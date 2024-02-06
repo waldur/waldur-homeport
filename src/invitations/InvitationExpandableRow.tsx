@@ -4,8 +4,10 @@ import { ENV } from '@waldur/configs/default';
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
 
+import { Invitation } from './types';
+
 export const InvitationExpandableRow: React.FC<{
-  row;
+  row: Invitation;
 }> = ({ row }) => (
   <>
     <p>
@@ -18,6 +20,18 @@ export const InvitationExpandableRow: React.FC<{
       <p>
         <b>{translate('Civil number')}: </b>
         {row.civil_number}
+      </p>
+    )}
+    {row.scope_type && (
+      <p>
+        <b>{translate('Scope type')}: </b>
+        {row.scope_type}
+      </p>
+    )}
+    {row.scope_name && (
+      <p>
+        <b>{translate('Scope name')}: </b>
+        {row.scope_type} {row.scope_name}
       </p>
     )}
     {row.extra_invitation_text && (

@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { CivilNumberGroup } from '../CivilNumberGroup';
 import { LoadUserDetailsButton } from '../LoadUserDetailsButton';
 import { TaxNumberGroup } from '../TaxNumberGroup';
-import { EmailInviteUser, StoredUserDetails } from '../types';
+import { GroupInviteRow, StoredUserDetails } from '../types';
 import { UserDetailsGroup } from '../UserDetailsGroup';
 
 import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
@@ -45,7 +45,7 @@ export const EmailsListGroup = ({
   const removeRow = (index) => fields._isFieldArray && fields.remove(index);
 
   const getUserDetails = useCallback(
-    (user: EmailInviteUser): StoredUserDetails =>
+    (user: GroupInviteRow): StoredUserDetails =>
       usersDetails.find((u) => u.civil_number === user.civil_number),
     [],
   );

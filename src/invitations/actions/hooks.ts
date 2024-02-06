@@ -1,64 +1,21 @@
-import { useRouter } from '@uirouter/react';
-import { useMemo, useEffect, useCallback, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useMemo, useCallback, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
-import { change } from 'redux-form';
 
-import {
-  CUSTOMER_OWNER_ROLE,
-  PROJECT_ADMIN_ROLE,
-  PROJECT_MANAGER_ROLE,
-  PROJECT_MEMBER_ROLE,
-  PROJECT_ROLES,
-} from '@waldur/core/constants';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { GROUP_INVITATION_CREATE_FORM_ID } from '@waldur/invitations/actions/constants';
+import { ENV } from '@waldur/configs/default';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { RoleEnum } from '@waldur/permissions/enums';
-import { formatRole } from '@waldur/permissions/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RootState } from '@waldur/store/reducers';
 
 import { InvitationService } from '../InvitationService';
-import { Invitation } from '../types';
 
 import { fetchUserDetails } from './api';
 import { InvitationPolicyService } from './InvitationPolicyService';
-import { roleSelector } from './selectors';
 import {
-  EmailInviteUser,
+  GroupInviteRow,
   GroupInvitationFormData,
   InvitationContext,
   StoredUserDetails,
 } from './types';
-
-const getRoles = (context) => {
-  const roles = [
-    {
-      title: formatRole(RoleEnum.CUSTOMER_OWNER),
-      value: CUSTOMER_OWNER_ROLE,
-      icon: 'fa-sitemap',
-    },
-    {
-      title: formatRole(RoleEnum.PROJECT_MANAGER),
-      value: PROJECT_MANAGER_ROLE,
-      icon: 'fa-users',
-    },
-    {
-      title: formatRole(RoleEnum.PROJECT_ADMIN),
-      value: PROJECT_ADMIN_ROLE,
-      icon: 'fa-server',
-    },
-  ];
-  roles.push({
-    title: formatRole(RoleEnum.PROJECT_MEMBER),
-    value: PROJECT_MEMBER_ROLE,
-    icon: 'fa-user-o',
-  });
-  return roles.filter((role) =>
-    InvitationPolicyService.canManageRole(context, role),
-  );
-};
 
 export const useInvitationCreateDialog = (context: InvitationContext) => {
   const dispatch = useDispatch();
@@ -66,7 +23,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
   const [usersDetails, setUsersDetails] = useState<StoredUserDetails[]>([]);
   const [{ loading: fetchingUserDetails }, fetchUserDetailsCallback] =
     useAsyncFn(
-      (user: EmailInviteUser) => {
+      (user: GroupInviteRow) => {
         if (!user.civil_number || !user.tax_number) return;
         return fetchUserDetails(user.civil_number, user.tax_number).then(
           (value) => {
@@ -93,14 +50,18 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
       [usersDetails, setUsersDetails],
     );
 
-  const roles = useMemo(() => getRoles(context), [context]);
+  const roles = useMemo(
+    () =>
+      ENV.roles.filter((role) =>
+        InvitationPolicyService.canManageRole(context, role),
+      ),
+    [context],
+  );
   const defaultRoleAndProject = useMemo(
     () =>
       context.project
         ? {
-            role:
-              roles.find((role) => role.value === PROJECT_MEMBER_ROLE) ||
-              roles.find((role) => role.value === PROJECT_MANAGER_ROLE),
+            role: roles.filter((role) => role.content_type === 'project')[0],
             project: context.project || context.customer.projects?.[0],
           }
         : {
@@ -110,26 +71,23 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     [roles, context],
   );
 
-  const [creationResult, setCreationResult] = useState<Invitation>(null);
+  const [creationResult, setCreationResult] = useState(null);
   const createInvitations = useCallback(
     (formData: GroupInvitationFormData) => {
       return new Promise((resolve, reject) => {
         try {
-          const users: EmailInviteUser[] = formData.users;
-          if (!users?.length) return;
-          const promises = [];
-          users.forEach((user) => {
+          if (!formData.rows?.length) return;
+          const promises = formData.rows.map((row) => {
             const payload: Record<string, any> = {};
-            payload.email = user.email;
+            payload.email = row.email;
             payload.extra_invitation_text = formData.extra_invitation_text;
-            if (PROJECT_ROLES.includes(user.role_project.role)) {
-              payload.project_role = user.role_project.role;
-              payload.project = user.role_project.project.url;
+            payload.role = row.role_project.role.uuid;
+            if (row.role_project.role.content_type === 'project') {
+              payload.scope = row.role_project.project.url;
             } else {
-              payload.customer_role = user.role_project.role;
-              payload.customer = context.customer.url;
+              payload.scope = context.customer.url;
             }
-            promises.push(InvitationService.createInvitation(payload));
+            return InvitationService.createInvitation(payload);
           });
           Promise.all(promises)
             .then((res) => {
@@ -166,52 +124,5 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     fetchUserDetailsCallback,
     fetchingUserDetails,
     usersDetails,
-  };
-};
-
-export const useGroupInvitationCreateDialog = (context: InvitationContext) => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  const role = useSelector((state: RootState) =>
-    roleSelector(state, GROUP_INVITATION_CREATE_FORM_ID),
-  );
-
-  const roles = useMemo(() => getRoles(context), [context]);
-  useEffect(() => {
-    dispatch(change(GROUP_INVITATION_CREATE_FORM_ID, 'role', roles[0].value));
-  }, [dispatch, roles]);
-
-  const roleDisabled = isFeatureVisible('invitation.require_user_details');
-  const projectEnabled = PROJECT_ROLES.includes(role) && !roleDisabled;
-
-  const createInvitation = useCallback(
-    async (formData) => {
-      try {
-        const payload: Record<string, string> = {};
-        if (PROJECT_ROLES.includes(role)) {
-          payload.project_role = role;
-          payload.project = formData.project.url;
-        } else {
-          payload.customer_role = role;
-          payload.customer = context.customer.url;
-        }
-        await InvitationService.createGroupInvitation(payload);
-        dispatch(closeModalDialog());
-        dispatch(showSuccess('Group invitation has been created.'));
-        if (context.refetch) {
-          context.refetch();
-        }
-      } catch (e) {
-        dispatch(showErrorResponse(e, 'Unable to create group invitation.'));
-      }
-    },
-    [dispatch, router.stateService, context.customer, role],
-  );
-
-  return {
-    createInvitation,
-    roles,
-    projectEnabled,
   };
 };

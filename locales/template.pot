@@ -535,6 +535,10 @@ msgstr ""
 msgid "Affected resource"
 msgstr ""
 
+#: src/administration/service-desk/SmaxSettings.tsx
+msgid "Affected resource field"
+msgstr ""
+
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Affected resource field name"
 msgstr ""
@@ -2991,7 +2995,6 @@ msgstr ""
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
-#: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
@@ -6380,6 +6383,10 @@ msgstr ""
 msgid "Not logged in"
 msgstr ""
 
+#: src/notifications/NotificationFilter.tsx
+msgid "Not overridden"
+msgstr ""
+
 #: src/customer/list/AccountingRunningField.tsx
 msgid "Not running accounting"
 msgstr ""
@@ -7051,6 +7058,10 @@ msgstr ""
 msgid "Organization events"
 msgstr ""
 
+#: src/administration/service-desk/SmaxSettings.tsx
+msgid "Organization field"
+msgstr ""
+
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
@@ -7179,6 +7190,10 @@ msgstr ""
 
 #: src/marketplace/orders/details/DetailsSection.tsx
 msgid "Output"
+msgstr ""
+
+#: src/notifications/NotificationFilter.tsx
+msgid "Overridden"
 msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
@@ -8117,6 +8132,10 @@ msgstr ""
 #: src/project/ProjectEventsFilter.tsx
 #: src/project/events.ts
 msgid "Project events"
+msgstr ""
+
+#: src/administration/service-desk/SmaxSettings.tsx
+msgid "Project field"
 msgstr ""
 
 #: src/administration/service-desk/AtlassianSettings.tsx
@@ -9673,6 +9692,14 @@ msgstr ""
 msgid "Schedules have been updated successfully."
 msgstr ""
 
+#: src/invitations/InvitationExpandableRow.tsx
+msgid "Scope name"
+msgstr ""
+
+#: src/invitations/InvitationExpandableRow.tsx
+msgid "Scope type"
+msgstr ""
+
 #: src/marketplace-checklist/StatsTable.tsx
 msgid "Score"
 msgstr ""
@@ -9981,6 +10008,10 @@ msgstr ""
 msgid "Select role"
 msgstr ""
 
+#: src/invitations/actions/RoleGroup.tsx
+msgid "Select role..."
+msgstr ""
+
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Select root category"
 msgstr ""
@@ -10015,6 +10046,7 @@ msgstr ""
 msgid "Select state..."
 msgstr ""
 
+#: src/notifications/NotificationFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Select status"
 msgstr ""
@@ -10758,6 +10790,7 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
+#: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -14418,6 +14451,7 @@ msgstr ""
 msgid "of"
 msgstr ""
 
+#: src/invitations/formatInvitation.ts
 #: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"
@@ -14887,10 +14921,6 @@ msgstr ""
 
 #: src/user/support/UserList.tsx
 msgid "{role} ({name})"
-msgstr ""
-
-#: src/invitations/RoleField.tsx
-msgid "{role} in {project}"
 msgstr ""
 
 #: src/customer/team/OwnerExpirationTimeGroup.tsx

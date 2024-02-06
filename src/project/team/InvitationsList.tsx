@@ -13,18 +13,11 @@ import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationP
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
+import { RoleField } from '@waldur/invitations/RoleField';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
-import {
-  getCustomer,
-  getProject,
-  getUser,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-  isProjectManagerSelector,
-} from '@waldur/workspace/selectors';
-
-import { RoleField } from './RoleField';
+import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -65,19 +58,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => formatDate(row.expires),
         },
       ]}
-      hoverableRow={
-        props.canManage ?? true
-          ? ({ row }) => (
-              <>
-                <InvitationSendButton invitation={row} />
-                <InvitationCancelButton
-                  invitation={row}
-                  refetch={props.fetch}
-                />
-              </>
-            )
-          : undefined
-      }
+      hoverableRow={({ row }) => (
+        <>
+          <InvitationSendButton invitation={row} />
+          <InvitationCancelButton invitation={row} refetch={props.fetch} />
+        </>
+      )}
       verboseName={translate('Team invitations')}
       actions={
         <InvitationCreateButton project={props.project} refetch={props.fetch} />
@@ -128,13 +114,10 @@ export const InvitationsList: FunctionComponent = () => {
       router.stateService.target('errorPage.notFound');
     }
   }, [user, project, customer, router]);
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const isProjectManager = isProjectManagerSelector(user, project);
 
   return (
     <InvitationsListComponent
       filters={<InvitationsFilter />}
-      canManage={isProjectManager || isOwnerOrStaff}
       project={project}
     />
   );

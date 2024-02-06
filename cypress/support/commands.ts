@@ -15,6 +15,7 @@ declare global {
       setToken(): Chainable;
       openDropdownByLabel(value: string): Chainable;
       openDropdownByLabelForce(value: string): Chainable;
+      selectRole(value: string): Chainable;
       openWorkspaceSelector(): Chainable;
       selectTheFirstOptionOfDropdown(): Chainable;
       selectTableFilter(label: string, value: string): Chainable;
@@ -76,6 +77,18 @@ Cypress.Commands.add('openDropdownByLabel', (label) => {
 Cypress.Commands.add('openDropdownByLabelForce', (label) => {
   cy.openDropdownByLabel(label).openDropdownByLabel(label);
 });
+
+Cypress.Commands.add('selectRole', (label) => {
+  cy.get('label')
+  .contains('Role')
+  .next()
+  .get('[class*="-control"]')
+  .click(0, 0, { force: true, multiple: true })
+  .get('[class*="-option"]')
+  .contains(label)
+  .click(0, 0, { force: true })
+});
+
 
 Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
   cy.get('*div[id^="react-select"]').first().click({ force: true }); // get ids which start with "react-select"
