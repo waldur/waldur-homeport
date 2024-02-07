@@ -1,4 +1,4 @@
-type RoleType = 'customer' | 'project' | 'offering';
+export type RoleType = 'customer' | 'project' | 'offering';
 
 export interface Role {
   uuid: string;
@@ -16,7 +16,7 @@ export interface GenericPermission {
   user_full_name: string;
   customer_uuid: string;
   customer_name: string;
-  scope_type: string;
+  scope_type: RoleType;
   scope_uuid: string;
   scope_name: string;
   role_name: string;

@@ -1,3 +1,5 @@
+import { RoleType } from '@waldur/permissions/types';
+
 export interface Invitation {
   uuid: string;
   civil_number?: string;
@@ -5,7 +7,7 @@ export interface Invitation {
   email: string;
   scope_name: string;
   scope_uuid: string;
-  scope_type: string;
+  scope_type: RoleType;
   role_description: string;
   customer_name: string;
   created_by_full_name?: string;

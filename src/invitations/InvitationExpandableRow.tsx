@@ -3,6 +3,7 @@ import React from 'react';
 import { ENV } from '@waldur/configs/default';
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
+import { formatRoleType } from '@waldur/permissions/utils';
 
 import { Invitation } from './types';
 
@@ -25,7 +26,7 @@ export const InvitationExpandableRow: React.FC<{
     {row.scope_type && (
       <p>
         <b>{translate('Scope type')}: </b>
-        {row.scope_type}
+        {formatRoleType(row.scope_type)}
       </p>
     )}
     {row.scope_name && (
