@@ -1,6 +1,8 @@
 import { ENV } from '@waldur/configs/default';
+import { ROLE_TYPES } from '@waldur/permissions/constants';
 
 import { RoleEnum } from './enums';
+import { RoleType } from './types';
 
 const getRoles = (type: string) =>
   ENV.roles
@@ -29,6 +31,7 @@ export const formatRole = (name: string) => {
   const roleName = ROLE_MAP[name] || name;
   return ENV.roles.find((role) => role.name === roleName)?.description;
 };
+
 export const getCustomerPermission = (user, customer) => {
   if (!user || !user.permissions || !customer) {
     return null;
@@ -40,5 +43,9 @@ export const getCustomerPermission = (user, customer) => {
       permission.scope_type === 'customer',
   );
 };
+
 export const getProjectPermission = (user) =>
   user.permissions?.find(({ scope_type }) => scope_type === 'project');
+
+export const formatRoleType = (content_type: RoleType) =>
+  ROLE_TYPES.find(({ value }) => value === content_type)?.label || content_type;

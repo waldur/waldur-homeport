@@ -6,6 +6,8 @@ import { FormContainer, SelectField, SubmitButton } from '@waldur/form';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 
+import { ROLE_TYPES } from '../../permissions/constants';
+
 import { PermissionField } from './PermissionField';
 
 export const RoleForm = reduxForm<any, { onSubmit; onCancel; role? }>({
@@ -27,11 +29,7 @@ export const RoleForm = reduxForm<any, { onSubmit; onCancel; role? }>({
           validate={required}
           required
           disabled={props.role?.is_system_role}
-          options={[
-            { value: 'customer', label: translate('Customer') },
-            { value: 'project', label: translate('Project') },
-            { value: 'offering', label: translate('Offering') },
-          ]}
+          options={ROLE_TYPES}
           simpleValue
         />
         {ENV.languageChoices.map(({ code, label }) => (

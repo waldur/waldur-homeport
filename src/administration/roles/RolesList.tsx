@@ -1,6 +1,7 @@
 import { Badge } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { formatRoleType } from '@waldur/permissions/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
@@ -30,6 +31,10 @@ export const RolesList = () => {
               )}
             </>
           ),
+        },
+        {
+          title: translate('Scope'),
+          render: ({ row }) => formatRoleType(row.content_type),
         },
         {
           title: translate('Description'),
