@@ -54,7 +54,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     () =>
       ENV.roles.filter(
         (role) =>
-          role.content_type === 'project' &&
+          (!context.project || role.content_type === 'project') &&
           InvitationPolicyService.canManageRole(context, role),
       ),
     [context],
