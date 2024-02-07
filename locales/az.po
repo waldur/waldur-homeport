@@ -1133,7 +1133,6 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
@@ -2727,6 +2726,7 @@ msgid "Project manager"
 msgstr "Layihə meneceri"
 
 #: src/customer/team/ProjectsListGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/project/ProjectNameField.tsx
@@ -3043,7 +3043,6 @@ msgstr "Buraxılış"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx

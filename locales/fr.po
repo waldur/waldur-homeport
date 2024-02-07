@@ -2322,7 +2322,6 @@ msgstr "Chaque rapport d'utilisation doit être relié à un plan de facturation
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
@@ -5833,6 +5832,7 @@ msgid "Project member"
 msgstr "Membre du projet"
 
 #: src/customer/team/ProjectsListGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/project/ProjectNameField.tsx
@@ -6539,7 +6539,6 @@ msgstr "Résolution"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
@@ -6742,8 +6741,6 @@ msgid "Retype OpenStack Volume"
 msgstr "Retapez OpenStack Volume"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/proposals/update/CallUpdateBar.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "Critique"
@@ -9946,7 +9943,6 @@ msgstr "États valides pour l’opération : {validStates}."
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr "Valeur"

@@ -1835,7 +1835,6 @@ msgstr "برای اطمینان از محاسبه صحیح داده های حس�
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx

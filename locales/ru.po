@@ -818,7 +818,6 @@ msgstr "Пулы распределения IP адресов"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
 msgstr "Стратегия распределения"
 
@@ -3818,7 +3817,6 @@ msgstr "Каждый отчет об использовании должен б�
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
@@ -9359,6 +9357,7 @@ msgstr "Описание Проекта"
 msgid "Project details"
 msgstr "Детали проекта"
 
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/resources/details/EndDateField.tsx
 msgid "Project end date"
 msgstr "Дата окончания проекта"
@@ -9423,6 +9422,7 @@ msgid "Project member"
 msgstr "Участник проекта"
 
 #: src/customer/team/ProjectsListGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/project/ProjectNameField.tsx
@@ -10473,7 +10473,6 @@ msgstr "Решительный"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
@@ -10792,8 +10791,6 @@ msgid "Retype OpenStack Volume"
 msgstr "Повторно введите том OpenStack."
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/proposals/update/CallUpdateBar.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "Обзор"
@@ -10825,7 +10822,6 @@ msgstr "Запрос на рассмотрение"
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
@@ -16005,7 +16001,6 @@ msgstr "Допустимые состояния для работы:{validStates
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr "Ценность"

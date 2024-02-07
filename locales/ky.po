@@ -818,7 +818,6 @@ msgstr "Бөлүштүрүү бассейндери"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
 msgstr "Бөлүштүрүү стратегиясы"
 
@@ -3818,7 +3817,6 @@ msgstr "Ар бир колдонуу отчету эсептик маалыма�
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
@@ -9359,6 +9357,7 @@ msgstr "Долбоордун сүрөттөлүшү"
 msgid "Project details"
 msgstr "Долбоордун чоо-жайы"
 
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/resources/details/EndDateField.tsx
 msgid "Project end date"
 msgstr "Долбоордун аяктоо күнү"
@@ -9423,6 +9422,7 @@ msgid "Project member"
 msgstr "Долбоордун мүчөсү"
 
 #: src/customer/team/ProjectsListGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/project/ProjectNameField.tsx
@@ -10473,7 +10473,6 @@ msgstr "чечилди"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
@@ -10792,8 +10791,6 @@ msgid "Retype OpenStack Volume"
 msgstr "OpenStack көлөмүн кайра териңиз"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/proposals/update/CallUpdateBar.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "карап чыгуу"
@@ -10825,7 +10822,6 @@ msgstr "Өтүнүчтү карап чыгуу"
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
@@ -16005,7 +16001,6 @@ msgstr "Иштөө үчүн жарактуу мамлекеттер:{validStates
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr "Нарк"

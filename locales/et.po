@@ -818,7 +818,6 @@ msgstr "Jaotise tsoonid"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
 msgstr "Jaotamise strateegia"
 
@@ -3032,7 +3031,7 @@ msgstr "Praegune tüüp"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Custom favicon .png image file"
-msgstr "Kohandatud pisipildi .png fail"
+msgstr "Pisipilt (png formaadis)."
 
 #: src/invitations/actions/create/CustomMessageInput.tsx
 msgid "Custom message"
@@ -3818,7 +3817,6 @@ msgstr "Iga kasutusaruanne peab olema ühendatud arveldusplaaniga, et tagada raa
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
@@ -4543,7 +4541,7 @@ msgstr "Faili allalaadimine on alanud"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "File for login page."
-msgstr "Sisselogimislehe fail."
+msgstr "Sisselogimismenüü ülaosas kasutatav pilt."
 
 #: src/core/CopyToClipboard.tsx
 msgid "File has been copied"
@@ -5064,15 +5062,15 @@ msgstr "Kangelase pilt"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Hex color definition is used in HomePort landing page for font color of login button."
-msgstr "Hex värvi määratlust kasutatakse HomePorti sihtlehel sisselogimisnupu fondivärvi jaoks."
+msgstr "Sisselogimisnupu fondivärv Homeport-i lehel (hex-formaadis)"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Hex color definition is used in landing page for font color of login button."
-msgstr "Sisselogimisnupu fondivärvi jaoks kasutatakse sihtlehel kuueteistkümnendvärvide määratlust."
+msgstr "Sisselogimisnupu fondivärv (hex-formaadis)"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Hex color definition is used in landing page for login button."
-msgstr "Sisselogimisnupu sihtlehel kasutatakse hex värvimääratlust."
+msgstr "Sisselogimisnupu värv (hex-formaadis)"
 
 #: src/form/SecretField.tsx
 msgid "Hide"
@@ -5282,23 +5280,23 @@ msgstr "Pildi nimi"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Image rendered at hero section of landing page."
-msgstr "Pilt renderdati sihtlehe kangelase jaotises."
+msgstr "Sisselogimislehe peamine pilt."
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Image rendered at the bottom of login menu."
-msgstr "Pilt renderdati sisselogimismenüü allservas."
+msgstr "Sisselogimismenüü allservas kasutatav pilt."
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Image rendered at the top of mobile sidebar menu."
-msgstr "Pilt renderdati mobiili külgriba menüü ülaosas."
+msgstr "Mobiilivaate külgriba menüü ülaosas kasutatav pilt."
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Image rendered at the top of sidebar menu."
-msgstr "Külgriba menüü ülaosas renderdatud pilt."
+msgstr "Külgriba menüü ülaosas kasutatav pilt."
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Image used in marketplace order header."
-msgstr "Turutellimuse päises kasutatud pilt."
+msgstr "Turuplatsi tellimuse päises kasutatud pilt."
 
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
@@ -5899,11 +5897,11 @@ msgstr "Silt"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Label for link in hero section of HomePort landing page."
-msgstr "Lingi silt HomePorti sihtlehe kangelase jaotises."
+msgstr "Sildi nimi Homeport-i pealehe pildil."
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Label for link in hero section of landing page."
-msgstr "Sihtlehe kangelasejaotise lingi silt."
+msgstr "Sildi nimi pealehe pildil."
 
 #: src/marketplace/offerings/DisplayNameField.tsx
 msgid "Label that is visible to users in Marketplace."
@@ -6004,11 +6002,11 @@ msgstr "Linkige OpenStacki eksemplar"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Link URL in hero section of HomePort landing page."
-msgstr "Lingi URL HomePorti sihtlehe kangelaste jaotises."
+msgstr "URL Homeport-i pealehe pildil."
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Link URL in hero section of landing page."
-msgstr "Lingi URL sihtlehe kangelasjaotises."
+msgstr "URL pealehe pildil."
 
 #: src/customer/payments/InvoicesDropdown.tsx
 msgid "Link invoice"
@@ -9359,6 +9357,7 @@ msgstr "Projekti kirjeldus"
 msgid "Project details"
 msgstr "Projekti üksikasjad"
 
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/resources/details/EndDateField.tsx
 msgid "Project end date"
 msgstr "Projekti lõppkuupäev"
@@ -9423,6 +9422,7 @@ msgid "Project member"
 msgstr "Projekti liige"
 
 #: src/customer/team/ProjectsListGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/project/ProjectNameField.tsx
@@ -10473,7 +10473,6 @@ msgstr "Lahendatud"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
@@ -10792,8 +10791,6 @@ msgid "Retype OpenStack Volume"
 msgstr "Muuda OpenStack salvestusüksuse tüüp"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/proposals/update/CallUpdateBar.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "Ülevaade"
@@ -10825,7 +10822,6 @@ msgstr "Taotluse ülevaatamine"
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
@@ -11750,7 +11746,7 @@ msgstr "Teenuste kataloogi pakkumised"
 
 #: src/administration/routes.ts
 msgid "Service desk"
-msgstr "Teeninduslaud"
+msgstr "Kasutajatoe liidestused"
 
 #: src/rancher/cluster/tabs.ts
 msgid "Service discovery"
@@ -12197,11 +12193,11 @@ msgstr "Ühekordne sisselogimine SAML2-põhise identiteediliitmise abil."
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Site description"
-msgstr "Saidi kirjeldus"
+msgstr "Veebisaidi kirjeldus"
 
 #: src/administration/branding/BrandingForm.tsx
 msgid "Site name"
-msgstr "Saidi nimi"
+msgstr "Veebisaidi nimi"
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/azure/vm/AzureVirtualMachineSummary.tsx
@@ -16005,7 +16001,6 @@ msgstr "Toimimiseks kehtivad olekud:{validStates} ."
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr "Väärtus"
@@ -17350,7 +17345,7 @@ msgstr "{sender} on kutsunud teid liituma {name} organisatsiooniga {type} projek
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 msgid "{supportServiceProvider} service desk."
-msgstr "{supportServiceProvider}teeninduslaud."
+msgstr "{supportServiceProvider} kasutajatugi."
 
 #: src/navigation/FooterLinks.tsx
 msgid "{text} has been copied"

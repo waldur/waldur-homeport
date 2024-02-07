@@ -823,7 +823,6 @@ msgstr "Пули алокації"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
 msgstr "Стратегія розподілу"
 
@@ -3836,7 +3835,6 @@ msgstr "Кожен звіт про використання має бути по
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
@@ -9385,6 +9383,7 @@ msgstr "Опис проекту"
 msgid "Project details"
 msgstr "Деталі проекту"
 
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/resources/details/EndDateField.tsx
 msgid "Project end date"
 msgstr "Дата закінчення проекту"
@@ -9449,6 +9448,7 @@ msgid "Project member"
 msgstr "Учасник проекту"
 
 #: src/customer/team/ProjectsListGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/project/ProjectNameField.tsx
@@ -10499,7 +10499,6 @@ msgstr "Вирішено"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
@@ -10818,8 +10817,6 @@ msgid "Retype OpenStack Volume"
 msgstr "Повторно введіть том OpenStack"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/proposals/update/CallUpdateBar.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "огляд"
@@ -10851,7 +10848,6 @@ msgstr "Запит на перегляд"
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
@@ -16063,7 +16059,6 @@ msgstr "Допустимі стани для роботи:{validStates} ."
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr "Цінність"
