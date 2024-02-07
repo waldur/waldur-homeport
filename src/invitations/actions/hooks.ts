@@ -52,8 +52,10 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
 
   const roles = useMemo(
     () =>
-      ENV.roles.filter((role) =>
-        InvitationPolicyService.canManageRole(context, role),
+      ENV.roles.filter(
+        (role) =>
+          role.content_type === 'project' &&
+          InvitationPolicyService.canManageRole(context, role),
       ),
     [context],
   );
