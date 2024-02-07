@@ -31,7 +31,7 @@ export const InvitationExpandableRow: React.FC<{
     {row.scope_name && (
       <p>
         <b>{translate('Scope name')}: </b>
-        {row.scope_type} {row.scope_name}
+        {row.scope_name}
       </p>
     )}
     {row.extra_invitation_text && (
