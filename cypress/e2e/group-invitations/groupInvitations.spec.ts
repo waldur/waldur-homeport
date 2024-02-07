@@ -19,14 +19,14 @@ describe('Group invitations', () => {
       )
       .intercept(
         'GET',
-        '/api/user-group-invitations/?page=1&page_size=10&customer=895e38d197e748459189f19285119edf',
+        '/api/user-group-invitations/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf',
         {
           fixture: 'group-invitations/user-group-invitations.json',
         },
       )
       .intercept(
         'GET',
-        '/api/user-group-invitations/?page=1&page_size=10&is_active=true&customer=895e38d197e748459189f19285119edf',
+        '/api/user-group-invitations/?page=1&page_size=10&is_active=true&customer_uuid=895e38d197e748459189f19285119edf',
         {
           fixture: 'group-invitations/user-group-invitations-active-items.json',
         },

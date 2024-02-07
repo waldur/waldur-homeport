@@ -129,12 +129,12 @@ describe('Invitations', () => {
       )
       .intercept(
         'GET',
-        '/api/user-invitations/?page=1&page_size=10&state=pending&customer=bf6d515c9e6e445f9c339021b30fc96b',
+        '/api/user-invitations/?page=1&page_size=10&state=pending&customer_uuid=bf6d515c9e6e445f9c339021b30fc96b',
         { fixture: 'invitations/pending-customer.json' },
       )
       .intercept(
         'GET',
-        '/api/user-invitations/?page=1&page_size=10&customer=bf6d515c9e6e445f9c339021b30fc96b',
+        '/api/user-invitations/?page=1&page_size=10&customer_uuid=bf6d515c9e6e445f9c339021b30fc96b',
         { fixture: 'invitations/pending-customer.json' },
       )
       .intercept('POST', '/api/user-invitations/', {
@@ -143,7 +143,7 @@ describe('Invitations', () => {
       .as('createInvitation')
       .intercept(
         'GET',
-        '/api/user-invitations/?page=1&page_size=10&state=pending&state=rejected&customer=bf6d515c9e6e445f9c339021b30fc96b',
+        '/api/user-invitations/?page=1&page_size=10&state=pending&state=rejected&customer_uuid=bf6d515c9e6e445f9c339021b30fc96b',
         {
           fixture: 'invitations/pending-rejected-customers.json',
         },
