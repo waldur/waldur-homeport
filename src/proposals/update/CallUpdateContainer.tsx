@@ -16,7 +16,6 @@ import { CallUpdateHero } from './CallUpdateHero';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
-import { CallReviewSection } from './review/CallReviewSection';
 import { CallReviewersSection } from './reviewers/CallReviewersSection';
 import { CallRoundsSection } from './rounds/CallRoundsSection';
 
@@ -54,7 +53,6 @@ export const CallUpdateContainer: FunctionComponent = () => {
             loading={isRefetching}
           />
           <CallDocumentsSection />
-          <CallReviewSection call={data} />
           <CallReviewersSection call={data} />
           <CallOfferingsSection call={data} />
         </div>

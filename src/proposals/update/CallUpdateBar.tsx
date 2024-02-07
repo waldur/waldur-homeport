@@ -51,10 +51,6 @@ export const CallUpdateBar: FunctionComponent<CallUpdateBarProps> = ({
         title: translate('Documents'),
       },
       {
-        key: 'review',
-        title: translate('Review'),
-      },
-      {
         key: 'reviewers',
         title: translate('Reviewers'),
       },
