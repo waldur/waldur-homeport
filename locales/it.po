@@ -2011,7 +2011,6 @@ msgstr "Distribuire l'archiviazione dei blocchi Longhorn dopo la distribuzione d
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
-#: src/notifications/NotificationList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx
@@ -7237,6 +7236,7 @@ msgstr "Seleziona alcuni file"
 msgid "Select state..."
 msgstr "Seleziona stato..."
 
+#: src/notifications/NotificationFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Select status"
 msgstr "Seleziona lo stato"
@@ -7738,6 +7738,7 @@ msgstr "Aggiornamento delle route statiche pianificato."
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
+#: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -10441,6 +10442,7 @@ msgstr "notifiche"
 msgid "of"
 msgstr "di"
 
+#: src/invitations/formatInvitation.ts
 #: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"
