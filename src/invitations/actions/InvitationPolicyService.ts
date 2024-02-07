@@ -10,6 +10,9 @@ export const InvitationPolicyService = {
     if (!role.description) {
       return false;
     }
+    if (!['customer', 'project'].includes(role.content_type)) {
+      return false;
+    }
     if (context.user?.is_staff) {
       return true;
     }
