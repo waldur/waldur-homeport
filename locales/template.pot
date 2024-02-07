@@ -639,10 +639,18 @@ msgstr ""
 msgid "Allocated"
 msgstr ""
 
+#: src/proposals/round/RoundQuotas.tsx
+msgid "Allocated offerings"
+msgstr ""
+
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Allocation"
 msgstr ""
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation date"
@@ -661,6 +669,7 @@ msgstr ""
 msgid "Allocation strategy"
 msgstr ""
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation time"
@@ -1504,6 +1513,7 @@ msgid "Calendar"
 msgstr ""
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "Call"
 msgstr ""
@@ -1521,6 +1531,10 @@ msgstr ""
 #: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/navigation/workspace/CallManagerIcon.tsx
 msgid "Call manager"
+msgstr ""
+
+#: src/proposals/round/CallRoundPage.tsx
+msgid "Call round"
 msgstr ""
 
 #: src/proposals/details/CallRoundsDialog.tsx
@@ -2459,6 +2473,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -2692,11 +2707,13 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Cutoff date"
 msgstr ""
 
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Cutoff date must be after start date"
 msgstr ""
@@ -2806,6 +2823,7 @@ msgstr ""
 msgid "Deadline"
 msgstr ""
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Deciding entity"
@@ -3297,6 +3315,7 @@ msgstr ""
 msgid "Due date"
 msgstr ""
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Duration"
 msgstr ""
@@ -3363,6 +3382,13 @@ msgstr ""
 #: src/project/team/AddMemberButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/round/allocation/EditAllocationInfoButton.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/review/EditReviewInfoButton.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/reviewers/EditReviewersButton.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
@@ -3464,6 +3490,18 @@ msgstr ""
 #: src/administration/roles/RoleEditButton.tsx
 #: src/administration/roles/RoleEditDialog.tsx
 msgid "Edit role"
+msgstr ""
+
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+msgid "Edit round allocation"
+msgstr ""
+
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+msgid "Edit round review"
+msgstr ""
+
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+msgid "Edit round submission"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditSchedulesButton.tsx
@@ -5228,6 +5266,7 @@ msgstr ""
 msgid "Last {month} month"
 msgstr ""
 
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Latest review completion date"
 msgstr ""
@@ -5547,6 +5586,7 @@ msgstr ""
 msgid "Maximum RAM for each VM"
 msgstr ""
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Maximum accepted proposals"
 msgstr ""
@@ -5693,6 +5733,7 @@ msgstr ""
 msgid "Minimum allowed value"
 msgstr ""
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Minimum average scoring for allocation"
 msgstr ""
@@ -5704,6 +5745,10 @@ msgstr ""
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Minimum number of reviewers"
+msgstr ""
+
+#: src/proposals/round/review/RoundReviewSection.tsx
+msgid "Minimum reviewers"
 msgstr ""
 
 #: src/freeipa/UsernameGroup.tsx
@@ -5906,6 +5951,7 @@ msgstr ""
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -6156,6 +6202,7 @@ msgid "Next hop (IP)"
 msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/round/RoundPageHeaderBody.tsx
 #: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Next round ends in"
 msgstr ""
@@ -6390,6 +6437,7 @@ msgid "Not used"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
@@ -7210,6 +7258,10 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 msgid "Parent offering:"
+msgstr ""
+
+#: src/proposals/round/RoundPageHero.tsx
+msgid "Part of {name}"
 msgstr ""
 
 #: src/marketplace/resources/details/ParentResourceLink.tsx
@@ -8259,6 +8311,15 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 msgid "Propagated"
+msgstr ""
+
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
+msgid "Proposal"
+msgstr ""
+
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
+msgid "Proposals"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
@@ -9329,8 +9390,15 @@ msgid "Retype OpenStack Volume"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
+msgstr ""
+
+#: src/proposals/round/review/RoundReviewSection.tsx
+msgid "Review duration"
 msgstr ""
 
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
@@ -9360,11 +9428,13 @@ msgstr ""
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
 msgstr ""
 
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/ProposalCallQuotas.tsx
 msgid "Reviewed"
 msgstr ""
@@ -9400,10 +9470,13 @@ msgstr ""
 msgid "Reviewed by provider at"
 msgstr ""
 
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewer"
 msgstr ""
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewers"
@@ -9489,6 +9562,10 @@ msgstr ""
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Roles"
+msgstr ""
+
+#: src/proposals/round/RoundPageHero.tsx
+msgid "Round"
 msgstr ""
 
 #: src/proposals/update/rounds/CallRoundsSection.tsx
@@ -9810,6 +9887,7 @@ msgstr ""
 msgid "See all rounds"
 msgstr ""
 
+#: src/proposals/round/RoundPageHero.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "See call"
 msgstr ""
@@ -10651,6 +10729,7 @@ msgid "Start"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Start date"
@@ -10777,6 +10856,7 @@ msgstr ""
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -10843,11 +10923,15 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Submission"
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Submissions"
 msgstr ""
@@ -11819,6 +11903,7 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
@@ -12248,6 +12333,10 @@ msgstr ""
 #: src/proposals/details/PublicCallDetailsContainer.tsx
 #: src/proposals/update/CallUpdateContainer.tsx
 msgid "Unable to load call details."
+msgstr ""
+
+#: src/proposals/round/CallRoundPage.tsx
+msgid "Unable to load call round."
 msgstr ""
 
 #: src/marketplace/offerings/import/SelectCategoryTab.tsx
@@ -14073,6 +14162,7 @@ msgstr ""
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "You can set the first round for this call."
 msgstr ""

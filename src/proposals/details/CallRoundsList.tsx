@@ -4,7 +4,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
 import { ProposalCall, ProposalCallRound } from '../types';
-import { checkRoundDate } from '../utils';
+import { getRoundStatus } from '../utils';
 
 interface CallRoundsListProps {
   call: ProposalCall;
@@ -15,7 +15,7 @@ export const CallRoundsList = ({ call, max }: CallRoundsListProps) => {
   const rounds = useMemo<
     Array<
       ProposalCallRound & {
-        state: ReturnType<typeof checkRoundDate>;
+        state: ReturnType<typeof getRoundStatus>;
       }
     >
   >(() => {
@@ -25,7 +25,7 @@ export const CallRoundsList = ({ call, max }: CallRoundsListProps) => {
         formatDate(a.start_time) > formatDate(b.start_time) ? 1 : -1,
       )
       .map((round) => {
-        Object.assign(round, { state: checkRoundDate(round) });
+        Object.assign(round, { state: getRoundStatus(round) });
         return round as any;
       });
   }, [call, max]);

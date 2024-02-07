@@ -27,8 +27,19 @@ export const enableCallManagingOrganization = (payload) =>
 export const disableCallManagingOrganization = (uuid) =>
   deleteById('/call-managing-organisations/', uuid);
 
-export const getProtectedCall = (id: string, options?: AxiosRequestConfig) =>
-  getById<ProposalCall>('/proposal-protected-calls/', id, options);
+export const getProtectedCall = (uuid: string, options?: AxiosRequestConfig) =>
+  getById<ProposalCall>('/proposal-protected-calls/', uuid, options);
+
+export const getProtectedCallRound = (
+  callUuid: string,
+  roundUuid: string,
+  options?: AxiosRequestConfig,
+) =>
+  getById<ProposalCallRound>(
+    `/proposal-protected-calls/${callUuid}/rounds/`,
+    roundUuid,
+    options,
+  );
 
 export const createCall = (data) => {
   return post<ProposalCall>('/proposal-protected-calls/', data);
@@ -44,6 +55,13 @@ export const getPublicCall = (uuid: string, options?: AxiosRequestConfig) =>
 export const createCallRound = (callUuid, data) => {
   return post<ProposalCallRound>(
     `/proposal-protected-calls/${callUuid}/rounds/`,
+    data,
+  );
+};
+
+export const updateCallRound = (callUuid, roundUuid, data) => {
+  return put<ProposalCallRound>(
+    `/proposal-protected-calls/${callUuid}/rounds/${roundUuid}/`,
     data,
   );
 };

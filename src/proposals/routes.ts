@@ -1,3 +1,5 @@
+import { UIView } from '@uirouter/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
@@ -23,6 +25,11 @@ const CallUpdateContainer = lazyComponent(
   'CallUpdateContainer',
 );
 
+const CallRoundPage = lazyComponent(
+  () => import('./round/CallRoundPage'),
+  'CallRoundPage',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'organization.call-management',
@@ -33,12 +40,25 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Call management'),
     },
   },
+
   {
     name: 'protected-call-update',
     url: 'call-management/:call_uuid/',
-    component: CallUpdateContainer,
+    abstract: true,
+    component: UIView,
     parent: 'organization',
   },
+  {
+    name: 'protected-call-update.details',
+    url: '',
+    component: CallUpdateContainer,
+  },
+  {
+    name: 'protected-call-update.round',
+    url: 'round/:round_uuid/',
+    component: CallRoundPage,
+  },
+
   {
     name: 'public-calls-user',
     url: 'calls/',

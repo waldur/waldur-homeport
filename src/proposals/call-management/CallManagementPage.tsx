@@ -33,7 +33,7 @@ export const CallManagementPage: FunctionComponent = () => {
           orderField: 'name',
           render: ({ row }) => (
             <Link
-              state="protected-call-update"
+              state="protected-call-update.details"
               params={{ call_uuid: row.uuid }}
               label={row.name}
             />

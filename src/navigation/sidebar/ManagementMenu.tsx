@@ -31,7 +31,7 @@ export const ManagementMenu = () => {
               'marketplace-offering-customer',
               'organization.call-management',
               'protected-call-update',
-            ].includes(state.name)
+            ].some((name) => state.name.includes(name))
               ? undefined
               : 'organization'
           }

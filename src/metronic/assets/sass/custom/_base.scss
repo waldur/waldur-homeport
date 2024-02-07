@@ -164,6 +164,19 @@
     }
   }
 }
+.form-addon {
+  position: relative;
+
+  .form-control-addon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-bottom: 0.7rem;
+    padding-right: 1rem;
+    pointer-events: none;
+    border: 1px solid transparent;
+  }
+}
 
 /* CHECKBOX */
 .form-check {

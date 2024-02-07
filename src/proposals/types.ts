@@ -72,13 +72,13 @@ export interface CallRoundFormData {
   start_time: string;
   timezone: string;
   cutoff_time: string;
-  review_strategy: string;
+  review_strategy: number; // enum
   review_duration_in_days: number;
   minimum_number_of_reviewers: number;
-  deciding_entity: string;
+  deciding_entity: number; // enum
   max_allocations: number;
-  minimal_average_scoring: number;
-  allocation_time: string;
+  minimal_average_scoring: string;
+  allocation_time: number; // enum
   allocation_date: string;
 }
 

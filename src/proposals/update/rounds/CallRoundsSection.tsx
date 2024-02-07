@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ProposalCall, ProposalCallRound } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
@@ -37,7 +38,13 @@ export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
       columns={[
         {
           title: translate('Round name'),
-          render: () => <>-</>,
+          render: ({ row }) => (
+            <Link
+              state="protected-call-update.round"
+              params={{ round_uuid: row.uuid }}
+              label={row.uuid.substring(0, 10)}
+            />
+          ),
         },
         {
           title: translate('Start date'),
