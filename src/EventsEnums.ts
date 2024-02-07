@@ -70,6 +70,11 @@ export const ProjectsEnum = {
   role_updated: 'role_updated',
 };
 
+export const ProposalEnum = {
+  call_proposal_document_added: 'call_proposal_document_added',
+  call_proposal_document_removed: 'call_proposal_document_removed',
+};
+
 export const ProvidersEnum = {
   marketplace_resource_create_canceled: 'marketplace_resource_create_canceled',
   marketplace_resource_create_failed: 'marketplace_resource_create_failed',
