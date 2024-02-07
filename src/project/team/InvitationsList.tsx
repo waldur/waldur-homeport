@@ -76,7 +76,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props) => ({
   ...props.stateFilter,
-  project: props.project.uuid,
+  scope: props.project.url,
   state: props.stateFilter?.state?.map((option) => option.value),
 });
 

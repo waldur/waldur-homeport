@@ -55,7 +55,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const mapPropsToFilter = (props) => ({
   ...props.filter,
-  customer: props.customer.uuid,
+  customer_uuid: props.customer.uuid,
 });
 
 const TableOptions: TableOptionsType = {
