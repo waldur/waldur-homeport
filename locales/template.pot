@@ -8102,6 +8102,7 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/resources/details/EndDateField.tsx
 msgid "Project end date"
 msgstr ""
@@ -8158,6 +8159,7 @@ msgid "Project is not selected."
 msgstr ""
 
 #: src/customer/team/ProjectsListGroup.tsx
+#: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/project/ProjectNameField.tsx
@@ -9055,7 +9057,6 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/ResourceDetailsView.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
