@@ -17,7 +17,9 @@ const CellDescription = ({
   description,
 }: Omit<QuotaCellProps, 'title'>) => (
   <span className="fw-bold text-nowrap">
-    {limit ? `${usage}/${limit}` : usage}
+    {limit
+      ? `${usage.toLocaleString()}/${limit.toLocaleString()}`
+      : usage.toLocaleString()}
     {units && ` ${units}`}
     {description && (
       <>
