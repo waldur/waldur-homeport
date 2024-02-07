@@ -658,7 +658,6 @@ msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 msgid "Allocation strategy"
 msgstr ""
 
@@ -777,10 +776,6 @@ msgstr ""
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "Apply to round"
-msgstr ""
-
-#: src/proposals/update/review/CallReviewSection.tsx
-msgid "Approval threshold score"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestApproveButton.tsx
@@ -2032,10 +2027,6 @@ msgstr ""
 
 #: src/administration/branding/AdministrationBranding.tsx
 msgid "Configuration has been updated."
-msgstr ""
-
-#: src/proposals/update/review/CallReviewSection.tsx
-msgid "Configuration key"
 msgstr ""
 
 #: src/rancher/template/QuestionGroup.tsx
@@ -3375,7 +3366,6 @@ msgstr ""
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/review/EditReviewInfoButton.tsx
 #: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
@@ -6406,10 +6396,6 @@ msgstr ""
 msgid "Nothing to see here"
 msgstr ""
 
-#: src/proposals/update/review/CallReviewSection.tsx
-msgid "Nothing to see here."
-msgstr ""
-
 #: src/marketplace/resources/list/CustomerResourcesListPlaceholder.tsx
 msgid "Nothing to show here"
 msgstr ""
@@ -9342,8 +9328,6 @@ msgid "Retype OpenStack Volume"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
-#: src/proposals/update/CallUpdateBar.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr ""
@@ -9375,7 +9359,6 @@ msgstr ""
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
@@ -13785,7 +13768,6 @@ msgstr ""
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/proposals/update/review/CallReviewSection.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Value"
 msgstr ""
