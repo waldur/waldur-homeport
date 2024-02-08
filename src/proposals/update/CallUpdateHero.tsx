@@ -9,6 +9,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProposalCall } from '../types';
 
+import { ActionsDropdown } from './ActionsDropdown';
 import { CallUpdateHeaderBody } from './CallUpdateHeaderBody';
 import { ProposalCallQuotas } from './ProposalCallQuotas';
 
@@ -16,9 +17,10 @@ const heroBg = require('@waldur/proposals/proposal-calls.png');
 
 interface CallUpdateHeroProps {
   call: ProposalCall;
+  refetch?(): void;
 }
 
-export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call }) => {
+export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
   const customer = useSelector(getCustomer);
   return (
     <PublicDashboardHero
@@ -39,9 +41,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call }) => {
       }
       quickActions={
         <div className="d-flex gap-5 justify-content-between">
-          <Button variant="light" className="w-50">
-            {translate('See call')}
-          </Button>
+          <ActionsDropdown call={call} refetch={refetch} />
           <Button variant="primary" className="w-50">
             {translate('Submit changes')}
           </Button>

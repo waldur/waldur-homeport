@@ -43,6 +43,11 @@ export const getProposalCallInitialValues = (call: ProposalCall) => {
   };
 };
 
+export const callStateActions = () => [
+  { label: translate('Activate'), value: 'Active', action: 'activate' },
+  { label: translate('Archive'), value: 'Archived', action: 'archive' },
+];
+
 export const getRoundStatus = (round: ProposalCallRound) => {
   const now = DateTime.now();
   const start = parseDate(round.start_time);

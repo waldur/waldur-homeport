@@ -1,6 +1,13 @@
 import { AxiosRequestConfig } from 'axios';
 
-import { getById, post, deleteById, getFirst, put } from '@waldur/core/api';
+import {
+  getById,
+  post,
+  deleteById,
+  getFirst,
+  put,
+  patch,
+} from '@waldur/core/api';
 
 import {
   CallManagingOrganizationInfo,
@@ -47,6 +54,14 @@ export const createCall = (data) => {
 
 export const updateCall = (data, uuid) => {
   return put<ProposalCall>(`/proposal-protected-calls/${uuid}/`, data);
+};
+
+export const updateCallPartially = (data, uuid) => {
+  return patch<ProposalCall>(`/proposal-protected-calls/${uuid}/`, data);
+};
+
+export const updateCallState = (state: 'activate' | 'archive', uuid) => {
+  return post<ProposalCall>(`/proposal-protected-calls/${uuid}/${state}/`);
 };
 
 export const getPublicCall = (uuid: string, options?: AxiosRequestConfig) =>

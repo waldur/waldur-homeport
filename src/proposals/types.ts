@@ -59,7 +59,7 @@ export interface ProposalCall {
   round_strategy: string;
   review_strategy: string;
   allocation_strategy: string;
-  state: string;
+  state: 'Active' | 'Draft' | 'Archived';
   manager: string;
   customer_name: string;
   created_by: string;
