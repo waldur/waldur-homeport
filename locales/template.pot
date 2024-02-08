@@ -217,6 +217,7 @@ msgstr ""
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
@@ -230,6 +231,8 @@ msgstr ""
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
 #: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
+#: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/utils.ts
 #: src/user/support/UserActivateButton.tsx
 msgid "Activate"
 msgstr ""
@@ -842,6 +845,7 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+#: src/proposals/utils.ts
 msgid "Archive"
 msgstr ""
 
@@ -1007,6 +1011,10 @@ msgstr ""
 
 #: src/resource/actions/AsyncActionItem.tsx
 msgid "Are you sure you want to {action} the VM?"
+msgstr ""
+
+#: src/proposals/update/ActionsDropdown.tsx
+msgid "Are you sure you want to {action} this call?"
 msgstr ""
 
 #: src/marketplace/resources/mass-actions/VirtualMachineMultiAction.tsx
@@ -1539,6 +1547,10 @@ msgstr ""
 
 #: src/proposals/details/CallRoundsDialog.tsx
 msgid "Call rounds"
+msgstr ""
+
+#: src/proposals/update/ActionsDropdown.tsx
+msgid "Call state updated."
 msgstr ""
 
 #: src/proposals/update/CallUpdateContainer.tsx
@@ -2081,6 +2093,7 @@ msgstr ""
 #: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -2693,10 +2706,6 @@ msgstr ""
 
 #: src/marketplace-script/marketplace.ts
 msgid "Custom scripts"
-msgstr ""
-
-#: src/administration/roles/RoleForm.tsx
-msgid "Customer"
 msgstr ""
 
 #: src/issues/CustomerSupportRating.tsx
@@ -6544,7 +6553,6 @@ msgid "Object is not found."
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
@@ -6576,6 +6584,7 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/permissions/constants.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -7017,6 +7026,7 @@ msgstr ""
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
+#: src/permissions/constants.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -8034,7 +8044,6 @@ msgid "Progress"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/deploy/steps.ts
@@ -8073,6 +8082,7 @@ msgstr ""
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/steps.ts
+#: src/permissions/constants.tsx
 #: src/project/routes.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -9753,6 +9763,10 @@ msgstr ""
 msgid "Schedules have been updated successfully."
 msgstr ""
 
+#: src/administration/roles/RolesList.tsx
+msgid "Scope"
+msgstr ""
+
 #: src/invitations/InvitationExpandableRow.tsx
 msgid "Scope name"
 msgstr ""
@@ -9888,7 +9902,6 @@ msgid "See all rounds"
 msgstr ""
 
 #: src/proposals/round/RoundPageHero.tsx
-#: src/proposals/update/CallUpdateHero.tsx
 msgid "See call"
 msgstr ""
 
@@ -12923,6 +12936,10 @@ msgstr ""
 msgid "Unable to update billing component."
 msgstr ""
 
+#: src/proposals/update/ActionsDropdown.tsx
+msgid "Unable to update call state."
+msgstr ""
+
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 msgid "Unable to update call."
@@ -14524,7 +14541,6 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: src/invitations/formatInvitation.ts
 #: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"
@@ -14557,10 +14573,6 @@ msgstr ""
 
 #: src/marketplace/orders/list/ResourceOrders.tsx
 msgid "orders"
-msgstr ""
-
-#: src/invitations/formatInvitation.ts
-msgid "organization"
 msgstr ""
 
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -14596,10 +14608,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/TenantPortsList.tsx
 #: src/vmware/PortsList.tsx
 msgid "ports"
-msgstr ""
-
-#: src/invitations/formatInvitation.ts
-msgid "project"
 msgstr ""
 
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx

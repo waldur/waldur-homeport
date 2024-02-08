@@ -43,7 +43,7 @@ export const CallUpdateContainer: FunctionComponent = () => {
   ) : data ? (
     <PageBarProvider>
       <div className="m-b">
-        <CallUpdateHero call={data} />
+        <CallUpdateHero call={data} refetch={refetch} />
         <CallUpdateBar call={data} />
         <div className="container-xxl py-10">
           <CallRoundsSection call={data} />
