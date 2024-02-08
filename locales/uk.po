@@ -800,10 +800,14 @@ msgstr "Усі ресурси буде припинено після наста�
 msgid "Allocated"
 msgstr "Виділено"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Allocation"
 msgstr "Виділення"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation date"
@@ -826,6 +830,7 @@ msgstr "Пули алокації"
 msgid "Allocation strategy"
 msgstr "Стратегія розподілу"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation time"
@@ -1780,6 +1785,7 @@ msgid "Calendar"
 msgstr "Календар"
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "Call"
 msgstr "Телефонуйте"
@@ -2830,6 +2836,7 @@ msgstr "Створіть свій перший проект"
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -3099,11 +3106,13 @@ msgstr "Кінцева дата"
 msgid "Cutoff"
 msgstr "Відрізати"
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Cutoff date"
 msgstr "Кінцева дата"
 
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Cutoff date must be after start date"
 msgstr "Кінцева дата має бути після дати початку"
@@ -3225,6 +3234,7 @@ msgstr "дезактивація"
 msgid "Deadline"
 msgstr "Дедлайн"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Deciding entity"
@@ -3766,6 +3776,7 @@ msgstr "Сценарій сухого запуску"
 msgid "Due date"
 msgstr "Термін виконання"
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Duration"
 msgstr "Тривалість"
@@ -3832,6 +3843,13 @@ msgstr "Кожен звіт про використання має бути по
 #: src/project/team/AddMemberButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/round/allocation/EditAllocationInfoButton.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/review/EditReviewInfoButton.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/reviewers/EditReviewersButton.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
@@ -5950,6 +5968,7 @@ msgstr "Останнє оновлення"
 msgid "Last {month} month"
 msgstr "Останній{month} місяць"
 
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Latest review completion date"
 msgstr "Остання дата завершення перевірки"
@@ -6357,6 +6376,7 @@ msgstr "Максимальне значення"
 msgid "Maximum RAM for each VM"
 msgstr "Максимальний обсяг оперативної пам’яті для кожної віртуальної машини"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Maximum accepted proposals"
 msgstr "Максимальна кількість прийнятих пропозицій"
@@ -6531,6 +6551,7 @@ msgstr "Мінімальна вартість"
 msgid "Minimum allowed value"
 msgstr "Мінімально допустиме значення"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Minimum average scoring for allocation"
 msgstr "Мінімальний середній бал для розподілу"
@@ -6775,6 +6796,7 @@ msgstr "N/A"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -7037,6 +7059,7 @@ msgid "Next month price"
 msgstr "Ціна наступного місяця"
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/round/RoundPageHeaderBody.tsx
 #: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Next round ends in"
 msgstr "Наступний раунд закінчується"
@@ -7303,6 +7326,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Зауважте, що за цей обсяг не стягуватиметься окрема плата{organization} ."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
@@ -9566,11 +9590,12 @@ msgstr "Підтверджуючий документ"
 msgid "Propagated"
 msgstr "Розмножується"
 
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 msgid "Proposal"
 msgstr "Пропозиція"
 
-#: src/marketplace/utils.ts
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 msgid "Proposals"
 msgstr "Пропозиції"
 
@@ -10817,6 +10842,9 @@ msgid "Retype OpenStack Volume"
 msgstr "Повторно введіть том OpenStack"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "огляд"
@@ -10848,11 +10876,13 @@ msgstr "Запит на перегляд"
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
 msgstr "Перегляд стратегії"
 
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/ProposalCallQuotas.tsx
 msgid "Reviewed"
 msgstr "Переглянуто"
@@ -10888,10 +10918,13 @@ msgstr "Переглянуто постачальником"
 msgid "Reviewed by provider at"
 msgstr "Переглянуто постачальником на"
 
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewer"
 msgstr "Рецензент"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewers"
@@ -11356,6 +11389,7 @@ msgstr "Переглянути всі пропозиції"
 msgid "See all rounds"
 msgstr "Переглянути всі раунди"
 
+#: src/proposals/round/RoundPageHero.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "See call"
 msgstr "См. дзвонити"
@@ -12344,6 +12378,7 @@ msgid "Start"
 msgstr "Почніть"
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Start date"
@@ -12470,6 +12505,7 @@ msgstr "Оновлення статичних маршрутів було зап
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -12544,11 +12580,15 @@ msgstr "Тип зберігання"
 msgid "Subject"
 msgstr "Тема"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Submission"
 msgstr "Подання"
 
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Submissions"
 msgstr "Подання"
@@ -13662,6 +13702,7 @@ msgstr "Спробуйте нову версію"
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
@@ -16437,6 +16478,7 @@ msgstr "Ви можете зареєструвати організацію як
 msgid "You can remove this organization by pressing the button"
 msgstr "Ви можете видалити цю організацію, натиснувши кнопку"
 
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "You can set the first round for this call."
 msgstr "Ви можете встановити перший раунд для цього виклику."

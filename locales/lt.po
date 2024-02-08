@@ -795,10 +795,14 @@ msgstr "Visi ištekliai bus suplanuoti nutraukti, kai tik pasieks data."
 msgid "Allocated"
 msgstr "Skirta"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Allocation"
 msgstr "Paskirstymas"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation date"
@@ -821,6 +825,7 @@ msgstr "Paskirstymo telkiniai"
 msgid "Allocation strategy"
 msgstr "Paskirstymo strategija"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation time"
@@ -1762,6 +1767,7 @@ msgid "Calendar"
 msgstr "Kalendorius"
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "Call"
 msgstr "Skambinti"
@@ -2812,6 +2818,7 @@ msgstr "Sukurkite savo pirmąjį projektą"
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -3081,11 +3088,13 @@ msgstr "Nutraukimo data"
 msgid "Cutoff"
 msgstr "Nupjauti"
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Cutoff date"
 msgstr "Pasibaigęs galiojimas"
 
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Cutoff date must be after start date"
 msgstr "Nutraukimo data turi būti vėlesnė nei pradžios data"
@@ -3207,6 +3216,7 @@ msgstr "Išjungiama"
 msgid "Deadline"
 msgstr "Terminas"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Deciding entity"
@@ -3748,6 +3758,7 @@ msgstr "Sauso paleidimo scenarijus"
 msgid "Due date"
 msgstr "Terminas"
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Duration"
 msgstr "Trukmė"
@@ -3814,6 +3825,13 @@ msgstr "Kiekviena naudojimo ataskaita turi būti susieta su atsiskaitymo planu, 
 #: src/project/team/AddMemberButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/round/allocation/EditAllocationInfoButton.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/review/EditReviewInfoButton.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/reviewers/EditReviewersButton.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
@@ -5932,6 +5950,7 @@ msgstr "Paskutiniai pakeitimai"
 msgid "Last {month} month"
 msgstr "Paskutinis{month} mėnuo"
 
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Latest review completion date"
 msgstr "Paskutinė peržiūros pabaigos data"
@@ -6339,6 +6358,7 @@ msgstr "Maksimali vertė"
 msgid "Maximum RAM for each VM"
 msgstr "Maksimalus RAM kiekvienam VM"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Maximum accepted proposals"
 msgstr "Maksimalus priimtų pasiūlymų skaičius"
@@ -6513,6 +6533,7 @@ msgstr "Minimali vertė"
 msgid "Minimum allowed value"
 msgstr "Minimali leistina vertė"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Minimum average scoring for allocation"
 msgstr "Mažiausias paskirstymo balų vidurkis"
@@ -6757,6 +6778,7 @@ msgstr "N/A"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -7019,6 +7041,7 @@ msgid "Next month price"
 msgstr "Kaina kito mėnesio"
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/round/RoundPageHeaderBody.tsx
 #: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Next round ends in"
 msgstr "Kitas turas baigiasi"
@@ -7285,6 +7308,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Atminkite, kad šis tomas nebus apmokestinamas atskirai {organization}."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
@@ -9540,11 +9564,12 @@ msgstr "Įrodomasis dokumentas"
 msgid "Propagated"
 msgstr "Dauginamas"
 
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 msgid "Proposal"
 msgstr "Pasiūlymas"
 
-#: src/marketplace/utils.ts
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 msgid "Proposals"
 msgstr "Pasiūlymus"
 
@@ -10791,6 +10816,9 @@ msgid "Retype OpenStack Volume"
 msgstr "Pakartotinai įveskite OpenStack tomą"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "Apžvalga"
@@ -10822,11 +10850,13 @@ msgstr "Peržiūrėti prašymą"
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
 msgstr "Peržiūrėkite strategiją"
 
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/ProposalCallQuotas.tsx
 msgid "Reviewed"
 msgstr "Peržiūrėta"
@@ -10862,10 +10892,13 @@ msgstr "Peržiūrėjo teikėjas"
 msgid "Reviewed by provider at"
 msgstr "Apžvelgė teikėjas adresu"
 
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewer"
 msgstr "Recenzentas"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewers"
@@ -11322,6 +11355,7 @@ msgstr "Žiūrėti visus pasiūlymus"
 msgid "See all rounds"
 msgstr "Žiūrėti visus raundus"
 
+#: src/proposals/round/RoundPageHero.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "See call"
 msgstr "Žiūrėti skambutį"
@@ -12310,6 +12344,7 @@ msgid "Start"
 msgstr "Pradėti"
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Start date"
@@ -12436,6 +12471,7 @@ msgstr "Buvo suplanuotas statinių maršrutų atnaujinimas."
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -12510,11 +12546,15 @@ msgstr "Saugyklos tipas"
 msgid "Subject"
 msgstr "Tema"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Submission"
 msgstr "Pateikimas"
 
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Submissions"
 msgstr "Pateikimai"
@@ -13628,6 +13668,7 @@ msgstr "Išbandykite naują versiją"
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
@@ -16379,6 +16420,7 @@ msgstr "Užregistruoti organizaciją kaip paslaugų teikėją galite paspausdami
 msgid "You can remove this organization by pressing the button"
 msgstr "Šią organizaciją galite pašalinti paspausdami mygtuką"
 
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "You can set the first round for this call."
 msgstr "Galite nustatyti pirmąjį šio skambučio raundą."

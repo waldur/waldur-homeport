@@ -795,10 +795,14 @@ msgstr "Датага жеткенден кийин бардык ресурста
 msgid "Allocated"
 msgstr "Бөлүнгөн"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Allocation"
 msgstr "Бөлүштүрүү"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation date"
@@ -821,6 +825,7 @@ msgstr "Бөлүштүрүү бассейндери"
 msgid "Allocation strategy"
 msgstr "Бөлүштүрүү стратегиясы"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation time"
@@ -1762,6 +1767,7 @@ msgid "Calendar"
 msgstr "Календар"
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "Call"
 msgstr "Чалуу"
@@ -2812,6 +2818,7 @@ msgstr "Биринчи долбооруңузду түзүңүз"
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -3081,11 +3088,13 @@ msgstr "Датасы"
 msgid "Cutoff"
 msgstr "Кесип алып"
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Cutoff date"
 msgstr "Кесүү күнү"
 
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Cutoff date must be after start date"
 msgstr "Кесүү күнү башталган күндөн кийин болушу керек"
@@ -3207,6 +3216,7 @@ msgstr "Өчүрүү"
 msgid "Deadline"
 msgstr "Мөөнөтү"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Deciding entity"
@@ -3748,6 +3758,7 @@ msgstr "Кургак иштетүү сценарийи"
 msgid "Due date"
 msgstr "Бүтүмдүк дата"
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Duration"
 msgstr "Узактыгы"
@@ -3814,6 +3825,13 @@ msgstr "Ар бир колдонуу отчету эсептик маалыма�
 #: src/project/team/AddMemberButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/round/allocation/EditAllocationInfoButton.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/review/EditReviewInfoButton.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/reviewers/EditReviewersButton.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
@@ -5932,6 +5950,7 @@ msgstr "Акыркы жаңыртуу"
 msgid "Last {month} month"
 msgstr "Акыркы{month} ай"
 
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Latest review completion date"
 msgstr "Соңку кароонун аяктоо күнү"
@@ -6339,6 +6358,7 @@ msgstr "Максималдуу маани"
 msgid "Maximum RAM for each VM"
 msgstr "Ар бир VM үчүн максималдуу RAM"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Maximum accepted proposals"
 msgstr "Максималдуу кабыл алынган сунуштар"
@@ -6513,6 +6533,7 @@ msgstr "Минималдуу маани"
 msgid "Minimum allowed value"
 msgstr "Минималдуу уруксат берилген маани"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Minimum average scoring for allocation"
 msgstr "Бөлүштүрүү үчүн минималдуу орточо балл"
@@ -6757,6 +6778,7 @@ msgstr "Жок"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -7019,6 +7041,7 @@ msgid "Next month price"
 msgstr "Кийинки ай баасы"
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/round/RoundPageHeaderBody.tsx
 #: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Next round ends in"
 msgstr "Кийинки тур аяктайт"
@@ -7285,6 +7308,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Бул көлөм үчүн өзүнчө төлөнбөй турганын эске алыңыз{organization} ."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
@@ -9540,11 +9564,12 @@ msgstr "Тастыктоочу документ"
 msgid "Propagated"
 msgstr "Көбөйтүлгөн"
 
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 msgid "Proposal"
 msgstr "Сунуш"
 
-#: src/marketplace/utils.ts
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 msgid "Proposals"
 msgstr "Сунуштар"
 
@@ -10791,6 +10816,9 @@ msgid "Retype OpenStack Volume"
 msgstr "OpenStack көлөмүн кайра териңиз"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "карап чыгуу"
@@ -10822,11 +10850,13 @@ msgstr "Өтүнүчтү карап чыгуу"
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
 msgstr "Стратегияны карап чыгуу"
 
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/ProposalCallQuotas.tsx
 msgid "Reviewed"
 msgstr "Каралып чыкты"
@@ -10862,10 +10892,13 @@ msgstr "Провайдер тарабынан каралат"
 msgid "Reviewed by provider at"
 msgstr "Провайдер тарабынан каралып чыккан"
 
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewer"
 msgstr "Сынчы"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewers"
@@ -11322,6 +11355,7 @@ msgstr "Бардык сунуштарды караңыз"
 msgid "See all rounds"
 msgstr "Бардык турларды көрүү"
 
+#: src/proposals/round/RoundPageHero.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "See call"
 msgstr "Чакырууну караңыз"
@@ -12310,6 +12344,7 @@ msgid "Start"
 msgstr "баштоо"
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Start date"
@@ -12436,6 +12471,7 @@ msgstr "Статикалык маршруттарды жаңыртуу план�
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -12510,11 +12546,15 @@ msgstr "Сактоо түрү"
 msgid "Subject"
 msgstr "Тема"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Submission"
 msgstr "Тапшыруу"
 
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Submissions"
 msgstr "Тапшыруулар"
@@ -13628,6 +13668,7 @@ msgstr "Жаңы версиясын колдонуп көрүңүз"
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
@@ -16379,6 +16420,7 @@ msgstr "Сиз төмөнкү баскычты басуу менен уюмду 
 msgid "You can remove this organization by pressing the button"
 msgstr "баскычын басуу менен бул уюмду алып салсаңыз болот"
 
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "You can set the first round for this call."
 msgstr "Бул чалуу үчүн биринчи айлампаны орното аласыз."

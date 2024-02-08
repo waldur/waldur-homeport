@@ -795,10 +795,14 @@ msgstr "Kaikki resurssit ajoitetaan lopetettaviksi, kun päivämäärä saavutet
 msgid "Allocated"
 msgstr "Jaettu"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Allocation"
 msgstr "jakaminen"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation date"
@@ -821,6 +825,7 @@ msgstr "Jakopoolit"
 msgid "Allocation strategy"
 msgstr "Jakostrategia"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Allocation time"
@@ -1762,6 +1767,7 @@ msgid "Calendar"
 msgstr "Kalenteri"
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "Call"
 msgstr "Kutsua"
@@ -2812,6 +2818,7 @@ msgstr "Ensimmäisen projektin luominen"
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -3081,11 +3088,13 @@ msgstr "Leikkauspäivämäärä"
 msgid "Cutoff"
 msgstr "Katkaista"
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Cutoff date"
 msgstr "Katkaisupäivämäärä"
 
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Cutoff date must be after start date"
 msgstr "Katkaisupäivän on oltava aloituspäivän jälkeinen"
@@ -3207,6 +3216,7 @@ msgstr "Poistetaan käytöstä"
 msgid "Deadline"
 msgstr "Määräaika"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Deciding entity"
@@ -3748,6 +3758,7 @@ msgstr "Kuivakäynnistysskripti"
 msgid "Due date"
 msgstr "Eräpäivä"
 
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Duration"
 msgstr "Kesto"
@@ -3814,6 +3825,13 @@ msgstr "Jokaiseen käyttöraporttiin tulee liittää laskutussuunnitelma kirjanp
 #: src/project/team/AddMemberButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/round/allocation/EditAllocationInfoButton.tsx
+#: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
+#: src/proposals/round/review/EditReviewInfoButton.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/reviewers/EditReviewersButton.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
@@ -5932,6 +5950,7 @@ msgstr "Viimeisin päivitys"
 msgid "Last {month} month"
 msgstr "Kestää{month} kuukausi"
 
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Latest review completion date"
 msgstr "Tarkistuksen viimeisin valmistumispäivä"
@@ -6339,6 +6358,7 @@ msgstr "Suurin arvo"
 msgid "Maximum RAM for each VM"
 msgstr "Maksimi RAM-muisti jokaiselle VM:lle"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Maximum accepted proposals"
 msgstr "Hyväksyttyjen ehdotusten enimmäismäärä"
@@ -6513,6 +6533,7 @@ msgstr "Minimiarvo"
 msgid "Minimum allowed value"
 msgstr "Pienin sallittu arvo"
 
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/WizardFormThirdPage.tsx
 msgid "Minimum average scoring for allocation"
 msgstr "Jaon keskimääräinen vähimmäispistemäärä"
@@ -6757,6 +6778,7 @@ msgstr "N/A"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -7019,6 +7041,7 @@ msgid "Next month price"
 msgstr "Ensi kuun hinta"
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/round/RoundPageHeaderBody.tsx
 #: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Next round ends in"
 msgstr "Seuraava kierros päättyy"
@@ -7285,6 +7308,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Huomaa, että tästä tilavuudesta ei veloiteta erikseen{organization} ."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
@@ -9540,11 +9564,12 @@ msgstr "Todistusasiakirja"
 msgid "Propagated"
 msgstr "Levitetty"
 
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 msgid "Proposal"
 msgstr "Ehdotus"
 
-#: src/marketplace/utils.ts
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 msgid "Proposals"
 msgstr "ehdotuksia"
 
@@ -10791,6 +10816,9 @@ msgid "Retype OpenStack Volume"
 msgstr "Kirjoita OpenStack Volume uudelleen"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/review/EditRoundReviewDialog.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr "Arvostelu"
@@ -10822,11 +10850,13 @@ msgstr "Tarkista pyyntö"
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
 msgstr "Tarkista strategia"
 
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/ProposalCallQuotas.tsx
 msgid "Reviewed"
 msgstr "Arvosteltu"
@@ -10862,10 +10892,13 @@ msgstr "Palveluntarjoajan tarkistama"
 msgid "Reviewed by provider at"
 msgstr "Palveluntarjoajan tarkistama osoitteessa"
 
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewer"
 msgstr "Arvostelija"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Reviewers"
@@ -11322,6 +11355,7 @@ msgstr "Katso kaikki tarjoukset"
 msgid "See all rounds"
 msgstr "Katso kaikki kierrokset"
 
+#: src/proposals/round/RoundPageHero.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 msgid "See call"
 msgstr "Katso puhelu"
@@ -12310,6 +12344,7 @@ msgid "Start"
 msgstr "Aloittaa"
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Start date"
@@ -12436,6 +12471,7 @@ msgstr "Staattisten reittien päivitys ajoitettiin."
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -12510,11 +12546,15 @@ msgstr "Varastointityyppi"
 msgid "Subject"
 msgstr "Aihe"
 
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Submission"
 msgstr "Lähetys"
 
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/round/RoundQuotas.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Submissions"
 msgstr "Lähetykset"
@@ -13628,6 +13668,7 @@ msgstr "Kokeile uutta versiota"
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
+#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
@@ -16379,6 +16420,7 @@ msgstr "Voit rekisteröidä organisaation palveluntarjoajaksi painamalla alla ol
 msgid "You can remove this organization by pressing the button"
 msgstr "Voit poistaa tämän organisaation painamalla -painiketta"
 
+#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "You can set the first round for this call."
 msgstr "Voit asettaa tämän puhelun ensimmäisen kierroksen."
