@@ -184,6 +184,7 @@ msgstr "Der er anvendt en handling."
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
@@ -197,6 +198,8 @@ msgstr "Handlinger"
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
 #: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
+#: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/utils.ts
 #: src/user/support/UserActivateButton.tsx
 msgid "Activate"
 msgstr "Aktivér"
@@ -616,6 +619,7 @@ msgstr "Godkendt af"
 
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+#: src/proposals/utils.ts
 msgid "Archive"
 msgstr "Arkiv"
 
@@ -1448,6 +1452,7 @@ msgstr "Bekræft sletning?"
 #: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -4624,7 +4629,6 @@ msgid "Object is not found."
 msgstr "Objektet blev ikke fundet."
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/marketplace-flows/FlowEditForm.tsx
 #: src/marketplace-flows/FlowsList.tsx
@@ -4656,6 +4660,7 @@ msgstr "Objektet blev ikke fundet."
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/permissions/constants.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -4960,6 +4965,7 @@ msgstr "Ordrer"
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
+#: src/permissions/constants.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -5735,7 +5741,6 @@ msgid "Private clouds"
 msgstr "Private skyer"
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/deploy/steps.ts
@@ -5774,6 +5779,7 @@ msgstr "Private skyer"
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/steps.ts
+#: src/permissions/constants.tsx
 #: src/project/routes.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -10465,7 +10471,6 @@ msgstr "meddelelser"
 msgid "of"
 msgstr "af"
 
-#: src/invitations/formatInvitation.ts
 #: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"

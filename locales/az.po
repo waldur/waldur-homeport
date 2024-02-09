@@ -112,6 +112,7 @@ msgstr "Uçotun başlama tarixi "
 #: src/paypal/InvoiceActions.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
@@ -2302,6 +2303,7 @@ msgstr "Xidmət Masasında açın"
 #: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
+#: src/permissions/constants.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
@@ -2632,7 +2634,6 @@ msgid "Private clouds"
 msgstr "Özəl buludlar"
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/administration/roles/RoleForm.tsx
 #: src/booking/BookingsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/deploy/steps.ts
@@ -2671,6 +2672,7 @@ msgstr "Özəl buludlar"
 #: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/steps.ts
+#: src/permissions/constants.tsx
 #: src/project/routes.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
