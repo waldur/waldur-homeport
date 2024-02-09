@@ -4,7 +4,7 @@ import { translate } from '@waldur/i18n/translate';
 export const CallEditButton = ({ row }) => {
   return (
     <Link
-      state="protected-call-update"
+      state="protected-call-update.details"
       params={{ call_uuid: row.uuid }}
       className="btn btn-primary"
     >
