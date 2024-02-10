@@ -5047,7 +5047,7 @@ msgstr "HTML sisu"
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Has fired"
-msgstr "On vallandanud"
+msgstr "Läviväärtus ületatud"
 
 #: src/administration/dashboard/HealthChecks.tsx
 msgid "Health checks"
@@ -15807,7 +15807,7 @@ msgstr "Kasutaja {user_link} on saanud endale rolli {affected_user_link}."
 
 #: src/project/team/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
-msgstr "Kasutaja{user_link} on andnud{role_name} rolli sisse{scope_link} juurde{affected_user_link} ."
+msgstr "Kasutaja {user_link} on andnud {role_name} rolli sisse {scope_link} juurde {affected_user_link} ."
 
 #: src/i18n/constants.ts
 msgid "User {user_link} has revoked Co-PI  {affected_user_link} from project {project_link}."
