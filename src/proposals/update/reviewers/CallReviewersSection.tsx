@@ -16,7 +16,7 @@ export const CallReviewersSection: FC<CallReviewersSectionProps> = (props) => {
   const tableProps = useTable({
     table: 'CallReviewersList',
     fetchData: createFetcher(
-      `proposal-protected-calls/${props.call.uuid}/reviewers`,
+      `proposal-protected-calls/${props.call.uuid}/list_users`,
     ),
   });
 
@@ -36,16 +36,7 @@ export const CallReviewersSection: FC<CallReviewersSectionProps> = (props) => {
           render: ({ row }) => <>{row.user_email}</>,
         },
       ]}
-      title={
-        <>
-          {props.call.reviewers.length === 0 ? (
-            <i className="fa fa-warning text-danger me-3" />
-          ) : (
-            <i className="fa fa-check text-success me-3" />
-          )}
-          <span>{translate('Reviewers')}</span>
-        </>
-      }
+      title={translate('Reviewers')}
       verboseName={translate('Reviewers')}
       actions={<EditReviewersButton />}
     />
