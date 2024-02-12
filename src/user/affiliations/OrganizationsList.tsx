@@ -20,23 +20,8 @@ import { OrganizationExpandableRow } from './OrganizationExpandableRow';
 import { OrganizationHoverableRow } from './OrganizationHoverableRow';
 import { RoleField } from './RoleField';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
-
-  usePermissionView(() => {
-    if (props.isStaffOrSupport) {
-      return {
-        permission: 'limited',
-        banner: {
-          title: '',
-          message: translate('Your role allows to see all organizations'),
-        },
-      };
-    } else {
-      return null;
-    }
-  }, [props.isStaffOrSupport]);
-
   const columns = filterColumns([
     {
       title: translate('Organization'),
@@ -144,4 +129,19 @@ export const OrganizationsList = connect((state: RootState) => ({
   currentOrganization: getCustomerSelector(state),
   user: getUser(state),
   isStaffOrSupport: isStaffOrSupportSelector(state),
-}))(PureOrganizations);
+}))((props: any) => {
+  usePermissionView(() => {
+    if (props.isStaffOrSupport) {
+      return {
+        permission: 'limited',
+        banner: {
+          title: '',
+          message: translate('Your role allows to see all organizations'),
+        },
+      };
+    } else {
+      return null;
+    }
+  }, [props.isStaffOrSupport]);
+  return <PureOrganizations {...props} />;
+});
