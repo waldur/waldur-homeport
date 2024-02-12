@@ -78,7 +78,7 @@ export const InvitationPolicyService = {
         projectId: context.project.uuid,
       }) ||
       hasPermission(context.user, {
-        permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+        permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
         customerId: context.customer.uuid,
       })
     );
