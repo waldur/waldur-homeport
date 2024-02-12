@@ -37,13 +37,6 @@ describe('Expired token redirect', () => {
     cy
       .intercept('GET', '/api/configuration/', {fixture:'configuration.json'})
       .intercept('POST', '/api-auth/password/', { token: 'valid' })
-      .intercept('GET', '/api/customer-permissions/', [])
-      .intercept('GET', '/api/project-permissions/', [])
-      .intercept(
-        'GET',
-        '/api/project-permissions/?user=3a836bc76e1b40349ec1a0d8220f374f&project=df4193e2bee24a4c8e339474d74c5f8c',
-        [],
-      )
       .intercept('GET', '/api/roles/', {fixture: 'roles.json'})
       .intercept('GET', '/api/events/', [])
       .intercept(

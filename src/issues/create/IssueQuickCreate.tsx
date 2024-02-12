@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { formatResourceShort } from '@waldur/marketplace/utils';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { RootState } from '@waldur/store/reducers';
-import { getUser } from '@waldur/workspace/selectors';
+import { checkIsOwner, getUser } from '@waldur/workspace/selectors';
 
 import { refreshProjects, refetchs } from './api';
 import { AsyncSelectField } from './AsyncSelectField';
@@ -38,9 +38,7 @@ const projectRequiredSelector = createSelector(
       return false;
     }
 
-    return (
-      customer.owners.find((owner) => owner.uuid === user.uuid) === undefined
-    );
+    return checkIsOwner(customer, user);
   },
 );
 

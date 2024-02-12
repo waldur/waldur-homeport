@@ -10,8 +10,7 @@ import { isDescendantOf } from '@waldur/navigation/useTabs';
 import {
   getCustomer,
   getProject,
-  getUserCustomerPermissions,
-  getUserProjectPermissions,
+  getUser,
   isStaffOrSupport,
 } from '@waldur/workspace/selectors';
 
@@ -110,22 +109,25 @@ const PermissionLayout: React.FC = ({ children }) => {
   } = useContext(PermissionContext);
 
   const hasAllAccess = useSelector(isStaffOrSupport);
-  const projectPermissions = useSelector(getUserProjectPermissions);
-  const customerPermissions = useSelector(getUserCustomerPermissions);
+  const user = useSelector(getUser);
   const project = useSelector(getProject);
   const customer = useSelector(getCustomer);
   const { state, params } = useCurrentStateAndParams();
 
   // Check users permissions
   useEffect(() => {
-    if (!hasAllAccess && state.name) {
+    if (!hasAllAccess && state.name && user) {
       if (isDescendantOf('project', state)) {
         if (
-          !projectPermissions.find(
-            (item) => item.project_uuid === params.uuid,
+          !user.permissions.find(
+            (permission) =>
+              permission.scope_uuid === params.uuid &&
+              permission.scope_type === 'project',
           ) &&
-          !customerPermissions.find(
-            (item) => item.customer_uuid === project.customer_uuid,
+          !user.permissions.find(
+            (permission) =>
+              permission.scope_uuid === project.customer_uuid &&
+              permission.scope_type === 'customer',
           )
         ) {
           setPermission('restricted');
@@ -147,8 +149,10 @@ const PermissionLayout: React.FC = ({ children }) => {
         }
       } else if (isDescendantOf('organization', state)) {
         if (
-          !customerPermissions.find(
-            (item) => item.customer_uuid === params.uuid,
+          !user.permissions.find(
+            (permission) =>
+              permission.scope_uuid === params.uuid &&
+              permission.scope_type === 'customer',
           )
         ) {
           setPermission('restricted');
@@ -169,8 +173,9 @@ const PermissionLayout: React.FC = ({ children }) => {
           });
         }
       } else if (
-        customerPermissions.length === 0 &&
-        projectPermissions.length === 0 &&
+        user.permissions.filter((permission) =>
+          ['customer', 'project'].includes(permission.scope_type),
+        ).length === 0 &&
         state.name === 'profile.details'
       ) {
         setPermission('limited');
@@ -187,14 +192,7 @@ const PermissionLayout: React.FC = ({ children }) => {
         clearPermissionView();
       }
     };
-  }, [
-    state,
-    params,
-    projectPermissions,
-    customerPermissions,
-    project,
-    customer,
-  ]);
+  }, [state, params, project, customer, user]);
 
   return permission === 'restricted' && pageMessage ? (
     <RestrictedView />

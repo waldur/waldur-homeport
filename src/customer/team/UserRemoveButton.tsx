@@ -41,7 +41,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
           }),
         ),
       );
-      if (user.permission) {
+      if (user.role_name) {
         await deleteCustomerUser({
           customer: customer.uuid,
           user: user.uuid,

@@ -5,7 +5,6 @@ describe('Resources in personal space', () => {
     })
       .mockUser()
       .mockChecklists()
-      .mockPermissions()
       .mockCustomers()
       .setToken()
       .visit('/profile/user-resources/')

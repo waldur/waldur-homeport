@@ -54,7 +54,6 @@ describe('Add resource pop up is visible', { testIsolation: false }, () => {
       .mockUser('admin')
       .mockChecklists()
       .mockEvents()
-      .mockPermissions()
       .intercept('GET', '/api/marketplace-categories/**', {
         fixture: 'marketplace/categories.json',
       })

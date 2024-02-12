@@ -1,10 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { RootState } from '@waldur/store/reducers';
-import {
-  isStaff,
-  getUserCustomerPermissions,
-} from '@waldur/workspace/selectors';
+import { isStaff, getUser } from '@waldur/workspace/selectors';
 
 export const canManageCustomer = (state: RootState): boolean =>
   state.config.plugins.WALDUR_CORE.OWNER_CAN_MANAGE_CUSTOMER;
@@ -14,12 +11,18 @@ export const canCreateOrganization = (state: RootState): boolean =>
 
 export const renderCustomerCreatePrompt = createSelector(
   isStaff,
-  getUserCustomerPermissions,
+  getUser,
   canManageCustomer,
-  (staff, userCustomerPermissions, ownerCanManageCustomer) => {
+  (staff, user, ownerCanManageCustomer) => {
     if (staff) {
-      return userCustomerPermissions.length === 0;
+      return (
+        user.permissions.filter((perm) => perm.scope_type === 'customer')
+          .length === 0
+      );
     }
-    return userCustomerPermissions.length === 0 && ownerCanManageCustomer;
+    return (
+      user.permissions.filter((perm) => perm.scope_type === 'customer')
+        .length === 0 && ownerCanManageCustomer
+    );
   },
 );

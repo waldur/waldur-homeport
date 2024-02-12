@@ -25,7 +25,6 @@ describe('Search Popup', () => {
       .mockUser()
       .mockChecklists()
       .mockEvents()
-      .mockPermissions()
       .intercept('GET', '/api/marketplace-categories/**', [
         {
           uuid: '046b038d75a342b7a0ddad7e98206492',

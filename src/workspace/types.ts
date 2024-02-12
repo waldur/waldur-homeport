@@ -1,5 +1,5 @@
 import { CustomerRole } from '@waldur/core/constants';
-import { GenericPermission } from '@waldur/permissions/types';
+import { BasePermission } from '@waldur/permissions/types';
 import { Quota } from '@waldur/quotas/types';
 
 export interface Permission {
@@ -12,26 +12,14 @@ export interface Permission {
   created_by_full_name?: string;
 }
 
-export interface CustomerPermission extends Permission {
-  customer_name: string;
-  customer_uuid: string;
-}
-
-export interface ProjectPermission extends CustomerPermission {
-  project_name: string;
-  project_uuid: string;
-}
-
 export interface User {
-  permissions?: GenericPermission[];
+  permissions?: BasePermission[];
   image?: string;
   is_staff: boolean;
   is_support: boolean;
   url: string;
   uuid: string;
   username?: string;
-  customer_permissions?: CustomerPermission[];
-  project_permissions?: ProjectPermission[];
   full_name?: string;
   first_name?: string;
   last_name?: string;
@@ -163,10 +151,7 @@ export interface Customer {
   division_parent_name?: string;
   latitude?: number;
   longitude?: number;
-  owners?: User[];
   billing_price_estimate?: BillingPriceEstimate;
-  service_managers?: User[];
-  support_users?: User[];
   projects?: Project[];
   payment_profiles?: PaymentProfile[];
   users_count?: number;

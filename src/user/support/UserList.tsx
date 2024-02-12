@@ -4,14 +4,15 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { CUSTOMER_OWNER_ROLE } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { RoleEnum } from '@waldur/permissions/enums';
 import { formatRole } from '@waldur/permissions/utils';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { Table, createFetcher } from '@waldur/table/index';
 import { useTable } from '@waldur/table/utils';
+import { User } from '@waldur/workspace/types';
 
 import { UserFilter } from './UserFilter';
 import { UserTableActions } from './UserTableActions';
@@ -128,7 +129,7 @@ export const UserList: FunctionComponent<any> = (props) => {
       row.email,
       row.phone_number,
       row.organization,
-      getOrganizationsWhereOwner(row.customer_permissions),
+      getOrganizationsWhereOwner(row),
     ],
     exportKeys: [
       'full_name',
@@ -232,12 +233,8 @@ export const formatStatusFilter = (filter) => {
   return filter;
 };
 
-export const getOrganizationsWhereOwner = (permissions) => {
-  const customerNames = [];
-  permissions.map((perm) => {
-    if (perm.role === CUSTOMER_OWNER_ROLE) {
-      customerNames.push(perm.customer_name);
-    }
-  });
-  return customerNames.join(', ');
-};
+export const getOrganizationsWhereOwner = (user: Partial<User>) =>
+  user.permissions
+    .filter((perm) => perm.role_name === RoleEnum.CUSTOMER_OWNER)
+    .map((perm) => perm.scope_name)
+    .join(', ');
