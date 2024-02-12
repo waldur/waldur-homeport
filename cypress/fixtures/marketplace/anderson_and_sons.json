@@ -25,44 +25,6 @@
       "name": "Re-contextualized global Graphic Interface"
     }
   ],
-  "owners": [
-    {
-      "url": "/api/users/3a836bc76e1b40349ec1a0d8220f374f/",
-      "uuid": "3a836bc76e1b40349ec1a0d8220f374f",
-      "username": "alice@lebowski.com",
-      "full_name": "Alice Lebowski",
-      "native_name": "Alice Lebowski"
-    },
-    {
-      "url": "/api/users/c05d30a41453433d8fe4fb659270ea69/",
-      "uuid": "c05d30a41453433d8fe4fb659270ea69",
-      "username": "angelpeterson@gmail.com",
-      "full_name": "Angel Peterson",
-      "native_name": ""
-    },
-    {
-      "url": "/api/users/32e84a93f63c44698dbe543e0f1e8939/",
-      "uuid": "32e84a93f63c44698dbe543e0f1e8939",
-      "username": "patrickperez@gmail.com",
-      "full_name": "Patrick Perez",
-      "native_name": ""
-    },
-    {
-      "url": "/api/users/8500109fdaf844708ac4ec4eede1210a/",
-      "uuid": "8500109fdaf844708ac4ec4eede1210a",
-      "username": "targo.tennisberg@example.com",
-      "full_name": "Henry Mendoza",
-      "native_name": ""
-    },
-    {
-      "url": "/api/users/9c5066ba96004594a45f9d5c015e6faf/",
-      "uuid": "9c5066ba96004594a45f9d5c015e6faf",
-      "username": "jasonlozano@gmail.com",
-      "full_name": "Jason Lozano",
-      "native_name": ""
-    }
-  ],
-  "support_users": [],
   "backend_id": "",
   "registration_code": "838-20-2770",
   "homepage": "",
@@ -109,7 +71,6 @@
       "is_active": true
     }
   ],
-  "service_managers": [],
   "is_service_provider": false,
   "billing_price_estimate": {
     "url": "/api/billing-price-estimates/7cbf6ff4313840f781e442028fb8c1d7/",

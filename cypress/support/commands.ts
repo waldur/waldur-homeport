@@ -8,7 +8,6 @@ declare global {
       mockCustomer(): Chainable;
       mockCustomers(): Chainable;
       mockEvents(): Chainable;
-      mockPermissions(): Chainable;
       mockChecklists(): Chainable;
       mockConfigs(): Chainable;
       fillAndSubmitLoginForm(username?: string, password?: string): Chainable;
@@ -203,8 +202,6 @@ Cypress.Commands.add('mockConfigs', () => {
   cy.intercept('GET', '/api/configuration/', {
     fixture: 'configuration.json',
   })
-    .intercept('GET', '/api/customer-permissions/', [])
-    .intercept('GET', '/api/project-permissions/', [])
     .intercept('GET', '/api/events/', [])
     .intercept('GET', '/api/roles/', {
       fixture: 'roles.json'
@@ -261,11 +258,4 @@ Cypress.Commands.add('mockCustomers', () => {
     '/api/customers/**',
     [],
   );
-});
-
-Cypress.Commands.add('mockPermissions', () => {
-  cy.intercept('GET', '/api/customer-permissions/', {})
-    .intercept('GET', '/api/customer-permissions/**', {})
-    .intercept('GET', '/api/project-permissions/', [])
-    .intercept('GET', '/api/project-permissions/**', []);
 });

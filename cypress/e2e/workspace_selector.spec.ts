@@ -28,7 +28,6 @@ describe('Workspace selector', () => {
       .mockUser()
       .mockChecklists()
       .mockEvents()
-      .mockPermissions()
       .intercept('GET', '/api/marketplace-categories/**', [])
       .intercept('GET', '/api/projects/6f3ae6f43d284ca196afeb467880b3b9/', {
         fixture: 'projects/alice_azure.json',

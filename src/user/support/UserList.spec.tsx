@@ -1,7 +1,4 @@
-import {
-  CUSTOMER_OWNER_ROLE,
-  PROJECT_ADMIN_ROLE,
-} from '@waldur/core/constants';
+import { RoleEnum } from '@waldur/permissions/enums';
 
 import { formatRoleFilter, getOrganizationsWhereOwner } from './UserList';
 
@@ -22,23 +19,28 @@ const filterMock = {
   ],
 };
 
-const customerPermissionsMock = [
-  {
-    customer_uuid: 'f80e006b36b542578fc216d83f2031fa',
-    customer_name: 'Blackberry',
-    role: CUSTOMER_OWNER_ROLE,
-  },
-  {
-    customer_uuid: 'gh0e006b36b5425bhfc216d83f2031nh',
-    customer_name: 'Tomson',
-    role: CUSTOMER_OWNER_ROLE,
-  },
-  {
-    customer_uuid: '560e006b36b542578fc216d83f2031bn',
-    customer_name: 'Beeline',
-    role: PROJECT_ADMIN_ROLE,
-  },
-];
+const user: any = {
+  permissions: [
+    {
+      scope_uuid: 'f80e006b36b542578fc216d83f2031fa',
+      scope_type: 'customer',
+      scope_name: 'Blackberry',
+      role_name: RoleEnum.CUSTOMER_OWNER,
+    },
+    {
+      scope_uuid: 'gh0e006b36b5425bhfc216d83f2031nh',
+      scope_type: 'customer',
+      scope_name: 'Tomson',
+      role_name: RoleEnum.CUSTOMER_OWNER,
+    },
+    {
+      scope_uuid: '560e006b36b542578fc216d83f2031bn',
+      scope_type: 'project',
+      scope_name: 'Beeline',
+      role_name: RoleEnum.PROJECT_ADMIN,
+    },
+  ],
+};
 
 describe('formatRoleFilter', () => {
   it('should return format of filter compatible with api', () => {
@@ -52,7 +54,7 @@ describe('formatRoleFilter', () => {
 
 describe('getOrganizationsWhereOwner', () => {
   it('should return joint list of organizations where user is an owner', () => {
-    const actual = getOrganizationsWhereOwner(customerPermissionsMock);
+    const actual = getOrganizationsWhereOwner(user);
     const expected = 'Blackberry, Tomson';
     expect(actual).toEqual(expected);
   });

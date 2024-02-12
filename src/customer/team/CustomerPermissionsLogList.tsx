@@ -9,7 +9,10 @@ export const PureCustomerPermissionsLogList = getEventsList({
     scope: props.customer.url,
     event_type: ['role_granted', 'role_revoked', 'role_updated'],
   }),
-  mapPropsToTableId: (props) => ['customer-permissions', props.customer.uuid],
+  mapPropsToTableId: (props) => [
+    'customer-permissions-log',
+    props.customer.uuid,
+  ],
 });
 
 const enhance = connect((state: RootState) => ({

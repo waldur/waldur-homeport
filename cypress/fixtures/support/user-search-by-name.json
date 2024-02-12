@@ -20,17 +20,6 @@
     "preferred_language": "et",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [],
-    "project_permissions": [
-      {
-        "url": "/api/project-permissions/544/",
-        "pk": 544,
-        "role": "manager",
-        "project_uuid": "fc161955cc1f430fa0903a9b9f526f3b",
-        "project_name": "Reduced national moratorium",
-        "customer_name": "Padilla-Brown"
-      }
-    ],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Tara",

@@ -3,14 +3,7 @@ import { createSelector } from 'reselect';
 import { RoleEnum } from '@waldur/permissions/enums';
 import { RootState } from '@waldur/store/reducers';
 
-import {
-  User,
-  Customer,
-  Project,
-  WorkspaceType,
-  CustomerPermission,
-  ProjectPermission,
-} from './types';
+import { User, Customer, Project, WorkspaceType } from './types';
 
 export const getUser = (state: RootState): User => state.workspace.user;
 
@@ -18,26 +11,6 @@ export const getCustomer = (state: RootState): Customer =>
   state.workspace.customer;
 
 export const getResource = (state: RootState) => state.workspace.resource;
-
-export const getUserCustomerPermissions = createSelector(
-  getUser,
-  (user: User): CustomerPermission[] => {
-    if (user) {
-      return user.customer_permissions;
-    }
-    return [];
-  },
-);
-
-export const getUserProjectPermissions = createSelector(
-  getUser,
-  (user: User): ProjectPermission[] => {
-    if (user) {
-      return user.project_permissions;
-    }
-    return [];
-  },
-);
 
 export const getProject = (state: RootState): Project =>
   state.workspace.project;
@@ -61,17 +34,23 @@ export const isStaffOrSupport = (state: RootState): boolean =>
   isStaff(state) || isSupport(state);
 
 export const checkIsOwner = (customer: Customer, user: User): boolean =>
-  customer &&
-  user &&
-  customer.owners?.find((owner) => owner.uuid === user.uuid) !== undefined;
+  !!user?.permissions?.find(
+    (permission) =>
+      permission.scope_type === 'customer' &&
+      permission.scope_uuid === customer?.uuid &&
+      permission.role_name === RoleEnum.CUSTOMER_OWNER,
+  );
 
 export const checkIsServiceManager = (
   customer: Customer,
   user: User,
 ): boolean =>
-  user &&
-  customer?.service_managers?.find((manager) => manager.uuid === user.uuid) !==
-    undefined;
+  !!user?.permissions?.find(
+    (permission) =>
+      permission.scope_type === 'customer' &&
+      permission.scope_uuid === customer?.uuid &&
+      permission.role_name === RoleEnum.CUSTOMER_MANAGER,
+  );
 
 export const checkCustomerUser = (customer: Customer, user: User): boolean => {
   if (user && user.is_staff) {
@@ -80,28 +59,13 @@ export const checkCustomerUser = (customer: Customer, user: User): boolean => {
   return customer && checkIsOwner(customer, user);
 };
 
-export const getOwner = createSelector(
-  getUser,
-  getCustomer,
-  (user: User, customer: Customer) => {
-    if (!user) {
-      return undefined;
-    }
-    if (customer) {
-      return customer.owners?.find((owner) => owner.uuid === user.uuid);
-    }
-  },
-);
-
 export const isServiceManagerSelector = createSelector(
   getCustomer,
   getUser,
   checkIsServiceManager,
 );
 
-export const isOwner = createSelector(getOwner, (owner) => {
-  return !!owner;
-});
+export const isOwner = createSelector(getCustomer, getUser, checkIsOwner);
 
 export const isOwnerOrStaff = createSelector(
   getUser,

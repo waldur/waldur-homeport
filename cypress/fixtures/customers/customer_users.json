@@ -7,14 +7,12 @@
     "email": "johndoe@example.com",
     "role": "owner",
     "role_name": "CUSTOMER.OWNER",
-    "permission": "/api/customer-permissions/200/",
     "projects": [
       {
         "url": "/api/projects/db97ad5d6f5744988c0397fef0bea9c1/",
         "uuid": "db97ad5d6f5744988c0397fef0bea9c1",
         "name": "Progressive mission-critical standardization",
         "role": "manager",
-        "permission": "/api/project-permissions/700/",
         "expiration_time": null
       }
     ],
@@ -33,7 +31,6 @@
         "uuid": "22d7e03a0d654f98bd45cafd592ce8a2",
         "name": "Function-based well-modulated Internet solution",
         "role": "manager",
-        "permission": "/api/project-permissions/865/",
         "expiration_time": null
       }
     ]

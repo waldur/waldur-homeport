@@ -6,7 +6,6 @@
         "full_name": "Admin",
         "email": "example@example.com",
         "role": "owner",
-        "permission": "/api/customer-permissions/261/",
         "projects": [],
         "is_service_manager": true,
         "expiration_time": null
@@ -18,7 +17,6 @@
         "full_name": "Adrian Little",
         "email": "AdrianLittle@example.com",
         "role": "service_manager",
-        "permission": "/api/customer-permissions/268/",
         "projects": [],
         "is_service_manager": true,
         "expiration_time": null
@@ -30,7 +28,6 @@
         "full_name": "Adrian Nolan",
         "email": "AdrianNolan@example.com",
         "role": "service_manager",
-        "permission": "/api/customer-permissions/269/",
         "projects": [],
         "is_service_manager": true,
         "expiration_time": null
@@ -42,7 +39,6 @@
         "full_name": "Alan Williams",
         "email": "AlanWilliams@example.com",
         "role": "service_manager",
-        "permission": "/api/customer-permissions/270/",
         "projects": [],
         "is_service_manager": true,
         "expiration_time": null
@@ -54,7 +50,6 @@
         "full_name": "David Gross",
         "email": "DavidGross@example.com",
         "role": "owner",
-        "permission": "/api/customer-permissions/232/",
         "projects": [],
         "is_service_manager": false,
         "expiration_time": null
@@ -66,7 +61,6 @@
         "full_name": "Jessica Edwards",
         "email": "JessicaEdwards@example.com",
         "role": "owner",
-        "permission": "/api/customer-permissions/238/",
         "projects": [],
         "is_service_manager": true,
         "expiration_time": null
@@ -78,7 +72,6 @@
         "full_name": "Laura Molina",
         "email": "LauraMolina@example.com",
         "role": "owner",
-        "permission": "/api/customer-permissions/239/",
         "projects": [],
         "is_service_manager": false,
         "expiration_time": null
@@ -90,7 +83,6 @@
         "full_name": "Nancy Beard",
         "email": "NancyBeard@example.com",
         "role": "owner",
-        "permission": "/api/customer-permissions/236/",
         "projects": [],
         "is_service_manager": false,
         "expiration_time": null
@@ -102,7 +94,6 @@
         "full_name": "Robert Norman DDS",
         "email": "RobertNormanDDS@example.com",
         "role": "owner",
-        "permission": "/api/customer-permissions/235/",
         "projects": [],
         "is_service_manager": false,
         "expiration_time": null
@@ -114,7 +105,6 @@
         "full_name": "Shirley Pennington",
         "email": "ShirleyPennington@example.com",
         "role": "owner",
-        "permission": "/api/customer-permissions/237/",
         "projects": [],
         "is_service_manager": false,
         "expiration_time": null

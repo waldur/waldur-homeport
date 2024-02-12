@@ -20,35 +20,6 @@
     "preferred_language": "et",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [
-      {
-        "url": "/api/customer-permissions/242/",
-        "pk": 242,
-        "role": "owner",
-        "customer_uuid": "895e38d197e748459189f19285119edf",
-        "customer_name": "Allen-Rodriguez",
-        "customer_native_name": "",
-        "customer_abbreviation": "All"
-      }
-    ],
-    "project_permissions": [
-      {
-        "url": "/api/project-permissions/544/",
-        "pk": 544,
-        "role": "manager",
-        "project_uuid": "fc161955cc1f430fa0903a9b9f526f3b",
-        "project_name": "Reduced national moratorium",
-        "customer_name": "Padilla-Brown"
-      },
-      {
-        "url": "/api/project-permissions/902/",
-        "pk": 903,
-        "role": "admin",
-        "project_uuid": "b1540368a3904f8cb451da4a2568fd09",
-        "project_name": "Test project",
-        "customer_name": "Allen-Rodriguez"
-      }
-    ],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Tara",
@@ -75,8 +46,6 @@
     "preferred_language": "et",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [],
-    "project_permissions": [],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Bianca",
@@ -103,27 +72,6 @@
     "preferred_language": "",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [
-      {
-        "url": "/api/customer-permissions/241/",
-        "pk": 241,
-        "role": "owner",
-        "customer_uuid": "6265e03b4a954789919d2228e5ef40a6",
-        "customer_name": "Kelley, Johnson and Davis",
-        "customer_native_name": "",
-        "customer_abbreviation": "Kel"
-      }
-    ],
-    "project_permissions": [
-      {
-        "url": "/api/project-permissions/902/",
-        "pk": 902,
-        "role": "admin",
-        "project_uuid": "a2568fd09b1540368a3904f8cb451da4",
-        "project_name": "Implemented stable policy",
-        "customer_name": "Kelley, Johnson and Davis"
-      }
-    ],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Alexandra",
@@ -150,17 +98,6 @@
     "preferred_language": "",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [],
-    "project_permissions": [
-      {
-        "url": "/api/project-permissions/952/",
-        "pk": 952,
-        "role": "admin",
-        "project_uuid": "8d7170a360a2468ca7740c4af361fd5f",
-        "project_name": "Extended system-worthy emulation",
-        "customer_name": "Campbell, Morrison and Young"
-      }
-    ],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Teresa",
@@ -187,8 +124,6 @@
     "preferred_language": "et",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [],
-    "project_permissions": [],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Leslie",
@@ -215,18 +150,6 @@
     "preferred_language": "et",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [
-      {
-        "url": "/api/customer-permissions/57/",
-        "pk": 57,
-        "role": "owner",
-        "customer_uuid": "8a0517819d7a408a9664b30eb71591d2",
-        "customer_name": "Mendoza, Burns and Gray",
-        "customer_native_name": "",
-        "customer_abbreviation": "Men"
-      }
-    ],
-    "project_permissions": [],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Danielle",
@@ -253,8 +176,6 @@
     "preferred_language": "",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [],
-    "project_permissions": [],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Kristen",
@@ -281,8 +202,6 @@
     "preferred_language": "",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [],
-    "project_permissions": [],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Gerald",
@@ -309,17 +228,6 @@
     "preferred_language": "et",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [],
-    "project_permissions": [
-      {
-        "url": "/api/project-permissions/1007/",
-        "pk": 1007,
-        "role": "admin",
-        "project_uuid": "d6dcf33d52bc433d96c3f805da472877",
-        "project_name": "Innovative bifurcated portal",
-        "customer_name": "Campbell, Morrison and Young"
-      }
-    ],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Jennifer",
@@ -346,8 +254,6 @@
     "preferred_language": "et",
     "competence": "",
     "permissions": [],
-    "customer_permissions": [],
-    "project_permissions": [],
     "requested_email": null,
     "affiliations": [],
     "first_name": "Brian",

@@ -22,8 +22,6 @@
   "agreement_date": "2016-12-20T12:24:34.963889Z",
   "preferred_language": "",
   "competence": "",
-  "customer_permissions": [],
-  "project_permissions": [],
   "identity_provider_fields": [],
   "identity_provider_label": "Local DB",
   "identity_provider_management_url": "",

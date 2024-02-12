@@ -15,7 +15,6 @@ describe('Project manage', { testIsolation: false }, () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
-      .mockPermissions()
       .mockCustomers()
       .setToken()
       .intercept('GET', '/api/projects/oecd_codes/', [])
