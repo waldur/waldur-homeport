@@ -23,23 +23,8 @@ import { ProjectHoverableRow } from './ProjectHoverableRow';
 import { ProjectsListFilter } from './ProjectsListFilter';
 import { RoleField } from './RoleField';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
-
-  usePermissionView(() => {
-    if (props.isStaffOrSupport) {
-      return {
-        permission: 'limited',
-        banner: {
-          title: '',
-          message: translate('Your role allows to see all projects'),
-        },
-      };
-    } else {
-      return null;
-    }
-  }, [props.isStaffOrSupport]);
-
   const columns = filterColumns([
     {
       title: translate('Name'),
@@ -146,5 +131,18 @@ const mapStateToProps = (state: RootState) => ({
 const Projects = connect(mapStateToProps)(PureProjects);
 
 export const ProjectsList = (props) => {
+  usePermissionView(() => {
+    if (props.isStaffOrSupport) {
+      return {
+        permission: 'limited',
+        banner: {
+          title: '',
+          message: translate('Your role allows to see all projects'),
+        },
+      };
+    } else {
+      return null;
+    }
+  }, [props.isStaffOrSupport]);
   return <Projects filters={<ProjectsListFilter />} {...props} />;
 };
