@@ -1,13 +1,13 @@
-import Axios from 'axios';
 import { FunctionComponent } from 'react';
 import { components } from 'react-select';
 import { useAsync } from 'react-use';
 
-import { ENV } from '@waldur/configs/default';
+import { get } from '@waldur/core/api';
 import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';
+
 import 'world-flags-sprite/stylesheets/flags16.css';
 
 const CountryRenderer = (option) => (
@@ -15,7 +15,7 @@ const CountryRenderer = (option) => (
     <i className="f16">
       <i className={`flag ${option.value.toLowerCase()}`}></i>
     </i>{' '}
-    {option.display_name}
+    {option.label}
   </>
 );
 
@@ -32,11 +32,8 @@ export const SingleValue: FunctionComponent<any> = (props) => (
 );
 
 export const loadCountries = async () => {
-  const response = await Axios.request({
-    method: 'OPTIONS',
-    url: ENV.apiEndpoint + 'api/customers/',
-  });
-  return response.data.actions.POST.country.choices;
+  const response = await get('/customers/countries/');
+  return response.data;
 };
 
 export const CountryGroup: FunctionComponent = () => {
@@ -52,7 +49,8 @@ export const CountryGroup: FunctionComponent = () => {
           onChange={onChange}
           placeholder={translate('Select country...')}
           components={{ Option, SingleValue }}
-          getOptionLabel={(option) => option.display_name}
+          getOptionLabel={(option) => option.label}
+          getOptionValue={(option) => option.value}
           options={options || []}
           isLoading={loading}
           isClearable={true}
