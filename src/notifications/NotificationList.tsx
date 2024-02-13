@@ -8,6 +8,7 @@ import { NotificationActions } from '@waldur/notifications/NotificationActions';
 import { NotificationExpandableRow } from '@waldur/notifications/NotificationExpandableRow';
 import { NotificationFilter } from '@waldur/notifications/NotificationFilter';
 import { createFetcher, Table } from '@waldur/table';
+import { BooleanField } from '@waldur/table/BooleanField';
 import { useTable } from '@waldur/table/utils';
 
 import { ManageCommonFooterButton } from './ManageCommonFooterButton';
@@ -74,6 +75,10 @@ export const NotificationList = () => {
           title: translate('Created at'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
+        },
+        {
+          title: translate('Enabled'),
+          render: ({ row }) => <BooleanField value={row.enabled} />,
         },
       ]}
       verboseName={translate('notifications')}
