@@ -66,7 +66,6 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
   (props) => {
     const {
       comment,
-      attachments,
       user,
       deleting,
       uiDisabled,
@@ -149,9 +148,7 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
           <p
             className="fw-normal fs-5 text-gray-700 m-0"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(
-                utils.formatJiraMarkup(comment.description, attachments),
-              ),
+              __html: DOMPurify.sanitize(comment.description),
             }}
             onClick={onCommentClick}
           />
