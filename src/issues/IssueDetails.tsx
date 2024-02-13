@@ -3,7 +3,9 @@ import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
+import { ENV } from '@waldur/configs/default';
 import { getById } from '@waldur/core/api';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { FormattedJira } from '@waldur/core/FormattedJira';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -57,7 +59,11 @@ export const IssueDetails: FunctionComponent = () => {
               </Card.Title>
             </Card.Header>
             <Card.Body>
-              <FormattedJira text={linkify(issue?.description)} />
+              {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'smax' ? (
+                <FormattedHtml html={linkify(issue?.description)} />
+              ) : (
+                <FormattedJira text={linkify(issue?.description)} />
+              )}
             </Card.Body>
           </Card>
           <IssueCommentsContainer issue={issue} />
