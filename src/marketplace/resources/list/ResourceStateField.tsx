@@ -10,7 +10,7 @@ export const ResourceStateField = ({
   roundless?: boolean;
 }) => (
   <StateIndicator
-    label={resource.state}
+    label={resource.backend_metadata?.runtime_state || resource.state}
     variant={
       resource.state === 'Erred'
         ? 'danger'
