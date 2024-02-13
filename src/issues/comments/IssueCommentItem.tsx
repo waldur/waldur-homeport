@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
+import { ENV } from '@waldur/configs/default';
 import { formatMediumDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { getAbbreviation } from '@waldur/core/utils';
@@ -148,7 +149,11 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
           <p
             className="fw-normal fs-5 text-gray-700 m-0"
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(comment.description),
+              __html: DOMPurify.sanitize(
+                ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'smax'
+                  ? comment.description
+                  : utils.formatJiraMarkup(comment.description),
+              ),
             }}
             onClick={onCommentClick}
           />
