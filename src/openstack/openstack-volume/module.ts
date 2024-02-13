@@ -1,6 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ActionRegistry } from '@waldur/resource/actions/registry';
-import { ResourceStateConfigurationProvider } from '@waldur/resource/state/ResourceStateConfiguration';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
 import { VOLUME_TYPE } from '../constants';
@@ -15,6 +14,3 @@ const OpenStackVolumeSummary = lazyComponent(
 
 ResourceSummary.register(VOLUME_TYPE, OpenStackVolumeSummary);
 ActionRegistry.register(VOLUME_TYPE, actions);
-ResourceStateConfigurationProvider.register(VOLUME_TYPE, {
-  error_states: ['error'],
-});

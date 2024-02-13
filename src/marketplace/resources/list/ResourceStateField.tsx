@@ -16,6 +16,10 @@ export const ResourceStateField = ({
         ? 'danger'
         : resource.state === 'Terminated'
         ? 'warning'
+        : ['SHUTOFF', 'STOPPED', 'SUSPENDED'].includes(
+            resource.backend_metadata?.runtime_state,
+          )
+        ? 'secondary'
         : 'primary'
     }
     active={['Creating', 'Updating', 'Terminating'].includes(resource.state)}
