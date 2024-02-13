@@ -19,20 +19,15 @@ export const InvitationPolicyService = {
     if (role.content_type === 'customer') {
       return hasPermission(context.user, {
         permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-        customerId: context.customer.uuid,
+        customerId: context.customer?.uuid,
       });
     }
     if (role.content_type === 'project') {
-      return (
-        hasPermission(context.user, {
-          permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
-          projectId: context.project.uuid,
-        }) ||
-        hasPermission(context.user, {
-          permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
-          customerId: context.customer.uuid,
-        })
-      );
+      return hasPermission(context.user, {
+        permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
+        projectId: context.project?.uuid,
+        customerId: context.customer?.uuid,
+      });
     }
     return false;
   },
@@ -45,20 +40,15 @@ export const InvitationPolicyService = {
     if (invitation.scope_type === 'customer') {
       return hasPermission(context.user, {
         permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-        customerId: context.customer.uuid,
+        customerId: context.customer?.uuid,
       });
     }
     if (invitation.scope_type === 'project') {
-      return (
-        hasPermission(context.user, {
-          permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
-          projectId: context.project.uuid,
-        }) ||
-        hasPermission(context.user, {
-          permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
-          customerId: context.customer.uuid,
-        })
-      );
+      return hasPermission(context.user, {
+        permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
+        projectId: context.project?.uuid,
+        customerId: context.customer?.uuid,
+      });
     }
     return false;
   },
@@ -71,15 +61,12 @@ export const InvitationPolicyService = {
     return (
       hasPermission(context.user, {
         permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-        customerId: context.customer.uuid,
+        customerId: context.customer?.uuid,
       }) ||
       hasPermission(context.user, {
         permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
-        projectId: context.project.uuid,
-      }) ||
-      hasPermission(context.user, {
-        permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
-        customerId: context.customer.uuid,
+        projectId: context.project?.uuid,
+        customerId: context.customer?.uuid,
       })
     );
   },
