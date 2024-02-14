@@ -2577,6 +2577,10 @@ msgstr ""
 msgid "Creation"
 msgstr ""
 
+#: src/administration/service-desk/SmaxSettings.tsx
+msgid "Creation source field"
+msgstr ""
+
 #: src/marketplace/offerings/import/tabs.ts
 #: src/user/routes.ts
 msgid "Credentials"

@@ -1,4 +1,5 @@
 import { FormContainer, SecretField, StringField } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 
 export const SmaxSettings = () => (
@@ -39,6 +40,12 @@ export const SmaxSettings = () => (
       name="SMAX_CREATION_SOURCE_NAME"
       label={translate('Creation source field')}
       maxLength={150}
+    />
+    <AwesomeCheckboxField
+      hideLabel
+      name="SMAX_VERIFY_SSL"
+      className="mt-3"
+      label={translate('Verify SSL')}
     />
   </FormContainer>
 );
