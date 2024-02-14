@@ -35,5 +35,10 @@ export const SmaxSettings = () => (
       label={translate('Affected resource field')}
       maxLength={150}
     />
+    <StringField
+      name="SMAX_CREATION_SOURCE_NAME"
+      label={translate('Creation source field')}
+      maxLength={150}
+    />
   </FormContainer>
 );
