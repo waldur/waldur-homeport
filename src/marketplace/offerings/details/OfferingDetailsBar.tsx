@@ -7,16 +7,6 @@ import { PageBarTab } from '@waldur/marketplace/common/PageBarTab';
 
 import './OfferingPageBar.scss';
 
-const Tab = ({ state, tab, active }) => (
-  <PageBarTab
-    title={tab.title}
-    name={tab.key}
-    state={state}
-    params={{ '#': tab.key }}
-    className={'btn' + (active ? ' text-primary' : ' text-white')}
-  />
-);
-
 export const OfferingDetailsBar: FunctionComponent = () => {
   const { state } = useCurrentStateAndParams();
 
@@ -37,15 +27,17 @@ export const OfferingDetailsBar: FunctionComponent = () => {
   });
 
   return (
-    <div className="offering-page-bar bg-light-dark shadow-sm">
+    <div className="offering-page-bar bg-body shadow-sm">
       <div className="container-xxl">
         <div className="d-flex scroll-x pt-2 pb-1">
           <div className="d-flex align-items-center w-100">
             {tabs.map((tab) => (
-              <Tab
+              <PageBarTab
                 key={tab.key}
-                tab={tab}
+                title={tab.title}
+                name={tab.key}
                 state={state.name}
+                params={{ '#': tab.key }}
                 active={activeSectionId === tab.key}
               />
             ))}
