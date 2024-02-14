@@ -2,36 +2,36 @@ import Axios, { AxiosRequestConfig } from 'axios';
 
 import { ENV } from '@waldur/configs/default';
 import {
+  deleteById,
   get,
   getAll,
   getById,
-  post,
-  sendForm,
-  getList,
   getFirst,
-  patch,
-  deleteById,
+  getList,
   getSelectData,
   parseResultCount,
+  patch,
+  post,
   put,
+  sendForm,
 } from '@waldur/core/api';
 import { GeolocationPoint } from '@waldur/map/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
 import {
-  OrderResponse,
   OrderDetailsType,
+  OrderResponse,
 } from '@waldur/marketplace/orders/types';
 import {
   Category,
-  Offering,
-  ServiceProvider,
   CategoryComponentUsage,
-  PluginMetadata,
-  ImportableResource,
-  OrganizationGroup,
-  OfferingPermission,
   CategoryGroup,
+  ImportableResource,
+  Offering,
+  OfferingPermission,
+  OrganizationGroup,
   Plan,
+  PluginMetadata,
+  ServiceProvider,
 } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
@@ -482,10 +482,11 @@ export const unpublishGoogleCalendar = (uuid: string) =>
 export const updateOfferingOverview = (offeringId, data) =>
   post(`/marketplace-provider-offerings/${offeringId}/update_overview/`, data);
 
-export const updateOfferingDescription = (offeringId, category) =>
-  post(`/marketplace-provider-offerings/${offeringId}/update_description/`, {
-    category,
-  });
+export const updateOfferingDescription = (offeringId, data) =>
+  post(
+    `/marketplace-provider-offerings/${offeringId}/update_description/`,
+    data,
+  );
 
 export const asyncRunOfferingScript = (
   offeringUuid: string,
