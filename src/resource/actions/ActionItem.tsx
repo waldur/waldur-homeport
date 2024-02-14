@@ -27,6 +27,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
       // See also: https://stackoverflow.com/questions/57349166/
       style={props.disabled ? { opacity: 0.3 } : undefined}
       onClick={() => !props.disabled && props.action()}
+      as="button"
     >
       {props.tooltip && (
         <Tip label={props.tooltip} id={`action-reason-${uniqueId()}`}>
