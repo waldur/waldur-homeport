@@ -113,11 +113,15 @@ $utilities: map-merge(
 .end-button {
   position: absolute;
   right: 8px;
-  top: 8px;
+  top: 33px;
 
   & span i {
     margin-left: 1px !important;
     margin-bottom: 1px !important;
+  }
+
+  .form-floating & {
+    top: 12px;
   }
 }
 

@@ -6,7 +6,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 export const DateField: FunctionComponent<any> = (props) => (
-  <div className="position-relative">
+  <>
     <Flatpickr
       options={{
         dateFormat: 'Y-m-d',
@@ -40,5 +40,5 @@ export const DateField: FunctionComponent<any> = (props) => (
         </Tip>
       </span>
     )}
-  </div>
+  </>
 );
