@@ -33,16 +33,8 @@ export const PermissionOptions = [
         value: 'OFFERING.UPDATE_DESCRIPTION',
       },
       {
-        label: translate('Update offering overview'),
-        value: 'OFFERING.UPDATE_OVERVIEW',
-      },
-      {
         label: translate('Update offering options'),
         value: 'OFFERING.UPDATE_OPTIONS',
-      },
-      {
-        label: translate('Update offering secret options'),
-        value: 'OFFERING.UPDATE_SECRET_OPTIONS',
       },
       {
         label: translate('Add offering endpoint'),

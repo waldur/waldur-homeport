@@ -3624,6 +3624,7 @@ msgstr ""
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/notifications/NotificationList.tsx
 #: src/user/hooks/HookForm.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Enabled"
@@ -13324,10 +13325,6 @@ msgid "Update offering options"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
-msgid "Update offering overview"
-msgstr ""
-
-#: src/administration/roles/PermissionOptions.tsx
 msgid "Update offering permission"
 msgstr ""
 
@@ -13337,10 +13334,6 @@ msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
 msgid "Update offering screenshot"
-msgstr ""
-
-#: src/administration/roles/PermissionOptions.tsx
-msgid "Update offering secret options"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
