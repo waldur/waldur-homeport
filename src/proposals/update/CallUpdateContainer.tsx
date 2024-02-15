@@ -52,7 +52,7 @@ export const CallUpdateContainer: FunctionComponent = () => {
             refetch={refetch}
             loading={isRefetching}
           />
-          <CallDocumentsSection />
+          <CallDocumentsSection call={data} refetch={refetch} />
           <CallReviewersSection call={data} />
           <CallOfferingsSection call={data} />
         </div>
