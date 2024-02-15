@@ -8,6 +8,7 @@ import {
   getProjectList,
   getCategoryOptions,
   getUsers,
+  getPublicOfferingsOptions,
 } from '@waldur/marketplace/common/api';
 
 export const organizationAutocomplete = async (
@@ -124,7 +125,15 @@ export const offeringsAutocomplete = async (
   query: object,
   prevOptions,
   currentPage: number,
-  field = ['name', 'uuid', 'url', 'category_title', 'thumbnail'],
+  providerOfferings = true,
+  field = [
+    'name',
+    'uuid',
+    'url',
+    'category_title',
+    'thumbnail',
+    'customer_name',
+  ],
 ) => {
   const params = {
     field,
@@ -134,7 +143,10 @@ export const offeringsAutocomplete = async (
     page: currentPage,
     page_size: ENV.pageSize,
   };
-  const response = await getProviderOfferingsOptions(params);
+  const api = providerOfferings
+    ? getProviderOfferingsOptions
+    : getPublicOfferingsOptions;
+  const response = await api(params);
   return returnReactSelectAsyncPaginateObject(
     response,
     prevOptions,

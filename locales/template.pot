@@ -304,6 +304,10 @@ msgstr ""
 msgid "Add Waldur user SSH keys to the FreeIPA profile"
 msgstr ""
 
+#: src/proposals/update/offerings/WizardFormThirdPage.tsx
+msgid "Add a note to the provider"
+msgstr ""
+
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 msgid "Add address"
 msgstr ""
@@ -834,6 +838,7 @@ msgstr ""
 
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Approved by"
 msgstr ""
 
@@ -991,6 +996,10 @@ msgstr ""
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
+msgstr ""
+
+#: src/proposals/update/offerings/WizardFormThirdPage.tsx
+msgid "Are you sure you want to request {provider} to add {offering} to the {call}?"
 msgstr ""
 
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
@@ -2065,6 +2074,10 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
+msgid "Configure request"
+msgstr ""
+
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "Confirm deletion?"
 msgstr ""
@@ -2268,6 +2281,7 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
@@ -5569,7 +5583,6 @@ msgid "Max # of snapshots"
 msgstr ""
 
 #: src/proposals/details/CallOfferingsCard.tsx
-#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Max allocation"
 msgstr ""
 
@@ -5717,7 +5730,6 @@ msgid "MiB"
 msgstr ""
 
 #: src/proposals/details/CallOfferingsCard.tsx
-#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Min allocation"
 msgstr ""
 
@@ -6146,6 +6158,7 @@ msgid "New network"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 msgid "New offering"
 msgstr ""
 
@@ -6202,6 +6215,7 @@ msgstr ""
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
 msgstr ""
@@ -6590,6 +6604,7 @@ msgstr ""
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/permissions/constants.tsx
+#: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -6706,6 +6721,10 @@ msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering project data synchronization has been scheduled."
+msgstr ""
+
+#: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
+msgid "Offering request has been submitted."
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -9066,6 +9085,7 @@ msgid "Requested at"
 msgstr ""
 
 #: src/marketplace-flows/utils.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Requested by"
 msgstr ""
 
@@ -9968,6 +9988,10 @@ msgstr ""
 msgid "Select available weekdays"
 msgstr ""
 
+#: src/proposals/update/offerings/WizardFormFirstPage.tsx
+msgid "Select category"
+msgstr ""
+
 #: src/marketplace/resources/list/CategoryFilter.tsx
 msgid "Select category..."
 msgstr ""
@@ -10001,6 +10025,10 @@ msgstr ""
 
 #: src/issues/create/IssueCreateForm.tsx
 msgid "Select issue template..."
+msgstr ""
+
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
+msgid "Select offering"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
@@ -10295,6 +10323,7 @@ msgstr ""
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
 msgid "Service provider"
 msgstr ""
@@ -10716,6 +10745,7 @@ msgid "Snapshots count"
 msgstr ""
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr ""
 
@@ -10980,6 +11010,7 @@ msgstr ""
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/rancher/cluster/ImportYAMLDialog.tsx

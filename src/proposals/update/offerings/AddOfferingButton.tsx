@@ -1,15 +1,44 @@
-import { translate } from '@waldur/i18n';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { lazyComponent } from '@waldur/core/lazyComponent';
+import { translate } from '@waldur/i18n/translate';
+import { openModalDialog } from '@waldur/modal/actions';
+import { ProposalCall } from '@waldur/proposals/types';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-export const AddOfferingButton = () => {
-  const callback = () => {
-    // ignore
-  };
+const CallOfferingCreateDialog = lazyComponent(
+  () => import('./CallOfferingCreateDialog'),
+  'CallOfferingCreateDialog',
+);
+
+interface AddOfferingButtonProps {
+  call: ProposalCall;
+  refetch(): void;
+}
+
+export const AddOfferingButton = ({
+  call,
+  refetch,
+}: AddOfferingButtonProps) => {
+  const dispatch = useDispatch();
+  const openOfferingCreateDialog = useCallback(
+    () =>
+      dispatch(
+        openModalDialog(CallOfferingCreateDialog, {
+          resolve: { call, refetch },
+          size: 'lg',
+        }),
+      ),
+    [dispatch],
+  );
+
   return (
     <ActionButton
-      action={callback}
       title={translate('Add offering')}
-      variant="primary"
+      icon="fa fa-plus"
+      action={openOfferingCreateDialog}
+      variant="light"
     />
   );
 };

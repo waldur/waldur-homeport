@@ -81,6 +81,9 @@ export const getPublicOfferingsList = (params?: {}) =>
 export const getProviderOfferingsOptions = (params?: {}) =>
   getSelectData<Offering>('/marketplace-provider-offerings/', params);
 
+export const getPublicOfferingsOptions = (params?: {}) =>
+  getSelectData<Offering>('/marketplace-public-offerings/', params);
+
 export const getAllProviderOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-provider-offerings/', options);
 

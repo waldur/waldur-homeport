@@ -41,8 +41,8 @@ export const PurePlanDescriptionButton = (
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  formData: getFormValues(FORM_ID)(state),
+const mapStateToProps = (state: RootState, ownProps) => ({
+  formData: getFormValues(ownProps.formId || FORM_ID)(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

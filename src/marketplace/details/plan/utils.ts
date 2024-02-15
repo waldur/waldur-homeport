@@ -229,7 +229,7 @@ const getLimits = (state, props) => {
 
 export const pricesSelector = (state, props): PricesData => {
   const plan: Plan = getPlan(state, props) || props.plan;
-  const limits: Limits = getLimits(state, props);
+  const limits: Limits = getLimits(state, props) || props.limits;
   return combinePrices(plan, limits, {}, props.offering);
 };
 

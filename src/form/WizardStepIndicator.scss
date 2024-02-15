@@ -1,6 +1,6 @@
 @use 'sass:math';
 
-$wizard-color-neutral: #5e6278 !default;
+$wizard-color-neutral: var(--bs-gray-800) !default;
 $wizard-color-active: #4183d7 !default;
 $wizard-color-line: #eff2f5 !default;
 $wizard-step-width-height: 30px !default;
@@ -55,7 +55,7 @@ $wizard-step-font-size: 12px !default;
   .step {
     background-color: $wizard-color-neutral;
     border-radius: 50%;
-    color: white;
+    color: var(--bs-body-bg);
     font-size: $wizard-step-font-size;
     height: $wizard-step-width-height;
     line-height: $wizard-step-width-height;
@@ -66,6 +66,10 @@ $wizard-step-font-size: 12px !default;
 
     &:hover {
       cursor: pointer;
+    }
+
+    .fa {
+      color: var(--bs-body-bg);
     }
   }
 

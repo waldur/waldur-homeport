@@ -26,7 +26,12 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
     <Table
       {...tableProps}
       id="offerings"
-      placeholderComponent={<CallOfferingsTablePlaceholder />}
+      placeholderComponent={
+        <CallOfferingsTablePlaceholder
+          call={props.call}
+          refetch={tableProps.fetch}
+        />
+      }
       columns={[
         {
           title: translate('Offering name'),
@@ -34,15 +39,15 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
         },
         {
           title: translate('Provider'),
-          render: ({ row }) => <>{renderFieldOrDash(row.customer_name)}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.provider_name)}</>,
         },
         {
-          title: translate('Min allocation'),
-          render: () => <>500TB</>,
+          title: translate('Requested by'),
+          render: ({ row }) => <>{renderFieldOrDash(row.created_by_name)}</>,
         },
         {
-          title: translate('Max allocation'),
-          render: () => <>500TB</>,
+          title: translate('Approved by'),
+          render: ({ row }) => <>{renderFieldOrDash(row.approved_by_name)}</>,
         },
         {
           title: translate('State'),
@@ -56,7 +61,9 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
       ]}
       title={translate('Offerings')}
       verboseName={translate('Offerings')}
-      actions={<AddOfferingButton />}
+      actions={
+        <AddOfferingButton call={props.call} refetch={tableProps.fetch} />
+      }
     />
   );
 };
