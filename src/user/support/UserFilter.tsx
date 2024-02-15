@@ -62,10 +62,6 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = ({ form }) => {
               placeholder={translate('Select status')}
               options={[
                 {
-                  label: translate('Any'),
-                  value: undefined,
-                },
-                {
                   label: translate('Active'),
                   value: true,
                 },
