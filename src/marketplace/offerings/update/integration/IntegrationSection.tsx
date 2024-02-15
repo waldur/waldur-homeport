@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import {
   getPluginOptionsForm,
   getSecretOptionsForm,
 } from '@waldur/marketplace/common/registry';
+import { EditLexisLinkIntegrationButton } from '@waldur/marketplace/offerings/update/integration/EditLexisLinkIntegrationButton';
 import { getServiceSettingsForm } from '@waldur/providers/registry';
 
 import { RefreshButton } from '../components/RefreshButton';
@@ -47,6 +49,12 @@ export const IntegrationSection: FC<OfferingSectionProps> = (props) => {
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </div>
         <div className="card-toolbar">
+          {isFeatureVisible('marketplace.lexis_links') ? (
+            <EditLexisLinkIntegrationButton
+              offering={props.offering}
+              refetch={props.refetch}
+            />
+          ) : null}
           <EditIntegrationButton
             offering={props.offering}
             refetch={props.refetch}
