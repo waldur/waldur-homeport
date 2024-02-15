@@ -63,6 +63,19 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                 </div>
               </td>
             </tr>
+            <tr>
+              <td className="col-md-3">{translate('Reference code')}</td>
+              <td className="col-md-9">{props.call.reference_code || 'N/A'}</td>
+              <td className="row-actions">
+                <div>
+                  <EditGeneralInfoButton
+                    call={props.call}
+                    fields={['reference_code']}
+                    refetch={props.refetch}
+                  />
+                </div>
+              </td>
+            </tr>
           </tbody>
         </Table>
       </Card.Body>

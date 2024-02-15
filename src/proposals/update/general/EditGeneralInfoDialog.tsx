@@ -88,6 +88,13 @@ export const EditGeneralInfoDialog = connect<
                 verticalLayout
               />
             )}
+            {props.resolve.fields.includes('reference_code') && (
+              <StringField
+                label={translate('Reference code')}
+                name="reference_code"
+                required={false}
+              />
+            )}
           </FormContainer>
         </ModalDialog>
       </form>
