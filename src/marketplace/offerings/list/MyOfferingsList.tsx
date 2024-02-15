@@ -27,8 +27,7 @@ const mapPropsToFilter = (props) => {
 const enhance = compose(
   connect((state: RootState) => ({
     customer: getCustomer(state),
-    actionsDisabled: true,
-    showOfferingCreateButton: false,
+    showActions: false,
     filter: getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID)(state),
   })),
   connectTable({

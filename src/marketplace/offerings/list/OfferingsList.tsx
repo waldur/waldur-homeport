@@ -68,13 +68,15 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}
-      placeholderComponent={<OfferingsListTablePlaceholder />}
+      placeholderComponent={
+        <OfferingsListTablePlaceholder showActions={props.showActions} />
+      }
       columns={columns}
       verboseName={translate('Offerings')}
-      dropdownActions={dropdownActions}
+      dropdownActions={props.showActions && dropdownActions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
-      hoverableRow={OfferingActions}
+      hoverableRow={props.showActions && OfferingActions}
       hasQuery={true}
     />
   );

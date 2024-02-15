@@ -39,6 +39,7 @@ export const Options: TableOptionsType = {
 const mapStateToProps = (state: RootState) => ({
   filter: getFormValues(ADMIN_OFFERINGS_FILTER_FORM_ID)(state),
   hasOrganizationColumn: true,
+  showActions: true,
 });
 
 const enhance = compose(connect(mapStateToProps), connectTable(Options));
