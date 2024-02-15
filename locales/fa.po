@@ -1921,6 +1921,7 @@ msgstr "فعال کردن DHCP"
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/notifications/NotificationList.tsx
 #: src/user/hooks/HookForm.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Enabled"
