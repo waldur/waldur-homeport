@@ -30,7 +30,9 @@ export const CallOfferingsCard: FC<CallOfferingsCardProps> = () => {
     <Table
       {...tableProps}
       id="offerings"
-      placeholderComponent={<OfferingsListTablePlaceholder />}
+      placeholderComponent={
+        <OfferingsListTablePlaceholder showActions={true} />
+      }
       columns={[
         {
           title: translate('Offering name'),

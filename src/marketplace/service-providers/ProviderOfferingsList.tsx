@@ -60,7 +60,9 @@ export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
     return (
       <Table
         {...tableProps}
-        placeholderComponent={<OfferingsListTablePlaceholder />}
+        placeholderComponent={
+          <OfferingsListTablePlaceholder showActions={true} />
+        }
         columns={[
           {
             title: translate('Offering / Category'),
