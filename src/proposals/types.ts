@@ -1,4 +1,5 @@
-import { Offering } from '@waldur/marketplace/types';
+import { Limits } from '@waldur/marketplace/details/types';
+import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 
 export interface CallManagingOrganizationInfo {
   uuid: string;
@@ -87,4 +88,17 @@ export interface EditCallProps {
   call: ProposalCall;
   fields: string[];
   refetch(): void;
+}
+
+export interface CallOffering {
+  offering: string;
+  attributes: AttributesType;
+}
+
+export interface CallOfferingFormData {
+  offering: Offering;
+  attributes: AttributesType;
+  description: string;
+  plan: Plan;
+  limits?: Limits;
 }

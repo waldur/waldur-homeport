@@ -11,6 +11,7 @@ import {
 
 import {
   CallManagingOrganizationInfo,
+  CallOffering,
   ProposalCall,
   ProposalCallRound,
 } from './types';
@@ -77,6 +78,13 @@ export const createCallRound = (callUuid, data) => {
 export const updateCallRound = (callUuid, roundUuid, data) => {
   return put<ProposalCallRound>(
     `/proposal-protected-calls/${callUuid}/rounds/${roundUuid}/`,
+    data,
+  );
+};
+
+export const createCallOffering = (callUuid, data) => {
+  return post<CallOffering>(
+    `/proposal-protected-calls/${callUuid}/offerings/`,
     data,
   );
 };

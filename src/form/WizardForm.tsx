@@ -22,6 +22,7 @@ export interface WizardFormStepProps
   onPrev(): void;
   onStep?(step: number): void;
   validate?(values: any): any;
+  data?: any;
 }
 
 interface WizardFormProps extends WizardFormStepProps, InjectedFormProps {

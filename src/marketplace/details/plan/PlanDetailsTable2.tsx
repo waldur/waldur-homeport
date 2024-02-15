@@ -5,12 +5,19 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
+import { Limits } from '@waldur/marketplace/details/types';
+import { Offering, Plan } from '@waldur/marketplace/types';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ComponentEditRow2 } from './ComponentEditRow';
 import { ComponentRow2 } from './ComponentRow';
-import { Component, PlanDetailsTableProps, PlanPeriod } from './types';
+import {
+  Component,
+  PlanDetailsTableProps,
+  PlanPeriod,
+  PricesData,
+} from './types';
 import { UsageComponentRow } from './UsageComponentRow';
 import { pricesSelector, useComponentsDetailPrices } from './utils';
 
@@ -322,4 +329,12 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
   );
 };
 
-export const PlanDetailsTable2 = connect(pricesSelector)(PureDetailsTable);
+interface PlanDetailsTable2 {
+  offering: Offering;
+  plan?: Plan;
+  limits?: Limits;
+}
+
+export const PlanDetailsTable2 = connect<PricesData, {}, PlanDetailsTable2>(
+  pricesSelector,
+)(PureDetailsTable);
