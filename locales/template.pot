@@ -8686,6 +8686,11 @@ msgstr ""
 msgid "Reference"
 msgstr ""
 
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+msgid "Reference code"
+msgstr ""
+
 #: src/marketplace/offerings/details/PublicOfferingAttributesSection.tsx
 #: src/marketplace/referral/ReferralDetailsField.tsx
 msgid "Referral count"
@@ -13906,6 +13911,7 @@ msgstr ""
 
 #: src/administration/providers/ProviderForm.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
+#: src/administration/service-desk/SmaxSettings.tsx
 msgid "Verify SSL"
 msgstr ""
 

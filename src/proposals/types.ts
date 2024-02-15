@@ -54,6 +54,7 @@ export interface ProposalCall {
   created: string;
   name: string;
   description: string;
+  reference_code: string;
   start_time: string;
   end_time: string;
   round_strategy: string;
