@@ -96,7 +96,7 @@ const SupportStatusField = ({ row }) => {
 const mapPropsToFilter = createSelector(
   getFormValues('userFilter'),
   (filters: any) => {
-    const params = cloneDeep(formatRoleFilter(formatStatusFilter(filters)));
+    const params = cloneDeep(formatRoleFilter(filters));
     if (filters?.organization?.uuid) {
       params.customer_uuid = filters.organization.uuid;
     }
@@ -211,24 +211,6 @@ export const formatRoleFilter = (filter) => {
       ...rest,
       ...formattedRole,
     };
-  }
-  return filter;
-};
-
-export const formatStatusFilter = (filter) => {
-  if (filter && filter.status) {
-    if (filter.status.value === true) {
-      return {
-        ...filter,
-        is_active: true,
-      };
-    }
-    if (filter.status.value === false) {
-      return {
-        ...filter,
-        is_active: false,
-      };
-    }
   }
   return filter;
 };

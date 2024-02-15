@@ -41,7 +41,7 @@ export const TableFilterItem: React.FunctionComponent<TableFilterItem> = (
       <Field
         name={props.name}
         component={({ input: { value } }) =>
-          value ? (
+          !['', undefined].includes(value) ? (
             <div
               className="filter-value"
               style={!props.ellipsis ? { maxWidth: 'unset' } : undefined}

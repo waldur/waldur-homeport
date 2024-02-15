@@ -41,3 +41,14 @@ export const getRoleFilterOptions = () => [
     value: 'is_support',
   },
 ];
+
+export const getUserStatusFilterOptions = () => [
+  {
+    label: translate('Active'),
+    value: true,
+  },
+  {
+    label: translate('Disabled'),
+    value: false,
+  },
+];

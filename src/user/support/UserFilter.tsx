@@ -15,7 +15,7 @@ import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-import { getRoleFilterOptions } from './utils';
+import { getRoleFilterOptions, getUserStatusFilterOptions } from './utils';
 
 import './UserFilter.scss';
 
@@ -52,24 +52,22 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = ({ form }) => {
           )}
         ></Field>
       </TableFilterItem>
-      <TableFilterItem name="status" title={translate('Status')}>
+      <TableFilterItem
+        name="is_active"
+        title={translate('Status')}
+        badgeValue={(value) =>
+          getUserStatusFilterOptions().find((op) => op.value === value)?.label
+        }
+        ellipsis={false}
+      >
         <Field
-          name="status"
+          name="is_active"
           component={(fieldProps) => (
             <SelectField
               {...fieldProps}
               className="Select"
               placeholder={translate('Select status')}
-              options={[
-                {
-                  label: translate('Active'),
-                  value: true,
-                },
-                {
-                  label: translate('Disabled'),
-                  value: false,
-                },
-              ]}
+              options={getUserStatusFilterOptions()}
               noUpdateOnBlur={true}
               simpleValue={true}
               isClearable={true}
