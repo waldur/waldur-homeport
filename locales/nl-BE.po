@@ -261,7 +261,7 @@ msgstr "Prijs voor activering"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Active"
 msgstr "Actief"
 
@@ -687,7 +687,7 @@ msgstr "Antwoorden werden ingediend"
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Any"
 msgstr "Enig"
 
@@ -756,6 +756,7 @@ msgstr "Goedgekeurd op"
 
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Approved by"
 msgstr "Goedgekeurd door"
 
@@ -1933,6 +1934,7 @@ msgstr "Coupon"
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
@@ -2620,7 +2622,7 @@ msgstr "IP-reclame voor gateway uitschakelen via DHCP"
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HooksList.tsx
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Disabled"
 msgstr "Invalide"
 
@@ -2730,6 +2732,7 @@ msgid "Done"
 msgstr "KLAAR"
 
 #: src/invitations/actions/create/BulkUpload.tsx
+#: src/proposals/update/documents/CallDocumentsSection.tsx
 msgid "Download"
 msgstr "Download"
 
@@ -4342,6 +4345,7 @@ msgstr "Nieuw project"
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
 msgstr "Volgend"
@@ -4911,6 +4915,7 @@ msgstr "Overig"
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/documents/RemoveDocumentButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -4949,6 +4954,7 @@ msgid "Requested at"
 msgstr "Aangevraagd bij"
 
 #: src/marketplace-flows/utils.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Requested by"
 msgstr "Aangevraagd door"
 
@@ -5068,6 +5074,7 @@ msgstr "Reglement"
 #: src/marketplace/offerings/update/attributes/EditCategoryDialog.tsx
 #: src/marketplace/offerings/update/components/EditComponentDialog.tsx
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
@@ -5082,6 +5089,7 @@ msgstr "Reglement"
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
+#: src/proposals/update/documents/AttachDocumentsDialog.tsx
 msgid "Save"
 msgstr "Sla op"
 
@@ -5262,6 +5270,7 @@ msgid "Size"
 msgstr "Grootte"
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr "Er is iets misgegaan"
 
@@ -5424,6 +5433,7 @@ msgstr "Onderwerp"
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/rancher/cluster/ImportYAMLDialog.tsx

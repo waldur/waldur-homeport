@@ -159,7 +159,7 @@ msgstr "فعال کردن"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Active"
 msgstr "فعال"
 
@@ -439,7 +439,7 @@ msgstr "پاسخ ها را مشاهده کنید"
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Any"
 msgstr "هیچ"
 
@@ -492,6 +492,7 @@ msgstr "تایید شده در"
 
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Approved by"
 msgstr "تایید شده توسط"
 
@@ -1207,6 +1208,7 @@ msgstr "کشور"
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
@@ -1684,7 +1686,7 @@ msgstr "غیر فعال کردن تبلیغات gateway IP از طریق DHCP"
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HooksList.tsx
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Disabled"
 msgstr "غیرفعال شده"
 
@@ -3258,6 +3260,7 @@ msgstr "اندازه جدید"
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
 msgstr "بعدی"
@@ -3425,6 +3428,7 @@ msgstr "شیء یافت نشد."
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/permissions/constants.tsx
+#: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx

@@ -132,7 +132,7 @@ msgstr "Aktiv olunur"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Active"
 msgstr "Aktiv"
 
@@ -273,7 +273,7 @@ msgstr "Layihənin silinməsi zamanı xəta baş verdi."
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Any"
 msgstr "İstənilən"
 
@@ -683,6 +683,7 @@ msgstr "Ölkə "
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
@@ -2187,6 +2188,7 @@ msgstr "Yeni ölçü"
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
 msgstr "Sonrakı "
@@ -2959,6 +2961,7 @@ msgstr "Uzaq CIDR (sinifsiz domenlərarası marşrutlama)"
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/documents/RemoveDocumentButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -3246,6 +3249,7 @@ msgstr "“Sankey” diaqramı"
 #: src/marketplace/offerings/update/attributes/EditCategoryDialog.tsx
 #: src/marketplace/offerings/update/components/EditComponentDialog.tsx
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
@@ -3260,6 +3264,7 @@ msgstr "“Sankey” diaqramı"
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
+#: src/proposals/update/documents/AttachDocumentsDialog.tsx
 msgid "Save"
 msgstr "Yaddaşda saxlamaq"
 
@@ -3691,6 +3696,7 @@ msgstr "Saxlama"
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/rancher/cluster/ImportYAMLDialog.tsx

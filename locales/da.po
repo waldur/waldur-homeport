@@ -217,7 +217,7 @@ msgstr "Aktiveringspris"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Active"
 msgstr "Aktiv"
 
@@ -561,7 +561,7 @@ msgstr "Svar er blevet indsendt"
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Any"
 msgstr "Nogen"
 
@@ -614,6 +614,7 @@ msgstr "Godkendt på"
 
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Approved by"
 msgstr "Godkendt af"
 
@@ -1577,6 +1578,7 @@ msgstr "Land"
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
@@ -2137,7 +2139,7 @@ msgstr "Deaktiver gateway IP-annoncering via DHCP"
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/user/hooks/HooksList.tsx
-#: src/user/support/UserFilter.tsx
+#: src/user/support/utils.ts
 msgid "Disabled"
 msgstr "Deaktiveret"
 
@@ -4392,6 +4394,7 @@ msgstr "Ny størrelse"
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
 msgstr "Næste"
@@ -4662,6 +4665,7 @@ msgstr "Objektet blev ikke fundet."
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/permissions/constants.tsx
+#: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -6336,6 +6340,7 @@ msgstr "Fjernsikkerhedsgruppe"
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/documents/RemoveDocumentButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -6516,6 +6521,7 @@ msgid "Requested"
 msgstr "Anmodet"
 
 #: src/marketplace-flows/utils.tsx
+#: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Requested by"
 msgstr "Anmodet af"
 
@@ -6948,6 +6954,7 @@ msgstr "Sankey diagram"
 #: src/marketplace/offerings/update/attributes/EditCategoryDialog.tsx
 #: src/marketplace/offerings/update/components/EditComponentDialog.tsx
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+#: src/marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx
 #: src/marketplace/offerings/update/integration/EditScriptDialog.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
@@ -6962,6 +6969,7 @@ msgstr "Sankey diagram"
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/AddProjectMemberDialog.tsx
+#: src/proposals/update/documents/AttachDocumentsDialog.tsx
 msgid "Save"
 msgstr "Gem"
 
@@ -7367,6 +7375,7 @@ msgstr "Servicechef for:"
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
 msgid "Service provider"
 msgstr "Tjenesteudbyder"
@@ -7849,6 +7858,7 @@ msgstr "Emne"
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/rancher/cluster/ImportYAMLDialog.tsx
