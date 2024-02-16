@@ -36,7 +36,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('networks')}
       actions={<CreateNetworkAction resource={props.resource} />}
-      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      hoverableRow={({ row }) => (
+        <ActionButtonResource url={row.url} refetch={props.fetch} />
+      )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );

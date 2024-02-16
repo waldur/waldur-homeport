@@ -50,7 +50,9 @@ const TableComponent = (
       verboseName={translate('resources')}
       showPageSizeSelector={true}
       enableExport={true}
-      hoverableRow={({ row }) => <ResourceRowActions resource={row} />}
+      hoverableRow={({ row }) => (
+        <ResourceRowActions resource={row} refetch={props.fetch} />
+      )}
     />
   );
 };

@@ -43,7 +43,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       actions={<AttachVolumeAction resource={props.resource} />}
       verboseName={translate('volumes')}
-      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      hoverableRow={({ row }) => (
+        <ActionButtonResource url={row.url} refetch={props.fetch} />
+      )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );

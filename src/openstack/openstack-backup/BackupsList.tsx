@@ -37,7 +37,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Actions'),
-          render: ({ row }) => <ResourceRowActions resource={row} />,
+          render: ({ row }) => (
+            <ResourceRowActions resource={row} refetch={props.fetch} />
+          ),
         },
       ]}
       verboseName={translate('VM snapshots')}

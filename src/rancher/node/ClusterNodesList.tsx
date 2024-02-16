@@ -51,7 +51,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('Kubernetes nodes')}
       actions={<CreateNodeAction resource={props.resource} />}
-      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      hoverableRow={({ row }) => (
+        <ActionButtonResource url={row.url} refetch={props.fetch} />
+      )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );

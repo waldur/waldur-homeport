@@ -52,7 +52,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
           <CreateFloatingIpAction resource={props.resource} />
         </ButtonGroup>
       }
-      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      hoverableRow={({ row }) => (
+        <ActionButtonResource url={row.url} refetch={props.fetch} />
+      )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );
