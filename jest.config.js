@@ -4,6 +4,9 @@ module.exports = {
     '^.+\\.svg$': '<rootDir>/test/svgTransform.js',
     '^.+\\.png$': '<rootDir>/test/pngTransform.js',
   },
+  transformIgnorePatterns: [
+    'node_modules/(?!axios/.*)'
+  ],
   testRegex: '\\.spec\\.tsx?$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   moduleNameMapper: {

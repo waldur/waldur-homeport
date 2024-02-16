@@ -13,7 +13,7 @@ export function initAuthToken() {
   // When application starts up, we need to inject auth token if it exists
   const token = getToken();
   if (token) {
-    Axios.defaults.headers.common['Authorization'] = 'Token ' + token;
+    Axios.defaults.headers.Authorization = 'Token ' + token;
   }
 }
 

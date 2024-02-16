@@ -26,7 +26,7 @@ class LanguageUtilsServiceClass {
       this.dictionary = mod.default;
     });
     Settings.defaultLocale = language.code;
-    Axios.defaults.headers.common['Accept-Language'] = language.code;
+    Axios.defaults.headers['Accept-Language'] = language.code;
     flatpickr.localize(flatpickr.l10ns[language.code]);
   }
 

@@ -73,7 +73,7 @@ export async function fetchAll(fetch: Fetcher, request: TableRequest) {
 export const ANONYMOUS_CONFIG = {
   transformRequest: [
     (data, headers) => {
-      delete headers.common.Authorization;
+      delete headers.Authorization;
       return data;
     },
   ],
