@@ -33,7 +33,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       expandableRow={SecurityGroupExpandableRow}
       enableExport={true}
-      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      hoverableRow={({ row }) => (
+        <ActionButtonResource url={row.url} refetch={props.fetch} />
+      )}
       verboseName={translate('security groups')}
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}

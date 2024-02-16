@@ -27,7 +27,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => row.network_name || 'N/A',
         },
       ]}
-      hoverableRow={({ row }) => <ResourceRowActions resource={row} />}
+      hoverableRow={({ row }) => (
+        <ResourceRowActions resource={row} refetch={props.fetch} />
+      )}
       expandableRow={ExpandablePortRow}
       verboseName={translate('ports')}
     />

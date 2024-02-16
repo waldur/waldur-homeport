@@ -7,8 +7,9 @@ import { ResourceSummaryButton } from '../summary/ResourceSummaryButton';
 
 import { ActionButtonResource } from './ActionButtonResource';
 
-export const ResourceRowActions: FunctionComponent<{ resource }> = ({
+export const ResourceRowActions: FunctionComponent<{ resource; refetch }> = ({
   resource,
+  refetch,
 }) => {
   const user = useSelector(getUser);
   if (!user || (user.is_support && !user.is_staff)) {
@@ -16,7 +17,7 @@ export const ResourceRowActions: FunctionComponent<{ resource }> = ({
   }
   return (
     <div className="d-flex">
-      <ActionButtonResource url={resource.url} />
+      <ActionButtonResource url={resource.url} refetch={refetch} />
       <ResourceSummaryButton url={resource.url} />
     </div>
   );

@@ -38,7 +38,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={false}
       actions={<CreateDiskAction resource={props.resource} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
-      hoverableRow={({ row }) => <ActionButtonResource url={row.url} />}
+      hoverableRow={({ row }) => (
+        <ActionButtonResource url={row.url} refetch={props.fetch} />
+      )}
     />
   );
 };
