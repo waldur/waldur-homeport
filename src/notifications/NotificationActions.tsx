@@ -1,6 +1,7 @@
 import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { NotificationToggleButton } from '@waldur/notifications/NotificationToggleButton';
 import { NotificationUpdateButton } from '@waldur/notifications/NotificationUpdateButton';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
@@ -10,6 +11,7 @@ export const NotificationActions = ({ row, refetch }) => {
     return (
       <ButtonGroup>
         <NotificationUpdateButton notification={row} refetch={refetch} />
+        <NotificationToggleButton notification={row} refetch={refetch} />
       </ButtonGroup>
     );
   } else {
