@@ -40,7 +40,7 @@ import { getToken, removeToken, setToken } from './TokenStorage';
 
 function setAuthHeader(token) {
   setToken(token);
-  Axios.defaults.headers.common['Authorization'] = 'Token ' + token;
+  Axios.defaults.headers.Authorization = 'Token ' + token;
 }
 
 function loginSuccess(response) {
@@ -117,7 +117,7 @@ function storeCurrentState() {
 }
 
 export function clearTokenHeader() {
-  delete Axios.defaults.headers.common['Authorization'];
+  delete Axios.defaults.headers.Authorization;
 }
 
 function localLogout(params?) {
