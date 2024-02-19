@@ -30,6 +30,9 @@ export const parseDate = (value: DateInput) => {
 
 export const formatDate: DateFormatter = (date) => parseDate(date).toISODate();
 
+export const formatShortDate: DateFormatter = (date, abbreviated = false) =>
+  parseDate(date).toFormat(abbreviated ? 'DD' : 'DDD');
+
 export const formatDateTime: DateFormatter = (date) =>
   parseDate(date).toFormat('yyyy-MM-dd T');
 
