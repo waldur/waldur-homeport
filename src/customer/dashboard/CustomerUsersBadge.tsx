@@ -27,7 +27,7 @@ export const CustomerUsersBadge = () => {
   ) : (
     <div className="d-flex justify-content-start align-items-xl-center flex-xl-row flex-column gap-xl-6">
       {getCustomerRoles().map((role) => (
-        <UserRoleGroup key={role.value} role={role} users={users} />
+        <UserRoleGroup key={role.name} role={role} users={users} />
       ))}
     </div>
   );

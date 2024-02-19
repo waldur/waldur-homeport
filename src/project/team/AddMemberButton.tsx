@@ -13,7 +13,6 @@ const AddProjectMemberDialog = lazyComponent(
 );
 
 interface AddMemberButtonProps {
-  users: User[];
   user?: User;
   project: Project;
   customer: Customer;
@@ -21,7 +20,6 @@ interface AddMemberButtonProps {
 }
 
 export const AddMemberButton: React.FC<AddMemberButtonProps> = ({
-  users,
   user,
   project,
   customer,
@@ -35,7 +33,6 @@ export const AddMemberButton: React.FC<AddMemberButtonProps> = ({
           currentProject: project,
           currentCustomer: customer,
           editUser: user,
-          addedUsers: users.map((user) => user.uuid),
           refetch,
         },
       }),

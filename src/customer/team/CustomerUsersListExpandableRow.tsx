@@ -11,9 +11,9 @@ export const CustomerUsersListExpandableRow: FunctionComponent<any> = ({
   return (
     <>
       {roles.map((role) => (
-        <p key={role.value}>
-          <b>{translate('{label} in:', role)}</b>{' '}
-          <ProjectRolesList roleName={role.value} row={row} />
+        <p key={role.name}>
+          <b>{translate('{label} in:', { label: role.description })}</b>{' '}
+          <ProjectRolesList roleName={role.name} row={row} />
         </p>
       ))}
     </>

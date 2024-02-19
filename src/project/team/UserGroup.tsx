@@ -5,7 +5,7 @@ import { components } from 'react-select';
 import { Tip } from '@waldur/core/Tooltip';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
-import { usersAutocomplete } from '@waldur/project/team/api';
+import { customerUsersAutocomplete } from '@waldur/project/team/api';
 
 export const UserListOptionInline: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
@@ -69,17 +69,16 @@ export const UserListOption: FunctionComponent<any> = (props) => (
 export const UserGroup: FunctionComponent<{
   customerUuid;
   editUser;
-  users;
   disabled;
-}> = ({ customerUuid, editUser, users, disabled }) =>
+}> = ({ customerUuid, editUser, disabled }) =>
   editUser ? (
     <Form.Group>
       <p>
         <strong>{translate('User')}</strong>:{' '}
-        {editUser.full_name || editUser.username}
+        {editUser.user_full_name || editUser.user_username}
       </p>
     </Form.Group>
-  ) : users?.length ? (
+  ) : (
     <Form.Group>
       <Form.Label>{translate('User')}</Form.Label>
       <AsyncSelectField
@@ -90,7 +89,7 @@ export const UserGroup: FunctionComponent<{
         components={{ Option: UserListOption }}
         placeholder={translate('Select user...')}
         loadOptions={(query, prevOptions, page) =>
-          usersAutocomplete(
+          customerUsersAutocomplete(
             customerUuid,
             { full_name: query },
             prevOptions,
@@ -101,6 +100,4 @@ export const UserGroup: FunctionComponent<{
         getOptionLabel={(option) => option.full_name || option.username}
       />
     </Form.Group>
-  ) : (
-    <p className="text-danger">{translate('There are no available users.')}</p>
   );
