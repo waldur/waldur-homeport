@@ -38,6 +38,9 @@ export const getImageInfo = (imageName: string) => {
 
 export const ResourceImageField = ({ scope }) => {
   const info = useMemo(() => getImageInfo(scope.image_name), [scope]);
+  if (!info) {
+    return null;
+  }
   return (
     <Field
       label={translate('Image')}
