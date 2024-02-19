@@ -6,6 +6,8 @@ import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { ActionItem } from './ActionItem';
+import { validateState } from './base';
+import { useValidators } from './useValidators';
 
 interface PullActionItemProps<T> {
   apiMethod(id: string): Promise<AxiosResponse>;
@@ -15,6 +17,8 @@ interface PullActionItemProps<T> {
   as?;
   refetch?;
 }
+
+const validators = [validateState('OK', 'Erred')];
 
 export const usePull = ({
   resource,
@@ -35,10 +39,13 @@ export const usePull = ({
       );
     }
   };
+  const { tooltip, disabled } = useValidators(validators, resource);
   return {
     action,
     title: translate('Synchronise'),
     iconClass: 'fa-refresh',
+    tooltip,
+    disabled,
   };
 };
 
