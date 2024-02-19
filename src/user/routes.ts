@@ -80,6 +80,11 @@ const IssueDetailsContainer = lazyComponent(
 
 const UserDetails = lazyComponent(() => import('./UserDetails'), 'UserDetails');
 
+const ProposalsList = lazyComponent(
+  () => import('./proposals/ProposalsList'),
+  'ProposalsList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'profile',
@@ -260,6 +265,16 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Resources'),
       priority: 110,
+    },
+  },
+  {
+    name: 'profile.proposals',
+    url: 'user-proposals/',
+    component: ProposalsList,
+    data: {
+      feature: 'marketplace.show_call_management_functionality',
+      breadcrumb: () => translate('Proposals'),
+      priority: 120,
     },
   },
   {

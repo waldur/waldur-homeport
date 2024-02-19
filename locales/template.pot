@@ -250,6 +250,7 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr ""
@@ -773,7 +774,6 @@ msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/utils.ts
 msgid "Any"
 msgstr ""
 
@@ -882,6 +882,7 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr ""
 
@@ -1548,6 +1549,8 @@ msgstr ""
 #: src/proposals/details/PublicCallDetailsHero.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
+#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 msgid "Call"
 msgstr ""
 
@@ -3187,6 +3190,7 @@ msgid "Direction"
 msgstr ""
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
 msgstr ""
 
@@ -3341,6 +3345,7 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr ""
 
@@ -3642,6 +3647,7 @@ msgstr ""
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
+#: src/notifications/NotificationToggleButton.tsx
 msgid "Enable"
 msgstr ""
 
@@ -3726,6 +3732,10 @@ msgstr ""
 msgid "Ended"
 msgstr ""
 
+#: src/user/proposals/ProposalsList.tsx
+msgid "Ending"
+msgstr ""
+
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
 msgid "Endpoint has been added successfully."
 msgstr ""
@@ -3788,6 +3798,14 @@ msgstr ""
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Error"
+msgstr ""
+
+#: src/notifications/NotificationToggleButton.tsx
+msgid "Error disabling the notification."
+msgstr ""
+
+#: src/notifications/NotificationToggleButton.tsx
+msgid "Error enabling the notification."
 msgstr ""
 
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
@@ -4529,6 +4547,10 @@ msgstr ""
 
 #: src/notifications/ManageCommonFooterDialog.tsx
 msgid "HTML content"
+msgstr ""
+
+#: src/user/proposals/ProposalsList.tsx
+msgid "Has ended"
 msgstr ""
 
 #: src/customer/cost-policies/CostPoliciesList.tsx
@@ -5947,6 +5969,10 @@ msgstr ""
 msgid "My orders"
 msgstr ""
 
+#: src/user/proposals/ProposalsList.tsx
+msgid "My proposals"
+msgstr ""
+
 #: src/marketplace-checklist/AnswersTable.tsx
 msgid "N/A"
 msgstr ""
@@ -6050,6 +6076,7 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -6522,6 +6549,7 @@ msgstr ""
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
+#: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr ""
 
@@ -8405,11 +8433,13 @@ msgid "Propagated"
 msgstr ""
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
+#: src/user/proposals/ProposalsList.tsx
 msgid "Proposal"
 msgstr ""
 
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/user/routes.ts
 msgid "Proposals"
 msgstr ""
 
@@ -9663,6 +9693,7 @@ msgid "Roles"
 msgstr ""
 
 #: src/proposals/round/RoundPageHero.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 msgid "Round"
 msgstr ""
 
@@ -10216,6 +10247,7 @@ msgstr ""
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Select state..."
 msgstr ""
 
@@ -10946,6 +10978,8 @@ msgstr ""
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
+#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -10970,6 +11004,7 @@ msgstr ""
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -11562,6 +11597,14 @@ msgstr ""
 
 #: src/administration/service-desk/ZammadSettings.tsx
 msgid "The name of the group to which the ticket will be added"
+msgstr ""
+
+#: src/notifications/NotificationToggleButton.tsx
+msgid "The notification has been disabled"
+msgstr ""
+
+#: src/notifications/NotificationToggleButton.tsx
+msgid "The notification has been enabled"
 msgstr ""
 
 #: src/marketplace/details/ProjectField.tsx
@@ -14035,6 +14078,10 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
+#: src/user/proposals/ProposalsList.tsx
+msgid "View"
+msgstr ""
+
 #: src/rancher/cluster/ViewYAMLButton.tsx
 msgid "View YAML"
 msgstr ""
@@ -14251,6 +14298,10 @@ msgstr ""
 
 #: src/invitations/actions/create/CustomMessageInput.tsx
 msgid "You can add a message to be attached to the invitation email the users receives."
+msgstr ""
+
+#: src/user/proposals/ProposalsListPlaceholder.tsx
+msgid "You can create your first proposal."
 msgstr ""
 
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx

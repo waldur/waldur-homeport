@@ -90,6 +90,24 @@ export interface EditCallProps {
   refetch(): void;
 }
 
+type ProposalState = 'Active' | 'Draft' | 'Archive';
+
+export interface Proposal {
+  uuid: string;
+  url: string;
+  name: string;
+  project_summary: string;
+  project_is_confidential: boolean;
+  project_has_civilian_purpose: boolean;
+  supporting_documentation: any[];
+  state: ProposalState;
+  approved_by: string;
+  created_by: string;
+  duration_in_days: number;
+  project: string;
+  round: ProposalCallRound;
+}
+
 export interface CallOffering {
   offering: string;
   attributes: AttributesType;
