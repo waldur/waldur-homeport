@@ -5,11 +5,12 @@ import { Variant } from 'react-bootstrap/types';
 
 import { Tip } from '@waldur/core/Tooltip';
 
+import { LoadingSpinnerIcon } from './LoadingSpinner';
+
 export interface StateIndicatorProps {
   label: string;
   tooltip?: string;
   variant: Variant;
-  striped?: boolean;
   active?: boolean;
   roundless?: boolean;
 }
@@ -33,6 +34,9 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
         'badge-' + props.variant,
       ])}
     >
-      {props.label.toUpperCase()}
+      {props.label.toUpperCase()}{' '}
+      {props.active && (
+        <LoadingSpinnerIcon className={'badge-' + props.variant} />
+      )}
     </Badge>,
   );
