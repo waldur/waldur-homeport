@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
-import { GenericPermission } from '@waldur/permissions/types';
+import { GenericPermission, Role } from '@waldur/permissions/types';
 
 export const UserRoleGroup = ({
   role,
@@ -12,7 +12,7 @@ export const UserRoleGroup = ({
   className,
   onClick,
 }: {
-  role?: { label; value };
+  role?: Role;
   users: GenericPermission[];
   altLabel?: string;
   max?: number;
@@ -22,7 +22,7 @@ export const UserRoleGroup = ({
   const items = useMemo(() => {
     let _items;
     if (role) {
-      _items = users.filter((user) => user.role_name === role.value);
+      _items = users.filter((user) => user.role_name === role.name);
     } else {
       _items = users;
     }
@@ -40,7 +40,7 @@ export const UserRoleGroup = ({
   return (
     <Form.Group as={Row} className={className}>
       <Form.Label column xs="auto">
-        {altLabel || role?.label}:
+        {altLabel || role?.description}:
       </Form.Label>
       <Col xs={12} sm>
         <SymbolsGroup items={items} max={max || 6} onClick={onClick} />

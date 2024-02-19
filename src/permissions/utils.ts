@@ -6,9 +6,11 @@ import { RoleType } from './types';
 
 const getRoles = (type: string) =>
   ENV.roles
-    .filter((role) => role.content_type === type && role.is_active)
-    .map((role) => ({ label: role.description, value: role.name }))
-    .sort((a, b) => a.label.localeCompare(b.label));
+    .filter(
+      (role) =>
+        role.content_type === type && role.is_active && role.description,
+    )
+    .sort((a, b) => a.description.localeCompare(b.description));
 
 export const getProjectRoles = () => getRoles('project');
 

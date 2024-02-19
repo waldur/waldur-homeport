@@ -9642,6 +9642,7 @@ msgstr ""
 msgid "Robot accounts synchronization has been scheduled."
 msgstr ""
 
+#: src/customer/team/CustomerRoleGroup.tsx
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -9649,8 +9650,8 @@ msgstr ""
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/marketplace/resources/users/AddUserDialog.tsx
 #: src/marketplace/resources/users/ResourceUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -9662,7 +9663,6 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
 msgid "Role expires on"
 msgstr ""
@@ -10702,6 +10702,10 @@ msgstr ""
 msgid "Show user details"
 msgstr ""
 
+#: src/project/team/AddProjectUserDialog.tsx
+msgid "Show users outside organization"
+msgstr ""
+
 #: src/customer/list/AccountingRunningField.tsx
 #: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
@@ -11641,10 +11645,6 @@ msgstr ""
 
 #: src/customer/team/ProjectsListGroup.tsx
 msgid "There are no available projects."
-msgstr ""
-
-#: src/project/team/UserGroup.tsx
-msgid "There are no available users."
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -15155,10 +15155,6 @@ msgstr ""
 
 #: src/user/support/UserList.tsx
 msgid "{role} ({name})"
-msgstr ""
-
-#: src/customer/team/OwnerExpirationTimeGroup.tsx
-msgid "{role} role expires on"
 msgstr ""
 
 #: src/invitations/formatInvitation.ts

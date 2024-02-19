@@ -17,12 +17,12 @@ import {
 } from '@waldur/permissions/api';
 import { PermissionEnum, RoleEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { ExpirationTimeGroup } from '@waldur/project/team/ExpirationTimeGroup';
 import { showErrorResponse } from '@waldur/store/notify';
 import { fetchListStart } from '@waldur/table/actions';
 import { checkCustomerUser, checkIsOwner } from '@waldur/workspace/selectors';
 import { Customer, User } from '@waldur/workspace/types';
 
-import { OwnerExpirationTimeGroup } from './OwnerExpirationTimeGroup';
 import { OwnerGroup } from './OwnerGroup';
 import { ProjectsListGroup } from './ProjectsListGroup';
 import { UserGroup } from './UserGroup';
@@ -240,7 +240,7 @@ export const EditTeamMemberDialog = reduxForm<
           canChangeRole={canChangeRole}
           canManageOwner={canManageOwner}
         />
-        <OwnerExpirationTimeGroup
+        <ExpirationTimeGroup
           disabled={submitting || !canChangeRole || !canManageOwner}
         />
         <ProjectsListGroup canChangeRole={canChangeRole} projects={projects} />

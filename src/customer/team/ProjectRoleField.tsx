@@ -15,7 +15,8 @@ export const ProjectRoleField: React.FC<{
       name={`projects[${index}].role_name`}
       component={SelectField}
       isDisabled={!canChangeRole}
-      simpleValue={true}
+      getOptionLabel={({ description }) => description}
+      getOptionValue={({ name }) => name}
       options={options}
       isClearable={true}
     />

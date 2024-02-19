@@ -14,6 +14,8 @@ export const OrganizationRoleSelectField: FunctionComponent = () => (
         value={prop.input.value}
         onChange={(value) => prop.input.onChange(value)}
         options={getCustomerRoles()}
+        getOptionLabel={({ description }) => description}
+        getOptionValue={({ name }) => name}
         isClearable={true}
         isMulti={true}
       />

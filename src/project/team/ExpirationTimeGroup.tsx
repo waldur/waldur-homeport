@@ -8,10 +8,10 @@ import { translate } from '@waldur/i18n';
 
 import './ExpirationTimeGroup.scss';
 
-export const ExpirationTimeGroup: FunctionComponent<{ disabled }> = ({
+export const ExpirationTimeGroup: FunctionComponent<{ disabled?: boolean }> = ({
   disabled,
 }) => (
-  <Form.Group id="expiration-time-group">
+  <Form.Group id="expiration-time-group" className="mt-3">
     <Form.Label>{translate('Role expires on')}</Form.Label>
     <Field
       name="expiration_time"

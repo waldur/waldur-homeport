@@ -1,4 +1,3 @@
-import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import Avatar from '@waldur/core/Avatar';
@@ -15,7 +14,6 @@ import {
   getProject,
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
-  isStaff as isStaffSelector,
   getCustomer,
   isProjectManagerSelector,
 } from '@waldur/workspace/selectors';
@@ -27,7 +25,6 @@ import { UserRemoveButton } from './UserRemoveButton';
 export const ProjectUsersList = () => {
   const user = useSelector(getUser);
   const project = useSelector(getProject);
-  const isStaff = useSelector(isStaffSelector);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   const customer = useSelector(getCustomer);
   const isProjectManager = isProjectManagerSelector(user, project);
@@ -64,19 +61,7 @@ export const ProjectUsersList = () => {
         },
       ]}
       hasQuery={true}
-      actions={
-        <ButtonGroup>
-          {isStaff && <AddUserButton refetch={tableProps.fetch} />}
-          {isOwnerOrStaff ? (
-            <AddMemberButton
-              users={tableProps.rows}
-              project={project}
-              customer={customer}
-              refetch={tableProps.fetch}
-            />
-          ) : null}
-        </ButtonGroup>
-      }
+      actions={<AddUserButton refetch={tableProps.fetch} />}
       title={translate('Team members')}
       verboseName={translate('Team members')}
       hoverableRow={({ row }) => (
@@ -87,7 +72,6 @@ export const ProjectUsersList = () => {
           {isOwnerOrStaff ? (
             <AddMemberButton
               user={row}
-              users={tableProps.rows}
               project={project}
               customer={customer}
               refetch={tableProps.fetch}

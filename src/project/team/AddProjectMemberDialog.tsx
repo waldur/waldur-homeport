@@ -1,12 +1,9 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { useAsyncFn } from 'react-use';
-import { reduxForm, change } from 'redux-form';
+import { connect, useDispatch } from 'react-redux';
+import { reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { CustomersService } from '@waldur/customer/services/CustomersService';
 import { FormContainer } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -16,7 +13,8 @@ import {
   deleteProjectUser,
   updateProjectUser,
 } from '@waldur/permissions/api';
-import { RoleEnum } from '@waldur/permissions/enums';
+import { Role } from '@waldur/permissions/types';
+import { getProjectRoles } from '@waldur/permissions/utils';
 import { showErrorResponse } from '@waldur/store/notify';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
@@ -26,14 +24,13 @@ import { UserGroup } from './UserGroup';
 const FORM_ID = 'AddProjectMemberDialog';
 
 interface AddProjectMemberDialogFormData {
-  role: string;
+  role: Role;
   expiration_time: string;
   user: any;
 }
 
 interface AddProjectMemberDialogResolve {
-  addedUsers: any;
-  editUser: any;
+  editUser: { role_name: string; user_uuid: string; expiration_time: string };
   currentCustomer: any;
   currentProject: any;
   refetch;
@@ -48,11 +45,11 @@ const savePermissions = async (
   resolve: AddProjectMemberDialogResolve,
 ) => {
   if (resolve.editUser) {
-    if (resolve.editUser.role_name === formData.role) {
+    if (resolve.editUser.role_name === formData.role.name) {
       await updateProjectUser({
         project: resolve.currentProject.uuid,
         user: resolve.editUser.user_uuid,
-        role: formData.role,
+        role: formData.role.name,
         expiration_time: formData.expiration_time,
       });
     } else {
@@ -64,7 +61,7 @@ const savePermissions = async (
       await addProjectUser({
         project: resolve.currentProject.uuid,
         user: resolve.editUser.user_uuid,
-        role: formData.role,
+        role: formData.role.name,
         expiration_time: formData.expiration_time,
       });
     }
@@ -72,94 +69,74 @@ const savePermissions = async (
     await addProjectUser({
       project: resolve.currentProject.uuid,
       user: formData.user.uuid,
-      role: formData.role,
+      role: formData.role.name,
       expiration_time: formData.expiration_time,
     });
   }
   resolve.refetch();
 };
 
-const loadValidUsers = (resolve: AddProjectMemberDialogResolve) =>
-  CustomersService.getUsers(resolve.currentCustomer.uuid).then((users) => {
-    return users.filter((user) => {
-      return resolve.addedUsers.indexOf(user.uuid) === -1;
-    });
-  });
-
-export const AddProjectMemberDialog = reduxForm<
-  AddProjectMemberDialogFormData,
-  AddProjectMemberDialogOwnProps
->({
-  form: FORM_ID,
-})(({ submitting, handleSubmit, resolve }) => {
-  const [{ loading, value: users }, callback] = useAsyncFn(
-    () => loadValidUsers(resolve),
-    [resolve],
-  );
-
-  const dispatch = useDispatch();
-
-  const saveUser = useCallback(
-    async (formData) => {
-      try {
-        await savePermissions(formData, resolve);
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to update user.')));
-      }
-    },
-    [dispatch, resolve],
-  );
-
-  useEffect(() => {
-    if (resolve.editUser) {
-      dispatch(change(FORM_ID, 'user', resolve.editUser));
-      dispatch(change(FORM_ID, 'role', resolve.editUser.role_name));
-      dispatch(
-        change(FORM_ID, 'expiration_time', resolve.editUser.expiration_time),
-      );
-    } else {
-      callback();
+export const AddProjectMemberDialog = connect(
+  (_, ownProps: AddProjectMemberDialogOwnProps) => {
+    const editUser = ownProps.resolve?.editUser;
+    if (editUser) {
+      return {
+        initialValues: {
+          role: getProjectRoles().find(
+            ({ name }) => name === editUser.role_name,
+          ),
+          expiration_time: editUser.expiration_time,
+        },
+      };
     }
-  }, [dispatch, resolve.editUser, callback]);
+  },
+)(
+  reduxForm<AddProjectMemberDialogFormData, AddProjectMemberDialogOwnProps>({
+    form: FORM_ID,
+  })(({ submitting, handleSubmit, resolve }) => {
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (users) {
-      dispatch(change(FORM_ID, 'role', RoleEnum.PROJECT_ADMIN));
-    }
-  }, [dispatch, users]);
+    const saveUser = useCallback(
+      async (formData) => {
+        try {
+          await savePermissions(formData, resolve);
+          dispatch(closeModalDialog());
+        } catch (error) {
+          dispatch(
+            showErrorResponse(error, translate('Unable to update user.')),
+          );
+        }
+      },
+      [dispatch, resolve],
+    );
 
-  return (
-    <form onSubmit={handleSubmit(saveUser)}>
-      <Modal.Header>
-        <Modal.Title>
-          {resolve.editUser
-            ? translate('Edit project member')
-            : translate('Add project member')}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
+    return (
+      <form onSubmit={handleSubmit(saveUser)}>
+        <Modal.Header>
+          <Modal.Title>
+            {resolve.editUser
+              ? translate('Edit project member')
+              : translate('Add project member')}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <FormContainer submitting={submitting}>
             <UserGroup
               customerUuid={resolve.currentCustomer.uuid}
               editUser={resolve.editUser}
-              users={users}
               disabled={submitting}
             />
             <RoleGroup />
             <ExpirationTimeGroup disabled={submitting} />
           </FormContainer>
-        )}
-      </Modal.Body>
-      <Modal.Footer>
-        <SubmitButton block={false} submitting={submitting}>
-          {resolve.editUser ? translate('Save') : translate('Add')}
-        </SubmitButton>
-        <CloseDialogButton />
-      </Modal.Footer>
-    </form>
-  );
-});
+        </Modal.Body>
+        <Modal.Footer>
+          <SubmitButton block={false} submitting={submitting}>
+            {resolve.editUser ? translate('Save') : translate('Add')}
+          </SubmitButton>
+          <CloseDialogButton />
+        </Modal.Footer>
+      </form>
+    );
+  }),
+);

@@ -72,7 +72,7 @@ export const ProjectUsersBadge = (props: OwnProps) => {
     >
       {getProjectRoles().map((role) => (
         <UserRoleGroup
-          key={role.value}
+          key={role.name}
           role={role}
           users={users}
           max={props.max}

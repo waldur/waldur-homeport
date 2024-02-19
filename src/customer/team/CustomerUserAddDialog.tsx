@@ -10,6 +10,8 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { addCustomerUser } from '@waldur/permissions/api';
+import { Role } from '@waldur/permissions/types';
+import { ExpirationTimeGroup } from '@waldur/project/team/ExpirationTimeGroup';
 import { UserListOption } from '@waldur/project/team/UserGroup';
 import { showSuccess } from '@waldur/store/notify';
 import { getCurrentUser } from '@waldur/user/UsersService';
@@ -18,11 +20,10 @@ import { getCustomer, getUser } from '@waldur/workspace/selectors';
 import { User } from '@waldur/workspace/types';
 
 import { usersAutocomplete } from './api';
-import { OwnerExpirationTimeGroup } from './OwnerExpirationTimeGroup';
 
 interface CustomerUserAddFormData {
   user: User;
-  role: string;
+  role: Role;
   expiration_time: Date;
 }
 
@@ -43,7 +44,7 @@ export const CustomerUserAddDialog = reduxForm<
     await addCustomerUser({
       customer: customer.uuid,
       user: formData.user.uuid,
-      role: formData.role,
+      role: formData.role.name,
       expiration_time: formData.expiration_time,
     });
     if (currentUser.uuid === formData.user.uuid) {
@@ -74,7 +75,7 @@ export const CustomerUserAddDialog = reduxForm<
             required={true}
           />
           <CustomerRoleGroup />
-          <OwnerExpirationTimeGroup />
+          <ExpirationTimeGroup />
         </FormContainer>
       </Modal.Body>
       <Modal.Footer>
