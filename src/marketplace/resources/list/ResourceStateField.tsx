@@ -8,21 +8,25 @@ export const ResourceStateField = ({
 }: {
   resource: Resource;
   roundless?: boolean;
-}) => (
-  <StateIndicator
-    label={resource.backend_metadata?.runtime_state || resource.state}
-    variant={
-      resource.state === 'Erred'
-        ? 'danger'
-        : resource.state === 'Terminated'
-        ? 'warning'
-        : ['SHUTOFF', 'STOPPED', 'SUSPENDED'].includes(
-            resource.backend_metadata?.runtime_state,
-          )
-        ? 'secondary'
-        : 'primary'
-    }
-    active={['Creating', 'Updating', 'Terminating'].includes(resource.state)}
-    roundless={roundless}
-  />
-);
+}) => {
+  const runtimeState = resource.backend_metadata?.runtime_state;
+  const isActive =
+    ['Creating', 'Updating', 'Terminating'].includes(resource.state) ||
+    ['Creating', 'Updating', 'Deleting'].includes(runtimeState);
+  return (
+    <StateIndicator
+      label={runtimeState || resource.state}
+      variant={
+        resource.state === 'Erred'
+          ? 'danger'
+          : resource.state === 'Terminated'
+          ? 'warning'
+          : ['SHUTOFF', 'STOPPED', 'SUSPENDED'].includes(runtimeState)
+          ? 'secondary'
+          : 'primary'
+      }
+      active={isActive}
+      roundless={roundless}
+    />
+  );
+};
