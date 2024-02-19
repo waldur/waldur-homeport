@@ -25,7 +25,6 @@ export interface OfferingDetailsProps {
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
   const { state } = useCurrentStateAndParams();
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
-
   return (
     <div className="provider-offering">
       <OfferingDetailsHeader
@@ -63,7 +62,9 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
           </div>
         }
       />
-      <OfferingDetailsBar />
+      <OfferingDetailsBar
+        integrationStatus={props.offering.integration_status}
+      />
       {showExperimentalUiComponents && <OfferingDetailsStatistics />}
       <div className="container-xxl py-10">
         <OfferingTables
