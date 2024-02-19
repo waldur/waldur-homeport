@@ -10,11 +10,10 @@ export const ResourceStateField = ({
   roundless?: boolean;
 }) => {
   const runtimeState = resource.backend_metadata?.runtime_state;
+  const backendState = resource.backend_metadata?.state;
   const isActive =
     ['Creating', 'Updating', 'Terminating'].includes(resource.state) ||
-    ['Creating', 'Updating', 'Deleting'].includes(
-      resource.backend_metadata?.state,
-    );
+    (backendState && !['OK', 'Erred'].includes(backendState));
   return (
     <StateIndicator
       label={runtimeState || resource.state}
