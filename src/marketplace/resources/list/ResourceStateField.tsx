@@ -16,7 +16,7 @@ export const ResourceStateField = ({
     (backendState && !['OK', 'Erred'].includes(backendState));
   return (
     <StateIndicator
-      label={runtimeState || resource.state}
+      label={runtimeState || backendState || resource.state}
       variant={
         resource.state === 'Erred'
           ? 'danger'
