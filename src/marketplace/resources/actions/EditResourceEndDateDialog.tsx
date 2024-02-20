@@ -38,7 +38,7 @@ const PureEditResourceEndDateDialog: FunctionComponent<
   const submitRequest = async (formData: FormData) => {
     try {
       await props.resolve.updateEndDate(
-        props.resolve.resource.uuid,
+        props.resolve.resource.marketplace_resource_uuid,
         formData.end_date ? formatDate(formData.end_date) : null,
       );
       dispatch(

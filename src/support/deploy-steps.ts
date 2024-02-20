@@ -34,7 +34,11 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Final configuration'),
     id: 'step-final-configuration',
-    fields: ['attributes.name', 'attributes.description'],
+    fields: [
+      'attributes.name',
+      'attributes.description',
+      'attributes.end_date',
+    ],
     required: true,
     requiredFields: ['attributes.name'],
     component: FormFinalConfigurationStep,

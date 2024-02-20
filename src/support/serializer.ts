@@ -14,6 +14,7 @@ export const serializer = (attributes, offering) => {
   if (attributes) {
     payload.name = attributes.name;
     payload.description = attributes.description;
+    payload.end_date = attributes.end_date;
   }
   if (offering.options.order) {
     offering.options.order.forEach((key) => {

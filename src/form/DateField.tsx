@@ -7,15 +7,18 @@ import { translate } from '@waldur/i18n';
 
 export const DateField: FunctionComponent<any> = (props) => (
   <>
+    {props.label && <label>{props.label}</label>}
     <Flatpickr
       options={{
         dateFormat: 'Y-m-d',
         minDate: props.minDate,
+        maxDate: props.maxDate,
+        defaultDate: props.defaultDate,
       }}
       value={
         props.input.value && typeof props.input.value === 'string'
           ? DateTime.fromISO(props.input.value).toJSDate()
-          : props.input.value
+          : props.defaultDate
       }
       onChange={(value) =>
         props.input.onChange(

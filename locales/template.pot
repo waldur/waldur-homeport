@@ -2901,6 +2901,10 @@ msgstr ""
 msgid "Default offering issue type"
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+msgid "Default resource termination offset in days"
+msgstr ""
+
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Default tax percent"
 msgstr ""
@@ -5369,6 +5373,10 @@ msgstr ""
 msgid "Last {month} month"
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+msgid "Latest date for resource termination"
+msgstr ""
+
 #: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Latest review completion date"
@@ -5678,6 +5686,10 @@ msgstr ""
 
 #: src/openstack/openstack-backup-schedule/actions/fields.ts
 msgid "Maximal number of resources"
+msgstr ""
+
+#: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+msgid "Maximal resource termination offset in days"
 msgstr ""
 
 #: src/marketplace/offerings/update/options/OptionForm.tsx
@@ -9391,6 +9403,10 @@ msgstr ""
 msgid "Resource schedule is already deactivated."
 msgstr ""
 
+#: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
+msgid "Resource termination date is required"
+msgstr ""
+
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 msgid "Resource termination request has been submitted."
 msgstr ""
@@ -11469,6 +11485,7 @@ msgstr ""
 
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/details/EndDateField.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -11555,6 +11572,7 @@ msgstr ""
 msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
 msgstr ""
 
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 msgid "The date is inclusive. Once reached, resource will be scheduled for termination."
 msgstr ""

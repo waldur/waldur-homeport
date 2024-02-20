@@ -3,8 +3,14 @@ import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { FormSection, reduxForm, Field } from 'redux-form';
 
-import { FormContainer, StringField, SubmitButton } from '@waldur/form';
+import {
+  FormContainer,
+  NumberField,
+  StringField,
+  SubmitButton,
+} from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { updateOfferingIntegration } from '@waldur/marketplace/common/api';
 import {
@@ -82,22 +88,48 @@ export const EditIntegrationDialog = connect(
             {showBackendId(props.resolve.offering.type) && (
               <StringField name="backend_id" label={translate('Backend ID')} />
             )}
-            <FormSection name="plugin_options">
-              {PluginOptionsForm && (
-                <>
-                  <Field
-                    name="auto_approve_in_service_provider_projects"
-                    component={AwesomeCheckboxField}
-                    className="mt-3"
-                    label={translate(
-                      'Auto approve in service provider projects',
-                    )}
-                  />
-                  <PluginOptionsForm />
-                </>
-              )}
-            </FormSection>
           </FormContainer>
+          <FormSection name="plugin_options">
+            {PluginOptionsForm && (
+              <FormContainer {...props}>
+                <Field
+                  name="auto_approve_in_service_provider_projects"
+                  component={AwesomeCheckboxField}
+                  className="mt-3"
+                  label={translate('Auto approve in service provider projects')}
+                />
+                <Field
+                  name="is_resource_termination_date_required"
+                  component={AwesomeCheckboxField}
+                  className="mt-3"
+                  label={translate('Resource termination date is required')}
+                />
+                <Field
+                  name="default_resource_termination_offset_in_days"
+                  component={NumberField}
+                  label={translate(
+                    'Default resource termination offset in days',
+                  )}
+                  className="mt-3"
+                />
+                <Field
+                  name="max_resource_termination_offset_in_days"
+                  component={NumberField}
+                  className="mt-3"
+                  label={translate(
+                    'Maximal resource termination offset in days',
+                  )}
+                />
+                <Field
+                  name="latest_date_for_resource_termination"
+                  component={DateField}
+                  label={translate('Latest date for resource termination')}
+                  className="mt-3"
+                />
+                <PluginOptionsForm />
+              </FormContainer>
+            )}
+          </FormSection>
         </Modal.Body>
         <Modal.Footer>
           <SubmitButton
