@@ -4,17 +4,17 @@ import { ROLE_TYPES } from '@waldur/permissions/constants';
 import { RoleEnum } from './enums';
 import { RoleType } from './types';
 
-const getRoles = (type: string) =>
+export const getRoles = (types: RoleType[]) =>
   ENV.roles
     .filter(
       (role) =>
-        role.content_type === type && role.is_active && role.description,
+        types.includes(role.content_type) && role.is_active && role.description,
     )
-    .sort((a, b) => a.description.localeCompare(b.description));
+    .sort((a, b) => a.content_type.localeCompare(b.content_type));
 
-export const getProjectRoles = () => getRoles('project');
+export const getProjectRoles = () => getRoles(['project']);
 
-export const getCustomerRoles = () => getRoles('customer');
+export const getCustomerRoles = () => getRoles(['customer']);
 
 const ROLE_MAP = {
   owner: RoleEnum.CUSTOMER_OWNER,

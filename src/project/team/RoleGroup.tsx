@@ -1,22 +1,47 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
+import { OptionProps, components } from 'react-select';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { getProjectRoles } from '@waldur/permissions/utils';
+import { Role, RoleType } from '@waldur/permissions/types';
+import { getRoles } from '@waldur/permissions/utils';
 
-export const RoleGroup: FunctionComponent = () => (
-  <Form.Group>
+const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => (
+  <components.Option {...props}>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {props.data.description}
+      <span
+        style={{
+          alignSelf: 'center',
+          marginLeft: 'auto',
+        }}
+      >
+        {props.data.content_type === 'customer'
+          ? 'O'
+          : props.data.content_type === 'project'
+          ? 'P'
+          : ''}
+      </span>
+    </div>
+  </components.Option>
+);
+
+export const RoleGroup: FunctionComponent<{ types: RoleType[] }> = ({
+  types,
+}) => (
+  <Form.Group className="mb-7">
     <Form.Label>{translate('Role')}</Form.Label>
     <Field
       name="role"
       component={SelectField}
-      options={getProjectRoles()}
+      options={getRoles(types)}
       getOptionLabel={({ description }) => description}
       getOptionValue={({ name }) => name}
       validate={[required]}
+      components={{ Option: RoleOption }}
     />
   </Form.Group>
 );

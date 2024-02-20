@@ -7,23 +7,15 @@ import Avatar from '@waldur/core/Avatar';
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
 import { translate } from '@waldur/i18n';
-import { RoleEnum } from '@waldur/permissions/enums';
-import { formatRole } from '@waldur/permissions/utils';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable } from '@waldur/table';
 import { TableOptionsType } from '@waldur/table/types';
-import { CustomerRole } from '@waldur/user/dashboard/CustomerRole';
-import {
-  getProject,
-  isStaff as isStaffSelector,
-  getCustomer,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@waldur/workspace/selectors';
+import { RoleField } from '@waldur/user/affiliations/RoleField';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { fetchCustomerUsers } from './api';
-import { CustomerUserAddButton } from './CustomerUserAddButton';
 import { CustomerUserRowActions } from './CustomerUserRowActions';
-import { ProjectMemberAddButton } from './ProjectMemberAddButton';
+import { UserAddButton } from './UserAddButton';
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -58,8 +50,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => row.email || 'N/A',
         },
         {
-          title: formatRole(RoleEnum.CUSTOMER_OWNER),
-          render: CustomerRole,
+          title: translate('Role in organization'),
+          render: RoleField,
         },
       ]}
       verboseName={translate('team members')}
@@ -67,17 +59,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hoverableRow={({ row }) => (
         <CustomerUserRowActions row={row} refetch={props.fetch} />
       )}
-      expandableRow={CustomerUsersListExpandableRow}
-      actions={
-        <>
-          {props.isStaff ? (
-            <CustomerUserAddButton refetch={props.fetch} />
-          ) : null}
-          {props.isOwnerOrStaff ? (
-            <ProjectMemberAddButton refetch={props.fetch} />
-          ) : null}
-        </>
-      }
+      expandableRow={({ row }) => (
+        <CustomerUsersListExpandableRow row={row} refetch={props.fetch} />
+      )}
+      actions={<UserAddButton refetch={props.fetch} />}
     />
   );
 };
@@ -108,9 +93,6 @@ const TableOptions: TableOptionsType = {
 };
 
 const mapStateToProps = (state: RootState) => ({
-  project: getProject(state),
-  isStaff: isStaffSelector(state),
-  isOwnerOrStaff: isOwnerOrStaffSelector(state),
   customer: getCustomer(state),
   filter: getFormValues(CUSTOMER_USERS_LIST_FILTER_FORM_ID)(state),
 });

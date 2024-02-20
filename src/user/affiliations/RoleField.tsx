@@ -9,5 +9,5 @@ export const RoleField = ({ row }) =>
       {formatRole(row.role_name)}
     </Badge>
   ) : (
-    DASH_ESCAPE_CODE
+    <>{DASH_ESCAPE_CODE}</>
   );

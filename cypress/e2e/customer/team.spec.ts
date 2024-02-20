@@ -27,6 +27,9 @@ describe('Team', () => {
       .intercept('POST', `/api/customers/bf6d515c9e6e445f9c339021b30fc96b/delete_user/`, {})
       .as('deleteCustomerPermission')
 
+      .intercept('POST', `/api/customers/bf6d515c9e6e445f9c339021b30fc96b/update_user/`, {})
+      .as('updateCustomerPermission')
+
       .intercept('POST', '/api/projects/*/add_user/', {})
 
       .intercept('GET', '/api/users/a37feb500aa0445b8dd45ae43a48b6e5/', {
@@ -64,22 +67,21 @@ describe('Team', () => {
   it('Allows to edit permission', () => {
     cy.get('.btn-group button').contains('Edit').click({ force: true });
     cy.get('.modal-title')
-      .contains('Edit team member')
+      .contains('Edit customer member')
       .get('.modal-content')
-      .get('.checkbox')
-      .contains('Organization owner')
-      .click()
 
       // Open Role dropdown
-      .get('td.role-column input')
+      .get('label')
+      .contains('Role')
+      .next()
+      .get('[class*="-control"]')
       .first()
-      .click({ force: true })
-      .type('{enter}', {force: true})
-
+      .click(0, 0, { force: true })
+      
       .get('button')
       .contains('Save')
       .click()
 
-      .wait('@deleteCustomerPermission');
+      .wait('@updateCustomerPermission');
   });
 });

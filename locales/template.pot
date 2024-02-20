@@ -290,13 +290,12 @@ msgid "Activity"
 msgstr ""
 
 #: src/administration/providers/CreateProviderDialog.tsx
+#: src/customer/team/AddProjectUserButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/deploy/DeployPage.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 msgid "Add"
 msgstr ""
@@ -379,8 +378,7 @@ msgstr ""
 msgid "Add key"
 msgstr ""
 
-#: src/customer/team/ProjectMemberAddButton.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/customer/team/UserAddButton.tsx
 msgid "Add member"
 msgstr ""
 
@@ -410,14 +408,6 @@ msgstr ""
 msgid "Add organization"
 msgstr ""
 
-#: src/customer/team/CustomerUserAddButton.tsx
-msgid "Add organization member"
-msgstr ""
-
-#: src/customer/team/CustomerUserAddDialog.tsx
-msgid "Add organization role"
-msgstr ""
-
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 msgid "Add pair"
 msgstr ""
@@ -442,10 +432,6 @@ msgstr ""
 msgid "Add project"
 msgstr ""
 
-#: src/project/team/AddProjectMemberDialog.tsx
-msgid "Add project member"
-msgstr ""
-
 #: src/dashboard/marketplace.ts
 #: src/marketplace-flows/FlowCreateButton.tsx
 #: src/marketplace/details/DetailsPage.tsx
@@ -459,6 +445,7 @@ msgstr ""
 
 #: src/marketplace/offerings/update/roles/AddRoleButton.tsx
 #: src/marketplace/offerings/update/roles/AddRoleDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 msgid "Add role"
 msgstr ""
 
@@ -481,8 +468,8 @@ msgstr ""
 
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -1013,6 +1000,10 @@ msgstr ""
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
+msgstr ""
+
+#: src/customer/team/DeleteProjectUserButton.tsx
+msgid "Are you sure you want to remove {user} from {project}?"
 msgstr ""
 
 #: src/proposals/update/offerings/WizardFormThirdPage.tsx
@@ -1843,7 +1834,7 @@ msgstr ""
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 msgid "Civil number"
 msgstr ""
 
@@ -2109,6 +2100,7 @@ msgstr ""
 #: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -3403,6 +3395,7 @@ msgstr ""
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/EditProjectUserButton.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
@@ -3440,7 +3433,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/round/allocation/EditAllocationInfoButton.tsx
@@ -3484,6 +3477,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/components/EditComponentDialog.tsx
 msgid "Edit component"
+msgstr ""
+
+#: src/customer/team/EditUserDialog.tsx
+msgid "Edit customer member"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditVarsButton.tsx
@@ -3535,7 +3532,9 @@ msgstr ""
 msgid "Edit profile"
 msgstr ""
 
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 msgid "Edit project member"
 msgstr ""
 
@@ -3577,10 +3576,6 @@ msgstr ""
 msgid "Edit service provider details"
 msgstr ""
 
-#: src/customer/team/EditTeamMemberDialog.tsx
-msgid "Edit team member"
-msgstr ""
-
 #: src/administration/agreements/UserAgreementsEditDialog.tsx
 msgid "Edit user agreements"
 msgstr ""
@@ -3614,7 +3609,7 @@ msgstr ""
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -3969,7 +3964,7 @@ msgstr ""
 msgid "Existing quota usage: {usage}"
 msgstr ""
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
@@ -6460,7 +6455,7 @@ msgstr ""
 msgid "No projects"
 msgstr ""
 
-#: src/customer/team/ProjectRolesList.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 msgid "No projects are assigned to this user."
 msgstr ""
 
@@ -8170,6 +8165,7 @@ msgstr ""
 #: src/booking/deploy/steps.ts
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
+#: src/customer/team/ProjectGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
 #: src/issues/IssueSummary.tsx
@@ -8341,7 +8337,7 @@ msgstr ""
 msgid "Project is not selected."
 msgstr ""
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
@@ -8423,10 +8419,6 @@ msgstr ""
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
 msgid "Projects"
-msgstr ""
-
-#: src/customer/team/ProjectsListGroup.tsx
-msgid "Projects list"
 msgstr ""
 
 #: src/customer/payments/PaymentCreateDialog.tsx
@@ -8966,6 +8958,7 @@ msgstr ""
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -9658,8 +9651,7 @@ msgstr ""
 msgid "Robot accounts synchronization has been scheduled."
 msgstr ""
 
-#: src/customer/team/CustomerRoleGroup.tsx
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
@@ -9689,6 +9681,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/roles/DeleteRoleButton.tsx
 msgid "Role has been removed."
+msgstr ""
+
+#: src/customer/team/CustomerUsersList.tsx
+msgid "Role in organization"
 msgstr ""
 
 #: src/project/team/ProjectUsersList.tsx
@@ -9819,8 +9815,9 @@ msgstr ""
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/customer/organization-groups/utils.ts
-#: src/customer/team/CustomerUserAddDialog.tsx
-#: src/customer/team/EditTeamMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/customer/team/EditUserDialog.tsx
 #: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -9845,7 +9842,7 @@ msgstr ""
 #: src/notifications/ManageCommonFooterDialog.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 msgid "Save"
 msgstr ""
@@ -10309,12 +10306,10 @@ msgstr ""
 msgid "Select type..."
 msgstr ""
 
-#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/AddUserDialog.tsx
 msgid "Select user..."
 msgstr ""
 
@@ -10718,7 +10713,7 @@ msgstr ""
 msgid "Show user details"
 msgstr ""
 
-#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 msgid "Show users outside organization"
 msgstr ""
 
@@ -11378,6 +11373,7 @@ msgstr ""
 msgid "Team invitations"
 msgstr ""
 
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Team member has been removed."
@@ -11660,10 +11656,6 @@ msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "There are no actions."
-msgstr ""
-
-#: src/customer/team/ProjectsListGroup.tsx
-msgid "There are no available projects."
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -12140,7 +12132,7 @@ msgstr ""
 msgid "Unable to add role."
 msgstr ""
 
-#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 msgid "Unable to add user."
 msgstr ""
@@ -12394,6 +12386,7 @@ msgstr ""
 msgid "Unable to delete resource."
 msgstr ""
 
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Unable to delete team member."
@@ -13202,7 +13195,11 @@ msgstr ""
 msgid "Unable to update payment."
 msgstr ""
 
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/customer/team/EditUserDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 msgid "Unable to update permission."
 msgstr ""
 
@@ -13249,11 +13246,6 @@ msgstr ""
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 msgid "Unable to update the configurations."
-msgstr ""
-
-#: src/customer/team/EditTeamMemberDialog.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
-msgid "Unable to update user."
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx
@@ -13687,7 +13679,6 @@ msgstr ""
 msgid "Used by {count} resources"
 msgstr ""
 
-#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/UserGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
@@ -13701,7 +13692,7 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
@@ -13870,7 +13861,7 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/slurm/SlurmForm.tsx
@@ -14358,14 +14349,6 @@ msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 msgid "You can start filling this table by creating your first offering."
-msgstr ""
-
-#: src/customer/team/OwnerGroup.tsx
-msgid "You cannot change your own role."
-msgstr ""
-
-#: src/customer/team/OwnerGroup.tsx
-msgid "You cannot manage other {role}."
 msgstr ""
 
 #: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
@@ -15060,10 +15043,6 @@ msgstr ""
 
 #: src/table/TablePagination.tsx
 msgid "{from}-{to} of {all} items"
-msgstr ""
-
-#: src/customer/team/CustomerUsersListExpandableRow.tsx
-msgid "{label} in:"
 msgstr ""
 
 #: src/marketplace-checklist/useChecklist.tsx

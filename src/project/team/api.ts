@@ -10,7 +10,7 @@ export const customerUsersAutocomplete = async (
   currentPage: number,
 ) => {
   const params = {
-    o: 'full_name',
+    o: 'concatenated_name',
     ...query,
     page: currentPage,
     page_size: ENV.pageSize,
