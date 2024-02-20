@@ -217,6 +217,7 @@ msgstr "Aktiveringspris"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Aktiv"
@@ -561,7 +562,6 @@ msgstr "Svar er blevet indsendt"
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/utils.ts
 msgid "Any"
 msgstr "Nogen"
 
@@ -628,6 +628,7 @@ msgstr "Arkiv"
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "Arkiveret"
 
@@ -2243,6 +2244,7 @@ msgstr "Download ordre PDF-fil"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "Udkast"
 
@@ -2432,6 +2434,7 @@ msgstr "E-mail-bekræftelse er blevet sendt. Tjek venligst din indbakke."
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
+#: src/notifications/NotificationToggleButton.tsx
 msgid "Enable"
 msgstr "Aktiver"
 
@@ -4252,6 +4255,7 @@ msgstr "N/A"
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -4549,6 +4553,7 @@ msgstr "Bemærk, at denne diskenhed ikke opkræves separat for {organization}."
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
+#: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr "Intet at se her"
 
@@ -6801,6 +6806,7 @@ msgstr "Anmeldelser"
 msgid "Revoke"
 msgstr "Tilbagekald"
 
+#: src/customer/team/CustomerRoleGroup.tsx
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -6808,8 +6814,8 @@ msgstr "Tilbagekald"
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/marketplace/resources/users/AddUserDialog.tsx
 #: src/marketplace/resources/users/ResourceUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -6821,7 +6827,6 @@ msgstr "Tilbagekald"
 msgid "Role"
 msgstr "Rolle"
 
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
 msgid "Role expires on"
 msgstr "Rollen udløber den"
@@ -7270,6 +7275,7 @@ msgstr "Vælg nogle filer"
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Select state..."
 msgstr "Vælg tilstand..."
 
@@ -7756,6 +7762,8 @@ msgstr "Starter"
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
+#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -7780,6 +7788,7 @@ msgstr "Opdatering af statiske ruter var planlagt."
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx

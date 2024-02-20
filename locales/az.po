@@ -132,6 +132,7 @@ msgstr "Aktiv olunur"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Aktiv"
@@ -273,7 +274,6 @@ msgstr "Layihənin silinməsi zamanı xəta baş verdi."
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/utils.ts
 msgid "Any"
 msgstr "İstənilən"
 
@@ -1065,6 +1065,7 @@ msgstr "İnvoys yükləyin"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "Layihə "
 
@@ -2121,6 +2122,7 @@ msgstr "Yoxdur "
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -3149,6 +3151,7 @@ msgstr "Gündə saxlama müddəti, əgər 0 - resurs sonsuza qədər saxlanılac
 msgid "Retry"
 msgstr "Yenidən cəhd edin"
 
+#: src/customer/team/CustomerRoleGroup.tsx
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -3156,8 +3159,8 @@ msgstr "Yenidən cəhd edin"
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/marketplace/resources/users/AddUserDialog.tsx
 #: src/marketplace/resources/users/ResourceUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -3169,7 +3172,6 @@ msgstr "Yenidən cəhd edin"
 msgid "Role"
 msgstr "Vəzifə"
 
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
 msgid "Role expires on"
 msgstr "Vəzifə ______başa çatır"
@@ -3645,6 +3647,8 @@ msgstr "Başlanğıc"
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
+#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx

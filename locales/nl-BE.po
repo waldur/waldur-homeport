@@ -261,6 +261,7 @@ msgstr "Prijs voor activering"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Actief"
@@ -687,7 +688,6 @@ msgstr "Antwoorden werden ingediend"
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/utils.ts
 msgid "Any"
 msgstr "Enig"
 
@@ -770,6 +770,7 @@ msgstr "Archief"
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "Gearchiveerde"
 
@@ -1286,6 +1287,8 @@ msgstr "Kalender"
 #: src/proposals/details/PublicCallDetailsHero.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
+#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 msgid "Call"
 msgstr "Roepen"
 
@@ -2606,6 +2609,7 @@ msgid "Direction"
 msgstr "Richting"
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
 msgstr "Uitschakelen"
 
@@ -2755,6 +2759,7 @@ msgstr "Download bestelling PDF-bestand"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "Concept"
 
@@ -2989,6 +2994,7 @@ msgstr "Verificatie per e-mail is verzonden. Controleer uw inbox."
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
+#: src/notifications/NotificationToggleButton.tsx
 msgid "Enable"
 msgstr "Inschakelen"
 
@@ -4305,6 +4311,7 @@ msgstr "N.V.T"
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -4400,6 +4407,7 @@ msgstr "Niet aangemeld"
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
+#: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr "Niets te zien hier"
 
@@ -5021,6 +5029,7 @@ msgstr "Opnieuw"
 msgid "Reviews"
 msgstr "Beoordelingen"
 
+#: src/customer/team/CustomerRoleGroup.tsx
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -5028,8 +5037,8 @@ msgstr "Beoordelingen"
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/marketplace/resources/users/AddUserDialog.tsx
 #: src/marketplace/resources/users/ResourceUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -5373,6 +5382,8 @@ msgstr "aanvangstijd"
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
+#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -5393,6 +5404,7 @@ msgstr "Staat"
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -5852,7 +5864,7 @@ msgstr "Btw-tarief"
 msgid "Value"
 msgstr "Waarde"
 
-#: src/marketplace/offerings/OfferingEditButton.tsx
+#: src/user/proposals/ProposalsList.tsx
 msgid "View"
 msgstr "Bekijken"
 

@@ -298,6 +298,7 @@ msgstr "سعر التفعيل"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "نشيط"
@@ -922,7 +923,6 @@ msgstr "تم إرسال الإجابات"
 
 #: src/openstack/openstack-security-groups/rule-editor/ProtocolField.tsx
 #: src/openstack/openstack-security-groups/utils.ts
-#: src/user/support/utils.ts
 msgid "Any"
 msgstr "أي"
 
@@ -1052,6 +1052,7 @@ msgstr "خطة عرض الأرشيف"
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "المؤرشفه"
 
@@ -1774,6 +1775,8 @@ msgstr "تقويم"
 #: src/proposals/details/PublicCallDetailsHero.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
+#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 msgid "Call"
 msgstr "دعا"
 
@@ -3564,6 +3567,7 @@ msgid "Direction"
 msgstr "اتجاه"
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
+#: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
 msgstr "تعطيل"
 
@@ -3731,6 +3735,7 @@ msgstr "تحميل ملف الطلب بصيغة PDF"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "مسودة"
 
@@ -4054,6 +4059,7 @@ msgstr "رسائل البريد الإلكتروني"
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
+#: src/notifications/NotificationToggleButton.tsx
 msgid "Enable"
 msgstr "تمكين"
 
@@ -6805,6 +6811,7 @@ msgstr "N/A"
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -7321,6 +7328,7 @@ msgstr "لاحظ أنه لن يتم تحصيل هذا الحجم بشكل منف
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
+#: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr "لا شيء لنرى هنا"
 
@@ -9576,11 +9584,13 @@ msgid "Propagated"
 msgstr "نشر"
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
+#: src/user/proposals/ProposalsList.tsx
 msgid "Proposal"
 msgstr "عرض"
 
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/user/routes.ts
 msgid "Proposals"
 msgstr "اقتراحات"
 
@@ -10949,6 +10959,7 @@ msgstr "حسابات الروبوت"
 msgid "Robot accounts synchronization has been scheduled."
 msgstr "تمت جدولة مزامنة حسابات الروبوت."
 
+#: src/customer/team/CustomerRoleGroup.tsx
 #: src/customer/team/ProjectsListGroup.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -10956,8 +10967,8 @@ msgstr "تمت جدولة مزامنة حسابات الروبوت."
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/marketplace/resources/users/AddUserDialog.tsx
 #: src/marketplace/resources/users/ResourceUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/project/team/RoleGroup.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -10969,7 +10980,6 @@ msgstr "تمت جدولة مزامنة حسابات الروبوت."
 msgid "Role"
 msgstr "دور"
 
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/ExpirationTimeGroup.tsx
 msgid "Role expires on"
 msgstr "تنتهي صلاحية الدور في"
@@ -11636,6 +11646,7 @@ msgstr "حدد بعض الملفات"
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Select state..."
 msgstr "اختر ولايه..."
 
@@ -12464,6 +12475,8 @@ msgstr "البرنامج النصي لبدء التشغيل"
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
+#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -12488,6 +12501,7 @@ msgstr "تمت جدولة تحديث المسارات الثابتة."
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -16126,7 +16140,7 @@ msgstr "التحقق من تغيير البريد الإلكتروني"
 msgid "Version"
 msgstr "الإصدار"
 
-#: src/marketplace/offerings/OfferingEditButton.tsx
+#: src/user/proposals/ProposalsList.tsx
 msgid "View"
 msgstr "منظر"
 
