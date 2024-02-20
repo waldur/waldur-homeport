@@ -1,8 +1,10 @@
+import { uniqueId } from 'lodash';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { NotificationActions } from '@waldur/notifications/NotificationActions';
 import { NotificationExpandableRow } from '@waldur/notifications/NotificationExpandableRow';
@@ -60,13 +62,18 @@ export const NotificationList = () => {
           title: translate('Notification code'),
           render: ({ row }) => (
             <>
-              {hasOverriddenTemplate(row) ? (
-                <div>
-                  {row.key}{' '}
-                  <i className="fa fa-pencil" style={{ marginLeft: '5px' }} />
-                </div>
-              ) : (
-                row.key
+              {row.key}
+              {hasOverriddenTemplate(row) && (
+                <i className="fa fa-pencil" style={{ marginLeft: '5px' }} />
+              )}
+              {row.description && (
+                <Tip
+                  label={row.description}
+                  className="ms-2"
+                  id={uniqueId('descriptionTip')}
+                >
+                  <i className="fa fa-question-circle" />
+                </Tip>
               )}
             </>
           ),
