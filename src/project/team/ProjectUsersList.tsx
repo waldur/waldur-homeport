@@ -14,19 +14,17 @@ import {
   getProject,
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
-  getCustomer,
   isProjectManagerSelector,
 } from '@waldur/workspace/selectors';
 
-import { AddMemberButton } from './AddMemberButton';
 import { AddUserButton } from './AddUserButton';
+import { EditUserButton } from './EditUserButton';
 import { UserRemoveButton } from './UserRemoveButton';
 
 export const ProjectUsersList = () => {
   const user = useSelector(getUser);
   const project = useSelector(getProject);
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  const customer = useSelector(getCustomer);
   const isProjectManager = isProjectManagerSelector(user, project);
   const tableProps = useTable({
     table: 'project-users',
@@ -70,12 +68,7 @@ export const ProjectUsersList = () => {
             <UserDetailsButton userId={row.user_uuid} />
           ) : null}
           {isOwnerOrStaff ? (
-            <AddMemberButton
-              user={row}
-              project={project}
-              customer={customer}
-              refetch={tableProps.fetch}
-            />
+            <EditUserButton permission={row} refetch={tableProps.fetch} />
           ) : null}
           {isOwnerOrStaff || isProjectManager ? (
             <UserRemoveButton

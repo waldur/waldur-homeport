@@ -14,6 +14,8 @@ export const ProjectRoleSelectField: FunctionComponent = () => (
         value={prop.input.value}
         onChange={(value) => prop.input.onChange(value)}
         options={getProjectRoles()}
+        getOptionLabel={({ description }) => description}
+        getOptionValue={({ name }) => name}
         isClearable={true}
         isMulti={true}
       />

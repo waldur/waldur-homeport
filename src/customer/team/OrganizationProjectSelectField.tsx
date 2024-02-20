@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
+import { required } from '@waldur/core/validators';
 import { SelectField, FormGroup } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -13,7 +14,7 @@ export const OrganizationProjectSelectField = () => {
       name="project"
       label={translate('Project')}
       component={FormGroup}
-      required={true}
+      validate={[required]}
     >
       <SelectField
         options={currentCustomer?.projects}

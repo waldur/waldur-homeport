@@ -4,34 +4,47 @@ import { useDispatch, useSelector } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser, getCustomer } from '@waldur/workspace/selectors';
-import { User } from '@waldur/workspace/types';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
-const EditTeamMemberDialog = lazyComponent(
-  () => import('./EditTeamMemberDialog'),
-  'EditTeamMemberDialog',
+import { NestedCustomerPermission } from './types';
+
+const EditUserDialog = lazyComponent(
+  () => import('./EditUserDialog'),
+  'EditUserDialog',
 );
 
 interface UserEditButtonProps {
-  editUser: User;
+  customer: NestedCustomerPermission;
+  refetch;
 }
 
-export const UserEditButton: React.FC<UserEditButtonProps> = ({ editUser }) => {
-  const currentUser = useSelector(getUser);
-  const currentCustomer = useSelector(getCustomer);
+export const UserEditButton: React.FC<UserEditButtonProps> = ({
+  customer,
+  refetch,
+}) => {
   const dispatch = useDispatch();
+  const user = useSelector(getUser);
+  const currentCustomer = useSelector(getCustomer);
   const callback = () =>
     dispatch(
-      openModalDialog(EditTeamMemberDialog, {
+      openModalDialog(EditUserDialog, {
         resolve: {
-          currentCustomer,
-          currentUser,
-          editUser,
+          customer,
+          refetch,
         },
-        size: 'lg',
       }),
     );
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.UPDATE_CUSTOMER_PERMISSION,
+      customerId: currentCustomer.uuid,
+    })
+  ) {
+    return null;
+  }
   return (
     <ActionButton
       action={callback}

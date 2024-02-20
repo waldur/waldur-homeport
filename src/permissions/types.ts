@@ -28,6 +28,7 @@ export interface GenericPermission extends BasePermission {
   user_image: string;
   user_username: string;
   user_email: string;
+  user_uuid: string;
   user_full_name: string;
   customer_uuid: string;
   customer_name: string;
