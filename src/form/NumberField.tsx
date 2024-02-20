@@ -16,12 +16,15 @@ export const NumberField: FunctionComponent<NumberFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, parse, format, ...rest } = props;
   const control = (
-    <Form.Control
-      {...props.input}
-      className="form-control-solid"
-      type="number"
-      {...rest}
-    />
+    <>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control
+        {...props.input}
+        className="form-control-solid"
+        type="number"
+        {...rest}
+      />
+    </>
   );
   if (props.unit) {
     return (
