@@ -28,13 +28,11 @@ export const ConnectionStatusIndicator = ({ status }) => {
           <Tip
             key={i}
             id="backend-id"
-            label={translate(
-              `${status[i].agent_type} - ${
-                status[i].status
-              }. Last request: ${formatDateTime(
-                status[i].last_request_timestamp,
-              )}`,
-            )}
+            label={translate('{agent} - {status}. Last request: {time}', {
+              agent: status[i].agent_type,
+              status: status[i].status,
+              time: formatDateTime(status[i].last_request_timestamp),
+            })}
           >
             <i
               className={getStatusClassName(status[i])}

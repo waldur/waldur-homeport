@@ -11018,6 +11018,7 @@ msgstr ""
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesFilter.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/notifications/NotificationFilter.tsx
@@ -15001,6 +15002,10 @@ msgstr ""
 
 #: src/resource/actions/AsyncActionItem.tsx
 msgid "{action} has been scheduled for {resource}."
+msgstr ""
+
+#: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
+msgid "{agent} - {status}. Last request: {time}"
 msgstr ""
 
 #: src/marketplace/resources/list/ProjectResourcesContainer.tsx
