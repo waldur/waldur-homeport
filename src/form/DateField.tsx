@@ -7,7 +7,6 @@ import { translate } from '@waldur/i18n';
 
 export const DateField: FunctionComponent<any> = (props) => (
   <>
-    {props.label && <label>{props.label}</label>}
     <Flatpickr
       options={{
         dateFormat: 'Y-m-d',
