@@ -1310,6 +1310,10 @@ msgstr ""
 msgid "Backend metadata"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceSummary.tsx
+msgid "Backend sync"
+msgstr ""
+
 #: src/resource/state/constants.ts
 msgid "Backing up"
 msgstr ""
@@ -9735,6 +9739,7 @@ msgstr ""
 msgid "Running accounting"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
@@ -10770,6 +10775,18 @@ msgstr ""
 msgid "Shows monthly revenue split by organization."
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceSummary.tsx
+msgid "Shows state of a resource as reported by backend system."
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceSummary.tsx
+msgid "Shows state of synchronisation with accounting."
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceSummary.tsx
+msgid "Shows state of synchronisation with backend system."
+msgstr ""
+
 #: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Shows usage of resources reported by service providers by month."
 msgstr ""
@@ -10947,7 +10964,6 @@ msgstr ""
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -11257,6 +11273,10 @@ msgstr ""
 
 #: src/freeipa/SyncProfile.tsx
 msgid "Sync profile"
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceSummary.tsx
+msgid "Sync state"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/GoogleCalendarActions.tsx

@@ -8,7 +8,6 @@ import { Field } from '@waldur/resource/summary';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
 
 import { KeyValueButton } from '../KeyValueButton';
-import { ResourceStateField } from '../list/ResourceStateField';
 import { Resource } from '../types';
 
 export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
@@ -43,8 +42,23 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
     <Field label={translate('Effective ID')} value={resource.effective_id} />
     <Field label={translate('Plugin ID')} value={resource.resource_uuid} />
     <Field
-      label={translate('State')}
-      value={<ResourceStateField resource={resource} />}
+      label={translate('Sync state')}
+      value={resource.state}
+      helpText={translate('Shows state of synchronisation with accounting.')}
+    />
+    <Field
+      label={translate('Backend sync')}
+      value={resource.backend_metadata?.state}
+      helpText={translate(
+        'Shows state of synchronisation with backend system.',
+      )}
+    />
+    <Field
+      label={translate('Runtime state')}
+      value={resource.backend_metadata?.runtime_state}
+      helpText={translate(
+        'Shows state of a resource as reported by backend system.',
+      )}
     />
     {resource.attributes ? (
       <Field
