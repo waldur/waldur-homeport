@@ -1,5 +1,3 @@
-import { Col, Row } from 'react-bootstrap';
-
 import { translate } from '@waldur/i18n';
 import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
@@ -48,39 +46,33 @@ export const OpenStackInstanceSummary = (
 ) => {
   return (
     <>
-      <Row>
-        <Col xs={12} xl={6}>
-          <PureVirtualMachineSummary {...props} />
-        </Col>
-        <Col xs={12} xl={6}>
-          <Field
-            label={translate('Security groups')}
-            value={formatSecurityGroups(props)}
-            valueClass="text-decoration-underline"
-          />
-          <Field
-            label={translate('Availability zone')}
-            value={props.resource.availability_zone_name}
-          />
-          <Field
-            label={translate('Hypervisor')}
-            value={props.resource.hypervisor_hostname}
-          />
-          {props.resource.rancher_cluster && (
-            <Field
-              label={translate('Rancher cluster')}
-              value={
-                <ResourceLink
-                  type="Rancher.Cluster"
-                  uuid={props.resource.rancher_cluster.uuid}
-                  project={props.resource.project_uuid}
-                  label={props.resource.rancher_cluster.name}
-                />
-              }
+      <PureVirtualMachineSummary {...props} />
+      <Field
+        label={translate('Security groups')}
+        value={formatSecurityGroups(props)}
+        valueClass="text-decoration-underline"
+      />
+      <Field
+        label={translate('Availability zone')}
+        value={props.resource.availability_zone_name}
+      />
+      <Field
+        label={translate('Hypervisor')}
+        value={props.resource.hypervisor_hostname}
+      />
+      {props.resource.rancher_cluster && (
+        <Field
+          label={translate('Rancher cluster')}
+          value={
+            <ResourceLink
+              type="Rancher.Cluster"
+              uuid={props.resource.rancher_cluster.uuid}
+              project={props.resource.project_uuid}
+              label={props.resource.rancher_cluster.name}
             />
-          )}
-        </Col>
-      </Row>
+          }
+        />
+      )}
 
       {props.resource?.volumes?.length > 0 && (
         <Field
