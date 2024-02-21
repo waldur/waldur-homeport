@@ -31,24 +31,6 @@ export interface ProposalCallRound {
   url: string;
 }
 
-export interface ProposalCallReviewer {
-  url: string;
-  uuid: string;
-  user: string;
-  user_full_name: string;
-  user_native_name: string;
-  user_username: string;
-  user_uuid: string;
-  user_email: string;
-  created: string;
-  created_by: string;
-  created_by_full_name: string;
-  created_by_native_name: string;
-  created_by_username: string;
-  created_by_uuid: string;
-  created_by_email: string;
-}
-
 export interface ProposalCall {
   url: string;
   uuid: string;
@@ -67,7 +49,6 @@ export interface ProposalCall {
   created_by: string;
   offerings: Offering[];
   rounds: ProposalCallRound[];
-  reviewers: ProposalCallReviewer[];
 }
 
 export interface CallRoundFormData {

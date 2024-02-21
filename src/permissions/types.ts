@@ -1,4 +1,4 @@
-export type RoleType = 'customer' | 'project' | 'offering';
+export type RoleType = 'customer' | 'project' | 'offering' | 'call';
 
 export interface Role {
   uuid: string;

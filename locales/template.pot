@@ -1547,6 +1547,7 @@ msgstr ""
 msgid "Calendar"
 msgstr ""
 
+#: src/permissions/constants.tsx
 #: src/proposals/details/PublicCallDetailsHero.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
