@@ -1498,6 +1498,10 @@ msgstr ""
 msgid "Business hours"
 msgstr ""
 
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
+msgid "By"
+msgstr ""
+
 #: src/auth/UserAuthWarning.tsx
 msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr ""
@@ -1538,7 +1542,6 @@ msgid "Calendar"
 msgstr ""
 
 #: src/proposals/details/PublicCallDetailsHero.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -10977,6 +10980,7 @@ msgstr ""
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -11019,7 +11023,6 @@ msgstr ""
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
