@@ -9,6 +9,7 @@ import { RoleField } from '@waldur/user/affiliations/RoleField';
 
 import { AddUserButton } from './AddUserButton';
 import { CallReviewersTablePlaceholder } from './CallReviewersTablePlaceholder';
+import { UserRemoveButton } from './UserRemoveButton';
 
 interface CallReviewersSectionProps {
   call: ProposalCall;
@@ -50,6 +51,13 @@ export const CallReviewersSection: FC<CallReviewersSectionProps> = (props) => {
       title={translate('Reviewers')}
       verboseName={translate('Reviewers')}
       actions={<AddUserButton refetch={tableProps.fetch} call={props.call} />}
+      hoverableRow={({ row }) => (
+        <UserRemoveButton
+          permission={row}
+          refetch={tableProps.fetch}
+          call={props.call}
+        />
+      )}
     />
   );
 };

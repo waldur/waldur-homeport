@@ -1001,6 +1001,7 @@ msgstr ""
 
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
 msgstr ""
 
@@ -2128,6 +2129,7 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -8982,6 +8984,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -11404,6 +11407,7 @@ msgstr ""
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Team member has been removed."
 msgstr ""
 
@@ -12418,6 +12422,7 @@ msgstr ""
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Unable to delete team member."
 msgstr ""
 
