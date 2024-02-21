@@ -470,6 +470,8 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddUserButton.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserButton.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -3453,7 +3455,6 @@ msgstr ""
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -9667,6 +9668,7 @@ msgstr ""
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -9852,6 +9854,7 @@ msgstr ""
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Save"
 msgstr ""
 
@@ -10318,6 +10321,7 @@ msgstr ""
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Select user..."
 msgstr ""
 
@@ -12156,6 +12160,7 @@ msgid "Unable to add role."
 msgstr ""
 
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 msgid "Unable to add user."
 msgstr ""
@@ -13717,6 +13722,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
 msgstr ""
@@ -14400,10 +14406,6 @@ msgstr ""
 
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "You don't have permission to send this invitation."
-msgstr ""
-
-#: src/project/team/UserRemoveButton.tsx
-msgid "You don't have permissions to delete this user."
 msgstr ""
 
 #: src/modal/ModalRoot.tsx
