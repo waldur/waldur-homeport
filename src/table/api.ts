@@ -27,7 +27,11 @@ export const parseResponse = (url, params, options?: AxiosRequestConfig) =>
   }).then((response: AxiosResponse<any>) => {
     const resultCount = parseResultCount(response);
     return {
-      rows: Array.isArray(response.data) ? response.data : [],
+      rows: Array.isArray(response.data)
+        ? response.data
+        : Array.isArray(response.data.proposals)
+        ? response.data.proposals
+        : [],
       resultCount,
       nextPage: getNextPageNumber(getNextPageUrl(response)),
     };

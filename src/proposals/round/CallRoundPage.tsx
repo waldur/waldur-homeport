@@ -67,7 +67,10 @@ export const CallRoundPage: FunctionComponent = () => {
         <RoundPageHero round={round} call={call} />
         <RoundPageBar />
         <div className="container-xxl py-10">
-          <RoundProposalsSection round={round} />
+          <RoundProposalsSection
+            round_uuid={round.uuid}
+            call_uuid={call.uuid}
+          />
           <RoundSubmissionSection
             round={round}
             call={call}
