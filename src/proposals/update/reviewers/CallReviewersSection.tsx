@@ -1,12 +1,14 @@
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { ProposalCall, ProposalCallReviewer } from '@waldur/proposals/types';
+import { GenericPermission } from '@waldur/permissions/types';
+import { ProposalCall } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
+import { RoleField } from '@waldur/user/affiliations/RoleField';
 
+import { AddUserButton } from './AddUserButton';
 import { CallReviewersTablePlaceholder } from './CallReviewersTablePlaceholder';
-import { EditReviewersButton } from './EditReviewersButton';
 
 interface CallReviewersSectionProps {
   call: ProposalCall;
@@ -21,24 +23,33 @@ export const CallReviewersSection: FC<CallReviewersSectionProps> = (props) => {
   });
 
   return (
-    <Table<ProposalCallReviewer>
+    <Table<GenericPermission>
       {...tableProps}
       id="reviewers"
       className="mb-7"
-      placeholderComponent={<CallReviewersTablePlaceholder />}
+      placeholderComponent={
+        <CallReviewersTablePlaceholder
+          refetch={tableProps.fetch}
+          call={props.call}
+        />
+      }
       columns={[
         {
           title: translate('Reviewer'),
-          render: ({ row }) => <>{row.user_full_name}</>,
+          render: ({ row }) => <>{row.user_full_name || row.user_username}</>,
         },
         {
           title: translate('Email'),
           render: ({ row }) => <>{row.user_email}</>,
         },
+        {
+          title: translate('Role'),
+          render: RoleField,
+        },
       ]}
       title={translate('Reviewers')}
       verboseName={translate('Reviewers')}
-      actions={<EditReviewersButton />}
+      actions={<AddUserButton refetch={tableProps.fetch} call={props.call} />}
     />
   );
 };
