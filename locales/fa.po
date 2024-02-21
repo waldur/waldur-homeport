@@ -182,13 +182,12 @@ msgid "Activity stream"
 msgstr "جریان فعالیت"
 
 #: src/administration/providers/CreateProviderDialog.tsx
+#: src/customer/team/AddProjectUserButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/deploy/DeployPage.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 msgid "Add"
 msgstr "اضافه کردن"
@@ -224,8 +223,7 @@ msgstr "اضافه کردن مورد"
 msgid "Add key"
 msgstr "اضافه کردن کلید"
 
-#: src/customer/team/ProjectMemberAddButton.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/customer/team/UserAddButton.tsx
 msgid "Add member"
 msgstr "اضافه کردن عضو"
 
@@ -1101,6 +1099,7 @@ msgstr "حذف را تایید میکنید؟"
 #: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -1802,6 +1801,7 @@ msgstr "برای اطمینان از محاسبه صحیح داده های حس�
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/EditProjectUserButton.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
@@ -1839,7 +1839,7 @@ msgstr "برای اطمینان از محاسبه صحیح داده های حس�
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/round/allocation/EditAllocationInfoButton.tsx
@@ -1868,7 +1868,9 @@ msgstr "ویرایش دسترسی"
 msgid "Edit booking event"
 msgstr "ویرایش رویداد رزرو"
 
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 msgid "Edit project member"
 msgstr "ویرایش اعضا پروژه"
 
@@ -1888,7 +1890,7 @@ msgstr "ویرایش اعضا گروه"
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -2106,7 +2108,7 @@ msgstr "استفاده از quota موجود{usage}"
 msgid "Expand"
 msgstr "توسعه دادن"
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx

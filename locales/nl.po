@@ -240,13 +240,12 @@ msgid "Activity stream"
 msgstr "Activiteitenstroom"
 
 #: src/administration/providers/CreateProviderDialog.tsx
+#: src/customer/team/AddProjectUserButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/deploy/DeployPage.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 msgid "Add"
 msgstr "Toevoegen"
@@ -295,8 +294,7 @@ msgstr "Artikel toevoegen"
 msgid "Add key"
 msgstr "Sleutel toevoegen"
 
-#: src/customer/team/ProjectMemberAddButton.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/customer/team/UserAddButton.tsx
 msgid "Add member"
 msgstr "Lid toevoegen"
 
@@ -403,8 +401,8 @@ msgstr "Toevoegen aan vergelijking"
 
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -1251,7 +1249,7 @@ msgstr "Keuzes als door komma's gescheiden lijst"
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 msgid "Civil number"
 msgstr "Burgerlijk nummer"
 
@@ -1438,6 +1436,7 @@ msgstr "Verwijdering bevestigen?"
 #: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -2289,6 +2288,7 @@ msgstr "Elk gebruiksrapport moet gekoppeld zijn aan een factureringsplan om een 
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/EditProjectUserButton.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
@@ -2326,7 +2326,7 @@ msgstr "Elk gebruiksrapport moet gekoppeld zijn aan een factureringsplan om een 
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/round/allocation/EditAllocationInfoButton.tsx
@@ -2380,7 +2380,9 @@ msgstr "Aanbod bewerken"
 msgid "Edit permissions"
 msgstr "Machtigingen bewerken"
 
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 msgid "Edit project member"
 msgstr "Projectlid bewerken"
 
@@ -2405,7 +2407,7 @@ msgstr "Uitgaand"
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -2679,7 +2681,7 @@ msgstr "Bestaand quotagebruik: {usage}"
 msgid "Expand"
 msgstr "Uitbreiden"
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
@@ -4471,7 +4473,7 @@ msgstr "Geen organisaties"
 msgid "No projects"
 msgstr "Geen projecten"
 
-#: src/customer/team/ProjectRolesList.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 msgid "No projects are assigned to this user."
 msgstr "Er zijn geen projecten toegewezen aan deze gebruiker."
 
@@ -5744,6 +5746,7 @@ msgstr "Privé wolken"
 #: src/booking/deploy/steps.ts
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
+#: src/customer/team/ProjectGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
 #: src/issues/IssueSummary.tsx
@@ -5857,7 +5860,7 @@ msgstr "Projectmanager"
 msgid "Project member"
 msgstr "Projectlid"
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
@@ -6320,6 +6323,7 @@ msgstr "Externe beveiligingsgroep"
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -6794,8 +6798,7 @@ msgstr "Beoordelingen"
 msgid "Revoke"
 msgstr "Intrekken"
 
-#: src/customer/team/CustomerRoleGroup.tsx
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
@@ -6935,8 +6938,9 @@ msgstr "Sankey diagram"
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/customer/organization-groups/utils.ts
-#: src/customer/team/CustomerUserAddDialog.tsx
-#: src/customer/team/EditTeamMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/customer/team/EditUserDialog.tsx
 #: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -6961,7 +6965,7 @@ msgstr "Sankey diagram"
 #: src/notifications/ManageCommonFooterDialog.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 msgid "Save"
 msgstr "Opslaan"
@@ -7296,12 +7300,10 @@ msgstr "Selecteer huurders..."
 msgid "Select type..."
 msgstr "Selecteer type..."
 
-#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/AddUserDialog.tsx
 msgid "Select user..."
 msgstr "Selecteer gebruiker..."
 
@@ -7770,6 +7772,7 @@ msgstr "Statische routes update was gepland."
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesFilter.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/notifications/NotificationFilter.tsx
@@ -8069,6 +8072,7 @@ msgstr "Belastingpercentage"
 msgid "Team"
 msgstr "Team"
 
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Team member has been removed."
@@ -8609,7 +8613,7 @@ msgstr "Kan afbeelding niet toevoegen."
 msgid "Unable to add item to shopping cart."
 msgstr "Kan artikel niet toevoegen aan winkelmandje."
 
-#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 msgid "Unable to add user."
 msgstr "Kan gebruiker niet toevoegen."
@@ -8798,6 +8802,7 @@ msgstr "Kan betaling niet verwijderen."
 msgid "Unable to delete resource."
 msgstr "Kan hulpbron niet verwijderen."
 
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Unable to delete team member."
@@ -9669,7 +9674,6 @@ msgstr "Gebruik sudo"
 msgid "Used in the period {period} by:"
 msgstr "Gebruikt in de periode {period} door:"
 
-#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/UserGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
@@ -9683,7 +9687,7 @@ msgstr "Gebruikt in de periode {period} door:"
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
@@ -9836,7 +9840,7 @@ msgstr "Gebruiker {user_link} succesvol uitgelogd met SAML2."
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/slurm/SlurmForm.tsx

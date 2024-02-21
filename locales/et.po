@@ -346,13 +346,12 @@ msgid "Activity stream"
 msgstr "Aktiivsuse voog"
 
 #: src/administration/providers/CreateProviderDialog.tsx
+#: src/customer/team/AddProjectUserButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/deploy/DeployPage.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 msgid "Add"
 msgstr "Lisa"
@@ -443,8 +442,7 @@ msgstr "Lisa element"
 msgid "Add key"
 msgstr "Lisa võti"
 
-#: src/customer/team/ProjectMemberAddButton.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/customer/team/UserAddButton.tsx
 msgid "Add member"
 msgstr "Lisa liige"
 
@@ -581,8 +579,8 @@ msgstr "Lisa võrdlusse"
 
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -2077,7 +2075,7 @@ msgstr "Valikud komadega eraldatud nimekirjana"
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 msgid "Civil number"
 msgstr "Isikukood"
 
@@ -2380,6 +2378,7 @@ msgstr "Kinnita kustutamine?"
 #: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -3798,6 +3797,7 @@ msgstr "Iga kasutusaruanne peab olema ühendatud arveldusplaaniga, et tagada raa
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/EditProjectUserButton.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
@@ -3835,7 +3835,7 @@ msgstr "Iga kasutusaruanne peab olema ühendatud arveldusplaaniga, et tagada raa
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/round/allocation/EditAllocationInfoButton.tsx
@@ -3955,7 +3955,9 @@ msgstr "Muuda järgmise kuu hindu"
 msgid "Edit profile"
 msgstr "Muuda profiili"
 
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 msgid "Edit project member"
 msgstr "Muuda projekti liiget"
 
@@ -4022,7 +4024,7 @@ msgstr "Egress"
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -4401,7 +4403,7 @@ msgstr "Hetke mahulimiidi kasutus: {usage}"
 msgid "Expand"
 msgstr "Laienda"
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
@@ -7211,7 +7213,7 @@ msgstr "Projekt puudub"
 msgid "No projects"
 msgstr "Projektid puuduvad"
 
-#: src/customer/team/ProjectRolesList.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 msgid "No projects are assigned to this user."
 msgstr "Sellele kasutajale pole määratud ühtegi projekti."
 
@@ -9280,6 +9282,7 @@ msgstr "Edusammud"
 #: src/booking/deploy/steps.ts
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
+#: src/customer/team/ProjectGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
 #: src/issues/IssueSummary.tsx
@@ -9464,7 +9467,7 @@ msgstr "Projektihaldur"
 msgid "Project member"
 msgstr "Projekti liige"
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
@@ -10184,6 +10187,7 @@ msgstr "Kaugkasutaja ID"
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -10959,8 +10963,7 @@ msgstr "Robotkontod"
 msgid "Robot accounts synchronization has been scheduled."
 msgstr "Robotikontode sünkroonimine on ajastatud."
 
-#: src/customer/team/CustomerRoleGroup.tsx
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
@@ -11144,8 +11147,9 @@ msgstr "Rahuloluvälja nimi"
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/customer/organization-groups/utils.ts
-#: src/customer/team/CustomerUserAddDialog.tsx
-#: src/customer/team/EditTeamMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/customer/team/EditUserDialog.tsx
 #: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -11170,7 +11174,7 @@ msgstr "Rahuloluvälja nimi"
 #: src/notifications/ManageCommonFooterDialog.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 msgid "Save"
 msgstr "Salvesta"
@@ -11692,12 +11696,10 @@ msgstr "Valige tüüp"
 msgid "Select type..."
 msgstr "Vali tüüp..."
 
-#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/AddUserDialog.tsx
 msgid "Select user..."
 msgstr "Valige kasutaja..."
 
@@ -12495,6 +12497,7 @@ msgstr "Staatiliste marsruutide värskendus oli ajastatud."
 #: src/issues/IssueSummary.tsx
 #: src/issues/list/IssuesFilter.tsx
 #: src/issues/list/IssuesList.tsx
+#: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/notifications/NotificationFilter.tsx
@@ -12896,6 +12899,7 @@ msgstr "Meeskond"
 msgid "Team invitations"
 msgstr "Meeskonna kutsed"
 
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Team member has been removed."
@@ -13012,6 +13016,7 @@ msgstr "Lõpetamine"
 
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 #: src/marketplace/resources/details/EndDateField.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -13110,6 +13115,7 @@ msgstr "Kategooriat on värskendatud."
 msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
 msgstr "Pärast märgitud kuupäeva määratakse kõik projektiressursid tühistamisele."
 
+#: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/resources/actions/EditResourceEndDateDialog.tsx
 msgid "The date is inclusive. Once reached, resource will be scheduled for termination."
 msgstr "Pärast märgitud kuupäeva määratakse kõik projektiressursid tühistamisele."
@@ -13768,7 +13774,7 @@ msgstr "Kaupa ei saa ostukorvi lisada."
 msgid "Unable to add option."
 msgstr "Valikut ei saa lisada."
 
-#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 msgid "Unable to add user."
 msgstr "Kasutajat ei saa lisada."
@@ -14052,6 +14058,7 @@ msgstr "Makse kustutamine ebaõnnestus."
 msgid "Unable to delete resource."
 msgstr "Ressursi ei saa kustutada."
 
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 msgid "Unable to delete team member."
@@ -14966,7 +14973,11 @@ msgstr "Makse värskendamine ebaõnnestus."
 msgid "Unable to update payment profile."
 msgstr "Makseprofiili ei saa uuendada."
 
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/customer/team/EditUserDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 msgid "Unable to update permission."
 msgstr "Õigusi ei saa värskendada."
 
@@ -15519,7 +15530,6 @@ msgstr "Kasutatud{count} ressursse"
 msgid "Used in the period {period} by:"
 msgstr "Kasutatud perioodil{period} kõrval:"
 
-#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/UserGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
@@ -15533,7 +15543,7 @@ msgstr "Kasutatud perioodil{period} kõrval:"
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
@@ -15905,7 +15915,7 @@ msgstr "Kasutaja{user_link} õnnestus SAML2-ga välja logida."
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/slurm/SlurmForm.tsx

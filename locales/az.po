@@ -142,13 +142,12 @@ msgid "Activity stream"
 msgstr "Aktivlik lenti"
 
 #: src/administration/providers/CreateProviderDialog.tsx
+#: src/customer/team/AddProjectUserButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
 #: src/marketplace/deploy/DeployPage.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx
 #: src/openstack/openstack-instance/deploy/FormNetworkStep.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 msgid "Add"
 msgstr "Əlavə edin"
@@ -175,8 +174,7 @@ msgstr "Bənd əlavə edin"
 msgid "Add key"
 msgstr "Açar əlavə edin"
 
-#: src/customer/team/ProjectMemberAddButton.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/customer/team/UserAddButton.tsx
 msgid "Add member"
 msgstr "Üzv əlavə edin"
 
@@ -216,8 +214,8 @@ msgstr "Qayda əlavə edin"
 
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
-#: src/project/team/AddProjectUserDialog.tsx
 #: src/project/team/AddUserButton.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -532,7 +530,7 @@ msgstr "Şifrəni dəyişin"
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 msgid "Civil number"
 msgstr "Mülki nömrə "
 
@@ -1094,6 +1092,7 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
+#: src/customer/team/EditProjectUserButton.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
@@ -1131,7 +1130,7 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
-#: src/project/team/AddMemberButton.tsx
+#: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/round/allocation/EditAllocationInfoButton.tsx
@@ -1152,7 +1151,9 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 msgid "Edit"
 msgstr "Redaktə etmək "
 
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 msgid "Edit project member"
 msgstr "Layihə üzvünü redaktə etmək"
 
@@ -1172,7 +1173,7 @@ msgstr "Heyət üzvünü redaktə etmək"
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -1298,7 +1299,7 @@ msgstr "Excel "
 msgid "Existing quota usage: {usage}"
 msgstr "Mövcud kvota istifadəsi: {usage}"
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
@@ -2644,6 +2645,7 @@ msgstr "Özəl buludlar"
 #: src/booking/deploy/steps.ts
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
+#: src/customer/team/ProjectGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/ProjectGroup.tsx
 #: src/issues/IssueSummary.tsx
@@ -2741,7 +2743,7 @@ msgstr "Layihə yeniləndi."
 msgid "Project manager"
 msgstr "Layihə meneceri"
 
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
@@ -2950,6 +2952,7 @@ msgstr "Uzaq CIDR (sinifsiz domenlərarası marşrutlama)"
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
@@ -3151,8 +3154,7 @@ msgstr "Gündə saxlama müddəti, əgər 0 - resurs sonsuza qədər saxlanılac
 msgid "Retry"
 msgstr "Yenidən cəhd edin"
 
-#: src/customer/team/CustomerRoleGroup.tsx
-#: src/customer/team/ProjectsListGroup.tsx
+#: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/RoleGroup.tsx
@@ -3239,8 +3241,9 @@ msgstr "“Sankey” diaqramı"
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/customer/organization-groups/utils.ts
-#: src/customer/team/CustomerUserAddDialog.tsx
-#: src/customer/team/EditTeamMemberDialog.tsx
+#: src/customer/team/AddProjectUserDialog.tsx
+#: src/customer/team/EditProjectUserDialog.tsx
+#: src/customer/team/EditUserDialog.tsx
 #: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -3265,7 +3268,7 @@ msgstr "“Sankey” diaqramı"
 #: src/notifications/ManageCommonFooterDialog.tsx
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
-#: src/project/team/AddProjectMemberDialog.tsx
+#: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 msgid "Save"
 msgstr "Yaddaşda saxlamaq"
@@ -3393,12 +3396,10 @@ msgstr "Alt şəbəkəni seçin"
 msgid "Select subnets to connect to..."
 msgstr "____qoşulmaq üçün alt şəbəkələri seçin ..."
 
-#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/issues/feedback/UserAutocomplete.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
-#: src/project/team/AddProjectUserDialog.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/AddUserDialog.tsx
 msgid "Select user..."
 msgstr "İstifadəçini seçin ..."
 
@@ -4255,7 +4256,6 @@ msgstr "İstifadənin ümumi baxışı"
 msgid "Use sudo"
 msgstr "“Sudo”  istifadə edin"
 
-#: src/customer/team/CustomerUserAddDialog.tsx
 #: src/customer/team/UserGroup.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
@@ -4269,7 +4269,7 @@ msgstr "“Sudo”  istifadə edin"
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderOfferingUsersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
-#: src/project/team/AddProjectUserDialog.tsx
+#: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
@@ -4398,7 +4398,7 @@ msgstr "{user_link} istifadəçi {affected_user_link} ləğv etmşdir."
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/project/team/UserGroup.tsx
+#: src/project/team/UserListOption.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/slurm/SlurmForm.tsx
