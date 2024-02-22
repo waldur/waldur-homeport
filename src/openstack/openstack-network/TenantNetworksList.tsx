@@ -49,6 +49,24 @@ const TableOptions = {
   fetchData: createFetcher('openstack-networks'),
   mapPropsToFilter: (props) => ({
     tenant_uuid: props.resource.uuid,
+    field: [
+      'uuid',
+      'url',
+      'name',
+      'description',
+      'created',
+      'is_external',
+      'type',
+      'subnets',
+      'state',
+      'error_message',
+      'resource_type',
+      'service_name',
+      'service_settings',
+      'service_settings_uuid',
+      'service_settings_state',
+      'service_settings_error_message',
+    ],
   }),
 };
 
