@@ -1,11 +1,15 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { CallAllFilters } from '@waldur/proposals/call-management/CallAllFilters';
+import { CALL_FILTER_FORM_ID } from '@waldur/proposals/constants';
 import { ProposalCall } from '@waldur/proposals/types';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -14,9 +18,26 @@ import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
 import { CallManagementTablePlaceholder } from './CallManagementTablePlaceholder';
 
+const mapPropsToFilter = createSelector(
+  getCustomer,
+  getFormValues(CALL_FILTER_FORM_ID),
+  (customer, filters: any) => {
+    const result: Record<string, any> = {};
+    if (customer) {
+      result.customer_uuid = customer.uuid;
+    }
+
+    if (filters) {
+      if (filters.state) {
+        result.state = filters.state.map((option) => option.value);
+      }
+    }
+    return result;
+  },
+);
+
 export const CallManagementPage: FunctionComponent = () => {
-  const customer = useSelector(getCustomer);
-  const filter = useMemo(() => ({ customer_uuid: customer.uuid }), [customer]);
+  const filter = useSelector(mapPropsToFilter);
   const tableProps = useTable({
     table: 'CallManagementList',
     fetchData: createFetcher('proposal-protected-calls'),
@@ -57,6 +78,7 @@ export const CallManagementPage: FunctionComponent = () => {
       actions={<CallCreateButton refetch={tableProps.fetch} />}
       placeholderComponent={<CallManagementTablePlaceholder />}
       expandableRow={CallExpandableRow}
+      filters={<CallAllFilters />}
     />
   );
 };
