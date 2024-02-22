@@ -50,7 +50,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       quickBody={<ProposalCallQuotas call={call} />}
       quickFooterClassName="justify-content-center"
     >
-      <CallUpdateHeaderBody call={call} />
+      {call.state !== 'Archived' && <CallUpdateHeaderBody call={call} />}
     </PublicDashboardHero>
   );
 };

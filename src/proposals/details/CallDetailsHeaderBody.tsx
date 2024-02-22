@@ -15,7 +15,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
     <>
       <p>{props.call.description}</p>
       <p>
-        {translate('Next round ends in')}:{' '}
+        {translate('Open round ends in')}:{' '}
         <span className="text-danger">{formatRelative(nextRoundDate)}</span>
       </p>
     </>
