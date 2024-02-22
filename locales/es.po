@@ -581,6 +581,8 @@ msgstr "Añadir a la comparación"
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddUserButton.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserButton.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -1180,6 +1182,7 @@ msgstr "¿Está seguro de que quiere eliminar el artículo de la factura {name}?
 
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
 msgstr "¿Está seguro de que desea eliminar {userName}?"
 
@@ -1770,8 +1773,8 @@ msgstr "CSV"
 msgid "Calendar"
 msgstr "Calendario"
 
+#: src/permissions/constants.tsx
 #: src/proposals/details/PublicCallDetailsHero.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -2396,6 +2399,7 @@ msgstr "¿Confirmar la eliminación?"
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -3848,7 +3852,6 @@ msgstr "Cada informe de uso debe estar conectado con un plan de facturación par
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -10202,6 +10205,7 @@ msgstr "ID de usuario remoto"
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -10972,6 +10976,7 @@ msgstr "Se ha programado la sincronización de las cuentas de los robots."
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -11043,6 +11048,7 @@ msgstr "Reglas: {rules_count}"
 msgid "Running accounting"
 msgstr "Ejecución de la contabilidad"
 
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
@@ -11176,6 +11182,7 @@ msgstr "Nombre del campo de satisfacción"
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Save"
 msgstr "Guardar"
 
@@ -11700,6 +11707,7 @@ msgstr "Seleccione el tipo..."
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Select user..."
 msgstr "Seleccione el usuario..."
 
@@ -12428,7 +12436,6 @@ msgstr "Script de inicio"
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -12461,6 +12468,7 @@ msgstr "Script de inicio"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -12503,7 +12511,6 @@ msgstr "Se programó la actualización de rutas estáticas."
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -12902,6 +12909,7 @@ msgstr "Invitaciones del equipo"
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Team member has been removed."
 msgstr "Se ha eliminado el miembro del equipo."
 
@@ -13775,6 +13783,7 @@ msgid "Unable to add option."
 msgstr "No se puede añadir la opción."
 
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 msgid "Unable to add user."
 msgstr "No se puede añadir el usuario."
@@ -14061,6 +14070,7 @@ msgstr "No se puede eliminar el recurso."
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Unable to delete team member."
 msgstr "No se puede eliminar el miembro del equipo."
 
@@ -15545,6 +15555,7 @@ msgstr "Utilizado en el período {period} por:"
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
 msgstr "Usuario"

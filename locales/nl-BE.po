@@ -468,6 +468,8 @@ msgstr "Toevoegen aan vergelijking"
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddUserButton.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserButton.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -818,6 +820,7 @@ msgstr "Weet u zeker dat u het factuuritem {name} wilt verwijderen?"
 
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
 msgstr "Weet u zeker dat u {userName} wilt verwijderen?"
 
@@ -1282,8 +1285,8 @@ msgstr ".CSV"
 msgid "Calendar"
 msgstr "Kalender"
 
+#: src/permissions/constants.tsx
 #: src/proposals/details/PublicCallDetailsHero.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -1784,6 +1787,7 @@ msgstr "Verwijdering bevestigen?"
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -2859,7 +2863,6 @@ msgstr "Elk gebruiksrapport moet gekoppeld zijn aan een factureringsplan om een 
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -4928,6 +4931,7 @@ msgstr "Overig"
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -5042,6 +5046,7 @@ msgstr "Beoordelingen"
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -5103,6 +5108,7 @@ msgstr "Reglement"
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Save"
 msgstr "Sla op"
 
@@ -5337,7 +5343,6 @@ msgstr "aanvangstijd"
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -5370,6 +5375,7 @@ msgstr "aanvangstijd"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -5408,7 +5414,6 @@ msgstr "Staat"
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -5786,6 +5791,7 @@ msgstr "gebruikt"
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
 msgstr "Gebruiker"

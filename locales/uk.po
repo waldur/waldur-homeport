@@ -587,6 +587,8 @@ msgstr "Додати до порівняння"
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddUserButton.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserButton.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -1194,6 +1196,7 @@ msgstr "Ви впевнені, що хочете видалити позицію
 
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
 msgstr "Ви впевнені, що хочете видалити{userName} ?"
 
@@ -1789,8 +1792,8 @@ msgstr "CSV"
 msgid "Calendar"
 msgstr "Календар"
 
+#: src/permissions/constants.tsx
 #: src/proposals/details/PublicCallDetailsHero.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -2415,6 +2418,7 @@ msgstr "Підтвердити видалення?"
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -3867,7 +3871,6 @@ msgstr "Кожен звіт про використання має бути по
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -10229,6 +10232,7 @@ msgstr "ID віддаленого користувача"
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -10999,6 +11003,7 @@ msgstr "Синхронізацію облікових записів робот�
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -11078,6 +11083,7 @@ msgstr "правила:{rules_count}"
 msgid "Running accounting"
 msgstr "Ведення бухгалтерського обліку"
 
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
@@ -11211,6 +11217,7 @@ msgstr "Назва поля задоволення"
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Save"
 msgstr "Зберегти"
 
@@ -11735,6 +11742,7 @@ msgstr "Виберіть тип..."
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Select user..."
 msgstr "Виберіть користувача..."
 
@@ -12463,7 +12471,6 @@ msgstr "Скрипт запуску"
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -12496,6 +12503,7 @@ msgstr "Скрипт запуску"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -12538,7 +12546,6 @@ msgstr "Оновлення статичних маршрутів було зап
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -12937,6 +12944,7 @@ msgstr "Командні запрошення"
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Team member has been removed."
 msgstr "Члена команди видалено."
 
@@ -13814,6 +13822,7 @@ msgid "Unable to add role."
 msgstr "Не вдалося додати роль."
 
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 msgid "Unable to add user."
 msgstr "Не вдалося додати користувача."
@@ -14104,6 +14113,7 @@ msgstr "Не вдалося видалити ресурс."
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 msgid "Unable to delete team member."
 msgstr "Не вдалося видалити члена команди."
 
@@ -15596,6 +15606,7 @@ msgstr "Використовується в період{period} від:"
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
 msgstr "Користувач"

@@ -216,6 +216,8 @@ msgstr "Qayda əlavə edin"
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddUserButton.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserButton.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -1143,7 +1145,6 @@ msgstr "Aİ ƏDV İdentifikasiyası "
 #: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
-#: src/proposals/update/reviewers/EditReviewersButton.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -2967,6 +2968,7 @@ msgstr "Uzaq CIDR (sinifsiz domenlərarası marşrutlama)"
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
+#: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
 msgid "Remove"
@@ -3163,6 +3165,7 @@ msgstr "Yenidən cəhd edin"
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -3186,6 +3189,7 @@ msgstr "Layihədə vəzifəsi"
 msgid "Role management events"
 msgstr "Vəzifə idarəçiliyi hadisələri"
 
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
@@ -3270,6 +3274,7 @@ msgstr "“Sankey” diaqramı"
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Save"
 msgstr "Yaddaşda saxlamaq"
 
@@ -3400,6 +3405,7 @@ msgstr "____qoşulmaq üçün alt şəbəkələri seçin ..."
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/project/team/AddUserDialog.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 msgid "Select user..."
 msgstr "İstifadəçini seçin ..."
 
@@ -3599,7 +3605,6 @@ msgstr "Başlanğıc"
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllList.tsx
@@ -3632,6 +3637,7 @@ msgstr "Başlanğıc"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -4271,6 +4277,7 @@ msgstr "“Sudo”  istifadə edin"
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
+#: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
 msgstr "İstifadəçi"
