@@ -1,4 +1,5 @@
 import { StateIndicator } from '@waldur/core/StateIndicator';
+import { translate } from '@waldur/i18n';
 
 import { Resource } from '../types';
 
@@ -28,6 +29,13 @@ export const ResourceStateField = ({
       }
       active={isActive}
       roundless={roundless}
+      tooltip={
+        resource.backend_metadata.action
+          ? translate('{action} in progress', {
+              action: resource.backend_metadata.action,
+            })
+          : ''
+      }
     />
   );
 };

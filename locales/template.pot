@@ -6327,12 +6327,6 @@ msgstr ""
 msgid "Next hop (IP)"
 msgstr ""
 
-#: src/proposals/details/CallDetailsHeaderBody.tsx
-#: src/proposals/round/RoundPageHeaderBody.tsx
-#: src/proposals/update/CallUpdateHeaderBody.tsx
-msgid "Next round ends in"
-msgstr ""
-
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Next trigger at"
 msgstr ""
@@ -6981,6 +6975,12 @@ msgstr ""
 #: src/marketplace/offerings/list/OpenPublicOffering.tsx
 #: src/marketplace/offerings/list/PreviewButton.tsx
 msgid "Open public page"
+msgstr ""
+
+#: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/round/RoundPageHeaderBody.tsx
+#: src/proposals/update/CallUpdateHeaderBody.tsx
+msgid "Open round ends in"
 msgstr ""
 
 #: src/administration/providers/IdentityProvidersList.tsx
@@ -15016,6 +15016,10 @@ msgstr ""
 
 #: src/resource/actions/AsyncActionItem.tsx
 msgid "{action} has been scheduled for {resource}."
+msgstr ""
+
+#: src/marketplace/resources/list/ResourceStateField.tsx
+msgid "{action} in progress"
 msgstr ""
 
 #: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
