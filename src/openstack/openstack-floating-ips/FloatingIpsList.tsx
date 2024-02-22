@@ -65,6 +65,21 @@ const TableOptions = {
   fetchData: createFetcher('openstack-floating-ips'),
   mapPropsToFilter: (props) => ({
     tenant_uuid: props.resource.uuid,
+    field: [
+      'uuid',
+      'url',
+      'name',
+      'description',
+      'created',
+      'error_message',
+      'resource_type',
+      'state',
+      'service_name',
+      'runtime_state',
+      'address',
+      'instance_uuid',
+      'instance_name',
+    ],
   }),
 };
 

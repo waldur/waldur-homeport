@@ -38,6 +38,22 @@ const TableOptions = {
   fetchData: createFetcher('openstack-routers'),
   mapPropsToFilter: (props) => ({
     tenant_uuid: props.resource.uuid,
+    field: [
+      'uuid',
+      'url',
+      'name',
+      'description',
+      'created',
+      'resource_type',
+      'service_name',
+      'service_settings',
+      'service_settings_uuid',
+      'service_settings_state',
+      'service_settings_error_message',
+      'state',
+      'error_message',
+      'fixed_ips',
+    ],
   }),
   queryField: 'name',
 };
