@@ -13,7 +13,7 @@ export const CallUpdateHeaderBody = (props: CallUpdateHeaderBodyProps) => {
     : props.call.end_time;
   return (
     <p className="fw-bold">
-      {translate('Next round ends in')}:{' '}
+      {translate('Open round ends in')}:{' '}
       <span className="text-danger">{formatRelative(nextRoundDate)}</span>
     </p>
   );

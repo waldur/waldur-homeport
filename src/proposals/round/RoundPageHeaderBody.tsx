@@ -10,7 +10,7 @@ interface RoundPageHeaderBodyProps {
 export const RoundPageHeaderBody = (props: RoundPageHeaderBodyProps) => {
   return (
     <p className="fw-bold">
-      {translate('Next round ends in')}:{' '}
+      {translate('Open round ends in')}:{' '}
       <span className="text-danger">
         {formatRelative(props.round.cutoff_time)}
       </span>
