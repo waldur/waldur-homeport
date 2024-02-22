@@ -60,6 +60,10 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
         'Shows state of a resource as reported by backend system.',
       )}
     />
+    <Field
+      label={translate('Current action')}
+      value={resource.backend_metadata?.action}
+    />
     {resource.attributes ? (
       <Field
         label={translate('Attributes')}

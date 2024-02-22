@@ -2635,6 +2635,10 @@ msgstr ""
 msgid "Current abbreviation: {value}."
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceSummary.tsx
+msgid "Current action"
+msgstr ""
+
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Current address: {value}."
 msgstr ""
