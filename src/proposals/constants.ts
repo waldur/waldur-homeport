@@ -5,3 +5,4 @@ export const WORKSPACE_STATE_CALLS = {
 };
 
 export const EDIT_CALL_GENERAL_FORM_ID = 'CallGeneralInfoForm';
+export const CALL_FILTER_FORM_ID = 'CallFilter';
