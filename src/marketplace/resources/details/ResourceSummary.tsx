@@ -64,6 +64,11 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
       label={translate('Current action')}
       value={resource.backend_metadata?.action}
     />
+    <Field label={translate('Error message')}>{resource.error_message}</Field>
+    <Field label={translate('Error traceback')}>
+      {resource.error_traceback}
+    </Field>
+
     {resource.attributes ? (
       <Field
         label={translate('Attributes')}

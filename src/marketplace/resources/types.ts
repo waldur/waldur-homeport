@@ -35,6 +35,8 @@ export interface Resource extends ResourceReference {
   plan?: string;
   attributes: AttributesType;
   backend_metadata?: AttributesType;
+  error_message?: string;
+  error_traceback?: string;
   offering_uuid: string;
   offering_name: string;
   offering_type: string;
