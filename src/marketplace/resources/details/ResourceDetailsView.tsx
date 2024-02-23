@@ -185,11 +185,12 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
 
           <div className="container-xxl py-10">
             <GettingStartedCard resource={resource} offering={offering} />
-            {specViews.map((specView, index) => (
+            {specViews.map((specView) => (
               <ResourceSpecGroupCard
                 key={specView.key}
-                index={index}
-                specView={specView}
+                tabKey={specView.key}
+                tabs={specView.children}
+                title={specView.title}
                 scope={scope}
                 resource={resource}
               />
