@@ -217,6 +217,7 @@ msgstr "Prezzo di attivazione"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
@@ -628,6 +629,7 @@ msgstr "Archivio"
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "Archiviato"
@@ -2247,6 +2249,7 @@ msgstr "Scarica il file PDF dell'ordine"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "Bozza"
@@ -7273,6 +7276,7 @@ msgstr "Seleziona alcuni file"
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Select state..."
@@ -7741,6 +7745,7 @@ msgstr "Avvio"
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx

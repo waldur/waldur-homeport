@@ -132,6 +132,7 @@ msgstr "Aktiv olunur"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
@@ -1065,6 +1066,7 @@ msgstr "İnvoys yükləyin"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "Layihə "
@@ -3635,6 +3637,7 @@ msgstr "Başlanğıc"
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx

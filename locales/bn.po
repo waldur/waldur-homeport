@@ -298,6 +298,7 @@ msgstr "অ্যাক্টিভেশন মূল্য"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
@@ -1052,6 +1053,7 @@ msgstr "আর্কাইভ প্রস্তাব পরিকল্পন�
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "সংরক্ষণাগারভুক্ত"
@@ -3738,6 +3740,7 @@ msgstr "অর্ডার পিডিএফ ফাইল ডাউনলোড
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "খসড়া"
@@ -11656,6 +11659,7 @@ msgstr "কিছু ফাইল নির্বাচন করুন"
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Select state..."
@@ -12466,6 +12470,7 @@ msgstr "স্টার্টআপ স্ক্রিপ্ট"
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx

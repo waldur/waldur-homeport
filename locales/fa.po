@@ -159,6 +159,7 @@ msgstr "فعال کردن"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
@@ -504,6 +505,7 @@ msgstr "بایگانی"
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "بایگانی شده"
@@ -1761,6 +1763,7 @@ msgstr "سفارش بارگیری فایل PDF"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "پیش نویس"

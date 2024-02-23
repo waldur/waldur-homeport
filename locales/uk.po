@@ -298,6 +298,7 @@ msgstr "Ціна активації"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
@@ -1058,6 +1059,7 @@ msgstr "Архів плану пропозиції"
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "Заархівовано"
@@ -3757,6 +3759,7 @@ msgstr "Завантажте PDF файл замовлення"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "Чернетка"
@@ -11691,6 +11694,7 @@ msgstr "Виберіть декілька файлів"
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
+#: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Select state..."
@@ -12501,6 +12505,7 @@ msgstr "Скрипт запуску"
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
