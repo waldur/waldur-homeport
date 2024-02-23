@@ -1,4 +1,7 @@
 import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -7,8 +10,10 @@ import { translate } from '@waldur/i18n';
 import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { CallAllFilters } from '@waldur/proposals/call-management/CallAllFilters';
+import { CALL_FILTER_FORM_ID } from '@waldur/proposals/constants';
 import { ProposalCall } from '@waldur/proposals/types';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { HeroSection } from './HeroSection';
@@ -17,7 +22,22 @@ import { PublicCallsTablePlaceholder } from './PublicCallsTablePlaceholder';
 
 import './PublicCallsPage.scss';
 
+const mapPropsToFilter = createSelector(
+  getFormValues(CALL_FILTER_FORM_ID),
+  (filters: any) => {
+    const result: Record<string, any> = {};
+
+    if (filters) {
+      if (filters.state) {
+        result.state = filters.state.map((option) => option.value);
+      }
+    }
+    return result;
+  },
+);
+
 export const PublicCallsPage: FunctionComponent = () => {
+  const filter = useSelector(mapPropsToFilter);
   useFullPage();
   useTitle(translate('Marketplace'));
 
@@ -27,6 +47,7 @@ export const PublicCallsPage: FunctionComponent = () => {
     table: 'PublicCallsList',
     fetchData: createFetcher('proposal-public-calls'),
     queryField: 'name',
+    filter,
   });
 
   return (
@@ -80,6 +101,7 @@ export const PublicCallsPage: FunctionComponent = () => {
           hasQuery={true}
           placeholderComponent={<PublicCallsTablePlaceholder />}
           expandableRow={PublicCallExpandableRow}
+          filters={<CallAllFilters />}
         />
       </div>
     </div>
