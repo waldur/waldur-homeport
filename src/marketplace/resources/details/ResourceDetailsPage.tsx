@@ -20,7 +20,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const { state, params } = useCurrentStateAndParams();
   const dispatch = useDispatch();
 
-  const { data, refetch, isLoading } = useQuery(
+  const { data, refetch, isRefetching } = useQuery(
     ['resource-details-page', params['resource_uuid']],
     () => fetchData(params.resource_uuid),
     { enabled: false },
@@ -123,7 +123,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
       {...data}
       {...extraData}
       refetch={refetch}
-      isLoading={isLoading}
+      isLoading={isRefetching}
       state={state}
     />
   );
