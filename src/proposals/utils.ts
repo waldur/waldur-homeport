@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-import { parseDate } from '@waldur/core/dateUtils';
+import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import {
   CallRoundFormData,
@@ -59,6 +59,36 @@ export const getRoundStatus = (round: ProposalCallRound) => {
       return { label: translate('Ended'), code: -1, color: 'danger' };
     else return { label: translate('Open'), code: 0, color: 'success' };
   }
+};
+
+/** Returns round items in sort of [earliest open, earliest scheduled, oldest ended] */
+export const getSortedRoundsWithStatus = (
+  rounds: ProposalCallRound[],
+): Array<
+  ProposalCallRound & {
+    state: ReturnType<typeof getRoundStatus>;
+  }
+> => {
+  const roundsWithState = rounds.map((round) => {
+    Object.assign(round, { state: getRoundStatus(round) });
+    return round as any;
+  });
+  const endedRounds = roundsWithState
+    .filter((round) => round.state.code === -1)
+    .sort((a, b) =>
+      formatDate(a.cutoff_time) < formatDate(b.cutoff_time) ? 1 : -1,
+    );
+  const openRounds = roundsWithState
+    .filter((round) => round.state.code === 0)
+    .sort((a, b) =>
+      formatDate(a.cutoff_time) > formatDate(b.cutoff_time) ? 1 : -1,
+    );
+  const scheduledRounds = roundsWithState
+    .filter((round) => round.state.code === 1)
+    .sort((a, b) =>
+      formatDate(a.cutoff_time) > formatDate(b.cutoff_time) ? 1 : -1,
+    );
+  return openRounds.concat(scheduledRounds).concat(endedRounds);
 };
 
 export const getCallRoundInitialValues = (

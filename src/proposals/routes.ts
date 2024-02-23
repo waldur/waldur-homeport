@@ -30,6 +30,11 @@ const CallRoundPage = lazyComponent(
   'CallRoundPage',
 );
 
+const ProposalCreatePage = lazyComponent(
+  () => import('./proposal/create/ProposalCreatePage'),
+  'ProposalCreatePage',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'organization.call-management',
@@ -59,6 +64,7 @@ export const states: StateDeclaration[] = [
     component: CallRoundPage,
   },
 
+  // Public calls
   {
     name: 'public-calls-user',
     url: 'calls/',
@@ -69,8 +75,15 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'public.public-calls',
+    name: 'public-calls',
     url: '/calls/',
+    abstract: true,
+    component: UIView,
+    parent: 'public',
+  },
+  {
+    name: 'public-calls.list-public',
+    url: '',
     component: PublicCallsPage,
     data: {
       hideProjectSelector: true,
@@ -78,9 +91,18 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'public.proposal-public-call',
-    url: '/calls/:uuid/',
+    name: 'public-calls.details',
+    url: ':uuid/',
     component: PublicCallDetailsContainer,
+    data: {
+      hideProjectSelector: true,
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    },
+  },
+  {
+    name: 'public-calls.create-proposal',
+    url: ':uuid/round/:round_uuid/create-proposal/',
+    component: ProposalCreatePage,
     data: {
       hideProjectSelector: true,
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,

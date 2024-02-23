@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 
 import { CallStateField } from '../CallStateField';
 import { ProposalCall } from '../types';
+import { getSortedRoundsWithStatus } from '../utils';
 
 import { CallDetailsHeaderBody } from './CallDetailsHeaderBody';
 import { CallRoundsList } from './CallRoundsList';
@@ -21,6 +22,15 @@ interface PublicCallDetailsHeroProps {
 export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
   call,
 }) => {
+  const activeRound = useMemo(() => {
+    const items = getSortedRoundsWithStatus(call.rounds);
+    const first = items[0];
+    if (first && [0, 1].includes(first.state.code)) {
+      return first;
+    }
+    return null;
+  }, [call]);
+
   return (
     <PublicDashboardHero
       logo={undefined}
@@ -41,7 +51,19 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       quickActions={
         <div className="d-flex gap-5 justify-content-between">
           <Button variant="light">{translate('See offerings')}</Button>
-          <Button variant="primary">{translate('Apply to round')}</Button>
+          {activeRound ? (
+            <Link
+              state="public-calls.create-proposal"
+              params={{ uuid: call.uuid, round_uuid: activeRound.uuid }}
+              className="btn btn-primary"
+            >
+              <span>{translate('Apply to round')}</span>
+            </Link>
+          ) : (
+            <Button variant="primary" disabled>
+              {translate('Apply to round')}
+            </Button>
+          )}
         </div>
       }
       quickBody={<CallRoundsList call={call} max={3} />}
