@@ -101,3 +101,17 @@ export interface CallOfferingFormData {
   plan: Plan;
   limits?: Limits;
 }
+
+export interface ProposalCreationFormStep {
+  label: string;
+  id: string;
+  component: React.ComponentType<ProposalFormStepProps>;
+}
+
+export interface ProposalFormStepProps {
+  step: number;
+  id: string;
+  title?: string;
+  observed?: boolean;
+  change?(field: string, value: any): void;
+}

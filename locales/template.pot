@@ -107,6 +107,7 @@ msgstr ""
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 msgid "Accepted"
 msgstr ""
@@ -781,6 +782,10 @@ msgstr ""
 
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Application has been created."
+msgstr ""
+
+#: src/proposals/proposal/create/CreatePageSidebar.tsx
+msgid "Application progress"
 msgstr ""
 
 #: src/administration/providers/ProviderForm.tsx
@@ -1520,6 +1525,7 @@ msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and
 msgstr ""
 
 #: src/marketplace/deploy/DeployPageSidebar.tsx
+#: src/proposals/proposal/create/CreatePageSidebar.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr ""
 
@@ -1846,6 +1852,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/options/OptionForm.tsx
 msgid "Choices as comma-separated list"
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Choose file"
 msgstr ""
 
 #: src/invitations/InvitationExpandableRow.tsx
@@ -2466,6 +2476,10 @@ msgstr ""
 
 #: src/marketplace/details/ProjectCreateGroup.tsx
 msgid "Create project request"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalCreatePage.tsx
+msgid "Create proposal"
 msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
@@ -3163,6 +3177,10 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Detailed description"
+msgstr ""
+
 #: src/administration/providers/ProviderCard.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -3366,6 +3384,10 @@ msgstr ""
 #: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Drag and drop file here or <underline></underline>"
 msgstr ""
 
 #: src/core/DropzoneFiles.tsx
@@ -4854,6 +4876,10 @@ msgstr ""
 msgid "Import offerings"
 msgstr ""
 
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Import project"
+msgstr ""
+
 #: src/user/keys/KeyCreateDialog.tsx
 msgid "Import public key"
 msgstr ""
@@ -5209,6 +5235,10 @@ msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Is service provider"
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Is the project confidential?"
 msgstr ""
 
 #: src/issues/feedback/SupportFeedbackList.tsx
@@ -5755,6 +5785,10 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/marketplace.ts
 msgid "Maximum parallel executions of provisioning operations for volumes."
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Maximum size"
 msgstr ""
 
 #: src/marketplace/offerings/update/components/ComponentLimitPeriodField.tsx
@@ -7902,6 +7936,7 @@ msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr ""
 
@@ -8300,7 +8335,12 @@ msgid "Project description"
 msgstr ""
 
 #: src/project/ProjectDetailsDialog.tsx
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Project details"
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Project duration"
 msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -8328,6 +8368,10 @@ msgstr ""
 
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Project field name"
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Project for civilian purpose?"
 msgstr ""
 
 #: src/project/effects.ts
@@ -8398,6 +8442,14 @@ msgstr ""
 msgid "Project settings"
 msgstr ""
 
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Project summary"
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Project title"
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "Project type"
@@ -8461,6 +8513,10 @@ msgstr ""
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 msgid "Proposal"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalCreatePage.tsx
+msgid "Proposal created successfully"
 msgstr ""
 
 #: src/proposals/round/RoundPageBar.tsx
@@ -9228,6 +9284,10 @@ msgstr ""
 msgid "Required nodes"
 msgstr ""
 
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Research field (OECD code)"
+msgstr ""
+
 #: src/invitations/actions/InvitationSendButton.tsx
 msgid "Resend"
 msgstr ""
@@ -9409,6 +9469,10 @@ msgstr ""
 msgid "Resource plan change request has been submitted."
 msgstr ""
 
+#: src/proposals/proposal/create/steps/steps.ts
+msgid "Resource requests"
+msgstr ""
+
 #: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
 #: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
 msgid "Resource schedule is already activated."
@@ -9550,6 +9614,7 @@ msgid "Retype OpenStack Volume"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/review/EditRoundReviewDialog.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
@@ -10892,6 +10957,7 @@ msgid "Snapshots count"
 msgstr ""
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/proposal/create/ProposalCreatePage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr ""
@@ -11127,6 +11193,7 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
@@ -11172,6 +11239,10 @@ msgstr ""
 #: src/resource/actions/ResourceActionDialog.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
+msgstr ""
+
+#: src/proposals/proposal/create/CreatePageSidebar.tsx
+msgid "Submit application"
 msgstr ""
 
 #: src/proposals/update/CallUpdateHero.tsx
@@ -11278,6 +11349,10 @@ msgstr ""
 
 #: src/user/support/utils.ts
 msgid "Support user"
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Supported formats"
 msgstr ""
 
 #: src/vmware/actions/SuspendAction.tsx
@@ -11410,6 +11485,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr ""
 
@@ -13623,6 +13699,10 @@ msgstr ""
 msgid "Update {resourceType} {resourceName}"
 msgstr ""
 
+#: src/proposals/proposal/create/ProgressSteps.tsx
+msgid "Updates"
+msgstr ""
+
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/resource/state/constants.ts
 msgid "Updating"
@@ -13654,6 +13734,10 @@ msgstr ""
 
 #: src/customer/details/CustomerLogoUpdate.tsx
 msgid "Upload new"
+msgstr ""
+
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+msgid "Upload supporting documentation"
 msgstr ""
 
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -13759,6 +13843,7 @@ msgid "User agreement was updated"
 msgstr ""
 
 #: src/administration/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr ""
 
@@ -14122,6 +14207,10 @@ msgstr ""
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "Verify server certificate"
+msgstr ""
+
+#: src/proposals/proposal/create/ProgressSteps.tsx
+msgid "Verify team"
 msgstr ""
 
 #: src/user/support/UserEmailChangeCallback.tsx

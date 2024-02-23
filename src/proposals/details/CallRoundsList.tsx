@@ -3,8 +3,8 @@ import { useMemo } from 'react';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
-import { ProposalCall, ProposalCallRound } from '../types';
-import { getRoundStatus } from '../utils';
+import { ProposalCall } from '../types';
+import { getSortedRoundsWithStatus } from '../utils';
 
 interface CallRoundsListProps {
   call: ProposalCall;
@@ -12,22 +12,9 @@ interface CallRoundsListProps {
 }
 
 export const CallRoundsList = ({ call, max }: CallRoundsListProps) => {
-  const rounds = useMemo<
-    Array<
-      ProposalCallRound & {
-        state: ReturnType<typeof getRoundStatus>;
-      }
-    >
-  >(() => {
-    const items = max ? call.rounds.slice(0, max) : call.rounds;
-    return items
-      .sort((a, b) =>
-        formatDate(a.start_time) > formatDate(b.start_time) ? 1 : -1,
-      )
-      .map((round) => {
-        Object.assign(round, { state: getRoundStatus(round) });
-        return round as any;
-      });
+  const rounds = useMemo(() => {
+    const items = getSortedRoundsWithStatus(call.rounds);
+    return max ? items.slice(0, max) : items;
   }, [call, max]);
 
   return rounds?.length ? (

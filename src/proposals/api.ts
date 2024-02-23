@@ -12,6 +12,7 @@ import {
 import {
   CallManagingOrganizationInfo,
   CallOffering,
+  Proposal,
   ProposalCall,
   ProposalCallRound,
 } from './types';
@@ -87,4 +88,8 @@ export const createCallOffering = (callUuid, data) => {
     `/proposal-protected-calls/${callUuid}/offerings/`,
     data,
   );
+};
+
+export const createProposal = (data) => {
+  return post<Proposal>(`/proposal-proposals/`, data);
 };
