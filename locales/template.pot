@@ -20,10 +20,6 @@ msgstr ""
 msgid "+{count} more schedules"
 msgstr ""
 
-#: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
-msgid "- . Last request:"
-msgstr ""
-
 #: src/issues/feedback/utils.ts
 msgid "1 - Very negative"
 msgstr ""
@@ -3654,7 +3650,7 @@ msgstr ""
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -5129,6 +5125,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr ""
 
@@ -6604,7 +6601,9 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
@@ -7706,6 +7705,7 @@ msgid "Permission has been updated successfully."
 msgstr ""
 
 #: src/customer/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Permission log"
 msgstr ""
 
@@ -8340,7 +8340,7 @@ msgid "Project details"
 msgstr ""
 
 #: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
-msgid "Project duration"
+msgid "Project duration in days"
 msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -9696,7 +9696,7 @@ msgid "Reviewed by provider at"
 msgstr ""
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 msgid "Reviewer"
 msgstr ""
 
@@ -9748,7 +9748,7 @@ msgstr ""
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -14044,6 +14044,8 @@ msgstr ""
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr ""
@@ -14451,7 +14453,7 @@ msgstr ""
 msgid "You can create your first proposal."
 msgstr ""
 
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 msgid "You can edit reviewers for this call."
 msgstr ""
 
@@ -14477,6 +14479,14 @@ msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "You can remove this organization by pressing the button"
+msgstr ""
+
+#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
+msgid "You can see invitations for this call."
+msgstr ""
+
+#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
+msgid "You can see permissions log for this call."
 msgstr ""
 
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
@@ -15051,6 +15061,7 @@ msgstr ""
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"

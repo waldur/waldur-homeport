@@ -7,7 +7,10 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { BoxRadioField } from '@waldur/marketplace/deploy/steps/BoxRadioField';
 import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
-import { StepCardTabs } from '@waldur/marketplace/deploy/steps/StepCardTabs';
+import {
+  StepCardTabs,
+  TabSpec,
+} from '@waldur/marketplace/deploy/steps/StepCardTabs';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { generateSystemImageChoices } from '@waldur/marketplace/deploy/utils';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
@@ -15,13 +18,13 @@ import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { getVMwareTemplates } from '../api';
 import { VMwareTemplate } from '../types';
 
-const tabs = [
-  { label: translate('Images'), value: 'images' },
-  { label: translate('Apps'), value: 'apps' },
+const tabs: TabSpec[] = [
+  { title: translate('Images'), key: 'images' },
+  { title: translate('Apps'), key: 'apps' },
 ];
 
 export const FormTemplateStep = (props: FormStepProps) => {
-  const [tab, setTab] = useState<'images' | 'apps'>('images');
+  const [tab, setTab] = useState<TabSpec>(tabs[0]);
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const { data, isLoading, error, refetch } = useQuery(

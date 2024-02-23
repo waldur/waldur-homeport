@@ -4,7 +4,10 @@ import { formatFilesize } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
-import { StepCardTabs } from '@waldur/marketplace/deploy/steps/StepCardTabs';
+import {
+  StepCardTabs,
+  TabSpec,
+} from '@waldur/marketplace/deploy/steps/StepCardTabs';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
@@ -15,13 +18,13 @@ import { Flavor } from '../types';
 
 import { getOfferingLimit, useQuotasData } from './utils';
 
-const tabs = [
-  { label: translate('Shared'), value: 'shared' },
-  { label: translate('Dedicated'), value: 'dedicated' },
+const tabs: TabSpec[] = [
+  { title: translate('Shared'), key: 'shared' },
+  { title: translate('Dedicated'), key: 'dedicated' },
 ];
 
 export const FormFlavorStep = (props: FormStepProps) => {
-  const [tab, setTab] = useState<'shared' | 'dedicated'>('shared');
+  const [tab, setTab] = useState<TabSpec>(tabs[0]);
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const filter = useMemo(

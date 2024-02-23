@@ -18,7 +18,7 @@ import { formProjectSelector } from '../utils';
 
 import { BoxRadioField } from './BoxRadioField';
 import { StepCard } from './StepCard';
-import { StepCardTabs } from './StepCardTabs';
+import { StepCardTabs, TabSpec } from './StepCardTabs';
 
 interface DataPage {
   data: Offering[];
@@ -45,13 +45,13 @@ const loadData: QueryFunction<DataPage> = async (context) => {
   };
 };
 
-const tabs = [
-  { label: translate('Private cloud'), value: 'private' },
-  { label: translate('Public cloud'), value: 'public' },
+const tabs: TabSpec[] = [
+  { title: translate('Private cloud'), key: 'private' },
+  { title: translate('Public cloud'), key: 'public' },
 ];
 
 export const FormCloudStep = (props: FormStepProps) => {
-  const [tab, setTab] = useState<'private' | 'public'>('private');
+  const [tab, setTab] = useState<TabSpec>(tabs[0]);
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const currentProject = useSelector(getProject);

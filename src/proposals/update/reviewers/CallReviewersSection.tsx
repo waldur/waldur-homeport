@@ -1,63 +1,47 @@
-import { FC } from 'react';
+import React, { useState } from 'react';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { GenericPermission } from '@waldur/permissions/types';
+import {
+  StepCardTabs,
+  TabSpec,
+} from '@waldur/marketplace/deploy/steps/StepCardTabs';
 import { ProposalCall } from '@waldur/proposals/types';
-import { Table, createFetcher } from '@waldur/table';
-import { useTable } from '@waldur/table/utils';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
 
-import { AddUserButton } from './AddUserButton';
-import { CallReviewersTablePlaceholder } from './CallReviewersTablePlaceholder';
-import { UserRemoveButton } from './UserRemoveButton';
+import { CallInvitationsListPlaceholder } from './CallInvitationsListPlaceholder';
+import { CallPermissionsLogListPlaceholder } from './CallPermissionsLogListPlaceholder';
+import { CallUsersList } from './CallUsersList';
 
-interface CallReviewersSectionProps {
-  call: ProposalCall;
-}
+const tabs: TabSpec<{ call: ProposalCall }>[] = [
+  { title: translate('Users'), key: 'users', component: CallUsersList },
+  {
+    title: translate('Permission log'),
+    key: 'permissions',
+    component: CallPermissionsLogListPlaceholder,
+  },
+  {
+    title: translate('Invitations'),
+    key: 'invitations',
+    component: CallInvitationsListPlaceholder,
+  },
+];
 
-export const CallReviewersSection: FC<CallReviewersSectionProps> = (props) => {
-  const tableProps = useTable({
-    table: 'CallReviewersList',
-    fetchData: createFetcher(
-      `proposal-protected-calls/${props.call.uuid}/list_users`,
-    ),
-  });
+export const CallReviewersSection = ({ call }) => {
+  const [tab, setTab] = useState<TabSpec<{ call: ProposalCall }>>(tabs[0]);
 
   return (
-    <Table<GenericPermission>
-      {...tableProps}
-      id="reviewers"
-      className="mb-7"
-      placeholderComponent={
-        <CallReviewersTablePlaceholder
-          refetch={tableProps.fetch}
-          call={props.call}
-        />
-      }
-      columns={[
-        {
-          title: translate('Reviewer'),
-          render: ({ row }) => <>{row.user_full_name || row.user_username}</>,
-        },
-        {
-          title: translate('Email'),
-          render: ({ row }) => <>{row.user_email}</>,
-        },
-        {
-          title: translate('Role'),
-          render: RoleField,
-        },
-      ]}
-      title={translate('Reviewers')}
-      verboseName={translate('Reviewers')}
-      actions={<AddUserButton refetch={tableProps.fetch} call={props.call} />}
-      hoverableRow={({ row }) => (
-        <UserRemoveButton
-          permission={row}
-          refetch={tableProps.fetch}
-          call={props.call}
-        />
-      )}
-    />
+    <Card>
+      <Card.Header>
+        <Card.Title>
+          <h3>{translate('Reviewers')}</h3>
+        </Card.Title>
+        <div className="card-toolbar flex-grow-1 ms-6">
+          <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />
+        </div>
+      </Card.Header>
+      <Card.Body className="p-0 min-h-550px">
+        {React.createElement(tab.component, { call })}
+      </Card.Body>
+    </Card>
   );
 };

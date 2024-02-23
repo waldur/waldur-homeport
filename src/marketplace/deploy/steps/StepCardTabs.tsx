@@ -1,13 +1,19 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-interface StepCardTabsProps {
-  tab: any;
-  setTab: React.Dispatch<React.SetStateAction<any>>;
-  tabs: Array<{ label; value }>;
+export interface TabSpec<T = any> {
+  title: string;
+  key: string;
+  component?: React.ComponentType<T>;
 }
 
-export const StepCardTabs: React.FC<StepCardTabsProps> = ({
+interface StepCardTabsProps<T extends TabSpec> {
+  tab: T;
+  setTab: React.Dispatch<React.SetStateAction<T>>;
+  tabs: T[];
+}
+
+export const StepCardTabs: React.FC<StepCardTabsProps<TabSpec<any>>> = ({
   tab,
   setTab,
   tabs,
@@ -16,16 +22,16 @@ export const StepCardTabs: React.FC<StepCardTabsProps> = ({
     <>
       {tabs.map((tabItem) => (
         <Button
-          key={tabItem.value}
+          key={tabItem.key}
           variant="link"
           size="sm"
           className={
             'btn-color-dark btn-active-color-primary mx-3' +
-            (tab === tabItem.value ? ' active text-decoration-underline' : '')
+            (tab.key === tabItem.key ? ' active text-decoration-underline' : '')
           }
-          onClick={() => setTab(tabItem.value)}
+          onClick={() => setTab(tabItem)}
         >
-          {tabItem.label}
+          {tabItem.title}
         </Button>
       ))}
     </>
