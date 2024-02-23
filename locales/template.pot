@@ -20,6 +20,10 @@ msgstr ""
 msgid "+{count} more schedules"
 msgstr ""
 
+#: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
+msgid "- . Last request:"
+msgstr ""
+
 #: src/issues/feedback/utils.ts
 msgid "1 - Very negative"
 msgstr ""
