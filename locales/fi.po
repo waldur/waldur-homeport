@@ -119,6 +119,7 @@ msgstr "Hyväksy kutsu"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "hyväksytty"
@@ -1737,6 +1738,7 @@ msgid "By ordering, you agree to the <tos>terms of service</tos> and <pp>privacy
 msgstr "Tilaamalla hyväksyt<tos> käyttöehdot</tos> ja<pp> Tietosuojakäytäntö</pp> ."
 
 #: src/marketplace/deploy/DeployPageSidebar.tsx
+#: src/proposals/proposal/create/CreatePageSidebar.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr "Tilaamalla hyväksyt alustan<tos> käyttöehdot</tos> ja<pp> Tietosuojakäytäntö</pp> ."
 
@@ -4031,7 +4033,7 @@ msgstr "Ulostulo"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -4230,11 +4232,13 @@ msgstr "Virhe ryhmien noutamisessa"
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr "Virheviesti"
 
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Error traceback"
 msgstr "Virheen jäljitys"
 
@@ -5645,6 +5649,7 @@ msgstr "Kutsun hylkääminen"
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr "Kutsut"
 
@@ -7334,7 +7339,9 @@ msgstr "Huomaa, että tästä tilavuudesta ei veloiteta erikseen{organization} .
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
@@ -8723,6 +8730,7 @@ msgid "Permission has been updated successfully."
 msgstr "Lupa on päivitetty onnistuneesti."
 
 #: src/customer/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Permission log"
 msgstr "Lupaloki"
 
@@ -8987,6 +8995,7 @@ msgstr "Hae organisaatiotasi"
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr "Valitse tieteen ja teknologian alaa vastaava OECD-koodi"
 
@@ -9406,6 +9415,7 @@ msgid "Project description"
 msgstr "Projektin kuvaus"
 
 #: src/project/ProjectDetailsDialog.tsx
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Project details"
 msgstr "Projektin tiedot"
 
@@ -10850,6 +10860,7 @@ msgid "Retype OpenStack Volume"
 msgstr "Kirjoita OpenStack Volume uudelleen"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/review/EditRoundReviewDialog.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
@@ -10927,7 +10938,7 @@ msgid "Reviewed by provider at"
 msgstr "Palveluntarjoajan tarkistama osoitteessa"
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 msgid "Reviewer"
 msgstr "Arvostelija"
 
@@ -10979,7 +10990,7 @@ msgstr "Robottitilien synkronointi on ajoitettu."
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -12348,6 +12359,7 @@ msgid "Snapshots count"
 msgstr "Tilannekuvat lasketaan"
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/proposal/create/ProposalCreatePage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr "Jokin meni pieleen."
@@ -12591,6 +12603,7 @@ msgstr "Varastointityyppi"
 msgid "Subject"
 msgstr "Aihe"
 
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
@@ -12904,6 +12917,7 @@ msgstr "Veroprosentti"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Joukkue"
 
@@ -15590,6 +15604,7 @@ msgid "User agreement was updated"
 msgstr "Käyttäjäsopimus päivitetty"
 
 #: src/administration/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Käyttäjäsopimukset"
 
@@ -15981,6 +15996,8 @@ msgstr "Käyttäjänimet voivat sisältää kirjaimia (az), numeroita (0-9), vä
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr "Käyttäjät"
@@ -16446,7 +16463,7 @@ msgstr "Voit lisätä viestin liitettäväksi käyttäjien vastaanottamaan kutsu
 msgid "You can create issue by pressing the button below"
 msgstr "Voit luoda ongelman painamalla alla olevaa painiketta"
 
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 msgid "You can edit reviewers for this call."
 msgstr "Voit muokata tämän puhelun arvioijia."
 
@@ -17156,6 +17173,7 @@ msgstr "käyttäjien lupapyynnöt"
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"

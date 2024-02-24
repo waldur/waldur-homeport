@@ -99,6 +99,7 @@ msgstr "Uitnodiging accepteren"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "Geaccepteerd"
@@ -2974,7 +2975,7 @@ msgstr "Uitgang"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -3120,11 +3121,13 @@ msgstr "Error"
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr "Foutmelding"
 
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Error traceback"
 msgstr "Fout bij traceback"
 
@@ -4413,7 +4416,9 @@ msgstr "Niet aangemeld"
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
@@ -4807,6 +4812,7 @@ msgid "Project description"
 msgstr "Beschrijving van het project"
 
 #: src/project/ProjectDetailsDialog.tsx
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Project details"
 msgstr "Details van het project"
 
@@ -5049,7 +5055,7 @@ msgstr "Beoordelingen"
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -5292,6 +5298,7 @@ msgid "Size"
 msgstr "Grootte"
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/proposal/create/ProposalCreatePage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr "Er is iets misgegaan"
@@ -5801,6 +5808,7 @@ msgid "User"
 msgstr "Gebruiker"
 
 #: src/administration/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Gebruikersovereenkomsten"
 
@@ -5857,6 +5865,8 @@ msgstr "Gebruikersnaam"
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr "Gebruikers"
@@ -6129,6 +6139,7 @@ msgstr "Gebruikersovereenkomsten"
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"

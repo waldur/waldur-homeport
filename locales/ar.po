@@ -119,6 +119,7 @@ msgstr "قبول الدعوة"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "وافقت"
@@ -1737,6 +1738,7 @@ msgid "By ordering, you agree to the <tos>terms of service</tos> and <pp>privacy
 msgstr "من خلال الطلب، فإنك توافق على<tos> شروط الخدمة</tos> و<pp> سياسة الخصوصية</pp> ."
 
 #: src/marketplace/deploy/DeployPageSidebar.tsx
+#: src/proposals/proposal/create/CreatePageSidebar.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr "من خلال الطلب، فإنك توافق على المنصة<tos> شروط الخدمة</tos> و<pp> سياسة الخصوصية</pp> ."
 
@@ -4031,7 +4033,7 @@ msgstr "الخروج"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -4230,11 +4232,13 @@ msgstr "خطأ في جلب المجموعات"
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr "رسالة خطأ"
 
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Error traceback"
 msgstr "تتبع الخطأ"
 
@@ -5645,6 +5649,7 @@ msgstr "رفض الدعوة"
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr "الدعوات"
 
@@ -7334,7 +7339,9 @@ msgstr "لاحظ أنه لن يتم تحصيل هذا الحجم بشكل منف
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
@@ -8723,6 +8730,7 @@ msgid "Permission has been updated successfully."
 msgstr "تم تحديث الإذن بنجاح."
 
 #: src/customer/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Permission log"
 msgstr "سجل الأذونات"
 
@@ -8987,6 +8995,7 @@ msgstr "الرجاء البحث عن مؤسستك"
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr "برجاء تحديد رمز منظمة التعاون الاقتصادي والتنمية المطابق لمجال العلوم والتكنولوجيا"
 
@@ -9406,6 +9415,7 @@ msgid "Project description"
 msgstr "وصف المشروع"
 
 #: src/project/ProjectDetailsDialog.tsx
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Project details"
 msgstr "تفاصيل المشروع"
 
@@ -10850,6 +10860,7 @@ msgid "Retype OpenStack Volume"
 msgstr "أعد كتابة حجم OpenStack"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/review/EditRoundReviewDialog.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
@@ -10927,7 +10938,7 @@ msgid "Reviewed by provider at"
 msgstr "تمت المراجعة من قبل المزود في"
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 msgid "Reviewer"
 msgstr "المراجع"
 
@@ -10979,7 +10990,7 @@ msgstr "تمت جدولة مزامنة حسابات الروبوت."
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -12348,6 +12359,7 @@ msgid "Snapshots count"
 msgstr "عدد اللقطات"
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/proposal/create/ProposalCreatePage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr "حدث خطأ ما"
@@ -12591,6 +12603,7 @@ msgstr "قوي"
 msgid "Subject"
 msgstr "موضوع"
 
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
@@ -12904,6 +12917,7 @@ msgstr "نسبة الضريبة"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "فريق"
 
@@ -15590,6 +15604,7 @@ msgid "User agreement was updated"
 msgstr "تم تحديث اتفاقية المستخدم"
 
 #: src/administration/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "اتفاقيات المستخدم"
 
@@ -15981,6 +15996,8 @@ msgstr "يمكن أن تحتوي أسماء المستخدمين على أحرف
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr "المستخدمين"
@@ -16446,7 +16463,7 @@ msgstr "يمكنك إضافة رسالة لإرفاقها برسالة البر�
 msgid "You can create issue by pressing the button below"
 msgstr "يمكنك إنشاء مشكلة بالضغط على الزر أدناه"
 
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 msgid "You can edit reviewers for this call."
 msgstr "يمكنك تحرير المراجعين لهذه المكالمة."
 
@@ -17156,6 +17173,7 @@ msgstr "طلبات إذن المستخدم"
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"

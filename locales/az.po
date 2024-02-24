@@ -41,6 +41,7 @@ msgstr "Qəbul edin"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "Qəbul edildi"
@@ -1177,7 +1178,7 @@ msgstr "Heyət üzvünü redaktə etmək"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -1209,6 +1210,7 @@ msgstr "Bitmə vaxtı "
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr "Xəta mesajı "
@@ -1736,6 +1738,7 @@ msgstr "Dəvət artıq etibarlı deyil."
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr "Dəvətlər"
 
@@ -2717,6 +2720,7 @@ msgid "Project description"
 msgstr "Layihənin təsviri"
 
 #: src/project/ProjectDetailsDialog.tsx
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Project details"
 msgstr "Layihə  təfsilatları"
 
@@ -3167,7 +3171,7 @@ msgstr "Yenidən cəhd edin"
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -3836,6 +3840,7 @@ msgstr "Vergi"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Heyət "
 
@@ -4442,6 +4447,8 @@ msgstr "İstifadəçi adlarında(a-z) hərfləri, (0-9), rəqəmlər, (-) tirel�
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr "İstifadəçilər"
@@ -4715,6 +4722,7 @@ msgstr "işarə zamandan çıxmayacaq"
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"

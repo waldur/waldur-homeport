@@ -119,6 +119,7 @@ msgstr "Aceptar la invitacion"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "Aceptado"
@@ -1737,6 +1738,7 @@ msgid "By ordering, you agree to the <tos>terms of service</tos> and <pp>privacy
 msgstr "Al realizar el pedido, acepta los <tos> Términos del servicio </tos> y la <pp> Política de privacidad </pp>."
 
 #: src/marketplace/deploy/DeployPageSidebar.tsx
+#: src/proposals/proposal/create/CreatePageSidebar.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr "Al realizar el pedido, aceptas la plataforma.<tos> términos de servicio</tos> y<pp> política de privacidad</pp> ."
 
@@ -4031,7 +4033,7 @@ msgstr "Salida"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -4230,11 +4232,13 @@ msgstr "Error al buscar grupos"
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr "Mensaje de error"
 
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Error traceback"
 msgstr "Rastreo de errores"
 
@@ -5645,6 +5649,7 @@ msgstr "Rechazo de la invitación"
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr "Invitaciones"
 
@@ -7334,7 +7339,9 @@ msgstr "Tenga en cuenta que este volumen no se cobrará por separado para {organ
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
@@ -8723,6 +8730,7 @@ msgid "Permission has been updated successfully."
 msgstr "El permiso se actualizó correctamente."
 
 #: src/customer/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Permission log"
 msgstr "Registro de permisos"
 
@@ -8987,6 +8995,7 @@ msgstr "Por favor, busque su organización"
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr "Seleccione el código de la OCDE correspondiente al campo de la ciencia y la tecnología"
 
@@ -9406,6 +9415,7 @@ msgid "Project description"
 msgstr "Descripción del proyecto"
 
 #: src/project/ProjectDetailsDialog.tsx
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Project details"
 msgstr "Detalles del proyecto"
 
@@ -10850,6 +10860,7 @@ msgid "Retype OpenStack Volume"
 msgstr "Vuelva a escribir el volumen de OpenStack"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/review/EditRoundReviewDialog.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
@@ -10927,7 +10938,7 @@ msgid "Reviewed by provider at"
 msgstr "Revisado por el proveedor en"
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 msgid "Reviewer"
 msgstr "Crítico"
 
@@ -10979,7 +10990,7 @@ msgstr "Se ha programado la sincronización de las cuentas de los robots."
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -12348,6 +12359,7 @@ msgid "Snapshots count"
 msgstr "Recuento de instantáneas"
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/proposal/create/ProposalCreatePage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr "Algo salió mal"
@@ -12591,6 +12603,7 @@ msgstr "Tipo de almacenamiento"
 msgid "Subject"
 msgstr "Asunto"
 
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
@@ -12904,6 +12917,7 @@ msgstr "Porcentaje de impuestos"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Equipo"
 
@@ -15590,6 +15604,7 @@ msgid "User agreement was updated"
 msgstr "Se actualizó el acuerdo de usuario."
 
 #: src/administration/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Acuerdos de usuario"
 
@@ -15981,6 +15996,8 @@ msgstr "Los nombres de usuario pueden contener letras (a-z), números (0-9), gui
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr "Usuarios"
@@ -16446,7 +16463,7 @@ msgstr "Puede añadir un mensaje para adjuntarlo al correo electrónico de invit
 msgid "You can create issue by pressing the button below"
 msgstr "Puede crear un problema pulsando el botón de abajo"
 
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 msgid "You can edit reviewers for this call."
 msgstr "Puede editar revisores para esta llamada."
 
@@ -17156,6 +17173,7 @@ msgstr "solicitudes de permiso de usuario"
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"

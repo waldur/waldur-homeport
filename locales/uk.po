@@ -119,6 +119,7 @@ msgstr "Прийняти запрошення"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 msgid "Accepted"
 msgstr "Прийнято"
@@ -1756,6 +1757,7 @@ msgid "By ordering, you agree to the <tos>terms of service</tos> and <pp>privacy
 msgstr "Роблячи замовлення, ви погоджуєтеся з<tos> Умови використання</tos> і<pp> політика конфіденційності</pp> ."
 
 #: src/marketplace/deploy/DeployPageSidebar.tsx
+#: src/proposals/proposal/create/CreatePageSidebar.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr "Роблячи замовлення, ви погоджуєтеся з платформою<tos> Умови використання</tos> і<pp> політика конфіденційності</pp> ."
 
@@ -4050,7 +4052,7 @@ msgstr "Виїзд"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -4249,11 +4251,13 @@ msgstr "Помилка під час отримання груп"
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr "Повідомлення про помилку"
 
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Error traceback"
 msgstr "Трасування помилки"
 
@@ -5664,6 +5668,7 @@ msgstr "Відмова від запрошення"
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr "Запрошення"
 
@@ -7353,7 +7358,9 @@ msgstr "Зауважте, що за цей обсяг не стягуватим�
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
 msgid "Nothing to see here"
@@ -8750,6 +8757,7 @@ msgid "Permission has been updated successfully."
 msgstr "Дозвіл успішно оновлено."
 
 #: src/customer/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Permission log"
 msgstr "Журнал дозволів"
 
@@ -9014,6 +9022,7 @@ msgstr "Будь ласка, знайдіть свою організацію"
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr "Будь ласка, виберіть код OECD, що відповідає галузі науки і техніки"
 
@@ -9433,6 +9442,7 @@ msgid "Project description"
 msgstr "Опис проекту"
 
 #: src/project/ProjectDetailsDialog.tsx
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Project details"
 msgstr "Деталі проекту"
 
@@ -10877,6 +10887,7 @@ msgid "Retype OpenStack Volume"
 msgstr "Повторно введіть том OpenStack"
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/review/EditRoundReviewDialog.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
@@ -10954,7 +10965,7 @@ msgid "Reviewed by provider at"
 msgstr "Переглянуто постачальником на"
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 msgid "Reviewer"
 msgstr "Рецензент"
 
@@ -11006,7 +11017,7 @@ msgstr "Синхронізацію облікових записів робот�
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
-#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -12383,6 +12394,7 @@ msgid "Snapshots count"
 msgstr "Знімки враховуються"
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/proposal/create/ProposalCreatePage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr "Щось пішло не так"
@@ -12626,6 +12638,7 @@ msgstr "Тип зберігання"
 msgid "Subject"
 msgstr "Тема"
 
+#: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
@@ -12939,6 +12952,7 @@ msgstr "Податкові відсотки"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Команда"
 
@@ -15641,6 +15655,7 @@ msgid "User agreement was updated"
 msgstr "Угоду користувача оновлено"
 
 #: src/administration/routes.ts
+#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Користувацькі угоди"
 
@@ -16040,6 +16055,8 @@ msgstr "Імена користувачів можуть містити літе
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallReviewersSection.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr "Користувач"
@@ -16505,7 +16522,7 @@ msgstr "Ви можете додати повідомлення, яке буде
 msgid "You can create issue by pressing the button below"
 msgstr "Ви можете створити проблему, натиснувши кнопку нижче"
 
-#: src/proposals/update/reviewers/CallReviewersTablePlaceholder.tsx
+#: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 msgid "You can edit reviewers for this call."
 msgstr "Ви можете редагувати рецензентів для цього виклику."
 
@@ -17215,6 +17232,7 @@ msgstr "запити дозволів користувача"
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"
