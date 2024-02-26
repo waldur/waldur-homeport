@@ -9,7 +9,6 @@ import {
 } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { InvoiceSummary } from '@waldur/dashboard/types';
-import { Event } from '@waldur/events/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { OecdCode } from './types';
@@ -97,14 +96,6 @@ export const dangerouslyUpdateCustomer = (customer, project) => {
     item.description = project.description;
   }
 };
-
-export const fetchLatestEvents = (project: Project, size: number) =>
-  getList<Event>('/events/', {
-    page: 1,
-    page_size: size,
-    scope: project.url,
-    field: ['uuid', 'created', 'event_type', 'message'],
-  });
 
 export const fetchLast12MonthProjectCosts = (projectId: string) =>
   getList<InvoiceSummary>('/invoice-items/costs/', {
