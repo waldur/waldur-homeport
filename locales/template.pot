@@ -3929,6 +3929,7 @@ msgid "Event types"
 msgstr ""
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx

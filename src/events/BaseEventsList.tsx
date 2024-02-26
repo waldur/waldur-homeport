@@ -27,6 +27,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ])}
       hasQuery={true}
+      title={translate('Events')}
       verboseName={translate('events')}
       actions={<EventTypesButton />}
       enableExport={true}
