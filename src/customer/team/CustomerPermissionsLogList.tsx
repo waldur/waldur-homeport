@@ -1,24 +1,9 @@
 import { connect } from 'react-redux';
 
-import { getEventsList } from '@waldur/events/BaseEventsList';
+import { PermissionsLogList } from '@waldur/permissions/PermissionsLogList';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-export const PureCustomerPermissionsLogList = getEventsList({
-  mapPropsToFilter: (props) => ({
-    scope: props.customer.url,
-    event_type: ['role_granted', 'role_revoked', 'role_updated'],
-  }),
-  mapPropsToTableId: (props) => [
-    'customer-permissions-log',
-    props.customer.uuid,
-  ],
-});
-
-const enhance = connect((state: RootState) => ({
-  customer: getCustomer(state),
-}));
-
-export const CustomerPermissionsLogList = enhance(
-  PureCustomerPermissionsLogList,
-);
+export const CustomerPermissionsLogList = connect((state: RootState) => ({
+  scope: getCustomer(state),
+}))(PermissionsLogList);

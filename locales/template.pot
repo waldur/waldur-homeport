@@ -6604,7 +6604,6 @@ msgstr ""
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -14485,10 +14484,6 @@ msgstr ""
 
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
 msgid "You can see invitations for this call."
-msgstr ""
-
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
-msgid "You can see permissions log for this call."
 msgstr ""
 
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
