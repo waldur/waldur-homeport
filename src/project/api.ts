@@ -89,14 +89,6 @@ export const dangerouslyUpdateProject = (cache, project) => {
   cache.description = project.description;
 };
 
-export const dangerouslyUpdateCustomer = (customer, project) => {
-  const item = customer.projects.find((p) => p.uuid === project.uuid);
-  if (item) {
-    item.name = project.name;
-    item.description = project.description;
-  }
-};
-
 export const fetchLast12MonthProjectCosts = (projectId: string) =>
   getList<InvoiceSummary>('/invoice-items/costs/', {
     project_uuid: projectId,
