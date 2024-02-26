@@ -9781,7 +9781,7 @@ msgstr ""
 msgid "Role in project"
 msgstr ""
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr ""
 
@@ -13941,11 +13941,11 @@ msgstr ""
 msgid "User {affected_user_link} has been updated."
 msgstr ""
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr ""
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr ""
 
@@ -13961,24 +13961,28 @@ msgstr ""
 msgid "User {user_link} authenticated successfully with username and password."
 msgstr ""
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr ""
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr ""
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr ""
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr ""
 
 #: src/auth/events.ts
 msgid "User {user_link} logged out successfully with SAML2."
+msgstr ""
+
+#: src/permissions/events.tsx
+msgid "User {user_link} role has been updated."
 msgstr ""
 
 #: src/administration/TokensList.tsx

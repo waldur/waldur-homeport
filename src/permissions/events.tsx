@@ -4,34 +4,47 @@ import eventsRegistry from '@waldur/events/registry';
 import {
   getUserContext,
   getAffectedUserContext,
-  RoleEvent,
+  UserContext,
+  AffectedUserContext,
 } from '@waldur/events/utils';
 import { translate, gettext, formatJsxTemplate } from '@waldur/i18n';
 import { formatRole } from '@waldur/permissions/utils';
 
-import { CustomersEnum } from '../../EventsEnums';
+import { PermissionsEnum } from '../EventsEnums';
+
+interface RoleEvent extends UserContext, AffectedUserContext {
+  scope_uuid: string;
+  scope_name: string;
+  scope_type: string;
+  role_name: string;
+}
+
+const STATES_MAP = {
+  customer: 'organization.dashboard',
+  project: 'project.dashboard',
+  offering: 'marketplace-offering-details',
+  call: 'protected-call-update.details',
+};
+
+const UUID_MAP = {
+  customer: 'uuid',
+  project: 'uuid',
+  offering: 'offering_uuid',
+  call: 'call_uuid',
+};
 
 const getScopeLink = (event: RoleEvent) => ({
-  scope_link: (
+  scope_link: STATES_MAP[event.scope_type] ? (
     <UISref
-      to={
-        event.structure_type === 'customer'
-          ? 'organization.events'
-          : 'project.dashboard'
-      }
+      to={STATES_MAP[event.scope_type]}
       params={{
-        uuid:
-          event.structure_type === 'customer'
-            ? event.customer_uuid
-            : event.project_uuid,
+        [UUID_MAP[event.scope_type]]: event.scope_uuid,
       }}
     >
-      <a>
-        {event.structure_type === 'customer'
-          ? event.customer_name
-          : event.project_name}
-      </a>
+      <a>{event.scope_name}</a>
     </UISref>
+  ) : (
+    event.scope_name
   ),
 });
 
@@ -76,18 +89,32 @@ const formatRoleRevokedEvent = (event: RoleEvent) => {
   }
 };
 
+const formatRoleUpdatedEvent = (event: RoleEvent) => {
+  const context = getEventContext(event);
+  return translate(
+    'User {user_link} role has been updated.',
+    context,
+    formatJsxTemplate,
+  );
+};
+
 eventsRegistry.registerGroup({
   title: gettext('Role management events'),
   events: [
     {
-      key: CustomersEnum.role_granted,
+      key: PermissionsEnum.role_granted,
       title: gettext(
         'User {user_link} has granted role to {affected_user_link}.',
       ),
       formatter: formatRoleGrantedEvent,
     },
     {
-      key: CustomersEnum.role_revoked,
+      key: PermissionsEnum.role_updated,
+      title: gettext('User {user_link} role has been updated.'),
+      formatter: formatRoleUpdatedEvent,
+    },
+    {
+      key: PermissionsEnum.role_revoked,
       title: gettext('User {user_link} has revoked {affected_user_link}.'),
       formatter: formatRoleRevokedEvent,
     },

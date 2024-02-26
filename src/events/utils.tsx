@@ -2,27 +2,16 @@ import { UISref } from '@uirouter/react';
 
 import { UserDetailsLink } from './UserDetailsLink';
 
-interface UserContext {
+export interface UserContext {
   user_uuid: string;
   user_full_name: string;
   user_username: string;
 }
 
-interface AffectedUserContext {
+export interface AffectedUserContext {
   affected_user_uuid: string;
   affected_user_full_name: string;
   affected_user_username: string;
-}
-
-export interface RoleEvent extends UserContext, AffectedUserContext {
-  customer_uuid: any;
-  customer_name: string;
-  project_uuid: any;
-  project_name: string;
-  scope_uuid: string;
-  scope_name: string;
-  role_name: string;
-  structure_type: string;
 }
 
 interface CustomerContext {

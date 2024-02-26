@@ -23,9 +23,6 @@ export const CustomersEnum = {
   payment_added: 'payment_added',
   payment_created: 'payment_created',
   payment_removed: 'payment_removed',
-  role_granted: 'role_granted',
-  role_revoked: 'role_revoked',
-  role_updated: 'role_updated',
 };
 
 export const InvoicesEnum = {
@@ -57,6 +54,12 @@ export const PaymentsEnum = {
   payment_creation_succeeded: 'payment_creation_succeeded',
 };
 
+export const PermissionsEnum = {
+  role_granted: 'role_granted',
+  role_revoked: 'role_revoked',
+  role_updated: 'role_updated',
+};
+
 export const ProjectsEnum = {
   project_creation_succeeded: 'project_creation_succeeded',
   project_deletion_succeeded: 'project_deletion_succeeded',
@@ -65,9 +68,6 @@ export const ProjectsEnum = {
   project_update_request_created: 'project_update_request_created',
   project_update_request_rejected: 'project_update_request_rejected',
   project_update_succeeded: 'project_update_succeeded',
-  role_granted: 'role_granted',
-  role_revoked: 'role_revoked',
-  role_updated: 'role_updated',
 };
 
 export const ProposalEnum = {
@@ -99,9 +99,6 @@ export const ProvidersEnum = {
   resource_robot_account_created: 'resource_robot_account_created',
   resource_robot_account_deleted: 'resource_robot_account_deleted',
   resource_robot_account_updated: 'resource_robot_account_updated',
-  role_granted: 'role_granted',
-  role_revoked: 'role_revoked',
-  role_updated: 'role_updated',
 };
 
 export const ResourcesEnum = {
