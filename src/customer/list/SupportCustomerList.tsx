@@ -51,7 +51,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       hoverableRow={({ row }) => (
         <>
-          <OrganizationHoverableRow row={{ customer_uuid: row.uuid }} />
+          <OrganizationHoverableRow row={row} />
           {props.isStaff && <OrganizationEditButton customer={row} />}
         </>
       )}
