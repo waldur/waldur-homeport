@@ -8,6 +8,7 @@ import { Application } from './Application';
 import './auth/module';
 import './issues/module';
 import './customer/module';
+import './permissions/events';
 import './invoices/module';
 import './support/module';
 import './openstack/module';
