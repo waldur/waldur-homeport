@@ -19,9 +19,6 @@ export const getProject = (projectId: string) =>
 export const getCustomer = (customerId: string) =>
   getById<Customer>('/customers/', customerId);
 
-export const getCustomersList = (params) =>
-  getList<Customer>('/customers/', params);
-
 export const createProject = (project) => {
   const data = {
     name: project.name,

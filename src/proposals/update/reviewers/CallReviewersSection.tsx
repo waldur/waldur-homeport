@@ -9,7 +9,7 @@ import {
 import { ProposalCall } from '@waldur/proposals/types';
 
 import { CallInvitationsListPlaceholder } from './CallInvitationsListPlaceholder';
-import { CallPermissionsLogListPlaceholder } from './CallPermissionsLogListPlaceholder';
+import { CallPermissionsLogList } from './CallPermissionsLogList';
 import { CallUsersList } from './CallUsersList';
 
 const tabs: TabSpec<{ call: ProposalCall }>[] = [
@@ -17,7 +17,7 @@ const tabs: TabSpec<{ call: ProposalCall }>[] = [
   {
     title: translate('Permission log'),
     key: 'permissions',
-    component: CallPermissionsLogListPlaceholder,
+    component: CallPermissionsLogList,
   },
   {
     title: translate('Invitations'),
