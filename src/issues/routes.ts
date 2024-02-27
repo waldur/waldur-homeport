@@ -27,10 +27,6 @@ const CustomerRequestContainer = lazyComponent(
   () => import('@waldur/marketplace-flows/CustomerRequestContainer'),
   'CustomerRequestContainer',
 );
-const OrganizationUpdateContainer = lazyComponent(
-  () => import('@waldur/customer/list/OrganizationUpdateContainer'),
-  'OrganizationUpdateContainer',
-);
 const SupportDashboard = lazyComponent(
   () => import('@waldur/support/dashboard/SupportDashboard'),
   'SupportDashboard',
@@ -162,15 +158,6 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support.customers_list',
       breadcrumb: () => translate('Organization groups'),
-    },
-  },
-
-  {
-    name: 'support.customer-update',
-    url: 'customer-update/:customer_uuid/',
-    component: OrganizationUpdateContainer,
-    data: {
-      feature: 'support.customers_list',
     },
   },
 
