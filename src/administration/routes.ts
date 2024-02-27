@@ -44,6 +44,10 @@ const SupportCustomersContainer = lazyComponent(
   () => import('@waldur/customer/list/SupportCustomersContainer'),
   'SupportCustomersContainer',
 );
+const OrganizationUpdateContainer = lazyComponent(
+  () => import('@waldur/customer/list/OrganizationUpdateContainer'),
+  'OrganizationUpdateContainer',
+);
 const SupportProjectsList = lazyComponent(
   () => import('@waldur/project/SupportProjectsList'),
   'SupportProjectsList',
@@ -223,6 +227,14 @@ export const states: StateDeclaration[] = [
     data: {
       feature: 'support.customers_list',
       breadcrumb: () => translate('Organizations'),
+    },
+  },
+  {
+    name: 'admin.customer-update',
+    url: 'customer-update/:customer_uuid/',
+    component: OrganizationUpdateContainer,
+    data: {
+      feature: 'support.customers_list',
     },
   },
 

@@ -18,7 +18,7 @@ export const OrganizationEditButton: FunctionComponent<OrganizationEditButtonPro
         icon="fa fa-edit"
         className="btn-active-primary ms-3"
         action={() =>
-          router.stateService.go('support.customer-update', {
+          router.stateService.go('admin.customer-update', {
             customer_uuid: props.customer.uuid,
           })
         }
