@@ -10,6 +10,7 @@ import { IssueAttachmentsList } from './IssueAttachmentsList';
 describe('IssueAttachmentsContainer', () => {
   const issue = {
     url: 'url',
+    add_attachment_is_available: true,
   };
   const initialProps = {
     issue,

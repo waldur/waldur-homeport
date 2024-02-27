@@ -30,5 +30,7 @@
   "modified": "2020-12-17T11:00:13.587709Z",
   "first_response_sla": "2020-12-18T07:00:27.525000Z",
   "template": null,
-  "feedback": null
+  "feedback": null,
+  "add_comment_is_available": true,
+  "add_attachment_is_available": true
 }
