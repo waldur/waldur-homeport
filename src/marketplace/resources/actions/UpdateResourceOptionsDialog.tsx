@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import {
-  getProviderOffering,
+  getPublicOffering,
   submitResourceOptions,
 } from '@waldur/marketplace/common/api';
 import { OptionsForm } from '@waldur/marketplace/common/OptionsForm';
@@ -40,7 +40,7 @@ export const UpdateResourceOptionsDialog = connect(
     };
     const { data, isLoading, error } = useQuery(
       ['UpdateResourceOptionsDialog'],
-      () => getProviderOffering(props.resolve.resource.offering_uuid),
+      () => getPublicOffering(props.resolve.resource.offering_uuid),
     );
 
     return (
