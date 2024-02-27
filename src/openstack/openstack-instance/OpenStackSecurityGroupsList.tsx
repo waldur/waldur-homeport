@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 
 import { OpenStackSecurityGroupsTable } from '../openstack-security-groups/OpenStackSecurityGroupsDialog';
 import { SecurityGroup } from '../openstack-security-groups/types';
@@ -14,6 +15,8 @@ interface OwnProps {
     security_groups: SecurityGroup[];
   };
   marketplaceResource;
+  refetch?(): void;
+  isLoading?: boolean;
 }
 
 export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
@@ -22,9 +25,15 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
   return (
     <Card>
       <Card.Header>
-        <Card.Title>{translate('Security groups details')}</Card.Title>
+        <Card.Title>
+          {translate('Security groups details')}
+          <RefreshButton refetch={props.refetch} loading={props.isLoading} />
+        </Card.Title>
         <div className="card-toolbar">
-          <UpdateSecurityGroupsButton resource={props.resource} />
+          <UpdateSecurityGroupsButton
+            resource={props.resource}
+            refetch={props.refetch}
+          />
           <ManageSecurityGroupsButton resource={props.marketplaceResource} />
         </div>
       </Card.Header>

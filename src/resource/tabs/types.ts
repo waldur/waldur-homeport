@@ -10,6 +10,8 @@ export interface ResourceTab {
       resource: any;
       marketplaceResource?: any;
       title?: string;
+      refetch?(): void;
+      isLoading?: boolean;
     } & Partial<TableProps>
   >;
   feature?: string;

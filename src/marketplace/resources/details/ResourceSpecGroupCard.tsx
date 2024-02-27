@@ -15,6 +15,9 @@ interface ResourceSpecGroupCardProps {
   scope;
   resource: Resource;
   tabKey: string;
+  index?: number;
+  refetch?(): void;
+  isLoading?: boolean;
 }
 
 export const ResourceSpecGroupCard: FunctionComponent<ResourceSpecGroupCardProps> =
@@ -43,6 +46,8 @@ export const ResourceSpecGroupCard: FunctionComponent<ResourceSpecGroupCardProps
             title={tab.title}
             initialPageSize={5}
             showPageSizeSelector
+            refetch={props.refetch}
+            isLoading={props.isLoading}
           />
         </Card.Body>
       </Card>
