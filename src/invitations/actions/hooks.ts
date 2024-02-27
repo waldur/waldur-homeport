@@ -52,24 +52,18 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
 
   const roles = useMemo(
     () =>
-      ENV.roles.filter(
-        (role) =>
-          (!context.project || role.content_type === 'project') &&
-          InvitationPolicyService.canManageRole(context, role),
+      ENV.roles.filter((role) =>
+        InvitationPolicyService.canManageRole(context, role),
       ),
     [context],
   );
   const defaultRoleAndProject = useMemo(
-    () =>
-      context.project
-        ? {
-            role: roles.filter((role) => role.content_type === 'project')[0],
-            project: context.project || context.customer.projects?.[0],
-          }
-        : {
-            role: undefined,
-            project: undefined,
-          },
+    () => ({
+      role: roles.length > 0 ? roles[0] : null,
+      project:
+        context.roleTypes.includes('project') &&
+        (context.project || context.customer.projects?.[0]),
+    }),
     [roles, context],
   );
 
@@ -86,8 +80,10 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
             payload.role = row.role_project.role.uuid;
             if (row.role_project.role.content_type === 'project') {
               payload.scope = row.role_project.project.url;
-            } else {
+            } else if (row.role_project.role.content_type === 'customer') {
               payload.scope = context.customer.url;
+            } else if (context.scope) {
+              payload.scope = context.scope.url;
             }
             return InvitationService.createInvitation(payload);
           });

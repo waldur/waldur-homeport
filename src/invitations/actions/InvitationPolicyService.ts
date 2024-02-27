@@ -4,29 +4,32 @@ import { Role } from '@waldur/permissions/types';
 
 import { Invitation } from '../types';
 
+import { InvitationContext } from './types';
+
 export const InvitationPolicyService = {
   // Check user permissions for new invitation
-  canManageRole(context, role: Role) {
+  canManageRole(context: InvitationContext, role: Role) {
     if (!role.description) {
       return false;
     }
-    if (!['customer', 'project'].includes(role.content_type)) {
+    if (!context.roleTypes.includes(role.content_type)) {
       return false;
-    }
-    if (context.user?.is_staff) {
-      return true;
     }
     if (role.content_type === 'customer') {
       return hasPermission(context.user, {
         permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-        customerId: context.customer?.uuid,
+        customerId: context.customer.uuid,
       });
-    }
-    if (role.content_type === 'project') {
+    } else if (role.content_type === 'project') {
       return hasPermission(context.user, {
         permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
         projectId: context.project?.uuid,
-        customerId: context.customer?.uuid,
+        customerId: context.customer.uuid,
+      });
+    } else if (role.content_type === 'call') {
+      return hasPermission(context.user, {
+        permission: PermissionEnum.CREATE_CALL_PERMISSION,
+        customerId: context.customer.uuid,
       });
     }
     return false;
@@ -42,12 +45,16 @@ export const InvitationPolicyService = {
         permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
         customerId: context.customer?.uuid,
       });
-    }
-    if (invitation.scope_type === 'project') {
+    } else if (invitation.scope_type === 'project') {
       return hasPermission(context.user, {
         permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
         projectId: context.project?.uuid,
         customerId: context.customer?.uuid,
+      });
+    } else if (invitation.scope_type === 'call') {
+      return hasPermission(context.user, {
+        permission: PermissionEnum.CREATE_CALL_PERMISSION,
+        customerId: context.customer.uuid,
       });
     }
     return false;
@@ -67,6 +74,10 @@ export const InvitationPolicyService = {
         permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
         projectId: context.project?.uuid,
         customerId: context.customer?.uuid,
+      }) ||
+      hasPermission(context.user, {
+        permission: PermissionEnum.CREATE_CALL_PERMISSION,
+        customerId: context.customer.uuid,
       })
     );
   },

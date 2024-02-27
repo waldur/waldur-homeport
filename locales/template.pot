@@ -2582,6 +2582,7 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -3650,6 +3651,7 @@ msgstr ""
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -4027,6 +4029,7 @@ msgstr ""
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 msgid "Expires at"
 msgstr ""
 
@@ -5128,6 +5131,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr ""
@@ -6604,7 +6608,6 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -9750,6 +9753,7 @@ msgstr ""
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -11128,6 +11132,7 @@ msgstr ""
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
@@ -14475,20 +14480,12 @@ msgstr ""
 msgid "You can not create group invitations."
 msgstr ""
 
-#: src/invitations/actions/create/InvitationCreateButton.tsx
-msgid "You can not invite users."
-msgstr ""
-
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 msgid "You can register organization as a service provider by pressing the button"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "You can remove this organization by pressing the button"
-msgstr ""
-
-#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-msgid "You can see invitations for this call."
 msgstr ""
 
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
@@ -14794,6 +14791,10 @@ msgstr ""
 
 #: src/openstack/openstack-instance/InternalIpsList.tsx
 msgid "internal IPs"
+msgstr ""
+
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
+msgid "invitations"
 msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx

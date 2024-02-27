@@ -66,7 +66,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
       )}
       verboseName={translate('Team invitations')}
       actions={
-        <InvitationCreateButton project={props.project} refetch={props.fetch} />
+        <InvitationCreateButton
+          project={props.project}
+          roleTypes={['project']}
+          refetch={props.fetch}
+        />
       }
       hasQuery={true}
       expandableRow={InvitationExpandableRow}

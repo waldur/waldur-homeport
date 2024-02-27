@@ -30,6 +30,7 @@ export const GroupInvitationCreateButton: FunctionComponent<{
           {
             customer,
             user,
+            roleTypes: ['customer', 'project'],
           },
           role,
         ),
