@@ -59,7 +59,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('team invitations')}
-      actions={<InvitationCreateButton refetch={props.fetch} />}
+      actions={
+        <InvitationCreateButton
+          roleTypes={['customer', 'project']}
+          refetch={props.fetch}
+        />
+      }
       hasQuery={true}
       hoverableRow={
         props.showActions ?? true

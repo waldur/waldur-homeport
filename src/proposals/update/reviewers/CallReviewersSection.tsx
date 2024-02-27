@@ -8,7 +8,7 @@ import {
 } from '@waldur/marketplace/deploy/steps/StepCardTabs';
 import { ProposalCall } from '@waldur/proposals/types';
 
-import { CallInvitationsListPlaceholder } from './CallInvitationsListPlaceholder';
+import { CallInvitationsList } from './CallInvitationsList';
 import { CallPermissionsLogList } from './CallPermissionsLogList';
 import { CallUsersList } from './CallUsersList';
 
@@ -22,7 +22,7 @@ const tabs: TabSpec<{ call: ProposalCall }>[] = [
   {
     title: translate('Invitations'),
     key: 'invitations',
-    component: CallInvitationsListPlaceholder,
+    component: CallInvitationsList,
   },
 ];
 
@@ -30,7 +30,7 @@ export const CallReviewersSection = ({ call }) => {
   const [tab, setTab] = useState<TabSpec<{ call: ProposalCall }>>(tabs[0]);
 
   return (
-    <Card>
+    <Card className="mb-7">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Reviewers')}</h3>
