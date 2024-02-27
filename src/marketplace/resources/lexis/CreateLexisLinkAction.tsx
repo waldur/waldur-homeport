@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
@@ -42,7 +43,8 @@ export const CreateLexisLinkAction: FC<CreateLexisLinkActionProps> = ({
   };
   if (
     disabled ||
-    !resource.available_actions?.includes(PermissionEnum.CREATE_LEXIS_LINK)
+    !resource.available_actions?.includes(PermissionEnum.CREATE_LEXIS_LINK) ||
+    !isFeatureVisible('marketplace.lexis_links')
   ) {
     return null;
   } else {

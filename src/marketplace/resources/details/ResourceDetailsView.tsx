@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { ErrorMessage } from '@waldur/ErrorMessage';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { PageBarProvider } from '@waldur/marketplace/context';
 import { LexisLinkCard } from '@waldur/marketplace/resources/lexis/LexisLinkCard';
@@ -205,7 +206,9 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
                 />
               </ErrorBoundary>
             )}
-            <LexisLinkCard resource={resource} />
+            {isFeatureVisible('marketplace.lexis_links') ? (
+              <LexisLinkCard resource={resource} />
+            ) : null}
             <RobotAccountCard resource={resource} />
             <UsageCard resource={resource} />
 

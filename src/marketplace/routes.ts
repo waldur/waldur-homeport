@@ -3,11 +3,12 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-import { loadContext, fetchProvider } from './resolve';
+import { fetchProvider, loadContext } from './resolve';
 
 const AdminOfferingsListContainer = lazyComponent(
   () =>
@@ -648,6 +649,13 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-admin-resources',
     data: {
       breadcrumb: () => translate('LEXIS links'),
+      permissions: [
+        () => {
+          if (isFeatureVisible('marketplace.lexis_links')) {
+            return true;
+          }
+        },
+      ],
     },
   },
   {
