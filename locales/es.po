@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "Tipos de eventos"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "Tenga en cuenta que este volumen no se cobrará por separado para {organ
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "El rol expira el"
 msgid "Role in project"
 msgstr "Rol en el proyecto"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Eventos de gestión de roles"
 
@@ -15755,7 +15755,7 @@ msgstr "El usuario {affected_user_link} tiene el rol de gerente de proyecto en e
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "El usuario {affected_user_link} tiene el rol de miembro del proyecto en el proyecto {project_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "El usuario {affected_user_link} tiene {role_name} un rol en {scope_link}."
 
@@ -15808,7 +15808,7 @@ msgstr "El usuario {affected_user_link} perdió el rol de miembro del proyecto e
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "El usuario {affected_user_link} perdió la función de asignador de recursos en {customer_link}"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "El usuario {affected_user_link} ha perdido {role_name} su función en {scope_link}."
 
@@ -15868,11 +15868,11 @@ msgstr "El usuario {user_link} ha otorgado el rol de miembro del proyecto en el 
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "El usuario {user_link} ha otorgado el rol de asignador de recursos {customer_link} a {affected_user_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "El usuario {user_link} ha otorgado el rol a {affected_user_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "El usuario {user_link} ha {role_name} asignado el rol {scope_link} a {affected_user_link}."
 
@@ -15920,11 +15920,11 @@ msgstr "El usuario {user_link} ha revocado el miembro {affected_user_link} del p
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "El usuario {user_link} ha revocado el asignador de recursos {affected_user_link} de {customer_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "El usuario {user_link} ha revocado {affected_user_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "El usuario {user_link} ha revocado {role_name} {affected_user_link} de {scope_link}."
 

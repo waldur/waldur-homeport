@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "Tapahtumatyypit"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "Huomaa, että tästä tilavuudesta ei veloiteta erikseen{organization} .
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "Rooli vanhenee"
 msgid "Role in project"
 msgstr "Rooli projektissa"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Roolijohtamistapahtumat"
 
@@ -15755,7 +15755,7 @@ msgstr "Käyttäjä{affected_user_link} on saanut projektipäällikön roolin pr
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "Käyttäjä{affected_user_link} on saanut projektijäsenen roolin projektissa{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "Käyttäjä{affected_user_link} on saanut{role_name} roolissa{scope_link} ."
 
@@ -15808,7 +15808,7 @@ msgstr "Käyttäjä{affected_user_link} on menettänyt projektijäsenen roolin{p
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "Käyttäjä{affected_user_link} on menettänyt resurssien allokaattorin roolin{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "Käyttäjä{affected_user_link} on hävinnyt{role_name} roolissa{scope_link} ."
 
@@ -15868,11 +15868,11 @@ msgstr "Käyttäjä{user_link} on myöntänyt projektijäsenen roolin projektiss
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "Käyttäjä{user_link} on myöntänyt resurssien jakajaroolin vuonna{customer_link} to{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Käyttäjä{user_link} on myöntänyt roolin{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "Käyttäjä{user_link} on myöntänyt{role_name} roolissa{scope_link} to{affected_user_link} ."
 
@@ -15920,11 +15920,11 @@ msgstr "Käyttäjä{user_link} on eronnut projektin jäsenestä{affected_user_li
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "Käyttäjä{user_link} on peruuttanut resurssien allokaattorin{affected_user_link} alkaen{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "Käyttäjä{user_link} on peruuttanut{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "Käyttäjä{user_link} on peruuttanut{role_name}{affected_user_link} alkaen{scope_link} ."
 

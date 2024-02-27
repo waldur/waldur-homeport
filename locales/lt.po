@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "Įvykių tipai"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "Atminkite, kad šis tomas nebus apmokestinamas atskirai {organization}."
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "Vaidmens galiojimo laikas baigiasi"
 msgid "Role in project"
 msgstr "Vaidmuo projekte"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Vaidmenų valdymo įvykiai"
 
@@ -15755,7 +15755,7 @@ msgstr "Vartotojas{affected_user_link} projekte atliko projekto vadovo vaidmenį
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "Vartotojas{affected_user_link} turi projekto nario vaidmenį projekte{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "Vartotojas{affected_user_link} turi{role_name} vaidmenį{scope_link} ."
 
@@ -15808,7 +15808,7 @@ msgstr "Vartotojas{affected_user_link} prarado projekto nario vaidmenį{project_
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "Vartotojas{affected_user_link} prarado išteklių paskirstytojo vaidmenį{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "Vartotojas{affected_user_link} prarado{role_name} vaidmenį{scope_link} ."
 
@@ -15868,11 +15868,11 @@ msgstr "Vartotojas{user_link} suteikė projekto nario vaidmenį projekte{project
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "Vartotojas{user_link} suteikė išteklių paskirstytojo vaidmenį{customer_link} į{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Vartotojas {user_link} suteikė vaidmenį {affected_user_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "Vartotojas{user_link} suteikė{role_name} vaidmenį{scope_link} į{affected_user_link} ."
 
@@ -15920,11 +15920,11 @@ msgstr "Vartotojas{user_link} atšaukė projekto narį{affected_user_link} iš p
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "Vartotojas{user_link} atšaukė išteklių skirstytuvą{affected_user_link} iš{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "Vartotojas {user_link} atšaukė {affected_user_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "Vartotojas{user_link} atšaukė{role_name}{affected_user_link} iš{scope_link} ."
 

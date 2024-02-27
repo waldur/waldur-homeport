@@ -4347,6 +4347,7 @@ msgid "Event types"
 msgstr "Типи подій"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7359,7 +7360,6 @@ msgstr "Зауважте, що за цей обсяг не стягуватим�
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11045,7 +11045,7 @@ msgstr "Роль видалено."
 msgid "Role in project"
 msgstr "Роль у проекті"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Події управління ролями"
 
@@ -15814,7 +15814,7 @@ msgstr "Користувач{affected_user_link} має роль менедже�
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "Користувач{affected_user_link} має роль учасника проекту в проекті{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "Користувач{affected_user_link} отримав{role_name} роль в{scope_link} ."
 
@@ -15867,7 +15867,7 @@ msgstr "Користувач{affected_user_link} втратив роль уча�
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "Користувач{affected_user_link} втратив роль розподілювача ресурсів у{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "Користувач{affected_user_link} програв{role_name} роль в{scope_link} ."
 
@@ -15927,11 +15927,11 @@ msgstr "Користувач{user_link} надав роль учасника п�
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "Користувач{user_link} надав роль розподілювача ресурсів у{customer_link} до{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Користувач{user_link} надав роль{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "Користувач{user_link} надав{role_name} роль в{scope_link} до{affected_user_link} ."
 
@@ -15979,11 +15979,11 @@ msgstr "Користувач{user_link} відкликав учасника пр
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "Користувач{user_link} скасував розподільник ресурсів{affected_user_link} від{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "Користувач{user_link} скасував{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "Користувач{user_link} скасував{role_name}{affected_user_link} від{scope_link} ."
 

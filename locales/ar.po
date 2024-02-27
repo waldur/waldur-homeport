@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "أنواع الأحداث"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "لاحظ أنه لن يتم تحصيل هذا الحجم بشكل منف
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "تنتهي صلاحية الدور في"
 msgid "Role in project"
 msgstr "دور في المشروع"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "أحداث إدارة الأدوار"
 
@@ -15755,7 +15755,7 @@ msgstr "مستخدم{affected_user_link} حصل على دور مدير المش�
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "مستخدم{affected_user_link} حصل على دور عضو المشروع في المشروع{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "مستخدم{affected_user_link} لقد حصلت{role_name} يلعب دورا{scope_link} ."
 
@@ -15808,7 +15808,7 @@ msgstr "مستخدم{affected_user_link} فقد دور عضو المشروع ف�
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "مستخدم{affected_user_link} لقد فقد دور مخصص الموارد في{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "مستخدم{affected_user_link} فقد{role_name} يلعب دورا{scope_link} ."
 
@@ -15868,11 +15868,11 @@ msgstr "مستخدم{user_link} منح عضو المشروع دورًا في ا�
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "مستخدم{user_link} تم منح دور مخصص الموارد في{customer_link} ل{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "مستخدم{user_link} منحت الدور ل{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "مستخدم{user_link} منحت{role_name} يلعب دورا{scope_link} ل{affected_user_link} ."
 
@@ -15920,11 +15920,11 @@ msgstr "مستخدم{user_link} تم إبطال عضو المشروع{affected_u
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "مستخدم{user_link} لقد ألغى مخصص الموارد{affected_user_link} من{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "مستخدم{user_link} قد ألغى{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "مستخدم{user_link} قد ألغى{role_name}{affected_user_link} من{scope_link} ."
 

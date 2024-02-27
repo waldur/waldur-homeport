@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "Pasākumu veidi"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "Ņemiet vērā, ka par šo apjomu netiks iekasēta atsevišķa maksa{org
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "Lomas termiņš beidzas"
 msgid "Role in project"
 msgstr "Loma projektā"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Lomu vadības pasākumi"
 
@@ -15755,7 +15755,7 @@ msgstr "Lietotājs{affected_user_link} ir ieguvusi projektu vadītāja lomu proj
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "Lietotājs{affected_user_link} ir ieguvusi projekta dalībnieka lomu projektā{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "Lietotājs{affected_user_link} ir ieguvis{role_name} lomu iekšā{scope_link} ."
 
@@ -15808,7 +15808,7 @@ msgstr "Lietotājs{affected_user_link} gadā ir zaudējis projekta dalībnieka l
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "Lietotājs{affected_user_link} ir zaudējis resursu sadalītāja lomu{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "Lietotājs{affected_user_link} ir zaudējis{role_name} lomu iekšā{scope_link} ."
 
@@ -15868,11 +15868,11 @@ msgstr "Lietotājs{user_link} ir piešķīris projekta dalībnieka lomu projekt�
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "Lietotājs{user_link} ir piešķīris resursu sadalītāja lomu{customer_link} uz{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Lietotājs{user_link} ir piešķīrusi lomu{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "Lietotājs{user_link} ir piešķīris{role_name} lomu iekšā{scope_link} uz{affected_user_link} ."
 
@@ -15920,11 +15920,11 @@ msgstr "Lietotājs{user_link} ir atsaukusi projekta dalībnieci{affected_user_li
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "Lietotājs{user_link} ir atsaukusi resursu sadalītāju{affected_user_link} no{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "Lietotājs{user_link} ir atsaukusi{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "Lietotājs{user_link} ir atsaukusi{role_name}{affected_user_link} no{scope_link} ."
 

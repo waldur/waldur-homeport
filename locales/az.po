@@ -1245,6 +1245,7 @@ msgid "Event types"
 msgstr "Hadisə növləri "
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -3191,7 +3192,7 @@ msgstr "Vəzifə ______başa çatır"
 msgid "Role in project"
 msgstr "Layihədə vəzifəsi"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Vəzifə idarəçiliyi hadisələri"
 
@@ -4375,7 +4376,7 @@ msgstr "{user_link} istifadəçi layihə administratoru vəzifəsini {project_li
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr "{user_link} istifadəçi layihə meneceri vəzifəsini {project_link} ünvanındakı {affected_user_link}-ə vermişdir."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "{user_link} istifadəçi vəzifəni {affected_user_link}-ə vermişdir."
 
@@ -4395,7 +4396,7 @@ msgstr "{user_link} istifadəçi {affected_user_link} layihə administratorunu {
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
 msgstr "{user_link} istifadəçi {affected_user_link} layihə menecerini {project_link}-ndən ləğv etmşdir."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "{user_link} istifadəçi {affected_user_link} ləğv etmşdir."
 

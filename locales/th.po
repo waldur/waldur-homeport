@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "ประเภทเหตุการณ์"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "โปรดทราบว่าปริมาณนี้จะไม
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "บทบาทหมดอายุในวันที่"
 msgid "Role in project"
 msgstr "บทบาทในโครงการ"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "กิจกรรมการจัดการบทบาท"
 
@@ -15755,7 +15755,7 @@ msgstr "ผู้ใช้{affected_user_link} มีบทบาทผู้จ
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "ผู้ใช้{affected_user_link} ได้เข้ามามีบทบาทเป็นสมาชิกโครงการในโครงการ{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "ผู้ใช้{affected_user_link} ได้แล้ว{role_name} บทบาทใน{scope_link} ."
 
@@ -15808,7 +15808,7 @@ msgstr "ผู้ใช้{affected_user_link} ได้สูญเสียบ
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "ผู้ใช้{affected_user_link} สูญเสียบทบาทผู้จัดสรรทรัพยากรไปแล้ว{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "ผู้ใช้{affected_user_link} ได้สูญเสีย{role_name} บทบาทใน{scope_link} ."
 
@@ -15868,11 +15868,11 @@ msgstr "ผู้ใช้{user_link} ได้มอบบทบาทสมา
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "ผู้ใช้{user_link} ได้มอบบทบาทผู้จัดสรรทรัพยากรให้กับ{customer_link} ถึง{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "ผู้ใช้{user_link} ได้มอบบทบาทให้{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "ผู้ใช้{user_link} ได้รับ{role_name} บทบาทใน{scope_link} ถึง{affected_user_link} ."
 
@@ -15920,11 +15920,11 @@ msgstr "ผู้ใช้{user_link} ได้เพิกถอนสมาช
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "ผู้ใช้{user_link} ได้เพิกถอนการจัดสรรทรัพยากร{affected_user_link} จาก{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "ผู้ใช้{user_link} ได้เพิกถอนแล้ว{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "ผู้ใช้{user_link} ได้เพิกถอนแล้ว{role_name}{affected_user_link} จาก{scope_link} ."
 

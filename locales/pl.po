@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "Typy wydarzeń"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "Należy pamiętać, że za ten wolumen nie będzie naliczana odrębna op
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "Rola wygasa dnia"
 msgid "Role in project"
 msgstr "Rola w projekcie"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Wydarzenia związane z zarządzaniem rolami"
 
@@ -15755,7 +15755,7 @@ msgstr "Użytkownik{affected_user_link} pełni rolę kierownika projektu w proje
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "Użytkownik{affected_user_link} ma rolę członka projektu w projekcie{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "Użytkownik{affected_user_link} ma{role_name} rola w{scope_link} ."
 
@@ -15808,7 +15808,7 @@ msgstr "Użytkownik{affected_user_link} utracił rolę członka projektu w{proje
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "Użytkownik{affected_user_link} utracił rolę alokatora zasobów w{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "Użytkownik{affected_user_link} przegrał{role_name} rola w{scope_link} ."
 
@@ -15868,11 +15868,11 @@ msgstr "Użytkownik{user_link} przyznało rolę członka projektu w projekcie{pr
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "Użytkownik{user_link} przyznał rolę alokatora zasobów w{customer_link} Do{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Użytkownik{user_link} przyznał rolę{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "Użytkownik{user_link} przyznał{role_name} rola w{scope_link} Do{affected_user_link} ."
 
@@ -15920,11 +15920,11 @@ msgstr "Użytkownik{user_link} odwołał członka projektu{affected_user_link} z
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "Użytkownik{user_link} unieważnił alokację zasobów{affected_user_link} z{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "Użytkownik{user_link} odwołało{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "Użytkownik{user_link} odwołało{role_name}{affected_user_link} z{scope_link} ."
 

@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "Händelsetyper"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "Observera att denna volym inte debiteras separat för {organization}."
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "Rollen upphör att gälla den"
 msgid "Role in project"
 msgstr "Roll i projektet"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Rollhanteringshändelser"
 
@@ -15755,7 +15755,7 @@ msgstr "Användare{affected_user_link} har fått projektledarroll i projekt{proj
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "Användare{affected_user_link} har fått projektmedlemsroll i projekt{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "Användare{affected_user_link} har fått{role_name} roll i{scope_link} ."
 
@@ -15808,7 +15808,7 @@ msgstr "Användare{affected_user_link} har förlorat rollen som projektmedlem i{
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "Användare{affected_user_link} har förlorat rollen som resursfördelare i{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "Användare{affected_user_link} har förlorat{role_name} roll i{scope_link} ."
 
@@ -15868,11 +15868,11 @@ msgstr "Användare{user_link} har beviljat projektmedlem roll i projekt{project_
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "Användare{user_link} har beviljat resursfördelare roll i{customer_link} till{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Användaren {user_link} har tilldelat {affected_user_link} roll."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "Användare{user_link} har beviljat{role_name} roll i{scope_link} till{affected_user_link} ."
 
@@ -15920,11 +15920,11 @@ msgstr "Användare{user_link} har återkallat projektmedlem{affected_user_link} 
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "Användare{user_link} har återkallat resursfördelare{affected_user_link} från{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "Användaren {user_link} har återkallat {affected_user_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "Användare{user_link} har återkallat{role_name}{affected_user_link} från{scope_link} ."
 

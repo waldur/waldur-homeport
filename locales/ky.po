@@ -4328,6 +4328,7 @@ msgid "Event types"
 msgstr "Окуя түрлөрү"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -7340,7 +7341,6 @@ msgstr "Бул көлөм үчүн өзүнчө төлөнбөй турганы�
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11010,7 +11010,7 @@ msgstr "Ролдун мөөнөтү бүтөт"
 msgid "Role in project"
 msgstr "Долбоордогу ролу"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Ролду башкаруу окуялары"
 
@@ -15755,7 +15755,7 @@ msgstr "Колдонуучу{affected_user_link} долбоордо долбоо
 msgid "User {affected_user_link} has got project member role in project {project_link}."
 msgstr "Колдонуучу{affected_user_link} долбоордо долбоордун мүчөсү ролуна ээ{project_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has got {role_name} role in {scope_link}."
 msgstr "Колдонуучу{affected_user_link} бар{role_name} ролу{scope_link} ."
 
@@ -15808,7 +15808,7 @@ msgstr "Колдонуучу{affected_user_link} Долбоордун мүчөс
 msgid "User {affected_user_link} has lost resource allocator role in {customer_link}."
 msgstr "Колдонуучу{affected_user_link} ресурстарды бөлүштүрүүчү ролун жоготту{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {affected_user_link} has lost {role_name} role in {scope_link}."
 msgstr "Колдонуучу{affected_user_link} жоготту{role_name} ролу{scope_link} ."
 
@@ -15868,11 +15868,11 @@ msgstr "Колдонуучу{user_link} долбоордо долбоордун 
 msgid "User {user_link} has granted resource allocator role in {customer_link} to {affected_user_link}."
 msgstr "Колдонуучу{user_link} ресурстарды бөлүштүрүүчү ролду берди{customer_link} чейин{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Колдонуучу{user_link} ролун берди{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted {role_name} role in {scope_link} to {affected_user_link}."
 msgstr "Колдонуучу{user_link} берди{role_name} ролу{scope_link} чейин{affected_user_link} ."
 
@@ -15920,11 +15920,11 @@ msgstr "Колдонуучу{user_link} долбоордун мүчөсүн жо
 msgid "User {user_link} has revoked resource allocator {affected_user_link} from {customer_link}."
 msgstr "Колдонуучу{user_link} ресурстарды бөлүштүргүчтү жокко чыгарды{affected_user_link} тартып{customer_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "Колдонуучу{user_link} жокко чыгарды{affected_user_link} ."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {role_name} {affected_user_link} from {scope_link}."
 msgstr "Колдонуучу{user_link} жокко чыгарды{role_name}{affected_user_link} тартып{scope_link} ."
 

@@ -2609,6 +2609,7 @@ msgid "Event types"
 msgstr "Gebeurtenistypen"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -4552,7 +4553,6 @@ msgstr "Merk op dat dit volume niet afzonderlijk in rekening zal worden gebracht
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
-#: src/proposals/update/reviewers/CallPermissionsLogListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -6842,7 +6842,7 @@ msgstr "Rol verloopt op"
 msgid "Role in project"
 msgstr "Rol in project"
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "Role management events"
 msgstr "Rolbeheergebeurtenissen"
 
@@ -9823,7 +9823,7 @@ msgstr "Gebruiker {user_link} heeft projectbeheerder rol in project {project_lin
 msgid "User {user_link} has granted project manager role in project {project_link} to {affected_user_link}."
 msgstr "Gebruiker {user_link} heeft projectmanager rol in project {project_link} toegekend aan {affected_user_link}."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has granted role to {affected_user_link}."
 msgstr "Gebruiker {user_link} heeft rol toegekend aan {affected_user_link}."
 
@@ -9843,7 +9843,7 @@ msgstr "Gebruiker {user_link} heeft projectbeheerder {affected_user_link} van pr
 msgid "User {user_link} has revoked project manager {affected_user_link} from project {project_link}."
 msgstr "Gebruiker {user_link} heeft projectmanager {affected_user_link} van project {project_link} ingetrokken."
 
-#: src/project/team/events.tsx
+#: src/permissions/events.tsx
 msgid "User {user_link} has revoked {affected_user_link}."
 msgstr "Gebruiker {user_link} heeft {affected_user_link} ingetrokken."
 
