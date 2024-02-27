@@ -38,6 +38,7 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
 
   render() {
     const { attachments, loading, uploading, issue } = this.props;
+    const isAddingAttachmentsAllowed = issue.add_attachment_is_available;
 
     return (
       <Dropzone
@@ -65,7 +66,7 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
             <Card.Body>
               {loading ? (
                 <LoadingSpinner />
-              ) : (
+              ) : isAddingAttachmentsAllowed ? (
                 <div className="attachments__container">
                   <div className="attachments__container-message">
                     <input {...getInputProps()} />
@@ -82,7 +83,7 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
                     uploading={uploading}
                   />
                 </div>
-              )}
+              ) : null}
             </Card.Body>
           </Card>
         )}

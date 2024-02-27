@@ -42,7 +42,9 @@ export const PureIssueCommentsFormMainContainer: FunctionComponent<PureIssueComm
 
 const mapStateToProps = (state, ownProps) => ({
   opened: getCommentFormIsOpen(state, ownProps),
-  uiDisabled: getIsUiDisabled(state),
+  uiDisabled:
+    getIsUiDisabled(state) ||
+    !state.issues.comments.issue?.add_comment_is_available,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
