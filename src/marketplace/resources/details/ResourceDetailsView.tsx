@@ -194,6 +194,8 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
                 title={specView.title}
                 scope={scope}
                 resource={resource}
+                refetch={refetch}
+                isLoading={isLoading}
               />
             ))}
             {MainComponent && (
