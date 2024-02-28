@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { AdministrationProfile } from '@waldur/administration/dashboard/AdministrationProfile';
 import { HealthChecks } from '@waldur/administration/dashboard/HealthChecks';
 import { BroadcastList } from '@waldur/broadcasts/BroadcastList';
+import { ENV } from '@waldur/configs/default';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -23,6 +24,7 @@ export const SupportDashboard: FC = () => {
   );
 
   const healthy = isWorking(data);
+  const isSupportEnabled = ENV.plugins.WALDUR_SUPPORT?.ENABLED;
 
   return (
     <>
@@ -36,15 +38,18 @@ export const SupportDashboard: FC = () => {
       ) : data ? (
         <AdministrationProfile healthy={healthy} supportOnly />
       ) : null}
-      <StatisticsCards />
+      {isSupportEnabled ? <StatisticsCards /> : null}
       {data && <HealthChecks healthInfoItems={data} />}
-      <IssuesList
-        className="mb-6"
-        title={translate('Open issues')}
-        filter={{ status: 'Open' }}
-        initialPageSize={5}
-        showPageSizeSelector={false}
-      />
+      {isSupportEnabled ? (
+        <IssuesList
+          className="mb-6"
+          title={translate('Open issues')}
+          filter={{ status: 'Open' }}
+          initialPageSize={5}
+          showPageSizeSelector={false}
+        />
+      ) : null}
+
       <BroadcastList title={translate('Broadcasts')} initialPageSize={5} />
     </>
   );
