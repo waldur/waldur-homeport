@@ -2897,6 +2897,7 @@ msgstr "Створено новий платіж для{customer_link} ."
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -4052,6 +4053,7 @@ msgstr "Виїзд"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -4453,6 +4455,7 @@ msgstr "Термін дії закінчується"
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 msgid "Expires at"
 msgstr "Термін дії закінчується о"
 
@@ -5669,6 +5672,7 @@ msgstr "Відмова від запрошення"
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr "Запрошення"
@@ -7359,7 +7363,6 @@ msgstr "Зауважте, що за цей обсяг не стягуватим�
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -11017,6 +11020,7 @@ msgstr "Синхронізацію облікових записів робот�
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -12563,6 +12567,7 @@ msgstr "Оновлення статичних маршрутів було зап
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx

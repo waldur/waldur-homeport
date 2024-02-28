@@ -2878,6 +2878,7 @@ msgstr "Es wurde eine neue Zahlung für {customer_link} erstellt."
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -4033,6 +4034,7 @@ msgstr "Ausstieg"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -4434,6 +4436,7 @@ msgstr "Läuft ab"
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 msgid "Expires at"
 msgstr "Läuft bei"
 
@@ -5650,6 +5653,7 @@ msgstr "Ablehnung einer Einladung"
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr "Einladungen"
@@ -7340,7 +7344,6 @@ msgstr "Beachten Sie, dass dieses Volumen nicht separat für {organization} bere
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -10990,6 +10993,7 @@ msgstr "Die Synchronisierung der Roboterkonten wurde geplant."
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -12528,6 +12532,7 @@ msgstr "Die Aktualisierung der statischen Routen wurde geplant."
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx

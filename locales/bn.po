@@ -2878,6 +2878,7 @@ msgstr "জন্য একটি নতুন অর্থপ্রদান �
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -4033,6 +4034,7 @@ msgstr "প্রস্থান"
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
 #: src/project/team/UserListOption.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
@@ -4434,6 +4436,7 @@ msgstr "মেয়াদ শেষ"
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/project/team/InvitationsList.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 msgid "Expires at"
 msgstr "মেয়াদ শেষ হবে"
 
@@ -5650,6 +5653,7 @@ msgstr "আমন্ত্রণ প্রত্যাখ্যান"
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallReviewersSection.tsx
 msgid "Invitations"
 msgstr "আমন্ত্রণ"
@@ -7340,7 +7344,6 @@ msgstr "মনে রাখবেন যে এই ভলিউমের জন�
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/reviewers/CallInvitationsListPlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -10990,6 +10993,7 @@ msgstr "রোবট অ্যাকাউন্ট সিঙ্ক্রোন�
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -12528,6 +12532,7 @@ msgstr "স্ট্যাটিক রুট আপডেট নির্ধা
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
