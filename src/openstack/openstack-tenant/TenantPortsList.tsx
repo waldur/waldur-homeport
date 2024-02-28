@@ -64,6 +64,7 @@ const TableOptions = {
       'port_security_enabled',
       'allowed_address_pairs',
       'security_groups',
+      'project_uuid',
     ],
     o: 'network_name',
   }),

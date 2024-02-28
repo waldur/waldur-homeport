@@ -64,6 +64,7 @@ const TableOptions = {
       'gateway_ip',
       'disable_gateway',
       'ip_version',
+      'project_uuid',
     ],
   }),
 };

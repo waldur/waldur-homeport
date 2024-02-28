@@ -53,6 +53,7 @@ const TableOptions = {
       'state',
       'error_message',
       'fixed_ips',
+      'project_uuid',
     ],
   }),
   queryField: 'name',

@@ -76,6 +76,7 @@ const TableOptions = {
       'backend_id',
       'marketplace_resource_uuid',
       'key_name',
+      'project_uuid',
     ],
   }),
   queryField: 'name',

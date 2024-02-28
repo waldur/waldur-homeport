@@ -79,6 +79,7 @@ const TableOptions = {
       'address',
       'instance_uuid',
       'instance_name',
+      'project_uuid',
     ],
   }),
 };
