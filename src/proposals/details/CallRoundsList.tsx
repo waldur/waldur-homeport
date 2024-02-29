@@ -9,14 +9,21 @@ import { getSortedRoundsWithStatus } from '../utils';
 interface CallRoundsListProps {
   call: ProposalCall;
   max?: number;
+  filterCode?: number;
 }
 
-export const CallRoundsList = ({ call, max }: CallRoundsListProps) => {
-  const rounds = useMemo(() => {
+export const CallRoundsList = ({
+  call,
+  max,
+  filterCode,
+}: CallRoundsListProps) => {
+  let rounds = useMemo(() => {
     const items = getSortedRoundsWithStatus(call.rounds);
     return max ? items.slice(0, max) : items;
   }, [call, max]);
-
+  if (filterCode) {
+    rounds = rounds.filter((round) => round.state.code !== filterCode);
+  }
   return rounds?.length ? (
     <ul className="list-unstyled">
       {rounds.map((round) => (
