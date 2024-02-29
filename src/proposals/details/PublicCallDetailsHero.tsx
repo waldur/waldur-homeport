@@ -66,7 +66,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
           )}
         </div>
       }
-      quickBody={<CallRoundsList call={call} max={3} />}
+      quickBody={<CallRoundsList call={call} max={3} filterCode={-1} />}
       quickFooter={<CallShowAllRounds call={call} />}
       quickFooterClassName="justify-content-center"
     >
