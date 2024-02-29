@@ -105,6 +105,7 @@ msgstr ""
 #: src/invitations/InvitationsFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Accepted"
 msgstr ""
 
@@ -252,7 +253,6 @@ msgstr ""
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr ""
@@ -878,7 +878,6 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr ""
 
@@ -1561,6 +1560,7 @@ msgstr ""
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Call"
 msgstr ""
 
@@ -1686,6 +1686,7 @@ msgid "Canceled"
 msgstr ""
 
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Cancelled"
 msgstr ""
 
@@ -2934,8 +2935,20 @@ msgstr ""
 msgid "Default tax percent"
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Default tenant category"
+msgstr ""
+
 #: src/marketplace/offerings/update/options/OptionForm.tsx
 msgid "Default value"
+msgstr ""
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Default vm category"
+msgstr ""
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Default volume category"
 msgstr ""
 
 #: src/administration/agreements/UserAgreementDeleteButton.tsx
@@ -4895,6 +4908,14 @@ msgstr ""
 msgid "Importing resources"
 msgstr ""
 
+#: src/user/proposals/ProposalsTableFilter.tsx
+msgid "In review"
+msgstr ""
+
+#: src/user/proposals/ProposalsTableFilter.tsx
+msgid "In revision"
+msgstr ""
+
 #: src/azure/provider/AzureForm.tsx
 msgid "In the format of GUID"
 msgstr ""
@@ -6422,6 +6443,10 @@ msgstr ""
 
 #: src/auth/PermissionLayout.tsx
 msgid "No association"
+msgstr ""
+
+#: src/user/proposals/ProposalsTableFilter.tsx
+msgid "No calls"
 msgstr ""
 
 #: src/marketplace/resources/list/CategoryFilter.tsx
@@ -8974,6 +8999,7 @@ msgstr ""
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Rejected"
 msgstr ""
 
@@ -10189,6 +10215,10 @@ msgstr ""
 msgid "Select available weekdays"
 msgstr ""
 
+#: src/user/proposals/ProposalsTableFilter.tsx
+msgid "Select call..."
+msgstr ""
+
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
 msgid "Select category"
 msgstr ""
@@ -10667,8 +10697,20 @@ msgstr ""
 msgid "Set termination date of {resourceName}"
 msgstr ""
 
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Set to \"true\" if this category is for OpenStack VM. Only one category can have \"true\" value."
+msgstr ""
+
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 msgid "Set to draft"
+msgstr ""
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Set to true if this category is for OpenStack Tenant. Only one category can have \"true\" value."
+msgstr ""
+
+#: src/marketplace/category/admin/CategoryFromDialog.tsx
+msgid "Set to true if this category is for OpenStack Volume. Only one category can have \"true\" value."
 msgstr ""
 
 #: src/slurm/SlurmForm.tsx
@@ -11272,6 +11314,10 @@ msgstr ""
 
 #: src/marketplace/resources/usage/ResourceUsageSubmitButton.tsx
 msgid "Submit usage report"
+msgstr ""
+
+#: src/user/proposals/ProposalsTableFilter.tsx
+msgid "Submitted"
 msgstr ""
 
 #: src/rancher/cluster/create/FormNetworkStep.tsx
