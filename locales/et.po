@@ -7339,7 +7339,7 @@ msgstr "Pane tähele et seda virtuaalmasinat tasustatakse kui osa <strong>{servi
 
 #: src/openstack/openstack-volume/OpenstackVolumeCheckoutSummary.tsx
 msgid "Note that this volume will not be charged separately for {organization}."
-msgstr "Pane tähele et seda volüümi tasustatakse kui osa <strong>{serviceName}</strong> paketist."
+msgstr "Pane tähele et selle ketta eest {organization}-lt eraldi tasu ei võeta."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
@@ -7840,7 +7840,7 @@ msgstr "Ava"
 
 #: src/openstack/analytics/ImagesList.tsx
 msgid "OpenStack Images"
-msgstr "Laienda OpenStack volüümi"
+msgstr "Laienda OpenStacki ketast"
 
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "OpenStack Instance"
@@ -7879,7 +7879,7 @@ msgstr "OpenStacki rentnik"
 #: src/openstack/openstack-volume/actions/EditDialog.tsx
 #: src/openstack/openstack-volume/marketplace.ts
 msgid "OpenStack volume"
-msgstr "OpenStacki helitugevus"
+msgstr "OpenStacki ketas"
 
 #: src/resource/actions/OpenConsoleActionItem.tsx
 msgid "Open console"
@@ -11732,7 +11732,7 @@ msgstr "Valige kasutaja..."
 
 #: src/rancher/cluster/create/FormNodeStorageTable.tsx
 msgid "Select volume type"
-msgstr "Valige helitugevuse tüüp"
+msgstr "Valige ketta tüüp"
 
 #: src/navigation/workspace/SelectWorkspaceDialog.tsx
 #: src/navigation/workspace/SelectWorkspaceToggle.tsx
@@ -12315,11 +12315,11 @@ msgstr "Suurus:{size} , lisatud:{device}"
 
 #: src/marketplace/resources/details/openstack-tenant/VolumesSection.tsx
 msgid "Size: {size}, attached to: {device}, volume type: {type}"
-msgstr "Suurus:{size} , lisatud:{device} , helitugevuse tüüp:{type}"
+msgstr "Suurus:{size} , lisatud:{device} , ketta tüüp:{type}"
 
 #: src/marketplace/resources/details/openstack-instance/VolumesSection.tsx
 msgid "Size: {size}, attached to: {device} , volume type: {type}"
-msgstr "Suurus:{size} , lisatud:{device} , helitugevuse tüüp:{type}"
+msgstr "Suurus:{size} , lisatud:{device} , ketta tüüp:{type}"
 
 #: src/digitalocean/digitalocean-droplet-config.ts
 msgid "Size name"
@@ -12849,7 +12849,7 @@ msgstr "Süsteemi salvestamine"
 #: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
 msgid "System volume"
-msgstr "Süsteemi helitugevus"
+msgstr "Süsteemi ketas"
 
 #: src/openstack/openstack-volume/actions/utils.ts
 msgid "System volume couldn't be detached."
@@ -12858,13 +12858,13 @@ msgstr "Süsteemi salvestusüksust ei saanud lahti ühendada."
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 msgid "System volume size"
-msgstr "Süsteemi volüümi suurus"
+msgstr "Süsteemi ketta suurus"
 
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
 #: src/rancher/cluster/create/SystemVolumeTypeGroup.tsx
 msgid "System volume type"
-msgstr "Süsteemi volüümi tüüp"
+msgstr "Süsteemi ketta tüüp"
 
 #: src/invoices/details/InvoiceDetails.tsx
 msgid "TAX"
@@ -13855,7 +13855,7 @@ msgstr "Plaani ei saa arhiivida."
 
 #: src/openstack/openstack-instance/actions/AttachVolumeDialog.tsx
 msgid "Unable to attach volume."
-msgstr "Helitugevust ei saa lisada."
+msgstr "Ketast ei saa lisada."
 
 #: src/openstack/openstack-volume/actions/AttachDialog.tsx
 msgid "Unable to attach volume to instance."
@@ -14128,7 +14128,7 @@ msgstr "Ketast ei saa pikendada."
 
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Unable to extend volume."
-msgstr "Helitugevust ei saa laiendada."
+msgstr "Ketast ei saa laiendada."
 
 #: src/issues/attachments/effects.ts
 #: src/resource/summary/effects.ts
@@ -16252,11 +16252,11 @@ msgstr "Külastage"
 #: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/openstack/openstack-volume/deploy/steps.ts
 msgid "Volume"
-msgstr "Volüüm"
+msgstr "Ketas"
 
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "Volume extension has been scheduled."
-msgstr "Helitugevuse suurendamine on kavandatud."
+msgstr "Ketta suurendamine on kavandatud."
 
 #: src/openstack/openstack-volume/actions/AttachDialog.tsx
 msgid "Volume has been attached to instance."
@@ -16273,7 +16273,7 @@ msgstr "Salvestusüksuse tüüp on muudetud."
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 #: src/openstack/openstack-volume/deploy/steps.ts
 msgid "Volume name"
-msgstr "Volüümi nimi"
+msgstr "Ketta nimi"
 
 #: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
 #: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
@@ -16310,7 +16310,7 @@ msgstr "Valitud tüüpi salvestusüksuse limiit on ületatud"
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Volumes"
-msgstr "Volüümid"
+msgstr "Kettad"
 
 #: src/quotas/constants.ts
 msgid "Volumes count"
@@ -17064,7 +17064,7 @@ msgstr "ressursid"
 
 #: src/openstack/openstack-snapshot/SnapshotRestoredVolumesList.tsx
 msgid "restored volumes"
-msgstr "taastatud volüümid"
+msgstr "taastatud kettad"
 
 #: src/issues/CustomerSupportRating.tsx
 msgid "reviews"
@@ -17230,7 +17230,7 @@ msgstr "Salvestusüksuse hetktõmmised"
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 msgid "volumes"
-msgstr "volüümid"
+msgstr "kettad"
 
 #: src/form/CronField.tsx
 msgid "week"
