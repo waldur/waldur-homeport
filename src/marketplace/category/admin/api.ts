@@ -12,6 +12,9 @@ export const createCategory = (data) => {
     description: data.description,
     icon: data.icon,
     group: data.group,
+    default_vm_category: data.default_vm_category,
+    default_volume_category: data.default_volume_category,
+    default_tenant_category: data.default_tenant_category,
   };
   return sendForm<Category>(
     'POST',
@@ -26,6 +29,9 @@ export const updateCategory = (data, uuid) => {
     description: data.description,
     icon: data.icon,
     group: data.group,
+    default_vm_category: data.default_vm_category,
+    default_volume_category: data.default_volume_category,
+    default_tenant_category: data.default_tenant_category,
   };
   if (!formData.icon) {
     formData.icon = '';

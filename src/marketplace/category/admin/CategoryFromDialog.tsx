@@ -6,6 +6,7 @@ import { SubmissionError, reduxForm } from 'redux-form';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
 import { SelectField, SubmitButton } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { FormContainer } from '@waldur/form/FormContainer';
 import { ImageField } from '@waldur/form/ImageField';
 import { StringField } from '@waldur/form/StringField';
@@ -22,6 +23,9 @@ interface FormData {
   title: string;
   description: string;
   icon: any;
+  default_volume_category: boolean;
+  default_vm_category: boolean;
+  default_tenant_category: boolean;
 }
 
 export const CategoryFromDialog = connect<
@@ -138,6 +142,30 @@ export const CategoryFromDialog = connect<
               label={translate('Description')}
               name="description"
               required={false}
+            />
+            <AwesomeCheckboxField
+              name="default_volume_category"
+              label={translate('Default volume category')}
+              required={false}
+              tooltip={translate(
+                'Set to true if this category is for OpenStack Volume. Only one category can have "true" value.',
+              )}
+            />
+            <AwesomeCheckboxField
+              name="default_vm_category"
+              label={translate('Default vm category')}
+              required={false}
+              tooltip={translate(
+                'Set to "true" if this category is for OpenStack VM. Only one category can have "true" value.',
+              )}
+            />
+            <AwesomeCheckboxField
+              name="default_tenant_category"
+              label={translate('Default tenant category')}
+              required={false}
+              tooltip={translate(
+                'Set to true if this category is for OpenStack Tenant. Only one category can have "true" value.',
+              )}
             />
           </FormContainer>
         </ModalDialog>
