@@ -1,6 +1,6 @@
 import { Card } from 'react-bootstrap';
 
-import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
+import { formatDateTime, formatEuroDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -28,11 +28,11 @@ export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
         <Field label={translate('Reference')} value="-" />
         <Field
           label={translate('Publication date')}
-          value={renderFieldOrDash(formatShortDateTime(call.start_time))}
+          value={renderFieldOrDash(formatEuroDateTime(call.start_time))}
         />
         <Field
           label={translate('Opening date')}
-          value={renderFieldOrDash(formatShortDateTime(call.created))}
+          value={renderFieldOrDash(formatEuroDateTime(call.created))}
         />
         <Field
           label={translate('Deadline')}
