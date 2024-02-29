@@ -7,6 +7,7 @@ import {
   getFirst,
   put,
   patch,
+  getSelectData,
 } from '@waldur/core/api';
 
 import {
@@ -35,6 +36,9 @@ export const enableCallManagingOrganization = (payload) =>
 
 export const disableCallManagingOrganization = (uuid) =>
   deleteById('/call-managing-organisations/', uuid);
+
+export const getPublicCallOptions = (params?: {}) =>
+  getSelectData<ProposalCall>('/proposal-public-calls/', params);
 
 export const getProtectedCall = (uuid: string, options?: AxiosRequestConfig) =>
   getById<ProposalCall>('/proposal-protected-calls/', uuid, options);

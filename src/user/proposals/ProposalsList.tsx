@@ -51,6 +51,9 @@ const filtersSelctor = createSelector(
     if (filters?.state) {
       result.state = filters.state.map((option) => option.value);
     }
+    if (filters?.call) {
+      result.call = filters.call.uuid;
+    }
     return result;
   },
 );
@@ -60,7 +63,9 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
 
   const tableProps = useTable({
     table: 'MyProposalsList',
-    fetchData: createFetcher('proposal-proposals'),
+    fetchData: createFetcher('proposal-proposals', {
+      params: { o: '-round__cutoff_time' },
+    }),
     queryField: 'name',
     filter,
   });
@@ -76,7 +81,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
         },
         {
           title: translate('Call'),
-          render: ({ row }) => <>{renderFieldOrDash(row.call)}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
         },
         {
           title: translate('Ending'),
