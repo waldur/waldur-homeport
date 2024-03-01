@@ -121,6 +121,7 @@ msgstr "Pieņemt ielūgumu"
 #: src/invitations/InvitationsFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Accepted"
 msgstr "Pieņemts"
 
@@ -300,7 +301,6 @@ msgstr "Aktivizācijas cena"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "AKTĪVS"
@@ -1055,7 +1055,6 @@ msgstr "Arhivēt piedāvājuma plānu"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "Arhivēts"
 
@@ -1782,6 +1781,7 @@ msgstr "Kalendārs"
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Call"
 msgstr "Zvaniet"
 
@@ -1899,6 +1899,7 @@ msgid "Canceled"
 msgstr "Atcelts"
 
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Cancelled"
 msgstr "Atcelts"
 
@@ -10131,6 +10132,7 @@ msgstr "Noraidīt atļaujas pieprasījumu līdz{name}"
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Rejected"
 msgstr "Noraidīts"
 

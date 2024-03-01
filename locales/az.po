@@ -43,6 +43,7 @@ msgstr "Qəbul edin"
 #: src/invitations/InvitationsFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Accepted"
 msgstr "Qəbul edildi"
 
@@ -134,7 +135,6 @@ msgstr "Aktiv olunur"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Aktiv"
@@ -486,6 +486,7 @@ msgid "Canceled"
 msgstr "Ləğv edildi"
 
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Cancelled"
 msgstr "Ləğv edildi"
 

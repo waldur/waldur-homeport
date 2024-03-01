@@ -121,6 +121,7 @@ msgstr "Přijmout pozvánku"
 #: src/invitations/InvitationsFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Accepted"
 msgstr "Přijato"
 
@@ -300,7 +301,6 @@ msgstr "Aktivační cena"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Aktivní"
@@ -1055,7 +1055,6 @@ msgstr "Archivovat plán nabídky"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "Archivováno"
 
@@ -1782,6 +1781,7 @@ msgstr "Kalendář"
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Call"
 msgstr "Volejte"
 
@@ -1899,6 +1899,7 @@ msgid "Canceled"
 msgstr "Zrušeno"
 
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Cancelled"
 msgstr "Zrušeno"
 
@@ -10131,6 +10132,7 @@ msgstr "Odmítnout žádost o povolení do{name}"
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Rejected"
 msgstr "Odmítnuto"
 

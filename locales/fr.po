@@ -87,6 +87,7 @@ msgstr "Accepter l'invitation"
 #: src/invitations/InvitationsFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Accepted"
 msgstr "Accepté"
 
@@ -219,7 +220,6 @@ msgstr "Prix d'activation"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Actif"
@@ -631,7 +631,6 @@ msgstr "Archiver"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "Archivé"
 
@@ -1109,6 +1108,7 @@ msgid "Canceled"
 msgstr "Annulé"
 
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Cancelled"
 msgstr "Annulé"
 
@@ -6276,6 +6276,7 @@ msgstr "Rejeter"
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Rejected"
 msgstr "Rejeté"
 

@@ -47,6 +47,7 @@ msgstr "پذیرفتن"
 #: src/invitations/InvitationsFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Accepted"
 msgstr "پذیرفته شده"
 
@@ -161,7 +162,6 @@ msgstr "فعال کردن"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "فعال"
@@ -507,7 +507,6 @@ msgstr "بایگانی"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "بایگانی شده"
 
@@ -834,6 +833,7 @@ msgid "Canceled"
 msgstr "لغو شده"
 
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Cancelled"
 msgstr "لغو شده"
 

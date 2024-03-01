@@ -87,6 +87,7 @@ msgstr "Uitnodiging accepteren"
 #: src/invitations/InvitationsFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Accepted"
 msgstr "Geaccepteerd"
 
@@ -219,7 +220,6 @@ msgstr "Activeringsprijs"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Actief"
@@ -631,7 +631,6 @@ msgstr "Archief"
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Archived"
 msgstr "Gearchiveerd"
 
@@ -1109,6 +1108,7 @@ msgid "Canceled"
 msgstr "Geannuleerd"
 
 #: src/paypal/InvoicesFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Cancelled"
 msgstr "Geannuleerd"
 
@@ -6276,6 +6276,7 @@ msgstr "Afwijzen"
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
+#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Rejected"
 msgstr "Afgewezen"
 
