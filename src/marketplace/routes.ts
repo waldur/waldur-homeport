@@ -103,6 +103,10 @@ const ProjectResourcesAllList = lazyComponent(
   () => import('./resources/list/ProjectResourcesAllList'),
   'ProjectResourcesAllList',
 );
+const OrganizationResourcesAllList = lazyComponent(
+  () => import('./resources/list/OrganizationResourcesAllList'),
+  'OrganizationResourcesAllList',
+);
 const PublicResourcesList = lazyComponent(
   () => import('./resources/list/PublicResourcesList'),
   'PublicResourcesList',
@@ -361,9 +365,10 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-organization-order-list',
     url: 'marketplace-organization-order-list/',
     component: CustomerOrdersList,
-    parent: 'organization',
+    parent: 'organization-resources',
     data: {
-      breadcrumb: () => translate('My orders'),
+      breadcrumb: () => translate('Orders'),
+      priority: 110,
     },
   },
 
@@ -748,6 +753,17 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('All resources'),
       hideHeaderMenu: true,
+    },
+  },
+
+  {
+    name: 'marketplace-organization-resources-all',
+    url: 'marketplace-resources/',
+    component: OrganizationResourcesAllList,
+    parent: 'organization-resources',
+    data: {
+      breadcrumb: () => translate('Resources'),
+      priority: 100,
     },
   },
 
