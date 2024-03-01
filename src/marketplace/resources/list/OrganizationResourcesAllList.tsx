@@ -7,18 +7,18 @@ import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resour
 import { createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
-import { getProject } from '@waldur/workspace/selectors';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ResourcesAllListTable } from './ResourcesAllListTable';
 import { resourcesListRequiredFields } from './utils';
 
 const mapPropsToFilter = createSelector(
-  getProject,
+  getCustomer,
   getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID),
-  (project, filters: any) => {
+  (customer, filters: any) => {
     const result: Record<string, any> = {};
-    if (project) {
-      result.project_uuid = project.uuid;
+    if (customer) {
+      result.customer_uuid = customer.uuid;
     }
     if (filters) {
       if (filters.offering) {
@@ -45,15 +45,16 @@ const mapPropsToFilter = createSelector(
   },
 );
 
-export const ProjectResourcesAllList: FC<Partial<TableProps>> = (props) => {
+export const OrganizationResourcesAllList: FC<Partial<TableProps>> = (
+  props,
+) => {
   const filter = useSelector(mapPropsToFilter);
-  const project = useSelector(getProject);
   const tableProps = useTable({
-    table: `ProjectResourcesAllList-${project.uuid}`,
+    table: `OrganizationResourcesAllList`,
     fetchData: createFetcher('marketplace-resources'),
     queryField: 'query',
     filter,
   });
 
-  return <ResourcesAllListTable {...tableProps} {...props} />;
+  return <ResourcesAllListTable {...tableProps} {...props} hasProjectColumn />;
 };
