@@ -1,23 +1,36 @@
-import { formatRelative } from '@waldur/core/dateUtils';
+import { formatRelativeWithHour } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
 import { ProposalCall } from '../types';
+import { getRoundStatus, getSortedRoundsWithStatus } from '../utils';
 
 interface CallDetailsHeaderBodyProps {
   call: ProposalCall;
 }
 
 export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
-  const nextRoundDate = props.call.rounds?.length
-    ? props.call.rounds[0].cutoff_time
+  const getSortedRounds = getSortedRoundsWithStatus(props.call.rounds);
+  const lastRoundStatus = getRoundStatus(getSortedRounds[0]);
+  const nextRoundDate = getSortedRounds?.length
+    ? getSortedRounds[0].cutoff_time
     : props.call.end_time;
+
   return (
     <>
       <p>{props.call.description}</p>
-      <p>
-        {translate('Open round ends in')}:{' '}
-        <span className="text-danger">{formatRelative(nextRoundDate)}</span>
-      </p>
+      {lastRoundStatus.label === 'Open' && (
+        <p>
+          {translate('Open round ends in')}:{' '}
+          <span className="text-danger">
+            {formatRelativeWithHour(nextRoundDate)}
+          </span>
+        </p>
+      )}
+      {lastRoundStatus.label === 'Ended' && (
+        <p className="text-danger">
+          {translate('There are no open rounds. The call is closed.')}
+        </p>
+      )}
     </>
   );
 };
