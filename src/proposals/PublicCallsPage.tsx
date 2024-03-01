@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
-import { CallAllFilters } from '@waldur/proposals/call-management/CallAllFilters';
+import { CallAllFiltersWithDefaultState } from '@waldur/proposals/call-management/CallAllFilters';
 import { CALL_FILTER_FORM_ID } from '@waldur/proposals/constants';
 import { ProposalCall } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
@@ -101,7 +101,7 @@ export const PublicCallsPage: FunctionComponent = () => {
           hasQuery={true}
           placeholderComponent={<PublicCallsTablePlaceholder />}
           expandableRow={PublicCallExpandableRow}
-          filters={<CallAllFilters />}
+          filters={<CallAllFiltersWithDefaultState />}
         />
       </div>
     </div>

@@ -17,11 +17,19 @@ const PureCallAllFilters: FunctionComponent = () => (
   </>
 );
 
-const enhance = reduxForm({
+const enhanceWithDefault = reduxForm({
   form: CALL_FILTER_FORM_ID,
+  destroyOnUnmount: false,
   initialValues: {
     state: [getStates()[1]],
   },
+});
+
+export const CallAllFiltersWithDefaultState =
+  enhanceWithDefault(PureCallAllFilters);
+
+const enhance = reduxForm({
+  form: CALL_FILTER_FORM_ID,
   destroyOnUnmount: false,
 });
 
