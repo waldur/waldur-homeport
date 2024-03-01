@@ -3473,6 +3473,7 @@ msgstr ""
 #: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
 #: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionButton.tsx
 #: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
 #: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
@@ -7129,7 +7130,12 @@ msgstr ""
 msgid "Optional"
 msgstr ""
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/options/ResourceOptionsCard.tsx
+msgid "Options"
+msgstr ""
+
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "Options have been updated"
 msgstr ""
 
@@ -9441,6 +9447,10 @@ msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 msgid "Resource does not have plan."
+msgstr ""
+
+#: src/marketplace/resources/options/ResourceOptionsCard.tsx
+msgid "Resource doesn't have options."
 msgstr ""
 
 #: src/customer/workspace/CustomerEventsFilter.tsx
@@ -11967,7 +11977,7 @@ msgstr ""
 msgid "There are no resource issues."
 msgstr ""
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "There are no resource options defined in the offering."
 msgstr ""
 
@@ -12829,10 +12839,6 @@ msgstr ""
 msgid "Unable to load offering cost chart."
 msgstr ""
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
-msgid "Unable to load offering details"
-msgstr ""
-
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
@@ -13359,7 +13365,7 @@ msgstr ""
 msgid "Unable to update offering."
 msgstr ""
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "Unable to update options."
 msgstr ""
 
@@ -13555,7 +13561,7 @@ msgstr ""
 #: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
 #: src/marketplace/orders/list/OrderTypeCell.tsx
 #: src/marketplace/orders/list/OrderTypeFilter.tsx
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
@@ -13682,9 +13688,8 @@ msgstr ""
 msgid "Update offering thumbnail"
 msgstr ""
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsAction.tsx
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
-msgid "Update options"
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
+msgid "Update option"
 msgstr ""
 
 #: src/customer/payments/PaymentUpdateDialog.tsx

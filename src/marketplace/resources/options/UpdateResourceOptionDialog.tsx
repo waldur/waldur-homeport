@@ -1,28 +1,44 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import {
-  getPublicOffering,
-  submitResourceOptions,
-} from '@waldur/marketplace/common/api';
+import { submitResourceOptions } from '@waldur/marketplace/common/api';
 import { OptionsForm } from '@waldur/marketplace/common/OptionsForm';
+import { Offering, OptionField } from '@waldur/marketplace/types';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-export const UpdateResourceOptionsDialog = connect(
-  (_, ownProps: { resolve: { resource: { options } } }) => ({
+import { Resource } from '../types';
+
+interface UpdateResourceOptionDialogProps {
+  resolve: {
+    resource: Resource & { options };
+    offering: Offering;
+    option: OptionField & { name };
+    refetch?;
+  };
+}
+
+export const UpdateResourceOptionDialog = connect(
+  (_, ownProps: UpdateResourceOptionDialogProps) => ({
     initialValues: {
       attributes: ownProps.resolve.resource.options,
     },
   }),
 )(
-  reduxForm<{}, { resolve }>({
-    form: 'UpdateResourceOptionsDialog',
+  reduxForm<{}, UpdateResourceOptionDialogProps>({
+    form: 'UpdateResourceOptionDialog',
   })((props) => {
+    const { name, ...option } = props.resolve.option;
+    const options = useMemo(() => {
+      return {
+        options: { [name]: option },
+        order: [name],
+      };
+    }, [name, option]);
+
     const dispatch = useDispatch();
     const submitForm = async (formData) => {
       try {
@@ -38,25 +54,17 @@ export const UpdateResourceOptionsDialog = connect(
         dispatch(showErrorResponse(e, translate('Unable to update options.')));
       }
     };
-    const { data, isLoading, error } = useQuery(
-      ['UpdateResourceOptionsDialog'],
-      () => getPublicOffering(props.resolve.resource.offering_uuid),
-    );
 
     return (
       <ActionDialog
-        title={translate('Update options')}
+        title={translate('Update option')}
         submitLabel={translate('Update')}
         onSubmit={props.handleSubmit(submitForm)}
         submitting={props.submitting}
         invalid={props.invalid}
       >
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          translate('Unable to load offering details')
-        ) : data.resource_options?.order ? (
-          <OptionsForm options={data.resource_options} />
+        {name ? (
+          <OptionsForm options={options} />
         ) : (
           translate('There are no resource options defined in the offering.')
         )}
