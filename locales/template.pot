@@ -11914,6 +11914,10 @@ msgstr ""
 msgid "There are no offerings."
 msgstr ""
 
+#: src/proposals/details/CallDetailsHeaderBody.tsx
+msgid "There are no open rounds. The call is closed."
+msgstr ""
+
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx

@@ -42,6 +42,25 @@ export const formatTime: DateFormatter = (date) =>
 export const formatRelative: DateFormatter = (date) =>
   parseDate(date).toRelative();
 
+export const formatRelativeWithHour: DateFormatter = (date) => {
+  const dateDiff = parseDate(date).diffNow(['hours', 'minutes']);
+
+  if (dateDiff.hours > 24) {
+    return parseDate(date).toRelative();
+  } else {
+    const hours = dateDiff.hours;
+    const minutes = dateDiff.minutes;
+
+    if (hours > 0 && minutes > 0) {
+      return `${hours} hours ${minutes.toFixed(0)} minutes`;
+    } else if (hours > 0) {
+      return `${hours} hours`;
+    } else {
+      return `${minutes.toFixed(0)} minutes`;
+    }
+  }
+};
+
 export const formatMediumDateTime: DateFormatter = (date) =>
   parseDate(date).toFormat('FFF');
 
