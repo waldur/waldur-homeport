@@ -42,6 +42,7 @@ export interface Resource extends ResourceReference {
   offering_type: string;
   offering_thumbnail?: string;
   offering_plugin_options?: Record<string, any>;
+  options?: Record<string, any>;
   state: ResourceState;
   scope?: string;
   created?: string;

@@ -53,6 +53,10 @@ export const ResourceDetailsBar: FunctionComponent = () => {
         title: translate('Tickets'),
       },
       {
+        key: 'resource-options',
+        title: translate('Options'),
+      },
+      {
         key: 'users',
         title: translate('Roles'),
       },

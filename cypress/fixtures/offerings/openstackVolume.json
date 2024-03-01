@@ -19,6 +19,7 @@
   "rating": null,
   "attributes": {},
   "options": {},
+  "resource_options": {},
   "components": [
     {
       "billing_type": "limit",
