@@ -70,29 +70,28 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     let specViews = [];
 
     if (data?.scope) {
-      const spec = NestedResourceTabsConfiguration.get(data.scope.resource_type)
-        .map((parentTab) => ({
-          ...parentTab,
-          children: parentTab.children.sort((t1, t2) =>
-            t1.title.localeCompare(t2.title),
-          ),
-        }))
-        .sort((t1, t2) => t1.title.localeCompare(t2.title));
+      const spec = NestedResourceTabsConfiguration.get(
+        data.scope.resource_type,
+      );
       if (spec) {
         specViews = spec;
       }
       tabSources = spec.map((conf) => conf.children).flat();
       tabs = tabs.concat(
-        spec.map((parentTab) => ({
-          title: parentTab.title,
-          children: parentTab.children.map((childTab) => ({
-            title: childTab.title,
-            to: state.name,
-            params: {
-              tab: childTab.key,
-            },
-          })),
-        })),
+        spec
+          .map((parentTab) => ({
+            title: parentTab.title,
+            children: parentTab.children
+              .map((childTab) => ({
+                title: childTab.title,
+                to: state.name,
+                params: {
+                  tab: childTab.key,
+                },
+              }))
+              .sort((t1, t2) => t1.title.localeCompare(t2.title)),
+          }))
+          .sort((t1, t2) => t1.title.localeCompare(t2.title)),
       );
     }
     tabSources = tabSources.concat([
