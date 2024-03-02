@@ -428,7 +428,7 @@ msgstr "Project-lid toevoegen"
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Add resource"
@@ -1419,9 +1419,9 @@ msgstr "Categorieën"
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
@@ -2138,9 +2138,9 @@ msgstr "Een nieuwe betaling gecreëerd voor {customer_link}."
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
@@ -2841,6 +2841,7 @@ msgstr "Elk gebruiksrapport moet gekoppeld zijn aan een factureringsplan om een 
 #: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
 #: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionButton.tsx
 #: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
 #: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
@@ -4272,9 +4273,9 @@ msgstr "N.V.T"
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -4774,7 +4775,9 @@ msgstr "Vooruitgang"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
@@ -5360,11 +5363,11 @@ msgstr "aanvangstijd"
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
@@ -5768,7 +5771,7 @@ msgstr "Ontkoppelen"
 #: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
 #: src/marketplace/orders/list/OrderTypeCell.tsx
 #: src/marketplace/orders/list/OrderTypeFilter.tsx
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx

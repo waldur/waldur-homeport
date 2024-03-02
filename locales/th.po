@@ -536,7 +536,7 @@ msgstr "เพิ่มสมาชิกโครงการ"
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Add resource"
@@ -1953,9 +1953,9 @@ msgstr "หมวดหมู่"
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
@@ -2870,9 +2870,9 @@ msgstr "สร้างการชำระเงินใหม่สำหร
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
@@ -3831,6 +3831,7 @@ msgstr "รายงานการใช้งานแต่ละรายก
 #: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
 #: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionButton.tsx
 #: src/marketplace/robot-accounts/RobotAccountEditButton.tsx
 #: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
@@ -6775,9 +6776,9 @@ msgstr "ไม่มี"
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -7488,10 +7489,10 @@ msgstr "ไม่พบวัตถุ"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
@@ -7949,7 +7950,7 @@ msgstr "ไม่จำเป็น"
 msgid "Options are invalid."
 msgstr "ตัวเลือกไม่ถูกต้อง"
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "Options have been updated"
 msgstr "ตัวเลือกได้รับการปรับปรุงแล้ว"
 
@@ -9321,7 +9322,9 @@ msgstr "ความคืบหน้า"
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
@@ -10759,11 +10762,12 @@ msgid "Resource {type} {activeStep}"
 msgstr "ทรัพยากร{type}{activeStep}"
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/customer/routes.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -12460,11 +12464,11 @@ msgstr "สคริปต์เริ่มต้น"
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesAllList.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
@@ -13409,7 +13413,7 @@ msgstr "ไม่มีกิจกรรมทรัพยากร"
 msgid "There are no resource issues."
 msgstr "ไม่มีปัญหาด้านทรัพยากร"
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "There are no resource options defined in the offering."
 msgstr "ไม่มีตัวเลือกทรัพยากรที่กำหนดไว้ในข้อเสนอ"
 
@@ -14993,7 +14997,7 @@ msgstr "ไม่สามารถอัปเดตข้อเสนอได
 msgid "Unable to update offering state."
 msgstr "ไม่สามารถอัปเดตสถานะข้อเสนอได้"
 
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "Unable to update options."
 msgstr "ไม่สามารถอัปเดตตัวเลือกได้"
 
@@ -15198,7 +15202,7 @@ msgstr "ยกเลิกการเผยแพร่เป็น Google ป�
 #: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
 #: src/marketplace/orders/list/OrderTypeCell.tsx
 #: src/marketplace/orders/list/OrderTypeFilter.tsx
-#: src/marketplace/resources/actions/UpdateResourceOptionsDialog.tsx
+#: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
