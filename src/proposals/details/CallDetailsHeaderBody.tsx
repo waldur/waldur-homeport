@@ -20,7 +20,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
       <p>{props.call.description}</p>
       {lastRoundStatus.label === 'Open' && (
         <p>
-          {translate('Open round ends in')}:{' '}
+          {translate('Open round ends')}:{' '}
           <span className="text-danger">
             {formatRelativeWithHour(nextRoundDate)}
           </span>
