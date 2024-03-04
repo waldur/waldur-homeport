@@ -96,6 +96,9 @@ const mapPropsToFilter = (props) => {
     if (props.filter.type) {
       filter.type = props.filter.type.value;
     }
+    if (props.filter.offering) {
+      filter.offering_uuid = props.filter.offering.uuid;
+    }
   }
   return filter;
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { SUPPORT_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/list/constants';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
@@ -33,6 +34,13 @@ const getOrderStateFilterOptions = (): {
 
 const PureSupportOrdersListFilter = () => (
   <>
+    <TableFilterItem
+      title={translate('Offering')}
+      name="offering"
+      badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
+    >
+      <OfferingAutocomplete />
+    </TableFilterItem>
     <TableFilterItem
       title={translate('Organization')}
       name="organization"
