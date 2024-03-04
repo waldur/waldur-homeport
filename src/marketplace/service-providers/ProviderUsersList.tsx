@@ -24,6 +24,7 @@ const ProviderUsersListComponent = ({ provider }) => {
     fetchData: createFetcher(
       `marketplace-service-providers/${provider.uuid}/users`,
     ),
+    queryField: 'query',
   });
   const ExpandableRow = useCallback(
     ({ row }) => <ProviderUserCustomersList user={row} provider={provider} />,
@@ -50,6 +51,7 @@ const ProviderUsersListComponent = ({ provider }) => {
       showPageSizeSelector={true}
       verboseName={translate('users')}
       expandableRow={ExpandableRow}
+      hasQuery={true}
     />
   );
 };
