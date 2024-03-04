@@ -247,6 +247,7 @@ msgstr ""
 msgid "Activation price"
 msgstr ""
 
+#: src/administration/roles/RolesList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
@@ -3235,6 +3236,7 @@ msgstr ""
 msgid "Direction"
 msgstr ""
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
@@ -3700,6 +3702,7 @@ msgstr ""
 msgid "Emails"
 msgstr ""
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 #: src/notifications/NotificationToggleButton.tsx
@@ -3859,8 +3862,16 @@ msgstr ""
 msgid "Error disabling the notification."
 msgstr ""
 
+#: src/administration/roles/RoleToggleButton.tsx
+msgid "Error disabling the role."
+msgstr ""
+
 #: src/notifications/NotificationToggleButton.tsx
 msgid "Error enabling the notification."
+msgstr ""
+
+#: src/administration/roles/RoleToggleButton.tsx
+msgid "Error enabling the role."
 msgstr ""
 
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
@@ -6751,6 +6762,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -7053,6 +7065,9 @@ msgid "Open public page"
 msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+msgid "Open round ends"
+msgstr ""
+
 #: src/proposals/round/RoundPageHeaderBody.tsx
 #: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Open round ends in"
@@ -9805,6 +9820,11 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
+#: src/customer/team/CustomerUsersList.tsx
+#: src/project/team/ProjectUsersList.tsx
+msgid "Role expiration"
+msgstr ""
+
 #: src/project/team/ExpirationTimeGroup.tsx
 msgid "Role expires on"
 msgstr ""
@@ -11815,6 +11835,14 @@ msgstr ""
 
 #: src/marketplace/details/ProjectField.tsx
 msgid "The project will be changed for all items in cart."
+msgstr ""
+
+#: src/administration/roles/RoleToggleButton.tsx
+msgid "The role has been disabled"
+msgstr ""
+
+#: src/administration/roles/RoleToggleButton.tsx
+msgid "The role has been enabled"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/CIDRField.tsx
