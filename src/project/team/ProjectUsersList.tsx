@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import Avatar from '@waldur/core/Avatar';
+import { renderRoleExpirationDate } from '@waldur/customer/team/CustomerUsersList';
 import { translate } from '@waldur/i18n';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -42,6 +43,10 @@ export const ProjectUsersList = () => {
         {
           title: translate('Role in project'),
           render: RoleField,
+        },
+        {
+          title: translate('Role expiration'),
+          render: ({ row }) => renderRoleExpirationDate(row),
         },
       ]}
       hasQuery={true}

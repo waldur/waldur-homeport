@@ -4,11 +4,13 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import Avatar from '@waldur/core/Avatar';
+import { formatDate } from '@waldur/core/dateUtils';
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable } from '@waldur/table';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { TableOptionsType } from '@waldur/table/types';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -16,6 +18,12 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { fetchCustomerUsers } from './api';
 import { CustomerUserRowActions } from './CustomerUserRowActions';
 import { UserAddButton } from './UserAddButton';
+
+export const renderRoleExpirationDate = (row) => {
+  return row.expiration_time
+    ? formatDate(row.expiration_time)
+    : DASH_ESCAPE_CODE;
+};
 
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
@@ -52,6 +60,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
         {
           title: translate('Role in organization'),
           render: RoleField,
+        },
+        {
+          title: translate('Role expiration'),
+          render: ({ row }) => renderRoleExpirationDate(row),
         },
       ]}
       verboseName={translate('team members')}
