@@ -1,8 +1,10 @@
 import { Badge } from 'react-bootstrap';
 
+import { RoleToggleButton } from '@waldur/administration/roles/RoleToggleButton';
 import { translate } from '@waldur/i18n';
 import { formatRoleType } from '@waldur/permissions/utils';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
+import { BooleanField } from '@waldur/table/BooleanField';
 import { useTable } from '@waldur/table/utils';
 
 import { RoleCreateButton } from './RoleCreateButton';
@@ -44,11 +46,16 @@ export const RolesList = () => {
           title: translate('Assigned users count'),
           render: ({ row }) => row.users_count,
         },
+        {
+          title: translate('Active'),
+          render: ({ row }) => <BooleanField value={row.is_active} />,
+        },
       ]}
       verboseName={translate('roles')}
       hoverableRow={({ row }) => (
         <>
           <RoleEditButton row={row} refetch={tableProps.fetch} />
+          <RoleToggleButton row={row} refetch={tableProps.fetch} />
           {!row.is_system_role && (
             <RoleDeleteButton row={row} refetch={tableProps.fetch} />
           )}

@@ -25,15 +25,16 @@ export const GroupInvitationCreateButton: FunctionComponent<{
   const dispatch = useDispatch();
   const roles = useMemo(
     () =>
-      ENV.roles.filter((role) =>
-        InvitationPolicyService.canManageRole(
-          {
-            customer,
-            user,
-            roleTypes: ['customer', 'project'],
-          },
-          role,
-        ),
+      ENV.roles.filter(
+        (role) =>
+          InvitationPolicyService.canManageRole(
+            {
+              customer,
+              user,
+              roleTypes: ['customer', 'project'],
+            },
+            role,
+          ) && role.is_active, // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
       ),
     [customer, user],
   );

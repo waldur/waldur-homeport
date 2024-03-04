@@ -1,4 +1,4 @@
-import { useMemo, useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
@@ -11,8 +11,8 @@ import { InvitationService } from '../InvitationService';
 import { fetchUserDetails } from './api';
 import { InvitationPolicyService } from './InvitationPolicyService';
 import {
-  GroupInviteRow,
   GroupInvitationFormData,
+  GroupInviteRow,
   InvitationContext,
   StoredUserDetails,
 } from './types';
@@ -50,10 +50,13 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
       [usersDetails, setUsersDetails],
     );
 
+  // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
   const roles = useMemo(
     () =>
-      ENV.roles.filter((role) =>
-        InvitationPolicyService.canManageRole(context, role),
+      ENV.roles.filter(
+        (role) =>
+          InvitationPolicyService.canManageRole(context, role) &&
+          role.is_active,
       ),
     [context],
   );
