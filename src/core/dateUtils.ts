@@ -67,8 +67,5 @@ export const formatMediumDateTime: DateFormatter = (date) =>
 export const formatShortDateTime: DateFormatter = (date) =>
   parseDate(date).toFormat('MMM D, T');
 
-export const formatEuroDateTime: DateFormatter = (date) =>
-  parseDate(date).toFormat('dd.MM.yyyy, T');
-
 export const formatISOWithoutZone: DateFormatter = (date) =>
   parseDate(date).toFormat("yyyy-MM-dd'T'T");
