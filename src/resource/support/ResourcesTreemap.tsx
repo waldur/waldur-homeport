@@ -119,7 +119,7 @@ const TreemapContainer = (props: StateProps) => {
         <TreemapChart
           title={translate('Resource usage')}
           width="100%"
-          height={500}
+          height={600}
           data={chartData}
           tooltipValueFormatter={tooltipValueFormatter}
         />
