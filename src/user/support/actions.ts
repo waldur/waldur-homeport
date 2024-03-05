@@ -34,6 +34,7 @@ export const showUserRemoval = () => {
       submitTitle: translate('Request removal'),
     },
     hideProjectAndResourceFields: true,
+    standaloneTicket: true,
   };
   return openIssueCreateDialog(resolve);
 };

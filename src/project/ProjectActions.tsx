@@ -4,7 +4,7 @@ import { translate } from '@waldur/i18n';
 import { Project } from '@waldur/workspace/types';
 
 export const ProjectActions = ({ project }: { project: Project }) => {
-  const showIssues = ENV.plugins.WALDUR_SUPPORT;
+  const showIssues = ENV.plugins.WALDUR_SUPPORT.ENABLED;
 
   return (
     <div>

@@ -237,7 +237,7 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
         <Modal.Title>{translate('Incorrect organization details')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {ENV.plugins.WALDUR_SUPPORT ? (
+        {ENV.plugins.WALDUR_SUPPORT.ENABLED ? (
           <div>
             <p>
               <b>{translate('Preview changes')}</b>
@@ -261,7 +261,7 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
         )}
       </Modal.Body>
       <Modal.Footer>
-        {ENV.plugins.WALDUR_SUPPORT && (
+        {ENV.plugins.WALDUR_SUPPORT.ENABLED && (
           <Button onClick={onCreateIssue} variant="primary">
             {translate('Propose changes')}
           </Button>

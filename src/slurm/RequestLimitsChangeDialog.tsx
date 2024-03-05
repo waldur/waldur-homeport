@@ -14,7 +14,7 @@ export const RequestLimitsChangeDialog: FunctionComponent<{
 }> = ({ resolve: { resource }, close }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    if (ENV.plugins.WALDUR_SUPPORT) {
+    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       close();
       dispatch(
         openIssueCreateDialog({
