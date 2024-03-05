@@ -295,13 +295,18 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
 
   componentDidMount() {
     const doFetch = !this.props.initialPageSize && !this.props.initialSorting;
-    if (this.props.initialPageSize) {
+    if (this.props.firstFetch && this.props.initialPageSize) {
       this.props.updatePageSize(this.props.initialPageSize);
     }
-    if (this.props.initialSorting) {
+    if (this.props.firstFetch && this.props.initialSorting) {
       this.props.sortList(this.props.initialSorting);
     }
-    if (this.props.loading || this.props.rows.length || this.props.error) {
+    if (
+      this.props.loading ||
+      this.props.rows.length ||
+      this.props.error ||
+      !this.props.firstFetch
+    ) {
       return;
     }
     doFetch && this.props.fetch();
