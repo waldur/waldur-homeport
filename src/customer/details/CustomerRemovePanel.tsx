@@ -52,7 +52,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
     const needsSupport = hasProjects || hasActiveInvoices;
 
     if (needsSupport) {
-      if (!ENV.plugins.WALDUR_SUPPORT) {
+      if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
         const notification = hasProjects
           ? translate(
               'Organization contains projects. Please remove them first.',

@@ -84,7 +84,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatchRemoval, dispatchMessage } = dispatchProps;
   let showUserRemoval;
 
-  if (ENV.plugins.WALDUR_SUPPORT) {
+  if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
     showUserRemoval = dispatchRemoval;
   } else {
     showUserRemoval = () =>

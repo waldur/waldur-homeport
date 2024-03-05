@@ -28,6 +28,7 @@ interface CreateIssueDialogProps {
     options: IssueOptions;
     defer: { resolve(): void; reject(): void };
     hideProjectAndResourceFields?: boolean;
+    standaloneTicket?: boolean;
   };
 }
 
@@ -153,7 +154,7 @@ export const IssueCreateDialog: FunctionComponent<CreateIssueDialogProps> = ({
       onCreateIssue={onCreateIssue}
       initialValues={{
         type: defaultTypeOption,
-        project,
+        ...(resolve.standaloneTicket ? {} : { project }),
       }}
       hideProjectAndResourceFields={resolve.hideProjectAndResourceFields}
     />

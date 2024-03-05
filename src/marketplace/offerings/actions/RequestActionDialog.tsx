@@ -17,7 +17,7 @@ export const RequestActionDialog: FunctionComponent<{
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
   useEffect(() => {
-    if (ENV.plugins.WALDUR_SUPPORT) {
+    if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       close();
       dispatch(
         openIssueCreateDialog({
