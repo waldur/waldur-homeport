@@ -295,6 +295,7 @@ msgstr "Активація"
 msgid "Activation price"
 msgstr "Ціна активації"
 
+#: src/administration/roles/RolesList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
@@ -3594,6 +3595,7 @@ msgstr "Цифровою ідентифікацією керує сам Waldur."
 msgid "Direction"
 msgstr "Напрямок"
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
@@ -4090,6 +4092,7 @@ msgstr "Підтвердження електронною поштою наді�
 msgid "Emails"
 msgstr "електронні листи"
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 #: src/notifications/NotificationToggleButton.tsx
@@ -7507,6 +7510,7 @@ msgstr "Об&#39;єкт не знайдено."
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx

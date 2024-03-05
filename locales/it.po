@@ -214,6 +214,7 @@ msgstr "Attivazione"
 msgid "Activation price"
 msgstr "Prezzo di attivazione"
 
+#: src/administration/roles/RolesList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
@@ -2444,6 +2445,7 @@ msgstr "L'e-mail è stata aggiornata."
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "La verifica e-mail è stata inviata. Controlla la tua casella di posta."
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 #: src/notifications/NotificationToggleButton.tsx
@@ -4655,6 +4657,7 @@ msgstr "Oggetto non trovato."
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx

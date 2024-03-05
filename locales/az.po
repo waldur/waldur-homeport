@@ -129,6 +129,7 @@ msgstr "Əməliyyatlar"
 msgid "Activating"
 msgstr "Aktiv olunur"
 
+#: src/administration/roles/RolesList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx

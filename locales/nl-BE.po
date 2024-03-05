@@ -258,6 +258,7 @@ msgstr "Wordt geactiveerd"
 msgid "Activation price"
 msgstr "Prijs voor activering"
 
+#: src/administration/roles/RolesList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
@@ -2616,6 +2617,7 @@ msgstr "DigitalOcean-aanbieder"
 msgid "Direction"
 msgstr "Richting"
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
@@ -3005,6 +3007,7 @@ msgstr "E-mail is bijgewerkt."
 msgid "Email verification has been sent. Please check your inbox."
 msgstr "Verificatie per e-mail is verzonden. Controleer uw inbox."
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 #: src/notifications/NotificationToggleButton.tsx

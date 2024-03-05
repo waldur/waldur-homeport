@@ -295,6 +295,7 @@ msgstr "সক্রিয় করা হচ্ছে"
 msgid "Activation price"
 msgstr "অ্যাক্টিভেশন মূল্য"
 
+#: src/administration/roles/RolesList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
@@ -3575,6 +3576,7 @@ msgstr "ডিজিটাল পরিচয় নিজেই Waldur দ্�
 msgid "Direction"
 msgstr "অভিমুখ"
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
@@ -4071,6 +4073,7 @@ msgstr "ইমেল যাচাইকরণ পাঠানো হয়েছ
 msgid "Emails"
 msgstr "ইমেইল"
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 #: src/notifications/NotificationToggleButton.tsx
@@ -7488,6 +7491,7 @@ msgstr "অবজেক্ট পাওয়া যায় না।"
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx

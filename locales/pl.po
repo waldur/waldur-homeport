@@ -295,6 +295,7 @@ msgstr "Aktywacja"
 msgid "Activation price"
 msgstr "Cena aktywacji"
 
+#: src/administration/roles/RolesList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
@@ -3575,6 +3576,7 @@ msgstr "Tożsamością cyfrową zarządza sam Waldur."
 msgid "Direction"
 msgstr "Kierunek"
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
@@ -4071,6 +4073,7 @@ msgstr "Weryfikacja e-mailem została wysłana. Proszę, sprawdź swoją skrzynk
 msgid "Emails"
 msgstr "Wiadomości e-mail"
 
+#: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
 #: src/notifications/NotificationToggleButton.tsx
@@ -7488,6 +7491,7 @@ msgstr "Nie znaleziono obiektu."
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
