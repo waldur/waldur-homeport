@@ -90,8 +90,18 @@ export interface Proposal {
 }
 
 export interface CallOffering {
-  offering: string;
+  url: string;
+  uuid: string;
   attributes: AttributesType;
+  call: string;
+  call_name: string;
+  created_by_email: string;
+  created_by_name: string;
+  description: string;
+  offering: string;
+  offering_name: string;
+  provider_name: string;
+  state: 'Requested' | 'Accepted' | 'Canceled';
 }
 
 export interface CallOfferingFormData {

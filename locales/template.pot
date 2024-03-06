@@ -85,6 +85,7 @@ msgstr ""
 
 #: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Accept"
 msgstr ""
 
@@ -100,9 +101,14 @@ msgstr ""
 msgid "Accept invitation"
 msgstr ""
 
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+msgid "Accept request"
+msgstr ""
+
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
@@ -1558,6 +1564,8 @@ msgstr ""
 
 #: src/permissions/constants.tsx
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -1683,6 +1691,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 msgid "Canceled"
 msgstr ""
 
@@ -2174,6 +2183,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 msgid "Contact"
 msgstr ""
 
@@ -5882,6 +5892,7 @@ msgstr ""
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr ""
@@ -6457,6 +6468,7 @@ msgstr ""
 msgid "No association"
 msgstr ""
 
+#: src/proposals/CallAutocomplete.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "No calls"
 msgstr ""
@@ -6643,6 +6655,7 @@ msgid "Not used"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
@@ -6784,6 +6797,8 @@ msgstr ""
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/permissions/constants.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
@@ -6909,6 +6924,11 @@ msgstr ""
 
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Offering request has been submitted."
+msgstr ""
+
+#: src/marketplace/routes.ts
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+msgid "Offering requests"
 msgstr ""
 
 #: src/marketplace/offerings/store/effects.ts
@@ -7251,6 +7271,8 @@ msgstr ""
 #: src/permissions/constants.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -7721,6 +7743,7 @@ msgstr ""
 #: src/booking/BookingCheckoutSummary.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Period"
 msgstr ""
 
@@ -7823,6 +7846,7 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
@@ -8992,6 +9016,7 @@ msgstr ""
 #: src/marketplace-flows/ReviewRejectAction.tsx
 #: src/marketplace/orders/actions/RejectByConsumerButton.tsx
 #: src/marketplace/orders/actions/RejectByProviderButton.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Reject"
 msgstr ""
 
@@ -9302,6 +9327,7 @@ msgid "Request-based item (without Service Desk)"
 msgstr ""
 
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/utils.ts
 msgid "Requested"
 msgstr ""
@@ -10248,6 +10274,7 @@ msgstr ""
 msgid "Select available weekdays"
 msgstr ""
 
+#: src/proposals/CallAutocomplete.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Select call..."
 msgstr ""
@@ -10431,6 +10458,7 @@ msgid "Select status"
 msgstr ""
 
 #: src/issues/list/IssuesFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 msgid "Select status..."
 msgstr ""
 
@@ -11164,6 +11192,7 @@ msgstr ""
 #: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
@@ -11207,6 +11236,7 @@ msgstr ""
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx

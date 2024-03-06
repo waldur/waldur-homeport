@@ -151,6 +151,10 @@ const ProviderRobotAccountList = lazyComponent(
   () => import('@waldur/marketplace/robot-accounts/ProviderRobotAccountList'),
   'ProviderRobotAccountList',
 );
+const OfferingRequestsList = lazyComponent(
+  () => import('@waldur/proposals/offering-requests/OfferingRequestsList'),
+  'OfferingRequestsList',
+);
 const ProjectsListContainer = lazyComponent(
   () => import('@waldur/project/ProjectsListContainer'),
   'ProjectsListContainer',
@@ -590,6 +594,17 @@ export const states: StateDeclaration[] = [
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Robot accounts'),
+    },
+  },
+
+  {
+    name: 'marketplace-provider-offering-requests',
+    url: 'offering-requests/',
+    component: OfferingRequestsList,
+    parent: 'provider-resources',
+    data: {
+      feature: 'marketplace.show_call_management_functionality',
+      breadcrumb: () => translate('Offering requests'),
     },
   },
 

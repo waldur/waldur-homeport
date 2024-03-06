@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 
+import { ENV } from '@waldur/configs/default';
 import {
   getById,
   post,
@@ -9,6 +10,7 @@ import {
   patch,
   getSelectData,
 } from '@waldur/core/api';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 
 import {
   CallManagingOrganizationInfo,
@@ -94,6 +96,34 @@ export const createCallOffering = (callUuid, data) => {
   );
 };
 
-export const createProposal = (data) => {
-  return post<Proposal>(`/proposal-proposals/`, data);
+export const getProtectedCallsOptions = (params?: {}) =>
+  getSelectData<ProposalCall>('/proposal-protected-calls/', params);
+
+export const getPublicCallsOptions = (params?: {}) =>
+  getSelectData<ProposalCall>('/proposal-public-calls/', params);
+
+export const callAutocomplete = async (
+  query: object,
+  prevOptions,
+  currentPage: number,
+  protectedCalls = false,
+  field = ['name', 'uuid', 'url'],
+) => {
+  const params = {
+    field,
+    o: 'name',
+    ...query,
+    page: currentPage,
+    page_size: ENV.pageSize,
+  };
+  const api = protectedCalls ? getProtectedCallsOptions : getPublicCallsOptions;
+  const response = await api(params);
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
 };
+
+export const createProposal = (data) =>
+  post<Proposal>(`/proposal-proposals/`, data);
