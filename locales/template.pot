@@ -7085,11 +7085,11 @@ msgid "Open public page"
 msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Open round ends"
 msgstr ""
 
 #: src/proposals/round/RoundPageHeaderBody.tsx
-#: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Open round ends in"
 msgstr ""
 
@@ -11986,6 +11986,7 @@ msgid "There are no offerings."
 msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "There are no open rounds. The call is closed."
 msgstr ""
 
