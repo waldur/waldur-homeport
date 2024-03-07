@@ -10,9 +10,9 @@ export const getInitialValuesOfOrganizationUpdateForm = (
   name: customer.name,
   uuid: customer.uuid,
   abbreviation: customer.abbreviation,
-  division: {
-    url: customer.division,
-    name: `${customer.division_parent_name} ${RIGHT_ARROW_STRING} ${customer.division_name}`,
+  organization_group: {
+    url: customer.organization_group,
+    name: `${customer.organization_group_parent_name} ${RIGHT_ARROW_STRING} ${customer.organization_group_name}`,
   },
   contact_details: customer.contact_details,
   registration_code: customer.registration_code,

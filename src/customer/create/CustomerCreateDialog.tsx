@@ -1,6 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { reset, SubmissionError } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
@@ -8,7 +8,7 @@ import { sendForm } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { addCustomerUser } from '@waldur/permissions/api';
 import { RoleEnum } from '@waldur/permissions/enums';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
@@ -21,7 +21,7 @@ const CUSTOMER_FIELDS = [
   'name',
   'native_name',
   'domain',
-  'division',
+  'organization_group',
   'email',
   'phone_number',
   'registration_code',
@@ -57,8 +57,8 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
       if (formData.country) {
         payload.country = formData.country.value;
       }
-      if (formData.division) {
-        payload.division = formData.division.value;
+      if (formData.organization_group) {
+        payload.organization_group = formData.organization_group.value;
       }
 
       try {

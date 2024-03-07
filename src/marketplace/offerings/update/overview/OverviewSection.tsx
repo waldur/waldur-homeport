@@ -110,8 +110,10 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             <tr>
               <td className="col-md-3">{translate('Access policies')}</td>
               <td className="col-md-9">
-                {props.offering.divisions.length > 0
-                  ? props.offering.divisions.map(({ name }) => name).join(', ')
+                {props.offering.organization_groups.length > 0
+                  ? props.offering.organization_groups
+                      .map(({ name }) => name)
+                      .join(', ')
                   : 'N/A'}
               </td>
               <td className="row-actions">

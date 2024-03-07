@@ -77,10 +77,10 @@ export const getFiltersUserFrindly = createSelector(
     const _sections = prepareAttributeSections(sections);
 
     const formattedFilters = [];
-    // Divisions
+    // Organization groups(divisions)
     const selectedOrganizationGroups = [];
     for (const key of Object.keys(filters)) {
-      if (key.startsWith('division')) {
+      if (key.startsWith('organization_group')) {
         selectedOrganizationGroups.push({
           key,
           title: filters[key],

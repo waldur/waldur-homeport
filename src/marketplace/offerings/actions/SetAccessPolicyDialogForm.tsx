@@ -11,7 +11,7 @@ import {
   formatRequestBodyForSetAccessPolicyForm,
   getInitialValuesForSetAccessPolicyForm,
 } from '@waldur/marketplace/offerings/actions/utils';
-import { OrganizationGroup, Offering } from '@waldur/marketplace/types';
+import { Offering, OrganizationGroup } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -75,7 +75,7 @@ const mapStateToProps = (
   ownProps: SetAccessPolicyDialogFormOwnProps,
 ) => ({
   initialValues: getInitialValuesForSetAccessPolicyForm(
-    ownProps.offering.divisions,
+    ownProps.offering.organization_groups,
   ),
 });
 

@@ -6,7 +6,7 @@ import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { connectTable, createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { TableOptionsType } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -47,7 +47,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Organization group'),
-      render: ({ row }) => <>{row.division_name || DASH_ESCAPE_CODE}</>,
+      render: ({ row }) => (
+        <>{row.organization_group_name || DASH_ESCAPE_CODE}</>
+      ),
     },
     {
       title: translate('Projects'),
@@ -94,7 +96,7 @@ export const getUserOrganizationsList = (
         'abbreviation',
         'role',
         'email',
-        'division_name',
+        'organization_group_name',
         'projects_count',
         'created',
         'created_by_full_name',
@@ -106,7 +108,7 @@ export const getUserOrganizationsList = (
     exportRow: (row) => [
       row.name,
       row.email || DASH_ESCAPE_CODE,
-      row.division_name || DASH_ESCAPE_CODE,
+      row.organization_group_name || DASH_ESCAPE_CODE,
       row.projects_count || 0,
       formatDateTime(row.created),
     ],

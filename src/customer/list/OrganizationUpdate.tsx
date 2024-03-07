@@ -133,7 +133,7 @@ const mapDispatchToProps = (dispatch) => ({
       updateOrganization({
         ...formData,
         country: formData.country?.value,
-        division: formData.division?.url,
+        organization_group: formData.organization_group?.url,
       }),
     ),
 });

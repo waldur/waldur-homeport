@@ -56,7 +56,7 @@ export const CustomerProfile = ({ customer }: { customer: Customer }) => {
                 </Stack>
                 <Stack direction="horizontal" className="gap-6 text-muted">
                   {[
-                    customer.division_name,
+                    customer.organization_group_name,
                     customer.email,
                     customer.phone_number,
                   ].map((item, i) => item && <span key={i}>{item}</span>)}

@@ -30,14 +30,14 @@ export const PureSupportCustomerFilter: FunctionComponent = () => (
     </TableFilterItem>
     <TableFilterItem
       title={translate('Organization group')}
-      name="division"
+      name="organization_group"
       badgeValue={(value) => value?.name}
     >
       <SelectOrganizationGroupFieldPure />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Organization group type')}
-      name="division_type"
+      name="organization_group_type"
     >
       <OrganizationGroupFilter />
     </TableFilterItem>

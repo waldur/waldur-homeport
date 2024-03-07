@@ -35,7 +35,7 @@ const SingleValue: FunctionComponent<any> = (props) => {
 
 export const SelectOrganizationGroupFieldPure: FunctionComponent = () => (
   <Field
-    name="division"
+    name="organization_group"
     component={(fieldProps) => (
       <AsyncPaginate
         placeholder={translate('Select organization group...')}

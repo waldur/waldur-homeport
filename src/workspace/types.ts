@@ -146,9 +146,9 @@ export interface Customer {
   is_call_managing_organization?: boolean;
   is_service_provider?: boolean;
   created?: string;
-  division?: string;
-  division_name?: string;
-  division_parent_name?: string;
+  organization_group?: string;
+  organization_group_name?: string;
+  organization_group_parent_name?: string;
   latitude?: number;
   longitude?: number;
   billing_price_estimate?: BillingPriceEstimate;
