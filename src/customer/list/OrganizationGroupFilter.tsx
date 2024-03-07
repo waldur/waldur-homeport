@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 
 export const OrganizationGroupFilter: FunctionComponent = () => (
   <Field
-    name="division_type"
+    name="organization_group_type"
     component={(fieldProps) => (
       <AsyncPaginate
         placeholder={translate('Select organization group type...')}

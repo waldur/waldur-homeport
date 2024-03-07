@@ -92,7 +92,7 @@ const buildOrganizationGroupsHierarchy = (array) => {
 
 const addCustomersWithoutOrganizationGroup = (data, customers) => {
   const totalNumberOfCustomersWithoutOrganizationGroup = customers.reduce(
-    (acc, customer) => (!customer.division_uuid ? acc + 1 : acc),
+    (acc, customer) => (!customer.organization_group_uuid ? acc + 1 : acc),
     0,
   );
   data.push({
@@ -108,7 +108,9 @@ const addValueToOrganizationGroups = (organizationGroups, customers) =>
   organizationGroups.map((organizationGroup) => {
     const countOccurrences = customers.reduce(
       (acc, customer) =>
-        customer.division_uuid === organizationGroup.uuid ? acc + 1 : acc,
+        customer.organization_group_uuid === organizationGroup.uuid
+          ? acc + 1
+          : acc,
       0,
     );
     return { ...organizationGroup, value: countOccurrences };

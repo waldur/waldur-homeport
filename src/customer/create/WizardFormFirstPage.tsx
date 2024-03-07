@@ -61,7 +61,7 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
               )}
               {isFeatureVisible('customer.show_domain') && <DomainGroup />}
               <InputGroup
-                name="division"
+                name="organization_group"
                 floating={false}
                 component={SelectField}
                 label={translate('Organization group')}

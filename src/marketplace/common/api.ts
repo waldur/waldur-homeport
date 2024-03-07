@@ -345,20 +345,24 @@ export const getProjectList = (params?: {}) =>
   getSelectData<Project>('/projects/', params);
 
 export const getOrganizationGroupList = (params?: {}) =>
-  getSelectData('/divisions/', params);
+  getSelectData('/organization-groups/', params);
 
 export const getOrganizationGroupTypesList = (params?: {}) =>
-  getSelectData('/division-types/', params);
+  getSelectData('/organization-group-types/', params);
 
 export const getAllOrganizationGroups = (options?) =>
-  getAll<OrganizationGroup>('/divisions/', options);
+  getAll<OrganizationGroup>('/organization-groups/', options);
 
 export const getCustomersOrganizationGroupUuids = (
   accounting_is_running: boolean,
   options?,
 ) =>
   getAll('/customers/', {
-    params: { accounting_is_running, size: 200, field: ['division_uuid'] },
+    params: {
+      accounting_is_running,
+      size: 200,
+      field: ['organization_group_uuid'],
+    },
     ...options,
   });
 
@@ -508,9 +512,12 @@ export const updateOfferingAccessPolicy = (
   offeringUuid: string,
   organizationGroups: string[],
 ) =>
-  post(`/marketplace-provider-offerings/${offeringUuid}/update_divisions/`, {
-    divisions: organizationGroups,
-  });
+  post(
+    `/marketplace-provider-offerings/${offeringUuid}/update_organization_groups/`,
+    {
+      organization_groups: organizationGroups,
+    },
+  );
 
 export const updateOfferingLogo = (offeringUuid: string, formData) =>
   sendForm(

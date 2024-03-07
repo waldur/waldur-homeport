@@ -4,8 +4,8 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import {
-  SUPPORT_CUSTOMERS_FORM_ID,
   SUPPORT_CUSTOMER_LIST,
+  SUPPORT_CUSTOMERS_FORM_ID,
 } from '@waldur/customer/list/constants';
 import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
@@ -73,13 +73,12 @@ const TableOptions = {
       if (props.filter.is_service_provider) {
         filter.is_service_provider = props.filter.is_service_provider.value;
       }
-      if (props.filter.division_type) {
-        filter.division_type_uuid = props.filter.division_type.map(
-          (option) => option.uuid,
-        );
+      if (props.filter.organization_group_type) {
+        filter.organization_group_type_uuid =
+          props.filter.organization_group_type.map((option) => option.uuid);
       }
-      if (props.filter.division) {
-        filter.division_uuid = props.filter.division.uuid;
+      if (props.filter.organization_group) {
+        filter.organization_group_uuid = props.filter.organization_group.uuid;
       }
     }
 
@@ -105,8 +104,8 @@ const TableOptions = {
       'vat_code',
       'domain',
       'is_service_provider',
-      'division_name',
-      'division_parent_name',
+      'organization_group_name',
+      'organization_group_parent_name',
     ];
 
     return filter;

@@ -40,7 +40,7 @@ const generateWidgetsData = (): ReportingWidget[] => [
   {
     title: translate('Organization groups'),
     description: translate('Shows distributions of organizations into groups.'),
-    to: { state: 'reporting.organizations-divisions' },
+    to: { state: 'reporting.organizations-organization-groups' },
   },
   {
     title: translate('Pricelist'),

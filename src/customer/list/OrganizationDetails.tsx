@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
@@ -26,12 +26,13 @@ export const OrganizationDetails: FunctionComponent<OrganizationDetailsProps> =
             label={translate('Organization group')}
             value={
               <>
-                {props.customer.division_parent_name && (
+                {props.customer.organization_group_parent_name && (
                   <>
-                    {props.customer.division_parent_name} {RIGHT_ARROW_HTML}{' '}
+                    {props.customer.organization_group_parent_name}{' '}
+                    {RIGHT_ARROW_HTML}{' '}
                   </>
                 )}
-                {props.customer.division_name}
+                {props.customer.organization_group_name}
               </>
             }
           />

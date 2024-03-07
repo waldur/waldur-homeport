@@ -134,7 +134,7 @@ export interface Offering extends GeolocationPoint {
   google_calendar_link?: string;
   image?: string;
   googlecalendar?: OfferingGoogleCalendar;
-  divisions: OrganizationGroup[];
+  organization_groups: OrganizationGroup[];
   parent_description?: string;
   parent_name?: string;
   getting_started?: any;
