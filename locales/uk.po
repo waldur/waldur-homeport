@@ -101,6 +101,7 @@ msgstr "Про"
 
 #: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Accept"
 msgstr "Прийняти"
 
@@ -119,6 +120,7 @@ msgstr "Прийняти запрошення"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
@@ -1798,6 +1800,8 @@ msgstr "Календар"
 
 #: src/permissions/constants.tsx
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -1915,6 +1919,7 @@ msgstr "Скасувати запит"
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 msgid "Canceled"
 msgstr "Скасовано"
 
@@ -2473,6 +2478,7 @@ msgstr "Деталі підключення"
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 msgid "Contact"
 msgstr "Контакти"
 
@@ -6512,6 +6518,7 @@ msgstr "Розмір пам&#39;яті в ГіБ"
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "повідомлення"
@@ -7366,6 +7373,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Зауважте, що за цей обсяг не стягуватиметься окрема плата{organization} ."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
@@ -7532,6 +7540,8 @@ msgstr "Об&#39;єкт не знайдено."
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/permissions/constants.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
@@ -8120,6 +8130,8 @@ msgstr "Назва поля організації"
 #: src/permissions/constants.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -8727,6 +8739,7 @@ msgstr "Виконано"
 #: src/booking/BookingCheckoutSummary.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Period"
 msgstr "Період"
 
@@ -8837,6 +8850,7 @@ msgstr "Номери телефонів"
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
@@ -10132,6 +10146,7 @@ msgstr "Звичайний користувач"
 #: src/marketplace-flows/ReviewRejectAction.tsx
 #: src/marketplace/orders/actions/RejectByConsumerButton.tsx
 #: src/marketplace/orders/actions/RejectByProviderButton.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Reject"
 msgstr "Відхиляти"
 
@@ -10491,6 +10506,7 @@ msgid "Request {requestId} has been created."
 msgstr "запит{requestId} було створено."
 
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/utils.ts
 msgid "Requested"
 msgstr "Просив"
@@ -11731,6 +11747,7 @@ msgid "Select status"
 msgstr "Виберіть статус"
 
 #: src/issues/list/IssuesFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 msgid "Select status..."
 msgstr "Виберіть статус..."
 
@@ -12534,6 +12551,7 @@ msgstr "Скрипт запуску"
 #: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
@@ -12577,6 +12595,7 @@ msgstr "Оновлення статичних маршрутів було зап
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx

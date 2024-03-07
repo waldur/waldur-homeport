@@ -101,6 +101,7 @@ msgstr "Um"
 
 #: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Accept"
 msgstr "Zustimmen"
 
@@ -119,6 +120,7 @@ msgstr "Einladung annehmen"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
@@ -1779,6 +1781,8 @@ msgstr "Kalender"
 
 #: src/permissions/constants.tsx
 #: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -1896,6 +1900,7 @@ msgstr "Anfrage abbrechen"
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 msgid "Canceled"
 msgstr "Abgebrochen"
 
@@ -2454,6 +2459,7 @@ msgstr "Verbindungsdetails"
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 msgid "Contact"
 msgstr "Kontaktieren Sie "
 
@@ -6493,6 +6499,7 @@ msgstr "Speichergröße in GiB"
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Nachricht"
@@ -7347,6 +7354,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Beachten Sie, dass dieses Volumen nicht separat für {organization} berechnet wird."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
@@ -7513,6 +7521,8 @@ msgstr "Das Objekt wurde nicht gefunden."
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/permissions/constants.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
@@ -8097,6 +8107,8 @@ msgstr "Feldname der Organisation"
 #: src/permissions/constants.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -8700,6 +8712,7 @@ msgstr "Durchgeführt von"
 #: src/booking/BookingCheckoutSummary.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Period"
 msgstr "Periode"
 
@@ -8810,6 +8823,7 @@ msgstr "Telefonnummern"
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
@@ -10105,6 +10119,7 @@ msgstr "Normaler Benutzer"
 #: src/marketplace-flows/ReviewRejectAction.tsx
 #: src/marketplace/orders/actions/RejectByConsumerButton.tsx
 #: src/marketplace/orders/actions/RejectByProviderButton.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Reject"
 msgstr "Ablehnen"
 
@@ -10464,6 +10479,7 @@ msgid "Request {requestId} has been created."
 msgstr "Die Anforderung {requestId} wurde erstellt."
 
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/utils.ts
 msgid "Requested"
 msgstr "Angefragt"
@@ -11696,6 +11712,7 @@ msgid "Select status"
 msgstr "Status auswählen"
 
 #: src/issues/list/IssuesFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 msgid "Select status..."
 msgstr "Status auswählen..."
 
@@ -12499,6 +12516,7 @@ msgstr "Startskript"
 #: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
@@ -12542,6 +12560,7 @@ msgstr "Die Aktualisierung der statischen Routen wurde geplant."
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx

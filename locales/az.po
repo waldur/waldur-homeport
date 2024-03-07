@@ -35,12 +35,14 @@ msgstr "Abbreviatur"
 
 #: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Accept"
 msgstr "Qəbul edin"
 
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
@@ -483,6 +485,7 @@ msgstr "Sorğunu  ləğv edin"
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 msgid "Canceled"
 msgstr "Ləğv edildi"
 
@@ -1995,6 +1998,7 @@ msgstr "Üzv "
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Mesaj"
@@ -2326,6 +2330,8 @@ msgstr "Xidmət Masasında açın"
 #: src/permissions/constants.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -3656,6 +3662,7 @@ msgstr "Başlanğıc"
 #: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx

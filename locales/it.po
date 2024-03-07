@@ -71,6 +71,7 @@ msgstr "Abbreviazione"
 
 #: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Accept"
 msgstr "Accetta"
 
@@ -85,6 +86,7 @@ msgstr "Accetta l'invito"
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
@@ -1105,6 +1107,7 @@ msgstr "Annulla richiesta"
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 msgid "Canceled"
 msgstr "Annullato"
 
@@ -4018,6 +4021,7 @@ msgstr "Dimensione della memoria in GIB"
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/events/BaseEventsList.tsx
 #: src/invitations/InvitationExpandableRow.tsx
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/user/api-key/AuthenticationEvents.tsx
 msgid "Message"
 msgstr "Messaggio"
@@ -4557,6 +4561,7 @@ msgid "Note that this volume will not be charged separately for {organization}."
 msgstr "Si noti che questo volume non verrà addebitato separatamente per {organization}."
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
+#: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
 #: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
@@ -4679,6 +4684,8 @@ msgstr "Oggetto non trovato."
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/permissions/constants.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
@@ -4987,6 +4994,8 @@ msgstr "Ordini"
 #: src/permissions/constants.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -5370,6 +5379,7 @@ msgstr "Eseguito da"
 #: src/booking/BookingCheckoutSummary.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Period"
 msgstr "Periodo"
 
@@ -5429,6 +5439,7 @@ msgstr "Numeri di telefono"
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
+#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
@@ -6269,6 +6280,7 @@ msgstr "Utente regolare"
 #: src/marketplace-flows/ReviewRejectAction.tsx
 #: src/marketplace/orders/actions/RejectByConsumerButton.tsx
 #: src/marketplace/orders/actions/RejectByProviderButton.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 msgid "Reject"
 msgstr "Rifiutare"
 
@@ -6537,6 +6549,7 @@ msgid "Request {requestId} has been created."
 msgstr "La richiesta {requestId} è stata creata."
 
 #: src/invitations/InvitationsFilter.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/utils.ts
 msgid "Requested"
 msgstr "Richiesto"
@@ -7768,6 +7781,7 @@ msgstr "Avvio"
 #: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsSection.tsx
@@ -7811,6 +7825,7 @@ msgstr "Aggiornamento delle route statiche pianificato."
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
