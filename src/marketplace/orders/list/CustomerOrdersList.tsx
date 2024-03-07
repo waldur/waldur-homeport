@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -12,6 +13,8 @@ import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { OrderDetailsLink } from '../details/OrderDetailsLink';
 
+import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from './constants';
+import { CustomerOrdersListFilter } from './CustomerOrdersListFilter';
 import { OrderStateCell } from './OrderStateCell';
 
 export const TableComponent: FunctionComponent<any> = (props) => {
@@ -80,17 +83,42 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
+      filters={<CustomerOrdersListFilter parentState={props.$state$.parent} />}
     />
   );
+};
+
+const mapPropsToFilter = (props) => {
+  const filter: Record<string, string> = {};
+
+  if (props.project && props.$state$.parent === 'project') {
+    filter.project_uuid = props.project.uuid;
+  } else {
+    filter.customer_uuid = props.customer.uuid;
+  }
+
+  if (props.filter) {
+    if (props.filter.project) {
+      filter.project_uuid = props.filter.project.uuid;
+    }
+    if (props.filter.state) {
+      filter.state = props.filter.state.value;
+    }
+    if (props.filter.type) {
+      filter.type = props.filter.type.value;
+    }
+    if (props.filter.offering) {
+      filter.offering_uuid = props.filter.offering.uuid;
+    }
+  }
+
+  return filter;
 };
 
 const TableOptions = {
   table: 'ordersList',
   fetchData: createFetcher('marketplace-orders'),
-  mapPropsToFilter: (props) =>
-    props.project && props.$state$.parent === 'project'
-      ? { project_uuid: props.project.uuid }
-      : { customer_uuid: props.customer.uuid },
+  mapPropsToFilter,
   exportRow: (row) => [
     formatDateTime(row.created),
     row.created_by_full_name || row.created_by_username,
@@ -116,6 +144,7 @@ const TableOptions = {
 const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
   customer: getCustomer(state),
+  filter: getFormValues(CUSTOMER_ORDERS_LIST_FILTER_FORM_ID)(state) as FormData,
 });
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
