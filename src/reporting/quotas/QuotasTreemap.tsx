@@ -135,4 +135,4 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = connect(mapStateToProps);
 
-export const ResourcesTreemap = enhance(TreemapContainer);
+export const QuotasTreemap = enhance(TreemapContainer);

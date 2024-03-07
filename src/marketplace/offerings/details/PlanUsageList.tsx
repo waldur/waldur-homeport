@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
+import { PlanUsageRow } from '@waldur/reporting/plan-usage/types';
 
 interface OwnProps {
   plansUsage: PlanUsageRow[];

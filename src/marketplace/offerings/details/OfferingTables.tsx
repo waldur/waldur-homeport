@@ -8,8 +8,8 @@ import { OfferingOrdersList } from '@waldur/marketplace/details/OfferingOrdersLi
 import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
 import { OrdersFilter } from '@waldur/marketplace/orders/list/OrdersFilter';
-import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
 import { Offering } from '@waldur/marketplace/types';
+import { PlanUsageRow } from '@waldur/reporting/plan-usage/types';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';
 import { OfferingCostsChart } from '../expandable/OfferingCostsChart';

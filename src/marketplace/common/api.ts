@@ -35,8 +35,8 @@ import {
 } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
+import { PlanUsageRow } from '../../reporting/plan-usage/types';
 import { OfferingDocument } from '../offerings/store/types';
-import { PlanUsageRow } from '../resources/plan-usage/types';
 import { Resource } from '../resources/types';
 import { ComponentUsage, ResourcePlanPeriod } from '../resources/usage/types';
 

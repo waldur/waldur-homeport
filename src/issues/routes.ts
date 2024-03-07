@@ -8,21 +8,6 @@ import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
 import { hasSupport } from './hooks';
 
-const CustomersOrganizationGroupsContainer = lazyComponent(
-  () =>
-    import(
-      '@waldur/customer/organization-groups/CustomersOrganizationGroupsContainer'
-    ),
-  'CustomersOrganizationGroupsContainer',
-);
-const CustomerListContainer = lazyComponent(
-  () => import('@waldur/customer/list/CustomerListContainer'),
-  'CustomerListContainer',
-);
-const PriceList = lazyComponent(
-  () => import('@waldur/marketplace/offerings/PriceList'),
-  'PriceList',
-);
 const CustomerRequestContainer = lazyComponent(
   () => import('@waldur/marketplace-flows/CustomerRequestContainer'),
   'CustomerRequestContainer',
@@ -122,42 +107,12 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'reporting.organizations',
-    url: 'organizations/',
-    component: CustomerListContainer,
-    data: {
-      feature: 'support.customers_list',
-      breadcrumb: () => translate('Monthly revenue'),
-    },
-  },
-
-  {
-    name: 'reporting.pricelist',
-    url: 'pricelist/',
-    component: PriceList,
-    data: {
-      feature: 'support.pricelist',
-      breadcrumb: () => translate('Pricelist'),
-    },
-  },
-
-  {
     name: 'support.customers-requests',
     url: 'customers-requests/',
     component: CustomerRequestContainer,
     data: {
       feature: 'support.customers_requests',
       breadcrumb: () => translate('Organization requests'),
-    },
-  },
-
-  {
-    name: 'reporting.organizations-divisions',
-    url: 'organizations-divisions/',
-    component: CustomersOrganizationGroupsContainer,
-    data: {
-      feature: 'support.customers_list',
-      breadcrumb: () => translate('Organization groups'),
     },
   },
 
