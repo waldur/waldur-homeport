@@ -6,8 +6,6 @@ import { formValueSelector } from 'redux-form';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
-import { CUSTOMERS_ORGANIZATION_GROUPS_FORM_ID } from '@waldur/customer/organization-groups/constants';
-import { getEChartOptions } from '@waldur/customer/organization-groups/utils';
 import { translate } from '@waldur/i18n';
 import {
   getAllOrganizationGroups,
@@ -15,8 +13,11 @@ import {
 } from '@waldur/marketplace/common/api';
 import { RootState } from '@waldur/store/reducers';
 
+import { REPORTING_ORGANIZATION_GROUPS_FORM_ID } from './constants';
+import { getEChartOptions } from './utils';
+
 const growthFilterFormSelector = formValueSelector(
-  CUSTOMERS_ORGANIZATION_GROUPS_FORM_ID,
+  REPORTING_ORGANIZATION_GROUPS_FORM_ID,
 );
 
 const getAccountingRunningFieldValue = (state: RootState) =>
@@ -31,7 +32,7 @@ const loadData = (accounting_is_running: boolean, options?) =>
     customers,
   }));
 
-export const CustomersOrganizationGroupsChart: FunctionComponent = () => {
+export const OrganizationGroupsChart: FunctionComponent = () => {
   const accountRunningState = useSelector(getAccountingRunningFieldValue);
   const {
     isLoading: loading,

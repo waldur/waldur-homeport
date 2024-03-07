@@ -6,9 +6,10 @@ import {
   AccountingRunningField,
   getOptions,
 } from '@waldur/customer/list/AccountingRunningField';
-import { CUSTOMERS_ORGANIZATION_GROUPS_FORM_ID } from '@waldur/customer/organization-groups/constants';
 
-export const PureCustomersOrganizationGroupsFilter: FunctionComponent = () => (
+import { REPORTING_ORGANIZATION_GROUPS_FORM_ID } from './constants';
+
+export const PureOrganizationGroupsFilter: FunctionComponent = () => (
   <Card>
     <Card.Body className="border-bottom mt-3">
       <form className="form-inline">
@@ -22,9 +23,9 @@ export const PureCustomersOrganizationGroupsFilter: FunctionComponent = () => (
   </Card>
 );
 
-export const CustomersOrganizationGroupsFilter = reduxForm<{}, any>({
-  form: CUSTOMERS_ORGANIZATION_GROUPS_FORM_ID,
+export const OrganizationGroupsFilter = reduxForm<{}, any>({
+  form: REPORTING_ORGANIZATION_GROUPS_FORM_ID,
   initialValues: {
     accounting_is_running: getOptions()[0],
   },
-})(PureCustomersOrganizationGroupsFilter);
+})(PureOrganizationGroupsFilter);

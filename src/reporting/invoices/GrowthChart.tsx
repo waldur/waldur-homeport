@@ -9,8 +9,9 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getGrowthChartData } from '@waldur/invoices/api';
 import { GROWTH_FILTER_ID } from '@waldur/invoices/constants';
-import { formatGrowthChart } from '@waldur/invoices/growth/utils';
 import { RootState } from '@waldur/store/reducers';
+
+import { formatGrowthChart } from './utils';
 
 const growthFilterFormSelector = formValueSelector(GROWTH_FILTER_ID);
 

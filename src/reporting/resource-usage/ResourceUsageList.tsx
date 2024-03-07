@@ -5,13 +5,16 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getStartAndEndDatesOfMonth } from '@waldur/issues/utils';
+import {
+  UsageReport,
+  UsageReportRequest,
+} from '@waldur/marketplace/resources/usage/types';
 import { RootState } from '@waldur/store/reducers';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
-import { FORM_ID } from './SupportUsageFilter';
-import { UsageReport, UsageReportRequest } from './types';
+import { FORM_ID } from './ResourceUsageFilter';
 
 const UsageExpandableRow = ({ row }) => (
   <p>
@@ -108,7 +111,7 @@ const mapPropsToFilter = (props) => {
 };
 
 const TableOptions = {
-  table: 'SupportUsageReports',
+  table: 'ResourceUsageReports',
   fetchData: createFetcher('marketplace-component-usages'),
   exportRow,
   exportFields,
@@ -121,6 +124,6 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
 
-export const SupportUsageList = enhance(
+export const ResourceUsageList = enhance(
   TableComponent,
 ) as React.ComponentType<any>;

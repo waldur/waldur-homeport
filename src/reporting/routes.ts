@@ -9,6 +9,38 @@ const ReportingDashboard = lazyComponent(
   () => import('./dashboard/ReportingDashboard'),
   'ReportingDashboard',
 );
+const CustomerListContainer = lazyComponent(
+  () => import('@waldur/customer/list/CustomerListContainer'),
+  'CustomerListContainer',
+);
+const OrganizationGroupsContainer = lazyComponent(
+  () => import('./organization-groups/OrganizationGroupsContainer'),
+  'OrganizationGroupsContainer',
+);
+const PriceList = lazyComponent(
+  () => import('@waldur/marketplace/offerings/PriceList'),
+  'PriceList',
+);
+const GrowthContainer = lazyComponent(
+  () => import('./invoices/GrowthContainer'),
+  'GrowthContainer',
+);
+const QuotasTreemap = lazyComponent(
+  () => import('./quotas/QuotasTreemap'),
+  'QuotasTreemap',
+);
+const VmTypeOverviewContainer = lazyComponent(
+  () => import('./openstack/VmTypeOverviewContainer'),
+  'VmTypeOverviewContainer',
+);
+const PlanUsageContainer = lazyComponent(
+  () => import('./plan-usage/PlanUsageContainer'),
+  'PlanUsageContainer',
+);
+const ResourceUsageContainer = lazyComponent(
+  () => import('./resource-usage/ResourceUsageContainer'),
+  'ResourceUsageContainer',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -31,6 +63,80 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Dashboard'),
       priority: 100,
+    },
+  },
+  {
+    name: 'reporting.organizations',
+    url: 'organizations/',
+    component: CustomerListContainer,
+    data: {
+      feature: 'support.customers_list',
+      breadcrumb: () => translate('Monthly revenue'),
+    },
+  },
+  {
+    name: 'reporting.pricelist',
+    url: 'pricelist/',
+    component: PriceList,
+    data: {
+      feature: 'support.pricelist',
+      breadcrumb: () => translate('Pricelist'),
+    },
+  },
+
+  {
+    name: 'invoicesGrowth',
+    url: 'growth/',
+    component: GrowthContainer,
+    parent: 'reporting',
+    data: {
+      breadcrumb: () => translate('Growth'),
+    },
+  },
+
+  {
+    name: 'reporting.organizations-divisions',
+    url: 'organizations-divisions/',
+    component: OrganizationGroupsContainer,
+    data: {
+      feature: 'support.customers_list',
+      breadcrumb: () => translate('Organization groups'),
+    },
+  },
+  {
+    name: 'reporting.resources-treemap',
+    url: 'resources-treemap/',
+    component: QuotasTreemap,
+    data: {
+      feature: 'support.resources_treemap',
+      breadcrumb: () => translate('Resources usage'),
+    },
+  },
+  {
+    name: 'reporting.vm-type-overview',
+    url: 'vm-type-overview/',
+    component: VmTypeOverviewContainer,
+    data: {
+      feature: 'support.vm_type_overview',
+      breadcrumb: () => translate('VM type overview'),
+    },
+  },
+  {
+    name: 'marketplace-support-plan-usages',
+    url: 'plan-usages/',
+    component: PlanUsageContainer,
+    parent: 'reporting',
+    data: {
+      breadcrumb: () => translate('Capacity'),
+    },
+  },
+  {
+    name: 'marketplace-support-usage-reports',
+    url: 'usage/',
+    component: ResourceUsageContainer,
+    parent: 'reporting',
+    data: {
+      breadcrumb: () => translate('Usage reports'),
     },
   },
 ];

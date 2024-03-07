@@ -15,12 +15,12 @@ import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { Customer, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
 
-interface SupportUsageFilterProps {
+interface ResourceUsageFilterProps {
   options: PeriodOption[];
   customer: Customer;
 }
 
-const PureSupportUsageFilter: FunctionComponent<SupportUsageFilterProps> = (
+const PureResourceUsageFilter: FunctionComponent<ResourceUsageFilterProps> = (
   props,
 ) => (
   <>
@@ -58,7 +58,7 @@ const PureSupportUsageFilter: FunctionComponent<SupportUsageFilterProps> = (
   </>
 );
 
-export const FORM_ID = 'SupportUsageFilter';
+export const FORM_ID = 'ResourceUsageFilter';
 
 const selector = formValueSelector(FORM_ID);
 
@@ -81,4 +81,4 @@ const enhance = compose(
   connect(mapStateToProps),
 );
 
-export const SupportUsageFilter = enhance(PureSupportUsageFilter);
+export const ResourceUsageFilter = enhance(PureResourceUsageFilter);

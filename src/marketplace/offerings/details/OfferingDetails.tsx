@@ -3,10 +3,10 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { PlanUsageRow } from '@waldur/marketplace/resources/plan-usage/types';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
+import { PlanUsageRow } from '@waldur/reporting/plan-usage/types';
 
 import { PreviewButton } from '../list/PreviewButton';
 

@@ -115,14 +115,6 @@ const SupportResourcesList = lazyComponent(
   () => import('./resources/list/SupportResourcesList'),
   'SupportResourcesList',
 );
-const PlanUsageContainer = lazyComponent(
-  () => import('./resources/plan-usage/PlanUsageContainer'),
-  'PlanUsageContainer',
-);
-const SupportUsageContainer = lazyComponent(
-  () => import('./resources/usage/SupportUsageContainer'),
-  'SupportUsageContainer',
-);
 const ProviderDetails = lazyComponent(
   () => import('./service-providers/ProviderDetails'),
   'ProviderDetails',
@@ -727,26 +719,6 @@ export const states: StateDeclaration[] = [
     component: SupportOrdersContainer,
     data: {
       breadcrumb: () => translate('Orders'),
-    },
-  },
-
-  {
-    name: 'marketplace-support-plan-usages',
-    url: 'plan-usages/',
-    component: PlanUsageContainer,
-    parent: 'reporting',
-    data: {
-      breadcrumb: () => translate('Capacity'),
-    },
-  },
-
-  {
-    name: 'marketplace-support-usage-reports',
-    url: 'usage/',
-    component: SupportUsageContainer,
-    parent: 'reporting',
-    data: {
-      breadcrumb: () => translate('Usage reports'),
     },
   },
 

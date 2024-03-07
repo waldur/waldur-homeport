@@ -3,10 +3,6 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
 
-const GrowthContainer = lazyComponent(
-  () => import('@waldur/invoices/growth/GrowthContainer'),
-  'GrowthContainer',
-);
 const BillingDetails = lazyComponent(
   () => import('./details/BillingDetails'),
   'BillingDetails',
@@ -40,16 +36,6 @@ export const states: StateDeclaration[] = [
           ? translate('Accounting record')
           : translate('Invoice'),
       skipBreadcrumb: true,
-    },
-  },
-
-  {
-    name: 'invoicesGrowth',
-    url: 'growth/',
-    component: GrowthContainer,
-    parent: 'reporting',
-    data: {
-      breadcrumb: () => translate('Growth'),
     },
   },
 ];
