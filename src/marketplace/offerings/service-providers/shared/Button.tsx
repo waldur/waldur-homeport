@@ -18,7 +18,7 @@ export const SharedButton: FunctionComponent<ButtonProps> = ({
   <Button onClick={onClick}>
     {iconPrefix && (
       <>
-        <img src={iconPrefix} />
+        <img src={iconPrefix} alt="icon" />
         &nbsp;
       </>
     )}

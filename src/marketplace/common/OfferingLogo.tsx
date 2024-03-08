@@ -15,6 +15,7 @@ interface OfferingLogoProps
 export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => (
   <img
     src={props.src || DefaultLogo}
+    alt="offering logo"
     className={
       props.size === 'small'
         ? 'marketplace-offering-logo--small'
@@ -22,6 +23,7 @@ export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => (
     }
     style={props.style}
     onClick={props.onClick}
+    aria-hidden="true"
   />
 );
 

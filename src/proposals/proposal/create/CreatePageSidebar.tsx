@@ -50,14 +50,15 @@ export const CreatePageSidebar = (props: CreatePageSidebarProps) => {
                         />
                       </FormCheck>
 
-                      <a
+                      <div
                         className="stepper-label"
+                        aria-hidden="true"
                         onClick={() => scrollToView(step.id)}
                       >
                         <h3 className="stepper-title">
                           {i + 1}. {step.label}
                         </h3>
-                      </a>
+                      </div>
                     </div>
 
                     <div className="stepper-line h-20px"></div>

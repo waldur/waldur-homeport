@@ -161,8 +161,9 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               )}
             </h5>
             {props.periods.length > 1 && (
-              <a
+              <button
                 className="text-link"
+                type="button"
                 onClick={() => {
                   setSelectedPeriod((prev) =>
                     prev === 'monthly' ? 'annual' : 'monthly',
@@ -173,7 +174,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                   ? translate('Show yearly estimates')
                   : translate('Show monthly estimates')}
                 *
-              </a>
+              </button>
             )}
           </div>
 

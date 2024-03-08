@@ -111,14 +111,15 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
                         </FormCheck>
                       )}
 
-                      <a
+                      <div
                         className="stepper-label"
                         onClick={() => scrollToView(step.id)}
+                        aria-hidden="true"
                       >
                         <h3 className="stepper-title">
                           {i + 1}. {step.label}
                         </h3>
-                      </a>
+                      </div>
                     </div>
 
                     <div className="stepper-line h-20px"></div>

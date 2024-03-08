@@ -37,6 +37,9 @@ export const FavoritePageItem: FC<OwnProps> = ({
         active && 'btn-success',
       )}
       onClick={() => click(item)}
+      onKeyPress={(e) => e.key === 'Enter' && click(item)}
+      role="button"
+      tabIndex={0}
     >
       <button
         className={classNames(

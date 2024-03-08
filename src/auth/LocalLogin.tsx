@@ -27,9 +27,13 @@ const Border = () => (
 const SignInWithLocalAccount: React.FC<SigninWithLocalAccountProps> = ({
   setShowForm,
 }) => (
-  <p className="LoginWithLocalAccountText" onClick={() => setShowForm(true)}>
+  <button
+    type="button"
+    className="LoginWithLocalAccountButton"
+    onClick={() => setShowForm(true)}
+  >
     {translate('Sign in with local account')}
-  </p>
+  </button>
 );
 
 export const LocalLogin: React.FC<LocalLoginProps> = ({ enableSeperator }) => {

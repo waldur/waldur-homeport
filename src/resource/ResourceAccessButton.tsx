@@ -105,6 +105,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                       <Button variant="link" className="p-0">
                         <i
                           className="fa fa-copy fa-lg"
+                          aria-hidden="true"
                           onClick={() => copyText(endpoint.url)}
                         />
                       </Button>

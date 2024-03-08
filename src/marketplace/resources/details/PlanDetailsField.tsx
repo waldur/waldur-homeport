@@ -12,12 +12,13 @@ export const PlanDetailsField = ({ resource }) => {
       value={
         <>
           {resource.plan_name}{' '}
-          <a
+          <button
             className="text-link"
+            type="button"
             onClick={() => dispatch(showPlanDetailsDialog(resource.uuid))}
           >
             [{translate('Show plan')}]
-          </a>
+          </button>
         </>
       }
     />

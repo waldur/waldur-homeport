@@ -42,7 +42,7 @@ export const CategoryListItem: FunctionComponent<{
       >
         {item.icon ? (
           <div className="symbol symbol-35px">
-            <img src={item.icon} />
+            <img src={item.icon} alt="category" />
           </div>
         ) : (
           <ImagePlaceholder

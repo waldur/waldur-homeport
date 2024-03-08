@@ -31,6 +31,7 @@ export const ImageThumbnail: FunctionComponent<ImageThumbnailProps> = (
         )
       }
       style={{ cursor: 'pointer', maxWidth: 100 }}
+      aria-hidden="true"
     />
   );
 };

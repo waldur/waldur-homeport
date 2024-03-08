@@ -13,10 +13,13 @@ interface LinkProps {
 
 export const Link: FunctionComponent<LinkProps> = (props) => (
   <UISref to={props.state} params={props.params}>
+    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
     <a
       target={props.target}
       onClick={props.onClick}
       className={props.className}
+      onKeyPress={(e) => e.key === 'Enter' && props.onClick(e)}
+      role={props.onClick ? 'button' : undefined}
     >
       {props.label || props.children}
     </a>

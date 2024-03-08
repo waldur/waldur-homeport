@@ -34,7 +34,13 @@ export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
   length,
   onClick,
 }) => (
-  <div className="symbol-group symbol-hover" onClick={onClick}>
+  <div
+    className="symbol-group symbol-hover"
+    onClick={onClick}
+    onKeyPress={(e) => e.key === 'Enter' && onClick()}
+    role="button"
+    tabIndex={0}
+  >
     {items.slice(0, max).map((item: User, index: number) => (
       <div key={index} className="symbol symbol-circle symbol-35px">
         <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>

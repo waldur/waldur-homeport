@@ -10,6 +10,7 @@ const getIssueContext = (event) => ({
   ...getCallerContext(event),
   issue_link: (
     <UISref to="support.detail" params={{ uuid: event.issue_uuid }}>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a>{event.issue_key}</a>
     </UISref>
   ),

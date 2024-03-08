@@ -34,11 +34,15 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
       <td className="col-md-5">
         {pair.address ? (
           <div className="btn-text-align">
-            <a onClick={() => onClick(pair.address)} className="pe-3">
+            <button
+              onClick={() => onClick(pair.address)}
+              type="button"
+              className="text-btn pe-3"
+            >
               <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
                 <i className="fa fa-copy fa-lg" />
               </Tip>
-            </a>
+            </button>
             {pair.address}
           </div>
         ) : (

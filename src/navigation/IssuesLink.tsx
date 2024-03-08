@@ -26,7 +26,7 @@ export const IssuesLink: React.FC = () => {
 
   return hasSupport && user ? (
     <span className="menu-link px-2">
-      <span className="menu-title" onClick={openDrawer}>
+      <span className="menu-title" aria-hidden="true" onClick={openDrawer}>
         {translate('Issues')}
       </span>
     </span>

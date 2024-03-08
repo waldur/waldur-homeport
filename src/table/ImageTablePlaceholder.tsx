@@ -13,7 +13,11 @@ export const ImageTablePlaceholder: React.FC<ImageTablePlaceholderProps> = (
 ) => (
   <Row className="justify-content-center" style={{ clear: 'both' }}>
     <Col sm={4}>
-      <img src={props.illustration} style={{ width: '100%' }} />
+      <img
+        src={props.illustration}
+        alt="placeholder"
+        style={{ width: '100%' }}
+      />
       <div className="text-center">
         <h2>{props.title}</h2>
         {props.description && <p>{props.description}</p>}

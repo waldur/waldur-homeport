@@ -24,9 +24,11 @@ export const ImagesTab: FunctionComponent<ImagesTabProps> = (props) => {
         <Col key={index} md={4} className="text-center">
           <img
             src={item.thumbnail}
+            alt="thumb"
             className="img-thumbnail m-xs"
             onClick={() => dispatch(openViewOfferingImageDialog(item))}
             style={{ cursor: 'pointer' }}
+            aria-hidden="true"
           />
           <h4 className="mt-3">{item.name}</h4>
           <p>{item.description}</p>

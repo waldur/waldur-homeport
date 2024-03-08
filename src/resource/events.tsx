@@ -17,6 +17,7 @@ const getResourceContext = (event) => ({
         uuid: event.project_uuid,
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a>{event.resource_name}</a>
     </UISref>
   ),

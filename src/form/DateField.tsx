@@ -29,7 +29,8 @@ export const DateField: FunctionComponent<any> = (props) => (
       className="form-control form-control-solid"
     />
     {props.input.value && typeof props.input.value === 'string' && (
-      <span
+      <button
+        type="button"
         className="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow end-button"
         onClick={() => props.input.onChange(null)}
       >
@@ -40,7 +41,7 @@ export const DateField: FunctionComponent<any> = (props) => (
         >
           <i className="fa fa-times fs-6"></i>
         </Tip>
-      </span>
+      </button>
     )}
   </>
 );

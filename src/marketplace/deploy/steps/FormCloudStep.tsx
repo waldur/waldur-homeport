@@ -80,7 +80,12 @@ export const FormCloudStep = (props: FormStepProps) => {
         page.data.map((offering) => ({
           label: offering.name,
           value: offering,
-          image: <img src={offering.image || offering.thumbnail} />,
+          image: (
+            <img
+              src={offering.image || offering.thumbnail}
+              alt="offering logo"
+            />
+          ),
         })),
       )
       .flat();
@@ -100,6 +105,7 @@ export const FormCloudStep = (props: FormStepProps) => {
             src={
               initialOffering.current.image || initialOffering.current.thumbnail
             }
+            alt="offering logo"
           />
         ),
       },

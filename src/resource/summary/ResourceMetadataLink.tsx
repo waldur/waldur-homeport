@@ -24,11 +24,12 @@ export const ResourceMetadataLink = <T extends Resource = any>(
 ) => {
   const dispatch = useDispatch();
   return (
-    <span
-      className="cursor-pointer"
+    <button
+      type="button"
+      className="text-btn text-dark"
       onClick={() => dispatch(openDetailsDialog(props))}
     >
       {translate('Show')}
-    </span>
+    </button>
   );
 };

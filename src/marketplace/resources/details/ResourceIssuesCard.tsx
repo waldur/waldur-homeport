@@ -23,9 +23,9 @@ const CreateIssueButton = ({ resource }) => {
     );
   }, [dispatch, resource]);
   return (
-    <a className="btn btn-link ms-3" onClick={callback}>
+    <button className="btn btn-link ms-3" onClick={callback}>
       {translate('Create')}
-    </a>
+    </button>
   );
 };
 
@@ -39,6 +39,7 @@ export const ResourceIssuesCard = ({ resource, state }) => {
         </Card.Title>
         <div className="card-toolbar">
           <UISref to={state.name} params={{ tab: 'issues' }}>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a className="btn btn-link">{translate('See all')}</a>
           </UISref>
           <CreateIssueButton resource={resource} />

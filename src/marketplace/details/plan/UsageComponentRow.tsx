@@ -68,9 +68,13 @@ export const UsageComponentRow: React.FC<UsageComponentRowProps> = (props) => {
             =
           </td>
           <td className="estimate">
-            <a className="text-link fst-italic" onClick={onClick}>
+            <button
+              type="button"
+              className="text-link fst-italic"
+              onClick={onClick}
+            >
               {translate('Estimate')}
-            </a>
+            </button>
           </td>
         </>
       ) : null}

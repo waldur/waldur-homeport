@@ -8,8 +8,9 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
+    'plugin:jsx-a11y/recommended',
   ],
-  plugins: ['react-hooks'],
+  plugins: ['react-hooks', 'jsx-a11y'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -79,5 +80,6 @@ module.exports = {
     'import/no-named-as-default': 'error',
     'require-await': 'error',
     'no-prototype-builtins': 'off',
+    'jsx-a11y/no-autofocus': ['error', { ignoreNonDOM: true }],
   },
 };

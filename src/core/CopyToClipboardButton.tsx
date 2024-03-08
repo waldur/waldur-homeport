@@ -31,7 +31,7 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
 
   return (
     <p className={classNames('my-1', className)}>
-      <a onClick={(e) => onClick(e)}>
+      <button className="text-btn" type="button" onClick={(e) => onClick(e)}>
         <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
           <i
             className={classNames(
@@ -40,7 +40,7 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
             )}
           />
         </Tip>
-      </a>
+      </button>
     </p>
   );
 };

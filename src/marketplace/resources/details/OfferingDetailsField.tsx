@@ -13,12 +13,13 @@ export const OfferingDetailsField = ({ offering }) => {
       value={
         <>
           {offering.name}{' '}
-          <a
+          <button
             className="text-link"
+            type="button"
             onClick={() => dispatch(openOfferingDetailsDialog(offering))}
           >
             [{translate('Show offering')}]
-          </a>
+          </button>
         </>
       }
     />

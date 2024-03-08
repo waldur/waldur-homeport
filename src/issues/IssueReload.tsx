@@ -23,7 +23,7 @@ export const PureIssueReload: FunctionComponent<PureIssueReloadProps> = (
 
   return (
     <Tip label={translate('Reload issue data')} id="reload_issue_tooltip">
-      <span className="issue-reload" onClick={fetchData}>
+      <span className="issue-reload" onClick={fetchData} aria-hidden="true">
         <i className={`fa fa-refresh ${loading ? 'fa-spin' : ''}`} />
       </span>
     </Tip>

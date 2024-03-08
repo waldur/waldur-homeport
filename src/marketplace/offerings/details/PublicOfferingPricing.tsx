@@ -47,6 +47,7 @@ export const PublicOfferingPricing: FunctionComponent<PublicOfferingPricingProps
                     period === 'yearly' ? 'text-muted' : 'text-primary'
                   }
                   onClick={() => setPeriod('monthly')}
+                  aria-hidden="true"
                 >
                   {translate('Billed monthly')}
                 </label>
@@ -60,6 +61,7 @@ export const PublicOfferingPricing: FunctionComponent<PublicOfferingPricingProps
                     period === 'monthly' ? 'text-muted' : 'text-primary'
                   }
                   onClick={() => setPeriod('yearly')}
+                  aria-hidden="true"
                 >
                   {translate('Billed yearly (20% discount)')}
                 </label>

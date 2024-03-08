@@ -208,6 +208,11 @@
 }
 
 .text-link {
+  background-color: transparent;
+  border: none;
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
   cursor: pointer;
   color: $dark;
   text-decoration: underline;
@@ -216,6 +221,30 @@
     color: $primary;
     text-decoration: none;
   }
+}
+.text-anchor {
+  background-color: transparent;
+  color: $link-color;
+  text-decoration: $link-decoration;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
+
+  &:hover {
+    color: $link-hover-color;
+    transition: $transition-base;
+  }
+}
+.text-btn {
+  background-color: transparent;
+  color: $gray-600;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
 }
 
 .z-index-100 {

@@ -56,7 +56,7 @@ const OfferingListItem: FunctionComponent<{
         <Stack direction="horizontal" gap={4}>
           {item.image ? (
             <div className="symbol symbol-40px">
-              <img src={item.image} />
+              <img src={item.image} alt="offering" />
             </div>
           ) : (
             <div className="symbol">

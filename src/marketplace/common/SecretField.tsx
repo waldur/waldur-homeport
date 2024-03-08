@@ -12,7 +12,13 @@ export class SecretField extends Component<
   render() {
     return (
       <>
-        <a className={this.getClassName()} onClick={this.toggle} />{' '}
+        <button
+          className={this.getClassName()}
+          type="button"
+          onClick={this.toggle}
+        >
+          &nbsp;
+        </button>{' '}
         {this.getValue()}
       </>
     );
@@ -25,7 +31,7 @@ export class SecretField extends Component<
   };
 
   getClassName = () =>
-    classNames('fa', {
+    classNames('text-btn fa', {
       'fa-eye-slash': this.state.showSecret,
       'fa-eye': !this.state.showSecret,
     });

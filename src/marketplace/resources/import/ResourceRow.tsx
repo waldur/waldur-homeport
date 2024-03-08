@@ -6,15 +6,16 @@ import { translate } from '@waldur/i18n';
 import { ResourceIcon } from '@waldur/resource/ResourceName';
 
 const SelectResourceButton = ({ value, onChange }) => (
-  <a
+  <button
     className={classNames(
       'btn btn-sm btn-outline',
       value ? 'btn-primary' : 'btn-secondary',
     )}
+    type="button"
     onClick={onChange}
   >
     {value ? translate('Selected') : translate('Select')}
-  </a>
+  </button>
 );
 
 const serializeResource = (resource) => ({

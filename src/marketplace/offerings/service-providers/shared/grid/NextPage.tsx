@@ -13,12 +13,13 @@ export const NextPage: FunctionComponent<NextPageProps> = ({
   disabled,
   onClick,
 }) => (
-  <div
-    className={classNames('pageAction', {
+  <button
+    className={classNames('text-btn pageAction', {
       'pageAction--disabled': disabled,
     })}
+    type="button"
     onClick={onClick}
   >
     {translate('Next')} <i className="fa fa-chevron-right m-l" />
-  </div>
+  </button>
 );

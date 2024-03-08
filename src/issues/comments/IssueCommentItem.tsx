@@ -103,12 +103,13 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
               </div>
               <div className="d-flex flex-column fw-semibold fs-5 text-gray-600 text-dark">
                 <div className="d-flex align-items-center">
-                  <a
+                  <button
                     onClick={openUserDialog}
-                    className="text-gray-800 fw-bold text-hover-primary fs-5 me-3"
+                    type="button"
+                    className="text-btn text-gray-800 fw-bold text-hover-primary fs-5 me-3"
                   >
                     {comment.author_name}
-                  </a>
+                  </button>
                   <span className="m-0"></span>
                 </div>
                 <span className="text-muted fw-semibold fs-6">
@@ -156,6 +157,7 @@ export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> 
               ),
             }}
             onClick={onCommentClick}
+            aria-hidden="true"
           />
           <IssueCommentsFormContainer
             formId={comment.uuid}

@@ -51,5 +51,11 @@ export const SidebarResizer = () => {
     }
   }, [sidebarWidth]);
 
-  return <div className="sidebar-resizer" onMouseDown={startResizing} />;
+  return (
+    <div
+      className="sidebar-resizer"
+      aria-hidden="true"
+      onMouseDown={startResizing}
+    />
+  );
 };

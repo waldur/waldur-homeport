@@ -22,9 +22,13 @@ export const RecipientsField: FunctionComponent<{
     <>
       <h4 className="fw-normal">{translate('Recipients')}</h4>
       <p>
-        <a className="btn btn-link" onClick={openRecipientsList}>
+        <button
+          className="btn btn-link"
+          type="button"
+          onClick={openRecipientsList}
+        >
           {translate('Show recipients')}
-        </a>
+        </button>
       </p>
     </>
   );

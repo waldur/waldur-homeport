@@ -70,11 +70,11 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           <AsideMobileToggle />
 
           <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-            <a className="d-lg-none">
+            <div className="d-lg-none">
               {imageUrl && (
                 <img src={imageUrl || Logo} alt="Logo" className="h-30px" />
               )}
-            </a>
+            </div>
           </div>
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">

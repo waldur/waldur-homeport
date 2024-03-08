@@ -74,12 +74,13 @@ export const BulkUpload: FC<OwnProps> = (props) => {
         onDrop={parseCsvFile}
         className="mb-4"
       />
-      <a
+      <button
         className="btn btn-link btn-color-muted btn-active-color-primary"
+        type="button"
         onClick={onDownloadClick}
       >
         <u>{translate('Download')} example_file.csv</u>
-      </a>
+      </button>
     </>
   );
 };

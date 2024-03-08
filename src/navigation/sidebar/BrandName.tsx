@@ -29,12 +29,13 @@ export const BrandName: FunctionComponent = () => {
         <>
           <img
             src={sidebarLogoMobileUrl}
+            alt="logo"
             className="mh-50px mw-200px logo_mobile"
           />
-          <img src={imageUrl} className="mh-50px mw-200px logo" />
+          <img src={imageUrl} alt="logo" className="mh-50px mw-200px logo" />
         </>
       ) : ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
-        <img src={imageUrl} className="mh-50px mw-200px logo" />
+        <img src={imageUrl} alt="logo" className="mh-50px mw-200px logo" />
       ) : (
         <>
           <h3 className="mt-2" style={{ color: 'white' }}>
@@ -49,6 +50,7 @@ export const BrandName: FunctionComponent = () => {
         data-kt-toggle-state="active"
         data-kt-toggle-target="body"
         data-kt-toggle-name="aside-minimize"
+        aria-hidden="true"
         style={{
           background: 'white',
           boxShadow: '0px 0px 10px rgba(113, 121, 136, 0.1)',

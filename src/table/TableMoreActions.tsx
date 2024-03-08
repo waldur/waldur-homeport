@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { FunctionComponent, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -62,7 +63,11 @@ export const TableMoreActions: FunctionComponent<TableMoreActionsProps> = ({
                       className="menu-item px-3"
                       data-kt-menu-trigger
                     >
-                      <a onClick={child.action} className="menu-link px-3">
+                      <a
+                        onClick={child.action}
+                        className="menu-link px-3"
+                        aria-hidden="true"
+                      >
                         {child.icon && (
                           <span className="menu-icon">
                             <i className={child.icon} />
@@ -76,7 +81,11 @@ export const TableMoreActions: FunctionComponent<TableMoreActionsProps> = ({
               </div>
             ) : (
               <div key={i} className="menu-item px-3" data-kt-menu-trigger>
-                <a onClick={item.action} className="menu-link px-3">
+                <a
+                  onClick={item.action}
+                  className="menu-link px-3"
+                  aria-hidden="true"
+                >
                   {item.icon && (
                     <span className="menu-icon">
                       <i className={item.icon} />

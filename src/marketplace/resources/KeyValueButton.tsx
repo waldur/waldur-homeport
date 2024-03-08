@@ -15,9 +15,9 @@ export const KeyValueButton: FunctionComponent<any> = (props) => {
   }, [dispatch, props.items, props.title]);
 
   return (
-    <a onClick={showDetails}>
+    <button type="button" className="text-btn" onClick={showDetails}>
       {translate('Show details')}{' '}
       <i className="fa fa-external-link cursor-pointer" />
-    </a>
+    </button>
   );
 };

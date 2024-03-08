@@ -20,10 +20,10 @@ const StateField = ({ row }) => {
   const cls = row.is_active ? 'bg-success' : 'bg-danger';
   const title = row.is_active ? translate('Enabled') : translate('Disabled');
   return (
-    <a
+    <span
       className={`status-circle d-inline-block rounded square ${cls}`}
       title={title}
-    />
+    ></span>
   );
 };
 

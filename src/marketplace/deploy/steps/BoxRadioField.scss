@@ -66,6 +66,10 @@
     margin: 0;
     height: 36px;
     overflow: hidden;
+    border: 0;
+    background-color: transparent;
+    color: unset;
+    width: 100%;
 
     .version-selector {
       display: flex;

@@ -91,6 +91,7 @@ export const OfferingUpdateContainer = () => {
                   uuid: data.offering.customer_uuid,
                 }}
               >
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a className="btn btn-sm me-2 btn-light">
                   {translate('Manage')}
                 </a>

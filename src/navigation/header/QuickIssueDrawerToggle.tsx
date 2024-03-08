@@ -25,8 +25,9 @@ export const QuickIssueDrawerToggle: React.FC = () => {
 
   return (
     <div className="d-flex align-items-center ms-1 ms-lg-3">
-      <div
+      <button
         id="quick-issue-toggle"
+        type="button"
         className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary position-relative w-35px h-35px w-md-40px h-md-40px"
         onClick={openDrawer}
       >
@@ -36,7 +37,7 @@ export const QuickIssueDrawerToggle: React.FC = () => {
           tooltipText={translate('Issues')}
           tooltipClassName="z-index-100"
         />
-      </div>
+      </button>
     </div>
   );
 };

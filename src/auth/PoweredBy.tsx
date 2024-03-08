@@ -10,7 +10,7 @@ export const PoweredBy: FunctionComponent = () =>
     <div className="powered-by">
       <div>{translate('Powered by')}</div>
       <div>
-        <img src={fixURL('/icons/powered_by_logo/')} />
+        <img src={fixURL('/icons/powered_by_logo/')} alt="Powered by" />
       </div>
     </div>
   ) : null;

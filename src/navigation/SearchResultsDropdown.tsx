@@ -43,7 +43,7 @@ export const SearchResultsDropdown: FunctionComponent<SearchResultsDropdownProps
           </div>
         ) : value?.items?.length === 0 ? (
           <div className="searchResultsDropdown__notFound">
-            <img src={illustration} height={120} width="auto" />
+            <img src={illustration} height={120} width="auto" alt="no data" />
             <p>{translate('No matching offerings found')}</p>
           </div>
         ) : value?.items?.length > 0 ? (

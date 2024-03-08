@@ -70,7 +70,7 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
                     <p className="text-muted mb-0">
                       {user.affiliations.slice(0, 2).join(', ')}{' '}
                       {translate('and')}{' '}
-                      <a>
+                      <span>
                         <i>
                           <u>
                             {translate('{count} more affiliations', {
@@ -78,7 +78,7 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
                             })}
                           </u>
                         </i>
-                      </a>
+                      </span>
                     </p>
                   )}
                 </Col>

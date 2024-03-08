@@ -14,7 +14,7 @@ describe('Link persistance after login', () => {
 
   it('should redirect to attempted url after login', () => {
     cy.visit('/profile/keys/')
-      .get('.LoginWithLocalAccountText')
+      .get('.LoginWithLocalAccountButton')
       .click()
       .fillAndSubmitLoginForm()
       .location('pathname')
@@ -23,7 +23,7 @@ describe('Link persistance after login', () => {
 
   it('should redirect to attempted url with params after login', () => {
     cy.visit('/projects/df4193e2bee24a4c8e339474d74c5f8c/')
-      .get('.LoginWithLocalAccountText')
+      .get('.LoginWithLocalAccountButton')
       .click()
       .fillAndSubmitLoginForm()
       .location('pathname')
@@ -54,7 +54,7 @@ describe('Expired token redirect', () => {
 
     cy.visit('/projects/df4193e2bee24a4c8e339474d74c5f8c/')
       .intercept('/api/users/me/', {fixture:'users/alice.json'})
-      .get('.LoginWithLocalAccountText')
+      .get('.LoginWithLocalAccountButton')
       .click()
       .fillAndSubmitLoginForm()
       .location('pathname')
@@ -83,7 +83,7 @@ describe('Expired token redirect', () => {
       .wait(['@error'])
       .intercept('GET', '/api/events/**', []);
 
-    cy.get('.LoginWithLocalAccountText')
+    cy.get('.LoginWithLocalAccountButton')
       .click()
 
     cy.fillAndSubmitLoginForm()

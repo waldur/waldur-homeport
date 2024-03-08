@@ -24,11 +24,11 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
   }, [dispatch, value]);
   return (
     <div className="copyToClipboard">
-      <a onClick={onClick}>
+      <button className="text-btn" type="button" onClick={onClick}>
         <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
           <i className="fa fa-clone fa-lg" />
         </Tip>
-      </a>
+      </button>
     </div>
   );
 };

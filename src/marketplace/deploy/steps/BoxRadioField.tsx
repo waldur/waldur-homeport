@@ -92,8 +92,9 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
                 {...rest}
               />
             </label>
-            <div
+            <button
               className="form-check-info"
+              type="button"
               onClick={() => onChange(selectedVersions[index].value)}
             >
               {choice.options?.length ? (
@@ -126,12 +127,13 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
                         className="menu-item px-3"
                         data-kt-menu-trigger
                       >
-                        <a
+                        <span
                           className="menu-link px-3"
                           onClick={() => onChangeSelect(option, index)}
+                          aria-hidden="true"
                         >
                           <span className="menu-title">{option.label}</span>
-                        </a>
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -144,7 +146,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
                   )}
                 </>
               )}
-            </div>
+            </button>
           </div>
         );
       })}

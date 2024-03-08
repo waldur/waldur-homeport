@@ -8,11 +8,12 @@ import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 
 const SelectOfferingButton = ({ value, onChange }) => (
-  <a
+  <button
     className={classNames(
       'btn btn-block-sm btn-block-md btn-outline',
       value ? 'btn-primary' : 'btn-secondary',
     )}
+    type="button"
     onClick={onChange}
   >
     {' '}
@@ -20,14 +21,14 @@ const SelectOfferingButton = ({ value, onChange }) => (
     <i
       className={classNames('fa', value ? 'fa-check' : 'fa-long-arrow-right')}
     />
-  </a>
+  </button>
 );
 
 const OfferingItem = ({ offering, value, onChange, id }) => (
   <Panel className="provider-box cursor-pointer">
     <div className="m-md">
       <Tip label={offering.name} id={id}>
-        <a className="h5 ellipsis">{offering.name}</a>
+        <div className="h5 ellipsis">{offering.name}</div>
       </Tip>
     </div>
     <div className="text-center m-b m-t">

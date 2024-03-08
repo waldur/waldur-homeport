@@ -19,7 +19,7 @@ export const SecretField: React.FC<SecretFieldProps> = (props) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
-  const iconClass = classNames('fa password-icon', {
+  const iconClass = classNames('text-btn fa password-icon', {
     'fa-eye-slash': showSecret,
     'fa-eye': !showSecret,
   });
@@ -34,11 +34,12 @@ export const SecretField: React.FC<SecretFieldProps> = (props) => {
         className="form-control-solid"
         {...rest}
       />
-      <a
+      <button
         className={iconClass}
+        type="button"
         title={showSecret ? translate('Hide') : translate('Show')}
         onClick={onToggle}
-      />
+      ></button>
     </div>
   );
 };

@@ -21,6 +21,7 @@ export const MenuItem: React.FC<{
       className={classNames('menu-item', { here: isActive })}
     >
       <UISref to={props.state} params={props.params}>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a className="menu-link">
           {props.iconPath && (
             <span className="menu-icon">

@@ -24,11 +24,12 @@ export const CallShowAllRounds = ({ call }: { call: ProposalCall }) => {
     return null;
   }
   return (
-    <a
+    <button
       className="text-link"
+      type="button"
       onClick={() => dispatch(showAllRoundsDialog(call))}
     >
       {translate('See all rounds')}
-    </a>
+    </button>
   );
 };
