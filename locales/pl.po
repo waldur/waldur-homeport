@@ -1897,6 +1897,7 @@ msgstr "Anuluj prośbę"
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
@@ -3716,6 +3717,7 @@ msgstr "Nazwa domeny. Jeśli nie zdefiniowano domeny domyślnej, zostanie użyta
 
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
@@ -4220,6 +4222,7 @@ msgstr "Zmienne środowiska"
 msgid "Environment variables have been updated successfully."
 msgstr "Zmienne środowiskowe zostały pomyślnie zaktualizowane."
 
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
@@ -4413,6 +4416,7 @@ msgstr "Przykład: [{\"header\": \"Database instance info\", \"body\": \"data\"}
 msgid "Excel"
 msgstr "Programu excel"
 
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
@@ -7496,6 +7500,7 @@ msgstr "Nie znaleziono obiektu."
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
@@ -8619,6 +8624,7 @@ msgstr "Oczekuje na zgodę na usunięcie"
 msgid "Pending confirmations"
 msgstr "Oczekujące potwierdzenia"
 
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
@@ -8639,6 +8645,7 @@ msgstr "Oczekuje na opinię konsumencką"
 msgid "Pending order confirmation"
 msgstr "Oczekujące na potwierdzenie zamówienia"
 
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
@@ -9337,6 +9344,7 @@ msgstr "Postęp"
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
@@ -10150,6 +10158,7 @@ msgstr "Odrzuć prośbę o pozwolenie przez{name}"
 #: src/marketplace-flows/RequestStateFilter.tsx
 #: src/marketplace-flows/RequestStateIndicator.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
@@ -12477,6 +12486,7 @@ msgstr "Skrypt startowy"
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
@@ -13750,6 +13760,7 @@ msgstr "Wypróbuj nową wersję"
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/update/options/OptionForm.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
+#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
