@@ -151,7 +151,11 @@ export const OrganizationListItem: FunctionComponent<{
                 <ServiceProviderIcon organization={item} />
               </Link>
             ) : (
-              <div className="action-item" onClick={(e) => e.stopPropagation()}>
+              <div
+                className="action-item"
+                aria-hidden="true"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <ServiceProviderIcon organization={item} />
               </div>
             )}
@@ -177,6 +181,7 @@ export const OrganizationListItem: FunctionComponent<{
               ) : (
                 <div
                   className="action-item"
+                  aria-hidden="true"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <CallManagerIcon organization={item} />

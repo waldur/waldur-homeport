@@ -27,8 +27,9 @@ export const FavoritePagesDropdown: React.FC = () => {
       rootClose={true}
     >
       <div className="d-flex align-items-center ms-1 ms-lg-3">
-        <div
+        <button
           id="favorite-pages-toggle"
+          type="button"
           className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary position-relative w-35px h-35px w-md-40px h-md-40px"
           onClick={() => setShow(!show)}
         >
@@ -38,7 +39,7 @@ export const FavoritePagesDropdown: React.FC = () => {
             tooltipText={translate('Favourites')}
             tooltipClassName="z-index-100"
           />
-        </div>
+        </button>
       </div>
     </OverlayTrigger>
   );

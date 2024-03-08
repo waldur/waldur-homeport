@@ -19,11 +19,12 @@ export const ResourceMetadataLink = ({ resource, scope }) => {
   const dispatch = useDispatch();
 
   return (
-    <a
+    <button
+      type="button"
       className="text-link text-nowrap"
       onClick={() => dispatch(showMetadata(resource, scope))}
     >
       {translate('Show metadata')}
-    </a>
+    </button>
   );
 };

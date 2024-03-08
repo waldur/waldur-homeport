@@ -24,6 +24,7 @@ export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => {
       className={`symbol symbol-${props.size}px marketplace-offering-logo-metronic ${props.className}`}
       style={props.style}
       onClick={props.onClick}
+      aria-hidden="true"
     >
       <div
         className="symbol-label image"

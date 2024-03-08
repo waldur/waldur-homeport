@@ -29,10 +29,13 @@ export const IssueLinkField: FunctionComponent<IssueLinkProps> = (props) => {
 
   return (
     <UISref to={toState} params={toParams}>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a
         target={props.target}
         onClick={props.onClick}
         className={props.className}
+        onKeyPress={(e) => e.key === 'Enter' && props.onClick(e)}
+        role={props.onClick ? 'button' : undefined}
       >
         {props.label || props.children}
       </a>

@@ -72,13 +72,14 @@ export const ExportFullPriceList: FunctionComponent<ExportFullPriceListProps> =
         ) : error ? (
           <>{translate('Unable to load full price list')}</>
         ) : components ? (
-          <div
-            className="exportFullPriceList__download"
+          <button
+            className="text-anchor exportFullPriceList__download"
+            type="button"
             onClick={() => onExport(offering.name, components)}
           >
             <i className="fa fa-download" />
             {translate('Download full price list')}
-          </div>
+          </button>
         ) : null}
       </div>
     );

@@ -19,10 +19,10 @@ export const CategoriesListHeader: FunctionComponent<CategoriesListHeaderProps> 
   ({ categories, onClearCategoriesFilter }) => (
     <div className="categoriesListHeader">
       <h1>{translate('Category')}</h1>
-      <span onClick={onClearCategoriesFilter}>
+      <button className="text-anchor" onClick={onClearCategoriesFilter}>
         {translate('Show all ({numberOfAllCategories})', {
           numberOfAllCategories: getNumberOfAllCategories(categories),
         })}
-      </span>
+      </button>
     </div>
   );

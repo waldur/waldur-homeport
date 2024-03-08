@@ -54,7 +54,11 @@ export const DeploymentIntroduction = () => {
             </div>
           </Col>
           <Col xs={12} lg={7} className="text-center">
-            <img src={image} className="h-350px mw-100" />
+            <img
+              src={image}
+              className="h-350px mw-100"
+              alt="easy deployment steps"
+            />
           </Col>
         </Row>
       </div>

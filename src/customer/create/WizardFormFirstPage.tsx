@@ -93,6 +93,7 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
                 component={ImageField}
                 type="file"
                 label={translate('Logo')}
+                floating={false}
               />
             </>
           )}

@@ -33,7 +33,7 @@ describe('OpenStackSecurityGroupsLink', () => {
   it('opens modal dialog when user clicks on link', () => {
     const items = [{ name: 'ssh' }, { name: 'default' }];
     const wrapper = renderLink({ items });
-    wrapper.find({ className: 'cursor-pointer' }).simulate('click');
+    wrapper.find('button').simulate('click');
     const actions = store.getActions();
     expect(actions[0]).toEqual(openDetailsDialog(items));
   });

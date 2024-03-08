@@ -45,6 +45,7 @@ export const getAffectedUserContext = (event: AffectedUserContext) => ({
 export const getCustomerContext = (event: CustomerContext) => ({
   customer_link: (
     <UISref to="organization.events" params={{ uuid: event.customer_uuid }}>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a>{event.customer_name}</a>
     </UISref>
   ),
@@ -53,6 +54,7 @@ export const getCustomerContext = (event: CustomerContext) => ({
 export const getProjectContext = (event: ProjectContext) => ({
   project_link: (
     <UISref to="project.dashboard" params={{ uuid: event.project_uuid }}>
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a>{event.project_name}</a>
     </UISref>
   ),

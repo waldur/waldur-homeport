@@ -90,14 +90,15 @@ export const ShoppingCartItem: FunctionComponent<ShoppingCartItemProps> = (
       )}
       <td className="text-center">
         <span className="btn-group">
-          <a
+          <button
             className={classNames('btn btn-outline btn-danger btn-sm', {
               disabled: props.isRemovingItem,
             })}
+            type="button"
             onClick={props.onRemove}
           >
             <i className="fa fa-trash" /> {translate('Remove')}
-          </a>
+          </button>
         </span>
       </td>
       {props.termsOfServiceIsVisible && <TosCell {...props} />}

@@ -17,14 +17,15 @@ const NamespaceSwitcher: FunctionComponent = () => (
   <Field
     name="useNewNamespace"
     component={(fieldProps) => (
-      <a
-        role="button"
+      <button
+        className="text-btn text-dark"
+        type="button"
         onClick={() => fieldProps.input.onChange(!fieldProps.input.value)}
       >
         {fieldProps.input.value
           ? translate('Use an existing namespace')
           : translate('Add to a new namespace')}
-      </a>
+      </button>
     )}
   />
 );

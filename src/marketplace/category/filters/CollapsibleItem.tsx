@@ -19,6 +19,7 @@ export const CollapsibleItem: React.FC<CollapsibleItemProps> = (props) => {
           selected: props.selected,
         })}
         onClick={onClick}
+        aria-hidden="true"
       >
         {props.title}{' '}
         {collapsed ? (

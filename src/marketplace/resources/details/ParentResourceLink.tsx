@@ -10,7 +10,7 @@ export const ParentResourceLink = ({ resource }: { resource: Resource }) =>
   resource.parent_uuid && resource.parent_name ? (
     <p>
       <i>
-        <img src={openstackIcon} width={15} className="me-1" />
+        <img src={openstackIcon} width={15} className="me-1" alt="openstack" />
         {translate(
           'Part of {resource}',
           {
@@ -22,6 +22,7 @@ export const ParentResourceLink = ({ resource }: { resource: Resource }) =>
                   resource_uuid: resource.parent_uuid,
                 }}
               >
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a className="text-link">{resource.parent_name}</a>
               </UISref>
             ),

@@ -11,7 +11,7 @@ interface SecretValueFieldProps {
 export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
   const [showSecret, onToggle] = useToggle(false);
 
-  const iconClass = classNames('fa password-icon', {
+  const iconClass = classNames('text-btn fa password-icon', {
     'fa-eye-slash': showSecret,
     'fa-eye': !showSecret,
   });
@@ -24,11 +24,12 @@ export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
         type={showSecret ? 'text' : 'password'}
         autoComplete="new-password"
       />
-      <a
+      <button
         className={iconClass}
+        type="button"
         title={showSecret ? 'Hide' : 'Show'}
         onClick={onToggle}
-      />
+      ></button>
     </div>
   );
 };

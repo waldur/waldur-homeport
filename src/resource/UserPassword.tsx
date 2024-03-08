@@ -12,14 +12,14 @@ export const UserPassword: React.FC<UserPasswordProps> = (props) => {
   const [showPassword, toggle] = useToggle(false);
   return (
     <>
-      <a
-        className={classNames('fa', {
+      <button
+        className={classNames('text-btn fa', {
           'fa-eye': !showPassword,
           'fa-eye-slash': showPassword,
         })}
         title={translate('Show password')}
         onClick={toggle}
-      />{' '}
+      ></button>{' '}
       {showPassword ? props.password : '***************'}
     </>
   );

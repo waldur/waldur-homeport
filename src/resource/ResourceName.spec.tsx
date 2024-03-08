@@ -10,7 +10,9 @@ import { ResourceName } from './ResourceName';
 
 jest.mock('@waldur/core/Link', () => {
   return {
-    Link: ({ label, children }) => <a>{label || children}</a>,
+    Link: ({ label, children }) => (
+      <button className="text-anchor">{label || children}</button>
+    ),
   };
 });
 

@@ -7,6 +7,7 @@ export const WizardStepIndicator = ({ steps, activeStep, onSelect }) => (
         key={stepIndex}
         className={activeStep === stepIndex ? 'active' : undefined}
         onClick={() => onSelect(stepIndex)}
+        aria-hidden="true"
       >
         <div className="step">
           {stepIndex < activeStep ? (

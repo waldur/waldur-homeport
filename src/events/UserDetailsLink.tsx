@@ -8,6 +8,7 @@ export const UserDetailsLink = ({ uuid, name }) => {
   if (currentUser.is_staff || currentUser.is_support) {
     return (
       <UISref to="users.details" params={{ uuid }}>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a>{name}</a>
       </UISref>
     );

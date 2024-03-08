@@ -44,7 +44,7 @@ export const FormTemplateStep = (props: FormStepProps) => {
     _choices.forEach((choice) => {
       choice.image =
         choice.image && typeof choice.image === 'string' ? (
-          <img src={choice.image} />
+          <img src={choice.image} alt="os" />
         ) : undefined;
     });
     return _choices;

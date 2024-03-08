@@ -6,6 +6,7 @@ import { AsyncPaginate } from '@waldur/form/themed-select';
 const renderIcon = (src: string, imgStyle: any) => (
   <img
     src={src}
+    alt="thumb"
     style={{
       display: 'inline-block',
       marginRight: 10,

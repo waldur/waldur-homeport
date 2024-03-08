@@ -27,9 +27,12 @@ export class PureIssueAttachmentModal extends Component<PureIssueAttachmentModal
 
     return (
       <div className="attachment-modal">
-        <div className="attachment-modal__close" onClick={closeModal}>
+        <button
+          className="attachment-modal__close text-btn"
+          onClick={closeModal}
+        >
           <i className="fa fa-times" aria-hidden="true" />
-        </div>
+        </button>
         <div className="modal-header">
           <div className="modal-title">
             <h3>
@@ -44,6 +47,7 @@ export class PureIssueAttachmentModal extends Component<PureIssueAttachmentModal
           <img
             className={this.state.loading ? 'hidden' : null}
             src={url}
+            alt="attachment"
             onLoad={() => this.setState({ loading: false })}
           />
         </div>

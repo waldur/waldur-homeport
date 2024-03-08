@@ -41,6 +41,7 @@ const getScopeLink = (event: RoleEvent) => ({
         [UUID_MAP[event.scope_type]]: event.scope_uuid,
       }}
     >
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a>{event.scope_name}</a>
     </UISref>
   ) : (

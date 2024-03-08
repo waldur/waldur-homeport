@@ -29,10 +29,15 @@ const getCounterText = (counter: number) => {
 };
 
 const CustomToggle = ({ onClick, itemsCount, badge, expanded }) => (
-  <div className="menu-item" data-kt-menu-trigger="trigger" onClick={onClick}>
+  <div
+    className="menu-item"
+    data-kt-menu-trigger="trigger"
+    aria-hidden="true"
+    onClick={onClick}
+  >
     <span className="menu-link">
       <span className="menu-title">
-        <a
+        <div
           className={classNames(
             'btn btn-flex btn-color-success fs-base p-0 ms-2 mb-2 collapsible rotate collapsed',
             expanded && 'active',
@@ -44,7 +49,7 @@ const CustomToggle = ({ onClick, itemsCount, badge, expanded }) => (
               : translate('Show {count} more', { count: itemsCount })}
           </span>
           <Arr082 className="svg-icon ms-2 svg-icon-3 rotate-180" />
-        </a>
+        </div>
       </span>
       {!expanded && <span className="menu-badge">{badge}</span>}
     </span>

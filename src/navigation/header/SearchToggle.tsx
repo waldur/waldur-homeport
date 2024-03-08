@@ -91,9 +91,10 @@ const SearchItem = ({ item }) => (
     to="marketplace-project-resource-details"
     params={{ uuid: item.project_uuid, resource_uuid: item.uuid }}
   >
+    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
     <a className="d-flex text-dark text-hover-primary align-items-center mb-5 mw-300px mw-md-350px">
       <div className="symbol symbol-40px me-4">
-        <img src={item.offering_thumbnail} />
+        <img src={item.offering_thumbnail} alt="offering" />
       </div>
       <div className="d-flex flex-column justify-content-start fw-semibold">
         <span className="fs-6 fw-semibold">{item.name}</span>
@@ -159,7 +160,8 @@ const SearchPopover = () => {
           >
             <span className="spinner-border h-15px w-15px align-middle text-gray-400"></span>
           </span>
-          <span
+          <button
+            type="button"
             className={classNames(
               'btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0',
               result.status === 'success' && query ? '' : 'd-none',
@@ -169,7 +171,7 @@ const SearchPopover = () => {
             <span className="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
               <CloseIcon />
             </span>
-          </span>
+          </button>
 
           <div
             className={classNames(
@@ -178,7 +180,8 @@ const SearchPopover = () => {
             )}
             data-kt-search-element="toolbar"
           >
-            <div
+            <button
+              type="button"
               data-kt-search-element="advanced-options-form-show"
               className="btn btn-icon w-20px btn-sm btn-active-color-primary"
               data-bs-toggle="tooltip"
@@ -188,7 +191,7 @@ const SearchPopover = () => {
               title="Show more search options"
             >
               <i className="fa fa-chevron-down"></i>
-            </div>
+            </button>
           </div>
         </form>
         <div className="separator border-gray-200 mb-6"></div>

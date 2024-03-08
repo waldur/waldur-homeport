@@ -23,7 +23,14 @@ interface PureIssueAttachmentProps {
 
 const getThumbnail = (attachment: Attachment, openModalHandler) => {
   if (isImage(attachment.mime_type)) {
-    return <img src={attachment.file} onClick={openModalHandler} />;
+    return (
+      <img
+        src={attachment.file}
+        onClick={openModalHandler}
+        alt="thumb"
+        aria-hidden="true"
+      />
+    );
   } else {
     return (
       <a href={attachment.file} download="true">
@@ -54,12 +61,13 @@ export const PureIssueAttachment: FunctionComponent<PureIssueAttachmentProps> =
                 <a href={attachment.file} download="true">
                   {attachment.file_name}
                 </a>
-                <div
-                  className="attachment-item__delete"
+                <button
+                  className="attachment-item__delete text-btn"
+                  type="button"
                   onClick={deleteAttachment}
                 >
                   <i className="fa fa-trash" aria-hidden="true" />
-                </div>
+                </button>
               </div>
               <div className="attachment-item__description-info">
                 <div className="attachment-item__description-date">

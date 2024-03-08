@@ -105,17 +105,18 @@ const ResourceSelectorDropdown: FunctionComponent<ResourceSelectorToggleProps> =
           >
             <span className="spinner-border h-15px w-15px align-middle text-gray-400"></span>
           </span>
-          <span
+          <button
             className={classNames(
               'btn btn-flush btn-active-color-primary',
               result.status === 'success' && query ? '' : 'd-none',
             )}
+            type="button"
             onClick={() => setQuery('')}
           >
             <span className="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
               <i className="fa fa-times" />
             </span>
-          </span>
+          </button>
         </form>
 
         <ResourcesList
@@ -176,6 +177,7 @@ export const ResourceSelectorToggle: FunctionComponent<ResourceSelectorTogglePro
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom"
+            aria-hidden="true"
             onClick={scroll}
           >
             <h3 className="text-start text-decoration-underline mb-0 me-2">

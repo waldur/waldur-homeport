@@ -36,8 +36,8 @@ export const ProviderTermsOfService: FunctionComponent<ProviderTermsOfServicePro
         iconless
       />
     ) : (
-      <a className="a cursor-pointer" onClick={onClick}>
+      <button className="text-anchor" type="button" onClick={onClick}>
         {props.label}
-      </a>
+      </button>
     );
   };

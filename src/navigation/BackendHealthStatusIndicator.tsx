@@ -45,13 +45,17 @@ export const PureBackendHealthStatusIndicator: FunctionComponent<any> = (
   const { value } = useAsync(getBackendHealthStatus, []);
   return value ? (
     <span className="me-2">
-      <a onClick={() => props.openDialog()}>
+      <button
+        type="button"
+        className="text-btn"
+        onClick={() => props.openDialog()}
+      >
         {isWorking(value) ? (
           <i className="fa fa-check-circle text-success" />
         ) : (
           <i className="fa fa-times-circle text-danger" />
         )}
-      </a>
+      </button>
     </span>
   ) : null;
 };

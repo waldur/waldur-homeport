@@ -73,9 +73,13 @@ export class PureIssueAttachmentsContainer extends Component<PureIssueAttachment
                     <i className="fa fa-cloud-upload" aria-hidden="true" />
                     <span>
                       {translate('Drop files to attach, or')}{' '}
-                      <a onClick={this.openDownloadModal}>
+                      <button
+                        className="text-btn text-dark"
+                        type="button"
+                        onClick={this.openDownloadModal}
+                      >
                         {translate('browse')}.
-                      </a>
+                      </button>
                     </span>
                   </div>
                   <IssueAttachmentsList

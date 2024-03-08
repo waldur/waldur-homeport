@@ -44,9 +44,8 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
                   uuid: props.offering.customer_uuid,
                 }}
               >
-                <a className="btn btn-light btn-sm  me-2">
-                  {translate('Edit')}
-                </a>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <a className="btn btn-light btn-sm me-2">{translate('Edit')}</a>
               </UISref>
               <PreviewButton offering={props.offering} />
             </div>

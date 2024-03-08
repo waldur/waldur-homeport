@@ -21,10 +21,10 @@ export const StepsList: FunctionComponent<{ steps; step }> = ({
               aria-selected={index === step}
               aria-disabled={index !== step}
             >
-              <a>
+              <span className="step">
                 <span className="number">{index + 1}. </span>
                 {currentStep}
-              </a>
+              </span>
             </li>
           ))}
         </ul>

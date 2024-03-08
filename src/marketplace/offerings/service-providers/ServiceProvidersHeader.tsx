@@ -12,6 +12,6 @@ export const ServiceProvidersHeader: FunctionComponent = () => (
       <Logo />
       <Description />
     </div>
-    <img src={illustration} />
+    <img src={illustration} alt="header" />
   </div>
 );

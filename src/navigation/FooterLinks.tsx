@@ -14,7 +14,11 @@ import './FooterLinks.scss';
 
 const SupportSubMenuItem = ({ title, onCopy }) =>
   title && (
-    <span className="menu-link px-2" onClick={() => onCopy(title)}>
+    <span
+      className="menu-link px-2"
+      aria-hidden="true"
+      onClick={() => onCopy(title)}
+    >
       <span className="menu-title">{title}</span>
       <span className="menu-badge">
         <button className="btn btn-active-icon-primary btn-flush ms-2">
@@ -72,10 +76,10 @@ export const FooterLinks = () => {
           data-kt-menu-placement="top-end"
           className="menu-item"
         >
-          <a className="menu-link px-2">
+          <div className="menu-link px-2">
             <span className="menu-title">{translate('Support')}</span>
             <span className="menu-arrow"></span>
-          </a>
+          </div>
           <div className="menu-sub menu-sub-dropdown p-2">
             <IssuesLink />
             <DocsLink />

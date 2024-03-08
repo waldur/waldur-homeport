@@ -36,9 +36,9 @@ export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
       name={props.name}
       component={AwesomeCheckboxField}
       label={
-        <a onClick={onClick}>
+        <button type="button" className="text-btn" onClick={onClick}>
           <i className="fa fa-external-link" /> {translate('Terms of Service')}
-        </a>
+        </button>
       }
       marginRight={false}
     />

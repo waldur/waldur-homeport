@@ -35,21 +35,24 @@ export const PublicOfferingComponents: FunctionComponent<PublicOfferingComponent
                 <PublicOfferingCardTitle>
                   {translate('Docs & resources')}
                 </PublicOfferingCardTitle>
-                <div className="mb-2">
-                  <a className="text-decoration-underline text-dark text-hover-primary fs-7 mb-2">
-                    Link 1
-                  </a>
-                </div>
-                <div className="mb-2">
-                  <a className="text-decoration-underline text-dark text-hover-primary fs-7 mb-2">
-                    Link 2
-                  </a>
-                </div>
-                <div className="mb-2">
-                  <a className="text-decoration-underline text-dark text-hover-primary fs-7 mb-2">
-                    Link 3
-                  </a>
-                </div>
+                <button
+                  type="button"
+                  className="text-link d-block text-decoration-underline text-dark text-hover-primary fs-7 mb-2"
+                >
+                  Link 1
+                </button>
+                <button
+                  type="button"
+                  className="text-link d-block text-decoration-underline text-dark text-hover-primary fs-7 mb-2"
+                >
+                  Link 2
+                </button>
+                <button
+                  type="button"
+                  className="text-link d-block text-decoration-underline text-dark text-hover-primary fs-7 mb-2"
+                >
+                  Link 3
+                </button>
               </Card.Body>
             </Card>
           </Col>

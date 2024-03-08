@@ -84,10 +84,12 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
               maxWidth: '100%',
             }}
             ref={previewRef}
+            alt="preview"
           />
         </div>
 
         {/* Pick image */}
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <label
           className="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
           data-kt-image-input-action="change"
@@ -110,7 +112,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
         </label>
 
         {/* Cancel image */}
-        <span
+        <button
           className="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
           data-kt-image-input-action="cancel"
           onClick={() => changeImage(initialValue)}
@@ -122,10 +124,10 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
           >
             <i className="fa fa-repeat fs-6"></i>
           </Tip>
-        </span>
+        </button>
 
         {/* Remove image */}
-        <span
+        <button
           className="btn btn-icon btn-circle btn-color-muted btn-active-color-danger w-25px h-25px bg-body shadow"
           data-kt-image-input-action="remove"
           onClick={() => changeImage('')}
@@ -137,7 +139,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
           >
             <i className="fa fa-times fs-6" />
           </Tip>
-        </span>
+        </button>
       </div>
       <div className="form-text">
         {isChanged && input.value instanceof File ? (

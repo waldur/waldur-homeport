@@ -91,18 +91,19 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                 className="menu-item px-3"
                 data-kt-menu-trigger
               >
-                <a
+                <span
                   className={
                     'menu-link px-3' +
                     (selectedRole?.uuid === role.uuid ? ' active' : '')
                   }
                   onClick={() => onClickRole(role)}
+                  aria-hidden="true"
                 >
                   <span className="menu-title">{role.description}</span>
                   {showProjects && !currentProject && (
                     <span className="menu-arrow"></span>
                   )}
-                </a>
+                </span>
               </div>
             ) : (
               <div
@@ -110,10 +111,10 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                 className="menu-item px-3"
                 data-kt-menu-trigger
               >
-                <a className="menu-link disabled px-3">
+                <span className="menu-link disabled px-3">
                   <span className="menu-title">{role.description}</span>
                   <span className="menu-arrow"></span>
-                </a>
+                </span>
               </div>
             ),
           )}
@@ -140,15 +141,16 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                   className="menu-item px-3"
                   data-kt-menu-trigger
                 >
-                  <a
+                  <span
                     className={
                       'menu-link px-3' +
                       (selectedProject?.uuid === project.uuid ? ' active' : '')
                     }
                     onClick={() => onClickProject(project)}
+                    aria-hidden="true"
                   >
                     <span className="menu-title">{project.name}</span>
-                  </a>
+                  </span>
                 </div>
               ))}
             </div>

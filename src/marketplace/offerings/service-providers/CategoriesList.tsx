@@ -37,9 +37,10 @@ export const CategoriesList: FunctionComponent<CategoriesListProps> = ({
           <li
             key={i}
             className={selectedCategory === category.uuid ? 'active' : ''}
-            onClick={() => selectCategory(category.uuid)}
           >
-            {category.title} ({category.offering_count})
+            <button onClick={() => selectCategory(category.uuid)}>
+              {category.title} ({category.offering_count})
+            </button>
           </li>
         ))}
       </ul>

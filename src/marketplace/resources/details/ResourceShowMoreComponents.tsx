@@ -30,13 +30,14 @@ export const ResourceShowMoreComponents = ({
     return null;
   }
   return (
-    <a
+    <button
+      type="button"
       className="text-link"
       onClick={() =>
         dispatch(showResourceComponentsDialog(resource, components))
       }
     >
       {translate('Show more')}
-    </a>
+    </button>
   );
 };

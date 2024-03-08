@@ -10,7 +10,7 @@ interface LogoProps {
 
 export const Logo: FunctionComponent<LogoProps> = (props) =>
   props.image ? (
-    <img src={props.image} height={props.height} width="auto" />
+    <img src={props.image} alt="logo" height={props.height} width="auto" />
   ) : (
     <PlaceholderImage
       width={props.width}

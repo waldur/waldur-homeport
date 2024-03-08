@@ -33,6 +33,7 @@ export const ResourceIcon: FunctionComponent<ResourceIconProps> = (props) => (
   >
     <img
       src={getResourceIcon(props.resource.resource_type)}
+      alt="resource"
       className="me-1"
       width={25}
     />{' '}

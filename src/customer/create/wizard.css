@@ -50,9 +50,9 @@
   width: 100%;
 }
 
-.wizard > .steps a,
-.wizard > .steps a:hover,
-.wizard > .steps a:active {
+.wizard > .steps span.step,
+.wizard > .steps span.step:hover,
+.wizard > .steps span.step:active {
   display: block;
   width: auto;
   margin: 0 0.5em 0.5em;
@@ -64,25 +64,25 @@
   border-radius: 5px;
 }
 
-.wizard > .steps .disabled a,
-.wizard > .steps .disabled a:hover,
-.wizard > .steps .disabled a:active {
+.wizard > .steps .disabled span.step,
+.wizard > .steps .disabled span.step:hover,
+.wizard > .steps .disabled span.step:active {
   background: #eee;
   color: #aaa;
   cursor: default;
 }
 
-.wizard > .steps .current a,
-.wizard > .steps .current a:hover,
-.wizard > .steps .current a:active {
+.wizard > .steps .current span.step,
+.wizard > .steps .current span.step:hover,
+.wizard > .steps .current span.step:active {
   background: #1ab394;
   color: #fff;
   cursor: default;
 }
 
-.wizard > .steps .done a,
-.wizard > .steps .done a:hover,
-.wizard > .steps .done a:active {
+.wizard > .steps .done span.step,
+.wizard > .steps .done span.step:hover,
+.wizard > .steps .done span.step:active {
   background: #6fd1bd;
   color: #fff;
 }
@@ -90,9 +90,9 @@
 /*
 error has been renamed to header-error due to conflict with error class in components.scss
 */
-.wizard > .steps .header-error a,
-.wizard > .steps .header-error a:hover,
-.wizard > .steps .header-error a:active {
+.wizard > .steps .header-error span.step,
+.wizard > .steps .header-error span.step:hover,
+.wizard > .steps .header-error span.step:active {
   background: #ed5565;
   color: #fff;
 }

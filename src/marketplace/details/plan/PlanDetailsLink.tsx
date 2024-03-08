@@ -16,9 +16,13 @@ interface DispatchProps {
 type Props = OwnProps & DispatchProps;
 
 const PurePlanDetailsLink: FunctionComponent<Props> = (props) => (
-  <a onClick={props.showPlanDetailsDialog}>
+  <button
+    className="text-btn text-dark"
+    type="button"
+    onClick={props.showPlanDetailsDialog}
+  >
     {translate('Show')} <i className="fa fa-external-link" />
-  </a>
+  </button>
 );
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({

@@ -34,12 +34,12 @@ export const Tip: React.FC<TipProps> = ({
       }
       {...rest}
     >
-      <span className={className} onClick={onClick}>
+      <span className={className} aria-hidden="true" onClick={onClick}>
         {children}
       </span>
     </OverlayTrigger>
   ) : (
-    <span className={className} onClick={onClick} {...rest}>
+    <span className={className} aria-hidden="true" onClick={onClick} {...rest}>
       {children}
     </span>
   );
