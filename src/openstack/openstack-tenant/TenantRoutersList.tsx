@@ -45,6 +45,7 @@ const TableOptions = {
       'description',
       'created',
       'resource_type',
+      'routes',
       'service_name',
       'service_settings',
       'service_settings_uuid',
