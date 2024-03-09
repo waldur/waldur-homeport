@@ -26,7 +26,6 @@ export const CallUsersList: FC<CallUsersListProps> = (props) => {
   return (
     <Table<GenericPermission>
       {...tableProps}
-      id="reviewers"
       className="mb-7"
       placeholderComponent={
         <CallUsersListPlaceholder
