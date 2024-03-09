@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -7,12 +8,22 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CallStateField } from '../CallStateField';
 import { ProposalCall } from '../types';
+import { getSortedRoundsWithStatus } from '../utils';
 
 interface CallDetailsCardProps {
   call: ProposalCall;
 }
 
 export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
+  const activeRound = useMemo(() => {
+    const items = getSortedRoundsWithStatus(call.rounds);
+    const first = items[0];
+    if (first && [0, 1].includes(first.state.code)) {
+      return first;
+    }
+    return null;
+  }, [call]);
+
   return (
     <Card id="details" className="mb-7">
       <Card.Header>
@@ -46,15 +57,15 @@ export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
         />
         <Field
           label={translate('Review strategy')}
-          value={call.review_strategy}
+          value={activeRound?.review_strategy}
         />
         <Field
           label={translate('Round strategy')}
-          value={call.round_strategy}
+          value={activeRound?.deciding_entity}
         />
         <Field
           label={translate('Allocation strategy')}
-          value={call.allocation_strategy}
+          value={activeRound?.allocation_time}
         />
       </Card.Body>
     </Card>
