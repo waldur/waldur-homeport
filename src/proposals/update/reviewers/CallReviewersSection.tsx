@@ -30,7 +30,7 @@ export const CallReviewersSection = ({ call }) => {
   const [tab, setTab] = useState<TabSpec<{ call: ProposalCall }>>(tabs[0]);
 
   return (
-    <Card className="mb-7">
+    <Card className="mb-7" id="reviewers">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Reviewers')}</h3>
