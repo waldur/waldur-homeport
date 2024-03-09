@@ -40,9 +40,6 @@ export interface ProposalCall {
   reference_code: string;
   start_time: string;
   end_time: string;
-  round_strategy: string;
-  review_strategy: string;
-  allocation_strategy: string;
   state: 'Active' | 'Draft' | 'Archived';
   manager: string;
   customer_name: string;

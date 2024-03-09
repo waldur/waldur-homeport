@@ -1,4 +1,5 @@
-import { FunctionComponent } from 'react';
+import Markdown from 'markdown-to-jsx';
+import { FunctionComponent, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -8,15 +9,24 @@ import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { translate } from '@waldur/i18n';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProposalCall } from './types';
+import { getSortedRoundsWithStatus } from './utils';
 
 export const PublicCallExpandableRow: FunctionComponent<{
   row: ProposalCall;
 }> = ({ row }) => {
   const customer = useSelector(getCustomer);
+
+  const activeRound = useMemo(() => {
+    const items = getSortedRoundsWithStatus(row.rounds);
+    const first = items[0];
+    if (first && [0, 1].includes(first.state.code)) {
+      return first;
+    }
+    return null;
+  }, [row]);
 
   return (
     <Row>
@@ -35,35 +45,50 @@ export const PublicCallExpandableRow: FunctionComponent<{
       </Col>
       <Col>
         <Row>
-          {row.description && (
-            <Col xs={12} className="text-dark mb-2">
-              {row.description}
+          <Col xs={12} className="text-dark mb-2">
+            {row.description ? (
+              <Markdown>{row.description}</Markdown>
+            ) : (
+              <p className="text-muted fst-italic fs-7">
+                {translate('No description')}
+              </p>
+            )}
+          </Col>
+
+          {activeRound ? (
+            <>
+              <Col lg={12} xl={6}>
+                <Field
+                  label={translate('Next cutoff')}
+                  value={formatDateTime(activeRound.cutoff_time)}
+                  isStuck
+                />
+                <Field
+                  label={translate('Review strategy')}
+                  value={activeRound.review_strategy}
+                  isStuck
+                />
+              </Col>
+              <Col lg={12} xl={6}>
+                <Field
+                  label={translate('Round strategy')}
+                  value={activeRound.deciding_entity}
+                  isStuck
+                />
+                <Field
+                  label={translate('Allocation strategy')}
+                  value={activeRound.allocation_time}
+                  isStuck
+                />
+              </Col>
+            </>
+          ) : (
+            <Col xs={12}>
+              <p className="text-muted fst-italic fs-7">
+                {translate('No active round')}
+              </p>
             </Col>
           )}
-          <Col lg={12} xl={6}>
-            <Field
-              label={translate('Next cutoff')}
-              value={renderFieldOrDash(formatDateTime(row.end_time))}
-              isStuck
-            />
-            <Field
-              label={translate('Review strategy')}
-              value={row.review_strategy}
-              isStuck
-            />
-          </Col>
-          <Col lg={12} xl={6}>
-            <Field
-              label={translate('Round strategy')}
-              value={row.round_strategy}
-              isStuck
-            />
-            <Field
-              label={translate('Allocation strategy')}
-              value={row.allocation_strategy}
-              isStuck
-            />
-          </Col>
         </Row>
       </Col>
     </Row>

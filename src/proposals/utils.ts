@@ -2,11 +2,7 @@ import { DateTime } from 'luxon';
 
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import {
-  CallRoundFormData,
-  ProposalCall,
-  ProposalCallRound,
-} from '@waldur/proposals/types';
+import { CallRoundFormData, ProposalCallRound } from '@waldur/proposals/types';
 
 export const getCallRoundStrategyOptions = () => [
   { value: 1, label: 'One-time' },
@@ -27,21 +23,6 @@ export const getCallAllocationTimesOptions = () => [
   { value: 1, label: 'On decision' },
   { value: 2, label: 'Fixed date' },
 ];
-
-export const getProposalCallInitialValues = (call: ProposalCall) => {
-  return {
-    ...call,
-    round_strategy: getCallRoundStrategyOptions().find(
-      (op) => op.label === call.round_strategy,
-    )?.value,
-    review_strategy: getCallReviewStrategyOptions().find(
-      (op) => op.label === call.review_strategy,
-    )?.value,
-    allocation_strategy: getCallAllocationStrategyOptions().find(
-      (op) => op.label === call.allocation_strategy,
-    )?.value,
-  };
-};
 
 export const callStateActions = () => [
   { label: translate('Activate'), value: 'Active', action: 'activate' },

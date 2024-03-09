@@ -14,7 +14,6 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { updateCall } from '@waldur/proposals/api';
 import { EDIT_CALL_GENERAL_FORM_ID } from '@waldur/proposals/constants';
 import { EditCallProps } from '@waldur/proposals/types';
-import { getProposalCallInitialValues } from '@waldur/proposals/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface FormData {
@@ -27,7 +26,7 @@ export const EditGeneralInfoDialog = connect<
   {},
   { resolve: EditCallProps }
 >((_, ownProps) => ({
-  initialValues: getProposalCallInitialValues(ownProps.resolve.call),
+  initialValues: ownProps.resolve.call,
 }))(
   reduxForm<FormData, { resolve: EditCallProps }>({
     form: EDIT_CALL_GENERAL_FORM_ID,
