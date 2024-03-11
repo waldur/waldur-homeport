@@ -6468,6 +6468,10 @@ msgstr ""
 msgid "No active resources"
 msgstr ""
 
+#: src/proposals/PublicCallExpandableRow.tsx
+msgid "No active round"
+msgstr ""
+
 #: src/auth/PermissionLayout.tsx
 msgid "No association"
 msgstr ""
@@ -6484,6 +6488,10 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
+msgstr ""
+
+#: src/proposals/PublicCallExpandableRow.tsx
+msgid "No description"
 msgstr ""
 
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx

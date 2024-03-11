@@ -13,7 +13,6 @@ import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { getProposalCallInitialValues } from '@waldur/proposals/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -26,9 +25,7 @@ interface FormData {
 
 export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
   (_, ownProps) => ({
-    initialValues: ownProps.resolve?.call
-      ? getProposalCallInitialValues(ownProps.resolve.call)
-      : undefined,
+    initialValues: ownProps.resolve?.call,
   }),
 )(
   reduxForm<FormData, { resolve: { call?; refetch } }>({
