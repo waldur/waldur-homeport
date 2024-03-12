@@ -17,7 +17,7 @@ export const ResourceMetadataDialog = ({ resolve }) => {
         <Modal.Title>{translate('Resource metadata')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <ResourceSummary resource={resolve.resource}>
+        <ResourceSummary resource={resolve.resource} scope={resolve.scope}>
           {resolve.scope && <SummaryComponent resource={resolve.scope} />}
         </ResourceSummary>
       </Modal.Body>

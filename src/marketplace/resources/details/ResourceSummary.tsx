@@ -10,10 +10,10 @@ import { CreatedField } from '@waldur/resource/summary/CreatedField';
 import { KeyValueButton } from '../KeyValueButton';
 import { Resource } from '../types';
 
-export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
-  resource,
-  children,
-}) => (
+export const ResourceSummary: FunctionComponent<{
+  resource: Resource;
+  scope: { error_message?; error_traceback? };
+}> = ({ resource, scope, children }) => (
   <Container className="container-metadata">
     <Field label={translate('Offering name')} value={resource.offering_name} />
     <Field
@@ -64,9 +64,11 @@ export const ResourceSummary: FunctionComponent<{ resource: Resource }> = ({
       label={translate('Current action')}
       value={resource.backend_metadata?.action}
     />
-    <Field label={translate('Error message')}>{resource.error_message}</Field>
+    <Field label={translate('Error message')}>
+      {resource.error_message || scope.error_message}
+    </Field>
     <Field label={translate('Error traceback')}>
-      {resource.error_traceback}
+      {resource.error_traceback || scope.error_traceback}
     </Field>
 
     {resource.attributes ? (
