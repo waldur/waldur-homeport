@@ -43,6 +43,11 @@ const generateWidgetsData = (): ReportingWidget[] => [
     to: { state: 'reporting.organizations-organization-groups' },
   },
   {
+    title: translate('Organization quotas'),
+    description: translate('Shows quotas aggregated by organization.'),
+    to: { state: 'reporting.quotas' },
+  },
+  {
     title: translate('Pricelist'),
     description: translate(
       'Shows a common pricelist for all offerings in the marketplace.',

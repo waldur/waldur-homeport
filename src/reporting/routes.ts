@@ -25,9 +25,9 @@ const GrowthContainer = lazyComponent(
   () => import('./invoices/GrowthContainer'),
   'GrowthContainer',
 );
-const QuotasTreemap = lazyComponent(
-  () => import('./quotas/QuotasTreemap'),
-  'QuotasTreemap',
+const CustomerQuotasList = lazyComponent(
+  () => import('./quotas/CustomerQuotasList'),
+  'CustomerQuotasList',
 );
 const VmTypeOverviewContainer = lazyComponent(
   () => import('./openstack/VmTypeOverviewContainer'),
@@ -104,12 +104,11 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'reporting.resources-treemap',
-    url: 'resources-treemap/',
-    component: QuotasTreemap,
+    name: 'reporting.quotas',
+    url: 'quotas/',
+    component: CustomerQuotasList,
     data: {
-      feature: 'support.resources_treemap',
-      breadcrumb: () => translate('Resources usage'),
+      breadcrumb: () => translate('Organization quotas'),
     },
   },
   {
