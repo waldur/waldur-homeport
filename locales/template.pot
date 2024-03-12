@@ -154,7 +154,7 @@ msgid "Accounting components"
 msgstr ""
 
 #: src/customer/list/CustomerListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 msgid "Accounting period"
 msgstr ""
 
@@ -273,7 +273,7 @@ msgid "Active clients"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Active count"
 msgstr ""
 
@@ -1705,8 +1705,8 @@ msgstr ""
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr ""
 
-#: src/marketplace/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Capacity"
 msgstr ""
 
@@ -1894,14 +1894,14 @@ msgstr ""
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client organization"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client project"
 msgstr ""
 
@@ -1945,11 +1945,11 @@ msgstr ""
 msgid "Cloud"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud RAM"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud block storage size"
 msgstr ""
 
@@ -1963,7 +1963,7 @@ msgstr ""
 msgid "Cloud region"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud vCPU"
 msgstr ""
 
@@ -2013,7 +2013,7 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Comment"
 msgstr ""
@@ -2738,10 +2738,6 @@ msgstr ""
 msgid "Current price"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
-msgid "Current price per month"
-msgstr ""
-
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "Current project"
@@ -2885,7 +2881,7 @@ msgstr ""
 msgid "Date joined"
 msgstr ""
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Date of reporting"
 msgstr ""
 
@@ -3907,7 +3903,7 @@ msgstr ""
 msgid "Error while deleting offering."
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Esimated price per month"
 msgstr ""
 
@@ -4303,7 +4299,7 @@ msgstr ""
 msgid "Flavor exclude regex"
 msgstr ""
 
-#: src/openstack/analytics/FlavorsList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
 msgid "Flavor name"
 msgstr ""
 
@@ -4311,9 +4307,9 @@ msgstr ""
 msgid "Flavor name: {flavor_name}"
 msgstr ""
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/VmTypeOverview.tsx
 msgid "Flavors"
 msgstr ""
 
@@ -4573,8 +4569,8 @@ msgstr ""
 msgid "Group invitations"
 msgstr ""
 
-#: src/invoices/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Growth"
 msgstr ""
 
@@ -4664,10 +4660,6 @@ msgstr ""
 
 #: src/form/SecretField.tsx
 msgid "Hide"
-msgstr ""
-
-#: src/resource/support/TreemapChartFilter.tsx
-msgid "Hide controls"
 msgstr ""
 
 #: src/rancher/cluster/ViewYAMLDialog.tsx
@@ -4848,7 +4840,7 @@ msgstr ""
 msgid "Image here"
 msgstr ""
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Image name"
 msgstr ""
 
@@ -4881,9 +4873,9 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/VmTypeOverview.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Images"
 msgstr ""
@@ -5496,7 +5488,7 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Limit"
 msgstr ""
 
@@ -6002,8 +5994,8 @@ msgstr ""
 msgid "Monthly invoices"
 msgstr ""
 
-#: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Monthly revenue"
 msgstr ""
 
@@ -6187,6 +6179,7 @@ msgstr ""
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
@@ -6736,8 +6729,8 @@ msgstr ""
 msgid "Number of cores in a VM"
 msgstr ""
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of created instances"
 msgstr ""
 
@@ -6745,8 +6738,8 @@ msgstr ""
 msgid "Number of etcd nodes"
 msgstr ""
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of running instances"
 msgstr ""
 
@@ -6795,10 +6788,6 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -6813,6 +6802,10 @@ msgstr ""
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -6953,7 +6946,7 @@ msgid "Offering state has been updated."
 msgstr ""
 
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Offering type"
 msgstr ""
 
@@ -7005,10 +6998,10 @@ msgstr ""
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/report/ShowReportDialog.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "Ok"
 msgstr ""
@@ -7114,7 +7107,7 @@ msgstr ""
 msgid "Open support tickets"
 msgstr ""
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "OpenStack Images"
 msgstr ""
 
@@ -7273,7 +7266,6 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -7286,6 +7278,7 @@ msgstr ""
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -7375,11 +7368,11 @@ msgstr ""
 msgid "Organization group type"
 msgstr ""
 
-#: src/issues/routes.ts
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Organization groups"
 msgstr ""
 
@@ -7407,6 +7400,11 @@ msgstr ""
 
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Organization native name"
+msgstr ""
+
+#: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
+msgid "Organization quotas"
 msgstr ""
 
 #: src/customer/create/WizardFormSecondPage.tsx
@@ -7473,7 +7471,7 @@ msgstr ""
 msgid "Organizations"
 msgstr ""
 
-#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
+#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Organizations by organization groups"
 msgstr ""
 
@@ -7485,7 +7483,7 @@ msgstr ""
 msgid "Other requirements?"
 msgstr ""
 
-#: src/invoices/growth/utils.ts
+#: src/reporting/invoices/utils.ts
 msgid "Others"
 msgstr ""
 
@@ -7509,9 +7507,9 @@ msgstr ""
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr ""
 
-#: src/invoices/growth/utils.ts
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/reporting/invoices/utils.ts
 msgid "Paid"
 msgstr ""
 
@@ -7856,19 +7854,19 @@ msgstr ""
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
 #: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 msgid "Plan"
 msgstr ""
 
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 msgid "Plan capacity"
 msgstr ""
 
@@ -7877,7 +7875,7 @@ msgstr ""
 msgid "Plan capacity is full."
 msgstr ""
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Plan component name"
 msgstr ""
 
@@ -7891,7 +7889,7 @@ msgstr ""
 msgid "Plan details"
 msgstr ""
 
-#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+#: src/reporting/plan-usage/PlanUsageButton.tsx
 msgid "Plan does not have limit"
 msgstr ""
 
@@ -8229,8 +8227,8 @@ msgstr ""
 msgid "Price per year"
 msgstr ""
 
-#: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Pricelist"
 msgstr ""
 
@@ -8337,7 +8335,6 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8357,6 +8354,7 @@ msgstr ""
 #: src/rancher/cluster/create/steps.ts
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 #: src/user/UserPermissionRequestsList.tsx
@@ -8693,10 +8691,10 @@ msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -8826,6 +8824,10 @@ msgstr ""
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 msgid "Question"
+msgstr ""
+
+#: src/reporting/quotas/CustomerQuotasFilter.tsx
+msgid "Quota"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
@@ -9083,11 +9085,11 @@ msgid "Reload issue data"
 msgstr ""
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Remaining"
 msgstr ""
 
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 msgid "Remaining amount"
 msgstr ""
 
@@ -9553,7 +9555,7 @@ msgstr ""
 
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Resource name"
 msgstr ""
 
@@ -9596,10 +9598,6 @@ msgstr ""
 msgid "Resource type"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
-msgid "Resource usage"
-msgstr ""
-
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 msgid "Resource usage for {resourceName}"
 msgstr ""
@@ -9627,8 +9625,7 @@ msgstr ""
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
-#: src/resource/support/ResourcesTreemap.tsx
-#: src/resource/support/TreemapChartFilter.tsx
+#: src/reporting/quotas/constants.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/user/routes.ts
@@ -9645,10 +9642,6 @@ msgstr ""
 
 #: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
 msgid "Resources represent the services you are using."
-msgstr ""
-
-#: src/resource/support/routes.ts
-msgid "Resources usage"
 msgstr ""
 
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
@@ -10012,11 +10005,9 @@ msgstr ""
 #: src/administration/roles/RoleForm.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
-#: src/customer/organization-groups/utils.ts
 #: src/customer/team/AddProjectUserDialog.tsx
 #: src/customer/team/EditProjectUserDialog.tsx
 #: src/customer/team/EditUserDialog.tsx
-#: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
@@ -10043,6 +10034,8 @@ msgstr ""
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 #: src/proposals/update/reviewers/AddUserDialog.tsx
+#: src/reporting/invoices/utils.ts
+#: src/reporting/organization-groups/utils.ts
 msgid "Save"
 msgstr ""
 
@@ -10415,6 +10408,10 @@ msgstr ""
 msgid "Select provider..."
 msgstr ""
 
+#: src/reporting/quotas/CustomerQuotasFilter.tsx
+msgid "Select quota"
+msgstr ""
+
 #: src/broadcasts/BroadcastFooter.tsx
 #: src/broadcasts/BroadcastForm.tsx
 msgid "Select recipients"
@@ -10442,7 +10439,7 @@ msgstr ""
 msgid "Select security groups..."
 msgstr ""
 
-#: src/openstack/analytics/VmOverviewFilter.tsx
+#: src/reporting/openstack/VmOverviewFilter.tsx
 msgid "Select service provider"
 msgstr ""
 
@@ -10626,8 +10623,6 @@ msgstr ""
 #: src/marketplace/UserPluginOptionsForm.tsx
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -10635,6 +10630,8 @@ msgstr ""
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Service provider"
 msgstr ""
 
@@ -10850,16 +10847,12 @@ msgstr ""
 msgid "Show all resources"
 msgstr ""
 
-#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+#: src/reporting/plan-usage/PlanUsageButton.tsx
 msgid "Show chart"
 msgstr ""
 
 #: src/resource/actions/OpenConsoleLogActionItem.tsx
 msgid "Show console log"
-msgstr ""
-
-#: src/resource/support/TreemapChartFilter.tsx
-msgid "Show controls"
 msgstr ""
 
 #: src/marketplace/resources/KeyValueButton.tsx
@@ -10919,7 +10912,7 @@ msgstr ""
 msgid "Show rules"
 msgstr ""
 
-#: src/openstack/analytics/VmOverviewFilter.tsx
+#: src/reporting/openstack/VmOverviewFilter.tsx
 msgid "Show shared"
 msgstr ""
 
@@ -10937,7 +10930,6 @@ msgid "Show users outside organization"
 msgstr ""
 
 #: src/customer/list/AccountingRunningField.tsx
-#: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr ""
 
@@ -10984,6 +10976,10 @@ msgstr ""
 
 #: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Shows monthly revenue split by organization."
+msgstr ""
+
+#: src/reporting/dashboard/ReportingWidgets.tsx
+msgid "Shows quotas aggregated by organization."
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
@@ -12236,7 +12232,6 @@ msgid "Too many empty fields"
 msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
-#: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/invoices/list/MonthOverview.tsx
@@ -12251,6 +12246,7 @@ msgstr ""
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/paypal/PayPalInvoicesList.tsx
+#: src/reporting/invoices/utils.ts
 msgid "Total"
 msgstr ""
 
@@ -12293,10 +12289,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/marketplace.ts
 msgid "Total storage limit is exceeded"
-msgstr ""
-
-#: src/resource/support/TreemapChartFilter.tsx
-msgid "Total: {total}"
 msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
@@ -12838,13 +12830,13 @@ msgstr ""
 msgid "Unable to load customer."
 msgstr ""
 
-#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/providers/dashboard/ProviderWidgets.tsx
+#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Unable to load data"
 msgstr ""
 
@@ -12890,7 +12882,7 @@ msgstr ""
 msgid "Unable to load full price list"
 msgstr ""
 
-#: src/invoices/growth/GrowthChart.tsx
+#: src/reporting/invoices/GrowthChart.tsx
 msgid "Unable to load growth chart."
 msgstr ""
 
@@ -12910,10 +12902,6 @@ msgstr ""
 
 #: src/customer/payments/InvoicesDropdown.tsx
 msgid "Unable to load invoices"
-msgstr ""
-
-#: src/resource/support/ResourcesTreemap.tsx
-msgid "Unable to load locations."
 msgstr ""
 
 #: src/marketplace/offerings/expandable/OfferingCostsChart.tsx
@@ -12993,7 +12981,7 @@ msgstr ""
 msgid "Unable to load service provider."
 msgstr ""
 
-#: src/openstack/analytics/VmOverviewFilterContainer.tsx
+#: src/reporting/openstack/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
 msgstr ""
 
@@ -13890,7 +13878,7 @@ msgstr ""
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
 msgid "Usage"
 msgstr ""
@@ -13907,8 +13895,8 @@ msgstr ""
 msgid "Usage report has been submitted."
 msgstr ""
 
-#: src/marketplace/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Usage reports"
 msgstr ""
 
@@ -13916,7 +13904,7 @@ msgstr ""
 msgid "Usage-based"
 msgstr ""
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Usages"
 msgstr ""
 
@@ -14266,7 +14254,7 @@ msgstr ""
 msgid "VM snapshots"
 msgstr ""
 
-#: src/openstack/analytics/routes.ts
+#: src/reporting/routes.ts
 msgid "VM type overview"
 msgstr ""
 
@@ -14279,23 +14267,23 @@ msgstr ""
 msgid "VMware Tools"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC RAM"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC block storage size"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC floating IP count"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC instance count"
 msgstr ""
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC vCPU"
 msgstr ""
 
@@ -14309,9 +14297,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Value"
 msgstr ""
 
@@ -14865,7 +14854,7 @@ msgstr ""
 msgid "error message: {errorMessage}"
 msgstr ""
 
-#: src/invoices/growth/utils.ts
+#: src/reporting/invoices/utils.ts
 msgid "estimated"
 msgstr ""
 
@@ -15038,7 +15027,7 @@ msgstr ""
 msgid "permission reviews"
 msgstr ""
 
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "plans"
 msgstr ""
 
@@ -15312,7 +15301,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/ResourcesColumn.tsx
 #: src/marketplace/service-providers/ResourcesCountColumn.tsx
-#: src/resource/support/TreemapChart.tsx
 msgid "{count} resources"
 msgstr ""
 
