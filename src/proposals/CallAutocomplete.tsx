@@ -36,9 +36,6 @@ export const CallAutocomplete: React.FC<CallAutocompleteProps> = (props) => (
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No calls')}
           isClearable={true}
-          additional={{
-            page: 1,
-          }}
           {...props.reactSelectProps}
         />
         {props.showError && fieldProps.meta.touched && (

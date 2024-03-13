@@ -89,9 +89,6 @@ const PureProposalsTableFilter: FunctionComponent<{}> = () => (
             onChange={(value) => fieldProps.input.onChange(value)}
             noOptionsMessage={() => translate('No calls')}
             isClearable={true}
-            additional={{
-              page: 1,
-            }}
           />
         )}
       />

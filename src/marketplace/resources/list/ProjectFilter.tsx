@@ -10,6 +10,15 @@ interface ProjectFilterProps {
   customer_uuid?: string;
 }
 
+const getOptionLabel = (option) => (
+  <div>
+    {option.name}
+    {isFeatureVisible('project.show_industry_flag') && option.is_industry && (
+      <i className="fa fa-industry fa-lg" style={{ marginLeft: '5px' }}></i>
+    )}
+  </div>
+);
+
 export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
   <Field
     name="project"
@@ -21,27 +30,11 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
         }
         defaultOptions
         getOptionValue={(option) => option.uuid}
-        getOptionLabel={(option) => (
-          <div>
-            {option.name}
-            {isFeatureVisible('project.show_industry_flag') &&
-              option.is_industry && (
-                <span>
-                  <i
-                    className="fa fa-industry fa-lg"
-                    style={{ marginLeft: '5px' }}
-                  ></i>
-                </span>
-              )}
-          </div>
-        )}
+        getOptionLabel={getOptionLabel as any}
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No projects')}
         isClearable={true}
-        additional={{
-          page: 1,
-        }}
       />
     )}
   />

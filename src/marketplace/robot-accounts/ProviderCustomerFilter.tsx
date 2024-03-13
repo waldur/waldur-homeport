@@ -33,9 +33,6 @@ export const ProviderCustomerFilter: React.FC<ProviderCustomerFilterProps> = (
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No organizations')}
         isClearable={true}
-        additional={{
-          page: 1,
-        }}
       />
     )}
   />

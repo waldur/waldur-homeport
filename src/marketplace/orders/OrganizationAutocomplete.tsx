@@ -36,9 +36,6 @@ export const OrganizationAutocomplete: FunctionComponent<OrganizationAutocomplet
             props.noOptionsMessage || translate('No organizations')
           }
           isClearable={true}
-          additional={{
-            page: 1,
-          }}
         />
       )}
     />
