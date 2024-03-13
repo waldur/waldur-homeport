@@ -99,7 +99,9 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                   onClick={() => onClickRole(role)}
                   aria-hidden="true"
                 >
-                  <span className="menu-title">{role.description}</span>
+                  <span className="menu-title">
+                    {role.name || role.description}
+                  </span>
                   {showProjects && !currentProject && (
                     <span className="menu-arrow"></span>
                   )}
@@ -112,7 +114,9 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                 data-kt-menu-trigger
               >
                 <span className="menu-link disabled px-3">
-                  <span className="menu-title">{role.description}</span>
+                  <span className="menu-title">
+                    {role.name || role.description}
+                  </span>
                   <span className="menu-arrow"></span>
                 </span>
               </div>

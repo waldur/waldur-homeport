@@ -9,9 +9,6 @@ import { InvitationContext } from './types';
 export const InvitationPolicyService = {
   // Check user permissions for new invitation
   canManageRole(context: InvitationContext, role: Role) {
-    if (!role.description) {
-      return false;
-    }
     if (!context.roleTypes.includes(role.content_type)) {
       return false;
     }

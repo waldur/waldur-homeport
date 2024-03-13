@@ -6,10 +6,7 @@ import { RoleType } from './types';
 
 export const getRoles = (types: RoleType[]) =>
   ENV.roles
-    .filter(
-      (role) =>
-        types.includes(role.content_type) && role.is_active && role.description,
-    )
+    .filter((role) => types.includes(role.content_type) && role.is_active)
     .sort((a, b) => a.content_type.localeCompare(b.content_type));
 
 export const getProjectRoles = () => getRoles(['project']);
