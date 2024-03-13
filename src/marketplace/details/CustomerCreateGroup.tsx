@@ -63,9 +63,6 @@ export const CustomerCreateGroup = () => {
                 getOptionLabel={(option) => option.name}
                 noOptionsMessage={() => translate('No organizations')}
                 isClearable={true}
-                additional={{
-                  page: 1,
-                }}
               />
             )}
           />

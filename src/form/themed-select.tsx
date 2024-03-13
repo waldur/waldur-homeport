@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import { useSelector } from 'react-redux';
 import BaseSelect, { Props as SelectProps } from 'react-select';
 import { AsyncPaginate as BaseAsyncPaginate } from 'react-select-async-paginate';
@@ -60,11 +61,16 @@ export const Select = (props) => {
   );
 };
 
-export const AsyncPaginate = (props) => {
+export const AsyncPaginate = (
+  props: ComponentProps<typeof BaseAsyncPaginate>,
+) => {
   const theme = useTheme();
   return (
     <BaseAsyncPaginate
       theme={theme}
+      additional={{
+        page: 1,
+      }}
       {...reactSelectMenuPortaling()}
       {...props}
     />

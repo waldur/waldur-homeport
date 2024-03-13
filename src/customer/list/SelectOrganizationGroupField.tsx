@@ -48,9 +48,6 @@ export const SelectOrganizationGroupFieldPure: FunctionComponent = () => (
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No organization groups')}
         isClearable={true}
-        additional={{
-          page: 1,
-        }}
       />
     )}
   />

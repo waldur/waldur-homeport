@@ -27,9 +27,6 @@ export const AsyncSelectField: FunctionComponent<any> = (props) => {
       noOptionsMessage={() => translate('No results found')}
       getOptionLabel={(option) => option.name}
       getOptionValue={(option) => option.value || option.uuid}
-      additional={{
-        page: 1,
-      }}
       {...rest}
     />
   );

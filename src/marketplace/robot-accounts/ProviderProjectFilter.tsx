@@ -33,9 +33,6 @@ export const ProviderProjectFilter: React.FC<ProviderProjectFilterProps> = (
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No projects')}
         isClearable={true}
-        additional={{
-          page: 1,
-        }}
       />
     )}
   />

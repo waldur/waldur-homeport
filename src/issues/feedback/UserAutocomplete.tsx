@@ -18,9 +18,6 @@ export const UserAutocomplete = () => (
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No users')}
         isClearable={true}
-        additional={{
-          page: 1,
-        }}
       />
     )}
   />

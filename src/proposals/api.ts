@@ -103,7 +103,7 @@ export const getPublicCallsOptions = (params?: {}) =>
   getSelectData<ProposalCall>('/proposal-public-calls/', params);
 
 export const callAutocomplete = async (
-  query: object,
+  query: any,
   prevOptions,
   currentPage: number,
   protectedCalls = false,

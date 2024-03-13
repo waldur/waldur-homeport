@@ -30,9 +30,6 @@ export const RelatedCustomerFilter: FunctionComponent = () => {
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No organizations')}
           isClearable={true}
-          additional={{
-            page: 1,
-          }}
         />
       )}
     />

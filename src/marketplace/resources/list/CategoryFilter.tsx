@@ -22,9 +22,6 @@ export const CategoryFilter: React.FC<{
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No categories')}
         isClearable={true}
-        additional={{
-          page: 1,
-        }}
         {...props.reactSelectProps}
       />
     )}

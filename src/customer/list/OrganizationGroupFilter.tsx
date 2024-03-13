@@ -20,9 +20,6 @@ export const OrganizationGroupFilter: FunctionComponent = () => (
         noOptionsMessage={() => translate('No organization group types')}
         isMulti={true}
         isClearable={true}
-        additional={{
-          page: 1,
-        }}
       />
     )}
   />

@@ -65,9 +65,6 @@ export const AutocompleteField: FunctionComponent<AutocompleteFieldProps> = (
     onChange={(value: any) => props.onChange(value)}
     noOptionsMessage={props.noOptionsMessage}
     isClearable={true}
-    additional={{
-      page: 1,
-    }}
     {...props.reactSelectProps}
   />
 );

@@ -36,9 +36,6 @@ export const AuthSaml2Dialog = reduxForm({
               filterOptions={createFilter({
                 ignoreAccents: false,
               })}
-              additional={{
-                page: 1,
-              }}
             />
           )}
         />
