@@ -194,7 +194,7 @@ msgid "Accounting components"
 msgstr "مكونات المحاسبة"
 
 #: src/customer/list/CustomerListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 msgid "Accounting period"
 msgstr "فترة المحاسبة"
 
@@ -317,7 +317,7 @@ msgid "Active clients"
 msgstr "العملاء النشطين"
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Active count"
 msgstr "عدد نشط"
 
@@ -1914,8 +1914,8 @@ msgstr "الغاء"
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr "لا يمكن إنشاء IP عائم إذا لم يتم تعريف الشبكة الخارجية للمستأجر."
 
-#: src/marketplace/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Capacity"
 msgstr "سعة"
 
@@ -2115,14 +2115,14 @@ msgstr "معرف العميل"
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client organization"
 msgstr "منظمة العميل"
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client project"
 msgstr "مشروع العميل"
 
@@ -2166,11 +2166,11 @@ msgstr "القضايا المغلقة (هذا الشهر)"
 msgid "Cloud"
 msgstr "سحابة"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud RAM"
 msgstr "ذاكرة الوصول العشوائي السحابية"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud block storage size"
 msgstr "حجم تخزين الكتلة السحابية"
 
@@ -2189,7 +2189,7 @@ msgstr "قالب init السحابي"
 msgid "Cloud region"
 msgstr "منطقة السحابة"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud vCPU"
 msgstr "وحدة المعالجة المركزية السحابية الافتراضية"
 
@@ -2255,7 +2255,7 @@ msgstr "أنواع المشكلات المفصولة بفواصل"
 #: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Comment"
 msgstr "التعليق"
@@ -3221,7 +3221,7 @@ msgstr "التاريخ والوقت الذي بدأ فيه استخدام الع
 msgid "Date joined"
 msgstr "تاريخ الانضمام"
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Date of reporting"
 msgstr "تاريخ التقرير"
 
@@ -4262,7 +4262,7 @@ msgstr "تتبع الخطأ"
 msgid "Error while deleting offering."
 msgstr "حدث خطأ أثناء حذف العرض."
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Esimated price per month"
 msgstr "السعر المقدر شهريا"
 
@@ -4738,7 +4738,7 @@ msgstr "تمت جدولة تغيير النكهة."
 msgid "Flavor exclude regex"
 msgstr "النكهة تستبعد التعبير العادي"
 
-#: src/openstack/analytics/FlavorsList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
 msgid "Flavor name"
 msgstr "اسم النكهة"
 
@@ -4746,9 +4746,9 @@ msgstr "اسم النكهة"
 msgid "Flavor name: {flavor_name}"
 msgstr "اسم النكهة:{flavor_name}"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/VmTypeOverview.tsx
 msgid "Flavors"
 msgstr "النكهات"
 
@@ -5049,8 +5049,8 @@ msgstr "تم إلغاء دعوة المجموعة."
 msgid "Group invitations"
 msgstr "دعوات جماعية"
 
-#: src/invoices/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Growth"
 msgstr "نمو"
 
@@ -5338,7 +5338,7 @@ msgstr "تمت إزالة الصورة."
 msgid "Image here"
 msgstr "الصورة هنا"
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Image name"
 msgstr "اسم الصورة"
 
@@ -5367,9 +5367,9 @@ msgstr "الصورة المستخدمة في رأس أمر السوق."
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/VmTypeOverview.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Images"
 msgstr "الصور"
@@ -6027,7 +6027,7 @@ msgstr "سيتم تحديث وإعادة تعيين مدى الحياة عند �
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Limit"
 msgstr "حد"
 
@@ -6637,8 +6637,8 @@ msgstr "التكلفة الشهرية"
 msgid "Monthly invoices"
 msgstr "الفواتير الشهرية"
 
-#: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Monthly revenue"
 msgstr "الإيرادات الشهرية"
 
@@ -6841,6 +6841,7 @@ msgstr "N/A"
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
@@ -7452,8 +7453,8 @@ msgstr "عدد عقد مستوى التحكم"
 msgid "Number of cores in a VM"
 msgstr "عدد النوى في VM"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of created instances"
 msgstr "عدد الحالات التي تم إنشاؤها"
 
@@ -7461,8 +7462,8 @@ msgstr "عدد الحالات التي تم إنشاؤها"
 msgid "Number of etcd nodes"
 msgstr "عدد العقد إلخ"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of running instances"
 msgstr "عدد الحالات قيد التشغيل"
 
@@ -7511,10 +7512,6 @@ msgstr "لم يتم العثور على الكائن."
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -7529,6 +7526,10 @@ msgstr "لم يتم العثور على الكائن."
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -7705,7 +7706,7 @@ msgid "Offering state has been updated."
 msgstr "تم تحديث حالة العرض."
 
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Offering type"
 msgstr "نوع العرض"
 
@@ -7757,10 +7758,10 @@ msgstr "عروض الصور"
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/report/ShowReportDialog.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "Ok"
 msgstr "موافق"
@@ -7859,7 +7860,7 @@ msgstr "يُسمح فقط للمستخدمين الموظفين بتنفيذ ه�
 msgid "Open"
 msgstr "مفتوح"
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "OpenStack Images"
 msgstr "صور OpenStack"
 
@@ -8101,7 +8102,6 @@ msgstr "اسم حقل المنظمة"
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8114,6 +8114,7 @@ msgstr "اسم حقل المنظمة"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -8207,11 +8208,11 @@ msgstr "مجموعة المنظمة"
 msgid "Organization group type"
 msgstr "نوع المجموعة التنظيمية"
 
-#: src/issues/routes.ts
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Organization groups"
 msgstr "المجموعات التنظيمية"
 
@@ -8338,7 +8339,7 @@ msgstr "المنظمات ({count} )"
 msgid "Organizations by divisions"
 msgstr "المنظمات حسب الأقسام"
 
-#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
+#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Organizations by organization groups"
 msgstr "المنظمات حسب مجموعات المنظمة"
 
@@ -8354,7 +8355,7 @@ msgstr "فئات أخرى"
 msgid "Other requirements?"
 msgstr "متطلبات اخرى؟"
 
-#: src/invoices/growth/utils.ts
+#: src/reporting/invoices/utils.ts
 msgid "Others"
 msgstr "الاخرين"
 
@@ -8418,9 +8419,9 @@ msgstr "لم يتم العثور على الصفحة."
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr "لم يتم العثور على الصفحة. إما أنك أدخلت عنوان URL غير صالح أو تحاول الوصول إلى الميزة المعطلة."
 
-#: src/invoices/growth/utils.ts
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/reporting/invoices/utils.ts
 msgid "Paid"
 msgstr "مدفوع"
 
@@ -8825,13 +8826,13 @@ msgstr "أرقام الهواتف"
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
 #: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 msgid "Plan"
@@ -8841,7 +8842,7 @@ msgstr "خطة"
 msgid "Plan #{index}"
 msgstr "يخطط #{index}"
 
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 msgid "Plan capacity"
 msgstr "قدرة الخطة"
 
@@ -8850,7 +8851,7 @@ msgstr "قدرة الخطة"
 msgid "Plan capacity is full."
 msgstr "سعة الخطة ممتلئة."
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Plan component name"
 msgstr "اسم مكون الخطة"
 
@@ -8868,7 +8869,7 @@ msgstr "وصف الخطة"
 msgid "Plan details"
 msgstr "تفاصيل الخطة"
 
-#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+#: src/reporting/plan-usage/PlanUsageButton.tsx
 msgid "Plan does not have limit"
 msgstr "الخطة ليس لها حدود"
 
@@ -9232,8 +9233,8 @@ msgstr "السعر لكل وحدة"
 msgid "Price per year"
 msgstr "السعر في السنة"
 
-#: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Pricelist"
 msgstr "قائمة الاسعار"
 
@@ -9352,7 +9353,6 @@ msgstr "ترقى"
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -9372,6 +9372,7 @@ msgstr "ترقى"
 #: src/rancher/cluster/create/steps.ts
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 #: src/user/UserPermissionRequestsList.tsx
@@ -9721,10 +9722,10 @@ msgstr "الحقول المحمية"
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -10190,11 +10191,11 @@ msgid "Reload issue data"
 msgstr "إعادة تحميل بيانات المشكلة"
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Remaining"
 msgstr "باق"
 
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 msgid "Remaining amount"
 msgstr "الكمية المتبقية"
 
@@ -10721,7 +10722,7 @@ msgstr "بيانات تعريف الموارد"
 
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Resource name"
 msgstr "اسم المورد"
 
@@ -10805,8 +10806,7 @@ msgstr "الموارد{type}{activeStep}"
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
-#: src/resource/support/ResourcesTreemap.tsx
-#: src/resource/support/TreemapChartFilter.tsx
+#: src/reporting/quotas/constants.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/user/routes.ts
@@ -11205,11 +11205,9 @@ msgstr "اسم حقل الرضا"
 #: src/administration/roles/RoleForm.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
-#: src/customer/organization-groups/utils.ts
 #: src/customer/team/AddProjectUserDialog.tsx
 #: src/customer/team/EditProjectUserDialog.tsx
 #: src/customer/team/EditUserDialog.tsx
-#: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
@@ -11236,6 +11234,8 @@ msgstr "اسم حقل الرضا"
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 #: src/proposals/update/reviewers/AddUserDialog.tsx
+#: src/reporting/invoices/utils.ts
+#: src/reporting/organization-groups/utils.ts
 msgid "Save"
 msgstr "حفظ"
 
@@ -11684,7 +11684,7 @@ msgstr "حدد فئة الجذر"
 msgid "Select security groups..."
 msgstr "تحديد مجموعات الأمان..."
 
-#: src/openstack/analytics/VmOverviewFilter.tsx
+#: src/reporting/openstack/VmOverviewFilter.tsx
 msgid "Select service provider"
 msgstr "اختر مزود الخدمة"
 
@@ -11893,8 +11893,6 @@ msgstr "مدير الخدمة :"
 #: src/marketplace/UserPluginOptionsForm.tsx
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -11902,6 +11900,8 @@ msgstr "مدير الخدمة :"
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Service provider"
 msgstr "مقدم الخدمة"
 
@@ -12130,7 +12130,7 @@ msgstr "عرض كافة مشاريع المنظمة"
 msgid "Show all resources"
 msgstr "إظهار كافة الموارد"
 
-#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+#: src/reporting/plan-usage/PlanUsageButton.tsx
 msgid "Show chart"
 msgstr "عرض الرسم البياني"
 
@@ -12227,7 +12227,7 @@ msgstr "عرض الطلب"
 msgid "Show rules"
 msgstr "عرض القواعد"
 
-#: src/openstack/analytics/VmOverviewFilter.tsx
+#: src/reporting/openstack/VmOverviewFilter.tsx
 msgid "Show shared"
 msgstr "إظهار المشتركة"
 
@@ -12241,7 +12241,6 @@ msgid "Show user details"
 msgstr "إظهار تفاصيل المستخدم"
 
 #: src/customer/list/AccountingRunningField.tsx
-#: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr "تظهر مع تشغيل المحاسبة"
 
@@ -13653,7 +13652,6 @@ msgid "Too many empty fields"
 msgstr "هناك عدد كبير جدًا من الحقول الفارغة"
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
-#: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/invoices/list/MonthOverview.tsx
@@ -13668,6 +13666,7 @@ msgstr "هناك عدد كبير جدًا من الحقول الفارغة"
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/paypal/PayPalInvoicesList.tsx
+#: src/reporting/invoices/utils.ts
 msgid "Total"
 msgstr "مجموع"
 
@@ -14321,13 +14320,13 @@ msgstr "غير قادر على تحميل العميل."
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "غير قادر على تحميل التقييم العام لرضا دعم العملاء."
 
-#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/providers/dashboard/ProviderWidgets.tsx
+#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Unable to load data"
 msgstr "غير قادر على تحميل البيانات"
 
@@ -14398,7 +14397,7 @@ msgstr "غير قادر على تحميل خيارات النموذج."
 msgid "Unable to load full price list"
 msgstr "غير قادر على تحميل قائمة الأسعار الكاملة"
 
-#: src/invoices/growth/GrowthChart.tsx
+#: src/reporting/invoices/GrowthChart.tsx
 msgid "Unable to load growth chart."
 msgstr "غير قادر على تحميل مخطط النمو."
 
@@ -14531,7 +14530,7 @@ msgstr "غير قادر على تحميل الأقسام للمقارنة."
 msgid "Unable to load service provider."
 msgstr "غير قادر على تحميل مزود الخدمة."
 
-#: src/openstack/analytics/VmOverviewFilterContainer.tsx
+#: src/reporting/openstack/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
 msgstr "غير قادر على تحميل مقدمي الخدمة."
 
@@ -15533,7 +15532,7 @@ msgstr "مدة التشغيل"
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
 msgid "Usage"
 msgstr "استخدام"
@@ -15558,12 +15557,12 @@ msgstr "نظرة عامة على الاستخدام"
 msgid "Usage report has been submitted."
 msgstr "تم إرسال تقرير الاستخدام."
 
-#: src/marketplace/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Usage reports"
 msgstr "تقارير الاستخدام"
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Usages"
 msgstr "الاستخدامات"
 
@@ -16116,7 +16115,7 @@ msgstr "جداول لقطة VM"
 msgid "VM snapshots"
 msgstr "لقطات VM"
 
-#: src/openstack/analytics/routes.ts
+#: src/reporting/routes.ts
 msgid "VM type overview"
 msgstr "نظرة عامة على نوع VM"
 
@@ -16129,23 +16128,23 @@ msgstr "أجهزة افتراضية"
 msgid "VMware Tools"
 msgstr "أدوات إم وير"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC RAM"
 msgstr "ذاكرة الوصول العشوائي VPC"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC block storage size"
 msgstr "حجم تخزين كتلة VPC"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC floating IP count"
 msgstr "عدد IP العائم لـ VPC"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC instance count"
 msgstr "عدد مثيلات VPC"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC vCPU"
 msgstr "VPC vCPU"
 
@@ -16159,9 +16158,10 @@ msgstr "الحالات الصالحة للتشغيل:{validStates} ."
 
 #: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Value"
 msgstr "قيمة"
 
@@ -16831,7 +16831,7 @@ msgstr "إدخالات"
 msgid "error message: {errorMessage}"
 msgstr "رسالة خطأ:{errorMessage}"
 
-#: src/invoices/growth/utils.ts
+#: src/reporting/invoices/utils.ts
 msgid "estimated"
 msgstr "مُقدَّر"
 
@@ -17036,7 +17036,7 @@ msgstr "المعلقه"
 msgid "permission reviews"
 msgstr "مراجعات الأذونات"
 
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "plans"
 msgstr "الخطط"
 
@@ -17326,7 +17326,6 @@ msgstr "{count}المشاريع"
 
 #: src/marketplace/service-providers/ResourcesColumn.tsx
 #: src/marketplace/service-providers/ResourcesCountColumn.tsx
-#: src/resource/support/TreemapChart.tsx
 msgid "{count} resources"
 msgstr "{count}موارد"
 

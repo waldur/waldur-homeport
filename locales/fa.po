@@ -74,7 +74,7 @@ msgid "Accounting"
 msgstr "حسابداری"
 
 #: src/customer/list/CustomerListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 msgid "Accounting period"
 msgstr "دوره حسابداری"
 
@@ -170,7 +170,7 @@ msgid "Active"
 msgstr "فعال"
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Active count"
 msgstr "حساب فعال"
 
@@ -968,14 +968,14 @@ msgstr "شناسه Client"
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client organization"
 msgstr "سازماندهی Client"
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client project"
 msgstr "پروژه Client"
 
@@ -994,7 +994,7 @@ msgstr "پروژه Client"
 msgid "Close"
 msgstr "بستن"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud RAM"
 msgstr "ابر RAM"
 
@@ -1003,7 +1003,7 @@ msgstr "ابر RAM"
 msgid "Cloud init template"
 msgstr "قالب اولیه ابر"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud vCPU"
 msgstr "ابر vCPU"
 
@@ -1035,7 +1035,7 @@ msgstr "جمع بندی"
 #: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Comment"
 msgstr "یادداشت"
@@ -1492,7 +1492,7 @@ msgstr "تاریخ"
 msgid "Date joined"
 msgstr "تاریخ پیوستن"
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Date of reporting"
 msgstr "تاریخ گزارش"
 
@@ -2005,7 +2005,7 @@ msgstr "خراب"
 msgid "Error message"
 msgstr "پیغام خطا"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Esimated price per month"
 msgstr "قیمت تخمین زده شده برای هر ماه"
 
@@ -2257,7 +2257,7 @@ msgstr "قیمت ثابت"
 msgid "Fixed — use common storage quota"
 msgstr "ثابت- از حافظه مشترک quota استفاده کنید"
 
-#: src/openstack/analytics/FlavorsList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
 msgid "Flavor name"
 msgstr "نام Flavor"
 
@@ -2418,7 +2418,7 @@ msgstr "آیکون"
 msgid "Image"
 msgstr "تصویر"
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Image name"
 msgstr "نام تصویر"
 
@@ -2427,9 +2427,9 @@ msgstr "نام تصویر"
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/VmTypeOverview.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Images"
 msgstr "تصویرها"
@@ -2793,7 +2793,7 @@ msgstr "پس از ذخیره فرم، طول عمر بروزرسانی و تنظ
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Limit"
 msgstr "محدود"
 
@@ -3182,6 +3182,7 @@ msgstr "سرویس های من"
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
@@ -3405,13 +3406,13 @@ msgstr "تعدادی از هسته های CPU برای هر socket"
 msgid "Number of cores in a VM"
 msgstr "تعدادی از هسته ها در VM"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of created instances"
 msgstr "تعدادی از instance های ایجاد شده"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of running instances"
 msgstr "تعدادی از instance های دز حال اجرا"
 
@@ -3445,10 +3446,6 @@ msgstr "شیء یافت نشد."
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -3463,6 +3460,10 @@ msgstr "شیء یافت نشد."
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -3512,7 +3513,7 @@ msgid "Offering state has been updated."
 msgstr "حالت پیشنهادی بروز رسانی شده است."
 
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Offering type"
 msgstr "نوع پیشنهاد"
 
@@ -3570,7 +3571,7 @@ msgstr "فقط کارمندان میتوانند سازمان را حذف کنن
 msgid "Open"
 msgstr "باز"
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "OpenStack Images"
 msgstr "تصویر های OpenStack"
 
@@ -3654,7 +3655,6 @@ msgstr "سفارش ها"
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -3667,6 +3667,7 @@ msgstr "سفارش ها"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx

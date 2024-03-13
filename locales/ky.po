@@ -194,7 +194,7 @@ msgid "Accounting components"
 msgstr "Бухгалтердик эсептин компоненттери"
 
 #: src/customer/list/CustomerListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 msgid "Accounting period"
 msgstr "Эсептөө мезгили"
 
@@ -317,7 +317,7 @@ msgid "Active clients"
 msgstr "Активдүү кардарлар"
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Active count"
 msgstr "Активдүү эсеп"
 
@@ -1914,8 +1914,8 @@ msgstr "Жокко чыгарылды"
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr "Ижарачынын тышкы тармагы аныкталбаса, калкыма IP түзө албайт."
 
-#: src/marketplace/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Capacity"
 msgstr "Кубаттуулугу"
 
@@ -2115,14 +2115,14 @@ msgstr "Кардар ID"
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client organization"
 msgstr "Кардар уюм"
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client project"
 msgstr "Кардар долбоору"
 
@@ -2166,11 +2166,11 @@ msgstr "Жабык сандар (ушул айда)"
 msgid "Cloud"
 msgstr "Булут"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud RAM"
 msgstr "Cloud RAM"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud block storage size"
 msgstr "Булут блогунун сактагычынын өлчөмү"
 
@@ -2189,7 +2189,7 @@ msgstr "Cloud Init үлгүсү"
 msgid "Cloud region"
 msgstr "Булуттуу аймак"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud vCPU"
 msgstr "Cloud vCPU"
 
@@ -2255,7 +2255,7 @@ msgstr "Үтүр менен бөлүнгөн маселенин түрлөрү"
 #: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Comment"
 msgstr "Комментарий"
@@ -3221,7 +3221,7 @@ msgstr "Буюмду колдонуу башталган күн жана уба�
 msgid "Date joined"
 msgstr "Кошулган күнү"
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Date of reporting"
 msgstr "Отчет берүү күнү"
 
@@ -4262,7 +4262,7 @@ msgstr "Ката кайра издөө"
 msgid "Error while deleting offering."
 msgstr "Сунушту жок кылууда ката кетти."
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Esimated price per month"
 msgstr "Айына болжолдуу баасы"
 
@@ -4738,7 +4738,7 @@ msgstr "Даамын өзгөртүү пландаштырылган."
 msgid "Flavor exclude regex"
 msgstr "Даам регексти жокко чыгарат"
 
-#: src/openstack/analytics/FlavorsList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
 msgid "Flavor name"
 msgstr "Даам аты"
 
@@ -4746,9 +4746,9 @@ msgstr "Даам аты"
 msgid "Flavor name: {flavor_name}"
 msgstr "Даам аты:{flavor_name}"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/VmTypeOverview.tsx
 msgid "Flavors"
 msgstr "Даамдар"
 
@@ -5049,8 +5049,8 @@ msgstr "Топко чакыруу жокко чыгарылды."
 msgid "Group invitations"
 msgstr "Топтук чакыруулар"
 
-#: src/invoices/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Growth"
 msgstr "Өсүү"
 
@@ -5338,7 +5338,7 @@ msgstr "Сүрөт өчүрүлдү."
 msgid "Image here"
 msgstr "Сүрөт бул жерде"
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Image name"
 msgstr "Сүрөттүн аты"
 
@@ -5367,9 +5367,9 @@ msgstr "Сүрөт базардагы буйрутмалардын аталыш�
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/VmTypeOverview.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Images"
 msgstr "Сүрөттөр"
@@ -6027,7 +6027,7 @@ msgstr "Өмүр бою жаңыртылып, форма сакталганда�
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Limit"
 msgstr "Limit"
 
@@ -6637,8 +6637,8 @@ msgstr "Айлык чыгым"
 msgid "Monthly invoices"
 msgstr "Айлык эсеп-фактуралар"
 
-#: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Monthly revenue"
 msgstr "Айлык киреше"
 
@@ -6841,6 +6841,7 @@ msgstr "Жок"
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
@@ -7452,8 +7453,8 @@ msgstr "Башкаруучу тегиздик түйүндөрүнүн саны"
 msgid "Number of cores in a VM"
 msgstr "VMдеги өзөктөрдүн саны"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of created instances"
 msgstr "Түзүлгөн инстанциялардын саны"
 
@@ -7461,8 +7462,8 @@ msgstr "Түзүлгөн инстанциялардын саны"
 msgid "Number of etcd nodes"
 msgstr "ж.б. түйүндөрдүн саны"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of running instances"
 msgstr "Иштеп жаткан инстанциялардын саны"
 
@@ -7511,10 +7512,6 @@ msgstr "Объект табылган жок."
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -7529,6 +7526,10 @@ msgstr "Объект табылган жок."
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -7705,7 +7706,7 @@ msgid "Offering state has been updated."
 msgstr "Сунуштун абалы жаңыртылды."
 
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Offering type"
 msgstr "Сунуш түрү"
 
@@ -7757,10 +7758,10 @@ msgstr "Сүрөттөрдү сунуштайт"
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/report/ShowReportDialog.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "Ok"
 msgstr "макул"
@@ -7859,7 +7860,7 @@ msgstr "Кызматтык колдонуучуларга гана бул ара
 msgid "Open"
 msgstr "Open"
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "OpenStack Images"
 msgstr "OpenStack сүрөттөрү"
 
@@ -8101,7 +8102,6 @@ msgstr "Уюм талаасынын аталышы"
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8114,6 +8114,7 @@ msgstr "Уюм талаасынын аталышы"
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -8207,11 +8208,11 @@ msgstr "Уюштуруу тобу"
 msgid "Organization group type"
 msgstr "Уюштуруу тобунун түрү"
 
-#: src/issues/routes.ts
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Organization groups"
 msgstr "Уюштуруу топтору"
 
@@ -8338,7 +8339,7 @@ msgstr "Уюмдар ({count} )"
 msgid "Organizations by divisions"
 msgstr "Бөлүмдөр боюнча уюмдар"
 
-#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
+#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Organizations by organization groups"
 msgstr "Уюмдар топтору боюнча уюмдар"
 
@@ -8354,7 +8355,7 @@ msgstr "Башка категориялар"
 msgid "Other requirements?"
 msgstr "Башка талаптар?"
 
-#: src/invoices/growth/utils.ts
+#: src/reporting/invoices/utils.ts
 msgid "Others"
 msgstr "Башкалар"
 
@@ -8418,9 +8419,9 @@ msgstr "Барак табылган жок."
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr "Барак табылган жок. Сиз URL дарегин жараксыз киргиздиңиз же өчүрүлгөн функцияга жетүүгө аракет кылып жатасыз."
 
-#: src/invoices/growth/utils.ts
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/reporting/invoices/utils.ts
 msgid "Paid"
 msgstr "Төлөндү"
 
@@ -8825,13 +8826,13 @@ msgstr "Телефон номерлери"
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
 #: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 msgid "Plan"
@@ -8841,7 +8842,7 @@ msgstr "План"
 msgid "Plan #{index}"
 msgstr "План #{index}"
 
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 msgid "Plan capacity"
 msgstr "Пландын кубаттуулугу"
 
@@ -8850,7 +8851,7 @@ msgstr "Пландын кубаттуулугу"
 msgid "Plan capacity is full."
 msgstr "Пландын кубаттуулугу толук."
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Plan component name"
 msgstr "План компонентинин аталышы"
 
@@ -8868,7 +8869,7 @@ msgstr "Пландын сүрөттөлүшү"
 msgid "Plan details"
 msgstr "Пландын чоо-жайы"
 
-#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+#: src/reporting/plan-usage/PlanUsageButton.tsx
 msgid "Plan does not have limit"
 msgstr "Пландын чеги жок"
 
@@ -9232,8 +9233,8 @@ msgstr "Бирдигине баа"
 msgid "Price per year"
 msgstr "Баасы жылына"
 
-#: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Pricelist"
 msgstr "Баа тизмеси"
 
@@ -9352,7 +9353,6 @@ msgstr "Прогресс"
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -9372,6 +9372,7 @@ msgstr "Прогресс"
 #: src/rancher/cluster/create/steps.ts
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 #: src/user/UserPermissionRequestsList.tsx
@@ -9721,10 +9722,10 @@ msgstr "Корголуучу талаалар"
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -10190,11 +10191,11 @@ msgid "Reload issue data"
 msgstr "Маселе дайындарын кайра жүктөө"
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Remaining"
 msgstr "Калган"
 
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 msgid "Remaining amount"
 msgstr "Калган сумма"
 
@@ -10721,7 +10722,7 @@ msgstr "Ресурстун метадайындары"
 
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Resource name"
 msgstr "Ресурстун аталышы"
 
@@ -10805,8 +10806,7 @@ msgstr "Ресурс{type}{activeStep}"
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
-#: src/resource/support/ResourcesTreemap.tsx
-#: src/resource/support/TreemapChartFilter.tsx
+#: src/reporting/quotas/constants.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/user/routes.ts
@@ -11205,11 +11205,9 @@ msgstr "Канааттануу талаасынын аталышы"
 #: src/administration/roles/RoleForm.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
-#: src/customer/organization-groups/utils.ts
 #: src/customer/team/AddProjectUserDialog.tsx
 #: src/customer/team/EditProjectUserDialog.tsx
 #: src/customer/team/EditUserDialog.tsx
-#: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
@@ -11236,6 +11234,8 @@ msgstr "Канааттануу талаасынын аталышы"
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 #: src/proposals/update/reviewers/AddUserDialog.tsx
+#: src/reporting/invoices/utils.ts
+#: src/reporting/organization-groups/utils.ts
 msgid "Save"
 msgstr "Сактоо"
 
@@ -11684,7 +11684,7 @@ msgstr "Тамыр категориясын тандаңыз"
 msgid "Select security groups..."
 msgstr "Коопсуздук топторун тандоо..."
 
-#: src/openstack/analytics/VmOverviewFilter.tsx
+#: src/reporting/openstack/VmOverviewFilter.tsx
 msgid "Select service provider"
 msgstr "Кызмат камсыздоочуну тандаңыз"
 
@@ -11893,8 +11893,6 @@ msgstr "Кызмат менеджери:"
 #: src/marketplace/UserPluginOptionsForm.tsx
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -11902,6 +11900,8 @@ msgstr "Кызмат менеджери:"
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Service provider"
 msgstr "Кызмат провайдери"
 
@@ -12130,7 +12130,7 @@ msgstr "Уюмдун бардык долбоорлорун көрсөтүү"
 msgid "Show all resources"
 msgstr "Бардык ресурстарды көрсөтүү"
 
-#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+#: src/reporting/plan-usage/PlanUsageButton.tsx
 msgid "Show chart"
 msgstr "Диаграмманы көрсөтүү"
 
@@ -12227,7 +12227,7 @@ msgstr "Сурам көрсөтүү"
 msgid "Show rules"
 msgstr "Эрежелерди көрсөтүү"
 
-#: src/openstack/analytics/VmOverviewFilter.tsx
+#: src/reporting/openstack/VmOverviewFilter.tsx
 msgid "Show shared"
 msgstr "Бөлүшүлгөн көрсөтүү"
 
@@ -12241,7 +12241,6 @@ msgid "Show user details"
 msgstr "Колдонуучунун чоо-жайын көрсөтүү"
 
 #: src/customer/list/AccountingRunningField.tsx
-#: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr "Бухгалтердик эсеп менен көрсөтүү"
 
@@ -13653,7 +13652,6 @@ msgid "Too many empty fields"
 msgstr "Өтө көп бош талаалар"
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
-#: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/invoices/list/MonthOverview.tsx
@@ -13668,6 +13666,7 @@ msgstr "Өтө көп бош талаалар"
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/paypal/PayPalInvoicesList.tsx
+#: src/reporting/invoices/utils.ts
 msgid "Total"
 msgstr "БАРДЫГЫ"
 
@@ -14321,13 +14320,13 @@ msgstr "Кардар жүктөлбөй жатат."
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "Кардарларды колдоо кызматынын жалпы рейтингин жүктөө мүмкүн эмес."
 
-#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/providers/dashboard/ProviderWidgets.tsx
+#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Unable to load data"
 msgstr "Дайындарды жүктөө мүмкүн эмес"
 
@@ -14398,7 +14397,7 @@ msgstr "Форма параметрлери жүктөлбөй жатат."
 msgid "Unable to load full price list"
 msgstr "Толук баа тизмеси жүктөлбөй жатат"
 
-#: src/invoices/growth/GrowthChart.tsx
+#: src/reporting/invoices/GrowthChart.tsx
 msgid "Unable to load growth chart."
 msgstr "Өсүү диаграммасы жүктөлбөй жатат."
 
@@ -14531,7 +14530,7 @@ msgstr "Салыштыруу үчүн бөлүмдөрдү жүктөө мүмк
 msgid "Unable to load service provider."
 msgstr "Кызмат провайдерин жүктөө мүмкүн эмес."
 
-#: src/openstack/analytics/VmOverviewFilterContainer.tsx
+#: src/reporting/openstack/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
 msgstr "Кызмат көрсөтүүчүлөрдү жүктөө мүмкүн эмес."
 
@@ -15533,7 +15532,7 @@ msgstr "Иштөө убактысы"
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
 msgid "Usage"
 msgstr "Колдонуу"
@@ -15558,12 +15557,12 @@ msgstr "Колдонууга сереп салуу"
 msgid "Usage report has been submitted."
 msgstr "Колдонуу отчету тапшырылды."
 
-#: src/marketplace/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Usage reports"
 msgstr "Колдонуу отчеттору"
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Usages"
 msgstr "колдонот"
 
@@ -16116,7 +16115,7 @@ msgstr "VM снапшот графиктери"
 msgid "VM snapshots"
 msgstr "VM сүрөттөрү"
 
-#: src/openstack/analytics/routes.ts
+#: src/reporting/routes.ts
 msgid "VM type overview"
 msgstr "VM түрүнө сереп салуу"
 
@@ -16129,23 +16128,23 @@ msgstr "VMs"
 msgid "VMware Tools"
 msgstr "VMware куралдары"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC RAM"
 msgstr "VPC RAM"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC block storage size"
 msgstr "VPC блок сактоо көлөмү"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC floating IP count"
 msgstr "VPC калкыма IP саны"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC instance count"
 msgstr "VPC инстанцияларынын саны"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC vCPU"
 msgstr "VPC vCPU"
 
@@ -16159,9 +16158,10 @@ msgstr "Иштөө үчүн жарактуу мамлекеттер:{validStates
 
 #: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Value"
 msgstr "Нарк"
 
@@ -16831,7 +16831,7 @@ msgstr "жазуулар"
 msgid "error message: {errorMessage}"
 msgstr "ката билдирүү:{errorMessage}"
 
-#: src/invoices/growth/utils.ts
+#: src/reporting/invoices/utils.ts
 msgid "estimated"
 msgstr "болжолдонгон"
 
@@ -17036,7 +17036,7 @@ msgstr "Күтүүдө"
 msgid "permission reviews"
 msgstr "уруксат кароо"
 
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "plans"
 msgstr "Пландар"
 
@@ -17326,7 +17326,6 @@ msgstr "{count}долбоорлор"
 
 #: src/marketplace/service-providers/ResourcesColumn.tsx
 #: src/marketplace/service-providers/ResourcesCountColumn.tsx
-#: src/resource/support/TreemapChart.tsx
 msgid "{count} resources"
 msgstr "{count}ресурстар"
 

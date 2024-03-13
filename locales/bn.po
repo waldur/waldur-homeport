@@ -194,7 +194,7 @@ msgid "Accounting components"
 msgstr "অ্যাকাউন্টিং উপাদান"
 
 #: src/customer/list/CustomerListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 msgid "Accounting period"
 msgstr "নির্দিষ্ট হিসাব"
 
@@ -317,7 +317,7 @@ msgid "Active clients"
 msgstr "সক্রিয় ক্লায়েন্ট"
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Active count"
 msgstr "সক্রিয় গণনা"
 
@@ -1914,8 +1914,8 @@ msgstr "বাতিল"
 msgid "Cannot create floating IP if tenant external network is not defined."
 msgstr "ভাড়াটে বহিরাগত নেটওয়ার্ক সংজ্ঞায়িত না থাকলে ভাসমান আইপি তৈরি করা যাবে না।"
 
-#: src/marketplace/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Capacity"
 msgstr "ক্ষমতা"
 
@@ -2115,14 +2115,14 @@ msgstr "ক্লায়েন্ট আইডি"
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client organization"
 msgstr "ক্লায়েন্ট সংস্থা"
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Client project"
 msgstr "ক্লায়েন্ট প্রকল্প"
 
@@ -2166,11 +2166,11 @@ msgstr "বন্ধ সমস্যা (এই মাসে)"
 msgid "Cloud"
 msgstr "মেঘ"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud RAM"
 msgstr "ক্লাউড RAM"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud block storage size"
 msgstr "ক্লাউড ব্লক স্টোরেজ সাইজ"
 
@@ -2189,7 +2189,7 @@ msgstr "Cloud init টেমপ্লেট"
 msgid "Cloud region"
 msgstr "মেঘ অঞ্চল"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Cloud vCPU"
 msgstr "ক্লাউড vCPU"
 
@@ -2255,7 +2255,7 @@ msgstr "কমা বিচ্ছিন্ন সমস্যা প্রকা
 #: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
 #: src/marketplace-flows/ReviewDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Comment"
 msgstr "মন্তব্য করুন"
@@ -3221,7 +3221,7 @@ msgstr "আইটেম ব্যবহার শুরু হওয়ার �
 msgid "Date joined"
 msgstr "যোগদানের তারিখ"
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Date of reporting"
 msgstr "রিপোর্টিং তারিখ"
 
@@ -4262,7 +4262,7 @@ msgstr "ত্রুটি ট্রেসব্যাক"
 msgid "Error while deleting offering."
 msgstr "অফার মোছার সময় ত্রুটি৷"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "Esimated price per month"
 msgstr "প্রতি মাসে অনুমানকৃত মূল্য"
 
@@ -4738,7 +4738,7 @@ msgstr "স্বাদ পরিবর্তন নির্ধারিত হ
 msgid "Flavor exclude regex"
 msgstr "স্বাদ regex বাদ"
 
-#: src/openstack/analytics/FlavorsList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
 msgid "Flavor name"
 msgstr "স্বাদ নাম"
 
@@ -4746,9 +4746,9 @@ msgstr "স্বাদ নাম"
 msgid "Flavor name: {flavor_name}"
 msgstr "স্বাদ নাম:{flavor_name}"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/VmTypeOverview.tsx
 msgid "Flavors"
 msgstr "স্বাদ"
 
@@ -5049,8 +5049,8 @@ msgstr "গ্রুপ আমন্ত্রণ বাতিল করা হ�
 msgid "Group invitations"
 msgstr "গ্রুপ আমন্ত্রণ"
 
-#: src/invoices/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Growth"
 msgstr "বৃদ্ধি"
 
@@ -5338,7 +5338,7 @@ msgstr "ছবি সরানো হয়েছে।"
 msgid "Image here"
 msgstr "ইমেজ এখানে"
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Image name"
 msgstr "ছবির নাম"
 
@@ -5367,9 +5367,9 @@ msgstr "মার্কেটপ্লেস অর্ডার হেডার�
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/openstack/analytics/VmTypeOverview.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/openstack/openstack-tenant/tabs.ts
+#: src/reporting/openstack/VmTypeOverview.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Images"
 msgstr "ছবি"
@@ -6027,7 +6027,7 @@ msgstr "লাইফটাইম আপডেট করা হবে এবং �
 #: src/dashboard/chart.ts
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Limit"
 msgstr "সীমা"
 
@@ -6637,8 +6637,8 @@ msgstr "মাসিক খরচ"
 msgid "Monthly invoices"
 msgstr "মাসিক চালান"
 
-#: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Monthly revenue"
 msgstr "মাসিক আয়"
 
@@ -6841,6 +6841,7 @@ msgstr "N/A"
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 #: src/rancher/template/ClusterTemplateList.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
@@ -7452,8 +7453,8 @@ msgstr "কন্ট্রোল প্লেন নোডের সংখ্য
 msgid "Number of cores in a VM"
 msgstr "একটি VM-এ কোরের সংখ্যা"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of created instances"
 msgstr "তৈরি দৃষ্টান্তের সংখ্যা"
 
@@ -7461,8 +7462,8 @@ msgstr "তৈরি দৃষ্টান্তের সংখ্যা"
 msgid "Number of etcd nodes"
 msgstr "etcd নোডের সংখ্যা"
 
-#: src/openstack/analytics/FlavorsList.tsx
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/FlavorsList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "Number of running instances"
 msgstr "চলমান উদাহরণের সংখ্যা"
 
@@ -7511,10 +7512,6 @@ msgstr "অবজেক্ট পাওয়া যায় না।"
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -7529,6 +7526,10 @@ msgstr "অবজেক্ট পাওয়া যায় না।"
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -7705,7 +7706,7 @@ msgid "Offering state has been updated."
 msgstr "অফার রাষ্ট্র আপডেট করা হয়েছে."
 
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Offering type"
 msgstr "অফার টাইপ"
 
@@ -7757,10 +7758,10 @@ msgstr "অফার ইমেজ"
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 #: src/marketplace/resources/MarketplaceKeyValueDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/marketplace/resources/report/ShowReportDialog.tsx
 #: src/openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "Ok"
 msgstr "ঠিক আছে"
@@ -7859,7 +7860,7 @@ msgstr "শুধুমাত্র স্টাফ ব্যবহারকা�
 msgid "Open"
 msgstr "খোলা"
 
-#: src/openstack/analytics/ImagesList.tsx
+#: src/reporting/openstack/ImagesList.tsx
 msgid "OpenStack Images"
 msgstr "ওপেনস্ট্যাক ইমেজ"
 
@@ -8101,7 +8102,6 @@ msgstr "প্রতিষ্ঠানের ক্ষেত্রের না�
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8114,6 +8114,7 @@ msgstr "প্রতিষ্ঠানের ক্ষেত্রের না�
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -8207,11 +8208,11 @@ msgstr "সংগঠন গ্রুপ"
 msgid "Organization group type"
 msgstr "সংগঠন গোষ্ঠীর ধরন"
 
-#: src/issues/routes.ts
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Organization groups"
 msgstr "সংগঠন গোষ্ঠী"
 
@@ -8338,7 +8339,7 @@ msgstr "সংগঠন ({count} )"
 msgid "Organizations by divisions"
 msgstr "বিভাগ দ্বারা সংগঠন"
 
-#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
+#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Organizations by organization groups"
 msgstr "সংগঠন গোষ্ঠী দ্বারা সংগঠন"
 
@@ -8354,7 +8355,7 @@ msgstr "অন্যান্য বিভাগ"
 msgid "Other requirements?"
 msgstr "অন্যান্য প্রয়োজনীয়তা?"
 
-#: src/invoices/growth/utils.ts
+#: src/reporting/invoices/utils.ts
 msgid "Others"
 msgstr "অন্যান্য"
 
@@ -8418,9 +8419,9 @@ msgstr "পেজ পাওয়া যায় না।"
 msgid "Page is not found. You've either entered invalid URL or trying to reach disabled feature."
 msgstr "পেজ পাওয়া যায় না। আপনি হয় অবৈধ URL লিখছেন বা অক্ষম বৈশিষ্ট্যে পৌঁছানোর চেষ্টা করছেন৷"
 
-#: src/invoices/growth/utils.ts
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
+#: src/reporting/invoices/utils.ts
 msgid "Paid"
 msgstr "পেড"
 
@@ -8825,13 +8826,13 @@ msgstr "ফোন নাম্বারগুলো"
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
 #: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 msgid "Plan"
@@ -8841,7 +8842,7 @@ msgstr "পরিকল্পনা"
 msgid "Plan #{index}"
 msgstr "পরিকল্পনা #{index}"
 
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 msgid "Plan capacity"
 msgstr "পরিকল্পনা ক্ষমতা"
 
@@ -8850,7 +8851,7 @@ msgstr "পরিকল্পনা ক্ষমতা"
 msgid "Plan capacity is full."
 msgstr "পরিকল্পনার ক্ষমতা পূর্ণ।"
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Plan component name"
 msgstr "পরিকল্পনা উপাদান নাম"
 
@@ -8868,7 +8869,7 @@ msgstr "পরিকল্পনার বিবরণ"
 msgid "Plan details"
 msgstr "পরিকল্পনার বিশদ বিবরণ"
 
-#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+#: src/reporting/plan-usage/PlanUsageButton.tsx
 msgid "Plan does not have limit"
 msgstr "পরিকল্পনার সীমা নেই"
 
@@ -9232,8 +9233,8 @@ msgstr "ইউনিট প্রতি মূল্য"
 msgid "Price per year"
 msgstr "প্রতি বছর মূল্য"
 
-#: src/issues/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Pricelist"
 msgstr "মূল্য তালিকা"
 
@@ -9352,7 +9353,6 @@ msgstr "অগ্রগতি"
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
-#: src/marketplace/resources/usage/SupportUsageFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -9372,6 +9372,7 @@ msgstr "অগ্রগতি"
 #: src/rancher/cluster/create/steps.ts
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
+#: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
 #: src/user/UserPermissionRequestsList.tsx
@@ -9721,10 +9722,10 @@ msgstr "সুরক্ষিত ক্ষেত্র"
 
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace-flows/FlowsList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderFilter.tsx
 msgid "Provider"
@@ -10190,11 +10191,11 @@ msgid "Reload issue data"
 msgstr "সমস্যা ডেটা পুনরায় লোড করুন"
 
 #: src/marketplace/offerings/details/PlanUsageList.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Remaining"
 msgstr "অবশিষ্ট"
 
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 msgid "Remaining amount"
 msgstr "অবশিষ্ট পরিমাণ"
 
@@ -10721,7 +10722,7 @@ msgstr "রিসোর্স মেটাডেটা"
 
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Resource name"
 msgstr "সম্পদের নাম"
 
@@ -10805,8 +10806,7 @@ msgstr "সম্পদ{type}{activeStep}"
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
-#: src/resource/support/ResourcesTreemap.tsx
-#: src/resource/support/TreemapChartFilter.tsx
+#: src/reporting/quotas/constants.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/user/routes.ts
@@ -11205,11 +11205,9 @@ msgstr "সন্তুষ্টি ক্ষেত্রের নাম"
 #: src/administration/roles/RoleForm.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
-#: src/customer/organization-groups/utils.ts
 #: src/customer/team/AddProjectUserDialog.tsx
 #: src/customer/team/EditProjectUserDialog.tsx
 #: src/customer/team/EditUserDialog.tsx
-#: src/invoices/growth/utils.ts
 #: src/map/SetLocationDialog.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
@@ -11236,6 +11234,8 @@ msgstr "সন্তুষ্টি ক্ষেত্রের নাম"
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 #: src/proposals/update/reviewers/AddUserDialog.tsx
+#: src/reporting/invoices/utils.ts
+#: src/reporting/organization-groups/utils.ts
 msgid "Save"
 msgstr "সংরক্ষণ"
 
@@ -11684,7 +11684,7 @@ msgstr "রুট বিভাগ নির্বাচন করুন"
 msgid "Select security groups..."
 msgstr "নিরাপত্তা গোষ্ঠী নির্বাচন করুন..."
 
-#: src/openstack/analytics/VmOverviewFilter.tsx
+#: src/reporting/openstack/VmOverviewFilter.tsx
 msgid "Select service provider"
 msgstr "পরিষেবা প্রদানকারী নির্বাচন করুন"
 
@@ -11893,8 +11893,6 @@ msgstr "এর পরিষেবা ব্যবস্থাপক:"
 #: src/marketplace/UserPluginOptionsForm.tsx
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageFilter.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -11902,6 +11900,8 @@ msgstr "এর পরিষেবা ব্যবস্থাপক:"
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/providers/dashboard/ProviderProfile.tsx
+#: src/reporting/plan-usage/PlanUsageFilter.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Service provider"
 msgstr "সেবা প্রদানকারী"
 
@@ -12130,7 +12130,7 @@ msgstr "প্রতিষ্ঠানের সমস্ত প্রকল্�
 msgid "Show all resources"
 msgstr "সমস্ত সম্পদ দেখান"
 
-#: src/marketplace/resources/plan-usage/PlanUsageButton.tsx
+#: src/reporting/plan-usage/PlanUsageButton.tsx
 msgid "Show chart"
 msgstr "চার্ট দেখান"
 
@@ -12227,7 +12227,7 @@ msgstr "অনুরোধ দেখান"
 msgid "Show rules"
 msgstr "নিয়ম দেখান"
 
-#: src/openstack/analytics/VmOverviewFilter.tsx
+#: src/reporting/openstack/VmOverviewFilter.tsx
 msgid "Show shared"
 msgstr "শেয়ার করা দেখান"
 
@@ -12241,7 +12241,6 @@ msgid "Show user details"
 msgstr "ব্যবহারকারীর বিবরণ দেখান"
 
 #: src/customer/list/AccountingRunningField.tsx
-#: src/resource/support/TreemapChartFilter.tsx
 msgid "Show with running accounting"
 msgstr "চলমান অ্যাকাউন্টিং সহ দেখান"
 
@@ -13653,7 +13652,6 @@ msgid "Too many empty fields"
 msgstr "অনেক খালি ক্ষেত্র"
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
-#: src/invoices/growth/utils.ts
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/invoices/list/MonthOverview.tsx
@@ -13668,6 +13666,7 @@ msgstr "অনেক খালি ক্ষেত্র"
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/paypal/PayPalInvoicesList.tsx
+#: src/reporting/invoices/utils.ts
 msgid "Total"
 msgstr "মোট"
 
@@ -14321,13 +14320,13 @@ msgstr "গ্রাহক লোড করতে অক্ষম."
 msgid "Unable to load customer support satisfaction overall rating."
 msgstr "গ্রাহক সমর্থন সন্তুষ্টি সামগ্রিক রেটিং লোড করতে অক্ষম৷"
 
-#: src/customer/organization-groups/CustomersOrganizationGroupsChart.tsx
 #: src/invoices/list/OverviewLastMonths.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/providers/dashboard/ProviderWidgets.tsx
+#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Unable to load data"
 msgstr "ডেটা লোড করতে অক্ষম৷"
 
@@ -14398,7 +14397,7 @@ msgstr "ফর্ম বিকল্প লোড করতে অক্ষম."
 msgid "Unable to load full price list"
 msgstr "সম্পূর্ণ মূল্য তালিকা লোড করতে অক্ষম"
 
-#: src/invoices/growth/GrowthChart.tsx
+#: src/reporting/invoices/GrowthChart.tsx
 msgid "Unable to load growth chart."
 msgstr "বৃদ্ধির চার্ট লোড করতে অক্ষম৷"
 
@@ -14531,7 +14530,7 @@ msgstr "তুলনার জন্য বিভাগ লোড করতে �
 msgid "Unable to load service provider."
 msgstr "পরিষেবা প্রদানকারী লোড করতে অক্ষম৷"
 
-#: src/openstack/analytics/VmOverviewFilterContainer.tsx
+#: src/reporting/openstack/VmOverviewFilterContainer.tsx
 msgid "Unable to load service providers."
 msgstr "পরিষেবা প্রদানকারীদের লোড করতে অক্ষম৷"
 
@@ -15533,7 +15532,7 @@ msgstr "আপটাইম"
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
-#: src/marketplace/resources/plan-usage/PlanUsageDialog.tsx
+#: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
 msgid "Usage"
 msgstr "ব্যবহার"
@@ -15558,12 +15557,12 @@ msgstr "ব্যবহার ওভারভিউ"
 msgid "Usage report has been submitted."
 msgstr "ব্যবহার রিপোর্ট জমা দেওয়া হয়েছে."
 
-#: src/marketplace/routes.ts
 #: src/reporting/dashboard/ReportingWidgets.tsx
+#: src/reporting/routes.ts
 msgid "Usage reports"
 msgstr "ব্যবহারের প্রতিবেদন"
 
-#: src/marketplace/resources/usage/SupportUsageList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Usages"
 msgstr "ব্যবহারসমূহ"
 
@@ -16116,7 +16115,7 @@ msgstr "VM স্ন্যাপশট সময়সূচী"
 msgid "VM snapshots"
 msgstr "ভিএম স্ন্যাপশট"
 
-#: src/openstack/analytics/routes.ts
+#: src/reporting/routes.ts
 msgid "VM type overview"
 msgstr "ভিএম টাইপ ওভারভিউ"
 
@@ -16129,23 +16128,23 @@ msgstr "ভিএম"
 msgid "VMware Tools"
 msgstr "VMware টুলস"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC RAM"
 msgstr "ভিপিসি র‌্যাম"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC block storage size"
 msgstr "ভিপিসি ব্লক স্টোরেজ সাইজ"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC floating IP count"
 msgstr "ভিপিসি ভাসমান আইপি গণনা"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC instance count"
 msgstr "ভিপিসি দৃষ্টান্ত গণনা"
 
-#: src/resource/support/ResourcesTreemap.tsx
+#: src/reporting/quotas/constants.tsx
 msgid "VPC vCPU"
 msgstr "ভিপিসি ভিসিপিইউ"
 
@@ -16159,9 +16158,10 @@ msgstr "অপারেশনের জন্য বৈধ অবস্থা:{v
 
 #: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
-#: src/marketplace/resources/usage/SupportUsageList.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
+#: src/reporting/quotas/CustomerQuotasList.tsx
+#: src/reporting/resource-usage/ResourceUsageList.tsx
 msgid "Value"
 msgstr "মান"
 
@@ -16831,7 +16831,7 @@ msgstr "এন্ট্রি"
 msgid "error message: {errorMessage}"
 msgstr "ভুল বার্তা:{errorMessage}"
 
-#: src/invoices/growth/utils.ts
+#: src/reporting/invoices/utils.ts
 msgid "estimated"
 msgstr "আনুমানিক"
 
@@ -17036,7 +17036,7 @@ msgstr "বিচারাধীন"
 msgid "permission reviews"
 msgstr "অনুমতি পর্যালোচনা"
 
-#: src/marketplace/resources/plan-usage/PlanUsageList.tsx
+#: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "plans"
 msgstr "পরিকল্পনা সমূহ"
 
@@ -17326,7 +17326,6 @@ msgstr "{count}প্রকল্প"
 
 #: src/marketplace/service-providers/ResourcesColumn.tsx
 #: src/marketplace/service-providers/ResourcesCountColumn.tsx
-#: src/resource/support/TreemapChart.tsx
 msgid "{count} resources"
 msgstr "{count}সম্পদ"
 
