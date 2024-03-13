@@ -29,7 +29,7 @@ export const UserRoleGroup = ({
   return (
     <Form.Group as={Row} className="mb-1">
       <Form.Label column xs="auto">
-        {role.name || role.description}:
+        {role.description || role.name}:
       </Form.Label>
       <Col xs={12} sm>
         <SymbolsGroup items={items} max={6} onClick={goToUsers} />
