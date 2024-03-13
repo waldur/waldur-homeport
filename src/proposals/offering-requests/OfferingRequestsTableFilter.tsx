@@ -13,15 +13,15 @@ import { OFFERING_REQUESTS_FILTER_FORM_ID } from '../constants';
 const choices = [
   {
     label: translate('Requested'),
-    value: '1',
+    value: 'Requested',
   },
   {
     label: translate('Accepted'),
-    value: '2',
+    value: 'Accepted',
   },
   {
     label: translate('Canceled'),
-    value: '3',
+    value: 'Canceled',
   },
 ];
 
