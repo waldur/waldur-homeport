@@ -60,7 +60,28 @@ export const UsageComponentRow: React.FC<UsageComponentRowProps> = (props) => {
           )
         </span>
       </th>
-      <td></td>
+      <td>
+        {props.offeringComponent.limit_amount !== null && (
+          // limit_period options: total, month, annual
+          <>
+            {props.offeringComponent.limit_period === 'total' &&
+              translate('Total limit: {limit} {unit}', {
+                limit: props.offeringComponent.limit_amount,
+                unit: props.offeringComponent.measured_unit,
+              })}
+            {props.offeringComponent.limit_period === 'month' &&
+              translate('Monthly limit: {limit} {unit}', {
+                limit: props.offeringComponent.limit_amount,
+                unit: props.offeringComponent.measured_unit,
+              })}
+            {props.offeringComponent.limit_period === 'annual' &&
+              translate('Annual limit: {limit} {unit}', {
+                limit: props.offeringComponent.limit_amount,
+                unit: props.offeringComponent.measured_unit,
+              })}
+          </>
+        )}
+      </td>
       <td>{translate('Usage based')}</td>
       {!props.hidePrices ? (
         <>

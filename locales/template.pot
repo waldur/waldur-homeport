@@ -753,6 +753,10 @@ msgstr ""
 msgid "Annual cost"
 msgstr ""
 
+#: src/marketplace/details/plan/UsageComponentRow.tsx
+msgid "Annual limit: {limit} {unit}"
+msgstr ""
+
 #: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Anonymized"
 msgstr ""
@@ -5992,6 +5996,10 @@ msgstr ""
 
 #: src/customer/payment-profiles/utils.ts
 msgid "Monthly invoices"
+msgstr ""
+
+#: src/marketplace/details/plan/UsageComponentRow.tsx
+msgid "Monthly limit: {limit} {unit}"
 msgstr ""
 
 #: src/reporting/dashboard/ReportingWidgets.tsx
@@ -12256,6 +12264,10 @@ msgstr ""
 
 #: src/customer/list/TotalCostField.tsx
 msgid "Total cost:"
+msgstr ""
+
+#: src/marketplace/details/plan/UsageComponentRow.tsx
+msgid "Total limit: {limit} {unit}"
 msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
