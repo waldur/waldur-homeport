@@ -2,7 +2,11 @@ import { DateTime } from 'luxon';
 
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { CallRoundFormData, ProposalCallRound } from '@waldur/proposals/types';
+import {
+  CallRoundFormData,
+  ProposalCall,
+  ProposalCallRound,
+} from '@waldur/proposals/types';
 
 export const getCallRoundStrategyOptions = () => [
   { value: 1, label: 'One-time' },
@@ -39,6 +43,18 @@ export const getRoundStatus = (round: ProposalCallRound) => {
     if (end < now)
       return { label: translate('Ended'), code: -1, color: 'danger' };
     else return { label: translate('Open'), code: 0, color: 'success' };
+  }
+};
+
+export const getCallStatus = (call: ProposalCall) => {
+  if (call.state == 'Active')
+    return { label: translate('Active'), color: 'success' };
+  else if (call.state == 'Draft')
+    return { label: translate('Draft'), color: 'danger' };
+  else if (call.state == 'Archived')
+    return { label: translate('Active'), color: 'secondary' };
+  else {
+    return { label: call.state, color: 'secondary' };
   }
 };
 

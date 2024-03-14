@@ -5,7 +5,6 @@ import { translate } from '@waldur/i18n';
 import { RemoveDocumentButton } from '@waldur/proposals/update/documents/RemoveDocumentButton';
 
 import { AttachDocumentsButton } from './AttachDocumentsButton';
-import { EditDocumentsButton } from './EditDocumentsButton';
 
 export const CallDocumentsSection = ({ call, refetch }) => {
   return (
@@ -20,7 +19,6 @@ export const CallDocumentsSection = ({ call, refetch }) => {
           <span>{translate('Documents')}</span>
         </Card.Title>
         <div className="card-toolbar">
-          <EditDocumentsButton />
           <AttachDocumentsButton call={call} refetch={refetch} />
         </div>
       </Card.Header>

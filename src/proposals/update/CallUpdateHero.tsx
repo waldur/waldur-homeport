@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import { Button } from 'react-bootstrap';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
+import { getCallStatus } from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ProposalCall } from '../types';
@@ -22,6 +22,7 @@ interface CallUpdateHeroProps {
 
 export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
   const customer = useSelector(getCustomer);
+  const status = useMemo(() => getCallStatus(call), [call]);
   return (
     <PublicDashboardHero
       logo={customer?.image}
@@ -29,6 +30,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       logoBottomLabel={translate('Call')}
       logoBottomClass="bg-secondary"
       logoTopLabel={call.state}
+      logoTopClass={'bg-' + status.color}
       backgroundImage={heroBg}
       asHero
       title={
@@ -42,9 +44,6 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       quickActions={
         <div className="d-flex gap-5 justify-content-between">
           <ActionsDropdown call={call} refetch={refetch} />
-          <Button variant="primary" className="w-50">
-            {translate('Submit changes')}
-          </Button>
         </div>
       }
       quickBody={<ProposalCallQuotas call={call} />}

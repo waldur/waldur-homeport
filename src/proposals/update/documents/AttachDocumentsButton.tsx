@@ -15,7 +15,7 @@ export const AttachDocumentsButton = ({ call, refetch }) => {
   return (
     <ActionButton
       action={callback}
-      title={translate('Add attachments')}
+      title={translate('Add document')}
       icon="fa fa-plus"
     />
   );
