@@ -22,14 +22,16 @@ interface PublicCallDetailsHeroProps {
 export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
   call,
 }) => {
-  const activeRound = useMemo(() => {
-    const items = getSortedRoundsWithStatus(call.rounds);
-    const first = items[0];
-    if (first && [0, 1].includes(first.state.code)) {
-      return first;
-    }
-    return null;
-  }, [call]);
+  const activeRound =
+    call.state == 'Active' &&
+    useMemo(() => {
+      const items = getSortedRoundsWithStatus(call.rounds);
+      const first = items[0];
+      if (first && [0, 1].includes(first.state.code)) {
+        return first;
+      }
+      return null;
+    }, [call]);
 
   return (
     <PublicDashboardHero
@@ -50,7 +52,6 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       }
       quickActions={
         <div className="d-flex gap-5 justify-content-between">
-          <Button variant="light">{translate('See offerings')}</Button>
           {activeRound ? (
             <Link
               state="public-calls.create-proposal"

@@ -8,6 +8,6 @@ const Illustration = require('@waldur/images/table-placeholders/undraw_empty_xct
 export const PublicCallsTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
     illustration={Illustration}
-    title={translate(`There are no proposal calls yet.`)}
+    title={translate(`There are no calls for proposals yet.`)}
   />
 );
