@@ -69,6 +69,7 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
@@ -260,6 +261,7 @@ msgstr ""
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr ""
@@ -321,10 +323,6 @@ msgstr ""
 msgid "Add address"
 msgstr ""
 
-#: src/proposals/update/documents/AttachDocumentsButton.tsx
-msgid "Add attachments"
-msgstr ""
-
 #: src/proposals/call-management/CallCreateButton.tsx
 msgid "Add call"
 msgstr ""
@@ -354,6 +352,10 @@ msgstr ""
 #: src/rancher/cluster/create/DataVolumeAddButton.tsx
 #: src/rancher/cluster/create/FormDataStorageStep.tsx
 msgid "Add data volume"
+msgstr ""
+
+#: src/proposals/update/documents/AttachDocumentsButton.tsx
+msgid "Add document"
 msgstr ""
 
 #: src/customer/list/ExportAsEmailDialog.tsx
@@ -415,6 +417,10 @@ msgstr ""
 #: src/customer/list/OrganizationCreateButton.tsx
 #: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
+msgstr ""
+
+#: src/customer/list/OrganizationGroupCreateButton.tsx
+msgid "Add organization group"
 msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
@@ -974,6 +980,10 @@ msgstr ""
 
 #: src/administration/TokenDeleteButton.tsx
 msgid "Are you sure you want to delete the token of {firstname} {lastname}?"
+msgstr ""
+
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
+msgid "Are you sure you want to delete the {name} organization group?"
 msgstr ""
 
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
@@ -2137,6 +2147,7 @@ msgstr ""
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
@@ -2306,6 +2317,7 @@ msgstr ""
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -2469,6 +2481,10 @@ msgstr ""
 msgid "Create organization"
 msgstr ""
 
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+msgid "Create organization group"
+msgstr ""
+
 #: src/marketplace/details/CustomerCreateGroup.tsx
 msgid "Create organization request"
 msgstr ""
@@ -2538,6 +2554,7 @@ msgstr ""
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueSummary.tsx
@@ -3204,6 +3221,7 @@ msgid "Detailed description"
 msgstr ""
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
@@ -3370,6 +3388,7 @@ msgstr ""
 msgid "Domain name. If not defined default domain will be used."
 msgstr ""
 
+#: src/customer/list/OrganizationGroupDetailsDialog.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
@@ -3406,6 +3425,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr ""
@@ -3461,7 +3481,9 @@ msgstr ""
 #: src/administration/agreements/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
+#: src/customer/list/CategoryGroupEditButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/EditProjectUserButton.tsx
@@ -3513,7 +3535,6 @@ msgstr ""
 #: src/proposals/round/reviewers/EditReviewersButton.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
-#: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
@@ -3649,6 +3670,10 @@ msgstr ""
 msgid "Edit user agreements"
 msgstr ""
 
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+msgid "Edit {name}"
+msgstr ""
+
 #: src/marketplace/category/admin/CategoryFromDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
@@ -3672,6 +3697,7 @@ msgstr ""
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -6102,6 +6128,9 @@ msgstr ""
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+#: src/customer/list/OrganizationGroupTypesList.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
@@ -6532,6 +6561,7 @@ msgid "No organization"
 msgstr ""
 
 #: src/customer/list/OrganizationGroupFilter.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 msgid "No organization group types"
 msgstr ""
 
@@ -7254,6 +7284,7 @@ msgstr ""
 
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -7366,16 +7397,29 @@ msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 msgid "Organization group"
 msgstr ""
 
+#: src/customer/list/OrganizationGroupDetailsDialog.tsx
+msgid "Organization group details of {orgName}"
+msgstr ""
+
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Organization group type"
 msgstr ""
 
+#: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupTypesList.tsx
+msgid "Organization group types"
+msgstr ""
+
+#: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
@@ -7466,6 +7510,7 @@ msgstr ""
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
@@ -8578,6 +8623,7 @@ msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -9141,6 +9187,7 @@ msgstr ""
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -9841,6 +9888,7 @@ msgstr ""
 msgid "Robot accounts synchronization has been scheduled."
 msgstr ""
 
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -10357,6 +10405,7 @@ msgid "Select organization"
 msgstr ""
 
 #: src/customer/list/OrganizationGroupFilter.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 msgid "Select organization group type..."
 msgstr ""
 
@@ -11379,10 +11428,6 @@ msgstr ""
 msgid "Submit application"
 msgstr ""
 
-#: src/proposals/update/CallUpdateHero.tsx
-msgid "Submit changes"
-msgstr ""
-
 #: src/slurm/details/SubmitJobAction.tsx
 #: src/slurm/details/SubmitJobDialog.tsx
 msgid "Submit job"
@@ -11885,6 +11930,14 @@ msgstr ""
 msgid "The notification has been enabled"
 msgstr ""
 
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+msgid "The organization group has been created."
+msgstr ""
+
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+msgid "The organization group has been updated."
+msgstr ""
+
 #: src/marketplace/details/ProjectField.tsx
 msgid "The project will be changed for all items in cart."
 msgstr ""
@@ -12313,6 +12366,7 @@ msgstr ""
 
 #: src/administration/agreements/UserAgreementsList.tsx
 #: src/administration/roles/RoleForm.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -12578,6 +12632,10 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 msgid "Unable to create offering."
+msgstr ""
+
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+msgid "Unable to create organization group."
 msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts
@@ -13137,6 +13195,10 @@ msgstr ""
 msgid "Unable to remove option."
 msgstr ""
 
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
+msgid "Unable to remove organization group."
+msgstr ""
+
 #: src/customer/payment-profiles/store/effects.ts
 msgid "Unable to remove payment profile."
 msgstr ""
@@ -13448,6 +13510,10 @@ msgstr ""
 
 #: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "Unable to update options."
+msgstr ""
+
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+msgid "Unable to update organization group."
 msgstr ""
 
 #: src/customer/list/store/effects.ts
@@ -15013,6 +15079,7 @@ msgstr ""
 msgid "orders"
 msgstr ""
 
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx

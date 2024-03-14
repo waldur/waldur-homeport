@@ -56,12 +56,12 @@ export const PublicCallsPage: FunctionComponent = () => {
         title={
           ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE +
           ' ' +
-          translate('Access calls')
+          translate('calls for proposals')
         }
       ></HeroSection>
       <div className="container-xxl mb-20">
         <Table<ProposalCall>
-          title={translate('Calls')}
+          title={translate('Calls for proposals')}
           {...tableProps}
           columns={[
             {

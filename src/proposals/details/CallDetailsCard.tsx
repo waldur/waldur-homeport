@@ -46,7 +46,7 @@ export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
           value={renderFieldOrDash(formatDateTime(call.created))}
         />
         <Field
-          label={translate('Deadline')}
+          label={translate('Round deadlines')}
           value={
             call.rounds?.length
               ? call.rounds
@@ -56,15 +56,15 @@ export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
           }
         />
         <Field
-          label={translate('Review strategy')}
+          label={translate('Review strategy in active round')}
           value={activeRound?.review_strategy}
         />
         <Field
-          label={translate('Round strategy')}
+          label={translate('Round strategy in active round')}
           value={activeRound?.deciding_entity}
         />
         <Field
-          label={translate('Allocation strategy')}
+          label={translate('Allocation strategy in active round')}
           value={activeRound?.allocation_time}
         />
       </Card.Body>
