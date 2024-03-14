@@ -27,7 +27,7 @@ export const CallAutocomplete: React.FC<CallAutocompleteProps> = (props) => (
         <AsyncPaginate
           placeholder={translate('Select call...')}
           loadOptions={(query, prevOptions, { page }) =>
-            callAutocomplete(query, prevOptions, page, true)
+            callAutocomplete(query, prevOptions, page, props.protectedCalls)
           }
           defaultOptions
           getOptionValue={(option) => option.uuid}

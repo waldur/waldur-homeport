@@ -50,11 +50,11 @@ export const TableFilterItem: React.FunctionComponent<TableFilterItem> = (
                 React.createElement(props.customValueComponent, {
                   value: value,
                 })
-              ) : (
+              ) : props.badgeValue(value) ? (
                 <Badge bg="secondary" className="text-dark">
                   {props.badgeValue(value)}
                 </Badge>
-              )}
+              ) : null}
             </div>
           ) : null
         }

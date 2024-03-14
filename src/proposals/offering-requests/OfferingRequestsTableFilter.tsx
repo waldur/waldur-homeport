@@ -39,7 +39,7 @@ const PureOfferingRequestsTableFilter: FunctionComponent<{}> = () => (
       name="call"
       badgeValue={(value) => value?.name}
     >
-      <CallAutocomplete />
+      <CallAutocomplete protectedCalls />
     </TableFilterItem>
     <TableFilterItem title={translate('Status')} name="state">
       <Field

@@ -124,3 +124,21 @@ export interface ProposalFormStepProps {
   observed?: boolean;
   change?(field: string, value: any): void;
 }
+
+type ProposalReviewState = 'Created' | 'In review' | 'Submitted' | 'Rejected';
+
+export interface ProposalReview {
+  url: string;
+  uuid: string;
+  proposal: string;
+  reviewer: string;
+  state: ProposalReviewState;
+  summary_score: number;
+  summary_public_comment: string;
+  summary_private_comment: string;
+  proposal_name: string;
+  review_end_date: string;
+  round_uuid: string;
+  call_name: string;
+  call_uuid: string;
+}

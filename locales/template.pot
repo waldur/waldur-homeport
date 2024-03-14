@@ -1022,6 +1022,10 @@ msgstr ""
 msgid "Are you sure you want to pull {count} resources?"
 msgstr ""
 
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Are you sure you want to reject the {name} proposal review?"
+msgstr ""
+
 #: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Are you sure you want to remove invoice item {name}?"
 msgstr ""
@@ -1046,6 +1050,10 @@ msgstr ""
 
 #: src/rancher/cluster/create/FormNodesStep.tsx
 msgid "Are you sure you want to select template? Note this will reset the node plan."
+msgstr ""
+
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Are you sure you want to start reviewing proposal {name}?"
 msgstr ""
 
 #: src/marketplace/cart/ShoppingCartButtonContainer.tsx
@@ -1584,6 +1592,9 @@ msgstr ""
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Call"
 msgstr ""
 
@@ -1629,6 +1640,7 @@ msgstr ""
 
 #: src/marketplace/utils.ts
 #: src/proposals/PublicCallsPage.tsx
+#: src/user/routes.ts
 msgid "Calls"
 msgstr ""
 
@@ -2583,6 +2595,7 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -4659,7 +4672,7 @@ msgstr ""
 msgid "HTML content"
 msgstr ""
 
-#: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/EndingField.tsx
 msgid "Has ended"
 msgstr ""
 
@@ -4957,6 +4970,7 @@ msgid "Importing resources"
 msgstr ""
 
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "In review"
 msgstr ""
 
@@ -6114,6 +6128,10 @@ msgstr ""
 msgid "My proposals"
 msgstr ""
 
+#: src/user/proposals/reviews/ReviewsList.tsx
+msgid "My reviews"
+msgstr ""
+
 #: src/marketplace-checklist/AnswersTable.tsx
 msgid "N/A"
 msgstr ""
@@ -6222,6 +6240,7 @@ msgstr ""
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -6507,7 +6526,6 @@ msgid "No association"
 msgstr ""
 
 #: src/proposals/CallAutocomplete.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "No calls"
 msgstr ""
 
@@ -6704,6 +6722,7 @@ msgstr ""
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
+#: src/user/proposals/reviews/ReviewsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr ""
 
@@ -7911,6 +7930,7 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
 #: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
+#: src/proposals/update/offerings/CallOfferingExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/reporting/plan-usage/PlanUsageList.tsx
@@ -8656,6 +8676,7 @@ msgstr ""
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
 msgid "Proposal"
 msgstr ""
 
@@ -9108,6 +9129,10 @@ msgstr ""
 msgid "Reject permission request by {name}"
 msgstr ""
 
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Reject review"
+msgstr ""
+
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
@@ -9120,6 +9145,7 @@ msgstr ""
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Rejected"
 msgstr ""
 
@@ -9771,6 +9797,10 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
+#: src/user/proposals/reviews/ReviewsList.tsx
+msgid "Review due"
+msgstr ""
+
 #: src/proposals/round/review/RoundReviewSection.tsx
 msgid "Review duration"
 msgstr ""
@@ -9783,12 +9813,20 @@ msgstr ""
 msgid "Review duration in days"
 msgstr ""
 
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Review has been accepted."
+msgstr ""
+
 #: src/customer/team/PendingReviewDialog.tsx
 msgid "Review has been closed."
 msgstr ""
 
 #: src/customer/team/ReviewCloseButton.tsx
 msgid "Review has been performed."
+msgstr ""
+
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Review has been rejected."
 msgstr ""
 
 #: src/marketplace-flows/ReviewDialog.tsx
@@ -9859,6 +9897,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/user/routes.ts
 msgid "Reviews"
 msgstr ""
 
@@ -9951,6 +9990,7 @@ msgstr ""
 
 #: src/proposals/round/RoundPageHero.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 msgid "Round"
 msgstr ""
 
@@ -10341,7 +10381,6 @@ msgid "Select available weekdays"
 msgstr ""
 
 #: src/proposals/CallAutocomplete.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Select call..."
 msgstr ""
 
@@ -10520,6 +10559,7 @@ msgstr ""
 #: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Select state..."
 msgstr ""
 
@@ -10597,6 +10637,10 @@ msgstr ""
 #: src/broadcasts/BroadcastExpandableRow.tsx
 #: src/broadcasts/BroadcastForm.tsx
 msgid "Send at"
+msgstr ""
+
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Send back"
 msgstr ""
 
 #: src/broadcasts/BroadcastFooter.tsx
@@ -11184,6 +11228,10 @@ msgstr ""
 msgid "Start day of accounting"
 msgstr ""
 
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Start review"
+msgstr ""
+
 #: src/booking/deploy/CustomRangeDatePicker.tsx
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Start time"
@@ -11283,6 +11331,8 @@ msgstr ""
 #: src/user/hooks/HooksList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -11447,6 +11497,7 @@ msgid "Submit usage report"
 msgstr ""
 
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Submitted"
 msgstr ""
 
@@ -12401,6 +12452,7 @@ msgstr ""
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr ""
@@ -12429,6 +12481,10 @@ msgstr ""
 #: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Unable to accept booking."
+msgstr ""
+
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Unable to accept review."
 msgstr ""
 
 #: src/user/support/effects.ts
@@ -13152,6 +13208,10 @@ msgstr ""
 
 #: src/invitations/UserPermissionRequestRejectButton.tsx
 msgid "Unable to reject permission request."
+msgstr ""
+
+#: src/user/proposals/reviews/ReviewItemActions.tsx
+msgid "Unable to reject review."
 msgstr ""
 
 #: src/user/keys/KeyRemoveButton.tsx

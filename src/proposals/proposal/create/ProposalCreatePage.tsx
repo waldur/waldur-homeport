@@ -48,7 +48,7 @@ export const ProposalCreatePage = reduxForm({
       return createProposal(formData)
         .then(() => {
           dispatch(showSuccess(translate('Proposal created successfully')));
-          router.stateService.go('profile.proposals');
+          router.stateService.go('profile-proposals');
         })
         .catch((error) => {
           dispatch(showErrorResponse(error, translate('Something went wrong')));
