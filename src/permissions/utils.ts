@@ -28,7 +28,8 @@ const ROLE_MAP = {
 
 export const formatRole = (name: string) => {
   const roleName = ROLE_MAP[name] || name;
-  return ENV.roles.find((role) => role.name === roleName)?.description;
+  const role = ENV.roles.find((role) => role.name === roleName);
+  return role?.description || role?.name;
 };
 
 export const getCustomerPermission = (user, customer) => {
