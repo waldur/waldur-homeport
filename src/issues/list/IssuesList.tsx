@@ -106,7 +106,7 @@ export const IssuesList: React.FC<OwnProps & Partial<TableProps>> = (props) => {
   const tableProps = useTable({
     table: 'issuesList',
     fetchData: createFetcher('support-issues'),
-    queryField: 'summary',
+    queryField: 'query',
     mapPropsToFilter: (props) => props.filter,
     mapPropsToTableId: (props) => (props.scope ? [props.scope.uuid] : []),
     exportRow,
