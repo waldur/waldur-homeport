@@ -26,8 +26,8 @@ const TableComponent = (props: any) => {
       render: ({ row }) => row.customer_name,
     },
     {
-      title: translate('Project'),
-      render: ({ row }) => row.scope_name,
+      title: translate('Scope'),
+      render: ({ row }) => row.scope_name || 'N/A',
     },
     {
       title: translate('Role'),
@@ -44,7 +44,7 @@ const TableComponent = (props: any) => {
     },
     {
       title: translate('Comment'),
-      render: ({ row }) => row.review_comment,
+      render: ({ row }) => row.review_comment || 'N/A',
     },
     {
       title: translate('State'),

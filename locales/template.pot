@@ -8365,7 +8365,6 @@ msgstr ""
 #: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
-#: src/user/UserPermissionRequestsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -10098,6 +10097,7 @@ msgid "Schedules have been updated successfully."
 msgstr ""
 
 #: src/administration/roles/RolesList.tsx
+#: src/user/UserPermissionRequestsList.tsx
 msgid "Scope"
 msgstr ""
 

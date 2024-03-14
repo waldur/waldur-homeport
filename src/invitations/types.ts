@@ -8,6 +8,7 @@ export interface Invitation {
   scope_name: string;
   scope_uuid: string;
   scope_type: RoleType;
+  role_name: string;
   role_description: string;
   customer_name: string;
   created_by_full_name?: string;
