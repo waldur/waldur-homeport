@@ -2,47 +2,48 @@ import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { CategoryGroup } from '@waldur/marketplace/types';
+import { OrganizationGroup } from '@waldur/marketplace/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { removeCategoryGroup } from './api';
+import { removeOrganizationGroup } from './api';
 
-interface GroupDeleteButtonProps {
-  row: CategoryGroup;
+interface OrganizationGroupDeleteButtonProps {
+  row: OrganizationGroup;
   refetch;
 }
 
-export const GroupDeleteButton = (props: GroupDeleteButtonProps) => {
+export const OrganizationGroupDeleteButton = (
+  props: OrganizationGroupDeleteButtonProps,
+) => {
   const dispatch = useDispatch();
   const [removing, setRemoving] = useState(false);
 
   const openDialog = useCallback(async () => {
     try {
-      const confirmed = await waitForConfirmation(
+      await waitForConfirmation(
         dispatch,
         translate('Confirmation'),
         translate(
-          'Are you sure you want to delete the {title} category group?',
-          { title: <strong>{props.row.title}</strong> },
+          'Are you sure you want to delete the {name} organization group?',
+          { name: <strong>{props.row.name}</strong> },
           formatJsxTemplate,
         ),
       );
-
-      if (!confirmed) return;
-
       setRemoving(true);
-      await removeCategoryGroup(props.row.uuid);
+      await removeOrganizationGroup(props.row.uuid);
       props.refetch();
-    } catch (e) {
+    } catch (error) {
       dispatch(
-        showErrorResponse(e, translate('Unable to remove category group.')),
+        showErrorResponse(
+          error,
+          translate('Unable to remove organization group.'),
+        ),
       );
-      setRemoving(false);
     }
+    setRemoving(false);
   }, [dispatch, setRemoving, props]);
-
   return (
     <ActionButton
       title={translate('Remove')}

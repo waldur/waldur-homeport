@@ -75,6 +75,16 @@ const NotificationList = lazyComponent(
   'NotificationList',
 );
 
+const OrganizationGroupsList = lazyComponent(
+  () => import('@waldur/customer/list/OrganizationGroupsList'),
+  'OrganizationGroupsList',
+);
+
+const OrganizationGroupTypesList = lazyComponent(
+  () => import('@waldur/customer/list/OrganizationGroupTypesList'),
+  'OrganizationGroupTypesList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -219,14 +229,42 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Categories'),
     },
   },
-
   {
-    name: 'admin.customers',
+    name: 'admin-organizations',
+    parent: 'admin',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Organizations'),
+    },
+  },
+  {
+    name: 'admin-organization-list',
     url: 'customers/',
+    parent: 'admin-organizations',
     component: SupportCustomersContainer,
     data: {
       feature: 'support.customers_list',
       breadcrumb: () => translate('Organizations'),
+    },
+  },
+  {
+    name: 'admin-organizations-group-list',
+    url: 'customer-groups/',
+    parent: 'admin-organizations',
+    component: OrganizationGroupsList,
+    data: {
+      breadcrumb: () => translate('Organization groups'),
+    },
+  },
+  {
+    name: 'admin-organization-group-types-list',
+    url: 'customer-group-types/',
+    parent: 'admin-organizations',
+    component: OrganizationGroupTypesList,
+    data: {
+      breadcrumb: () => translate('Organization group types'),
     },
   },
   {
