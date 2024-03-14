@@ -84,6 +84,10 @@ const ProposalsList = lazyComponent(
   () => import('./proposals/ProposalsList'),
   'ProposalsList',
 );
+const ReviewsList = lazyComponent(
+  () => import('./proposals/reviews/ReviewsList'),
+  'ReviewsList',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -119,6 +123,18 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Affiliations'),
       priority: 105,
+    },
+  },
+
+  {
+    name: 'profile-calls',
+    abstract: true,
+    parent: 'profile',
+    component: UIView,
+    url: '',
+    data: {
+      feature: 'marketplace.show_call_management_functionality',
+      breadcrumb: () => translate('Calls'),
     },
   },
 
@@ -268,16 +284,6 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'profile.proposals',
-    url: 'user-proposals/',
-    component: ProposalsList,
-    data: {
-      feature: 'marketplace.show_call_management_functionality',
-      breadcrumb: () => translate('Proposals'),
-      priority: 120,
-    },
-  },
-  {
     name: 'profile-organizations',
     url: 'organizations/',
     component: OrganizationsList,
@@ -290,5 +296,26 @@ export const states: StateDeclaration[] = [
     name: 'user-email-change',
     url: '/user_email_change/:token/',
     component: UserEmailChangeCallback,
+  },
+
+  {
+    name: 'profile-proposals',
+    url: 'user-proposals/',
+    component: ProposalsList,
+    parent: 'profile-calls',
+    data: {
+      feature: 'marketplace.show_call_management_functionality',
+      breadcrumb: () => translate('Proposals'),
+    },
+  },
+  {
+    name: 'profile-reviews',
+    url: 'user-reviews/',
+    component: ReviewsList,
+    parent: 'profile-calls',
+    data: {
+      feature: 'marketplace.show_call_management_functionality',
+      breadcrumb: () => translate('Reviews'),
+    },
   },
 ];

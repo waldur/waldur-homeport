@@ -127,3 +127,9 @@ export const callAutocomplete = async (
 
 export const createProposal = (data) =>
   post<Proposal>(`/proposal-proposals/`, data);
+
+export const acceptProposalReview = (uuid) =>
+  post(`/proposal-reviews/${uuid}/accept/`);
+
+export const rejectProposalReview = (uuid) =>
+  post(`/proposal-reviews/${uuid}/reject/`);

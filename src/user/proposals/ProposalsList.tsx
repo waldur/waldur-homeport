@@ -1,18 +1,17 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ProposalCallRound } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { USER_PROPOSALS_FILTER_FORM_ID } from '../constants';
 
+import { EndingField } from './EndingField';
 import { ProposalsListExpandableRow } from './ProposalsListExpandableRow';
 import { ProposalsListPlaceholder } from './ProposalsListPlaceholder';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
@@ -20,29 +19,6 @@ import { ProposalsTableFilter } from './ProposalsTableFilter';
 interface ProposalsListProps {
   round: ProposalCallRound;
 }
-
-const ProposalEndingField = ({ row }) => {
-  const data = useMemo(() => {
-    if (!row.round.cutoff_time) return {};
-    const endDate = parseDate(row.round.cutoff_time);
-    const diffNowDays = endDate.diffNow().as('days');
-    const textClass = diffNowDays <= 4 ? 'text-danger' : '';
-    return {
-      text: diffNowDays > 0 ? endDate.toRelative() : translate('Has ended'),
-      date: endDate.toISODate(),
-      textClass,
-    };
-  }, [row]);
-
-  if (!row.round.cutoff_time) {
-    return <>{DASH_ESCAPE_CODE}</>;
-  }
-  return (
-    <div className={data.textClass}>
-      {data.text} ({data.date})
-    </div>
-  );
-};
 
 const filtersSelctor = createSelector(
   getFormValues(USER_PROPOSALS_FILTER_FORM_ID),
@@ -85,7 +61,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
         },
         {
           title: translate('Ending'),
-          render: ProposalEndingField,
+          render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
         },
         {
           title: translate('State'),
