@@ -194,7 +194,10 @@ export const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (
       <FormControl
         className="form-control-solid"
         type="text"
-        value={[selectedRole?.description, selectedProject?.name]
+        value={[
+          selectedRole?.description || selectedRole?.name,
+          selectedProject?.name,
+        ]
           .filter(Boolean)
           .join(' - ')}
         placeholder={placeholder}

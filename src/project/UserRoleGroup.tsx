@@ -40,7 +40,7 @@ export const UserRoleGroup = ({
   return (
     <Form.Group as={Row} className={className}>
       <Form.Label column xs="auto">
-        {altLabel || role?.description}:
+        {altLabel || role?.description || role?.name}:
       </Form.Label>
       <Col xs={12} sm>
         <SymbolsGroup items={items} max={max || 6} onClick={onClick} />
