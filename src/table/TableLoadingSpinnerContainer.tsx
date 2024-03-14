@@ -3,9 +3,7 @@ import { FunctionComponent } from 'react';
 import { TableProps } from '@waldur/table/Table';
 
 export const LoadingSpinner: FunctionComponent = () => (
-  <span>
-    <i className="fa fa-spinner fa-spin" />
-  </span>
+  <i className="fa fa-spinner fa-spin" />
 );
 
 export const TableLoadingSpinnerContainer = (props: TableProps) =>

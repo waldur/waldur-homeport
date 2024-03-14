@@ -57,7 +57,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
               params={{ uuid: call.uuid, round_uuid: activeRound.uuid }}
               className="btn btn-primary"
             >
-              <span>{translate('Apply to round')}</span>
+              {translate('Apply to round')}
             </Link>
           ) : (
             <Button variant="primary" disabled>
@@ -70,7 +70,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       quickFooter={<CallShowAllRounds call={call} />}
       quickFooterClassName="justify-content-center"
     >
-      <CallDetailsHeaderBody call={call} />
+      {call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />}
     </PublicDashboardHero>
   );
 };
