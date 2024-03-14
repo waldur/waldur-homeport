@@ -99,6 +99,8 @@ export interface CallOffering {
   offering_name: string;
   provider_name: string;
   state: 'Requested' | 'Accepted' | 'Canceled';
+  plan?: string;
+  plan_name?: string;
 }
 
 export interface CallOfferingFormData {

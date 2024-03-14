@@ -1,6 +1,7 @@
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { createCallOffering } from '@waldur/proposals/api';
@@ -22,10 +23,13 @@ export const CallOfferingCreateDialog: FC<CallOfferingCreateDialogProps> = (
   const dispatch = useDispatch();
   const createRound = useCallback(
     (formData: CallOfferingFormData, _dispatch, formProps) => {
+      const updated_plan_url = fixURL(
+        `/marketplace-plans/${formData.plan.uuid}/`,
+      );
       const payload = {
         offering: formData.offering.url,
         description: formData.description,
-        plan: formData.plan.url,
+        plan: updated_plan_url,
         attributes: formData.limits
           ? {
               limits: formData.limits,

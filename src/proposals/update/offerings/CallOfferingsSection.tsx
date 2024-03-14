@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { ProposalCall } from '@waldur/proposals/types';
+import { CallOfferingExpandableRow } from '@waldur/proposals/update/offerings/CallOfferingExpandableRow';
 import { callOfferingStateAliases } from '@waldur/proposals/utils';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
@@ -64,6 +65,7 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
       actions={
         <AddOfferingButton call={props.call} refetch={tableProps.fetch} />
       }
+      expandableRow={CallOfferingExpandableRow}
     />
   );
 };
