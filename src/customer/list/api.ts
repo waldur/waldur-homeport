@@ -1,9 +1,9 @@
 import { ENV } from '@waldur/configs/default';
-import { get, post, sendForm } from '@waldur/core/api';
+import { deleteById, get, post, put, sendForm } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import {
-  getOrganizationGroupTypesList,
   getOrganizationGroupList,
+  getOrganizationGroupTypesList,
 } from '@waldur/marketplace/common/api';
 
 interface TotalStats {
@@ -69,3 +69,12 @@ export const organizationGroupTypeAutocomplete = async (
 export const sendFinancialReport = (payload) => {
   return post('/invoice/send-financial-report-by-mail/', payload);
 };
+
+export const removeOrganizationGroup = (uuid: string) =>
+  deleteById('/organization-groups/', uuid);
+
+export const createOrganizationGroup = (data) =>
+  post('/organization-groups/', data);
+
+export const updateOrganizationGroup = (uuid, data) =>
+  put(`/organization-groups/${uuid}/`, data);

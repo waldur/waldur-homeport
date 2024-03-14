@@ -84,7 +84,7 @@ interface OfferingGoogleCalendar {
 export interface OrganizationGroup {
   uuid: string;
   name: string;
-  type: string;
+  type_name: string;
   url: string;
 }
 
