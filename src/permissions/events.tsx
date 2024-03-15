@@ -2,12 +2,12 @@ import { UISref } from '@uirouter/react';
 
 import eventsRegistry from '@waldur/events/registry';
 import {
-  getUserContext,
-  getAffectedUserContext,
-  UserContext,
   AffectedUserContext,
+  getAffectedUserContext,
+  getUserContext,
+  UserContext,
 } from '@waldur/events/utils';
-import { translate, gettext, formatJsxTemplate } from '@waldur/i18n';
+import { formatJsxTemplate, gettext, translate } from '@waldur/i18n';
 import { formatRole } from '@waldur/permissions/utils';
 
 import { PermissionsEnum } from '../EventsEnums';
@@ -23,7 +23,7 @@ const STATES_MAP = {
   customer: 'organization.dashboard',
   project: 'project.dashboard',
   offering: 'marketplace-offering-details',
-  call: 'protected-call-update.details',
+  call: 'call-management.protected-call-update-details',
 };
 
 const UUID_MAP = {

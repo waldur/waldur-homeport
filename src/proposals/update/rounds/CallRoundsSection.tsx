@@ -4,7 +4,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ProposalCall, ProposalCallRound } from '@waldur/proposals/types';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 import { CallRoundsTablePlaceholder } from './CallRoundsTablePlaceholder';
@@ -40,8 +40,8 @@ export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
           title: translate('Round name'),
           render: ({ row }) => (
             <Link
-              state="protected-call-update.round"
-              params={{ round_uuid: row.uuid }}
+              state="call-management.protected-call-update-round"
+              params={{ round_uuid: row.uuid, call_uuid: props.call.uuid }}
               label={row.uuid.substring(0, 10)}
             />
           ),

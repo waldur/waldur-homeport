@@ -54,7 +54,7 @@ export const CallManagementPage: FunctionComponent = () => {
           orderField: 'name',
           render: ({ row }) => (
             <Link
-              state="protected-call-update.details"
+              state="call-management.protected-call-update-details"
               params={{ call_uuid: row.uuid }}
               label={row.name}
             />
@@ -71,7 +71,7 @@ export const CallManagementPage: FunctionComponent = () => {
           render: ({ row }) => <>{row.state}</>,
         },
       ]}
-      verboseName={translate('Call management')}
+      verboseName={translate('Calls')}
       initialSorting={{ field: 'name', mode: 'desc' }}
       hoverableRow={({ row }) => <CallEditButton row={row} />}
       hasQuery={true}

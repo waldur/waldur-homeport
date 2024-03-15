@@ -38,7 +38,7 @@ export const RoundPageHero: FC<RoundPageHeroProps> = ({ round, call }) => {
             {translate('Round')} {round.uuid}
           </h3>
           <Link
-            state="protected-call-update.details"
+            state="call-management.protected-call-update-details"
             params={{ call_uuid: call.uuid }}
             label={translate('Part of {name}', { name: call.name })}
             className="text-link"
@@ -47,7 +47,7 @@ export const RoundPageHero: FC<RoundPageHeroProps> = ({ round, call }) => {
       }
       quickActions={
         <Link
-          state="protected-call-update.details"
+          state="call-management.protected-call-update-details"
           params={{ call_uuid: call.uuid }}
           label={translate('See call')}
           className="btn btn-light w-50"

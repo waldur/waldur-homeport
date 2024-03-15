@@ -2,12 +2,13 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 
-const CallManagementPage = lazyComponent(
-  () => import('./call-management/CallManagementPage'),
-  'CallManagementPage',
+const CallManagementDashboard = lazyComponent(
+  () => import('./call-management/CallManagementDashboard'),
+  'CallManagementDashboard',
 );
 
 const PublicCallsPage = lazyComponent(
@@ -37,30 +38,44 @@ const ProposalCreatePage = lazyComponent(
 
 export const states: StateDeclaration[] = [
   {
-    name: 'organization.call-management',
-    url: 'call-management/',
-    component: CallManagementPage,
+    name: 'call-management',
+    url: '/call-management/:uuid/',
+    parent: 'layout',
+    component: UIView,
+    abstract: true,
     data: {
+      auth: true,
+      title: () => translate('Call management'),
+      hideProjectSelector: true,
+      skipInitWorkspace: true,
+    },
+    resolve: [
+      {
+        token: 'fetchCustomer',
+        resolveFn: fetchCustomer,
+        deps: ['$transition$'],
+      },
+    ],
+  },
+  {
+    name: 'call-management-dashboard',
+    url: 'dashboard/',
+    parent: 'call-management',
+    component: CallManagementDashboard,
+    data: {
+      breadcrumb: () => translate('Dashboard'),
+      priority: 100,
       feature: 'marketplace.show_call_management_functionality',
-      breadcrumb: () => translate('Call management'),
     },
   },
-
   {
-    name: 'protected-call-update',
-    url: 'call-management/:call_uuid/',
-    abstract: true,
-    component: UIView,
-    parent: 'organization',
-  },
-  {
-    name: 'protected-call-update.details',
-    url: '',
+    name: 'call-management.protected-call-update-details',
+    url: 'call/:call_uuid/',
     component: CallUpdateContainer,
   },
   {
-    name: 'protected-call-update.round',
-    url: 'round/:round_uuid/',
+    name: 'call-management.protected-call-update-round',
+    url: 'call/:call_uuid/round/:round_uuid/',
     component: CallRoundPage,
   },
 
