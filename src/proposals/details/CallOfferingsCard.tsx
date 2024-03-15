@@ -1,33 +1,29 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { OfferingNameColumn } from '@waldur/marketplace/offerings/list/OfferingNameColumn';
 import { OfferingsListTablePlaceholder } from '@waldur/marketplace/offerings/list/OfferingsListTablePlaceholder';
-import { OfferingStateCell } from '@waldur/marketplace/offerings/list/OfferingStateCell';
-import { createFetcher, Table } from '@waldur/table';
-import { useTable } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { Table } from '@waldur/table';
+import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
-import { ProposalCall } from '../types';
+import { CallOffering, ProposalCall } from '../types';
+import { callOfferingStateAliases } from '../utils';
 
 interface CallOfferingsCardProps {
   call: ProposalCall;
 }
 
-export const CallOfferingsCard: FC<CallOfferingsCardProps> = () => {
-  const customer = useSelector(getCustomer);
-
+export const CallOfferingsCard: FC<CallOfferingsCardProps> = (props) => {
   const tableProps = useTable({
-    table: 'ProviderOfferingsList',
-    fetchData: createFetcher(
-      `marketplace-service-providers/${customer?.uuid}/offerings`,
-    ),
-    queryField: 'name',
+    table: 'CallOfferingsList',
+    fetchData: Promise.resolve({
+      rows: props.call.offerings,
+      resultCount: props.call.offerings.length,
+    }),
   });
 
   return (
-    <Table
+    <Table<CallOffering>
       {...tableProps}
       id="offerings"
       placeholderComponent={
@@ -36,28 +32,32 @@ export const CallOfferingsCard: FC<CallOfferingsCardProps> = () => {
       columns={[
         {
           title: translate('Offering name'),
-          render: OfferingNameColumn,
+          render: ({ row }) => <>{row.offering_name}</>,
         },
         {
           title: translate('Provider'),
-          render: ({ row }) => <>{row.customer_name}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.provider_name)}</>,
         },
         {
           title: translate('Min allocation'),
-          render: () => '500TB',
+          render: () => <>500TB</>,
         },
         {
           title: translate('Max allocation'),
-          render: () => '500TB',
+          render: () => <>500TB</>,
         },
         {
           title: translate('State'),
-          render: OfferingStateCell,
+          render: ({ row }) => (
+            <StateIndicator
+              label={callOfferingStateAliases(row.state)}
+              variant={row.state === 'Accepted' ? 'success' : 'secondary'}
+            />
+          ),
         },
       ]}
       title={translate('Offerings')}
       verboseName={translate('Offerings')}
-      hasQuery={true}
     />
   );
 };
