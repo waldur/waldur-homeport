@@ -10,6 +10,7 @@ import {
   getPlugins,
   getProviderOffering,
 } from '@waldur/marketplace/common/api';
+import { PageBarProvider } from '@waldur/marketplace/context';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
@@ -73,138 +74,140 @@ export const OfferingUpdateContainer = () => {
   }
 
   return (
-    <div className="provider-offering">
-      <OfferingDetailsHeader
-        offering={data.offering}
-        category={data.category}
-        secondaryActions={
-          <div className="d-flex">
-            <div className="flex-grow-1">
-              <UISref
-                to={
-                  isDescendantOf('admin', state)
-                    ? 'admin.marketplace-offering-details'
-                    : 'marketplace-offering-details'
-                }
-                params={{
-                  offering_uuid: data.offering.uuid,
-                  uuid: data.offering.customer_uuid,
-                }}
-              >
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a className="btn btn-sm me-2 btn-light">
-                  {translate('Manage')}
-                </a>
-              </UISref>
-              <PreviewButton offering={data.offering} />
-            </div>
-            <div>
-              <OfferingStateActions
-                offering={data.offering}
-                refreshOffering={refetch}
-              />
-              <Button
-                variant="light"
-                size="sm"
-                className="btn-icon me-2"
-                onClick={() => refetch()}
-              >
-                <i className="fa fa-refresh" />
-              </Button>
-            </div>
-          </div>
-        }
-      />
-      <OfferingUpdateBar offering={data.offering} />
-      <div className="container-xxl py-10">
-        <OverviewSection
-          offering={data.offering}
-          refetch={refetch}
-          loading={isRefetching}
-        />
-
-        <IntegrationSection
-          offering={data.offering}
-          refetch={refetch}
-          loading={isRefetching}
-        />
-
-        <OfferingEndpointsSection
-          offering={data.offering}
-          refetch={refetch}
-          loading={isRefetching}
-        />
-
-        <OfferingOptionsSection
-          type="options"
-          title={
-            <>
-              {translate('User input')}{' '}
-              <Tip
-                id="form-field-tooltip"
-                label={translate(
-                  'If you want user to provide additional details when ordering, please configure input form for the user below',
-                )}
-                className="mx-2"
-              >
-                <i className="fa fa-question-circle" />
-              </Tip>
-            </>
-          }
-          offering={data.offering}
-          refetch={refetch}
-          loading={isRefetching}
-        />
-
-        <OfferingOptionsSection
-          type="resource_options"
-          title={
-            <>
-              {translate('Resource options')}{' '}
-              <Tip
-                id="form-field-tooltip"
-                label={translate(
-                  'If you want user to be able to modify resource options after creation, please configure options for user below',
-                )}
-                className="mx-2"
-              >
-                <i className="fa fa-question-circle" />
-              </Tip>
-            </>
-          }
-          offering={data.offering}
-          refetch={refetch}
-          loading={isRefetching}
-        />
-
-        <AttributesSection
+    <PageBarProvider>
+      <div className="provider-offering">
+        <OfferingDetailsHeader
           offering={data.offering}
           category={data.category}
-          refetch={refetch}
-          loading={isRefetching}
+          secondaryActions={
+            <div className="d-flex">
+              <div className="flex-grow-1">
+                <UISref
+                  to={
+                    isDescendantOf('admin', state)
+                      ? 'admin.marketplace-offering-details'
+                      : 'marketplace-offering-details'
+                  }
+                  params={{
+                    offering_uuid: data.offering.uuid,
+                    uuid: data.offering.customer_uuid,
+                  }}
+                >
+                  {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                  <a className="btn btn-sm me-2 btn-light">
+                    {translate('Manage')}
+                  </a>
+                </UISref>
+                <PreviewButton offering={data.offering} />
+              </div>
+              <div>
+                <OfferingStateActions
+                  offering={data.offering}
+                  refreshOffering={refetch}
+                />
+                <Button
+                  variant="light"
+                  size="sm"
+                  className="btn-icon me-2"
+                  onClick={() => refetch()}
+                >
+                  <i className="fa fa-refresh" />
+                </Button>
+              </div>
+            </div>
+          }
         />
+        <OfferingUpdateBar offering={data.offering} />
+        <div className="container-xxl py-10">
+          <OverviewSection
+            offering={data.offering}
+            refetch={refetch}
+            loading={isRefetching}
+          />
 
-        <ComponentsSection
-          offering={data.offering}
-          components={data.components}
-          refetch={refetch}
-          loading={isRefetching}
-        />
+          <IntegrationSection
+            offering={data.offering}
+            refetch={refetch}
+            loading={isRefetching}
+          />
 
-        <PlansSection
-          offering={data.offering}
-          refetch={refetch}
-          loading={isRefetching}
-        />
+          <OfferingEndpointsSection
+            offering={data.offering}
+            refetch={refetch}
+            loading={isRefetching}
+          />
 
-        <OfferingImagesList offering={data.offering} />
+          <OfferingOptionsSection
+            type="options"
+            title={
+              <>
+                {translate('User input')}{' '}
+                <Tip
+                  id="form-field-tooltip"
+                  label={translate(
+                    'If you want user to provide additional details when ordering, please configure input form for the user below',
+                  )}
+                  className="mx-2"
+                >
+                  <i className="fa fa-question-circle" />
+                </Tip>
+              </>
+            }
+            offering={data.offering}
+            refetch={refetch}
+            loading={isRefetching}
+          />
 
-        <RolesSection
-          offering={data.offering}
-          refetch={refetch}
-          loading={isRefetching}
-        />
+          <OfferingOptionsSection
+            type="resource_options"
+            title={
+              <>
+                {translate('Resource options')}{' '}
+                <Tip
+                  id="form-field-tooltip"
+                  label={translate(
+                    'If you want user to be able to modify resource options after creation, please configure options for user below',
+                  )}
+                  className="mx-2"
+                >
+                  <i className="fa fa-question-circle" />
+                </Tip>
+              </>
+            }
+            offering={data.offering}
+            refetch={refetch}
+            loading={isRefetching}
+          />
+
+          <AttributesSection
+            offering={data.offering}
+            category={data.category}
+            refetch={refetch}
+            loading={isRefetching}
+          />
+
+          <ComponentsSection
+            offering={data.offering}
+            components={data.components}
+            refetch={refetch}
+            loading={isRefetching}
+          />
+
+          <PlansSection
+            offering={data.offering}
+            refetch={refetch}
+            loading={isRefetching}
+          />
+
+          <OfferingImagesList offering={data.offering} />
+
+          <RolesSection
+            offering={data.offering}
+            refetch={refetch}
+            loading={isRefetching}
+          />
+        </div>
       </div>
-    </div>
+    </PageBarProvider>
   );
 };

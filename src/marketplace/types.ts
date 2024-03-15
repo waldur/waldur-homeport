@@ -86,6 +86,9 @@ export interface OrganizationGroup {
   name: string;
   type_name: string;
   url: string;
+  parent?: string;
+  parent_uuid?: string;
+  parent_name?: string;
 }
 
 export interface Offering extends GeolocationPoint {

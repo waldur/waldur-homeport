@@ -1,4 +1,4 @@
-.call-page-bar {
+.page-bar-container {
   position: sticky;
   top: calc(65px + var(--kt-toolbar-height)); /* header and toolbar height */
   z-index: 10;
@@ -8,7 +8,7 @@
   }
 }
 body:not(.toolbar-fixed) {
-  .call-page-bar {
+  .page-bar-container {
     top: 65px; /* header height */
   }
 }
