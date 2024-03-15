@@ -1,6 +1,5 @@
+import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { ProposalFormStepProps } from '@waldur/proposals/types';
-
-import { StepCard } from './StepCard';
 
 export const FormResourceRequestsStep = (props: ProposalFormStepProps) => {
   return (

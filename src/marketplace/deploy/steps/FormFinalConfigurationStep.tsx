@@ -5,10 +5,9 @@ import { getNameFieldValidators } from '@waldur/core/validators';
 import { FormGroup, StringField, TextField } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
+import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 
 import { FormStepProps } from '../types';
-
-import { StepCard } from './StepCard';
 
 export const FormFinalConfigurationStep = (props: FormStepProps) => {
   const defaultOffsetDays =

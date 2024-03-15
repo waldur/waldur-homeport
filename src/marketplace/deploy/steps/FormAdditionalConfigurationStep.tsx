@@ -1,8 +1,7 @@
 import { OptionsForm } from '@waldur/marketplace/common/OptionsForm';
+import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 
 import { FormStepProps } from '../types';
-
-import { StepCard } from './StepCard';
 
 export const FormAdditionalConfigurationStep = (props: FormStepProps) => (
   <StepCard

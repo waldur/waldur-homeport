@@ -1,13 +1,12 @@
 import { useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
 import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
 
 import { FormStepProps } from '../types';
-
-import { StepCard } from './StepCard';
 
 export const FormPlanStep = (props: FormStepProps) => {
   const plans = useMemo(
