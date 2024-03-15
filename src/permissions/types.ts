@@ -1,4 +1,6 @@
-export type RoleType = 'customer' | 'project' | 'offering' | 'call';
+import { PermissionMap } from './enums';
+
+export type RoleType = keyof typeof PermissionMap;
 
 export interface Role {
   uuid: string;

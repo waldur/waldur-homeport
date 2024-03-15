@@ -1612,7 +1612,6 @@ msgid "Call details"
 msgstr ""
 
 #: src/navigation/sidebar/CallManagementMenu.tsx
-#: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
 msgid "Call management"
 msgstr ""
@@ -1648,6 +1647,7 @@ msgid "Caller field name"
 msgstr ""
 
 #: src/marketplace/utils.ts
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/user/routes.ts
 msgid "Calls"
 msgstr ""
@@ -2860,6 +2860,7 @@ msgstr ""
 #: src/marketplace/routes.ts
 #: src/marketplace/utils.ts
 #: src/project/routes.ts
+#: src/proposals/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
@@ -8690,6 +8691,7 @@ msgstr ""
 msgid "Propagated"
 msgstr ""
 
+#: src/permissions/constants.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
