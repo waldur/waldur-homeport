@@ -120,10 +120,6 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
-#: src/proposals/PublicCallsPage.tsx
-msgid "Access calls"
-msgstr ""
-
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Access policies"
 msgstr ""
@@ -685,8 +681,11 @@ msgid "Allocation pools"
 msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Allocation strategy"
+msgstr ""
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Allocation strategy in active round"
 msgstr ""
 
 #: src/proposals/round/allocation/RoundAllocationSection.tsx
@@ -1639,9 +1638,12 @@ msgid "Caller field name"
 msgstr ""
 
 #: src/marketplace/utils.ts
-#: src/proposals/PublicCallsPage.tsx
 #: src/user/routes.ts
 msgid "Calls"
+msgstr ""
+
+#: src/proposals/PublicCallsPage.tsx
+msgid "Calls for proposals"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignForm.tsx
@@ -2931,10 +2933,6 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Deactivating"
-msgstr ""
-
-#: src/proposals/details/CallDetailsCard.tsx
-msgid "Deadline"
 msgstr ""
 
 #: src/proposals/round/allocation/RoundAllocationSection.tsx
@@ -9839,11 +9837,14 @@ msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
 msgid "Review strategy"
+msgstr ""
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Review strategy in active round"
 msgstr ""
 
 #: src/proposals/round/RoundQuotas.tsx
@@ -9994,14 +9995,21 @@ msgstr ""
 msgid "Round"
 msgstr ""
 
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Round deadlines"
+msgstr ""
+
 #: src/proposals/update/rounds/CallRoundsSection.tsx
 msgid "Round name"
 msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
+msgstr ""
+
+#: src/proposals/details/CallDetailsCard.tsx
+msgid "Round strategy in active round"
 msgstr ""
 
 #: src/proposals/update/CallUpdateBar.tsx
@@ -10332,7 +10340,6 @@ msgid "See more"
 msgstr ""
 
 #: src/marketplace/landing/FooterSection.tsx
-#: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "See offerings"
 msgstr ""
 
@@ -12029,6 +12036,10 @@ msgstr ""
 msgid "There are no actions."
 msgstr ""
 
+#: src/proposals/PublicCallsTablePlaceholder.tsx
+msgid "There are no calls for proposals yet."
+msgstr ""
+
 #: src/i18n/constants.ts
 msgid "There are no categories in catalog yet."
 msgstr ""
@@ -12152,7 +12163,6 @@ msgstr ""
 msgid "There are no projects."
 msgstr ""
 
-#: src/proposals/PublicCallsTablePlaceholder.tsx
 #: src/proposals/call-management/CallManagementTablePlaceholder.tsx
 msgid "There are no proposal calls yet."
 msgstr ""
@@ -12452,7 +12462,6 @@ msgstr ""
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr ""
@@ -14950,6 +14959,10 @@ msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "browse"
+msgstr ""
+
+#: src/proposals/PublicCallsPage.tsx
+msgid "calls for proposals"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
