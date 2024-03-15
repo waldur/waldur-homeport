@@ -143,7 +143,7 @@ export interface Customer {
   homepage?: string;
   vat_code?: string;
   image?: string;
-  is_call_managing_organization?: boolean;
+  call_managing_organization_uuid?: string;
   is_service_provider?: boolean;
   created?: string;
   organization_group?: string;

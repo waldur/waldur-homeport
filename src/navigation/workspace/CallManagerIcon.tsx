@@ -9,7 +9,7 @@ export const CallManagerIcon: FunctionComponent<{
   organization;
   className?;
 }> = ({ organization, className }) =>
-  organization.is_call_managing_organization &&
+  organization.call_managing_organization_uuid &&
   isFeatureVisible('marketplace.show_call_management_functionality') ? (
     <Tip
       label={translate('Call manager')}

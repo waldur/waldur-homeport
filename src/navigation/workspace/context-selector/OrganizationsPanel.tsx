@@ -1,4 +1,4 @@
-import { useCallback, FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { Col, ListGroupItem, Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -161,7 +161,7 @@ export const OrganizationListItem: FunctionComponent<{
             )}
           </div>
         )}
-        {item?.is_call_managing_organization &&
+        {item?.call_managing_organization_uuid &&
           isFeatureVisible(
             'marketplace.show_call_management_functionality',
           ) && (
