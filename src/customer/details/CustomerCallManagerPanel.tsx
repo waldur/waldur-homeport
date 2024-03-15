@@ -101,11 +101,14 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
         {errorInfo && <LoadingErred loadData={refetch} />}
         <AwesomeCheckbox
           label={translate('Enable call manager')}
-          value={customer.is_call_managing_organization}
+          value={customer.call_managing_organization_uuid ? true : false}
           onChange={toggleCallManager}
           disabled={
-            (!infoUuid && customer.is_call_managing_organization) ||
-            loadingToggle
+            !(
+              infoUuid ||
+              customer.call_managing_organization_uuid ||
+              loadingToggle
+            )
           }
         />
       </Card.Body>

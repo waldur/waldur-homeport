@@ -30,7 +30,7 @@ export const getCustomersPage = (
         'is_service_provider',
         'image',
         'projects_count',
-        'is_call_managing_organization',
+        'call_managing_organization_uuid',
       ],
       o: 'name',
       query,
