@@ -9,10 +9,9 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { FormGroup, SelectField, StringField, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { formatJsx, translate } from '@waldur/i18n';
+import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { loadOecdCodes } from '@waldur/project/api';
 import { ProposalFormStepProps } from '@waldur/proposals/types';
-
-import { StepCard } from './StepCard';
 
 const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 

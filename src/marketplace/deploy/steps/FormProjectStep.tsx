@@ -1,9 +1,8 @@
 import { translate } from '@waldur/i18n';
+import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 
 import { FormStepProps } from '../types';
-
-import { StepCard } from './StepCard';
 
 export const FormProjectStep = (props: FormStepProps) => {
   return (

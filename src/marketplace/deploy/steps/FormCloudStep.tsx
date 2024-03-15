@@ -8,6 +8,7 @@ import { Field } from 'redux-form';
 import { fixURL } from '@waldur/core/api';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
+import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { parseResponse } from '@waldur/table/api';
@@ -17,7 +18,6 @@ import { FormStepProps } from '../types';
 import { formProjectSelector } from '../utils';
 
 import { BoxRadioField } from './BoxRadioField';
-import { StepCard } from './StepCard';
 import { StepCardTabs, TabSpec } from './StepCardTabs';
 
 interface DataPage {
