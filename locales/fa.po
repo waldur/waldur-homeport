@@ -27,6 +27,7 @@ msgstr "پروفایل ایجاد شده است."
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
@@ -165,6 +166,7 @@ msgstr "فعال کردن"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "فعال"
@@ -1105,6 +1107,7 @@ msgstr "حذف را تایید میکنید؟"
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
@@ -1190,6 +1193,7 @@ msgstr "کشور"
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -1305,6 +1309,7 @@ msgstr "اولین پروژه را ایجاد کنید"
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueSummary.tsx
@@ -1333,6 +1338,7 @@ msgstr "اولین پروژه را ایجاد کنید"
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -1657,6 +1663,7 @@ msgid "Detaching"
 msgstr "جدا کردن"
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
@@ -1741,6 +1748,7 @@ msgstr "نام Domain"
 msgid "Domain name. If not defined default domain will be used."
 msgstr "اگر نام Domain تعریف نشده باشد،از Domain پیش فرض استفاده میشود."
 
+#: src/customer/list/OrganizationGroupDetailsDialog.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
@@ -1772,6 +1780,7 @@ msgstr "سفارش بارگیری فایل PDF"
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "پیش نویس"
@@ -1810,7 +1819,9 @@ msgstr "برای اطمینان از محاسبه صحیح داده های حس�
 #: src/administration/agreements/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
+#: src/customer/list/CategoryGroupEditButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/EditProjectUserButton.tsx
@@ -1862,7 +1873,6 @@ msgstr "برای اطمینان از محاسبه صحیح داده های حس�
 #: src/proposals/round/reviewers/EditReviewersButton.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
-#: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
@@ -1896,6 +1906,7 @@ msgstr "ویرایش اعضا گروه"
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -3097,6 +3108,9 @@ msgstr "سرویس های من"
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+#: src/customer/list/OrganizationGroupTypesList.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
@@ -3188,6 +3202,7 @@ msgstr "سرویس های من"
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -3367,6 +3382,7 @@ msgstr "توجه داشته باشید این volume به صورت جداگان�
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
+#: src/user/proposals/reviews/ReviewsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr "اینجا چیزی جهت مشاهده نیست"
 
@@ -3635,6 +3651,7 @@ msgstr "سفارش ها"
 
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -3773,6 +3790,7 @@ msgstr "سازمان {customer_name} حذف شده است."
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts

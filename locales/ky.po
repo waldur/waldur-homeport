@@ -85,6 +85,7 @@ msgstr "Профиль түзүлдү."
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
@@ -304,6 +305,7 @@ msgstr "Активдештирүү баасы"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Активдүү"
@@ -1787,6 +1789,9 @@ msgstr "Календар"
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Call"
 msgstr "Чалуу"
 
@@ -1824,6 +1829,7 @@ msgstr "Чалуу талаасынын аты"
 
 #: src/marketplace/utils.ts
 #: src/proposals/PublicCallsPage.tsx
+#: src/user/routes.ts
 msgid "Calls"
 msgstr "Чалуулар"
 
@@ -2391,6 +2397,7 @@ msgstr "Жок кылуу ырасталсынбы?"
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
@@ -2578,6 +2585,7 @@ msgstr "Купон"
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -2826,6 +2834,7 @@ msgstr "Биринчи долбооруңузду түзүңүз"
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueSummary.tsx
@@ -2854,6 +2863,7 @@ msgstr "Биринчи долбооруңузду түзүңүз"
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -3536,6 +3546,7 @@ msgid "Detailed view"
 msgstr "Толук көрүнүш"
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
@@ -3715,6 +3726,7 @@ msgstr "Домен аты"
 msgid "Domain name. If not defined default domain will be used."
 msgstr "Домен аты. Эгерде аныкталбаса, демейки домен колдонулат."
 
+#: src/customer/list/OrganizationGroupDetailsDialog.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
@@ -3755,6 +3767,7 @@ msgstr "Заказдын PDF файлын жүктөп алыңыз"
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "Долбоор"
@@ -3815,7 +3828,9 @@ msgstr "Ар бир колдонуу отчету эсептик маалыма�
 #: src/administration/agreements/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
+#: src/customer/list/CategoryGroupEditButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/EditProjectUserButton.tsx
@@ -3867,7 +3882,6 @@ msgstr "Ар бир колдонуу отчету эсептик маалыма�
 #: src/proposals/round/reviewers/EditReviewersButton.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
-#: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
@@ -4039,6 +4053,7 @@ msgstr "Чыгуу"
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -6756,6 +6771,9 @@ msgstr "Жок"
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+#: src/customer/list/OrganizationGroupTypesList.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
@@ -6847,6 +6865,7 @@ msgstr "Жок"
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -7207,6 +7226,7 @@ msgid "No organization"
 msgstr "Уюм жок"
 
 #: src/customer/list/OrganizationGroupFilter.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 msgid "No organization group types"
 msgstr "Уюм топторунун түрлөрү жок"
 
@@ -7365,6 +7385,7 @@ msgstr "Бул көлөм үчүн өзүнчө төлөнбөй турганы�
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
+#: src/user/proposals/reviews/ReviewsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr "Бул жерде көрө турган эч нерсе жок"
 
@@ -8082,6 +8103,7 @@ msgstr "Уюм талаасынын аталышы"
 
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -8198,16 +8220,20 @@ msgstr "Уюштуруу иш-чаралары"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 msgid "Organization group"
 msgstr "Уюштуруу тобу"
 
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Organization group type"
 msgstr "Уюштуруу тобунун түрү"
 
+#: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
@@ -8318,6 +8344,7 @@ msgstr "Уюштуруу{customer_name} өчүрүлгөн."
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
@@ -8830,6 +8857,7 @@ msgstr "Телефон номерлери"
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
 #: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
+#: src/proposals/update/offerings/CallOfferingExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/reporting/plan-usage/PlanUsageList.tsx
@@ -9375,7 +9403,6 @@ msgstr "Прогресс"
 #: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
-#: src/user/UserPermissionRequestsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -9598,6 +9625,7 @@ msgstr "Долбоор{project_name} өчүрүлгөн."
 
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -9638,6 +9666,7 @@ msgstr "Көбөйтүлгөн"
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
 msgid "Proposal"
 msgstr "Сунуш"
 
@@ -10165,6 +10194,7 @@ msgstr "тарабынан уруксат сурамын четке кагуу{n
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Rejected"
 msgstr "Четке кагылды"
 
@@ -10240,6 +10270,7 @@ msgstr "Алыскы колдонуучу ID"
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -10990,6 +11021,7 @@ msgstr "Рецензенттер"
 #: src/customer/routes.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/user/routes.ts
 msgid "Reviews"
 msgstr "Сын-пикирлер"
 
@@ -11019,6 +11051,7 @@ msgstr "Робот эсептери"
 msgid "Robot accounts synchronization has been scheduled."
 msgstr "Робот каттоо эсептерин синхрондоштуруу пландаштырылган."
 
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -11611,6 +11644,7 @@ msgid "Select organization group..."
 msgstr "Уюм тобун тандоо..."
 
 #: src/customer/list/OrganizationGroupFilter.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 msgid "Select organization group type..."
 msgstr "Уюм тобунун түрүн тандаңыз..."
 
@@ -11712,6 +11746,7 @@ msgstr "Кээ бир файлдарды тандаңыз"
 #: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Select state..."
 msgstr "Мамлекетти тандоо..."
 
@@ -12545,6 +12580,8 @@ msgstr "Баштоо скрипти"
 #: src/user/hooks/HooksList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -13745,6 +13782,7 @@ msgstr "Жаңы версиясын колдонуп көрүңүз"
 
 #: src/administration/agreements/UserAgreementsList.tsx
 #: src/administration/roles/RoleForm.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -13779,6 +13817,7 @@ msgstr "Жаңы версиясын колдонуп көрүңүз"
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr "Type"
@@ -17002,6 +17041,7 @@ msgstr "Заказдар"
 msgid "organization"
 msgstr "Уюштуруу"
 
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx

@@ -85,6 +85,7 @@ msgstr "একটি প্রোফাইল তৈরি করা হয়�
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
@@ -304,6 +305,7 @@ msgstr "অ্যাক্টিভেশন মূল্য"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "সক্রিয়"
@@ -1787,6 +1789,9 @@ msgstr "ক্যালেন্ডার"
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Call"
 msgstr "কল"
 
@@ -1824,6 +1829,7 @@ msgstr "কলার ক্ষেত্রের নাম"
 
 #: src/marketplace/utils.ts
 #: src/proposals/PublicCallsPage.tsx
+#: src/user/routes.ts
 msgid "Calls"
 msgstr "কল"
 
@@ -2391,6 +2397,7 @@ msgstr "মুছে ফেলা নিশ্চিত করুন?"
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
@@ -2578,6 +2585,7 @@ msgstr "কুপন"
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -2826,6 +2834,7 @@ msgstr "আপনার প্রথম প্রকল্প তৈরি ক�
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueSummary.tsx
@@ -2854,6 +2863,7 @@ msgstr "আপনার প্রথম প্রকল্প তৈরি ক�
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -3536,6 +3546,7 @@ msgid "Detailed view"
 msgstr "বিস্তারিত ভিউ"
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
@@ -3715,6 +3726,7 @@ msgstr "ডোমেন নাম"
 msgid "Domain name. If not defined default domain will be used."
 msgstr "ডোমেন নাম. সংজ্ঞায়িত না হলে ডিফল্ট ডোমেইন ব্যবহার করা হবে।"
 
+#: src/customer/list/OrganizationGroupDetailsDialog.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
@@ -3755,6 +3767,7 @@ msgstr "অর্ডার পিডিএফ ফাইল ডাউনলোড
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "খসড়া"
@@ -3815,7 +3828,9 @@ msgstr "অ্যাকাউন্টিং ডেটার সঠিক গণ
 #: src/administration/agreements/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
+#: src/customer/list/CategoryGroupEditButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/EditProjectUserButton.tsx
@@ -3867,7 +3882,6 @@ msgstr "অ্যাকাউন্টিং ডেটার সঠিক গণ
 #: src/proposals/round/reviewers/EditReviewersButton.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
-#: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
@@ -4039,6 +4053,7 @@ msgstr "প্রস্থান"
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -6756,6 +6771,9 @@ msgstr "N/A"
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+#: src/customer/list/OrganizationGroupTypesList.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
@@ -6847,6 +6865,7 @@ msgstr "N/A"
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -7207,6 +7226,7 @@ msgid "No organization"
 msgstr "সংগঠন নেই"
 
 #: src/customer/list/OrganizationGroupFilter.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 msgid "No organization group types"
 msgstr "কোন সংগঠন গ্রুপ প্রকার নেই"
 
@@ -7365,6 +7385,7 @@ msgstr "মনে রাখবেন যে এই ভলিউমের জন�
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
+#: src/user/proposals/reviews/ReviewsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr "এখানে দেখার মতো কিছু নেই"
 
@@ -8082,6 +8103,7 @@ msgstr "প্রতিষ্ঠানের ক্ষেত্রের না�
 
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -8198,16 +8220,20 @@ msgstr "সংগঠনের ঘটনা"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 msgid "Organization group"
 msgstr "সংগঠন গ্রুপ"
 
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Organization group type"
 msgstr "সংগঠন গোষ্ঠীর ধরন"
 
+#: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
@@ -8318,6 +8344,7 @@ msgstr "সংগঠন{customer_name} মুছে ফেলা হয়েছ
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
@@ -8830,6 +8857,7 @@ msgstr "ফোন নাম্বারগুলো"
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
 #: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
+#: src/proposals/update/offerings/CallOfferingExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/reporting/plan-usage/PlanUsageList.tsx
@@ -9375,7 +9403,6 @@ msgstr "অগ্রগতি"
 #: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
-#: src/user/UserPermissionRequestsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -9598,6 +9625,7 @@ msgstr "প্রকল্প{project_name} মুছে ফেলা হয়�
 
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -9638,6 +9666,7 @@ msgstr "প্রচারিত"
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
 msgid "Proposal"
 msgstr "প্রস্তাব"
 
@@ -10165,6 +10194,7 @@ msgstr "দ্বারা অনুমতি অনুরোধ প্রত্
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Rejected"
 msgstr "প্রত্যাখ্যাত"
 
@@ -10240,6 +10270,7 @@ msgstr "দূরবর্তী ব্যবহারকারী আইডি"
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -10990,6 +11021,7 @@ msgstr "রিভিউয়ার"
 #: src/customer/routes.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/user/routes.ts
 msgid "Reviews"
 msgstr "রিভিউ"
 
@@ -11019,6 +11051,7 @@ msgstr "রোবট অ্যাকাউন্ট"
 msgid "Robot accounts synchronization has been scheduled."
 msgstr "রোবট অ্যাকাউন্ট সিঙ্ক্রোনাইজেশন নির্ধারিত হয়েছে।"
 
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -11611,6 +11644,7 @@ msgid "Select organization group..."
 msgstr "সংগঠন গোষ্ঠী নির্বাচন করুন..."
 
 #: src/customer/list/OrganizationGroupFilter.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 msgid "Select organization group type..."
 msgstr "সংগঠন গোষ্ঠীর ধরন নির্বাচন করুন..."
 
@@ -11712,6 +11746,7 @@ msgstr "কিছু ফাইল নির্বাচন করুন"
 #: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Select state..."
 msgstr "রাজ্য নির্বাচন কর..."
 
@@ -12545,6 +12580,8 @@ msgstr "স্টার্টআপ স্ক্রিপ্ট"
 #: src/user/hooks/HooksList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -13745,6 +13782,7 @@ msgstr "নতুন সংস্করণ চেষ্টা করে দে�
 
 #: src/administration/agreements/UserAgreementsList.tsx
 #: src/administration/roles/RoleForm.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -13779,6 +13817,7 @@ msgstr "নতুন সংস্করণ চেষ্টা করে দে�
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr "টাইপ"
@@ -17002,6 +17041,7 @@ msgstr "আদেশ"
 msgid "organization"
 msgstr "সংগঠন"
 
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx

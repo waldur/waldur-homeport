@@ -85,6 +85,7 @@ msgstr "Sukurtas profilis."
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
@@ -304,6 +305,7 @@ msgstr "Aktyvinimo kaina"
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/support/utils.ts
 msgid "Active"
 msgstr "Aktyvus"
@@ -1787,6 +1789,9 @@ msgstr "Kalendorius"
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Call"
 msgstr "Skambinti"
 
@@ -1824,6 +1829,7 @@ msgstr "Skambintojo lauko pavadinimas"
 
 #: src/marketplace/utils.ts
 #: src/proposals/PublicCallsPage.tsx
+#: src/user/routes.ts
 msgid "Calls"
 msgstr "Skambučiai"
 
@@ -2391,6 +2397,7 @@ msgstr "Patvirtinti ištrynimą?"
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
@@ -2578,6 +2585,7 @@ msgstr "Kuponas"
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -2826,6 +2834,7 @@ msgstr "Sukurkite savo pirmąjį projektą"
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueSummary.tsx
@@ -2854,6 +2863,7 @@ msgstr "Sukurkite savo pirmąjį projektą"
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -3536,6 +3546,7 @@ msgid "Detailed view"
 msgstr "Išsamus vaizdas"
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
@@ -3715,6 +3726,7 @@ msgstr "Domeno pavadinimas"
 msgid "Domain name. If not defined default domain will be used."
 msgstr "Domeno pavadinimas. Jei nenustatytas, bus naudojamas numatytasis domenas."
 
+#: src/customer/list/OrganizationGroupDetailsDialog.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
@@ -3755,6 +3767,7 @@ msgstr "Atsisiųsti užsakymo PDF failą"
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 #: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr "Juodraštis"
@@ -3815,7 +3828,9 @@ msgstr "Kiekviena naudojimo ataskaita turi būti susieta su atsiskaitymo planu, 
 #: src/administration/agreements/UserAgreementsEditButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
+#: src/customer/list/CategoryGroupEditButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/EditProjectUserButton.tsx
@@ -3867,7 +3882,6 @@ msgstr "Kiekviena naudojimo ataskaita turi būti susieta su atsiskaitymo planu, 
 #: src/proposals/round/reviewers/EditReviewersButton.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
-#: src/proposals/update/documents/EditDocumentsButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
@@ -4039,6 +4053,7 @@ msgstr "Išėjimas"
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -6756,6 +6771,9 @@ msgstr "N/A"
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
+#: src/customer/list/OrganizationGroupTypesList.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
@@ -6847,6 +6865,7 @@ msgstr "N/A"
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
+#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -7207,6 +7226,7 @@ msgid "No organization"
 msgstr "Jokios organizacijos"
 
 #: src/customer/list/OrganizationGroupFilter.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 msgid "No organization group types"
 msgstr "Nėra organizacijų grupių tipų"
 
@@ -7365,6 +7385,7 @@ msgstr "Atminkite, kad šis tomas nebus apmokestinamas atskirai {organization}."
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
+#: src/user/proposals/reviews/ReviewsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr "Čia nieko nėra"
 
@@ -8082,6 +8103,7 @@ msgstr "Organizacijos lauko pavadinimas"
 
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -8198,16 +8220,20 @@ msgstr "Organizavimo renginiai"
 
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 msgid "Organization group"
 msgstr "Organizacijos grupė"
 
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/SupportCustomerFilter.tsx
 msgid "Organization group type"
 msgstr "Organizacijos grupės tipas"
 
+#: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
@@ -8318,6 +8344,7 @@ msgstr "Organizacija {customer_name} ištrinta."
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
@@ -8830,6 +8857,7 @@ msgstr "Telefono numeriai"
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
 #: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
+#: src/proposals/update/offerings/CallOfferingExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/reporting/plan-usage/PlanUsageList.tsx
@@ -9375,7 +9403,6 @@ msgstr "Progresas"
 #: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
-#: src/user/UserPermissionRequestsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -9598,6 +9625,7 @@ msgstr "Projektas {project_name} ištrintas."
 
 #: src/administration/dashboard/StatisticsCards.tsx
 #: src/administration/routes.ts
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -9638,6 +9666,7 @@ msgstr "Dauginamas"
 
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
 msgid "Proposal"
 msgstr "Pasiūlymas"
 
@@ -10165,6 +10194,7 @@ msgstr "Atmesti leidimo prašymą iki{name}"
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Rejected"
 msgstr "Atmesta"
 
@@ -10240,6 +10270,7 @@ msgstr "Nuotolinio vartotojo ID"
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -10990,6 +11021,7 @@ msgstr "Recenzentai"
 #: src/customer/routes.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/user/routes.ts
 msgid "Reviews"
 msgstr "Apžvalgos"
 
@@ -11019,6 +11051,7 @@ msgstr "Robotų sąskaitos"
 msgid "Robot accounts synchronization has been scheduled."
 msgstr "Suplanuotas roboto paskyrų sinchronizavimas."
 
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -11611,6 +11644,7 @@ msgid "Select organization group..."
 msgstr "Pasirinkite organizacijos grupę..."
 
 #: src/customer/list/OrganizationGroupFilter.tsx
+#: src/customer/list/OrganizationGroupFromDialog.tsx
 msgid "Select organization group type..."
 msgstr "Pasirinkite organizacijos grupės tipą..."
 
@@ -11712,6 +11746,7 @@ msgstr "Pasirinkite kai kuriuos failus"
 #: src/proposals/call-management/CallStateFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Select state..."
 msgstr "Pasirinkite valstiją ..."
 
@@ -12545,6 +12580,8 @@ msgstr "Paleidimo scenarijus"
 #: src/user/hooks/HooksList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsTableFilter.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -13745,6 +13782,7 @@ msgstr "Išbandykite naują versiją"
 
 #: src/administration/agreements/UserAgreementsList.tsx
 #: src/administration/roles/RoleForm.tsx
+#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -13779,6 +13817,7 @@ msgstr "Išbandykite naują versiją"
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
+#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr "Tipas"
@@ -17002,6 +17041,7 @@ msgstr "įsakymus"
 msgid "organization"
 msgstr "Organizacija"
 
+#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
