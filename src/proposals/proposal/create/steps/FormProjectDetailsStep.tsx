@@ -129,11 +129,9 @@ export const FormProjectDetailsStep = (props: ProposalFormStepProps) => {
               fieldProps.input.onChange(files?.length ? files[0] : null)
             }
             message={translate(
-              'Drag and drop file here or <underline></underline>',
+              'Drag and drop file here or <u>Choose file</u>',
               {
-                underline: () => (
-                  <u className="text-link">{translate('Choose file')}</u>
-                ),
+                u: (s) => <u className="text-link">{s}</u>,
               },
               formatJsx,
             )}

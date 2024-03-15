@@ -1,15 +1,22 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
+import { FunctionComponent, useCallback } from 'react';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { OrganizationUpdate } from '@waldur/customer/list/OrganizationUpdate';
 import { translate } from '@waldur/i18n';
+import { PageBarProvider } from '@waldur/marketplace/context';
+import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { getCustomer } from '@waldur/project/api';
 
+import { CustomerEditPanels } from '../details/CustomerEditPanels';
+import { CustomerManagePageBar } from '../details/CustomerManagePageBar';
+
+import { updateOrganization } from './store/actions';
+
 export const OrganizationUpdateContainer: FunctionComponent = () => {
+  useFullPage();
+
   const {
     params: { customer_uuid },
   } = useCurrentStateAndParams();
@@ -27,13 +34,33 @@ export const OrganizationUpdateContainer: FunctionComponent = () => {
       : translate('Organization update'),
   );
 
+  const updateCustomer = useCallback(
+    (formData, dispatch) => {
+      return dispatch(
+        updateOrganization({
+          ...formData,
+          uuid: customer.uuid,
+          country: formData.country?.value,
+        }),
+      );
+    },
+    [customer],
+  );
+
   return loading ? (
     <LoadingSpinner />
   ) : error ? (
     <>{translate('Unable to load customer.')}</>
   ) : (
-    <Card body>
-      <OrganizationUpdate customer={customer} />
-    </Card>
+    <PageBarProvider>
+      <CustomerManagePageBar />
+      <div className="container-xxl py-10">
+        <CustomerEditPanels
+          customer={customer}
+          canUpdate={true}
+          callback={updateCustomer}
+        />
+      </div>
+    </PageBarProvider>
   );
 };

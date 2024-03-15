@@ -1,11 +1,9 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent, useContext, useEffect } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { PageBarTab } from '@waldur/marketplace/common/PageBarTab';
-import { PageBarContext } from '@waldur/marketplace/context';
+import { PageBarTabs } from '@waldur/marketplace/common/PageBarTabs';
+import { PageBarTab } from '@waldur/marketplace/context';
 
-import './CallPageBar.scss';
 import { ProposalCall } from '../types';
 
 interface CallUpdateBarProps {
@@ -15,11 +13,8 @@ interface CallUpdateBarProps {
 export const CallUpdateBar: FunctionComponent<CallUpdateBarProps> = ({
   call,
 }) => {
-  const { state } = useCurrentStateAndParams();
-  const { tabs, addTabs, visibleSectionId } = useContext(PageBarContext);
-
-  useEffect(() => {
-    addTabs([
+  const tabs = useMemo<PageBarTab[]>(
+    () => [
       {
         key: 'rounds',
         title: (
@@ -58,27 +53,9 @@ export const CallUpdateBar: FunctionComponent<CallUpdateBarProps> = ({
         key: 'offerings',
         title: translate('Offerings'),
       },
-    ]);
-  }, []);
-
-  return (
-    <div className="call-page-bar bg-body shadow-sm">
-      <div className="container-xxl">
-        <div className="d-flex scroll-x pt-2 pb-1">
-          <div className="d-flex align-items-center w-100">
-            {tabs.map((tab) => (
-              <PageBarTab
-                key={tab.key}
-                title={tab.title}
-                name={tab.key}
-                state={state.name}
-                params={{ '#': tab.key }}
-                active={visibleSectionId === tab.key}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+    ],
+    [call],
   );
+
+  return <PageBarTabs tabs={tabs} />;
 };

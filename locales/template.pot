@@ -70,7 +70,6 @@ msgstr ""
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
@@ -120,6 +119,11 @@ msgstr ""
 msgid "Access"
 msgstr ""
 
+#: src/customer/details/CustomerAccessControlPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
+msgid "Access control"
+msgstr ""
+
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Access policies"
 msgstr ""
@@ -133,7 +137,6 @@ msgid "Access resource"
 msgstr ""
 
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "Access subnets"
 msgstr ""
 
@@ -170,7 +173,7 @@ msgstr ""
 msgid "Accounting running"
 msgstr ""
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Accounting start date"
 msgstr ""
@@ -594,7 +597,6 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -1360,7 +1362,7 @@ msgid "Bandwidth"
 msgstr ""
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank account"
 msgstr ""
@@ -1370,7 +1372,7 @@ msgid "Bank account number"
 msgstr ""
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank name"
 msgstr ""
@@ -1382,6 +1384,11 @@ msgstr ""
 #: src/rancher/RancherProviderForm.tsx
 #: src/rancher/cluster/create/marketplace.ts
 msgid "Base image name"
+msgstr ""
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
+msgid "Basic details"
 msgstr ""
 
 #: src/slurm/details/SubmitJobDialog.tsx
@@ -1400,6 +1407,8 @@ msgstr ""
 msgid "Billed yearly (20% discount)"
 msgstr ""
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/invoices/routes.ts
 msgid "Billing"
 msgstr ""
@@ -1560,6 +1569,7 @@ msgstr ""
 msgid "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr ""
 
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
@@ -1890,10 +1900,6 @@ msgstr ""
 msgid "Choices as comma-separated list"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
-msgid "Choose file"
-msgstr ""
-
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -2210,6 +2216,8 @@ msgstr ""
 msgid "Connection details"
 msgstr ""
 
+#: src/customer/details/CustomerContactPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
@@ -2217,21 +2225,19 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Contact details"
 msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
@@ -2320,6 +2326,7 @@ msgstr ""
 
 #: src/customer/create/CountryGroup.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr ""
 
@@ -3106,6 +3113,7 @@ msgstr ""
 
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
@@ -3232,6 +3240,7 @@ msgid "Detailed description"
 msgstr ""
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -3296,6 +3305,8 @@ msgid "Disabled"
 msgstr ""
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Discard"
@@ -3442,7 +3453,7 @@ msgid "Draft"
 msgstr ""
 
 #: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
-msgid "Drag and drop file here or <underline></underline>"
+msgid "Drag and drop file here or <u>Choose file</u>"
 msgstr ""
 
 #: src/core/DropzoneFiles.tsx
@@ -3706,10 +3717,10 @@ msgstr ""
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
 #: src/broadcasts/RecipientsList.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -4716,7 +4727,7 @@ msgstr ""
 msgid "Home organization domain name"
 msgstr ""
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 msgid "Homepage"
 msgstr ""
 
@@ -4818,6 +4829,10 @@ msgstr ""
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 msgid "Icon"
+msgstr ""
+
+#: src/customer/details/CustomerDetailsPanel.tsx
+msgid "Identifiers"
 msgstr ""
 
 #: src/auth/callbacks/SAML2DiscoveryCompleted.tsx
@@ -5898,6 +5913,11 @@ msgstr ""
 msgid "Measured unit"
 msgstr ""
 
+#: src/customer/details/CustomerManagePageBar.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
+msgid "Media"
+msgstr ""
+
 #: src/customer/team/CustomerUsersList.tsx
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 #: src/project/team/ProjectUsersList.tsx
@@ -6147,7 +6167,6 @@ msgstr ""
 #: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/OrganizationGroupTypesList.tsx
 #: src/customer/list/OrganizationGroupsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
@@ -6370,6 +6389,10 @@ msgstr ""
 msgid "Networks"
 msgstr ""
 
+#: src/customer/details/CustomerAccessControlPanel.tsx
+msgid "New access subnet"
+msgstr ""
+
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 msgid "New cloud"
 msgstr ""
@@ -6531,7 +6554,6 @@ msgstr ""
 msgid "No categories"
 msgstr ""
 
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
 msgstr ""
@@ -7395,10 +7417,6 @@ msgstr ""
 msgid "Organization creation request review"
 msgstr ""
 
-#: src/customer/details/CustomerDetailsPanel.tsx
-msgid "Organization details"
-msgstr ""
-
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Organization domain"
 msgstr ""
@@ -7413,6 +7431,7 @@ msgid "Organization field"
 msgstr ""
 
 #: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
@@ -7457,9 +7476,8 @@ msgstr ""
 msgid "Organization has signed a fixed price agreement"
 msgstr ""
 
-#: src/customer/details/CustomerDetailsPanel.tsx
-#: src/customer/list/OrganizationUpdate.tsx
-msgid "Organization image"
+#: src/customer/details/CustomerMediaPanel.tsx
+msgid "Organization logo"
 msgstr ""
 
 #: src/user/dashboard/CustomerPermissions.tsx
@@ -7505,7 +7523,7 @@ msgstr ""
 msgid "Organization update ({name})"
 msgstr ""
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerManage.tsx
 msgid "Organization updated successfully"
 msgstr ""
 
@@ -7895,8 +7913,8 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
@@ -8688,8 +8706,11 @@ msgstr ""
 msgid "Proposals"
 msgstr ""
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/details/CustomerErrorDialog.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 msgid "Propose changes"
 msgstr ""
 
@@ -9078,19 +9099,15 @@ msgstr ""
 msgid "Registered at:"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Registration code"
 msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
 msgid "Registration method"
-msgstr ""
-
-#: src/customer/details/CustomerDetailsPanel.tsx
-msgid "Registry code"
 msgstr ""
 
 #: src/rancher/cluster/create/RancherPluginOptionsForm.tsx
@@ -10155,7 +10172,10 @@ msgid "Save as draft"
 msgstr ""
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Save changes"
@@ -10405,7 +10425,6 @@ msgid "Select connected subnet"
 msgstr ""
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr ""
@@ -11198,7 +11217,7 @@ msgstr ""
 msgid "Special price"
 msgstr ""
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Sponsor number"
 msgstr ""
 
@@ -11708,6 +11727,7 @@ msgstr ""
 msgid "Targets"
 msgstr ""
 
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -11719,8 +11739,8 @@ msgstr ""
 msgid "Tax number"
 msgstr ""
 
-#: src/customer/list/OrganizationUpdate.tsx
-msgid "Tax percent"
+#: src/customer/details/CustomerBillingPanel.tsx
+msgid "Tax percentage"
 msgstr ""
 
 #: src/customer/routes.ts
@@ -12479,8 +12499,8 @@ msgstr ""
 msgid "URL"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
@@ -13075,6 +13095,7 @@ msgstr ""
 msgid "Unable to load organization groups"
 msgstr ""
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
 msgid "Unable to load organization groups."
 msgstr ""
@@ -13767,7 +13788,6 @@ msgstr ""
 #: src/administration/notifications/HookUpdateButton.tsx
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 #: src/broadcasts/BroadcastUpdateButton.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
@@ -14341,9 +14361,8 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "VAT code"
 msgstr ""
 
@@ -14357,10 +14376,6 @@ msgstr ""
 
 #: src/price/PriceTooltip.tsx
 msgid "VAT is not included."
-msgstr ""
-
-#: src/customer/details/CustomerDetailsPanel.tsx
-msgid "VAT rate"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx

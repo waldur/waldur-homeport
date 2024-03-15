@@ -2,15 +2,17 @@ import { FC, ReactNode, createContext, useMemo, useState } from 'react';
 
 import useScrollTracker from '@waldur/core/useScrollTracker';
 
-interface Tab {
+export interface PageBarTab {
   key: string;
   title: ReactNode;
   priority?: number;
+  state?: string;
+  params?: any;
 }
 
 interface PageBarContextModel {
-  tabs: Array<Tab>;
-  addTabs(tabs: Tab[]): void;
+  tabs: Array<PageBarTab>;
+  addTabs(tabs: PageBarTab[]): void;
   clearTabs(): void;
   visibleSectionId?: string;
 }
@@ -24,9 +26,9 @@ export const PageBarContext = createContext<PageBarContextModel>({
 });
 
 export const PageBarProvider: FC = ({ children }) => {
-  const [tabs, setTabs] = useState<Tab[]>([]);
+  const [tabs, setTabs] = useState<PageBarTab[]>([]);
 
-  const addTabs = (_tabs: Tab[]) => {
+  const addTabs = (_tabs: PageBarTab[]) => {
     const newTabs = _tabs.filter((t) => !tabs.some((t2) => t2.key === t.key));
     if (newTabs.length === 0) {
       return;

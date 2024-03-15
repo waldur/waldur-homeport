@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { translate } from '@waldur/i18n';
+import { PageBarProvider } from '@waldur/marketplace/context';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
@@ -65,22 +66,24 @@ export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps
     }, [offering]);
 
     return (
-      <div className="publicOfferingDetails m-b" id="general">
-        <PublicOfferingDetailsHero offering={offering} category={category} />
-        <PublicOfferingDetailsBar offering={offering} canDeploy={canDeploy} />
-        <div className="container-xxl py-10">
-          <PublicOfferingInfo offering={offering} category={category} />
-          <PublicOfferingComponents offering={offering} />
-          <PublicOfferingImages offering={offering} />
-          {showExperimentalUiComponents && (
-            <PublicOfferingGettingStarted offering={offering} />
-          )}
-          {showExperimentalUiComponents && <PublicOfferingFAQ />}
-          {showExperimentalUiComponents && <PublicOfferingReviews />}
-          <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
-          <PublicOfferingFacility offering={offering} />
-          {showExperimentalUiComponents && <PublicOfferingGetHelp />}
+      <PageBarProvider>
+        <div className="publicOfferingDetails m-b" id="general">
+          <PublicOfferingDetailsHero offering={offering} category={category} />
+          <PublicOfferingDetailsBar offering={offering} canDeploy={canDeploy} />
+          <div className="container-xxl py-10">
+            <PublicOfferingInfo offering={offering} category={category} />
+            <PublicOfferingComponents offering={offering} />
+            <PublicOfferingImages offering={offering} />
+            {showExperimentalUiComponents && (
+              <PublicOfferingGettingStarted offering={offering} />
+            )}
+            {showExperimentalUiComponents && <PublicOfferingFAQ />}
+            {showExperimentalUiComponents && <PublicOfferingReviews />}
+            <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
+            <PublicOfferingFacility offering={offering} />
+            {showExperimentalUiComponents && <PublicOfferingGetHelp />}
+          </div>
         </div>
-      </div>
+      </PageBarProvider>
     );
   };

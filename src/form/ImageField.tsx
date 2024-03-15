@@ -113,6 +113,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
 
         {/* Cancel image */}
         <button
+          type="button"
           className="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
           data-kt-image-input-action="cancel"
           onClick={() => changeImage(initialValue)}
@@ -128,6 +129,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
 
         {/* Remove image */}
         <button
+          type="button"
           className="btn btn-icon btn-circle btn-color-muted btn-active-color-danger w-25px h-25px bg-body shadow"
           data-kt-image-input-action="remove"
           onClick={() => changeImage('')}
