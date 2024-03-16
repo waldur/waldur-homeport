@@ -86,7 +86,6 @@ msgstr "สร้างโปรไฟล์แล้ว"
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
@@ -165,7 +164,6 @@ msgid "Access resource"
 msgstr "เข้าถึงทรัพยากร"
 
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "Access subnets"
 msgstr "เข้าถึงเครือข่ายย่อย"
 
@@ -218,7 +216,7 @@ msgstr "บันทึกทางบัญชี"
 msgid "Accounting running"
 msgstr "การบัญชีกำลังทำงานอยู่"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Accounting start date"
 msgstr "วันเริ่มต้นการบัญชี"
@@ -723,7 +721,6 @@ msgstr "รายละเอียดข้อตกลง"
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -832,7 +829,6 @@ msgid "Allocation pools"
 msgstr "พูลการจัดสรร"
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Allocation strategy"
 msgstr "กลยุทธ์การจัดสรร"
 
@@ -1528,7 +1524,7 @@ msgid "Bandwidth"
 msgstr "แบนด์วิธ"
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank account"
 msgstr "บัญชีธนาคาร"
@@ -1538,7 +1534,7 @@ msgid "Bank account number"
 msgstr "หมายเลขบัญชีธนาคาร"
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank name"
 msgstr "ชื่อธนาคาร"
@@ -1576,6 +1572,8 @@ msgstr "เรียกเก็บเงินเป็นรายเดือ
 msgid "Billed yearly (20% discount)"
 msgstr "เรียกเก็บเงินรายปี (ส่วนลด 20%)"
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/invoices/routes.ts
 msgid "Billing"
 msgstr "การเรียกเก็บเงิน"
@@ -1754,6 +1752,7 @@ msgstr "ด้วยการตั้งค่าอายุการใช้
 msgid "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr "โดยการส่งแบบฟอร์มแสดงว่าคุณยอมรับ<tos> เงื่อนไขการให้บริการ</tos> และ<pp> นโยบายความเป็นส่วนตัว</pp> ."
 
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
@@ -1800,7 +1799,6 @@ msgid "Call details"
 msgstr "รายละเอียดการโทร"
 
 #: src/navigation/sidebar/CallManagementMenu.tsx
-#: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
 msgid "Call management"
 msgstr "การจัดการการโทร"
@@ -1828,7 +1826,7 @@ msgid "Caller field name"
 msgstr "ชื่อฟิลด์ผู้โทร"
 
 #: src/marketplace/utils.ts
-#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/user/routes.ts
 msgid "Calls"
 msgstr "โทร"
@@ -2464,6 +2462,8 @@ msgstr "เครือข่ายย่อยที่เชื่อมต่
 msgid "Connection details"
 msgstr "รายละเอียดการเชื่อมต่อ"
 
+#: src/customer/details/CustomerContactPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
@@ -2471,21 +2471,19 @@ msgstr "รายละเอียดการเชื่อมต่อ"
 msgid "Contact"
 msgstr "ติดต่อ"
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Contact details"
 msgstr "รายละเอียดการติดต่อ"
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr "อีเมลติดต่อ"
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
@@ -2574,6 +2572,7 @@ msgstr "ไม่สามารถสร้างองค์กรได้"
 
 #: src/customer/create/CountryGroup.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr "ประเทศ"
 
@@ -3155,6 +3154,7 @@ msgstr "ธีมสีเข้ม"
 #: src/marketplace/routes.ts
 #: src/marketplace/utils.ts
 #: src/project/routes.ts
+#: src/proposals/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
@@ -3416,6 +3416,7 @@ msgstr "ลักษณะ"
 
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
@@ -3546,6 +3547,7 @@ msgid "Detailed view"
 msgstr "มุมมองรายละเอียด"
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -3618,6 +3620,8 @@ msgid "Disabled"
 msgstr "พิการ"
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Discard"
@@ -4051,10 +4055,10 @@ msgstr "ทางออก"
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
 #: src/broadcasts/RecipientsList.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -5172,7 +5176,7 @@ msgstr "คำนำหน้าโฮมไดเร็กทอรี"
 msgid "Home organization domain name"
 msgstr "ชื่อโดเมนองค์กรที่บ้าน"
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 msgid "Homepage"
 msgstr "หน้าแรก"
 
@@ -6774,7 +6778,6 @@ msgstr "ไม่มี"
 #: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/OrganizationGroupTypesList.tsx
 #: src/customer/list/OrganizationGroupsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
@@ -7172,7 +7175,6 @@ msgstr "ไม่มีสมาคม"
 msgid "No categories"
 msgstr "ไม่มีหมวดหมู่"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
 msgstr "ไม่มีประเทศ"
@@ -8219,6 +8221,7 @@ msgid "Organization events"
 msgstr "กิจกรรมองค์กร"
 
 #: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
@@ -8305,7 +8308,7 @@ msgstr "การปรับปรุงองค์กร"
 msgid "Organization update ({name})"
 msgstr "อัปเดตองค์กร ({name} )"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerManage.tsx
 msgid "Organization updated successfully"
 msgstr "อัปเดตองค์กรเรียบร้อยแล้ว"
 
@@ -8828,8 +8831,8 @@ msgstr "โทรศัพท์"
 msgid "Phone: {phone_number}"
 msgstr "โทรศัพท์:{phone_number}"
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
@@ -9664,6 +9667,7 @@ msgstr "เอกสารหลักฐาน"
 msgid "Propagated"
 msgstr "แพร่พันธุ์"
 
+#: src/permissions/constants.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
@@ -9676,8 +9680,11 @@ msgstr "ข้อเสนอ"
 msgid "Proposals"
 msgstr "ข้อเสนอ"
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/details/CustomerErrorDialog.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 msgid "Propose changes"
 msgstr "เสนอการเปลี่ยนแปลง"
 
@@ -10129,9 +10136,9 @@ msgstr "ลงทะเบียนองค์กรเป็นผู้ให
 msgid "Registered at:"
 msgstr "ลงทะเบียนที่:"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Registration code"
 msgstr "รหัสลงทะเบียน"
@@ -10963,7 +10970,6 @@ msgstr "ตรวจสอบคำขอ"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
@@ -11101,7 +11107,6 @@ msgstr "ชื่อกลม"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
 msgstr "กลยุทธ์แบบกลม"
 
@@ -11285,7 +11290,10 @@ msgid "Save as draft"
 msgstr "บันทึกเป็นร่าง"
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Save changes"
@@ -11486,7 +11494,6 @@ msgid "See more"
 msgstr "ดูเพิ่มเติม"
 
 #: src/marketplace/landing/FooterSection.tsx
-#: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "See offerings"
 msgstr "ดูเครื่องบูชา"
 
@@ -11565,7 +11572,6 @@ msgid "Select connected subnet"
 msgstr "เลือกเครือข่ายย่อยที่เชื่อมต่อ"
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr "เลือกประเทศ..."
@@ -12444,7 +12450,7 @@ msgstr "อะไรบางอย่างผิดปกติ"
 msgid "Special price"
 msgstr "ราคาพิเศษ"
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Sponsor number"
 msgstr "เบอร์สปอนเซอร์"
 
@@ -12979,6 +12985,7 @@ msgstr "ประเภทเป้าหมาย"
 msgid "Targets"
 msgstr "เป้าหมาย"
 
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -13453,7 +13460,6 @@ msgstr "ไม่มีโปรเจ็กต์ที่ตรงกับต
 msgid "There are no projects yet for this organization."
 msgstr "ยังไม่มีโครงการสำหรับองค์กรนี้"
 
-#: src/proposals/PublicCallsTablePlaceholder.tsx
 #: src/proposals/call-management/CallManagementTablePlaceholder.tsx
 msgid "There are no proposal calls yet."
 msgstr "ยังไม่มีการเรียกข้อเสนอ"
@@ -13817,7 +13823,6 @@ msgstr "ลองเวอร์ชันใหม่"
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr "พิมพ์"
@@ -13847,8 +13852,8 @@ msgstr "ประเภทของปัญหาที่เชื่อมโ
 msgid "URL"
 msgstr "URL"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
@@ -14506,6 +14511,7 @@ msgstr "ไม่สามารถโหลดรายละเอียดค
 msgid "Unable to load organization groups"
 msgstr "โหลดกลุ่มองค์กรไม่ได้"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
 msgid "Unable to load organization groups."
 msgstr "โหลดกลุ่มองค์กรไม่ได้"
@@ -15264,7 +15270,6 @@ msgstr "ยกเลิกการเผยแพร่เป็น Google ป�
 #: src/administration/notifications/HookUpdateButton.tsx
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 #: src/broadcasts/BroadcastUpdateButton.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
@@ -16094,9 +16099,8 @@ msgstr "ผู้ใช้จาก{provider}"
 msgid "VAT"
 msgstr "ภาษีมูลค่าเพิ่ม"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "VAT code"
 msgstr "รหัสภาษีมูลค่าเพิ่ม"
 

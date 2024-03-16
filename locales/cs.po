@@ -86,7 +86,6 @@ msgstr "Profil byl vytvořen."
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
@@ -165,7 +164,6 @@ msgid "Access resource"
 msgstr "Přístupový zdroj"
 
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "Access subnets"
 msgstr "Přístup k podsítím"
 
@@ -218,7 +216,7 @@ msgstr "Účetní záznamy"
 msgid "Accounting running"
 msgstr "Vedení účetnictví"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Accounting start date"
 msgstr "Datum zahájení účtování"
@@ -723,7 +721,6 @@ msgstr "Podrobnosti smlouvy"
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -832,7 +829,6 @@ msgid "Allocation pools"
 msgstr "Alokační fondy"
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Allocation strategy"
 msgstr "Alokační strategie"
 
@@ -1528,7 +1524,7 @@ msgid "Bandwidth"
 msgstr "Šířka pásma"
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank account"
 msgstr "Bankovní účet"
@@ -1538,7 +1534,7 @@ msgid "Bank account number"
 msgstr "Číslo bankovního účtu"
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank name"
 msgstr "Název banky"
@@ -1576,6 +1572,8 @@ msgstr "Účtováno měsíčně"
 msgid "Billed yearly (20% discount)"
 msgstr "Fakturace ročně (20% sleva)"
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/invoices/routes.ts
 msgid "Billing"
 msgstr "Platby"
@@ -1754,6 +1752,7 @@ msgstr "Nastavením životnosti tokenu na dobu neurčitou dovolíte každému, k
 msgid "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr "Odesláním formuláře souhlasíte s<tos> Podmínky služby</tos> a<pp> Zásady ochrany osobních údajů</pp> ."
 
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
@@ -1800,7 +1799,6 @@ msgid "Call details"
 msgstr "Podrobnosti o volání"
 
 #: src/navigation/sidebar/CallManagementMenu.tsx
-#: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
 msgid "Call management"
 msgstr "Správa hovorů"
@@ -1828,7 +1826,7 @@ msgid "Caller field name"
 msgstr "Název pole volajícího"
 
 #: src/marketplace/utils.ts
-#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/user/routes.ts
 msgid "Calls"
 msgstr "Volá"
@@ -2464,6 +2462,8 @@ msgstr "Připojené podsítě"
 msgid "Connection details"
 msgstr "Podrobnosti o připojení"
 
+#: src/customer/details/CustomerContactPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
@@ -2471,21 +2471,19 @@ msgstr "Podrobnosti o připojení"
 msgid "Contact"
 msgstr "Kontakt"
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Contact details"
 msgstr "Kontaktní údaje"
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr "Kontaktní e-mail"
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
@@ -2574,6 +2572,7 @@ msgstr "Nelze vytvořit organizaci"
 
 #: src/customer/create/CountryGroup.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr "Země"
 
@@ -3155,6 +3154,7 @@ msgstr "Tmavé téma"
 #: src/marketplace/routes.ts
 #: src/marketplace/utils.ts
 #: src/project/routes.ts
+#: src/proposals/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
@@ -3416,6 +3416,7 @@ msgstr "Popis"
 
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
@@ -3546,6 +3547,7 @@ msgid "Detailed view"
 msgstr "Detailní pohled"
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -3618,6 +3620,8 @@ msgid "Disabled"
 msgstr "Zakázáno"
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Discard"
@@ -4051,10 +4055,10 @@ msgstr "Egress"
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
 #: src/broadcasts/RecipientsList.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -5172,7 +5176,7 @@ msgstr "Předpona domovského adresáře"
 msgid "Home organization domain name"
 msgstr "Název domény domovské organizace"
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 msgid "Homepage"
 msgstr "Domovská stránka"
 
@@ -6774,7 +6778,6 @@ msgstr "N/A"
 #: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/OrganizationGroupTypesList.tsx
 #: src/customer/list/OrganizationGroupsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
@@ -7172,7 +7175,6 @@ msgstr "Žádná asociace"
 msgid "No categories"
 msgstr "Žádné kategorie"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
 msgstr "Žádné země"
@@ -8219,6 +8221,7 @@ msgid "Organization events"
 msgstr "Události organizace"
 
 #: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
@@ -8305,7 +8308,7 @@ msgstr "Aktualizace organizace"
 msgid "Organization update ({name})"
 msgstr "Aktualizace organizace ({name})"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerManage.tsx
 msgid "Organization updated successfully"
 msgstr "Organizace byla úspěšně aktualizována"
 
@@ -8828,8 +8831,8 @@ msgstr "Telefon"
 msgid "Phone: {phone_number}"
 msgstr "Telefon:{phone_number}"
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
@@ -9664,6 +9667,7 @@ msgstr "Důkazní dokument"
 msgid "Propagated"
 msgstr "Propagováno"
 
+#: src/permissions/constants.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
@@ -9676,8 +9680,11 @@ msgstr "Návrh"
 msgid "Proposals"
 msgstr "návrhy"
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/details/CustomerErrorDialog.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 msgid "Propose changes"
 msgstr "Navrhněte změny"
 
@@ -10129,9 +10136,9 @@ msgstr "Zaregistrujte organizaci jako poskytovatele služeb a odstraňte ji."
 msgid "Registered at:"
 msgstr "Registrováno na:"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Registration code"
 msgstr "Registrační kód"
@@ -10963,7 +10970,6 @@ msgstr "Žádost o kontrolu"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
@@ -11101,7 +11107,6 @@ msgstr "Kulatý název"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
 msgstr "Strategie kola"
 
@@ -11285,7 +11290,10 @@ msgid "Save as draft"
 msgstr "Uložit jako koncept"
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Save changes"
@@ -11486,7 +11494,6 @@ msgid "See more"
 msgstr "Podívejte se na další"
 
 #: src/marketplace/landing/FooterSection.tsx
-#: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "See offerings"
 msgstr "Podívejte se na nabídky"
 
@@ -11565,7 +11572,6 @@ msgid "Select connected subnet"
 msgstr "Vybrat připojenou podsíť"
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr "Vyberte zemi..."
@@ -12444,7 +12450,7 @@ msgstr "Něco se pokazilo"
 msgid "Special price"
 msgstr "Speciální cena"
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Sponsor number"
 msgstr "Číslo sponzora"
 
@@ -12979,6 +12985,7 @@ msgstr "Typ cíle"
 msgid "Targets"
 msgstr "Cíle"
 
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -13453,7 +13460,6 @@ msgstr "Neexistují žádné projekty, které by odpovídaly filtru."
 msgid "There are no projects yet for this organization."
 msgstr "Pro tuto organizaci zatím neexistují žádné projekty."
 
-#: src/proposals/PublicCallsTablePlaceholder.tsx
 #: src/proposals/call-management/CallManagementTablePlaceholder.tsx
 msgid "There are no proposal calls yet."
 msgstr "Zatím nejsou žádné výzvy k předkládání návrhů."
@@ -13817,7 +13823,6 @@ msgstr "Vyzkoušejte novou verzi"
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr "Typ"
@@ -13847,8 +13852,8 @@ msgstr "Typ propojeného problému"
 msgid "URL"
 msgstr "URL"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
@@ -14506,6 +14511,7 @@ msgstr "Nelze načíst podrobnosti objednávky."
 msgid "Unable to load organization groups"
 msgstr "Nelze načíst organizační skupiny"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
 msgid "Unable to load organization groups."
 msgstr "Nelze načíst organizační skupiny."
@@ -15264,7 +15270,6 @@ msgstr "Zrušit publikování jako Google Kalendář"
 #: src/administration/notifications/HookUpdateButton.tsx
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 #: src/broadcasts/BroadcastUpdateButton.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
@@ -16094,9 +16099,8 @@ msgstr "Uživatelé z{provider}"
 msgid "VAT"
 msgstr "DPH"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "VAT code"
 msgstr "Kód DPH"
 

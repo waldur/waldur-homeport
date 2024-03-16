@@ -86,7 +86,6 @@ msgstr "En profil har skapats."
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
@@ -165,7 +164,6 @@ msgid "Access resource"
 msgstr "Få tillgång till resurs"
 
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "Access subnets"
 msgstr "Delnät för åtkomst"
 
@@ -218,7 +216,7 @@ msgstr "Redovisningsposter"
 msgid "Accounting running"
 msgstr "Redovisning körs"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Accounting start date"
 msgstr "Startdatum för redovisning"
@@ -723,7 +721,6 @@ msgstr "Avtalsdetaljer"
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -832,7 +829,6 @@ msgid "Allocation pools"
 msgstr "Tilldelningspooler"
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Allocation strategy"
 msgstr "Allokeringsstrategi"
 
@@ -1528,7 +1524,7 @@ msgid "Bandwidth"
 msgstr "Bandbredd"
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank account"
 msgstr "Bankkonto"
@@ -1538,7 +1534,7 @@ msgid "Bank account number"
 msgstr "bankkontonummer"
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank name"
 msgstr "Banknamn"
@@ -1576,6 +1572,8 @@ msgstr "Faktureras månadsvis"
 msgid "Billed yearly (20% discount)"
 msgstr "Faktureras årligen (20 % rabatt)"
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/invoices/routes.ts
 msgid "Billing"
 msgstr "Fakturering"
@@ -1754,6 +1752,7 @@ msgstr "Genom att ställa in token livstid på obestämd tid tillåter du alla s
 msgid "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr "Genom att skicka in formuläret godkänner du<tos> Användarvillkor</tos> och<pp> Integritetspolicy</pp> ."
 
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
@@ -1800,7 +1799,6 @@ msgid "Call details"
 msgstr "Samtalsuppgifter"
 
 #: src/navigation/sidebar/CallManagementMenu.tsx
-#: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
 msgid "Call management"
 msgstr "Samtalshantering"
@@ -1828,7 +1826,7 @@ msgid "Caller field name"
 msgstr "Uppringarens fältnamn"
 
 #: src/marketplace/utils.ts
-#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/user/routes.ts
 msgid "Calls"
 msgstr "Samtal"
@@ -2464,6 +2462,8 @@ msgstr "Anslutna undernät"
 msgid "Connection details"
 msgstr "Anslutningsdetaljer"
 
+#: src/customer/details/CustomerContactPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
@@ -2471,21 +2471,19 @@ msgstr "Anslutningsdetaljer"
 msgid "Contact"
 msgstr "Kontakt"
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Contact details"
 msgstr "Kontaktuppgifter"
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr "Kontakt e-post"
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
@@ -2574,6 +2572,7 @@ msgstr "Det gick inte att skapa organisation"
 
 #: src/customer/create/CountryGroup.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr "Land"
 
@@ -3155,6 +3154,7 @@ msgstr "Mörkt tema"
 #: src/marketplace/routes.ts
 #: src/marketplace/utils.ts
 #: src/project/routes.ts
+#: src/proposals/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
@@ -3416,6 +3416,7 @@ msgstr "Beskrivning"
 
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
@@ -3546,6 +3547,7 @@ msgid "Detailed view"
 msgstr "Detaljerad vy"
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -3618,6 +3620,8 @@ msgid "Disabled"
 msgstr "Inaktiverad"
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Discard"
@@ -4051,10 +4055,10 @@ msgstr "Utgång"
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
 #: src/broadcasts/RecipientsList.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -5172,7 +5176,7 @@ msgstr "Hemkatalogprefix"
 msgid "Home organization domain name"
 msgstr "Hemorganisations domännamn"
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 msgid "Homepage"
 msgstr "Hemsida"
 
@@ -6774,7 +6778,6 @@ msgstr "N/A"
 #: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/OrganizationGroupTypesList.tsx
 #: src/customer/list/OrganizationGroupsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
@@ -7172,7 +7175,6 @@ msgstr "Ingen förening"
 msgid "No categories"
 msgstr "Inga kategorier"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
 msgstr "Inga länder"
@@ -8219,6 +8221,7 @@ msgid "Organization events"
 msgstr "Organisation evenemang"
 
 #: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
@@ -8305,7 +8308,7 @@ msgstr "Organisationsuppdatering"
 msgid "Organization update ({name})"
 msgstr "Organisationsuppdatering ({name})"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerManage.tsx
 msgid "Organization updated successfully"
 msgstr "Organisationen har uppdaterats"
 
@@ -8828,8 +8831,8 @@ msgstr "Telefon"
 msgid "Phone: {phone_number}"
 msgstr "telefon:{phone_number}"
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
@@ -9664,6 +9667,7 @@ msgstr "Bevisdokument"
 msgid "Propagated"
 msgstr "Förökas"
 
+#: src/permissions/constants.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
@@ -9676,8 +9680,11 @@ msgstr "Förslag"
 msgid "Proposals"
 msgstr "förslag"
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/details/CustomerErrorDialog.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 msgid "Propose changes"
 msgstr "Föreslå ändringar"
 
@@ -10129,9 +10136,9 @@ msgstr "Registrera organisationen som tjänsteleverantör och ta bort organisati
 msgid "Registered at:"
 msgstr "Registrerat på:"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Registration code"
 msgstr "Registreringskod"
@@ -10963,7 +10970,6 @@ msgstr "Granska begäran"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
@@ -11101,7 +11107,6 @@ msgstr "Runt namn"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
 msgstr "Rund strategi"
 
@@ -11285,7 +11290,10 @@ msgid "Save as draft"
 msgstr "Spara som utkast"
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Save changes"
@@ -11486,7 +11494,6 @@ msgid "See more"
 msgstr "Se mer"
 
 #: src/marketplace/landing/FooterSection.tsx
-#: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "See offerings"
 msgstr "Se erbjudanden"
 
@@ -11565,7 +11572,6 @@ msgid "Select connected subnet"
 msgstr "Välj anslutet undernät"
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr "Välj land..."
@@ -12444,7 +12450,7 @@ msgstr "Något gick fel"
 msgid "Special price"
 msgstr "Specialpris"
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Sponsor number"
 msgstr "Sponsornummer"
 
@@ -12979,6 +12985,7 @@ msgstr "Måltyp"
 msgid "Targets"
 msgstr "Mål"
 
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -13453,7 +13460,6 @@ msgstr "Det finns inga projekt matchande filter."
 msgid "There are no projects yet for this organization."
 msgstr "Det finns ännu inga projekt för den här organisationen."
 
-#: src/proposals/PublicCallsTablePlaceholder.tsx
 #: src/proposals/call-management/CallManagementTablePlaceholder.tsx
 msgid "There are no proposal calls yet."
 msgstr "Det finns inga utlysningar ännu."
@@ -13817,7 +13823,6 @@ msgstr "Testa den nya versionen"
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr "Typ"
@@ -13847,8 +13852,8 @@ msgstr "Typ av länkat problem"
 msgid "URL"
 msgstr "URL"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
@@ -14506,6 +14511,7 @@ msgstr "Det gick inte att ladda orderinformation."
 msgid "Unable to load organization groups"
 msgstr "Det gick inte att läsa in organisationsgrupper"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
 msgid "Unable to load organization groups."
 msgstr "Det gick inte att läsa in organisationsgrupper."
@@ -15264,7 +15270,6 @@ msgstr "Avpublicera som Google Kalender"
 #: src/administration/notifications/HookUpdateButton.tsx
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 #: src/broadcasts/BroadcastUpdateButton.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
@@ -16094,9 +16099,8 @@ msgstr "Användare från{provider}"
 msgid "VAT"
 msgstr "MOMS"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "VAT code"
 msgstr "MOMS-kod"
 

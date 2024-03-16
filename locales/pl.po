@@ -86,7 +86,6 @@ msgstr "Konto zostało utworzone."
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
@@ -165,7 +164,6 @@ msgid "Access resource"
 msgstr "Dostęp do zasobu"
 
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "Access subnets"
 msgstr "Dostęp do podsieci"
 
@@ -218,7 +216,7 @@ msgstr "Wpisy księgowe"
 msgid "Accounting running"
 msgstr "Prowadzenie księgowości"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Accounting start date"
 msgstr "Data rozpoczęcia księgowości"
@@ -723,7 +721,6 @@ msgstr "Szczegóły umowy"
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
@@ -832,7 +829,6 @@ msgid "Allocation pools"
 msgstr "Pule alokacji"
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Allocation strategy"
 msgstr "Strategia alokacji"
 
@@ -1528,7 +1524,7 @@ msgid "Bandwidth"
 msgstr "Przepustowość łącza"
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank account"
 msgstr "Konto"
@@ -1538,7 +1534,7 @@ msgid "Bank account number"
 msgstr "numer konta bankowego"
 
 #: src/customer/create/WizardFormSecondPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank name"
 msgstr "Nazwa banku"
@@ -1576,6 +1572,8 @@ msgstr "Rozliczane co miesiąc"
 msgid "Billed yearly (20% discount)"
 msgstr "Rozliczane co roku (20% zniżki)"
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/invoices/routes.ts
 msgid "Billing"
 msgstr "Rozliczeń"
@@ -1754,6 +1752,7 @@ msgstr "Ustawiając czas życia tokena na czas nieokreślony, pozwalasz każdemu
 msgid "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr "Przesyłając formularz wyrażasz zgodę na<tos> Warunki usługi</tos> I<pp> Polityka prywatności</pp> ."
 
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
 msgid "CIDR"
@@ -1800,7 +1799,6 @@ msgid "Call details"
 msgstr "Szczegóły połączenia"
 
 #: src/navigation/sidebar/CallManagementMenu.tsx
-#: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
 msgid "Call management"
 msgstr "Zarządzanie połączeniami"
@@ -1828,7 +1826,7 @@ msgid "Caller field name"
 msgstr "Nazwa pola wywołującego"
 
 #: src/marketplace/utils.ts
-#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/call-management/CallManagementPage.tsx
 #: src/user/routes.ts
 msgid "Calls"
 msgstr "Połączenia"
@@ -2464,6 +2462,8 @@ msgstr "Połączone podsieci"
 msgid "Connection details"
 msgstr "Szczegóły połączenia"
 
+#: src/customer/details/CustomerContactPanel.tsx
+#: src/customer/details/CustomerManagePageBar.tsx
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
@@ -2471,21 +2471,19 @@ msgstr "Szczegóły połączenia"
 msgid "Contact"
 msgstr "Kontakt"
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Contact details"
 msgstr "Dane kontaktowe"
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr "Kontaktowy adres e-mail"
 
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
@@ -2574,6 +2572,7 @@ msgstr "Nie można utworzyć organizacji"
 
 #: src/customer/create/CountryGroup.tsx
 #: src/customer/list/OrganizationDetails.tsx
+#: src/customer/list/SelectCountryField.tsx
 msgid "Country"
 msgstr "Kraj"
 
@@ -3155,6 +3154,7 @@ msgstr "Ciemny motyw"
 #: src/marketplace/routes.ts
 #: src/marketplace/utils.ts
 #: src/project/routes.ts
+#: src/proposals/routes.ts
 #: src/reporting/routes.ts
 #: src/user/routes.ts
 msgid "Dashboard"
@@ -3416,6 +3416,7 @@ msgstr "Opis"
 
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
 #: src/marketplace-flows/ProjectCreateExpandableRow.tsx
@@ -3546,6 +3547,7 @@ msgid "Detailed view"
 msgstr "Widok szczegółowy"
 
 #: src/administration/providers/ProviderCard.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
@@ -3618,6 +3620,8 @@ msgid "Disabled"
 msgstr "Niepełnosprawny"
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Discard"
@@ -4051,10 +4055,10 @@ msgstr "Wyjście"
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
 #: src/broadcasts/RecipientsList.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -5172,7 +5176,7 @@ msgstr "Prefiks katalogu domowego"
 msgid "Home organization domain name"
 msgstr "Nazwa domeny organizacji domowej"
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 msgid "Homepage"
 msgstr "Strona główna"
 
@@ -6774,7 +6778,6 @@ msgstr "N/A"
 #: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/list/OrganizationGroupTypesList.tsx
 #: src/customer/list/OrganizationGroupsList.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
@@ -7172,7 +7175,6 @@ msgstr "Żadnego stowarzyszenia"
 msgid "No categories"
 msgstr "Brak kategorii"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "No countries"
 msgstr "Brak krajów"
@@ -8219,6 +8221,7 @@ msgid "Organization events"
 msgstr "Wydarzenia organizacyjne"
 
 #: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
@@ -8305,7 +8308,7 @@ msgstr "Aktualizacja organizacji"
 msgid "Organization update ({name})"
 msgstr "Aktualizacja organizacji ({name} )"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerManage.tsx
 msgid "Organization updated successfully"
 msgstr "Organizacja została pomyślnie zaktualizowana"
 
@@ -8828,8 +8831,8 @@ msgstr "Telefon"
 msgid "Phone: {phone_number}"
 msgstr "Telefon:{phone_number}"
 
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
@@ -9664,6 +9667,7 @@ msgstr "Dokument potwierdzający"
 msgid "Propagated"
 msgstr "Propagowane"
 
+#: src/permissions/constants.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
@@ -9676,8 +9680,11 @@ msgstr "Wniosek"
 msgid "Proposals"
 msgstr "Propozycje"
 
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/details/CustomerErrorDialog.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 msgid "Propose changes"
 msgstr "Zaproponuj zmiany"
 
@@ -10129,9 +10136,9 @@ msgstr "Zarejestruj organizację jako usługodawcę i usuń ją."
 msgid "Registered at:"
 msgstr "Zarejestrowany pod adresem:"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace-flows/CustomerCreateExpandableRow.tsx
 msgid "Registration code"
 msgstr "Kod rejestracyjny"
@@ -10963,7 +10970,6 @@ msgstr "Przejrzyj prośbę"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
@@ -11101,7 +11107,6 @@ msgstr "Okrągłe imię"
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 msgid "Round strategy"
 msgstr "Okrągła strategia"
 
@@ -11285,7 +11290,10 @@ msgid "Save as draft"
 msgstr "Zapisz jako szkic"
 
 #: src/administration/branding/BrandingForm.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
+#: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerMediaPanel.tsx
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Save changes"
@@ -11486,7 +11494,6 @@ msgid "See more"
 msgstr "Zobacz więcej"
 
 #: src/marketplace/landing/FooterSection.tsx
-#: src/proposals/details/PublicCallDetailsHero.tsx
 msgid "See offerings"
 msgstr "Zobacz oferty"
 
@@ -11565,7 +11572,6 @@ msgid "Select connected subnet"
 msgstr "Wybierz połączoną podsieć"
 
 #: src/customer/create/CountryGroup.tsx
-#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr "Wybierz kraj..."
@@ -12444,7 +12450,7 @@ msgstr "Coś poszło nie tak"
 msgid "Special price"
 msgstr "Cena specjalna"
 
-#: src/customer/list/OrganizationUpdate.tsx
+#: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Sponsor number"
 msgstr "Numer sponsora"
 
@@ -12979,6 +12985,7 @@ msgstr "Typ celu"
 msgid "Targets"
 msgstr "Cele"
 
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/paypal/PayPalInvoicesList.tsx
@@ -13453,7 +13460,6 @@ msgstr "Brak projektów pasujących do filtra."
 msgid "There are no projects yet for this organization."
 msgstr "Nie ma jeszcze żadnych projektów dla tej organizacji."
 
-#: src/proposals/PublicCallsTablePlaceholder.tsx
 #: src/proposals/call-management/CallManagementTablePlaceholder.tsx
 msgid "There are no proposal calls yet."
 msgstr "Nie ma jeszcze żadnych zaproszeń do składania wniosków."
@@ -13817,7 +13823,6 @@ msgstr "Wypróbuj nową wersję"
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
 msgstr "Typ"
@@ -13847,8 +13852,8 @@ msgstr "Typ powiązanego problemu"
 msgid "URL"
 msgstr "Adres URL"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
@@ -14506,6 +14511,7 @@ msgstr "Nie można wczytać szczegółów zamówienia."
 msgid "Unable to load organization groups"
 msgstr "Nie można wczytać grup organizacji"
 
+#: src/customer/details/CustomerDetailsPanel.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
 msgid "Unable to load organization groups."
 msgstr "Nie można wczytać grup organizacji."
@@ -15264,7 +15270,6 @@ msgstr "Cofnij publikację jako Kalendarz Google"
 #: src/administration/notifications/HookUpdateButton.tsx
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 #: src/broadcasts/BroadcastUpdateButton.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/cart/ShoppingCartUpdateButton.tsx
@@ -16094,9 +16099,8 @@ msgstr "Użytkownicy z{provider}"
 msgid "VAT"
 msgstr "VAT"
 
-#: src/customer/details/CustomerDetailsPanel.tsx
+#: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationUpdate.tsx
 msgid "VAT code"
 msgstr "Kod VAT"
 
