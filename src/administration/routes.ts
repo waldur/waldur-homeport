@@ -40,10 +40,6 @@ const AdminCategoriesPage = lazyComponent(
   'AdminCategoriesPage',
 );
 
-const SupportCustomersContainer = lazyComponent(
-  () => import('@waldur/customer/list/SupportCustomersContainer'),
-  'SupportCustomersContainer',
-);
 const OrganizationUpdateContainer = lazyComponent(
   () => import('@waldur/customer/list/OrganizationUpdateContainer'),
   'OrganizationUpdateContainer',
@@ -75,13 +71,18 @@ const NotificationList = lazyComponent(
   'NotificationList',
 );
 
+const OrganizationsList = lazyComponent(
+  () => import('./organizations/OrganizationsList'),
+  'OrganizationsList',
+);
+
 const OrganizationGroupsList = lazyComponent(
-  () => import('@waldur/customer/list/OrganizationGroupsList'),
+  () => import('./organizations/OrganizationGroupsList'),
   'OrganizationGroupsList',
 );
 
 const OrganizationGroupTypesList = lazyComponent(
-  () => import('@waldur/customer/list/OrganizationGroupTypesList'),
+  () => import('./organizations/OrganizationGroupTypesList'),
   'OrganizationGroupTypesList',
 );
 
@@ -241,17 +242,16 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'admin-organization-list',
-    url: 'customers/',
+    url: 'organizations/',
     parent: 'admin-organizations',
-    component: SupportCustomersContainer,
+    component: OrganizationsList,
     data: {
-      feature: 'support.customers_list',
       breadcrumb: () => translate('Organizations'),
     },
   },
   {
     name: 'admin-organizations-group-list',
-    url: 'customer-groups/',
+    url: 'organization-groups/',
     parent: 'admin-organizations',
     component: OrganizationGroupsList,
     data: {
@@ -260,7 +260,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'admin-organization-group-types-list',
-    url: 'customer-group-types/',
+    url: 'organization-group-types/',
     parent: 'admin-organizations',
     component: OrganizationGroupTypesList,
     data: {
@@ -271,9 +271,6 @@ export const states: StateDeclaration[] = [
     name: 'admin.customer-update',
     url: 'customer-update/:customer_uuid/',
     component: OrganizationUpdateContainer,
-    data: {
-      feature: 'support.customers_list',
-    },
   },
 
   {

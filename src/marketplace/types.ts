@@ -89,6 +89,7 @@ export interface OrganizationGroup {
   parent?: string;
   parent_uuid?: string;
   parent_name?: string;
+  customers_count: number;
 }
 
 export interface Offering extends GeolocationPoint {

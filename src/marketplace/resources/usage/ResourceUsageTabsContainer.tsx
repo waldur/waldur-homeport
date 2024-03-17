@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
+import { generateColors } from '@waldur/core/generateColors';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ResourceMetaInfo } from '@waldur/marketplace/resources/usage/ResourceMetaInfo';
 import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
-import { generateColors } from '@waldur/reporting/organization-groups/utils';
 
 import { getComponentsAndUsages } from './api';
 

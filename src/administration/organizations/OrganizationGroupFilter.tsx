@@ -1,9 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
-import { organizationGroupTypeAutocomplete } from '@waldur/customer/list/api';
 import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+
+import { organizationGroupTypeAutocomplete } from './api';
 
 export const OrganizationGroupFilter: FunctionComponent = () => (
   <Field
