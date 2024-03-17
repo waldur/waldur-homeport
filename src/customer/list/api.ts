@@ -1,10 +1,7 @@
 import { ENV } from '@waldur/configs/default';
-import { deleteById, get, post, put, sendForm } from '@waldur/core/api';
+import { get, post, sendForm } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import {
-  getOrganizationGroupList,
-  getOrganizationGroupTypesList,
-} from '@waldur/marketplace/common/api';
+import { getOrganizationGroupList } from '@waldur/marketplace/common/api';
 
 interface TotalStats {
   price: number;
@@ -51,30 +48,6 @@ export const organizationGroupAutocomplete = async (
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };
 
-export const organizationGroupTypeAutocomplete = async (
-  query: string,
-  prevOptions,
-  { page },
-) => {
-  const params = {
-    name: query,
-    page: page,
-    page_size: ENV.pageSize,
-    o: 'name',
-  };
-  const response = await getOrganizationGroupTypesList(params);
-  return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
-};
-
 export const sendFinancialReport = (payload) => {
   return post('/invoice/send-financial-report-by-mail/', payload);
 };
-
-export const removeOrganizationGroup = (uuid: string) =>
-  deleteById('/organization-groups/', uuid);
-
-export const createOrganizationGroup = (data) =>
-  post('/organization-groups/', data);
-
-export const updateOrganizationGroup = (uuid, data) =>
-  put(`/organization-groups/${uuid}/`, data);

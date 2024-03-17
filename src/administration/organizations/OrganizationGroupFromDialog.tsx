@@ -13,9 +13,9 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import {
+  updateOrganizationGroup,
   createOrganizationGroup,
   organizationGroupTypeAutocomplete,
-  updateOrganizationGroup,
 } from './api';
 
 interface FormData {

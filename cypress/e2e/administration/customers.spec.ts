@@ -36,7 +36,7 @@ describe('Customers', () => {
         }
       })
 
-      .visit('/administration/customers/')
+      .visit('/administration/organizations/')
 
       .waitForSpinner();
   });

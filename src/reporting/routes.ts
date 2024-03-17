@@ -13,10 +13,6 @@ const CustomerListContainer = lazyComponent(
   () => import('@waldur/customer/list/CustomerListContainer'),
   'CustomerListContainer',
 );
-const OrganizationGroupsContainer = lazyComponent(
-  () => import('./organization-groups/OrganizationGroupsContainer'),
-  'OrganizationGroupsContainer',
-);
 const PriceList = lazyComponent(
   () => import('@waldur/marketplace/offerings/PriceList'),
   'PriceList',
@@ -70,7 +66,6 @@ export const states: StateDeclaration[] = [
     url: 'organizations/',
     component: CustomerListContainer,
     data: {
-      feature: 'support.customers_list',
       breadcrumb: () => translate('Monthly revenue'),
     },
   },
@@ -94,15 +89,6 @@ export const states: StateDeclaration[] = [
     },
   },
 
-  {
-    name: 'reporting.organizations-divisions',
-    url: 'organizations-divisions/',
-    component: OrganizationGroupsContainer,
-    data: {
-      feature: 'support.customers_list',
-      breadcrumb: () => translate('Organization groups'),
-    },
-  },
   {
     name: 'reporting.quotas',
     url: 'quotas/',

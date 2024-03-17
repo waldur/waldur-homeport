@@ -2,13 +2,13 @@ import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
+import { generateColors } from '@waldur/core/generateColors';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getProviderOffering } from '@waldur/marketplace/common/api';
 import { getProviderOfferingComponentStats } from '@waldur/marketplace/offerings/expandable/api';
 import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
 import { OfferingComponent } from '@waldur/marketplace/types';
-import { generateColors } from '@waldur/reporting/organization-groups/utils';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
 import { parseSlurmUsage } from '@waldur/slurm/details/utils';
 

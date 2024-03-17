@@ -1,14 +1,15 @@
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { OrganizationGroupEditButton } from '@waldur/customer/list/CategoryGroupEditButton';
-import { OrganizationGroupCreateButton } from '@waldur/customer/list/OrganizationGroupCreateButton';
-import { OrganizationGroupDeleteButton } from '@waldur/customer/list/OrganizationGroupDeleteButton';
-import { OrganizationGroupDetailsButton } from '@waldur/customer/list/OrganizationGroupDetailsButton';
 import { translate } from '@waldur/i18n';
 import { OrganizationGroup } from '@waldur/marketplace/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
+
+import { OrganizationGroupCreateButton } from './OrganizationGroupCreateButton';
+import { OrganizationGroupDeleteButton } from './OrganizationGroupDeleteButton';
+import { OrganizationGroupDetailsButton } from './OrganizationGroupDetailsButton';
+import { OrganizationGroupEditButton } from './OrganizationGroupEditButton';
 
 export const OrganizationGroupsList: FunctionComponent = () => {
   const tableProps = useTable({
@@ -37,6 +38,12 @@ export const OrganizationGroupsList: FunctionComponent = () => {
         {
           title: translate('Name'),
           render: ({ row }) => <>{row.name}</>,
+          orderField: 'name',
+        },
+        {
+          title: translate('Organisations'),
+          render: ({ row }) => <>{row.customers_count}</>,
+          orderField: 'customers_count',
         },
       ]}
       verboseName={translate('Organization groups')}
