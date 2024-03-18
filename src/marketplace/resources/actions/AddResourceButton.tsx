@@ -5,11 +5,11 @@ import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n/translate';
 import { getSubResourcesOfferings } from '@waldur/marketplace/common/api';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
-import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import { Resource } from '@waldur/resource/types';
 
 interface AddResourceButtonProps {
   resource: Resource;
+  offeringType: string;
 }
 
 export const AddResourceButton = (props: AddResourceButtonProps) => {
@@ -19,7 +19,7 @@ export const AddResourceButton = (props: AddResourceButtonProps) => {
   );
 
   const relatedOfferingUuid = value?.length
-    ? value.find((offering) => offering.type === INSTANCE_TYPE).uuid
+    ? value.find((offering) => offering.type === props.offeringType).uuid
     : null;
 
   return loading ? (

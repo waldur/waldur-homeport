@@ -10,6 +10,8 @@ import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { ResourceSummaryField } from '@waldur/resource/summary/VirtualMachineSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 
+import { INSTANCE_TYPE } from '../constants';
+
 const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
@@ -37,7 +39,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('instances')}
-      actions={<AddResourceButton resource={props.resource} />}
+      actions={
+        <AddResourceButton
+          resource={props.resource}
+          offeringType={INSTANCE_TYPE}
+        />
+      }
       hoverableRow={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}

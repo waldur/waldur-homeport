@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
@@ -9,7 +10,7 @@ import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
 
-import { AttachVolumeAction } from '../openstack-instance/actions/AttachVolumeAction';
+import { VOLUME_TYPE } from '../constants';
 
 import { formatInstance } from './OpenStackVolumeSummary';
 
@@ -44,7 +45,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       hasQuery={true}
-      actions={<AttachVolumeAction resource={props.resource} />}
+      actions={
+        <AddResourceButton
+          resource={props.resource}
+          offeringType={VOLUME_TYPE}
+        />
+      }
       verboseName={translate('volumes')}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hoverableRow={({ row }) => (
