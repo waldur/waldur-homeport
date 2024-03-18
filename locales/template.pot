@@ -168,7 +168,7 @@ msgstr ""
 msgid "Accounting record"
 msgstr ""
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr ""
@@ -7322,6 +7322,10 @@ msgstr ""
 msgid "Organisation field name"
 msgstr ""
 
+#: src/administration/organizations/OrganizationGroupsList.tsx
+msgid "Organisations"
+msgstr ""
+
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/organizations/SupportCustomerList.tsx
 #: src/booking/BookingsList.tsx
@@ -7432,7 +7436,7 @@ msgid "Organization field"
 msgstr ""
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -7446,7 +7450,7 @@ msgid "Organization group details of {orgName}"
 msgstr ""
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 msgid "Organization group type"
 msgstr ""
 
@@ -10737,7 +10741,7 @@ msgstr ""
 msgid "Service discovery"
 msgstr ""
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
