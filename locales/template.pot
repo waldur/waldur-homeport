@@ -7228,10 +7228,6 @@ msgstr ""
 msgid "OpenStack volume"
 msgstr ""
 
-#: src/proposals/details/CallDetailsCard.tsx
-msgid "Opening date"
-msgstr ""
-
 #: src/marketplace/offerings/update/options/AddOptionDialog.tsx
 msgid "Option has been added successfully."
 msgstr ""
@@ -10011,10 +10007,6 @@ msgstr ""
 #: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 msgid "Round"
-msgstr ""
-
-#: src/proposals/details/CallDetailsCard.tsx
-msgid "Round deadlines"
 msgstr ""
 
 #: src/proposals/update/rounds/CallRoundsSection.tsx
