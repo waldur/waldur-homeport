@@ -65,10 +65,10 @@ export const ResourceSummary: FunctionComponent<{
       value={resource.backend_metadata?.action}
     />
     <Field label={translate('Error message')}>
-      {resource.error_message || scope.error_message}
+      {resource.error_message || scope?.error_message}
     </Field>
     <Field label={translate('Error traceback')}>
-      {resource.error_traceback || scope.error_traceback}
+      {resource.error_traceback || scope?.error_traceback}
     </Field>
 
     {resource.attributes ? (
