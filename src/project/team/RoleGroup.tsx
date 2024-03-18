@@ -38,7 +38,7 @@ export const RoleGroup: FunctionComponent<{ types: RoleType[] }> = ({
       name="role"
       component={SelectField}
       options={getRoles(types)}
-      getOptionLabel={({ description }) => description}
+      getOptionLabel={(role) => role.description || role.name}
       getOptionValue={({ name }) => name}
       validate={[required]}
       components={{ Option: RoleOption }}
