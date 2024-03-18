@@ -56,11 +56,11 @@ msgstr "Een eenmalige vergoeding die wordt toegepast op activering."
 msgid "A profile has been created."
 msgstr "Er is een profiel aangemaakt."
 
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
@@ -136,8 +136,8 @@ msgstr "Boekhoudkundig record"
 msgid "Accounting records"
 msgstr "Boekhoudkundig records"
 
+#: src/administration/organizations/SupportCustomerFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
 msgid "Accounting running"
 msgstr "Boekhouding loopt"
 
@@ -1442,12 +1442,12 @@ msgid "Confirm deletion?"
 msgstr "Verwijdering bevestigen?"
 
 #: src/administration/TokenDeleteButton.tsx
+#: src/administration/organizations/OrganizationGroupDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
-#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
@@ -1506,14 +1506,14 @@ msgstr "Verbindingsdetails"
 msgid "Contact details"
 msgstr "Contact details"
 
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr "Contact e-mail"
 
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr "Contact telefoon"
@@ -1562,10 +1562,10 @@ msgid "Country"
 msgstr "Land"
 
 #: src/administration/agreements/UserAgreementCreateButton.tsx
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
-#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -1690,10 +1690,10 @@ msgstr "Maak uw eerste project"
 
 #: src/administration/TokensList.tsx
 #: src/administration/notifications/HooksList.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueSummary.tsx
@@ -2114,9 +2114,9 @@ msgstr "Loskoppelen"
 msgid "Detaching"
 msgstr "Ontkoppeling"
 
+#: src/administration/organizations/OrganizationGroupDetailsButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/customer/details/CustomerBillingPanel.tsx
-#: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
@@ -2236,7 +2236,7 @@ msgstr "Domeinnaam"
 msgid "Domain name. If not defined default domain will be used."
 msgstr "Domeinnaam. Indien niet gedefinieerd standaarddomein zal worden gebruikt."
 
-#: src/customer/list/OrganizationGroupDetailsDialog.tsx
+#: src/administration/organizations/OrganizationGroupDetailsDialog.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
@@ -2309,11 +2309,11 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr "Elk gebruiksrapport moet gekoppeld zijn aan een factureringsplan om een correcte berekening van de boekhoudgegevens te garanderen."
 
 #: src/administration/agreements/UserAgreementsEditButton.tsx
+#: src/administration/organizations/OrganizationGroupEditButton.tsx
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
-#: src/customer/list/CategoryGroupEditButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
-#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/EditProjectUserButton.tsx
@@ -2423,13 +2423,13 @@ msgid "Egress"
 msgstr "Uitgaand"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -4185,6 +4185,10 @@ msgstr "Mijn diensten"
 msgid "N/A"
 msgstr "N/A"
 
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
+#: src/administration/organizations/OrganizationGroupTypesList.tsx
+#: src/administration/organizations/OrganizationGroupsList.tsx
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -4195,10 +4199,6 @@ msgstr "N/A"
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupFromDialog.tsx
-#: src/customer/list/OrganizationGroupTypesList.tsx
-#: src/customer/list/OrganizationGroupsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -4983,10 +4983,10 @@ msgstr "Besteloverzicht"
 msgid "Orders"
 msgstr "Bestellingen"
 
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
@@ -5135,13 +5135,13 @@ msgid "Organization {customer_name} has been deleted."
 msgstr "Organisatie {customer_name} is verwijderd."
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/administration/routes.ts
 #: src/broadcasts/BroadcastExpandableRow.tsx
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -5979,8 +5979,8 @@ msgid "Project {project_name} has been deleted."
 msgstr "Project {project_name} is verwijderd."
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/routes.ts
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -6383,10 +6383,10 @@ msgstr "Externe beveiligingsgroep"
 
 #: src/administration/TokenDeleteButton.tsx
 #: src/administration/notifications/HookRemoveButton.tsx
+#: src/administration/organizations/OrganizationGroupDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
-#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -6866,7 +6866,7 @@ msgstr "Beoordelingen"
 msgid "Revoke"
 msgstr "Intrekken"
 
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -7039,7 +7039,6 @@ msgstr "Sankey diagram"
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 #: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/reporting/invoices/utils.ts
-#: src/reporting/organization-groups/utils.ts
 msgid "Save"
 msgstr "Opslaan"
 
@@ -7430,8 +7429,8 @@ msgstr "Dienst manager"
 msgid "Service manager of:"
 msgstr "Dienst manager van:"
 
+#: src/administration/organizations/SupportCustomerFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
@@ -8620,8 +8619,8 @@ msgid "Try again"
 msgstr "Opnieuw proberen"
 
 #: src/administration/agreements/UserAgreementsList.tsx
+#: src/administration/organizations/OrganizationGroupsList.tsx
 #: src/administration/roles/RoleForm.tsx
-#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -9051,7 +9050,6 @@ msgstr "Kan algemene beoordeling tevredenheid klantenondersteuning niet laden."
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/providers/dashboard/ProviderWidgets.tsx
-#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Unable to load data"
 msgstr "Kan gegevens niet laden"
 
@@ -10610,7 +10608,7 @@ msgstr "bestel artikelen"
 msgid "organization"
 msgstr "organisatie"
 
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx

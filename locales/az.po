@@ -86,11 +86,11 @@ msgstr "Aktivləşdirmə zamanı birdəfəlik ödəniş tətbiq olunur."
 msgid "A profile has been created."
 msgstr "Profil yaradıldı."
 
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
@@ -219,8 +219,8 @@ msgstr "Uçot qeydi "
 msgid "Accounting records"
 msgstr "Uçot sənədləri"
 
+#: src/administration/organizations/SupportCustomerFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
 msgid "Accounting running"
 msgstr "Mühasibat uçotu"
 
@@ -2485,12 +2485,12 @@ msgid "Confirm deletion?"
 msgstr "Silinməni təsdiqləmək?"
 
 #: src/administration/TokenDeleteButton.tsx
+#: src/administration/organizations/OrganizationGroupDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
-#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
@@ -2572,14 +2572,14 @@ msgstr "əlaqə saxlayın"
 msgid "Contact details"
 msgstr "Əlaqə məlumatları"
 
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr "Əlaqə e-poçtu"
 
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr "Əlaqə telefonu"
@@ -2676,10 +2676,10 @@ msgid "Coupon"
 msgstr "kupon"
 
 #: src/administration/agreements/UserAgreementCreateButton.tsx
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
-#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -2929,10 +2929,10 @@ msgstr "İlk layihənizi yaradın"
 
 #: src/administration/TokensList.tsx
 #: src/administration/notifications/HooksList.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/booking/BookingsListExpandableRow.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueSummary.tsx
@@ -3673,9 +3673,9 @@ msgstr "Ətraflı təsvir"
 msgid "Detailed view"
 msgstr "Ətraflı görünüş"
 
+#: src/administration/organizations/OrganizationGroupDetailsButton.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/customer/details/CustomerBillingPanel.tsx
-#: src/customer/list/OrganizationGroupDetailsButton.tsx
 #: src/invoices/list/MonthOverview.tsx
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
@@ -3865,7 +3865,7 @@ msgstr "Domen adı"
 msgid "Domain name. If not defined default domain will be used."
 msgstr "Domen adı. Müəyyən edilməyibsə, standart domendən istifadə ediləcək"
 
-#: src/customer/list/OrganizationGroupDetailsDialog.tsx
+#: src/administration/organizations/OrganizationGroupDetailsDialog.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
@@ -3969,11 +3969,11 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr "Hər bir istifadə hesabatı mühasibat məlumatlarının düzgün hesablanmasını təmin etmək üçün hesablama planı ilə əlaqələndirilməlidir."
 
 #: src/administration/agreements/UserAgreementsEditButton.tsx
+#: src/administration/organizations/OrganizationGroupEditButton.tsx
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
-#: src/customer/list/CategoryGroupEditButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
-#: src/customer/list/OrganizationGroupFromDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/PaymentActions.tsx
 #: src/customer/team/EditProjectUserButton.tsx
@@ -4211,13 +4211,13 @@ msgid "Egress"
 msgstr "Çıxış"
 
 #: src/administration/notifications/HooksList.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -7009,6 +7009,10 @@ msgstr "Mənim xidmətlərim"
 msgid "N/A"
 msgstr "Yoxdur "
 
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
+#: src/administration/organizations/OrganizationGroupTypesList.tsx
+#: src/administration/organizations/OrganizationGroupsList.tsx
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -7019,10 +7023,6 @@ msgstr "Yoxdur "
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupFromDialog.tsx
-#: src/customer/list/OrganizationGroupTypesList.tsx
-#: src/customer/list/OrganizationGroupsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -7483,8 +7483,8 @@ msgstr "Təklif yoxdur"
 msgid "No organization"
 msgstr "Təşkilat yoxdur"
 
-#: src/customer/list/OrganizationGroupFilter.tsx
-#: src/customer/list/OrganizationGroupFromDialog.tsx
+#: src/administration/organizations/OrganizationGroupFilter.tsx
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
 msgid "No organization group types"
 msgstr "Təşkilat qrupu növləri yoxdur"
 
@@ -8394,10 +8394,10 @@ msgstr "Təsdiq edilən sifarişlər"
 msgid "Organisation field name"
 msgstr "Təşkilat sahəsinin adı"
 
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
@@ -8515,28 +8515,27 @@ msgstr "Təşkilat tədbirləri"
 msgid "Organization field"
 msgstr "Təşkilat sahəsi"
 
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/SupportCustomerFilter.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 msgid "Organization group"
 msgstr "Təşkilat qrupu"
 
-#: src/customer/list/OrganizationGroupFromDialog.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
+#: src/administration/organizations/SupportCustomerFilter.tsx
 msgid "Organization group type"
 msgstr "Təşkilat qrupu növü"
 
+#: src/administration/organizations/OrganizationGroupsList.tsx
 #: src/administration/routes.ts
-#: src/customer/list/OrganizationGroupsList.tsx
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 #: src/reporting/dashboard/ReportingWidgets.tsx
-#: src/reporting/routes.ts
 msgid "Organization groups"
 msgstr "təşkilat qrupları"
 
@@ -8642,13 +8641,13 @@ msgid "Organization {customer_name} has been deleted."
 msgstr "Təşkilat {customer_name} silindi."
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/SupportCustomerList.tsx
 #: src/administration/routes.ts
 #: src/broadcasts/BroadcastExpandableRow.tsx
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
-#: src/customer/list/SupportCustomerList.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -9967,8 +9966,8 @@ msgid "Project {project_name} has been deleted."
 msgstr "{project_name} layihəsi silindi.\t"
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/routes.ts
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
 #: src/customer/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -10627,10 +10626,10 @@ msgstr "Uzaq istifadəçi identifikatoru"
 
 #: src/administration/TokenDeleteButton.tsx
 #: src/administration/notifications/HookRemoveButton.tsx
+#: src/administration/organizations/OrganizationGroupDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
-#: src/customer/list/OrganizationGroupDeleteButton.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -11430,7 +11429,7 @@ msgstr "Robot hesabları"
 msgid "Robot accounts synchronization has been scheduled."
 msgstr "Robot hesablarının sinxronizasiyası planlaşdırılıb."
 
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -11669,7 +11668,6 @@ msgstr "Məmnuniyyət sahəsinin adı"
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 #: src/proposals/update/reviewers/AddUserDialog.tsx
 #: src/reporting/invoices/utils.ts
-#: src/reporting/organization-groups/utils.ts
 msgid "Save"
 msgstr "Yaddaşda saxlamaq"
 
@@ -12070,8 +12068,8 @@ msgstr "Təşkilat seçin ..."
 msgid "Select organization group..."
 msgstr "Təşkilat qrupunu seçin..."
 
-#: src/customer/list/OrganizationGroupFilter.tsx
-#: src/customer/list/OrganizationGroupFromDialog.tsx
+#: src/administration/organizations/OrganizationGroupFilter.tsx
+#: src/administration/organizations/OrganizationGroupFromDialog.tsx
 msgid "Select organization group type..."
 msgstr "Təşkilat qrupu növünü seçin..."
 
@@ -12354,8 +12352,8 @@ msgstr "Xidmət meneceri"
 msgid "Service manager of:"
 msgstr "Xidmət meneceri:"
 
+#: src/administration/organizations/SupportCustomerFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
-#: src/customer/list/SupportCustomerFilter.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
@@ -14286,8 +14284,8 @@ msgid "Try out new version"
 msgstr "Yeni versiyanı sınayın"
 
 #: src/administration/agreements/UserAgreementsList.tsx
+#: src/administration/organizations/OrganizationGroupsList.tsx
 #: src/administration/roles/RoleForm.tsx
-#: src/customer/list/OrganizationGroupsList.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -14881,7 +14879,6 @@ msgstr "Müştəri dəstəyi məmnuniyyəti ümumi reytinqini yükləyə bilmə"
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/providers/dashboard/ProviderWidgets.tsx
-#: src/reporting/organization-groups/OrganizationGroupsChart.tsx
 msgid "Unable to load data"
 msgstr "Məlumatları yükləmək mümkün deyil"
 
@@ -17628,7 +17625,7 @@ msgstr "Sifarişlər"
 msgid "organization"
 msgstr "təşkilat"
 
-#: src/customer/list/OrganizationGroupOrganizationsList.tsx
+#: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
