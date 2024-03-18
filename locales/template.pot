@@ -11746,7 +11746,6 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr ""
 
@@ -14140,7 +14139,6 @@ msgid "User agreement was updated"
 msgstr ""
 
 #: src/administration/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr ""
 
