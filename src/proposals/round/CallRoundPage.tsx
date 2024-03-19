@@ -12,7 +12,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { getProtectedCall, getProtectedCallRound } from '../api';
 
 import { RoundAllocationSection } from './allocation/RoundAllocationSection';
-import { RoundProposalsSection } from './proposals/RoundProposalsSection';
+import { RoundProposalsList } from './proposals/RoundProposalsList';
 import { RoundReviewSection } from './review/RoundReviewSection';
 import { RoundReviewersSection } from './reviewers/RoundReviewersSection';
 import { RoundPageBar } from './RoundPageBar';
@@ -67,10 +67,7 @@ export const CallRoundPage: FunctionComponent = () => {
         <RoundPageHero round={round} call={call} />
         <RoundPageBar />
         <div className="container-xxl py-10">
-          <RoundProposalsSection
-            round_uuid={round.uuid}
-            call_uuid={call.uuid}
-          />
+          <RoundProposalsList round_uuid={round.uuid} call_uuid={call.uuid} />
           <RoundSubmissionSection
             round={round}
             call={call}

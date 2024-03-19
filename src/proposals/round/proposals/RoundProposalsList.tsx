@@ -6,9 +6,9 @@ import { Table } from '@waldur/table';
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/utils';
 
-import { RoundProposalsTablePlaceholder } from './RoundProposalsTablePlaceholder';
+import { RoundProposalsPlaceholder } from './RoundProposalsPlaceholder';
 
-interface RoundProposalsSectionProps {
+interface RoundProposalsListProps {
   round_uuid: string;
   call_uuid: string;
 }
@@ -21,9 +21,7 @@ const ProposalNameField = ({ row }) => {
   );
 };
 
-export const RoundProposalsSection: FC<RoundProposalsSectionProps> = (
-  props,
-) => {
+export const RoundProposalsList: FC<RoundProposalsListProps> = (props) => {
   const tableProps = useTable({
     table: 'RoundProposalsList',
     fetchData: createFetcher(
@@ -37,7 +35,7 @@ export const RoundProposalsSection: FC<RoundProposalsSectionProps> = (
       {...tableProps}
       id="proposals"
       className="mb-7"
-      placeholderComponent={<RoundProposalsTablePlaceholder />}
+      placeholderComponent={<RoundProposalsPlaceholder />}
       columns={[
         {
           title: translate('Name'),

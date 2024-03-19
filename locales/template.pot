@@ -658,7 +658,7 @@ msgstr ""
 msgid "All resources will be scheduled for termination once the date is reached."
 msgstr ""
 
-#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Allocated"
 msgstr ""
 
@@ -1274,7 +1274,7 @@ msgstr ""
 msgid "Availability:"
 msgstr ""
 
-#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Available"
 msgstr ""
 
@@ -1557,7 +1557,7 @@ msgstr ""
 msgid "Business hours"
 msgstr ""
 
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/proposals/round/proposals/RoundProposalsList.tsx
 msgid "By"
 msgstr ""
 
@@ -2607,7 +2607,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/proposals/round/proposals/RoundProposalsList.tsx
 #: src/proposals/utils.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -2844,7 +2844,7 @@ msgid "Customers"
 msgstr ""
 
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
-#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/CallRoundsList.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Cutoff date"
 msgstr ""
@@ -6250,7 +6250,7 @@ msgstr ""
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/proposals/round/proposals/RoundProposalsList.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -6752,7 +6752,7 @@ msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
-#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
+#: src/proposals/round/proposals/RoundProposalsPlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
@@ -8716,7 +8716,7 @@ msgid "Proposal created successfully"
 msgstr ""
 
 #: src/proposals/round/RoundPageBar.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/proposals/round/proposals/RoundProposalsList.tsx
 #: src/user/routes.ts
 msgid "Proposals"
 msgstr ""
@@ -10022,7 +10022,7 @@ msgstr ""
 msgid "Round"
 msgstr ""
 
-#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Round name"
 msgstr ""
 
@@ -10036,7 +10036,7 @@ msgid "Round strategy in active round"
 msgstr ""
 
 #: src/proposals/update/CallUpdateBar.tsx
-#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Rounds"
 msgstr ""
 
@@ -11250,7 +11250,7 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
-#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/CallRoundsList.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Start date"
 msgstr ""
@@ -11343,9 +11343,9 @@ msgstr ""
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
-#: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/proposals/round/proposals/RoundProposalsList.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
-#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/CallRoundsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -11466,7 +11466,7 @@ msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/round/RoundQuotas.tsx
-#: src/proposals/update/rounds/CallRoundsSection.tsx
+#: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Submissions"
 msgstr ""
 
@@ -14775,7 +14775,7 @@ msgstr ""
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
-#: src/proposals/round/proposals/RoundProposalsTablePlaceholder.tsx
+#: src/proposals/round/proposals/RoundProposalsPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "You can set the first round for this call."
 msgstr ""

@@ -11,11 +11,11 @@ import { CallRoundsTablePlaceholder } from './CallRoundsTablePlaceholder';
 import { RoundCreateButton } from './RoundCreateButton';
 import { RoundExpandableRow } from './RoundExpandableRow';
 
-interface CallRoundsSectionProps {
+interface CallRoundsListProps {
   call: Call;
 }
 
-export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
+export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
   const tableProps = useTable({
     table: 'CallRoundsList',
     fetchData: createFetcher(

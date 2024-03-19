@@ -17,7 +17,7 @@ import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
 import { CallReviewersSection } from './reviewers/CallReviewersSection';
-import { CallRoundsSection } from './rounds/CallRoundsSection';
+import { CallRoundsList } from './rounds/CallRoundsList';
 
 export const CallUpdateContainer: FunctionComponent = () => {
   useFullPage();
@@ -46,7 +46,7 @@ export const CallUpdateContainer: FunctionComponent = () => {
         <CallUpdateHero call={data} refetch={refetch} />
         <CallUpdateBar call={data} />
         <div className="container-xxl py-10">
-          <CallRoundsSection call={data} />
+          <CallRoundsList call={data} />
           <CallGeneralSection
             call={data}
             refetch={refetch}
