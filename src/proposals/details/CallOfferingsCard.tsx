@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { OfferingsListTablePlaceholder } from '@waldur/marketplace/offerings/list/OfferingsListTablePlaceholder';
 import { Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
@@ -16,19 +15,17 @@ interface CallOfferingsCardProps {
 export const CallOfferingsCard: FC<CallOfferingsCardProps> = (props) => {
   const tableProps = useTable({
     table: 'CallOfferingsList',
-    fetchData: Promise.resolve({
-      rows: props.call.offerings,
-      resultCount: props.call.offerings.length,
-    }),
+    fetchData: () =>
+      Promise.resolve({
+        rows: props.call.offerings,
+        resultCount: props.call.offerings.length,
+      }),
   });
 
   return (
     <Table<CallOffering>
       {...tableProps}
       id="offerings"
-      placeholderComponent={
-        <OfferingsListTablePlaceholder showActions={true} />
-      }
       columns={[
         {
           title: translate('Offering name'),
