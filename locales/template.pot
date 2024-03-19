@@ -11306,6 +11306,7 @@ msgid "Startup script"
 msgstr ""
 
 #: src/administration/notifications/HooksList.tsx
+#: src/administration/notifications/HooksListFilter.tsx
 #: src/booking/BookingsList.tsx
 #: src/broadcasts/BroadcastList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
