@@ -7,20 +7,20 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const CategoryEditDialog = lazyComponent(
-  () => import('./CategoryFromDialog'),
-  'CategoryFromDialog',
+  () => import('./CategoryEditDialog'),
+  'CategoryEditDialog',
 );
-
-const categoryEditDialog = (row, refetch) =>
-  openModalDialog(CategoryEditDialog, {
-    resolve: { category: row, refetch },
-    size: 'md',
-  });
 
 export const CategoryEditButton = ({ row, refetch }) => {
   const dispatch = useDispatch();
   const openFormDialog = useCallback(
-    () => dispatch(categoryEditDialog(row, refetch)),
+    () =>
+      dispatch(
+        openModalDialog(CategoryEditDialog, {
+          resolve: { category: row, refetch },
+          size: 'md',
+        }),
+      ),
     [dispatch],
   );
 

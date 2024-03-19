@@ -28,7 +28,7 @@ interface FormData {
   default_tenant_category: boolean;
 }
 
-export const CategoryFromDialog = connect<
+export const CategoryEditDialog = connect<
   {},
   {},
   { resolve: { category?; refetch } }
@@ -150,6 +150,7 @@ export const CategoryFromDialog = connect<
               tooltip={translate(
                 'Set to true if this category is for OpenStack Volume. Only one category can have "true" value.',
               )}
+              hideLabel
             />
             <AwesomeCheckboxField
               name="default_vm_category"
@@ -158,6 +159,7 @@ export const CategoryFromDialog = connect<
               tooltip={translate(
                 'Set to "true" if this category is for OpenStack VM. Only one category can have "true" value.',
               )}
+              hideLabel
             />
             <AwesomeCheckboxField
               name="default_tenant_category"
@@ -166,6 +168,7 @@ export const CategoryFromDialog = connect<
               tooltip={translate(
                 'Set to true if this category is for OpenStack Tenant. Only one category can have "true" value.',
               )}
+              hideLabel
             />
           </FormContainer>
         </ModalDialog>
