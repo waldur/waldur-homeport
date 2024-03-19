@@ -59,6 +59,8 @@ export interface Call {
   manager: string;
   customer_name: string;
   created_by: string;
+
+  backend_id?: string;
   offerings: Offering[];
   rounds: Round[];
 }

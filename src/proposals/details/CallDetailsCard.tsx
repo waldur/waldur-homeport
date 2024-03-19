@@ -6,7 +6,6 @@ import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { CallStateField } from '../CallStateField';
 import { Call } from '../types';
 import {
   formatRoundAllocationStrategy,
@@ -38,10 +37,9 @@ export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
       </Card.Header>
       <Card.Body>
         <Field
-          label={translate('Status')}
-          value={<CallStateField call={call} />}
+          label={translate('Reference code')}
+          value={call.backend_id || <>&mdash;</>}
         />
-        <Field label={translate('Reference')} value="-" />
         <Field
           label={translate('Publication date')}
           value={renderFieldOrDash(formatDateTime(call.start_time))}

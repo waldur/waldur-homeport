@@ -9074,9 +9074,6 @@ msgid "Redeploy"
 msgstr ""
 
 #: src/proposals/details/CallDetailsCard.tsx
-msgid "Reference"
-msgstr ""
-
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 msgid "Reference code"
@@ -11390,7 +11387,6 @@ msgstr ""
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
