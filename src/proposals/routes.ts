@@ -36,6 +36,11 @@ const ProposalCreatePage = lazyComponent(
   'ProposalCreatePage',
 );
 
+const CallManagementPage = lazyComponent(
+  () => import('./call-management/CallManagementPage'),
+  'CallManagementPage',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'call-management',
@@ -66,6 +71,14 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Dashboard'),
       priority: 100,
       feature: 'marketplace.show_call_management_functionality',
+    },
+  },
+  {
+    name: 'call-management.call-list',
+    url: 'calls/?{state}',
+    component: CallManagementPage,
+    data: {
+      breadcrumb: () => translate('Calls'),
     },
   },
   {

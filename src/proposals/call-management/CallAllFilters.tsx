@@ -1,6 +1,9 @@
-import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
+import {
+  syncFiltersToURL,
+  useReinitializeFilterFromUrl,
+} from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { CALL_FILTER_FORM_ID } from '@waldur/proposals/constants';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -9,13 +12,16 @@ import { getCallStateOptions } from '../utils';
 
 import { CallStateFilter } from './CallStateFilter';
 
-const PureCallAllFilters: FunctionComponent = () => (
-  <>
-    <TableFilterItem title={translate('State')} name="state">
-      <CallStateFilter />
-    </TableFilterItem>
-  </>
-);
+const PureCallAllFilters = ({ form }) => {
+  useReinitializeFilterFromUrl(form);
+  return (
+    <>
+      <TableFilterItem title={translate('State')} name="state">
+        <CallStateFilter />
+      </TableFilterItem>
+    </>
+  );
+};
 
 const enhanceWithDefault = reduxForm({
   form: CALL_FILTER_FORM_ID,
@@ -31,6 +37,7 @@ export const CallAllFiltersWithDefaultState =
 const enhance = reduxForm({
   form: CALL_FILTER_FORM_ID,
   destroyOnUnmount: false,
+  onChange: syncFiltersToURL,
 });
 
 export const CallAllFilters = enhance(PureCallAllFilters);
