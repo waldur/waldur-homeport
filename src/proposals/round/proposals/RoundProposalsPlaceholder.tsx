@@ -8,7 +8,7 @@ export const RoundProposalsPlaceholder = () => {
     <ImageTablePlaceholder
       illustration={TwoDocumentsIllustration}
       title={translate('Nothing to see here')}
-      description={translate('You can set the first round for this call.')}
+      description={translate('Nobody has submitted proposals yet.')}
     />
   );
 };

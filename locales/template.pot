@@ -2368,7 +2368,7 @@ msgstr ""
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
 #: src/marketplace/cart/ShoppingCartButton.tsx
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/CreateOfferingUserButton.tsx
@@ -2449,7 +2449,7 @@ msgstr ""
 msgid "Create catalog"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Create category"
 msgstr ""
 
@@ -3008,7 +3008,7 @@ msgstr ""
 msgid "Default tax percent"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Default tenant category"
 msgstr ""
 
@@ -3016,11 +3016,11 @@ msgstr ""
 msgid "Default value"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Default vm category"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Default volume category"
 msgstr ""
 
@@ -3146,7 +3146,7 @@ msgstr ""
 #: src/marketplace-flows/ResourceCreateExpandableRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 #: src/marketplace/category/admin/CategoryGroupsList.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
@@ -3537,7 +3537,7 @@ msgstr ""
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace-flows/FlowEditAction.tsx
 #: src/marketplace/category/admin/CategoryEditButton.tsx
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 #: src/marketplace/category/admin/GroupEditButton.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/deploy/DeployPage.tsx
@@ -3720,7 +3720,7 @@ msgstr ""
 msgid "Edit {name}"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
@@ -4637,7 +4637,7 @@ msgid "Grant permission"
 msgstr ""
 
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Group"
 msgstr ""
 
@@ -4853,7 +4853,7 @@ msgstr ""
 msgid "IP version"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/rancher/template/CatalogTemplateList.tsx
 msgid "Icon"
@@ -6704,6 +6704,10 @@ msgstr ""
 
 #: src/invitations/InvitationButtons.tsx
 msgid "No, continue using current email"
+msgstr ""
+
+#: src/proposals/round/proposals/RoundProposalsPlaceholder.tsx
+msgid "Nobody has submitted proposals yet."
 msgstr ""
 
 #: src/rancher/node/ClusterNodesList.tsx
@@ -10932,7 +10936,7 @@ msgstr ""
 msgid "Set termination date of {resourceName}"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Set to \"true\" if this category is for OpenStack VM. Only one category can have \"true\" value."
 msgstr ""
 
@@ -10940,11 +10944,11 @@ msgstr ""
 msgid "Set to draft"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Set to true if this category is for OpenStack Tenant. Only one category can have \"true\" value."
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Set to true if this category is for OpenStack Volume. Only one category can have \"true\" value."
 msgstr ""
 
@@ -11964,11 +11968,11 @@ msgstr ""
 msgid "The category group has been updated."
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "The category has been created."
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "The category has been updated."
 msgstr ""
 
@@ -12334,7 +12338,7 @@ msgstr ""
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 #: src/marketplace/category/admin/CategoryGroupsList.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/referral/ReferralsList.tsx
@@ -12709,7 +12713,7 @@ msgstr ""
 msgid "Unable to create category group."
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Unable to create category."
 msgstr ""
 
@@ -12973,7 +12977,7 @@ msgstr ""
 msgid "Unable to load category details"
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Unable to load category groups."
 msgstr ""
 
@@ -13554,7 +13558,7 @@ msgstr ""
 msgid "Unable to update category group."
 msgstr ""
 
-#: src/marketplace/category/admin/CategoryFromDialog.tsx
+#: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Unable to update category."
 msgstr ""
 
@@ -14799,7 +14803,6 @@ msgstr ""
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
-#: src/proposals/round/proposals/RoundProposalsPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "You can set the first round for this call."
 msgstr ""
