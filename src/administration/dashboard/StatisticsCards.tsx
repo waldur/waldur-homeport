@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
-import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { CallCountCard } from '@waldur/proposals/call-management/CallCountCard';
 
 import * as api from '../api';
 
@@ -50,42 +49,6 @@ export const StatisticsCards = () => {
     },
   );
 
-  const statisticsData = useMemo(() => {
-    const counts: Partial<typeof data> = data || {};
-    return [
-      {
-        title: translate('Organizations'),
-        count: counts.organizations,
-        viewLinkState: 'admin.customers',
-      },
-      {
-        title: translate('Projects'),
-        count: counts.projects,
-        viewLinkState: 'admin.projects',
-      },
-      {
-        title: translate('Users'),
-        count: counts.users,
-        viewLinkState: 'admin-user-users',
-      },
-      {
-        title: translate('Categories'),
-        count: counts.categories,
-        viewLinkState: 'admin-marketplace-categories',
-      },
-      {
-        title: translate('Offerings'),
-        count: counts.providerOfferings,
-        viewLinkState: 'admin-marketplace-offerings',
-      },
-      {
-        title: translate('Resources'),
-        count: counts.resources,
-        viewLinkState: 'marketplace-admin-resources-list',
-      },
-    ];
-  }, [data]);
-
   return (
     <Row>
       {error && (
@@ -95,29 +58,57 @@ export const StatisticsCards = () => {
           className="mb-4"
         />
       )}
-      {statisticsData.map((item) => (
-        <Col key={item.title} md={6} lg={4}>
-          <Card className="mb-6">
-            <Card.Body className="d-flex d-md-block justify-content-between align-items-center">
-              <div className="buttons text-end order-2">
-                <Link state={item.viewLinkState} className="btn btn-light">
-                  {translate('View all')}
-                </Link>
-              </div>
-              <div className="mb-4 order-1">
-                {isLoading ? (
-                  <LoadingSpinner />
-                ) : (
-                  <strong className={'d-block display-4 text-success'}>
-                    {item.count}
-                  </strong>
-                )}
-                <strong>{item.title}</strong>
-              </div>
-            </Card.Body>
-          </Card>
+      {data && (
+        <>
+          <Col md={6} lg={4}>
+            <CallCountCard
+              title={translate('Organizations')}
+              value={data.organizations}
+              to={{ state: 'admin.customers' }}
+            />
+          </Col>
+          <Col md={6} lg={4}>
+            <CallCountCard
+              title={translate('Projects')}
+              value={data.projects}
+              to={{ state: 'admin.projects' }}
+            />
+          </Col>
+          <Col md={6} lg={4}>
+            <CallCountCard
+              title={translate('Users')}
+              value={data.users}
+              to={{ state: 'admin-user-users' }}
+            />
+          </Col>
+          <Col md={6} lg={4}>
+            <CallCountCard
+              title={translate('Categories')}
+              value={data.categories}
+              to={{ state: 'admin-marketplace-categories' }}
+            />
+          </Col>
+          <Col md={6} lg={4}>
+            <CallCountCard
+              title={translate('Offerings')}
+              value={data.providerOfferings}
+              to={{ state: 'admin-marketplace-offerings' }}
+            />
+          </Col>
+          <Col md={6} lg={4}>
+            <CallCountCard
+              title={translate('Resources')}
+              value={data.resources}
+              to={{ state: 'marketplace-admin-resources-list' }}
+            />
+          </Col>
+        </>
+      )}
+      {isLoading && (
+        <Col md={6} lg={4}>
+          <LoadingSpinner />
         </Col>
-      ))}
+      )}
     </Row>
   );
 };

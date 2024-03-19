@@ -113,6 +113,10 @@ msgstr ""
 msgid "Accepted"
 msgstr ""
 
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+msgid "Accepted proposals"
+msgstr ""
+
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "Access"
 msgstr ""
@@ -281,6 +285,10 @@ msgstr ""
 
 #: src/providers/dashboard/ProviderWidgets.tsx
 msgid "Active resources"
+msgstr ""
+
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+msgid "Active rounds"
 msgstr ""
 
 #: src/administration/routes.ts
@@ -1663,6 +1671,10 @@ msgstr ""
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/user/routes.ts
 msgid "Calls"
+msgstr ""
+
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+msgid "Calls closing soon"
 msgstr ""
 
 #: src/proposals/PublicCallsPage.tsx
@@ -7168,6 +7180,10 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+msgid "Open calls"
+msgstr ""
+
 #: src/resource/actions/OpenConsoleActionItem.tsx
 msgid "Open console"
 msgstr ""
@@ -7798,6 +7814,14 @@ msgstr ""
 msgid "Pending consumer orders"
 msgstr ""
 
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+msgid "Pending offering requests"
+msgstr ""
+
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+msgid "Pending proposals"
+msgstr ""
+
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
@@ -7810,6 +7834,7 @@ msgid "Pending provider orders"
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
 msgid "Pending review"
 msgstr ""
 
@@ -10020,6 +10045,10 @@ msgstr ""
 #: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 msgid "Round"
+msgstr ""
+
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+msgid "Round closing soon"
 msgstr ""
 
 #: src/proposals/update/rounds/CallRoundsList.tsx
@@ -13143,6 +13172,7 @@ msgid "Unable to load service providers."
 msgstr ""
 
 #: src/administration/dashboard/StatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatisticsCards.tsx
 #: src/support/dashboard/StatisticsCards.tsx
 msgid "Unable to load statistics data"
 msgstr ""
@@ -14533,9 +14563,8 @@ msgstr ""
 msgid "View YAML"
 msgstr ""
 
-#: src/administration/dashboard/StatisticsCards.tsx
 #: src/marketplace/category/list/CategoryGroupsList.tsx
-#: src/support/dashboard/StatisticsCards.tsx
+#: src/proposals/call-management/CallCountCard.tsx
 msgid "View all"
 msgstr ""
 
