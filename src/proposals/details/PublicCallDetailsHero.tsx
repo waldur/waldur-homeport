@@ -4,10 +4,12 @@ import { Button } from 'react-bootstrap';
 import { Link } from '@waldur/core/Link';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
+import {
+  getCallStatus,
+  getSortedRoundsWithStatus,
+} from '@waldur/proposals/utils';
 
-import { CallStateField } from '../CallStateField';
 import { Call } from '../types';
-import { getSortedRoundsWithStatus } from '../utils';
 
 import { CallDetailsHeaderBody } from './CallDetailsHeaderBody';
 import { CallRoundsList } from './CallRoundsList';
@@ -33,13 +35,16 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       return null;
     }, [call]);
 
+  const status = useMemo(() => getCallStatus(call), [call]);
+
   return (
     <PublicDashboardHero
       logo={undefined}
-      logoAlt={call.customer_name}
+      logoAlt={call.name}
       logoBottomLabel={translate('Call')}
       logoBottomClass="bg-secondary"
-      logoTopLabel={<CallStateField call={call} roundless />}
+      logoTopLabel={call.state}
+      logoTopClass={'bg-' + status.color}
       backgroundImage={heroBg}
       asHero
       title={

@@ -26,7 +26,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
   return (
     <PublicDashboardHero
       logo={customer?.image}
-      logoAlt={call.customer_name}
+      logoAlt={call.name}
       logoBottomLabel={translate('Call')}
       logoBottomClass="bg-secondary"
       logoTopLabel={formatCallState(call.state)}
