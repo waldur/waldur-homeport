@@ -12,7 +12,7 @@ import { getRoles } from '@waldur/permissions/utils';
 const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => (
   <components.Option {...props}>
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      {props.data.description}
+      {props.data.description || props.data.name}
       <span
         style={{
           alignSelf: 'center',
@@ -38,7 +38,7 @@ export const RoleGroup: FunctionComponent<{ types: RoleType[] }> = ({
       name="role"
       component={SelectField}
       options={getRoles(types)}
-      getOptionLabel={(role) => role.description || role.name}
+      getOptionLabel={(role: Role) => role.description || role.name}
       getOptionValue={({ name }) => name}
       validate={[required]}
       components={{ Option: RoleOption }}
