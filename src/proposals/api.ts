@@ -33,9 +33,6 @@ export const enableCallManagingOrganization = (payload) =>
 export const disableCallManagingOrganization = (uuid) =>
   deleteById('/call-managing-organisations/', uuid);
 
-export const getPublicCallOptions = (params?: {}) =>
-  getSelectData<Call>('/proposal-public-calls/', params);
-
 export const getProtectedCall = (uuid: string, options?: AxiosRequestConfig) =>
   getById<Call>('/proposal-protected-calls/', uuid, options);
 
@@ -50,21 +47,17 @@ export const getProtectedCallRound = (
     options,
   );
 
-export const createCall = (data) => {
-  return post<Call>('/proposal-protected-calls/', data);
-};
+export const createCall = (data) =>
+  post<Call>('/proposal-protected-calls/', data);
 
-export const updateCall = (data, uuid) => {
-  return put<Call>(`/proposal-protected-calls/${uuid}/`, data);
-};
+export const updateCall = (data, uuid) =>
+  put<Call>(`/proposal-protected-calls/${uuid}/`, data);
 
-export const updateCallPartially = (data, uuid) => {
-  return patch<Call>(`/proposal-protected-calls/${uuid}/`, data);
-};
+export const updateCallPartially = (data, uuid) =>
+  patch<Call>(`/proposal-protected-calls/${uuid}/`, data);
 
-export const updateCallState = (state: 'activate' | 'archive', uuid) => {
-  return post<Call>(`/proposal-protected-calls/${uuid}/${state}/`);
-};
+export const updateCallState = (state: 'activate' | 'archive', uuid) =>
+  post<Call>(`/proposal-protected-calls/${uuid}/${state}/`);
 
 export const getPublicCall = (uuid: string, options?: AxiosRequestConfig) =>
   getById<Call>('/proposal-public-calls/', uuid, options);
@@ -73,19 +66,14 @@ export const createCallRound = (callUuid, data) => {
   return post<Round>(`/proposal-protected-calls/${callUuid}/rounds/`, data);
 };
 
-export const updateCallRound = (callUuid, roundUuid, data) => {
-  return put<Round>(
+export const updateCallRound = (callUuid, roundUuid, data) =>
+  put<Round>(
     `/proposal-protected-calls/${callUuid}/rounds/${roundUuid}/`,
     data,
   );
-};
 
-export const createCallOffering = (callUuid, data) => {
-  return post<CallOffering>(
-    `/proposal-protected-calls/${callUuid}/offerings/`,
-    data,
-  );
-};
+export const createCallOffering = (callUuid, data) =>
+  post<CallOffering>(`/proposal-protected-calls/${callUuid}/offerings/`, data);
 
 export const getProtectedCallsOptions = (params?: {}) =>
   getSelectData<Call>('/proposal-protected-calls/', params);
