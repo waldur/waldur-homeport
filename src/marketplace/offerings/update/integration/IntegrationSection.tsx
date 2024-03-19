@@ -9,7 +9,6 @@ import {
   getSecretOptionsForm,
 } from '@waldur/marketplace/common/registry';
 import { EditLexisLinkIntegrationButton } from '@waldur/marketplace/offerings/update/integration/EditLexisLinkIntegrationButton';
-import { getServiceSettingsForm } from '@waldur/providers/registry';
 
 import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';
@@ -18,6 +17,7 @@ import { EditIntegrationButton } from './EditIntegrationButton';
 import { EditSchedulesButton } from './EditSchedulesButton';
 import { GoogleCalendarActions } from './GoogleCalendarActions';
 import { OfferingAttributes } from './OfferingAttributes';
+import { getServiceSettingsForm } from './registry';
 import { RemoteActions } from './RemoteActions';
 import { ScriptIntegrationSummary } from './ScriptIntegrationSummary';
 import { SyncButton } from './SyncButton';

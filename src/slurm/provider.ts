@@ -1,5 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import * as ProvidersRegistry from '@waldur/providers/registry';
+import * as ProvidersRegistry from '@waldur/marketplace/offerings/update/integration/registry';
 
 const SlurmForm = lazyComponent(() => import('./SlurmForm'), 'SlurmForm');
 

@@ -1,6 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { pick } from '@waldur/core/utils';
-import * as ProvidersRegistry from '@waldur/providers/registry';
+import * as ProvidersRegistry from '@waldur/marketplace/offerings/update/integration/registry';
 
 const RancherProviderForm = lazyComponent(
   () => import('./RancherProviderForm'),

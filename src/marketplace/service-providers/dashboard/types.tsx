@@ -1,14 +1,3 @@
-import React from 'react';
-
-export interface ProviderConfig {
-  name: string;
-  type: string;
-  component: React.ComponentType;
-  endpoint: string;
-  icon: string;
-  serializer: (details: any) => any;
-}
-
 export interface ProviderStatistics {
   active_campaigns: number;
   current_customers: number;

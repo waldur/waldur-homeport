@@ -20,7 +20,8 @@ const ResourceDetailsPage = lazyComponent(
   'ResourceDetailsPage',
 );
 const ProviderDashboard = lazyComponent(
-  () => import('@waldur/providers/dashboard/ProviderDashboard'),
+  () =>
+    import('@waldur/marketplace/service-providers/dashboard/ProviderDashboard'),
   'ProviderDashboard',
 );
 const Layout = lazyComponent(

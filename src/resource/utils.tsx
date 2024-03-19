@@ -2,7 +2,10 @@ import { get } from '@waldur/core/api';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { getTypeDisplay, getServiceIcon } from '@waldur/providers/registry';
+import {
+  getTypeDisplay,
+  getServiceIcon,
+} from '@waldur/marketplace/offerings/update/integration/registry';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { ResourceSummaryProps } from '@waldur/resource/summary';
 import { Schedule } from '@waldur/resource/types';

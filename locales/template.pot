@@ -266,11 +266,11 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: src/providers/dashboard/ProviderWidgets.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Active campaigns"
 msgstr ""
 
-#: src/providers/dashboard/ProviderWidgets.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Active clients"
 msgstr ""
 
@@ -279,11 +279,11 @@ msgstr ""
 msgid "Active count"
 msgstr ""
 
-#: src/providers/dashboard/ProviderWidgets.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Active notifications"
 msgstr ""
 
-#: src/providers/dashboard/ProviderWidgets.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Active resources"
 msgstr ""
 
@@ -1205,10 +1205,10 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
+#: src/marketplace/service-providers/dashboard/ProviderEventsTable.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectEventsList.tsx
 #: src/project/routes.ts
-#: src/providers/dashboard/ProviderEventsTable.tsx
 #: src/user/UserActions.tsx
 #: src/user/routes.ts
 msgid "Audit logs"
@@ -3932,7 +3932,7 @@ msgstr ""
 msgid "Erred"
 msgstr ""
 
-#: src/providers/dashboard/ProviderWidgets.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Erred resources"
 msgstr ""
 
@@ -4012,7 +4012,7 @@ msgid "Estimated monthly fee will change from {old_estimate} to {new_estimate}. 
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingDetailsStatistics.tsx
-#: src/providers/dashboard/api.ts
+#: src/marketplace/service-providers/dashboard/api.ts
 msgid "Estimated revenue"
 msgstr ""
 
@@ -7008,7 +7008,7 @@ msgstr ""
 msgid "Offering managers"
 msgstr ""
 
-#: src/providers/dashboard/ProviderProfile.tsx
+#: src/marketplace/service-providers/dashboard/ProviderProfile.tsx
 msgid "Offering managers:"
 msgstr ""
 
@@ -7081,11 +7081,11 @@ msgstr ""
 #: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/dashboard/ProviderDashboard.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/details/PublicCallDetailsBar.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
-#: src/providers/dashboard/ProviderDashboard.tsx
 msgid "Offerings"
 msgstr ""
 
@@ -7215,7 +7215,7 @@ msgstr ""
 msgid "Open source identity and access management solution."
 msgstr ""
 
-#: src/providers/dashboard/ProviderWidgets.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Open support tickets"
 msgstr ""
 
@@ -7344,7 +7344,7 @@ msgstr ""
 msgid "Orders"
 msgstr ""
 
-#: src/providers/dashboard/ProviderWidgets.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Orders pending approval"
 msgstr ""
 
@@ -10786,11 +10786,11 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
+#: src/marketplace/service-providers/dashboard/ProviderProfile.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
-#: src/providers/dashboard/ProviderProfile.tsx
 #: src/reporting/plan-usage/PlanUsageFilter.tsx
 #: src/reporting/plan-usage/PlanUsageList.tsx
 msgid "Service provider"
@@ -12451,7 +12451,7 @@ msgstr ""
 msgid "Total price"
 msgstr ""
 
-#: src/providers/dashboard/ProviderWidgets.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Total published offerings"
 msgstr ""
 
@@ -13020,8 +13020,8 @@ msgstr ""
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 #: src/marketplace/resources/usage/ResourceUsageTabsContainer.tsx
+#: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
-#: src/providers/dashboard/ProviderWidgets.tsx
 msgid "Unable to load data"
 msgstr ""
 
@@ -13191,8 +13191,8 @@ msgid "Unable to load user."
 msgstr ""
 
 #: src/customer/dashboard/CustomerUsersBadge.tsx
+#: src/marketplace/service-providers/dashboard/ProviderProfile.tsx
 #: src/project/ProjectUsersBadge.tsx
-#: src/providers/dashboard/ProviderProfile.tsx
 msgid "Unable to load users"
 msgstr ""
 

@@ -13,7 +13,7 @@ import { Chart } from '@waldur/dashboard/types';
 import { translate } from '@waldur/i18n';
 import { ServiceProvider } from '@waldur/marketplace/types';
 
-import { ProviderStatistics } from '../types';
+import { ProviderStatistics } from './types';
 
 interface EstimatedRevenueSummary {
   year: number;

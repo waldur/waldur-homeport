@@ -8,19 +8,18 @@ import { translate } from '@waldur/i18n';
 import { getStates as getResourceStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
-import { ProviderStatistics } from '../types';
-
 import { getServiceProviderStatistics } from './api';
 import { ChangesAmountBadge } from './ChangesAmountBadge';
+import { ProviderStatistics } from './types';
 
-const IconAttentionTriangle = require('@waldur/providers/dashboard/icons/attention-triangle.svg');
-const IconActiveCampaigns = require('@waldur/providers/dashboard/icons/campaign.svg');
-const IconNotification = require('@waldur/providers/dashboard/icons/notification-bell.svg');
-const IconOffering = require('@waldur/providers/dashboard/icons/offering-tag.svg');
-const IconPendingApproval = require('@waldur/providers/dashboard/icons/pending-approval.svg');
-const IconResource = require('@waldur/providers/dashboard/icons/provider-resource.svg');
-const IconSupport = require('@waldur/providers/dashboard/icons/provider-support.svg');
-const IconUser = require('@waldur/providers/dashboard/icons/provider-user.svg');
+const IconAttentionTriangle = require('./icons/attention-triangle.svg');
+const IconActiveCampaigns = require('./icons/campaign.svg');
+const IconNotification = require('./icons/notification-bell.svg');
+const IconOffering = require('./icons/offering-tag.svg');
+const IconPendingApproval = require('./icons/pending-approval.svg');
+const IconResource = require('./icons/provider-resource.svg');
+const IconSupport = require('./icons/provider-support.svg');
+const IconUser = require('./icons/provider-user.svg');
 
 interface ProviderWidget {
   icon: any;
