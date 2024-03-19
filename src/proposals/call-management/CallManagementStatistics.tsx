@@ -6,9 +6,21 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { StatisticsCard } from '@waldur/core/StatisticsCard';
 import { translate } from '@waldur/i18n';
+import { getCallStateOptions } from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { getCallManagementStatistics } from '../api';
+
+const getCallState = (states: string[]) => ({
+  state: 'call-management.call-list',
+  params: {
+    state: JSON.stringify(
+      states.map((state) =>
+        getCallStateOptions().find((op) => op.value === state),
+      ),
+    ),
+  },
+});
 
 export const CallManagementStatistics = () => {
   const customer = useSelector(getCustomer);
@@ -35,6 +47,7 @@ export const CallManagementStatistics = () => {
             <StatisticsCard
               title={translate('Open calls')}
               value={data.open_calls}
+              to={getCallState(['active'])}
             />
           </Col>
           <Col md={6} lg={4}>
