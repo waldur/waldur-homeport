@@ -155,3 +155,14 @@ export interface ProposalReview {
   call_name: string;
   call_uuid: string;
 }
+
+export interface CallManagementStatistics {
+  open_calls: number;
+  active_rounds: number;
+  accepted_proposals: number;
+  pending_proposals: number;
+  pending_review: number;
+  rounds_closing_in_one_week: number;
+  calls_closing_in_one_week: number;
+  offering_requests_pending: number;
+}

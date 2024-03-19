@@ -2,17 +2,19 @@ import { AxiosRequestConfig } from 'axios';
 
 import { ENV } from '@waldur/configs/default';
 import {
-  getById,
-  post,
   deleteById,
+  get,
+  getById,
   getFirst,
-  put,
-  patch,
   getSelectData,
+  patch,
+  post,
+  put,
 } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 
 import {
+  CallManagementStatistics,
   CallManagingOrganization,
   CallOffering,
   Proposal,
@@ -112,3 +114,9 @@ export const acceptProposalReview = (uuid) =>
 
 export const rejectProposalReview = (uuid) =>
   post(`/proposal-reviews/${uuid}/reject/`);
+
+export const getCallManagementStatistics = (callManagingOrganizationUuid) => {
+  return get<CallManagementStatistics>(
+    `/call-managing-organisations/${callManagingOrganizationUuid}/stats/`,
+  ).then((response) => response.data);
+};
