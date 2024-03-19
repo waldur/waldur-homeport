@@ -7494,7 +7494,6 @@ msgstr ""
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
 #: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
-#: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Organization groups"
 msgstr ""
 
@@ -11129,10 +11128,6 @@ msgstr ""
 
 #: src/reporting/dashboard/ReportingWidgets.tsx
 msgid "Shows change in aggregated monthly revenues over time."
-msgstr ""
-
-#: src/reporting/dashboard/ReportingWidgets.tsx
-msgid "Shows distributions of organizations into groups."
 msgstr ""
 
 #: src/reporting/dashboard/ReportingWidgets.tsx

@@ -38,11 +38,6 @@ const generateWidgetsData = (): ReportingWidget[] => [
     feature: 'support.customers_list',
   },
   {
-    title: translate('Organization groups'),
-    description: translate('Shows distributions of organizations into groups.'),
-    to: { state: 'reporting.organizations-organization-groups' },
-  },
-  {
     title: translate('Organization quotas'),
     description: translate('Shows quotas aggregated by organization.'),
     to: { state: 'reporting.quotas' },
