@@ -113,7 +113,7 @@ msgstr ""
 msgid "Accepted"
 msgstr ""
 
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Accepted proposals"
 msgstr ""
 
@@ -287,7 +287,7 @@ msgstr ""
 msgid "Active resources"
 msgstr ""
 
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Active rounds"
 msgstr ""
 
@@ -1673,7 +1673,7 @@ msgstr ""
 msgid "Calls"
 msgstr ""
 
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Calls closing soon"
 msgstr ""
 
@@ -1795,7 +1795,7 @@ msgstr ""
 msgid "Catalogues"
 msgstr ""
 
-#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/routes.ts
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
 #: src/marketplace/category/list/AllCategoriesPage.tsx
@@ -1996,7 +1996,7 @@ msgstr ""
 msgid "Closed"
 msgstr ""
 
-#: src/support/dashboard/StatisticsCards.tsx
+#: src/support/dashboard/SupportStatistics.tsx
 msgid "Closed issues (this month)"
 msgstr ""
 
@@ -7071,7 +7071,7 @@ msgstr ""
 msgid "Offering users synchronization has been scheduled."
 msgstr ""
 
-#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/dashboard/AdminStatistics.tsx
 #: src/broadcasts/BroadcastExpandableRow.tsx
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
@@ -7180,7 +7180,7 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Open calls"
 msgstr ""
 
@@ -7192,8 +7192,8 @@ msgstr ""
 msgid "Open in Service Desk"
 msgstr ""
 
-#: src/support/dashboard/StatisticsCards.tsx
 #: src/support/dashboard/SupportDashboard.tsx
+#: src/support/dashboard/SupportStatistics.tsx
 msgid "Open issues"
 msgstr ""
 
@@ -7573,7 +7573,7 @@ msgstr ""
 msgid "Organization {customer_name} has been deleted."
 msgstr ""
 
-#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/organizations/SupportCustomerList.tsx
 #: src/administration/routes.ts
@@ -7814,11 +7814,11 @@ msgstr ""
 msgid "Pending consumer orders"
 msgstr ""
 
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Pending offering requests"
 msgstr ""
 
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Pending proposals"
 msgstr ""
 
@@ -7834,7 +7834,7 @@ msgid "Pending provider orders"
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Pending review"
 msgstr ""
 
@@ -8696,7 +8696,7 @@ msgstr ""
 msgid "Project {project_name} has been deleted."
 msgstr ""
 
-#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/routes.ts
 #: src/customer/routes.ts
@@ -9048,7 +9048,7 @@ msgstr ""
 msgid "Reboot"
 msgstr ""
 
-#: src/support/dashboard/StatisticsCards.tsx
+#: src/support/dashboard/SupportStatistics.tsx
 msgid "Recent broadcasts (this month)"
 msgstr ""
 
@@ -9740,7 +9740,7 @@ msgstr ""
 msgid "Resource {type} {activeStep}"
 msgstr ""
 
-#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/dashboard/AdminStatistics.tsx
 #: src/customer/routes.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
@@ -10047,7 +10047,7 @@ msgstr ""
 msgid "Round"
 msgstr ""
 
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Round closing soon"
 msgstr ""
 
@@ -13171,9 +13171,9 @@ msgstr ""
 msgid "Unable to load service providers."
 msgstr ""
 
-#: src/administration/dashboard/StatisticsCards.tsx
-#: src/proposals/call-management/CallManagementStatisticsCards.tsx
-#: src/support/dashboard/StatisticsCards.tsx
+#: src/administration/dashboard/AdminStatistics.tsx
+#: src/proposals/call-management/CallManagementStatistics.tsx
+#: src/support/dashboard/SupportStatistics.tsx
 msgid "Unable to load statistics data"
 msgstr ""
 
@@ -14366,7 +14366,7 @@ msgstr ""
 msgid "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.)."
 msgstr ""
 
-#: src/administration/dashboard/StatisticsCards.tsx
+#: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/administration/routes.ts
 #: src/customer/routes.ts

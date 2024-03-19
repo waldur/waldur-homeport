@@ -1,13 +1,11 @@
 import { FC } from 'react';
 
-import { CallManagementPage } from '@waldur/proposals/call-management/CallManagementPage';
-import { CallManagementStatisticsCards } from '@waldur/proposals/call-management/CallManagementStatisticsCards';
+import { CallManagementPage } from './CallManagementPage';
+import { CallManagementStatistics } from './CallManagementStatistics';
 
-export const CallManagementDashboard: FC = () => {
-  return (
-    <>
-      <CallManagementStatisticsCards />
-      <CallManagementPage />
-    </>
-  );
-};
+export const CallManagementDashboard: FC = () => (
+  <>
+    <CallManagementStatistics />
+    <CallManagementPage />
+  </>
+);
