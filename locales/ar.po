@@ -211,7 +211,7 @@ msgstr "سجل محاسبي"
 msgid "Accounting records"
 msgstr "سجلات المحاسبة"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "تشغيل المحاسبة"
@@ -8221,7 +8221,7 @@ msgid "Organization events"
 msgstr "فعاليات المنظمة"
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -8231,7 +8231,7 @@ msgid "Organization group"
 msgstr "مجموعة المنظمة"
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 msgid "Organization group type"
 msgstr "نوع المجموعة التنظيمية"
 
@@ -11923,7 +11923,7 @@ msgstr "مدير الخدمة"
 msgid "Service manager of:"
 msgstr "مدير الخدمة :"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -13002,7 +13002,6 @@ msgstr "نسبة الضريبة"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "فريق"
 
@@ -15689,7 +15688,6 @@ msgid "User agreement was updated"
 msgstr "تم تحديث اتفاقية المستخدم"
 
 #: src/administration/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "اتفاقيات المستخدم"
 

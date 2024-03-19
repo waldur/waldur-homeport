@@ -211,7 +211,7 @@ msgstr "Бухгалтердик эсеп"
 msgid "Accounting records"
 msgstr "Бухгалтердик эсеп жазуулары"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "Бухгалтердик эсеп жүргүзүү"
@@ -8221,7 +8221,7 @@ msgid "Organization events"
 msgstr "Уюштуруу иш-чаралары"
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -8231,7 +8231,7 @@ msgid "Organization group"
 msgstr "Уюштуруу тобу"
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 msgid "Organization group type"
 msgstr "Уюштуруу тобунун түрү"
 
@@ -11923,7 +11923,7 @@ msgstr "Кызмат менеджери"
 msgid "Service manager of:"
 msgstr "Кызмат менеджери:"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -13002,7 +13002,6 @@ msgstr "Салык пайызы"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Команда"
 
@@ -15689,7 +15688,6 @@ msgid "User agreement was updated"
 msgstr "Колдонуучу келишими жаңыртылган"
 
 #: src/administration/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Колдонуучу келишимдери"
 

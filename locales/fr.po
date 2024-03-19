@@ -136,7 +136,7 @@ msgstr "Enregistrement comptable"
 msgid "Accounting records"
 msgstr "Documents comptables"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "Comptabilité en cours"
@@ -7429,7 +7429,7 @@ msgstr "Gestionnaire de service"
 msgid "Service manager of:"
 msgstr "Gestionnaire de service de :"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -8149,7 +8149,6 @@ msgstr "Pourcentage d'impôt"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Équipe"
 

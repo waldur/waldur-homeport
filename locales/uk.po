@@ -211,7 +211,7 @@ msgstr "Обліковий запис"
 msgid "Accounting records"
 msgstr "Облікові записи"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "Облік запущений"
@@ -8244,7 +8244,7 @@ msgid "Organization events"
 msgstr "Організація заходів"
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -8254,7 +8254,7 @@ msgid "Organization group"
 msgstr "Організаційна група"
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 msgid "Organization group type"
 msgstr "Тип організаційної групи"
 
@@ -11958,7 +11958,7 @@ msgstr "Менеджер служби"
 msgid "Service manager of:"
 msgstr "Менеджер служби:"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -13037,7 +13037,6 @@ msgstr "Податкові відсотки"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Команда"
 
@@ -15740,7 +15739,6 @@ msgid "User agreement was updated"
 msgstr "Угоду користувача оновлено"
 
 #: src/administration/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Користувацькі угоди"
 

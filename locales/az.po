@@ -219,7 +219,7 @@ msgstr "Uçot qeydi "
 msgid "Accounting records"
 msgstr "Uçot sənədləri"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "Mühasibat uçotu"
@@ -8516,7 +8516,7 @@ msgid "Organization field"
 msgstr "Təşkilat sahəsi"
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -8526,7 +8526,7 @@ msgid "Organization group"
 msgstr "Təşkilat qrupu"
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 msgid "Organization group type"
 msgstr "Təşkilat qrupu növü"
 
@@ -12352,7 +12352,7 @@ msgstr "Xidmət meneceri"
 msgid "Service manager of:"
 msgstr "Xidmət meneceri:"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -13480,7 +13480,6 @@ msgstr "Vergi faizi"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Heyət "
 
@@ -16232,7 +16231,6 @@ msgid "User agreement was updated"
 msgstr "İstifadəçi sazişi yeniləndi"
 
 #: src/administration/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "İstifadəçi sazişləri"
 

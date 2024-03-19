@@ -211,7 +211,7 @@ msgstr "Redovisning"
 msgid "Accounting records"
 msgstr "Redovisningsposter"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "Redovisning körs"
@@ -8221,7 +8221,7 @@ msgid "Organization events"
 msgstr "Organisation evenemang"
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -8231,7 +8231,7 @@ msgid "Organization group"
 msgstr "Organisationsgrupp"
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 msgid "Organization group type"
 msgstr "Typ av organisationsgrupp"
 
@@ -11923,7 +11923,7 @@ msgstr "Servicechef"
 msgid "Service manager of:"
 msgstr "Serviceansvarig för:"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -13002,7 +13002,6 @@ msgstr "Skatt procent"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Grupp"
 
@@ -15689,7 +15688,6 @@ msgid "User agreement was updated"
 msgstr "Användaravtalet har uppdaterats"
 
 #: src/administration/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Användaravtal"
 

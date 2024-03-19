@@ -174,7 +174,7 @@ msgstr "Boekhoudkundige gegevens"
 msgid "Accounting records"
 msgstr "Boekhoudkundige gegevens"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "Boekhouding wordt uitgevoerd"
@@ -5880,7 +5880,6 @@ msgid "User"
 msgstr "Gebruiker"
 
 #: src/administration/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Gebruikersovereenkomsten"
 

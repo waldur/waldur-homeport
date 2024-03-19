@@ -136,7 +136,7 @@ msgstr "Boekhoudkundig record"
 msgid "Accounting records"
 msgstr "Boekhoudkundig records"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "Boekhouding loopt"
@@ -7429,7 +7429,7 @@ msgstr "Dienst manager"
 msgid "Service manager of:"
 msgstr "Dienst manager van:"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -8149,7 +8149,6 @@ msgstr "Belastingpercentage"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Team"
 

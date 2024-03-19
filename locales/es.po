@@ -211,7 +211,7 @@ msgstr "Registro contable"
 msgid "Accounting records"
 msgstr "Registros contables"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/list/CustomerListFilter.tsx
 msgid "Accounting running"
 msgstr "Contabilidad en ejecución"
@@ -8221,7 +8221,7 @@ msgid "Organization events"
 msgstr "Eventos de la organización"
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -8231,7 +8231,7 @@ msgid "Organization group"
 msgstr "Grupo organizativo"
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 msgid "Organization group type"
 msgstr "Tipo de grupo organizativo"
 
@@ -11923,7 +11923,7 @@ msgstr "Gerente de servicio"
 msgid "Service manager of:"
 msgstr "Gerente de servicio de:"
 
-#: src/administration/organizations/SupportCustomerFilter.tsx
+#: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerMarketplacePanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
@@ -13002,7 +13002,6 @@ msgstr "Porcentaje de impuestos"
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "Team"
 msgstr "Equipo"
 
@@ -15689,7 +15688,6 @@ msgid "User agreement was updated"
 msgstr "Se actualizó el acuerdo de usuario."
 
 #: src/administration/routes.ts
-#: src/proposals/proposal/create/steps/steps.ts
 msgid "User agreements"
 msgstr "Acuerdos de usuario"
 
