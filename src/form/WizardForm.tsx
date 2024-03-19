@@ -17,6 +17,7 @@ export interface WizardFormStepProps
   title: string;
   onSubmit(formData, dispatch, formProps): Promise<any> | void;
   submitLabel: string;
+  submitDisabled?: boolean;
   steps: string[];
   step: number;
   onPrev(): void;
@@ -48,7 +49,7 @@ const WizardFormPure: FC<WizardFormProps> = (props) => {
             steps={props.steps}
             activeStep={props.step}
             onSelect={(step) => {
-              if (!props.onStep) return;
+              if (!props.onStep || props.submitDisabled) return;
               if (step > props.step) {
                 props.submit();
                 if (props.valid) {
@@ -82,6 +83,7 @@ const WizardFormPure: FC<WizardFormProps> = (props) => {
           block={false}
           submitting={props.submitting}
           label={props.submitLabel}
+          invalid={props.submitDisabled}
           className="min-w-125px"
         />
       </Modal.Footer>

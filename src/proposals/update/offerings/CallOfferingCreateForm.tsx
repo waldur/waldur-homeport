@@ -3,33 +3,19 @@ import { useState, createElement, FunctionComponent } from 'react';
 import { WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 
-import { WizardFormFirstPage } from './WizardFormFirstPage';
-import { WizardFormSecondPage } from './WizardFormSecondPage';
-import { WizardFormThirdPage } from './WizardFormThirdPage';
-
 interface CallOfferingCreateFormProps {
   onSubmit: WizardFormStepProps['onSubmit'];
+  steps: string[];
+  wizardForms: FunctionComponent<WizardFormStepProps>[];
   initialValues?: any;
   data: any;
 }
-
-const WizardForms = [
-  WizardFormFirstPage,
-  WizardFormSecondPage,
-  WizardFormThirdPage,
-];
-
-const steps = [
-  translate('Select offering'),
-  translate('Configure request'),
-  translate('Submit'),
-];
 
 export const CallOfferingCreateForm: FunctionComponent<CallOfferingCreateFormProps> =
   (props) => {
     const [step, setStep] = useState(0);
     const [lastVisitedStep, setLastVisitedStep] = useState(0);
-    const isLast = step === steps.length - 1;
+    const isLast = step === props.steps.length - 1;
     const nextStep = () => {
       setStep(step + 1);
       if (step + 1 > lastVisitedStep) {
@@ -42,7 +28,7 @@ export const CallOfferingCreateForm: FunctionComponent<CallOfferingCreateFormPro
     };
     const submitLabel = isLast ? translate('Create') : translate('Next');
 
-    return createElement(WizardForms[step], {
+    return createElement(props.wizardForms[step], {
       form: 'CallOfferingForm',
       title: translate('New offering'),
       onSubmit: isLast ? props.onSubmit : nextStep,
@@ -50,7 +36,7 @@ export const CallOfferingCreateForm: FunctionComponent<CallOfferingCreateFormPro
       onStep: selectStep,
       submitLabel,
       step,
-      steps,
+      steps: props.steps,
       initialValues: props.initialValues,
       data: props.data,
     });

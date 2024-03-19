@@ -1,4 +1,4 @@
-.proposal-create-sidebar {
+.proposal-manage-sidebar {
   width: 350px; /* for larger screen sizes */
   top: calc(65px + var(--kt-toolbar-height));
   z-index: 95 !important;
@@ -29,7 +29,7 @@
           font-size: 0.85rem;
           margin-bottom: 0;
         }
-        a.stepper-label {
+        .stepper-label {
           cursor: pointer;
 
           &:hover .stepper-title {
@@ -70,19 +70,19 @@
   }
 }
 
-body:not(.toolbar-fixed) .proposal-create-sidebar {
+body:not(.toolbar-fixed) .proposal-manage-sidebar {
   top: 65px;
 }
 
 @media (max-width: 1650px) {
-  .proposal-create-sidebar {
+  .proposal-manage-sidebar {
     width: 300px;
   }
 }
 
 /* Equals to bootstrap xl screen size (for smaller than xl) */
 @media (max-width: 1200px) {
-  .proposal-create-sidebar {
+  .proposal-manage-sidebar {
     width: 100%;
     height: auto;
   }

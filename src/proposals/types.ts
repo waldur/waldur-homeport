@@ -61,7 +61,7 @@ export interface Call {
   created_by: string;
 
   backend_id?: string;
-  offerings: Offering[];
+  offerings: CallOffering[];
   rounds: Round[];
 }
 
@@ -89,6 +89,9 @@ export interface Proposal {
   uuid: string;
   url: string;
   name: string;
+  call_name: string;
+  call_uuid: string;
+  description: string;
   project_summary: string;
   project_is_confidential: boolean;
   project_has_civilian_purpose: boolean;
@@ -99,6 +102,9 @@ export interface Proposal {
   duration_in_days: number;
   project: string;
   round: Round;
+  resources: any[];
+  oecd_fos_2007_code: string;
+  oecd_fos_2007_label: string;
 }
 
 export interface CallOffering {
@@ -111,6 +117,7 @@ export interface CallOffering {
   created_by_name: string;
   description: string;
   offering: string;
+  offering_uuid: string;
   offering_name: string;
   provider_name: string;
   state: CallOfferingState;
@@ -130,6 +137,7 @@ export interface ProposalCreationFormStep {
   label: string;
   id: string;
   component: React.ComponentType<ProposalFormStepProps>;
+  params?: Record<string, any>;
 }
 
 export interface ProposalFormStepProps {
@@ -138,6 +146,14 @@ export interface ProposalFormStepProps {
   title?: string;
   observed?: boolean;
   change?(field: string, value: any): void;
+  params?: ProposalCreationFormStep['params'];
+}
+
+export interface ProposalResourceFormData {
+  offering: Offering & { requested_offering_uuid: string };
+  attributes: AttributesType;
+  plan: Plan;
+  limits?: Limits;
 }
 
 export interface ProposalReview {

@@ -1,9 +1,12 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Link } from '@waldur/core/Link';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
 import {
   getCallStatus,
   getSortedRoundsWithStatus,
@@ -21,6 +24,11 @@ interface PublicCallDetailsHeroProps {
   call: Call;
 }
 
+const ProposalCreateDialog = lazyComponent(
+  () => import('@waldur/proposals/proposal/create/AddProposalDialog'),
+  'AddProposalDialog',
+);
+
 export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
   call,
 }) => {
@@ -34,6 +42,19 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       }
       return null;
     }, [call]);
+
+  const dispatch = useDispatch();
+  const openAddProposalDialog = useCallback(
+    () =>
+      activeRound &&
+      dispatch(
+        openModalDialog(ProposalCreateDialog, {
+          resolve: { call, round: activeRound },
+          size: 'md',
+        }),
+      ),
+    [dispatch, activeRound],
+  );
 
   const status = useMemo(() => getCallStatus(call), [call]);
 
@@ -58,13 +79,9 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       quickActions={
         <div className="d-flex gap-5 justify-content-between">
           {activeRound ? (
-            <Link
-              state="public-calls.create-proposal"
-              params={{ uuid: call.uuid, round_uuid: activeRound.uuid }}
-              className="btn btn-primary"
-            >
+            <Button variant="primary" onClick={openAddProposalDialog}>
               {translate('Apply to round')}
-            </Link>
+            </Button>
           ) : (
             <Button variant="primary" disabled>
               {translate('Apply to round')}

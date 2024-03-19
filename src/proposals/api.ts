@@ -7,6 +7,7 @@ import {
   getById,
   getFirst,
   getSelectData,
+  getAll,
   patch,
   post,
   put,
@@ -77,6 +78,12 @@ export const updateCallRound = (callUuid, roundUuid, data) =>
 export const createCallOffering = (callUuid, data) =>
   post<CallOffering>(`/proposal-protected-calls/${callUuid}/offerings/`, data);
 
+export const getCallOfferings = (callUuid) => {
+  return getAll<CallOffering>(
+    `/proposal-protected-calls/${callUuid}/offerings/`,
+  );
+};
+
 export const getProtectedCallsOptions = (params?: {}) =>
   getSelectData<Call>('/proposal-protected-calls/', params);
 
@@ -108,6 +115,15 @@ export const callAutocomplete = async (
 
 export const createProposal = (data) =>
   post<Proposal>(`/proposal-proposals/`, data);
+
+export const getProposal = (uuid) =>
+  getById<Proposal>(`/proposal-proposals/`, uuid);
+
+export const updateProposal = (data, uuid) =>
+  patch<Proposal>(`/proposal-proposals/${uuid}/`, data);
+
+export const createProposalResource = (data, uuid) =>
+  post<Proposal>(`/proposal-proposals/${uuid}/resources/`, data);
 
 export const acceptProposalReview = (uuid) =>
   post(`/proposal-reviews/${uuid}/accept/`);
