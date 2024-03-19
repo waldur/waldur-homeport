@@ -3,16 +3,27 @@ import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { StatisticsCard } from '@waldur/core/StatisticsCard';
 import { translate } from '@waldur/i18n';
 import { getIssueStatuses } from '@waldur/issues/list/IssuesFilter';
-import { CallCountCard } from '@waldur/proposals/call-management/CallCountCard';
 
-import { getServiceProviderStatistics } from '../api';
+import { getSupportStatistics } from '../api';
 
-export const StatisticsCards = () => {
+const getIssueState = (states: string[]) => ({
+  state: 'support.list',
+  params: {
+    status: JSON.stringify(
+      states.map((state) =>
+        getIssueStatuses().find((op) => op.value === state),
+      ),
+    ),
+  },
+});
+
+export const SupportStatistics = () => {
   const { data, isLoading, error, refetch } = useQuery(
     ['support-statistics'],
-    getServiceProviderStatistics,
+    getSupportStatistics,
     {
       staleTime: 5 * 60 * 1000,
     },
@@ -30,39 +41,21 @@ export const StatisticsCards = () => {
       {data && (
         <>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Open issues')}
               value={data.open_issues_count}
-              to={{
-                state: 'support.list',
-                params: {
-                  status: JSON.stringify([
-                    getIssueStatuses().find(
-                      (op) => op.value === 'Waiting for support',
-                    ),
-                    getIssueStatuses().find((op) => op.value === 'Open'),
-                  ]),
-                },
-              }}
+              to={getIssueState(['Waiting for support', 'Open'])}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Closed issues (this month)')}
               value={data.closed_this_month_count}
-              to={{
-                state: 'support.list',
-                params: {
-                  status: JSON.stringify([
-                    getIssueStatuses().find((op) => op.value === 'Resolved'),
-                    getIssueStatuses().find((op) => op.value === 'Closed'),
-                  ]),
-                },
-              }}
+              to={getIssueState(['Resolved', 'Closed'])}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Recent broadcasts (this month)')}
               value={data.recent_broadcasts_count}
               to={{ state: 'support.broadcast' }}

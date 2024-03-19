@@ -10,8 +10,8 @@ import {
 } from '@waldur/navigation/BackendHealthStatusIndicator';
 
 import { AdministrationProfile } from './AdministrationProfile';
+import { AdminStatistics } from './AdminStatistics';
 import { HealthChecks } from './HealthChecks';
-import { StatisticsCards } from './StatisticsCards';
 
 export const AdministrationDashboard: FC = () => {
   const { data, isLoading, error, refetch } = useQuery(
@@ -37,7 +37,7 @@ export const AdministrationDashboard: FC = () => {
           <HealthChecks healthInfoItems={data} />
         </>
       ) : null}
-      <StatisticsCards />
+      <AdminStatistics />
     </>
   );
 };

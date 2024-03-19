@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { StatisticsCard } from '@waldur/core/StatisticsCard';
 import { translate } from '@waldur/i18n';
-import { CallCountCard } from '@waldur/proposals/call-management/CallCountCard';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { getCallManagementStatistics } from '../api';
 
-export const CallManagementStatisticsCards = () => {
+export const CallManagementStatistics = () => {
   const customer = useSelector(getCustomer);
   const { data, isLoading, error, refetch } = useQuery(
     ['call-management-statistics', customer.call_managing_organization_uuid],
@@ -32,49 +32,49 @@ export const CallManagementStatisticsCards = () => {
       {data && (
         <>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Open calls')}
               value={data.open_calls}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Active rounds')}
               value={data.active_rounds}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Accepted proposals')}
               value={data.accepted_proposals}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Pending proposals')}
               value={data.pending_proposals}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Pending review')}
               value={data.pending_review}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Round closing soon')}
               value={data.rounds_closing_in_one_week}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Calls closing soon')}
               value={data.calls_closing_in_one_week}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Pending offering requests')}
               value={data.offering_requests_pending}
             />

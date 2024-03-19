@@ -4,13 +4,13 @@ import { Card } from 'react-bootstrap';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
-interface CallCountCardProps {
+interface StatisticsCardProps {
   title: string;
   value: number;
   to?: { state: string; params?: object };
 }
 
-export const CallCountCard: React.FC<CallCountCardProps> = ({
+export const StatisticsCard: React.FC<StatisticsCardProps> = ({
   title,
   value,
   to,

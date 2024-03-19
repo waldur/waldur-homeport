@@ -14,7 +14,7 @@ import {
   isWorking,
 } from '@waldur/navigation/BackendHealthStatusIndicator';
 
-import { StatisticsCards } from './StatisticsCards';
+import { SupportStatistics } from './SupportStatistics';
 
 export const SupportDashboard: FC = () => {
   const { data, isLoading, error, refetch } = useQuery(
@@ -38,7 +38,7 @@ export const SupportDashboard: FC = () => {
       ) : data ? (
         <AdministrationProfile healthy={healthy} supportOnly />
       ) : null}
-      {isSupportEnabled ? <StatisticsCards /> : null}
+      {isSupportEnabled ? <SupportStatistics /> : null}
       {data && <HealthChecks healthInfoItems={data} />}
       {isSupportEnabled ? (
         <IssuesList

@@ -64,7 +64,7 @@ export const fetchInstanceOptions = async (
   );
 };
 
-export const getServiceProviderStatistics = () =>
+export const getSupportStatistics = () =>
   get<SupportStatistics>(`/support-statistics/`).then(
     (response) => response.data,
   );

@@ -3,12 +3,12 @@ import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { StatisticsCard } from '@waldur/core/StatisticsCard';
 import { translate } from '@waldur/i18n';
-import { CallCountCard } from '@waldur/proposals/call-management/CallCountCard';
 
 import * as api from '../api';
 
-export const StatisticsCards = () => {
+export const AdminStatistics = () => {
   const { data, isLoading, error, refetch } = useQuery(
     ['statistics'],
     async () => {
@@ -61,42 +61,42 @@ export const StatisticsCards = () => {
       {data && (
         <>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Organizations')}
               value={data.organizations}
               to={{ state: 'admin.customers' }}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Projects')}
               value={data.projects}
               to={{ state: 'admin.projects' }}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Users')}
               value={data.users}
               to={{ state: 'admin-user-users' }}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Categories')}
               value={data.categories}
               to={{ state: 'admin-marketplace-categories' }}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Offerings')}
               value={data.providerOfferings}
               to={{ state: 'admin-marketplace-offerings' }}
             />
           </Col>
           <Col md={6} lg={4}>
-            <CallCountCard
+            <StatisticsCard
               title={translate('Resources')}
               value={data.resources}
               to={{ state: 'marketplace-admin-resources-list' }}

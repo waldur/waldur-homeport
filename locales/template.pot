@@ -14563,8 +14563,8 @@ msgstr ""
 msgid "View YAML"
 msgstr ""
 
+#: src/core/StatisticsCard.tsx
 #: src/marketplace/category/list/CategoryGroupsList.tsx
-#: src/proposals/call-management/CallCountCard.tsx
 msgid "View all"
 msgstr ""
 
