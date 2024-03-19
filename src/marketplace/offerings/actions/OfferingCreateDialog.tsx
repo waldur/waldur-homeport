@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from '@uirouter/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -43,9 +44,10 @@ export const OfferingCreateDialog = reduxForm<
 
   const customer = useSelector(getCustomer);
   const dispatch = useDispatch();
+  const router = useRouter();
   const saveOffering = async (formData: OfferingCreateFormData) => {
     try {
-      await createProviderOffering({
+      const response = await createProviderOffering({
         name: formData.name,
         customer: customer.url,
         category: formData.category.url,
@@ -56,6 +58,9 @@ export const OfferingCreateDialog = reduxForm<
         await fetch();
       }
       dispatch(closeModalDialog());
+      router.stateService.go('marketplace-offering-update', {
+        offering_uuid: response.data.uuid,
+      });
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to create offering.')));
     }
