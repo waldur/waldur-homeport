@@ -12,7 +12,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import {
   disableCallManagingOrganization,
   enableCallManagingOrganization,
-  organizationCallManagingInfo,
+  getCallManagingOrganization,
 } from '@waldur/proposals/api';
 import { showErrorResponse } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -27,7 +27,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
   const { error: errorInfo, refetch } = useQuery(
     ['callManagingOrganization', customer.uuid],
     () =>
-      organizationCallManagingInfo(customer.uuid).then((data) => {
+      getCallManagingOrganization(customer.uuid).then((data) => {
         if (data) {
           setInfoUuid(data.uuid);
         }

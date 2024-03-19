@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ProposalCall } from '@waldur/proposals/types';
+import { Call } from '@waldur/proposals/types';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const CallRoundCreateDialog = lazyComponent(
@@ -13,7 +13,7 @@ const CallRoundCreateDialog = lazyComponent(
 );
 
 interface RoundCreateButtonProps {
-  call: ProposalCall;
+  call: Call;
   refetch(): void;
 }
 

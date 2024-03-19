@@ -3,10 +3,10 @@ import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 
 interface CallDescriptionCardProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const CallDescriptionCard = ({ call }: CallDescriptionCardProps) => {

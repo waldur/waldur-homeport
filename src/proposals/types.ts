@@ -1,7 +1,28 @@
 import { Limits } from '@waldur/marketplace/details/types';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 
-export interface CallManagingOrganizationInfo {
+export type RoundReviewStrategy = 'after_round' | 'after_proposal';
+
+export type RoundAllocationStrategy = 'by_call_manager' | 'automatic';
+
+export type RoundAllocationTime = 'on_decision' | 'fixed_date';
+
+export type CallState = 'active' | 'draft' | 'archived';
+
+export type ProposalState =
+  | 'draft'
+  | 'submitted'
+  | 'in_review'
+  | 'in_revision'
+  | 'accepted'
+  | 'rejected'
+  | 'canceled';
+
+export type CallOfferingState = 'requested' | 'accepted' | 'canceled';
+
+export type ReviewState = 'created' | 'in_review' | 'submitted' | 'rejected';
+
+export interface CallManagingOrganization {
   uuid: string;
   url: string;
   customer_name: string;
@@ -10,19 +31,13 @@ export interface CallManagingOrganizationInfo {
   image?: string;
 }
 
-type CallReviewStrategy = 'After round is closed' | 'After proposal submission';
-type CallAllocationStrategy =
-  | 'By call manager'
-  | 'Automatic based on review scoring';
-type CallAllocationTime = 'On decision' | 'Fixed date';
-
-export interface ProposalCallRound {
+export interface Round {
   uuid: string;
   start_time: string;
   cutoff_time: string;
-  review_strategy: CallReviewStrategy;
-  deciding_entity: CallAllocationStrategy;
-  allocation_time: CallAllocationTime;
+  review_strategy: RoundReviewStrategy;
+  deciding_entity: RoundAllocationStrategy;
+  allocation_time: RoundAllocationTime;
   max_allocations: number;
   allocation_date: string;
   minimal_average_scoring: string;
@@ -31,7 +46,7 @@ export interface ProposalCallRound {
   url: string;
 }
 
-export interface ProposalCall {
+export interface Call {
   url: string;
   uuid: string;
   created: string;
@@ -40,35 +55,33 @@ export interface ProposalCall {
   reference_code: string;
   start_time: string;
   end_time: string;
-  state: 'Active' | 'Draft' | 'Archived';
+  state: CallState;
   manager: string;
   customer_name: string;
   created_by: string;
   offerings: Offering[];
-  rounds: ProposalCallRound[];
+  rounds: Round[];
 }
 
-export interface CallRoundFormData {
+export interface RoundFormData {
   start_time: string;
   timezone: string;
   cutoff_time: string;
-  review_strategy: number; // enum
+  review_strategy: RoundReviewStrategy;
   review_duration_in_days: number;
   minimum_number_of_reviewers: number;
-  deciding_entity: number; // enum
+  deciding_entity: RoundAllocationStrategy;
   max_allocations: number;
   minimal_average_scoring: string;
-  allocation_time: number; // enum
+  allocation_time: RoundAllocationTime;
   allocation_date: string;
 }
 
 export interface EditCallProps {
-  call: ProposalCall;
+  call: Call;
   fields: string[];
   refetch(): void;
 }
-
-type ProposalState = 'Active' | 'Draft' | 'Archive';
 
 export interface Proposal {
   uuid: string;
@@ -83,7 +96,7 @@ export interface Proposal {
   created_by: string;
   duration_in_days: number;
   project: string;
-  round: ProposalCallRound;
+  round: Round;
 }
 
 export interface CallOffering {
@@ -98,7 +111,7 @@ export interface CallOffering {
   offering: string;
   offering_name: string;
   provider_name: string;
-  state: 'Requested' | 'Accepted' | 'Canceled';
+  state: CallOfferingState;
   plan?: string;
   plan_name?: string;
 }
@@ -125,14 +138,12 @@ export interface ProposalFormStepProps {
   change?(field: string, value: any): void;
 }
 
-type ProposalReviewState = 'Created' | 'In review' | 'Submitted' | 'Rejected';
-
 export interface ProposalReview {
   url: string;
   uuid: string;
   proposal: string;
   reviewer: string;
-  state: ProposalReviewState;
+  state: ReviewState;
   summary_score: number;
   summary_public_comment: string;
   summary_private_comment: string;

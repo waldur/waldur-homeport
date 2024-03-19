@@ -1,16 +1,16 @@
 import { FC } from 'react';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { OfferingsListTablePlaceholder } from '@waldur/marketplace/offerings/list/OfferingsListTablePlaceholder';
 import { Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
-import { CallOffering, ProposalCall } from '../types';
-import { callOfferingStateAliases } from '../utils';
+import { CallOffering, Call } from '../types';
+
+import { CallOfferingStateField } from './CallOfferingStateField';
 
 interface CallOfferingsCardProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const CallOfferingsCard: FC<CallOfferingsCardProps> = (props) => {
@@ -48,12 +48,7 @@ export const CallOfferingsCard: FC<CallOfferingsCardProps> = (props) => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => (
-            <StateIndicator
-              label={callOfferingStateAliases(row.state)}
-              variant={row.state === 'Accepted' ? 'success' : 'secondary'}
-            />
-          ),
+          render: CallOfferingStateField,
         },
       ]}
       title={translate('Offerings')}

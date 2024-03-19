@@ -5,13 +5,13 @@ import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
 import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
 import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
-import { ProposalCall, ProposalCallRound } from '@waldur/proposals/types';
+import { Call, Round } from '@waldur/proposals/types';
 
 import { EditSubmissionInfoButton } from './EditSubmissionInfoButton';
 
 interface RoundSubmissionSectionProps {
-  round: ProposalCallRound;
-  call: ProposalCall;
+  round: Round;
+  call: Call;
   refetch(): void;
   loading: boolean;
 }
@@ -50,7 +50,6 @@ export const RoundSubmissionSection: FC<RoundSubmissionSectionProps> = ({
       </Card.Header>
       <Card.Body>
         <ReadOnlyFormControl
-          key={round.start_time}
           label={translate('Start date')}
           value={
             round.start_time
@@ -61,7 +60,6 @@ export const RoundSubmissionSection: FC<RoundSubmissionSectionProps> = ({
           floating
         />
         <ReadOnlyFormControl
-          key={round.cutoff_time}
           label={translate('Cutoff date')}
           value={
             round.cutoff_time

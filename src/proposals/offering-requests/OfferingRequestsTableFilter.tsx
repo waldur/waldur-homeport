@@ -9,21 +9,7 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { CallAutocomplete } from '../CallAutocomplete';
 import { OFFERING_REQUESTS_FILTER_FORM_ID } from '../constants';
-
-const choices = [
-  {
-    label: translate('Requested'),
-    value: 'Requested',
-  },
-  {
-    label: translate('Accepted'),
-    value: 'Accepted',
-  },
-  {
-    label: translate('Canceled'),
-    value: 'Canceled',
-  },
-];
+import { getCallOfferingStateOptions } from '../utils';
 
 const PureOfferingRequestsTableFilter: FunctionComponent<{}> = () => (
   <>
@@ -47,7 +33,7 @@ const PureOfferingRequestsTableFilter: FunctionComponent<{}> = () => (
         component={(fieldProps) => (
           <Select
             placeholder={translate('Select status...')}
-            options={choices}
+            options={getCallOfferingStateOptions()}
             value={fieldProps.input.value}
             onChange={(item) => fieldProps.input.onChange(item)}
             isMulti={true}

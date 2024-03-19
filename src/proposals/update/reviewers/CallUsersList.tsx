@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { GenericPermission } from '@waldur/permissions/types';
-import { ProposalCall } from '@waldur/proposals/types';
+import { Call } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
@@ -12,7 +12,7 @@ import { CallUsersListPlaceholder } from './CallUsersListPlaceholder';
 import { UserRemoveButton } from './UserRemoveButton';
 
 interface CallUsersListProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const CallUsersList: FC<CallUsersListProps> = (props) => {

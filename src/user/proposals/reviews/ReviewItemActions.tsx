@@ -74,7 +74,7 @@ export const ReviewItemAction = ({ row, fetch }: ReviewItemActionProps) => {
       }
     },
   );
-  return row.state === 'Created' ? (
+  return row.state === 'created' ? (
     <>
       <ActionButton
         action={accept}

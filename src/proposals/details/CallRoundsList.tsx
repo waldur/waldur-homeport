@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 import { getSortedRoundsWithStatus } from '../utils';
 
 interface CallRoundsListProps {
-  call: ProposalCall;
+  call: Call;
   max?: number;
   filterCode?: number;
 }

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { ProposalCall, ProposalCallRound } from '@waldur/proposals/types';
+import { Call, Round } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
@@ -12,7 +12,7 @@ import { RoundCreateButton } from './RoundCreateButton';
 import { RoundExpandableRow } from './RoundExpandableRow';
 
 interface CallRoundsSectionProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
@@ -25,7 +25,7 @@ export const CallRoundsSection: FC<CallRoundsSectionProps> = (props) => {
   });
 
   return (
-    <Table<ProposalCallRound>
+    <Table<Round>
       {...tableProps}
       id="rounds"
       className="mb-7"

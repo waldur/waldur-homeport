@@ -5,19 +5,20 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { ProposalCallRound } from '@waldur/proposals/types';
+import { Round } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { useTable } from '@waldur/table/utils';
 
 import { OFFERING_REQUESTS_FILTER_FORM_ID } from '../constants';
+import { formatCallOfferingState } from '../utils';
 
 import { OfferingRequestsListExpandableRow } from './OfferingRequestsListExpandableRow';
 import { OfferingRequestsListPlaceholder } from './OfferingRequestsListPlaceholder';
 import { OfferingRequestsTableFilter } from './OfferingRequestsTableFilter';
 
 interface OfferingRequestsListProps {
-  round: ProposalCallRound;
+  round: Round;
 }
 
 const filtersSelctor = createSelector(
@@ -73,7 +74,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{row.state}</>,
+          render: ({ row }) => <>{formatCallOfferingState(row.state)}</>,
         },
       ]}
       title={translate('Offering requests')}

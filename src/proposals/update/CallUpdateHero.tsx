@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
-import { getCallStatus } from '@waldur/proposals/utils';
+import { formatCallState, getCallStatus } from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 
 import { ActionsDropdown } from './ActionsDropdown';
 import { CallUpdateHeaderBody } from './CallUpdateHeaderBody';
@@ -16,7 +16,7 @@ import { ProposalCallQuotas } from './ProposalCallQuotas';
 const heroBg = require('@waldur/proposals/proposal-calls.png');
 
 interface CallUpdateHeroProps {
-  call: ProposalCall;
+  call: Call;
   refetch?(): void;
 }
 
@@ -29,7 +29,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       logoAlt={call.customer_name}
       logoBottomLabel={translate('Call')}
       logoBottomClass="bg-secondary"
-      logoTopLabel={call.state}
+      logoTopLabel={formatCallState(call.state)}
       logoTopClass={'bg-' + status.color}
       backgroundImage={heroBg}
       asHero
@@ -49,7 +49,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       quickBody={<ProposalCallQuotas call={call} />}
       quickFooterClassName="justify-content-center"
     >
-      {call.state !== 'Archived' && call.rounds.length > 0 && (
+      {call.state !== 'archived' && call.rounds.length > 0 && (
         <CallUpdateHeaderBody call={call} />
       )}
     </PublicDashboardHero>

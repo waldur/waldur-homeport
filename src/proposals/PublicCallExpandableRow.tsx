@@ -11,11 +11,16 @@ import { getItemAbbreviation } from '@waldur/navigation/workspace/context-select
 import { Field } from '@waldur/resource/summary';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { ProposalCall } from './types';
-import { getSortedRoundsWithStatus } from './utils';
+import { Call } from './types';
+import {
+  formatRoundAllocationStrategy,
+  formatRoundAllocationTime,
+  formatRoundReviewStrategy,
+  getSortedRoundsWithStatus,
+} from './utils';
 
 export const PublicCallExpandableRow: FunctionComponent<{
-  row: ProposalCall;
+  row: Call;
 }> = ({ row }) => {
   const customer = useSelector(getCustomer);
 
@@ -65,19 +70,21 @@ export const PublicCallExpandableRow: FunctionComponent<{
                 />
                 <Field
                   label={translate('Review strategy')}
-                  value={activeRound.review_strategy}
+                  value={formatRoundReviewStrategy(activeRound.review_strategy)}
                   isStuck
                 />
               </Col>
               <Col lg={12} xl={6}>
                 <Field
                   label={translate('Round strategy')}
-                  value={activeRound.deciding_entity}
+                  value={formatRoundAllocationStrategy(
+                    activeRound.deciding_entity,
+                  )}
                   isStuck
                 />
                 <Field
                   label={translate('Allocation strategy')}
-                  value={activeRound.allocation_time}
+                  value={formatRoundAllocationTime(activeRound.allocation_time)}
                   isStuck
                 />
               </Col>

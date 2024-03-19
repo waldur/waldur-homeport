@@ -5,13 +5,17 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
 import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
-import { ProposalCall, ProposalCallRound } from '@waldur/proposals/types';
+import { Call as Call, Round } from '@waldur/proposals/types';
+import {
+  formatRoundAllocationStrategy,
+  formatRoundAllocationTime,
+} from '@waldur/proposals/utils';
 
 import { EditAllocationInfoButton } from './EditAllocationInfoButton';
 
 interface RoundAllocationSectionProps {
-  round: ProposalCallRound;
-  call: ProposalCall;
+  round: Round;
+  call: Call;
   refetch(): void;
   loading: boolean;
 }
@@ -39,36 +43,31 @@ export const RoundAllocationSection: FC<RoundAllocationSectionProps> = ({
       </Card.Header>
       <Card.Body>
         <ReadOnlyFormControl
-          key={round.deciding_entity}
           label={translate('Deciding entity')}
-          value={round.deciding_entity}
+          value={formatRoundAllocationStrategy(round.deciding_entity)}
           className="col-12 col-md-6"
           floating
         />
         <ReadOnlyFormControl
-          key={round.max_allocations}
           label={translate('Maximum accepted proposals')}
           value={round.max_allocations}
           className="col-12 col-md-6"
           floating
         />
         <ReadOnlyFormControl
-          key={round.minimal_average_scoring}
           label={translate('Minimum average scoring for allocation')}
           value={round.minimal_average_scoring}
           className="col-12 col-md-6"
           floating
         />
         <ReadOnlyFormControl
-          key={round.allocation_time}
           label={translate('Allocation time')}
-          value={round.allocation_time}
+          value={formatRoundAllocationTime(round.allocation_time)}
           className="col-12 col-md-6"
           floating
         />
-        {round.allocation_time === 'Fixed date' && (
+        {round.allocation_time === 'fixed_date' && (
           <ReadOnlyFormControl
-            key={round.allocation_date}
             label={translate('Allocation date')}
             value={
               round.allocation_date

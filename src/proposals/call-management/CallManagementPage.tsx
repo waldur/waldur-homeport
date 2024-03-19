@@ -8,10 +8,12 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { CallAllFilters } from '@waldur/proposals/call-management/CallAllFilters';
 import { CALL_FILTER_FORM_ID } from '@waldur/proposals/constants';
-import { ProposalCall } from '@waldur/proposals/types';
+import { Call } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
+
+import { formatCallState } from '../utils';
 
 import { CallCreateButton } from './CallCreateButton';
 import { CallEditButton } from './CallEditButton';
@@ -46,7 +48,7 @@ export const CallManagementPage: FunctionComponent = () => {
   });
 
   return (
-    <Table<ProposalCall>
+    <Table<Call>
       {...tableProps}
       columns={[
         {
@@ -68,7 +70,7 @@ export const CallManagementPage: FunctionComponent = () => {
         {
           title: translate('State'),
           orderField: 'state',
-          render: ({ row }) => <>{row.state}</>,
+          render: ({ row }) => <>{formatCallState(row.state)}</>,
         },
       ]}
       verboseName={translate('Calls')}

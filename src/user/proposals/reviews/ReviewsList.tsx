@@ -4,7 +4,8 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { ProposalCallRound, ProposalReview } from '@waldur/proposals/types';
+import { Round, ProposalReview } from '@waldur/proposals/types';
+import { formatReviewState } from '@waldur/proposals/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { USER_REVIEWS_FILTER_FORM_ID } from '@waldur/user/constants';
@@ -18,7 +19,7 @@ import { ReviewsListPlaceholder } from './ReviewsListPlaceholder';
 import { ReviewsTableFilter } from './ReviewsTableFilter';
 
 interface ReviewsListProps {
-  round: ProposalCallRound;
+  round: Round;
 }
 
 const filtersSelctor = createSelector(
@@ -66,7 +67,7 @@ export const ReviewsList: FC<ReviewsListProps> = () => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{row.state}</>,
+          render: ({ row }) => <>{formatReviewState(row.state)}</>,
         },
       ]}
       title={translate('My reviews')}

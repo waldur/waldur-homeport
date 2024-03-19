@@ -6,7 +6,7 @@ import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero'
 import { translate } from '@waldur/i18n';
 
 import { CallStateField } from '../CallStateField';
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 import { getSortedRoundsWithStatus } from '../utils';
 
 import { CallDetailsHeaderBody } from './CallDetailsHeaderBody';
@@ -16,14 +16,14 @@ import { CallShowAllRounds } from './CallShowAllRounds';
 const heroBg = require('@waldur/proposals/proposal-calls.png');
 
 interface PublicCallDetailsHeroProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
   call,
 }) => {
   const activeRound =
-    call.state == 'Active' &&
+    call.state == 'active' &&
     useMemo(() => {
       const items = getSortedRoundsWithStatus(call.rounds);
       const first = items[0];

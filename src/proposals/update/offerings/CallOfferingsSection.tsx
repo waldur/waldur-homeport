@@ -1,18 +1,17 @@
 import { FC } from 'react';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { ProposalCall } from '@waldur/proposals/types';
-import { CallOfferingExpandableRow } from '@waldur/proposals/update/offerings/CallOfferingExpandableRow';
-import { callOfferingStateAliases } from '@waldur/proposals/utils';
+import { CallOfferingStateField } from '@waldur/proposals/details/CallOfferingStateField';
+import { Call } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { AddOfferingButton } from './AddOfferingButton';
+import { CallOfferingExpandableRow } from './CallOfferingExpandableRow';
 import { CallOfferingsTablePlaceholder } from './CallOfferingsTablePlaceholder';
 
 interface CallOfferingsSectionProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
@@ -52,12 +51,7 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => (
-            <StateIndicator
-              label={callOfferingStateAliases(row.state)}
-              variant={row.state === 'Accepted' ? 'success' : 'secondary'}
-            />
-          ),
+          render: CallOfferingStateField,
         },
       ]}
       title={translate('Offerings')}

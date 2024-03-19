@@ -6,7 +6,7 @@ import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero'
 import { translate } from '@waldur/i18n';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { ProposalCall, ProposalCallRound } from '../types';
+import { Call, Round } from '../types';
 import { getRoundStatus } from '../utils';
 
 import { RoundPageHeaderBody } from './RoundPageHeaderBody';
@@ -15,8 +15,8 @@ import { RoundQuotas } from './RoundQuotas';
 const heroBg = require('@waldur/proposals/proposal-calls.png');
 
 interface RoundPageHeroProps {
-  round: ProposalCallRound;
-  call: ProposalCall;
+  round: Round;
+  call: Call;
 }
 
 export const RoundPageHero: FC<RoundPageHeroProps> = ({ round, call }) => {

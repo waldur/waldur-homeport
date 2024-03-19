@@ -4,7 +4,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 
 const CallRoundsDialog = lazyComponent(
   () => import('./CallRoundsDialog'),
@@ -17,7 +17,7 @@ const showAllRoundsDialog = (call) =>
     size: 'lg',
   });
 
-export const CallShowAllRounds = ({ call }: { call: ProposalCall }) => {
+export const CallShowAllRounds = ({ call }: { call: Call }) => {
   const dispatch = useDispatch();
 
   if (call?.rounds?.length < 4) {

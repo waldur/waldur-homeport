@@ -5,14 +5,14 @@ import { fixURL } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { createCallOffering } from '@waldur/proposals/api';
-import { CallOfferingFormData, ProposalCall } from '@waldur/proposals/types';
+import { CallOfferingFormData, Call } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { CallOfferingCreateForm } from './CallOfferingCreateForm';
 
 interface CallOfferingCreateDialogProps {
   resolve: {
-    call: ProposalCall;
+    call: Call;
     refetch(): void;
   };
 }

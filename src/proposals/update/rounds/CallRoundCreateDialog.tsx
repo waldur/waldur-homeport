@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 
 import { closeModalDialog } from '@waldur/modal/actions';
 import { createCallRound } from '@waldur/proposals/api';
-import { CallRoundFormData, ProposalCall } from '@waldur/proposals/types';
+import { RoundFormData, Call } from '@waldur/proposals/types';
 
 import { CallRoundCreateForm } from './CallRoundCreateForm';
 
 interface CallRoundCreateDialogProps {
   resolve: {
-    call: ProposalCall;
+    call: Call;
     refetch(): void;
   };
 }
@@ -20,7 +20,7 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
 ) => {
   const dispatch = useDispatch();
   const createRound = useCallback(
-    (formData: CallRoundFormData, _dispatch, formProps) => {
+    (formData: RoundFormData, _dispatch, formProps) => {
       return createCallRound(props.resolve.call.uuid, formData).then(() => {
         formProps.destroy();
         dispatch(closeModalDialog());

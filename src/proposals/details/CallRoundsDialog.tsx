@@ -2,13 +2,13 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 
 import { CallRoundsList } from './CallRoundsList';
 
 interface CallRoundsDialogProps {
   resolve: {
-    call: ProposalCall;
+    call: Call;
   };
 }
 
