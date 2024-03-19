@@ -12,13 +12,14 @@ import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { CallAllFiltersWithDefaultState } from '@waldur/proposals/call-management/CallAllFilters';
 import { CALL_FILTER_FORM_ID } from '@waldur/proposals/constants';
-import { ProposalCall } from '@waldur/proposals/types';
+import { Call } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { HeroSection } from './HeroSection';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { PublicCallsTablePlaceholder } from './PublicCallsTablePlaceholder';
+import { formatCallState } from './utils';
 
 import './PublicCallsPage.scss';
 
@@ -60,7 +61,7 @@ export const PublicCallsPage: FunctionComponent = () => {
         }
       ></HeroSection>
       <div className="container-xxl mb-20">
-        <Table<ProposalCall>
+        <Table<Call>
           title={translate('Calls for proposals')}
           {...tableProps}
           columns={[
@@ -93,7 +94,7 @@ export const PublicCallsPage: FunctionComponent = () => {
             },
             {
               title: translate('State'),
-              render: ({ row }) => <>{row.state}</>,
+              render: ({ row }) => <>{formatCallState(row.state)}</>,
             },
           ]}
           verboseName={translate('Public calls')}

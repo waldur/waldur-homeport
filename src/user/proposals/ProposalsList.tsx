@@ -5,7 +5,8 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { ProposalCallRound } from '@waldur/proposals/types';
+import { Round } from '@waldur/proposals/types';
+import { formatProposalState } from '@waldur/proposals/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
@@ -17,7 +18,7 @@ import { ProposalsListPlaceholder } from './ProposalsListPlaceholder';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
 
 interface ProposalsListProps {
-  round: ProposalCallRound;
+  round: Round;
 }
 
 const filtersSelctor = createSelector(
@@ -30,6 +31,7 @@ const filtersSelctor = createSelector(
     if (filters?.call) {
       result.call = filters.call.uuid;
     }
+    result.o = '-round__cutoff_time';
     return result;
   },
 );
@@ -39,9 +41,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
 
   const tableProps = useTable({
     table: 'MyProposalsList',
-    fetchData: createFetcher('proposal-proposals', {
-      params: { o: '-round__cutoff_time' },
-    }),
+    fetchData: createFetcher('proposal-proposals'),
     queryField: 'name',
     filter,
   });
@@ -65,7 +65,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{row.state}</>,
+          render: ({ row }) => <>{formatProposalState(row.state)}</>,
         },
         {
           title: translate('Status'),

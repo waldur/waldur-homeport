@@ -7,13 +7,9 @@ import { DateTimeField } from '@waldur/form/DateTimeField';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 import {
-  getCallAllocationStrategyOptions,
-  getCallAllocationTimesOptions,
+  getRoundAllocationStrategyOptions,
+  getRoundAllocationTimeOptions,
 } from '@waldur/proposals/utils';
-
-const FIXED_DATE_OPTION = getCallAllocationTimesOptions().find(
-  (op) => op.label === 'Fixed date',
-).value;
 
 export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
   props,
@@ -22,7 +18,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
     <WizardForm {...props}>
       {(wizardProps) => {
         const showAllocationDate =
-          wizardProps.formValues?.allocation_time === FIXED_DATE_OPTION;
+          wizardProps.formValues?.allocation_time === 'fixed_date';
         return (
           <FormContainer
             submitting={wizardProps.submitting}
@@ -32,7 +28,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
               name="deciding_entity"
               label={translate('Deciding entity')}
               simpleValue={true}
-              options={getCallAllocationStrategyOptions()}
+              options={getRoundAllocationStrategyOptions()}
               required={true}
               isClearable={false}
               validate={required}
@@ -53,7 +49,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
               name="allocation_time"
               label={translate('Allocation time')}
               simpleValue={true}
-              options={getCallAllocationTimesOptions()}
+              options={getRoundAllocationTimeOptions()}
               required={true}
               isClearable={false}
               validate={required}

@@ -4,10 +4,10 @@ import { translate } from '@waldur/i18n';
 import { PageBarTabs } from '@waldur/marketplace/common/PageBarTabs';
 import { PageBarTab } from '@waldur/marketplace/context';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 
 interface CallUpdateBarProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const CallUpdateBar: FunctionComponent<CallUpdateBarProps> = ({

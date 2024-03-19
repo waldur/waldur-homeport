@@ -1,11 +1,11 @@
 import { formatRelativeWithHour } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 import { getRoundStatus, getSortedRoundsWithStatus } from '../utils';
 
 interface CallDetailsHeaderBodyProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {

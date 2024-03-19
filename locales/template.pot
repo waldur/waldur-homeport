@@ -108,10 +108,8 @@ msgstr ""
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
-#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/utils.ts
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Accepted"
 msgstr ""
 
@@ -259,7 +257,6 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
-#: src/proposals/call-management/CallStateFilter.tsx
 #: src/proposals/utils.ts
 #: src/user/support/utils.ts
 msgid "Active"
@@ -575,6 +572,14 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
 msgid "Affinity"
+msgstr ""
+
+#: src/proposals/utils.ts
+msgid "After proposal submission"
+msgstr ""
+
+#: src/proposals/utils.ts
+msgid "After round is closed"
 msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
@@ -895,7 +900,7 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
-#: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/utils.ts
 msgid "Archived"
 msgstr ""
 
@@ -1246,6 +1251,10 @@ msgstr ""
 msgid "Auto-generated"
 msgstr ""
 
+#: src/proposals/utils.ts
+msgid "Automatic based on review scoring"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/OfferingScheduler.tsx
 msgid "Availability"
 msgstr ""
@@ -1556,6 +1565,10 @@ msgstr ""
 msgid "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr ""
 
+#: src/proposals/utils.ts
+msgid "By call manager"
+msgstr ""
+
 #: src/marketplace/deploy/DeployPageSidebar.tsx
 #: src/proposals/proposal/create/CreatePageSidebar.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
@@ -1730,12 +1743,12 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
-#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/proposals/utils.ts
 msgid "Canceled"
 msgstr ""
 
 #: src/paypal/InvoicesFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
+#: src/proposals/utils.ts
 msgid "Cancelled"
 msgstr ""
 
@@ -2595,6 +2608,7 @@ msgstr ""
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/round/proposals/RoundProposalsSection.tsx
+#: src/proposals/utils.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -2604,7 +2618,6 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/affiliations/ProjectsList.tsx
-#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -3447,9 +3460,7 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/paypal/InvoicesFilter.tsx
-#: src/proposals/call-management/CallStateFilter.tsx
 #: src/proposals/utils.ts
-#: src/user/proposals/ProposalsTableFilter.tsx
 msgid "Draft"
 msgstr ""
 
@@ -4322,6 +4333,10 @@ msgstr ""
 msgid "Fixed IPs"
 msgstr ""
 
+#: src/proposals/utils.ts
+msgid "Fixed date"
+msgstr ""
+
 #: src/marketplace/offerings/update/components/ComponentAccountingTypeField.tsx
 msgid "Fixed price"
 msgstr ""
@@ -4983,12 +4998,11 @@ msgstr ""
 msgid "Importing resources"
 msgstr ""
 
-#: src/user/proposals/ProposalsTableFilter.tsx
-#: src/user/proposals/reviews/ReviewsTableFilter.tsx
+#: src/proposals/utils.ts
 msgid "In review"
 msgstr ""
 
-#: src/user/proposals/ProposalsTableFilter.tsx
+#: src/proposals/utils.ts
 msgid "In revision"
 msgstr ""
 
@@ -7089,6 +7103,10 @@ msgstr ""
 msgid "Old value"
 msgstr ""
 
+#: src/proposals/utils.ts
+msgid "On decision"
+msgstr ""
+
 #: src/marketplace/service-providers/ProjectsCountColumn.tsx
 msgid "One project"
 msgstr ""
@@ -9155,9 +9173,8 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/proposals/utils.ts
 #: src/user/UserPermissionRequestsStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
-#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Rejected"
 msgstr ""
 
@@ -9438,7 +9455,6 @@ msgid "Request-based item (without Service Desk)"
 msgstr ""
 
 #: src/invitations/InvitationsFilter.tsx
-#: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/utils.ts
 msgid "Requested"
 msgstr ""
@@ -11514,8 +11530,7 @@ msgstr ""
 msgid "Submit usage report"
 msgstr ""
 
-#: src/user/proposals/ProposalsTableFilter.tsx
-#: src/user/proposals/reviews/ReviewsTableFilter.tsx
+#: src/proposals/utils.ts
 msgid "Submitted"
 msgstr ""
 

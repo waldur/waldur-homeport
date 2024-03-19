@@ -14,10 +14,10 @@ const PureProviderCampaignFilter: FunctionComponent = () => {
         <ProviderAutocomplete />
       </TableFilterItem>
       <TableFilterItem title={translate('State')} name="state">
-        <ProviderCampaignStateFilter reactSelectProps={{ isMulti: true }} />
+        <ProviderCampaignStateFilter />
       </TableFilterItem>
       <TableFilterItem title={translate('Discount type')} name="discount_type">
-        <ProviderCampaignTypeFilter reactSelectProps={{ isMulti: true }} />
+        <ProviderCampaignTypeFilter />
       </TableFilterItem>
     </>
   );

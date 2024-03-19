@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { ProposalCallRound } from '@waldur/proposals/types';
+import { Round } from '@waldur/proposals/types';
 
 import { EditReviewersButton } from './EditReviewersButton';
 
 interface RoundReviewersSectionProps {
-  round: ProposalCallRound;
+  round: Round;
 }
 
 const dummyData = [

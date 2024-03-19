@@ -5,13 +5,14 @@ import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
 import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
 import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
-import { ProposalCall, ProposalCallRound } from '@waldur/proposals/types';
+import { Call, Round } from '@waldur/proposals/types';
+import { formatRoundReviewStrategy } from '@waldur/proposals/utils';
 
 import { EditReviewInfoButton } from './EditReviewInfoButton';
 
 interface RoundReviewSectionProps {
-  round: ProposalCallRound;
-  call: ProposalCall;
+  round: Round;
+  call: Call;
   refetch(): void;
   loading: boolean;
 }
@@ -44,14 +45,12 @@ export const RoundReviewSection: FC<RoundReviewSectionProps> = ({
       </Card.Header>
       <Card.Body>
         <ReadOnlyFormControl
-          key={round.review_strategy}
           label={translate('Review strategy')}
-          value={round.review_strategy}
+          value={formatRoundReviewStrategy(round.review_strategy)}
           className="col-12 col-md-6"
           floating
         />
         <ReadOnlyFormControl
-          key={round.review_duration_in_days}
           label={translate('Review duration')}
           value={round.review_duration_in_days}
           className="col-12 col-md-6"
@@ -59,7 +58,6 @@ export const RoundReviewSection: FC<RoundReviewSectionProps> = ({
           addon={'days'}
         />
         <ReadOnlyFormControl
-          key={round.minimum_number_of_reviewers}
           label={translate('Minimum reviewers')}
           value={round.minimum_number_of_reviewers}
           className="col-12 col-md-6"

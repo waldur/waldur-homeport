@@ -3,37 +3,128 @@ import { DateTime } from 'luxon';
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import {
-  CallRoundFormData,
-  ProposalCall,
-  ProposalCallRound,
+  RoundFormData,
+  Call,
+  Round,
+  RoundAllocationStrategy,
+  RoundReviewStrategy,
+  RoundAllocationTime,
+  CallState,
+  CallOfferingState,
+  ProposalState,
+  ReviewState,
 } from '@waldur/proposals/types';
 
-export const getCallRoundStrategyOptions = () => [
-  { value: 1, label: 'One-time' },
-  { value: 2, label: 'Regular' },
-];
+export const getRoundReviewStrategyOptions = () =>
+  [
+    { value: 'after_round', label: translate('After round is closed') },
+    { value: 'after_proposal', label: translate('After proposal submission') },
+  ] as { value: RoundReviewStrategy; label: string }[];
 
-export const getCallReviewStrategyOptions = () => [
-  { value: 1, label: 'After round is closed' },
-  { value: 2, label: 'After proposal submission' },
-];
+export const formatRoundReviewStrategy = (value: RoundReviewStrategy) =>
+  getRoundReviewStrategyOptions().find((option) => option.value === value)
+    ?.label || value;
 
-export const getCallAllocationStrategyOptions = () => [
-  { value: 1, label: 'By call manager' },
-  { value: 2, label: 'Automatic based on review scoring' },
-];
+export const getRoundAllocationStrategyOptions = () =>
+  [
+    { value: 'by_call_manager', label: translate('By call manager') },
+    {
+      value: 'automatic',
+      label: translate('Automatic based on review scoring'),
+    },
+  ] as { value: RoundAllocationStrategy; label: string }[];
 
-export const getCallAllocationTimesOptions = () => [
-  { value: 1, label: 'On decision' },
-  { value: 2, label: 'Fixed date' },
-];
+export const formatRoundAllocationStrategy = (value: RoundAllocationStrategy) =>
+  getRoundAllocationStrategyOptions().find((option) => option.value === value)
+    ?.label || value;
 
-export const callStateActions = () => [
-  { label: translate('Activate'), value: 'Active', action: 'activate' },
-  { label: translate('Archive'), value: 'Archived', action: 'archive' },
-];
+export const getRoundAllocationTimeOptions = () =>
+  [
+    { value: 'on_decision', label: translate('On decision') },
+    { value: 'fixed_date', label: translate('Fixed date') },
+  ] as { value: RoundAllocationTime; label: string }[];
 
-export const getRoundStatus = (round: ProposalCallRound) => {
+export const formatRoundAllocationTime = (value: RoundAllocationTime) =>
+  getRoundAllocationTimeOptions().find((option) => option.value === value)
+    ?.label || value;
+
+export const getCallStateActions = () =>
+  [
+    { label: translate('Activate'), value: 'active', action: 'activate' },
+    { label: translate('Archive'), value: 'archived', action: 'archive' },
+  ] as { value: CallState; label: string; action: string }[];
+
+export const getCallStateOptions = () =>
+  [
+    { value: 'archived', label: translate('Archived') },
+    { value: 'active', label: translate('Active') },
+    { value: 'draft', label: translate('Draft') },
+  ] as { value: CallState; label: string }[];
+
+export const formatCallState = (value: CallState) =>
+  getCallStateOptions().find((option) => option.value === value)?.label ||
+  value;
+
+export const getCallOfferingStateOptions = () =>
+  [
+    { value: 'requested', label: translate('Requested') },
+    { value: 'accepted', label: translate('Accepted') },
+    { value: 'canceled', label: translate('Canceled') },
+  ] as { value: CallOfferingState; label: string }[];
+
+export const formatCallOfferingState = (value: CallOfferingState) =>
+  getCallOfferingStateOptions().find((option) => option.value === value)
+    ?.label || value;
+
+export const getProposalStateOptions = () =>
+  [
+    {
+      label: translate('Draft'),
+      value: 'draft',
+    },
+    {
+      label: translate('Submitted'),
+      value: 'submitted',
+    },
+    {
+      label: translate('In review'),
+      value: 'in_review',
+    },
+    {
+      label: translate('In revision'),
+      value: 'in_revision',
+    },
+    {
+      label: translate('Accepted'),
+      value: 'accepted',
+    },
+    {
+      label: translate('Rejected'),
+      value: 'rejected',
+    },
+    {
+      label: translate('Cancelled'),
+      value: 'cancelled',
+    },
+  ] as { value: ProposalState; label: string }[];
+
+export const formatProposalState = (value: ProposalState) =>
+  getProposalStateOptions().find((option) => option.value === value)?.label ||
+  value;
+
+export const getReviewStateOptions = () =>
+  [
+    { value: 'created', label: translate('Created') },
+    { value: 'in_review', label: translate('In review') },
+    { value: 'submitted', label: translate('Submitted') },
+    { value: 'rejected', label: translate('Rejected') },
+  ] as { value: ReviewState; label: string }[];
+
+export const formatReviewState = (value: ReviewState) =>
+  getReviewStateOptions().find((option) => option.value === value)?.label ||
+  value;
+
+export const getRoundStatus = (round: Round) => {
   const now = DateTime.now();
   const start = parseDate(round.start_time);
   if (start > now)
@@ -46,13 +137,13 @@ export const getRoundStatus = (round: ProposalCallRound) => {
   }
 };
 
-export const getCallStatus = (call: ProposalCall) => {
-  if (call.state == 'Active')
+export const getCallStatus = (call: Call) => {
+  if (call.state == 'active')
     return { label: translate('Active'), color: 'success' };
-  else if (call.state == 'Draft')
+  else if (call.state == 'draft')
     return { label: translate('Draft'), color: 'danger' };
-  else if (call.state == 'Archived')
-    return { label: translate('Active'), color: 'secondary' };
+  else if (call.state == 'archived')
+    return { label: translate('Archived'), color: 'secondary' };
   else {
     return { label: call.state, color: 'secondary' };
   }
@@ -60,9 +151,9 @@ export const getCallStatus = (call: ProposalCall) => {
 
 /** Returns round items in sort of [earliest open, earliest scheduled, oldest ended] */
 export const getSortedRoundsWithStatus = (
-  rounds: ProposalCallRound[],
+  rounds: Round[],
 ): Array<
-  ProposalCallRound & {
+  Round & {
     state: ReturnType<typeof getRoundStatus>;
   }
 > => {
@@ -88,35 +179,8 @@ export const getSortedRoundsWithStatus = (
   return openRounds.concat(scheduledRounds).concat(endedRounds);
 };
 
-export const getCallRoundInitialValues = (
-  round: ProposalCallRound,
-): CallRoundFormData => {
-  return {
-    ...round,
-    deciding_entity: getCallAllocationStrategyOptions().find(
-      (op) => op.label === round.deciding_entity,
-    )?.value,
-    review_strategy: getCallReviewStrategyOptions().find(
-      (op) => op.label === round.review_strategy,
-    )?.value,
-    allocation_time: getCallAllocationTimesOptions().find(
-      (op) => op.label === round.allocation_time,
-    )?.value,
-    // FIX: we don't have timezone in round object on the backend?
-    timezone: DateTime.local().zoneName,
-  };
-};
-
-export const callOfferingStateAliases = (state: string): string => {
-  switch (state) {
-    case 'Requested': {
-      return translate('Requested');
-    }
-    case 'Accepted': {
-      return translate('Accepted');
-    }
-    default: {
-      return state;
-    }
-  }
-};
+export const getRoundInitialValues = (round: Round): RoundFormData => ({
+  ...round,
+  // FIX: we don't have timezone in round object on the backend?
+  timezone: DateTime.local().zoneName,
+});

@@ -7,11 +7,16 @@ import { Field } from '@waldur/resource/summary';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CallStateField } from '../CallStateField';
-import { ProposalCall } from '../types';
-import { getSortedRoundsWithStatus } from '../utils';
+import { Call } from '../types';
+import {
+  formatRoundAllocationStrategy,
+  formatRoundAllocationTime,
+  formatRoundReviewStrategy,
+  getSortedRoundsWithStatus,
+} from '../utils';
 
 interface CallDetailsCardProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
@@ -41,18 +46,24 @@ export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
           label={translate('Publication date')}
           value={renderFieldOrDash(formatDateTime(call.start_time))}
         />
-        <Field
-          label={translate('Review strategy in active round')}
-          value={activeRound?.review_strategy}
-        />
-        <Field
-          label={translate('Round strategy in active round')}
-          value={activeRound?.deciding_entity}
-        />
-        <Field
-          label={translate('Allocation strategy in active round')}
-          value={activeRound?.allocation_time}
-        />
+        {activeRound && (
+          <Field
+            label={translate('Review strategy in active round')}
+            value={formatRoundReviewStrategy(activeRound.review_strategy)}
+          />
+        )}
+        {activeRound && (
+          <Field
+            label={translate('Round strategy in active round')}
+            value={formatRoundAllocationStrategy(activeRound.deciding_entity)}
+          />
+        )}
+        {activeRound && (
+          <Field
+            label={translate('Allocation strategy in active round')}
+            value={formatRoundAllocationTime(activeRound.allocation_time)}
+          />
+        )}
       </Card.Body>
     </Card>
   );

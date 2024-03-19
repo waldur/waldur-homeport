@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { GenericPermission } from '@waldur/permissions/types';
-import { ProposalCall } from '@waldur/proposals/types';
+import { Call } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
@@ -12,7 +12,7 @@ import { deleteCallUser } from './api';
 
 interface UserRemoveButtonProps {
   permission: GenericPermission;
-  call: ProposalCall;
+  call: Call;
   refetch;
 }
 

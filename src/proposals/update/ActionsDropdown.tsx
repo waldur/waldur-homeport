@@ -7,11 +7,11 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { updateCallState } from '../api';
-import { ProposalCall } from '../types';
-import { callStateActions } from '../utils';
+import { Call } from '../types';
+import { getCallStateActions } from '../utils';
 
 interface ActionsDropdownProps {
-  call: ProposalCall;
+  call: Call;
   refetch?(): void;
   className?: string;
 }
@@ -46,13 +46,13 @@ export const ActionsDropdown: FC<ActionsDropdownProps> = ({
     [dispatch, call, refetch],
   );
 
-  return call.state === 'Active' ? (
+  return call.state === 'active' ? (
     <DropdownButton
       variant="light"
       title={translate('Actions')}
       className={className}
     >
-      {callStateActions()
+      {getCallStateActions()
         .filter((state) => state.value !== call.state)
         .map((state, i) => (
           <Dropdown.Item
@@ -71,7 +71,7 @@ export const ActionsDropdown: FC<ActionsDropdownProps> = ({
       onClick={() => editCallState('activate', translate('Activate'))}
       className={className}
     >
-      {callStateActions()
+      {getCallStateActions()
         .filter((state) => state.value !== call.state)
         .map((state, i) => (
           <Dropdown.Item

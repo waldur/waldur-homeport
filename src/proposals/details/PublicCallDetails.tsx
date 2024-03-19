@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { PageBarProvider } from '@waldur/marketplace/context';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 
 import { CallDescriptionCard } from './CallDescriptionCard';
 import { CallDetailsCard } from './CallDetailsCard';
@@ -12,7 +12,7 @@ import { PublicCallDetailsBar } from './PublicCallDetailsBar';
 import { PublicCallDetailsHero } from './PublicCallDetailsHero';
 
 interface PublicCallDetailsProps {
-  call: ProposalCall;
+  call: Call;
   refreshCall;
 }
 

@@ -4,12 +4,12 @@ import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
-import { ProposalCall } from '@waldur/proposals/types';
+import { Call } from '@waldur/proposals/types';
 
 import { EditGeneralInfoButton } from './EditGeneralInfoButton';
 
 interface CallGeneralSectionProps {
-  call: ProposalCall;
+  call: Call;
   refetch(): void;
   loading: boolean;
 }

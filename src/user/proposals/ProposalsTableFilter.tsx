@@ -4,40 +4,10 @@ import { Field, reduxForm } from 'redux-form';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { CallAutocomplete } from '@waldur/proposals/CallAutocomplete';
+import { getProposalStateOptions } from '@waldur/proposals/utils';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { USER_PROPOSALS_FILTER_FORM_ID } from '../constants';
-
-const states = [
-  {
-    label: translate('Draft'),
-    value: 'Draft',
-  },
-  {
-    label: translate('Submitted'),
-    value: 'Submitted',
-  },
-  {
-    label: translate('In review'),
-    value: 'In review',
-  },
-  {
-    label: translate('In revision'),
-    value: 'In revision',
-  },
-  {
-    label: translate('Accepted'),
-    value: 'Accepted',
-  },
-  {
-    label: translate('Rejected'),
-    value: 'Rejected',
-  },
-  {
-    label: translate('Cancelled'),
-    value: 'Cancelled',
-  },
-];
 
 const PureProposalsTableFilter: FunctionComponent<{}> = () => (
   <>
@@ -47,7 +17,7 @@ const PureProposalsTableFilter: FunctionComponent<{}> = () => (
         component={(fieldProps) => (
           <Select
             placeholder={translate('Select state...')}
-            options={states}
+            options={getProposalStateOptions()}
             value={fieldProps.input.value}
             onChange={(item) => fieldProps.input.onChange(item)}
             isMulti={true}

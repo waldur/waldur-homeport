@@ -6,23 +6,19 @@ import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { updateCallRound } from '@waldur/proposals/api';
-import {
-  CallRoundFormData,
-  ProposalCall,
-  ProposalCallRound,
-} from '@waldur/proposals/types';
+import { RoundFormData, Call, Round } from '@waldur/proposals/types';
 import { WizardFormFirstPage } from '@waldur/proposals/update/rounds/WizardFormFirstPage';
-import { getCallRoundInitialValues } from '@waldur/proposals/utils';
+import { getRoundInitialValues } from '@waldur/proposals/utils';
 
 interface EditRoundSubmissionDialogProps {
   resolve: {
-    round: ProposalCallRound;
-    call: ProposalCall;
+    round: Round;
+    call: Call;
     refetch(): void;
   };
 }
 
-const validate = (values: CallRoundFormData) => {
+const validate = (values: RoundFormData) => {
   const errors: any = {};
   if (parseDate(values.start_time) > parseDate(values.cutoff_time)) {
     errors.cutoff_time = translate('Cutoff date must be after start date');
@@ -35,9 +31,9 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
 ) => {
   const dispatch = useDispatch();
   const submit = useCallback(
-    (formData: CallRoundFormData, _dispatch, formProps) => {
+    (formData: RoundFormData, _dispatch, formProps) => {
       const updatedRound = {
-        ...getCallRoundInitialValues(props.resolve.round),
+        ...getRoundInitialValues(props.resolve.round),
         ...formData,
       };
       return updateCallRound(

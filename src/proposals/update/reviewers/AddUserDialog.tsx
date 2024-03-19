@@ -14,7 +14,7 @@ import { Role } from '@waldur/permissions/types';
 import { ExpirationTimeGroup } from '@waldur/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@waldur/project/team/RoleGroup';
 import { UserListOptionInline } from '@waldur/project/team/UserListOptionInline';
-import { ProposalCall } from '@waldur/proposals/types';
+import { Call } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { addCallUser } from './api';
@@ -29,7 +29,7 @@ interface AddUserDialogFormData {
 
 interface AddUserDialogProps {
   refetch;
-  call: ProposalCall;
+  call: Call;
 }
 
 export const AddUserDialog = reduxForm<

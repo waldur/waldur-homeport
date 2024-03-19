@@ -6,10 +6,10 @@ import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { QuotaCell } from '@waldur/marketplace/resources/details/QuotaCell';
 
-import { ProposalCallRound } from '../types';
+import { Round } from '../types';
 
 interface RoundQuotasProps {
-  round: ProposalCallRound;
+  round: Round;
 }
 
 const QuotaItem = (props: { title; usage; limit?; units; isSmallScreen }) => {

@@ -5,7 +5,7 @@ import { required } from '@waldur/core/validators';
 import { FormContainer, NumberField, SelectField } from '@waldur/form';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
-import { getCallReviewStrategyOptions } from '@waldur/proposals/utils';
+import { getRoundReviewStrategyOptions } from '@waldur/proposals/utils';
 
 export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
   props,
@@ -30,7 +30,7 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
               name="review_strategy"
               label={translate('Review strategy')}
               simpleValue={true}
-              options={getCallReviewStrategyOptions()}
+              options={getRoundReviewStrategyOptions()}
               required={true}
               isClearable={false}
               validate={required}

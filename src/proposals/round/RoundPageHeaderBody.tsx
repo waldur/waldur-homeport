@@ -1,10 +1,10 @@
 import { formatRelative } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
-import { ProposalCallRound } from '../types';
+import { Round } from '../types';
 
 interface RoundPageHeaderBodyProps {
-  round: ProposalCallRound;
+  round: Round;
 }
 
 export const RoundPageHeaderBody = (props: RoundPageHeaderBodyProps) => {

@@ -3,7 +3,7 @@ import { useState, createElement, FunctionComponent } from 'react';
 import { parseDate } from '@waldur/core/dateUtils';
 import { WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
-import { CallRoundFormData } from '@waldur/proposals/types';
+import { RoundFormData } from '@waldur/proposals/types';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';
@@ -26,7 +26,7 @@ const steps = [
   translate('Allocation'),
 ];
 
-const validate = (values: CallRoundFormData) => {
+const validate = (values: RoundFormData) => {
   const errors: any = {};
   if (parseDate(values.start_time) > parseDate(values.cutoff_time)) {
     errors.cutoff_time = translate('Cutoff date must be after start date');

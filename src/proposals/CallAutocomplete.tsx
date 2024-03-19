@@ -1,5 +1,4 @@
 import React from 'react';
-import { Props as SelectProps } from 'react-select';
 import { Field, Validator } from 'redux-form';
 
 import { FieldError } from '@waldur/form';
@@ -11,7 +10,6 @@ import { callAutocomplete } from './api';
 interface CallAutocompleteProps {
   protectedCalls?: boolean;
   className?: string;
-  reactSelectProps?: Partial<SelectProps>;
   onChange?(value): any;
   showError?: boolean;
   validate?: Validator | Validator[];
@@ -36,7 +34,6 @@ export const CallAutocomplete: React.FC<CallAutocompleteProps> = (props) => (
           onChange={(value) => fieldProps.input.onChange(value)}
           noOptionsMessage={() => translate('No calls')}
           isClearable={true}
-          {...props.reactSelectProps}
         />
         {props.showError && fieldProps.meta.touched && (
           <FieldError error={fieldProps.meta.error} />

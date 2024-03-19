@@ -5,10 +5,10 @@ import { useMediaQuery } from 'react-responsive';
 import { translate } from '@waldur/i18n';
 import { QuotaCell } from '@waldur/marketplace/resources/details/QuotaCell';
 
-import { ProposalCall } from '../types';
+import { Call } from '../types';
 
 interface ProposalCallQuotasProps {
-  call: ProposalCall;
+  call: Call;
 }
 
 const QuotaItem = (props: { title; usage; limit?; units; isSmallScreen }) => {
