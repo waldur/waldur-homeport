@@ -19,9 +19,9 @@ import {
   getSecretOptionsForm,
   showBackendId,
 } from '@waldur/marketplace/common/registry';
+import { getServiceSettingsForm } from '@waldur/marketplace/offerings/update/integration/registry';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { getServiceSettingsForm } from '@waldur/marketplace/offerings/update/integration/registry';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { EDIT_INTEGRATION_FORM_ID } from './constants';

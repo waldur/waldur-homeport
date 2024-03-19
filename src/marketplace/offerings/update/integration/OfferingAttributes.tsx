@@ -5,8 +5,8 @@ import {
   getProviderType,
 } from '@waldur/marketplace/common/registry';
 import { AttributesTable } from '@waldur/marketplace/details/attributes/AttributesTable';
-import { Section } from '@waldur/marketplace/types';
 import { getSerializer } from '@waldur/marketplace/offerings/update/integration/registry';
+import { Section } from '@waldur/marketplace/types';
 
 export const OfferingAttributes = ({ offering }) => {
   const OptionsSummary = getOptionsSummary(offering.type);
