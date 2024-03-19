@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Round } from '@waldur/proposals/types';
 import { formatProposalState } from '@waldur/proposals/utils';
@@ -95,7 +95,19 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
       verboseName={translate('My proposals')}
       hasQuery={true}
       expandableRow={ProposalsListExpandableRow}
-      hoverableRow={() => <Button>{translate('View')}</Button>}
+      hoverableRow={({ row }) => (
+        <Link
+          state="public-calls.manage-proposal"
+          params={{
+            uuid: row.call_uuid,
+            round_uuid: row.round.uuid,
+            proposal_uuid: row.uuid,
+          }}
+          className="btn btn-primary"
+        >
+          {translate('View')}
+        </Link>
+      )}
       filters={<ProposalsTableFilter />}
     />
   );

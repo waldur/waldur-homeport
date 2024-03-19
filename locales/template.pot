@@ -458,6 +458,7 @@ msgstr ""
 #: src/marketplace/resources/list/CreateResourceButton.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
+#: src/proposals/proposal/create/steps/AddResourceButton.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Add resource"
 msgstr ""
@@ -811,7 +812,7 @@ msgstr ""
 msgid "Application has been created."
 msgstr ""
 
-#: src/proposals/proposal/create/CreatePageSidebar.tsx
+#: src/proposals/proposal/create/CompletionPageSidebar.tsx
 msgid "Application progress"
 msgstr ""
 
@@ -1578,7 +1579,7 @@ msgid "By call manager"
 msgstr ""
 
 #: src/marketplace/deploy/DeployPageSidebar.tsx
-#: src/proposals/proposal/create/CreatePageSidebar.tsx
+#: src/proposals/proposal/create/CompletionPageSidebar.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr ""
 
@@ -1669,6 +1670,7 @@ msgstr ""
 
 #: src/marketplace/utils.ts
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/routes.ts
 #: src/user/routes.ts
 msgid "Calls"
 msgstr ""
@@ -1820,6 +1822,7 @@ msgstr ""
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/proposals/proposal/create/steps/FormResourceRequestsStep.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Category"
@@ -2179,7 +2182,8 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
+#: src/proposals/proposal/create/steps/AddResourceDialog.tsx
+#: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Configure request"
 msgstr ""
 
@@ -2392,6 +2396,7 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/proposal/create/AddProposalDialog.tsx
 #: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
@@ -2554,7 +2559,8 @@ msgstr ""
 msgid "Create project request"
 msgstr ""
 
-#: src/proposals/proposal/create/ProposalCreatePage.tsx
+#: src/proposals/proposal/create/AddProposalDialog.tsx
+#: src/proposals/proposal/create/ProposalCompletionPage.tsx
 msgid "Create proposal"
 msgstr ""
 
@@ -3576,6 +3582,7 @@ msgstr ""
 #: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/proposal/create/steps/FormResourceRequestsStep.tsx
 #: src/proposals/round/allocation/EditAllocationInfoButton.tsx
 #: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
 #: src/proposals/round/review/EditReviewInfoButton.tsx
@@ -6264,6 +6271,7 @@ msgstr ""
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/proposal/create/AddProposalDialog.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
@@ -6911,6 +6919,7 @@ msgstr ""
 #: src/permissions/constants.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/proposals/proposal/create/steps/FormResourceRequestsStep.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/reporting/plan-usage/PlanUsageFilter.tsx
@@ -7044,6 +7053,7 @@ msgstr ""
 
 #: src/marketplace/routes.ts
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/proposal/create/steps/FormResourceRequestsStep.tsx
 msgid "Offering requests"
 msgstr ""
 
@@ -8739,14 +8749,19 @@ msgid "Propagated"
 msgstr ""
 
 #: src/permissions/constants.tsx
+#: src/proposals/proposal/create/ProposalCompletionPage.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
 msgid "Proposal"
 msgstr ""
 
-#: src/proposals/proposal/create/ProposalCreatePage.tsx
+#: src/proposals/proposal/create/AddProposalDialog.tsx
 msgid "Proposal created successfully"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalCompletionPage.tsx
+msgid "Proposal updated successfully"
 msgstr ""
 
 #: src/proposals/round/RoundPageBar.tsx
@@ -8835,6 +8850,7 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/proposal/create/steps/FormResourceRequestsStep.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -9292,6 +9308,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/proposal/create/steps/FormResourceRequestsStep.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
 #: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
@@ -9713,6 +9730,10 @@ msgstr ""
 
 #: src/marketplace/resources/store/effects.ts
 msgid "Resource plan change request has been submitted."
+msgstr ""
+
+#: src/proposals/proposal/create/steps/AddResourceDialog.tsx
+msgid "Resource request has been submitted."
 msgstr ""
 
 #: src/proposals/proposal/create/steps/steps.ts
@@ -10502,7 +10523,9 @@ msgstr ""
 msgid "Select issue template..."
 msgstr ""
 
-#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
+#: src/proposals/proposal/create/steps/AddResourceDialog.tsx
+#: src/proposals/proposal/create/steps/AddResourceWizardFormFirstPage.tsx
+#: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Select offering"
 msgstr ""
 
@@ -10809,6 +10832,7 @@ msgstr ""
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/proposals/proposal/create/steps/AddResourceWizardFormFirstPage.tsx
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/reporting/plan-usage/PlanUsageFilter.tsx
 #: src/reporting/plan-usage/PlanUsageList.tsx
@@ -11255,7 +11279,9 @@ msgid "Snapshots count"
 msgstr ""
 
 #: src/customer/list/ExportAsEmailDialog.tsx
-#: src/proposals/proposal/create/ProposalCreatePage.tsx
+#: src/proposals/proposal/create/AddProposalDialog.tsx
+#: src/proposals/proposal/create/ProposalCompletionPage.tsx
+#: src/proposals/proposal/create/steps/AddResourceDialog.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr ""
@@ -11537,7 +11563,7 @@ msgstr ""
 #: src/marketplace/resources/terminate/TerminateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
-#: src/proposals/update/offerings/CallOfferingCreateForm.tsx
+#: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/catalog/CatalogDeleteDialog.tsx
 #: src/rancher/cluster/ImportYAMLDialog.tsx
@@ -11550,7 +11576,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: src/proposals/proposal/create/CreatePageSidebar.tsx
+#: src/proposals/proposal/create/CompletionPageSidebar.tsx
 msgid "Submit application"
 msgstr ""
 
@@ -12159,6 +12185,10 @@ msgstr ""
 
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 msgid "There are no matching checklists."
+msgstr ""
+
+#: src/proposals/proposal/create/steps/AddResourceWizardFormFirstPage.tsx
+msgid "There are no offerings"
 msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx

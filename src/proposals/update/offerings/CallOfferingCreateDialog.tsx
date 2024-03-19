@@ -9,6 +9,9 @@ import { CallOfferingFormData, Call } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { CallOfferingCreateForm } from './CallOfferingCreateForm';
+import { WizardFormFirstPage } from './WizardFormFirstPage';
+import { WizardFormSecondPage } from './WizardFormSecondPage';
+import { WizardFormThirdPage } from './WizardFormThirdPage';
 
 interface CallOfferingCreateDialogProps {
   resolve: {
@@ -16,6 +19,18 @@ interface CallOfferingCreateDialogProps {
     refetch(): void;
   };
 }
+
+const WizardForms = [
+  WizardFormFirstPage,
+  WizardFormSecondPage,
+  WizardFormThirdPage,
+];
+
+const steps = [
+  translate('Select offering'),
+  translate('Configure request'),
+  translate('Submit'),
+];
 
 export const CallOfferingCreateDialog: FC<CallOfferingCreateDialogProps> = (
   props,
@@ -54,6 +69,8 @@ export const CallOfferingCreateDialog: FC<CallOfferingCreateDialogProps> = (
   return (
     <CallOfferingCreateForm
       onSubmit={createRound}
+      steps={steps}
+      wizardForms={WizardForms}
       data={{ call: props.resolve.call }}
     />
   );

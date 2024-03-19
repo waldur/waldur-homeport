@@ -8,21 +8,21 @@ import { ProposalCreationFormStep } from '@waldur/proposals/types';
 
 import { SubmitButton } from './SubmitButton';
 
-interface CreatePageSidebarProps {
+interface CompletionPageSidebarProps {
   steps: ProposalCreationFormStep[];
   completedSteps: boolean[];
   submitting: boolean;
 }
 
-export const CreatePageSidebar = (props: CreatePageSidebarProps) => {
+export const CompletionPageSidebar = (props: CompletionPageSidebarProps) => {
   const isVerticalMode = useMediaQuery({ maxWidth: 1200 });
 
   return (
     <div
       className={
         isVerticalMode
-          ? 'proposal-create-sidebar container-xxl'
-          : 'proposal-create-sidebar drawer drawer-end drawer-on'
+          ? 'proposal-manage-sidebar container-xxl'
+          : 'proposal-manage-sidebar drawer drawer-end drawer-on'
       }
     >
       <Card className="card-flush border-0">

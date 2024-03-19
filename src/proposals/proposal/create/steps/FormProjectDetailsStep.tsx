@@ -1,4 +1,3 @@
-import { Button } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
 
@@ -12,6 +11,7 @@ import { formatJsx, translate } from '@waldur/i18n';
 import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { loadOecdCodes } from '@waldur/project/api';
 import { ProposalFormStepProps } from '@waldur/proposals/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
@@ -27,9 +27,11 @@ export const FormProjectDetailsStep = (props: ProposalFormStepProps) => {
       loading={loading}
       actions={
         <div className="d-flex justify-content-end flex-grow-1">
-          <Button variant="light" size="sm">
-            {translate('Import project')}
-          </Button>
+          <ActionButton
+            title={translate('Import project')}
+            action={null}
+            variant="light"
+          />
         </div>
       }
     >
