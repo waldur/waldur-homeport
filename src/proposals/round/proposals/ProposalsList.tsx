@@ -2,11 +2,13 @@ import { FC } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { formatProposalState } from '@waldur/proposals/utils';
 import { Table } from '@waldur/table';
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/utils';
 
-import { RoundProposalsPlaceholder } from './RoundProposalsPlaceholder';
+import { ProposalExpandableRow } from './ProposalExpandableRow';
+import { ProposalsPlaceholder } from './ProposalsPlaceholder';
 
 interface RoundProposalsListProps {
   round_uuid: string;
@@ -21,7 +23,7 @@ const ProposalNameField = ({ row }) => {
   );
 };
 
-export const RoundProposalsList: FC<RoundProposalsListProps> = (props) => {
+export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
   const tableProps = useTable({
     table: 'RoundProposalsList',
     fetchData: createFetcher(
@@ -35,7 +37,7 @@ export const RoundProposalsList: FC<RoundProposalsListProps> = (props) => {
       {...tableProps}
       id="proposals"
       className="mb-7"
-      placeholderComponent={<RoundProposalsPlaceholder />}
+      placeholderComponent={<ProposalsPlaceholder />}
       columns={[
         {
           title: translate('Name'),
@@ -51,11 +53,12 @@ export const RoundProposalsList: FC<RoundProposalsListProps> = (props) => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{row.state}</>,
+          render: ({ row }) => <>{formatProposalState(row.state)}</>,
         },
       ]}
       title={translate('Proposals')}
       verboseName={translate('Proposals')}
+      expandableRow={ProposalExpandableRow}
       hasQuery={true}
     />
   );

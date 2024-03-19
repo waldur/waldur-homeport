@@ -1565,7 +1565,7 @@ msgstr ""
 msgid "Business hours"
 msgstr ""
 
-#: src/proposals/round/proposals/RoundProposalsList.tsx
+#: src/proposals/round/proposals/ProposalsList.tsx
 msgid "By"
 msgstr ""
 
@@ -1985,6 +1985,7 @@ msgstr ""
 #: src/marketplace/referral/OfferingReferralsDialog.tsx
 #: src/marketplace/resources/usage/ResourceShowUsageDialog.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
+#: src/proposals/round/proposals/ProposalReviewsDetailButton.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
 #: src/user/UserPopover.tsx
@@ -2619,7 +2620,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
-#: src/proposals/round/proposals/RoundProposalsList.tsx
+#: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/utils.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -3275,6 +3276,7 @@ msgstr ""
 #: src/project/ProjectDetailsButton.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/round/proposals/ProposalReviewsDetailButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
 #: src/resource/summary/ResourceSummaryModal.tsx
@@ -6262,7 +6264,7 @@ msgstr ""
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
-#: src/proposals/round/proposals/RoundProposalsList.tsx
+#: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -6706,7 +6708,7 @@ msgstr ""
 msgid "No, continue using current email"
 msgstr ""
 
-#: src/proposals/round/proposals/RoundProposalsPlaceholder.tsx
+#: src/proposals/round/proposals/ProposalsPlaceholder.tsx
 msgid "Nobody has submitted proposals yet."
 msgstr ""
 
@@ -6768,7 +6770,7 @@ msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
-#: src/proposals/round/proposals/RoundProposalsPlaceholder.tsx
+#: src/proposals/round/proposals/ProposalsPlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/reviewers/CallUsersListPlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
@@ -8406,6 +8408,10 @@ msgstr ""
 msgid "Private cloud"
 msgstr ""
 
+#: src/proposals/round/proposals/ProposalReviewsDetailButton.tsx
+msgid "Private comment"
+msgstr ""
+
 #: src/vmware/deploy/FormProcessorStep.tsx
 #: src/vmware/deploy/steps.ts
 msgid "Processor"
@@ -8744,7 +8750,7 @@ msgid "Proposal created successfully"
 msgstr ""
 
 #: src/proposals/round/RoundPageBar.tsx
-#: src/proposals/round/proposals/RoundProposalsList.tsx
+#: src/proposals/round/proposals/ProposalsList.tsx
 #: src/user/routes.ts
 msgid "Proposals"
 msgstr ""
@@ -8862,6 +8868,10 @@ msgstr ""
 
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 msgid "Public cloud"
+msgstr ""
+
+#: src/proposals/round/proposals/ProposalReviewsDetailButton.tsx
+msgid "Public comment"
 msgstr ""
 
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
@@ -9850,6 +9860,10 @@ msgstr ""
 msgid "Review"
 msgstr ""
 
+#: src/proposals/round/proposals/ProposalReviewsDetailButton.tsx
+msgid "Review details"
+msgstr ""
+
 #: src/user/proposals/reviews/ReviewsList.tsx
 msgid "Review due"
 msgstr ""
@@ -9938,6 +9952,7 @@ msgstr ""
 msgid "Reviewed by provider at"
 msgstr ""
 
+#: src/proposals/round/proposals/ProposalExpandableRow.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 msgid "Reviewer"
@@ -10263,6 +10278,7 @@ msgid "Scope type"
 msgstr ""
 
 #: src/marketplace-checklist/StatsTable.tsx
+#: src/proposals/round/proposals/ProposalExpandableRow.tsx
 msgid "Score"
 msgstr ""
 
@@ -11371,7 +11387,7 @@ msgstr ""
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
-#: src/proposals/round/proposals/RoundProposalsList.tsx
+#: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -11416,6 +11432,7 @@ msgstr ""
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/proposals/round/proposals/ProposalExpandableRow.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserDetailsTable.tsx
