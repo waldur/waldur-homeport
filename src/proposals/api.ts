@@ -125,8 +125,8 @@ export const createProposal = (data) =>
 export const getProposal = (uuid) =>
   getById<Proposal>(`/proposal-proposals/`, uuid);
 
-export const updateProposal = (data, uuid) =>
-  patch<Proposal>(`/proposal-proposals/${uuid}/`, data);
+export const updateProposalProjectDetails = (data, uuid) =>
+  post<Proposal>(`/proposal-proposals/${uuid}/update_project_details/`, data);
 
 export const createProposalResource = (data, uuid) =>
   post<Proposal>(`/proposal-proposals/${uuid}/resources/`, data);

@@ -74,7 +74,7 @@ export const CompletionPageSidebar = (props: CompletionPageSidebarProps) => {
 
           {/* Clicking on this button will trigger submit on the parent form */}
           <SubmitButton
-            title={translate('Submit application')}
+            title={translate('Update project details')}
             className="w-100"
             loading={props.submitting}
           />

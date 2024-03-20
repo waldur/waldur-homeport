@@ -7394,6 +7394,10 @@ msgstr ""
 msgid "Orders pending approval"
 msgstr ""
 
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+msgid "Ordinary plan"
+msgstr ""
+
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Organisation field name"
 msgstr ""
@@ -8029,7 +8033,6 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
-#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/proposals/update/offerings/CallOfferingExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
@@ -11610,10 +11613,6 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: src/proposals/proposal/create/CompletionPageSidebar.tsx
-msgid "Submit application"
-msgstr ""
-
 #: src/slurm/details/SubmitJobAction.tsx
 #: src/slurm/details/SubmitJobDialog.tsx
 msgid "Submit job"
@@ -14069,6 +14068,7 @@ msgid "Update project"
 msgstr ""
 
 #: src/project/ProjectUpdateForm.tsx
+#: src/proposals/proposal/create/CompletionPageSidebar.tsx
 msgid "Update project details"
 msgstr ""
 

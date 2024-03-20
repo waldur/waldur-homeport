@@ -9,7 +9,10 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
-import { getProposal, updateProposal } from '@waldur/proposals/api';
+import {
+  getProposal,
+  updateProposalProjectDetails,
+} from '@waldur/proposals/api';
 import { formatProposalState } from '@waldur/proposals/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -61,7 +64,7 @@ export const ProposalCompletionPage = reduxForm({
 
   const submit = useCallback(
     (formData, dispatch) => {
-      return updateProposal(formData, proposal_uuid)
+      return updateProposalProjectDetails(formData, proposal_uuid)
         .then(() => {
           dispatch(showSuccess(translate('Proposal updated successfully')));
         })
