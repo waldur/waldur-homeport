@@ -14,8 +14,8 @@ import { Offering } from '@waldur/marketplace/types';
 import { getCheckoutSummaryComponent } from '../common/registry';
 import { OrderResponse } from '../orders/types';
 
+import { PlatformTosNotification } from './PlatformTosNotification';
 import { ProviderTermsOfService } from './ProviderTermsOfService';
-import { TosNotification } from './TosNotification';
 import { OfferingConfigurationFormStep } from './types';
 import { formErrorsSelector, scrollToView } from './utils';
 
@@ -149,7 +149,7 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
             />
           )}
 
-          <TosNotification />
+          <PlatformTosNotification />
           {(props.offering.terms_of_service ||
             props.offering.terms_of_service_link) &&
           props.offering.privacy_policy_link ? (

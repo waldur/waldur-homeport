@@ -2,7 +2,7 @@ import { Card, FormCheck } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
 import { translate } from '@waldur/i18n';
-import { TosNotification } from '@waldur/marketplace/deploy/TosNotification';
+import { PlatformTosNotification } from '@waldur/marketplace/deploy/PlatformTosNotification';
 import { scrollToView } from '@waldur/marketplace/deploy/utils';
 import { ProposalCreationFormStep } from '@waldur/proposals/types';
 
@@ -79,7 +79,7 @@ export const CompletionPageSidebar = (props: CompletionPageSidebarProps) => {
             loading={props.submitting}
           />
 
-          <TosNotification />
+          <PlatformTosNotification />
         </Card.Body>
       </Card>
     </div>
