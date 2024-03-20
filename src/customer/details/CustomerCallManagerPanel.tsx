@@ -17,7 +17,7 @@ import {
 import { showErrorResponse } from '@waldur/store/notify';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { CustomersService } from '../services/CustomersService';
+import { refreshCurrentCustomer } from '../api';
 
 export const CustomerCallManagerPanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
@@ -63,7 +63,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
         };
         try {
           const result = await enableCallManagingOrganization(payload);
-          CustomersService.refreshCurrentCustomer(customer.uuid);
+          await refreshCurrentCustomer(customer.uuid);
           setInfoUuid(result.uuid);
           return result;
         } catch (error) {
@@ -76,7 +76,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
         if (!infoUuid) return null;
         try {
           const result = await disableCallManagingOrganization(infoUuid);
-          CustomersService.refreshCurrentCustomer(customer.uuid);
+          await refreshCurrentCustomer(customer.uuid);
           return result;
         } catch (error) {
           dispatch(
