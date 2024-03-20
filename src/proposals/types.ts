@@ -103,7 +103,7 @@ export interface Proposal {
   duration_in_days: number;
   project: string;
   round: Round;
-  resources: any[];
+  resources: ProposalResource[];
   oecd_fos_2007_code: string;
   oecd_fos_2007_label: string;
 }
@@ -122,6 +122,7 @@ export interface CallOffering {
   offering_name: string;
   provider_name: string;
   state: CallOfferingState;
+  category_name?: string;
   plan?: string;
   plan_name?: string;
 }
@@ -150,8 +151,19 @@ export interface ProposalFormStepProps {
   params?: ProposalCreationFormStep['params'];
 }
 
+export interface ProposalResource {
+  attributes: AttributesType;
+  created_by: string;
+  created_by_name: string;
+  description: string;
+  requested_offering: CallOffering;
+  resource: any;
+  url: string;
+  uuid: string;
+}
+
 export interface ProposalResourceFormData {
-  offering: Offering & { requested_offering_uuid: string };
+  offering: CallOffering & { requested_offering_uuid: string };
   attributes: AttributesType;
   plan: Plan;
   limits?: Limits;

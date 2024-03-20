@@ -68,6 +68,8 @@ export const CallOfferingCreateDialog: FC<CallOfferingCreateDialogProps> = (
   );
   return (
     <CallOfferingCreateForm
+      title={translate('New offering')}
+      submitLabel={translate('Create')}
       onSubmit={createRound}
       steps={steps}
       wizardForms={WizardForms}
