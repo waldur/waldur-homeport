@@ -34,8 +34,6 @@ export const AddProposalDialog = reduxForm<
           dispatch(showSuccess(translate('Proposal created successfully')));
           const proposal = res.data;
           router.stateService.go('public-calls.manage-proposal', {
-            uuid: props.resolve.call.uuid,
-            round_uuid: props.resolve.round.uuid,
             proposal_uuid: proposal.uuid,
           });
         })

@@ -99,8 +99,6 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
         <Link
           state="public-calls.manage-proposal"
           params={{
-            uuid: row.call_uuid,
-            round_uuid: row.round.uuid,
             proposal_uuid: row.uuid,
           }}
           className="btn btn-primary"

@@ -125,7 +125,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'public-calls.manage-proposal',
-    url: ':uuid/round/:round_uuid/proposals/:proposal_uuid/manage/',
+    url: 'proposals/:proposal_uuid/',
     component: ProposalCompletionPage,
     data: {
       hideProjectSelector: true,
