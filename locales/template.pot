@@ -1655,7 +1655,7 @@ msgstr ""
 msgid "Call manager"
 msgstr ""
 
-#: src/proposals/round/CallRoundPage.tsx
+#: src/proposals/round/RoundPage.tsx
 msgid "Call round"
 msgstr ""
 
@@ -13028,7 +13028,7 @@ msgstr ""
 msgid "Unable to load call details."
 msgstr ""
 
-#: src/proposals/round/CallRoundPage.tsx
+#: src/proposals/round/RoundPage.tsx
 msgid "Unable to load call round."
 msgstr ""
 

@@ -26,10 +26,7 @@ const CallUpdateContainer = lazyComponent(
   'CallUpdateContainer',
 );
 
-const CallRoundPage = lazyComponent(
-  () => import('./round/CallRoundPage'),
-  'CallRoundPage',
-);
+const RoundPage = lazyComponent(() => import('./round/RoundPage'), 'RoundPage');
 
 const ProposalCompletionPage = lazyComponent(
   () => import('./proposal/create/ProposalCompletionPage'),
@@ -89,7 +86,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'call-management.protected-call-update-round',
     url: 'call/:call_uuid/round/:round_uuid/',
-    component: CallRoundPage,
+    component: RoundPage,
   },
 
   // Public calls

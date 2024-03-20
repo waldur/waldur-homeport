@@ -19,7 +19,7 @@ import { RoundPageBar } from './RoundPageBar';
 import { RoundPageHero } from './RoundPageHero';
 import { RoundSubmissionSection } from './submission/RoundSubmissionSection';
 
-export const CallRoundPage: FunctionComponent = () => {
+export const RoundPage: FunctionComponent = () => {
   useFullPage();
 
   const {
