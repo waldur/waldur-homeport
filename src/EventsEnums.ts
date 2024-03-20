@@ -73,6 +73,8 @@ export const ProjectsEnum = {
 export const ProposalEnum = {
   call_proposal_document_added: 'call_proposal_document_added',
   call_proposal_document_removed: 'call_proposal_document_removed',
+  proposal_document_added: 'proposal_document_added',
+  proposal_document_removed: 'proposal_document_removed',
 };
 
 export const ProvidersEnum = {
