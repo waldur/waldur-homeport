@@ -85,7 +85,7 @@ msgstr ""
 
 #: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
-#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
 msgid "Accept"
 msgstr ""
 
@@ -115,6 +115,10 @@ msgstr ""
 
 #: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Accepted proposals"
+msgstr ""
+
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+msgid "Accepting offering request"
 msgstr ""
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
@@ -917,6 +921,10 @@ msgstr ""
 msgid "Are you sure you want to accept a {name}?"
 msgstr ""
 
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+msgid "Are you sure you want to accept the {name} offering request?"
+msgstr ""
+
 #: src/user/support/UserActivateButton.tsx
 msgid "Are you sure you want to activate ?"
 msgstr ""
@@ -1035,6 +1043,10 @@ msgstr ""
 
 #: src/marketplace/resources/mass-actions/MultiPullAction.tsx
 msgid "Are you sure you want to pull {count} resources?"
+msgstr ""
+
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+msgid "Are you sure you want to reject the {name} offering request?"
 msgstr ""
 
 #: src/user/proposals/reviews/ReviewItemActions.tsx
@@ -7047,6 +7059,14 @@ msgstr ""
 msgid "Offering project data synchronization has been scheduled."
 msgstr ""
 
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+msgid "Offering request has been accepted."
+msgstr ""
+
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+msgid "Offering request has been rejected."
+msgstr ""
+
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Offering request has been submitted."
 msgstr ""
@@ -9189,7 +9209,7 @@ msgstr ""
 #: src/marketplace-flows/ReviewRejectAction.tsx
 #: src/marketplace/orders/actions/RejectByConsumerButton.tsx
 #: src/marketplace/orders/actions/RejectByProviderButton.tsx
-#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
 msgid "Reject"
 msgstr ""
 
@@ -9227,6 +9247,10 @@ msgstr ""
 #: src/proposals/utils.ts
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Rejected"
+msgstr ""
+
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+msgid "Rejecting offering request"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/utils.ts
@@ -12590,6 +12614,10 @@ msgstr ""
 msgid "Unable to accept booking."
 msgstr ""
 
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+msgid "Unable to accept offering request."
+msgstr ""
+
 #: src/user/proposals/reviews/ReviewItemActions.tsx
 msgid "Unable to accept review."
 msgstr ""
@@ -13307,6 +13335,10 @@ msgstr ""
 
 #: src/invitations/InvitationReject.tsx
 msgid "Unable to reject invitation."
+msgstr ""
+
+#: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+msgid "Unable to reject offering request."
 msgstr ""
 
 #: src/marketplace/orders/actions/RejectByConsumerButton.tsx

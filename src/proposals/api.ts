@@ -84,6 +84,12 @@ export const getCallOfferings = (callUuid) => {
   );
 };
 
+export const acceptCallOfferingRequest = (uuid) =>
+  post(`/proposal-requested-offerings/${uuid}/accept/`);
+
+export const rejectCallOfferingRequest = (uuid) =>
+  post(`/proposal-requested-offerings/${uuid}/cancel/`);
+
 export const getProtectedCallsOptions = (params?: {}) =>
   getSelectData<Call>('/proposal-protected-calls/', params);
 
