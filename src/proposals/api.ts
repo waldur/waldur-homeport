@@ -128,8 +128,17 @@ export const getProposal = (uuid) =>
 export const updateProposal = (data, uuid) =>
   patch<Proposal>(`/proposal-proposals/${uuid}/`, data);
 
-export const createProposalResource = (data, uuid) =>
-  post<Proposal>(`/proposal-proposals/${uuid}/resources/`, data);
+export const createProposalResource = (data, proposalUuid) =>
+  post<Proposal>(`/proposal-proposals/${proposalUuid}/resources/`, data);
+
+export const updateProposalResource = (data, proposalUuid, uuid) =>
+  patch<Proposal>(
+    `/proposal-proposals/${proposalUuid}/resources/${uuid}/`,
+    data,
+  );
+
+export const removeProposalResource = (proposalUuid, uuid) =>
+  deleteById(`/proposal-proposals/${proposalUuid}/resources/`, uuid);
 
 export const acceptProposalReview = (uuid) =>
   post(`/proposal-reviews/${uuid}/accept/`);

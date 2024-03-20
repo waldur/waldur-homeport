@@ -10,7 +10,7 @@ import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 import { getPublicCall } from '@waldur/proposals/api';
 
-export const AddResourceWizardFormFirstPage: FunctionComponent<WizardFormStepProps> =
+export const ResourceRequestWizardFormFirstPage: FunctionComponent<WizardFormStepProps> =
   (props) => {
     const {
       data: call,

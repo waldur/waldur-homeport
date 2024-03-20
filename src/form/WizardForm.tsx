@@ -103,5 +103,7 @@ export const WizardForm = compose(
   reduxForm<{}, any>({
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
+    enableReinitialize: true,
+    keepDirtyOnReinitialize: true,
   }),
 )(WizardFormPure);

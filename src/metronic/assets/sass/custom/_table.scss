@@ -189,6 +189,11 @@
 
   /* TABLE FULL IN CARD */
   &.full-width {
+    .table-filter {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
     .card-body {
       padding-top: 0;
       padding-left: 0;

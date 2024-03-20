@@ -2,7 +2,7 @@ import { translate } from '@waldur/i18n';
 import { ProposalCreationFormStep } from '@waldur/proposals/types';
 
 import { FormProjectDetailsStep } from './FormProjectDetailsStep';
-import { FormResourceRequestsStep } from './FormResourceRequestsStep';
+import { FormResourceRequestsStep } from './resource-requests-step/FormResourceRequestsStep';
 
 export const createProposalSteps: ProposalCreationFormStep[] = [
   {

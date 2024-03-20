@@ -7,9 +7,9 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { Proposal } from '@waldur/proposals/types';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const AddResourceDialog = lazyComponent(
-  () => import('./AddResourceDialog'),
-  'AddResourceDialog',
+const ResourceRequestFormDialog = lazyComponent(
+  () => import('./ResourceRequestFormDialog'),
+  'ResourceRequestFormDialog',
 );
 
 interface AddResourceButtonProps {
@@ -25,7 +25,7 @@ export const AddResourceButton = ({
   const openAddResourceDialog = useCallback(
     () =>
       dispatch(
-        openModalDialog(AddResourceDialog, {
+        openModalDialog(ResourceRequestFormDialog, {
           resolve: { proposal, refetch },
           size: 'lg',
         }),

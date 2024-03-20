@@ -4,7 +4,9 @@ import { WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 
 interface CallOfferingCreateFormProps {
+  title: string;
   onSubmit: WizardFormStepProps['onSubmit'];
+  submitLabel: string;
   steps: string[];
   wizardForms: FunctionComponent<WizardFormStepProps>[];
   initialValues?: any;
@@ -26,11 +28,11 @@ export const CallOfferingCreateForm: FunctionComponent<CallOfferingCreateFormPro
     const selectStep = (num: number) => {
       if (num <= lastVisitedStep) setStep(num);
     };
-    const submitLabel = isLast ? translate('Create') : translate('Next');
+    const submitLabel = isLast ? props.submitLabel : translate('Next');
 
     return createElement(props.wizardForms[step], {
       form: 'CallOfferingForm',
-      title: translate('New offering'),
+      title: props.title,
       onSubmit: isLast ? props.onSubmit : nextStep,
       onPrev: prevStep,
       onStep: selectStep,
