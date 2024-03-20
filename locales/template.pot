@@ -11612,10 +11612,6 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: src/proposals/proposal/create/CompletionPageSidebar.tsx
-msgid "Submit application"
-msgstr ""
-
 #: src/slurm/details/SubmitJobAction.tsx
 #: src/slurm/details/SubmitJobDialog.tsx
 msgid "Submit job"
@@ -14071,6 +14067,7 @@ msgid "Update project"
 msgstr ""
 
 #: src/project/ProjectUpdateForm.tsx
+#: src/proposals/proposal/create/CompletionPageSidebar.tsx
 msgid "Update project details"
 msgstr ""
 
