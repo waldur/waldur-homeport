@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { createRef, useCallback, useRef } from 'react';
-import { Badge, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -15,14 +14,39 @@ import {
   submitProposal,
   updateProposalProjectDetails,
 } from '@waldur/proposals/api';
-import { formatProposalState } from '@waldur/proposals/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
+import './ProposalCompletionPage.scss';
 import { CompletionPageSidebar } from './CompletionPageSidebar';
 import { ProgressSteps } from './ProgressSteps';
-import { createProposalSteps } from './steps/steps';
+import { ProposalHeader } from './ProposalHeader';
+import { ProposalTeam } from './ProposalTeam';
+import { createProposalSteps } from './steps';
 
-import './ProposalCompletionPage.scss';
+const ProposalSteps = ({ proposal, refetch }) => {
+  const formSteps = createProposalSteps;
+
+  const stepRefs = useRef([]);
+  stepRefs.current = formSteps.map(
+    (_, i) => stepRefs.current[i] ?? createRef(),
+  );
+
+  return (
+    <>
+      {formSteps.map((step, i) => (
+        <div ref={stepRefs.current[i]} key={step.id}>
+          <step.component
+            step={i + 1}
+            id={step.id}
+            title={step.label}
+            observed={false}
+            params={{ proposal, refetch }}
+          />
+        </div>
+      ))}
+    </>
+  );
+};
 
 export const ProposalCompletionPage = reduxForm({
   form: 'ProposalCompletionForm',
@@ -55,13 +79,6 @@ export const ProposalCompletionPage = reduxForm({
       });
     },
   });
-
-  const formSteps = createProposalSteps;
-
-  const stepRefs = useRef([]);
-  stepRefs.current = formSteps.map(
-    (_, i) => stepRefs.current[i] ?? createRef(),
-  );
 
   const dispatch = useDispatch();
 
@@ -97,49 +114,28 @@ export const ProposalCompletionPage = reduxForm({
   return (
     <>
       <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
-      <form
-        className="form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10"
-        onSubmit={props.handleSubmit(submitForm)}
-      >
-        {/* Steps */}
-        <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
-          <Card>
-            <Card.Body>
-              <div className="d-flex mb-4">
-                <h3 className="mb-0">
-                  {translate('Proposal')} - {proposal.name}
-                </h3>
-                <Badge bg="light" text="dark" className="ms-4">
-                  {formatProposalState(proposal.state)}
-                </Badge>
-              </div>
-              <p className="text-muted fst-italic">UUID: {proposal.uuid}</p>
-            </Card.Body>
-          </Card>
+      {proposal.state === 'submitted' ? (
+        <ProposalTeam proposal={proposal} />
+      ) : (
+        <form
+          className="form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10"
+          onSubmit={props.handleSubmit(submitForm)}
+        >
+          <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
+            <ProposalHeader proposal={proposal} />
 
-          {formSteps.map((step, i) => (
-            <div ref={stepRefs.current[i]} key={step.id}>
-              <step.component
-                step={i + 1}
-                id={step.id}
-                title={step.label}
-                observed={false}
-                change={props.change}
-                params={{ proposal, refetch }}
-              />
-            </div>
-          ))}
-        </div>
+            {/* Steps */}
+            <ProposalSteps proposal={proposal} refetch={refetch} />
+          </div>
 
-        {/* Sidebar */}
-        <CompletionPageSidebar
-          steps={formSteps}
-          completedSteps={[]}
-          submitProposal={submitProposalCallback}
-          submitting={props.submitting}
-          canSubmit={proposal.state === 'draft'}
-        />
-      </form>
+          {/* Sidebar */}
+          <CompletionPageSidebar
+            submitProposal={submitProposalCallback}
+            submitting={props.submitting}
+            canSubmit={proposal.state === 'draft'}
+          />
+        </form>
+      )}
     </>
   );
 });

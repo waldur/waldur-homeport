@@ -9478,7 +9478,7 @@ msgid "Project description"
 msgstr "Descripción del proyecto"
 
 #: src/project/ProjectDetailsDialog.tsx
-#: src/proposals/proposal/create/steps/steps.ts
+#: src/proposals/proposal/create/steps.ts
 msgid "Project details"
 msgstr "Detalles del proyecto"
 

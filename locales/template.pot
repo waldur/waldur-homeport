@@ -462,7 +462,7 @@ msgstr ""
 #: src/marketplace/resources/list/CreateResourceButton.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/AddResourceButton.tsx
+#: src/proposals/proposal/create/resource-requests-step/AddResourceButton.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Add resource"
 msgstr ""
@@ -816,10 +816,6 @@ msgstr ""
 msgid "Application has been created."
 msgstr ""
 
-#: src/proposals/proposal/create/CompletionPageSidebar.tsx
-msgid "Application progress"
-msgstr ""
-
 #: src/administration/providers/ProviderForm.tsx
 msgid "Application secret key."
 msgstr ""
@@ -1057,7 +1053,7 @@ msgstr ""
 msgid "Are you sure you want to remove invoice item {name}?"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestItemActions.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
 msgid "Are you sure you want to remove the {name} resource request?"
 msgstr ""
 
@@ -1837,7 +1833,7 @@ msgstr ""
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/FormResourceRequestsStep.tsx
+#: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Category"
@@ -2197,7 +2193,7 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Configure request"
 msgstr ""
@@ -2412,7 +2408,7 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 #: src/rancher/catalog/CatalogCreateButton.tsx
@@ -3283,7 +3279,8 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Detailed description"
 msgstr ""
 
@@ -3499,7 +3496,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
 msgid "Drag and drop file here or <u>Choose file</u>"
 msgstr ""
 
@@ -3597,8 +3594,8 @@ msgstr ""
 #: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestItemActions.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
 #: src/proposals/round/allocation/EditAllocationInfoButton.tsx
 #: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
 #: src/proposals/round/review/EditReviewInfoButton.tsx
@@ -3724,7 +3721,7 @@ msgstr ""
 msgid "Edit request"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 msgid "Edit resource request"
 msgstr ""
 
@@ -5033,7 +5030,7 @@ msgstr ""
 msgid "Import offerings"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
 msgid "Import project"
 msgstr ""
 
@@ -5404,7 +5401,8 @@ msgstr ""
 msgid "Is service provider"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Is the project confidential?"
 msgstr ""
 
@@ -5954,7 +5952,7 @@ msgstr ""
 msgid "Maximum parallel executions of provisioning operations for volumes."
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
 msgid "Maximum size"
 msgstr ""
 
@@ -6518,7 +6516,7 @@ msgstr ""
 msgid "New public key"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 msgid "New resource"
 msgstr ""
 
@@ -6584,6 +6582,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
@@ -6954,8 +6953,8 @@ msgstr ""
 #: src/permissions/constants.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/FormResourceRequestsStep.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/ProposalResourcesFilter.tsx
+#: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
+#: src/proposals/proposal/create/resource-requests-step/ProposalResourcesFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/reporting/plan-usage/PlanUsageFilter.tsx
@@ -7097,7 +7096,7 @@ msgstr ""
 
 #: src/marketplace/routes.ts
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/FormResourceRequestsStep.tsx
+#: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
 msgid "Offering requests"
 msgstr ""
 
@@ -8214,7 +8213,7 @@ msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr ""
 
@@ -8619,11 +8618,12 @@ msgid "Project description"
 msgstr ""
 
 #: src/project/ProjectDetailsDialog.tsx
-#: src/proposals/proposal/create/steps/steps.ts
+#: src/proposals/proposal/create/steps.ts
 msgid "Project details"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Project duration in days"
 msgstr ""
 
@@ -8654,7 +8654,8 @@ msgstr ""
 msgid "Project field name"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Project for civilian purpose?"
 msgstr ""
 
@@ -8726,11 +8727,13 @@ msgstr ""
 msgid "Project settings"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Project summary"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Project title"
 msgstr ""
 
@@ -8796,7 +8799,7 @@ msgid "Propagated"
 msgstr ""
 
 #: src/permissions/constants.tsx
-#: src/proposals/proposal/create/ProposalCompletionPage.tsx
+#: src/proposals/proposal/create/ProposalHeader.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
@@ -8809,6 +8812,10 @@ msgstr ""
 
 #: src/proposals/proposal/create/ProposalCompletionPage.tsx
 msgid "Proposal has been submitted"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalTeam.tsx
+msgid "Proposal summary"
 msgstr ""
 
 #: src/proposals/proposal/create/ProposalCompletionPage.tsx
@@ -8901,7 +8908,7 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/FormResourceRequestsStep.tsx
+#: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
@@ -9363,7 +9370,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestItemActions.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
 #: src/proposals/update/reviewers/UserRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
@@ -9395,7 +9402,7 @@ msgstr ""
 msgid "Removing organization {organizationName}"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestItemActions.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
 msgid "Removing resource request"
 msgstr ""
 
@@ -9602,7 +9609,8 @@ msgstr ""
 msgid "Required nodes"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Research field (OECD code)"
 msgstr ""
 
@@ -9791,19 +9799,19 @@ msgstr ""
 msgid "Resource plan change request has been submitted."
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestItemActions.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
 msgid "Resource request has been deleted."
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 msgid "Resource request has been submitted."
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 msgid "Resource request has been updated."
 msgstr ""
 
-#: src/proposals/proposal/create/steps/steps.ts
+#: src/proposals/proposal/create/steps.ts
 msgid "Resource requests"
 msgstr ""
 
@@ -10590,8 +10598,8 @@ msgstr ""
 msgid "Select issue template..."
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Select offering"
 msgstr ""
@@ -10599,7 +10607,7 @@ msgstr ""
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
 #: src/marketplace/resources/list/OfferingFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/CallOfferingFilter.tsx
+#: src/proposals/proposal/create/resource-requests-step/CallOfferingFilter.tsx
 msgid "Select offering..."
 msgstr ""
 
@@ -10900,7 +10908,7 @@ msgstr ""
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/reporting/plan-usage/PlanUsageFilter.tsx
 #: src/reporting/plan-usage/PlanUsageList.tsx
@@ -11349,7 +11357,7 @@ msgstr ""
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
 #: src/proposals/proposal/create/ProposalCompletionPage.tsx
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestFormDialog.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
 msgstr ""
@@ -11750,7 +11758,7 @@ msgstr ""
 msgid "Support user"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
 msgid "Supported formats"
 msgstr ""
 
@@ -12251,7 +12259,7 @@ msgstr ""
 msgid "There are no matching checklists."
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx
 msgid "There are no offerings"
 msgstr ""
 
@@ -12949,7 +12957,7 @@ msgstr ""
 msgid "Unable to delete payment."
 msgstr ""
 
-#: src/proposals/proposal/create/steps/resource-requests-step/ResourceRequestItemActions.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
 msgid "Unable to delete resource request."
 msgstr ""
 
@@ -14197,7 +14205,7 @@ msgstr ""
 msgid "Upload new"
 msgstr ""
 
-#: src/proposals/proposal/create/steps/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
 msgid "Upload supporting documentation"
 msgstr ""
 
@@ -14868,6 +14876,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectRemoveDialog.tsx
+#: src/proposals/proposal/create/ProposalTeam.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
