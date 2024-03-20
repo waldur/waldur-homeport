@@ -7,7 +7,6 @@ import { createSelector } from 'reselect';
 import { translate } from '@waldur/i18n';
 import { Round } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { useTable } from '@waldur/table/utils';
 
 import { OFFERING_REQUESTS_FILTER_FORM_ID } from '../constants';
@@ -63,7 +62,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
         },
         {
           title: translate('Organization'),
-          render: ({ row }) => <>{row.provider_name}</>,
+          render: ({ row }) => <>{row.call_managing_organisation}</>,
         },
         {
           title: translate('Offering'),
@@ -71,7 +70,9 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
         },
         {
           title: translate('Period'),
-          render: () => <>{DASH_ESCAPE_CODE}</>,
+          render: ({ row }) => (
+            <>{row.plan_name ? row.plan_name : translate('Ordinary plan')}</>
+          ),
         },
         {
           title: translate('State'),
