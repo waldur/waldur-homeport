@@ -9794,7 +9794,7 @@ msgid "Project description"
 msgstr "Layihənin təsviri"
 
 #: src/project/ProjectDetailsDialog.tsx
-#: src/proposals/proposal/create/steps/steps.ts
+#: src/proposals/proposal/create/steps.ts
 msgid "Project details"
 msgstr "Layihə  təfsilatları"
 
@@ -11155,7 +11155,7 @@ msgstr "Resurs planının dəyişdirilməsi tələbi təqdim edilmişdir."
 msgid "Resource report variables"
 msgstr "Resurs hesabat dəyişənləri"
 
-#: src/proposals/proposal/create/steps/steps.ts
+#: src/proposals/proposal/create/steps.ts
 msgid "Resource requests"
 msgstr "Resurs sorğuları"
 
