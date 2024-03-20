@@ -2572,7 +2572,6 @@ msgid "Create project request"
 msgstr ""
 
 #: src/proposals/proposal/create/AddProposalDialog.tsx
-#: src/proposals/proposal/create/ProposalCompletionPage.tsx
 msgid "Create proposal"
 msgstr ""
 
@@ -3640,6 +3639,10 @@ msgstr ""
 msgid "Edit customer member"
 msgstr ""
 
+#: src/proposals/update/general/CallGeneralSection.tsx
+msgid "Edit description"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/EditVarsButton.tsx
 #: src/marketplace/offerings/update/integration/EditVarsDialog.tsx
 msgid "Edit environment variables"
@@ -3655,6 +3658,10 @@ msgstr ""
 
 #: src/invoices/details/InvoiceItemUpdate.tsx
 msgid "Edit item"
+msgstr ""
+
+#: src/proposals/update/general/CallGeneralSection.tsx
+msgid "Edit name"
 msgstr ""
 
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
@@ -3704,6 +3711,10 @@ msgstr ""
 msgid "Edit quotas"
 msgstr ""
 
+#: src/proposals/update/general/CallGeneralSection.tsx
+msgid "Edit reference code"
+msgstr ""
+
 #: src/project/ProjectCreateForm.tsx
 msgid "Edit request"
 msgstr ""
@@ -3744,7 +3755,6 @@ msgstr ""
 #: src/marketplace/category/admin/CategoryEditDialog.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
-#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 msgid "Edit {title}"
 msgstr ""
 
@@ -14064,6 +14074,10 @@ msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
 msgid "Update project permission"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalCompletionPage.tsx
+msgid "Update proposal"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx

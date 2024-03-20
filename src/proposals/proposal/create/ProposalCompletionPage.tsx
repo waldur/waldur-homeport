@@ -19,11 +19,11 @@ import { createProposalSteps } from './steps/steps';
 import './ProposalCompletionPage.scss';
 
 export const ProposalCompletionPage = reduxForm({
-  form: 'ProposalCreateForm',
+  form: 'ProposalCompletionForm',
   touchOnChange: true,
 })((props) => {
   useFullPage();
-  useTitle(translate('Create proposal'));
+  useTitle(translate('Update proposal'));
 
   const {
     params: { proposal_uuid },
@@ -81,11 +81,11 @@ export const ProposalCompletionPage = reduxForm({
     <>
       <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
       <form
-        className="proposal-create-page form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10"
+        className="form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10"
         onSubmit={props.handleSubmit(submit)}
       >
         {/* Steps */}
-        <div className="proposal-create-steps container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
+        <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
           <Card>
             <Card.Body>
               <div className="d-flex mb-4">
