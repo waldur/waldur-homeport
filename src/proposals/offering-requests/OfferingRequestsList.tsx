@@ -13,6 +13,7 @@ import { useTable } from '@waldur/table/utils';
 import { OFFERING_REQUESTS_FILTER_FORM_ID } from '../constants';
 import { formatCallOfferingState } from '../utils';
 
+import { OfferingRequestItemActions } from './OfferingRequestItemActions';
 import { OfferingRequestsListExpandableRow } from './OfferingRequestsListExpandableRow';
 import { OfferingRequestsListPlaceholder } from './OfferingRequestsListPlaceholder';
 import { OfferingRequestsTableFilter } from './OfferingRequestsTableFilter';
@@ -82,12 +83,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
       hasQuery={true}
       actions={<Button variant="success">{translate('Accept request')}</Button>}
       expandableRow={OfferingRequestsListExpandableRow}
-      hoverableRow={() => (
-        <>
-          <Button className="me-3">{translate('Accept')}</Button>
-          <Button variant="danger">{translate('Reject')}</Button>
-        </>
-      )}
+      hoverableRow={OfferingRequestItemActions}
       filters={<OfferingRequestsTableFilter />}
     />
   );
