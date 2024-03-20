@@ -129,7 +129,6 @@ export const states: StateDeclaration[] = [
     component: ProposalCompletionPage,
     data: {
       hideProjectSelector: true,
-      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },
 ];
