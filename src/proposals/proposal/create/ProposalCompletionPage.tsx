@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { createRef, useCallback, useRef } from 'react';
 import { Badge, Card } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -11,6 +12,7 @@ import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import {
   getProposal,
+  submitProposal,
   updateProposalProjectDetails,
 } from '@waldur/proposals/api';
 import { formatProposalState } from '@waldur/proposals/utils';
@@ -32,7 +34,6 @@ export const ProposalCompletionPage = reduxForm({
   const {
     params: { proposal_uuid },
   } = useCurrentStateAndParams();
-  const router = useRouter();
 
   const {
     data: proposal,
@@ -62,8 +63,10 @@ export const ProposalCompletionPage = reduxForm({
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
-  const submit = useCallback(
-    (formData, dispatch) => {
+  const dispatch = useDispatch();
+
+  const submitForm = useCallback(
+    (formData) => {
       return updateProposalProjectDetails(formData, proposal_uuid)
         .then(() => {
           dispatch(showSuccess(translate('Proposal updated successfully')));
@@ -72,8 +75,18 @@ export const ProposalCompletionPage = reduxForm({
           dispatch(showErrorResponse(error, translate('Something went wrong')));
         });
     },
-    [proposal_uuid, router],
+    [proposal_uuid, dispatch],
   );
+
+  const submitProposalCallback = useCallback(() => {
+    return submitProposal(proposal_uuid)
+      .then(() => {
+        dispatch(showSuccess(translate('Proposal has been submitted')));
+      })
+      .catch((error) => {
+        dispatch(showErrorResponse(error, translate('Something went wrong')));
+      });
+  }, [proposal_uuid, dispatch]);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -86,7 +99,7 @@ export const ProposalCompletionPage = reduxForm({
       <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
       <form
         className="form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10"
-        onSubmit={props.handleSubmit(submit)}
+        onSubmit={props.handleSubmit(submitForm)}
       >
         {/* Steps */}
         <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
@@ -122,7 +135,9 @@ export const ProposalCompletionPage = reduxForm({
         <CompletionPageSidebar
           steps={formSteps}
           completedSteps={[]}
+          submitProposal={submitProposalCallback}
           submitting={props.submitting}
+          canSubmit={proposal.state === 'draft'}
         />
       </form>
     </>

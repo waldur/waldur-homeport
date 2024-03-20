@@ -1,4 +1,4 @@
-import { Card, FormCheck } from 'react-bootstrap';
+import { Button, Card, FormCheck } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
 import { translate } from '@waldur/i18n';
@@ -11,6 +11,8 @@ import { SubmitButton } from './SubmitButton';
 interface CompletionPageSidebarProps {
   steps: ProposalCreationFormStep[];
   completedSteps: boolean[];
+  canSubmit: boolean;
+  submitProposal(): void;
   submitting: boolean;
 }
 
@@ -73,11 +75,25 @@ export const CompletionPageSidebar = (props: CompletionPageSidebarProps) => {
           </div>
 
           {/* Clicking on this button will trigger submit on the parent form */}
-          <SubmitButton
-            title={translate('Update project details')}
-            className="w-100"
-            loading={props.submitting}
-          />
+          {props.canSubmit && (
+            <>
+              <SubmitButton
+                title={translate('Update project details')}
+                className="w-100"
+                loading={props.submitting}
+              />
+
+              <div className="d-flex justify-content-between mt-5">
+                <Button
+                  size="sm"
+                  onClick={props.submitProposal}
+                  className="w-100"
+                >
+                  {translate('To team verification')}
+                </Button>
+              </div>
+            </>
+          )}
 
           <PlatformTosNotification />
         </Card.Body>

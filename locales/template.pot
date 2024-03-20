@@ -1594,7 +1594,7 @@ msgstr ""
 msgid "By call manager"
 msgstr ""
 
-#: src/marketplace/deploy/TosNotification.tsx
+#: src/marketplace/deploy/PlatformTosNotification.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr ""
 
@@ -8808,6 +8808,10 @@ msgid "Proposal created successfully"
 msgstr ""
 
 #: src/proposals/proposal/create/ProposalCompletionPage.tsx
+msgid "Proposal has been submitted"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalCompletionPage.tsx
 msgid "Proposal updated successfully"
 msgstr ""
 
@@ -12485,6 +12489,10 @@ msgstr ""
 
 #: src/customer/details/OrganizationRemovalErrorDialog.tsx
 msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
+msgstr ""
+
+#: src/proposals/proposal/create/CompletionPageSidebar.tsx
+msgid "To team verification"
 msgstr ""
 
 #: src/administration/service-desk/AtlassianSettings.tsx

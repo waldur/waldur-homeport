@@ -3,37 +3,36 @@ import { FC, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import './ProgressSteps.scss';
+import { Proposal } from '@waldur/proposals/types';
 
 interface ProgressStepsProps {
-  proposal: any; // FIX the type later
+  proposal: Proposal;
   bgClass?: string;
   className?: string;
 }
 
-const getSteps = (proposal: any) => {
+const getSteps = (proposal: Proposal) => {
   const steps: Array<{ label; description?; completed; color? }> = [];
-  const nextStepCompleted = proposal ? true : false;
   steps.push({
     label: translate('Submission'),
-    completed: nextStepCompleted,
+    completed: proposal.state === 'submitted',
   });
-  // TODO: need to be updated later (use nextStepCompleted to determine the next step completeness)
   steps.push(
     {
       label: translate('Verify team'),
-      completed: false,
+      completed: proposal.state === 'in_review',
     },
     {
       label: translate('Review'),
-      completed: false,
+      completed: proposal.state === 'in_revision',
     },
     {
       label: translate('Updates'),
-      completed: false,
+      completed: proposal.state === 'in_revision',
     },
     {
       label: translate('Accepted'),
-      completed: false,
+      completed: proposal.state === 'accepted',
     },
   );
   return steps;
