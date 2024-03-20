@@ -1590,8 +1590,7 @@ msgstr ""
 msgid "By call manager"
 msgstr ""
 
-#: src/marketplace/deploy/DeployPageSidebar.tsx
-#: src/proposals/proposal/create/CompletionPageSidebar.tsx
+#: src/marketplace/deploy/TosNotification.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr ""
 
@@ -7394,6 +7393,10 @@ msgstr ""
 msgid "Orders pending approval"
 msgstr ""
 
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+msgid "Ordinary plan"
+msgstr ""
+
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Organisation field name"
 msgstr ""
@@ -8029,7 +8032,6 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
-#: src/proposals/offering-requests/OfferingRequestsListExpandableRow.tsx
 #: src/proposals/update/offerings/CallOfferingExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/reporting/plan-usage/PlanUsageDialog.tsx

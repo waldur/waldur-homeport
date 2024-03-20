@@ -1,8 +1,8 @@
 import { Card, FormCheck } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-import { Link } from '@waldur/core/Link';
-import { formatJsx, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
+import { TosNotification } from '@waldur/marketplace/deploy/TosNotification';
 import { scrollToView } from '@waldur/marketplace/deploy/utils';
 import { ProposalCreationFormStep } from '@waldur/proposals/types';
 
@@ -79,16 +79,7 @@ export const CompletionPageSidebar = (props: CompletionPageSidebarProps) => {
             loading={props.submitting}
           />
 
-          <p className="text-center fs-9 mt-2 mb-0">
-            {translate(
-              'By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>.',
-              {
-                tos: (s: string) => <Link state="about.tos" label={s} />,
-                pp: (s: string) => <Link state="about.privacy" label={s} />,
-              },
-              formatJsx,
-            )}
-          </p>
+          <TosNotification />
         </Card.Body>
       </Card>
     </div>

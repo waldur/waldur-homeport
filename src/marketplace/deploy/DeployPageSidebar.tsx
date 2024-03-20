@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
-import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { flattenObject } from '@waldur/core/utils';
 import { FieldError } from '@waldur/form';
@@ -16,6 +15,7 @@ import { getCheckoutSummaryComponent } from '../common/registry';
 import { OrderResponse } from '../orders/types';
 
 import { ProviderTermsOfService } from './ProviderTermsOfService';
+import { TosNotification } from './TosNotification';
 import { OfferingConfigurationFormStep } from './types';
 import { formErrorsSelector, scrollToView } from './utils';
 
@@ -149,16 +149,7 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
             />
           )}
 
-          <p className="text-center fs-9 mt-2 mb-0">
-            {translate(
-              'By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>.',
-              {
-                tos: (s: string) => <Link state="about.tos" label={s} />,
-                pp: (s: string) => <Link state="about.privacy" label={s} />,
-              },
-              formatJsx,
-            )}
-          </p>
+          <TosNotification />
           {(props.offering.terms_of_service ||
             props.offering.terms_of_service_link) &&
           props.offering.privacy_policy_link ? (
