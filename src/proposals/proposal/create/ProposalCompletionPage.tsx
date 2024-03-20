@@ -17,6 +17,7 @@ import { ProgressSteps } from './ProgressSteps';
 import { createProposalSteps } from './steps/steps';
 
 import './ProposalCompletionPage.scss';
+import { formatProposalState } from '@waldur/proposals/utils';
 
 export const ProposalCompletionPage = reduxForm({
   form: 'ProposalCompletionForm',
@@ -93,7 +94,7 @@ export const ProposalCompletionPage = reduxForm({
                   {translate('Proposal')} - {proposal.name}
                 </h3>
                 <Badge bg="light" text="dark" className="ms-4">
-                  {proposal.state}
+                  {formatProposalState(proposal.state)}
                 </Badge>
               </div>
               <p className="text-muted fst-italic">UUID: {proposal.uuid}</p>
