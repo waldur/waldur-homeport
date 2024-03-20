@@ -169,7 +169,7 @@ export const OrganizationListItem: FunctionComponent<{
               {hasOrganizationPermission ? (
                 <Link
                   className="action-item"
-                  state="call-management-dashboard"
+                  state="call-management.dashboard"
                   params={{ uuid: item.uuid }}
                   onClick={(e) => {
                     e.stopPropagation();

@@ -23,7 +23,7 @@ const STATES_MAP = {
   customer: 'organization.dashboard',
   project: 'project.dashboard',
   offering: 'marketplace-offering-details',
-  call: 'call-management.protected-call-update-details',
+  call: 'call-management.call-update',
 };
 
 const UUID_MAP = {

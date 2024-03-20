@@ -60,9 +60,8 @@ export const states: StateDeclaration[] = [
     ],
   },
   {
-    name: 'call-management-dashboard',
+    name: 'call-management.dashboard',
     url: 'dashboard/',
-    parent: 'call-management',
     component: CallManagementDashboard,
     data: {
       breadcrumb: () => translate('Dashboard'),
@@ -79,12 +78,12 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'call-management.protected-call-update-details',
+    name: 'call-management.call-update',
     url: 'call/:call_uuid/',
     component: CallUpdateContainer,
   },
   {
-    name: 'call-management.protected-call-update-round',
+    name: 'call-management.round-update',
     url: 'call/:call_uuid/round/:round_uuid/',
     component: RoundPage,
   },

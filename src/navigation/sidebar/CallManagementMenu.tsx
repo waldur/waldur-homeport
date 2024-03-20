@@ -21,9 +21,9 @@ export const CallManagementMenu = () => {
   return (
     <MenuItem
       title={translate('Call management')}
-      state="call-management-dashboard"
+      state="call-management.dashboard"
       activeState={
-        ['call-management-dashboard'].some((name) => state.name.includes(name))
+        ['call-management.dashboard'].some((name) => state.name.includes(name))
           ? state.name
           : undefined
       }
