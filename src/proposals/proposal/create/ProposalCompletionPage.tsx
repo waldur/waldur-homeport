@@ -10,6 +10,7 @@ import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { getProposal, updateProposal } from '@waldur/proposals/api';
+import { formatProposalState } from '@waldur/proposals/utils';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { CompletionPageSidebar } from './CompletionPageSidebar';
@@ -17,7 +18,6 @@ import { ProgressSteps } from './ProgressSteps';
 import { createProposalSteps } from './steps/steps';
 
 import './ProposalCompletionPage.scss';
-import { formatProposalState } from '@waldur/proposals/utils';
 
 export const ProposalCompletionPage = reduxForm({
   form: 'ProposalCompletionForm',
