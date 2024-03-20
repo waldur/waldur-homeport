@@ -81,7 +81,8 @@ export interface RoundFormData {
 
 export interface EditCallProps {
   call: Call;
-  fields: string[];
+  name: string;
+  title: string;
   refetch(): void;
 }
 

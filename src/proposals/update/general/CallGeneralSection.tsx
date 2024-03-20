@@ -38,7 +38,8 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                 <div>
                   <EditGeneralInfoButton
                     call={props.call}
-                    fields={['name']}
+                    name="name"
+                    title={translate('Edit name')}
                     refetch={props.refetch}
                   />
                 </div>
@@ -57,7 +58,8 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                 <div>
                   <EditGeneralInfoButton
                     call={props.call}
-                    fields={['description']}
+                    name="description"
+                    title={translate('Edit description')}
                     refetch={props.refetch}
                   />
                 </div>
@@ -70,7 +72,8 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                 <div>
                   <EditGeneralInfoButton
                     call={props.call}
-                    fields={['reference_code']}
+                    name="reference_code"
+                    title={translate('Edit reference code')}
                     refetch={props.refetch}
                   />
                 </div>

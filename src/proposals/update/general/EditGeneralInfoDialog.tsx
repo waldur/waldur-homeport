@@ -52,12 +52,7 @@ export const EditGeneralInfoDialog = connect<
     return (
       <form onSubmit={props.handleSubmit(processRequest)}>
         <ModalDialog
-          title={translate('Edit {title}', {
-            title:
-              props.resolve.fields.length === 1
-                ? props.resolve.fields[0]
-                : props.resolve.call.name,
-          })}
+          title={props.resolve.title}
           closeButton
           footer={
             <>
@@ -71,7 +66,7 @@ export const EditGeneralInfoDialog = connect<
           }
         >
           <FormContainer submitting={props.submitting}>
-            {props.resolve.fields.includes('name') && (
+            {props.resolve.name === 'name' && (
               <StringField
                 label={translate('Name')}
                 name="name"
@@ -79,7 +74,7 @@ export const EditGeneralInfoDialog = connect<
                 validate={required}
               />
             )}
-            {props.resolve.fields.includes('description') && (
+            {props.resolve.name === 'description' && (
               <MarkdownField
                 label={translate('Description')}
                 name="description"
@@ -87,7 +82,7 @@ export const EditGeneralInfoDialog = connect<
                 verticalLayout
               />
             )}
-            {props.resolve.fields.includes('reference_code') && (
+            {props.resolve.name === 'reference_code' && (
               <StringField
                 label={translate('Reference code')}
                 name="reference_code"
