@@ -3280,7 +3280,7 @@ msgid "Detaching"
 msgstr ""
 
 #: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 msgid "Detailed description"
 msgstr ""
 
@@ -5402,7 +5402,7 @@ msgid "Is service provider"
 msgstr ""
 
 #: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 msgid "Is the project confidential?"
 msgstr ""
 
@@ -6582,7 +6582,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
@@ -8623,7 +8623,7 @@ msgid "Project details"
 msgstr ""
 
 #: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 msgid "Project duration in days"
 msgstr ""
 
@@ -8655,7 +8655,7 @@ msgid "Project field name"
 msgstr ""
 
 #: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 msgid "Project for civilian purpose?"
 msgstr ""
 
@@ -8728,12 +8728,12 @@ msgid "Project settings"
 msgstr ""
 
 #: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 msgid "Project summary"
 msgstr ""
 
 #: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 msgid "Project title"
 msgstr ""
 
@@ -8814,7 +8814,7 @@ msgstr ""
 msgid "Proposal has been submitted"
 msgstr ""
 
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 msgid "Proposal summary"
 msgstr ""
 
@@ -9610,7 +9610,7 @@ msgid "Required nodes"
 msgstr ""
 
 #: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 msgid "Research field (OECD code)"
 msgstr ""
 
@@ -14880,7 +14880,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectRemoveDialog.tsx
-#: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalSummaryCard.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
