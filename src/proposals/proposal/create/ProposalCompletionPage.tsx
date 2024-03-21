@@ -10,6 +10,7 @@ import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import {
+  attachDocuments,
   getProposal,
   submitProposal,
   updateProposalProjectDetails,
@@ -58,6 +59,7 @@ export const ProposalCompletionPage = reduxForm({
   const {
     params: { proposal_uuid },
   } = useCurrentStateAndParams();
+  const dispatch = useDispatch();
 
   const {
     data: proposal,
@@ -80,17 +82,22 @@ export const ProposalCompletionPage = reduxForm({
     },
   });
 
-  const dispatch = useDispatch();
-
   const submitForm = useCallback(
-    (formData) => {
-      return updateProposalProjectDetails(formData, proposal_uuid)
-        .then(() => {
-          dispatch(showSuccess(translate('Proposal updated successfully')));
-        })
-        .catch((error) => {
-          dispatch(showErrorResponse(error, translate('Something went wrong')));
-        });
+    async (formData) => {
+      try {
+        await updateProposalProjectDetails(formData, proposal_uuid);
+        if (formData && formData.supporting_documentation) {
+          const files = Object.values(formData.supporting_documentation);
+          if (files && files.length > 0) {
+            await Promise.all(
+              files.map((file) => attachDocuments(proposal_uuid, file)),
+            );
+          }
+        }
+        dispatch(showSuccess(translate('Proposal updated successfully')));
+      } catch (error) {
+        dispatch(showErrorResponse(error, translate('Something went wrong')));
+      }
     },
     [proposal_uuid, dispatch],
   );
