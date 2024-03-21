@@ -97,7 +97,7 @@ export const FormResourceRequestsStep = (props: ProposalFormStepProps) => {
           },
         ]}
         title={translate('Offering requests')}
-        verboseName={translate('Offering requests')}
+        verboseName={translate('offering requests')}
         filters={
           isLoading ? (
             <LoadingSpinner />

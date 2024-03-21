@@ -1,5 +1,6 @@
 import { ProjectDetailsSummary } from './ProjectDetailsSummary';
 import { ProposalHeader } from './ProposalHeader';
+import { ResourceRequestsSummary } from './ResourceRequestsSummary';
 
 export const ProposalTeam = ({ proposal }) => {
   return (
@@ -7,6 +8,7 @@ export const ProposalTeam = ({ proposal }) => {
       <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
         <ProposalHeader proposal={proposal} />
         <ProjectDetailsSummary proposal={proposal} />
+        <ResourceRequestsSummary proposal={proposal} />
       </div>
     </div>
   );

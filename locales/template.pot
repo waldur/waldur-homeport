@@ -1833,6 +1833,7 @@ msgstr ""
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/proposals/proposal/create/ResourceRequestsSummary.tsx
 #: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -6957,6 +6958,7 @@ msgstr ""
 #: src/permissions/constants.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/proposals/proposal/create/ResourceRequestsSummary.tsx
 #: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
 #: src/proposals/proposal/create/resource-requests-step/ProposalResourcesFilter.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
@@ -8912,6 +8914,7 @@ msgstr ""
 #: src/marketplace-flows/FlowsList.tsx
 #: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/proposal/create/ResourceRequestsSummary.tsx
 #: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
@@ -9815,6 +9818,7 @@ msgstr ""
 msgid "Resource request has been updated."
 msgstr ""
 
+#: src/proposals/proposal/create/ResourceRequestsSummary.tsx
 #: src/proposals/proposal/create/steps.ts
 msgid "Resource requests"
 msgstr ""
@@ -15317,6 +15321,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 msgid "offering permissions"
+msgstr ""
+
+#: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
+msgid "offering requests"
 msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx

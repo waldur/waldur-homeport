@@ -43,7 +43,7 @@ export const ProjectDetailsSummary = ({ proposal }) => (
 
       <ReadOnlyFormControl
         label={translate('Research field (OECD code)')}
-        value={proposal.oecd_fos_2007_label}
+        value={proposal.oecd_fos_2007_label || 'N/A'}
         className="col-12 col-md-6"
         floating
       />
