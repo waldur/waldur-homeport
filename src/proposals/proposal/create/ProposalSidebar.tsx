@@ -2,7 +2,6 @@ import { Button, Card } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
 import { translate } from '@waldur/i18n';
-import { PlatformTosNotification } from '@waldur/marketplace/deploy/PlatformTosNotification';
 
 import { SubmitButton } from './SubmitButton';
 
@@ -12,7 +11,7 @@ interface CompletionPageSidebarProps {
   submitting: boolean;
 }
 
-export const CompletionPageSidebar = (props: CompletionPageSidebarProps) => {
+export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
   const isVerticalMode = useMediaQuery({ maxWidth: 1200 });
 
   return (
@@ -27,25 +26,30 @@ export const CompletionPageSidebar = (props: CompletionPageSidebarProps) => {
         <Card.Body>
           {props.canSubmit && (
             <>
-              <SubmitButton
-                title={translate('Update project details')}
-                className="w-100"
-                loading={props.submitting}
-              />
-
               <div className="d-flex justify-content-between mt-5">
                 <Button
                   size="sm"
+                  variant="danger"
                   onClick={props.submitProposal}
                   className="w-100"
                 >
                   {translate('To team verification')}
                 </Button>
               </div>
+
+              <p className="text-center fs-9 mt-2 mb-0">
+                {translate(
+                  'When you proceed to team verification, you would be unable to edit project details or resource requests and they are going to be available for editing only during review phase.',
+                )}
+              </p>
+
+              <SubmitButton
+                title={translate('Update project details')}
+                className="w-100"
+                loading={props.submitting}
+              />
             </>
           )}
-
-          <PlatformTosNotification />
         </Card.Body>
       </Card>
     </div>

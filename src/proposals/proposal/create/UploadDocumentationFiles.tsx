@@ -8,7 +8,7 @@ export const UploadDocumentationFiles = (props) => (
         {props.input.value.map((item, index) => (
           <li key={index}>
             <a href={item.file} target="_blank" rel="noreferrer">
-              {translate('File {index}', { index })}
+              {translate('File {index}', { index: index + 1 })}
             </a>
           </li>
         ))}

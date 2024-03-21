@@ -12503,7 +12503,7 @@ msgstr ""
 msgid "To remove your organization, please send an email to {supportEmail}. Thank you!"
 msgstr ""
 
-#: src/proposals/proposal/create/CompletionPageSidebar.tsx
+#: src/proposals/proposal/create/ProposalSidebar.tsx
 msgid "To team verification"
 msgstr ""
 
@@ -14119,7 +14119,7 @@ msgid "Update project"
 msgstr ""
 
 #: src/project/ProjectUpdateForm.tsx
-#: src/proposals/proposal/create/CompletionPageSidebar.tsx
+#: src/proposals/proposal/create/ProposalSidebar.tsx
 msgid "Update project details"
 msgstr ""
 
@@ -14825,6 +14825,10 @@ msgstr ""
 
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 msgid "When"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalSidebar.tsx
+msgid "When you proceed to team verification, you would be unable to edit project details or resource requests and they are going to be available for editing only during review phase."
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx

@@ -18,9 +18,9 @@ import {
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import './ProposalCompletionPage.scss';
-import { CompletionPageSidebar } from './CompletionPageSidebar';
 import { ProgressSteps } from './ProgressSteps';
 import { ProposalHeader } from './ProposalHeader';
+import { ProposalSidebar } from './ProposalSidebar';
 import { ProposalTeam } from './ProposalTeam';
 import { createProposalSteps } from './steps';
 
@@ -136,7 +136,7 @@ export const ProposalCompletionPage = reduxForm({
           </div>
 
           {/* Sidebar */}
-          <CompletionPageSidebar
+          <ProposalSidebar
             submitProposal={submitProposalCallback}
             submitting={props.submitting}
             canSubmit={proposal.state === 'draft'}
