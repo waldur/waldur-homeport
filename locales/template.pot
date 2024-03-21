@@ -3496,7 +3496,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/UploadDocumentationFiles.tsx
 msgid "Drag and drop file here or <u>Choose file</u>"
 msgstr ""
 
@@ -5952,7 +5952,7 @@ msgstr ""
 msgid "Maximum parallel executions of provisioning operations for volumes."
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/UploadDocumentationFiles.tsx
 msgid "Maximum size"
 msgstr ""
 
@@ -11758,7 +11758,7 @@ msgstr ""
 msgid "Support user"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/UploadDocumentationFiles.tsx
 msgid "Supported formats"
 msgstr ""
 
@@ -14207,6 +14207,10 @@ msgstr ""
 
 #: src/proposals/proposal/create/FormProjectDetailsStep.tsx
 msgid "Upload supporting documentation"
+msgstr ""
+
+#: src/proposals/proposal/create/UploadDocumentationFiles.tsx
+msgid "Uploaded file"
 msgstr ""
 
 #: src/resource/summary/VirtualMachineSummary.tsx
