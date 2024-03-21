@@ -6,7 +6,10 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { StatisticsCard } from '@waldur/core/StatisticsCard';
 import { translate } from '@waldur/i18n';
-import { getCallStateOptions } from '@waldur/proposals/utils';
+import {
+  getCallStateOptions,
+  getProposalStateOptions,
+} from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { getCallManagementStatistics } from '../api';
@@ -17,6 +20,17 @@ const getCallState = (states: string[]) => ({
     state: JSON.stringify(
       states.map((state) =>
         getCallStateOptions().find((op) => op.value === state),
+      ),
+    ),
+  },
+});
+
+const getProposalState = (states: string[]) => ({
+  state: 'call-management.proposal-list',
+  params: {
+    state: JSON.stringify(
+      states.map((state) =>
+        getProposalStateOptions().find((op) => op.value === state),
       ),
     ),
   },
@@ -52,26 +66,28 @@ export const CallManagementStatistics = () => {
           </Col>
           <Col md={6} lg={4}>
             <StatisticsCard
-              title={translate('Active rounds')}
-              value={data.active_rounds}
-            />
-          </Col>
-          <Col md={6} lg={4}>
-            <StatisticsCard
               title={translate('Accepted proposals')}
               value={data.accepted_proposals}
+              to={getProposalState(['accepted'])}
             />
           </Col>
           <Col md={6} lg={4}>
             <StatisticsCard
               title={translate('Pending proposals')}
               value={data.pending_proposals}
+              to={getProposalState(['in_review', 'in_revision', 'submitted'])}
             />
           </Col>
           <Col md={6} lg={4}>
             <StatisticsCard
               title={translate('Pending review')}
               value={data.pending_review}
+            />
+          </Col>
+          <Col md={6} lg={4}>
+            <StatisticsCard
+              title={translate('Active rounds')}
+              value={data.active_rounds}
             />
           </Col>
           <Col md={6} lg={4}>
