@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import {
-  attachDocuments,
+  attachDocument,
   getProposal,
   submitProposal,
   updateProposalProjectDetails,
@@ -77,7 +77,6 @@ export const ProposalCompletionPage = reduxForm({
         oecd_fos_2007_code: data.oecd_fos_2007_code,
         project_is_confidential: data.project_is_confidential,
         duration_in_days: data.duration_in_days,
-        supporting_documentation: data.supporting_documentation,
       });
     },
   });
@@ -90,7 +89,9 @@ export const ProposalCompletionPage = reduxForm({
           const files = Object.values(formData.supporting_documentation);
           if (files && files.length > 0) {
             await Promise.all(
-              files.map((file) => attachDocuments(proposal_uuid, file)),
+              Array.from(files).map((file) =>
+                attachDocument(proposal_uuid, file),
+              ),
             );
           }
         }

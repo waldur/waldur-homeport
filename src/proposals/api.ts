@@ -151,15 +151,15 @@ export const acceptProposalReview = (uuid) =>
 export const rejectProposalReview = (uuid) =>
   post(`/proposal-reviews/${uuid}/reject/`);
 
-export const getCallManagementStatistics = (callManagingOrganizationUuid) => {
+export const getCallManagementStatistics = (uuid) => {
   return get<CallManagementStatistics>(
-    `/call-managing-organisations/${callManagingOrganizationUuid}/stats/`,
+    `/call-managing-organisations/${uuid}/stats/`,
   ).then((response) => response.data);
 };
 
-export const attachDocuments = (proposal_uuid, file) => {
-  const url = fixURL(`/proposal-proposals/${proposal_uuid}/attach_documents/`);
-  sendForm('POST', url, {
-    supporting_documentation: [file],
-  });
-};
+export const attachDocument = (proposal_uuid, file) =>
+  sendForm(
+    'POST',
+    fixURL(`/proposal-proposals/${proposal_uuid}/attach_document/`),
+    { file },
+  );

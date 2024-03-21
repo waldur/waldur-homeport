@@ -116,7 +116,7 @@ export const ProjectDetailsStep = (props: ProposalFormStepProps) => {
         label={translate('Upload supporting documentation')}
         component={FormGroup}
       >
-        <UploadDocumentationFiles />
+        <UploadDocumentationFiles proposal={props.params.proposal} />
       </Field>
     </StepCard>
   );

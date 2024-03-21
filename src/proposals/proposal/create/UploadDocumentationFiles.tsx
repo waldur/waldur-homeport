@@ -3,9 +3,9 @@ import { formatJsx, translate } from '@waldur/i18n';
 
 export const UploadDocumentationFiles = (props) => (
   <>
-    {props.input.value?.length > 0 && (
+    {props.proposal.supporting_documentation.length > 0 && (
       <ul className="text-muted">
-        {props.input.value.map((item, index) => (
+        {props.proposal.supporting_documentation.map((item, index) => (
           <li key={index}>
             <a href={item.file} target="_blank" rel="noreferrer">
               {translate('File {index}', { index: index + 1 })}
@@ -15,7 +15,7 @@ export const UploadDocumentationFiles = (props) => (
       </ul>
     )}
     <DropzoneFiles
-      multiple={false}
+      multiple={true}
       maxSize={25 * 1024 * 1024} // 25MB
       accept={{
         'application/pdf': ['.pdf'],
@@ -26,7 +26,7 @@ export const UploadDocumentationFiles = (props) => (
         'application/msword': ['.doc'],
         'application/vnd.oasis.opendocument.text': ['.odt'],
       }}
-      onDrop={(files) => props.input.onChange(files?.length ? files[0] : null)}
+      onDrop={(files) => props.input.onChange(files)}
       message={translate(
         'Drag and drop file here or <u>Choose file</u>',
         {
