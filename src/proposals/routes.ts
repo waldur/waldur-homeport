@@ -38,6 +38,11 @@ const CallManagementPage = lazyComponent(
   'CallManagementPage',
 );
 
+const ProposalsList = lazyComponent(
+  () => import('./proposal/ProposalsList'),
+  'ProposalsList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'call-management',
@@ -75,6 +80,14 @@ export const states: StateDeclaration[] = [
     component: CallManagementPage,
     data: {
       breadcrumb: () => translate('Calls'),
+    },
+  },
+  {
+    name: 'call-management.proposal-list',
+    url: 'proposals/?{state}',
+    component: ProposalsList,
+    data: {
+      breadcrumb: () => translate('Proposals'),
     },
   },
   {

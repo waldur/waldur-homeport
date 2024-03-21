@@ -1630,6 +1630,7 @@ msgstr ""
 #: src/proposals/details/PublicCallDetailsHero.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/proposals/proposal/ProposalsList.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -3912,6 +3913,7 @@ msgstr ""
 msgid "Ended"
 msgstr ""
 
+#: src/proposals/proposal/ProposalsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 msgid "Ending"
 msgstr ""
@@ -8805,6 +8807,7 @@ msgid "Propagated"
 msgstr ""
 
 #: src/permissions/constants.tsx
+#: src/proposals/proposal/ProposalsList.tsx
 #: src/proposals/proposal/create/ProposalHeader.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
@@ -8828,8 +8831,10 @@ msgstr ""
 msgid "Proposal updated successfully"
 msgstr ""
 
+#: src/proposals/proposal/ProposalsList.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
+#: src/proposals/routes.ts
 #: src/user/routes.ts
 msgid "Proposals"
 msgstr ""
@@ -11498,6 +11503,7 @@ msgstr ""
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/proposal/ProposalsList.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
@@ -11543,6 +11549,7 @@ msgstr ""
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
+#: src/proposals/proposal/ProposalsList.tsx
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
