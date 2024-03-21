@@ -72,7 +72,7 @@ export const loadData = async (settings: string, offering: Offering) => {
     subnets,
     flavors,
     volumeTypes: volumeTypeChoices,
-    defaultVolumeType: defaultVolumeType && defaultVolumeType.url,
+    defaultVolumeType: defaultVolumeType && defaultVolumeType.value,
     mountPoints: getRancherMountPointChoices(),
     templates,
     securityGroups,

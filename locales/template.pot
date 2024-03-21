@@ -2934,7 +2934,6 @@ msgid "Data volume size"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
 msgid "Data volume type"
 msgstr ""
 
@@ -4546,8 +4545,7 @@ msgstr ""
 msgid "Full price list of {offeringName} offering"
 msgstr ""
 
-#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
-#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-instance/deploy/FormAbstractVolumeStep.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 #: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
@@ -9062,8 +9060,7 @@ msgstr ""
 msgid "Quota"
 msgstr ""
 
-#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
-#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-instance/deploy/FormAbstractVolumeStep.tsx
 #: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/quotas/QuotaUsageBarChart.tsx
 #: src/rancher/cluster/create/FormDataStorageStep.tsx
@@ -11846,7 +11843,6 @@ msgid "System volume size"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
-#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
 #: src/rancher/cluster/create/SystemVolumeTypeGroup.tsx
 msgid "System volume type"
 msgstr ""
@@ -14760,8 +14756,7 @@ msgstr ""
 msgid "Volume name"
 msgstr ""
 
-#: src/openstack/openstack-instance/deploy/FormDataVolumeStep.tsx
-#: src/openstack/openstack-instance/deploy/FormSystemVolumeStep.tsx
+#: src/openstack/openstack-instance/deploy/FormAbstractVolumeStep.tsx
 #: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "Volume size"
