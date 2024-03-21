@@ -3,23 +3,25 @@ import { AxiosRequestConfig } from 'axios';
 import { ENV } from '@waldur/configs/default';
 import {
   deleteById,
+  fixURL,
   get,
+  getAll,
   getById,
   getFirst,
   getSelectData,
-  getAll,
   patch,
   post,
   put,
+  sendForm,
 } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 
 import {
+  Call,
   CallManagementStatistics,
   CallManagingOrganization,
   CallOffering,
   Proposal,
-  Call,
   Round,
 } from './types';
 
@@ -153,4 +155,11 @@ export const getCallManagementStatistics = (callManagingOrganizationUuid) => {
   return get<CallManagementStatistics>(
     `/call-managing-organisations/${callManagingOrganizationUuid}/stats/`,
   ).then((response) => response.data);
+};
+
+export const attachDocuments = (proposal_uuid, file) => {
+  const url = fixURL(`/proposal-proposals/${proposal_uuid}/attach_documents/`);
+  sendForm('POST', url, {
+    supporting_documentation: [file],
+  });
 };
