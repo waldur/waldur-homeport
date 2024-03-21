@@ -3,7 +3,7 @@ import { formatJsx, translate } from '@waldur/i18n';
 
 export const UploadDocumentationFiles = (props) => (
   <>
-    {props.input.value?.length && (
+    {props.input.value?.length > 0 && (
       <ul className="text-muted">
         {props.input.value.map((item, index) => (
           <li key={index}>
