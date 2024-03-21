@@ -16,7 +16,7 @@ import { UploadDocumentationFiles } from './UploadDocumentationFiles';
 
 const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
-export const FormProjectDetailsStep = (props: ProposalFormStepProps) => {
+export const ProjectDetailsStep = (props: ProposalFormStepProps) => {
   const { loading, value: oecdCodes } = useAsync(loadOecdCodes);
 
   return (
@@ -58,7 +58,7 @@ export const FormProjectDetailsStep = (props: ProposalFormStepProps) => {
         <TextField />
       </Field>
       <Field
-        name="project_description"
+        name="description"
         component={FormGroup}
         maxLength={1000}
         label={translate('Detailed description')}

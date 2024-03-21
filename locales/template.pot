@@ -3279,8 +3279,8 @@ msgstr ""
 msgid "Detaching"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Detailed description"
 msgstr ""
 
@@ -4325,6 +4325,10 @@ msgstr ""
 msgid "File too large. Please select a smaller file."
 msgstr ""
 
+#: src/proposals/proposal/create/UploadDocumentationFiles.tsx
+msgid "File {index}"
+msgstr ""
+
 #: src/issues/attachments/utils.ts
 msgid "Files"
 msgstr ""
@@ -5030,7 +5034,7 @@ msgstr ""
 msgid "Import offerings"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
 msgid "Import project"
 msgstr ""
 
@@ -5401,8 +5405,8 @@ msgstr ""
 msgid "Is service provider"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Is the project confidential?"
 msgstr ""
 
@@ -6582,7 +6586,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
@@ -8213,7 +8217,7 @@ msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr ""
 
@@ -8622,8 +8626,8 @@ msgstr ""
 msgid "Project details"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Project duration in days"
 msgstr ""
 
@@ -8654,8 +8658,8 @@ msgstr ""
 msgid "Project field name"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Project for civilian purpose?"
 msgstr ""
 
@@ -8727,13 +8731,13 @@ msgstr ""
 msgid "Project settings"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Project summary"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Project title"
 msgstr ""
 
@@ -8814,7 +8818,7 @@ msgstr ""
 msgid "Proposal has been submitted"
 msgstr ""
 
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Proposal summary"
 msgstr ""
 
@@ -9609,8 +9613,8 @@ msgstr ""
 msgid "Required nodes"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Research field (OECD code)"
 msgstr ""
 
@@ -14205,12 +14209,8 @@ msgstr ""
 msgid "Upload new"
 msgstr ""
 
-#: src/proposals/proposal/create/FormProjectDetailsStep.tsx
+#: src/proposals/proposal/create/ProjectDetailsStep.tsx
 msgid "Upload supporting documentation"
-msgstr ""
-
-#: src/proposals/proposal/create/UploadDocumentationFiles.tsx
-msgid "Uploaded file"
 msgstr ""
 
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -14880,7 +14880,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectRemoveDialog.tsx
-#: src/proposals/proposal/create/ProposalSummaryCard.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx

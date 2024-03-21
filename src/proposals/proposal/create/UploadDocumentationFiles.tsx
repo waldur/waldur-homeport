@@ -4,9 +4,15 @@ import { formatJsx, translate } from '@waldur/i18n';
 export const UploadDocumentationFiles = (props) => (
   <>
     {props.input.value?.length && (
-      <p className="text-muted">
-        {translate('Uploaded file')} {props.input.value[0].file}
-      </p>
+      <ul className="text-muted">
+        {props.input.value.map((item, index) => (
+          <li key={index}>
+            <a href={item.file} target="_blank" rel="noreferrer">
+              {translate('File {index}', { index })}
+            </a>
+          </li>
+        ))}
+      </ul>
     )}
     <DropzoneFiles
       multiple={false}

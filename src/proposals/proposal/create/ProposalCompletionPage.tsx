@@ -72,7 +72,7 @@ export const ProposalCompletionPage = reduxForm({
       props.initialize({
         name: data.name,
         project_summary: data.project_summary,
-        project_description: data.description,
+        description: data.description,
         project_has_civilian_purpose: data.project_has_civilian_purpose,
         oecd_fos_2007_code: data.oecd_fos_2007_code,
         project_is_confidential: data.project_is_confidential,

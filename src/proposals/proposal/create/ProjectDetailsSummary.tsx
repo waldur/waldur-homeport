@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
 import { translate } from '@waldur/i18n';
 
-export const ProposalSummaryCard = ({ proposal }) => (
+export const ProjectDetailsSummary = ({ proposal }) => (
   <Card>
     <Card.Header>
       <Card.Title>{translate('Proposal summary')}</Card.Title>
