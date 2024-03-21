@@ -45,7 +45,7 @@ export const formatVolumeTypeLabel = (volumeType: VolumeType): string =>
     ? `${volumeType.name} (${volumeType.description})`
     : volumeType.name;
 
-export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): any[] =>
+export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]) =>
   volumeTypes.map((volumeType) => ({
     label: formatVolumeTypeLabel(volumeType),
     value: volumeType.url,
@@ -53,7 +53,9 @@ export const formatVolumeTypeChoices = (volumeTypes: VolumeType[]): any[] =>
     is_default: volumeType.is_default,
   }));
 
-export const getDefaultVolumeType = (volumeTypes) =>
+export type VolumeTypeChoice = ReturnType<typeof formatVolumeTypeChoices>[0];
+
+export const getDefaultVolumeType = (volumeTypes: VolumeTypeChoice[]) =>
   volumeTypes.find((volumeType) => volumeType.is_default);
 
 const DNS_LABEL_REGEX = new RegExp('^([a-zA-Z0-9-]{1,63})$');

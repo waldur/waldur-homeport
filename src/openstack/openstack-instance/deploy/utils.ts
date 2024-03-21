@@ -50,12 +50,9 @@ export const useQuotasData = (offering: Offering) => {
   return useMemo(() => {
     const quotas = getQuotas({ formData, usages, limits });
     return {
+      quotas,
       vcpuQuota: quotas.find((q) => q.name === 'vcpu'),
       ramQuota: quotas.find((q) => q.name === 'ram'),
-      storageQuota: quotas.find((q) => q.name === 'storage'),
-      volumeTypeQuotas: quotas.filter(
-        (q) => !['vcpu', 'ram', 'storage'].includes(q.name),
-      ),
     };
   }, [formData, usages, limits]);
 };
