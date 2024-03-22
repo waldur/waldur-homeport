@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -13,6 +13,15 @@ import {
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { getCallManagementStatistics } from '../api';
+
+export const FlatStatistics = ({ count, title }) => {
+  return (
+    <Col className="text-md-center mb-4">
+      <strong className="d-block fs-2">{count}</strong>
+      <strong className="health-title">{title}</strong>
+    </Col>
+  );
+};
 
 const getCallState = (states: string[]) => ({
   state: 'call-management.call-list',
@@ -78,35 +87,33 @@ export const CallManagementStatistics = () => {
               to={getProposalState(['in_review', 'in_revision', 'submitted'])}
             />
           </Col>
-          <Col md={6} lg={4}>
-            <StatisticsCard
-              title={translate('Pending review')}
-              value={data.pending_review}
-            />
-          </Col>
-          <Col md={6} lg={4}>
-            <StatisticsCard
-              title={translate('Active rounds')}
-              value={data.active_rounds}
-            />
-          </Col>
-          <Col md={6} lg={4}>
-            <StatisticsCard
-              title={translate('Round closing soon')}
-              value={data.rounds_closing_in_one_week}
-            />
-          </Col>
-          <Col md={6} lg={4}>
-            <StatisticsCard
-              title={translate('Calls closing soon')}
-              value={data.calls_closing_in_one_week}
-            />
-          </Col>
-          <Col md={6} lg={4}>
-            <StatisticsCard
-              title={translate('Pending offering requests')}
-              value={data.offering_requests_pending}
-            />
+          <Col>
+            <Card className="mb-6">
+              <Card.Body>
+                <div className="d-flex justify-content-start justify-content-lg-between flex-wrap">
+                  <FlatStatistics
+                    title={translate('Pending review')}
+                    count={data.pending_review}
+                  />
+                  <FlatStatistics
+                    title={translate('Active rounds')}
+                    count={data.active_rounds}
+                  />
+                  <FlatStatistics
+                    title={translate('Round closing soon')}
+                    count={data.rounds_closing_in_one_week}
+                  />
+                  <FlatStatistics
+                    title={translate('Calls closing soon')}
+                    count={data.calls_closing_in_one_week}
+                  />
+                  <FlatStatistics
+                    title={translate('Pending offering requests')}
+                    count={data.offering_requests_pending}
+                  />
+                </div>
+              </Card.Body>
+            </Card>
           </Col>
         </>
       )}
