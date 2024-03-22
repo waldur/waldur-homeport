@@ -4,6 +4,7 @@ import { Card, FormCheck } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
+import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 
 interface StepCardProps {
   title: string;
@@ -16,6 +17,8 @@ interface StepCardProps {
   className?: string;
   disabled?: boolean;
   required?: boolean;
+  refetch?(): void;
+  refetching?: boolean;
 }
 
 export const StepCard: FC<StepCardProps> = (props) => {
@@ -45,6 +48,14 @@ export const StepCard: FC<StepCardProps> = (props) => {
             >
               <i className="fa fa-question-circle fs-5" />
             </Tip>
+          )}
+          {props.refetch && (
+            <div className="ms-2">
+              <RefreshButton
+                loading={props.refetching}
+                refetch={props.refetch}
+              />
+            </div>
           )}
         </div>
         {props.actions && (

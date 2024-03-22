@@ -73,10 +73,12 @@ export const FormResourceRequestsStep = (props: ProposalFormStepProps) => {
         <div className="d-flex justify-content-end flex-grow-1">
           <AddResourceButton
             proposal={props.params.proposal}
-            refetch={props.params.refetch}
+            refetch={tableProps.fetch}
           />
         </div>
       }
+      refetch={tableProps.fetch}
+      refetching={tableProps.loading}
     >
       <Table<ProposalResource>
         {...tableProps}

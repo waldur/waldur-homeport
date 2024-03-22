@@ -1778,7 +1778,6 @@ msgid "Canceled"
 msgstr ""
 
 #: src/paypal/InvoicesFilter.tsx
-#: src/proposals/utils.ts
 msgid "Cancelled"
 msgstr ""
 
@@ -5921,15 +5920,6 @@ msgstr ""
 msgid "Maximum RAM for each VM"
 msgstr ""
 
-#: src/proposals/round/allocation/RoundAllocationSection.tsx
-#: src/proposals/update/rounds/WizardFormThirdPage.tsx
-msgid "Maximum accepted proposals"
-msgstr ""
-
-#: src/proposals/update/rounds/RoundExpandableRow.tsx
-msgid "Maximum allocations"
-msgstr ""
-
 #: src/marketplace/offerings/update/components/ComponentMaxValueField.tsx
 msgid "Maximum allowed value"
 msgstr ""
@@ -7272,12 +7262,9 @@ msgid "Open public page"
 msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
+#: src/proposals/round/RoundPageHeaderBody.tsx
 #: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Open round ends"
-msgstr ""
-
-#: src/proposals/round/RoundPageHeaderBody.tsx
-msgid "Open round ends in"
 msgstr ""
 
 #: src/administration/providers/IdentityProvidersList.tsx
@@ -12186,6 +12173,14 @@ msgstr ""
 
 #: src/administration/roles/RoleToggleButton.tsx
 msgid "The role has been enabled"
+msgstr ""
+
+#: src/proposals/round/RoundPageHeaderBody.tsx
+msgid "The round has ended on:"
+msgstr ""
+
+#: src/proposals/round/RoundPageHeaderBody.tsx
+msgid "The round will be open on:"
 msgstr ""
 
 #: src/openstack/openstack-security-groups/rule-editor/CIDRField.tsx
