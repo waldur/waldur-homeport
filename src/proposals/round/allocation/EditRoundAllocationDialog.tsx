@@ -55,7 +55,6 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
       steps={[translate('Allocation')]}
       initialValues={{
         deciding_entity: initialValues.deciding_entity,
-        max_allocations: initialValues.max_allocations,
         minimal_average_scoring: initialValues.minimal_average_scoring,
         allocation_time: initialValues.allocation_time,
         allocation_date: initialValues.allocation_date,

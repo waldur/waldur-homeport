@@ -49,12 +49,6 @@ export const RoundAllocationSection: FC<RoundAllocationSectionProps> = ({
           floating
         />
         <ReadOnlyFormControl
-          label={translate('Maximum accepted proposals')}
-          value={round.max_allocations}
-          className="col-12 col-md-6"
-          floating
-        />
-        <ReadOnlyFormControl
           label={translate('Minimum average scoring for allocation')}
           value={round.minimal_average_scoring}
           className="col-12 col-md-6"
