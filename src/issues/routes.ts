@@ -8,10 +8,6 @@ import { SUPPORT_WORKSPACE } from '@waldur/workspace/types';
 
 import { hasSupport } from './hooks';
 
-const CustomerRequestContainer = lazyComponent(
-  () => import('@waldur/marketplace-flows/CustomerRequestContainer'),
-  'CustomerRequestContainer',
-);
 const SupportDashboard = lazyComponent(
   () => import('@waldur/support/dashboard/SupportDashboard'),
   'SupportDashboard',
@@ -103,16 +99,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Feedback'),
       permissions: [isStaffOrSupport, hasSupport],
-    },
-  },
-
-  {
-    name: 'support.customers-requests',
-    url: 'customers-requests/',
-    component: CustomerRequestContainer,
-    data: {
-      feature: 'support.customers_requests',
-      breadcrumb: () => translate('Organization requests'),
     },
   },
 

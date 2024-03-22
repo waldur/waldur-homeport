@@ -8,13 +8,9 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { CustomerCreateFormData } from '@waldur/customer/create/types';
 import { translate } from '@waldur/i18n';
-import { createFlow } from '@waldur/marketplace-flows/api';
 import * as api from '@waldur/marketplace/common/api';
 import { OrderResponse } from '@waldur/marketplace/orders/types';
-import { ProjectCreateFormData } from '@waldur/project/ProjectCreateForm';
 import {
   showError,
   showErrorResponse,
@@ -86,45 +82,7 @@ function* initCart() {
   }
 }
 
-const formatProjectCreateRequest = (request: ProjectCreateFormData) => ({
-  ...request,
-  end_date: request.end_date ? formatDate(request.end_date) : undefined,
-});
-
-const formatCustomerCreateRequest = (request: CustomerCreateFormData) => ({
-  ...request,
-  country: request.country?.value,
-});
-
 function* addItem(action) {
-  if (action.payload.item.project_create_request) {
-    const payload = {
-      resource_create_request: {
-        ...formatItemToCreate(action.payload.item),
-        name: action.payload.item.attributes.name,
-      },
-      project_create_request: formatProjectCreateRequest(
-        action.payload.item.project_create_request,
-      ),
-      customer: action.payload.item.customer?.url,
-      customer_create_request: action.payload.item.customer_create_request
-        ? formatCustomerCreateRequest(
-            action.payload.item.customer_create_request,
-          )
-        : undefined,
-    };
-    try {
-      yield call(createFlow, payload);
-      yield put(triggerTransition('profile.flows-list', {}));
-      yield put(
-        showSuccess(translate('Resource creation flow has been created.')),
-      );
-    } catch (e) {
-      yield put(showError(translate('Unable to submit data.')));
-      yield put(actions.addItemError());
-    }
-    return;
-  }
   // Clear cart so that there's only one item per project
   const cartItems: OrderResponse[] = yield select(getItems);
   if (cartItems) {

@@ -98,10 +98,6 @@
         "description": "Allow to attach document to marketplace offering."
       },
       {
-        "key": "flows",
-        "description": "Allow to submit organization, project and resource creation requests simultaneously."
-      },
-      {
         "key": "private_offerings",
         "description": "Render list of private marketplace service providers in organization workspace."
       },

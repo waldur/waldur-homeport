@@ -1,4 +1,4 @@
-import { ReviewActions } from '@waldur/marketplace-flows/ReviewActions';
+import { ReviewActions } from '@waldur/marketplace-remote/ReviewActions';
 
 import { approveProjectUpdateRequest, rejectProjectUpdateRequest } from './api';
 

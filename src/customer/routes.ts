@@ -14,14 +14,6 @@ const ProjectsList = lazyComponent(
   () => import('@waldur/project/ProjectsList'),
   'ProjectsList',
 );
-const ProjectCreateRequestsList = lazyComponent(
-  () => import('@waldur/marketplace-flows/ProjectCreateRequestsList'),
-  'ProjectCreateRequestsList',
-);
-const ResourceCreateRequestsList = lazyComponent(
-  () => import('@waldur/marketplace-flows/ResourceCreateRequestsList'),
-  'ResourceCreateRequestsList',
-);
 const ProjectCreateContainer = lazyComponent(
   () => import('../project/ProjectCreateContainer'),
   'ProjectCreateContainer',
@@ -183,26 +175,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Projects'),
       skipBreadcrumb: true,
-    },
-  },
-
-  {
-    name: 'organization-project-requests',
-    url: 'project-requests/',
-    component: ProjectCreateRequestsList,
-    parent: 'organization-requests',
-    data: {
-      breadcrumb: () => translate('Project creation requests'),
-    },
-  },
-
-  {
-    name: 'organization-resource-requests',
-    url: 'resource-requests/',
-    component: ResourceCreateRequestsList,
-    parent: 'organization-requests',
-    data: {
-      breadcrumb: () => translate('Resource creation requests'),
     },
   },
 

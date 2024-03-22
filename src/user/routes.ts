@@ -28,14 +28,6 @@ const UserOfferingList = lazyComponent(
   () => import('./UserOfferingList'),
   'UserOfferingList',
 );
-const FlowListContainer = lazyComponent(
-  () => import('@waldur/marketplace-flows/FlowListContainer'),
-  'FlowListContainer',
-);
-const FlowEditForm = lazyComponent(
-  () => import('@waldur/marketplace-flows/FlowEditForm'),
-  'FlowEditForm',
-);
 const UserPermissionRequestsListContainer = lazyComponent(
   () => import('./UserPermissionRequestsListContainer'),
   'UserPermissionRequestsListContainer',
@@ -223,20 +215,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Remote accounts'),
     },
-  },
-  {
-    name: 'profile.flows-list',
-    url: 'resources/',
-    component: FlowListContainer,
-    data: {
-      feature: 'marketplace.flows',
-      breadcrumb: () => translate('Resources'),
-    },
-  },
-  {
-    name: 'profile.flow-edit',
-    url: 'resources/:flow_uuid/',
-    component: FlowEditForm,
   },
   {
     name: 'profile.permission-requests',

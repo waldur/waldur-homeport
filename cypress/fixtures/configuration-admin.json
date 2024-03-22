@@ -27,7 +27,6 @@
     },
     "marketplace": {
       "offering_document": false,
-      "flows": false,
       "private_offerings": true,
       "import_resources": true,
       "conceal_prices": false,
