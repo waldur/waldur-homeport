@@ -19,6 +19,8 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
       {(wizardProps) => {
         const showAllocationDate =
           wizardProps.formValues?.allocation_time === 'fixed_date';
+        const showMinAverageScoring =
+          wizardProps.formValues?.deciding_entity != 'by_call_manager';
         return (
           <FormContainer
             submitting={wizardProps.submitting}
@@ -39,12 +41,14 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
               required
               validate={required}
             />
-            <NumberField
-              label={translate('Minimum average scoring for allocation')}
-              name="minimal_average_scoring"
-              required
-              validate={required}
-            />
+            {showMinAverageScoring && (
+              <NumberField
+                label={translate('Minimum average scoring for allocation')}
+                name="minimal_average_scoring"
+                required
+                validate={required}
+              />
+            )}
             <SelectField
               name="allocation_time"
               label={translate('Allocation time')}
