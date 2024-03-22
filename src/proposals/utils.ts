@@ -3,16 +3,16 @@ import { DateTime } from 'luxon';
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import {
-  RoundFormData,
   Call,
-  Round,
-  RoundAllocationStrategy,
-  RoundReviewStrategy,
-  RoundAllocationTime,
-  CallState,
   CallOfferingState,
+  CallState,
   ProposalState,
   ReviewState,
+  Round,
+  RoundAllocationStrategy,
+  RoundAllocationTime,
+  RoundFormData,
+  RoundReviewStrategy,
 } from '@waldur/proposals/types';
 
 export const getRoundReviewStrategyOptions = () =>
@@ -103,8 +103,8 @@ export const getProposalStateOptions = () =>
       value: 'rejected',
     },
     {
-      label: translate('Cancelled'),
-      value: 'cancelled',
+      label: translate('Canceled'),
+      value: 'canceled',
     },
   ] as { value: ProposalState; label: string }[];
 
