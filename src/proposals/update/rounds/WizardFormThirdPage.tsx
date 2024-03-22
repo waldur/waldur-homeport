@@ -35,12 +35,6 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
               isClearable={false}
               validate={required}
             />
-            <NumberField
-              label={translate('Maximum accepted proposals')}
-              name="max_allocations"
-              required
-              validate={required}
-            />
             {showMinAverageScoring && (
               <NumberField
                 label={translate('Minimum average scoring for allocation')}

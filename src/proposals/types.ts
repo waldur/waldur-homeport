@@ -38,7 +38,6 @@ export interface Round {
   review_strategy: RoundReviewStrategy;
   deciding_entity: RoundAllocationStrategy;
   allocation_time: RoundAllocationTime;
-  max_allocations: number;
   allocation_date: string;
   minimal_average_scoring: string;
   review_duration_in_days: number;
@@ -73,7 +72,6 @@ export interface RoundFormData {
   review_duration_in_days: number;
   minimum_number_of_reviewers: number;
   deciding_entity: RoundAllocationStrategy;
-  max_allocations: number;
   minimal_average_scoring: string;
   allocation_time: RoundAllocationTime;
   allocation_date: string;

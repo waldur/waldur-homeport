@@ -40,10 +40,6 @@ export const RoundExpandableRow: FunctionComponent<RoundExpandableRowProps> = ({
         />
       )}
       <Field
-        label={translate('Maximum allocations')}
-        value={renderFieldOrDash(row.max_allocations)}
-      />
-      <Field
         label={translate('Minimal average scoring')}
         value={renderFieldOrDash(row.minimal_average_scoring)}
       />
