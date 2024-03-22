@@ -9,7 +9,11 @@ export const RefreshButton = (props: RefreshButtonProps) =>
   props.loading ? (
     <LoadingSpinner />
   ) : (
-    <button className="btn btn-icon btn-active-light" onClick={props.refetch}>
+    <button
+      type="button"
+      className="btn btn-icon btn-active-light"
+      onClick={props.refetch}
+    >
       <i className="fa fa-refresh fs-4"></i>
     </button>
   );
