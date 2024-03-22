@@ -6,7 +6,10 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
-import { formatUserStatus } from '@waldur/user/support/utils';
+import {
+  formatUserIsActive,
+  formatUserStatus,
+} from '@waldur/user/support/utils';
 import { UserDetails } from '@waldur/workspace/types';
 
 import { Row } from './Row';
@@ -71,8 +74,13 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
         />
       ) : null}
       <Row
-        label={translate('Status')}
+        label={translate('User type')}
         value={formatUserStatus(props.user)}
+        isVisible={props.isVisibleForSupportOrStaff}
+      />
+      <Row
+        label={translate('Account status')}
+        value={formatUserIsActive(props.user)}
         isVisible={props.isVisibleForSupportOrStaff}
       />
       <Row

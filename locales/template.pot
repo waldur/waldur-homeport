@@ -150,6 +150,10 @@ msgstr ""
 msgid "Account removal"
 msgstr ""
 
+#: src/user/support/UserDetailsTable.tsx
+msgid "Account status"
+msgstr ""
+
 #: src/invoices/routes.ts
 msgid "Accounting"
 msgstr ""
@@ -11550,7 +11554,6 @@ msgstr ""
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
-#: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Status"
@@ -14401,6 +14404,10 @@ msgstr ""
 
 #: src/user/support/UserEditForm.tsx
 msgid "User status"
+msgstr ""
+
+#: src/user/support/UserDetailsTable.tsx
+msgid "User type"
 msgstr ""
 
 #: src/user/events.ts
