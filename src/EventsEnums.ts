@@ -10,6 +10,11 @@ export const AuthEnum = {
   token_lifetime_updated: 'token_lifetime_updated',
 };
 
+export const CallEnum = {
+  call_document_added: 'call_document_added',
+  call_document_removed: 'call_document_removed',
+};
+
 export const CustomersEnum = {
   customer_creation_succeeded: 'customer_creation_succeeded',
   customer_deletion_succeeded: 'customer_deletion_succeeded',
@@ -71,8 +76,6 @@ export const ProjectsEnum = {
 };
 
 export const ProposalEnum = {
-  call_proposal_document_added: 'call_proposal_document_added',
-  call_proposal_document_removed: 'call_proposal_document_removed',
   proposal_document_added: 'proposal_document_added',
   proposal_document_removed: 'proposal_document_removed',
 };
