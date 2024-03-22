@@ -52,3 +52,6 @@ export const getUserStatusFilterOptions = () => [
     value: false,
   },
 ];
+
+export const formatUserIsActive = (user) =>
+  user.is_active ? translate('Active') : translate('Disabled');
