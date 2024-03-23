@@ -9,9 +9,7 @@ import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 
 import { connectServerGroupForm } from './utils';
 
-export const getPolicies = () => [
-  { value: 'affinity', label: translate('Affinity') },
-];
+const getPolicies = () => [{ value: 'affinity', label: translate('Affinity') }];
 
 export const CreateServerGroupForm = connectServerGroupForm(
   ({

@@ -15,7 +15,7 @@ interface ShowReportButtonProps {
   report: Report;
 }
 
-export const openReport = (report) =>
+const openReport = (report) =>
   openModalDialog(ShowReportDialog, { resolve: { report }, size: 'lg' });
 
 export const ShowReportButton: React.FC<ShowReportButtonProps> = ({

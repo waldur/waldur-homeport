@@ -5,7 +5,7 @@ import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
 import { FloatingIpsForm } from './FloatingIpsForm';
 import { useFloatingIpsEditor } from './utils';
 
-export interface UpdateFloatingIpsDialogProps {
+interface UpdateFloatingIpsDialogProps {
   resolve: {
     resource: OpenStackInstance;
     refetch?(): void;

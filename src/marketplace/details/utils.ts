@@ -9,7 +9,7 @@ import {
 import { FORM_ID } from './constants';
 import { OrderSummaryProps } from './types';
 
-export const formatOrder = (props: OrderSummaryProps, request) => {
+const formatOrder = (props: OrderSummaryProps, request) => {
   const serializer = getFormSerializer(props.offering.type);
   const limitSerializer = getFormLimitSerializer(props.offering.type);
   if (props.formData) {

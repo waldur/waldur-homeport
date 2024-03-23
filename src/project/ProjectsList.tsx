@@ -18,7 +18,7 @@ import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
 import { ProjectLink } from './ProjectLink';
 import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
   const columns = filterColumns([
     {

@@ -6,7 +6,7 @@ import { Field } from '@waldur/resource/summary';
 
 import './ResourceImageField.scss';
 
-export const getImageInfo = (imageName: string) => {
+const getImageInfo = (imageName: string) => {
   if (!imageName) return null;
   const image = SYSTEM_IMAGES.find((item) =>
     imageName.toLowerCase().includes(item.name),

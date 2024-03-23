@@ -31,7 +31,6 @@ export const BaseList: FunctionComponent<{
     }
   }, [scrollBarRef, itemId]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(adjustScroll, []);
 
   return (

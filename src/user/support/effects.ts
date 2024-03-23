@@ -43,7 +43,7 @@ export function* handleUpdateUser(action) {
   }
 }
 
-export function* handleActivateUser(action) {
+function* handleActivateUser(action) {
   try {
     yield call(api.activateUser, action.payload.uuid);
     const user = { ...action.payload, is_active: true };
@@ -59,7 +59,7 @@ export function* handleActivateUser(action) {
   }
 }
 
-export function* handleDeactivateUser(action) {
+function* handleDeactivateUser(action) {
   try {
     yield call(api.deactivateUser, action.payload.uuid);
     const user = { ...action.payload, is_active: false };

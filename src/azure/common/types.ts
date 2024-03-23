@@ -23,7 +23,7 @@ export interface AzureSQLDatabase extends AzureResource {
   collation: string;
 }
 
-export interface Option {
+interface Option {
   name: string;
   url: string;
 }

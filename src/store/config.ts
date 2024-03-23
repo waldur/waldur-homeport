@@ -4,7 +4,7 @@ import { RootState } from './reducers';
 
 const INITIAL_STATE: ApplicationConfigurationOptions = null;
 
-export const INIT_CONFIG = 'waldur/core/INIT_CONFIG';
+const INIT_CONFIG = 'waldur/core/INIT_CONFIG';
 
 export const initConfig = (config: any) => ({
   type: INIT_CONFIG,
@@ -39,7 +39,7 @@ export const reducer = (
 
 export const getConfig = (state: RootState) => state.config;
 
-export const isVisibleSelector = (feature: string) => (state: RootState) => {
+const isVisibleSelector = (feature: string) => (state: RootState) => {
   if (feature === undefined || feature === null) {
     return true;
   }

@@ -10,7 +10,7 @@ import {
   getFormValues,
 } from 'redux-form';
 
-export const withTestStore = (store) => (WrappedComponent) =>
+const withTestStore = (store) => (WrappedComponent) =>
   (
     <Provider store={store}>
       <WrappedComponent />
@@ -23,7 +23,7 @@ export const withReduxForm = (WrappedComponent) => {
   return withTestStore(store)(WrappedComponent);
 };
 
-export const withTestForm = (WrappedComponent) =>
+const withTestForm = (WrappedComponent) =>
   reduxForm({ form: 'testForm' })(WrappedComponent);
 
 export const mountTestForm: (component: React.ComponentType) => ReactWrapper =

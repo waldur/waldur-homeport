@@ -8,7 +8,7 @@ import { EmptyResourcesListPlaceholder } from '../resources/list/EmptyResourcesL
 import { ResourceNameField } from '../resources/list/ResourceNameField';
 import { ResourceStateField } from '../resources/list/ResourceStateField';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}

@@ -63,110 +63,111 @@ const hashStr = (str) => {
   return hash;
 };
 
-export const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> =
-  (props) => {
-    const {
-      comment,
-      user,
-      deleting,
-      uiDisabled,
-      formToggleDisabled,
-      openDeleteDialog,
-      openUserDialog,
-      openAttachmentPreview,
-      toggleForm,
-    } = props;
-    const onCommentClick = (evt) => {
-      const target = evt.target as HTMLElement;
-      if (!target.matches('img')) {
-        return;
-      }
-      const url = target.getAttribute('src');
-      openAttachmentPreview(url, getFilename(url));
-    };
+const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> = (
+  props,
+) => {
+  const {
+    comment,
+    user,
+    deleting,
+    uiDisabled,
+    formToggleDisabled,
+    openDeleteDialog,
+    openUserDialog,
+    openAttachmentPreview,
+    toggleForm,
+  } = props;
+  const onCommentClick = (evt) => {
+    const target = evt.target as HTMLElement;
+    if (!target.matches('img')) {
+      return;
+    }
+    const url = target.getAttribute('src');
+    openAttachmentPreview(url, getFilename(url));
+  };
 
-    const color = nameToColor(comment.author_name);
+  const color = nameToColor(comment.author_name);
 
-    return deleting ? (
-      <LoadingOverlay />
-    ) : (
-      <div className="card card-bordered mb-9">
-        <div className="card-body">
-          <div className="w-100 d-flex flex-stack mb-8">
-            <div className="d-flex align-items-center f">
-              <div className="symbol symbol-50px me-5">
-                <div
-                  className={`symbol-label fs-1 fw-bold bg-light-${color} text-${color}`}
-                >
-                  {getAbbreviation(comment.author_name)}
-                </div>
-              </div>
-              <div className="d-flex flex-column fw-semibold fs-5 text-gray-600 text-dark">
-                <div className="d-flex align-items-center">
-                  <button
-                    onClick={openUserDialog}
-                    type="button"
-                    className="text-btn text-gray-800 fw-bold text-hover-primary fs-5 me-3"
-                  >
-                    {comment.author_name}
-                  </button>
-                  <span className="m-0"></span>
-                </div>
-                <span className="text-muted fw-semibold fs-6">
-                  {formatMediumDateTime(comment.created)}
-                </span>
-                {!comment.is_public && (
-                  <span className="label label-default text-uppercase">
-                    {translate('Internal')}
-                  </span>
-                )}
+  return deleting ? (
+    <LoadingOverlay />
+  ) : (
+    <div className="card card-bordered mb-9">
+      <div className="card-body">
+        <div className="w-100 d-flex flex-stack mb-8">
+          <div className="d-flex align-items-center f">
+            <div className="symbol symbol-50px me-5">
+              <div
+                className={`symbol-label fs-1 fw-bold bg-light-${color} text-${color}`}
+              >
+                {getAbbreviation(comment.author_name)}
               </div>
             </div>
-            <div className="m-0">
-              {(user.is_staff || user.uuid === comment.author_uuid) && (
-                <>
-                  <button
-                    className="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold me-3"
-                    disabled={
-                      uiDisabled ||
-                      formToggleDisabled ||
-                      !comment.update_is_available
-                    }
-                    onClick={toggleForm}
-                  >
-                    {translate('Edit')}
-                  </button>
-                  <button
-                    className="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold"
-                    disabled={uiDisabled || !comment.destroy_is_available}
-                    onClick={openDeleteDialog}
-                  >
-                    {translate('Delete')}
-                  </button>
-                </>
+            <div className="d-flex flex-column fw-semibold fs-5 text-gray-600 text-dark">
+              <div className="d-flex align-items-center">
+                <button
+                  onClick={openUserDialog}
+                  type="button"
+                  className="text-btn text-gray-800 fw-bold text-hover-primary fs-5 me-3"
+                >
+                  {comment.author_name}
+                </button>
+                <span className="m-0"></span>
+              </div>
+              <span className="text-muted fw-semibold fs-6">
+                {formatMediumDateTime(comment.created)}
+              </span>
+              {!comment.is_public && (
+                <span className="label label-default text-uppercase">
+                  {translate('Internal')}
+                </span>
               )}
             </div>
           </div>
-          <p
-            className="fw-normal fs-5 text-gray-700 m-0"
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(
-                ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'smax'
-                  ? comment.description
-                  : utils.formatJiraMarkup(comment.description),
-              ),
-            }}
-            onClick={onCommentClick}
-            aria-hidden="true"
-          />
-          <IssueCommentsFormContainer
-            formId={comment.uuid}
-            defaultMessage={comment.description}
-          />
+          <div className="m-0">
+            {(user.is_staff || user.uuid === comment.author_uuid) && (
+              <>
+                <button
+                  className="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold me-3"
+                  disabled={
+                    uiDisabled ||
+                    formToggleDisabled ||
+                    !comment.update_is_available
+                  }
+                  onClick={toggleForm}
+                >
+                  {translate('Edit')}
+                </button>
+                <button
+                  className="btn btn-color-gray-400 btn-active-color-primary p-0 fw-bold"
+                  disabled={uiDisabled || !comment.destroy_is_available}
+                  onClick={openDeleteDialog}
+                >
+                  {translate('Delete')}
+                </button>
+              </>
+            )}
+          </div>
         </div>
+        <p
+          className="fw-normal fs-5 text-gray-700 m-0"
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(
+              ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'smax'
+                ? comment.description
+                : utils.formatJiraMarkup(comment.description),
+            ),
+          }}
+          onClick={onCommentClick}
+          aria-hidden="true"
+        />
+        <IssueCommentsFormContainer
+          formId={comment.uuid}
+          defaultMessage={comment.description}
+        />
       </div>
-    );
-  };
+    </div>
+  );
+};
 
 const createDeleteDialog = (uuid) =>
   openModalDialog(IssueCommentDeleteDialog, { resolve: { uuid } });

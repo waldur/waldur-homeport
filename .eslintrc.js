@@ -10,7 +10,7 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:jsx-a11y/recommended',
   ],
-  plugins: ['react-hooks', 'jsx-a11y'],
+  plugins: ['jsx-a11y'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -71,8 +71,6 @@ module.exports = {
         },
       },
     ],
-    'react-hooks/rules-of-hooks': 'warn',
-    'react-hooks/exhaustive-deps': 'warn',
     '@typescript-eslint/no-this-alias': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/ban-types': 'off',

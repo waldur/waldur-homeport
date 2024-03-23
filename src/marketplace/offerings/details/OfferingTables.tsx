@@ -22,7 +22,7 @@ import { OfferingUsersTable } from './OfferingUsersTable';
 import { OfferingPermissionsList } from './permissions/OfferingPermissionsList';
 import { PlanUsageList } from './PlanUsageList';
 
-export interface OfferingTablesProps {
+interface OfferingTablesProps {
   offering: Offering;
   plansUsage: PlanUsageRow[];
 }

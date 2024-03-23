@@ -6,7 +6,7 @@ export interface OfferingUser {
   user_uuid: string;
 }
 
-export interface Campaign {
+interface Campaign {
   uuid?: string;
   name: string;
   description: string;

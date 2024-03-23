@@ -39,7 +39,7 @@ import {
 } from './selectors';
 import * as utils from './utils';
 
-export function* issueCommentsGet(action) {
+function* issueCommentsGet(action) {
   const { issueUrl } = action.payload;
   try {
     const response = yield call(api.getComments, issueUrl);
@@ -53,7 +53,7 @@ export function* issueCommentsGet(action) {
   }
 }
 
-export function* issueCommentsCreate(
+function* issueCommentsCreate(
   formId: string,
   message: string,
   issueId: string,
@@ -76,7 +76,7 @@ export function* issueCommentsCreate(
   yield put(actions.issueCommentsFormToggle(null));
 }
 
-export function* issueCommentsUpdate(message: string, commentId: string) {
+function* issueCommentsUpdate(message: string, commentId: string) {
   try {
     const response = yield call(api.updateComment, message, commentId);
     yield put(actions.issueCommentsUpdateSuccess(response.data));
@@ -89,7 +89,7 @@ export function* issueCommentsUpdate(message: string, commentId: string) {
   }
 }
 
-export function* issueCommentsDelete(action) {
+function* issueCommentsDelete(action) {
   const { commentId } = action.payload;
   try {
     yield call(api.deleteComment, commentId);
@@ -103,7 +103,7 @@ export function* issueCommentsDelete(action) {
   }
 }
 
-export function* issueCommentsFormSubmit(action) {
+function* issueCommentsFormSubmit(action) {
   const { message, formId } = action.payload;
   yield put(startSubmit(formId));
   yield put(actions.issueCommentsUiDisable(true));
@@ -134,13 +134,13 @@ export function* issueCommentsFormSubmit(action) {
   yield put(actions.issueCommentsUiDisable(false));
 }
 
-export function* issueCommentsWrapAttachment(attachments: Attachment[]) {
+function* issueCommentsWrapAttachment(attachments: Attachment[]) {
   const issue = yield select(getIssue);
   const commentDescription = utils.createJiraComment(null, attachments);
   yield call(issueCommentsCreate, undefined, commentDescription, issue.uuid);
 }
 
-export function* issueCommentsAttachmentsPutStart() {
+function* issueCommentsAttachmentsPutStart() {
   yield put(actions.issueCommentsUiDisable(true));
   const activeFormId = yield select(getActiveFormId);
   let count = yield select(getUploading);
@@ -173,7 +173,7 @@ export function* issueCommentsAttachmentsPutStart() {
   yield put(actions.issueCommentsUiDisable(false));
 }
 
-export function* issueCommentsPendingAttachmentsDelete() {
+function* issueCommentsPendingAttachmentsDelete() {
   const attachments = yield select(getPendingAttachments);
   for (const attachment of attachments) {
     yield put(issueAttachmentsDelete(attachment.uuid));

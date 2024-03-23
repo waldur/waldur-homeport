@@ -14,7 +14,7 @@ const SetLimitsDialog = lazyComponent(
 
 const validators = [validateState('OK'), validateStaffAction];
 
-export const useSetLimits = ({ resource, refetch }) => {
+const useSetLimits = ({ resource, refetch }) => {
   const { tooltip, disabled } = useValidators(validators, resource);
   const action = useModalDialogCallback(SetLimitsDialog, null, resource, {
     refetch,

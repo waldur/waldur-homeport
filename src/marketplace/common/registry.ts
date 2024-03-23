@@ -221,7 +221,7 @@ export function getOptionsSummary(offeringType: string) {
   return func ? func() : [];
 }
 
-export function getOfferingComponentsFilter(offeringType: string) {
+function getOfferingComponentsFilter(offeringType: string) {
   return (
     REGISTRY.hasOwnProperty(offeringType) &&
     REGISTRY[offeringType].offeringComponentsFilter

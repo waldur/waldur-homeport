@@ -100,7 +100,7 @@ export const combinePrices = (
   }
 };
 
-export const calculateTotalPeriods = (components: Component[]) => {
+const calculateTotalPeriods = (components: Component[]) => {
   return components.reduce((totalPeriods, component) => {
     component.prices.forEach((price, i) => {
       if (!totalPeriods[i]) totalPeriods[i] = 0;

@@ -5,7 +5,7 @@ import { OpenStackInstance } from '../../types';
 import { UpdateSecurityGroupsForm } from './UpdateSecurityGroupsForm';
 import { useUpdateSecurityGroupsForm } from './utils';
 
-export interface UpdateSecurityGroupsDialogProps {
+interface UpdateSecurityGroupsDialogProps {
   resolve: {
     resource: OpenStackInstance;
     refetch?(): void;

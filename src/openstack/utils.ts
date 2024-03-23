@@ -34,7 +34,7 @@ export const SUBNET_PRIVATE_CIDR_PATTERN = new RegExp(
     '|(^(192).(168)(.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])).0/24$)',
 );
 
-export const PRIVATE_CIDR_PATTERN = new RegExp(
+const PRIVATE_CIDR_PATTERN = new RegExp(
   // Class A
   '(^(10)(.([2]([0-5][0-5]|[01234][6-9])|[1][0-9][0-9]|[1-9][0-9]|[0-9])){2}.([0-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/([89]|[12][0-9]|3[0-2])$)' +
     // Class B
@@ -43,7 +43,7 @@ export const PRIVATE_CIDR_PATTERN = new RegExp(
     '|(^(192).(168)(.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])).([0-9]|[1-8][0-9]|9[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])/(1[6-9]|2[0-9]|3[0-2])$)',
 );
 
-export const VOLUME_NAME_PATTERN = new RegExp('^[A-Za-z0-9\\-]+$');
+const VOLUME_NAME_PATTERN = new RegExp('^[A-Za-z0-9\\-]+$');
 
 const IPv4_ADDRESS_PATTERN = ipRegex.v4({ exact: true });
 

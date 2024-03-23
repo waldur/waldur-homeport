@@ -16,7 +16,7 @@ import { LayoutContext } from './context';
 import { Tab } from './Tab';
 import { getTitle } from './title';
 
-export const isChild = (parent, child) =>
+const isChild = (parent, child) =>
   parent &&
   child &&
   (child.parent == parent.name ||

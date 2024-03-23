@@ -20,7 +20,7 @@ export interface BookingState {
   config: ConfigProps;
 }
 
-export interface ConfigProps {
+interface ConfigProps {
   weekends: boolean;
   businessHours: {
     startTime: string;

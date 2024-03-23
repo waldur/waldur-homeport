@@ -28,7 +28,7 @@ export const groupByN = (n: number, data: any[]) => {
   return result;
 };
 
-export const buildQuestionTypeMap = (
+const buildQuestionTypeMap = (
   questions: Question[],
 ): Record<string, QuestionType> => {
   const questionTypeMap = {};
@@ -107,7 +107,7 @@ export const loadData = async (templateUuid: string, clusterUuid: string) => {
 };
 
 // Taken from https://stackoverflow.com/questions/6842795/dynamic-deep-setting-for-a-javascript-object
-export function getValue(obj, path) {
+function getValue(obj, path) {
   if (!obj) {
     return;
   }

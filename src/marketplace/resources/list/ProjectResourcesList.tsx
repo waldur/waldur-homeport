@@ -40,7 +40,7 @@ interface OwnProps {
   columns: CategoryColumn[];
 }
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns: any[] = [
     {
       title: translate('Name'),

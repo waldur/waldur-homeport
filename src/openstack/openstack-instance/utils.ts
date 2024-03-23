@@ -28,7 +28,7 @@ export const formatFlavorTitle = (flavor) => {
   return `${flavor.name} (${props})`;
 };
 
-export const getMinSystemVolumeSize = (formData) => {
+const getMinSystemVolumeSize = (formData) => {
   const imageMinValue = formData.image ? formData.image.min_disk : 0;
   const flavorMinValue = formData.flavor ? formData.flavor.disk : 0;
   return Math.max(imageMinValue, flavorMinValue);

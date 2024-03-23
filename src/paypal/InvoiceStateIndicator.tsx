@@ -3,7 +3,7 @@ import { Variant } from 'react-bootstrap/types';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 
-export type InvoiceStateType = 'DRAFT' | 'SENT' | 'CANCELLED' | 'PAID';
+type InvoiceStateType = 'DRAFT' | 'SENT' | 'CANCELLED' | 'PAID';
 
 const LABEL_CLASSES: { [key in InvoiceStateType]: Variant } = {
   DRAFT: 'warning',

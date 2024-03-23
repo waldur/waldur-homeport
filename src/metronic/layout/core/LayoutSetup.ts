@@ -14,7 +14,7 @@ import {
 
 const LAYOUT_CONFIG_KEY = 'LayoutConfig';
 
-export function getLayout(): ILayout {
+function getLayout(): ILayout {
   const ls = localStorage.getItem(LAYOUT_CONFIG_KEY);
   if (ls) {
     try {

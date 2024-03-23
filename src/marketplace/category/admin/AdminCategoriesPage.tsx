@@ -18,7 +18,7 @@ import { CategoryCreateButton } from './CategoryCreateButton';
 import { CategoryDeleteButton } from './CategoryDeleteButton';
 import { CategoryEditButton } from './CategoryEditButton';
 
-export const categoryFields = {
+const categoryFields = {
   fields: ['uuid', 'title', 'description', 'icon', 'offering_count', 'group'],
 };
 

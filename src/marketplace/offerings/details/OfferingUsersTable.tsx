@@ -8,7 +8,7 @@ import { TableOptionsType } from '@waldur/table/types';
 
 import { CreateOfferingUserButton } from './CreateOfferingUserButton';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -45,7 +45,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-export const TableOptions: TableOptionsType = {
+const TableOptions: TableOptionsType = {
   table: 'OfferingUsersList',
   fetchData: createFetcher('marketplace-offering-users'),
   mapPropsToFilter: (props) => ({

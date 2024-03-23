@@ -11,9 +11,9 @@ import { changeLimits } from '../store/constants';
 
 import { FetchedData, getData } from './utils';
 
-export const FORM_ID = 'marketplaceChangeLimits';
+const FORM_ID = 'marketplaceChangeLimits';
 
-export const formSelector = formValueSelector(FORM_ID);
+const formSelector = formValueSelector(FORM_ID);
 
 export interface OwnProps {
   asyncState: AsyncState<FetchedData>;

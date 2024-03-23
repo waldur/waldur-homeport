@@ -5,7 +5,6 @@ import {
   deleteById,
   fixURL,
   get,
-  getAll,
   getById,
   getFirst,
   getSelectData,
@@ -58,9 +57,6 @@ export const createCall = (data) =>
 export const updateCall = (data, uuid) =>
   put<Call>(`/proposal-protected-calls/${uuid}/`, data);
 
-export const updateCallPartially = (data, uuid) =>
-  patch<Call>(`/proposal-protected-calls/${uuid}/`, data);
-
 export const updateCallState = (state: 'activate' | 'archive', uuid) =>
   post<Call>(`/proposal-protected-calls/${uuid}/${state}/`);
 
@@ -80,22 +76,16 @@ export const updateCallRound = (callUuid, roundUuid, data) =>
 export const createCallOffering = (callUuid, data) =>
   post<CallOffering>(`/proposal-protected-calls/${callUuid}/offerings/`, data);
 
-export const getCallOfferings = (callUuid) => {
-  return getAll<CallOffering>(
-    `/proposal-protected-calls/${callUuid}/offerings/`,
-  );
-};
-
 export const acceptCallOfferingRequest = (uuid) =>
   post(`/proposal-requested-offerings/${uuid}/accept/`);
 
 export const rejectCallOfferingRequest = (uuid) =>
   post(`/proposal-requested-offerings/${uuid}/cancel/`);
 
-export const getProtectedCallsOptions = (params?: {}) =>
+const getProtectedCallsOptions = (params?: {}) =>
   getSelectData<Call>('/proposal-protected-calls/', params);
 
-export const getPublicCallsOptions = (params?: {}) =>
+const getPublicCallsOptions = (params?: {}) =>
   getSelectData<Call>('/proposal-public-calls/', params);
 
 export const callAutocomplete = async (

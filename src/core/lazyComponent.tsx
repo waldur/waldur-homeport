@@ -28,7 +28,6 @@ export function lazyComponent<T = any>(
               return { default: () => <ErrorRetryView retry={retry} /> };
             }),
         ),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       [promise, loading],
     );
     return (

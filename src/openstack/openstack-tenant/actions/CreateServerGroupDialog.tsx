@@ -5,7 +5,7 @@ import { OpenStackTenant } from '../types';
 import { CreateServerGroupForm } from './CreateServerGroupForm';
 import { useCreateServerGroupForm } from './utils';
 
-export interface CreateServerGroupDialogProps {
+interface CreateServerGroupDialogProps {
   resolve: {
     resource: OpenStackTenant;
   };

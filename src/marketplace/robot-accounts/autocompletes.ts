@@ -3,7 +3,7 @@ import { getSelectData } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { Customer, Project } from '@waldur/workspace/types';
 
-export const getProviderProjectList = ({ provider_uuid, ...params }) =>
+const getProviderProjectList = ({ provider_uuid, ...params }) =>
   getSelectData<Project>(
     `/marketplace-service-providers/${provider_uuid}/robot_account_projects`,
     params,
@@ -29,7 +29,7 @@ export const providerProjectAutocomplete = async (
   );
 };
 
-export const getProviderCustomerList = ({ provider_uuid, ...params }) =>
+const getProviderCustomerList = ({ provider_uuid, ...params }) =>
   getSelectData<Customer>(
     `/marketplace-service-providers/${provider_uuid}/robot_account_customers`,
     params,

@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-export interface CreateUserAgreementsFormData {
+interface CreateUserAgreementsFormData {
   agreement_type: any;
   content: string;
 }

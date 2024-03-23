@@ -1,5 +1,3 @@
-import Axios from 'axios';
-
 import { getAll, put, post, deleteById, get } from '@waldur/core/api';
 import { terminateResource } from '@waldur/marketplace/common/api';
 import {
@@ -10,10 +8,8 @@ import {
   OpenStackInstance,
 } from '@waldur/openstack/openstack-instance/types';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
-import { SshKey } from '@waldur/user/types';
 
 import {
-  AvailabilityZone,
   EthernetType,
   SecurityGroupDirection,
   SecurityGroupProtocol,
@@ -58,25 +54,19 @@ export interface CreateServerGroupRequestBody {
   policy: string;
 }
 
-export interface UpdateInternalIpsRequestBody {
+interface UpdateInternalIpsRequestBody {
   internal_ips_set: {
     subnet: string;
   }[];
 }
 
-export interface UpdateSecurityGroupsRequestBody {
+interface UpdateSecurityGroupsRequestBody {
   security_groups: {
     url: string;
   }[];
 }
 
-export interface UpdateServerGroupsRequestBody {
-  server_groups: {
-    url: string;
-  }[];
-}
-
-export interface CreateNetworkRequestBody {
+interface CreateNetworkRequestBody {
   name: string;
   description: string;
 }
@@ -158,11 +148,6 @@ export const loadSecurityGroups = (settings_uuid: string, name?: string) =>
     params: { settings_uuid, name },
   });
 
-export const loadServerGroups = (settings_uuid: string) =>
-  getAll<ServerGroupType>('/openstacktenant-server-groups/', {
-    params: { settings_uuid },
-  });
-
 export const loadSecurityGroupsResources = (params?) =>
   getAll<SecurityGroup>('/openstack-security-groups/', { params });
 
@@ -175,21 +160,8 @@ export const updateSecurityGroup = (id: string, data) =>
 export const setSecurityGroupRules = (id: string, data) =>
   post(`/openstack-security-groups/${id}/set_rules/`, data);
 
-export const updateServerGroup = (id: string, data) =>
-  put(`/openstack-server-groups/${id}/`, data);
-
-export const loadVolumeAvailabilityZones = (settings_uuid: string) =>
-  getAll<AvailabilityZone>('/openstacktenant-volume-availability-zones/', {
-    params: { settings_uuid },
-  });
-
 export const loadVolumeTypes = (settings_uuid: string) =>
   getAll<VolumeType>('/openstacktenant-volume-types/', {
-    params: { settings_uuid },
-  });
-
-export const loadInstanceAvailabilityZones = (settings_uuid: string) =>
-  getAll<AvailabilityZone>('/openstacktenant-instance-availability-zones/', {
     params: { settings_uuid },
   });
 
@@ -227,20 +199,6 @@ export const updateSecurityGroups = (
   id: string,
   data: UpdateSecurityGroupsRequestBody,
 ) => post(`/openstacktenant-instances/${id}/update_security_groups/`, data);
-
-export const updateServerGroups = (
-  id: string,
-  data: UpdateServerGroupsRequestBody,
-) => post(`/openstacktenant-instances/${id}/update_server_groups/`, data);
-
-export const loadSshKeys = (user_uuid: string) =>
-  getAll<SshKey>('/keys/', { params: { user_uuid } });
-
-export const loadServiceSettings = (scope: string) =>
-  Axios.get(scope).then((response) => response.data);
-
-export const loadInstances = () =>
-  getAll<OpenStackInstance>('/openstacktenant-instances/');
 
 export const getFlavors = (params) =>
   getAll<Flavor>('/openstacktenant-flavors/', { params });

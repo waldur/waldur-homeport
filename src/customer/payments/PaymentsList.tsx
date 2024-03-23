@@ -30,7 +30,7 @@ const openPaymentCreateDialog = (profileUrl: string) =>
     size: 'lg',
   });
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const activePaymentProfile = getActivePaymentProfile(
     props.customer.payment_profiles,
   );

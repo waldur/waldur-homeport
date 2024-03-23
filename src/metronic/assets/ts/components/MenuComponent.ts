@@ -16,7 +16,7 @@ import {
   getHighestZindex,
 } from '../_utils/index';
 
-export interface MenuOptions {
+interface MenuOptions {
   dropdown: {
     hoverTimeout: number;
     zindex: number;

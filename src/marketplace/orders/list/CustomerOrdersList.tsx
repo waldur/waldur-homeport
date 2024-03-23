@@ -17,7 +17,7 @@ import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from './constants';
 import { CustomerOrdersListFilter } from './CustomerOrdersListFilter';
 import { OrderStateCell } from './OrderStateCell';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Name'),

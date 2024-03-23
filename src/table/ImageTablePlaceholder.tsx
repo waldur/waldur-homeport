@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-export interface ImageTablePlaceholderProps {
+interface ImageTablePlaceholderProps {
   illustration: string;
   title: React.ReactNode;
   description?: React.ReactNode;

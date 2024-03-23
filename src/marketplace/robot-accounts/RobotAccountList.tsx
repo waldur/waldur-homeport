@@ -7,7 +7,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Type'),
@@ -45,7 +45,7 @@ const mapPropsToFilter = ({ resource }) => {
   return { resource: resource.url };
 };
 
-export const TableOptions = {
+const TableOptions = {
   table: 'marketplace-robot-accounts',
   fetchData: createFetcher('marketplace-robot-accounts'),
   mapPropsToFilter,

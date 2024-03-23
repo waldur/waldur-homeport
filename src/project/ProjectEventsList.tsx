@@ -10,7 +10,7 @@ import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectEventsFilter } from './ProjectEventsFilter';
 
-export const PureProjectEvents = getEventsList({
+const PureProjectEvents = getEventsList({
   mapPropsToFilter: (props) => {
     const filter = {
       ...props.userFilter,

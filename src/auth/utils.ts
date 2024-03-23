@@ -1,6 +1,6 @@
 import Qs from 'qs';
 
-export const getStateId = () =>
+const getStateId = () =>
   encodeURIComponent(Math.random().toString(36).substr(2));
 
 export const getRedirectUri = (provider) =>

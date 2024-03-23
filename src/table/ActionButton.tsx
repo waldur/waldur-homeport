@@ -5,7 +5,7 @@ import { ButtonVariant } from 'react-bootstrap/esm/types';
 
 import { Tip } from '@waldur/core/Tooltip';
 
-export interface ActionButtonProps {
+interface ActionButtonProps {
   title: string;
   action: (event?: any) => void;
   icon?: string;

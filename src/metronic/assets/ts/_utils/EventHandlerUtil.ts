@@ -1,7 +1,7 @@
 import { DataUtil } from './_DataUtil';
 import { getUniqueIdWithPrefix } from './_TypesHelpers';
 
-export interface EventMeta {
+interface EventMeta {
   name: string;
   callback: Function;
   one: boolean;

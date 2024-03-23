@@ -22,7 +22,7 @@ import {
 } from './constants';
 import { WorkspaceStorage } from './WorkspaceStorage';
 
-export function* refreshCurrentCustomer() {
+function* refreshCurrentCustomer() {
   try {
     const customer = yield select(getCustomerSelector);
     const newCustomer = yield call(getCustomer, customer.uuid);

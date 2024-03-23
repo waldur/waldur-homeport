@@ -22,10 +22,3 @@ export const deleteCallUser = ({ call, user, role }) =>
     user,
     role,
   });
-
-export const updateCallUser = ({ call, user, role, expiration_time }) =>
-  post(`/proposal-protected-calls/${call}/update_user/`, {
-    user,
-    role,
-    expiration_time,
-  });

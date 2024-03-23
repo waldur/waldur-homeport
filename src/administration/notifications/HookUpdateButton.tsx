@@ -11,7 +11,7 @@ interface HookUpdateButtonProps {
   row: any;
 }
 
-export const PureHookUpdateButton: FunctionComponent<HookUpdateButtonProps> = (
+const PureHookUpdateButton: FunctionComponent<HookUpdateButtonProps> = (
   props,
 ) => (
   <ActionButtonSmall

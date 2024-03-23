@@ -4,7 +4,7 @@ import { RulesForm } from './rule-editor/RulesForm';
 import { useRulesEditor } from './rule-editor/utils';
 import { SecurityGroup } from './types';
 
-export interface SecurityGroupEditorDialogProps {
+interface SecurityGroupEditorDialogProps {
   resolve: {
     resource: SecurityGroup;
   };

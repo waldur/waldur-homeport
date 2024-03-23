@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, createContext, useContext, useEffect, useState } from 'react';
 
-export interface PageLink {
+interface PageLink {
   title: string;
   path: string;
   isActive: boolean;
   isSeparator?: boolean;
 }
 
-export interface PageDataContextModel {
+interface PageDataContextModel {
   pageTitle?: string;
   setPageTitle: (_title: string) => void;
   pageDescription?: string;

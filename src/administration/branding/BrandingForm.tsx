@@ -12,7 +12,7 @@ import {
 import { ImageField } from '@waldur/form/ImageField';
 import { translate } from '@waldur/i18n';
 
-export const PureBrandingForm: FunctionComponent<any> = (props) => (
+const PureBrandingForm: FunctionComponent<any> = (props) => (
   <form onSubmit={props.handleSubmit(props.saveConfig)}>
     <FormContainer submitting={props.submitting} floating={true}>
       <StringField

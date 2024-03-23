@@ -19,7 +19,7 @@ import * as constants from './constants';
 import { getDeleting, getExludedTypes } from './selectors';
 import * as utils from './utils';
 
-export function* issueAttachmentsGet(action) {
+function* issueAttachmentsGet(action) {
   const { issueUrl } = action.payload;
   try {
     const response = yield call(api.getAttachments, issueUrl);
@@ -33,7 +33,7 @@ export function* issueAttachmentsGet(action) {
   }
 }
 
-export function* issueAttachmentUpload(action) {
+function* issueAttachmentUpload(action) {
   const { issueUrl, file } = action;
   const { cancel } = yield race({
     sync: call(function* () {
@@ -55,7 +55,7 @@ export function* issueAttachmentUpload(action) {
   }
 }
 
-export function* issueAttachmentsPut(action) {
+function* issueAttachmentsPut(action) {
   const { issueUrl, files } = action.payload;
   const excludedTypes = yield select(getExludedTypes);
   const { accepted, rejected } = yield call(
@@ -74,7 +74,7 @@ export function* issueAttachmentsPut(action) {
   }
 }
 
-export function* issueAttachmentsDelete(action) {
+function* issueAttachmentsDelete(action) {
   const { uuid } = action.payload;
   const deleting = yield select(getDeleting);
   if (deleting[uuid]) {

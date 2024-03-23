@@ -11,7 +11,7 @@ const ShowReportDialog = lazyComponent(
   'ShowReportDialog',
 );
 
-export const openReport = (report) =>
+const openReport = (report) =>
   openModalDialog(ShowReportDialog, { resolve: { report }, size: 'lg' });
 
 export const ShowReportAction: ActionItemType = ({ resource, ...rest }) => {

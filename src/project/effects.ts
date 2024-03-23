@@ -24,7 +24,7 @@ import {
 } from './actions';
 import * as api from './api';
 
-export function* handleCreateProject(action) {
+function* handleCreateProject(action) {
   const successMessage = translate('Project has been created.');
   const errorMessage = translate('Project could not be created.');
 
@@ -102,7 +102,7 @@ export function* handleUpdateProject(action) {
   }
 }
 
-export function* handleMoveProject(action) {
+function* handleMoveProject(action) {
   try {
     yield call(api.moveProject, action.payload);
     yield put(moveProject.success());

@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
-export interface RequestStateFilterOption {
+interface RequestStateFilterOption {
   value: string;
   label: string;
 }

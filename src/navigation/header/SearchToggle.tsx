@@ -129,6 +129,7 @@ const SearchPopover = () => {
   return (
     <div className="menu menu-sub menu-sub-dropdown p-7 show">
       <div className={`${menuState === 'main' ? '' : 'd-none'}`}>
+        {/* eslint-disable-next-line react/no-unknown-property */}
         <form className="w-100 position-relative mb-3" auto-complete="off">
           <input
             style={hiddenStyle}

@@ -9,7 +9,7 @@ export type OrderState =
   | 'erred'
   | 'rejected';
 
-export type OrderType = 'Create' | 'Update' | 'Terminate';
+type OrderType = 'Create' | 'Update' | 'Terminate';
 
 interface IssueReference {
   key: string;

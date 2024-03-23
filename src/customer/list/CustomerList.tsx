@@ -46,7 +46,7 @@ const renderTitleWithPriceTooltip = (title) => (
   </>
 );
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns, customerListFilter } = props;
   const accountingPeriodIsCurrent =
     customerListFilter?.accounting_period?.value.current;

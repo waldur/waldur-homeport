@@ -8,7 +8,7 @@ export const register = (provider: ProviderConfig) => {
   providers[provider.type] = provider;
 };
 
-export const findProvider = (type) => providers[type];
+const findProvider = (type) => providers[type];
 
 export const getTypeDisplay = (type) =>
   providers[type] ? providers[type].name : type;

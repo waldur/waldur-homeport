@@ -1,5 +1,4 @@
 export const OFFERING_TYPE_BOOKING = 'Marketplace.Booking';
-export const BOOKING_RESOURCES_TABLE = 'booking-resources';
 
 export const ADD_BOOKING = 'waldur/booking/ADD_BOOKING';
 export const UPDATE_BOOKING = 'waldur/booking/UPDATE_BOOKING';

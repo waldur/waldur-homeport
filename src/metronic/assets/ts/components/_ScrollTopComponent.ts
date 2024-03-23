@@ -9,7 +9,7 @@ import {
   ElementAnimateUtil,
 } from '../_utils/index';
 
-export interface IScrollTopOptions {
+interface IScrollTopOptions {
   offset: number;
   speed: number;
 }

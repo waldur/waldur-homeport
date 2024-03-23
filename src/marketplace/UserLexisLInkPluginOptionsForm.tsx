@@ -1,18 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
-import { Field, formValueSelector } from 'redux-form';
+import { Field } from 'redux-form';
 
 import { StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-
-import { EDIT_LEXIS_LINK_INTEGRATION_FORM_ID } from './offerings/update/integration/constants';
-
-export const pluginOptionsSelector = (state: RootState) =>
-  formValueSelector(EDIT_LEXIS_LINK_INTEGRATION_FORM_ID)(
-    state,
-    'plugin_options',
-  );
 
 export const UserLexisLinkPluginOptionsForm: FunctionComponent<{}> = () => {
   return (

@@ -7,7 +7,7 @@ import { TableOptionsType } from '@waldur/table/types';
 import { BillingPeriod } from '../common/BillingPeriod';
 import { getBillingTypeLabel } from '../resources/usage/utils';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Offering'),
@@ -54,7 +54,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-export const TableOptions: TableOptionsType = {
+const TableOptions: TableOptionsType = {
   table: 'MarketplacePriceList',
   fetchData: createFetcher('marketplace-plan-components'),
   exportFields: (row) => [

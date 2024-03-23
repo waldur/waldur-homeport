@@ -27,7 +27,7 @@ interface OwnProps {
   user: UserDetails;
 }
 
-export type UserDetailsViewProps = StateProps & OwnProps;
+type UserDetailsViewProps = StateProps & OwnProps;
 
 export const PureUserDetailsView: FunctionComponent<UserDetailsViewProps> = (
   props,
