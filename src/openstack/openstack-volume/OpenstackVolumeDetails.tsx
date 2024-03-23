@@ -13,7 +13,7 @@ const formatSize = (props) => {
   return formatFilesize(props.order.attributes.size);
 };
 
-export interface OpenstackVolumeDetailsProps {
+interface OpenstackVolumeDetailsProps {
   order: OrderResponse;
 }
 

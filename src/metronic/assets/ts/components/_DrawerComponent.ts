@@ -48,7 +48,7 @@ export class DrawerStore {
   }
 }
 
-export interface DrawerOptions {
+interface DrawerOptions {
   overlay: boolean;
   baseClass: string;
   overlayClass: string;

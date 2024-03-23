@@ -57,7 +57,7 @@ const storeConnector = connect<StateProps, {}, OwnProps, RootState>(
   mapStateToProps,
 );
 
-export const validate = (_, props) => {
+const validate = (_, props) => {
   const errors: any = {};
   if (props.workspace != USER_WORKSPACE && !props.project) {
     errors.project = translate('This field is required.');

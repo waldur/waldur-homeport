@@ -78,7 +78,7 @@ const getLastSixMonths = (): string[] => {
   return lastSixMonths;
 };
 
-export const getPeriods = (xAxisPeriods: string[]): Period[] => {
+const getPeriods = (xAxisPeriods: string[]): Period[] => {
   const periods: Period[] = [];
   xAxisPeriods.forEach((period) => {
     periods.push({
@@ -178,11 +178,7 @@ const fillSeriesAndLegendWithDistinctUsers = (
   });
 };
 
-export const getEChartOptions = (
-  chart,
-  usages: Usage[],
-  userUsages: UserUsage[],
-) => {
+const getEChartOptions = (chart, usages: Usage[], userUsages: UserUsage[]) => {
   const option = eChartInitialOption();
 
   // filling periods

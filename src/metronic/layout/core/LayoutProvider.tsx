@@ -14,7 +14,7 @@ import {
   LayoutSetup,
 } from './LayoutSetup';
 
-export interface LayoutContextModel {
+interface LayoutContextModel {
   config: ILayout;
   classes: ILayoutCSSClasses;
   attributes: ILayoutHTMLAttributes;

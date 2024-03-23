@@ -5,7 +5,7 @@ import { RootState } from '@waldur/store/reducers';
 import { getTheme, setTheme } from './ThemeStorage';
 import { ThemeName } from './types';
 
-export interface Theme {
+interface Theme {
   theme: ThemeName;
   themes: Record<ThemeName, string> | {};
 }

@@ -52,7 +52,7 @@ export const commentExist = (
   return false;
 };
 
-export const getAttachmentByFileName = (
+const getAttachmentByFileName = (
   attachments: Attachment[] = [],
   fileName = '',
 ): Attachment => {
@@ -65,11 +65,8 @@ export const getAttachmentByFileName = (
   return null;
 };
 
-export const renderLink = (
-  href: string,
-  name: string = href,
-  download = false,
-) => `<a href="${href}"${download ? ' download' : ''}>${name}</a>`;
+const renderLink = (href: string, name: string = href, download = false) =>
+  `<a href="${href}"${download ? ' download' : ''}>${name}</a>`;
 
 // See also JIRA to Markdown converter: https://github.com/kylefarris/J2M/blob/master/index.js
 // and JIRA Text Formatting Notation: https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all

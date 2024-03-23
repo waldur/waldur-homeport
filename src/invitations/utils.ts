@@ -109,7 +109,7 @@ export function acceptInvitation(token, replaceEmail) {
     });
 }
 
-export function submitGroupRequest(token) {
+function submitGroupRequest(token) {
   return InvitationService.submitRequest(token)
     .then(() => {
       store.dispatch(
@@ -145,7 +145,7 @@ export function confirmInvitation(token) {
   return deferred.promise;
 }
 
-export function confirmUserGroupInvitation(token) {
+function confirmUserGroupInvitation(token) {
   const deferred = createDeferred();
   store.dispatch(
     openModalDialog(GroupInvitationConfirmDialog, {

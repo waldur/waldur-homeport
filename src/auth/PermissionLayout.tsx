@@ -25,7 +25,7 @@ interface PermissionOptions {
   className?: string;
 }
 
-export interface PermissionContextInterface {
+interface PermissionContextInterface {
   permission: Permission;
   setPermission: (value: Permission) => void;
   banner: PermissionMessage;

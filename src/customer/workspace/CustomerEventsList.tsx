@@ -8,7 +8,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerEventsFilter } from './CustomerEventsFilter';
 
-export const PureCustomerEvents = getEventsList({
+const PureCustomerEvents = getEventsList({
   mapPropsToFilter: (props) => {
     const filter = {
       ...props.userFilter,

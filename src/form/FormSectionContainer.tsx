@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import { FormContainer, FormContainerProps } from './FormContainer';
 
-export interface FormSectionContainerProps extends FormContainerProps {
+interface FormSectionContainerProps extends FormContainerProps {
   label: React.ReactNode;
 }
 

@@ -46,7 +46,7 @@ export interface FloatingIp {
   subnet_name?: string;
 }
 
-export interface ServiceComponent {
+interface ServiceComponent {
   cores: number;
   storage: number;
   ram: number;

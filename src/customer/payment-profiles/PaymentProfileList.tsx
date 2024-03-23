@@ -12,7 +12,7 @@ import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
 import { PaymentProfileActions } from './PaymentProfileActions';
 import { PaymentProfileCreateButton } from './PaymentProfileCreateButton';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const tooltipAndDisabledAttributes = {
     disabled: props.isSupport && !props.isStaff,
     tooltip:

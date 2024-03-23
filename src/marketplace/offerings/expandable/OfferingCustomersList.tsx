@@ -10,7 +10,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { fetchProviderOfferingCustomers } from './api';
 import { OFFERING_CUSTOMERS_LIST_TABLE_ID } from './constants';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
   const columns = filterColumns([
     {

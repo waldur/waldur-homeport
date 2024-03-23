@@ -23,7 +23,7 @@ import { VolumeMountPointGroup } from './VolumeMountPointGroup';
 
 import './FormDataStorageStep.scss';
 
-export const renderDataVolumeRows = ({
+const renderDataVolumeRows = ({
   fields,
   nodeIndex,
   volumeTypeChoices,

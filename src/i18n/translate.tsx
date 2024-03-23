@@ -49,7 +49,7 @@ export const formatJsx = (
 export const formatTemplate: Translate = (template, context) =>
   context ? template.replace(/{(.+?)}/g, (_, key) => context[key]) : template;
 
-export const translateTemplate = (template) =>
+const translateTemplate = (template) =>
   LanguageUtilsService.dictionary[template] || template;
 
 const getDomainMessage = (message) => {

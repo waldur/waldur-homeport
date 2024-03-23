@@ -30,8 +30,3 @@ export interface PlanRequest {
   article_code?: string;
   uuid?: string;
 }
-
-export interface OfferingDocument {
-  file: File;
-  name?: string;
-}

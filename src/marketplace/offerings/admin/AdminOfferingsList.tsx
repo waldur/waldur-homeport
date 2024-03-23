@@ -30,7 +30,7 @@ const mapPropsToFilter = (props) => {
   return filter;
 };
 
-export const Options: TableOptionsType = {
+const Options: TableOptionsType = {
   ...TableOptions,
   table: ADMIN_OFFERING_TABLE_NAME,
   mapPropsToFilter,

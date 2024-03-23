@@ -1,4 +1,4 @@
-export type Interpolator = (template: string, context?: {}) => any;
+type Interpolator = (template: string, context?: {}) => any;
 
 export type Translate = (
   template: string,

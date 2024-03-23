@@ -2,7 +2,7 @@ import { CustomerRole } from '@waldur/core/constants';
 import { BasePermission } from '@waldur/permissions/types';
 import { Quota } from '@waldur/quotas/types';
 
-export interface Permission {
+interface Permission {
   project_uuid?: string;
   user_uuid: string;
   role: string;
@@ -108,7 +108,7 @@ export interface Project {
   is_industry?: boolean;
 }
 
-export type PhoneNumber =
+type PhoneNumber =
   | string
   | {
       national_number: string;

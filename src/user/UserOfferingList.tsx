@@ -15,7 +15,7 @@ interface OwnProps {
   user?: UserDetails;
 }
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Offering'),

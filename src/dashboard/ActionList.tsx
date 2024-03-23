@@ -4,7 +4,7 @@ import { Badge, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 import { Action } from './types';
 
-export interface ActionListProps {
+interface ActionListProps {
   actions: Action[];
 }
 

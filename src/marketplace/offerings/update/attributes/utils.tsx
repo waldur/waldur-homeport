@@ -8,7 +8,7 @@ import {
   formatIntField,
 } from '@waldur/marketplace/common/utils';
 
-export interface AttrConfig {
+interface AttrConfig {
   type?: string;
   min?: number;
   parse?: any;

@@ -16,7 +16,7 @@ import { OfferingDetailsHeader } from './OfferingDetailsHeader';
 import { OfferingDetailsStatistics } from './OfferingDetailsStatistics';
 import { OfferingTables } from './OfferingTables';
 
-export interface OfferingDetailsProps {
+interface OfferingDetailsProps {
   offering: Offering;
   category: Category;
   plansUsage: PlanUsageRow[];

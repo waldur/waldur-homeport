@@ -1,7 +1,7 @@
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
-export const formatErrorObject = (error) =>
+const formatErrorObject = (error) =>
   Object.keys(error)
     .map((key) => `${key}: ${error[key]}`)
     .join(', ');

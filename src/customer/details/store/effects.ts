@@ -16,7 +16,7 @@ const PendingReviewDialog = lazyComponent(
   'PendingReviewDialog',
 );
 
-export function* uploadLogo(action) {
+function* uploadLogo(action) {
   const { customerUuid, image } = action.payload;
   const successMessage = translate('Logo has been uploaded.');
   const errorMessage = translate('Unable to upload logo.');
@@ -35,7 +35,7 @@ export function* uploadLogo(action) {
   }
 }
 
-export function* removeLogo(action) {
+function* removeLogo(action) {
   const { customer } = action.payload;
   const successMessage = translate('Logo has been removed.');
   const errorMessage = translate('Unable to remove logo.');

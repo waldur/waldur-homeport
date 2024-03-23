@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { Tip } from '@waldur/core/Tooltip';
 
-export interface FieldProps {
+interface FieldProps {
   label: string;
   helpText?: string;
   value?: React.ReactNode;

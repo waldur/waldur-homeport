@@ -31,7 +31,7 @@ interface OwnProps {
   profile?: any;
 }
 
-export type UserDetailsTableProps = StateProps & OwnProps;
+type UserDetailsTableProps = StateProps & OwnProps;
 
 const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
   props,

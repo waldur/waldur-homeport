@@ -21,7 +21,7 @@ interface EstimatedRevenueSummary {
   total: number;
 }
 
-export const formatCostChart = (records: EstimatedRevenueSummary[]): Chart => {
+const formatCostChart = (records: EstimatedRevenueSummary[]): Chart => {
   let items: DateValuePair[] = records.map((record) => ({
     value: record.total,
     date: DateTime.fromObject({ year: record.year, month: record.month }),

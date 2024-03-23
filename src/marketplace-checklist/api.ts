@@ -3,14 +3,7 @@ import Axios from 'axios';
 import { ENV } from '@waldur/configs/default';
 import { get, getAll, getById, parseResultCount, post } from '@waldur/core/api';
 
-import {
-  Category,
-  Checklist,
-  Question,
-  Answer,
-  ChecklistStats,
-  ProjectStats,
-} from './types';
+import { Category, Checklist, Question, Answer, ChecklistStats } from './types';
 
 export const getCategories = () =>
   getAll<Category>('/marketplace-checklists-categories/');
@@ -42,11 +35,6 @@ export const getStats = (checklistId: string) =>
 export const getCustomerStats = (customerId: string, checklistId: string) =>
   getAll<ChecklistStats>(
     `/customers/${customerId}/marketplace-checklists/${checklistId}/`,
-  );
-
-export const getProjectStats = (projectId: string) =>
-  get<ProjectStats[]>(`/projects/${projectId}/marketplace-checklists/`).then(
-    (response) => response.data,
   );
 
 export const getCustomerChecklists = (customerId: string) =>

@@ -13,7 +13,7 @@ interface ChartProps {
   options: any;
 }
 
-export class EChartComponent extends Component<ChartProps> {
+class EChartComponent extends Component<ChartProps> {
   container = undefined;
   chart = undefined;
 

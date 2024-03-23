@@ -2,7 +2,7 @@ import type { ComponentType } from 'react';
 
 import { TableProps } from '@waldur/table/Table';
 
-export interface ResourceTab {
+interface ResourceTab {
   key: string;
   title: string;
   component: ComponentType<

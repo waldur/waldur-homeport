@@ -7,7 +7,7 @@ import { Customer, Project } from '@waldur/workspace/types';
 
 export type BillingPeriod = 'hour' | 'day' | 'half_month' | 'month';
 
-export interface BaseComponent {
+interface BaseComponent {
   type: string;
   name: string;
   measured_unit: string;
@@ -59,7 +59,7 @@ export interface OptionField {
   max?: number;
 }
 
-export interface OfferingOptions {
+interface OfferingOptions {
   order: string[];
   options: { [key: string]: OptionField };
 }

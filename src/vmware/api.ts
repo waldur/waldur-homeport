@@ -35,7 +35,7 @@ export const loadVMwareAdvancedOptions = async (props: {
   };
 };
 
-export interface CreatePortRequestBody {
+interface CreatePortRequestBody {
   name: string;
   network: string;
 }

@@ -26,7 +26,7 @@ const OrganizationLink: FunctionComponent<{ row }> = ({ row }) => (
   />
 );
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const { filterColumns } = props;
   const columns = filterColumns([
     {

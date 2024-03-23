@@ -7,7 +7,7 @@ export const ISSUE_IDS = {
   INFORMATIONAL: 'Informational',
 };
 
-export const getIssueTypeLabel = (issueType) =>
+const getIssueTypeLabel = (issueType) =>
   ({
     INCIDENT: translate('Incident'),
     CHANGE_REQUEST: translate('Change Request'),

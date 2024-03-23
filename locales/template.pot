@@ -83,14 +83,9 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 #: src/proposals/offering-requests/OfferingRequestItemActions.tsx
 msgid "Accept"
-msgstr ""
-
-#: src/booking/AcceptAction.tsx
-msgid "Accept booking"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -203,7 +198,6 @@ msgstr ""
 msgid "Action has been applied."
 msgstr ""
 
-#: src/booking/BookingsList.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/details/InvoiceItemActions.tsx
@@ -741,7 +735,6 @@ msgid "Allowed file types"
 msgstr ""
 
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/offerings/update/plans/PlanComponents.tsx
 #: src/marketplace/offerings/update/plans/QuotasTable.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 msgid "Amount"
@@ -908,10 +901,6 @@ msgstr ""
 msgid "Archived"
 msgstr ""
 
-#: src/booking/AcceptAction.tsx
-msgid "Are you sure you want to accept a {name}?"
-msgstr ""
-
 #: src/proposals/offering-requests/OfferingRequestItemActions.tsx
 msgid "Are you sure you want to accept the {name} offering request?"
 msgstr ""
@@ -926,10 +915,6 @@ msgstr ""
 
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 msgid "Are you sure you want to archive plan {name}?"
-msgstr ""
-
-#: src/booking/CancelAction.tsx
-msgid "Are you sure you want to cancel a {name}?"
 msgstr ""
 
 #: src/invitations/GroupInvitationCancelButton.tsx
@@ -1326,10 +1311,6 @@ msgstr ""
 msgid "Azure Virtual Machine"
 msgstr ""
 
-#: src/azure/provider/help.js
-msgid "Azure provider"
-msgstr ""
-
 #: src/broadcasts/BroadcastFooter.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/error/InvalidObjectPage.tsx
@@ -1477,21 +1458,14 @@ msgstr ""
 msgid "Booking"
 msgstr ""
 
-#: src/booking/BookingsListExpandableRow.tsx
-msgid "Booking description"
-msgstr ""
-
-#: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Booking has been accepted."
 msgstr ""
 
-#: src/booking/CancelAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Booking has been cancelled."
 msgstr ""
 
-#: src/booking/BookingsList.tsx
 #: src/booking/offering/OfferingBookingResourcesCalendarContainer.tsx
 #: src/marketplace/resources/details/BookingMainComponent.tsx
 msgid "Bookings"
@@ -1710,7 +1684,6 @@ msgid "Campaigns"
 msgstr ""
 
 #: src/administration/roles/RoleForm.tsx
-#: src/booking/CancelAction.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invitations/GroupinvitationButtons.tsx
@@ -1723,10 +1696,6 @@ msgstr ""
 #: src/project/ProjectCreateForm.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
-msgstr ""
-
-#: src/booking/CancelAction.tsx
-msgid "Cancel booking"
 msgstr ""
 
 #: src/invitations/InvitationButtons.tsx
@@ -1927,7 +1896,6 @@ msgstr ""
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
-#: src/project/team/UserListOption.tsx
 msgid "Civil number"
 msgstr ""
 
@@ -2600,7 +2568,6 @@ msgstr ""
 #: src/administration/TokensList.tsx
 #: src/administration/notifications/HooksList.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/booking/BookingsListExpandableRow.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
@@ -2672,7 +2639,6 @@ msgstr ""
 msgid "Created at"
 msgstr ""
 
-#: src/booking/BookingsList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
@@ -3764,7 +3730,6 @@ msgstr ""
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/project/team/UserListOption.tsx
 #: src/proposals/update/reviewers/CallInvitationsList.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -4636,10 +4601,6 @@ msgstr ""
 msgid "Google Calendar has been unpublished successfully."
 msgstr ""
 
-#: src/marketplace/offerings/details/GoogleCalendarLinkField.tsx
-msgid "Google Calendar link"
-msgstr ""
-
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 msgid "Grant permission"
@@ -4805,10 +4766,6 @@ msgstr ""
 
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Hours"
-msgstr ""
-
-#: src/azure/provider/help.js
-msgid "How to obtain credentials for Azure provider"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenStackInstanceSummary.tsx
@@ -6177,7 +6134,6 @@ msgstr ""
 #: src/administration/roles/RoleForm.tsx
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
-#: src/booking/BookingsList.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/broadcasts/BroadcastTemplateList.tsx
@@ -6871,7 +6827,6 @@ msgid "Object is not found."
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/booking/BookingsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
@@ -7367,7 +7322,6 @@ msgstr ""
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/organizations/SupportCustomerList.tsx
-#: src/booking/BookingsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -8256,7 +8210,6 @@ msgstr ""
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/offerings/update/plans/PlanComponents.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/paypal/PayPalInvoicesList.tsx
 msgid "Price"
@@ -8398,8 +8351,6 @@ msgid "Progress"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/booking/BookingsList.tsx
-#: src/booking/BookingsListExpandableRow.tsx
 #: src/booking/deploy/steps.ts
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
@@ -8480,7 +8431,6 @@ msgstr ""
 msgid "Project could not be updated."
 msgstr ""
 
-#: src/booking/BookingsListExpandableRow.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/project/ProjectCreateForm.tsx
@@ -9064,7 +9014,6 @@ msgid "Reference code"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingAttributesSection.tsx
-#: src/marketplace/referral/ReferralDetailsField.tsx
 msgid "Referral count"
 msgstr ""
 
@@ -9113,7 +9062,6 @@ msgstr ""
 msgid "Regular user"
 msgstr ""
 
-#: src/booking/CancelAction.tsx
 #: src/invitations/UserPermissionRequestRejectButton.tsx
 #: src/marketplace-remote/ReviewRejectAction.tsx
 #: src/marketplace/orders/actions/RejectByConsumerButton.tsx
@@ -11248,7 +11196,6 @@ msgstr ""
 
 #: src/administration/notifications/HooksList.tsx
 #: src/administration/notifications/HooksListFilter.tsx
-#: src/booking/BookingsList.tsx
 #: src/broadcasts/BroadcastList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
@@ -12263,7 +12210,6 @@ msgstr ""
 msgid "Time slot"
 msgstr ""
 
-#: src/booking/BookingsList.tsx
 #: src/marketplace/cart/ShoppingCartTimeSlots.tsx
 msgid "Time slots"
 msgstr ""
@@ -12485,7 +12431,6 @@ msgstr ""
 msgid "UUID"
 msgstr ""
 
-#: src/booking/AcceptAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Unable to accept booking."
 msgstr ""
@@ -12579,7 +12524,6 @@ msgstr ""
 msgid "Unable to bootstrap application."
 msgstr ""
 
-#: src/booking/CancelAction.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 msgid "Unable to cancel booking."
 msgstr ""
@@ -13712,7 +13656,6 @@ msgstr ""
 msgid "Unit price"
 msgstr ""
 
-#: src/marketplace/offerings/update/plans/PlanComponents.tsx
 #: src/marketplace/offerings/update/plans/PricesTable.tsx
 #: src/marketplace/offerings/update/plans/QuotasTable.tsx
 msgid "Units"
@@ -14286,7 +14229,6 @@ msgstr ""
 #: src/openstack/OpenStackTenantForm.tsx
 #: src/openstack/marketplace.ts
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
-#: src/project/team/UserListOption.tsx
 #: src/rancher/catalog/CatalogCreateDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/slurm/SlurmForm.tsx

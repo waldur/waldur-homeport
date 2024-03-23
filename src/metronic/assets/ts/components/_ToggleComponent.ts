@@ -7,7 +7,7 @@ import {
 // Helpers
 import { CookieComponent } from './_CookieComponent';
 
-export interface ToggleOptions {
+interface ToggleOptions {
   saveState: boolean;
   targetState?: string;
   toggleState?: string;

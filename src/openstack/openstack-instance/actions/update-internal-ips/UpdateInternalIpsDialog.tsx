@@ -5,7 +5,7 @@ import { OpenStackInstance } from '../../types';
 import { UpdateInternalIpsForm } from './UpdateInternalIpsForm';
 import { useUpdateInternalIpsForm } from './utils';
 
-export interface UpdateInternalIpsDialogProps {
+interface UpdateInternalIpsDialogProps {
   resolve: {
     resource: OpenStackInstance;
   };

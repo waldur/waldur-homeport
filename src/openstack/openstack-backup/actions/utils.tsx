@@ -21,7 +21,7 @@ import { RootState } from '@waldur/store/reducers';
 
 import { OpenStackBackup } from '../types';
 
-export const AUTO_ASSIGN_FLOATING_IP = 'AUTO_ASSIGN_FLOATING_IP';
+const AUTO_ASSIGN_FLOATING_IP = 'AUTO_ASSIGN_FLOATING_IP';
 
 export const SKIP_FLOATING_IP_ASSIGNMENT = 'SKIP_FLOATING_IP_ASSIGNMENT';
 
@@ -37,7 +37,7 @@ export interface BackupFormChoices {
   floatingIps: Option[];
 }
 
-export interface BackupNetworkType {
+interface BackupNetworkType {
   subnet: string;
   floating_ip: string;
 }

@@ -15,7 +15,7 @@ interface SetTitleAction {
   };
 }
 
-export const setTitle = (title: string, subtitle?: string): SetTitleAction => ({
+const setTitle = (title: string, subtitle?: string): SetTitleAction => ({
   type: SET_TITLE,
   payload: {
     title,

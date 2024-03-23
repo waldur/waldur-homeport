@@ -16,7 +16,7 @@ import { RootState } from '@waldur/store/reducers';
 
 import { Flavor, OpenStackInstanceFormData } from '../types';
 
-export const formDataSelector = (state: RootState) =>
+const formDataSelector = (state: RootState) =>
   (getFormValues(FORM_ID)(state) || {}) as OpenStackInstanceFormData;
 
 export const formAttributesSelector = (state: RootState) => {

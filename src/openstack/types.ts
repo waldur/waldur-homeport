@@ -8,11 +8,6 @@ export interface Quota {
   required?: number;
 }
 
-export interface AvailabilityZone {
-  url: string;
-  name: string;
-}
-
 export interface VolumeType {
   url: string;
   name: string;

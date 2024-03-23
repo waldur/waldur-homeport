@@ -7,7 +7,7 @@ import { showError } from '@waldur/store/notify';
 
 import * as actions from './actions';
 
-export function* handleSaml2LoginSaga(action) {
+function* handleSaml2LoginSaga(action) {
   const provider = action.payload['identity-provider'];
   if (!provider) {
     return;

@@ -30,7 +30,7 @@ interface OwnProps {
   offering: Offering;
 }
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Name'),
@@ -105,7 +105,7 @@ const exportFields = [
   'State',
 ];
 
-export const TableOptions = {
+const TableOptions = {
   table: TABLE_OFFERING_RESOURCE,
   fetchData: createFetcher('marketplace-resources'),
   mapPropsToFilter,

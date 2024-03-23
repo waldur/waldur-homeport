@@ -36,7 +36,6 @@ import {
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { PlanUsageRow } from '../../reporting/plan-usage/types';
-import { OfferingDocument } from '../offerings/store/types';
 import { Resource } from '../resources/types';
 import { ComponentUsage, ResourcePlanPeriod } from '../resources/usage/types';
 
@@ -72,9 +71,6 @@ export const getComponentUsages = (
 export const getCategory = (id: string, options?: AxiosRequestConfig) =>
   getById<Category>('/marketplace-categories/', id, options);
 
-export const getProviderOfferingsList = (params?: {}) =>
-  getList<Offering>('/marketplace-provider-offerings/', params);
-
 export const getPublicOfferingsList = (params?: {}) =>
   getList<Offering>('/marketplace-public-offerings/', params);
 
@@ -93,19 +89,8 @@ export const getAllPublicOfferings = (options?: {}) =>
 export const getOfferingsByServiceProvider = (options?: {}) =>
   get('/marketplace-provider-offerings/groups/', options);
 
-export const getProviderOfferingsCount = (options?: {}) =>
-  Axios.head(
-    `${ENV.apiEndpoint}api/marketplace-provider-offerings/`,
-    options,
-  ).then((response) => parseResultCount(response));
-
 export const getAllOfferingPermissions = (options?: AxiosRequestConfig) =>
   getAll<OfferingPermission>('/marketplace-offering-permissions/', options);
-
-export const getResourcesCount = (options?: {}) =>
-  Axios.head(`${ENV.apiEndpoint}api/marketplace-resources/`, options).then(
-    (response) => parseResultCount(response),
-  );
 
 export const getProviderOfferings = (customerUuid: string) =>
   getAllProviderOfferings({ params: { customer_uuid: customerUuid } });
@@ -133,11 +118,6 @@ export const getOfferingPlans = (offeringUuid: string) =>
 
 export const getOfferingPlansUsage = (offeringUuid: string) =>
   getAll<PlanUsageRow>('/marketplace-plans/usage_stats/', {
-    params: { offering_uuid: offeringUuid },
-  });
-
-export const getOfferingRoles = (offeringUuid: string) =>
-  getAll<Plan>('/marketplace-offering-user-roles/', {
     params: { offering_uuid: offeringUuid },
   });
 
@@ -233,13 +213,6 @@ export const updateOfferingLocation = (offeringId, data) =>
     data,
   );
 
-export const uploadProviderOfferingHeroImage = (offeringId, image) =>
-  sendForm<Offering>(
-    'PATCH',
-    `${ENV.apiEndpoint}api/marketplace-provider-offerings/${offeringId}/`,
-    { image },
-  );
-
 export const updateOfferingAttributes = (offeringId, data) =>
   post(
     `/marketplace-provider-offerings/${offeringId}/update_attributes/`,
@@ -279,16 +252,6 @@ export const updateOfferingSecretOptions = (offeringId, data) =>
     data,
   );
 
-export const uploadOfferingDocument = (
-  offeringUrl: string,
-  document: OfferingDocument,
-) =>
-  sendForm<Offering>(
-    'POST',
-    `${ENV.apiEndpoint}api/marketplace-offering-files/`,
-    { offering: offeringUrl, ...document },
-  );
-
 export const getCartItems = (projectUrl: string) =>
   getAll('/marketplace-cart-items/', { params: { project: projectUrl } });
 
@@ -310,9 +273,6 @@ export const submitCart = (data: object) =>
   post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(
     (response) => response.data,
   );
-
-export const getOrdersList = (params?: {}) =>
-  getList<OrderResponse>('/marketplace-orders/', params);
 
 export const getOrder = (id) =>
   getById<OrderDetailsType>('/marketplace-orders/', id);
@@ -352,19 +312,6 @@ export const getOrganizationGroupTypesList = (params?: {}) =>
 
 export const getAllOrganizationGroups = (options?) =>
   getAll<OrganizationGroup>('/organization-groups/', options);
-
-export const getCustomersOrganizationGroupUuids = (
-  accounting_is_running: boolean,
-  options?,
-) =>
-  getAll('/customers/', {
-    params: {
-      accounting_is_running,
-      size: 200,
-      field: ['organization_group_uuid'],
-    },
-    ...options,
-  });
 
 export const updateOfferingState = (offeringUuid, action, reason) =>
   post(

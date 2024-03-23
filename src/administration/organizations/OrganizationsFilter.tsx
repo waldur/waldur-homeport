@@ -12,7 +12,7 @@ import { ServiceProviderFilter } from '@waldur/customer/list/ServiceProviderFilt
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureSupportCustomerFilter: FunctionComponent = () => (
+const PureSupportCustomerFilter: FunctionComponent = () => (
   <>
     <TableFilterItem
       title={translate('Accounting running')}

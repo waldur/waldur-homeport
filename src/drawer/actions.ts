@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type DialogSizeType = 'lg' | 'xl';
+type DialogSizeType = 'lg' | 'xl';
 
 export const openDrawerDialog = <P = any>(
   drawerComponent: React.ComponentType<P>,

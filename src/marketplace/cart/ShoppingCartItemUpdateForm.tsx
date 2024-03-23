@@ -30,7 +30,7 @@ const storeConnector = connect<
   project: getProject(state),
 }));
 
-export const validate = (_, props) => {
+const validate = (_, props) => {
   const errors: any = {};
   if (!props.project) {
     errors.project = translate('This field is required.');

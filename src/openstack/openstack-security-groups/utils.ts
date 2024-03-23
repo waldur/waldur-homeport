@@ -23,7 +23,7 @@ const COMMON_PORTS = {
 export const formatSecurityGroupProtocol = (rule: SecurityGroupRule) =>
   !rule.protocol ? translate('Any') : rule.protocol.toUpperCase();
 
-export const formatSecurityGroupRulePort = (input: number) => {
+const formatSecurityGroupRulePort = (input: number) => {
   if (COMMON_PORTS[input]) {
     return `${input} (${COMMON_PORTS[input]})`;
   }

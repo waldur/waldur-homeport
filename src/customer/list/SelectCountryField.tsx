@@ -11,10 +11,9 @@ import {
 import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
-export const WindowedSelectField = ({
-  input: { value, onChange },
-  ...props
-}) => <WindowedSelect value={value} onChange={onChange} {...props} />;
+const WindowedSelectField = ({ input: { value, onChange }, ...props }) => (
+  <WindowedSelect value={value} onChange={onChange} {...props} />
+);
 
 export const SelectCountryField: FunctionComponent = () => {
   const { isLoading, data } = useQuery(['countries'], loadCountries, {

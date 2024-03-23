@@ -12,26 +12,27 @@ interface CustomerListFilterProps {
   accountingPeriods: PeriodOption[];
 }
 
-export const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> =
-  (props) => (
-    <>
-      <TableFilterItem
-        title={translate('Accounting period')}
-        name="accounting_period"
-        badgeValue={(value) => value?.label}
-        ellipsis={false}
-      >
-        <AccountingPeriodField options={props.accountingPeriods} />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Accounting running')}
-        name="accounting_is_running"
-        badgeValue={(value) => value?.label}
-      >
-        <AccountingRunningField />
-      </TableFilterItem>
-    </>
-  );
+const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> = (
+  props,
+) => (
+  <>
+    <TableFilterItem
+      title={translate('Accounting period')}
+      name="accounting_period"
+      badgeValue={(value) => value?.label}
+      ellipsis={false}
+    >
+      <AccountingPeriodField options={props.accountingPeriods} />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Accounting running')}
+      name="accounting_is_running"
+      badgeValue={(value) => value?.label}
+    >
+      <AccountingRunningField />
+    </TableFilterItem>
+  </>
+);
 
 export const CustomerListFilter = reduxForm<{}, CustomerListFilterProps>({
   form: 'customerListFilter',

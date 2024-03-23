@@ -14,7 +14,7 @@ interface InternalNameFieldProps {
 
 const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_-]+$');
 
-export const validateInternalName = (value: string) =>
+const validateInternalName = (value: string) =>
   !value.match(INTERNAL_NAME_PATTERN)
     ? translate('Please use Latin letters without spaces only.')
     : undefined;

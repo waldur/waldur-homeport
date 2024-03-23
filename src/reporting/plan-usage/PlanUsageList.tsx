@@ -11,7 +11,7 @@ import { Table, connectTable, createFetcher } from '@waldur/table';
 import { PlanUsageButton } from './PlanUsageButton';
 import { PlanUsageRowProps } from './types';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Service provider'),

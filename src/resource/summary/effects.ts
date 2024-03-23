@@ -9,7 +9,7 @@ import * as api from './api';
 import * as constants from './constants';
 import { getResource } from './selectors';
 
-export function* summarySourceFetch(action) {
+function* summarySourceFetch(action) {
   const { url } = action.payload;
   const resource = yield select(getResource, { resolve: { url } });
   if (resource && resource.url === url) {

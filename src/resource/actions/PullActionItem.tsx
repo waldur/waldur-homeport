@@ -20,7 +20,7 @@ interface PullActionItemProps<T> {
 
 const validators = [validateState('OK', 'Erred')];
 
-export const usePull = ({
+const usePull = ({
   resource,
   apiMethod,
   refetch,

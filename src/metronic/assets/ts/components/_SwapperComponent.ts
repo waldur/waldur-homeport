@@ -44,11 +44,11 @@ export class SwapperStore {
   }
 }
 
-export interface ISwapperOptions {
+interface ISwapperOptions {
   mode: string;
 }
 
-export interface ISwapperQueries {
+interface ISwapperQueries {
   componentName: string;
   instanseQuery: string;
   attrQuery: string;

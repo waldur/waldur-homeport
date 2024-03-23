@@ -19,7 +19,7 @@ import { isStaff } from '@waldur/workspace/selectors';
 import { OrganizationDetails } from '../../customer/list/OrganizationDetails';
 import { OrganizationLink } from '../../customer/list/OrganizationLink';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Name'),

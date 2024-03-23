@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-export interface ExternalLinkProps {
+interface ExternalLinkProps {
   label: string;
   url: string;
   iconless?: boolean;

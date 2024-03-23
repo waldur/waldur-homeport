@@ -83,7 +83,7 @@ export interface Sorting {
   mode: undefined | 'asc' | 'desc';
 }
 
-export interface SortingState extends Sorting {
+interface SortingState extends Sorting {
   loading?: boolean;
 }
 

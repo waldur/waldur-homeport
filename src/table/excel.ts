@@ -124,7 +124,7 @@ export function getSheetData(sharedStrings: SharedStrings, rows: any[][]) {
     .join('');
 }
 
-export function getSheet(sharedStrings: SharedStrings, rows: any[][]) {
+function getSheet(sharedStrings: SharedStrings, rows: any[][]) {
   return (
     '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
     '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" ' +

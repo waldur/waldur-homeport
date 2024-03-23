@@ -4,7 +4,7 @@ import { Field } from 'redux-form';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
-export const getOptions = () => [
+const getOptions = () => [
   { value: true, label: translate('Yes') },
   { value: false, label: translate('No') },
   { value: undefined, label: translate('All') },

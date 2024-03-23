@@ -12,7 +12,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-export const PureUpdateOfferingLogoDialog: FunctionComponent<any> = (props) => {
+const PureUpdateOfferingLogoDialog: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
   const submitRequest = async (formData) => {
     try {

@@ -1,9 +1,9 @@
-export interface ILoader {
+interface ILoader {
   display?: boolean;
   type: 'default' | 'spinner-message' | 'spinner-logo';
 }
 
-export interface IScrollTop {
+interface IScrollTop {
   display: boolean;
 }
 
@@ -18,7 +18,7 @@ export interface IHeader {
   menuIcon: 'svg' | 'font';
 }
 
-export interface IMegaMenu {
+interface IMegaMenu {
   display: boolean;
 }
 
@@ -42,7 +42,7 @@ export interface IFooter {
   width: 'fixed' | 'fluid';
 }
 
-export interface ISidebar {
+interface ISidebar {
   display: boolean;
   toggle: boolean;
   shown: boolean;
@@ -95,7 +95,7 @@ export interface IPageTitle {
   responsiveTarget: string;
 }
 
-export interface IMain {
+interface IMain {
   body?: {
     backgroundImage?: string;
     class: string;

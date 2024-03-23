@@ -35,9 +35,7 @@ interface PureForwardButton {
   tooltip?: string;
 }
 
-export const PureForwardButton: FunctionComponent<PureForwardButton> = (
-  props,
-) => (
+const PureForwardButton: FunctionComponent<PureForwardButton> = (props) => (
   <ActionButton
     title={props.title}
     icon="fa fa-arrow-right"

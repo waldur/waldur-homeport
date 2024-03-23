@@ -15,15 +15,3 @@ export const orderCanBeApproved = createSelector(
       projectId: project?.uuid,
     }),
 );
-
-export const orderCanBeRejected = createSelector(
-  getUser,
-  getCustomer,
-  getProject,
-  (user, customer, project) =>
-    hasPermission(user, {
-      permission: PermissionEnum.REJECT_ORDER,
-      customerId: customer?.uuid,
-      projectId: project?.uuid,
-    }),
-);

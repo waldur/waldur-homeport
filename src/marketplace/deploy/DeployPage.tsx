@@ -31,7 +31,7 @@ import { hasStepWithField } from './utils';
 
 import './DeployPage.scss';
 
-export interface DeployPageProps {
+interface DeployPageProps {
   offering: Offering;
   limits?: string[];
   updateMode?: boolean;

@@ -20,7 +20,7 @@ import { USER_WORKSPACE } from '@waldur/workspace/types';
 
 import { UsersService } from './UsersService';
 
-export async function loadUser() {
+async function loadUser() {
   const currentProject = getProjectSelector(store.getState());
   const currentUser = getUserSelector(store.getState());
   if (

@@ -2,7 +2,7 @@ import { get, post } from '@waldur/core/api';
 
 import { Invitation } from './types';
 
-export interface CreateGroupInvitationPayload {
+interface CreateGroupInvitationPayload {
   scope: string;
   role: string;
 }
