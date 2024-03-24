@@ -1592,6 +1592,7 @@ msgstr ""
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/ProposalsList.tsx
+#: src/proposals/review/ReviewsList.tsx
 #: src/proposals/update/CallUpdateHero.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
@@ -7752,8 +7753,11 @@ msgid "Pending provider orders"
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Pending review"
+msgstr ""
+
+#: src/proposals/call-management/CallManagementStatistics.tsx
+msgid "Pending reviews"
 msgstr ""
 
 #: src/navigation/header/ConfirmationDrawerToggle.tsx
@@ -8621,6 +8625,7 @@ msgstr ""
 #: src/permissions/constants.tsx
 #: src/proposals/proposal/ProposalsList.tsx
 #: src/proposals/proposal/create/ProposalHeader.tsx
+#: src/proposals/review/ReviewsList.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
@@ -9735,6 +9740,7 @@ msgstr ""
 msgid "Review details"
 msgstr ""
 
+#: src/proposals/review/ReviewsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
 msgid "Review due"
 msgstr ""
@@ -9821,6 +9827,7 @@ msgstr ""
 msgid "Reviewed by provider at"
 msgstr ""
 
+#: src/proposals/review/ReviewsList.tsx
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
 #: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/proposals/update/reviewers/CallUsersList.tsx
@@ -9837,6 +9844,8 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/proposals/review/ReviewsList.tsx
+#: src/proposals/routes.ts
 #: src/user/routes.ts
 msgid "Reviews"
 msgstr ""
@@ -11258,6 +11267,7 @@ msgstr ""
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/proposal/ProposalsList.tsx
+#: src/proposals/review/ReviewsList.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx

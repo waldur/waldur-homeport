@@ -172,6 +172,7 @@ export interface ProposalReview {
   uuid: string;
   proposal: string;
   reviewer: string;
+  reviewer_full_name: string;
   state: ReviewState;
   summary_score: number;
   summary_public_comment: string;

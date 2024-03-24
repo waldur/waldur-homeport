@@ -43,6 +43,11 @@ const ProposalsList = lazyComponent(
   'ProposalsList',
 );
 
+const ReviewsList = lazyComponent(
+  () => import('./review/ReviewsList'),
+  'ReviewsList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'call-management',
@@ -88,6 +93,14 @@ export const states: StateDeclaration[] = [
     component: ProposalsList,
     data: {
       breadcrumb: () => translate('Proposals'),
+    },
+  },
+  {
+    name: 'call-management.review-list',
+    url: 'reviews/?{state}',
+    component: ReviewsList,
+    data: {
+      breadcrumb: () => translate('Reviews'),
     },
   },
   {

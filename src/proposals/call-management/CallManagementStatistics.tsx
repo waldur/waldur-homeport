@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import {
   getCallStateOptions,
   getProposalStateOptions,
+  getReviewStateOptions,
 } from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -45,6 +46,17 @@ const getProposalState = (states: string[]) => ({
   },
 });
 
+const getReviewState = (states: string[]) => ({
+  state: 'call-management.review-list',
+  params: {
+    state: JSON.stringify(
+      states.map((state) =>
+        getReviewStateOptions().find((op) => op.value === state),
+      ),
+    ),
+  },
+});
+
 export const CallManagementStatistics = () => {
   const customer = useSelector(getCustomer);
   const { data, isLoading, error, refetch } = useQuery(
@@ -66,35 +78,38 @@ export const CallManagementStatistics = () => {
       )}
       {data && (
         <>
-          <Col md={6} lg={4}>
+          <Col md={6} lg={3}>
             <StatisticsCard
               title={translate('Open calls')}
               value={data.open_calls}
               to={getCallState(['active'])}
             />
           </Col>
-          <Col md={6} lg={4}>
+          <Col md={6} lg={3}>
             <StatisticsCard
               title={translate('Accepted proposals')}
               value={data.accepted_proposals}
               to={getProposalState(['accepted'])}
             />
           </Col>
-          <Col md={6} lg={4}>
+          <Col md={6} lg={3}>
             <StatisticsCard
               title={translate('Pending proposals')}
               value={data.pending_proposals}
               to={getProposalState(['in_review', 'in_revision', 'submitted'])}
             />
           </Col>
+          <Col md={6} lg={3}>
+            <StatisticsCard
+              title={translate('Pending reviews')}
+              value={data.pending_review}
+              to={getReviewState(['submitted'])}
+            />
+          </Col>
           <Col>
             <Card className="mb-6">
               <Card.Body>
                 <div className="d-flex justify-content-start justify-content-lg-between flex-wrap">
-                  <FlatStatistics
-                    title={translate('Pending review')}
-                    count={data.pending_review}
-                  />
                   <FlatStatistics
                     title={translate('Active rounds')}
                     count={data.active_rounds}
