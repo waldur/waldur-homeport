@@ -42,7 +42,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
             <Link
               state="call-management.round-update"
               params={{ round_uuid: row.uuid, call_uuid: props.call.uuid }}
-              label={row.uuid.substring(0, 10)}
+              label={row.name}
             />
           ),
         },
