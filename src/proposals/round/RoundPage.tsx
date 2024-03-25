@@ -68,6 +68,7 @@ export const RoundPage: FunctionComponent = () => {
         <RoundPageBar />
         <div className="container-xxl py-10">
           <ProposalsList round_uuid={round.uuid} call_uuid={call.uuid} />
+          <RoundReviewersSection round={round} />
           <RoundSubmissionSection
             round={round}
             call={call}
@@ -80,7 +81,6 @@ export const RoundPage: FunctionComponent = () => {
             refetch={refetch}
             loading={isRefetching}
           />
-          <RoundReviewersSection round={round} />
           <RoundAllocationSection
             round={round}
             call={call}

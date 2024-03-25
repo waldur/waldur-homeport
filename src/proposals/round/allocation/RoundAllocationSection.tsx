@@ -30,7 +30,7 @@ export const RoundAllocationSection: FC<RoundAllocationSectionProps> = ({
     <Card id="allocation" className="mb-7">
       <Card.Header>
         <Card.Title>
-          {translate('Allocation')}
+          {translate('Allocation strategy')}
           <RefreshButton refetch={refetch} loading={loading} />
         </Card.Title>
         <div className="card-toolbar">

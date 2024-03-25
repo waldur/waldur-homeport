@@ -37,7 +37,7 @@ export const RoundSubmissionSection: FC<RoundSubmissionSectionProps> = ({
     <Card id="submission" className="mb-7">
       <Card.Header>
         <Card.Title>
-          {translate('Submission')}
+          {translate('Submission strategy')}
           <RefreshButton refetch={refetch} loading={loading} />
         </Card.Title>
         <div className="card-toolbar">

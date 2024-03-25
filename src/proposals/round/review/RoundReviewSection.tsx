@@ -36,7 +36,7 @@ export const RoundReviewSection: FC<RoundReviewSectionProps> = ({
     <Card id="review" className="mb-7">
       <Card.Header>
         <Card.Title>
-          {translate('Review')}
+          {translate('Review strategy')}
           <RefreshButton refetch={refetch} loading={loading} />
         </Card.Title>
         <div className="card-toolbar">

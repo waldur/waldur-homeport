@@ -8,20 +8,20 @@ const tabs: PageBarTab[] = [
     title: translate('Proposals'),
   },
   {
-    key: 'submission',
-    title: translate('Submission'),
-  },
-  {
-    key: 'review',
-    title: translate('Review'),
-  },
-  {
     key: 'reviewers',
     title: translate('Reviewers'),
   },
   {
+    key: 'submission',
+    title: translate('Submission strategy'),
+  },
+  {
+    key: 'review',
+    title: translate('Review strategy'),
+  },
+  {
     key: 'allocation',
-    title: translate('Allocation'),
+    title: translate('Allocation strategy'),
   },
 ];
 
