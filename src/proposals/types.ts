@@ -196,3 +196,8 @@ export interface CallManagementStatistics {
   calls_closing_in_one_week: number;
   offering_requests_pending: number;
 }
+
+export interface Reviewer {
+  full_name: string;
+  email: string;
+}
