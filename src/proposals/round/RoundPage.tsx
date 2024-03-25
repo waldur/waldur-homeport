@@ -8,13 +8,13 @@ import { translate } from '@waldur/i18n';
 import { PageBarProvider } from '@waldur/marketplace/context';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { RoundReviewersList } from '@waldur/proposals/round/reviewers/RoundReviewersList';
 
 import { getProtectedCall, getProtectedCallRound } from '../api';
 
 import { RoundAllocationSection } from './allocation/RoundAllocationSection';
 import { ProposalsList } from './proposals/ProposalsList';
 import { RoundReviewSection } from './review/RoundReviewSection';
-import { RoundReviewersSection } from './reviewers/RoundReviewersSection';
 import { RoundPageBar } from './RoundPageBar';
 import { RoundPageHero } from './RoundPageHero';
 import { RoundSubmissionSection } from './submission/RoundSubmissionSection';
@@ -68,7 +68,6 @@ export const RoundPage: FunctionComponent = () => {
         <RoundPageBar />
         <div className="container-xxl py-10">
           <ProposalsList round_uuid={round.uuid} call_uuid={call.uuid} />
-          <RoundReviewersSection round={round} />
           <RoundSubmissionSection
             round={round}
             call={call}
@@ -81,6 +80,7 @@ export const RoundPage: FunctionComponent = () => {
             refetch={refetch}
             loading={isRefetching}
           />
+          <RoundReviewersList round_uuid={round.uuid} />
           <RoundAllocationSection
             round={round}
             call={call}
