@@ -103,19 +103,19 @@ export const ProposalCompletionPage = reduxForm({
     [proposal_uuid, dispatch],
   );
 
-  const switchToTeamCallback = useCallback(() => {
-    return switchProposalToTeamVerification(proposal_uuid)
-      .then(() => {
-        dispatch(
-          showSuccess(
-            translate('Proposal has been switched to team verification step.'),
-          ),
-        );
-      })
-      .catch((error) => {
-        dispatch(showErrorResponse(error, translate('Something went wrong')));
-      });
-  }, [proposal_uuid, dispatch]);
+  const switchToTeamCallback = async () => {
+    try {
+      await switchProposalToTeamVerification(proposal_uuid);
+      await refetch();
+      dispatch(
+        showSuccess(
+          translate('Proposal has been switched to team verification step.'),
+        ),
+      );
+    } catch (error) {
+      dispatch(showErrorResponse(error, translate('Something went wrong')));
+    }
+  };
 
   if (isLoading) {
     return <LoadingSpinner />;
