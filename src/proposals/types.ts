@@ -33,6 +33,7 @@ export interface CallManagingOrganization {
 
 export interface Round {
   uuid: string;
+  name: string;
   start_time: string;
   cutoff_time: string;
   review_strategy: RoundReviewStrategy;

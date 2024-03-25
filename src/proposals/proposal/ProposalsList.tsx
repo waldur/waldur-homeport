@@ -60,6 +60,10 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
           render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
         },
         {
+          title: translate('Round'),
+          render: ({ row }) => <>{renderFieldOrDash(row.round.name)}</>,
+        },
+        {
           title: translate('Ending'),
           render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
         },

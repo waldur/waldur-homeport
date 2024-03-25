@@ -9937,6 +9937,7 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
+#: src/proposals/proposal/ProposalsList.tsx
 #: src/proposals/round/RoundPageHero.tsx
 #: src/user/proposals/ProposalsListExpandableRow.tsx
 #: src/user/proposals/reviews/ReviewsListExpandableRow.tsx

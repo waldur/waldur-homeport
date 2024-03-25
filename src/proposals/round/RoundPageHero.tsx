@@ -34,9 +34,7 @@ export const RoundPageHero: FC<RoundPageHeroProps> = ({ round, call }) => {
       asHero
       title={
         <>
-          <h3>
-            {translate('Round')} {round.uuid}
-          </h3>
+          <h3>{round.name}</h3>
           <Link
             state="call-management.call-update"
             params={{ call_uuid: call.uuid }}
