@@ -489,8 +489,8 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionCreateButton.tsx
 #: src/project/team/AddUserButton.tsx
 #: src/project/team/AddUserDialog.tsx
-#: src/proposals/reviewers/AddUserButton.tsx
-#: src/proposals/reviewers/AddUserDialog.tsx
+#: src/proposals/team/AddUserButton.tsx
+#: src/proposals/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 #: src/user/support/UserTableActions.tsx
 msgid "Add user"
@@ -1039,7 +1039,7 @@ msgstr ""
 
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
-#: src/proposals/reviewers/UserRemoveButton.tsx
+#: src/proposals/team/UserRemoveButton.tsx
 msgid "Are you sure you want to remove {userName}?"
 msgstr ""
 
@@ -2182,7 +2182,7 @@ msgstr ""
 #: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
-#: src/proposals/reviewers/UserRemoveButton.tsx
+#: src/proposals/team/UserRemoveButton.tsx
 #: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
@@ -2632,7 +2632,7 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/notifications/NotificationList.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/proposals/reviewers/InvitationsList.tsx
+#: src/proposals/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
@@ -3731,8 +3731,9 @@ msgstr ""
 #: src/invitations/actions/create/EmailsListGroup.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/ProjectUsersList.tsx
-#: src/proposals/reviewers/InvitationsList.tsx
-#: src/proposals/reviewers/UsersList.tsx
+#: src/proposals/round/reviewers/RoundReviewersList.tsx
+#: src/proposals/team/InvitationsList.tsx
+#: src/proposals/team/UsersList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
@@ -4120,7 +4121,7 @@ msgstr ""
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/project/team/InvitationsList.tsx
-#: src/proposals/reviewers/InvitationsList.tsx
+#: src/proposals/team/InvitationsList.tsx
 msgid "Expires at"
 msgstr ""
 
@@ -4464,6 +4465,7 @@ msgstr ""
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/marketplace/UserPluginOptionsForm.tsx
+#: src/proposals/round/reviewers/RoundReviewersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
@@ -5217,8 +5219,8 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
-#: src/proposals/reviewers/InvitationsList.tsx
-#: src/proposals/reviewers/ReviewersSection.tsx
+#: src/proposals/team/InvitationsList.tsx
+#: src/proposals/team/ReviewersSection.tsx
 msgid "Invitations"
 msgstr ""
 
@@ -6719,8 +6721,8 @@ msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
-#: src/proposals/reviewers/UsersListPlaceholder.tsx
 #: src/proposals/round/proposals/ProposalsPlaceholder.tsx
+#: src/proposals/team/UsersListPlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 #: src/user/proposals/ProposalsListPlaceholder.tsx
@@ -7841,7 +7843,7 @@ msgid "Permission has been updated successfully."
 msgstr ""
 
 #: src/customer/routes.ts
-#: src/proposals/reviewers/ReviewersSection.tsx
+#: src/proposals/team/ReviewersSection.tsx
 msgid "Permission log"
 msgstr ""
 
@@ -8630,7 +8632,6 @@ msgstr ""
 #: src/proposals/proposal/ProposalsList.tsx
 #: src/proposals/proposal/create/ProposalHeader.tsx
 #: src/proposals/review/ReviewsList.tsx
-#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/proposals/reviews/ReviewsList.tsx
 msgid "Proposal"
@@ -9197,7 +9198,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
-#: src/proposals/reviewers/UserRemoveButton.tsx
+#: src/proposals/team/UserRemoveButton.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 #: src/user/keys/KeyRemoveButton.tsx
@@ -9831,16 +9832,15 @@ msgid "Reviewed by provider at"
 msgstr ""
 
 #: src/proposals/review/ReviewsList.tsx
-#: src/proposals/reviewers/UsersList.tsx
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
-#: src/proposals/round/reviewers/RoundReviewersSection.tsx
+#: src/proposals/team/UsersList.tsx
 msgid "Reviewer"
 msgstr ""
 
-#: src/proposals/reviewers/ReviewersSection.tsx
 #: src/proposals/round/RoundPageBar.tsx
-#: src/proposals/round/reviewers/RoundReviewersSection.tsx
+#: src/proposals/round/reviewers/RoundReviewersList.tsx
 #: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/CallUpdateContainer.tsx
 msgid "Reviewers"
 msgstr ""
 
@@ -9889,8 +9889,8 @@ msgstr ""
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/project/team/RoleGroup.tsx
-#: src/proposals/reviewers/InvitationsList.tsx
-#: src/proposals/reviewers/UsersList.tsx
+#: src/proposals/team/InvitationsList.tsx
+#: src/proposals/team/UsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/affiliations/OrganizationsList.tsx
@@ -10087,7 +10087,7 @@ msgstr ""
 #: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/EditUserDialog.tsx
-#: src/proposals/reviewers/AddUserDialog.tsx
+#: src/proposals/team/AddUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
 #: src/reporting/invoices/utils.ts
 msgid "Save"
@@ -10573,7 +10573,7 @@ msgstr ""
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/project/team/AddUserDialog.tsx
-#: src/proposals/reviewers/AddUserDialog.tsx
+#: src/proposals/team/AddUserDialog.tsx
 msgid "Select user..."
 msgstr ""
 
@@ -11318,8 +11318,8 @@ msgstr ""
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/ProposalsList.tsx
-#: src/proposals/reviewers/InvitationsList.tsx
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
+#: src/proposals/team/InvitationsList.tsx
 #: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -11675,6 +11675,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
+#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Team"
 msgstr ""
 
@@ -11685,7 +11686,7 @@ msgstr ""
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
-#: src/proposals/reviewers/UserRemoveButton.tsx
+#: src/proposals/team/UserRemoveButton.tsx
 msgid "Team member has been removed."
 msgstr ""
 
@@ -12424,7 +12425,6 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
-#: src/proposals/round/reviewers/RoundReviewersSection.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
@@ -12493,7 +12493,7 @@ msgid "Unable to add role."
 msgstr ""
 
 #: src/project/team/AddUserDialog.tsx
-#: src/proposals/reviewers/AddUserDialog.tsx
+#: src/proposals/team/AddUserDialog.tsx
 #: src/user/support/AddRemoteUserDialog.tsx
 msgid "Unable to add user."
 msgstr ""
@@ -12757,7 +12757,7 @@ msgstr ""
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
-#: src/proposals/reviewers/UserRemoveButton.tsx
+#: src/proposals/team/UserRemoveButton.tsx
 msgid "Unable to delete team member."
 msgstr ""
 
@@ -14074,7 +14074,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderUsersList.tsx
 #: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
-#: src/proposals/reviewers/AddUserDialog.tsx
+#: src/proposals/team/AddUserDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
 msgstr ""
@@ -14299,8 +14299,8 @@ msgstr ""
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
-#: src/proposals/reviewers/ReviewersSection.tsx
-#: src/proposals/reviewers/UsersList.tsx
+#: src/proposals/team/ReviewersSection.tsx
+#: src/proposals/team/UsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
 msgstr ""
@@ -15031,7 +15031,7 @@ msgstr ""
 msgid "internal IPs"
 msgstr ""
 
-#: src/proposals/reviewers/InvitationsList.tsx
+#: src/proposals/team/InvitationsList.tsx
 msgid "invitations"
 msgstr ""
 
@@ -15300,7 +15300,7 @@ msgstr ""
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/marketplace/service-providers/ProviderUsersList.tsx
-#: src/proposals/reviewers/UsersList.tsx
+#: src/proposals/team/UsersList.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "users"

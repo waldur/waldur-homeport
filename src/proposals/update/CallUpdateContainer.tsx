@@ -10,7 +10,7 @@ import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { getProtectedCall } from '../api';
-import { ReviewersSection } from '../reviewers/ReviewersSection';
+import { TeamSection } from '../team/ReviewersSection';
 
 import { CallUpdateBar } from './CallUpdateBar';
 import { CallUpdateHero } from './CallUpdateHero';
@@ -59,7 +59,11 @@ export const CallUpdateContainer: FunctionComponent = () => {
             loading={isRefetching}
           />
           <CallDocumentsSection call={call} refetch={refetch} />
-          <ReviewersSection scope={call} roleTypes={['call']} />
+          <TeamSection
+            scope={call}
+            roleTypes={['call']}
+            title={translate('Reviewers')}
+          />
           <CallOfferingsSection call={call} />
         </div>
       </div>

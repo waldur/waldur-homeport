@@ -26,14 +26,16 @@ const tabs: TabSpec<GenericInvitationContext>[] = [
   },
 ];
 
-export const ReviewersSection: FC<GenericInvitationContext> = (props) => {
+export const TeamSection: FC<GenericInvitationContext & { title: string }> = (
+  props,
+) => {
   const [tab, setTab] = useState<TabSpec<GenericInvitationContext>>(tabs[0]);
 
   return (
     <Card className="mb-7" id="reviewers">
       <Card.Header>
         <Card.Title>
-          <h3>{translate('Reviewers')}</h3>
+          <h3>{props.title}</h3>
         </Card.Title>
         <div className="card-toolbar flex-grow-1 ms-6">
           <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />
