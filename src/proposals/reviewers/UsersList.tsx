@@ -1,26 +1,20 @@
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { GenericInvitationContext } from '@waldur/invitations/types';
 import { GenericPermission } from '@waldur/permissions/types';
-import { Call } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 
 import { AddUserButton } from './AddUserButton';
-import { CallUsersListPlaceholder } from './CallUsersListPlaceholder';
 import { UserRemoveButton } from './UserRemoveButton';
+import { UsersListPlaceholder } from './UsersListPlaceholder';
 
-interface CallUsersListProps {
-  call: Call;
-}
-
-export const CallUsersList: FC<CallUsersListProps> = (props) => {
+export const UsersList: FC<GenericInvitationContext> = (props) => {
   const tableProps = useTable({
-    table: 'CallUsersListList',
-    fetchData: createFetcher(
-      `proposal-protected-calls/${props.call.uuid}/list_users`,
-    ),
+    table: 'UsersListList',
+    fetchData: createFetcher(`${props.scope.url}list_users/`),
   });
 
   return (
@@ -28,10 +22,7 @@ export const CallUsersList: FC<CallUsersListProps> = (props) => {
       {...tableProps}
       className="mb-7"
       placeholderComponent={
-        <CallUsersListPlaceholder
-          refetch={tableProps.fetch}
-          call={props.call}
-        />
+        <UsersListPlaceholder refetch={tableProps.fetch} {...props} />
       }
       columns={[
         {
@@ -49,12 +40,12 @@ export const CallUsersList: FC<CallUsersListProps> = (props) => {
       ]}
       title={translate('Users')}
       verboseName={translate('users')}
-      actions={<AddUserButton refetch={tableProps.fetch} call={props.call} />}
+      actions={<AddUserButton refetch={tableProps.fetch} {...props} />}
       hoverableRow={({ row }) => (
         <UserRemoveButton
           permission={row}
           refetch={tableProps.fetch}
-          call={props.call}
+          scope={props.scope}
         />
       )}
     />

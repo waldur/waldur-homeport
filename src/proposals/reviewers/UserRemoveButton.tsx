@@ -4,21 +4,20 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { GenericPermission } from '@waldur/permissions/types';
-import { Call } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { deleteCallUser } from './api';
+import { deleteScopeUser } from './api';
 
 interface UserRemoveButtonProps {
   permission: GenericPermission;
-  call: Call;
+  scope: { url: string };
   refetch;
 }
 
 export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   permission,
-  call,
+  scope,
   refetch,
 }) => {
   const dispatch = useDispatch();
@@ -36,8 +35,8 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
       return;
     }
     try {
-      await deleteCallUser({
-        call: call.uuid,
+      await deleteScopeUser({
+        scope: scope.url,
         user: permission.user_uuid,
         role: permission.role_name,
       });

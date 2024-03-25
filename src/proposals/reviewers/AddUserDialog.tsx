@@ -14,10 +14,10 @@ import { Role } from '@waldur/permissions/types';
 import { ExpirationTimeGroup } from '@waldur/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@waldur/project/team/RoleGroup';
 import { UserListOptionInline } from '@waldur/project/team/UserListOptionInline';
-import { Call } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { addCallUser } from './api';
+import { addScopeUser } from './api';
+import { AddUserDialogProps } from './types';
 
 const FORM_ID = 'AddUserDialog';
 
@@ -27,17 +27,12 @@ interface AddUserDialogFormData {
   user: any;
 }
 
-interface AddUserDialogProps {
-  refetch;
-  call: Call;
-}
-
 export const AddUserDialog = reduxForm<
   AddUserDialogFormData,
   AddUserDialogProps
 >({
   form: FORM_ID,
-})(({ submitting, handleSubmit, refetch, invalid, call }) => {
+})(({ submitting, handleSubmit, refetch, invalid, scope, roleTypes }) => {
   const dispatch = useDispatch();
 
   const getOptionLabel = (option) =>
@@ -47,14 +42,14 @@ export const AddUserDialog = reduxForm<
 
   const saveUser = async (formData: AddUserDialogFormData) => {
     try {
-      await addCallUser({
+      await addScopeUser({
+        scope: scope.url,
         user: formData.user.uuid,
-        call: call.uuid,
         expiration_time: formData.expiration_time,
         role: formData.role.name,
       });
       await refetch();
-      dispatch(showSuccess('User has been added to call.'));
+      dispatch(showSuccess('User has been added.'));
       dispatch(closeModalDialog());
     } catch (error) {
       dispatch(showErrorResponse(error, translate('Unable to add user.')));
@@ -81,7 +76,7 @@ export const AddUserDialog = reduxForm<
             required={true}
             validate={[required]}
           />
-          <RoleGroup types={['call']} />
+          <RoleGroup types={roleTypes} />
           <ExpirationTimeGroup />
         </FormContainer>
       </Modal.Body>

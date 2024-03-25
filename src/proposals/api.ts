@@ -123,6 +123,9 @@ export const updateProposalProjectDetails = (data, uuid) =>
 export const submitProposal = (uuid) =>
   post<Proposal>(`/proposal-proposals/${uuid}/submit/`);
 
+export const switchProposalToTeamVerification = (uuid) =>
+  post<Proposal>(`/proposal-proposals/${uuid}/switch_to_team_verification/`);
+
 export const createProposalResource = (data, proposalUuid) =>
   post<Proposal>(`/proposal-proposals/${proposalUuid}/resources/`, data);
 

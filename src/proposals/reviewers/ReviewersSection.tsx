@@ -1,33 +1,33 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { GenericInvitationContext } from '@waldur/invitations/types';
 import {
   StepCardTabs,
   TabSpec,
 } from '@waldur/marketplace/deploy/steps/StepCardTabs';
-import { Call } from '@waldur/proposals/types';
+import { PermissionsLogList } from '@waldur/permissions/PermissionsLogList';
 
-import { CallInvitationsList } from './CallInvitationsList';
-import { CallPermissionsLogList } from './CallPermissionsLogList';
-import { CallUsersList } from './CallUsersList';
+import { InvitationsList } from './InvitationsList';
+import { UsersList } from './UsersList';
 
-const tabs: TabSpec<{ call: Call }>[] = [
-  { title: translate('Users'), key: 'users', component: CallUsersList },
+const tabs: TabSpec<GenericInvitationContext>[] = [
+  { title: translate('Users'), key: 'users', component: UsersList },
   {
     title: translate('Permission log'),
     key: 'permissions',
-    component: CallPermissionsLogList,
+    component: PermissionsLogList,
   },
   {
     title: translate('Invitations'),
     key: 'invitations',
-    component: CallInvitationsList,
+    component: InvitationsList,
   },
 ];
 
-export const CallReviewersSection = ({ call }) => {
-  const [tab, setTab] = useState<TabSpec<{ call: Call }>>(tabs[0]);
+export const ReviewersSection: FC<GenericInvitationContext> = (props) => {
+  const [tab, setTab] = useState<TabSpec<GenericInvitationContext>>(tabs[0]);
 
   return (
     <Card className="mb-7" id="reviewers">
@@ -40,7 +40,7 @@ export const CallReviewersSection = ({ call }) => {
         </div>
       </Card.Header>
       <Card.Body className="p-0 min-h-550px">
-        {React.createElement(tab.component, { call })}
+        {React.createElement(tab.component, props)}
       </Card.Body>
     </Card>
   );

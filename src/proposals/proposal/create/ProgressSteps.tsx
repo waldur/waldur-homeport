@@ -15,7 +15,7 @@ const getSteps = (proposal: Proposal) => {
   const steps: Array<{ label; description?; completed; color? }> = [];
   steps.push({
     label: translate('Submission'),
-    completed: proposal.state === 'submitted',
+    completed: proposal.state === 'team_verification',
   });
   steps.push(
     {

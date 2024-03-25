@@ -83,6 +83,10 @@ export const getProposalStateOptions = () =>
       value: 'draft',
     },
     {
+      label: translate('Team verification'),
+      value: 'team_verification',
+    },
+    {
       label: translate('Submitted'),
       value: 'submitted',
     },

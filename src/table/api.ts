@@ -42,7 +42,9 @@ export function createFetcher(
   options?: AxiosRequestConfig,
 ): Fetcher {
   return (request: TableRequest) => {
-    const url = `${ENV.apiEndpoint}api/${endpoint}/`;
+    const url = endpoint.startsWith('http')
+      ? endpoint
+      : `${ENV.apiEndpoint}api/${endpoint}/`;
     const params = {
       page: request.currentPage,
       page_size: request.pageSize,

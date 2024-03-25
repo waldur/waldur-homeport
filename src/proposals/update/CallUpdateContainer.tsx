@@ -10,13 +10,13 @@ import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { getProtectedCall } from '../api';
+import { ReviewersSection } from '../reviewers/ReviewersSection';
 
 import { CallUpdateBar } from './CallUpdateBar';
 import { CallUpdateHero } from './CallUpdateHero';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
-import { CallReviewersSection } from './reviewers/CallReviewersSection';
 import { CallRoundsList } from './rounds/CallRoundsList';
 
 export const CallUpdateContainer: FunctionComponent = () => {
@@ -26,7 +26,13 @@ export const CallUpdateContainer: FunctionComponent = () => {
     params: { call_uuid },
   } = useCurrentStateAndParams();
 
-  const { data, isLoading, error, refetch, isRefetching } = useQuery(
+  const {
+    data: call,
+    isLoading,
+    error,
+    refetch,
+    isRefetching,
+  } = useQuery(
     ['CallUpdateContainer', call_uuid],
     () => getProtectedCall(call_uuid),
     {
@@ -34,27 +40,27 @@ export const CallUpdateContainer: FunctionComponent = () => {
     },
   );
 
-  useTitle(data ? data.name : translate('Call update'));
+  useTitle(call ? call.name : translate('Call update'));
 
   return isLoading ? (
     <LoadingSpinner />
   ) : error ? (
     <h3>{translate('Unable to load call details.')}</h3>
-  ) : data ? (
+  ) : call ? (
     <PageBarProvider>
       <div className="m-b">
-        <CallUpdateHero call={data} refetch={refetch} />
-        <CallUpdateBar call={data} />
+        <CallUpdateHero call={call} refetch={refetch} />
+        <CallUpdateBar call={call} />
         <div className="container-xxl py-10">
-          <CallRoundsList call={data} />
+          <CallRoundsList call={call} />
           <CallGeneralSection
-            call={data}
+            call={call}
             refetch={refetch}
             loading={isRefetching}
           />
-          <CallDocumentsSection call={data} refetch={refetch} />
-          <CallReviewersSection call={data} />
-          <CallOfferingsSection call={data} />
+          <CallDocumentsSection call={call} refetch={refetch} />
+          <ReviewersSection scope={call} roleTypes={['call']} />
+          <CallOfferingsSection call={call} />
         </div>
       </div>
     </PageBarProvider>

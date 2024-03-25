@@ -12,7 +12,7 @@ import { useTitle } from '@waldur/navigation/title';
 import {
   attachDocument,
   getProposal,
-  submitProposal,
+  switchProposalToTeamVerification,
   updateProposalProjectDetails,
 } from '@waldur/proposals/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -103,10 +103,14 @@ export const ProposalCompletionPage = reduxForm({
     [proposal_uuid, dispatch],
   );
 
-  const submitProposalCallback = useCallback(() => {
-    return submitProposal(proposal_uuid)
+  const switchToTeamCallback = useCallback(() => {
+    return switchProposalToTeamVerification(proposal_uuid)
       .then(() => {
-        dispatch(showSuccess(translate('Proposal has been submitted')));
+        dispatch(
+          showSuccess(
+            translate('Proposal has been switched to team verification step.'),
+          ),
+        );
       })
       .catch((error) => {
         dispatch(showErrorResponse(error, translate('Something went wrong')));
@@ -122,7 +126,7 @@ export const ProposalCompletionPage = reduxForm({
   return (
     <>
       <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
-      {proposal.state === 'submitted' ? (
+      {proposal.state === 'team_verification' ? (
         <ProposalTeam proposal={proposal} />
       ) : (
         <form
@@ -138,9 +142,9 @@ export const ProposalCompletionPage = reduxForm({
 
           {/* Sidebar */}
           <ProposalSidebar
-            submitProposal={submitProposalCallback}
+            switchToTeam={switchToTeamCallback}
             submitting={props.submitting}
-            canSubmit={proposal.state === 'draft'}
+            canSwitchToTeam={proposal.state === 'draft'}
           />
         </form>
       )}
