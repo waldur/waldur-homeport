@@ -9,9 +9,9 @@ export const ProposalTeam = ({ proposal }) => {
     <div className="d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10">
       <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
         <ProposalHeader proposal={proposal} />
+        <ReviewersSection scope={proposal} roleTypes={['proposal']} />
         <ProjectDetailsSummary proposal={proposal} />
         <ResourceRequestsSummary proposal={proposal} />
-        <ReviewersSection scope={proposal} roleTypes={['proposal']} />
       </div>
     </div>
   );
