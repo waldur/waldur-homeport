@@ -8002,6 +8002,10 @@ msgstr ""
 msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
+#: src/proposals/proposal/create/ProposalSidebar.tsx
+msgid "Please make sure that  project proposal details and resource requests are finalised. During team verification they will not be editable."
+msgstr ""
+
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "Please make sure you know what you are doing and set to 10 minutes if unsure."
 msgstr ""
@@ -8637,7 +8641,7 @@ msgid "Proposal created successfully"
 msgstr ""
 
 #: src/proposals/proposal/create/ProposalCompletionPage.tsx
-msgid "Proposal has been submitted"
+msgid "Proposal has been switched to team verification step."
 msgstr ""
 
 #: src/proposals/proposal/create/ProjectDetailsSummary.tsx
@@ -11693,6 +11697,10 @@ msgstr ""
 msgid "Team size"
 msgstr ""
 
+#: src/proposals/utils.ts
+msgid "Team verification"
+msgstr ""
+
 #: src/marketplace/offerings/ArticleCodeField.tsx
 msgid "Technical code used by accounting software."
 msgstr ""
@@ -14593,10 +14601,6 @@ msgstr ""
 
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 msgid "When"
-msgstr ""
-
-#: src/proposals/proposal/create/ProposalSidebar.tsx
-msgid "When you proceed to team verification, you would be unable to edit project details or resource requests and they are going to be available for editing only during review phase."
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
