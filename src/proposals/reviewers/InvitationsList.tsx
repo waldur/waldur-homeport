@@ -8,11 +8,14 @@ import { InvitationCancelButton } from '@waldur/invitations/actions/InvitationCa
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { RoleField } from '@waldur/invitations/RoleField';
+import { GenericInvitationContext } from '@waldur/invitations/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-export const CallInvitationsList: FunctionComponent<{ call }> = (props) => {
-  const filter = useMemo(() => ({ scope: props.call.url }), [props.call]);
+export const InvitationsList: FunctionComponent<GenericInvitationContext> = (
+  props,
+) => {
+  const filter = useMemo(() => ({ scope: props.scope.url }), [props.scope]);
   const tableProps = useTable({
     table: 'user-invitations',
     fetchData: createFetcher('user-invitations'),
@@ -65,13 +68,7 @@ export const CallInvitationsList: FunctionComponent<{ call }> = (props) => {
       )}
       title={translate('Invitations')}
       verboseName={translate('invitations')}
-      actions={
-        <InvitationCreateButton
-          scope={props.call}
-          roleTypes={['call']}
-          refetch={tableProps.fetch}
-        />
-      }
+      actions={<InvitationCreateButton {...props} refetch={tableProps.fetch} />}
       hasQuery={true}
       expandableRow={InvitationExpandableRow}
     />

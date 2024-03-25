@@ -16,3 +16,7 @@ export interface Invitation {
   expires?: string;
   created?: string;
 }
+export interface GenericInvitationContext {
+  scope?: { url: string };
+  roleTypes: RoleType[];
+}

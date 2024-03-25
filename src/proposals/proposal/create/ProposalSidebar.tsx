@@ -6,8 +6,8 @@ import { translate } from '@waldur/i18n';
 import { SubmitButton } from './SubmitButton';
 
 interface CompletionPageSidebarProps {
-  canSubmit: boolean;
-  submitProposal(): void;
+  canSwitchToTeam: boolean;
+  switchToTeam(): void;
   submitting: boolean;
 }
 
@@ -24,13 +24,13 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
     >
       <Card className="card-flush border-0">
         <Card.Body>
-          {props.canSubmit && (
+          {props.canSwitchToTeam && (
             <>
               <div className="d-flex justify-content-between mt-5">
                 <Button
                   size="sm"
                   variant="danger"
-                  onClick={props.submitProposal}
+                  onClick={props.switchToTeam}
                   className="w-100"
                 >
                   {translate('To team verification')}
@@ -39,7 +39,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
 
               <p className="text-center fs-9 mt-2 mb-0">
                 {translate(
-                  'When you proceed to team verification, you would be unable to edit project details or resource requests and they are going to be available for editing only during review phase.',
+                  'Please make sure that  project proposal details and resource requests are finalised. During team verification they will not be editable.',
                 )}
               </p>
 

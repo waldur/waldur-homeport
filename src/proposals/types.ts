@@ -11,6 +11,7 @@ export type CallState = 'active' | 'draft' | 'archived';
 
 export type ProposalState =
   | 'draft'
+  | 'team_verification'
   | 'submitted'
   | 'in_review'
   | 'in_revision'

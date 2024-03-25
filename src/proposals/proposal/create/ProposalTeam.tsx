@@ -1,3 +1,5 @@
+import { ReviewersSection } from '@waldur/proposals/reviewers/ReviewersSection';
+
 import { ProjectDetailsSummary } from './ProjectDetailsSummary';
 import { ProposalHeader } from './ProposalHeader';
 import { ResourceRequestsSummary } from './ResourceRequestsSummary';
@@ -9,6 +11,7 @@ export const ProposalTeam = ({ proposal }) => {
         <ProposalHeader proposal={proposal} />
         <ProjectDetailsSummary proposal={proposal} />
         <ResourceRequestsSummary proposal={proposal} />
+        <ReviewersSection scope={proposal} roleTypes={['proposal']} />
       </div>
     </div>
   );

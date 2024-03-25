@@ -1,5 +1,7 @@
-import { Role, RoleType } from '@waldur/permissions/types';
+import { Role } from '@waldur/permissions/types';
 import { Customer, Project, User } from '@waldur/workspace/types';
+
+import { GenericInvitationContext } from '../types';
 
 export interface UserDetails {
   full_name: string;
@@ -13,13 +15,11 @@ export interface StoredUserDetails {
   details: UserDetails;
 }
 
-export interface InvitationContext {
+export interface InvitationContext extends GenericInvitationContext {
   user: User;
   customer: Customer;
   project?: Project;
   refetch?(): void;
-  scope?;
-  roleTypes: RoleType[];
 }
 
 export interface GroupInviteRow {
