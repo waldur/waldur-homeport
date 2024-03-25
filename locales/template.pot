@@ -670,9 +670,7 @@ msgstr ""
 msgid "Allocated offerings"
 msgstr ""
 
-#: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
-#: src/proposals/round/allocation/RoundAllocationSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Allocation"
 msgstr ""
@@ -692,6 +690,8 @@ msgid "Allocation pools"
 msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/allocation/RoundAllocationSection.tsx
 msgid "Allocation strategy"
 msgstr ""
 
@@ -9733,9 +9733,7 @@ msgstr ""
 
 #: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
-#: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/review/EditRoundReviewDialog.tsx
-#: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Review"
 msgstr ""
@@ -9787,6 +9785,7 @@ msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
+#: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
@@ -11388,11 +11387,14 @@ msgid "Subject"
 msgstr ""
 
 #: src/proposals/proposal/create/ProgressSteps.tsx
-#: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
-#: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Submission"
+msgstr ""
+
+#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/submission/RoundSubmissionSection.tsx
+msgid "Submission strategy"
 msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
