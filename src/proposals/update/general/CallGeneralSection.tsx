@@ -4,6 +4,8 @@ import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
+import { RoleEnum } from '@waldur/permissions/enums';
+import { formatRole } from '@waldur/permissions/utils';
 import { Call } from '@waldur/proposals/types';
 
 import { EditGeneralInfoButton } from './EditGeneralInfoButton';
@@ -74,6 +76,23 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                     call={props.call}
                     name="reference_code"
                     title={translate('Edit reference code')}
+                    refetch={props.refetch}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="col-md-3">{translate('Default project role')}</td>
+              <td className="col-md-9">
+                {formatRole(props.call.default_project_role_name) ||
+                  formatRole(RoleEnum.PROJECT_ADMIN)}
+              </td>
+              <td className="row-actions">
+                <div>
+                  <EditGeneralInfoButton
+                    call={props.call}
+                    name="default_project_role"
+                    title={translate('Edit default project role')}
                     refetch={props.refetch}
                   />
                 </div>

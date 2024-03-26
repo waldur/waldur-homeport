@@ -48,6 +48,8 @@ export interface Round {
 }
 
 export interface Call {
+  default_project_role: string;
+  default_project_role_name: string;
   url: string;
   uuid: string;
   created: string;

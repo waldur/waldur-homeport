@@ -2967,6 +2967,11 @@ msgstr ""
 msgid "Default offering issue type"
 msgstr ""
 
+#: src/proposals/update/general/CallGeneralSection.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
+msgid "Default project role"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
 msgid "Default resource termination offset in days"
 msgstr ""
@@ -3583,6 +3588,10 @@ msgstr ""
 
 #: src/customer/team/EditUserDialog.tsx
 msgid "Edit customer member"
+msgstr ""
+
+#: src/proposals/update/general/CallGeneralSection.tsx
+msgid "Edit default project role"
 msgstr ""
 
 #: src/proposals/update/general/CallGeneralSection.tsx
