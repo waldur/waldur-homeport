@@ -39,12 +39,12 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
 
               <p className="text-center fs-9 mt-2 mb-0">
                 {translate(
-                  'Please make sure that  project proposal details and resource requests are finalised. During team verification they will not be editable.',
+                  'Please make sure that project proposal details and resource requests are finalised. During team verification they will not be editable.',
                 )}
               </p>
 
               <SubmitButton
-                title={translate('Update project details')}
+                title={translate('Save draft')}
                 className="w-100"
                 loading={props.submitting}
               />

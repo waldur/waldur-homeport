@@ -8014,7 +8014,7 @@ msgid "Please give us a moment to validate your invitation."
 msgstr ""
 
 #: src/proposals/proposal/create/ProposalSidebar.tsx
-msgid "Please make sure that  project proposal details and resource requests are finalised. During team verification they will not be editable."
+msgid "Please make sure that project proposal details and resource requests are finalised. During team verification they will not be editable."
 msgstr ""
 
 #: src/user/api-key/TokenLifetimeField.tsx
@@ -10122,6 +10122,10 @@ msgstr ""
 #: src/user/api-key/UserEditTokenContainer.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Save changes"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalSidebar.tsx
+msgid "Save draft"
 msgstr ""
 
 #: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
@@ -13904,7 +13908,6 @@ msgid "Update project"
 msgstr ""
 
 #: src/project/ProjectUpdateForm.tsx
-#: src/proposals/proposal/create/ProposalSidebar.tsx
 msgid "Update project details"
 msgstr ""
 
