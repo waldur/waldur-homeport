@@ -10,7 +10,7 @@ export const parseDate = (value: DateInput) => {
   } else if (typeof value === 'undefined' || value === null) {
     return DateTime.now();
   } else if (typeof value === 'string') {
-    return DateTime.fromISO(value);
+    return DateTime.fromISO(value, { zone: DateTime.local().zone });
   } else if (value instanceof Date) {
     return DateTime.fromJSDate(value);
   } else if (typeof value === 'number') {
