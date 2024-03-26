@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { Round } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OFFERING_REQUESTS_FILTER_FORM_ID } from '../constants';
 import { formatCallOfferingState } from '../utils';
@@ -22,9 +23,13 @@ interface OfferingRequestsListProps {
 }
 
 const filtersSelctor = createSelector(
+  getCustomer,
   getFormValues(OFFERING_REQUESTS_FILTER_FORM_ID),
-  (filters: any) => {
+  (customer, filters: any) => {
     const result: Record<string, any> = {};
+    if (customer) {
+      result.provider_uuid = customer.uuid;
+    }
     if (filters?.state) {
       result.state = filters.state.map((option) => option.value);
     }
