@@ -53,6 +53,9 @@ export const FormAbstractVolumeStep = (
 
   const exceeds = useCallback(
     (value: number) => {
+      if (limit === -1) {
+        return;
+      }
       if ((value || 0) + (usage || 0) > limit) {
         return translate('Quota usage exceeds available limit.');
       }
