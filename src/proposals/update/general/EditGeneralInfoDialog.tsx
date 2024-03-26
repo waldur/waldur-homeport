@@ -2,8 +2,9 @@ import { useCallback } from 'react';
 import { connect } from 'react-redux';
 import { SubmissionError, reduxForm } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { required } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
+import { SelectField, SubmitButton } from '@waldur/form';
 import { FormContainer } from '@waldur/form/FormContainer';
 import { MarkdownField } from '@waldur/form/MarkdownField';
 import { StringField } from '@waldur/form/StringField';
@@ -11,6 +12,9 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { RoleEnum } from '@waldur/permissions/enums';
+import { Role } from '@waldur/permissions/types';
+import { getProjectRoles } from '@waldur/permissions/utils';
 import { updateCall } from '@waldur/proposals/api';
 import { EDIT_CALL_GENERAL_FORM_ID } from '@waldur/proposals/constants';
 import { EditCallProps } from '@waldur/proposals/types';
@@ -19,6 +23,7 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 interface FormData {
   name: string;
   description: string;
+  default_project_role: Role;
 }
 
 export const EditGeneralInfoDialog = connect<
@@ -26,14 +31,26 @@ export const EditGeneralInfoDialog = connect<
   {},
   { resolve: EditCallProps }
 >((_, ownProps) => ({
-  initialValues: ownProps.resolve.call,
+  initialValues: {
+    ...ownProps.resolve.call,
+    default_project_role:
+      ENV.roles.find(
+        (role) => role.name == ownProps.resolve.call.default_project_role_name,
+      ) || ENV.roles.find((role) => role.name == RoleEnum.PROJECT_ADMIN),
+  },
 }))(
   reduxForm<FormData, { resolve: EditCallProps }>({
     form: EDIT_CALL_GENERAL_FORM_ID,
   })((props) => {
     const processRequest = useCallback(
       (values: FormData, dispatch) => {
-        return updateCall(values, props.resolve.call.uuid)
+        return updateCall(
+          {
+            ...values,
+            default_project_role: values.default_project_role?.uuid,
+          },
+          props.resolve.call.uuid,
+        )
           .then(() => {
             props.resolve.refetch();
             dispatch(showSuccess(translate('The call has been updated.')));
@@ -87,6 +104,15 @@ export const EditGeneralInfoDialog = connect<
                 label={translate('Reference code')}
                 name="reference_code"
                 required={false}
+              />
+            )}
+            {props.resolve.name === 'default_project_role' && (
+              <SelectField
+                label={translate('Default project role')}
+                name="default_project_role"
+                options={getProjectRoles()}
+                getOptionLabel={(role: Role) => role.description || role.name}
+                getOptionValue={({ uuid }) => uuid}
               />
             )}
           </FormContainer>
