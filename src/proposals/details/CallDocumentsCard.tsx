@@ -3,12 +3,7 @@ import { Card } from 'react-bootstrap';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { translate } from '@waldur/i18n';
 
-const dummyLinks = [
-  { url: '#', label: 'MyFirstDocument.pdf' },
-  { url: '#', label: 'Specifications_2023call.pdf' },
-];
-
-export const CallDocumentsCard = () => {
+export const CallDocumentsCard = ({ call }) => {
   return (
     <Card id="documents" className="mb-7">
       <Card.Header>
@@ -18,9 +13,18 @@ export const CallDocumentsCard = () => {
       </Card.Header>
       <Card.Body>
         <ul>
-          {dummyLinks.map((link, i) => (
+          {call.documents.map((document, i) => (
             <li key={i}>
-              <ExternalLink url={link.url} label={link.label} iconless />
+              <ExternalLink
+                url={document.file}
+                label={decodeURIComponent(
+                  document.file
+                    .split('/')
+                    .pop()
+                    .replace(/_[^_]+\./, '.'),
+                )}
+                iconless
+              />
             </li>
           ))}
         </ul>
