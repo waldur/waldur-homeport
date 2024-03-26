@@ -27,7 +27,7 @@ export const PublicCallDetails: FunctionComponent<PublicCallDetailsProps> = ({
         <div className="container-xxl py-10">
           <CallDetailsCard call={call} />
           <CallDescriptionCard call={call} />
-          <CallDocumentsCard />
+          <CallDocumentsCard call={call} />
           <CallOfferingsCard call={call} />
         </div>
       </div>
