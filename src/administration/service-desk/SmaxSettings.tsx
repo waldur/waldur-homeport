@@ -41,6 +41,11 @@ export const SmaxSettings = () => (
       label={translate('Creation source field')}
       maxLength={150}
     />
+    <StringField
+      name="SMAX_REQUESTS_OFFERING"
+      label={translate('Requests offering code for all issues')}
+      maxLength={150}
+    />
     <AwesomeCheckboxField
       hideLabel
       name="SMAX_VERIFY_SSL"
