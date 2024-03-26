@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from 'axios';
+import Axios, { AxiosRequestConfig } from 'axios';
 
 import { ENV } from '@waldur/configs/default';
 import {
@@ -156,3 +156,6 @@ export const attachDocument = (proposal_uuid, file) =>
     fixURL(`/proposal-proposals/${proposal_uuid}/attach_document/`),
     { file },
   );
+
+export const deleteRequestedOffering = (requestedOfferingURL: string) =>
+  Axios.delete(requestedOfferingURL);
