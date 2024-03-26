@@ -13,7 +13,7 @@ export const ProposalTeam = ({ proposal }) => {
         <TeamSection
           scope={proposal}
           roleTypes={['proposal']}
-          title={translate('Team')}
+          title={translate('Proposed project team')}
         />
         <ProjectDetailsSummary proposal={proposal} />
         <ResourceRequestsSummary proposal={proposal} />

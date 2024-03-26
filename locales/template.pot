@@ -8734,6 +8734,10 @@ msgstr ""
 msgid "Proposed postal code: {value}."
 msgstr ""
 
+#: src/proposals/proposal/create/ProposalTeam.tsx
+msgid "Proposed project team"
+msgstr ""
+
 #: src/customer/details/CustomerErrorDialog.tsx
 msgid "Proposed registry code: {value}."
 msgstr ""
@@ -11688,7 +11692,6 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/project/ProjectUsersBadge.tsx
 #: src/project/routes.ts
-#: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Team"
 msgstr ""
 
