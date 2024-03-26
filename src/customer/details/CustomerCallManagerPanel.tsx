@@ -104,7 +104,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
           value={customer.call_managing_organization_uuid ? true : false}
           onChange={toggleCallManager}
           disabled={
-            !(
+            !!(
               infoUuid ||
               customer.call_managing_organization_uuid ||
               loadingToggle
