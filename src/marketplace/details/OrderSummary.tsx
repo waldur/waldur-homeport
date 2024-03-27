@@ -25,7 +25,7 @@ import { formatOrderForCreate, formatOrderForUpdate } from './utils';
 
 export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
   return (
-    <div className="order-summary bg-gray-100 mb-10 fs-8 fw-bold">
+    <div className="block-summary bg-gray-100 mb-10 fs-8 fw-bold">
       {props.extraComponent ? createElement(props.extraComponent, props) : null}
       {props.formData && props.formData.plan && (
         <OrderSummaryPlanRows

@@ -6,8 +6,8 @@ import { formValueSelector } from 'redux-form';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Tip } from '@waldur/core/Tooltip';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
@@ -107,7 +107,7 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Security groups')}
       step={props.step}
       id={props.id}
@@ -172,6 +172,6 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
         fieldType="checkbox"
         fieldName="attributes.security_groups"
       />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

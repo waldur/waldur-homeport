@@ -6,14 +6,13 @@ import { createSelector } from 'reselect';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
-import { getPublicCall } from '@waldur/proposals/api';
 import {
-  Proposal,
-  ProposalFormStepProps,
-  ProposalResource,
-} from '@waldur/proposals/types';
+  VStepperFormStepCard,
+  VStepperFormStepProps,
+} from '@waldur/form/VStepperFormStep';
+import { translate } from '@waldur/i18n';
+import { getPublicCall } from '@waldur/proposals/api';
+import { Proposal, ProposalResource } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
@@ -31,8 +30,9 @@ const mapPropsToFilter = createSelector(
     return result;
   },
 );
-export const FormResourceRequestsStep = (props: ProposalFormStepProps) => {
+export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params.proposal;
+  const readOnlyMode = props.params.readOnly;
   const {
     data: call,
     isLoading,
@@ -64,18 +64,20 @@ export const FormResourceRequestsStep = (props: ProposalFormStepProps) => {
   });
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={props.title}
       step={props.step}
       id={props.id}
       completed={props.observed}
       actions={
-        <div className="d-flex justify-content-end flex-grow-1">
-          <AddResourceButton
-            proposal={props.params.proposal}
-            refetch={tableProps.fetch}
-          />
-        </div>
+        !readOnlyMode ? (
+          <div className="d-flex justify-content-end flex-grow-1">
+            <AddResourceButton
+              proposal={props.params.proposal}
+              refetch={tableProps.fetch}
+            />
+          </div>
+        ) : null
       }
       refetch={tableProps.fetch}
       refetching={tableProps.loading}
@@ -111,14 +113,16 @@ export const FormResourceRequestsStep = (props: ProposalFormStepProps) => {
         }
         hasActionBar={false}
         fullWidth
-        hoverableRow={({ row, fetch }) => (
-          <ResourceRequestItemActions
-            row={row}
-            proposal={proposal}
-            refetch={fetch}
-          />
-        )}
+        hoverableRow={({ row, fetch }) =>
+          !readOnlyMode ? (
+            <ResourceRequestItemActions
+              row={row}
+              proposal={proposal}
+              refetch={fetch}
+            />
+          ) : null
+        }
       />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

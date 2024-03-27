@@ -5,9 +5,9 @@ import { Field } from 'redux-form';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { BoxRadioField } from '@waldur/marketplace/deploy/steps/BoxRadioField';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import {
   StepCardTabs,
   TabSpec,
@@ -60,7 +60,7 @@ export const FormImageStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Image')}
       step={props.step}
       id={props.id}
@@ -91,6 +91,6 @@ export const FormImageStep = (props: FormStepProps) => {
           onChange={onChangeImage}
         />
       )}
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

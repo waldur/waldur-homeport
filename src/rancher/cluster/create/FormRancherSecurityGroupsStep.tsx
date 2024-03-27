@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getUUID } from '@waldur/core/utils';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { loadSecurityGroups } from '@waldur/openstack/api';
@@ -41,7 +41,7 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
       offering={{ ...props.offering, scope_uuid: getUUID(tenant) }}
     />
   ) : (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Security groups')}
       step={props.step}
       id={props.id}
@@ -52,6 +52,6 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
       <StepCardPlaceholder>
         {translate('Please select a tenant first')}
       </StepCardPlaceholder>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

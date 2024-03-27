@@ -91,7 +91,7 @@ export const CheckoutSummary = ({
   return (
     <>
       {formIsValid && (
-        <div className="order-summary bg-gray-100 mb-10 fs-8 fw-bold">
+        <div className="block-summary bg-gray-100 mb-10 fs-8 fw-bold">
           {formAttributesData.name && (
             <CheckoutPricingRow
               label={translate('VM name')}

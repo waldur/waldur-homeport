@@ -13,6 +13,7 @@ import { reduxForm } from 'redux-form';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { parseDate } from '@waldur/core/dateUtils';
+import { VStepperForm } from '@waldur/form/VStepperForm';
 import { translate } from '@waldur/i18n';
 import { getOrderFormSteps } from '@waldur/marketplace/common/registry';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
@@ -248,9 +249,21 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   }
 
   return (
-    <form className="form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10">
-      {/* Steps */}
-      <div className="deploy-view-steps d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
+    <>
+      <VStepperForm
+        form={FORM_ID}
+        steps={formSteps}
+        sidebar={(sidebarProps) => (
+          <DeployPageSidebar
+            {...sidebarProps}
+            offering={selectedOffering}
+            steps={formSteps}
+            completedSteps={completedSteps}
+            updateMode={props.updateMode}
+            cartItem={props.cartItem}
+          />
+        )}
+      >
         <div className="d-flex justify-content-between align-items-center">
           <h1 className="mb-0">
             {isEdit ? translate('Edit') : translate('Add')}{' '}
@@ -274,16 +287,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
             />
           </div>
         ))}
-      </div>
-
-      {/* Sidebar */}
-      <DeployPageSidebar
-        offering={selectedOffering}
-        steps={formSteps}
-        completedSteps={completedSteps}
-        updateMode={props.updateMode}
-        cartItem={props.cartItem}
-      />
-    </form>
+      </VStepperForm>
+    </>
   );
 });

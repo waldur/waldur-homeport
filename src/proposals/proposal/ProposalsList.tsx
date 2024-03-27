@@ -13,6 +13,8 @@ import { EndingField } from '@waldur/user/proposals/EndingField';
 import { ProposalsTableFilter } from '@waldur/user/proposals/ProposalsTableFilter';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { ProposalRowActions } from '../round/proposals/ProposalRowActions';
+
 interface ProposalsListProps {
   round: Round;
 }
@@ -99,6 +101,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
       verboseName={translate('Proposals')}
       hasQuery={true}
       filters={<ProposalsTableFilter />}
+      hoverableRow={ProposalRowActions}
     />
   );
 };

@@ -4,9 +4,9 @@ import { Field } from 'redux-form';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { BoxRadioField } from '@waldur/marketplace/deploy/steps/BoxRadioField';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import {
   StepCardTabs,
   TabSpec,
@@ -69,7 +69,7 @@ export const FormTemplateStep = (props: FormStepProps) => {
   }, [props.offering, data, onChangeImage]);
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Template')}
       step={props.step}
       id={props.id}
@@ -100,6 +100,6 @@ export const FormTemplateStep = (props: FormStepProps) => {
           onChange={onChangeImage as any}
         />
       )}
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

@@ -3,9 +3,9 @@ import { Field, formValues } from 'redux-form';
 
 import { FieldError } from '@waldur/form';
 import { StaticField } from '@waldur/form/StaticField';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { maxAmount } from '@waldur/marketplace/common/utils';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 import { useVMwareLimitsLoader } from './utils';
@@ -60,7 +60,7 @@ export const FormStorageStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Storage')}
       step={props.step}
       id={props.id}
@@ -71,6 +71,6 @@ export const FormStorageStep = (props: FormStepProps) => {
     >
       <StaticDiskField limits={limits} />
       <GuestOSField />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

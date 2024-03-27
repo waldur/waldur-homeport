@@ -137,22 +137,6 @@ export interface CallOfferingFormData {
   limits?: Limits;
 }
 
-export interface ProposalCreationFormStep {
-  label: string;
-  id: string;
-  component: React.ComponentType<ProposalFormStepProps>;
-  params?: Record<string, any>;
-}
-
-export interface ProposalFormStepProps {
-  step: number;
-  id: string;
-  title?: string;
-  observed?: boolean;
-  change?(field: string, value: any): void;
-  params?: ProposalCreationFormStep['params'];
-}
-
 export interface ProposalResource {
   attributes: AttributesType;
   created_by: string;

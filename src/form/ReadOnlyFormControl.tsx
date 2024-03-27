@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, cloneElement } from 'react';
 import { Form } from 'react-bootstrap';
 
 interface ReadOnlyFormControlProps {
   label: string;
-  value: string | number;
+  value: any;
   description?: string;
   addon?: string | number;
   className?: string;
@@ -15,34 +15,55 @@ interface ReadOnlyFormControlProps {
 
 export const ReadOnlyFormControl: FunctionComponent<ReadOnlyFormControlProps> =
   (props) => {
-    const labelNode = <Form.Label>{props.label}</Form.Label>;
+    const {
+      label,
+      value,
+      description,
+      plaintext,
+      disabled,
+      className,
+      floating,
+      addon,
+      children,
+      ...rest
+    } = props;
+    const childProps = {
+      ...rest,
+      input: { name: '', value },
+      value,
+      readOnly: true,
+      disabled,
+    };
+    const labelNode = <Form.Label>{label}</Form.Label>;
 
     return (
       <div
         className={classNames(
           'mb-7',
-          props.className,
-          props.floating && 'form-floating',
-          props.addon && 'form-addon',
+          className,
+          floating && 'form-floating',
+          addon && 'form-addon',
         )}
       >
-        {!props.floating && labelNode}
-        <Form.Control
-          readOnly
-          plaintext={props.plaintext}
-          className={classNames(!props.plaintext && 'form-control-solid')}
-          defaultValue={props.value}
-          disabled={props.disabled}
-        />
-        {props.description && (
+        {!floating && labelNode}
+        {children ? (
+          cloneElement(children as any, childProps)
+        ) : (
+          <Form.Control
+            readOnly
+            plaintext={plaintext}
+            className={classNames(!plaintext && 'form-control-solid')}
+            defaultValue={value}
+            disabled={disabled}
+          />
+        )}
+        {description && (
           <Form.Text muted={true} className="mb-0">
-            {props.description}
+            {description}
           </Form.Text>
         )}
-        {props.floating && labelNode}
-        {props.addon && (
-          <span className="form-control-addon">{props.addon}</span>
-        )}
+        {floating && labelNode}
+        {addon && <span className="form-control-addon">{addon}</span>}
       </div>
     );
   };

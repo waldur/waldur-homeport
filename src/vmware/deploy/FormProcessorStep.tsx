@@ -3,13 +3,13 @@ import { Field } from 'redux-form';
 
 import { FormGroup } from '@waldur/form';
 import { SliderNumberField } from '@waldur/form/SliderNumberField';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import {
   formatIntField,
   maxAmount,
   parseIntField,
 } from '@waldur/marketplace/common/utils';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 import { minOne, useVMwareLimitsLoader } from './utils';
@@ -43,7 +43,7 @@ export const FormProcessorStep = (props: FormStepProps) => {
   }, [limits.max_cores_per_socket]);
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Processor')}
       step={props.step}
       id={props.id}
@@ -84,6 +84,6 @@ export const FormProcessorStep = (props: FormStepProps) => {
           max={limits.max_cores_per_socket || limits.max_cpu}
         />
       </Field>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

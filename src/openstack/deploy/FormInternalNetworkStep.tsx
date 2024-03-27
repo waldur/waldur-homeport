@@ -1,8 +1,8 @@
 import { Field } from 'redux-form';
 
 import { FormGroup } from '@waldur/form';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 import { OpenStackAllocationPool } from '../OpenStackAllocationPool';
@@ -11,7 +11,7 @@ import { validateSubnetPrivateCIDR } from '../utils';
 
 export const FormInternalNetworkStep = (props: FormStepProps) => {
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Internal network')}
       step={props.step}
       id={props.id}
@@ -34,6 +34,6 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
       >
         <OpenStackAllocationPool />
       </Field>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

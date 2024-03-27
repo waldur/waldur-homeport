@@ -4,8 +4,8 @@ import { Field } from 'redux-form';
 import { getNameFieldValidators } from '@waldur/core/validators';
 import { FormGroup, StringField, TextField } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 
 import { FormStepProps } from '../types';
 
@@ -32,7 +32,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
   }
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Final configuration')}
       step={props.step}
       id={props.id}
@@ -71,6 +71,6 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
       >
         <DateField {...dateFieldProps} />
       </Field>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

@@ -6,6 +6,28 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 
+export interface VStepperFormStep<T = VStepperFormStepProps> {
+  label: string;
+  id: string;
+  component: React.ComponentType<T>;
+  params?: Record<string, any>;
+  fields?: Array<string>;
+  required?: boolean;
+  requiredFields?: Array<string>;
+  isActive?: (data?: any) => boolean;
+}
+
+export interface VStepperFormStepProps {
+  step?: number;
+  id: string;
+  title?: string;
+  observed?: boolean;
+  required?: boolean;
+  disabled?: boolean;
+  change?(field: string, value: any): void;
+  params?: VStepperFormStep['params'];
+}
+
 interface StepCardProps {
   title: string;
   helpText?: string;
@@ -21,12 +43,9 @@ interface StepCardProps {
   refetching?: boolean;
 }
 
-export const StepCard: FC<StepCardProps> = (props) => {
+export const VStepperFormStepCard: FC<StepCardProps> = (props) => {
   return (
-    <Card
-      className={'deploy-step-card card-flush ' + props.className}
-      id={props.id}
-    >
+    <Card className={'step-card card-flush ' + props.className} id={props.id}>
       <Card.Header className="ps-5">
         <div className="d-flex align-items-center me-2">
           <FormCheck className="form-check form-check-custom form-check-sm me-6">

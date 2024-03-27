@@ -6,8 +6,8 @@ import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormGroup, SelectField } from '@waldur/form';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
@@ -31,7 +31,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
   }, [data]);
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Network')}
       step={props.step}
       id={props.id}
@@ -69,6 +69,6 @@ export const FormNetworkStep = (props: FormStepProps) => {
           {translate('Please select a tenant first')}
         </StepCardPlaceholder>
       )}
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

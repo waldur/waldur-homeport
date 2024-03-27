@@ -26,9 +26,11 @@ export const ManagementMenu = () => {
           state="organization.dashboard"
           params={{ uuid: customer.uuid }}
           activeState={
-            // The following states will highlight the other menu items ("Add resource")
-            ['marketplace-offering-customer'].some((name) =>
-              state.name.includes(name),
+            // The following states will highlight the other menu items ("Add resource", "Call management")
+            ['marketplace-offering-customer', 'protected-call'].some(
+              (name) =>
+                state.name.includes(name) ||
+                String(state.parent).includes(name),
             )
               ? undefined
               : 'organization'

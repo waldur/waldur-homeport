@@ -2,8 +2,8 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import {
   StepCardTabs,
   TabSpec,
@@ -67,7 +67,7 @@ export const FormFlavorStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Flavor')}
       step={props.step}
       id={props.id}
@@ -116,6 +116,6 @@ export const FormFlavorStep = (props: FormStepProps) => {
         fieldName="attributes.flavor"
         validate={[required, exceeds]}
       />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

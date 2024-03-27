@@ -1,12 +1,12 @@
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 
 import { FormStepProps } from '../types';
 
 export const FormProjectStep = (props: FormStepProps) => {
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Project')}
       step={props.step}
       id={props.id}
@@ -15,6 +15,6 @@ export const FormProjectStep = (props: FormStepProps) => {
       required={props.required}
     >
       <ProjectField hideLabel />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

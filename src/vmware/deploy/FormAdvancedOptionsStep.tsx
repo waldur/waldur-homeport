@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 
 import { ENV } from '@waldur/configs/default';
 import { FormContainer, SelectField } from '@waldur/form';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 import { loadVMwareAdvancedOptions } from '../api';
@@ -24,7 +24,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Advanced options')}
       step={props.step}
       id={props.id}
@@ -70,6 +70,6 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
           )}
         </FormContainer>
       )}
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

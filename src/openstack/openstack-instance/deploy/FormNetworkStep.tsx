@@ -5,8 +5,8 @@ import { Field, FieldArray } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { SelectField } from '@waldur/form';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { loadFloatingIps, loadSubnets } from '@waldur/openstack/api';
@@ -143,7 +143,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Network')}
       step={props.step}
       id={props.id}
@@ -167,6 +167,6 @@ export const FormNetworkStep = (props: FormStepProps) => {
         component={renderNetworkRows}
         {...data}
       />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

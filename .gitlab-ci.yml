@@ -55,6 +55,23 @@ Run linters:
     - yarn format:check
     - yarn lint:check
 
+Run code duplication detection:
+  stage: test
+  interruptible: true
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+    - if: '$CI_COMMIT_BRANCH == "master"'
+    # If event is related to a created merge request
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      changes:
+        - src/**/*
+  script:
+    - npm install -g jscpd
+    - echo "limit to proposals only for now"
+    - npx jscpd  src/proposals --exitCode 1 -r consoleFull --pattern "**/*.scss"
+
 Run jest tests:
   stage: test
   interruptible: true

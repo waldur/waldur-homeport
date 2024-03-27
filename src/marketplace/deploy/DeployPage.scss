@@ -1,80 +1,3 @@
-.deploy-view-steps {
-  padding-right: 300px;
-}
-
-.deploy-view-sidebar {
-  width: 350px; /* for larger screen sizes */
-  top: calc(65px + var(--kt-toolbar-height));
-  z-index: 95 !important;
-
-  .stepper {
-    &.stepper-pills {
-      &.stepper-column {
-        .stepper-item {
-          padding: 0;
-
-          &:last-child .stepper-line {
-            display: none;
-          }
-        }
-        .stepper-line {
-          width: 19px;
-        }
-      }
-      .stepper-item {
-        &.completed .stepper-label .stepper-title {
-          color: var(--bs-primary);
-        }
-        .stepper-label .stepper-title {
-          font-weight: 500;
-          font-size: 0.85rem;
-          margin-bottom: 0;
-        }
-        .stepper-label {
-          cursor: pointer;
-
-          &:hover .stepper-title {
-            text-decoration: underline;
-          }
-        }
-        .stepper-icon {
-          width: unset;
-          height: 30px;
-          background-color: transparent !important;
-
-          &.error {
-            i {
-              font-size: 22.7px;
-              color: var(--bs-active-warning);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .order-summary {
-    margin: 0 -2.25rem;
-    padding: 1.25rem 2.25rem;
-  }
-
-  .floating-submit-button {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    width: 160px;
-    right: 30px;
-    z-index: 1;
-    transition: 0.3s all;
-    opacity: 0;
-    transform: translateY(100%);
-  }
-}
-
-body:not(.toolbar-fixed) .deploy-view-sidebar {
-  top: 65px;
-}
-
 .capacity-bar {
   .progress {
     width: 150px;
@@ -94,9 +17,6 @@ body:not(.toolbar-fixed) .deploy-view-sidebar {
 }
 
 @media (max-width: 1650px) {
-  .deploy-view-sidebar {
-    width: 300px;
-  }
   .deploy-page-banner {
     padding-right: 300px;
   }
@@ -104,22 +24,7 @@ body:not(.toolbar-fixed) .deploy-view-sidebar {
 
 /* Equals to bootstrap xl screen size */
 @media (max-width: 1200px) {
-  .deploy-view-steps {
-    padding-right: 0;
-  }
-  .deploy-view-sidebar {
-    width: 100%;
-  }
   .deploy-page-banner {
     padding-right: 0;
-  }
-
-  .floating-submit-button {
-    display: block !important;
-
-    &.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 }

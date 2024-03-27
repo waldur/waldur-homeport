@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
 import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
@@ -18,7 +18,7 @@ export const FormPlanStep = (props: FormStepProps) => {
     return null;
   }
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Plan')}
       step={props.step}
       id={props.id}
@@ -33,6 +33,6 @@ export const FormPlanStep = (props: FormStepProps) => {
         <PlanDescriptionButton />
       </div>
       <PlanDetailsTable2 offering={props.offering} />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };
