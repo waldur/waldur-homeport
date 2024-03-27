@@ -21,9 +21,8 @@ interface DeployPageSidebarProps extends InjectedVStepperFormSidebarProps {
 }
 
 export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
-  const CheckoutSummaryComponent = getCheckoutSummaryComponent(
-    props.offering.type,
-  );
+  const CheckoutSummaryComponent =
+    getCheckoutSummaryComponent(props.offering.type) || OrderSummary;
 
   const errors = useSelector(formErrorsSelector);
 
@@ -32,25 +31,14 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
       {...props}
       title={translate('Progress')}
       customSummary={
-        CheckoutSummaryComponent ? (
-          <CheckoutSummaryComponent
-            offering={
-              props.updateMode
-                ? { ...props.offering, uuid: props.cartItem.uuid }
-                : props.offering
-            }
-            updateMode={props.updateMode}
-          />
-        ) : (
-          <OrderSummary
-            offering={
-              props.updateMode
-                ? { ...props.offering, uuid: props.cartItem.uuid }
-                : props.offering
-            }
-            updateMode={props.updateMode}
-          />
-        )
+        <CheckoutSummaryComponent
+          offering={
+            props.updateMode
+              ? { ...props.offering, uuid: props.cartItem.uuid }
+              : props.offering
+          }
+          updateMode={props.updateMode}
+        />
       }
       errors={errors}
       extraNode={<OfferingTosNotification offering={props.offering} />}
