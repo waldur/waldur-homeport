@@ -35,9 +35,13 @@ describe('Workspace selector', () => {
       .intercept('GET', '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/', {
         fixture: 'customers/alice.json',
       })
-      .intercept('GET', '/api/marketplace-service-providers/?customer_uuid=bf6d515c9e6e445f9c339021b30fc96b', {
-        fixture: 'marketplace/service_providers.json',
-      })
+      .intercept(
+        'GET',
+        '/api/marketplace-service-providers/?customer_uuid=bf6d515c9e6e445f9c339021b30fc96b',
+        {
+          fixture: 'marketplace/service_providers.json',
+        },
+      )
       .setToken()
       .visit('/profile/')
       // waiting until the page loaded, so that we can click on the popup
@@ -129,9 +133,7 @@ describe('Workspace selector', () => {
       .contains('Alice')
       .parents('.list-group-item')
       .within(() => {
-        cy.get('.actions .action-item')
-          .contains('SP')
-          .click({ force: true });
+        cy.get('.actions .action-item').contains('SP').click({ force: true });
       });
 
     // wait for the provider menu and dashboard

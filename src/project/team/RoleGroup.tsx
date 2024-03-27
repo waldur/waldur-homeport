@@ -22,8 +22,8 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => (
         {props.data.content_type === 'customer'
           ? 'O'
           : props.data.content_type === 'project'
-          ? 'P'
-          : ''}
+            ? 'P'
+            : ''}
       </span>
     </div>
   </components.Option>

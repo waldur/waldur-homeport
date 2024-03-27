@@ -22,44 +22,45 @@ interface RejectByProviderButtonProps {
   refetch?: () => void;
 }
 
-export const RejectByProviderButton: FunctionComponent<RejectByProviderButtonProps> =
-  (props) => {
-    const dispatch = useDispatch();
-    const { mutate, isLoading } = useMutation(async () => {
-      try {
-        await rejectOrderByProvider(props.orderUuid);
-        const newOrder = await getOrder(props.orderUuid);
-        dispatch(updateEntity(TABLE_SUPPORT_ORDERS, props.orderUuid, newOrder));
-        // update orders table on the main page
-        dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.orderUuid, newOrder));
-        // update pending orders tables on the drawer
-        dispatch(
-          updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.orderUuid, newOrder),
-        );
-        dispatch(
-          updateEntity(
-            TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
-            props.orderUuid,
-            newOrder,
-          ),
-        );
+export const RejectByProviderButton: FunctionComponent<
+  RejectByProviderButtonProps
+> = (props) => {
+  const dispatch = useDispatch();
+  const { mutate, isLoading } = useMutation(async () => {
+    try {
+      await rejectOrderByProvider(props.orderUuid);
+      const newOrder = await getOrder(props.orderUuid);
+      dispatch(updateEntity(TABLE_SUPPORT_ORDERS, props.orderUuid, newOrder));
+      // update orders table on the main page
+      dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.orderUuid, newOrder));
+      // update pending orders tables on the drawer
+      dispatch(
+        updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.orderUuid, newOrder),
+      );
+      dispatch(
+        updateEntity(
+          TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
+          props.orderUuid,
+          newOrder,
+        ),
+      );
 
-        if (props.refetch) await props.refetch();
+      if (props.refetch) await props.refetch();
 
-        dispatch(showSuccess(translate('Order has been rejected.')));
-      } catch (response) {
-        dispatch(
-          showErrorResponse(response, translate('Unable to reject order.')),
-        );
-      }
-    });
-    return (
-      <ActionButton
-        className="btn btn-sm btn-secondary"
-        title={translate('Reject')}
-        action={mutate}
-        disabled={isLoading}
-        icon={isLoading ? 'fa fa-spinner fa-spin' : 'fa fa-ban'}
-      />
-    );
-  };
+      dispatch(showSuccess(translate('Order has been rejected.')));
+    } catch (response) {
+      dispatch(
+        showErrorResponse(response, translate('Unable to reject order.')),
+      );
+    }
+  });
+  return (
+    <ActionButton
+      className="btn btn-sm btn-secondary"
+      title={translate('Reject')}
+      action={mutate}
+      disabled={isLoading}
+      icon={isLoading ? 'fa fa-spinner fa-spin' : 'fa fa-ban'}
+    />
+  );
+};

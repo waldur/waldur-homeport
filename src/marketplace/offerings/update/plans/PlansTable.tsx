@@ -17,10 +17,10 @@ export const PlansTable = ({ plans, offering, refetch, user }) => (
             {plan.resources_count === 0
               ? translate('Not used')
               : plan.resources_count === 1
-              ? translate('Used by one resource')
-              : translate('Used by {count} resources', {
-                  count: plan.resources_count,
-                })}
+                ? translate('Used by one resource')
+                : translate('Used by {count} resources', {
+                    count: plan.resources_count,
+                  })}
           </td>
           <td className="row-actions">
             <PlanActions

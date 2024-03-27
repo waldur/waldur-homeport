@@ -15,42 +15,43 @@ interface DeleteProjectUserButtonProps {
   refetch(): void;
 }
 
-export const DeleteProjectUserButton: React.FC<DeleteProjectUserButtonProps> =
-  ({ project, customer, refetch }) => {
-    const dispatch = useDispatch();
-    const callback = async () => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Confirmation'),
-          translate('Are you sure you want to remove {user} from {project}?', {
-            user: customer.full_name || customer.username,
-            project: project.name,
-          }),
-        );
-      } catch {
-        return;
-      }
+export const DeleteProjectUserButton: React.FC<
+  DeleteProjectUserButtonProps
+> = ({ project, customer, refetch }) => {
+  const dispatch = useDispatch();
+  const callback = async () => {
+    try {
+      await waitForConfirmation(
+        dispatch,
+        translate('Confirmation'),
+        translate('Are you sure you want to remove {user} from {project}?', {
+          user: customer.full_name || customer.username,
+          project: project.name,
+        }),
+      );
+    } catch {
+      return;
+    }
 
-      try {
-        await deleteProjectUser({
-          project: project.uuid,
-          user: customer.uuid,
-          role: project.role_name,
-        });
-        refetch();
-        dispatch(showSuccess(translate('Team member has been removed.')));
-      } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to delete team member.')),
-        );
-      }
-    };
-    return (
-      <ActionButton
-        action={callback}
-        title={translate('Remove')}
-        icon="fa fa-trash"
-      />
-    );
+    try {
+      await deleteProjectUser({
+        project: project.uuid,
+        user: customer.uuid,
+        role: project.role_name,
+      });
+      refetch();
+      dispatch(showSuccess(translate('Team member has been removed.')));
+    } catch (e) {
+      dispatch(
+        showErrorResponse(e, translate('Unable to delete team member.')),
+      );
+    }
   };
+  return (
+    <ActionButton
+      action={callback}
+      title={translate('Remove')}
+      icon="fa fa-trash"
+    />
+  );
+};

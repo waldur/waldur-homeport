@@ -11,32 +11,33 @@ interface UserRemovalMessageDialogProps {
   };
 }
 
-export const UserRemovalMessageDialog: FunctionComponent<UserRemovalMessageDialogProps> =
-  (props) => {
-    const {
-      resolve: { userName },
-    } = props;
-    return (
-      <ModalDialog
-        title={translate('Request account removal for {userName}.', {
-          userName,
+export const UserRemovalMessageDialog: FunctionComponent<
+  UserRemovalMessageDialogProps
+> = (props) => {
+  const {
+    resolve: { userName },
+  } = props;
+  return (
+    <ModalDialog
+      title={translate('Request account removal for {userName}.', {
+        userName,
+      })}
+      footer={
+        <div>
+          <CloseDialogButton label={translate('Close')} />
+        </div>
+      }
+    >
+      <p>
+        {translate('To remove account, please send a request to {support}.', {
+          support: ENV.plugins.WALDUR_CORE.SITE_EMAIL || translate('support'),
         })}
-        footer={
-          <div>
-            <CloseDialogButton label={translate('Close')} />
-          </div>
-        }
-      >
-        <p>
-          {translate('To remove account, please send a request to {support}.', {
-            support: ENV.plugins.WALDUR_CORE.SITE_EMAIL || translate('support'),
-          })}
-        </p>
-        <p>
-          {translate(
-            'Please note that request should specify user name and provide a reason.',
-          )}
-        </p>
-      </ModalDialog>
-    );
-  };
+      </p>
+      <p>
+        {translate(
+          'Please note that request should specify user name and provide a reason.',
+        )}
+      </p>
+    </ModalDialog>
+  );
+};

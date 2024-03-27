@@ -14,8 +14,8 @@ export const PermissionRequestStateField: FunctionComponent<{ row }> = ({
         state === 'rejected'
           ? 'danger'
           : state === 'pending'
-          ? 'warning'
-          : 'primary'
+            ? 'warning'
+            : 'primary'
       }
     />
   );

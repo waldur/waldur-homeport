@@ -11,11 +11,12 @@ interface CustomerUserRowActionsProps {
   row;
 }
 
-export const CustomerUserRowActions: FunctionComponent<CustomerUserRowActionsProps> =
-  ({ row, refetch }) => (
-    <ButtonGroup>
-      <UserDetailsButton userId={row.uuid} />
-      <UserEditButton customer={row} refetch={refetch} />
-      <UserRemoveButton customer={row} refetch={refetch} />
-    </ButtonGroup>
-  );
+export const CustomerUserRowActions: FunctionComponent<
+  CustomerUserRowActionsProps
+> = ({ row, refetch }) => (
+  <ButtonGroup>
+    <UserDetailsButton userId={row.uuid} />
+    <UserEditButton customer={row} refetch={refetch} />
+    <UserRemoveButton customer={row} refetch={refetch} />
+  </ButtonGroup>
+);

@@ -9,12 +9,13 @@ interface ResourceDetailsHeaderTitleProps {
   resource: Resource;
 }
 
-export const ResourceDetailsHeaderTitle: FunctionComponent<ResourceDetailsHeaderTitleProps> =
-  ({ resource }) => {
-    return (
-      <>
-        <ResourceSelectorToggle resource={resource} />
-        <ParentResourceLink resource={resource} />
-      </>
-    );
-  };
+export const ResourceDetailsHeaderTitle: FunctionComponent<
+  ResourceDetailsHeaderTitleProps
+> = ({ resource }) => {
+  return (
+    <>
+      <ResourceSelectorToggle resource={resource} />
+      <ParentResourceLink resource={resource} />
+    </>
+  );
+};

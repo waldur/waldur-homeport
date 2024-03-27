@@ -14,10 +14,10 @@ const PermissionEntity = (props) => {
       )
         ? 'FULL_ACCESS'
         : props.entity.options.find((option) =>
-            props.input.value.includes(option.value),
-          )
-        ? 'PARTIAL_ACCESS'
-        : 'NO_ACCESS',
+              props.input.value.includes(option.value),
+            )
+          ? 'PARTIAL_ACCESS'
+          : 'NO_ACCESS',
     [props.entity, props.input.value],
   );
   return (
@@ -30,16 +30,16 @@ const PermissionEntity = (props) => {
               accessType === 'FULL_ACCESS'
                 ? 'success'
                 : accessType === 'PARTIAL_ACCESS'
-                ? 'primary'
-                : 'danger'
+                  ? 'primary'
+                  : 'danger'
             }
             className="mx-2"
           >
             {accessType === 'FULL_ACCESS'
               ? translate('Full access')
               : accessType === 'PARTIAL_ACCESS'
-              ? translate('Partial access')
-              : translate('No access')}
+                ? translate('Partial access')
+                : translate('No access')}
           </Badge>
         </Accordion.Header>
         <Accordion.Body>

@@ -11,14 +11,15 @@ interface OfferingReferralsDialogProps {
   resolve: Offering;
 }
 
-export const OfferingReferralsDialog: FunctionComponent<OfferingReferralsDialogProps> =
-  (props) => (
-    <ModalDialog
-      title={translate('Referrals for {name}', {
-        name: props.resolve.name,
-      })}
-      footer={<CloseDialogButton label={translate('Close')} />}
-    >
-      <ReferralsList offering={props.resolve} />
-    </ModalDialog>
-  );
+export const OfferingReferralsDialog: FunctionComponent<
+  OfferingReferralsDialogProps
+> = (props) => (
+  <ModalDialog
+    title={translate('Referrals for {name}', {
+      name: props.resolve.name,
+    })}
+    footer={<CloseDialogButton label={translate('Close')} />}
+  >
+    <ReferralsList offering={props.resolve} />
+  </ModalDialog>
+);

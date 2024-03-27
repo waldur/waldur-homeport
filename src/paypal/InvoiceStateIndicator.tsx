@@ -18,10 +18,11 @@ interface InvoiceStateIndicatorProps {
   };
 }
 
-export const InvoiceStateIndicator: FunctionComponent<InvoiceStateIndicatorProps> =
-  (props) => (
-    <StateIndicator
-      label={props.model.state}
-      variant={LABEL_CLASSES[props.model.state] || 'info'}
-    />
-  );
+export const InvoiceStateIndicator: FunctionComponent<
+  InvoiceStateIndicatorProps
+> = (props) => (
+  <StateIndicator
+    label={props.model.state}
+    variant={LABEL_CLASSES[props.model.state] || 'info'}
+  />
+);

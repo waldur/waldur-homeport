@@ -32,8 +32,8 @@ export const StatsTable = ({
                 customer.score < 25
                   ? 'danger'
                   : customer.score < 75
-                  ? 'warning'
-                  : 'primary'
+                    ? 'warning'
+                    : 'primary'
               }
             />
           </td>

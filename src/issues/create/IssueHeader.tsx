@@ -8,15 +8,15 @@ export const IssueHeader: FunctionComponent<{ issue }> = ({ issue }) => {
   const customerName = issue.customer
     ? issue.customer.name
     : issue.project
-    ? issue.project.customer_name
-    : issue.resource
-    ? issue.resource.customer_name
-    : undefined;
+      ? issue.project.customer_name
+      : issue.resource
+        ? issue.resource.customer_name
+        : undefined;
   const projectName = issue.project
     ? issue.project.name
     : issue.resource
-    ? issue.resource.project_name
-    : undefined;
+      ? issue.resource.project_name
+      : undefined;
   return (
     <>
       {customerName && (

@@ -13,26 +13,27 @@ interface UserPermissionRequestRowActionsProps {
   row;
 }
 
-export const UserPermissionRequestRowActions: FunctionComponent<UserPermissionRequestRowActionsProps> =
-  ({ row, refetch }) => {
-    const user = useSelector(getUser);
-    const canManageRequest =
-      hasPermission(user, {
-        permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-        customerId: row.customer_uuid,
-        projectId: row.project_uuid,
-      }) || user.is_support;
+export const UserPermissionRequestRowActions: FunctionComponent<
+  UserPermissionRequestRowActionsProps
+> = ({ row, refetch }) => {
+  const user = useSelector(getUser);
+  const canManageRequest =
+    hasPermission(user, {
+      permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+      customerId: row.customer_uuid,
+      projectId: row.project_uuid,
+    }) || user.is_support;
 
-    return row.state === 'pending' && canManageRequest ? (
-      <ButtonGroup>
-        <UserPermissionRequestApproveButton
-          permissionRequest={row}
-          refetch={refetch}
-        />
-        <UserPermissionRequestRejectButton
-          permissionRequest={row}
-          refetch={refetch}
-        />
-      </ButtonGroup>
-    ) : null;
-  };
+  return row.state === 'pending' && canManageRequest ? (
+    <ButtonGroup>
+      <UserPermissionRequestApproveButton
+        permissionRequest={row}
+        refetch={refetch}
+      />
+      <UserPermissionRequestRejectButton
+        permissionRequest={row}
+        refetch={refetch}
+      />
+    </ButtonGroup>
+  ) : null;
+};

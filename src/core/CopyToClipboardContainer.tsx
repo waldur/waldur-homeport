@@ -11,14 +11,15 @@ interface CopyToClipboardContainerProps {
   label?: ReactNode;
 }
 
-export const CopyToClipboardContainer: FunctionComponent<CopyToClipboardContainerProps> =
-  ({ value, label }) => (
-    <div className="pre-container">
-      <pre>
-        <div className="copyable-content">{label ? label : value}</div>
-        <div className="ms-1 copy-to-clipboard-container">
-          <CopyToClipboardButton value={value} />
-        </div>
-      </pre>
-    </div>
-  );
+export const CopyToClipboardContainer: FunctionComponent<
+  CopyToClipboardContainerProps
+> = ({ value, label }) => (
+  <div className="pre-container">
+    <pre>
+      <div className="copyable-content">{label ? label : value}</div>
+      <div className="ms-1 copy-to-clipboard-container">
+        <CopyToClipboardButton value={value} />
+      </div>
+    </pre>
+  </div>
+);

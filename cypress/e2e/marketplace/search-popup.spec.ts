@@ -246,6 +246,9 @@ describe('Search Popup', () => {
   it('when searched for a keyword and not matches, "No result found" message should come up', () => {
     cy.get('#searchIconContainer').debug().click();
     cy.get('#GlobalSearch input[name=search]').click().focused().type('ccc');
-    cy.get('#GlobalSearch .text-gray-600.fs-5.mb-2').should('have.text', 'No result found');
+    cy.get('#GlobalSearch .text-gray-600.fs-5.mb-2').should(
+      'have.text',
+      'No result found',
+    );
   });
 });

@@ -23,14 +23,14 @@ export const CategoriesBar = (props: CategoriesListType) => {
   const showCount = isSmallScreen
     ? 2
     : isMediumScreen
-    ? 3
-    : isSidebarClosed
-    ? 5
-    : isLargeScreen
-    ? 4
-    : isXLargeScreen
-    ? 5
-    : 6;
+      ? 3
+      : isSidebarClosed
+        ? 5
+        : isLargeScreen
+          ? 4
+          : isXLargeScreen
+            ? 5
+            : 6;
 
   return (
     <Card className="mb-6">

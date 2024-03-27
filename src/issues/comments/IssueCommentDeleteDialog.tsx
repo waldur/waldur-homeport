@@ -15,17 +15,18 @@ interface IssueCommentDeleteDialogProps {
   };
 }
 
-export const PureIssueCommentDeleteDialog: FunctionComponent<IssueCommentDeleteDialogProps> =
-  (props) => {
-    const { onSubmit } = props;
-    return (
-      <ActionDialog submitLabel={translate('Delete')} onSubmit={onSubmit}>
-        <h3 className="text-center">
-          {translate('Do you really want to delete comment?')}
-        </h3>
-      </ActionDialog>
-    );
-  };
+export const PureIssueCommentDeleteDialog: FunctionComponent<
+  IssueCommentDeleteDialogProps
+> = (props) => {
+  const { onSubmit } = props;
+  return (
+    <ActionDialog submitLabel={translate('Delete')} onSubmit={onSubmit}>
+      <h3 className="text-center">
+        {translate('Do you really want to delete comment?')}
+      </h3>
+    </ActionDialog>
+  );
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit: (evt: Event): void => {

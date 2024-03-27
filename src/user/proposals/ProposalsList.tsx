@@ -76,8 +76,8 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
                   state === true
                     ? 'bg-success'
                     : state === false
-                    ? 'bg-danger'
-                    : 'bg-secondary';
+                      ? 'bg-danger'
+                      : 'bg-secondary';
                 return (
                   <span
                     key={i}

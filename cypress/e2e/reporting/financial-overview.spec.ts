@@ -13,7 +13,7 @@ describe('Financial overview', () => {
         fixture: 'customers/invoices.json',
       })
       .intercept('GET', /\/api\/financial-reports\/\?.*/, {
-        fixture: 'reporting/financial-reports.json'
+        fixture: 'reporting/financial-reports.json',
       })
       .visit('/reporting/organizations/', { log: false });
   });
@@ -27,12 +27,10 @@ describe('Financial overview', () => {
   });
 
   it('should render cost column if previous month is selected', () => {
-
     cy.contains('button.filter-toggle', 'Accounting period')
       .should('exist')
       .click();
-    cy.get('.filter-toggle:nth-child(1)')
-       .click();
+    cy.get('.filter-toggle:nth-child(1)').click();
     cy.get('.accounting-period-selector')
       .find('input[type="text"]')
       .type('January, 2023')

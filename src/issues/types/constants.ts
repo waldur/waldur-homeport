@@ -13,7 +13,7 @@ const getIssueTypeLabel = (issueType) =>
     CHANGE_REQUEST: translate('Change Request'),
     SERVICE_REQUEST: translate('Service Request'),
     INFORMATIONAL: translate('Informational'),
-  }[issueType]);
+  })[issueType];
 
 export const ISSUE_ICONS = {
   INCIDENT: 'fa-exclamation-triangle',
@@ -43,7 +43,7 @@ const getIssueDescription = (issueType) =>
     CHANGE_REQUEST: translate(
       'Change request - client’s request to perform a generic modification of data or service.',
     ),
-  }[issueType]);
+  })[issueType];
 
 export const getIssueTypeChoices = () =>
   Object.keys(ISSUE_IDS).map((item) => ({

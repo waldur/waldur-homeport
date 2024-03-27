@@ -10,22 +10,23 @@ interface OrganizationGroupDetailsDialogProps {
   resolve: { organizationGroup: OrganizationGroup };
 }
 
-export const OrganizationGroupDetailsDialog: FunctionComponent<OrganizationGroupDetailsDialogProps> =
-  (props) => {
-    return (
-      <ModalDialog
-        title={translate('Organization group details of {orgName}', {
-          orgName: props.resolve.organizationGroup.name,
-        })}
-        footer={
-          <div className="flex-grow-1 d-flex justify-content-between">
-            <CloseDialogButton label={translate('Done')} />
-          </div>
-        }
-      >
-        <OrganizationGroupOrganizationsList
-          organizationGroup={props.resolve.organizationGroup}
-        />
-      </ModalDialog>
-    );
-  };
+export const OrganizationGroupDetailsDialog: FunctionComponent<
+  OrganizationGroupDetailsDialogProps
+> = (props) => {
+  return (
+    <ModalDialog
+      title={translate('Organization group details of {orgName}', {
+        orgName: props.resolve.organizationGroup.name,
+      })}
+      footer={
+        <div className="flex-grow-1 d-flex justify-content-between">
+          <CloseDialogButton label={translate('Done')} />
+        </div>
+      }
+    >
+      <OrganizationGroupOrganizationsList
+        organizationGroup={props.resolve.organizationGroup}
+      />
+    </ModalDialog>
+  );
+};

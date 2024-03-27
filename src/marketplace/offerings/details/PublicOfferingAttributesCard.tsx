@@ -17,32 +17,33 @@ interface PublicOfferingAttributesProps {
   category: Category;
 }
 
-export const PublicOfferingAttributesCard: FunctionComponent<PublicOfferingAttributesProps> =
-  ({ offering, category }) => {
-    const show = useMemo(
-      () =>
-        !!offering.datacite_doi ||
-        offering.citation_count >= 0 ||
-        (!!offering.google_calendar_link &&
-          offering.type === OFFERING_TYPE_BOOKING) ||
-        (!!category.sections.length && !isEmpty(offering.attributes)),
-      [offering, category],
-    );
-    if (!show) {
-      return null;
-    }
-    return (
-      <Card>
-        <Card.Body>
-          <PublicOfferingCardTitle>
-            {translate('Attributes')}
-          </PublicOfferingCardTitle>
-          <PublicOfferingAttributesSection offering={offering} />
-          <AttributesList
-            attributes={offering.attributes}
-            sections={category.sections}
-          />
-        </Card.Body>
-      </Card>
-    );
-  };
+export const PublicOfferingAttributesCard: FunctionComponent<
+  PublicOfferingAttributesProps
+> = ({ offering, category }) => {
+  const show = useMemo(
+    () =>
+      !!offering.datacite_doi ||
+      offering.citation_count >= 0 ||
+      (!!offering.google_calendar_link &&
+        offering.type === OFFERING_TYPE_BOOKING) ||
+      (!!category.sections.length && !isEmpty(offering.attributes)),
+    [offering, category],
+  );
+  if (!show) {
+    return null;
+  }
+  return (
+    <Card>
+      <Card.Body>
+        <PublicOfferingCardTitle>
+          {translate('Attributes')}
+        </PublicOfferingCardTitle>
+        <PublicOfferingAttributesSection offering={offering} />
+        <AttributesList
+          attributes={offering.attributes}
+          sections={category.sections}
+        />
+      </Card.Body>
+    </Card>
+  );
+};

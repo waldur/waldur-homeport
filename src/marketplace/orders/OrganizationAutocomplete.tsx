@@ -12,31 +12,32 @@ interface OrganizationAutocompleteProps {
   isServiceProvider?: boolean;
 }
 
-export const OrganizationAutocomplete: FunctionComponent<OrganizationAutocompleteProps> =
-  (props) => (
-    <Field
-      name="organization"
-      component={(fieldProps) => (
-        <AsyncPaginate
-          placeholder={props.placeholder || translate('Select organization...')}
-          loadOptions={(query, prevOptions, { page }) =>
-            organizationAutocomplete(query, prevOptions, page, {
-              field: ['name', 'uuid'],
-              o: 'name',
-              is_service_provider: props.isServiceProvider,
-              has_resources: props.isServiceProvider ? undefined : true,
-            })
-          }
-          defaultOptions
-          getOptionValue={(option) => option.uuid}
-          getOptionLabel={(option) => option.name}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          noOptionsMessage={() =>
-            props.noOptionsMessage || translate('No organizations')
-          }
-          isClearable={true}
-        />
-      )}
-    />
-  );
+export const OrganizationAutocomplete: FunctionComponent<
+  OrganizationAutocompleteProps
+> = (props) => (
+  <Field
+    name="organization"
+    component={(fieldProps) => (
+      <AsyncPaginate
+        placeholder={props.placeholder || translate('Select organization...')}
+        loadOptions={(query, prevOptions, { page }) =>
+          organizationAutocomplete(query, prevOptions, page, {
+            field: ['name', 'uuid'],
+            o: 'name',
+            is_service_provider: props.isServiceProvider,
+            has_resources: props.isServiceProvider ? undefined : true,
+          })
+        }
+        defaultOptions
+        getOptionValue={(option) => option.uuid}
+        getOptionLabel={(option) => option.name}
+        value={fieldProps.input.value}
+        onChange={(value) => fieldProps.input.onChange(value)}
+        noOptionsMessage={() =>
+          props.noOptionsMessage || translate('No organizations')
+        }
+        isClearable={true}
+      />
+    )}
+  />
+);

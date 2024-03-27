@@ -35,7 +35,7 @@
     ],
     "geolocations": [],
     "plugin_options": {},
-    "options": {"order": [], "options": {}},
+    "options": { "order": [], "options": {} },
     "state": "Active",
     "native_name": "",
     "native_description": "",
@@ -109,7 +109,7 @@
       }
     ],
     "plugin_options": {},
-    "options": {"order": [], "options": {}},
+    "options": { "order": [], "options": {} },
     "state": "Active",
     "native_name": "",
     "native_description": "",

@@ -30,8 +30,8 @@ export const parseResponse = (url, params, options?: AxiosRequestConfig) =>
       rows: Array.isArray(response.data)
         ? response.data
         : Array.isArray(response.data.proposals)
-        ? response.data.proposals
-        : [],
+          ? response.data.proposals
+          : [],
       resultCount,
       nextPage: getNextPageNumber(getNextPageUrl(response)),
     };

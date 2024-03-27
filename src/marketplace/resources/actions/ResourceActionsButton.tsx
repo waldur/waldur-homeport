@@ -11,17 +11,18 @@ interface ResourceActionsButtonProps {
   refetch?(): void;
 }
 
-export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> =
-  (props) => {
-    const [open, onToggle] = useBoolean(false);
+export const ResourceActionsButton: FunctionComponent<
+  ResourceActionsButtonProps
+> = (props) => {
+  const [open, onToggle] = useBoolean(false);
 
-    return (
-      <ResourceActionComponent
-        open={open}
-        onToggle={onToggle}
-        actions={ActionsList}
-        resource={props.resource}
-        refetch={props.refetch}
-      />
-    );
-  };
+  return (
+    <ResourceActionComponent
+      open={open}
+      onToggle={onToggle}
+      actions={ActionsList}
+      resource={props.resource}
+      refetch={props.refetch}
+    />
+  );
+};

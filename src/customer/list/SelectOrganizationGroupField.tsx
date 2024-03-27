@@ -53,14 +53,15 @@ export const SelectOrganizationGroupFieldPure: FunctionComponent = () => (
   />
 );
 
-export const SelectOrganizationGroupField: FunctionComponent<SelectOrganizationGroupFieldProps> =
-  (props) => (
-    <Form.Group className={props.isFilterForm ? ' col-sm-3' : ''}>
-      <Form.Label className={props.isFilterForm ? '' : 'd-none'}>
-        {translate('Organization group')}
-      </Form.Label>
-      <div className={props.isFilterForm ? '' : 'mb-7'}>
-        <SelectOrganizationGroupFieldPure />
-      </div>
-    </Form.Group>
-  );
+export const SelectOrganizationGroupField: FunctionComponent<
+  SelectOrganizationGroupFieldProps
+> = (props) => (
+  <Form.Group className={props.isFilterForm ? ' col-sm-3' : ''}>
+    <Form.Label className={props.isFilterForm ? '' : 'd-none'}>
+      {translate('Organization group')}
+    </Form.Label>
+    <div className={props.isFilterForm ? '' : 'mb-7'}>
+      <SelectOrganizationGroupFieldPure />
+    </div>
+  </Form.Group>
+);

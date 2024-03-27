@@ -50,37 +50,38 @@ const onExport = (offeringName, rows) => {
   exportExcel(filename, data);
 };
 
-export const ExportFullPriceList: FunctionComponent<ExportFullPriceListProps> =
-  ({ offering }) => {
-    const {
-      loading,
-      error,
-      value: components,
-    } = useAsync(async () => {
-      const components = await fetchPlanComponents(offering.uuid);
-      components.map((plan) => {
-        if (plan.billing_type !== 'limit') return plan;
-        if (plan.amount === 0) plan.amount = 1;
-        return plan;
-      });
-      return components;
-    }, [offering]);
-    return (
-      <div className="exportFullPriceList">
-        {loading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          <>{translate('Unable to load full price list')}</>
-        ) : components ? (
-          <button
-            className="text-anchor exportFullPriceList__download"
-            type="button"
-            onClick={() => onExport(offering.name, components)}
-          >
-            <i className="fa fa-download" />
-            {translate('Download full price list')}
-          </button>
-        ) : null}
-      </div>
-    );
-  };
+export const ExportFullPriceList: FunctionComponent<
+  ExportFullPriceListProps
+> = ({ offering }) => {
+  const {
+    loading,
+    error,
+    value: components,
+  } = useAsync(async () => {
+    const components = await fetchPlanComponents(offering.uuid);
+    components.map((plan) => {
+      if (plan.billing_type !== 'limit') return plan;
+      if (plan.amount === 0) plan.amount = 1;
+      return plan;
+    });
+    return components;
+  }, [offering]);
+  return (
+    <div className="exportFullPriceList">
+      {loading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <>{translate('Unable to load full price list')}</>
+      ) : components ? (
+        <button
+          className="text-anchor exportFullPriceList__download"
+          type="button"
+          onClick={() => onExport(offering.name, components)}
+        >
+          <i className="fa fa-download" />
+          {translate('Download full price list')}
+        </button>
+      ) : null}
+    </div>
+  );
+};

@@ -10,12 +10,11 @@ import {
   getFormValues,
 } from 'redux-form';
 
-const withTestStore = (store) => (WrappedComponent) =>
-  (
-    <Provider store={store}>
-      <WrappedComponent />
-    </Provider>
-  );
+const withTestStore = (store) => (WrappedComponent) => (
+  <Provider store={store}>
+    <WrappedComponent />
+  </Provider>
+);
 
 export const withReduxForm = (WrappedComponent) => {
   const reducer = combineReducers({ form: formReducer });

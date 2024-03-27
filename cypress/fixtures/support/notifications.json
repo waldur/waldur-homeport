@@ -141,17 +141,11 @@
           "uuid": "bc636616fd3f4aae9086c7dca70fe2ad"
         }
       ],
-      "project_roles": [
-        "manager"
-      ],
-      "customer_roles": [
-        "support"
-      ]
+      "project_roles": ["manager"],
+      "customer_roles": ["support"]
     },
     "author_full_name": "Admin",
-    "emails": [
-      "DavidJenkins@example.com"
-    ],
+    "emails": ["DavidJenkins@example.com"],
     "state": "DRAFT"
   },
   {
@@ -170,18 +164,11 @@
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
       ],
-      "project_roles": [
-        "manager",
-        "admin"
-      ],
-      "customer_roles": [
-        "owner"
-      ]
+      "project_roles": ["manager", "admin"],
+      "customer_roles": ["owner"]
     },
     "author_full_name": "Brandon Hogan",
-    "emails": [
-      "john.doe@gmail.com"
-    ],
+    "emails": ["john.doe@gmail.com"],
     "state": "DRAFT"
   },
   {
@@ -200,18 +187,11 @@
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
       ],
-      "project_roles": [
-        "manager",
-        "admin"
-      ],
-      "customer_roles": [
-        "owner"
-      ]
+      "project_roles": ["manager", "admin"],
+      "customer_roles": ["owner"]
     },
     "author_full_name": "Brandon Hogan",
-    "emails": [
-      "john.doe@gmail.com"
-    ],
+    "emails": ["john.doe@gmail.com"],
     "state": "DRAFT"
   },
   {
@@ -226,14 +206,10 @@
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
       ],
-      "customer_roles": [
-        "owner"
-      ]
+      "customer_roles": ["owner"]
     },
     "author_full_name": "Brandon Hogan",
-    "emails": [
-      "john.doe@gmail.com"
-    ],
+    "emails": ["john.doe@gmail.com"],
     "state": "DRAFT"
   },
   {
@@ -248,15 +224,10 @@
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
       ],
-      "project_roles": [
-        "manager",
-        "admin"
-      ]
+      "project_roles": ["manager", "admin"]
     },
     "author_full_name": "Brandon Hogan",
-    "emails": [
-      "john.doe@gmail.com"
-    ],
+    "emails": ["john.doe@gmail.com"],
     "state": "DRAFT"
   },
   {
@@ -275,18 +246,11 @@
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
       ],
-      "project_roles": [
-        "admin",
-        "manager"
-      ],
-      "customer_roles": [
-        "owner"
-      ]
+      "project_roles": ["admin", "manager"],
+      "customer_roles": ["owner"]
     },
     "author_full_name": "Brandon Hogan",
-    "emails": [
-      "john.doe@gmail.com"
-    ],
+    "emails": ["john.doe@gmail.com"],
     "state": "DRAFT"
   }
 ]

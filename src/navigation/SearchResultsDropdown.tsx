@@ -17,46 +17,47 @@ interface SearchResultsDropdownProps {
   onPageChange: (newPageIndex: number) => void;
 }
 
-export const SearchResultsDropdown: FunctionComponent<SearchResultsDropdownProps> =
-  ({ query, pageIndex, onPageChange }) => {
-    const [{ loading, error, value }, loadData] = useAsyncFn<any>(
-      () => fetchOfferings(query, pageIndex),
-      [query, pageIndex],
-    );
+export const SearchResultsDropdown: FunctionComponent<
+  SearchResultsDropdownProps
+> = ({ query, pageIndex, onPageChange }) => {
+  const [{ loading, error, value }, loadData] = useAsyncFn<any>(
+    () => fetchOfferings(query, pageIndex),
+    [query, pageIndex],
+  );
 
-    useEffect(() => {
-      loadData();
-    }, [query, pageIndex]);
+  useEffect(() => {
+    loadData();
+  }, [query, pageIndex]);
 
-    return (
-      <div className="searchResultsDropdown">
-        {loading ? (
-          <div className="searchResultsDropdown__loadingSpinner">
-            <LoadingSpinner />
-          </div>
-        ) : error ? (
-          <div className="searchResultsDropdown__error">
-            <p>{translate('Unable to fetch offerings')}</p>
-            <Button variant="primary" onClick={() => loadData()}>
-              <i className="fa fa-refresh"></i> {translate('Retry')}
-            </Button>
-          </div>
-        ) : value?.items?.length === 0 ? (
-          <div className="searchResultsDropdown__notFound">
-            <img src={illustration} height={120} width="auto" alt="no data" />
-            <p>{translate('No matching offerings found')}</p>
-          </div>
-        ) : value?.items?.length > 0 ? (
-          <>
-            <SearchResults offeringsByProvider={value.items} />
-            <ServiceProviderOfferingsPaging
-              pageIndex={pageIndex}
-              onPageChange={onPageChange}
-              offeringsByProvider={value.items}
-              totalItems={value.totalItems}
-            />
-          </>
-        ) : null}
-      </div>
-    );
-  };
+  return (
+    <div className="searchResultsDropdown">
+      {loading ? (
+        <div className="searchResultsDropdown__loadingSpinner">
+          <LoadingSpinner />
+        </div>
+      ) : error ? (
+        <div className="searchResultsDropdown__error">
+          <p>{translate('Unable to fetch offerings')}</p>
+          <Button variant="primary" onClick={() => loadData()}>
+            <i className="fa fa-refresh"></i> {translate('Retry')}
+          </Button>
+        </div>
+      ) : value?.items?.length === 0 ? (
+        <div className="searchResultsDropdown__notFound">
+          <img src={illustration} height={120} width="auto" alt="no data" />
+          <p>{translate('No matching offerings found')}</p>
+        </div>
+      ) : value?.items?.length > 0 ? (
+        <>
+          <SearchResults offeringsByProvider={value.items} />
+          <ServiceProviderOfferingsPaging
+            pageIndex={pageIndex}
+            onPageChange={onPageChange}
+            offeringsByProvider={value.items}
+            totalItems={value.totalItems}
+          />
+        </>
+      ) : null}
+    </div>
+  );
+};

@@ -32,80 +32,82 @@ interface VolumeExtendDialogFormData {
 export const VolumeExtendDialog = reduxForm<
   VolumeExtendDialogFormData,
   VolumeExtendDialogOwnProps
->({ form: 'VolumeExtendDialog' })(
-  ({ resolve: { resource, refetch }, submitting, handleSubmit }) => {
-    const dispatch = useDispatch();
+>({ form: 'VolumeExtendDialog' })(({
+  resolve: { resource, refetch },
+  submitting,
+  handleSubmit,
+}) => {
+  const dispatch = useDispatch();
 
-    const minSize = Math.round(resource.size / 1024) + 1;
+  const minSize = Math.round(resource.size / 1024) + 1;
 
-    useEffect(() => {
-      dispatch(change('VolumeExtendDialog', 'size', minSize));
-    }, [dispatch, minSize]);
+  useEffect(() => {
+    dispatch(change('VolumeExtendDialog', 'size', minSize));
+  }, [dispatch, minSize]);
 
-    const extendVolume = useCallback(
-      async (formData: VolumeExtendDialogFormData) => {
-        const payload = {
-          disk_size: formData.size * 1024,
-        };
-        try {
-          await post(
-            `/openstacktenant-volumes/${resource.uuid}/extend/`,
-            payload,
-          );
-          dispatch(
-            showSuccess(translate('Volume extension has been scheduled.')),
-          );
-          dispatch(closeModalDialog());
-          if (refetch) {
-            await refetch();
-          }
-        } catch (e) {
-          dispatch(showErrorResponse(e, translate('Unable to extend volume.')));
+  const extendVolume = useCallback(
+    async (formData: VolumeExtendDialogFormData) => {
+      const payload = {
+        disk_size: formData.size * 1024,
+      };
+      try {
+        await post(
+          `/openstacktenant-volumes/${resource.uuid}/extend/`,
+          payload,
+        );
+        dispatch(
+          showSuccess(translate('Volume extension has been scheduled.')),
+        );
+        dispatch(closeModalDialog());
+        if (refetch) {
+          await refetch();
         }
-      },
-      [resource, dispatch],
-    );
-    return (
-      <form onSubmit={handleSubmit(extendVolume)}>
-        <Modal.Header>
-          <Modal.Title>{translate('Extend OpenStack volume')}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>
-            <strong>{translate('Volume name')}:</strong> {resource.name}
-          </p>
+      } catch (e) {
+        dispatch(showErrorResponse(e, translate('Unable to extend volume.')));
+      }
+    },
+    [resource, dispatch],
+  );
+  return (
+    <form onSubmit={handleSubmit(extendVolume)}>
+      <Modal.Header>
+        <Modal.Title>{translate('Extend OpenStack volume')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>
+          <strong>{translate('Volume name')}:</strong> {resource.name}
+        </p>
 
-          <p>
-            <strong>{translate('Current size')}:</strong>{' '}
-            {formatFilesize(resource.size)}
-          </p>
+        <p>
+          <strong>{translate('Current size')}:</strong>{' '}
+          {formatFilesize(resource.size)}
+        </p>
 
-          <Form.Group>
-            <Form.Label>{translate('New size')}:</Form.Label>
-            <InputGroup>
-              <Field
-                name="size"
-                component={InputField}
-                type="number"
-                required={true}
-                min={minSize}
-                disabled={submitting}
-                parse={parseIntField}
-                format={formatIntField}
-              />
-              <InputGroup.Text>{translate('GB')}</InputGroup.Text>
-            </InputGroup>
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <CloseDialogButton />
-          <SubmitButton
-            block={false}
-            submitting={submitting}
-            label={translate('Submit')}
-          />
-        </Modal.Footer>
-      </form>
-    );
-  },
-);
+        <Form.Group>
+          <Form.Label>{translate('New size')}:</Form.Label>
+          <InputGroup>
+            <Field
+              name="size"
+              component={InputField}
+              type="number"
+              required={true}
+              min={minSize}
+              disabled={submitting}
+              parse={parseIntField}
+              format={formatIntField}
+            />
+            <InputGroup.Text>{translate('GB')}</InputGroup.Text>
+          </InputGroup>
+        </Form.Group>
+      </Modal.Body>
+      <Modal.Footer>
+        <CloseDialogButton />
+        <SubmitButton
+          block={false}
+          submitting={submitting}
+          label={translate('Submit')}
+        />
+      </Modal.Footer>
+    </form>
+  );
+});

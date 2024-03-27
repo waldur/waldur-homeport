@@ -20,36 +20,37 @@ interface ResourceSpecGroupCardProps {
   isLoading?: boolean;
 }
 
-export const ResourceSpecGroupCard: FunctionComponent<ResourceSpecGroupCardProps> =
-  (props) => {
-    const [tab, setTab] = useState(props.tabs[0]);
+export const ResourceSpecGroupCard: FunctionComponent<
+  ResourceSpecGroupCardProps
+> = (props) => {
+  const [tab, setTab] = useState(props.tabs[0]);
 
-    const { addTabs } = useContext(PageBarContext);
-    useEffect(() => {
-      addTabs([{ key: props.tabKey, title: props.title }]);
-    }, [props, addTabs]);
+  const { addTabs } = useContext(PageBarContext);
+  useEffect(() => {
+    addTabs([{ key: props.tabKey, title: props.title }]);
+  }, [props, addTabs]);
 
-    return (
-      <Card className="mb-10" id={props.tabKey}>
-        <Card.Header>
-          <Card.Title>
-            <h3>{props.title}</h3>
-          </Card.Title>
-          <div className="card-toolbar flex-grow-1 ms-6">
-            <StepCardTabs tabs={props.tabs} tab={tab} setTab={setTab} />
-          </div>
-        </Card.Header>
-        <Card.Body className="p-0 min-h-550px">
-          <tab.component
-            resource={props.scope}
-            marketplaceResource={props.resource}
-            title={tab.title}
-            initialPageSize={5}
-            showPageSizeSelector
-            refetch={props.refetch}
-            isLoading={props.isLoading}
-          />
-        </Card.Body>
-      </Card>
-    );
-  };
+  return (
+    <Card className="mb-10" id={props.tabKey}>
+      <Card.Header>
+        <Card.Title>
+          <h3>{props.title}</h3>
+        </Card.Title>
+        <div className="card-toolbar flex-grow-1 ms-6">
+          <StepCardTabs tabs={props.tabs} tab={tab} setTab={setTab} />
+        </div>
+      </Card.Header>
+      <Card.Body className="p-0 min-h-550px">
+        <tab.component
+          resource={props.scope}
+          marketplaceResource={props.resource}
+          title={tab.title}
+          initialPageSize={5}
+          showPageSizeSelector
+          refetch={props.refetch}
+          isLoading={props.isLoading}
+        />
+      </Card.Body>
+    </Card>
+  );
+};

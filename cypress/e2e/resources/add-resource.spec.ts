@@ -6,7 +6,7 @@ describe('Add resource button', () => {
         fixture: 'support/configuration.json',
       })
       .intercept('GET', '/api/events/', [])
-      .intercept('GET', '/api/roles/', {fixture: 'roles.json'})
+      .intercept('GET', '/api/roles/', { fixture: 'roles.json' })
 
       .intercept('GET', '/api/users/me/', {
         fixture: 'users/nonstaff.json',
@@ -17,12 +17,9 @@ describe('Add resource button', () => {
       .waitForSpinner();
   });
 
-
   it('Assure that Add resource button is not visible for users without organization affiliation', () => {
-    cy.get("#kt_aside_menu_wrapper").should("exist");
+    cy.get('#kt_aside_menu_wrapper').should('exist');
 
-    cy.get("#kt_aside_menu")
-      .contains("Add resource")
-      .should("not.exist");
+    cy.get('#kt_aside_menu').contains('Add resource').should('not.exist');
   });
 });

@@ -8,10 +8,10 @@ export const virtualMachineName = (value: string) =>
   value.length > 15
     ? translate('The name must be shorter than 15 characters.')
     : !value.match(VIRTUAL_MACHINE_NAME_PATTERNS)
-    ? translate(
-        'The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number',
-      )
-    : undefined;
+      ? translate(
+          'The name can contain only letters, numbers, and hyphens. It should start with a letter and must end with a letter or a number',
+        )
+      : undefined;
 
 const SQL_SERVER_NAME_PATTERN = new RegExp('^[a-z0-9][a-z0-9-]+[a-z0-9]$');
 

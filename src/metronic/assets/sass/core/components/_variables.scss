@@ -425,8 +425,12 @@ $caret-spacing: $caret-width * 0.85 !default;
 $transition-base: all 0.2s ease !default;
 $transition-fade: opacity 0.15s linear !default;
 $transition-collapse: height 0.35s ease !default;
-$transition-link: color 0.2s ease, background-color 0.2s ease !default; // Custom variable
-$transition-input: color 0.2s ease, background-color 0.2s ease !default; // Custom variable
+$transition-link:
+  color 0.2s ease,
+  background-color 0.2s ease !default; // Custom variable
+$transition-input:
+  color 0.2s ease,
+  background-color 0.2s ease !default; // Custom variable
 
 // Components
 //
@@ -706,8 +710,11 @@ $btn-border-radius: $border-radius !default;
 $btn-border-radius-sm: $border-radius !default;
 $btn-border-radius-lg: $border-radius !default;
 
-$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
+$btn-transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out !default;
 
 $btn-extended-variants: true !default; // Custom variable
 
@@ -779,8 +786,10 @@ $form-check-padding-left: $form-check-input-width + 0.5rem !default;
 $form-check-margin-bottom: 0.125rem !default;
 $form-check-label-color: null !default;
 $form-check-label-cursor: null !default;
-$form-check-transition: background-color 0.15s ease-in-out,
-  background-position 0.15s ease-in-out, border-color 0.15s ease-in-out,
+$form-check-transition:
+  background-color 0.15s ease-in-out,
+  background-position 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
   box-shadow 0.15s ease-in-out !default;
 
 $form-check-input-active-filter: brightness(90%) !default;
@@ -875,7 +884,9 @@ $accordion-body-padding-x: $accordion-padding-x !default;
 
 $accordion-button-padding-y: $accordion-padding-y !default;
 $accordion-button-padding-x: $accordion-padding-x !default;
-$accordion-transition: $btn-transition, border-radius 0.15s ease !default;
+$accordion-transition:
+  $btn-transition,
+  border-radius 0.15s ease !default;
 $accordion-button-active-bg: $gray-100 !default;
 $accordion-button-active-color: $primary !default;
 
@@ -979,8 +990,10 @@ $pagination-disabled-color: $gray-400 !default;
 $pagination-disabled-bg: transparent !default;
 $pagination-disabled-border-color: transparent !default;
 
-$pagination-transition: color 0.15s ease-in-out,
-  background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+$pagination-transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
   box-shadow 0.15s ease-in-out !default;
 
 // Popovers

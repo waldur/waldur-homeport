@@ -27,8 +27,8 @@ export const TerminateDialog = reduxForm<
     resource.resource_type === 'OpenStack.Tenant'
       ? TenantSubtitle
       : resource.resource_type === 'Rancher.Cluster'
-      ? ClusterSubtitle
-      : null;
+        ? ClusterSubtitle
+        : null;
 
   const dispatch = useDispatch();
   const callback = async () => {

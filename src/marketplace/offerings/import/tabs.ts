@@ -25,4 +25,4 @@ export const getTabLabel = (tab: string) =>
     Organization: translate('Organization'),
     Offering: translate('Offering'),
     Category: translate('Category'),
-  }[tab] || tab);
+  })[tab] || tab;

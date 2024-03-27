@@ -65,8 +65,8 @@ export const parseQuestions = (questions: Question[]) => {
       question.showSubquestionIf === 'true'
         ? true
         : question.showSubquestionIf === 'false'
-        ? false
-        : undefined,
+          ? false
+          : undefined,
     subquestions: question.subquestions
       ? question.subquestions.map((subQuestion) => ({
           ...subQuestion,

@@ -14,22 +14,23 @@ const EditAttributeDialog = lazyComponent(
   'EditAttributeDialog',
 );
 
-export const EditAttributeButton: FunctionComponent<EditAttributeDialogProps> =
-  (props) => {
-    const dispatch = useDispatch();
-    const callback = () => {
-      dispatch(
-        openModalDialog(EditAttributeDialog, {
-          resolve: props,
-          formId: ATTRIBUTE_FORM_ID,
-        }),
-      );
-    };
-    return (
-      <ActionButton
-        action={callback}
-        title={translate('Edit')}
-        icon="fa fa-pencil"
-      />
+export const EditAttributeButton: FunctionComponent<
+  EditAttributeDialogProps
+> = (props) => {
+  const dispatch = useDispatch();
+  const callback = () => {
+    dispatch(
+      openModalDialog(EditAttributeDialog, {
+        resolve: props,
+        formId: ATTRIBUTE_FORM_ID,
+      }),
     );
   };
+  return (
+    <ActionButton
+      action={callback}
+      title={translate('Edit')}
+      icon="fa fa-pencil"
+    />
+  );
+};

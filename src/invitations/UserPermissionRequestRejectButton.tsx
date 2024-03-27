@@ -24,44 +24,40 @@ const openPermissionRequestActionDialog = (resolve) =>
     size: 'md',
   });
 
-export const UserPermissionRequestRejectButton: FunctionComponent<UserPermissionRequestRejectButtonProps> =
-  ({ permissionRequest, refetch }) => {
-    const dispatch = useDispatch();
+export const UserPermissionRequestRejectButton: FunctionComponent<
+  UserPermissionRequestRejectButtonProps
+> = ({ permissionRequest, refetch }) => {
+  const dispatch = useDispatch();
 
-    const submitRequest = async (comment: string) => {
-      try {
-        await rejectPermissionRequest(permissionRequest.uuid, comment);
-        dispatch(
-          showSuccess(translate('Permission request has been rejected.')),
-        );
-        dispatch(closeModalDialog());
-        refetch();
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to reject permission request.'),
-          ),
-        );
-      }
-    };
-
-    const callback = () => {
+  const submitRequest = async (comment: string) => {
+    try {
+      await rejectPermissionRequest(permissionRequest.uuid, comment);
+      dispatch(showSuccess(translate('Permission request has been rejected.')));
+      dispatch(closeModalDialog());
+      refetch();
+    } catch (e) {
       dispatch(
-        openPermissionRequestActionDialog({
-          title: translate('Reject permission request by {name}', {
-            name: permissionRequest.created_by_full_name,
-          }),
-          submitRequest,
-        }),
+        showErrorResponse(e, translate('Unable to reject permission request.')),
       );
-    };
+    }
+  };
 
-    return (
-      <ActionButton
-        action={callback}
-        title={translate('Reject')}
-        icon="fa fa-ban"
-      />
+  const callback = () => {
+    dispatch(
+      openPermissionRequestActionDialog({
+        title: translate('Reject permission request by {name}', {
+          name: permissionRequest.created_by_full_name,
+        }),
+        submitRequest,
+      }),
     );
   };
+
+  return (
+    <ActionButton
+      action={callback}
+      title={translate('Reject')}
+      icon="fa fa-ban"
+    />
+  );
+};

@@ -21,37 +21,38 @@ interface ResourceUsageTabsContainerProps {
   hideHeader?: boolean;
 }
 
-export const ResourceUsageTabsContainer: FunctionComponent<ResourceUsageTabsContainerProps> =
-  ({ resource, months, hideHeader }) => {
-    const { loading, error, value } = useAsync(
-      () =>
-        getComponentsAndUsages(
-          resource.offering_uuid,
-          resource.resource_uuid,
-          months,
-        ),
-      [resource, months],
-    );
+export const ResourceUsageTabsContainer: FunctionComponent<
+  ResourceUsageTabsContainerProps
+> = ({ resource, months, hideHeader }) => {
+  const { loading, error, value } = useAsync(
+    () =>
+      getComponentsAndUsages(
+        resource.offering_uuid,
+        resource.resource_uuid,
+        months,
+      ),
+    [resource, months],
+  );
 
-    return loading ? (
-      <LoadingSpinner />
-    ) : error ? (
-      <>{translate('Unable to load data')}</>
-    ) : !value.components.length ? (
-      <h3>{translate('Offering does not have any usage-based components.')}</h3>
-    ) : (
-      <>
-        {!hideHeader && <ResourceMetaInfo resource={resource} />}
-        <ResourceUsageTabs
-          components={value.components}
-          usages={value.usages}
-          months={months}
-          colors={generateColors(value.components.length, {
-            colorStart: 0.25,
-            colorEnd: 0.65,
-            useEndAsStart: true,
-          })}
-        />
-      </>
-    );
-  };
+  return loading ? (
+    <LoadingSpinner />
+  ) : error ? (
+    <>{translate('Unable to load data')}</>
+  ) : !value.components.length ? (
+    <h3>{translate('Offering does not have any usage-based components.')}</h3>
+  ) : (
+    <>
+      {!hideHeader && <ResourceMetaInfo resource={resource} />}
+      <ResourceUsageTabs
+        components={value.components}
+        usages={value.usages}
+        months={months}
+        colors={generateColors(value.components.length, {
+          colorStart: 0.25,
+          colorEnd: 0.65,
+          useEndAsStart: true,
+        })}
+      />
+    </>
+  );
+};

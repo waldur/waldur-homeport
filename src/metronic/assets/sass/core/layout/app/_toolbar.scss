@@ -76,7 +76,9 @@
     }
 
     // Aside
-    .app-toolbar-fixed.app-aside-fixed:not(.app-aside-stacked).app-aside-push-toolbar
+    .app-toolbar-fixed.app-aside-fixed:not(
+        .app-aside-stacked
+      ).app-aside-push-toolbar
       & {
       left: var(--kt-app-aside-width);
     }

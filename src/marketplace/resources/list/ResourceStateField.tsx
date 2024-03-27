@@ -22,10 +22,10 @@ export const ResourceStateField = ({
         resource.state === 'Erred'
           ? 'danger'
           : resource.state === 'Terminated'
-          ? 'warning'
-          : ['SHUTOFF', 'STOPPED', 'SUSPENDED'].includes(runtimeState)
-          ? 'secondary'
-          : 'primary'
+            ? 'warning'
+            : ['SHUTOFF', 'STOPPED', 'SUSPENDED'].includes(runtimeState)
+              ? 'secondary'
+              : 'primary'
       }
       active={isActive}
       roundless={roundless}

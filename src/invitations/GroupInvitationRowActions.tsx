@@ -13,18 +13,19 @@ interface GroupInvitationRowActionsProps {
   row;
 }
 
-export const GroupInvitationRowActions: FunctionComponent<GroupInvitationRowActionsProps> =
-  ({ row, refetch }) => {
-    const user = useSelector(getUser);
-    const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-    return isOwnerOrStaff || user.is_support ? (
-      <ButtonGroup>
-        {row.is_active && (
-          <GroupInvitationCancelButton
-            permissionRequest={row}
-            refetch={refetch}
-          />
-        )}
-      </ButtonGroup>
-    ) : null;
-  };
+export const GroupInvitationRowActions: FunctionComponent<
+  GroupInvitationRowActionsProps
+> = ({ row, refetch }) => {
+  const user = useSelector(getUser);
+  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  return isOwnerOrStaff || user.is_support ? (
+    <ButtonGroup>
+      {row.is_active && (
+        <GroupInvitationCancelButton
+          permissionRequest={row}
+          refetch={refetch}
+        />
+      )}
+    </ButtonGroup>
+  ) : null;
+};

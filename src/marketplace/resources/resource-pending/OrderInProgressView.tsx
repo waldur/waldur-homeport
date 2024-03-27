@@ -18,8 +18,8 @@ const getTranslatedOrderType = (type) =>
   type === 'Create'
     ? translate('Creation')
     : type === 'Terminate'
-    ? translate('Termination')
-    : translate('Change');
+      ? translate('Termination')
+      : translate('Change');
 
 const getSteps = (resource: Resource) => {
   const order = resource.order_in_progress;
@@ -66,10 +66,10 @@ const getSteps = (resource: Resource) => {
           order.state === 'canceled'
             ? translate('Canceled')
             : order.state === 'erred'
-            ? translate('Erred')
-            : order.state === 'rejected'
-            ? translate('Rejected')
-            : translate('Done'),
+              ? translate('Erred')
+              : order.state === 'rejected'
+                ? translate('Rejected')
+                : translate('Done'),
         ]
       : null,
     completed: isStep4Completed,

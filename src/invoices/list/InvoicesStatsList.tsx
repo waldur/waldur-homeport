@@ -11,8 +11,8 @@ const CostField = ({ invoiceStats, organization }) =>
   getActiveFixedPricePaymentProfile(organization.payment_profiles)
     ? DASH_ESCAPE_CODE
     : ENV.accountingMode === 'accounting'
-    ? defaultCurrency(invoiceStats.aggregated_price)
-    : defaultCurrency(invoiceStats.aggregated_total);
+      ? defaultCurrency(invoiceStats.aggregated_price)
+      : defaultCurrency(invoiceStats.aggregated_total);
 
 const TableComponent = (props: any) => {
   const columns = [

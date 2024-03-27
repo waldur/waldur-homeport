@@ -41,8 +41,8 @@ export const CustomerMap: React.FC<CustomerMapProps> = ({ customers }) => (
             customer.score < 25
               ? redIcon
               : customer.score < 75
-              ? yellowIcon
-              : greenIcon
+                ? yellowIcon
+                : greenIcon
           }
         >
           <Popup>{`${customer.name}: ${customer.score} %`}</Popup>

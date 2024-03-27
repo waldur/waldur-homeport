@@ -7,7 +7,11 @@ describe('User manage', () => {
         fixture: 'users/alice.json',
       })
       .intercept('HEAD', '/api/customers/', [])
-      .intercept('GET', '/api/marketplace-categories/?field=uuid&field=title&has_offerings=true', [])
+      .intercept(
+        'GET',
+        '/api/marketplace-categories/?field=uuid&field=title&has_offerings=true',
+        [],
+      )
       .intercept('GET', '/api/customers/**', [])
       .setToken()
       .visit('/profile/manage/');
@@ -23,12 +27,12 @@ describe('User manage', () => {
       .contains('Request change')
       .click();
 
-      // Close dialog
+    // Close dialog
     cy.get('.modal-footer')
       .should('be.visible')
       .get('.modal-footer button:contains(Cancel)')
       .click();
-      // Ensure that organization input field is present
+    // Ensure that organization input field is present
     cy.get('input[name="organization"]')
 
       // Ensure that job_title input field is present
@@ -41,10 +45,10 @@ describe('User manage', () => {
       .type('some text')
 
       // Ensure that phone_number input field is present
-      .get('input[name="phone_number"]')
+      .get('input[name="phone_number"]');
 
-      // Ensure that Request deletion button works
-      /*.get('input[type="checkbox"]')
+    // Ensure that Request deletion button works
+    /*.get('input[type="checkbox"]')
       .last()
       .click()
       .get('button')

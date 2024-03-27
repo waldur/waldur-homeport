@@ -21,32 +21,33 @@ interface ProjectDashboardCostPoliciesProps {
   pageSize?: number;
 }
 
-export const ProjectDashboardCostPolicies: FC<ProjectDashboardCostPoliciesProps> =
-  ({ project, pageSize, setCostPolicies }) => {
-    const loadData: QueryFunction<DataPage> = async (context) => {
-      const response = await parseResponse(
-        fixURL('/marketplace-project-estimated-cost-policies/'),
-        {
-          project_uuid: project.uuid,
-          page: context.pageParam,
-          page_size: pageSize,
-        },
-        { signal: context.signal },
-      );
-      setCostPolicies((prev) => uniqBy(prev.concat(response.rows), 'uuid'));
-      return {
-        data: response.rows,
-        nextPage: response.nextPage,
-      };
-    };
-    return (
-      <InfiniteListTable
-        loadData={loadData}
-        queryKey="costPolicies"
-        pageSize={pageSize}
-      />
+export const ProjectDashboardCostPolicies: FC<
+  ProjectDashboardCostPoliciesProps
+> = ({ project, pageSize, setCostPolicies }) => {
+  const loadData: QueryFunction<DataPage> = async (context) => {
+    const response = await parseResponse(
+      fixURL('/marketplace-project-estimated-cost-policies/'),
+      {
+        project_uuid: project.uuid,
+        page: context.pageParam,
+        page_size: pageSize,
+      },
+      { signal: context.signal },
     );
+    setCostPolicies((prev) => uniqBy(prev.concat(response.rows), 'uuid'));
+    return {
+      data: response.rows,
+      nextPage: response.nextPage,
+    };
   };
+  return (
+    <InfiniteListTable
+      loadData={loadData}
+      queryKey="costPolicies"
+      pageSize={pageSize}
+    />
+  );
+};
 
 interface InfiniteListTableProps {
   loadData: QueryFunction<DataPage>;

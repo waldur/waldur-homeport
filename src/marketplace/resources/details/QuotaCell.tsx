@@ -43,8 +43,8 @@ export const QuotaCell = ({
     limit === undefined || limit === null
       ? Infinity
       : Number(limit) === 0
-      ? Number(usage)
-      : Number(limit);
+        ? Number(usage)
+        : Number(limit);
   const percent = Math.round((Number(usage) / limitValue) * 100);
   return (
     <div className="d-flex flex-column align-items-center mb-4">

@@ -1,11 +1,11 @@
 {
-    "active_campaigns": 0,
-    "current_customers": 2,
-    "customers_number_change": 0,
-    "active_resources": 21,
-    "resources_number_change": 0,
-    "active_and_paused_offerings": 2,
-    "unresolved_tickets": 0,
-    "pending_orders": 2,
-    "erred_resources": 1
+  "active_campaigns": 0,
+  "current_customers": 2,
+  "customers_number_change": 0,
+  "active_resources": 21,
+  "resources_number_change": 0,
+  "active_and_paused_offerings": 2,
+  "unresolved_tickets": 0,
+  "pending_orders": 2,
+  "erred_resources": 1
 }

@@ -24,66 +24,67 @@ interface PublicOfferingDetailsProps {
   refreshOffering;
 }
 
-export const PublicOfferingDetails: FunctionComponent<PublicOfferingDetailsProps> =
-  ({ offering, category }) => {
-    const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
-    const canDeploy = useMemo(() => offering.state === 'Active', [offering]);
+export const PublicOfferingDetails: FunctionComponent<
+  PublicOfferingDetailsProps
+> = ({ offering, category }) => {
+  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+  const canDeploy = useMemo(() => offering.state === 'Active', [offering]);
 
-    usePermissionView(() => {
-      switch (offering.state) {
-        case 'Paused':
-          return {
-            permission: 'limited',
-            banner: {
-              title: translate('Paused'),
-              message: translate(
-                'This offering has been paused and new resources cannot be added at the moment.',
-              ),
-            },
-          };
-        case 'Draft':
-          return {
-            permission: 'limited',
-            banner: {
-              title: translate('Draft'),
-              message: translate(
-                'This offering has not been activated by the operator yet.',
-              ),
-            },
-          };
-        case 'Archived':
-          return {
-            permission: 'limited',
-            banner: {
-              title: translate('Archived'),
-              message: translate('This offering has been archived.'),
-            },
-          };
+  usePermissionView(() => {
+    switch (offering.state) {
+      case 'Paused':
+        return {
+          permission: 'limited',
+          banner: {
+            title: translate('Paused'),
+            message: translate(
+              'This offering has been paused and new resources cannot be added at the moment.',
+            ),
+          },
+        };
+      case 'Draft':
+        return {
+          permission: 'limited',
+          banner: {
+            title: translate('Draft'),
+            message: translate(
+              'This offering has not been activated by the operator yet.',
+            ),
+          },
+        };
+      case 'Archived':
+        return {
+          permission: 'limited',
+          banner: {
+            title: translate('Archived'),
+            message: translate('This offering has been archived.'),
+          },
+        };
 
-        default:
-          return null;
-      }
-    }, [offering]);
+      default:
+        return null;
+    }
+  }, [offering]);
 
-    return (
-      <PageBarProvider>
-        <div className="publicOfferingDetails m-b" id="general">
-          <PublicOfferingDetailsHero offering={offering} category={category} />
-          <PublicOfferingDetailsBar offering={offering} canDeploy={canDeploy} />
-          <div className="container-xxl py-10">
-            <PublicOfferingInfo offering={offering} category={category} />
-            <PublicOfferingComponents offering={offering} />
-            <PublicOfferingImages offering={offering} />
-            {showExperimentalUiComponents && (
-              <PublicOfferingGettingStarted offering={offering} />
-            )}
-            {showExperimentalUiComponents && <PublicOfferingFAQ />}
-            {showExperimentalUiComponents && <PublicOfferingReviews />}
-            <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
-            <PublicOfferingFacility offering={offering} />
-            {showExperimentalUiComponents && <PublicOfferingGetHelp />}
-          </div>
+  return (
+    <PageBarProvider>
+      <div className="publicOfferingDetails m-b" id="general">
+        <PublicOfferingDetailsHero offering={offering} category={category} />
+        <PublicOfferingDetailsBar offering={offering} canDeploy={canDeploy} />
+        <div className="container-xxl py-10">
+          <PublicOfferingInfo offering={offering} category={category} />
+          <PublicOfferingComponents offering={offering} />
+          <PublicOfferingImages offering={offering} />
+          {showExperimentalUiComponents && (
+            <PublicOfferingGettingStarted offering={offering} />
+          )}
+          {showExperimentalUiComponents && <PublicOfferingFAQ />}
+          {showExperimentalUiComponents && <PublicOfferingReviews />}
+          <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
+          <PublicOfferingFacility offering={offering} />
+          {showExperimentalUiComponents && <PublicOfferingGetHelp />}
         </div>
-      </PageBarProvider>
-    );
-  };
+      </div>
+    </PageBarProvider>
+  );
+};

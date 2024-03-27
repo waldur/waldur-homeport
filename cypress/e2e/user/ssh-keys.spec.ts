@@ -16,7 +16,7 @@ describe('SSH Keys', () => {
         {
           fixture: 'dashboard/ssh-keys.json',
         },
-      )
+      );
     cy.visit('/profile/keys/');
   });
 

@@ -1,10 +1,10 @@
 describe('Empty pending confirmations drawer', () => {
   beforeEach(() => {
-      cy.intercept('HEAD', '/api/marketplace-orders/**', {
-        headers: {
-          'x-result-count': '0',
-        },
-      })
+    cy.intercept('HEAD', '/api/marketplace-orders/**', {
+      headers: {
+        'x-result-count': '0',
+      },
+    })
       .intercept('HEAD', '/api/marketplace-project-update-requests/**', {
         headers: {
           'x-result-count': '0',
@@ -40,9 +40,9 @@ describe('Pending confirmations drawer', () => {
   const successApproveUpdateRequest = 'Review has been submitted';
 
   beforeEach(() => {
-      cy.intercept('GET', '/api/marketplace-orders/**/', {
-        fixture: 'marketplace/order.json',
-      })
+    cy.intercept('GET', '/api/marketplace-orders/**/', {
+      fixture: 'marketplace/order.json',
+    })
       .intercept('GET', '/api/marketplace-orders/?**', {
         fixture: 'marketplace/orders.json',
       })

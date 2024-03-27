@@ -173,7 +173,8 @@
           // Animation
           @if (get($menu, dropdown, animation) == true) {
             // Move up
-            animation: menu-sub-dropdown-animation-fade-in
+            animation:
+              menu-sub-dropdown-animation-fade-in
                 #{get($menu, dropdown, animation-speed)}
                 ease
                 1,
@@ -186,7 +187,8 @@
             &[data-popper-placement='top'],
             &[data-popper-placement='top-start'],
             &[data-popper-placement='top-end'] {
-              animation: menu-sub-dropdown-animation-fade-in
+              animation:
+                menu-sub-dropdown-animation-fade-in
                   #{get($menu, dropdown, animation-speed)}
                   ease
                   1,

@@ -34,33 +34,34 @@ const validate = (values: RoundFormData) => {
   return errors;
 };
 
-export const CallRoundCreateForm: FunctionComponent<CallRoundCreateFormProps> =
-  (props) => {
-    const [step, setStep] = useState(0);
-    const [lastVisitedStep, setLastVisitedStep] = useState(0);
-    const isLast = step === steps.length - 1;
-    const nextStep = () => {
-      setStep(step + 1);
-      if (step + 1 > lastVisitedStep) {
-        setLastVisitedStep(step + 1);
-      }
-    };
-    const prevStep = () => setStep(step - 1);
-    const selectStep = (num: number) => {
-      if (num <= lastVisitedStep) setStep(num);
-    };
-    const submitLabel = isLast ? translate('Create') : translate('Next');
-
-    return createElement(WizardForms[step], {
-      form: 'CallRoundForm',
-      title: translate('New round'),
-      onSubmit: isLast ? props.onSubmit : nextStep,
-      onPrev: prevStep,
-      onStep: selectStep,
-      submitLabel,
-      step,
-      steps,
-      initialValues: props.initialValues,
-      validate,
-    });
+export const CallRoundCreateForm: FunctionComponent<
+  CallRoundCreateFormProps
+> = (props) => {
+  const [step, setStep] = useState(0);
+  const [lastVisitedStep, setLastVisitedStep] = useState(0);
+  const isLast = step === steps.length - 1;
+  const nextStep = () => {
+    setStep(step + 1);
+    if (step + 1 > lastVisitedStep) {
+      setLastVisitedStep(step + 1);
+    }
   };
+  const prevStep = () => setStep(step - 1);
+  const selectStep = (num: number) => {
+    if (num <= lastVisitedStep) setStep(num);
+  };
+  const submitLabel = isLast ? translate('Create') : translate('Next');
+
+  return createElement(WizardForms[step], {
+    form: 'CallRoundForm',
+    title: translate('New round'),
+    onSubmit: isLast ? props.onSubmit : nextStep,
+    onPrev: prevStep,
+    onStep: selectStep,
+    submitLabel,
+    step,
+    steps,
+    initialValues: props.initialValues,
+    validate,
+  });
+};

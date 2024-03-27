@@ -12,47 +12,47 @@ It uses yarn for dependency management and webpack as module bundler.
 
 1. Update system and install basic dependencies. Example for Linux Ubuntu:
 
-    ```bash
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get install git wget
-    ```
+   ```bash
+   sudo apt-get update
+   sudo apt-get upgrade
+   sudo apt-get install git wget
+   ```
 
 2. Install Node LTS and yarn:
 
-    ```bash
-    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-    source ~/.bashrc
-    nvm install --lts
-    npm install -g yarn
-    ```
+   ```bash
+   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+   source ~/.bashrc
+   nvm install --lts
+   npm install -g yarn
+   ```
 
 3. Clone project and go to its folder:
 
-    ```bash
-    git clone <repository-url>
-    cd waldur-homeport
-    ```
+   ```bash
+   git clone <repository-url>
+   cd waldur-homeport
+   ```
 
 4. Install dependencies via yarn:
 
-    ```bash
-    yarn
-    ```
+   ```bash
+   yarn
+   ```
 
-    PS. If you see errors related to fsevents on OS X, the workaround is: `yarn cache clean && yarn upgrade && yarn`.
+   PS. If you see errors related to fsevents on OS X, the workaround is: `yarn cache clean && yarn upgrade && yarn`.
 
 5. Create `/src/configs/config.json`:
 
-    ```bash
-    cp src/configs/config.json.example src/configs/config.json
-    ```
+   ```bash
+   cp src/configs/config.json.example src/configs/config.json
+   ```
 
 6. Configure `config.json`.
 
 7. Run application: `yarn start`.
 
-    Server will listen on `//localhost:8001`
+   Server will listen on `//localhost:8001`
 
 ## Backend configuration
 
