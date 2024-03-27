@@ -1545,7 +1545,7 @@ msgstr ""
 msgid "By call manager"
 msgstr ""
 
-#: src/form/VStepperFormSidebar.tsx
+#: src/form/TosNotification.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr ""
 
@@ -14684,15 +14684,15 @@ msgstr ""
 msgid "Yes, use invitation email"
 msgstr ""
 
-#: src/marketplace/deploy/DeployPageSidebar.tsx
+#: src/marketplace/deploy/OfferingTosNotification.tsx
 msgid "You also agree to the service provider’s <pp>privacy policy</pp>."
 msgstr ""
 
-#: src/marketplace/deploy/DeployPageSidebar.tsx
+#: src/marketplace/deploy/OfferingTosNotification.tsx
 msgid "You also agree to the service provider’s <tos>terms of service</tos> and provider’s <pp>privacy policy</pp>."
 msgstr ""
 
-#: src/marketplace/deploy/DeployPageSidebar.tsx
+#: src/marketplace/deploy/OfferingTosNotification.tsx
 msgid "You also agree to the service provider’s <tos>terms of service</tos>."
 msgstr ""
 
