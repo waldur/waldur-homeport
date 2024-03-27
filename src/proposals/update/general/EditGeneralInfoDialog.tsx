@@ -1,3 +1,4 @@
+import { pick } from 'lodash';
 import { useCallback } from 'react';
 import { connect } from 'react-redux';
 import { SubmissionError, reduxForm } from 'redux-form';
@@ -31,13 +32,16 @@ export const EditGeneralInfoDialog = connect<
   {},
   { resolve: EditCallProps }
 >((_, ownProps) => ({
-  initialValues: {
-    ...ownProps.resolve.call,
-    default_project_role:
-      ENV.roles.find(
-        (role) => role.name == ownProps.resolve.call.default_project_role_name,
-      ) || ENV.roles.find((role) => role.name == RoleEnum.PROJECT_ADMIN),
-  },
+  initialValues:
+    ownProps.resolve.name === 'default_project_role'
+      ? {
+          default_project_role:
+            ENV.roles.find(
+              (role) =>
+                role.name == ownProps.resolve.call.default_project_role_name,
+            ) || ENV.roles.find((role) => role.name == RoleEnum.PROJECT_ADMIN),
+        }
+      : pick(ownProps.resolve.call, ownProps.resolve.name),
 }))(
   reduxForm<FormData, { resolve: EditCallProps }>({
     form: EDIT_CALL_GENERAL_FORM_ID,
