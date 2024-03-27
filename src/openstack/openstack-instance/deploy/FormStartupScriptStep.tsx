@@ -4,15 +4,15 @@ import { Field } from 'redux-form';
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { TextField } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 export const FormStartupScriptStep = (props: FormStepProps) => {
   const [scriptEnabled, setScriptEnabled] = useState(false);
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Startup script')}
       step={props.step}
       id={props.id}
@@ -39,6 +39,6 @@ export const FormStartupScriptStep = (props: FormStepProps) => {
           )}
         />
       )}
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

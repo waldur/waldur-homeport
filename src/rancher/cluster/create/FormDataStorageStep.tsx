@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { FieldArray, FormName, FormSection } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
@@ -105,7 +105,7 @@ export const FormDataStorageStep = (props: FormStepProps) => {
   const mountPoints = useMemo(() => getRancherMountPointChoices(), []);
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Data storage')}
       step={props.step}
       id={props.id}
@@ -142,6 +142,6 @@ export const FormDataStorageStep = (props: FormStepProps) => {
           {translate('Please add a node')}
         </StepCardPlaceholder>
       )}
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

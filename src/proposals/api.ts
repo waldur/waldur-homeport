@@ -22,6 +22,7 @@ import {
   CallOffering,
   Proposal,
   Round,
+  ProposalReview,
 } from './types';
 
 export const getCallManagingOrganization = (customerUuid) =>
@@ -137,6 +138,9 @@ export const updateProposalResource = (data, proposalUuid, uuid) =>
 
 export const removeProposalResource = (proposalUuid, uuid) =>
   deleteById(`/proposal-proposals/${proposalUuid}/resources/`, uuid);
+
+export const createProposalReview = (data) =>
+  post<ProposalReview>(`/proposal-reviews/`, data);
 
 export const acceptProposalReview = (uuid) =>
   post(`/proposal-reviews/${uuid}/accept/`);

@@ -1,10 +1,10 @@
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { OptionsForm } from '@waldur/marketplace/common/OptionsForm';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 
 import { FormStepProps } from '../types';
 
 export const FormAdditionalConfigurationStep = (props: FormStepProps) => (
-  <StepCard
+  <VStepperFormStepCard
     title={props.title}
     step={props.step}
     id={props.id}
@@ -13,5 +13,5 @@ export const FormAdditionalConfigurationStep = (props: FormStepProps) => (
     required={props.required}
   >
     <OptionsForm options={props.offering.options} />
-  </StepCard>
+  </VStepperFormStepCard>
 );

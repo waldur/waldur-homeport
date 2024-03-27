@@ -1,10 +1,12 @@
-.proposal-manage-sidebar {
+$headerAndToolbarHeight: calc(65px + var(--kt-toolbar-height));
+
+.v-stepper-form-sidebar {
   width: 350px; /* for larger screen sizes */
-  top: calc(65px + var(--kt-toolbar-height));
+  top: $headerAndToolbarHeight;
   z-index: 95 !important;
   position: sticky !important;
   flex-shrink: 0;
-  height: calc(100vh - 65px);
+  height: calc(100vh - $headerAndToolbarHeight);
 
   .stepper {
     &.stepper-pills {
@@ -70,19 +72,20 @@
   }
 }
 
-body:not(.toolbar-fixed) .proposal-manage-sidebar {
+body:not(.toolbar-fixed) .v-stepper-form-sidebar {
   top: 65px;
+  height: calc(100vh - 65px);
 }
 
 @media (max-width: 1650px) {
-  .proposal-manage-sidebar {
+  .v-stepper-form-sidebar {
     width: 300px;
   }
 }
 
 /* Equals to bootstrap xl screen size (for smaller than xl) */
 @media (max-width: 1200px) {
-  .proposal-manage-sidebar {
+  .v-stepper-form-sidebar {
     width: 100%;
     height: auto;
   }

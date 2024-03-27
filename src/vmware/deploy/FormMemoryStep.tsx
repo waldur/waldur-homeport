@@ -3,13 +3,13 @@ import { Field } from 'redux-form';
 
 import { FormGroup } from '@waldur/form';
 import { SliderNumberField } from '@waldur/form/SliderNumberField';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import {
   formatIntField,
   maxAmount,
   parseIntField,
 } from '@waldur/marketplace/common/utils';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 import { minOne, useVMwareLimitsLoader } from './utils';
@@ -25,7 +25,7 @@ export const FormMemoryStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Memory')}
       step={props.step}
       id={props.id}
@@ -50,6 +50,6 @@ export const FormMemoryStep = (props: FormStepProps) => {
           max={limits.max_ram}
         />
       </Field>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

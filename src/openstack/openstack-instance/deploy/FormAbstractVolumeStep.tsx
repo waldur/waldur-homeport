@@ -6,8 +6,8 @@ import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { required } from '@waldur/core/validators';
 import { FormGroup, SelectField } from '@waldur/form';
 import { SliderNumberField } from '@waldur/form/SliderNumberField';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
@@ -64,7 +64,7 @@ export const FormAbstractVolumeStep = (
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={props.title}
       step={props.step}
       id={props.id}
@@ -118,6 +118,6 @@ export const FormAbstractVolumeStep = (
           max={1 * 5120}
         />
       </Field>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

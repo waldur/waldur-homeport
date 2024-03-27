@@ -31,6 +31,6 @@ module.exports = {
   reporters: ['default', 'jest-junit'],
   snapshotFormat: {
     escapeString: true,
-    printBasicPrototype: true
+    printBasicPrototype: true,
   },
 };

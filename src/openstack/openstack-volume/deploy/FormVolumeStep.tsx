@@ -4,8 +4,8 @@ import { Field } from 'redux-form';
 import { required } from '@waldur/core/validators';
 import { FormGroup, SelectField } from '@waldur/form';
 import { SliderNumberField } from '@waldur/form/SliderNumberField';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import {
   getOfferingLimit,
@@ -40,7 +40,7 @@ export const FormVolumeStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Volume')}
       step={props.step}
       id={props.id}
@@ -79,6 +79,6 @@ export const FormVolumeStep = (props: FormStepProps) => {
       >
         <SliderNumberField unit={translate('GB')} min={1} max={1 * 10240} />
       </Field>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

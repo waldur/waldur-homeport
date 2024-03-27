@@ -43,6 +43,11 @@ const ProposalsList = lazyComponent(
   'ProposalsList',
 );
 
+const ProposalReviewCreatePage = lazyComponent(
+  () => import('./proposal/create-review/ProposalReviewCreatePage'),
+  'ProposalReviewCreatePage',
+);
+
 const ReviewsList = lazyComponent(
   () => import('./review/ReviewsList'),
   'ReviewsList',
@@ -104,14 +109,27 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'call-management.call-update',
+    name: 'protected-call',
     url: 'call/:call_uuid/',
+    abstract: true,
+    component: UIView,
+    parent: 'call-management',
+  },
+  {
+    name: 'protected-call.main',
+    url: '',
     component: CallUpdateContainer,
   },
   {
-    name: 'call-management.round-update',
-    url: 'call/:call_uuid/round/:round_uuid/',
+    name: 'protected-call.round',
+    url: 'round/:round_uuid/',
     component: RoundPage,
+  },
+  {
+    name: 'proposal-create-review',
+    url: 'proposal/:proposal_uuid/create-review',
+    component: ProposalReviewCreatePage,
+    parent: 'call-management',
   },
 
   // Public calls

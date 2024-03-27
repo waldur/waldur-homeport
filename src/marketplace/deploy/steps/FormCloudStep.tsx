@@ -7,8 +7,8 @@ import { Field } from 'redux-form';
 
 import { fixURL } from '@waldur/core/api';
 import { required } from '@waldur/core/validators';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { Offering } from '@waldur/marketplace/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { parseResponse } from '@waldur/table/api';
@@ -151,7 +151,7 @@ export const FormCloudStep = (props: FormStepProps) => {
   ]);
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={props.title || translate('Cloud')}
       step={props.step}
       id={props.id}
@@ -214,6 +214,6 @@ export const FormCloudStep = (props: FormStepProps) => {
           </div>
         </>
       )}
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

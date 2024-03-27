@@ -6,8 +6,8 @@ import { Button } from 'react-bootstrap';
 import { Field, FieldArray } from 'redux-form';
 
 import { parseDate } from '@waldur/core/dateUtils';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 import { getOfferingBookedItems } from '../api';
@@ -169,7 +169,7 @@ export const FormPeriodsStep = (props: FormStepProps) => {
   );
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Periods')}
       step={props.step}
       id={props.id}
@@ -185,6 +185,6 @@ export const FormPeriodsStep = (props: FormStepProps) => {
         availableSchedules={props.offering.attributes.schedules || []}
         bookedItems={bookedItems}
       />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

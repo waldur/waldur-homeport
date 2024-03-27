@@ -23,7 +23,10 @@ export const CallManagementMenu = () => {
       title={translate('Call management')}
       state="call-management.dashboard"
       activeState={
-        ['call-management.dashboard'].some((name) => state.name.includes(name))
+        ['call-management', 'protected-call'].some(
+          (name) =>
+            state.name.includes(name) || String(state.parent).includes(name),
+        )
           ? state.name
           : undefined
       }

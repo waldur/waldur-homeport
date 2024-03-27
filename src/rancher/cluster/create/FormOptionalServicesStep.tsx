@@ -3,13 +3,13 @@ import { Field } from 'redux-form';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { FormGroup } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 export const FormOptionalServicesStep = (props: FormStepProps) => {
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Optional')}
       step={props.step}
       id={props.id}
@@ -36,6 +36,6 @@ export const FormOptionalServicesStep = (props: FormStepProps) => {
           )}
         />
       </Field>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

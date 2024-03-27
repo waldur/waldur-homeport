@@ -3,8 +3,8 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -37,7 +37,7 @@ export const FormSSHPublicKeysStep = (props: FormStepProps) => {
   const openFormDialog = useCallback(() => dispatch(keyCreateDialog()), []);
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('SSH public keys')}
       step={props.step}
       id={props.id}
@@ -82,6 +82,6 @@ export const FormSSHPublicKeysStep = (props: FormStepProps) => {
         fieldType="radio"
         fieldName="attributes.ssh_public_key"
       />
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

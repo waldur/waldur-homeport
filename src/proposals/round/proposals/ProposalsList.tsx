@@ -8,6 +8,7 @@ import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/utils';
 
 import { ProposalExpandableRow } from './ProposalExpandableRow';
+import { ProposalRowActions } from './ProposalRowActions';
 import { ProposalsPlaceholder } from './ProposalsPlaceholder';
 
 interface RoundProposalsListProps {
@@ -60,6 +61,7 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
       verboseName={translate('Proposals')}
       expandableRow={ProposalExpandableRow}
       hasQuery={true}
+      hoverableRow={ProposalRowActions}
     />
   );
 };

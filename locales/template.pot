@@ -496,6 +496,10 @@ msgstr ""
 msgid "Add user"
 msgstr ""
 
+#: src/proposals/proposal/create-review/steps/FormSummaryStep.tsx
+msgid "Add your comment here"
+msgstr ""
+
 #: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
 msgid "Add your favorite pages here"
 msgstr ""
@@ -959,6 +963,10 @@ msgstr ""
 
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 msgid "Are you sure you want to delete the image?"
+msgstr ""
+
+#: src/proposals/details/CallOfferingDeleteButton.tsx
+msgid "Are you sure you want to delete the offering {offering_name} ?"
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
@@ -1551,7 +1559,7 @@ msgstr ""
 msgid "By call manager"
 msgstr ""
 
-#: src/marketplace/deploy/PlatformTosNotification.tsx
+#: src/form/VStepperFormSidebar.tsx
 msgid "By ordering, you agree to the platform <tos>terms of service</tos> and <pp>privacy policy</pp>."
 msgstr ""
 
@@ -2041,6 +2049,7 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackListExpandableRow.tsx
 #: src/marketplace-remote/ReviewDialog.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 #: src/reporting/resource-usage/ResourceUsageList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Comment"
@@ -2055,6 +2064,7 @@ msgid "Comment prefix"
 msgstr ""
 
 #: src/issues/comments/IssueCommentsContainer.tsx
+#: src/proposals/proposal/create-review/steps/FormSummaryStep.tsx
 msgid "Comments"
 msgstr ""
 
@@ -2182,6 +2192,7 @@ msgstr ""
 #: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/details/CallOfferingDeleteButton.tsx
 #: src/proposals/team/UserRemoveButton.tsx
 #: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
@@ -2530,6 +2541,11 @@ msgstr ""
 
 #: src/issues/create/IssueCreateDialog.tsx
 msgid "Create request"
+msgstr ""
+
+#: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
+#: src/proposals/round/proposals/ProposalRowActions.tsx
+msgid "Create review"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -3549,7 +3565,6 @@ msgstr ""
 #: src/proposals/round/allocation/EditRoundAllocationDialog.tsx
 #: src/proposals/round/review/EditReviewInfoButton.tsx
 #: src/proposals/round/review/EditRoundReviewDialog.tsx
-#: src/proposals/round/reviewers/EditReviewersButton.tsx
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
@@ -4011,6 +4026,10 @@ msgstr ""
 msgid "Ethernet type"
 msgstr ""
 
+#: src/proposals/proposal/create-review/steps/steps.ts
+msgid "Evaluate project details"
+msgstr ""
+
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/feedback/SupportFeedbackListFilter.tsx
@@ -4274,6 +4293,7 @@ msgstr ""
 msgid "File too large. Please select a smaller file."
 msgstr ""
 
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 #: src/proposals/proposal/create/UploadDocumentationFiles.tsx
 msgid "File {index}"
 msgstr ""
@@ -4301,6 +4321,10 @@ msgstr ""
 #: src/support/deploy-steps.ts
 #: src/vmware/deploy/steps.ts
 msgid "Final configuration"
+msgstr ""
+
+#: src/proposals/proposal/create-review/steps/FormSummaryStep.tsx
+msgid "Final score"
 msgstr ""
 
 #: src/navigation/header/project-selector/ProjectSelectorDropdown.tsx
@@ -4984,6 +5008,7 @@ msgstr ""
 msgid "Importing resources"
 msgstr ""
 
+#: src/proposals/proposal/create-review/CreatePageSidebar.tsx
 #: src/proposals/utils.ts
 msgid "In review"
 msgstr ""
@@ -6482,6 +6507,10 @@ msgstr ""
 msgid "Next hop (IP)"
 msgstr ""
 
+#: src/proposals/proposal/create-review/steps/FormProjectDetailsStep.tsx
+msgid "Next section"
+msgstr ""
+
 #: src/resource/summary/ScheduleSummary.tsx
 msgid "Next trigger at"
 msgstr ""
@@ -6726,6 +6755,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/plans/PlansTable.tsx
 msgid "Not used"
+msgstr ""
+
+#: src/proposals/proposal/create-review/steps/FormSummaryStep.tsx
+msgid "Notes (not visible to user)"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
@@ -8458,6 +8491,7 @@ msgid "Project description"
 msgstr ""
 
 #: src/project/ProjectDetailsDialog.tsx
+#: src/proposals/proposal/create-review/steps/FormEvaluateProjectDetailsStep.tsx
 #: src/proposals/proposal/create/steps.ts
 msgid "Project details"
 msgstr ""
@@ -8652,6 +8686,10 @@ msgstr ""
 
 #: src/proposals/proposal/create/ProposalCompletionPage.tsx
 msgid "Proposal has been switched to team verification step."
+msgstr ""
+
+#: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
+msgid "Proposal review created successfully"
 msgstr ""
 
 #: src/proposals/proposal/create/ProjectDetailsSummary.tsx
@@ -8962,6 +9000,10 @@ msgstr ""
 msgid "Rating"
 msgstr ""
 
+#: src/proposals/proposal/create-review/steps/steps.ts
+msgid "Rating and comments"
+msgstr ""
+
 #: src/marketplace/landing/FooterSection.tsx
 msgid "Reach a new audience"
 msgstr ""
@@ -9210,6 +9252,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/project/team/UserRemoveButton.tsx
+#: src/proposals/details/CallOfferingDeleteButton.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
 #: src/proposals/team/UserRemoveButton.tsx
 #: src/proposals/update/documents/RemoveDocumentButton.tsx
@@ -9426,6 +9469,10 @@ msgstr ""
 msgid "Requested email"
 msgstr ""
 
+#: src/proposals/details/CallOfferingDeleteButton.tsx
+msgid "Requested offering has been removed."
+msgstr ""
+
 #: src/marketplace/category/list/OfferingCard.tsx
 #: src/marketplace/common/OfferingCard.tsx
 #: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
@@ -9608,6 +9655,7 @@ msgstr ""
 msgid "Resource request has been updated."
 msgstr ""
 
+#: src/proposals/proposal/create-review/steps/FormEvaluateProjectDetailsStep.tsx
 #: src/proposals/proposal/create/ResourceRequestsSummary.tsx
 #: src/proposals/proposal/create/steps.ts
 msgid "Resource requests"
@@ -9791,6 +9839,10 @@ msgstr ""
 
 #: src/marketplace-remote/ReviewDialog.tsx
 msgid "Review has been submitted."
+msgstr ""
+
+#: src/proposals/proposal/create-review/CreatePageSidebar.tsx
+msgid "Review progress"
 msgstr ""
 
 #: src/marketplace-remote/ReviewDialog.tsx
@@ -11156,6 +11208,7 @@ msgid "Snapshots count"
 msgstr ""
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
 #: src/proposals/proposal/create/ProposalCompletionPage.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
@@ -11423,6 +11476,7 @@ msgstr ""
 #: src/administration/agreements/UserAgreementDeleteDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
+#: src/form/VStepperFormSidebar.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/PermissionRequestActionDialog.tsx
 #: src/invitations/actions/GroupInvitationCreateDialog.tsx
@@ -11451,6 +11505,10 @@ msgstr ""
 #: src/resource/actions/ResourceActionDialog.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Submit"
+msgstr ""
+
+#: src/proposals/proposal/create-review/CreatePageSidebar.tsx
+msgid "Submit application"
 msgstr ""
 
 #: src/slurm/details/SubmitJobAction.tsx
@@ -11530,6 +11588,7 @@ msgstr ""
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
+#: src/proposals/proposal/create-review/steps/FormSummaryStep.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/TemplateDetail.tsx
 #: src/resource/summary/VirtualMachineSummary.tsx
@@ -11560,6 +11619,10 @@ msgstr ""
 
 #: src/proposals/proposal/create/UploadDocumentationFiles.tsx
 msgid "Supported formats"
+msgstr ""
+
+#: src/proposals/proposal/create/ProjectDetailsSummary.tsx
+msgid "Supporting documentation"
 msgstr ""
 
 #: src/vmware/actions/SuspendAction.tsx
@@ -12760,6 +12823,10 @@ msgstr ""
 
 #: src/customer/payments/store/effects.ts
 msgid "Unable to delete payment."
+msgstr ""
+
+#: src/proposals/details/CallOfferingDeleteButton.tsx
+msgid "Unable to delete requested offering."
 msgstr ""
 
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
@@ -14605,6 +14672,10 @@ msgstr ""
 
 #: src/i18n/constants.ts
 msgid "Welcome to service catalog"
+msgstr ""
+
+#: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
+msgid "Welcome to the review portal. Please review the application below. If you want to add a comment to a specific field, click on the comment action in the corresponding field."
 msgstr ""
 
 #: src/auth/AuthInit.tsx

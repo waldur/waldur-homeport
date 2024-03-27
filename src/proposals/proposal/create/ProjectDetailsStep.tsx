@@ -6,21 +6,23 @@ import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { FormGroup, SelectField, StringField, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import {
+  VStepperFormStepCard,
+  VStepperFormStepProps,
+} from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { loadOecdCodes } from '@waldur/project/api';
-import { ProposalFormStepProps } from '@waldur/proposals/types';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import { UploadDocumentationFiles } from './UploadDocumentationFiles';
 
 const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
-export const ProjectDetailsStep = (props: ProposalFormStepProps) => {
+export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const { loading, value: oecdCodes } = useAsync(loadOecdCodes);
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={props.title}
       step={props.step}
       id={props.id}
@@ -118,6 +120,6 @@ export const ProjectDetailsStep = (props: ProposalFormStepProps) => {
       >
         <UploadDocumentationFiles proposal={props.params.proposal} />
       </Field>
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

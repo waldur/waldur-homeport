@@ -2,8 +2,9 @@ import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
-import './ProgressSteps.scss';
 import { Proposal } from '@waldur/proposals/types';
+
+import './ProgressSteps.scss';
 
 interface ProgressStepsProps {
   proposal: Proposal;

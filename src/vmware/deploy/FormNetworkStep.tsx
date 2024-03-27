@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { ENV } from '@waldur/configs/default';
+import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { StepCard } from '@waldur/marketplace/deploy/steps/StepCard';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { Table, createFetcher } from '@waldur/table';
@@ -29,7 +29,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
   });
 
   return (
-    <StepCard
+    <VStepperFormStepCard
       title={translate('Network interfaces')}
       step={props.step}
       id={props.id}
@@ -68,6 +68,6 @@ export const FormNetworkStep = (props: FormStepProps) => {
           fieldName="attributes.networks"
         />
       )}
-    </StepCard>
+    </VStepperFormStepCard>
   );
 };

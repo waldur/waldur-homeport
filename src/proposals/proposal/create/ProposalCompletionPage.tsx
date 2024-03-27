@@ -6,6 +6,7 @@ import { reduxForm } from 'redux-form';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { VStepperForm } from '@waldur/form/VStepperForm';
 import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
@@ -17,37 +18,11 @@ import {
 } from '@waldur/proposals/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import './ProposalCompletionPage.scss';
 import { ProgressSteps } from './ProgressSteps';
 import { ProposalHeader } from './ProposalHeader';
 import { ProposalSidebar } from './ProposalSidebar';
 import { ProposalTeam } from './ProposalTeam';
 import { createProposalSteps } from './steps';
-
-const ProposalSteps = ({ proposal, refetch }) => {
-  const formSteps = createProposalSteps;
-
-  const stepRefs = useRef([]);
-  stepRefs.current = formSteps.map(
-    (_, i) => stepRefs.current[i] ?? createRef(),
-  );
-
-  return (
-    <>
-      {formSteps.map((step, i) => (
-        <div ref={stepRefs.current[i]} key={step.id}>
-          <step.component
-            step={i + 1}
-            id={step.id}
-            title={step.label}
-            observed={false}
-            params={{ proposal, refetch }}
-          />
-        </div>
-      ))}
-    </>
-  );
-};
 
 export const ProposalCompletionPage = reduxForm({
   form: 'ProposalCompletionForm',
@@ -80,6 +55,13 @@ export const ProposalCompletionPage = reduxForm({
       });
     },
   });
+
+  const formSteps = createProposalSteps;
+
+  const stepRefs = useRef([]);
+  stepRefs.current = formSteps.map(
+    (_, i) => stepRefs.current[i] ?? createRef(),
+  );
 
   const submitForm = useCallback(
     async (formData) => {
@@ -129,24 +111,33 @@ export const ProposalCompletionPage = reduxForm({
       {proposal.state === 'team_verification' ? (
         <ProposalTeam proposal={proposal} />
       ) : (
-        <form
-          className="form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10"
-          onSubmit={props.handleSubmit(submitForm)}
+        <VStepperForm
+          form="ProposalCompletionForm"
+          steps={formSteps}
+          sidebar={(sidebarProps) => (
+            <ProposalSidebar
+              {...sidebarProps}
+              switchToTeam={switchToTeamCallback}
+              canSwitchToTeam={proposal.state === 'draft'}
+            />
+          )}
+          onSubmit={submitForm}
+          noPaddingTop
         >
-          <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
-            <ProposalHeader proposal={proposal} />
+          <ProposalHeader proposal={proposal} />
 
-            {/* Steps */}
-            <ProposalSteps proposal={proposal} refetch={refetch} />
-          </div>
-
-          {/* Sidebar */}
-          <ProposalSidebar
-            switchToTeam={switchToTeamCallback}
-            submitting={props.submitting}
-            canSwitchToTeam={proposal.state === 'draft'}
-          />
-        </form>
+          {formSteps.map((step, i) => (
+            <div ref={stepRefs.current[i]} key={step.id}>
+              <step.component
+                step={i + 1}
+                id={step.id}
+                title={step.label}
+                observed={false}
+                params={{ proposal, refetch }}
+              />
+            </div>
+          ))}
+        </VStepperForm>
       )}
     </>
   );
