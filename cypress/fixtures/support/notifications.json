@@ -7,9 +7,7 @@
     "query": {
       "projects": [],
       "customers": [],
-      "offerings": [],
-      "project_roles": [],
-      "customer_roles": []
+      "offerings": []
     },
     "author_full_name": "Admin",
     "emails": [],
@@ -140,9 +138,7 @@
           "name": "Managed maximized superstructure",
           "uuid": "bc636616fd3f4aae9086c7dca70fe2ad"
         }
-      ],
-      "project_roles": ["manager"],
-      "customer_roles": ["support"]
+      ]
     },
     "author_full_name": "Admin",
     "emails": ["DavidJenkins@example.com"],
@@ -163,9 +159,7 @@
           "name": "UT HPC (Public)",
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
-      ],
-      "project_roles": ["manager", "admin"],
-      "customer_roles": ["owner"]
+      ]
     },
     "author_full_name": "Brandon Hogan",
     "emails": ["john.doe@gmail.com"],
@@ -186,9 +180,7 @@
           "name": "UT HPC (Public)",
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
-      ],
-      "project_roles": ["manager", "admin"],
-      "customer_roles": ["owner"]
+      ]
     },
     "author_full_name": "Brandon Hogan",
     "emails": ["john.doe@gmail.com"],
@@ -205,8 +197,7 @@
           "name": "UT HPC (Public)",
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
-      ],
-      "customer_roles": ["owner"]
+      ]
     },
     "author_full_name": "Brandon Hogan",
     "emails": ["john.doe@gmail.com"],
@@ -245,9 +236,7 @@
           "name": "UT HPC (Public)",
           "uuid": "c183adfc4d7a422badcc84e0b198bfff"
         }
-      ],
-      "project_roles": ["admin", "manager"],
-      "customer_roles": ["owner"]
+      ]
     },
     "author_full_name": "Brandon Hogan",
     "emails": ["john.doe@gmail.com"],

@@ -41,8 +41,6 @@ interface QueryResponse {
   customers: IdNamePair[];
   offerings: IdNamePair[];
   projects: IdNamePair[];
-  customer_roles: string[];
-  project_roles: string[];
   all_users: boolean;
 }
 
