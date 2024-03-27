@@ -15,13 +15,14 @@ interface ExpandableEventDetailsProps extends StateProps {
   row: Event;
 }
 
-const PureExpandableEventDetails: FunctionComponent<ExpandableEventDetailsProps> =
-  (props) => (
-    <ExpandableEventDetailsTable
-      event={props.row}
-      isStaffOrSupport={props.isStaffOrSupport}
-    />
-  );
+const PureExpandableEventDetails: FunctionComponent<
+  ExpandableEventDetailsProps
+> = (props) => (
+  <ExpandableEventDetailsTable
+    event={props.row}
+    isStaffOrSupport={props.isStaffOrSupport}
+  />
+);
 
 const mapStateToProps = (state: RootState) => ({
   isStaffOrSupport: isStaffOrSupport(state),

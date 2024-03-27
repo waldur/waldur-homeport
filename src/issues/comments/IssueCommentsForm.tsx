@@ -19,37 +19,32 @@ interface PureIssueCommentsFormProps extends InjectedFormProps {
   onSubmit(data: any): void;
 }
 
-export const IssueCommentsForm: FunctionComponent<PureIssueCommentsFormProps> =
-  (props) => {
-    const {
-      submitting,
-      uiDisabled,
-      pristine,
-      onCancel,
-      handleSubmit,
-      onSubmit,
-    } = props;
+export const IssueCommentsForm: FunctionComponent<
+  PureIssueCommentsFormProps
+> = (props) => {
+  const { submitting, uiDisabled, pristine, onCancel, handleSubmit, onSubmit } =
+    props;
 
-    return (
-      <div className="comments-form">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <FormContainer submitting={submitting} clearOnUnmount={false}>
-            <TextField name={constants.FORM_FIELDS.comment} />
-          </FormContainer>
-          <div className="comments-form__controls mt-3 text-end mb-2">
-            <SubmitButton
-              submitting={submitting}
-              disabled={uiDisabled || pristine}
-              label={translate('Add')}
-              className="btn btn-primary me-3"
-            />
-            <CancelButton
-              onClick={onCancel}
-              label={translate('Cancel')}
-              variant="secondary"
-            />
-          </div>
-        </form>
-      </div>
-    );
-  };
+  return (
+    <div className="comments-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormContainer submitting={submitting} clearOnUnmount={false}>
+          <TextField name={constants.FORM_FIELDS.comment} />
+        </FormContainer>
+        <div className="comments-form__controls mt-3 text-end mb-2">
+          <SubmitButton
+            submitting={submitting}
+            disabled={uiDisabled || pristine}
+            label={translate('Add')}
+            className="btn btn-primary me-3"
+          />
+          <CancelButton
+            onClick={onCancel}
+            label={translate('Cancel')}
+            variant="secondary"
+          />
+        </div>
+      </form>
+    </div>
+  );
+};

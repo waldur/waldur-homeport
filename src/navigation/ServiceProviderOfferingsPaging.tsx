@@ -16,29 +16,30 @@ interface ServiceProviderOfferingsPagingProps {
 const isNextDisabled = (pageIndex: number, totalItems: number) =>
   pageIndex * PAGE_SIZE >= totalItems;
 
-export const ServiceProviderOfferingsPaging: FunctionComponent<ServiceProviderOfferingsPagingProps> =
-  ({ pageIndex, onPageChange, totalItems }) => {
-    const previous = () => {
-      if (pageIndex === 1) {
-        return;
-      }
-      onPageChange(pageIndex - 1);
-    };
-
-    const next = () => {
-      if (isNextDisabled(pageIndex, totalItems)) {
-        return;
-      }
-      onPageChange(pageIndex + 1);
-    };
-
-    return (
-      <div className="spOfferingsPaging">
-        <PrevPage disabled={pageIndex === 1} onClick={previous} />
-        <NextPage
-          disabled={isNextDisabled(pageIndex, totalItems)}
-          onClick={next}
-        />
-      </div>
-    );
+export const ServiceProviderOfferingsPaging: FunctionComponent<
+  ServiceProviderOfferingsPagingProps
+> = ({ pageIndex, onPageChange, totalItems }) => {
+  const previous = () => {
+    if (pageIndex === 1) {
+      return;
+    }
+    onPageChange(pageIndex - 1);
   };
+
+  const next = () => {
+    if (isNextDisabled(pageIndex, totalItems)) {
+      return;
+    }
+    onPageChange(pageIndex + 1);
+  };
+
+  return (
+    <div className="spOfferingsPaging">
+      <PrevPage disabled={pageIndex === 1} onClick={previous} />
+      <NextPage
+        disabled={isNextDisabled(pageIndex, totalItems)}
+        onClick={next}
+      />
+    </div>
+  );
+};

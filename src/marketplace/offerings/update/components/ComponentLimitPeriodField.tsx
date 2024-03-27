@@ -41,22 +41,23 @@ interface ComponentLimitPeriodFieldProps {
   limitPeriod: LimitPeriodOption;
 }
 
-export const ComponentLimitPeriodField: FunctionComponent<ComponentLimitPeriodFieldProps> =
-  (props) => (
-    <FormGroup label={translate('Limit period')}>
-      <Field
-        name="limit_period"
-        component={(fieldProps) => (
-          <Select
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            options={getLimitPeriods()}
-            isClearable={false}
-          />
-        )}
-      />
-      {props.limitPeriod && (
-        <div className="help-text mt-2">{props.limitPeriod.description}</div>
+export const ComponentLimitPeriodField: FunctionComponent<
+  ComponentLimitPeriodFieldProps
+> = (props) => (
+  <FormGroup label={translate('Limit period')}>
+    <Field
+      name="limit_period"
+      component={(fieldProps) => (
+        <Select
+          value={fieldProps.input.value}
+          onChange={(value) => fieldProps.input.onChange(value)}
+          options={getLimitPeriods()}
+          isClearable={false}
+        />
       )}
-    </FormGroup>
-  );
+    />
+    {props.limitPeriod && (
+      <div className="help-text mt-2">{props.limitPeriod.description}</div>
+    )}
+  </FormGroup>
+);

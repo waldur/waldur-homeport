@@ -10,21 +10,22 @@ interface PureIssueCommentsListProps {
   erred?: boolean;
 }
 
-export const IssueCommentsList: FunctionComponent<PureIssueCommentsListProps> =
-  (props) => {
-    const { comments, erred } = props;
+export const IssueCommentsList: FunctionComponent<
+  PureIssueCommentsListProps
+> = (props) => {
+  const { comments, erred } = props;
 
-    if (erred) {
-      return <div>{translate('Unable to load comments.')}</div>;
-    }
-    if (!comments.length) {
-      return <div>{translate('There are no comments yet.')}</div>;
-    }
-    return (
-      <div className="vertical-container dark-timeline">
-        {comments.map((comment) => (
-          <IssueCommentItem key={comment.uuid} comment={comment} />
-        ))}
-      </div>
-    );
-  };
+  if (erred) {
+    return <div>{translate('Unable to load comments.')}</div>;
+  }
+  if (!comments.length) {
+    return <div>{translate('There are no comments yet.')}</div>;
+  }
+  return (
+    <div className="vertical-container dark-timeline">
+      {comments.map((comment) => (
+        <IssueCommentItem key={comment.uuid} comment={comment} />
+      ))}
+    </div>
+  );
+};

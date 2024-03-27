@@ -14,16 +14,17 @@ type DispatchProps = typeof mapDispatchToProps;
 
 type OrganizationCreateButtonProps = StateProps & DispatchProps;
 
-const OrganizationCreateButtonPure: FunctionComponent<OrganizationCreateButtonProps> =
-  ({ isVisible, onClick }) =>
-    isVisible ? (
-      <ActionButton
-        title={translate('Add organization')}
-        action={onClick}
-        icon="fa fa-plus"
-        variant="primary"
-      />
-    ) : null;
+const OrganizationCreateButtonPure: FunctionComponent<
+  OrganizationCreateButtonProps
+> = ({ isVisible, onClick }) =>
+  isVisible ? (
+    <ActionButton
+      title={translate('Add organization')}
+      action={onClick}
+      icon="fa fa-plus"
+      variant="primary"
+    />
+  ) : null;
 
 const mapDispatchToProps = {
   onClick: customerCreateDialog,

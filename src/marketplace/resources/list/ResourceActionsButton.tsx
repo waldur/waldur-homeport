@@ -10,20 +10,21 @@ interface ResourceActionsButtonProps {
   refetch?(): void;
 }
 
-export const ResourceActionsButton: FunctionComponent<ResourceActionsButtonProps> =
-  ({ row, refetch }) =>
-    row.scope === null || row.offering_type === 'Support.OfferingTemplate' ? (
-      <BaseResourceActionsButton
-        resource={
-          {
-            ...row,
-            marketplace_resource_uuid: row.uuid,
-          } as any
-        }
-        refetch={refetch}
-      />
-    ) : (
-      <>
-        <ActionButtonResource url={row.scope} refetch={refetch} />
-      </>
-    );
+export const ResourceActionsButton: FunctionComponent<
+  ResourceActionsButtonProps
+> = ({ row, refetch }) =>
+  row.scope === null || row.offering_type === 'Support.OfferingTemplate' ? (
+    <BaseResourceActionsButton
+      resource={
+        {
+          ...row,
+          marketplace_resource_uuid: row.uuid,
+        } as any
+      }
+      refetch={refetch}
+    />
+  ) : (
+    <>
+      <ActionButtonResource url={row.scope} refetch={refetch} />
+    </>
+  );

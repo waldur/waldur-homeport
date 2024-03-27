@@ -9,20 +9,20 @@ const invitationRequestBodies = {
   'owner@test.com': {
     email: 'owner@test.com',
     extra_invitation_text: 'Testing invite users',
-    role: "511cfcf0357f43ff835bfe243569658d",
-    scope: "/api/customers/bf6d515c9e6e445f9c339021b30fc96b",
+    role: '511cfcf0357f43ff835bfe243569658d',
+    scope: '/api/customers/bf6d515c9e6e445f9c339021b30fc96b',
   },
   'manager@test.com': {
     email: 'manager@test.com',
     extra_invitation_text: 'Testing invite users',
-    role: "f98af5dc4ae14d30b905e9670f44c835",
-    scope: "/api/projects/6f3ae6f43d284ca196afeb467880b3b9/",
+    role: 'f98af5dc4ae14d30b905e9670f44c835',
+    scope: '/api/projects/6f3ae6f43d284ca196afeb467880b3b9/',
   },
   'administrator@test.com': {
     email: 'administrator@test.com',
     extra_invitation_text: 'Testing invite users',
-    role: "94e3061f698c49a68b3aad97db393bd1",
-    scope: "/api/projects/df4193e2bee24a4c8e339474d74c5f8c/",
+    role: '94e3061f698c49a68b3aad97db393bd1',
+    scope: '/api/projects/df4193e2bee24a4c8e339474d74c5f8c/',
   },
 };
 

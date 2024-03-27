@@ -12,39 +12,38 @@ interface GroupInvitationCancelButtonProps {
   refetch;
 }
 
-export const GroupInvitationCancelButton: FunctionComponent<GroupInvitationCancelButtonProps> =
-  ({ permissionRequest, refetch }) => {
-    const dispatch = useDispatch();
-    const callback = async () => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Confirmation'),
-          translate('Are you sure you want to cancel invitation by {name}?', {
-            name: permissionRequest.created_by_full_name,
-          }),
-        );
-      } catch {
-        return;
-      }
-      try {
-        await cancelGroupInvitation(permissionRequest.uuid);
-        refetch();
-        dispatch(
-          showSuccess(translate('Group invitation has been cancelled.')),
-        );
-      } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to cancel group invitation.')),
-        );
-      }
-    };
-    return (
-      <ActionButton
-        action={callback}
-        title={translate('Cancel')}
-        icon="fa fa-ban"
-        className="btn-secondary"
-      />
-    );
+export const GroupInvitationCancelButton: FunctionComponent<
+  GroupInvitationCancelButtonProps
+> = ({ permissionRequest, refetch }) => {
+  const dispatch = useDispatch();
+  const callback = async () => {
+    try {
+      await waitForConfirmation(
+        dispatch,
+        translate('Confirmation'),
+        translate('Are you sure you want to cancel invitation by {name}?', {
+          name: permissionRequest.created_by_full_name,
+        }),
+      );
+    } catch {
+      return;
+    }
+    try {
+      await cancelGroupInvitation(permissionRequest.uuid);
+      refetch();
+      dispatch(showSuccess(translate('Group invitation has been cancelled.')));
+    } catch (e) {
+      dispatch(
+        showErrorResponse(e, translate('Unable to cancel group invitation.')),
+      );
+    }
   };
+  return (
+    <ActionButton
+      action={callback}
+      title={translate('Cancel')}
+      icon="fa fa-ban"
+      className="btn-secondary"
+    />
+  );
+};

@@ -58,10 +58,10 @@ export const CustomerRemovePanel: FunctionComponent = () => {
               'Organization contains projects. Please remove them first.',
             )
           : hasActiveInvoices
-          ? translate(
-              'Organization contains invoices. Please remove them first.',
-            )
-          : '';
+            ? translate(
+                'Organization contains invoices. Please remove them first.',
+              )
+            : '';
         return notification
           ? dispatch(showError(notification))
           : dispatch(openModalDialog(OrganizationRemovalErrorDialog));

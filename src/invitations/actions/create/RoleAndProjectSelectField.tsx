@@ -225,25 +225,26 @@ export const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (
   );
 };
 
-export const RoleAndProjectSelectField: React.FC<RoleAndProjectSelectFieldProps> =
-  ({ name, roles, customer, currentProject, disabled }) => {
-    return !disabled ? (
-      <Field
-        name={name}
-        roles={roles}
-        customer={customer}
-        currentProject={currentProject}
-        component={RoleAndProjectSelect}
-        placeholder={translate('Select role')}
-        validate={[required]}
-      />
-    ) : (
-      <Field
-        name={name}
-        component={FormControl}
-        placeholder={translate('Select role')}
-        disabled={disabled}
-        validate={[required]}
-      />
-    );
-  };
+export const RoleAndProjectSelectField: React.FC<
+  RoleAndProjectSelectFieldProps
+> = ({ name, roles, customer, currentProject, disabled }) => {
+  return !disabled ? (
+    <Field
+      name={name}
+      roles={roles}
+      customer={customer}
+      currentProject={currentProject}
+      component={RoleAndProjectSelect}
+      placeholder={translate('Select role')}
+      validate={[required]}
+    />
+  ) : (
+    <Field
+      name={name}
+      component={FormControl}
+      placeholder={translate('Select role')}
+      disabled={disabled}
+      validate={[required]}
+    />
+  );
+};

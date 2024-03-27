@@ -23,7 +23,8 @@ body {
 
   // Wrapper
   .wrapper {
-    transition: padding-left get($aside-config, transition-speed) ease,
+    transition:
+      padding-left get($aside-config, transition-speed) ease,
       margin-right get($aside-config, transition-speed) ease;
 
     // Aside default enabled and aside fixed modes

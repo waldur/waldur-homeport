@@ -17,41 +17,42 @@ interface ResourceActionComponentProps {
   refetch?(): void;
 }
 
-export const ResourceActionComponent: FunctionComponent<ResourceActionComponentProps> =
-  (props) => (
-    <DropdownButton
-      title={translate('Actions')}
-      onToggle={props.onToggle}
-      disabled={props.disabled}
-      variant="light"
-      data-cy="actions-dropdown-btn"
-      className="me-3 d-inline-block"
-    >
-      {props.open ? (
-        props.loading ? (
-          <Dropdown.Item eventKey="1">
-            {translate('Loading actions')}
-          </Dropdown.Item>
-        ) : props.error ? (
-          <Dropdown.Item eventKey="1">
-            {translate('Unable to load actions')}
-          </Dropdown.Item>
-        ) : props.actions ? (
-          <>
-            {props.actions.map((ActionComponent, index) => (
-              <ActionComponent
-                key={index}
-                resource={props.resource}
-                marketplaceResource={props.marketplaceResource}
-                refetch={props.refetch}
-              />
-            ))}
-          </>
-        ) : (
-          <Dropdown.Item eventKey="2">
-            {translate('There are no actions.')}
-          </Dropdown.Item>
-        )
-      ) : null}
-    </DropdownButton>
-  );
+export const ResourceActionComponent: FunctionComponent<
+  ResourceActionComponentProps
+> = (props) => (
+  <DropdownButton
+    title={translate('Actions')}
+    onToggle={props.onToggle}
+    disabled={props.disabled}
+    variant="light"
+    data-cy="actions-dropdown-btn"
+    className="me-3 d-inline-block"
+  >
+    {props.open ? (
+      props.loading ? (
+        <Dropdown.Item eventKey="1">
+          {translate('Loading actions')}
+        </Dropdown.Item>
+      ) : props.error ? (
+        <Dropdown.Item eventKey="1">
+          {translate('Unable to load actions')}
+        </Dropdown.Item>
+      ) : props.actions ? (
+        <>
+          {props.actions.map((ActionComponent, index) => (
+            <ActionComponent
+              key={index}
+              resource={props.resource}
+              marketplaceResource={props.marketplaceResource}
+              refetch={props.refetch}
+            />
+          ))}
+        </>
+      ) : (
+        <Dropdown.Item eventKey="2">
+          {translate('There are no actions.')}
+        </Dropdown.Item>
+      )
+    ) : null}
+  </DropdownButton>
+);

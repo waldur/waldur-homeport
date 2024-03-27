@@ -6,7 +6,7 @@ const getBillingPeriodTitle = (unit: string) =>
     day: translate('Days'),
     hour: translate('Hours'),
     month: translate('Months'),
-  }[unit] || translate('Billing periods'));
+  })[unit] || translate('Billing periods');
 
 export const ResourceLimitPeriodsTable = ({ periods, unit }) => (
   <small>

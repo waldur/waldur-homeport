@@ -44,9 +44,7 @@ describe('Broadcast', () => {
     cy.get('div.card-title.h5')
       .should('exist')
       .within(() => {
-        cy.get('span.me-2')
-          .should('exist')
-          .should('contain', 'Broadcast');
+        cy.get('span.me-2').should('exist').should('contain', 'Broadcast');
       });
   });
 
@@ -63,27 +61,19 @@ describe('Broadcast', () => {
         .click()
         .get('.modal-footer > .ms-3.btn.btn-primary')
         .contains('Send broadcast')
-        .click()
-        cy.get('tbody')
-        .find('tr')
-        .eq(0)
-        .should('exist')
-        .contains('Test')
+        .click();
+      cy.get('tbody').find('tr').eq(0).should('exist').contains('Test');
     });
   });
 
   it('should expand items when click on arrow icon', () => {
-    cy.get('.fa.fa-chevron-right')
-      .eq(0)
-      .click()
-    cy.get('.col-sm-8')
-      .contains('Test')
-      .should('be.visible');
+    cy.get('.fa.fa-chevron-right').eq(0).click();
+    cy.get('.col-sm-8').contains('Test').should('be.visible');
   });
 
   it('should refresh button work correctly', () => {
     cy.wait('@getNotifications').then(() => {
-      cy.get('.fa.fa-refresh.fs-4').click()
-    })
+      cy.get('.fa.fa-refresh.fs-4').click();
+    });
   });
 });

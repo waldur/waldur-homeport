@@ -16,15 +16,10 @@
   "category_title": "HPC",
   "rating": null,
   "attributes": {
-    "hpc_Security_certification": [
-      "hpc_Security_certification_iskel"
-    ]
+    "hpc_Security_certification": ["hpc_Security_certification_iskel"]
   },
   "options": {
-    "order": [
-      "test",
-      "namename"
-    ]
+    "order": ["test", "namename"]
   },
   "components": [
     {

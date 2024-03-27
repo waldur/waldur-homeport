@@ -131,15 +131,17 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
           <td className="row-control">
             {fieldType && fieldProps ? (
               <>
-                {isChecked && fieldProps.meta.touched && fieldProps.meta.error && (
-                  <Tip
-                    label={fieldProps.meta.error}
-                    id={`tableErrorTip-${rowIndex}`}
-                    className="error-mark"
-                  >
-                    <i className="fa fa-exclamation-circle" />
-                  </Tip>
-                )}
+                {isChecked &&
+                  fieldProps.meta.touched &&
+                  fieldProps.meta.error && (
+                    <Tip
+                      label={fieldProps.meta.error}
+                      id={`tableErrorTip-${rowIndex}`}
+                      className="error-mark"
+                    >
+                      <i className="fa fa-exclamation-circle" />
+                    </Tip>
+                  )}
                 <FormCheck
                   name={fieldProps.input.name}
                   type={fieldType}

@@ -34,10 +34,10 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
     input.value > max
       ? max
       : input.value < min
-      ? min
-      : Boolean(input.value) && input.value !== 0
-      ? input.value
-      : min;
+        ? min
+        : Boolean(input.value) && input.value !== 0
+          ? input.value
+          : min;
 
   return (
     <div className="slider-number-input">

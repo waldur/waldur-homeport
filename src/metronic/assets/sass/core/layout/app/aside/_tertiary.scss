@@ -116,8 +116,9 @@
     [data-kt-app-aside-tertiary-collapse='on'] & {
       @include app-layout-transition();
       left: calc(
-        var(--kt-app-aside-primary-width) + var(--kt-app-aside-secondary-width) -
-          var(--kt-app-aside-tertiary-actual-width)
+        var(--kt-app-aside-primary-width) + var(--kt-app-aside-secondary-width) - var(
+            --kt-app-aside-tertiary-actual-width
+          )
       );
       width: var(--kt-app-aside-tertiary-actual-width);
     }
@@ -145,7 +146,9 @@
 
   // Integration
   .app-aside-tertiary {
-    .app-aside-tertiary-fixed.app-header-fixed:not(.app-aside-tertiary-push-header)
+    .app-aside-tertiary-fixed.app-header-fixed:not(
+        .app-aside-tertiary-push-header
+      )
       & {
       top: var(--kt-app-header-height);
     }

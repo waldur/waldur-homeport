@@ -113,8 +113,9 @@
     [data-kt-app-aside-secondary-collapse='on'] & {
       @include app-layout-transition();
       left: calc(
-        var(--kt-app-aside-primary-width) -
-          var(--kt-app-aside-secondary-actual-width)
+        var(--kt-app-aside-primary-width) - var(
+            --kt-app-aside-secondary-actual-width
+          )
       );
       width: var(--kt-app-aside-secondary-actual-width);
     }
@@ -142,7 +143,9 @@
 
   // Integration
   .app-aside-secondary {
-    .app-aside-secondary-fixed.app-header-fixed:not(.app-aside-secondary-push-header)
+    .app-aside-secondary-fixed.app-header-fixed:not(
+        .app-aside-secondary-push-header
+      )
       & {
       top: var(--kt-app-header-height);
     }

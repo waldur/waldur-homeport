@@ -99,17 +99,18 @@ const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
             <div className="d-flex justify-content-between align-items-center mb-2">
               <label>
                 <b>{translate('Period {i}', { i: index + 1 })}:</b>&nbsp;
-                {props.fields.get(index).start && props.fields.get(index).end && (
-                  <span>
-                    {parseDate(props.fields.get(index).start).toFormat(
-                      'dd LLLL yyyy HH:mm',
-                    )}
-                    &nbsp;{translate('To')}&nbsp;
-                    {parseDate(props.fields.get(index).end).toFormat(
-                      'dd LLLL yyyy HH:mm',
-                    )}
-                  </span>
-                )}
+                {props.fields.get(index).start &&
+                  props.fields.get(index).end && (
+                    <span>
+                      {parseDate(props.fields.get(index).start).toFormat(
+                        'dd LLLL yyyy HH:mm',
+                      )}
+                      &nbsp;{translate('To')}&nbsp;
+                      {parseDate(props.fields.get(index).end).toFormat(
+                        'dd LLLL yyyy HH:mm',
+                      )}
+                    </span>
+                  )}
               </label>
               <Button
                 variant="light"

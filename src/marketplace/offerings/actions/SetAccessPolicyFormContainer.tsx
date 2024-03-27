@@ -10,17 +10,18 @@ interface SetAccessPolicyFormContainerProps {
   submitting: boolean;
 }
 
-export const SetAccessPolicyFormContainer: FunctionComponent<SetAccessPolicyFormContainerProps> =
-  ({ organizationGroups, submitting }) => (
-    <FormContainer submitting={submitting}>
-      {organizationGroups.map((organizationGroup) => (
-        <Field
-          key={organizationGroup.uuid}
-          name={organizationGroup.uuid}
-          component={(prop) => (
-            <AwesomeCheckbox label={organizationGroup.name} {...prop.input} />
-          )}
-        />
-      ))}
-    </FormContainer>
-  );
+export const SetAccessPolicyFormContainer: FunctionComponent<
+  SetAccessPolicyFormContainerProps
+> = ({ organizationGroups, submitting }) => (
+  <FormContainer submitting={submitting}>
+    {organizationGroups.map((organizationGroup) => (
+      <Field
+        key={organizationGroup.uuid}
+        name={organizationGroup.uuid}
+        component={(prop) => (
+          <AwesomeCheckbox label={organizationGroup.name} {...prop.input} />
+        )}
+      />
+    ))}
+  </FormContainer>
+);

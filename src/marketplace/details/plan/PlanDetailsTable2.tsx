@@ -154,8 +154,8 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                   ? translate('Monthly')
                   : translate('Monthly cost')
                 : shouldConcealPrices
-                ? translate('Annual')
-                : translate('Annual cost')}
+                  ? translate('Annual')
+                  : translate('Annual cost')}
               {!shouldConcealPrices && (
                 <PriceTooltip iconClassName="text-dark" />
               )}

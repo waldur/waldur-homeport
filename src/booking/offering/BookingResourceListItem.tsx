@@ -81,8 +81,8 @@ function calculateEventItemLayouts(
         indexSchedule === 0
           ? 'first'
           : indexSchedule === schedules.length - 1
-          ? 'last'
-          : 'middle';
+            ? 'last'
+            : 'middle';
 
       layouts.push({
         style: {

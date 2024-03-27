@@ -15,14 +15,15 @@ const getNumberOfAllCategories = (categories: Category[]) =>
     0,
   );
 
-export const CategoriesListHeader: FunctionComponent<CategoriesListHeaderProps> =
-  ({ categories, onClearCategoriesFilter }) => (
-    <div className="categoriesListHeader">
-      <h1>{translate('Category')}</h1>
-      <button className="text-anchor" onClick={onClearCategoriesFilter}>
-        {translate('Show all ({numberOfAllCategories})', {
-          numberOfAllCategories: getNumberOfAllCategories(categories),
-        })}
-      </button>
-    </div>
-  );
+export const CategoriesListHeader: FunctionComponent<
+  CategoriesListHeaderProps
+> = ({ categories, onClearCategoriesFilter }) => (
+  <div className="categoriesListHeader">
+    <h1>{translate('Category')}</h1>
+    <button className="text-anchor" onClick={onClearCategoriesFilter}>
+      {translate('Show all ({numberOfAllCategories})', {
+        numberOfAllCategories: getNumberOfAllCategories(categories),
+      })}
+    </button>
+  </div>
+);

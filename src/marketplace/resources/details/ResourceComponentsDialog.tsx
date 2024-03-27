@@ -16,31 +16,32 @@ interface ResourceComponentsDialogProps {
   };
 }
 
-export const ResourceComponentsDialog: React.FC<ResourceComponentsDialogProps> =
-  ({ resolve }) => {
-    const isSmallScreen = useMediaQuery({ maxWidth: 320 });
+export const ResourceComponentsDialog: React.FC<
+  ResourceComponentsDialogProps
+> = ({ resolve }) => {
+  const isSmallScreen = useMediaQuery({ maxWidth: 320 });
 
-    return (
-      <ModalDialog
-        title={translate('Components')}
-        footer={<CloseDialogButton label={translate('Done')} />}
-      >
-        <Row>
-          {resolve.components.map((component) => (
-            <Col
-              key={component.type}
-              xs={isSmallScreen ? 12 : 6}
-              sm={6}
-              md={4}
-              lg={3}
-            >
-              <ResourceComponentItem
-                resource={resolve.resource}
-                component={component}
-              />
-            </Col>
-          ))}
-        </Row>
-      </ModalDialog>
-    );
-  };
+  return (
+    <ModalDialog
+      title={translate('Components')}
+      footer={<CloseDialogButton label={translate('Done')} />}
+    >
+      <Row>
+        {resolve.components.map((component) => (
+          <Col
+            key={component.type}
+            xs={isSmallScreen ? 12 : 6}
+            sm={6}
+            md={4}
+            lg={3}
+          >
+            <ResourceComponentItem
+              resource={resolve.resource}
+              component={component}
+            />
+          </Col>
+        ))}
+      </Row>
+    </ModalDialog>
+  );
+};

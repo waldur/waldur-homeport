@@ -30,25 +30,26 @@ interface PublicResourceActionsProps {
   refetch(): void;
 }
 
-export const PublicResourceActions: FunctionComponent<PublicResourceActionsProps> =
-  ({ resource, refetch }) => {
-    return (
-      <DropdownButton
-        title={translate('Actions')}
-        variant="light"
-        size="sm"
-        data-cy="public-resources-list-actions-dropdown-btn"
-      >
-        {ActionsList.map((ActionComponent: any, index: number) => (
-          <ActionComponent
-            key={index}
-            resource={{
-              ...resource,
-              marketplace_resource_uuid: resource.uuid,
-            }}
-            refetch={refetch}
-          />
-        ))}
-      </DropdownButton>
-    );
-  };
+export const PublicResourceActions: FunctionComponent<
+  PublicResourceActionsProps
+> = ({ resource, refetch }) => {
+  return (
+    <DropdownButton
+      title={translate('Actions')}
+      variant="light"
+      size="sm"
+      data-cy="public-resources-list-actions-dropdown-btn"
+    >
+      {ActionsList.map((ActionComponent: any, index: number) => (
+        <ActionComponent
+          key={index}
+          resource={{
+            ...resource,
+            marketplace_resource_uuid: resource.uuid,
+          }}
+          refetch={refetch}
+        />
+      ))}
+    </DropdownButton>
+  );
+};

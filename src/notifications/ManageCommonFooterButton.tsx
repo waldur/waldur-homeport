@@ -16,39 +16,38 @@ interface ManageCommonFooterButtonProps {
   refetch: () => void;
 }
 
-export const ManageCommonFooterButton: FunctionComponent<ManageCommonFooterButtonProps> =
-  ({ refetch }) => {
-    const dispatch = useDispatch();
-    const CommonFooterText = ENV.plugins.WALDUR_CORE.COMMON_FOOTER_TEXT;
-    const CommonFooterHtml = ENV.plugins.WALDUR_CORE.COMMON_FOOTER_HTML;
+export const ManageCommonFooterButton: FunctionComponent<
+  ManageCommonFooterButtonProps
+> = ({ refetch }) => {
+  const dispatch = useDispatch();
+  const CommonFooterText = ENV.plugins.WALDUR_CORE.COMMON_FOOTER_TEXT;
+  const CommonFooterHtml = ENV.plugins.WALDUR_CORE.COMMON_FOOTER_HTML;
 
-    const openManageDialog = () => {
-      dispatch(
-        openModalDialog(ManageCommonFooterDialog, {
-          size: 'xl',
-          resolve: {
-            refetch: () => {
-              loadConfig().then(() => {
-                refetch();
-              });
-            },
+  const openManageDialog = () => {
+    dispatch(
+      openModalDialog(ManageCommonFooterDialog, {
+        size: 'xl',
+        resolve: {
+          refetch: () => {
+            loadConfig().then(() => {
+              refetch();
+            });
           },
-        }),
-      );
-    };
-
-    return (
-      <ActionButton
-        action={openManageDialog}
-        title={
-          CommonFooterText || CommonFooterHtml
-            ? translate('Edit footer')
-            : translate('Add footer')
-        }
-        icon={
-          CommonFooterText || CommonFooterHtml ? 'fa fa-edit' : 'fa fa-plus'
-        }
-        variant="primary"
-      />
+        },
+      }),
     );
   };
+
+  return (
+    <ActionButton
+      action={openManageDialog}
+      title={
+        CommonFooterText || CommonFooterHtml
+          ? translate('Edit footer')
+          : translate('Add footer')
+      }
+      icon={CommonFooterText || CommonFooterHtml ? 'fa fa-edit' : 'fa fa-plus'}
+      variant="primary"
+    />
+  );
+};

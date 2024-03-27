@@ -24,29 +24,30 @@ const LoadingErred = ({ loadData }) => (
   </div>
 );
 
-export const CategoryResourcesList: FunctionComponent<CategoryResourcesListProps> =
-  (props) => {
-    const [{ loading, error, value }, callback] = useAsyncFn(
-      () => loadMarketplaceCategories(props.scopeType, props.scope),
-      [props.scope],
-    );
-    useEffectOnce(() => {
-      callback();
-    });
+export const CategoryResourcesList: FunctionComponent<
+  CategoryResourcesListProps
+> = (props) => {
+  const [{ loading, error, value }, callback] = useAsyncFn(
+    () => loadMarketplaceCategories(props.scopeType, props.scope),
+    [props.scope],
+  );
+  useEffectOnce(() => {
+    callback();
+  });
 
-    if (loading) {
-      return <LoadingSpinner />;
-    }
-    if (error) {
-      return <LoadingErred loadData={callback} />;
-    }
-    return (
-      <>
-        {Array.isArray(value)
-          ? value.map((category, index) => (
-              <CategoryResources key={index} category={category} />
-            ))
-          : null}
-      </>
-    );
-  };
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  if (error) {
+    return <LoadingErred loadData={callback} />;
+  }
+  return (
+    <>
+      {Array.isArray(value)
+        ? value.map((category, index) => (
+            <CategoryResources key={index} category={category} />
+          ))
+        : null}
+    </>
+  );
+};

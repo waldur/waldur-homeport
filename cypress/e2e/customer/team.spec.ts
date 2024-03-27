@@ -24,10 +24,18 @@ describe('Team', () => {
       )
       .intercept('POST', '/api/projects/*/delete_user/', {})
 
-      .intercept('POST', `/api/customers/bf6d515c9e6e445f9c339021b30fc96b/delete_user/`, {})
+      .intercept(
+        'POST',
+        `/api/customers/bf6d515c9e6e445f9c339021b30fc96b/delete_user/`,
+        {},
+      )
       .as('deleteCustomerPermission')
 
-      .intercept('POST', `/api/customers/bf6d515c9e6e445f9c339021b30fc96b/update_user/`, {})
+      .intercept(
+        'POST',
+        `/api/customers/bf6d515c9e6e445f9c339021b30fc96b/update_user/`,
+        {},
+      )
       .as('updateCustomerPermission')
 
       .intercept('POST', '/api/projects/*/add_user/', {})
@@ -77,7 +85,7 @@ describe('Team', () => {
       .get('[class*="-control"]')
       .first()
       .click(0, 0, { force: true })
-      
+
       .get('button')
       .contains('Save')
       .click()

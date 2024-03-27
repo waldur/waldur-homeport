@@ -29,8 +29,8 @@ export const BookingStateField: FunctionComponent<{ row }> = ({ row }) => {
         state === 'Rejected'
           ? 'danger'
           : state === 'Unconfirmed'
-          ? 'warning'
-          : 'primary'
+            ? 'warning'
+            : 'primary'
       }
       active={state === 'Unconfirmed'}
     />

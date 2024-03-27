@@ -58,32 +58,33 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
                 <UserActions />{' '}
               </Col>
             </Row>
-            {Array.isArray(user.affiliations) && user.affiliations.length > 0 && (
-              <Row className="mb-6">
-                <Col>
-                  <h6 className="fs-7">{translate('Affiliation')}</h6>
-                  {user.affiliations.length < 4 ? (
-                    <p className="text-muted mb-0">
-                      {user.affiliations.join(', ')}
-                    </p>
-                  ) : (
-                    <p className="text-muted mb-0">
-                      {user.affiliations.slice(0, 2).join(', ')}{' '}
-                      {translate('and')}{' '}
-                      <span>
-                        <i>
-                          <u>
-                            {translate('{count} more affiliations', {
-                              count: user.affiliations.length - 2,
-                            })}
-                          </u>
-                        </i>
-                      </span>
-                    </p>
-                  )}
-                </Col>
-              </Row>
-            )}
+            {Array.isArray(user.affiliations) &&
+              user.affiliations.length > 0 && (
+                <Row className="mb-6">
+                  <Col>
+                    <h6 className="fs-7">{translate('Affiliation')}</h6>
+                    {user.affiliations.length < 4 ? (
+                      <p className="text-muted mb-0">
+                        {user.affiliations.join(', ')}
+                      </p>
+                    ) : (
+                      <p className="text-muted mb-0">
+                        {user.affiliations.slice(0, 2).join(', ')}{' '}
+                        {translate('and')}{' '}
+                        <span>
+                          <i>
+                            <u>
+                              {translate('{count} more affiliations', {
+                                count: user.affiliations.length - 2,
+                              })}
+                            </u>
+                          </i>
+                        </span>
+                      </p>
+                    )}
+                  </Col>
+                </Row>
+              )}
           </Col>
         </Row>
       </Card.Body>

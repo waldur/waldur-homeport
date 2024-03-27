@@ -89,11 +89,7 @@
     "required": true,
     "default": "LoadBalancer",
     "group": "Services and Load Balancing",
-    "options": [
-      "ClusterIP",
-      "NodePort",
-      "LoadBalancer"
-    ],
+    "options": ["ClusterIP", "NodePort", "LoadBalancer"],
     "showIf": "nginx.enabled=true&&ingress.enabled=false"
   },
   {
@@ -215,12 +211,7 @@
         "type": "enum",
         "required": true,
         "default": "file-system",
-        "options": [
-          "file-system",
-          "nfs",
-          "google-storage",
-          "aws-s3"
-        ]
+        "options": ["file-system", "nfs", "google-storage", "aws-s3"]
       }
     ],
     "showSubquestionIf": "true"
@@ -428,12 +419,7 @@
     "required": true,
     "default": "postgresql",
     "group": "Database Settings",
-    "options": [
-      "postgresql",
-      "mysql",
-      "oracle",
-      "mssql"
-    ],
+    "options": ["postgresql", "mysql", "oracle", "mssql"],
     "showIf": "postgresql.enabled=false"
   },
   {

@@ -37,8 +37,8 @@ export const FieldError: FunctionComponent<FieldErrorProps> = (props) => {
       {Array.isArray(props.error)
         ? props.error.map((e, i) => <div key={i}>{e}</div>)
         : typeof props.error === 'object'
-        ? getKeyValueElement(props.error)
-        : props.error}
+          ? getKeyValueElement(props.error)
+          : props.error}
     </Form.Text>
   ) : null;
 };

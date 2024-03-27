@@ -79,15 +79,14 @@ Cypress.Commands.add('openDropdownByLabelForce', (label) => {
 
 Cypress.Commands.add('selectRole', (label) => {
   cy.get('label')
-  .contains('Role')
-  .next()
-  .get('[class*="-control"]')
-  .click(0, 0, { force: true, multiple: true })
-  .get('[class*="-option"]')
-  .contains(label)
-  .click(0, 0, { force: true })
+    .contains('Role')
+    .next()
+    .get('[class*="-control"]')
+    .click(0, 0, { force: true, multiple: true })
+    .get('[class*="-option"]')
+    .contains(label)
+    .click(0, 0, { force: true });
 });
-
 
 Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
   cy.get('*div[id^="react-select"]').first().click({ force: true }); // get ids which start with "react-select"
@@ -204,7 +203,7 @@ Cypress.Commands.add('mockConfigs', () => {
   })
     .intercept('GET', '/api/events/', [])
     .intercept('GET', '/api/roles/', {
-      fixture: 'roles.json'
+      fixture: 'roles.json',
     });
 });
 
@@ -220,8 +219,8 @@ Cypress.Commands.add('mockUser', (userName) => {
     .intercept('POST', '/api-auth/password/', { token: 'valid' })
     .intercept('GET', '/api/users/me/', {
       fixture: `users/${userData}`,
-    }).
-    intercept('GET', '/api/roles/', {fixture: 'roles.json'});
+    })
+    .intercept('GET', '/api/roles/', { fixture: 'roles.json' });
 });
 
 Cypress.Commands.add('mockCustomer', () => {

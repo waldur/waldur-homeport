@@ -26,45 +26,46 @@ async function getUserAgreement(agreement_type) {
   return response.data[0];
 }
 
-export const UserAgreementComponent: FunctionComponent<TemplateComponentProps> =
-  (props) => {
-    const {
-      isLoading: loading,
-      error,
-      data: option,
-    } = useQuery(
-      ['userAgreementData'],
-      async () => await getUserAgreement(props.agreement_type),
-    );
-    if (loading) {
-      return <LoadingSpinner />;
-    }
-    if (error) {
-      return <>{translate('Unable to load page')}</>;
-    }
+export const UserAgreementComponent: FunctionComponent<
+  TemplateComponentProps
+> = (props) => {
+  const {
+    isLoading: loading,
+    error,
+    data: option,
+  } = useQuery(
+    ['userAgreementData'],
+    async () => await getUserAgreement(props.agreement_type),
+  );
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+  if (error) {
+    return <>{translate('Unable to load page')}</>;
+  }
 
-    if (!option) {
-      return (
-        <h2>
-          {props.title} {translate('is not defined.')}
-        </h2>
-      );
-    }
-
+  if (!option) {
     return (
-      <div>
-        <div className="mb-6 card">
-          <div className="card-body">
-            <p className="mb-10">
-              <em className="fw-light ms-4">
-                {translate('Last update')}: {formatDateTime(option.modified)}
-              </em>
-            </p>
+      <h2>
+        {props.title} {translate('is not defined.')}
+      </h2>
+    );
+  }
 
-            <h2 className="fw-bold">{props.title}</h2>
-            <Markdown>{option.content}</Markdown>
-          </div>
+  return (
+    <div>
+      <div className="mb-6 card">
+        <div className="card-body">
+          <p className="mb-10">
+            <em className="fw-light ms-4">
+              {translate('Last update')}: {formatDateTime(option.modified)}
+            </em>
+          </p>
+
+          <h2 className="fw-bold">{props.title}</h2>
+          <Markdown>{option.content}</Markdown>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};

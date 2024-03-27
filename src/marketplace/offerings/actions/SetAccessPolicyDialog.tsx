@@ -11,21 +11,22 @@ interface SetAccessPolicyDialogProps {
   resolve: { offering: Offering };
 }
 
-export const SetAccessPolicyDialog: FunctionComponent<SetAccessPolicyDialogProps> =
-  ({ resolve }) => {
-    const {
-      loading,
-      error,
-      value: organizationGroups,
-    } = useAsync(async () => await getAllOrganizationGroups(), [resolve]);
-    return loading ? (
-      <LoadingSpinner />
-    ) : error ? (
-      <>{translate('Unable to load organization groups.')}</>
-    ) : (
-      <SetAccessPolicyDialogForm
-        organizationGroups={organizationGroups}
-        offering={resolve.offering}
-      />
-    );
-  };
+export const SetAccessPolicyDialog: FunctionComponent<
+  SetAccessPolicyDialogProps
+> = ({ resolve }) => {
+  const {
+    loading,
+    error,
+    value: organizationGroups,
+  } = useAsync(async () => await getAllOrganizationGroups(), [resolve]);
+  return loading ? (
+    <LoadingSpinner />
+  ) : error ? (
+    <>{translate('Unable to load organization groups.')}</>
+  ) : (
+    <SetAccessPolicyDialogForm
+      organizationGroups={organizationGroups}
+      offering={resolve.offering}
+    />
+  );
+};

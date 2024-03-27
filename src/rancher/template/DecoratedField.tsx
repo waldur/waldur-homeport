@@ -32,8 +32,8 @@ export const DecoratedField: React.FC<OwnProps> = (props) => (
           props.validate
             ? props.validate
             : props.required
-            ? required
-            : undefined
+              ? required
+              : undefined
         }
       />
       <Form.Text muted={true}>{props.description}</Form.Text>

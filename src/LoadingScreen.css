@@ -29,33 +29,49 @@
 
 @keyframes dots-mobile {
   0% {
-    text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
+    text-shadow:
+      0.25em 0 0 #ffffff,
+      0.5em 0 0 #ffffff;
   }
   33% {
-    text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #ffffff;
+    text-shadow:
+      0.25em 0 0 #2f4050,
+      0.5em 0 0 #ffffff;
   }
   66% {
-    text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
+    text-shadow:
+      0.25em 0 0 #2f4050,
+      0.5em 0 0 #2f4050;
   }
   100% {
     color: #ffffff;
-    text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
+    text-shadow:
+      0.25em 0 0 #ffffff,
+      0.5em 0 0 #ffffff;
   }
 }
 
 @keyframes dots {
   0% {
-    text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
+    text-shadow:
+      0.25em 0 0 #2f4050,
+      0.5em 0 0 #2f4050;
   }
   33% {
-    text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #2f4050;
+    text-shadow:
+      0.25em 0 0 #ffffff,
+      0.5em 0 0 #2f4050;
   }
   66% {
-    text-shadow: 0.25em 0 0 #ffffff, 0.5em 0 0 #ffffff;
+    text-shadow:
+      0.25em 0 0 #ffffff,
+      0.5em 0 0 #ffffff;
   }
   100% {
     color: #2f4050;
-    text-shadow: 0.25em 0 0 #2f4050, 0.5em 0 0 #2f4050;
+    text-shadow:
+      0.25em 0 0 #2f4050,
+      0.5em 0 0 #2f4050;
   }
 }
 

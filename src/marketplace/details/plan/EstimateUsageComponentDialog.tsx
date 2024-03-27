@@ -23,8 +23,8 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
   const perPeriod = !props.resolve.period
     ? ''
     : props.resolve.period === 'annual'
-    ? ' /year'
-    : ' /mo';
+      ? ' /year'
+      : ' /mo';
 
   return (
     <ModalDialog

@@ -63,8 +63,8 @@ export const ComponentRow2: React.FC<ComponentRowProps> = (props) => {
   const perPeriod = !props.period
     ? ''
     : props.period === 'annual'
-    ? ' /year'
-    : ' /mo';
+      ? ' /year'
+      : ' /mo';
 
   return (
     <tr>

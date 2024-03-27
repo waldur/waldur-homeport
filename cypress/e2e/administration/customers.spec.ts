@@ -57,33 +57,22 @@ describe('Customers', () => {
     cy.contains('button.filter-toggle', 'Service provider')
       .should('exist')
       .click();
-    cy.get('.filter-toggle:nth-child(2)')
-      .click()
-      .type('{enter}');
+    cy.get('.filter-toggle:nth-child(2)').click().type('{enter}');
 
     cy.contains('button.filter-toggle', 'Organization group')
       .should('exist')
       .click();
-    cy.get('.filter-toggle:nth-child(2)')
-      .click()
-      .type('{enter}');
+    cy.get('.filter-toggle:nth-child(2)').click().type('{enter}');
 
     cy.contains('button.filter-toggle', 'Organization group type')
       .should('exist')
       .click();
-    cy.get('.filter-toggle:nth-child(2)')
-      .click()
-      .type('{enter}');
+    cy.get('.filter-toggle:nth-child(2)').click().type('{enter}');
   });
 
   it('Show details modal when click on the row', () => {
-    cy.get('div.table-container')
-      .find('tbody tr')
-      .first()
-      .click()
+    cy.get('div.table-container').find('tbody tr').first().click();
 
-    cy.get('.col-sm-12')
-      .contains('Name')
-      .should('be.visible');
+    cy.get('.col-sm-12').contains('Name').should('be.visible');
   });
 });

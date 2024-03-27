@@ -123,13 +123,17 @@
   // Integration
   .app-aside-primary {
     // Header
-    .app-aside-primary-fixed.app-header-fixed:not(.app-aside-primary-push-header)
+    .app-aside-primary-fixed.app-header-fixed:not(
+        .app-aside-primary-push-header
+      )
       & {
       top: var(--kt-app-header-height);
     }
 
     // Toolbar
-    .app-aside-primary-fixed.app-toolbar-fixed:not(.app-aside-primary-push-toolbar)
+    .app-aside-primary-fixed.app-toolbar-fixed:not(
+        .app-aside-primary-push-toolbar
+      )
       & {
       top: calc(var(--kt-app-header-height) + var(--kt-app-toolbar-height, 0));
     }

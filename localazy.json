@@ -6,10 +6,7 @@
         "type": "pot",
         "group": "source",
         "pattern": "template-for-localazy.pot",
-        "features": [
-          "use_key_for_content",
-          "filter_untranslated"
-        ],
+        "features": ["use_key_for_content", "filter_untranslated"],
         "lang": "inherited"
       },
       {
@@ -23,9 +20,7 @@
           "locales/neic.po",
           "locales/ita.po"
         ],
-        "features": [
-          "filter_untranslated"
-        ],
+        "features": ["filter_untranslated"],
         "file": "template-for-localazy.pot",
         "lang": "${autodetectLang}"
       }

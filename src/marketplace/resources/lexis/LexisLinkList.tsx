@@ -30,8 +30,8 @@ export const TableComponent: FunctionComponent<any> = (props) => {
             row.state === 'erred'
               ? 'danger'
               : row.state === 'pending'
-              ? 'warning'
-              : 'primary'
+                ? 'warning'
+                : 'primary'
           }
         />
       ),

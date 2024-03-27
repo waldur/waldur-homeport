@@ -40,60 +40,61 @@ const getThumbnail = (attachment: Attachment, openModalHandler) => {
   }
 };
 
-export const PureIssueAttachment: FunctionComponent<PureIssueAttachmentProps> =
-  (props) => {
-    const { attachment, isDeleting, deleteAttachment, openModal } = props;
+export const PureIssueAttachment: FunctionComponent<
+  PureIssueAttachmentProps
+> = (props) => {
+  const { attachment, isDeleting, deleteAttachment, openModal } = props;
 
-    return (
-      <div className="attachment-item">
-        {isDeleting && (
-          <div className="attachment-item__overlay">
-            <LoadingSpinner />
+  return (
+    <div className="attachment-item">
+      {isDeleting && (
+        <div className="attachment-item__overlay">
+          <LoadingSpinner />
+        </div>
+      )}
+      {attachment.file ? (
+        <>
+          <div className="attachment-item__thumb">
+            {getThumbnail(attachment, openModal)}
           </div>
-        )}
-        {attachment.file ? (
-          <>
-            <div className="attachment-item__thumb">
-              {getThumbnail(attachment, openModal)}
+          <div className="attachment-item__description">
+            <div className="attachment-item__description-name">
+              <a href={attachment.file} download="true">
+                {attachment.file_name}
+              </a>
+              <button
+                className="attachment-item__delete text-btn"
+                type="button"
+                onClick={deleteAttachment}
+              >
+                <i className="fa fa-trash" aria-hidden="true" />
+              </button>
             </div>
-            <div className="attachment-item__description">
-              <div className="attachment-item__description-name">
-                <a href={attachment.file} download="true">
-                  {attachment.file_name}
-                </a>
-                <button
-                  className="attachment-item__delete text-btn"
-                  type="button"
-                  onClick={deleteAttachment}
-                >
-                  <i className="fa fa-trash" aria-hidden="true" />
-                </button>
+            <div className="attachment-item__description-info">
+              <div className="attachment-item__description-date">
+                {formatDateTime(attachment.created)}
               </div>
-              <div className="attachment-item__description-info">
-                <div className="attachment-item__description-date">
-                  {formatDateTime(attachment.created)}
-                </div>
-                <div className="attachment-item__description-size">
-                  {formatFilesize(attachment.file_size, 'B')}
-                </div>
+              <div className="attachment-item__description-size">
+                {formatFilesize(attachment.file_size, 'B')}
               </div>
             </div>
-          </>
-        ) : (
-          <>
-            <div className="attachment-item__thumb">
-              <i className="fa fa-exclamation-triangle"></i>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="attachment-item__thumb">
+            <i className="fa fa-exclamation-triangle"></i>
+          </div>
+          <div className="attachment-item__description">
+            <div className="attachment-item__description-name">
+              {translate('Attachment is broken.')}
             </div>
-            <div className="attachment-item__description">
-              <div className="attachment-item__description-name">
-                {translate('Attachment is broken.')}
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    );
-  };
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 const mapStateToProps = (state, ownProps) => ({
   isDeleting: getIsDeleting(state, ownProps),

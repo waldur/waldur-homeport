@@ -24,69 +24,67 @@ const getTipLabel = (component) =>
   ' ' +
   (component.measured_unit || 'N/A');
 
-export const TotalLimitComponentsList: FunctionComponent<TotalLimitComponentsListProps> =
-  (props) => {
-    const shouldConcealPrices = useSelector((state: RootState) =>
-      isVisible(state, 'marketplace.conceal_prices'),
-    );
-    return (
-      <Table bordered={true}>
-        <thead>
-          <tr>
-            <th className="col-sm-1">{translate('Component name')}</th>
+export const TotalLimitComponentsList: FunctionComponent<
+  TotalLimitComponentsListProps
+> = (props) => {
+  const shouldConcealPrices = useSelector((state: RootState) =>
+    isVisible(state, 'marketplace.conceal_prices'),
+  );
+  return (
+    <Table bordered={true}>
+      <thead>
+        <tr>
+          <th className="col-sm-1">{translate('Component name')}</th>
+          {!shouldConcealPrices && (
+            <th>
+              {translate('Price per unit')}
+              <PriceTooltip />
+            </th>
+          )}
+          <th>{translate('Subtotal')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {props.components.map((component, index) => (
+          <tr key={index}>
+            <td>
+              <span>
+                {component.name}
+                <Tip label={getTipLabel(component)} id="componentLimitTooltip">
+                  {' '}
+                  <i className="fa fa-question-circle" />
+                </Tip>
+              </span>
+            </td>
             {!shouldConcealPrices && (
-              <th>
-                {translate('Price per unit')}
-                <PriceTooltip />
-              </th>
-            )}
-            <th>{translate('Subtotal')}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.components.map((component, index) => (
-            <tr key={index}>
-              <td>
-                <span>
-                  {component.name}
-                  <Tip
-                    label={getTipLabel(component)}
-                    id="componentLimitTooltip"
-                  >
-                    {' '}
-                    <i className="fa fa-question-circle" />
-                  </Tip>
-                </span>
-              </td>
-              {!shouldConcealPrices && (
-                <td>
-                  {formatCurrency(
-                    component.price,
-                    ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-                    4,
-                  )}
-                </td>
-              )}
               <td>
                 {formatCurrency(
-                  component.subTotal,
+                  component.price,
                   ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                   4,
                 )}
               </td>
-            </tr>
-          ))}
-          <tr>
-            <td colSpan={3}>{translate('Total')}</td>
+            )}
             <td>
               {formatCurrency(
-                props.total,
+                component.subTotal,
                 ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                 4,
               )}
             </td>
           </tr>
-        </tbody>
-      </Table>
-    );
-  };
+        ))}
+        <tr>
+          <td colSpan={3}>{translate('Total')}</td>
+          <td>
+            {formatCurrency(
+              props.total,
+              ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+              4,
+            )}
+          </td>
+        </tr>
+      </tbody>
+    </Table>
+  );
+};

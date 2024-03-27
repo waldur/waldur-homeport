@@ -66,19 +66,10 @@
     }
   },
   "LANGUAGES": [
-    [
-      "en",
-      "English"
-    ],
-    [
-      "et",
-      "Eesti"
-    ]
+    ["en", "English"],
+    ["et", "Eesti"]
   ],
-  "LANGUAGE_CHOICES": [
-    "en",
-    "et"
-  ],
+  "LANGUAGE_CHOICES": ["en", "et"],
   "LANGUAGE_CODE": "en",
   "WALDUR_CORE": {
     "CURRENCY_NAME": "EUR",
@@ -88,11 +79,7 @@
     "SITE_PHONE": "",
     "SITE_DESCRIPTION": "Your single pane of control for managing projects, teams and resources in a self-service manner.",
     "MASTERMIND_URL": "",
-    "AUTHENTICATION_METHODS": [
-      "LOCAL_SIGNIN",
-      "SAML2",
-      "SOCIAL_SIGNUP"
-    ],
+    "AUTHENTICATION_METHODS": ["LOCAL_SIGNIN", "SAML2", "SOCIAL_SIGNUP"],
     "INVITATIONS_ENABLED": true,
     "VALIDATE_INVITATION_EMAIL": false,
     "OWNER_CAN_MANAGE_CUSTOMER": false,
@@ -106,10 +93,7 @@
     "EXTERNAL_LINKS": [],
     "SHORT_PAGE_TITLE": "Waldur",
     "FULL_PAGE_TITLE": "Waldur | Cloud Service Management",
-    "USER_MANDATORY_FIELDS": [
-      "full_name",
-      "email"
-    ],
+    "USER_MANDATORY_FIELDS": ["full_name", "email"],
     "USER_REGISTRATION_HIDDEN_FIELDS": [
       "registration_method",
       "job_title",
@@ -176,11 +160,7 @@
         "RAM": 1024
       }
     },
-    "MOUNT_POINT_CHOICES": [
-      "/var/lib/docker",
-      "/var/lib/etcd",
-      "/opt/media01"
-    ],
+    "MOUNT_POINT_CHOICES": ["/var/lib/docker", "/var/lib/etcd", "/opt/media01"],
     "MOUNT_POINT_MIN_SIZE": {
       "/var/lib/docker": 64,
       "/var/lib/etcd": 10

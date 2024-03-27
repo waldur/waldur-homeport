@@ -6,27 +6,19 @@ describe('Users', () => {
         fixture: 'support/configuration.json',
       })
       .intercept('GET', '/api/events/', [])
-      .intercept('GET', '/api/roles/', {fixture: 'roles.json'})
+      .intercept('GET', '/api/roles/', { fixture: 'roles.json' })
 
       .intercept('GET', '/api/users/me/', {
         fixture: 'support/me.json',
       })
 
-      .intercept(
-        'GET',
-        '/api/customers/**',
-        {
-          fixture: 'support/customers.json',
-        },
-      )
+      .intercept('GET', '/api/customers/**', {
+        fixture: 'support/customers.json',
+      })
 
-      .intercept(
-        'GET',
-        '/api/users/?page=1&page_size=10&query=Tara%20Pierce',
-        {
-          fixture: 'support/user-search-by-name.json',
-        },
-      )
+      .intercept('GET', '/api/users/?page=1&page_size=10&query=Tara%20Pierce', {
+        fixture: 'support/user-search-by-name.json',
+      })
 
       .intercept(
         'GET',
@@ -99,8 +91,7 @@ describe('Users', () => {
 
   it('should organization search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.contains('button.filter-toggle', 'Organization')
-        .should('be.visible')
+      cy.contains('button.filter-toggle', 'Organization').should('be.visible');
       cy.get('.filter-toggle:nth-child(1)')
         .click()
         .get('.filter-toggle:nth-child(1) .filter-field')
@@ -123,11 +114,10 @@ describe('Users', () => {
 
   it('should search works correctly using account role', () => {
     cy.wait('@getUsers').then(() => {
-      cy.contains('button.filter-toggle', 'Role')
-        .click()
+      cy.contains('button.filter-toggle', 'Role').click();
       cy.contains('div.filter-field', 'Select role')
         .should('be.visible')
-        .click()
+        .click();
       cy.get('.filter-toggle:nth-child(2)')
         .click()
         .type('{enter}')
@@ -138,11 +128,10 @@ describe('Users', () => {
 
   it('should search works correctly using account status', () => {
     cy.wait('@getUsers').then(() => {
-      cy.contains('button.filter-toggle', 'Status')
-        .click()
+      cy.contains('button.filter-toggle', 'Status').click();
       cy.contains('div.filter-field', 'Select status')
         .should('be.visible')
-        .click()
+        .click();
       cy.get('.filter-toggle:nth-child(2)')
         .click()
         .type('{enter}')

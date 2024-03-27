@@ -8,7 +8,9 @@ interface GridPaginationProps extends PaginationProps {
   gotoPage: (page: any) => void;
 }
 
-export const GridPagination: FunctionComponent<GridPaginationProps> = (props) =>
+export const GridPagination: FunctionComponent<GridPaginationProps> = (
+  props,
+) =>
   props.resultCount > props.pageSize ? (
     <div className="gridPaginationContainer">
       <Pagination

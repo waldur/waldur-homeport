@@ -43,61 +43,62 @@ const mapPropsToFilter = createSelector(
   },
 );
 
-export const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> =
-  ({ provider, extraTableProps = {} }) => {
-    const filter = useSelector(mapPropsToFilter);
+export const ProviderOfferingsComponent: FC<
+  ProviderOfferingsComponentProps
+> = ({ provider, extraTableProps = {} }) => {
+  const filter = useSelector(mapPropsToFilter);
 
-    const tableProps = useTable({
-      table: 'ProviderOfferingsList',
-      fetchData: createFetcher(
-        `marketplace-service-providers/${provider.uuid}/offerings`,
-      ),
-      filter,
-      queryField: 'name',
-    });
-    const dropdownActions = useOfferingDropdownActions();
+  const tableProps = useTable({
+    table: 'ProviderOfferingsList',
+    fetchData: createFetcher(
+      `marketplace-service-providers/${provider.uuid}/offerings`,
+    ),
+    filter,
+    queryField: 'name',
+  });
+  const dropdownActions = useOfferingDropdownActions();
 
-    return (
-      <Table
-        {...tableProps}
-        placeholderComponent={
-          <OfferingsListTablePlaceholder showActions={true} />
-        }
-        columns={[
-          {
-            title: translate('Offering / Category'),
-            render: OfferingNameColumn,
-          },
-          {
-            title: translate('Type'),
-            render: ({ row }) => getLabel(row.type),
-          },
-          {
-            title: translate('Resources'),
-            render: ResourcesCountColumn,
-          },
-          {
-            title: translate('Estimated cost'),
-            render: ({ row }) =>
-              defaultCurrency(row.billing_price_estimate?.total || 0),
-          },
-          {
-            title: translate('State'),
-            render: OfferingStateCell,
-          },
-        ]}
-        verboseName={translate('Offerings')}
-        dropdownActions={dropdownActions}
-        actions={<CreateOfferingButton fetch={tableProps.fetch} />}
-        hoverableRow={(row) => (
-          <OfferingActions row={row.row} refetch={tableProps.fetch} />
-        )}
-        {...extraTableProps}
-        filters={<ProviderOfferingsFilter />}
-        hasQuery={true}
-      />
-    );
-  };
+  return (
+    <Table
+      {...tableProps}
+      placeholderComponent={
+        <OfferingsListTablePlaceholder showActions={true} />
+      }
+      columns={[
+        {
+          title: translate('Offering / Category'),
+          render: OfferingNameColumn,
+        },
+        {
+          title: translate('Type'),
+          render: ({ row }) => getLabel(row.type),
+        },
+        {
+          title: translate('Resources'),
+          render: ResourcesCountColumn,
+        },
+        {
+          title: translate('Estimated cost'),
+          render: ({ row }) =>
+            defaultCurrency(row.billing_price_estimate?.total || 0),
+        },
+        {
+          title: translate('State'),
+          render: OfferingStateCell,
+        },
+      ]}
+      verboseName={translate('Offerings')}
+      dropdownActions={dropdownActions}
+      actions={<CreateOfferingButton fetch={tableProps.fetch} />}
+      hoverableRow={(row) => (
+        <OfferingActions row={row.row} refetch={tableProps.fetch} />
+      )}
+      {...extraTableProps}
+      filters={<ProviderOfferingsFilter />}
+      hasQuery={true}
+    />
+  );
+};
 
 export const ProviderOfferingsList = ({ provider }) => {
   useDestroyFilterOnLeave(PROVIDER_OFFERINGS_FORM_ID);

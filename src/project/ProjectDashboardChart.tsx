@@ -15,29 +15,30 @@ interface ProjectDashboardProps {
   costPolicies: CostPolicy[];
 }
 
-export const ProjectDashboardChart: FunctionComponent<ProjectDashboardProps> =
-  ({ project, costPolicies }) => {
-    const { data, isLoading, error } = useQuery(
-      ['ProjectDashboardChart', project.uuid, costPolicies.length],
-      () => loadChart(project, costPolicies),
-      { staleTime: 5 * 60 * 1000 },
-    );
-    if (isLoading) {
-      return <LoadingSpinner />;
-    } else if (error) {
-      <>{translate('Unable to load data.')}</>;
-    }
-    return (
-      <>
-        <Col xs={7}>
-          <EChart options={data.options} height="100px" />
-        </Col>
-        <Col>
-          <div>
-            <h1 className="fw-bold">{data.chart.current}</h1>
-            <h5 className="fw-bold text-uppercase">{data.chart.title}</h5>
-          </div>
-        </Col>
-      </>
-    );
-  };
+export const ProjectDashboardChart: FunctionComponent<
+  ProjectDashboardProps
+> = ({ project, costPolicies }) => {
+  const { data, isLoading, error } = useQuery(
+    ['ProjectDashboardChart', project.uuid, costPolicies.length],
+    () => loadChart(project, costPolicies),
+    { staleTime: 5 * 60 * 1000 },
+  );
+  if (isLoading) {
+    return <LoadingSpinner />;
+  } else if (error) {
+    <>{translate('Unable to load data.')}</>;
+  }
+  return (
+    <>
+      <Col xs={7}>
+        <EChart options={data.options} height="100px" />
+      </Col>
+      <Col>
+        <div>
+          <h1 className="fw-bold">{data.chart.current}</h1>
+          <h5 className="fw-bold text-uppercase">{data.chart.title}</h5>
+        </div>
+      </Col>
+    </>
+  );
+};

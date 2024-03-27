@@ -24,44 +24,43 @@ const openPermissionRequestActionDialog = (resolve) =>
     size: 'md',
   });
 
-export const UserPermissionRequestApproveButton: FunctionComponent<UserPermissionRequestApproveButtonProps> =
-  ({ permissionRequest, refetch }) => {
-    const dispatch = useDispatch();
+export const UserPermissionRequestApproveButton: FunctionComponent<
+  UserPermissionRequestApproveButtonProps
+> = ({ permissionRequest, refetch }) => {
+  const dispatch = useDispatch();
 
-    const submitRequest = async (comment: string) => {
-      try {
-        await approvePermissionRequest(permissionRequest.uuid, comment);
-        dispatch(
-          showSuccess(translate('Permission request has been approved.')),
-        );
-        dispatch(closeModalDialog());
-        refetch();
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to approve permission request.'),
-          ),
-        );
-      }
-    };
-
-    const callback = () => {
+  const submitRequest = async (comment: string) => {
+    try {
+      await approvePermissionRequest(permissionRequest.uuid, comment);
+      dispatch(showSuccess(translate('Permission request has been approved.')));
+      dispatch(closeModalDialog());
+      refetch();
+    } catch (e) {
       dispatch(
-        openPermissionRequestActionDialog({
-          title: translate('Approve permission request by {name}', {
-            name: permissionRequest.created_by_full_name,
-          }),
-          submitRequest,
-        }),
+        showErrorResponse(
+          e,
+          translate('Unable to approve permission request.'),
+        ),
       );
-    };
+    }
+  };
 
-    return (
-      <ActionButton
-        action={callback}
-        title={translate('Approve')}
-        icon="fa fa-check"
-      />
+  const callback = () => {
+    dispatch(
+      openPermissionRequestActionDialog({
+        title: translate('Approve permission request by {name}', {
+          name: permissionRequest.created_by_full_name,
+        }),
+        submitRequest,
+      }),
     );
   };
+
+  return (
+    <ActionButton
+      action={callback}
+      title={translate('Approve')}
+      icon="fa fa-check"
+    />
+  );
+};

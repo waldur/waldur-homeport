@@ -34,53 +34,56 @@ const fixUsername = (username: string): string =>
 export const FreeIPAAccountCreate = reduxForm<
   FreeIPAAccountCreateFormData,
   FreeIPAAccountCreateOwnProps
->({ form: FORM_ID })(
-  ({ invalid, submitting, handleSubmit, onProfileAdded }) => {
-    const dispatch = useDispatch();
-    const user = useSelector(getUser);
+>({ form: FORM_ID })(({
+  invalid,
+  submitting,
+  handleSubmit,
+  onProfileAdded,
+}) => {
+  const dispatch = useDispatch();
+  const user = useSelector(getUser);
 
-    useEffect(() => {
-      dispatch(change(FORM_ID, 'username', fixUsername(user.username)));
-    }, [user, dispatch]);
+  useEffect(() => {
+    dispatch(change(FORM_ID, 'username', fixUsername(user.username)));
+  }, [user, dispatch]);
 
-    const callback = useCallback(
-      async (formData) => {
-        try {
-          await createProfile(formData.username);
-          dispatch(showSuccess(translate('A profile has been created.')));
-          onProfileAdded();
-        } catch (response) {
-          if (response.data && response.data.username) {
-            dispatch(showError(response.data.username));
-          }
-          dispatch(
-            showErrorResponse(
-              response,
-              translate('Unable to create a FreeIPA profile.'),
-            ),
-          );
+  const callback = useCallback(
+    async (formData) => {
+      try {
+        await createProfile(formData.username);
+        dispatch(showSuccess(translate('A profile has been created.')));
+        onProfileAdded();
+      } catch (response) {
+        if (response.data && response.data.username) {
+          dispatch(showError(response.data.username));
         }
-      },
-      [dispatch, onProfileAdded],
-    );
+        dispatch(
+          showErrorResponse(
+            response,
+            translate('Unable to create a FreeIPA profile.'),
+          ),
+        );
+      }
+    },
+    [dispatch, onProfileAdded],
+  );
 
-    return (
-      <form onSubmit={handleSubmit(callback)}>
-        <FormContainer submitting={submitting}>
-          <UsernameGroup />
-          <FormGroup>
-            <div className="pull-right">
-              <SubmitButton
-                submitting={submitting}
-                invalid={invalid}
-                block={false}
-              >
-                <i className="fa fa-plus" /> {translate('Create')}
-              </SubmitButton>
-            </div>
-          </FormGroup>
-        </FormContainer>
-      </form>
-    );
-  },
-);
+  return (
+    <form onSubmit={handleSubmit(callback)}>
+      <FormContainer submitting={submitting}>
+        <UsernameGroup />
+        <FormGroup>
+          <div className="pull-right">
+            <SubmitButton
+              submitting={submitting}
+              invalid={invalid}
+              block={false}
+            >
+              <i className="fa fa-plus" /> {translate('Create')}
+            </SubmitButton>
+          </div>
+        </FormGroup>
+      </FormContainer>
+    </form>
+  );
+});

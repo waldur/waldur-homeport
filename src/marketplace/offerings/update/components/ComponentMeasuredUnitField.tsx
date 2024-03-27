@@ -17,13 +17,14 @@ const componentMeasuredUnitValidator = (value: string) => {
   }
 };
 
-export const ComponentMeasuredUnitField: FunctionComponent<ComponentMeasuredUnitFieldProps> =
-  ({ disabled }) => (
-    <Field
-      label={translate('Measured unit')}
-      name="measured_unit"
-      validate={componentMeasuredUnitValidator}
-      component={FormGroupWithError}
-      disabled={disabled}
-    />
-  );
+export const ComponentMeasuredUnitField: FunctionComponent<
+  ComponentMeasuredUnitFieldProps
+> = ({ disabled }) => (
+  <Field
+    label={translate('Measured unit')}
+    name="measured_unit"
+    validate={componentMeasuredUnitValidator}
+    component={FormGroupWithError}
+    disabled={disabled}
+  />
+);

@@ -75,8 +75,8 @@ const getChoices = (
     disabledReason: !plan.is_active
       ? translate('Plan capacity is full.')
       : plan.url === resource.plan
-      ? translate('Resource already has this plan.')
-      : undefined,
+        ? translate('Resource already has this plan.')
+        : undefined,
   }));
 
 export async function loadData(resource_uuid): Promise<FetchedData> {

@@ -16,28 +16,25 @@ interface ProviderTermsOfServiceProps {
   termsOfServiceLink?: any;
 }
 
-export const ProviderTermsOfService: FunctionComponent<ProviderTermsOfServiceProps> =
-  (props) => {
-    const dispatch = useDispatch();
-    const onClick = (e) => {
-      e.preventDefault();
-      dispatch(
-        openModalDialog(TermsOfServiceDialog, {
-          resolve: { content: props.termsOfService },
-          size: 'lg',
-        }),
-      );
-    };
-
-    return props.termsOfServiceLink ? (
-      <ExternalLink
-        url={props.termsOfServiceLink}
-        label={props.label}
-        iconless
-      />
-    ) : (
-      <button className="text-anchor" type="button" onClick={onClick}>
-        {props.label}
-      </button>
+export const ProviderTermsOfService: FunctionComponent<
+  ProviderTermsOfServiceProps
+> = (props) => {
+  const dispatch = useDispatch();
+  const onClick = (e) => {
+    e.preventDefault();
+    dispatch(
+      openModalDialog(TermsOfServiceDialog, {
+        resolve: { content: props.termsOfService },
+        size: 'lg',
+      }),
     );
   };
+
+  return props.termsOfServiceLink ? (
+    <ExternalLink url={props.termsOfServiceLink} label={props.label} iconless />
+  ) : (
+    <button className="text-anchor" type="button" onClick={onClick}>
+      {props.label}
+    </button>
+  );
+};

@@ -23,16 +23,17 @@ const openOrganizationGroupsDialog = (organizationGroup: OrganizationGroup) => {
   });
 };
 
-export const OrganizationGroupDetailsButton: FunctionComponent<OrganizationGroupDetailsButtonProps> =
-  (props) => {
-    const dispatch = useDispatch();
-    return (
-      <ActionButton
-        title={translate('Details')}
-        icon="fa fa-eye"
-        action={() =>
-          dispatch(openOrganizationGroupsDialog(props.organizationGroup))
-        }
-      />
-    );
-  };
+export const OrganizationGroupDetailsButton: FunctionComponent<
+  OrganizationGroupDetailsButtonProps
+> = (props) => {
+  const dispatch = useDispatch();
+  return (
+    <ActionButton
+      title={translate('Details')}
+      icon="fa fa-eye"
+      action={() =>
+        dispatch(openOrganizationGroupsDialog(props.organizationGroup))
+      }
+    />
+  );
+};

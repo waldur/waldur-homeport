@@ -13,12 +13,13 @@ interface ProviderProjectResourcesDialogProps {
   };
 }
 
-export const ProviderProjectResourcesDialog: FunctionComponent<ProviderProjectResourcesDialogProps> =
-  (props) => (
-    <ModalDialog
-      title={translate('Resources in project and provider')}
-      footer={<CloseDialogButton label={translate('Close')} />}
-    >
-      <ProviderProjectResourcesList {...props.resolve} />
-    </ModalDialog>
-  );
+export const ProviderProjectResourcesDialog: FunctionComponent<
+  ProviderProjectResourcesDialogProps
+> = (props) => (
+  <ModalDialog
+    title={translate('Resources in project and provider')}
+    footer={<CloseDialogButton label={translate('Close')} />}
+  >
+    <ProviderProjectResourcesList {...props.resolve} />
+  </ModalDialog>
+);

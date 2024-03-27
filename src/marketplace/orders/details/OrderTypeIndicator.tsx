@@ -31,10 +31,10 @@ export const OrderTypeIndicator = ({ order }: { order: OrderDetailsType }) => {
       order.type === 'Create'
         ? 'primary'
         : order.type === 'Update'
-        ? 'success'
-        : order.type === 'Terminate'
-        ? 'warning'
-        : 'plain',
+          ? 'success'
+          : order.type === 'Terminate'
+            ? 'warning'
+            : 'plain',
     [order],
   );
 

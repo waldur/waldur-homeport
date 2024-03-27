@@ -13,38 +13,37 @@ interface FilterDropdownContentProps {
   closeDropdown: () => void;
 }
 
-export const FilterDropdownContent: FunctionComponent<FilterDropdownContentProps> =
-  ({ toggle, closeDropdown }) => {
-    const loading = useSelector(selectors.isLoading);
-    const error = useSelector(selectors.isErred);
-    const sections = useSelector(selectors.getSections);
-    const organizationGroups = useSelector(
-      selectors.getOrganizationGroups,
-    ).items;
+export const FilterDropdownContent: FunctionComponent<
+  FilterDropdownContentProps
+> = ({ toggle, closeDropdown }) => {
+  const loading = useSelector(selectors.isLoading);
+  const error = useSelector(selectors.isErred);
+  const sections = useSelector(selectors.getSections);
+  const organizationGroups = useSelector(selectors.getOrganizationGroups).items;
 
-    return (
-      <div
-        className={classNames('filterDropdownContent bg-body', {
-          'd-none': !toggle,
-        })}
-      >
-        {loading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          <p className="text-gray-600 fs-4 fw-bold p-8 shadow-sm text-center">
-            {translate('Unable to load category sections.')}
-          </p>
-        ) : !sections?.length && !organizationGroups?.length ? (
-          <p className="text-gray-600 fs-4 fw-bold p-8 shadow-sm text-center">
-            {translate("Category doesn't contain sections.")}
-          </p>
-        ) : (
-          <CategorySectionsFilterForm
-            organizationGroups={organizationGroups}
-            sections={sections}
-            closeDropdown={closeDropdown}
-          />
-        )}
-      </div>
-    );
-  };
+  return (
+    <div
+      className={classNames('filterDropdownContent bg-body', {
+        'd-none': !toggle,
+      })}
+    >
+      {loading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <p className="text-gray-600 fs-4 fw-bold p-8 shadow-sm text-center">
+          {translate('Unable to load category sections.')}
+        </p>
+      ) : !sections?.length && !organizationGroups?.length ? (
+        <p className="text-gray-600 fs-4 fw-bold p-8 shadow-sm text-center">
+          {translate("Category doesn't contain sections.")}
+        </p>
+      ) : (
+        <CategorySectionsFilterForm
+          organizationGroups={organizationGroups}
+          sections={sections}
+          closeDropdown={closeDropdown}
+        />
+      )}
+    </div>
+  );
+};

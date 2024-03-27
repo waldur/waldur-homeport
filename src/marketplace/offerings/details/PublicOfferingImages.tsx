@@ -12,16 +12,15 @@ interface PublicOfferingImagesProps {
   offering: Offering;
 }
 
-export const PublicOfferingImages: FunctionComponent<PublicOfferingImagesProps> =
-  ({ offering }) => {
-    return offering.screenshots.length ? (
-      <Card className="mb-10" id="images">
-        <Card.Body>
-          <PublicOfferingCardTitle>
-            {translate('Images')}
-          </PublicOfferingCardTitle>
-          <ImagesTab images={offering.screenshots} />
-        </Card.Body>
-      </Card>
-    ) : null;
-  };
+export const PublicOfferingImages: FunctionComponent<
+  PublicOfferingImagesProps
+> = ({ offering }) => {
+  return offering.screenshots.length ? (
+    <Card className="mb-10" id="images">
+      <Card.Body>
+        <PublicOfferingCardTitle>{translate('Images')}</PublicOfferingCardTitle>
+        <ImagesTab images={offering.screenshots} />
+      </Card.Body>
+    </Card>
+  ) : null;
+};

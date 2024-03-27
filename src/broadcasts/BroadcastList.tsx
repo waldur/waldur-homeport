@@ -38,8 +38,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
                 row.state === 'DRAFT'
                   ? 'dark'
                   : row.state === 'SENT'
-                  ? 'success'
-                  : 'info'
+                    ? 'success'
+                    : 'info'
               }
             />
           ),
