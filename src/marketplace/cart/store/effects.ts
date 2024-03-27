@@ -11,11 +11,7 @@ import {
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { OrderResponse } from '@waldur/marketplace/orders/types';
-import {
-  showError,
-  showErrorResponse,
-  showSuccess,
-} from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import {
   SET_CURRENT_PROJECT,
   SET_CURRENT_CUSTOMER,
@@ -50,11 +46,6 @@ const formatItem = (item) => ({
 
 const formatItemToCreate = (item) => ({
   offering: item.offering.url,
-  ...formatItem(item),
-});
-
-const formatItemToUpdate = (item) => ({
-  uuid: item.shoppingCartItemUuid,
   ...formatItem(item),
 });
 
@@ -140,90 +131,7 @@ function* addItem(action) {
   }
 }
 
-function* removeItem(action) {
-  try {
-    yield call(api.removeCartItem, action.payload.uuid);
-    yield put(actions.removeItemSuccess(action.payload.uuid));
-
-    const items = yield call(api.getCartItems, action.payload.project);
-    yield put(actions.setItems(items));
-
-    yield put(
-      showSuccess(translate('Item has been removed from shopping cart.')),
-    );
-  } catch (error) {
-    yield put(
-      showErrorResponse(
-        error,
-        translate('Unable to remove item from shopping cart.'),
-      ),
-    );
-    yield put(actions.removeItemError());
-  }
-}
-
-function* updateItem(action) {
-  try {
-    const item = yield call(
-      api.updateCartItem,
-      action.payload.item.uuid,
-      formatItemToUpdate(action.payload.item),
-    );
-    yield put(actions.updateItemSuccess(item));
-
-    const items = yield call(api.getCartItems, action.payload.item.project);
-    yield put(actions.setItems(items));
-
-    yield put(showSuccess(translate('Shopping cart item has been updated.')));
-    yield put(
-      triggerTransition('marketplace-checkout', { uuid: item.project_uuid }),
-    );
-  } catch (error) {
-    yield put(
-      showErrorResponse(
-        error,
-        translate('Unable to update shopping cart item.'),
-      ),
-    );
-    yield put(actions.updateItemError());
-  }
-}
-
-function* createOrder() {
-  const project = yield select(getProject);
-  if (!project) {
-    yield put(actions.createOrderError());
-    yield put(showError(translate('Project is not selected.')));
-    return;
-  }
-  try {
-    const order = yield call(api.submitCart, { project: project.url });
-    yield put(showSuccess(translate('Order has been submitted.')));
-    yield put(actions.createOrderSuccess());
-    const workspace: WorkspaceType = yield select(getWorkspace);
-    if (workspace === ORGANIZATION_WORKSPACE) {
-      yield put(
-        triggerTransition('marketplace-order-details-customer', {
-          order_uuid: order.uuid,
-        }),
-      );
-    } else {
-      yield put(
-        triggerTransition('marketplace-order-details-project', {
-          order_uuid: order.uuid,
-        }),
-      );
-    }
-  } catch (error) {
-    yield put(showErrorResponse(error, translate('Unable to submit order.')));
-    yield put(actions.createOrderError());
-  }
-}
-
 export default function* () {
   yield takeLatest([SET_CURRENT_PROJECT, SET_CURRENT_CUSTOMER], initCart);
   yield takeEvery(constants.ADD_ITEM_REQUEST, addItem);
-  yield takeEvery(constants.UPDATE_ITEM_REQUEST, updateItem);
-  yield takeEvery(constants.REMOVE_ITEM_REQUEST, removeItem);
-  yield takeEvery(constants.CREATE_ORDER_REQUEST, createOrder);
 }

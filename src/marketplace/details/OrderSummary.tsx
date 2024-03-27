@@ -8,7 +8,6 @@ import useOnScreen from '@waldur/core/useOnScreen';
 import { FieldError } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
-import { ShoppingCartUpdateButtonContainer } from '@waldur/marketplace/cart/ShoppingCartUpdateButtonContainer';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
@@ -21,7 +20,7 @@ import { OrderSummaryPlanRows } from './plan/OrderSummaryPlanRows';
 import { PricesData } from './plan/types';
 import { pricesSelector } from './plan/utils';
 import { OfferingFormData, OrderSummaryProps } from './types';
-import { formatOrderForCreate, formatOrderForUpdate } from './utils';
+import { formatOrderForCreate } from './utils';
 
 export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
   return (
@@ -55,7 +54,7 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
   const errorsExist =
     projectError || props.errors?.attributes || props.errors?.limits;
 
-  const buttonsJsx = !props.updateMode ? (
+  const buttonsJsx = (
     <>
       {errorsExist && (
         <Tip
@@ -84,36 +83,6 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
       {!errorsExist && (
         <ShoppingCartButtonContainer
           item={formatOrderForCreate(props)}
-          flavor="primary"
-          disabled={!props.formValid}
-          className="w-100"
-        />
-      )}
-    </>
-  ) : (
-    <>
-      {errorsExist && (
-        <Tip
-          label={
-            <FieldError
-              error={{ ...props.errors?.attributes, ...props.errors?.limits }}
-            />
-          }
-          id="offering-button-errors"
-          autoWidth
-          className="w-100"
-        >
-          <ShoppingCartUpdateButtonContainer
-            item={formatOrderForUpdate(props)}
-            flavor="primary"
-            disabled={Boolean(errorsExist) || !props.formValid}
-            className="w-100"
-          />
-        </Tip>
-      )}
-      {!errorsExist && (
-        <ShoppingCartUpdateButtonContainer
-          item={formatOrderForUpdate(props)}
           flavor="primary"
           disabled={!props.formValid}
           className="w-100"

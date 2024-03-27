@@ -28,14 +28,6 @@ const Layout = lazyComponent(
   () => import('@waldur/navigation/Layout'),
   'Layout',
 );
-const CheckoutPage = lazyComponent(
-  () => import('./cart/CheckoutPage'),
-  'CheckoutPage',
-);
-const ShoppingCartItemUpdate = lazyComponent(
-  () => import('./cart/ShoppingCartItemUpdate'),
-  'ShoppingCartItemUpdate',
-);
 const AllCategoriesPage = lazyComponent(
   () => import('./category/list/AllCategoriesPage'),
   'AllCategoriesPage',
@@ -211,13 +203,6 @@ export const states: StateDeclaration[] = [
     data: {
       useExtraTabs: true,
     },
-  },
-
-  {
-    name: 'marketplace-checkout',
-    url: 'marketplace-checkout/',
-    component: CheckoutPage,
-    parent: 'project',
   },
 
   {
@@ -753,19 +738,5 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Resources'),
       priority: 100,
     },
-  },
-
-  {
-    name: 'marketplace-shopping-cart-item-update',
-    url: 'marketplace-shopping-cart-item-update/:order_uuid/',
-    component: ShoppingCartItemUpdate,
-    parent: 'project',
-  },
-
-  {
-    name: 'marketplace-shopping-cart-item-update-customer',
-    url: 'marketplace-shopping-cart-item-update/:order_uuid/',
-    component: ShoppingCartItemUpdate,
-    parent: 'organization',
   },
 ];
