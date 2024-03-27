@@ -45,22 +45,6 @@ export const cartReducer = (state = INITIAL_STATE, action): CartState => {
         items: state.items.filter((item) => item.uuid !== payload.uuid),
         removingItem: false,
       };
-    case constants.UPDATE_ITEM_REQUEST:
-      return {
-        ...state,
-        updatingItem: true,
-      };
-    case constants.UPDATE_ITEM_ERROR:
-      return {
-        ...state,
-        updatingItem: false,
-      };
-    case constants.UPDATE_ITEM_SUCCESS:
-      return {
-        ...state,
-        items: [...state.items, payload.item],
-        updatingItem: false,
-      };
     case constants.CREATE_ORDER_REQUEST:
       return {
         ...state,

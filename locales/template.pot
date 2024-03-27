@@ -201,7 +201,6 @@ msgstr ""
 #: src/customer/payments/PaymentsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/details/InvoiceItemActions.tsx
-#: src/marketplace/cart/ShoppingCart.tsx
 #: src/marketplace/offerings/actions/ActionsDropdown.tsx
 #: src/marketplace/offerings/list/OfferingActions.tsx
 #: src/marketplace/offerings/update/plans/PlanActions.tsx
@@ -249,10 +248,6 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Activating"
-msgstr ""
-
-#: src/marketplace/cart/ShoppingCart.tsx
-msgid "Activation price"
 msgstr ""
 
 #: src/administration/roles/RolesList.tsx
@@ -603,10 +598,6 @@ msgstr ""
 msgid "Agree and proceed"
 msgstr ""
 
-#: src/marketplace/cart/ShoppingCart.tsx
-msgid "Agree with terms"
-msgstr ""
-
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -833,7 +824,6 @@ msgstr ""
 
 #: src/invitations/UserPermissionRequestApproveButton.tsx
 #: src/marketplace-remote/ReviewApproveAction.tsx
-#: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/marketplace/orders/actions/ApproveByConsumerButton.tsx
 #: src/marketplace/orders/actions/ApproveByProviderButton.tsx
 msgid "Approve"
@@ -1330,10 +1320,6 @@ msgstr ""
 #: src/auth/callbacks/AuthLoginFailed.tsx
 #: src/auth/callbacks/OauthLoginCompleted.tsx
 msgid "Back to login"
-msgstr ""
-
-#: src/marketplace/cart/BackButton.tsx
-msgid "Back to shopping"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
@@ -1894,10 +1880,6 @@ msgstr ""
 msgid "Checklists"
 msgstr ""
 
-#: src/marketplace/cart/CheckoutPage.tsx
-msgid "Checkout"
-msgstr ""
-
 #: src/marketplace/offerings/update/options/OptionForm.tsx
 msgid "Choices as comma-separated list"
 msgstr ""
@@ -2152,7 +2134,6 @@ msgid "Configuration options"
 msgstr ""
 
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
-#: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.tsx
 msgid "Configure"
 msgstr ""
@@ -5341,7 +5322,6 @@ msgstr ""
 msgid "Invoice to"
 msgstr ""
 
-#: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 msgid "Invoiced to"
@@ -5415,12 +5395,7 @@ msgstr ""
 
 #: src/invoices/details/BillingRecordDetails.tsx
 #: src/invoices/details/InvoiceDetails.tsx
-#: src/marketplace/cart/ShoppingCart.tsx
 msgid "Item"
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Item has been removed from shopping cart."
 msgstr ""
 
 #: src/invoices/details/InvoiceItemMoveDialog.tsx
@@ -7298,10 +7273,6 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: src/marketplace/cart/ShoppingCartSidebar.tsx
-msgid "Order Summary"
-msgstr ""
-
 #: src/marketplace/orders/details/OrderDetails.tsx
 msgid "Order details"
 msgstr ""
@@ -7329,7 +7300,6 @@ msgstr ""
 msgid "Order history"
 msgstr ""
 
-#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
 #: src/marketplace/details/OfferingDetails.tsx
 msgid "Order summary"
 msgstr ""
@@ -8415,7 +8385,6 @@ msgstr ""
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
-#: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/deploy/steps/FormProjectStep.tsx
 #: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
@@ -8556,10 +8525,6 @@ msgstr ""
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
 msgid "Project image"
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Project is not selected."
 msgstr ""
 
 #: src/customer/team/CustomerUsersListExpandableRow.tsx
@@ -8902,10 +8867,6 @@ msgstr ""
 msgid "Pulling quotas"
 msgstr ""
 
-#: src/marketplace/cart/ForwardButton.tsx
-msgid "Purchase"
-msgstr ""
-
 #: src/marketplace/offerings/update/integration/RemoteActions.tsx
 msgid "Push project data"
 msgstr ""
@@ -9242,7 +9203,6 @@ msgstr ""
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
-#: src/marketplace/cart/ShoppingCartItem.tsx
 #: src/marketplace/category/admin/CategoryDeleteButton.tsx
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
 #: src/marketplace/offerings/RemoveButton.tsx
@@ -9338,16 +9298,11 @@ msgid "Reporting"
 msgstr ""
 
 #: src/i18n/constants.ts
-#: src/marketplace/cart/ForwardButton.tsx
 msgid "Request"
 msgstr ""
 
 #: src/user/support/UserRemovalMessageDialog.tsx
 msgid "Request account removal for {userName}."
-msgstr ""
-
-#: src/marketplace/cart/ForwardButton.tsx
-msgid "Request an approval"
 msgstr ""
 
 #: src/user/support/EmailField.tsx
@@ -9481,6 +9436,10 @@ msgstr ""
 
 #: src/customer/routes.ts
 msgid "Requests"
+msgstr ""
+
+#: src/administration/service-desk/SmaxSettings.tsx
+msgid "Requests offering code for all issues"
 msgstr ""
 
 #: src/marketplace/offerings/update/options/OptionForm.tsx
@@ -9793,7 +9752,6 @@ msgstr ""
 msgid "Retype OpenStack Volume"
 msgstr ""
 
-#: src/marketplace/cart/ShoppingCartSteps.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/round/review/EditRoundReviewDialog.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
@@ -10948,18 +10906,6 @@ msgstr ""
 
 #: src/marketplace/UserSecretOptionsForm.tsx
 msgid "Shared user password"
-msgstr ""
-
-#: src/marketplace/cart/ShoppingCart.tsx
-msgid "Shopping cart is empty. You should add items to cart first."
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Shopping cart item has been updated."
-msgstr ""
-
-#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
-msgid "Shopping cart item update"
 msgstr ""
 
 #: src/form/SecretField.tsx
@@ -12254,7 +12200,6 @@ msgid "This field is only editable when startup script is enabled."
 msgstr ""
 
 #: src/core/validators.ts
-#: src/marketplace/cart/ShoppingCartItemUpdateForm.tsx
 #: src/marketplace/details/OfferingConfigurator.tsx
 msgid "This field is required."
 msgstr ""
@@ -12309,10 +12254,6 @@ msgstr ""
 
 #: src/booking/components/SlotDurationGroup.tsx
 msgid "Time slot"
-msgstr ""
-
-#: src/marketplace/cart/ShoppingCartTimeSlots.tsx
-msgid "Time slots"
 msgstr ""
 
 #: src/booking/components/TimeZoneGroup.tsx
@@ -12402,7 +12343,6 @@ msgstr ""
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesList.tsx
 #: src/invoices/list/MonthOverview.tsx
-#: src/marketplace/cart/ShoppingCartSidebar.tsx
 #: src/marketplace/details/plan/OrderSummaryPlanRows.tsx
 #: src/marketplace/details/plan/PlanDetailsList.tsx
 #: src/marketplace/details/plan/PlanDetailsTable.tsx
@@ -13102,10 +13042,6 @@ msgstr ""
 msgid "Unable to load offering details."
 msgstr ""
 
-#: src/marketplace/cart/ShoppingCartItemUpdate.tsx
-msgid "Unable to load offering."
-msgstr ""
-
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
 msgid "Unable to load offerings"
 msgstr ""
@@ -13305,10 +13241,6 @@ msgstr ""
 
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 msgid "Unable to remove image."
-msgstr ""
-
-#: src/marketplace/cart/store/effects.ts
-msgid "Unable to remove item from shopping cart."
 msgstr ""
 
 #: src/customer/details/store/effects.ts
@@ -13688,10 +13620,6 @@ msgstr ""
 msgid "Unable to update service provider."
 msgstr ""
 
-#: src/marketplace/cart/store/effects.ts
-msgid "Unable to update shopping cart item."
-msgstr ""
-
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Unable to update static routes."
 msgstr ""
@@ -13819,7 +13747,6 @@ msgstr ""
 #: src/broadcasts/BroadcastUpdateButton.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
-#: src/marketplace/cart/ShoppingCartUpdateButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
@@ -14859,10 +14786,6 @@ msgstr ""
 
 #: src/quotas/QuotasTable.tsx
 msgid "You have no quotas yet."
-msgstr ""
-
-#: src/marketplace/cart/ForwardButton.tsx
-msgid "You have the right to purchase service without additional approval."
 msgstr ""
 
 #: src/i18n/constants.ts
