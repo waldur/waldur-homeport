@@ -144,14 +144,6 @@
         "description": "Render list of users in support workspace."
       },
       {
-        "key": "flowmap",
-        "description": "Render service usage as a flowmap chart in support workspace."
-      },
-      {
-        "key": "heatmap",
-        "description": "Render service usage as a heatmap chart in support workspace."
-      },
-      {
         "key": "shared_providers",
         "description": "Render overview of shared marketplace service providers in support workspace."
       },
