@@ -1,60 +1,17 @@
 import classNames from 'classnames';
-import { FC, ReactNode, useMemo, useRef } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 import { Button, Card, FormCheck } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
-import useOnScreen from '@waldur/core/useOnScreen';
 import { flattenObject } from '@waldur/core/utils';
 import { formatJsx, translate } from '@waldur/i18n';
 import { scrollToView } from '@waldur/marketplace/deploy/utils';
 
 import { FieldError } from './FieldError';
+import { FloatingButton } from './FloatingButton';
 import { VStepperFormStep } from './VStepperFormStep';
-
-interface SubmitButtonProps {
-  title: string;
-  onClick?(): void;
-  disabled?: boolean;
-  className?: string;
-  loading?: boolean;
-}
-
-export const SubmitButton: FC<SubmitButtonProps> = (props) => {
-  const mainButtonRef = useRef(null);
-  const isOnScreen = useOnScreen(mainButtonRef);
-
-  const buttonJsx = (
-    <Button
-      size="sm"
-      variant="primary"
-      type="submit"
-      disabled={props.disabled || props.loading}
-      onClick={props.onClick}
-      className={classNames('w-100', props.className)}
-    >
-      {props.loading && <i className="fa fa-spinner fa-spin me-1" />}
-      {props.title}
-    </Button>
-  );
-
-  return (
-    <>
-      <div ref={mainButtonRef} className="d-flex justify-content-between mt-5">
-        {buttonJsx}
-      </div>
-      <div
-        className={classNames(
-          'floating-submit-button d-xl-none',
-          !isOnScreen && 'active',
-        )}
-      >
-        {buttonJsx}
-      </div>
-    </>
-  );
-};
 
 interface VStepperFormSidebarProps {
   title?: string;
@@ -189,11 +146,21 @@ export const VStepperFormSidebar: FC<VStepperFormSidebarProps> = (props) => {
 
               {/* Clicking on this button will trigger submit on the parent form */}
               {props.hasSubmitButton && (
-                <SubmitButton
-                  title={props.submitLabel}
-                  loading={props.submitting}
-                  disabled={props.submitDisabled}
-                />
+                <FloatingButton>
+                  <Button
+                    size="sm"
+                    variant="primary"
+                    type="submit"
+                    disabled={props.submitDisabled || props.submitting}
+                    className="w-100"
+                  >
+                    {props.submitting && (
+                      <i className="fa fa-spinner fa-spin me-1" />
+                    )}
+                    {props.submitLabel}
+                  </Button>
+                  )
+                </FloatingButton>
               )}
             </>
           )}

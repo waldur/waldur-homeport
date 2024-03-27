@@ -1,11 +1,11 @@
-import { createElement, FunctionComponent, useMemo, useRef } from 'react';
+import { createElement, FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { getFormValues, isValid } from 'redux-form';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
-import useOnScreen from '@waldur/core/useOnScreen';
 import { FieldError } from '@waldur/form';
+import { FloatingButton } from '@waldur/form/FloatingButton';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
@@ -37,9 +37,6 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
 };
 
 export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
-  const mainButtonRef = useRef(null);
-  const isOnScreen = useOnScreen(mainButtonRef);
-
   const projectError = useMemo(() => {
     if (props.formData?.project?.end_date) {
       const endDate = parseDate(props.formData.project.end_date);
@@ -54,8 +51,8 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
   const errorsExist =
     projectError || props.errors?.attributes || props.errors?.limits;
 
-  const buttonsJsx = (
-    <>
+  return (
+    <FloatingButton>
       {errorsExist && (
         <Tip
           label={
@@ -88,23 +85,7 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
           className="w-100"
         />
       )}
-    </>
-  );
-
-  return (
-    <>
-      <div ref={mainButtonRef} className="d-flex justify-content-between mt-5">
-        {buttonsJsx}
-      </div>
-      <div
-        className={
-          'floating-submit-button d-xl-none' +
-          (!isOnScreen ? ' active' : undefined)
-        }
-      >
-        {buttonsJsx}
-      </div>
-    </>
+    </FloatingButton>
   );
 };
 

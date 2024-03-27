@@ -1,0 +1,23 @@
+.floating-button {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  width: 160px;
+  right: 30px;
+  z-index: 1;
+  transition: 0.3s all;
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+/* Equals to bootstrap xl screen size (for smaller than xl) */
+@media (max-width: 1200px) {
+  .floating-button {
+    display: block !important;
+
+    &.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

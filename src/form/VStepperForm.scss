@@ -58,18 +58,6 @@ $headerAndToolbarHeight: calc(65px + var(--kt-toolbar-height));
     margin: 0 -2.25rem;
     padding: 1.25rem 2.25rem;
   }
-
-  .floating-submit-button {
-    display: none;
-    position: fixed;
-    bottom: 20px;
-    width: 160px;
-    right: 30px;
-    z-index: 1;
-    transition: 0.3s all;
-    opacity: 0;
-    transform: translateY(100%);
-  }
 }
 
 body:not(.toolbar-fixed) .v-stepper-form-sidebar {
@@ -88,14 +76,5 @@ body:not(.toolbar-fixed) .v-stepper-form-sidebar {
   .v-stepper-form-sidebar {
     width: 100%;
     height: auto;
-  }
-
-  .floating-submit-button {
-    display: block !important;
-
-    &.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 }
