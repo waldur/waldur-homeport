@@ -152,14 +152,6 @@
         "description": "Render service usage as a heatmap chart in support workspace."
       },
       {
-        "key": "sankey_diagram",
-        "description": "Render service usage as a sankey chart in support workspace."
-      },
-      {
-        "key": "resources_treemap",
-        "description": "Render resource usage as a treemap chart in support workspace."
-      },
-      {
         "key": "shared_providers",
         "description": "Render overview of shared marketplace service providers in support workspace."
       },
