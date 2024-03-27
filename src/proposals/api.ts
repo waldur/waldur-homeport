@@ -56,7 +56,7 @@ export const createCall = (data) =>
   post<Call>('/proposal-protected-calls/', data);
 
 export const updateCall = (data, uuid) =>
-  put<Call>(`/proposal-protected-calls/${uuid}/`, data);
+  patch<Call>(`/proposal-protected-calls/${uuid}/`, data);
 
 export const updateCallState = (state: 'activate' | 'archive', uuid) =>
   post<Call>(`/proposal-protected-calls/${uuid}/${state}/`);
