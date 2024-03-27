@@ -1,14 +1,12 @@
-import Markdown from 'markdown-to-jsx';
 import { useCallback } from 'react';
 import { Col, Modal, Row } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 
-import { CodeBlock } from '@waldur/core/CodeBlock';
+import { CodePreview } from '@waldur/core/CodePreview';
 import { Tip } from '@waldur/core/Tooltip';
 import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { formatTemplate } from '@waldur/i18n/translate';
 import { updateOfferingOverview } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -89,19 +87,14 @@ export const EditGettingStartedDialog = connect(
             ></Col>
             <Col className="pb-20">
               <div className="form-label">{translate('Preview')}</div>
-              <Markdown
-                options={{
-                  overrides: {
-                    CodeBlock: { component: CodeBlock },
-                  },
-                }}
-              >
-                {formatTemplate(formValues.template, {
+              <CodePreview
+                template={formValues.template}
+                context={{
                   resource_name: 'RESOURCE_NAME',
                   resource_username: 'RESOURCE_USERNAME',
                   backend_id: 'BACKEND_ID',
-                })}
-              </Markdown>
+                }}
+              />
             </Col>
           </Row>
         </Modal.Body>

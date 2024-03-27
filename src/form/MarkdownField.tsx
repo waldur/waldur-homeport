@@ -1,10 +1,8 @@
-import Markdown from 'markdown-to-jsx';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { CodeBlock } from '@waldur/core/CodeBlock';
+import { CodePreview } from '@waldur/core/CodePreview';
 import { translate } from '@waldur/i18n';
-import { formatTemplate } from '@waldur/i18n/translate';
 
 import { TextField } from './TextField';
 import { FormField } from './types';
@@ -45,15 +43,7 @@ export const MarkdownField: FunctionComponent<MarkdownFieldProps> = (props) => {
       </Col>
       <Col className="pb-20">
         <div className="form-label">{translate('Preview')}</div>
-        <Markdown
-          options={{
-            overrides: {
-              CodeBlock: { component: CodeBlock },
-            },
-          }}
-        >
-          {formatTemplate(props.input.value, formatKeys)}
-        </Markdown>
+        <CodePreview template={props.input.value} context={formatKeys} />
       </Col>
     </Row>
   );

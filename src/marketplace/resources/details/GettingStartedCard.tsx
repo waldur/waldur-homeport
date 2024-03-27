@@ -1,8 +1,7 @@
 import { Card } from 'react-bootstrap';
 
+import { CodePreview } from '@waldur/core/CodePreview';
 import { translate } from '@waldur/i18n';
-
-import { GettingStartedMessage } from './GettingStartedMessage';
 
 export const GettingStartedCard = ({ resource, offering }) => {
   return offering.getting_started ? (
@@ -13,7 +12,14 @@ export const GettingStartedCard = ({ resource, offering }) => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <GettingStartedMessage resource={resource} offering={offering} />
+        <CodePreview
+          template={offering.getting_started}
+          context={{
+            backend_id: resource.effective_id || resource.backend_id,
+            resource_name: resource.name,
+            resource_username: resource.username || 'username',
+          }}
+        />
       </Card.Body>
     </Card>
   ) : null;
