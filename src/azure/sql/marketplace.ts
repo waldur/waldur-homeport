@@ -16,7 +16,7 @@ registerOfferingType({
   get label() {
     return translate('Azure PostgreSQL database server');
   },
-  component: AzureSQLServerForm,
+  orderFormComponent: AzureSQLServerForm,
   detailsComponent: AzureSQLServerDetails,
   providerType: 'Azure',
   allowToUpdateService: true,

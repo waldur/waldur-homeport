@@ -29,3 +29,9 @@ export interface OrderSummaryProps {
   extraComponent?: React.ComponentType<any>;
   shouldConcealPrices?: boolean;
 }
+export interface PureOfferingConfiguratorProps {
+  offering: Offering;
+  project?: Project;
+  plan?: Plan;
+  limits: string[];
+}

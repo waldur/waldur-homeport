@@ -4,7 +4,6 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
 import { MARKETPLACE_RANCHER } from './constants';
-import { deployOfferingSteps } from './steps';
 
 const RancherClusterCheckoutSummary = lazyComponent(
   () => import('./RancherClusterCheckoutSummary'),
@@ -13,6 +12,10 @@ const RancherClusterCheckoutSummary = lazyComponent(
 const RancherPluginOptionsForm = lazyComponent(
   () => import('./RancherPluginOptionsForm'),
   'RancherPluginOptionsForm',
+);
+const RancherOrderForm = lazyComponent(
+  () => import('./RancherOrderForm'),
+  'RancherOrderForm',
 );
 
 const ServiceSettingsAttributes = (): Attribute[] => [
@@ -78,7 +81,7 @@ registerOfferingType({
   get label() {
     return translate('Rancher cluster');
   },
-  formSteps: deployOfferingSteps,
+  orderFormComponent: RancherOrderForm,
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
   pluginOptionsForm: RancherPluginOptionsForm,
   providerType: 'Rancher',

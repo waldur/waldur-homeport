@@ -15,12 +15,12 @@ import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { parseDate } from '@waldur/core/dateUtils';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
-import { getOrderFormSteps } from '@waldur/marketplace/common/registry';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
 import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { getOrderFormComponent } from '../common/registry';
 import { FORM_ID } from '../details/constants';
 import { getDefaultLimits } from '../offerings/utils';
 import { OrderResponse } from '../orders/types';
@@ -43,16 +43,17 @@ interface DeployPageProps {
   initialAttributes?: AttributesType;
 }
 
-export const DeployPage = reduxForm<{}, DeployPageProps>({
-  form: FORM_ID,
-  touchOnChange: true,
-})((props) => {
+export const BaseDeployPage = ({
+  formData,
+  inputFormSteps,
+  selectedOffering,
+  ...props
+}) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const isEdit = useMemo(() => Boolean(props.cartItem), [props]);
 
   const project = useSelector(getProject);
-  const formData = useSelector(formDataSelector);
 
   const isProjectInactive = useMemo(() => {
     if (formData?.project?.end_date) {
@@ -63,8 +64,6 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
     return false;
   }, [formData?.project]);
 
-  const selectedOffering: Offering = formData?.offering || props?.offering;
-
   const plans = useMemo(
     () => selectedOffering.plans.filter((plan) => plan.archived === false),
     [selectedOffering],
@@ -72,7 +71,7 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
 
   const formSteps = useMemo(
     () =>
-      (getOrderFormSteps(selectedOffering?.type) || []).filter(
+      inputFormSteps.filter(
         (step) => (step.isActive && step.isActive(selectedOffering)) ?? true,
       ),
     [selectedOffering],
@@ -286,5 +285,21 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
         />
       </SidebarLayout.Sidebar>
     </SidebarLayout.Container>
+  );
+};
+
+export const DeployPage = reduxForm<{}, DeployPageProps>({
+  form: FORM_ID,
+  touchOnChange: true,
+})((props) => {
+  const formData = useSelector(formDataSelector);
+  const selectedOffering: Offering = formData?.offering || props?.offering;
+  const OrderFormComponent = getOrderFormComponent(selectedOffering.type);
+  return (
+    <OrderFormComponent
+      selectedOffering={selectedOffering}
+      formData={formData}
+      {...props}
+    />
   );
 });

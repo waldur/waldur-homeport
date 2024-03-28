@@ -4,7 +4,6 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
 import { BASIC_OFFERING_TYPE, SUPPORT_OFFERING_TYPE } from './constants';
-import { deployOfferingSteps } from './deploy-steps';
 import { serializer } from './serializer';
 
 const OfferingConfigurationDetails = lazyComponent(
@@ -19,6 +18,10 @@ const OfferingPluginSecretOptionsForm = lazyComponent(
   () => import('./OfferingPluginSecretOptionsForm'),
   'OfferingPluginSecretOptionsForm',
 );
+const RequestOrderForm = lazyComponent(
+  () => import('./RequestOrderForm'),
+  'RequestOrderForm',
+);
 
 const OfferingOptionsSummary = (): Attribute[] => [
   {
@@ -29,7 +32,7 @@ const OfferingOptionsSummary = (): Attribute[] => [
 ];
 
 export const COMMON_OPTIONS = {
-  formSteps: deployOfferingSteps,
+  orderFormComponent: RequestOrderForm,
   detailsComponent: OfferingConfigurationDetails,
   pluginOptionsForm: UserPluginOptionsForm,
   optionsSummary: OfferingOptionsSummary,

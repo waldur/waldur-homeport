@@ -4,7 +4,6 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { Attribute } from '@waldur/marketplace/types';
 
 import { TENANT_TYPE } from './constants';
-import { deployOfferingSteps } from './deploy/steps';
 import { STORAGE_MODE_OPTIONS } from './OpenStackPluginOptionsForm';
 
 const OpenStackPackageDetails = lazyComponent(
@@ -14,6 +13,10 @@ const OpenStackPackageDetails = lazyComponent(
 const OpenStackPluginOptionsForm = lazyComponent(
   () => import('./OpenStackPluginOptionsForm'),
   'OpenStackPluginOptionsForm',
+);
+const OpenstackTenantOrder = lazyComponent(
+  () => import('./deploy/OpenstackTenantOrder'),
+  'OpenstackTenantOrder',
 );
 
 const ServiceSettingsAttributes = (): Attribute[] => [
@@ -135,7 +138,7 @@ registerOfferingType({
   get label() {
     return translate('OpenStack admin');
   },
-  formSteps: deployOfferingSteps,
+  orderFormComponent: OpenstackTenantOrder,
   detailsComponent: OpenStackPackageDetails,
   pluginOptionsForm: OpenStackPluginOptionsForm,
   limitSerializer,
