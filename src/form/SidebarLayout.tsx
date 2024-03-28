@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
 import './SidebarLayout.scss';
+import { useFullPage } from '@waldur/navigation/context';
 
 const Container: FC = (props) => (
   <div className="d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10">
@@ -18,6 +19,7 @@ const Body: FC = (props) => (
 
 const Sidebar: FC = (props) => {
   const isVMode = useMediaQuery({ maxWidth: 1200 });
+  useFullPage();
 
   return (
     <div
