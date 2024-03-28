@@ -1,19 +1,28 @@
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { customerCreateDialog } from '@waldur/customer/create/actions';
+import { canCreateOrganization } from '@waldur/customer/create/selectors';
 import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
 
 import './EmptyOrganizationsPlaceholder.scss';
 
-import { useCreateOrganization } from './utils';
-
 const InitialCreateOrganizationButton = () => {
-  const [enabled, onClick] = useCreateOrganization();
+  const dispatch = useDispatch();
+  const enabled = useSelector(canCreateOrganization);
   if (!enabled) {
     return null;
   }
   return (
-    <Button variant="primary" onClick={onClick as any}>
+    <Button
+      variant="primary"
+      onClick={() => {
+        dispatch(closeModalDialog());
+        dispatch(customerCreateDialog());
+      }}
+    >
       {translate('Create organization')}
     </Button>
   );

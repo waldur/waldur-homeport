@@ -4,18 +4,15 @@ import { useSelector } from 'react-redux';
 import { ENV } from '@waldur/configs/default';
 import { sendForm } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { canManageCustomer } from '@waldur/customer/create/selectors';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { PageBarProvider } from '@waldur/marketplace/context';
 import { openModalDialog } from '@waldur/modal/actions';
 import { useFullPage } from '@waldur/navigation/context';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showError, showSuccess } from '@waldur/store/notify';
-import {
-  getUser,
-  isOwner as isOwnerSelector,
-  getCustomer,
-} from '@waldur/workspace/selectors';
+import { getUser, getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
 import { CustomerEditPanels } from './CustomerEditPanels';
@@ -33,9 +30,10 @@ export const CustomerManage: FunctionComponent = () => {
 
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
-  const isOwner = useSelector(isOwnerSelector);
-  const ownerCanManage = useSelector(canManageCustomer);
-  const canEditCustomer = user.is_staff || (isOwner && ownerCanManage);
+  const canEditCustomer = hasPermission(user, {
+    permission: PermissionEnum.UPDATE_CUSTOMER,
+    customerId: customer.uuid,
+  });
 
   const updateCustomer = useCallback(
     async (formData, dispatch) => {

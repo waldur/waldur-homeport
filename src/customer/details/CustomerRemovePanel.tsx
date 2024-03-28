@@ -12,17 +12,13 @@ import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { deleteCustomer } from '@waldur/project/api';
 import { showError } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
-import {
-  getUser,
-  isOwner as isOwnerSelector,
-  getCustomer,
-} from '@waldur/workspace/selectors';
-
-import { canManageCustomer } from '../create/selectors';
+import { getUser, getCustomer } from '@waldur/workspace/selectors';
 
 const OrganizationRemovalErrorDialog = lazyComponent(
   () => import('@waldur/customer/details/OrganizationRemovalErrorDialog'),
@@ -37,9 +33,10 @@ const loadInvoices = (customer) =>
 export const CustomerRemovePanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
-  const isOwner = useSelector(isOwnerSelector);
-  const ownerCanManage = useSelector(canManageCustomer);
-  const canDeleteCustomer = user.is_staff || (isOwner && ownerCanManage);
+  const canDeleteCustomer = hasPermission(user, {
+    permission: PermissionEnum.DELETE_CUSTOMER,
+    customerId: customer.uuid,
+  });
   const { loading, value: invoices } = useAsync(() => loadInvoices(customer));
   const dispatch = useDispatch();
   const router = useRouter();
