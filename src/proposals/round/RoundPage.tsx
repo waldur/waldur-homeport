@@ -52,7 +52,7 @@ export const RoundPage: FunctionComponent = () => {
     },
   );
 
-  useTitle(round ? round.uuid : translate('Call round'));
+  useTitle(round ? round.name : translate('Call round'));
 
   const isLoading = isLoadingCall || isLoadingRound;
   const error = errorCall || errorRound;
@@ -68,6 +68,7 @@ export const RoundPage: FunctionComponent = () => {
         <RoundPageBar />
         <div className="container-xxl py-10">
           <ProposalsList round_uuid={round.uuid} call_uuid={call.uuid} />
+          <RoundReviewersList round_uuid={round.uuid} />
           <RoundSubmissionSection
             round={round}
             call={call}
@@ -80,7 +81,6 @@ export const RoundPage: FunctionComponent = () => {
             refetch={refetch}
             loading={isRefetching}
           />
-          <RoundReviewersList round_uuid={round.uuid} />
           <RoundAllocationSection
             round={round}
             call={call}
