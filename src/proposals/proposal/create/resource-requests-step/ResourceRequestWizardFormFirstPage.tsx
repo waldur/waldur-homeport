@@ -69,7 +69,6 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
                 noUpdateOnBlur
                 validate={required}
                 onChange={(value) => {
-                  wizardProps.change('limits', value.attributes?.limits);
                   if (value?.uuid !== offering?.uuid) {
                     wizardProps.change('plan', undefined);
                   }
