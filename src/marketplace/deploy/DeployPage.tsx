@@ -13,7 +13,7 @@ import { reduxForm } from 'redux-form';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { parseDate } from '@waldur/core/dateUtils';
-import { VStepperForm } from '@waldur/form/VStepperForm';
+import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
 import { getOrderFormSteps } from '@waldur/marketplace/common/registry';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
@@ -249,43 +249,42 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   }
 
   return (
-    <VStepperForm
-      form={FORM_ID}
-      steps={formSteps}
-      sidebar={(sidebarProps) => (
+    <SidebarLayout.Container>
+      <SidebarLayout.Body>
+        <div className="d-flex justify-content-between align-items-center pt-10">
+          <h1 className="mb-0">
+            {isEdit ? translate('Edit') : translate('Add')}{' '}
+            {selectedOffering.name}
+          </h1>
+          {showExperimentalUiComponents && <DeployPageActions />}
+        </div>
+
+        {formSteps.map((step, i) => (
+          <div ref={stepRefs.current[i]} key={step.id}>
+            <step.component
+              step={i + 1}
+              id={step.id}
+              title={step.label}
+              offering={selectedOffering}
+              observed={completedSteps[i]}
+              change={props.change}
+              params={step.params}
+              required={Boolean(step.requiredFields?.length)}
+              disabled={step.id !== 'step-project' && isProjectInactive}
+            />
+          </div>
+        ))}
+      </SidebarLayout.Body>
+
+      <SidebarLayout.Sidebar>
         <DeployPageSidebar
-          {...sidebarProps}
-          offering={selectedOffering}
           steps={formSteps}
+          offering={selectedOffering}
           completedSteps={completedSteps}
           updateMode={props.updateMode}
           cartItem={props.cartItem}
         />
-      )}
-    >
-      <div className="d-flex justify-content-between align-items-center">
-        <h1 className="mb-0">
-          {isEdit ? translate('Edit') : translate('Add')}{' '}
-          {selectedOffering.name}
-        </h1>
-        {showExperimentalUiComponents && <DeployPageActions />}
-      </div>
-
-      {formSteps.map((step, i) => (
-        <div ref={stepRefs.current[i]} key={step.id}>
-          <step.component
-            step={i + 1}
-            id={step.id}
-            title={step.label}
-            offering={selectedOffering}
-            observed={completedSteps[i]}
-            change={props.change}
-            params={step.params}
-            required={Boolean(step.requiredFields?.length)}
-            disabled={step.id !== 'step-project' && isProjectInactive}
-          />
-        </div>
-      ))}
-    </VStepperForm>
+      </SidebarLayout.Sidebar>
+    </SidebarLayout.Container>
   );
 });

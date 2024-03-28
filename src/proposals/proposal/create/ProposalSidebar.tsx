@@ -1,8 +1,8 @@
 import { Button } from 'react-bootstrap';
 
 import { FloatingButton } from '@waldur/form/FloatingButton';
-import { SidebarProps, FormSidebar } from '@waldur/form/FormSidebar';
 import { FormSteps } from '@waldur/form/FormSteps';
+import { SidebarProps } from '@waldur/form/SidebarProps';
 import { translate } from '@waldur/i18n';
 
 interface CompletionPageSidebarProps extends SidebarProps {
@@ -11,7 +11,7 @@ interface CompletionPageSidebarProps extends SidebarProps {
 }
 
 export const ProposalSidebar = (props: CompletionPageSidebarProps) => (
-  <FormSidebar>
+  <>
     <FormSteps steps={props.steps} completedSteps={props.completedSteps} />
     {props.canSwitchToTeam && (
       <>
@@ -46,5 +46,5 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => (
         </FloatingButton>
       </>
     )}
-  </FormSidebar>
+  </>
 );

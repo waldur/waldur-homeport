@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import { SidebarProps, FormSidebar } from '@waldur/form/FormSidebar';
 import { FormSteps } from '@waldur/form/FormSteps';
+import { SidebarProps } from '@waldur/form/SidebarProps';
 import { TosNotification } from '@waldur/form/TosNotification';
 import { translate } from '@waldur/i18n';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
@@ -25,7 +25,7 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
   const errors = useSelector(formErrorsSelector);
 
   return (
-    <FormSidebar>
+    <>
       <h6 className="fs-7">{translate('Progress')}</h6>
       <FormSteps
         steps={props.steps}
@@ -42,6 +42,6 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
       />
       <TosNotification />
       <OfferingTosNotification offering={props.offering} />
-    </FormSidebar>
+    </>
   );
 };

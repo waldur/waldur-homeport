@@ -21,6 +21,5 @@ export const FloatingSubmitButton: FC<{ label?; disabled?; submitting }> = ({
       {submitting && <i className="fa fa-spinner fa-spin me-1" />}
       {label || translate('Submit')}
     </Button>
-    )
   </FloatingButton>
 );
