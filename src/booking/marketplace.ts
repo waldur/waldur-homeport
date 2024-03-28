@@ -17,9 +17,12 @@ const UserPluginOptionsForm = lazyComponent(
   () => import('@waldur/marketplace/UserPluginOptionsForm'),
   'UserPluginOptionsForm',
 );
+const BookingOrderForm = lazyComponent(
+  () => import('./deploy/BookingOrderForm'),
+  'BookingOrderForm',
+);
 
 import { OFFERING_TYPE_BOOKING } from './constants';
-import { deployOfferingSteps } from './deploy/steps';
 
 /* Since back-end doesn't allow slots in the past,
  * this function detects slots that are in the past and
@@ -65,7 +68,7 @@ registerOfferingType({
   get label() {
     return translate('Booking');
   },
-  formSteps: deployOfferingSteps,
+  orderFormComponent: BookingOrderForm,
   checkoutSummaryComponent: BookingCheckoutSummary,
   pluginOptionsForm: UserPluginOptionsForm,
   detailsComponent: BookingDetails,

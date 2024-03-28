@@ -23,7 +23,7 @@ registerOfferingType({
   get label() {
     return translate('Azure Virtual Machine');
   },
-  component: AzureVirtualMachineForm,
+  orderFormComponent: AzureVirtualMachineForm,
   detailsComponent: AzureVirtualMachineDetails,
   providerType: 'Azure',
   serializer,

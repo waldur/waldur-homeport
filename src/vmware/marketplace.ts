@@ -1,8 +1,13 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
 import { VMWARE_VM } from './constants';
-import { deployOfferingSteps } from './deploy/steps';
+
+const VmwareOrderForm = lazyComponent(
+  () => import('./deploy/VmwareOrderForm'),
+  'VmwareOrderForm',
+);
 
 const serializer = ({
   template,
@@ -39,7 +44,7 @@ registerOfferingType({
   get label() {
     return translate('vSphere Virtual Machine');
   },
-  formSteps: deployOfferingSteps,
+  orderFormComponent: VmwareOrderForm,
   providerType: 'VMware',
   serializer,
   limitSerializer,

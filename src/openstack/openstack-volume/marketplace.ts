@@ -5,11 +5,14 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { VOLUME_TYPE } from '../constants';
 
 import { CheckoutSummary } from './deploy/CheckoutSummary';
-import { deployOfferingSteps } from './deploy/steps';
 
 const OpenstackVolumeDetails = lazyComponent(
-  () => import('@waldur/openstack/openstack-volume/OpenstackVolumeDetails'),
+  () => import('./OpenstackVolumeDetails'),
   'OpenstackVolumeDetails',
+);
+const OpenstackVolumeOrder = lazyComponent(
+  () => import('./deploy/OpenstackVolumeOrder'),
+  'OpenstackVolumeOrder',
 );
 
 const serializer = (attrs) => ({
@@ -22,7 +25,7 @@ registerOfferingType({
   get label() {
     return translate('OpenStack volume');
   },
-  formSteps: deployOfferingSteps,
+  orderFormComponent: OpenstackVolumeOrder,
   detailsComponent: OpenstackVolumeDetails,
   checkoutSummaryComponent: CheckoutSummary,
   serializer,

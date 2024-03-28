@@ -5,14 +5,10 @@ import {
   Offering,
   Attribute,
   OrderDetailsProps,
-  OfferingConfigurationFormProps,
   OfferingComponent,
 } from '@waldur/marketplace/types';
 
-import {
-  CheckoutSummaryProps,
-  OfferingConfigurationFormStep,
-} from '../deploy/types';
+import { CheckoutSummaryProps } from '../deploy/types';
 
 const REGISTRY: { [key: string]: Omit<OfferingConfiguration, 'type'> } = {};
 
@@ -22,8 +18,7 @@ export type LimitParser = (limits: Limits) => Limits;
 
 interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
   type: string;
-  formSteps?: OfferingConfigurationFormStep[];
-  component?: React.ComponentType<OfferingConfigurationFormProps>;
+  orderFormComponent?;
   pluginOptionsForm?: React.ComponentType<any>;
   secretOptionsForm?: React.ComponentType<any>;
   detailsComponent?: React.ComponentType<OrderDetailsProps>;
@@ -62,15 +57,10 @@ export function registerOfferingType(config: OfferingConfiguration) {
   REGISTRY[type] = rest;
 }
 
-export function getOrderFormSteps(offeringType: string) {
+export function getOrderFormComponent(offeringType: string) {
   return (
-    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].formSteps
-  );
-}
-
-export function getFormComponent(offeringType: string) {
-  return (
-    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].component
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].orderFormComponent
   );
 }
 

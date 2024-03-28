@@ -4,8 +4,10 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
-import { PureOfferingConfiguratorProps } from '@waldur/marketplace/details/OfferingConfigurator';
-import { OfferingFormData } from '@waldur/marketplace/details/types';
+import {
+  PureOfferingConfiguratorProps,
+  OfferingFormData,
+} from '@waldur/marketplace/details/types';
 import {
   Offering,
   OfferingConfigurationFormProps,

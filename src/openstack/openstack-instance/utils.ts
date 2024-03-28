@@ -3,6 +3,7 @@ import { InternalIP } from '@waldur/resource/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
 import { Quota, VolumeType } from '../types';
+import { parseQuotas, parseQuotasUsage } from '../utils';
 
 const getTotalStorage = (formData) =>
   (formData.system_volume_size || 0) + (formData.data_volume_size || 0);
@@ -174,3 +175,57 @@ export const getDefaultFloatingIps = () => [
     url: 'true',
   },
 ];
+
+export const formValidator = (props) => {
+  const {
+    offering,
+    values: { attributes },
+  } = props;
+  if (!attributes) {
+    return;
+  }
+  if (!offering.quotas) {
+    return;
+  }
+  // TODO: Use memoization to avoid unnecessary quotas parsing
+  const limits: Record<string, number> = parseQuotas(offering.quotas);
+  const usages: Record<string, number> = parseQuotasUsage(offering.quotas);
+  const errors: Record<string, string> = {};
+  if (attributes.flavor) {
+    if (
+      limits.cores !== -1 &&
+      attributes.flavor.cores + usages.cores > limits.cores
+    ) {
+      errors.flavor = translate('vCPU limit is exceeded');
+    }
+    if (limits.ram !== -1 && attributes.flavor.ram + usages.ram > limits.ram) {
+      errors.flavor = translate('RAM limit is exceeded');
+    }
+  }
+  if (
+    limits.disk !== -1 &&
+    usages.disk +
+      attributes.system_volume_size +
+      (attributes.data_volume_size || 0) >
+      limits.disk
+  ) {
+    errors.system_volume_size = errors.data_volume_size = translate(
+      'Total storage limit is exceeded',
+    );
+  }
+  const volumeTypes = getVolumeTypeRequirements(attributes);
+  for (const name in volumeTypes) {
+    if (
+      limits[name] !== -1 &&
+      volumeTypes[name] + usages[name] > limits[name]
+    ) {
+      errors.system_volume_size = errors.data_volume_size = translate(
+        'Volume type storage limit is exceeded',
+      );
+    }
+  }
+  if (attributes.networks.length === 0) {
+    errors.networks = translate('Please select network.');
+  }
+  return { attributes: errors };
+};
