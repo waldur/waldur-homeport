@@ -1,4 +1,3 @@
-import React from 'react';
 import { Omit } from 'react-redux';
 
 import {
@@ -16,17 +15,35 @@ export type Limits = Record<string, number>;
 
 export type LimitParser = (limits: Limits) => Limits;
 
-interface OfferingConfiguration<AttributesType = any, RequestPaylodType = any> {
+interface OfferingConfiguration<
+  AttributesType = any,
+  RequestPayloadType = any,
+> {
   type: string;
-  orderFormComponent?;
+  /**
+   *  Please use only lazy component here to enable code-splitting.
+   */
+  orderFormComponent?: React.ComponentType<any>;
+  /**
+   *  Please use only lazy component here to enable code-splitting.
+   */
   pluginOptionsForm?: React.ComponentType<any>;
+  /**
+   *  Please use only lazy component here to enable code-splitting.
+   */
   secretOptionsForm?: React.ComponentType<any>;
+  /**
+   *  Please use only lazy component here to enable code-splitting.
+   */
   detailsComponent?: React.ComponentType<OrderDetailsProps>;
+  /**
+   *  Please use only lazy component here to enable code-splitting.
+   */
   checkoutSummaryComponent?: React.ComponentType<CheckoutSummaryProps>;
   serializer?: (
     attributes: AttributesType,
     offering: Offering,
-  ) => RequestPaylodType;
+  ) => RequestPayloadType;
   limitSerializer?: LimitParser;
   limitParser?: LimitParser;
   formValidator?(values: any): any;

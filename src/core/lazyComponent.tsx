@@ -39,7 +39,7 @@ export function lazyComponent<T = any>(
     );
   }
 
-  (LazyLoader as any).displayName = `LazyLoader`;
+  (LazyLoader as any).displayName = `${componentName}LazyLoader`;
 
   return LazyLoader as React.ComponentType<T>;
 }
