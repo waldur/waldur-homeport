@@ -4,8 +4,10 @@ import { registerOfferingType } from '@waldur/marketplace/common/registry';
 
 import { VOLUME_TYPE } from '../constants';
 
-import { CheckoutSummary } from './deploy/CheckoutSummary';
-
+const CheckoutSummary = lazyComponent(
+  () => import('./deploy/CheckoutSummary'),
+  'CheckoutSummary',
+);
 const OpenstackVolumeDetails = lazyComponent(
   () => import('./OpenstackVolumeDetails'),
   'OpenstackVolumeDetails',
