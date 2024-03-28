@@ -10,11 +10,13 @@ import {
 import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { OrganizationHoverableRow } from '@waldur/user/affiliations/OrganizationHoverableRow';
-import { isStaff } from '@waldur/workspace/selectors';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { OrganizationDetails } from '../../customer/list/OrganizationDetails';
 import { OrganizationLink } from '../../customer/list/OrganizationLink';
@@ -52,7 +54,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hoverableRow={({ row }) => (
         <>
           <OrganizationHoverableRow row={row} />
-          {props.isStaff && <OrganizationEditButton customer={row} />}
+          {hasPermission(props.user, {
+            permission: PermissionEnum.UPDATE_CUSTOMER,
+            customerId: row.uuid,
+          }) && <OrganizationEditButton customer={row} />}
         </>
       )}
       expandableRow={({ row }) => <OrganizationDetails customer={row} />}
@@ -123,7 +128,7 @@ const TableOptions = {
 
 const mapStateToProps = (state: RootState) => ({
   filter: getFormValues(SUPPORT_CUSTOMERS_FORM_ID)(state),
-  isStaff: isStaff(state),
+  user: getUser(state),
 });
 
 const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));

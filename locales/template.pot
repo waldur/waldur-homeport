@@ -104,6 +104,7 @@ msgstr ""
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
+#: src/proposals/round/reviewers/RoundReviewersListExpandableRow.tsx
 #: src/proposals/utils.ts
 msgid "Accepted"
 msgstr ""
@@ -4988,6 +4989,10 @@ msgstr ""
 msgid "Importing resources"
 msgstr ""
 
+#: src/proposals/round/reviewers/RoundReviewersListExpandableRow.tsx
+msgid "In progress"
+msgstr ""
+
 #: src/proposals/proposal/create-review/CreatePageSidebar.tsx
 #: src/proposals/utils.ts
 msgid "In review"
@@ -7821,6 +7826,10 @@ msgstr ""
 msgid "Periods"
 msgstr ""
 
+#: src/customer/list/OrganizationUpdateContainer.tsx
+msgid "Permission denied"
+msgstr ""
+
 #: src/user/affiliations/PermissionDetails.tsx
 msgid "Permission expires at"
 msgstr ""
@@ -9111,6 +9120,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+#: src/proposals/round/reviewers/RoundReviewersListExpandableRow.tsx
 #: src/proposals/utils.ts
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Rejected"
