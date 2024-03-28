@@ -8,11 +8,11 @@ import { Round } from '@waldur/proposals/types';
 import { formatProposalState } from '@waldur/proposals/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
-import { USER_PROPOSALS_FILTER_FORM_ID } from '@waldur/user/constants';
 import { EndingField } from '@waldur/user/proposals/EndingField';
 import { ProposalsTableFilter } from '@waldur/user/proposals/ProposalsTableFilter';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { PROPOSALS_FILTER_FORM_ID } from '../constants';
 import { ProposalRowActions } from '../round/proposals/ProposalRowActions';
 
 interface ProposalsListProps {
@@ -21,7 +21,7 @@ interface ProposalsListProps {
 
 const mapPropsToFilter = createSelector(
   getCustomer,
-  getFormValues(USER_PROPOSALS_FILTER_FORM_ID),
+  getFormValues(PROPOSALS_FILTER_FORM_ID),
   (customer, filters: any) => {
     const result: Record<string, any> = {};
     if (customer) {
@@ -100,7 +100,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
       title={translate('Proposals')}
       verboseName={translate('Proposals')}
       hasQuery={true}
-      filters={<ProposalsTableFilter />}
+      filters={<ProposalsTableFilter form={PROPOSALS_FILTER_FORM_ID} />}
       hoverableRow={ProposalRowActions}
     />
   );

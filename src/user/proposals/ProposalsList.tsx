@@ -15,7 +15,7 @@ import { USER_PROPOSALS_FILTER_FORM_ID } from '../constants';
 import { EndingField } from './EndingField';
 import { ProposalsListExpandableRow } from './ProposalsListExpandableRow';
 import { ProposalsListPlaceholder } from './ProposalsListPlaceholder';
-import { ProposalsTableFilter } from './ProposalsTableFilter';
+import { UserProposalsTableFilter } from './ProposalsTableFilter';
 
 interface ProposalsListProps {
   round: Round;
@@ -106,7 +106,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
           {translate('View')}
         </Link>
       )}
-      filters={<ProposalsTableFilter />}
+      filters={<UserProposalsTableFilter />}
     />
   );
 };

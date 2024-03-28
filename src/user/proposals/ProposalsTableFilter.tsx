@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import {
@@ -12,8 +13,7 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { USER_PROPOSALS_FILTER_FORM_ID } from '../constants';
 
-const PureProposalsTableFilter = ({ form }) => {
-  useReinitializeFilterFromUrl(form);
+const SharedProposalsTableFilter: FunctionComponent = () => {
   return (
     <>
       <TableFilterItem title={translate('State')} name="state">
@@ -42,10 +42,33 @@ const PureProposalsTableFilter = ({ form }) => {
   );
 };
 
-const enhance = reduxForm({
-  form: USER_PROPOSALS_FILTER_FORM_ID,
-  destroyOnUnmount: false,
-  onChange: syncFiltersToURL,
-});
+const UserProposalsTableFilter: FunctionComponent = () => {
+  const NON_CANCELED_REJECTED_STATES = getProposalStateOptions().filter(
+    (option) => option.value !== 'canceled' && option.value !== 'rejected',
+  );
 
-export const ProposalsTableFilter = enhance(PureProposalsTableFilter);
+  const enhance = reduxForm({
+    form: USER_PROPOSALS_FILTER_FORM_ID,
+    destroyOnUnmount: false,
+    initialValues: {
+      state: NON_CANCELED_REJECTED_STATES,
+    },
+  });
+
+  const EnhancedComponent = enhance(SharedProposalsTableFilter);
+  return <EnhancedComponent />;
+};
+
+const ProposalsTableFilter = ({ form }) => {
+  useReinitializeFilterFromUrl(form);
+  const enhance = reduxForm({
+    form: form,
+    destroyOnUnmount: false,
+    onChange: syncFiltersToURL,
+  });
+
+  const EnhancedComponent = enhance(SharedProposalsTableFilter);
+  return <EnhancedComponent />;
+};
+
+export { UserProposalsTableFilter, ProposalsTableFilter };
