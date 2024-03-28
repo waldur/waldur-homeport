@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { RoundReviewersListExpandableRow } from '@waldur/proposals/round/reviewers/RoundReviewersListExpandableRow';
 import { Reviewer } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -19,6 +20,7 @@ export const RoundReviewersList: FC<RoundReviewersListProps> = (props) => {
     <Table<Reviewer>
       {...tableProps}
       id="reviewers"
+      className="mb-7"
       columns={[
         {
           title: translate('Full name'),
@@ -31,6 +33,7 @@ export const RoundReviewersList: FC<RoundReviewersListProps> = (props) => {
       ]}
       title={translate('Reviewers')}
       verboseName={translate('Reviewers')}
+      expandableRow={RoundReviewersListExpandableRow}
     />
   );
 };
