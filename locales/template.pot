@@ -4496,7 +4496,6 @@ msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormAbstractVolumeStep.tsx
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
-#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/SystemVolumeSizeGroup.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 #: src/vmware/deploy/FormMemoryStep.tsx
@@ -6898,20 +6897,12 @@ msgstr ""
 msgid "Offering LEXIS link options have been updated successfully."
 msgstr ""
 
-#: src/marketplace/details/OfferingDetails.tsx
-msgid "Offering configuration"
-msgstr ""
-
 #: src/marketplace/offerings/details/OfferingTables.tsx
 msgid "Offering cost chart"
 msgstr ""
 
 #: src/marketplace/offerings/list/DeleteOfferingButton.tsx
 msgid "Offering deleted successfully."
-msgstr ""
-
-#: src/marketplace/details/OfferingDetails.tsx
-msgid "Offering description"
 msgstr ""
 
 #: src/marketplace/details/OverviewTab.tsx
@@ -7298,10 +7289,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/ResourceOrdersLink.tsx
 msgid "Order history"
-msgstr ""
-
-#: src/marketplace/details/OfferingDetails.tsx
-msgid "Order summary"
 msgstr ""
 
 #: src/marketplace/deploy/DeployPageActions.tsx
@@ -7932,7 +7919,6 @@ msgstr ""
 msgid "Plan capacity"
 msgstr ""
 
-#: src/marketplace/details/OfferingConfigurator.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 msgid "Plan capacity is full."
 msgstr ""
@@ -8108,7 +8094,7 @@ msgstr ""
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
-#: src/openstack/openstack-instance/marketplace.ts
+#: src/openstack/openstack-instance/utils.ts
 msgid "Please select network."
 msgstr ""
 
@@ -8897,7 +8883,6 @@ msgid "Quota"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormAbstractVolumeStep.tsx
-#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/quotas/QuotaUsageBarChart.tsx
 #: src/rancher/cluster/create/FormDataStorageStep.tsx
 #: src/rancher/cluster/create/FormSystemStorageStep.tsx
@@ -8925,7 +8910,7 @@ msgstr ""
 msgid "RAM limit (GB-hours)"
 msgstr ""
 
-#: src/openstack/openstack-instance/marketplace.ts
+#: src/openstack/openstack-instance/utils.ts
 msgid "RAM limit is exceeded"
 msgstr ""
 
@@ -12201,7 +12186,6 @@ msgid "This field is only editable when startup script is enabled."
 msgstr ""
 
 #: src/core/validators.ts
-#: src/marketplace/details/OfferingConfigurator.tsx
 msgid "This field is required."
 msgstr ""
 
@@ -12399,7 +12383,7 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
-#: src/openstack/openstack-instance/marketplace.ts
+#: src/openstack/openstack-instance/utils.ts
 msgid "Total storage limit is exceeded"
 msgstr ""
 
@@ -14539,7 +14523,6 @@ msgid "Volume name"
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormAbstractVolumeStep.tsx
-#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/VolumeSizeGroup.tsx
 msgid "Volume size"
 msgstr ""
@@ -14556,12 +14539,11 @@ msgstr ""
 #: src/openstack/openstack-volume/OpenStackVolumeSummary.tsx
 #: src/openstack/openstack-volume/OpenstackVolumeDetails.tsx
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
-#: src/openstack/openstack-volume/deploy/FormVolumeStep.tsx
 #: src/rancher/cluster/create/VolumeTypeGroup.tsx
 msgid "Volume type"
 msgstr ""
 
-#: src/openstack/openstack-instance/marketplace.ts
+#: src/openstack/openstack-instance/utils.ts
 msgid "Volume type storage limit is exceeded"
 msgstr ""
 
@@ -15327,7 +15309,7 @@ msgstr ""
 msgid "vCPU count"
 msgstr ""
 
-#: src/openstack/openstack-instance/marketplace.ts
+#: src/openstack/openstack-instance/utils.ts
 msgid "vCPU limit is exceeded"
 msgstr ""
 

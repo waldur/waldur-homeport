@@ -19,7 +19,7 @@ import { getOfferingLimit, useQuotasData, useVolumeDataLoader } from './utils';
 const DEFAULT_STORAGE_LIMIT_MB = 10240 * 1024;
 
 export const FormAbstractVolumeStep = (
-  props: FormStepProps & { typeField; sizeField; title; helpText; optional },
+  props: FormStepProps & { typeField; sizeField; title; helpText?; optional },
 ) => {
   const [fieldsEnabled, setFieldsEnabled] = useState(!props.optional);
   const { quotas } = useQuotasData(props.offering);
@@ -93,11 +93,10 @@ export const FormAbstractVolumeStep = (
           component={FormGroup}
           validate={props.optional ? undefined : [required]}
           label={props.title}
-          required
+          required={!props.optional}
         >
           <SelectField
             options={data.volumeTypeChoices}
-            required={true}
             isDisabled={!fieldsEnabled}
           />
         </Field>
@@ -113,9 +112,9 @@ export const FormAbstractVolumeStep = (
       >
         <SliderNumberField
           unit={translate('GB')}
-          required={true}
           min={1}
           max={1 * 5120}
+          disabled={!fieldsEnabled}
         />
       </Field>
     </VStepperFormStepCard>
