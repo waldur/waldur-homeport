@@ -249,45 +249,43 @@ export const DeployPage = reduxForm<{}, DeployPageProps>({
   }
 
   return (
-    <>
-      <VStepperForm
-        form={FORM_ID}
-        steps={formSteps}
-        sidebar={(sidebarProps) => (
-          <DeployPageSidebar
-            {...sidebarProps}
-            offering={selectedOffering}
-            steps={formSteps}
-            completedSteps={completedSteps}
-            updateMode={props.updateMode}
-            cartItem={props.cartItem}
-          />
-        )}
-      >
-        <div className="d-flex justify-content-between align-items-center">
-          <h1 className="mb-0">
-            {isEdit ? translate('Edit') : translate('Add')}{' '}
-            {selectedOffering.name}
-          </h1>
-          {showExperimentalUiComponents && <DeployPageActions />}
-        </div>
+    <VStepperForm
+      form={FORM_ID}
+      steps={formSteps}
+      sidebar={(sidebarProps) => (
+        <DeployPageSidebar
+          {...sidebarProps}
+          offering={selectedOffering}
+          steps={formSteps}
+          completedSteps={completedSteps}
+          updateMode={props.updateMode}
+          cartItem={props.cartItem}
+        />
+      )}
+    >
+      <div className="d-flex justify-content-between align-items-center">
+        <h1 className="mb-0">
+          {isEdit ? translate('Edit') : translate('Add')}{' '}
+          {selectedOffering.name}
+        </h1>
+        {showExperimentalUiComponents && <DeployPageActions />}
+      </div>
 
-        {formSteps.map((step, i) => (
-          <div ref={stepRefs.current[i]} key={step.id}>
-            <step.component
-              step={i + 1}
-              id={step.id}
-              title={step.label}
-              offering={selectedOffering}
-              observed={completedSteps[i]}
-              change={props.change}
-              params={step.params}
-              required={Boolean(step.requiredFields?.length)}
-              disabled={step.id !== 'step-project' && isProjectInactive}
-            />
-          </div>
-        ))}
-      </VStepperForm>
-    </>
+      {formSteps.map((step, i) => (
+        <div ref={stepRefs.current[i]} key={step.id}>
+          <step.component
+            step={i + 1}
+            id={step.id}
+            title={step.label}
+            offering={selectedOffering}
+            observed={completedSteps[i]}
+            change={props.change}
+            params={step.params}
+            required={Boolean(step.requiredFields?.length)}
+            disabled={step.id !== 'step-project' && isProjectInactive}
+          />
+        </div>
+      ))}
+    </VStepperForm>
   );
 });

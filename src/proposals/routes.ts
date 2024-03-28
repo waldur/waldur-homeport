@@ -28,9 +28,9 @@ const CallUpdateContainer = lazyComponent(
 
 const RoundPage = lazyComponent(() => import('./round/RoundPage'), 'RoundPage');
 
-const ProposalCompletionPage = lazyComponent(
-  () => import('./proposal/create/ProposalCompletionPage'),
-  'ProposalCompletionPage',
+const ProposalManagePage = lazyComponent(
+  () => import('./proposal/create/ProposalManagePage'),
+  'ProposalManagePage',
 );
 
 const CallManagementPage = lazyComponent(
@@ -170,7 +170,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'public-calls.manage-proposal',
     url: 'proposals/:proposal_uuid/',
-    component: ProposalCompletionPage,
+    component: ProposalManagePage,
     data: {
       hideProjectSelector: true,
     },

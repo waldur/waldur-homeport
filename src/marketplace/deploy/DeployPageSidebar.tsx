@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux';
 
-import {
-  InjectedVStepperFormSidebarProps,
-  VStepperFormSidebar,
-} from '@waldur/form/VStepperFormSidebar';
+import { SidebarProps, FormSidebar } from '@waldur/form/FormSidebar';
+import { FormSteps } from '@waldur/form/FormSteps';
+import { TosNotification } from '@waldur/form/TosNotification';
 import { translate } from '@waldur/i18n';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 import { Offering } from '@waldur/marketplace/types';
@@ -13,8 +12,7 @@ import { OrderResponse } from '../orders/types';
 
 import { OfferingTosNotification } from './OfferingTosNotification';
 import { formErrorsSelector } from './utils';
-
-interface DeployPageSidebarProps extends InjectedVStepperFormSidebarProps {
+interface DeployPageSidebarProps extends SidebarProps {
   offering: Offering;
   updateMode?: boolean;
   cartItem?: OrderResponse;
@@ -27,21 +25,23 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
   const errors = useSelector(formErrorsSelector);
 
   return (
-    <VStepperFormSidebar
-      {...props}
-      title={translate('Progress')}
-      customSummary={
-        <CheckoutSummaryComponent
-          offering={
-            props.updateMode
-              ? { ...props.offering, uuid: props.cartItem.uuid }
-              : props.offering
-          }
-          updateMode={props.updateMode}
-        />
-      }
-      errors={errors}
-      extraNode={<OfferingTosNotification offering={props.offering} />}
-    />
+    <FormSidebar>
+      <h6 className="fs-7">{translate('Progress')}</h6>
+      <FormSteps
+        steps={props.steps}
+        completedSteps={props.completedSteps}
+        errors={errors}
+      />
+      <CheckoutSummaryComponent
+        offering={
+          props.updateMode
+            ? { ...props.offering, uuid: props.cartItem.uuid }
+            : props.offering
+        }
+        updateMode={props.updateMode}
+      />
+      <TosNotification />
+      <OfferingTosNotification offering={props.offering} />
+    </FormSidebar>
   );
 };

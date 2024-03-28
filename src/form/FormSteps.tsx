@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -7,8 +7,13 @@ import { flattenObject } from '@waldur/core/utils';
 import { scrollToView } from '@waldur/marketplace/deploy/utils';
 
 import { FieldError } from './FieldError';
+import { VStepperFormStep } from './VStepperFormStep';
 
-export const FormSteps = ({ steps, completedSteps, errors }) => {
+export const FormSteps: FC<{
+  steps: Pick<VStepperFormStep, 'label' | 'id' | 'fields'>[];
+  completedSteps?: boolean[];
+  errors?;
+}> = ({ steps, completedSteps, errors }) => {
   const nonRequiredErrors = useMemo(() => {
     const errorsFlatten = flattenObject(errors);
     const result = {};
@@ -91,4 +96,9 @@ export const FormSteps = ({ steps, completedSteps, errors }) => {
       </div>
     </div>
   );
+};
+
+FormSteps.defaultProps = {
+  completedSteps: [],
+  errors: [],
 };

@@ -8649,7 +8649,7 @@ msgstr ""
 msgid "Proposal created successfully"
 msgstr ""
 
-#: src/proposals/proposal/create/ProposalCompletionPage.tsx
+#: src/proposals/proposal/create/ProposalSubmissionStep.tsx
 msgid "Proposal has been switched to team verification step."
 msgstr ""
 
@@ -8661,7 +8661,7 @@ msgstr ""
 msgid "Proposal summary"
 msgstr ""
 
-#: src/proposals/proposal/create/ProposalCompletionPage.tsx
+#: src/proposals/proposal/create/ProposalSubmissionStep.tsx
 msgid "Proposal updated successfully"
 msgstr ""
 
@@ -8737,6 +8737,7 @@ msgstr ""
 msgid "Proposed postal code: {value}."
 msgstr ""
 
+#: src/proposals/proposal/create/ProposalManagePage.tsx
 #: src/proposals/proposal/create/ProposalTeam.tsx
 msgid "Proposed project team"
 msgstr ""
@@ -11156,7 +11157,7 @@ msgstr ""
 #: src/customer/list/ExportAsEmailDialog.tsx
 #: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
-#: src/proposals/proposal/create/ProposalCompletionPage.tsx
+#: src/proposals/proposal/create/ProposalSubmissionStep.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
@@ -11422,7 +11423,7 @@ msgstr ""
 #: src/administration/agreements/UserAgreementDeleteDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
-#: src/form/VStepperFormSidebar.tsx
+#: src/form/FloatingSubmitButton.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/PermissionRequestActionDialog.tsx
 #: src/invitations/actions/GroupInvitationCreateDialog.tsx
@@ -13912,7 +13913,7 @@ msgstr ""
 msgid "Update project permission"
 msgstr ""
 
-#: src/proposals/proposal/create/ProposalCompletionPage.tsx
+#: src/proposals/proposal/create/ProposalManagePage.tsx
 msgid "Update proposal"
 msgstr ""
 
