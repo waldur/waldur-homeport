@@ -3,8 +3,8 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { FormSidebar } from '@waldur/form/FormSidebar';
 import { FormSteps } from '@waldur/form/FormSteps';
+import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
@@ -40,9 +40,11 @@ export const ProposalManagePage = () => {
     <>
       <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
       {proposal.state === 'team_verification' ? (
-        <div className="d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10">
-          <ProposalTeam proposal={proposal} />
-          <FormSidebar>
+        <SidebarLayout.Container>
+          <SidebarLayout.Body>
+            <ProposalTeam proposal={proposal} />
+          </SidebarLayout.Body>
+          <SidebarLayout.Sidebar>
             <FormSteps
               steps={[
                 {
@@ -51,8 +53,8 @@ export const ProposalManagePage = () => {
                 },
               ]}
             />
-          </FormSidebar>
-        </div>
+          </SidebarLayout.Sidebar>
+        </SidebarLayout.Container>
       ) : (
         <ProposalSubmissionStep proposal={proposal} refetch={refetch} />
       )}

@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { VStepperForm } from '@waldur/form/VStepperForm';
+import { Form } from '@waldur/form/Form';
+import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
+import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { createProposalReview, getProposal } from '@waldur/proposals/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -18,6 +20,7 @@ import { createProposalSteps } from './steps/steps';
 
 export const ProposalReviewCreatePage = (props) => {
   useTitle(translate('Create review'));
+  useFullPage();
 
   const {
     params: { proposal_uuid },
@@ -69,35 +72,35 @@ export const ProposalReviewCreatePage = (props) => {
   }
 
   return (
-    <VStepperForm
-      form="ProposalReviewCreateForm"
-      steps={formSteps}
-      sidebar={(sidebarProps) => (
-        <CreatePageSidebar {...sidebarProps} proposal={proposal} />
-      )}
-      onSubmit={submit}
-    >
-      <Card>
-        <Card.Body>
-          <h6>
-            {translate(
-              'Welcome to the review portal. Please review the application below. If you want to add a comment to a specific field, click on the comment action in the corresponding field.',
-            )}
-          </h6>
-        </Card.Body>
-      </Card>
+    <Form form="ProposalReviewCreateForm" onSubmit={submit}>
+      <SidebarLayout.Container>
+        <SidebarLayout.Body>
+          <Card>
+            <Card.Body>
+              <h6>
+                {translate(
+                  'Welcome to the review portal. Please review the application below. If you want to add a comment to a specific field, click on the comment action in the corresponding field.',
+                )}
+              </h6>
+            </Card.Body>
+          </Card>
 
-      {formSteps.map((step, i) => (
-        <div ref={stepRefs.current[i]} key={step.id}>
-          <step.component
-            id={step.id}
-            title={step.label}
-            observed={false}
-            change={props.change}
-            params={{ proposal }}
-          />
-        </div>
-      ))}
-    </VStepperForm>
+          {formSteps.map((step, i) => (
+            <div ref={stepRefs.current[i]} key={step.id}>
+              <step.component
+                id={step.id}
+                title={step.label}
+                observed={false}
+                change={props.change}
+                params={{ proposal }}
+              />
+            </div>
+          ))}
+        </SidebarLayout.Body>
+        <SidebarLayout.Sidebar>
+          <CreatePageSidebar proposal={proposal} steps={formSteps} />
+        </SidebarLayout.Sidebar>
+      </SidebarLayout.Container>
+    </Form>
   );
 };

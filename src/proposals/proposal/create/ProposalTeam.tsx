@@ -7,7 +7,7 @@ import { ResourceRequestsSummary } from './ResourceRequestsSummary';
 
 export const ProposalTeam = ({ proposal }) => {
   return (
-    <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
+    <>
       <ProposalHeader proposal={proposal} />
       <TeamSection
         scope={proposal}
@@ -16,6 +16,6 @@ export const ProposalTeam = ({ proposal }) => {
       />
       <ProjectDetailsSummary proposal={proposal} />
       <ResourceRequestsSummary proposal={proposal} />
-    </div>
+    </>
   );
 };

@@ -2,15 +2,21 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-import { VStepperFormStep } from './VStepperFormStep';
+import './SidebarLayout.scss';
 
-export interface SidebarProps {
-  steps?: VStepperFormStep[];
-  completedSteps?: boolean[];
-  submitting: boolean;
-}
+const Container: FC = (props) => (
+  <div className="d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10">
+    {props.children}
+  </div>
+);
 
-export const FormSidebar: FC<{}> = (props) => {
+const Body: FC = (props) => (
+  <div className="container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7">
+    {props.children}
+  </div>
+);
+
+const Sidebar: FC = (props) => {
   const isVMode = useMediaQuery({ maxWidth: 1200 });
 
   return (
@@ -27,3 +33,5 @@ export const FormSidebar: FC<{}> = (props) => {
     </div>
   );
 };
+
+export const SidebarLayout = { Container, Body, Sidebar };

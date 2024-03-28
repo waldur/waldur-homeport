@@ -1,8 +1,8 @@
 import { Badge } from 'react-bootstrap';
 
 import { FloatingSubmitButton } from '@waldur/form/FloatingSubmitButton';
-import { SidebarProps, FormSidebar } from '@waldur/form/FormSidebar';
 import { FormSteps } from '@waldur/form/FormSteps';
+import { SidebarProps } from '@waldur/form/SidebarProps';
 import { TosNotification } from '@waldur/form/TosNotification';
 import { translate } from '@waldur/i18n';
 import { Proposal } from '@waldur/proposals/types';
@@ -12,7 +12,7 @@ interface CreatePageSidebarProps extends SidebarProps {
 }
 
 export const CreatePageSidebar = (props: CreatePageSidebarProps) => (
-  <FormSidebar>
+  <>
     <p className="text-muted fst-italic fs-7 mb-2">
       UUID: {props.proposal?.uuid}
     </p>
@@ -30,5 +30,5 @@ export const CreatePageSidebar = (props: CreatePageSidebarProps) => (
       label={translate('Submit application')}
     />
     <TosNotification />
-  </FormSidebar>
+  </>
 );
