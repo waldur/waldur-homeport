@@ -5,7 +5,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 
 import { useFullPage } from '@waldur/navigation/context';
 
-import { InjectedVStepperFormSidebarProps } from './VStepperFormSidebar';
+import { SidebarProps } from './FormSidebar';
 import { VStepperFormStep } from './VStepperFormStep';
 
 import './VStepperForm.scss';
@@ -15,7 +15,7 @@ interface VStepperFormProps {
   children: any;
   initialValues?: InjectedFormProps['initialValues'];
   onSubmit?(formData, dispatch, formProps): Promise<any> | void;
-  sidebar: React.ComponentType<InjectedVStepperFormSidebarProps>;
+  sidebar: React.ComponentType<SidebarProps>;
   steps: VStepperFormStep[];
   completedSteps?: boolean[];
   validate?(values: any): any;
@@ -33,13 +33,13 @@ const VStepperFormPure: React.FC<OwnProps> = (props) => {
   useFullPage();
   return (
     <form
-      className="v-stepper-form form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10"
+      className="form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10"
       onSubmit={props.onSubmit && props.handleSubmit(props.onSubmit)}
     >
       {/* Steps container */}
       <div
         className={
-          'v-stepper-form-steps container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7' +
+          'container-xxl pe-xl-0 d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7' +
           (props.noPaddingTop ? '' : ' pt-10')
         }
       >
