@@ -53,7 +53,7 @@ export const OrganizationUpdateContainer: FunctionComponent = () => {
 
   const user = useSelector(getUser);
   const canEdit = hasPermission(user, {
-    permission: PermissionEnum.UPDATE_CUSTOMER_PERMISSION,
+    permission: PermissionEnum.UPDATE_CUSTOMER,
     customerId: customer?.uuid,
   });
 
