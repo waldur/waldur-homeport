@@ -4,7 +4,6 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { Round } from '@waldur/proposals/types';
 import { formatProposalState } from '@waldur/proposals/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
@@ -14,10 +13,6 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { PROPOSALS_FILTER_FORM_ID } from '../constants';
 import { ProposalRowActions } from '../round/proposals/ProposalRowActions';
-
-interface ProposalsListProps {
-  round: Round;
-}
 
 const mapPropsToFilter = createSelector(
   getCustomer,
@@ -40,7 +35,7 @@ const mapPropsToFilter = createSelector(
   },
 );
 
-export const ProposalsList: FC<ProposalsListProps> = () => {
+export const ProposalsList: FC<{}> = () => {
   const filter = useSelector(mapPropsToFilter);
   const tableProps = useTable({
     table: 'ProposalsList',
