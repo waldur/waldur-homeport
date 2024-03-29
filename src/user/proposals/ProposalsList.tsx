@@ -1,44 +1,41 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { Round } from '@waldur/proposals/types';
-import { formatProposalState } from '@waldur/proposals/utils';
+import { PROPOSALS_FILTER_FORM_ID } from '@waldur/proposals/constants';
+import {
+  formatProposalState,
+  getProposalStateOptions,
+} from '@waldur/proposals/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
-
-import { USER_PROPOSALS_FILTER_FORM_ID } from '../constants';
 
 import { EndingField } from './EndingField';
 import { ProposalsListExpandableRow } from './ProposalsListExpandableRow';
 import { ProposalsListPlaceholder } from './ProposalsListPlaceholder';
-import { UserProposalsTableFilter } from './ProposalsTableFilter';
+import { ProposalsTableFilter } from './ProposalsTableFilter';
 import { ProposalStatus } from './ProposalStatus';
 
-interface ProposalsListProps {
-  round: Round;
-}
-
-const filtersSelctor = createSelector(
-  getFormValues(USER_PROPOSALS_FILTER_FORM_ID),
+const filtersSelector = createSelector(
+  getFormValues(PROPOSALS_FILTER_FORM_ID),
   (filters: any) => {
     const result: Record<string, any> = {};
     if (filters?.state) {
       result.state = filters.state.map((option) => option.value);
     }
     if (filters?.call) {
-      result.call = filters.call.uuid;
+      result.call_uuid = filters.call.uuid;
     }
     result.o = '-round__cutoff_time';
     return result;
   },
 );
 
-export const ProposalsList: FC<ProposalsListProps> = () => {
-  const filter = useSelector(filtersSelctor);
+export const ProposalsList: FC = () => {
+  const filter = useSelector(filtersSelector);
 
   const tableProps = useTable({
     table: 'MyProposalsList',
@@ -46,6 +43,15 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
     queryField: 'name',
     filter,
   });
+
+  const initialValues = useMemo(
+    () => ({
+      state: getProposalStateOptions().filter(
+        (option) => option.value !== 'canceled' && option.value !== 'rejected',
+      ),
+    }),
+    [],
+  );
 
   return (
     <Table
@@ -88,7 +94,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
           {translate('View')}
         </Link>
       )}
-      filters={<UserProposalsTableFilter />}
+      filters={<ProposalsTableFilter initialValues={initialValues} />}
     />
   );
 };
