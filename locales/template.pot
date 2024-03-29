@@ -1024,7 +1024,7 @@ msgstr ""
 msgid "Are you sure you want to reject the {name} offering request?"
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Are you sure you want to reject the {name} proposal review?"
 msgstr ""
 
@@ -1058,7 +1058,7 @@ msgstr ""
 msgid "Are you sure you want to select template? Note this will reset the node plan."
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Are you sure you want to start reviewing proposal {name}?"
 msgstr ""
 
@@ -1586,15 +1586,15 @@ msgstr ""
 #: src/proposals/details/PublicCallDetailsHero.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
-#: src/proposals/proposal/ProposalsList.tsx
-#: src/proposals/review/ReviewsList.tsx
+#: src/proposals/proposal/CustomerProposalsList.tsx
+#: src/proposals/proposal/ProposalsListExpandableRow.tsx
+#: src/proposals/proposal/ProposalsTableFilter.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
+#: src/proposals/review/CustomerReviewsList.tsx
+#: src/proposals/review/ReviewsListExpandableRow.tsx
+#: src/proposals/review/ReviewsTableFilter.tsx
+#: src/proposals/review/UserReviewsList.tsx
 #: src/proposals/update/CallUpdateHero.tsx
-#: src/user/proposals/ProposalsList.tsx
-#: src/user/proposals/ProposalsListExpandableRow.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
-#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
-#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Call"
 msgstr ""
 
@@ -2525,8 +2525,8 @@ msgstr ""
 msgid "Create request"
 msgstr ""
 
+#: src/proposals/proposal/ProposalRowActions.tsx
 #: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
-#: src/proposals/round/proposals/ProposalRowActions.tsx
 msgid "Create review"
 msgstr ""
 
@@ -3860,8 +3860,8 @@ msgstr ""
 msgid "Ended"
 msgstr ""
 
-#: src/proposals/proposal/ProposalsList.tsx
-#: src/user/proposals/ProposalsList.tsx
+#: src/proposals/proposal/CustomerProposalsList.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
 msgid "Ending"
 msgstr ""
 
@@ -4696,7 +4696,7 @@ msgstr ""
 msgid "HTML content"
 msgstr ""
 
-#: src/user/proposals/EndingField.tsx
+#: src/proposals/EndingField.tsx
 msgid "Has ended"
 msgstr ""
 
@@ -6131,11 +6131,11 @@ msgstr ""
 msgid "My orders"
 msgstr ""
 
-#: src/user/proposals/ProposalsList.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
 msgid "My proposals"
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/proposals/review/UserReviewsList.tsx
 msgid "My reviews"
 msgstr ""
 
@@ -6222,7 +6222,9 @@ msgstr ""
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/proposal/ProposalsListExpandableRow.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
+#: src/proposals/review/ReviewsListExpandableRow.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
@@ -6244,8 +6246,6 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/ProjectsList.tsx
-#: src/user/proposals/ProposalsListExpandableRow.tsx
-#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -6742,12 +6742,12 @@ msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 #: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
+#: src/proposals/proposal/ProposalsListPlaceholder.tsx
+#: src/proposals/review/ReviewsListPlaceholder.tsx
 #: src/proposals/round/proposals/ProposalsPlaceholder.tsx
 #: src/proposals/team/UsersListPlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
-#: src/user/proposals/ProposalsListPlaceholder.tsx
-#: src/user/proposals/reviews/ReviewsListPlaceholder.tsx
 msgid "Nothing to see here"
 msgstr ""
 
@@ -8632,11 +8632,11 @@ msgid "Propagated"
 msgstr ""
 
 #: src/permissions/constants.tsx
-#: src/proposals/proposal/ProposalsList.tsx
+#: src/proposals/proposal/CustomerProposalsList.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
 #: src/proposals/proposal/create/ProposalHeader.tsx
-#: src/proposals/review/ReviewsList.tsx
-#: src/user/proposals/ProposalsList.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/proposals/review/CustomerReviewsList.tsx
+#: src/proposals/review/UserReviewsList.tsx
 msgid "Proposal"
 msgstr ""
 
@@ -8660,11 +8660,10 @@ msgstr ""
 msgid "Proposal updated successfully"
 msgstr ""
 
-#: src/proposals/proposal/ProposalsList.tsx
+#: src/proposals/proposal/CustomerProposalsList.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/routes.ts
-#: src/user/routes.ts
 msgid "Proposals"
 msgstr ""
 
@@ -9108,7 +9107,7 @@ msgstr ""
 msgid "Reject permission request by {name}"
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Reject review"
 msgstr ""
 
@@ -9758,8 +9757,8 @@ msgstr ""
 msgid "Review details"
 msgstr ""
 
-#: src/proposals/review/ReviewsList.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
+#: src/proposals/review/CustomerReviewsList.tsx
+#: src/proposals/review/UserReviewsList.tsx
 msgid "Review due"
 msgstr ""
 
@@ -9775,7 +9774,7 @@ msgstr ""
 msgid "Review duration in days"
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Review has been accepted."
 msgstr ""
 
@@ -9787,7 +9786,7 @@ msgstr ""
 msgid "Review has been performed."
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Review has been rejected."
 msgstr ""
 
@@ -9850,7 +9849,7 @@ msgstr ""
 msgid "Reviewed by provider at"
 msgstr ""
 
-#: src/proposals/review/ReviewsList.tsx
+#: src/proposals/review/CustomerReviewsList.tsx
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
 #: src/proposals/team/UsersList.tsx
 msgid "Reviewer"
@@ -9866,9 +9865,8 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
-#: src/proposals/review/ReviewsList.tsx
+#: src/proposals/review/CustomerReviewsList.tsx
 #: src/proposals/routes.ts
-#: src/user/routes.ts
 msgid "Reviews"
 msgstr ""
 
@@ -9959,10 +9957,10 @@ msgstr ""
 msgid "Roles"
 msgstr ""
 
-#: src/proposals/proposal/ProposalsList.tsx
+#: src/proposals/proposal/CustomerProposalsList.tsx
+#: src/proposals/proposal/ProposalsListExpandableRow.tsx
+#: src/proposals/review/ReviewsListExpandableRow.tsx
 #: src/proposals/round/RoundPageHero.tsx
-#: src/user/proposals/ProposalsListExpandableRow.tsx
-#: src/user/proposals/reviews/ReviewsListExpandableRow.tsx
 msgid "Round"
 msgstr ""
 
@@ -10543,9 +10541,9 @@ msgstr ""
 #: src/marketplace/resources/list/RuntimeStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 #: src/proposals/call-management/CallStateFilter.tsx
+#: src/proposals/proposal/ProposalsTableFilter.tsx
+#: src/proposals/review/ReviewsTableFilter.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
-#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 msgid "Select state..."
 msgstr ""
 
@@ -10625,7 +10623,7 @@ msgstr ""
 msgid "Send at"
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Send back"
 msgstr ""
 
@@ -11201,7 +11199,7 @@ msgstr ""
 msgid "Start day of accounting"
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Start review"
 msgstr ""
 
@@ -11282,8 +11280,12 @@ msgstr ""
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
-#: src/proposals/proposal/ProposalsList.tsx
-#: src/proposals/review/ReviewsList.tsx
+#: src/proposals/proposal/CustomerProposalsList.tsx
+#: src/proposals/proposal/ProposalsTableFilter.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
+#: src/proposals/review/CustomerReviewsList.tsx
+#: src/proposals/review/ReviewsTableFilter.tsx
+#: src/proposals/review/UserReviewsList.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
@@ -11301,10 +11303,6 @@ msgstr ""
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
-#: src/user/proposals/ProposalsList.tsx
-#: src/user/proposals/ProposalsTableFilter.tsx
-#: src/user/proposals/reviews/ReviewsList.tsx
-#: src/user/proposals/reviews/ReviewsTableFilter.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
@@ -11329,10 +11327,10 @@ msgstr ""
 #: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
-#: src/proposals/proposal/ProposalsList.tsx
+#: src/proposals/proposal/CustomerProposalsList.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
 #: src/proposals/team/InvitationsList.tsx
-#: src/user/proposals/ProposalsList.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
 msgid "Status"
@@ -12474,7 +12472,7 @@ msgstr ""
 msgid "Unable to accept offering request."
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Unable to accept review."
 msgstr ""
 
@@ -13205,7 +13203,7 @@ msgstr ""
 msgid "Unable to reject permission request."
 msgstr ""
 
-#: src/user/proposals/reviews/ReviewItemActions.tsx
+#: src/proposals/review/ReviewItemActions.tsx
 msgid "Unable to reject review."
 msgstr ""
 
@@ -14482,7 +14480,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/user/proposals/ProposalsList.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
 msgid "View"
 msgstr ""
 
@@ -14705,7 +14703,7 @@ msgstr ""
 msgid "You can add a message to be attached to the invitation email the users receives."
 msgstr ""
 
-#: src/user/proposals/ProposalsListPlaceholder.tsx
+#: src/proposals/proposal/ProposalsListPlaceholder.tsx
 msgid "You can create your first proposal."
 msgstr ""
 

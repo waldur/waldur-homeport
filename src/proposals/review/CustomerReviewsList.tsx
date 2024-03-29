@@ -4,45 +4,41 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { Round, ProposalReview } from '@waldur/proposals/types';
+import { EndingField } from '@waldur/proposals/EndingField';
+import { ReviewsTableFilter } from '@waldur/proposals/review/ReviewsTableFilter';
+import { ProposalReview } from '@waldur/proposals/types';
 import { formatReviewState } from '@waldur/proposals/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { USER_REVIEWS_FILTER_FORM_ID } from '@waldur/user/constants';
-import { getUser } from '@waldur/workspace/selectors';
+import { getCustomer } from '@waldur/workspace/selectors';
 
-import { EndingField } from '../EndingField';
-
-import { ReviewItemAction } from './ReviewItemActions';
 import { ReviewsListExpandableRow } from './ReviewsListExpandableRow';
 import { ReviewsListPlaceholder } from './ReviewsListPlaceholder';
-import { ReviewsTableFilter } from './ReviewsTableFilter';
 
-interface ReviewsListProps {
-  round: Round;
-}
-
-const filtersSelctor = createSelector(
-  getUser,
+const filtersSelector = createSelector(
+  getCustomer,
   getFormValues(USER_REVIEWS_FILTER_FORM_ID),
-  (user, filters: any) => {
+  (customer, filters: any) => {
     const result: Record<string, any> = {};
-    result.reviewer_uuid = user.uuid;
+    if (customer) {
+      result.organization_uuid = customer.uuid;
+    }
     if (filters?.state) {
       result.state = filters.state.map((option) => option.value);
     }
     if (filters?.call) {
-      result.call = filters.call.uuid;
+      result.call_uuid = filters.call.uuid;
     }
     return result;
   },
 );
 
-export const ReviewsList: FC<ReviewsListProps> = () => {
-  const filter = useSelector(filtersSelctor);
+export const CustomerReviewsList: FC<{}> = () => {
+  const filter = useSelector(filtersSelector);
 
   const tableProps = useTable({
-    table: 'MyReviewsList',
+    table: 'ReviewsList',
     fetchData: createFetcher('proposal-reviews'),
     queryField: 'proposal_name',
     filter,
@@ -58,6 +54,10 @@ export const ReviewsList: FC<ReviewsListProps> = () => {
           render: ({ row }) => <>{row.proposal_name}</>,
         },
         {
+          title: translate('Reviewer'),
+          render: ({ row }) => <>{row.reviewer_full_name}</>,
+        },
+        {
           title: translate('Call'),
           render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
         },
@@ -70,10 +70,9 @@ export const ReviewsList: FC<ReviewsListProps> = () => {
           render: ({ row }) => <>{formatReviewState(row.state)}</>,
         },
       ]}
-      title={translate('My reviews')}
-      verboseName={translate('My reviews')}
+      title={translate('Reviews')}
+      verboseName={translate('Reviews')}
       hasQuery={true}
-      hoverableRow={ReviewItemAction}
       expandableRow={ReviewsListExpandableRow}
       filters={<ReviewsTableFilter />}
     />

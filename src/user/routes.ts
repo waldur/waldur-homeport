@@ -72,15 +72,6 @@ const IssueDetailsContainer = lazyComponent(
 
 const UserDetails = lazyComponent(() => import('./UserDetails'), 'UserDetails');
 
-const ProposalsList = lazyComponent(
-  () => import('./proposals/ProposalsList'),
-  'ProposalsList',
-);
-const ReviewsList = lazyComponent(
-  () => import('./proposals/reviews/ReviewsList'),
-  'ReviewsList',
-);
-
 export const states: StateDeclaration[] = [
   {
     name: 'profile',
@@ -274,26 +265,5 @@ export const states: StateDeclaration[] = [
     name: 'user-email-change',
     url: '/user_email_change/:token/',
     component: UserEmailChangeCallback,
-  },
-
-  {
-    name: 'profile-proposals',
-    url: 'user-proposals/',
-    component: ProposalsList,
-    parent: 'profile-calls',
-    data: {
-      feature: 'marketplace.show_call_management_functionality',
-      breadcrumb: () => translate('Proposals'),
-    },
-  },
-  {
-    name: 'profile-reviews',
-    url: 'user-reviews/',
-    component: ReviewsList,
-    parent: 'profile-calls',
-    data: {
-      feature: 'marketplace.show_call_management_functionality',
-      breadcrumb: () => translate('Reviews'),
-    },
   },
 ];

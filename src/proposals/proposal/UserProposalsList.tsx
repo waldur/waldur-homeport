@@ -13,7 +13,8 @@ import {
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
-import { EndingField } from './EndingField';
+import { EndingField } from '../EndingField';
+
 import { ProposalsListExpandableRow } from './ProposalsListExpandableRow';
 import { ProposalsListPlaceholder } from './ProposalsListPlaceholder';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
@@ -34,7 +35,7 @@ const filtersSelector = createSelector(
   },
 );
 
-export const ProposalsList: FC = () => {
+export const UserProposalsList: FC = () => {
   const filter = useSelector(filtersSelector);
 
   const tableProps = useTable({

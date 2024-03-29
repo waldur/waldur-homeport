@@ -7,13 +7,14 @@ import { translate } from '@waldur/i18n';
 import { formatProposalState } from '@waldur/proposals/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
-import { EndingField } from '@waldur/user/proposals/EndingField';
-import { ProposalsTableFilter } from '@waldur/user/proposals/ProposalsTableFilter';
-import { ProposalStatus } from '@waldur/user/proposals/ProposalStatus';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { PROPOSALS_FILTER_FORM_ID } from '../constants';
-import { ProposalRowActions } from '../round/proposals/ProposalRowActions';
+import { EndingField } from '../EndingField';
+
+import { ProposalRowActions } from './ProposalRowActions';
+import { ProposalsTableFilter } from './ProposalsTableFilter';
+import { ProposalStatus } from './ProposalStatus';
 
 const mapPropsToFilter = createSelector(
   getCustomer,
@@ -36,7 +37,7 @@ const mapPropsToFilter = createSelector(
   },
 );
 
-export const ProposalsList: FC<{}> = () => {
+export const CustomerProposalsList: FC<{}> = () => {
   const filter = useSelector(mapPropsToFilter);
   const tableProps = useTable({
     table: 'ProposalsList',

@@ -38,9 +38,9 @@ const CallManagementPage = lazyComponent(
   'CallManagementPage',
 );
 
-const ProposalsList = lazyComponent(
-  () => import('./proposal/ProposalsList'),
-  'ProposalsList',
+const CustomerProposalsList = lazyComponent(
+  () => import('./proposal/CustomerProposalsList'),
+  'CustomerProposalsList',
 );
 
 const ProposalReviewCreatePage = lazyComponent(
@@ -48,9 +48,19 @@ const ProposalReviewCreatePage = lazyComponent(
   'ProposalReviewCreatePage',
 );
 
-const ReviewsList = lazyComponent(
-  () => import('./review/ReviewsList'),
-  'ReviewsList',
+const CustomerReviewsList = lazyComponent(
+  () => import('./review/CustomerReviewsList'),
+  'CustomerReviewsList',
+);
+
+const UserProposalsList = lazyComponent(
+  () => import('./proposal/UserProposalsList'),
+  'UserProposalsList',
+);
+
+const UserReviewsList = lazyComponent(
+  () => import('./review/UserReviewsList'),
+  'UserReviewsList',
 );
 
 export const states: StateDeclaration[] = [
@@ -95,7 +105,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'call-management.proposal-list',
     url: 'proposals/?{state}',
-    component: ProposalsList,
+    component: CustomerProposalsList,
     data: {
       breadcrumb: () => translate('Proposals'),
     },
@@ -103,7 +113,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'call-management.review-list',
     url: 'reviews/?{state}',
-    component: ReviewsList,
+    component: CustomerReviewsList,
     data: {
       breadcrumb: () => translate('Reviews'),
     },
@@ -173,6 +183,27 @@ export const states: StateDeclaration[] = [
     component: ProposalManagePage,
     data: {
       hideProjectSelector: true,
+    },
+  },
+
+  {
+    name: 'profile-proposals',
+    url: 'user-proposals/',
+    component: UserProposalsList,
+    parent: 'profile-calls',
+    data: {
+      feature: 'marketplace.show_call_management_functionality',
+      breadcrumb: () => translate('Proposals'),
+    },
+  },
+  {
+    name: 'profile-reviews',
+    url: 'user-reviews/',
+    component: UserReviewsList,
+    parent: 'profile-calls',
+    data: {
+      feature: 'marketplace.show_call_management_functionality',
+      breadcrumb: () => translate('Reviews'),
     },
   },
 ];

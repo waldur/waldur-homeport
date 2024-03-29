@@ -7,8 +7,9 @@ import { Table } from '@waldur/table';
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/utils';
 
+import { ProposalRowActions } from '../../proposal/ProposalRowActions';
+
 import { ProposalExpandableRow } from './ProposalExpandableRow';
-import { ProposalRowActions } from './ProposalRowActions';
 import { ProposalsPlaceholder } from './ProposalsPlaceholder';
 
 interface RoundProposalsListProps {
