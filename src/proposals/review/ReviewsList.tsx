@@ -19,7 +19,7 @@ interface ReviewsListProps {
   round: Round;
 }
 
-const filtersSelctor = createSelector(
+const filtersSelector = createSelector(
   getCustomer,
   getFormValues(USER_REVIEWS_FILTER_FORM_ID),
   (customer, filters: any) => {
@@ -31,14 +31,14 @@ const filtersSelctor = createSelector(
       result.state = filters.state.map((option) => option.value);
     }
     if (filters?.call) {
-      result.call = filters.call.uuid;
+      result.call_uuid = filters.call.uuid;
     }
     return result;
   },
 );
 
 export const ReviewsList: FC<ReviewsListProps> = () => {
-  const filter = useSelector(filtersSelctor);
+  const filter = useSelector(filtersSelector);
 
   const tableProps = useTable({
     table: 'ReviewsList',
