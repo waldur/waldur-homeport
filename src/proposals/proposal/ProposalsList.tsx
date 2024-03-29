@@ -9,6 +9,7 @@ import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { EndingField } from '@waldur/user/proposals/EndingField';
 import { ProposalsTableFilter } from '@waldur/user/proposals/ProposalsTableFilter';
+import { ProposalStatus } from '@waldur/user/proposals/ProposalStatus';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { PROPOSALS_FILTER_FORM_ID } from '../constants';
@@ -70,26 +71,7 @@ export const ProposalsList: FC<{}> = () => {
         },
         {
           title: translate('Status'),
-          render: () => (
-            <>
-              {[true, null, null, null, null].map((state, i) => {
-                const bg =
-                  state === true
-                    ? 'bg-success'
-                    : state === false
-                      ? 'bg-danger'
-                      : 'bg-secondary';
-                return (
-                  <span
-                    key={i}
-                    className={
-                      'w-15px h-15px d-inline-block rounded-circle me-4 ' + bg
-                    }
-                  ></span>
-                );
-              })}
-            </>
-          ),
+          render: ProposalStatus,
         },
       ]}
       title={translate('Proposals')}

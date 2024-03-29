@@ -16,6 +16,7 @@ import { EndingField } from './EndingField';
 import { ProposalsListExpandableRow } from './ProposalsListExpandableRow';
 import { ProposalsListPlaceholder } from './ProposalsListPlaceholder';
 import { UserProposalsTableFilter } from './ProposalsTableFilter';
+import { ProposalStatus } from './ProposalStatus';
 
 interface ProposalsListProps {
   round: Round;
@@ -69,26 +70,7 @@ export const ProposalsList: FC<ProposalsListProps> = () => {
         },
         {
           title: translate('Status'),
-          render: () => (
-            <>
-              {[true, null, null, null, null].map((state, i) => {
-                const bg =
-                  state === true
-                    ? 'bg-success'
-                    : state === false
-                      ? 'bg-danger'
-                      : 'bg-secondary';
-                return (
-                  <span
-                    key={i}
-                    className={
-                      'w-15px h-15px d-inline-block rounded-circle me-4 ' + bg
-                    }
-                  ></span>
-                );
-              })}
-            </>
-          ),
+          render: ProposalStatus,
         },
       ]}
       title={translate('My proposals')}
