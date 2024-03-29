@@ -16,14 +16,6 @@ interface RoundProposalsListProps {
   call_uuid: string;
 }
 
-const ProposalNameField = ({ row }) => {
-  return (
-    <div>
-      <span className="d-block text-muted">{row.name}</span>
-    </div>
-  );
-};
-
 export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
   const tableProps = useTable({
     table: 'RoundProposalsList',
@@ -42,7 +34,7 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
       columns={[
         {
           title: translate('Name'),
-          render: ProposalNameField,
+          render: ({ row }) => <>{row.name}</>,
         },
         {
           title: translate('By'),
