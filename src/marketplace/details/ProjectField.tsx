@@ -8,7 +8,6 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { FormGroup } from '../offerings/FormGroup';
 
-import { CustomerCreateGroup } from './CustomerCreateGroup';
 import { ProjectCreateGroup } from './ProjectCreateGroup';
 import { ProjectSelectField } from './ProjectSelectField';
 
@@ -41,7 +40,6 @@ export const ProjectField: FC<ProjectFieldProps> = ({
     </FormGroup>
   ) : (
     <>
-      <CustomerCreateGroup />
       <ProjectCreateGroup />
     </>
   );
