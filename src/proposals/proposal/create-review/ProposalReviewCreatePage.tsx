@@ -8,7 +8,8 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Form } from '@waldur/form/Form';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
-import { translate } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { createProposalReview, getProposal } from '@waldur/proposals/api';
@@ -43,7 +44,22 @@ export const ProposalReviewCreatePage = (props) => {
   );
 
   const submit = useCallback(
-    (formData, dispatch) => {
+    async (formData, dispatch) => {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Confirm your review'),
+          translate(
+            'Are you sure you want to submit this review for the {name} proposal?',
+            {
+              name: <b>{proposal.name}</b>,
+            },
+            formatJsxTemplate,
+          ),
+        );
+      } catch {
+        return;
+      }
       Object.assign(formData, {
         proposal: proposal.url,
         reviewer: user.url,
@@ -75,7 +91,7 @@ export const ProposalReviewCreatePage = (props) => {
     <Form form="ProposalReviewCreateForm" onSubmit={submit}>
       <SidebarLayout.Container>
         <SidebarLayout.Body>
-          <Card>
+          <Card className="mt-10">
             <Card.Body>
               <h6>
                 {translate(
