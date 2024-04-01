@@ -31,38 +31,12 @@ describe('Customer creation dialog', () => {
       .get('input[name="name"]')
       .type('Alice Lebowski')
 
-      // Enter home organization domain name
-      .get('input[name="name"]')
-      .type('Domain name')
-
       // Enter organization email
       .get('input[name="email"]')
       .type('contact@abc.com')
 
-      // Enter organization phone
-      .get('input[name="phone_number"]')
-      .type('+1234567890')
-
-      // Enter organization website
-      .get('input[name="homepage"]')
-      .type('https://example.com')
-
-      // Press next
-      .get('div.modal-footer button.btn')
-      .contains('Next')
-      .click()
-      .wait(200)
-
-      // Enter organization registration code
-      .get('input[name="registration_code"]')
-      .type('Registration code')
-
-      // Enter address
-      .get('input[name="address"]')
-      .type('Address')
-
       // Submit form
-      .get('div.modal-footer button.btn')
+      .get('div.modal-body button.btn')
       .contains('Create organization')
       .click()
       .wait(500)
@@ -79,8 +53,8 @@ describe('Customer creation dialog', () => {
       .get('#kt_aside_toolbar span')
       .contains('Alice Lebowski')
 
-      // Workspace selector should indicate new organization name
-      .get('#kt_content_container h2')
-      .contains('Alice Lebowski');
+      // Form with details edit form should open
+      .get('#kt_content_container .card-title.h5')
+      .contains('Basic details');
   });
 });

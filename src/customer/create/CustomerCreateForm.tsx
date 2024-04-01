@@ -1,44 +1,49 @@
-import { useState, createElement, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
+import { InjectedFormProps, reduxForm } from 'redux-form';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
+import { getNameFieldValidators } from '@waldur/core/validators';
+import { InputGroup } from '@waldur/customer/create/InputGroup';
+import { SubmitButton } from '@waldur/form';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
 import { CustomerCreateFormData } from './types';
-import { WizardFormFirstPage } from './WizardFormFirstPage';
-import { WizardFormSecondPage } from './WizardFormSecondPage';
 
-const WizardForms = [WizardFormFirstPage, WizardFormSecondPage];
-
-interface CustomerCreateFormProps {
+interface CustomerCreateFormProps extends InjectedFormProps {
   onSubmit(formData: CustomerCreateFormData): void;
-  initialValues?: CustomerCreateFormData;
 }
 
-export const CustomerCreateForm: FunctionComponent<CustomerCreateFormProps> = (
+const PureCustomerCreateForm: FunctionComponent<CustomerCreateFormProps> = (
   props,
 ) => {
-  const [step, setStep] = useState(1);
-  const steps = [translate('General information')];
-  if (!isFeatureVisible(CustomerFeatures.hide_organization_billing_step)) {
-    steps.push(translate('Billing details'));
-  }
-  const isLast = step === steps.length;
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
-  const submitLabel = isLast
-    ? translate('Create organization')
-    : translate('Next');
-
-  const stepTitle = steps[step - 1];
-
-  return createElement(WizardForms[step - 1], {
-    onSubmit: isLast ? props.onSubmit : nextStep,
-    onPrev: prevStep,
-    submitLabel,
-    step: step - 1,
-    steps,
-    stepTitle,
-    initialValues: props.initialValues,
-  });
+  return (
+    <form onSubmit={props.handleSubmit(props.onSubmit)}>
+      <InputGroup
+        name="name"
+        component={InputField}
+        required={true}
+        label={translate('Name')}
+        maxLength={150}
+        helpText={translate('Name of your organization.')}
+        validate={getNameFieldValidators()}
+      />
+      <InputGroup
+        name="email"
+        component={InputField}
+        type="email"
+        label={translate('Contact email')}
+        required={true}
+      />
+      <SubmitButton
+        submitting={props.submitting}
+        disabled={props.invalid}
+        label={translate('Create organization')}
+        className="btn btn-primary ms-4 pull-right"
+      />
+    </form>
+  );
 };
+
+export const CustomerCreateForm = reduxForm({ form: 'customerCreate' })(
+  PureCustomerCreateForm,
+);

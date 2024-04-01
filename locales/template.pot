@@ -521,7 +521,6 @@ msgstr ""
 msgid "Additionally service provider can charge for usage of the following components"
 msgstr ""
 
-#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
@@ -1366,13 +1365,11 @@ msgstr ""
 msgid "Bandwidth"
 msgstr ""
 
-#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank account"
 msgstr ""
 
-#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerBillingPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Bank name"
@@ -1416,10 +1413,6 @@ msgstr ""
 
 #: src/marketplace/offerings/update/components/EditComponentDialog.tsx
 msgid "Billing component has been updated successfully."
-msgstr ""
-
-#: src/customer/create/CustomerCreateForm.tsx
-msgid "Billing details"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
@@ -2227,13 +2220,12 @@ msgid "Contact details"
 msgstr ""
 
 #: src/administration/organizations/SupportCustomerList.tsx
-#: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr ""
 
 #: src/administration/organizations/SupportCustomerList.tsx
-#: src/customer/create/WizardFormFirstPage.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr ""
@@ -2493,18 +2485,14 @@ msgstr ""
 msgid "Create offering user"
 msgstr ""
 
+#: src/customer/create/CustomerCreateDialog.tsx
 #: src/customer/create/CustomerCreateForm.tsx
-#: src/customer/create/WizardForm.tsx
 #: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Create organization"
 msgstr ""
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
 msgid "Create organization group"
-msgstr ""
-
-#: src/marketplace/details/CustomerCreateGroup.tsx
-msgid "Create organization request"
 msgstr ""
 
 #: src/vmware/actions/CreatePortDialog.tsx
@@ -3488,10 +3476,6 @@ msgstr ""
 msgid "Dynamic — use separate volume types for tracking pricing"
 msgstr ""
 
-#: src/customer/create/WizardFormSecondPage.tsx
-msgid "EU VAT ID"
-msgstr ""
-
 #: src/rancher/cluster/create/VolumeMountPointGroup.tsx
 msgid "Each mount point should be used once at most."
 msgstr ""
@@ -3626,10 +3610,6 @@ msgstr ""
 
 #: src/marketplace/offerings/update/options/EditOptionDialog.tsx
 msgid "Edit option"
-msgstr ""
-
-#: src/marketplace/details/CustomerCreateGroup.tsx
-msgid "Edit organization request ({name})"
 msgstr ""
 
 #: src/customer/team/PendingReviewDialog.tsx
@@ -4542,10 +4522,6 @@ msgstr ""
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 msgid "General"
-msgstr ""
-
-#: src/customer/create/CustomerCreateForm.tsx
-msgid "General information"
 msgstr ""
 
 #: src/rancher/cluster/actions/KubeconfigFileAction.tsx
@@ -5685,7 +5661,6 @@ msgstr ""
 msgid "Login failed"
 msgstr ""
 
-#: src/customer/create/WizardFormFirstPage.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 msgid "Logo"
 msgstr ""
@@ -6161,7 +6136,7 @@ msgstr ""
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
 #: src/broadcasts/BroadcastTemplateList.tsx
-#: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
@@ -6297,7 +6272,7 @@ msgstr ""
 msgid "Name must consist of lower case alphanumeric characters."
 msgstr ""
 
-#: src/customer/create/WizardFormFirstPage.tsx
+#: src/customer/create/CustomerCreateForm.tsx
 msgid "Name of your organization."
 msgstr ""
 
@@ -6330,7 +6305,6 @@ msgstr ""
 msgid "Naming"
 msgstr ""
 
-#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/invitations/actions/UserDetailsGroup.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
@@ -6477,7 +6451,6 @@ msgstr ""
 msgid "New value"
 msgstr ""
 
-#: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/WizardButtons.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateForm.tsx
@@ -6612,7 +6585,6 @@ msgstr ""
 msgid "No organization groups"
 msgstr ""
 
-#: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
@@ -7347,7 +7319,6 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
-#: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/tabs.ts
@@ -7411,7 +7382,6 @@ msgstr ""
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/organizations/OrganizationsFilter.tsx
-#: src/customer/create/WizardFormFirstPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
@@ -7465,10 +7435,6 @@ msgstr ""
 #: src/reporting/dashboard/ReportingWidgets.tsx
 #: src/reporting/routes.ts
 msgid "Organization quotas"
-msgstr ""
-
-#: src/customer/create/WizardFormSecondPage.tsx
-msgid "Organization registration code"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
@@ -8060,20 +8026,12 @@ msgstr ""
 msgid "Please provide a reason"
 msgstr ""
 
-#: src/customer/create/WizardFormSecondPage.tsx
-msgid "Please provide registration code of your company."
-msgstr ""
-
 #: src/slurm/RequestLimitsChangeDialog.tsx
 msgid "Please provide requested limits and a reason."
 msgstr ""
 
 #: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
 msgid "Please provide visual material describing the Offering"
-msgstr ""
-
-#: src/customer/create/WizardFormSecondPage.tsx
-msgid "Please provide your EU VAT ID if you are registered in the European Union."
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
@@ -8192,7 +8150,6 @@ msgstr ""
 msgid "Postal"
 msgstr ""
 
-#: src/customer/create/WizardFormSecondPage.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Postal code"
 msgstr ""
@@ -8225,7 +8182,6 @@ msgstr ""
 msgid "Preview order form"
 msgstr ""
 
-#: src/customer/create/WizardForm.tsx
 #: src/form/WizardForm.tsx
 #: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
 msgid "Previous"
@@ -10450,7 +10406,6 @@ msgid "Select organization roles"
 msgstr ""
 
 #: src/auth/saml2/AuthSaml2Dialog.tsx
-#: src/marketplace/details/CustomerCreateGroup.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
@@ -13057,10 +13012,6 @@ msgstr ""
 msgid "Unable to load order details."
 msgstr ""
 
-#: src/customer/create/WizardFormFirstPage.tsx
-msgid "Unable to load organization groups"
-msgstr ""
-
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/marketplace/offerings/actions/SetAccessPolicyDialog.tsx
 msgid "Unable to load organization groups."
@@ -14586,10 +14537,6 @@ msgstr ""
 
 #: src/user/hooks/HookTypeField.tsx
 msgid "Webhook"
-msgstr ""
-
-#: src/customer/create/WizardFormFirstPage.tsx
-msgid "Website URL"
 msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx

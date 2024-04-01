@@ -1,5 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import React from 'react';
+import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { reset, SubmissionError } from 'redux-form';
 
@@ -17,22 +18,7 @@ import { Customer } from '@waldur/workspace/types';
 import * as constants from './constants';
 import { CustomerCreateForm } from './CustomerCreateForm';
 
-const CUSTOMER_FIELDS = [
-  'name',
-  'native_name',
-  'domain',
-  'organization_group',
-  'email',
-  'phone_number',
-  'registration_code',
-  'country',
-  'address',
-  'vat_code',
-  'postal',
-  'bank_name',
-  'bank_account',
-  'image',
-];
+const CUSTOMER_FIELDS = ['name', 'email'];
 
 interface OwnProps {
   resolve: { role: string };
@@ -51,16 +37,6 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
           payload[field] = formData[field];
         }
       });
-      if (formData.vat_code) {
-        payload.is_company = true;
-      }
-      if (formData.country) {
-        payload.country = formData.country.value;
-      }
-      if (formData.organization_group) {
-        payload.organization_group = formData.organization_group.value;
-      }
-
       try {
         const response = await sendForm<Customer>(
           'POST',
@@ -78,7 +54,7 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
         dispatch(showSuccess(translate('Organization has been created.')));
         const newUser = await getCurrentUser();
         dispatch(setCurrentUser(newUser));
-        router.stateService.go('organization.dashboard', {
+        router.stateService.go('organization.manage', {
           uuid: customer.uuid,
         });
         dispatch(reset('CustomerCreateDialog'));
@@ -93,5 +69,14 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
     },
     [dispatch, router, user, resolve.role],
   );
-  return <CustomerCreateForm onSubmit={createOrganization} />;
+  return (
+    <>
+      <Modal.Header>
+        <Modal.Title>{translate('Create organization')}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <CustomerCreateForm onSubmit={createOrganization} />
+      </Modal.Body>
+    </>
+  );
 };
