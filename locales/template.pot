@@ -1066,6 +1066,10 @@ msgstr ""
 msgid "Are you sure you want to submit the order?"
 msgstr ""
 
+#: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
+msgid "Are you sure you want to submit this review for the {name} proposal?"
+msgstr ""
+
 #: src/resource/actions/UnlinkActionItem.tsx
 msgid "Are you sure you want to unlink {name} {resourceType}?"
 msgstr ""
@@ -2146,6 +2150,10 @@ msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "Confirm deletion?"
+msgstr ""
+
+#: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
+msgid "Confirm your review"
 msgstr ""
 
 #: src/administration/TokenDeleteButton.tsx
