@@ -27,10 +27,10 @@ export const LoginColumn = () => {
   );
 
   return (
-    <div className="LoginColumn">
-      <div className="LoginBody">
-        <div className="LoginGridItemContainer">
-          <div className="LoginLogo mb-2">
+    <div className="login-column">
+      <div className="login-body">
+        <div className="login-grid-item-container">
+          <div className="login-logo mb-2">
             <img
               alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
               src={imageUrl}
@@ -55,7 +55,7 @@ export const LoginColumn = () => {
           <PoweredBy />
         </div>
       </div>
-      <div className="LoginFooter">
+      <div className="login-footer">
         <LanguageSelectorBox />
         <FooterLinks />
       </div>

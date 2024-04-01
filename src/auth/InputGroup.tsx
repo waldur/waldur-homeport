@@ -9,7 +9,7 @@ export const InputGroup: FunctionComponent<{
   const renderComponent = useCallback(
     ({ input }) => (
       <input
-        className="LoginInput"
+        className="login-input"
         type={type}
         placeholder={placeholder}
         {...input}

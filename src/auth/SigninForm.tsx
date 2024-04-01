@@ -52,7 +52,7 @@ export const SigninForm = reduxForm<FormData>({ form: FORM_ID })(
       />
       <button
         type="submit"
-        className="LoginSubmitButton"
+        className="login-submit-button"
         style={{
           backgroundColor: ENV.plugins.WALDUR_CORE.BRAND_COLOR,
           color: ENV.plugins.WALDUR_CORE.BRAND_LABEL_COLOR,
