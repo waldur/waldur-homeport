@@ -1,6 +1,5 @@
-// WARNING: This file is auto-generated from src/waldur_core/permissions/enums.py
+// WARNING: This file is auto-generated from src/waldur_core/permissions/print_permission_enums.py
 // Do not edit it manually. All manual changes would be overridden.
-
 export const RoleEnum = {
   CUSTOMER_OWNER: 'CUSTOMER.OWNER',
   CUSTOMER_SUPPORT: 'CUSTOMER.SUPPORT',
