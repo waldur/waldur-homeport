@@ -59,11 +59,13 @@
         position: absolute;
         left: -7px;
       }
+
       &::before {
         top: 0;
         border-top-color: var(--bs-dark);
         border-bottom-color: transparent;
       }
+
       &::after {
         bottom: 0;
         border-top-color: transparent;

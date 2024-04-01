@@ -18,19 +18,23 @@ $headerAndToolbarHeight: calc(65px + var(--kt-toolbar-height));
             display: none;
           }
         }
+
         .stepper-line {
           width: 19px;
         }
       }
+
       .stepper-item {
         &.completed .stepper-label .stepper-title {
           color: var(--bs-primary);
         }
+
         .stepper-label .stepper-title {
           font-weight: 500;
           font-size: 0.85rem;
           margin-bottom: 0;
         }
+
         .stepper-label {
           cursor: pointer;
 
@@ -38,6 +42,7 @@ $headerAndToolbarHeight: calc(65px + var(--kt-toolbar-height));
             text-decoration: underline;
           }
         }
+
         .stepper-icon {
           width: unset;
           height: 30px;
@@ -65,14 +70,14 @@ body:not(.toolbar-fixed) .v-stepper-form-sidebar {
   height: calc(100vh - 65px);
 }
 
-@media (max-width: 1650px) {
+@media (width <= 1650px) {
   .v-stepper-form-sidebar {
     width: 300px;
   }
 }
 
 /* Equals to bootstrap xl screen size (for smaller than xl) */
-@media (max-width: 1200px) {
+@media (width <= 1200px) {
   .v-stepper-form-sidebar {
     width: 100%;
     height: auto;

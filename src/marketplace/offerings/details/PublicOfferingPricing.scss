@@ -1,5 +1,5 @@
-@import '~sass/theme/_variables.scss';
-@import '~sass/variables.scss';
+@import '~sass/theme/_variables';
+@import '~sass/variables';
 
 .publicOfferingPricing {
   display: flex;
@@ -8,7 +8,7 @@
   border-radius: 4px;
   background-color: $white;
   padding: 24px;
-  color: #000000;
+  color: #000;
 
   &__info {
     width: 33%;
@@ -36,6 +36,7 @@
     &:first-child {
       margin-left: 0;
     }
+
     &:last-child {
       margin-right: 0;
     }
@@ -51,6 +52,7 @@
       padding: 1rem 0.5rem 0.75rem;
       border-radius: 0.45rem 0.45rem 0 0;
     }
+
     .recommended {
       width: 100%;
       position: absolute;
@@ -65,9 +67,11 @@
         margin: 0 auto;
       }
     }
+
     .pricing-plan-info {
       padding: 1rem 0.5rem;
     }
+
     .pricing-plan-details {
       margin: 0.25rem;
       padding: 1rem 0.5rem;
@@ -83,6 +87,7 @@
         margin-left: auto;
         margin-right: auto;
       }
+
       .description,
       .btn,
       .pricing-plan-details-list {
@@ -92,6 +97,7 @@
       }
     }
   }
+
   .pricing-plan-details-list {
     list-style: none;
     text-align: start;

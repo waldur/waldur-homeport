@@ -7,7 +7,6 @@ import { Category, Offering } from '@waldur/marketplace/types';
 
 import { PublicOfferingAttributesCard } from './PublicOfferingAttributesCard';
 import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';
-import './PublicOfferingInfo.scss';
 
 interface PublicOfferingInfoProps {
   offering: Offering;

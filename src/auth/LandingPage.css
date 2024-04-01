@@ -1,9 +1,9 @@
-.LandingPage {
+.landing-page {
   display: grid;
 }
 
-@media (min-width: 768px) {
-  .LandingPage {
+@media (width >= 768px) {
+  .landing-page {
     grid-auto-flow: column;
     grid-template-columns: 1fr 1fr;
   }

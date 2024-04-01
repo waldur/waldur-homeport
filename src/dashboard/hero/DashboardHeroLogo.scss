@@ -1,4 +1,4 @@
-@import '../../sass/mixins/mediaqueries.scss';
+@import '../../sass/mixins/mediaqueries';
 
 .dashboard-small-label {
   display: block;
@@ -23,6 +23,7 @@
       left: 50%;
       transform: translate(-50%, 0);
     }
+
     &.bottom-label {
       position: absolute;
       bottom: 0;

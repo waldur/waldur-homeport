@@ -1,11 +1,11 @@
-.HeroColumn {
+.hero-column {
   min-height: 100vh;
   height: 100%;
   background-size: cover;
   overflow: hidden;
 }
 
-.HeroBackground {
+.hero-background {
   width: 100%;
   height: 100%;
   background: #000000ba;
@@ -14,18 +14,18 @@
   align-items: center;
 }
 
-.HeroText {
+.hero-text {
   text-align: center;
 }
 
-.HeroText h1 {
+.hero-text h1 {
   font-weight: bold;
   color: white;
   text-transform: uppercase;
 }
 
-@media (min-width: 768px) {
-  .HeroText {
+@media (width >= 768px) {
+  .hero-text {
     max-width: 57%;
   }
 }

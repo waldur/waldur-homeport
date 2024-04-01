@@ -1,15 +1,15 @@
-.LoginButton {
+.login-button {
   background: #e7eaec;
   border-radius: 12px;
   padding: 7px;
   display: grid;
   grid-auto-flow: column;
-  margin: 10px 0px;
+  margin: 10px 0;
   width: 100%;
   border: none;
 }
 
-.LoginButtonIcon {
+.login-button-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,11 +18,11 @@
   margin-left: 5px;
 }
 
-.LoginButtonIcon img {
+.login-button-icon img {
   max-height: 30px;
 }
 
-.LoginButtonText {
+.login-button-text {
   font-size: 14px;
   display: flex;
   align-items: center;

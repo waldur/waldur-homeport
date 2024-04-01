@@ -13,7 +13,7 @@ export const LandingPage = () => {
   return (
     <>
       <CookiesConsent />
-      <div className="LandingPage">
+      <div className="landing-page">
         <LoginColumn />
         <HeroColumn />
       </div>

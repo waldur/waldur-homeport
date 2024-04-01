@@ -9,7 +9,7 @@ $wizard-step-font-size: 12px !default;
 .wizard-step-indicator {
   border-collapse: separate;
   display: table;
-  margin-left: 0px;
+  margin-left: 0;
   position: relative;
   table-layout: fixed;
   text-align: center;
@@ -23,8 +23,8 @@ $wizard-step-font-size: 12px !default;
     padding: 0;
     width: 1%;
 
-    &:after,
-    &:before {
+    &::after,
+    &::before {
       background-color: $wizard-color-line;
       content: '';
       display: block;
@@ -34,12 +34,12 @@ $wizard-step-font-size: 12px !default;
       top: math.div($wizard-step-width-height, 2);
     }
 
-    &:after {
+    &::after {
       left: 50%;
     }
 
     &:last-child {
-      &:after {
+      &::after {
         display: none;
       }
     }

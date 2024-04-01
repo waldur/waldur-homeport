@@ -1,8 +1,8 @@
-@import '~sass/variables.scss';
+@import '~sass/variables';
 
 .searchResultsDropdown {
   padding: 14px 150px 34px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 4px rgb(0 0 0 / 40%);
   position: absolute;
   background-color: $white;
   width: 100%;

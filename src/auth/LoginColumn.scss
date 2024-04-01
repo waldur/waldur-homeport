@@ -1,4 +1,4 @@
-@import '~sass/theme/_variables.scss';
+@import '~sass/theme/_variables';
 
 .LoginColumn {
   height: 100%;
@@ -16,7 +16,6 @@
   text-align: center;
   height: 100%;
   flex-grow: 1;
-
   color: $text-color;
 }
 
@@ -32,7 +31,7 @@
   background-color: transparent;
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .LoginGridItemContainer {
     width: 50%;
   }

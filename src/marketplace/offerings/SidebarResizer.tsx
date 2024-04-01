@@ -4,14 +4,14 @@ import '@waldur/marketplace/offerings/SidebarResizer.css';
 
 export const SidebarResizer = () => {
   const sidebarRef = useRef(
-    document.getElementsByClassName('sidebarEditor')[0] as HTMLElement,
+    document.getElementsByClassName('sidebar-editor')[0] as HTMLElement,
   );
   const [isResizing, setIsResizing] = useState(false);
   const [sidebarWidth, setSidebarWidth] = useState(600);
 
   useEffect(() => {
     const el = document.getElementsByClassName(
-      'sidebarEditor',
+      'sidebar-editor',
     )[0] as HTMLElement;
     if (el) sidebarRef.current = el;
   });

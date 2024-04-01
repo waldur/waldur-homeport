@@ -35,7 +35,7 @@ export const ServiceProviderEditorButton = ({
             },
             modalStyle: { left: 'auto', bottom: 'auto' },
             formId: 'ServiceProviderEditor',
-            dialogClassName: 'sidebarEditor',
+            dialogClassName: 'sidebar-editor',
           }),
         )
       }

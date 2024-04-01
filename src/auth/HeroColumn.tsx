@@ -10,15 +10,15 @@ import './HeroColumn.css';
 
 export const HeroColumn = () => (
   <div
-    className="HeroColumn"
+    className="hero-column"
     style={{
       backgroundImage: `url(${
         fixURL('/icons/hero_image/') || DefaultHeroImage
       })`,
     }}
   >
-    <div className="HeroBackground">
-      <div className="HeroText">
+    <div className="hero-background">
+      <div className="hero-text">
         <h1>{ENV.plugins.WALDUR_CORE.SITE_DESCRIPTION}</h1>
         <HeroButton />
       </div>

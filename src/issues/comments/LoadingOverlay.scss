@@ -1,17 +1,15 @@
-@import '~sass/theme/_variables.scss';
-@import '~sass/variables.scss';
+@use 'sass:color';
+@import '~sass/theme/_variables';
+@import '~sass/variables';
 
 .loading-overlay {
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   padding: 20px;
-  background: transparentize($white, 0.5);
+  background: color.adjust($white, $alpha: -0.5);
   text-align: center;
   z-index: 2;
 }

@@ -3,6 +3,7 @@
   border-radius: 7px;
   flex-shrink: 0;
 }
+
 .image-placeholder > * {
   width: 100% !important;
   height: 100% !important;

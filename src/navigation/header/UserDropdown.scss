@@ -6,10 +6,12 @@
   display: flex;
   background-color: lightgray;
   padding: 1px;
+
   &.dark {
     background-color: #6a6a6a;
     justify-content: flex-end;
   }
+
   span {
     height: 18px;
     width: 18px;

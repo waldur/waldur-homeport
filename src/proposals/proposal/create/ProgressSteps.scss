@@ -16,10 +16,12 @@
               color: var(--bs-gray-800);
               font-size: 0.9rem;
             }
+
             .stepper-desc {
               color: var(--bs-gray-500);
             }
           }
+
           .stepper-icon {
             background: var(--bs-gray-300);
             border-radius: 50%;
@@ -27,6 +29,7 @@
             margin-bottom: 0.75rem;
             z-index: 1;
           }
+
           .stepper-line-area {
             position: absolute;
             display: flex;
@@ -46,10 +49,12 @@
           .stepper-icon {
             background: var(--bs-gray-600);
           }
+
           .stepper-line-area .stepper-line {
             background: var(--bs-gray-600);
           }
         }
+
         &.current .stepper-wrapper {
           .stepper-line-area .stepper-line {
             background: var(--bs-gray-600);

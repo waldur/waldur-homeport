@@ -8,16 +8,17 @@
     width: 55%;
     background-color: #2f4050;
     background-image: linear-gradient(to right, #000a, #000a),
-      url(../landing/marketplace-background.jpg);
+      url('../landing/marketplace-background.jpg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
     display: table;
   }
+
   .category-hero__background-right {
     width: 45%;
     background-color: #2f4050;
-    background-image: url(../landing/marketplace-background.jpg);
+    background-image: url('../landing/marketplace-background.jpg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -42,15 +43,17 @@
     }
   }
 
-  @media (max-width: 1200px) {
+  @media (width <= 1200px) {
     .category-hero__background-right {
       display: none;
     }
+
     .category-hero__background-left {
       width: 100%;
     }
   }
-  @media (min-width: 992px) {
+
+  @media (width >= 992px) {
     .category-hero__main {
       padding-left: 4rem;
     }

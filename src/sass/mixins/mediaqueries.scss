@@ -11,27 +11,32 @@
     @media #{$bp-xs} {
       @content;
     }
+
     @media #{$bp-xs-helpdesk} {
       @content;
     }
   }
+
   // small (not only mobile)
   @if $point == sm {
     @media #{$bp-sm} {
       @content;
     }
   }
+
   // medium smallscreen laptop & tablets & some mobile
   @if $point == md {
     @media #{$bp-md} {
       @content;
     }
   }
+
   @if $point == lightmd {
     @media #{$bp-lightmd} {
       @content;
     }
   }
+
   // medium big screens
   @if $point == lg {
     @media #{$bp-lg} {
