@@ -1,7 +1,5 @@
-*.fixture.ts
-typings.d.ts
-.cache-loader
-cypress
+**/.git
+**/node_modules
 src/permissions/enums.ts
 src/EventsEnums.ts
 src/FeaturesEnums.ts

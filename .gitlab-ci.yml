@@ -50,7 +50,6 @@ Run linters:
         - webpack.*
         - .eslintrc.js
         - .eslintignore
-        - .prettierrc.js
   script:
     - yarn format:check
     - yarn lint:check

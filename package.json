@@ -177,6 +177,13 @@
     "webpack-dev-server": "^4.4.0",
     "webpack-merge": "^5.8.0"
   },
+  "prettier": {
+    "semi": true,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "printWidth": 80,
+    "tabWidth": 2
+  },
   "husky": {
     "hooks": {
       "pre-commit": "yarn gettext:extract && yarn lint-staged"

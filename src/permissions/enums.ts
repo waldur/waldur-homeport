@@ -1,4 +1,3 @@
-/* eslint-disable */
 // WARNING: This file is auto-generated from src/waldur_core/permissions/enums.py
 // Do not edit it manually. All manual changes would be overridden.
 
