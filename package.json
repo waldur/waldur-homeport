@@ -14,7 +14,7 @@
     "style:check": "yarn stylelint \"src/**/*.css\" \"src/**/*.scss\"",
     "lint:check": "yarn eslint --ext ts,tsx src",
     "lint:fix": "yarn eslint --fix --ext ts,tsx src",
-    "test": "yarn format:check && yarn lint:check && yarn knip --include files,types && yarn style:check && jest --verbose --runInBand && npm run build",
+    "test": "yarn format:check && yarn lint:check && yarn knip --include files,types,enumMembers && yarn style:check && jest --verbose --runInBand && npm run build",
     "ci:conf": "mkdirp build/scripts/configs/ && cp src/configs/test-config.json build/scripts/configs/config.json",
     "ci:start": "yarn build && yarn ci:conf && yarn serve build --single --listen 8001",
     "ci:run": "cypress run",

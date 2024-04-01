@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 import { ENV } from '@waldur/configs/default';
 import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { FormGroup, SelectField, StringField, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import {
@@ -75,7 +76,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       >
         <AwesomeCheckboxField />
       </Field>
-      {oecdCodes && isFeatureVisible('project.oecd_fos_2007_code') ? (
+      {oecdCodes && isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
         <Field
           name="oecd_fos_2007_code"
           component={FormGroup}

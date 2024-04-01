@@ -5,6 +5,7 @@ import { Field, formValueSelector } from 'redux-form';
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { OpenstackFeatures } from '@waldur/FeaturesEnums';
 import { FormGroup, SelectField } from '@waldur/form';
 import { SliderNumberField } from '@waldur/form/SliderNumberField';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
@@ -31,7 +32,7 @@ export const FormAbstractVolumeStep = (
   );
 
   const hideVolumeTypeSelector = isFeatureVisible(
-    'openstack.hide_volume_type_selector',
+    OpenstackFeatures.hide_volume_type_selector,
   );
 
   const { change } = props;

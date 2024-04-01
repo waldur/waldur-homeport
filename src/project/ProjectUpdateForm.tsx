@@ -61,7 +61,8 @@ export const PureProjectUpdateForm: FunctionComponent<
         disabled={props.isDisabled}
         validate={validateMaxLength}
       />
-      {props.oecdCodes && isFeatureVisible('project.oecd_fos_2007_code') ? (
+      {props.oecdCodes &&
+      isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
         <SelectField
           floating={false}
           label={translate('OECD FoS code')}

@@ -6,7 +6,6 @@ import { useAsyncFn } from 'react-use';
 import { ENV } from '@waldur/configs/default';
 import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
 import { LayoutContext } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
@@ -20,13 +19,8 @@ import { InvoiceDetails } from './InvoiceDetails';
 
 import './BillingDetails.scss';
 
-const loadData = (invoiceId: string) => {
-  if (isFeatureVisible('paypal')) {
-    return getById<Invoice>('/paypal-invoices/', invoiceId);
-  } else {
-    return getById<Invoice>('/invoices/', invoiceId);
-  }
-};
+const loadData = (invoiceId: string) =>
+  getById<Invoice>('/invoices/', invoiceId);
 
 export const BillingDetails: FunctionComponent = () => {
   useTitle(

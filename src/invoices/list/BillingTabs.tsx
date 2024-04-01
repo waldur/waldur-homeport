@@ -2,8 +2,6 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { ENV } from '@waldur/configs/default';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { PayPalInvoicesList } from '@waldur/paypal/PayPalInvoicesList';
 
 import { AgreementInfo } from './AgreementInfo';
 import { BillingRecordsList } from './BillingRecordsList';
@@ -21,7 +19,7 @@ export const BillingTabs: FunctionComponent = () => {
     <Card.Body>
       <OverviewLastMonths />
       <AgreementInfo />
-      {isFeatureVisible('paypal') ? <PayPalInvoicesList /> : <InvoicesList />}
+      <InvoicesList />
     </Card.Body>
   );
 };
