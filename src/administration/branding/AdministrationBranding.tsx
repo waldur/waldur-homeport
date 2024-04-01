@@ -8,7 +8,7 @@ import { sendForm } from '@waldur/core/api';
 import { pick } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { isSupport as isSupportSelector } from '@waldur/workspace/selectors';
+import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 import { BrandingForm } from './BrandingForm';
 
@@ -27,7 +27,7 @@ const LOGOS = [
 
 export const AdministrationBranding = () => {
   const dispatch = useDispatch();
-  const isSupport = useSelector(isSupportSelector);
+  const isStaff = useSelector(isStaffSelector);
 
   const callback = async (formData) => {
     try {
@@ -71,7 +71,7 @@ export const AdministrationBranding = () => {
         <BrandingForm
           saveConfig={mutate}
           initialValues={initialValues}
-          disabled={isSupport}
+          disabled={!isStaff}
         />
       </Card.Body>
     </Card>
