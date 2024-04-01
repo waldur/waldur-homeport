@@ -74,4 +74,3 @@ export const UserFeatures = {
   preferred_language: 'user.preferred_language',
   ssh_keys: 'user.ssh_keys',
 };
-
