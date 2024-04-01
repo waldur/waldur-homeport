@@ -1,4 +1,4 @@
-.LoginInput {
+.login-input {
   border-radius: 8px;
   margin-bottom: 14px;
   width: 100%;
@@ -6,27 +6,27 @@
   padding: 8px;
 }
 
-.LoginInput:focus {
+.login-input:focus {
   outline: 0;
-  box-shadow: 0px 0px 2px #3a8500;
+  box-shadow: 0 0 2px #3a8500;
 }
 
-.LoginSeparator {
+.login-separator {
   display: flex;
   align-items: center;
-  margin: 12px 0px;
+  margin: 12px 0;
 }
 
-.LoginSeparatorBorder {
+.login-separator-border {
   flex-grow: 1;
   border-bottom: 1px solid #3a8500;
 }
 
-.LoginSeparatorText {
+.login-separator-text {
   margin: 0 18px;
 }
 
-.LoginWithLocalAccountButton {
+.login-with-local-account-button {
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
@@ -37,7 +37,7 @@
   background: transparent;
 }
 
-.LoginSubmitButton {
+.login-submit-button {
   background: #3a8500;
   color: white;
   text-align: center;

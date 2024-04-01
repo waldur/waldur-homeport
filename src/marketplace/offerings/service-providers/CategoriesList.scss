@@ -1,4 +1,4 @@
-@import '~sass/theme/_variables.scss';
+@import '~sass/theme/_variables';
 
 .categoriesListContainer {
   ul {
@@ -23,7 +23,7 @@
 
       &:hover button,
       &.active button {
-        background: rgba(28, 132, 198, 0.1);
+        background: rgb(28 132 198 / 10%);
       }
 
       &.active button {

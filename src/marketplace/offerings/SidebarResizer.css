@@ -1,9 +1,9 @@
-.sidebarEditor {
+.sidebar-editor {
   min-width: 280px;
   margin: 0;
 }
 
-.sidebarEditor .modal-content {
+.sidebar-editor .modal-content {
   height: 100vh;
   border-radius: 0;
 }
@@ -18,9 +18,11 @@
   cursor: col-resize;
   z-index: 10;
 }
+
 .sidebar-resizer:hover {
   background-color: #ccc;
 }
+
 .sidebar-resizer::after {
   content: '';
   position: absolute;
@@ -30,6 +32,7 @@
   border-right: 1px solid #999;
   padding-right: 2px;
 }
+
 .sidebar-resizer:hover::after {
   border-right-color: #000;
 }

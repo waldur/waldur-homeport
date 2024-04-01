@@ -11,9 +11,10 @@
     "build-stats": "cross-env NODE_ENV=production webpack --config=webpack.config.prod.js --profile --json > stats.json",
     "format:check": "yarn prettier --check \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
     "format:fix": "yarn prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" \"src/**/*.scss\"",
+    "style:check": "yarn stylelint \"src/**/*.css\" \"src/**/*.scss\"",
     "lint:check": "yarn eslint --ext ts,tsx src",
     "lint:fix": "yarn eslint --fix --ext ts,tsx src",
-    "test": "yarn format:check && yarn lint:check && yarn knip --include files,types && jest --verbose --runInBand && npm run build",
+    "test": "yarn format:check && yarn lint:check && yarn knip --include files,types && yarn style:check && jest --verbose --runInBand && npm run build",
     "ci:conf": "mkdirp build/scripts/configs/ && cp src/configs/test-config.json build/scripts/configs/config.json",
     "ci:start": "yarn build && yarn ci:conf && yarn serve build --single --listen 8001",
     "ci:run": "cypress run",
@@ -154,7 +155,7 @@
     "marked": "^4.0.10",
     "mini-css-extract-plugin": "^2.6.0",
     "mock-match-media": "^0.4.3",
-    "postcss": "8",
+    "postcss": "^8.4.38",
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.2.0",
     "prettier": "^3.2.5",
@@ -167,6 +168,8 @@
     "source-map-loader": "^3.0.0",
     "start-server-and-test": "^2.0.1",
     "style-loader": "^3.3.1",
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard-scss": "^13.0.0",
     "terser-webpack-plugin": "^5.2.4",
     "ts-import-plugin": "^3.0.0",
     "ts-jest": "^29.1.2",
@@ -227,6 +230,14 @@
       "config": [
         "webpack.config.*.js"
       ]
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-recommended-scss",
+    "ignoreFiles": ["./src/metronic/**/*.scss"],
+    "rules": {
+      "no-descending-specificity": null,
+      "scss/load-no-partial-leading-underscore": null
     }
   }
 }

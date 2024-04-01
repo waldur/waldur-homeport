@@ -5,7 +5,7 @@
   justify-items: center;
 
   &.hasOneItem {
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       justify-items: left;
     }
   }

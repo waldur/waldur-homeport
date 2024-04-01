@@ -2,7 +2,7 @@
   padding: 0 150px;
 }
 
-@media only screen and (max-width: 745px) {
+@media only screen and (width <= 745px) {
   .serviceProvidersContainer {
     padding: 16px;
   }

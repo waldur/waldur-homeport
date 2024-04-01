@@ -13,8 +13,8 @@ export const LoginButton = ({
   label: string;
   onClick?(): void;
 }) => (
-  <button className="LoginButton" onClick={onClick}>
-    <div className="LoginButtonIcon">
+  <button className="login-button" onClick={onClick}>
+    <div className="login-button-icon">
       {image}
       {iconClass ? (
         <i
@@ -24,7 +24,7 @@ export const LoginButton = ({
         />
       ) : null}
     </div>
-    <div className="LoginButtonText">
+    <div className="login-button-text">
       {translate('Sign in with {label}', { label })}
     </div>
   </button>

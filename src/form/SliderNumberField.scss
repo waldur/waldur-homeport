@@ -55,13 +55,14 @@
       font-weight: 600;
 
       /* Hide arrows */
+
       /* Firefox */
-      -moz-appearance: textfield;
+      appearance: textfield;
 
       /* Chrome, Safari, Edge, Opera */
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
+        appearance: none;
         margin: 0;
       }
 
@@ -84,7 +85,7 @@
   }
 
   input[type='range'] {
-    -webkit-appearance: none;
+    appearance: none;
     position: relative;
     background: transparent;
     height: 14px;
@@ -93,14 +94,14 @@
     z-index: 1;
 
     &::-webkit-slider-runnable-track {
-      -webkit-appearance: none;
+      appearance: none;
       box-shadow: none;
       border: none;
       background: transparent;
     }
 
     &::-webkit-slider-thumb {
-      -webkit-appearance: none;
+      appearance: none;
       height: 20px;
       width: 20px;
       border-radius: 50%;
@@ -111,11 +112,11 @@
     }
 
     &::-webkit-slider-thumb:hover {
-      box-shadow: var(--bs-dark) 0px 0px 0px 2px;
+      box-shadow: var(--bs-dark) 0 0 0 2px;
     }
 
     &::-webkit-slider-thumb:active {
-      box-shadow: var(--bs-dark) 0px 0px 0px 1px;
+      box-shadow: var(--bs-dark) 0 0 0 1px;
       transition:
         box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
         left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,

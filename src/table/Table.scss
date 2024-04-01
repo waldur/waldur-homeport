@@ -26,7 +26,7 @@
   z-index: 100;
 
   .text-center {
-    color: #ffffff;
+    color: #fff;
     margin-top: 40px;
   }
 }
@@ -37,7 +37,7 @@
   overflow-x: auto;
 }
 
-@media (max-width: 767px) {
+@media (width <= 767px) {
   .table-responsive .dropdown-menu {
     position: static !important;
   }

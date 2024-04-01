@@ -8,7 +8,7 @@
   }
 }
 
-@media only screen and (max-width: 745px) {
+@media only screen and (width <= 745px) {
   .serviceProvidersHeader img {
     display: none;
   }

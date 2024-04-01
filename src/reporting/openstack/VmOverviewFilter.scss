@@ -1,9 +1,10 @@
-@import '~sass/theme/_variables.scss';
+@import '~sass/theme/_variables';
 
 #vm-overview-filter {
   .form-group {
     vertical-align: middle;
   }
+
   .service-provider-selector {
     min-width: 200px;
   }

@@ -3,12 +3,15 @@
     td:first-child {
       text-align: left;
     }
+
     td:not(:first-child) {
       text-align: right;
     }
+
     th:first-child {
       text-align: left;
     }
+
     th:not(:first-child) {
       text-align: right;
     }
@@ -25,7 +28,7 @@
   }
 
   > td:last-child {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #ddd;
     text-align: right;
     width: 15%;
   }

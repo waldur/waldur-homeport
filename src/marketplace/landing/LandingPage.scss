@@ -6,7 +6,7 @@
     height: 500px;
     width: 100%;
     background-color: #2f4050;
-    background-image: url(./marketplace-background.jpg);
+    background-image: url('./marketplace-background.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,6 +24,7 @@
       display: table-cell;
       vertical-align: middle;
     }
+
     .marketplace-hero__main {
       max-width: 800px;
       margin-right: auto;
@@ -39,9 +40,11 @@
         color: #fff;
         font-weight: 500;
       }
+
       h2 {
         font-size: 32px;
       }
+
       h1 {
         font-size: 38px;
         margin-bottom: 20px;
@@ -50,7 +53,7 @@
   }
 
   .providers-brands {
-    opacity: if(isDarkMode(), 1, 0.6);
+    opacity: if(isdarkmode(), 1, 0.6);
     align-items: stretch;
 
     .symbol-label {
@@ -63,12 +66,15 @@
     display: table;
     max-width: 100%;
     min-height: 300px;
+
     .left-side {
       text-align: left;
     }
+
     .right-side {
       text-align: right;
     }
+
     .left-side,
     .right-side {
       display: table-cell;
@@ -77,7 +83,8 @@
       background-position: center center;
       background-repeat: no-repeat;
       background-size: cover;
-      @media (max-width: 767px) {
+
+      @media (width <= 767px) {
         width: 100%;
         height: auto;
         display: block;
@@ -85,7 +92,8 @@
       }
     }
   }
-  @media (max-width: 767px) {
+
+  @media (width <= 767px) {
     .footer-section {
       display: block;
     }

@@ -1,4 +1,4 @@
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
   .invoice-details {
     display: flex;
     justify-content: center;
@@ -14,6 +14,7 @@
   body {
     visibility: hidden;
   }
+
   #kt_content_container {
     visibility: visible;
     position: absolute;

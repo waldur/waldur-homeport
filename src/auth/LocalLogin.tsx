@@ -17,7 +17,7 @@ interface SigninWithLocalAccountProps {
 
 const Border = () => (
   <div
-    className="LoginSeparatorBorder"
+    className="login-separator-border"
     style={{
       borderBottomColor: ENV.plugins.WALDUR_CORE.BRAND_COLOR,
     }}
@@ -29,7 +29,7 @@ const SignInWithLocalAccount: React.FC<SigninWithLocalAccountProps> = ({
 }) => (
   <button
     type="button"
-    className="LoginWithLocalAccountButton"
+    className="login-with-local-account-button"
     onClick={() => setShowForm(true)}
   >
     {translate('Sign in with local account')}
@@ -41,9 +41,9 @@ export const LocalLogin: React.FC<LocalLoginProps> = ({ enableSeperator }) => {
   return (
     <>
       {enableSeperator && (
-        <div className="LoginSeparator">
+        <div className="login-separator">
           <Border />
-          <div className="LoginSeparatorText">{translate('OR')}</div>
+          <div className="login-separator-text">{translate('OR')}</div>
           <Border />
         </div>
       )}
