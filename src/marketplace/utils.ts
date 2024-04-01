@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { getFormValues } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { useExtraTabs } from '@waldur/navigation/context';
@@ -28,7 +29,7 @@ export const formatResourceShort = (resource) => {
 };
 
 export const isExperimentalUiComponentsVisible = () =>
-  isFeatureVisible('marketplace.show_experimental_ui_components');
+  isFeatureVisible(MarketplaceFeatures.show_experimental_ui_components);
 
 const IPv4_ADDRESS_PATTERN = ipRegex.v4({ exact: true });
 const IPv6_ADDRESS_PATTERN = ipRegex.v6({ exact: true });
@@ -54,7 +55,9 @@ export const useMarketplacePublicTabs = () => {
         params: landingStateParams,
       },
     ];
-    if (isFeatureVisible('marketplace.show_call_management_functionality')) {
+    if (
+      isFeatureVisible(MarketplaceFeatures.show_call_management_functionality)
+    ) {
       _tabs.push({
         title: translate('Calls'),
         to: callsState,

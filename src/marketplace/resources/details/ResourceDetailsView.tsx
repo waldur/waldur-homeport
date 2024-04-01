@@ -5,6 +5,7 @@ import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PageBarProvider } from '@waldur/marketplace/context';
 import { LexisLinkCard } from '@waldur/marketplace/resources/lexis/LexisLinkCard';
@@ -209,7 +210,7 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
                 />
               </ErrorBoundary>
             )}
-            {isFeatureVisible('marketplace.lexis_links') ? (
+            {isFeatureVisible(MarketplaceFeatures.lexis_links) ? (
               <LexisLinkCard resource={resource} />
             ) : null}
             <RobotAccountCard resource={resource} />

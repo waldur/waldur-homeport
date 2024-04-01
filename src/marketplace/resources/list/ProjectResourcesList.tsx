@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { CategoryColumn } from '@waldur/marketplace/types';
@@ -134,7 +135,7 @@ const TableOptions = {
 
 const mapStateToProps = (state: RootState) => ({
   project: getProject(state),
-  importVisible: isVisible(state, 'marketplace.import_resources'),
+  importVisible: isVisible(state, MarketplaceFeatures.import_resources),
   filter: getFormValues('ProjectResourcesFilter')(state),
 });
 

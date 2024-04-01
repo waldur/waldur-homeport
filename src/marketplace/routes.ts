@@ -4,6 +4,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
@@ -581,7 +582,7 @@ export const states: StateDeclaration[] = [
     component: OfferingRequestsList,
     parent: 'provider-resources',
     data: {
-      feature: 'marketplace.show_call_management_functionality',
+      feature: MarketplaceFeatures.show_call_management_functionality,
       breadcrumb: () => translate('Offering requests'),
     },
   },
@@ -649,7 +650,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('LEXIS links'),
       permissions: [
         () => {
-          if (isFeatureVisible('marketplace.lexis_links')) {
+          if (isFeatureVisible(MarketplaceFeatures.lexis_links)) {
             return true;
           }
         },

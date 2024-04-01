@@ -4,6 +4,7 @@ import { getFormValues, isValid } from 'redux-form';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { FieldError } from '@waldur/form';
 import { FloatingButton } from '@waldur/form/FloatingButton';
 import { translate } from '@waldur/i18n';
@@ -109,7 +110,7 @@ const mapStateToProps = (state, ownProps) => ({
   formData: getFormValues(FORM_ID)(state),
   formValid: isValid(FORM_ID)(state),
   errors: formErrorsSelector(state),
-  shouldConcealPrices: isVisible(state, 'marketplace.conceal_prices'),
+  shouldConcealPrices: isVisible(state, MarketplaceFeatures.conceal_prices),
 });
 
 export const OrderSummary = connect<

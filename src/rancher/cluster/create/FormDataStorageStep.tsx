@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { FieldArray, FormName, FormSection } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { RancherFeatures } from '@waldur/FeaturesEnums';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
@@ -50,7 +51,7 @@ const renderDataVolumeRows = ({
               change={change}
               onDeleteRow={() => fields.remove(index)}
             />
-            {isFeatureVisible('rancher.volume_mount_point') && (
+            {isFeatureVisible(RancherFeatures.volume_mount_point) && (
               <tr>
                 <td>
                   <FormName>

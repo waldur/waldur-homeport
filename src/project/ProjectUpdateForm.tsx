@@ -6,6 +6,7 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { ENV } from '@waldur/configs/default';
 import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import {
   FieldError,
   FormContainer,
@@ -76,7 +77,7 @@ export const PureProjectUpdateForm: FunctionComponent<
           required={isCodeRequired}
         />
       ) : null}
-      {isFeatureVisible('project.show_industry_flag') && (
+      {isFeatureVisible(ProjectFeatures.show_industry_flag) && (
         <AwesomeCheckboxField
           name="is_industry"
           label={translate('Please mark if project is aimed at industrial use')}

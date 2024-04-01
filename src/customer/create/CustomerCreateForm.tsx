@@ -1,6 +1,7 @@
 import { useState, createElement, FunctionComponent } from 'react';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 
 import { CustomerCreateFormData } from './types';
@@ -19,7 +20,7 @@ export const CustomerCreateForm: FunctionComponent<CustomerCreateFormProps> = (
 ) => {
   const [step, setStep] = useState(1);
   const steps = [translate('General information')];
-  if (!isFeatureVisible('customer.hide_organization_billing_step')) {
+  if (!isFeatureVisible(CustomerFeatures.hide_organization_billing_step)) {
     steps.push(translate('Billing details'));
   }
   const isLast = step === steps.length;

@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { RancherFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import {
   parseIntField,
@@ -20,7 +21,7 @@ const createVolumeSizeValidator =
     if (volumeIndex >= volumes.length) {
       return;
     }
-    if (!isFeatureVisible('rancher.volume_mount_point')) {
+    if (!isFeatureVisible(RancherFeatures.volume_mount_point)) {
       return;
     }
     const volume = volumes[volumeIndex];

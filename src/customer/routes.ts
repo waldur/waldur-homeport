@@ -3,6 +3,7 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 import { isStaff } from '@waldur/workspace/selectors';
@@ -248,7 +249,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Payments'),
       permissions: [
         (state) => {
-          if (isFeatureVisible('customer.payments_for_staff_only')) {
+          if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
             return isStaff(state);
           }
           return true;

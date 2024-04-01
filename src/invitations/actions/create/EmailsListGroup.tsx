@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 
 import { email, required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { EmailField } from '@waldur/form/EmailField';
 import { translate } from '@waldur/i18n';
 
@@ -52,7 +53,8 @@ export const EmailsListGroup = ({
 
   const isRoleDisabled = useCallback(
     (userDetails: StoredUserDetails) =>
-      isFeatureVisible('invitation.require_user_details') && !userDetails,
+      isFeatureVisible(InvitationsFeatures.require_user_details) &&
+      !userDetails,
     [],
   );
 
@@ -65,10 +67,12 @@ export const EmailsListGroup = ({
               <thead>
                 <tr>
                   <td className="w-250px">{translate('Email')}</td>
-                  {!isFeatureVisible('invitations.conceal_civil_number') && (
+                  {!isFeatureVisible(
+                    InvitationsFeatures.conceal_civil_number,
+                  ) && (
                     <td className="id-column">{translate('Civil number')}</td>
                   )}
-                  {isFeatureVisible('invitation.show_tax_number') && (
+                  {isFeatureVisible(InvitationsFeatures.show_tax_number) && (
                     <td className="tax-column">{translate('Tax number')}</td>
                   )}
                   <td className="role-column">{translate('Role')}</td>
@@ -99,7 +103,9 @@ export const EmailsListGroup = ({
                             />
                           </td>
                         )}
-                        {isFeatureVisible('invitation.show_tax_number') &&
+                        {isFeatureVisible(
+                          InvitationsFeatures.show_tax_number,
+                        ) &&
                           isFeatureVisible(
                             'invitation.require_user_details',
                           ) && (

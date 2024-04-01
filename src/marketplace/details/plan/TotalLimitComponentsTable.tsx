@@ -5,6 +5,7 @@ import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { formatCurrency } from '@waldur/core/formatCurrency';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import {
@@ -27,7 +28,7 @@ export const TotalLimitComponentsTable: FunctionComponent<
   TotalLimitComponentsTableProps
 > = (props) => {
   const shouldConcealPrices = useSelector((state: RootState) =>
-    isVisible(state, 'marketplace.conceal_prices'),
+    isVisible(state, MarketplaceFeatures.conceal_prices),
   );
   return (
     <Table bordered={true}>

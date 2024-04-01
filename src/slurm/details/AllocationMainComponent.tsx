@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { SlurmFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PageBarContext } from '@waldur/marketplace/context';
 
@@ -8,7 +9,7 @@ import { AllocationJobsTable } from './AllocationJobsTable';
 import { AllocationUsersTable } from './AllocationUsersTable';
 
 export const AllocationMainComponent = ({ scope }) => {
-  const isSlurmJubsVisible = isFeatureVisible('slurm.jobs');
+  const isSlurmJubsVisible = isFeatureVisible(SlurmFeatures.jobs);
   const { addTabs } = useContext(PageBarContext);
   useEffect(() => {
     addTabs([
