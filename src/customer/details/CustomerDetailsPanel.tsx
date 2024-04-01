@@ -8,6 +8,7 @@ import { ENV } from '@waldur/configs/default';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { SelectField, StringField, SubmitButton } from '@waldur/form';
 import { FormSectionContainer } from '@waldur/form/FormSectionContainer';
 import { translate } from '@waldur/i18n';
@@ -109,7 +110,7 @@ export const CustomerDetailsPanel = enhance((props: OwnProps) => {
               />
             )}
 
-            {isFeatureVisible('customer.show_domain') ? (
+            {isFeatureVisible(CustomerFeatures.show_domain) ? (
               <StringField
                 name="domain"
                 label={translate('Domain name')}

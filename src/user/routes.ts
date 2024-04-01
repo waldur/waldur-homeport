@@ -2,6 +2,7 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { MarketplaceFeatures, UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 import { getConfig } from '@waldur/store/config';
@@ -116,7 +117,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     url: '',
     data: {
-      feature: 'marketplace.show_call_management_functionality',
+      feature: MarketplaceFeatures.show_call_management_functionality,
       breadcrumb: () => translate('Calls'),
     },
   },
@@ -164,7 +165,7 @@ export const states: StateDeclaration[] = [
     component: KeysList,
     parent: 'profile-credentials',
     data: {
-      feature: 'user.ssh_keys',
+      feature: UserFeatures.ssh_keys,
       breadcrumb: () => translate('SSH keys'),
     },
   },
@@ -173,7 +174,7 @@ export const states: StateDeclaration[] = [
     url: 'notifications/',
     component: HooksList,
     data: {
-      feature: 'user.notifications',
+      feature: UserFeatures.notifications,
       breadcrumb: () => translate('Notifications'),
     },
   },

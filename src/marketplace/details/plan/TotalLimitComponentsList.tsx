@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { ENV } from '@waldur/configs/default';
 import { formatCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { isVisible } from '@waldur/store/config';
@@ -28,7 +29,7 @@ export const TotalLimitComponentsList: FunctionComponent<
   TotalLimitComponentsListProps
 > = (props) => {
   const shouldConcealPrices = useSelector((state: RootState) =>
-    isVisible(state, 'marketplace.conceal_prices'),
+    isVisible(state, MarketplaceFeatures.conceal_prices),
   );
   return (
     <Table bordered={true}>

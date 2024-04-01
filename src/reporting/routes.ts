@@ -2,6 +2,7 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
@@ -74,7 +75,7 @@ export const states: StateDeclaration[] = [
     url: 'pricelist/',
     component: PriceList,
     data: {
-      feature: 'support.pricelist',
+      feature: SupportFeatures.pricelist,
       breadcrumb: () => translate('Pricelist'),
     },
   },
@@ -102,7 +103,7 @@ export const states: StateDeclaration[] = [
     url: 'vm-type-overview/',
     component: VmTypeOverviewContainer,
     data: {
-      feature: 'support.vm_type_overview',
+      feature: SupportFeatures.vm_type_overview,
       breadcrumb: () => translate('VM type overview'),
     },
   },

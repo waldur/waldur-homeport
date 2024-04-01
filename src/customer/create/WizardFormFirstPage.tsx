@@ -6,6 +6,7 @@ import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getNameFieldValidators } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { ImageField } from '@waldur/form/ImageField';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
@@ -59,7 +60,9 @@ export const WizardFormFirstPage: FunctionComponent<any> = (props) => {
                   maxLength={160}
                 />
               )}
-              {isFeatureVisible('customer.show_domain') && <DomainGroup />}
+              {isFeatureVisible(CustomerFeatures.show_domain) && (
+                <DomainGroup />
+              )}
               <InputGroup
                 name="organization_group"
                 floating={false}

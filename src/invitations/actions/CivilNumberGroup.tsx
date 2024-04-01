@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 
 import { InputGroup } from './InputGroup';
@@ -16,7 +17,7 @@ export const CivilNumberGroup: FunctionComponent<{ name; disabled }> = ({
       ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_LABEL ||
       translate('Civil number')
     }
-    required={isFeatureVisible('invitation.civil_number_required')}
+    required={isFeatureVisible(InvitationsFeatures.civil_number_required)}
     disabled={disabled}
     helpText={translate('Must start with a country prefix ie EE34501234215')}
   />

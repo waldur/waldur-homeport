@@ -7,6 +7,7 @@ import { reduxForm } from 'redux-form';
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
+import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import {
   TextField,
   SelectField,
@@ -53,10 +54,10 @@ export const ProjectCreateForm = reduxForm<
   const customer = useSelector(getCustomer);
   const workspace = useSelector(getWorkspace);
   const showCode = useSelector((state: RootState) =>
-    isVisible(state, 'project.oecd_fos_2007_code'),
+    isVisible(state, ProjectFeatures.oecd_fos_2007_code),
   );
   const showIndustry = useSelector((state: RootState) =>
-    isVisible(state, 'project.show_industry_flag'),
+    isVisible(state, ProjectFeatures.show_industry_flag),
   );
   const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 

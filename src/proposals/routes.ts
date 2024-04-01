@@ -3,6 +3,7 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 
@@ -91,7 +92,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Dashboard'),
       priority: 100,
-      feature: 'marketplace.show_call_management_functionality',
+      feature: MarketplaceFeatures.show_call_management_functionality,
     },
   },
   {
@@ -192,7 +193,7 @@ export const states: StateDeclaration[] = [
     component: UserProposalsList,
     parent: 'profile-calls',
     data: {
-      feature: 'marketplace.show_call_management_functionality',
+      feature: MarketplaceFeatures.show_call_management_functionality,
       breadcrumb: () => translate('Proposals'),
     },
   },
@@ -202,7 +203,7 @@ export const states: StateDeclaration[] = [
     component: UserReviewsList,
     parent: 'profile-calls',
     data: {
-      feature: 'marketplace.show_call_management_functionality',
+      feature: MarketplaceFeatures.show_call_management_functionality,
       breadcrumb: () => translate('Reviews'),
     },
   },

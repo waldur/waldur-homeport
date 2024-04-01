@@ -6,6 +6,7 @@ import { useAsync } from 'react-use';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import {
@@ -58,7 +59,7 @@ export const ProjectExpandableRow: React.FC<{
           label={translate('Backend ID')}
           value={value.project.backend_id}
         />
-        {isFeatureVisible('project.show_industry_flag') && (
+        {isFeatureVisible(ProjectFeatures.show_industry_flag) && (
           <Field
             label={translate('OECD FoS code')}
             value={row.oecd_fos_2007_label}
@@ -68,7 +69,7 @@ export const ProjectExpandableRow: React.FC<{
           label={translate('Industry project')}
           value={value.project.is_industry ? translate('Yes') : translate('No')}
         />
-        {isFeatureVisible('project.estimated_cost') && (
+        {isFeatureVisible(ProjectFeatures.estimated_cost) && (
           <Field
             label={translate('Cost estimation')}
             value={defaultCurrency(

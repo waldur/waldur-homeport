@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 import { FormName, FormSection } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { RancherFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { RemoveButton } from '@waldur/marketplace/offerings/RemoveButton';
 
@@ -29,7 +30,7 @@ export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
     </Card.Header>
     <Card.Body>
       <FormSection name={props.volumePath}>
-        {isFeatureVisible('rancher.volume_mount_point') && (
+        {isFeatureVisible(RancherFeatures.volume_mount_point) && (
           <FormName>
             {({ form }) => (
               <VolumeMountPointGroup

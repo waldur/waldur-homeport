@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { isVisible } from '@waldur/store/config';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { PaymentProfile } from '@waldur/workspace/types';
@@ -120,7 +121,7 @@ export const hasMonthlyPaymentProfile = createSelector(
 
 export const showPriceSelector = createSelector(
   getCustomer,
-  (state) => isVisible(state, 'marketplace.conceal_prices'),
+  (state) => isVisible(state, MarketplaceFeatures.conceal_prices),
   (customer, concealPricesFeatureToggle: boolean) =>
     !getActiveFixedPricePaymentProfile(customer.payment_profiles) &&
     !concealPricesFeatureToggle,

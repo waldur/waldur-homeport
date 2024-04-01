@@ -1,5 +1,6 @@
 import { isValid, getFormSyncErrors } from 'redux-form';
 
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
@@ -88,7 +89,7 @@ export const hasStepWithField = (
   steps.some((step) => step.fields && step.fields.some((key) => key === field));
 
 export const concealPricesSelector = (state: RootState) =>
-  isVisible(state, 'marketplace.conceal_prices');
+  isVisible(state, MarketplaceFeatures.conceal_prices);
 
 export const formProjectSelector = (state: RootState) => {
   const formData = formDataSelector(state);

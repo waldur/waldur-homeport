@@ -9,6 +9,7 @@ import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
@@ -50,7 +51,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
               <Col>
                 <h2 className="mb-0">
                   {project.name}
-                  {isFeatureVisible('project.show_industry_flag') &&
+                  {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
                     project.is_industry && (
                       <span>
                         <i

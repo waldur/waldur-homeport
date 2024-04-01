@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import {
@@ -49,7 +50,7 @@ export const IntegrationSection: FC<OfferingSectionProps> = (props) => {
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </div>
         <div className="card-toolbar">
-          {isFeatureVisible('marketplace.lexis_links') ? (
+          {isFeatureVisible(MarketplaceFeatures.lexis_links) ? (
             <EditLexisLinkIntegrationButton
               offering={props.offering}
               refetch={props.refetch}

@@ -5,6 +5,7 @@ import { ENV } from '@waldur/configs/default';
 import { sendForm } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PageBarProvider } from '@waldur/marketplace/context';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -82,9 +83,9 @@ export const CustomerManage: FunctionComponent = () => {
           canUpdate={canEditCustomer}
         />
         <CustomerMarketplacePanel />
-        {isFeatureVisible('marketplace.show_call_management_functionality') && (
-          <CustomerCallManagerPanel />
-        )}
+        {isFeatureVisible(
+          MarketplaceFeatures.show_call_management_functionality,
+        ) && <CustomerCallManagerPanel />}
         <CustomerRemovePanel />
       </div>
     </PageBarProvider>

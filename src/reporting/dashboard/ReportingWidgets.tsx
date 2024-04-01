@@ -3,6 +3,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import './ReportingWidgets.scss';
 
@@ -35,7 +36,6 @@ const generateWidgetsData = (): ReportingWidget[] => [
     title: translate('Monthly revenue'),
     description: translate('Shows monthly revenue split by organization.'),
     to: { state: 'reporting.organizations' },
-    feature: 'support.customers_list',
   },
   {
     title: translate('Organization quotas'),
@@ -48,7 +48,7 @@ const generateWidgetsData = (): ReportingWidget[] => [
       'Shows a common pricelist for all offerings in the marketplace.',
     ),
     to: { state: 'reporting.pricelist' },
-    feature: 'support.pricelist',
+    feature: SupportFeatures.pricelist,
   },
   {
     title: translate('Usage reports'),

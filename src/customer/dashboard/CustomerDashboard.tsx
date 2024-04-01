@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
 import { ProjectsList } from '@waldur/project/ProjectsList';
 import {
@@ -37,7 +38,7 @@ export const CustomerDashboard: FunctionComponent = () => {
           <div className="mb-6">
             <ProjectsList />
           </div>
-          {isFeatureVisible('customer.category_resources_list') && (
+          {isFeatureVisible(CustomerFeatures.category_resources_list) && (
             <CategoryResourcesList
               scopeType={ORGANIZATION_WORKSPACE}
               scope={customer}

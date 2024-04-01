@@ -2,6 +2,7 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
@@ -188,7 +189,7 @@ export const states: StateDeclaration[] = [
     parent: 'admin-users',
     component: UserList,
     data: {
-      feature: 'support.users',
+      feature: SupportFeatures.users,
       breadcrumb: () => translate('Users'),
     },
   },

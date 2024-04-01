@@ -2,6 +2,7 @@ import React from 'react';
 import { Field } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { projectAutocomplete } from '@waldur/marketplace/common/autocompletes';
@@ -13,9 +14,10 @@ interface ProjectFilterProps {
 const getOptionLabel = (option) => (
   <div>
     {option.name}
-    {isFeatureVisible('project.show_industry_flag') && option.is_industry && (
-      <i className="fa fa-industry fa-lg" style={{ marginLeft: '5px' }}></i>
-    )}
+    {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
+      option.is_industry && (
+        <i className="fa fa-industry fa-lg" style={{ marginLeft: '5px' }}></i>
+      )}
   </div>
 );
 
