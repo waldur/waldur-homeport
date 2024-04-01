@@ -30,16 +30,13 @@ export const InvoiceFeatures = {
 
 export const MarketplaceFeatures = {
   conceal_prices: 'marketplace.conceal_prices',
-  flows: 'marketplace.flows',
   import_resources: 'marketplace.import_resources',
   lexis_links: 'marketplace.lexis_links',
   offering_document: 'marketplace.offering_document',
   private_offerings: 'marketplace.private_offerings',
   review: 'marketplace.review',
-  show_call_management_functionality:
-    'marketplace.show_call_management_functionality',
-  show_experimental_ui_components:
-    'marketplace.show_experimental_ui_components',
+  show_call_management_functionality: 'marketplace.show_call_management_functionality',
+  show_experimental_ui_components: 'marketplace.show_experimental_ui_components',
   terms_of_service: 'marketplace.terms_of_service',
 };
 
@@ -64,15 +61,8 @@ export const SlurmFeatures = {
 };
 
 export const SupportFeatures = {
-  activity_stream: 'support.activity_stream',
   conceal_change_request: 'support.conceal_change_request',
-  customers_requests: 'support.customers_requests',
-  flowmap: 'support.flowmap',
-  heatmap: 'support.heatmap',
-  offering_comments: 'support.offering_comments',
   pricelist: 'support.pricelist',
-  resource_usage: 'support.resource_usage',
-  sankey_diagram: 'support.sankey_diagram',
   shared_providers: 'support.shared_providers',
   users: 'support.users',
   vm_type_overview: 'support.vm_type_overview',
@@ -84,3 +74,4 @@ export const UserFeatures = {
   preferred_language: 'user.preferred_language',
   ssh_keys: 'user.ssh_keys',
 };
+
