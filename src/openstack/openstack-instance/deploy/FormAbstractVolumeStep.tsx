@@ -4,6 +4,7 @@ import { Field, formValueSelector } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { required } from '@waldur/core/validators';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { FormGroup, SelectField } from '@waldur/form';
 import { SliderNumberField } from '@waldur/form/SliderNumberField';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
@@ -29,13 +30,25 @@ export const FormAbstractVolumeStep = (
     formValueSelector(FORM_ID)(state, props.typeField),
   );
 
+  const hideVolumeTypeSelector = isFeatureVisible(
+    'openstack.hide_volume_type_selector',
+  );
+
   const { change } = props;
 
   useEffect(() => {
+    if (hideVolumeTypeSelector) {
+      return;
+    }
     if (data?.defaultVolumeType) {
       change(props.typeField, data.defaultVolumeType);
     }
-  }, [data?.defaultVolumeType, change, props.typeField]);
+  }, [
+    data?.defaultVolumeType,
+    change,
+    props.typeField,
+    hideVolumeTypeSelector,
+  ]);
 
   const quotaName = volumeType ? `gigabytes_${volumeType.name}` : 'storage';
 
@@ -87,7 +100,7 @@ export const FormAbstractVolumeStep = (
       }
       loading={isLoading}
     >
-      {data?.volumeTypeChoices?.length > 0 && (
+      {data?.volumeTypeChoices?.length > 0 && !hideVolumeTypeSelector && (
         <Field
           name={props.typeField}
           component={FormGroup}

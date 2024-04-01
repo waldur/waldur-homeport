@@ -8,7 +8,6 @@ import { translate } from '@waldur/i18n';
 import { Quota } from '@waldur/quotas/types';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
-import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
 import { OpenStackTenant } from './types';
@@ -39,7 +38,7 @@ const formatPassword = (props: OpenStackTenantSummaryProps) =>
     <UserPassword password={props.resource.user_password} />
   ) : null;
 
-const formatTenantSummary = (quotas: Quota[], volumeTypeVisible) => {
+const formatTenantSummary = (quotas: Quota[]) => {
   const parts = [
     {
       quota: quotas.find((quota) => quota.name === 'vcpu'),
@@ -50,21 +49,20 @@ const formatTenantSummary = (quotas: Quota[], volumeTypeVisible) => {
       name: 'RAM',
     },
   ];
-  if (volumeTypeVisible) {
-    quotas
-      .filter((quota) => quota.name.startsWith('gigabytes_'))
-      .forEach((quota) => {
+  const volumeTypeQuotas = quotas.filter((quota) =>
+    quota.name.startsWith('gigabytes_'),
+  );
+  volumeTypeQuotas.length > 0
+    ? volumeTypeQuotas.forEach((quota) => {
         parts.push({
           quota,
           name: quota.name.split('gigabytes_')[1],
         });
+      })
+    : parts.push({
+        quota: quotas.find((quota) => quota.name === 'storage'),
+        name: 'storage',
       });
-  } else {
-    parts.push({
-      quota: quotas.find((quota) => quota.name === 'storage'),
-      name: 'storage',
-    });
-  }
   return parts
     .map((part) =>
       translate('{usage} of {limit} {name}', {
@@ -87,8 +85,8 @@ export const PureOpenStackTenantSummary: FunctionComponent<
 > = (props) => {
   const { resource } = props;
   const summary = useMemo(
-    () => formatTenantSummary(resource.quotas, props.volumeTypeVisible),
-    [resource.quotas, props.volumeTypeVisible],
+    () => formatTenantSummary(resource.quotas),
+    [resource.quotas],
   );
   return (
     <>
@@ -118,7 +116,6 @@ export const PureOpenStackTenantSummary: FunctionComponent<
 const mapStateToProps = (state: RootState) => ({
   tenantCredentialsVisible:
     state.config.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE,
-  volumeTypeVisible: isVisible(state, 'openstack.volume_type'),
 });
 
 const enhance = compose(connect(mapStateToProps));
