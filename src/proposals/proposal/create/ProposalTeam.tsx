@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import { translate } from '@waldur/i18n';
 import { TeamSection } from '@waldur/proposals/team/ReviewersSection';
 
@@ -5,7 +7,7 @@ import { ProjectDetailsSummary } from './ProjectDetailsSummary';
 import { ProposalHeader } from './ProposalHeader';
 import { ResourceRequestsSummary } from './ResourceRequestsSummary';
 
-export const ProposalTeam = ({ proposal }) => {
+export const ProposalTeam: FC<{ proposal; showTeam? }> = ({ proposal }) => {
   return (
     <>
       <ProposalHeader proposal={proposal} />
