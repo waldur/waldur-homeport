@@ -34,6 +34,11 @@ const ProposalManagePage = lazyComponent(
   'ProposalManagePage',
 );
 
+const ProposalDetailsContainer = lazyComponent(
+  () => import('./proposal/ProposalDetailsContainer'),
+  'ProposalDetailsContainer',
+);
+
 const CallManagementPage = lazyComponent(
   () => import('./call-management/CallManagementPage'),
   'CallManagementPage',
@@ -118,6 +123,11 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Reviews'),
     },
+  },
+  {
+    name: 'call-management.proposal-details',
+    url: 'proposals/:proposal_uuid/',
+    component: ProposalDetailsContainer,
   },
   {
     name: 'protected-call',

@@ -14439,6 +14439,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
+#: src/proposals/proposal/ProposalRowActions.tsx
 #: src/proposals/proposal/UserProposalsList.tsx
 msgid "View"
 msgstr ""

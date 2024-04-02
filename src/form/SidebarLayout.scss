@@ -83,3 +83,8 @@ body:not(.toolbar-fixed) .v-stepper-form-sidebar {
     height: auto;
   }
 }
+@media (min-width: 1200px) {
+  .v-stepper-form .container-xxl {
+    padding-right: 0;
+  }
+}
