@@ -7,7 +7,19 @@ import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
 import { ProposalHeader } from './create/ProposalHeader';
 import { ResourceRequestsSummary } from './create/ResourceRequestsSummary';
 
-export const ProposalDetails = ({ proposal, isLoading, error, refetch }) => {
+interface ProposalDetails {
+  proposal;
+  isLoading?;
+  error?;
+  refetch?;
+}
+
+export const ProposalDetails = ({
+  proposal,
+  isLoading,
+  error,
+  refetch,
+}: ProposalDetails) => {
   if (isLoading) {
     return <LoadingSpinner />;
   } else if (error) {
