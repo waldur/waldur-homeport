@@ -9,6 +9,7 @@ interface CallOfferingCreateFormProps {
   submitLabel: string;
   steps: string[];
   wizardForms: FunctionComponent<WizardFormStepProps>[];
+  form?: string;
   initialValues?: any;
   data: any;
 }
@@ -32,7 +33,7 @@ export const CallOfferingCreateForm: FunctionComponent<
   const submitLabel = isLast ? props.submitLabel : translate('Next');
 
   return createElement(props.wizardForms[step], {
-    form: 'CallOfferingForm',
+    form: props.form,
     title: props.title,
     onSubmit: isLast ? props.onSubmit : nextStep,
     onPrev: prevStep,
@@ -43,4 +44,8 @@ export const CallOfferingCreateForm: FunctionComponent<
     initialValues: props.initialValues,
     data: props.data,
   });
+};
+
+CallOfferingCreateForm.defaultProps = {
+  form: 'CallOfferingForm',
 };

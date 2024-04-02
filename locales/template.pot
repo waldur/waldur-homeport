@@ -504,6 +504,7 @@ msgstr ""
 msgid "Add {category}"
 msgstr ""
 
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 #: src/support/deploy-steps.ts
 msgid "Additional configuration"
 msgstr ""
@@ -6863,6 +6864,7 @@ msgstr ""
 #: src/proposals/proposal/create/ResourceRequestsSummary.tsx
 #: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
 #: src/proposals/proposal/create/resource-requests-step/ProposalResourcesFilter.tsx
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx
 #: src/proposals/update/offerings/WizardFormSecondPage.tsx
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/reporting/plan-usage/PlanUsageFilter.tsx
@@ -7889,6 +7891,7 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/openstack/deploy/steps.ts
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx
 #: src/proposals/update/offerings/CallOfferingExpandableRow.tsx
 #: src/rancher/cluster/create/steps.ts
 #: src/reporting/plan-usage/PlanUsageDialog.tsx

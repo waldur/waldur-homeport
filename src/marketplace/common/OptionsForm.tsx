@@ -21,10 +21,17 @@ import {
 import { fetchInstanceOptions, fetchTenantOptions } from '@waldur/support/api';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-export const OptionsForm = ({ options }) => {
+import { Offering } from '../types';
+
+interface OptionsFormProps {
+  options: Offering['options'];
+  submitting?: boolean;
+}
+
+export const OptionsForm = ({ options, submitting }: OptionsFormProps) => {
   const customer = useSelector(getCustomer);
   return (
-    <FormContainer submitting={false} className="size-xl">
+    <FormContainer submitting={submitting} className="size-xl">
       {options.order &&
         options.order.map((key) => {
           const option = options.options[key];
