@@ -28,14 +28,17 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
   );
   const options = useMemo(() => {
     if (!call) return [];
-    return call.offerings.map((item) => ({
-      requested_offering_uuid: item.uuid,
-      uuid: item.offering_uuid,
-      name: item.offering_name,
-      url: item.offering,
-      customer_name: item.provider_name,
-      attributes: item.attributes,
-    }));
+    return call.offerings
+      .map((item) => ({
+        requested_offering_uuid: item.uuid,
+        uuid: item.offering_uuid,
+        name: item.offering_name,
+        url: item.offering,
+        customer_name: item.provider_name,
+        attributes: item.attributes,
+        plan: item.plan,
+      }))
+      .filter((opt) => Boolean(opt.plan));
   }, [call]);
 
   return (
@@ -52,7 +55,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
               <LoadingSpinner />
             ) : error ? (
               <LoadingErred loadData={refetch} />
-            ) : call?.offerings.length === 0 ? (
+            ) : options.length === 0 ? (
               <h2 className="text-center text-muted">
                 {translate('There are no offerings')}
               </h2>
@@ -70,7 +73,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
                 validate={required}
                 onChange={(value) => {
                   if (value?.uuid !== offering?.uuid) {
-                    wizardProps.change('plan', undefined);
+                    wizardProps.change('plan', value.plan);
                   }
                 }}
               />

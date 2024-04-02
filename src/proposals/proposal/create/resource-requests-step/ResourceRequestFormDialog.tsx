@@ -1,6 +1,9 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { Offering } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import {
   createProposalResource,
@@ -12,10 +15,11 @@ import {
   ProposalResourceFormData,
 } from '@waldur/proposals/types';
 import { CallOfferingCreateForm } from '@waldur/proposals/update/offerings/CallOfferingCreateForm';
-import { WizardFormSecondPage } from '@waldur/proposals/update/offerings/WizardFormSecondPage';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { ResourceRequestWizardFormFirstPage } from './ResourceRequestWizardFormFirstPage';
+import { ResourceRequestWizardFormSecondPage } from './ResourceRequestWizardFormSecondPage';
+import { ResourceRequestWizardFormThirdPage } from './ResourceRequestWizardFormThirdPage';
 
 interface OwnProps {
   resolve: {
@@ -25,20 +29,31 @@ interface OwnProps {
   };
 }
 
-const WizardForms = [ResourceRequestWizardFormFirstPage, WizardFormSecondPage];
+const WizardForms = [
+  ResourceRequestWizardFormFirstPage,
+  ResourceRequestWizardFormSecondPage,
+  ResourceRequestWizardFormThirdPage,
+];
 
-const steps = [translate('Select offering'), translate('Configure request')];
+const steps = [
+  translate('Select offering'),
+  translate('Configure request'),
+  translate('Additional configuration'),
+];
 
 export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
   const callback = useCallback(
     (formData: ProposalResourceFormData, dispatch, formProps) => {
+      const attributes = {};
+      if (formData.attributes) {
+        Object.assign(attributes, formData.attributes);
+      }
+      if (formData.limits) {
+        Object.assign(attributes, { limits: formData.limits });
+      }
       const payload = {
         requested_offering_uuid: formData.offering.requested_offering_uuid,
-        attributes: formData.limits
-          ? {
-              limits: formData.limits,
-            }
-          : {},
+        attributes,
       };
       if (props.resolve.resourceRequest) {
         // Edit
@@ -83,15 +98,30 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
 
   const isEdit = Boolean(props.resolve.resourceRequest);
 
+  /** Auto filling `mainOffering` in step 2 */
+  const mainOffering: Offering = useSelector((state) =>
+    formValueSelector('ProposalResourceForm')(state, 'mainOffering'),
+  );
+
+  const WizardStepsData = useMemo(() => {
+    return mainOffering?.options?.order?.length
+      ? { steps, wizardForms: WizardForms }
+      : {
+          steps: steps.slice(0, 2),
+          wizardForms: WizardForms.slice(0, 2),
+        };
+  }, [mainOffering]);
+
   return (
     <CallOfferingCreateForm
+      form="ProposalResourceForm"
       title={
         isEdit ? translate('Edit resource request') : translate('New resource')
       }
       submitLabel={isEdit ? translate('Edit') : translate('Create')}
       onSubmit={callback}
-      steps={steps}
-      wizardForms={WizardForms}
+      steps={WizardStepsData.steps}
+      wizardForms={WizardStepsData.wizardForms}
       initialValues={
         isEdit
           ? {
@@ -109,6 +139,7 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
                 uuid: props.resolve.resourceRequest.requested_offering
                   .offering_uuid,
               },
+              attributes: props.resolve.resourceRequest.attributes,
               limits: props.resolve.resourceRequest.attributes?.limits,
               plan: props.resolve.resourceRequest.requested_offering.plan,
             }
