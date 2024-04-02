@@ -21,7 +21,7 @@ interface UserUpdateComponentProps {
 
 const UserUpdateComponent: React.FC<UserUpdateComponentProps> = (props) => {
   return (
-    <Card className="user-edit mb-6">
+    <Card className="mb-6">
       <Card.Header>{translate('Profile settings')}</Card.Header>
       <Card.Body>
         {!props.user.email ? (

@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 
 import { TableDropdownItem } from './types';
 

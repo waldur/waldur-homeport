@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { Tip } from '@waldur/core/Tooltip';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 export const MarketplacePopupTitle: FunctionComponent<{

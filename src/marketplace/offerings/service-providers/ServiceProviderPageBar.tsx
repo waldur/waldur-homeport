@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 
 import { CategoriesList } from './CategoriesList';
 import { CategorySectionsFilterBar } from './CategorySectionsFilterBar';

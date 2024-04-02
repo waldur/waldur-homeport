@@ -5,7 +5,7 @@ import {
   MenuComponent,
   ScrollComponent,
   ToggleComponent,
-} from '@waldur/metronic/assets/ts/components';
+} from '@waldur/metronic/components';
 import { useLayout } from '@waldur/metronic/layout/core';
 import { WorkspaceStorage } from '@waldur/workspace/WorkspaceStorage';
 

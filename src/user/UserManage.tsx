@@ -11,8 +11,6 @@ import { IdentityProviderContainer } from './support/IdentityProviderContainer';
 import { UserDeleteAccount } from './support/UserDeleteAccount';
 import { UserEditFormContainer } from './support/UserEditFormContainer';
 
-import './user-edit.scss';
-
 export const UserManage: FunctionComponent = () => {
   useTitle(translate('Settings'));
 

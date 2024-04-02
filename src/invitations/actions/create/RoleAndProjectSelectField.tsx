@@ -11,7 +11,7 @@ import { Field } from 'redux-form';
 import { required } from '@waldur/core/validators';
 import { FormField } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 import { Role } from '@waldur/permissions/types';
 import { Customer, Project } from '@waldur/workspace/types';
 

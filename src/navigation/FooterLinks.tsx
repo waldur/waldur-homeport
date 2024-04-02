@@ -6,7 +6,7 @@ import { AuthService } from '@waldur/auth/AuthService';
 import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 import { DocsLink } from '@waldur/navigation/header/DocsLink';
 import { IssuesLink } from '@waldur/navigation/IssuesLink';
 import { showSuccess } from '@waldur/store/notify';

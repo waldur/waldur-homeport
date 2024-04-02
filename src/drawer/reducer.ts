@@ -1,4 +1,4 @@
-import { DrawerComponent } from '@waldur/metronic/assets/ts/components';
+import { DrawerComponent } from '@waldur/metronic/components';
 
 const initialState = {
   drawerComponent: null,

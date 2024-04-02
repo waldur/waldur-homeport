@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { PermissionLayout } from '@waldur/auth/PermissionLayout';
 
-import { MenuComponent } from '../assets/ts/components';
+import { MenuComponent } from '../components';
 
 import { Content } from './components/Content';
 import { PageDataProvider } from './core';

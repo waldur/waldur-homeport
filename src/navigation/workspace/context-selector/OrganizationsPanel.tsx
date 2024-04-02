@@ -6,7 +6,7 @@ import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 import { getCustomerPermission } from '@waldur/permissions/utils';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';

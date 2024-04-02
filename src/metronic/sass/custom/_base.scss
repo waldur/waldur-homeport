@@ -1,0 +1,169 @@
+@import '~/src/metronic/sass/core/components/_variables.scss';
+
+/* BUTTON */
+.btn {
+  border-radius: 7px;
+  padding: 5px 12px;
+  border: 0;
+  letter-spacing: 0.56px;
+}
+
+/* CARD */
+.card .card-header {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: $gray-700;
+  border-bottom-color: $light;
+}
+
+/* LIST-GROUP & ITEMS */
+.list-group-item {
+  background-color: $dark-inverse;
+
+  &:hover {
+    background-color: $gray-200;
+  }
+  &.active {
+    color: $gray-900;
+    background-color: $gray-200;
+    border-color: $gray-200;
+  }
+}
+
+/* *** FORM ELEMENTS *** */
+/* LABEL */
+.col-form-label,
+.form-label {
+  font-size: 0.95rem; // fs-7
+  font-weight: 500; // fw-bold
+}
+
+/* FORM CONTROL (INPUT) */
+.form-control {
+  border-radius: 9px;
+  font-size: 0.95rem;
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $gray-200;
+  }
+  &[readonly]:not(.flatpickr-input) {
+    background-color: $gray-200;
+  }
+
+  &.form-control-solid {
+    border-color: $gray-300;
+
+    &:focus,
+    &:active {
+      border-color: $gray-400;
+    }
+
+    &.is-invalid {
+      border-color: #f1416c;
+    }
+  }
+}
+.form-floating {
+  > textarea {
+    &.form-control {
+      height: unset;
+    }
+    // Hide label of floating textarea when scroll not on top
+    &[data-scroll]:not([data-scroll='0']) + label.form-label {
+      opacity: 0;
+    }
+  }
+}
+.form-addon {
+  position: relative;
+
+  .form-control-addon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-bottom: 0.7rem;
+    padding-right: 1rem;
+    pointer-events: none;
+    border: 1px solid transparent;
+  }
+}
+
+/* CHECKBOX */
+.form-check {
+  &-label {
+    font-size: 0.95rem;
+  }
+}
+
+/* SVG ICON */
+.collapsible:not(.collapsed),
+.show,
+.active {
+  > .rotate-180 {
+    transform: rotateZ(180deg);
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Typography */
+.ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+
+.btn-text-align {
+  line-height: 1.5;
+  padding: calc(0.75rem + 1px) calc(1.5rem + 1px);
+}
+
+.text-link {
+  background-color: transparent;
+  border: none;
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  color: $dark;
+  text-decoration: underline;
+
+  &:hover {
+    color: $primary;
+    text-decoration: none;
+  }
+}
+.text-anchor {
+  background-color: transparent;
+  color: $link-color;
+  text-decoration: $link-decoration;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
+
+  &:hover {
+    color: $link-hover-color;
+    transition: $transition-base;
+  }
+}
+.text-btn {
+  background-color: transparent;
+  color: $gray-600;
+  border: none;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.z-index-100 {
+  z-index: 100;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}

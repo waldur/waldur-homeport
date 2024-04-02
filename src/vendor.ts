@@ -1,6 +1,3 @@
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-geosearch/assets/css/leaflet.css';
-
 import 'font-awesome/css/font-awesome.css';
 import '@fontsource/inter/index.css';
 import '@fontsource/inter/300.css';
