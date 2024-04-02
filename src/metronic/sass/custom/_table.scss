@@ -1,0 +1,255 @@
+@import '~/src/metronic/sass/core/components/_variables.scss';
+
+/* TABLE */
+.table {
+  thead > tr > th {
+    font-size: 14px;
+    color: $dark;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  tbody > tr > td {
+    color: $gray-600;
+  }
+
+  td:first-child,
+  th:first-child,
+  tr:first-child {
+    padding-left: 0.75rem;
+  }
+  td:last-child,
+  th:last-child,
+  tr:last-child {
+    padding-right: 0.75rem;
+  }
+
+  /* TR */
+  &.table-expandable tr {
+    th:first-child,
+    td:first-child {
+      border-left: 4px solid transparent;
+    }
+    &.expanded,
+    &.expanded + tr {
+      td:first-child {
+        border-left-color: $gray-500;
+      }
+    }
+  }
+  tbody > tr {
+    position: relative;
+
+    > td.row-actions {
+      position: relative;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      width: 0;
+
+      > div {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        background: $body-bg;
+        transition: all 0.1s;
+        top: 0;
+        right: 0;
+        height: 100%;
+        padding-left: 6px;
+        border: 0;
+        opacity: 0;
+
+        &::before {
+          width: 144px;
+          transition: all 0.1s;
+          content: '';
+          height: 100%;
+          margin-left: -144px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background-image: linear-gradient(
+            90deg,
+            rgba($body-bg, 0) 0%,
+            $body-bg 100%
+          );
+          opacity: 0;
+        }
+
+        .btn {
+          white-space: nowrap;
+        }
+      }
+    }
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+      > td.row-actions > div {
+        background: $body-bg;
+        opacity: 1;
+
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+
+    > td.row-control {
+      display: flex;
+      align-items: center;
+
+      .error-mark {
+        position: absolute;
+        left: 0.7rem;
+        margin-top: 1px;
+        line-height: 1;
+
+        i {
+          color: if(isDarkMode(), $danger, $warning);
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+.table-responsive {
+  overflow: inherit;
+}
+
+/* TABLE IN CARD */
+.card.card-table {
+  border: unset;
+
+  .card-header {
+    border-bottom-style: dashed;
+  }
+
+  .table-filter {
+    width: 100%;
+    display: flex;
+    align-items: stretch;
+
+    .scroll-x {
+      margin-bottom: -0.5rem;
+    }
+
+    .filter-toggle {
+      display: flex;
+      align-items: center;
+      border-radius: 0;
+      position: relative;
+
+      .filter-field {
+        max-height: 50px;
+        width: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: all 0.3s;
+      }
+
+      .filter-value {
+        max-width: 100px;
+        margin-left: 0.5rem;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        > * {
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      &.active {
+        .filter-field {
+          opacity: 1;
+          width: 300px;
+          margin-left: 0.5rem;
+        }
+        .filter-value {
+          display: none;
+        }
+      }
+
+      &:not(:last-child)::after {
+        content: '';
+        width: 2px;
+        height: 40px;
+        position: absolute;
+        top: 15px;
+        right: 0;
+        background-color: $border-color;
+      }
+    }
+  }
+
+  /* TABLE FULL IN CARD */
+  &.full-width {
+    .table-filter {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .card-body {
+      padding-top: 0;
+      padding-left: 0;
+      padding-right: 0;
+
+      .table {
+        td:first-child,
+        th:first-child,
+        tr:first-child {
+          padding-left: 2.5rem;
+        }
+        td:last-child,
+        td.row-actions > div,
+        th:last-child,
+        tr:last-child {
+          padding-right: 2.5rem;
+        }
+      }
+
+      .table-filters {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+    }
+
+    .table-pagination {
+      padding: 0 2.5rem !important;
+    }
+  }
+
+  &.field-table {
+    tr {
+      cursor: pointer;
+    }
+    tr.checked,
+    tr.checked:hover {
+      background-color: $primary !important;
+
+      > * {
+        color: $dark-inverse !important;
+        border: unset;
+        --bs-table-accent-bg: $primary;
+      }
+    }
+
+    .form-check .form-check-input[type='checkbox']:checked {
+      background-image: escape-svg(
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13 11' width='13' height='11' fill='none'><path d='M11.0426 1.02893C11.3258 0.695792 11.8254 0.655283 12.1585 0.938451C12.4917 1.22162 12.5322 1.72124 12.249 2.05437L5.51985 9.97104C5.23224 10.3094 4.72261 10.3451 4.3907 10.05L0.828197 6.88335C0.50141 6.59288 0.471975 6.09249 0.762452 5.7657C1.05293 5.43891 1.55332 5.40948 1.88011 5.69995L4.83765 8.32889L11.0426 1.02893Z' fill='#{$primary}'/></svg>")
+      );
+      background-color: $dark-inverse;
+    }
+    .form-check .form-check-input[type='radio']:checked {
+      background-image: escape-svg(
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$primary}'/></svg>")
+      );
+      background-color: $dark-inverse;
+    }
+  }
+}

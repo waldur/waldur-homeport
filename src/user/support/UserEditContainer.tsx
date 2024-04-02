@@ -12,7 +12,6 @@ import {
 import { UserEditForm } from '@waldur/user/support/UserEditForm';
 import { UserDetails } from '@waldur/workspace/types';
 
-import '../user-edit.scss';
 import * as actions from './actions';
 import { EmailChangeForm } from './EmailChangeForm';
 

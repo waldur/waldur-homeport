@@ -1,17 +1,17 @@
-@use 'sass:color';
-@import '~sass/variables';
+@import '~/src/metronic/sass/core/components/_variables.scss';
 
-.attachments__title {
+.dropzone-title {
   padding-right: 55px;
   position: relative;
 }
 
-.attachments__container {
-  border: 1px dashed $gray-label;
+.dropzone {
+  border: 3px dashed $gray-300;
   padding: 20px 30px;
+  border-radius: 10px;
 }
 
-.attachments__container-message {
+.dropzone-message {
   font-size: 14px;
   text-align: center;
 
@@ -24,6 +24,11 @@
   i {
     margin-right: 10px;
     font-size: 22px;
+    color: $gray-300;
+  }
+
+  .dropzone-attachments {
+    margin-top: 0.5rem;
   }
 }
 
@@ -32,9 +37,12 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   padding: 20px;
-  background: color.adjust($white, $alpha: -0.5);
+  background: transparentize($white, 0.5);
   border: 3px dashed $yellow;
   text-align: center;
   z-index: 2;

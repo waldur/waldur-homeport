@@ -13,7 +13,7 @@ import {
 } from '@waldur/marketplace/common/api';
 import { OFFERING_CATEGORY_SECTION_FORM_ID } from '@waldur/marketplace/offerings/service-providers/constants';
 import { Section } from '@waldur/marketplace/types';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 
 import { CategorySectionsFilterBarItem } from './CategorySectionsFilterBarItem';
 

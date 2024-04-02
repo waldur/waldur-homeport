@@ -2,6 +2,8 @@ import Leaflet from 'leaflet';
 import React from 'react';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 
+import 'leaflet/dist/leaflet.css';
+
 import { FitWorld } from '@waldur/map/FitWorld';
 import { OpenStreetMapTileLayer } from '@waldur/map/OpenStreetMapTileLayer';
 

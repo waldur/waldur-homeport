@@ -8,7 +8,7 @@ import {
   StickyComponent,
   ToggleComponent,
   SwapperComponent,
-} from '../assets/ts/components';
+} from '../components';
 
 import { useLayout } from './core/LayoutProvider';
 

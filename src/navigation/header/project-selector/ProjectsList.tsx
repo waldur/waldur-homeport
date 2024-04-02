@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 import { BaseList } from '@waldur/navigation/workspace/context-selector/BaseList';
 import { highlightMatch } from '@waldur/navigation/workspace/highlightMatch';
 import { getProject } from '@waldur/workspace/selectors';

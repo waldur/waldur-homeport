@@ -9,7 +9,7 @@ import { Link } from '@waldur/core/Link';
 import { SearchIcon } from '@waldur/core/svg/SearchIcon';
 import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 
 import { Resource } from '../types';
 

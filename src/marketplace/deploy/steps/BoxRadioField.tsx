@@ -2,7 +2,7 @@ import { isEqual } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { FormField } from '@waldur/form/types';
-import { MenuComponent } from '@waldur/metronic/assets/ts/components';
+import { MenuComponent } from '@waldur/metronic/components';
 
 import './BoxRadioField.scss';
 

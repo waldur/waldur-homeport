@@ -1,0 +1,26 @@
+@mixin bp($point) {
+  $bp-xs: '(max-width : 480px)';
+  $bp-sm: '(min-width : 768px) and (max-width : 992px)';
+  $bp-md: '(min-width : 992px) and (max-width : 1200px)';
+
+  // extrasmall mobile
+  @if $point == xs {
+    @media #{$bp-xs} {
+      @content;
+    }
+  }
+
+  // small (not only mobile)
+  @if $point == sm {
+    @media #{$bp-sm} {
+      @content;
+    }
+  }
+
+  // medium smallscreen laptop & tablets & some mobile
+  @if $point == md {
+    @media #{$bp-md} {
+      @content;
+    }
+  }
+}

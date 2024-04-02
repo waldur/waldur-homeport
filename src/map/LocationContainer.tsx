@@ -1,6 +1,9 @@
 import { OpenStreetMapProvider } from 'leaflet-geosearch';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-geosearch/assets/css/leaflet.css';
+
 import { translate } from '@waldur/i18n';
 import { CustomMarkerIcon } from '@waldur/map/CustomMarkerIcon';
 

@@ -41,7 +41,7 @@ export const ThemeSelector: FunctionComponent = () => {
       // For the first time invoke of dark/light theme
       if (newTheme === 'dark') {
         import(
-          /* webpackChunkName: "dark" */ '@waldur/metronic/assets/sass/style.dark.scss'
+          /* webpackChunkName: "dark" */ '@waldur/metronic/sass/style.dark.scss'
         ).then(() => {
           const newThemes = {
             ...themes,
@@ -52,7 +52,7 @@ export const ThemeSelector: FunctionComponent = () => {
         });
       } else if (newTheme === 'light') {
         import(
-          /* webpackChunkName: "light" */ '@waldur/metronic/assets/sass/style.scss'
+          /* webpackChunkName: "light" */ '@waldur/metronic/sass/style.scss'
         ).then(() => {
           const newThemes = {
             ...themes,
