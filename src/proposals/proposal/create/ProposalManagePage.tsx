@@ -10,6 +10,8 @@ import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { getProposal } from '@waldur/proposals/api';
 
+import { ProposalDetails } from '../ProposalDetails';
+
 import { ProgressSteps } from './ProgressSteps';
 import { ProposalSubmissionStep } from './ProposalSubmissionStep';
 import { ProposalTeam } from './ProposalTeam';
@@ -36,7 +38,9 @@ export const ProposalManagePage = () => {
     return <LoadingErred loadData={refetch} />;
   }
 
-  return (
+  return !['team_verification', 'draft'].includes(proposal.state) ? (
+    <ProposalDetails proposal={proposal} />
+  ) : (
     <>
       <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
       {proposal.state === 'team_verification' ? (
