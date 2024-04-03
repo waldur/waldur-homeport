@@ -1,9 +1,17 @@
 import { ENV } from '@waldur/configs/default';
 import { User } from '@waldur/workspace/types';
 
-import { PermissionRequest } from './types';
+import { PermissionRequest, RoleType } from './types';
 
-function checkScope(user: User, targetScopeType, targetScopeId, targetPerm) {
+export function checkScope(
+  user: User,
+  targetScopeType: RoleType,
+  targetScopeId,
+  targetPerm,
+) {
+  if (user.is_staff) {
+    return true;
+  }
   const userRole = user.permissions?.find(
     ({ scope_uuid, scope_type }) =>
       scope_uuid === targetScopeId && scope_type === targetScopeType,
@@ -17,10 +25,6 @@ function checkScope(user: User, targetScopeType, targetScopeId, targetPerm) {
 }
 
 export const hasPermission = (user: User, request: PermissionRequest) => {
-  if (user.is_staff) {
-    return true;
-  }
-
   if (request.projectId) {
     if (checkScope(user, 'project', request.projectId, request.permission)) {
       return true;
@@ -28,11 +32,6 @@ export const hasPermission = (user: User, request: PermissionRequest) => {
   }
   if (request.customerId) {
     if (checkScope(user, 'customer', request.customerId, request.permission)) {
-      return true;
-    }
-  }
-  if (request.offeringId) {
-    if (checkScope(user, 'offering', request.offeringId, request.permission)) {
       return true;
     }
   }

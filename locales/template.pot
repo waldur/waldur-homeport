@@ -5224,7 +5224,7 @@ msgstr ""
 #: src/invitations/InvitationsList.tsx
 #: src/project/routes.ts
 #: src/proposals/team/InvitationsList.tsx
-#: src/proposals/team/ReviewersSection.tsx
+#: src/proposals/team/TeamSection.tsx
 msgid "Invitations"
 msgstr ""
 
@@ -7827,7 +7827,7 @@ msgid "Permission has been updated successfully."
 msgstr ""
 
 #: src/customer/routes.ts
-#: src/proposals/team/ReviewersSection.tsx
+#: src/proposals/team/TeamSection.tsx
 msgid "Permission log"
 msgstr ""
 
@@ -14263,7 +14263,7 @@ msgstr ""
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
 #: src/marketplace/routes.ts
 #: src/project/routes.ts
-#: src/proposals/team/ReviewersSection.tsx
+#: src/proposals/team/TeamSection.tsx
 #: src/proposals/team/UsersList.tsx
 #: src/rancher/cluster/tabs.ts
 msgid "Users"
