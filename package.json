@@ -174,7 +174,7 @@
     "ts-import-plugin": "^3.0.0",
     "ts-jest": "^29.1.2",
     "ts-loader": "^9.2.6",
-    "typescript": "5",
+    "typescript": "^5.4.3",
     "webpack": "^5.61.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.4.0",
@@ -234,7 +234,9 @@
   },
   "stylelint": {
     "extends": "stylelint-config-recommended-scss",
-    "ignoreFiles": ["./src/metronic/**/*.scss"],
+    "ignoreFiles": [
+      "./src/metronic/**/*.scss"
+    ],
     "rules": {
       "no-descending-specificity": null,
       "scss/load-no-partial-leading-underscore": null
