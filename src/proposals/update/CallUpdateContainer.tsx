@@ -10,7 +10,7 @@ import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { getProtectedCall } from '../api';
-import { TeamSection } from '../team/ReviewersSection';
+import { TeamSection } from '../team/TeamSection';
 
 import { CallUpdateBar } from './CallUpdateBar';
 import { CallUpdateHero } from './CallUpdateHero';
