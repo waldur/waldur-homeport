@@ -1,30 +1,18 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 
 import Avatar from '@waldur/core/Avatar';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { InvitationCreateButton } from '@waldur/invitations/actions/create/InvitationCreateButton';
 import { InvitationCancelButton } from '@waldur/invitations/actions/InvitationCancelButton';
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { RoleField } from '@waldur/invitations/RoleField';
-import { GenericInvitationContext } from '@waldur/invitations/types';
-import { createFetcher, Table } from '@waldur/table';
-import { useTable } from '@waldur/table/utils';
+import { Table } from '@waldur/table';
 
-export const InvitationsList: FunctionComponent<GenericInvitationContext> = (
-  props,
-) => {
-  const filter = useMemo(() => ({ scope: props.scope.url }), [props.scope]);
-  const tableProps = useTable({
-    table: 'user-invitations',
-    fetchData: createFetcher('user-invitations'),
-    queryField: 'email',
-    filter,
-  });
+export const InvitationsList: FunctionComponent<any> = ({ table }) => {
   return (
     <Table
-      {...tableProps}
+      {...table}
       columns={[
         {
           title: translate('Email'),
@@ -63,12 +51,11 @@ export const InvitationsList: FunctionComponent<GenericInvitationContext> = (
       hoverableRow={({ row }) => (
         <>
           <InvitationSendButton invitation={row} />
-          <InvitationCancelButton invitation={row} refetch={tableProps.fetch} />
+          <InvitationCancelButton invitation={row} refetch={table.fetch} />
         </>
       )}
       title={translate('Invitations')}
       verboseName={translate('invitations')}
-      actions={<InvitationCreateButton {...props} refetch={tableProps.fetch} />}
       hasQuery={true}
       expandableRow={InvitationExpandableRow}
     />
