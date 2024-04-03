@@ -70,11 +70,14 @@ export const FormAbstractVolumeStep = (
       if (limit === -1) {
         return;
       }
-      if ((value || 0) / 1024 + (usage || 0) > limit) {
+      if (quotaName !== 'storage') {
+        value = value / 1024;
+      }
+      if ((value || 0) + (usage || 0) > limit) {
         return translate('Quota usage exceeds available limit.');
       }
     },
-    [limit, usage],
+    [limit, usage, quotaName],
   );
 
   return (
