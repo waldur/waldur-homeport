@@ -12,10 +12,10 @@ import { ExpandableEventDetails } from './ExpandableEventDetails';
 
 const EventDateField = ({ row }) => <>{formatDateTime(row.created)}</>;
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
-      columns={props.filterColumns([
+      columns={[
         {
           title: translate('Message'),
           render: ({ row }) => eventsRegistry.formatEvent(row),
@@ -25,7 +25,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: EventDateField,
           orderField: 'created',
         },
-      ])}
+      ]}
       hasQuery={true}
       title={translate('Events')}
       verboseName={translate('events')}

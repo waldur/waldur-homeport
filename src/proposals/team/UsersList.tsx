@@ -1,29 +1,17 @@
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { GenericInvitationContext } from '@waldur/invitations/types';
 import { GenericPermission } from '@waldur/permissions/types';
-import { Table, createFetcher } from '@waldur/table';
-import { useTable } from '@waldur/table/utils';
+import { Table } from '@waldur/table';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 
-import { AddUserButton } from './AddUserButton';
 import { UserRemoveButton } from './UserRemoveButton';
-import { UsersListPlaceholder } from './UsersListPlaceholder';
 
-export const UsersList: FC<GenericInvitationContext> = (props) => {
-  const tableProps = useTable({
-    table: 'UsersListList',
-    fetchData: createFetcher(`${props.scope.url}list_users/`),
-  });
-
+export const UsersList: FC<any> = ({ table, scope }) => {
   return (
     <Table<GenericPermission>
-      {...tableProps}
+      {...table}
       className="mb-7"
-      placeholderComponent={
-        <UsersListPlaceholder refetch={tableProps.fetch} {...props} />
-      }
       columns={[
         {
           title: translate('Reviewer'),
@@ -40,12 +28,11 @@ export const UsersList: FC<GenericInvitationContext> = (props) => {
       ]}
       title={translate('Users')}
       verboseName={translate('users')}
-      actions={<AddUserButton refetch={tableProps.fetch} {...props} />}
       hoverableRow={({ row }) => (
         <UserRemoveButton
           permission={row}
-          refetch={tableProps.fetch}
-          scope={props.scope}
+          refetch={table.fetch}
+          scope={scope}
         />
       )}
     />

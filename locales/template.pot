@@ -6726,7 +6726,6 @@ msgstr ""
 #: src/proposals/proposal/ProposalsListPlaceholder.tsx
 #: src/proposals/review/ReviewsListPlaceholder.tsx
 #: src/proposals/round/proposals/ProposalsPlaceholder.tsx
-#: src/proposals/team/UsersListPlaceholder.tsx
 #: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
 #: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
