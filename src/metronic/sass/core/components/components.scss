@@ -19,7 +19,6 @@
 @import '~bootstrap/scss/navbar';
 @import '~bootstrap/scss/card';
 @import '~bootstrap/scss/accordion';
-@import '~bootstrap/scss/breadcrumb';
 @import '~bootstrap/scss/badge';
 @import '~bootstrap/scss/alert';
 @import '~bootstrap/scss/progress';
@@ -29,6 +28,7 @@
 @import '~bootstrap/scss/tooltip';
 @import '~bootstrap/scss/popover';
 @import '~bootstrap/scss/spinners';
+@import '~bootstrap/scss/pagination';
 
 // Bootstrap helpers
 @import '~bootstrap/scss/helpers';
@@ -59,7 +59,7 @@
 @import 'svg-icon';
 @import 'fixed';
 @import 'timeline';
-@import 'overlay';
+@import 'pagination';
 @import 'bullet';
 @import 'drawer';
 @import 'badge';
@@ -70,7 +70,6 @@
 @import 'stepper';
 @import 'toggle';
 @import 'shape';
-@import 'ribbon';
 @import 'notice';
 @import 'cookiealert';
 @import 'print';
