@@ -38,11 +38,12 @@ Run linters:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
-    - if: '$CI_COMMIT_BRANCH == "master"'
-    # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
-        - src/**/*
+        - src/**/*.css
+        - src/**/*.scss
+        - src/**/*.ts
+        - src/**/*.tsx
         - package.json
         - yarn.lock
         - tsconfig.json
@@ -53,6 +54,8 @@ Run linters:
   script:
     - yarn format:check
     - yarn lint:check
+    - yarn style:check
+    - yarn deps:check
 
 Run code duplication detection:
   stage: test
@@ -61,15 +64,15 @@ Run code duplication detection:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
-    - if: '$CI_COMMIT_BRANCH == "master"'
-    # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
-        - src/**/*
+        - src/**/*.css
+        - src/**/*.scss
+        - src/**/*.ts
+        - src/**/*.tsx
         - .gitlab-ci.yml
   script:
     - npm install -g jscpd
-    - echo "limit to proposals only for now"
     - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.scss"
     - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.tsx" -k 250
 
@@ -80,11 +83,12 @@ Run jest tests:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
-    - if: '$CI_COMMIT_BRANCH == "master"'
-    # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
-        - src/**/*
+        - src/**/*.css
+        - src/**/*.scss
+        - src/**/*.ts
+        - src/**/*.tsx
         - package.json
         - yarn.lock
         - tsconfig.json
@@ -93,7 +97,7 @@ Run jest tests:
         - test/*
         - jest.config.js
   script:
-    - yarn jest --verbose --runInBand --coverage --reporters=jest-junit
+    - yarn test
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
     when: always
@@ -113,11 +117,12 @@ Run E2E tests:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
-    - if: '$CI_COMMIT_BRANCH == "master"'
-    # If event is related to a created merge request
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
-        - src/**/*
+        - src/**/*.css
+        - src/**/*.scss
+        - src/**/*.ts
+        - src/**/*.tsx
         - package.json
         - yarn.lock
         - tsconfig.json
@@ -144,7 +149,6 @@ Build artifact:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
-    - if: '$CI_COMMIT_BRANCH == "master"'
   script:
     - yarn build
   artifacts:
@@ -189,7 +193,6 @@ Upload translatable strings:
     - if: '$SKIP_I18N_UPLOAD == "true" || $SKIP_I18N_UPLOAD == "yes"'
       when: never
     - if: '$CI_COMMIT_BRANCH == "develop"'
-    - if: '$CI_COMMIT_BRANCH == "master"'
   image:
     name: registry.hpc.ut.ee/mirror/localazy/cli:latest
   script:
@@ -228,7 +231,6 @@ Update UI developer docs:
   interruptible: true
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
-    - if: '$CI_COMMIT_BRANCH == "master"'
   image:
     name: registry.hpc.ut.ee/mirror/alpine/git:latest
     entrypoint: [""]

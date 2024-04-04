@@ -3,7 +3,6 @@
 
 export enum CustomerFeatures {
   category_resources_list = 'customer.category_resources_list',
-  hide_organization_billing_step = 'customer.hide_organization_billing_step',
   payments_for_staff_only = 'customer.payments_for_staff_only',
   show_domain = 'customer.show_domain',
 }
