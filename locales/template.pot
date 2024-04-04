@@ -4730,7 +4730,6 @@ msgstr ""
 msgid "Homepage"
 msgstr ""
 
-#: src/administration/notifications/HookRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 msgid "Hook has been removed."
 msgstr ""
@@ -9154,7 +9153,6 @@ msgid "Remote user ID"
 msgstr ""
 
 #: src/administration/TokenDeleteButton.tsx
-#: src/administration/notifications/HookRemoveButton.tsx
 #: src/administration/organizations/OrganizationGroupDeleteButton.tsx
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
@@ -13186,7 +13184,6 @@ msgstr ""
 msgid "Unable to remove endpoint."
 msgstr ""
 
-#: src/administration/notifications/HookRemoveButton.tsx
 #: src/user/hooks/HookRemoveButton.tsx
 msgid "Unable to remove hook."
 msgstr ""
