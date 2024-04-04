@@ -1,10 +1,8 @@
-import ReactGA from 'react-ga';
-
 import store from '@waldur/store/store';
 
+import { MatomoInstance } from './afterBootstrap';
 import { setRedirect } from './auth/AuthRedirectStorage';
 import { AuthService } from './auth/AuthService';
-import { ENV } from './configs/default';
 import { cleanObject } from './core/utils';
 import { isFeatureVisible } from './features/connect';
 import { tryAcceptInvitation } from './invitations/tryAcceptInvitation';
@@ -143,8 +141,8 @@ export function attachTransitions() {
   });
 
   router.transitionService.onSuccess({}, () => {
-    if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
-      ReactGA.pageview(location.pathname);
+    if (MatomoInstance) {
+      MatomoInstance.trackPageView();
     }
   });
 

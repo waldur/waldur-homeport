@@ -25,6 +25,7 @@
   "dependencies": {
     "@fontsource/inter": "^4.5.14",
     "@fontsource/open-sans": "^4.5.14",
+    "@jonkoops/matomo-tracker": "^0.7.0",
     "@popperjs/core": "~2.10.1",
     "@redux-saga/delay-p": "^1.2.1",
     "@sentry/react": "^7.30.0",
@@ -72,7 +73,6 @@
     "react-draft-wysiwyg": "^1.14.7",
     "react-dropzone": "^14.2.3",
     "react-flatpickr": "^3.10.13",
-    "react-ga": "^3.3.0",
     "react-inlinesvg": "^3.0.0",
     "react-leaflet": "^3.0.0",
     "react-monaco-editor": "^0.46.0",
