@@ -23,6 +23,8 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  MATOMO_URL_BASE: string;
+  MATOMO_SITE_ID: number;
   MASTERMIND_URL: string;
   BRAND_COLOR: string;
   BRAND_LABEL_COLOR: string;

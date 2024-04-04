@@ -1,6 +1,6 @@
+import MatomoTracker from '@jonkoops/matomo-tracker';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
-import ReactGA from 'react-ga';
 
 import { initAuthToken } from './auth/interceptor';
 import { ENV } from './configs/default';
@@ -28,11 +28,18 @@ function initSentry() {
   }
 }
 
+export let MatomoInstance: MatomoTracker = null;
+
 export function afterBootstrap() {
   document.title = ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE;
-  if (ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID) {
-    ReactGA.initialize(ENV.plugins.WALDUR_CORE.GOOGLE_ANALYTICS_ID);
-  }
+  if (
+    ENV.plugins.WALDUR_CORE.MATOMO_URL_BASE &&
+    ENV.plugins.WALDUR_CORE.MATOMO_SITE_ID
+  )
+    MatomoInstance = new MatomoTracker({
+      urlBase: ENV.plugins.WALDUR_CORE.MATOMO_URL_BASE,
+      siteId: ENV.plugins.WALDUR_CORE.MATOMO_SITE_ID,
+    });
   initSentry();
   initAuthToken();
   store.dispatch(initConfig(ENV));
