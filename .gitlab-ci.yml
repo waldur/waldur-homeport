@@ -66,10 +66,11 @@ Run code duplication detection:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       changes:
         - src/**/*
+        - .gitlab-ci.yml
   script:
     - npm install -g jscpd
     - echo "limit to proposals only for now"
-    - npx jscpd  src/proposals --exitCode 1 -r consoleFull --pattern "**/*.scss"
+    - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.scss"
 
 Run jest tests:
   stage: test
