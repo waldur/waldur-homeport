@@ -15,10 +15,6 @@ const ProjectsList = lazyComponent(
   () => import('@waldur/project/ProjectsList'),
   'ProjectsList',
 );
-const ProjectCreateContainer = lazyComponent(
-  () => import('../project/ProjectCreateContainer'),
-  'ProjectCreateContainer',
-);
 const CustomerDashboard = lazyComponent(
   () => import('./dashboard/CustomerDashboard'),
   'CustomerDashboard',
@@ -276,12 +272,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Payments list'),
     },
-  },
-
-  {
-    name: 'organization.createProject',
-    url: 'createProject/',
-    component: ProjectCreateContainer,
   },
 
   {

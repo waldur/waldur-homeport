@@ -2495,7 +2495,6 @@ msgid "Create port"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/project/ProjectCreateContainer.tsx
 #: src/project/ProjectCreateDialog.tsx
 msgid "Create project"
 msgstr ""

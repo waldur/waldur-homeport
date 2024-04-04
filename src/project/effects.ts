@@ -16,7 +16,6 @@ import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import {
   createProject,
-  gotoProjectList,
   updateProject,
   DELETE_PROJECT,
   moveProject,
@@ -54,13 +53,6 @@ function* handleCreateProject(action) {
     }
     yield put(createProject.failure(formError));
   }
-}
-
-function* handleGotoProjectList() {
-  const customer = yield select(getCustomer);
-  yield put(
-    triggerTransition('organization.projects', { uuid: customer.uuid }),
-  );
 }
 
 export function* handleUpdateProject(action) {
@@ -149,7 +141,6 @@ function* handleProjectDelete(action) {
 
 export default function* projectSaga() {
   yield takeEvery(createProject.REQUEST, handleCreateProject);
-  yield takeEvery(gotoProjectList.REQUEST, handleGotoProjectList);
   yield takeEvery(updateProject.REQUEST, handleUpdateProject);
   yield takeEvery(moveProject.REQUEST, handleMoveProject);
   yield takeEvery(DELETE_PROJECT, handleProjectDelete);

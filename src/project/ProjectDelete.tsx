@@ -10,11 +10,11 @@ import { Project } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 
-interface DispatchProps {
+interface ProjectDeleteProps {
   project: Project;
 }
 
-const PureProjectDelete: React.FC<DispatchProps> = (props) => {
+export const ProjectDelete: React.FC<ProjectDeleteProps> = (props) => {
   const [confirm, setConfirm] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector(getUser);
@@ -63,5 +63,3 @@ const PureProjectDelete: React.FC<DispatchProps> = (props) => {
     </Card>
   ) : null;
 };
-
-export const ProjectDelete = PureProjectDelete;
