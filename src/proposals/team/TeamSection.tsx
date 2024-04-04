@@ -34,10 +34,19 @@ const tabs: TabSpec<GenericInvitationContext>[] = [
 export const TeamSection: FC<GenericInvitationContext & { title: string }> = (
   props,
 ) => {
+  const hideRole = props.roles && props.roles.length === 1;
+
   const [tab, setTab] = useState<TabSpec<GenericInvitationContext>>(tabs[0]);
+  const usersFilter = useMemo(
+    () => ({
+      role: props.roles,
+    }),
+    [props.roles],
+  );
   const usersTable = useTable({
-    table: 'UsersListList',
+    table: `UserList${props.title}`,
     fetchData: createFetcher(`${props.scope.url}list_users/`),
+    filter: usersFilter,
   });
 
   const invitationsFilter = useMemo(
@@ -45,7 +54,7 @@ export const TeamSection: FC<GenericInvitationContext & { title: string }> = (
     [props.scope],
   );
   const invitationsTable = useTable({
-    table: 'user-invitations',
+    table: `UserInvitations${props.title}`,
     fetchData: createFetcher('user-invitations'),
     queryField: 'email',
     filter: invitationsFilter,
@@ -67,7 +76,7 @@ export const TeamSection: FC<GenericInvitationContext & { title: string }> = (
   });
 
   return (
-    <Card className="mb-7" id="reviewers">
+    <Card>
       <Card.Header>
         <Card.Title>
           <h3>{props.title}</h3>
@@ -87,10 +96,14 @@ export const TeamSection: FC<GenericInvitationContext & { title: string }> = (
       </Card.Header>
       <Card.Body className="p-0 min-h-550px">
         {tab.key === 'users' && (
-          <UsersList table={usersTable} scope={props.scope} />
+          <UsersList
+            table={usersTable}
+            scope={props.scope}
+            hideRole={hideRole}
+          />
         )}
         {tab.key === 'invitations' && (
-          <InvitationsList table={invitationsTable} />
+          <InvitationsList table={invitationsTable} hideRole={hideRole} />
         )}
         {tab.key === 'permissions' && <TableComponent {...eventsTable} />}
       </Card.Body>

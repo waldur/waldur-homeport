@@ -32,7 +32,15 @@ export const AddUserDialog = reduxForm<
   AddUserDialogProps
 >({
   form: FORM_ID,
-})(({ submitting, handleSubmit, refetch, invalid, scope, roleTypes }) => {
+})(({
+  submitting,
+  handleSubmit,
+  refetch,
+  invalid,
+  scope,
+  roleTypes,
+  roles,
+}) => {
   const dispatch = useDispatch();
 
   const getOptionLabel = (option) =>
@@ -46,7 +54,7 @@ export const AddUserDialog = reduxForm<
         scope: scope.url,
         user: formData.user.uuid,
         expiration_time: formData.expiration_time,
-        role: formData.role.name,
+        role: roles && roles.length === 1 ? roles[0] : formData.role.name,
       });
       await refetch();
       dispatch(showSuccess('User has been added.'));
@@ -76,7 +84,7 @@ export const AddUserDialog = reduxForm<
             required={true}
             validate={[required]}
           />
-          <RoleGroup types={roleTypes} />
+          {roles && roles.length === 1 ? null : <RoleGroup types={roleTypes} />}
           <ExpirationTimeGroup />
         </FormContainer>
       </Modal.Body>
