@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { Category } from '@waldur/marketplace/types';
-import './CategoryCard.scss';
+import '@waldur/marketplace/category/list/CategoryCard.scss';
 
 interface CategoryCardProps {
   category: Category;

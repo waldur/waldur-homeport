@@ -9,7 +9,8 @@
     overflow: hidden;
     padding-bottom: 10px;
 
-    & > img {
+    & > img,
+    & > span {
       display: block;
       height: 4em;
       width: 4em;

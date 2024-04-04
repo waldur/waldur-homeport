@@ -3084,7 +3084,6 @@ msgstr ""
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "Deploy"
 msgstr ""
 
@@ -9391,7 +9390,6 @@ msgstr ""
 
 #: src/marketplace/category/list/OfferingCard.tsx
 #: src/marketplace/common/OfferingCard.tsx
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
 msgstr ""
 
@@ -12146,7 +12144,7 @@ msgstr ""
 msgid "There are not namespaces in this project yet."
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard.tsx
+#: src/marketplace/common/OfferingDescription.tsx
 msgid "There is no description"
 msgstr ""
 
@@ -14456,7 +14454,6 @@ msgid "View all"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderOfferingCardButtonsOverlay.tsx
 msgid "View item"
 msgstr ""
 

@@ -4,13 +4,13 @@ import { compose } from 'redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { OfferingCard } from '@waldur/marketplace/common/OfferingCard';
 import {
   OFFERING_CATEGORY_SECTION_FORM_ID,
   SERVICE_PROVIDER_OFFERING_GRID,
 } from '@waldur/marketplace/offerings/service-providers/constants';
 import { GRID_PAGE_SIZE_CONFIG } from '@waldur/marketplace/offerings/service-providers/shared/grid/constants';
 import Grid from '@waldur/marketplace/offerings/service-providers/shared/grid/Grid';
-import { ServiceProviderOfferingDetailsCard } from '@waldur/marketplace/offerings/service-providers/shared/ServiceProviderOfferingDetailsCard';
 import { RootState } from '@waldur/store/reducers';
 import { connectTable, createFetcher } from '@waldur/table';
 import { updatePageSize } from '@waldur/table/actions';
@@ -33,7 +33,9 @@ const GridComponent: FunctionComponent<any> = (props) => {
     <Grid
       {...props}
       verboseName={translate('Service provider offerings')}
-      gridItemComponent={ServiceProviderOfferingDetailsCard}
+      gridItemComponent={({ row }) => (
+        <OfferingCard offering={row} className="w-100 mw-300px" />
+      )}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hideGridHeader={true}
     />
