@@ -4,6 +4,7 @@ import { Category, ServiceProvider } from '@waldur/marketplace/types';
 
 import { ServiceProviderEditorButton } from './ServiceProviderEditorButton';
 import { Logo } from './shared/Logo';
+import '@waldur/marketplace/category/HeroSection.scss';
 import './ServiceProviderHeroSection.scss';
 
 interface ServiceProviderHeroSectionProps {
@@ -16,7 +17,7 @@ export const ServiceProviderHeroSection: FunctionComponent<
   ServiceProviderHeroSectionProps
 > = (props) => {
   return (
-    <div className="serviceProvider-category-hero">
+    <div className="category-hero">
       <div className="category-hero__background-left">
         <div className="category-hero__table">
           <div className="category-hero__main">

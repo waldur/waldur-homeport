@@ -4,7 +4,7 @@ import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
 
 import { AllCategoriesLink } from '../links/AllCategoriesLink';
-import './CategoryCard.scss';
+import '@waldur/marketplace/category/list/CategoryCard.scss';
 
 const icon = require('@waldur/images/logo_w.svg');
 
