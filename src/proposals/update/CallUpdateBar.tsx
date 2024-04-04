@@ -50,6 +50,10 @@ export const CallUpdateBar: FunctionComponent<CallUpdateBarProps> = ({
         title: translate('Reviewers'),
       },
       {
+        key: 'managers',
+        title: translate('Managers'),
+      },
+      {
         key: 'offerings',
         title: translate('Offerings'),
       },

@@ -18,5 +18,6 @@ export interface Invitation {
 }
 export interface GenericInvitationContext {
   scope?: { url: string; uuid: string };
-  roleTypes: RoleType[];
+  roleTypes?: RoleType[];
+  roles?: string[];
 }

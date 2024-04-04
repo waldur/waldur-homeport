@@ -53,11 +53,13 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
   // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
   const roles = useMemo(
     () =>
-      ENV.roles.filter(
-        (role) =>
-          InvitationPolicyService.canManageRole(context, role) &&
-          role.is_active,
-      ),
+      context.roles
+        ? ENV.roles.filter((role) => context.roles.includes(role.name))
+        : ENV.roles.filter(
+            (role) =>
+              InvitationPolicyService.canManageRole(context, role) &&
+              role.is_active,
+          ),
     [context],
   );
   const defaultRoleAndProject = useMemo(

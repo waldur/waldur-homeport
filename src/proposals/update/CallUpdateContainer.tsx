@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { PageBarProvider } from '@waldur/marketplace/context';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { RoleEnum } from '@waldur/permissions/enums';
 
 import { getProtectedCall } from '../api';
 import { TeamSection } from '../team/TeamSection';
@@ -59,11 +60,22 @@ export const CallUpdateContainer: FunctionComponent = () => {
             loading={isRefetching}
           />
           <CallDocumentsSection call={call} refetch={refetch} />
-          <TeamSection
-            scope={call}
-            roleTypes={['call']}
-            title={translate('Reviewers')}
-          />
+          <div className="mb-7" id="reviewers">
+            <TeamSection
+              scope={call}
+              roles={[RoleEnum.CALL_REVIEWER]}
+              roleTypes={['call']}
+              title={translate('Reviewers')}
+            />
+          </div>
+          <div className="mb-7" id="managers">
+            <TeamSection
+              scope={call}
+              roles={[RoleEnum.CALL_MANAGER]}
+              roleTypes={['call']}
+              title={translate('Managers')}
+            />
+          </div>
           <CallOfferingsSection call={call} />
         </div>
       </div>

@@ -5729,6 +5729,11 @@ msgstr ""
 msgid "Management offering"
 msgstr ""
 
+#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/CallUpdateContainer.tsx
+msgid "Managers"
+msgstr ""
+
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Map waldur users to service desk agents"
 msgstr ""
@@ -9783,7 +9788,6 @@ msgstr ""
 
 #: src/proposals/review/CustomerReviewsList.tsx
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
-#: src/proposals/team/UsersList.tsx
 msgid "Reviewer"
 msgstr ""
 
@@ -13991,6 +13995,7 @@ msgstr ""
 #: src/project/team/AddUserDialog.tsx
 #: src/project/team/UserGroup.tsx
 #: src/proposals/team/AddUserDialog.tsx
+#: src/proposals/team/UsersList.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "User"
 msgstr ""

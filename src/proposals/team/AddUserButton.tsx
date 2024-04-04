@@ -27,7 +27,17 @@ export const AddUserButton: React.FC<AddUserDialogProps> = (props) => {
   );
   return (
     <ActionButton
-      action={() => dispatch(openModalDialog(AddUserDialog, props))}
+      action={() =>
+        dispatch(
+          openModalDialog(AddUserDialog, {
+            ...props,
+            initialValues:
+              props.roles && props.roles.length === 1
+                ? { role: props.roles[0] }
+                : {},
+          }),
+        )
+      }
       title={translate('Add user')}
       icon="fa fa-plus"
       disabled={disabled}

@@ -9,7 +9,10 @@ import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandabl
 import { RoleField } from '@waldur/invitations/RoleField';
 import { Table } from '@waldur/table';
 
-export const InvitationsList: FunctionComponent<any> = ({ table }) => {
+export const InvitationsList: FunctionComponent<any> = ({
+  table,
+  hideRole,
+}) => {
   return (
     <Table
       {...table}
@@ -28,10 +31,12 @@ export const InvitationsList: FunctionComponent<any> = ({ table }) => {
           ),
           orderField: 'email',
         },
-        {
-          title: translate('Role'),
-          render: ({ row }) => <RoleField invitation={row} />,
-        },
+        hideRole
+          ? undefined
+          : {
+              title: translate('Role'),
+              render: ({ row }) => <RoleField invitation={row} />,
+            },
         {
           title: translate('Status'),
           orderField: 'state',
@@ -47,7 +52,7 @@ export const InvitationsList: FunctionComponent<any> = ({ table }) => {
           orderField: 'expires',
           render: ({ row }) => formatDate(row.expires),
         },
-      ]}
+      ].filter(Boolean)}
       hoverableRow={({ row }) => (
         <>
           <InvitationSendButton invitation={row} />

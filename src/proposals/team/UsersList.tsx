@@ -7,25 +7,28 @@ import { RoleField } from '@waldur/user/affiliations/RoleField';
 
 import { UserRemoveButton } from './UserRemoveButton';
 
-export const UsersList: FC<any> = ({ table, scope }) => {
+export const UsersList: FC<any> = ({ table, scope, hideRole }) => {
+  const columns = [
+    {
+      title: translate('User'),
+      render: ({ row }) => <>{row.user_full_name || row.user_username}</>,
+    },
+    {
+      title: translate('Email'),
+      render: ({ row }) => <>{row.user_email}</>,
+    },
+  ];
+  if (!hideRole) {
+    columns.push({
+      title: translate('Role'),
+      render: RoleField,
+    });
+  }
   return (
     <Table<GenericPermission>
       {...table}
       className="mb-7"
-      columns={[
-        {
-          title: translate('Reviewer'),
-          render: ({ row }) => <>{row.user_full_name || row.user_username}</>,
-        },
-        {
-          title: translate('Email'),
-          render: ({ row }) => <>{row.user_email}</>,
-        },
-        {
-          title: translate('Role'),
-          render: RoleField,
-        },
-      ]}
+      columns={columns}
       title={translate('Users')}
       verboseName={translate('users')}
       hoverableRow={({ row }) => (
