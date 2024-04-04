@@ -71,6 +71,7 @@ Run code duplication detection:
     - npm install -g jscpd
     - echo "limit to proposals only for now"
     - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.scss"
+    - npx jscpd src/ --exitCode 1 -r consoleFull --pattern "**/*.tsx" -k 250
 
 Run jest tests:
   stage: test

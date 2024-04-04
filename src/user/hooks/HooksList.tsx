@@ -64,7 +64,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hoverableRow={({ row }) => (
         <div className="list_active_button_container">
           <HookUpdateButton row={row} />
-          <HookRemoveButton uuid={row.uuid} url={row.url} />
+          <HookRemoveButton url={row.url} refetch={props.fetch} />
         </div>
       )}
       enableExport={true}
