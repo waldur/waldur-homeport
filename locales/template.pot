@@ -224,8 +224,6 @@ msgstr ""
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/paypal/InvoiceActions.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 #: src/project/ProjectsListActions.tsx
 #: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -1718,10 +1716,6 @@ msgstr ""
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/proposals/utils.ts
 msgid "Canceled"
-msgstr ""
-
-#: src/paypal/InvoicesFilter.tsx
-msgid "Cancelled"
 msgstr ""
 
 #: src/openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx
@@ -3427,15 +3421,10 @@ msgstr ""
 msgid "Download full price list"
 msgstr ""
 
-#: src/paypal/InvoiceActions.tsx
-msgid "Download invoice"
-msgstr ""
-
 #: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/marketplace/offerings/list/OfferingStateCell.tsx
 #: src/marketplace/offerings/list/OfferingStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
-#: src/paypal/InvoicesFilter.tsx
 #: src/proposals/utils.ts
 msgid "Draft"
 msgstr ""
@@ -3463,7 +3452,6 @@ msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/invoices/list/InvoicesList.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 msgid "Due date"
 msgstr ""
 
@@ -4721,7 +4709,6 @@ msgstr ""
 msgid "Home directory prefix"
 msgstr ""
 
-#: src/customer/create/DomainGroup.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 msgid "Home organization domain name"
 msgstr ""
@@ -5248,7 +5235,6 @@ msgstr ""
 
 #: src/invoices/details/InvoiceDetails.tsx
 #: src/invoices/list/InvoicesList.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 msgid "Invoice date"
 msgstr ""
 
@@ -5280,10 +5266,6 @@ msgstr ""
 msgid "Invoice has been successfully unlinked from payment."
 msgstr ""
 
-#: src/paypal/InvoiceActions.tsx
-msgid "Invoice has not been sent to PayPal yet"
-msgstr ""
-
 #: src/invoices/details/InvoiceItemDelete.tsx
 msgid "Invoice item has been removed."
 msgstr ""
@@ -5293,7 +5275,6 @@ msgid "Invoice item has been updated."
 msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 msgid "Invoice number"
 msgstr ""
 
@@ -7526,7 +7507,6 @@ msgid "Page is not found. You've either entered invalid URL or trying to reach d
 msgstr ""
 
 #: src/invoices/list/InvoicesFilter.tsx
-#: src/paypal/InvoicesFilter.tsx
 #: src/reporting/invoices/utils.ts
 msgid "Paid"
 msgstr ""
@@ -7591,10 +7571,6 @@ msgstr ""
 msgid "Pay"
 msgstr ""
 
-#: src/paypal/InvoiceActions.tsx
-msgid "Pay invoice"
-msgstr ""
-
 #: src/paypal/events.ts
 msgid "Payment events"
 msgstr ""
@@ -7639,10 +7615,6 @@ msgstr ""
 #: src/paypal/PaymentApprove.tsx
 #: src/paypal/PaymentCancel.tsx
 msgid "Payment is being processed, please wait."
-msgstr ""
-
-#: src/paypal/InvoicesFilter.tsx
-msgid "Payment pending"
 msgstr ""
 
 #: src/customer/payment-profiles/store/effects.ts
@@ -8192,7 +8164,6 @@ msgstr ""
 #: src/invoices/list/InvoicesList.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 msgid "Price"
 msgstr ""
 
@@ -10620,10 +10591,6 @@ msgstr ""
 msgid "Sending status"
 msgstr ""
 
-#: src/paypal/InvoicesFilter.tsx
-msgid "Sent"
-msgstr ""
-
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
 msgid "Server"
 msgstr ""
@@ -11235,7 +11202,6 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
@@ -11640,7 +11606,6 @@ msgstr ""
 #: src/customer/details/CustomerBillingPanel.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/invoices/list/InvoicesList.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 msgid "Tax"
 msgstr ""
 
@@ -11790,7 +11755,6 @@ msgstr ""
 
 #: src/about.tsx
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/marketplace/orders/TermsOfService.tsx
 #: src/marketplace/orders/TermsOfServiceDialog.tsx
 msgid "Terms of Service"
 msgstr ""
@@ -12306,7 +12270,6 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 #: src/reporting/invoices/utils.ts
 msgid "Total"
 msgstr ""
@@ -13675,10 +13638,6 @@ msgstr ""
 msgid "Unlink resource"
 msgstr ""
 
-#: src/paypal/InvoicesFilter.tsx
-msgid "Unpaid"
-msgstr ""
-
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 msgid "Unpause"
 msgstr ""
@@ -14988,7 +14947,6 @@ msgid "invitations"
 msgstr ""
 
 #: src/invoices/list/InvoicesList.tsx
-#: src/paypal/PayPalInvoicesList.tsx
 msgid "invoices"
 msgstr ""
 

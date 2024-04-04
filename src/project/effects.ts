@@ -18,7 +18,6 @@ import {
   createProject,
   gotoProjectList,
   updateProject,
-  GOTO_PROJECT_CREATE,
   DELETE_PROJECT,
   moveProject,
 } from './actions';
@@ -55,13 +54,6 @@ function* handleCreateProject(action) {
     }
     yield put(createProject.failure(formError));
   }
-}
-
-function* handleGotoProjectCreate() {
-  const customer = yield select(getCustomer);
-  yield put(
-    triggerTransition('organization.createProject', { uuid: customer.uuid }),
-  );
 }
 
 function* handleGotoProjectList() {
@@ -158,7 +150,6 @@ function* handleProjectDelete(action) {
 export default function* projectSaga() {
   yield takeEvery(createProject.REQUEST, handleCreateProject);
   yield takeEvery(gotoProjectList.REQUEST, handleGotoProjectList);
-  yield takeEvery(GOTO_PROJECT_CREATE, handleGotoProjectCreate);
   yield takeEvery(updateProject.REQUEST, handleUpdateProject);
   yield takeEvery(moveProject.REQUEST, handleMoveProject);
   yield takeEvery(DELETE_PROJECT, handleProjectDelete);
