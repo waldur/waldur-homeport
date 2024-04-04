@@ -9,15 +9,16 @@ import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
+import { HookRemoveButton } from '@waldur/user/hooks/HookRemoveButton';
 import { formatEventTitle } from '@waldur/user/hooks/utils';
 
 import {
   ADMIN_HOOKS_LIST_FILTER_FORM_ID,
   ADMIN_HOOK_LIST_ID,
 } from './constants';
-import { HookRemoveButton } from './HookRemoveButton';
 import { HooksListFilter } from './HooksListFilter';
 import { HookUpdateButton } from './HookUpdateButton';
+
 import '@waldur/user/hooks/HookList.scss';
 
 const StateField = ({ row }) => {
@@ -105,7 +106,7 @@ export const HooksList: FunctionComponent<any> = () => {
       hoverableRow={({ row }) => (
         <div className="list_active_button_container">
           <HookUpdateButton row={row} />
-          <HookRemoveButton uuid={row.uuid} url={row.url} />
+          <HookRemoveButton refetch={tableProps.fetch} url={row.url} />
         </div>
       )}
       enableExport={true}

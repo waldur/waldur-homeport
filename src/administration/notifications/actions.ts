@@ -7,16 +7,6 @@ const HookDetailsDialog = lazyComponent(
   () => import('@waldur/user/hooks/HookDetailsDialog'),
   'HookDetailsDialog',
 );
-const HookRemoveDialog = lazyComponent(
-  () => import('@waldur/user/hooks/HookRemoveDialog'),
-  'HookRemoveDialog',
-);
-
-export const showHookRemoveConfirmation = (action: () => void) =>
-  openModalDialog(HookRemoveDialog, {
-    resolve: { action, listId: ADMIN_HOOK_LIST_ID },
-    size: 'md',
-  });
 
 export const showHookUpdateDialog = (row?) =>
   openModalDialog(HookDetailsDialog, {
