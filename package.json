@@ -241,5 +241,12 @@
       "no-descending-specificity": null,
       "scss/load-no-partial-leading-underscore": null
     }
+  },
+  "jscpd": {
+    "ignore": [
+      "src/form/BoxNumberField.scss",
+      "src/metronic/sass/core/components/buttons/_theme.scss",
+      "src/metronic/sass/core/base/functions/_get.scss"
+    ]
   }
 }
