@@ -3,7 +3,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { SupportFeatures } from '@waldur/FeaturesEnums';
+import { FeaturesEnum, SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import './ReportingWidgets.scss';
 
@@ -16,7 +16,7 @@ interface ReportingWidget {
     type: 'Number' | 'String' | 'Date';
   }>;
   to: { state; params? };
-  feature?: string;
+  feature?: FeaturesEnum;
 }
 
 const generateWidgetsData = (): ReportingWidget[] => [

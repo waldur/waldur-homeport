@@ -94,7 +94,7 @@ export const EmailsListGroup = ({
                           />
                         </td>
                         {isFeatureVisible(
-                          'invitations.conceal_civil_number',
+                          InvitationsFeatures.conceal_civil_number,
                         ) ? null : (
                           <td>
                             <CivilNumberGroup
@@ -107,7 +107,7 @@ export const EmailsListGroup = ({
                           InvitationsFeatures.show_tax_number,
                         ) &&
                           isFeatureVisible(
-                            'invitation.require_user_details',
+                            InvitationsFeatures.require_user_details,
                           ) && (
                             <td>
                               <TaxNumberGroup

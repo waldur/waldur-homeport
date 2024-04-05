@@ -55,3 +55,15 @@ export enum UserFeatures {
   preferred_language = 'user.preferred_language',
   ssh_keys = 'user.ssh_keys',
 }
+
+export type FeaturesEnum =
+  | CustomerFeatures
+  | InvitationsFeatures
+  | MarketplaceFeatures
+  | OpenstackFeatures
+  | ProjectFeatures
+  | RancherFeatures
+  | SlurmFeatures
+  | SupportFeatures
+  | UserFeatures
+;

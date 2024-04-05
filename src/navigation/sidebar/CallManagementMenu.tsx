@@ -2,6 +2,7 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useSelector } from 'react-redux';
 
 import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -13,7 +14,7 @@ export const CallManagementMenu = () => {
   const customer = useSelector(getCustomer);
   const { state } = useCurrentStateAndParams();
   const visible = isFeatureVisible(
-    'marketplace.show_call_management_functionality',
+    MarketplaceFeatures.show_call_management_functionality,
   );
   if (!visible || !customer?.call_managing_organization_uuid) {
     return null;

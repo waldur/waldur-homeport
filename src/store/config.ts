@@ -1,4 +1,5 @@
 import { ApplicationConfigurationOptions } from '@waldur/core/types';
+import { FeaturesEnum } from '@waldur/FeaturesEnums';
 
 import { RootState } from './reducers';
 
@@ -39,7 +40,7 @@ export const reducer = (
 
 export const getConfig = (state: RootState) => state.config;
 
-const isVisibleSelector = (feature: string) => (state: RootState) => {
+const isVisibleSelector = (feature: FeaturesEnum) => (state: RootState) => {
   if (feature === undefined || feature === null) {
     return true;
   }
@@ -49,7 +50,7 @@ const isVisibleSelector = (feature: string) => (state: RootState) => {
   return state.config.FEATURES[feature];
 };
 
-export const isVisible = (state: RootState, feature: string): boolean => {
+export const isVisible = (state: RootState, feature: FeaturesEnum): boolean => {
   return isVisibleSelector(feature)(state);
 };
 

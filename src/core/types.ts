@@ -2,11 +2,12 @@ import { StateDeclaration as BaseStateDeclaration } from '@uirouter/core';
 import { ComponentType } from 'react';
 
 import { PluginConfiguration } from '@waldur/auth/types';
+import { FeaturesEnum } from '@waldur/FeaturesEnums';
 import { Role } from '@waldur/permissions/types';
 
 interface DataDeclaration {
   /** State is disabled as long as its feature is disabled */
-  feature: string;
+  feature: FeaturesEnum;
   /** Authenticated view is protected from anonymous user.
    * When anonymous user tries to access protected state, he is redirected to login view.
    */

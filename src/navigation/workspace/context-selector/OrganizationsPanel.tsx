@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 import { getCustomerPermission } from '@waldur/permissions/utils';
@@ -163,7 +164,7 @@ export const OrganizationListItem: FunctionComponent<{
         )}
         {item?.call_managing_organization_uuid &&
           isFeatureVisible(
-            'marketplace.show_call_management_functionality',
+            MarketplaceFeatures.show_call_management_functionality,
           ) && (
             <div className="actions ms-auto">
               {hasOrganizationPermission ? (
