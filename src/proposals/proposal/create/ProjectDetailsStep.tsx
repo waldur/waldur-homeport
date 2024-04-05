@@ -2,7 +2,7 @@ import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
-import { required } from '@waldur/core/validators';
+import { number, required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { FormGroup, SelectField, StringField, TextField } from '@waldur/form';
@@ -107,7 +107,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         name="duration_in_days"
         component={FormGroup}
         label={translate('Project duration in days')}
-        validate={required}
+        validate={[required, number]}
         required
         floating
       >

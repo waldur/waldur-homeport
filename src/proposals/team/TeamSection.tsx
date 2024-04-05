@@ -31,9 +31,12 @@ const tabs: TabSpec<GenericInvitationContext>[] = [
   },
 ];
 
-export const TeamSection: FC<GenericInvitationContext & { title: string }> = (
-  props,
-) => {
+export const TeamSection: FC<
+  GenericInvitationContext & {
+    title: string;
+    change?(field: string, value: any): void;
+  }
+> = (props) => {
   const hideRole = props.roles && props.roles.length === 1;
 
   const [tab, setTab] = useState<TabSpec<GenericInvitationContext>>(tabs[0]);
@@ -47,6 +50,11 @@ export const TeamSection: FC<GenericInvitationContext & { title: string }> = (
     table: `UserList${props.title}`,
     fetchData: createFetcher(`${props.scope.url}list_users/`),
     filter: usersFilter,
+    onFetch(rows) {
+      if (props.change) {
+        props.change('users', rows);
+      }
+    },
   });
 
   const invitationsFilter = useMemo(

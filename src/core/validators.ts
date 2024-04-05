@@ -14,6 +14,9 @@ export const isGuid = (value) => {
 export const required = (value) =>
   value || value === 0 ? undefined : translate('This field is required.');
 
+export const number = (value) =>
+  !value || !isNaN(value) ? undefined : translate('Must be a number.');
+
 export const max = (length) => (value) =>
   value && value.length > length
     ? translate(`Must be ${length} characters or less.`)

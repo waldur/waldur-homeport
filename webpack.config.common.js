@@ -7,7 +7,7 @@ const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const { addDisplayNameTransformer } = require('./ts-react-display-name')
+const { addDisplayNameTransformer } = require('./ts-react-display-name');
 const utils = require('./webpack.utils');
 const scssPath = path.resolve('./src/');
 const imagesPath = path.resolve('./src/images');

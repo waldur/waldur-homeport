@@ -10,30 +10,39 @@ interface ProgressStepsProps {
   className?: string;
 }
 
+const sortedSteps = [
+  {
+    label: translate('Submission'),
+    state: ['draft'],
+  },
+  {
+    label: translate('Verify team'),
+    state: ['team_verification'],
+  },
+  {
+    label: translate('Review'),
+    state: ['in_review', 'submitted'],
+  },
+  {
+    label: translate('Updates'),
+    state: ['in_revision'],
+  },
+  {
+    label: translate('Accepted'),
+    state: ['accepted'],
+  },
+];
+
 const getSteps = (proposal: Proposal) => {
   const steps: Array<{ label; description?; completed; color? }> = [];
-  steps.push({
-    label: translate('Submission'),
-    completed: proposal.state === 'team_verification',
+  const currentStateIndex =
+    sortedSteps.findIndex((step) => step.state.includes(proposal.state)) - 1;
+  sortedSteps.forEach((step, i) => {
+    steps.push({
+      label: step.label,
+      completed: i <= currentStateIndex,
+    });
   });
-  steps.push(
-    {
-      label: translate('Verify team'),
-      completed: proposal.state === 'in_review',
-    },
-    {
-      label: translate('Review'),
-      completed: proposal.state === 'in_revision',
-    },
-    {
-      label: translate('Updates'),
-      completed: proposal.state === 'in_revision',
-    },
-    {
-      label: translate('Accepted'),
-      completed: proposal.state === 'accepted',
-    },
-  );
   return steps;
 };
 

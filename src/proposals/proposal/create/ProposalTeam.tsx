@@ -7,13 +7,17 @@ import { ProjectDetailsSummary } from './ProjectDetailsSummary';
 import { ProposalHeader } from './ProposalHeader';
 import { ResourceRequestsSummary } from './ResourceRequestsSummary';
 
-export const ProposalTeam: FC<{ proposal }> = ({ proposal }) => (
+export const ProposalTeam: FC<{
+  proposal;
+  change(field: string, value: any): void;
+}> = ({ proposal, change }) => (
   <>
     <ProposalHeader proposal={proposal} />
     <TeamSection
       scope={proposal}
       roleTypes={['proposal']}
       title={translate('Proposed project team')}
+      change={change}
     />
     <ProjectDetailsSummary proposal={proposal} />
     <ResourceRequestsSummary proposal={proposal} />

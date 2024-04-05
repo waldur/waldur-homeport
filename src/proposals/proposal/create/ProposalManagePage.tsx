@@ -3,8 +3,6 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { FormSteps } from '@waldur/form/FormSteps';
-import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
@@ -14,7 +12,7 @@ import { ProposalDetails } from '../ProposalDetails';
 
 import { ProgressSteps } from './ProgressSteps';
 import { ProposalSubmissionStep } from './ProposalSubmissionStep';
-import { ProposalTeam } from './ProposalTeam';
+import { ProposalTeamVerificationStep } from './ProposalTeamVerificationStep';
 
 export const ProposalManagePage = () => {
   useFullPage();
@@ -44,21 +42,7 @@ export const ProposalManagePage = () => {
     <>
       <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
       {proposal.state === 'team_verification' ? (
-        <SidebarLayout.Container>
-          <SidebarLayout.Body>
-            <ProposalTeam proposal={proposal} />
-          </SidebarLayout.Body>
-          <SidebarLayout.Sidebar>
-            <FormSteps
-              steps={[
-                {
-                  label: translate('Proposed project team'),
-                  id: 'step-team',
-                },
-              ]}
-            />
-          </SidebarLayout.Sidebar>
-        </SidebarLayout.Container>
+        <ProposalTeamVerificationStep proposal={proposal} refetch={refetch} />
       ) : (
         <ProposalSubmissionStep proposal={proposal} refetch={refetch} />
       )}
