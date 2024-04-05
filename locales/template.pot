@@ -11932,10 +11932,6 @@ msgstr ""
 msgid "The organization group has been updated."
 msgstr ""
 
-#: src/marketplace/details/ProjectField.tsx
-msgid "The project will be changed for all items in cart."
-msgstr ""
-
 #: src/administration/roles/RoleToggleButton.tsx
 msgid "The role has been disabled"
 msgstr ""
