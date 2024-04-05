@@ -41,6 +41,9 @@ export const FormAbstractVolumeStep = (
     if (hideVolumeTypeSelector) {
       return;
     }
+    if (volumeType) {
+      return;
+    }
     if (data?.defaultVolumeType) {
       change(props.typeField, data.defaultVolumeType);
     }
@@ -49,6 +52,7 @@ export const FormAbstractVolumeStep = (
     change,
     props.typeField,
     hideVolumeTypeSelector,
+    volumeType,
   ]);
 
   const quotaName = volumeType ? `gigabytes_${volumeType.name}` : 'storage';
