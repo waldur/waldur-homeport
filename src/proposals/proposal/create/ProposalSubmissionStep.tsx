@@ -1,6 +1,9 @@
+import { get } from 'lodash';
 import { FC, createRef, useCallback, useMemo, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 
+import { isEmpty } from '@waldur/core/utils';
 import { Form } from '@waldur/form/Form';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
@@ -9,11 +12,15 @@ import {
   switchProposalToTeamVerification,
   updateProposalProjectDetails,
 } from '@waldur/proposals/api';
+import { PROPOSAL_UPDATE_SUBMISSION_FORM_ID } from '@waldur/proposals/constants';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { ProposalHeader } from './ProposalHeader';
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
+
+export const formDataSelector = (state) =>
+  (getFormValues(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) || {}) as any;
 
 export const ProposalSubmissionStep: FC<{ proposal; refetch }> = ({
   proposal,
@@ -29,6 +36,7 @@ export const ProposalSubmissionStep: FC<{ proposal; refetch }> = ({
       oecd_fos_2007_code: proposal.oecd_fos_2007_code,
       project_is_confidential: proposal.project_is_confidential,
       duration_in_days: proposal.duration_in_days,
+      resources: [],
     }),
     [proposal],
   );
@@ -77,36 +85,58 @@ export const ProposalSubmissionStep: FC<{ proposal; refetch }> = ({
     }
   };
 
+  const formData = useSelector(formDataSelector);
+  const completedSteps = useMemo(() => {
+    const result = stepRefs.current.map(() => false);
+    stepRefs.current.forEach((_, i) => {
+      let completed = false;
+      if (formSteps[i].required && formSteps[i].requiredFields?.length) {
+        completed = formSteps[i].requiredFields.every((fieldName) => {
+          const field = get(formData, fieldName);
+          return typeof field === 'object' ? !isEmpty(field) : Boolean(field);
+        });
+      } else {
+        completed = true;
+      }
+      result[i] = completed;
+    });
+    return result;
+  }, [formData, stepRefs.current, formSteps]);
+
   return (
     <Form
-      form="ProposalSubmissionStep"
+      form={PROPOSAL_UPDATE_SUBMISSION_FORM_ID}
       onSubmit={submitForm}
       initialValues={initialValues}
     >
-      <SidebarLayout.Container>
-        <SidebarLayout.Body>
-          <ProposalHeader proposal={proposal} />
+      {(formProps) => (
+        <SidebarLayout.Container>
+          <SidebarLayout.Body>
+            <ProposalHeader proposal={proposal} />
 
-          {formSteps.map((step, i) => (
-            <div ref={stepRefs.current[i]} key={step.id}>
-              <step.component
-                step={i + 1}
-                id={step.id}
-                title={step.label}
-                observed={false}
-                params={{ proposal, refetch }}
-              />
-            </div>
-          ))}
-        </SidebarLayout.Body>
-        <SidebarLayout.Sidebar>
-          <ProposalSidebar
-            steps={formSteps}
-            switchToTeam={switchToTeamCallback}
-            canSwitchToTeam={proposal.state === 'draft'}
-          />
-        </SidebarLayout.Sidebar>
-      </SidebarLayout.Container>
+            {formSteps.map((step, i) => (
+              <div ref={stepRefs.current[i]} key={step.id}>
+                <step.component
+                  step={i + 1}
+                  id={step.id}
+                  title={step.label}
+                  observed={completedSteps[i]}
+                  params={{ proposal, refetch, change: formProps.change }}
+                />
+              </div>
+            ))}
+          </SidebarLayout.Body>
+          <SidebarLayout.Sidebar>
+            <ProposalSidebar
+              steps={formSteps}
+              switchToTeam={switchToTeamCallback}
+              canSwitchToTeam={proposal.state === 'draft'}
+              submitting={formProps.submitting}
+              completedSteps={completedSteps}
+            />
+          </SidebarLayout.Sidebar>
+        </SidebarLayout.Container>
+      )}
     </Form>
   );
 };

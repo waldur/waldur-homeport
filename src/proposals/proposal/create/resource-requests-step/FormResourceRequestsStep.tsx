@@ -32,6 +32,7 @@ const mapPropsToFilter = createSelector(
 );
 export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params.proposal;
+  const change = props.params?.change;
   const readOnlyMode = props.params.readOnly;
   const {
     data: call,
@@ -61,6 +62,11 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
     table: 'ProposalResourcesList',
     fetchData: createFetcher('proposal-requested-resources'),
     filter,
+    onFetch(rows) {
+      if (change) {
+        change('resources', rows);
+      }
+    },
   });
 
   return (

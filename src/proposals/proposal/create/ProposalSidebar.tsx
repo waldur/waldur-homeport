@@ -1,50 +1,58 @@
 import { Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { getFormSyncErrors } from 'redux-form';
 
-import { FloatingButton } from '@waldur/form/FloatingButton';
+import { FloatingSubmitButton } from '@waldur/form/FloatingSubmitButton';
 import { FormSteps } from '@waldur/form/FormSteps';
 import { SidebarProps } from '@waldur/form/SidebarProps';
 import { translate } from '@waldur/i18n';
+import { PROPOSAL_UPDATE_SUBMISSION_FORM_ID } from '@waldur/proposals/constants';
 
 interface CompletionPageSidebarProps extends SidebarProps {
   canSwitchToTeam: boolean;
   switchToTeam(): void;
 }
 
-export const ProposalSidebar = (props: CompletionPageSidebarProps) => (
-  <>
-    <FormSteps steps={props.steps} completedSteps={props.completedSteps} />
-    {props.canSwitchToTeam && (
-      <>
-        <div className="d-flex justify-content-between mt-5">
-          <Button
-            size="sm"
-            variant="primary"
-            onClick={props.switchToTeam}
-            className="w-100"
-          >
-            {translate('To team verification')}
-          </Button>
-        </div>
+const formErrorsSelector = (state) =>
+  getFormSyncErrors(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) as any;
 
-        <p className="text-center fs-9 mt-2 mb-0">
-          {translate(
-            'Please make sure that project proposal details and resource requests are finalised. During team verification they will not be editable.',
-          )}
-        </p>
+export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
+  const errors = useSelector(formErrorsSelector);
 
-        <FloatingButton>
-          <Button
-            size="sm"
+  return (
+    <>
+      <FormSteps
+        steps={props.steps}
+        completedSteps={props.completedSteps}
+        errors={errors}
+      />
+      {props.canSwitchToTeam && (
+        <>
+          <div className="d-flex justify-content-between mt-5">
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={props.switchToTeam}
+              className="w-100"
+            >
+              {translate('To team verification')}
+            </Button>
+          </div>
+
+          <p className="text-center fs-9 mt-2 mb-0">
+            {translate(
+              'Please make sure that project proposal details and resource requests are finalised. During team verification they will not be editable.',
+            )}
+          </p>
+
+          <FloatingSubmitButton
+            submitting={props.submitting}
+            label={translate('Save draft')}
             variant="secondary"
-            type="submit"
-            disabled={props.submitting}
-            className="w-100"
-          >
-            {props.submitting && <i className="fa fa-spinner fa-spin me-1" />}
-            {translate('Save draft')}
-          </Button>
-        </FloatingButton>
-      </>
-    )}
-  </>
-);
+            errors={errors}
+          />
+        </>
+      )}
+    </>
+  );
+};

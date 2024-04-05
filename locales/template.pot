@@ -6086,6 +6086,10 @@ msgstr ""
 msgid "Must be 500 characters or less."
 msgstr ""
 
+#: src/core/validators.ts
+msgid "Must be a number."
+msgstr ""
+
 #: src/invitations/actions/CivilNumberGroup.tsx
 msgid "Must start with a country prefix ie EE34501234215"
 msgstr ""
@@ -8572,6 +8576,7 @@ msgstr ""
 
 #: src/permissions/constants.tsx
 #: src/proposals/proposal/CustomerProposalsList.tsx
+#: src/proposals/proposal/ProposalDetails.tsx
 #: src/proposals/proposal/UserProposalsList.tsx
 #: src/proposals/proposal/create/ProposalHeader.tsx
 #: src/proposals/review/CustomerReviewsList.tsx
@@ -8589,6 +8594,10 @@ msgstr ""
 
 #: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
 msgid "Proposal review created successfully"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalTeamVerificationStep.tsx
+msgid "Proposal submitted successfully"
 msgstr ""
 
 #: src/proposals/proposal/create/ProjectDetailsSummary.tsx
@@ -8670,8 +8679,8 @@ msgstr ""
 msgid "Proposed postal code: {value}."
 msgstr ""
 
-#: src/proposals/proposal/create/ProposalManagePage.tsx
 #: src/proposals/proposal/create/ProposalTeam.tsx
+#: src/proposals/proposal/create/ProposalTeamVerificationStep.tsx
 msgid "Proposed project team"
 msgstr ""
 
@@ -11082,6 +11091,7 @@ msgstr ""
 #: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
 #: src/proposals/proposal/create/ProposalSubmissionStep.tsx
+#: src/proposals/proposal/create/ProposalTeamVerificationStep.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Something went wrong"
@@ -11384,6 +11394,10 @@ msgstr ""
 #: src/slurm/details/SubmitJobAction.tsx
 #: src/slurm/details/SubmitJobDialog.tsx
 msgid "Submit job"
+msgstr ""
+
+#: src/proposals/proposal/create/ProposalTeamVerificationStep.tsx
+msgid "Submit proposal"
 msgstr ""
 
 #: src/marketplace/resources/report/SubmitReportAction.tsx

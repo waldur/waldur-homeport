@@ -7,7 +7,7 @@ import { RoleField } from '@waldur/user/affiliations/RoleField';
 
 import { UserRemoveButton } from './UserRemoveButton';
 
-export const UsersList: FC<any> = ({ table, scope, hideRole }) => {
+export const UsersList: FC<any> = ({ table, scope, hideRole, readOnly }) => {
   const columns = [
     {
       title: translate('User'),
@@ -31,13 +31,17 @@ export const UsersList: FC<any> = ({ table, scope, hideRole }) => {
       columns={columns}
       title={translate('Users')}
       verboseName={translate('users')}
-      hoverableRow={({ row }) => (
-        <UserRemoveButton
-          permission={row}
-          refetch={table.fetch}
-          scope={scope}
-        />
-      )}
+      hoverableRow={
+        readOnly
+          ? null
+          : ({ row }) => (
+              <UserRemoveButton
+                permission={row}
+                refetch={table.fetch}
+                scope={scope}
+              />
+            )
+      }
     />
   );
 };
