@@ -56,7 +56,7 @@ export enum UserFeatures {
   ssh_keys = 'user.ssh_keys',
 }
 
-export type FeaturesEnum =
+export type FeatureEnum =
   | CustomerFeatures
   | InvitationsFeatures
   | MarketplaceFeatures
