@@ -20,7 +20,7 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 import { getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
-import { getProject, getCustomer, getUser } from '@waldur/workspace/selectors';
+import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
 import { customerUsersAutocomplete } from './api';
@@ -125,7 +125,7 @@ export const AddUserDialog = reduxForm<
                 ? usersAutocomplete({ query }, prevOptions, page)
                 : customerUsersAutocomplete(
                     currentCustomer.uuid,
-                    { query },
+                    { full_name_and_email: query },
                     prevOptions,
                     page,
                   )
