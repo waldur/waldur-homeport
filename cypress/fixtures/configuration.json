@@ -17,7 +17,8 @@
       "phone_number",
       "organization"
     ],
-    "USER_MANDATORY_FIELDS": ["full_name", "email"]
+    "USER_MANDATORY_FIELDS": ["full_name", "email"],
+    "LANGUAGE_CHOICES": "en,it,de,es,et,fr,ar"
   },
   "WALDUR_AUTH_SOCIAL": {},
   "WALDUR_OPENSTACK": {
@@ -42,7 +43,6 @@
     "ENABLED": true
   },
   "LANGUAGES": [["en", "English"]],
-  "LANGUAGE_CHOICES": ["en"],
   "FEATURES": {
     "support": {
       "customers_list": true

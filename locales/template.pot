@@ -32,6 +32,10 @@ msgstr ""
 msgid "<Link>Terms of Service</Link> have been accepted on <Date></Date>"
 msgstr ""
 
+#: src/administration/languages/LanguageOptionsForm.tsx
+msgid "A list of languages available for selection has been updated"
+msgstr ""
+
 #: src/rancher/cluster/create/LonghornWorkerWarning.tsx
 msgid "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
 msgstr ""
@@ -5476,6 +5480,14 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#: src/administration/languages/AdministrationLanguages.tsx
+msgid "Language options"
+msgstr ""
+
+#: src/administration/routes.ts
+msgid "Languages"
+msgstr ""
+
 #: src/administration/TokensList.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Last name"
@@ -8049,6 +8061,10 @@ msgstr ""
 msgid "Please select a username that you will use for login into the Linux systems."
 msgstr ""
 
+#: src/administration/languages/LanguageOptionsForm.tsx
+msgid "Please select at least one language to save changes"
+msgstr ""
+
 #: src/openstack/openstack-instance/utils.ts
 msgid "Please select network."
 msgstr ""
@@ -10018,6 +10034,7 @@ msgstr ""
 #: src/administration/FeaturesList.tsx
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
 #: src/administration/agreements/UserAgreementsForm.tsx
+#: src/administration/languages/LanguageOptionsForm.tsx
 #: src/administration/providers/UpdateProviderDialog.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
@@ -13459,6 +13476,10 @@ msgstr ""
 msgid "Unable to update invoice item."
 msgstr ""
 
+#: src/administration/languages/LanguageOptionsForm.tsx
+msgid "Unable to update languages available for selection"
+msgstr ""
+
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 msgid "Unable to update logo."
 msgstr ""
@@ -14658,6 +14679,14 @@ msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 msgid "You can start filling this table by creating your first offering."
+msgstr ""
+
+#: src/administration/languages/LanguageOptionsForm.tsx
+msgid "You cannot unselect the current UI language"
+msgstr ""
+
+#: src/administration/languages/LanguageOptionsForm.tsx
+msgid "You cannot unselect the deafult language"
 msgstr ""
 
 #: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx

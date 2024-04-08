@@ -61,7 +61,9 @@ export async function loadConfig() {
   const config = {
     ...frontendSettings,
     plugins: backendSettings,
-    languageChoices: backendSettings.LANGUAGE_CHOICES.map((code) => ({
+    languageChoices: backendSettings.LANGUAGES.map(
+      (language) => language[0],
+    ).map((code) => ({
       code,
       label: languageLabels[code],
     })),

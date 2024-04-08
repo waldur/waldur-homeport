@@ -69,13 +69,13 @@
     ["en", "English"],
     ["et", "Eesti"]
   ],
-  "LANGUAGE_CHOICES": ["en", "et"],
   "LANGUAGE_CODE": "en",
   "WALDUR_CORE": {
     "CURRENCY_NAME": "EUR",
     "SITE_NAME": "Waldur",
     "SITE_EMAIL": "",
     "SITE_ADDRESS": "",
+    "LANGUAGE_CHOICES": "en,it,de,es,et,fr,ar",
     "SITE_PHONE": "",
     "SITE_DESCRIPTION": "Your single pane of control for managing projects, teams and resources in a self-service manner.",
     "MASTERMIND_URL": "",
