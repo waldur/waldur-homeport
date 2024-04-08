@@ -69,10 +69,10 @@
     ["en", "English"],
     ["et", "Eesti"]
   ],
-  "LANGUAGE_CHOICES": ["en", "et"],
   "LANGUAGE_CODE": "en",
   "WALDUR_CORE": {
     "CURRENCY_NAME": "EUR",
+    "LANGUAGE_CHOICES": "en,it,de,es,et,fr,ar",
     "SITE_NAME": "Waldur",
     "SITE_EMAIL": "",
     "SITE_ADDRESS": "",

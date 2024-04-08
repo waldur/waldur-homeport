@@ -87,6 +87,11 @@ const OrganizationGroupTypesList = lazyComponent(
   'OrganizationGroupTypesList',
 );
 
+const AdministrationLanguages = lazyComponent(
+  () => import('./languages/AdministrationLanguages'),
+  'AdministrationLanguages',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -150,6 +155,16 @@ export const states: StateDeclaration[] = [
     component: AdministrationBranding,
     data: {
       breadcrumb: () => translate('Branding'),
+    },
+  },
+
+  {
+    name: 'admin-languages',
+    url: 'languages/',
+    parent: 'admin-settings',
+    component: AdministrationLanguages,
+    data: {
+      breadcrumb: () => translate('Languages'),
     },
   },
 

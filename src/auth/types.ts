@@ -67,6 +67,7 @@ interface CoreConfiguration {
   COMMON_FOOTER_HTML: string;
   COMMON_FOOTER_TEXT: string;
   OECD_FOS_2007_CODE_MANDATORY: boolean;
+  LANGUAGE_CHOICES: string[];
 }
 
 interface MarketplaceConfiguration {
