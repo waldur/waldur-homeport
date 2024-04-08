@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
 
@@ -49,36 +48,30 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
         </div>
 
         <div className="menu-sub menu-sub-dropdown w-175px py-4">
-          {languageChoices
-            .filter((language) =>
-              ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES.includes(language.code),
-            )
-            .map((language) => (
+          {languageChoices.map((language) => (
+            <div
+              className="menu-item px-3"
+              key={language.code}
+              data-kt-menu-trigger="click"
+              aria-hidden="true"
+              onClick={() => {
+                setLanguage(language);
+              }}
+            >
               <div
-                className="menu-item px-3"
-                key={language.code}
-                data-kt-menu-trigger="click"
-                aria-hidden="true"
-                onClick={() => {
-                  setLanguage(language);
-                }}
+                className={classNames('menu-link d-flex px-5', {
+                  active: language.code === currentLanguage.code,
+                })}
               >
-                <div
-                  className={classNames('menu-link d-flex px-5', {
-                    active: language.code === currentLanguage.code,
-                  })}
-                >
-                  <span className="symbol symbol-20px me-4">
-                    <i className="f16">
-                      <i
-                        className={`flag ${LanguageCountry[language.code]}`}
-                      ></i>
-                    </i>
-                  </span>
-                  {language.label}
-                </div>
+                <span className="symbol symbol-20px me-4">
+                  <i className="f16">
+                    <i className={`flag ${LanguageCountry[language.code]}`}></i>
+                  </i>
+                </span>
+                {language.label}
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       </div>
     </>
