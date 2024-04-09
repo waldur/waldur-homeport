@@ -10,7 +10,7 @@ import {
   getCustomer,
   getProject,
 } from '@waldur/workspace/selectors';
-import { WorkspaceType, USER_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 export function useLandingCategories() {
   const customer = useSelector(getCustomer);
@@ -56,7 +56,7 @@ export function useLandingOfferings() {
     allowed_customer_uuid: customer?.uuid,
     project_uuid: project?.uuid,
   };
-  if (workspace === USER_WORKSPACE) {
+  if (workspace === WorkspaceType.USER) {
     params.shared = true;
   }
   return useQuery({

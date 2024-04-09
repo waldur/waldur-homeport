@@ -8,7 +8,7 @@ import {
   getProject,
   getWorkspace,
 } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 interface OrderResourceLinkProps {
   item: ResourceReference;
@@ -22,7 +22,7 @@ export const OrderResourceLink: FunctionComponent<OrderResourceLinkProps> = (
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   let state, params;
-  if (workspace === ORGANIZATION_WORKSPACE) {
+  if (workspace === WorkspaceType.ORGANIZATION) {
     state = 'marketplace-public-resource-details';
     params = {
       uuid: customer.uuid,

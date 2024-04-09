@@ -16,7 +16,7 @@ import {
   getProject as getProjectSelector,
   getUser as getUserSelector,
 } from '@waldur/workspace/selectors';
-import { USER_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { UsersService } from './UsersService';
 
@@ -27,13 +27,13 @@ async function loadUser() {
     router.globals.params.uuid === undefined ||
     router.globals.params.uuid === currentUser.uuid
   ) {
-    store.dispatch(setCurrentWorkspace(USER_WORKSPACE));
+    store.dispatch(setCurrentWorkspace(WorkspaceType.USER));
     store.dispatch(setCurrentUser(currentUser));
   } else if (currentUser.is_staff || currentUser.is_support) {
     try {
       const user = await UsersService.get(router.globals.params.uuid);
       store.dispatch(setCurrentUser(user));
-      store.dispatch(setCurrentWorkspace(USER_WORKSPACE));
+      store.dispatch(setCurrentWorkspace(WorkspaceType.USER));
     } catch (error) {
       if (error.response?.status === 404) {
         router.stateService.go('errorPage.notFound');

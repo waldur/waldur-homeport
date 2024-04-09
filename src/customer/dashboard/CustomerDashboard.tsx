@@ -11,7 +11,7 @@ import {
   getCustomer,
   checkIsServiceManager,
 } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerProfile } from './CustomerProfile';
@@ -40,7 +40,7 @@ export const CustomerDashboard: FunctionComponent = () => {
           </div>
           {isFeatureVisible(CustomerFeatures.category_resources_list) && (
             <CategoryResourcesList
-              scopeType={ORGANIZATION_WORKSPACE}
+              scopeType={WorkspaceType.ORGANIZATION}
               scope={customer}
             />
           )}

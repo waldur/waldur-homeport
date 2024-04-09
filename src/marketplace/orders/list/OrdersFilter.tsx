@@ -11,7 +11,7 @@ import { OrganizationAutocomplete } from '@waldur/marketplace/orders/Organizatio
 import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import {
   OrderStateFilter,
@@ -78,7 +78,7 @@ const filterSelector = createSelector(
   getCustomer,
   getWorkspace,
   (customer, workspace) => {
-    if (workspace === ORGANIZATION_WORKSPACE) {
+    if (workspace === WorkspaceType.ORGANIZATION) {
       return { customer_uuid: customer.uuid };
     }
   },

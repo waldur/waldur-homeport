@@ -23,7 +23,7 @@ import { translate } from '@waldur/i18n';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
-import { USER_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import * as api from './api';
 import { ProjectNameField } from './ProjectNameField';
@@ -132,7 +132,7 @@ export const ProjectCreateForm = reduxForm<
             disabled={props.invalid}
             submitting={props.submitting}
             label={
-              workspace === USER_WORKSPACE
+              workspace === WorkspaceType.USER
                 ? translate('Edit request')
                 : translate('Add project')
             }

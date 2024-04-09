@@ -13,7 +13,7 @@ import { OrganizationAutocomplete } from '@waldur/marketplace/orders/Organizatio
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
-import { Customer, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { Customer, WorkspaceType } from '@waldur/workspace/types';
 
 interface ResourceUsageFilterProps {
   options: PeriodOption[];
@@ -63,7 +63,7 @@ export const FORM_ID = 'ResourceUsageFilter';
 const selector = formValueSelector(FORM_ID);
 
 const mapStateToProps = createSelector(
-  (state: RootState) => selector(state, ORGANIZATION_WORKSPACE),
+  (state: RootState) => selector(state, WorkspaceType.ORGANIZATION),
   (customer) => ({
     customer,
     options: makeLastTwelveMonthsFilterPeriods(),

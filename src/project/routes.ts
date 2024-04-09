@@ -4,7 +4,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
-import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { ProjectContainer } from './ProjectContainer';
 import { loadProject } from './resolve';
@@ -52,7 +52,7 @@ export const states: StateDeclaration[] = [
     component: ProjectContainer,
     data: {
       auth: true,
-      workspace: PROJECT_WORKSPACE,
+      workspace: WorkspaceType.PROJECT,
       title: () => translate('Project'),
       skipInitWorkspace: true,
     },

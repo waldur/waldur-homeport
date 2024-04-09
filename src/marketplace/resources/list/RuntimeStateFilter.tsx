@@ -9,7 +9,7 @@ import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { getRuntimeStates } from '@waldur/marketplace/common/api';
 import { getProject, getWorkspace } from '@waldur/workspace/selectors';
-import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 export const RuntimeStateFilter: React.FC<{}> = () => {
   const workspace = useSelector(getWorkspace);
@@ -19,7 +19,7 @@ export const RuntimeStateFilter: React.FC<{}> = () => {
   const { data, isLoading } = useQuery(
     ['runtime-states', project?.uuid, params.category_uuid],
     () =>
-      workspace === PROJECT_WORKSPACE
+      workspace === WorkspaceType.PROJECT
         ? getRuntimeStates(project.uuid, params.category_uuid)
         : getRuntimeStates(),
   );

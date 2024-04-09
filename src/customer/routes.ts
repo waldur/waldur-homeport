@@ -7,7 +7,7 @@ import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 import { isStaff } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { fetchCustomer } from './workspace/CustomerWorkspace';
 
@@ -78,7 +78,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     data: {
       auth: true,
-      workspace: ORGANIZATION_WORKSPACE,
+      workspace: WorkspaceType.ORGANIZATION,
       title: () => translate('Organization'),
       hideProjectSelector: true,
       skipInitWorkspace: true,

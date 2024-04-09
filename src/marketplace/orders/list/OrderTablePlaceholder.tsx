@@ -6,18 +6,15 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import {
-  ORGANIZATION_WORKSPACE,
-  PROJECT_WORKSPACE,
-} from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 const DocumentSearchIllustration = require('@waldur/images/table-placeholders/undraw_file_searching_duff.svg');
 
 const stateSelector = (state: RootState) => {
   const workspace = getWorkspace(state);
-  if (workspace === ORGANIZATION_WORKSPACE) {
+  if (workspace === WorkspaceType.ORGANIZATION) {
     return 'marketplace-landing-customer';
-  } else if (workspace === PROJECT_WORKSPACE) {
+  } else if (workspace === WorkspaceType.PROJECT) {
     return 'marketplace-landing-project';
   } else {
     return 'marketplace-landing-user';

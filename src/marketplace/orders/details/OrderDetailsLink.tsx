@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { RootState } from '@waldur/store/reducers';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import { PROJECT_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 const PureOrderDetailsLink: FunctionComponent<any> = (props) => (
   <Link
@@ -35,7 +35,7 @@ const connector = connect<StateProps, {}, OwnProps, RootState>(
     const forceProjectLevel = ownProps.project_uuid && !ownProps.customer_uuid;
     if (
       forceProjectLevel ||
-      (workspace === PROJECT_WORKSPACE && ownProps.project_uuid)
+      (workspace === WorkspaceType.PROJECT && ownProps.project_uuid)
     ) {
       return {
         state: 'marketplace-order-details-project',

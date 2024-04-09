@@ -6,7 +6,7 @@ import { Link } from '@waldur/core/Link';
 import { WORKSPACE_ALL_CATEGORIES } from '@waldur/marketplace/constants';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { getWorkspace } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 interface OwnProps {
   className?: string;
@@ -25,7 +25,7 @@ const useAllCategoriesLink = () => {
     ) {
       state =
         WORKSPACE_ALL_CATEGORIES[workspace] || 'public.marketplace-categories';
-      if (workspace === ORGANIZATION_WORKSPACE && params.uuid) {
+      if (workspace === WorkspaceType.ORGANIZATION && params.uuid) {
         stateParams = { uuid: params.uuid };
       }
     }

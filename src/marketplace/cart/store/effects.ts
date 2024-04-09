@@ -17,7 +17,7 @@ import {
   SET_CURRENT_CUSTOMER,
 } from '@waldur/workspace/constants';
 import { getProject, getWorkspace } from '@waldur/workspace/selectors';
-import { WorkspaceType, ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 import * as constants from './constants';
@@ -111,7 +111,7 @@ function* addItem(action) {
       const workspace: WorkspaceType = yield select(getWorkspace);
       let resourceDetailsLinkState;
       let parentUuid;
-      if (workspace === ORGANIZATION_WORKSPACE) {
+      if (workspace === WorkspaceType.ORGANIZATION) {
         resourceDetailsLinkState = 'marketplace-provider-resource-details';
         parentUuid = order.customer_uuid;
       } else {

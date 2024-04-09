@@ -4,6 +4,7 @@ import { ComponentType } from 'react';
 import { PluginConfiguration } from '@waldur/auth/types';
 import { FeaturesEnum } from '@waldur/FeaturesEnums';
 import { Role } from '@waldur/permissions/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 interface DataDeclaration {
   /** State is disabled as long as its feature is disabled */
@@ -23,7 +24,7 @@ interface DataDeclaration {
   /** Project selector is hidden if this parameter is set to true */
   hideProjectSelector: boolean;
   /** Workspace declaration is used by workspace selector. */
-  workspace: string;
+  workspace: WorkspaceType;
   skipAuth: boolean;
   title?(): string;
   breadcrumb?(): string;

@@ -15,7 +15,7 @@ import {
   getProject as getProjectSelector,
   getUser,
 } from '@waldur/workspace/selectors';
-import { ORGANIZATION_WORKSPACE, Project } from '@waldur/workspace/types';
+import { WorkspaceType, Project } from '@waldur/workspace/types';
 
 export async function fetchCustomer(transition: Transition) {
   const project = getProjectSelector(store.getState());
@@ -34,7 +34,7 @@ export async function fetchCustomer(transition: Transition) {
         });
         store.dispatch(setCurrentProject(newProject));
       }
-      store.dispatch(setCurrentWorkspace(ORGANIZATION_WORKSPACE));
+      store.dispatch(setCurrentWorkspace(WorkspaceType.ORGANIZATION));
 
       if (
         !checkCustomerUser(currentCustomer, currentUser) &&

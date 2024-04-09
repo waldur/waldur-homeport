@@ -6,7 +6,7 @@ import { MarketplaceFeatures, UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 import { getConfig } from '@waldur/store/config';
-import { USER_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { UsersService } from './UsersService';
 
@@ -80,7 +80,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     data: {
       auth: true,
-      workspace: USER_WORKSPACE,
+      workspace: WorkspaceType.USER,
       title: () => UsersService.getCachedUser()?.full_name,
       hideProjectSelector: true,
     },

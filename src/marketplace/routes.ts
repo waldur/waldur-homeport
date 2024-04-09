@@ -7,7 +7,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
-import { ORGANIZATION_WORKSPACE } from '@waldur/workspace/types';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { fetchProvider, loadContext } from './resolve';
 
@@ -363,7 +363,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     data: {
       auth: true,
-      workspace: ORGANIZATION_WORKSPACE,
+      workspace: WorkspaceType.ORGANIZATION,
       title: () => translate('Service provider'),
       hideProjectSelector: true,
     },
