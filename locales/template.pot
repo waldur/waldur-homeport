@@ -660,10 +660,6 @@ msgstr ""
 msgid "All resources will be scheduled for termination once the date is reached."
 msgstr ""
 
-#: src/proposals/update/rounds/CallRoundsList.tsx
-msgid "Allocated"
-msgstr ""
-
 #: src/proposals/round/RoundQuotas.tsx
 msgid "Allocated offerings"
 msgstr ""
@@ -1278,10 +1274,6 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingFacility.tsx
 msgid "Availability:"
-msgstr ""
-
-#: src/proposals/update/rounds/CallRoundsList.tsx
-msgid "Available"
 msgstr ""
 
 #: src/marketplace/routes.ts
@@ -8628,6 +8620,7 @@ msgstr ""
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/routes.ts
+#: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Proposals"
 msgstr ""
 
@@ -11366,7 +11359,6 @@ msgstr ""
 
 #: src/proposals/call-management/CallExpandableRow.tsx
 #: src/proposals/round/RoundQuotas.tsx
-#: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Submissions"
 msgstr ""
 
