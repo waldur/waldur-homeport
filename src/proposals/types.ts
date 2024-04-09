@@ -45,6 +45,7 @@ export interface Round {
   review_duration_in_days: number;
   minimum_number_of_reviewers: number;
   url: string;
+  proposals: Proposal[];
 }
 
 export interface Call {

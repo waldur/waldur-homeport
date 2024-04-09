@@ -55,12 +55,8 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
           render: ({ row }) => <>{formatDateTime(row.cutoff_time)}</>,
         },
         {
-          title: translate('Submissions'),
-          render: () => <>-</>,
-        },
-        {
-          title: translate('Allocated') + '/' + translate('Available'),
-          render: () => <>-</>,
+          title: translate('Proposals'),
+          render: ({ row }) => <>{row.proposals.length}</>,
         },
         {
           title: translate('State'),
