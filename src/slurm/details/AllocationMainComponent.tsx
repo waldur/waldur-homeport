@@ -27,7 +27,7 @@ export const AllocationMainComponent = ({ scope }) => {
       ]);
     }
   });
-  return (
+  return scope ? (
     <>
       <div className="mb-10" id="allocation-users">
         <AllocationUsersTable scope={scope} />
@@ -38,5 +38,5 @@ export const AllocationMainComponent = ({ scope }) => {
         </div>
       )}
     </>
-  );
+  ) : null;
 };
