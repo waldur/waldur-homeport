@@ -109,6 +109,7 @@ export interface Proposal {
   resources: ProposalResource[];
   oecd_fos_2007_code: string;
   oecd_fos_2007_label: string;
+  reviews: ProposalReview[];
 }
 
 export interface CallOffering {

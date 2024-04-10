@@ -203,6 +203,7 @@ msgstr ""
 msgid "Action has been applied."
 msgstr ""
 
+#: src/administration/roles/RoleActions.tsx
 #: src/customer/payments/PaymentsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
 #: src/invoices/details/InvoiceItemActions.tsx
@@ -1671,6 +1672,7 @@ msgstr ""
 msgid "Campaigns"
 msgstr ""
 
+#: src/administration/roles/RoleDescriptionForm.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
@@ -3151,7 +3153,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: src/administration/roles/RoleForm.tsx
+#: src/administration/roles/RoleDescriptionForm.tsx
 msgid "Description ({language})"
 msgstr ""
 
@@ -3568,6 +3570,10 @@ msgstr ""
 
 #: src/proposals/update/general/CallGeneralSection.tsx
 msgid "Edit description"
+msgstr ""
+
+#: src/administration/roles/RoleDescriptionEditButton.tsx
+msgid "Edit descriptions"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditVarsButton.tsx
@@ -9821,6 +9827,7 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
 #: src/proposals/review/CustomerReviewsList.tsx
 #: src/proposals/routes.ts
+#: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Reviews"
 msgstr ""
 
@@ -10029,6 +10036,7 @@ msgstr ""
 #: src/administration/agreements/UserAgreementsForm.tsx
 #: src/administration/languages/LanguageOptionsForm.tsx
 #: src/administration/providers/UpdateProviderDialog.tsx
+#: src/administration/roles/RoleDescriptionForm.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/broadcasts/BroadcastSaveAsTemplateDialog.tsx
 #: src/broadcasts/BroadcastTemplateForm.tsx
@@ -14251,6 +14259,10 @@ msgstr ""
 
 #: src/administration/providers/ProviderUsersDialog.tsx
 msgid "Users from {provider}"
+msgstr ""
+
+#: src/administration/roles/RoleDeleteButton.tsx
+msgid "Users should be revoked before role is removed."
 msgstr ""
 
 #: src/invoices/details/CustomerDetails.tsx

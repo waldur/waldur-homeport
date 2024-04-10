@@ -59,6 +59,16 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
           render: ({ row }) => <>{row.proposals.length}</>,
         },
         {
+          title: translate('Reviews'),
+          render: ({ row }) => {
+            const totalReviews = row.proposals.reduce(
+              (acc, proposal) => acc + proposal.reviews.length,
+              0,
+            );
+            return <>{totalReviews}</>;
+          },
+        },
+        {
           title: translate('State'),
           render: () => <>-</>,
         },
