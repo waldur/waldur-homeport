@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ENV } from '@waldur/configs/default';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 import { deleteRole, getRoles } from './api';
 
@@ -28,11 +28,11 @@ export const RoleDeleteButton = ({ row, refetch }) => {
     refetch();
   };
   return (
-    <ActionButton
+    <ActionItem
       title={translate('Remove')}
       action={openDialog}
-      variant="light-danger"
-      icon="fa fa-trash"
+      disabled={row.users_count > 0}
+      tooltip={translate('Users should be revoked before role is removed.')}
     />
   );
 };

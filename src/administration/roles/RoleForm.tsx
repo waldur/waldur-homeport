@@ -1,6 +1,5 @@
 import { reduxForm } from 'redux-form';
 
-import { ENV } from '@waldur/configs/default';
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, SubmitButton } from '@waldur/form';
 import { StringField } from '@waldur/form/StringField';
@@ -32,13 +31,6 @@ export const RoleForm = reduxForm<any, { onSubmit; onCancel; role? }>({
           options={ROLE_TYPES}
           simpleValue
         />
-        {ENV.languageChoices.map(({ code, label }) => (
-          <StringField
-            key={code}
-            name={`description_${code}`}
-            label={translate('Description ({language})', { language: label })}
-          />
-        ))}
         <PermissionField
           name="permissions"
           label={translate('Permissions')}

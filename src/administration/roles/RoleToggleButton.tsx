@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 
 import { disableRole, enableRole } from '@waldur/administration/roles/api';
 import { translate } from '@waldur/i18n';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
 
 export const RoleToggleButton: FunctionComponent<{
   row;
@@ -34,11 +34,10 @@ export const RoleToggleButton: FunctionComponent<{
     refetch();
   };
   return (
-    <ActionButton
+    <ActionItem
       action={callback}
       title={row.is_active ? translate('Disable') : translate('Enable')}
       icon={row.is_active ? 'fa fa-toggle-on' : 'fa fa-toggle-off'}
-      className={`ms-3 btn ${row.is_active ? 'btn-danger' : 'btn-success'}`}
     />
   );
 };

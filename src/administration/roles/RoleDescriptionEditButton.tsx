@@ -14,7 +14,7 @@ const RoleEditDialog = lazyComponent(
   'RoleEditDialog',
 );
 
-export const RoleEditButton = ({ row, refetch }) => {
+export const RoleDescriptionEditButton = ({ row, refetch }) => {
   const dispatch = useDispatch();
   const openRoleEditDialog = useCallback(
     () =>
@@ -22,6 +22,7 @@ export const RoleEditButton = ({ row, refetch }) => {
         openModalDialog(RoleEditDialog, {
           resolve: {
             row,
+            isDescriptionForm: true,
           },
           onSubmit: async (formData) => {
             await editRole(row.uuid, formData);
@@ -39,7 +40,7 @@ export const RoleEditButton = ({ row, refetch }) => {
 
   return (
     <ActionItem
-      title={translate('Edit role')}
+      title={translate('Edit descriptions')}
       icon="fa fa-edit"
       action={openRoleEditDialog}
     />
