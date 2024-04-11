@@ -9,7 +9,7 @@ import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/consta
 import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable } from '@waldur/table';
+import { connectTable, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { TableOptionsType } from '@waldur/table/types';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
@@ -30,6 +30,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     <Table
       title={translate('Team members')}
       {...props}
+      filters={props.filters}
       columns={[
         {
           title: translate('Member'),
@@ -86,11 +87,11 @@ const mapPropsToFilter = (props) => {
   };
   if (props.filter) {
     if (props.filter.project_role) {
-      filter.project_role = props.filter.project_role.map(({ value }) => value);
+      filter.project_role = props.filter.project_role.map(({ name }) => name);
     }
     if (props.filter.organization_role) {
       filter.organization_role = props.filter.organization_role.map(
-        ({ value }) => value,
+        ({ name }) => name,
       );
     }
   }
