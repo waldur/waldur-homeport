@@ -14104,6 +14104,10 @@ msgstr ""
 msgid "User input"
 msgstr ""
 
+#: src/proposals/proposal/create/resource-requests-step/ResourceRequestExpandableRow.tsx
+msgid "User inputs"
+msgstr ""
+
 #: src/administration/TokensList.tsx
 msgid "User is active"
 msgstr ""

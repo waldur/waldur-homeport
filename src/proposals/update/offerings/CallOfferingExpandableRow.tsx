@@ -10,7 +10,7 @@ export const CallOfferingExpandableRow: FunctionComponent<any> = ({ row }) => (
     <Container>
       <Field
         label={translate('Plan')}
-        value={renderFieldOrDash(row.plan_name)}
+        value={renderFieldOrDash(row.plan?.name)}
       />
       {typeof row.attributes?.limits === 'object' &&
         Object.entries(row.attributes.limits).map(([key, value]) => (

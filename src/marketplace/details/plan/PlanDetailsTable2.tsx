@@ -334,6 +334,7 @@ interface PlanDetailsTable2 {
   offering: Offering;
   plan?: Plan;
   limits?: Limits;
+  viewMode?: boolean;
 }
 
 export const PlanDetailsTable2 = connect<PricesData, {}, PlanDetailsTable2>(
