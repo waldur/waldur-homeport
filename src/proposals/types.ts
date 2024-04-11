@@ -127,8 +127,9 @@ export interface CallOffering {
   provider_name: string;
   state: CallOfferingState;
   category_name?: string;
-  plan?: string;
-  plan_name?: string;
+  plan?: Plan;
+  options?: Offering['options'];
+  components?: Offering['components'];
 }
 
 export interface CallOfferingFormData {

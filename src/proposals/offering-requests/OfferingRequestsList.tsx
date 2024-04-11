@@ -76,7 +76,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
         {
           title: translate('Period'),
           render: ({ row }) => (
-            <>{row.plan_name ? row.plan_name : translate('Ordinary plan')}</>
+            <>{row.plan ? row.plan.name : translate('Ordinary plan')}</>
           ),
         },
         {

@@ -6,6 +6,8 @@ import { ProposalResource } from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
+import { ResourceRequestExpandableRow } from './resource-requests-step/ResourceRequestExpandableRow';
+
 export const ResourceRequestsSummary = ({ proposal }) => {
   const filter = useMemo(
     () => ({
@@ -44,6 +46,7 @@ export const ResourceRequestsSummary = ({ proposal }) => {
             },
           ]}
           hasActionBar={false}
+          expandableRow={ResourceRequestExpandableRow}
         />
       </Card.Body>
     </Card>

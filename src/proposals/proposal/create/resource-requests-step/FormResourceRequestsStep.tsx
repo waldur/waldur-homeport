@@ -18,6 +18,7 @@ import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { AddResourceButton } from './AddResourceButton';
 import { ProposalResourcesFilter } from './ProposalResourcesFilter';
+import { ResourceRequestExpandableRow } from './ResourceRequestExpandableRow';
 import { ResourceRequestItemActions } from './ResourceRequestItemActions';
 
 const mapPropsToFilter = createSelector(
@@ -118,6 +119,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           )
         }
         hasActionBar={false}
+        expandableRow={ResourceRequestExpandableRow}
         fullWidth
         hoverableRow={({ row, fetch }) =>
           !readOnlyMode ? (

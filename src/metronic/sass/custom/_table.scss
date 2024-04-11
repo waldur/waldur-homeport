@@ -32,7 +32,7 @@
     }
     &.expanded,
     &.expanded + tr {
-      td:first-child {
+      > td:first-child {
         border-left-color: $gray-500;
       }
     }
