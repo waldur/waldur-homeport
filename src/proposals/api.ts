@@ -118,6 +118,9 @@ export const createProposal = (data) =>
 export const getProposal = (uuid) =>
   getById<Proposal>(`/proposal-proposals/`, uuid);
 
+export const rejectProposal = (uuid) =>
+  post<Proposal>(`/proposal-proposals/${uuid}/reject/`);
+
 export const updateProposalProjectDetails = (data, uuid) =>
   post<Proposal>(`/proposal-proposals/${uuid}/update_project_details/`, data);
 
