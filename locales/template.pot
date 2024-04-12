@@ -230,6 +230,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsListActions.tsx
+#: src/proposals/proposal/ProposalRowActions.tsx
 #: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
@@ -1017,6 +1018,10 @@ msgstr ""
 
 #: src/marketplace/resources/mass-actions/MultiPullAction.tsx
 msgid "Are you sure you want to pull {count} resources?"
+msgstr ""
+
+#: src/proposals/proposal/ProposalRowActions.tsx
+msgid "Are you sure you want to reject the proposal: {name}?"
 msgstr ""
 
 #: src/proposals/offering-requests/OfferingRequestItemActions.tsx
@@ -2169,6 +2174,7 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/details/CallOfferingDeleteButton.tsx
+#: src/proposals/proposal/ProposalRowActions.tsx
 #: src/proposals/team/UserRemoveButton.tsx
 #: src/proposals/update/ActionsDropdown.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
@@ -8602,6 +8608,10 @@ msgstr ""
 msgid "Proposal created successfully"
 msgstr ""
 
+#: src/proposals/proposal/ProposalRowActions.tsx
+msgid "Proposal has been rejected."
+msgstr ""
+
 #: src/proposals/proposal/create/ProposalSubmissionStep.tsx
 msgid "Proposal has been switched to team verification step."
 msgstr ""
@@ -9050,6 +9060,7 @@ msgstr ""
 #: src/marketplace/orders/actions/RejectByConsumerButton.tsx
 #: src/marketplace/orders/actions/RejectByProviderButton.tsx
 #: src/proposals/offering-requests/OfferingRequestItemActions.tsx
+#: src/proposals/proposal/ProposalRowActions.tsx
 msgid "Reject"
 msgstr ""
 
@@ -13155,6 +13166,10 @@ msgstr ""
 
 #: src/proposals/review/ReviewItemActions.tsx
 msgid "Unable to reject review."
+msgstr ""
+
+#: src/proposals/proposal/ProposalRowActions.tsx
+msgid "Unable to reject the proposal."
 msgstr ""
 
 #: src/user/keys/KeyRemoveButton.tsx
