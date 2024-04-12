@@ -1,0 +1,3 @@
+.action-group:has(.action-list:empty) {
+  display: none;
+}

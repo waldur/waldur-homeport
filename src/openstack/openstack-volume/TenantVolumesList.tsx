@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
-import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
+import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalActionsRouter';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
@@ -54,7 +54,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('volumes')}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hoverableRow={({ row }) => (
-        <ActionButtonResource url={row.url} refetch={props.fetch} />
+        <ModalActionsRouter
+          url={row.url}
+          name={row.name}
+          offering_type={VOLUME_TYPE}
+          refetch={props.fetch}
+        />
       )}
     />
   );

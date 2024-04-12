@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
-import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
+import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalActionsRouter';
 import { IPList } from '@waldur/resource/IPList';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
@@ -46,7 +46,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
         />
       }
       hoverableRow={({ row }) => (
-        <ActionButtonResource url={row.url} refetch={props.fetch} />
+        <ModalActionsRouter
+          url={row.url}
+          name={row.name}
+          offering_type={INSTANCE_TYPE}
+          refetch={props.fetch}
+        />
       )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hasQuery={true}

@@ -1,6 +1,12 @@
 import { useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
+import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalActionsRouter';
+import {
+  INSTANCE_TYPE,
+  TENANT_TYPE,
+  VOLUME_TYPE,
+} from '@waldur/openstack/constants';
 import { ActionRegistry } from '@waldur/resource/actions/registry';
 
 import { ActionsList } from './actions/ActionsList';
@@ -20,6 +26,18 @@ export const ResourceActions = ({ resource, scope, refetch }) => {
         !quickActions.includes(action) && !actionsList.includes(action),
     );
   }, [resource]);
+  if (
+    [INSTANCE_TYPE, VOLUME_TYPE, TENANT_TYPE].includes(resource.offering_type)
+  ) {
+    return (
+      <ModalActionsRouter
+        offering_type={resource.offering_type}
+        url={resource.scope}
+        name={resource.name}
+        refetch={refetch}
+      />
+    );
+  }
   return (
     <Dropdown>
       <Dropdown.Toggle

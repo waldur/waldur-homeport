@@ -14,6 +14,13 @@ export const VirtualMachineMultiAction = ({
   title,
   iconClass,
   refetch,
+}: {
+  rows;
+  validators;
+  apiMethod;
+  title;
+  iconClass?;
+  refetch;
 }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
@@ -64,7 +71,7 @@ export const VirtualMachineMultiAction = ({
       onClick={callback}
       title={title}
     >
-      <i className={'fa ' + iconClass} />
+      <i className={'fa ' + iconClass || 'fa-play'} />
     </button>
   );
 };

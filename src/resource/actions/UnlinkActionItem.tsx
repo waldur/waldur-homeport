@@ -53,6 +53,7 @@ export const UnlinkActionItem: FC<{ resource }> = ({ resource }) => {
       title={translate('Unlink')}
       action={callback}
       className="text-danger"
+      staff
     />
   );
 };

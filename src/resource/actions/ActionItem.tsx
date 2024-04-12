@@ -1,16 +1,17 @@
 import classNames from 'classnames';
 import { uniqueId } from 'lodash';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { ResourceActionMenuContext } from '@waldur/marketplace/resources/actions/ResourceActionMenuContext';
 
-interface ActionItemProps {
+export interface ActionItemProps {
   title: string;
   action: () => void;
   icon?: string;
   staff?: boolean;
+  important?: boolean;
   className?: string;
   disabled?: boolean;
   tooltip?: string;
@@ -20,6 +21,19 @@ interface ActionItemProps {
 
 export const ActionItem: FC<ActionItemProps> = (props) => {
   const Component = props.as;
+  const actionMenuContext = useContext(ResourceActionMenuContext);
+  if (
+    actionMenuContext?.query &&
+    !props.title.includes(actionMenuContext.query)
+  ) {
+    return null;
+  }
+  if (actionMenuContext?.hideDisabled && props.disabled) {
+    return null;
+  }
+  if (actionMenuContext?.hideNonImportant && !props.important) {
+    return null;
+  }
   return Component === Dropdown.Item ? (
     <Component
       className={classNames('d-flex gap-1', props.className)}
@@ -35,15 +49,6 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         </Tip>
       )}
       {props.title}
-      {props.staff && (
-        <Tip
-          label={translate('Staff action')}
-          id={`staff-action-${uniqueId()}`}
-          className="ms-auto ps-2"
-        >
-          <i className="fa fa-user" />
-        </Tip>
-      )}
     </Component>
   ) : (
     <Component {...props} />

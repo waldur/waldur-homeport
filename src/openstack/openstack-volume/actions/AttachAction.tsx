@@ -18,5 +18,6 @@ export const AttachAction: ActionItemType = ({ resource, refetch }) => (
     modalComponent={AttachDialog}
     resource={resource}
     extraResolve={{ refetch }}
+    important
   />
 );

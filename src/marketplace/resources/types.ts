@@ -46,7 +46,7 @@ export interface Resource extends ResourceReference {
   state: ResourceState;
   scope?: string;
   created?: string;
-  category_title?: string;
+  category_title: string;
   category_uuid?: string;
   category_icon?: string;
   customer_name?: string;

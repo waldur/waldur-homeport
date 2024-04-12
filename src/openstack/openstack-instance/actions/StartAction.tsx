@@ -1,7 +1,10 @@
 import { translate } from '@waldur/i18n';
 import { startInstance } from '@waldur/openstack/api';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
-import { AsyncActionItem } from '@waldur/resource/actions/AsyncActionItem';
+import {
+  AsyncActionItem,
+  AsyncActionItemProps,
+} from '@waldur/resource/actions/AsyncActionItem';
 import {
   validateState,
   validateRuntimeState,
@@ -20,12 +23,14 @@ const validators = [
   validateRuntimeState('SHUTOFF'),
 ];
 
-export const getProps = () => ({
-  title: translate('Start'),
-  iconClass: 'fa-play',
-  validators,
-  apiMethod: startInstance,
-});
+export const getProps = () =>
+  ({
+    title: translate('Start'),
+    iconClass: 'fa-play',
+    validators,
+    apiMethod: startInstance,
+    important: true,
+  }) as AsyncActionItemProps<OpenStackInstance>;
 
 export const StartAction: ActionItemType = ({ resource, ...rest }) => (
   <AsyncActionItem {...getProps()} resource={resource} {...rest} />

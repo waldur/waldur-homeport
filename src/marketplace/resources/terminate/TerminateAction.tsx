@@ -32,6 +32,7 @@ export const TerminateAction: FC<TerminateActionProps> = ({
     action,
     tooltip,
     disabled,
+    className: 'text-danger',
   };
   return <ActionItem {...props} />;
 };
