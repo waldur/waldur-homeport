@@ -12,11 +12,12 @@ interface OpenConsoleActionItemProps<T> {
   apiMethod(id: string): Promise<string>;
   resource: T;
   validators?: ActionValidator<T>[];
+  staff?: boolean;
 }
 
 export const OpenConsoleActionItem: <T extends { uuid: string }>(
   props: OpenConsoleActionItemProps<T>,
-) => ReactElement = ({ resource, apiMethod, validators }) => {
+) => ReactElement = ({ resource, apiMethod, validators, staff }) => {
   const dispatch = useDispatch();
   const validationState = useValidators(validators, resource);
   const callback = async () => {
@@ -31,6 +32,7 @@ export const OpenConsoleActionItem: <T extends { uuid: string }>(
     <ActionItem
       title={translate('Open console')}
       action={callback}
+      staff={staff}
       {...validationState}
     />
   );

@@ -22,5 +22,6 @@ export const DetachAction: ActionItemType = ({ resource, refetch }) => (
     resource={resource}
     validators={validators}
     refetch={refetch}
+    important
   />
 );

@@ -17,6 +17,7 @@ interface ActionButtonProps {
   icon?: string;
   className?: string;
   staff?: boolean;
+  important?: boolean;
 }
 
 export interface DialogActionProps<T>

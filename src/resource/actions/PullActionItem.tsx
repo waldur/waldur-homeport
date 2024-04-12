@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { ActionItem } from './ActionItem';
+import { ActionItem, ActionItemProps } from './ActionItem';
 import { validateState } from './base';
 import { useValidators } from './useValidators';
 
@@ -46,7 +46,8 @@ const usePull = ({
     iconClass: 'fa-refresh',
     tooltip,
     disabled,
-  };
+    important: true,
+  } as ActionItemProps;
 };
 
 export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(

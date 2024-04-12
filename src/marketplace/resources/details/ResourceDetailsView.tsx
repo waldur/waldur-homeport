@@ -35,6 +35,7 @@ import { BookingMainComponent } from './BookingMainComponent';
 import { GettingStartedCard } from './GettingStartedCard';
 import { InstanceComponents } from './InstanceComponents';
 import { InstanceMainComponent } from './InstanceMainComponent';
+import { getMarketplaceResourceLogo } from './MarketplaceResourceLogo';
 import { QuickActions } from './QuickActions';
 import { RefreshButton } from './RefreshButton';
 import { ResourceComponents } from './ResourceComponents';
@@ -48,8 +49,6 @@ import { ShortResourceHeader } from './ShortResourceHeader';
 import { TenantMainComponent } from './TenantMainComponent';
 import { UsageCard } from './UsageCard';
 import { VolumeComponents } from './VolumeComponents';
-
-const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
 
 interface ResourceDetailsViewProps {
   resource;
@@ -88,12 +87,6 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
       [SLURM_PLUGIN]: AllocationMainComponent,
     }[resource.offering_type] || null;
 
-  const logo = [INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE].includes(
-    resource.offering_type,
-  )
-    ? openstackIcon
-    : resource.offering_thumbnail || resource.category_icon;
-
   return (
     <>
       {tabSpec ? (
@@ -113,7 +106,7 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
             <OrderInProgressView resource={resource} refetch={refetch} />
           )}
           <PublicDashboardHero
-            logo={logo}
+            logo={getMarketplaceResourceLogo(resource)}
             logoAlt={resource.category_title}
             logoBottomLabel={translate('Resource')}
             logoBottomClass="bg-secondary"

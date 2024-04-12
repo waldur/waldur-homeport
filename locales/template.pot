@@ -212,6 +212,7 @@ msgstr ""
 #: src/marketplace/offerings/update/plans/PlanActions.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/resources/actions/ModalActionsButton.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
@@ -1406,6 +1407,12 @@ msgstr ""
 #: src/customer/details/CustomerManagePageBar.tsx
 #: src/invoices/routes.ts
 msgid "Billing"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenStackInstanceActions.tsx
+#: src/openstack/openstack-tenant/OpenstackTenantActions.tsx
+#: src/openstack/openstack-volume/OpenStackVolumeActions.tsx
+msgid "Billing actions"
 msgstr ""
 
 #: src/marketplace/offerings/update/components/AddComponentDialog.tsx
@@ -2832,6 +2839,12 @@ msgstr ""
 
 #: src/booking/components/BusinessHoursGroup.tsx
 msgid "Daily available booking time range"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenStackInstanceActions.tsx
+#: src/openstack/openstack-tenant/OpenstackTenantActions.tsx
+#: src/openstack/openstack-volume/OpenStackVolumeActions.tsx
+msgid "Dangerous actions"
 msgstr ""
 
 #: src/navigation/theme/ThemeSwitcher.tsx
@@ -5593,6 +5606,7 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
+#: src/marketplace/resources/actions/ActionsPopover.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "Loading actions"
 msgstr ""
@@ -5609,6 +5623,10 @@ msgstr ""
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Loading more..."
+msgstr ""
+
+#: src/marketplace/resources/actions/ModalActionsDialog.tsx
+msgid "Loading resource"
 msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
@@ -8733,6 +8751,10 @@ msgstr ""
 msgid "Provider"
 msgstr ""
 
+#: src/marketplace/resources/actions/ProviderActionsGroup.tsx
+msgid "Provider actions"
+msgstr ""
+
 #: src/marketplace/service-providers/ProviderDetails.tsx
 msgid "Provider details"
 msgstr ""
@@ -9479,6 +9501,12 @@ msgstr ""
 msgid "Resource UUID"
 msgstr ""
 
+#: src/openstack/openstack-instance/OpenStackInstanceActions.tsx
+#: src/openstack/openstack-tenant/OpenstackTenantActions.tsx
+#: src/openstack/openstack-volume/OpenStackVolumeActions.tsx
+msgid "Resource actions"
+msgstr ""
+
 #: src/marketplace/resources/change-plan/utils.tsx
 msgid "Resource already has this plan."
 msgstr ""
@@ -10199,6 +10227,10 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: src/marketplace/resources/actions/ActionDialogBody.tsx
+msgid "Search by name"
+msgstr ""
+
 #: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
 msgid "Search by name or abbreviation"
 msgstr ""
@@ -10877,6 +10909,10 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+#: src/marketplace/resources/actions/ActionsPopover.tsx
+msgid "Show all"
+msgstr ""
+
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 msgid "Show all ({numberOfAllCategories})"
 msgstr ""
@@ -11143,8 +11179,13 @@ msgid "Staff"
 msgstr ""
 
 #: src/marketplace/resources/details/ActionButton.tsx
-#: src/resource/actions/ActionItem.tsx
 msgid "Staff action"
+msgstr ""
+
+#: src/openstack/openstack-instance/OpenStackInstanceActions.tsx
+#: src/openstack/openstack-tenant/OpenstackTenantActions.tsx
+#: src/openstack/openstack-volume/OpenStackVolumeActions.tsx
+msgid "Staff actions"
 msgstr ""
 
 #: src/user/support/utils.ts
@@ -12837,6 +12878,7 @@ msgstr ""
 msgid "Unable to link invoice to the payment."
 msgstr ""
 
+#: src/marketplace/resources/actions/ActionsPopover.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "Unable to load actions"
 msgstr ""
@@ -13048,6 +13090,10 @@ msgstr ""
 #: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load questions and answers."
+msgstr ""
+
+#: src/marketplace/resources/actions/ModalActionsDialog.tsx
+msgid "Unable to load resource"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignFooter.tsx

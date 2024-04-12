@@ -18,6 +18,11 @@ describe('OpenStack Volume detail view', () => {
         '/api/marketplace-resources/53b9bda915ab4dc0aac93a8f4fe83d30/details/',
         { fixture: 'openstack/openstacktenant-volume.json' },
       )
+      .intercept(
+        'GET',
+        '/api/openstacktenant-volumes/df15b1f2dc7c445cadb2996594b0a6c3/',
+        { fixture: 'openstack/openstacktenant-volume.json' },
+        )
       .as('getOpenstackTenantVolume')
       .intercept('GET', '/api/openstacktenant-instances/**', {
         fixture: 'openstack/openstacktenant-instances.json',
@@ -47,13 +52,11 @@ describe('OpenStack Volume detail view', () => {
 
   it('Attaches OpenStack Volume to Instance', () => {
     cy.log('Open "Attach OpenStack Volume to Instance" dialog')
-      .get(
-        '#kt_content_container .public-dashboard-hero-body .dropdown button.btn-icon',
-      )
-      .first()
+      .get('button')
+      .contains('Actions')
       .click({ force: true })
-      .next('.dropdown-menu')
-      .contains('.dropdown-item', 'Attach')
+      .get('.dropdown-item')
+      .contains('Attach')
       .click({ force: true })
 
       .log('Select an option of Instance field')

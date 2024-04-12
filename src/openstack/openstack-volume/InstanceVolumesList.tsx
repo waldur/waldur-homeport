@@ -2,13 +2,14 @@ import { FunctionComponent } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
+import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalActionsRouter';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, connectTable, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
 
+import { VOLUME_TYPE } from '../constants';
 import { AttachVolumeAction } from '../openstack-instance/actions/AttachVolumeAction';
 
 const TableComponent: FunctionComponent<any> = (props) => {
@@ -44,7 +45,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
       actions={<AttachVolumeAction resource={props.resource} />}
       verboseName={translate('volumes')}
       hoverableRow={({ row }) => (
-        <ActionButtonResource url={row.url} refetch={props.fetch} />
+        <ModalActionsRouter
+          url={row.url}
+          name={row.name}
+          offering_type={VOLUME_TYPE}
+          refetch={props.fetch}
+        />
       )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />

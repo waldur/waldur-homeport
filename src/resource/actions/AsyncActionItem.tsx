@@ -6,20 +6,18 @@ import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { ActionItem } from './ActionItem';
+import { ActionItem, ActionItemProps } from './ActionItem';
 import { ActionValidator } from './types';
 import { useValidators } from './useValidators';
 
-interface AsyncActionItemProps<T> {
+export interface AsyncActionItemProps<T>
+  extends Omit<ActionItemProps, 'disabled' | 'action'> {
   apiMethod(id: string): Promise<AxiosResponse>;
   resource: T;
   validators: ActionValidator<T>[];
-  title: string;
-  icon?: string;
-  iconClass?: string;
-  className?: string;
   successMessage?: string;
   errorMessage?: string;
+  iconClass?: string;
   refetch?(): void;
 }
 
