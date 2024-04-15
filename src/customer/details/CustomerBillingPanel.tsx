@@ -25,7 +25,7 @@ const enhance = compose(
       country: customer.country
         ? {
             value: customer.country,
-            display_name: customer.country_name,
+            label: customer.country_name,
           }
         : null,
     };
