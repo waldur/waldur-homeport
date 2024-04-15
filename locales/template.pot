@@ -2317,7 +2317,6 @@ msgstr ""
 msgid "Could not create organization"
 msgstr ""
 
-#: src/customer/create/CountryGroup.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Country"
@@ -5623,10 +5622,6 @@ msgstr ""
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Loading more..."
-msgstr ""
-
-#: src/marketplace/resources/actions/ModalActionsDialog.tsx
-msgid "Loading resource"
 msgstr ""
 
 #: src/azure/AzureResourceSummary.tsx
@@ -10386,7 +10381,6 @@ msgstr ""
 msgid "Select connected subnet"
 msgstr ""
 
-#: src/customer/create/CountryGroup.tsx
 #: src/customer/list/SelectCountryField.tsx
 msgid "Select country..."
 msgstr ""
@@ -13090,10 +13084,6 @@ msgstr ""
 #: src/marketplace-checklist/UserChecklist.tsx
 #: src/marketplace-checklist/useChecklist.tsx
 msgid "Unable to load questions and answers."
-msgstr ""
-
-#: src/marketplace/resources/actions/ModalActionsDialog.tsx
-msgid "Unable to load resource"
 msgstr ""
 
 #: src/marketplace/service-providers/CampaignFooter.tsx
