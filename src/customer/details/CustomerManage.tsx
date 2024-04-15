@@ -47,7 +47,7 @@ export const CustomerManage: FunctionComponent = () => {
             data.image = undefined;
           }
         }
-        if ('country' in data) {
+        if ('country' in data && data.country) {
           data.country = data.country.value;
         }
 
