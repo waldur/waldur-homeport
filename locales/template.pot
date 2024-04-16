@@ -1079,12 +1079,12 @@ msgstr ""
 msgid "Are you sure you want to unlink {name} {resourceType}?"
 msgstr ""
 
-#: src/resource/actions/AsyncActionItem.tsx
-msgid "Are you sure you want to {action} the VM?"
-msgstr ""
-
 #: src/proposals/update/ActionsDropdown.tsx
 msgid "Are you sure you want to {action} this call?"
+msgstr ""
+
+#: src/resource/actions/AsyncActionItem.tsx
+msgid "Are you sure you want to {action}?"
 msgstr ""
 
 #: src/marketplace/resources/mass-actions/VirtualMachineMultiAction.tsx

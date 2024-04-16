@@ -39,7 +39,7 @@ export const AsyncActionItem: <T extends { uuid: string; name?: string }>(
       await waitForConfirmation(
         dispatch,
         translate('Confirmation'),
-        translate('Are you sure you want to {action} the VM?', {
+        translate('Are you sure you want to {action}?', {
           action: rest.title.toLowerCase(),
         }),
       );
