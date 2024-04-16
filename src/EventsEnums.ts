@@ -82,24 +82,16 @@ export const ProposalEnum = {
 export const ProvidersEnum = {
   marketplace_resource_create_canceled: 'marketplace_resource_create_canceled',
   marketplace_resource_create_failed: 'marketplace_resource_create_failed',
-  marketplace_resource_create_requested:
-    'marketplace_resource_create_requested',
-  marketplace_resource_create_succeeded:
-    'marketplace_resource_create_succeeded',
+  marketplace_resource_create_requested: 'marketplace_resource_create_requested',
+  marketplace_resource_create_succeeded: 'marketplace_resource_create_succeeded',
   marketplace_resource_renamed: 'marketplace_resource_renamed',
-  marketplace_resource_terminate_failed:
-    'marketplace_resource_terminate_failed',
-  marketplace_resource_terminate_requested:
-    'marketplace_resource_terminate_requested',
-  marketplace_resource_terminate_succeeded:
-    'marketplace_resource_terminate_succeeded',
+  marketplace_resource_terminate_failed: 'marketplace_resource_terminate_failed',
+  marketplace_resource_terminate_requested: 'marketplace_resource_terminate_requested',
+  marketplace_resource_terminate_succeeded: 'marketplace_resource_terminate_succeeded',
   marketplace_resource_update_failed: 'marketplace_resource_update_failed',
-  marketplace_resource_update_limits_failed:
-    'marketplace_resource_update_limits_failed',
-  marketplace_resource_update_limits_succeeded:
-    'marketplace_resource_update_limits_succeeded',
-  marketplace_resource_update_requested:
-    'marketplace_resource_update_requested',
+  marketplace_resource_update_limits_failed: 'marketplace_resource_update_limits_failed',
+  marketplace_resource_update_limits_succeeded: 'marketplace_resource_update_limits_succeeded',
+  marketplace_resource_update_requested: 'marketplace_resource_update_requested',
   resource_robot_account_created: 'resource_robot_account_created',
   resource_robot_account_deleted: 'resource_robot_account_deleted',
   resource_robot_account_updated: 'resource_robot_account_updated',
@@ -114,40 +106,27 @@ export const ResourcesEnum = {
   marketplace_order_terminated: 'marketplace_order_terminated',
   marketplace_resource_create_canceled: 'marketplace_resource_create_canceled',
   marketplace_resource_create_failed: 'marketplace_resource_create_failed',
-  marketplace_resource_create_requested:
-    'marketplace_resource_create_requested',
-  marketplace_resource_create_succeeded:
-    'marketplace_resource_create_succeeded',
+  marketplace_resource_create_requested: 'marketplace_resource_create_requested',
+  marketplace_resource_create_succeeded: 'marketplace_resource_create_succeeded',
   marketplace_resource_downscaled: 'marketplace_resource_downscaled',
-  marketplace_resource_erred_on_backend:
-    'marketplace_resource_erred_on_backend',
+  marketplace_resource_erred_on_backend: 'marketplace_resource_erred_on_backend',
   marketplace_resource_renamed: 'marketplace_resource_renamed',
-  marketplace_resource_terminate_canceled:
-    'marketplace_resource_terminate_canceled',
-  marketplace_resource_terminate_failed:
-    'marketplace_resource_terminate_failed',
-  marketplace_resource_terminate_requested:
-    'marketplace_resource_terminate_requested',
-  marketplace_resource_terminate_succeeded:
-    'marketplace_resource_terminate_succeeded',
+  marketplace_resource_terminate_canceled: 'marketplace_resource_terminate_canceled',
+  marketplace_resource_terminate_failed: 'marketplace_resource_terminate_failed',
+  marketplace_resource_terminate_requested: 'marketplace_resource_terminate_requested',
+  marketplace_resource_terminate_succeeded: 'marketplace_resource_terminate_succeeded',
   marketplace_resource_update_canceled: 'marketplace_resource_update_canceled',
-  marketplace_resource_update_end_date_succeeded:
-    'marketplace_resource_update_end_date_succeeded',
+  marketplace_resource_update_end_date_succeeded: 'marketplace_resource_update_end_date_succeeded',
   marketplace_resource_update_failed: 'marketplace_resource_update_failed',
-  marketplace_resource_update_limits_failed:
-    'marketplace_resource_update_limits_failed',
-  marketplace_resource_update_limits_succeeded:
-    'marketplace_resource_update_limits_succeeded',
-  marketplace_resource_update_requested:
-    'marketplace_resource_update_requested',
-  marketplace_resource_update_succeeded:
-    'marketplace_resource_update_succeeded',
+  marketplace_resource_update_limits_failed: 'marketplace_resource_update_limits_failed',
+  marketplace_resource_update_limits_succeeded: 'marketplace_resource_update_limits_succeeded',
+  marketplace_resource_update_requested: 'marketplace_resource_update_requested',
+  marketplace_resource_update_succeeded: 'marketplace_resource_update_succeeded',
   openstack_flavor_created: 'openstack_flavor_created',
   openstack_flavor_deleted: 'openstack_flavor_deleted',
   openstack_floating_ip_attached: 'openstack_floating_ip_attached',
   openstack_floating_ip_connected: 'openstack_floating_ip_connected',
-  openstack_floating_ip_description_updated:
-    'openstack_floating_ip_description_updated',
+  openstack_floating_ip_description_updated: 'openstack_floating_ip_description_updated',
   openstack_floating_ip_detached: 'openstack_floating_ip_detached',
   openstack_floating_ip_disconnected: 'openstack_floating_ip_disconnected',
   openstack_network_cleaned: 'openstack_network_cleaned',
@@ -167,16 +146,11 @@ export const ResourcesEnum = {
   openstack_security_group_deleted: 'openstack_security_group_deleted',
   openstack_security_group_imported: 'openstack_security_group_imported',
   openstack_security_group_pulled: 'openstack_security_group_pulled',
-  openstack_security_group_rule_cleaned:
-    'openstack_security_group_rule_cleaned',
-  openstack_security_group_rule_created:
-    'openstack_security_group_rule_created',
-  openstack_security_group_rule_deleted:
-    'openstack_security_group_rule_deleted',
-  openstack_security_group_rule_imported:
-    'openstack_security_group_rule_imported',
-  openstack_security_group_rule_updated:
-    'openstack_security_group_rule_updated',
+  openstack_security_group_rule_cleaned: 'openstack_security_group_rule_cleaned',
+  openstack_security_group_rule_created: 'openstack_security_group_rule_created',
+  openstack_security_group_rule_deleted: 'openstack_security_group_rule_deleted',
+  openstack_security_group_rule_imported: 'openstack_security_group_rule_imported',
+  openstack_security_group_rule_updated: 'openstack_security_group_rule_updated',
   openstack_security_group_updated: 'openstack_security_group_updated',
   openstack_server_group_cleaned: 'openstack_server_group_cleaned',
   openstack_server_group_created: 'openstack_server_group_created',
@@ -191,10 +165,8 @@ export const ResourcesEnum = {
   openstack_subnet_updated: 'openstack_subnet_updated',
   openstack_tenant_quota_limit_updated: 'openstack_tenant_quota_limit_updated',
   resource_assign_floating_ip_failed: 'resource_assign_floating_ip_failed',
-  resource_assign_floating_ip_scheduled:
-    'resource_assign_floating_ip_scheduled',
-  resource_assign_floating_ip_succeeded:
-    'resource_assign_floating_ip_succeeded',
+  resource_assign_floating_ip_scheduled: 'resource_assign_floating_ip_scheduled',
+  resource_assign_floating_ip_succeeded: 'resource_assign_floating_ip_succeeded',
   resource_attach_failed: 'resource_attach_failed',
   resource_attach_scheduled: 'resource_attach_scheduled',
   resource_attach_succeeded: 'resource_attach_succeeded',
@@ -235,11 +207,9 @@ export const ResourcesEnum = {
   resource_robot_account_deleted: 'resource_robot_account_deleted',
   resource_robot_account_updated: 'resource_robot_account_updated',
   resource_snapshot_schedule_activated: 'resource_snapshot_schedule_activated',
-  resource_snapshot_schedule_cleaned_up:
-    'resource_snapshot_schedule_cleaned_up',
+  resource_snapshot_schedule_cleaned_up: 'resource_snapshot_schedule_cleaned_up',
   resource_snapshot_schedule_created: 'resource_snapshot_schedule_created',
-  resource_snapshot_schedule_deactivated:
-    'resource_snapshot_schedule_deactivated',
+  resource_snapshot_schedule_deactivated: 'resource_snapshot_schedule_deactivated',
   resource_snapshot_schedule_deleted: 'resource_snapshot_schedule_deleted',
   resource_start_failed: 'resource_start_failed',
   resource_start_scheduled: 'resource_start_scheduled',
@@ -248,32 +218,20 @@ export const ResourcesEnum = {
   resource_stop_scheduled: 'resource_stop_scheduled',
   resource_stop_succeeded: 'resource_stop_succeeded',
   resource_unassign_floating_ip_failed: 'resource_unassign_floating_ip_failed',
-  resource_unassign_floating_ip_scheduled:
-    'resource_unassign_floating_ip_scheduled',
-  resource_unassign_floating_ip_succeeded:
-    'resource_unassign_floating_ip_succeeded',
-  resource_update_allowed_address_pairs_failed:
-    'resource_update_allowed_address_pairs_failed',
-  resource_update_allowed_address_pairs_scheduled:
-    'resource_update_allowed_address_pairs_scheduled',
-  resource_update_allowed_address_pairs_succeeded:
-    'resource_update_allowed_address_pairs_succeeded',
+  resource_unassign_floating_ip_scheduled: 'resource_unassign_floating_ip_scheduled',
+  resource_unassign_floating_ip_succeeded: 'resource_unassign_floating_ip_succeeded',
+  resource_update_allowed_address_pairs_failed: 'resource_update_allowed_address_pairs_failed',
+  resource_update_allowed_address_pairs_scheduled: 'resource_update_allowed_address_pairs_scheduled',
+  resource_update_allowed_address_pairs_succeeded: 'resource_update_allowed_address_pairs_succeeded',
   resource_update_floating_ips_failed: 'resource_update_floating_ips_failed',
-  resource_update_floating_ips_scheduled:
-    'resource_update_floating_ips_scheduled',
-  resource_update_floating_ips_succeeded:
-    'resource_update_floating_ips_succeeded',
+  resource_update_floating_ips_scheduled: 'resource_update_floating_ips_scheduled',
+  resource_update_floating_ips_succeeded: 'resource_update_floating_ips_succeeded',
   resource_update_internal_ips_failed: 'resource_update_internal_ips_failed',
-  resource_update_internal_ips_scheduled:
-    'resource_update_internal_ips_scheduled',
-  resource_update_internal_ips_succeeded:
-    'resource_update_internal_ips_succeeded',
-  resource_update_security_groups_failed:
-    'resource_update_security_groups_failed',
-  resource_update_security_groups_scheduled:
-    'resource_update_security_groups_scheduled',
-  resource_update_security_groups_succeeded:
-    'resource_update_security_groups_succeeded',
+  resource_update_internal_ips_scheduled: 'resource_update_internal_ips_scheduled',
+  resource_update_internal_ips_succeeded: 'resource_update_internal_ips_succeeded',
+  resource_update_security_groups_failed: 'resource_update_security_groups_failed',
+  resource_update_security_groups_scheduled: 'resource_update_security_groups_scheduled',
+  resource_update_security_groups_succeeded: 'resource_update_security_groups_succeeded',
   resource_update_succeeded: 'resource_update_succeeded',
 };
 
