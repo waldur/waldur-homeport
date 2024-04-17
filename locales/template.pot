@@ -12064,6 +12064,10 @@ msgstr ""
 msgid "There are no comments yet."
 msgstr ""
 
+#: src/proposals/update/documents/CallDocumentsSection.tsx
+msgid "There are no documents uploaded."
+msgstr ""
+
 #: src/customer/payments/InvoicesDropdown.tsx
 msgid "There are no invoices."
 msgstr ""
