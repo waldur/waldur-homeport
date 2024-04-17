@@ -46,6 +46,8 @@ export const ActionsDropdown: FC<ActionsDropdownProps> = ({
     [dispatch, call, refetch],
   );
 
+  const hasRounds = call.rounds.length > 0;
+
   return call.state === 'active' ? (
     <DropdownButton
       variant="light"
@@ -70,6 +72,7 @@ export const ActionsDropdown: FC<ActionsDropdownProps> = ({
       title={translate('Activate')}
       onClick={() => editCallState('activate', translate('Activate'))}
       className={className}
+      disabled={!hasRounds}
     >
       {getCallStateActions()
         .filter((state) => state.value !== call.state)
