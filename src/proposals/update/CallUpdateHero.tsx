@@ -9,7 +9,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { Call } from '../types';
 
-import { ActionsDropdown } from './ActionsDropdown';
+import { CallActions } from './CallActions';
 import { CallUpdateHeaderBody } from './CallUpdateHeaderBody';
 import { ProposalCallQuotas } from './ProposalCallQuotas';
 
@@ -43,7 +43,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       }
       quickActions={
         <div className="d-flex gap-5 justify-content-between">
-          <ActionsDropdown call={call} refetch={refetch} />
+          <CallActions call={call} refetch={refetch} />
         </div>
       }
       quickBody={<ProposalCallQuotas call={call} />}
