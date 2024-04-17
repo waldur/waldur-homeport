@@ -3,10 +3,9 @@ import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { GroupInvitationCancelButton } from '@waldur/invitations/GroupInvitationCancelButton';
-import {
-  getUser,
-  isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@waldur/workspace/selectors';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 interface GroupInvitationRowActionsProps {
   refetch;
@@ -16,9 +15,13 @@ interface GroupInvitationRowActionsProps {
 export const GroupInvitationRowActions: FunctionComponent<
   GroupInvitationRowActionsProps
 > = ({ row, refetch }) => {
+  const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
-  const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
-  return isOwnerOrStaff || user.is_support ? (
+  const canCancel = hasPermission(user, {
+    permission: PermissionEnum.DELETE_CUSTOMER_PERMISSION,
+    customerId: customer.uuid,
+  });
+  return canCancel ? (
     <ButtonGroup>
       {row.is_active && (
         <GroupInvitationCancelButton
