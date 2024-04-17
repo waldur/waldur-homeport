@@ -1,5 +1,5 @@
 import { FC, useCallback } from 'react';
-import { DropdownButton, SplitButton, Dropdown } from 'react-bootstrap';
+import { DropdownButton, Dropdown, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -10,13 +10,13 @@ import { updateCallState } from '../api';
 import { Call } from '../types';
 import { getCallStateActions } from '../utils';
 
-interface ActionsDropdownProps {
+interface CallActionsProps {
   call: Call;
   refetch?(): void;
   className?: string;
 }
 
-export const ActionsDropdown: FC<ActionsDropdownProps> = ({
+export const CallActions: FC<CallActionsProps> = ({
   call,
   refetch,
   className,
@@ -48,7 +48,7 @@ export const ActionsDropdown: FC<ActionsDropdownProps> = ({
 
   const hasRounds = call.rounds.length > 0;
 
-  return call.state === 'active' ? (
+  return call.state === 'draft' ? (
     <DropdownButton
       variant="light"
       title={translate('Actions')}
@@ -66,25 +66,22 @@ export const ActionsDropdown: FC<ActionsDropdownProps> = ({
           </Dropdown.Item>
         ))}
     </DropdownButton>
-  ) : (
-    <SplitButton
+  ) : call.state === 'archived' ? (
+    <Button
       variant="primary"
-      title={translate('Activate')}
       onClick={() => editCallState('activate', translate('Activate'))}
       className={className}
       disabled={!hasRounds}
     >
-      {getCallStateActions()
-        .filter((state) => state.value !== call.state)
-        .map((state, i) => (
-          <Dropdown.Item
-            key={state.value}
-            eventKey={i + 1}
-            onClick={() => editCallState(state.action, state.label)}
-          >
-            {state.label}
-          </Dropdown.Item>
-        ))}
-    </SplitButton>
+      {translate('Activate')}
+    </Button>
+  ) : (
+    <Button
+      variant="primary"
+      onClick={() => editCallState('archive', translate('Archive'))}
+      className={className}
+    >
+      {translate('Archive')}
+    </Button>
   );
 };

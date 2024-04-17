@@ -232,7 +232,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsListActions.tsx
 #: src/proposals/proposal/ProposalRowActions.tsx
-#: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/CallActions.tsx
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterServicesList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
@@ -246,7 +246,7 @@ msgstr ""
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/openstack/openstack-backup-schedule/actions/ActivateAction.tsx
 #: src/openstack/openstack-snapshot-schedule/actions/ActivateSnapshotScheduleAction.tsx
-#: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/CallActions.tsx
 #: src/proposals/utils.ts
 #: src/user/support/UserActivateButton.tsx
 msgid "Activate"
@@ -877,6 +877,7 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
+#: src/proposals/update/CallActions.tsx
 #: src/proposals/utils.ts
 msgid "Archive"
 msgstr ""
@@ -1079,7 +1080,7 @@ msgstr ""
 msgid "Are you sure you want to unlink {name} {resourceType}?"
 msgstr ""
 
-#: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/CallActions.tsx
 msgid "Are you sure you want to {action} this call?"
 msgstr ""
 
@@ -1625,7 +1626,7 @@ msgstr ""
 msgid "Call rounds"
 msgstr ""
 
-#: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/CallActions.tsx
 msgid "Call state updated."
 msgstr ""
 
@@ -2183,7 +2184,7 @@ msgstr ""
 #: src/proposals/details/CallOfferingDeleteButton.tsx
 #: src/proposals/proposal/ProposalRowActions.tsx
 #: src/proposals/team/UserRemoveButton.tsx
-#: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/CallActions.tsx
 #: src/rancher/cluster/create/FormNodesStep.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 #: src/resource/actions/ResourceDeleteButton.tsx
@@ -13466,7 +13467,7 @@ msgstr ""
 msgid "Unable to update billing component."
 msgstr ""
 
-#: src/proposals/update/ActionsDropdown.tsx
+#: src/proposals/update/CallActions.tsx
 msgid "Unable to update call state."
 msgstr ""
 
