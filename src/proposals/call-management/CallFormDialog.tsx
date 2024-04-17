@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from '@uirouter/react';
 import React, { useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { SubmissionError, reduxForm } from 'redux-form';
@@ -32,6 +33,7 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
     form: 'ProposalCallForm',
   })((props) => {
     const customer = useSelector(getCustomer);
+    const router = useRouter();
     const {
       data: manager,
       isLoading: loadingManager,
@@ -62,8 +64,8 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
         }
 
         return action
-          .then(() => {
-            props.resolve.refetch();
+          .then((res) => {
+            if (isEdit) props.resolve.refetch();
             dispatch(
               showSuccess(
                 isEdit
@@ -72,6 +74,11 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
               ),
             );
             dispatch(closeModalDialog());
+            if (!isEdit && res.data?.uuid) {
+              router.stateService.go('protected-call.main', {
+                call_uuid: res.data.uuid,
+              });
+            }
           })
           .catch((e) => {
             dispatch(
@@ -87,7 +94,7 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
             }
           });
       },
-      [props.resolve],
+      [props.resolve, router],
     );
 
     if (loadingManager) {
