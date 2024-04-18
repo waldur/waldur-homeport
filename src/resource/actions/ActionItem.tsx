@@ -24,7 +24,9 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
   const actionMenuContext = useContext(ResourceActionMenuContext);
   if (
     actionMenuContext?.query &&
-    !props.title.includes(actionMenuContext.query)
+    !props.title
+      .toLocaleLowerCase()
+      .includes(actionMenuContext.query.toLocaleLowerCase())
   ) {
     return null;
   }
