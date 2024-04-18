@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { FC, createRef, useCallback, useMemo, useRef } from 'react';
+import { createRef, FC, useCallback, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -7,6 +7,7 @@ import { isEmpty } from '@waldur/core/utils';
 import { Form } from '@waldur/form/Form';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import {
   attachDocument,
   switchProposalToTeamVerification,
@@ -70,9 +71,22 @@ export const ProposalSubmissionStep: FC<{ proposal; refetch }> = ({
     },
     [proposal_uuid, dispatch],
   );
+  const formData = useSelector(formDataSelector);
 
   const switchToTeamCallback = async () => {
     try {
+      await waitForConfirmation(
+        dispatch,
+        translate('Confirmation'),
+        translate(
+          'Are you sure you want to send the proposal to team verification step?',
+        ),
+      );
+    } catch {
+      return;
+    }
+    try {
+      await updateProposalProjectDetails(formData, proposal_uuid);
       await switchProposalToTeamVerification(proposal_uuid);
       await refetch();
       dispatch(
@@ -85,7 +99,6 @@ export const ProposalSubmissionStep: FC<{ proposal; refetch }> = ({
     }
   };
 
-  const formData = useSelector(formDataSelector);
   const completedSteps = useMemo(() => {
     const result = stepRefs.current.map(() => false);
     stepRefs.current.forEach((_, i) => {
