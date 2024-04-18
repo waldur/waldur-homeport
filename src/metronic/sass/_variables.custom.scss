@@ -34,3 +34,6 @@ $warning: if(isDarkMode(), #ffa800, #ffc700);
 $warning-active: if(isDarkMode(), #ee9d01, #f1bc00);
 $warning-light: if(isDarkMode(), #392f28, #fff8dd);
 $warning-inverse: #ffffff;
+
+$dropdown-item-padding-x: 1.1rem;
+$dropdown-item-padding-y: 1.1rem;
