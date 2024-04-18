@@ -7,6 +7,7 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { ActionItem, ActionItemProps } from './ActionItem';
 import { validateState } from './base';
+import { ActionContext } from './types';
 import { useValidators } from './useValidators';
 
 interface PullActionItemProps<T> {
@@ -18,7 +19,12 @@ interface PullActionItemProps<T> {
   refetch?;
 }
 
-const validators = [validateState('OK', 'Erred')];
+const hasBackendId = (ctx: ActionContext) =>
+  ctx.resource.backend_id
+    ? undefined
+    : translate('Resource does not have backend ID.');
+
+const validators = [validateState('OK', 'Erred'), hasBackendId];
 
 const usePull = ({
   resource,
@@ -54,8 +60,5 @@ export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
   props: PullActionItemProps<T>,
 ) => ReactElement = (props) => {
   const buttonProps = usePull(props);
-  if (!props.resource.backend_id) {
-    return null;
-  }
   return <ActionItem {...buttonProps} as={props.as} staff={props.staff} />;
 };
