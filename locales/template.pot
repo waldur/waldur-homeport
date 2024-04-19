@@ -6058,7 +6058,7 @@ msgid "Modified"
 msgstr ""
 
 #: src/core/lazyComponent.tsx
-msgid "Module loading error. Try again."
+msgid "Module {componentName} loading error. Try again."
 msgstr ""
 
 #: src/marketplace/resources/details/InstanceMainComponent.tsx
