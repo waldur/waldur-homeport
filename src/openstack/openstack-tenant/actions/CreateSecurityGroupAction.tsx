@@ -16,6 +16,7 @@ const validators = [validateState('OK')];
 
 export const CreateSecurityGroupAction: FC<TenantActionProps> = ({
   resource,
+  refetch,
 }) => (
   <DialogActionButton
     title={translate('Create')}
@@ -24,5 +25,6 @@ export const CreateSecurityGroupAction: FC<TenantActionProps> = ({
     resource={resource}
     dialogSize="xl"
     validators={validators}
+    extraResolve={{ refetch }}
   />
 );

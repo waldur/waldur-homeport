@@ -67,18 +67,16 @@ export const PortRangeField: FC<PortRangeFieldProps> = ({ rule }) => {
     [portMax],
   );
   return (
-    <>
-      <Field
-        name="port_range"
-        component={FormField}
-        validate={validate}
-        parse={parsePortRange}
-        format={formatPortRange}
-        placeholder={translate('All ports')}
-        tooltip={translate(
-          'Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.',
-        )}
-      />
-    </>
+    <Field
+      name="port_range"
+      component={FormField}
+      validate={validate}
+      parse={parsePortRange}
+      format={formatPortRange}
+      placeholder={translate('All ports')}
+      tooltip={translate(
+        'Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.',
+      )}
+    />
   );
 };

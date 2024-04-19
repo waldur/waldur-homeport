@@ -29,7 +29,10 @@ export function userCanModifyTenant(ctx: ActionContext): string {
 
 type CreateSecurityGroupFormData = CreateSecurityGroupRequestBody;
 
-export const useCreateSecurityGroupForm = (resource: OpenStackTenant) => {
+export const useCreateSecurityGroupForm = (
+  resource: OpenStackTenant,
+  refetch,
+) => {
   const asyncState = useAsync(
     () =>
       loadSecurityGroupsResources({
@@ -49,11 +52,15 @@ export const useCreateSecurityGroupForm = (resource: OpenStackTenant) => {
             ? []
             : formData.rules.map(({ port_range, ...rule }) => ({
                 ...rule,
-                protocol: rule.protocol === null ? '' : rule.protocol,
+                protocol:
+                  rule.protocol === 'any' || rule.protocol === null
+                    ? ''
+                    : rule.protocol,
                 from_port: port_range.min,
                 to_port: port_range.max,
               })),
       });
+      await refetch();
       dispatch(
         showSuccess(translate('Security group creation has been scheduled.')),
       );

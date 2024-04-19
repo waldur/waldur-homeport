@@ -42,7 +42,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       actions={
         <ButtonGroup>
-          <CreateSecurityGroupAction resource={props.resource} />
+          <CreateSecurityGroupAction
+            resource={props.resource}
+            refetch={props.fetch}
+          />
           <PullSecurityGroupsAction resource={props.resource} />
         </ButtonGroup>
       }
