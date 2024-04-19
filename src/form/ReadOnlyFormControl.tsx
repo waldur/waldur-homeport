@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FunctionComponent, cloneElement } from 'react';
+import { FunctionComponent, ReactNode, cloneElement } from 'react';
 import { Form } from 'react-bootstrap';
 
 interface ReadOnlyFormControlProps {
@@ -11,6 +11,7 @@ interface ReadOnlyFormControlProps {
   plaintext?: boolean;
   disabled?: boolean;
   floating?: boolean;
+  actions?: ReactNode;
 }
 
 export const ReadOnlyFormControl: FunctionComponent<
@@ -26,24 +27,26 @@ export const ReadOnlyFormControl: FunctionComponent<
     floating,
     addon,
     children,
+    actions,
     ...rest
   } = props;
   const childProps = {
     ...rest,
-    input: { name: '', value },
+    input: { name: '', value, onChange: (v) => v },
     value,
     readOnly: true,
     disabled,
   };
   const labelNode = <Form.Label>{label}</Form.Label>;
 
-  return (
+  const main = (
     <div
       className={classNames(
         'mb-7',
         className,
         floating && 'form-floating',
         addon && 'form-addon',
+        Boolean(actions) && 'flex-grow-1',
       )}
     >
       {!floating && labelNode}
@@ -67,4 +70,14 @@ export const ReadOnlyFormControl: FunctionComponent<
       {addon && <span className="form-control-addon">{addon}</span>}
     </div>
   );
+
+  if (actions) {
+    return (
+      <div className="d-flex align-items-start gap-4">
+        {main}
+        {actions}
+      </div>
+    );
+  }
+  return main;
 };

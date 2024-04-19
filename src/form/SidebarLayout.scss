@@ -54,6 +54,13 @@ $headerAndToolbarHeight: calc(65px + var(--kt-toolbar-height));
               color: var(--bs-active-warning);
             }
           }
+
+          &.critical-error {
+            i {
+              font-size: 22.7px;
+              color: var(--bs-active-danger);
+            }
+          }
         }
       }
     }

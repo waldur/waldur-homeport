@@ -4,7 +4,7 @@ import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
 
 import { UsersListSummary } from '../team/UsersListSummary';
-import { Proposal } from '../types';
+import { Proposal, ProposalReview } from '../types';
 
 import { ProgressSteps } from './create/ProgressSteps';
 import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
@@ -13,6 +13,7 @@ import { ResourceRequestsSummary } from './create/ResourceRequestsSummary';
 
 interface ProposalDetails {
   proposal: Proposal;
+  reviews?: ProposalReview[];
   isLoading?;
   error?;
   refetch?;
@@ -20,6 +21,7 @@ interface ProposalDetails {
 
 export const ProposalDetails = ({
   proposal,
+  reviews,
   isLoading,
   error,
   refetch,
@@ -35,10 +37,14 @@ export const ProposalDetails = ({
       <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
       <SidebarLayout.Body className="mb-10">
         <ProposalHeader proposal={proposal} />
-        <ProjectDetailsSummary proposal={proposal} />
-        <ResourceRequestsSummary proposal={proposal} />
+        <ProjectDetailsSummary proposal={proposal} reviews={reviews} />
+        <ResourceRequestsSummary proposal={proposal} reviews={reviews} />
         {!['team_verification', 'draft'].includes(proposal.state) && (
-          <UsersListSummary scope={proposal} title={translate('Proposal')} />
+          <UsersListSummary
+            scope={proposal}
+            title={translate('Proposal')}
+            reviews={reviews}
+          />
         )}
       </SidebarLayout.Body>
     </>

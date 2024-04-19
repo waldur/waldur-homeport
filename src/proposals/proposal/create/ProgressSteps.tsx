@@ -10,7 +10,7 @@ interface ProgressStepsProps {
   className?: string;
 }
 
-const sortedSteps = [
+const getSortedSteps = (proposal: Proposal) => [
   {
     label: translate('Submission'),
     state: ['draft'],
@@ -27,20 +27,28 @@ const sortedSteps = [
     label: translate('Updates'),
     state: ['in_revision'],
   },
-  {
-    label: translate('Accepted'),
-    state: ['accepted'],
-  },
+  proposal.state === 'rejected'
+    ? {
+        label: translate('Rejected'),
+        state: ['rejected'],
+        color: 'bg-danger',
+      }
+    : {
+        label: translate('Accepted'),
+        state: ['accepted'],
+      },
 ];
 
 const getSteps = (proposal: Proposal) => {
   const steps: Array<{ label; description?; completed; color? }> = [];
+  const sortedSteps = getSortedSteps(proposal);
   const currentStateIndex =
     sortedSteps.findIndex((step) => step.state.includes(proposal.state)) - 1;
   sortedSteps.forEach((step, i) => {
     steps.push({
       label: step.label,
       completed: i <= currentStateIndex,
+      color: step.color,
     });
   });
   return steps;

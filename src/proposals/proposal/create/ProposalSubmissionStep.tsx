@@ -23,8 +23,9 @@ import { createProposalSteps } from './steps';
 export const formDataSelector = (state) =>
   (getFormValues(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) || {}) as any;
 
-export const ProposalSubmissionStep: FC<{ proposal; refetch }> = ({
+export const ProposalSubmissionStep: FC<{ proposal; reviews?; refetch }> = ({
   proposal,
+  reviews,
   refetch,
 }) => {
   const dispatch = useDispatch();
@@ -134,7 +135,12 @@ export const ProposalSubmissionStep: FC<{ proposal; refetch }> = ({
                   id={step.id}
                   title={step.label}
                   observed={completedSteps[i]}
-                  params={{ proposal, refetch, change: formProps.change }}
+                  params={{
+                    proposal,
+                    refetch,
+                    change: formProps.change,
+                    reviews,
+                  }}
                 />
               </div>
             ))}

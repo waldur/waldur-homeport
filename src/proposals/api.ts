@@ -5,6 +5,7 @@ import {
   deleteById,
   fixURL,
   get,
+  getAll,
   getById,
   getFirst,
   getSelectData,
@@ -14,6 +15,7 @@ import {
   sendForm,
 } from '@waldur/core/api';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+import { GenericPermission } from '@waldur/permissions/types';
 
 import {
   Call,
@@ -112,6 +114,12 @@ export const callAutocomplete = async (
   );
 };
 
+export const getAllCallUsers = (callUuid, role = null) =>
+  getAll<GenericPermission>(
+    `/proposal-protected-calls/${callUuid}/list_users/`,
+    role ? { params: { role } } : null,
+  );
+
 export const createProposal = (data) =>
   post<Proposal>(`/proposal-proposals/`, data);
 
@@ -142,8 +150,22 @@ export const updateProposalResource = (data, proposalUuid, uuid) =>
 export const removeProposalResource = (proposalUuid, uuid) =>
   deleteById(`/proposal-proposals/${proposalUuid}/resources/`, uuid);
 
+export const getProposalReview = (reviewUuid) =>
+  getById<ProposalReview>('/proposal-reviews/', reviewUuid);
+
+export const getAllProposalReviews = (proposalUuid) =>
+  getAll<ProposalReview>('/proposal-reviews/', {
+    params: { proposal_uuid: proposalUuid },
+  });
+
 export const createProposalReview = (data) =>
   post<ProposalReview>(`/proposal-reviews/`, data);
+
+export const updateProposalReview = (data, uuid) =>
+  patch<ProposalReview>(`/proposal-reviews/${uuid}/`, data);
+
+export const submitProposalReview = (data, uuid) =>
+  post<ProposalReview>(`/proposal-reviews/${uuid}/submit/`, data);
 
 export const acceptProposalReview = (uuid) =>
   post(`/proposal-reviews/${uuid}/accept/`);

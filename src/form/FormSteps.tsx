@@ -13,7 +13,8 @@ export const FormSteps: FC<{
   steps: Pick<VStepperFormStep, 'label' | 'id' | 'fields'>[];
   completedSteps?: boolean[];
   errors?;
-}> = ({ steps, completedSteps, errors }) => {
+  criticalErrors?;
+}> = ({ steps, completedSteps, errors, criticalErrors }) => {
   const nonRequiredErrors = useMemo(() => {
     const errorsFlatten = flattenObject(errors);
     const result = {};
@@ -36,6 +37,23 @@ export const FormSteps: FC<{
     return result;
   }, [errors]);
 
+  const criticalErrorsMap = useMemo(() => {
+    const errorsFlatten = flattenObject(criticalErrors);
+    const result = {};
+    for (const key in errorsFlatten) {
+      if (!errorsFlatten[key]) continue;
+      if (Array.isArray(errorsFlatten[key])) {
+        errorsFlatten[key].forEach((err: any) => {
+          if (!(key in result)) Object.assign(result, { [key]: [] });
+          result[key].push(err);
+        });
+      } else if (typeof errorsFlatten[key] === 'string') {
+        Object.assign(result, { [key]: errorsFlatten[key] });
+      }
+    }
+    return result;
+  }, [criticalErrors]);
+
   return (
     <div className="stepper stepper-pills stepper-column d-flex flex-column mb-10">
       <div className="d-flex flex-row-auto w-100 w-lg-300px">
@@ -50,7 +68,25 @@ export const FormSteps: FC<{
             >
               <div className="stepper-wrapper d-flex align-items-center">
                 {step.fields &&
-                step.fields.some((key) => nonRequiredErrors[key]) ? (
+                step.fields.some((key) => criticalErrorsMap[key]) ? (
+                  <Tip
+                    label={
+                      <FieldError
+                        error={step.fields
+                          .map((key) => criticalErrorsMap[key])
+                          .flat()
+                          .filter(Boolean)}
+                      />
+                    }
+                    className="stepper-icon critical-error"
+                    id={`stepperErrorTip-${i}`}
+                    placement="left"
+                    autoWidth
+                  >
+                    <i className="fa fa-times-circle" />
+                  </Tip>
+                ) : step.fields &&
+                  step.fields.some((key) => nonRequiredErrors[key]) ? (
                   <Tip
                     label={
                       <FieldError

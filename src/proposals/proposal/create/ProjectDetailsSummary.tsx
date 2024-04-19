@@ -1,20 +1,28 @@
 import { FC } from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
-import { ExternalLink } from '@waldur/core/ExternalLink';
+import { TextField } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
 import { translate } from '@waldur/i18n';
-import { Proposal } from '@waldur/proposals/types';
+import { Proposal, ProposalReview } from '@waldur/proposals/types';
+
+import { CommentSection } from './CommentSection';
+import { DocumentationFiles } from './DocumentationFiles';
+import { QuestionMark } from './QuestionMark';
 
 interface ProjectDetailsSummaryProps {
   proposal: Proposal;
-  commentable?: boolean;
+  reviews?: ProposalReview[];
   paddingless?: boolean;
   hideHeader?: boolean;
+  onAddCommentClick?(field?: string): void;
 }
 
 export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
   proposal,
+  reviews,
+  onAddCommentClick,
   ...props
 }) => (
   <Card>
@@ -24,117 +32,111 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
       </Card.Header>
     )}
     <Card.Body className={props.paddingless ? 'p-0' : ''}>
-      <Row>
-        <Col xs={12} sm md={6}>
-          <ReadOnlyFormControl
-            label={translate('Project title')}
-            value={proposal.name}
-            floating
-          />
-        </Col>
-        {props.commentable && (
-          <Col xs={12} sm="auto" md={6} className="mb-4">
-            <Button
-              type="button"
-              variant="dark"
-              size="sm"
-              className="h-50px me-2"
-            >
-              {translate('Comment')}
-            </Button>
-          </Col>
+      <CommentSection
+        label={translate('Project title')}
+        valueField="name"
+        commentField="comment_project_title"
+        tooltip={translate(
+          'Short title for the project, which explains the project goal as much as possible.',
         )}
-      </Row>
+        floating
+        proposal={proposal}
+        onAddCommentClick={onAddCommentClick}
+        reviews={reviews}
+      />
 
-      <Row>
-        <Col xs={12} md={6}>
-          <ReadOnlyFormControl
-            label={translate('Project summary')}
-            value={proposal.project_summary}
-            floating
+      <CommentSection
+        label={translate('Project summary')}
+        valueField="project_summary"
+        commentField="comment_project_summary"
+        tooltip={translate('Brief description of the project.')}
+        floating
+        onAddCommentClick={onAddCommentClick}
+        reviews={reviews}
+        proposal={proposal}
+      />
+
+      <CommentSection
+        label={translate('Detailed description')}
+        valueField="description"
+        commentField="comment_project_description"
+        tooltip={translate(
+          'Explanation of the scientific case of the project for which the resources are intended to be used.',
+        )}
+        floating
+        onAddCommentClick={onAddCommentClick}
+        reviews={reviews}
+        proposal={proposal}
+      >
+        <TextField />
+      </CommentSection>
+
+      <CommentSection
+        label={translate('Project for civilian purpose?')}
+        commentField="comment_project_has_civilian_purpose"
+        valueField="project_has_civilian_purpose"
+        tooltip={translate('Mark if the project has a civilian purpose.')}
+        onAddCommentClick={onAddCommentClick}
+        reviews={reviews}
+        proposal={proposal}
+      >
+        <AwesomeCheckboxField />
+      </CommentSection>
+
+      <ReadOnlyFormControl
+        label={translate('Research field (OECD code)')}
+        value={proposal.oecd_fos_2007_label || 'N/A'}
+        floating
+        actions={
+          <QuestionMark
+            tooltip={translate(
+              'Select the main research field for the project.',
+            )}
           />
-        </Col>
-      </Row>
+        }
+      />
 
-      <Row>
-        <Col xs={12} md={6}>
-          <ReadOnlyFormControl
-            label={translate('Detailed description')}
-            value={proposal.description || 'N/A'}
-            floating
-          />
-        </Col>
-      </Row>
+      <CommentSection
+        label={translate('Is the project confidential?')}
+        tooltip={translate(
+          'Select if the project proposal contains confidential information.',
+        )}
+        valueField="project_is_confidential"
+        commentField="comment_project_is_confidential"
+        onAddCommentClick={onAddCommentClick}
+        reviews={reviews}
+        proposal={proposal}
+      >
+        <AwesomeCheckboxField />
+      </CommentSection>
 
-      <Row>
-        <Col xs={12} md={6}>
-          <ReadOnlyFormControl
-            label={translate('Project for civilian purpose?')}
-            value={
-              proposal.project_has_civilian_purpose
-                ? translate('Yes')
-                : translate('No')
-            }
-            floating
-          />
-        </Col>
-      </Row>
+      <CommentSection
+        label={translate('Project duration in days')}
+        valueField="duration_in_days"
+        commentField="comment_project_duration"
+        tooltip={translate(
+          'Expected project duration in days once resources have been granted.',
+        )}
+        floating
+        onAddCommentClick={onAddCommentClick}
+        reviews={reviews}
+        proposal={proposal}
+      />
 
-      <Row>
-        <Col xs={12} md={6}>
-          <ReadOnlyFormControl
-            label={translate('Research field (OECD code)')}
-            value={proposal.oecd_fos_2007_label || 'N/A'}
-            floating
-          />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col xs={12} md={6}>
-          <ReadOnlyFormControl
-            label={translate('Is the project confidential?')}
-            value={
-              proposal.project_is_confidential
-                ? translate('Yes')
-                : translate('No')
-            }
-            floating
-          />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col xs={12} md={6}>
-          <ReadOnlyFormControl
-            label={translate('Project duration in days')}
-            value={proposal.duration_in_days || 0}
-            floating
-          />
-        </Col>
-      </Row>
-
-      {proposal.supporting_documentation.length > 0 && (
-        <Row>
-          <Col xs={12} md={6}>
-            <ReadOnlyFormControl
-              label={translate('Supporting documentation')}
-              value={proposal.supporting_documentation}
-            >
-              <ul className="text-muted">
-                {proposal.supporting_documentation.map((item, index) => (
-                  <li key={index}>
-                    <ExternalLink
-                      url={item.file}
-                      label={translate('File {index}', { index: index + 1 })}
-                      iconless
-                    />
-                  </li>
-                ))}
-              </ul>
-            </ReadOnlyFormControl>
-          </Col>
-        </Row>
+      {proposal.supporting_documentation?.length > 0 && (
+        <CommentSection
+          label={translate('Supporting documentation')}
+          valueField="supporting_documentation"
+          commentField="comment_project_supporting_documentation"
+          tooltip={translate(
+            'Upload additional documents, which support the proposal and help to review it.',
+          )}
+          onAddCommentClick={onAddCommentClick}
+          reviews={reviews}
+          proposal={proposal}
+        >
+          <DocumentationFiles files={proposal.supporting_documentation} />
+        </CommentSection>
       )}
     </Card.Body>
   </Card>

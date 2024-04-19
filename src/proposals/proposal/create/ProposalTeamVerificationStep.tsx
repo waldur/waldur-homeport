@@ -25,10 +25,11 @@ const validate = (values) => {
   return errors;
 };
 
-export const ProposalTeamVerificationStep: FC<{ proposal; refetch }> = ({
-  proposal,
-  refetch,
-}) => {
+export const ProposalTeamVerificationStep: FC<{
+  proposal;
+  reviews?;
+  refetch;
+}> = ({ proposal, reviews, refetch }) => {
   const submitForm = useCallback(
     async (_, dispatch) => {
       try {
@@ -55,7 +56,11 @@ export const ProposalTeamVerificationStep: FC<{ proposal; refetch }> = ({
       {(formProps) => (
         <SidebarLayout.Container>
           <SidebarLayout.Body>
-            <ProposalTeam proposal={proposal} change={formProps.change} />
+            <ProposalTeam
+              proposal={proposal}
+              change={formProps.change}
+              reviews={reviews}
+            />
           </SidebarLayout.Body>
           <SidebarLayout.Sidebar>
             <FormSteps

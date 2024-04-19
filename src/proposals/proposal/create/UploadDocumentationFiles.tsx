@@ -1,19 +1,11 @@
 import { DropzoneFiles } from '@waldur/core/DropzoneFiles';
 import { formatJsx, translate } from '@waldur/i18n';
 
+import { DocumentationFiles } from './DocumentationFiles';
+
 export const UploadDocumentationFiles = (props) => (
   <>
-    {props.proposal.supporting_documentation.length > 0 && (
-      <ul className="text-muted">
-        {props.proposal.supporting_documentation.map((item, index) => (
-          <li key={index}>
-            <a href={item.file} target="_blank" rel="noreferrer">
-              {translate('File {index}', { index: index + 1 })}
-            </a>
-          </li>
-        ))}
-      </ul>
-    )}
+    <DocumentationFiles files={props.proposal.supporting_documentation} />
     <DropzoneFiles
       multiple={true}
       maxSize={25 * 1024 * 1024} // 25MB
