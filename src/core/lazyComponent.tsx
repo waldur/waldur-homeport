@@ -4,9 +4,11 @@ import React from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
-const ErrorRetryView = ({ retry }) => (
+const ErrorRetryView = ({ retry, componentName }) => (
   <button className="btn btn-primary" onClick={retry}>
-    {translate('Module loading error. Try again.')}
+    {translate('Module {componentName} loading error. Try again.', {
+      componentName,
+    })}
   </button>
 );
 
@@ -25,7 +27,11 @@ export function lazyComponent<T = any>(
             .then((module) => ({ default: module[componentName] }))
             .catch(() => {
               setLoading(false);
-              return { default: () => <ErrorRetryView retry={retry} /> };
+              return {
+                default: () => (
+                  <ErrorRetryView retry={retry} componentName={componentName} />
+                ),
+              };
             }),
         ),
       [promise, loading],
