@@ -147,8 +147,8 @@ export const states: StateDeclaration[] = [
     component: RoundPage,
   },
   {
-    name: 'proposal-create-review',
-    url: 'proposal/:proposal_uuid/create-review',
+    name: 'proposal-review',
+    url: 'review/:review_uuid/',
     component: ProposalReviewCreatePage,
     parent: 'call-management',
   },

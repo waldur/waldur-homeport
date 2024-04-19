@@ -7,7 +7,21 @@ import { RoleField } from '@waldur/user/affiliations/RoleField';
 
 import { UserRemoveButton } from './UserRemoveButton';
 
-export const UsersList: FC<any> = ({ table, scope, hideRole, readOnly }) => {
+interface UsersListProps {
+  table;
+  scope;
+  hideRole?: boolean;
+  readOnly?: boolean;
+  tableFooter?;
+}
+
+export const UsersList: FC<UsersListProps> = ({
+  table,
+  scope,
+  hideRole,
+  readOnly,
+  tableFooter,
+}) => {
   const columns = [
     {
       title: translate('User'),
@@ -42,6 +56,7 @@ export const UsersList: FC<any> = ({ table, scope, hideRole, readOnly }) => {
               />
             )
       }
+      footer={tableFooter}
     />
   );
 };

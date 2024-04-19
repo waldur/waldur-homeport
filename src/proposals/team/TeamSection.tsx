@@ -12,6 +12,9 @@ import {
 import { createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
+import { FieldReviewComments } from '../proposal/create-review/FieldReviewComments';
+import { ProposalReview } from '../types';
+
 import { AddUserButton } from './AddUserButton';
 import { InvitationsList } from './InvitationsList';
 import { UsersList } from './UsersList';
@@ -35,6 +38,7 @@ export const TeamSection: FC<
   GenericInvitationContext & {
     title: string;
     change?(field: string, value: any): void;
+    reviews?: ProposalReview[];
   }
 > = (props) => {
   const hideRole = props.roles && props.roles.length === 1;
@@ -114,6 +118,8 @@ export const TeamSection: FC<
           <InvitationsList table={invitationsTable} hideRole={hideRole} />
         )}
         {tab.key === 'permissions' && <TableComponent {...eventsTable} />}
+
+        <FieldReviewComments reviews={props.reviews} fieldName="comment_team" />
       </Card.Body>
     </Card>
   );

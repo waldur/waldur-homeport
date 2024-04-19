@@ -2,13 +2,27 @@ import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { ProposalResource } from '@waldur/proposals/types';
+import {
+  Proposal,
+  ProposalResource,
+  ProposalReview,
+} from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
+import { FieldReviewComments } from '../create-review/FieldReviewComments';
+
 import { ResourceRequestExpandableRow } from './resource-requests-step/ResourceRequestExpandableRow';
 
-export const ResourceRequestsSummary = ({ proposal }) => {
+interface ResourceRequestsSummaryProps {
+  proposal: Proposal;
+  reviews?: ProposalReview[];
+}
+
+export const ResourceRequestsSummary = ({
+  proposal,
+  reviews,
+}: ResourceRequestsSummaryProps) => {
   const filter = useMemo(
     () => ({
       proposal_uuid: proposal.uuid,
@@ -47,6 +61,11 @@ export const ResourceRequestsSummary = ({ proposal }) => {
           ]}
           hasActionBar={false}
           expandableRow={ResourceRequestExpandableRow}
+          fullWidth
+        />
+        <FieldReviewComments
+          reviews={reviews}
+          fieldName="comment_resource_requests"
         />
       </Card.Body>
     </Card>

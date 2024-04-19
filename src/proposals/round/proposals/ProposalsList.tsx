@@ -54,7 +54,9 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
       verboseName={translate('Proposals')}
       expandableRow={ProposalExpandableRow}
       hasQuery={true}
-      hoverableRow={ProposalRowActions}
+      hoverableRow={({ row }) => (
+        <ProposalRowActions row={{ ...row, call_uuid: props.call_uuid }} />
+      )}
     />
   );
 };

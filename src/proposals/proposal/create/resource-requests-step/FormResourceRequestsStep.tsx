@@ -12,9 +12,16 @@ import {
 } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { getPublicCall } from '@waldur/proposals/api';
-import { Proposal, ProposalResource } from '@waldur/proposals/types';
+import {
+  Proposal,
+  ProposalResource,
+  ProposalReview,
+} from '@waldur/proposals/types';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
+
+import { AddCommentButton } from '../../create-review/AddCommentButton';
+import { FieldReviewComments } from '../../create-review/FieldReviewComments';
 
 import { AddResourceButton } from './AddResourceButton';
 import { ProposalResourcesFilter } from './ProposalResourcesFilter';
@@ -34,6 +41,8 @@ const mapPropsToFilter = createSelector(
 export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params.proposal;
   const change = props.params?.change;
+  const reviews: ProposalReview[] = props.params?.reviews;
+  const onAddCommentClick = props.params?.onAddCommentClick;
   const readOnlyMode = props.params.readOnly;
   const {
     data: call,
@@ -84,6 +93,12 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
               refetch={tableProps.fetch}
             />
           </div>
+        ) : onAddCommentClick ? (
+          <div className="d-flex justify-content-end flex-grow-1">
+            <AddCommentButton
+              onClick={() => onAddCommentClick('comment_resource_requests')}
+            />
+          </div>
         ) : null
       }
       refetch={tableProps.fetch}
@@ -130,6 +145,10 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
             />
           ) : null
         }
+      />
+      <FieldReviewComments
+        reviews={reviews}
+        fieldName="comment_resource_requests"
       />
     </VStepperFormStepCard>
   );

@@ -10,7 +10,8 @@ import { ResourceRequestsSummary } from './ResourceRequestsSummary';
 export const ProposalTeam: FC<{
   proposal;
   change(field: string, value: any): void;
-}> = ({ proposal, change }) => (
+  reviews?;
+}> = ({ proposal, change, reviews }) => (
   <>
     <ProposalHeader proposal={proposal} />
     <TeamSection
@@ -18,8 +19,9 @@ export const ProposalTeam: FC<{
       roleTypes={['proposal']}
       title={translate('Proposed project team')}
       change={change}
+      reviews={reviews}
     />
-    <ProjectDetailsSummary proposal={proposal} />
-    <ResourceRequestsSummary proposal={proposal} />
+    <ProjectDetailsSummary proposal={proposal} reviews={reviews} />
+    <ResourceRequestsSummary proposal={proposal} reviews={reviews} />
   </>
 );

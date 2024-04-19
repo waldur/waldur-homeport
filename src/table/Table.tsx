@@ -71,6 +71,7 @@ export interface TableProps<RowType = any> extends TableState {
   fieldType?: 'checkbox' | 'radio';
   fieldName?: string;
   validate?: BaseFieldProps['validate'];
+  footer?: React.ReactNode;
 }
 
 class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
@@ -195,6 +196,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               </Col>
             </Row>
           )}
+          {this.props.footer}
         </Card.Body>
       </Card>
     );

@@ -27,7 +27,7 @@ export const CreatePageSidebar = (props: CreatePageSidebarProps) => (
     />
     <FloatingSubmitButton
       submitting={props.submitting}
-      label={translate('Submit application')}
+      label={translate('Submit review')}
     />
     <TosNotification />
   </>

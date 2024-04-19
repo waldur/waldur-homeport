@@ -1,13 +1,20 @@
+import { useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
+import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 import { rejectProposal } from '../api';
+
+const CreateReviewDialog = lazyComponent(
+  () => import('./create-review/CreateReviewDialog'),
+  'CreateReviewDialog',
+);
 
 export const ProposalRowActions = ({ row }) => {
   const isStaff = useSelector(isStaffSelector);
@@ -18,6 +25,17 @@ export const ProposalRowActions = ({ row }) => {
   ].includes(row.state);
 
   const dispatch = useDispatch();
+
+  const openCreateReviewDialog = useCallback(
+    (proposal) =>
+      dispatch(
+        openModalDialog(CreateReviewDialog, {
+          resolve: { proposal },
+          size: 'md',
+        }),
+      ),
+    [dispatch],
+  );
 
   const handleRejectProposal = async (proposalUuid) => {
     await waitForConfirmation(
@@ -43,11 +61,7 @@ export const ProposalRowActions = ({ row }) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         {isStaff && (
-          <Dropdown.Item
-            as={Link}
-            state="proposal-create-review"
-            params={{ proposal_uuid: row.uuid }}
-          >
+          <Dropdown.Item onClick={() => openCreateReviewDialog(row)}>
             {translate('Create review')}
           </Dropdown.Item>
         )}
@@ -60,7 +74,9 @@ export const ProposalRowActions = ({ row }) => {
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => handleRejectProposal(row.uuid)}
-          className="text-danger"
+          className={
+            'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
+          }
           disabled={isRejectButtonDisabled}
         >
           {translate('Reject')}

@@ -6,10 +6,12 @@ import {
 } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { ProjectDetailsSummary } from '@waldur/proposals/proposal/create/ProjectDetailsSummary';
-import { Proposal } from '@waldur/proposals/types';
+import { Proposal, ProposalReview } from '@waldur/proposals/types';
 
 export const FormProjectDetailsStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params?.proposal;
+  const reviews: ProposalReview[] = props.params?.reviews;
+  const onAddCommentClick = props.params?.onAddCommentClick;
 
   return (
     <VStepperFormStepCard
@@ -20,7 +22,8 @@ export const FormProjectDetailsStep = (props: VStepperFormStepProps) => {
     >
       <ProjectDetailsSummary
         proposal={proposal}
-        commentable
+        reviews={reviews}
+        onAddCommentClick={onAddCommentClick}
         hideHeader
         paddingless
       />

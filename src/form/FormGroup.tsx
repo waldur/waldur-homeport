@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { cloneElement, PureComponent } from 'react';
+import { cloneElement, PureComponent, ReactNode } from 'react';
 import { Form } from 'react-bootstrap';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
@@ -13,6 +13,7 @@ import { FormField } from './types';
 export interface FormGroupProps extends FormField {
   meta: WrappedFieldMetaProps;
   clearOnUnmount?: boolean;
+  actions?: ReactNode;
 }
 
 export class FormGroup extends PureComponent<FormGroupProps> {
@@ -33,6 +34,7 @@ export class FormGroup extends PureComponent<FormGroupProps> {
       meta: { touched, error },
       children,
       floating,
+      actions,
       ...rest
     } = this.props;
     const newProps = {
@@ -56,10 +58,13 @@ export class FormGroup extends PureComponent<FormGroupProps> {
         {label}
       </Form.Label>
     );
-    return (
+    const main = (
       <div
         className={classNames(
-          { 'form-floating': floating },
+          {
+            'form-floating': floating,
+            'flex-grow-1': Boolean(actions),
+          },
           'position-relative mb-7',
         )}
       >
@@ -74,6 +79,15 @@ export class FormGroup extends PureComponent<FormGroupProps> {
         {touched && <FieldError error={error} />}
       </div>
     );
+    if (actions) {
+      return (
+        <div className="d-flex align-items-start gap-4">
+          {main}
+          {actions}
+        </div>
+      );
+    }
+    return main;
   }
 
   componentWillUnmount() {
