@@ -4,7 +4,7 @@ import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import { Invoice } from '@waldur/invoices/types';
 
-interface InvoicesDropdownProps {
+interface ResourceActionComponentProps {
   onToggle: (isOpen: boolean) => void;
   onSelect: (invoice: Invoice) => void;
   disabled?: boolean;
@@ -20,9 +20,9 @@ const ActionItem = ({ invoice, invoiceKey, onSelect }) => (
   </Dropdown.Item>
 );
 
-export const InvoicesDropdown: FunctionComponent<InvoicesDropdownProps> = (
-  props,
-) => (
+export const InvoicesDropdown: FunctionComponent<
+  ResourceActionComponentProps
+> = (props) => (
   <DropdownButton
     title={
       <>
