@@ -51,18 +51,23 @@ export const GroupInvitationCreateButton: FunctionComponent<{
       }),
     );
 
-  const disabled = !hasPermission(user, {
-    permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-    customerId: customer.uuid,
-  });
+  const canManage =
+    hasPermission(user, {
+      permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+      customerId: customer.uuid,
+    }) ||
+    hasPermission(user, {
+      permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
+      customerId: customer.uuid,
+    });
   return (
     <ActionButton
       action={callback}
       title={translate('Create group invitation')}
       icon="fa fa-plus"
       variant="primary"
-      disabled={disabled}
-      tooltip={disabled && translate('You can not create group invitations.')}
+      disabled={!canManage}
+      tooltip={!canManage && translate('You can not create group invitations.')}
     />
   );
 };
