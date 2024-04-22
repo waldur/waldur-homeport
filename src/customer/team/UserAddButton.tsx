@@ -24,14 +24,15 @@ export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const customer = useSelector(getCustomer);
-  if (
-    !hasPermission(user, {
+  const canAddUser =
+    hasPermission(user, {
       permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
       customerId: customer.uuid,
-    })
-  ) {
-    return null;
-  }
+    }) ||
+    hasPermission(user, {
+      permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
+      customerId: customer.uuid,
+    });
   return (
     <ActionButton
       action={() =>
@@ -45,6 +46,7 @@ export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
       }
       title={translate('Add member')}
       icon="fa fa-plus"
+      disabled={!canAddUser}
     />
   );
 };
