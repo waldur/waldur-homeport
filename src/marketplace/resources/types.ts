@@ -66,6 +66,7 @@ export interface Resource extends ResourceReference {
   parent_name?: string;
   report?: Report;
   provider_name: string;
+  provider_uuid: string;
   marketplace_offering_uuid?: string;
   marketplace_resource_uuid?: string;
   end_date?: string;
