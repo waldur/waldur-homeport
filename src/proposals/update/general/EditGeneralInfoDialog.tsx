@@ -80,7 +80,7 @@ export const EditGeneralInfoDialog = connect<
               <SubmitButton
                 disabled={props.invalid}
                 submitting={props.submitting}
-                label={translate('Edit')}
+                label={translate('Save')}
               />
               <CloseDialogButton />
             </>
