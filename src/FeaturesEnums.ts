@@ -49,6 +49,10 @@ export enum SupportFeatures {
   vm_type_overview = 'support.vm_type_overview',
 }
 
+export enum TelemetryFeatures {
+  send_metrics = 'telemetry.send_metrics',
+}
+
 export enum UserFeatures {
   competence = 'user.competence',
   notifications = 'user.notifications',
@@ -65,5 +69,6 @@ export type FeaturesEnum =
   | RancherFeatures
   | SlurmFeatures
   | SupportFeatures
+  | TelemetryFeatures
   | UserFeatures
 ;
