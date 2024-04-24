@@ -28,6 +28,7 @@ const useChangeLimits = ({ resource, refetch }) => {
     tooltip,
     disabled,
     iconClass: 'fa-edit',
+    important: true,
   };
 };
 
