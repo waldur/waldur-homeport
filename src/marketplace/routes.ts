@@ -11,10 +11,9 @@ import { WorkspaceType } from '@waldur/workspace/types';
 
 import { fetchProvider, loadContext } from './resolve';
 
-const AdminOfferingsListContainer = lazyComponent(
-  () =>
-    import('@waldur/marketplace/offerings/admin/AdminOfferingsListContainer'),
-  'AdminOfferingsListContainer',
+const AdminOfferingsList = lazyComponent(
+  () => import('@waldur/marketplace/offerings/admin/AdminOfferingsList'),
+  'AdminOfferingsList',
 );
 const ResourceDetailsPage = lazyComponent(
   () => import('@waldur/marketplace/resources/details/ResourceDetailsPage'),
@@ -53,9 +52,9 @@ const PublicOfferingDetailsContainer = lazyComponent(
   () => import('./offerings/details/PublicOfferingDetailsContainer'),
   'PublicOfferingDetailsContainer',
 );
-const MyOfferingsListContainer = lazyComponent(
-  () => import('./offerings/list/MyOfferingsListContainer'),
-  'MyOfferingsListContainer',
+const MyOfferingsList = lazyComponent(
+  () => import('./offerings/list/MyOfferingsList'),
+  'MyOfferingsList',
 );
 const ProviderOfferingsList = lazyComponent(
   () => import('./service-providers/ProviderOfferingsList'),
@@ -73,13 +72,13 @@ const OfferingUpdateContainer = lazyComponent(
   () => import('./offerings/update/OfferingUpdateContainer'),
   'OfferingUpdateContainer',
 );
-const ProviderOrdersList = lazyComponent(
-  () => import('./orders/list/ProviderOrdersList'),
-  'ProviderOrdersList',
+const OrdersList = lazyComponent(
+  () => import('./orders/list/OrdersList'),
+  'OrdersList',
 );
-const SupportOrdersContainer = lazyComponent(
-  () => import('./orders/SupportOrdersContainer'),
-  'SupportOrdersContainer',
+const SupportOrdersList = lazyComponent(
+  () => import('./orders/list/SupportOrdersList'),
+  'SupportOrdersList',
 );
 const OrderDetails = lazyComponent(
   () => import('./orders/details/OrderDetails'),
@@ -145,9 +144,9 @@ const ProjectsListContainer = lazyComponent(
   () => import('@waldur/project/ProjectsListContainer'),
   'ProjectsListContainer',
 );
-const SupportLexisLinksList = lazyComponent(
-  () => import('./resources/lexis/SupportLexisLinksList'),
-  'SupportLexisLinksList',
+const BasicLexisLinkList = lazyComponent(
+  () => import('./resources/lexis/BasicLexisLinkList'),
+  'BasicLexisLinkList',
 );
 const getPublicRoutesParams = () => ({
   resolve: [
@@ -508,7 +507,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-my-offerings',
     url: 'marketplace-my-offerings/',
-    component: MyOfferingsListContainer,
+    component: MyOfferingsList,
     parent: 'organization',
     data: {
       breadcrumb: () => translate('My offerings'),
@@ -549,7 +548,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-orders',
     url: 'marketplace-orders/?{state}',
-    component: ProviderOrdersList,
+    component: OrdersList,
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Orders'),
@@ -644,7 +643,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-admin-lexis-links-list',
     url: 'lexis-links/',
-    component: SupportLexisLinksList,
+    component: BasicLexisLinkList,
     parent: 'marketplace-admin-resources',
     data: {
       breadcrumb: () => translate('LEXIS links'),
@@ -671,7 +670,7 @@ export const states: StateDeclaration[] = [
     name: 'admin-marketplace-offerings',
     parent: 'admin-marketplace',
     url: 'offerings/',
-    component: AdminOfferingsListContainer,
+    component: AdminOfferingsList,
     data: {
       breadcrumb: () => translate('Available offerings'),
     },
@@ -703,7 +702,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-support-orders',
     url: 'orders/',
     parent: 'marketplace-admin-resources',
-    component: SupportOrdersContainer,
+    component: SupportOrdersList,
     data: {
       breadcrumb: () => translate('Orders'),
     },

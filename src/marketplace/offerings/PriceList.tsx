@@ -1,13 +1,30 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { BillingPeriod } from '../common/BillingPeriod';
 import { getBillingTypeLabel } from '../resources/usage/utils';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const exportFields = (row) => [
+  row.offering_name,
+  row.plan_name,
+  row.component_name,
+  row.measured_unit || 'N/A',
+  row.billing_type,
+  row.plan_unit,
+  row.amount,
+  row.price,
+];
+
+export const PriceList: FunctionComponent = () => {
+  const props = useTable({
+    table: 'MarketplacePriceList',
+    fetchData: createFetcher('marketplace-plan-components'),
+    exportFields,
+  });
+
   const columns = [
     {
       title: translate('Offering'),
@@ -53,20 +70,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: 'MarketplacePriceList',
-  fetchData: createFetcher('marketplace-plan-components'),
-  exportFields: (row) => [
-    row.offering_name,
-    row.plan_name,
-    row.component_name,
-    row.measured_unit || 'N/A',
-    row.billing_type,
-    row.plan_unit,
-    row.amount,
-    row.price,
-  ],
-};
-
-export const PriceList = connectTable(TableOptions)(TableComponent);

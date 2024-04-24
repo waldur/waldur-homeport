@@ -1,6 +1,5 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useCallback, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
@@ -8,12 +7,14 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { FinancialReportSendButton } from '@waldur/customer/list/FinancialReportSendButton';
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Table, createFetcher } from '@waldur/table';
+import { Column } from '@waldur/table/types';
+import { renderFieldOrDash, useTable } from '@waldur/table/utils';
+import { Customer } from '@waldur/workspace/types';
 
 import { CurrentCostField } from './CurrentCostField';
 import { CustomerExpandableRow } from './CustomerExpandableRow';
+import { CustomerListFilter } from './CustomerListFilter';
 import {
   EstimatedCostField,
   ExportEstimatedCostField,
@@ -46,11 +47,16 @@ const renderTitleWithPriceTooltip = (title) => (
   </>
 );
 
-const TableComponent: FunctionComponent<any> = (props) => {
-  const { filterColumns, customerListFilter } = props;
+export const CustomerList: FunctionComponent<{
+  initialValues;
+  accountingPeriods;
+}> = ({ initialValues, accountingPeriods }) => {
+  const customerListFilter: any = useSelector(
+    getFormValues('customerListFilter'),
+  );
   const accountingPeriodIsCurrent =
     customerListFilter?.accounting_period?.value.current;
-  const columns = filterColumns([
+  const columns: Column<Customer>[] = [
     {
       title: translate('Organization'),
       render: OrganizationLink,
@@ -81,19 +87,68 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: AgreementNumberField,
       orderField: 'agreement_number',
     },
-    {
+  ];
+
+  if (accountingPeriodIsCurrent) {
+    columns.push({
       title: renderTitleWithPriceTooltip(translate('Estimated cost')),
       render: EstimatedCostField,
-      visible: accountingPeriodIsCurrent,
       orderField: 'estimated_cost',
-    },
-    {
+    });
+  } else {
+    columns.push({
       title: renderTitleWithPriceTooltip(translate('Cost')),
       render: CurrentCostField,
-      visible: !accountingPeriodIsCurrent,
       orderField: 'total_cost',
+    });
+  }
+
+  const filter = useMemo(
+    () => formatFilter(customerListFilter),
+    [customerListFilter],
+  );
+
+  const exportRow = useCallback(
+    (row) => {
+      const base = [
+        row.name,
+        row.abbreviation,
+        formatDate(row.created),
+        formatDate(row.accounting_start_date),
+        renderFieldOrDash(row.agreement_number),
+      ];
+      return accountingPeriodIsCurrent
+        ? [...base, ExportEstimatedCostField({ row })]
+        : base;
     },
-  ]);
+    [accountingPeriodIsCurrent],
+  );
+
+  const exportFields = useMemo(() => {
+    const base = [
+      translate('Organization'),
+      translate('Abbreviation'),
+      translate('Created'),
+      translate('Start day of accounting'),
+      translate('Agreement number'),
+    ];
+    const vatNotIncluded = ENV.accountingMode === 'accounting';
+    const vatMessage = vatNotIncluded
+      ? translate('VAT is not included')
+      : translate('VAT is included');
+    return accountingPeriodIsCurrent
+      ? [...base, `${translate('Estimated cost')} (${vatMessage})`]
+      : [...base, `${translate('Cost')} (${vatMessage})`];
+  }, [accountingPeriodIsCurrent]);
+
+  const props = useTable({
+    table: 'customerList',
+    fetchData: createFetcher('financial-reports'),
+    queryField: 'query',
+    filter,
+    exportRow,
+    exportFields,
+  });
 
   return (
     <Table
@@ -105,42 +160,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
       enableExport={true}
       expandableRow={CustomerExpandableRow}
       actions={<FinancialReportSendButton />}
+      filters={
+        <CustomerListFilter
+          initialValues={initialValues}
+          accountingPeriods={accountingPeriods}
+        />
+      }
     />
   );
-};
-
-const exportRow = (row, props) => {
-  const base = [
-    row.name,
-    row.abbreviation,
-    formatDate(row.created),
-    formatDate(row.accounting_start_date),
-    renderFieldOrDash(row.agreement_number),
-  ];
-  return props.customerListFilter.accounting_period &&
-    props.customerListFilter.accounting_period.value.current
-    ? [...base, ExportEstimatedCostField({ row })]
-    : base;
-};
-
-const exportFields = (props) => {
-  const base = [
-    translate('Organization'),
-    translate('Abbreviation'),
-    translate('Created'),
-    translate('Start day of accounting'),
-    translate('Agreement number'),
-  ];
-  const accountingPeriodIsCurrent =
-    props.customerListFilter.accounting_period &&
-    props.customerListFilter.accounting_period.value.current;
-  const vatNotIncluded = ENV.accountingMode === 'accounting';
-  const vatMessage = vatNotIncluded
-    ? translate('VAT is not included')
-    : translate('VAT is included');
-  return accountingPeriodIsCurrent
-    ? [...base, `${translate('Estimated cost')} (${vatMessage})`]
-    : [...base, `${translate('Cost')} (${vatMessage})`];
 };
 
 const formatFilter = (filter) => {
@@ -157,20 +184,3 @@ const formatFilter = (filter) => {
     return filter;
   }
 };
-
-const TableOptions = {
-  table: 'customerList',
-  fetchData: createFetcher('financial-reports'),
-  queryField: 'query',
-  mapPropsToFilter: (props) => formatFilter(props.customerListFilter),
-  exportRow,
-  exportFields,
-};
-
-const mapStateToProps = (state: RootState) => ({
-  customerListFilter: getFormValues('customerListFilter')(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const CustomerList = enhance(TableComponent) as React.ComponentType<any>;

@@ -1,38 +1,59 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { PlanUsageButton } from './PlanUsageButton';
+import { PlanUsageFilter } from './PlanUsageFilter';
 import { PlanUsageRowProps } from './types';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const PlanUsageList: FunctionComponent = () => {
+  const filter = useSelector(mapStateToProps);
+  const props = useTable({
+    table: 'PlanUsages',
+    fetchData: createFetcher('marketplace-plans/usage_stats'),
+    exportRow: (row) => [
+      row.customer_provider_name,
+      row.offering_name,
+      row.plan_name,
+      row.limit,
+      row.usage,
+    ],
+    exportFields: [
+      'Service provider',
+      'Offering',
+      'Plan',
+      'Limit',
+      'Active plan count',
+    ],
+    filter,
+  });
   const columns = [
     {
       title: translate('Service provider'),
-      render: ({ row }: PlanUsageRowProps) => row.customer_provider_name,
+      render: ({ row }: PlanUsageRowProps) => <>{row.customer_provider_name}</>,
     },
     {
       title: translate('Offering'),
-      render: ({ row }: PlanUsageRowProps) => row.offering_name,
+      render: ({ row }: PlanUsageRowProps) => <>{row.offering_name}</>,
     },
     {
       title: translate('Plan'),
-      render: ({ row }: PlanUsageRowProps) => row.plan_name,
+      render: ({ row }: PlanUsageRowProps) => <>{row.plan_name}</>,
     },
     {
       title: translate('Active count'),
-      render: ({ row }: PlanUsageRowProps) => row.usage,
+      render: ({ row }: PlanUsageRowProps) => <>{row.usage}</>,
       orderField: 'usage',
     },
     {
       title: translate('Limit'),
-      render: ({ row }: PlanUsageRowProps) => row.limit || 'N/A',
+      render: ({ row }: PlanUsageRowProps) => <>{row.limit || 'N/A'}</>,
       orderField: 'limit',
     },
     {
@@ -51,48 +72,23 @@ const TableComponent: FunctionComponent<any> = (props) => {
       enableExport={true}
       initialSorting={{ field: 'usage', mode: 'desc' }}
       hoverableRow={PlanUsageButton}
+      filters={<PlanUsageFilter />}
     />
   );
 };
 
-const TableOptions = {
-  table: 'PlanUsages',
-  fetchData: createFetcher('marketplace-plans/usage_stats'),
-  mapPropsToFilter: (props) => {
+const mapStateToProps = createSelector(
+  getFormValues('PlanUsageFilter'),
+  (filterValues: any) => {
     const filter: Record<string, string> = {};
-    if (props.filter) {
-      if (props.filter.provider) {
-        filter.customer_provider_uuid = props.filter.provider.customer_uuid;
+    if (filterValues) {
+      if (filterValues.provider) {
+        filter.customer_provider_uuid = filterValues.provider.customer_uuid;
       }
-      if (props.filter.offering) {
-        filter.offering_uuid = props.filter.offering.uuid;
+      if (filterValues.offering) {
+        filter.offering_uuid = filterValues.offering.uuid;
       }
     }
     return filter;
   },
-
-  exportRow: (row) => [
-    row.customer_provider_name,
-    row.offering_name,
-    row.plan_name,
-    row.limit,
-    row.usage,
-  ],
-  exportFields: [
-    'Service provider',
-    'Offering',
-    'Plan',
-    'Limit',
-    'Active plan count',
-  ],
-};
-
-const mapStateToProps = (state: RootState) => ({
-  filter: getFormValues('PlanUsageFilter')(state),
-});
-
-const connector = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const PlanUsageList = connector(
-  TableComponent,
-) as React.ComponentType<any>;
+);

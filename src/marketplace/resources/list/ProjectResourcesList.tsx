@@ -1,47 +1,68 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { CategoryColumn } from '@waldur/marketplace/types';
-import { isVisible } from '@waldur/store/config';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { getProject } from '@waldur/workspace/selectors';
-import { Project } from '@waldur/workspace/types';
 
 import { ResourceImportButton } from '../import/ResourceImportButton';
-import { Resource } from '../types';
 
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
 import { EmptyResourcesListPlaceholder } from './EmptyResourcesListPlaceholder';
 import { ExpandableResourceSummary } from './ExpandableResourceSummary';
+import { ProjectResourcesFilter } from './ProjectResourcesFilter';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 import { resourcesListRequiredFields } from './utils';
 
-interface FieldProps {
-  row: Resource;
-}
-
-interface StateProps {
-  project: Project;
-  importVisible: boolean;
-  filter: any;
-}
-
 interface OwnProps {
   category_uuid: string;
   columns: CategoryColumn[];
+  offerings;
 }
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ProjectResourcesList: FunctionComponent<OwnProps> = (ownProps) => {
+  const project = useSelector(getProject);
+  const filterValues: any = useSelector(
+    getFormValues('ProjectResourcesFilter'),
+  );
+
+  const filter = useMemo(() => {
+    const filter: Record<string, any> = {};
+    if (project) {
+      filter.project_uuid = project.uuid;
+    }
+    if (ownProps.category_uuid) {
+      filter.category_uuid = ownProps.category_uuid;
+    }
+    if (filterValues?.offering) {
+      filter.offering_uuid = filterValues.offering.uuid;
+    }
+    if (filterValues?.runtime_state) {
+      filter.runtime_state = filterValues.runtime_state.value;
+    }
+    if (filterValues?.state) {
+      filter.state = filterValues.state.map((option) => option.value);
+    }
+    filter.field = resourcesListRequiredFields();
+    return filter;
+  }, [filterValues, project, ownProps.category_uuid]);
+
+  const props = useTable({
+    table: `ProjectResourcesList-${project.uuid}-${ownProps.category_uuid}`,
+    fetchData: createFetcher('marketplace-resources'),
+    filter,
+    queryField: 'query',
+  });
   const columns: any[] = [
     {
       title: translate('Name'),
@@ -50,11 +71,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Offering'),
-      render: ({ row }: FieldProps) => row.offering_name,
+      render: ({ row }) => row.offering_name,
     },
   ];
 
-  props.columns.map((column: CategoryColumn) => {
+  ownProps.columns.map((column: CategoryColumn) => {
     columns.push({
       title: column.title,
       render: ({ row }) => CategoryColumnField({ row, column }),
@@ -74,13 +95,13 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
   const tableActions = (
     <>
-      {props.importVisible && (
+      {isFeatureVisible(MarketplaceFeatures.import_resources) && (
         <ResourceImportButton
-          category_uuid={props.category_uuid}
-          project_uuid={props.project && props.project.uuid}
+          category_uuid={ownProps.category_uuid}
+          project_uuid={project?.uuid}
         />
       )}
-      <CreateResourceButton category_uuid={props.category_uuid} />
+      <CreateResourceButton category_uuid={ownProps.category_uuid} />
     </>
   );
 
@@ -100,50 +121,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       expandableRow={ExpandableResourceSummary}
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
+      filters={<ProjectResourcesFilter offerings={ownProps.offerings} />}
     />
   );
 };
-
-const mapPropsToFilter = (props: StateProps & OwnProps) => {
-  const filter: Record<string, any> = {};
-  if (props.project) {
-    filter.project_uuid = props.project.uuid;
-  }
-  if (props.category_uuid) {
-    filter.category_uuid = props.category_uuid;
-  }
-  if (props.filter?.offering) {
-    filter.offering_uuid = props.filter.offering.uuid;
-  }
-  if (props.filter?.runtime_state) {
-    filter.runtime_state = props.filter.runtime_state.value;
-  }
-  if (props.filter?.state) {
-    filter.state = props.filter.state.map((option) => option.value);
-  }
-  filter.field = resourcesListRequiredFields();
-  return filter;
-};
-
-const TableOptions = {
-  table: 'ProjectResourcesList',
-  mapPropsToTableId: (props) => [props.project.uuid, props.category_uuid],
-  fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter,
-  queryField: 'query',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  project: getProject(state),
-  importVisible: isVisible(state, MarketplaceFeatures.import_resources),
-  filter: getFormValues('ProjectResourcesFilter')(state),
-});
-
-const enhance = compose(
-  connect<StateProps, {}, OwnProps>(mapStateToProps),
-  connectTable(TableOptions),
-);
-
-export const ProjectResourcesList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

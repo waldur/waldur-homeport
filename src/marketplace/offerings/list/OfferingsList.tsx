@@ -1,23 +1,10 @@
 import { FunctionComponent } from 'react';
-import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
-import {
-  OFFERING_TABLE_NAME,
-  PUBLIC_OFFERINGS_FILTER_FORM_ID,
-} from '@waldur/marketplace/offerings/store/constants';
-import { RootState } from '@waldur/store/reducers';
 import { Table, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import {
-  getCustomer,
-  getUser,
-  isOwnerOrStaff,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { Offering } from '../../types';
 import { useOfferingDropdownActions } from '../hooks';
@@ -27,8 +14,33 @@ import { OfferingNameColumn } from './OfferingNameColumn';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 import { OfferingStateCell } from './OfferingStateCell';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
-  const organizationColumn = props?.hasOrganizationColumn
+const exportRow = (row: Offering) => [
+  row.name,
+  formatDateTime(row.created),
+  row.category_title,
+  row.state,
+  row.type,
+];
+
+const exportFields = ['Name', 'Created', 'Category', 'State', 'Type'];
+
+export const BaseOfferingsList: FunctionComponent<{
+  table: string;
+  filter;
+  hasOrganizationColumn?: boolean;
+  showActions?: boolean;
+  filters?;
+}> = ({ table, filter, hasOrganizationColumn, showActions, filters }) => {
+  const props = useTable({
+    table,
+    filter,
+    fetchData: createFetcher('marketplace-provider-offerings'),
+    exportRow,
+    exportFields,
+    queryField: 'keyword',
+  });
+
+  const organizationColumn = hasOrganizationColumn
     ? [
         {
           title: translate('Organization'),
@@ -50,7 +62,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Created'),
-      render: ({ row }) => formatDateTime(row.created),
+      render: ({ row }) => <>{formatDateTime(row.created)}</>,
       orderField: 'created',
     },
     {
@@ -59,7 +71,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Type'),
-      render: ({ row }) => getLabel(row.type),
+      render: ({ row }) => <>{getLabel(row.type)}</>,
     },
   ];
 
@@ -69,61 +81,20 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     <Table
       {...props}
       placeholderComponent={
-        <OfferingsListTablePlaceholder showActions={props.showActions} />
+        <OfferingsListTablePlaceholder showActions={showActions} />
       }
       columns={columns}
       verboseName={translate('Offerings')}
-      dropdownActions={props.showActions && dropdownActions}
+      dropdownActions={showActions && dropdownActions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
-      hoverableRow={props.showActions && OfferingActions}
+      hoverableRow={
+        showActions
+          ? ({ row }) => <OfferingActions row={row} refetch={props.fetch} />
+          : null
+      }
       hasQuery={true}
+      filters={filters}
     />
   );
 };
-
-interface FilterData {
-  state: { value: string }[];
-}
-
-type StateProps = Readonly<ReturnType<typeof mapStateToProps>>;
-
-const mapPropsToFilter = (props: StateProps) => {
-  const filter: Record<string, any> = {
-    billable: true,
-    shared: true,
-  };
-  if (props.customer) {
-    filter.customer_uuid = props.customer.uuid;
-  }
-  if (props.filter?.state) {
-    filter.state = props.filter.state.map((option) => option.value);
-  }
-  if (props.isServiceManager && !props.isOwnerOrStaff) {
-    filter.service_manager_uuid = props.user.uuid;
-  }
-  return filter;
-};
-
-export const TableOptions: TableOptionsType = {
-  table: OFFERING_TABLE_NAME,
-  fetchData: createFetcher('marketplace-provider-offerings'),
-  mapPropsToFilter,
-  exportRow: (row: Offering) => [
-    row.name,
-    formatDateTime(row.created),
-    row.category_title,
-    row.state,
-    row.type,
-  ],
-  exportFields: ['Name', 'Created', 'Category', 'State', 'Type'],
-  queryField: 'keyword',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  user: getUser(state),
-  isServiceManager: isServiceManagerSelector(state),
-  isOwnerOrStaff: isOwnerOrStaff(state),
-  filter: getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID)(state) as FilterData,
-});

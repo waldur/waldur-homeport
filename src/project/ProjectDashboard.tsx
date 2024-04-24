@@ -30,7 +30,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
       <ProjectProfile project={project} />
       {!shouldConcealPrices && <ProjectDashboardCostLimits project={project} />}
       <ProjectResourcesAllList initialPageSize={5} className="mb-6" />
-      <ProjectEventsView initialPageSize={5} />
+      <ProjectEventsView />
     </>
   );
 };

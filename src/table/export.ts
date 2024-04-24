@@ -48,24 +48,10 @@ export function* exportTable(action: ReturnType<typeof exportTableAs>) {
   if (options.exportAll) {
     const state = yield select(getTableState(table));
     yield put(blockStart(table));
-    let defaultFilter;
-    if (options.getDefaultFilter) {
-      defaultFilter = yield select(options.getDefaultFilter);
-    }
-    let propFilter;
-    if (props && options.mapPropsToFilter) {
-      propFilter = options.mapPropsToFilter(props);
-    }
     const request: TableRequest = {
       pageSize: Math.max(state.pagination.resultCount, 200),
       currentPage: 1,
-      filter: config.withFilters
-        ? {
-            ...defaultFilter,
-            ...propFilter,
-            ...options.filter,
-          }
-        : { ...propFilter },
+      filter: config.withFilters ? { ...options.filter } : {},
     };
     if (config.withFilters && options.queryField && state.query) {
       request.filter[options.queryField] = state.query;

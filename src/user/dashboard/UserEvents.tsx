@@ -1,25 +1,15 @@
-import React from 'react';
+import { FC, useMemo } from 'react';
 
-import { getEventsList } from '@waldur/events/BaseEventsList';
-import { User } from '@waldur/workspace/types';
+import { BaseEventsList } from '@waldur/events/BaseEventsList';
 
-interface UserEventsProps {
-  showActions?: boolean;
-  user: User;
-}
-
-export const UserEvents: React.FC<UserEventsProps> = (outerProps) =>
-  outerProps.user
-    ? getEventsList({
-        mapPropsToFilter: (props) => ({
-          scope: props.user.url,
-          feature: 'users',
-          exclude_extra: true,
-        }),
-        mapPropsToTableId: (props) => ['user-events', props.user.uuid],
-      })(outerProps)
-    : null;
-
-UserEvents.defaultProps = {
-  showActions: true,
+export const UserEvents: FC<{ user? }> = ({ user }) => {
+  const filter = useMemo(
+    () => ({
+      scope: user.url,
+      feature: 'users',
+      exclude_extra: true,
+    }),
+    [user],
+  );
+  return <BaseEventsList filter={filter} table={`user-events-${user.uuid}`} />;
 };

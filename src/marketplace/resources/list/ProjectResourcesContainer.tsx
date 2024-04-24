@@ -8,7 +8,6 @@ import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { getProject } from '@waldur/workspace/selectors';
 
-import { ProjectResourcesFilter } from './ProjectResourcesFilter';
 import { ProjectResourcesList } from './ProjectResourcesList';
 import { loadData } from './utils';
 
@@ -35,12 +34,6 @@ export const ProjectResourcesContainer: React.FC = () => {
   } else if (error) {
     return <>{translate('Unable to load category details')}</>;
   } else {
-    return (
-      <ProjectResourcesList
-        columns={value.columns}
-        category_uuid={category_uuid}
-        filters={<ProjectResourcesFilter offerings={value.offerings} />}
-      />
-    );
+    return <ProjectResourcesList {...value} category_uuid={category_uuid} />;
   }
 };

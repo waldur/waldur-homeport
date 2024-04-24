@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -7,14 +7,31 @@ import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalA
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
+import { useTable } from '@waldur/table/utils';
 
 import { VOLUME_TYPE } from '../constants';
 
 import { formatInstance } from './OpenStackVolumeSummary';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const TenantVolumesList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      service_settings_uuid: resource.child_settings,
+    }),
+    [resource],
+  );
+
+  const props = useTable({
+    table: 'openstacktenant-volumes',
+    fetchData: createFetcher('openstacktenant-volumes'),
+    filter,
+    queryField: 'name',
+  });
+
   return (
     <Table
       {...props}
@@ -46,10 +63,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       hasQuery={true}
       actions={
-        <AddResourceButton
-          resource={props.resource}
-          offeringType={VOLUME_TYPE}
-        />
+        <AddResourceButton resource={resource} offeringType={VOLUME_TYPE} />
       }
       verboseName={translate('volumes')}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
@@ -64,14 +78,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'openstacktenant-volumes',
-  fetchData: createFetcher('openstacktenant-volumes'),
-  mapPropsToFilter: (props) => ({
-    service_settings_uuid: props.resource.child_settings,
-  }),
-  queryField: 'name',
-};
-
-export const TenantVolumesList = connectTable(TableOptions)(TableComponent);

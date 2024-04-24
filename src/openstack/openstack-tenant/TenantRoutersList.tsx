@@ -1,13 +1,46 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { SetRoutersButton } from './SetRoutersButton';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const TenantRoutersList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      tenant_uuid: resource.uuid,
+      field: [
+        'uuid',
+        'url',
+        'name',
+        'description',
+        'created',
+        'resource_type',
+        'routes',
+        'service_name',
+        'service_settings',
+        'service_settings_uuid',
+        'service_settings_state',
+        'service_settings_error_message',
+        'state',
+        'error_message',
+        'fixed_ips',
+        'project_uuid',
+      ],
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstack-routers',
+    fetchData: createFetcher('openstack-routers'),
+    queryField: 'name',
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -32,32 +65,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'openstack-routers',
-  fetchData: createFetcher('openstack-routers'),
-  mapPropsToFilter: (props) => ({
-    tenant_uuid: props.resource.uuid,
-    field: [
-      'uuid',
-      'url',
-      'name',
-      'description',
-      'created',
-      'resource_type',
-      'routes',
-      'service_name',
-      'service_settings',
-      'service_settings_uuid',
-      'service_settings_state',
-      'service_settings_error_message',
-      'state',
-      'error_message',
-      'fixed_ips',
-      'project_uuid',
-    ],
-  }),
-  queryField: 'name',
-};
-
-export const TenantRoutersList = connectTable(TableOptions)(TableComponent);

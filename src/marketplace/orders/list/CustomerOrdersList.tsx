@@ -1,14 +1,15 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { useTable } from '@waldur/table/utils';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { OrderDetailsLink } from '../details/OrderDetailsLink';
@@ -17,7 +18,16 @@ import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from './constants';
 import { CustomerOrdersListFilter } from './CustomerOrdersListFilter';
 import { OrderStateCell } from './OrderStateCell';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const CustomerOrdersList: FunctionComponent = () => {
+  const filter = useSelector(mapStateToFilter);
+  const props = useTable({
+    table: 'ordersList',
+    fetchData: createFetcher('marketplace-orders'),
+    filter,
+    exportRow,
+    exportFields,
+  });
+  const { state } = useCurrentStateAndParams();
   const columns = [
     {
       title: translate('Name'),
@@ -67,7 +77,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
   ];
 
-  if (props.$state$.parent !== 'project') {
+  if (state.parent !== 'project') {
     columns.splice(3, 0, {
       title: translate('Project'),
       render: ({ row }) => row.project_name,
@@ -83,70 +93,61 @@ const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
-      filters={<CustomerOrdersListFilter parentState={props.$state$.parent} />}
+      filters={<CustomerOrdersListFilter />}
     />
   );
 };
 
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string> = {};
+const exportRow = (row) => [
+  formatDateTime(row.created),
+  row.created_by_full_name || row.created_by_username,
+  row.state,
+  row.consumer_reviewed_at
+    ? formatDateTime(row.consumer_reviewed_at)
+    : DASH_ESCAPE_CODE,
+  row.consumer_reviewed_by_full_name ||
+    row.consumer_reviewed_by_username ||
+    DASH_ESCAPE_CODE,
+  row.cost,
+];
 
-  if (props.project && props.$state$.parent === 'project') {
-    filter.project_uuid = props.project.uuid;
-  } else {
-    filter.customer_uuid = props.customer.uuid;
-  }
+const exportFields = [
+  'Created at',
+  'Created by',
+  'State',
+  'Approved at',
+  'Approved by',
+  'Cost',
+];
 
-  if (props.filter) {
-    if (props.filter.project) {
-      filter.project_uuid = props.filter.project.uuid;
+const mapStateToFilter = createSelector(
+  getProject,
+  getCustomer,
+  getFormValues(CUSTOMER_ORDERS_LIST_FILTER_FORM_ID),
+  (project, customer, filterValues: any) => {
+    const filter: Record<string, string> = {};
+
+    if (project) {
+      filter.project_uuid = project.uuid;
+    } else {
+      filter.customer_uuid = customer.uuid;
     }
-    if (props.filter.state) {
-      filter.state = props.filter.state.value;
+
+    if (filterValues) {
+      if (filterValues.project) {
+        filter.project_uuid = filterValues.project.uuid;
+      }
+      if (filterValues.state) {
+        filter.state = filterValues.state.value;
+      }
+      if (filterValues.type) {
+        filter.type = filterValues.type.value;
+      }
+      if (filterValues.offering) {
+        filter.offering_uuid = filterValues.offering.uuid;
+      }
     }
-    if (props.filter.type) {
-      filter.type = props.filter.type.value;
-    }
-    if (props.filter.offering) {
-      filter.offering_uuid = props.filter.offering.uuid;
-    }
-  }
 
-  return filter;
-};
-
-const TableOptions = {
-  table: 'ordersList',
-  fetchData: createFetcher('marketplace-orders'),
-  mapPropsToFilter,
-  exportRow: (row) => [
-    formatDateTime(row.created),
-    row.created_by_full_name || row.created_by_username,
-    row.state,
-    row.consumer_reviewed_at
-      ? formatDateTime(row.consumer_reviewed_at)
-      : DASH_ESCAPE_CODE,
-    row.consumer_reviewed_by_full_name ||
-      row.consumer_reviewed_by_username ||
-      DASH_ESCAPE_CODE,
-    row.cost,
-  ],
-  exportFields: [
-    'Created at',
-    'Created by',
-    'State',
-    'Approved at',
-    'Approved by',
-    'Cost',
-  ],
-};
-
-const mapStateToProps = (state: RootState) => ({
-  project: getProject(state),
-  customer: getCustomer(state),
-  filter: getFormValues(CUSTOMER_ORDERS_LIST_FILTER_FORM_ID)(state) as FormData,
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const CustomerOrdersList = enhance(TableComponent);
+    return filter;
+  },
+);

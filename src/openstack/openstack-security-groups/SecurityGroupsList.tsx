@@ -1,17 +1,46 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CreateSecurityGroupAction } from '../openstack-tenant/actions/CreateSecurityGroupAction';
 import { PullSecurityGroupsAction } from '../openstack-tenant/actions/PullSecurityGroupsAction';
 
 import { SecurityGroupExpandableRow } from './SecurityGroupExpandableRow';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const SecurityGroupsList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      tenant_uuid: resource.uuid,
+      field: [
+        'name',
+        'description',
+        'state',
+        'url',
+        'marketplace_offering_uuid',
+        'service_name',
+        'end_date',
+        'backend_id',
+        'rules',
+        'resource_type',
+      ],
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstack-security-groups',
+    fetchData: createFetcher('openstack-security-groups'),
+    filter,
+    queryField: 'query',
+    exportRow,
+    exportFields: ['Name', 'Security groups'],
+  });
   return (
     <Table
       {...props}
@@ -43,10 +72,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       actions={
         <ButtonGroup>
           <CreateSecurityGroupAction
-            resource={props.resource}
+            resource={resource}
             refetch={props.fetch}
           />
-          <PullSecurityGroupsAction resource={props.resource} />
+          <PullSecurityGroupsAction resource={resource} />
         </ButtonGroup>
       }
     />
@@ -59,28 +88,3 @@ const exportRow = (row) => [
     return JSON.stringify(rule).replaceAll(/"/g, "'");
   }),
 ];
-
-const TableOptions = {
-  table: 'openstack-security-groups',
-  fetchData: createFetcher('openstack-security-groups'),
-  mapPropsToFilter: (props) => ({
-    tenant_uuid: props.resource.uuid,
-    field: [
-      'name',
-      'description',
-      'state',
-      'url',
-      'marketplace_offering_uuid',
-      'service_name',
-      'end_date',
-      'backend_id',
-      'rules',
-      'resource_type',
-    ],
-  }),
-  queryField: 'query',
-  exportRow,
-  exportFields: ['Name', 'Security groups'],
-};
-
-export const SecurityGroupsList = connectTable(TableOptions)(TableComponent);

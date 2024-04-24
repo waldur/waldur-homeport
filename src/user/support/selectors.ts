@@ -4,11 +4,6 @@ import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
-export const userManageIsVisible = (state: RootState) => {
-  const user = getUser(state);
-  return user.is_staff;
-};
-
 export const userTokenIsVisible = (state: RootState, ownProps) => {
   const currentUser = getUser(state);
   if (!currentUser) {

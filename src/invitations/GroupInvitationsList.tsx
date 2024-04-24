@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -11,16 +11,31 @@ import { GroupInvitationRowActions } from '@waldur/invitations/GroupInvitationRo
 import { GroupInvitationsFilter } from '@waldur/invitations/GroupInvitationsFilter';
 import { GroupInvitationsListExpandableRow } from '@waldur/invitations/GroupInvitationsListExpandableRow';
 import { RoleField } from '@waldur/invitations/RoleField';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
-import { TableOptionsType } from '@waldur/table/types';
+import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const mapStateToFilter = createSelector(
+  getCustomer,
+  getFormValues(GROUP_INVITATIONS_FILTER_FORM_ID),
+  (customer, filterValues) => ({
+    ...filterValues,
+    customer_uuid: customer.uuid,
+  }),
+);
+
+export const GroupInvitationsList: FunctionComponent<{}> = () => {
+  const filter = useSelector(mapStateToFilter);
+  const props = useTable({
+    table: 'group-invitations',
+    fetchData: createFetcher('user-group-invitations'),
+    filter,
+  });
   return (
     <Table
       {...props}
+      filters={<GroupInvitationsFilter />}
       columns={[
         {
           title: translate('Created by'),
@@ -51,30 +66,4 @@ const TableComponent: FunctionComponent<any> = (props) => {
       expandableRow={GroupInvitationsListExpandableRow}
     />
   );
-};
-
-const mapPropsToFilter = (props) => ({
-  ...props.filter,
-  customer_uuid: props.customer.uuid,
-});
-
-const TableOptions: TableOptionsType = {
-  table: 'group-invitations',
-  fetchData: createFetcher('user-group-invitations'),
-  mapPropsToFilter,
-};
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  filter: getFormValues(GROUP_INVITATIONS_FILTER_FORM_ID)(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-const GroupInvitationsListComponent = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
-
-export const GroupInvitationsList: FunctionComponent = () => {
-  return <GroupInvitationsListComponent filters={<GroupInvitationsFilter />} />;
 };

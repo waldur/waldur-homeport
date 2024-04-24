@@ -9,8 +9,6 @@ import {
   sendForm,
 } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
-import { parseResponse } from '@waldur/table/api';
-import { Fetcher, TableRequest } from '@waldur/table/types';
 import { Customer } from '@waldur/workspace/types';
 
 import { Invoice } from './types';
@@ -35,17 +33,6 @@ export const getGrowthChartData = (accounting_is_running: boolean, options?) =>
     },
     ...options,
   }).then((response) => response.data);
-
-export const fetchInvoicesStats: Fetcher = (request: TableRequest) => {
-  const { invoice_uuid, ...rest } = request.filter;
-  const url = `${ENV.apiEndpoint}api/invoices/${invoice_uuid}/stats/`;
-  const params = {
-    page: request.currentPage,
-    page_size: request.pageSize,
-    ...rest,
-  };
-  return parseResponse(url, params);
-};
 
 export const deleteInvoiceItem = (itemId) =>
   deleteById('/invoice-items/', itemId);

@@ -1,27 +1,26 @@
 import { FunctionComponent, useCallback, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAsyncFn, useBoolean } from 'react-use';
 
 import { getAll } from '@waldur/core/api';
 import { InvoicesDropdown } from '@waldur/customer/payments/InvoicesDropdown';
 import { Invoice } from '@waldur/invoices/types';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-interface LinkInvoiceActionProps {
-  onInvoiceSelect: (invoice) => any;
-  disabled: boolean;
-}
+import { linkInvoice } from './store/actions';
 
 const loadInvoices = (customer: Customer) =>
   getAll<Invoice[]>('/invoices/', {
     params: { customer: customer.url, state: 'paid' },
   });
 
-export const LinkInvoiceAction: FunctionComponent<LinkInvoiceActionProps> = (
-  props,
-) => {
+export const LinkInvoiceAction: FunctionComponent<{ payment }> = ({
+  payment,
+}) => {
   const customer = useSelector(getCustomer);
+  const dispatch = useDispatch();
+  const user = useSelector(getUser);
 
   const [{ loading, error, value }, getInvoices] = useAsyncFn(
     () => loadInvoices(customer),
@@ -37,16 +36,13 @@ export const LinkInvoiceAction: FunctionComponent<LinkInvoiceActionProps> = (
   useEffect(loadInvoicesIfOpen, [open]);
 
   const triggerAction = (selectedInvoice: Invoice) => {
-    if (props.disabled) {
-      return;
-    }
-    props.onInvoiceSelect(selectedInvoice);
+    dispatch(linkInvoice(payment.uuid, selectedInvoice.url));
   };
 
   return (
     <InvoicesDropdown
       open={open}
-      disabled={props.disabled}
+      disabled={!user.is_staff}
       loading={loading}
       error={error}
       invoices={value}

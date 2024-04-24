@@ -1,24 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { DateTime } from 'luxon';
 
-import { ENV } from '@waldur/configs/default';
 import { getAll } from '@waldur/core/api';
 import { ComponentUsage } from '@waldur/marketplace/resources/usage/types';
-import { parseResponse } from '@waldur/table/api';
-import { Fetcher, TableRequest } from '@waldur/table/types';
-
-export const fetchProviderOfferingCustomers: Fetcher = (
-  request: TableRequest,
-) => {
-  const { offering_uuid, ...rest } = request.filter;
-  const url = `${ENV.apiEndpoint}api/marketplace-provider-offerings/${offering_uuid}/customers/`;
-  const params = {
-    page: request.currentPage,
-    page_size: request.pageSize,
-    ...rest,
-  };
-  return parseResponse(url, params);
-};
 
 export const getProviderOfferingCostChartData = (
   accounting_is_running: boolean,

@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
@@ -8,11 +8,51 @@ import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { ResourceSummaryField } from '@waldur/resource/summary/VirtualMachineSummary';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { INSTANCE_TYPE } from '../constants';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const TenantInstancesList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      service_settings_uuid: resource.child_settings,
+      field: [
+        'uuid',
+        'url',
+        'name',
+        'description',
+        'created',
+        'internal_ips',
+        'external_ips',
+        'state',
+        'runtime_state',
+        'resource_type',
+        'error_message',
+        'image_name',
+        'flavor_name',
+        'cores',
+        'ram',
+        'start_time',
+        'resource_state',
+        'volumes',
+        'security_groups',
+        'backend_id',
+        'marketplace_resource_uuid',
+        'key_name',
+        'project_uuid',
+      ],
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstacktenant-instances',
+    fetchData: createFetcher('openstacktenant-instances'),
+    queryField: 'name',
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -40,10 +80,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('instances')}
       actions={
-        <AddResourceButton
-          resource={props.resource}
-          offeringType={INSTANCE_TYPE}
-        />
+        <AddResourceButton resource={resource} offeringType={INSTANCE_TYPE} />
       }
       hoverableRow={({ row }) => (
         <ModalActionsRouter
@@ -59,39 +96,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'openstacktenant-instances',
-  fetchData: createFetcher('openstacktenant-instances'),
-  mapPropsToFilter: (props) => ({
-    service_settings_uuid: props.resource.child_settings,
-    field: [
-      'uuid',
-      'url',
-      'name',
-      'description',
-      'created',
-      'internal_ips',
-      'external_ips',
-      'state',
-      'runtime_state',
-      'resource_type',
-      'error_message',
-      'image_name',
-      'flavor_name',
-      'cores',
-      'ram',
-      'start_time',
-      'resource_state',
-      'volumes',
-      'security_groups',
-      'backend_id',
-      'marketplace_resource_uuid',
-      'key_name',
-      'project_uuid',
-    ],
-  }),
-  queryField: 'name',
-};
-
-export const TenantInstancesList = connectTable(TableOptions)(TableComponent);

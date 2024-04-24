@@ -146,7 +146,7 @@ export const TableOptions = {
   queryField: 'query',
 };
 
-export const mapPropsToFilter = createSelector(
+export const mapStateToFilter = createSelector(
   getCustomer,
   getUser,
   isServiceManagerSelector,
@@ -187,7 +187,7 @@ export const mapPropsToFilter = createSelector(
 
 export const PublicResourcesList: React.ComponentType<any> = () => {
   const filter = useSelector((state) =>
-    mapPropsToFilter(state, PUBLIC_RESOURCES_LIST_FILTER_FORM_ID),
+    mapStateToFilter(state, PUBLIC_RESOURCES_LIST_FILTER_FORM_ID),
   );
   const tableProps = useTable({
     ...TableOptions,

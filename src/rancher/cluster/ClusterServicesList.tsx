@@ -1,14 +1,27 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { ImportYAMLButton } from './ImportYAMLButton';
 import { ServiceActions } from './ServiceActions';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ClusterServicesList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      cluster_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'rancher-services',
+    fetchData: createFetcher('rancher-services'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -61,17 +74,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('services')}
-      actions={<ImportYAMLButton cluster_id={props.resource.uuid} />}
+      actions={<ImportYAMLButton cluster_id={resource.uuid} />}
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: 'rancher-services',
-  fetchData: createFetcher('rancher-services'),
-  mapPropsToFilter: (props) => ({
-    cluster_uuid: props.resource.uuid,
-  }),
-};
-
-export const ClusterServicesList = connectTable(TableOptions)(TableComponent);

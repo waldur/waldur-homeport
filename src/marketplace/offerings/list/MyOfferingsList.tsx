@@ -1,42 +1,40 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
-import { RootState } from '@waldur/store/reducers';
-import { connectTable } from '@waldur/table';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { TableComponent, TableOptions } from './OfferingsList';
+import { OfferingsFilter as MyOfferingsFilter } from './OfferingsFilter';
+import { BaseOfferingsList } from './OfferingsList';
 
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string | boolean> = {
-    billable: false,
-  };
-  if (props.customer) {
-    filter.customer_uuid = props.customer.uuid;
-  }
-  if (props.filter) {
-    if (props.filter.state) {
-      filter.state = props.filter.state.map((option) => option.value);
+const mapStateToFilter = createSelector(
+  getCustomer,
+  getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),
+  (customer, filterValues: any) => {
+    const filter: Record<string, string | boolean> = {
+      billable: false,
+    };
+    if (customer) {
+      filter.customer_uuid = customer.uuid;
     }
-  }
-  return filter;
-};
-
-const enhance = compose(
-  connect((state: RootState) => ({
-    customer: getCustomer(state),
-    showActions: false,
-    filter: getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID)(state),
-  })),
-  connectTable({
-    ...TableOptions,
-    table: 'marketplace-my-offerings',
-    mapPropsToFilter,
-  }),
+    if (filterValues) {
+      if (filterValues.state) {
+        filter.state = filterValues.state.map((option) => option.value);
+      }
+    }
+    return filter;
+  },
 );
 
-export const MyOfferingsList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+export const MyOfferingsList = () => {
+  const filter = useSelector(mapStateToFilter);
+  return (
+    <BaseOfferingsList
+      table="marketplace-my-offerings"
+      filter={filter}
+      showActions={false}
+      filters={<MyOfferingsFilter />}
+    />
+  );
+};

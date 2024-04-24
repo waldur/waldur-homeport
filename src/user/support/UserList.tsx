@@ -93,7 +93,7 @@ const SupportStatusField = ({ row }) => {
   return <BooleanField value={row.is_support} />;
 };
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getFormValues('userFilter'),
   (filters: any) => {
     const params = cloneDeep(formatRoleFilter(filters));
@@ -108,7 +108,7 @@ const mapPropsToFilter = createSelector(
 );
 
 export const UserList: FunctionComponent<any> = (props) => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: `userList`,
     fetchData: createFetcher('users'),

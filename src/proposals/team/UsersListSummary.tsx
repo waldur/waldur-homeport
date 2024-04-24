@@ -10,7 +10,7 @@ import { UsersList } from './UsersList';
 export const UsersListSummary: FC<{ scope; title; reviews? }> = (props) => {
   const usersTable = useTable({
     table: `UserList${props.title}`,
-    fetchData: createFetcher(`${props.scope.url}list_users/`),
+    fetchData: createFetcher(`${props.scope.url}list_users`),
   });
   return (
     <UsersList

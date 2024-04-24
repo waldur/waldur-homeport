@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -10,13 +10,23 @@ import {
   SUPPORT_ORDERS_LIST_FILTER_FORM_ID,
   TABLE_SUPPORT_ORDERS,
 } from '@waldur/marketplace/orders/list/constants';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { useTable } from '@waldur/table/utils';
 
 import { OrdersListExpandableRow } from './OrdersListExpandableRow';
+import { SupportOrdersListFilter } from './SupportOrdersListFilter';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const SupportOrdersList: FunctionComponent = () => {
+  const filter = useSelector(mapStateToFilter);
+  const props = useTable({
+    table: TABLE_SUPPORT_ORDERS,
+    fetchData: createFetcher('marketplace-orders'),
+    filter,
+    exportFields,
+    exportRow,
+    queryField: 'query',
+  });
   const columns = [
     {
       title: translate('Name'),
@@ -77,63 +87,52 @@ const TableComponent: FunctionComponent<any> = (props) => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       expandableRow={OrdersListExpandableRow}
+      filters={<SupportOrdersListFilter />}
     />
   );
 };
 
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string> = {};
-  if (props.filter) {
-    if (props.filter.organization) {
-      filter.customer_uuid = props.filter.organization.uuid;
-    }
-    if (props.filter.project) {
-      filter.project_uuid = props.filter.project.uuid;
-    }
-    if (props.filter.state) {
-      filter.state = props.filter.state.value;
-    }
-    if (props.filter.type) {
-      filter.type = props.filter.type.value;
-    }
-    if (props.filter.offering) {
-      filter.offering_uuid = props.filter.offering.uuid;
-    }
-  }
-  return filter;
-};
+const exportRow = (row) => [
+  formatDateTime(row.created),
+  row.created_by_full_name || row.created_by_username,
+  row.state,
+  row.consumer_reviewed_at
+    ? formatDateTime(row.consumer_reviewed_at)
+    : DASH_ESCAPE_CODE,
+  row.consumer_reviewed_by_full_name ||
+    row.consumer_reviewed_by_username ||
+    DASH_ESCAPE_CODE,
+];
 
-const TableOptions = {
-  table: TABLE_SUPPORT_ORDERS,
-  fetchData: createFetcher('marketplace-orders'),
-  mapPropsToFilter,
-  exportRow: (row) => [
-    formatDateTime(row.created),
-    row.created_by_full_name || row.created_by_username,
-    row.state,
-    row.consumer_reviewed_at
-      ? formatDateTime(row.consumer_reviewed_at)
-      : DASH_ESCAPE_CODE,
-    row.consumer_reviewed_by_full_name ||
-      row.consumer_reviewed_by_username ||
-      DASH_ESCAPE_CODE,
-  ],
-  exportFields: [
-    'Created at',
-    'Created by',
-    'State',
-    'Approved at',
-    'Approved by',
-  ],
-  queryField: 'query',
-};
+const exportFields = [
+  'Created at',
+  'Created by',
+  'State',
+  'Approved at',
+  'Approved by',
+];
 
-const mapStateToProps = (state: RootState) => ({
-  filter: getFormValues(SUPPORT_ORDERS_LIST_FILTER_FORM_ID)(state) as FormData,
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const SupportOrdersList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+const mapStateToFilter = createSelector(
+  getFormValues(SUPPORT_ORDERS_LIST_FILTER_FORM_ID),
+  (filterValues: any) => {
+    const filter: Record<string, string> = {};
+    if (filterValues) {
+      if (filterValues.organization) {
+        filter.customer_uuid = filterValues.organization.uuid;
+      }
+      if (filterValues.project) {
+        filter.project_uuid = filterValues.project.uuid;
+      }
+      if (filterValues.state) {
+        filter.state = filterValues.state.value;
+      }
+      if (filterValues.type) {
+        filter.type = filterValues.type.value;
+      }
+      if (filterValues.offering) {
+        filter.offering_uuid = filterValues.offering.uuid;
+      }
+    }
+    return filter;
+  },
+);

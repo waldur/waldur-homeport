@@ -1,7 +1,7 @@
 import { FunctionComponent, useCallback } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -9,18 +9,25 @@ import { CampaignCreateButton } from '@waldur/marketplace/service-providers/Camp
 import { ProviderCampaignActions } from '@waldur/marketplace/service-providers/ProviderCampaignActions';
 import { ProviderCampaignFilter } from '@waldur/marketplace/service-providers/ProviderCampaignFilter';
 import { ProviderCampaignResourceExpandable } from '@waldur/marketplace/service-providers/ProviderCampaignResourceExpandable';
-import { RootState } from '@waldur/store/reducers';
-import { connectTable, createFetcher, Table } from '@waldur/table/index';
+import { createFetcher, Table } from '@waldur/table/index';
+import { useTable } from '@waldur/table/utils';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
 import { CampaignStateIndicator } from './CampaignStateIndicator';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const ProviderCampaignsListComponent: FunctionComponent<any> = () => {
   const ExpandableRow = useCallback(
     ({ row }) => <ProviderCampaignResourceExpandable campaign={row} />,
     [],
   );
+  const filter = useSelector(mapStateToFilter);
+  const props = useTable({
+    table: 'marketplace-provider-campaigns',
+    fetchData: createFetcher('promotions-campaigns'),
+    filter,
+    queryField: 'query',
+  });
   return (
     <Table
       {...props}
@@ -39,12 +46,12 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Start date'),
-          render: ({ row }) => formatDate(row.start_date),
+          render: ({ row }) => <>{formatDate(row.start_date)}</>,
           orderField: 'start_date',
         },
         {
           title: translate('End date'),
-          render: ({ row }) => formatDate(row.end_date),
+          render: ({ row }) => <>{formatDate(row.end_date)}</>,
           orderField: 'end_date',
         },
       ]}
@@ -58,40 +65,26 @@ const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, any> = {};
-  if (props.filter) {
-    if (props.filter.state) {
-      filter.state = props.filter.state.map((option) => option.value);
+const mapStateToFilter = createSelector(
+  getFormValues('ProviderCampaignFilter'),
+  (filterValues: any) => {
+    const filter: Record<string, any> = {};
+    if (filterValues) {
+      if (filterValues.state) {
+        filter.state = filterValues.state.map((option) => option.value);
+      }
+      if (filterValues.provider) {
+        filter.service_provider_uuid = filterValues.provider.uuid;
+      }
+      if (filterValues.discount_type) {
+        filter.discount_type = filterValues.discount_type.map(
+          (option) => option.value,
+        );
+      }
     }
-    if (props.filter.provider) {
-      filter.service_provider_uuid = props.filter.provider.uuid;
-    }
-    if (props.filter.discount_type) {
-      filter.discount_type = props.filter.discount_type.map(
-        (option) => option.value,
-      );
-    }
-  }
-  return filter;
-};
-
-const TableOptions = {
-  table: 'marketplace-provider-campaigns',
-  fetchData: createFetcher('promotions-campaigns'),
-  mapPropsToFilter,
-  queryField: 'query',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  filter: getFormValues('ProviderCampaignFilter')(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-const ProviderCampaignsListComponent = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+    return filter;
+  },
+);
 
 export const ProviderCampaignsList = ({ provider }) => {
   if (!provider) {

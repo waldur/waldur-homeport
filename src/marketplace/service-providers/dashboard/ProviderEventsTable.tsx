@@ -1,20 +1,21 @@
-import { getEventsList } from '@waldur/events/BaseEventsList';
+import { useMemo } from 'react';
+
+import { BaseEventsList } from '@waldur/events/BaseEventsList';
 import { translate } from '@waldur/i18n';
 
-const ProviderEvents = getEventsList({
-  mapPropsToFilter: (props) => ({
-    scope: props.provider ? props.provider.customer : undefined,
-    feature: ['providers'],
-  }),
-  mapPropsToTableId: (props) => [props.provider?.uuid],
-});
-
 export const ProviderEventsTable = ({ provider }) => {
+  const filter = useMemo(
+    () => ({
+      scope: provider ? provider.customer : undefined,
+      feature: ['providers'],
+    }),
+    [provider],
+  );
   return (
-    <ProviderEvents
+    <BaseEventsList
       title={translate('Audit logs')}
-      initialPageSize={5}
-      provider={provider}
+      filter={filter}
+      table={`events-${provider?.uuid}`}
     />
   );
 };

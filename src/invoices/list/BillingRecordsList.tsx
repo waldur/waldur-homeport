@@ -1,15 +1,13 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { formatPeriod } from '../utils';
@@ -19,17 +17,49 @@ import { SendNotificationButton } from './SendNotificationButton';
 
 const RecordPeriodField = ({ row }) => formatPeriod(row);
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const BillingRecordsList: FunctionComponent = () => {
+  const customer = useSelector(getCustomer);
+  const stateFilter: any = useSelector(getFormValues('InvoicesFilter'));
+  const filter = useMemo(
+    () => ({
+      ...stateFilter,
+      customer: customer.url,
+      state: stateFilter?.state?.map((option) => option.value),
+      field: [
+        'uuid',
+        'state',
+        'month',
+        'year',
+        'invoice_date',
+        'number',
+        'price',
+      ],
+    }),
+    [stateFilter, customer],
+  );
+
+  const table = useMemo(() => `invoices-${customer.uuid}`, [customer]);
+
+  const props = useTable({
+    table: table,
+    fetchData: createFetcher('invoices'),
+    filter,
+    exportRow,
+    exportFields,
+    queryField: 'number',
+  });
+
   return (
     <Table
       {...props}
+      filters={<InvoicesFilter />}
       columns={[
         {
           title: translate('Record number'),
           render: ({ row }) => (
             <Link
               state="billingDetails"
-              params={{ uuid: props.customer.uuid, invoice_uuid: row.uuid }}
+              params={{ uuid: customer.uuid, invoice_uuid: row.uuid }}
             >
               {row.number}
             </Link>
@@ -67,35 +97,3 @@ const exportRow = (row) => [
 ];
 
 const exportFields = ['Record number', 'State', 'Record period', 'Total'];
-
-const mapPropsToFilter = (props) => ({
-  ...props.stateFilter,
-  customer: props.customer.url,
-  state: props.stateFilter?.state?.map((option) => option.value),
-  field: ['uuid', 'state', 'month', 'year', 'invoice_date', 'number', 'price'],
-});
-
-const TableOptions: TableOptionsType = {
-  table: 'invoices',
-  fetchData: createFetcher('invoices'),
-  mapPropsToFilter,
-  exportRow,
-  exportFields,
-  queryField: 'number',
-  mapPropsToTableId: (props) => [props.customer.uuid],
-};
-
-const mapsStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  stateFilter: getFormValues('InvoicesFilter')(state),
-});
-
-const enhance = compose(connect(mapsStateToProps), connectTable(TableOptions));
-
-const BillingRecordsListComponent = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
-
-export const BillingRecordsList: FunctionComponent = () => (
-  <BillingRecordsListComponent filters={<InvoicesFilter />} />
-);

@@ -1,6 +1,7 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -11,10 +12,21 @@ import {
 import { IssueField } from '@waldur/issues/feedback/IssueField';
 import { SupportFeedbackListExpandableRow } from '@waldur/issues/feedback/SupportFeedbackListExpandableRow';
 import { getStartAndEndDatesOfMonth } from '@waldur/issues/utils';
-import { RootState } from '@waldur/store/reducers';
-import { connectTable, createFetcher, Table } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-const TableComponent = (props) => {
+import { SupportFeedbackListFilter } from './SupportFeedbackListFilter';
+
+export const SupportFeedbackList: FC = () => {
+  const filter = useSelector(mapStateToProps);
+  const props = useTable({
+    table: SUPPORT_FEEDBACK_LIST,
+    fetchData: createFetcher('support-feedbacks'),
+    filter,
+    exportRow,
+    exportFields,
+    queryField: 'query',
+  });
   const columns = [
     {
       title: translate('Issue'),
@@ -46,29 +58,9 @@ const TableComponent = (props) => {
       hasQuery={true}
       enableExport={true}
       showPageSizeSelector={true}
+      filters={<SupportFeedbackListFilter />}
     />
   );
-};
-
-const mapPropsToFilter = ({ supportFeedbackListFilter }) => {
-  const filter: Record<string, string | number> = {};
-  if (!supportFeedbackListFilter) {
-    return {};
-  }
-  if (supportFeedbackListFilter.evaluation) {
-    filter.evaluation = supportFeedbackListFilter.evaluation.value;
-  }
-  if (supportFeedbackListFilter.period) {
-    const { start, end } = getStartAndEndDatesOfMonth(
-      supportFeedbackListFilter.period.value,
-    );
-    filter.created_after = start;
-    filter.created_before = end;
-  }
-  if (supportFeedbackListFilter.user) {
-    filter.user = supportFeedbackListFilter.user.url;
-  }
-  return filter;
 };
 
 const exportRow = (row) => [
@@ -85,23 +77,26 @@ const exportFields = [
   translate('Created'),
 ];
 
-const TableOptions = {
-  table: SUPPORT_FEEDBACK_LIST,
-  fetchData: createFetcher('support-feedbacks'),
-  mapPropsToFilter,
-  exportRow,
-  exportFields,
-  queryField: 'query',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  supportFeedbackListFilter: getFormValues(SUPPORT_FEEDBACK_LIST_FILTER_FORM)(
-    state,
-  ),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const SupportFeedbackList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+const mapStateToProps = createSelector(
+  getFormValues(SUPPORT_FEEDBACK_LIST_FILTER_FORM),
+  (filterValues: any) => {
+    const filter: Record<string, string | number> = {};
+    if (!filterValues) {
+      return {};
+    }
+    if (filterValues.evaluation) {
+      filter.evaluation = filterValues.evaluation.value;
+    }
+    if (filterValues.period) {
+      const { start, end } = getStartAndEndDatesOfMonth(
+        filterValues.period.value,
+      );
+      filter.created_after = start;
+      filter.created_before = end;
+    }
+    if (filterValues.user) {
+      filter.user = filterValues.user.url;
+    }
+    return filter;
+  },
+);

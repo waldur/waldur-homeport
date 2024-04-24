@@ -16,7 +16,7 @@ import { ProposalRowActions } from './ProposalRowActions';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
 import { ProposalStatus } from './ProposalStatus';
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getCustomer,
   getFormValues(PROPOSALS_FILTER_FORM_ID),
   (customer, filters: any) => {
@@ -38,7 +38,7 @@ const mapPropsToFilter = createSelector(
 );
 
 export const CustomerProposalsList: FC<{}> = () => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: 'ProposalsList',
     fetchData: createFetcher('proposal-proposals'),

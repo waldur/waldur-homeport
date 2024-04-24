@@ -30,13 +30,13 @@ const VmTypeOverviewContainer = lazyComponent(
   () => import('./openstack/VmTypeOverviewContainer'),
   'VmTypeOverviewContainer',
 );
-const PlanUsageContainer = lazyComponent(
-  () => import('./plan-usage/PlanUsageContainer'),
-  'PlanUsageContainer',
+const PlanUsageList = lazyComponent(
+  () => import('./plan-usage/PlanUsageList'),
+  'PlanUsageList',
 );
-const ResourceUsageContainer = lazyComponent(
-  () => import('./resource-usage/ResourceUsageContainer'),
-  'ResourceUsageContainer',
+const ResourceUsageList = lazyComponent(
+  () => import('./resource-usage/ResourceUsageList'),
+  'ResourceUsageList',
 );
 
 export const states: StateDeclaration[] = [
@@ -110,7 +110,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-plan-usages',
     url: 'plan-usages/',
-    component: PlanUsageContainer,
+    component: PlanUsageList,
     parent: 'reporting',
     data: {
       breadcrumb: () => translate('Capacity'),
@@ -119,7 +119,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-support-usage-reports',
     url: 'usage/',
-    component: ResourceUsageContainer,
+    component: ResourceUsageList,
     parent: 'reporting',
     data: {
       breadcrumb: () => translate('Usage reports'),

@@ -1,35 +1,37 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { isEmpty } from '@waldur/core/utils';
-import { getEventsList } from '@waldur/events/BaseEventsList';
-import { RootState } from '@waldur/store/reducers';
+import { BaseEventsList } from '@waldur/events/BaseEventsList';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerEventsFilter } from './CustomerEventsFilter';
 
-const PureCustomerEvents = getEventsList({
-  mapPropsToFilter: (props) => {
+const mapStateToFilter = createSelector(
+  getCustomer,
+  getFormValues('customerEventsFilter'),
+  (customer, userFilter: any) => {
     const filter = {
-      ...props.userFilter,
-      feature: props.userFilter?.feature?.map((option) => option.value),
-      scope: props.customer.url,
+      ...userFilter,
+      feature: userFilter?.feature?.map((option) => option.value),
+      scope: customer.url,
     };
-    if (props.userFilter && isEmpty(props.userFilter.feature)) {
+    if (userFilter && isEmpty(userFilter.feature)) {
       filter.feature = ['customers', 'projects', 'resources'];
     }
     return filter;
   },
-  mapPropsToTableId: (props) => ['customer-events', props.customer.uuid],
-});
+);
 
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  userFilter: getFormValues('customerEventsFilter')(state),
-});
-
-const CustomerEvents = connect(mapStateToProps)(PureCustomerEvents);
-
-export const CustomerEventsList = (props) => {
-  return <CustomerEvents {...props} filters={<CustomerEventsFilter />} />;
+export const CustomerEventsList = () => {
+  const customer = useSelector(getCustomer);
+  const filter = useSelector(mapStateToFilter);
+  return (
+    <BaseEventsList
+      table={`customer-events-${customer.uuid}`}
+      filter={filter}
+      filters={<CustomerEventsFilter />}
+    />
+  );
 };

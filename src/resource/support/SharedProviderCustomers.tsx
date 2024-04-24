@@ -1,12 +1,11 @@
-import React from 'react';
+import { FC, useMemo } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { translate } from '@waldur/i18n';
-import { createFetcher, Table, connectTable } from '@waldur/table';
-import { TableProps } from '@waldur/table/Table';
-import { Column, TableOptionsType } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { createFetcher, Table } from '@waldur/table';
+import { Column } from '@waldur/table/types';
+import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { Customer } from '@waldur/workspace/types';
 
 const AbbreviationField = ({ row }) => (
@@ -17,9 +16,24 @@ const CreatedDateField = ({ row }) => (
   <>{renderFieldOrDash(formatDate(row.created))}</>
 );
 
-const TableComponent = (
-  props: TableProps<Customer> & { provider_uuid: string },
-) => {
+export const SharedProviderCustomers: FC<{ provider_uuid: string }> = ({
+  provider_uuid,
+}) => {
+  const filter = useMemo(
+    () => ({
+      service_settings_uuid: provider_uuid,
+    }),
+    [provider_uuid],
+  );
+  const props = useTable({
+    table: 'SharedProviderCustomers',
+    fetchData: createFetcher('openstack-shared-settings-customers'),
+    exportRow,
+    exportFields,
+    exportKeys,
+    exportAll: true,
+    filter,
+  });
   const columns: Array<Column<Customer & { vm_count: string }>> = [
     {
       title: translate('Organization'),
@@ -65,21 +79,3 @@ const exportFields = () => [
 ];
 
 const exportKeys = ['name', 'abbreviation', 'created', 'vm_count'];
-
-const mapPropsToFilter = (props) => ({
-  service_settings_uuid: props.provider_uuid,
-});
-
-const TableOptions: TableOptionsType = {
-  table: 'SharedProviderCustomers',
-  fetchData: createFetcher('openstack-shared-settings-customers'),
-  exportRow,
-  exportFields,
-  exportKeys,
-  mapPropsToFilter,
-  exportAll: true,
-};
-
-export const SharedProviderCustomers = connectTable(TableOptions)(
-  TableComponent,
-) as React.ComponentType<{ provider_uuid: string }>;

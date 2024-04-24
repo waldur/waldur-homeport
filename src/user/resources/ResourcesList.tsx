@@ -25,7 +25,7 @@ interface FieldProps {
   row: Resource;
 }
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getFormValues(USER_RESOURCES_FILTER_FORM_ID),
   (filters: any) => {
     const result: Record<string, any> = {};
@@ -66,7 +66,7 @@ const tableActions = (
 );
 
 export const ResourcesList = () => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: `UserResourcesList`,
     fetchData: createFetcher('marketplace-resources'),

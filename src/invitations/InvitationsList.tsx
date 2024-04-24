@@ -1,6 +1,5 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import Avatar from '@waldur/core/Avatar';
@@ -8,9 +7,8 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { useTitle } from '@waldur/navigation/title';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { InvitationCreateButton } from './actions/create/InvitationCreateButton';
@@ -19,10 +17,29 @@ import { InvitationSendButton } from './actions/InvitationSendButton';
 import { InvitationsFilter } from './InvitationsFilter';
 import { RoleField } from './RoleField';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const InvitationsList: FunctionComponent = () => {
+  useTitle(translate('Invitations'));
+  const customer = useSelector(getCustomer);
+  const stateFilter: any = useSelector(getFormValues('InvitationsFilter'));
+  const filter = useMemo(
+    () => ({
+      ...stateFilter,
+      state: stateFilter?.state?.map((option) => option.value),
+      customer_uuid: customer.uuid,
+    }),
+    [stateFilter, customer],
+  );
+  const props = useTable({
+    table: 'user-invitations',
+    fetchData: createFetcher('user-invitations'),
+    filter,
+    queryField: 'email',
+  });
+
   return (
     <Table
       {...props}
+      filters={<InvitationsFilter />}
       columns={[
         {
           title: translate('Email'),
@@ -66,49 +83,13 @@ const TableComponent: FunctionComponent<any> = (props) => {
         />
       }
       hasQuery={true}
-      hoverableRow={
-        props.showActions ?? true
-          ? ({ row }) => (
-              <>
-                <InvitationSendButton invitation={row} />
-                <InvitationCancelButton
-                  invitation={row}
-                  refetch={props.fetch}
-                />
-              </>
-            )
-          : undefined
-      }
+      hoverableRow={({ row }) => (
+        <>
+          <InvitationSendButton invitation={row} />
+          <InvitationCancelButton invitation={row} refetch={props.fetch} />
+        </>
+      )}
       expandableRow={InvitationExpandableRow}
     />
   );
-};
-
-const mapPropsToFilter = (props) => ({
-  ...props.stateFilter,
-  state: props.stateFilter?.state?.map((option) => option.value),
-  customer_uuid: props.customer.uuid,
-});
-
-const TableOptions: TableOptionsType = {
-  table: 'user-invitations',
-  fetchData: createFetcher('user-invitations'),
-  mapPropsToFilter,
-  queryField: 'email',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  stateFilter: getFormValues('InvitationsFilter')(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-const InvitationsListComponent = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
-
-export const InvitationsList: FunctionComponent = () => {
-  useTitle(translate('Invitations'));
-  return <InvitationsListComponent filters={<InvitationsFilter />} />;
 };

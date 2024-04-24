@@ -1,19 +1,34 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const mapStateToFilter = createSelector(
+  getProject,
+  getFormValues('ProjectUpdateRequestListFilter'),
+  (project, filterValues: any) => ({
+    project_uuid: project.uuid,
+    state: filterValues?.state?.map((choice) => choice.value),
+  }),
+);
+
+export const ProjectUpdateRequestsList: FunctionComponent = () => {
   useTitle(translate('Project updates'));
+  const filter = useSelector(mapStateToFilter);
+  const props = useTable({
+    table: 'marketplace-project-update-requests',
+    fetchData: createFetcher('marketplace-project-update-requests'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -25,7 +40,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         { title: translate('State'), render: ({ row }) => row.state },
         {
           title: translate('Created'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
         {
@@ -43,26 +58,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const mapPropsToFilter = (props) => ({
-  project_uuid: props.project.uuid,
-  state: props.filter?.state?.map((choice) => choice.value),
-});
-
-const filterFormSelector = (state: RootState) =>
-  getFormValues('ProjectUpdateRequestListFilter')(state);
-
-const mapStateToProps = (state: RootState) => ({
-  project: getProject(state),
-  filter: filterFormSelector(state),
-});
-
-const TableOptions = {
-  table: 'marketplace-project-update-requests',
-  fetchData: createFetcher('marketplace-project-update-requests'),
-  mapPropsToFilter,
-};
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const ProjectUpdateRequestsList = enhance(TableComponent);

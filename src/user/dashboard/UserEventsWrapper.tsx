@@ -1,7 +1,10 @@
-import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 
-import { CurrentUserEvents } from './CurrentUserEvents';
+import { getUser } from '@waldur/workspace/selectors';
 
-export const UserEventsWrapper: FunctionComponent = () => {
-  return <CurrentUserEvents />;
+import { UserEvents } from './UserEvents';
+
+export const UserEventsWrapper = () => {
+  const user = useSelector(getUser);
+  return <UserEvents user={user} />;
 };

@@ -1,11 +1,11 @@
-import React from 'react';
+import { FC, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableProps } from '@waldur/table/Table';
-import { Column, TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { Column } from '@waldur/table/types';
+import { useTable } from '@waldur/table/utils';
 
 import { ResourceRowActions } from '../actions/ResourceRowActions';
 import { ResourceName } from '../ResourceName';
@@ -17,9 +17,24 @@ interface CustomerResource extends Resource {
   customer_uuid: string;
 }
 
-const TableComponent = (
-  props: TableProps<CustomerResource> & { provider_uuid: string },
-) => {
+export const SharedProviderResources: FC<{ provider_uuid: string }> = ({
+  provider_uuid,
+}) => {
+  const filter = useMemo(
+    () => ({
+      service_settings_uuid: provider_uuid,
+    }),
+    [provider_uuid],
+  );
+  const props = useTable({
+    table: 'SharedProviderResources',
+    fetchData: createFetcher('openstack-shared-settings-instances'),
+    exportRow,
+    exportFields,
+    exportKeys,
+    filter,
+    exportAll: true,
+  });
   const columns: Array<Column<CustomerResource>> = [
     {
       title: translate('Name'),
@@ -80,21 +95,3 @@ const exportKeys = [
   'resource_type',
   'state',
 ];
-
-const mapPropsToFilter = (props) => ({
-  service_settings_uuid: props.provider_uuid,
-});
-
-const TableOptions: TableOptionsType = {
-  table: 'SharedProviderResources',
-  fetchData: createFetcher('openstack-shared-settings-instances'),
-  exportRow,
-  exportFields,
-  exportKeys,
-  mapPropsToFilter,
-  exportAll: true,
-};
-
-export const SharedProviderResources = connectTable(TableOptions)(
-  TableComponent,
-) as React.ComponentType<{ provider_uuid: string }>;

@@ -5,13 +5,13 @@ import { useTable } from '@waldur/table/utils';
 import {
   TableOptions,
   TableComponent,
-  mapPropsToFilter,
+  mapStateToFilter,
 } from './PublicResourcesList';
 import { SupportResourcesFilter } from './SupportResourcesFilter';
 
 export const SupportResourcesList: React.ComponentType<any> = () => {
   const filter = useSelector((state) =>
-    mapPropsToFilter(state, 'SupportResourcesFilter'),
+    mapStateToFilter(state, 'SupportResourcesFilter'),
   );
   delete filter.provider_uuid;
   const tableProps = useTable({

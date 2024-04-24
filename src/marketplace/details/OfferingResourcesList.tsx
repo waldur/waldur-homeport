@@ -1,6 +1,5 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -10,27 +9,43 @@ import {
   TABLE_OFFERING_RESOURCE,
 } from '@waldur/marketplace/details/constants';
 import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicResourceLink';
-import { ResourceState } from '@waldur/marketplace/resources/types';
 import { PublicResourceActions } from '@waldur/marketplace/resources/usage/PublicResourceActions';
 import { Offering } from '@waldur/marketplace/types';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { ResourceStateField } from '../resources/list/ResourceStateField';
 
-interface OfferingResourceFilter {
-  state?: ResourceState;
-}
-
-interface StateProps {
-  filter: OfferingResourceFilter;
-}
+import { OfferingResourcesFilter } from './OfferingResourcesFilter';
 
 interface OwnProps {
   offering: Offering;
 }
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const OfferingResourcesList: FunctionComponent<OwnProps> = (
+  ownProps,
+) => {
+  const filterValues: any = useSelector(
+    getFormValues(FILTER_OFFERING_RESOURCE),
+  );
+  const filter = useMemo(() => {
+    const filter: Record<string, string> = {};
+    if (filterValues?.state) {
+      filter.state = filterValues.state.map((option) => option.value);
+    }
+    return {
+      offering_uuid: ownProps.offering.uuid,
+      ...filter,
+    };
+  }, [ownProps.offering, filterValues]);
+  const tableProps = useTable({
+    table: TABLE_OFFERING_RESOURCE,
+    fetchData: createFetcher('marketplace-resources'),
+    filter,
+    exportRow,
+    exportFields,
+    queryField: 'query',
+  });
   const columns = [
     {
       title: translate('Name'),
@@ -51,7 +66,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Created at'),
-      render: ({ row }) => formatDateTime(row.created),
+      render: ({ row }) => <>{formatDateTime(row.created)}</>,
       orderField: 'created',
     },
     {
@@ -62,7 +77,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
   return (
     <Table
-      {...props}
+      {...tableProps}
       title={translate('Resources')}
       columns={columns}
       verboseName={translate('offering resources')}
@@ -72,19 +87,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       showPageSizeSelector={true}
       hoverableRow={PublicResourceActions}
+      filters={<OfferingResourcesFilter />}
     />
   );
-};
-
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string> = {};
-  if (props.filter?.state) {
-    filter.state = props.filter.state.map((option) => option.value);
-  }
-  return {
-    offering_uuid: props.offering.uuid,
-    ...filter,
-  };
 };
 
 const exportRow = (row) => [
@@ -104,25 +109,3 @@ const exportFields = [
   'Plan',
   'State',
 ];
-
-const TableOptions = {
-  table: TABLE_OFFERING_RESOURCE,
-  fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter,
-  exportRow,
-  exportFields,
-  queryField: 'query',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  filter: getFormValues(FILTER_OFFERING_RESOURCE)(state),
-});
-
-const enhance = compose(
-  connect<StateProps, {}, OwnProps>(mapStateToProps),
-  connectTable(TableOptions),
-);
-
-export const OfferingResourcesList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

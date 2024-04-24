@@ -1,12 +1,21 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { LexisLinkDeleteButton } from '@waldur/marketplace/resources/lexis/LexisLinkDeleteButton';
-import { connectTable, createFetcher, Table } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
+  filter,
+}) => {
+  const props = useTable({
+    table: 'lexis-links',
+    fetchData: createFetcher('lexis-links'),
+    filter,
+    queryField: 'query',
+  });
   const columns = [
     {
       title: translate('Robot account'),
@@ -51,20 +60,3 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const mapPropsToFilter = ({ resource }) => {
-  return { resource_uuid: resource.uuid };
-};
-
-export const TableOptions = {
-  table: 'lexis-links',
-  fetchData: createFetcher('lexis-links'),
-  mapPropsToFilter,
-  queryField: 'query',
-};
-
-const enhance = connectTable(TableOptions);
-
-export const LexisLinkList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

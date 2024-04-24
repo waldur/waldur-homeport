@@ -1,12 +1,10 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { TableComponent } from '@waldur/events/BaseEventsList';
-import { createFetcher } from '@waldur/table';
-import { useTable } from '@waldur/table/utils';
+import { BaseEventsList } from '@waldur/events/BaseEventsList';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-export const customerPermissionsLogList = () => {
+export const CustomerPermissionsLogList = () => {
   const customer = useSelector(getCustomer);
   const eventsFilter = useMemo(
     () => ({
@@ -16,12 +14,10 @@ export const customerPermissionsLogList = () => {
     [customer],
   );
 
-  const eventsTable = useTable({
-    table: `permissions-log${customer.url}`,
-    filter: eventsFilter,
-    fetchData: createFetcher('events'),
-    queryField: 'message',
-  });
-
-  return <TableComponent {...eventsTable} />;
+  return (
+    <BaseEventsList
+      table={`permissions-log-${customer.url}`}
+      filter={eventsFilter}
+    />
+  );
 };

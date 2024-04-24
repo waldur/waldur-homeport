@@ -1,15 +1,29 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CreatePortAction } from './actions/CreatePortAction';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const PortsList: FunctionComponent<{ resource }> = ({ resource }) => {
+  const filter = useMemo(
+    () => ({
+      vm_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+
+  const props = useTable({
+    table: 'vmware-ports',
+    fetchData: createFetcher('vmware-ports'),
+    filter,
+  });
+
   return (
     <Table
       {...props}
@@ -29,7 +43,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Created'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
         {
@@ -38,7 +52,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('ports')}
-      actions={<CreatePortAction resource={props.resource} />}
+      actions={<CreatePortAction resource={resource} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hoverableRow={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
@@ -46,15 +60,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const mapPropsToFilter = (props) => ({
-  vm_uuid: props.resource.uuid,
-});
-
-const TableOptions = {
-  table: 'vmware-ports',
-  fetchData: createFetcher('vmware-ports'),
-  mapPropsToFilter,
-};
-
-export const PortsList = connectTable(TableOptions)(TableComponent);

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import {
   SUPPORT_CUSTOMER_LIST,
@@ -10,18 +10,37 @@ import {
 import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
 import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { RootState } from '@waldur/store/reducers';
-import { connectTable, createFetcher, Table } from '@waldur/table';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { createFetcher, Table } from '@waldur/table';
+import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { OrganizationHoverableRow } from '@waldur/user/affiliations/OrganizationHoverableRow';
-import { getUser } from '@waldur/workspace/selectors';
 
 import { OrganizationDetails } from '../../customer/list/OrganizationDetails';
 import { OrganizationLink } from '../../customer/list/OrganizationLink';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+import { OrganizationsFilter } from './OrganizationsFilter';
+
+export const SupportCustomerList: FunctionComponent<{}> = () => {
+  const filter = useSelector(mapStateToFilter);
+  const props = useTable({
+    table: SUPPORT_CUSTOMER_LIST,
+    fetchData: createFetcher('customers'),
+    queryField: 'query',
+    filter,
+    exportAll: true,
+    exportFields: [
+      translate('Organization'),
+      translate('Abbreviation'),
+      translate('Contact email'),
+      translate('Contact phone'),
+    ],
+    exportRow: (row) => [
+      row.name,
+      row.abbreviation,
+      row.email,
+      row.phone_number,
+    ],
+    exportKeys: ['name', 'abbreviation', 'email', 'phone_number'],
+  });
   const columns = [
     {
       title: translate('Name'),
@@ -54,37 +73,31 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hoverableRow={({ row }) => (
         <>
           <OrganizationHoverableRow row={row} />
-          {hasPermission(props.user, {
-            permission: PermissionEnum.UPDATE_CUSTOMER,
-            customerId: row.uuid,
-          }) && <OrganizationEditButton customer={row} />}
+          <OrganizationEditButton customer={row} />
         </>
       )}
       expandableRow={({ row }) => <OrganizationDetails customer={row} />}
+      filters={<OrganizationsFilter />}
     />
   );
 };
 
-const TableOptions = {
-  table: SUPPORT_CUSTOMER_LIST,
-  fetchData: createFetcher('customers'),
-  queryField: 'query',
-  mapPropsToFilter: (props) => {
+const mapStateToFilter = createSelector(
+  getFormValues(SUPPORT_CUSTOMERS_FORM_ID),
+  (filterValues: any) => {
     const filter: Record<string, string | string[]> = {};
-    if (props.filter) {
-      if (props.filter.accounting_is_running) {
-        filter.accounting_is_running = props.filter.accounting_is_running.value;
-      }
-      if (props.filter.is_service_provider) {
-        filter.is_service_provider = props.filter.is_service_provider.value;
-      }
-      if (props.filter.organization_group_type) {
-        filter.organization_group_type_uuid =
-          props.filter.organization_group_type.map((option) => option.uuid);
-      }
-      if (props.filter.organization_group) {
-        filter.organization_group_uuid = props.filter.organization_group.uuid;
-      }
+    if (filterValues?.accounting_is_running) {
+      filter.accounting_is_running = filterValues.accounting_is_running.value;
+    }
+    if (filterValues?.is_service_provider) {
+      filter.is_service_provider = filterValues.is_service_provider.value;
+    }
+    if (filterValues?.organization_group_type) {
+      filter.organization_group_type_uuid =
+        filterValues.organization_group_type.map((option) => option.uuid);
+    }
+    if (filterValues?.organization_group) {
+      filter.organization_group_uuid = filterValues.organization_group.uuid;
     }
 
     // select required fields
@@ -115,24 +128,4 @@ const TableOptions = {
 
     return filter;
   },
-  exportFields: [
-    translate('Organization'),
-    translate('Abbreviation'),
-    translate('Contact email'),
-    translate('Contact phone'),
-  ],
-  exportAll: true,
-  exportRow: (row) => [row.name, row.abbreviation, row.email, row.phone_number],
-  exportKeys: ['name', 'abbreviation', 'email', 'phone_number'],
-};
-
-const mapStateToProps = (state: RootState) => ({
-  filter: getFormValues(SUPPORT_CUSTOMERS_FORM_ID)(state),
-  user: getUser(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const SupportCustomerList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+);

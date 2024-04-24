@@ -1,13 +1,26 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { WorkloadActions } from './WorkloadActions';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ClusterWorkloadsList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      cluster_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'rancher-workloads',
+    fetchData: createFetcher('rancher-workloads'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -42,13 +55,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: 'rancher-workloads',
-  fetchData: createFetcher('rancher-workloads'),
-  mapPropsToFilter: (props) => ({
-    cluster_uuid: props.resource.uuid,
-  }),
-};
-
-export const ClusterWorkloadsList = connectTable(TableOptions)(TableComponent);

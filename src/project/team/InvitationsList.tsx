@@ -1,8 +1,8 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import Avatar from '@waldur/core/Avatar';
 import { formatDate } from '@waldur/core/dateUtils';
@@ -14,12 +14,19 @@ import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSend
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
 import { RoleField } from '@waldur/invitations/RoleField';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const InvitationsListComponent: FunctionComponent = () => {
+  const filter = useSelector(mapStateToFilter);
+  const props = useTable({
+    table: 'user-invitations',
+    fetchData: createFetcher('user-invitations'),
+    filter,
+    queryField: 'email',
+  });
+  const project = useSelector(getProject);
   return (
     <Table
       {...props}
@@ -67,40 +74,27 @@ const TableComponent: FunctionComponent<any> = (props) => {
       verboseName={translate('Team invitations')}
       actions={
         <InvitationCreateButton
-          project={props.project}
+          project={project}
           roleTypes={['project']}
           refetch={props.fetch}
         />
       }
       hasQuery={true}
       expandableRow={InvitationExpandableRow}
+      filters={<InvitationsFilter />}
     />
   );
 };
 
-const mapPropsToFilter = (props) => ({
-  ...props.stateFilter,
-  scope: props.project.url,
-  state: props.stateFilter?.state?.map((option) => option.value),
-});
-
-const TableOptions: TableOptionsType = {
-  table: 'user-invitations',
-  fetchData: createFetcher('user-invitations'),
-  mapPropsToFilter,
-  queryField: 'email',
-};
-
-const mapStateToProps = (state: RootState) => ({
-  project: getProject(state),
-  stateFilter: getFormValues('InvitationsFilter')(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-const InvitationsListComponent = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+const mapStateToFilter = createSelector(
+  getProject,
+  getFormValues('InvitationsFilter'),
+  (project, stateFilter: any) => ({
+    ...stateFilter,
+    scope: project.url,
+    state: stateFilter?.state?.map((option) => option.value),
+  }),
+);
 
 export const InvitationsList: FunctionComponent = () => {
   const user = useSelector(getUser);
@@ -119,10 +113,5 @@ export const InvitationsList: FunctionComponent = () => {
     }
   }, [user, project, customer, router]);
 
-  return (
-    <InvitationsListComponent
-      filters={<InvitationsFilter />}
-      project={project}
-    />
-  );
+  return <InvitationsListComponent />;
 };

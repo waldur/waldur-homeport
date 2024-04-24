@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
@@ -6,11 +6,27 @@ import { translate } from '@waldur/i18n';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CreateSnapshotAction } from './actions/CreateSnapshotAction';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const VolumeSnapshotsList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      source_volume_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+
+  const props = useTable({
+    table: 'openstacktenant-snapshots',
+    fetchData: createFetcher('openstacktenant-snapshots'),
+    filter,
+  });
+
   return (
     <Table
       {...props}
@@ -30,7 +46,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Created'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
         {
@@ -46,19 +62,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('snapshots')}
       hasQuery={false}
-      actions={<CreateSnapshotAction resource={props.resource} />}
+      actions={<CreateSnapshotAction resource={resource} />}
     />
   );
 };
-
-const mapPropsToFilter = (props) => ({
-  source_volume_uuid: props.resource.uuid,
-});
-
-const TableOptions = {
-  table: 'openstacktenant-snapshots',
-  fetchData: createFetcher('openstacktenant-snapshots'),
-  mapPropsToFilter,
-};
-
-export const VolumeSnapshotsList = connectTable(TableOptions)(TableComponent);

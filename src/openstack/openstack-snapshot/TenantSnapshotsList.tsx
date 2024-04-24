@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
@@ -6,9 +6,23 @@ import { translate } from '@waldur/i18n';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const TenantSnapshotsList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      service_settings_uuid: resource.child_settings,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstacktenant-snapshots',
+    fetchData: createFetcher('openstacktenant-snapshots'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -28,7 +42,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Created'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
         {
@@ -47,13 +61,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'openstacktenant-snapshots',
-  fetchData: createFetcher('openstacktenant-snapshots'),
-  mapPropsToFilter: (props) => ({
-    service_settings_uuid: props.resource.child_settings,
-  }),
-};
-
-export const TenantSnapshotsList = connectTable(TableOptions)(TableComponent);

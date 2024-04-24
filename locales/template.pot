@@ -79,7 +79,7 @@ msgstr ""
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Abbreviation"
 msgstr ""
 
@@ -434,8 +434,8 @@ msgstr ""
 msgid "Add pair"
 msgstr ""
 
+#: src/customer/payments/CreatePaymentButton.tsx
 #: src/customer/payments/PaymentCreateDialog.tsx
-#: src/customer/payments/PaymentsList.tsx
 msgid "Add payment"
 msgstr ""
 
@@ -973,7 +973,7 @@ msgstr ""
 msgid "Are you sure you want to delete the payment profile?"
 msgstr ""
 
-#: src/customer/payments/PaymentActions.tsx
+#: src/customer/payments/DeletePaymentButton.tsx
 msgid "Are you sure you want to delete the payment?"
 msgstr ""
 
@@ -1531,7 +1531,7 @@ msgstr ""
 msgid "Broadcast templates"
 msgstr ""
 
-#: src/support/dashboard/SupportDashboard.tsx
+#: src/broadcasts/BroadcastList.tsx
 msgid "Broadcasts"
 msgstr ""
 
@@ -2180,7 +2180,7 @@ msgstr ""
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
-#: src/customer/payments/PaymentActions.tsx
+#: src/customer/payments/DeletePaymentButton.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
@@ -2596,7 +2596,7 @@ msgstr ""
 #: src/issues/feedback/SupportFeedbackList.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
@@ -2617,8 +2617,8 @@ msgstr ""
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Created"
@@ -3027,7 +3027,7 @@ msgstr ""
 
 #: src/administration/agreements/UserAgreementDeleteButton.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
-#: src/customer/payments/PaymentActions.tsx
+#: src/customer/payments/DeletePaymentButton.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
 #: src/issues/comments/IssueCommentItem.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
@@ -3528,7 +3528,7 @@ msgstr ""
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
-#: src/customer/payments/PaymentActions.tsx
+#: src/customer/payments/EditPaymentButton.tsx
 #: src/customer/team/EditProjectUserButton.tsx
 #: src/customer/team/UserEditButton.tsx
 #: src/issues/comments/IssueCommentItem.tsx
@@ -3768,7 +3768,7 @@ msgstr ""
 #: src/proposals/round/reviewers/RoundReviewersList.tsx
 #: src/proposals/team/InvitationsList.tsx
 #: src/proposals/team/UsersList.tsx
-#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/hooks/HookTypeField.tsx
 #: src/user/support/EmailField.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -3867,7 +3867,7 @@ msgstr ""
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 msgid "End date"
 msgstr ""
 
@@ -5528,8 +5528,8 @@ msgid "LEXIS link creation request has been submitted."
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
 #: src/marketplace/resources/lexis/LexisLinkCard.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
 #: src/marketplace/routes.ts
 msgid "LEXIS links"
 msgstr ""
@@ -6313,7 +6313,7 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
-#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
@@ -7413,8 +7413,8 @@ msgstr ""
 #: src/issues/create/IssueHeader.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/ChecklistOverview.tsx
+#: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/tabs.ts
@@ -7438,8 +7438,8 @@ msgstr ""
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/affiliations/ProjectsListFilter.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
@@ -7481,7 +7481,7 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
-#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Organization group"
 msgstr ""
 
@@ -7583,7 +7583,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
-#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
@@ -7928,7 +7928,7 @@ msgstr ""
 msgid "Permission request has been rejected."
 msgstr ""
 
-#: src/user/UserPermissionRequestsListContainer.tsx
+#: src/user/UserPermissionRequestsList.tsx
 #: src/user/routes.ts
 msgid "Permission requests"
 msgstr ""
@@ -8437,7 +8437,7 @@ msgstr ""
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace/deploy/steps/FormProjectStep.tsx
 #: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
@@ -8637,7 +8637,7 @@ msgstr ""
 msgid "Project update requests"
 msgstr ""
 
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/routes.ts
 #: src/navigation/header/confirmation-drawer/PendingProjectUpdates.tsx
@@ -8666,8 +8666,8 @@ msgstr ""
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
-#: src/user/affiliations/OrganizationsList.tsx
-#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsView.tsx
@@ -9757,7 +9757,7 @@ msgstr ""
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 #: src/reporting/quotas/constants.tsx
-#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/user/routes.ts
 msgid "Resources"
@@ -9913,13 +9913,13 @@ msgid "Reviewed"
 msgstr ""
 
 #: src/invitations/UserPermissionRequestsList.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed at"
 msgstr ""
 
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/user/UserPermissionRequestsList.tsx
 msgid "Reviewed by"
@@ -9967,7 +9967,7 @@ msgstr ""
 msgid "Revoke"
 msgstr ""
 
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
+#: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
 msgid "Robot account"
 msgstr ""
 
@@ -9975,7 +9975,7 @@ msgstr ""
 msgid "Robot account has been created."
 msgstr ""
 
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
+#: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
 msgid "Robot account type"
 msgstr ""
 
@@ -10003,9 +10003,9 @@ msgstr ""
 #: src/proposals/team/UsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/affiliations/PermissionDetails.tsx
-#: src/user/affiliations/ProjectsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
@@ -11351,8 +11351,8 @@ msgstr ""
 #: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/invoices/list/InvoicesList.tsx
+#: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesFilter.tsx
@@ -11371,7 +11371,7 @@ msgstr ""
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
-#: src/marketplace/resources/lexis/LexisLinkList.tsx
+#: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -13847,7 +13847,7 @@ msgstr ""
 msgid "Unlink instance"
 msgstr ""
 
-#: src/customer/payments/PaymentActions.tsx
+#: src/customer/payments/UnlinkInvoiceButton.tsx
 msgid "Unlink invoice"
 msgstr ""
 
@@ -14941,7 +14941,10 @@ msgstr ""
 msgid "You must be staff to modify payment profiles"
 msgstr ""
 
-#: src/customer/payments/PaymentsList.tsx
+#: src/customer/payments/CreatePaymentButton.tsx
+#: src/customer/payments/DeletePaymentButton.tsx
+#: src/customer/payments/EditPaymentButton.tsx
+#: src/customer/payments/UnlinkInvoiceButton.tsx
 msgid "You must be staff to modify payments"
 msgstr ""
 
@@ -15269,7 +15272,7 @@ msgstr ""
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
-#: src/user/affiliations/OrganizationsList.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 msgid "organizations"
 msgstr ""
@@ -15307,7 +15310,7 @@ msgstr ""
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
-#: src/user/affiliations/ProjectsList.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"
 msgstr ""
@@ -15332,7 +15335,7 @@ msgstr ""
 msgid "remove"
 msgstr ""
 
-#: src/marketplace-remote/OrganizationProjectUpdateRequestsList.tsx
+#: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 msgid "requests"
 msgstr ""

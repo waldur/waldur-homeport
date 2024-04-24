@@ -12,7 +12,7 @@ import { getProject } from '@waldur/workspace/selectors';
 import { ResourcesAllListTable } from './ResourcesAllListTable';
 import { resourcesListRequiredFields } from './utils';
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getProject,
   getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID),
   (project, filters: any) => {
@@ -46,7 +46,7 @@ const mapPropsToFilter = createSelector(
 );
 
 export const ProjectResourcesAllList: FC<Partial<TableProps>> = (props) => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
   const project = useSelector(getProject);
   const tableProps = useTable({
     table: `ProjectResourcesAllList-${project.uuid}`,

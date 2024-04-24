@@ -25,15 +25,10 @@ export function* fetchList(action) {
   try {
     const state = yield select(getTableState(table));
     const options = getTableOptions(table);
-    let filter;
-    if (options.getDefaultFilter) {
-      filter = yield select(options.getDefaultFilter);
-    }
     const request: TableRequest = {
       currentPage: state.pagination.currentPage,
       pageSize: state.pagination.pageSize,
       filter: {
-        ...filter,
         ...extraFilter,
       },
     };

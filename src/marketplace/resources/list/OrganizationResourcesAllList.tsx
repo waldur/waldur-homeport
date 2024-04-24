@@ -12,7 +12,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { ResourcesAllListTable } from './ResourcesAllListTable';
 import { resourcesListRequiredFields } from './utils';
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getCustomer,
   getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID),
   (customer, filters: any) => {
@@ -48,7 +48,7 @@ const mapPropsToFilter = createSelector(
 export const OrganizationResourcesAllList: FC<Partial<TableProps>> = (
   props,
 ) => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: `OrganizationResourcesAllList`,
     fetchData: createFetcher('marketplace-resources'),

@@ -1,17 +1,36 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { IMAGES_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
 import { Offering } from '@waldur/marketplace/types';
-import { connectTable, createFetcher, Table } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CreateImageButton } from './CreateImageButton';
 import { DeleteImageButton } from './DeleteImageButton';
 import { ImagesListPlaceholder } from './ImagesListPlaceholder';
 import { ImageThumbnail } from './ImageThumbnail';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const OfferingImagesList: FunctionComponent<{ offering }> = ({
+  offering,
+}) => {
+  const filter = useMemo(() => {
+    if (offering) {
+      return { offering_uuid: offering.uuid };
+    }
+  }, [offering]);
+  const tableProps = useTable({
+    table: IMAGES_TABLE_NAME,
+    fetchData: createFetcher('marketplace-screenshots'),
+    filter,
+    exportRow: (row: Offering) => [
+      row.name,
+      row.description,
+      formatDateTime(row.created),
+    ],
+    exportFields: ['Name', 'Description', 'Created'],
+  });
   const columns = [
     {
       title: translate('Thumbnail'),
@@ -35,40 +54,16 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
   return (
     <Table
-      {...props}
+      {...tableProps}
       title={translate('Images')}
       id="images"
       columns={columns}
       placeholderComponent={<ImagesListPlaceholder />}
       verboseName={translate('Offerings images')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      actions={<CreateImageButton offering={props.offering} />}
+      actions={<CreateImageButton offering={offering} />}
       hoverableRow={DeleteImageButton}
       className="mb-10"
     />
   );
 };
-
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string | boolean> = {};
-  if (props.offering) {
-    filter.offering_uuid = props.offering.uuid;
-  }
-  return filter;
-};
-
-const TableOptions = {
-  table: IMAGES_TABLE_NAME,
-  fetchData: createFetcher('marketplace-screenshots'),
-  mapPropsToFilter,
-  exportRow: (row: Offering) => [
-    row.name,
-    row.description,
-    formatDateTime(row.created),
-  ],
-  exportFields: ['Name', 'Description', 'Created'],
-};
-
-export const OfferingImagesList = connectTable(TableOptions)(
-  TableComponent,
-) as React.ComponentType<any>;

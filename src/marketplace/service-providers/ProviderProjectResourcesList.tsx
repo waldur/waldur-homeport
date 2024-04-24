@@ -1,14 +1,32 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { EmptyResourcesListPlaceholder } from '../resources/list/EmptyResourcesListPlaceholder';
 import { ResourceNameField } from '../resources/list/ResourceNameField';
 import { ResourceStateField } from '../resources/list/ResourceStateField';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ProviderProjectResourcesList: FunctionComponent<{
+  project_uuid;
+  provider_uuid;
+}> = (ownProps) => {
+  const filter = useMemo(
+    () => ({
+      project_uuid: ownProps.project_uuid,
+      provider_uuid: ownProps.provider_uuid,
+      state: ['OK', 'Erred', 'Creating', 'Updating', 'Terminating'],
+    }),
+    [ownProps],
+  );
+  const props = useTable({
+    table: 'ProviderProjectResourcesList',
+    fetchData: createFetcher('marketplace-resources'),
+    filter,
+    queryField: 'query',
+  });
   return (
     <Table
       {...props}
@@ -28,7 +46,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Created at'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
         {
@@ -45,24 +63,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, any> = {};
-  filter.project_uuid = props.project_uuid;
-  filter.provider_uuid = props.provider_uuid;
-  filter.state = ['OK', 'Erred', 'Creating', 'Updating', 'Terminating'];
-  return filter;
-};
-
-const TableOptions = {
-  table: 'ProviderProjectResourcesList',
-  fetchData: createFetcher('marketplace-resources'),
-  mapPropsToFilter,
-  queryField: 'query',
-};
-
-const enhance = connectTable(TableOptions);
-
-export const ProviderProjectResourcesList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

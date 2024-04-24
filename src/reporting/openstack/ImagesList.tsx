@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
 import { createFetcher } from '@waldur/table/api';
-import { Table, connectTable } from '@waldur/table/index';
+import { Table } from '@waldur/table/index';
+import { useTable } from '@waldur/table/utils';
 
 import { formatFilter } from './utils';
 
@@ -18,7 +18,20 @@ const NumOfCreatedInstancesField = ({ row }) => (
   <>{row.created_instances_count}</>
 );
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const mapStateToFilter = createSelector(
+  getFormValues('vmOverviewFilter'),
+  formatFilter,
+);
+
+export const ImagesList: FunctionComponent<{}> = () => {
+  const filter = useSelector(mapStateToFilter);
+
+  const props = useTable({
+    table: 'imagesList',
+    fetchData: createFetcher('openstacktenant-images/usage_stats'),
+    filter,
+  });
+
   return (
     <Table
       {...props}
@@ -40,19 +53,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'imagesList',
-  fetchData: createFetcher('openstacktenant-images/usage_stats'),
-  mapPropsToFilter: (props) => {
-    return formatFilter(props.vmOverviewFilter);
-  },
-};
-
-const mapStateToProps = (state: RootState) => ({
-  vmOverviewFilter: getFormValues('vmOverviewFilter')(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const ImagesList = enhance(TableComponent);
