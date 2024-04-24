@@ -4,11 +4,13 @@ import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { Field, initialize, reduxForm } from 'redux-form';
 
+import { TelemetryExampleButton } from '@waldur/administration/TelemetryExampleButton';
 import { ENV } from '@waldur/configs/default';
 import { get, post } from '@waldur/core/api';
 import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
+import { TelemetryFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -103,13 +105,21 @@ export const FeaturesList = reduxForm({
 
                 {section.items.map((item) => (
                   <tr key={item.key}>
-                    <td>{item.description}</td>
+                    <td>
+                      {item.description}
+                      {`${section.key}.${item.key}` ===
+                      TelemetryFeatures.send_metrics ? (
+                        <div>
+                          <TelemetryExampleButton />
+                        </div>
+                      ) : null}
+                    </td>
                     <td>
                       <Field
                         name={`${section.key}.${item.key}`}
                         choices={choices}
                         component={CustomRadioButton}
-                      ></Field>
+                      />
                     </td>
                   </tr>
                 ))}

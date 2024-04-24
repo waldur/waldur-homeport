@@ -1955,6 +1955,7 @@ msgstr ""
 msgid "Clone of"
 msgstr ""
 
+#: src/administration/TelemetryExampleDialog.tsx
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
 #: src/broadcasts/RecipientsListDialog.tsx
 #: src/invitations/actions/create/FormButtons.tsx
@@ -3132,8 +3133,16 @@ msgstr ""
 msgid "Deploy in seconds"
 msgstr ""
 
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Deployment ID"
+msgstr ""
+
 #: src/marketplace/landing/DeploymentIntroduction.tsx
 msgid "Deployment made easy, for everyone"
+msgstr ""
+
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Deployment type"
 msgstr ""
 
 #: src/administration/roles/RolesList.tsx
@@ -4115,6 +4124,10 @@ msgstr ""
 msgid "Every year service provider can report up to the amount requested by user."
 msgstr ""
 
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Example telemetry metrics"
+msgstr ""
+
 #: src/marketplace/resources/report/SubmitReportDialog.tsx
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
@@ -4741,6 +4754,14 @@ msgstr ""
 msgid "Hello"
 msgstr ""
 
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Helpdesk backend"
+msgstr ""
+
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Helpdesk integration status"
+msgstr ""
+
 #: src/administration/branding/BrandingForm.tsx
 msgid "Hex color definition is used in landing page for font color of login button."
 msgstr ""
@@ -5028,6 +5049,10 @@ msgstr ""
 msgid "In the format of GUID"
 msgstr ""
 
+#: src/project/team/UserListOptionInline.tsx
+msgid "Inactive"
+msgstr ""
+
 #: src/user/support/UserActivateButton.tsx
 msgid "Inactive user will not be able to login into the portal."
 msgstr ""
@@ -5081,6 +5106,10 @@ msgstr ""
 
 #: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Initial primary group number"
+msgstr ""
+
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Installation date"
 msgstr ""
 
 #: src/openstack/openstack-backup/OpenStackBackupSummary.tsx
@@ -6858,9 +6887,17 @@ msgstr ""
 msgid "Number of etcd nodes"
 msgstr ""
 
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Number of offerings"
+msgstr ""
+
 #: src/reporting/openstack/FlavorsList.tsx
 #: src/reporting/openstack/ImagesList.tsx
 msgid "Number of running instances"
+msgstr ""
+
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Number of users"
 msgstr ""
 
 #: src/rancher/cluster/create/RancherClusterCheckoutSummary.tsx
@@ -11013,6 +11050,10 @@ msgstr ""
 msgid "Show diff"
 msgstr ""
 
+#: src/administration/TelemetryExampleButton.tsx
+msgid "Show example"
+msgstr ""
+
 #: src/navigation/sidebar/ResourcesMenu.tsx
 msgid "Show less"
 msgstr ""
@@ -12532,6 +12573,10 @@ msgstr ""
 
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Type of linked issue"
+msgstr ""
+
+#: src/administration/TelemetryExampleDialog.tsx
+msgid "Types of offering"
 msgstr ""
 
 #: src/marketplace/offerings/update/endpoints/AddEndpointDialog.tsx
@@ -14573,6 +14618,7 @@ msgstr ""
 msgid "Verifying email change"
 msgstr ""
 
+#: src/administration/TelemetryExampleDialog.tsx
 #: src/administration/dashboard/AdministrationProfile.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
 #: src/navigation/AppFooter.tsx
