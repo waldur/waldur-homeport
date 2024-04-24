@@ -20,7 +20,7 @@ import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
 import { CallManagementTablePlaceholder } from './CallManagementTablePlaceholder';
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getCustomer,
   getFormValues(CALL_FILTER_FORM_ID),
   (customer, filters: any) => {
@@ -39,7 +39,7 @@ const mapPropsToFilter = createSelector(
 );
 
 export const CallManagementPage: FunctionComponent = () => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: 'CallManagementList',
     fetchData: createFetcher('proposal-protected-calls'),

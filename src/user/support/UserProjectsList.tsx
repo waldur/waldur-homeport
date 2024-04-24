@@ -1,22 +1,8 @@
-import { connect } from 'react-redux';
+import { useMemo } from 'react';
 
-import { RootState } from '@waldur/store/reducers';
-import { getUserProjectsList } from '@waldur/user/affiliations/ProjectsList';
-import { getProject } from '@waldur/workspace/selectors';
-import { User } from '@waldur/workspace/types';
+import { BaseProjectsList } from '../affiliations/BaseProjectsList';
 
-interface UserProjectsListProps {
-  user: User;
-}
-
-const PureUserProjects = getUserProjectsList();
-
-const mapStateToProps = (
-  state: RootState,
-  ownProps: UserProjectsListProps,
-) => ({
-  currentProject: getProject(state),
-  user: ownProps.user,
-});
-
-export const UserProjectsList = connect(mapStateToProps)(PureUserProjects);
+export const UserProjectsList = ({ user }) => {
+  const filter = useMemo(() => ({ user_uuid: user.uuid }), [user]);
+  return <BaseProjectsList filter={filter} />;
+};

@@ -1,6 +1,7 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -9,12 +10,11 @@ import {
   UsageReport,
   UsageReportRequest,
 } from '@waldur/marketplace/resources/usage/types';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableProps } from '@waldur/table/Table';
+import { Table, createFetcher } from '@waldur/table';
 import { Column } from '@waldur/table/types';
+import { useTable } from '@waldur/table/utils';
 
-import { FORM_ID } from './ResourceUsageFilter';
+import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
 
 const UsageExpandableRow = ({ row }) => (
   <p>
@@ -22,7 +22,15 @@ const UsageExpandableRow = ({ row }) => (
   </p>
 );
 
-const TableComponent = (props: TableProps<UsageReport>) => {
+export const ResourceUsageList: FC = () => {
+  const filter = useSelector(mapStateToFilter);
+  const props = useTable({
+    table: 'ResourceUsageReports',
+    fetchData: createFetcher('marketplace-component-usages'),
+    exportRow,
+    exportFields,
+    filter,
+  });
   const columns: Array<Column<UsageReport>> = [
     {
       title: translate('Client organization'),
@@ -62,6 +70,7 @@ const TableComponent = (props: TableProps<UsageReport>) => {
       showPageSizeSelector={true}
       enableExport={true}
       expandableRow={UsageExpandableRow}
+      filters={<ResourceUsageFilter />}
     />
   );
 };
@@ -88,42 +97,27 @@ const exportFields = () => [
   translate('Comment'),
 ];
 
-const mapPropsToFilter = (props) => {
-  const filter: UsageReportRequest = {};
-  if (props.usageFilter) {
-    if (props.usageFilter.accounting_period) {
-      const { start } = getStartAndEndDatesOfMonth(
-        props.usageFilter.accounting_period.value,
-      );
-      filter.billing_period = start;
+const mapStateToFilter = createSelector(
+  getFormValues(FORM_ID),
+  (usageFilter: any) => {
+    const filter: UsageReportRequest = {};
+    if (usageFilter) {
+      if (usageFilter.accounting_period) {
+        const { start } = getStartAndEndDatesOfMonth(
+          usageFilter.accounting_period.value,
+        );
+        filter.billing_period = start;
+      }
+      if (usageFilter.organization) {
+        filter.customer_uuid = usageFilter.organization.uuid;
+      }
+      if (usageFilter.project) {
+        filter.project_uuid = usageFilter.project.uuid;
+      }
+      if (usageFilter.offering) {
+        filter.offering_uuid = usageFilter.offering.uuid;
+      }
     }
-    if (props.usageFilter.organization) {
-      filter.customer_uuid = props.usageFilter.organization.uuid;
-    }
-    if (props.usageFilter.project) {
-      filter.project_uuid = props.usageFilter.project.uuid;
-    }
-    if (props.usageFilter.offering) {
-      filter.offering_uuid = props.usageFilter.offering.uuid;
-    }
-  }
-  return filter;
-};
-
-const TableOptions = {
-  table: 'ResourceUsageReports',
-  fetchData: createFetcher('marketplace-component-usages'),
-  exportRow,
-  exportFields,
-  mapPropsToFilter,
-};
-
-const mapStateToProps = (state: RootState) => ({
-  usageFilter: getFormValues(FORM_ID)(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const ResourceUsageList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;
+    return filter;
+  },
+);

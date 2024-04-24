@@ -1,15 +1,47 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
+import { useTable } from '@waldur/table/utils';
 
 import { CreateNetworkAction } from '../openstack-tenant/actions/CreateNetworkAction';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const TenantNetworksList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      tenant_uuid: resource.uuid,
+      field: [
+        'uuid',
+        'url',
+        'name',
+        'description',
+        'created',
+        'is_external',
+        'type',
+        'subnets',
+        'state',
+        'error_message',
+        'resource_type',
+        'service_name',
+        'service_settings',
+        'service_settings_uuid',
+        'service_settings_state',
+        'service_settings_error_message',
+      ],
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstack-networks',
+    fetchData: createFetcher('openstack-networks'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -35,7 +67,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('networks')}
-      actions={<CreateNetworkAction resource={props.resource} />}
+      actions={<CreateNetworkAction resource={resource} />}
       hoverableRow={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
@@ -43,31 +75,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'openstack-networks',
-  fetchData: createFetcher('openstack-networks'),
-  mapPropsToFilter: (props) => ({
-    tenant_uuid: props.resource.uuid,
-    field: [
-      'uuid',
-      'url',
-      'name',
-      'description',
-      'created',
-      'is_external',
-      'type',
-      'subnets',
-      'state',
-      'error_message',
-      'resource_type',
-      'service_name',
-      'service_settings',
-      'service_settings_uuid',
-      'service_settings_state',
-      'service_settings_error_message',
-    ],
-  }),
-};
-
-export const TenantNetworksList = connectTable(TableOptions)(TableComponent);

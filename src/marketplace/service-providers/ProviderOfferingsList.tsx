@@ -29,7 +29,7 @@ interface ProviderOfferingsComponentProps {
   extraTableProps?: Partial<TableProps>;
 }
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getFormValues(PROVIDER_OFFERINGS_FORM_ID),
   (filters: any) => {
     const result: Record<string, any> = {};
@@ -46,7 +46,7 @@ const mapPropsToFilter = createSelector(
 export const ProviderOfferingsComponent: FC<
   ProviderOfferingsComponentProps
 > = ({ provider, extraTableProps = {} }) => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
 
   const tableProps = useTable({
     table: 'ProviderOfferingsList',

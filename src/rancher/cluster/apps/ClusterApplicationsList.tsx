@@ -1,15 +1,35 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { ApplicationDeleteButton } from './ApplicationDeleteButton';
 import { ApplicationDetailsButton } from './ApplicationDetailsButton';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const ApplicationActions = ({ row }) => (
+  <ButtonGroup>
+    <ApplicationDetailsButton application={row} />
+    <ApplicationDeleteButton application={row} />
+  </ButtonGroup>
+);
+
+export const ClusterApplicationsList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      cluster_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'rancher-apps',
+    fetchData: createFetcher('rancher-apps'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -40,26 +60,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Actions'),
-          render: ({ row }) => (
-            <ButtonGroup>
-              <ApplicationDetailsButton application={row} />
-              <ApplicationDeleteButton application={row} />
-            </ButtonGroup>
-          ),
+          render: ApplicationActions,
         },
       ]}
       verboseName={translate('applications')}
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: 'rancher-apps',
-  fetchData: createFetcher('rancher-apps'),
-  mapPropsToFilter: (props) => ({
-    cluster_uuid: props.resource.uuid,
-  }),
-};
-
-export const ClusterApplicationsList =
-  connectTable(TableOptions)(TableComponent);

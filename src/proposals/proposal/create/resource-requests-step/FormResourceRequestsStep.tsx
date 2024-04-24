@@ -28,7 +28,7 @@ import { ProposalResourcesFilter } from './ProposalResourcesFilter';
 import { ResourceRequestExpandableRow } from './ResourceRequestExpandableRow';
 import { ResourceRequestItemActions } from './ResourceRequestItemActions';
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getFormValues('ProposalResourcesFilter'),
   (filters: any) => {
     const result: Record<string, any> = {};
@@ -58,7 +58,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
     },
   );
 
-  const filterValues = useSelector(mapPropsToFilter);
+  const filterValues = useSelector(mapStateToFilter);
 
   const filter = useMemo(
     () => ({

@@ -3,9 +3,8 @@ import { FunctionComponent } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { connectTable, createFetcher, Table } from '@waldur/table';
-import { TableProps } from '@waldur/table/Table';
-import { TableOptionsType } from '@waldur/table/types';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { BroadcastCreateButton } from './BroadcastCreateButton';
 import { BroadcastExpandableRow } from './BroadcastExpandableRow';
@@ -13,20 +12,28 @@ import { BroadcastSendButton } from './BroadcastSendButton';
 import { BroadcastUpdateButton } from './BroadcastUpdateButton';
 import { BroadcastResponseData } from './types';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const BroadcastList: FunctionComponent<{}> = () => {
+  const props = useTable({
+    table: 'broadcast',
+    fetchData: createFetcher('broadcast-messages'),
+    queryField: 'subject',
+  });
   return (
     <Table
       {...props}
       columns={[
         {
           title: translate('Author'),
-          render: ({ row }: { row: BroadcastResponseData }) =>
-            row.author_full_name,
+          render: ({ row }: { row: BroadcastResponseData }) => (
+            <>{row.author_full_name}</>
+          ),
           orderField: 'author_full_name',
         },
         {
           title: translate('Subject'),
-          render: ({ row }: { row: BroadcastResponseData }) => row.subject,
+          render: ({ row }: { row: BroadcastResponseData }) => (
+            <>{row.subject}</>
+          ),
           orderField: 'subject',
         },
         {
@@ -46,7 +53,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Created at'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
       ]}
@@ -65,16 +72,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         ) : null
       }
       hasQuery={true}
+      title={translate('Broadcasts')}
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: 'broadcast',
-  fetchData: createFetcher('broadcast-messages'),
-  queryField: 'subject',
-};
-
-export const BroadcastList = connectTable(TableOptions)(
-  TableComponent,
-) as React.ComponentType<Partial<TableProps>>;

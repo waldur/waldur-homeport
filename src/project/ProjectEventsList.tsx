@@ -1,45 +1,43 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { isEmpty } from '@waldur/core/utils';
-import { getEventsList } from '@waldur/events/BaseEventsList';
+import { BaseEventsList } from '@waldur/events/BaseEventsList';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectEventsFilter } from './ProjectEventsFilter';
 
-const PureProjectEvents = getEventsList({
-  mapPropsToFilter: (props) => {
+const mapStateToFilter = createSelector(
+  getFormValues('projectEventsFilter'),
+  getProject,
+  (userFilter: any, project) => {
     const filter = {
-      ...props.userFilter,
-      feature: props.userFilter?.feature?.map((option) => option.value),
+      ...userFilter,
+      feature: userFilter?.feature?.map((option) => option.value),
     };
-    if (props.project) {
-      filter.scope = props.project.url;
+    if (project) {
+      filter.scope = project.url;
     }
-    if (props.userFilter && isEmpty(props.userFilter.feature)) {
+    if (userFilter && isEmpty(userFilter.feature)) {
       filter.feature = ['projects', 'resources'];
     }
     return filter;
   },
-  mapPropsToTableId: (props) => ['project-events', props.project?.uuid],
-});
+);
 
-const mapStateToProps = (state: RootState) => ({
-  userFilter: getFormValues('projectEventsFilter')(state),
-  project: getProject(state),
-});
-
-const ProjectEvents = connect(mapStateToProps)(PureProjectEvents);
-
-export const ProjectEventsView: FunctionComponent<any> = (props) => {
+export const ProjectEventsView: FunctionComponent = () => {
+  const project = useSelector(getProject);
+  const filter = useSelector(mapStateToFilter);
   return (
-    <ProjectEvents
+    <BaseEventsList
+      table={`project-events-${project?.uuid}`}
       title={translate('Audit logs')}
-      {...props}
+      filter={filter}
       filters={<ProjectEventsFilter />}
+      initialPageSize={5}
     />
   );
 };

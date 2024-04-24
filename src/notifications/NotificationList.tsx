@@ -15,7 +15,7 @@ import { useTable } from '@waldur/table/utils';
 
 import { ManageCommonFooterButton } from './ManageCommonFooterButton';
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getFormValues('notificationFilter'),
   (filters: any) => {
     const result: Record<string, any> = {};
@@ -36,7 +36,7 @@ const mapPropsToFilter = createSelector(
 );
 
 export const NotificationList = () => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
   const exportRow = (row) => {
     const templatesContent = row.templates.map((template) => template.content);
     return [row.key, ...templatesContent];
@@ -44,12 +44,11 @@ export const NotificationList = () => {
   const tableProps = useTable({
     table: 'notification',
     fetchData: createFetcher('notification-messages'),
-    mapPropsToFilter: (props) => props.filter,
+    filter,
     queryField: 'query',
     exportRow: exportRow,
     exportAll: true,
     exportKeys: ['key', 'templates'],
-    filter,
   });
   const hasOverriddenTemplate = (row) => {
     return row.templates.some((template) => template.is_content_overridden);

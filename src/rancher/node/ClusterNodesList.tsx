@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -6,13 +6,27 @@ import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CreateNodeAction } from '../cluster/actions/CreateNodeAction';
 
 import { NodeRoleField } from './NodeRoleField';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ClusterNodesList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      cluster_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'rancher-nodes',
+    fetchData: createFetcher('rancher-nodes'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -33,7 +47,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           title: translate('Instance'),
           render: ({ row }) => {
             if (!row.instance_uuid) {
-              return translate('Not assigned');
+              return <>{translate('Not assigned')}</>;
             }
             return (
               <Link
@@ -50,7 +64,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('Kubernetes nodes')}
-      actions={<CreateNodeAction resource={props.resource} />}
+      actions={<CreateNodeAction resource={resource} />}
       hoverableRow={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
@@ -58,13 +72,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'rancher-nodes',
-  fetchData: createFetcher('rancher-nodes'),
-  mapPropsToFilter: (props) => ({
-    cluster_uuid: props.resource.uuid,
-  }),
-};
-
-export const ClusterNodesList = connectTable(TableOptions)(TableComponent);

@@ -1,13 +1,11 @@
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { OfferingBookingResourcesCalendarContainer } from '@waldur/booking/offering/OfferingBookingResourcesCalendarContainer';
 import { translate } from '@waldur/i18n';
 import { OfferingOrdersList } from '@waldur/marketplace/details/OfferingOrdersList';
-import { OfferingResourcesFilter } from '@waldur/marketplace/details/OfferingResourcesFilter';
 import { OfferingResourcesList } from '@waldur/marketplace/details/OfferingResourcesList';
-import { OrdersFilter } from '@waldur/marketplace/orders/list/OrdersFilter';
 import { Offering } from '@waldur/marketplace/types';
 import { PlanUsageRow } from '@waldur/reporting/plan-usage/types';
 
@@ -27,10 +25,10 @@ interface OfferingTablesProps {
   plansUsage: PlanUsageRow[];
 }
 
-export const OfferingTables = ({
+export const OfferingTables: FC<OfferingTablesProps> = ({
   offering,
   plansUsage,
-}: OfferingTablesProps) => {
+}) => {
   const [uniqueFormId] = useMemo(
     () => `${OFFERING_CUSTOMERS_LIST_FILTER}-${offering.uuid}`,
     [offering],
@@ -45,13 +43,10 @@ export const OfferingTables = ({
         </div>
       )}
       <div className="mb-10" id="orders">
-        <OfferingOrdersList offering={offering} filters={<OrdersFilter />} />
+        <OfferingOrdersList offering={offering} />
       </div>
       <div className="mb-10" id="resources">
-        <OfferingResourcesList
-          offering={offering}
-          filters={<OfferingResourcesFilter />}
-        />
+        <OfferingResourcesList offering={offering} />
       </div>
       {offering.type !== OFFERING_TYPE_BOOKING && offering.billable && (
         <PlanUsageList plansUsage={plansUsage} className="mb-10" id="plans" />

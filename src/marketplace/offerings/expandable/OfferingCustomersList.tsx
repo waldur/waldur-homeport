@@ -1,18 +1,51 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { Table, connectTable } from '@waldur/table';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Table, createFetcher } from '@waldur/table';
+import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
-import { fetchProviderOfferingCustomers } from './api';
 import { OFFERING_CUSTOMERS_LIST_TABLE_ID } from './constants';
 
-const TableComponent: FunctionComponent<any> = (props) => {
-  const { filterColumns } = props;
-  const columns = filterColumns([
+interface OfferingCustomersListOwnProps {
+  offeringUuid: string;
+  uniqueFormId: string;
+}
+
+export const OfferingCustomersList: FunctionComponent<
+  OfferingCustomersListOwnProps
+> = (props) => {
+  const table = useMemo(
+    () => `${OFFERING_CUSTOMERS_LIST_TABLE_ID}-${props.offeringUuid}`,
+    [props.offeringUuid],
+  );
+
+  const filterValues: any = useSelector(getFormValues(props.uniqueFormId));
+
+  const filter = useMemo(
+    () => ({
+      accounting_is_running: filterValues?.accounting_is_running?.value,
+    }),
+    [filterValues],
+  );
+
+  const fetcher = useMemo(
+    () =>
+      createFetcher(
+        `/marketplace-provider-offerings/${props.offeringUuid}/customers/`,
+      ),
+    [props.offeringUuid],
+  );
+
+  const tableProps = useTable({
+    table,
+    fetchData: fetcher,
+    queryField: 'query',
+    filter,
+  });
+
+  const columns = [
     {
       title: translate('Organization'),
       render: ({ row }) => <>{row.name}</>,
@@ -21,11 +54,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Abbreviation'),
       render: ({ row }) => <>{renderFieldOrDash(row.abbreviation)}</>,
     },
-  ]);
+  ];
 
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={columns}
       verboseName={translate('Organizations')}
       hasQuery={true}
@@ -34,29 +67,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const mapPropsToFilter = ({ customerListFilter, offeringUuid }) => ({
-  accounting_is_running: customerListFilter?.accounting_is_running
-    ? customerListFilter.accounting_is_running.value
-    : undefined,
-  offering_uuid: offeringUuid,
-});
-
-const TableOptions = {
-  table: OFFERING_CUSTOMERS_LIST_TABLE_ID,
-  fetchData: fetchProviderOfferingCustomers,
-  queryField: 'query',
-  mapPropsToFilter: (props) => mapPropsToFilter(props),
-  mapPropsToTableId: (props) => [props.offeringUuid],
-};
-
-const mapStateToProps = (state, ownProps) => ({
-  customerListFilter: getFormValues(ownProps.uniqueFormId)(state),
-});
-
-const enhance = compose<any>(
-  connect(mapStateToProps),
-  connectTable(TableOptions),
-);
-
-export const OfferingCustomersList = enhance(TableComponent);

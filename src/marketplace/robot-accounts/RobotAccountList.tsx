@@ -1,13 +1,22 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const RobotAccountList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(() => ({ resource: resource.url }), [resource]);
+  const tableProps = useTable({
+    table: 'marketplace-robot-accounts',
+    fetchData: createFetcher('marketplace-robot-accounts'),
+    filter,
+  });
   const columns = [
     {
       title: translate('Type'),
@@ -25,14 +34,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Actions'),
       render: ({ row }) => (
-        <RobotAccountActions refetch={props.fetch} row={row} />
+        <RobotAccountActions refetch={tableProps.fetch} row={row} />
       ),
     },
   ];
 
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={columns}
       verboseName={translate('robot accounts')}
       hasActionBar={false}
@@ -40,19 +49,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const mapPropsToFilter = ({ resource }) => {
-  return { resource: resource.url };
-};
-
-const TableOptions = {
-  table: 'marketplace-robot-accounts',
-  fetchData: createFetcher('marketplace-robot-accounts'),
-  mapPropsToFilter,
-};
-
-const enhance = connectTable(TableOptions);
-
-export const RobotAccountList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

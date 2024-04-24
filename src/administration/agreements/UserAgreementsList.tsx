@@ -1,17 +1,21 @@
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
-import { UserAgreementCreateButton } from '@waldur/administration/agreements/UserAgreementCreateButton';
-import { UserAgreementDeleteButton } from '@waldur/administration/agreements/UserAgreementDeleteButton';
-import { UserAgreementsEditButton } from '@waldur/administration/agreements/UserAgreementsEditButton';
-import { UserAgreementsExpandableRow } from '@waldur/administration/agreements/UserAgreementsExpandableRow';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableProps } from '@waldur/table/Table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+import { UserAgreementCreateButton } from './UserAgreementCreateButton';
+import { UserAgreementDeleteButton } from './UserAgreementDeleteButton';
+import { UserAgreementsEditButton } from './UserAgreementsEditButton';
+import { UserAgreementsExpandableRow } from './UserAgreementsExpandableRow';
+
+export const UserAgreementsList: FunctionComponent<{}> = () => {
+  const props = useTable({
+    table: 'user-agreements',
+    fetchData: createFetcher('user-agreements'),
+  });
   return (
     <Table
       {...props}
@@ -41,12 +45,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: 'user-agreements',
-  fetchData: createFetcher('user-agreements'),
-};
-
-export const UserAgreementsList = connectTable(TableOptions)(
-  TableComponent,
-) as React.ComponentType<Partial<TableProps>>;

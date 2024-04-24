@@ -1,12 +1,30 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 
 import { getById } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { UpdateFloatingIpsActionButton } from '@waldur/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsActionButton';
 import { VirtualMachine } from '@waldur/resource/types';
-import { Table, connectTable } from '@waldur/table';
+import { Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const FloatingIpsList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const fetchData = useCallback(
+    () =>
+      getById<VirtualMachine>(
+        '/openstacktenant-instances/',
+        resource.uuid,
+      ).then((vm) => ({
+        rows: vm.floating_ips,
+        resultCount: vm.floating_ips.length,
+      })),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstack-floating-ips',
+    fetchData,
+  });
   return (
     <Table
       {...props}
@@ -29,26 +47,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('floating IPs')}
-      actions={<UpdateFloatingIpsActionButton resource={props.resource} />}
+      actions={<UpdateFloatingIpsActionButton resource={resource} />}
     />
   );
 };
-
-const getFloatingIps = (request) =>
-  getById<VirtualMachine>(
-    '/openstacktenant-instances/',
-    request.filter.uuid,
-  ).then((vm) => ({
-    rows: vm.floating_ips,
-    resultCount: vm.floating_ips.length,
-  }));
-
-const TableOptions = {
-  table: 'openstack-floating-ips',
-  fetchData: getFloatingIps,
-  mapPropsToFilter: (props) => ({
-    uuid: props.resource?.uuid,
-  }),
-};
-
-export const FloatingIpsList = connectTable(TableOptions)(TableComponent);

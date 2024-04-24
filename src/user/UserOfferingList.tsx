@@ -1,12 +1,10 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { UserOfferingListPlaceholder } from '@waldur/user/UserOfferingListPlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
@@ -15,7 +13,21 @@ interface OwnProps {
   user?: UserDetails;
 }
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const UserOfferingList: FunctionComponent<OwnProps> = (props) => {
+  const currentUser = useSelector(getUser);
+  const user = props.user || currentUser;
+  const filter = useMemo(
+    () => ({
+      user_uuid: user?.uuid,
+    }),
+    [user],
+  );
+  const tableProps = useTable({
+    table: 'UserOfferingList',
+    fetchData: createFetcher('marketplace-offering-users'),
+    filter,
+    queryField: 'query',
+  });
   const columns = [
     {
       title: translate('Offering'),
@@ -27,13 +39,13 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Created at'),
-      render: ({ row }) => formatDateTime(row.created),
+      render: ({ row }) => <>{formatDateTime(row.created)}</>,
     },
   ];
 
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={columns}
       verboseName={translate('remote accounts')}
       placeholderComponent={<UserOfferingListPlaceholder />}
@@ -42,20 +54,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-export const TableOptions: TableOptionsType = {
-  table: 'UserOfferingList',
-  fetchData: createFetcher('marketplace-offering-users'),
-  mapPropsToFilter: (props) => ({
-    user_uuid: props.user?.uuid,
-  }),
-  queryField: 'query',
-};
-
-const mapStateToProps = (state: RootState, ownProps: OwnProps) => ({
-  user: ownProps.user || getUser(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const UserOfferingList = enhance(TableComponent);

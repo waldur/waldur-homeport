@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
 import { createFetcher } from '@waldur/table/api';
-import { Table, connectTable } from '@waldur/table/index';
+import { Table } from '@waldur/table/index';
+import { useTable } from '@waldur/table/utils';
 
 import { formatFilter } from './utils';
 
@@ -18,10 +18,21 @@ const NumOfCreatedInstancesField = ({ row }) => (
   <>{row.created_instances_count}</>
 );
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const mapStateToFilter = createSelector(
+  getFormValues('vmOverviewFilter'),
+  formatFilter,
+);
+
+export const FlavorsList: FunctionComponent<{}> = () => {
+  const filter = useSelector(mapStateToFilter);
+  const tableProps = useTable({
+    table: 'flavorsList',
+    fetchData: createFetcher('openstacktenant-flavors/usage_stats'),
+    filter,
+  });
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={[
         {
           title: translate('Flavor name'),
@@ -40,17 +51,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'flavorsList',
-  fetchData: createFetcher('openstacktenant-flavors/usage_stats'),
-  mapPropsToFilter: (props) => formatFilter(props.vmOverviewFilter),
-};
-
-const mapStateToProps = (state: RootState) => ({
-  vmOverviewFilter: getFormValues('vmOverviewFilter')(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const FlavorsList = enhance(TableComponent);

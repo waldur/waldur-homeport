@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Tip } from '@waldur/core/Tooltip';
@@ -7,7 +7,6 @@ import { translate } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
-import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { selectTableRows } from '@waldur/table/selectors';
@@ -31,17 +30,6 @@ export const getId = (row, index) => {
   return index;
 };
 
-const filterByFeature = (state: RootState) => (columns) =>
-  columns.filter(
-    (column) => !column.feature || isVisible(state, column.feature),
-  );
-
-export const filterColumns = (state: RootState) => (columns) => {
-  return filterByFeature(state)(columns).filter(
-    (column) => column.visible === undefined || column.visible === true,
-  );
-};
-
 const getDefaultTitle = (state: RootState) => {
   const pageTitle = getTitle(state);
   const breadcrumbs = router.globals.$current.path
@@ -51,73 +39,6 @@ const getDefaultTitle = (state: RootState) => {
 
   return breadcrumbs.pop() || pageTitle;
 };
-
-export function connectTable(options: TableOptionsType) {
-  return function wrapper<P = {}>(Component: React.ComponentType<P>) {
-    const Wrapper: React.ComponentType<P> = (props) => {
-      const { table: rawTableId } = options;
-      const extraId = options.mapPropsToTableId
-        ? options.mapPropsToTableId(props).filter((x) => x !== undefined)
-        : [];
-      const table = `${rawTableId}${
-        extraId.length ? '-' + extraId.join('-') : ''
-      }`;
-      registerTable({ ...options, table });
-
-      const mapDispatchToProps = (dispatch) => ({
-        fetch: () => {
-          let propFilter;
-          if (options.mapPropsToFilter) {
-            propFilter = options.mapPropsToFilter(props);
-          }
-          return dispatch(
-            actions.fetchListStart(table, propFilter, options.pullInterval),
-          );
-        },
-        gotoPage: (page) => dispatch(actions.fetchListGotoPage(table, page)),
-        openExportDialog: (format: ExportConfig['format'], ownProps?) =>
-          dispatch(
-            openModalDialog(ExportDialog, {
-              resolve: {
-                table,
-                format,
-                ownProps,
-              },
-            }),
-          ),
-        setQuery: (query) => dispatch(actions.setFilterQuery(table, query)),
-        updatePageSize: (size) => dispatch(actions.updatePageSize(table, size)),
-        resetPagination: () => dispatch(actions.resetPagination(table)),
-        sortList: (sorting: Sorting) =>
-          dispatch(actions.sortListStart(table, sorting)),
-        toggleRow: (row: any) => dispatch(actions.toggleRow(table, row)),
-        toggleFilter: () => dispatch(actions.toggleFilter(table)),
-        selectRow: (row: any) => dispatch(actions.selectRow(table, row)),
-        selectAllRows: (rows: any[]) =>
-          dispatch(actions.selectAllRows(table, rows)),
-        resetSelection: () => dispatch(actions.resetSelection(table)),
-      });
-
-      const mapStateToProps = (state: RootState) => ({
-        alterTitle: getDefaultTitle(state),
-        filterColumns: filterColumns(state),
-        ...getTableState(table)(state),
-        rows: selectTableRows(state, table),
-      });
-
-      const enhance = connect(mapStateToProps, mapDispatchToProps);
-
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      /* @ts-ignore */
-      const ConnectedComponent = enhance(Component);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      /* @ts-ignore */
-      return <ConnectedComponent {...props} />;
-    };
-    Wrapper.displayName = `connectTable(${Component.name})`;
-    return Wrapper;
-  };
-}
 
 export const formatLongText = (value) =>
   value && value.length > 100 ? (

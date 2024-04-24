@@ -1,11 +1,11 @@
 import { ENV } from '@waldur/configs/default';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
-import { fetchInvoicesStats } from '@waldur/invoices/api';
 import { INVOICES_STATS_TABLE } from '@waldur/invoices/constants';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { connectTable, Table } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { useTable } from '@waldur/table/utils';
 
 const CostField = ({ invoiceStats, organization }) =>
   getActiveFixedPricePaymentProfile(organization.payment_profiles)
@@ -14,7 +14,11 @@ const CostField = ({ invoiceStats, organization }) =>
       ? defaultCurrency(invoiceStats.aggregated_price)
       : defaultCurrency(invoiceStats.aggregated_total);
 
-const TableComponent = (props: any) => {
+export const InvoicesStatsList = (props: any) => {
+  const tableProps = useTable({
+    table: [INVOICES_STATS_TABLE, props.invoiceUuid].join('-'),
+    fetchData: createFetcher(`invoices/${props.invoiceUuid}/stats`),
+  });
   const columns = [
     {
       title: translate('Offering name'),
@@ -38,21 +42,10 @@ const TableComponent = (props: any) => {
 
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={columns}
       verboseName={translate('Invoice statistics')}
       showPageSizeSelector={true}
     />
   );
 };
-
-const TableOptions = {
-  table: INVOICES_STATS_TABLE,
-  mapPropsToTableId: (props) => [props.invoiceUuid],
-  fetchData: fetchInvoicesStats,
-  mapPropsToFilter: (props) => ({
-    invoice_uuid: props.invoiceUuid,
-  }),
-};
-
-export const InvoicesStatsList = connectTable(TableOptions)(TableComponent);

@@ -1,16 +1,35 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { INSTANCE_TYPE } from '../constants';
 import { CreateBackupAction } from '../openstack-instance/actions/CreateBackupAction';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const BackupsList: FunctionComponent<{ resource }> = ({ resource }) => {
+  const filter = useMemo(() => {
+    const fields = {
+      [INSTANCE_TYPE]: 'instance',
+      'OpenStackTenant.BackupSchedule': 'backup_schedule',
+    };
+    const { resource_type, url } = resource;
+    const field = fields[resource_type];
+    if (field) {
+      return {
+        [field]: url,
+      };
+    }
+  }, [resource]);
+  const props = useTable({
+    table: 'openstacktenant-backups',
+    fetchData: createFetcher('openstacktenant-backups'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -44,29 +63,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('VM snapshots')}
       hasQuery={false}
-      actions={<CreateBackupAction resource={props.resource} />}
+      actions={<CreateBackupAction resource={resource} />}
     />
   );
 };
-
-const mapPropsToFilter = (props) => {
-  const fields = {
-    [INSTANCE_TYPE]: 'instance',
-    'OpenStackTenant.BackupSchedule': 'backup_schedule',
-  };
-  const { resource_type, url } = props.resource;
-  const field = fields[resource_type];
-  if (field) {
-    return {
-      [field]: url,
-    };
-  }
-};
-
-const TableOptions = {
-  table: 'openstacktenant-backups',
-  fetchData: createFetcher('openstacktenant-backups'),
-  mapPropsToFilter,
-};
-
-export const BackupsList = connectTable(TableOptions)(TableComponent);

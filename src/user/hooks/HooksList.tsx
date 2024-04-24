@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { Table, createFetcher, connectTable } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -31,7 +31,25 @@ const getDestinationField = (row) => row.destination_url || row.email || 'N/A';
 const getEventsField = (row) =>
   row.event_groups.map(formatEventTitle).join(', ');
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const mapStateToProps = createSelector(getUser, (user) => ({
+  author_uuid: user.uuid,
+}));
+
+export const HooksList: FunctionComponent = () => {
+  const filter = useSelector(mapStateToProps);
+  const props = useTable({
+    table: HOOK_LIST_ID,
+    fetchData: createFetcher('hooks'),
+    filter,
+    exportRow: (row) => [
+      titleCase(row.hook_type),
+      getDestinationField(row),
+      getEventsField(row),
+    ],
+    exportAll: true,
+    exportFields: ['Method', 'Destination', 'Events'],
+    exportKeys: ['hook_type', 'destination_url', 'email', 'event_groups'],
+  });
   return (
     <Table
       {...props}
@@ -71,25 +89,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: HOOK_LIST_ID,
-  fetchData: createFetcher('hooks'),
-  mapPropsToFilter: (props) => ({ author_uuid: props.user.uuid }),
-  exportRow: (row) => [
-    titleCase(row.hook_type),
-    getDestinationField(row),
-    getEventsField(row),
-  ],
-  exportAll: true,
-  exportFields: ['Method', 'Destination', 'Events'],
-  exportKeys: ['hook_type', 'destination_url', 'email', 'event_groups'],
-};
-
-const mapStateToProps = (state: RootState) => ({
-  user: getUser(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const HooksList = enhance(TableComponent);

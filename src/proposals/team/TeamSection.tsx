@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { TableComponent } from '@waldur/events/BaseEventsList';
+import { BaseEventsList } from '@waldur/events/BaseEventsList';
 import { translate } from '@waldur/i18n';
 import { InvitationCreateButton } from '@waldur/invitations/actions/create/InvitationCreateButton';
 import { GenericInvitationContext } from '@waldur/invitations/types';
@@ -52,7 +52,7 @@ export const TeamSection: FC<
   );
   const usersTable = useTable({
     table: `UserList${props.title}`,
-    fetchData: createFetcher(`${props.scope.url}list_users/`),
+    fetchData: createFetcher(`${props.scope.url}list_users`),
     filter: usersFilter,
     onFetch(rows) {
       if (props.change) {
@@ -79,13 +79,6 @@ export const TeamSection: FC<
     }),
     [props.scope],
   );
-
-  const eventsTable = useTable({
-    table: `permissions-log${props.scope.url}`,
-    filter: eventsFilter,
-    fetchData: createFetcher('events'),
-    queryField: 'message',
-  });
 
   return (
     <Card>
@@ -117,7 +110,12 @@ export const TeamSection: FC<
         {tab.key === 'invitations' && (
           <InvitationsList table={invitationsTable} hideRole={hideRole} />
         )}
-        {tab.key === 'permissions' && <TableComponent {...eventsTable} />}
+        {tab.key === 'permissions' && (
+          <BaseEventsList
+            table={`permissions-log${props.scope.url}`}
+            filter={eventsFilter}
+          />
+        )}
 
         <FieldReviewComments reviews={props.reviews} fieldName="comment_team" />
       </Card.Body>

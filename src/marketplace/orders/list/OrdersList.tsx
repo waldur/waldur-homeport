@@ -1,32 +1,42 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { useDestroyFilterOnLeave } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { Offering, ServiceProvider } from '@waldur/marketplace/types';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Table, createFetcher } from '@waldur/table';
+import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import {
   getCustomer,
   getUser,
-  isOwnerOrStaff,
+  isOwnerOrStaff as isOwnerOrStaffSelector,
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { Customer, User } from '@waldur/workspace/types';
 
 import { OrderProviderActions } from '../actions/OrderProviderActions';
 
 import { TABLE_PUBLIC_ORDERS } from './constants';
 import { OrderNameField } from './OrderNameField';
+import { OrdersFilter } from './OrdersFilter';
 import { OrderStateCell } from './OrderStateCell';
 import { OrderTablePlaceholder } from './OrderTablePlaceholder';
 import { OrderTypeCell } from './OrderTypeCell';
 import { ResourceNameField } from './ResourceNameField';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const OrdersList: FunctionComponent<{}> = () => {
+  useDestroyFilterOnLeave('OrderFilter');
+  const filter = useSelector(mapStateToFilter);
+
+  const props = useTable({
+    table: TABLE_PUBLIC_ORDERS,
+    fetchData: createFetcher('marketplace-orders'),
+    filter,
+  });
+
   const columns = [
     {
       title: translate('Offering'),
@@ -38,15 +48,15 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Organization'),
-      render: ({ row }) => row.customer_name,
+      render: ({ row }) => <>{row.customer_name}</>,
     },
     {
       title: translate('Project'),
-      render: ({ row }) => row.project_name,
+      render: ({ row }) => <>{row.project_name}</>,
     },
     {
       title: translate('Created at'),
-      render: ({ row }) => formatDateTime(row.created),
+      render: ({ row }) => <>{formatDateTime(row.created)}</>,
       orderField: 'created',
     },
     {
@@ -75,40 +85,52 @@ const TableComponent: FunctionComponent<any> = (props) => {
         <OrderProviderActions row={row} refetch={props.fetch} />
       )}
       fullWidth={true}
+      filters={
+        <OrdersFilter showOrganizationFilter={true} showOfferingFilter={true} />
+      }
     />
   );
 };
 
-const OrdersListTableOptions = {
-  table: TABLE_PUBLIC_ORDERS,
-  fetchData: createFetcher('marketplace-orders'),
-  mapPropsToFilter: (props: StateProps) => {
+const mapStateToFilter = createSelector(
+  getFormValues('OrderFilter'),
+  getCustomer,
+  isServiceManagerSelector,
+  isOwnerOrStaffSelector,
+  getUser,
+  (
+    filterValues: FormData,
+    customer: Customer,
+    isServiceManager: boolean,
+    isOwnerOrStaff: boolean,
+    user: User,
+  ) => {
     const filter: Record<string, string> = {
-      provider_uuid: props.customer.uuid,
+      provider_uuid: customer.uuid,
     };
-    if (props.filter) {
-      if (props.filter.offering) {
-        filter.offering_uuid = props.filter.offering.uuid;
+    if (filterValues) {
+      if (filterValues.offering) {
+        filter.offering_uuid = filterValues.offering.uuid;
       }
-      if (props.filter.organization) {
-        filter.customer_uuid = props.filter.organization.uuid;
+      if (filterValues.organization) {
+        filter.customer_uuid = filterValues.organization.uuid;
       }
-      if (props.filter.provider) {
-        filter.provider_uuid = props.filter.provider.customer_uuid;
+      if (filterValues.provider) {
+        filter.provider_uuid = filterValues.provider.customer_uuid;
       }
-      if (props.filter.state) {
-        filter.state = props.filter.state.value;
+      if (filterValues.state) {
+        filter.state = filterValues.state.value;
       }
-      if (props.filter.type) {
-        filter.type = props.filter.type.value;
+      if (filterValues.type) {
+        filter.type = filterValues.type.value;
       }
     }
-    if (props.isServiceManager && !props.isOwnerOrStaff) {
-      filter.service_manager_uuid = props.user.uuid;
+    if (isServiceManager && !isOwnerOrStaff) {
+      filter.service_manager_uuid = user.uuid;
     }
     return filter;
   },
-};
+);
 
 interface FormData {
   offering?: Offering;
@@ -117,20 +139,3 @@ interface FormData {
   state?: { value: string };
   type?: { value: string };
 }
-
-type StateProps = Readonly<ReturnType<typeof mapStateToProps>>;
-
-const mapStateToProps = (state: RootState) => ({
-  filter: getFormValues('OrderFilter')(state) as FormData,
-  customer: getCustomer(state),
-  user: getUser(state),
-  isServiceManager: isServiceManagerSelector(state),
-  isOwnerOrStaff: isOwnerOrStaff(state),
-});
-
-const enhance = compose(
-  connect(mapStateToProps),
-  connectTable(OrdersListTableOptions),
-);
-
-export const OrdersList = enhance(TableComponent) as React.ComponentType<any>;

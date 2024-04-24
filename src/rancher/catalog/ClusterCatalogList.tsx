@@ -2,12 +2,29 @@ import { FunctionComponent, useMemo } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CatalogCreateButton } from './CatalogCreateButton';
 import { CatalogDeleteButton } from './CatalogDeleteButton';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const exportRow = (row) => [row.name, row.description, row.catalog_url];
+export const ClusterCatalogList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      cluster_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'rancher-catalogs',
+    fetchData: createFetcher('rancher-catalogs'),
+    exportFields: ['name', 'description', 'catalog_url'],
+    exportRow,
+    filter,
+  });
   const columns = useMemo(
     () => [
       {
@@ -16,9 +33,9 @@ const TableComponent: FunctionComponent<any> = (props) => {
           <Link
             state="rancher-catalog-details"
             params={{
-              clusterUuid: props.resource.uuid,
+              clusterUuid: resource.uuid,
               catalogUuid: row.uuid,
-              uuid: props.resource.project_uuid,
+              uuid: resource.project_uuid,
             }}
             label={row.name}
           />
@@ -33,14 +50,14 @@ const TableComponent: FunctionComponent<any> = (props) => {
         render: ({ row }) => <>{row.catalog_url}</>,
       },
     ],
-    [props.resource],
+    [resource],
   );
   return (
     <Table
       {...props}
       columns={columns}
       verboseName={translate('catalogues')}
-      actions={<CatalogCreateButton cluster={props.resource} />}
+      actions={<CatalogCreateButton cluster={resource} />}
       hoverableRow={({ row }) =>
         row.scope_type === 'cluster' ? (
           <CatalogDeleteButton catalog={row} />
@@ -49,15 +66,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'rancher-catalogs',
-  fetchData: createFetcher('rancher-catalogs'),
-  exportFields: ['name', 'description', 'catalog_url'],
-  exportRow: (row) => [row.name, row.description, row.catalog_url],
-  mapPropsToFilter: (props) => ({
-    cluster_uuid: props.resource.uuid,
-  }),
-};
-
-export const ClusterCatalogList = connectTable(TableOptions)(TableComponent);

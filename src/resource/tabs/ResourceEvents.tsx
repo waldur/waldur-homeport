@@ -1,6 +1,35 @@
-import { getEventsList } from '@waldur/events/BaseEventsList';
+import { FC, useMemo } from 'react';
 
-export const ResourceEvents = getEventsList({
-  mapPropsToFilter: (props) => ({ scope: props.marketplaceResource?.url }),
-  mapPropsToTableId: (props) => [props.marketplaceResource?.uuid],
-});
+import { BaseEventsList } from '@waldur/events/BaseEventsList';
+
+export const ResourceEvents: FC<{
+  marketplaceResource;
+  title?;
+  id?;
+  initialPageSize?;
+  className?;
+  actions?;
+}> = ({
+  marketplaceResource,
+  title,
+  id,
+  initialPageSize,
+  className,
+  actions,
+}) => {
+  const filter = useMemo(
+    () => ({ scope: marketplaceResource?.url }),
+    [marketplaceResource],
+  );
+  return (
+    <BaseEventsList
+      filter={filter}
+      table={`events-${marketplaceResource?.uuid}`}
+      title={title}
+      id={id}
+      initialPageSize={initialPageSize}
+      className={className}
+      actions={actions}
+    />
+  );
+};

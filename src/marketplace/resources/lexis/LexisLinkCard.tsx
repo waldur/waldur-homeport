@@ -1,14 +1,17 @@
+import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { translate } from '@waldur/i18n';
 import { countLexisLinks } from '@waldur/marketplace/common/api';
-import { LexisLinkList } from '@waldur/marketplace/resources/lexis/LexisLinkList';
+
+import { BasicLexisLinkList } from './BasicLexisLinkList';
 
 export const LexisLinkCard = ({ resource }) => {
   const result = useAsync(() =>
     countLexisLinks({ resource_uuid: resource.uuid }),
   );
+  const filter = useMemo(() => ({ resource_uuid: resource.uuid }), [resource]);
   if (!result.value) {
     return null;
   }
@@ -20,7 +23,7 @@ export const LexisLinkCard = ({ resource }) => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <LexisLinkList resource={resource} />
+        <BasicLexisLinkList filter={filter} />
       </Card.Body>
     </Card>
   );

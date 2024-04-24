@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
@@ -6,14 +6,27 @@ import { translate } from '@waldur/i18n';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CreateDiskAction } from './actions/CreateDiskAction';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const DisksList: FunctionComponent<{ resource }> = ({ resource }) => {
+  const filter = useMemo(
+    () => ({
+      vm_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const tableProps = useTable({
+    table: 'vmware-disks',
+    fetchData: createFetcher('vmware-disks'),
+    filter,
+  });
+
   return (
     <Table
-      {...props}
+      {...tableProps}
       columns={[
         {
           title: translate('Name'),
@@ -26,7 +39,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
         {
           title: translate('Created'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
         {
@@ -36,23 +49,11 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('disks')}
       hasQuery={false}
-      actions={<CreateDiskAction resource={props.resource} />}
+      actions={<CreateDiskAction resource={resource} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hoverableRow={({ row }) => (
-        <ActionButtonResource url={row.url} refetch={props.fetch} />
+        <ActionButtonResource url={row.url} refetch={tableProps.fetch} />
       )}
     />
   );
 };
-
-const mapPropsToFilter = (props) => ({
-  vm_uuid: props.resource.uuid,
-});
-
-const TableOptions = {
-  table: 'vmware-disks',
-  fetchData: createFetcher('vmware-disks'),
-  mapPropsToFilter,
-};
-
-export const DisksList = connectTable(TableOptions)(TableComponent);

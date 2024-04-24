@@ -1,14 +1,29 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { REFERRALS_TABLE } from '@waldur/marketplace/referral/constants';
 import { ReferralTypeIcon } from '@waldur/marketplace/referral/ReferralTypeIcon';
-import { connectTable, createFetcher, Table } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
+import { useTable } from '@waldur/table/utils';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ReferralsList: FunctionComponent<{ offering }> = ({
+  offering,
+}) => {
+  const filter = useMemo(() => ({ scope: offering.url }), [offering]);
+  const props = useTable({
+    table: REFERRALS_TABLE,
+    fetchData: (request) =>
+      createFetcher(
+        'marketplace-offering-referrals',
+        ENV.plugins.WALDUR_MARKETPLACE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS
+          ? ANONYMOUS_CONFIG
+          : undefined,
+      )(request),
+    filter,
+  });
   const columns = [
     {
       title: translate('Title'),
@@ -49,19 +64,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: REFERRALS_TABLE,
-  fetchData: (request) =>
-    createFetcher(
-      'marketplace-offering-referrals',
-      ENV.plugins.WALDUR_MARKETPLACE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS
-        ? ANONYMOUS_CONFIG
-        : undefined,
-    )(request),
-  mapPropsToFilter: (props) => ({ scope: props.offering.url }),
-};
-
-const enhance = connectTable(TableOptions);
-
-export const ReferralsList = enhance(TableComponent);

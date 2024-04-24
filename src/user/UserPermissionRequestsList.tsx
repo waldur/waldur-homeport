@@ -1,21 +1,44 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { PermissionRequestStateField } from '@waldur/invitations/PermissionRequestStateField';
 import { RoleField } from '@waldur/invitations/RoleField';
-import { RootState } from '@waldur/store/reducers';
-import { connectTable, createFetcher, Table } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { useTitle } from '@waldur/navigation/title';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import {
   USER_PERMISSION_REQUESTS_FILTER_FORM_ID,
   USER_PERMISSION_REQUESTS_TABLE_ID,
 } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
-const TableComponent = (props: any) => {
+import { UserPermissionRequestsListFilter } from './UserPermissionRequestsListFilter';
+
+const mapStateToProps = createSelector(
+  getUser,
+  getFormValues(USER_PERMISSION_REQUESTS_FILTER_FORM_ID),
+  (user, filterValues: any) => {
+    const filter: Record<string, string> = {
+      created_by: user?.uuid,
+    };
+    if (filterValues && filterValues.state) {
+      filter.state = filterValues.state.map((option) => option.value);
+    }
+    return filter;
+  },
+);
+
+export const UserPermissionRequestsList = () => {
+  useTitle(translate('Permission requests'));
+  const filter = useSelector(mapStateToProps);
+  const props = useTable({
+    table: USER_PERMISSION_REQUESTS_TABLE_ID,
+    fetchData: createFetcher('user-permission-requests'),
+    filter,
+  });
   const columns = [
     {
       title: translate('Created at'),
@@ -57,33 +80,7 @@ const TableComponent = (props: any) => {
       columns={columns}
       verboseName={translate('user permission requests')}
       showPageSizeSelector={true}
+      filters={<UserPermissionRequestsListFilter />}
     />
   );
 };
-
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string> = {
-    created_by: props.user?.uuid,
-  };
-  if (props.filter && props.filter.state) {
-    filter.state = props.filter.state.map((option) => option.value);
-  }
-  return filter;
-};
-
-const TableOptions: TableOptionsType = {
-  table: USER_PERMISSION_REQUESTS_TABLE_ID,
-  fetchData: createFetcher('user-permission-requests'),
-  mapPropsToFilter,
-};
-
-const mapStateToProps = (state: RootState) => ({
-  user: getUser(state),
-  filter: getFormValues(USER_PERMISSION_REQUESTS_FILTER_FORM_ID)(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const UserPermissionRequestsList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

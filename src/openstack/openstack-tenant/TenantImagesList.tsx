@@ -1,10 +1,25 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const TenantImagesList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      settings_uuid: resource.child_settings,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstacktenant-images',
+    fetchData: createFetcher('openstacktenant-images'),
+    filter,
+    queryField: 'name',
+  });
   return (
     <Table
       {...props}
@@ -27,14 +42,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'openstacktenant-images',
-  fetchData: createFetcher('openstacktenant-images'),
-  mapPropsToFilter: (props) => ({
-    settings_uuid: props.resource.child_settings,
-  }),
-  queryField: 'name',
-};
-
-export const TenantImagesList = connectTable(TableOptions)(TableComponent);

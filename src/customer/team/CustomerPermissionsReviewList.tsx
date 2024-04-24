@@ -1,62 +1,61 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ReviewCloseButton } from './ReviewCloseButton';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const mapStateToProps = createSelector(getCustomer, (customer) => ({
+  customer_uuid: customer.uuid,
+  o: '-created',
+}));
+
+export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
+  const filter = useSelector(mapStateToProps);
+  const props = useTable({
+    table: 'customer-permissions-reviews',
+    fetchData: createFetcher('customer-permissions-reviews'),
+    filter,
+  });
   return (
     <Table
       {...props}
       columns={[
         {
           title: translate('Created'),
-          render: ({ row }) => formatDateTime(row.created),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
         },
         {
           title: translate('Performed'),
-          render: ({ row }) =>
-            row.closed ? formatDateTime(row.closed) : 'N/A',
+          render: ({ row }) => (
+            <>{row.closed ? formatDateTime(row.closed) : 'N/A'}</>
+          ),
         },
         {
           title: translate('Performed by'),
-          render: ({ row }) => row.reviewer_full_name || 'N/A',
+          render: ({ row }) => <>{row.reviewer_full_name || 'N/A'}</>,
         },
         {
           title: translate('State'),
-          render: ({ row }) =>
-            row.is_pending ? translate('Pending') : translate('Performed'),
+          render: ({ row }) => (
+            <>
+              {row.is_pending ? translate('Pending') : translate('Performed')}
+            </>
+          ),
         },
       ]}
       verboseName={translate('permission reviews')}
-      hoverableRow={({ row }) =>
-        row.is_pending ? <ReviewCloseButton reviewId={row.uuid} /> : 'N/A'
-      }
+      hoverableRow={({ row }) => (
+        <>
+          {row.is_pending ? <ReviewCloseButton reviewId={row.uuid} /> : 'N/A'}
+        </>
+      )}
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: 'customer-permissions-reviews',
-  fetchData: createFetcher('customer-permissions-reviews'),
-  mapPropsToFilter: (props) => ({
-    customer_uuid: props.customer.uuid,
-    o: '-created',
-  }),
-};
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const CustomerPermissionsReviewList = enhance(TableComponent);

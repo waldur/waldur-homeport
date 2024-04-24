@@ -1,11 +1,27 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ClusterProjectList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      cluster_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'rancher-projects',
+    fetchData: createFetcher('rancher-projects'),
+    exportFields: ['name', 'description', 'state'],
+    exportRow: (row) => [row.name, row.description, row.runtime_state],
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -28,15 +44,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'rancher-projects',
-  fetchData: createFetcher('rancher-projects'),
-  exportFields: ['name', 'description', 'state'],
-  exportRow: (row) => [row.name, row.description, row.runtime_state],
-  mapPropsToFilter: (props) => ({
-    cluster_uuid: props.resource.uuid,
-  }),
-};
-
-export const ClusterProjectList = connectTable(TableOptions)(TableComponent);

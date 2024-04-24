@@ -1,13 +1,21 @@
-import { getEventsList } from '@waldur/events/BaseEventsList';
+import { useMemo } from 'react';
+
+import { BaseEventsList } from '@waldur/events/BaseEventsList';
 import { translate } from '@waldur/i18n';
 
-const List = getEventsList({
-  mapPropsToFilter: (props) => ({
-    scope: props.offering.url,
-  }),
-  mapPropsToTableId: (props) => [props.offering.uuid],
-});
-
-export const OfferingEventsList = ({ offering }) => (
-  <List offering={offering} title={translate('Events')} id="events" />
-);
+export const OfferingEventsList = ({ offering }) => {
+  const filter = useMemo(
+    () => ({
+      scope: offering.url,
+    }),
+    [offering],
+  );
+  return (
+    <BaseEventsList
+      filter={filter}
+      table={`events-${offering.uuid}`}
+      title={translate('Events')}
+      id="events"
+    />
+  );
+};

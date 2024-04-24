@@ -1,16 +1,32 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { formatCrontab } from '@waldur/resource/crontab';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
+import { useTable } from '@waldur/table/utils';
 
 import { CreateBackupScheduleAction } from '../openstack-instance/actions/CreateBackupScheduleAction';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const BackupsSchedulesList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      instance: resource.url,
+    }),
+    [resource],
+  );
+
+  const props = useTable({
+    table: 'openstacktenant-backup-schedules',
+    fetchData: createFetcher('openstacktenant-backup-schedules'),
+    filter,
+  });
+
   return (
     <Table
       {...props}
@@ -45,19 +61,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       ]}
       verboseName={translate('VM snapshot schedules')}
       hasQuery={false}
-      actions={<CreateBackupScheduleAction resource={props.resource} />}
+      actions={<CreateBackupScheduleAction resource={resource} />}
     />
   );
 };
-
-const mapPropsToFilter = (props) => ({
-  instance: props.resource.url,
-});
-
-const TableOptions = {
-  table: 'openstacktenant-backup-schedules',
-  fetchData: createFetcher('openstacktenant-backup-schedules'),
-  mapPropsToFilter,
-};
-
-export const BackupsSchedulesList = connectTable(TableOptions)(TableComponent);

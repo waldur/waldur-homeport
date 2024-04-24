@@ -1,21 +1,19 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
 import Avatar from '@waldur/core/Avatar';
 import { formatDate } from '@waldur/core/dateUtils';
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { connectTable, Table } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { TableOptionsType } from '@waldur/table/types';
+import { useTable } from '@waldur/table/utils';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { fetchCustomerUsers } from './api';
 import { CustomerUserRowActions } from './CustomerUserRowActions';
 import { UserAddButton } from './UserAddButton';
 
@@ -25,12 +23,42 @@ export const renderRoleExpirationDate = (row) => {
     : DASH_ESCAPE_CODE;
 };
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const mapStateToFilter = createSelector(
+  getFormValues(CUSTOMER_USERS_LIST_FILTER_FORM_ID),
+  (filterValues: any) => {
+    const filter: Record<string, string | boolean> = {
+      o: 'concatenated_name',
+    };
+    if (filterValues) {
+      if (filterValues.project_role) {
+        filter.project_role = filterValues.project_role.map(({ name }) => name);
+      }
+      if (filterValues.organization_role) {
+        filter.organization_role = filterValues.organization_role.map(
+          ({ name }) => name,
+        );
+      }
+    }
+    return filter;
+  },
+);
+
+export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
+  filters,
+}) => {
+  const filter = useSelector(mapStateToFilter);
+  const customer = useSelector(getCustomer);
+  const props = useTable({
+    table: 'customer-users',
+    fetchData: createFetcher(`customers/${customer.uuid}/users`),
+    queryField: 'full_name_and_email',
+    filter,
+  });
   return (
     <Table
       title={translate('Team members')}
       {...props}
-      filters={props.filters}
+      filters={filters}
       columns={[
         {
           title: translate('Member'),
@@ -79,39 +107,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, string | boolean> = {
-    customer_uuid: props.customer.uuid,
-    o: 'concatenated_name',
-  };
-  if (props.filter) {
-    if (props.filter.project_role) {
-      filter.project_role = props.filter.project_role.map(({ name }) => name);
-    }
-    if (props.filter.organization_role) {
-      filter.organization_role = props.filter.organization_role.map(
-        ({ name }) => name,
-      );
-    }
-  }
-  return filter;
-};
-
-const TableOptions: TableOptionsType = {
-  table: 'customer-users',
-  fetchData: fetchCustomerUsers,
-  queryField: 'full_name_and_email',
-  mapPropsToFilter,
-};
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  filter: getFormValues(CUSTOMER_USERS_LIST_FILTER_FORM_ID)(state),
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(TableOptions));
-
-export const CustomerUsersList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

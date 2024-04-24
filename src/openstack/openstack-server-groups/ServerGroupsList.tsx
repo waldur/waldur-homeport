@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -8,7 +8,8 @@ import { ServerGroupType } from '@waldur/openstack/types';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 interface ResourceRules extends Resource {
   policy: ServerGroupType;
@@ -16,7 +17,20 @@ interface ResourceRules extends Resource {
 
 const ResourcePolicy = (resource: ResourceRules) => resource.policy;
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ServerGroupsList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      tenant_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstack-server-groups',
+    fetchData: createFetcher('openstack-server-groups'),
+    filter,
+  });
   return (
     <Table
       {...props}
@@ -49,20 +63,10 @@ const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       actions={
         <ButtonGroup>
-          <PullServerGroupsAction resource={props.resource} />
-          <CreateServerGroupAction resource={props.resource} />
+          <PullServerGroupsAction resource={resource} />
+          <CreateServerGroupAction resource={resource} />
         </ButtonGroup>
       }
     />
   );
 };
-
-const TableOptions = {
-  table: 'openstack-server-groups',
-  fetchData: createFetcher('openstack-server-groups'),
-  mapPropsToFilter: (props) => ({
-    tenant_uuid: props.resource.uuid,
-  }),
-};
-
-export const ServerGroupsList = connectTable(TableOptions)(TableComponent);

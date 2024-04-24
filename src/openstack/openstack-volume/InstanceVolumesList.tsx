@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -6,13 +6,28 @@ import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalA
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
+import { useTable } from '@waldur/table/utils';
 
 import { VOLUME_TYPE } from '../constants';
 import { AttachVolumeAction } from '../openstack-instance/actions/AttachVolumeAction';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const InstanceVolumesList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      instance_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'openstacktenant-volumes',
+    fetchData: createFetcher('openstacktenant-volumes'),
+    filter,
+  });
+
   return (
     <Table
       {...props}
@@ -42,7 +57,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
           render: ({ row }) => <ResourceState resource={row} />,
         },
       ]}
-      actions={<AttachVolumeAction resource={props.resource} />}
+      actions={<AttachVolumeAction resource={resource} />}
       verboseName={translate('volumes')}
       hoverableRow={({ row }) => (
         <ModalActionsRouter
@@ -56,13 +71,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'openstacktenant-volumes',
-  fetchData: createFetcher('openstacktenant-volumes'),
-  mapPropsToFilter: (props) => ({
-    instance_uuid: props.resource.uuid,
-  }),
-};
-
-export const InstanceVolumesList = connectTable(TableOptions)(TableComponent);

@@ -16,9 +16,9 @@ const SupportFeedback = lazyComponent(
   () => import('@waldur/issues/feedback/SupportFeedback'),
   'SupportFeedback',
 );
-const SupportFeedbackListContainer = lazyComponent(
-  () => import('@waldur/issues/feedback/SupportFeedbackListContainer'),
-  'SupportFeedbackListContainer',
+const SupportFeedbackList = lazyComponent(
+  () => import('@waldur/issues/feedback/SupportFeedbackList'),
+  'SupportFeedbackList',
 );
 const SupportIssues = lazyComponent(
   () => import('@waldur/issues/SupportIssues'),
@@ -95,7 +95,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'support.feedback',
     url: 'feedback/',
-    component: SupportFeedbackListContainer,
+    component: SupportFeedbackList,
     data: {
       breadcrumb: () => translate('Feedback'),
       permissions: [isStaffOrSupport, hasSupport],

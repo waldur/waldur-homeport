@@ -1,10 +1,31 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { Table, connectTable, createFetcher } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+const exportFields = ['name', 'description', 'catalog'];
+
+const exportRow = (row) => [row.name, row.description, row.catalog_name];
+
+export const ClusterTemplatesList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      cluster_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+  const props = useTable({
+    table: 'rancher-cluster-templates',
+    fetchData: createFetcher('rancher-templates'),
+    exportFields,
+    exportRow,
+    filter,
+    queryField: 'name',
+  });
   return (
     <Table
       {...props}
@@ -15,8 +36,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
             <Link
               state="rancher-template-details"
               params={{
-                uuid: props.resource.project_uuid,
-                clusterUuid: props.resource.uuid,
+                uuid: resource.project_uuid,
+                clusterUuid: resource.uuid,
                 templateUuid: row.uuid,
               }}
             >
@@ -44,16 +65,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: 'rancher-cluster-templates',
-  fetchData: createFetcher('rancher-templates'),
-  exportFields: ['name', 'description', 'catalog'],
-  exportRow: (row) => [row.name, row.description, row.catalog_name],
-  mapPropsToFilter: (props) => ({
-    cluster_uuid: props.resource.uuid,
-  }),
-  queryField: 'name',
-};
-
-export const ClusterTemplatesList = connectTable(TableOptions)(TableComponent);

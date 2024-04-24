@@ -29,9 +29,9 @@ const UserOfferingList = lazyComponent(
   () => import('./UserOfferingList'),
   'UserOfferingList',
 );
-const UserPermissionRequestsListContainer = lazyComponent(
-  () => import('./UserPermissionRequestsListContainer'),
-  'UserPermissionRequestsListContainer',
+const UserPermissionRequestsList = lazyComponent(
+  () => import('./UserPermissionRequestsList'),
+  'UserPermissionRequestsList',
 );
 const UserApiKey = lazyComponent(
   () => import('./api-key/UserApiKey'),
@@ -211,7 +211,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'profile.permission-requests',
     url: 'permission-requests/',
-    component: UserPermissionRequestsListContainer,
+    component: UserPermissionRequestsList,
     data: {
       breadcrumb: () => translate('Permission requests'),
     },

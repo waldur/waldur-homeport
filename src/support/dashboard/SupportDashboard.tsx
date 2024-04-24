@@ -50,7 +50,7 @@ export const SupportDashboard: FC = () => {
         />
       ) : null}
 
-      <BroadcastList title={translate('Broadcasts')} initialPageSize={5} />
+      <BroadcastList />
     </>
   );
 };

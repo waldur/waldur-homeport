@@ -1,11 +1,11 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { HPA } from '@waldur/rancher/types';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { ViewYAMLButton } from '../ViewYAMLButton';
 
@@ -13,7 +13,22 @@ import { HPACreateButton } from './HPACreateButton';
 import { HPADeleteButton } from './HPADeleteButton';
 import { HPAUpdateButton } from './HPAUpdateButton';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const ClusterHPAList: FunctionComponent<{ resource }> = ({
+  resource,
+}) => {
+  const filter = useMemo(
+    () => ({
+      cluster_uuid: resource.uuid,
+    }),
+    [resource],
+  );
+
+  const props = useTable({
+    table: 'rancher-hpas',
+    fetchData: createFetcher('rancher-hpas'),
+    filter,
+  });
+
   return (
     <Table<HPA>
       {...props}
@@ -70,17 +85,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
         },
       ]}
       verboseName={translate('horizontal pod autoscalers')}
-      actions={<HPACreateButton cluster={props.resource} />}
+      actions={<HPACreateButton cluster={resource} />}
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: 'rancher-hpas',
-  fetchData: createFetcher('rancher-hpas'),
-  mapPropsToFilter: (props) => ({
-    cluster_uuid: props.resource.uuid,
-  }),
-};
-
-export const ClusterHPAList = connectTable(TableOptions)(TableComponent);

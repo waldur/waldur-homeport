@@ -23,7 +23,7 @@ import { formatCallState } from './utils';
 
 import './PublicCallsPage.scss';
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getFormValues(CALL_FILTER_FORM_ID),
   (filters: any) => {
     const result: Record<string, any> = {};
@@ -38,7 +38,7 @@ const mapPropsToFilter = createSelector(
 );
 
 export const PublicCallsPage: FunctionComponent = () => {
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
   useFullPage();
   useTitle(translate('Marketplace'));
 

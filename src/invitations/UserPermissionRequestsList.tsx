@@ -1,19 +1,31 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FC, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { USER_PERMISSION_REQUESTS_TABLE_ID } from '@waldur/invitations/constants';
 import { PermissionRequestStateField } from '@waldur/invitations/PermissionRequestStateField';
 import { UserPermissionRequestRowActions } from '@waldur/invitations/UserPermissionRequestRowActions';
-import { connectTable, createFetcher, Table } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 interface OwnProps {
   groupInvitationUuid: string;
 }
 
-const TableComponent = (props: any) => {
+export const UserPermissionRequestsList: FC<OwnProps> = ({
+  groupInvitationUuid,
+}) => {
+  const tableOptions = useMemo(
+    () => ({
+      table: [USER_PERMISSION_REQUESTS_TABLE_ID, groupInvitationUuid].join('-'),
+      fetchData: createFetcher('user-permission-requests'),
+      filter: {
+        invitation: groupInvitationUuid,
+      },
+    }),
+    [groupInvitationUuid],
+  );
+  const props = useTable(tableOptions);
   const columns = [
     {
       title: translate('Created by'),
@@ -52,19 +64,3 @@ const TableComponent = (props: any) => {
     />
   );
 };
-
-const TableOptions: TableOptionsType = {
-  table: USER_PERMISSION_REQUESTS_TABLE_ID,
-  fetchData: createFetcher('user-permission-requests'),
-  mapPropsToFilter: (props: OwnProps) => ({
-    invitation: props.groupInvitationUuid,
-  }),
-  mapPropsToTableId: (props: OwnProps) => [props.groupInvitationUuid],
-};
-
-const enhance = compose(
-  connect<{}, {}, OwnProps>(null),
-  connectTable(TableOptions),
-);
-
-export const UserPermissionRequestsList = enhance(TableComponent);

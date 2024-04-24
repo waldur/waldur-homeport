@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import React from 'react';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
@@ -34,12 +35,9 @@ const getOrderStateFilterOptions = (): {
   { value: 'rejected', label: translate('Rejected') },
 ];
 
-interface OwnProps {
-  parentState: string;
-}
-
-const PureCustomerOrdersListFilter: React.FC<OwnProps> = (props) => {
+const PureCustomerOrdersListFilter: React.FC = () => {
   const customer = useSelector(getCustomer);
+  const { state } = useCurrentStateAndParams();
   return (
     <>
       <TableFilterItem
@@ -49,7 +47,7 @@ const PureCustomerOrdersListFilter: React.FC<OwnProps> = (props) => {
       >
         <OfferingAutocomplete />
       </TableFilterItem>
-      {props.parentState !== 'project' && (
+      {state.parent !== 'project' && (
         <TableFilterItem
           title={translate('Project')}
           name="project"
@@ -83,7 +81,7 @@ const mapStateToProps = (state) => ({
 
 const enhance = compose(
   connect(mapStateToProps),
-  reduxForm<{}, OwnProps>({
+  reduxForm({
     form: CUSTOMER_ORDERS_LIST_FILTER_FORM_ID,
     destroyOnUnmount: false,
     initialValues: {
@@ -94,4 +92,4 @@ const enhance = compose(
 
 export const CustomerOrdersListFilter = enhance(
   PureCustomerOrdersListFilter,
-) as React.ComponentType<OwnProps>;
+) as React.ComponentType<{}>;

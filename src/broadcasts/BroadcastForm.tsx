@@ -1,6 +1,6 @@
 import { Col, Modal, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { change, FormName } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { change, FormName, getFormValues } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
@@ -18,6 +18,11 @@ import { templateAutocomplete } from './autocomplete';
 import { RecipientsList } from './RecipientsList';
 import { MessageTemplate, BroadcastFormData } from './types';
 
+const RecipientsListQuery = ({ form }) => {
+  const query = useSelector(getFormValues(form));
+  return <RecipientsList query={query} />;
+};
+
 export const BroadcastForm = ({
   submitting,
   formValues,
@@ -30,7 +35,6 @@ export const BroadcastForm = ({
   setStep(step: number): void;
 }) => {
   const dispatch = useDispatch();
-
   return (
     <>
       <WizardStepIndicator
@@ -127,7 +131,7 @@ export const BroadcastForm = ({
                   </FormContainer>
                 </Col>
                 <Col sm={7}>
-                  <RecipientsList form={form} />
+                  <RecipientsListQuery form={form} />
                 </Col>
               </Row>
             )}

@@ -1,49 +1,44 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 
-import { RootState } from '@waldur/store/reducers';
-import { connectTable } from '@waldur/table';
-import { TableOptionsType } from '@waldur/table/types';
+import { BaseOfferingsList } from '../list/OfferingsList';
 
-import { TableComponent, TableOptions } from '../list/OfferingsList';
-
+import { AdminOfferingsFilter } from './AdminOfferingsFilter';
 import {
   ADMIN_OFFERINGS_FILTER_FORM_ID,
   ADMIN_OFFERING_TABLE_NAME,
 } from './constants';
 
-const mapPropsToFilter = (props) => {
-  const filter: Record<string, any> = {
-    billable: true,
-    shared: true,
-  };
-  if (props.filter?.organization) {
-    filter.customer_uuid = props.filter.organization.uuid;
-  }
-  if (props.filter?.state) {
-    filter.state = props.filter.state.map((option) => option.value);
-  }
-  if (props.filter?.offering_type) {
-    filter.type = props.filter.offering_type.value;
-  }
-  return filter;
+const mapStateToFilter = createSelector(
+  getFormValues(ADMIN_OFFERINGS_FILTER_FORM_ID),
+  (filterValues: any) => {
+    const filter: Record<string, any> = {
+      billable: true,
+      shared: true,
+    };
+    if (filterValues?.organization) {
+      filter.customer_uuid = filterValues.organization.uuid;
+    }
+    if (filterValues?.state) {
+      filter.state = filterValues.state.map((option) => option.value);
+    }
+    if (filterValues?.offering_type) {
+      filter.type = filterValues.offering_type.value;
+    }
+    return filter;
+  },
+);
+
+export const AdminOfferingsList = () => {
+  const filter = useSelector(mapStateToFilter);
+  return (
+    <BaseOfferingsList
+      table={ADMIN_OFFERING_TABLE_NAME}
+      filter={filter}
+      hasOrganizationColumn
+      showActions
+      filters={<AdminOfferingsFilter />}
+    />
+  );
 };
-
-const Options: TableOptionsType = {
-  ...TableOptions,
-  table: ADMIN_OFFERING_TABLE_NAME,
-  mapPropsToFilter,
-};
-
-const mapStateToProps = (state: RootState) => ({
-  filter: getFormValues(ADMIN_OFFERINGS_FILTER_FORM_ID)(state),
-  hasOrganizationColumn: true,
-  showActions: true,
-});
-
-const enhance = compose(connect(mapStateToProps), connectTable(Options));
-
-export const AdminOfferingsList = enhance(
-  TableComponent,
-) as React.ComponentType<any>;

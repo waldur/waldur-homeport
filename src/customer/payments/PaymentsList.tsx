@@ -1,41 +1,40 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
 import { PAYMENTS_TABLE } from '@waldur/customer/details/constants';
 import { PaymentInvoiceRenderer } from '@waldur/customer/payments/PaymentInvoiceRenderer';
 import { PaymentProofRenderer } from '@waldur/customer/payments/PaymentProofRenderer';
 import { translate } from '@waldur/i18n';
 import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
-import { openModalDialog } from '@waldur/modal/actions';
-import { RootState } from '@waldur/store/reducers';
-import { connectTable, createFetcher, Table } from '@waldur/table';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
+import { createFetcher, Table } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
+import { getCustomer } from '@waldur/workspace/selectors';
 
+import { CreatePaymentButton } from './CreatePaymentButton';
 import { PaymentActions } from './PaymentActions';
 
-const PaymentCreateDialogContainer = lazyComponent(
-  () => import('@waldur/customer/payments/PaymentCreateDialog'),
-  'PaymentCreateDialogContainer',
-);
-
-const openPaymentCreateDialog = (profileUrl: string) =>
-  openModalDialog(PaymentCreateDialogContainer, {
-    resolve: {
-      profileUrl: profileUrl,
-    },
-    size: 'lg',
-  });
-
-const TableComponent: FunctionComponent<any> = (props) => {
-  const activePaymentProfile = getActivePaymentProfile(
-    props.customer.payment_profiles,
+export const PaymentsList: FunctionComponent = () => {
+  const customer = useSelector(getCustomer);
+  const profile = useMemo(
+    () => getActivePaymentProfile(customer.payment_profiles),
+    [customer],
   );
 
-  if (!activePaymentProfile) {
+  const filter = useMemo(
+    () => ({
+      profile_uuid: profile?.uuid,
+    }),
+    [profile],
+  );
+
+  const props = useTable({
+    table: PAYMENTS_TABLE,
+    fetchData: createFetcher('payments'),
+    filter,
+  });
+
+  if (!profile) {
     return (
       <p>
         {translate(
@@ -44,14 +43,6 @@ const TableComponent: FunctionComponent<any> = (props) => {
       </p>
     );
   }
-
-  const tooltipAndDisabledAttributes = {
-    disabled: props.isSupport && !props.isStaff,
-    tooltip:
-      props.isSupport && !props.isStaff
-        ? translate('You must be staff to modify payments')
-        : null,
-  };
 
   const columns = [
     {
@@ -72,12 +63,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Actions'),
-      render: ({ row }) => (
-        <PaymentActions
-          payment={row}
-          tooltipAndDisabledAttributes={tooltipAndDisabledAttributes}
-        />
-      ),
+      render: ({ row }) => <PaymentActions payment={row} />,
     },
   ];
 
@@ -87,41 +73,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       columns={columns}
       verboseName={translate('payments')}
       showPageSizeSelector={true}
-      actions={
-        <ActionButton
-          title={translate('Add payment')}
-          action={() => props.openCreateDialog(activePaymentProfile.url)}
-          icon="fa fa-plus"
-          variant="primary"
-          {...tooltipAndDisabledAttributes}
-        />
-      }
+      actions={<CreatePaymentButton activePaymentProfile={profile} />}
     />
   );
 };
-
-const TableOptions = {
-  table: PAYMENTS_TABLE,
-  fetchData: createFetcher('payments'),
-  mapPropsToFilter: (props) => ({
-    profile_uuid: getActivePaymentProfile(props.customer.payment_profiles).uuid,
-  }),
-};
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  isStaff: isStaff(state),
-  isSupport: isSupport(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  openCreateDialog: (profileUrl: string) =>
-    dispatch(openPaymentCreateDialog(profileUrl)),
-});
-
-const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  connectTable(TableOptions),
-);
-
-export const PaymentsList = enhance(TableComponent);

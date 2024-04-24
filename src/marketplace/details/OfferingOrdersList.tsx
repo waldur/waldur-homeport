@@ -1,6 +1,5 @@
-import React, { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -12,9 +11,10 @@ import { OrderTypeCell } from '@waldur/marketplace/orders/list/OrderTypeCell';
 import { ResourceNameField } from '@waldur/marketplace/orders/list/ResourceNameField';
 import { Offering } from '@waldur/marketplace/types';
 import { OrderExpandableRow } from '@waldur/navigation/header/confirmation-drawer/OrderExpandableRow';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Table, createFetcher } from '@waldur/table';
+import { renderFieldOrDash, useTable } from '@waldur/table/utils';
+
+import { OrdersFilter } from '../orders/list/OrdersFilter';
 
 import { TABLE_OFFERING_ORDERS } from './constants';
 
@@ -25,11 +25,35 @@ interface OfferingOrderFilter {
   state?: { value: string };
   type?: { value: string };
 }
-interface StateProps {
-  filter: OfferingOrderFilter;
-}
 
-const OrdersTable: FunctionComponent<any> = (props) => {
+export const OfferingOrdersList: FunctionComponent<OwnProps> = ({
+  offering,
+}) => {
+  const filterValues: OfferingOrderFilter = useSelector(
+    getFormValues('OrderFilter'),
+  );
+
+  const filter = useMemo(() => {
+    const filter: Record<string, string> = {
+      offering_uuid: offering.uuid,
+    };
+    if (filterValues) {
+      if (filterValues.state) {
+        filter.state = filterValues.state.value;
+      }
+      if (filterValues.type) {
+        filter.type = filterValues.type.value;
+      }
+    }
+    return filter;
+  }, [filterValues, offering]);
+
+  const props = useTable({
+    table: TABLE_OFFERING_ORDERS,
+    fetchData: createFetcher('marketplace-orders'),
+    filter,
+  });
+
   const columns = [
     {
       title: translate('Resource'),
@@ -37,11 +61,11 @@ const OrdersTable: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Project'),
-      render: ({ row }) => row.project_name,
+      render: ({ row }) => <>{row.project_name}</>,
     },
     {
       title: translate('Created at'),
-      render: ({ row }) => formatDateTime(row.created),
+      render: ({ row }) => <>{formatDateTime(row.created)}</>,
       orderField: 'created',
     },
     {
@@ -54,11 +78,11 @@ const OrdersTable: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Cost'),
-      render: ({ row }) => defaultCurrency(row.cost),
+      render: ({ row }) => <>{defaultCurrency(row.cost)}</>,
     },
     {
       title: translate('Plan'),
-      render: ({ row }) => renderFieldOrDash(row.plan_name),
+      render: ({ row }) => <>{renderFieldOrDash(row.plan_name)}</>,
     },
   ];
 
@@ -73,38 +97,7 @@ const OrdersTable: FunctionComponent<any> = (props) => {
       hoverableRow={OrderProviderActions}
       expandableRow={OrderExpandableRow}
       hasPagination={true}
+      filters={<OrdersFilter />}
     />
   );
 };
-
-const OfferingOrdersListOptions = {
-  table: TABLE_OFFERING_ORDERS,
-  fetchData: createFetcher('marketplace-orders'),
-  mapPropsToFilter: (props: StateProps & OwnProps) => {
-    const filter: Record<string, string> = {
-      offering_uuid: props.offering.uuid,
-    };
-    if (props.filter) {
-      if (props.filter.state) {
-        filter.state = props.filter.state.value;
-      }
-      if (props.filter.type) {
-        filter.type = props.filter.type.value;
-      }
-    }
-    return filter;
-  },
-};
-
-const mapStateToProps = (state: RootState): StateProps => ({
-  filter: getFormValues('OrderFilter')(state) as OfferingOrderFilter,
-});
-
-const enhance = compose(
-  connect<StateProps, {}, OwnProps>(mapStateToProps),
-  connectTable(OfferingOrdersListOptions),
-);
-
-export const OfferingOrdersList = enhance(
-  OrdersTable,
-) as React.ComponentType<any>;

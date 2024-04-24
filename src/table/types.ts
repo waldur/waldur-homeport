@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 interface RequestConfigExtended extends AxiosRequestConfig {
   staleTime?: number;
@@ -30,7 +30,6 @@ export type Fetcher = <RowType = any>(
 ) => Promise<TableResponse<RowType>>;
 
 export interface TableOptionsType<RowType = any> {
-  mapPropsToTableId?(props: any): string[];
   table: string;
   fetchData: any;
   onFetch?: (rows: RowType[], totalCount: number, firstFetch: boolean) => void;
@@ -41,8 +40,6 @@ export interface TableOptionsType<RowType = any> {
   exportData?: (rows: RowType[], props: any) => string[][];
   exportRow?: (row: RowType, props: any) => string[];
   exportAll?: boolean;
-  getDefaultFilter?: (state: any) => any;
-  mapPropsToFilter?: (props: any) => any;
   placeholderComponent?: React.ComponentType;
   pullInterval?: number | (() => number);
   filters?: React.ReactNode;
@@ -50,7 +47,7 @@ export interface TableOptionsType<RowType = any> {
 }
 
 export interface Column<RowType = any> {
-  title: string;
+  title: ReactNode;
   render: React.ComponentType<{ row: RowType }>;
   className?: string;
   orderField?: string;

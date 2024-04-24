@@ -1,22 +1,43 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { PAYMENT_PROFILES_TABLE } from '@waldur/customer/details/constants';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { Table, connectTable, createFetcher } from '@waldur/table';
-import { getCustomer, isStaff, isSupport } from '@waldur/workspace/selectors';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
+import {
+  getCustomer,
+  isStaff as isStaffSelector,
+  isSupport as isSupportSelector,
+} from '@waldur/workspace/selectors';
 
 import { PaymentProfileActions } from './PaymentProfileActions';
 import { PaymentProfileCreateButton } from './PaymentProfileCreateButton';
 
-const TableComponent: FunctionComponent<any> = (props) => {
+export const PaymentProfileList: FunctionComponent<{}> = () => {
+  const customer = useSelector(getCustomer);
+  const isStaff = useSelector(isStaffSelector);
+  const isSupport = useSelector(isSupportSelector);
+
+  const filter = useMemo(
+    () => ({
+      organization_uuid: customer.uuid,
+      o: 'is_active',
+    }),
+    [customer],
+  );
+
+  const props = useTable({
+    table: PAYMENT_PROFILES_TABLE,
+    fetchData: createFetcher('payment-profiles'),
+    filter,
+  });
+
   const tooltipAndDisabledAttributes = {
-    disabled: props.isSupport && !props.isStaff,
+    disabled: isSupport && !isStaff,
     tooltip:
-      props.isSupport && !props.isStaff
+      isSupport && !isStaff
         ? translate('You must be staff to modify payment profiles')
         : null,
   };
@@ -66,25 +87,3 @@ const TableComponent: FunctionComponent<any> = (props) => {
     />
   );
 };
-
-const TableOptions = {
-  table: PAYMENT_PROFILES_TABLE,
-  fetchData: createFetcher('payment-profiles'),
-  mapPropsToFilter: (props) => ({
-    organization_uuid: props.customer.uuid,
-    o: 'is_active',
-  }),
-};
-
-const mapStateToProps = (state: RootState) => ({
-  customer: getCustomer(state),
-  isStaff: isStaff(state),
-  isSupport: isSupport(state),
-});
-
-const enhance = compose(
-  connect(mapStateToProps, null),
-  connectTable(TableOptions),
-);
-
-export const PaymentProfileList = enhance(TableComponent);

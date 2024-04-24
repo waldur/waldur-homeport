@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -12,10 +12,8 @@ import { StatusColumn } from '@waldur/issues/list/StatusColumn';
 import { TitleColumn } from '@waldur/issues/list/TitleColumn';
 import { Table, createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
-import {
-  filterColumns as filterColumnsSelector,
-  useTable,
-} from '@waldur/table/utils';
+import { Column } from '@waldur/table/types';
+import { useTable } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueCreateButton } from './IssueCreateButton';
@@ -33,7 +31,7 @@ interface OwnProps {
   filter?: Record<string, any>;
 }
 
-const mapPropsToFilter = createSelector(
+const mapStateToFilter = createSelector(
   getFormValues('IssuesFilter'),
   (filters: any) => {
     const result: Record<string, any> = {};
@@ -101,63 +99,67 @@ export const IssuesList: React.FC<OwnProps & Partial<TableProps>> = (props) => {
     [supportOrStaff, hiddenColumns],
   );
 
-  const filter = useSelector(mapPropsToFilter);
+  const filter = useSelector(mapStateToFilter);
 
   const tableProps = useTable({
-    table: 'issuesList',
+    table: `issuesList-${props.scope?.uuid}`,
     fetchData: createFetcher('support-issues'),
     queryField: 'query',
-    mapPropsToFilter: (props) => props.filter,
-    mapPropsToTableId: (props) => (props.scope ? [props.scope.uuid] : []),
+    filter: props.filter || filter,
     exportRow,
     exportFields,
-    filter: props.filter || filter,
   });
 
-  const filterColumns = useSelector(filterColumnsSelector);
+  const columns = useMemo(() => {
+    const columns: Array<Column> = [
+      {
+        title: translate('Key'),
+        orderField: 'key',
+        render: ({ row }) => (
+          <IssueLinkField label={row.key || 'N/A'} row={row} />
+        ),
+      },
+      {
+        title: translate('Status'),
+        render: StatusColumn,
+        orderField: 'status',
+      },
+      {
+        title: translate('Title'),
+        render: TitleColumn,
+        orderField: 'summary',
+      },
+    ];
+    if (!hiddenColumns.includes('customer')) {
+      columns.push({
+        title: translate('Organization'),
+        orderField: 'customer_name',
+        render: ({ row }) => row.customer_name || 'N/A',
+      });
+    }
+    if (!hiddenColumns.includes('project')) {
+      columns.push({
+        title: translate('Project'),
+        orderField: 'project_name',
+        render: ({ row }) => row.project_name || 'N/A',
+      });
+    }
+    if (!hiddenColumns.includes('caller')) {
+      columns.push({
+        title: translate('Caller'),
+        orderField: 'caller_full_name',
+        render: ({ row }) => row.caller_full_name || 'N/A',
+      });
+    }
 
-  const columns = filterColumns([
-    {
-      title: translate('Key'),
-      orderField: 'key',
-      render: ({ row }) => (
-        <IssueLinkField label={row.key || 'N/A'} row={row} />
-      ),
-    },
-    {
-      title: translate('Status'),
-      render: StatusColumn,
-      orderField: 'status',
-    },
-    {
-      title: translate('Title'),
-      render: TitleColumn,
-      orderField: 'summary',
-    },
-    {
-      title: translate('Organization'),
-      orderField: 'customer_name',
-      render: ({ row }) => row.customer_name || 'N/A',
-      visible: !hiddenColumns.includes('customer'),
-    },
-    {
-      title: translate('Project'),
-      orderField: 'project_name',
-      render: ({ row }) => row.project_name || 'N/A',
-      visible: !hiddenColumns.includes('project'),
-    },
-    {
-      title: translate('Caller'),
-      orderField: 'caller_full_name',
-      render: ({ row }) => row.caller_full_name || 'N/A',
-      visible: !hiddenColumns.includes('caller'),
-    },
-    {
-      title: translate('Time in progress'),
-      render: ({ row }) => <>{formatRelative(row.created)}</>,
-      visible: supportOrStaff && !hiddenColumns.includes('time_in_progress'),
-    },
-  ]);
+    if (supportOrStaff && !hiddenColumns.includes('time_in_progress')) {
+      columns.push({
+        title: translate('Time in progress'),
+        render: ({ row }) => <>{formatRelative(row.created)}</>,
+      });
+    }
+    return columns;
+  }, [hiddenColumns, supportOrStaff]);
 
   return (
     <Table

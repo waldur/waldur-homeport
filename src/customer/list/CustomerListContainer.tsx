@@ -8,7 +8,6 @@ import { translate } from '@waldur/i18n';
 
 import { getOptions } from './AccountingRunningField';
 import { CustomerList } from './CustomerList';
-import { CustomerListFilter } from './CustomerListFilter';
 import { TotalCostContainer } from './TotalCostComponent';
 import { makeAccountingPeriods } from './utils';
 
@@ -57,7 +56,7 @@ export const CustomerListContainer: FunctionComponent = () => {
   }
   return (
     <>
-      <CustomerList filters={<CustomerListFilter {...data} />} />
+      <CustomerList {...data} />
       <TotalCostContainer />
     </>
   );
