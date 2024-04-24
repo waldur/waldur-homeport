@@ -31,6 +31,7 @@ export const usersAutocomplete = async (
       'uuid',
       'username',
       'registration_method',
+      'is_active',
     ],
     o: 'full_name',
     ...query,
