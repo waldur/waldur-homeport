@@ -7,9 +7,9 @@ const OrganizationProjectUpdateRequestsList = lazyComponent(
   'OrganizationProjectUpdateRequestsList',
 );
 
-const ProjectUpdateRequestListContainer = lazyComponent(
-  () => import('./ProjectUpdateRequestListContainer'),
-  'ProjectUpdateRequestListContainer',
+const ProjectUpdateRequestsList = lazyComponent(
+  () => import('./ProjectUpdateRequestsList'),
+  'ProjectUpdateRequestsList',
 );
 
 export const states: StateDeclaration[] = [
@@ -26,7 +26,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-project-update-requests',
     url: 'marketplace-project-update-requests/',
-    component: ProjectUpdateRequestListContainer,
+    component: ProjectUpdateRequestsList,
     parent: 'project',
     data: {
       breadcrumb: () => translate('Project updates'),

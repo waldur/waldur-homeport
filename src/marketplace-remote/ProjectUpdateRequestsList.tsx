@@ -11,6 +11,7 @@ import { useTable } from '@waldur/table/utils';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
+import { ProjectUpdateRequestListFilter } from './ProjectUpdateRequestListFilter';
 
 const mapStateToFilter = createSelector(
   getProject,
@@ -55,6 +56,7 @@ export const ProjectUpdateRequestsList: FunctionComponent = () => {
       ]}
       expandableRow={ProjectUpdateRequestExpandable}
       verboseName={translate('requests')}
+      filters={<ProjectUpdateRequestListFilter />}
     />
   );
 };
