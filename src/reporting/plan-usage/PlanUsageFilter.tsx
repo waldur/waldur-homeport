@@ -14,10 +14,18 @@ const offeringProps = {
 
 const PurePlanUsageFilter: FunctionComponent = () => (
   <>
-    <TableFilterItem title={translate('Service provider')} name="provider">
+    <TableFilterItem
+      title={translate('Service provider')}
+      name="provider"
+      getValueLabel={(option) => option.customer_name}
+    >
       <ProviderAutocomplete />
     </TableFilterItem>
-    <TableFilterItem title={translate('Offering')} name="offering">
+    <TableFilterItem
+      title={translate('Offering')}
+      name="offering"
+      getValueLabel={(option) => `${option.category_title} / ${option.name}`}
+    >
       <OfferingAutocomplete {...offeringProps} />
     </TableFilterItem>
   </>

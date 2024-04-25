@@ -15,7 +15,8 @@ describe('Financial overview', () => {
       .intercept('GET', /\/api\/financial-reports\/\?.*/, {
         fixture: 'reporting/financial-reports.json',
       })
-      .visit('/reporting/organizations/', { log: false });
+      .visit('/reporting/organizations/', { log: false })
+      .waitForPage();
   });
 
   it('should render estimated cost columns if current month is selected', () => {
@@ -27,15 +28,8 @@ describe('Financial overview', () => {
   });
 
   it('should render cost column if previous month is selected', () => {
-    cy.contains('button.filter-toggle', 'Accounting period')
-      .should('exist')
-      .click();
-    cy.get('.filter-toggle:nth-child(1)').click();
-    cy.get('.accounting-period-selector')
-      .find('input[type="text"]')
-      .type('January, 2023')
-      .type('{enter}')
-      .get('table th')
+    cy.selectTableFilter('Accounting period', 'January, 2023');
+    cy.get('table th')
       .contains('Estimated cost')
       .should('not.exist')
       .get('table th')

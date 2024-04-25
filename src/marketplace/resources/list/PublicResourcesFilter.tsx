@@ -86,6 +86,7 @@ const enhance = compose(
   reduxForm({
     form: PUBLIC_RESOURCES_LIST_FILTER_FORM_ID,
     onChange: syncFiltersToURL,
+    destroyOnUnmount: false,
     enableReinitialize: true,
   }),
 );

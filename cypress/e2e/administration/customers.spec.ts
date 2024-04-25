@@ -4,12 +4,12 @@ describe('Customers', () => {
       .mockChecklists()
       .setToken()
 
-      .intercept('GET', '/api/divisions/?name=&page=1&page_size=10&o=name', {
+      .intercept('GET', '/api/organization-groups/?name=&page=1&page_size=10&o=name', {
         fixture: 'administration/organization-groups.json',
       })
       .intercept(
         'GET',
-        '/api/division-types/?name=&page=1&page_size=10&o=name',
+        '/api/organization-group-types/?name=&page=1&page_size=10&o=name',
         {
           fixture: 'administration/division-types.json',
         },
@@ -38,7 +38,7 @@ describe('Customers', () => {
 
       .visit('/administration/organizations/')
 
-      .waitForSpinner();
+      .waitForPage();
   });
 
   it('Render items correctly', () => {
@@ -54,20 +54,30 @@ describe('Customers', () => {
   });
 
   it('Select options select works correctly', () => {
-    cy.contains('button.filter-toggle', 'Service provider')
+    cy.get('.card-table button.btn-toggle-filters')
       .should('exist')
       .click();
-    cy.get('.filter-toggle:nth-child(2)').click().type('{enter}');
 
-    cy.contains('button.filter-toggle', 'Organization group')
+    cy.contains('#kt_drawer_body button.accordion-button', 'Service provider')
       .should('exist')
       .click();
-    cy.get('.filter-toggle:nth-child(2)').click().type('{enter}');
+    cy.get('#kt_drawer_body .accordion-item:nth-child(2) .accordion-collapse .filter-field > *')
+      .click()
+      .selectTheFirstOptionOfDropdown();
 
-    cy.contains('button.filter-toggle', 'Organization group type')
+    cy.contains('#kt_drawer_body button.accordion-button', 'Organization group')
       .should('exist')
       .click();
-    cy.get('.filter-toggle:nth-child(2)').click().type('{enter}');
+    cy.get('#kt_drawer_body .accordion-item:nth-child(3) .accordion-collapse .filter-field > *')
+      .click()
+      .selectTheFirstOptionOfDropdown();
+
+    cy.contains('#kt_drawer_body button.accordion-button', 'Organization group type')
+      .should('exist')
+      .click();
+    cy.get('#kt_drawer_body .accordion-item:nth-child(4) .accordion-collapse .filter-field > *')
+      .click()
+      .selectTheFirstOptionOfDropdown();
   });
 
   it('Show details modal when click on the row', () => {

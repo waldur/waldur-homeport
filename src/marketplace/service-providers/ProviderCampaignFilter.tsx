@@ -10,7 +10,11 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 const PureProviderCampaignFilter: FunctionComponent = () => {
   return (
     <>
-      <TableFilterItem title={translate('Service provider')} name="provider">
+      <TableFilterItem
+        title={translate('Service provider')}
+        name="provider"
+        getValueLabel={(value) => value?.customer_name}
+      >
         <ProviderAutocomplete />
       </TableFilterItem>
       <TableFilterItem title={translate('State')} name="state">

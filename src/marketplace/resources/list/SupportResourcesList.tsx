@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { useTable } from '@waldur/table/utils';
 
+import { SUPPORT_RESOURCES_FILTER_FORM_ID } from './constants';
 import {
   TableOptions,
   TableComponent,
@@ -11,7 +12,7 @@ import { SupportResourcesFilter } from './SupportResourcesFilter';
 
 export const SupportResourcesList: React.ComponentType<any> = () => {
   const filter = useSelector((state) =>
-    mapStateToFilter(state, 'SupportResourcesFilter'),
+    mapStateToFilter(state, SUPPORT_RESOURCES_FILTER_FORM_ID),
   );
   delete filter.provider_uuid;
   const tableProps = useTable({

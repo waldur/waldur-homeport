@@ -60,7 +60,7 @@ describe('Users', () => {
       .setToken()
 
       .visit('/administration/users/')
-      .waitForSpinner();
+      .waitForPage();
   });
 
   it('renders title', () => {
@@ -91,15 +91,8 @@ describe('Users', () => {
 
   it('should organization search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.contains('button.filter-toggle', 'Organization').should('be.visible');
-      cy.get('.filter-toggle:nth-child(1)')
-        .click()
-        .get('.filter-toggle:nth-child(1) .filter-field')
-        .click()
-        .type('Allen-Rodriguez')
-        .selectTheFirstOptionOfDropdown()
-        .get('table tbody tr')
-        .should('have.length', 1);
+      cy.selectTableFilter('Organization', 'Allen-Rodriguez', true, true);
+      cy.get('table tbody tr').should('have.length', 1);
     });
   });
 
@@ -114,29 +107,15 @@ describe('Users', () => {
 
   it('should search works correctly using account role', () => {
     cy.wait('@getUsers').then(() => {
-      cy.contains('button.filter-toggle', 'Role').click();
-      cy.contains('div.filter-field', 'Select role')
-        .should('be.visible')
-        .click();
-      cy.get('.filter-toggle:nth-child(2)')
-        .click()
-        .type('{enter}')
-        .get('table tbody tr')
-        .should('have.length', 10);
+      cy.selectTableFilter('Role', null);
+      cy.get('table tbody tr').should('have.length', 10);
     });
   });
 
   it('should search works correctly using account status', () => {
     cy.wait('@getUsers').then(() => {
-      cy.contains('button.filter-toggle', 'Status').click();
-      cy.contains('div.filter-field', 'Select status')
-        .should('be.visible')
-        .click();
-      cy.get('.filter-toggle:nth-child(2)')
-        .click()
-        .type('{enter}')
-        .get('table tbody tr')
-        .should('have.length', 10);
+      cy.selectTableFilter('Status', null);
+      cy.get('table tbody tr').should('have.length', 10);
     });
   });
 

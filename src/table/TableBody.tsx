@@ -193,7 +193,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
         return true;
       }
       if (
-        e.target.className &&
+        typeof e.target.className === 'string' &&
         e.target.className.includes('dropdown-toggle')
       ) {
         const dropdownToggle: HTMLButtonElement = e.target;

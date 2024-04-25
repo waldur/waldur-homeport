@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Badge } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 
@@ -24,11 +23,7 @@ const PureSupportResourcesFilter: FunctionComponent = () => {
       <TableFilterItem
         title={translate('Offering')}
         name="offering"
-        customValueComponent={({ value }) => (
-          <Badge bg="secondary" className="text-dark">
-            {value?.name}
-          </Badge>
-        )}
+        badgeValue={(value) => value?.name}
       >
         <OfferingAutocomplete />
       </TableFilterItem>
@@ -69,7 +64,7 @@ const enhance = reduxForm({
   initialValues: getInitialValues({
     state: NON_TERMINATED_STATES,
   }),
-  destroyOnUnmount: true,
+  destroyOnUnmount: false,
 });
 
 export const SupportResourcesFilter = enhance(PureSupportResourcesFilter);

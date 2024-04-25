@@ -87,7 +87,7 @@ const enhance = compose(
   reduxForm({
     form: 'userFilter',
     onChange: syncFiltersToURL,
-    destroyOnUnmount: true,
+    destroyOnUnmount: false,
     initialValues: getInitialValues(),
     enableReinitialize: true,
   }),

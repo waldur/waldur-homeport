@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { Reducer } from 'redux';
 
 import { RootState } from '@waldur/store/reducers';
@@ -21,8 +22,12 @@ const INITIAL_STATE: TableState = {
     field: null,
     loading: false,
   },
+  filterPosition: 'sidebar',
+  filtersStorage: [],
+  savedFilters: [],
+  selectedSavedFilter: null,
+  applyFilters: false,
   toggled: {},
-  filterVisible: true,
   selectedRows: [],
   firstFetch: true,
 };
@@ -152,6 +157,57 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         },
       };
 
+    case actions.SET_FILTER: {
+      const item = action.payload.item;
+      const index = state.filtersStorage.findIndex(
+        (filter) => filter.name === item.name,
+      );
+      const isEmpty =
+        !item.value && item.value !== false && !item.value?.length;
+
+      if (index > -1) {
+        if (isEqual(state.filtersStorage[index].value, item.value)) {
+          return state;
+        }
+        const newItems = [...state.filtersStorage];
+        if (isEmpty) {
+          newItems.splice(index, 1);
+        } else {
+          newItems.splice(index, 1, item);
+        }
+        return {
+          ...state,
+          filtersStorage: newItems,
+        };
+      } else {
+        if (!isEmpty) {
+          return {
+            ...state,
+            filtersStorage: state.filtersStorage.concat([item]),
+          };
+        }
+        return state;
+      }
+    }
+
+    case actions.APPLY_FILTERS:
+      return {
+        ...state,
+        applyFilters: action.payload.apply,
+      };
+
+    case actions.SET_SAVED_FILTERS:
+      return {
+        ...state,
+        savedFilters: action.payload.items,
+      };
+
+    case actions.SELECT_SAVED_FILTER:
+      return {
+        ...state,
+        selectedSavedFilter: action.payload.item,
+      };
+
     case actions.TOGGLE_ROW:
       return {
         ...state,
@@ -159,12 +215,6 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
           ...state.toggled,
           [action.payload.row]: !state.toggled[action.payload.row],
         },
-      };
-
-    case actions.TOGGLE_FILTER:
-      return {
-        ...state,
-        filterVisible: !state.filterVisible,
       };
 
     case actions.SELECT_ROW: {

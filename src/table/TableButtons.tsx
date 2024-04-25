@@ -4,6 +4,7 @@ import { translate } from '@waldur/i18n';
 
 import { TableProps } from './Table';
 import { TableExportButton } from './TableExportButton';
+import { TableFilterButton } from './TableFilterButton';
 import { TableMoreActions } from './TableMoreActions';
 import { TableDropdownItem } from './types';
 
@@ -57,6 +58,11 @@ export const TableButtons: FunctionComponent<any> = (props: TableProps) => {
   if (!props.selectedRows?.length) {
     return (
       <>
+        {props.filterPosition === 'sidebar' && props.filters && (
+          <TableFilterButton
+            onClick={() => props.openFiltersDrawer(props.filters)}
+          />
+        )}
         {props.actions}
         {showExportInDropdown ? (
           <TableMoreActions actions={dropdownActions} />

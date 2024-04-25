@@ -1,6 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import React, { ReactNode } from 'react';
 
+import { TableFiltersGroup } from './TableFilterService';
+
 interface RequestConfigExtended extends AxiosRequestConfig {
   staleTime?: number;
 }
@@ -60,6 +62,13 @@ export interface Pagination {
   pageSize: number;
 }
 
+export interface FilterItem {
+  label: string;
+  name: string;
+  value: any[];
+  component: () => JSX.Element;
+}
+
 export interface TableState {
   entities?: Record<string, any>;
   order?: string[];
@@ -69,8 +78,12 @@ export interface TableState {
   pagination?: Pagination;
   query?: string;
   sorting?: SortingState;
+  filterPosition?: 'sidebar' | 'header';
+  filtersStorage?: FilterItem[];
+  savedFilters?: TableFiltersGroup[];
+  selectedSavedFilter?: TableFiltersGroup;
+  applyFilters?: boolean;
   toggled?: object;
-  filterVisible?: boolean;
   selectedRows?: any[];
   firstFetch?: boolean;
 }

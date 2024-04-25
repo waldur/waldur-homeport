@@ -11,27 +11,35 @@ import { SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
+const options = [
+  {
+    label: translate('Not overridden'),
+    value: false,
+  },
+  {
+    label: translate('Overridden'),
+    value: true,
+  },
+];
+
 const PureNotificationFilter: FunctionComponent<any> = ({ form }) => {
   useReinitializeFilterFromUrl(form);
   return (
     <>
-      <TableFilterItem name="is_overridden" title={translate('Status')}>
+      <TableFilterItem
+        name="is_overridden"
+        title={translate('Status')}
+        getValueLabel={(value) =>
+          options.find((op) => op.value === value).label
+        }
+      >
         <Field
           name="is_overridden"
           component={(fieldProps) => (
             <SelectField
               {...fieldProps}
               placeholder={translate('Select status')}
-              options={[
-                {
-                  label: translate('Not overridden'),
-                  value: false,
-                },
-                {
-                  label: translate('Overridden'),
-                  value: true,
-                },
-              ]}
+              options={options}
               noUpdateOnBlur={true}
               simpleValue={true}
               isClearable={true}
@@ -47,7 +55,7 @@ const enhance = compose(
   reduxForm({
     form: 'notificationFilter',
     onChange: syncFiltersToURL,
-    destroyOnUnmount: true,
+    destroyOnUnmount: false,
     initialValues: getInitialValues(),
     enableReinitialize: true,
   }),
