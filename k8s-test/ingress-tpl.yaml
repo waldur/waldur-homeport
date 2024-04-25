@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+  labels:
+    name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+spec:
+  rules:
+  - host: homeport-testing.waldur.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/${CI_MERGE_REQUEST_ID}"
+        backend:
+          service:
+            name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+            port:
+              number: 80

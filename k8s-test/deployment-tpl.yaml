@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+  template:
+    metadata:
+      labels:
+        app: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+    spec:
+      imagePullSecrets:
+        - name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+      containers:
+      - name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+        image: ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}
+        resources:
+          limits:
+            cpu: '1'
+            memory: 2000Mi
+          requests:
+            cpu: 500m
+            memory: 1000Mi
+        env:
+        - name: TITLE
+          value: Waldur Homeport Test ${CI_MERGE_REQUEST_ID}
+        - name: API_URL
+          value: https://rest-test.nodeconductor.com/
+        - name: ASSET_PATH
+          value: "${CI_MERGE_REQUEST_ID}/"
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP

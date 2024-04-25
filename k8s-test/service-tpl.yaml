@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+spec:
+  selector:
+    app: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+  ports:
+  - port: 80
+    targetPort: 80
