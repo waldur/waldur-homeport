@@ -9,8 +9,9 @@ RUN apk add --no-cache git && yarn install --frozen-lockfile
 
 COPY . /app
 ARG VERSION=latest
+ARG ASSET_PATH="/"
 RUN sed -i "s/buildId: 'develop'/buildId: '$VERSION'/" src/configs/default.ts
-RUN yarn build
+RUN echo $ASSET_PATH && yarn build
 
 # production environment
 FROM nginx:stable-alpine
@@ -24,7 +25,7 @@ ENV TITLE="Waldur | Cloud Service Management"
 COPY docker/config.template.json /usr/share/nginx/
 
 # replace default configuration
-COPY docker/nginx.conf /etc/nginx/nginx.conf
+COPY docker/nginx-tpl.conf /etc/nginx/nginx-tpl.conf
 COPY docker/entrypoint.sh /
 
 EXPOSE 80

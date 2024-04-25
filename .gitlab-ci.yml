@@ -246,3 +246,89 @@ Update UI developer docs:
     - git branch new-ui-guide
     - git push --set-upstream origin new-ui-guide:master
   before_script: []
+
+Build test docker image:
+  stage: release
+  interruptible: true
+  image: "registry.hpc.ut.ee/mirror/library/docker:20.10.24"
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  services:
+    - name: "registry.hpc.ut.ee/mirror/library/docker:20.10.24-dind"
+      alias: docker
+      command: ["--mtu=1400"]
+  before_script:
+    - echo "[+] Build and publish docker image for merge request ${CI_MERGE_REQUEST_ID}"
+  script:
+    - mkdir build-info
+    - echo $CI_COMMIT_SHA > build-info/COMMIT_SHA
+    - echo $CI_REGISTRY_IMAGE:$CI_MERGE_REQUEST_ID
+    - docker build --build-arg ASSET_PATH="/$CI_MERGE_REQUEST_ID/" -t $CI_REGISTRY_IMAGE:$CI_MERGE_REQUEST_ID .
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u "$CI_REGISTRY_USER" --password-stdin
+    - docker push $CI_REGISTRY_IMAGE:$CI_MERGE_REQUEST_ID
+
+Test k8s deployment:
+  stage: validate
+  image:
+    name: "registry.hpc.ut.ee/mirror/bitnami/kubectl:1.29.4-debian-12-r2"
+    entrypoint: ['']
+  interruptible: false
+  environment:
+    name: test-${CI_MERGE_REQUEST_ID}
+    action: start
+    on_stop: Cleanup test k8s deployment
+    url: https://homeport-testing.waldur.com/${CI_MERGE_REQUEST_ID}/
+  rules:
+    - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - export KUBECONFIG=${K8S_CONFIG_WALDUR_HELM_TEST}
+    - apt update && apt install gettext -y
+  script:
+    - kubectl config current-context
+    - envsubst < k8s-test/deployment-tpl.yaml > k8s-test/deployment.yaml
+    - envsubst < k8s-test/service-tpl.yaml > k8s-test/service.yaml
+    - envsubst < k8s-test/ingress-tpl.yaml > k8s-test/ingress.yaml
+    - kubectl delete secret waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
+    - kubectl create secret docker-registry waldur-homeport-test-${CI_MERGE_REQUEST_ID} --docker-server=${CI_REGISTRY} --docker-username=${CI_REGISTRY_USER} --docker-password=${CI_REGISTRY_PASSWORD}
+    - kubectl apply -f k8s-test/deployment.yaml --wait
+    - kubectl apply -f k8s-test/service.yaml
+    - kubectl apply -f k8s-test/ingress.yaml
+    - POD_NAME=$(kubectl get pods -o name -l app=waldur-homeport-test-${CI_MERGE_REQUEST_ID})
+    - echo $POD_NAME
+    # Wait until the pod is ready to ensure the image is pulled
+    - kubectl wait --timeout=120s --for=condition=Ready=true $POD_NAME
+  allow_failure: true
+
+Cleanup test k8s deployment:
+  stage: deploy
+  image:
+    name: "registry.hpc.ut.ee/mirror/bitnami/kubectl:1.29.4-debian-12-r2"
+    entrypoint: ['']
+  interruptible: false
+  rules:
+  - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+    when: never
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    when: manual
+  environment:
+    name: test-${CI_MERGE_REQUEST_ID}
+    action: stop
+  before_script:
+    - export KUBECONFIG=${K8S_CONFIG_WALDUR_HELM_TEST}
+  script:
+    - kubectl delete secret waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
+    - kubectl delete deployment waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
+    - kubectl delete service waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
+    - kubectl delete ingress waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
+
+Cleanup previous k8s test deployment:
+  extends: Cleanup test k8s deployment
+  stage: .pre
+  rules:
+  - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
+    when: never
+  - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
