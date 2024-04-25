@@ -23,7 +23,7 @@ const choices = [
 
 const PureCustomerEventsFilter: FunctionComponent = () => (
   <>
-    <TableFilterItem title={translate('Type')}>
+    <TableFilterItem name="feature" title={translate('Type')}>
       <Field
         name="feature"
         component={(fieldProps) => (

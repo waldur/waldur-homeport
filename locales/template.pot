@@ -822,6 +822,14 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
+#: src/table/TableFilterActions.tsx
+msgid "Apply"
+msgstr ""
+
+#: src/table/utils.tsx
+msgid "Apply filters to table data"
+msgstr ""
+
 #: src/table/ExportDialog.tsx
 msgid "Apply table filters"
 msgstr ""
@@ -1713,6 +1721,7 @@ msgstr ""
 #: src/modal/CloseDialogButton.tsx
 #: src/navigation/header/SearchToggle.tsx
 #: src/project/ProjectCreateForm.tsx
+#: src/table/TableFilterActions.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
 msgid "Cancel"
 msgstr ""
@@ -1912,6 +1921,10 @@ msgstr ""
 
 #: src/marketplace/category/filters/CategorySectionsFilterForm.tsx
 msgid "Clear all"
+msgstr ""
+
+#: src/table/TableFilters.tsx
+msgid "Clear filters"
 msgstr ""
 
 #: src/marketplace/offerings/details/GoogleCalendarLink.tsx
@@ -3579,6 +3592,7 @@ msgstr ""
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -4322,12 +4336,15 @@ msgid "Files"
 msgstr ""
 
 #: src/marketplace/category/filters/FilterDropdownHeader.tsx
-#: src/table/Table.tsx
 msgid "Filter"
 msgstr ""
 
 #: src/marketplace/category/filters/FilteredBy.tsx
 msgid "Filtered by"
+msgstr ""
+
+#: src/table/utils.tsx
+msgid "Filters"
 msgstr ""
 
 #: src/booking/deploy/steps.ts
@@ -6730,6 +6747,10 @@ msgstr ""
 
 #: src/proposals/details/CallRoundsList.tsx
 msgid "No rounds"
+msgstr ""
+
+#: src/table/SavedFilterSelect.tsx
+msgid "No saved filter"
 msgstr ""
 
 #: src/issues/feedback/UserAutocomplete.tsx
@@ -10202,7 +10223,6 @@ msgstr ""
 #: src/proposals/proposal/create-review/CommentFormDialog.tsx
 #: src/proposals/team/AddUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
-#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/reporting/invoices/utils.ts
 msgid "Save"
 msgstr ""
@@ -10231,6 +10251,10 @@ msgstr ""
 
 #: src/proposals/proposal/create/ProposalSidebar.tsx
 msgid "Save draft"
+msgstr ""
+
+#: src/table/TableFilterActions.tsx
+msgid "Save filter"
 msgstr ""
 
 #: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
@@ -10619,6 +10643,10 @@ msgstr ""
 msgid "Select root category"
 msgstr ""
 
+#: src/table/SavedFilterSelect.tsx
+msgid "Select saved filter"
+msgstr ""
+
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/actions/update-security-groups/UpdateSecurityGroupsForm.tsx
 msgid "Select security groups..."
@@ -10917,6 +10945,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx
 msgid "Set external username"
+msgstr ""
+
+#: src/table/TableFilterButton.tsx
+msgid "Set filters"
 msgstr ""
 
 #: src/slurm/SetLimitsAction.tsx
@@ -13910,6 +13942,10 @@ msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
 msgid "Update customer permission"
+msgstr ""
+
+#: src/table/TableFilterActions.tsx
+msgid "Update filter"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsAction.tsx

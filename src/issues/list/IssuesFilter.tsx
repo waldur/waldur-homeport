@@ -42,7 +42,7 @@ const PureIssuesFilter = ({ form }) => {
 
 const enhance = reduxForm({
   form: 'IssuesFilter',
-  destroyOnUnmount: true,
+  destroyOnUnmount: false,
   onChange: syncFiltersToURL,
   initialValues: getInitialValues(),
 });

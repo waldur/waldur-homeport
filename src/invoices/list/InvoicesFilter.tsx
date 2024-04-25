@@ -41,7 +41,7 @@ const PureInvoicesFilter = () => {
 
   return (
     <>
-      <TableFilterItem title={translate('State')}>
+      <TableFilterItem name="state" title={translate('State')}>
         <Field
           name="state"
           component={(fieldProps) => (

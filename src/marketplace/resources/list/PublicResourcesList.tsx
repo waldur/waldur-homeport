@@ -103,7 +103,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       hoverableRow={({ row }) => (
         <PublicResourceActions resource={row} refetch={props.fetch} />
       )}
-      filterVisible={true}
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
     />

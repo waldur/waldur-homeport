@@ -1,4 +1,5 @@
-import { ExportConfig, Sorting } from './types';
+import { TableFiltersGroup } from './TableFilterService';
+import { ExportConfig, FilterItem, Sorting } from './types';
 
 export const FETCH_LIST_START = 'waldur/table/FETCH_START';
 export const FETCH_LIST_DONE = 'waldur/table/FETCH_DONE';
@@ -15,8 +16,11 @@ export const ENTITY_DELETE = 'waldur/table/ENTITY_DELETE';
 export const PAGE_SIZE_UPDATE = 'waldur/table/PAGE_SIZE_UPDATE';
 export const SORT_LIST_START = 'waldur/table/SORT_LIST_START';
 export const SORT_LIST_DONE = 'waldur/table/SORT_LIST_DONE';
+export const SET_FILTER = 'waldur/table/SET_FILTER';
+export const SET_SAVED_FILTERS = 'waldur/table/SET_SAVED_FILTERS';
+export const SELECT_SAVED_FILTER = 'waldur/table/SELECT_SAVED_FILTER';
+export const APPLY_FILTERS = 'waldur/table/APPLY_FILTERS';
 export const TOGGLE_ROW = 'waldur/table/TOGGLE_ROW';
-export const TOGGLE_FILTER = 'waldur/table/TOGGLE_FILTER';
 export const SELECT_ROW = 'waldur/table/SELECT_ROW';
 export const SELECT_ALL_ROWS = 'waldur/table/SELECT_ALL_ROWS';
 export const RESET_SELECTION = 'waldur/table/RESET_SELECTION';
@@ -152,18 +156,43 @@ export const sortListDone = (table: string) => ({
   },
 });
 
+export const setFilter = (table: string, item: FilterItem) => ({
+  type: SET_FILTER,
+  payload: {
+    table,
+    item,
+  },
+});
+
+export const setSavedFilters = (table: string, items: TableFiltersGroup[]) => ({
+  type: SET_SAVED_FILTERS,
+  payload: {
+    table,
+    items,
+  },
+});
+
+export const selectSavedFilter = (table: string, item: TableFiltersGroup) => ({
+  type: SELECT_SAVED_FILTER,
+  payload: {
+    table,
+    item,
+  },
+});
+
+export const applyFilters = (table: string, apply: boolean) => ({
+  type: APPLY_FILTERS,
+  payload: {
+    table,
+    apply,
+  },
+});
+
 export const toggleRow = (table: string, row: string | number) => ({
   type: TOGGLE_ROW,
   payload: {
     table,
     row,
-  },
-});
-
-export const toggleFilter = (table: string) => ({
-  type: TOGGLE_FILTER,
-  payload: {
-    table,
   },
 });
 

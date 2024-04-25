@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Tip } from '@waldur/core/Tooltip';
+import { openDrawerDialog, renderDrawerDialog } from '@waldur/drawer/actions';
 import { translate } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getTitle } from '@waldur/navigation/title';
@@ -14,11 +15,17 @@ import { selectTableRows } from '@waldur/table/selectors';
 import * as actions from './actions';
 import { registerTable } from './registry';
 import { getTableState } from './store';
-import { TableOptionsType, Sorting, ExportConfig } from './types';
+import { TableFilterActions } from './TableFilterActions';
+import { TableOptionsType, Sorting, ExportConfig, FilterItem } from './types';
 
 const ExportDialog = lazyComponent(
   () => import('./ExportDialog'),
   'ExportDialog',
+);
+
+const TableFilterContainer = lazyComponent(
+  () => import('./TableFilterContainer'),
+  'TableFilterContainer',
 );
 
 export const getId = (row, index) => {
@@ -75,6 +82,16 @@ export function getMessage({ query, verboseName }) {
   }
 }
 
+export const getFiltersFormId = (filters: JSX.Element) => {
+  if (!filters) return '';
+  return (
+    filters.props?.form || filters.type?.WrappedComponent?.defaultProps?.form
+  );
+};
+
+export const getSavedFiltersKey = (table, formId) =>
+  `waldur/table/filters/${table}/${formId}`;
+
 export const useTable = (options: TableOptionsType) => {
   const { table } = options;
   registerTable({ ...options, table });
@@ -104,6 +121,45 @@ export const useTable = (options: TableOptionsType) => {
       ),
     [dispatch, table],
   );
+  const openFiltersDrawer = useCallback(
+    (filters: React.ReactNode) => {
+      dispatch(actions.applyFilters(table, false));
+      return dispatch(
+        openDrawerDialog(TableFilterContainer, {
+          title: translate('Filters'),
+          subtitle: translate('Apply filters to table data'),
+          width: '500px',
+          props: {
+            table,
+            filters,
+            setFilter: (item: FilterItem) =>
+              dispatch(actions.setFilter(table, item)),
+            apply: () => dispatch(actions.applyFilters(table, true)),
+          },
+          footer: TableFilterActions,
+        }),
+      );
+    },
+    [dispatch, table],
+  );
+  const renderFiltersDrawer = useCallback(
+    (filters: React.ReactNode) => {
+      dispatch(
+        renderDrawerDialog(TableFilterContainer, {
+          props: {
+            table,
+            filters,
+            setFilter: (item: FilterItem) =>
+              dispatch(actions.setFilter(table, item)),
+          },
+        }),
+      );
+      dispatch(actions.applyFilters(table, true));
+      dispatch(actions.selectSavedFilter(table, null));
+    },
+    [dispatch, table],
+  );
+
   const setQuery = useCallback(
     (query) => dispatch(actions.setFilterQuery(table, query)),
     [dispatch, table],
@@ -122,10 +178,6 @@ export const useTable = (options: TableOptionsType) => {
   );
   const toggleRow = useCallback(
     (row: any) => dispatch(actions.toggleRow(table, row)),
-    [dispatch, table],
-  );
-  const toggleFilter = useCallback(
-    () => dispatch(actions.toggleFilter(table)),
     [dispatch, table],
   );
   const selectRow = useCallback(
@@ -151,12 +203,13 @@ export const useTable = (options: TableOptionsType) => {
     fetch,
     gotoPage,
     openExportDialog,
+    openFiltersDrawer,
+    renderFiltersDrawer,
     setQuery,
     updatePageSize,
     resetPagination,
     sortList,
     toggleRow,
-    toggleFilter,
     selectRow,
     selectAllRows,
     resetSelection,

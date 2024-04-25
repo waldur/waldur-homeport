@@ -64,6 +64,7 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
         <GroupInvitationRowActions row={row} refetch={props.fetch} />
       )}
       expandableRow={GroupInvitationsListExpandableRow}
+      filterPosition="header"
     />
   );
 };

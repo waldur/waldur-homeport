@@ -9,12 +9,17 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureCustomerUsersListFilter: FunctionComponent = () => (
   <>
-    <TableFilterItem title={translate('Project role')} name="project_role">
+    <TableFilterItem
+      title={translate('Project role')}
+      name="project_role"
+      getValueLabel={(value) => value.description || value.name}
+    >
       <ProjectRoleSelectField />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Organization role')}
       name="organization_role"
+      getValueLabel={(value) => value.description || value.name}
     >
       <OrganizationRoleSelectField />
     </TableFilterItem>

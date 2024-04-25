@@ -17,7 +17,12 @@ declare global {
       selectRole(value: string): Chainable;
       openWorkspaceSelector(): Chainable;
       selectTheFirstOptionOfDropdown(): Chainable;
-      selectTableFilter(label: string, value: string): Chainable;
+      selectTableFilter(
+        label: string,
+        value: string,
+        apply?: boolean,
+        type?: boolean,
+      ): Chainable;
       selectDate(): Chainable;
       selectFlatpickrDate(inputQueryPath: string, date?: string): Chainable;
       openSelectDialog(selectId: string, option: string): Chainable;
@@ -25,6 +30,7 @@ declare global {
       clickSidebarMenuItem(menu: string, submenu?: string): Chainable;
       waitForSpinner(): Chainable;
       waitForPage(): Chainable;
+      acceptCookies(): Chainable;
     }
   }
 }
@@ -65,6 +71,12 @@ Cypress.Commands.add('waitForPage', () => {
   cy.get('#kt_content_container').should('exist').wait(600).waitForSpinner();
 });
 
+Cypress.Commands.add('acceptCookies', () => {
+  cy.get('button.acceptcookies').should(($el) => {
+    if ($el) $el.trigger('click');
+  });
+});
+
 Cypress.Commands.add('openDropdownByLabel', (label) => {
   cy.get('label')
     .contains(label)
@@ -92,29 +104,46 @@ Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
   cy.get('*div[id^="react-select"]').first().click({ force: true }); // get ids which start with "react-select"
 });
 
-Cypress.Commands.add('selectTableFilter', (label, value) => {
-  cy.get('.table-filter')
-    .within(() => {
-      cy.contains('button', label)
+Cypress.Commands.add(
+  'selectTableFilter',
+  (label, value, apply = true, type = false) => {
+    cy.acceptCookies();
+    cy.get('.card-table button.btn-toggle-filters').should('exist').click();
+    cy.get('#kt_drawer_body').within(() => {
+      cy.contains('.filter-toggle .accordion-button', label)
         .click()
-        .get(
-          `button:contains(${label}) .filter-field div[class$="indicatorContainer"]`,
-        )
-        .last()
-        .click({ force: true });
-    })
-    .get('*div[id^="react-select"]')
-    .contains(value)
-    .click({ force: true })
-    .get('.card-toolbar .card-title button i.fa-refresh')
-    .first()
-    .should(($el) => {
-      const className = $el[0].className;
-      if (className.indexOf('fa-spin') < 0) {
-        cy.get('.card-toolbar .card-title button i.fa-refresh').first().click();
-      }
+        .contains('.filter-toggle .accordion-button', label)
+        .parent()
+        .parent()
+        .within(() => {
+          if (type && value) {
+            cy.get(`.filter-field`).click().type(value);
+          } else {
+            cy.get(`.filter-field`).click();
+          }
+        });
     });
-});
+    if (value === null || value === undefined) {
+      cy.selectTheFirstOptionOfDropdown();
+    } else {
+      cy.get('*div[id^="react-select"]').contains(value).click({ force: true });
+    }
+    if (apply) {
+      cy.contains('#kt_drawer_footer button', 'Apply').click();
+      // Make sure the fetch fn is performed
+      cy.get('.card-toolbar .card-title button i.fa-refresh')
+        .first()
+        .then(($el) => {
+          const className = $el[0].className;
+          if (className.indexOf('fa-spin') < 0) {
+            cy.get('.card-toolbar .card-title button i.fa-refresh')
+              .first()
+              .click();
+          }
+        });
+    }
+  },
+);
 
 Cypress.Commands.add('selectDate', () => {
   cy.get('.react-datepicker-wrapper input')

@@ -22,7 +22,11 @@ describe('Table reducer', () => {
         loading: false,
       },
       toggled: {},
-      filterVisible: true,
+      filterPosition: 'sidebar',
+      filtersStorage: [],
+      savedFilters: [],
+      selectedSavedFilter: null,
+      applyFilters: false,
       selectedRows: [],
       firstFetch: true,
     });

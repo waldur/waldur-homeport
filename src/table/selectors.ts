@@ -28,3 +28,17 @@ export const selectTableRows = createSelector(
     return rows;
   },
 );
+
+export const selectTableSavedFilters = (state: RootState, table: string) => {
+  if (state.tables && state.tables[table]) {
+    return state.tables[table].savedFilters;
+  }
+  return [];
+};
+
+export const selectSelectedSavedFilter = (state: RootState, table: string) => {
+  if (state.tables && state.tables[table]) {
+    return state.tables[table].selectedSavedFilter;
+  }
+  return null;
+};

@@ -38,6 +38,7 @@ const PureSupportCustomerFilter: FunctionComponent = () => (
     <TableFilterItem
       title={translate('Organization group type')}
       name="organization_group_type"
+      getValueLabel={(option) => option.name}
     >
       <OrganizationGroupFilter />
     </TableFilterItem>

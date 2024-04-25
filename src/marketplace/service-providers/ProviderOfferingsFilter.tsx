@@ -26,7 +26,7 @@ const PureProviderOfferingsFilter: FunctionComponent = () => (
       <OfferingStateFilter />
     </TableFilterItem>
 
-    <TableFilterItem title={translate('Integration type')} name="type">
+    <TableFilterItem title={translate('Integration type')} name="offering_type">
       <OfferingTypeAutocomplete />
     </TableFilterItem>
   </>
