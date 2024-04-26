@@ -3592,7 +3592,6 @@ msgstr ""
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
-#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -10223,6 +10222,7 @@ msgstr ""
 #: src/proposals/proposal/create-review/CommentFormDialog.tsx
 #: src/proposals/team/AddUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/reporting/invoices/utils.ts
 msgid "Save"
 msgstr ""
@@ -14918,7 +14918,7 @@ msgid "You cannot unselect the current UI language"
 msgstr ""
 
 #: src/administration/languages/LanguageOptionsForm.tsx
-msgid "You cannot unselect the deafult language"
+msgid "You cannot unselect the default language"
 msgstr ""
 
 #: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
