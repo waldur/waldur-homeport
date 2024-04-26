@@ -6739,7 +6739,7 @@ msgstr ""
 msgid "No result found"
 msgstr ""
 
-#: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/auth/saml2/ProviderField.tsx
 #: src/form/AsyncSelectField.tsx
 msgid "No results found"
 msgstr ""
@@ -10570,7 +10570,7 @@ msgstr ""
 msgid "Select organization roles"
 msgstr ""
 
-#: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/auth/saml2/ProviderField.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
@@ -13284,7 +13284,7 @@ msgstr ""
 msgid "Unable to load users"
 msgstr ""
 
-#: src/auth/saml2/store/effects.ts
+#: src/auth/saml2/AuthSaml2Dialog.tsx
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
