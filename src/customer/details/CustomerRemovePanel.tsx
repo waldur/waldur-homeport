@@ -1,13 +1,10 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { getAll } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
@@ -18,17 +15,12 @@ import { deleteCustomer } from '@waldur/project/api';
 import { showError } from '@waldur/store/notify';
 import store from '@waldur/store/store';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { getUser, getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 const OrganizationRemovalErrorDialog = lazyComponent(
   () => import('@waldur/customer/details/OrganizationRemovalErrorDialog'),
   'OrganizationRemovalErrorDialog',
 );
-
-const loadInvoices = (customer) =>
-  getAll<{ state: string; price: string }>('/invoices/', {
-    params: { field: ['state', 'price'], customer_uuid: customer.uuid },
-  });
 
 export const CustomerRemovePanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
@@ -37,28 +29,18 @@ export const CustomerRemovePanel: FunctionComponent = () => {
     permission: PermissionEnum.DELETE_CUSTOMER,
     customerId: customer.uuid,
   });
-  const { loading, value: invoices } = useAsync(() => loadInvoices(customer));
   const dispatch = useDispatch();
   const router = useRouter();
 
   const removeCustomer = () => {
-    const hasActiveInvoices = invoices.some(
-      (invoice) => invoice.state !== 'pending' || parseFloat(invoice.price) > 0,
-    );
     const hasProjects = customer.projects.length > 0;
-    const needsSupport = hasProjects || hasActiveInvoices;
-
-    if (needsSupport) {
+    if (hasProjects) {
       if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
         const notification = hasProjects
           ? translate(
               'Organization contains projects. Please remove them first.',
             )
-          : hasActiveInvoices
-            ? translate(
-                'Organization contains invoices. Please remove them first.',
-              )
-            : '';
+          : '';
         return notification
           ? dispatch(showError(notification))
           : dispatch(openModalDialog(OrganizationRemovalErrorDialog));
@@ -96,9 +78,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
     }
   };
 
-  return loading ? (
-    <LoadingSpinner />
-  ) : canDeleteCustomer ? (
+  return canDeleteCustomer ? (
     <Card className="mt-5">
       <Card.Header>
         <Card.Title>
