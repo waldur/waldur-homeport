@@ -12970,7 +12970,6 @@ msgid "Unable to extend volume."
 msgstr ""
 
 #: src/issues/attachments/effects.ts
-#: src/resource/summary/effects.ts
 msgid "Unable to fetch attachment."
 msgstr ""
 
