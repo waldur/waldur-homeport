@@ -19,7 +19,7 @@ import { getTableOptions } from './registry';
 import { getTableState } from './store';
 import { TableRequest } from './types';
 
-export function* fetchList(action) {
+function* fetchList(action) {
   const { table, extraFilter, pullInterval } = action.payload;
   const controller = new AbortController();
   try {

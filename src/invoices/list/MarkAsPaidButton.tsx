@@ -3,23 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { Invoice } from '@waldur/invoices/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 const MarkAsPaidDialog = lazyComponent(
-  () => import('@waldur/invoices/list/MarkAsPaidDialog'),
+  () => import('./MarkAsPaidDialog'),
   'MarkAsPaidDialog',
 );
 
-const openMarkAsPaidDialog = (invoice: Invoice) =>
-  openModalDialog(MarkAsPaidDialog, {
-    resolve: invoice,
-    size: 'lg',
-  });
-
-export const MarkAsPaidButton: FunctionComponent<{ row }> = ({ row }) => {
+export const MarkAsPaidButton: FunctionComponent<{ row; refetch }> = ({
+  row,
+  refetch,
+}) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   if (!user.is_staff) {
@@ -35,7 +31,14 @@ export const MarkAsPaidButton: FunctionComponent<{ row }> = ({ row }) => {
           ? translate('Only a created invoice can be marked as paid.')
           : ''
       }
-      action={() => dispatch(openMarkAsPaidDialog(row))}
+      action={() =>
+        dispatch(
+          openModalDialog(MarkAsPaidDialog, {
+            resolve: { invoice: row, refetch },
+            size: 'lg',
+          }),
+        )
+      }
     />
   );
 };

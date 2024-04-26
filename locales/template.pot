@@ -12075,7 +12075,7 @@ msgstr ""
 msgid "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}"
 msgstr ""
 
-#: src/invoices/store/effects.ts
+#: src/invoices/list/MarkAsPaidDialog.tsx
 msgid "The invoice has been marked as paid."
 msgstr ""
 
@@ -13288,7 +13288,7 @@ msgstr ""
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
-#: src/invoices/store/effects.ts
+#: src/invoices/list/MarkAsPaidDialog.tsx
 msgid "Unable to mark the invoice as paid."
 msgstr ""
 

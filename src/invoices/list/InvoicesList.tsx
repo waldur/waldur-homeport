@@ -84,7 +84,7 @@ export const InvoicesList: FunctionComponent = () => {
       hoverableRow={({ row }) => (
         <ButtonGroup>
           <SendNotificationButton row={row} />
-          <MarkAsPaidButton row={row} />
+          <MarkAsPaidButton row={row} refetch={props.fetch} />
           <InvoicePayButton invoice={row} />
         </ButtonGroup>
       )}
