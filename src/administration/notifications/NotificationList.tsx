@@ -6,14 +6,14 @@ import { createSelector } from 'reselect';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { NotificationActions } from '@waldur/notifications/NotificationActions';
-import { NotificationExpandableRow } from '@waldur/notifications/NotificationExpandableRow';
-import { NotificationFilter } from '@waldur/notifications/NotificationFilter';
 import { createFetcher, Table } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { useTable } from '@waldur/table/utils';
 
 import { ManageCommonFooterButton } from './ManageCommonFooterButton';
+import { NotificationActions } from './NotificationActions';
+import { NotificationExpandableRow } from './NotificationExpandableRow';
+import { NotificationFilter } from './NotificationFilter';
 
 const mapStateToFilter = createSelector(
   getFormValues('notificationFilter'),

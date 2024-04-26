@@ -5,9 +5,10 @@ import { reduxForm } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { overrideNotificationTemplate } from '@waldur/notifications/api';
-import { NotificationForm } from '@waldur/notifications/NotificationForm';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+
+import { overrideNotificationTemplate } from './api';
+import { NotificationForm } from './NotificationForm';
 
 const enhance = reduxForm<any, any>({
   form: 'NotificationUpdateForm',

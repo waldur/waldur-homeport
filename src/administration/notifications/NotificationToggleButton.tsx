@@ -2,12 +2,10 @@ import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import {
-  disableNotification,
-  enableNotification,
-} from '@waldur/notifications/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+
+import { disableNotification, enableNotification } from './api';
 
 export const NotificationToggleButton: FunctionComponent<{
   notification;

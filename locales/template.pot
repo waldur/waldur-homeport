@@ -374,7 +374,7 @@ msgstr ""
 msgid "Add endpoint"
 msgstr ""
 
-#: src/notifications/ManageCommonFooterButton.tsx
+#: src/administration/notifications/ManageCommonFooterButton.tsx
 msgid "Add footer"
 msgstr ""
 
@@ -2084,11 +2084,11 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
 msgid "Common footer has been deleted"
 msgstr ""
 
-#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
 msgid "Common footer has been updated"
 msgstr ""
 
@@ -2278,7 +2278,7 @@ msgid "Contains the word"
 msgstr ""
 
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
-#: src/notifications/NotificationForm.tsx
+#: src/administration/notifications/NotificationForm.tsx
 msgid "Content"
 msgstr ""
 
@@ -2599,7 +2599,7 @@ msgid "Create your first project"
 msgstr ""
 
 #: src/administration/TokensList.tsx
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -2642,6 +2642,7 @@ msgid "Created a new payment for {customer_link}."
 msgstr ""
 
 #: src/administration/agreements/UserAgreementsList.tsx
+#: src/administration/notifications/NotificationList.tsx
 #: src/broadcasts/BroadcastList.tsx
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -2662,7 +2663,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
-#: src/notifications/NotificationList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/team/InvitationsList.tsx
 #: src/resource/support/SharedProviderResources.tsx
@@ -3039,6 +3039,7 @@ msgid "Default volume category"
 msgstr ""
 
 #: src/administration/agreements/UserAgreementDeleteButton.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/DeletePaymentButton.tsx
 #: src/issues/comments/IssueCommentDeleteDialog.tsx
@@ -3050,7 +3051,6 @@ msgstr ""
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
 #: src/marketplace/offerings/update/roles/DeleteRoleButton.tsx
 #: src/marketplace/resources/users/DeleteUserButton.tsx
-#: src/notifications/ManageCommonFooterDialog.tsx
 #: src/openstack/openstack-backup/actions/NetworksList.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
@@ -3229,7 +3229,7 @@ msgstr ""
 msgid "Desired replicas"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Destination"
 msgstr ""
@@ -3332,9 +3332,9 @@ msgstr ""
 msgid "Direction"
 msgstr ""
 
+#: src/administration/notifications/NotificationToggleButton.tsx
 #: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
-#: src/notifications/NotificationToggleButton.tsx
 msgid "Disable"
 msgstr ""
 
@@ -3342,7 +3342,7 @@ msgstr ""
 msgid "Disable gateway IP advertising via DHCP"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -3535,6 +3535,7 @@ msgid "Each usage report must be connected with a billing plan to assure correct
 msgstr ""
 
 #: src/administration/agreements/UserAgreementsEditButton.tsx
+#: src/administration/notifications/NotificationUpdateButton.tsx
 #: src/administration/organizations/OrganizationGroupEditButton.tsx
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
 #: src/administration/providers/ProviderCard.tsx
@@ -3569,7 +3570,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderCampaignUpdateButton.tsx
 #: src/marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx
 #: src/marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx
-#: src/notifications/NotificationUpdateButton.tsx
 #: src/openstack/openstack-backup-schedule/actions/EditAction.tsx
 #: src/openstack/openstack-backup/actions/EditAction.tsx
 #: src/openstack/openstack-instance/actions/EditAction.tsx
@@ -3645,7 +3645,7 @@ msgstr ""
 msgid "Edit environment variables"
 msgstr ""
 
-#: src/notifications/ManageCommonFooterButton.tsx
+#: src/administration/notifications/ManageCommonFooterButton.tsx
 msgid "Edit footer"
 msgstr ""
 
@@ -3765,7 +3765,7 @@ msgstr ""
 msgid "Egress"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/administration/service-desk/AtlassianSettings.tsx
@@ -3813,10 +3813,10 @@ msgstr ""
 msgid "Emails"
 msgstr ""
 
+#: src/administration/notifications/NotificationToggleButton.tsx
 #: src/administration/roles/RoleToggleButton.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileEnableButton.tsx
-#: src/notifications/NotificationToggleButton.tsx
 msgid "Enable"
 msgstr ""
 
@@ -3840,13 +3840,13 @@ msgstr ""
 msgid "Enable profile after creation"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
+#: src/administration/notifications/NotificationList.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/administration/providers/ProviderForm.tsx
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/notifications/NotificationList.tsx
 #: src/user/hooks/HookForm.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Enabled"
@@ -3971,7 +3971,7 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: src/notifications/NotificationToggleButton.tsx
+#: src/administration/notifications/NotificationToggleButton.tsx
 msgid "Error disabling the notification."
 msgstr ""
 
@@ -3979,7 +3979,7 @@ msgstr ""
 msgid "Error disabling the role."
 msgstr ""
 
-#: src/notifications/NotificationToggleButton.tsx
+#: src/administration/notifications/NotificationToggleButton.tsx
 msgid "Error enabling the notification."
 msgstr ""
 
@@ -4072,7 +4072,7 @@ msgstr ""
 msgid "Event types"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
 #: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/details/OfferingDetailsBar.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
@@ -4745,7 +4745,7 @@ msgstr ""
 msgid "HPA"
 msgstr ""
 
-#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
 msgid "HTML content"
 msgstr ""
 
@@ -6027,7 +6027,7 @@ msgstr ""
 msgid "Metadata"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Method"
 msgstr ""
@@ -6808,7 +6808,7 @@ msgstr ""
 msgid "Not logged in"
 msgstr ""
 
-#: src/notifications/NotificationFilter.tsx
+#: src/administration/notifications/NotificationFilter.tsx
 msgid "Not overridden"
 msgstr ""
 
@@ -6846,7 +6846,7 @@ msgstr ""
 msgid "Notification can be sent only for created invoice."
 msgstr ""
 
-#: src/notifications/NotificationList.tsx
+#: src/administration/notifications/NotificationList.tsx
 msgid "Notification code"
 msgstr ""
 
@@ -6854,7 +6854,7 @@ msgstr ""
 msgid "Notification has been created."
 msgstr ""
 
-#: src/notifications/NotificationUpdateDialog.tsx
+#: src/administration/notifications/NotificationUpdateDialog.tsx
 #: src/user/hooks/utils.ts
 msgid "Notification has been updated."
 msgstr ""
@@ -6863,7 +6863,7 @@ msgstr ""
 msgid "Notification method"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
 #: src/administration/routes.ts
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.ts
@@ -7626,7 +7626,7 @@ msgstr ""
 msgid "Overall score"
 msgstr ""
 
-#: src/notifications/NotificationFilter.tsx
+#: src/administration/notifications/NotificationFilter.tsx
 msgid "Overridden"
 msgstr ""
 
@@ -7957,7 +7957,7 @@ msgstr ""
 msgid "Permissions log"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
+#: src/administration/hooks/HooksList.tsx
 msgid "Person"
 msgstr ""
 
@@ -9560,7 +9560,7 @@ msgstr ""
 msgid "Reserved slot by {name}"
 msgstr ""
 
-#: src/notifications/NotificationForm.tsx
+#: src/administration/notifications/NotificationForm.tsx
 #: src/vmware/actions/ResetAction.tsx
 msgid "Reset"
 msgstr ""
@@ -10183,6 +10183,8 @@ msgstr ""
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
 #: src/administration/agreements/UserAgreementsForm.tsx
 #: src/administration/languages/LanguageOptionsForm.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
+#: src/administration/notifications/NotificationForm.tsx
 #: src/administration/providers/UpdateProviderDialog.tsx
 #: src/administration/roles/RoleDescriptionForm.tsx
 #: src/administration/roles/RoleForm.tsx
@@ -10211,8 +10213,6 @@ msgstr ""
 #: src/marketplace/resources/actions/MoveResourceDialog.tsx
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
-#: src/notifications/ManageCommonFooterDialog.tsx
-#: src/notifications/NotificationForm.tsx
 #: src/project/MoveProjectDialog.tsx
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/proposal/create-review/CommentFormDialog.tsx
@@ -10675,7 +10675,7 @@ msgstr ""
 msgid "Select state..."
 msgstr ""
 
-#: src/notifications/NotificationFilter.tsx
+#: src/administration/notifications/NotificationFilter.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Select status"
 msgstr ""
@@ -11370,8 +11370,8 @@ msgstr ""
 msgid "Startup script"
 msgstr ""
 
-#: src/administration/notifications/HooksList.tsx
-#: src/administration/notifications/HooksListFilter.tsx
+#: src/administration/hooks/HooksList.tsx
+#: src/administration/hooks/HooksListFilter.tsx
 #: src/broadcasts/BroadcastList.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invitations/InvitationsFilter.tsx
@@ -11466,6 +11466,7 @@ msgstr ""
 msgid "Static routes update was scheduled."
 msgstr ""
 
+#: src/administration/notifications/NotificationFilter.tsx
 #: src/administration/providers/ProviderUsersDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
 #: src/invitations/InvitationsList.tsx
@@ -11476,7 +11477,6 @@ msgstr ""
 #: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
-#: src/notifications/NotificationFilter.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/CustomerProposalsList.tsx
@@ -11997,7 +11997,7 @@ msgstr ""
 msgid "Terms of service link"
 msgstr ""
 
-#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
 msgid "Text content"
 msgstr ""
 
@@ -12103,11 +12103,11 @@ msgstr ""
 msgid "The name of the group to which the ticket will be added"
 msgstr ""
 
-#: src/notifications/NotificationToggleButton.tsx
+#: src/administration/notifications/NotificationToggleButton.tsx
 msgid "The notification has been disabled"
 msgstr ""
 
-#: src/notifications/NotificationToggleButton.tsx
+#: src/administration/notifications/NotificationToggleButton.tsx
 msgid "The notification has been enabled"
 msgstr ""
 
@@ -12898,7 +12898,7 @@ msgstr ""
 msgid "Unable to delete comment."
 msgstr ""
 
-#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
 msgid "Unable to delete common footer."
 msgstr ""
 
@@ -13601,7 +13601,7 @@ msgstr ""
 msgid "Unable to update a campaign."
 msgstr ""
 
-#: src/notifications/NotificationUpdateDialog.tsx
+#: src/administration/notifications/NotificationUpdateDialog.tsx
 msgid "Unable to update a notification."
 msgstr ""
 
@@ -13646,7 +13646,7 @@ msgstr ""
 msgid "Unable to update category."
 msgstr ""
 
-#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
 msgid "Unable to update common footer."
 msgstr ""
 
@@ -13894,7 +13894,7 @@ msgstr ""
 msgid "Unpublish as Google Calendar"
 msgstr ""
 
-#: src/administration/notifications/HookUpdateButton.tsx
+#: src/administration/hooks/HookUpdateButton.tsx
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 #: src/broadcasts/BroadcastUpdateButton.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
@@ -13931,7 +13931,7 @@ msgstr ""
 msgid "Update a campaign"
 msgstr ""
 
-#: src/notifications/NotificationUpdateDialog.tsx
+#: src/administration/notifications/NotificationUpdateDialog.tsx
 msgid "Update a notification"
 msgstr ""
 
@@ -14097,7 +14097,7 @@ msgstr ""
 msgid "Update static routes"
 msgstr ""
 
-#: src/notifications/ManageCommonFooterDialog.tsx
+#: src/administration/notifications/ManageCommonFooterDialog.tsx
 msgid "Update the common footer"
 msgstr ""
 
@@ -15255,7 +15255,7 @@ msgstr ""
 msgid "networks"
 msgstr ""
 
-#: src/notifications/NotificationList.tsx
+#: src/administration/notifications/NotificationList.tsx
 msgid "notifications"
 msgstr ""
 

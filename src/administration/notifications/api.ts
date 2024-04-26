@@ -1,5 +1,6 @@
 import { getList, post } from '@waldur/core/api';
-import { NotificationMessageTemplate } from '@waldur/notifications/types';
+
+import { NotificationMessageTemplate } from './types';
 
 export const getNotificationMessagesTemplates = (params?: {}) => {
   return getList<NotificationMessageTemplate>(

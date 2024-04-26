@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
+import { getNotificationMessagesTemplates } from '@waldur/administration/notifications/api';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getNotificationMessagesTemplates } from '@waldur/notifications/api';
 
 export const CustomMessageWrapper = () => {
   const [{ loading, error, value }, loadTemplate] = useAsyncFn(() =>

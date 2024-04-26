@@ -62,13 +62,10 @@ const IdentityProvidersList = lazyComponent(
 
 const RolesList = lazyComponent(() => import('./roles/RolesList'), 'RolesList');
 const TokensList = lazyComponent(() => import('./TokensList'), 'TokensList');
-const HooksList = lazyComponent(
-  () => import('./notifications/HooksList'),
-  'HooksList',
-);
+const HooksList = lazyComponent(() => import('./hooks/HooksList'), 'HooksList');
 
 const NotificationList = lazyComponent(
-  () => import('@waldur/notifications/NotificationList'),
+  () => import('./notifications/NotificationList'),
   'NotificationList',
 );
 
