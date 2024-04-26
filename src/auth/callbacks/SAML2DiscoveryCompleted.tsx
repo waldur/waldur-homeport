@@ -6,13 +6,14 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-import { loginSaml2Action } from '../saml2/store/actions';
+import { useSaml2 } from '../saml2/hooks';
 
 export const SAML2DiscoveryCompleted = () => {
   const dispatch = useDispatch();
+  const handleSaml2Login = useSaml2();
   useEffect(() => {
     const qs = Qs.parse(getQueryString());
-    dispatch(loginSaml2Action(qs.entityID));
+    dispatch(handleSaml2Login(qs.entityID));
   }, [dispatch]);
   return (
     <div className="middle-box text-center">

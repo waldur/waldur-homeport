@@ -7476,10 +7476,6 @@ msgid "Organization UUID"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
-msgid "Organization contains invoices. Please remove them first."
-msgstr ""
-
-#: src/customer/details/CustomerRemovePanel.tsx
 msgid "Organization contains projects. Please remove them first."
 msgstr ""
 
@@ -13284,7 +13280,7 @@ msgstr ""
 msgid "Unable to load users"
 msgstr ""
 
-#: src/auth/saml2/AuthSaml2Dialog.tsx
+#: src/auth/saml2/hooks.ts
 msgid "Unable to login via SAML2 protocol."
 msgstr ""
 
