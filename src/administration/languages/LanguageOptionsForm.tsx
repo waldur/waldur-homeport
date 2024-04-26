@@ -97,57 +97,34 @@ const LanguageOptionsForm: React.FC<LanguageOptionProps> = ({
     }
   };
 
-  const renderLanguageCheckbox = (
-    language: { code: string; label: string },
-    selectedLanguages: string[],
-    handleLanguageChange: (code: string) => void,
-  ) => (
-    <div key={language.code} className="mb-3">
-      <Field
-        name={`language_${language.code}`}
-        component={AwesomeCheckboxField}
-        label={
-          <div className="d-flex align-items-center">
-            <div className="symbol symbol-20px me-2">
-              <i className="f16">
-                <i className={`flag ${LanguageCountry[language.code]}`} />
-              </i>
-            </div>
-            {language.label}
-          </div>
-        }
-        input={{
-          value: selectedLanguages.includes(language.code),
-          onChange: () => handleLanguageChange(language.code),
-        }}
-      />
-    </div>
-  );
-
   return (
     <div>
-      <div className="row">
+      <div className="row" style={{ columnCount: 2, display: 'flow' }}>
         <div className="col-md-6">
-          {languageChoices.map(
-            (language: { code: string; label: string }, index: number) =>
-              index < Math.ceil(languageChoices.length / 2) &&
-              renderLanguageCheckbox(
-                language,
-                selectedLanguages,
-                handleLanguageChange,
-              ),
-          )}
-        </div>
-        <div className="col-md-6">
-          {languageChoices.map(
-            (language: { code: string; label: string }, index: number) =>
-              index >= Math.ceil(languageChoices.length / 2) &&
-              renderLanguageCheckbox(
-                language,
-                selectedLanguages,
-                handleLanguageChange,
-              ),
-          )}
+          {languageChoices.map((language: { code: string; label: string }) => (
+            <div key={language.code} className="mb-3">
+              <Field
+                name={`language_${language.code}`}
+                component={AwesomeCheckboxField}
+                label={
+                  <div className="d-flex align-items-center">
+                    <div className="symbol symbol-20px me-2">
+                      <i className="f16">
+                        <i
+                          className={`flag ${LanguageCountry[language.code]}`}
+                        />
+                      </i>
+                    </div>
+                    {language.label}
+                  </div>
+                }
+                input={{
+                  value: selectedLanguages.includes(language.code),
+                  onChange: () => handleLanguageChange(language.code),
+                }}
+              />
+            </div>
+          ))}
         </div>
       </div>
       <div className="row">
