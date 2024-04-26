@@ -5751,7 +5751,7 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: src/customer/details/store/effects.ts
+#: src/customer/details/CustomerLogoUpdate.tsx
 msgid "Logo has been removed."
 msgstr ""
 
@@ -5759,7 +5759,7 @@ msgstr ""
 msgid "Logo has been updated successfully."
 msgstr ""
 
-#: src/customer/details/store/effects.ts
+#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 msgid "Logo has been uploaded."
 msgstr ""
 
@@ -13395,7 +13395,7 @@ msgstr ""
 msgid "Unable to remove image."
 msgstr ""
 
-#: src/customer/details/store/effects.ts
+#: src/customer/details/CustomerLogoUpdate.tsx
 msgid "Unable to remove logo."
 msgstr ""
 
@@ -13797,7 +13797,7 @@ msgstr ""
 msgid "Unable to upload attachment."
 msgstr ""
 
-#: src/customer/details/store/effects.ts
+#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 msgid "Unable to upload logo."
 msgstr ""
 

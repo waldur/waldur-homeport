@@ -1,9 +1,9 @@
 import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { reduxForm, SubmissionError } from 'redux-form';
 
-import { CustomerLogoUpdateContainer } from '@waldur/customer/details/CustomerLogoUpdateContainer';
-import { uploadLogo } from '@waldur/customer/details/store/api';
+import { uploadLogo } from '@waldur/customer/details/api';
+import { CustomerLogoUpdate } from '@waldur/customer/details/CustomerLogoUpdate';
 import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { updateServiceProvider } from '@waldur/marketplace/common/api';
@@ -20,16 +20,24 @@ export const ServiceProviderEditor = connect((_, props: any) => ({
     form: 'ServiceProviderEditor',
   })(({ submitting, invalid, handleSubmit, resolve }) => {
     const dispatch = useDispatch();
+
     const updateCustomerHandler = async (formData) => {
       try {
         await updateServiceProvider(resolve.uuid, {
           description: formData.description,
         });
         if (formData.image) {
-          await uploadLogo({
-            customerUuid: resolve.customer_uuid,
-            image: formData.image,
-          });
+          try {
+            await uploadLogo({
+              customerUuid: resolve.customer_uuid,
+              image: formData.image,
+            });
+            dispatch(showSuccess(translate('Logo has been uploaded.')));
+          } catch (error) {
+            throw new SubmissionError({
+              _error: translate('Unable to upload logo.'),
+            });
+          }
         }
         await resolve.refreshServiceProvider();
         dispatch(showSuccess(translate('Service provider has been updated.')));
@@ -50,7 +58,7 @@ export const ServiceProviderEditor = connect((_, props: any) => ({
         <Modal.Body>
           <FormContainer submitting={submitting}>
             <TextField name={'description'} label={translate('Description')} />
-            <CustomerLogoUpdateContainer
+            <CustomerLogoUpdate
               customer={
                 {
                   uuid: resolve.customer_uuid,
