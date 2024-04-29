@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { Button, Card, Modal, Tab, Tabs } from 'react-bootstrap';
+import { Button, Modal, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 import { createSelector } from 'reselect';
@@ -7,6 +7,8 @@ import { createSelector } from 'reselect';
 import { ENV } from '@waldur/configs/default';
 import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { getProfile } from '@waldur/freeipa/api';
 import { translate } from '@waldur/i18n';
 import { countChecklists } from '@waldur/marketplace-checklist/api';
@@ -68,31 +70,25 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Tabs defaultActiveKey={1} id="user-details" unmountOnExit={true}>
+        <Tabs defaultActiveKey={1} unmountOnExit={true}>
           <Tab eventKey={1} title={translate('Details')}>
-            <Card>
-              <UserDetailsTable user={value.user} profile={value.profile} />
-            </Card>
+            <UserDetailsTable user={value.user} profile={value.profile} />
           </Tab>
 
           {canSeeChecklist && value.checklistCount ? (
             <Tab eventKey={2} title={translate('Checklists')}>
-              <Card>
-                <UserChecklist userId={value.user.uuid} readOnly={true} />
-              </Card>
+              <UserChecklist userId={value.user.uuid} readOnly={true} />
             </Tab>
           ) : null}
 
-          <Tab eventKey={3} title={translate('Keys')}>
-            <Card>
-              <KeysList user={value.user} />
-            </Card>
-          </Tab>
+          {isFeatureVisible(UserFeatures.ssh_keys) ? (
+            <Tab eventKey={3} title={translate('Keys')}>
+              <KeysList user={value.user} hasActionBar={false} />
+            </Tab>
+          ) : null}
 
           <Tab eventKey={4} title={translate('Remote accounts')}>
-            <Card>
-              <UserOfferingList user={value.user} />
-            </Card>
+            <UserOfferingList user={value.user} hasActionBar={false} />
           </Tab>
         </Tabs>
       </Modal.Body>

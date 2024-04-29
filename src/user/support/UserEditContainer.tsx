@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { ENV } from '@waldur/configs/default';
 import { getNativeNameVisible, getConfig } from '@waldur/store/config';
 import {
   fieldIsVisible,
@@ -72,35 +71,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
   return {
     updateUser,
-    dispatchRemoval: () => dispatch(actions.showUserRemoval()),
-    dispatchMessage: (resolve) =>
-      dispatch(actions.showUserRemovalMessage(resolve)),
   };
 };
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  const { user } = ownProps;
-  const { dispatchRemoval, dispatchMessage } = dispatchProps;
-  let showUserRemoval;
-
-  if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
-    showUserRemoval = dispatchRemoval;
-  } else {
-    showUserRemoval = () =>
-      dispatchMessage({
-        supportEmail: ENV.plugins.WALDUR_CORE.SITE_EMAIL,
-        userName: user.full_name,
-      });
-  }
-
-  return {
-    ...ownProps,
-    ...stateProps,
-    ...dispatchProps,
-    showUserRemoval,
-  };
-};
-
-const enhance = connect(mapStateToProps, mapDispatchToProps, mergeProps);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const UserEditContainer = enhance(UserUpdateComponent);

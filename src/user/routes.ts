@@ -15,7 +15,10 @@ const FreeIpaAccount = lazyComponent(
   'FreeIpaAccount',
 );
 const HooksList = lazyComponent(() => import('./hooks/HooksList'), 'HooksList');
-const KeysList = lazyComponent(() => import('./keys/KeysList'), 'KeysList');
+const MyKeysList = lazyComponent(
+  () => import('./keys/MyKeysList'),
+  'MyKeysList',
+);
 const UserDashboard = lazyComponent(
   () => import('./dashboard/UserDashboard'),
   'UserDashboard',
@@ -162,7 +165,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'profile-keys',
     url: 'keys/',
-    component: KeysList,
+    component: MyKeysList,
     parent: 'profile-credentials',
     data: {
       feature: UserFeatures.ssh_keys,

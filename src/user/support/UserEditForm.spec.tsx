@@ -5,13 +5,7 @@ import { TermsOfService } from '@waldur/user/support/TermsOfService';
 import { PureUserEditForm } from '@waldur/user/support/UserEditForm';
 
 const renderForm = (props) =>
-  shallow(
-    <PureUserEditForm
-      handleSubmit={jest.fn()}
-      showUserRemoval={jest.fn()}
-      {...props}
-    />,
-  );
+  shallow(<PureUserEditForm handleSubmit={jest.fn()} {...props} />);
 
 describe('UserEditForm', () => {
   it('should render form with all possible fields for STAFF user', () => {
@@ -23,7 +17,6 @@ describe('UserEditForm', () => {
       fieldIsProtected: () => false,
       isRequired: () => true,
       nativeNameIsVisible: true,
-      showDeleteButton: true,
       user: staffUser,
     });
     expect(wrapper.find({ label: 'First name' }).length).toBe(1);
@@ -46,7 +39,6 @@ describe('UserEditForm', () => {
       fieldIsProtected: () => false,
       isRequired: () => true,
       nativeNameIsVisible: false,
-      showDeleteButton: false,
       user: staffUser,
     });
     expect(wrapper.find({ label: 'First name' }).length).toBe(1);
@@ -60,7 +52,6 @@ describe('UserEditForm', () => {
     expect(wrapper.find({ label: 'Current API token' }).length).toBe(0);
     expect(wrapper.find({ name: 'token_lifetime' }).length).toBe(0);
     expect(wrapper.find(TermsOfService)).toHaveLength(1);
-    expect(wrapper.find('#remove-btn').length).toBe(0);
   });
 
   it('should render initial form with appropriate fields for STAFF user', () => {
@@ -72,7 +63,6 @@ describe('UserEditForm', () => {
       fieldIsProtected: () => false,
       isRequired: () => true,
       nativeNameIsVisible: true,
-      showDeleteButton: false,
       user: staffUser,
     });
     expect(wrapper.find({ label: 'First name' }).length).toBe(1);
@@ -88,7 +78,6 @@ describe('UserEditForm', () => {
     expect(wrapper.find({ name: 'token_lifetime' }).length).toBe(0);
     expect(wrapper.find(TermsOfService).length).toBe(1);
     expect(wrapper.find({ label: 'Agree and proceed' }).length).toBe(1);
-    expect(wrapper.find('#remove-btn').length).toBe(0);
   });
 
   it('should render form with native name and civil number for ORDINARY user', () => {
@@ -100,7 +89,6 @@ describe('UserEditForm', () => {
       fieldIsProtected: () => false,
       isRequired: () => false,
       nativeNameIsVisible: true,
-      showDeleteButton: false,
       user: ordinaryUser,
     });
     expect(wrapper.find({ label: 'Native name' }).length).toBe(1);

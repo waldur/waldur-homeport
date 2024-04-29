@@ -11,9 +11,13 @@ import { UserDetails } from '@waldur/workspace/types';
 
 interface OwnProps {
   user?: UserDetails;
+  hasActionBar?: boolean;
 }
 
-export const UserOfferingList: FunctionComponent<OwnProps> = (props) => {
+export const UserOfferingList: FunctionComponent<OwnProps> = ({
+  hasActionBar = true,
+  ...props
+}) => {
   const currentUser = useSelector(getUser);
   const user = props.user || currentUser;
   const filter = useMemo(
@@ -51,6 +55,7 @@ export const UserOfferingList: FunctionComponent<OwnProps> = (props) => {
       placeholderComponent={<UserOfferingListPlaceholder />}
       showPageSizeSelector={true}
       hasQuery={true}
+      hasActionBar={hasActionBar}
     />
   );
 };
