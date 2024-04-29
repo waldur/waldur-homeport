@@ -50,7 +50,7 @@ const LanguageOptionsForm: React.FC<LanguageOptionProps> = ({
         return selectedLanguagesArray;
       }
 
-      if (ENV.defaultLanguage === code) {
+      if (ENV.defaultLanguage === code && isCodeSelected) {
         dispatch(
           showError(translate('You cannot unselect the default language')),
         );
