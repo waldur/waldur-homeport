@@ -24,7 +24,7 @@ export const KeysList: FunctionComponent<OwnProps> = (props) => {
   const currentUser = useSelector(getUser);
   const user = props.user || currentUser;
   const { params } = useCurrentStateAndParams();
-  const isStaffOrSelf = user.is_staff || params.uuid === user.uuid;
+  const isStaffOrSelf = currentUser.is_staff || params.uuid === user.uuid;
   const filter = useMemo(
     () => ({
       user_uuid: user?.uuid || params.uuid,
