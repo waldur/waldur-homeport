@@ -1,4 +1,3 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -9,29 +8,24 @@ import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/utils';
 import { KeysListExpandableRow } from '@waldur/user/keys/KeysListExpandableRow';
 import { KeysListTablePlaceholder } from '@waldur/user/keys/KeysListTablePlaceholder';
-import { getUser, getWorkspace } from '@waldur/workspace/selectors';
-import { WorkspaceType, UserDetails } from '@waldur/workspace/types';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { KeyCreateButton } from './KeyCreateButton';
 import { KeyRemoveButton } from './KeyRemoveButton';
 
-interface OwnProps {
-  user?: UserDetails;
-}
-
-export const KeysList: FunctionComponent<OwnProps> = (props) => {
-  const workspace = useSelector(getWorkspace);
+export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
+  user,
+  hasActionBar = true,
+}) => {
   const currentUser = useSelector(getUser);
-  const user = props.user || currentUser;
-  const { params } = useCurrentStateAndParams();
-  const isStaffOrSelf = currentUser.is_staff || params.uuid === user.uuid;
+  const isStaffOrSelf = currentUser.is_staff || user.uuid === currentUser.uuid;
   const filter = useMemo(
     () => ({
-      user_uuid: user?.uuid || params.uuid,
+      user_uuid: user.uuid,
     }),
-    [user, params],
+    [user],
   );
-  const tableProps = useTable({
+  const props = useTable({
     table: 'keysList',
     fetchData: createFetcher('keys'),
     exportRow: (row) => [row.name, row.fingerprint],
@@ -63,27 +57,27 @@ export const KeysList: FunctionComponent<OwnProps> = (props) => {
       render: ({ row }) => row.type,
     },
   ];
-  if (workspace === WorkspaceType.USER) {
+
+  if (isStaffOrSelf) {
     columns.push({
       title: translate('Actions'),
-      render: ({ row }) => isStaffOrSelf && <KeyRemoveButton uuid={row.uuid} />,
+      render: ({ row }) => <KeyRemoveButton uuid={row.uuid} />,
       className: 'text-center col-md-2',
     });
   }
 
   return (
     <Table
-      {...tableProps}
+      {...props}
       columns={columns}
       hasQuery={true}
       showPageSizeSelector={true}
       verboseName={translate('SSH keys')}
-      actions={
-        isStaffOrSelf && workspace === WorkspaceType.USER && <KeyCreateButton />
-      }
+      actions={isStaffOrSelf && <KeyCreateButton />}
       placeholderComponent={<KeysListTablePlaceholder />}
       enableExport={true}
       expandableRow={KeysListExpandableRow}
+      hasActionBar={hasActionBar}
     />
   );
 };

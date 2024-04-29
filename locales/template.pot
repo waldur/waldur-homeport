@@ -146,7 +146,7 @@ msgstr ""
 msgid "Access subnets"
 msgstr ""
 
-#: src/user/support/actions.ts
+#: src/user/support/UserDeleteAccount.tsx
 msgid "Account removal"
 msgstr ""
 
@@ -239,7 +239,6 @@ msgstr ""
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/resource/actions/ResourceActionComponent.tsx
 #: src/user/keys/KeysList.tsx
-#: src/user/support/UserTableDropDownActions.tsx
 msgid "Actions"
 msgstr ""
 
@@ -1220,7 +1219,7 @@ msgstr ""
 msgid "Attributes"
 msgstr ""
 
-#: src/user/support/UserDetailsView.tsx
+#: src/user/support/UserDetailsDialog.tsx
 msgid "Audit log"
 msgstr ""
 
@@ -3302,7 +3301,7 @@ msgstr ""
 #: src/user/UserDetailsButton.tsx
 #: src/user/UserPopover.tsx
 #: src/user/support/UserDetailsButton.tsx
-#: src/user/support/UserDetailsView.tsx
+#: src/user/support/UserDetailsDialog.tsx
 #: src/vmware/tabs.ts
 msgid "Details"
 msgstr ""
@@ -5518,7 +5517,7 @@ msgid "Key removal"
 msgstr ""
 
 #: src/user/UserPopover.tsx
-#: src/user/support/UserDetailsView.tsx
+#: src/user/support/UserDetailsDialog.tsx
 msgid "Keys"
 msgstr ""
 
@@ -5800,7 +5799,7 @@ msgstr ""
 #: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 #: src/project/ProjectActions.tsx
 #: src/user/UserActions.tsx
-#: src/user/support/UserDetailsView.tsx
+#: src/user/support/UserDetailsDialog.tsx
 msgid "Manage"
 msgstr ""
 
@@ -7602,7 +7601,7 @@ msgstr ""
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/routes.ts
-#: src/user/support/UserDetailsView.tsx
+#: src/user/support/UserDetailsDialog.tsx
 msgid "Organizations"
 msgstr ""
 
@@ -8686,7 +8685,7 @@ msgstr ""
 #: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/routes.ts
-#: src/user/support/UserDetailsView.tsx
+#: src/user/support/UserDetailsDialog.tsx
 msgid "Projects"
 msgstr ""
 
@@ -9061,7 +9060,7 @@ msgid "Reach a new audience"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
-#: src/user/support/actions.ts
+#: src/user/support/UserDeleteAccount.tsx
 msgid "Reason"
 msgstr ""
 
@@ -9263,7 +9262,7 @@ msgstr ""
 
 #: src/user/UserPopover.tsx
 #: src/user/routes.ts
-#: src/user/support/UserDetailsView.tsx
+#: src/user/support/UserDetailsDialog.tsx
 msgid "Remote accounts"
 msgstr ""
 
@@ -9470,7 +9469,7 @@ msgid "Request publishing"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
-#: src/user/support/actions.ts
+#: src/user/support/UserDeleteAccount.tsx
 msgid "Request removal"
 msgstr ""
 
@@ -14787,7 +14786,7 @@ msgstr ""
 msgid "Why do you need to remove organization with existing projects?"
 msgstr ""
 
-#: src/user/support/actions.ts
+#: src/user/support/UserDeleteAccount.tsx
 msgid "Why would you want to go away? Help us become better please!"
 msgstr ""
 

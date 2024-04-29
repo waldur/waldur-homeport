@@ -1,28 +1,29 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { UserDetails } from '@waldur/workspace/types';
 
-import * as actions from './actions';
+const UserDetailsDialog = lazyComponent(
+  () => import('./UserDetailsDialog'),
+  'UserDetailsDialog',
+);
 
-interface UserDetailsButtonProps {
-  row: UserDetails;
-  onClick: () => void;
-}
-
-const PureUserDetailsButton: FunctionComponent<UserDetailsButtonProps> = (
-  props,
-) => <ActionButton title={translate('Details')} action={props.onClick} />;
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: (e) => {
-    e.target.blur();
-    return dispatch(actions.showUserDetails(ownProps.row));
-  },
-});
-
-const enhance = connect(null, mapDispatchToProps);
-
-export const UserDetailsButton = enhance(PureUserDetailsButton);
+export const UserDetailsButton: FunctionComponent<{ row }> = ({ row }) => {
+  const dispatch = useDispatch();
+  return (
+    <ActionButton
+      title={translate('Details')}
+      action={() =>
+        dispatch(
+          openModalDialog(UserDetailsDialog, {
+            resolve: { user: row },
+            size: 'xl',
+          }),
+        )
+      }
+    />
+  );
+};

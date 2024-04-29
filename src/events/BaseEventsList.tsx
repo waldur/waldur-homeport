@@ -21,6 +21,7 @@ export const BaseEventsList: FunctionComponent<{
   initialPageSize?;
   className?;
   actions?;
+  hasActionBar?;
 }> = ({
   filter,
   filters,
@@ -30,6 +31,7 @@ export const BaseEventsList: FunctionComponent<{
   initialPageSize,
   className,
   actions,
+  hasActionBar = true,
 }) => {
   const options = useMemo(
     () => ({
@@ -69,6 +71,7 @@ export const BaseEventsList: FunctionComponent<{
       id={id}
       initialPageSize={initialPageSize}
       className={className}
+      hasActionBar={hasActionBar}
       {...props}
     />
   );

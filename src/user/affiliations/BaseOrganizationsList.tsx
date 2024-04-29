@@ -29,9 +29,10 @@ const exportFields = [
   'Created',
 ];
 
-export const BaseOrganizationsList: FunctionComponent<{ user }> = ({
-  user,
-}) => {
+export const BaseOrganizationsList: FunctionComponent<{
+  user;
+  hasActionBar?;
+}> = ({ user, hasActionBar = true }) => {
   const filter = useMemo(
     () => ({
       field: [
@@ -116,6 +117,7 @@ export const BaseOrganizationsList: FunctionComponent<{ user }> = ({
       hoverableRow={OrganizationHoverableRow}
       expandableRow={OrganizationExpandableRow}
       fullWidth={true}
+      hasActionBar={hasActionBar}
     />
   );
 };

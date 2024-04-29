@@ -2,7 +2,10 @@ import { FC, useMemo } from 'react';
 
 import { BaseEventsList } from '@waldur/events/BaseEventsList';
 
-export const UserEvents: FC<{ user? }> = ({ user }) => {
+export const UserEvents: FC<{ user?; hasActionBar? }> = ({
+  user,
+  hasActionBar = true,
+}) => {
   const filter = useMemo(
     () => ({
       scope: user.url,
@@ -11,5 +14,11 @@ export const UserEvents: FC<{ user? }> = ({ user }) => {
     }),
     [user],
   );
-  return <BaseEventsList filter={filter} table={`user-events-${user.uuid}`} />;
+  return (
+    <BaseEventsList
+      filter={filter}
+      table={`user-events-${user.uuid}`}
+      hasActionBar={hasActionBar}
+    />
+  );
 };

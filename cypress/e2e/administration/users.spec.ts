@@ -120,12 +120,7 @@ describe('Users', () => {
   });
 
   it('should open details modal when click details button', () => {
-    cy.get('td .dropdown')
-      .first()
-      .contains('Actions')
-      .click({ force: true })
-      .get('.dropdown-item')
-      .contains('Details')
+    cy.contains('button', 'Details')
       .click({ force: true })
       .get('.modal-title')
       .contains('User details of Tara Pierce')
