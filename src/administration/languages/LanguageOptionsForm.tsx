@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
@@ -23,14 +23,11 @@ interface LanguageOptionProps {
 const LanguageOptionsForm: React.FC<LanguageOptionProps> = ({
   languageChoices,
 }) => {
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>(
+    ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES,
+  );
   const dispatch = useDispatch();
   const { currentLanguage } = useLanguageSelector();
-
-  useEffect(() => {
-    const selectedLanguageCodes = ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES;
-    setSelectedLanguages(selectedLanguageCodes);
-  }, []);
 
   const handleLanguageChange = (code: string) => {
     setSelectedLanguages((prevSelectedLanguages: string | string[]) => {
