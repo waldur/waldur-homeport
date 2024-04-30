@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
@@ -15,14 +15,15 @@ interface AwesomeCheckBoxGroupProps {
   groupType?: string;
 }
 
-export const AwesomeCheckBoxGroup: FunctionComponent<
-  AwesomeCheckBoxGroupProps
-> = (props) => (
+export const AwesomeCheckBoxGroup: FC<AwesomeCheckBoxGroupProps> = ({
+  groupType = 'list',
+  ...props
+}) => (
   <span>
     {props.options.map((option, index) => (
       <div key={index} className="ms-2 mb-2">
         <Field
-          name={`${props.groupType}-${props.fieldName}-${index}`}
+          name={`${groupType}-${props.fieldName}-${index}`}
           component={(prop) => (
             <AwesomeCheckbox label={option.title} {...prop.input} />
           )}
@@ -32,7 +33,3 @@ export const AwesomeCheckBoxGroup: FunctionComponent<
     ))}
   </span>
 );
-
-AwesomeCheckBoxGroup.defaultProps = {
-  groupType: 'list',
-};

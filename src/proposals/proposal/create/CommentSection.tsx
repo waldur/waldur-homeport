@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
 import { Proposal, ProposalReview } from '@waldur/proposals/types';
@@ -8,7 +8,7 @@ import { FieldReviewComments } from '../create-review/FieldReviewComments';
 
 import { QuestionMark } from './QuestionMark';
 
-export const CommentSection: FC<{
+interface CommentSectionProps {
   proposal: Proposal;
   reviews?: ProposalReview[];
   valueField: string;
@@ -17,7 +17,9 @@ export const CommentSection: FC<{
   tooltip: string;
   floating?: boolean;
   onAddCommentClick?;
-}> = ({
+}
+
+export const CommentSection: FC<PropsWithChildren<CommentSectionProps>> = ({
   proposal,
   valueField,
   commentField,

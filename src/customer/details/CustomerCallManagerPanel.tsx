@@ -35,10 +35,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
       }),
   );
 
-  const [{ loading: loadingToggle }, toggleCallManager] = useAsyncFn<
-    any,
-    boolean[]
-  >(
+  const [{ loading: loadingToggle }, toggleCallManager] = useAsyncFn(
     async (value: boolean) => {
       try {
         await waitForConfirmation(

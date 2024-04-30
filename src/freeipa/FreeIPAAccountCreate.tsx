@@ -74,11 +74,7 @@ export const FreeIPAAccountCreate = reduxForm<
         <UsernameGroup />
         <FormGroup>
           <div className="pull-right">
-            <SubmitButton
-              submitting={submitting}
-              invalid={invalid}
-              block={false}
-            >
+            <SubmitButton submitting={submitting} invalid={invalid}>
               <i className="fa fa-plus" /> {translate('Create')}
             </SubmitButton>
           </div>

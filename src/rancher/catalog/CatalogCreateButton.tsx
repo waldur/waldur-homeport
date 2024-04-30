@@ -1,4 +1,4 @@
-import { useCallback, FunctionComponent } from 'react';
+import { useCallback, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -15,11 +15,11 @@ const CatalogCreateDialog = lazyComponent(
 const createCatalogDialog = (cluster) =>
   openModalDialog(CatalogCreateDialog, { resolve: { cluster } });
 
-export const CatalogCreateButton: FunctionComponent<any> = (props) => {
+export const CatalogCreateButton: FC<{ cluster }> = ({ cluster }) => {
   const dispatch = useDispatch();
   const callback = useCallback(
-    () => dispatch(createCatalogDialog(props.cluster)),
-    [dispatch, props.cluster],
+    () => dispatch(createCatalogDialog(cluster)),
+    [dispatch, cluster],
   );
   if (ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE) {
     return null;

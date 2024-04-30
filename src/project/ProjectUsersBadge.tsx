@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -21,7 +21,7 @@ interface OwnProps {
   onClick?(): any;
 }
 
-const LayoutWrapper: FC<OwnProps> = (props) =>
+const LayoutWrapper: FC<PropsWithChildren<OwnProps>> = (props) =>
   props.isHorizontal ? (
     <div
       className={classNames(

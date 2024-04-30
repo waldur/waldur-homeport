@@ -1,7 +1,6 @@
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -16,12 +15,33 @@ import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerReso
 
 import { CampaignStateIndicator } from './CampaignStateIndicator';
 
-const ProviderCampaignsListComponent: FunctionComponent<any> = () => {
+const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
+  provider,
+}) => {
   const ExpandableRow = useCallback(
     ({ row }) => <ProviderCampaignResourceExpandable campaign={row} />,
     [],
   );
-  const filter = useSelector(mapStateToFilter);
+  const filterValues: any = useSelector(
+    getFormValues('ProviderCampaignFilter'),
+  );
+  const filter = useMemo(() => {
+    const filter: Record<string, any> = {};
+    if (provider) {
+      filter.service_provider_uuid = provider.uuid;
+    }
+    if (filterValues) {
+      if (filterValues.state) {
+        filter.state = filterValues.state.map((option) => option.value);
+      }
+      if (filterValues.discount_type) {
+        filter.discount_type = filterValues.discount_type.map(
+          (option) => option.value,
+        );
+      }
+    }
+    return filter;
+  }, [filterValues, provider]);
   const props = useTable({
     table: 'marketplace-provider-campaigns',
     fetchData: createFetcher('promotions-campaigns'),
@@ -61,39 +81,14 @@ const ProviderCampaignsListComponent: FunctionComponent<any> = () => {
       hasQuery={true}
       hoverableRow={ProviderCampaignActions}
       expandableRow={ExpandableRow}
+      filters={<ProviderCampaignFilter />}
     />
   );
 };
-
-const mapStateToFilter = createSelector(
-  getFormValues('ProviderCampaignFilter'),
-  (filterValues: any) => {
-    const filter: Record<string, any> = {};
-    if (filterValues) {
-      if (filterValues.state) {
-        filter.state = filterValues.state.map((option) => option.value);
-      }
-      if (filterValues.provider) {
-        filter.service_provider_uuid = filterValues.provider.uuid;
-      }
-      if (filterValues.discount_type) {
-        filter.discount_type = filterValues.discount_type.map(
-          (option) => option.value,
-        );
-      }
-    }
-    return filter;
-  },
-);
 
 export const ProviderCampaignsList = ({ provider }) => {
   if (!provider) {
     return <CustomerResourcesListPlaceholder />;
   }
-  return (
-    <ProviderCampaignsListComponent
-      provider={provider}
-      filters={<ProviderCampaignFilter />}
-    />
-  );
+  return <ProviderCampaignsListComponent provider={provider} />;
 };

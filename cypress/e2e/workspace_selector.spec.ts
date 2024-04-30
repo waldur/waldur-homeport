@@ -60,10 +60,6 @@ describe('Workspace selector', () => {
 
   it('Lists all organizations by default', () => {
     cy.get('.organization-listing .list-group-item p.title')
-      .click({
-        force: true,
-        multiple: true,
-      })
       // Only matching organizations should be present
       .should(($p) =>
         expect(getTextList($p)).to.deep.eq(['Alice Lebowski', 'Bob', 'Web']),

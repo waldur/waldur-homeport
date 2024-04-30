@@ -1,11 +1,29 @@
-import { FunctionComponent } from 'react';
-import { components } from 'react-select';
+import { FC } from 'react';
+import { OptionProps, components } from 'react-select';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
-export const UserListOptionInline: FunctionComponent<any> = (props) => (
+type UserListOptionInlineProps = OptionProps<{
+  full_name: string;
+  email: string;
+  is_active: boolean;
+  registration_method: string;
+}>;
+
+export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
   <components.Option {...props}>
+    <style>
+      {`
+          #registration-method-tooltip {
+            z-index: 9999;
+          }
+          #inactive-user-tooltip {
+            z-index: 9999;
+          }
+        `}
+    </style>
+
     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       {props.data.full_name}
       {props.data.email && <>&nbsp;({props.data.email})</>}
@@ -14,7 +32,11 @@ export const UserListOptionInline: FunctionComponent<any> = (props) => (
           marginLeft: '5px',
         }}
       >
-        {format_inactive_users(props.data.is_active)}
+        {props.data.is_active === false && (
+          <Tip label={translate('Inactive')} id="inactive-user-tooltip">
+            <i className="fa fa-ban" />
+          </Tip>
+        )}
       </span>
       <span
         style={{
@@ -22,47 +44,15 @@ export const UserListOptionInline: FunctionComponent<any> = (props) => (
           marginLeft: 'auto',
         }}
       >
-        {format_registration_method(props.data.registration_method)}
+        <small>
+          <Tip
+            label={props.data.registration_method}
+            id="registration-method-tooltip"
+          >
+            <i className="fa fa-key" />
+          </Tip>
+        </small>
       </span>
     </div>
   </components.Option>
 );
-
-const format_registration_method = (registration_method) => {
-  return (
-    <small>
-      <style>
-        {`
-          #registration-method-tooltip {
-            z-index: 9999;
-          }
-          #inactive-user-tooltip {
-            z-index: 9999;
-          }
-        `}
-      </style>
-      <Tip label={registration_method} id="registration-method-tooltip">
-        <i className="fa fa-key" />
-      </Tip>
-    </small>
-  );
-};
-
-const format_inactive_users = (is_active) => {
-  return (
-    <small>
-      <style>
-        {`
-          #inactive-user-tooltip {
-            z-index: 9999;
-          }
-        `}
-      </style>
-      {is_active === false && (
-        <Tip label={translate('Inactive')} id="inactive-user-tooltip">
-          <i className="fa fa-ban" />
-        </Tip>
-      )}
-    </small>
-  );
-};

@@ -9,12 +9,7 @@ import { SimpleSelectField } from './SimpleSelectField';
 
 export const SystemVolumeTypeGroup: FunctionComponent<any> = (props) =>
   props.volumeTypes.length > 0 ? (
-    <FormGroup
-      label={translate('System volume type')}
-      required={true}
-      labelClassName={props.labelClassName}
-      valueClassName={props.valueClassName}
-    >
+    <FormGroup label={translate('System volume type')} required={true}>
       <Field
         name="system_volume_type"
         options={props.volumeTypes}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { FormContainer, FormContainerProps } from './FormContainer';
@@ -7,9 +7,9 @@ interface FormSectionContainerProps extends FormContainerProps {
   label: React.ReactNode;
 }
 
-export const FormSectionContainer: React.FC<FormSectionContainerProps> = (
-  props,
-) => {
+export const FormSectionContainer: React.FC<
+  PropsWithChildren<FormSectionContainerProps>
+> = (props) => {
   const { label, className = 'size-sm mx-0', ...rest } = props;
 
   return (

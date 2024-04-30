@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react';
+import { FC, useState } from 'react';
 import { Card, FormCheck, Stack } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
@@ -17,9 +17,10 @@ interface PublicOfferingPricingProps {
   canDeploy?: boolean;
 }
 
-export const PublicOfferingPricing: FunctionComponent<
-  PublicOfferingPricingProps
-> = ({ offering, canDeploy }) => {
+export const PublicOfferingPricing: FC<PublicOfferingPricingProps> = ({
+  offering,
+  canDeploy = true,
+}) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   const [period, setPeriod] = useState<'monthly' | 'yearly'>('yearly');
   const switchPeriod = () => {
@@ -119,8 +120,4 @@ export const PublicOfferingPricing: FunctionComponent<
       </Card.Body>
     </Card>
   );
-};
-
-PublicOfferingPricing.defaultProps = {
-  canDeploy: true,
 };

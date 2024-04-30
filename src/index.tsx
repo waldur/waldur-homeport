@@ -1,8 +1,7 @@
+import { createRoot } from 'react-dom/client';
+
 import './vendor';
 import './sass/noscript.scss';
-
-import ReactDOM from 'react-dom';
-
 import { Application } from './Application';
 
 import './auth/module';
@@ -24,4 +23,6 @@ import './marketplace-remote/marketplace';
 import './paypal/events';
 import './vmware/module';
 
-ReactDOM.render(<Application />, document.getElementById('react-root'));
+const domNode = document.getElementById('react-root');
+const root = createRoot(domNode);
+root.render(<Application />);

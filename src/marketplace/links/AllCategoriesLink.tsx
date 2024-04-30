@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React, { useMemo } from 'react';
+import React, { PropsWithChildren, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -33,7 +33,9 @@ const useAllCategoriesLink = () => {
   }, [workspace, currentState, params]);
 };
 
-export const AllCategoriesLink: React.FC<OwnProps> = (props) => {
+export const AllCategoriesLink: React.FC<PropsWithChildren<OwnProps>> = (
+  props,
+) => {
   const { state, stateParams } = useAllCategoriesLink();
   return (
     <Link state={state} params={stateParams} className={props.className}>

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import './ProgressSteps.scss';
 
@@ -16,7 +16,7 @@ interface ProgressStepsProps {
   className?: string;
 }
 
-export const ProgressSteps: FC<ProgressStepsProps> = ({
+export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
   steps,
   className,
   bgClass,

@@ -79,11 +79,7 @@ export const BroadcastSaveAsTemplateDialog = connect()(
               >
                 <i className="fa fa-long-arrow-left" /> {translate('Back')}
               </Button>
-              <SubmitButton
-                block={false}
-                submitting={submitting}
-                label={translate('Save')}
-              />
+              <SubmitButton submitting={submitting} label={translate('Save')} />
             </div>
           </FormContainer>
         </form>

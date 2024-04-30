@@ -31,12 +31,7 @@ export const ProjectCreateGroup = () => {
       }),
     );
   return (
-    <FormGroup
-      labelClassName="col-sm-3"
-      valueClassName="col-sm-9"
-      label={translate('Project')}
-      required={true}
-    >
+    <FormGroup label={translate('Project')} required={true}>
       <Button onClick={openProjectCreateDialog}>
         {initialValues ? (
           <i className="fa fa-pencil" />

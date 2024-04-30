@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { FC } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import './TableHeader.scss';
@@ -59,11 +59,11 @@ const TableTh = ({ column, onSortClick, currentSorting }) => (
   </th>
 );
 
-export const TableHeader: React.FC<TableHeaderProps> = ({
+export const TableHeader: FC<TableHeaderProps> = ({
   columns,
   onSortClick,
   currentSorting,
-  expandableRow,
+  expandableRow = false,
   rows,
   enableMultiSelect,
   onSelectAllRows,
@@ -101,8 +101,4 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
       </tr>
     </thead>
   );
-};
-
-TableHeader.defaultProps = {
-  expandableRow: false,
 };

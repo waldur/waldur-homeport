@@ -28,21 +28,20 @@ interface UserEditFormData {
   description: string;
   phone_number: string;
 }
-
-interface UserEditFormProps extends InjectedFormProps {
+interface OwnProps {
   updateUser(data: UserEditFormData): Promise<void>;
   initial?: boolean;
   isVisibleForSupportOrStaff: boolean;
   fieldIsVisible: (field: string) => boolean;
   isRequired: (field: string) => boolean;
-  nativeNameIsVisible: () => boolean;
+  nativeNameIsVisible: boolean;
   user: UserDetails;
   fieldIsProtected(field: string): boolean;
 }
 
-export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
-  props,
-) => (
+export const PureUserEditForm: FunctionComponent<
+  OwnProps & InjectedFormProps<{}, OwnProps>
+> = (props) => (
   <form onSubmit={props.handleSubmit(props.updateUser)}>
     <FormContainer submitting={props.submitting} floating={true}>
       <EmailField
@@ -198,7 +197,7 @@ export const PureUserEditForm: FunctionComponent<UserEditFormProps> = (
   </form>
 );
 
-const enhance = reduxForm({
+const enhance = reduxForm<{}, OwnProps>({
   form: 'userEdit',
 });
 

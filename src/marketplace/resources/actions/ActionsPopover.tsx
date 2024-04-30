@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, PropsWithChildren, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -14,7 +14,7 @@ import {
   ResourceActionMenuContextModel,
 } from './ResourceActionMenuContext';
 
-const ModalMessage: FC<{}> = ({ children }) => (
+const ModalMessage: FC<PropsWithChildren> = ({ children }) => (
   <div className="justify-content-center mx-5 my-5">
     <div className="mx-auto">{children}</div>
   </div>

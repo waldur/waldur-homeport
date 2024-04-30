@@ -21,8 +21,6 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
 }) => (
   <FormGroup
     label={translate('Business hours')}
-    labelClassName="col-sm-3"
-    valueClassName="col-sm-8"
     description={translate('Daily available booking time range')}
   >
     <Form.Label className="col-xs-2" htmlFor="react-select-startTime--value">

@@ -12,7 +12,7 @@ export const AuthLoginFailed: FunctionComponent = () => {
   return (
     <div className="middle-box text-center">
       <h3 className="app-title centered">{translate('Login failed')}</h3>
-      {message && <p className="mt-3">{message}</p>}
+      {typeof message === 'string' && <p className="mt-3">{message}</p>}
       <p className="mt-3">
         <Link state="login"> &lt; {translate('Back to login')} </Link>
       </p>

@@ -33,10 +33,7 @@ export const UserAgreementsList: FunctionComponent<{}> = () => {
       hoverableRow={({ row }) => (
         <ButtonGroup>
           <UserAgreementsEditButton row={row} refetch={props.fetch} />
-          <UserAgreementDeleteButton
-            userAgreement={row}
-            refetch={props.fetch}
-          />
+          <UserAgreementDeleteButton userAgreement={row} />
         </ButtonGroup>
       )}
       expandableRow={UserAgreementsExpandableRow}

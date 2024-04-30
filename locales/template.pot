@@ -10857,7 +10857,6 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/routes.ts
-#: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/dashboard/ProviderProfile.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Field } from 'redux-form';
 
 import { FormGroup } from './FormGroup';
@@ -10,7 +10,9 @@ export interface FormContainerProps {
   floating?: boolean;
 }
 
-export const FormContainer: React.FC<FormContainerProps> = (props) => {
+export const FormContainer: React.FC<PropsWithChildren<FormContainerProps>> = (
+  props,
+) => {
   const { className = 'size-sm' } = props;
 
   return (

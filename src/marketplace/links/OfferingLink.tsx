@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -47,7 +47,7 @@ export const useOfferingDetailsLink = () => {
   return { state, stateParams };
 };
 
-export const OfferingLink: React.FC<OwnProps> = (props) => {
+export const OfferingLink: React.FC<PropsWithChildren<OwnProps>> = (props) => {
   const { state, stateParams } = useOfferingDetailsLink();
   return (
     <Link

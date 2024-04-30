@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
@@ -24,19 +24,18 @@ export const wrapTooltip = (label, children, rest?) =>
     children
   );
 
-export const ActionButton: React.FC<ActionButtonProps> = (props) =>
+export const ActionButton: FC<ActionButtonProps> = ({
+  className = 'ms-3',
+  variant = 'light',
+  ...props
+}) =>
   wrapTooltip(
     props.tooltip,
     <Button
-      className={classNames(props.className, { disabled: props.disabled })}
+      className={classNames(className, { disabled: props.disabled })}
       onClick={props.action}
-      variant={props.variant}
+      variant={variant}
     >
       {props.icon && <i className={props.icon} />} {props.title}
     </Button>,
   );
-
-ActionButton.defaultProps = {
-  className: 'ms-3',
-  variant: 'light',
-};

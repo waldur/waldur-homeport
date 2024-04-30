@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
@@ -32,9 +32,9 @@ const tabs: PageBarTab[] = [
   { key: 'pricing', title: translate('Pricing') },
 ];
 
-export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
+export const PublicOfferingDetailsBar: FC<OwnProps> = ({
   offering,
-  canDeploy,
+  canDeploy = true,
 }) => {
   return (
     <PageBarTabs
@@ -56,8 +56,4 @@ export const PublicOfferingDetailsBar: FunctionComponent<OwnProps> = ({
       }
     />
   );
-};
-
-PublicOfferingDetailsBar.defaultProps = {
-  canDeploy: true,
 };

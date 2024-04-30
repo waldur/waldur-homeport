@@ -18,7 +18,7 @@ import {
   getCustomerChecklists,
   updateCustomerChecklists,
 } from './api';
-import { Category, Checklist } from './types';
+import { Category } from './types';
 
 const formatRolesList = (roles) =>
   roles.length === 0 ? 'N/A' : roles.map((role) => formatRole(role)).join(', ');
@@ -30,8 +30,8 @@ export const ChecklistCustomer: FunctionComponent = () => {
   const [enabled, setEnabled] = useState<Record<string, boolean>>({});
   const dispatch = useDispatch();
 
-  const categoriesState = useAsync<Category[]>(getCategories);
-  const checklistsState = useAsync<Checklist[]>(async () => {
+  const categoriesState = useAsync(getCategories);
+  const checklistsState = useAsync(async () => {
     if (category) {
       const checklists = await getChecklists(category.uuid);
       const customerChecklists = await getCustomerChecklists(customer.uuid);
@@ -133,11 +133,16 @@ export const ChecklistCustomer: FunctionComponent = () => {
                       type="radio"
                       name={`checklist-${checklist.uuid}`}
                     >
-                      <ToggleButton value="true" disabled={submitState.loading}>
+                      <ToggleButton
+                        value="true"
+                        id="true"
+                        disabled={submitState.loading}
+                      >
                         {translate('Yes')}
                       </ToggleButton>
                       <ToggleButton
                         value="false"
+                        id="false"
                         disabled={submitState.loading}
                       >
                         {translate('No')}
@@ -150,7 +155,7 @@ export const ChecklistCustomer: FunctionComponent = () => {
               ))}
             </tbody>
           </Table>
-          <SubmitButton submitting={submitState.loading} block={false}>
+          <SubmitButton submitting={submitState.loading}>
             {translate('Save')}
           </SubmitButton>
         </form>

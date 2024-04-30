@@ -4,10 +4,7 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
-import {
-  Category,
-  ServiceProvider as ServiceProviderType,
-} from '@waldur/marketplace/types';
+import { ServiceProvider as ServiceProviderType } from '@waldur/marketplace/types';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 import { ServiceProviderHeroSection } from './ServiceProviderHeroSection';
@@ -32,7 +29,7 @@ export const ServiceProvider: FunctionComponent<ServiceProviderProps> = ({
     loading,
     error,
     value: categories,
-  } = useAsync<Category[]>(
+  } = useAsync(
     () =>
       getCategories({
         params: {

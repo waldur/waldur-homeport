@@ -52,7 +52,6 @@ const HookDetailsComponent = ({
         {!eventGroupsState.error && (
           <SubmitButton
             variant="primary"
-            block={false}
             submitting={submitting}
             invalid={invalid}
           >

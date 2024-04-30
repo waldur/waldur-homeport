@@ -1,4 +1,4 @@
-import { useState, createElement, FunctionComponent } from 'react';
+import { useState, createElement, FC } from 'react';
 
 import { WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
@@ -8,15 +8,16 @@ interface CallOfferingCreateFormProps {
   onSubmit: WizardFormStepProps['onSubmit'];
   submitLabel: string;
   steps: string[];
-  wizardForms: FunctionComponent<WizardFormStepProps>[];
+  wizardForms: FC<WizardFormStepProps>[];
   form?: string;
   initialValues?: any;
   data: any;
 }
 
-export const CallOfferingCreateForm: FunctionComponent<
-  CallOfferingCreateFormProps
-> = (props) => {
+export const CallOfferingCreateForm: FC<CallOfferingCreateFormProps> = ({
+  form = 'CallOfferingForm',
+  ...props
+}) => {
   const [step, setStep] = useState(0);
   const [lastVisitedStep, setLastVisitedStep] = useState(0);
   const isLast = step === props.steps.length - 1;
@@ -33,7 +34,7 @@ export const CallOfferingCreateForm: FunctionComponent<
   const submitLabel = isLast ? props.submitLabel : translate('Next');
 
   return createElement(props.wizardForms[step], {
-    form: props.form,
+    form,
     title: props.title,
     onSubmit: isLast ? props.onSubmit : nextStep,
     onPrev: prevStep,
@@ -44,8 +45,4 @@ export const CallOfferingCreateForm: FunctionComponent<
     initialValues: props.initialValues,
     data: props.data,
   });
-};
-
-CallOfferingCreateForm.defaultProps = {
-  form: 'CallOfferingForm',
 };

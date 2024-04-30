@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
@@ -24,7 +24,7 @@ const Border = () => (
   />
 );
 
-const SignInWithLocalAccount: React.FC<SigninWithLocalAccountProps> = ({
+const SignInWithLocalAccount: FC<SigninWithLocalAccountProps> = ({
   setShowForm,
 }) => (
   <button
@@ -36,7 +36,9 @@ const SignInWithLocalAccount: React.FC<SigninWithLocalAccountProps> = ({
   </button>
 );
 
-export const LocalLogin: React.FC<LocalLoginProps> = ({ enableSeperator }) => {
+export const LocalLogin: FC<LocalLoginProps> = ({
+  enableSeperator = false,
+}) => {
   const [showSigninForm, setShowSigninForm] = useState(false);
   return (
     <>
@@ -54,8 +56,4 @@ export const LocalLogin: React.FC<LocalLoginProps> = ({ enableSeperator }) => {
       )}
     </>
   );
-};
-
-LocalLogin.defaultProps = {
-  enableSeperator: false,
 };

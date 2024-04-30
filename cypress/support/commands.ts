@@ -101,7 +101,7 @@ Cypress.Commands.add('selectRole', (label) => {
 });
 
 Cypress.Commands.add('selectTheFirstOptionOfDropdown', () => {
-  cy.get('*div[id^="react-select"]').first().click({ force: true }); // get ids which start with "react-select"
+  cy.get('[role="option"]').first().click({ force: true }); // get ids which start with "react-select"
 });
 
 Cypress.Commands.add(

@@ -55,7 +55,11 @@ export const OrganizationDetails: FunctionComponent<
         <Field label={translate('Postal')} value={props.customer.postal} />
         <Field
           label={translate('Phone number')}
-          value={props.customer.phone_number}
+          value={
+            typeof props.customer.phone_number === 'string'
+              ? props.customer.phone_number
+              : undefined
+          }
         />
         <Field
           label={translate('Access subnets')}

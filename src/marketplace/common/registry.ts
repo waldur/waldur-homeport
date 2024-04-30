@@ -1,5 +1,3 @@
-import { Omit } from 'react-redux';
-
 import {
   Offering,
   Attribute,

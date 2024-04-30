@@ -11,7 +11,10 @@ interface StepsListProps {
   getTabLabel?(tab: string): string;
 }
 
-export const StepsList: FunctionComponent<StepsListProps> = (props) => {
+export const StepsList: FunctionComponent<StepsListProps> = ({
+  getTabLabel = (s) => s,
+  ...props
+}) => {
   const stepIndex = props.choices.indexOf(props.value);
 
   return (
@@ -24,7 +27,7 @@ export const StepsList: FunctionComponent<StepsListProps> = (props) => {
       {props.choices.map((stepId, index) => (
         <Step
           key={index}
-          title={`${index + 1}. ${props.getTabLabel(stepId)}`}
+          title={`${index + 1}. ${getTabLabel(stepId)}`}
           complete={stepIndex > index}
           active={stepIndex === index}
           onClick={() => props.onClick && props.onClick(stepId)}
@@ -32,8 +35,4 @@ export const StepsList: FunctionComponent<StepsListProps> = (props) => {
       ))}
     </div>
   );
-};
-
-StepsList.defaultProps = {
-  getTabLabel: (s) => s,
 };

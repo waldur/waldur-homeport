@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import SVG from 'react-inlinesvg';
 
-export const MenuAccordion: React.FC<{
+interface MenuAccordionProps {
   title: React.ReactNode;
   itemId?: string;
   iconPath?: string;
-}> = (props) => (
+}
+
+export const MenuAccordion: React.FC<PropsWithChildren<MenuAccordionProps>> = (
+  props,
+) => (
   <div
     className="menu-item menu-accordion"
     data-kt-menu-trigger="click"

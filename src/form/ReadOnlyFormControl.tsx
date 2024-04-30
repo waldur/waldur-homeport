@@ -1,5 +1,10 @@
 import classNames from 'classnames';
-import { FunctionComponent, ReactNode, cloneElement } from 'react';
+import {
+  FunctionComponent,
+  PropsWithChildren,
+  ReactNode,
+  cloneElement,
+} from 'react';
 import { Form } from 'react-bootstrap';
 
 interface ReadOnlyFormControlProps {
@@ -15,7 +20,7 @@ interface ReadOnlyFormControlProps {
 }
 
 export const ReadOnlyFormControl: FunctionComponent<
-  ReadOnlyFormControlProps
+  PropsWithChildren<ReadOnlyFormControlProps>
 > = (props) => {
   const {
     label,

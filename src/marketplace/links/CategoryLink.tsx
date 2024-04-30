@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React, { useMemo } from 'react';
+import React, { PropsWithChildren, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -33,7 +33,7 @@ export const useCategoryLink = () => {
   }, [workspace, currentState, params]);
 };
 
-export const CategoryLink: React.FC<OwnProps> = (props) => {
+export const CategoryLink: React.FC<PropsWithChildren<OwnProps>> = (props) => {
   const { state, stateParams } = useCategoryLink();
   return (
     <Link

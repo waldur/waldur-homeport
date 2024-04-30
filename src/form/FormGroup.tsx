@@ -1,10 +1,16 @@
 import classNames from 'classnames';
-import { cloneElement, PureComponent, ReactNode } from 'react';
+import {
+  cloneElement,
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  useContext,
+  useEffect,
+} from 'react';
 import { Form } from 'react-bootstrap';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { omit } from '@waldur/core/utils';
 
 import { FormFieldsContext } from './context';
 import { FieldError } from './FieldError';
@@ -16,85 +22,82 @@ export interface FormGroupProps extends FormField {
   actions?: ReactNode;
 }
 
-export class FormGroup extends PureComponent<FormGroupProps> {
-  static contextType = FormFieldsContext;
+export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
+  const context = useContext(FormFieldsContext);
 
-  static defaultProps = {
-    floating: false,
-  };
+  const {
+    input,
+    required,
+    label,
+    description,
+    tooltip,
+    hideLabel,
+    meta,
+    children,
+    floating = false,
+    actions,
+    clearOnUnmount,
+    ...rest
+  } = props;
 
-  render() {
-    const {
-      input,
-      required,
-      label,
-      description,
-      tooltip,
-      hideLabel,
-      meta: { touched, error },
-      children,
-      floating,
-      actions,
-      ...rest
-    } = this.props;
-    const newProps = {
-      input,
-      ...omit(rest, 'clearOnUnmount'),
-      readOnly: this.context.readOnlyFields.includes(input.name),
-      onBlur: (event) => {
-        if (!this.props.noUpdateOnBlur) {
-          this.props.input.onBlur(event);
-        }
-      },
-      isInvalid: touched && !!error,
+  useEffect(() => {
+    return () => {
+      if (clearOnUnmount === false) {
+        return;
+      }
+      meta.dispatch(clearFields(meta.form, false, false, input.name));
     };
-    const labelNode = !hideLabel && (
-      <Form.Label className={classNames({ required })}>
-        {tooltip && (
-          <Tip id="form-field-tooltip" label={tooltip}>
-            <i className="fa fa-question-circle" />{' '}
-          </Tip>
-        )}
-        {label}
-      </Form.Label>
-    );
-    const main = (
-      <div
-        className={classNames(
-          {
-            'form-floating': floating,
-            'flex-grow-1': Boolean(actions),
-          },
-          'position-relative mb-7',
-        )}
-      >
-        {!floating && labelNode}
-        {cloneElement(children as any, newProps)}
-        {floating && labelNode}
-        {description && (
-          <Form.Text muted={true} className="mb-0">
-            {description}
-          </Form.Text>
-        )}
-        {touched && <FieldError error={error} />}
+  }, []);
+
+  const newProps = {
+    input,
+    ...rest,
+    readOnly: context.readOnlyFields.includes(input.name),
+    onBlur: (event) => {
+      if (!props.noUpdateOnBlur) {
+        props.input.onBlur(event);
+      }
+    },
+    isInvalid: meta.touched && !!meta.error,
+  };
+  const labelNode = !hideLabel && (
+    <Form.Label className={classNames({ required })}>
+      {tooltip && (
+        <Tip id="form-field-tooltip" label={tooltip}>
+          <i className="fa fa-question-circle" />{' '}
+        </Tip>
+      )}
+      {label}
+    </Form.Label>
+  );
+  const main = (
+    <div
+      className={classNames(
+        {
+          'form-floating': floating,
+          'flex-grow-1': Boolean(actions),
+        },
+        'position-relative mb-7',
+      )}
+    >
+      {!floating && labelNode}
+      {cloneElement(children as any, newProps)}
+      {floating && labelNode}
+      {description && (
+        <Form.Text muted={true} className="mb-0">
+          {description}
+        </Form.Text>
+      )}
+      {meta.touched && <FieldError error={meta.error} />}
+    </div>
+  );
+  if (actions) {
+    return (
+      <div className="d-flex align-items-start gap-4">
+        {main}
+        {actions}
       </div>
     );
-    if (actions) {
-      return (
-        <div className="d-flex align-items-start gap-4">
-          {main}
-          {actions}
-        </div>
-      );
-    }
-    return main;
   }
-
-  componentWillUnmount() {
-    const { meta, input, clearOnUnmount } = this.props;
-    if (clearOnUnmount === false) {
-      return;
-    }
-    meta.dispatch(clearFields(meta.form, false, false, input.name));
-  }
-}
+  return main;
+};

@@ -6,7 +6,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 
 import { MarketplaceKeyValueDialog } from './MarketplaceKeyValueDialog';
 
-export const KeyValueButton: FunctionComponent<any> = (props) => {
+export const KeyValueButton: FunctionComponent<{ items; title }> = (props) => {
   const dispatch = useDispatch();
 
   const showDetails = useCallback(() => {

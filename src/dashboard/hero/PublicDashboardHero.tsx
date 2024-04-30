@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, ReactNode } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 import { DashboardHeroLogo } from './DashboardHeroLogo';
@@ -23,7 +23,9 @@ interface PublicDashboardHeroProps {
   className?: string;
 }
 
-export const PublicDashboardHero: FC<PublicDashboardHeroProps> = (props) => {
+export const PublicDashboardHero: FC<
+  PropsWithChildren<PublicDashboardHeroProps>
+> = (props) => {
   const body = (
     <Row className={classNames('public-dashboard-hero-body', props.className)}>
       <Col md={8} sm={12} className="d-flex">

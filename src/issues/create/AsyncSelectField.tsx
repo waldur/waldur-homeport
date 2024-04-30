@@ -19,7 +19,7 @@ export const AsyncSelectField = ({
     <Select
       value={selectedValue}
       onChange={onChange}
-      options={asyncValue?.options}
+      options={(asyncValue as any)?.options}
       onInputChange={setInputValue}
       isLoading={isLoading}
       {...props}

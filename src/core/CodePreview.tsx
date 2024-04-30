@@ -1,10 +1,10 @@
 import Markdown from 'markdown-to-jsx';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatTemplate } from '@waldur/i18n/translate';
 
-const CodeBlock: FunctionComponent = ({ children }) => (
+const CodeBlock: FunctionComponent<PropsWithChildren> = ({ children }) => (
   <div className="code-block">
     <pre>
       <div className="me-1 code-block-pre">$</div>

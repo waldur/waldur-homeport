@@ -4,7 +4,7 @@ import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 
 export const fetchOfferings = async (keyword: string, pageIndex: number) => {
   if (!keyword) {
-    return [];
+    return { items: [], totalItems: 0 };
   }
   const response = await getOfferingsByServiceProvider({
     ...ANONYMOUS_CONFIG,

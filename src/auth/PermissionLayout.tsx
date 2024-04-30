@@ -1,5 +1,12 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import React, { useEffect, createContext, useContext, useState } from 'react';
+import {
+  FC,
+  useEffect,
+  createContext,
+  useContext,
+  useState,
+  PropsWithChildren,
+} from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -44,7 +51,7 @@ export const PermissionContext = createContext<
   Partial<PermissionContextInterface>
 >({});
 
-const PermissionDataProvider: React.FC = ({ children }) => {
+const PermissionDataProvider: FC<PropsWithChildren> = ({ children }) => {
   const [permission, setPermission] = useState<Permission>('allowed');
   const [banner, setBanner] = useState<PermissionMessage>({
     title: '',
@@ -98,7 +105,7 @@ const RestrictedView = () => {
   );
 };
 
-const PermissionLayout: React.FC = ({ children }) => {
+const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
   const {
     permission,
     setPermission,

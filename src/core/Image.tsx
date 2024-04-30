@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 
 interface ImageProps {
   src: string;
@@ -7,11 +7,11 @@ interface ImageProps {
   classes?: string;
 }
 
-export const Image: React.FC<ImageProps> = ({
+export const Image: FC<ImageProps> = ({
   src,
   size,
   isContain,
-  classes,
+  classes = '',
 }) => {
   return (
     <div
@@ -26,8 +26,4 @@ export const Image: React.FC<ImageProps> = ({
       ></div>
     </div>
   );
-};
-
-Image.defaultProps = {
-  classes: '',
 };

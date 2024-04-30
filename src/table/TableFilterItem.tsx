@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { isEqual } from 'lodash';
-import React, { useCallback, useEffect } from 'react';
+import React, { FC, PropsWithChildren, useCallback, useEffect } from 'react';
 import { Accordion, Badge } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, change, formValueSelector } from 'redux-form';
@@ -16,9 +16,18 @@ interface TableFilterItem {
   showValueBadge?: boolean;
 }
 
-const TableHeaderFilterItem: React.FunctionComponent<TableFilterItem> = (
-  props,
-) => {
+const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
+  badgeValue = (value) => {
+    if (value)
+      if (value instanceof Array) {
+        return value.length;
+      } else {
+        return 1;
+      }
+    else return null;
+  },
+  ...props
+}) => {
   const [open, setOpen] = React.useState(false);
   const toggleClick = React.useCallback(
     (value, e) => {
@@ -50,9 +59,9 @@ const TableHeaderFilterItem: React.FunctionComponent<TableFilterItem> = (
               className="filter-value"
               style={!props.ellipsis ? { maxWidth: 'unset' } : undefined}
             >
-              {props.badgeValue(value) ? (
+              {badgeValue(value) ? (
                 <Badge bg="secondary" className="text-dark">
-                  {props.badgeValue(value)}
+                  {badgeValue(value)}
                 </Badge>
               ) : null}
             </div>
@@ -64,18 +73,6 @@ const TableHeaderFilterItem: React.FunctionComponent<TableFilterItem> = (
       </span>
     </button>
   );
-};
-
-TableHeaderFilterItem.defaultProps = {
-  badgeValue: (value) => {
-    if (value)
-      if (value instanceof Array) {
-        return value.length;
-      } else {
-        return 1;
-      }
-    else return null;
-  },
 };
 
 const RemoveButton = ({ onClick }) => (
@@ -135,9 +132,18 @@ const TableSidebarFilterValues = ({
   ) : null;
 };
 
-const TableSidebarFilterItem: React.FunctionComponent<TableFilterItem> = (
-  props,
-) => {
+const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
+  getValueLabel = (value) => {
+    if (value)
+      if (Array.isArray(value)) {
+        return value.length;
+      } else {
+        return value?.label || value;
+      }
+    else return value;
+  },
+  ...props
+}) => {
   const { setFilter, form } = React.useContext(TableFilterContext);
 
   const _setFilter = useCallback(
@@ -149,7 +155,7 @@ const TableSidebarFilterItem: React.FunctionComponent<TableFilterItem> = (
         component: () => (
           <TableSidebarFilterValues
             value={value}
-            getValueLabel={props.getValueLabel}
+            getValueLabel={getValueLabel}
             badgeValue={props.badgeValue}
             ellipsis={props.ellipsis}
             remove={removeValue}
@@ -199,7 +205,7 @@ const TableSidebarFilterItem: React.FunctionComponent<TableFilterItem> = (
             component={({ input: { value } }) => (
               <TableSidebarFilterValues
                 value={value}
-                getValueLabel={props.getValueLabel}
+                getValueLabel={getValueLabel}
                 badgeValue={props.badgeValue}
                 ellipsis={props.ellipsis}
                 remove={removeValue}
@@ -212,29 +218,14 @@ const TableSidebarFilterItem: React.FunctionComponent<TableFilterItem> = (
   );
 };
 
-TableSidebarFilterItem.defaultProps = {
-  getValueLabel: (value) => {
-    if (value)
-      if (Array.isArray(value)) {
-        return value.length;
-      } else {
-        return value?.label || value;
-      }
-    else return value;
-  },
-};
-
 /** Please put only one child in each table filter item. */
-export const TableFilterItem: React.FunctionComponent<TableFilterItem> = (
-  props,
-) => {
+export const TableFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
+  ellipsis = true,
+  ...props
+}) => {
   const { filterPosition } = React.useContext(TableFilterContext);
   if (filterPosition === 'sidebar') {
-    return <TableSidebarFilterItem {...props} />;
+    return <TableSidebarFilterItem ellipsis={ellipsis} {...props} />;
   }
-  return <TableHeaderFilterItem {...props} />;
-};
-
-TableFilterItem.defaultProps = {
-  ellipsis: true,
+  return <TableHeaderFilterItem ellipsis={ellipsis} {...props} />;
 };

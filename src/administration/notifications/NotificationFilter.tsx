@@ -22,7 +22,7 @@ const options = [
   },
 ];
 
-const PureNotificationFilter: FunctionComponent<any> = ({ form }) => {
+const PureNotificationFilter: FunctionComponent<{ form }> = ({ form }) => {
   useReinitializeFilterFromUrl(form);
   return (
     <>

@@ -33,7 +33,7 @@ export const ArchivePlanButton = ({ plan, refetch }) => {
     }
   };
   return (
-    <Dropdown.Item variant="danger" onClick={handler}>
+    <Dropdown.Item onClick={handler}>
       <i className="fa fa-trash" /> {translate('Archive')}
     </Dropdown.Item>
   );

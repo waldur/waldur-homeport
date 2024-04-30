@@ -33,7 +33,7 @@ const StateField = ({ row }) => {
   );
 };
 
-const filtersSelctor = createSelector(
+const mapStateToFilter = createSelector(
   getFormValues(ADMIN_HOOKS_LIST_FILTER_FORM_ID),
   (filters: any) => {
     const result: Record<string, any> = {};
@@ -48,8 +48,8 @@ const getDestinationField = (row) => row.destination_url || row.email || 'N/A';
 const getEventsField = (row) =>
   row.event_groups.map(formatEventTitle).join(', ');
 
-export const HooksList: FunctionComponent<any> = () => {
-  const filter = useSelector(filtersSelctor);
+export const HooksList: FunctionComponent = () => {
+  const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: ADMIN_HOOK_LIST_ID,
     fetchData: createFetcher('hooks'),

@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
@@ -13,23 +14,25 @@ export interface UserAgreementsFormData {
   content: string;
 }
 
-const agreementTypeLabelMap = {
-  pp: 'Privacy policy',
-  tos: 'Terms of service',
-};
-
-export const UserAgreementsForm = ({
-  submitting,
-  formValues,
-  handleSubmit,
-  initialValues,
-  refetch,
-}: {
+interface UserAgreementsFormProps {
   submitting: boolean;
   formValues: UserAgreementsFormData;
   handleSubmit;
   initialValues;
   refetch;
+}
+
+const agreementTypeLabelMap = {
+  pp: 'Privacy policy',
+  tos: 'Terms of service',
+};
+
+export const UserAgreementsForm: FC<UserAgreementsFormProps> = ({
+  submitting,
+  formValues,
+  handleSubmit,
+  initialValues,
+  refetch,
 }) => {
   const dispatch = useDispatch();
   const callback = async (formData: UserAgreementsFormData) => {
@@ -49,11 +52,7 @@ export const UserAgreementsForm = ({
           style={{ height: '520px' }}
         />
         <div className="mb-5 text-end">
-          <SubmitButton
-            block={false}
-            submitting={submitting}
-            label={translate('Save')}
-          />
+          <SubmitButton submitting={submitting} label={translate('Save')} />
         </div>
       </FormContainer>
     </form>

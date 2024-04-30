@@ -9,15 +9,8 @@ import { SystemVolumeTypeGroup } from './SystemVolumeTypeGroup';
 
 export const NodeStorageGroup: FunctionComponent<any> = (props) => (
   <>
-    <SystemVolumeSizeGroup
-      labelClassName={props.labelClassName}
-      valueClassName={props.valueClassName}
-    />
-    <SystemVolumeTypeGroup
-      volumeTypes={props.volumeTypes}
-      labelClassName={props.labelClassName}
-      valueClassName={props.valueClassName}
-    />
+    <SystemVolumeSizeGroup />
+    <SystemVolumeTypeGroup volumeTypes={props.volumeTypes} />
     {props.mountPoints.length > 0 &&
       !ENV.plugins.WALDUR_RANCHER.DISABLE_DATA_VOLUME_CREATION && (
         <FieldArray

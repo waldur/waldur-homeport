@@ -14,7 +14,7 @@ export const FormSteps: FC<{
   completedSteps?: boolean[];
   errors?;
   criticalErrors?;
-}> = ({ steps, completedSteps, errors, criticalErrors }) => {
+}> = ({ steps, completedSteps = [], errors = [], criticalErrors }) => {
   const nonRequiredErrors = useMemo(() => {
     const errorsFlatten = flattenObject(errors);
     const result = {};
@@ -132,9 +132,4 @@ export const FormSteps: FC<{
       </div>
     </div>
   );
-};
-
-FormSteps.defaultProps = {
-  completedSteps: [],
-  errors: [],
 };

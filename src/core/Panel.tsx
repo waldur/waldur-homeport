@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { Card } from 'react-bootstrap';
 
 interface PanelProps {
@@ -7,7 +7,7 @@ interface PanelProps {
   actions?: React.ReactNode;
 }
 
-export const Panel: React.FC<PanelProps> = ({
+export const Panel: React.FC<PropsWithChildren<PanelProps>> = ({
   title,
   children,
   className,

@@ -90,7 +90,7 @@ const RenderMenuItems = ({ items, project, counters = {} }) => {
   );
 };
 
-export const ResourcesMenu = ({ anonymous }) => {
+export const ResourcesMenu = ({ anonymous = false }) => {
   const currentCustomer = useSelector(getCustomer);
   const project = useSelector(getProject);
 
@@ -196,8 +196,4 @@ export const ResourcesMenu = ({ anonymous }) => {
       ) : null}
     </MenuAccordion>
   ) : null;
-};
-
-ResourcesMenu.defaultProps = {
-  anonymous: false,
 };

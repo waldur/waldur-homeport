@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { FC, useRef } from 'react';
+import { FC, PropsWithChildren, useRef } from 'react';
 
 import useOnScreen from '@waldur/core/useOnScreen';
 
 import './FloatingButton.scss';
 
-export const FloatingButton: FC<{}> = (props) => {
+export const FloatingButton: FC<PropsWithChildren> = (props) => {
   const mainButtonRef = useRef(null);
   const isOnScreen = useOnScreen(mainButtonRef);
 

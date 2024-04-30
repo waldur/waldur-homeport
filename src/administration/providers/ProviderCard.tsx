@@ -42,7 +42,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
   provider,
   type,
   refetch,
-  editable,
+  editable = true,
 }) => {
   const dispatch = useDispatch();
 
@@ -144,8 +144,4 @@ export const ProviderCard: FC<ProviderCardProps> = ({
       </Card.Body>
     </Card>
   );
-};
-
-ProviderCard.defaultProps = {
-  editable: true,
 };

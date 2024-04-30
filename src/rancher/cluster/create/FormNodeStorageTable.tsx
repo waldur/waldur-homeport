@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, PropsWithChildren, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { BaseFieldProps, Field } from 'redux-form';
 
@@ -31,7 +31,9 @@ interface FormNodeStorageRowProps {
   onDeleteRow?(): void;
 }
 
-export const FormNodeStorageTable: FC<FormNodeStorageTableProps> = (props) => {
+export const FormNodeStorageTable: FC<
+  PropsWithChildren<FormNodeStorageTableProps>
+> = (props) => {
   return (
     <Form.Group>
       <div>
@@ -52,7 +54,7 @@ export const FormNodeStorageTable: FC<FormNodeStorageTableProps> = (props) => {
   );
 };
 
-export const FormNodeStorageRow = (props: FormNodeStorageRowProps) => {
+export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
   useEffect(() => {
     if (props?.defaultVolumeType) {
       props.change(

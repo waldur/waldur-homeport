@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -12,12 +12,15 @@ import { ProviderRobotAccountFilter } from './ProviderRobotAccountFilter';
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
-export const ProviderRobotAccountList: FunctionComponent<{ provider }> = ({
-  provider,
-}) => {
+interface FilterValues {
+  project?: { uuid };
+  customer?: { uuid };
+}
+
+export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
   const filterValues = useSelector(
     getFormValues('ProviderRobotAccountFilter'),
-  ) as { project?: { uuid }; customer?: { uuid } };
+  ) as FilterValues;
   const customer = useSelector(getCustomer);
   const filter = useMemo(() => {
     const baseFilter: {
@@ -35,11 +38,13 @@ export const ProviderRobotAccountList: FunctionComponent<{ provider }> = ({
 
     return baseFilter;
   }, [filterValues, customer]);
+
   const tableProps = useTable({
     table: 'provider-robot-accounts',
     fetchData: createFetcher('marketplace-robot-accounts'),
     filter,
   });
+
   const columns = [
     {
       title: translate('Organization'),

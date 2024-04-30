@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 interface PricingPlanDetailsListProps {
   items: Array<{
@@ -8,9 +8,10 @@ interface PricingPlanDetailsListProps {
   className?: string;
 }
 
-export const PricingPlanDetailsList: FunctionComponent<
-  PricingPlanDetailsListProps
-> = ({ items, className }) => {
+export const PricingPlanDetailsList: FC<PricingPlanDetailsListProps> = ({
+  items,
+  className = '',
+}) => {
   return (
     <ul className={`pricing-plan-details-list ${className}`}>
       {items.map((item, i) => (
@@ -25,8 +26,4 @@ export const PricingPlanDetailsList: FunctionComponent<
       ))}
     </ul>
   );
-};
-
-PricingPlanDetailsList.defaultProps = {
-  className: '',
 };

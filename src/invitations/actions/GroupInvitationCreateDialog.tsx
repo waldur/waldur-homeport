@@ -69,11 +69,7 @@ export const GroupInvitationCreateDialog = reduxForm<
       </Modal.Body>
       <Modal.Footer>
         <CloseDialogButton />
-        <SubmitButton
-          block={false}
-          label={translate('Submit')}
-          submitting={submitting}
-        />
+        <SubmitButton label={translate('Submit')} submitting={submitting} />
       </Modal.Footer>
     </form>
   );

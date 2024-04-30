@@ -74,7 +74,7 @@ describe('RetypeDialog', () => {
     expect(
       wrapper
         .find(Select)
-        .prop('options')
+        .prop<{ label }[]>('options')
         .map((option) => option.label),
     ).toEqual(['prod (HPC production HDD)', 'scratch (IOPS intensive SSD)']);
   });

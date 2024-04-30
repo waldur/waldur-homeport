@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, useMemo } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
@@ -14,7 +14,7 @@ export interface StaticRoute {
   nexthop: string;
 }
 
-const validateFixedIPs = (fixedIps) => (value) => {
+const validateFixedIPs = (fixedIps: string[]) => (value) => {
   if (fixedIps.includes(value)) {
     return translate('IP address is already used by router.');
   }
@@ -52,8 +52,11 @@ const StaticRouteAddButton = ({ onClick }) => (
   </Button>
 );
 
-export const StaticRoutesTable: React.FC<any> = ({ fields, fixedIps }) => {
-  const nexthopValidator = React.useMemo(
+export const StaticRoutesTable: FC<{ fields; fixedIps: string[] }> = ({
+  fields,
+  fixedIps = [],
+}) => {
+  const nexthopValidator = useMemo(
     () => [required, validateIPv4, validateFixedIPs(fixedIps)],
     [fixedIps],
   );
@@ -94,8 +97,4 @@ export const StaticRoutesTable: React.FC<any> = ({ fields, fixedIps }) => {
       )}
     </>
   );
-};
-
-StaticRoutesTable.defaultProps = {
-  fixedIps: [],
 };

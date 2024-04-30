@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -17,7 +17,7 @@ const GroupInvitationCreateDialog = lazyComponent(
   'GroupInvitationCreateDialog',
 );
 
-export const GroupInvitationCreateButton: FunctionComponent<{
+export const GroupInvitationCreateButton: FC<{
   refetch(): void;
 }> = ({ refetch }) => {
   const user = useSelector(getUser);

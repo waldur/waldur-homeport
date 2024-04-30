@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 interface StepProps {
   active?: boolean;
@@ -9,22 +9,23 @@ interface StepProps {
   disabled?: boolean;
 }
 
-export const Step: FunctionComponent<StepProps> = (props) => (
+export const Step: FC<StepProps> = ({
+  active = false,
+  complete = false,
+  disabled,
+  title,
+  onClick,
+}) => (
   <button
     className={classNames('step', {
-      active: props.active,
-      disabled: props.disabled,
+      active,
+      disabled,
     })}
     type="button"
-    onClick={() => props.onClick()}
+    onClick={() => onClick()}
   >
     <h4 className="step-title">
-      {props.complete && <i className="fa fa-check-circle" />} {props.title}
+      {complete && <i className="fa fa-check-circle" />} {title}
     </h4>
   </button>
 );
-
-Step.defaultProps = {
-  active: false,
-  complete: false,
-};

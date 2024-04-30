@@ -1,4 +1,11 @@
-import { FC, ReactNode, createContext, useMemo, useState } from 'react';
+import {
+  FC,
+  PropsWithChildren,
+  ReactNode,
+  createContext,
+  useMemo,
+  useState,
+} from 'react';
 
 import useScrollTracker from '@waldur/core/useScrollTracker';
 
@@ -25,7 +32,7 @@ export const PageBarContext = createContext<PageBarContextModel>({
   clearTabs: () => {},
 });
 
-export const PageBarProvider: FC = ({ children }) => {
+export const PageBarProvider: FC<PropsWithChildren> = ({ children }) => {
   const [tabs, setTabs] = useState<PageBarTab[]>([]);
 
   const addTabs = (_tabs: PageBarTab[]) => {

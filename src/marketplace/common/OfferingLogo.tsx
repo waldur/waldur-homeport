@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 
 import './OfferingLogo.scss';
 
@@ -12,21 +12,18 @@ interface OfferingLogoProps
   onClick?: () => void;
 }
 
-export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => (
+export const OfferingLogo: FC<OfferingLogoProps> = ({
+  className = 'marketplace-offering-logo',
+  ...props
+}) => (
   <img
     src={props.src || DefaultLogo}
     alt="offering logo"
     className={
-      props.size === 'small'
-        ? 'marketplace-offering-logo--small'
-        : props.className
+      props.size === 'small' ? 'marketplace-offering-logo--small' : className
     }
     style={props.style}
     onClick={props.onClick}
     aria-hidden="true"
   />
 );
-
-OfferingLogo.defaultProps = {
-  className: 'marketplace-offering-logo',
-};

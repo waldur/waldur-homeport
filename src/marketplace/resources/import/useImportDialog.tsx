@@ -48,12 +48,12 @@ export const useImportDialog = (props: ImportDialogProps) => {
   const toggleResource = (resource: ImportableResource) =>
     setResources(toggleElement(resource, resources));
 
-  const offeringsProps = useAsync<Offering[]>(
+  const offeringsProps = useAsync(
     () => getOfferingsForImport(props.resolve),
     [props.resolve],
   );
 
-  const [resourceProps, resourceCallback] = useAsyncFn<ImportableResource[]>(
+  const [resourceProps, resourceCallback] = useAsyncFn(
     () => getImportableResources(offering.uuid),
     [offering],
   );

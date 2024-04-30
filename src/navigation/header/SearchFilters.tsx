@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import { StringField } from '@waldur/form';
-import { reactSelectMenuNoPortaling } from '@waldur/form/themed-select';
+import { REACT_SELECT_MENU_NO_PORTALING } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
@@ -20,18 +20,18 @@ const PureSearchFilters: FunctionComponent<{}> = () => (
       />
     </div>
     <div className="mb-5">
-      <OfferingAutocomplete reactSelectProps={reactSelectMenuNoPortaling()} />
+      <OfferingAutocomplete reactSelectProps={REACT_SELECT_MENU_NO_PORTALING} />
     </div>
     <div className="mb-5">
-      <CategoryFilter reactSelectProps={reactSelectMenuNoPortaling()} />
+      <CategoryFilter reactSelectProps={REACT_SELECT_MENU_NO_PORTALING} />
     </div>
     <div className="mb-5">
       <OfferingTypeAutocomplete
-        reactSelectProps={reactSelectMenuNoPortaling()}
+        reactSelectProps={REACT_SELECT_MENU_NO_PORTALING}
       />
     </div>
     <div className="mb-8">
-      <ResourceStateFilter reactSelectProps={reactSelectMenuNoPortaling()} />
+      <ResourceStateFilter reactSelectProps={REACT_SELECT_MENU_NO_PORTALING} />
     </div>
   </>
 );

@@ -107,9 +107,9 @@ const mapStateToFilter = createSelector(
   },
 );
 
-export const UserList: FunctionComponent<any> = (props) => {
+export const UserList: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
-  const tableProps = useTable({
+  const props = useTable({
     table: `userList`,
     fetchData: createFetcher('users'),
     queryField: 'query',
@@ -143,7 +143,7 @@ export const UserList: FunctionComponent<any> = (props) => {
 
   return (
     <Table
-      {...tableProps}
+      {...props}
       filters={<UserFilter />}
       columns={[
         {

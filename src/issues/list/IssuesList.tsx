@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -42,8 +42,8 @@ const mapStateToFilter = createSelector(
   },
 );
 
-export const IssuesList: React.FC<OwnProps & Partial<TableProps>> = (props) => {
-  const { hiddenColumns } = props;
+export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
+  const { hiddenColumns = [] } = props;
   const user = useSelector(getUser);
   const supportOrStaff = user?.is_staff || user?.is_support || false;
 
@@ -179,8 +179,4 @@ export const IssuesList: React.FC<OwnProps & Partial<TableProps>> = (props) => {
       )}
     />
   );
-};
-
-IssuesList.defaultProps = {
-  hiddenColumns: [],
 };

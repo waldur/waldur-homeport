@@ -23,7 +23,13 @@ const rejectStyle = {
 };
 
 export const DropzoneFiles: FC<OwnProps> = (props) => {
-  const { message, footerLeft, footerRight, className, ...rest } = props;
+  const {
+    message = translate('Drop files here, or click to select files'),
+    footerLeft,
+    footerRight,
+    className,
+    ...rest
+  } = props;
 
   const {
     acceptedFiles,
@@ -71,8 +77,4 @@ export const DropzoneFiles: FC<OwnProps> = (props) => {
       </div>
     </div>
   );
-};
-
-DropzoneFiles.defaultProps = {
-  message: translate('Drop files here, or click to select files'),
 };
