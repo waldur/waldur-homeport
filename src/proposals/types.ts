@@ -57,8 +57,8 @@ export interface Call {
   name: string;
   description: string;
   reference_code: string;
-  start_time: string;
-  end_time: string;
+  start_date: string;
+  end_date: string;
   state: CallState;
   manager: string;
   customer_name: string;
