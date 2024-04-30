@@ -42,7 +42,7 @@ export const CallDetailsCard = ({ call }: CallDetailsCardProps) => {
         />
         <Field
           label={translate('Publication date')}
-          value={renderFieldOrDash(formatDateTime(call.start_time))}
+          value={renderFieldOrDash(formatDateTime(call.start_date))}
         />
         {activeRound && (
           <Field

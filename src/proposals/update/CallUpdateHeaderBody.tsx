@@ -13,7 +13,7 @@ export const CallUpdateHeaderBody = (props: CallUpdateHeaderBodyProps) => {
   const lastRoundStatus = getRoundStatus(getSortedRounds[0]);
   const nextRoundDate = getSortedRounds?.length
     ? getSortedRounds[0].cutoff_time
-    : props.call.end_time;
+    : props.call.end_date;
   return (
     <p className="fw-bold">
       {lastRoundStatus.label === 'Open' && (

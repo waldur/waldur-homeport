@@ -83,13 +83,13 @@ export const PublicCallsPage: FunctionComponent = () => {
             {
               title: translate('Start'),
               render: ({ row }) => (
-                <>{renderFieldOrDash(formatDateTime(row.start_time))}</>
+                <>{renderFieldOrDash(formatDateTime(row.start_date))}</>
               ),
             },
             {
               title: translate('End'),
               render: ({ row }) => (
-                <>{renderFieldOrDash(formatDateTime(row.end_time))}</>
+                <>{renderFieldOrDash(formatDateTime(row.end_date))}</>
               ),
             },
             {
