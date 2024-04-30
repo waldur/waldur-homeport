@@ -18,7 +18,7 @@
             }
 
             .stepper-desc {
-              color: var(--bs-gray-500);
+              color: var(--bs-gray-600);
             }
           }
 
@@ -28,6 +28,10 @@
             margin-right: 0;
             margin-bottom: 0.75rem;
             z-index: 1;
+
+            i {
+              color: white;
+            }
           }
 
           .stepper-line-area {
@@ -47,17 +51,17 @@
 
         &.completed .stepper-wrapper {
           .stepper-icon {
-            background: var(--bs-gray-600);
+            background: var(--bs-green);
           }
 
           .stepper-line-area .stepper-line {
-            background: var(--bs-gray-600);
+            background: var(--bs-green);
           }
         }
 
         &.current .stepper-wrapper {
           .stepper-line-area .stepper-line {
-            background: var(--bs-gray-600);
+            background: var(--bs-gray-400);
           }
         }
 

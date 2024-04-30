@@ -70,3 +70,5 @@ export interface ApplicationConfigurationOptions {
 
 // Polyfill taken from https://stackoverflow.com/a/63984409
 export type Await<T> = T extends PromiseLike<infer U> ? U : T;
+
+export type AtLeast<T, K extends keyof T> = Partial<T> & Pick<T, K>;
