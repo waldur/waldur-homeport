@@ -8,7 +8,9 @@ interface ProgressStepsProps {
     label: any;
     description?: any;
     completed: any;
-    color?: any;
+    icon?: any;
+    labelClass?: string;
+    color?: string;
   }>;
   bgClass?: string;
   className?: string;
@@ -47,11 +49,21 @@ export const ProgressSteps: FC<ProgressStepsProps> = ({
                 >
                   <div className="stepper-wrapper d-flex flex-column align-items-center">
                     <div
-                      className={
-                        'stepper-icon w-25px h-25px ' +
-                        (current ? step.color || 'bg-success' : '')
-                      }
-                    ></div>
+                      className={classNames(
+                        'stepper-icon w-25px h-25px',
+                        current ? step.color || 'bg-success' : '',
+                      )}
+                    >
+                      {step.icon &&
+                        (typeof step.icon === 'string' ? (
+                          <i className={'fa ' + step.icon} />
+                        ) : (
+                          step.icon
+                        ))}
+                      {!step.icon && step.completed && (
+                        <i className="fa fa-check" />
+                      )}
+                    </div>
                     <div
                       className={classNames(
                         'stepper-line-area h-25px',
@@ -62,7 +74,14 @@ export const ProgressSteps: FC<ProgressStepsProps> = ({
                     </div>
 
                     <div className="stepper-label">
-                      <h3 className="stepper-title">{step.label}</h3>
+                      <div
+                        className={classNames(
+                          'stepper-title h3',
+                          step.labelClass,
+                        )}
+                      >
+                        {step.label}
+                      </div>
                       {step.description && (
                         <div className="stepper-desc">
                           {step.description.map((line, i) => (

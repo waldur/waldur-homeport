@@ -25,6 +25,7 @@ import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ResourceStateField } from '../list/ResourceStateField';
 import { ResourceOptionsCard } from '../options/ResourceOptionsCard';
 import { ShowReportAction } from '../report/ShowReportAction';
+import { OrderErredView } from '../resource-pending/OrderErredView';
 import { OrderInProgressView } from '../resource-pending/OrderInProgressView';
 import { ResourceActions } from '../ResourceActions';
 import { ResourceUsersCard } from '../users/ResourceUsersCard';
@@ -102,9 +103,11 @@ export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
         </>
       ) : (
         <PageBarProvider>
-          {resource.order_in_progress && (
+          {resource.order_in_progress ? (
             <OrderInProgressView resource={resource} refetch={refetch} />
-          )}
+          ) : resource.creation_order ? (
+            <OrderErredView resource={resource} />
+          ) : null}
           <PublicDashboardHero
             logo={getMarketplaceResourceLogo(resource)}
             logoAlt={resource.category_title}

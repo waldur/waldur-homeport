@@ -867,6 +867,7 @@ msgid "Approve private order"
 msgstr ""
 
 #: src/marketplace-remote/RequestStateFilter.tsx
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 msgid "Approved"
@@ -1069,6 +1070,10 @@ msgstr ""
 
 #: src/proposals/update/offerings/WizardFormThirdPage.tsx
 msgid "Are you sure you want to request {provider} to add {offering} to the {call}?"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
+msgid "Are you sure you want to retry to submit this order?"
 msgstr ""
 
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
@@ -2208,6 +2213,7 @@ msgstr ""
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
 #: src/marketplace/offerings/update/roles/DeleteRoleButton.tsx
 #: src/marketplace/resources/lexis/LexisLinkDeleteButton.tsx
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
 #: src/marketplace/resources/users/DeleteUserButton.tsx
 #: src/marketplace/service-providers/OfferingPermissionRemoveButton.tsx
 #: src/project/team/UserRemoveButton.tsx
@@ -2710,6 +2716,10 @@ msgstr ""
 
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Creation"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
+msgid "Creation has failed"
 msgstr ""
 
 #: src/administration/service-desk/SmaxSettings.tsx
@@ -3994,12 +4004,14 @@ msgstr ""
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/resource-pending/ResourceOrderErrorDialog.tsx
 #: src/resource/summary/ErrorMessageField.tsx
 msgid "Error message"
 msgstr ""
 
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/resource-pending/ResourceOrderErrorDialog.tsx
 msgid "Error traceback"
 msgstr ""
 
@@ -7392,6 +7404,10 @@ msgstr ""
 msgid "Order history"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
+msgid "Order submitted"
+msgstr ""
+
 #: src/marketplace/deploy/DeployPageActions.tsx
 msgid "Order with script over API"
 msgstr ""
@@ -7405,6 +7421,10 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 msgid "Orders"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/ResourceOrderErrorDialog.tsx
+msgid "Orders errors"
 msgstr ""
 
 #: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
@@ -9843,6 +9863,7 @@ msgid "Retention time in days, if 0 - resource will be kept forever"
 msgstr ""
 
 #: src/LoadingScreen.tsx
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
 #: src/navigation/SearchResultsDropdown.tsx
 msgid "Retry"
 msgstr ""
@@ -11078,6 +11099,10 @@ msgstr ""
 msgid "Show diff"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
+msgid "Show error"
+msgstr ""
+
 #: src/administration/TelemetryExampleButton.tsx
 msgid "Show example"
 msgstr ""
@@ -11763,6 +11788,10 @@ msgstr ""
 #: src/user/support/EmailField.tsx
 #: src/user/support/StaticField.tsx
 msgid "Synchronized from identity provider"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
+msgid "System"
 msgstr ""
 
 #: src/administration/roles/RolesList.tsx
@@ -14676,6 +14705,11 @@ msgstr ""
 msgid "View item"
 msgstr ""
 
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
+#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
+msgid "View order"
+msgstr ""
+
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
 msgid "Viewing image"
 msgstr ""
@@ -14752,6 +14786,10 @@ msgstr ""
 
 #: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Warning: Service provider option will clear all usernames of the existing offering users"
+msgstr ""
+
+#: src/marketplace/resources/resource-pending/OrderErredView.tsx
+msgid "We're sorry, but the resource creation process has failed."
 msgstr ""
 
 #: src/user/hooks/HookTypeField.tsx
@@ -15510,10 +15548,6 @@ msgstr ""
 
 #: src/vmware/marketplace.ts
 msgid "vSphere Virtual Machine"
-msgstr ""
-
-#: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
-msgid "view order"
 msgstr ""
 
 #: src/vmware/actions/EditDialog.tsx

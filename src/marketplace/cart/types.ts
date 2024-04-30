@@ -1,3 +1,4 @@
+import { AtLeast } from '@waldur/core/types';
 import { OrderResponse } from '@waldur/marketplace/orders/types';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 
@@ -14,8 +15,9 @@ export interface SubmitCartRequest {
 }
 
 export interface OrderRequest {
-  offering: Offering;
-  plan?: Plan;
+  offering: AtLeast<Offering, 'url'>;
+  plan?: AtLeast<Plan, 'url'>;
+  project?: string;
   attributes?: AttributesType;
   limits?: { [key: string]: number };
 }

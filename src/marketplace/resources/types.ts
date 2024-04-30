@@ -37,6 +37,7 @@ export interface Resource extends ResourceReference {
   backend_metadata?: AttributesType;
   error_message?: string;
   error_traceback?: string;
+  offering: string;
   offering_uuid: string;
   offering_name: string;
   offering_type: string;
@@ -50,6 +51,7 @@ export interface Resource extends ResourceReference {
   category_uuid?: string;
   category_icon?: string;
   customer_name?: string;
+  project?: string;
   project_name?: string;
   project_uuid?: string;
   customer_uuid?: string;
@@ -71,4 +73,5 @@ export interface Resource extends ResourceReference {
   end_date?: string;
   username?: string;
   order_in_progress?: OrderDetailsType;
+  creation_order?: OrderDetailsType;
 }

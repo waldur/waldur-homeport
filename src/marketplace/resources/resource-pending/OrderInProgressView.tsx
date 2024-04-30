@@ -104,7 +104,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
           project_uuid={resource.order_in_progress.project_uuid}
           className="text-link"
         >
-          ({translate('view order')})
+          ({translate('View order')})
         </OrderDetailsLink>
         {resource.order_in_progress.state === 'pending-consumer' && (
           <div className="ms-6 d-inline-block">
