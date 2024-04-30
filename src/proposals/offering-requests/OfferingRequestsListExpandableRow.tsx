@@ -23,9 +23,11 @@ export const OfferingRequestsListExpandableRow: FunctionComponent<OwnProps> = ({
         </Col>
         <Col sm={6}>
           {typeof row.attributes?.limits === 'object' &&
-            Object.entries(row.attributes.limits).map(([key, value]) => (
-              <Field key={key} label={key} value={value} />
-            ))}
+            Object.entries(row.attributes.limits).map(
+              ([key, value]: [string, string]) => (
+                <Field key={key} label={key} value={value} />
+              ),
+            )}
         </Col>
       </Row>
       <Field label={translate('Message')} value={row.description} isStuck />

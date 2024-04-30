@@ -1,30 +1,31 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import './ImagePlaceholder.css';
 
 interface ImagePlaceholderProps {
   width?: string;
   height?: string;
   backgroundColor?: string;
+  minWidth?;
 }
 
-export const ImagePlaceholder: FC<ImagePlaceholderProps> = (props) => {
+export const ImagePlaceholder: FC<PropsWithChildren<ImagePlaceholderProps>> = ({
+  width = '24px',
+  height = '24px',
+  backgroundColor = '#eee',
+  minWidth,
+  children,
+}) => {
   return (
     <div
       className="image-placeholder"
       style={{
-        width: props.width,
-        minWidth: props.width,
-        height: props.height,
-        backgroundColor: props.backgroundColor,
+        width,
+        minWidth,
+        height,
+        backgroundColor,
       }}
     >
-      {props.children}
+      {children}
     </div>
   );
-};
-
-ImagePlaceholder.defaultProps = {
-  width: '24px',
-  height: '24px',
-  backgroundColor: '#eee',
 };

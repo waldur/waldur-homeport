@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, PropsWithChildren } from 'react';
 import { Container } from 'react-bootstrap';
 
 import { ENV } from '@waldur/configs/default';
@@ -10,10 +10,14 @@ import { CreatedField } from '@waldur/resource/summary/CreatedField';
 import { KeyValueButton } from '../KeyValueButton';
 import { Resource } from '../types';
 
-export const ResourceSummary: FunctionComponent<{
+interface ResourceSummaryProps {
   resource: Resource;
   scope: { error_message?; error_traceback? };
-}> = ({ resource, scope, children }) => (
+}
+
+export const ResourceSummary: FunctionComponent<
+  PropsWithChildren<ResourceSummaryProps>
+> = ({ resource, scope, children }) => (
   <Container className="container-metadata">
     <Field label={translate('Offering name')} value={resource.offering_name} />
     <Field

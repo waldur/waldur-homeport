@@ -4,9 +4,12 @@ import { Col, Form } from 'react-bootstrap';
 import { DataVolumeAddButton } from './DataVolumeAddButton';
 import { DataVolumePanel } from './DataVolumePanel';
 
-export const DataVolumesList: FunctionComponent<any> = (props) => (
+export const DataVolumesList: FunctionComponent<any> = ({
+  sm = { span: 8, offset: 4 },
+  ...props
+}) => (
   <Form.Group>
-    <Col sm={props.sm}>
+    <Col sm={sm}>
       {props.fields.map((volume, index) => (
         <DataVolumePanel
           key={index}
@@ -29,7 +32,3 @@ export const DataVolumesList: FunctionComponent<any> = (props) => (
     </Col>
   </Form.Group>
 );
-
-DataVolumesList.defaultProps = {
-  sm: { span: 8, offset: 4 },
-};

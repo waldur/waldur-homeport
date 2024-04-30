@@ -11,23 +11,22 @@ interface EnumFieldProps extends FieldProps {
   options?: any[];
 }
 
-export const EnumField: React.FC<EnumFieldProps> = (props) => {
-  const { options } = props;
+export const EnumField: React.FC<EnumFieldProps> = ({
+  getLabel = (option) => option,
+  getValue = (option) => option,
+  options,
+  ...props
+}) => {
   const renderField = React.useCallback(
     (fieldProps) => (
       <SelectControl
         options={options}
         input={fieldProps.input}
-        getLabel={props.getLabel}
-        getValue={props.getValue}
+        getLabel={getLabel}
+        getValue={getValue}
       />
     ),
-    [options, props.getLabel, props.getValue],
+    [options, getLabel, getValue],
   );
   return <DecoratedField {...props} component={renderField} />;
-};
-
-EnumField.defaultProps = {
-  getLabel: (option) => option,
-  getValue: (option) => option,
 };

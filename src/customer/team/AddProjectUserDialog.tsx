@@ -85,9 +85,7 @@ export const AddProjectUserDialog = reduxForm<
         </FormContainer>
       </Modal.Body>
       <Modal.Footer>
-        <SubmitButton block={false} submitting={submitting}>
-          {translate('Save')}
-        </SubmitButton>
+        <SubmitButton submitting={submitting}>{translate('Save')}</SubmitButton>
         <CloseDialogButton />
       </Modal.Footer>
     </form>

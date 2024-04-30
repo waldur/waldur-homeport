@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { getAbbreviation } from '@waldur/core/utils';
@@ -13,7 +13,10 @@ interface OfferingLogoProps
   onClick?: () => void;
 }
 
-export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => {
+export const OfferingLogo: FC<OfferingLogoProps> = ({
+  size = 75,
+  ...props
+}) => {
   const abbreviation = useMemo(
     () => getAbbreviation(props.name).substr(0, 4),
     [props.name],
@@ -21,7 +24,7 @@ export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => {
 
   return props.src ? (
     <div
-      className={`symbol symbol-${props.size}px marketplace-offering-logo-metronic ${props.className}`}
+      className={`symbol symbol-${size}px marketplace-offering-logo-metronic ${props.className}`}
       style={props.style}
       onClick={props.onClick}
       aria-hidden="true"
@@ -34,8 +37,8 @@ export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => {
   ) : (
     <div className="symbol">
       <ImagePlaceholder
-        width={`${props.size}px`}
-        height={`${props.size}px`}
+        width={`${size}px`}
+        height={`${size}px`}
         backgroundColor="#e2e2e2"
       >
         {abbreviation && (
@@ -44,8 +47,4 @@ export const OfferingLogo: React.FC<OfferingLogoProps> = (props) => {
       </ImagePlaceholder>
     </div>
   );
-};
-
-OfferingLogo.defaultProps = {
-  size: 75,
 };

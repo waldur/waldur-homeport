@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
 import { useBoolean } from 'react-use';
 
 import './CollapsibleItem.scss';
@@ -10,7 +10,9 @@ interface CollapsibleItemProps {
   counter?: number;
 }
 
-export const CollapsibleItem: React.FC<CollapsibleItemProps> = (props) => {
+export const CollapsibleItem: FC<PropsWithChildren<CollapsibleItemProps>> = (
+  props,
+) => {
   const [collapsed, onClick] = useBoolean(false);
   return (
     <div className="collapsible-item">

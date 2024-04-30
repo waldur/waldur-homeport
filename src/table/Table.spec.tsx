@@ -9,7 +9,7 @@ import Table from './Table';
 
 describe('Table', () => {
   const fetch = jest.fn();
-  const defaultProps = {
+  const props = {
     loading: false,
     error: null,
     fetch,
@@ -24,29 +24,29 @@ describe('Table', () => {
   describe('special states', () => {
     it('renders spinner if list is loading', () => {
       const wrapper = shallow(
-        <TableLoadingSpinnerContainer {...defaultProps} loading={true} />,
+        <TableLoadingSpinnerContainer {...props} loading={true} />,
       );
       expect(wrapper.contains(<LoadingSpinner />)).toBe(true);
     });
 
     it('renders message if loading failed', () => {
-      const wrapper = shallow(<Table {...defaultProps} error="Not found" />);
+      const wrapper = shallow(<Table {...props} error="Not found" />);
       expect(wrapper.html()).toContain('Unable to fetch data.');
     });
 
     it('renders message if list is empty', () => {
-      const wrapper = mount(<Table {...defaultProps} />);
+      const wrapper = mount(<Table {...props} />);
       expect(wrapper.contains('There are no items yet.')).toBe(true);
     });
 
     it('renders custom message if list is empty and verboseName is set', () => {
-      const wrapper = mount(<Table {...defaultProps} verboseName="projects" />);
+      const wrapper = mount(<Table {...props} verboseName="projects" />);
       expect(wrapper.contains('There are no projects yet.')).toBe(true);
     });
 
     it('renders custom message if list is empty and verboseName is set and query is set', () => {
       const wrapper = mount(
-        <Table {...defaultProps} verboseName="projects" query="my projects" />,
+        <Table {...props} verboseName="projects" query="my projects" />,
       );
       expect(
         wrapper.contains('There are no projects found matching the filter.'),

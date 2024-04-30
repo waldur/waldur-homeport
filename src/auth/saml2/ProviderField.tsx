@@ -1,4 +1,4 @@
-import { createFilter } from 'react-select/dist/react-select.cjs.dev';
+import { createFilter } from 'react-select';
 import { Field } from 'redux-form';
 
 import * as api from '@waldur/auth/saml2/api';

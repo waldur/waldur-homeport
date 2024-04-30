@@ -13,11 +13,7 @@ export const TimeZoneGroup: FunctionComponent<TimeZoneGroupProps> = ({
   timeZone,
   setTimeZone,
 }) => (
-  <FormGroup
-    label={translate('Time zone')}
-    labelClassName="col-sm-3"
-    valueClassName={'col-sm-8'}
-  >
+  <FormGroup label={translate('Time zone')}>
     <TimezoneField
       isSearchable={true}
       isClearable={false}

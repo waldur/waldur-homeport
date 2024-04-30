@@ -87,7 +87,7 @@ describe('Group invitations', () => {
       .selectRole('Organization owner')
       .get('.modal-footer > .btn-primary')
       .click()
-      .get('.reapop__notification-meta')
+      .get('[role="alert"]')
       .should('be.visible');
   });
 
@@ -99,7 +99,7 @@ describe('Group invitations', () => {
       .selectTheFirstOptionOfDropdown()
       .get('.modal-footer > .btn-primary')
       .click()
-      .get('.reapop__notification-meta')
+      .get('[role="alert"]')
       .should('be.visible');
   });
 
@@ -111,7 +111,7 @@ describe('Group invitations', () => {
       .selectTheFirstOptionOfDropdown()
       .get('.modal-footer > .btn-primary')
       .click()
-      .get('.reapop__notification-meta')
+      .get('[role="alert"]')
       .should('be.visible');
   });
 
@@ -123,7 +123,7 @@ describe('Group invitations', () => {
       .selectTheFirstOptionOfDropdown()
       .get('.modal-footer > .btn-primary')
       .click()
-      .get('.reapop__notification-meta')
+      .get('[role="alert"]')
       .should('be.visible');
   });
 
@@ -132,7 +132,7 @@ describe('Group invitations', () => {
       .click()
       .get('.modal-footer .btn-primary:contains("Yes")')
       .click()
-      .get('.reapop__notification-meta')
+      .get('[role="alert"]')
       .should('be.visible');
   });
 });

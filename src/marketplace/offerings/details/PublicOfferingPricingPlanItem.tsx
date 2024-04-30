@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -19,9 +19,12 @@ interface PricingPlanItemProps {
   singlePlan?: boolean;
 }
 
-export const PublicOfferingPricingPlanItem: FunctionComponent<
-  PricingPlanItemProps
-> = ({ offering, plan, canDeploy, singlePlan }) => {
+export const PublicOfferingPricingPlanItem: FC<PricingPlanItemProps> = ({
+  offering,
+  plan,
+  canDeploy = true,
+  singlePlan = false,
+}) => {
   // TODO: fix this later
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   const recommended = false;
@@ -95,9 +98,4 @@ export const PublicOfferingPricingPlanItem: FunctionComponent<
       )}
     </div>
   );
-};
-
-PublicOfferingPricingPlanItem.defaultProps = {
-  canDeploy: true,
-  singlePlan: false,
 };

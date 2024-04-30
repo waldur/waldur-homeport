@@ -1,4 +1,4 @@
-import { useCallback, FunctionComponent } from 'react';
+import { useCallback, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -11,13 +11,17 @@ const UserAgreementDeleteDialog = lazyComponent(
   'UserAgreementDeleteDialog',
 );
 
-const deleteUserAgreementDialog = (userAgreement) =>
-  openModalDialog(UserAgreementDeleteDialog, { resolve: { userAgreement } });
-
-export const UserAgreementDeleteButton: FunctionComponent<any> = (props) => {
+export const UserAgreementDeleteButton: FC<{ userAgreement }> = ({
+  userAgreement,
+}) => {
   const dispatch = useDispatch();
   const callback = useCallback(
-    () => dispatch(deleteUserAgreementDialog(props.userAgreement)),
+    () =>
+      dispatch(
+        openModalDialog(UserAgreementDeleteDialog, {
+          resolve: { userAgreement },
+        }),
+      ),
     [],
   );
   return (

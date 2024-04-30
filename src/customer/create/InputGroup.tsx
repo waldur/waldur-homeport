@@ -4,23 +4,19 @@ import { Field } from 'redux-form';
 
 import { FieldError } from '@waldur/form';
 
-export const InputGroup = ({
-  label,
-  helpText,
-  validate,
-  floating,
-  ...props
-}: any) => (
+export const InputGroup = ({ floating = true, ...props }) => (
   <Form.Group className={classNames({ 'form-floating': floating }, 'mb-7')}>
-    {!floating && label && (
+    {!floating && props.label && (
       <Form.Label>
-        {label} {props.required && <span className="text-danger"> *</span>}
+        {props.label}{' '}
+        {props.required && <span className="text-danger"> *</span>}
       </Form.Label>
     )}
     <Field {...props} />
-    {floating && label && (
+    {floating && props.label && (
       <Form.Label>
-        {label} {props.required && <span className="text-danger"> *</span>}
+        {props.label}{' '}
+        {props.required && <span className="text-danger"> *</span>}
       </Form.Label>
     )}
     <Field
@@ -28,12 +24,8 @@ export const InputGroup = ({
       component={({ meta }) =>
         meta.touched && <FieldError error={meta.error} />
       }
-      validate={validate}
+      validate={props.validate}
     />
-    {helpText && <Form.Text muted={true}>{helpText}</Form.Text>}
+    {props.helpText && <Form.Text muted={true}>{props.helpText}</Form.Text>}
   </Form.Group>
 );
-
-InputGroup.defaultProps = {
-  floating: true,
-};

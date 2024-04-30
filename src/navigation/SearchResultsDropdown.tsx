@@ -20,7 +20,7 @@ interface SearchResultsDropdownProps {
 export const SearchResultsDropdown: FunctionComponent<
   SearchResultsDropdownProps
 > = ({ query, pageIndex, onPageChange }) => {
-  const [{ loading, error, value }, loadData] = useAsyncFn<any>(
+  const [{ loading, error, value }, loadData] = useAsyncFn(
     () => fetchOfferings(query, pageIndex),
     [query, pageIndex],
   );

@@ -1,9 +1,9 @@
 import { UISref, useIsActive } from '@uirouter/react';
 import classNames from 'classnames';
-import React from 'react';
+import { FC } from 'react';
 import SVG from 'react-inlinesvg';
 
-export const MenuItem: React.FC<{
+interface MenuItemProps {
   title: React.ReactNode;
   badge?: React.ReactNode;
   state?: string;
@@ -11,7 +11,10 @@ export const MenuItem: React.FC<{
   child?: boolean;
   params?;
   iconPath?: string;
-}> = (props) => {
+}
+
+export const MenuItem: FC<MenuItemProps> = (props) => {
+  const { child = true } = props;
   const isActive = props.activeState
     ? useIsActive(props.activeState)
     : useIsActive(props.state, props.params);
@@ -30,7 +33,7 @@ export const MenuItem: React.FC<{
               </span>
             </span>
           )}
-          {props.child && (
+          {child && (
             <span className="menu-bullet">
               <span className="bullet bullet-dot"></span>
             </span>
@@ -41,8 +44,4 @@ export const MenuItem: React.FC<{
       </UISref>
     </div>
   );
-};
-
-MenuItem.defaultProps = {
-  child: true,
 };

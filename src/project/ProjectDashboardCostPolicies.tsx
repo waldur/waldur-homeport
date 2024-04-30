@@ -58,7 +58,7 @@ interface InfiniteListTableProps {
 const InfiniteListTable: FC<InfiniteListTableProps> = ({
   loadData,
   queryKey,
-  pageSize,
+  pageSize = 3,
 }) => {
   const {
     data,
@@ -137,8 +137,4 @@ const InfiniteListTable: FC<InfiniteListTableProps> = ({
       </div>
     </>
   );
-};
-
-ProjectDashboardCostPolicies.defaultProps = {
-  pageSize: 3,
 };

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 import { range } from '@waldur/core/utils';
 import './RatingStars.scss';
@@ -12,24 +12,23 @@ interface RatingStarsProps {
   className?: string;
 }
 
-export const RatingStars: FunctionComponent<RatingStarsProps> = (props) => (
+export const RatingStars: FC<RatingStarsProps> = ({
+  max = 5,
+  size = 'default',
+  ...props
+}) => (
   <div
     className={classNames('rating-stars', props.className, {
-      'rating-stars-default': props.size === 'default',
-      'rating-stars-medium': props.size === 'medium',
+      'rating-stars-default': size === 'default',
+      'rating-stars-medium': size === 'medium',
     })}
-    title={`${props.rating}/${props.max}`}
+    title={`${props.rating}/${max}`}
   >
     {range(Math.floor(props.rating)).map((key) => (
       <i className={classNames('fa fa-star filled', props.color)} key={key} />
     ))}
-    {range(props.max - Math.floor(props.rating)).map((key) => (
+    {range(max - Math.floor(props.rating)).map((key) => (
       <i className="fa fa-star" key={key} />
     ))}
   </div>
 );
-
-RatingStars.defaultProps = {
-  max: 5,
-  size: 'default',
-};

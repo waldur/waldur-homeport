@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 interface CategorySectionsFilterBarItemProps {
   text: string;
 }
 
 export const CategorySectionsFilterBarItem: FC<
-  CategorySectionsFilterBarItemProps
+  PropsWithChildren<CategorySectionsFilterBarItemProps>
 > = ({ text, children }) => {
   return (
     <div>

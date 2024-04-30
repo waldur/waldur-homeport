@@ -52,7 +52,6 @@ const renderFields = ({ fields, submitting, meta: { pristine } }: any) => {
       </Tabs>
       <div className="mb-5 text-end">
         <SubmitButton
-          block={false}
           submitting={submitting}
           invalid={pristine}
           label={translate('Save')}

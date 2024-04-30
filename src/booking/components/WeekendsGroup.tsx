@@ -14,7 +14,6 @@ export const WeekendsGroup: FunctionComponent<WeekendsGroupProps> = ({
 }) => (
   <FormGroup
     label={translate('Include weekends')}
-    labelClassName="col-sm-3"
     description={translate('Allow bookings to be scheduled at weekends')}
   >
     <div className="checkbox-toggle">

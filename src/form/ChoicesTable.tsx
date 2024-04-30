@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FunctionComponent } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Table } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -24,14 +24,15 @@ interface ChoicesTableProps extends PureChoicesTableProps {
   filterOptions?: FilterOptions;
 }
 
-export const PureChoicesTable: FunctionComponent<ChoicesTableProps> = (
-  props,
-) => (
+export const PureChoicesTable: FC<ChoicesTableProps> = ({
+  enableSelect = true,
+  ...props
+}) => (
   <div className="table-responsive choices-table">
     <Table bsPrefix="table">
       <thead>
         <tr>
-          {props.enableSelect && <th />}
+          {enableSelect && <th />}
           {props.columns.map((column, index) => (
             <th key={index} className={column.headerClass}>
               {column.label}
@@ -53,9 +54,9 @@ export const PureChoicesTable: FunctionComponent<ChoicesTableProps> = (
                 return props.input.onChange(choice);
               }
             }}
-            className={classNames({ 'selectable-row': props.enableSelect })}
+            className={classNames({ 'selectable-row': enableSelect })}
           >
-            {props.enableSelect && (
+            {enableSelect && (
               <td>
                 {choice.disabled ? (
                   <Tip id={choice.uuid} label={choice.disabledReason}>
@@ -91,45 +92,32 @@ export const PureChoicesTable: FunctionComponent<ChoicesTableProps> = (
   </div>
 );
 
-PureChoicesTable.defaultProps = {
-  enableSelect: true,
-};
+export const ChoicesTable: FC<ChoicesTableProps> = (props) => {
+  const [filter, setFilter] = useState<string>();
 
-export class ChoicesTable extends React.Component<ChoicesTableProps> {
-  state = {
-    filter: undefined,
-  };
-
-  setFilter = (filter) => {
-    this.setState({ filter });
-  };
-
-  getChoices = (choices) => {
-    if (this.props.filterOptions && this.state.filter) {
+  const choices = useMemo(() => {
+    if (props.filterOptions && filter) {
       return choices.filter(
-        (choice) => choice[this.props.filterOptions.name] === this.state.filter,
+        (choice) => choice[props.filterOptions.name] === filter,
       );
     }
     return choices;
-  };
+  }, [props.choices]);
 
-  render() {
-    const props = this.props;
-    return (
-      <>
-        {props.filterOptions && (
-          <ChoicesTableFilter
-            filterOptions={props.filterOptions}
-            input={{ onChange: this.setFilter, value: this.state.filter }}
-            wrapperClassName="btn-group mb-1"
-          />
-        )}
-        <PureChoicesTable
-          columns={props.columns}
-          choices={this.getChoices(props.choices)}
-          input={props.input}
+  return (
+    <>
+      {props.filterOptions && (
+        <ChoicesTableFilter
+          filterOptions={props.filterOptions}
+          input={{ onChange: setFilter, value: filter }}
+          wrapperClassName="btn-group mb-1"
         />
-      </>
-    );
-  }
-}
+      )}
+      <PureChoicesTable
+        columns={props.columns}
+        choices={choices}
+        input={props.input}
+      />
+    </>
+  );
+};

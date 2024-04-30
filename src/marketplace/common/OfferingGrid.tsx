@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -11,7 +11,10 @@ interface OfferingGridProps extends OfferingsListType {
   width?: number;
 }
 
-export const OfferingGrid: React.FC<OfferingGridProps> = (props) => {
+export const OfferingGrid: FC<OfferingGridProps> = ({
+  width = 3,
+  ...props
+}) => {
   if (props.loading) {
     return <LoadingSpinner />;
   }
@@ -33,14 +36,10 @@ export const OfferingGrid: React.FC<OfferingGridProps> = (props) => {
   return (
     <Row>
       {props.items.map((offering, index) => (
-        <Col key={index} xl={2} lg={props.width} sm={6}>
+        <Col key={index} xl={2} lg={width} sm={6}>
           <OfferingCard offering={offering} />
         </Col>
       ))}
     </Row>
   );
-};
-
-OfferingGrid.defaultProps = {
-  width: 3,
 };

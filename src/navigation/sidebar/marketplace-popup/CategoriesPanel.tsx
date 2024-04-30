@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FunctionComponent, useContext } from 'react';
+import { FunctionComponent, PropsWithChildren, useContext } from 'react';
 import {
   Accordion,
   AccordionContext,
@@ -20,13 +20,16 @@ const EmptyCategoryListPlaceholder: FunctionComponent = () => (
     {translate('There are no categories.')}
   </div>
 );
-
-export const CategoryListItem: FunctionComponent<{
+interface CategoryListItemProps {
   item: Category;
   onClick;
   selectedItem?: Category;
   active?: boolean;
-}> = ({ item, onClick, selectedItem, active, children }) => {
+}
+
+export const CategoryListItem: FunctionComponent<
+  PropsWithChildren<CategoryListItemProps>
+> = ({ item, onClick, selectedItem, active, children }) => {
   return (
     <ListGroupItem
       data-uuid={item.uuid}

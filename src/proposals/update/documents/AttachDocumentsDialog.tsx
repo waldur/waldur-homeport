@@ -60,11 +60,7 @@ export const AttachDocumentsDialog = reduxForm<
         </FormContainer>
       </Modal.Body>
       <Modal.Footer>
-        <SubmitButton
-          block={false}
-          submitting={submitting}
-          label={translate('Save')}
-        />
+        <SubmitButton submitting={submitting} label={translate('Save')} />
         <CloseDialogButton />
       </Modal.Footer>
     </form>

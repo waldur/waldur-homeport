@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -19,7 +19,9 @@ interface ComponentRowProps {
   className?: string;
 }
 
-export const ComponentRow: React.FC<ComponentRowProps> = (props) => {
+export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
+  props,
+) => {
   const customer = useSelector(getCustomer);
   const activeFixedPriceProfile =
     customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
@@ -56,7 +58,9 @@ export const ComponentRow: React.FC<ComponentRowProps> = (props) => {
   );
 };
 
-export const ComponentRow2: React.FC<ComponentRowProps> = (props) => {
+export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
+  props,
+) => {
   const componentTotalPrice =
     props.offeringComponent.prices[props.activePriceIndex];
 

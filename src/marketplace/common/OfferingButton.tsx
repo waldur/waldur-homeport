@@ -20,7 +20,8 @@ interface OfferingButtonProps {
 export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
   props,
 ) => {
-  if (props.flavor === 'primary') {
+  const { flavor = 'ternary' } = props;
+  if (flavor === 'primary') {
     return (
       <Button
         size="sm"
@@ -33,7 +34,7 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
         <i className={props.icon} /> {props.title}
       </Button>
     );
-  } else if (props.flavor === 'secondary') {
+  } else if (flavor === 'secondary') {
     return (
       <Tip
         label={props.title}
@@ -59,8 +60,4 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
       <i className={props.icon} />
     </Tip>
   );
-};
-
-OfferingButton.defaultProps = {
-  flavor: 'ternary',
 };

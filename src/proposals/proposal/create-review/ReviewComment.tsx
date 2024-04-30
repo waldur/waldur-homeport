@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { RatingStars } from '@waldur/marketplace/common/RatingStars';
@@ -10,7 +10,9 @@ interface ReviewCommentProps {
   className?: string;
 }
 
-export const ReviewComment: FC<ReviewCommentProps> = (props) => {
+export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
+  props,
+) => {
   return (
     <div
       className={classNames(

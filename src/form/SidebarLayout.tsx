@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Card } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
@@ -7,13 +7,13 @@ import { useFullPage } from '@waldur/navigation/context';
 
 import './SidebarLayout.scss';
 
-const Container: FC = (props) => (
+const Container: FC<PropsWithChildren> = (props) => (
   <div className="v-stepper-form d-flex flex-column flex-xl-row gap-5 gap-lg-7 pb-10">
     {props.children}
   </div>
 );
 
-const Body: FC<{ className? }> = (props) => (
+const Body: FC<PropsWithChildren<{ className? }>> = (props) => (
   <div
     className={classNames(
       'container-xxl d-flex flex-column flex-lg-row-fluid gap-5 gap-lg-7',
@@ -24,7 +24,7 @@ const Body: FC<{ className? }> = (props) => (
   </div>
 );
 
-const Sidebar: FC = (props) => {
+const Sidebar: FC<PropsWithChildren> = (props) => {
   const isVMode = useMediaQuery({ maxWidth: 1200 });
   useFullPage();
 

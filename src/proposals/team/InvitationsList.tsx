@@ -9,7 +9,7 @@ import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandabl
 import { RoleField } from '@waldur/invitations/RoleField';
 import { Table } from '@waldur/table';
 
-export const InvitationsList: FunctionComponent<any> = ({
+export const InvitationsList: FunctionComponent<{ table; hideRole }> = ({
   table,
   hideRole,
 }) => {

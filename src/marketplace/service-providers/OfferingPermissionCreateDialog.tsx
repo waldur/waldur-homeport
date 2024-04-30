@@ -85,7 +85,7 @@ export const OfferingPermissionCreateDialog = reduxForm<
       </Modal.Body>
       <Modal.Footer>
         <CloseDialogButton />
-        <SubmitButton block={false} submitting={submitting}>
+        <SubmitButton submitting={submitting}>
           {translate('Submit')}
         </SubmitButton>
       </Modal.Footer>

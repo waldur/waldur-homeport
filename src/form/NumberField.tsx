@@ -12,31 +12,29 @@ interface NumberFieldProps extends FormField {
   placeholder?: string;
 }
 
-export const NumberField: FunctionComponent<NumberFieldProps> = (props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { input, label, validate, parse, format, ...rest } = props;
+export const NumberField: FunctionComponent<NumberFieldProps> = ({
+  input,
+  unit,
+  placeholder = '  ',
+  ...rest
+}) => {
   const control = (
     <Form.Control
-      {...props.input}
+      {...input}
       className="form-control-solid"
       type="number"
+      placeholder={placeholder}
       {...rest}
     />
   );
-  if (props.unit) {
+  if (unit) {
     return (
       <>
         {control}
-        <InputGroup.Text className="border-0 unit">
-          {props.unit}
-        </InputGroup.Text>
+        <InputGroup.Text className="border-0 unit">{unit}</InputGroup.Text>
       </>
     );
   } else {
     return control;
   }
-};
-
-NumberField.defaultProps = {
-  placeholder: '  ',
 };

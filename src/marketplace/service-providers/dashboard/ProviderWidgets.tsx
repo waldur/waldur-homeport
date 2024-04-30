@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -114,7 +115,7 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
   },
 ];
 
-const WidgetItem = ({ item }: { item: ProviderWidget }) => (
+const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
   <Card
     as={Link}
     state={item.to.state}
@@ -139,7 +140,7 @@ const WidgetItem = ({ item }: { item: ProviderWidget }) => (
 export const ProviderWidgets = ({ provider }) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
-  const { loading, error, value } = useAsync<ProviderWidget[]>(() => {
+  const { loading, error, value } = useAsync(() => {
     return getServiceProviderStatistics(provider.uuid).then((res) => {
       const widgets = generateWidgetsData(res.data);
       if (!showExperimentalUiComponents) {
@@ -161,7 +162,7 @@ export const ProviderWidgets = ({ provider }) => {
       ) : error ? (
         <>{translate('Unable to load data')}</>
       ) : (
-        value.map((item, i) => (
+        (value as ProviderWidget[]).map((item, i) => (
           <Col key={i} xs={6} md={3} lg={6} xxl={3} className="mb-6">
             <WidgetItem item={item} />
           </Col>

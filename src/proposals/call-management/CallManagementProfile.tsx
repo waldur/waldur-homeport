@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
 
 import 'world-flags-sprite/stylesheets/flags32.css';
@@ -9,7 +9,9 @@ import { getItemAbbreviation } from '@waldur/navigation/workspace/context-select
 import { ServiceProviderIcon } from '@waldur/navigation/workspace/ServiceProviderIcon';
 import { Customer } from '@waldur/workspace/types';
 
-export const CallManagementProfile = ({ customer }: { customer: Customer }) => {
+export const CallManagementProfile: FC<{ customer: Customer }> = ({
+  customer,
+}) => {
   const abbreviation = useMemo(() => getItemAbbreviation(customer), [customer]);
 
   return (
@@ -45,7 +47,9 @@ export const CallManagementProfile = ({ customer }: { customer: Customer }) => {
                   {[
                     customer.organization_group_name,
                     customer.email,
-                    customer.phone_number,
+                    typeof customer.phone_number === 'string'
+                      ? customer.phone_number
+                      : undefined,
                   ].map((item, i) => item && <span key={i}>{item}</span>)}
                 </Stack>
               </Col>

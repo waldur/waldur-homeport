@@ -1,35 +1,33 @@
-import classNames from 'classnames';
-import React, { FunctionComponent } from 'react';
+import { FC, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
 interface ModalDialogProps {
-  title: React.ReactNode;
-  footer?: React.ReactNode;
+  title: ReactNode;
+  footer?: ReactNode;
   closeButton?: boolean;
   bodyClassName?: string;
   footerClassName?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
-export const ModalDialog: FunctionComponent<ModalDialogProps> = (props) => (
+export const ModalDialog: FC<ModalDialogProps> = ({
+  closeButton = false,
+  title,
+  children,
+  footer,
+  bodyClassName,
+  footerClassName,
+}) => (
   <div>
     <Modal.Header
-      closeButton={props.closeButton}
-      className={!props.title ? 'without-border' : undefined}
+      closeButton={closeButton}
+      className={!title ? 'without-border' : undefined}
     >
-      <Modal.Title>{props.title}</Modal.Title>
+      <Modal.Title>{title}</Modal.Title>
     </Modal.Header>
-    <div className={classNames('modal-body', props.bodyClassName)}>
-      {props.children}
-    </div>
-    {props.footer && (
-      <div className={classNames('modal-footer', props.footerClassName)}>
-        {props.footer}
-      </div>
+    <Modal.Body className={bodyClassName}>{children}</Modal.Body>
+    {footer && (
+      <Modal.Footer className={footerClassName}>{footer}</Modal.Footer>
     )}
   </div>
 );
-
-ModalDialog.defaultProps = {
-  closeButton: false,
-};

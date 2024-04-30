@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, PropsWithChildren, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -33,7 +33,9 @@ export const useMarketplaceLandingLink = () => {
   }, [workspace, currentState, params]);
 };
 
-export const LandingLink: FunctionComponent<OwnProps> = (props) => {
+export const LandingLink: FunctionComponent<PropsWithChildren<OwnProps>> = (
+  props,
+) => {
   const { state, stateParams } = useMarketplaceLandingLink();
   return (
     <Link state={state} className={props.className} params={stateParams}>

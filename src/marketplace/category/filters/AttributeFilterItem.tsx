@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 import MediaQuery from 'react-responsive';
 
 import { CollapsibleItem } from './CollapsibleItem';
@@ -9,9 +9,9 @@ interface AttributeFilterItemProps {
   counter?: number;
 }
 
-export const AttributeFilterItem: React.FC<AttributeFilterItemProps> = (
-  props,
-) => (
+export const AttributeFilterItem: React.FC<
+  PropsWithChildren<AttributeFilterItemProps>
+> = (props) => (
   <MediaQuery minWidth={768}>
     {(matches) =>
       matches ? (

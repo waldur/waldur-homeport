@@ -1,26 +1,25 @@
-import { ComponentProps } from 'react';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import BaseSelect, { Props as SelectProps } from 'react-select';
+import BaseSelect, { Props as SelectProps, ThemeConfig } from 'react-select';
 import { AsyncPaginate as BaseAsyncPaginate } from 'react-select-async-paginate';
-import { ThemeConfig } from 'react-select/src/theme';
 import BaseWindowedSelect from 'react-windowed-select';
 
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
-const reactSelectMenuPortaling = (): Partial<SelectProps> => ({
+const REACT_SELECT_MENU_PORTALING: Partial<SelectProps> = {
   menuPortalTarget: document.body,
   styles: { menuPortal: (base) => ({ ...base, zIndex: 9999 }) },
   menuPosition: 'fixed',
   menuPlacement: 'bottom',
-});
+};
 
-export const reactSelectMenuNoPortaling = (): Partial<SelectProps> => ({
+export const REACT_SELECT_MENU_NO_PORTALING: Partial<SelectProps> = {
   menuPortalTarget: undefined,
   styles: undefined,
   menuPosition: undefined,
   menuPlacement: undefined,
-});
+};
 
 const DARK_COLORS = {
   neutral0: '#1A261D',
@@ -55,15 +54,13 @@ export const Select = (props) => {
     <BaseSelect
       theme={theme}
       placeholder={translate('Select') + '...'}
-      {...reactSelectMenuPortaling()}
+      {...REACT_SELECT_MENU_PORTALING}
       {...props}
     />
   );
 };
 
-export const AsyncPaginate = (
-  props: ComponentProps<typeof BaseAsyncPaginate>,
-) => {
+export const AsyncPaginate: FC<any> = (props) => {
   const theme = useTheme();
   return (
     <BaseAsyncPaginate
@@ -71,7 +68,7 @@ export const AsyncPaginate = (
       additional={{
         page: 1,
       }}
-      {...reactSelectMenuPortaling()}
+      {...REACT_SELECT_MENU_PORTALING}
       {...props}
     />
   );
@@ -82,7 +79,7 @@ export const WindowedSelect = (props) => {
   return (
     <BaseWindowedSelect
       theme={theme}
-      {...reactSelectMenuPortaling()}
+      {...REACT_SELECT_MENU_PORTALING}
       {...props}
     />
   );

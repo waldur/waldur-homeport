@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash';
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { Card, FormCheck } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -43,7 +43,9 @@ interface StepCardProps {
   refetching?: boolean;
 }
 
-export const VStepperFormStepCard: FC<StepCardProps> = (props) => {
+export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
+  props,
+) => {
   return (
     <Card className={'step-card card-flush ' + props.className} id={props.id}>
       <Card.Header className="ps-5">

@@ -119,7 +119,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
         )}
       </Modal.Body>
       <Modal.Footer>
-        <SubmitButton block={false} invalid={invalid} submitting={submitting}>
+        <SubmitButton invalid={invalid} submitting={submitting}>
           <i className="fa fa-sign-in" /> {translate('Sign in')}
         </SubmitButton>
         <CloseDialogButton />

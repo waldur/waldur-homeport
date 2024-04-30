@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
-import PlaceholderImage from 'react-simple-svg-placeholder';
 
+import { SVGImagePlaceholder } from '@waldur/core/SVGImagePlaceholder';
 interface LogoProps {
   image: string;
   placeholder: string;
@@ -12,7 +12,7 @@ export const Logo: FunctionComponent<LogoProps> = (props) =>
   props.image ? (
     <img src={props.image} alt="logo" height={props.height} width="auto" />
   ) : (
-    <PlaceholderImage
+    <SVGImagePlaceholder
       width={props.width}
       height={props.height}
       text={props.placeholder}

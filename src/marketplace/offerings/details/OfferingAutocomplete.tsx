@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { Props as SelectProps } from 'react-select';
 import { Field, Validator } from 'redux-form';
 
@@ -17,9 +17,10 @@ interface OfferingAutocompleteProps {
   validate?: Validator | Validator[];
 }
 
-export const OfferingAutocomplete: React.FC<OfferingAutocompleteProps> = (
-  props,
-) => (
+export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
+  providerOfferings = true,
+  ...props
+}) => (
   <Field
     name="offering"
     validate={props.validate}
@@ -36,7 +37,7 @@ export const OfferingAutocomplete: React.FC<OfferingAutocompleteProps> = (
               },
               prevOptions,
               page,
-              props.providerOfferings,
+              providerOfferings,
             )
           }
           value={fieldProps.input.value}
@@ -51,7 +52,3 @@ export const OfferingAutocomplete: React.FC<OfferingAutocompleteProps> = (
     )}
   />
 );
-
-OfferingAutocomplete.defaultProps = {
-  providerOfferings: true,
-};

@@ -22,8 +22,14 @@ export const AnswerGroup: FunctionComponent<{
     name={`checklist-${question.uuid}`}
     defaultValue="null"
   >
-    <ToggleButton value="true">{translate('Yes')}</ToggleButton>
-    <ToggleButton value="false">{translate('No')}</ToggleButton>
-    <ToggleButton value="null">{'?'}</ToggleButton>
+    <ToggleButton id="true" value="true">
+      {translate('Yes')}
+    </ToggleButton>
+    <ToggleButton id="false" value="false">
+      {translate('No')}
+    </ToggleButton>
+    <ToggleButton id="null" value="null">
+      {'?'}
+    </ToggleButton>
   </ToggleButtonGroup>
 );

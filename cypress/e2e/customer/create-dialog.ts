@@ -42,7 +42,7 @@ describe('Customer creation dialog', () => {
       .wait(500)
 
       // Notification should be shown
-      .get('p')
+      .get("[role='alert']")
       .contains('Organization has been created.')
 
       // Wait for modal to hide

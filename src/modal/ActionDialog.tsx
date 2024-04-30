@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton, FormContainer, FieldError } from '@waldur/form';
@@ -16,7 +16,9 @@ interface ActionDialogProps {
   error?: string;
 }
 
-export const ActionDialog: React.FC<ActionDialogProps> = (props) => (
+export const ActionDialog: React.FC<PropsWithChildren<ActionDialogProps>> = (
+  props,
+) => (
   <form onSubmit={props.onSubmit}>
     <ModalDialog
       title={props.title}

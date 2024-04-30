@@ -37,11 +37,6 @@ interface FormData {
   };
 }
 
-const defaultProps = {
-  labelClassName: 'col-sm-3',
-  valueClassName: 'col-sm-9',
-};
-
 const serializeDataVolume = ({ size, ...volumeRest }) => ({
   ...volumeRest,
   size: size * 1024,
@@ -105,15 +100,14 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
           <p>{translate('Unable to load data.')}</p>
         ) : (
           <>
-            <NodeRoleGroup {...defaultProps} />
-            <NodeFlavorGroup options={state.value.flavors} {...defaultProps} />
-            <SubnetGroup options={state.value.subnets} {...defaultProps} />
+            <NodeRoleGroup />
+            <NodeFlavorGroup options={state.value.flavors} />
+            <SubnetGroup options={state.value.subnets} />
             <NodeStorageGroup
               volumeTypes={state.value.volumeTypes}
               mountPoints={state.value.mountPoints}
               defaultVolumeType={state.value.defaultVolumeType}
               sm={{ span: 9, offset: 3 }}
-              {...defaultProps}
             />
           </>
         )}

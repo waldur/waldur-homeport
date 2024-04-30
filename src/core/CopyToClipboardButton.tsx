@@ -15,8 +15,8 @@ interface OwnProps {
 
 export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
   value,
-  size,
   className,
+  size = 'lg',
 }) => {
   const dispatch = useDispatch();
 
@@ -43,8 +43,4 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
       </button>
     </p>
   );
-};
-
-CopyToClipboardButton.defaultProps = {
-  size: 'lg',
 };

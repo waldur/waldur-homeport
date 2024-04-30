@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 import Avatar from '@waldur/core/Avatar';
 import { Tip } from '@waldur/core/Tooltip';
@@ -9,7 +9,6 @@ interface SymbolsGroupProps {
   max?: number;
   nameKey?: string;
   emailKey?: string;
-  imageKey?: string;
   length?: number;
   onClick?(): void;
 }
@@ -26,11 +25,11 @@ const getSymbolColorClass = (index: number) => {
   return colorClasses[index % colorClasses.length];
 };
 
-export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
+export const SymbolsGroup: FC<SymbolsGroupProps> = ({
+  max = 8,
+  nameKey = 'full_name',
+  emailKey = 'email',
   items,
-  max,
-  nameKey,
-  emailKey,
   length,
   onClick,
 }) => (
@@ -73,10 +72,3 @@ export const SymbolsGroup: FunctionComponent<SymbolsGroupProps> = ({
     )}
   </div>
 );
-
-SymbolsGroup.defaultProps = {
-  max: 8,
-  nameKey: 'full_name',
-  emailKey: 'email',
-  imageKey: 'imageUrl',
-};

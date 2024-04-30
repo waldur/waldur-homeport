@@ -102,11 +102,7 @@ export const VolumeExtendDialog = reduxForm<
       </Modal.Body>
       <Modal.Footer>
         <CloseDialogButton />
-        <SubmitButton
-          block={false}
-          submitting={submitting}
-          label={translate('Submit')}
-        />
+        <SubmitButton submitting={submitting} label={translate('Submit')} />
       </Modal.Footer>
     </form>
   );

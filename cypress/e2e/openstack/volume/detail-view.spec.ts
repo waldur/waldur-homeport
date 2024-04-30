@@ -60,9 +60,7 @@ describe('OpenStack Volume detail view', () => {
       .click({ force: true })
 
       .log('Select an option of Instance field')
-      .get('.modal-dialog div[class$="placeholder"]')
-      .first()
-      .click()
+      .openDropdownByLabel('Instance')
       .selectTheFirstOptionOfDropdown()
 
       .log('Submit the form')

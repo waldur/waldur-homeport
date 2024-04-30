@@ -1,5 +1,4 @@
 import { ComponentType } from 'react';
-import { Omit } from 'react-redux';
 
 import { BaseResource } from '@waldur/resource/types';
 import { User } from '@waldur/workspace/types';

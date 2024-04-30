@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -8,7 +8,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { LonghornWorkerWarning } from './LonghornWorkerWarning';
 
-const SelectFlavorField: FunctionComponent<any> = (props) => (
+const SelectFlavorField: FC<any> = (props) => (
   <SelectControl
     value={props.input.value}
     onChange={props.input.onChange}
@@ -18,20 +18,13 @@ const SelectFlavorField: FunctionComponent<any> = (props) => (
 );
 
 interface NodeFlavorGroupProps {
-  labelClassName?: string;
-  valueClassName?: string;
   nodeIndex?: number;
   options: any[];
 }
 
-export const NodeFlavorGroup: React.FC<NodeFlavorGroupProps> = (props) => {
+export const NodeFlavorGroup: FC<NodeFlavorGroupProps> = (props) => {
   return (
-    <FormGroup
-      label={translate('Flavor')}
-      required={true}
-      labelClassName={props.labelClassName}
-      valueClassName={props.valueClassName}
-    >
+    <FormGroup label={translate('Flavor')} required={true}>
       <Field
         name="flavor"
         component={SelectFlavorField}

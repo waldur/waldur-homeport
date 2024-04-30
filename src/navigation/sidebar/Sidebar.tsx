@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { PropsWithChildren, useEffect, useRef } from 'react';
 
 import {
   DrawerComponent,
@@ -35,7 +35,7 @@ function storeMenuAccordionsStatus(menuElement, event: 'show' | 'hide') {
   WorkspaceStorage.setSidebarStatus(newStates);
 }
 
-export const Sidebar: React.FC = (props) => {
+export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
   const layout = useLayout();
 

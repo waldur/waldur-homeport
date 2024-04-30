@@ -167,11 +167,7 @@ export const IssueCreateForm = enhance(
         )}
       </Modal.Body>
       <Modal.Footer>
-        <SubmitButton
-          block={false}
-          submitting={submitting}
-          label={options.submitTitle}
-        />
+        <SubmitButton submitting={submitting} label={options.submitTitle} />
         <CloseDialogButton />
       </Modal.Footer>
     </form>

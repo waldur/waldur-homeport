@@ -20,7 +20,7 @@ export interface ActionItemProps {
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => {
-  const Component = props.as;
+  const Component = props.as || Dropdown.Item;
   const actionMenuContext = useContext(ResourceActionMenuContext);
   if (
     actionMenuContext?.query &&
@@ -55,8 +55,4 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
   ) : (
     <Component {...props} />
   );
-};
-
-ActionItem.defaultProps = {
-  as: Dropdown.Item,
 };

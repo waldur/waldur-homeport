@@ -5,7 +5,9 @@ import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-export const CallOfferingExpandableRow: FunctionComponent<any> = ({ row }) => (
+export const CallOfferingExpandableRow: FunctionComponent<{ row }> = ({
+  row,
+}) => (
   <div className="container-fluid m-t">
     <Container>
       <Field
@@ -13,9 +15,11 @@ export const CallOfferingExpandableRow: FunctionComponent<any> = ({ row }) => (
         value={renderFieldOrDash(row.plan?.name)}
       />
       {typeof row.attributes?.limits === 'object' &&
-        Object.entries(row.attributes.limits).map(([key, value]) => (
-          <Field key={key} label={key} value={value} />
-        ))}
+        Object.entries(row.attributes.limits).map(
+          ([key, value]: [string, string]) => (
+            <Field key={key} label={key} value={value} />
+          ),
+        )}
     </Container>
   </div>
 );

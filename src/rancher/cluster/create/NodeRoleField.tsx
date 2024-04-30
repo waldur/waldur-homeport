@@ -10,10 +10,14 @@ export const NodeRoleField: FunctionComponent<any> = (props) => (
     name="role"
     type="checkbox"
   >
-    <ToggleButton value="controlplane">
+    <ToggleButton value="controlplane" id="controlplane">
       {translate('Control plane')}
     </ToggleButton>
-    <ToggleButton value="etcd">{translate('etcd')}</ToggleButton>
-    <ToggleButton value="worker">{translate('Worker')}</ToggleButton>
+    <ToggleButton value="etcd" id="etcd">
+      {translate('etcd')}
+    </ToggleButton>
+    <ToggleButton value="worker" id="worker">
+      {translate('Worker')}
+    </ToggleButton>
   </ToggleButtonGroup>
 );

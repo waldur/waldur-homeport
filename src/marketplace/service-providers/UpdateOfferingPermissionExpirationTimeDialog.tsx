@@ -58,7 +58,7 @@ const PureUpdateOfferingPermissionExpirationTimeDialog = (props) => {
         </FormContainer>
       </Modal.Body>
       <Modal.Footer>
-        <SubmitButton block={false} submitting={props.submitting}>
+        <SubmitButton submitting={props.submitting}>
           {translate('Update')}
         </SubmitButton>
         <CloseDialogButton />

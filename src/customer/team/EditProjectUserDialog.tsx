@@ -110,7 +110,7 @@ export const EditProjectUserDialog = connect(
           </FormContainer>
         </Modal.Body>
         <Modal.Footer>
-          <SubmitButton block={false} submitting={submitting}>
+          <SubmitButton submitting={submitting}>
             {translate('Save')}
           </SubmitButton>
           <CloseDialogButton />

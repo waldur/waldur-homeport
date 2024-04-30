@@ -1,4 +1,11 @@
-import { FC, createContext, useContext, useState, useEffect } from 'react';
+import {
+  FC,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  PropsWithChildren,
+} from 'react';
 
 import { DefaultLayoutConfig } from './DefaultLayoutConfig';
 import {
@@ -45,7 +52,7 @@ const disableSplashScreen = () => {
   }
 };
 
-const LayoutProvider: FC = ({ children }) => {
+const LayoutProvider: FC<PropsWithChildren> = ({ children }) => {
   const [config, setConfig] = useState(LayoutSetup.config);
   const [classes, setClasses] = useState(LayoutSetup.classes);
   const [attributes, setAttributes] = useState(LayoutSetup.attributes);

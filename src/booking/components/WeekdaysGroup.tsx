@@ -17,11 +17,7 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
   daysOfWeek,
   setDaysOfWeek,
 }) => (
-  <FormGroup
-    label={translate('Select available weekdays')}
-    labelClassName="col-sm-3"
-    valueClassName={'col-sm-8'}
-  >
+  <FormGroup label={translate('Select available weekdays')}>
     <div className="weekDays-selector">
       {[6].concat(range(6)).map((day, index) => {
         // luxon day indexes are Monday: 0 -> Sunday: 6

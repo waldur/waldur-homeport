@@ -9,18 +9,19 @@ interface TermsOfServiceProps {
   agreementDate: string;
 }
 
-export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
-  props,
-) => (
+export const TermsOfService: FunctionComponent<TermsOfServiceProps> = ({
+  initial = false,
+  agreementDate,
+}) => (
   <div className="mb-8">
-    {!props.initial
-      ? props.agreementDate &&
+    {!initial
+      ? agreementDate &&
         translate(
           '<Link>Terms of Service</Link> have been accepted on <Date></Date>',
           {
             Link: (s) => <Link state="about.tos" label={s} target="_blank" />,
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            Date: (_) => formatDateTime(props.agreementDate),
+            Date: (_) => formatDateTime(agreementDate),
           },
           formatJsx,
         )
@@ -34,7 +35,3 @@ export const TermsOfService: FunctionComponent<TermsOfServiceProps> = (
         )}
   </div>
 );
-
-TermsOfService.defaultProps = {
-  initial: false,
-};

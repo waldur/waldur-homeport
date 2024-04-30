@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { OverlayTrigger, OverlayTriggerProps, Tooltip } from 'react-bootstrap';
 
 interface TipProps {
@@ -12,12 +12,12 @@ interface TipProps {
   onClick?(): void;
 }
 
-export const Tip: React.FC<TipProps> = ({
+export const Tip: React.FC<PropsWithChildren<TipProps>> = ({
   label,
-  children,
   id,
   placement,
   trigger,
+  children,
   autoWidth,
   className,
   onClick,

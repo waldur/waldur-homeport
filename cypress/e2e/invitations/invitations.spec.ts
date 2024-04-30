@@ -277,7 +277,7 @@ describe('Invitations', () => {
       .get('button')
       .contains('Resend')
       .click()
-      .get('p')
+      .get('[role="alert"]')
       .contains('Invitation has been sent again.');
   });
 
@@ -286,7 +286,7 @@ describe('Invitations', () => {
       .get('button')
       .contains('Cancel')
       .click()
-      .get('p')
+      .get('[role="alert"]')
       .contains('Invitation has been canceled.');
   });
 });

@@ -15,11 +15,15 @@ import { UserDetails } from '@waldur/workspace/types';
 import * as actions from './actions';
 import { EmailChangeForm } from './EmailChangeForm';
 
-interface UserUpdateComponentProps {
+interface OwnProps {
   user: UserDetails;
 }
 
-const UserUpdateComponent: React.FC<UserUpdateComponentProps> = (props) => {
+const UserUpdateComponent: React.FC<
+  OwnProps &
+    ReturnType<typeof mapStateToProps> &
+    ReturnType<typeof mapDispatchToProps>
+> = (props) => {
   return (
     <Card className="mb-6">
       <Card.Header>{translate('Profile settings')}</Card.Header>
@@ -77,6 +81,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-const enhance = connect(mapStateToProps, mapDispatchToProps, null);
+const enhance = connect(mapStateToProps, mapDispatchToProps);
 
 export const UserEditFormContainer = enhance(UserUpdateComponent);

@@ -1,4 +1,4 @@
-import { useMemo, FunctionComponent } from 'react';
+import { useMemo, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -10,7 +10,7 @@ import { InvitationService } from '../InvitationService';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
-export const InvitationCancelButton: FunctionComponent<{
+export const InvitationCancelButton: FC<{
   invitation;
   refetch;
 }> = ({ invitation, refetch }) => {

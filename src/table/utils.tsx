@@ -84,9 +84,7 @@ export function getMessage({ query, verboseName }) {
 
 export const getFiltersFormId = (filters: JSX.Element) => {
   if (!filters) return '';
-  return (
-    filters.props?.form || filters.type?.WrappedComponent?.defaultProps?.form
-  );
+  return filters.props?.form;
 };
 
 export const getSavedFiltersKey = (table, formId) =>

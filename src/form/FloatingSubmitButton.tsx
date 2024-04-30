@@ -21,7 +21,7 @@ export const FloatingSubmitButton: FC<OwnProps> = ({
   disabled,
   submitting,
   errors,
-  variant,
+  variant = 'primary',
 }) => {
   const errorsExist = errors && Object.keys(errors).length > 0;
   return (
@@ -45,8 +45,4 @@ export const FloatingSubmitButton: FC<OwnProps> = ({
       </Tip>
     </FloatingButton>
   );
-};
-
-FloatingSubmitButton.defaultProps = {
-  variant: 'primary',
 };

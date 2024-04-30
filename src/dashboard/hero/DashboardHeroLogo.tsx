@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { ReactNode } from 'react';
-import PlaceholderImage from 'react-simple-svg-placeholder';
 
 import { Image } from '@waldur/core/Image';
 import './DashboardHeroLogo.scss';
+import { SVGImagePlaceholder } from '@waldur/core/SVGImagePlaceholder';
 
 interface DashboardHeroLogoProps {
   logo: string;
@@ -20,7 +20,7 @@ export const DashboardHeroLogo = (props: DashboardHeroLogoProps) => {
       {props.logo ? (
         <Image src={props.logo} size={100} isContain />
       ) : (
-        <PlaceholderImage
+        <SVGImagePlaceholder
           width={100}
           height={100}
           text={props.logoAlt ? props.logoAlt[0] : ''}

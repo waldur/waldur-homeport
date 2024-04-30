@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
@@ -21,7 +21,7 @@ import { Tab } from './Tab';
 import { Toolbar } from './Toolbar';
 import { useTabs } from './useTabs';
 
-export const Layout: React.FC = ({ children }) => {
+export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const dispatch = useDispatch();
   const { state } = useCurrentStateAndParams();
   const currentUser = useSelector(getUser);

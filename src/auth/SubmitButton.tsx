@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { Button } from 'react-bootstrap';
 
 interface SubmitButtonProps {
@@ -6,17 +6,16 @@ interface SubmitButtonProps {
   invalid?: boolean;
   label?: string;
   variant?: string;
-  block?: boolean;
   className?: string;
 }
 
-export const SubmitButton: React.FC<SubmitButtonProps> = ({
+export const SubmitButton: FC<PropsWithChildren<SubmitButtonProps>> = ({
   submitting,
   invalid,
   label,
   children,
-  variant,
   className,
+  variant = 'primary',
 }) => (
   <Button
     type="submit"
@@ -33,8 +32,3 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
     {children}
   </Button>
 );
-
-SubmitButton.defaultProps = {
-  variant: 'primary',
-  block: true,
-};

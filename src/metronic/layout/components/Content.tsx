@@ -1,10 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 
 import { DrawerComponent } from '../../components';
 import { useLayout } from '../core';
 
-const Content: React.FC = ({ children }) => {
+const Content: React.FC<PropsWithChildren> = ({ children }) => {
   const { classes } = useLayout();
   const { state } = useCurrentStateAndParams();
   useEffect(() => {

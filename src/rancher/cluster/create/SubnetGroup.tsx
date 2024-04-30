@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -7,23 +7,13 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { SimpleSelectField } from './SimpleSelectField';
 
-export const SubnetGroup: FunctionComponent<any> = (props) => (
-  <FormGroup
-    label={translate('Subnet')}
-    required={true}
-    labelClassName={props.labelClassName}
-    valueClassName={props.valueClassName}
-  >
+export const SubnetGroup: FC<{ options }> = ({ options }) => (
+  <FormGroup label={translate('Subnet')} required={true}>
     <Field
       name="attributes.subnet"
       validate={required}
-      options={props.options}
+      options={options}
       component={SimpleSelectField}
     />
   </FormGroup>
 );
-
-SubnetGroup.defaultProps = {
-  labelClassName: 'col-sm-3',
-  valueClassName: 'col-sm-9',
-};

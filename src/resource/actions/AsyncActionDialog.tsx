@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
@@ -14,7 +14,9 @@ interface AsyncActionDialogProps {
   invalid: boolean;
 }
 
-export const AsyncActionDialog: FC<AsyncActionDialogProps> = (props) => (
+export const AsyncActionDialog: FC<
+  PropsWithChildren<AsyncActionDialogProps>
+> = (props) => (
   <ModalDialog
     title={props.title}
     footer={

@@ -33,36 +33,35 @@ const getTheme = (): string => {
   return theme === 'dark' ? 'vs-dark' : 'vs-light';
 };
 
-export const MonacoField: React.FC<MonacoFieldProps> = (props) => (
+export const MonacoField: React.FC<MonacoFieldProps> = ({
+  height = 600,
+  options = {
+    automaticLayout: true,
+  },
+  ...props
+}) => (
   <Suspense fallback={<LoadingSpinner />}>
     {props.diff ? (
       <ReactMonacoDiff
-        height={props.height}
+        height={height}
         language={props.mode}
         value={props.input.value}
         onChange={props.input.onChange}
         original={props.original}
-        options={props.options}
+        options={options}
         width={props.width}
         theme={getTheme()}
       />
     ) : (
       <ReactMonacoEditor
-        height={props.height}
+        height={height}
         width={props.width}
         language={props.mode}
         value={props.input.value}
         onChange={props.input.onChange}
-        options={props.options}
+        options={options}
         theme={getTheme()}
       />
     )}
   </Suspense>
 );
-
-MonacoField.defaultProps = {
-  height: 600,
-  options: {
-    automaticLayout: true,
-  },
-};

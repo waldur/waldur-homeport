@@ -80,7 +80,6 @@ const WizardFormPure: FC<WizardFormProps> = (props) => {
           </Button>
         )}
         <SubmitButton
-          block={false}
           submitting={props.submitting}
           label={props.submitLabel}
           invalid={props.submitDisabled}

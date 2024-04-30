@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 import { connect } from 'react-redux';
 
 import { getNativeNameVisible, getConfig } from '@waldur/store/config';
@@ -14,20 +14,19 @@ import { UserDetails } from '@waldur/workspace/types';
 import * as actions from './actions';
 import { EmailChangeForm } from './EmailChangeForm';
 
-interface UserUpdateComponentProps {
-  showDeleteButton: boolean;
+interface OwnProps {
   user: UserDetails;
 }
 
-const UserUpdateComponent: React.FC<UserUpdateComponentProps> = (props) => {
+const UserUpdateComponent: FC<
+  OwnProps &
+    ReturnType<typeof mapStateToProps> &
+    ReturnType<typeof mapDispatchToProps>
+> = (props) => {
   if (!props.user.email) {
     return <EmailChangeForm user={props.user} />;
   }
   return <UserEditForm {...props} />;
-};
-
-UserUpdateComponent.defaultProps = {
-  showDeleteButton: true,
 };
 
 const getProtectedMethods = (state: any): string[] => {

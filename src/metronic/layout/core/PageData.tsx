@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, createContext, useContext, useEffect, useState } from 'react';
+import {
+  FC,
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 interface PageLink {
   title: string;
@@ -24,7 +31,7 @@ const PageDataContext = createContext<PageDataContextModel>({
   setPageDescription: (_description: string) => {},
 });
 
-const PageDataProvider: FC = ({ children }) => {
+const PageDataProvider: FC<PropsWithChildren> = ({ children }) => {
   const [pageTitle, setPageTitle] = useState<string>('');
   const [pageDescription, setPageDescription] = useState<string>('');
   const [pageBreadcrumbs, setPageBreadcrumbs] = useState<Array<PageLink>>([]);
@@ -52,7 +59,11 @@ type Props = {
   breadcrumbs?: Array<PageLink>;
 };
 
-const PageTitle: FC<Props> = ({ children, description, breadcrumbs }) => {
+const PageTitle: FC<PropsWithChildren<Props>> = ({
+  children,
+  description,
+  breadcrumbs,
+}) => {
   const { setPageTitle, setPageDescription, setPageBreadcrumbs } =
     usePageData();
   useEffect(() => {
@@ -85,7 +96,7 @@ const PageTitle: FC<Props> = ({ children, description, breadcrumbs }) => {
   return <></>;
 };
 
-const PageDescription: React.FC = ({ children }) => {
+const PageDescription: React.FC<PropsWithChildren> = ({ children }) => {
   const { setPageDescription } = usePageData();
   useEffect(() => {
     if (children) {

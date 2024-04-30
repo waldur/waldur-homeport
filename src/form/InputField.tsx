@@ -9,12 +9,8 @@ interface InputFieldProps extends FormField {
 
 export const InputField: FunctionComponent<InputFieldProps> = ({
   input,
-  className,
+  className = 'form-control-solid',
   ...props
 }) => (
   <FormControl className={className} placeholder="  " {...input} {...props} />
 );
-
-InputField.defaultProps = {
-  className: 'form-control-solid',
-};

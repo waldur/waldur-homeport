@@ -33,11 +33,7 @@ export const BroadcastTemplateForm = ({
           validate={required}
         />
         <div className="mb-5 text-end">
-          <SubmitButton
-            block={false}
-            submitting={submitting}
-            label={translate('Save')}
-          />
+          <SubmitButton submitting={submitting} label={translate('Save')} />
         </div>
       </FormContainer>
     </Modal.Body>

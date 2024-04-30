@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 
 interface SubmitButtonProps {
   submitting: boolean;
@@ -9,11 +9,14 @@ interface SubmitButtonProps {
   onClick?(): void;
 }
 
-export const SubmitButton: FunctionComponent<SubmitButtonProps> = (props) => (
+export const SubmitButton: FC<SubmitButtonProps> = ({
+  className = 'btn btn-primary',
+  ...props
+}) => (
   <button
     id={props.id}
     type="submit"
-    className={props.className}
+    className={className}
     disabled={props.submitting || props.disabled === true}
     onClick={props.onClick}
   >
@@ -21,7 +24,3 @@ export const SubmitButton: FunctionComponent<SubmitButtonProps> = (props) => (
     {props.label}
   </button>
 );
-
-SubmitButton.defaultProps = {
-  className: 'btn btn-primary',
-};
