@@ -167,7 +167,10 @@ describe('Add resource pop up is visible', { testIsolation: false }, () => {
   });
 
   it('Provider context: Assure that selecting resources from resource quick creation form works', () => {
-    cy.clickSidebarMenuItem('Provider');
+    cy.clickSidebarMenuItem('Organization');
+    cy.get('.nav-tabs .nav-item button:contains(Service provider)')
+      .should('exist')
+      .click();
     openQuickAddResourcePopupAndSelectAnOffering('HPC', 'Another offering');
   });
 

@@ -40,6 +40,10 @@ export const DefaultLayoutConfig: ILayout = {
     width: 'fixed', // Set fixed|fluid to change width
     layout: 'default',
   },
+  hero: {
+    display: true,
+    width: 'fluid',
+  },
   toolbar: {
     display: true, // Display toolbar
     width: 'fluid', // Set fixed|fluid to change width type,

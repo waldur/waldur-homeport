@@ -7,11 +7,9 @@ import { MenuComponent } from '@waldur/metronic/components';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { AdminMenu } from './AdminMenu';
-import { CallManagementMenu } from './CallManagementMenu';
 import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
-import { ProviderMenu } from './ProviderMenu';
 import { ReportingMenu } from './ReportingMenu';
 import { ResourcesMenu } from './ResourcesMenu';
 import { Sidebar } from './Sidebar';
@@ -51,8 +49,6 @@ export const UnifiedSidebar = () => {
           ) : null}
           <ManagementMenu />
           <ResourcesMenu />
-          <ProviderMenu />
-          <CallManagementMenu />
           <ReportingMenu />
           <SupportMenu />
           <AdminMenu />

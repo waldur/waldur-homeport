@@ -37,6 +37,11 @@
       border-bottom: get($toolbar-config, border-bottom);
     }
 
+    // Enabled hero & fixed toolbar modes
+    .hero-enabled.toolbar-fixed & {
+      position: sticky;
+    }
+
     // Aside default enabled, aside fixed & header sticky modes
     .aside-enabled.aside-fixed.toolbar-fixed & {
       left: get($aside-config, width);
@@ -77,6 +82,11 @@
       top: get($header-config, default, height, tablet-and-mobile);
       border-top: get($toolbar-config, border-top);
       border-bottom: get($toolbar-config, border-bottom);
+    }
+
+    // Enabled hero & fixed toolbar modes
+    .hero-enabled.toolbar-tablet-and-mobile-fixed & {
+      position: sticky;
     }
 
     // Page title

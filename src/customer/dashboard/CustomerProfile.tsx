@@ -1,20 +1,26 @@
-import { FC } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
 
 import 'world-flags-sprite/stylesheets/flags32.css';
 
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { CallManagerIcon } from '@waldur/navigation/workspace/CallManagerIcon';
+import { ProviderOfferingPermissions } from '@waldur/marketplace/service-providers/dashboard/ProviderOfferingPermissions';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
-import { ServiceProviderIcon } from '@waldur/navigation/workspace/ServiceProviderIcon';
 import { Customer } from '@waldur/workspace/types';
 
 import { CustomerActions } from './CustomerActions';
 import { CustomerUsersBadge } from './CustomerUsersBadge';
 
-export const CustomerProfile: FC<{ customer: Customer }> = ({ customer }) => (
-  <Card className="mb-6">
+interface CustomerProfileProps {
+  customer: Customer;
+  fromServiceProvider?: boolean;
+}
+
+export const CustomerProfile = ({
+  customer,
+  fromServiceProvider,
+}: CustomerProfileProps) => (
+  <Card>
     <Card.Body>
       <Row>
         <Col xs="auto">
@@ -37,19 +43,19 @@ export const CustomerProfile: FC<{ customer: Customer }> = ({ customer }) => (
         <Col>
           <Row className="mb-6">
             <Col>
-              <Stack direction="horizontal" className="gap-6 text-muted mb-1">
-                <div className="d-flex align-items-center gap-2">
-                  {customer.country && (
-                    <i className="f32">
-                      <i
-                        className={`flag ${customer.country?.toLowerCase()}`}
-                      ></i>
-                    </i>
-                  )}
-                  <h2 className="mb-0">{customer.name}</h2>
-                </div>
-                <ServiceProviderIcon organization={customer} />
-                <CallManagerIcon organization={customer} />
+              <Stack
+                direction="horizontal"
+                gap={2}
+                className="gap-6 text-muted mb-1"
+              >
+                {customer.country && (
+                  <i className="f32">
+                    <i
+                      className={`flag ${customer.country?.toLowerCase()}`}
+                    ></i>
+                  </i>
+                )}
+                <h2 className="mb-0">{customer.name}</h2>
               </Stack>
               <Stack direction="horizontal" className="gap-6 text-muted">
                 {[
@@ -67,7 +73,11 @@ export const CustomerProfile: FC<{ customer: Customer }> = ({ customer }) => (
           </Row>
           <Row>
             <Col xs={12}>
-              <CustomerUsersBadge />
+              {fromServiceProvider ? (
+                <ProviderOfferingPermissions customer={customer} />
+              ) : (
+                <CustomerUsersBadge />
+              )}
             </Col>
           </Row>
         </Col>

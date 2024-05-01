@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from 'react';
+import { ReactNode, createContext, useContext, useEffect } from 'react';
 
 import { Tab } from './Tab';
 
@@ -8,6 +8,7 @@ export interface LayoutContextInterface {
   setExtraTabs(tabs: Tab[]): void;
   fullPage: boolean;
   setFullPage(value: boolean): void;
+  setPageHero(component: React.ReactNode);
 }
 
 export const LayoutContext = createContext<Partial<LayoutContextInterface>>({});
@@ -28,6 +29,16 @@ export const useFullPage = () => {
     layoutContext.setFullPage(true);
     return () => {
       layoutContext.setFullPage(false);
+    };
+  }, [layoutContext]);
+};
+
+export const usePageHero = (component: ReactNode) => {
+  const layoutContext = useContext(LayoutContext);
+  useEffect(() => {
+    layoutContext.setPageHero(component);
+    return () => {
+      layoutContext.setPageHero(null);
     };
   }, [layoutContext]);
 };

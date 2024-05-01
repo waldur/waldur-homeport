@@ -49,7 +49,7 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
         {showScrollArrows && <TabsScrollArrows />}
         <div
           ref={tabsScrollRef}
-          className="d-flex align-items-stretch scroll-x"
+          className="d-flex align-items-stretch overflow-auto"
         >
           <div ref={tabsWrapperRef} className="header-menu align-items-stretch">
             <div

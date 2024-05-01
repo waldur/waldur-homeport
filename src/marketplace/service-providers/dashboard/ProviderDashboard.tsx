@@ -5,13 +5,11 @@ import { ProviderOfferingsComponent } from '@waldur/marketplace/service-provider
 
 import { ProviderDashboardChart } from './ProviderDashboardChart';
 import { ProviderEventsTable } from './ProviderEventsTable';
-import { ProviderProfile } from './ProviderProfile';
 import { ProviderWidgets } from './ProviderWidgets';
 
 export const ProviderDashboard = ({ provider }) =>
   provider ? (
     <>
-      <ProviderProfile provider={provider} />
       <Row>
         <Col md={12} lg={6}>
           <ProviderDashboardChart provider={provider} />

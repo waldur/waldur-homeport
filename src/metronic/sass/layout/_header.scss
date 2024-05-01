@@ -11,6 +11,7 @@
     position: relative;
     z-index: 2;
     height: get($header-config, default, height, desktop);
+    border-bottom: get($header-config, default, border-bottom);
     transition: left get($aside-config, transition-speed) ease;
 
     // Fixed header & sticky header modes
@@ -57,6 +58,7 @@
     justify-content: space-between;
     align-items: center;
     height: get($header-config, default, height, tablet-and-mobile);
+    border-bottom: get($header-config, default, border-bottom);
     position: relative;
     z-index: 3;
 

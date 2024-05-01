@@ -4,6 +4,7 @@ import {
   IContent,
   IFooter,
   IHeader,
+  IHero,
   IToolbar,
   ILayout,
   ILayoutCSSClasses,
@@ -45,6 +46,7 @@ export function getEmptyCssClasses() {
     aside: [],
     asideMenu: [],
     asideToggle: [],
+    heroContainer: [],
     toolbar: [],
     toolbarContainer: [],
     content: [],
@@ -117,6 +119,17 @@ export class LayoutSetup {
     if (config.fixed.tabletAndMobile) {
       document.body.classList.add('header-tablet-and-mobile-fixed');
     }
+  }
+
+  private static initHero(config: IHero): void {
+    if (!config.display) {
+      return;
+    }
+
+    document.body.classList.add('hero-enabled');
+    LayoutSetup.classes.heroContainer.push(
+      config.width === 'fluid' ? 'container-fluid' : 'container',
+    );
   }
 
   private static initToolbar(config: IToolbar): void {
@@ -231,6 +244,7 @@ export class LayoutSetup {
 
     LayoutSetup.initHeader(config.header);
     LayoutSetup.initPageTitle(config.pageTitle as IPageTitle);
+    LayoutSetup.initHero(config.hero);
     LayoutSetup.initToolbar(config.toolbar);
     LayoutSetup.initContent(config.content);
     LayoutSetup.initAside(config.aside);

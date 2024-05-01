@@ -23,7 +23,7 @@ const isChild = (parent, child) =>
     child.name.toString().startsWith(`${parent.name}.`));
 
 export const isChildOf = (parentName: string, state: StateDeclaration) =>
-  state.name.startsWith(`${parent.name}.`) ||
+  state.name.startsWith(`${state.parent}.`) ||
   state.name.startsWith(`${parentName}.`) ||
   state.parent === parentName;
 

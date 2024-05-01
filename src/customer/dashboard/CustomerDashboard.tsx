@@ -32,7 +32,6 @@ export const CustomerDashboard: FunctionComponent = () => {
         <CustomerProfile customer={customer} />
       ) : (
         <>
-          <CustomerProfile customer={customer} />
           <CustomerDashboardChart customer={customer} user={user} />
           <CustomerChecklistOverview customer={customer} />
           <div className="mb-6">

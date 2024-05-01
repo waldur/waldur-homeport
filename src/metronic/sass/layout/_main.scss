@@ -44,6 +44,11 @@ body {
       padding-top: get($header-config, fixed, height, desktop);
     }
 
+    // Fixed header & fixed toolbar & enabled hero modes
+    .header-fixed.toolbar-fixed.hero-enabled & {
+      padding-top: get($header-config, fixed, height, desktop);
+    }
+
     // Fixed header & fixed toolbar modes
     .header-fixed.toolbar-fixed & {
       padding-top: calc(
@@ -67,6 +72,12 @@ body {
   .wrapper {
     // Fixed header mode
     .header-tablet-and-mobile-fixed & {
+      padding-top: get($header-config, fixed, height, tablet-and-mobile);
+    }
+
+    // Fixed header & fixed toolbar & enabled hero modes
+    .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed.hero-enabled
+      & {
       padding-top: get($header-config, fixed, height, tablet-and-mobile);
     }
 

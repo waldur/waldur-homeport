@@ -31,6 +31,7 @@ $header-config: (
         tablet-and-mobile: 55px,
       ),
       bg-color: if(isDarkMode(), #253629, $white),
+      border-bottom: 1px solid $border-color,
     ),
   // Fixed Mode
   fixed:
@@ -41,6 +42,7 @@ $header-config: (
       ),
       z-index: 100,
       bg-color: if(isDarkMode(), #253629, $white),
+      border-bottom: 1px solid $border-color,
       box-shadow:
         if(isDarkMode(), none, 0px 10px 30px 0px rgba(82, 63, 105, 0.05)),
     )
@@ -61,7 +63,7 @@ $toolbar-config: (
       0px 10px 30px 0px rgba(17, 26, 19, 0.05),
       0px 10px 30px 0px rgba(82, 63, 105, 0.05)
     ),
-  border-top: 1px solid $border-color,
+  border-top: 0,
   border-bottom: if(isDarkMode(), 1px solid $border-color, 0),
 ) !default;
 

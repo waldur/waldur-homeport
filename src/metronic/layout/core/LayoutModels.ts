@@ -52,6 +52,11 @@ interface ISidebar {
   displayFooterButton: boolean;
 }
 
+export interface IHero {
+  display: boolean;
+  width: 'fixed' | 'fluid';
+}
+
 export interface IToolbar {
   display: boolean;
   width: 'fixed' | 'fluid';
@@ -112,6 +117,7 @@ export interface ILayout {
   megaMenu: IMegaMenu;
   aside: IAside;
   content: IContent;
+  hero: IHero;
   toolbar: IToolbar;
   footer: IFooter;
   sidebar?: ISidebar;
@@ -128,6 +134,7 @@ export interface ILayoutCSSClasses {
   asideMenu: Array<string>;
   asideToggle: Array<string>;
   sidebar: Array<string>;
+  heroContainer: Array<string>;
   toolbar: Array<string>;
   toolbarContainer: Array<string>;
   content: Array<string>;

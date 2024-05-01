@@ -26,7 +26,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
   const goToUsers = () => router.stateService.go('project-users');
 
   return (
-    <Card className="mb-6">
+    <Card>
       <Card.Body>
         <Row>
           <Col xs="auto">
