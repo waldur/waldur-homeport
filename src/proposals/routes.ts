@@ -6,6 +6,7 @@ import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
+import { OrganizationUIView } from '@waldur/organization/OrganizationUIView';
 
 const CallManagementDashboard = lazyComponent(
   () => import('./call-management/CallManagementDashboard'),
@@ -74,7 +75,7 @@ export const states: StateDeclaration[] = [
     name: 'call-management',
     url: '/call-management/:uuid/',
     parent: 'layout',
-    component: UIView,
+    component: OrganizationUIView,
     abstract: true,
     data: {
       auth: true,

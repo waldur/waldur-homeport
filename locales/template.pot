@@ -1636,7 +1636,7 @@ msgstr ""
 msgid "Call details"
 msgstr ""
 
-#: src/navigation/sidebar/CallManagementMenu.tsx
+#: src/organization/OrganizationUIView.tsx
 #: src/proposals/routes.ts
 msgid "Call management"
 msgstr ""
@@ -2856,6 +2856,10 @@ msgstr ""
 msgid "Custom scripts"
 msgstr ""
 
+#: src/organization/OrganizationUIView.tsx
+msgid "Customer"
+msgstr ""
+
 #: src/issues/CustomerSupportRating.tsx
 msgid "Customer support satisfaction overall rating"
 msgstr ""
@@ -3601,6 +3605,7 @@ msgstr ""
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -7085,7 +7090,7 @@ msgstr ""
 msgid "Offering managers"
 msgstr ""
 
-#: src/marketplace/service-providers/dashboard/ProviderProfile.tsx
+#: src/marketplace/service-providers/dashboard/ProviderOfferingPermissions.tsx
 msgid "Offering managers:"
 msgstr ""
 
@@ -8861,7 +8866,6 @@ msgid "Protected fields"
 msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
-#: src/navigation/sidebar/ProviderMenu.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/proposal/create/ResourceRequestsSummary.tsx
 #: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
@@ -10238,7 +10242,6 @@ msgstr ""
 #: src/proposals/proposal/create-review/CommentFormDialog.tsx
 #: src/proposals/team/AddUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
-#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/reporting/invoices/utils.ts
 msgid "Save"
 msgstr ""
@@ -10857,10 +10860,10 @@ msgstr ""
 #: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/routes.ts
-#: src/marketplace/service-providers/dashboard/ProviderProfile.tsx
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
+#: src/organization/OrganizationUIView.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx
 #: src/proposals/update/offerings/WizardFormFirstPage.tsx
 #: src/reporting/plan-usage/PlanUsageFilter.tsx
@@ -13302,7 +13305,7 @@ msgid "Unable to load user."
 msgstr ""
 
 #: src/customer/dashboard/CustomerUsersBadge.tsx
-#: src/marketplace/service-providers/dashboard/ProviderProfile.tsx
+#: src/marketplace/service-providers/dashboard/ProviderOfferingPermissions.tsx
 #: src/project/ProjectUsersBadge.tsx
 msgid "Unable to load users"
 msgstr ""

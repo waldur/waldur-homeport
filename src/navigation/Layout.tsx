@@ -28,6 +28,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const [actions, setActions] = useState(null);
   const [extraTabs, setExtraTabs] = useState<Tab[]>([]);
   const [fullPage, setFullPage] = useState(false);
+  const [PageHero, setPageHero] = useState<React.ReactNode>(null);
   const context = useMemo<Partial<LayoutContextInterface>>(
     () => ({
       setActions,
@@ -35,8 +36,9 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setExtraTabs,
       fullPage,
       setFullPage,
+      setPageHero,
     }),
-    [setActions, extraTabs, setExtraTabs, fullPage, setFullPage],
+    [setActions, extraTabs, setExtraTabs, fullPage, setFullPage, setPageHero],
   );
 
   const layout = useLayout();
@@ -47,11 +49,12 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     layout.setLayout({
       toolbar: showToolbar ? DefaultLayoutConfig.toolbar : false,
+      hero: PageHero ? DefaultLayoutConfig.hero : false,
       content: {
-        width: fullPage ? 'fluid' : 'fixed',
+        width: fullPage || PageHero ? 'fluid' : 'fixed',
       },
     });
-  }, [showToolbar, fullPage]);
+  }, [showToolbar, fullPage, PageHero]);
 
   useEffect(() => {
     if (AuthService.isAuthenticated() && !currentUser) {
@@ -76,10 +79,16 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
               )}
               <WarningBar />
               <div
-                className={classNames('content d-flex flex-column-fluid', {
-                  'full-page': fullPage,
-                })}
+                className={classNames(
+                  'content d-flex flex-column flex-grow-1',
+                  { 'full-page': fullPage },
+                )}
               >
+                {PageHero && (
+                  <div className="hero w-100 d-flex flex-column">
+                    {PageHero}
+                  </div>
+                )}
                 {showToolbar && <Toolbar actions={actions} />}
                 <div className="post w-100 d-flex flex-column-fluid">
                   {children}

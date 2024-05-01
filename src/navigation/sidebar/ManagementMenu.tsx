@@ -8,6 +8,12 @@ import {
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
 
+import {
+  ORGNIZATION_MENU_EXCLUDE_STATES,
+  PROJECT_MENU_EXCLUDE_STATES,
+} from '../constants';
+import { isDescendantOf } from '../useTabs';
+
 import { MenuItem } from './MenuItem';
 
 const IconOrganization = require('./Organization.svg');
@@ -26,14 +32,20 @@ export const ManagementMenu = () => {
           state="organization.dashboard"
           params={{ uuid: customer.uuid }}
           activeState={
-            // The following states will highlight the other menu items ("Add resource", "Call management")
-            ['marketplace-offering-customer', 'protected-call'].some(
+            [
+              'organization',
+              'call-management',
+              'protected-call',
+              'marketplace-provider',
+            ].some((name) => isDescendantOf(name, state)) &&
+            // The following states will highlight the other menu items ("Add resource", "Resource details")
+            !ORGNIZATION_MENU_EXCLUDE_STATES.some(
               (name) =>
                 state.name.includes(name) ||
                 String(state.parent).includes(name),
             )
-              ? undefined
-              : 'organization'
+              ? state.name
+              : undefined
           }
           iconPath={IconOrganization}
           child={false}
@@ -51,12 +63,8 @@ export const ManagementMenu = () => {
           title={translate('Project')}
           state="project.dashboard"
           activeState={
-            [
-              'marketplace-project-resources-all',
-              'marketplace-project-resources',
-              // The following state highlights the "Add resource" menu item
-              'marketplace-offering-project',
-            ].includes(state.name) || params.resource_uuid
+            PROJECT_MENU_EXCLUDE_STATES.includes(state.name) ||
+            params.resource_uuid
               ? undefined
               : 'project'
           }

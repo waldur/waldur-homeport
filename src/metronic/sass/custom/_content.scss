@@ -5,3 +5,12 @@
     padding: 0;
   }
 }
+
+.hero-enabled .content {
+  padding: 0;
+
+  .post {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}

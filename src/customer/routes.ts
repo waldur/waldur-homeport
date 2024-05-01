@@ -6,6 +6,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
+import { OrganizationUIView } from '@waldur/organization/OrganizationUIView';
 import { isStaff } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
@@ -84,7 +85,7 @@ export const states: StateDeclaration[] = [
       skipInitWorkspace: true,
     },
     parent: 'layout',
-    component: UIView,
+    component: OrganizationUIView,
     resolve: [
       {
         token: 'fetchCustomer',

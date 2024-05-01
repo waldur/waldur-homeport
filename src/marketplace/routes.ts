@@ -7,6 +7,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
+import { OrganizationUIView } from '@waldur/organization/OrganizationUIView';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import { fetchProvider, loadContext } from './resolve';
@@ -359,7 +360,7 @@ export const states: StateDeclaration[] = [
     abstract: true,
     url: '/providers/:uuid/',
     parent: 'layout',
-    component: UIView,
+    component: OrganizationUIView,
     data: {
       auth: true,
       workspace: WorkspaceType.ORGANIZATION,

@@ -132,9 +132,9 @@ describe('Workspace selector', () => {
         cy.get('.actions .action-item').contains('SP').click({ force: true });
       });
 
-    // wait for the provider menu and dashboard
-    cy.get('.aside-menu .menu-item:contains(Provider)')
-      .should('have.class', 'here')
+    // wait for the provider tab and dashboard
+    cy.get('.nav-tabs .nav-item button:contains(Service provider)')
+      .should('have.class', 'active')
       .get('.page-title:contains(Service provider)')
       .should('be.visible');
   });

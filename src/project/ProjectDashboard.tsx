@@ -9,7 +9,6 @@ import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
 import { ProjectEventsView } from './ProjectEventsList';
-import { ProjectProfile } from './ProjectProfile';
 
 export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldConcealPrices = useSelector((state: RootState) =>
@@ -27,7 +26,6 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   }
   return (
     <>
-      <ProjectProfile project={project} />
       {!shouldConcealPrices && <ProjectDashboardCostLimits project={project} />}
       <ProjectResourcesAllList initialPageSize={5} className="mb-6" />
       <ProjectEventsView />
