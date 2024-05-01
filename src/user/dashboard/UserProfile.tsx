@@ -55,7 +55,7 @@ export const UserProfile = ({ user }: { user: UserDetails }) => {
                 </Stack>
               </Col>
               <Col xs="auto">
-                <UserActions />{' '}
+                <UserActions />
               </Col>
             </Row>
             {Array.isArray(user.affiliations) &&

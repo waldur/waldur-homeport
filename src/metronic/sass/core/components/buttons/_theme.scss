@@ -16,6 +16,11 @@
     $border-color-active: theme-active-color($name);
     $bg-color-active: theme-active-color($name);
 
+    $color-dark: theme-dark-inverse-color($name);
+    $icon-color-dark: theme-dark-inverse-color($name);
+    $border-color-dark: theme-dark-color($name);
+    $bg-color-dark: theme-dark-color($name);
+
     @include button-custom-variant(
       $color,
       $icon-color,
@@ -24,7 +29,11 @@
       $color-active,
       $icon-color-active,
       $border-color-active,
-      $bg-color-active
+      $bg-color-active,
+      $color-dark,
+      $icon-color-dark,
+      $border-color-dark,
+      $bg-color-dark
     );
   }
 

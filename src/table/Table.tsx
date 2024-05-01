@@ -110,7 +110,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
           {this.props.hasActionBar && (
             <Card.Header className="border-2 border-bottom">
               <Row className="card-toolbar w-100">
-                <Col xs className="order-0 pe-5">
+                <Col xs className="order-0 mw-25 pe-5">
                   <Card.Title>
                     <span className="me-2">
                       {this.props.title || this.props.alterTitle}
@@ -118,22 +118,18 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                     <TableRefreshButton {...this.props} />
                   </Card.Title>
                 </Col>
-                <Col xs md={4} xl={4} className="order-1 order-md-2 ps-5">
+                <Col
+                  xs="auto"
+                  className="order-1 order-md-2 min-w-25 ms-auto ps-5"
+                >
                   {this.showActionsColumn() && (
-                    <div className="ms-auto">
-                      <div className="d-flex justify-content-end text-nowrap gap-3">
-                        <TableButtons {...this.props} />
-                      </div>
+                    <div className="d-flex justify-content-end text-nowrap gap-3">
+                      <TableButtons {...this.props} />
                     </div>
                   )}
                 </Col>
                 {this.showQueryColumn() && (
-                  <Col
-                    xs={12}
-                    md={4}
-                    xl={4}
-                    className="order-2 order-md-1 mt-4 mt-md-0"
-                  >
+                  <Col xs className="order-2 order-md-1 mw-lg-350px mx-auto">
                     {!this.props.selectedRows?.length ? (
                       this.props.hasQuery && (
                         <TableQuery

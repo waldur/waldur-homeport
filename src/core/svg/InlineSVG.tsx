@@ -10,6 +10,12 @@ type Props = {
   tooltipClassName?: string;
 };
 
+const SvgIcon = (props: Pick<Props, 'className' | 'path' | 'svgClassName'>) => (
+  <span className={`svg-icon ${props.className}`}>
+    <SVG src={props.path} className={props.svgClassName} />
+  </span>
+);
+
 const InlineSVG: React.FC<Props> = ({
   className = '',
   path,
@@ -25,11 +31,9 @@ const InlineSVG: React.FC<Props> = ({
 
   return (
     <OverlayTrigger placement="bottom" overlay={tooltip}>
-      <span className={`svg-icon ${className}`}>
-        <SVG src={path} className={svgClassName} />
-      </span>
+      <SvgIcon path={path} className={className} svgClassName={svgClassName} />
     </OverlayTrigger>
   );
 };
 
-export { InlineSVG };
+export { InlineSVG, SvgIcon };

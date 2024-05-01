@@ -5,11 +5,26 @@
 //
 
 // Theme colors
+// Primary base
+$primary-50: if(isDarkMode(), #1a261d, #f1f7ef);
+$primary-200: if(isDarkMode(), #405448, #c3dabb);
+$primary-300: if(isDarkMode(), #5d806b, #97bf89);
+$primary-700: if(isDarkMode(), #adcba2, #174000);
+$primary-800: if(isDarkMode(), #ffffff, #1d2b1c);
+
 // Primary
 $primary: if(isDarkMode(), #78bf69, #009ef7);
 $primary-active: if(isDarkMode(), #53a642, #0095e8);
 $primary-light: if(isDarkMode(), #214729, #f1faff);
 $primary-inverse: if(isDarkMode(), #172219, #ffffff);
+
+// Secondary
+$secondary: $primary-50 !default;
+$secondary-active: $primary-200 !default;
+$secondary-dark: $primary-300 !default;
+$secondary-light: $primary-50 !default;
+$secondary-inverse: $primary-700 !default;
+$secondary-dark-inverse: $primary-800 !default;
 
 // Success
 $success: if(isDarkMode(), #53a642, #50cd89);
@@ -37,3 +52,13 @@ $warning-inverse: #ffffff;
 
 $dropdown-item-padding-x: 1.1rem;
 $dropdown-item-padding-y: 1.1rem;
+
+// Dark colors
+$theme-dark-colors: (
+  'secondary': $secondary-dark,
+) !default; // Custom variable
+
+// Dark inverse colors
+$theme-dark-inverse-colors: (
+  'secondary': $secondary-dark-inverse,
+) !default; // Custom variable

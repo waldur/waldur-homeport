@@ -8,7 +8,7 @@
   outline: none !important;
 
   // Reset focus shadow
-  &:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg) {
+  &:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(:focus) {
     box-shadow: none !important;
   }
 
@@ -78,7 +78,9 @@
 // Icons
 .btn {
   // Default font-size for all buttons
-  font-size: 12px;
+  :not(.btn-sm):not(.btn-lg) {
+    font-size: 14px;
+  }
 
   // Font icon
   i {
