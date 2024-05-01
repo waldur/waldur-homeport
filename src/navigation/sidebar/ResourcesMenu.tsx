@@ -66,9 +66,7 @@ const RenderMenuItems = ({ items, project, counters = {} }) => {
           <MenuItem
             key={item.uuid}
             title={item.title}
-            badge={getCounterText(
-              counters['marketplace_category_' + item.uuid],
-            )}
+            badge={getCounterText(counters[item.uuid])}
             state="marketplace-project-resources"
             params={{
               uuid: project.uuid,
@@ -133,8 +131,8 @@ export const ResourcesMenu = ({ anonymous = false }) => {
       return categories;
     }
     return categories.sort((a, b) => {
-      const aCount = counters['marketplace_category_' + a.uuid] || 0;
-      const bCount = counters['marketplace_category_' + b.uuid] || 0;
+      const aCount = counters[a.uuid] || 0;
+      const bCount = counters[b.uuid] || 0;
       return bCount - aCount;
     });
   }, [categories, counters]);
@@ -142,17 +140,12 @@ export const ResourcesMenu = ({ anonymous = false }) => {
   const [allResourcesCount, collapsedResourcesCount] = useMemo(() => {
     if (!counters) return [0, 0];
     const all = sortedCategories.reduce(
-      (acc, category) =>
-        (acc += counters['marketplace_category_' + category.uuid] || 0),
+      (acc, category) => (acc += counters[category.uuid] || 0),
       0,
     );
     const collapsed = sortedCategories
       .slice(MAX_COLLAPSE_MENU_COUNT)
-      .reduce(
-        (acc, category) =>
-          (acc += counters['marketplace_category_' + category.uuid] || 0),
-        0,
-      );
+      .reduce((acc, category) => (acc += counters[category.uuid] || 0), 0);
     return [all, collapsed];
   }, [sortedCategories, counters]);
 

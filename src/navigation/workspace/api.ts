@@ -43,7 +43,11 @@ export const getCustomersPage = (
   }));
 
 export const getProjectCounters = (projectUuid: string) =>
-  get(`/projects/${projectUuid}/counters/`).then((response) => response.data);
+  get(`/marketplace-project-categories/${projectUuid}/`).then(
+    (response) => response.data,
+  );
 
 export const getOrganizationCounters = (customerUuid: string) =>
-  get(`/customers/${customerUuid}/counters/`).then((response) => response.data);
+  get(`/marketplace-customer-categories/${customerUuid}/`).then(
+    (response) => response.data,
+  );
