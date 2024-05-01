@@ -13,3 +13,11 @@
 @function theme-light-color($key: 'primary') {
   @return get($theme-light-colors, $key);
 }
+
+@function theme-dark-color($key: 'primary') {
+  @return get($theme-dark-colors, $key);
+}
+
+@function theme-dark-inverse-color($key: 'primary') {
+  @return get($theme-dark-inverse-colors, $key);
+}

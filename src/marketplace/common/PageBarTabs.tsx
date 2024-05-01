@@ -23,7 +23,7 @@ export const PageBarTabItem = (props: PageBarTabProps) => (
     params={props.params}
     className={
       props.className ||
-      'btn text-hover-primary' + (props.active ? ' text-primary' : '')
+      'btn btn-sm text-hover-primary' + (props.active ? ' text-primary' : '')
     }
     onClick={() => scrollToSectionById(props.name)}
   >

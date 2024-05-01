@@ -11,7 +11,11 @@
   $color-active,
   $icon-color-active,
   $border-color-active,
-  $bg-color-active
+  $bg-color-active,
+  $color-dark: null,
+  $icon-color-dark: null,
+  $border-color-dark: null,
+  $bg-color-dark: null
 ) {
   @if ($color != null) {
     color: $color;
@@ -72,6 +76,45 @@
 
     @if ($bg-color-active != null) {
       background-color: $bg-color-active !important;
+    }
+  }
+
+  @if ($bg-color-active != null) {
+    .btn-check:focus + &,
+    &:focus:not(.btn-active) {
+      outline: 0;
+      box-shadow: 0 0 0 0.25rem rgba($bg-color-active, 0.25);
+    }
+  }
+
+  .btn-check:active + &,
+  &:active:not(.btn-active),
+  &.active,
+  &.show {
+    @if ($color-dark != null) {
+      color: $color-dark;
+    }
+
+    @if ($icon-color-dark != null) {
+      i {
+        color: $icon-color-dark;
+      }
+
+      .svg-icon {
+        @include svg-icon-color($icon-color-dark);
+      }
+
+      &.dropdown-toggle:after {
+        color: $icon-color-dark;
+      }
+    }
+
+    @if ($border-color-dark != null) {
+      border-color: $border-color-dark;
+    }
+
+    @if ($bg-color-dark != null) {
+      background-color: $bg-color-dark !important;
     }
   }
 }
