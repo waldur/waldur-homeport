@@ -6,14 +6,12 @@ import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { AdminMenu } from './AdminMenu';
 import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
 import { ReportingMenu } from './ReportingMenu';
 import { ResourcesMenu } from './ResourcesMenu';
 import { Sidebar } from './Sidebar';
-import { SupportMenu } from './SupportMenu';
 
 export const UnifiedSidebar = () => {
   const user = useSelector(getUser);
@@ -50,8 +48,6 @@ export const UnifiedSidebar = () => {
           <ManagementMenu />
           <ResourcesMenu />
           <ReportingMenu />
-          <SupportMenu />
-          <AdminMenu />
         </>
       ) : (
         <MenuItem title={translate('Login')} state="login" />
