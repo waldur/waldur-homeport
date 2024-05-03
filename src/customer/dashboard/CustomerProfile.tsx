@@ -68,7 +68,7 @@ export const CustomerProfile = ({
               </Stack>
             </Col>
             <Col xs="auto">
-              <CustomerActions />
+              <CustomerActions customer={customer} />
             </Col>
           </Row>
           <Row>
