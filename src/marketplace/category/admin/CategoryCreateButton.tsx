@@ -8,7 +8,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 
 const CategoryCreateDialog = lazyComponent(
   () => import('./CategoryEditDialog'),
-  'CategoryFromDialog',
+  'CategoryEditDialog',
 );
 
 const categoryCreateDialog = (refetch) =>
