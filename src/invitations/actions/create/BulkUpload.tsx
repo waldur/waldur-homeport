@@ -9,10 +9,10 @@ import { saveAsCsv } from '@waldur/table/export';
 
 import example_file from './example_file.json';
 
-type ImportEmail = Array<{ email: string }>;
+export type EmailRolePairs = Array<{ email: string; role?: string }>;
 
 interface OwnProps {
-  onImport(items: ImportEmail): void;
+  onImport(items: EmailRolePairs): void;
 }
 
 export const BulkUpload: FC<OwnProps> = (props) => {
@@ -35,14 +35,16 @@ export const BulkUpload: FC<OwnProps> = (props) => {
               dispatch(showError('Unable to locate email information'));
               return;
             }
-            const items: ImportEmail = [];
+            const roleIndex = results.data[0].findIndex((str) =>
+              str.toLowerCase().includes('role'),
+            );
+            const items: EmailRolePairs = [];
             // slice 1 to ignore csv header row
             results.data.slice(1).forEach((row) => {
-              if (
-                row[emailIndex] &&
-                !items.some((item) => item.email === row[emailIndex])
-              ) {
-                items.push({ email: row[emailIndex] });
+              const email = row[emailIndex];
+              const role = row[roleIndex];
+              if (email && !items.some((item) => item.email === email)) {
+                items.push({ email, role });
               }
             });
             props.onImport(items);

@@ -6,7 +6,7 @@ import { INVITATION_CREATE_FORM_ID } from '../constants';
 import { useInvitationCreateDialog } from '../hooks';
 import { GroupInviteRow, InvitationContext } from '../types';
 
-import { BulkUpload } from './BulkUpload';
+import { BulkUpload, EmailRolePairs } from './BulkUpload';
 import { CustomMessageInput } from './CustomMessageInput';
 import { CustomMessageWrapper } from './CustomMessageWrapper';
 import { EmailsListGroupWrapper } from './EmailsListGroupWrapper';
@@ -30,7 +30,8 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
     creationResult,
     finish,
     roles,
-    defaultRoleAndProject,
+    defaultRole,
+    defaultProject,
     fetchUserDetailsCallback,
     fetchingUserDetails,
     usersDetails,
@@ -39,17 +40,26 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
   const [step, setStep] = useState<1 | 2 | 3>(1);
 
   const populateRows = useCallback(
-    (items: Array<{ email: string }>) => {
+    (items: EmailRolePairs) => {
       const rows: GroupInviteRow[] = [];
       items.forEach((item) => {
+        const role = item.role
+          ? roles.find(
+              (role) =>
+                role.name.toLocaleLowerCase() ===
+                  item.role.toLocaleLowerCase() ||
+                role.description.toLocaleLowerCase() ===
+                  item.role.toLocaleLowerCase(),
+            )
+          : undefined;
         rows.push({
           email: item.email,
-          role_project: defaultRoleAndProject,
+          role_project: { role: role || defaultRole, project: defaultProject },
         });
       });
       change('rows', rows);
     },
-    [change, defaultRoleAndProject],
+    [change, defaultRole, defaultProject, roles],
   );
 
   const resetForm = () => {
