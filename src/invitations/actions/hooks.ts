@@ -62,14 +62,16 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
           ),
     [context],
   );
-  const defaultRoleAndProject = useMemo(
-    () => ({
-      role: roles.length > 0 ? roles[0] : null,
-      project:
-        context.roleTypes.includes('project') &&
-        (context.project || context.customer.projects?.[0]),
-    }),
+  const defaultRole = useMemo(
+    () => (roles.length > 0 ? roles[0] : null),
     [roles, context],
+  );
+
+  const defaultProject = useMemo(
+    () =>
+      context.roleTypes.includes('project') &&
+      (context.project || context.customer.projects?.[0]),
+    [context],
   );
 
   const [creationResult, setCreationResult] = useState(null);
@@ -123,7 +125,8 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
     creationResult,
     finish,
     roles,
-    defaultRoleAndProject,
+    defaultRole,
+    defaultProject,
     fetchUserDetailsCallback,
     fetchingUserDetails,
     usersDetails,
