@@ -36,6 +36,9 @@ export const PageBarProvider: FC<PropsWithChildren> = ({ children }) => {
   const [tabs, setTabs] = useState<PageBarTab[]>([]);
 
   const addTabs = (_tabs: PageBarTab[]) => {
+    if (!_tabs.some((t) => !tabs.some((t2) => t2.key === t.key))) {
+      return;
+    }
     setTabs((prev) => {
       const newTabs = _tabs.filter((t) => !prev.some((t2) => t2.key === t.key));
       const renderedTabs = prev

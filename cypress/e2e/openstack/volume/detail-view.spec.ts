@@ -47,7 +47,7 @@ describe('OpenStack Volume detail view', () => {
       .visit(
         '/projects/5d3016240ccf4181b4cdc0baa0e41d5c/resource-details/53b9bda915ab4dc0aac93a8f4fe83d30',
       )
-      .waitForPage();
+      .get('.public-dashboard-hero-body');
   });
 
   it('Attaches OpenStack Volume to Instance', () => {
