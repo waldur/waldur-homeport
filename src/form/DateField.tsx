@@ -13,6 +13,7 @@ export const DateField: FunctionComponent<any> = (props) => (
         minDate: props.minDate,
         maxDate: props.maxDate,
         defaultDate: props.defaultDate,
+        monthSelectorType: 'static',
       }}
       value={
         props.input.value && typeof props.input.value === 'string'
