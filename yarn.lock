@@ -4337,6 +4337,13 @@ csstype@^3.1.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
   integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
 
+cypress-recurse@^1.35.3:
+  version "1.35.3"
+  resolved "https://registry.yarnpkg.com/cypress-recurse/-/cypress-recurse-1.35.3.tgz#60982d9d0ef3e8ae7c34a38e93aeec68f7ca01e8"
+  integrity sha512-NbFOpEuZT4tFqAB0jQqel7WtVNDe8pvSHE2TfXvYk4pspf3wq98OC2RhhLn3bMnoCnPtY4IHO7e37c+CZ9HnMA==
+  dependencies:
+    humanize-duration "^3.27.3"
+
 cypress@*:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-6.2.0.tgz#1a8a7dd5bd08db3064551a9f12072963cc9337bf"
@@ -7231,6 +7238,11 @@ human-signals@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
+
+humanize-duration@^3.27.3:
+  version "3.32.0"
+  resolved "https://registry.yarnpkg.com/humanize-duration/-/humanize-duration-3.32.0.tgz#b25f64ef55d723b049b197b6b4aa3c96c202b6c9"
+  integrity sha512-6WsXYTHJr7hXKqoqf5zoWza/lANRAqGlbnZnm0cjDykbXuez1JVXOQGmq0EPB45pXYAJyueRA3S3hfhmMbrMEQ==
 
 husky@^4.2.3:
   version "4.2.3"

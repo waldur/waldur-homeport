@@ -1,3 +1,6 @@
+import { Info } from 'luxon';
+import { recurse } from 'cypress-recurse'
+
 /* eslint-disable no-redeclare */
 // Must be declared global to be detected by typescript (allows import/export)
 declare global {
@@ -162,14 +165,17 @@ Cypress.Commands.add('selectFlatpickrDate', (inputQueryPath, date) => {
       .get('.flatpickr-calendar')
       .should('be.visible')
       .within(() => {
+        // Month
+        const monthName = Info.months('long', {locale: 'en-US'})[d.getMonth()];
+        recurse(
+          () => cy.get('.cur-month').then(t => t.text().trim()),
+          (month) => month === monthName,
+          {delay:0, post: () => cy.get('.flatpickr-next-month').click()}
+        )
         // Year
-        cy.get('.flatpickr-months .flatpickr-current-month input.numInput')
+        cy.get('input.cur-year')
           .clear()
           .type(d.getFullYear().toString());
-        // Month
-        cy.get(
-          '.flatpickr-months .flatpickr-current-month select.flatpickr-monthDropdown-months',
-        ).select(d.getMonth());
         // Day
         cy.get('.flatpickr-innerContainer .dayContainer')
           .contains('span.flatpickr-day', d.getDate().toString())
