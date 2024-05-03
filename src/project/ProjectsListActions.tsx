@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { DropdownButton } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -12,12 +13,10 @@ interface ProjectsListActionsProps {
   project: Project;
 }
 
-export const ProjectsListActions = ({ project }: ProjectsListActionsProps) => (
-  <DropdownButton
-    title={translate('Actions')}
-    id="project-list-actions-dropdown-btn"
-    className="dropdown-btn"
-  >
+export const ProjectsListActions: FC<ProjectsListActionsProps> = ({
+  project,
+}) => (
+  <DropdownButton title={translate('Actions')} className="dropdown-btn">
     {ActionsList.map((ActionComponent, index) => (
       <ActionComponent key={index} project={project} />
     ))}

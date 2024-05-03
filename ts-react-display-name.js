@@ -109,7 +109,7 @@ function visit(ctx, sf, options) {
 function addDisplayNameTransformer(options = {}) {
   const optionsWithDefaults = {
     onlyFileRoot: false,
-    funcTypes: ['React.FunctionComponent', 'React.FC'],
+    funcTypes: ['React.FunctionComponent', 'React.FC', 'FunctionComponent', 'FC'],
     classTypes: ['React.Component', 'React.PureComponent'],
     factoryFuncs: ['React.forwardRef', 'React.memo'],
     ...options,
