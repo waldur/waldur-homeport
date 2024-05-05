@@ -104,17 +104,6 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Resources'),
     },
   },
-
-  {
-    name: 'organization-requests',
-    abstract: true,
-    parent: 'organization',
-    component: UIView,
-    data: {
-      breadcrumb: () => translate('Requests'),
-    },
-  },
-
   {
     name: 'organization-team',
     abstract: true,
