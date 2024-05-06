@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
+import { Field } from 'redux-form';
 
-import { FormContainer, SelectField, NumberField } from '@waldur/form';
+import { FormContainer, NumberField, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { pluginOptionsSelector } from '@waldur/marketplace/UserPluginOptionsForm';
 
@@ -34,6 +35,12 @@ export const OpenStackPluginOptionsForm: FunctionComponent<{ container }> = ({
         simpleValue={true}
         required={true}
         isClearable={false}
+      />
+      <Field
+        name="default_internal_network_mtu"
+        component={NumberField}
+        label={translate('Default internal network MTU')}
+        className="mt-3"
       />
       {pluginOptions && pluginOptions.storage_mode == 'dynamic' && (
         <NumberField
