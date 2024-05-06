@@ -9550,10 +9550,6 @@ msgstr ""
 msgid "Requesting of new resources has been temporarily paused"
 msgstr ""
 
-#: src/customer/routes.ts
-msgid "Requests"
-msgstr ""
-
 #: src/administration/service-desk/SmaxSettings.tsx
 msgid "Requests offering code for all issues"
 msgstr ""
