@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
-import { FormSection, reduxForm, Field } from 'redux-form';
+import { Field, FormSection, reduxForm } from 'redux-form';
 
 import {
   FormContainer,
