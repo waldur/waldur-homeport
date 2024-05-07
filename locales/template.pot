@@ -578,6 +578,7 @@ msgid "Affiliation"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderUsersList.tsx
+#: src/user/affiliations/UserAffiliationsList.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
@@ -4201,6 +4202,7 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/team/InvitationsList.tsx
+#: src/user/affiliations/UserAffiliationsList.tsx
 msgid "Expires at"
 msgstr ""
 
@@ -4693,6 +4695,10 @@ msgstr ""
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 msgid "Grant permission"
+msgstr ""
+
+#: src/user/affiliations/UserAffiliationsList.tsx
+msgid "Granted at"
 msgstr ""
 
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
@@ -7488,6 +7494,7 @@ msgstr ""
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/affiliations/ProjectsListFilter.tsx
+#: src/user/affiliations/UserAffiliationsList.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
@@ -10045,6 +10052,7 @@ msgstr ""
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/affiliations/PermissionDetails.tsx
+#: src/user/affiliations/UserAffiliationsList.tsx
 #: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
@@ -10309,6 +10317,7 @@ msgstr ""
 
 #: src/administration/roles/RolesList.tsx
 #: src/user/UserPermissionRequestsList.tsx
+#: src/user/affiliations/UserAffiliationsList.tsx
 msgid "Scope"
 msgstr ""
 
@@ -12624,6 +12633,7 @@ msgstr ""
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/resource/support/SharedProviderResources.tsx
+#: src/user/affiliations/UserAffiliationsList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
@@ -15103,6 +15113,10 @@ msgstr ""
 
 #: src/administration/service-desk/ZammadSettings.tsx
 msgid "Zammad group"
+msgstr ""
+
+#: src/user/affiliations/UserAffiliationsList.tsx
+msgid "affiliations"
 msgstr ""
 
 #: src/slurm/details/AllocationUsersTable.tsx
