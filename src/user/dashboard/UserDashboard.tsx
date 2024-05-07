@@ -1,5 +1,4 @@
-import React from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -9,13 +8,13 @@ import { countChecklists } from '@waldur/marketplace-checklist/api';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
-import { CustomerPermissions } from './CustomerPermissions';
-import { ProjectPermissions } from './ProjectPermissions';
+import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
+
 import { UserDashboardChart } from './UserDashboardChart';
 import { UserProfile } from './UserProfile';
 import { UserWelcome } from './UserWelcome';
 
-export const UserDashboard: React.FC = () => {
+export const UserDashboard: FC = () => {
   const user = useSelector(getUser) as UserDetails;
 
   const asyncState = useAsync(countChecklists);
@@ -29,14 +28,7 @@ export const UserDashboard: React.FC = () => {
       <UserWelcome user={user} />
       <UserProfile user={user} />
       <UserDashboardChart user={user} hasChecklists={asyncState.value > 0} />
-      <Row>
-        <Col md={12} lg={6}>
-          <CustomerPermissions />
-        </Col>
-        <Col md={12} lg={6}>
-          <ProjectPermissions />
-        </Col>
-      </Row>
+      <UserAffiliationsList />
     </>
   );
 };

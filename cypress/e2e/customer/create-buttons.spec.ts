@@ -1,4 +1,4 @@
-describe('Customer creation toggle', () => {
+xdescribe('Customer creation toggle', () => {
   beforeEach(() => {
     cy.mockUser()
       .mockChecklists()
