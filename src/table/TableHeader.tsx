@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import './TableHeader.scss';
@@ -17,6 +17,7 @@ interface TableHeaderProps {
   onSelectAllRows?(rows: any[]): void;
   selectedRows?: any[];
   fieldType?: TableProps['fieldType'];
+  concealedColumns?: Record<string, boolean>;
 }
 
 function handleOrdering(currentSorting: Sorting, field: string): Sorting {
@@ -69,8 +70,14 @@ export const TableHeader: FC<TableHeaderProps> = ({
   onSelectAllRows,
   selectedRows,
   fieldType,
+  concealedColumns,
 }) => {
   const isAllSelected = selectedRows?.length >= rows?.length;
+  const visibleColumns = useMemo(
+    () =>
+      columns.filter((column) => !column.key || !concealedColumns[column.key]),
+    [concealedColumns, columns],
+  );
 
   return (
     <thead>
@@ -87,7 +94,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
           </th>
         ) : null}
         {expandableRow && <th style={{ width: '10px' }} />}
-        {columns.map(
+        {visibleColumns.map(
           (column, index) =>
             (column.visible ?? true) && (
               <TableTh

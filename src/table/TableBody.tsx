@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
@@ -25,6 +25,7 @@ type TableBodyProps = Pick<
   | 'fieldType'
   | 'fieldName'
   | 'validate'
+  | 'concealedColumns'
 >;
 
 const TableCells = ({ row, columns }) => (
@@ -56,7 +57,13 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   fieldType,
   fieldName,
   validate,
+  concealedColumns,
 }) => {
+  const visibleColumns = useMemo(
+    () =>
+      columns.filter((column) => !column.key || !concealedColumns[column.key]),
+    [concealedColumns, columns],
+  );
   const trClick = useCallback(
     (row, index, e) => {
       if (!expandableRow) return;
@@ -169,7 +176,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             )}
           </td>
         )}
-        <TableCells row={row} columns={columns} />
+        <TableCells row={row} columns={visibleColumns} />
         {hoverableRow && (
           <td className="row-actions">
             <div>{React.createElement(hoverableRow, { row, fetch })}</div>

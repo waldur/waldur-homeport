@@ -36,40 +36,5 @@ export const RolesList = () => {
 };
 ```
 
-## Migration example
-
-Previously we used `connectTable` higher-order component, but it is deprecated now.
-Previous example looked like so.
-
-```ts
-import { translate } from '@waldur/i18n';
-import { Table, createFetcher } from '@waldur/table';
-import { useTable } from '@waldur/table/utils';
-
-const PureRolesList = (tableProps) => {
-  return (
-    <Table
-      {...tableProps}
-      columns={[
-        {
-          title: translate('Name'),
-          render: ({ row }) => row.name,
-        },
-        {
-          title: translate('Description'),
-          render: ({ row }) => row.description,
-        },
-        {
-          title: translate('Assigned users count'),
-          render: ({ row }) => row.users_count,
-        },
-      ]}
-    />
-  );
-};
-
-export const RolesList = connectTable({
-  table: `RolesList`,
-  fetchData: createFetcher('roles'),
-})(PureRolesList);
-```
+Column definition consists of two mandatory fields: `title` and `render`.
+In order to be able to make column optional, please specify `hasOptionalColumns` property for table and ensure that `key` property is defined for columns.

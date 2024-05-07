@@ -24,6 +24,7 @@ export const TOGGLE_ROW = 'waldur/table/TOGGLE_ROW';
 export const SELECT_ROW = 'waldur/table/SELECT_ROW';
 export const SELECT_ALL_ROWS = 'waldur/table/SELECT_ALL_ROWS';
 export const RESET_SELECTION = 'waldur/table/RESET_SELECTION';
+export const TOGGLE_COLUMN = 'waldur/table/TOGGLE_COLUMN';
 
 export const fetchListStart = (
   table: string,
@@ -216,5 +217,13 @@ export const resetSelection = (table: string) => ({
   type: RESET_SELECTION,
   payload: {
     table,
+  },
+});
+
+export const toggleColumn = (table: string, column) => ({
+  type: TOGGLE_COLUMN,
+  payload: {
+    table,
+    column,
   },
 });
