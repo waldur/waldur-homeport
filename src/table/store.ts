@@ -30,6 +30,7 @@ const INITIAL_STATE: TableState = {
   toggled: {},
   selectedRows: [],
   firstFetch: true,
+  concealedColumns: {},
 };
 
 const deleteEntity = (state, action) => {
@@ -261,6 +262,16 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         selectedRows: [],
       };
     }
+
+    case actions.TOGGLE_COLUMN:
+      return {
+        ...state,
+        concealedColumns: {
+          ...state.concealedColumns,
+          [action.payload.column.key]:
+            !state.concealedColumns[action.payload.column.key],
+        },
+      };
 
     default:
       return state;

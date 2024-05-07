@@ -55,7 +55,7 @@ export interface TableProps<RowType = any> extends TableState {
   expandableRowClassName?: string;
   hoverableRow?: React.ComponentType<{ row; fetch }>;
   toggleRow?(row: any): void;
-  toggled?: object;
+  toggled?: Record<string, boolean>;
   enableExport?: boolean;
   placeholderComponent?: React.ReactNode;
   filters?: JSX.Element;
@@ -74,6 +74,8 @@ export interface TableProps<RowType = any> extends TableState {
   fieldName?: string;
   validate?: BaseFieldProps['validate'];
   footer?: React.ReactNode;
+  hasOptionalColumns?: boolean;
+  toggleColumn?(column): void;
 }
 
 class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
@@ -258,6 +260,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               onSelectAllRows={this.props.selectAllRows}
               selectedRows={this.props.selectedRows}
               fieldType={this.props.fieldType}
+              concealedColumns={this.props.concealedColumns}
             />
           )}
           <TableBody
@@ -276,6 +279,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             fieldType={this.props.fieldType}
             fieldName={this.props.fieldName}
             validate={this.props.validate}
+            concealedColumns={this.props.concealedColumns}
           />
         </table>
       </ErrorBoundary>

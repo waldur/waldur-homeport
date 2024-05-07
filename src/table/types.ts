@@ -54,6 +54,7 @@ export interface Column<RowType = any> {
   className?: string;
   orderField?: string;
   visible?: boolean;
+  key?: string;
 }
 
 export interface Pagination {
@@ -83,9 +84,10 @@ export interface TableState {
   savedFilters?: TableFiltersGroup[];
   selectedSavedFilter?: TableFiltersGroup;
   applyFilters?: boolean;
-  toggled?: object;
+  toggled?: Record<string, boolean>;
   selectedRows?: any[];
   firstFetch?: boolean;
+  concealedColumns: Record<string, boolean>;
 }
 
 export interface Sorting {

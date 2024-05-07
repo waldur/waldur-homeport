@@ -3,6 +3,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import { translate } from '@waldur/i18n';
 
 import { TableProps } from './Table';
+import { TableColumnButton } from './TableColumnsButton';
 import { TableExportButton } from './TableExportButton';
 import { TableFilterButton } from './TableFilterButton';
 import { TableMoreActions } from './TableMoreActions';
@@ -10,7 +11,7 @@ import { TableDropdownItem } from './types';
 
 import './TableButtons.scss';
 
-export const TableButtons: FunctionComponent<any> = (props: TableProps) => {
+export const TableButtons: FunctionComponent<TableProps> = (props) => {
   const [dropdownActions, setDropdownActions] = useState<TableDropdownItem[]>(
     [],
   );
@@ -64,6 +65,7 @@ export const TableButtons: FunctionComponent<any> = (props: TableProps) => {
           />
         )}
         {props.actions}
+        {props.hasOptionalColumns && <TableColumnButton {...props} />}
         {showExportInDropdown ? (
           <TableMoreActions actions={dropdownActions} />
         ) : (

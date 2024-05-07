@@ -190,6 +190,10 @@ export const useTable = (options: TableOptionsType) => {
     () => dispatch(actions.resetSelection(table)),
     [dispatch, table],
   );
+  const toggleColumn = useCallback(
+    (column: any) => dispatch(actions.toggleColumn(table, column)),
+    [dispatch, table],
+  );
 
   const tableState = useSelector(getTableState(table));
 
@@ -211,6 +215,7 @@ export const useTable = (options: TableOptionsType) => {
     selectRow,
     selectAllRows,
     resetSelection,
+    toggleColumn,
     ...tableState,
     rows,
     alterTitle,

@@ -37,28 +37,34 @@ export const SupportOrdersList: FunctionComponent = () => {
           label={row.attributes.name}
         />
       ),
+      key: 'title',
     },
     {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
+      key: 'created_at',
     },
     {
       title: translate('Created by'),
       render: ({ row }) => row.created_by_full_name || row.created_by_username,
+      key: 'created_by',
     },
     {
       title: translate('State'),
       render: ({ row }) => row.state,
       orderField: 'state',
+      key: 'state',
     },
     {
       title: translate('Project'),
       render: ({ row }) => row.project_name,
+      key: 'project_name',
     },
     {
       title: translate('Client organization'),
       render: ({ row }) => row.customer_name,
+      key: 'customer_name',
     },
     {
       title: translate('Approved at'),
@@ -67,6 +73,7 @@ export const SupportOrdersList: FunctionComponent = () => {
           ? formatDateTime(row.consumer_reviewed_at)
           : DASH_ESCAPE_CODE,
       orderField: 'consumer_reviewed_at',
+      key: 'approved_at',
     },
     {
       title: translate('Approved by'),
@@ -74,6 +81,7 @@ export const SupportOrdersList: FunctionComponent = () => {
         row.consumer_reviewed_by_full_name ||
         row.consumer_reviewed_by_username ||
         DASH_ESCAPE_CODE,
+      key: 'approved_by',
     },
   ];
 
@@ -88,6 +96,7 @@ export const SupportOrdersList: FunctionComponent = () => {
       enableExport={true}
       expandableRow={OrdersListExpandableRow}
       filters={<SupportOrdersListFilter />}
+      hasOptionalColumns
     />
   );
 };
