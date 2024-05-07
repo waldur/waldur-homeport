@@ -4,6 +4,9 @@ import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
 import { orderByFilter } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 import { fetchAll } from '@waldur/table/api';
 
@@ -76,5 +79,13 @@ export function* exportTable(action: ReturnType<typeof exportTableAs>) {
       ? exportData(rows, props)
       : rows.map((row) => exportRow(row, props)),
   };
-  exporters[config.format](table, data);
+  yield call(exporters[config.format], table, data);
+  yield put(
+    showSuccess(
+      translate('Table has been exported to {format}.', {
+        format: config.format,
+      }),
+    ),
+  );
+  yield put(closeModalDialog());
 }
