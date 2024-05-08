@@ -34,7 +34,7 @@ export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
       title: translate('State'),
       render: ({ row }) => (
         <StateIndicator
-          label={translate(row.state)}
+          label={row.state}
           variant={
             row.state === 'erred'
               ? 'danger'

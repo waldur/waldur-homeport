@@ -73,7 +73,7 @@ const CheckboxGroup = ({ groupName, options, input, groupClassName }) => (
 const renderNodeRows = ({ fields, flavors }: any) => {
   const addRow = useCallback(() => {
     fields.push({
-      name: translate('Rancher node ' + (fields.length + 1)),
+      name: translate('Rancher node ') + (fields.length + 1),
       roles: ['worker'],
       units: 1,
     });
@@ -216,7 +216,7 @@ export const FormNodesStep = (props: FormStepProps) => {
             : undefined;
           dispatch(
             arrayPush(FORM_ID, NODES_FIELD_ARRAY, {
-              name: translate('Rancher node ' + (i + 1)),
+              name: translate('Rancher node ') + (i + 1),
               units: 1,
               roles: node.roles,
               system_volume_size: node.system_volume_size,

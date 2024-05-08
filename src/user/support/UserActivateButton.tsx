@@ -18,8 +18,8 @@ interface UserActivateButtonProps {
 
 const getConfirmationText = (isActive, name) => {
   return isActive
-    ? translate(`Are you sure you want to deactivate ${name}? `)
-    : translate(`Are you sure you want to activate ${name}? `);
+    ? translate(`Are you sure you want to deactivate {name}?`, { name })
+    : translate(`Are you sure you want to activate {name}?`, { name });
 };
 
 const PureUserActivateButton = (props: UserActivateButtonProps) => {

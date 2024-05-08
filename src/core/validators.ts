@@ -19,7 +19,7 @@ export const number = (value) =>
 
 export const max = (length) => (value) =>
   value && value.length > length
-    ? translate(`Must be ${length} characters or less.`)
+    ? translate(`Must be {length} characters or less.`, { length })
     : undefined;
 
 export const email = (value) =>

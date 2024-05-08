@@ -40,7 +40,7 @@ export const BroadcastList: FunctionComponent<{}> = () => {
           title: translate('State'),
           render: ({ row }: { row: BroadcastResponseData }) => (
             <StateIndicator
-              label={translate(row.state)}
+              label={row.state}
               variant={
                 row.state === 'DRAFT'
                   ? 'dark'

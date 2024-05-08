@@ -13,7 +13,7 @@ export const SyncResourceAction = ({ resource, ...rest }) => {
       const response = await syncCustomScriptResource({
         resource_uuid: resource.uuid,
       });
-      dispatch(showSuccess(translate(response.data['detail'])));
+      dispatch(showSuccess(response.data['detail']));
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to synchronise.')));
     }

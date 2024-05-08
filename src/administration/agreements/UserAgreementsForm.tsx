@@ -23,8 +23,8 @@ interface UserAgreementsFormProps {
 }
 
 const agreementTypeLabelMap = {
-  pp: 'Privacy policy',
-  tos: 'Terms of service',
+  pp: translate('Privacy policy'),
+  tos: translate('Terms of service'),
 };
 
 export const UserAgreementsForm: FC<UserAgreementsFormProps> = ({
@@ -47,7 +47,7 @@ export const UserAgreementsForm: FC<UserAgreementsFormProps> = ({
     <form onSubmit={handleSubmit(callback)}>
       <FormContainer submitting={submitting}>
         <TextField
-          label={translate(agreementType)}
+          label={agreementType}
           name="content"
           style={{ height: '520px' }}
         />
