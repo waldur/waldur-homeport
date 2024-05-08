@@ -100,10 +100,6 @@ msgstr ""
 msgid "Accept invitation"
 msgstr ""
 
-#: src/proposals/offering-requests/OfferingRequestsList.tsx
-msgid "Accept request"
-msgstr ""
-
 #: src/booking/BookingStateField.tsx
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
@@ -437,7 +433,6 @@ msgid "Add option"
 msgstr ""
 
 #: src/customer/list/OrganizationCreateButton.tsx
-#: src/user/dashboard/CustomerCreateButton.tsx
 msgid "Add organization"
 msgstr ""
 
@@ -594,7 +589,6 @@ msgid "Affiliation"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderUsersList.tsx
-#: src/user/affiliations/UserAffiliationsList.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
@@ -935,7 +929,7 @@ msgid "Are you sure you want to accept the {name} offering request?"
 msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
-msgid "Are you sure you want to activate ?"
+msgid "Are you sure you want to activate {name}?"
 msgstr ""
 
 #: src/customer/details/CustomerCallManagerPanel.tsx
@@ -951,7 +945,7 @@ msgid "Are you sure you want to cancel invitation by {name}?"
 msgstr ""
 
 #: src/user/support/UserActivateButton.tsx
-msgid "Are you sure you want to deactivate ?"
+msgid "Are you sure you want to deactivate {name}?"
 msgstr ""
 
 #: src/resource/actions/DestroyActionItem.tsx
@@ -4241,7 +4235,6 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/team/InvitationsList.tsx
-#: src/user/affiliations/UserAffiliationsList.tsx
 msgid "Expires at"
 msgstr ""
 
@@ -4734,10 +4727,6 @@ msgstr ""
 #: src/marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 msgid "Grant permission"
-msgstr ""
-
-#: src/user/affiliations/UserAffiliationsList.tsx
-msgid "Granted at"
 msgstr ""
 
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
@@ -6249,10 +6238,6 @@ msgstr ""
 msgid "Move to project"
 msgstr ""
 
-#: src/core/validators.ts
-msgid "Must be  characters or less."
-msgstr ""
-
 #: src/form/utils.ts
 msgid "Must be 2000 characters or less."
 msgstr ""
@@ -6263,6 +6248,10 @@ msgstr ""
 
 #: src/core/validators.ts
 msgid "Must be a number."
+msgstr ""
+
+#: src/core/validators.ts
+msgid "Must be {length} characters or less."
 msgstr ""
 
 #: src/invitations/actions/CivilNumberGroup.tsx
@@ -7529,7 +7518,6 @@ msgstr ""
 #: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/affiliations/ProjectsListFilter.tsx
 #: src/user/affiliations/UserAffiliationsList.tsx
-#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/user/support/UserDetailsTable.tsx
@@ -7607,7 +7595,6 @@ msgstr ""
 msgid "Organization logo"
 msgstr ""
 
-#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Organization name"
 msgstr ""
@@ -7668,7 +7655,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Organizations"
@@ -8464,6 +8450,7 @@ msgstr ""
 
 #: src/about.tsx
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/UserAgreementsForm.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Privacy policy"
 msgstr ""
@@ -8558,7 +8545,6 @@ msgstr ""
 #: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
-#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 #: src/vmware/deploy/steps.ts
@@ -8752,7 +8738,6 @@ msgstr ""
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
-#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/routes.ts
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Projects"
@@ -10087,9 +10072,6 @@ msgstr ""
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/affiliations/PermissionDetails.tsx
-#: src/user/affiliations/UserAffiliationsList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
-#: src/user/dashboard/ProjectPermissions.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
 msgstr ""
@@ -10123,6 +10105,10 @@ msgstr ""
 msgid "Role management events"
 msgstr ""
 
+#: src/user/affiliations/UserAffiliationsList.tsx
+msgid "Role name"
+msgstr ""
+
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/roles/RolesSection.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
@@ -10130,6 +10116,10 @@ msgstr ""
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "Roles"
+msgstr ""
+
+#: src/user/affiliations/UserAffiliationsList.tsx
+msgid "Roles and permissions"
 msgstr ""
 
 #: src/proposals/proposal/CustomerProposalsList.tsx
@@ -10352,15 +10342,16 @@ msgstr ""
 
 #: src/administration/roles/RolesList.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/affiliations/UserAffiliationsList.tsx
 msgid "Scope"
 msgstr ""
 
 #: src/invitations/InvitationExpandableRow.tsx
+#: src/user/affiliations/UserAffiliationsList.tsx
 msgid "Scope name"
 msgstr ""
 
 #: src/invitations/InvitationExpandableRow.tsx
+#: src/user/affiliations/UserAffiliationsList.tsx
 msgid "Scope type"
 msgstr ""
 
@@ -12066,6 +12057,7 @@ msgid "Terms of Service"
 msgstr ""
 
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
+#: src/administration/agreements/UserAgreementsForm.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/navigation/FooterLinks.tsx
 msgid "Terms of service"
@@ -12668,7 +12660,6 @@ msgstr ""
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/project/ProjectEventsFilter.tsx
 #: src/resource/support/SharedProviderResources.tsx
-#: src/user/affiliations/UserAffiliationsList.tsx
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
@@ -14681,6 +14672,10 @@ msgstr ""
 msgid "Valid states for operation: {validStates}."
 msgstr ""
 
+#: src/user/affiliations/UserAffiliationsList.tsx
+msgid "Valid till"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx
 #: src/marketplace/resources/KeyValueTable.tsx
 #: src/marketplace/resources/usage/utils.ts
@@ -15409,7 +15404,6 @@ msgstr ""
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/resource/support/SharedProviderCustomers.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
-#: src/user/dashboard/CustomerPermissions.tsx
 msgid "organizations"
 msgstr ""
 
@@ -15447,7 +15441,6 @@ msgstr ""
 #: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
-#: src/user/dashboard/ProjectPermissions.tsx
 msgid "projects"
 msgstr ""
 

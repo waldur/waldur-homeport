@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -87,7 +86,6 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
       title={translate('Offering requests')}
       verboseName={translate('Offering requests')}
       hasQuery={true}
-      actions={<Button variant="success">{translate('Accept request')}</Button>}
       expandableRow={OfferingRequestsListExpandableRow}
       hoverableRow={OfferingRequestItemActions}
       filters={<OfferingRequestsTableFilter />}
