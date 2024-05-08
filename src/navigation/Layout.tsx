@@ -48,13 +48,14 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     layout.setLayout({
+      aside: currentUser ? DefaultLayoutConfig.aside : false,
       toolbar: showToolbar ? DefaultLayoutConfig.toolbar : false,
       hero: PageHero ? DefaultLayoutConfig.hero : false,
       content: {
         width: fullPage || PageHero ? 'fluid' : 'fixed',
       },
     });
-  }, [showToolbar, fullPage, PageHero]);
+  }, [showToolbar, fullPage, PageHero, currentUser]);
 
   useEffect(() => {
     if (AuthService.isAuthenticated() && !currentUser) {

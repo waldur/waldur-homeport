@@ -2,13 +2,11 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
-import { MenuItem } from './MenuItem';
 import { ReportingMenu } from './ReportingMenu';
 import { ResourcesMenu } from './ResourcesMenu';
 import { Sidebar } from './Sidebar';
@@ -38,20 +36,18 @@ export const UnifiedSidebar = () => {
       menu.show(item);
     }
   }, [router, state, params.resource_uuid]);
+
+  if (!user) {
+    return null;
+  }
   return (
     <Sidebar>
-      {user ? (
-        <>
-          {user.is_staff || user.permissions?.length !== 0 ? (
-            <MarketplaceTrigger />
-          ) : null}
-          <ManagementMenu />
-          <ResourcesMenu />
-          <ReportingMenu />
-        </>
-      ) : (
-        <MenuItem title={translate('Login')} state="login" />
-      )}
+      {user.is_staff || user.permissions?.length !== 0 ? (
+        <MarketplaceTrigger />
+      ) : null}
+      <ManagementMenu />
+      <ResourcesMenu />
+      <ReportingMenu />
     </Sidebar>
   );
 };
