@@ -393,17 +393,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'provider-marketplace',
-    abstract: true,
-    parent: 'marketplace-provider',
-    component: UIView,
-    url: '',
-    data: {
-      breadcrumb: () => translate('Marketplace'),
-    },
-  },
-
-  {
     name: 'marketplace-provider-customers',
     parent: 'marketplace-provider',
     abstract: true,
@@ -411,6 +400,19 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Customers'),
+      priority: 110,
+    },
+  },
+
+  {
+    name: 'provider-marketplace',
+    abstract: true,
+    parent: 'marketplace-provider',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Marketplace'),
+      priority: 120,
     },
   },
 
@@ -422,6 +424,20 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Resources'),
+      priority: 130,
+    },
+  },
+
+  {
+    name: 'provider-calls',
+    abstract: true,
+    parent: 'marketplace-provider',
+    component: UIView,
+    url: '',
+    data: {
+      feature: MarketplaceFeatures.show_call_management_functionality,
+      breadcrumb: () => translate('Calls for proposals'),
+      priority: 140,
     },
   },
 
@@ -580,10 +596,10 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-offering-requests',
     url: 'offering-requests/',
     component: OfferingRequestsList,
-    parent: 'provider-resources',
+    parent: 'provider-calls',
     data: {
       feature: MarketplaceFeatures.show_call_management_functionality,
-      breadcrumb: () => translate('Offering requests'),
+      breadcrumb: () => translate('Requests for offerings'),
     },
   },
 
