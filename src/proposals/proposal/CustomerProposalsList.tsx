@@ -14,7 +14,6 @@ import { EndingField } from '../EndingField';
 
 import { ProposalRowActions } from './ProposalRowActions';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
-import { ProposalStatus } from './ProposalStatus';
 
 const mapStateToFilter = createSelector(
   getCustomer,
@@ -69,10 +68,6 @@ export const CustomerProposalsList: FC<{}> = () => {
         {
           title: translate('State'),
           render: ({ row }) => <>{formatProposalState(row.state)}</>,
-        },
-        {
-          title: translate('Status'),
-          render: ProposalStatus,
         },
       ]}
       title={translate('Proposals')}

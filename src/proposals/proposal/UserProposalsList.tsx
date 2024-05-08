@@ -18,7 +18,6 @@ import { EndingField } from '../EndingField';
 import { ProposalsListExpandableRow } from './ProposalsListExpandableRow';
 import { ProposalsListPlaceholder } from './ProposalsListPlaceholder';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
-import { ProposalStatus } from './ProposalStatus';
 
 const filtersSelector = createSelector(
   getFormValues(PROPOSALS_FILTER_FORM_ID),
@@ -74,10 +73,6 @@ export const UserProposalsList: FC = () => {
         {
           title: translate('State'),
           render: ({ row }) => <>{formatProposalState(row.state)}</>,
-        },
-        {
-          title: translate('Status'),
-          render: ProposalStatus,
         },
       ]}
       title={translate('My proposals')}
