@@ -70,6 +70,11 @@ const UserReviewsList = lazyComponent(
   'UserReviewsList',
 );
 
+const CallsForProposals = lazyComponent(
+  () => import('./CallsForProposals'),
+  'CallsForProposals',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'call-management',
@@ -156,12 +161,76 @@ export const states: StateDeclaration[] = [
 
   // Public calls
   {
-    name: 'public-calls-user',
-    url: 'calls/',
-    component: PublicCallsPage,
-    parent: 'profile',
+    name: 'calls-for-proposals',
+    url: '/calls-for-proposals/',
+    abstract: true,
+    parent: 'layout',
+    component: UIView,
     data: {
+      title: () => translate('Calls for proposals'),
       hideProjectSelector: true,
+    },
+  },
+  {
+    name: 'proposals',
+    url: '/proposals/',
+    abstract: true,
+    parent: 'layout',
+    component: UIView,
+    data: {
+      title: () => translate('Proposals'),
+      hideProjectSelector: true,
+    },
+  },
+  {
+    name: 'reviews',
+    url: '/reviews/',
+    abstract: true,
+    parent: 'layout',
+    component: UIView,
+    data: {
+      title: () => translate('Reviews'),
+      hideProjectSelector: true,
+    },
+  },
+
+  {
+    name: 'calls-for-proposals-dashboard',
+    url: '',
+    parent: 'calls-for-proposals',
+    component: CallsForProposals,
+    data: {
+      breadcrumb: () => translate('Dashboard'),
+      priority: 100,
+    },
+  },
+  {
+    name: 'calls-for-proposals-all-calls',
+    url: 'all-calls/',
+    parent: 'calls-for-proposals',
+    component: PublicCallsPage,
+    data: {
+      breadcrumb: () => translate('All calls'),
+    },
+  },
+  {
+    name: 'proposals-all-proposals',
+    url: '',
+    parent: 'proposals',
+    component: UserProposalsList,
+    data: {
+      breadcrumb: () => translate('All proposals'),
+      priority: 100,
+    },
+  },
+  {
+    name: 'reviews-all-reviews',
+    url: '',
+    parent: 'reviews',
+    component: UserReviewsList,
+    data: {
+      breadcrumb: () => translate('All reviews'),
+      priority: 100,
     },
   },
   {
@@ -195,27 +264,6 @@ export const states: StateDeclaration[] = [
     component: ProposalManagePage,
     data: {
       hideProjectSelector: true,
-    },
-  },
-
-  {
-    name: 'profile-proposals',
-    url: 'user-proposals/',
-    component: UserProposalsList,
-    parent: 'profile-calls',
-    data: {
-      feature: MarketplaceFeatures.show_call_management_functionality,
-      breadcrumb: () => translate('Proposals'),
-    },
-  },
-  {
-    name: 'profile-reviews',
-    url: 'user-reviews/',
-    component: UserReviewsList,
-    parent: 'profile-calls',
-    data: {
-      feature: MarketplaceFeatures.show_call_management_functionality,
-      breadcrumb: () => translate('Reviews'),
     },
   },
 ];

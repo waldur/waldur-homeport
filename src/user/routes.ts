@@ -2,7 +2,7 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { MarketplaceFeatures, UserFeatures } from '@waldur/FeaturesEnums';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 import { getConfig } from '@waldur/store/config';
@@ -110,18 +110,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Affiliations'),
       priority: 105,
-    },
-  },
-
-  {
-    name: 'profile-calls',
-    abstract: true,
-    parent: 'profile',
-    component: UIView,
-    url: '',
-    data: {
-      feature: MarketplaceFeatures.show_call_management_functionality,
-      breadcrumb: () => translate('Calls'),
     },
   },
 

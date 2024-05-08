@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { MenuComponent } from '@waldur/metronic/components';
+import { CallPublicMenu } from '@waldur/navigation/CallPublicMenu';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ManagementMenu } from './ManagementMenu';
@@ -35,6 +36,16 @@ export const UnifiedSidebar = () => {
       const item = document.querySelector('#resources-menu');
       menu.show(item);
     }
+    if (
+      [
+        'calls-for-proposals-dashboard',
+        'proposals-all-proposals',
+        'reviews-all-reviews',
+      ].includes(state.name)
+    ) {
+      const item = document.querySelector('#calls-menu');
+      menu.show(item);
+    }
   }, [router, state, params.resource_uuid]);
 
   if (!user) {
@@ -48,6 +59,7 @@ export const UnifiedSidebar = () => {
       <ManagementMenu />
       <ResourcesMenu />
       <ReportingMenu />
+      <CallPublicMenu />
     </Sidebar>
   );
 };

@@ -7,7 +7,6 @@ import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { CallAllFiltersWithDefaultState } from '@waldur/proposals/call-management/CallAllFilters';
@@ -40,9 +39,7 @@ const mapStateToFilter = createSelector(
 export const PublicCallsPage: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
   useFullPage();
-  useTitle(translate('Marketplace'));
-
-  useMarketplacePublicTabs();
+  useTitle(translate('All calls'));
 
   const tableProps = useTable({
     table: 'PublicCallsList',
@@ -60,7 +57,7 @@ export const PublicCallsPage: FunctionComponent = () => {
           translate('calls for proposals')
         }
       ></HeroSection>
-      <div className="container-xxl mb-20">
+      <div className="container-xxl mt-20">
         <Table<Call>
           title={translate('Calls for proposals')}
           {...tableProps}
