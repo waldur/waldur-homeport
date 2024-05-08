@@ -6,9 +6,12 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
+import { formatResourceType } from '@waldur/resource/utils';
 
 import { KeyValueButton } from '../KeyValueButton';
 import { Resource } from '../types';
+
+import { PlanDetailsField } from './PlanDetailsField';
 
 interface ResourceSummaryProps {
   resource: Resource;
@@ -19,6 +22,10 @@ export const ResourceSummary: FunctionComponent<
   PropsWithChildren<ResourceSummaryProps>
 > = ({ resource, scope, children }) => (
   <Container className="container-metadata">
+    <Field
+      label={translate('Resource type')}
+      value={formatResourceType(resource)}
+    />
     <Field label={translate('Offering name')} value={resource.offering_name} />
     <Field
       label={translate('Client organization')}
@@ -26,7 +33,7 @@ export const ResourceSummary: FunctionComponent<
     />
     <Field label={translate('Client project')} value={resource.project_name} />
     <Field label={translate('Category')} value={resource.category_title} />
-    <Field label={translate('Plan')} value={resource.plan_name || 'N/A'} />
+    <PlanDetailsField resource={resource} />
     <Field
       label={translate('Created')}
       value={<CreatedField resource={resource} />}

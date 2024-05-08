@@ -15,6 +15,7 @@ export interface PageBarTab {
   priority?: number;
   state?: string;
   params?: any;
+  children?: Omit<PageBarTab, 'children'>[];
 }
 
 interface PageBarContextModel {
@@ -50,8 +51,14 @@ export const PageBarProvider: FC<PropsWithChildren> = ({ children }) => {
         .concat(newTabs)
         .map((tab) => {
           const el = document.getElementById(tab.key);
-          if (el) return { ...tab, priority: el.offsetTop };
-          else return null;
+          if (el) return { ...tab, priority: tab.priority || el.offsetTop };
+          if (tab.children?.length) {
+            for (const child of tab.children) {
+              const childEl = document.getElementById(child.key);
+              if (childEl)
+                return { ...tab, priority: tab.priority || childEl.offsetTop };
+            }
+          } else return null;
         })
         .filter(Boolean);
       return renderedTabs.sort((a, b) => (a.priority > b.priority ? 1 : -1));
@@ -60,7 +67,16 @@ export const PageBarProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const clearTabs = () => setTabs([]);
 
-  const tabKeys = useMemo(() => tabs.map((tab) => tab.key), [tabs]);
+  const tabKeys = useMemo(() => {
+    const keys = [];
+    tabs.forEach((tab) => {
+      keys.push(tab.key);
+      if (tab.children?.length) {
+        keys.push(...tab.children.map((child) => child.key));
+      }
+    });
+    return keys;
+  }, [tabs]);
 
   const visibleSectionId = useScrollTracker({
     sectionIds: tabKeys,

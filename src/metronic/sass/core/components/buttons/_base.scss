@@ -51,6 +51,12 @@
     border: 1px solid $input-border-color;
   }
 
+  // No focus
+  &.btn-no-focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
   // Flush
   &.btn-flush {
     @include button-reset();
@@ -78,7 +84,7 @@
 // Icons
 .btn {
   // Default font-size for all buttons
-  :not(.btn-sm):not(.btn-lg) {
+  &:not(.btn-sm):not(.btn-lg) {
     font-size: 14px;
   }
 

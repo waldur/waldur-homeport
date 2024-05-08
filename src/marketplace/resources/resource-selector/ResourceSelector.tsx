@@ -4,7 +4,6 @@ import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { get } from '@waldur/core/api';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { Link } from '@waldur/core/Link';
 import { SearchIcon } from '@waldur/core/svg/SearchIcon';
 import useOnScreen from '@waldur/core/useOnScreen';
@@ -169,30 +168,21 @@ export const ResourceSelectorToggle: FunctionComponent<
   };
 
   return (
-    <div
-      id="resource-selector-wrapper"
-      className="resource-selector-wrapper d-flex align-items-center"
-    >
-      <div>
-        <div
-          className="resource-selector-toggle btn btn-flush d-flex align-items-center mb-2"
-          data-kt-menu-trigger="click"
-          data-kt-menu-attach="parent"
-          data-kt-menu-placement="bottom"
-          aria-hidden="true"
-          onClick={scroll}
-        >
-          <h3 className="text-start text-decoration-underline mb-0 me-2">
-            {props.resource.name}
-          </h3>
-          <i className="fa fa-caret-down fs-4 text-dark"></i>
-        </div>
-        <ResourceSelectorDropdown resource={props.resource} />
+    <div id="resource-selector-wrapper" className="resource-selector-wrapper">
+      <div
+        className="resource-selector-toggle btn btn-flush d-flex align-items-center"
+        data-kt-menu-trigger="click"
+        data-kt-menu-attach="parent"
+        data-kt-menu-placement="bottom"
+        aria-hidden="true"
+        onClick={scroll}
+      >
+        <h3 className="text-start text-decoration-underline mb-0 me-2">
+          {props.resource.name}
+        </h3>
+        <i className="fa fa-caret-down fs-4 text-dark"></i>
       </div>
-      <CopyToClipboardButton
-        value={props.resource.name}
-        className="mx-2 text-hover-primary cursor-pointer"
-      />
+      <ResourceSelectorDropdown resource={props.resource} />
     </div>
   );
 };

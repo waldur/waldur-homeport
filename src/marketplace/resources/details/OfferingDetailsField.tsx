@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux';
 
+import { Tip } from '@waldur/core/Tooltip';
+import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
@@ -12,7 +14,12 @@ export const OfferingDetailsField = ({ offering }) => {
       label={translate('Offering name')}
       value={
         <>
-          {offering.name}{' '}
+          <Tip
+            label={offering.name?.length > 30 ? offering.name : null}
+            id={offering.uuid}
+          >
+            {truncate(offering.name)}
+          </Tip>{' '}
           <button
             className="text-link"
             type="button"

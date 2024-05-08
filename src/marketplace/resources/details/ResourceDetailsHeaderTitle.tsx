@@ -1,5 +1,8 @@
 import { FunctionComponent } from 'react';
 
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
+
+import { ResourceStateField } from '../list/ResourceStateField';
 import { ResourceSelectorToggle } from '../resource-selector/ResourceSelector';
 import { Resource } from '../types';
 
@@ -14,7 +17,14 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
 > = ({ resource }) => {
   return (
     <>
-      <ResourceSelectorToggle resource={resource} />
+      <div className="d-flex flex-wrap gap-2 mb-2">
+        <ResourceSelectorToggle resource={resource} />
+        <CopyToClipboardButton
+          value={resource.name}
+          className="text-hover-primary cursor-pointer"
+        />
+        <ResourceStateField resource={resource} pill light hasBullet />
+      </div>
       <ParentResourceLink resource={resource} />
     </>
   );

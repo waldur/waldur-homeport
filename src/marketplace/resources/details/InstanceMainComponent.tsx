@@ -6,7 +6,7 @@ import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { MonitoringCharts } from './MonitoringCharts';
 
-export const InstanceMainComponent = () => {
+export const InstanceMainComponent = ({ activeTab }) => {
   const experimentalUiComponentsVisible = isExperimentalUiComponentsVisible();
   const { addTabs } = useContext(PageBarContext);
   useEffect(() => {
@@ -15,9 +15,14 @@ export const InstanceMainComponent = () => {
         {
           key: 'monitoring',
           title: translate('Monitoring'),
+          priority: 12,
         },
       ]);
     }
   });
-  return experimentalUiComponentsVisible ? <MonitoringCharts /> : null;
+  return experimentalUiComponentsVisible ? (
+    <div className={activeTab === 'monitoring' ? undefined : 'd-none'}>
+      <MonitoringCharts />
+    </div>
+  ) : null;
 };

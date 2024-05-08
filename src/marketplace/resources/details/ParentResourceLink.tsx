@@ -23,7 +23,7 @@ export const ParentResourceLink = ({ resource }: { resource: Resource }) =>
                 }}
               >
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a className="text-link">{resource.parent_name}</a>
+                <a className="text-btn">{resource.parent_name}</a>
               </UISref>
             ),
           },

@@ -27,7 +27,7 @@ export const ResourceSpecGroupCard: FunctionComponent<
 
   const { addTabs } = useContext(PageBarContext);
   useEffect(() => {
-    addTabs([{ key: props.tabKey, title: props.title }]);
+    addTabs([{ key: props.tabKey, title: props.title, priority: 11 }]);
   }, [props, addTabs]);
 
   return (

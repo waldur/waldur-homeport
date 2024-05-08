@@ -4,9 +4,10 @@ import { Button, OverlayTrigger, Popover, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
-import { detectOS } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/notify';
+
+import { getResourceAccessEndpoints, isSshFormat } from './utils';
 
 interface Endpoint {
   name: string;
@@ -27,15 +28,6 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
   offering,
 }) => {
   const dispatch = useDispatch();
-
-  const isSshFormat = (url) => {
-    try {
-      const parsedUrl = new URL(url);
-      return parsedUrl.protocol === 'ssh:';
-    } catch (error) {
-      return false;
-    }
-  };
 
   const extendURLWithUsername = (url) => {
     const [protocol, restUrl] = url.split('://');
@@ -61,19 +53,18 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     [dispatch, resource.username],
   );
 
-  const os = useMemo(() => detectOS(), []);
+  const endpoints = useMemo(
+    () => getResourceAccessEndpoints(resource, offering),
+    [resource, offering],
+  );
 
-  let endpoints = [...resource.endpoints, ...offering.endpoints];
-  if (os === 'Windows') {
-    endpoints = endpoints.filter((endpoint) => !isSshFormat(endpoint.url));
-  }
   if (endpoints.length === 0) {
     return null;
   }
   return (
     <OverlayTrigger
       trigger="click"
-      placement="bottom-start"
+      placement="bottom-end"
       overlay={
         <Popover className="w-350px">
           <Table bordered>
@@ -119,10 +110,13 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
       }
       rootClose={true}
     >
-      <Button className="me-3 d-flex" variant="success">
-        <div className="me-3">{translate('Access resource')}</div>
+      <Button
+        variant="outline-dark"
+        className="d-flex btn-outline btn-active-secondary border-gray-400"
+      >
+        <div className="me-2">{translate('Access resource')}</div>
         <div>
-          <i className="fa fa-angle-down fa-lg"></i>
+          <i className="fa fa-caret-down fa-lg"></i>
         </div>
       </Button>
     </OverlayTrigger>
