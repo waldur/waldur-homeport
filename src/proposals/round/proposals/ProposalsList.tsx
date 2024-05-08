@@ -55,7 +55,10 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
       expandableRow={ProposalExpandableRow}
       hasQuery={true}
       hoverableRow={({ row }) => (
-        <ProposalRowActions row={{ ...row, call_uuid: props.call_uuid }} />
+        <ProposalRowActions
+          row={{ ...row, call_uuid: props.call_uuid }}
+          refetch={tableProps.fetch}
+        />
       )}
     />
   );
