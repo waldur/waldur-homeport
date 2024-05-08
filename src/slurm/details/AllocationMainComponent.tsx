@@ -8,7 +8,7 @@ import { PageBarContext } from '@waldur/marketplace/context';
 import { AllocationJobsTable } from './AllocationJobsTable';
 import { AllocationUsersTable } from './AllocationUsersTable';
 
-export const AllocationMainComponent = ({ scope }) => {
+export const AllocationMainComponent = ({ scope, activeTab }) => {
   const isSlurmJubsVisible = isFeatureVisible(SlurmFeatures.jobs);
   const { addTabs } = useContext(PageBarContext);
   useEffect(() => {
@@ -16,6 +16,7 @@ export const AllocationMainComponent = ({ scope }) => {
       {
         key: 'allocation-users',
         title: translate('Allocation users'),
+        priority: 12,
       },
     ]);
     if (isSlurmJubsVisible) {
@@ -23,17 +24,21 @@ export const AllocationMainComponent = ({ scope }) => {
         {
           key: 'jobs',
           title: translate('Jobs'),
+          priority: 13,
         },
       ]);
     }
   });
   return scope ? (
     <>
-      <div className="mb-10" id="allocation-users">
+      <div
+        className={activeTab === 'allocation-users' ? 'mb-10' : 'd-none'}
+        id="allocation-users"
+      >
         <AllocationUsersTable scope={scope} />
       </div>
       {isSlurmJubsVisible && (
-        <div className="mb-10" id="jobs">
+        <div className={activeTab === 'jobs' ? 'mb-10' : 'd-none'} id="jobs">
           <AllocationJobsTable scope={scope} />
         </div>
       )}

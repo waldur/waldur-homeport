@@ -17,34 +17,47 @@ const tabs: PageBarTab[] = [
   {
     key: 'getting-started',
     title: translate('Getting started'),
+    priority: 10,
   },
   {
     key: 'lexis-links',
     title: translate('LEXIS links'),
+    priority: 20,
   },
   {
     key: 'robot-accounts',
     title: translate('Robot accounts'),
+    priority: 30,
   },
   {
     key: 'usage-history',
     title: translate('Usage'),
-  },
-  {
-    key: 'activity',
-    title: translate('Activity'),
+    priority: 40,
   },
   {
     key: 'tickets',
     title: translate('Tickets'),
+    priority: 50,
   },
   {
     key: 'resource-options',
     title: translate('Options'),
+    priority: 60,
   },
   {
     key: 'users',
     title: translate('Roles'),
+    priority: 70,
+  },
+  {
+    key: 'metadata',
+    title: translate('Resource metadata'),
+    children: [
+      { key: 'resource-details', title: translate('Resource details') },
+      { key: 'activity', title: translate('Audit logs') },
+      { key: 'order-history', title: translate('Order history') },
+    ],
+    priority: 80,
   },
 ];
 
@@ -57,6 +70,7 @@ export const ResourceDetailsBar: FunctionComponent = () => {
   return (
     <PageBarTabs
       tabs={tabs}
+      showFirstTab
       right={
         <ProjectUsersBadge
           compact

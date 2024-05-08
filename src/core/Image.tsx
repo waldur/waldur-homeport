@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 
 interface ImageProps {
@@ -5,6 +6,7 @@ interface ImageProps {
   size: number | string;
   isContain?: boolean;
   classes?: string;
+  circle?: boolean;
 }
 
 export const Image: FC<ImageProps> = ({
@@ -12,13 +14,16 @@ export const Image: FC<ImageProps> = ({
   size,
   isContain,
   classes = '',
+  circle,
 }) => {
   return (
     <div
-      className={
-        `symbol symbol-${size}px ${classes}` +
-        (isContain ? 'symbol-contain' : '')
-      }
+      className={classNames(
+        `symbol symbol-${size}px`,
+        classes,
+        isContain && 'symbol-contain',
+        circle && 'symbol-circle',
+      )}
     >
       <div
         className="symbol-label"

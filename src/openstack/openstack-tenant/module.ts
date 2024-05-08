@@ -2,7 +2,6 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ActionRegistry } from '@waldur/resource/actions/registry';
 import * as ResourceSummary from '@waldur/resource/summary/registry';
 
-import './actions/module';
 import { DestroyPortAction } from './DestroyPortAction';
 import './tabs';
 

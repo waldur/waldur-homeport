@@ -1,13 +1,19 @@
-import { translate } from '@waldur/i18n';
+import { Button } from 'react-bootstrap';
 
-import { ActionButton } from './ActionButton';
+import { translate } from '@waldur/i18n';
 
 export const RefreshButton = ({ refetch, isLoading }) => {
   return (
-    <ActionButton
-      title={translate('Refresh')}
-      iconClass={isLoading ? 'fa-repeat fa-spin' : 'fa-repeat'}
-      action={!isLoading && refetch}
-    />
+    <Button
+      variant="outline-dark"
+      className="btn-outline btn-active-secondary btn-icon-dark border-gray-400 w-100px px-2"
+      size="sm"
+      onClick={!isLoading && refetch}
+    >
+      <i
+        className={'fa ' + (isLoading ? 'fa-repeat fa-spin' : 'fa-repeat')}
+      ></i>
+      {translate('Refresh')}
+    </Button>
   );
 };

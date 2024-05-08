@@ -1,6 +1,6 @@
 import { get } from '@waldur/core/api';
 import { Tip } from '@waldur/core/Tooltip';
-import { formatFilesize } from '@waldur/core/utils';
+import { detectOS, formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import {
   getTypeDisplay,
@@ -11,6 +11,24 @@ import { ResourceSummaryProps } from '@waldur/resource/summary';
 import { Schedule } from '@waldur/resource/types';
 
 export const getResourceIcon = (type) => getServiceIcon(type.split('.')[0]);
+
+export const getResourceAccessEndpoints = (resource, offering) => {
+  const os = detectOS();
+  let endpoints = [...resource.endpoints, ...offering.endpoints];
+  if (os === 'Windows') {
+    endpoints = endpoints.filter((endpoint) => !isSshFormat(endpoint.url));
+  }
+  return endpoints;
+};
+
+export const isSshFormat = (url) => {
+  try {
+    const parsedUrl = new URL(url);
+    return parsedUrl.protocol === 'ssh:';
+  } catch (error) {
+    return false;
+  }
+};
 
 const RESOURCE_TYPE_LABELS = {};
 

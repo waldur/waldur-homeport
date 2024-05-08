@@ -48,10 +48,12 @@ const useScrollTracker = (props: useScrollTrackerProps) => {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
+    document.addEventListener('click', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      document.removeEventListener('click', handleScroll);
     };
   }, [handleScroll]);
 

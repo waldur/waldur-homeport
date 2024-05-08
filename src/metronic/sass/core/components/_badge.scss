@@ -22,6 +22,11 @@
     width: $badge-size;
   }
 
+  // Circle
+  &.badge-pill {
+    border-radius: 50px;
+  }
+
   // Sizes
   &.badge-sm {
     min-width: $badge-size-sm;

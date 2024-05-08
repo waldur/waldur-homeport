@@ -307,11 +307,6 @@ msgstr ""
 msgid "Active user will be able to login into the portal."
 msgstr ""
 
-#: src/marketplace/resources/details/ActivityCard.tsx
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
-msgid "Activity"
-msgstr ""
-
 #: src/administration/providers/CreateProviderDialog.tsx
 #: src/customer/team/AddProjectUserButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
@@ -638,6 +633,10 @@ msgstr ""
 #: src/marketplace/offerings/update/attributes/utils.tsx
 #: src/rancher/node/NodeRoleField.tsx
 msgid "All"
+msgstr ""
+
+#: src/marketplace/resources/ResourceActions.tsx
+msgid "All actions"
 msgstr ""
 
 #: src/marketplace/category/list/AllCategoriesPage.tsx
@@ -1245,6 +1244,8 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
+#: src/marketplace/resources/details/ActivityCard.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 #: src/marketplace/service-providers/dashboard/ProviderEventsTable.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectEventsList.tsx
@@ -3636,6 +3637,7 @@ msgstr ""
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -4464,7 +4466,6 @@ msgstr ""
 msgid "Fixed-price contract"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/ResourceFlavorField.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
@@ -4504,7 +4505,6 @@ msgstr ""
 msgid "Flavors regex"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/ResourceFloatingIpField.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr ""
@@ -4994,7 +4994,6 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
-#: src/marketplace/resources/details/openstack-instance/ResourceImageField.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
@@ -5259,7 +5258,6 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
-#: src/marketplace/resources/details/openstack-instance/ResourceInternalIpsField.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
@@ -7431,7 +7429,7 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceOrdersLink.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 msgid "Order history"
 msgstr ""
 
@@ -8038,7 +8036,6 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/PlanDetailsField.tsx
-#: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -9642,7 +9639,6 @@ msgstr ""
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
-#: src/marketplace/resources/details/ResourceDetailsView.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
@@ -9680,6 +9676,11 @@ msgstr ""
 
 #: src/marketplace/orders/details/DetailsSection.tsx
 msgid "Resource description"
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceMetadataCard.tsx
+msgid "Resource details"
 msgstr ""
 
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
@@ -9733,7 +9734,7 @@ msgstr ""
 msgid "Resource link"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceMetadataDialog.tsx
+#: src/marketplace/resources/details/ResourceDetailsBar.tsx
 msgid "Resource metadata"
 msgstr ""
 
@@ -9791,7 +9792,7 @@ msgstr ""
 msgid "Resource termination request has been submitted."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceTypeField.tsx
+#: src/marketplace/resources/details/ResourceSummary.tsx
 msgid "Resource type"
 msgstr ""
 
@@ -10275,7 +10276,6 @@ msgstr ""
 #: src/proposals/proposal/create-review/CommentFormDialog.tsx
 #: src/proposals/team/AddUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
-#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/reporting/invoices/utils.ts
 msgid "Save"
 msgstr ""
@@ -11148,10 +11148,6 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceMetadataLink.tsx
-msgid "Show metadata"
-msgstr ""
-
 #: src/marketplace/details/plan/PlanDetailsTable2.tsx
 msgid "Show monthly estimates"
 msgstr ""
@@ -11380,10 +11376,6 @@ msgstr ""
 #: src/user/support/UserList.tsx
 #: src/user/support/utils.ts
 msgid "Staff"
-msgstr ""
-
-#: src/marketplace/resources/details/ActionButton.tsx
-msgid "Staff action"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenStackInstanceActions.tsx
@@ -12502,6 +12494,10 @@ msgstr ""
 
 #: src/invitations/utils.ts
 msgid "To accept the invitation, please sign in to your account."
+msgstr ""
+
+#: src/marketplace/resources/details/GettingStartedCard.tsx
+msgid "To access {resource}, please select one of the supported methods from dropdown on the right"
 msgstr ""
 
 #: src/slurm/RequestLimitsChangeDialog.tsx
