@@ -639,6 +639,11 @@ msgstr ""
 msgid "All actions"
 msgstr ""
 
+#: src/proposals/PublicCallsPage.tsx
+#: src/proposals/routes.ts
+msgid "All calls"
+msgstr ""
+
 #: src/marketplace/category/list/AllCategoriesPage.tsx
 msgid "All categories"
 msgstr ""
@@ -661,6 +666,10 @@ msgstr ""
 msgid "All ports"
 msgstr ""
 
+#: src/proposals/routes.ts
+msgid "All proposals"
+msgstr ""
+
 #: src/marketplace/routes.ts
 #: src/navigation/sidebar/ResourcesMenu.tsx
 msgid "All resources"
@@ -672,6 +681,10 @@ msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
 msgid "All resources will be scheduled for termination once the date is reached."
+msgstr ""
+
+#: src/proposals/routes.ts
+msgid "All reviews"
 msgstr ""
 
 #: src/proposals/round/RoundQuotas.tsx
@@ -933,6 +946,10 @@ msgstr ""
 
 #: src/customer/details/CustomerCallManagerPanel.tsx
 msgid "Are you sure you want to allow this organization to manage calls?"
+msgstr ""
+
+#: src/proposals/proposal/ProposalRowActions.tsx
+msgid "Are you sure you want to approve the proposal: {name}?"
 msgstr ""
 
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
@@ -1689,10 +1706,9 @@ msgstr ""
 msgid "Caller field name"
 msgstr ""
 
-#: src/marketplace/utils.ts
+#: src/navigation/CallPublicMenu.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
-#: src/user/routes.ts
 msgid "Calls"
 msgstr ""
 
@@ -1701,7 +1717,10 @@ msgid "Calls closing soon"
 msgstr ""
 
 #: src/marketplace/routes.ts
+#: src/navigation/CallPublicMenu.tsx
+#: src/proposals/CallsForProposals.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/routes.ts
 msgid "Calls for proposals"
 msgstr ""
 
@@ -2353,10 +2372,6 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: src/marketplace/landing/DeploymentIntroduction.tsx
-msgid "Cost efficiently"
-msgstr ""
-
 #: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Cost estimation"
 msgstr ""
@@ -2904,6 +2919,10 @@ msgstr ""
 msgid "Cutoff date must be after start date"
 msgstr ""
 
+#: src/proposals/CallCard.tsx
+msgid "Cutoff: {title}"
+msgstr ""
+
 #: src/openstack/openstack-subnet/fields.tsx
 msgid "DNS name servers"
 msgstr ""
@@ -3180,20 +3199,8 @@ msgstr ""
 msgid "Deploy Longhorn block storage after cluster is deployed"
 msgstr ""
 
-#: src/marketplace/landing/DeploymentIntroduction.tsx
-msgid "Deploy in minutes"
-msgstr ""
-
-#: src/marketplace/landing/FooterSection.tsx
-msgid "Deploy in seconds"
-msgstr ""
-
 #: src/administration/TelemetryExampleDialog.tsx
 msgid "Deployment ID"
-msgstr ""
-
-#: src/marketplace/landing/DeploymentIntroduction.tsx
-msgid "Deployment made easy, for everyone"
 msgstr ""
 
 #: src/administration/TelemetryExampleDialog.tsx
@@ -3637,7 +3644,6 @@ msgstr ""
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/round/submission/EditSubmissionInfoButton.tsx
 #: src/proposals/update/general/EditGeneralInfoButton.tsx
-#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/cluster/hpas/HPAUpdateButton.tsx
 #: src/slurm/EditAction.tsx
 #: src/user/support/IdentityProviderIndicator.tsx
@@ -4530,8 +4536,8 @@ msgstr ""
 msgid "For"
 msgstr ""
 
-#: src/marketplace/landing/FooterSection.tsx
-msgid "For vendors"
+#: src/proposals/proposal/ProposalRowActions.tsx
+msgid "Force approve"
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/ForceDestroyAction.tsx
@@ -5731,6 +5737,7 @@ msgstr ""
 #: src/marketplace/resources/details/InfiniteList.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
+#: src/proposals/CallsForProposalsList.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
 msgstr ""
@@ -5843,10 +5850,6 @@ msgstr ""
 msgid "MTU"
 msgstr ""
 
-#: src/marketplace/landing/DeploymentIntroduction.tsx
-msgid "Magento server deployment is quick and easy so you don’t fret over the technicalities."
-msgstr ""
-
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 #: src/project/ProjectActions.tsx
@@ -5916,7 +5919,6 @@ msgstr ""
 #: src/administration/routes.ts
 #: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/routes.ts
-#: src/proposals/PublicCallsPage.tsx
 msgid "Marketplace"
 msgstr ""
 
@@ -7296,6 +7298,7 @@ msgstr ""
 msgid "Open"
 msgstr ""
 
+#: src/proposals/CallsForProposalsList.tsx
 #: src/proposals/call-management/CallManagementStatistics.tsx
 msgid "Open calls"
 msgstr ""
@@ -8766,6 +8769,10 @@ msgid "Proposal created successfully"
 msgstr ""
 
 #: src/proposals/proposal/ProposalRowActions.tsx
+msgid "Proposal has been approved."
+msgstr ""
+
+#: src/proposals/proposal/ProposalRowActions.tsx
 msgid "Proposal has been rejected."
 msgstr ""
 
@@ -8797,6 +8804,7 @@ msgstr ""
 msgid "Proposal updated successfully"
 msgstr ""
 
+#: src/navigation/CallPublicMenu.tsx
 #: src/proposals/proposal/CustomerProposalsList.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
@@ -9098,10 +9106,6 @@ msgstr ""
 
 #: src/proposals/proposal/create-review/steps/steps.ts
 msgid "Rating and comments"
-msgstr ""
-
-#: src/marketplace/landing/FooterSection.tsx
-msgid "Reach a new audience"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
@@ -10025,6 +10029,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
+#: src/navigation/CallPublicMenu.tsx
 #: src/proposals/review/CustomerReviewsList.tsx
 #: src/proposals/routes.ts
 #: src/proposals/update/rounds/CallRoundsList.tsx
@@ -10276,6 +10281,7 @@ msgstr ""
 #: src/proposals/proposal/create-review/CommentFormDialog.tsx
 #: src/proposals/team/AddUserDialog.tsx
 #: src/proposals/update/documents/AttachDocumentsDialog.tsx
+#: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/reporting/invoices/utils.ts
 msgid "Save"
 msgstr ""
@@ -10493,10 +10499,6 @@ msgstr ""
 
 #: src/booking/offering/BookingResourceListItem.tsx
 msgid "See more"
-msgstr ""
-
-#: src/marketplace/landing/FooterSection.tsx
-msgid "See offerings"
 msgstr ""
 
 #: src/marketplace/orders/list/OrderTablePlaceholder.tsx
@@ -11533,8 +11535,6 @@ msgstr ""
 #: src/navigation/BackendHealthStatusDialog.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
-#: src/proposals/proposal/CustomerProposalsList.tsx
-#: src/proposals/proposal/UserProposalsList.tsx
 #: src/proposals/round/proposals/ProposalExpandableRow.tsx
 #: src/proposals/team/InvitationsList.tsx
 #: src/user/support/UserFilter.tsx
@@ -12226,6 +12226,10 @@ msgstr ""
 msgid "There are no actions."
 msgstr ""
 
+#: src/proposals/CallsForProposalsList.tsx
+msgid "There are no calls for proposals at the moment."
+msgstr ""
+
 #: src/proposals/PublicCallsTablePlaceholder.tsx
 msgid "There are no calls for proposals yet."
 msgstr ""
@@ -12754,6 +12758,10 @@ msgstr ""
 
 #: src/invitations/UserPermissionRequestApproveButton.tsx
 msgid "Unable to approve permission request."
+msgstr ""
+
+#: src/proposals/proposal/ProposalRowActions.tsx
+msgid "Unable to approve the proposal."
 msgstr ""
 
 #: src/marketplace/offerings/update/plans/ArchivePlanButton.tsx
@@ -14702,10 +14710,6 @@ msgstr ""
 msgid "Value should not be negative."
 msgstr ""
 
-#: src/marketplace/landing/DeploymentIntroduction.tsx
-msgid "Vendor Neutral"
-msgstr ""
-
 #: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
 msgid "Vendor support pages"
 msgstr ""
@@ -14753,7 +14757,12 @@ msgstr ""
 
 #: src/core/StatisticsCard.tsx
 #: src/marketplace/category/list/CategoryGroupsList.tsx
+#: src/proposals/CallsForProposalsList.tsx
 msgid "View all"
+msgstr ""
+
+#: src/proposals/CallCard.tsx
+msgid "View call"
 msgstr ""
 
 #: src/marketplace/common/OfferingCardButtonsOverlay.tsx
@@ -15204,6 +15213,7 @@ msgstr ""
 msgid "browse"
 msgstr ""
 
+#: src/proposals/CallsForProposals.tsx
 #: src/proposals/PublicCallsPage.tsx
 msgid "calls for proposals"
 msgstr ""
