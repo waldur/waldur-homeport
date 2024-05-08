@@ -70,6 +70,11 @@ export const createCallRound = (callUuid, data) => {
   return post<Round>(`/proposal-protected-calls/${callUuid}/rounds/`, data);
 };
 
+export const getAllPublicCalls = (callsWithActiveRounds?) =>
+  getAll<Call>('/proposal-public-calls/', {
+    params: { has_active_round: callsWithActiveRounds },
+  });
+
 export const updateCallRound = (callUuid, roundUuid, data) =>
   put<Round>(
     `/proposal-protected-calls/${callUuid}/rounds/${roundUuid}/`,

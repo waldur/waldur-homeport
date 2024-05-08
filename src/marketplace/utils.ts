@@ -55,14 +55,6 @@ export const useMarketplacePublicTabs = () => {
         params: landingStateParams,
       },
     ];
-    if (
-      isFeatureVisible(MarketplaceFeatures.show_call_management_functionality)
-    ) {
-      _tabs.push({
-        title: translate('Calls'),
-        to: callsState,
-      });
-    }
     return _tabs.concat(
       getCategoryItems(
         categories.isFetched ? categories.data : [],
