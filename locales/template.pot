@@ -1705,6 +1705,7 @@ msgstr ""
 msgid "Calls closing soon"
 msgstr ""
 
+#: src/marketplace/routes.ts
 #: src/proposals/PublicCallsPage.tsx
 msgid "Calls for proposals"
 msgstr ""
@@ -7169,12 +7170,6 @@ msgstr ""
 msgid "Offering request has been submitted."
 msgstr ""
 
-#: src/marketplace/routes.ts
-#: src/proposals/offering-requests/OfferingRequestsList.tsx
-#: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
-msgid "Offering requests"
-msgstr ""
-
 #: src/marketplace/offerings/store/effects.ts
 msgid "Offering resources synchronization has been scheduled."
 msgstr ""
@@ -9593,6 +9588,12 @@ msgstr ""
 #: src/marketplace/category/list/OfferingCard.tsx
 #: src/marketplace/common/OfferingCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
+msgstr ""
+
+#: src/marketplace/routes.ts
+#: src/proposals/offering-requests/OfferingRequestsList.tsx
+#: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
+msgid "Requests for offerings"
 msgstr ""
 
 #: src/administration/service-desk/SmaxSettings.tsx
@@ -15375,10 +15376,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 msgid "offering permissions"
-msgstr ""
-
-#: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
-msgid "offering requests"
 msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx

@@ -84,8 +84,8 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
           render: ({ row }) => <>{formatCallOfferingState(row.state)}</>,
         },
       ]}
-      title={translate('Offering requests')}
-      verboseName={translate('Offering requests')}
+      title={translate('Requests for offerings')}
+      verboseName={translate('Requests for offerings')}
       hasQuery={true}
       actions={<Button variant="success">{translate('Accept request')}</Button>}
       expandableRow={OfferingRequestsListExpandableRow}

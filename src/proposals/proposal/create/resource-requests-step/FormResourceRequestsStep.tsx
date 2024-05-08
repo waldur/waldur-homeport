@@ -122,8 +122,8 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
             ),
           },
         ]}
-        title={translate('Offering requests')}
-        verboseName={translate('offering requests')}
+        title={translate('Requests for offerings')}
+        verboseName={translate('Requests for offerings')}
         filters={
           isLoading ? (
             <LoadingSpinner />
