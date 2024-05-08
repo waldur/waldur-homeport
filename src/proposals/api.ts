@@ -23,8 +23,8 @@ import {
   CallManagingOrganization,
   CallOffering,
   Proposal,
-  Round,
   ProposalReview,
+  Round,
 } from './types';
 
 export const getCallManagingOrganization = (customerUuid) =>
@@ -128,6 +128,9 @@ export const getProposal = (uuid) =>
 
 export const rejectProposal = (uuid) =>
   post<Proposal>(`/proposal-proposals/${uuid}/reject/`);
+
+export const forceApproveProposal = (uuid) =>
+  post<Proposal>(`/proposal-proposals/${uuid}/force_approve/`);
 
 export const updateProposalProjectDetails = (data, uuid) =>
   post<Proposal>(`/proposal-proposals/${uuid}/update_project_details/`, data);

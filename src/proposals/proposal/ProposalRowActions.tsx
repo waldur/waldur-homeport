@@ -9,14 +9,14 @@ import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
-import { rejectProposal } from '../api';
+import { forceApproveProposal, rejectProposal } from '../api';
 
 const CreateReviewDialog = lazyComponent(
   () => import('./create-review/CreateReviewDialog'),
   'CreateReviewDialog',
 );
 
-export const ProposalRowActions = ({ row }) => {
+export const ProposalRowActions = ({ row, refetch }) => {
   const isStaff = useSelector(isStaffSelector);
   const isRejectButtonDisabled = ![
     'submitted',
@@ -48,9 +48,28 @@ export const ProposalRowActions = ({ row }) => {
     try {
       await rejectProposal(proposalUuid);
       dispatch(showSuccess(translate('Proposal has been rejected.')));
+      refetch();
     } catch (error) {
       dispatch(
         showErrorResponse(error, translate('Unable to reject the proposal.')),
+      );
+    }
+  };
+  const handleForceApproveProposal = async (proposalUuid) => {
+    await waitForConfirmation(
+      dispatch,
+      translate('Confirmation'),
+      translate('Are you sure you want to approve the proposal: {name}?', {
+        name: row.name,
+      }),
+    );
+    try {
+      await forceApproveProposal(proposalUuid);
+      dispatch(showSuccess(translate('Proposal has been approved.')));
+      refetch();
+    } catch (error) {
+      dispatch(
+        showErrorResponse(error, translate('Unable to approve the proposal.')),
       );
     }
   };
@@ -72,15 +91,28 @@ export const ProposalRowActions = ({ row }) => {
         >
           {translate('View')}
         </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => handleRejectProposal(row.uuid)}
-          className={
-            'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
-          }
-          disabled={isRejectButtonDisabled}
-        >
-          {translate('Reject')}
-        </Dropdown.Item>
+        {!isRejectButtonDisabled && (
+          <>
+            <Dropdown.Item
+              onClick={() => handleRejectProposal(row.uuid)}
+              className={
+                'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
+              }
+              disabled={isRejectButtonDisabled}
+            >
+              {translate('Reject')}
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => handleForceApproveProposal(row.uuid)}
+              className={
+                'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
+              }
+              disabled={isRejectButtonDisabled}
+            >
+              {translate('Force approve')}
+            </Dropdown.Item>
+          </>
+        )}
       </Dropdown.Menu>
     </Dropdown>
   );

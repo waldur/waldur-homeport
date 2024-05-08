@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
 import { formatProposalState } from '@waldur/proposals/utils';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -79,7 +79,9 @@ export const CustomerProposalsList: FC<{}> = () => {
       verboseName={translate('Proposals')}
       hasQuery={true}
       filters={<ProposalsTableFilter form={PROPOSALS_FILTER_FORM_ID} />}
-      hoverableRow={ProposalRowActions}
+      hoverableRow={({ row }) => (
+        <ProposalRowActions refetch={tableProps.fetch} row={row} />
+      )}
     />
   );
 };
