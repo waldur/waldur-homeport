@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { getFirst, sendForm } from '@waldur/core/api';
+import { deleteById, getFirst, sendForm } from '@waldur/core/api';
 
 interface UpdateLogoParams {
   customerUuid: string;
@@ -25,3 +25,12 @@ export const getPendingReview = (customerId: string) =>
     customer_uuid: customerId,
     is_pending: true,
   });
+
+export const createAccessSubnet = (data) =>
+  sendForm('POST', `${ENV.apiEndpoint}api/access-subnets/`, data);
+
+export const removeAccessSubnet = (uuid) =>
+  deleteById('/access-subnets/', uuid);
+
+export const updateAccessSubnet = (uuid, data) =>
+  sendForm('PATCH', `${ENV.apiEndpoint}api/access-subnets/${uuid}/`, data);

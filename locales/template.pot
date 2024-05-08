@@ -142,6 +142,18 @@ msgstr ""
 msgid "Access resource"
 msgstr ""
 
+#: src/customer/details/AccessSubnetCreateForm.tsx
+msgid "Access subnet has been created."
+msgstr ""
+
+#: src/customer/details/AccessSubnetDeleteButton.tsx
+msgid "Access subnet has been removed."
+msgstr ""
+
+#: src/customer/details/AccessSubnetEditDialog.tsx
+msgid "Access subnet has been updated."
+msgstr ""
+
 #: src/customer/list/OrganizationDetails.tsx
 msgid "Access subnets"
 msgstr ""
@@ -321,6 +333,10 @@ msgstr ""
 
 #: src/proposals/update/offerings/WizardFormThirdPage.tsx
 msgid "Add a note to the provider"
+msgstr ""
+
+#: src/customer/details/AccessSubnetCreateButton.tsx
+msgid "Add access subnet"
 msgstr ""
 
 #: src/openstack/openstack-tenant/IpAddressList.tsx
@@ -998,6 +1014,10 @@ msgstr ""
 msgid "Are you sure you want to delete the token of {firstname} {lastname}?"
 msgstr ""
 
+#: src/customer/details/AccessSubnetDeleteButton.tsx
+msgid "Are you sure you want to delete the {inet} access subnet?"
+msgstr ""
+
 #: src/administration/organizations/OrganizationGroupDeleteButton.tsx
 msgid "Are you sure you want to delete the {name} organization group?"
 msgstr ""
@@ -1593,6 +1613,8 @@ msgstr ""
 msgid "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr ""
 
+#: src/customer/details/AccessSubnetCreateForm.tsx
+#: src/customer/details/AccessSubnetEditDialog.tsx
 #: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-subnet/TenantSubnetsList.tsx
@@ -2196,6 +2218,7 @@ msgstr ""
 #: src/administration/service-desk/AdministrationServiceDesk.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/details/AccessSubnetDeleteButton.tsx
 #: src/customer/details/CustomerCallManagerPanel.tsx
 #: src/customer/payment-profiles/PaymentProfileDeleteButton.tsx
 #: src/customer/payments/DeletePaymentButton.tsx
@@ -2369,6 +2392,7 @@ msgstr ""
 #: src/broadcasts/BroadcastCreateButton.tsx
 #: src/broadcasts/BroadcastTemplateCreateButton.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/customer/details/AccessSubnetCreateForm.tsx
 #: src/freeipa/FreeIPAAccountCreate.tsx
 #: src/issues/create/IssueCreateDialog.tsx
 #: src/issues/list/IssueCreateButton.tsx
@@ -2405,6 +2429,10 @@ msgstr ""
 #: src/rancher/cluster/hpas/HPACreateButton.tsx
 #: src/user/hooks/HookDetailsDialog.tsx
 msgid "Create"
+msgstr ""
+
+#: src/customer/details/AccessSubnetCreateForm.tsx
+msgid "Create Access Subnet"
 msgstr ""
 
 #: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx
@@ -3178,6 +3206,8 @@ msgstr ""
 
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
+#: src/customer/details/AccessSubnetCreateForm.tsx
+#: src/customer/details/AccessSubnetEditDialog.tsx
 #: src/customer/details/CustomerAccessControlPanel.tsx
 #: src/issues/list/IssuesList.tsx
 #: src/issues/list/IssuesListExpandableRow.tsx
@@ -3558,6 +3588,7 @@ msgstr ""
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
 #: src/administration/providers/ProviderCard.tsx
 #: src/broadcasts/BroadcastTemplateUpdateButton.tsx
+#: src/customer/details/AccessSubnetEditButton.tsx
 #: src/customer/list/OrganizationEditButton.tsx
 #: src/customer/payment-profiles/PaymentProfileEditButton.tsx
 #: src/customer/payments/EditPaymentButton.tsx
@@ -3615,6 +3646,10 @@ msgstr ""
 #: src/user/support/IdentityProviderIndicator.tsx
 #: src/vmware/actions/EditAction.tsx
 msgid "Edit"
+msgstr ""
+
+#: src/customer/details/AccessSubnetEditDialog.tsx
+msgid "Edit Access Subnet"
 msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditLexisLinkIntegrationButton.tsx
@@ -4159,6 +4194,10 @@ msgstr ""
 
 #: src/administration/TelemetryExampleDialog.tsx
 msgid "Example telemetry metrics"
+msgstr ""
+
+#: src/customer/details/AccessSubnetCreateForm.tsx
+msgid "Example: 192.168.1.0/24"
 msgstr ""
 
 #: src/marketplace/resources/report/SubmitReportDialog.tsx
@@ -6483,10 +6522,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 msgid "Networks"
-msgstr ""
-
-#: src/customer/details/CustomerAccessControlPanel.tsx
-msgid "New access subnet"
 msgstr ""
 
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
@@ -9326,6 +9361,7 @@ msgstr ""
 #: src/administration/roles/RoleDeleteButton.tsx
 #: src/broadcasts/BroadcastTemplateDeleteButton.tsx
 #: src/customer/cost-policies/CostPolicyDeleteButton.tsx
+#: src/customer/details/AccessSubnetDeleteButton.tsx
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
@@ -12822,6 +12858,10 @@ msgstr ""
 msgid "Unable to create a user agreement."
 msgstr ""
 
+#: src/customer/details/AccessSubnetCreateForm.tsx
+msgid "Unable to create access subnet."
+msgstr ""
+
 #: src/rancher/template/TemplateDetail.tsx
 msgid "Unable to create application."
 msgstr ""
@@ -13415,6 +13455,10 @@ msgstr ""
 msgid "Unable to remove SSH key."
 msgstr ""
 
+#: src/customer/details/AccessSubnetDeleteButton.tsx
+msgid "Unable to remove access subnet."
+msgstr ""
+
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
 msgid "Unable to remove category group."
 msgstr ""
@@ -13651,6 +13695,10 @@ msgstr ""
 
 #: src/marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx
 msgid "Unable to update access policy."
+msgstr ""
+
+#: src/customer/details/AccessSubnetEditDialog.tsx
+msgid "Unable to update access subnet."
 msgstr ""
 
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
@@ -13941,6 +13989,7 @@ msgstr ""
 #: src/administration/hooks/HookUpdateButton.tsx
 #: src/administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx
 #: src/broadcasts/BroadcastUpdateButton.tsx
+#: src/customer/details/AccessSubnetEditDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx

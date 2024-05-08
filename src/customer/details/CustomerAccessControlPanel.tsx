@@ -1,31 +1,22 @@
-import { translate } from '@waldur/i18n';
-import { Table } from '@waldur/table';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { useTable } from '@waldur/table/utils';
+import { useSelector } from 'react-redux';
 
-const dummyData = [
-  {
-    cidr: 'xx.xx.xx.xx/24',
-    description: 'item 1',
-  },
-  {
-    cidr: 'xx.xx.xx.xx/24',
-    description: 'item 2',
-  },
-  {
-    cidr: 'xx.xx.xx.xx/24',
-    description: 'item 3',
-  },
-];
+import { translate } from '@waldur/i18n';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
+import { getCustomer } from '@waldur/workspace/selectors';
+
+import { AccessSubnetCreateButton } from './AccessSubnetCreateButton';
+import { AccessSubnetDeleteButton } from './AccessSubnetDeleteButton';
+import { AccessSubnetEditButton } from './AccessSubnetEditButton';
 
 export const CustomerAccessControlPanel = () => {
+  const customer = useSelector(getCustomer);
+
   const tableProps = useTable({
     table: 'customerAccessControl',
-    fetchData: () =>
-      Promise.resolve({
-        rows: dummyData,
-        resultCount: dummyData.length,
-      }),
+    fetchData: createFetcher('access-subnets', {
+      params: { customer_uuid: customer.uuid },
+    }),
     queryField: 'description',
   });
 
@@ -38,7 +29,7 @@ export const CustomerAccessControlPanel = () => {
       columns={[
         {
           title: translate('CIDR'),
-          render: ({ row }) => <>{row.cidr}</>,
+          render: ({ row }) => <>{row.inet}</>,
         },
         {
           title: translate('Description'),
@@ -48,13 +39,17 @@ export const CustomerAccessControlPanel = () => {
       verboseName={translate('Access control')}
       hasQuery
       actions={
-        <ActionButton
-          action={null}
-          title={translate('New access subnet')}
-          icon="fa fa-plus"
-          variant="light"
+        <AccessSubnetCreateButton
+          refetch={tableProps.fetch}
+          customer_uuid={customer.uuid}
         />
       }
+      hoverableRow={({ row }) => (
+        <>
+          <AccessSubnetEditButton row={row} refetch={tableProps.fetch} />
+          <AccessSubnetDeleteButton row={row} refetch={tableProps.fetch} />
+        </>
+      )}
     />
   );
 };
