@@ -1,21 +1,22 @@
-import { useSelector } from 'react-redux';
+import { FunctionComponent } from 'react';
 
+import { CustomerEditPanelProps } from '@waldur/customer/details/types';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { AccessSubnetCreateButton } from './AccessSubnetCreateButton';
 import { AccessSubnetDeleteButton } from './AccessSubnetDeleteButton';
 import { AccessSubnetEditButton } from './AccessSubnetEditButton';
 
-export const CustomerAccessControlPanel = () => {
-  const customer = useSelector(getCustomer);
-
+export const CustomerAccessControlPanel: FunctionComponent<
+  CustomerEditPanelProps
+> = ({ customer }) => {
+  const customer_uuid = customer.uuid;
   const tableProps = useTable({
     table: 'customerAccessControl',
     fetchData: createFetcher('access-subnets', {
-      params: { customer_uuid: customer.uuid },
+      params: { customer_uuid: customer_uuid },
     }),
     queryField: 'description',
   });
@@ -41,7 +42,7 @@ export const CustomerAccessControlPanel = () => {
       actions={
         <AccessSubnetCreateButton
           refetch={tableProps.fetch}
-          customer_uuid={customer.uuid}
+          customer_uuid={customer_uuid}
         />
       }
       hoverableRow={({ row }) => (

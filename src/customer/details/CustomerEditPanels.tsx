@@ -1,7 +1,5 @@
 import { FunctionComponent } from 'react';
 
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-
 import { CustomerAccessControlPanel } from './CustomerAccessControlPanel';
 import { CustomerBillingPanel } from './CustomerBillingPanel';
 import { CustomerContactPanel } from './CustomerContactPanel';
@@ -12,13 +10,11 @@ import { CustomerEditPanelProps } from './types';
 export const CustomerEditPanels: FunctionComponent<CustomerEditPanelProps> = (
   props,
 ) => {
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
-
   return (
     <>
       <CustomerDetailsPanel {...props} />
       <CustomerContactPanel {...props} />
-      {showExperimentalUiComponents && <CustomerAccessControlPanel />}
+      <CustomerAccessControlPanel {...props} />
       <CustomerBillingPanel {...props} />
       <CustomerMediaPanel {...props} />
     </>
