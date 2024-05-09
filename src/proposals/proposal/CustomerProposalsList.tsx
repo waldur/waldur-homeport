@@ -4,7 +4,10 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { translate } from '@waldur/i18n';
-import { formatProposalState } from '@waldur/proposals/utils';
+import {
+  formatProposalState,
+  getNonCanceledProposalStates,
+} from '@waldur/proposals/utils';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -23,6 +26,8 @@ const mapStateToFilter = createSelector(
     if (customer) {
       result.organization_uuid = customer.uuid;
     }
+    result.o = '-round__cutoff_time';
+    result.state = getNonCanceledProposalStates();
 
     if (filters) {
       if (filters.state) {
