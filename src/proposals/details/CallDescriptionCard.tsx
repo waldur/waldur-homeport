@@ -10,7 +10,7 @@ interface CallDescriptionCardProps {
 }
 
 export const CallDescriptionCard = ({ call }: CallDescriptionCardProps) => {
-  return (
+  return call.description ? (
     <Card id="description" className="mb-7">
       <Card.Header>
         <Card.Title>
@@ -21,5 +21,5 @@ export const CallDescriptionCard = ({ call }: CallDescriptionCardProps) => {
         <Markdown>{call.description}</Markdown>
       </Card.Body>
     </Card>
-  );
+  ) : null;
 };
