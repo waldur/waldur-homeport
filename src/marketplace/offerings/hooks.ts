@@ -1,4 +1,3 @@
-import { useRouter } from '@uirouter/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -14,7 +13,6 @@ const OfferingImportDialog = lazyComponent(
 );
 
 export const useOfferingDropdownActions = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
@@ -35,15 +33,6 @@ export const useOfferingDropdownActions = () => {
       icon: 'fa fa-plus',
       action: () => {
         dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }));
-      },
-    },
-    {
-      label: translate('Public list'),
-      icon: 'fa fa-external-link',
-      action: () => {
-        router.stateService.go('marketplace-service-provider.details', {
-          uuid: customer.uuid,
-        });
       },
     },
   ];

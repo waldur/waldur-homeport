@@ -8947,10 +8947,6 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
-#: src/marketplace/offerings/hooks.ts
-msgid "Public list"
-msgstr ""
-
 #: src/proposals/details/CallDetailsCard.tsx
 msgid "Publication date"
 msgstr ""
