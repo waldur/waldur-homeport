@@ -5,6 +5,7 @@ import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
 import { hasSupport } from '@waldur/issues/hooks';
 import { OrganizationUIView } from '@waldur/organization/OrganizationUIView';
 import { isStaff } from '@waldur/workspace/selectors';
@@ -261,6 +262,14 @@ export const states: StateDeclaration[] = [
     component: CustomerPayments,
     data: {
       breadcrumb: () => translate('Payments list'),
+      permissions: [
+        (state) => {
+          const activePaymentProfile = getActivePaymentProfile(
+            state.workspace.customer.payment_profiles,
+          );
+          return !!activePaymentProfile;
+        },
+      ],
     },
   },
 
