@@ -112,6 +112,13 @@ export const getProposalStateOptions = () =>
     },
   ] as { value: ProposalState; label: string }[];
 
+export const getNonCanceledProposalStates = () => {
+  const proposalStates = getProposalStateOptions();
+  return proposalStates
+    .filter((state) => state.value !== 'canceled')
+    .map((state) => state.value);
+};
+
 export const formatProposalState = (value: ProposalState) =>
   getProposalStateOptions().find((option) => option.value === value)?.label ||
   value;
