@@ -29,12 +29,13 @@ export const SYSTEM_IMAGES = [
   { name: 'freebsd', label: 'FreeBSD', thumb: FreeBSD },
 ];
 
+export const findImage = (name) =>
+  SYSTEM_IMAGES.find((item) => name.toLowerCase().includes(item.name));
+
 export const generateSystemImageChoices = (data: any[]) => {
   if (!data?.length) return [];
   const _choices = data.reduce<BoxRadioChoice[]>((acc, value) => {
-    const image = SYSTEM_IMAGES.find((item) =>
-      value.name.toLowerCase().includes(item.name),
-    );
+    const image = findImage(value.name);
     if (image) {
       /* eslint-disable no-useless-escape */
       const version = value.name

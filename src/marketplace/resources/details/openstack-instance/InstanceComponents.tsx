@@ -4,7 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { translate } from '@waldur/i18n';
 
-import { QuotaCell } from './QuotaCell';
+import { QuotaCell } from '../QuotaCell';
 
 const ResourceComponentItem = ({ title, usage, units, isSmallScreen }) => {
   return (
