@@ -15,9 +15,9 @@ function getTimezoneMetadata(zone: string) {
   };
 }
 
-function getTimezoneItems() {
-  return TIMEZONES.map(getTimezoneMetadata).sort((a, b) => a.offset - b.offset);
-}
+const preprocessedTimezones = TIMEZONES.map(getTimezoneMetadata).sort(
+  (a, b) => a.offset - b.offset,
+);
 
 export function getDefaultTimezone() {
   return Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -25,7 +25,7 @@ export function getDefaultTimezone() {
 
 export const TimezoneField: FunctionComponent<any> = (props) => {
   const { input, ...rest } = props;
-  const options = useMemo(getTimezoneItems, []);
+  const options = useMemo(() => preprocessedTimezones, []);
   return (
     <WindowedSelect
       options={options}
