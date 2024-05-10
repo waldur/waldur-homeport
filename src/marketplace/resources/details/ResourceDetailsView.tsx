@@ -61,7 +61,7 @@ interface ResourceDetailsViewProps {
   specViews?: ResourceParentTab[];
 }
 
-const HidableWrapper: FC<PropsWithChildren<{ activeTab; tabKey }>> = (
+export const HidableWrapper: FC<PropsWithChildren<{ activeTab; tabKey }>> = (
   props,
 ) => (
   <div className={props.activeTab !== props.tabKey ? 'd-none' : undefined}>
