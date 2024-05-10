@@ -3,12 +3,13 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { EndingField } from '@waldur/proposals/EndingField';
 import { ReviewsTableFilter } from '@waldur/proposals/review/ReviewsTableFilter';
 import { ProposalReview } from '@waldur/proposals/types';
 import { formatReviewState } from '@waldur/proposals/utils';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { USER_REVIEWS_FILTER_FORM_ID } from '@waldur/user/constants';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -75,6 +76,17 @@ export const CustomerReviewsList: FC<{}> = () => {
       hasQuery={true}
       expandableRow={ReviewsListExpandableRow}
       filters={<ReviewsTableFilter />}
+      hoverableRow={({ row }) => (
+        <Link
+          state="proposal-review"
+          params={{
+            review_uuid: row.uuid,
+          }}
+          className="btn btn-primary"
+        >
+          {translate('View')}
+        </Link>
+      )}
     />
   );
 };
