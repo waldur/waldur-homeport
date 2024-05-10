@@ -857,7 +857,7 @@ msgstr ""
 msgid "Apply table filters"
 msgstr ""
 
-#: src/proposals/details/PublicCallDetailsHero.tsx
+#: src/proposals/details/PublicCallApplyButton.tsx
 msgid "Apply to round"
 msgstr ""
 

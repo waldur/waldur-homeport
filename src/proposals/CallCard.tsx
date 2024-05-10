@@ -1,11 +1,12 @@
 import { FC } from 'react';
-import { Badge, Button, Stack } from 'react-bootstrap';
+import { Badge, Stack } from 'react-bootstrap';
 
 import { formatDate, formatRelativeWithHour } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { ModelCard1 } from '@waldur/core/ModelCard1';
 import { translate } from '@waldur/i18n';
 
+import { PublicCallApplyButton } from './details/PublicCallApplyButton';
 import { getRoundStatus, getSortedRoundsWithStatus } from './utils';
 
 export const CallCard: FC<{ call }> = ({ call }) => {
@@ -36,9 +37,12 @@ export const CallCard: FC<{ call }> = ({ call }) => {
             </div>
           ) : null}
           <Stack direction="horizontal" gap={4}>
-            <Button variant="flush" className="text-btn">
-              {translate('Apply')}
-            </Button>
+            <PublicCallApplyButton
+              call={call}
+              title={translate('Apply')}
+              variant="flush"
+              className="text-btn"
+            />
             <Link
               state="public-calls.details"
               params={{ uuid: call.uuid }}
