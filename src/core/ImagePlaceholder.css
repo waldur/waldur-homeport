@@ -1,10 +1,7 @@
 .image-placeholder {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 7px;
   flex-shrink: 0;
-}
-
-.image-placeholder > * {
-  width: 100% !important;
-  height: 100% !important;
 }

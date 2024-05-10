@@ -1,46 +1,53 @@
 import { FC } from 'react';
-import { Badge, Card, Col } from 'react-bootstrap';
+import { Badge, Button, Stack } from 'react-bootstrap';
 
-import { formatRelativeWithHour } from '@waldur/core/dateUtils';
+import { formatDate, formatRelativeWithHour } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { ModelCard1 } from '@waldur/core/ModelCard1';
+import { translate } from '@waldur/i18n';
 
-export const CallCard: FC<{ call }> = ({ call }) => (
-  <Col lg={4} className="mb-3 d-flex">
-    <Card className="flex-grow-1 flex-shrink-1 flex-basis-auto">
-      <Card.Header>
-        <Card.Title>
-          <h2>{call.name}</h2>
-        </Card.Title>
-        <Card.Subtitle>
-          <small>{call.customer_name}</small>
-        </Card.Subtitle>
-      </Card.Header>
-      <Card.Body className="d-flex flex-column">
-        <Card.Text className="flex-grow-1 flex-shrink-0">
-          {call.description}
-        </Card.Text>
+import { getRoundStatus, getSortedRoundsWithStatus } from './utils';
+
+export const CallCard: FC<{ call }> = ({ call }) => {
+  const getSortedRounds = getSortedRoundsWithStatus(call.rounds);
+  const lastRoundStatus = getRoundStatus(getSortedRounds[0]);
+  const nextRoundDate = getSortedRounds?.length
+    ? getSortedRounds[0].cutoff_time
+    : call.end_date;
+
+  return (
+    <ModelCard1
+      title={call.name}
+      subtitle={call.customer_name}
+      body={call.description}
+      footer={
         <div className="d-flex justify-content-between">
-          <Card.Text>
+          {lastRoundStatus.label === 'Open' ? (
             <Badge bg="warning" text="dark">
-              {translate(
-                'Cutoff: {title}',
-                {
-                  title: (
-                    <strong>{formatRelativeWithHour(call.end_date)}</strong>
-                  ),
-                },
-                formatJsxTemplate,
-              )}
+              {translate('Cutoff')}
+              {': '}
+              <strong>{formatRelativeWithHour(nextRoundDate)}</strong>
             </Badge>
-          </Card.Text>
-          <Link
-            state="public-calls.details"
-            params={{ uuid: call.uuid }}
-            label={translate('View call')}
-          />
+          ) : lastRoundStatus.label === 'Ended' ? (
+            <div className="text-muted">
+              {translate('Cutoff')}
+              {': '}
+              <strong>{formatDate(nextRoundDate)}</strong>
+            </div>
+          ) : null}
+          <Stack direction="horizontal" gap={4}>
+            <Button variant="flush" className="text-btn">
+              {translate('Apply')}
+            </Button>
+            <Link
+              state="public-calls.details"
+              params={{ uuid: call.uuid }}
+              className="btn btn-flush text-anchor"
+              label={translate('View call')}
+            />
+          </Stack>
         </div>
-      </Card.Body>
-    </Card>
-  </Col>
-);
+      }
+    />
+  );
+};

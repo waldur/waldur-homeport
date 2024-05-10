@@ -29,8 +29,8 @@ export const OfferingsGroup: FC<OfferingsQueryResult> = (props) => {
 
   return (
     <Row>
-      {props.data.map((offering, index) => (
-        <Col key={index} xl={2} lg={4} sm={6}>
+      {props.data.map((offering) => (
+        <Col key={offering.uuid} lg={6} xl={4} className="mb-3">
           <OfferingCard offering={offering} />
         </Col>
       ))}

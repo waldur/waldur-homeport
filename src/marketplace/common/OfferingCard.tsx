@@ -1,18 +1,17 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
+import { ModelCard1 } from '@waldur/core/ModelCard1';
 import { translate } from '@waldur/i18n';
-import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogoMetronic';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { OfferingLink } from '../links/OfferingLink';
 import { Offering } from '../types';
 
 import './OfferingCard.scss';
-import { OfferingCardButtonsOverlay } from './OfferingCardButtonsOverlay';
-import { OfferingDescription } from './OfferingDescription';
+
+const placeholder = require('@waldur/images/logo_w.svg');
 
 interface OfferingCardProps {
   offering: Offering;
@@ -26,33 +25,35 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
         translate('Requesting of new resources has been temporarily paused')),
     <OfferingLink
       offering_uuid={props.offering.uuid}
-      className={props.className}
+      className={classNames(props.className, 'offering-card', {
+        disabled: props.offering.state !== 'Active',
+      })}
     >
-      <Card
-        className={classNames('offering-card card-flush shadow-sm text-dark', {
-          disabled: props.offering.state !== 'Active',
-        })}
-      >
-        <Card.Body>
-          <div className="offering-card-body">
-            <OfferingLogo
-              src={props.offering.thumbnail}
-              name={props.offering.name}
-            />
-            <h3 className="offering-title text-dark fw-bold text-hover-primary fs-6 mt-4">
-              {props.offering.name}
-            </h3>
-            <Link
-              state="marketplace-service-provider.details"
-              params={{ uuid: props.offering.customer_uuid }}
-              className="text-decoration-underline text-dark text-hover-primary fs-7 mb-2"
+      <ModelCard1
+        title={props.offering.name}
+        subtitle={props.offering.customer_name}
+        logo={props.offering.thumbnail}
+        image={props.offering.image || placeholder}
+        imageAsSvg={!props.offering.image}
+        footer={
+          <div className="d-flex justify-content-end gap-4">
+            <OfferingLink
+              offering_uuid={props.offering.uuid}
+              className="btn btn-flush text-btn"
             >
-              {props.offering.customer_name}
+              {translate('Deploy')}
+            </OfferingLink>
+            <Link
+              state="public.marketplace-public-offering"
+              params={{
+                uuid: props.offering.uuid,
+              }}
+              className="btn btn-flush text-anchor"
+            >
+              {translate('View offering')}
             </Link>
-            <OfferingDescription offering={props.offering} />
           </div>
-        </Card.Body>
-        <OfferingCardButtonsOverlay offering={props.offering} />
-      </Card>
+        }
+      />
     </OfferingLink>,
   );

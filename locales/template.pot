@@ -844,6 +844,7 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
+#: src/proposals/CallCard.tsx
 #: src/table/TableFilterActions.tsx
 msgid "Apply"
 msgstr ""
@@ -2908,6 +2909,10 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
+#: src/proposals/CallCard.tsx
+msgid "Cutoff"
+msgstr ""
+
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
@@ -2917,10 +2922,6 @@ msgstr ""
 #: src/proposals/round/submission/EditRoundSubmissionDialog.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Cutoff date must be after start date"
-msgstr ""
-
-#: src/proposals/CallCard.tsx
-msgid "Cutoff: {title}"
 msgstr ""
 
 #: src/openstack/openstack-subnet/fields.tsx
@@ -3189,7 +3190,7 @@ msgstr ""
 msgid "Deny"
 msgstr ""
 
-#: src/marketplace/common/OfferingCardButtonsOverlay.tsx
+#: src/marketplace/common/OfferingCard.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "Deploy"
@@ -12397,10 +12398,6 @@ msgstr ""
 msgid "There are not namespaces in this project yet."
 msgstr ""
 
-#: src/marketplace/common/OfferingDescription.tsx
-msgid "There is no description"
-msgstr ""
-
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 msgid "Third"
 msgstr ""
@@ -14761,8 +14758,8 @@ msgstr ""
 msgid "View call"
 msgstr ""
 
-#: src/marketplace/common/OfferingCardButtonsOverlay.tsx
-msgid "View item"
+#: src/marketplace/common/OfferingCard.tsx
+msgid "View offering"
 msgstr ""
 
 #: src/marketplace/resources/resource-pending/OrderErredView.tsx

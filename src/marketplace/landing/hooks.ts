@@ -39,6 +39,7 @@ export function useLandingOfferings() {
     'name',
     'description',
     'thumbnail',
+    'image',
     'rating',
     'order_count',
     'category_uuid',
