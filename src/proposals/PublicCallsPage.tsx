@@ -6,6 +6,7 @@ import { createSelector } from 'reselect';
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
+import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
 import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
@@ -15,12 +16,11 @@ import { Call } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
-import { HeroSection } from './HeroSection';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { PublicCallsTablePlaceholder } from './PublicCallsTablePlaceholder';
 import { formatCallState } from './utils';
 
-import './PublicCallsPage.scss';
+const background = require('./proposal-calls.png');
 
 const mapStateToFilter = createSelector(
   getFormValues(CALL_FILTER_FORM_ID),
@@ -50,13 +50,11 @@ export const PublicCallsPage: FunctionComponent = () => {
 
   return (
     <div className="public-calls-page">
-      <HeroSection
-        title={
-          ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE +
-          ' ' +
-          translate('calls for proposals')
-        }
-      ></HeroSection>
+      <LandingHeroSection
+        header={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+        title={translate('Calls for proposals')}
+        backgroundImage={background}
+      ></LandingHeroSection>
       <div className="container-xxl mt-20">
         <Table<Call>
           title={translate('Calls for proposals')}

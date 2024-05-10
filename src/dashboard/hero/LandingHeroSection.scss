@@ -1,0 +1,47 @@
+.landing-hero__background {
+  height: 300px;
+  width: 100%;
+  background-color: #2f4050;
+  background-image: url('./marketplace-background.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.landing-hero__table {
+  display: table;
+  height: 300px;
+  width: 100%;
+
+  .landing-hero__cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .landing-hero__main {
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+
+    > * {
+      position: relative;
+    }
+
+    h1,
+    h2 {
+      color: #fff;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 0;
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 20px;
+    }
+  }
+}

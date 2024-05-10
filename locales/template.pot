@@ -1342,6 +1342,7 @@ msgid "Availability:"
 msgstr ""
 
 #: src/marketplace/routes.ts
+#: src/proposals/CallsForProposals.tsx
 msgid "Available offerings"
 msgstr ""
 
@@ -1419,10 +1420,6 @@ msgstr ""
 
 #: src/resource/state/constants.ts
 msgid "Backing up"
-msgstr ""
-
-#: src/marketplace/resources/details/MonitoringCharts.tsx
-msgid "Bandwidth"
 msgstr ""
 
 #: src/customer/details/CustomerBillingPanel.tsx
@@ -1590,7 +1587,6 @@ msgid "Browse"
 msgstr ""
 
 #: src/marketplace/landing/CategoryCardAll.tsx
-#: src/marketplace/landing/LandingPage.tsx
 msgid "Browse all categories"
 msgstr ""
 
@@ -1634,7 +1630,6 @@ msgstr ""
 msgid "CIDR"
 msgstr ""
 
-#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 #: src/rancher/node/RancherNodeSummary.tsx
 msgid "CPU"
@@ -3344,6 +3339,7 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
 #: src/project/ProjectDetailsButton.tsx
 #: src/proposals/details/CallDetailsCard.tsx
 #: src/proposals/details/PublicCallDetailsBar.tsx
@@ -3437,10 +3433,6 @@ msgstr ""
 
 #: src/vmware/actions/CreateDiskDialog.tsx
 msgid "Disk has been created."
-msgstr ""
-
-#: src/marketplace/resources/details/MonitoringCharts.tsx
-msgid "Disk usage"
 msgstr ""
 
 #: src/vmware/tabs.ts
@@ -4022,8 +4014,8 @@ msgid "Erred resources"
 msgstr ""
 
 #: src/administration/dashboard/AdministrationProfile.tsx
+#: src/core/InfiniteList.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/marketplace/resources/details/InfiniteList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Error"
 msgstr ""
@@ -4371,8 +4363,8 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
+#: src/core/InfiniteList.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/marketplace/resources/details/InfiniteList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Fetching..."
 msgstr ""
@@ -4473,6 +4465,7 @@ msgstr ""
 msgid "Fixed-price contract"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
 #: src/openstack/openstack-backup/actions/BackupRestoreDialog.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
@@ -4512,6 +4505,7 @@ msgstr ""
 msgid "Flavors regex"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
 #: src/openstack/openstack-floating-ips/FloatingIpsList.tsx
 msgid "Floating IP"
 msgstr ""
@@ -4671,6 +4665,10 @@ msgstr ""
 #: src/marketplace/resources/details/GettingStartedCard.tsx
 #: src/marketplace/resources/details/ResourceDetailsBar.tsx
 msgid "Getting started"
+msgstr ""
+
+#: src/dashboard/hero/NewbiesGuideNotification.tsx
+msgid "Getting started guide"
 msgstr ""
 
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
@@ -5001,6 +4999,7 @@ msgstr ""
 
 #: src/azure/vm/AzureVirtualMachineForm.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
 #: src/openstack/openstack-instance/OpenstackInstanceDetails.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
@@ -5265,6 +5264,7 @@ msgstr ""
 msgid "Internal IP"
 msgstr ""
 
+#: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
 #: src/openstack/openstack-instance/tabs.ts
 #: src/openstack/openstack-tenant/TenantInstancesList.tsx
 msgid "Internal IPs"
@@ -5727,15 +5727,15 @@ msgstr ""
 msgid "List resource users"
 msgstr ""
 
+#: src/core/InfiniteList.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/marketplace/resources/details/InfiniteList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Load more"
 msgstr ""
 
+#: src/core/InfiniteList.tsx
 #: src/customer/list/TotalCostComponent.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/marketplace/resources/details/InfiniteList.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 #: src/proposals/CallsForProposalsList.tsx
@@ -5756,8 +5756,8 @@ msgstr ""
 msgid "Loading invoices"
 msgstr ""
 
+#: src/core/InfiniteList.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/marketplace/resources/details/InfiniteList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Loading more..."
 msgstr ""
@@ -6053,7 +6053,6 @@ msgstr ""
 msgid "Members"
 msgstr ""
 
-#: src/marketplace/resources/details/MonitoringCharts.tsx
 #: src/rancher/cluster/hpas/utils.ts
 #: src/vmware/deploy/FormMemoryStep.tsx
 #: src/vmware/deploy/steps.ts
@@ -6157,11 +6156,6 @@ msgstr ""
 
 #: src/core/lazyComponent.tsx
 msgid "Module {componentName} loading error. Try again."
-msgstr ""
-
-#: src/marketplace/resources/details/InstanceMainComponent.tsx
-#: src/marketplace/resources/details/MonitoringCharts.tsx
-msgid "Monitoring"
 msgstr ""
 
 #: src/marketplace/details/plan/PlanDetailsTable2.tsx
@@ -6595,6 +6589,14 @@ msgstr ""
 
 #: src/openstack/openstack-volume/actions/ExtendDialog.tsx
 msgid "New size"
+msgstr ""
+
+#: src/proposals/CallsForProposals.tsx
+msgid "New to {org} calls page?"
+msgstr ""
+
+#: src/marketplace/landing/LandingPage.tsx
+msgid "New to {org} marketplace?"
 msgstr ""
 
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -7403,6 +7405,10 @@ msgstr ""
 
 #: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "Options have been updated"
+msgstr ""
+
+#: src/proposals/CallsForProposals.tsx
+msgid "Or if you know what you are looking for"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -9051,7 +9057,7 @@ msgstr ""
 msgid "Quotas have been updated successfully."
 msgstr ""
 
-#: src/marketplace/resources/details/InstanceComponents.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceComponents.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
 #: src/openstack/openstack-tenant/TenantFlavorsList.tsx
@@ -10397,6 +10403,7 @@ msgstr ""
 msgid "Script language: {language}"
 msgstr ""
 
+#: src/core/AsyncSearchBox.tsx
 #: src/navigation/header/SearchFilters.tsx
 #: src/navigation/header/SearchToggle.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
@@ -10410,6 +10417,10 @@ msgstr ""
 
 #: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
 msgid "Search by name or abbreviation"
+msgstr ""
+
+#: src/proposals/CallsSearchBox.tsx
+msgid "Search for call by name or offering"
 msgstr ""
 
 #: src/navigation/OfferingSearchField.tsx
@@ -10482,6 +10493,10 @@ msgstr ""
 msgid "See all"
 msgstr ""
 
+#: src/proposals/CallsForProposals.tsx
+msgid "See all calls"
+msgstr ""
+
 #: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
 msgid "See all offerings"
 msgstr ""
@@ -10496,6 +10511,10 @@ msgstr ""
 
 #: src/booking/offering/BookingResourceListItem.tsx
 msgid "See more"
+msgstr ""
+
+#: src/dashboard/hero/NewbiesGuideNotification.tsx
+msgid "See our {guide}"
 msgstr ""
 
 #: src/marketplace/orders/list/OrderTablePlaceholder.tsx
@@ -12317,6 +12336,7 @@ msgstr ""
 msgid "There are no offerings yet."
 msgstr ""
 
+#: src/marketplace/landing/OfferingsSearchBox.tsx
 #: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
 msgid "There are no offerings."
 msgstr ""
@@ -12384,6 +12404,14 @@ msgstr ""
 
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
 msgid "There are no resources available."
+msgstr ""
+
+#: src/proposals/CallsSearchBox.tsx
+msgid "There are no results for this keyword, please try another one"
+msgstr ""
+
+#: src/core/AsyncSearchBox.tsx
+msgid "There are no results for this keyword."
 msgstr ""
 
 #: src/table/utils.tsx
@@ -12657,6 +12685,10 @@ msgstr ""
 #: src/user/keys/KeysList.tsx
 #: src/vmware/deploy/FormNetworkStep.tsx
 msgid "Type"
+msgstr ""
+
+#: src/marketplace/landing/OfferingsSearchBox.tsx
+msgid "Type in name of offering or provider"
 msgstr ""
 
 #: src/administration/service-desk/ZammadSettings.tsx
@@ -14741,6 +14773,7 @@ msgstr ""
 
 #: src/proposals/proposal/ProposalRowActions.tsx
 #: src/proposals/proposal/UserProposalsList.tsx
+#: src/proposals/review/CustomerReviewsList.tsx
 msgid "View"
 msgstr ""
 
@@ -14851,6 +14884,10 @@ msgstr ""
 
 #: src/user/hooks/HookTypeField.tsx
 msgid "Webhook"
+msgstr ""
+
+#: src/marketplace/landing/LandingPage.tsx
+msgid "Welcome to"
 msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
@@ -15204,11 +15241,6 @@ msgstr ""
 
 #: src/issues/attachments/IssueAttachmentsContainer.tsx
 msgid "browse"
-msgstr ""
-
-#: src/proposals/CallsForProposals.tsx
-#: src/proposals/PublicCallsPage.tsx
-msgid "calls for proposals"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
@@ -15583,7 +15615,7 @@ msgstr ""
 msgid "users"
 msgstr ""
 
-#: src/marketplace/resources/details/InstanceComponents.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceComponents.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
 #: src/resource/utils.tsx
@@ -15838,8 +15870,8 @@ msgstr ""
 msgid "{type} script was executed successfully"
 msgstr ""
 
-#: src/marketplace/resources/details/InstanceComponents.tsx
 #: src/marketplace/resources/details/VolumeComponents.tsx
+#: src/marketplace/resources/details/openstack-instance/InstanceComponents.tsx
 msgid "{type} storage"
 msgstr ""
 
