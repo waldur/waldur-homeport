@@ -18,6 +18,7 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         autoFocus
+        solid
       />
       <div className="scroll-y mh-400px">
         <ResourceActionMenuContext.Provider value={queryContextValue}>

@@ -30,7 +30,7 @@ export function useLandingCategories() {
   });
 }
 
-export function useLandingOfferings() {
+export function useLandingOfferings(keyword = '') {
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
   const workspace: WorkspaceType = useSelector(getWorkspace);
@@ -50,7 +50,7 @@ export function useLandingOfferings() {
     'paused_reason',
   ];
   const params: Record<string, any> = {
-    page_size: 6,
+    page_size: keyword ? 30 : 6,
     o: '-created',
     state: ['Active', 'Paused'],
     field,
@@ -60,8 +60,11 @@ export function useLandingOfferings() {
   if (workspace === WorkspaceType.USER) {
     params.shared = true;
   }
+  if (keyword) {
+    params.keyword = keyword;
+  }
   return useQuery({
-    queryKey: ['landing-offerings', customer?.uuid, project?.uuid],
+    queryKey: ['landing-offerings', keyword, customer?.uuid, project?.uuid],
     queryFn: () => getPublicOfferingsList(params),
     staleTime: 5 * 60 * 1000,
   });

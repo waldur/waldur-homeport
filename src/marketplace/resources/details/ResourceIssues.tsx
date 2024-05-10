@@ -1,11 +1,11 @@
 import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 
 import { fixURL } from '@waldur/core/api';
+import { InfiniteList } from '@waldur/core/InfiniteList';
 import { translate } from '@waldur/i18n';
 import { Issue } from '@waldur/issues/list/types';
 import { parseResponse } from '@waldur/table/api';
 
-import { InfiniteList } from './InfiniteList';
 import { IssueRow } from './IssueRow';
 
 interface DataPage {

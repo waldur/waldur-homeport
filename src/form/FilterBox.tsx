@@ -1,7 +1,8 @@
+import classNames from 'classnames';
 import { useEffect, useRef } from 'react';
 import { Form } from 'react-bootstrap';
 
-export const FilterBox = ({ autoFocus, ...props }: any) => {
+export const FilterBox = ({ className, autoFocus, solid, ...props }: any) => {
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (!autoFocus) {
@@ -13,7 +14,7 @@ export const FilterBox = ({ autoFocus, ...props }: any) => {
     inputRef?.current.focus();
   }, [inputRef, autoFocus]);
   return (
-    <div className="position-relative">
+    <div className={classNames('position-relative', className)}>
       <span className="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +41,7 @@ export const FilterBox = ({ autoFocus, ...props }: any) => {
       </span>
       <Form.Control
         type="text"
-        className="form-control-solid ps-10"
+        className={classNames(solid && 'form-control-solid', 'ps-10')}
         {...props}
         ref={inputRef}
       />

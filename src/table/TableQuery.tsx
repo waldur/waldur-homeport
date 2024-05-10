@@ -37,6 +37,7 @@ export class TableQuery extends Component<TableQueryProps, State> {
         placeholder={translate('Search') + ' ...'}
         value={this.state.query}
         onChange={this.setQuery}
+        solid
       />
     );
   }

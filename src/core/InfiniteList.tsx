@@ -13,11 +13,11 @@ export const InfiniteList = ({
   emptyMessage: string;
 }) =>
   context.status === 'loading' ? (
-    <p className="text-center">{translate('Loading')}</p>
+    <p className="text-center text-dark mb-0">{translate('Loading')}</p>
   ) : context.status === 'error' ? (
-    <p className="text-center">{translate('Error')}</p>
+    <p className="text-center text-dark mb-0">{translate('Error')}</p>
   ) : context.data.pages[0].data.length === 0 ? (
-    <p className="text-center">{emptyMessage}</p>
+    <p className="text-center text-dark mb-0">{emptyMessage}</p>
   ) : (
     <>
       <div className="timeline">
