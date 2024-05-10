@@ -23,10 +23,8 @@ export const CallsForProposals: FunctionComponent = () => {
           translate('calls for proposals')
         }
       />
-      <div className="container-fluid mt-5">
-        <div className="row justify-content-start">
-          <CallsForProposalsList />
-        </div>
+      <div className="container my-14">
+        <CallsForProposalsList />
       </div>
     </div>
   );

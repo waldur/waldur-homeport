@@ -35,6 +35,7 @@ function* loadOfferings() {
           'state',
           'paused_reason',
           'thumbnail',
+          'image',
           'name',
           'customer_uuid',
           'customer_name',

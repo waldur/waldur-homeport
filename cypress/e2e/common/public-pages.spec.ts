@@ -38,7 +38,7 @@ describe('Public marketplace pages', () => {
   it('Assure that public offering page is visible without auth token', () => {
     // Ensure that the offering we want to click is 'Test request-based item'
     cy.get('.offering-card:contains("Test request-based item")')
-      .contains('a', 'View item')
+      .contains('a', 'View offering')
       .click();
 
     // Wait until page loaded
