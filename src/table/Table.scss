@@ -31,27 +31,13 @@
   }
 }
 
-// Prevent vertical scroll of dropdown inside of table-responsive
-// https://stackoverflow.com/a/26021872/6917997
-.table-container {
-  overflow-x: auto;
-}
 
 @media (width <= 767px) {
-  .table-responsive .dropdown-menu {
-    position: static !important;
-  }
-
   .dataTables_wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 12px;
-  }
-
-  .table-container {
-    width: 100%;
-    overflow-x: scroll;
   }
 
   .dataTables_info {
