@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import {
   formatProposalState,
@@ -60,7 +61,15 @@ export const CustomerProposalsList: FC<{}> = () => {
         },
         {
           title: translate('Call'),
-          render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
+          render: ({ row }) => (
+            <>
+              <Link
+                state="protected-call.main"
+                params={{ call_uuid: row.call_uuid }}
+                label={row.call_name}
+              />
+            </>
+          ),
         },
         {
           title: translate('Round'),
