@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
@@ -47,10 +48,11 @@ export const ResourceDeleteButton: FunctionComponent<{
   const [{ loading }, callback] = useAsyncFn(deleteApp);
   return (
     <ActionButton
+      variant="danger"
       title={translate('Delete')}
-      disabled={loading}
+      pending={loading}
       action={callback}
-      icon={loading ? 'fa fa-spinner fa-spin me-1' : 'fa fa-trash'}
+      iconNode={<Trash />}
     />
   );
 };

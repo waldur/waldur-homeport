@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -27,7 +28,10 @@ export const EditOverviewButton: FC<EditOfferingProps> = (props) => {
   };
   return (
     <Button onClick={callback} size="sm" className="me-3">
-      <i className="fa fa-pencil" /> {translate('Edit')}
+      <span className="svg-icon svg-icon-2">
+        <PencilSimple />
+      </span>{' '}
+      {translate('Edit')}
     </Button>
   );
 };

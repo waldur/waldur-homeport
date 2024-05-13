@@ -1,3 +1,4 @@
+import { CaretDown, MagnifyingGlass, X } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
@@ -5,7 +6,6 @@ import { Col, Row } from 'react-bootstrap';
 
 import { get } from '@waldur/core/api';
 import { Link } from '@waldur/core/Link';
-import { SearchIcon } from '@waldur/core/svg/SearchIcon';
 import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
@@ -85,7 +85,7 @@ const ResourceSelectorDropdown: FunctionComponent<
         autoComplete="off"
       >
         <span className="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-dark">
-          <SearchIcon />
+          <MagnifyingGlass />
         </span>
         <input
           ref={refSearch}
@@ -114,7 +114,7 @@ const ResourceSelectorDropdown: FunctionComponent<
           onClick={() => setQuery('')}
         >
           <span className="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
-            <i className="fa fa-times" />
+            <X />
           </span>
         </button>
       </form>
@@ -180,7 +180,7 @@ export const ResourceSelectorToggle: FunctionComponent<
         <h3 className="text-start text-decoration-underline mb-0 me-2">
           {props.resource.name}
         </h3>
-        <i className="fa fa-caret-down fs-4 text-dark"></i>
+        <CaretDown />
       </div>
       <ResourceSelectorDropdown resource={props.resource} />
     </div>

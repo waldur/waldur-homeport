@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -28,7 +29,7 @@ export const AddRoleButton: FunctionComponent<{
   };
   return (
     <ActionButton
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       title={translate('Add role')}
       action={callback}
     />

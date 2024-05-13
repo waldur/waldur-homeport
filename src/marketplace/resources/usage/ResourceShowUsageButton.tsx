@@ -1,3 +1,4 @@
+import { Eye } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -30,7 +31,7 @@ const PureResourceUsageButton: FunctionComponent<ResourceUsageButton> = (
 ) => (
   <ActionButton
     title={translate('Show usage')}
-    icon="fa fa-eye"
+    iconNode={<Eye />}
     action={props.openDialog}
     className="me-3"
   />

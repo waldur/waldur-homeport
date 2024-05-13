@@ -80,15 +80,13 @@ export const ReviewItemAction = ({ row, fetch }: ReviewItemActionProps) => {
         action={accept}
         title={translate('Start review')}
         variant="primary"
-        disabled={isAcceptLoading || isRejectLoading}
-        icon={isAcceptLoading && 'fa fa-spinner fa-spin'}
+        pending={isAcceptLoading || isRejectLoading}
       />
       <ActionButton
         action={reject}
         title={translate('Send back')}
         variant="light"
-        disabled={isAcceptLoading || isRejectLoading}
-        icon={isRejectLoading && 'fa fa-spinner fa-spin'}
+        pending={isAcceptLoading || isRejectLoading}
       />
     </>
   ) : null;

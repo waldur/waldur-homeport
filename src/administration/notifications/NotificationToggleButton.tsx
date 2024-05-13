@@ -1,3 +1,4 @@
+import { BellSimple, BellSimpleSlash } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -44,7 +45,7 @@ export const NotificationToggleButton: FunctionComponent<{
     <ActionButton
       action={callback}
       title={notification.enabled ? translate('Disable') : translate('Enable')}
-      icon={notification.enabled ? 'fa fa-toggle-on' : 'fa fa-toggle-off'}
+      iconNode={notification.enabled ? <BellSimple /> : <BellSimpleSlash />}
       className={`ms-3 btn ${
         notification.enabled ? 'btn-danger' : 'btn-success'
       }`}

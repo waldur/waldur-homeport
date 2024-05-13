@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -29,7 +30,7 @@ export const SetAllowedAddressPairsButton: FunctionComponent<{
   return (
     <ActionButton
       title={translate('Set allowed address pairs')}
-      icon="fa fa-pencil"
+      iconNode={<PencilSimple />}
       action={openDialog}
     />
   );

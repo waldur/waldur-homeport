@@ -1,3 +1,4 @@
+import { Play } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -21,7 +22,7 @@ export const PaymentProfileEnableButton = (props) => {
     <ActionButton
       title={translate('Enable')}
       action={callback}
-      icon="fa fa-play"
+      iconNode={<Play />}
       {...props.tooltipAndDisabledAttributes}
     />
   );

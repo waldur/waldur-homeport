@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -67,7 +68,9 @@ export const PureIssueAttachment: FunctionComponent<
                 type="button"
                 onClick={deleteAttachment}
               >
-                <i className="fa fa-trash" aria-hidden="true" />
+                <span className="svg-icon svg-icon-2">
+                  <Trash />
+                </span>
               </button>
             </div>
             <div className="attachment-item__description-info">

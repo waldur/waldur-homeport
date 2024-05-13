@@ -1,12 +1,9 @@
+import { GearSix, ListMagnifyingGlass, Warning } from '@phosphor-icons/react';
+
 import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
-import { SvgIcon } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
 import { Project } from '@waldur/workspace/types';
-
-const IconCog = require('@waldur/images/cog-outline.svg');
-const IconIssue = require('@waldur/images/exclamation-triangle-outline.svg');
-const IconLogs = require('@waldur/images/search-logs.svg');
 
 export const ProjectActions = ({ project }: { project: Project }) => {
   const showIssues = ENV.plugins.WALDUR_SUPPORT.ENABLED;
@@ -18,7 +15,9 @@ export const ProjectActions = ({ project }: { project: Project }) => {
         params={{ uuid: project.uuid }}
         className="btn btn-secondary me-3"
       >
-        <SvgIcon path={IconCog} className="svg-icon-2" />
+        <span className="svg-icon svg-icon-2">
+          <GearSix />
+        </span>
         {translate('Manage')}
       </Link>
 
@@ -27,7 +26,9 @@ export const ProjectActions = ({ project }: { project: Project }) => {
         params={{ uuid: project.uuid }}
         className="btn btn-secondary me-3"
       >
-        <SvgIcon path={IconLogs} className="svg-icon-2" />
+        <span className="svg-icon svg-icon-2">
+          <ListMagnifyingGlass />
+        </span>
         {translate('Audit logs')}
       </Link>
 
@@ -37,7 +38,9 @@ export const ProjectActions = ({ project }: { project: Project }) => {
           params={{ uuid: project.uuid }}
           className="btn btn-secondary"
         >
-          <SvgIcon path={IconIssue} className="svg-icon-2" />
+          <span className="svg-icon svg-icon-2">
+            <Warning />
+          </span>
           {translate('Issues')}
         </Link>
       )}

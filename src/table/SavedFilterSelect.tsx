@@ -1,6 +1,6 @@
+import { Funnel, Trash } from '@phosphor-icons/react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
-import SVG from 'react-inlinesvg';
 import { useDispatch, useSelector } from 'react-redux';
 import { components } from 'react-select';
 import { change, clearFields, getFormValues, reset } from 'redux-form';
@@ -16,12 +16,10 @@ import {
 import { TableFilterService, TableFiltersGroup } from './TableFilterService';
 import { getSavedFiltersKey } from './utils';
 
-const Icon = require('./filter-outline.svg');
-
 export const Control = (props) => (
   <components.Control {...props}>
     <span className="svg-icon svg-icon-2 svg-icon-gray-700 ps-3">
-      <SVG src={Icon} />
+      <Funnel />
     </span>
     {props.children}
   </components.Control>
@@ -85,7 +83,7 @@ export const SavedFilterSelect = ({ table, formId }) => {
       {selected && (
         <Col xs="auto" className="ps-0">
           <Button variant="light-danger" className="btn-icon" onClick={remove}>
-            <i className="fa fa-trash-o fs-2"></i>
+            <Trash />
           </Button>
         </Col>
       )}

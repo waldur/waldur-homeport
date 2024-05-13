@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import copy from 'copy-to-clipboard';
 import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
@@ -59,7 +60,9 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
           title={translate('Delete')}
           onClick={onRemove}
         >
-          <i className="fa fa-trash-o"></i>
+          <span className="svg-icon svg-icon-2">
+            <Trash />
+          </span>
         </Button>
       </td>
     </tr>

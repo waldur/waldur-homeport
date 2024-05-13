@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -36,7 +37,7 @@ export const RoundCreateButton = ({
   return (
     <ActionButton
       title={translate('New round')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       action={openRoundCreateDialog}
       variant="light"
     />

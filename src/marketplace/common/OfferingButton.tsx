@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 
 import './OfferingButton.scss';
@@ -30,7 +31,7 @@ export const OfferingButton: FunctionComponent<OfferingButtonProps> = (
         onClick={props.onClick}
         className={props.className}
       >
-        {props.isAddingItem && <i className="fa fa-spinner fa-spin me-1" />}
+        {props.isAddingItem && <LoadingSpinnerIcon className="me-1" />}
         <i className={props.icon} /> {props.title}
       </Button>
     );

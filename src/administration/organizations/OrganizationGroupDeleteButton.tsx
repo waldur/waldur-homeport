@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -49,8 +50,8 @@ export const OrganizationGroupDeleteButton = (
       title={translate('Remove')}
       action={openDialog}
       variant="danger"
-      icon={removing ? 'fa fa-spinner fa-spin' : 'fa fa-trash'}
-      disabled={removing}
+      iconNode={<Trash />}
+      pending={removing}
     />
   );
 };

@@ -1,10 +1,13 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { TableProps } from '@waldur/table/Table';
 
 export const LoadingSpinner: FunctionComponent = () => (
   <button className="btn btn-icon btn-flush">
-    <i className="fa fa-refresh fa-spin fs-4" />
+    <span className="fa-spin">
+      <ArrowsClockwise size={20} data-cy="loading-spinner" />
+    </span>
   </button>
 );
 
@@ -14,6 +17,6 @@ export const TableRefreshButton = (props: TableProps) =>
     <LoadingSpinner />
   ) : (
     <button className="btn btn-icon btn-active-light" onClick={props.fetch}>
-      <i className="fa fa-refresh fs-4"></i>
+      <ArrowsClockwise size={20} data-cy="loading-spinner" />
     </button>
   );

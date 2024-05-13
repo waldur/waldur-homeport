@@ -1,3 +1,4 @@
+import { Check } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -29,7 +30,13 @@ export const ConsumerApproveAll = ({ orders, refetch }) => {
       onClick={() => mutate()}
       disabled={isLoading}
     >
-      {isLoading ? <LoadingSpinnerIcon /> : <i className="fa fa-check me-1" />}
+      {isLoading ? (
+        <LoadingSpinnerIcon />
+      ) : (
+        <span className="svg-icon svg-icon-2">
+          <Check />
+        </span>
+      )}
       {translate('Approve all')}
     </Button>
   );

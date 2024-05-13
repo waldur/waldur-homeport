@@ -1,74 +1,47 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
+import { Trash } from '@phosphor-icons/react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { deleteEntity } from '@waldur/table/actions';
 
-import { showKeyRemoveConfirmation } from './actions';
 import { removeKey } from './api';
-import * as constants from './constants';
 
-const mapDispatchToProps = (dispatch) => ({
-  showConfirmDialog: (action: () => void) =>
-    dispatch(showKeyRemoveConfirmation(action)),
-  removeEntity: (id: string) =>
-    dispatch(deleteEntity(constants.keysListTable, id)),
-  showError: (message: string) => dispatch(showError(message)),
-  showSuccess: (message: string) => dispatch(showSuccess(message)),
-});
+const KeyRemoveDialog = lazyComponent(
+  () => import('./KeyRemoveDialog'),
+  'KeyRemoveDialog',
+);
 
-interface OwnProps {
-  uuid: string;
-}
+export const KeyRemoveButton = ({ uuid, refetch }) => {
+  const dispatch = useDispatch();
+  const [pending, setPending] = useState(false);
 
-interface DispatchProps {
-  showConfirmDialog: (action: () => void) => void;
-  removeEntity: (id: string) => void;
-  showError: (message: string) => void;
-  showSuccess: (message: string) => void;
-}
-
-interface KeyRemoveButtonState {
-  removing: boolean;
-}
-
-class KeyRemoveButtonComponent extends Component<
-  OwnProps & DispatchProps,
-  KeyRemoveButtonState
-> {
-  state = {
-    removing: false,
+  const action = async () => {
+    try {
+      setPending(true);
+      await removeKey(uuid);
+      await refetch();
+      dispatch(showSuccess(translate('SSH key has been removed.')));
+    } catch (e) {
+      dispatch(showError(translate('Unable to remove SSH key.')));
+    }
+    setPending(false);
   };
 
-  async removeKey(id: string) {
-    try {
-      this.setState({ removing: true });
-      await removeKey(id);
-      this.props.removeEntity(id);
-      this.props.showSuccess(translate('SSH key has been removed.'));
-    } catch (e) {
-      this.props.showError(translate('Unable to remove SSH key.'));
-    }
-  }
-
-  render() {
-    return (
-      <>
-        <ActionButton
-          title={translate('Remove')}
-          action={() =>
-            this.props.showConfirmDialog(() => this.removeKey(this.props.uuid))
-          }
-          icon={this.state.removing ? 'fa fa-spinner fa-spin' : 'fa fa-trash'}
-          disabled={this.state.removing}
-        />
-      </>
-    );
-  }
-}
-
-const enhance = connect<{}, DispatchProps, OwnProps>(null, mapDispatchToProps);
-
-export const KeyRemoveButton = enhance(KeyRemoveButtonComponent);
+  return (
+    <ActionButton
+      title={translate('Remove')}
+      action={() =>
+        dispatch(
+          openModalDialog(KeyRemoveDialog, { resolve: { action }, size: 'md' }),
+        )
+      }
+      pending={pending}
+      iconNode={<Trash />}
+      disabled={pending}
+    />
+  );
+};

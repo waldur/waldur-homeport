@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
@@ -21,7 +22,10 @@ const IPAddressRow = ({ address, onRemove }) => (
     </td>
     <td>
       <Button variant="default" onClick={onRemove} size="sm">
-        <i className="fa fa-trash" /> {translate('Remove')}
+        <span className="svg-icon svg-icon-2">
+          <Trash />
+        </span>{' '}
+        {translate('Remove')}
       </Button>
     </td>
   </tr>

@@ -1,3 +1,4 @@
+import { CaretDown, CaretUp, CaretUpDown } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
@@ -36,11 +37,11 @@ function renderSortingIcon(column: Column, sorting: Sorting) {
   if (!column.orderField || !sorting) {
     return null;
   } else if (column.orderField !== sorting.field) {
-    return <i className="fa fa-sort ms-1" />;
+    return <CaretUpDown size={17} width={30} />;
   } else if (sorting.mode === 'asc') {
-    return <i className="fa fa-sort-asc ms-1" />;
+    return <CaretUp size={17} width={30} />;
   } else {
-    return <i className="fa fa-sort-desc ms-1" />;
+    return <CaretDown size={17} width={30} />;
   }
 }
 

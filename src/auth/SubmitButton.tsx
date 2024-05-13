@@ -1,6 +1,8 @@
 import { FC, PropsWithChildren } from 'react';
 import { Button } from 'react-bootstrap';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+
 interface SubmitButtonProps {
   submitting: boolean;
   invalid?: boolean;
@@ -25,7 +27,7 @@ export const SubmitButton: FC<PropsWithChildren<SubmitButtonProps>> = ({
   >
     {submitting && (
       <>
-        <i className="fa fa-spinner fa-spin me-1" />{' '}
+        <LoadingSpinnerIcon className="me-1" />{' '}
       </>
     )}
     {label}

@@ -1,3 +1,4 @@
+import { MapPin } from '@phosphor-icons/react/dist/ssr';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -44,7 +45,7 @@ const PureSetLocationButton: FunctionComponent<SetLocationButtonProps> = (
 ) => (
   <ActionButton
     title={translate('Set location')}
-    icon="fa fa-map-marker"
+    iconNode={<MapPin />}
     action={props.openDialog}
   />
 );

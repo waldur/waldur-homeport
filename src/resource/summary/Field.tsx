@@ -42,7 +42,7 @@ export const Field: FunctionComponent<FieldProps> = (props) =>
         {props.hasCopy && (
           <CopyToClipboardButton
             value={props.value}
-            size="sm"
+            size={15}
             className="mx-2 text-hover-primary cursor-pointer d-inline z-index-1"
           />
         )}

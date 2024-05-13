@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -26,7 +27,7 @@ export const ResourceCreateUsageButton: FunctionComponent<
   return (
     <ActionButton
       title={translate('Report usage')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       action={openDialog}
       disabled={props.disabled}
     />

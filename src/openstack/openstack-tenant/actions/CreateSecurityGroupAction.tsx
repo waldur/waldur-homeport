@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -20,7 +21,7 @@ export const CreateSecurityGroupAction: FC<TenantActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Create')}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
     modalComponent={CreateSecurityGroupDialog}
     resource={resource}
     dialogSize="xl"

@@ -1,10 +1,9 @@
+import { GearSix } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button, Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
 import SVG from 'react-inlinesvg';
 
 import { TableProps } from './Table';
-
-const IconCog = require('@waldur/images/cog-outline.svg');
 
 const CheckboxIcon = require('./Checkbox.svg');
 const CheckboxEmptyIcon = require('./CheckboxEmpty.svg');
@@ -37,7 +36,7 @@ export const TableColumnButton: FC<TableProps> = (props) => {
     >
       <Button variant="light" className="btn-icon">
         <span className="svg-icon svg-icon-2 svg-icon-dark">
-          <SVG src={IconCog} />
+          <GearSix />
         </span>
       </Button>
     </OverlayTrigger>

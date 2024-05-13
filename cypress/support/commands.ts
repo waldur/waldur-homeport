@@ -134,12 +134,13 @@ Cypress.Commands.add(
     if (apply) {
       cy.contains('#kt_drawer_footer button', 'Apply').click();
       // Make sure the fetch fn is performed
-      cy.get('.card-toolbar .card-title button i.fa-refresh')
+      cy.get('[data-cy=loading-spinner]')
         .first()
         .then(($el) => {
-          const className = $el[0].className;
+          //@ts-ignore
+          const className = $el[0].parentNode.className;
           if (className.indexOf('fa-spin') < 0) {
-            cy.get('.card-toolbar .card-title button i.fa-refresh')
+            cy.get('[data-cy=loading-spinner]')
               .first()
               .click();
           }

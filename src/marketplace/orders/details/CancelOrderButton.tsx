@@ -1,3 +1,4 @@
+import { Prohibit } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -33,8 +34,8 @@ export const CancelOrderButton: FC<CancelOrderButtonProps> = (props) => {
       className="btn btn-sm btn-danger mb-2"
       title={translate('Cancel')}
       action={callback}
-      disabled={loading}
-      icon={loading ? 'fa fa-spinner fa-spin' : 'fa fa-trash'}
+      pending={loading}
+      iconNode={<Prohibit />}
     />
   );
 };

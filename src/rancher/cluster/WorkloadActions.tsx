@@ -1,3 +1,4 @@
+import { Swap, Trash } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -43,13 +44,13 @@ export const WorkloadActions: FunctionComponent<{ workload }> = ({
       <ActionButton
         title={translate('Redeploy')}
         action={redeployCallback}
-        icon="fa fa-retweet"
+        iconNode={<Swap />}
         disabled={disabled}
       />
       <ActionButton
         title={translate('Delete')}
         action={deleteCallback}
-        icon="fa fa-trash"
+        iconNode={<Trash />}
         disabled={disabled}
       />
     </ButtonGroup>

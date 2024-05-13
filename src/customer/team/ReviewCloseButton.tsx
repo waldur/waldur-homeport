@@ -1,4 +1,5 @@
-import React from 'react';
+import { Prohibit } from '@phosphor-icons/react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -11,9 +12,7 @@ interface ReviewCloseButtonProps {
   reviewId: string;
 }
 
-export const ReviewCloseButton: React.FC<ReviewCloseButtonProps> = ({
-  reviewId,
-}) => {
+export const ReviewCloseButton: FC<ReviewCloseButtonProps> = ({ reviewId }) => {
   const dispatch = useDispatch();
   const callback = async () => {
     try {
@@ -27,7 +26,7 @@ export const ReviewCloseButton: React.FC<ReviewCloseButtonProps> = ({
     <ActionButton
       action={callback}
       title={translate('Perform review')}
-      icon="fa fa-ban"
+      iconNode={<Prohibit />}
     />
   );
 };

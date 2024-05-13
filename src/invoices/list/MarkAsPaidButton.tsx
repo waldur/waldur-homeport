@@ -1,3 +1,4 @@
+import { Money } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,7 +26,7 @@ export const MarkAsPaidButton: FunctionComponent<{ row; refetch }> = ({
     <ActionButton
       title={translate('Mark as paid')}
       disabled={row.state !== 'created'}
-      icon="fa fa-money"
+      iconNode={<Money />}
       tooltip={
         row.state !== 'created'
           ? translate('Only a created invoice can be marked as paid.')

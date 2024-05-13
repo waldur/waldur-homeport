@@ -71,12 +71,6 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
           'N/A'
         ),
     },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => (
-        <RobotAccountActions refetch={tableProps.fetch} row={row} />
-      ),
-    },
   ];
 
   return (
@@ -86,6 +80,9 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
       columns={columns}
       verboseName={translate('robot accounts')}
       expandableRow={RobotAccountExpandable}
+      hoverableRow={({ row }) => (
+        <RobotAccountActions refetch={tableProps.fetch} row={row} />
+      )}
     />
   );
 };

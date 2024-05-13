@@ -1,3 +1,4 @@
+import { CaretDown, MagnifyingGlass } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import {
   FunctionComponent,
@@ -13,7 +14,6 @@ import { useSelector } from 'react-redux';
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
-import { SearchIcon } from '@waldur/core/svg/SearchIcon';
 import useOnScreen from '@waldur/core/useOnScreen';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
@@ -91,7 +91,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
         <span className="text-dark d-none d-sm-block fs-base fw-bold lh-1 mx-3">
           {project ? project.name : translate('Select project')}
         </span>
-        <i className="fa fa-caret-down fs-4 text-dark"></i>
+        <CaretDown />
       </div>
       {/* END: Toggle */}
 
@@ -105,7 +105,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
           autoComplete="off"
         >
           <span className="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-dark">
-            <SearchIcon />
+            <MagnifyingGlass />
           </span>
           <input
             ref={refSearch}
@@ -117,7 +117,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
             placeholder={translate('Find project') + '...'}
             autoComplete="off"
           />
-          <i className="fa fa-caret-down fs-4 text-dark"></i>
+          <CaretDown />
         </form>
         <ProjectsList
           projects={filteredProjects}
@@ -131,7 +131,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
               title={translate('New project')}
               variant="link"
               className="btn-lg text-dark pl-2 text-left w-100 text-decoration-underline"
-              icon={null}
+              icon={false}
             />
           </Col>
           <Col xs={7}>

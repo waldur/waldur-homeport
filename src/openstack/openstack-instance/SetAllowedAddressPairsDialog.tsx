@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
@@ -54,7 +55,10 @@ const PairRow = ({ pair, onRemove }) => (
     </td>
     <td>
       <Button variant="default" onClick={onRemove}>
-        <i className="fa fa-trash" /> {translate('Remove')}
+        <span className="svg-icon svg-icon-2">
+          <Trash />
+        </span>{' '}
+        {translate('Remove')}
       </Button>
     </td>
   </tr>

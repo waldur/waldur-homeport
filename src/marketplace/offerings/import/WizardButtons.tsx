@@ -1,3 +1,4 @@
+import { CaretLeft, CaretRight } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
@@ -26,7 +27,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
     <ActionButton
       title={translate('Back')}
       action={goBack}
-      icon="fa fa-arrow-left"
+      iconNode={<CaretLeft />}
       className={classNames(
         { disabled: submitting },
         'btn btn-outline btn-secondary',
@@ -36,7 +37,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
       <ActionButton
         title={translate('Next')}
         action={goNext}
-        icon="fa fa-arrow-right"
+        iconNode={<CaretRight />}
         className="btn btn-primary"
       />
     )}

@@ -1,13 +1,17 @@
+import { ShoppingCart } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import { translate } from '@waldur/i18n';
+import { useMarketplaceLandingLink } from '@waldur/marketplace/links/LandingLink';
 import { MenuComponent } from '@waldur/metronic/components';
 import { CallPublicMenu } from '@waldur/navigation/CallPublicMenu';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
+import { MenuItem } from './MenuItem';
 import { ReportingMenu } from './ReportingMenu';
 import { ResourcesMenu } from './ResourcesMenu';
 import { Sidebar } from './Sidebar';
@@ -16,6 +20,7 @@ export const UnifiedSidebar = () => {
   const user = useSelector(getUser);
   const router = useRouter();
   const { state, params } = useCurrentStateAndParams();
+  const marketplaceLink = useMarketplaceLandingLink();
   useEffect(() => {
     MenuComponent.reinitialization();
     const menuElement = document.querySelector('#kt_aside_menu');
@@ -60,6 +65,13 @@ export const UnifiedSidebar = () => {
       <ResourcesMenu />
       <ReportingMenu />
       <CallPublicMenu />
+      <MenuItem
+        icon={<ShoppingCart />}
+        title={translate('Marketplace')}
+        state={marketplaceLink.state}
+        params={marketplaceLink.stateParams}
+        child={false}
+      />
     </Sidebar>
   );
 };

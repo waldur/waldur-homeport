@@ -1,4 +1,5 @@
-import { useCallback, FC } from 'react';
+import { PlusCircle } from '@phosphor-icons/react';
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -17,18 +18,14 @@ const createCatalogDialog = (cluster) =>
 
 export const CatalogCreateButton: FC<{ cluster }> = ({ cluster }) => {
   const dispatch = useDispatch();
-  const callback = useCallback(
-    () => dispatch(createCatalogDialog(cluster)),
-    [dispatch, cluster],
-  );
   if (ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE) {
     return null;
   }
   return (
     <ActionButton
       title={translate('Create')}
-      action={callback}
-      icon="fa fa-plus"
+      action={() => dispatch(createCatalogDialog(cluster))}
+      iconNode={<PlusCircle />}
     />
   );
 };

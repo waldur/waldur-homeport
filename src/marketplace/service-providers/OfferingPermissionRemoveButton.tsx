@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -52,7 +53,7 @@ export const OfferingPermissionRemoveButton: React.FC<
     <ActionButton
       action={callback}
       title={translate('Revoke')}
-      icon="fa fa-trash"
+      iconNode={<Trash />}
     />
   ) : null;
 };

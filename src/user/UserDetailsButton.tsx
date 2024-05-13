@@ -1,3 +1,4 @@
+import { Eye } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -28,7 +29,7 @@ export const UserDetailsButton: React.FC<UserDetailsButtonProps> = ({
     <ActionButton
       action={callback}
       title={translate('Details')}
-      icon="fa fa-eye"
+      iconNode={<Eye />}
     />
   );
 };

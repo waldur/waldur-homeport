@@ -1,3 +1,4 @@
+import { Eye } from '@phosphor-icons/react';
 import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -35,7 +36,7 @@ export const PurePlanDescriptionButton = (
     <ActionButton
       title={translate('Details')}
       action={() => props.showOfferingPlanDescription(planDescription)}
-      icon="fa fa-eye"
+      iconNode={<Eye />}
       className={props.className}
     />
   );

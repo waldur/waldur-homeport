@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -64,7 +65,7 @@ export const GroupInvitationCreateButton: FC<{
     <ActionButton
       action={callback}
       title={translate('Create group invitation')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       variant="primary"
       disabled={!canManage}
       tooltip={!canManage && translate('You can not create group invitations.')}

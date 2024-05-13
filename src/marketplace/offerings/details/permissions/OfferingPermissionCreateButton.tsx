@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -27,7 +28,7 @@ export const OfferingPermissionCreateButton: React.FC<{
     <ActionButton
       action={callback}
       title={translate('Add user')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       variant="primary"
     />
   );

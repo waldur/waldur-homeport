@@ -27,6 +27,7 @@
     "@fontsource/inter": "^4.5.14",
     "@fontsource/open-sans": "^4.5.14",
     "@jonkoops/matomo-tracker": "^0.7.0",
+    "@phosphor-icons/react": "^2.1.5",
     "@popperjs/core": "~2.10.1",
     "@redux-saga/delay-p": "^1.2.1",
     "@sentry/react": "^7.30.0",

@@ -1,3 +1,4 @@
+import { Check } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
@@ -58,8 +59,8 @@ export const ApproveByProviderButton: FunctionComponent<
       className="btn btn-sm btn-secondary"
       title={translate('Approve')}
       action={mutate}
-      disabled={isLoading}
-      icon={isLoading ? 'fa fa-spinner fa-spin' : 'fa fa-check'}
+      pending={isLoading}
+      iconNode={<Check />}
     />
   );
 };

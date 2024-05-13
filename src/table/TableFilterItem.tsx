@@ -1,3 +1,4 @@
+import { X } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { isEqual } from 'lodash';
 import React, { FC, PropsWithChildren, useCallback, useEffect } from 'react';
@@ -81,7 +82,7 @@ const RemoveButton = ({ onClick }) => (
     className="text-btn ps-2 text-hover-danger"
     onClick={onClick}
   >
-    <i className="fa fa-times fs-7" />
+    <X weight="bold" />
   </button>
 );
 

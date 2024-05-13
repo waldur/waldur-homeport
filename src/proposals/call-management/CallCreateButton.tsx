@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { PlusCircle } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -19,16 +19,12 @@ const callCreateDialog = (refetch) =>
 
 export const CallCreateButton = ({ refetch }) => {
   const dispatch = useDispatch();
-  const openFormDialog = useCallback(
-    () => dispatch(callCreateDialog(refetch)),
-    [dispatch],
-  );
 
   return (
     <ActionButton
       title={translate('Add call')}
-      action={openFormDialog}
-      icon="fa fa-plus"
+      action={() => dispatch(callCreateDialog(refetch))}
+      iconNode={<PlusCircle />}
       variant="primary"
     />
   );

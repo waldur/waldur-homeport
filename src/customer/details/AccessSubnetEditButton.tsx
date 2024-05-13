@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -29,7 +30,7 @@ export const AccessSubnetEditButton = ({ row, refetch }) => {
     <ActionButton
       title={translate('Edit')}
       action={openFormDialog}
-      icon="fa fa-edit"
+      iconNode={<PencilSimple />}
       variant="primary"
     />
   );

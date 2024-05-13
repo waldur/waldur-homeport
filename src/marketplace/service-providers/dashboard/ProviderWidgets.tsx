@@ -1,4 +1,13 @@
-import { FC } from 'react';
+import {
+  Bell,
+  Headset,
+  SealPercent,
+  Stack,
+  Tag,
+  UserList,
+  Warning,
+} from '@phosphor-icons/react';
+import { FC, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -13,17 +22,11 @@ import { getServiceProviderStatistics } from './api';
 import { ChangesAmountBadge } from './ChangesAmountBadge';
 import { ProviderStatistics } from './types';
 
-const IconAttentionTriangle = require('./icons/attention-triangle.svg');
-const IconActiveCampaigns = require('./icons/campaign.svg');
-const IconNotification = require('./icons/notification-bell.svg');
-const IconOffering = require('./icons/offering-tag.svg');
 const IconPendingApproval = require('./icons/pending-approval.svg');
-const IconResource = require('./icons/provider-resource.svg');
-const IconSupport = require('./icons/provider-support.svg');
-const IconUser = require('./icons/provider-user.svg');
 
 interface ProviderWidget {
-  icon: any;
+  icon?: any;
+  iconNode?: ReactNode;
   value: string | number;
   title: string;
   changes: number;
@@ -33,21 +36,21 @@ interface ProviderWidget {
 
 const generateWidgetsData = (statistics: ProviderStatistics) => [
   {
-    icon: IconActiveCampaigns,
+    iconNode: <SealPercent size={40} />,
     value: statistics.active_campaigns,
     title: translate('Active campaigns'),
     changes: 0,
     to: { state: 'marketplace-provider-campaigns' },
   },
   {
-    icon: IconUser,
+    iconNode: <UserList size={40} />,
     value: statistics.current_customers,
     title: translate('Active clients'),
     changes: statistics.customers_number_change,
     to: { state: 'marketplace-provider-organizations' },
   },
   {
-    icon: IconResource,
+    iconNode: <Stack size={40} />,
     value: statistics.active_resources,
     title: translate('Active resources'),
     changes: statistics.resources_number_change,
@@ -63,7 +66,7 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     },
   },
   {
-    icon: IconOffering,
+    iconNode: <Tag size={40} />,
     value: statistics.active_and_paused_offerings,
     title: translate('Total published offerings'),
     changes: 0,
@@ -73,7 +76,7 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     },
   },
   {
-    icon: IconSupport,
+    iconNode: <Headset size={40} />,
     value: statistics.unresolved_tickets,
     title: translate('Open support tickets'),
     changes: 0,
@@ -92,14 +95,14 @@ const generateWidgetsData = (statistics: ProviderStatistics) => [
     },
   },
   {
-    icon: IconNotification,
+    iconNode: <Bell size={40} />,
     value: 0,
     title: translate('Active notifications'),
     changes: 0,
     to: { state: '#' },
   },
   {
-    icon: IconAttentionTriangle,
+    iconNode: <Warning size={40} />,
     value: statistics.erred_resources,
     title: translate('Erred resources'),
     changes: 0,
@@ -123,13 +126,25 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
     className="flex-grow-1 min-h-225px border border-secondary border-hover"
   >
     <Card.Body className="py-10 px-6">
-      <InlineSVG
-        path={item.icon}
-        className={
-          'svg-icon-2tx ' +
-          (item.active ? 'svg-icon-success' : 'svg-icon-gray-300')
-        }
-      />
+      {item.icon && (
+        <InlineSVG
+          path={item.icon}
+          className={
+            'svg-icon-2tx ' +
+            (item.active ? 'svg-icon-success' : 'svg-icon-gray-300')
+          }
+        />
+      )}
+      {item.iconNode && (
+        <span
+          className={
+            'svg-icon-2tx ' +
+            (item.active ? 'svg-icon-success' : 'svg-icon-gray-300')
+          }
+        >
+          {item.iconNode}
+        </span>
+      )}
       <h1 className="display-6 text-nowrap mb-0 mt-2">{item.value}</h1>
       <p className="fs-7 fw-bolder mb-5 h-40px text-dark">{item.title}</p>
       <ChangesAmountBadge changes={item.changes} />

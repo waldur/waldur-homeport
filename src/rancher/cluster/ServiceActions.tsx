@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -33,7 +34,7 @@ export const ServiceActions: FunctionComponent<{ service }> = ({ service }) => {
       <ActionButton
         title={translate('Delete')}
         action={deleteCallback}
-        icon="fa fa-trash"
+        iconNode={<Trash />}
         disabled={disabled}
       />
     </ButtonGroup>

@@ -1,3 +1,4 @@
+import { FileText } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { unlinkInvoice } from '@waldur/customer/payments/store/actions';
@@ -13,7 +14,7 @@ export const UnlinkInvoiceButton = ({ payment }) => {
     <ActionButton
       title={translate('Unlink invoice')}
       action={() => dispatch(unlinkInvoice(payment.uuid))}
-      icon="fa fa-file-text-o"
+      iconNode={<FileText />}
       disabled={!user.is_staff}
       tooltip={
         !user.is_staff

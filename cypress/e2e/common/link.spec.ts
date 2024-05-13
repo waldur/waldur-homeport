@@ -77,7 +77,7 @@ describe('Expired token redirect', () => {
       'error',
     );
 
-    cy.get('button:has(i.fa.fa-refresh)')
+    cy.get('[data-cy=loading-spinner]')
       .click()
       .wait(['@error'])
       .intercept('GET', '/api/events/**', []);

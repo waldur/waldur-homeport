@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
@@ -67,7 +68,7 @@ export const CustomerLogoUpdate: React.FC<CustomerLogoUpdateProps> = (
             className="btn btn-sm btn-danger"
             title={translate('Remove logo')}
             action={removeLogo}
-            icon="fa fa-trash"
+            iconNode={<Trash />}
           />
         )}
         <Field

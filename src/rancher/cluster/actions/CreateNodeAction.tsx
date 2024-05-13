@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { ENV } from '@waldur/configs/default';
@@ -16,7 +17,7 @@ export const CreateNodeAction: FC<{ resource: Cluster }> = ({ resource }) =>
   Boolean(resource.tenant_settings) ? (
     <DialogActionButton
       title={translate('Create node')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       modalComponent={CreateNodeDialog}
       resource={resource}
     />

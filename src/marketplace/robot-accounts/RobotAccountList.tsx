@@ -31,12 +31,6 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
           'N/A'
         ),
     },
-    {
-      title: translate('Actions'),
-      render: ({ row }) => (
-        <RobotAccountActions refetch={tableProps.fetch} row={row} />
-      ),
-    },
   ];
 
   return (
@@ -46,6 +40,9 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
       verboseName={translate('robot accounts')}
       hasActionBar={false}
       expandableRow={RobotAccountExpandable}
+      hoverableRow={({ row }) => (
+        <RobotAccountActions refetch={tableProps.fetch} row={row} />
+      )}
     />
   );
 };

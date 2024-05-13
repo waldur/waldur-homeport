@@ -116,7 +116,7 @@ describe('Add resource pop up is visible', { testIsolation: false }, () => {
     // selecting an organization
     cy.get('div[class="symbol symbol-50px"]')
       .trigger('mouseover', { force: true })
-      .get('i[class="fa fa-angle-right display-5 fw-light"]')
+      .get('[data-cy=context-selector-toggle]')
       .click({ force: true, multiple: true })
       .get('#quick-selector-search-box')
       .should('be.visible');

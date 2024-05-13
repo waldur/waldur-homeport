@@ -1,19 +1,20 @@
+import {
+  ChartBar,
+  GearSix,
+  Headset,
+  ShoppingCart,
+} from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, createElement } from 'react';
 
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
-import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { Tip } from '@waldur/core/Tooltip';
 import { getAbbreviation } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import { FavoritePage } from './FavoritePageService';
-
-const AdminIcon = require('@waldur/navigation/sidebar/Administration.svg');
-const ReportingIcon = require('@waldur/navigation/sidebar/Reporting.svg');
-const SupportIcon = require('@waldur/navigation/sidebar/Support.svg');
 
 interface OwnProps {
   item: FavoritePage;
@@ -22,6 +23,13 @@ interface OwnProps {
   click(page: FavoritePage): void;
   remove(event, page: FavoritePage): void;
 }
+
+const PageIcons = {
+  admin: GearSix,
+  reporting: ChartBar,
+  support: Headset,
+  marketplace: ShoppingCart,
+};
 
 export const FavoritePageItem: FC<OwnProps> = ({
   item,
@@ -55,12 +63,8 @@ export const FavoritePageItem: FC<OwnProps> = ({
       </button>
       <Tip label={item.title} id={`tip-${item.id}`}>
         {item?.image ? (
-          item.image === 'admin' ? (
-            <InlineSVG path={AdminIcon} svgClassName="h-40px w-40px" />
-          ) : item.image === 'reporting' ? (
-            <InlineSVG path={ReportingIcon} svgClassName="h-40px w-40px" />
-          ) : item.image === 'support' ? (
-            <InlineSVG path={SupportIcon} svgClassName="h-40px w-40px" />
+          PageIcons[item.image] ? (
+            createElement(PageIcons[item.image], { size: 40 })
           ) : (
             <Image src={item.image} size={40} />
           )

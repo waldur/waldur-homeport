@@ -1,3 +1,5 @@
+import { Prohibit } from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
 
@@ -7,7 +9,8 @@ export const ReviewRejectAction = ({ request, refetch, apiMethod }) =>
   request.state === 'pending' ? (
     <DialogActionButton
       title={translate('Reject')}
-      icon="fa fa-ban text-danger"
+      className="btn-dnager"
+      iconNode={<Prohibit />}
       resource={request}
       modalComponent={ReviewDialog}
       extraResolve={{

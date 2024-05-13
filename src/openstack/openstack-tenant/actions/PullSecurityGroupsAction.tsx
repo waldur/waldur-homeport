@@ -1,3 +1,4 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
@@ -14,7 +15,7 @@ export const PullSecurityGroupsAction: FC<TenantActionProps> = ({
 }) => (
   <AsyncActionButton
     title={translate('Synchronise')}
-    icon="fa fa-refresh"
+    iconNode={<ArrowsClockwise />}
     resource={resource}
     validators={validators}
     apiMethod={pullTenantSecurityGroups}

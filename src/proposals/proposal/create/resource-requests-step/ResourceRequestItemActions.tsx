@@ -78,8 +78,7 @@ export const ResourceRequestItemActions = ({
       <ActionButton
         action={remove}
         title={translate('Remove')}
-        disabled={isRemoving}
-        icon={isRemoving && 'fa fa-spinner fa-spin'}
+        pending={isRemoving}
       />
     </>
   );

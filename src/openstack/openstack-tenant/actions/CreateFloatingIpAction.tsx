@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
@@ -22,7 +23,7 @@ const validators = [validateState('OK'), checkExternalNetwork];
 export const CreateFloatingIpAction: FC<TenantActionProps> = ({ resource }) => (
   <AsyncActionButton
     title={translate('Create')}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
     resource={resource}
     validators={validators}
     apiMethod={createFloatingIp}

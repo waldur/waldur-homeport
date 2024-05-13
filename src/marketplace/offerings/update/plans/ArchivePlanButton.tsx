@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -34,7 +35,10 @@ export const ArchivePlanButton = ({ plan, refetch }) => {
   };
   return (
     <Dropdown.Item onClick={handler}>
-      <i className="fa fa-trash" /> {translate('Archive')}
+      <span className="svg-icon svg-icon-2">
+        <Trash />
+      </span>{' '}
+      {translate('Archive')}
     </Dropdown.Item>
   );
 };

@@ -1,3 +1,4 @@
+import { Eye } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -26,7 +27,7 @@ export const ProjectDetailsButton = ({ project }: { project: Project }) => {
       title={translate('Details')}
       action={callback}
       className="d-flex align-items-center ms-3"
-      icon="fa fa-eye"
+      iconNode={<Eye />}
     />
   );
 };

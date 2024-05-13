@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
@@ -32,7 +33,7 @@ export const LexisLinkDeleteButton = ({ row, refetch }) => {
       title={translate('Remove')}
       action={openDialog}
       variant="light-danger"
-      icon="fa fa-trash"
+      iconNode={<Trash />}
     />
   );
 };

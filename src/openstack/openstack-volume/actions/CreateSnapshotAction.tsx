@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -17,7 +18,7 @@ const validators = [validateState('OK')];
 export const CreateSnapshotAction: FC<VolumeActionProps> = ({ resource }) => (
   <DialogActionButton
     title={translate('Create')}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
     modalComponent={CreateSnapshotDialog}
     resource={resource}
     validators={validators}

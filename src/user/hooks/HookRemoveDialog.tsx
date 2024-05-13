@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -10,34 +10,27 @@ interface HookRemoveDialogProps {
   resolve: {
     action: () => void;
   };
-  dismiss: () => void;
 }
 
-const PureHookRemoveDialog = (props: HookRemoveDialogProps) => (
-  <ModalDialog
-    title={translate('Hook removal')}
-    footer={[
-      <ActionButton
-        key={1}
-        title={translate('Yes')}
-        action={() => {
-          props.resolve.action();
-          props.dismiss();
-        }}
-        className="btn btn-sm btn-danger"
-      />,
-      <CloseDialogButton key={2} className="btn btn-sm btn-secondary" />,
-    ]}
-  >
-    {translate('Are you sure you would like to delete the hook?')}
-  </ModalDialog>
-);
-
-const mapDispatchToProps = (dispatch) => ({
-  dismiss: () => dispatch(closeModalDialog()),
-});
-
-export const HookRemoveDialog = connect(
-  null,
-  mapDispatchToProps,
-)(PureHookRemoveDialog);
+export const HookRemoveDialog = (props: HookRemoveDialogProps) => {
+  const dispatch = useDispatch();
+  return (
+    <ModalDialog
+      title={translate('Hook removal')}
+      footer={[
+        <ActionButton
+          key={1}
+          title={translate('Yes')}
+          action={() => {
+            props.resolve.action();
+            dispatch(closeModalDialog());
+          }}
+          className="btn btn-sm btn-danger"
+        />,
+        <CloseDialogButton key={2} className="btn btn-sm btn-secondary" />,
+      ]}
+    >
+      {translate('Are you sure you would like to delete the hook?')}
+    </ModalDialog>
+  );
+};

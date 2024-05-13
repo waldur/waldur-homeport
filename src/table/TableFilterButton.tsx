@@ -1,10 +1,8 @@
+import { FunnelSimple } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
-import SVG from 'react-inlinesvg';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-
-const Icon = require('./filter-icon.svg');
 
 export const TableFilterButton = ({ onClick }) => {
   return (
@@ -14,8 +12,8 @@ export const TableFilterButton = ({ onClick }) => {
         className="btn-icon btn-toggle-filters"
         onClick={onClick}
       >
-        <span className="svg-icon svg-icon-2 svg-icon-dark">
-          <SVG src={Icon} />
+        <span className="svg-icon svg-icon-2">
+          <FunnelSimple />
         </span>
       </Button>
     </Tip>

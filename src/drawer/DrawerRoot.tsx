@@ -1,3 +1,4 @@
+import { X } from '@phosphor-icons/react';
 import { ErrorBoundary } from '@sentry/react';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -72,7 +73,7 @@ export const DrawerRoot: FunctionComponent = () => {
               className="btn btn-sm btn-icon btn-active-light-primary me-n5"
               onClick={onHide}
             >
-              <i className="fa fa-times" />
+              <X />
             </button>
           </div>
         </div>

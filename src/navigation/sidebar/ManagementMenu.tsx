@@ -1,3 +1,4 @@
+import { Buildings, ClipboardText } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useSelector } from 'react-redux';
 
@@ -15,9 +16,6 @@ import {
 import { isDescendantOf } from '../useTabs';
 
 import { MenuItem } from './MenuItem';
-
-const IconOrganization = require('./Organization.svg');
-const IconProject = require('./Project.svg');
 
 export const ManagementMenu = () => {
   const customer = useSelector(getCustomer);
@@ -47,14 +45,14 @@ export const ManagementMenu = () => {
               ? state.name
               : undefined
           }
-          iconPath={IconOrganization}
+          icon={<Buildings />}
           child={false}
         />
       ) : (
         <MenuItem
           title={translate('Organization')}
           state="profile.no-customer"
-          iconPath={IconOrganization}
+          icon={<Buildings />}
           child={false}
         />
       )}
@@ -69,7 +67,7 @@ export const ManagementMenu = () => {
               : 'project'
           }
           params={{ uuid: project.uuid }}
-          iconPath={IconProject}
+          icon={<ClipboardText />}
           child={false}
         />
       ) : null}

@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -24,7 +25,7 @@ export const PaymentProfileCreateButton = (props) => {
     <ActionButton
       title={translate('Add payment profile')}
       action={openDialog}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       variant="primary"
       {...props}
     />

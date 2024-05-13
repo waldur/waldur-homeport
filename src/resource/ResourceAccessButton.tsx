@@ -1,3 +1,4 @@
+import { Copy } from '@phosphor-icons/react';
 import copy from 'copy-to-clipboard';
 import { FC, useCallback, useMemo } from 'react';
 import { Button, OverlayTrigger, Popover, Table } from 'react-bootstrap';
@@ -93,12 +94,12 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                           : endpoint.url
                       }
                     >
-                      <Button variant="link" className="p-0">
-                        <i
-                          className="fa fa-copy fa-lg"
-                          aria-hidden="true"
-                          onClick={() => copyText(endpoint.url)}
-                        />
+                      <Button
+                        variant="link"
+                        className="p-0"
+                        onClick={() => copyText(endpoint.url)}
+                      >
+                        <Copy />
                       </Button>
                     </Tip>
                   </td>

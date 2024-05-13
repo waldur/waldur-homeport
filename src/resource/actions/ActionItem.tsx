@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { uniqueId } from 'lodash';
-import { FC, useContext } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -10,6 +10,7 @@ export interface ActionItemProps {
   title: string;
   action: () => void;
   icon?: string;
+  iconNode?: ReactNode;
   staff?: boolean;
   important?: boolean;
   className?: string;

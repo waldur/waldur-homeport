@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -36,7 +37,7 @@ export const AddOfferingButton = ({
   return (
     <ActionButton
       title={translate('Add offering')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       action={openOfferingCreateDialog}
       variant="light"
     />

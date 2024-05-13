@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -28,7 +29,7 @@ export const CatalogDeleteButton: FunctionComponent<any> = (props) => {
     <ActionButton
       title={translate('Delete')}
       action={callback}
-      icon="fa fa-trash"
+      iconNode={<Trash />}
     />
   );
 };

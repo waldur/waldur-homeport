@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -16,7 +17,7 @@ export const AttachDocumentsButton = ({ call, refetch }) => {
     <ActionButton
       action={callback}
       title={translate('Add document')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
     />
   );
 };

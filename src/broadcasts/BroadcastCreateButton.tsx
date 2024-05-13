@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -29,7 +30,7 @@ export const BroadcastCreateButton: FunctionComponent<{ refetch }> = ({
     <ActionButton
       action={callback}
       title={translate('Create')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       variant="primary"
     />
   );

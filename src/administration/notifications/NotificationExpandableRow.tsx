@@ -40,7 +40,7 @@ export const NotificationExpandableRow: FunctionComponent<{
                   <CopyToClipboardButton
                     className="mx-2 text-hover-primary cursor-pointer d-inline z-index-1"
                     value={template.content}
-                    size="2x"
+                    size={30}
                   />
                 </div>
               </div>

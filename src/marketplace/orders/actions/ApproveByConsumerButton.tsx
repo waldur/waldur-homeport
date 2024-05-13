@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { approveOrderByConsumer } from '@waldur/marketplace/common/api';
 import { PermissionEnum } from '@waldur/permissions/enums';
@@ -47,7 +48,7 @@ export const ApproveByConsumerButton: FC<OrderActionProps> = ({
       disabled={isLoading}
     >
       <i className="fa fa-check" /> {translate('Approve')}{' '}
-      {isLoading && <i className="fa fa-spinner fa-spin me-1" />}
+      {isLoading && <LoadingSpinnerIcon className="me-1" />}
     </button>,
   );
 };

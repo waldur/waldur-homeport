@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -14,7 +15,7 @@ export const KeyCreateButton: FunctionComponent = () => {
     <ActionButton
       title={translate('Add key')}
       action={openFormDialog}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       variant="primary"
     />
   );

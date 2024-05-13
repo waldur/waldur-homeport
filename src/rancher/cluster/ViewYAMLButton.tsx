@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -29,7 +30,7 @@ export const ViewYAMLButton = ({
           }),
         )
       }
-      icon="fa fa-edit"
+      iconNode={<PencilSimple />}
       disabled={disabled}
     />
   );

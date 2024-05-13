@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { deleteBroadcastTemplate } from '@waldur/broadcasts/api';
@@ -31,7 +32,7 @@ export const BroadcastTemplateDeleteButton = ({ template, refetch }) => {
       title={translate('Remove')}
       action={openDialog}
       variant="light-danger"
-      icon="fa fa-trash"
+      iconNode={<Trash />}
     />
   );
 };

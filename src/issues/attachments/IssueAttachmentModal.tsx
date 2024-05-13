@@ -1,3 +1,4 @@
+import { X } from '@phosphor-icons/react';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -31,7 +32,7 @@ export class PureIssueAttachmentModal extends Component<PureIssueAttachmentModal
           className="attachment-modal__close text-btn"
           onClick={closeModal}
         >
-          <i className="fa fa-times" aria-hidden="true" />
+          <X />
         </button>
         <div className="modal-header">
           <div className="modal-title">
