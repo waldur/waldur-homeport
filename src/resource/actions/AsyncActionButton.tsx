@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -15,6 +15,7 @@ interface AsyncActionButtonProps<T> {
   validators?: ActionValidator<T>[];
   title: string;
   icon?: string;
+  iconNode?: ReactNode;
   className?: string;
   refetch?(): void;
 }

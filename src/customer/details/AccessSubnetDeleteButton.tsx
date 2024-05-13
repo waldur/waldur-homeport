@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -52,8 +53,8 @@ export const AccessSubnetDeleteButton = (
       title={translate('Remove')}
       action={openDialog}
       variant="danger"
-      icon={removing ? 'fa fa-spinner fa-spin' : 'fa fa-trash'}
-      disabled={removing}
+      pending={removing}
+      iconNode={<Trash />}
     />
   );
 };

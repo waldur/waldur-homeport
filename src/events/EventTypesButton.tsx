@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -11,7 +12,7 @@ export const EventTypesButton: FunctionComponent = () => {
     <ActionButton
       title={translate('Event types')}
       action={() => dispatch(showEventTypes())}
-      icon="fa fa-question-circle"
+      iconNode={<Question />}
     />
   );
 };

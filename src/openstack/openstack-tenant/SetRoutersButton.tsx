@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -24,7 +25,7 @@ export const SetRoutersButton: FunctionComponent<{ router }> = ({ router }) => {
   return (
     <ActionButton
       title={translate('Set static routes')}
-      icon="fa fa-pencil"
+      iconNode={<PencilSimple />}
       action={openDialog}
     />
   );

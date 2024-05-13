@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Button, Card } from 'react-bootstrap';
@@ -101,7 +102,10 @@ export const CustomerRemovePanel: FunctionComponent = () => {
         </ul>
         <div>
           <Button onClick={removeCustomer} variant="danger">
-            <i className="fa fa-trash" /> {translate('Remove organization')}
+            <span className="svg-icon svg-icon-2">
+              <Trash />
+            </span>{' '}
+            {translate('Remove organization')}
           </Button>
         </div>
       </Card.Body>

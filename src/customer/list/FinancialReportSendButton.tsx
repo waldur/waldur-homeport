@@ -1,3 +1,4 @@
+import { Share } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -18,7 +19,10 @@ export const FinancialReportSendButton = () => {
       onClick={() => dispatch(openModalDialog(ExportAsEmailDialog))}
       variant="light"
     >
-      <i className="fa fa-send" /> {translate('Send')}
+      <span className="svg-icon svg-icon-2">
+        <Share />
+      </span>{' '}
+      {translate('Send')}
     </Button>
   );
 };

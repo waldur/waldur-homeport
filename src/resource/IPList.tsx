@@ -9,7 +9,7 @@ export const IPList = ({ value }) => {
             {ip}
             <CopyToClipboardButton
               value={ip}
-              size="sm"
+              size={15}
               className="mx-2 text-hover-primary cursor-pointer d-inline z-index-1 position-relative"
             />
           </span>

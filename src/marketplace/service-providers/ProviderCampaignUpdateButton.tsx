@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -28,7 +29,7 @@ export const ProviderCampaignUpdateButton: FunctionComponent<{
     <ActionButton
       action={callback}
       title={translate('Edit')}
-      icon="fa fa-pencil"
+      iconNode={<PencilSimple />}
     />
   );
 };

@@ -61,7 +61,9 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
   if (isStaffOrSelf) {
     columns.push({
       title: translate('Actions'),
-      render: ({ row }) => <KeyRemoveButton uuid={row.uuid} />,
+      render: ({ row }) => (
+        <KeyRemoveButton uuid={row.uuid} refetch={props.fetch} />
+      ),
       className: 'text-center col-md-2',
     });
   }

@@ -22,6 +22,7 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
         <CopyToClipboardButton
           value={resource.name}
           className="text-hover-primary cursor-pointer"
+          size={20}
         />
         <ResourceStateField resource={resource} pill light hasBullet />
       </div>

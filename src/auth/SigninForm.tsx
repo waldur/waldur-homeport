@@ -2,6 +2,7 @@ import { reduxForm, SubmissionError } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
 import { format } from '@waldur/core/ErrorMessageFormatter';
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
 import { AuthService } from './AuthService';
@@ -61,7 +62,7 @@ export const SigninForm = reduxForm<FormData>({ form: FORM_ID })(
       >
         {submitting && (
           <>
-            <i className="fa fa-spinner fa-spin me-1" />{' '}
+            <LoadingSpinnerIcon className="me-1" />{' '}
           </>
         )}
         {translate('Login')}

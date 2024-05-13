@@ -1,3 +1,4 @@
+import { Share } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -35,7 +36,7 @@ export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
     <ActionButton
       title={translate('Send notification')}
       disabled={row.state !== 'created'}
-      icon="fa fa-envelope-o"
+      iconNode={<Share />}
       tooltip={
         row.state !== 'created'
           ? translate('Notification can be sent only for created invoice.')

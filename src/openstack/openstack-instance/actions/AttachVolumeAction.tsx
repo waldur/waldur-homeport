@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -29,7 +30,7 @@ export const AttachVolumeAction: FC<AttachVolumeActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Attach volume')}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
     modalComponent={AttachVolumeDialog}
     resource={resource}
     validators={validators}

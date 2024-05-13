@@ -1,3 +1,4 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
@@ -12,7 +13,7 @@ const validators = [validateState('OK')];
 export const PullFloatingIpsAction: FC<TenantActionProps> = ({ resource }) => (
   <AsyncActionButton
     title={translate('Synchronise')}
-    icon="fa fa-refresh"
+    iconNode={<ArrowsClockwise />}
     resource={resource}
     validators={validators}
     apiMethod={pullTenantFloatingIps}

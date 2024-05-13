@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -24,7 +25,7 @@ export const CreateBackupAction: FC<CreateBackupActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Create')}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
     modalComponent={CreateBackupDialog}
     formId={RESOURCE_ACTION_FORM}
     resource={resource}

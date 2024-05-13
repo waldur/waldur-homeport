@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -52,7 +53,7 @@ export const EditUserButton: React.FC<EditUserButtonProps> = ({
     <ActionButton
       action={callback}
       title={translate('Edit')}
-      icon="fa fa-pencil"
+      iconNode={<PencilSimple />}
     />
   );
 };

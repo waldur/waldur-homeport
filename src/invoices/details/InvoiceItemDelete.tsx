@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -35,7 +36,7 @@ export const InvoiceItemDelete = ({ item, refreshInvoiceItems }) => {
     <ActionItem
       action={callback}
       title={translate('Remove')}
-      icon="fa fa-trash"
+      iconNode={<Trash />}
     />
   );
 };

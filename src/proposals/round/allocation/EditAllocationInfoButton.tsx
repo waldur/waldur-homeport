@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -24,7 +25,7 @@ export const EditAllocationInfoButton = ({ round, call, refetch }) => {
     <ActionButton
       action={callback}
       title={translate('Edit')}
-      icon="fa fa-pencil"
+      iconNode={<PencilSimple />}
     />
   );
 };

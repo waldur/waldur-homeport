@@ -2,11 +2,11 @@ import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
 import { getAll } from '@waldur/core/api';
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { Offering, PlanComponent } from '@waldur/marketplace/types';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
 import exportExcel from '@waldur/table/excel';
-import { LoadingSpinner } from '@waldur/table/TableLoadingSpinnerContainer';
 import './ExportFullPriceList.scss';
 
 interface ExportFullPriceListProps {
@@ -69,7 +69,7 @@ export const ExportFullPriceList: FunctionComponent<
   return (
     <div className="exportFullPriceList">
       {loading ? (
-        <LoadingSpinner />
+        <LoadingSpinnerIcon />
       ) : error ? (
         <>{translate('Unable to load full price list')}</>
       ) : components ? (

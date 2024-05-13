@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
@@ -29,7 +30,7 @@ export const OrganizationEditButton: FunctionComponent<
   return (
     <ActionButton
       title={translate('Edit')}
-      icon="fa fa-edit"
+      iconNode={<PencilSimple />}
       className="btn-active-primary ms-3"
       action={() =>
         router.stateService.go('admin.customer-update', {

@@ -1,33 +1,39 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButtonSmall } from '@waldur/table/ActionButtonSmall';
 
-import { showHookUpdateDialog } from './actions';
+import { ADMIN_HOOK_LIST_ID } from './constants';
+
+const HookDetailsDialog = lazyComponent(
+  () => import('@waldur/user/hooks/HookDetailsDialog'),
+  'HookDetailsDialog',
+);
+
+export const showHookUpdateDialog = (row?) =>
+  openModalDialog(HookDetailsDialog, {
+    resolve: { hook: row, listId: ADMIN_HOOK_LIST_ID },
+    size: 'md',
+  });
 
 interface HookUpdateButtonProps {
-  showHookUpdateDialog?(row?): void;
   row: any;
 }
 
-const PureHookUpdateButton: FunctionComponent<HookUpdateButtonProps> = (
-  props,
-) => (
-  <ActionButtonSmall
-    title={translate('Update')}
-    action={() => props.showHookUpdateDialog(props.row)}
-    className="btn btn-secondary"
-  >
-    <i className="fa fa-pencil" />
-  </ActionButtonSmall>
-);
-
-const mapDispatchToProps = (dispatch) => ({
-  showHookUpdateDialog: (row) => dispatch(showHookUpdateDialog(row)),
-});
-
-export const HookUpdateButton = connect(
-  undefined,
-  mapDispatchToProps,
-)(PureHookUpdateButton);
+export const HookUpdateButton: FunctionComponent<HookUpdateButtonProps> = ({
+  row,
+}) => {
+  const dispatch = useDispatch();
+  return (
+    <ActionButtonSmall
+      title={translate('Update')}
+      action={() => dispatch(showHookUpdateDialog(row))}
+      className="btn btn-secondary"
+    >
+      <i className="fa fa-pencil" />
+    </ActionButtonSmall>
+  );
+};

@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -23,7 +24,7 @@ export const PaymentProfileEditButton = (props) => {
     <ActionButton
       title={translate('Edit')}
       action={callback}
-      icon="fa fa-edit"
+      iconNode={<PencilSimple />}
       {...props.tooltipAndDisabledAttributes}
     />
   );

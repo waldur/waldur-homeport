@@ -1,3 +1,4 @@
+import { Prohibit } from '@phosphor-icons/react';
 import { useMemo, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -63,7 +64,7 @@ export const InvitationCancelButton: FC<{
     <ActionButton
       action={callback}
       title={translate('Cancel')}
-      icon="fa fa-ban"
+      iconNode={<Prohibit />}
       disabled={isDisabled}
       tooltip={tooltip}
       className="btn-secondary ms-3"

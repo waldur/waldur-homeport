@@ -4,6 +4,7 @@ import { Button, Col, Modal, Row } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Field, getFormValues, initialize, reduxForm } from 'redux-form';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { SubmitButton, SelectField } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
@@ -143,7 +144,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
               >
                 {executing && (
                   <>
-                    <i className="fa fa-spinner fa-spin me-1" />{' '}
+                    <LoadingSpinnerIcon className="me-1" />{' '}
                   </>
                 )}
                 {translate('Save & dry run script')}

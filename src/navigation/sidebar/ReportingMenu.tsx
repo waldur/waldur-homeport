@@ -1,11 +1,10 @@
+import { ChartBar } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { MenuItem } from './MenuItem';
-
-const Icon = require('./Reporting.svg');
 
 export const ReportingMenu = () => {
   const visible = useSelector(isStaffOrSupport);
@@ -18,7 +17,7 @@ export const ReportingMenu = () => {
       state="reporting-dashboard"
       activeState="reporting"
       child={false}
-      iconPath={Icon}
+      icon={<ChartBar />}
     />
   );
 };

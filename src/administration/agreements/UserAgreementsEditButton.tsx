@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -30,7 +31,7 @@ export const UserAgreementsEditButton = ({ row, refetch }) => {
     <ActionButton
       action={callback}
       title={translate('Edit')}
-      icon="fa fa-pencil"
+      iconNode={<PencilSimple />}
     />
   );
 };

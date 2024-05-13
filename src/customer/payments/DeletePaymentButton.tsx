@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deletePayment } from '@waldur/customer/payments/store/actions';
@@ -24,7 +25,7 @@ export const DeletePaymentButton = ({ payment }) => {
         }
         dispatch(deletePayment(payment.uuid));
       }}
-      icon="fa fa-trash"
+      iconNode={<Trash />}
       disabled={!user.is_staff}
       tooltip={
         !user.is_staff

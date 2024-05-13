@@ -1,3 +1,4 @@
+import { Plus, PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -46,7 +47,9 @@ export const ManageCommonFooterButton: FunctionComponent<
           ? translate('Edit footer')
           : translate('Add footer')
       }
-      icon={CommonFooterText || CommonFooterHtml ? 'fa fa-edit' : 'fa fa-plus'}
+      iconNode={
+        CommonFooterText || CommonFooterHtml ? <PencilSimple /> : <Plus />
+      }
       variant="primary"
     />
   );

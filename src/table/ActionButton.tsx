@@ -1,18 +1,20 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 
 interface ActionButtonProps {
   title: string;
   action: (event?: any) => void;
-  icon?: string;
+  iconNode?: ReactNode;
   className?: string;
   disabled?: boolean;
   tooltip?: string;
   variant?: ButtonVariant;
+  pending?: boolean;
 }
 
 export const wrapTooltip = (label, children, rest?) =>
@@ -32,10 +34,17 @@ export const ActionButton: FC<ActionButtonProps> = ({
   wrapTooltip(
     props.tooltip,
     <Button
-      className={classNames(className, { disabled: props.disabled })}
+      className={classNames(className, {
+        disabled: props.disabled || props.pending,
+      })}
       onClick={props.action}
       variant={variant}
     >
-      {props.icon && <i className={props.icon} />} {props.title}
+      {props.pending ? (
+        <LoadingSpinnerIcon />
+      ) : props.iconNode ? (
+        <span className="svg-icon svg-icon-2">{props.iconNode}</span>
+      ) : null}{' '}
+      {props.title}
     </Button>,
   );

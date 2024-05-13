@@ -89,15 +89,13 @@ export const OfferingRequestItemActions = ({
         action={accept}
         title={translate('Accept')}
         variant="primary"
-        disabled={isAcceptLoading || isRejectLoading}
-        icon={isAcceptLoading && 'fa fa-spinner fa-spin'}
+        pending={isAcceptLoading || isRejectLoading}
       />
       <ActionButton
         action={reject}
         title={translate('Reject')}
         variant="danger"
-        disabled={isAcceptLoading || isRejectLoading}
-        icon={isRejectLoading && 'fa fa-spinner fa-spin'}
+        pending={isAcceptLoading || isRejectLoading}
       />
     </>
   ) : null;

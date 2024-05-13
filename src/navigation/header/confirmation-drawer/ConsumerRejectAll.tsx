@@ -1,3 +1,4 @@
+import { Prohibit } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -24,12 +25,18 @@ export const ConsumerRejectAll = ({ orders, refetch }) => {
   });
   return (
     <Button
-      variant="primary"
+      variant="danger"
       className="me-4"
       onClick={() => mutate()}
       disabled={isLoading}
     >
-      {isLoading ? <LoadingSpinnerIcon /> : <i className="fa fa-check me-1" />}
+      {isLoading ? (
+        <LoadingSpinnerIcon />
+      ) : (
+        <span className="svg-icon svg-icon-2">
+          <Prohibit />
+        </span>
+      )}
       {translate('Reject all')}
     </Button>
   );

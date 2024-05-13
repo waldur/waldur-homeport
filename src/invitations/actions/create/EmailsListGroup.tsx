@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { Fragment, useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
@@ -135,7 +136,9 @@ export const EmailsListGroup = ({
                             className="btn-icon"
                             onClick={() => removeRow(i)}
                           >
-                            <i className="fa fa-trash fs-4"></i>
+                            <span className="svg-icon svg-icon-2">
+                              <Trash />
+                            </span>
                           </Button>
                         </td>
                       </tr>

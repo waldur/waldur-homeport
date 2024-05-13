@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -30,7 +31,7 @@ export const CreateOfferingUserButton = ({ offering, onSuccess }) => {
   return (
     <ActionButton
       title={translate('Create')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       action={() =>
         dispatch(
           openModalDialog(CreateOfferingUserDialog, {

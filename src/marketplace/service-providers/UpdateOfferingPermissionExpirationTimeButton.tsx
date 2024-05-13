@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -37,7 +38,7 @@ export const UpdateOfferingPermissionExpirationTimeButton: FunctionComponent<{
     <ActionButton
       action={callback}
       title={translate('Edit')}
-      icon="fa fa-pencil"
+      iconNode={<PencilSimple />}
     />
   ) : null;
 };

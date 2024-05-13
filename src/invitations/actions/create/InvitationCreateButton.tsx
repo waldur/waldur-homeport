@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -60,7 +61,7 @@ export const InvitationCreateButton: FunctionComponent<
     <ActionButton
       action={callback}
       title={translate('Invite user')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       variant="primary"
       disabled={!canInvite}
     />

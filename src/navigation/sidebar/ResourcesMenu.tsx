@@ -1,10 +1,10 @@
+import { SquaresFour, CaretDoubleDown } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Arr082 } from '@waldur/core/svg/Arr082';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
@@ -18,8 +18,6 @@ import { getOrganizationCounters, getProjectCounters } from '../workspace/api';
 
 import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
-
-const Icon = require('./Resources.svg');
 
 const MAX_COLLAPSE_MENU_COUNT = 5;
 
@@ -48,7 +46,9 @@ const CustomToggle = ({ onClick, itemsCount, badge, expanded }) => (
               ? translate('Show less')
               : translate('Show {count} more', { count: itemsCount })}
           </span>
-          <Arr082 className="svg-icon ms-2 svg-icon-3 rotate-180" />
+          <span className="svg-icon ms-2 svg-icon-3 rotate-180">
+            <CaretDoubleDown />
+          </span>
         </div>
       </span>
       {!expanded && <span className="menu-badge">{badge}</span>}
@@ -153,7 +153,7 @@ export const ResourcesMenu = ({ anonymous = false }) => {
     <MenuAccordion
       title={translate('Resources')}
       itemId="resources-menu"
-      iconPath={Icon}
+      icon={<SquaresFour />}
     >
       {project && (
         <MenuItem

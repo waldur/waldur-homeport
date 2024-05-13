@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -41,7 +42,7 @@ export const RoleDescriptionEditButton = ({ row, refetch }) => {
   return (
     <ActionItem
       title={translate('Edit descriptions')}
-      icon="fa fa-edit"
+      iconNode={<PencilSimple />}
       action={openRoleEditDialog}
     />
   );

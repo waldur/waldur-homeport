@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -41,7 +42,7 @@ export const CreateImageButton = (props: CreateImageButtonProps) => {
   return (
     <ActionButton
       title={translate('Add image')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       action={callback}
     />
   );

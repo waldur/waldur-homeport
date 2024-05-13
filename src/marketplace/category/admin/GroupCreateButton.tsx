@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -25,7 +26,7 @@ export const GroupCreateButton = ({ refetch }) => {
     <ActionButton
       title={translate('Add group')}
       action={openFormDialog}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       variant="primary"
     />
   );

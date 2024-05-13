@@ -1,3 +1,4 @@
+import { Check } from '@phosphor-icons/react';
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -54,7 +55,13 @@ export const ApproveAllButton: React.FC<ApproveAllButtonProps> = (props) => {
       onClick={handler}
       disabled={loading}
     >
-      {loading ? <LoadingSpinnerIcon /> : <i className="fa fa-check me-1" />}
+      {loading ? (
+        <LoadingSpinnerIcon />
+      ) : (
+        <span className="svg-icon svg-icon-2">
+          <Check />
+        </span>
+      )}
       {translate('Approve all')}
     </Button>
   );

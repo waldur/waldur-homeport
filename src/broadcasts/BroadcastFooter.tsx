@@ -1,3 +1,9 @@
+import {
+  ArrowLeft,
+  ArrowRight,
+  FloppyDisk,
+  Share,
+} from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -98,7 +104,10 @@ export const BroadcastFooter = ({
             variant="secondary"
             disabled={disabled}
           >
-            <i className="fa fa-file-text" /> {translate('Save as draft')}
+            <span className="svg-icon svg-icon-2">
+              <FloppyDisk />
+            </span>{' '}
+            {translate('Save as draft')}
           </Button>
           <Button
             onClick={handleSubmit(saveAsTemplate)}
@@ -106,17 +115,25 @@ export const BroadcastFooter = ({
             variant="secondary"
             disabled={disabled}
           >
-            <i className="fa fa-file-text" /> {translate('Save as a template')}
+            <span className="svg-icon svg-icon-2">
+              <FloppyDisk />
+            </span>{' '}
+            {translate('Save as a template')}
           </Button>
           <Button onClick={() => setStep(1)} className="ms-3">
-            <i className="fa fa-long-arrow-right" />{' '}
+            <span className="svg-icon svg-icon-2">
+              <ArrowRight />
+            </span>{' '}
             {translate('Select recipients')}
           </Button>
         </>
       ) : (
         <>
           <Button onClick={() => setStep(0)} variant="secondary">
-            <i className="fa fa-long-arrow-left" /> {translate('Back')}
+            <span className="svg-icon svg-icon-2">
+              <ArrowLeft />
+            </span>{' '}
+            {translate('Back')}
           </Button>
           <Button
             onClick={handleSubmit(saveAsDraft)}
@@ -124,14 +141,20 @@ export const BroadcastFooter = ({
             variant="secondary"
             disabled={disabled}
           >
-            <i className="fa fa-file-text" /> {translate('Save as draft')}
+            <span className="svg-icon svg-icon-2">
+              <FloppyDisk />
+            </span>{' '}
+            {translate('Save as draft')}
           </Button>
           <Button
             disabled={disabled}
             className="ms-3"
             onClick={handleSubmit(saveAndSend)}
           >
-            <i className="fa fa-send" /> {translate('Send broadcast')}
+            <span className="svg-icon svg-icon-2">
+              <Share />
+            </span>{' '}
+            {translate('Send broadcast')}
           </Button>
         </>
       )}

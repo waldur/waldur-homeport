@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
 export const ImportButton: FunctionComponent<{
@@ -17,7 +18,7 @@ export const ImportButton: FunctionComponent<{
   >
     {submitting && (
       <>
-        <i className="fa fa-spinner fa-spin" />{' '}
+        <LoadingSpinnerIcon />{' '}
       </>
     )}
     {translate('Import')}

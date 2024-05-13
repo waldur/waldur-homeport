@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+
 interface SubmitButtonProps {
   submitting: boolean;
   label: string;
@@ -20,7 +22,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
     disabled={props.submitting || props.disabled === true}
     onClick={props.onClick}
   >
-    {props.submitting && <i className="fa fa-spinner fa-spin me-1" />}
+    {props.submitting && <LoadingSpinnerIcon className="me-1" />}
     {props.label}
   </button>
 );

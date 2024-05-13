@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -17,7 +18,7 @@ export const AddUserButton: React.FC<{ refetch }> = ({ refetch }) => {
     <ActionButton
       action={() => dispatch(openModalDialog(AddUserDialog, { refetch }))}
       title={translate('Add user')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
     />
   );
 };

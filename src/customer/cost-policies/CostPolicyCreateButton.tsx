@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -54,7 +55,7 @@ export const CostPolicyCreateButton = ({ refetch }) => {
   return (
     <ActionButton
       title={translate('New policy')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       action={openCostPolicyCreateDialog}
       variant="primary"
     />

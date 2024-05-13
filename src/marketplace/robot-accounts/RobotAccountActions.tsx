@@ -6,7 +6,7 @@ export const RobotAccountActions = ({ row, refetch }) =>
     <>N/A</>
   ) : (
     <>
-      <RobotAccountDeleteButton row={row} refetch={refetch} />
       <RobotAccountEditButton row={row} refetch={refetch} />
+      <RobotAccountDeleteButton row={row} refetch={refetch} />
     </>
   );

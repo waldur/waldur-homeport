@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { DialogSizeType } from '@waldur/modal/actions';
 import { ActionValidator } from '@waldur/resource/actions/types';
 
@@ -27,4 +29,5 @@ export interface DialogActionProps<T>
   validators?: ActionValidator<T>[];
   extraResolve?: any;
   iconClass?: string;
+  iconNode?: ReactNode;
 }

@@ -1,9 +1,7 @@
 import { shallow, mount } from 'enzyme';
 
-import {
-  LoadingSpinner,
-  TableLoadingSpinnerContainer,
-} from '@waldur/table/TableLoadingSpinnerContainer';
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { TableLoadingSpinnerContainer } from '@waldur/table/TableLoadingSpinnerContainer';
 
 import Table from './Table';
 
@@ -27,7 +25,7 @@ describe('Table', () => {
       const wrapper = shallow(
         <TableLoadingSpinnerContainer {...props} loading={true} />,
       );
-      expect(wrapper.contains(<LoadingSpinner />)).toBe(true);
+      expect(wrapper.contains(<LoadingSpinnerIcon />)).toBe(true);
     });
 
     it('renders message if loading failed', () => {

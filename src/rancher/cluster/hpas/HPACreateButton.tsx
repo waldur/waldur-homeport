@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -23,7 +24,7 @@ export const HPACreateButton: FunctionComponent<{ cluster }> = ({
     <ActionButton
       title={translate('Create')}
       action={callback}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
     />
   );
 };

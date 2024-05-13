@@ -1,3 +1,4 @@
+import { Check } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -60,7 +61,7 @@ export const UserPermissionRequestApproveButton: FunctionComponent<
     <ActionButton
       action={callback}
       title={translate('Approve')}
-      icon="fa fa-check"
+      iconNode={<Check />}
     />
   );
 };

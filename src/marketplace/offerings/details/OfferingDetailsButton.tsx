@@ -1,3 +1,4 @@
+import { Eye } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -27,7 +28,7 @@ const PureOfferingDetailsButton: FunctionComponent<OfferingDetailsButton> = (
 ) => (
   <ActionButton
     title={translate('Offering details')}
-    icon="fa fa-eye"
+    iconNode={<Eye />}
     action={props.openDialog}
     className="me-3"
   />

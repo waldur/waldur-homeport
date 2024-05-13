@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -27,7 +28,9 @@ const AddButton = ({ onClick, disabled }) => (
 
 const DeleteButton = ({ onClick }) => (
   <Button variant="default" title={translate('Delete')} onClick={onClick}>
-    <i className="fa fa-trash-o"></i>
+    <span className="svg-icon svg-icon-2">
+      <Trash />
+    </span>
   </Button>
 );
 

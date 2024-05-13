@@ -3,7 +3,10 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import {
+  LoadingSpinner,
+  LoadingSpinnerIcon,
+} from '@waldur/core/LoadingSpinner';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
@@ -17,7 +20,7 @@ const SubmitButton = ({ submitting, submit }) => (
   <Button onClick={() => submit()} variant="primary" disabled={submitting}>
     {submitting && (
       <>
-        <i className="fa fa-spinner fa-spin" />{' '}
+        <LoadingSpinnerIcon />{' '}
       </>
     )}
     {translate('Submit')}

@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
@@ -39,7 +40,7 @@ export const FloatingSubmitButton: FC<OwnProps> = ({
           disabled={disabled || submitting || errorsExist}
           className="w-100"
         >
-          {submitting && <i className="fa fa-spinner fa-spin me-1" />}
+          {submitting && <LoadingSpinnerIcon className="me-1" />}
           {label || translate('Submit')}
         </Button>
       </Tip>

@@ -1,3 +1,4 @@
+import { Wrench } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -23,7 +24,7 @@ export const UpdateInternalIpsAction: FC<UpdateInternalIpsActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Configure')}
-    icon="fa fa-wrench"
+    iconNode={<Wrench />}
     modalComponent={UpdateInternalIpsDialog}
     resource={resource}
     validators={validators}

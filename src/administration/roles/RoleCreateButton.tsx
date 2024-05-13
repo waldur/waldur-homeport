@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -37,7 +38,7 @@ export const RoleCreateButton = ({ refetch }) => {
   return (
     <ActionButton
       title={translate('New role')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       action={openRoleCreateDialog}
       variant="primary"
     />

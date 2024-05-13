@@ -1,3 +1,4 @@
+import { Share } from '@phosphor-icons/react';
 import { useMemo, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -65,7 +66,7 @@ export const InvitationSendButton: FunctionComponent<{ invitation }> = ({
     <ActionButton
       action={callback}
       title={translate('Resend')}
-      icon="fa fa-envelope-o"
+      iconNode={<Share />}
       disabled={isDisabled}
       tooltip={tooltip}
     />

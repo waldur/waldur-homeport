@@ -5,7 +5,7 @@ export const ResourceTitle = ({ resource }) => (
     <h4 className="text-start mb-0 me-2">{resource.name}</h4>
     <CopyToClipboardButton
       value={resource.name}
-      size="sm"
+      size={15}
       className="mx-2 text-hover-primary cursor-pointer"
     />
   </div>

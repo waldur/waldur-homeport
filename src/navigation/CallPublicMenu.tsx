@@ -1,10 +1,10 @@
+import { ChatTeardropText } from '@phosphor-icons/react';
+
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { MenuAccordion } from '@waldur/navigation/sidebar/MenuAccordion';
 import { MenuItem } from '@waldur/navigation/sidebar/MenuItem';
-
-const Icon = require('./CallManagement.svg');
 
 export const CallPublicMenu = () => {
   const visible = isFeatureVisible(
@@ -17,7 +17,7 @@ export const CallPublicMenu = () => {
     <MenuAccordion
       title={translate('Calls')}
       itemId="calls-menu"
-      iconPath={Icon}
+      icon={<ChatTeardropText />}
     >
       <MenuItem
         title={translate('Calls for proposals')}

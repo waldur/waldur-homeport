@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -39,7 +40,9 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
       onClick={callback}
       title={translate('Destroy')}
     >
-      <i className="fa fa-trash" />
+      <span className="svg-icon svg-icon-2">
+        <Trash />
+      </span>
     </button>
   );
 };

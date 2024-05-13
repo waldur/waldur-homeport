@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -11,7 +12,7 @@ const PureIssueCreateButton: FunctionComponent<any> = (props) => (
   <ActionButton
     title={translate('Create')}
     action={props.onClick}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
   />
 );
 

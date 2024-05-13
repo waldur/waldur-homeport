@@ -1,3 +1,4 @@
+import { Prohibit } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
@@ -59,8 +60,8 @@ export const RejectByProviderButton: FunctionComponent<
       className="btn btn-sm btn-secondary"
       title={translate('Reject')}
       action={mutate}
-      disabled={isLoading}
-      icon={isLoading ? 'fa fa-spinner fa-spin' : 'fa fa-ban'}
+      pending={isLoading}
+      iconNode={<Prohibit />}
     />
   );
 };

@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useCallback, FC } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -28,7 +29,7 @@ export const UserAgreementDeleteButton: FC<{ userAgreement }> = ({
     <ActionButton
       title={translate('Delete')}
       action={callback}
-      icon="fa fa-trash"
+      iconNode={<Trash />}
     />
   );
 };

@@ -3,6 +3,7 @@ import { useState, FunctionComponent } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -48,7 +49,7 @@ export const PendingReviewDialog: FunctionComponent<{
         >
           {submitting && (
             <>
-              <i className="fa fa-spinner fa-spin me-1" />{' '}
+              <LoadingSpinnerIcon className="me-1" />{' '}
             </>
           )}
           {translate('Confirming that data is correct')}

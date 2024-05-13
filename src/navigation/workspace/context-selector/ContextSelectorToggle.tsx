@@ -1,3 +1,4 @@
+import { CaretRight } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -70,7 +71,12 @@ export const ContextSelectorToggle: FunctionComponent = () => {
               )}
             </div>
             <div className="d-flex align-items-center">
-              <i className="fa fa-angle-right display-5 fw-light"></i>
+              <span
+                className="display-6 fw-light text-gray-600"
+                data-cy="context-selector-toggle"
+              >
+                <CaretRight weight="bold" />
+              </span>
             </div>
           </div>
         </div>

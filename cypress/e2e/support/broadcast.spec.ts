@@ -73,7 +73,7 @@ describe('Broadcast', () => {
 
   it('should refresh button work correctly', () => {
     cy.wait('@getNotifications').then(() => {
-      cy.get('.fa.fa-refresh.fs-4').click();
+      cy.get('[data-cy=loading-spinner').click();
     });
   });
 });

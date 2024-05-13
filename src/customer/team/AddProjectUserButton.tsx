@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -36,7 +37,7 @@ export const AddProjectUserButton: React.FC<AddProjectUserButtonProps> = ({
     <ActionButton
       action={callback}
       title={translate('Add')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
     />
   );
 };

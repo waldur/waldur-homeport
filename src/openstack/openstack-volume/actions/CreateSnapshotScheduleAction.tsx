@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -19,7 +20,7 @@ export const CreateSnapshotScheduleAction: FC<VolumeActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Create')}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
     modalComponent={CreateSnapshotScheduleDialog}
     resource={resource}
     validators={validators}

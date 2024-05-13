@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -23,7 +24,7 @@ const PureResourceImportButton: React.FC<ResourceImportButtonProps> = (
   <ActionButton
     title={translate('Import resource')}
     action={props.openDialog}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
   />
 );
 

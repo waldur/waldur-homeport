@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -16,7 +17,7 @@ interface SubmitJobActionProps {
 export const SubmitJobAction: FC<SubmitJobActionProps> = ({ resource }) => (
   <DialogActionButton
     title={translate('Submit job')}
-    icon="fa fa-plus"
+    iconNode={<PlusCircle />}
     modalComponent={SubmitJobDialog}
     resource={resource}
   />

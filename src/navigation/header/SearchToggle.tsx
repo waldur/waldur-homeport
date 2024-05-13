@@ -1,3 +1,4 @@
+import { CaretDown, MagnifyingGlass, X } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { UISref } from '@uirouter/react';
 import classNames from 'classnames';
@@ -9,42 +10,11 @@ import { getFormValues } from 'redux-form';
 
 import { get } from '@waldur/core/api';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
-import { SearchIcon } from '@waldur/core/svg/SearchIcon';
 import { translate } from '@waldur/i18n';
 
 import { SearchFilters } from './SearchFilters';
 
 const iconEmpty = require('./file-search.svg');
-
-const CloseIcon = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <rect
-      opacity="0.5"
-      x="6"
-      y="17.3137"
-      width="16"
-      height="2"
-      rx="1"
-      transform="rotate(-45 6 17.3137)"
-      fill="currentColor"
-    ></rect>
-    <rect
-      x="7.41422"
-      y="6"
-      width="16"
-      height="2"
-      rx="1"
-      transform="rotate(45 7.41422 6)"
-      fill="currentColor"
-    ></rect>
-  </svg>
-);
 
 const useSearch = () => {
   const [query, setQuery] = useState('');
@@ -142,7 +112,7 @@ const SearchPopover = () => {
             name="fakepasswordremembered"
           />
           <span className="svg-icon svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 translate-middle-y ms-0">
-            <SearchIcon />
+            <MagnifyingGlass />
           </span>
           <input
             ref={refSearch}
@@ -169,8 +139,8 @@ const SearchPopover = () => {
             )}
             onClick={() => setQuery('')}
           >
-            <span className="svg-icon svg-icon-2 svg-icon-lg-1 me-0">
-              <CloseIcon />
+            <span className="svg-icon svg-icon-2 svg-icon-lg-1 me-0 text-gray-400">
+              <X />
             </span>
           </button>
 
@@ -191,7 +161,7 @@ const SearchPopover = () => {
               }}
               title="Show more search options"
             >
-              <i className="fa fa-chevron-down"></i>
+              <CaretDown size={30} />
             </button>
           </div>
         </form>
@@ -283,7 +253,7 @@ export const SearchToggle = () => (
     >
       <div className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px">
         <span className="svg-icon svg-icon-1">
-          <SearchIcon />
+          <MagnifyingGlass />
         </span>
       </div>
     </div>

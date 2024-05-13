@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -45,7 +46,7 @@ export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
         )
       }
       title={translate('Add member')}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       disabled={!canAddUser}
     />
   );

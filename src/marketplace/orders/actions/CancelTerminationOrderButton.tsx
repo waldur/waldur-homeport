@@ -1,3 +1,4 @@
+import { Prohibit } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -43,8 +44,8 @@ export const CancelTerminationOrderButton = ({
         className="btn btn-sm btn-secondary me-2"
         title={translate('Cancel')}
         action={mutate}
-        disabled={isLoading}
-        icon={isLoading ? 'fa fa-spinner fa-spin' : 'fa fa-cancel'}
+        pending={isLoading}
+        iconNode={<Prohibit />}
       />
     );
   }

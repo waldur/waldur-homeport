@@ -1,3 +1,4 @@
+import { Prohibit } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -42,7 +43,7 @@ export const GroupInvitationCancelButton: FunctionComponent<
     <ActionButton
       action={callback}
       title={translate('Cancel')}
-      icon="fa fa-ban"
+      iconNode={<Prohibit />}
       className="btn-secondary"
     />
   );

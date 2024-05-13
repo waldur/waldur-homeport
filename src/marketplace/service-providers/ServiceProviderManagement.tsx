@@ -123,12 +123,8 @@ class ServiceProviderWrapper extends Component<
                   this.state.serviceProvider,
                 )
               }
+              pending={this.props.secretCode.generating}
               className="btn btn-primary"
-              icon={
-                this.props.secretCode.generating
-                  ? 'fa fa-spinner fa-spin'
-                  : undefined
-              }
             />
           </div>
         </div>
@@ -146,9 +142,7 @@ class ServiceProviderWrapper extends Component<
               title={translate('Register as service provider')}
               action={this.registerServiceProvider}
               className="btn btn-primary"
-              icon={
-                this.state.registering ? 'fa fa-spinner fa-spin' : undefined
-              }
+              pending={this.state.registering}
             />
           </div>
         </div>

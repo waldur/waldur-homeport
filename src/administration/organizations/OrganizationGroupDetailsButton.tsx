@@ -1,3 +1,4 @@
+import { Eye } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -30,7 +31,7 @@ export const OrganizationGroupDetailsButton: FunctionComponent<
   return (
     <ActionButton
       title={translate('Details')}
-      icon="fa fa-eye"
+      iconNode={<Eye />}
       action={() =>
         dispatch(openOrganizationGroupsDialog(props.organizationGroup))
       }

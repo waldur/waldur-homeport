@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -18,7 +19,7 @@ const ProjectCreateDialog = lazyComponent(
 
 interface ProjectCreateButtonProps {
   title?: string;
-  icon?: string;
+  icon?: boolean;
   variant?: string;
   className?: string;
 }
@@ -26,7 +27,7 @@ interface ProjectCreateButtonProps {
 export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
   title = translate('Add project'),
   variant = 'primary',
-  icon = 'fa fa-plus',
+  icon = true,
   className,
 }) => {
   const customer = useSelector(getCustomer);
@@ -64,7 +65,7 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
             )
           : undefined
       }
-      icon={icon}
+      iconNode={icon ? <PlusCircle /> : null}
       variant={variant}
       disabled={disabled}
       className={className}

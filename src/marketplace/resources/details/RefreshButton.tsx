@@ -1,5 +1,7 @@
+import { ArrowClockwise } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
 export const RefreshButton = ({ refetch, isLoading }) => {
@@ -10,9 +12,13 @@ export const RefreshButton = ({ refetch, isLoading }) => {
       size="sm"
       onClick={!isLoading && refetch}
     >
-      <i
-        className={'fa ' + (isLoading ? 'fa-repeat fa-spin' : 'fa-repeat')}
-      ></i>
+      {isLoading ? (
+        <LoadingSpinnerIcon />
+      ) : (
+        <span className="svg-icon">
+          <ArrowClockwise />
+        </span>
+      )}
       {translate('Refresh')}
     </Button>
   );

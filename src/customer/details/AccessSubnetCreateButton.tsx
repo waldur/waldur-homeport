@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -30,7 +31,7 @@ export const AccessSubnetCreateButton = ({ refetch, customer_uuid }) => {
     <ActionButton
       title={translate('Add access subnet')}
       action={openFormDialog}
-      icon="fa fa-plus"
+      iconNode={<PlusCircle />}
       variant="primary"
     />
   );
