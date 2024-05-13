@@ -73,7 +73,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
       <BrandName />
       <ContextSelectorToggle />
 
-      <div className="aside-menu flex-column-fluid overflow-hidden">
+      <div className="aside-menu flex-grow-1 overflow-hidden">
         <div
           className="hover-scroll-overlay-y my-5 my-lg-5"
           id="kt_aside_menu_wrapper"
