@@ -36,14 +36,6 @@ export const CallOfferingsCard: FC<CallOfferingsCardProps> = (props) => {
           render: ({ row }) => <>{renderFieldOrDash(row.provider_name)}</>,
         },
         {
-          title: translate('Min allocation'),
-          render: () => <>500TB</>,
-        },
-        {
-          title: translate('Max allocation'),
-          render: () => <>500TB</>,
-        },
-        {
           title: translate('State'),
           render: CallOfferingStateField,
         },
