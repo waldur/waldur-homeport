@@ -15,9 +15,8 @@ export const TableButtons: FunctionComponent<TableProps> = (props) => {
   const [dropdownActions, setDropdownActions] = useState<TableDropdownItem[]>(
     [],
   );
-  const showExportButton = props.rows?.length > 0 && props.enableExport;
   const showExportInDropdown = Boolean(
-    showExportButton && props.actions && props.dropdownActions?.length,
+    props.enableExport && props.actions && props.dropdownActions?.length,
   );
 
   useEffect(() => {
@@ -70,7 +69,7 @@ export const TableButtons: FunctionComponent<TableProps> = (props) => {
           <TableMoreActions actions={dropdownActions} />
         ) : (
           <>
-            {showExportButton && <TableExportButton {...props} />}
+            {props.enableExport && <TableExportButton {...props} />}
             {dropdownActions.length > 0 && (
               <TableMoreActions actions={dropdownActions} />
             )}
