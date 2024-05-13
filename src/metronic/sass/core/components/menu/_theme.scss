@@ -126,10 +126,10 @@
 .menu-hover-primary {
   .menu-item {
     @include menu-link-hover-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
       null
     );
   }
@@ -137,23 +137,35 @@
 
 .menu-show-primary {
   .menu-item {
-    @include menu-link-show-state($primary, $primary, $primary, $primary, null);
+    @include menu-link-show-state(
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      null
+    );
   }
 }
 
 .menu-here-primary {
   .menu-item {
-    @include menu-link-here-state($primary, $primary, $primary, $primary, null);
+    @include menu-link-here-state(
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      null
+    );
   }
 }
 
 .menu-active-primary {
   .menu-item {
     @include menu-link-active-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
       null
     );
   }
@@ -162,19 +174,31 @@
 .menu-state-primary {
   .menu-item {
     @include menu-link-hover-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
       null
     );
-    @include menu-link-show-state($primary, $primary, $primary, $primary, null);
-    @include menu-link-here-state($primary, $primary, $primary, $primary, null);
+    @include menu-link-show-state(
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      null
+    );
+    @include menu-link-here-state(
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      null
+    );
     @include menu-link-active-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
       null
     );
   }
@@ -188,7 +212,7 @@
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
-      $primary
+      $primary-700
     );
   }
 }
@@ -200,7 +224,7 @@
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
-      $primary
+      $primary-700
     );
   }
 }
@@ -212,7 +236,7 @@
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
-      $primary
+      $primary-700
     );
   }
 }
@@ -224,7 +248,7 @@
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
-      $primary
+      $primary-700
     );
   }
 }
@@ -236,28 +260,28 @@
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
-      $primary
+      $primary-700
     );
     @include menu-link-show-state(
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
-      $primary
+      $primary-700
     );
     @include menu-link-here-state(
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
-      $primary
+      $primary-700
     );
     @include menu-link-active-state(
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
-      $primary
+      $primary-700
     );
   }
 }
@@ -266,11 +290,11 @@
 .menu-show-bg-light-primary {
   .menu-item {
     @include menu-link-show-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
-      $primary-light
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-50
     );
   }
 }
@@ -278,11 +302,11 @@
 .menu-here-bg-light-primary {
   .menu-item {
     @include menu-link-here-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
-      $primary-light
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-50
     );
   }
 }
@@ -290,11 +314,11 @@
 .menu-hover-bg-light-primary {
   .menu-item {
     @include menu-link-hover-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
-      $primary-light
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-50
     );
   }
 }
@@ -302,11 +326,11 @@
 .menu-active-bg-light-primary {
   .menu-item {
     @include menu-link-active-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
-      $primary-light
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-50
     );
   }
 }
@@ -314,32 +338,32 @@
 .menu-state-bg-light-primary {
   .menu-item {
     @include menu-link-show-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
-      $primary-light
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-50
     );
     @include menu-link-here-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
-      $primary-light
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-50
     );
     @include menu-link-hover-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
-      $primary-light
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-50
     );
     @include menu-link-active-state(
-      $primary,
-      $primary,
-      $primary,
-      $primary,
-      $primary-light
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-700,
+      $primary-50
     );
   }
 }
@@ -429,34 +453,34 @@
 // Primary title states
 .menu-hover-title-primary {
   .menu-item {
-    @include menu-link-hover-state($primary, null, null, null, null);
+    @include menu-link-hover-state($primary-700, null, null, null, null);
   }
 }
 
 .menu-here-title-primary {
   .menu-item {
-    @include menu-link-here-state($primary, null, null, null, null);
+    @include menu-link-here-state($primary-700, null, null, null, null);
   }
 }
 
 .menu-show-title-primary {
   .menu-item {
-    @include menu-link-show-state($primary, null, null, null, null);
+    @include menu-link-show-state($primary-700, null, null, null, null);
   }
 }
 
 .menu-active-title-primary {
   .menu-item {
-    @include menu-link-active-state($primary, null, null, null, null);
+    @include menu-link-active-state($primary-700, null, null, null, null);
   }
 }
 
 .menu-state-title-primary {
   .menu-item {
-    @include menu-link-hover-state($primary, null, null, null, null);
-    @include menu-link-here-state($primary, null, null, null, null);
-    @include menu-link-show-state($primary, null, null, null, null);
-    @include menu-link-active-state($primary, null, null, null, null);
+    @include menu-link-hover-state($primary-700, null, null, null, null);
+    @include menu-link-here-state($primary-700, null, null, null, null);
+    @include menu-link-show-state($primary-700, null, null, null, null);
+    @include menu-link-active-state($primary-700, null, null, null, null);
   }
 }
 
@@ -464,37 +488,37 @@
 .menu-hover-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, $primary, null, null, null);
+    @include menu-link-hover-state(null, $primary-700, null, null, null);
   }
 }
 
 .menu-here-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-here-state(null, $primary, null, null, null);
+    @include menu-link-here-state(null, $primary-700, null, null, null);
   }
 }
 
 .menu-show-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-show-state(null, $primary, null, null, null);
+    @include menu-link-show-state(null, $primary-700, null, null, null);
   }
 }
 
 .menu-active-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-active-state(null, $primary, null, null, null);
+    @include menu-link-active-state(null, $primary-700, null, null, null);
   }
 }
 
 .menu-state-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, $primary, null, null, null);
-    @include menu-link-show-state(null, $primary, null, null, null);
-    @include menu-link-active-state(null, $primary, null, null, null);
+    @include menu-link-hover-state(null, $primary-700, null, null, null);
+    @include menu-link-show-state(null, $primary-700, null, null, null);
+    @include menu-link-active-state(null, $primary-700, null, null, null);
   }
 }
 
@@ -502,37 +526,37 @@
 .menu-hover-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, null, $primary, null, null);
+    @include menu-link-hover-state(null, null, $primary-700, null, null);
   }
 }
 
 .menu-show-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-show-state(null, null, $primary, null, null);
+    @include menu-link-show-state(null, null, $primary-700, null, null);
   }
 }
 
 .menu-here-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-here-state(null, null, $primary, null, null);
+    @include menu-link-here-state(null, null, $primary-700, null, null);
   }
 }
 
 .menu-active-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-active-state(null, null, $primary, null, null);
+    @include menu-link-active-state(null, null, $primary-700, null, null);
   }
 }
 
 .menu-state-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, null, $primary, null, null);
-    @include menu-link-show-state(null, null, $primary, null, null);
-    @include menu-link-active-state(null, null, $primary, null, null);
+    @include menu-link-hover-state(null, null, $primary-700, null, null);
+    @include menu-link-show-state(null, null, $primary-700, null, null);
+    @include menu-link-active-state(null, null, $primary-700, null, null);
   }
 }
 
@@ -540,37 +564,37 @@
 .menu-hover-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, null, null, $primary, null);
+    @include menu-link-hover-state(null, null, null, $primary-700, null);
   }
 }
 
 .menu-here-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-here-state(null, null, null, $primary, null);
+    @include menu-link-here-state(null, null, null, $primary-700, null);
   }
 }
 
 .menu-show-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-show-state(null, null, null, $primary, null);
+    @include menu-link-show-state(null, null, null, $primary-700, null);
   }
 }
 
 .menu-active-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-active-state(null, null, null, $primary, null);
+    @include menu-link-active-state(null, null, null, $primary-700, null);
   }
 }
 
 .menu-state-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-    @include menu-link-hover-state(null, null, null, $primary, null);
-    @include menu-link-show-state(null, null, null, $primary, null);
-    @include menu-link-active-state(null, null, null, $primary, null);
+    @include menu-link-hover-state(null, null, null, $primary-700, null);
+    @include menu-link-show-state(null, null, null, $primary-700, null);
+    @include menu-link-active-state(null, null, null, $primary-700, null);
   }
 }
 

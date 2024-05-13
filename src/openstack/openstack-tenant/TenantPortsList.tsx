@@ -9,12 +9,12 @@ import { Port } from '../types';
 
 import { ExpandablePortRow } from './ExpandablePortRow';
 
-export const TenantPortsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      tenant_uuid: resource.uuid,
+      tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
         'url',
@@ -42,7 +42,7 @@ export const TenantPortsList: FunctionComponent<{ resource }> = ({
       ],
       o: 'network_name',
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstack-ports',

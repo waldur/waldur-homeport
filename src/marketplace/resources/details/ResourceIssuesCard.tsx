@@ -1,4 +1,4 @@
-import { UISref } from '@uirouter/react';
+import { UISref, useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback } from 'react';
 import { Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,10 +29,11 @@ const CreateIssueButton = ({ resource }) => {
   );
 };
 
-export const ResourceIssuesCard = ({ resource, state }) => {
+export const ResourceIssuesCard = ({ resource }) => {
+  const { state } = useCurrentStateAndParams();
   const showIssues = useSelector(hasSupport);
   return showIssues ? (
-    <Card className="mb-10" id="tickets">
+    <Card id="tickets">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Tickets')}</h3>

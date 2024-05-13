@@ -11,14 +11,14 @@ import { useTable } from '@waldur/table/utils';
 
 import { CreateSnapshotAction } from './actions/CreateSnapshotAction';
 
-export const VolumeSnapshotsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const VolumeSnapshotsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      source_volume_uuid: resource.uuid,
+      source_volume_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
 
   const props = useTable({
@@ -62,7 +62,7 @@ export const VolumeSnapshotsList: FunctionComponent<{ resource }> = ({
       ]}
       verboseName={translate('snapshots')}
       hasQuery={false}
-      actions={<CreateSnapshotAction resource={resource} />}
+      actions={<CreateSnapshotAction resource={resourceScope} />}
     />
   );
 };

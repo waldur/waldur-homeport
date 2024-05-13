@@ -9,14 +9,14 @@ import { CatalogCreateButton } from './CatalogCreateButton';
 import { CatalogDeleteButton } from './CatalogDeleteButton';
 
 const exportRow = (row) => [row.name, row.description, row.catalog_url];
-export const ClusterCatalogList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterCatalogList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'rancher-catalogs',
@@ -33,9 +33,9 @@ export const ClusterCatalogList: FunctionComponent<{ resource }> = ({
           <Link
             state="rancher-catalog-details"
             params={{
-              clusterUuid: resource.uuid,
+              clusterUuid: resourceScope.uuid,
               catalogUuid: row.uuid,
-              uuid: resource.project_uuid,
+              uuid: resourceScope.project_uuid,
             }}
             label={row.name}
           />
@@ -50,14 +50,14 @@ export const ClusterCatalogList: FunctionComponent<{ resource }> = ({
         render: ({ row }) => <>{row.catalog_url}</>,
       },
     ],
-    [resource],
+    [resourceScope],
   );
   return (
     <Table
       {...props}
       columns={columns}
       verboseName={translate('catalogues')}
-      actions={<CatalogCreateButton cluster={resource} />}
+      actions={<CatalogCreateButton cluster={resourceScope} />}
       hoverableRow={({ row }) =>
         row.scope_type === 'cluster' ? (
           <CatalogDeleteButton catalog={row} />

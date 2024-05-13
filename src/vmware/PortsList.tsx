@@ -10,12 +10,14 @@ import { useTable } from '@waldur/table/utils';
 
 import { CreatePortAction } from './actions/CreatePortAction';
 
-export const PortsList: FunctionComponent<{ resource }> = ({ resource }) => {
+export const PortsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
+}) => {
   const filter = useMemo(
     () => ({
-      vm_uuid: resource.uuid,
+      vm_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
 
   const props = useTable({
@@ -52,7 +54,7 @@ export const PortsList: FunctionComponent<{ resource }> = ({ resource }) => {
         },
       ]}
       verboseName={translate('ports')}
-      actions={<CreatePortAction resource={resource} />}
+      actions={<CreatePortAction resource={resourceScope} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hoverableRow={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />

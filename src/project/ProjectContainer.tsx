@@ -24,7 +24,7 @@ const PageHero = ({ project }) => {
   );
 };
 
-export const ProjectContainer = (props) => {
+const ProjectContainerWithHero = (props) => {
   const project = useSelector(getProject);
 
   usePageHero(project ? <PageHero project={project} /> : null);
@@ -33,4 +33,13 @@ export const ProjectContainer = (props) => {
     return null;
   }
   return <UIView {...props} />;
+};
+
+export const ProjectContainer = (props) => {
+  const { state } = useCurrentStateAndParams();
+
+  if (state.data?.skipHero) {
+    return <UIView {...props} />;
+  }
+  return <ProjectContainerWithHero {...props} />;
 };

@@ -11,12 +11,14 @@ import { useTable } from '@waldur/table/utils';
 
 import { CreateDiskAction } from './actions/CreateDiskAction';
 
-export const DisksList: FunctionComponent<{ resource }> = ({ resource }) => {
+export const DisksList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
+}) => {
   const filter = useMemo(
     () => ({
-      vm_uuid: resource.uuid,
+      vm_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const tableProps = useTable({
     table: 'vmware-disks',
@@ -49,7 +51,7 @@ export const DisksList: FunctionComponent<{ resource }> = ({ resource }) => {
       ]}
       verboseName={translate('disks')}
       hasQuery={false}
-      actions={<CreateDiskAction resource={resource} />}
+      actions={<CreateDiskAction resource={resourceScope} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hoverableRow={({ row }) => (
         <ActionButtonResource url={row.url} refetch={tableProps.fetch} />

@@ -11,20 +11,22 @@ import { useTable } from '@waldur/table/utils';
 import { INSTANCE_TYPE } from '../constants';
 import { CreateBackupAction } from '../openstack-instance/actions/CreateBackupAction';
 
-export const BackupsList: FunctionComponent<{ resource }> = ({ resource }) => {
+export const BackupsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
+}) => {
   const filter = useMemo(() => {
     const fields = {
       [INSTANCE_TYPE]: 'instance',
       'OpenStackTenant.BackupSchedule': 'backup_schedule',
     };
-    const { resource_type, url } = resource;
+    const { resource_type, url } = resourceScope;
     const field = fields[resource_type];
     if (field) {
       return {
         [field]: url,
       };
     }
-  }, [resource]);
+  }, [resourceScope]);
   const props = useTable({
     table: 'openstacktenant-backups',
     fetchData: createFetcher('openstacktenant-backups'),
@@ -63,7 +65,7 @@ export const BackupsList: FunctionComponent<{ resource }> = ({ resource }) => {
       ]}
       verboseName={translate('VM snapshots')}
       hasQuery={false}
-      actions={<CreateBackupAction resource={resource} />}
+      actions={<CreateBackupAction resource={resourceScope} />}
     />
   );
 };

@@ -16,14 +16,14 @@ const ApplicationActions = ({ row }) => (
   </ButtonGroup>
 );
 
-export const ClusterApplicationsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterApplicationsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'rancher-apps',

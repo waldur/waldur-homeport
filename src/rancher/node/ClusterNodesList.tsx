@@ -13,14 +13,14 @@ import { CreateNodeAction } from '../cluster/actions/CreateNodeAction';
 
 import { NodeRoleField } from './NodeRoleField';
 
-export const ClusterNodesList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterNodesList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'rancher-nodes',
@@ -64,7 +64,7 @@ export const ClusterNodesList: FunctionComponent<{ resource }> = ({
         },
       ]}
       verboseName={translate('Kubernetes nodes')}
-      actions={<CreateNodeAction resource={resource} />}
+      actions={<CreateNodeAction resource={resourceScope} />}
       hoverableRow={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}

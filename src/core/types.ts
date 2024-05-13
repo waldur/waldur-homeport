@@ -33,6 +33,7 @@ interface DataDeclaration {
   permissions: Array<(state) => boolean>;
   useExtraTabs?: boolean;
   skipInitWorkspace?: boolean;
+  skipHero?: boolean;
 }
 
 export interface StateDeclaration extends BaseStateDeclaration {

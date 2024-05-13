@@ -12,7 +12,7 @@ import { Resource } from '../types';
 interface ResourceSpecGroupCardProps {
   tabs: TabSpec[];
   title: string;
-  scope;
+  resourceScope;
   resource: Resource;
   tabKey: string;
   index?: number;
@@ -42,8 +42,8 @@ export const ResourceSpecGroupCard: FunctionComponent<
       </Card.Header>
       <Card.Body className="p-0 min-h-550px">
         <tab.component
-          resource={props.scope}
-          marketplaceResource={props.resource}
+          resource={props.resource}
+          resourceScope={props.resourceScope}
           title={tab.title}
           initialPageSize={5}
           showPageSizeSelector

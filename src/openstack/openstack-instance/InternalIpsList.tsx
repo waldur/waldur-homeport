@@ -10,19 +10,19 @@ import { UpdateInternalIpsAction } from './actions/update-internal-ips/UpdateInt
 import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
 import { formatAddressList } from './utils';
 
-export const InternalIpsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const InternalIpsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const fetchData = useCallback(
     () =>
       getById<VirtualMachine>(
         '/openstacktenant-instances/',
-        resource.uuid,
+        resourceScope.uuid,
       ).then((vm) => ({
         rows: vm.internal_ips_set,
         resultCount: vm.internal_ips_set.length,
       })),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstack-internal-ips',
@@ -52,14 +52,14 @@ export const InternalIpsList: FunctionComponent<{ resource }> = ({
           title: translate('Actions'),
           render: ({ row }) => (
             <SetAllowedAddressPairsButton
-              instance={resource}
+              instance={resourceScope}
               internalIp={row}
             />
           ),
         },
       ]}
       verboseName={translate('internal IPs')}
-      actions={<UpdateInternalIpsAction resource={resource} />}
+      actions={<UpdateInternalIpsAction resource={resourceScope} />}
     />
   );
 };

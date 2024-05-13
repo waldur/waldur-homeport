@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FunctionComponent, useContext, useEffect } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
@@ -7,7 +7,7 @@ import { ENV } from '@waldur/configs/default';
 import { getById } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { LayoutContext } from '@waldur/navigation/context';
+import { useToolbarActions } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { showError, showSuccess } from '@waldur/store/notify';
 
@@ -53,13 +53,7 @@ export const BillingDetails: FunctionComponent = () => {
     }
   }, [error, router.stateService]);
 
-  const layoutContext = useContext(LayoutContext);
-  useEffect(() => {
-    layoutContext.setActions(<InvoiceDetailActions invoice={invoice} />);
-    return () => {
-      layoutContext.setActions(null);
-    };
-  }, [invoice, layoutContext]);
+  useToolbarActions(<InvoiceDetailActions invoice={invoice} />, [invoice]);
 
   const dispatch = useDispatch();
   useEffect(() => {

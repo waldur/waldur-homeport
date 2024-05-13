@@ -9,14 +9,14 @@ import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-export const TenantSnapshotsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const TenantSnapshotsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      service_settings_uuid: resource.child_settings,
+      service_settings_uuid: resourceScope.child_settings,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstacktenant-snapshots',

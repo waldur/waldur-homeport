@@ -7,12 +7,12 @@ import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-export const TenantSubnetsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      tenant_uuid: resource.uuid,
+      tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
         'url',
@@ -38,7 +38,7 @@ export const TenantSubnetsList: FunctionComponent<{ resource }> = ({
         'project_uuid',
       ],
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstack-subnets',

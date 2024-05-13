@@ -11,10 +11,10 @@ import { UpdateSecurityGroupsButton } from './actions/update-security-groups/Upd
 import { ManageSecurityGroupsButton } from './ManageSecurityGroupsButton';
 
 interface OwnProps {
-  resource: {
+  resourceScope: {
     security_groups: SecurityGroup[];
   };
-  marketplaceResource;
+  resource;
   refetch?(): void;
   isLoading?: boolean;
 }
@@ -31,18 +31,18 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
         </Card.Title>
         <div className="card-toolbar">
           <UpdateSecurityGroupsButton
-            resource={props.resource}
+            resource={props.resourceScope}
             refetch={props.refetch}
           />
-          <ManageSecurityGroupsButton resource={props.marketplaceResource} />
+          <ManageSecurityGroupsButton resource={props.resource} />
         </div>
       </Card.Header>
       <Card.Body>
-        {props.resource.security_groups.length === 0 &&
+        {props.resourceScope.security_groups.length === 0 &&
           translate('Instance does not have any security groups yet.')}
-        {props.resource.security_groups.length > 0 && (
+        {props.resourceScope.security_groups.length > 0 && (
           <OpenStackSecurityGroupsTable
-            securityGroups={props.resource.security_groups}
+            securityGroups={props.resourceScope.security_groups}
           />
         )}
       </Card.Body>

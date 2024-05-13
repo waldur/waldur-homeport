@@ -4,6 +4,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
 import { IssueLinkRenderer } from '@waldur/marketplace/orders/list/IssueLinkRenderer';
+import { Resource } from '@waldur/marketplace/resources/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
@@ -13,7 +14,7 @@ import { OrderStateCell } from './OrderStateCell';
 import { OrderTypeCell } from './OrderTypeCell';
 
 interface ResourceOrdersProps {
-  resource_uuid: string;
+  resource: Resource;
   id?: string;
 }
 
@@ -22,13 +23,13 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
 ) => {
   const filter = useMemo(
     () => ({
-      resource_uuid: props.resource_uuid,
+      resource_uuid: props.resource.uuid,
       o: '-created',
     }),
-    [props.resource_uuid],
+    [props.resource.uuid],
   );
   const tableProps = useTable({
-    table: `ResourceOrders-${props.resource_uuid}`,
+    table: `ResourceOrders-${props.resource.uuid}`,
     fetchData: createFetcher('marketplace-orders'),
     filter,
   });

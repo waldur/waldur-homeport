@@ -25,7 +25,7 @@ export const PublicDashboardHero2: FC<
   PropsWithChildren<PublicDashboardHero2Props>
 > = (props) => {
   return (
-    <div className="public-dashboard-hero container-xxl mt-6 mb-8">
+    <div className="public-dashboard-hero">
       <Row
         className={classNames('public-dashboard-hero-body', props.className)}
       >

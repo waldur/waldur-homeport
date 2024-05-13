@@ -13,7 +13,7 @@ interface ResourceOptionsCardProps {
   resource: Resource;
   offering: Offering;
   refetch?;
-  loading?;
+  isLoading?;
 }
 
 export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
@@ -22,11 +22,11 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
     return null;
   }
   return (
-    <Card className="mb-10" id="resource-options">
+    <Card id="resource-options">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           {translate('Options')}
-          <RefreshButton refetch={props.refetch} loading={props.loading} />
+          <RefreshButton refetch={props.refetch} loading={props.isLoading} />
         </div>
       </div>
       <Card.Body>

@@ -7,14 +7,14 @@ import { useTable } from '@waldur/table/utils';
 
 import { WorkloadActions } from './WorkloadActions';
 
-export const ClusterWorkloadsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterWorkloadsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'rancher-workloads',

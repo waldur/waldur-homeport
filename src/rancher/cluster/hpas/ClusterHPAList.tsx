@@ -13,14 +13,14 @@ import { HPACreateButton } from './HPACreateButton';
 import { HPADeleteButton } from './HPADeleteButton';
 import { HPAUpdateButton } from './HPAUpdateButton';
 
-export const ClusterHPAList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterHPAList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
 
   const props = useTable({
@@ -85,7 +85,7 @@ export const ClusterHPAList: FunctionComponent<{ resource }> = ({
         },
       ]}
       verboseName={translate('horizontal pod autoscalers')}
-      actions={<HPACreateButton cluster={resource} />}
+      actions={<HPACreateButton cluster={resourceScope} />}
     />
   );
 };

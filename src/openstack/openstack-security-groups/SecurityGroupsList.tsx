@@ -12,12 +12,12 @@ import { PullSecurityGroupsAction } from '../openstack-tenant/actions/PullSecuri
 
 import { SecurityGroupExpandableRow } from './SecurityGroupExpandableRow';
 
-export const SecurityGroupsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      tenant_uuid: resource.uuid,
+      tenant_uuid: resourceScope.uuid,
       field: [
         'name',
         'description',
@@ -31,7 +31,7 @@ export const SecurityGroupsList: FunctionComponent<{ resource }> = ({
         'resource_type',
       ],
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstack-security-groups',
@@ -72,10 +72,10 @@ export const SecurityGroupsList: FunctionComponent<{ resource }> = ({
       actions={
         <ButtonGroup>
           <CreateSecurityGroupAction
-            resource={resource}
+            resource={resourceScope}
             refetch={props.fetch}
           />
-          <PullSecurityGroupsAction resource={resource} />
+          <PullSecurityGroupsAction resource={resourceScope} />
         </ButtonGroup>
       }
     />

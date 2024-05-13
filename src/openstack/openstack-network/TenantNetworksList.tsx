@@ -10,12 +10,12 @@ import { useTable } from '@waldur/table/utils';
 
 import { CreateNetworkAction } from '../openstack-tenant/actions/CreateNetworkAction';
 
-export const TenantNetworksList: FunctionComponent<{ resource }> = ({
-  resource,
+export const TenantNetworksList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      tenant_uuid: resource.uuid,
+      tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
         'url',
@@ -35,7 +35,7 @@ export const TenantNetworksList: FunctionComponent<{ resource }> = ({
         'service_settings_error_message',
       ],
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstack-networks',
@@ -67,7 +67,7 @@ export const TenantNetworksList: FunctionComponent<{ resource }> = ({
         },
       ]}
       verboseName={translate('networks')}
-      actions={<CreateNetworkAction resource={resource} />}
+      actions={<CreateNetworkAction resource={resourceScope} />}
       hoverableRow={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}

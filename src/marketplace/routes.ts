@@ -164,6 +164,7 @@ const getResourceDetailsParams = {
   data: {
     useExtraTabs: true,
     skipBreadcrumb: true,
+    skipHero: true,
   },
 };
 

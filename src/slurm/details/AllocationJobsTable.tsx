@@ -8,8 +8,8 @@ import { useTable } from '@waldur/table/utils';
 
 import { SubmitJobAction } from './SubmitJobAction';
 
-export const AllocationJobsTable: FunctionComponent<{ scope }> = ({
-  scope,
+export const AllocationJobsTable: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const columns = [
     {
@@ -31,9 +31,9 @@ export const AllocationJobsTable: FunctionComponent<{ scope }> = ({
   ];
   const filter = useMemo(
     () => ({
-      allocation_uuid: scope.uuid,
+      allocation_uuid: resourceScope.uuid,
     }),
-    [scope],
+    [resourceScope],
   );
   const tableProps = useTable({
     table: 'AllocationJobsTable',
@@ -47,7 +47,7 @@ export const AllocationJobsTable: FunctionComponent<{ scope }> = ({
       title={translate('Jobs')}
       columns={columns}
       verboseName={translate('jobs')}
-      actions={<SubmitJobAction resource={scope} />}
+      actions={<SubmitJobAction resource={resourceScope} />}
     />
   );
 };

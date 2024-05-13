@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useContext, useEffect } from 'react';
+import {
+  DependencyList,
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+} from 'react';
 
 import { Tab } from './Tab';
 
@@ -33,12 +39,28 @@ export const useFullPage = () => {
   }, [layoutContext]);
 };
 
-export const usePageHero = (component: ReactNode) => {
+export const usePageHero = (
+  component: ReactNode,
+  deps: DependencyList = [],
+) => {
   const layoutContext = useContext(LayoutContext);
   useEffect(() => {
     layoutContext.setPageHero(component);
     return () => {
       layoutContext.setPageHero(null);
     };
-  }, [layoutContext]);
+  }, [layoutContext, ...deps]);
+};
+
+export const useToolbarActions = (
+  component: ReactNode,
+  deps: DependencyList = [],
+) => {
+  const layoutContext = useContext(LayoutContext);
+  useEffect(() => {
+    layoutContext.setActions(component);
+    return () => {
+      layoutContext.setActions(null);
+    };
+  }, [layoutContext, ...deps]);
 };
