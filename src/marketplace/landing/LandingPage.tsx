@@ -49,11 +49,9 @@ export const LandingPage: FC<{}> = () => {
       </LandingHeroSection>
       <div className="container-xxl my-20">
         <CategoriesList {...categories} />
-        <h2 className="mb-10 text-center">{translate('Featured offerings')}</h2>
-        <OfferingsGroup {...offerings} />
       </div>
       <div className="container-xxl mb-20">
-        <h2 className="mb-10 text-center">{translate('Recent offerings')}</h2>
+        <h2 className="mb-10">{translate('Latest offerings')}</h2>
         <OfferingsGroup {...offerings} />
       </div>
     </div>
