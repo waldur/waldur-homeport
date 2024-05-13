@@ -1,6 +1,12 @@
 // WARNING: This file is auto-generated from src/waldur_core/core/management/commands/print_events_enums.py
 // Do not edit it manually. All manual changes would be overridden.
 
+export const Access_subnetsEnum = {
+  access_subnet_creation_succeeded: 'access_subnet_creation_succeeded',
+  access_subnet_deletion_succeeded: 'access_subnet_deletion_succeeded',
+  access_subnet_update_succeeded: 'access_subnet_update_succeeded',
+};
+
 export const AuthEnum = {
   auth_logged_in_with_username: 'auth_logged_in_with_username',
   auth_logged_out: 'auth_logged_out',
