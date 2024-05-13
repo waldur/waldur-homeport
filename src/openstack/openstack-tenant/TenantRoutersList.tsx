@@ -8,12 +8,12 @@ import { useTable } from '@waldur/table/utils';
 
 import { SetRoutersButton } from './SetRoutersButton';
 
-export const TenantRoutersList: FunctionComponent<{ resource }> = ({
-  resource,
+export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      tenant_uuid: resource.uuid,
+      tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
         'url',
@@ -33,7 +33,7 @@ export const TenantRoutersList: FunctionComponent<{ resource }> = ({
         'project_uuid',
       ],
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstack-routers',

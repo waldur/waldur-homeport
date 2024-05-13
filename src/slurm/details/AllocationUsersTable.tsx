@@ -4,14 +4,14 @@ import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-export const AllocationUsersTable: FunctionComponent<{ scope }> = ({
-  scope,
+export const AllocationUsersTable: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      allocation_uuid: scope.uuid,
+      allocation_uuid: resourceScope.uuid,
     }),
-    [scope],
+    [resourceScope],
   );
   const tableProps = useTable({
     table: 'AllocationUsersTable',

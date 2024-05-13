@@ -13,14 +13,14 @@ import { useTable } from '@waldur/table/utils';
 import { VOLUME_TYPE } from '../constants';
 import { AttachVolumeAction } from '../openstack-instance/actions/AttachVolumeAction';
 
-export const InstanceVolumesList: FunctionComponent<{ resource }> = ({
-  resource,
+export const InstanceVolumesList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      instance_uuid: resource.uuid,
+      instance_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstacktenant-volumes',
@@ -57,7 +57,7 @@ export const InstanceVolumesList: FunctionComponent<{ resource }> = ({
           render: ({ row }) => <ResourceState resource={row} />,
         },
       ]}
-      actions={<AttachVolumeAction resource={resource} />}
+      actions={<AttachVolumeAction resource={resourceScope} />}
       verboseName={translate('volumes')}
       hoverableRow={({ row }) => (
         <ModalActionsRouter

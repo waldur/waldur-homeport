@@ -10,7 +10,7 @@ export const RefreshButton = ({ refetch, isLoading }) => {
       variant="outline-dark"
       className="btn-outline btn-active-secondary btn-icon-dark border-gray-400 w-100px px-2"
       size="sm"
-      onClick={!isLoading && refetch}
+      onClick={!isLoading ? refetch : undefined}
     >
       {isLoading ? (
         <LoadingSpinnerIcon />

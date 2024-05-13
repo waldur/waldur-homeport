@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react';
 
+import { Offering } from '@waldur/marketplace/types';
 import { TableProps } from '@waldur/table/Table';
 
 interface ResourceTab {
@@ -7,8 +8,9 @@ interface ResourceTab {
   title: string;
   component: ComponentType<
     {
-      resource: any;
-      marketplaceResource?: any;
+      resource?: any;
+      resourceScope?: any;
+      offering?: Offering;
       title?: string;
       refetch?(): void;
       isLoading?: boolean;

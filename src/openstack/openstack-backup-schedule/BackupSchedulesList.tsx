@@ -11,14 +11,14 @@ import { useTable } from '@waldur/table/utils';
 
 import { CreateBackupScheduleAction } from '../openstack-instance/actions/CreateBackupScheduleAction';
 
-export const BackupsSchedulesList: FunctionComponent<{ resource }> = ({
-  resource,
+export const BackupsSchedulesList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      instance: resource.url,
+      instance: resourceScope.url,
     }),
-    [resource],
+    [resourceScope],
   );
 
   const props = useTable({
@@ -61,7 +61,7 @@ export const BackupsSchedulesList: FunctionComponent<{ resource }> = ({
       ]}
       verboseName={translate('VM snapshot schedules')}
       hasQuery={false}
-      actions={<CreateBackupScheduleAction resource={resource} />}
+      actions={<CreateBackupScheduleAction resource={resourceScope} />}
     />
   );
 };

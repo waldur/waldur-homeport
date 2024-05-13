@@ -6,14 +6,14 @@ import { useTable } from '@waldur/table/utils';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 
-export const ClusterProjectList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterProjectList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'rancher-projects',

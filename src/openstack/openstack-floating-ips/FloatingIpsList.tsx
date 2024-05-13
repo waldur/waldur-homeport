@@ -13,12 +13,12 @@ import { INSTANCE_TYPE } from '../constants';
 import { CreateFloatingIpAction } from '../openstack-tenant/actions/CreateFloatingIpAction';
 import { PullFloatingIpsAction } from '../openstack-tenant/actions/PullFloatingIpsAction';
 
-export const FloatingIpsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      tenant_uuid: resource.uuid,
+      tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
         'url',
@@ -36,7 +36,7 @@ export const FloatingIpsList: FunctionComponent<{ resource }> = ({
         'project_uuid',
       ],
     }),
-    [resource],
+    [resourceScope],
   );
   const tableProps = useTable({
     table: 'openstack-floating-ips',
@@ -78,8 +78,8 @@ export const FloatingIpsList: FunctionComponent<{ resource }> = ({
       verboseName={translate('floating IPs')}
       actions={
         <ButtonGroup>
-          <PullFloatingIpsAction resource={resource} />
-          <CreateFloatingIpAction resource={resource} />
+          <PullFloatingIpsAction resource={resourceScope} />
+          <CreateFloatingIpAction resource={resourceScope} />
         </ButtonGroup>
       }
       hoverableRow={({ row }) => (

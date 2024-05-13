@@ -12,7 +12,7 @@ export const RobotAccountCard = ({ resource }) => {
     return null;
   }
   return (
-    <Card className="mb-10" id="robot-accounts">
+    <Card id="robot-accounts">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Robot accounts')}</h3>

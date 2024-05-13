@@ -11,14 +11,14 @@ const exportFields = ['Full name', 'Username'];
 
 const exportRow = (row) => [row.full_name, row.user_name];
 
-export const ClusterUsersList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterUsersList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'rancher-cluster-users',

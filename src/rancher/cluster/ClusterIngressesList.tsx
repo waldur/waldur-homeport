@@ -8,14 +8,14 @@ import { useTable } from '@waldur/table/utils';
 import { ImportYAMLButton } from './ImportYAMLButton';
 import { IngressActions } from './IngressActions';
 
-export const ClusterIngressesList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterIngressesList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'rancher-ingresses',
@@ -58,7 +58,7 @@ export const ClusterIngressesList: FunctionComponent<{ resource }> = ({
         },
       ]}
       verboseName={translate('ingresses')}
-      actions={<ImportYAMLButton cluster_id={resource.uuid} />}
+      actions={<ImportYAMLButton cluster_id={resourceScope.uuid} />}
     />
   );
 };

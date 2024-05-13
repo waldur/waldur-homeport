@@ -9,14 +9,14 @@ const exportFields = ['name', 'description', 'catalog'];
 
 const exportRow = (row) => [row.name, row.description, row.catalog_name];
 
-export const ClusterTemplatesList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ClusterTemplatesList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      cluster_uuid: resource.uuid,
+      cluster_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'rancher-cluster-templates',
@@ -36,8 +36,8 @@ export const ClusterTemplatesList: FunctionComponent<{ resource }> = ({
             <Link
               state="rancher-template-details"
               params={{
-                uuid: resource.project_uuid,
-                clusterUuid: resource.uuid,
+                uuid: resourceScope.project_uuid,
+                clusterUuid: resourceScope.uuid,
                 templateUuid: row.uuid,
               }}
             >

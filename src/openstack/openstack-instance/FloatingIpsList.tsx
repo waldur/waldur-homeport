@@ -7,19 +7,19 @@ import { VirtualMachine } from '@waldur/resource/types';
 import { Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-export const FloatingIpsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const fetchData = useCallback(
     () =>
       getById<VirtualMachine>(
         '/openstacktenant-instances/',
-        resource.uuid,
+        resourceScope.uuid,
       ).then((vm) => ({
         rows: vm.floating_ips,
         resultCount: vm.floating_ips.length,
       })),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstack-floating-ips',
@@ -47,7 +47,7 @@ export const FloatingIpsList: FunctionComponent<{ resource }> = ({
         },
       ]}
       verboseName={translate('floating IPs')}
-      actions={<UpdateFloatingIpsActionButton resource={resource} />}
+      actions={<UpdateFloatingIpsActionButton resource={resourceScope} />}
     />
   );
 };

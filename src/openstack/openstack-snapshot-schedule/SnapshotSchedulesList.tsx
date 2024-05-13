@@ -11,14 +11,14 @@ import { useTable } from '@waldur/table/utils';
 
 import { CreateSnapshotScheduleAction } from '../openstack-volume/actions/CreateSnapshotScheduleAction';
 
-export const SnapshotSchedulesList: FunctionComponent<{ resource }> = ({
-  resource,
+export const SnapshotSchedulesList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      source_volume: resource.url,
+      source_volume: resourceScope.url,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstacktenant-snapshot-schedules',
@@ -59,7 +59,7 @@ export const SnapshotSchedulesList: FunctionComponent<{ resource }> = ({
       ]}
       verboseName={translate('snapshot schedules')}
       hasQuery={false}
-      actions={<CreateSnapshotScheduleAction resource={resource} />}
+      actions={<CreateSnapshotScheduleAction resource={resourceScope} />}
     />
   );
 };

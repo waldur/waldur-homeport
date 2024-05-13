@@ -17,14 +17,14 @@ interface ResourceRules extends Resource {
 
 const ResourcePolicy = (resource: ResourceRules) => resource.policy;
 
-export const ServerGroupsList: FunctionComponent<{ resource }> = ({
-  resource,
+export const ServerGroupsList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      tenant_uuid: resource.uuid,
+      tenant_uuid: resourceScope.uuid,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstack-server-groups',
@@ -63,8 +63,8 @@ export const ServerGroupsList: FunctionComponent<{ resource }> = ({
       showPageSizeSelector={true}
       actions={
         <ButtonGroup>
-          <PullServerGroupsAction resource={resource} />
-          <CreateServerGroupAction resource={resource} />
+          <PullServerGroupsAction resource={resourceScope} />
+          <CreateServerGroupAction resource={resourceScope} />
         </ButtonGroup>
       }
     />

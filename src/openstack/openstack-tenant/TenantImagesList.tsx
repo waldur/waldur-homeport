@@ -5,14 +5,14 @@ import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-export const TenantImagesList: FunctionComponent<{ resource }> = ({
-  resource,
+export const TenantImagesList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      settings_uuid: resource.child_settings,
+      settings_uuid: resourceScope.child_settings,
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstacktenant-images',

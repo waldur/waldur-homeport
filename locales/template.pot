@@ -223,8 +223,6 @@ msgstr ""
 #: src/marketplace/resources/actions/ModalActionsButton.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourceActions.tsx
-#: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
-#: src/marketplace/robot-accounts/RobotAccountList.tsx
 #: src/marketplace/service-providers/CampaignForm.tsx
 #: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
@@ -716,7 +714,7 @@ msgstr ""
 msgid "Allocation strategy"
 msgstr ""
 
-#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/CallDetailsFields.tsx
 msgid "Allocation strategy in active round"
 msgstr ""
 
@@ -726,7 +724,8 @@ msgstr ""
 msgid "Allocation time"
 msgstr ""
 
-#: src/slurm/details/AllocationMainComponent.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/slurm/details/AllocationUsersTable.tsx
 msgid "Allocation users"
 msgstr ""
@@ -1263,7 +1262,8 @@ msgstr ""
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/marketplace/resources/details/ActivityCard.tsx
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/service-providers/dashboard/ProviderEventsTable.tsx
 #: src/project/ProjectActions.tsx
 #: src/project/ProjectEventsList.tsx
@@ -1509,7 +1509,8 @@ msgid "Booked by"
 msgstr ""
 
 #: src/booking/marketplace.ts
-#: src/marketplace/resources/details/BookingMainComponent.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 msgid "Booking"
 msgstr ""
 
@@ -2351,7 +2352,6 @@ msgstr ""
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/table/ExportDialog.tsx
 #: src/table/TableButtons.tsx
-#: src/table/TableExportButton.tsx
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -2940,7 +2940,6 @@ msgstr ""
 #: src/administration/routes.ts
 #: src/customer/routes.ts
 #: src/issues/routes.ts
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/utils.ts
 #: src/project/routes.ts
@@ -3339,10 +3338,10 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
 #: src/project/ProjectDetailsButton.tsx
-#: src/proposals/details/CallDetailsCard.tsx
-#: src/proposals/details/PublicCallDetailsBar.tsx
 #: src/proposals/round/proposals/ProposalReviewsDetailButton.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsButton.tsx
 #: src/resource/summary/ResourceSummaryButton.tsx
@@ -4334,10 +4333,6 @@ msgstr ""
 msgid "Favourites"
 msgstr ""
 
-#: src/marketplace/landing/LandingPage.tsx
-msgid "Featured offerings"
-msgstr ""
-
 #: src/administration/FeaturesList.tsx
 #: src/administration/routes.ts
 #: src/marketplace/details/OfferingTabs.tsx
@@ -4663,12 +4658,9 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 #: src/marketplace/resources/details/GettingStartedCard.tsx
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 msgid "Getting started"
-msgstr ""
-
-#: src/dashboard/hero/NewbiesGuideNotification.tsx
-msgid "Getting started guide"
 msgstr ""
 
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
@@ -4690,7 +4682,6 @@ msgid "Go to detail view"
 msgstr ""
 
 #: src/marketplace/orders/list/OrderTablePlaceholder.tsx
-#: src/navigation/sidebar/SidebarFooter.tsx
 msgid "Go to marketplace"
 msgstr ""
 
@@ -5539,8 +5530,9 @@ msgstr ""
 msgid "Job title"
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
-#: src/slurm/details/AllocationMainComponent.tsx
 msgid "Jobs"
 msgstr ""
 
@@ -5602,7 +5594,8 @@ msgstr ""
 msgid "LEXIS link creation request has been submitted."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
 #: src/marketplace/resources/lexis/LexisLinkCard.tsx
 #: src/marketplace/routes.ts
@@ -5656,6 +5649,10 @@ msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
 msgid "Latest date for resource termination"
+msgstr ""
+
+#: src/marketplace/landing/LandingPage.tsx
+msgid "Latest offerings"
 msgstr ""
 
 #: src/proposals/round/review/RoundReviewSection.tsx
@@ -5920,6 +5917,7 @@ msgstr ""
 #: src/administration/routes.ts
 #: src/marketplace/landing/LandingPage.tsx
 #: src/marketplace/routes.ts
+#: src/navigation/sidebar/UnifiedSidebar.tsx
 msgid "Marketplace"
 msgstr ""
 
@@ -7398,7 +7396,8 @@ msgstr ""
 msgid "Optional"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/options/ResourceOptionsCard.tsx
 msgid "Options"
 msgstr ""
@@ -7439,7 +7438,8 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 msgid "Order history"
 msgstr ""
 
@@ -8954,7 +8954,7 @@ msgstr ""
 msgid "Public key"
 msgstr ""
 
-#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/CallDetailsFields.tsx
 msgid "Publication date"
 msgstr ""
 
@@ -9049,7 +9049,9 @@ msgstr ""
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/TenantMainComponent.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 msgid "Quotas"
 msgstr ""
 
@@ -9129,10 +9131,6 @@ msgstr ""
 msgid "Recent broadcasts (this month)"
 msgstr ""
 
-#: src/marketplace/landing/LandingPage.tsx
-msgid "Recent offerings"
-msgstr ""
-
 #: src/marketplace/category/list/RecentlyAddedOfferings.tsx
 #: src/navigation/sidebar/marketplace-popup/DataLoader.tsx
 msgid "Recently added offerings"
@@ -9175,7 +9173,7 @@ msgstr ""
 msgid "Redeploy"
 msgstr ""
 
-#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/CallDetailsFields.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 msgid "Reference code"
@@ -9685,8 +9683,9 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/ResourceMetadataCard.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 msgid "Resource details"
 msgstr ""
 
@@ -9741,7 +9740,7 @@ msgstr ""
 msgid "Resource link"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 msgid "Resource metadata"
 msgstr ""
 
@@ -9978,7 +9977,7 @@ msgstr ""
 msgid "Review strategy"
 msgstr ""
 
-#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/CallDetailsFields.tsx
 msgid "Review strategy in active round"
 msgstr ""
 
@@ -10055,7 +10054,8 @@ msgstr ""
 msgid "Robot account type"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/robot-accounts/RobotAccountCard.tsx
 #: src/marketplace/routes.ts
 msgid "Robot accounts"
@@ -10121,7 +10121,8 @@ msgstr ""
 
 #: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/roles/RolesSection.tsx
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
 #: src/rancher/node/RancherNodeSummary.tsx
@@ -10152,7 +10153,7 @@ msgstr ""
 msgid "Round strategy"
 msgstr ""
 
-#: src/proposals/details/CallDetailsCard.tsx
+#: src/proposals/details/CallDetailsFields.tsx
 msgid "Round strategy in active round"
 msgstr ""
 
@@ -10514,7 +10515,7 @@ msgid "See more"
 msgstr ""
 
 #: src/dashboard/hero/NewbiesGuideNotification.tsx
-msgid "See our {guide}"
+msgid "See our {guide}."
 msgstr ""
 
 #: src/marketplace/orders/list/OrderTablePlaceholder.tsx
@@ -12473,8 +12474,9 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 msgid "Tickets"
 msgstr ""
 
@@ -14278,7 +14280,8 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/marketplace/resources/details/ResourceDetailsBar.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
+#: src/marketplace/resources/details/fetchData.tsx
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
 msgid "Usage"
@@ -15315,6 +15318,10 @@ msgstr ""
 msgid "floating IPs"
 msgstr ""
 
+#: src/dashboard/hero/NewbiesGuideNotification.tsx
+msgid "getting started guide"
+msgstr ""
+
 #: src/invitations/GroupInvitationsList.tsx
 msgid "group invitations"
 msgstr ""
@@ -15885,10 +15892,6 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/OpenStackTenantSummary.tsx
 msgid "{usage} of {limit} {name}"
-msgstr ""
-
-#: src/marketplace/resources/details/ShortResourceHeader.tsx
-msgid "{usage} out of {limit} {unit} {name}"
 msgstr ""
 
 #: src/marketplace/orders/details/OrderSummaryMessage.tsx

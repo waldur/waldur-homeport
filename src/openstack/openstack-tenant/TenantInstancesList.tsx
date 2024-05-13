@@ -13,12 +13,12 @@ import { useTable } from '@waldur/table/utils';
 
 import { INSTANCE_TYPE } from '../constants';
 
-export const TenantInstancesList: FunctionComponent<{ resource }> = ({
-  resource,
+export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
+  resourceScope,
 }) => {
   const filter = useMemo(
     () => ({
-      service_settings_uuid: resource.child_settings,
+      service_settings_uuid: resourceScope.child_settings,
       field: [
         'uuid',
         'url',
@@ -45,7 +45,7 @@ export const TenantInstancesList: FunctionComponent<{ resource }> = ({
         'project_uuid',
       ],
     }),
-    [resource],
+    [resourceScope],
   );
   const props = useTable({
     table: 'openstacktenant-instances',
@@ -80,7 +80,10 @@ export const TenantInstancesList: FunctionComponent<{ resource }> = ({
       ]}
       verboseName={translate('instances')}
       actions={
-        <AddResourceButton resource={resource} offeringType={INSTANCE_TYPE} />
+        <AddResourceButton
+          resource={resourceScope}
+          offeringType={INSTANCE_TYPE}
+        />
       }
       hoverableRow={({ row }) => (
         <ModalActionsRouter
