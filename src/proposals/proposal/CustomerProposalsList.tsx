@@ -74,6 +74,7 @@ export const CustomerProposalsList: FC<{}> = () => {
         {
           title: translate('Round'),
           render: ({ row }) => <>{renderFieldOrDash(row.round.name)}</>,
+          orderField: 'round__cutoff_time',
         },
         {
           title: translate('Ending'),
