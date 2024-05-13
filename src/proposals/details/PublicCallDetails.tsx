@@ -7,7 +7,6 @@ import { HidableWrapper } from '@waldur/marketplace/resources/details/ResourceDe
 import { Call } from '../types';
 
 import { CallDescriptionCard } from './CallDescriptionCard';
-import { CallDetailsCard } from './CallDetailsCard';
 import { CallDocumentsCard } from './CallDocumentsCard';
 import { CallOfferingsCard } from './CallOfferingsCard';
 import { PublicCallDetailsBar } from './PublicCallDetailsBar';
@@ -29,24 +28,15 @@ export const PublicCallDetails: FunctionComponent<PublicCallDetailsProps> = ({
         <PublicCallDetailsHero call={call} />
         <PublicCallDetailsBar />
         <div className="container-xxl py-10">
-          <HidableWrapper activeTab={activeTab} tabKey="details">
-            <CallDetailsCard call={call} />
+          <HidableWrapper activeTab={activeTab} tabKey="description">
+            <CallDescriptionCard call={call} />
           </HidableWrapper>
-          {
-            <HidableWrapper activeTab={activeTab} tabKey="description">
-              <CallDescriptionCard call={call} />
-            </HidableWrapper>
-          }
-          {
-            <HidableWrapper activeTab={activeTab} tabKey="documents">
-              <CallDocumentsCard call={call} />
-            </HidableWrapper>
-          }
-          {
-            <HidableWrapper activeTab={activeTab} tabKey="offerings">
-              <CallOfferingsCard call={call} />
-            </HidableWrapper>
-          }
+          <HidableWrapper activeTab={activeTab} tabKey="documents">
+            <CallDocumentsCard call={call} />
+          </HidableWrapper>
+          <HidableWrapper activeTab={activeTab} tabKey="offerings">
+            <CallOfferingsCard call={call} />
+          </HidableWrapper>
         </div>
       </div>
     </PageBarProvider>

@@ -6,24 +6,19 @@ import { PageBarTab } from '@waldur/marketplace/context';
 
 const tabs: PageBarTab[] = [
   {
-    key: 'details',
-    title: translate('Details'),
-    priority: 10,
-  },
-  {
     key: 'description',
     title: translate('Description'),
-    priority: 20,
+    priority: 10,
   },
   {
     key: 'documents',
     title: translate('Documents'),
-    priority: 30,
+    priority: 20,
   },
   {
     key: 'offerings',
     title: translate('Offerings'),
-    priority: 40,
+    priority: 30,
   },
 ];
 
