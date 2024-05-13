@@ -10,7 +10,7 @@ import { ReviewsTableFilter } from '@waldur/proposals/review/ReviewsTableFilter'
 import { ProposalReview } from '@waldur/proposals/types';
 import { formatReviewState } from '@waldur/proposals/utils';
 import { createFetcher, Table } from '@waldur/table';
-import { renderFieldOrDash, useTable } from '@waldur/table/utils';
+import { useTable } from '@waldur/table/utils';
 import { USER_REVIEWS_FILTER_FORM_ID } from '@waldur/user/constants';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -60,7 +60,15 @@ export const CustomerReviewsList: FC<{}> = () => {
         },
         {
           title: translate('Call'),
-          render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
+          render: ({ row }) => (
+            <>
+              <Link
+                state="protected-call.main"
+                params={{ call_uuid: row.call_uuid }}
+                label={row.call_name}
+              />
+            </>
+          ),
         },
         {
           title: translate('Review due'),
