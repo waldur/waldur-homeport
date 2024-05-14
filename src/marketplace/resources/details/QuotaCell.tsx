@@ -17,7 +17,7 @@ const CellDescription = ({
   title,
   description,
 }: QuotaCellProps) => (
-  <span className="fw-bold text-nowrap">
+  <span className="fw-bold text-nowrap ellipsis">
     {limit
       ? `${usage.toLocaleString()}/${limit.toLocaleString()}`
       : usage.toLocaleString()}
