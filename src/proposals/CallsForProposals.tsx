@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
@@ -36,9 +35,12 @@ export const CallsForProposals: FunctionComponent = () => {
         backgroundImage={background}
       >
         <div className="d-flex justify-content-center gap-5">
-          <Button variant="outline-white" className="btn-outline w-200px">
+          <Link
+            state="calls-for-proposals-all-available-offerings"
+            className="btn btn-outline btn-outline-white w-200px"
+          >
             {translate('Available offerings')}
-          </Button>
+          </Link>
           <Link
             state="calls-for-proposals-all-calls"
             className="btn btn-white btn-text-dark-always w-200px"

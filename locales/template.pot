@@ -650,6 +650,10 @@ msgstr ""
 msgid "All categories"
 msgstr ""
 
+#: src/marketplace/landing/OfferingsGroup.tsx
+msgid "All offerings"
+msgstr ""
+
 #: src/navigation/header/confirmation-drawer/ApproveAllButton.tsx
 #: src/navigation/header/confirmation-drawer/ConsumerApproveAll.tsx
 msgid "All orders have been approved."
@@ -5664,7 +5668,7 @@ msgstr ""
 msgid "Latest date for resource termination"
 msgstr ""
 
-#: src/marketplace/landing/LandingPage.tsx
+#: src/marketplace/landing/OfferingsGroup.tsx
 msgid "Latest offerings"
 msgstr ""
 
@@ -5748,8 +5752,6 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
-#: src/proposals/CallsAvailableOfferingsList.tsx
-#: src/proposals/CallsForProposalsList.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
 msgstr ""
@@ -9794,6 +9796,10 @@ msgstr ""
 msgid "Resource schedule is already deactivated."
 msgstr ""
 
+#: src/marketplace/resources/details/EndDateField.tsx
+msgid "Resource termination date"
+msgstr ""
+
 #: src/marketplace/offerings/update/integration/EditIntegrationDialog.tsx
 msgid "Resource termination date is required"
 msgstr ""
@@ -13316,7 +13322,6 @@ msgstr ""
 
 #: src/marketplace/category/list/RecentlyAddedOfferings.tsx
 #: src/marketplace/common/OfferingGrid.tsx
-#: src/marketplace/landing/OfferingsGroup.tsx
 msgid "Unable to load offerings."
 msgstr ""
 

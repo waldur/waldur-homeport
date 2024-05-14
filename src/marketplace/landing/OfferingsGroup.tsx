@@ -1,39 +1,82 @@
-import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { Table, createFetcher } from '@waldur/table';
+import { ActionButton } from '@waldur/table/ActionButton';
+import { useTable } from '@waldur/table/utils';
+import {
+  getCustomer,
+  getProject,
+  getWorkspace,
+} from '@waldur/workspace/selectors';
+import { WorkspaceType } from '@waldur/workspace/types';
 
 import { OfferingCard } from '../common/OfferingCard';
 
-import { OfferingsQueryResult } from './hooks';
+const field = [
+  'uuid',
+  'name',
+  'description',
+  'thumbnail',
+  'image',
+  'rating',
+  'order_count',
+  'category_uuid',
+  'attributes',
+  'customer_name',
+  'customer_uuid',
+  'state',
+  'paused_reason',
+];
 
-export const OfferingsGroup: FC<OfferingsQueryResult> = (props) => {
-  if (props.isLoading) {
-    return <LoadingSpinner />;
-  }
+const mapStateToFilter = createSelector(
+  getCustomer,
+  getProject,
+  getWorkspace,
+  (customer, project, workspace) => {
+    const filter: Record<string, any> = {
+      page_size: 6,
+      field,
+      state: ['Active', 'Paused'],
+      allowed_customer_uuid: customer?.uuid,
+      project_uuid: project?.uuid,
+    };
+    if (workspace === WorkspaceType.USER) {
+      filter.shared = true;
+    }
+    return filter;
+  },
+);
 
-  if (props.isError) {
-    return (
-      <h3 className="text-center">{translate('Unable to load offerings.')}</h3>
-    );
-  }
-
-  if (!props.data?.length) {
-    return (
-      <h3 className="text-center">
-        {translate('There are no offerings in marketplace yet.')}
-      </h3>
-    );
-  }
+export const OfferingsGroup = () => {
+  const filter = useSelector(mapStateToFilter);
+  const tableProps = useTable({
+    table: 'marketplace-landing-offerings',
+    filter,
+    fetchData: createFetcher('marketplace-public-offerings'),
+    staleTime: 3 * 60 * 1000,
+  });
 
   return (
-    <Row>
-      {props.data.map((offering) => (
-        <Col key={offering.uuid} lg={6} xl={4} className="mb-3">
-          <OfferingCard offering={offering} />
-        </Col>
-      ))}
-    </Row>
+    <Table
+      {...tableProps}
+      gridItem={({ row }) => <OfferingCard offering={row} />}
+      gridSize={{ lg: 6, xl: 4 }}
+      mode="grid"
+      placeholderComponent={
+        <h3 className="text-center">
+          {translate('There are no offerings in marketplace yet.')}
+        </h3>
+      }
+      title={translate('Latest offerings')}
+      verboseName={translate('Latest offerings')}
+      initialSorting={{ field: 'created', mode: 'desc' }}
+      actions={
+        <ActionButton title={translate('All offerings')} action={null} />
+      }
+      hasQuery={false}
+      hasPagination={false}
+    />
   );
 };
