@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback } from 'react';
-import { Button, Card, Col, Row, Stack } from 'react-bootstrap';
+import { Button, Col, Row, Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, getFormValues } from 'redux-form';
 
@@ -28,33 +28,29 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
   }, [dispatch, props, formValues]);
 
   return props.filtersStorage.length > 0 ? (
-    <Card className="mb-4">
-      <Card.Body>
-        <Row>
-          <Col xs={12} md="auto" className="order-md-1 mb-4 mb-md-0 text-end">
-            <Button
-              variant="flush"
-              className="btn-active-text-primary"
-              onClick={clearFilters}
-            >
-              {translate('Clear filters')}
-            </Button>
-          </Col>
-          <Col className="d-flex flex-wrap gap-4">
-            {props.filtersStorage.map((item) => (
-              <Stack
-                key={item.name}
-                direction="horizontal"
-                gap={2}
-                className="flex-wrap fw-bold"
-              >
-                {item.label}
-                <item.component />
-              </Stack>
-            ))}
-          </Col>
-        </Row>
-      </Card.Body>
-    </Card>
+    <Row className="card-toolbar w-100 my-4">
+      <Col xs={12} md="auto" className="order-md-1 mb-4 mb-md-0 text-end">
+        <Button
+          variant="flush"
+          className="btn-active-text-primary"
+          onClick={clearFilters}
+        >
+          {translate('Clear filters')}
+        </Button>
+      </Col>
+      <Col className="d-flex flex-wrap gap-4">
+        {props.filtersStorage.map((item) => (
+          <Stack
+            key={item.name}
+            direction="horizontal"
+            gap={2}
+            className="flex-wrap fw-bold"
+          >
+            {item.label}
+            <item.component />
+          </Stack>
+        ))}
+      </Col>
+    </Row>
   ) : null;
 };
