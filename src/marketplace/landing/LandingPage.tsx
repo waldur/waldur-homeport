@@ -12,7 +12,7 @@ import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { CategoriesList } from './CategoriesList';
-import { useLandingCategories, useLandingOfferings } from './hooks';
+import { useLandingCategories } from './hooks';
 import { OfferingsGroup } from './OfferingsGroup';
 import { OfferingsSearchBox } from './OfferingsSearchBox';
 
@@ -27,7 +27,6 @@ export const LandingPage: FC<{}> = () => {
   useMarketplacePublicTabs();
 
   const categories = useLandingCategories();
-  const offerings = useLandingOfferings();
 
   return (
     <div className="marketplace-landing-page">
@@ -47,12 +46,11 @@ export const LandingPage: FC<{}> = () => {
           <OfferingsSearchBox />
         </div>
       </LandingHeroSection>
-      <div className="container-xxl my-20">
+      <div className="container-xxl mt-20 mb-10">
         <CategoriesList {...categories} />
       </div>
       <div className="container-xxl mb-20">
-        <h2 className="mb-10">{translate('Latest offerings')}</h2>
-        <OfferingsGroup {...offerings} />
+        <OfferingsGroup />
       </div>
     </div>
   );

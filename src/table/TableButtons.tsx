@@ -65,7 +65,7 @@ export const TableButtons: FunctionComponent<TableProps> = (props) => {
           />
         )}
         {props.actions}
-        {props.gridItem && (
+        {Boolean(props.gridItem && props.columns.length) && (
           <TableDisplayModeButton
             mode={props.mode}
             setDisplayMode={props.setDisplayMode}

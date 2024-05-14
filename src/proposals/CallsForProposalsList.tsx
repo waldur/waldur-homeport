@@ -1,51 +1,43 @@
-import { useQuery } from '@tanstack/react-query';
-import { FC } from 'react';
-import { Col } from 'react-bootstrap';
+import { FC, useMemo } from 'react';
 
 import { Link } from '@waldur/core/Link';
-import { LoadingErred } from '@waldur/core/LoadingErred';
 import { translate } from '@waldur/i18n';
-import { getAllPublicCalls } from '@waldur/proposals/api';
+import { Table, createFetcher } from '@waldur/table';
+import { useTable } from '@waldur/table/utils';
 
 import { CallCard } from './CallCard';
 
 export const CallsForProposalsList: FC = () => {
-  const {
-    data: calls,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery(['CallsForProposals'], () => getAllPublicCalls(true), {
+  const filter = useMemo(() => ({ page_size: 6, has_active_round: true }), []);
+  const tableProps = useTable({
+    table: 'CallsForProposals',
+    filter,
+    fetchData: createFetcher('proposal-public-calls'),
     staleTime: 3 * 60 * 1000,
   });
+
   return (
-    <div>
-      {isLoading ? (
-        <p className="text-center">{translate('Loading')}</p>
-      ) : error ? (
-        <LoadingErred loadData={refetch} />
-      ) : calls.length === 0 ? (
-        <p className="text-center">
+    <Table
+      {...tableProps}
+      gridItem={({ row }) => <CallCard call={row} />}
+      gridSize={{ lg: 6, xl: 4 }}
+      mode="grid"
+      placeholderComponent={
+        <h3 className="text-center">
           {translate('There are no calls for proposals at the moment.')}
-        </p>
-      ) : (
-        <>
-          <div className="d-flex justify-content-between align-items-center mb-6">
-            <h1 className="mb-0">{translate('Open calls')}</h1>
-            <Link
-              state="calls-for-proposals-all-calls"
-              label={translate('View all')}
-            />
-          </div>
-          <div className="row d-flex flex-wrap">
-            {calls.map((call) => (
-              <Col key={call.uuid} lg={6} xl={4} className="mb-3">
-                <CallCard call={call} />
-              </Col>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+        </h3>
+      }
+      title={translate('Open calls')}
+      verboseName={translate('Open calls')}
+      actions={
+        <Link
+          state="calls-for-proposals-all-calls"
+          label={translate('View all')}
+          className="btn btn-light"
+        />
+      }
+      hasQuery={false}
+      hasPagination={false}
+    />
   );
 };
