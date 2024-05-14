@@ -23,7 +23,9 @@ export const CallCard: FC<{ call }> = ({ call }) => {
       body={call.description}
       footer={
         <div className="d-flex justify-content-between">
-          {lastRoundStatus.label === 'Open' ? (
+          {!lastRoundStatus ? (
+            <div className="text-muted">{translate('No rounds')}</div>
+          ) : lastRoundStatus.label === 'Open' ? (
             <Badge bg="warning" text="dark">
               {translate('Cutoff')}
               {': '}

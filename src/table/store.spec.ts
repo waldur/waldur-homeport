@@ -9,6 +9,7 @@ describe('Table reducer', () => {
     expect(getTableState('users')(state)).toEqual({
       loading: false,
       error: null,
+      mode: 'table',
       pagination: {
         pageSize: 10,
         resultCount: 0,

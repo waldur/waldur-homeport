@@ -1,10 +1,11 @@
 import { TableFiltersGroup } from './TableFilterService';
-import { ExportConfig, FilterItem, Sorting } from './types';
+import { DisplayMode, ExportConfig, FilterItem, Sorting } from './types';
 
 export const FETCH_LIST_START = 'waldur/table/FETCH_START';
 export const FETCH_LIST_DONE = 'waldur/table/FETCH_DONE';
 export const FETCH_LIST_ERROR = 'waldur/table/FETCH_ERROR';
 export const FETCH_LIST_GOTO_PAGE = 'waldur/table/GOTO_PAGE';
+export const SET_MODE = 'waldur/table/SET_MODE';
 export const SET_FILTER_QUERY = 'waldur/table/SET_QUERY';
 export const EXPORT_TABLE_AS = 'waldur/table/EXPORT';
 export const BLOCK_START = 'waldur/table/BLOCK_START';
@@ -90,6 +91,14 @@ export const blockStop = (table: string) => ({
   type: BLOCK_STOP,
   payload: {
     table,
+  },
+});
+
+export const setMode = (table: string, mode: DisplayMode) => ({
+  type: SET_MODE,
+  payload: {
+    table,
+    mode,
   },
 });
 

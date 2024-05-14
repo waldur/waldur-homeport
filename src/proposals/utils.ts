@@ -136,6 +136,7 @@ export const formatReviewState = (value: ReviewState) =>
   value;
 
 export const getRoundStatus = (round: Round) => {
+  if (!round) return null;
   const now = DateTime.now();
   const start = parseDate(round.start_time);
   if (start > now)

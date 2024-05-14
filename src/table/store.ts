@@ -12,6 +12,7 @@ const INITIAL_STATE: TableState = {
   order: [],
   loading: false,
   error: null,
+  mode: 'table',
   pagination: {
     pageSize: 10,
     resultCount: 0,
@@ -79,6 +80,12 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
           ...state.pagination,
           currentPage: action.payload.page,
         },
+      };
+
+    case actions.SET_MODE:
+      return {
+        ...state,
+        mode: action.payload.mode,
       };
 
     case actions.SET_FILTER_QUERY:

@@ -4726,6 +4726,10 @@ msgstr ""
 msgid "Grant permission"
 msgstr ""
 
+#: src/table/TableDisplayModeButton.tsx
+msgid "Grid mode"
+msgstr ""
+
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
 #: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Group"
@@ -6794,6 +6798,7 @@ msgstr ""
 msgid "No results found"
 msgstr ""
 
+#: src/proposals/CallCard.tsx
 #: src/proposals/details/CallRoundsList.tsx
 msgid "No rounds"
 msgstr ""
@@ -11887,6 +11892,10 @@ msgstr ""
 
 #: src/table/export.ts
 msgid "Table has been exported to {format}."
+msgstr ""
+
+#: src/table/TableDisplayModeButton.tsx
+msgid "Table mode"
 msgstr ""
 
 #: src/resource/state/constants.ts

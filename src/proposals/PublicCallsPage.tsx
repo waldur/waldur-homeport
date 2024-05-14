@@ -16,6 +16,7 @@ import { Call } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
+import { CallCard } from './CallCard';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { PublicCallsTablePlaceholder } from './PublicCallsTablePlaceholder';
 import { formatCallState } from './utils';
@@ -55,7 +56,7 @@ export const PublicCallsPage: FunctionComponent = () => {
         title={translate('Calls for proposals')}
         backgroundImage={background}
       ></LandingHeroSection>
-      <div className="container-xxl mt-20">
+      <div className="container-xxl mt-20 mb-10">
         <Table<Call>
           title={translate('Calls for proposals')}
           {...tableProps}
@@ -92,6 +93,8 @@ export const PublicCallsPage: FunctionComponent = () => {
               render: ({ row }) => <>{formatCallState(row.state)}</>,
             },
           ]}
+          gridItem={({ row }) => <CallCard call={row} />}
+          gridSize={{ lg: 6, xl: 4 }}
           verboseName={translate('Public calls')}
           initialSorting={{ field: 'name', mode: 'desc' }}
           hasQuery={true}
