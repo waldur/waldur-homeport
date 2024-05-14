@@ -12,8 +12,6 @@ import { useTitle } from '@waldur/navigation/title';
 import { CallsAvailableOfferingsList } from '@waldur/proposals/CallsAvailableOfferingsList';
 import { CallsForProposalsList } from '@waldur/proposals/CallsForProposalsList';
 
-import { CallsSearchBox } from './CallsSearchBox';
-
 const background = require('./proposal-calls.png');
 
 export const CallsForProposals: FunctionComponent = () => {
@@ -49,14 +47,6 @@ export const CallsForProposals: FunctionComponent = () => {
           </Link>
         </div>
       </LandingHeroSection>
-      <div className="h-50px bg-dark">
-        <div className="container d-flex align-items-center justify-content-between text-inverse-dark h-100">
-          <p className="fs-5 fw-bold mb-0 d-none d-md-block">
-            {translate('Or if you know what you are looking for')}
-          </p>
-          <CallsSearchBox />
-        </div>
-      </div>
       <div className="container my-14">
         <CallsForProposalsList />
       </div>
