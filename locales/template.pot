@@ -5945,10 +5945,6 @@ msgstr ""
 msgid "Max # of snapshots"
 msgstr ""
 
-#: src/proposals/details/CallOfferingsCard.tsx
-msgid "Max allocation"
-msgstr ""
-
 #: src/proposals/update/ProposalCallQuotas.tsx
 msgid "Max applicants"
 msgstr ""
@@ -6094,10 +6090,6 @@ msgstr ""
 
 #: src/rancher/cluster/hpas/utils.ts
 msgid "MiB"
-msgstr ""
-
-#: src/proposals/details/CallOfferingsCard.tsx
-msgid "Min allocation"
 msgstr ""
 
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
@@ -7409,10 +7401,6 @@ msgstr ""
 
 #: src/marketplace/resources/options/UpdateResourceOptionDialog.tsx
 msgid "Options have been updated"
-msgstr ""
-
-#: src/proposals/CallsForProposals.tsx
-msgid "Or if you know what you are looking for"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
@@ -10425,10 +10413,6 @@ msgstr ""
 msgid "Search by name or abbreviation"
 msgstr ""
 
-#: src/proposals/CallsSearchBox.tsx
-msgid "Search for call by name or offering"
-msgstr ""
-
 #: src/navigation/OfferingSearchField.tsx
 msgid "Search for offerings and providers"
 msgstr ""
@@ -12416,10 +12400,6 @@ msgstr ""
 msgid "There are no resources available."
 msgstr ""
 
-#: src/proposals/CallsSearchBox.tsx
-msgid "There are no results for this keyword, please try another one"
-msgstr ""
-
 #: src/core/AsyncSearchBox.tsx
 msgid "There are no results for this keyword."
 msgstr ""
@@ -14267,7 +14247,7 @@ msgid "Updating security groups"
 msgstr ""
 
 #: src/invitations/actions/create/BulkUpload.tsx
-msgid "Upload a CSV file containing the columns email, role, project and organization in that order. If you are unsure, you can download an example file as a template"
+msgid "Upload a CSV file containing the columns email and role. If you are unsure, you can download an example file as a template"
 msgstr ""
 
 #: src/proposals/proposal/create/ProjectDetailsStep.tsx

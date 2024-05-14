@@ -17,7 +17,6 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
 
   return (
     <>
-      <p>{props.call.description}</p>
       {lastRoundStatus.label === 'Open' && (
         <p>
           {translate('Open round ends')}:{' '}
