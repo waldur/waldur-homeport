@@ -4,6 +4,7 @@ import { translate } from '@waldur/i18n';
 
 import { TableProps } from './Table';
 import { TableColumnButton } from './TableColumnsButton';
+import { TableDisplayModeButton } from './TableDisplayModeButton';
 import { TableExportButton } from './TableExportButton';
 import { TableFilterButton } from './TableFilterButton';
 import { TableMoreActions } from './TableMoreActions';
@@ -64,6 +65,12 @@ export const TableButtons: FunctionComponent<TableProps> = (props) => {
           />
         )}
         {props.actions}
+        {props.gridItem && (
+          <TableDisplayModeButton
+            mode={props.mode}
+            setDisplayMode={props.setDisplayMode}
+          />
+        )}
         {props.hasOptionalColumns && <TableColumnButton {...props} />}
         {showExportInDropdown ? (
           <TableMoreActions actions={dropdownActions} />

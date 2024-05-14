@@ -1,13 +1,14 @@
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import React, { useEffect } from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Button, Card, Col, ColProps, Row } from 'react-bootstrap';
 import { BaseFieldProps } from 'redux-form';
 
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
 
 import './Table.scss';
+import { GridBody } from './GridBody';
 import { TableBody } from './TableBody';
 import { TableButtons } from './TableButtons';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -25,6 +26,7 @@ import {
   Sorting,
   TableDropdownItem,
   ExportConfig,
+  DisplayMode,
 } from './types';
 
 export interface TableProps<RowType = any> extends TableState {
@@ -34,6 +36,9 @@ export interface TableProps<RowType = any> extends TableState {
   hasQuery?: boolean;
   setQuery?: (query: string) => void;
   columns?: Array<Column<RowType>>;
+  setDisplayMode?: (mode: DisplayMode) => void;
+  gridItem?: React.ComponentType<{ row: RowType }>;
+  gridSize?: ColProps;
   openExportDialog?: (format: ExportConfig['format'], props?) => void;
   openFiltersDrawer?: (filters: React.ReactNode) => void;
   renderFiltersDrawer?: (filters: React.ReactNode) => void;
@@ -174,7 +179,14 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
 
           <Card.Body>
             <div className="table-responsive dataTables_wrapper">
-              <div className="table-container">{this.renderBody()}</div>
+              <div
+                className={classNames(
+                  'table-container',
+                  this.props.mode === 'grid' && this.props.gridItem && 'px-3',
+                )}
+              >
+                {this.renderBody()}
+              </div>
             </div>
             {this.props.hasPagination && (
               <Row className="table-pagination px-0">
@@ -238,7 +250,15 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
       }
     }
 
-    return (
+    return this.props.mode === 'grid' && this.props.gridItem ? (
+      <ErrorBoundary fallback={ErrorMessage}>
+        <GridBody
+          rows={this.props.rows}
+          gridItem={this.props.gridItem}
+          gridSize={this.props.gridSize}
+        />
+      </ErrorBoundary>
+    ) : (
       <ErrorBoundary fallback={ErrorMessage}>
         <table
           className={classNames(

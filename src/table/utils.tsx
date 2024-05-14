@@ -16,7 +16,13 @@ import * as actions from './actions';
 import { registerTable } from './registry';
 import { getTableState } from './store';
 import { TableFilterActions } from './TableFilterActions';
-import { TableOptionsType, Sorting, ExportConfig, FilterItem } from './types';
+import {
+  TableOptionsType,
+  Sorting,
+  ExportConfig,
+  FilterItem,
+  DisplayMode,
+} from './types';
 
 const ExportDialog = lazyComponent(
   () => import('./ExportDialog'),
@@ -158,6 +164,10 @@ export const useTable = (options: TableOptionsType) => {
     [dispatch, table],
   );
 
+  const setDisplayMode = useCallback(
+    (mode: DisplayMode) => dispatch(actions.setMode(table, mode)),
+    [dispatch, table],
+  );
   const setQuery = useCallback(
     (query) => dispatch(actions.setFilterQuery(table, query)),
     [dispatch, table],
@@ -207,6 +217,7 @@ export const useTable = (options: TableOptionsType) => {
     openExportDialog,
     openFiltersDrawer,
     renderFiltersDrawer,
+    setDisplayMode,
     setQuery,
     updatePageSize,
     resetPagination,

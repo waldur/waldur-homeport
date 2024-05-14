@@ -57,6 +57,8 @@ export interface Column<RowType = any> {
   key?: string;
 }
 
+export type DisplayMode = 'table' | 'grid';
+
 export interface Pagination {
   resultCount: number;
   currentPage: number;
@@ -76,6 +78,7 @@ export interface TableState {
   loading?: boolean;
   blocked?: boolean;
   error?: any;
+  mode?: DisplayMode;
   pagination?: Pagination;
   query?: string;
   sorting?: SortingState;
