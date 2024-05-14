@@ -142,14 +142,14 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'protected-call',
-    url: 'call/:call_uuid/',
+    url: '/call/:call_uuid/',
     abstract: true,
     component: UIView,
-    parent: 'call-management',
+    parent: 'layout',
   },
   {
     name: 'protected-call.main',
-    url: '',
+    url: 'edit/',
     component: CallUpdateContainer,
   },
   {
