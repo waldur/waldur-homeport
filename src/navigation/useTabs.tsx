@@ -74,9 +74,9 @@ export const useTabs = (): Tab[] => {
   const syncTabs = () => {
     const allStates = router.stateRegistry.get();
     const current = router.globals.$current;
-    if (current.data.hideHeaderMenu) {
+    if (current.data?.hideHeaderMenu) {
       setTabs([]);
-    } else if (!current.data.useExtraTabs) {
+    } else if (!current.data?.useExtraTabs) {
       const root = current.path.find((part) => part.data?.title);
       setTabs(getTabs(root, allStates));
     } else {
