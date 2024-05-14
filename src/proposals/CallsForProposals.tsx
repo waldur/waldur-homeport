@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { CallsAvailableOfferingsList } from '@waldur/proposals/CallsAvailableOfferingsList';
 import { CallsForProposalsList } from '@waldur/proposals/CallsForProposalsList';
 
 import { CallsSearchBox } from './CallsSearchBox';
@@ -58,6 +59,9 @@ export const CallsForProposals: FunctionComponent = () => {
       </div>
       <div className="container my-14">
         <CallsForProposalsList />
+      </div>
+      <div className="container my-14">
+        <CallsAvailableOfferingsList />
       </div>
     </div>
   );
