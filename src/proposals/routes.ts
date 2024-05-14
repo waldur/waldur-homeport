@@ -75,6 +75,11 @@ const CallsForProposals = lazyComponent(
   'CallsForProposals',
 );
 
+const CallsAvailableOfferingsPage = lazyComponent(
+  () => import('./CallsAvailableOfferingsPage'),
+  'CallsAvailableOfferingsPage',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'call-management',
@@ -231,6 +236,15 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('All reviews'),
       priority: 100,
+    },
+  },
+  {
+    name: 'calls-for-proposals-all-available-offerings',
+    url: 'all-available-offerings/',
+    parent: 'calls-for-proposals',
+    component: CallsAvailableOfferingsPage,
+    data: {
+      breadcrumb: () => translate('Available offerings'),
     },
   },
   {
