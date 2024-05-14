@@ -39,7 +39,7 @@ export const ResourceRequestExpandableRow = ({
 
       <PlanDetailsTable2
         offering={row.requested_offering as any}
-        plan={row.requested_offering.plan}
+        plan={row.requested_offering.plan_details}
         limits={limits}
         viewMode
       />

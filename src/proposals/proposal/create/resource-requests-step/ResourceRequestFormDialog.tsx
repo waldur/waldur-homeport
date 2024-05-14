@@ -141,7 +141,8 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
               },
               attributes: props.resolve.resourceRequest.attributes,
               limits: props.resolve.resourceRequest.attributes?.limits,
-              plan: props.resolve.resourceRequest.requested_offering.plan,
+              plan: props.resolve.resourceRequest.requested_offering
+                .plan_details,
             }
           : {}
       }
