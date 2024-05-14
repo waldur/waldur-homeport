@@ -128,6 +128,7 @@ export interface CallOffering {
   state: CallOfferingState;
   category_name?: string;
   plan?: Plan;
+  plan_details?: Plan;
   options?: Offering['options'];
   components?: Offering['components'];
 }

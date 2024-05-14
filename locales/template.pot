@@ -637,6 +637,10 @@ msgstr ""
 msgid "All actions"
 msgstr ""
 
+#: src/proposals/CallsAvailableOfferingsPage.tsx
+msgid "All available offerings"
+msgstr ""
+
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/routes.ts
 msgid "All calls"
@@ -1342,7 +1346,10 @@ msgid "Availability:"
 msgstr ""
 
 #: src/marketplace/routes.ts
+#: src/proposals/CallsAvailableOfferingsList.tsx
+#: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/CallsForProposals.tsx
+#: src/proposals/routes.ts
 msgid "Available offerings"
 msgstr ""
 
@@ -2893,6 +2900,7 @@ msgid "Custom scripts"
 msgstr ""
 
 #: src/organization/OrganizationUIView.tsx
+#: src/proposals/CallsAvailableOfferingsPage.tsx
 msgid "Customer"
 msgstr ""
 
@@ -3243,6 +3251,7 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDescriptionCard.tsx
 #: src/proposals/details/PublicCallDetailsBar.tsx
@@ -5739,6 +5748,7 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
+#: src/proposals/CallsAvailableOfferingsList.tsx
 #: src/proposals/CallsForProposalsList.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
@@ -6344,6 +6354,7 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
 #: src/project/SupportProjectsList.tsx
+#: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
@@ -11489,6 +11500,7 @@ msgstr ""
 #: src/openstack/openstack-volume/InstanceVolumesList.tsx
 #: src/openstack/openstack-volume/TenantVolumesList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
+#: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
@@ -12234,6 +12246,14 @@ msgstr ""
 
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "There are no actions."
+msgstr ""
+
+#: src/proposals/CallsAvailableOfferingsList.tsx
+msgid "There are no available offerings at the moment."
+msgstr ""
+
+#: src/proposals/PublicAvailableOfferingsTablePlaceholder.tsx
+msgid "There are no available offerings yet."
 msgstr ""
 
 #: src/proposals/CallsForProposalsList.tsx
@@ -14775,6 +14795,7 @@ msgstr ""
 
 #: src/core/StatisticsCard.tsx
 #: src/marketplace/category/list/CategoryGroupsList.tsx
+#: src/proposals/CallsAvailableOfferingsList.tsx
 #: src/proposals/CallsForProposalsList.tsx
 msgid "View all"
 msgstr ""
@@ -14784,6 +14805,7 @@ msgid "View call"
 msgstr ""
 
 #: src/marketplace/common/OfferingCard.tsx
+#: src/proposals/AvailableOfferingCard.tsx
 msgid "View offering"
 msgstr ""
 
