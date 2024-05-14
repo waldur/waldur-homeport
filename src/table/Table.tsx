@@ -96,130 +96,133 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
 
   render() {
     return (
-      <>
-        {this.props.filterPosition === 'sidebar' && this.props.filters && (
-          <TableFilters
-            filtersStorage={this.props.filtersStorage}
-            filters={this.props.filters}
-            renderFiltersDrawer={this.props.renderFiltersDrawer}
-          />
+      <Card
+        className={classNames(
+          'card-table',
+          this.props.fullWidth ? 'full-width' : '',
+          this.props.fieldName ? 'field-table' : '',
+          this.props.className,
         )}
-        <Card
-          className={classNames(
-            'card-table',
-            this.props.fullWidth ? 'full-width' : '',
-            this.props.fieldName ? 'field-table' : '',
-            this.props.className,
-          )}
-          id={this.props.id}
-        >
-          {this.props.blocked && <div className="table-block" />}
-          {this.props.hasActionBar && (
-            <Card.Header className="border-2 border-bottom">
-              <Row className="card-toolbar w-100">
-                <Col xs className="order-0 mw-25 pe-5">
-                  <Card.Title>
-                    <span className="me-2">
-                      {this.props.title || this.props.alterTitle}
-                    </span>
-                    <TableRefreshButton {...this.props} />
-                  </Card.Title>
-                </Col>
-                <Col
-                  xs="auto"
-                  className="order-1 order-md-2 min-w-25 ms-auto ps-5"
-                >
-                  {this.showActionsColumn() && (
-                    <div className="d-flex justify-content-end text-nowrap gap-3">
-                      <TableButtons {...this.props} />
-                    </div>
-                  )}
-                </Col>
-                {this.showQueryColumn() && (
-                  <Col xs className="order-2 order-md-1 mw-lg-350px mx-auto">
-                    {!this.props.selectedRows?.length ? (
-                      this.props.hasQuery && (
-                        <TableQuery
-                          query={this.props.query}
-                          setQuery={this.props.setQuery}
-                        />
-                      )
-                    ) : (
-                      <>
-                        <Button
-                          variant="light"
-                          className="btn-icon me-2"
-                          size="sm"
-                          onClick={this.props.resetSelection}
-                        >
-                          <i className="fa fa-times fs-5"></i>
-                        </Button>
-                        <span className="me-2 border-bottom-dashed border-2">
-                          {this.props.selectedRows?.length === 1
-                            ? translate('{count} row selected', {
-                                count: this.props.selectedRows?.length,
-                              })
-                            : translate('{count} rows selected', {
-                                count: this.props.selectedRows?.length,
-                              })}
-                        </span>
-                      </>
-                    )}
-                  </Col>
-                )}
-              </Row>
-            </Card.Header>
-          )}
-
-          {this.props.filterPosition === 'header' && this.props.filters && (
-            <Card.Header className="table-filter border-2 border-bottom align-items-stretch">
-              <TableFilterContainer filters={this.props.filters} />
-            </Card.Header>
-          )}
-
-          <Card.Body>
-            <div className="table-responsive dataTables_wrapper">
-              <div
-                className={classNames(
-                  'table-container',
-                  this.props.mode === 'grid' && this.props.gridItem && 'px-3',
-                )}
+        id={this.props.id}
+      >
+        {this.props.blocked && <div className="table-block" />}
+        {this.props.hasActionBar && (
+          <Card.Header className="border-2 border-bottom">
+            <Row className="card-toolbar w-100">
+              <Col xs className="order-0 mw-25 pe-5">
+                <Card.Title>
+                  <span className="me-2">
+                    {this.props.title || this.props.alterTitle}
+                  </span>
+                  <TableRefreshButton {...this.props} />
+                </Card.Title>
+              </Col>
+              <Col
+                xs="auto"
+                className="order-1 order-md-2 min-w-25 ms-auto ps-5"
               >
-                {this.renderBody()}
-              </div>
+                {this.showActionsColumn() && (
+                  <div className="d-flex justify-content-end text-nowrap gap-3">
+                    <TableButtons {...this.props} />
+                  </div>
+                )}
+              </Col>
+              {this.showQueryColumn() && (
+                <Col xs className="order-2 order-md-1 mw-lg-350px mx-auto">
+                  {!this.props.selectedRows?.length ? (
+                    this.props.hasQuery && (
+                      <TableQuery
+                        query={this.props.query}
+                        setQuery={this.props.setQuery}
+                      />
+                    )
+                  ) : (
+                    <>
+                      <Button
+                        variant="light"
+                        className="btn-icon me-2"
+                        size="sm"
+                        onClick={this.props.resetSelection}
+                      >
+                        <i className="fa fa-times fs-5"></i>
+                      </Button>
+                      <span className="me-2 border-bottom-dashed border-2">
+                        {this.props.selectedRows?.length === 1
+                          ? translate('{count} row selected', {
+                              count: this.props.selectedRows?.length,
+                            })
+                          : translate('{count} rows selected', {
+                              count: this.props.selectedRows?.length,
+                            })}
+                      </span>
+                    </>
+                  )}
+                </Col>
+              )}
+            </Row>
+          </Card.Header>
+        )}
+
+        {this.props.filterPosition === 'header' && this.props.filters ? (
+          <Card.Header className="table-filter border-2 border-bottom align-items-stretch">
+            <TableFilterContainer filters={this.props.filters} />
+          </Card.Header>
+        ) : null}
+
+        {this.props.filterPosition === 'sidebar' &&
+        this.props.filtersStorage.length &&
+        this.props.filters ? (
+          <Card.Header className="border-2 border-bottom">
+            <TableFilters
+              filtersStorage={this.props.filtersStorage}
+              filters={this.props.filters}
+              renderFiltersDrawer={this.props.renderFiltersDrawer}
+            />
+          </Card.Header>
+        ) : null}
+
+        <Card.Body>
+          <div className="table-responsive dataTables_wrapper">
+            <div
+              className={classNames(
+                'table-container',
+                this.props.mode === 'grid' && this.props.gridItem && 'px-3',
+              )}
+            >
+              {this.renderBody()}
             </div>
-            {this.props.hasPagination && (
-              <Row className="table-pagination px-0">
-                <Col
-                  sm={'auto'}
-                  md={2}
-                  className="d-flex align-items-start justify-content-start"
-                >
-                  {this.props.showPageSizeSelector && (
-                    <TablePageSize
-                      {...this.props.pagination}
-                      updatePageSize={this.props.updatePageSize}
-                    />
-                  )}
-                </Col>
-                <Col
-                  sm
-                  md={8}
-                  className="d-flex flex-column align-items-end justify-content-start align-items-md-center"
-                >
-                  {this.hasRows() && (
-                    <TablePagination
-                      {...this.props.pagination}
-                      gotoPage={this.props.gotoPage}
-                    />
-                  )}
-                </Col>
-              </Row>
-            )}
-            {this.props.footer}
-          </Card.Body>
-        </Card>
-      </>
+          </div>
+          {this.props.hasPagination && (
+            <Row className="table-pagination px-0">
+              <Col
+                sm={'auto'}
+                md={2}
+                className="d-flex align-items-start justify-content-start"
+              >
+                {this.props.showPageSizeSelector && (
+                  <TablePageSize
+                    {...this.props.pagination}
+                    updatePageSize={this.props.updatePageSize}
+                  />
+                )}
+              </Col>
+              <Col
+                sm
+                md={8}
+                className="d-flex flex-column align-items-end justify-content-start align-items-md-center"
+              >
+                {this.hasRows() && (
+                  <TablePagination
+                    {...this.props.pagination}
+                    gotoPage={this.props.gotoPage}
+                  />
+                )}
+              </Col>
+            </Row>
+          )}
+          {this.props.footer}
+        </Card.Body>
+      </Card>
     );
   }
 
