@@ -36,7 +36,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
         url: item.offering,
         customer_name: item.provider_name,
         attributes: item.attributes,
-        plan: item.plan,
+        plan: item.plan_details,
       }))
       .filter((opt) => Boolean(opt.plan));
   }, [call]);
