@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -27,7 +28,6 @@ const mapStateToFilter = createSelector(
   getFormValues(CALL_FILTER_FORM_ID),
   (filters: any) => {
     const result: Record<string, any> = {};
-
     if (filters) {
       if (filters.state) {
         result.state = filters.state.map((option) => option.value);
@@ -39,12 +39,17 @@ const mapStateToFilter = createSelector(
 
 export const PublicCallsPage: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
+  const {
+    params: { offering_uuid },
+  } = useCurrentStateAndParams();
   useFullPage();
   useTitle(translate('All calls'));
 
   const tableProps = useTable({
     table: 'PublicCallsList',
-    fetchData: createFetcher('proposal-public-calls'),
+    fetchData: createFetcher('proposal-public-calls', {
+      params: { offering_uuid: offering_uuid },
+    }),
     queryField: 'name',
     filter,
   });

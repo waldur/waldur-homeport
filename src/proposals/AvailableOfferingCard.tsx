@@ -14,6 +14,12 @@ export const AvailableOfferingCard: FC<{ availableOffering }> = ({
     footer={
       <div className="d-flex justify-content-between">
         <Link
+          state="calls-for-proposals-all-calls"
+          params={{ offering_uuid: availableOffering.uuid }}
+          className="btn btn-flush text-anchor"
+          label={translate('Apply')}
+        />
+        <Link
           state="public.marketplace-public-offering"
           params={{ uuid: availableOffering.uuid }}
           className="btn btn-flush text-anchor"
