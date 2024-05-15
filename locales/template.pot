@@ -851,6 +851,7 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
+#: src/proposals/AvailableOfferingCard.tsx
 #: src/proposals/CallCard.tsx
 #: src/table/TableFilterActions.tsx
 msgid "Apply"

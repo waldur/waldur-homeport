@@ -1,3 +1,4 @@
+import { Globe } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -15,7 +16,7 @@ export const Saml2ProvidersButton = () => {
 
   return (
     <LoginButton
-      iconClass="fa-globe"
+      icon={<Globe />}
       label="eduGAIN"
       onClick={() => dispatch(openModalDialog(AuthSaml2Dialog))}
     />

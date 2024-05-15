@@ -1,3 +1,4 @@
+import { Globe } from '@phosphor-icons/react';
 import Qs from 'qs';
 
 import { ENV } from '@waldur/configs/default';
@@ -6,7 +7,7 @@ import { LoginButton } from './LoginButton';
 
 export const Saml2DiscoveryButton = () => (
   <LoginButton
-    iconClass="fa-globe"
+    icon={<Globe />}
     label={ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_LABEL}
     onClick={() => {
       const discovery = ENV.plugins.WALDUR_AUTH_SAML2.DISCOVERY_SERVICE_URL;

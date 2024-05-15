@@ -1,3 +1,5 @@
+import { Student } from '@phosphor-icons/react';
+
 import { ENV } from '@waldur/configs/default';
 
 import { LoginButton } from './LoginButton';
@@ -8,7 +10,7 @@ export const Saml2Button = () => {
 
   return (
     <LoginButton
-      iconClass="fa-university"
+      icon={<Student />}
       label={ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_LABEL}
       onClick={() =>
         handleSaml2Login(ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL)

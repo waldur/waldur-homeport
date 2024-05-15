@@ -1,3 +1,4 @@
+import { DeviceMobile } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -15,7 +16,7 @@ export const ValimoButton = () => {
   const dispatch = useDispatch();
   return (
     <LoginButton
-      iconClass="fa-phone-square"
+      icon={<DeviceMobile />}
       label={ENV.plugins.WALDUR_AUTH_VALIMO.LABEL}
       onClick={() => dispatch(openModalDialog(AuthValimoDialog))}
     />
