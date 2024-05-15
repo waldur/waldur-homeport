@@ -11,14 +11,19 @@ const tabs: PageBarTab[] = [
     priority: 10,
   },
   {
+    key: 'rounds',
+    title: translate('Rounds'),
+    priority: 20,
+  },
+  {
     key: 'documents',
     title: translate('Documents'),
-    priority: 20,
+    priority: 30,
   },
   {
     key: 'offerings',
     title: translate('Offerings'),
-    priority: 30,
+    priority: 40,
   },
 ];
 

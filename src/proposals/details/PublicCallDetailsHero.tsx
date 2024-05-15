@@ -8,8 +8,6 @@ import { getCallStatus } from '@waldur/proposals/utils';
 import { Call } from '../types';
 
 import { CallDetailsHeaderBody } from './CallDetailsHeaderBody';
-import { CallRoundsList } from './CallRoundsList';
-import { CallShowAllRounds } from './CallShowAllRounds';
 import { PublicCallApplyButton } from './PublicCallApplyButton';
 
 const heroBg = require('@waldur/proposals/proposal-calls.png');
@@ -46,8 +44,6 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
           <PublicCallApplyButton call={call} />
         </div>
       }
-      quickBody={<CallRoundsList call={call} max={3} filterCode={-1} />}
-      quickFooter={<CallShowAllRounds call={call} />}
       quickFooterClassName="justify-content-center"
     >
       {call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />}

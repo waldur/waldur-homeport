@@ -9,6 +9,7 @@ import { Call } from '../types';
 import { CallDescriptionCard } from './CallDescriptionCard';
 import { CallDocumentsCard } from './CallDocumentsCard';
 import { CallOfferingsCard } from './CallOfferingsCard';
+import { CallRoundsList } from './CallRoundsList';
 import { PublicCallDetailsBar } from './PublicCallDetailsBar';
 import { PublicCallDetailsHero } from './PublicCallDetailsHero';
 
@@ -30,6 +31,9 @@ export const PublicCallDetails: FunctionComponent<PublicCallDetailsProps> = ({
         <div className="container-xxl py-10">
           <HidableWrapper activeTab={activeTab} tabKey="description">
             <CallDescriptionCard call={call} />
+          </HidableWrapper>
+          <HidableWrapper activeTab={activeTab} tabKey="rounds">
+            <CallRoundsList call={call} />
           </HidableWrapper>
           <HidableWrapper activeTab={activeTab} tabKey="documents">
             <CallDocumentsCard call={call} />
