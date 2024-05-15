@@ -17,7 +17,6 @@ export interface ActionItemProps {
   disabled?: boolean;
   tooltip?: string;
   as?;
-  iconClass?;
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => {

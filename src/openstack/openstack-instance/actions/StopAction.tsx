@@ -26,7 +26,6 @@ const validators = [
 export const getProps = () =>
   ({
     title: translate('Stop'),
-    iconClass: 'fa-stop',
     validators,
     apiMethod: stopInstance,
     important: true,

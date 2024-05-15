@@ -19,11 +19,6 @@ export const ShowReportAction: ActionItemType = ({ resource, ...rest }) => {
   const callback = () => dispatch(openReport(resource.report));
 
   return Array.isArray(resource.report) ? (
-    <ActionItem
-      title={translate('Show report')}
-      iconClass="fa-book"
-      action={callback}
-      {...rest}
-    />
+    <ActionItem title={translate('Show report')} action={callback} {...rest} />
   ) : null;
 };

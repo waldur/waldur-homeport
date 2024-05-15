@@ -49,7 +49,6 @@ const usePull = ({
   return {
     action,
     title: translate('Synchronise'),
-    iconClass: 'fa-refresh',
     tooltip,
     disabled,
     important: true,

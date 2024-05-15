@@ -17,7 +17,6 @@ export interface AsyncActionItemProps<T>
   validators: ActionValidator<T>[];
   successMessage?: string;
   errorMessage?: string;
-  iconClass?: string;
   refetch?(): void;
 }
 

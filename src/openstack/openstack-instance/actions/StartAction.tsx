@@ -26,7 +26,6 @@ const validators = [
 export const getProps = () =>
   ({
     title: translate('Start'),
-    iconClass: 'fa-play',
     validators,
     apiMethod: startInstance,
     important: true,

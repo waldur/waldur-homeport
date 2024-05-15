@@ -26,7 +26,6 @@ const validators = [
 export const getProps = () =>
   ({
     title: translate('Restart'),
-    iconClass: 'fa-refresh',
     validators,
     apiMethod: restartInstance,
     important: true,
