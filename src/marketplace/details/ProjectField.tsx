@@ -35,8 +35,6 @@ export const ProjectField: FC<ProjectFieldProps> = ({
       </div>
     </FormGroup>
   ) : (
-    <>
-      <ProjectCreateGroup />
-    </>
+    <ProjectCreateGroup />
   );
 };

@@ -55,12 +55,10 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
           )}
 
           {value.offering.parent_name ? (
-            <>
-              <p>
-                <strong>{translate('Parent offering:')}</strong>{' '}
-                {value.offering.parent_name}
-              </p>
-            </>
+            <p>
+              <strong>{translate('Parent offering:')}</strong>{' '}
+              {value.offering.parent_name}
+            </p>
           ) : null}
 
           {value.offering.parent_description ? (

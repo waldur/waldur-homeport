@@ -11,21 +11,17 @@ import {
 } from '@waldur/resource/actions/base';
 
 const HostRoutesField: FunctionComponent = () => (
-  <>
-    <Form.Group>
-      <label>{translate('Host routes')}</label>
-      <FieldArray name="host_routes" component={StaticRoutesTable} />
-    </Form.Group>
-  </>
+  <Form.Group>
+    <label>{translate('Host routes')}</label>
+    <FieldArray name="host_routes" component={StaticRoutesTable} />
+  </Form.Group>
 );
 
 const NameserversField: FunctionComponent = () => (
-  <>
-    <Form.Group>
-      <label>{translate('DNS name servers')}</label>
-      <FieldArray name="dns_nameservers" component={IpAddressList} />
-    </Form.Group>
-  </>
+  <Form.Group>
+    <label>{translate('DNS name servers')}</label>
+    <FieldArray name="dns_nameservers" component={IpAddressList} />
+  </Form.Group>
 );
 
 export const getFields = () => [

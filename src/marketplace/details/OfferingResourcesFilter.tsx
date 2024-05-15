@@ -9,11 +9,9 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { NON_TERMINATED_STATES } from '../resources/list/SupportResourcesFilter';
 
 const PureOfferingResourcesFilter: FunctionComponent = () => (
-  <>
-    <TableFilterItem title={translate('State')} name="state" ellipsis={false}>
-      <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
-    </TableFilterItem>
-  </>
+  <TableFilterItem title={translate('State')} name="state" ellipsis={false}>
+    <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
+  </TableFilterItem>
 );
 
 const enhance = reduxForm({

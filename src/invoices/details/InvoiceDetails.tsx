@@ -37,11 +37,9 @@ export const InvoiceDetails = ({
               <div className="row">
                 <div className="text-end">
                   {invoice.number && (
-                    <>
-                      <h4>
-                        {translate('Invoice No.')} {invoice.number}
-                      </h4>
-                    </>
+                    <h4>
+                      {translate('Invoice No.')} {invoice.number}
+                    </h4>
                   )}
                   <div>
                     <strong>{translate('Invoice period')}: </strong>

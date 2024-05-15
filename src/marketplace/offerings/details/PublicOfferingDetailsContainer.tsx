@@ -78,13 +78,11 @@ export const PublicOfferingDetailsContainer: FunctionComponent = () => {
   ) : error ? (
     <h3>{translate('Unable to load offering details.')}</h3>
   ) : value ? (
-    <>
-      <PublicOfferingDetails
-        offering={value.offering}
-        refreshOffering={refreshOffering}
-        category={value.category}
-      />
-    </>
+    <PublicOfferingDetails
+      offering={value.offering}
+      refreshOffering={refreshOffering}
+      category={value.category}
+    />
   ) : (
     <InvalidRoutePage />
   );

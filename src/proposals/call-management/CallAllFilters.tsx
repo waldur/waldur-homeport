@@ -15,11 +15,9 @@ import { CallStateFilter } from './CallStateFilter';
 const PureCallAllFilters = ({ form }) => {
   useReinitializeFilterFromUrl(form);
   return (
-    <>
-      <TableFilterItem title={translate('State')} name="state">
-        <CallStateFilter />
-      </TableFilterItem>
-    </>
+    <TableFilterItem title={translate('State')} name="state">
+      <CallStateFilter />
+    </TableFilterItem>
   );
 };
 

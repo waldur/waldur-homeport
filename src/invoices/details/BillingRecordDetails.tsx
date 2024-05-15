@@ -38,12 +38,10 @@ export const BillingRecordDetails: FunctionComponent<
                   <div className="row">
                     <div className="text-end">
                       {customer.agreement_number && (
-                        <>
-                          <h4>
-                            {translate('Agreement number')}{' '}
-                            {customer.agreement_number}
-                          </h4>
-                        </>
+                        <h4>
+                          {translate('Agreement number')}{' '}
+                          {customer.agreement_number}
+                        </h4>
                       )}
                       <h4>
                         {translate('Record no.')} {invoice.number}
@@ -76,7 +74,7 @@ export const BillingRecordDetails: FunctionComponent<
                           <th>{translate('Quantity')}</th>
                           <th>{translate('Unit price')}</th>
                           <th>
-                            <PriceTooltip /> <>{translate('Total price')}</>
+                            <PriceTooltip /> {translate('Total price')}
                           </th>
                         </tr>
                       </thead>

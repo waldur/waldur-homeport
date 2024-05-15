@@ -49,38 +49,36 @@ export const IssueDetails: FunctionComponent = () => {
   }
 
   return (
-    <>
-      <Row>
-        <Col sm={8}>
-          <Card className="mb-6">
-            <Card.Header>
-              <Card.Title>
-                {issue.key ? `${issue.key}: ${issue.summary}` : issue.summary}
-              </Card.Title>
-            </Card.Header>
-            <Card.Body>
-              {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'smax' ? (
-                <FormattedHtml html={linkify(issue?.description)} />
-              ) : (
-                <FormattedJira text={linkify(issue?.description)} />
-              )}
-            </Card.Body>
-          </Card>
-          <IssueCommentsContainer issue={issue} />
-        </Col>
-        <Col sm={4}>
-          <Card className="mb-6">
-            <Card.Header>
-              <Card.Title>{translate('Summary')}</Card.Title>
-            </Card.Header>
-            <Card.Body>
-              <IssueSummary issue={issue} />
-            </Card.Body>
-          </Card>
+    <Row>
+      <Col sm={8}>
+        <Card className="mb-6">
+          <Card.Header>
+            <Card.Title>
+              {issue.key ? `${issue.key}: ${issue.summary}` : issue.summary}
+            </Card.Title>
+          </Card.Header>
+          <Card.Body>
+            {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'smax' ? (
+              <FormattedHtml html={linkify(issue?.description)} />
+            ) : (
+              <FormattedJira text={linkify(issue?.description)} />
+            )}
+          </Card.Body>
+        </Card>
+        <IssueCommentsContainer issue={issue} />
+      </Col>
+      <Col sm={4}>
+        <Card className="mb-6">
+          <Card.Header>
+            <Card.Title>{translate('Summary')}</Card.Title>
+          </Card.Header>
+          <Card.Body>
+            <IssueSummary issue={issue} />
+          </Card.Body>
+        </Card>
 
-          <IssueAttachmentsContainer issue={issue} />
-        </Col>
-      </Row>
-    </>
+        <IssueAttachmentsContainer issue={issue} />
+      </Col>
+    </Row>
   );
 };

@@ -22,15 +22,13 @@ const PureProviderOfferingUsersFilter: FunctionComponent<{}> = () => {
   );
 
   return (
-    <>
-      <TableFilterItem
-        title={translate('Offering')}
-        name="offering"
-        badgeValue={(value) => value.name}
-      >
-        <OfferingAutocomplete offeringFilter={offeringFilter} />
-      </TableFilterItem>
-    </>
+    <TableFilterItem
+      title={translate('Offering')}
+      name="offering"
+      badgeValue={(value) => value.name}
+    >
+      <OfferingAutocomplete offeringFilter={offeringFilter} />
+    </TableFilterItem>
   );
 };
 

@@ -8,11 +8,9 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { OfferingStateFilter, getStates } from './OfferingStateFilter';
 
 const PureOfferingsFilter: FunctionComponent = () => (
-  <>
-    <TableFilterItem title={translate('State')} name="state">
-      <OfferingStateFilter />
-    </TableFilterItem>
-  </>
+  <TableFilterItem title={translate('State')} name="state">
+    <OfferingStateFilter />
+  </TableFilterItem>
 );
 
 const enhance = reduxForm({

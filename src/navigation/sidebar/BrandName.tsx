@@ -37,11 +37,9 @@ export const BrandName: FunctionComponent = () => {
       ) : ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
         <img src={imageUrl} alt="logo" className="mh-50px mw-200px logo" />
       ) : (
-        <>
-          <h3 className="mt-2" style={{ color: 'white' }}>
-            {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
-          </h3>
-        </>
+        <h3 className="mt-2" style={{ color: 'white' }}>
+          {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+        </h3>
       )}
       <div
         id="kt_aside_toggle"

@@ -19,21 +19,19 @@ const states = [
 ];
 
 const PureHooksListFilter: FunctionComponent<{}> = () => (
-  <>
-    <TableFilterItem title={translate('State')} name="state">
-      <Field
-        name="state"
-        component={(prop) => (
-          <Select
-            value={prop.input.value}
-            onChange={(value) => prop.input.onChange(value)}
-            options={states}
-            isClearable={true}
-          />
-        )}
-      />
-    </TableFilterItem>
-  </>
+  <TableFilterItem title={translate('State')} name="state">
+    <Field
+      name="state"
+      component={(prop) => (
+        <Select
+          value={prop.input.value}
+          onChange={(value) => prop.input.onChange(value)}
+          options={states}
+          isClearable={true}
+        />
+      )}
+    />
+  </TableFilterItem>
 );
 
 const enhance = reduxForm({

@@ -14,7 +14,7 @@ export const AppFooter: FunctionComponent = () => {
       <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
         <div className="text-dark order-2 order-md-1">
           <BackendHealthStatusIndicator />
-          <>{translate('Version')}</>: {buildId}
+          {translate('Version')}: {buildId}
         </div>
 
         <FooterLinks />

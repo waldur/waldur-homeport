@@ -5,7 +5,6 @@ import {
   PropsWithChildren,
   createContext,
   useContext,
-  useEffect,
   useState,
 } from 'react';
 
@@ -54,59 +53,4 @@ function usePageData() {
   return useContext(PageDataContext);
 }
 
-type Props = {
-  description?: string;
-  breadcrumbs?: Array<PageLink>;
-};
-
-const PageTitle: FC<PropsWithChildren<Props>> = ({
-  children,
-  description,
-  breadcrumbs,
-}) => {
-  const { setPageTitle, setPageDescription, setPageBreadcrumbs } =
-    usePageData();
-  useEffect(() => {
-    if (children) {
-      setPageTitle(children.toString());
-    }
-    return () => {
-      setPageTitle('');
-    };
-  }, [children]);
-
-  useEffect(() => {
-    if (description) {
-      setPageDescription(description);
-    }
-    return () => {
-      setPageDescription('');
-    };
-  }, [description]);
-
-  useEffect(() => {
-    if (breadcrumbs) {
-      setPageBreadcrumbs(breadcrumbs);
-    }
-    return () => {
-      setPageBreadcrumbs([]);
-    };
-  }, [breadcrumbs]);
-
-  return <></>;
-};
-
-const PageDescription: React.FC<PropsWithChildren> = ({ children }) => {
-  const { setPageDescription } = usePageData();
-  useEffect(() => {
-    if (children) {
-      setPageDescription(children.toString());
-    }
-    return () => {
-      setPageDescription('');
-    };
-  }, [children]);
-  return <></>;
-};
-
-export { PageDescription, PageTitle, PageDataProvider, usePageData };
+export { PageDataProvider, usePageData };

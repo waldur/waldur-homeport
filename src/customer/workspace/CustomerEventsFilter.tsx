@@ -22,23 +22,21 @@ const choices = [
 ];
 
 const PureCustomerEventsFilter: FunctionComponent = () => (
-  <>
-    <TableFilterItem name="feature" title={translate('Type')}>
-      <Field
-        name="feature"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Select type...')}
-            options={choices}
-            value={fieldProps.input.value}
-            onChange={(item) => fieldProps.input.onChange(item)}
-            isMulti={true}
-            isClearable={true}
-          />
-        )}
-      />
-    </TableFilterItem>
-  </>
+  <TableFilterItem name="feature" title={translate('Type')}>
+    <Field
+      name="feature"
+      component={(fieldProps) => (
+        <Select
+          placeholder={translate('Select type...')}
+          options={choices}
+          value={fieldProps.input.value}
+          onChange={(item) => fieldProps.input.onChange(item)}
+          isMulti={true}
+          isClearable={true}
+        />
+      )}
+    />
+  </TableFilterItem>
 );
 
 const enhance = compose(

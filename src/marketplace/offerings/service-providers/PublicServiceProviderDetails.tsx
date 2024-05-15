@@ -52,12 +52,10 @@ export const PublicServiceProviderDetails: FunctionComponent = () => {
   ) : error ? (
     <p>{translate('Unable to load the service provider.')}</p>
   ) : serviceProvider ? (
-    <>
-      <ServiceProvider
-        serviceProvider={serviceProvider}
-        refreshServiceProvider={refreshServiceProvider}
-      />
-    </>
+    <ServiceProvider
+      serviceProvider={serviceProvider}
+      refreshServiceProvider={refreshServiceProvider}
+    />
   ) : (
     <InvalidRoutePage />
   );

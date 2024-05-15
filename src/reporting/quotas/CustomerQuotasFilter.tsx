@@ -9,25 +9,23 @@ import { getQuotas } from './constants';
 import { QuotaChoice } from './types';
 
 export const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
-  <>
-    <TableFilterItem
-      title={translate('Quota')}
+  <TableFilterItem
+    title={translate('Quota')}
+    name="quota"
+    badgeValue={(value) => value?.title}
+    ellipsis={false}
+  >
+    <Field
       name="quota"
-      badgeValue={(value) => value?.title}
-      ellipsis={false}
-    >
-      <Field
-        name="quota"
-        options={getQuotas(true)}
-        isClearable={false}
-        component={SelectField}
-        getOptionValue={(option: QuotaChoice) => option.key}
-        getOptionLabel={(option: QuotaChoice) => option.title}
-        placeholder={translate('Select quota') + '...'}
-        noUpdateOnBlur
-      />
-    </TableFilterItem>
-  </>
+      options={getQuotas(true)}
+      isClearable={false}
+      component={SelectField}
+      getOptionValue={(option: QuotaChoice) => option.key}
+      getOptionLabel={(option: QuotaChoice) => option.title}
+      placeholder={translate('Select quota') + '...'}
+      noUpdateOnBlur
+    />
+  </TableFilterItem>
 );
 
 export const CustomerQuotasFilter = reduxForm<{}, {}>({

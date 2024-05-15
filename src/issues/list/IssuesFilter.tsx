@@ -20,23 +20,21 @@ const PureIssuesFilter = ({ form }) => {
   useReinitializeFilterFromUrl(form);
 
   return (
-    <>
-      <TableFilterItem title={translate('Status')} name="status">
-        <Field
-          name="status"
-          component={(fieldProps) => (
-            <Select
-              placeholder={translate('Select status...')}
-              options={getIssueStatuses()}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              isMulti={true}
-              isClearable={true}
-            />
-          )}
-        />
-      </TableFilterItem>
-    </>
+    <TableFilterItem title={translate('Status')} name="status">
+      <Field
+        name="status"
+        component={(fieldProps) => (
+          <Select
+            placeholder={translate('Select status...')}
+            options={getIssueStatuses()}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            isMulti={true}
+            isClearable={true}
+          />
+        )}
+      />
+    </TableFilterItem>
   );
 };
 

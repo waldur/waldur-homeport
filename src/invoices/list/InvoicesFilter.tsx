@@ -40,23 +40,21 @@ const PureInvoicesFilter = () => {
   }, [accountingMode]);
 
   return (
-    <>
-      <TableFilterItem name="state" title={translate('State')}>
-        <Field
-          name="state"
-          component={(fieldProps) => (
-            <Select
-              placeholder={translate('Select state...')}
-              options={choices}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              isMulti={true}
-              isClearable={true}
-            />
-          )}
-        />
-      </TableFilterItem>
-    </>
+    <TableFilterItem name="state" title={translate('State')}>
+      <Field
+        name="state"
+        component={(fieldProps) => (
+          <Select
+            placeholder={translate('Select state...')}
+            options={choices}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            isMulti={true}
+            isClearable={true}
+          />
+        )}
+      />
+    </TableFilterItem>
   );
 };
 

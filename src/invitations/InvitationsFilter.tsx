@@ -33,23 +33,21 @@ const choices = [
 
 const PureInvitationsFilter = () => {
   return (
-    <>
-      <TableFilterItem title={translate('State')} name="state">
-        <Field
-          name="state"
-          component={(fieldProps) => (
-            <Select
-              placeholder={translate('Select state...')}
-              options={choices}
-              value={fieldProps.input.value}
-              onChange={(item) => fieldProps.input.onChange(item)}
-              isMulti={true}
-              isClearable={true}
-            />
-          )}
-        />
-      </TableFilterItem>
-    </>
+    <TableFilterItem title={translate('State')} name="state">
+      <Field
+        name="state"
+        component={(fieldProps) => (
+          <Select
+            placeholder={translate('Select state...')}
+            options={choices}
+            value={fieldProps.input.value}
+            onChange={(item) => fieldProps.input.onChange(item)}
+            isMulti={true}
+            isClearable={true}
+          />
+        )}
+      />
+    </TableFilterItem>
   );
 };
 

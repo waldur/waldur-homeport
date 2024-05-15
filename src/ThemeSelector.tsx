@@ -71,5 +71,6 @@ export const ThemeSelector: FunctionComponent = () => {
     else loadTheme('light');
   }, [theme]);
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <></>;
 };

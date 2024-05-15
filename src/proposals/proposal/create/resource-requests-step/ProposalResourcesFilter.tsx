@@ -12,15 +12,13 @@ interface OwnProps {
 }
 
 const PureProposalResourcesFilter: FC<OwnProps> = ({ offerings }) => (
-  <>
-    <TableFilterItem
-      title={translate('Offering')}
-      name="offering"
-      badgeValue={(value) => value?.offering_name}
-    >
-      <CallOfferingFilter options={offerings} />
-    </TableFilterItem>
-  </>
+  <TableFilterItem
+    title={translate('Offering')}
+    name="offering"
+    badgeValue={(value) => value?.offering_name}
+  >
+    <CallOfferingFilter options={offerings} />
+  </TableFilterItem>
 );
 
 export const ProposalResourcesFilter = reduxForm<any, OwnProps>({

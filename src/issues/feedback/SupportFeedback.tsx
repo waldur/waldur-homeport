@@ -33,47 +33,45 @@ const SupportFeedbackContainer = (props) => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={props.handleSubmit(submitRequest)}
-        className="center-vertically"
-      >
-        <FormContainer submitting={props.submitting}>
-          <Field
-            name="evaluation"
-            label={translate('Evaluation')}
-            component={(fieldProps) => (
-              <ReactStars
-                count={10}
-                size={24}
-                edit={true}
-                isHalf={false}
-                activeColor="#ffd700"
-                value={fieldProps.input.value}
-                onChange={(value) => fieldProps.input.onChange(value)}
-              />
-            )}
-          />
+    <form
+      onSubmit={props.handleSubmit(submitRequest)}
+      className="center-vertically"
+    >
+      <FormContainer submitting={props.submitting}>
+        <Field
+          name="evaluation"
+          label={translate('Evaluation')}
+          component={(fieldProps) => (
+            <ReactStars
+              count={10}
+              size={24}
+              edit={true}
+              isHalf={false}
+              activeColor="#ffd700"
+              value={fieldProps.input.value}
+              onChange={(value) => fieldProps.input.onChange(value)}
+            />
+          )}
+        />
 
-          <TextField
-            name="comment"
-            label={translate('Comment')}
-            maxLength={150}
-            rows={2}
-          />
+        <TextField
+          name="comment"
+          label={translate('Comment')}
+          maxLength={150}
+          rows={2}
+        />
 
-          <Form.Group>
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <SubmitButton
-                disabled={props.invalid}
-                submitting={props.submitting}
-                label={translate('Submit')}
-              />
-            </div>
-          </Form.Group>
-        </FormContainer>
-      </form>
-    </>
+        <Form.Group>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <SubmitButton
+              disabled={props.invalid}
+              submitting={props.submitting}
+              label={translate('Submit')}
+            />
+          </div>
+        </Form.Group>
+      </FormContainer>
+    </form>
   );
 };
 

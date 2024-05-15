@@ -25,14 +25,12 @@ export const OrganizationGroupsList: FunctionComponent = () => {
         {
           title: translate('Type'),
           render: ({ row }) => (
-            <>
-              <Link
-                state="admin-organization-group-types-list"
-                params={{ group: row.uuid }}
-              >
-                {row.type_name}
-              </Link>
-            </>
+            <Link
+              state="admin-organization-group-types-list"
+              params={{ group: row.uuid }}
+            >
+              {row.type_name}
+            </Link>
           ),
         },
         {

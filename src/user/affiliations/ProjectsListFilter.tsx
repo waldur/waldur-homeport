@@ -6,16 +6,14 @@ import { OrganizationAutocomplete } from '@waldur/marketplace/orders/Organizatio
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureProjectsListFilter = () => (
-  <>
-    <TableFilterItem
-      title={translate('Organization')}
-      name="organization"
-      badgeValue={(value) => value?.name}
-      ellipsis={false}
-    >
-      <OrganizationAutocomplete />
-    </TableFilterItem>
-  </>
+  <TableFilterItem
+    title={translate('Organization')}
+    name="organization"
+    badgeValue={(value) => value?.name}
+    ellipsis={false}
+  >
+    <OrganizationAutocomplete />
+  </TableFilterItem>
 );
 
 export const ProjectsListFilter = reduxForm({

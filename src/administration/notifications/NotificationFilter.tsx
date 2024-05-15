@@ -25,29 +25,25 @@ const options = [
 const PureNotificationFilter: FunctionComponent<{ form }> = ({ form }) => {
   useReinitializeFilterFromUrl(form);
   return (
-    <>
-      <TableFilterItem
+    <TableFilterItem
+      name="is_overridden"
+      title={translate('Status')}
+      getValueLabel={(value) => options.find((op) => op.value === value).label}
+    >
+      <Field
         name="is_overridden"
-        title={translate('Status')}
-        getValueLabel={(value) =>
-          options.find((op) => op.value === value).label
-        }
-      >
-        <Field
-          name="is_overridden"
-          component={(fieldProps) => (
-            <SelectField
-              {...fieldProps}
-              placeholder={translate('Select status')}
-              options={options}
-              noUpdateOnBlur={true}
-              simpleValue={true}
-              isClearable={true}
-            />
-          )}
-        ></Field>
-      </TableFilterItem>
-    </>
+        component={(fieldProps) => (
+          <SelectField
+            {...fieldProps}
+            placeholder={translate('Select status')}
+            options={options}
+            noUpdateOnBlur={true}
+            simpleValue={true}
+            isClearable={true}
+          />
+        )}
+      ></Field>
+    </TableFilterItem>
   );
 };
 

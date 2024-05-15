@@ -35,9 +35,7 @@ export const PublicCallDetailsContainer: FunctionComponent = () => {
   ) : error ? (
     <h3>{translate('Unable to load call details.')}</h3>
   ) : value ? (
-    <>
-      <PublicCallDetails call={value} refreshCall={refreshCall} />
-    </>
+    <PublicCallDetails call={value} refreshCall={refreshCall} />
   ) : (
     <InvalidRoutePage />
   );

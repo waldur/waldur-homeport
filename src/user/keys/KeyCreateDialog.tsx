@@ -67,13 +67,11 @@ const PureKeyCreateDialog: React.FC<InjectedFormProps<FormData>> = (props) => {
         title={translate('Import public key')}
         closeButton
         footer={
-          <>
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={translate('Import key')}
-            />
-          </>
+          <SubmitButton
+            disabled={props.invalid}
+            submitting={props.submitting}
+            label={translate('Import key')}
+          />
         }
       >
         <FormContainer submitting={props.submitting}>

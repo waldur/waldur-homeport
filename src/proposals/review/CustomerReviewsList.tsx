@@ -61,13 +61,11 @@ export const CustomerReviewsList: FC<{}> = () => {
         {
           title: translate('Call'),
           render: ({ row }) => (
-            <>
-              <Link
-                state="protected-call.main"
-                params={{ call_uuid: row.call_uuid }}
-                label={row.call_name}
-              />
-            </>
+            <Link
+              state="protected-call.main"
+              params={{ call_uuid: row.call_uuid }}
+              label={row.call_name}
+            />
           ),
         },
         {
