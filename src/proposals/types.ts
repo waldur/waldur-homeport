@@ -127,8 +127,8 @@ export interface CallOffering {
   provider_name: string;
   state: CallOfferingState;
   category_name?: string;
-  plan?: Plan;
-  plan_details?: Plan;
+  plan: string;
+  plan_details: Plan;
   options?: Offering['options'];
   components?: Offering['components'];
 }
