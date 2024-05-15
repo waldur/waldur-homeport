@@ -211,7 +211,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'calls-for-proposals-all-calls',
-    url: 'all-calls/',
+    url: 'all-calls/?:offering_uuid/',
     parent: 'calls-for-proposals',
     component: PublicCallsPage,
     data: {
