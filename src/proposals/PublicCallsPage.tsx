@@ -32,6 +32,9 @@ const mapStateToFilter = createSelector(
       if (filters.state) {
         result.state = filters.state.map((option) => option.value);
       }
+      if (filters.has_active_round) {
+        result.has_active_round = filters.has_active_round;
+      }
     }
     return result;
   },
@@ -48,10 +51,9 @@ export const PublicCallsPage: FunctionComponent = () => {
   const tableProps = useTable({
     table: 'PublicCallsList',
     fetchData: createFetcher('proposal-public-calls', {
-      params: { offering_uuid: offering_uuid },
+      params: { ...filter, offering_uuid: offering_uuid },
     }),
     queryField: 'name',
-    filter,
   });
 
   return (
