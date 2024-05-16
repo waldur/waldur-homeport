@@ -1,7 +1,8 @@
+import ReactStars from 'react-rating-stars-component';
 import { Field } from 'redux-form';
 
+import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
 import { FormGroup, TextField } from '@waldur/form';
-import { StarRatingField } from '@waldur/form/StarRatingField';
 import {
   VStepperFormStepCard,
   VStepperFormStepProps,
@@ -18,11 +19,19 @@ export const FormSummaryStep = (props: VStepperFormStepProps) => {
     >
       <Field
         name="summary_score"
-        component={FormGroup}
+        component={(fieldProps) => (
+          <ReactStars
+            count={5}
+            size={24}
+            edit={true}
+            isHalf={false}
+            activeColor={RATING_STAR_ACTIVE_COLOR}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+          />
+        )}
         label={translate('Final score')}
-      >
-        <StarRatingField />
-      </Field>
+      />
       <Field
         name="summary_public_comment"
         component={FormGroup}

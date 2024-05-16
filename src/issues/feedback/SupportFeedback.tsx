@@ -5,6 +5,7 @@ import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 
+import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
 import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { addFeedback } from '@waldur/issues/feedback/api';
@@ -12,7 +13,6 @@ import { SUPPORT_FEEDBACK_FORM_ID } from '@waldur/issues/feedback/constants';
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-
 import './SupportFeedback.scss';
 
 const SupportFeedbackContainer = (props) => {
@@ -47,7 +47,7 @@ const SupportFeedbackContainer = (props) => {
               size={24}
               edit={true}
               isHalf={false}
-              activeColor="#ffd700"
+              activeColor={RATING_STAR_ACTIVE_COLOR}
               value={fieldProps.input.value}
               onChange={(value) => fieldProps.input.onChange(value)}
             />

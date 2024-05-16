@@ -8,3 +8,5 @@ export type CustomerRole =
   | typeof CUSTOMER_OWNER_ROLE
   | typeof CUSTOMER_SUPPORT_ROLE
   | typeof CUSTOMER_SERVICE_MANAGER_ROLE;
+
+export const RATING_STAR_ACTIVE_COLOR = '#ffad0f';
