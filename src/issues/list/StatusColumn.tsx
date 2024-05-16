@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import ReactStars from 'react-rating-stars-component';
 
+import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { IssueTypeIcon } from '@waldur/issues/types/IssueTypeIcon';
 
@@ -17,7 +18,7 @@ export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
           size={14}
           edit={false}
           isHalf={true}
-          activeColor="#ffd700"
+          activeColor={RATING_STAR_ACTIVE_COLOR}
           value={row.feedback.evaluation_number}
         />
       </Tip>

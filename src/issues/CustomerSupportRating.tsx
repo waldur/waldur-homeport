@@ -3,10 +3,10 @@ import ReactStars from 'react-rating-stars-component';
 import { useAsync } from 'react-use';
 
 import { get } from '@waldur/core/api';
+import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
-
 import './CustomerSupportRating.scss';
 
 const loadData = async () => {
@@ -50,7 +50,7 @@ export const CustomerSupportRating: FunctionComponent = () => {
           size={24}
           edit={false}
           isHalf={true}
-          activeColor="#ffd700"
+          activeColor={RATING_STAR_ACTIVE_COLOR}
           value={value.averageFeedback}
         />
         <div className="total-reviews">
