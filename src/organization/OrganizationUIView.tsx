@@ -73,18 +73,18 @@ const PageHero = ({ customer }) => {
           <Tab
             eventKey="organization.dashboard"
             title={translate('Customer')}
-          ></Tab>
+          />
           {showCallManagement && (
             <Tab
               eventKey="call-management.dashboard"
               title={translate('Call management')}
-            ></Tab>
+            />
           )}
           {showServiceProvider && (
             <Tab
               eventKey="marketplace-provider-dashboard"
               title={translate('Service provider')}
-            ></Tab>
+            />
           )}
         </Tabs>
       )}
