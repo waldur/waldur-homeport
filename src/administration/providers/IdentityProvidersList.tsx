@@ -43,7 +43,7 @@ export const IdentityProvidersList = () => {
         <Row>
           <Col xs={12} md={6} xl={4} className="mb-6">
             <ProviderCard
-              title={'Keycloak'}
+              title="Keycloak"
               description={translate(
                 'Open source identity and access management solution.',
               )}
@@ -54,7 +54,7 @@ export const IdentityProvidersList = () => {
           </Col>
           <Col xs={12} md={6} xl={4} className="mb-6">
             <ProviderCard
-              title={'TARA'}
+              title="TARA"
               description={translate(
                 'Identity service of the Republic of Estonia',
               )}
@@ -65,7 +65,7 @@ export const IdentityProvidersList = () => {
           </Col>
           <Col xs={12} md={6} xl={4} className="mb-6">
             <ProviderCard
-              title={'eduTEAMS'}
+              title="eduTEAMS"
               description={translate(
                 'Global federation of identity providers for researchers.',
               )}
@@ -78,7 +78,7 @@ export const IdentityProvidersList = () => {
         <Row>
           <Col xs={12} md={6} xl={4} className="mb-6">
             <ProviderCard
-              title={'Local identity provider'}
+              title={translate('Local identity provider')}
               description={translate(
                 'Digital identity is managed by Waldur itself.',
               )}
@@ -95,7 +95,7 @@ export const IdentityProvidersList = () => {
           </Col>
           <Col xs={12} md={6} xl={4} className="mb-6">
             <ProviderCard
-              title={'SAML2'}
+              title="SAML2"
               description={translate(
                 'Single sign-on using SAML2-based identity federation.',
               )}

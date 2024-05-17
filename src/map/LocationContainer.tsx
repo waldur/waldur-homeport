@@ -32,7 +32,7 @@ export const LocationContainer = ({ input: { value, onChange }, ...props }) => {
       ) : null}
       <GeoSearchControlElement
         provider={provider}
-        style={'bar'}
+        style="bar"
         showMarker={true}
         showPopup={true}
         popupFormat={({ result }) => result.label}

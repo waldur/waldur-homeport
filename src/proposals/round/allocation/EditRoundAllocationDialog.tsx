@@ -45,7 +45,7 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
 
   return (
     <WizardFormThirdPage
-      form={'RoundEditForm'}
+      form="RoundEditForm"
       title={translate('Edit round allocation')}
       onSubmit={submit}
       onPrev={null}

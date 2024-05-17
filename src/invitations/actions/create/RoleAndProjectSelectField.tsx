@@ -206,21 +206,19 @@ export const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (
         data-kt-menu-attach="parent"
         data-kt-menu-placement="bottom"
       />
-      {
-        <RoleAndProjectSelectPopup
-          roles={roles}
-          customer={customer}
-          currentProject={currentProject}
-          selectedRole={selectedRole}
-          selectedProject={selectedProject}
-          select={(role: Role, project) => {
-            props.input.onChange({
-              role,
-              project,
-            });
-          }}
-        />
-      }
+      <RoleAndProjectSelectPopup
+        roles={roles}
+        customer={customer}
+        currentProject={currentProject}
+        selectedRole={selectedRole}
+        selectedProject={selectedProject}
+        select={(role: Role, project) => {
+          props.input.onChange({
+            role,
+            project,
+          });
+        }}
+      />
     </div>
   );
 };

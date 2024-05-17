@@ -41,6 +41,7 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
+    'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
     'react/self-closing-comp': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/camelcase': 'off',

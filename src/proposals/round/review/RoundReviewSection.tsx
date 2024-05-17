@@ -55,7 +55,7 @@ export const RoundReviewSection: FC<RoundReviewSectionProps> = ({
           value={round.review_duration_in_days}
           className="col-12 col-md-6"
           floating
-          addon={'days'}
+          addon="days"
         />
         <ReadOnlyFormControl
           label={translate('Minimum reviewers')}

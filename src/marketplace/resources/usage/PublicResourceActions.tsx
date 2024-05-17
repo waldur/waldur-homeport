@@ -30,7 +30,7 @@ export const PublicResourceActions: FunctionComponent<
 > = ({ row }) => {
   const is_support_only = useSelector(isSupportOnly);
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
-    return <>{'N/A'}</>;
+    return <>N/A</>;
   }
   const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
   return (

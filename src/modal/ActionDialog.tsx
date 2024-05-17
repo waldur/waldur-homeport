@@ -36,7 +36,7 @@ export const ActionDialog: React.FC<PropsWithChildren<ActionDialogProps>> = (
       {props.loading ? (
         <LoadingSpinner />
       ) : (
-        <FormContainer submitting={props.submitting} className={'col-l'}>
+        <FormContainer submitting={props.submitting} className="col-l">
           {props.children}
         </FormContainer>
       )}

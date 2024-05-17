@@ -19,7 +19,7 @@ const TosPage = () => {
   return (
     <UserAgreementComponent
       agreement_type={USER_AGREEMENT_TYPES.terms_of_service}
-      title={'Terms of Service'}
+      title={translate('Terms of Service')}
     />
   );
 };
@@ -29,7 +29,7 @@ const PrivacyPage = () => {
   return (
     <UserAgreementComponent
       agreement_type={USER_AGREEMENT_TYPES.privacy_policy}
-      title={'Privacy Policy'}
+      title={translate('Privacy Policy')}
     />
   );
 };

@@ -195,7 +195,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
           {this.props.hasPagination && (
             <Row className="table-pagination px-0">
               <Col
-                sm={'auto'}
+                sm="auto"
                 md={2}
                 className="d-flex align-items-start justify-content-start"
               >

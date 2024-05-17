@@ -10,6 +10,6 @@ const defaults = {
 export const SVGImagePlaceholder = (props) => (
   <img
     src={SimpleSvgPlaceholder({ ...defaults, ...props })}
-    alt={'Placeholder'}
+    alt="Placeholder"
   />
 );

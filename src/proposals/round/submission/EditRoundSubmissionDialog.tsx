@@ -51,7 +51,7 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
 
   return (
     <WizardFormFirstPage
-      form={'RoundEditForm'}
+      form="RoundEditForm"
       title={translate('Edit round submission')}
       onSubmit={submit}
       onPrev={null}

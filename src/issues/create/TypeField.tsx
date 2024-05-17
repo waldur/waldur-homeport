@@ -33,6 +33,6 @@ export const TypeField: FunctionComponent<{ issueTypes; isDisabled }> = ({
     components={{ Option, SingleValue }}
     isClearable={false}
     required={true}
-    noOptionsMessage={'No request types'}
+    noOptionsMessage={translate('No request types')}
   />
 );

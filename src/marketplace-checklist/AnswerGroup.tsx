@@ -29,7 +29,7 @@ export const AnswerGroup: FunctionComponent<{
       {translate('No')}
     </ToggleButton>
     <ToggleButton id="null" value="null">
-      {'?'}
+      ?
     </ToggleButton>
   </ToggleButtonGroup>
 );
