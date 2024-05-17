@@ -9,16 +9,18 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import {
   formatRoundAllocationStrategy,
   formatRoundReviewStrategy,
-  getSortedRoundsWithStatus,
+  getRoundsWithStatus,
 } from '../utils';
 
 export const CallExpandableRow: FunctionComponent<{
   row: Call;
 }> = ({ row }) => {
   const activeRound = useMemo(() => {
-    const items = getSortedRoundsWithStatus(row.rounds);
-    const first = items[0];
-    if (first && [0, 1].includes(first.state.code)) {
+    const first = getRoundsWithStatus(row.rounds)[0];
+    if (
+      first &&
+      (first.status.label === 'Open' || first.status.label === 'Scheduled')
+    ) {
       return first;
     }
     return null;

@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { Call } from '../types';
-import { getSortedRoundsWithStatus } from '../utils';
+import { getRoundsWithStatus } from '../utils';
 
 interface PublicCallApplyButtonProps {
   call: Call;
@@ -31,9 +31,12 @@ export const PublicCallApplyButton: FC<PublicCallApplyButtonProps> = ({
   const activeRound =
     call.state == 'active' &&
     useMemo(() => {
-      const items = getSortedRoundsWithStatus(call.rounds);
+      const items = getRoundsWithStatus(call.rounds);
       const first = items[0];
-      if (first && [0, 1].includes(first.state.code)) {
+      if (
+        (first && first.status.label === 'Open') ||
+        first.status.label === 'Scheduled'
+      ) {
         return first;
       }
       return null;

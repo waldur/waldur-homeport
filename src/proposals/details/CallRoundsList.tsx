@@ -3,12 +3,12 @@ import { FC } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { Call, Round } from '@waldur/proposals/types';
+import { Call } from '@waldur/proposals/types';
 import { Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 import { RoundExpandableRow } from '../update/rounds/RoundExpandableRow';
-import { getSortedRoundsWithStatus } from '../utils';
+import { getRoundsWithStatus } from '../utils';
 
 interface CallRoundsListProps {
   call: Call;
@@ -19,13 +19,13 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
     table: 'CallRoundsList',
     fetchData: () =>
       Promise.resolve({
-        rows: getSortedRoundsWithStatus(props.call.rounds),
+        rows: getRoundsWithStatus(props.call.rounds),
         resultCount: props.call.rounds.length,
       }),
   });
 
   return (
-    <Table<Round & { state: { label: string; color: string } }>
+    <Table
       {...tableProps}
       id="rounds"
       className="mb-7"
@@ -45,7 +45,10 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
         {
           title: translate('State'),
           render: ({ row }) => (
-            <StateIndicator label={row.state.label} variant={row.state.color} />
+            <StateIndicator
+              label={row.status.label}
+              variant={row.status.color}
+            />
           ),
         },
       ]}

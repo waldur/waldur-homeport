@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
 
-import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import {
   Call,
@@ -136,18 +135,22 @@ export const formatReviewState = (value: ReviewState) =>
   value;
 
 export const getRoundStatus = (round: Round) => {
-  if (!round) return null;
-  const now = DateTime.now();
-  const start = parseDate(round.start_time);
-  if (start > now)
-    return { label: translate('Scheduled'), code: 1, color: 'secondary' };
-  else {
-    const end = parseDate(round.cutoff_time);
-    if (end < now)
-      return { label: translate('Ended'), code: -1, color: 'danger' };
-    else return { label: translate('Open'), code: 0, color: 'success' };
+  if (!round) {
+    return null;
+  } else if (round.status === 'scheduled') {
+    return { label: translate('Scheduled'), color: 'secondary' };
+  } else if (round.status === 'open') {
+    return { label: translate('Open'), color: 'success' };
+  } else if (round.status === 'ended') {
+    return { label: translate('Ended'), color: 'danger' };
   }
 };
+
+export const getRoundsWithStatus = (rounds: Round[]) =>
+  rounds.map((round) => ({
+    ...round,
+    status: getRoundStatus(round),
+  }));
 
 export const getCallStatus = (call: Call) => {
   if (call.state == 'active')
@@ -159,36 +162,6 @@ export const getCallStatus = (call: Call) => {
   else {
     return { label: call.state, color: 'secondary' };
   }
-};
-
-/** Returns round items in sort of [earliest open, earliest scheduled, oldest ended] */
-export const getSortedRoundsWithStatus = (
-  rounds: Round[],
-): Array<
-  Round & {
-    state: ReturnType<typeof getRoundStatus>;
-  }
-> => {
-  const roundsWithState = rounds.map((round) => {
-    Object.assign(round, { state: getRoundStatus(round) });
-    return round as any;
-  });
-  const endedRounds = roundsWithState
-    .filter((round) => round.state.code === -1)
-    .sort((a, b) =>
-      formatDate(a.cutoff_time) < formatDate(b.cutoff_time) ? 1 : -1,
-    );
-  const openRounds = roundsWithState
-    .filter((round) => round.state.code === 0)
-    .sort((a, b) =>
-      formatDate(a.cutoff_time) > formatDate(b.cutoff_time) ? 1 : -1,
-    );
-  const scheduledRounds = roundsWithState
-    .filter((round) => round.state.code === 1)
-    .sort((a, b) =>
-      formatDate(a.cutoff_time) > formatDate(b.cutoff_time) ? 1 : -1,
-    );
-  return openRounds.concat(scheduledRounds).concat(endedRounds);
 };
 
 export const getRoundInitialValues = (round: Round): RoundFormData => ({
