@@ -4,11 +4,10 @@ import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { removeProviderOfferingComponent } from '@waldur/marketplace/common/api';
+import { OfferingData } from '@waldur/marketplace/offerings/OfferingEditUIView';
 import { formatComponent } from '@waldur/marketplace/offerings/store/utils';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-
-import { OfferingData } from '../OfferingUpdateContainer';
 
 export const DeleteComponentButton = ({ offering, component }) => {
   const dispatch = useDispatch();

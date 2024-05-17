@@ -20,7 +20,7 @@ export const AvailableOfferingCard: FC<{ availableOffering }> = ({
           label={translate('Apply')}
         />
         <Link
-          state="public.marketplace-public-offering"
+          state="public-offering.marketplace-public-offering"
           params={{ uuid: availableOffering.uuid }}
           className="btn btn-flush text-anchor"
           label={translate('View offering')}

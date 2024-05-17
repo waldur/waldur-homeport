@@ -1,33 +1,30 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
+import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { generateColors } from '@waldur/core/generateColors';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { getProviderOffering } from '@waldur/marketplace/common/api';
 import { getProviderOfferingComponentStats } from '@waldur/marketplace/offerings/expandable/api';
 import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
-import { OfferingComponent } from '@waldur/marketplace/types';
+import { Offering } from '@waldur/marketplace/types';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
 import { parseSlurmUsage } from '@waldur/slurm/details/utils';
 
 interface OfferingUsageChartProps {
-  offeringUuid: string;
-  components: OfferingComponent[];
+  offering: Offering;
 }
 
 export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
-  offeringUuid,
-  components,
+  offering,
 }) => {
   const {
     loading,
     error,
     value: usages,
   } = useAsync(async () => {
-    const offering = await getProviderOffering(offeringUuid);
-    const usages = await getProviderOfferingComponentStats(offeringUuid, {
+    const usages = await getProviderOfferingComponentStats(offering.uuid, {
       params: {
         start: DateTime.now()
           .minus({ months: 12 })
@@ -40,26 +37,38 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
       return usages.map(parseSlurmUsage);
     }
     return usages;
-  }, [offeringUuid]);
-  return loading ? (
-    <LoadingSpinner />
-  ) : error ? (
-    <>{translate('Unable to load data')}</>
-  ) : (
-    <div
-      className="card-body mt-3 p-m"
-      style={{ maxWidth: '500px', minWidth: '100%' }}
-    >
-      <ResourceUsageTabs
-        components={components}
-        usages={usages}
-        months={12}
-        colors={generateColors(components.length, {
-          colorStart: 0.25,
-          colorEnd: 0.65,
-          useEndAsStart: true,
-        })}
-      />
-    </div>
+  }, [offering]);
+
+  return (
+    <Card className="mb-10">
+      <Card.Header className="border-2 border-bottom">
+        <div className="card-toolbar">
+          <div className="card-title h5">
+            {translate('Component usage chart')}
+          </div>
+        </div>
+      </Card.Header>
+      <Card.Body
+        className="mt-3 p-m"
+        style={{ maxWidth: '500px', minWidth: '100%' }}
+      >
+        {loading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <>{translate('Unable to load data')}</>
+        ) : (
+          <ResourceUsageTabs
+            components={offering.components}
+            usages={usages}
+            months={12}
+            colors={generateColors(offering.components.length, {
+              colorStart: 0.25,
+              colorEnd: 0.65,
+              useEndAsStart: true,
+            })}
+          />
+        )}
+      </Card.Body>
+    </Card>
   );
 };

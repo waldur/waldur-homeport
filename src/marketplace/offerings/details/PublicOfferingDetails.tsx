@@ -1,34 +1,39 @@
 import { FunctionComponent, useMemo } from 'react';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
+import { Link } from '@waldur/core/Link';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { PageBarProvider } from '@waldur/marketplace/context';
 import { Category, Offering } from '@waldur/marketplace/types';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-
-import { PublicOfferingComponents } from './PublicOfferingComponents';
-import { PublicOfferingDetailsBar } from './PublicOfferingDetailsBar';
-import { PublicOfferingDetailsHero } from './PublicOfferingDetailsHero';
-import { PublicOfferingFacility } from './PublicOfferingFacility';
-import { PublicOfferingFAQ } from './PublicOfferingFAQ';
-import { PublicOfferingGetHelp } from './PublicOfferingGetHelp';
-import { PublicOfferingGettingStarted } from './PublicOfferingGettingStarted';
-import { PublicOfferingImages } from './PublicOfferingImages';
-import { PublicOfferingInfo } from './PublicOfferingInfo';
-import { PublicOfferingPricing } from './PublicOfferingPricing';
-import { PublicOfferingReviews } from './PublicOfferingReviews';
+import { useToolbarActions } from '@waldur/navigation/context';
 
 interface PublicOfferingDetailsProps {
   offering: Offering;
   category: Category;
   refreshOffering;
+  tabSpec;
 }
 
 export const PublicOfferingDetails: FunctionComponent<
   PublicOfferingDetailsProps
-> = ({ offering, category }) => {
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+> = ({ offering, category, tabSpec }) => {
   const canDeploy = useMemo(() => offering.state === 'Active', [offering]);
+
+  useToolbarActions(
+    <Tip
+      id="tip-deploy"
+      label={offering.state === 'Paused' ? offering.paused_reason : null}
+      placement="left"
+    >
+      <Link
+        state={canDeploy ? 'marketplace-offering-user' : ''}
+        params={{ offering_uuid: offering.uuid }}
+        className={`btn btn-primary ${canDeploy ? '' : 'disabled'}`}
+      >
+        {translate('Deploy')}
+      </Link>
+    </Tip>,
+  );
 
   usePermissionView(() => {
     switch (offering.state) {
@@ -66,25 +71,13 @@ export const PublicOfferingDetails: FunctionComponent<
     }
   }, [offering]);
 
-  return (
-    <PageBarProvider>
-      <div className="publicOfferingDetails m-b" id="general">
-        <PublicOfferingDetailsHero offering={offering} category={category} />
-        <PublicOfferingDetailsBar offering={offering} canDeploy={canDeploy} />
-        <div className="container-xxl py-10">
-          <PublicOfferingInfo offering={offering} category={category} />
-          <PublicOfferingComponents offering={offering} />
-          <PublicOfferingImages offering={offering} />
-          {showExperimentalUiComponents && (
-            <PublicOfferingGettingStarted offering={offering} />
-          )}
-          {showExperimentalUiComponents && <PublicOfferingFAQ />}
-          {showExperimentalUiComponents && <PublicOfferingReviews />}
-          <PublicOfferingPricing offering={offering} canDeploy={canDeploy} />
-          <PublicOfferingFacility offering={offering} />
-          {showExperimentalUiComponents && <PublicOfferingGetHelp />}
-        </div>
-      </div>
-    </PageBarProvider>
-  );
+  return tabSpec ? (
+    <div className="publicOfferingDetails">
+      <tabSpec.component
+        offering={offering}
+        category={category}
+        canDeploy={canDeploy}
+      />
+    </div>
+  ) : null;
 };

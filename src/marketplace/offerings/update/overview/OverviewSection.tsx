@@ -1,3 +1,4 @@
+import { Check, X } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
@@ -54,7 +55,7 @@ const attributes: Attribute[] = [
 
 export const OverviewSection: FC<OfferingSectionProps> = (props) => {
   return (
-    <Card className="mb-10" id="general">
+    <Card id="general">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           <span className="me-2">{translate('General')}</span>
@@ -90,13 +91,11 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             <tr>
               <td className="col-md-3">{translate('Location')}</td>
               <td className="col-md-9">
-                <i
-                  className={
-                    props.offering.latitude && props.offering.longitude
-                      ? 'fa fa-check text-info'
-                      : 'fa fa-times text-danger'
-                  }
-                />
+                {props.offering.latitude && props.offering.longitude ? (
+                  <Check weight="bold" className="text-info" />
+                ) : (
+                  <X weight="bold" className="text-danger" />
+                )}
               </td>
               <td className="row-actions">
                 <div>
@@ -128,13 +127,11 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             <tr>
               <td className="col-md-3">{translate('Logo')}</td>
               <td className="col-md-9">
-                <i
-                  className={
-                    props.offering.thumbnail
-                      ? 'fa fa-check text-info'
-                      : 'fa fa-times text-danger'
-                  }
-                />
+                {props.offering.thumbnail ? (
+                  <Check weight="bold" className="text-info" />
+                ) : (
+                  <X weight="bold" className="text-danger" />
+                )}
               </td>
               <td className="row-actions">
                 <div>
@@ -150,13 +147,11 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
                 {translate('Getting started instructions')}
               </td>
               <td className="col-md-9">
-                <i
-                  className={
-                    props.offering.getting_started
-                      ? 'fa fa-check text-info'
-                      : 'fa fa-times text-danger'
-                  }
-                />
+                {props.offering.getting_started ? (
+                  <Check weight="bold" className="text-info" />
+                ) : (
+                  <X weight="bold" className="text-danger" />
+                )}
               </td>
               <td className="row-actions">
                 <div>

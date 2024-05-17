@@ -35,10 +35,7 @@ export const ArchivePlanButton = ({ plan, refetch }) => {
   };
   return (
     <Dropdown.Item onClick={handler}>
-      <span className="svg-icon svg-icon-2">
-        <Trash />
-      </span>{' '}
-      {translate('Archive')}
+      <Trash size={18} /> {translate('Archive')}
     </Dropdown.Item>
   );
 };

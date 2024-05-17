@@ -149,6 +149,19 @@ const BasicLexisLinkList = lazyComponent(
   () => import('./resources/lexis/BasicLexisLinkList'),
   'BasicLexisLinkList',
 );
+const OfferingPublicUIView = lazyComponent(
+  () => import('./offerings/OfferingPublicUIView'),
+  'OfferingPublicUIView',
+);
+const OfferingDetailsUIView = lazyComponent(
+  () => import('./offerings/OfferingDetailsUIView'),
+  'OfferingDetailsUIView',
+);
+const OfferingEditUIView = lazyComponent(
+  () => import('./offerings/OfferingEditUIView'),
+  'OfferingEditUIView',
+);
+
 const getPublicRoutesParams = () => ({
   resolve: [
     {
@@ -239,10 +252,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-offering-details',
-    url: 'marketplace-provider-offering-details/:offering_uuid/',
-    component: OfferingContainer,
+    name: 'provider-offering-details',
+    url: '',
+    abstract: true,
     parent: 'marketplace-provider',
+    component: OfferingDetailsUIView,
+  },
+  {
+    name: 'marketplace-offering-details',
+    url: 'marketplace-provider-offering-details/:offering_uuid/?tab',
+    component: OfferingContainer,
+    parent: 'provider-offering-details',
+    data: {
+      skipHero: true,
+    },
   },
 
   {
@@ -253,10 +276,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'public.marketplace-public-offering',
-    url: '/marketplace-public-offering/:uuid/',
+    name: 'public-offering',
+    url: '',
+    abstract: true,
+    parent: 'public',
+    component: OfferingPublicUIView,
+  },
+  {
+    name: 'public-offering.marketplace-public-offering',
+    url: '/marketplace-public-offering/:uuid/?tab',
     component: PublicOfferingDetailsContainer,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    data: {
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      useExtraTabs: true,
+    },
   },
 
   {
@@ -543,10 +576,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-offering-update',
-    url: 'offering-update/:offering_uuid/',
-    component: OfferingUpdateContainer,
+    name: 'provider-offering-update',
+    url: '',
+    abstract: true,
     parent: 'marketplace-provider',
+    component: OfferingEditUIView,
+  },
+  {
+    name: 'marketplace-offering-update',
+    url: 'offering-update/:offering_uuid/?tab',
+    component: OfferingUpdateContainer,
+    parent: 'provider-offering-update',
+    data: {
+      skipHero: true,
+    },
   },
 
   {
@@ -695,15 +738,31 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin.marketplace-offering-details',
-    url: 'offerings/:offering_uuid',
+    name: 'admin-offering-details',
+    url: '',
+    abstract: true,
+    parent: 'admin',
+    component: OfferingDetailsUIView,
+  },
+  {
+    name: 'admin-marketplace-offering-details',
+    url: 'offerings/:offering_uuid/?tab',
     component: OfferingContainer,
+    parent: 'admin-offering-details',
   },
 
   {
-    name: 'admin.marketplace-offering-update',
-    url: 'offerings/:offering_uuid/update',
+    name: 'admin-offering-update',
+    url: '',
+    abstract: true,
+    parent: 'admin',
+    component: OfferingEditUIView,
+  },
+  {
+    name: 'admin-marketplace-offering-update',
+    url: 'offerings/:offering_uuid/update/?tab',
     component: OfferingUpdateContainer,
+    parent: 'admin-offering-update',
   },
 
   {

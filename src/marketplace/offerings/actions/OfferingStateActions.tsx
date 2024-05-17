@@ -101,21 +101,11 @@ export const OfferingStateActions = ({ offering, refreshOffering }) => {
     );
   }
   return (
-    <Dropdown as={ButtonGroup} className="me-2">
-      <Button
-        variant="primary"
-        size="sm"
-        onClick={() => callback()}
-        style={{ padding: '0.5rem' }}
-      >
+    <Dropdown as={ButtonGroup}>
+      <Button variant="primary" size="sm" onClick={() => callback()}>
         {title}
       </Button>
-      <Dropdown.Toggle
-        split
-        size="sm"
-        variant="primary"
-        style={{ padding: '0.5rem' }}
-      />
+      <Dropdown.Toggle split size="sm" variant="primary" className="px-4" />
       <Dropdown.Menu>
         {offering.state !== DRAFT && (
           <Dropdown.Item onClick={() => setDraft()}>{draftTitle}</Dropdown.Item>

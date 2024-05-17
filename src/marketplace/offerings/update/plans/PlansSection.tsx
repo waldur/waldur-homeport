@@ -1,3 +1,4 @@
+import { CheckFat, Warning } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
@@ -37,13 +38,13 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
   }
 
   return (
-    <Card className="mb-10" id="plans">
+    <Card id="plans">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           {plans.length === 0 ? (
-            <i className="fa fa-warning text-danger me-3" />
+            <Warning size={18} weight="fill" className="text-danger me-3" />
           ) : (
-            <i className="fa fa-check text-success me-3" />
+            <CheckFat size={18} weight="fill" className="text-success me-3" />
           )}
           <span className="me-2">{translate('Accounting plans')}</span>
           <RefreshButton refetch={refetch} loading={isRefetching} />

@@ -11,7 +11,7 @@ export const OfferingNameColumn = ({ row }) => {
     if (isDescendantOf('organization', state)) {
       return 'marketplace-offering-details';
     } else if (isDescendantOf('admin', state)) {
-      return 'admin.marketplace-offering-details';
+      return 'admin-marketplace-offering-details';
     }
   }, [state]);
   return (

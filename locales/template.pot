@@ -166,7 +166,7 @@ msgstr ""
 msgid "Accounting"
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/update/components/ComponentsSection.tsx
 msgid "Accounting components"
 msgstr ""
@@ -176,7 +176,7 @@ msgstr ""
 msgid "Accounting period"
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/update/plans/PlansSection.tsx
 msgid "Accounting plans"
 msgstr ""
@@ -291,6 +291,11 @@ msgstr ""
 
 #: src/marketplace/service-providers/dashboard/ProviderWidgets.tsx
 msgid "Active resources"
+msgstr ""
+
+#: src/proposals/call-management/CallActiveRoundFilter.tsx
+#: src/proposals/call-management/CallAllFilters.tsx
+msgid "Active round"
 msgstr ""
 
 #: src/proposals/call-management/CallManagementStatistics.tsx
@@ -1490,10 +1495,6 @@ msgstr ""
 msgid "Billing component has been updated successfully."
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
-msgid "Billing enabled"
-msgstr ""
-
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
@@ -1535,6 +1536,7 @@ msgid "Booking has been cancelled."
 msgstr ""
 
 #: src/booking/offering/OfferingBookingResourcesCalendarContainer.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/resources/details/BookingMainComponent.tsx
 msgid "Bookings"
 msgstr ""
@@ -1635,6 +1637,10 @@ msgstr ""
 msgid "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingGeneral.tsx
+msgid "By {customer}"
+msgstr ""
+
 #: src/customer/details/AccessSubnetCreateForm.tsx
 #: src/customer/details/AccessSubnetEditDialog.tsx
 #: src/customer/details/CustomerAccessControlPanel.tsx
@@ -1692,10 +1698,6 @@ msgstr ""
 
 #: src/proposals/round/RoundPage.tsx
 msgid "Call round"
-msgstr ""
-
-#: src/proposals/details/CallRoundsDialog.tsx
-msgid "Call rounds"
 msgstr ""
 
 #: src/proposals/update/CallActions.tsx
@@ -1846,12 +1848,12 @@ msgid "Categories"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/offerings/details/PublicOfferingGeneral.tsx
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
@@ -2185,13 +2187,17 @@ msgstr ""
 msgid "Component name"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingTables.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
+msgid "Component usage"
+msgstr ""
+
+#: src/marketplace/offerings/expandable/OfferingUsageChart.tsx
 msgid "Component usage chart"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponents.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/offerings/details/PublicOfferingGeneral.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 msgid "Components"
@@ -2391,6 +2397,10 @@ msgstr ""
 
 #: src/customer/cost-policies/CostPoliciesList.tsx
 msgid "Cost threshold"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
+msgid "Costs"
 msgstr ""
 
 #: src/customer/create/CustomerCreateDialog.tsx
@@ -2921,6 +2931,7 @@ msgstr ""
 msgid "Cutoff"
 msgstr ""
 
+#: src/proposals/details/CallRoundsList.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
@@ -3198,7 +3209,7 @@ msgid "Deny"
 msgstr ""
 
 #: src/marketplace/common/OfferingCard.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/details/PublicOfferingDetails.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx
 msgid "Deploy"
 msgstr ""
@@ -3230,9 +3241,9 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingTabs.tsx
 #: src/marketplace/details/plan/PlanSection.tsx
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
 #: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
@@ -3524,7 +3535,6 @@ msgstr ""
 #: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
-#: src/proposals/details/CallRoundsDialog.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Done"
@@ -3609,18 +3619,11 @@ msgstr ""
 #: src/marketplace/category/admin/GroupEditButton.tsx
 #: src/marketplace/category/admin/GroupFromDialog.tsx
 #: src/marketplace/deploy/DeployPage.tsx
-#: src/marketplace/offerings/details/OfferingDetails.tsx
+#: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/list/EditOfferingButton.tsx
 #: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
+#: src/marketplace/offerings/update/RowEditButton.tsx
 #: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
-#: src/marketplace/offerings/update/components/EditComponentButton.tsx
-#: src/marketplace/offerings/update/integration/EditScriptButton.tsx
-#: src/marketplace/offerings/update/options/EditOptionButton.tsx
-#: src/marketplace/offerings/update/overview/EditGettingStartedButton.tsx
-#: src/marketplace/offerings/update/overview/EditOverviewButton.tsx
-#: src/marketplace/offerings/update/overview/OfferingLocationButton.tsx
-#: src/marketplace/offerings/update/overview/OfferingLogoButton.tsx
-#: src/marketplace/offerings/update/overview/SetAccessPolicyButton.tsx
 #: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
 #: src/marketplace/resources/actions/EditAction.tsx
 #: src/marketplace/resources/options/UpdateResourceOptionButton.tsx
@@ -3976,7 +3979,7 @@ msgstr ""
 msgid "Endpoint has been removed."
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/update/endpoints/OfferingEndpointsSection.tsx
 msgid "Endpoints"
 msgstr ""
@@ -4138,7 +4141,7 @@ msgstr ""
 
 #: src/administration/hooks/HooksList.tsx
 #: src/events/BaseEventsList.tsx
-#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/user/hooks/HooksList.tsx
@@ -4326,11 +4329,12 @@ msgstr ""
 msgid "External username"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingFAQ.tsx
 msgid "FAQ"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingFacility.tsx
 msgid "Facility"
 msgstr ""
@@ -4649,8 +4653,8 @@ msgstr ""
 msgid "Gateway IP of this subnet"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
@@ -4665,11 +4669,12 @@ msgstr ""
 msgid "Generate password"
 msgstr ""
 
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
 msgid "Get help"
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 #: src/marketplace/resources/details/GettingStartedCard.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
@@ -4998,11 +5003,11 @@ msgstr ""
 msgid "If defined, will be set as a password for all offering users"
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+#: src/marketplace/offerings/update/options/OfferingResourceOptionsSection.tsx
 msgid "If you want user to be able to modify resource options after creation, please configure options for user below"
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+#: src/marketplace/offerings/update/options/OfferingOptionsSection.tsx
 msgid "If you want user to provide additional details when ordering, please configure input form for the user below"
 msgstr ""
 
@@ -5059,10 +5064,10 @@ msgid "Image:"
 msgstr ""
 
 #: src/marketplace/details/OfferingTabs.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingImages.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
 #: src/openstack/openstack-tenant/tabs.ts
 #: src/reporting/openstack/VmTypeOverview.tsx
@@ -5253,7 +5258,7 @@ msgstr ""
 msgid "Instances count"
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/update/integration/IntegrationSection.tsx
 #: src/marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx
 msgid "Integration"
@@ -5866,7 +5871,7 @@ msgid "MTU"
 msgstr ""
 
 #: src/customer/dashboard/CustomerActions.tsx
-#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+#: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/project/ProjectActions.tsx
 #: src/user/UserActions.tsx
 #: src/user/support/UserDetailsDialog.tsx
@@ -6643,7 +6648,7 @@ msgstr ""
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/category/filters/FilteredBy.tsx
-#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/update/attributes/utils.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -6805,7 +6810,6 @@ msgid "No results found"
 msgstr ""
 
 #: src/proposals/CallCard.tsx
-#: src/proposals/details/CallRoundsList.tsx
 msgid "No rounds"
 msgstr ""
 
@@ -7009,7 +7013,6 @@ msgstr ""
 #: src/administration/roles/PermissionOptions.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
@@ -7059,7 +7062,7 @@ msgstr ""
 msgid "Offering LEXIS link options have been updated successfully."
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingTables.tsx
+#: src/marketplace/offerings/expandable/OfferingCostsChart.tsx
 msgid "Offering cost chart"
 msgstr ""
 
@@ -7068,11 +7071,11 @@ msgid "Offering deleted successfully."
 msgstr ""
 
 #: src/marketplace/details/OverviewTab.tsx
-#: src/marketplace/offerings/details/OfferingContainer.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/OfferingDetailsButton.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsContainer.tsx
-#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
 msgid "Offering details"
 msgstr ""
 
@@ -7097,7 +7100,7 @@ msgstr ""
 msgid "Offering doesn't have images."
 msgstr ""
 
-#: src/marketplace/offerings/update/options/OfferingOptionsSection.tsx
+#: src/marketplace/offerings/update/options/OfferingOptionsSectionPure.tsx
 msgid "Offering doesn't have input variables."
 msgstr ""
 
@@ -7329,7 +7332,6 @@ msgid "Open issues"
 msgstr ""
 
 #: src/marketplace/offerings/list/OpenPublicOffering.tsx
-#: src/marketplace/offerings/list/PreviewButton.tsx
 msgid "Open public page"
 msgstr ""
 
@@ -7459,7 +7461,7 @@ msgid "Order with script over API"
 msgstr ""
 
 #: src/marketplace/details/OfferingOrdersList.tsx
-#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/orders/list/CustomerOrdersList.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersList.tsx
@@ -7659,6 +7661,7 @@ msgstr ""
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
@@ -8014,6 +8017,7 @@ msgid "Permission requests"
 msgstr ""
 
 #: src/administration/roles/RoleForm.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
 msgid "Permissions"
 msgstr ""
 
@@ -8124,7 +8128,7 @@ msgstr ""
 msgid "Planned quota usage: {usage}"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/offerings/details/PlanUsageList.tsx
 msgid "Plans"
 msgstr ""
@@ -8337,7 +8341,6 @@ msgid "Preferred language"
 msgstr ""
 
 #: src/form/MarkdownField.tsx
-#: src/marketplace/offerings/list/PreviewButton.tsx
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 msgid "Preview"
@@ -8432,7 +8435,7 @@ msgstr ""
 msgid "Prices have been updated successfully."
 msgstr ""
 
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
 msgid "Pricing"
 msgstr ""
@@ -8937,6 +8940,10 @@ msgstr ""
 
 #: src/marketplace/orders/details/OrderTypeIndicator.tsx
 msgid "Provision new resource"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingViewHero.tsx
+msgid "Public"
 msgstr ""
 
 #: src/user/keys/KeysListTablePlaceholder.tsx
@@ -9756,8 +9763,8 @@ msgstr ""
 msgid "Resource name"
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
+#: src/marketplace/offerings/update/options/OfferingResourceOptionsSection.tsx
 msgid "Resource options"
 msgstr ""
 
@@ -9828,7 +9835,7 @@ msgstr ""
 #: src/administration/dashboard/AdminStatistics.tsx
 #: src/customer/routes.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
@@ -10040,7 +10047,7 @@ msgid "Reviewers"
 msgstr ""
 
 #: src/customer/routes.ts
-#: src/marketplace/offerings/details/PublicOfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
 #: src/navigation/CallPublicMenu.tsx
 #: src/proposals/review/CustomerReviewsList.tsx
@@ -10130,7 +10137,7 @@ msgstr ""
 msgid "Role name"
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/update/roles/RolesSection.tsx
 #: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
@@ -10155,6 +10162,7 @@ msgstr ""
 msgid "Round closing soon"
 msgstr ""
 
+#: src/proposals/details/CallRoundsList.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Round name"
 msgstr ""
@@ -10168,6 +10176,7 @@ msgstr ""
 msgid "Round strategy in active round"
 msgstr ""
 
+#: src/proposals/details/PublicCallDetailsBar.tsx
 #: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Rounds"
@@ -10507,10 +10516,6 @@ msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
 msgid "See all offerings"
-msgstr ""
-
-#: src/proposals/details/CallShowAllRounds.tsx
-msgid "See all rounds"
 msgstr ""
 
 #: src/proposals/round/RoundPageHero.tsx
@@ -11106,7 +11111,6 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/openstack/openstack-instance/deploy/FormFlavorStep.tsx
 msgid "Shared"
 msgstr ""
@@ -11117,6 +11121,10 @@ msgstr ""
 
 #: src/marketplace/UserSecretOptionsForm.tsx
 msgid "Shared user password"
+msgstr ""
+
+#: src/marketplace/offerings/OfferingViewHero.tsx
+msgid "Shared/Billing enabled"
 msgstr ""
 
 #: src/proposals/proposal/create/ProjectDetailsStep.tsx
@@ -11422,6 +11430,7 @@ msgid "Start"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderCampaignsList.tsx
+#: src/proposals/details/CallRoundsList.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
@@ -11445,6 +11454,10 @@ msgstr ""
 msgid "Starting"
 msgstr ""
 
+#: src/marketplace/offerings/details/PublicOfferingGeneral.tsx
+msgid "Starting at"
+msgstr ""
+
 #: src/openstack/openstack-instance/deploy/FormStartupScriptStep.tsx
 #: src/openstack/openstack-instance/deploy/steps.ts
 msgid "Startup script"
@@ -11466,7 +11479,6 @@ msgstr ""
 #: src/marketplace/details/OfferingResourcesFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
-#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
 #: src/marketplace/offerings/list/OfferingsFilter.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
@@ -11512,6 +11524,7 @@ msgstr ""
 #: src/proposals/call-management/CallAllFilters.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
+#: src/proposals/details/CallRoundsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/proposal/CustomerProposalsList.tsx
 #: src/proposals/proposal/ProposalsTableFilter.tsx
@@ -11545,6 +11558,10 @@ msgstr ""
 
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Static routes update was scheduled."
+msgstr ""
+
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
+msgid "Statistics"
 msgstr ""
 
 #: src/administration/notifications/NotificationFilter.tsx
@@ -12211,6 +12228,10 @@ msgstr ""
 msgid "The organization group has been updated."
 msgstr ""
 
+#: src/marketplace/offerings/OfferingViewHero.tsx
+msgid "The public view is currently inactive as this offering is in draft status."
+msgstr ""
+
 #: src/administration/roles/RoleToggleButton.tsx
 msgid "The role has been disabled"
 msgstr ""
@@ -12675,8 +12696,8 @@ msgstr ""
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace/details/OfferingOrdersList.tsx
+#: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
-#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
@@ -13308,6 +13329,7 @@ msgid "Unable to load offering cost chart."
 msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
+#: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/details/OfferingContainer.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingDetailsContainer.tsx
@@ -14449,8 +14471,8 @@ msgstr ""
 msgid "User has been updated."
 msgstr ""
 
-#: src/marketplace/offerings/update/OfferingUpdateBar.tsx
-#: src/marketplace/offerings/update/OfferingUpdateContainer.tsx
+#: src/marketplace/offerings/OfferingEditUIView.tsx
+#: src/marketplace/offerings/update/options/OfferingOptionsSection.tsx
 msgid "User input"
 msgstr ""
 
@@ -14599,7 +14621,7 @@ msgstr ""
 #: src/administration/providers/ProviderCard.tsx
 #: src/administration/routes.ts
 #: src/customer/routes.ts
-#: src/marketplace/offerings/details/OfferingDetailsBar.tsx
+#: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
@@ -14782,7 +14804,7 @@ msgstr ""
 
 #: src/administration/TelemetryExampleDialog.tsx
 #: src/administration/dashboard/AdministrationProfile.tsx
-#: src/marketplace/offerings/details/PublicOfferingDetailsHero.tsx
+#: src/marketplace/offerings/details/PublicOfferingGeneral.tsx
 #: src/navigation/AppFooter.tsx
 #: src/rancher/cluster/apps/ApplicationDetailsDialog.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
@@ -14980,7 +15002,7 @@ msgstr ""
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/category/filters/FilteredBy.tsx
-#: src/marketplace/offerings/details/OfferingDetailsHeader.tsx
+#: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/update/attributes/utils.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
@@ -15546,6 +15568,10 @@ msgstr ""
 #: src/administration/roles/RolesList.tsx
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 msgid "roles"
+msgstr ""
+
+#: src/proposals/details/CallRoundsList.tsx
+msgid "rounds"
 msgstr ""
 
 #: src/openstack/openstack-tenant/TenantRoutersList.tsx

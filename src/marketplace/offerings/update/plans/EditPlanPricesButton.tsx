@@ -1,3 +1,4 @@
+import { Coins } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -30,7 +31,7 @@ export const EditPlanPricesButton: FunctionComponent<{
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <i className="fa fa-money" /> {translate('Edit prices')}
+      <Coins size={18} /> {translate('Edit prices')}
     </Dropdown.Item>
   );
 };

@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
@@ -9,18 +8,10 @@ import {
   getOptions,
 } from '@waldur/customer/list/AccountingRunningField';
 
-export const PureCustomersListFilter: FunctionComponent = () => (
-  <div className="card">
-    <div className="card-body mb-2 border-bottom">
-      <form className="form-inline">
-        <Row>
-          <Col sm={3}>
-            <AccountingRunningField />
-          </Col>
-        </Row>
-      </form>
-    </div>
-  </div>
+const PureCustomersListFilter: FunctionComponent = () => (
+  <form className="form-inline min-w-200px">
+    <AccountingRunningField />
+  </form>
 );
 
 const mapStateToProps = (_state, ownProps) => {

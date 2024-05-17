@@ -21,7 +21,7 @@ export const EditOfferingButton = ({ row }) => {
 
   const { state } = useCurrentStateAndParams();
   const targetState = isDescendantOf('admin', state)
-    ? 'admin.marketplace-offering-update'
+    ? 'admin-marketplace-offering-update'
     : 'marketplace-offering-update';
 
   if (!canUpdateOffering) {

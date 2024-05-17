@@ -9,6 +9,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { orderByFilter } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { Offering } from '@waldur/marketplace/types';
 
 import { BookingResourcesCalendar } from './BookingResourcesCalendar';
 
@@ -25,20 +26,20 @@ async function loadBookingOfferings(offeringUuid: string) {
 }
 
 interface OfferingBookingResourcesCalendarContainerProps {
-  offeringUuid: string;
+  offering: Offering;
 }
 
 export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
   OfferingBookingResourcesCalendarContainerProps
-> = ({ offeringUuid }) => {
+> = ({ offering }) => {
   const {
     data: calendarEvents,
     isLoading,
     isRefetching,
     error,
     refetch,
-  } = useQuery(['offeringBookings', offeringUuid], () =>
-    loadBookingOfferings(offeringUuid),
+  } = useQuery(['offeringBookings', offering.uuid], () =>
+    loadBookingOfferings(offering.uuid),
   );
 
   if (isLoading) {

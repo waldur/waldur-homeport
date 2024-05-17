@@ -1,12 +1,10 @@
-import { UISref } from '@uirouter/react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Eye } from '@phosphor-icons/react';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-
-import { ACTIVE, PAUSED } from '../store/constants';
 
 const PreviewOfferingDialog = lazyComponent(
   () => import('./PreviewOfferingDialog'),
@@ -16,32 +14,22 @@ const PreviewOfferingDialog = lazyComponent(
 export const PreviewButton = ({ offering }) => {
   const dispatch = useDispatch();
   return (
-    <DropdownButton
-      title={translate('Preview')}
-      variant="light"
+    <Button
+      variant="secondary"
+      onClick={() =>
+        dispatch(
+          openModalDialog(PreviewOfferingDialog, {
+            resolve: { offering },
+            size: 'lg',
+          }),
+        )
+      }
       size="sm"
-      className="d-inline me-2"
     >
-      <Dropdown.Item
-        onClick={() => {
-          dispatch(
-            openModalDialog(PreviewOfferingDialog, {
-              resolve: { offering },
-              size: 'lg',
-            }),
-          );
-        }}
-      >
-        {translate('Preview order form')}
-      </Dropdown.Item>
-      {[ACTIVE, PAUSED].includes(offering.state) && (
-        <UISref
-          to="public.marketplace-public-offering"
-          params={{ uuid: offering.uuid }}
-        >
-          <Dropdown.Item>{translate('Open public page')}</Dropdown.Item>
-        </UISref>
-      )}
-    </DropdownButton>
+      <span className="svg-icon svg-icon-4">
+        <Eye />
+      </span>{' '}
+      {translate('Preview order form')}
+    </Button>
   );
 };

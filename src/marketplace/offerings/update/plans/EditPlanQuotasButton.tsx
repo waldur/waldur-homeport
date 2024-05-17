@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -36,7 +37,7 @@ export const EditPlanQuotasButton: FunctionComponent<{
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <i className="fa fa-pencil" /> {translate('Edit quotas')}
+      <PencilSimple size={18} /> {translate('Edit quotas')}
     </Dropdown.Item>
   );
 };

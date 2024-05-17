@@ -63,7 +63,6 @@ export const OfferingImagesList: FunctionComponent<{ offering }> = ({
       initialSorting={{ field: 'created', mode: 'desc' }}
       actions={<CreateImageButton offering={offering} />}
       hoverableRow={DeleteImageButton}
-      className="mb-10"
     />
   );
 };

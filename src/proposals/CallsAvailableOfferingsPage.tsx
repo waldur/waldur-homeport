@@ -63,7 +63,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
               orderField: 'name',
               render: ({ row }) => (
                 <Link
-                  state="public.marketplace-public-offering"
+                  state="public-offering.marketplace-public-offering"
                   params={{ uuid: row.uuid }}
                   label={row.name}
                 />

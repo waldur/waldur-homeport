@@ -1,3 +1,4 @@
+import { CheckFat, Warning } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
@@ -19,13 +20,13 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
     return null;
   }
   return (
-    <Card className="mb-10" id="components">
+    <Card id="components">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           {props.offering.components.length === 0 ? (
-            <i className="fa fa-warning text-danger me-3" />
+            <Warning size={18} weight="fill" className="text-danger me-3" />
           ) : (
-            <i className="fa fa-check text-success me-3" />
+            <CheckFat size={18} weight="fill" className="text-success me-3" />
           )}
           <span className="me-2">{translate('Accounting components')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
