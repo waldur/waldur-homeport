@@ -5,6 +5,7 @@
   "repository": "https://github.com/waldur/waldur-homeport",
   "license": "MIT",
   "scripts": {
+    "postinstall": "husky",
     "start": "webpack-dev-server --progress --config webpack.config.dev.js",
     "build": "cross-env NODE_ENV=production webpack --config=webpack.config.prod.js",
     "build-dev": "webpack --config=webpack.config.dev.js",
@@ -146,7 +147,7 @@
     "html-loader": "^3.0.1",
     "html-webpack-harddisk-plugin": "^2.0.0",
     "html-webpack-plugin": "^5.5.0",
-    "husky": "^4.2.3",
+    "husky": "^9.0.1",
     "jest": "^29.7.0",
     "jest-date-mock": "^1.0.5",
     "jest-environment-jsdom": "^29.7.0",
@@ -188,11 +189,6 @@
     "singleQuote": true,
     "printWidth": 80,
     "tabWidth": 2
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn gettext:extract && yarn lint-staged"
-    }
   },
   "lint-staged": {
     "**/*.js": [
