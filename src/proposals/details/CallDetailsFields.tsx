@@ -9,14 +9,17 @@ import {
   formatRoundAllocationStrategy,
   formatRoundAllocationTime,
   formatRoundReviewStrategy,
-  getSortedRoundsWithStatus,
+  getRoundsWithStatus,
 } from '../utils';
 
 export const CallDetailsFields = ({ call }) => {
   const activeRound = useMemo(() => {
-    const items = getSortedRoundsWithStatus(call.rounds);
+    const items = getRoundsWithStatus(call.rounds);
     const first = items[0];
-    if (first && [0, 1].includes(first.state.code)) {
+    if (
+      (first && first.status.label === 'Open') ||
+      first.status.label === 'Scheduled'
+    ) {
       return first;
     }
     return null;

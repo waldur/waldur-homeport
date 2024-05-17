@@ -7,14 +7,10 @@ import { ModelCard1 } from '@waldur/core/ModelCard1';
 import { translate } from '@waldur/i18n';
 
 import { PublicCallApplyButton } from './details/PublicCallApplyButton';
-import { getRoundStatus, getSortedRoundsWithStatus } from './utils';
+import { getRoundsWithStatus } from './utils';
 
 export const CallCard: FC<{ call }> = ({ call }) => {
-  const getSortedRounds = getSortedRoundsWithStatus(call.rounds);
-  const lastRoundStatus = getRoundStatus(getSortedRounds[0]);
-  const nextRoundDate = getSortedRounds?.length
-    ? getSortedRounds[0].cutoff_time
-    : call.end_date;
+  const nextRound = getRoundsWithStatus(call.rounds)[0];
 
   return (
     <ModelCard1
@@ -23,19 +19,19 @@ export const CallCard: FC<{ call }> = ({ call }) => {
       body={call.description}
       footer={
         <div className="d-flex justify-content-between">
-          {!lastRoundStatus ? (
+          {!nextRound ? (
             <div className="text-muted">{translate('No rounds')}</div>
-          ) : lastRoundStatus.label === 'Open' ? (
+          ) : nextRound.status.label === 'Open' ? (
             <Badge bg="warning" text="dark">
               {translate('Cutoff')}
               {': '}
-              <strong>{formatRelativeWithHour(nextRoundDate)}</strong>
+              <strong>{formatRelativeWithHour(nextRound.cutoff_time)}</strong>
             </Badge>
-          ) : lastRoundStatus.label === 'Ended' ? (
+          ) : nextRound.status.label === 'Ended' ? (
             <div className="text-muted">
               {translate('Cutoff')}
               {': '}
-              <strong>{formatDate(nextRoundDate)}</strong>
+              <strong>{formatDate(nextRound.cutoff_time)}</strong>
             </div>
           ) : null}
           <Stack direction="horizontal" gap={4}>

@@ -16,7 +16,7 @@ import {
   formatRoundAllocationStrategy,
   formatRoundAllocationTime,
   formatRoundReviewStrategy,
-  getSortedRoundsWithStatus,
+  getRoundsWithStatus,
 } from './utils';
 
 export const PublicCallExpandableRow: FunctionComponent<{
@@ -25,9 +25,12 @@ export const PublicCallExpandableRow: FunctionComponent<{
   const customer = useSelector(getCustomer);
 
   const activeRound = useMemo(() => {
-    const items = getSortedRoundsWithStatus(row.rounds);
+    const items = getRoundsWithStatus(row.rounds);
     const first = items[0];
-    if (first && [0, 1].includes(first.state.code)) {
+    if (
+      (first && first.status.label === 'Open') ||
+      first.status.label === 'Scheduled'
+    ) {
       return first;
     }
     return null;

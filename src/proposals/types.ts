@@ -46,6 +46,7 @@ export interface Round {
   minimum_number_of_reviewers: number;
   url: string;
   proposals: Proposal[];
+  status: string;
 }
 
 export interface Call {
@@ -86,6 +87,7 @@ export interface EditCallProps {
   call: Call;
   name: string;
   title: string;
+
   refetch(): void;
 }
 
