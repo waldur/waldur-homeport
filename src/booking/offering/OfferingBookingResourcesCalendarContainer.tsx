@@ -67,7 +67,7 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
               className="btn btn-icon btn-active-light"
               onClick={() => refetch()}
             >
-              <i className="fa fa-refresh fs-4"></i>
+              <i className="fa fa-refresh fs-4" />
             </button>
           )}
         </Card.Title>

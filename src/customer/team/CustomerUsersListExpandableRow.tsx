@@ -28,7 +28,7 @@ export const CustomerUsersListExpandableRow: FunctionComponent<{
             <td>{translate('Project name')}</td>
             <td>{translate('Role')}</td>
             <td>{translate('Expiration time')}</td>
-            <td></td>
+            <td />
           </tr>
         </thead>
         <tbody>

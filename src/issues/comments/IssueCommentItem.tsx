@@ -111,7 +111,7 @@ const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> = (
                 >
                   {comment.author_name}
                 </button>
-                <span className="m-0"></span>
+                <span className="m-0" />
               </div>
               <span className="text-muted fw-semibold fs-6">
                 {formatMediumDateTime(comment.created)}

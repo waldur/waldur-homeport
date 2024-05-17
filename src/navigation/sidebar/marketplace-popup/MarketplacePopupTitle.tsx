@@ -73,7 +73,7 @@ export const MarketplacePopupTitle: FunctionComponent<{
           MenuComponent.hideDropdowns(null);
         }}
       >
-        <i className="fa fa-arrow-left fs-4"></i>
+        <i className="fa fa-arrow-left fs-4" />
       </button>
       <div>
         <span className="text-nowrap">

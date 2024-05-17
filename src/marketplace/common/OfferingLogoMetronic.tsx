@@ -32,7 +32,7 @@ export const OfferingLogo: FC<OfferingLogoProps> = ({
       <div
         className="symbol-label image"
         style={{ backgroundImage: `url(${props.src})` }}
-      ></div>
+      />
     </div>
   ) : (
     <div className="symbol">

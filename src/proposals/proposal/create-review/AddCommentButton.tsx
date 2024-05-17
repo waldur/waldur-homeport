@@ -28,7 +28,7 @@ export const AddCommentButton = ({ onClick }) => {
               rx="1"
               transform="rotate(-90 10.8891 17.8033)"
               fill="currentColor"
-            ></rect>
+            />
             <rect
               x="8.21041"
               y="9.3047"
@@ -36,7 +36,7 @@ export const AddCommentButton = ({ onClick }) => {
               height="2"
               rx="1"
               fill="currentColor"
-            ></rect>
+            />
           </svg>
         </span>
       </Button>

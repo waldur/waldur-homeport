@@ -7,7 +7,7 @@ export const DeployPageActions = () => {
   return (
     <Dropdown id="deploy-actions" align="end">
       <Dropdown.Toggle variant="light" bsPrefix="btn-icon bg-body">
-        <i className="fa fa-ellipsis-h"></i>
+        <i className="fa fa-ellipsis-h" />
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <ActionItem action={() => null} title={translate('Import config')} />

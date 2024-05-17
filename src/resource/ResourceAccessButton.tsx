@@ -117,7 +117,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
       >
         <div className="me-2">{translate('Access resource')}</div>
         <div>
-          <i className="fa fa-caret-down fa-lg"></i>
+          <i className="fa fa-caret-down fa-lg" />
         </div>
       </Button>
     </OverlayTrigger>

@@ -88,12 +88,12 @@ const renderNodeRows = ({ fields, flavors }: any) => {
               <thead>
                 <tr>
                   <th className="w-200px">{translate('Required nodes')}</th>
-                  <th></th>
-                  <th className="w-250px"></th>
+                  <th />
+                  <th className="w-250px" />
                   <th className="w-100px text-center">1, 3 or 5</th>
                   <th className="w-100px text-center">1 or more</th>
                   <th className="w-100px text-center">1 or more</th>
-                  <th className="w-5px"></th>
+                  <th className="w-5px" />
                 </tr>
               </thead>
               <tbody>
@@ -146,7 +146,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                             className="btn-icon btn-active-light-danger"
                             onClick={() => fields.remove(index)}
                           >
-                            <i className="fa fa-times fs-4"></i>
+                            <i className="fa fa-times fs-4" />
                           </Button>
                         </td>
                       </tr>
@@ -166,7 +166,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
         </Form.Group>
       )}
       <Button variant="light" className="text-nowrap" onClick={addRow}>
-        <i className="fa fa-plus"></i>
+        <i className="fa fa-plus" />
         {translate('Add')}
       </Button>
     </>

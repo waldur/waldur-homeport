@@ -52,7 +52,7 @@ export const FormSSHPublicKeysStep = (props: FormStepProps) => {
             size="sm"
             onClick={openFormDialog}
           >
-            <i className="fa fa-plus"></i>
+            <i className="fa fa-plus" />
             {translate('New public key')}
           </Button>
         </div>

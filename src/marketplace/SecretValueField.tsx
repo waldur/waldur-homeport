@@ -29,7 +29,7 @@ export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
         type="button"
         title={showSecret ? 'Hide' : 'Show'}
         onClick={onToggle}
-      ></button>
+      />
     </div>
   );
 };

@@ -57,7 +57,7 @@ export const HeroSection: FunctionComponent = () => {
               }
             : {}
         }
-      ></div>
+      />
     </div>
   );
 };

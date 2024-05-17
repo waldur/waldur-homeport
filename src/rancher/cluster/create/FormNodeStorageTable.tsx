@@ -41,9 +41,9 @@ export const FormNodeStorageTable: FC<
           <thead>
             <tr>
               <th className="w-200px">{props.title}</th>
-              <th className="w-125px"></th>
+              <th className="w-125px" />
               {props?.volumeTypeChoices?.length > 0 && (
-                <th className="w-250px"></th>
+                <th className="w-250px" />
               )}
             </tr>
           </thead>
@@ -120,7 +120,7 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
             className="btn-icon btn-active-light-danger"
             onClick={props.onDeleteRow}
           >
-            <i className="fa fa-times fs-4"></i>
+            <i className="fa fa-times fs-4" />
           </Button>
         </td>
       )}

@@ -144,7 +144,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                         size="sm"
                         onClick={this.props.resetSelection}
                       >
-                        <i className="fa fa-times fs-5"></i>
+                        <i className="fa fa-times fs-5" />
                       </Button>
                       <span className="me-2 border-bottom-dashed border-2">
                         {this.props.selectedRows?.length === 1

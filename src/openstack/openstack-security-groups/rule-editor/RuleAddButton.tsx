@@ -19,7 +19,8 @@ const DEFAULT_RULE = {
 
 export const RuleAddButton: FC<RuleAddButtonProps> = ({ fields }) => (
   <Button variant="primary" size="sm" onClick={() => fields.push(DEFAULT_RULE)}>
-    <i className="fa fa-plus"></i>&nbsp;
+    <i className="fa fa-plus" />
+    &nbsp;
     {translate('Add rule')}
   </Button>
 );

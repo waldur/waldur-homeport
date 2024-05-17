@@ -50,9 +50,7 @@ export const CustomerProfile = ({
               >
                 {customer.country && (
                   <i className="f32">
-                    <i
-                      className={`flag ${customer.country?.toLowerCase()}`}
-                    ></i>
+                    <i className={`flag ${customer.country?.toLowerCase()}`} />
                   </i>
                 )}
                 <h2 className="mb-0">{customer.name}</h2>

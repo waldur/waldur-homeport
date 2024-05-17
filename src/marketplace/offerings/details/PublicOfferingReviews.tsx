@@ -10,27 +10,27 @@ const ReviewStars = ({ className }: { className? }) => {
     <div className={`rating ${className}`}>
       <div className="rating-label checked">
         <span className="svg-icon">
-          <i className="fa fa-star text-gray-600"></i>
+          <i className="fa fa-star text-gray-600" />
         </span>
       </div>
       <div className="rating-label checked">
         <span className="svg-icon">
-          <i className="fa fa-star text-gray-600"></i>
+          <i className="fa fa-star text-gray-600" />
         </span>
       </div>
       <div className="rating-label checked">
         <span className="svg-icon">
-          <i className="fa fa-star text-gray-600"></i>
+          <i className="fa fa-star text-gray-600" />
         </span>
       </div>
       <div className="rating-label">
         <span className="svg-icon">
-          <i className="fa fa-star text-gray-300"></i>
+          <i className="fa fa-star text-gray-300" />
         </span>
       </div>
       <div className="rating-label">
         <span className="svg-icon">
-          <i className="fa fa-star text-gray-300"></i>
+          <i className="fa fa-star text-gray-300" />
         </span>
       </div>
     </div>

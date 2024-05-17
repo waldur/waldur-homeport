@@ -78,7 +78,7 @@ export const FooterLinks = () => {
         >
           <div className="menu-link px-2">
             <span className="menu-title">{translate('Support')}</span>
-            <span className="menu-arrow"></span>
+            <span className="menu-arrow" />
           </div>
           <div className="menu-sub menu-sub-dropdown p-2">
             <IssuesLink />

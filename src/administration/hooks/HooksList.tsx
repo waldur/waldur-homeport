@@ -29,7 +29,7 @@ const StateField = ({ row }) => {
       className={`status-circle d-inline-block rounded square ${cls}`}
       title={title}
       role="button"
-    ></span>
+    />
   );
 };
 

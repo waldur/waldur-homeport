@@ -70,7 +70,7 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                         bgClass,
                       )}
                     >
-                      <div className="stepper-line"></div>
+                      <div className="stepper-line" />
                     </div>
 
                     <div className="stepper-label">

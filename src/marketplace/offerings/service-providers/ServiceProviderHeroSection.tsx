@@ -62,7 +62,7 @@ export const ServiceProviderHeroSection: FunctionComponent<
               }
             : {}
         }
-      ></div>
+      />
     </div>
   );
 };

@@ -50,7 +50,7 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = ({ form }) => {
               isClearable={true}
             />
           )}
-        ></Field>
+        />
       </TableFilterItem>
       <TableFilterItem
         name="is_active"
@@ -73,7 +73,7 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = ({ form }) => {
               isClearable={true}
             />
           )}
-        ></Field>
+        />
       </TableFilterItem>
     </>
   );

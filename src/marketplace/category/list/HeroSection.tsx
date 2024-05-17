@@ -12,7 +12,7 @@ export const HeroSection: FunctionComponent<HeroSectionProps> = (props) => {
   const { params, state } = useCurrentStateAndParams();
   return (
     <>
-      <div className="all-categories__background"></div>
+      <div className="all-categories__background" />
       <div className="all-categories__table container-xxl">
         <div className="all-categories__cell">
           {params?.group && (

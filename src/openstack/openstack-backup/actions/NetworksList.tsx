@@ -22,7 +22,7 @@ type NetworkChoices = Pick<BackupFormChoices, 'subnets' | 'floatingIps'>;
 
 const AddButton = ({ onClick, disabled }) => (
   <Button variant="default" onClick={onClick} disabled={disabled}>
-    <i className="fa fa-plus"></i> {translate('Add')}
+    <i className="fa fa-plus" /> {translate('Add')}
   </Button>
 );
 

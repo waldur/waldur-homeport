@@ -54,7 +54,7 @@ export const TableMoreActions: FunctionComponent<TableMoreActionsProps> = ({
                     </span>
                   )}
                   <span className="menu-title">{item.label}</span>
-                  <span className="menu-arrow"></span>
+                  <span className="menu-arrow" />
                 </a>
                 <div className="menu-sub menu-sub-dropdown w-175px py-3">
                   {item.children.map((child, j) => (

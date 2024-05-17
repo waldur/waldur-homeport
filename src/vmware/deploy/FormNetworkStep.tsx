@@ -40,7 +40,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-end flex-grow-1">
             <Button variant="light" className="text-nowrap" size="sm">
-              <i className="fa fa-plus"></i>
+              <i className="fa fa-plus" />
               {translate('New interface')}
             </Button>
           </div>

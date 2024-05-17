@@ -30,7 +30,7 @@ function CustomToggle({ children, eventKey }) {
         className={`fa fa-${
           isCurrentEventKey ? 'minus' : 'plus'
         } fs-4 ms-2 text-dark`}
-      ></i>
+      />
     </Button>
   );
 }

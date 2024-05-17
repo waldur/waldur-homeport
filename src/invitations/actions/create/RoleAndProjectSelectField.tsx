@@ -103,7 +103,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                     {role.description || role.name}
                   </span>
                   {showProjects && !currentProject && (
-                    <span className="menu-arrow"></span>
+                    <span className="menu-arrow" />
                   )}
                 </span>
               </div>
@@ -117,7 +117,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                   <span className="menu-title">
                     {role.description || role.name}
                   </span>
-                  <span className="menu-arrow"></span>
+                  <span className="menu-arrow" />
                 </span>
               </div>
             ),

@@ -57,7 +57,7 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
     <>
       <p>{translate('Unable to load user.')}</p>
       <Button onClick={callback}>
-        <i className="fa fa-refresh"></i> {translate('Try again')}
+        <i className="fa fa-refresh" /> {translate('Try again')}
       </Button>
     </>
   ) : value?.user ? (

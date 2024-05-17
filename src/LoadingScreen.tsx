@@ -20,7 +20,7 @@ export const LoadingScreen: FunctionComponent<{
       {error ? (
         <div className="erred-screen center-block">
           <div className="erred-screen-icon">
-            <i className="fa fa-exclamation-triangle"></i>
+            <i className="fa fa-exclamation-triangle" />
           </div>
           <h1>{translate('Unable to bootstrap application.')}</h1>
           {error.message ? (
@@ -33,7 +33,7 @@ export const LoadingScreen: FunctionComponent<{
               location.reload();
             }}
           >
-            <i className="fa fa-refresh"></i> {translate('Retry')}
+            <i className="fa fa-refresh" /> {translate('Retry')}
           </button>
         </div>
       ) : null}

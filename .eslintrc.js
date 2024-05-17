@@ -41,6 +41,7 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
+    'react/self-closing-comp': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/no-explicit-any': 'off',

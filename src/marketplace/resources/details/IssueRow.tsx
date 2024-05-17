@@ -4,7 +4,7 @@ import { IssueTypeIcon } from '@waldur/issues/types/IssueTypeIcon';
 
 export const IssueRow = ({ row }: { row: Issue }) => (
   <div className="timeline-item">
-    <div className="timeline-line w-40px"></div>
+    <div className="timeline-line w-40px" />
     <div className="timeline-icon symbol symbol-circle symbol-40px me-4">
       <div className="symbol-label bg-light">
         <IssueTypeIcon type={row.type} />

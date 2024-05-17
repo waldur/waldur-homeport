@@ -44,13 +44,13 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
       <div className="slider-number-input-range">
         <input {...props.input} type="range" min={0} max={100} {...rest} />
         <div className="slider-line-wrapper">
-          <div className="slider-line-bg"></div>
+          <div className="slider-line-bg" />
           <div
             className="slider-line-active"
             style={{
               width: ((sliderLineValue - min) / (max - min)) * 100 + '%',
             }}
-          ></div>
+          />
         </div>
       </div>
       <div className="slider-number-input-control">
@@ -72,7 +72,7 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
             }
             disabled={props.disabled}
           >
-            <i className="fa fa-plus"></i>
+            <i className="fa fa-plus" />
           </Button>
           <Button
             size="sm"
@@ -83,7 +83,7 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
             }
             disabled={props.disabled}
           >
-            <i className="fa fa-minus"></i>
+            <i className="fa fa-minus" />
           </Button>
         </div>
       </div>

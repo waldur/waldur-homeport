@@ -86,7 +86,7 @@ export const EditGettingStartedDialog = connect(
             <Col
               xs="auto"
               className="border-end border-gray-300 border-2 mx-5 p-0"
-            ></Col>
+            />
             <Col className="pb-20">
               <div className="form-label">{translate('Preview')}</div>
               <CodePreview

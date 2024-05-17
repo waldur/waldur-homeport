@@ -95,7 +95,7 @@ export const AdministrationProfile = ({
                   {supportOnly && phone && <span>{phone}</span>}
                 </Stack>
               </Col>
-              <Col xs="auto"></Col>
+              <Col xs="auto" />
             </Row>
             <Row>
               {loading ? (

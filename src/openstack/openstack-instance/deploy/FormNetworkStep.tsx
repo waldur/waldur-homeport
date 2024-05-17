@@ -105,7 +105,7 @@ const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
               className="btn-icon btn-active-light-danger"
               onClick={() => fields.remove(index)}
             >
-              <i className="fa fa-times fs-4"></i>
+              <i className="fa fa-times fs-4" />
             </Button>
           </Col>
         </Row>
@@ -116,7 +116,7 @@ const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
         disabled={freeSubnets.length === 0}
         onClick={addRow}
       >
-        <i className="fa fa-plus"></i>
+        <i className="fa fa-plus" />
         {translate('Add')}
       </Button>
     </>
@@ -155,7 +155,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-end flex-grow-1">
             <Button variant="light" className="text-nowrap" size="sm">
-              <i className="fa fa-plus"></i>
+              <i className="fa fa-plus" />
               {translate('New network')}
             </Button>
           </div>

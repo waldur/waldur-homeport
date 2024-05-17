@@ -123,7 +123,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
             label={translate('Reset avatar')}
             className="w-100"
           >
-            <i className="fa fa-repeat fs-6"></i>
+            <i className="fa fa-repeat fs-6" />
           </Tip>
         </button>
 

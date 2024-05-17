@@ -66,7 +66,7 @@ export const DropzoneFiles: FC<OwnProps> = (props) => {
               className="dropzone-item btn btn-icon btn-light btn-active-secondary"
               title={`${file.name} - ${file.size} bytes`}
             >
-              <i className="fa fa-file fs-4"></i>
+              <i className="fa fa-file fs-4" />
             </button>
           ))}
         </div>

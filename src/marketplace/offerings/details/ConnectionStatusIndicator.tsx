@@ -39,7 +39,7 @@ export const ConnectionStatusIndicator = ({ status }) => {
               key={i}
               data-toggle="tooltip"
               data-placement="top"
-            ></i>
+            />
           </Tip>
         ))}
       </Col>

@@ -39,7 +39,7 @@ export const MarkdownField: FunctionComponent<MarkdownFieldProps> = (props) => {
               ? 'border-bottom border-gray-300 border-2 my-5'
               : 'border-end border-gray-300 border-2 mx-5'
           }
-        ></div>
+        />
       </Col>
       <Col className="pb-20">
         <div className="form-label">{translate('Preview')}</div>

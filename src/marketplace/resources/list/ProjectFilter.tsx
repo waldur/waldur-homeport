@@ -16,7 +16,7 @@ const getOptionLabel = (option) => (
     {option.name}
     {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
       option.is_industry && (
-        <i className="fa fa-industry fa-lg" style={{ marginLeft: '5px' }}></i>
+        <i className="fa fa-industry fa-lg" style={{ marginLeft: '5px' }} />
       )}
   </div>
 );

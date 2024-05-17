@@ -125,7 +125,7 @@ export const FormSteps: FC<{
                 </div>
               </div>
 
-              <div className="stepper-line h-20px"></div>
+              <div className="stepper-line h-20px" />
             </div>
           ))}
         </div>

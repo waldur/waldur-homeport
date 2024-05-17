@@ -22,7 +22,7 @@ export const CallUpdateBar: FunctionComponent<CallUpdateBarProps> = ({
             {call.rounds.length === 0 ? (
               <i className="fa fa-warning text-danger fs-5" />
             ) : (
-              <i className="fa fa-check text-success fs-5"></i>
+              <i className="fa fa-check text-success fs-5" />
             )}
             {translate('Rounds')}
           </>

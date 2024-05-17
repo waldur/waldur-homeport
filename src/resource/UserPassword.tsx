@@ -19,7 +19,7 @@ export const UserPassword: React.FC<UserPasswordProps> = (props) => {
         })}
         title={translate('Show password')}
         onClick={toggle}
-      ></button>{' '}
+      />{' '}
       {showPassword ? props.password : '***************'}
     </>
   );

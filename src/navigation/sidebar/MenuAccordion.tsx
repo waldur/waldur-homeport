@@ -31,7 +31,7 @@ export const MenuAccordion: React.FC<PropsWithChildren<MenuAccordionProps>> = (
         </span>
       )}
       <span className="menu-title">{props.title}</span>
-      <span className="menu-arrow"></span>
+      <span className="menu-arrow" />
     </span>
     <div className="menu-sub menu-sub-accordion">{props.children}</div>
   </div>

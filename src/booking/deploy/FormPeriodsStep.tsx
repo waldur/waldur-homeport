@@ -117,7 +117,7 @@ const renderScheduleRows = ({
               className="btn-icon btn-active-light-danger"
               onClick={() => fields.remove(index)}
             >
-              <i className="fa fa-times fs-4"></i>
+              <i className="fa fa-times fs-4" />
             </Button>
           </div>
           <Field
@@ -154,7 +154,7 @@ const renderScheduleRows = ({
         </div>
       ))}
       <Button variant="light" className="text-nowrap" onClick={addRow}>
-        <i className="fa fa-plus"></i>
+        <i className="fa fa-plus" />
         {translate('Add time period')}
       </Button>
     </>

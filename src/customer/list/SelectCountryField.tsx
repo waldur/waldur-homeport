@@ -13,7 +13,7 @@ import 'world-flags-sprite/stylesheets/flags16.css';
 const CountryRenderer = (option) => (
   <>
     <i className="f16">
-      <i className={`flag ${option.value.toLowerCase()}`}></i>
+      <i className={`flag ${option.value.toLowerCase()}`} />
     </i>{' '}
     {option.label}
   </>

@@ -86,7 +86,7 @@ export const PureIssueAttachment: FunctionComponent<
       ) : (
         <>
           <div className="attachment-item__thumb">
-            <i className="fa fa-exclamation-triangle"></i>
+            <i className="fa fa-exclamation-triangle" />
           </div>
           <div className="attachment-item__description">
             <div className="attachment-item__description-name">

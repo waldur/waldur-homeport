@@ -23,7 +23,7 @@ const StateField = ({ row }) => {
     <span
       className={`status-circle d-inline-block rounded square ${cls}`}
       title={title}
-    ></span>
+    />
   );
 };
 

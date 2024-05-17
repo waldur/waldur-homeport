@@ -14,7 +14,7 @@ export const ResourceHeader = ({ toggled, resource, customer }) => (
         params={{ uuid: customer.uuid, resource_uuid: resource.uuid }}
         className="hidden-print"
       >
-        <i className="fa fa-external-link"></i>
+        <i className="fa fa-external-link" />
       </Link>
     ) : null}
   </div>

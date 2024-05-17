@@ -103,7 +103,7 @@ const ResourceSelectorDropdown: FunctionComponent<
             result.status === 'loading' ? '' : 'd-none',
           )}
         >
-          <span className="spinner-border h-15px w-15px align-middle text-gray-400"></span>
+          <span className="spinner-border h-15px w-15px align-middle text-gray-400" />
         </span>
         <button
           className={classNames(

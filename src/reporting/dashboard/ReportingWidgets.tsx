@@ -91,7 +91,7 @@ const WidgetItem = ({ item }: { item: ReportingWidget }) => (
           )}
         </div>
         <div>
-          <i className="icon-arrow fa fa-angle-right display-5 fw-light text-dark"></i>
+          <i className="icon-arrow fa fa-angle-right display-5 fw-light text-dark" />
         </div>
       </div>
     </Card.Body>

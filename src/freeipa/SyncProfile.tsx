@@ -45,7 +45,7 @@ export const SyncProfile: FunctionComponent<{
       id="freeipa-sync-profile"
     >
       <Button variant="primary" className="ms-2" onClick={callback}>
-        <i className="fa fa-refresh"></i> {translate('Sync profile')}
+        <i className="fa fa-refresh" /> {translate('Sync profile')}
       </Button>
     </Tip>
   );

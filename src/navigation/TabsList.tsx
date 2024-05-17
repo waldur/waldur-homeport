@@ -56,7 +56,7 @@ export const TabsList: FunctionComponent = () => {
             <MenuLink to={parentTab.to}>
               <a className="menu-link">
                 <span className="menu-title">{parentTab.title}</span>
-                <span className="menu-arrow"></span>
+                <span className="menu-arrow" />
               </a>
             </MenuLink>
             <div className="menu-sub menu-sub-down-accordion menu-sub-dropdown px-2 py-4 w-200px">

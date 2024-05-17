@@ -38,9 +38,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
           <span className="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
             {currentLanguage.label}{' '}
             <i className="f16">
-              <i
-                className={`flag ${LanguageCountry[currentLanguage.code]}`}
-              ></i>
+              <i className={`flag ${LanguageCountry[currentLanguage.code]}`} />
             </i>
           </span>
         </span>
@@ -64,7 +62,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
             >
               <span className="symbol symbol-20px me-4">
                 <i className="f16">
-                  <i className={`flag ${LanguageCountry[language.code]}`}></i>
+                  <i className={`flag ${LanguageCountry[language.code]}`} />
                 </i>
               </span>
               {language.label}

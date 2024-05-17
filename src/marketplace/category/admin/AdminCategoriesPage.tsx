@@ -63,7 +63,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
           render: ({ row }) => {
             if (row.group) {
               if (loadingGroups) {
-                return <i className="fa fa-refresh fa-spin fs-4 me-2"></i>;
+                return <i className="fa fa-refresh fa-spin fs-4 me-2" />;
               } else if (errorGroups) {
                 return (
                   <>
@@ -76,7 +76,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
                       className="btn-icon ms-1"
                       onClick={() => refetch()}
                     >
-                      <i className="fa fa-refresh fs-4 me-2"></i>
+                      <i className="fa fa-refresh fs-4 me-2" />
                     </Button>
                   </>
                 );

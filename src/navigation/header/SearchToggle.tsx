@@ -129,7 +129,7 @@ const SearchPopover = () => {
               result.status === 'loading' ? '' : 'd-none',
             )}
           >
-            <span className="spinner-border h-15px w-15px align-middle text-gray-400"></span>
+            <span className="spinner-border h-15px w-15px align-middle text-gray-400" />
           </span>
           <button
             type="button"
@@ -165,7 +165,7 @@ const SearchPopover = () => {
             </button>
           </div>
         </form>
-        <div className="separator border-gray-200 mb-6"></div>
+        <div className="separator border-gray-200 mb-6" />
         <div>
           <div className="scroll-y mh-200px mh-lg-350px">
             {result.data

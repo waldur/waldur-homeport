@@ -52,7 +52,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
         header={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
         title={translate('Available offerings')}
         backgroundImage={background}
-      ></LandingHeroSection>
+      />
       <div className="container-xxl mt-20">
         <Table
           title={translate('Available offerings')}

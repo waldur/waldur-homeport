@@ -41,7 +41,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
           )}
           {child && (
             <span className="menu-bullet">
-              <span className="bullet bullet-dot"></span>
+              <span className="bullet bullet-dot" />
             </span>
           )}
           <span className="menu-title">{props.title}</span>

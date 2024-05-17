@@ -84,7 +84,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
     <thead>
       <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
         {fieldType ? (
-          <th style={{ width: '10px' }}></th>
+          <th style={{ width: '10px' }} />
         ) : enableMultiSelect ? (
           <th style={{ width: '10px' }}>
             <FormCheck

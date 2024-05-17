@@ -77,7 +77,7 @@ function CustomToggle({ item, eventKey }) {
       active={activeEventKey === eventKey}
     >
       <span className="svg-icon-2 rotate-90">
-        <i className="fa fa-angle-right fs-1 fw-light"></i>
+        <i className="fa fa-angle-right fs-1 fw-light" />
       </span>
     </CategoryListItem>
   );

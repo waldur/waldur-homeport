@@ -28,7 +28,7 @@ export const Image: FC<ImageProps> = ({
       <div
         className="symbol-label"
         style={{ backgroundImage: `url(${src})` }}
-      ></div>
+      />
     </div>
   );
 };

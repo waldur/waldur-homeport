@@ -41,7 +41,7 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           }
           disabled={props.disabled}
         >
-          <i className="fa fa-minus"></i>
+          <i className="fa fa-minus" />
         </Button>
         <Form.Control
           {...props.input}
@@ -60,7 +60,7 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           }
           disabled={props.disabled}
         >
-          <i className="fa fa-plus"></i>
+          <i className="fa fa-plus" />
         </Button>
       </div>
     </div>

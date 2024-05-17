@@ -26,7 +26,7 @@ export const InvoicesDropdown: FunctionComponent<
   <DropdownButton
     title={
       <>
-        <i className="fa fa-file-text-o"></i> {translate('Link invoice')}
+        <i className="fa fa-file-text-o" /> {translate('Link invoice')}
       </>
     }
     id="link-invoice-dropdown-btn"

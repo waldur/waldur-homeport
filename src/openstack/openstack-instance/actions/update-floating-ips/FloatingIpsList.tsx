@@ -51,7 +51,7 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
             });
           }}
         >
-          <i className="fa fa-plus"></i> {translate('Add')}
+          <i className="fa fa-plus" /> {translate('Add')}
         </Button>
       </>
     )}

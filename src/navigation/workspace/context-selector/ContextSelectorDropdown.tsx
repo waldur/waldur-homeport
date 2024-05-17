@@ -156,7 +156,7 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
                   MenuComponent.hideDropdowns(undefined);
                 }}
               >
-                <i className="fa fa-arrow-left fs-4"></i>
+                <i className="fa fa-arrow-left fs-4" />
               </button>
               <FormControl
                 id="quick-selector-search-box"

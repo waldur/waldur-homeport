@@ -78,7 +78,7 @@ const renderDataVolumeRows = ({
               fields.push({ size: 1, volume_type: defaultVolumeType })
             }
           >
-            <i className="fa fa-plus"></i>
+            <i className="fa fa-plus" />
             {translate('Add data volume')}
           </Button>
         </td>

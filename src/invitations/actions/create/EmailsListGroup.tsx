@@ -77,7 +77,7 @@ export const EmailsListGroup = ({
                     <td className="tax-column">{translate('Tax number')}</td>
                   )}
                   <td className="role-column">{translate('Role')}</td>
-                  <td className="w-5px"></td>
+                  <td className="w-5px" />
                 </tr>
               </thead>
               <tbody>
@@ -166,7 +166,7 @@ export const EmailsListGroup = ({
           disabled={warn}
           onClick={addRow}
         >
-          <i className="fa fa-plus fs-4"></i>
+          <i className="fa fa-plus fs-4" />
         </Button>
         {warn && (
           <span className="text-danger ms-2">

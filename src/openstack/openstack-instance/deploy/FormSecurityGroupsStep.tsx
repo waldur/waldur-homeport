@@ -127,7 +127,7 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
             <ShowPreviewButton />
             {showExperimentalUiComponents && (
               <Button variant="light" className="text-nowrap" size="sm">
-                <i className="fa fa-plus"></i>
+                <i className="fa fa-plus" />
                 {translate('New security group')}
               </Button>
             )}
@@ -153,7 +153,7 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
                     <i
                       className="fa fa-exclamation-triangle"
                       style={{ color: 'red' }}
-                    ></i>
+                    />
                   </Tip>
                 )}
               </>

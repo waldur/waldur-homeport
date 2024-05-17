@@ -41,7 +41,7 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
       {props.hasBullet && (
         <span
           className={`bullet bullet-dot bg-${props.light ? props.variant : 'white'} me-2 h-5px w-5px align-middle`}
-        ></span>
+        />
       )}
       {props.label.toUpperCase()}{' '}
       {props.active && (

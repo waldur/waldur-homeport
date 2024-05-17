@@ -40,7 +40,7 @@ export const DateField: FunctionComponent<any> = (props) => (
           label={translate('Remove')}
           className="w-100"
         >
-          <i className="fa fa-times fs-6"></i>
+          <i className="fa fa-times fs-6" />
         </Tip>
       </button>
     )}

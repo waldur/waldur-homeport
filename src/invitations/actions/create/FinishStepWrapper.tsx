@@ -18,7 +18,7 @@ export const FinishStepWrapper = () => {
           className={
             'fa fa-check-circle text-success m-auto ' + (show && 'show')
           }
-        ></i>
+        />
       </div>
     </>
   );

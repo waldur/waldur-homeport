@@ -20,7 +20,7 @@ export const AuthLogoutFailed: FunctionComponent = () => {
           type="button"
           onClick={AuthService.localLogout}
         >
-          <i className="fa fa-sign-out"></i> {translate('Perform local logout')}
+          <i className="fa fa-sign-out" /> {translate('Perform local logout')}
         </button>
       </p>
     </div>

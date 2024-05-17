@@ -12,7 +12,7 @@ export const ProjectLink = ({ row }) => (
     {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
       row.is_industry && (
         <span>
-          <i className="fa fa-industry" style={{ marginLeft: '5px' }}></i>
+          <i className="fa fa-industry" style={{ marginLeft: '5px' }} />
         </span>
       )}
   </div>

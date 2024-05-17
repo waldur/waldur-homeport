@@ -42,7 +42,7 @@ const PureNotificationFilter: FunctionComponent<{ form }> = ({ form }) => {
             isClearable={true}
           />
         )}
-      ></Field>
+      />
     </TableFilterItem>
   );
 };

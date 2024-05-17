@@ -57,7 +57,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
                         <i
                           className="fa fa-industry fa-lg"
                           style={{ marginLeft: '5px' }}
-                        ></i>
+                        />
                       </span>
                     )}
                 </h2>

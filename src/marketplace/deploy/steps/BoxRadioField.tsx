@@ -78,7 +78,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
                 ) : typeof choice.label === 'string' ? (
                   choice.label.toUpperCase().substring(0, 4)
                 ) : (
-                  <i className="fa fa-check display-6"></i>
+                  <i className="fa fa-check display-6" />
                 )}
               </div>
               <input
@@ -106,14 +106,14 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
                     data-kt-menu-attach="parent"
                     data-kt-menu-placement="bottom"
                   >
-                    <div></div>
+                    <div />
                     <div>
                       <div className="form-check-label">{choice.label}</div>
                       <div className="form-check-metadata">
                         {selectedVersions[index].label}
                       </div>
                     </div>
-                    <i className="fa fa-angle-down fs-1 fw-light"></i>
+                    <i className="fa fa-angle-down fs-1 fw-light" />
                   </div>
 
                   {/* Options menu */}

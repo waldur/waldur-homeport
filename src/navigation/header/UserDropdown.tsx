@@ -110,7 +110,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
           </div>
         )}
 
-        <div className="separator my-2"></div>
+        <div className="separator my-2" />
 
         <LanguageSelectorDropdown />
 
@@ -126,12 +126,12 @@ export const UserDropdownMenu: FunctionComponent = () => {
           </div>
         )}
 
-        <div className="separator my-2"></div>
+        <div className="separator my-2" />
         <ThemeSwitcher />
 
         {user && (
           <>
-            <div className="separator my-2"></div>
+            <div className="separator my-2" />
             <UserToken token={user.token} />
           </>
         )}

@@ -85,7 +85,7 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
       </Card.Header>
       <Card.Body className="pt-0 ps-16 position-relative">
         {props.disabled && (
-          <div className="blocker position-absolute z-index-1 w-100 h-100 cursor-not-allowed"></div>
+          <div className="blocker position-absolute z-index-1 w-100 h-100 cursor-not-allowed" />
         )}
         {props.loading ? <LoadingSpinner /> : props.children}
       </Card.Body>
