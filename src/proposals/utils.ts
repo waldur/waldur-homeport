@@ -138,11 +138,15 @@ export const getRoundStatus = (round: Round) => {
   if (!round) {
     return null;
   } else if (round.status === 'scheduled') {
-    return { label: translate('Scheduled'), color: 'secondary' };
+    return {
+      label: translate('Scheduled'),
+      value: round.status,
+      color: 'secondary',
+    };
   } else if (round.status === 'open') {
-    return { label: translate('Open'), color: 'success' };
+    return { label: translate('Open'), value: round.status, color: 'success' };
   } else if (round.status === 'ended') {
-    return { label: translate('Ended'), color: 'danger' };
+    return { label: translate('Ended'), value: round.status, color: 'danger' };
   }
 };
 

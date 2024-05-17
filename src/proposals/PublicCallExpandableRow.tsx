@@ -28,8 +28,8 @@ export const PublicCallExpandableRow: FunctionComponent<{
     const items = getRoundsWithStatus(row.rounds);
     const first = items[0];
     if (
-      (first && first.status.label === 'Open') ||
-      first.status.label === 'Scheduled'
+      (first && first.status.value === 'open') ||
+      first.status.value === 'scheduled'
     ) {
       return first;
     }
