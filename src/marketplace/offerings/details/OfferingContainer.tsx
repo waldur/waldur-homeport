@@ -1,53 +1,32 @@
-import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
-import { useEffectOnce } from 'react-use';
+import { FC } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import {
-  getProviderOffering,
-  getCategory,
-  getOfferingPlansUsage,
-} from '@waldur/marketplace/common/api';
-import { useFullPage } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
+import { Category, Offering } from '@waldur/marketplace/types';
+import { PlanUsageRow } from '@waldur/reporting/plan-usage/types';
 
 import { OfferingDetails } from './OfferingDetails';
 
-async function loadData(offering_uuid: string) {
-  const [offering, plansUsage] = await Promise.all([
-    getProviderOffering(offering_uuid),
-    getOfferingPlansUsage(offering_uuid),
-  ]);
-  const category = await getCategory(offering.category_uuid);
-
-  return { offering, category, plansUsage };
+interface OwnProps {
+  data: {
+    offering: Offering;
+    category: Category;
+    plansUsage: PlanUsageRow[];
+  };
+  refetch;
+  isLoading;
+  error;
+  tabSpec;
 }
 
-export const OfferingContainer: FunctionComponent = () => {
-  const {
-    params: { offering_uuid },
-  } = useCurrentStateAndParams();
+export const OfferingContainer: FC<OwnProps> = (props) => {
+  const data = props.data;
 
-  const { isLoading, error, data, refetch } = useQuery(
-    ['providerOfferingDetail', offering_uuid],
-    () => loadData(offering_uuid),
-    { enabled: false },
-  );
-
-  useEffectOnce(() => {
-    refetch();
-  });
-
-  useFullPage();
-  useTitle(data ? data.offering.name : translate('Offering details'));
-
-  if (isLoading && !data) {
+  if (props.isLoading && !data) {
     return <LoadingSpinner />;
   }
 
-  if (error) {
+  if (props.error) {
     return <h3>{translate('Unable to load offering details.')}</h3>;
   }
 
@@ -60,7 +39,8 @@ export const OfferingContainer: FunctionComponent = () => {
       offering={data.offering}
       category={data.category}
       plansUsage={data.plansUsage}
-      refetch={refetch}
+      refetch={props.refetch}
+      tabSpec={props.tabSpec}
     />
   );
 };

@@ -8,17 +8,19 @@ import { OfferingSectionProps } from '../types';
 
 import { OfferingOptionsSectionPure } from './OfferingOptionsSectionPure';
 
-export const OfferingOptionsSection: FC<OfferingSectionProps> = (props) => {
+export const OfferingResourceOptionsSection: FC<OfferingSectionProps> = (
+  props,
+) => {
   return (
     <OfferingOptionsSectionPure
-      type="options"
+      type="resource_options"
       title={
         <>
-          {translate('User input')}{' '}
+          {translate('Resource options')}{' '}
           <Tip
             id="form-field-tooltip"
             label={translate(
-              'If you want user to provide additional details when ordering, please configure input form for the user below',
+              'If you want user to be able to modify resource options after creation, please configure options for user below',
             )}
             className="mx-2 text-muted"
           >

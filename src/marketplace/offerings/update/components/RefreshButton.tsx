@@ -1,3 +1,5 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
+
 import { LoadingSpinner } from '@waldur/table/TableRefreshButton';
 
 interface RefreshButtonProps {
@@ -11,9 +13,9 @@ export const RefreshButton = (props: RefreshButtonProps) =>
   ) : (
     <button
       type="button"
-      className="btn btn-icon btn-active-light"
+      className="btn btn-icon btn-active-light btn-color-muted"
       onClick={props.refetch}
     >
-      <i className="fa fa-refresh fs-4"></i>
+      <ArrowsClockwise size={20} data-cy="loading-spinner" weight="bold" />
     </button>
   );

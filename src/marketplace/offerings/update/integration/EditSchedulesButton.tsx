@@ -1,11 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { isOfferingTypeSchedulable } from '@waldur/marketplace/common/registry';
 import { openModalDialog } from '@waldur/modal/actions';
+
+import { RowEditButton } from '../RowEditButton';
 
 import { EDIT_SCHEDULES_FORM_ID } from './constants';
 
@@ -33,8 +34,10 @@ export const EditSchedulesButton: FunctionComponent<{
     return null;
   }
   return (
-    <Button onClick={callback} className="me-3" variant="light" size="sm">
-      <i className="fa fa-pencil"></i> {translate('Edit schedules')}
-    </Button>
+    <RowEditButton
+      onClick={callback}
+      title={translate('Edit schedules')}
+      variant="light"
+    />
   );
 };

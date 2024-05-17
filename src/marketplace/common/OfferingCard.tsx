@@ -44,7 +44,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
               {translate('Deploy')}
             </OfferingLink>
             <Link
-              state="public.marketplace-public-offering"
+              state="public-offering.marketplace-public-offering"
               params={{
                 uuid: props.offering.uuid,
               }}

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { Eye, EyeSlash } from '@phosphor-icons/react';
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useToggle } from 'react-use';
@@ -19,10 +19,6 @@ export const SecretField: React.FC<SecretFieldProps> = (props) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { input, label, validate, ...rest } = props;
-  const iconClass = classNames('text-btn fa password-icon', {
-    'fa-eye-slash': showSecret,
-    'fa-eye': !showSecret,
-  });
 
   return (
     <div className="has-password">
@@ -35,11 +31,14 @@ export const SecretField: React.FC<SecretFieldProps> = (props) => {
         {...rest}
       />
       <button
-        className={iconClass}
+        className="password-icon text-btn"
         type="button"
         title={showSecret ? translate('Hide') : translate('Show')}
         onClick={onToggle}
-      ></button>
+      >
+        {showSecret ? <EyeSlash size={18} /> : <Eye size={18} />}
+        &nbsp;
+      </button>
     </div>
   );
 };

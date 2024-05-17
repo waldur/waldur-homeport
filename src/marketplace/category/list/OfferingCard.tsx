@@ -17,7 +17,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
       (props.offering.paused_reason ||
         translate('Requesting of new resources has been temporarily paused')),
     <Link
-      state="public.marketplace-public-offering"
+      state="public-offering.marketplace-public-offering"
       params={{
         uuid: props.offering.uuid,
       }}

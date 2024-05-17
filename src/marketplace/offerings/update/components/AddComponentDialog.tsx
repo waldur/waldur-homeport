@@ -7,11 +7,11 @@ import { reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { createProviderOfferingComponent } from '@waldur/marketplace/common/api';
+import { OfferingData } from '@waldur/marketplace/offerings/OfferingEditUIView';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { formatComponent } from '../../store/utils';
-import { OfferingData } from '../OfferingUpdateContainer';
 
 import { ComponentForm } from './ComponentForm';
 import { ADD_COMPONENT_FORM_ID } from './constants';

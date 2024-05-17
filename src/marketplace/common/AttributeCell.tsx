@@ -1,3 +1,4 @@
+import { Check, X } from '@phosphor-icons/react';
 import React from 'react';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -30,7 +31,7 @@ export const AttributeCell: React.FC<AttributeCellProps> = ({
         <>
           {titles.map((item, index) => (
             <span key={index}>
-              <i className="fa fa-check" />
+              <Check weight="bold" />
               {` ${item}`}
               <br />
             </span>
@@ -40,9 +41,11 @@ export const AttributeCell: React.FC<AttributeCellProps> = ({
     }
 
     case 'boolean': {
-      const icon =
-        value === true ? 'fa fa-check text-info' : 'fa fa-times text-danger';
-      return <i className={icon} />;
+      return value === true ? (
+        <Check weight="bold" className="text-info" />
+      ) : (
+        <X weight="bold" className="text-danger" />
+      );
     }
 
     case 'choice': {

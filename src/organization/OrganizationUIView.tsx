@@ -98,10 +98,19 @@ const PageHero = ({ customer }) => {
   );
 };
 
-export const OrganizationUIView: FunctionComponent = () => {
+const WithHero = (props) => {
   const customer = useSelector(getCustomer);
 
   usePageHero(<PageHero customer={customer} />);
 
-  return <UIView />;
+  return <UIView {...props} />;
+};
+
+export const OrganizationUIView: FunctionComponent = (props) => {
+  const { state } = useCurrentStateAndParams();
+
+  if (state.data?.skipHero) {
+    return <UIView {...props} />;
+  }
+  return <WithHero {...props} />;
 };

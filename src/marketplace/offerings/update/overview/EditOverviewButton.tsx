@@ -1,11 +1,10 @@
-import { PencilSimple } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+
+import { RowEditButton } from '../RowEditButton';
 
 import { OVERVIEW_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';
@@ -26,12 +25,5 @@ export const EditOverviewButton: FC<EditOfferingProps> = (props) => {
       }),
     );
   };
-  return (
-    <Button onClick={callback} size="sm" className="me-3">
-      <span className="svg-icon svg-icon-2">
-        <PencilSimple />
-      </span>{' '}
-      {translate('Edit')}
-    </Button>
-  );
+  return <RowEditButton onClick={callback} />;
 };

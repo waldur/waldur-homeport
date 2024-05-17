@@ -1,3 +1,4 @@
+import { Info } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Col, Modal, Row } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
@@ -71,9 +72,10 @@ export const EditGettingStartedDialog = connect(
                         id="template"
                       >
                         {translate('Template')}
-                        <i
-                          className="fa fa-info-circle ms-1"
-                          aria-hidden="true"
+                        <Info
+                          size={16}
+                          weight="fill"
+                          className="text-muted ms-1"
                         />
                       </Tip>
                     }

@@ -1,5 +1,7 @@
+import { ReactNode } from 'react';
+
 export interface Tab {
-  title: string;
+  title: ReactNode;
   to?: string;
   params?: Record<string, any>;
   children?: Tab[];

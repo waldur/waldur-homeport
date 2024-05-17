@@ -43,7 +43,7 @@ export const IntegrationSection: FC<OfferingSectionProps> = (props) => {
   }
 
   return (
-    <Card className="mb-10" id="integration">
+    <Card id="integration">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           <span className="me-2">{translate('Integration')}</span>

@@ -1,15 +1,14 @@
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { ACTIVE, DRAFT, PAUSED } from '../../store/constants';
+import { RowEditButton } from '../RowEditButton';
 
 const UpdateOfferingLogoDialog = lazyComponent(
   () => import('../../actions/UpdateOfferingLogoDialog'),
@@ -35,10 +34,6 @@ export const OfferingLogoButton: FC<{ offering; refetch }> = (props) => {
         customerId: customer.uuid,
       }))
   )
-    return (
-      <Button onClick={callback} size="sm" className="me-3">
-        <i className="fa fa-pencil" /> {translate('Edit')}
-      </Button>
-    );
+    return <RowEditButton onClick={callback} />;
   return null;
 };

@@ -11,7 +11,7 @@ import { DeleteEndpointButton } from './DeleteEndpointButton';
 
 export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
   return (
-    <Card className="mb-10" id="endpoints">
+    <Card id="endpoints">
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           <span className="me-2">{translate('Endpoints')}</span>

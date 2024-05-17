@@ -7,7 +7,7 @@ import { DropdownLink } from './DropdownLink';
 export const OpenPublicOffering = ({ row }) => (
   <Dropdown.Item
     as={DropdownLink}
-    state="public.marketplace-public-offering"
+    state="public-offering.marketplace-public-offering"
     params={{
       uuid: row.uuid,
     }}

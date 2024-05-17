@@ -45,7 +45,7 @@ const getDataForFavoritePage = async (
     subtitle = offering.name;
     image = offering.thumbnail;
   } else if (
-    state.name === 'public.marketplace-public-offering' &&
+    state.name === 'public-offering.marketplace-public-offering' &&
     params.uuid
   ) {
     const offering = await getPublicOffering(params.offering_uuid, {

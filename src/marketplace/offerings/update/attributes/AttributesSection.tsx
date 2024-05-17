@@ -13,7 +13,7 @@ import { EditCategoryButton } from './EditCategoryButton';
 export const AttributesSection: FC<OfferingSectionProps & { category }> = (
   props,
 ) => (
-  <Card className="mb-10" id="category">
+  <Card id="category">
     <div className="border-2 border-bottom card-header">
       <div className="card-title h5">
         <span className="me-2">{translate('Category')}</span>

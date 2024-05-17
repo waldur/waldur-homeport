@@ -1,4 +1,5 @@
-import { Button } from 'react-bootstrap';
+import { ArrowsClockwise } from '@phosphor-icons/react';
+import { Button, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { post } from '@waldur/core/api';
@@ -46,11 +47,9 @@ export const SyncButton = ({ offering, refetch }) => {
       className="me-3"
       disabled={!enabled}
     >
-      {enabled ? (
-        <i className="fa fa-refresh"></i>
-      ) : (
-        <i className="fa fa-spinner fa-spin"></i>
-      )}{' '}
+      <span className="svg-icon svg-icon-2">
+        {enabled ? <ArrowsClockwise /> : <Spinner className="fa-spin" />}
+      </span>{' '}
       {translate('Synchronize')}
     </Button>
   );

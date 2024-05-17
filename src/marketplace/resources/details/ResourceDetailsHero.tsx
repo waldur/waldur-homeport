@@ -37,19 +37,17 @@ export const ResourceDetailsHero = ({
         logoTooltip={formatResourceType(resource)}
         backgroundImage={offering.image}
         title={<ResourceDetailsHeaderTitle resource={resource} />}
-        actions={
-          <ResourceActions
-            resource={{
-              ...resource,
-              marketplace_resource_uuid: resource.uuid,
-            }}
-            scope={scope}
-            refetch={refetch}
-          />
-        }
         quickActions={
-          <div className="d-flex flex-wrap gap-2">
+          <div className="d-flex flex-column flex-wrap gap-2">
             <RefreshButton refetch={refetch} isLoading={isLoading} />
+            <ResourceActions
+              resource={{
+                ...resource,
+                marketplace_resource_uuid: resource.uuid,
+              }}
+              scope={scope}
+              refetch={refetch}
+            />
           </div>
         }
         quickBody={

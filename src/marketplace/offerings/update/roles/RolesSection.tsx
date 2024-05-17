@@ -10,7 +10,7 @@ import { AddRoleButton } from './AddRoleButton';
 import { DeleteRoleButton } from './DeleteRoleButton';
 
 export const RolesSection: FC<OfferingSectionProps> = (props) => (
-  <Card className="mb-10" id="roles">
+  <Card id="roles">
     <div className="border-2 border-bottom card-header">
       <div className="card-title h5">
         <span className="me-2">{translate('Roles')}</span>

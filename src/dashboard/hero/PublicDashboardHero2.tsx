@@ -19,6 +19,7 @@ interface PublicDashboardHero2Props {
   quickFooter?: ReactNode;
   quickFooterClassName?: string;
   className?: string;
+  hideQuickSection?: boolean;
 }
 
 export const PublicDashboardHero2: FC<
@@ -29,7 +30,11 @@ export const PublicDashboardHero2: FC<
       <Row
         className={classNames('public-dashboard-hero-body', props.className)}
       >
-        <Col md={6} sm={12} className="d-flex">
+        <Col
+          md={props.hideQuickSection ? undefined : 6}
+          sm={props.hideQuickSection ? undefined : 12}
+          className="d-flex"
+        >
           <Card className="w-100 mb-md-0 mb-4">
             <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-10 flex-grow-1 py-6">
               <Tip
@@ -47,6 +52,12 @@ export const PublicDashboardHero2: FC<
                 <div className="d-flex flex-grow-1 flex-sm-row flex-column-reverse">
                   {/* Title */}
                   <div className="flex-grow-1">{props.title}</div>
+                  {/* Actions */}
+                  {props.actions && (
+                    <div className="d-flex align-self-end align-self-sm-start gap-3">
+                      {props.actions}
+                    </div>
+                  )}
                 </div>
                 <div className="mt-6">
                   {/* Details */}
@@ -57,38 +68,31 @@ export const PublicDashboardHero2: FC<
           </Card>
         </Col>
 
-        <Col md={6} sm={12} className="d-flex">
-          <Card className="flex-grow-1">
-            <Card.Body className="d-flex flex-column py-6">
-              <Row className="mb-5">
-                <Col xs>{props.quickBody}</Col>
-                {/* Actions */}
-                {(props.actions || props.quickActions) && (
-                  <Col xs="auto">
-                    {props.quickActions && (
-                      <div className="mb-2">{props.quickActions}</div>
-                    )}
-                    {props.actions && (
-                      <div className="d-flex flex-column align-items-end">
-                        {props.actions}
-                      </div>
-                    )}
-                  </Col>
-                )}
-              </Row>
-              {props.quickFooter && (
-                <div
-                  className={classNames(
-                    'flex-grow-1 d-flex align-items-end',
-                    props.quickFooterClassName,
+        {!props.hideQuickSection && (
+          <Col md={6} sm={12} className="d-flex">
+            <Card className="flex-grow-1">
+              <Card.Body className="d-flex flex-column py-6">
+                <Row className="mb-5">
+                  <Col xs>{props.quickBody}</Col>
+                  {/* Quick actions */}
+                  {props.quickActions && (
+                    <Col xs="auto">{props.quickActions}</Col>
                   )}
-                >
-                  {props.quickFooter}
-                </div>
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
+                </Row>
+                {props.quickFooter && (
+                  <div
+                    className={classNames(
+                      'flex-grow-1 d-flex align-items-end',
+                      props.quickFooterClassName,
+                    )}
+                  >
+                    {props.quickFooter}
+                  </div>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        )}
       </Row>
     </div>
   );

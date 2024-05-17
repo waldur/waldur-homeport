@@ -1,3 +1,4 @@
+import { Copy } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -30,7 +31,7 @@ export const ClonePlanButton: FunctionComponent<{
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <i className="fa fa-clone" /> {translate('Clone')}
+      <Copy size={18} /> {translate('Clone')}
     </Dropdown.Item>
   );
 };
