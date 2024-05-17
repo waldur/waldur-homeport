@@ -11,7 +11,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { CallsAvailableOfferingsList } from '@waldur/proposals/CallsAvailableOfferingsList';
 import { CallsForProposalsList } from '@waldur/proposals/CallsForProposalsList';
 
-const background = require('./proposal-calls.png');
+import background from './proposal-calls.png';
 
 export const CallsForProposals: FunctionComponent = () => {
   useFullPage();

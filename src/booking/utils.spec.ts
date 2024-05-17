@@ -3,8 +3,8 @@ import { DateTime } from 'luxon';
 
 import { handlePastSlotsForBookingOffering } from '@waldur/booking/marketplace';
 
-const attributesAfter = require('./fixtures/attributes-after.json');
-const attributesBefore = require('./fixtures/attributes-before.json');
+import attributesAfter from './fixtures/attributes-after.json';
+import attributesBefore from './fixtures/attributes-before.json';
 
 afterAll(() => {
   clear();

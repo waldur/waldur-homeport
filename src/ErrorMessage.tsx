@@ -2,9 +2,8 @@ import { FallbackRender } from '@sentry/react';
 import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import Illustration from '@waldur/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
-
-const Illustration = require('@waldur/images/table-placeholders/undraw_fixing_bugs_w7gi.svg');
 
 export const ErrorMessage: FallbackRender = (props) => (
   <>

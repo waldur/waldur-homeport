@@ -4,12 +4,12 @@ import { useAsyncFn } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import illustration from '@waldur/images/table-placeholders/undraw_no_data_qbuo.svg';
 import { fetchOfferings } from '@waldur/navigation/api';
 import { SearchResults } from '@waldur/navigation/SearchResults';
 import { ServiceProviderOfferingsPaging } from '@waldur/navigation/ServiceProviderOfferingsPaging';
-import './SearchResultsDropdown.scss';
 
-const illustration: string = require('@waldur/images/table-placeholders/undraw_no_data_qbuo.svg');
+import './SearchResultsDropdown.scss';
 
 interface SearchResultsDropdownProps {
   query: string;

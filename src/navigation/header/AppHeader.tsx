@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import 'world-flags-sprite/stylesheets/flags16.css';
 
 import { fixURL } from '@waldur/core/api';
+import Logo from '@waldur/images/logo.svg';
 import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -17,8 +18,6 @@ import { ProjectSelectorDropdown } from './project-selector/ProjectSelectorDropd
 import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
-
-const Logo = require('@waldur/images/logo.svg');
 
 const AsideMobileToggle: FunctionComponent = () => (
   <div

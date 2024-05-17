@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
+import heroBg from '@waldur/proposals/proposal-calls.png';
 import { formatCallState, getCallStatus } from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -12,8 +13,6 @@ import { Call } from '../types';
 import { CallActions } from './CallActions';
 import { CallUpdateHeaderBody } from './CallUpdateHeaderBody';
 import { ProposalCallQuotas } from './ProposalCallQuotas';
-
-const heroBg = require('@waldur/proposals/proposal-calls.png');
 
 interface CallUpdateHeroProps {
   call: Call;

@@ -5,7 +5,7 @@ import { FormField } from '@waldur/form/types';
 
 import './InputField.scss';
 
-const SearchIcon = require('./SearchIcon.svg');
+import SearchIcon from './SearchIcon.svg';
 
 interface InputFieldProps extends FormField {
   placeholder?: string;

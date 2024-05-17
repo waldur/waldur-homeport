@@ -1,7 +1,6 @@
 import { translate } from '@waldur/i18n';
+import TwoDocumentsIllustration from '@waldur/images/table-placeholders/undraw_no_data_qbuo.svg';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
-
-const TwoDocumentsIllustration: string = require('@waldur/images/table-placeholders/undraw_no_data_qbuo.svg');
 
 export const ProposalsPlaceholder = () => {
   return (

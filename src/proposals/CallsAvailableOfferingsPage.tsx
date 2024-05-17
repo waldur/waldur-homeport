@@ -17,7 +17,7 @@ import { PublicAvailableOfferingsTablePlaceholder } from '@waldur/proposals/Publ
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
-const background = require('./proposal-calls.png');
+import background from './proposal-calls.png';
 
 const mapStateToFilter = createSelector(
   getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),

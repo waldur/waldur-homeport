@@ -3,14 +3,13 @@ import { FC, useMemo } from 'react';
 import { Link } from '@waldur/core/Link';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
+import heroBg from '@waldur/proposals/proposal-calls.png';
 import { getCallStatus } from '@waldur/proposals/utils';
 
 import { Call } from '../types';
 
 import { CallDetailsHeaderBody } from './CallDetailsHeaderBody';
 import { PublicCallApplyButton } from './PublicCallApplyButton';
-
-const heroBg = require('@waldur/proposals/proposal-calls.png');
 
 interface PublicCallDetailsHeroProps {
   call: Call;

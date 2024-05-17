@@ -1,21 +1,22 @@
 import { Question } from '../types';
 
+import DataDog from './DataDog.json';
+import JFrog from './JFrog.json';
+import MySQL from './MySQL.json';
 import { groupQuestions, parseQuestions, parseVisibleQuestions } from './utils';
-
-const DataDog: Question[] = require('./DataDog.json');
-const JFrog: Question[] = require('./JFrog.json');
-const MySQL: Question[] = require('./MySQL.json');
 
 describe('Rancher application provision utils', () => {
   describe('groupQuestions', () => {
     it('groups questions', () => {
-      expect(Object.keys(groupQuestions(DataDog))).toMatchSnapshot();
+      expect(
+        Object.keys(groupQuestions(DataDog as Question[])),
+      ).toMatchSnapshot();
     });
   });
 
   describe('subquestions', () => {
     it('shows subquestions if condition is met', () => {
-      const parsed = parseQuestions(MySQL);
+      const parsed = parseQuestions(MySQL as Question[]);
       const visible = parseVisibleQuestions(parsed, { defaultImage: false });
       expect(
         visible.find((question) => question.variable === 'image'),
@@ -23,7 +24,7 @@ describe('Rancher application provision utils', () => {
     });
 
     it('hides subquestions if condition is not met', () => {
-      const parsed = parseQuestions(MySQL);
+      const parsed = parseQuestions(MySQL as Question[]);
       const visible = parseVisibleQuestions(parsed, { defaultImage: true });
       expect(
         visible.find((question) => question.variable === 'image'),
@@ -31,7 +32,7 @@ describe('Rancher application provision utils', () => {
     });
 
     it('parses subquestion types', () => {
-      const parsed = parseQuestions(JFrog);
+      const parsed = parseQuestions(JFrog as Question[]);
       expect(parsed).toMatchSnapshot();
     });
   });

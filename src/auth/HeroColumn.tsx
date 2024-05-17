@@ -1,10 +1,9 @@
 import { ENV } from '@waldur/configs/default';
 import { fixURL } from '@waldur/core/api';
 
-import { HeroButton } from './HeroButton';
-
 // Image is taken from https://www.flickr.com/photos/visitestonia/33974817076
-const DefaultHeroImage = require('./estonian-bog.jpg');
+import DefaultHeroImage from './estonian-bog.jpg';
+import { HeroButton } from './HeroButton';
 
 import './HeroColumn.css';
 

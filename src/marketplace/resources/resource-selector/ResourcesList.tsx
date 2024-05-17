@@ -7,12 +7,11 @@ import { ListGroup, ListGroupItem, Stack } from 'react-bootstrap';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
+import iconEmpty from '@waldur/navigation/header/file-search.svg';
 
 import { Resource } from '../types';
 
 import { ItemIcon } from './ItemIcon';
-
-const iconEmpty = require('@waldur/navigation/header/file-search.svg');
 
 const ResourceListItem = ({ item, loading }) => (
   <Stack direction="horizontal" gap={5} title={item.name}>

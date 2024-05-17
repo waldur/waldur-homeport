@@ -1,10 +1,9 @@
 import { UISref } from '@uirouter/react';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
+import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
 
 import { Resource } from '../types';
-
-const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
 
 export const ParentResourceLink = ({ resource }: { resource: Resource }) =>
   resource.parent_uuid && resource.parent_name ? (

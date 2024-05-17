@@ -11,8 +11,7 @@ import { Customer } from '@waldur/workspace/types';
 
 import './CustomerLogoUpdate.scss';
 import * as api from './api';
-
-const DEFAULT_LOGO = require('./logo-placeholder.png');
+import DEFAULT_LOGO from './logo-placeholder.png';
 
 interface CustomerLogoUpdateProps {
   customer: Customer;

@@ -18,11 +18,10 @@ import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { CallCard } from './CallCard';
+import background from './proposal-calls.png';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { PublicCallsTablePlaceholder } from './PublicCallsTablePlaceholder';
 import { formatCallState } from './utils';
-
-const background = require('./proposal-calls.png');
 
 const mapStateToFilter = createSelector(
   getFormValues(CALL_FILTER_FORM_ID),

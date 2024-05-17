@@ -3,10 +3,9 @@ import { FC } from 'react';
 import { Button, Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
 import SVG from 'react-inlinesvg';
 
+import CheckboxIcon from './Checkbox.svg';
+import CheckboxEmptyIcon from './CheckboxEmpty.svg';
 import { TableProps } from './Table';
-
-const CheckboxIcon = require('./Checkbox.svg');
-const CheckboxEmptyIcon = require('./CheckboxEmpty.svg');
 
 export const TableColumnButton: FC<TableProps> = (props) => {
   return (

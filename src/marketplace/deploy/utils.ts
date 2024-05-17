@@ -1,6 +1,13 @@
 import { isValid, getFormSyncErrors } from 'redux-form';
 
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import CentOS from '@waldur/images/appstore/centos.svg';
+import Debian from '@waldur/images/appstore/debian.svg';
+import FreeBSD from '@waldur/images/appstore/freebsd-1.svg';
+import Oracle from '@waldur/images/appstore/oracle.svg';
+import Rocky from '@waldur/images/appstore/rocky.svg';
+import Ubuntu from '@waldur/images/appstore/ubuntu.svg';
+import Windows from '@waldur/images/appstore/windows.svg';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
@@ -9,14 +16,6 @@ import { formDataSelector } from '../utils';
 
 import { BoxRadioChoice } from './steps/BoxRadioField';
 import { OfferingConfigurationFormStep } from './types';
-
-const CentOS = require('@waldur/images/appstore/centos.svg');
-const Debian = require('@waldur/images/appstore/debian.svg');
-const FreeBSD = require('@waldur/images/appstore/freebsd-1.svg');
-const Oracle = require('@waldur/images/appstore/oracle.svg');
-const Rocky = require('@waldur/images/appstore/rocky.svg');
-const Ubuntu = require('@waldur/images/appstore/ubuntu.svg');
-const Windows = require('@waldur/images/appstore/windows.svg');
 
 export const SYSTEM_IMAGES = [
   { name: 'ubuntu', label: 'Ubuntu', thumb: Ubuntu },

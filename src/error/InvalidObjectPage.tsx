@@ -2,10 +2,9 @@ import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import Illustration from '@waldur/images/table-placeholders/undraw_empty_xct9.svg';
 import { useTitle } from '@waldur/navigation/title';
 import { goBack } from '@waldur/navigation/utils';
-
-const Illustration = require('@waldur/images/table-placeholders/undraw_empty_xct9.svg');
 
 export const InvalidObjectPage: FunctionComponent = () => {
   useTitle(translate('Page is not found.'));

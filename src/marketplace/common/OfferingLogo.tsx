@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import './OfferingLogo.scss';
 
-const DefaultLogo = require('./OfferingLogo.svg');
+import DefaultLogo from './OfferingLogo.svg';
 
 interface OfferingLogoProps
   extends Partial<Pick<JSX.IntrinsicElements['img'], 'style'>> {

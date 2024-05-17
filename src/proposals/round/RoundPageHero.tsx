@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
+import heroBg from '@waldur/proposals/proposal-calls.png';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { Call, Round } from '../types';
@@ -11,8 +12,6 @@ import { getRoundStatus } from '../utils';
 
 import { RoundPageHeaderBody } from './RoundPageHeaderBody';
 import { RoundQuotas } from './RoundQuotas';
-
-const heroBg = require('@waldur/proposals/proposal-calls.png');
 
 interface RoundPageHeroProps {
   round: Round;

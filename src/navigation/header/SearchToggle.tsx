@@ -12,9 +12,8 @@ import { get } from '@waldur/core/api';
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
 
+import iconEmpty from './file-search.svg';
 import { SearchFilters } from './SearchFilters';
-
-const iconEmpty = require('./file-search.svg');
 
 const useSearch = () => {
   const [query, setQuery] = useState('');

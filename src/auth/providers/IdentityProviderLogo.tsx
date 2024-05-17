@@ -1,11 +1,10 @@
+import WaldurLogo from '@waldur/images/logo.svg';
+
 import { EDUTEAMS_IDP, KEYCLOAK_IDP, SAML2_IDP, TARA_IDP } from './constants';
-
-const WaldurLogo = require('@waldur/images/logo.svg');
-
-const EduteamsLogo = require('./EduteamsLogo.png');
-const KeycloakLogo = require('./KeycloakLogo.svg');
-const Saml2Logo = require('./Saml2Logo.svg');
-const TaraLogo = require('./TaraLogo.svg');
+import EduteamsLogo from './EduteamsLogo.png';
+import KeycloakLogo from './KeycloakLogo.svg';
+import Saml2Logo from './Saml2Logo.svg';
+import TaraLogo from './TaraLogo.svg';
 
 export const IdentityProviderLogo = ({ name }) => {
   if (name === EDUTEAMS_IDP) {

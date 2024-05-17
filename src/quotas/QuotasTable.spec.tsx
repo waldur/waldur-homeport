@@ -5,8 +5,7 @@ import configureStore from 'redux-mock-store';
 import { RootState } from '@waldur/store/reducers';
 
 import { QuotasTable } from './QuotasTable';
-
-const quotas = require('./QuotasTable.fixture.json');
+import quotas from './QuotasTable.fixture.json';
 
 const renderComponent = (resource) => {
   const mockStore = configureStore();

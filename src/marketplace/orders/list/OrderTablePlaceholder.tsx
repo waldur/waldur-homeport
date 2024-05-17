@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import DocumentSearchIllustration from '@waldur/images/table-placeholders/undraw_file_searching_duff.svg';
 import { RootState } from '@waldur/store/reducers';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 import { getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
-
-const DocumentSearchIllustration = require('@waldur/images/table-placeholders/undraw_file_searching_duff.svg');
 
 const stateSelector = (state: RootState) => {
   const workspace = getWorkspace(state);

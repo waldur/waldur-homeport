@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
-import { Description } from '@waldur/marketplace/offerings/service-providers/Description';
-import { Logo } from '@waldur/marketplace/offerings/service-providers/Logo';
-import './ServiceProvidersHeader.scss';
+import illustration from '@waldur/images/service-providers/undraw_Pitching_re_fpgk.svg';
 
-const illustration = require('@waldur/images/service-providers/undraw_Pitching_re_fpgk.svg');
+import { Description } from './Description';
+import { Logo } from './Logo';
+import './ServiceProvidersHeader.scss';
 
 export const ServiceProvidersHeader: FunctionComponent = () => (
   <div className="serviceProvidersHeader">

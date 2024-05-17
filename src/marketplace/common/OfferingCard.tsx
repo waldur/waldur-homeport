@@ -4,14 +4,13 @@ import { FunctionComponent } from 'react';
 import { Link } from '@waldur/core/Link';
 import { ModelCard1 } from '@waldur/core/ModelCard1';
 import { translate } from '@waldur/i18n';
+import placeholder from '@waldur/images/logo_w.svg';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { OfferingLink } from '../links/OfferingLink';
 import { Offering } from '../types';
 
 import './OfferingCard.scss';
-
-const placeholder = require('@waldur/images/logo_w.svg');
 
 interface OfferingCardProps {
   offering: Offering;

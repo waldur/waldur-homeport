@@ -20,9 +20,8 @@ import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { getServiceProviderStatistics } from './api';
 import { ChangesAmountBadge } from './ChangesAmountBadge';
+import IconPendingApproval from './icons/pending-approval.svg';
 import { ProviderStatistics } from './types';
-
-const IconPendingApproval = require('./icons/pending-approval.svg');
 
 interface ProviderWidget {
   icon?: any;

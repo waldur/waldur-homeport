@@ -1,8 +1,8 @@
-const WaldurLogo = require('@waldur/images/logo.svg');
+import WaldurLogo from '@waldur/images/logo.svg';
 
-const AtlassianLogo = require('./AtlassianLogo.svg');
-const SMAXLogo = require('./OpentextLogo.svg');
-const ZammadLogo = require('./ZammadLogo.svg');
+import AtlassianLogo from './AtlassianLogo.svg';
+import SMAXLogo from './OpentextLogo.svg';
+import ZammadLogo from './ZammadLogo.svg';
 
 export const ServiceDeskProviderLogo = ({ name }) => {
   if (name === 'atlassian') {

@@ -1,11 +1,11 @@
+import ipRegex from 'ip-regex';
+
 import { ENV } from '@waldur/configs/default';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import { ActionContext } from '@waldur/resource/actions/types';
 
 import { listToDict } from '../core/utils';
-
-const ipRegex = require('ip-regex');
 
 const quotaNames = {
   storage: 'disk',

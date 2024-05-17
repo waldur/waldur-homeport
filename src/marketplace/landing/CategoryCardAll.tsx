@@ -2,11 +2,10 @@ import { Card } from 'react-bootstrap';
 
 import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
+import icon from '@waldur/images/logo_w.svg';
 
 import { AllCategoriesLink } from '../links/AllCategoriesLink';
 import '@waldur/marketplace/category/list/CategoryCard.scss';
-
-const icon = require('@waldur/images/logo_w.svg');
 
 export const CategoryCardAll = () => (
   <Card as={AllCategoriesLink} className="shadow-sm category-card">

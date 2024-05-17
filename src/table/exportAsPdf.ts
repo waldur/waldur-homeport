@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import FileSaver from 'file-saver';
 
 function saveAsPdf(table, data) {

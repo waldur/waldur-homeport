@@ -9,9 +9,7 @@ import { orderCanBeApproved as orderCanBeApprovedSelector } from '@waldur/market
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-// @ts-ignore
 import TenantSubtitle from '@waldur/openstack/openstack-tenant/actions/DestroyActionSubtitle.md';
-// @ts-ignore
 import ClusterSubtitle from '@waldur/rancher/cluster/actions/DestroyActionSubtitle.md';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 

@@ -30,6 +30,7 @@ const middlewares = [sagaMiddleware, routerMiddleware, thunk];
 let enhancedMiddlewares;
 
 if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   middlewares.push(require('redux-logger').default);
   enhancedMiddlewares = composeEnhancers(applyMiddleware(...middlewares));
 } else {

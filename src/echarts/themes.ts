@@ -3,7 +3,7 @@
  * dark-metronic theme
  */
 
-const echarts = require('echarts');
+import echarts from 'echarts';
 
 function registerDarkTheme() {
   const log = function (msg) {

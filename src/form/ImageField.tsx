@@ -4,12 +4,11 @@ import { FunctionComponent, useCallback, useEffect, useRef } from 'react';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import avatarBlank from '@waldur/images/avatar-blank.svg';
 
 import { FormField } from './types';
 
 import './ImageField.scss';
-
-const avatarBlank = require('@waldur/images/avatar-blank.svg');
 
 type ImageType = File | string;
 

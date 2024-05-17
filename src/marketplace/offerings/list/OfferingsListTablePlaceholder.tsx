@@ -1,14 +1,13 @@
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import TwoDocumentsIllustration from '@waldur/images/table-placeholders/undraw_no_data_qbuo.svg';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { CreateOfferingButton } from './CreateOfferingButton';
-
-const TwoDocumentsIllustration: string = require('@waldur/images/table-placeholders/undraw_no_data_qbuo.svg');
 
 export const OfferingsListTablePlaceholder = ({ showActions }) => {
   const customer = useSelector(getCustomer);

@@ -5,12 +5,11 @@ import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
 import { usePublicResourceState } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { Field } from '@waldur/resource/summary';
 import { Volume } from '@waldur/resource/types';
 import { getCustomer } from '@waldur/workspace/selectors';
-
-const openstackIcon = require('@waldur/images/appstore/icon-openstack.png');
 
 interface VolumeBadgeProps {
   volume: Volume;

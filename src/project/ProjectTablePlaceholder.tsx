@@ -1,11 +1,10 @@
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
+import Illustration from '@waldur/images/table-placeholders/undraw_organizing_projects.svg';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 import { ProjectCreateButton } from './ProjectCreateButton';
-
-const Illustration = require('@waldur/images/table-placeholders/undraw_organizing_projects.svg');
 
 export const ProjectTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder

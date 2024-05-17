@@ -4,14 +4,13 @@ import { MapContainer, Marker, Popup } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 
+import iconGreen from '@waldur/images/marker-icon-green.png';
+import iconRed from '@waldur/images/marker-icon-red.png';
+import iconYellow from '@waldur/images/marker-icon-yellow.png';
 import { FitWorld } from '@waldur/map/FitWorld';
 import { OpenStreetMapTileLayer } from '@waldur/map/OpenStreetMapTileLayer';
 
 import { ChecklistStats } from './types';
-
-const iconGreen = require('@waldur/images/marker-icon-green.png');
-const iconRed = require('@waldur/images/marker-icon-red.png');
-const iconYellow = require('@waldur/images/marker-icon-yellow.png');
 
 interface CustomerMapProps {
   customers: ChecklistStats[];
