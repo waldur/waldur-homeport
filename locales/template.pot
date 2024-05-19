@@ -1667,7 +1667,6 @@ msgid "Calendar"
 msgstr ""
 
 #: src/permissions/constants.tsx
-#: src/proposals/details/PublicCallDetailsHero.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/CustomerProposalsList.tsx
@@ -1678,7 +1677,6 @@ msgstr ""
 #: src/proposals/review/ReviewsListExpandableRow.tsx
 #: src/proposals/review/ReviewsTableFilter.tsx
 #: src/proposals/review/UserReviewsList.tsx
-#: src/proposals/update/CallUpdateHero.tsx
 msgid "Call"
 msgstr ""
 
@@ -3644,6 +3642,7 @@ msgstr ""
 #: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
+#: src/proposals/details/CallTabs.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
 #: src/proposals/round/allocation/EditAllocationInfoButton.tsx
@@ -8943,6 +8942,7 @@ msgid "Provision new resource"
 msgstr ""
 
 #: src/marketplace/offerings/OfferingViewHero.tsx
+#: src/proposals/details/CallTabs.tsx
 msgid "Public"
 msgstr ""
 
@@ -12226,6 +12226,10 @@ msgstr ""
 
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
 msgid "The organization group has been updated."
+msgstr ""
+
+#: src/proposals/details/CallTabs.tsx
+msgid "The public view is currently inactive as this call is archived or draft."
 msgstr ""
 
 #: src/marketplace/offerings/OfferingViewHero.tsx

@@ -5,7 +5,6 @@ import { useAsyncFn, useEffectOnce } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
-import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { getPublicCall } from '../api';
@@ -13,15 +12,13 @@ import { getPublicCall } from '../api';
 import { PublicCallDetails } from './PublicCallDetails';
 
 export const PublicCallDetailsContainer: FunctionComponent = () => {
-  useFullPage();
-
   const {
-    params: { uuid },
+    params: { call_uuid },
   } = useCurrentStateAndParams();
 
   const [{ loading, error, value }, refreshCall] = useAsyncFn(
-    () => getPublicCall(uuid),
-    [uuid],
+    () => getPublicCall(call_uuid),
+    [call_uuid],
   );
 
   useEffectOnce(() => {

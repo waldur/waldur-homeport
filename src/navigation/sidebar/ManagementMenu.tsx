@@ -30,12 +30,9 @@ export const ManagementMenu = () => {
           state="organization.dashboard"
           params={{ uuid: customer.uuid }}
           activeState={
-            [
-              'organization',
-              'call-management',
-              'protected-call',
-              'marketplace-provider',
-            ].some((name) => isDescendantOf(name, state)) &&
+            ['organization', 'marketplace-provider'].some((name) =>
+              isDescendantOf(name, state),
+            ) &&
             // The following states will highlight the other menu items ("Add resource", "Resource details")
             !ORGNIZATION_MENU_EXCLUDE_STATES.some(
               (name) =>

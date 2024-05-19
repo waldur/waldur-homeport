@@ -1,11 +1,9 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { translate } from '@waldur/i18n';
-import heroBg from '@waldur/proposals/proposal-calls.png';
-import { formatCallState, getCallStatus } from '@waldur/proposals/utils';
+import { StateIndicator } from '@waldur/core/StateIndicator';
+import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { getCallStatus } from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { Call } from '../types';
@@ -23,21 +21,21 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
   const customer = useSelector(getCustomer);
   const status = useMemo(() => getCallStatus(call), [call]);
   return (
-    <PublicDashboardHero
+    <PublicDashboardHero2
       logo={customer?.image}
       logoAlt={call.name}
-      logoBottomLabel={translate('Call')}
-      logoBottomClass="bg-secondary"
-      logoTopLabel={formatCallState(call.state)}
-      logoTopClass={'bg-' + status.color}
-      backgroundImage={heroBg}
-      asHero
       title={
         <>
-          <h3>{call.name}</h3>
-          <Link state="#" className="text-link">
-            {call.customer_name}
-          </Link>
+          <div className="d-flex flex-wrap gap-2 mb-2">
+            <h3>{call.name}</h3>
+            <StateIndicator
+              variant={status.color}
+              label={status.label}
+              light
+              pill
+            />
+          </div>
+          <p className="text-muted">{call.customer_name}</p>
         </>
       }
       quickActions={
@@ -51,6 +49,6 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       {call.state !== 'archived' && call.rounds.length > 0 && (
         <CallUpdateHeaderBody call={call} />
       )}
-    </PublicDashboardHero>
+    </PublicDashboardHero2>
   );
 };

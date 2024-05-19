@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -25,14 +25,6 @@ interface ResourceDetailsViewProps {
     component?: ResourceParentTab['children'][0]['component'];
   };
 }
-
-export const HidableWrapper: FC<PropsWithChildren<{ activeTab; tabKey }>> = (
-  props,
-) => (
-  <div className={props.activeTab !== props.tabKey ? 'd-none' : undefined}>
-    {props.children}
-  </div>
-);
 
 export const ResourceDetailsView: FC<ResourceDetailsViewProps> = ({
   resource,

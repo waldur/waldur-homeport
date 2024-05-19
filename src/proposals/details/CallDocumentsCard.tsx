@@ -4,7 +4,7 @@ import { ExternalLink } from '@waldur/core/ExternalLink';
 import { translate } from '@waldur/i18n';
 
 export const CallDocumentsCard = ({ call }) => {
-  return call.documents.length > 0 ? (
+  return (
     <Card id="documents" className="mb-7">
       <Card.Header>
         <Card.Title>
@@ -30,5 +30,5 @@ export const CallDocumentsCard = ({ call }) => {
         </ul>
       </Card.Body>
     </Card>
-  ) : null;
+  );
 };

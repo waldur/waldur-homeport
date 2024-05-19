@@ -37,7 +37,7 @@ export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
   }, [state, tabs]);
   useExtraTabs(mainTabs);
 
-  const tabSpec = useMemo(() => {
+  const tabSpec = useMemo<PageBarTab>(() => {
     if (!tabs?.length) return null;
     let _tabSpec;
     if (params.tab) {

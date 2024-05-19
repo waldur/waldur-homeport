@@ -17,7 +17,7 @@ interface CallRoundsListProps {
 
 export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
   const tableProps = useTable({
-    table: 'CallRoundsList',
+    table: 'PrivateCallRoundsList',
     fetchData: createFetcher(
       `proposal-protected-calls/${props.call.uuid}/rounds`,
     ),
