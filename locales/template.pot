@@ -1727,6 +1727,7 @@ msgstr ""
 
 #: src/marketplace/routes.ts
 #: src/navigation/CallPublicMenu.tsx
+#: src/navigation/FooterLinks.tsx
 #: src/proposals/CallsForProposals.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/routes.ts

@@ -53,7 +53,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
         title={translate('Available offerings')}
         backgroundImage={background}
       />
-      <div className="container-xxl mt-20">
+      <div className="container-xxl mt-20 mb-10">
         <Table
           title={translate('Available offerings')}
           {...tableProps}

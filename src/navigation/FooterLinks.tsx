@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { AuthService } from '@waldur/auth/AuthService';
 import { ENV } from '@waldur/configs/default';
 import { Link } from '@waldur/core/Link';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 import { DocsLink } from '@waldur/navigation/header/DocsLink';
@@ -54,11 +56,25 @@ export const FooterLinks = () => {
       data-kt-menu="true"
     >
       {!AuthService.isAuthenticated() && (
-        <li className="menu-item" data-kt-menu-trigger="click">
-          <Link className="menu-link px-2" state="public.marketplace-landing">
-            {translate('Explore marketplace')}
-          </Link>
-        </li>
+        <>
+          {isFeatureVisible(
+            MarketplaceFeatures.show_call_management_functionality,
+          ) && (
+            <li className="menu-item" data-kt-menu-trigger="click">
+              <Link
+                className="menu-link px-2"
+                state="calls-for-proposals-dashboard"
+              >
+                {translate('Calls for proposals')}
+              </Link>
+            </li>
+          )}
+          <li className="menu-item" data-kt-menu-trigger="click">
+            <Link className="menu-link px-2" state="public.marketplace-landing">
+              {translate('Explore marketplace')}
+            </Link>
+          </li>
+        </>
       )}
       <li className="menu-item" data-kt-menu-trigger="click">
         <Link className="menu-link px-2" state="about.privacy">

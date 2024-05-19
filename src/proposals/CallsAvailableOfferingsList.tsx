@@ -14,7 +14,7 @@ export const CallsAvailableOfferingsList: FC = () => {
   const tableProps = useTable({
     table: 'CallsAvailableOfferingsList',
     filter,
-    fetchData: createFetcher('marketplace-provider-offerings'),
+    fetchData: createFetcher('marketplace-public-offerings'),
     staleTime: 3 * 60 * 1000,
   });
 

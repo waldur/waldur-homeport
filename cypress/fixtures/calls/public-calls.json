@@ -1,0 +1,222 @@
+[
+  {
+    "url": "/api/proposal-public-calls/3b8fc588d37f434eabc68d2a0b4a4bbe/",
+    "uuid": "3b8fc588d37f434eabc68d2a0b4a4bbe",
+    "created": "2024-04-15T06:40:02.823774Z",
+    "start_date": "2024-04-21T12:00:00Z",
+    "end_date": "2080-05-31T12:00:00Z",
+    "name": "Long time call",
+    "description": "High level description of the call.",
+    "state": "active",
+    "manager": "/api/call-managing-organisations/65aaf2dddfa84735b0c826a46ff5fe9a/",
+    "customer_name": "Ashley and Sons",
+    "offerings": [
+      {
+        "uuid": "b5be71d4d8a14c8e85863ca1c19be986",
+        "state": "accepted",
+        "offering": "/api/marketplace-public-offerings/793a21a1f09a4c929168f526d8fce8d7/",
+        "offering_name": "limits-change-test",
+        "offering_uuid": "793a21a1f09a4c929168f526d8fce8d7",
+        "provider_name": "Castro-Miller",
+        "category_uuid": "4588ff519260461893ab371b8fe83363",
+        "category_name": "HPC",
+        "call_managing_organisation": "Ashley and Sons",
+        "attributes": {
+          "limits": {
+            "asd": 100
+          }
+        },
+        "plan": null,
+        "plan_details": null,
+        "options": {
+          "order": [],
+          "options": {}
+        },
+        "components": [
+          {
+            "uuid": "f2bfc67cfb9b414abd355edad46d860d",
+            "billing_type": "limit",
+            "type": "asd",
+            "name": "asd",
+            "description": "",
+            "measured_unit": "",
+            "limit_period": null,
+            "limit_amount": null,
+            "article_code": "",
+            "max_value": 100,
+            "min_value": 10,
+            "max_available_limit": null,
+            "is_boolean": false,
+            "default_limit": null,
+            "factor": null,
+            "is_builtin": false
+          }
+        ]
+      },
+      {
+        "uuid": "be305564b851412aad097b196e4e4bea",
+        "state": "accepted",
+        "offering": "/api/marketplace-public-offerings/08f5dce57d784ee88499109ca9653f02/",
+        "offering_name": "Fully-configurable multi-state Graphic Interface",
+        "offering_uuid": "08f5dce57d784ee88499109ca9653f02",
+        "provider_name": "Hart and Sons",
+        "category_uuid": "4588ff519260461893ab371b8fe83363",
+        "category_name": "HPC",
+        "call_managing_organisation": "Ashley and Sons",
+        "attributes": {},
+        "plan": null,
+        "plan_details": null,
+        "options": {},
+        "components": [
+          {
+            "uuid": "60b6f2a2491540ee877adb10f613195d",
+            "billing_type": "usage",
+            "type": "cpu",
+            "name": "CPU",
+            "description": "",
+            "measured_unit": "hours",
+            "limit_period": "total",
+            "limit_amount": 267,
+            "article_code": "",
+            "max_value": null,
+            "min_value": null,
+            "max_available_limit": null,
+            "is_boolean": false,
+            "default_limit": null,
+            "factor": 1,
+            "is_builtin": true
+          },
+          {
+            "uuid": "47ec9e3c34b742159af5cd4a16617870",
+            "billing_type": "usage",
+            "type": "gpu",
+            "name": "GPU",
+            "description": "",
+            "measured_unit": "hours",
+            "limit_period": "total",
+            "limit_amount": 7,
+            "article_code": "",
+            "max_value": null,
+            "min_value": null,
+            "max_available_limit": null,
+            "is_boolean": false,
+            "default_limit": null,
+            "factor": 1,
+            "is_builtin": true
+          },
+          {
+            "uuid": "67117ae30fe3476092af939c4c88efb4",
+            "billing_type": "usage",
+            "type": "ram",
+            "name": "RAM",
+            "description": "",
+            "measured_unit": "GB-hours",
+            "limit_period": "total",
+            "limit_amount": 1667,
+            "article_code": "",
+            "max_value": null,
+            "min_value": null,
+            "max_available_limit": null,
+            "is_boolean": false,
+            "default_limit": null,
+            "factor": 1,
+            "is_builtin": true
+          }
+        ]
+      },
+      {
+        "uuid": "edb0d477cdd84776a43753690efcfd0c",
+        "state": "accepted",
+        "offering": "/api/marketplace-public-offerings/c7a2d9b8f38247909e529653ba88464e/",
+        "offering_name": "HPC offering for testing",
+        "offering_uuid": "c7a2d9b8f38247909e529653ba88464e",
+        "provider_name": "Hart and Sons",
+        "category_uuid": "4588ff519260461893ab371b8fe83363",
+        "category_name": "HPC",
+        "call_managing_organisation": "Ashley and Sons",
+        "attributes": {
+          "limits": {
+            "cpu-hours": 100,
+            "gpu-hours": 100
+          }
+        },
+        "plan": null,
+        "plan_details": null,
+        "options": {
+          "order": [],
+          "options": {}
+        },
+        "components": [
+          {
+            "uuid": "394680365828409b82821b1f936f6b4c",
+            "billing_type": "limit",
+            "type": "cpu-hours",
+            "name": "CPU hours",
+            "description": "",
+            "measured_unit": "hours",
+            "limit_period": null,
+            "limit_amount": null,
+            "article_code": "",
+            "max_value": null,
+            "min_value": null,
+            "max_available_limit": null,
+            "is_boolean": false,
+            "default_limit": null,
+            "factor": null,
+            "is_builtin": false
+          },
+          {
+            "uuid": "48900f5c2e3a49e7891e65acb928274b",
+            "billing_type": "limit",
+            "type": "gpu-hours",
+            "name": "GPU HOURS",
+            "description": "",
+            "measured_unit": "hours",
+            "limit_period": null,
+            "limit_amount": null,
+            "article_code": "",
+            "max_value": null,
+            "min_value": null,
+            "max_available_limit": null,
+            "is_boolean": false,
+            "default_limit": null,
+            "factor": null,
+            "is_builtin": false
+          }
+        ]
+      }
+    ],
+    "rounds": [
+      {
+        "uuid": "a4c98d1a4f714033b1bde13885803170",
+        "name": "Round 13.05.2024-31.05.2024",
+        "start_time": "2024-05-13T12:00:00Z",
+        "cutoff_time": "2075-05-31T12:00:00Z",
+        "status": "open",
+        "review_strategy": "after_round",
+        "deciding_entity": "by_call_manager",
+        "allocation_time": "on_decision",
+        "allocation_date": null,
+        "minimal_average_scoring": null,
+        "review_duration_in_days": 12,
+        "minimum_number_of_reviewers": 1
+      },
+      {
+        "uuid": "451f02163f164d7b98c65d49d9c38ef3",
+        "name": "Round 21.04.2024-10.05.2024",
+        "start_time": "2024-04-21T12:00:00Z",
+        "cutoff_time": "2024-05-10T15:00:00Z",
+        "status": "ended",
+        "review_strategy": "after_round",
+        "deciding_entity": "automatic",
+        "allocation_time": "on_decision",
+        "allocation_date": "2024-03-13T12:00:00Z",
+        "minimal_average_scoring": "3.6",
+        "review_duration_in_days": 21,
+        "minimum_number_of_reviewers": 2
+      }
+    ],
+    "documents": [],
+    "backend_id": ""
+  }
+]
