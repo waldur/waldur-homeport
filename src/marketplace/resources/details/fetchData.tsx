@@ -1,5 +1,3 @@
-import { StateDeclaration } from '@uirouter/react';
-
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures, SlurmFeatures } from '@waldur/FeaturesEnums';
@@ -12,14 +10,31 @@ import {
   getResourceDetails,
   getResourceOffering,
 } from '@waldur/marketplace/common/api';
-import { Tab } from '@waldur/navigation/Tab';
+import { ResourceOrders } from '@waldur/marketplace/orders/list/ResourceOrders';
+import { RobotAccountCard } from '@waldur/marketplace/robot-accounts/RobotAccountCard';
+import { PageBarTab } from '@waldur/navigation/types';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
 import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 import { getResourceAccessEndpoints } from '@waldur/resource/utils';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
+import { AllocationJobsTable } from '@waldur/slurm/details/AllocationJobsTable';
+import { AllocationUsersTable } from '@waldur/slurm/details/AllocationUsersTable';
 import store from '@waldur/store/store';
 
-export const fetchData = async (resourceId, state: StateDeclaration) => {
+import { LexisLinkCard } from '../lexis/LexisLinkCard';
+import { ResourceOptionsCard } from '../options/ResourceOptionsCard';
+import { ResourceUsersList } from '../users/ResourceUsersList';
+
+import { ActivityCard } from './ActivityCard';
+import { BookingMainComponent } from './BookingMainComponent';
+import { GettingStartedCard } from './GettingStartedCard';
+import { InstanceMainComponent } from './openstack-instance/InstanceMainComponent';
+import { ResourceIssuesCard } from './ResourceIssuesCard';
+import { ResourceMetadataCard } from './ResourceMetadataCard';
+import { TenantMainComponent } from './TenantMainComponent';
+import { UsageCard } from './UsageCard';
+
+export const fetchData = async (resourceId) => {
   const resource = await getResource(resourceId);
   let scope;
   if (resource.scope) {
@@ -29,62 +44,53 @@ export const fetchData = async (resourceId, state: StateDeclaration) => {
   const components = offering.components;
 
   // Generate tabs
-  const tabs: Tab[] = [];
+  const tabs: PageBarTab[] = [];
 
   const endpoints = getResourceAccessEndpoints(resource, offering);
   if (offering.getting_started || endpoints.length > 0) {
     tabs.push({
+      key: 'getting-started',
       title: translate('Getting started'),
-      to: state.name,
-      params: { tab: 'getting-started' },
+      component: GettingStartedCard,
     });
-  }
-
-  if (scope) {
-    const spec = NestedResourceTabsConfiguration.get(scope.resource_type);
-    tabs.push(
-      ...spec
-        .map((tab) => ({
-          title: tab.title,
-          to: state.name,
-          params: { tab: tab.key },
-        }))
-        .sort((t1, t2) => t1.title.localeCompare(t2.title)),
-    );
   }
 
   if (resource.offering_type === TENANT_TYPE && scope) {
     tabs.push({
+      key: 'quotas',
       title: translate('Quotas'),
-      to: state.name,
-      params: { tab: 'quotas' },
+      component: TenantMainComponent,
     });
   } else if (resource.offering_type === INSTANCE_TYPE && scope) {
     tabs.push({
+      key: 'vm-details',
       title: translate('Details'),
-      to: state.name,
-      params: { tab: 'vm-details' },
+      component: InstanceMainComponent,
     });
   } else if (resource.offering_type === OFFERING_TYPE_BOOKING) {
     tabs.push({
+      key: 'booking',
       title: translate('Booking'),
-      to: state.name,
-      params: { tab: 'booking' },
+      component: BookingMainComponent,
     });
   } else if (resource.offering_type === SLURM_PLUGIN && scope) {
     tabs.push({
+      key: 'allocation-users',
       title: translate('Allocation users'),
-      to: state.name,
-      params: { tab: 'allocation-users' },
+      component: AllocationUsersTable,
     });
     const isSlurmJobsVisible = isFeatureVisible(SlurmFeatures.jobs);
     if (isSlurmJobsVisible) {
       tabs.push({
+        key: 'jobs',
         title: translate('Jobs'),
-        to: state.name,
-        params: { tab: 'jobs' },
+        component: AllocationJobsTable,
       });
     }
+  }
+
+  if (scope) {
+    tabs.push(...NestedResourceTabsConfiguration.get(scope.resource_type));
   }
 
   if (isFeatureVisible(MarketplaceFeatures.lexis_links)) {
@@ -93,9 +99,9 @@ export const fetchData = async (resourceId, state: StateDeclaration) => {
     });
     if (lexisLinksCount) {
       tabs.push({
+        key: 'lexis-links',
         title: translate('LEXIS links'),
-        to: state.name,
-        params: { tab: 'lexis-links' },
+        component: LexisLinkCard,
       });
     }
   }
@@ -105,62 +111,63 @@ export const fetchData = async (resourceId, state: StateDeclaration) => {
   });
   if (robotAccountsCount) {
     tabs.push({
+      key: 'robot-accounts',
       title: translate('Robot accounts'),
-      to: state.name,
-      params: { tab: 'robot-accounts' },
+      component: RobotAccountCard,
     });
   }
 
   if (resource.is_usage_based || resource.is_limit_based) {
     tabs.push({
+      key: 'usage-history',
       title: translate('Usage'),
-      to: state.name,
-      params: { tab: 'usage-history' },
+      component: UsageCard,
     });
   }
 
   const showIssues = hasSupport(store.getState());
   if (showIssues) {
     tabs.push({
+      key: 'tickets',
       title: translate('Tickets'),
-      to: state.name,
-      params: { tab: 'tickets' },
+      component: ResourceIssuesCard,
     });
   }
 
   if (offering.resource_options?.order?.length) {
     tabs.push({
+      key: 'resource-options',
       title: translate('Options'),
-      to: state.name,
-      params: { tab: 'resource-options' },
+      component: ResourceOptionsCard,
     });
   }
 
   if (offering.roles?.length > 0) {
     tabs.push({
+      key: 'users',
       title: translate('Roles'),
-      to: state.name,
-      params: { tab: 'users' },
+      component: ResourceUsersList,
     });
   }
 
   tabs.push({
+    key: 'metadata',
     title: translate('Resource metadata'),
     children: [
       {
+        key: 'resource-details',
         title: translate('Resource details'),
-        to: state.name,
-        params: { tab: 'resource-details' },
+        component: ResourceMetadataCard,
       },
       {
+        key: 'activity',
         title: translate('Audit logs'),
-        to: state.name,
-        params: { tab: 'activity' },
+        component: ActivityCard,
       },
       {
+        key: 'order-history',
         title: translate('Order history'),
-        to: state.name,
-        params: { tab: 'order-history' },
+        component: ResourceOrders,
       },
     ],
   });

@@ -124,8 +124,7 @@ describe('Public calls for proposals pages', () => {
       .should('include', '/calls/3b8fc588d37f434eabc68d2a0b4a4bbe')
       .get('.page-title')
       .should('contain', 'Long time call')
-      .get('#kt_content_container .card')
-      .contains('button', 'Apply to round');
+      .get('button').contains('Apply to round');
   });
 
   it('Assure that all calls page is visible without auth token', () => {

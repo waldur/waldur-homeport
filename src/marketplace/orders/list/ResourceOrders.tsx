@@ -69,7 +69,6 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
       {...tableProps}
       title={translate('Resource orders')}
       columns={columns}
-      id={props.id}
       verboseName={translate('orders')}
       hoverableRow={CancelTerminationOrderButton}
       fullWidth

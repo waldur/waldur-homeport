@@ -33,7 +33,7 @@ export const ResourceIssuesCard = ({ resource }) => {
   const { state } = useCurrentStateAndParams();
   const showIssues = useSelector(hasSupport);
   return showIssues ? (
-    <Card id="tickets">
+    <Card>
       <Card.Header>
         <Card.Title>
           <h3>{translate('Tickets')}</h3>

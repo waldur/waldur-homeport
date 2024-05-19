@@ -13,7 +13,7 @@ export const GettingStartedCard = ({ resource, offering }) => {
   );
 
   return offering.getting_started || endpoints.length > 0 ? (
-    <Card id="getting-started">
+    <Card>
       <Card.Header>
         <Card.Title>
           <h3>{translate('Getting started')}</h3>
