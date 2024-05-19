@@ -43,7 +43,7 @@ export const CallCard: FC<{ call }> = ({ call }) => {
             />
             <Link
               state="public-calls.details"
-              params={{ uuid: call.uuid }}
+              params={{ call_uuid: call.uuid }}
               className="btn btn-flush text-anchor"
               label={translate('View call')}
             />

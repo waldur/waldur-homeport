@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { useMarketplaceLandingLink } from '@waldur/marketplace/links/LandingLink';
 import { MenuComponent } from '@waldur/metronic/components';
-import { CallPublicMenu } from '@waldur/navigation/CallPublicMenu';
+import { CallPublicMenu } from '@waldur/navigation/sidebar/CallPublicMenu';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ManagementMenu } from './ManagementMenu';
@@ -46,6 +46,8 @@ export const UnifiedSidebar = () => {
         'calls-for-proposals-dashboard',
         'proposals-all-proposals',
         'reviews-all-reviews',
+        'public-calls.details',
+        'protected-call.main',
       ].includes(state.name)
     ) {
       const item = document.querySelector('#calls-menu');

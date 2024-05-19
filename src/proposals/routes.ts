@@ -149,7 +149,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'protected-call.main',
-    url: 'edit/',
+    url: 'edit/?tab',
     component: CallUpdateContainer,
   },
   {
@@ -265,7 +265,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'public-calls.details',
-    url: ':uuid/',
+    url: ':call_uuid/?tab',
     component: PublicCallDetailsContainer,
     data: {
       hideProjectSelector: true,

@@ -16,7 +16,7 @@ interface CallRoundsListProps {
 
 export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
   const tableProps = useTable({
-    table: 'CallRoundsList',
+    table: 'PublicCallRoundsList',
     fetchData: () =>
       Promise.resolve({
         rows: getRoundsWithStatus(props.call.rounds),

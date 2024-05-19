@@ -73,7 +73,7 @@ export const PublicCallsPage: FunctionComponent = () => {
               render: ({ row }) => (
                 <Link
                   state="public-calls.details"
-                  params={{ uuid: row.uuid }}
+                  params={{ call_uuid: row.uuid }}
                   label={row.name}
                 />
               ),

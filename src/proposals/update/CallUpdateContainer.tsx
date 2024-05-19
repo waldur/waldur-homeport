@@ -1,28 +1,112 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
-import { PageBarProvider } from '@waldur/marketplace/context';
-import { useFullPage } from '@waldur/navigation/context';
+import { usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { PageBarTab } from '@waldur/navigation/types';
+import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 import { RoleEnum } from '@waldur/permissions/enums';
 
 import { getProtectedCall } from '../api';
+import { CallTabs } from '../details/CallTabs';
 import { TeamSection } from '../team/TeamSection';
 
-import { CallUpdateBar } from './CallUpdateBar';
 import { CallUpdateHero } from './CallUpdateHero';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
 import { CallRoundsList } from './rounds/CallRoundsList';
 
-export const CallUpdateContainer: FunctionComponent = () => {
-  useFullPage();
+const PageHero = ({ call, refetch }) => (
+  <div className="container-fluid mb-8 mt-6">
+    <CallTabs call={call} />
+    <CallUpdateHero call={call} refetch={refetch} />
+  </div>
+);
 
+const Body = ({ call, refetch, loading }) => {
+  const tabs = useMemo<PageBarTab[]>(
+    () => [
+      {
+        key: 'rounds',
+        title: (
+          <>
+            {call.rounds.length === 0 ? (
+              <i className="fa fa-warning text-danger fs-5" />
+            ) : (
+              <i className="fa fa-check text-success fs-5" />
+            )}
+            {translate('Rounds')}
+          </>
+        ),
+        component: CallRoundsList,
+      },
+      {
+        key: 'general',
+        title: (
+          <>
+            {!call.description ? (
+              <i className="fa fa-warning text-danger me-3" />
+            ) : (
+              <i className="fa fa-check text-success me-3" />
+            )}
+            <span>{translate('General')}</span>
+          </>
+        ),
+        component: CallGeneralSection,
+      },
+      {
+        key: 'documents',
+        title: translate('Documents'),
+        component: CallDocumentsSection,
+      },
+      {
+        key: 'reviewers',
+        title: translate('Reviewers'),
+        component: ({ call }) => (
+          <TeamSection
+            scope={call}
+            roles={[RoleEnum.CALL_REVIEWER]}
+            roleTypes={['call']}
+            title={translate('Reviewers')}
+          />
+        ),
+      },
+      {
+        key: 'managers',
+        title: translate('Managers'),
+        component: ({ call }) => (
+          <TeamSection
+            scope={call}
+            roles={[RoleEnum.CALL_MANAGER]}
+            roleTypes={['call']}
+            title={translate('Managers')}
+          />
+        ),
+      },
+      {
+        key: 'offerings',
+        title: translate('Offerings'),
+        component: CallOfferingsSection,
+      },
+    ],
+    [call],
+  );
+
+  usePageHero(<PageHero call={call} refetch={refetch} />);
+
+  const {
+    tabSpec: { component: Component },
+  } = usePageTabsTransmitter(tabs);
+
+  return <Component call={call} refetch={refetch} loading={loading} />;
+};
+
+export const CallUpdateContainer: FunctionComponent = () => {
   const {
     params: { call_uuid },
   } = useCurrentStateAndParams();
@@ -48,38 +132,7 @@ export const CallUpdateContainer: FunctionComponent = () => {
   ) : error ? (
     <h3>{translate('Unable to load call details.')}</h3>
   ) : call ? (
-    <PageBarProvider>
-      <div className="m-b">
-        <CallUpdateHero call={call} refetch={refetch} />
-        <CallUpdateBar call={call} />
-        <div className="container-xxl py-10">
-          <CallRoundsList call={call} />
-          <CallGeneralSection
-            call={call}
-            refetch={refetch}
-            loading={isRefetching}
-          />
-          <CallDocumentsSection call={call} refetch={refetch} />
-          <div className="mb-7" id="reviewers">
-            <TeamSection
-              scope={call}
-              roles={[RoleEnum.CALL_REVIEWER]}
-              roleTypes={['call']}
-              title={translate('Reviewers')}
-            />
-          </div>
-          <div className="mb-7" id="managers">
-            <TeamSection
-              scope={call}
-              roles={[RoleEnum.CALL_MANAGER]}
-              roleTypes={['call']}
-              title={translate('Managers')}
-            />
-          </div>
-          <CallOfferingsSection call={call} />
-        </div>
-      </div>
-    </PageBarProvider>
+    <Body refetch={refetch} loading={isRefetching} call={call} />
   ) : (
     <InvalidRoutePage />
   );
