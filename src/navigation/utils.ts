@@ -29,26 +29,38 @@ export const goBack = () => {
 export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
   const { state, params } = useCurrentStateAndParams();
   const mainTabs = useMemo<Tab[]>(() => {
-    return tabs.map((tab) => ({
-      title: tab.title,
-      to: state.name,
-      params: { tab: tab.key },
-    }));
+    return tabs.map((tab) =>
+      tab.children
+        ? {
+            title: tab.title,
+            children: tab.children.map((child) => ({
+              title: child.title,
+              to: state.name,
+              params: { tab: child.key },
+            })),
+          }
+        : {
+            title: tab.title,
+            to: state.name,
+            params: { tab: tab.key },
+          },
+    );
   }, [state, tabs]);
   useExtraTabs(mainTabs);
 
+  const flatTabs = useMemo(
+    () => tabs.flatMap((tab) => (tab.component ? [tab] : tab.children)),
+    [tabs],
+  );
+
   const tabSpec = useMemo<PageBarTab>(() => {
-    if (!tabs?.length) return null;
-    let _tabSpec;
-    if (params.tab) {
-      _tabSpec = tabs.find((child) => child.key === params.tab);
-    } else if (tabs) {
-      const firstTabKey = tabs[0].children?.length
-        ? tabs[0].children[0].key
-        : tabs[0].key;
-      _tabSpec = tabs.find((child) => child.key === firstTabKey);
+    if (!flatTabs?.length) {
+      return null;
+    } else if (params.tab) {
+      return flatTabs.find((tab) => tab.key === params.tab);
+    } else {
+      return flatTabs[0];
     }
-    return _tabSpec;
   }, [tabs, params?.tab]);
 
   return { tabSpec };

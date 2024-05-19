@@ -22,7 +22,7 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
     return null;
   }
   return (
-    <Card id="resource-options">
+    <Card>
       <div className="border-2 border-bottom card-header">
         <div className="card-title h5">
           {translate('Options')}

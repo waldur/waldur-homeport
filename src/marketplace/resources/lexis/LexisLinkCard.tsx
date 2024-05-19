@@ -16,7 +16,7 @@ export const LexisLinkCard = ({ resource }) => {
     return null;
   }
   return (
-    <Card id="lexis-links">
+    <Card>
       <Card.Header>
         <Card.Title>
           <h3>{translate('LEXIS links')}</h3>
