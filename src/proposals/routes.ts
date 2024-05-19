@@ -169,7 +169,7 @@ export const states: StateDeclaration[] = [
     name: 'calls-for-proposals',
     url: '/calls-for-proposals/',
     abstract: true,
-    parent: 'layout',
+    parent: 'public',
     component: UIView,
     data: {
       title: () => translate('Calls for proposals'),

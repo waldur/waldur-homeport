@@ -69,6 +69,92 @@ describe('Public marketplace pages', () => {
   });
 });
 
+describe('Public calls for proposals pages', () => {
+  beforeEach(() => {
+    cy.mockConfigs().mockChecklists();
+
+    cy.intercept('GET', '/api/users/me/', {
+      statusCode: 401,
+    })
+      .intercept('GET', '/api/customers/', [])
+      .intercept('GET', '/api/marketplace-categories/**', {
+        fixture: 'marketplace/categories.json',
+      })
+      .intercept('GET', '/api/marketplace-public-offerings/**', {
+        fixture: 'marketplace/offerings.json',
+      })
+      .intercept('GET', '/api/proposal-public-calls/**', {
+        fixture: 'calls/public-calls.json',
+      })
+      .intercept(
+        'GET',
+        '/api/proposal-public-calls/3b8fc588d37f434eabc68d2a0b4a4bbe/',
+        {
+          fixture: 'calls/public-call.json',
+        },
+      )
+      .visit('/calls-for-proposals/');
+  });
+
+  it('Assure that calls landing page is visible without auth token', () => {
+    cy.get('.public-calls-page:contains(Calls for proposals)').should(
+      'be.visible',
+    );
+    cy.get('#kt_content_container .card-table .card-title').should(
+      'contain',
+      'Open calls',
+    );
+    cy.get('#kt_content_container .card-table .card-title').should(
+      'contain',
+      'Available offerings',
+    );
+  });
+
+  it('Assure that public call page is visible without auth token', () => {
+    cy.get('.card .card-title:contains("Open calls")')
+      .parents('.card')
+      .within(() => {
+        cy.get('.model-card-1 .card-title:contains("Long time call")')
+          .parents('.model-card-1')
+          .contains('a', 'View call')
+          .click();
+      });
+
+    cy.url()
+      .should('include', '/calls/3b8fc588d37f434eabc68d2a0b4a4bbe')
+      .get('.page-title')
+      .should('contain', 'Long time call')
+      .get('#kt_content_container .card')
+      .contains('button', 'Apply to round');
+  });
+
+  it('Assure that all calls page is visible without auth token', () => {
+    cy.get('.toolbar .menu-link').contains('All calls').click();
+    cy.get('#kt_content_container .card-table .card-title').should(
+      'contain',
+      'Calls for proposals',
+    );
+    cy.get('#kt_content_container .card-table table tbody tr').should(
+      'have.length',
+      1,
+    );
+  });
+
+  it('Assure that available offerings page is visible without auth token', () => {
+    cy.get('#kt_content_container')
+      .contains('a.btn', 'Available offerings')
+      .click();
+    cy.get('#kt_content_container .card-table .card-title').should(
+      'contain',
+      'Available offerings',
+    );
+    cy.get('#kt_content_container .card-table table tbody tr').should(
+      'have.length',
+      2,
+    );
+  });
+});
+
 describe('TOS and PP pages', () => {
   beforeEach(() => {
     cy.mockConfigs().mockChecklists();
