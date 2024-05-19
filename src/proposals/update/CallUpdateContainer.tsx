@@ -5,6 +5,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
+import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 import { usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { PageBarTab } from '@waldur/navigation/types';
@@ -35,11 +36,7 @@ const Body = ({ call, refetch, loading }) => {
         key: 'rounds',
         title: (
           <>
-            {call.rounds.length === 0 ? (
-              <i className="fa fa-warning text-danger fs-5" />
-            ) : (
-              <i className="fa fa-check text-success fs-5" />
-            )}
+            <ValidationIcon value={call.rounds.length > 0} />
             {translate('Rounds')}
           </>
         ),
@@ -49,11 +46,7 @@ const Body = ({ call, refetch, loading }) => {
         key: 'general',
         title: (
           <>
-            {!call.description ? (
-              <i className="fa fa-warning text-danger me-3" />
-            ) : (
-              <i className="fa fa-check text-success me-3" />
-            )}
+            <ValidationIcon value={call.description} />
             <span>{translate('General')}</span>
           </>
         ),

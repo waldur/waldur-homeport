@@ -1,9 +1,9 @@
-import { CheckFat, Warning } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { showComponentsList } from '@waldur/marketplace/common/registry';
+import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 import { getBillingTypeLabel } from '@waldur/marketplace/resources/usage/utils';
 
 import { OfferingSectionProps } from '../types';
@@ -20,14 +20,10 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
     return null;
   }
   return (
-    <Card>
+    <Card id="components">
       <Card.Header className="border-2 border-bottom">
         <Card.Title className="h5">
-          {props.offering.components.length === 0 ? (
-            <Warning size={18} weight="fill" className="text-danger me-3" />
-          ) : (
-            <CheckFat size={18} weight="fill" className="text-success me-3" />
-          )}
+          <ValidationIcon value={props.offering.components.length > 0} />
           <span className="me-2">{translate('Accounting components')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </Card.Title>

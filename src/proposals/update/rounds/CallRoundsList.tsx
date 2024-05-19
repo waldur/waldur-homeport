@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 import { Call, Round } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -75,12 +76,8 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
       ]}
       title={
         <>
-          {props.call.rounds.length === 0 ? (
-            <i className="fa fa-warning text-danger me-3" />
-          ) : (
-            <i className="fa fa-check text-success me-3" />
-          )}
-          <span>{translate('Rounds')}</span>
+          <ValidationIcon value={props.call.rounds.length > 0} />
+          {translate('Rounds')}
         </>
       }
       verboseName={translate('Rounds')}

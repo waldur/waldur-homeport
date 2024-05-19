@@ -1,7 +1,8 @@
-import { Check, CheckFat, Warning, X } from '@phosphor-icons/react';
+import { Check, X } from '@phosphor-icons/react';
 import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 
 import { RefreshButton } from '../components/RefreshButton';
 
@@ -11,14 +12,14 @@ import { EditVarsButton } from './EditVarsButton';
 import { SCRIPT_ROWS } from './utils';
 
 export const ScriptIntegrationSummary = ({ offering, refetch, loading }) => (
-  <Card>
+  <Card id="integration">
     <Card.Header className="border-2 border-bottom">
       <Card.Title className="h5">
-        {SCRIPT_ROWS.every((option) => offering.secret_options[option.type]) ? (
-          <CheckFat size={18} weight="fill" className="text-success me-3" />
-        ) : (
-          <Warning size={18} weight="fill" className="text-danger me-3" />
-        )}
+        <ValidationIcon
+          value={SCRIPT_ROWS.every(
+            (option) => offering.secret_options[option.type],
+          )}
+        />
         <span className="me-2">{translate('Integration')}</span>
         <RefreshButton refetch={refetch} loading={loading} />
       </Card.Title>

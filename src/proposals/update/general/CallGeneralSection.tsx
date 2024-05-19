@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 import { RoleEnum } from '@waldur/permissions/enums';
 import { formatRole } from '@waldur/permissions/utils';
@@ -21,12 +22,8 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
     <Card>
       <Card.Header className="border-2 border-bottom">
         <Card.Title>
-          {!props.call.description ? (
-            <i className="fa fa-warning text-danger me-3" />
-          ) : (
-            <i className="fa fa-check text-success me-3" />
-          )}
-          <span>{translate('General')}</span>
+          <ValidationIcon value={props.call.description} />
+          <span className="me-2">{translate('General')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </Card.Title>
       </Card.Header>
