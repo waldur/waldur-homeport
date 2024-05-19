@@ -1,4 +1,3 @@
-import { CheckFat, Warning } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
@@ -23,6 +22,7 @@ import {
   showComponentsList,
   showOfferingOptions,
 } from '../common/registry';
+import { ValidationIcon } from '../common/ValidationIcon';
 
 import { OfferingViewHero } from './OfferingViewHero';
 import { getServiceSettingsForm } from './update/integration/registry';
@@ -98,22 +98,19 @@ const getTabs = (offering: Offering): PageBarTab[] => {
   const PluginOptionsForm = getPluginOptionsForm(offering.type);
 
   if (ServiceSettingsForm || SecretOptionsForm || PluginOptionsForm) {
-    const isCustomScript = offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS;
-    const isIntegrationError =
-      isCustomScript &&
-      !SCRIPT_ROWS.every((option) => offering.secret_options[option.type]);
-
     tabs.push({
       key: 'integration',
       component: IntegrationSection,
       title: (
         <>
-          {isCustomScript &&
-            (isIntegrationError ? (
-              <Warning size={18} weight="fill" className="text-danger me-2" />
-            ) : (
-              <CheckFat size={18} weight="fill" className="text-success me-2" />
-            ))}
+          <ValidationIcon
+            value={
+              offering.type !== OFFERING_TYPE_CUSTOM_SCRIPTS ||
+              SCRIPT_ROWS.every(
+                (option) => offering.secret_options[option.type],
+              )
+            }
+          />
           {translate('Integration')}
         </>
       ),
@@ -155,11 +152,7 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       component: ComponentsSection,
       title: (
         <>
-          {offering.components.length === 0 ? (
-            <Warning size={18} weight="fill" className="text-danger me-2" />
-          ) : (
-            <CheckFat size={18} weight="fill" className="text-success me-2" />
-          )}
+          <ValidationIcon value={offering.components.length > 0} />
           {translate('Accounting components')}
         </>
       ),
@@ -172,11 +165,7 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       component: PlansSection,
       title: (
         <>
-          {offering.plans.length === 0 ? (
-            <Warning size={18} weight="fill" className="text-danger me-2" />
-          ) : (
-            <CheckFat size={18} weight="fill" className="text-success me-2" />
-          )}
+          <ValidationIcon value={offering.plans.length > 0} />
           {translate('Accounting plans')}
         </>
       ),

@@ -1,4 +1,3 @@
-import { CheckFat, Warning } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
@@ -7,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { getOfferingPlans } from '@waldur/marketplace/common/api';
 import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
+import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 import { Plan } from '@waldur/marketplace/types';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -38,14 +38,10 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
   }
 
   return (
-    <Card>
+    <Card id="plans">
       <Card.Header className="border-2 border-bottom">
         <Card.Title className="h5">
-          {plans.length === 0 ? (
-            <Warning size={18} weight="fill" className="text-danger me-3" />
-          ) : (
-            <CheckFat size={18} weight="fill" className="text-success me-3" />
-          )}
+          <ValidationIcon value={plans.length > 0} />
           <span className="me-2">{translate('Accounting plans')}</span>
           <RefreshButton refetch={refetch} loading={isRefetching} />
         </Card.Title>
