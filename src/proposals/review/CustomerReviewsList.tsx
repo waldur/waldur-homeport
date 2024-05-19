@@ -12,8 +12,9 @@ import { formatReviewState } from '@waldur/proposals/utils';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import { USER_REVIEWS_FILTER_FORM_ID } from '@waldur/user/constants';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
+import { ReviewItemAction } from './ReviewItemActions';
 import { ReviewsListExpandableRow } from './ReviewsListExpandableRow';
 import { ReviewsListPlaceholder } from './ReviewsListPlaceholder';
 
@@ -36,6 +37,22 @@ const filtersSelector = createSelector(
 );
 
 export const CustomerReviewsList: FC<{}> = () => {
+  const user = useSelector(getUser);
+  const ReviewItemActions = ({ row, fetch }) => (
+    <>
+      <Link
+        state="proposal-review"
+        params={{
+          review_uuid: row.uuid,
+        }}
+        className="btn btn-primary"
+      >
+        {translate('View')}
+      </Link>
+      {user.is_staff ? <ReviewItemAction row={row} fetch={fetch} /> : null}
+    </>
+  );
+
   const filter = useSelector(filtersSelector);
 
   const tableProps = useTable({
@@ -82,17 +99,7 @@ export const CustomerReviewsList: FC<{}> = () => {
       hasQuery={true}
       expandableRow={ReviewsListExpandableRow}
       filters={<ReviewsTableFilter />}
-      hoverableRow={({ row }) => (
-        <Link
-          state="proposal-review"
-          params={{
-            review_uuid: row.uuid,
-          }}
-          className="btn btn-primary"
-        >
-          {translate('View')}
-        </Link>
-      )}
+      hoverableRow={ReviewItemActions}
     />
   );
 };
