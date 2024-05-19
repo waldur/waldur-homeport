@@ -41,7 +41,7 @@ export const CallOfferingsCard: FC<CallOfferingsCardProps> = (props) => {
         },
       ]}
       title={translate('Offerings')}
-      verboseName={translate('Offerings')}
+      verboseName={translate('offerings')}
     />
   );
 };

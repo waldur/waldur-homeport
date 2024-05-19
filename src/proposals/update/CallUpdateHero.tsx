@@ -6,10 +6,10 @@ import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero
 import { getCallStatus } from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { CallDetailsHeaderBody } from '../details/CallDetailsHeaderBody';
 import { Call } from '../types';
 
 import { CallActions } from './CallActions';
-import { CallUpdateHeaderBody } from './CallUpdateHeaderBody';
 import { ProposalCallQuotas } from './ProposalCallQuotas';
 
 interface CallUpdateHeroProps {
@@ -47,7 +47,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       quickFooterClassName="justify-content-center"
     >
       {call.state !== 'archived' && call.rounds.length > 0 && (
-        <CallUpdateHeaderBody call={call} />
+        <CallDetailsHeaderBody call={call} />
       )}
     </PublicDashboardHero2>
   );
