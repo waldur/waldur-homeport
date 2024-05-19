@@ -11,16 +11,16 @@ import { DeleteEndpointButton } from './DeleteEndpointButton';
 
 export const OfferingEndpointsSection: FC<OfferingSectionProps> = (props) => {
   return (
-    <Card id="endpoints">
-      <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">
+    <Card>
+      <Card.Header className="border-2 border-bottom">
+        <Card.Title className="h5">
           <span className="me-2">{translate('Endpoints')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
-        </div>
+        </Card.Title>
         <div className="card-toolbar">
           <AddEndpointButton {...props} />
         </div>
-      </div>
+      </Card.Header>
       <Card.Body>
         {props.offering.endpoints.length === 0 ? (
           <div className="justify-content-center row">

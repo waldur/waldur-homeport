@@ -8,7 +8,7 @@ import { AttachDocumentsButton } from './AttachDocumentsButton';
 
 export const CallDocumentsSection = ({ call, refetch }) => {
   return (
-    <Card id="documents" className="mb-7">
+    <Card>
       <Card.Header className="border-2 border-bottom">
         <Card.Title>{translate('Documents')}</Card.Title>
         <div className="card-toolbar">

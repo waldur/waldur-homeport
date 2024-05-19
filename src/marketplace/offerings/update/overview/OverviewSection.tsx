@@ -55,13 +55,13 @@ const attributes: Attribute[] = [
 
 export const OverviewSection: FC<OfferingSectionProps> = (props) => {
   return (
-    <Card id="general">
-      <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">
+    <Card>
+      <Card.Header className="border-2 border-bottom">
+        <Card.Title className="h5">
           <span className="me-2">{translate('General')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
-        </div>
-      </div>
+        </Card.Title>
+      </Card.Header>
       <Card.Body>
         <Table bordered={true} hover={true} responsive={true}>
           <tbody>

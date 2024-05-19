@@ -18,7 +18,7 @@ interface CallGeneralSectionProps {
 
 export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
   return (
-    <Card id="general" className="mb-7">
+    <Card>
       <Card.Header className="border-2 border-bottom">
         <Card.Title>
           {!props.call.description ? (

@@ -43,12 +43,12 @@ export const IntegrationSection: FC<OfferingSectionProps> = (props) => {
   }
 
   return (
-    <Card id="integration">
-      <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">
+    <Card>
+      <Card.Header className="border-2 border-bottom">
+        <Card.Title className="h5">
           <span className="me-2">{translate('Integration')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
-        </div>
+        </Card.Title>
         <div className="card-toolbar">
           {isFeatureVisible(MarketplaceFeatures.lexis_links) ? (
             <EditLexisLinkIntegrationButton
@@ -65,7 +65,7 @@ export const IntegrationSection: FC<OfferingSectionProps> = (props) => {
           <GoogleCalendarActions offering={props.offering} />
           <SyncButton offering={props.offering} refetch={props.refetch} />
         </div>
-      </div>
+      </Card.Header>
       <Card.Body>
         <OfferingAttributes offering={props.offering} />
       </Card.Body>

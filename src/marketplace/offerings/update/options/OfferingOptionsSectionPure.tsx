@@ -23,17 +23,17 @@ export const OfferingOptionsSectionPure: FC<
   const data = props.offering[props.type];
   return (
     <Card id={props.type}>
-      <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">
+      <Card.Header className="border-2 border-bottom">
+        <Card.Title className="h5">
           {props.title}
           <RefreshButton refetch={props.refetch} loading={props.loading} />
-        </div>
+        </Card.Title>
         {!readOnlyFields.includes(props.type) ? (
           <div className="card-toolbar">
             <AddOptionButton {...props} />
           </div>
         ) : null}
-      </div>
+      </Card.Header>
       <Card.Body>
         {data?.order?.length === 0 ? (
           <div className="justify-content-center row">
