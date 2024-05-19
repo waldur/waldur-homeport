@@ -10,16 +10,16 @@ import { AddRoleButton } from './AddRoleButton';
 import { DeleteRoleButton } from './DeleteRoleButton';
 
 export const RolesSection: FC<OfferingSectionProps> = (props) => (
-  <Card id="roles">
-    <div className="border-2 border-bottom card-header">
-      <div className="card-title h5">
+  <Card>
+    <Card.Header className="border-2 border-bottom">
+      <Card.Title className="h5">
         <span className="me-2">{translate('Roles')}</span>
         <RefreshButton refetch={props.refetch} loading={props.loading} />
-      </div>
+      </Card.Title>
       <div className="card-toolbar">
         <AddRoleButton {...props} />
       </div>
-    </div>
+    </Card.Header>
     <Card.Body>
       {props.offering.roles.length === 0 ? (
         <div className="justify-content-center row">

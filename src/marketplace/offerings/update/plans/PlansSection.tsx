@@ -38,9 +38,9 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
   }
 
   return (
-    <Card id="plans">
-      <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">
+    <Card>
+      <Card.Header className="border-2 border-bottom">
+        <Card.Title className="h5">
           {plans.length === 0 ? (
             <Warning size={18} weight="fill" className="text-danger me-3" />
           ) : (
@@ -48,7 +48,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
           )}
           <span className="me-2">{translate('Accounting plans')}</span>
           <RefreshButton refetch={refetch} loading={isRefetching} />
-        </div>
+        </Card.Title>
         {!hidePlanAddButton(props.offering.type, plans) &&
           hasPermission(user, {
             permission: PermissionEnum.CREATE_OFFERING_PLAN,
@@ -58,7 +58,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
               <AddPlanButton refetch={refetch} offering={props.offering} />
             </div>
           )}
-      </div>
+      </Card.Header>
       <Card.Body>
         {plans.length === 0 ? (
           <div className="justify-content-center row">

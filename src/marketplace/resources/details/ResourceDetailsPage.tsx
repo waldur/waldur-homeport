@@ -92,7 +92,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     return <LoadingSpinner />;
   }
 
-  return tabSpec.component ? (
+  return tabSpec?.component ? (
     <tabSpec.component
       resource={data.resource}
       resourceScope={data.scope}

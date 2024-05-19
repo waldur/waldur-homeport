@@ -43,9 +43,9 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
     <Card className="mb-10">
       <Card.Header className="border-2 border-bottom">
         <div className="card-toolbar">
-          <div className="card-title h5">
+          <Card.Title className="h5">
             {translate('Component usage chart')}
-          </div>
+          </Card.Title>
         </div>
       </Card.Header>
       <Card.Body

@@ -11,9 +11,9 @@ import { EditVarsButton } from './EditVarsButton';
 import { SCRIPT_ROWS } from './utils';
 
 export const ScriptIntegrationSummary = ({ offering, refetch, loading }) => (
-  <Card id="integration">
-    <div className="border-2 border-bottom card-header">
-      <div className="card-title h5">
+  <Card>
+    <Card.Header className="border-2 border-bottom">
+      <Card.Title className="h5">
         {SCRIPT_ROWS.every((option) => offering.secret_options[option.type]) ? (
           <CheckFat size={18} weight="fill" className="text-success me-3" />
         ) : (
@@ -21,12 +21,12 @@ export const ScriptIntegrationSummary = ({ offering, refetch, loading }) => (
         )}
         <span className="me-2">{translate('Integration')}</span>
         <RefreshButton refetch={refetch} loading={loading} />
-      </div>
+      </Card.Title>
       <div className="card-toolbar">
         <EditVarsButton offering={offering} refetch={refetch} />
         <EditIntegrationButton offering={offering} refetch={refetch} />
       </div>
-    </div>
+    </Card.Header>
     <Card.Body>
       <Table bordered={true} hover={true} responsive={true}>
         <tbody>

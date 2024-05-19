@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 
 export const CallDocumentsCard = ({ call }) => {
   return (
-    <Card id="documents" className="mb-7">
+    <Card>
       <Card.Header>
         <Card.Title>
           <h3>{translate('Documents')}</h3>

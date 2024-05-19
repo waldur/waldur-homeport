@@ -20,9 +20,9 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
     return null;
   }
   return (
-    <Card id="components">
-      <div className="border-2 border-bottom card-header">
-        <div className="card-title h5">
+    <Card>
+      <Card.Header className="border-2 border-bottom">
+        <Card.Title className="h5">
           {props.offering.components.length === 0 ? (
             <Warning size={18} weight="fill" className="text-danger me-3" />
           ) : (
@@ -30,13 +30,13 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
           )}
           <span className="me-2">{translate('Accounting components')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
-        </div>
+        </Card.Title>
         {!props.components.length && (
           <div className="card-toolbar">
             <AddComponentButton {...props} />
           </div>
         )}
-      </div>
+      </Card.Header>
       <Card.Body>
         {props.offering.components.length === 0 ? (
           <div className="justify-content-center row">
