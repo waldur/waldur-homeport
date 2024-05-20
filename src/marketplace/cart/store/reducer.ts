@@ -29,16 +29,6 @@ export const cartReducer = (state = INITIAL_STATE, action): CartState => {
         items: [...state.items, payload.item],
         addingItem: false,
       };
-    case constants.REMOVE_ITEM_REQUEST:
-      return {
-        ...state,
-        removingItem: true,
-      };
-    case constants.REMOVE_ITEM_ERROR:
-      return {
-        ...state,
-        removingItem: false,
-      };
     case constants.REMOVE_ITEM_SUCCESS:
       return {
         ...state,

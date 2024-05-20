@@ -3,7 +3,6 @@ import { FunctionComponent, useMemo } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { getStartingPrice } from '@waldur/marketplace/details/plan/utils';
 import { Category, Offering } from '@waldur/marketplace/types';
@@ -35,13 +34,9 @@ export const PublicOfferingGeneral: FunctionComponent<
                     'By {customer}',
                     {
                       customer: (
-                        <Link
-                          state="marketplace-service-provider.details"
-                          params={{ uuid: offering.customer_uuid }}
-                          className="text-decoration-underline text-dark text-hover-primary fs-7 mb-2"
-                        >
+                        <span className="text-dark text-hover-primary fs-7 mb-2">
                           {offering.customer_name}
-                        </Link>
+                        </span>
                       ),
                     },
                     formatJsxTemplate,

@@ -61,14 +61,6 @@ const ProviderOfferingsList = lazyComponent(
   () => import('./service-providers/ProviderOfferingsList'),
   'ProviderOfferingsList',
 );
-const PublicServiceProviderDetails = lazyComponent(
-  () => import('./offerings/service-providers/PublicServiceProviderDetails'),
-  'PublicServiceProviderDetails',
-);
-const ServiceProvidersContainer = lazyComponent(
-  () => import('./offerings/service-providers/ServiceProvidersContainer'),
-  'ServiceProvidersContainer',
-);
 const OfferingUpdateContainer = lazyComponent(
   () => import('./offerings/update/OfferingUpdateContainer'),
   'OfferingUpdateContainer',
@@ -433,36 +425,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Offering managers'),
     },
-  },
-
-  {
-    name: 'marketplace-service-provider',
-    url: '/service-providers/',
-    abstract: true,
-    component: Layout,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-    ...getPublicRoutesParams(),
-  },
-
-  {
-    name: 'marketplace-service-provider.details',
-    url: ':uuid/',
-    component: PublicServiceProviderDetails,
-  },
-
-  {
-    name: 'marketplace-service-providers',
-    url: '/service-providers/',
-    abstract: true,
-    component: Layout,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-    ...getPublicRoutesParams(),
-  },
-
-  {
-    name: 'marketplace-service-providers.details',
-    url: '',
-    component: ServiceProvidersContainer,
   },
 
   {

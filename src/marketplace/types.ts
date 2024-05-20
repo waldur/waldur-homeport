@@ -300,17 +300,6 @@ export interface ImportableResource {
   name: string;
 }
 
-export interface OfferingInfo {
-  offering_name: string;
-  offering_uuid: string;
-}
-
-export interface OfferingsByServiceProvider {
-  customer_name: string;
-  customer_uuid: string;
-  offerings: OfferingInfo[];
-}
-
 export interface OfferingPermission {
   url: string;
   pk: number;

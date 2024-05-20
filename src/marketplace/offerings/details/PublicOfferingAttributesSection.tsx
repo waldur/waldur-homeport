@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
+import { CopyToClipboard } from '@waldur/marketplace/common/CopyToClipboard';
 import { GoogleCalendarLink } from '@waldur/marketplace/offerings/details/GoogleCalendarLink';
-import { CopyToClipboard } from '@waldur/marketplace/offerings/service-providers/shared/CopyToClipboard';
 import { ReferralDetailsButton } from '@waldur/marketplace/referral/ReferralDetailsButton';
 import { Offering } from '@waldur/marketplace/types';
 import './PublicOfferingAttributesSection.scss';

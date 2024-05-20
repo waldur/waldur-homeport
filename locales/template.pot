@@ -1840,7 +1840,6 @@ msgstr ""
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
 #: src/marketplace/category/list/AllCategoriesPage.tsx
 #: src/marketplace/category/utils.ts
-#: src/marketplace/offerings/service-providers/ServiceProviderPageBar.tsx
 msgid "Categories"
 msgstr ""
 
@@ -1850,7 +1849,6 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingGeneral.tsx
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/offerings/list/OfferingsList.tsx
-#: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
 #: src/marketplace/offerings/update/attributes/AttributesSection.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
@@ -2363,7 +2361,7 @@ msgstr ""
 
 #: src/core/CopyToClipboard.tsx
 #: src/core/CopyToClipboardButton.tsx
-#: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
+#: src/marketplace/common/CopyToClipboard.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/table/ExportDialog.tsx
 #: src/table/TableButtons.tsx
@@ -3244,7 +3242,6 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingInfo.tsx
 #: src/marketplace/offerings/images/CreateImageDialog.tsx
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
-#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/options/OptionForm.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
 #: src/marketplace/offerings/update/plans/PlanForm.tsx
@@ -3617,7 +3614,6 @@ msgstr ""
 #: src/marketplace/deploy/DeployPage.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/list/EditOfferingButton.tsx
-#: src/marketplace/offerings/service-providers/ServiceProviderEditorButton.tsx
 #: src/marketplace/offerings/update/RowEditButton.tsx
 #: src/marketplace/offerings/update/attributes/EditAttributeButton.tsx
 #: src/marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx
@@ -3797,10 +3793,6 @@ msgstr ""
 
 #: src/marketplace/offerings/update/integration/EditSchedulesButton.tsx
 msgid "Edit schedules"
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
-msgid "Edit service provider details"
 msgstr ""
 
 #: src/administration/agreements/UserAgreementsEditDialog.tsx
@@ -4606,10 +4598,6 @@ msgstr ""
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserList.tsx
 msgid "Full name"
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/shared/ServiceProviderDetailsCard.tsx
-msgid "Full name:"
 msgstr ""
 
 #: src/marketplace/offerings/details/ExportFullPriceList.tsx
@@ -5797,10 +5785,6 @@ msgstr ""
 msgid "Location of {name} organization"
 msgstr ""
 
-#: src/navigation/AnonymousHeader.tsx
-msgid "Log in"
-msgstr ""
-
 #: src/navigation/header/UserDropdown.tsx
 msgid "Log out"
 msgstr ""
@@ -5825,16 +5809,8 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: src/customer/details/CustomerLogoUpdate.tsx
-msgid "Logo has been removed."
-msgstr ""
-
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
 msgid "Logo has been updated successfully."
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
-msgid "Logo has been uploaded."
 msgstr ""
 
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
@@ -6613,7 +6589,6 @@ msgid "New value"
 msgstr ""
 
 #: src/marketplace/offerings/import/WizardButtons.tsx
-#: src/marketplace/offerings/service-providers/shared/grid/NextPage.tsx
 #: src/proposals/update/offerings/CallOfferingCreateForm.tsx
 #: src/proposals/update/rounds/CallRoundCreateForm.tsx
 msgid "Next"
@@ -6722,10 +6697,6 @@ msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingFacility.tsx
 msgid "No location available"
-msgstr ""
-
-#: src/navigation/SearchResultsDropdown.tsx
-msgid "No matching offerings found"
 msgstr ""
 
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
@@ -7583,7 +7554,6 @@ msgstr ""
 #: src/administration/routes.ts
 #: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
 #: src/marketplace/category/store/selectors.ts
-#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 msgid "Organization groups"
 msgstr ""
 
@@ -8356,7 +8326,6 @@ msgid "Preview order form"
 msgstr ""
 
 #: src/form/WizardForm.tsx
-#: src/marketplace/offerings/service-providers/shared/grid/PrevPage.tsx
 msgid "Previous"
 msgstr ""
 
@@ -9379,10 +9348,6 @@ msgstr ""
 msgid "Remove avatar"
 msgstr ""
 
-#: src/customer/details/CustomerLogoUpdate.tsx
-msgid "Remove logo"
-msgstr ""
-
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "Remove organization"
 msgstr ""
@@ -9914,7 +9879,6 @@ msgstr ""
 
 #: src/LoadingScreen.tsx
 #: src/marketplace/resources/resource-pending/OrderErredView.tsx
-#: src/navigation/SearchResultsDropdown.tsx
 msgid "Retry"
 msgstr ""
 
@@ -10428,14 +10392,6 @@ msgstr ""
 msgid "Search by name"
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
-msgid "Search by name or abbreviation"
-msgstr ""
-
-#: src/navigation/OfferingSearchField.tsx
-msgid "Search for offerings and providers"
-msgstr ""
-
 #: src/marketplace/category/filters/FilterBar.tsx
 msgid "Search for offerings..."
 msgstr ""
@@ -10495,10 +10451,6 @@ msgstr ""
 #: src/openstack/openstack-instance/OpenStackSecurityGroupsList.tsx
 #: src/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog.tsx
 msgid "Security groups details"
-msgstr ""
-
-#: src/marketplace/resources/details/ResourceIssuesCard.tsx
-msgid "See all"
 msgstr ""
 
 #: src/proposals/CallsForProposals.tsx
@@ -10915,7 +10867,6 @@ msgstr ""
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
 #: src/marketplace/UserPluginOptionsForm.tsx
-#: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/routes.ts
 #: src/navigation/workspace/ServiceProviderIcon.tsx
@@ -10954,24 +10905,8 @@ msgstr ""
 msgid "Service provider has been registered."
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
-msgid "Service provider has been updated."
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/ServiceProviderOfferingsGrid.tsx
-msgid "Service provider offerings"
-msgstr ""
-
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 msgid "Service provider:"
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/ServiceProvidersGrid.tsx
-msgid "Service providers"
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/ServiceProvidersContainer.tsx
-msgid "Service providers in {title}"
 msgstr ""
 
 #: src/resource/state/utils.ts
@@ -11133,10 +11068,6 @@ msgstr ""
 msgid "Show all"
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/CategoriesListHeader.tsx
-msgid "Show all ({numberOfAllCategories})"
-msgstr ""
-
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 msgid "Show all projects of organization"
 msgstr ""
@@ -11183,10 +11114,6 @@ msgstr ""
 
 #: src/marketplace/resources/details/OfferingDetailsField.tsx
 msgid "Show offering"
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/shared/ShowOfferingsButton.tsx
-msgid "Show offerings"
 msgstr ""
 
 #: src/invitations/GroupInvitationsFilter.tsx
@@ -11255,7 +11182,6 @@ msgstr ""
 msgid "Showing services available for"
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/shared/grid/GridInfo.tsx
 #: src/table/TableInfo.tsx
 msgid "Showing {sliceStart} to {sliceEnd} of {resultCount} entries."
 msgstr ""
@@ -12102,7 +12028,7 @@ msgid "Text content"
 msgstr ""
 
 #: src/core/CopyToClipboardButton.tsx
-#: src/marketplace/offerings/service-providers/shared/CopyToClipboard.tsx
+#: src/marketplace/common/CopyToClipboard.tsx
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/resource/ResourceAccessButton.tsx
 msgid "Text has been copied"
@@ -13109,21 +13035,12 @@ msgstr ""
 msgid "Unable to fetch comments."
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/ServiceProvidersContainer.tsx
-msgid "Unable to fetch current user"
-msgstr ""
-
 #: src/user/support/UserEmailChangeCallback.tsx
 msgid "Unable to fetch current user."
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/shared/grid/Grid.tsx
 #: src/table/Table.tsx
 msgid "Unable to fetch data."
-msgstr ""
-
-#: src/navigation/SearchResultsDropdown.tsx
-msgid "Unable to fetch offerings"
 msgstr ""
 
 #: src/issues/comments/utils.ts
@@ -13198,7 +13115,6 @@ msgstr ""
 #: src/marketplace/category/list/CategoriesBar.tsx
 #: src/marketplace/category/list/CategoryGroupsList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
-#: src/marketplace/offerings/service-providers/ServiceProvider.tsx
 msgid "Unable to load categories."
 msgstr ""
 
@@ -13215,7 +13131,6 @@ msgid "Unable to load category groups."
 msgstr ""
 
 #: src/marketplace/category/filters/FilterDropdownContent.tsx
-#: src/marketplace/offerings/service-providers/CategorySectionsFilterBar.tsx
 msgid "Unable to load category sections."
 msgstr ""
 
@@ -13397,10 +13312,6 @@ msgstr ""
 msgid "Unable to load statistics data"
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/PublicServiceProviderDetails.tsx
-msgid "Unable to load the service provider."
-msgstr ""
-
 #: src/user/dashboard/UserDashboardChart.tsx
 msgid "Unable to load user monthly activity data."
 msgstr ""
@@ -13533,10 +13444,6 @@ msgstr ""
 
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 msgid "Unable to remove image."
-msgstr ""
-
-#: src/customer/details/CustomerLogoUpdate.tsx
-msgid "Unable to remove logo."
 msgstr ""
 
 #: src/marketplace/offerings/update/options/DeleteOptionButton.tsx
@@ -13916,10 +13823,6 @@ msgstr ""
 msgid "Unable to update security groups of OpenStack instance."
 msgstr ""
 
-#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
-msgid "Unable to update service provider."
-msgstr ""
-
 #: src/openstack/openstack-tenant/SetRoutesDialog.tsx
 msgid "Unable to update static routes."
 msgstr ""
@@ -13939,10 +13842,6 @@ msgstr ""
 
 #: src/issues/attachments/effects.ts
 msgid "Unable to upload attachment."
-msgstr ""
-
-#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
-msgid "Unable to upload logo."
 msgstr ""
 
 #: src/booking/BookingStateField.tsx
@@ -14044,7 +13943,6 @@ msgstr ""
 #: src/customer/details/AccessSubnetEditDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/payments/PaymentUpdateDialog.tsx
-#: src/marketplace/offerings/service-providers/ServiceProviderEditor.tsx
 #: src/marketplace/offerings/update/integration/EditSchedulesDialog.tsx
 #: src/marketplace/offerings/update/overview/EditGettingStartedDialog.tsx
 #: src/marketplace/offerings/update/overview/EditOverviewDialog.tsx
@@ -14294,10 +14192,6 @@ msgstr ""
 #: src/proposals/proposal/create/ProjectDetailsStep.tsx
 #: src/proposals/proposal/create/ProjectDetailsSummary.tsx
 msgid "Upload additional documents, which support the proposal and help to review it."
-msgstr ""
-
-#: src/customer/details/CustomerLogoUpdate.tsx
-msgid "Upload new"
 msgstr ""
 
 #: src/proposals/proposal/create/ProjectDetailsStep.tsx
@@ -14937,7 +14831,6 @@ msgid "Welcome to the review portal. Please review the application below. If you
 msgstr ""
 
 #: src/auth/AuthInit.tsx
-#: src/marketplace/offerings/service-providers/Description.tsx
 msgid "Welcome to {pageTitle}!"
 msgstr ""
 
