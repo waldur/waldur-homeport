@@ -67,7 +67,7 @@ describe('Broadcast', () => {
   });
 
   it('should expand items when click on arrow icon', () => {
-    cy.get('.fa.fa-chevron-right').eq(0).click();
+    cy.get('[data-cy=row-expander]').eq(0).click();
     cy.get('.col-sm-8').contains('Test').should('be.visible');
   });
 
