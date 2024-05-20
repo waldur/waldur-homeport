@@ -11968,7 +11968,7 @@ msgstr ""
 msgid "Team members"
 msgstr ""
 
-#: src/customer/dashboard/api.ts
+#: src/dashboard/TeamWidget.tsx
 msgid "Team size"
 msgstr ""
 
@@ -13410,7 +13410,7 @@ msgstr ""
 msgid "Unable to load user."
 msgstr ""
 
-#: src/customer/dashboard/CustomerUsersBadge.tsx
+#: src/dashboard/TeamWidget.tsx
 #: src/marketplace/service-providers/dashboard/ProviderOfferingPermissions.tsx
 #: src/project/ProjectUsersBadge.tsx
 msgid "Unable to load users"
@@ -15730,6 +15730,10 @@ msgstr ""
 msgid "{category} resources"
 msgstr ""
 
+#: src/dashboard/TeamWidget.tsx
+msgid "{changes} vs last month"
+msgstr ""
+
 #: src/user/api-key/TokenLifetimeField.tsx
 msgid "{count} hour"
 msgstr ""
@@ -15742,6 +15746,7 @@ msgstr ""
 msgid "{count} items"
 msgstr ""
 
+#: src/dashboard/TeamWidget.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 msgid "{count} members"
 msgstr ""

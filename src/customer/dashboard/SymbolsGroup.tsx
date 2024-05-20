@@ -10,6 +10,7 @@ interface SymbolsGroupProps {
   nameKey?: string;
   emailKey?: string;
   length?: number;
+  size?: number;
   onClick?(): void;
 }
 
@@ -31,6 +32,7 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
   emailKey = 'email',
   items,
   length,
+  size = 35,
   onClick,
 }) => (
   <div
@@ -41,16 +43,20 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
     tabIndex={0}
   >
     {items.slice(0, max).map((item: User, index: number) => (
-      <div key={index} className="symbol symbol-circle symbol-35px">
+      <div key={index} className={`symbol symbol-circle symbol-${size}px`}>
         <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
           {item.image ? (
             <img
               src={item.image}
               alt={item.image}
-              className="rounded-circle w-35px h-35px"
+              className={`rounded-circle w-${size}px h-${size}px`}
             />
           ) : item[emailKey] ? (
-            <Avatar className="rounded-circle" name={item[nameKey]} />
+            <Avatar
+              size={size}
+              className="rounded-circle"
+              name={item[nameKey]}
+            />
           ) : (
             <div
               className={`symbol-label fs-4 fw-bold ${getSymbolColorClass(
@@ -64,8 +70,8 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
       </div>
     ))}
     {(length ?? items.length) > max && (
-      <div className="symbol symbol-circle symbol-35px">
-        <div className="symbol-label fs-6 fw-bold bg-dark text-inverse-dark">
+      <div className={`symbol symbol-circle symbol-${size}px`}>
+        <div className="symbol-label fs-5 fw-bold bg-secondary text-primary-600">
           +{length ? Math.max(length - max, 0) : items.slice(max).length}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { getAll, post } from '@waldur/core/api';
+import { getAll, getSelectData, post } from '@waldur/core/api';
 
 import { GenericPermission } from './types';
 
@@ -92,11 +92,10 @@ export const updateOfferingPermission = ({
     expiration_time,
   });
 
-export const fetchAllCustomerUsers = (projectId: string) =>
-  getAll<GenericPermission>(`/customers/${projectId}/list_users/`, {
-    params: {
-      field: ['user_uuid', 'user_full_name', 'user_email', 'role_name'],
-    },
+export const fetchSelectCustomerUsers = (customerUuid: string, params = {}) =>
+  getSelectData<GenericPermission>(`/customers/${customerUuid}/users/`, {
+    field: ['user_uuid', 'user_full_name', 'user_email', 'role_name'],
+    ...params,
   });
 
 export const fetchAllProjectUsers = (projectId: string) =>
