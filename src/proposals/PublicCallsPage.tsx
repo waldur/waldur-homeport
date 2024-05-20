@@ -1,5 +1,5 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -21,7 +21,7 @@ import { CallCard } from './CallCard';
 import background from './proposal-calls.png';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { PublicCallsTablePlaceholder } from './PublicCallsTablePlaceholder';
-import { formatCallState } from './utils';
+import { formatCallState, getRoundsWithStatus } from './utils';
 
 const mapStateToFilter = createSelector(
   getFormValues(CALL_FILTER_FORM_ID),
@@ -97,6 +97,32 @@ export const PublicCallsPage: FunctionComponent = () => {
             {
               title: translate('State'),
               render: ({ row }) => <>{formatCallState(row.state)}</>,
+            },
+            {
+              title: translate('Active round'),
+              render: ({ row }) => {
+                const activeRound = useMemo(() => {
+                  const items = getRoundsWithStatus(row.rounds);
+                  const first = items[0];
+                  if (
+                    first &&
+                    (first.status.value === 'open' ||
+                      first.status.value === 'scheduled')
+                  ) {
+                    return first;
+                  }
+                  return null;
+                }, [row.rounds]);
+                return (
+                  <>
+                    {activeRound ? (
+                      formatDateTime(activeRound.cutoff_time)
+                    ) : (
+                      <>&mdash;</>
+                    )}
+                  </>
+                );
+              },
             },
           ]}
           gridItem={({ row }) => <CallCard call={row} />}

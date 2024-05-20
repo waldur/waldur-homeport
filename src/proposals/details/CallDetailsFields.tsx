@@ -17,8 +17,8 @@ export const CallDetailsFields = ({ call }) => {
     const items = getRoundsWithStatus(call.rounds);
     const first = items[0];
     if (
-      (first && first.status.value === 'open') ||
-      first.status.value === 'scheduled'
+      first &&
+      (first.status.value === 'open' || first.status.value === 'scheduled')
     ) {
       return first;
     }
