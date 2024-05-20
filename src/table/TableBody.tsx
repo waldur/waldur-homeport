@@ -1,3 +1,4 @@
+import { CaretDown, CaretRight } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
@@ -168,11 +169,11 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
           </td>
         )}
         {expandableRow && (
-          <td>
+          <td data-cy="row-expander">
             {toggled[getId(row, rowIndex)] ? (
-              <i className="fa fa-chevron-down" />
+              <CaretDown size={15} />
             ) : (
-              <i className="fa fa-chevron-right" />
+              <CaretRight size={15} />
             )}
           </td>
         )}
