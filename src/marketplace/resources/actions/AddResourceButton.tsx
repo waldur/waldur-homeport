@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
@@ -32,7 +33,10 @@ export const AddResourceButton = (props: AddResourceButtonProps) => {
         offering_uuid={relatedOfferingUuid}
         className="btn btn-primary"
       >
-        <i className="fa fa-plus" /> {translate('Add resource')}
+        <span className="svg-icon svg-icon-2">
+          <PlusCircle />
+        </span>
+        {translate('Add resource')}
       </OfferingLink>
     )
   );

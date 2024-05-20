@@ -2,7 +2,6 @@ import { translate } from '@waldur/i18n';
 import { getCategoryUsages } from '@waldur/marketplace/common/api';
 import { CategoryComponentUsage } from '@waldur/marketplace/types';
 import { router } from '@waldur/router';
-import { WorkspaceType } from '@waldur/workspace/types';
 
 import { Category } from './CategoryResources';
 import { getResourceChartOptions } from './chart';
@@ -137,10 +136,7 @@ const formatChart = (
     });
 };
 
-const formatData = (
-  list: FilteredData[],
-  workspace: WorkspaceType,
-): Category[] => {
+const formatData = (list: FilteredData[]): Category[] => {
   return list
     .map((category) => {
       return {
@@ -157,11 +153,9 @@ const formatData = (
           {
             title: translate('Add resource'),
             onClick: () => {
-              const state =
-                workspace === WorkspaceType.ORGANIZATION
-                  ? 'marketplace-category-customer'
-                  : 'marketplace-category-project';
-              router.stateService.go(state, { category_uuid: category.uuid });
+              router.stateService.go('public.marketplace-category', {
+                category_uuid: category.uuid,
+              });
             },
           },
         ],
@@ -172,12 +166,11 @@ const formatData = (
 };
 
 export async function loadMarketplaceCategories(
-  workspace: WorkspaceType,
   scope: Scope,
 ): Promise<Category[]> {
   const params = { scope: scope.url };
   const rows = await getCategoryUsages({ params });
   const collector = collectData(rows);
   const list = filterData(collector);
-  return formatData(list, workspace);
+  return formatData(list);
 }

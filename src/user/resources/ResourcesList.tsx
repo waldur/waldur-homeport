@@ -1,11 +1,12 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { LandingLink } from '@waldur/marketplace/links/LandingLink';
 import { EmptyResourcesListPlaceholder } from '@waldur/marketplace/resources/list/EmptyResourcesListPlaceholder';
 import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
 import { ResourceActionsButton } from '@waldur/marketplace/resources/list/ResourceActionsButton';
@@ -58,11 +59,14 @@ const mapStateToFilter = createSelector(
 );
 
 const tableActions = (
-  <LandingLink>
+  <Link state="public.marketplace-landing">
     <Button variant="primary">
-      <i className="fa fa-plus" /> {translate('Add resource')}
+      <span className="svg-icon svg-icon-2">
+        <PlusCircle />
+      </span>
+      {translate('Add resource')}
     </Button>
-  </LandingLink>
+  </Link>
 );
 
 export const ResourcesList = () => {

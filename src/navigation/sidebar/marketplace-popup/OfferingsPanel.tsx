@@ -2,7 +2,6 @@ import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { useState, useCallback, FunctionComponent, useMemo } from 'react';
 import { ListGroupItem, Stack } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
@@ -10,11 +9,8 @@ import { TextWithoutFormatting } from '@waldur/core/TextWithoutFormatting';
 import { Tip } from '@waldur/core/Tooltip';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { useCategoryLink } from '@waldur/marketplace/links/CategoryLink';
-import { useOfferingDetailsLink } from '@waldur/marketplace/links/OfferingLink';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { BaseList } from './BaseList';
 
@@ -90,21 +86,17 @@ export const OfferingsPanel: FunctionComponent<{
   category: Category;
 }> = ({ offerings, category }) => {
   const [selectedOffering, selectOffering] = useState<Offering>();
-  const customer = useSelector(getCustomer);
 
-  const { state: categoryState } = useCategoryLink();
-  const { state, stateParams } = useOfferingDetailsLink();
   const router = useRouter();
 
   const handleOfferingClick = useCallback(
     (offering: Offering) => {
       selectOffering(offering);
-      router.stateService.go(state, {
-        ...stateParams,
+      router.stateService.go('marketplace-offering-public', {
         offering_uuid: offering.uuid,
       });
     },
-    [router, state, stateParams, selectOffering],
+    [router, selectOffering],
   );
 
   return (
@@ -122,9 +114,8 @@ export const OfferingsPanel: FunctionComponent<{
             <div className="text-center">
               <span data-kt-menu-dismiss="true">
                 <Link
-                  state={categoryState}
+                  state="public.marketplace-category"
                   params={{
-                    uuid: customer.uuid,
                     category_uuid: category?.uuid,
                   }}
                   className="btn btn-dark"

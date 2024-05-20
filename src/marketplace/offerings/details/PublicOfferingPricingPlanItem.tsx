@@ -71,7 +71,7 @@ export const PublicOfferingPricingPlanItem: FC<PricingPlanItemProps> = ({
         </div>
         <div className="mx-2">
           <Link
-            state={canDeploy ? 'marketplace-offering-user' : ''}
+            state={canDeploy ? 'marketplace-offering-public' : ''}
             params={{ offering_uuid: offering.uuid }}
             className={classNames(
               'btn w-100',

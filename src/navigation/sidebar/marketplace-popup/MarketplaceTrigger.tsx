@@ -7,19 +7,7 @@ import { translate } from '@waldur/i18n';
 import { MarketplacePopup } from './MarketplacePopup';
 
 export const MarketplaceTrigger: FunctionComponent = () => {
-  const isActiveProjectAddResource = useIsActive(
-    'marketplace-offering-project',
-  );
-  const isActiveCustomerAddResource = useIsActive(
-    'marketplace-offering-customer',
-  );
-  const isActiveUserAddResource = useIsActive('marketplace-offering-user');
-
-  const isActive =
-    isActiveProjectAddResource ||
-    isActiveCustomerAddResource ||
-    isActiveUserAddResource;
-
+  const isActive = useIsActive('marketplace-offering-public');
   return (
     <div
       className={classNames('menu-item', { here: isActive })}

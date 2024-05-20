@@ -28,7 +28,7 @@ export const CategoryResourcesList: FunctionComponent<
   CategoryResourcesListProps
 > = (props) => {
   const [{ loading, error, value }, callback] = useAsyncFn(
-    () => loadMarketplaceCategories(props.scopeType, props.scope),
+    () => loadMarketplaceCategories(props.scope),
     [props.scope],
   );
   useEffectOnce(() => {

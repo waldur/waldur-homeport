@@ -1,3 +1,4 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { Duration } from 'luxon';
 import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { Button, Card } from 'react-bootstrap';
@@ -136,7 +137,9 @@ const PureOfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
           </div>
         ))}
         <Button variant="light" className="text-nowrap" onClick={addRow}>
-          <i className="fa fa-plus" />
+          <span className="svg-icon svg-icon-2">
+            <PlusCircle />
+          </span>
           {translate('Add time period')}
         </Button>
       </>
