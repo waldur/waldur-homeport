@@ -1,8 +1,6 @@
 import { Col, Form, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
-import 'world-flags-sprite/stylesheets/flags32.css';
-
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { translate } from '@waldur/i18n';

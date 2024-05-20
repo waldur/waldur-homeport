@@ -3,8 +3,6 @@ import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import 'world-flags-sprite/stylesheets/flags16.css';
-
 import { fixURL } from '@waldur/core/api';
 import Logo from '@waldur/images/logo.svg';
 import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';

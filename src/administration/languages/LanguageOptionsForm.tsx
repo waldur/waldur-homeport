@@ -7,6 +7,7 @@ import { ENV } from '@waldur/configs/default';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
+import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { LanguageCountry } from '@waldur/navigation/header/LanguageSelectorDropdown';
 import {
   showSuccess,
@@ -106,11 +107,9 @@ const LanguageOptionsForm: React.FC<LanguageOptionProps> = ({
                 label={
                   <div className="d-flex align-items-center">
                     <div className="symbol symbol-20px me-2">
-                      <i className="f16">
-                        <i
-                          className={`flag ${LanguageCountry[language.code]}`}
-                        />
-                      </i>
+                      <CountryFlag
+                        countryCode={LanguageCountry[language.code]}
+                      />
                     </div>
                     {language.label}
                   </div>

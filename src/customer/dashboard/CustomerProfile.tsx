@@ -1,9 +1,8 @@
 import { Card, Col, Row, Stack } from 'react-bootstrap';
 
-import 'world-flags-sprite/stylesheets/flags32.css';
-
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { ProviderOfferingPermissions } from '@waldur/marketplace/service-providers/dashboard/ProviderOfferingPermissions';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { Customer } from '@waldur/workspace/types';
@@ -48,9 +47,7 @@ export const CustomerProfile = ({
                 className="gap-6 text-muted mb-1"
               >
                 {customer.country && (
-                  <i className="f32">
-                    <i className={`flag ${customer.country?.toLowerCase()}`} />
-                  </i>
+                  <CountryFlag countryCode={customer.country} />
                 )}
                 <h2 className="mb-0">{customer.name}</h2>
               </Stack>

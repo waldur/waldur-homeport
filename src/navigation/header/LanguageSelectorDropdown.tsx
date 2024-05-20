@@ -3,9 +3,10 @@ import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
+import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 
 export const LanguageCountry = {
-  ar: '_Arab_League',
+  ar: 'sa',
   en: 'gb',
   et: 'ee',
   lt: 'lt',
@@ -37,9 +38,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
           {translate('Language')}
           <span className="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
             {currentLanguage.label}{' '}
-            <i className="f16">
-              <i className={`flag ${LanguageCountry[currentLanguage.code]}`} />
-            </i>
+            <CountryFlag countryCode={LanguageCountry[currentLanguage.code]} />
           </span>
         </span>
       </div>
@@ -61,9 +60,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
               })}
             >
               <span className="symbol symbol-20px me-4">
-                <i className="f16">
-                  <i className={`flag ${LanguageCountry[language.code]}`} />
-                </i>
+                <CountryFlag countryCode={LanguageCountry[language.code]} />
               </span>
               {language.label}
             </div>

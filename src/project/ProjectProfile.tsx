@@ -1,7 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
-import 'world-flags-sprite/stylesheets/flags32.css';
 import { useSelector } from 'react-redux';
 
 import { formatDate } from '@waldur/core/dateUtils';

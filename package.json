@@ -98,8 +98,7 @@
     "reselect": "^3.0.1",
     "resize-observer-polyfill": "^1.5.1",
     "stream-browserify": "^3.0.0",
-    "text-security": "^3.2.1",
-    "world-flags-sprite": "^0.0.2"
+    "text-security": "^3.2.1"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",

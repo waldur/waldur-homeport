@@ -7,15 +7,11 @@ import { Field } from 'redux-form';
 import { get } from '@waldur/core/api';
 import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-
-import 'world-flags-sprite/stylesheets/flags16.css';
+import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 
 const CountryRenderer = (option) => (
   <>
-    <i className="f16">
-      <i className={`flag ${option.value.toLowerCase()}`} />
-    </i>{' '}
-    {option.label}
+    <CountryFlag countryCode={option.value} /> {option.label}
   </>
 );
 
