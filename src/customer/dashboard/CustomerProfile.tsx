@@ -9,7 +9,6 @@ import { getItemAbbreviation } from '@waldur/navigation/workspace/context-select
 import { Customer } from '@waldur/workspace/types';
 
 import { CustomerActions } from './CustomerActions';
-import { CustomerUsersBadge } from './CustomerUsersBadge';
 
 interface CustomerProfileProps {
   customer: Customer;
@@ -69,15 +68,13 @@ export const CustomerProfile = ({
               <CustomerActions customer={customer} />
             </Col>
           </Row>
-          <Row>
-            <Col xs={12}>
-              {fromServiceProvider ? (
+          {fromServiceProvider ? (
+            <Row>
+              <Col xs={12}>
                 <ProviderOfferingPermissions customer={customer} />
-              ) : (
-                <CustomerUsersBadge />
-              )}
-            </Col>
-          </Row>
+              </Col>
+            </Row>
+          ) : null}
         </Col>
       </Row>
     </Card.Body>

@@ -83,6 +83,9 @@ $primary-inverse: if(
   $white
 ) !default; // Custom variable
 
+// Primary base
+$primary-600: if(isDarkMode(), #6f977f, #286100); // Custom variable
+
 // Secondary colors
 $secondary: $gray-300 !default; // Bootstrap variable
 $secondary-active: $gray-400 !default; // Custom variable
@@ -192,6 +195,7 @@ $theme-light-colors: (
 $theme-text-colors: (
   'white': $white,
   'primary': $primary,
+  'primary-600': $primary-600,
   'secondary': $secondary,
   'light': $light,
   'success': $success,
@@ -589,6 +593,8 @@ $font-sizes: (
   // 13px
   fluid: 100%,
   // 100%
+  1x: $font-size-base * 1.85,
+  // 26px
   2x: $font-size-base * 2,
   // 26px
   2qx: $font-size-base * 2.25,

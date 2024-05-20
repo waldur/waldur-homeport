@@ -1,8 +1,7 @@
 import { getList } from '@waldur/core/api';
-import { formatCostChart, getDailyQuotaCharts } from '@waldur/dashboard/api';
+import { formatCostChart } from '@waldur/dashboard/api';
 import { getScopeChartOptions } from '@waldur/dashboard/chart';
 import { Scope, Chart, InvoiceSummary } from '@waldur/dashboard/types';
-import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 
 const getInvoiceSummary = (customer: string) =>
@@ -18,16 +17,6 @@ async function getCustomerCharts(customer: Scope): Promise<Chart[]> {
     const invoices = await getInvoiceSummary(customer.url);
     const costChart = formatCostChart(invoices);
     charts.push(costChart);
-  }
-  const quotas = [
-    {
-      quota: 'nc_user_count',
-      title: translate('Team size'),
-    },
-  ];
-  const quotaCharts = await getDailyQuotaCharts(quotas, customer);
-  if (quotaCharts.length) {
-    charts.push(...quotaCharts);
   }
   return charts;
 }

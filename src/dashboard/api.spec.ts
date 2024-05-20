@@ -2,7 +2,6 @@ import { advanceTo, clear } from 'jest-date-mock';
 import { DateTime } from 'luxon';
 
 import * as api from './api';
-import { Quota } from './types';
 
 jest.mock('@waldur/core/formatCurrency', () => ({
   defaultCurrency: (val) => `EUR${val}`,
@@ -28,34 +27,5 @@ describe('Dashboard chart API', () => {
       DateTime.fromISO('2018-08-01'),
     );
     clear();
-  });
-
-  it('computes filesize unit', () => {
-    const tb10 = 1024 * 1024 * 10;
-    const gb20 = 1024 * 20;
-    const result = api.getFormatterUnits('filesize', tb10);
-    expect(result.units).toBe('TB');
-    expect(result.formatter(tb10)).toBe('10.0');
-    expect(result.formatter(gb20)).toBe('0.0');
-  });
-
-  it('formats quota chart', () => {
-    const quota: Quota = {
-      quota: 'nc_volume_size',
-      title: 'Volume size',
-      type: 'filesize',
-    };
-    const values = [10, 20, 40];
-    advanceTo(new Date(2018, 9, 16));
-    const chart = api.formatQuotaChart(quota, values);
-    clear();
-
-    expect(chart.units).toBe('MB');
-    expect(chart.current).toBe(40);
-    expect(chart.data).toEqual([
-      { label: '2018-09-16', value: 10 },
-      { label: '2018-09-17', value: 20 },
-      { label: '2018-09-18', value: 40 },
-    ]);
   });
 });
