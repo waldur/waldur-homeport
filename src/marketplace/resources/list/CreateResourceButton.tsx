@@ -1,20 +1,17 @@
 import { PlusCircle } from '@phosphor-icons/react';
-import { triggerTransition } from '@uirouter/redux';
-import { useDispatch } from 'react-redux';
+import { useRouter } from '@uirouter/react';
 
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 export const CreateResourceButton = ({ category_uuid }) => {
-  const dispatch = useDispatch();
+  const router = useRouter();
   return (
     <ActionButton
       action={() =>
-        dispatch(
-          triggerTransition('marketplace-category-project', {
-            category_uuid,
-          }),
-        )
+        router.stateService.go('public.marketplace-category', {
+          category_uuid,
+        })
       }
       iconNode={<PlusCircle />}
       title={translate('Add resource')}

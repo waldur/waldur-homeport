@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { useMarketplaceLandingLink } from '@waldur/marketplace/links/LandingLink';
 import { MenuComponent } from '@waldur/metronic/components';
 import { CallPublicMenu } from '@waldur/navigation/sidebar/CallPublicMenu';
 import { getUser } from '@waldur/workspace/selectors';
@@ -20,7 +19,6 @@ export const UnifiedSidebar = () => {
   const user = useSelector(getUser);
   const router = useRouter();
   const { state, params } = useCurrentStateAndParams();
-  const marketplaceLink = useMarketplaceLandingLink();
   useEffect(() => {
     MenuComponent.reinitialization();
     const menuElement = document.querySelector('#kt_aside_menu');
@@ -68,10 +66,12 @@ export const UnifiedSidebar = () => {
       <ReportingMenu />
       <CallPublicMenu />
       <MenuItem
+        activeState={
+          state.name.includes('marketplace') ? state.name : undefined
+        }
         icon={<ShoppingCart />}
         title={translate('Marketplace')}
-        state={marketplaceLink.state}
-        params={marketplaceLink.stateParams}
+        state="public.marketplace-landing"
         child={false}
       />
     </Sidebar>

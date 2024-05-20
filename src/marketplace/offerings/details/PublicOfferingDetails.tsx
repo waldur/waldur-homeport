@@ -26,7 +26,7 @@ export const PublicOfferingDetails: FunctionComponent<
       placement="left"
     >
       <Link
-        state={canDeploy ? 'marketplace-offering-user' : ''}
+        state={canDeploy ? 'marketplace-offering-public' : ''}
         params={{ offering_uuid: offering.uuid }}
         className={`btn btn-primary ${canDeploy ? '' : 'disabled'}`}
       >

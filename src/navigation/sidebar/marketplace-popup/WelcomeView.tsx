@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { LandingLink } from '@waldur/marketplace/links/LandingLink';
 import { Customer } from '@waldur/workspace/types';
 
 export const WelcomeView: FunctionComponent<{
@@ -16,9 +16,12 @@ export const WelcomeView: FunctionComponent<{
         </p>
         {customer && (
           <span data-kt-menu-dismiss="true">
-            <LandingLink className="btn btn-white btn-hover-rise btn-active-light-primary">
+            <Link
+              className="btn btn-white btn-hover-rise btn-active-light-primary"
+              state="public.marketplace-landing"
+            >
               {translate('Browse')}
-            </LandingLink>
+            </Link>
           </span>
         )}
       </div>

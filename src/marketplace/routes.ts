@@ -191,63 +191,12 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-landing-project',
-    url: 'marketplace/',
-    component: LandingPage,
-    parent: 'project',
-    data: {
-      useExtraTabs: true,
-    },
-  },
-
-  {
-    name: 'marketplace-landing-customer',
-    url: 'marketplace/',
-    component: LandingPage,
-    parent: 'organization',
-    data: {
-      useExtraTabs: true,
-    },
-  },
-
-  {
-    name: 'marketplace-landing-user',
-    url: 'marketplace/',
-    component: LandingPage,
-    parent: 'profile',
-    data: {
-      useExtraTabs: true,
-    },
-  },
-
-  {
-    name: 'marketplace-offering-project',
-    url: 'marketplace-provider-offering/:offering_uuid/',
+    name: 'marketplace-offering-public',
+    url: '/marketplace-provider-offering/:offering_uuid/',
     component: OfferingDetailsPage,
-    parent: 'project',
+    parent: 'public',
     data: {
-      hideHeaderMenu: true,
       hideProjectSelector: true,
-    },
-  },
-
-  {
-    name: 'marketplace-offering-customer',
-    url: 'marketplace-provider-offering/:offering_uuid/',
-    component: OfferingDetailsPage,
-    parent: 'organization',
-    data: {
-      hideHeaderMenu: true,
-    },
-  },
-
-  {
-    name: 'marketplace-offering-user',
-    url: 'marketplace-provider-offering/:offering_uuid/',
-    component: OfferingDetailsPage,
-    parent: 'profile',
-    data: {
-      hideHeaderMenu: true,
     },
   },
 
@@ -272,7 +221,10 @@ export const states: StateDeclaration[] = [
     name: 'public.marketplace-landing',
     url: '/marketplace/',
     component: LandingPage,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+    data: {
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      hideProjectSelector: true,
+    },
   },
 
   {
@@ -289,59 +241,16 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
+      hideProjectSelector: true,
     },
-  },
-
-  {
-    name: 'marketplace-categories-project',
-    url: 'marketplace/all/?group',
-    component: AllCategoriesPage,
-    parent: 'project',
-  },
-  {
-    name: 'marketplace-categories-customer',
-    url: 'marketplace/all/?group',
-    component: AllCategoriesPage,
-    parent: 'organization',
-  },
-  {
-    name: 'marketplace-categories-user',
-    url: 'marketplace/all/?group',
-    component: AllCategoriesPage,
-    parent: 'profile',
   },
   {
     name: 'public.marketplace-categories',
     url: '/marketplace/all/?group',
     component: AllCategoriesPage,
-    data: ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-  },
-
-  {
-    name: 'marketplace-category-project',
-    url: 'marketplace-category/:category_uuid/',
-    component: CategoryPage,
-    parent: 'project',
     data: {
-      useExtraTabs: true,
-    },
-  },
-  {
-    name: 'marketplace-category-customer',
-    url: 'marketplace-category/:category_uuid/',
-    component: CategoryPage,
-    parent: 'organization',
-    data: {
-      useExtraTabs: true,
-    },
-  },
-  {
-    name: 'marketplace-category-user',
-    url: 'marketplace-category/:category_uuid/',
-    component: CategoryPage,
-    parent: 'profile',
-    data: {
-      useExtraTabs: true,
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      hideProjectSelector: true,
     },
   },
   {
@@ -349,8 +258,9 @@ export const states: StateDeclaration[] = [
     url: '/marketplace-category/:category_uuid/',
     component: CategoryPage,
     data: {
-      useExtraTabs: true,
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      useExtraTabs: true,
+      hideProjectSelector: true,
     },
   },
 

@@ -1,9 +1,10 @@
+import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { LandingLink } from '@waldur/marketplace/links/LandingLink';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Table } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
@@ -77,11 +78,14 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
       actions={
-        <LandingLink>
+        <Link state="public.marketplace-landing">
           <Button variant="primary">
-            <i className="fa fa-plus" /> {translate('Add resource')}
+            <span className="svg-icon svg-icon-2">
+              <PlusCircle />
+            </span>
+            {translate('Add resource')}
           </Button>
-        </LandingLink>
+        </Link>
       }
     />
   );
