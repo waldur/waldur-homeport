@@ -1,6 +1,6 @@
-import { UISref, useCurrentStateAndParams } from '@uirouter/react';
+import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -23,14 +23,16 @@ const CreateIssueButton = ({ resource }) => {
     );
   }, [dispatch, resource]);
   return (
-    <button className="btn btn-link ms-3" onClick={callback}>
+    <Button variant="light" onClick={callback}>
+      <span className="svg-icon svg-icon-2">
+        <PlusCircle />
+      </span>
       {translate('Create')}
-    </button>
+    </Button>
   );
 };
 
 export const ResourceIssuesCard = ({ resource }) => {
-  const { state } = useCurrentStateAndParams();
   const showIssues = useSelector(hasSupport);
   return showIssues ? (
     <Card>
@@ -39,10 +41,6 @@ export const ResourceIssuesCard = ({ resource }) => {
           <h3>{translate('Tickets')}</h3>
         </Card.Title>
         <div className="card-toolbar">
-          <UISref to={state.name} params={{ tab: 'issues' }}>
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a className="btn btn-link">{translate('See all')}</a>
-          </UISref>
           <CreateIssueButton resource={resource} />
         </div>
       </Card.Header>
