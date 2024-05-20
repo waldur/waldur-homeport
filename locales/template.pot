@@ -293,6 +293,7 @@ msgstr ""
 msgid "Active resources"
 msgstr ""
 
+#: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallActiveRoundFilter.tsx
 #: src/proposals/call-management/CallAllFilters.tsx
 msgid "Active round"
@@ -737,7 +738,6 @@ msgstr ""
 msgid "Allocation time"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/slurm/details/AllocationUsersTable.tsx
 msgid "Allocation users"
@@ -1276,7 +1276,6 @@ msgstr ""
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/customer/routes.ts
 #: src/marketplace/resources/details/ActivityCard.tsx
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/service-providers/dashboard/ProviderEventsTable.tsx
 #: src/project/ProjectActions.tsx
@@ -1522,7 +1521,6 @@ msgid "Booked by"
 msgstr ""
 
 #: src/booking/marketplace.ts
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 msgid "Booking"
 msgstr ""
@@ -1715,7 +1713,7 @@ msgstr ""
 msgid "Caller field name"
 msgstr ""
 
-#: src/navigation/CallPublicMenu.tsx
+#: src/navigation/sidebar/CallPublicMenu.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/routes.ts
 msgid "Calls"
@@ -1726,8 +1724,8 @@ msgid "Calls closing soon"
 msgstr ""
 
 #: src/marketplace/routes.ts
-#: src/navigation/CallPublicMenu.tsx
 #: src/navigation/FooterLinks.tsx
+#: src/navigation/sidebar/CallPublicMenu.tsx
 #: src/proposals/CallsForProposals.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/routes.ts
@@ -3269,7 +3267,7 @@ msgstr ""
 #: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDescriptionCard.tsx
-#: src/proposals/details/PublicCallDetailsBar.tsx
+#: src/proposals/details/PublicCallDetails.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 #: src/proposals/update/general/EditGeneralInfoDialog.tsx
 #: src/rancher/ClusterProjectList.tsx
@@ -3362,7 +3360,6 @@ msgstr ""
 #: src/marketplace/details/plan/PlanDescriptionButton.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/referral/ReferralDetailsButton.tsx
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx
 #: src/project/ProjectDetailsButton.tsx
@@ -3495,8 +3492,8 @@ msgid "Documentation"
 msgstr ""
 
 #: src/proposals/details/CallDocumentsCard.tsx
-#: src/proposals/details/PublicCallDetailsBar.tsx
-#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/details/PublicCallDetails.tsx
+#: src/proposals/update/CallUpdateContainer.tsx
 #: src/proposals/update/documents/CallDocumentsSection.tsx
 msgid "Documents"
 msgstr ""
@@ -4143,7 +4140,6 @@ msgstr ""
 #: src/events/BaseEventsList.tsx
 #: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/offerings/expandable/OfferingEventsList.tsx
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/user/hooks/HooksList.tsx
 msgid "Events"
 msgstr ""
@@ -4656,7 +4652,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
-#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/update/CallUpdateContainer.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 msgid "General"
 msgstr ""
@@ -4677,7 +4673,6 @@ msgstr ""
 #: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingGettingStarted.tsx
 #: src/marketplace/resources/details/GettingStartedCard.tsx
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 msgid "Getting started"
 msgstr ""
@@ -5512,7 +5507,6 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/issues/list/IssuesList.tsx
 #: src/issues/routes.ts
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/navigation/IssuesLink.tsx
 #: src/navigation/header/QuickIssueDrawerToggle.tsx
 #: src/project/ProjectActions.tsx
@@ -5553,7 +5547,6 @@ msgstr ""
 msgid "Job title"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 msgid "Jobs"
@@ -5617,7 +5610,6 @@ msgstr ""
 msgid "LEXIS link creation request has been submitted."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
 #: src/marketplace/resources/lexis/LexisLinkCard.tsx
@@ -5781,6 +5773,10 @@ msgstr ""
 msgid "Loading more..."
 msgstr ""
 
+#: src/administration/providers/IdentityProvidersList.tsx
+msgid "Local identity provider"
+msgstr ""
+
 #: src/azure/AzureResourceSummary.tsx
 #: src/azure/sql/AzureSQLServerForm.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -5910,7 +5906,6 @@ msgstr ""
 msgid "Management offering"
 msgstr ""
 
-#: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/CallUpdateContainer.tsx
 msgid "Managers"
 msgstr ""
@@ -6794,6 +6789,10 @@ msgstr ""
 msgid "No providers"
 msgstr ""
 
+#: src/issues/create/TypeField.tsx
+msgid "No request types"
+msgstr ""
+
 #: src/navigation/header/project-selector/ProjectsList.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 msgid "No resource"
@@ -7216,8 +7215,8 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/dashboard/ProviderDashboard.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
-#: src/proposals/details/PublicCallDetailsBar.tsx
-#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/details/PublicCallDetails.tsx
+#: src/proposals/update/CallUpdateContainer.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Offerings"
 msgstr ""
@@ -7337,7 +7336,6 @@ msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
 #: src/proposals/round/RoundPageHeaderBody.tsx
-#: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "Open round ends"
 msgstr ""
 
@@ -7409,7 +7407,6 @@ msgstr ""
 msgid "Optional"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/options/ResourceOptionsCard.tsx
 msgid "Options"
@@ -7447,7 +7444,6 @@ msgstr ""
 msgid "Order has been submitted."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 msgid "Order history"
 msgstr ""
@@ -8821,7 +8817,7 @@ msgstr ""
 msgid "Proposal updated successfully"
 msgstr ""
 
-#: src/navigation/CallPublicMenu.tsx
+#: src/navigation/sidebar/CallPublicMenu.tsx
 #: src/proposals/proposal/CustomerProposalsList.tsx
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
@@ -9064,7 +9060,6 @@ msgstr ""
 msgid "Quota usage exceeds available limit."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/TenantMainComponent.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 msgid "Quotas"
@@ -9698,7 +9693,6 @@ msgstr ""
 msgid "Resource description"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/ResourceMetadataCard.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 msgid "Resource details"
@@ -10042,7 +10036,6 @@ msgstr ""
 
 #: src/proposals/round/RoundPageBar.tsx
 #: src/proposals/round/reviewers/RoundReviewersList.tsx
-#: src/proposals/update/CallUpdateBar.tsx
 #: src/proposals/update/CallUpdateContainer.tsx
 msgid "Reviewers"
 msgstr ""
@@ -10050,7 +10043,7 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/details/PublicOfferingReviews.tsx
-#: src/navigation/CallPublicMenu.tsx
+#: src/navigation/sidebar/CallPublicMenu.tsx
 #: src/proposals/review/CustomerReviewsList.tsx
 #: src/proposals/routes.ts
 #: src/proposals/update/rounds/CallRoundsList.tsx
@@ -10073,7 +10066,6 @@ msgstr ""
 msgid "Robot account type"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/robot-accounts/RobotAccountCard.tsx
 #: src/marketplace/routes.ts
@@ -10140,7 +10132,6 @@ msgstr ""
 
 #: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/update/roles/RolesSection.tsx
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/users/ResourceUsersList.tsx
 #: src/rancher/node/ClusterNodesList.tsx
@@ -10177,8 +10168,8 @@ msgstr ""
 msgid "Round strategy in active round"
 msgstr ""
 
-#: src/proposals/details/PublicCallDetailsBar.tsx
-#: src/proposals/update/CallUpdateBar.tsx
+#: src/proposals/details/PublicCallDetails.tsx
+#: src/proposals/update/CallUpdateContainer.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Rounds"
 msgstr ""
@@ -10506,7 +10497,6 @@ msgstr ""
 msgid "Security groups details"
 msgstr ""
 
-#: src/marketplace/resources/details/ActivityCard.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 msgid "See all"
 msgstr ""
@@ -12389,7 +12379,6 @@ msgid "There are no offerings."
 msgstr ""
 
 #: src/proposals/details/CallDetailsHeaderBody.tsx
-#: src/proposals/update/CallUpdateHeaderBody.tsx
 msgid "There are no open rounds. The call is closed."
 msgstr ""
 
@@ -12516,7 +12505,6 @@ msgstr ""
 msgid "Thumbnail"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/ResourceIssuesCard.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 msgid "Tickets"
@@ -14322,7 +14310,6 @@ msgstr ""
 
 #: src/dashboard/chart.ts
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
-#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/slurm/details/utils.ts
@@ -15465,6 +15452,7 @@ msgstr ""
 
 #: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
+#: src/proposals/details/CallOfferingsCard.tsx
 msgid "offerings"
 msgstr ""
 
