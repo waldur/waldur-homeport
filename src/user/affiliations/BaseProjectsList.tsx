@@ -2,7 +2,10 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectLink } from '@waldur/project/ProjectLink';
@@ -13,7 +16,6 @@ import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 import { ProjectHoverableRow } from './ProjectHoverableRow';
-import { RoleField } from './RoleField';
 
 const exportRow = (row) => [
   row.name,
@@ -49,10 +51,12 @@ export const BaseProjectsList: FunctionComponent<{
   const columns = [
     {
       title: translate('Name'),
+      orderField: 'name',
       render: ProjectLink,
     },
     {
       title: translate('Organization'),
+      orderField: 'customer_name',
       render: ({ row }) =>
         row.customer_uuid ? (
           <Link
@@ -65,15 +69,12 @@ export const BaseProjectsList: FunctionComponent<{
         ),
     },
     {
-      title: translate('Role'),
-      render: RoleField,
-    },
-    {
       title: translate('Resources'),
       render: ({ row }) => <>{row.resources_count || 0}</>,
     },
     {
       title: translate('End date'),
+      orderField: 'end_date',
       render: ({ row }) => (
         <>{row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE}</>
       ),
@@ -85,6 +86,20 @@ export const BaseProjectsList: FunctionComponent<{
       ),
     },
   ];
+
+  if (isFeatureVisible(ProjectFeatures.estimated_cost)) {
+    columns.push({
+      title: translate('Cost estimation'),
+      render: ({ row }) => (
+        <>
+          {defaultCurrency(
+            (row.billing_price_estimate && row.billing_price_estimate.total) ||
+              0,
+          )}
+        </>
+      ),
+    });
+  }
 
   return (
     <Table
