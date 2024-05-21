@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { ProgressBar } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -27,7 +28,7 @@ const CellDescription = ({
       <>
         {' '}
         <Tip id="quota" label={description}>
-          <i className="fa fa-question-circle" />
+          <Question />
         </Tip>
       </>
     )}

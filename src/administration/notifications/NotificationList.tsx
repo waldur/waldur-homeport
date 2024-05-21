@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { uniqueId } from 'lodash';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -71,7 +72,7 @@ export const NotificationList = () => {
                   className="ms-2"
                   id={uniqueId('descriptionTip')}
                 >
-                  <i className="fa fa-question-circle" />
+                  <Question />
                 </Tip>
               )}
             </>

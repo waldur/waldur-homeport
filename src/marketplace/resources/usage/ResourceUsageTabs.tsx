@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 
@@ -33,7 +34,7 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
                 id={`tab-${index}-tooltip`}
                 label={getBillingTypeLabel(component.billing_type)}
               >
-                <i className="fa fa-question-circle" />
+                <Question />
               </Tip>{' '}
               {component.name}
             </>

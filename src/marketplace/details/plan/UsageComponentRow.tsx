@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -47,7 +48,7 @@ export const UsageComponentRow: React.FC<UsageComponentRowProps> = (props) => {
           className="mx-1"
         >
           {' '}
-          <i className="fa fa-question-circle" />
+          <Question />
         </Tip>
         <span className="fw-normal fst-italic">
           (

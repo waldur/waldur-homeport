@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -53,7 +54,7 @@ export const TotalLimitComponentsList: FunctionComponent<
                 {component.name}
                 <Tip label={getTipLabel(component)} id="componentLimitTooltip">
                   {' '}
-                  <i className="fa fa-question-circle" />
+                  <Question />
                 </Tip>
               </span>
             </td>
