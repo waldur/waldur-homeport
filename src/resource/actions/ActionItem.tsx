@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash';
 import { FC, ReactNode, useContext } from 'react';
@@ -47,7 +48,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     >
       {props.tooltip && (
         <Tip label={props.tooltip} id={`action-reason-${uniqueId()}`}>
-          <i className="fa fa-question-circle" />
+          <Question />
         </Tip>
       )}
       {props.title}

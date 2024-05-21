@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { FormCheck, ListGroup, ListGroupItem } from 'react-bootstrap';
 
@@ -27,7 +28,7 @@ export const MultiSelectField: FunctionComponent<{ input; options }> = ({
                   label={option.help_text}
                   autoWidth={true}
                 >
-                  <i className="fa fa-question-circle" aria-hidden="true" />
+                  <Question />
                 </Tip>
               </div>
             )}

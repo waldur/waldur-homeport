@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { uniqueId } from 'lodash';
 import React, { FC, PropsWithChildren } from 'react';
 import { Card, FormCheck } from 'react-bootstrap';
@@ -67,7 +68,7 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
               id={uniqueId('stepCardTip')}
               className="ms-2"
             >
-              <i className="fa fa-question-circle fs-5" />
+              <Question size={17} />
             </Tip>
           )}
           {props.refetch && (

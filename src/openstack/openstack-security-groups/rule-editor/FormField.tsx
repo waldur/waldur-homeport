@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { WrappedFieldProps } from 'redux-form';
@@ -22,7 +23,7 @@ export const FormField: FC<WrappedFieldProps & { tooltip?: string }> = ({
         overlay={<Tooltip id={input.name}>{tooltip}</Tooltip>}
       >
         <span style={{ position: 'absolute', right: 20, top: 20 }}>
-          <i className="fa fa-question-circle" />
+          <Question />
         </span>
       </OverlayTrigger>
     ) : null}

@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { cloneDeep } from 'lodash';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
@@ -54,7 +55,7 @@ const OrganizationRolesField = ({ row }) => {
           label={formatRole(permission.role_name)}
           id="customer-role"
         >
-          {permission.scope_name} <i className="fa fa-question-circle" />
+          {permission.scope_name} <Question />
         </Tip>
         <br />
       </span>
@@ -79,7 +80,7 @@ const ProjectRolesField = ({ row }) => {
           })}
           id="project-role"
         >
-          {permission.scope_name} <i className="fa fa-question-circle" />
+          {permission.scope_name} <Question />
         </Tip>
         <br />
       </span>

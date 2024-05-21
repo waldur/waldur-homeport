@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { FormControl, InputGroup } from 'react-bootstrap';
 
@@ -44,7 +45,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
                 className="mx-1"
               >
                 {' '}
-                <i className="fa fa-question-circle" />
+                <Question />
               </Tip>
               <span className="fw-normal fst-italic">
                 (

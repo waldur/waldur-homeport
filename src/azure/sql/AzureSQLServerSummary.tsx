@@ -1,3 +1,5 @@
+import { Question } from '@phosphor-icons/react';
+
 import { AzureSQLServer } from '@waldur/azure/common/types';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
@@ -10,7 +12,7 @@ import { PureAzureResourceSummary } from '../AzureResourceSummary';
 const ValueWithTooltip = ({ value, tooltip }) => (
   <>
     <Tip id="compute-generation" label={tooltip}>
-      <i className="fa fa-question-circle" />
+      <Question />
     </Tip>{' '}
     {value}
   </>

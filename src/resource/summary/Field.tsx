@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
@@ -36,7 +37,7 @@ export const Field: FunctionComponent<FieldProps> = (props) =>
         {props.helpText && (
           <Tip label={props.helpText} id="fieldHelpText">
             {' '}
-            <i className="fa fa-question-circle" />
+            <Question />
           </Tip>
         )}
         {props.hasCopy && (

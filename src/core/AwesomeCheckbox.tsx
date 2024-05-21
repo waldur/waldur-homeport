@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import React, { FunctionComponent } from 'react';
 
 import { Tip } from './Tooltip';
@@ -28,7 +29,7 @@ export const AwesomeCheckbox: FunctionComponent<AwesomeCheckboxProps> = (
         {props.tooltip && (
           <>
             <Tip label={props.tooltip} id="tooltip">
-              <i className="fa fa-question-circle" />
+              <Question />
             </Tip>{' '}
           </>
         )}

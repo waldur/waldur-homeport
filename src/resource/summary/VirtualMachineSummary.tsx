@@ -1,3 +1,5 @@
+import { Question } from '@phosphor-icons/react';
+
 import { formatRelative } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -22,7 +24,7 @@ export const ResourceSummaryField = ({ resource }) => (
         })}
       >
         {' '}
-        <i className="fa fa-question-circle" />
+        <Question />
       </Tip>
     )}
   </>

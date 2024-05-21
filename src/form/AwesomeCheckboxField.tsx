@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, ReactNode } from 'react';
 import { Form } from 'react-bootstrap';
@@ -28,7 +29,7 @@ export const AwesomeCheckboxField: FunctionComponent<
     <label className="form-check-label">
       {tooltip && (
         <Tip id="form-field-tooltip" label={tooltip}>
-          <i className="fa fa-question-circle" />{' '}
+          <Question />{' '}
         </Tip>
       )}
       <span className="fw-bold">{label}</span>

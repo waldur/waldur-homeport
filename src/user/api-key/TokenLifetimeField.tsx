@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -23,7 +24,7 @@ export const TokenLifetimeTooltip = (
       'Lifetime will be updated and reset upon saving the form.',
     )}
   >
-    {translate('Token lifetime')} <i className="fa fa-question-circle" />
+    {translate('Token lifetime')} <Question />
   </Tip>
 );
 

@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -22,7 +23,7 @@ const formatErrorField = (props: ResourceSummaryProps) => {
   return (
     <>
       <Tip id="error-traceback" label={props.resource.error_traceback}>
-        <i className="fa fa-question-circle" />
+        <Question />
       </Tip>{' '}
       {props.resource.error_message}
     </>

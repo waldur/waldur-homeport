@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -32,7 +33,7 @@ export const ComponentItem: React.FC<ComponentItemProps> = (props) => {
           {props.offeringComponent.name}
           <Tip label={tipLabel} id="componentTooltip">
             {' '}
-            <i className="fa fa-question-circle" />
+            <Question />
           </Tip>
         </span>
       </td>
