@@ -2,7 +2,7 @@ import { VStepperFormStep } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 
 import { FormEvaluateProjectDetailsStep } from './FormEvaluateProjectDetailsStep';
-import { FormSummaryStep } from './FormSummaryStep';
+import FormSummaryStep from './FormSummaryStep';
 
 export const createProposalSteps: VStepperFormStep[] = [
   {

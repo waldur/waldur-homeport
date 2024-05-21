@@ -1,5 +1,7 @@
+import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import ReactStars from 'react-rating-stars-component';
-import { Field } from 'redux-form';
+import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
 import { FormGroup, TextField } from '@waldur/form';
@@ -8,8 +10,33 @@ import {
   VStepperFormStepProps,
 } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
+import { updateProposalReview } from '@waldur/proposals/api';
+import { REVIEW_SUMMARY_FORM_ID } from '@waldur/proposals/constants';
 
-export const FormSummaryStep = (props: VStepperFormStepProps) => {
+interface FormData {
+  summary_score: number;
+  summary_public_comment: string;
+  summary_private_comment: string;
+}
+
+type FormSummaryStepProps = VStepperFormStepProps &
+  InjectedFormProps<FormData, VStepperFormStepProps>;
+
+const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
+  const { handleSubmit, params } = props;
+
+  useEffect(() => {
+    props.initialize({
+      summary_score: params.reviews[0].summary_score,
+      summary_public_comment: params.reviews[0].summary_public_comment,
+      summary_private_comment: params.reviews[0].summary_private_comment,
+    });
+  }, [params]);
+
+  const updateReview = (formData: FormData) => {
+    updateProposalReview(formData, params.reviews[0].uuid);
+  };
+
   return (
     <VStepperFormStepCard
       title={translate('Summary')}
@@ -26,7 +53,7 @@ export const FormSummaryStep = (props: VStepperFormStepProps) => {
             edit={true}
             isHalf={false}
             activeColor={RATING_STAR_ACTIVE_COLOR}
-            value={fieldProps.input.value}
+            value={fieldProps.input.value || 0}
             onChange={(value) => fieldProps.input.onChange(value)}
           />
         )}
@@ -50,6 +77,14 @@ export const FormSummaryStep = (props: VStepperFormStepProps) => {
       >
         <TextField />
       </Field>
+      <Button onClick={handleSubmit(updateReview)}>
+        {translate('Save summary')}
+      </Button>
     </VStepperFormStepCard>
   );
 };
+
+export default reduxForm<FormData, VStepperFormStepProps>({
+  form: REVIEW_SUMMARY_FORM_ID,
+  enableReinitialize: false,
+})(FormSummaryStep);
