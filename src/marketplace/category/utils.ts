@@ -38,7 +38,7 @@ export const getCategoryItems = (categories: Category[]) => {
     }));
   return [
     {
-      title: translate('Categories'),
+      title: translate('Offerings'),
       children,
     },
   ];
