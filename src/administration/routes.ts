@@ -69,11 +69,6 @@ const NotificationList = lazyComponent(
   'NotificationList',
 );
 
-const SupportCustomerList = lazyComponent(
-  () => import('./organizations/SupportCustomerList'),
-  'SupportCustomerList',
-);
-
 const OrganizationGroupsList = lazyComponent(
   () => import('./organizations/OrganizationGroupsList'),
   'OrganizationGroupsList',
@@ -249,15 +244,6 @@ export const states: StateDeclaration[] = [
     abstract: true,
     component: UIView,
     url: '',
-    data: {
-      breadcrumb: () => translate('Organizations'),
-    },
-  },
-  {
-    name: 'admin-organization-list',
-    url: 'organizations/',
-    parent: 'admin-organizations',
-    component: SupportCustomerList,
     data: {
       breadcrumb: () => translate('Organizations'),
     },

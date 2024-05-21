@@ -71,7 +71,6 @@ msgid "API token"
 msgstr ""
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/list/OrganizationDetails.tsx
@@ -2311,13 +2310,11 @@ msgstr ""
 msgid "Contact details"
 msgstr ""
 
-#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact email"
 msgstr ""
 
-#: src/administration/organizations/SupportCustomerList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 msgid "Contact phone"
 msgstr ""
@@ -6260,7 +6257,6 @@ msgstr ""
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
 #: src/administration/organizations/OrganizationGroupTypesList.tsx
 #: src/administration/organizations/OrganizationGroupsList.tsx
-#: src/administration/organizations/SupportCustomerList.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/administration/roles/RolesList.tsx
 #: src/azure/vm/AzureVirtualMachineForm.tsx
@@ -7459,7 +7455,6 @@ msgid "Organisations"
 msgstr ""
 
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerList.tsx
 #: src/customer/list/CustomerList.tsx
 #: src/customer/routes.ts
 #: src/events/ExpandableEventDetailsTable.tsx
@@ -7621,7 +7616,6 @@ msgstr ""
 
 #: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/organizations/SupportCustomerList.tsx
 #: src/administration/routes.ts
 #: src/broadcasts/BroadcastExpandableRow.tsx
 #: src/broadcasts/BroadcastForm.tsx
@@ -7632,9 +7626,9 @@ msgstr ""
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/sidebar/OrganizationsListMenu.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
-#: src/user/routes.ts
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Organizations"
 msgstr ""

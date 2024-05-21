@@ -17,3 +17,5 @@ export const USER_PERMISSION_REQUESTS_FILTER_FORM_ID =
 export const USER_RESOURCES_FILTER_FORM_ID = 'UserResourcesFilter';
 
 export const USER_REVIEWS_FILTER_FORM_ID = 'UserReviewsFilter';
+
+export const CUSTOMERS_FILTER_FORM_ID = 'CustomersFilter';

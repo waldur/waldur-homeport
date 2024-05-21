@@ -247,7 +247,7 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
               <Col className="d-flex flex-column justify-content-center" xs={5}>
                 <Link
                   className="btn btn-sm btn-link text-white text-decoration-underline my-3"
-                  state="profile-organizations"
+                  state="profile.organizations"
                   onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
                   {translate('Manage organizations')}

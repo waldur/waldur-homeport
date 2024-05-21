@@ -245,12 +245,11 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'profile-organizations',
+    name: 'profile.organizations',
     url: 'organizations/',
     component: OrganizationsList,
-    parent: 'profile-affiliations',
     data: {
-      breadcrumb: () => translate('Organizations'),
+      hideHeaderMenu: true,
     },
   },
   {

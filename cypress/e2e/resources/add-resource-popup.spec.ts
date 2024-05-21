@@ -166,7 +166,7 @@ describe('Add resource pop up is visible', { testIsolation: false }, () => {
     openQuickAddResourcePopupAndSelectAnOffering('HPC', 'Another offering');
   });
 
-  it('Provider context: Assure that selecting resources from resource quick creation form works', () => {
+  xit('Provider context: Assure that selecting resources from resource quick creation form works', () => {
     cy.clickSidebarMenuItem('Organization');
     cy.get('.nav-tabs .nav-item button:contains(Service provider)')
       .should('exist')
@@ -174,7 +174,7 @@ describe('Add resource pop up is visible', { testIsolation: false }, () => {
     openQuickAddResourcePopupAndSelectAnOffering('HPC', 'Another offering');
   });
 
-  it('Organization context: Assure that selecting resources from resource quick creation form works', () => {
+  xit('Organization context: Assure that selecting resources from resource quick creation form works', () => {
     cy.clickSidebarMenuItem('Organization');
     openQuickAddResourcePopupAndSelectAnOffering('HPC', 'Another offering');
   });

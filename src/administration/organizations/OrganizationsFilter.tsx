@@ -6,11 +6,11 @@ import {
   AccountingRunningField,
   getOptions as AccountingRunningFieldOptions,
 } from '@waldur/customer/list/AccountingRunningField';
-import { SUPPORT_CUSTOMERS_FORM_ID } from '@waldur/customer/list/constants';
 import { SelectOrganizationGroupFieldPure } from '@waldur/customer/list/SelectOrganizationGroupField';
 import { ServiceProviderFilter } from '@waldur/customer/list/ServiceProviderFilter';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { CUSTOMERS_FILTER_FORM_ID } from '@waldur/user/constants';
 
 const PureSupportCustomerFilter: FunctionComponent = () => (
   <>
@@ -46,7 +46,7 @@ const PureSupportCustomerFilter: FunctionComponent = () => (
 );
 
 export const OrganizationsFilter = reduxForm<{}, any>({
-  form: SUPPORT_CUSTOMERS_FORM_ID,
+  form: CUSTOMERS_FILTER_FORM_ID,
   initialValues: {
     accounting_is_running: AccountingRunningFieldOptions()[0],
   },
