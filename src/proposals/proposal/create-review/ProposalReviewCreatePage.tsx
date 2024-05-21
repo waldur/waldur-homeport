@@ -164,7 +164,7 @@ export const ProposalReviewCreatePage = (props) => {
                 change={props.change}
                 params={{
                   proposal: data.proposal,
-                  reviews: reviewObject ? [reviewObject] : null,
+                  reviews: data.review ? [data.review] : null,
                   onAddCommentClick: openCommentFormDialog,
                 }}
               />
