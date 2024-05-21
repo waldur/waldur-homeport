@@ -4,10 +4,6 @@
     "description": "Organization workspace",
     "items": [
       {
-        "key": "category_resources_list",
-        "description": "Render component usage charts in organization dashboard."
-      },
-      {
         "key": "project_requests",
         "description": "Render list of project creation requests in organization dashboard."
       },

@@ -462,7 +462,6 @@ msgstr ""
 msgid "Add project"
 msgstr ""
 
-#: src/dashboard/marketplace.ts
 #: src/marketplace/details/DetailsPage.tsx
 #: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
@@ -9248,7 +9247,6 @@ msgstr ""
 
 #: src/ErrorMessage.tsx
 #: src/core/LoadingErred.tsx
-#: src/dashboard/CategoryResourcesList.tsx
 msgid "Reload"
 msgstr ""
 
@@ -12227,10 +12225,6 @@ msgstr ""
 msgid "There are no category groups yet."
 msgstr ""
 
-#: src/dashboard/CategoryResources.tsx
-msgid "There are no charts yet."
-msgstr ""
-
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-checklist/UserChecklist.tsx
 msgid "There are no checklist yet."
@@ -13119,10 +13113,6 @@ msgstr ""
 
 #: src/marketplace/category/filters/FilterDropdownContent.tsx
 msgid "Unable to load category sections."
-msgstr ""
-
-#: src/dashboard/CategoryResourcesList.tsx
-msgid "Unable to load charts."
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx

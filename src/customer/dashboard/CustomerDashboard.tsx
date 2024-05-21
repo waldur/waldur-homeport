@@ -1,9 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CategoryResourcesList } from '@waldur/dashboard/CategoryResourcesList';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
 import { ProjectsList } from '@waldur/project/ProjectsList';
 import {
@@ -11,7 +8,6 @@ import {
   getCustomer,
   checkIsServiceManager,
 } from '@waldur/workspace/selectors';
-import { WorkspaceType } from '@waldur/workspace/types';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerProfile } from './CustomerProfile';
@@ -37,12 +33,6 @@ export const CustomerDashboard: FunctionComponent = () => {
           <div className="mb-6">
             <ProjectsList />
           </div>
-          {isFeatureVisible(CustomerFeatures.category_resources_list) && (
-            <CategoryResourcesList
-              scopeType={WorkspaceType.ORGANIZATION}
-              scope={customer}
-            />
-          )}
         </>
       )}
     </>

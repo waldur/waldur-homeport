@@ -2,7 +2,6 @@
   "WALDUR_DISABLED_EXTENSIONS": null,
   "FEATURES": {
     "customer": {
-      "category_resources_list": false,
       "project_requests": false,
       "resource_requests": false,
       "show_subnets": false,
