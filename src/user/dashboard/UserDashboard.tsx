@@ -10,7 +10,6 @@ import { UserDetails } from '@waldur/workspace/types';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
-import { UserDashboardChart } from './UserDashboardChart';
 import { UserProfile } from './UserProfile';
 import { UserWelcome } from './UserWelcome';
 
@@ -27,7 +26,6 @@ export const UserDashboard: FC = () => {
     <>
       <UserWelcome user={user} />
       <UserProfile user={user} />
-      <UserDashboardChart user={user} hasChecklists={asyncState.value > 0} />
       <UserAffiliationsList />
     </>
   );
