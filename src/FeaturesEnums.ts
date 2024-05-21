@@ -2,7 +2,6 @@
 // Do not edit it manually. All manual changes would be overridden.
 
 export enum CustomerFeatures {
-  category_resources_list = 'customer.category_resources_list',
   payments_for_staff_only = 'customer.payments_for_staff_only',
   show_domain = 'customer.show_domain',
 }

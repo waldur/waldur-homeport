@@ -18,11 +18,6 @@ export interface Scope {
   payment_profiles?: PaymentProfile[];
 }
 
-export interface Action {
-  title: string;
-  onClick(): void;
-}
-
 export interface InvoiceSummary {
   year: number;
   month: number;
