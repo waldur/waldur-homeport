@@ -73,7 +73,7 @@ export const DrawerRoot: FunctionComponent = () => {
               className="btn btn-sm btn-icon btn-active-light-primary me-n5"
               onClick={onHide}
             >
-              <X />
+              <X size={18} />
             </button>
           </div>
         </div>
