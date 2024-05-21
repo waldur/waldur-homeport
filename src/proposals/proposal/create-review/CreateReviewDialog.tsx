@@ -56,14 +56,11 @@ export const CreateReviewDialog = reduxForm<
         proposal: proposalUrl,
       });
       return createProposalReview(values)
-        .then((res) => {
+        .then(() => {
           dispatch(
             showSuccess(translate('Proposal review created successfully')),
           );
-          const review = res.data;
-          router.stateService.go('proposal-review', {
-            review_uuid: review.uuid,
-          });
+          router.stateService.go('call-management.review-list');
         })
         .catch((error) => {
           dispatch(showErrorResponse(error, translate('Something went wrong')));
