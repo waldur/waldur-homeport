@@ -102,18 +102,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'profile-affiliations',
-    abstract: true,
-    parent: 'profile',
-    component: UIView,
-    url: '',
-    data: {
-      breadcrumb: () => translate('Affiliations'),
-      priority: 105,
-    },
-  },
-
-  {
     name: 'profile.details',
     url: '',
     component: UserDashboard,
@@ -227,12 +215,11 @@ export const states: StateDeclaration[] = [
     component: EmptyProjectPlaceholder,
   },
   {
-    name: 'profile-projects',
+    name: 'profile.projects',
     url: 'projects/',
     component: ProjectsList,
-    parent: 'profile-affiliations',
     data: {
-      breadcrumb: () => translate('Projects'),
+      hideHeaderMenu: true,
     },
   },
   {

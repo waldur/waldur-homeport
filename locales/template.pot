@@ -587,7 +587,6 @@ msgid "Affiliation"
 msgstr ""
 
 #: src/marketplace/service-providers/ProviderUsersList.tsx
-#: src/user/routes.ts
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Affiliations"
@@ -1838,7 +1837,6 @@ msgstr ""
 #: src/administration/routes.ts
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
 #: src/marketplace/category/list/AllCategoriesPage.tsx
-#: src/marketplace/category/utils.ts
 msgid "Categories"
 msgstr ""
 
@@ -2378,7 +2376,7 @@ msgstr ""
 msgid "Cost"
 msgstr ""
 
-#: src/user/affiliations/ProjectExpandableRow.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 msgid "Cost estimation"
 msgstr ""
 
@@ -2674,7 +2672,6 @@ msgstr ""
 #: src/openstack/openstack-snapshot/TenantSnapshotsList.tsx
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
-#: src/project/SupportProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/utils.ts
@@ -3257,7 +3254,6 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
-#: src/project/SupportProjectsList.tsx
 #: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDescriptionCard.tsx
@@ -3930,7 +3926,6 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
-#: src/project/SupportProjectsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 msgid "End date"
 msgstr ""
@@ -4080,7 +4075,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/project/ProjectsList.tsx
-#: src/project/SupportProjectsList.tsx
 msgid "Estimated cost"
 msgstr ""
 
@@ -6328,7 +6322,6 @@ msgstr ""
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
-#: src/project/SupportProjectsList.tsx
 #: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
@@ -7174,6 +7167,7 @@ msgstr ""
 #: src/broadcasts/BroadcastExpandableRow.tsx
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
+#: src/marketplace/category/utils.ts
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
@@ -7480,7 +7474,6 @@ msgstr ""
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
 #: src/permissions/constants.tsx
-#: src/project/SupportProjectsList.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
@@ -7527,7 +7520,6 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
-#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Organization group"
 msgstr ""
 
@@ -8699,17 +8691,16 @@ msgstr ""
 
 #: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
-#: src/administration/routes.ts
 #: src/customer/routes.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/sidebar/ProjectsListMenu.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
-#: src/user/routes.ts
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Projects"
 msgstr ""
@@ -10048,8 +10039,6 @@ msgstr ""
 #: src/proposals/team/UsersList.tsx
 #: src/rancher/cluster/create/NodeRoleGroup.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/affiliations/BaseOrganizationsList.tsx
-#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/affiliations/PermissionDetails.tsx
 #: src/user/support/UserFilter.tsx
 msgid "Role"
@@ -10288,6 +10277,10 @@ msgstr ""
 
 #: src/table/TableFilterActions.tsx
 msgid "Save filter"
+msgstr ""
+
+#: src/proposals/proposal/create-review/steps/FormSummaryStep.tsx
+msgid "Save summary"
 msgstr ""
 
 #: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
@@ -13306,10 +13299,6 @@ msgstr ""
 msgid "Unable to load statistics data"
 msgstr ""
 
-#: src/user/dashboard/UserDashboardChart.tsx
-msgid "Unable to load user monthly activity data."
-msgstr ""
-
 #: src/auth/AuthInit.tsx
 #: src/user/UserPopover.tsx
 msgid "Unable to load user."
@@ -15392,7 +15381,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 #: src/project/ProjectsList.tsx
-#: src/project/SupportProjectsList.tsx
 #: src/rancher/ClusterProjectList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 msgid "projects"

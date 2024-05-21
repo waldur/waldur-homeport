@@ -13,7 +13,6 @@ import { translate } from '@waldur/i18n';
 import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
-import { getCustomer as getCustomerSelector } from '@waldur/workspace/selectors';
 
 import { CUSTOMERS_FILTER_FORM_ID } from '../constants';
 
@@ -50,8 +49,6 @@ export const BaseOrganizationsList: FunctionComponent<{
     exportRow,
     exportFields,
   });
-
-  const currentOrganization = useSelector(getCustomerSelector);
 
   const columns = [
     {
@@ -94,9 +91,6 @@ export const BaseOrganizationsList: FunctionComponent<{
       hasQuery={true}
       showPageSizeSelector={true}
       enableExport={true}
-      rowClass={({ row }) =>
-        currentOrganization?.uuid === row.uuid ? 'bg-gray-200' : ''
-      }
       hoverableRow={({ row }) => (
         <>
           <OrganizationHoverableRow row={row} />

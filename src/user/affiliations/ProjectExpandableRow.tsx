@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
@@ -59,24 +58,18 @@ export const ProjectExpandableRow: React.FC<{
           label={translate('Backend ID')}
           value={value.project.backend_id}
         />
-        {isFeatureVisible(ProjectFeatures.show_industry_flag) && (
+        {isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) && (
           <Field
             label={translate('OECD FoS code')}
             value={row.oecd_fos_2007_label}
           />
         )}
-        <Field
-          label={translate('Industry project')}
-          value={value.project.is_industry ? translate('Yes') : translate('No')}
-        />
-        {isFeatureVisible(ProjectFeatures.estimated_cost) && (
+        {isFeatureVisible(ProjectFeatures.show_industry_flag) && (
           <Field
-            label={translate('Cost estimation')}
-            value={defaultCurrency(
-              (value.project.billing_price_estimate &&
-                value.project.billing_price_estimate.total) ||
-                0,
-            )}
+            label={translate('Industry project')}
+            value={
+              value.project.is_industry ? translate('Yes') : translate('No')
+            }
           />
         )}
       </Container>

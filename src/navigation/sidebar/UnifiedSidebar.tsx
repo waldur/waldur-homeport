@@ -12,6 +12,7 @@ import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
 import { OrganizationsListMenu } from './OrganizationsListMenu';
+import { ProjectsListMenu } from './ProjectsListMenu';
 import { ReportingMenu } from './ReportingMenu';
 import { ResourcesMenu } from './ResourcesMenu';
 import { Sidebar } from './Sidebar';
@@ -63,6 +64,7 @@ export const UnifiedSidebar = () => {
         <MarketplaceTrigger />
       ) : null}
       <OrganizationsListMenu />
+      <ProjectsListMenu />
       <ManagementMenu />
       <ResourcesMenu />
       <ReportingMenu />
