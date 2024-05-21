@@ -137,7 +137,7 @@ export const ProjectSelectorDropdown: FunctionComponent = () => {
           <Col xs={7}>
             <Link
               className="btn btn-lg text-right pr-2 btn-link text-dark w-100 text-decoration-underline"
-              state="profile-organizations"
+              state="profile.organizations"
               onClick={() => MenuComponent.hideDropdowns(undefined)}
             >
               {translate('Change organization')}
