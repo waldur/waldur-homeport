@@ -1,7 +1,6 @@
 import { GearSix } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button, Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
-import SVG from 'react-inlinesvg';
 
 import CheckboxIcon from './Checkbox.svg';
 import CheckboxEmptyIcon from './CheckboxEmpty.svg';
@@ -21,11 +20,13 @@ export const TableColumnButton: FC<TableProps> = (props) => {
                 onClick={() => props.toggleColumn(column)}
                 key={index}
               >
-                {props.concealedColumns[column.key] ? (
-                  <SVG src={CheckboxEmptyIcon} className="me-3" />
-                ) : (
-                  <SVG src={CheckboxIcon} className="me-3" />
-                )}
+                <span className="svg-icon svg-icon-2 svg-icon-white me-3">
+                  {props.concealedColumns[column.key] ? (
+                    <CheckboxEmptyIcon />
+                  ) : (
+                    <CheckboxIcon />
+                  )}
+                </span>
                 {column.title}
               </Dropdown.Item>
             ))}
@@ -34,7 +35,7 @@ export const TableColumnButton: FC<TableProps> = (props) => {
       rootClose
     >
       <Button variant="light" className="btn-icon">
-        <span className="svg-icon svg-icon-2 svg-icon-dark">
+        <span className="svg-icon svg-icon-2">
           <GearSix />
         </span>
       </Button>

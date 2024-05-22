@@ -13,7 +13,7 @@ interface OwnProps {
 export const CallRoundsTablePlaceholder = (props: OwnProps) => {
   return (
     <ImageTablePlaceholder
-      illustration={TwoDocumentsIllustration}
+      illustration={<TwoDocumentsIllustration />}
       title={translate('Nothing to see here')}
       description={translate('You can set the first round for this call.')}
       action={<RoundCreateButton {...props} />}

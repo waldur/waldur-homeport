@@ -6,16 +6,17 @@ import KeycloakLogo from './KeycloakLogo.svg';
 import Saml2Logo from './Saml2Logo.svg';
 import TaraLogo from './TaraLogo.svg';
 
+const LogoMap = {
+  [EDUTEAMS_IDP]: (props) => (
+    <img src={EduteamsLogo} alt="eduteams" {...props} />
+  ),
+  [TARA_IDP]: TaraLogo,
+  [KEYCLOAK_IDP]: KeycloakLogo,
+  [SAML2_IDP]: Saml2Logo,
+  waldur: WaldurLogo,
+};
+
 export const IdentityProviderLogo = ({ name }) => {
-  if (name === EDUTEAMS_IDP) {
-    return <img src={EduteamsLogo} style={{ width: '100%' }} alt={name} />;
-  } else if (name === TARA_IDP) {
-    return <img src={TaraLogo} style={{ width: '100%' }} alt={name} />;
-  } else if (name === KEYCLOAK_IDP) {
-    return <img src={KeycloakLogo} style={{ width: '100%' }} alt={name} />;
-  } else if (name === SAML2_IDP) {
-    return <img src={Saml2Logo} style={{ width: '100%' }} alt={name} />;
-  } else {
-    return <img src={WaldurLogo} style={{ width: '100%' }} alt={name} />;
-  }
+  const Logo = LogoMap[name] || LogoMap.waldur;
+  return <Logo style={{ width: '100%' }} />;
 };

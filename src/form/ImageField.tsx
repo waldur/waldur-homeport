@@ -4,7 +4,7 @@ import { FunctionComponent, useCallback, useEffect, useRef } from 'react';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import avatarBlank from '@waldur/images/avatar-blank.svg';
+import AvatarBlank from '@waldur/images/avatar-blank.svg';
 
 import { FormField } from './types';
 
@@ -17,9 +17,15 @@ interface ImageFieldProps extends FormField {
   initialValue?: ImageType;
 }
 
+const style = {
+  height: 'auto',
+  width: '100%',
+  maxHeight: '100%',
+  maxWidth: '100%',
+};
+
 const previewImage = (imageFile: ImageType, element: HTMLImageElement) => {
   if (!imageFile) {
-    element.src = avatarBlank;
     return;
   }
   if (typeof imageFile === 'string') {
@@ -75,16 +81,11 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
         data-kt-image-input="true"
       >
         <div className="w-100px h-100px d-flex align-items-center justify-content-center">
-          <img
-            style={{
-              height: 'auto',
-              width: '100%',
-              maxHeight: '100%',
-              maxWidth: '100%',
-            }}
-            ref={previewRef}
-            alt="preview"
-          />
+          {!input.value ? (
+            <AvatarBlank style={style} />
+          ) : (
+            <img style={style} ref={previewRef} alt="preview" />
+          )}
         </div>
 
         {/* Pick image */}

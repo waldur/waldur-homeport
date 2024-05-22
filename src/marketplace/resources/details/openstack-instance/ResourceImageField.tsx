@@ -41,7 +41,7 @@ export const ResourceImageField = ({ scope }) => {
   } else {
     return (
       <div className={'vm-image-field' + (info.image ? ' has-icon' : '')}>
-        {info.image && <img src={info.image} alt="resource" />}
+        {info.image && <info.image />}
         <span>
           {info.label} {info.version}
         </span>

@@ -170,7 +170,31 @@ module.exports = {
         exclude: /\.module\.css$/,
       },
       {
-        test: /\.(eot|svg|otf|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?/,
+        test: /\.svg$/i,
+        issuer: /\.tsx?$/,
+        use: {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [
+                {
+                  name: 'preset-default',
+                  params: {
+                    overrides: {
+                      // viewBox is required to resize SVGs with CSS.
+                      // @see https://github.com/svg/svgo/issues/1128
+                      removeViewBox: false,
+                    },
+                  },
+                },
+                'removeDimensions',
+              ],
+            },
+          },
+        },
+      },
+      {
+        test: /\.(eot|otf|ttf|woff|woff2)(\?v=\d+\.\d+\.\d+)?/,
         type: 'asset/resource',
         generator: {
           filename: 'fonts/[name][ext]?[hash]',

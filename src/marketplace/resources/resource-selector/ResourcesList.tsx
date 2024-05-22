@@ -5,9 +5,8 @@ import { useState, useCallback, FunctionComponent } from 'react';
 import { ListGroup, ListGroupItem, Stack } from 'react-bootstrap';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
-import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
-import iconEmpty from '@waldur/navigation/header/file-search.svg';
+import IconEmpty from '@waldur/navigation/header/file-search.svg';
 
 import { Resource } from '../types';
 
@@ -81,7 +80,9 @@ export const ResourcesList: FunctionComponent<{
         })}
       >
         <div className="pt-10 pb-10">
-          <InlineSVG path={iconEmpty} className="svg-icon-4x opacity-50" />
+          <span className="svg-icon svg-icon-4x opacity-50">
+            <IconEmpty className="mh-50px" />
+          </span>
         </div>
 
         <div className="pb-15 fw-bold">

@@ -15,15 +15,25 @@ interface OfferingLogoProps
 export const OfferingLogo: FC<OfferingLogoProps> = ({
   className = 'marketplace-offering-logo',
   ...props
-}) => (
-  <img
-    src={props.src || DefaultLogo}
-    alt="offering logo"
-    className={
-      props.size === 'small' ? 'marketplace-offering-logo--small' : className
-    }
-    style={props.style}
-    onClick={props.onClick}
-    aria-hidden="true"
-  />
-);
+}) =>
+  props.src ? (
+    <img
+      src={props.src}
+      alt="offering logo"
+      className={
+        props.size === 'small' ? 'marketplace-offering-logo--small' : className
+      }
+      style={props.style}
+      onClick={props.onClick}
+      aria-hidden="true"
+    />
+  ) : (
+    <DefaultLogo
+      className={
+        props.size === 'small' ? 'marketplace-offering-logo--small' : className
+      }
+      style={props.style}
+      onClick={props.onClick}
+      aria-hidden="true"
+    />
+  );

@@ -13,7 +13,6 @@ import { useAsync } from 'react-use';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
 import { getStates as getResourceStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
@@ -126,13 +125,14 @@ const WidgetItem: FC<{ item: ProviderWidget }> = ({ item }) => (
   >
     <Card.Body className="py-10 px-6">
       {item.icon && (
-        <InlineSVG
-          path={item.icon}
+        <span
           className={
-            'svg-icon-2tx ' +
+            'svg-icon svg-icon-2tx ' +
             (item.active ? 'svg-icon-success' : 'svg-icon-gray-300')
           }
-        />
+        >
+          <item.icon className="mh-50px" />
+        </span>
       )}
       {item.iconNode && (
         <span

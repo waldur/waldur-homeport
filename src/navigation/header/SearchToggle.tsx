@@ -9,10 +9,9 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { get } from '@waldur/core/api';
-import { InlineSVG } from '@waldur/core/svg/InlineSVG';
 import { translate } from '@waldur/i18n';
 
-import iconEmpty from './file-search.svg';
+import IconEmpty from './file-search.svg';
 import { SearchFilters } from './SearchFilters';
 
 const useSearch = () => {
@@ -184,7 +183,9 @@ const SearchPopover = () => {
             })}
           >
             <div className="pt-10 pb-10">
-              <InlineSVG path={iconEmpty} className="svg-icon-4x opacity-50" />
+              <span className="svg-icon svg-icon-4x opacity-50">
+                <IconEmpty className="mh-50px" />
+              </span>
             </div>
 
             <div className="pb-15 fw-bold">

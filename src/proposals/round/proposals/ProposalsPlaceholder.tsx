@@ -5,7 +5,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 export const ProposalsPlaceholder = () => {
   return (
     <ImageTablePlaceholder
-      illustration={TwoDocumentsIllustration}
+      illustration={<TwoDocumentsIllustration />}
       title={translate('Nothing to see here')}
       description={translate('Nobody has submitted proposals yet.')}
     />
