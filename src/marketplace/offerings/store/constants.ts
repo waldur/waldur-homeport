@@ -9,7 +9,6 @@ export const PAUSED = 'Paused';
 
 export const ARCHIVED = 'Archived';
 
-export const OFFERING_TABLE_NAME = 'marketplace-offerings';
 export const PUBLIC_OFFERINGS_FILTER_FORM_ID = 'OfferingsFilter';
 
 export const IMAGES_TABLE_NAME = 'marketplace-offering-images';

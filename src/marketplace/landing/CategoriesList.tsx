@@ -1,25 +1,30 @@
-import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { FC, useState } from 'react';
+import { Button, Col, Row } from 'react-bootstrap';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
-import { CategoryCard } from './CategoryCard';
-import { CategoryCardAll } from './CategoryCardAll';
-import { CategoriesQueryResult } from './hooks';
+import { useCategories } from '../category/useCategories';
+import { CategoryGroupLink } from '../links/CategoryGroupLink';
+import { CategoryLink } from '../links/CategoryLink';
 
-export const CategoriesList: FC<CategoriesQueryResult> = (props) => {
-  if (props.isLoading) {
+import { CategoryCard } from './CategoryCard';
+
+export const CategoriesList: FC = () => {
+  const categories = useCategories();
+  const [showAll, setShowAll] = useState(false);
+
+  if (categories.isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (props.isError) {
+  if (categories.isError) {
     return (
       <h3 className="text-center">{translate('Unable to load categories.')}</h3>
     );
   }
 
-  if (!props.data) {
+  if (!categories.data) {
     return (
       <h3 className="text-center">
         {translate('There are no categories in marketplace yet.')}
@@ -27,16 +32,31 @@ export const CategoriesList: FC<CategoriesQueryResult> = (props) => {
     );
   }
 
+  const items = showAll ? categories.data : categories.data.slice(0, 5);
+
   return (
-    <Row className="justify-content-center">
-      {props.data.slice(0, 5).map((category, index) => (
-        <Col key={index} xxl={2} xl={3} lg={4} sm={6}>
-          <CategoryCard category={category} />
-        </Col>
-      ))}
-      <Col xxl={2} xl={3} lg={4} sm={6}>
-        <CategoryCardAll />
-      </Col>
-    </Row>
+    <>
+      <Row className="justify-content-center">
+        {items.map((item, index) => (
+          <Col key={index} xxl={2} xl={3} lg={4} sm={6}>
+            <CategoryCard
+              item={item}
+              as={item.categories ? CategoryGroupLink : CategoryLink}
+            />
+          </Col>
+        ))}
+      </Row>
+      <div className="d-flex flex-column justify-content-center flex-grow-1">
+        <Button
+          variant="link"
+          size="sm"
+          className="text-decoration-underline my-1"
+          role="button"
+          onClick={() => setShowAll((value) => !value)}
+        >
+          {showAll ? translate('See less') : translate('See more')}
+        </Button>
+      </div>
+    </>
   );
 };

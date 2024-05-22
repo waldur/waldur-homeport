@@ -26,6 +26,18 @@ describe('Public marketplace pages', () => {
           fixture: 'offerings/offeringCategory.json',
         },
       )
+      .intercept(
+        'GET',
+        '/api/marketplace-categories/4588ff519260461893ab371b8fe83363/',
+        {
+          fixture: 'offerings/hpcCategory.json',
+        },
+      )
+      .intercept(
+        'GET',
+        '/api/marketplace-category-groups/',
+        [],
+      )
       .visit('/marketplace/');
   });
 
@@ -56,16 +68,6 @@ describe('Public marketplace pages', () => {
     cy.get('.marketplace-category-page .category-hero__main', {
       timeout: 5000,
     }).should('contain', 'HPC');
-  });
-
-  it('Assure that public all categories page is visible without auth token', () => {
-    // Ensure that the category we want to click is 'Browse all'
-    cy.get('.category-card').contains('Browse all').click();
-
-    // Wait until page loaded
-    cy.get('.marketplace-all-categories-page .all-categories__main', {
-      timeout: 5000,
-    }).should('contain', 'All categories');
   });
 });
 

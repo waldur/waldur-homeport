@@ -21,5 +21,3 @@ export function useLandingCategories() {
     staleTime: 5 * 60 * 1000,
   });
 }
-
-export type CategoriesQueryResult = ReturnType<typeof useLandingCategories>;

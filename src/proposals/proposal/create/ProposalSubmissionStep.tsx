@@ -20,7 +20,7 @@ import { ProposalHeader } from './ProposalHeader';
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
 
-export const formDataSelector = (state) =>
+const formDataSelector = (state) =>
   (getFormValues(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) || {}) as any;
 
 export const ProposalSubmissionStep: FC<{ proposal; reviews?; refetch }> = ({

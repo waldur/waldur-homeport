@@ -15,19 +15,19 @@ const CountryRenderer = (option) => (
   </>
 );
 
-export const Option: FunctionComponent<any> = (props) => (
+const Option: FunctionComponent<any> = (props) => (
   <components.Option {...props}>
     <CountryRenderer {...props.data} />
   </components.Option>
 );
 
-export const SingleValue: FunctionComponent<any> = (props) => (
+const SingleValue: FunctionComponent<any> = (props) => (
   <components.SingleValue {...props}>
     <CountryRenderer {...props.data} />
   </components.SingleValue>
 );
 
-export const loadCountries = async () => {
+const loadCountries = async () => {
   const response = await get('/customers/countries/');
   return response.data;
 };

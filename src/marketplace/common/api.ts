@@ -17,10 +17,7 @@ import {
 } from '@waldur/core/api';
 import { GeolocationPoint } from '@waldur/map/types';
 import { SubmitCartRequest } from '@waldur/marketplace/cart/types';
-import {
-  OrderDetailsType,
-  OrderResponse,
-} from '@waldur/marketplace/orders/types';
+import { OrderDetailsType } from '@waldur/marketplace/orders/types';
 import {
   Category,
   CategoryComponentUsage,
@@ -46,6 +43,9 @@ export const getPlugins = () =>
 
 export const getCategoryGroups = (options?: AxiosRequestConfig) =>
   getAll<CategoryGroup>('/marketplace-category-groups/', options);
+
+export const getCategoryGroup = (id: string, options?: AxiosRequestConfig) =>
+  getById<CategoryGroup>('/marketplace-category-groups/', id, options);
 
 export const getCategories = (options?: AxiosRequestConfig) =>
   getAll<Category>('/marketplace-categories/', options);
@@ -85,9 +85,6 @@ export const getAllProviderOfferings = (options?: {}) =>
 
 export const getAllPublicOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-public-offerings/', options);
-
-export const getOfferingsByServiceProvider = (options?: {}) =>
-  get('/marketplace-provider-offerings/groups/', options);
 
 export const getAllOfferingPermissions = (options?: AxiosRequestConfig) =>
   getAll<OfferingPermission>('/marketplace-offering-permissions/', options);
@@ -255,19 +252,11 @@ export const updateOfferingSecretOptions = (offeringId, data) =>
 export const getCartItems = (projectUrl: string) =>
   getAll('/marketplace-cart-items/', { params: { project: projectUrl } });
 
-export const getCartItem = (id: string) =>
-  getById<OrderResponse>('/marketplace-cart-items/', id);
-
 export const addCartItem = (data: object) =>
   post('/marketplace-cart-items/', data).then((response) => response.data);
 
 export const removeCartItem = (id: string) =>
   deleteById('/marketplace-cart-items/', id);
-
-export const updateCartItem = (id: string, data: object) =>
-  patch(`/marketplace-cart-items/${id}/`, data).then(
-    (response) => response.data,
-  );
 
 export const submitCart = (data: object) =>
   post<SubmitCartRequest>('/marketplace-cart-items/submit/', data).then(

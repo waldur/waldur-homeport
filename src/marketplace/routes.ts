@@ -29,13 +29,13 @@ const Layout = lazyComponent(
   () => import('@waldur/navigation/Layout'),
   'Layout',
 );
-const AllCategoriesPage = lazyComponent(
-  () => import('./category/list/AllCategoriesPage'),
-  'AllCategoriesPage',
-);
 const CategoryPage = lazyComponent(
   () => import('./category/CategoryPage'),
   'CategoryPage',
+);
+const CategoryGroupPage = lazyComponent(
+  () => import('./category/CategoryGroupPage'),
+  'CategoryGroupPage',
 );
 const OfferingDetailsPage = lazyComponent(
   () => import('./details/DetailsPage'),
@@ -237,18 +237,19 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'public.marketplace-categories',
-    url: '/marketplace/all/?group',
-    component: AllCategoriesPage,
+    name: 'public.marketplace-category',
+    url: '/marketplace-category/:category_uuid/',
+    component: CategoryPage,
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      useExtraTabs: true,
       hideProjectSelector: true,
     },
   },
   {
-    name: 'public.marketplace-category',
-    url: '/marketplace-category/:category_uuid/',
-    component: CategoryPage,
+    name: 'public.marketplace-category-group',
+    url: '/marketplace-category-group/:group_uuid/',
+    component: CategoryGroupPage,
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,

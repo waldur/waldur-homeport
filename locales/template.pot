@@ -649,10 +649,6 @@ msgstr ""
 msgid "All calls"
 msgstr ""
 
-#: src/marketplace/category/list/AllCategoriesPage.tsx
-msgid "All categories"
-msgstr ""
-
 #: src/marketplace/landing/OfferingsGroup.tsx
 msgid "All offerings"
 msgstr ""
@@ -1596,10 +1592,6 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: src/marketplace/landing/CategoryCardAll.tsx
-msgid "Browse all categories"
-msgstr ""
-
 #: src/invitations/actions/create/BulkUpload.tsx
 msgid "Bulk upload"
 msgstr ""
@@ -1835,7 +1827,6 @@ msgstr ""
 #: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/routes.ts
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
-#: src/marketplace/category/list/AllCategoriesPage.tsx
 msgid "Categories"
 msgstr ""
 
@@ -1859,10 +1850,6 @@ msgstr ""
 #: src/user/resources/ResourcesFilter.tsx
 #: src/user/resources/ResourcesList.tsx
 msgid "Category"
-msgstr ""
-
-#: src/marketplace/category/filters/FilterDropdownContent.tsx
-msgid "Category doesn't contain sections."
 msgstr ""
 
 #: src/administration/routes.ts
@@ -1961,10 +1948,6 @@ msgstr ""
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
 msgid "Civil number"
-msgstr ""
-
-#: src/marketplace/category/filters/CategorySectionsFilterForm.tsx
-msgid "Clear all"
 msgstr ""
 
 #: src/table/TableFilters.tsx
@@ -2087,10 +2070,6 @@ msgstr ""
 
 #: src/marketplace/offerings/utils.ts
 msgid "Code should consist of latin symbols, numbers, dashes and underscores."
-msgstr ""
-
-#: src/marketplace/category/filters/CategorySectionsFilterForm.tsx
-msgid "Collapse filter"
 msgstr ""
 
 #: src/azure/sql/AzureSQLDatabaseSummary.tsx
@@ -4380,14 +4359,6 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: src/marketplace/category/filters/FilterDropdownHeader.tsx
-msgid "Filter"
-msgstr ""
-
-#: src/marketplace/category/filters/FilteredBy.tsx
-msgid "Filtered by"
-msgstr ""
-
 #: src/table/utils.tsx
 msgid "Filters"
 msgstr ""
@@ -4665,7 +4636,6 @@ msgid "Global federation of identity providers for researchers."
 msgstr ""
 
 #: src/invitations/actions/create/FormButtons.tsx
-#: src/marketplace/category/list/HeroSection.tsx
 msgid "Go back"
 msgstr ""
 
@@ -5908,6 +5878,7 @@ msgstr ""
 msgid "Marketplace UUID"
 msgstr ""
 
+#: src/marketplace/category/CategoryGroupPage.tsx
 #: src/marketplace/category/CategoryPage.tsx
 msgid "Marketplace offerings"
 msgstr ""
@@ -6158,10 +6129,6 @@ msgstr ""
 msgid "Months"
 msgstr ""
 
-#: src/marketplace/category/list/CategoriesBar.tsx
-msgid "More"
-msgstr ""
-
 #: src/table/TableMoreActions.tsx
 msgid "More actions"
 msgstr ""
@@ -6266,6 +6233,8 @@ msgstr ""
 #: src/invoices/details/InvoiceItemCompensationDialog.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/category/CategoryGroupOfferingsList.tsx
+#: src/marketplace/category/CategoryOfferingsList.tsx
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanSection.tsx
@@ -6605,7 +6574,6 @@ msgstr ""
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/update/attributes/utils.tsx
 #: src/modal/ConfirmationDialog.tsx
@@ -7458,6 +7426,8 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
+#: src/marketplace/category/CategoryGroupOfferingsList.tsx
+#: src/marketplace/category/CategoryOfferingsList.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/tabs.ts
@@ -7538,8 +7508,6 @@ msgstr ""
 
 #: src/administration/organizations/OrganizationGroupsList.tsx
 #: src/administration/routes.ts
-#: src/marketplace/category/filters/AttributeFilterOrganizationGroup.tsx
-#: src/marketplace/category/store/selectors.ts
 msgid "Organization groups"
 msgstr ""
 
@@ -7622,10 +7590,6 @@ msgstr ""
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Organizations"
-msgstr ""
-
-#: src/marketplace/category/list/AllCategoriesPage.tsx
-msgid "Other categories"
 msgstr ""
 
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
@@ -8196,10 +8160,6 @@ msgstr ""
 
 #: src/administration/languages/LanguageOptionsForm.tsx
 msgid "Please select at least one language to save changes"
-msgstr ""
-
-#: src/openstack/openstack-instance/utils.ts
-msgid "Please select network."
 msgstr ""
 
 #: src/openstack/openstack-instance/actions/RestartAction.tsx
@@ -9035,10 +8995,6 @@ msgstr ""
 msgid "RAM limit (GB-hours)"
 msgstr ""
 
-#: src/openstack/openstack-instance/utils.ts
-msgid "RAM limit is exceeded"
-msgstr ""
-
 #: src/slurm/details/constants.ts
 msgid "RAM usage"
 msgstr ""
@@ -9094,7 +9050,6 @@ msgstr ""
 msgid "Recent broadcasts (this month)"
 msgstr ""
 
-#: src/marketplace/category/list/RecentlyAddedOfferings.tsx
 #: src/navigation/sidebar/marketplace-popup/DataLoader.tsx
 msgid "Recently added offerings"
 msgstr ""
@@ -9530,7 +9485,6 @@ msgstr ""
 msgid "Requested offering has been removed."
 msgstr ""
 
-#: src/marketplace/category/list/OfferingCard.tsx
 #: src/marketplace/common/OfferingCard.tsx
 msgid "Requesting of new resources has been temporarily paused"
 msgstr ""
@@ -10377,10 +10331,6 @@ msgstr ""
 msgid "Search by name"
 msgstr ""
 
-#: src/marketplace/category/filters/FilterBar.tsx
-msgid "Search for offerings..."
-msgstr ""
-
 #: src/invitations/actions/create/RoleAndProjectSelectField.tsx
 msgid "Search for project"
 msgstr ""
@@ -10450,7 +10400,12 @@ msgstr ""
 msgid "See call"
 msgstr ""
 
+#: src/marketplace/landing/CategoriesList.tsx
+msgid "See less"
+msgstr ""
+
 #: src/booking/offering/BookingResourceListItem.tsx
+#: src/marketplace/landing/CategoriesList.tsx
 msgid "See more"
 msgstr ""
 
@@ -11157,10 +11112,6 @@ msgstr ""
 
 #: src/navigation/sidebar/ResourcesMenu.tsx
 msgid "Show {count} more"
-msgstr ""
-
-#: src/marketplace/category/filters/FilteredBy.tsx
-msgid "Showing all"
 msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/MarketplacePopupTitle.tsx
@@ -12202,13 +12153,8 @@ msgstr ""
 msgid "There are no categories in catalog yet."
 msgstr ""
 
-#: src/marketplace/category/list/CategoryGroupsList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 msgid "There are no categories in marketplace yet."
-msgstr ""
-
-#: src/marketplace/category/list/CategoryGroupsList.tsx
-msgid "There are no categories in this group."
 msgstr ""
 
 #: src/marketplace/category/admin/CategoriesListTablePlaceholder.tsx
@@ -12266,10 +12212,6 @@ msgstr ""
 #: src/marketplace/common/OfferingGrid.tsx
 #: src/marketplace/landing/OfferingsGroup.tsx
 msgid "There are no offerings in marketplace yet."
-msgstr ""
-
-#: src/marketplace/category/list/RecentlyAddedOfferings.tsx
-msgid "There are no offerings recently added in marketplace."
 msgstr ""
 
 #: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
@@ -12574,10 +12516,6 @@ msgstr ""
 msgid "Total storage"
 msgstr ""
 
-#: src/openstack/openstack-instance/utils.ts
-msgid "Total storage limit is exceeded"
-msgstr ""
-
 #: src/invoices/details/ResourceLimitPeriodsTable.tsx
 msgid "Tracked using UTC timezone, displayed with your browser’s timezone."
 msgstr ""
@@ -12595,6 +12533,8 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
+#: src/marketplace/category/CategoryGroupOfferingsList.tsx
+#: src/marketplace/category/CategoryOfferingsList.tsx
 #: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
@@ -13093,8 +13033,6 @@ msgid "Unable to load categories"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/list/CategoriesBar.tsx
-#: src/marketplace/category/list/CategoryGroupsList.tsx
 #: src/marketplace/landing/CategoriesList.tsx
 msgid "Unable to load categories."
 msgstr ""
@@ -13109,10 +13047,6 @@ msgstr ""
 
 #: src/marketplace/category/admin/CategoryEditDialog.tsx
 msgid "Unable to load category groups."
-msgstr ""
-
-#: src/marketplace/category/filters/FilterDropdownContent.tsx
-msgid "Unable to load category sections."
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
@@ -13228,7 +13162,6 @@ msgstr ""
 msgid "Unable to load offerings"
 msgstr ""
 
-#: src/marketplace/category/list/RecentlyAddedOfferings.tsx
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "Unable to load offerings."
 msgstr ""
@@ -14294,10 +14227,6 @@ msgstr ""
 msgid "User details of {fullName}"
 msgstr ""
 
-#: src/user/dashboard/utils.ts
-msgid "User events (month)"
-msgstr ""
-
 #: src/user/support/effects.ts
 msgid "User has been activated."
 msgstr ""
@@ -14681,7 +14610,6 @@ msgid "View YAML"
 msgstr ""
 
 #: src/core/StatisticsCard.tsx
-#: src/marketplace/category/list/CategoryGroupsList.tsx
 #: src/proposals/CallsAvailableOfferingsList.tsx
 #: src/proposals/CallsForProposalsList.tsx
 msgid "View all"
@@ -14752,10 +14680,6 @@ msgstr ""
 #: src/openstack/openstack-volume/actions/RetypeDialog.tsx
 #: src/rancher/cluster/create/VolumeTypeGroup.tsx
 msgid "Volume type"
-msgstr ""
-
-#: src/openstack/openstack-instance/utils.ts
-msgid "Volume type storage limit is exceeded"
 msgstr ""
 
 #: src/openstack/openstack-instance/tabs.ts
@@ -14859,7 +14783,6 @@ msgstr ""
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
 #: src/marketplace-checklist/ChecklistCustomer.tsx
-#: src/marketplace/category/filters/FilteredBy.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/update/attributes/utils.tsx
 #: src/modal/ConfirmationDialog.tsx
@@ -15299,7 +15222,6 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: src/marketplace/category/list/CategoryCard.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 msgid "offering"
 msgstr ""
@@ -15316,7 +15238,8 @@ msgstr ""
 msgid "offering users"
 msgstr ""
 
-#: src/marketplace/category/list/CategoryCard.tsx
+#: src/marketplace/category/CategoryGroupOfferingsList.tsx
+#: src/marketplace/category/CategoryOfferingsList.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 msgid "offerings"
@@ -15534,10 +15457,6 @@ msgstr ""
 msgid "vCPU count"
 msgstr ""
 
-#: src/openstack/openstack-instance/utils.ts
-msgid "vCPU limit is exceeded"
-msgstr ""
-
 #: src/azure/sql/AzureSQLServerSummary.tsx
 msgid "vCores"
 msgstr ""
@@ -15639,10 +15558,6 @@ msgstr ""
 
 #: src/table/Table.tsx
 msgid "{count} rows selected"
-msgstr ""
-
-#: src/user/dashboard/utils.ts
-msgid "{count} user events in {date}"
 msgstr ""
 
 #: src/table/TablePagination.tsx

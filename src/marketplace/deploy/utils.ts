@@ -29,7 +29,7 @@ export const SYSTEM_IMAGES = [
   { name: 'freebsd', label: 'FreeBSD', thumb: FreeBSD },
 ];
 
-export const findImage = (name) =>
+const findImage = (name) =>
   SYSTEM_IMAGES.find((item) => name.toLowerCase().includes(item.name));
 
 export const generateSystemImageChoices = (data: any[]) => {

@@ -64,9 +64,4 @@ export const formatOrderForCreate = (props: OrderSummaryProps) => {
   return formatOrder(props, request);
 };
 
-export const formatOrderForUpdate = (props: OrderSummaryProps) => {
-  const request = { uuid: props.offering.uuid };
-  return formatOrder(props, request);
-};
-
 export const formSelector = formValueSelector(FORM_ID);

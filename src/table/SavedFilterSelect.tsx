@@ -16,7 +16,7 @@ import {
 import { TableFilterService, TableFiltersGroup } from './TableFilterService';
 import { getSavedFiltersKey } from './utils';
 
-export const Control = (props) => (
+const Control = (props) => (
   <components.Control {...props}>
     <span className="svg-icon svg-icon-2 svg-icon-gray-700 ps-3">
       <Funnel />

@@ -12,7 +12,6 @@ import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { CategoriesList } from './CategoriesList';
-import { useLandingCategories } from './hooks';
 import { OfferingsGroup } from './OfferingsGroup';
 import { OfferingsSearchBox } from './OfferingsSearchBox';
 
@@ -25,9 +24,6 @@ export const LandingPage: FC<{}> = () => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   useMarketplacePublicTabs();
-
-  const categories = useLandingCategories();
-
   return (
     <div className="marketplace-landing-page">
       {showExperimentalUiComponents && (
@@ -47,7 +43,7 @@ export const LandingPage: FC<{}> = () => {
         </div>
       </LandingHeroSection>
       <div className="container-xxl mt-20 mb-10">
-        <CategoriesList {...categories} />
+        <CategoriesList />
       </div>
       <div className="container-xxl mb-20">
         <OfferingsGroup />
