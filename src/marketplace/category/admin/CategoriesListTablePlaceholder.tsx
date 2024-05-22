@@ -6,7 +6,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 export const CategoriesListTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
-    illustration={Illustration}
+    illustration={<Illustration />}
     title={translate(`There are no categories yet.`)}
     description=""
   />

@@ -6,7 +6,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 export const GroupInvitationErrorMessage = ({ dismiss }) => (
   <ImageTablePlaceholder
-    illustration={Illustration}
+    illustration={<Illustration />}
     title={translate('Request is not valid.')}
     description={translate(
       `You've either entered invalid URL or don't have enough permissions to view this page.`,

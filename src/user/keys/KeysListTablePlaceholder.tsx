@@ -6,7 +6,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 export const KeysListTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
-    illustration={Illustration}
+    illustration={<Illustration />}
     title={translate(`There are no SSH keys yet.`)}
     description={translate(
       `Public SSH keys will be injected into services that allow key-based access.`,

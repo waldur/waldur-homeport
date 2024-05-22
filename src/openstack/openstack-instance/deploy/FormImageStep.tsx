@@ -38,16 +38,7 @@ export const FormImageStep = (props: FormStepProps) => {
     { staleTime: 3 * 60 * 1000 },
   );
 
-  const choices = useMemo(() => {
-    const _choices = generateSystemImageChoices(data);
-    _choices.forEach((choice) => {
-      choice.image =
-        choice.image && typeof choice.image === 'string' ? (
-          <img src={choice.image} alt="os" />
-        ) : undefined;
-    });
-    return _choices;
-  }, [data]);
+  const choices = useMemo(() => generateSystemImageChoices(data), [data]);
 
   const flavor = useSelector(formFlavorSelector);
   const onChangeImage = useCallback(

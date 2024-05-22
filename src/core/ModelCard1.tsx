@@ -3,7 +3,6 @@ import { Card } from 'react-bootstrap';
 
 import { Image } from './Image';
 import { ImagePlaceholder } from './ImagePlaceholder';
-import { InlineSVG } from './svg/InlineSVG';
 import { getAbbreviation } from './utils';
 
 interface ModelCard1Props {
@@ -12,27 +11,23 @@ interface ModelCard1Props {
   logo?: string;
   body?: ReactNode;
   image?: string;
-  imageAsSvg?: boolean;
+  placeholder?: ReactNode;
   footer?: ReactNode;
 }
 
 export const ModelCard1: FC<ModelCard1Props> = (props) => (
   <Card className="model-card-1 card-bordered h-100">
-    {props.image && (
+    {(props.image || props.placeholder) && (
       <div className="h-90px d-flex flex-center border-bottom">
-        {props.imageAsSvg ? (
-          <InlineSVG
-            path={props.image}
-            className="svg-icon-5tx svg-icon-dark"
-            svgClassName="mh-90px"
-          />
-        ) : (
+        {props.image ? (
           <img
             alt="model-card"
             src={props.image}
             height={90}
             style={{ margin: 'auto' }}
           />
+        ) : (
+          props.placeholder
         )}
       </div>
     )}

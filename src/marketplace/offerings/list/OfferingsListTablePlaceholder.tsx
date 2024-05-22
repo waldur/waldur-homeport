@@ -21,7 +21,7 @@ export const OfferingsListTablePlaceholder = ({ showActions }) => {
     });
   return (
     <ImageTablePlaceholder
-      illustration={TwoDocumentsIllustration}
+      illustration={<TwoDocumentsIllustration />}
       title={translate('Nothing to see here')}
       description={
         showMessage

@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { fixURL } from '@waldur/core/api';
-import Logo from '@waldur/images/logo.svg';
+import DefaultLogo from '@waldur/images/logo.svg';
 import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -53,8 +53,10 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
 
           <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
             <div className="d-lg-none">
-              {imageUrl && (
-                <img src={imageUrl || Logo} alt="Logo" className="h-30px" />
+              {imageUrl ? (
+                <img src={imageUrl} alt="Logo" className="h-30px" />
+              ) : (
+                <DefaultLogo className="h-30px" />
               )}
             </div>
           </div>

@@ -6,7 +6,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 export const HookListTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
-    illustration={Illustration}
+    illustration={<Illustration />}
     title={translate('You have no notifications yet.')}
     description={translate(
       'Notifications allow to be informed when a certain event has occurred.',

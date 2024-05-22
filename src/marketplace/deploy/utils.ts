@@ -1,3 +1,4 @@
+import { createElement } from 'react';
 import { isValid, getFormSyncErrors } from 'redux-form';
 
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -48,7 +49,7 @@ export const generateSystemImageChoices = (data: any[]) => {
         const choice = {
           label: image.label,
           value: image.name,
-          image: image.thumb,
+          image: createElement(image.thumb),
           options: [{ label: version, value }],
         };
         acc.push(choice);

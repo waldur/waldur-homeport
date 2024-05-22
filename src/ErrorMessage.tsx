@@ -8,7 +8,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 export const ErrorMessage: FallbackRender = (props) => (
   <>
     <ImageTablePlaceholder
-      illustration={Illustration}
+      illustration={<Illustration />}
       title={translate(`An error has occurred.`)}
       description={props.error.message}
       action={

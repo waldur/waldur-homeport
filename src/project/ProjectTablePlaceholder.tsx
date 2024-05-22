@@ -8,7 +8,7 @@ import { ProjectCreateButton } from './ProjectCreateButton';
 
 export const ProjectTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
-    illustration={Illustration}
+    illustration={<Illustration />}
     title={translate(`Your organization does not have any projects yet.`)}
     description={translate(
       `Project aggregates and isolates teams and resources.`,

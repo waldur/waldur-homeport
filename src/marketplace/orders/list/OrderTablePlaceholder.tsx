@@ -7,7 +7,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 export const OrderTablePlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
-    illustration={DocumentSearchIllustration}
+    illustration={<DocumentSearchIllustration />}
     title={translate(`Seems there's nothing here`)}
     description={translate(
       `You can find offerings to order in the marketplace`,

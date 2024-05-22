@@ -4,12 +4,10 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 
 import { AddOfferingButton } from './AddOfferingButton';
 
-export const CallOfferingsTablePlaceholder = ({ call, refetch }) => {
-  return (
-    <ImageTablePlaceholder
-      illustration={TwoDocumentsIllustration}
-      title={translate('Nothing to see here')}
-      action={<AddOfferingButton call={call} refetch={refetch} />}
-    />
-  );
-};
+export const CallOfferingsTablePlaceholder = ({ call, refetch }) => (
+  <ImageTablePlaceholder
+    illustration={<TwoDocumentsIllustration />}
+    title={translate('Nothing to see here')}
+    action={<AddOfferingButton call={call} refetch={refetch} />}
+  />
+);

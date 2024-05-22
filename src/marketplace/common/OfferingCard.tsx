@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { Link } from '@waldur/core/Link';
 import { ModelCard1 } from '@waldur/core/ModelCard1';
 import { translate } from '@waldur/i18n';
-import placeholder from '@waldur/images/logo_w.svg';
+import Placeholder from '@waldur/images/logo_w.svg';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { OfferingLink } from '../links/OfferingLink';
@@ -32,8 +32,12 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) =>
         title={props.offering.name}
         subtitle={props.offering.customer_name}
         logo={props.offering.thumbnail}
-        image={props.offering.image || placeholder}
-        imageAsSvg={!props.offering.image}
+        image={props.offering.image}
+        placeholder={
+          <span className="svg-icon svg-icon-5tx svg-icon-dark">
+            <Placeholder className="mh-90px" />
+          </span>
+        }
         footer={
           <div className="d-flex justify-content-end gap-4">
             <OfferingLink

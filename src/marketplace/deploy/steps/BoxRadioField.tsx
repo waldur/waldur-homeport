@@ -10,7 +10,7 @@ export interface BoxRadioChoice {
   value: any;
   label: React.ReactNode;
   metadata?: React.ReactNode;
-  image?: string | React.ReactNode;
+  image?: any;
   options?: Array<{ label; value }>;
 }
 
