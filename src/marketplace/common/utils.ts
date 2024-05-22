@@ -1,8 +1,5 @@
 import { translate } from '@waldur/i18n';
 
-import { OrderResponse } from '../orders/types';
-import { BillingPeriod } from '../types';
-
 // See also: https://github.com/erikras/redux-form/issues/1852
 export const parseIntField = (value) => parseInt(value, 10) || 0;
 export const formatIntField = (value) => (value ? value.toString() : 0);
@@ -76,27 +73,3 @@ export function getBillingPeriods(unit: string): BillingPeriodDescription {
       };
   }
 }
-
-export const getMaxUnit = (items: OrderResponse[]): BillingPeriod => {
-  const units: string[] = items
-    .filter((item) => item.plan)
-    .map((item) => item.plan_unit);
-
-  if (units.length === 0) {
-    return null;
-  }
-
-  if (units.includes('month')) {
-    return 'month';
-  }
-
-  if (units.includes('half_month')) {
-    return 'month';
-  }
-
-  if (units.includes('day')) {
-    return 'day';
-  }
-
-  return 'hour';
-};

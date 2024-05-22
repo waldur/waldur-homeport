@@ -54,7 +54,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
                   <ImagePlaceholder width="30px" height="30px" />
                 )}
               </div>
-              <CategoryLink category_uuid={row.uuid}>{row.title}</CategoryLink>
+              <CategoryLink item={row}>{row.title}</CategoryLink>
             </>
           ),
         },
@@ -84,8 +84,8 @@ export const AdminCategoriesPage: FunctionComponent = () => {
               const group = categoryGroups.find((g) => g.url === row.group);
               return group ? (
                 <Link
-                  state="public.marketplace-categories"
-                  params={{ group: group.uuid }}
+                  state="public.marketplace-category-group"
+                  params={{ group_uuid: group.uuid }}
                 >
                   {group.title}
                 </Link>

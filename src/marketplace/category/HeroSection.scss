@@ -5,7 +5,7 @@
   overflow: auto;
 
   .category-hero__background-left {
-    width: 55%;
+    width: 100%;
     background-color: #2f4050;
     background-image: linear-gradient(to right, #000a, #000a),
       url('../../dashboard/hero/marketplace-background.jpg');
@@ -13,15 +13,22 @@
     background-repeat: no-repeat;
     background-size: cover;
     display: table;
+    &.clipped {
+      width: 85%;
+      clip-path: polygon(0 0, 100% 0%, 85% 100%, 0% 100%);
+    }
   }
 
   .category-hero__background-right {
-    width: 45%;
+    width: 65%;
     background-color: #2f4050;
     background-image: url('../../dashboard/hero/marketplace-background.jpg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;
+    clip-path: polygon(15% 0, 100% 0%, 100% 100%, 0 100%);
+    overflow: hidden;
+    margin-left: -15%;
   }
 
   .category-hero__table {
@@ -50,6 +57,7 @@
 
     .category-hero__background-left {
       width: 100%;
+      clip-path: none;
     }
   }
 

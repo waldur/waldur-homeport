@@ -225,19 +225,6 @@ export interface CategoryComponentUsage {
   measured_unit: string;
 }
 
-export interface CategoriesListType {
-  items: Category[];
-  loaded: boolean;
-  loading: boolean;
-}
-
-export interface CategoryGroupsListType {
-  items: CategoryGroup[];
-  loaded: boolean;
-  loading: boolean;
-  maxShow?: number;
-}
-
 export interface OfferingsListType {
   items: Offering[];
   loaded: boolean;

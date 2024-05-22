@@ -1,5 +1,5 @@
 import { translate } from '@waldur/i18n';
-import { Category, CategoryGroup, Section } from '@waldur/marketplace/types';
+import { Category, CategoryGroup } from '@waldur/marketplace/types';
 
 export const countSelectedFilters = (filterValues) => {
   const selectedFilters = [];
@@ -70,15 +70,3 @@ export const getGroupedCategories = (
     return acc;
   }, []);
 };
-
-const SUPPORTED_TYPES = ['choice', 'list', 'boolean'];
-
-export const prepareAttributeSections = (sections: Section[]) =>
-  sections
-    .map((section) => ({
-      ...section,
-      attributes: section.attributes.filter(
-        (attribute) => SUPPORTED_TYPES.indexOf(attribute.type) !== -1,
-      ),
-    }))
-    .filter((section) => section.attributes.length > 0);
