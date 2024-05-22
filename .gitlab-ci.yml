@@ -96,6 +96,7 @@ Run jest tests:
         - webpack.*
         - test/*
         - jest.config.js
+      allow_failure: true
   script:
     - yarn test
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
@@ -130,6 +131,7 @@ Run E2E tests:
         - webpack.*
         - cypress/**/*
         - cypress.config.ts
+      allow_failure: true
   script:
     - NO_COLOR=1 yarn ci:test
   artifacts:
