@@ -1,8 +1,10 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { BaseOfferingsList } from '../list/OfferingsList';
+import { getStates } from '../list/OfferingStateFilter';
 
 import { AdminOfferingsFilter } from './AdminOfferingsFilter';
 import {
@@ -10,7 +12,7 @@ import {
   ADMIN_OFFERING_TABLE_NAME,
 } from './constants';
 
-const mapStateToFilter = createSelector(
+export const mapStateToFilter = createSelector(
   getFormValues(ADMIN_OFFERINGS_FILTER_FORM_ID),
   (filterValues: any) => {
     const filter: Record<string, any> = {
@@ -32,13 +34,19 @@ const mapStateToFilter = createSelector(
 
 export const AdminOfferingsList = () => {
   const filter = useSelector(mapStateToFilter);
+  const initialValues = useMemo(
+    () => ({
+      state: [getStates()[1], getStates()[2]],
+    }),
+    [],
+  );
   return (
     <BaseOfferingsList
       table={ADMIN_OFFERING_TABLE_NAME}
       filter={filter}
       hasOrganizationColumn
       showActions
-      filters={<AdminOfferingsFilter />}
+      filters={<AdminOfferingsFilter initialValues={initialValues} />}
     />
   );
 };

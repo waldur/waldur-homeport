@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { useTable } from '@waldur/table/utils';
 import {
   getCustomer,
@@ -73,7 +73,9 @@ export const OfferingsGroup = () => {
       verboseName={translate('Latest offerings')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       actions={
-        <ActionButton title={translate('All offerings')} action={null} />
+        <Link state="public.offerings" className="btn btn-light">
+          {translate('All offerings')}
+        </Link>
       }
       hasQuery={false}
       hasPagination={false}

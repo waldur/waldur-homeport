@@ -81,6 +81,7 @@ export interface TableProps<RowType = any> extends TableState {
   footer?: React.ReactNode;
   hasOptionalColumns?: boolean;
   toggleColumn?(column): void;
+  initialMode?: 'grid' | 'table';
 }
 
 class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
@@ -310,6 +311,9 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
   }
 
   componentDidMount() {
+    if (this.props.initialMode) {
+      this.props.setDisplayMode(this.props.initialMode);
+    }
     const doFetch = !this.props.initialPageSize && !this.props.initialSorting;
     if (this.props.firstFetch && this.props.initialPageSize) {
       this.props.updatePageSize(this.props.initialPageSize);
@@ -374,7 +378,8 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
       this.props.actions ||
       this.props.dropdownActions?.length ||
       this.props.enableExport ||
-      this.props.filters
+      this.props.filters ||
+      Boolean(this.props.gridItem && this.props.columns.length)
     );
   }
 }

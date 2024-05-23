@@ -37,6 +37,10 @@ const CategoryGroupPage = lazyComponent(
   () => import('./category/CategoryGroupPage'),
   'CategoryGroupPage',
 );
+const AllOfferingsList = lazyComponent(
+  () => import('./category/AllOfferingsList'),
+  'AllOfferingsList',
+);
 const OfferingDetailsPage = lazyComponent(
   () => import('./details/DetailsPage'),
   'OfferingDetailsPage',
@@ -240,6 +244,16 @@ export const states: StateDeclaration[] = [
     name: 'public.marketplace-category',
     url: '/marketplace-category/:category_uuid/',
     component: CategoryPage,
+    data: {
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      useExtraTabs: true,
+      hideProjectSelector: true,
+    },
+  },
+  {
+    name: 'public.offerings',
+    url: '/marketplace-public-offerings/',
+    component: AllOfferingsList,
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
