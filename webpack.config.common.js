@@ -289,10 +289,6 @@ module.exports = {
           to: utils.formatPath('images/appstore'),
         },
         {
-          from: path.resolve(imagesPath, './help'),
-          to: utils.formatPath('images/help'),
-        },
-        {
           from: path.resolve(imagesPath, './service-providers'),
           to: utils.formatPath('images/service-providers'),
         },
