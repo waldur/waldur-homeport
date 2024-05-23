@@ -14,14 +14,14 @@ export const HeroSection = ({ item }: { item: Category | CategoryGroup }) => (
           <p>{item.description}</p>
 
           {(item as CategoryGroup).categories?.map((category, index) => (
-            <span key={index}>
-              <Link
-                state="public.marketplace-category"
-                params={{ category_uuid: category.uuid }}
-              >
-                {category.title}
-              </Link>{' '}
-            </span>
+            <Link
+              state="public.marketplace-category"
+              params={{ category_uuid: category.uuid }}
+              key={index}
+              className="text-white me-3 text-hover-primary"
+            >
+              {category.title}
+            </Link>
           ))}
         </div>
       </div>
