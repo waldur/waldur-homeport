@@ -3,10 +3,7 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
-import {
-  OfferingStateFilter,
-  getStates,
-} from '@waldur/marketplace/offerings/list/OfferingStateFilter';
+import { OfferingStateFilter } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -36,9 +33,6 @@ const PureAdminOfferingsFilter: FunctionComponent = () => (
 
 const enhance = reduxForm({
   form: ADMIN_OFFERINGS_FILTER_FORM_ID,
-  initialValues: {
-    state: [getStates()[1], getStates()[2]],
-  },
   destroyOnUnmount: false,
 });
 

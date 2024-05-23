@@ -649,6 +649,7 @@ msgstr ""
 msgid "All calls"
 msgstr ""
 
+#: src/marketplace/category/AllOfferingsList.tsx
 #: src/marketplace/landing/OfferingsGroup.tsx
 msgid "All offerings"
 msgstr ""
@@ -6233,8 +6234,7 @@ msgstr ""
 #: src/invoices/details/InvoiceItemCompensationDialog.tsx
 #: src/invoices/details/ResourceRow.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/marketplace/category/CategoryGroupOfferingsList.tsx
-#: src/marketplace/category/CategoryOfferingsList.tsx
+#: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/deploy/steps/FormFinalConfigurationStep.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanSection.tsx
@@ -7426,8 +7426,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistOverview.tsx
 #: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
-#: src/marketplace/category/CategoryGroupOfferingsList.tsx
-#: src/marketplace/category/CategoryOfferingsList.tsx
+#: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/tabs.ts
@@ -11328,6 +11327,7 @@ msgstr ""
 #: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
+#: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
@@ -12533,8 +12533,7 @@ msgstr ""
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/marketplace/category/CategoryGroupOfferingsList.tsx
-#: src/marketplace/category/CategoryOfferingsList.tsx
+#: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
@@ -15239,8 +15238,7 @@ msgstr ""
 msgid "offering users"
 msgstr ""
 
-#: src/marketplace/category/CategoryGroupOfferingsList.tsx
-#: src/marketplace/category/CategoryOfferingsList.tsx
+#: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/landing/CategoryCard.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 msgid "offerings"
