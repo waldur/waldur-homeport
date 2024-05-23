@@ -18,7 +18,7 @@
   margin-left: 5px;
 }
 
-.login-button-icon img {
+.login-button-icon img, svg {
   max-height: 30px;
 }
 
