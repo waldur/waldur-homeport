@@ -288,10 +288,6 @@ module.exports = {
           from: path.resolve(imagesPath, './appstore'),
           to: utils.formatPath('images/appstore'),
         },
-        {
-          from: path.resolve(imagesPath, './service-providers'),
-          to: utils.formatPath('images/service-providers'),
-        },
         // favicon is a part of white-labeling, store such resources separately.
         // https://opennode.atlassian.net/wiki/display/WD/HomePort+configuration#HomePortconfiguration-White-labeling
         {
