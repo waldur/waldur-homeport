@@ -14,8 +14,6 @@ export interface FormField {
   label?: ReactNode;
   description?: ReactNode;
   tooltip?: ReactNode;
-  labelClass?: string;
-  controlClass?: string;
   validate?: Validator | Validator[];
   disabled?: boolean;
   hideLabel?: boolean;
