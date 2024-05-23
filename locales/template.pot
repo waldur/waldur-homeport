@@ -13037,7 +13037,8 @@ msgstr ""
 msgid "Unable to load categories."
 msgstr ""
 
-#: src/marketplace/category/HeroSection.tsx
+#: src/marketplace/category/CategoryGroupPage.tsx
+#: src/marketplace/category/CategoryPage.tsx
 msgid "Unable to load category"
 msgstr ""
 
