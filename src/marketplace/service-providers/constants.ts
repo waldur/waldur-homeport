@@ -7,3 +7,4 @@ export const PROVIDER_OFFERINGS_FORM_ID = 'ProviderOfferingsFilter';
 export const PROVIDER_OFFERING_USERS_FORM_ID = 'ProviderOfferingUsersFilter';
 
 export const CAMPAIGN_CREATE_FORM_ID = 'CampaignCreateDialog';
+export const TABLE_SERVICE_PROVIDERS = 'marketplace-service-providers';
