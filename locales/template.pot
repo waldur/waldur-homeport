@@ -2693,6 +2693,7 @@ msgstr ""
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
+#: src/marketplace/service-providers/ServiceProvidersList.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 #: src/project/team/InvitationsList.tsx
 #: src/proposals/team/InvitationsList.tsx
@@ -6269,6 +6270,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/marketplace/service-providers/ServiceProvidersList.tsx
 #: src/openstack/openstack-backup-schedule/BackupSchedulesList.tsx
 #: src/openstack/openstack-backup/BackupsList.tsx
 #: src/openstack/openstack-instance/actions/EditDialog.tsx
@@ -7141,6 +7143,7 @@ msgstr ""
 #: src/marketplace/service-providers/CampaignUpdateForm.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
+#: src/marketplace/service-providers/ServiceProvidersList.tsx
 #: src/marketplace/service-providers/dashboard/ProviderDashboard.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/details/PublicCallDetails.tsx
@@ -10846,6 +10849,12 @@ msgstr ""
 
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
 msgid "Service provider:"
+msgstr ""
+
+#: src/marketplace/routes.ts
+#: src/marketplace/service-providers/ServiceProvidersList.tsx
+#: src/marketplace/utils.ts
+msgid "Service providers"
 msgstr ""
 
 #: src/resource/state/utils.ts

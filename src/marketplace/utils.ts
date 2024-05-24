@@ -45,6 +45,10 @@ export const useMarketplacePublicTabs = () => {
         title: translate('Dashboard'),
         to: 'public.marketplace-landing',
       },
+      {
+        title: translate('Service providers'),
+        to: 'public.marketplace-providers',
+      },
     ];
     return _tabs.concat(
       getCategoryItems(categories.isFetched ? categories.data : []),

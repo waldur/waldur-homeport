@@ -157,6 +157,10 @@ const OfferingEditUIView = lazyComponent(
   () => import('./offerings/OfferingEditUIView'),
   'OfferingEditUIView',
 );
+const ServiceProvidersList = lazyComponent(
+  () => import('./service-providers/ServiceProvidersList'),
+  'ServiceProvidersList',
+);
 
 const getPublicRoutesParams = () => ({
   resolve: [
@@ -218,6 +222,17 @@ export const states: StateDeclaration[] = [
     url: '/marketplace/',
     component: LandingPage,
     data: {
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      hideProjectSelector: true,
+    },
+  },
+
+  {
+    name: 'public.marketplace-providers',
+    url: '/marketplace-providers/',
+    component: ServiceProvidersList,
+    data: {
+      breadcrumb: () => translate('Service providers'),
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       hideProjectSelector: true,
     },
