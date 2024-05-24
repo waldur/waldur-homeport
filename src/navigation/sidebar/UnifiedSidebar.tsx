@@ -8,7 +8,6 @@ import { MenuComponent } from '@waldur/metronic/components';
 import { CallPublicMenu } from '@waldur/navigation/sidebar/CallPublicMenu';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { ManagementMenu } from './ManagementMenu';
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
 import { OrganizationsListMenu } from './OrganizationsListMenu';
@@ -65,7 +64,6 @@ export const UnifiedSidebar = () => {
       ) : null}
       <OrganizationsListMenu />
       <ProjectsListMenu />
-      <ManagementMenu />
       <ResourcesMenu />
       <ReportingMenu />
       <CallPublicMenu />

@@ -131,9 +131,7 @@ describe('Add resource pop up is visible', { testIsolation: false }, () => {
       .click({ force: true });
 
     // wait for the project menu and dashboard
-    cy.get('.aside-menu .menu-item:contains(Project)')
-      .should('have.class', 'here')
-      .get('h2:contains(Azure Alice project)')
+    cy.get('h2:contains(Azure Alice project)')
       .should('be.visible');
 
     // Check from project page
