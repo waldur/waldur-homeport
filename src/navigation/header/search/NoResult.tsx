@@ -19,7 +19,7 @@ export const NoResult = ({ isVisible, clearSearch }) => {
           <h4 className="fw-bold mb-2">{translate('No results found')}</h4>
           <div className="text-muted fs-6">
             <p className="mb-0">
-              {translate("We didn't much any result.")}
+              {translate("We didn't get any results.")}
               <br />
               {translate('Please try again')}
             </p>
