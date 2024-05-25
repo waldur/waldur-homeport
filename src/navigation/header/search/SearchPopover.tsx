@@ -5,7 +5,7 @@ import {
   Star,
 } from '@phosphor-icons/react';
 import { groupBy, isEmpty } from 'lodash';
-import { Fragment, useEffect, useState, useRef, useCallback } from 'react';
+import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Badge, Button, Col, Nav, Row, Tab } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -21,6 +21,7 @@ import { SearchResult } from './useSearch';
 interface SearchPopoverProps {
   result: SearchResult;
   query: string;
+  show: boolean;
   setQuery;
 }
 
@@ -284,6 +285,7 @@ const ResourcesTabContent = ({ result, clearSearch }: TabContentProps) => {
 export const SearchPopover = ({
   result,
   query,
+  show,
   setQuery,
 }: SearchPopoverProps) => {
   const [menuState, setMenuState] = useState<'main' | 'advanced'>('main');
@@ -310,6 +312,7 @@ export const SearchPopover = ({
         <SearchInput
           result={result}
           query={query}
+          show={show}
           setQuery={setQuery}
           className="px-5 mb-6 d-lg-none"
         />

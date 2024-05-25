@@ -8,6 +8,7 @@ import { SearchResult } from './useSearch';
 interface SearchProps {
   result: SearchResult;
   query: string;
+  show: boolean;
   setQuery;
   hasFilters?: boolean;
   className?: string;
@@ -20,6 +21,7 @@ const hiddenStyle = {
 export const SearchInput = ({
   result,
   query,
+  show,
   setQuery,
   hasFilters,
   className,
@@ -46,14 +48,11 @@ export const SearchInput = ({
           onChange={(event) => setQuery(event.target.value)}
           placeholder={translate('Search...')}
         />
-        <span
-          className={classNames(
-            'position-absolute top-50 end-0 translate-middle-y lh-0 me-4',
-            isLoading ? '' : 'd-none',
-          )}
-        >
-          <span className="spinner-border h-15px w-15px align-middle text-gray-700" />
-        </span>
+        {show && isLoading ? (
+          <span className="position-absolute top-50 end-0 translate-middle-y lh-0 me-4">
+            <span className="spinner-border h-15px w-15px align-middle text-gray-700" />
+          </span>
+        ) : null}
         <button
           type="button"
           className={classNames(

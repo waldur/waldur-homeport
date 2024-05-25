@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { get, parseResultCount } from '@waldur/core/api';
 import { Resource } from '@waldur/marketplace/resources/types';
@@ -7,6 +7,28 @@ import { Customer, Project } from '@waldur/workspace/types';
 
 export const useSearch = () => {
   const [query, setQuery] = useState('');
+  const [show, setShow] = useState(false);
+
+  const handleClickOutside = useCallback(
+    (e) => {
+      const popup = document.getElementById('GlobalSearch');
+      const input = document.getElementById('searchContainer');
+      if (!popup || !input) {
+        return;
+      }
+      if (!popup.contains(e.target) && !input.contains(e.target)) {
+        setShow(false);
+      }
+    },
+    [setShow],
+  );
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [handleClickOutside]);
 
   const result = useQuery(
     [`global-search`, query],
@@ -62,9 +84,9 @@ export const useSearch = () => {
         resultsCount: customersCount + projectsCount + resourcesCount,
       };
     },
-    { staleTime: 60 * 1000, keepPreviousData: true },
+    { staleTime: 60 * 1000, keepPreviousData: true, enabled: show },
   );
-  return { query, setQuery, result };
+  return { query, setQuery, result, show, setShow };
 };
 
 export type SearchResult = ReturnType<typeof useSearch>['result'];

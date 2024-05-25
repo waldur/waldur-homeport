@@ -1,5 +1,4 @@
 import { MagnifyingGlass } from '@phosphor-icons/react';
-import { useCallback, useEffect, useState } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 import { SearchInput } from './SearchInput';
@@ -9,29 +8,7 @@ import { useSearch } from './useSearch';
 import './SearchToggle.scss';
 
 export const SearchToggle = () => {
-  const { query, setQuery, result } = useSearch();
-  const [show, setShow] = useState(false);
-
-  const handleClickOutside = useCallback(
-    (e) => {
-      const popup = document.getElementById('GlobalSearch');
-      const input = document.getElementById('searchContainer');
-      if (!popup || !input) {
-        return;
-      }
-      if (!popup.contains(e.target) && !input.contains(e.target)) {
-        setShow(false);
-      }
-    },
-    [setShow],
-  );
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [handleClickOutside]);
+  const { query, setQuery, result, show, setShow } = useSearch();
 
   return (
     <OverlayTrigger
@@ -40,7 +17,12 @@ export const SearchToggle = () => {
       show={show}
       overlay={
         <Popover id="GlobalSearch">
-          <SearchPopover result={result} query={query} setQuery={setQuery} />{' '}
+          <SearchPopover
+            result={result}
+            query={query}
+            show={show}
+            setQuery={setQuery}
+          />
         </Popover>
       }
       rootClose={true}
@@ -55,6 +37,7 @@ export const SearchToggle = () => {
           result={result}
           query={query}
           setQuery={setQuery}
+          show={show}
           className="d-none d-lg-block"
         />
         <div className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px d-lg-none">

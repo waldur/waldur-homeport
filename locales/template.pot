@@ -14736,7 +14736,7 @@ msgid "Warning: Service provider option will clear all usernames of the existing
 msgstr ""
 
 #: src/navigation/header/search/NoResult.tsx
-msgid "We didn't much any result."
+msgid "We didn't get any results."
 msgstr ""
 
 #: src/marketplace/resources/resource-pending/OrderErredView.tsx
