@@ -69,25 +69,13 @@ const OfferingUpdateContainer = lazyComponent(
   () => import('./offerings/update/OfferingUpdateContainer'),
   'OfferingUpdateContainer',
 );
-const OrdersList = lazyComponent(
-  () => import('./orders/list/OrdersList'),
-  'OrdersList',
-);
-const SupportOrdersList = lazyComponent(
-  () => import('./orders/list/SupportOrdersList'),
-  'SupportOrdersList',
+const MarketplaceOrdersList = lazyComponent(
+  () => import('./orders/list/MarketplaceOrdersList'),
+  'MarketplaceOrdersList',
 );
 const OrderDetails = lazyComponent(
   () => import('./orders/details/OrderDetails'),
   'OrderDetails',
-);
-const CustomerOrdersList = lazyComponent(
-  () => import('./orders/list/CustomerOrdersList'),
-  'CustomerOrdersList',
-);
-const OrganizationResourcesAllList = lazyComponent(
-  () => import('./resources/list/OrganizationResourcesAllList'),
-  'OrganizationResourcesAllList',
 );
 const PublicResourcesList = lazyComponent(
   () => import('./resources/list/PublicResourcesList'),
@@ -220,11 +208,11 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'public.marketplace-providers',
-    url: '/marketplace-providers/',
-    component: ServiceProvidersList,
+    name: 'public.marketplace-orders',
+    url: '/marketplace-orders/',
+    component: MarketplaceOrdersList,
     data: {
-      breadcrumb: () => translate('Service providers'),
+      breadcrumb: () => translate('Orders'),
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       hideProjectSelector: true,
     },
@@ -279,16 +267,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-project-order-list',
-    url: 'marketplace-project-order-list/',
-    component: CustomerOrdersList,
-    parent: 'project',
-    data: {
-      breadcrumb: () => translate('My orders'),
-    },
-  },
-
-  {
     name: 'marketplace-provider-details',
     url: 'marketplace-provider-details/:customer_uuid/',
     component: ProviderDetails,
@@ -300,17 +278,6 @@ export const states: StateDeclaration[] = [
     url: 'marketplace-provider-details/:customer_uuid/',
     component: ProviderDetails,
     parent: 'organization',
-  },
-
-  {
-    name: 'marketplace-organization-order-list',
-    url: 'marketplace-organization-order-list/',
-    component: CustomerOrdersList,
-    parent: 'organization-resources',
-    data: {
-      breadcrumb: () => translate('Orders'),
-      priority: 110,
-    },
   },
 
   {
@@ -501,16 +468,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-orders',
-    url: 'marketplace-orders/?{state}',
-    component: OrdersList,
-    parent: 'provider-resources',
-    data: {
-      breadcrumb: () => translate('Orders'),
-    },
-  },
-
-  {
     name: 'marketplace-public-resources',
     url: 'resources-list/?{state}',
     component: PublicResourcesList,
@@ -670,22 +627,13 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-support-orders',
-    url: 'orders/',
-    parent: 'marketplace-admin-resources',
-    component: SupportOrdersList,
+    name: 'public.marketplace-providers',
+    url: '/marketplace-providers/',
+    component: ServiceProvidersList,
     data: {
-      breadcrumb: () => translate('Orders'),
-    },
-  },
-  {
-    name: 'marketplace-organization-resources-all',
-    url: 'marketplace-resources/',
-    component: OrganizationResourcesAllList,
-    parent: 'organization-resources',
-    data: {
-      breadcrumb: () => translate('Resources'),
-      priority: 100,
+      breadcrumb: () => translate('Service providers'),
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      hideProjectSelector: true,
     },
   },
 ];

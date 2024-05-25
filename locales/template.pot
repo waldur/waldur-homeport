@@ -907,13 +907,11 @@ msgstr ""
 msgid "Approved"
 msgstr ""
 
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 msgid "Approved at"
 msgstr ""
 
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/proposals/update/offerings/CallOfferingsSection.tsx
 msgid "Approved by"
 msgstr ""
@@ -1790,9 +1788,8 @@ msgstr ""
 #: src/invitations/InvitationsFilter.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/proposals/utils.ts
 msgid "Canceled"
@@ -1973,7 +1970,7 @@ msgid "Client ID"
 msgstr ""
 
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -2357,9 +2354,7 @@ msgstr ""
 
 #: src/customer/list/CustomerList.tsx
 #: src/invoices/list/InvoicesStatsList.tsx
-#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/offerings/expandable/utils.ts
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
 msgid "Cost"
 msgstr ""
 
@@ -2686,15 +2681,12 @@ msgstr ""
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
-#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/details/OfferingUsersTable.tsx
 #: src/marketplace/offerings/details/permissions/OfferingPermissionsList.tsx
 #: src/marketplace/orders/details/DetailsSection.tsx
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
@@ -2714,8 +2706,7 @@ msgstr ""
 
 #: src/invitations/GroupInvitationsList.tsx
 #: src/invitations/UserPermissionRequestsList.tsx
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
 msgid "Created by"
 msgstr ""
@@ -3502,10 +3493,9 @@ msgstr ""
 #: src/administration/organizations/OrganizationGroupDetailsDialog.tsx
 #: src/marketplace/details/plan/PlanDetailsDialog.tsx
 #: src/marketplace/offerings/details/OfferingDetailsDialog.tsx
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/details/ResourceComponentsDialog.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/navigation/BackendHealthStatusDialog.tsx
@@ -3985,10 +3975,9 @@ msgstr ""
 msgid "Environment variables have been updated successfully."
 msgstr ""
 
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Erred"
@@ -4183,10 +4172,9 @@ msgstr ""
 msgid "Example: [{\"header\": \"Database instance info\", \"body\": \"data\"}]"
 msgstr ""
 
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 msgid "Executing"
 msgstr ""
 
@@ -6209,10 +6197,6 @@ msgstr ""
 msgid "My offerings"
 msgstr ""
 
-#: src/marketplace/routes.ts
-msgid "My orders"
-msgstr ""
-
 #: src/proposals/proposal/UserProposalsList.tsx
 msgid "My proposals"
 msgstr ""
@@ -6264,8 +6248,7 @@ msgstr ""
 #: src/marketplace/offerings/update/plans/QuotasTable.tsx
 #: src/marketplace/offerings/update/roles/AddRoleDialog.tsx
 #: src/marketplace/orders/details/LimitsSection.tsx
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -6953,11 +6936,8 @@ msgstr ""
 #: src/marketplace/offerings/PriceList.tsx
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/orders/details/SummarySection.tsx
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
-#: src/marketplace/orders/list/OrdersFilter.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/OfferingFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
@@ -7398,12 +7378,9 @@ msgstr ""
 msgid "Order with script over API"
 msgstr ""
 
-#: src/marketplace/details/OfferingOrdersList.tsx
-#: src/marketplace/offerings/OfferingDetailsUIView.tsx
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/marketplace/routes.ts
+#: src/marketplace/utils.ts
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 msgid "Orders"
@@ -7445,9 +7422,7 @@ msgstr ""
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/offerings/list/OfferingsList.tsx
-#: src/marketplace/orders/list/OrdersFilter.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
@@ -7806,10 +7781,9 @@ msgstr ""
 msgid "Pending confirmations"
 msgstr ""
 
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 msgid "Pending consumer approval"
 msgstr ""
 
@@ -7825,10 +7799,9 @@ msgstr ""
 msgid "Pending proposals"
 msgstr ""
 
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
 #: src/marketplace/orders/list/OrderStateFilter.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 msgid "Pending provider approval"
 msgstr ""
 
@@ -7980,11 +7953,9 @@ msgstr ""
 
 #: src/booking/deploy/steps.ts
 #: src/marketplace/deploy/steps/FormPlanStep.tsx
-#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/offerings/PriceList.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/resources/details/PlanDetailsField.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
@@ -8450,15 +8421,11 @@ msgstr ""
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace/deploy/steps/FormProjectStep.tsx
-#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -9203,9 +9170,8 @@ msgstr ""
 #: src/booking/utils.ts
 #: src/invitations/InvitationsFilter.tsx
 #: src/marketplace-remote/RequestStateFilter.tsx
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrderStateCell.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 #: src/proposals/proposal/create/ProgressSteps.tsx
 #: src/proposals/proposal/create/ProposalRejectionStep.tsx
@@ -9575,9 +9541,7 @@ msgstr ""
 #: src/administration/roles/PermissionOptions.tsx
 #: src/events/ExpandableEventDetailsTable.tsx
 #: src/issues/create/IssueHeader.tsx
-#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -10832,7 +10796,7 @@ msgstr ""
 #: src/invoices/list/InvoicesStatsList.tsx
 #: src/map/LeafletMap.tsx
 #: src/marketplace/UserPluginOptionsForm.tsx
-#: src/marketplace/orders/list/OrdersFilter.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/routes.ts
 #: src/navigation/workspace/ServiceProviderIcon.tsx
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
@@ -11360,7 +11324,6 @@ msgstr ""
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestsList.tsx
 #: src/marketplace/category/PublicOfferingsList.tsx
-#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/details/OfferingResourcesFilter.tsx
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
@@ -11368,14 +11331,10 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingsFilter.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
-#: src/marketplace/orders/list/CustomerOrdersList.tsx
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
-#: src/marketplace/orders/list/OrdersFilter.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
-#: src/marketplace/orders/list/SupportOrdersList.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
@@ -12566,7 +12525,6 @@ msgstr ""
 #: src/customer/workspace/CustomerEventsFilter.tsx
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/marketplace/category/PublicOfferingsList.tsx
-#: src/marketplace/details/OfferingOrdersList.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
 #: src/marketplace/offerings/details/PublicOfferingComponentsTable.tsx
@@ -12574,12 +12532,9 @@ msgstr ""
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/offerings/update/options/OptionForm.tsx
 #: src/marketplace/orders/details/SummarySection.tsx
-#: src/marketplace/orders/list/CustomerOrdersListFilter.tsx
-#: src/marketplace/orders/list/OrdersFilter.tsx
-#: src/marketplace/orders/list/OrdersList.tsx
+#: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
-#: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/marketplace/robot-accounts/RobotAccountList.tsx

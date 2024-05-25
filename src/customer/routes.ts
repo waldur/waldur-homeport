@@ -72,6 +72,10 @@ const CostPoliciesList = lazyComponent(
   () => import('./cost-policies/CostPoliciesList'),
   'CostPoliciesList',
 );
+const OrganizationResourcesAllList = lazyComponent(
+  () => import('../marketplace/resources/list/OrganizationResourcesAllList'),
+  'OrganizationResourcesAllList',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -98,9 +102,9 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'organization-resources',
-    abstract: true,
     parent: 'organization',
-    component: UIView,
+    url: 'marketplace-resources/',
+    component: OrganizationResourcesAllList,
     data: {
       breadcrumb: () => translate('Resources'),
     },
