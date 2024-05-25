@@ -3,11 +3,12 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
-import { SUPPORT_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/list/constants';
+import { MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/list/constants';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
+import { ProviderAutocomplete } from '../ProviderAutocomplete';
 import { OrderState } from '../types';
 
 import { OrderStateFilter } from './OrderStateFilter';
@@ -32,7 +33,7 @@ const getOrderStateFilterOptions = (): {
   { value: 'rejected', label: translate('Rejected') },
 ];
 
-const PureSupportOrdersListFilter = () => (
+const PureMarketplaceOrdersListFilter = () => (
   <>
     <TableFilterItem
       title={translate('Offering')}
@@ -56,6 +57,13 @@ const PureSupportOrdersListFilter = () => (
       <ProjectFilter />
     </TableFilterItem>
     <TableFilterItem
+      title={translate('Service provider')}
+      name="provider"
+      getValueLabel={(option) => option.customer_name}
+    >
+      <ProviderAutocomplete />
+    </TableFilterItem>
+    <TableFilterItem
       title={translate('State')}
       name="state"
       badgeValue={(value) => value?.label}
@@ -74,10 +82,10 @@ const PureSupportOrdersListFilter = () => (
   </>
 );
 
-export const SupportOrdersListFilter = reduxForm({
-  form: SUPPORT_ORDERS_LIST_FILTER_FORM_ID,
+export const MarketplaceOrdersListFilter = reduxForm({
+  form: MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID,
   initialValues: {
     state: getOrderStateFilterOptions()[0],
   },
   destroyOnUnmount: false,
-})(PureSupportOrdersListFilter) as React.ComponentType;
+})(PureMarketplaceOrdersListFilter) as React.ComponentType;

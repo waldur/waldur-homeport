@@ -1,59 +1,74 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import {
+  MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID,
+  TABLE_MARKETPLACE_ORDERS,
+} from '@waldur/marketplace/orders/list/constants';
+import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import { Table, createFetcher } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { useTable } from '@waldur/table/utils';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
-import { OrderDetailsLink } from '../details/OrderDetailsLink';
+import { OrderProviderActions } from '../actions/OrderProviderActions';
 
-import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from './constants';
-import { CustomerOrdersListFilter } from './CustomerOrdersListFilter';
-import { OrderStateCell } from './OrderStateCell';
+import { MarketplaceOrdersListFilter } from './MarketplaceOrdersListFilter';
+import { OrdersListExpandableRow } from './OrdersListExpandableRow';
+import { OrderTablePlaceholder } from './OrderTablePlaceholder';
 
-export const CustomerOrdersList: FunctionComponent = () => {
+export const MarketplaceOrdersList: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
-    table: 'ordersList',
+    table: TABLE_MARKETPLACE_ORDERS,
     fetchData: createFetcher('marketplace-orders'),
     filter,
-    exportRow,
     exportFields,
+    exportRow,
+    queryField: 'query',
   });
-  const { state } = useCurrentStateAndParams();
   const columns = [
     {
       title: translate('Name'),
       render: ({ row }) => (
-        <OrderDetailsLink
-          order_uuid={row.uuid}
-          customer_uuid={row.customer_uuid}
-          project_uuid={row.project_uuid}
-        >
-          {row.attributes.name || 'N/A'}
-        </OrderDetailsLink>
+        <Link
+          state="marketplace-order-details-project"
+          params={{ order_uuid: row.uuid, uuid: row.project_uuid }}
+          label={row.attributes.name}
+        />
       ),
+      key: 'title',
     },
     {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
+      key: 'created_at',
     },
     {
       title: translate('Created by'),
       render: ({ row }) => row.created_by_full_name || row.created_by_username,
+      key: 'created_by',
     },
     {
       title: translate('State'),
-      render: OrderStateCell,
+      render: ({ row }) => row.state,
       orderField: 'state',
+      key: 'state',
+    },
+    {
+      title: translate('Project'),
+      render: ({ row }) => row.project_name,
+      key: 'project_name',
+    },
+    {
+      title: translate('Client organization'),
+      render: ({ row }) => row.customer_name,
+      key: 'customer_name',
     },
     {
       title: translate('Approved at'),
@@ -62,6 +77,7 @@ export const CustomerOrdersList: FunctionComponent = () => {
           ? formatDateTime(row.consumer_reviewed_at)
           : DASH_ESCAPE_CODE,
       orderField: 'consumer_reviewed_at',
+      key: 'approved_at',
     },
     {
       title: translate('Approved by'),
@@ -69,31 +85,28 @@ export const CustomerOrdersList: FunctionComponent = () => {
         row.consumer_reviewed_by_full_name ||
         row.consumer_reviewed_by_username ||
         DASH_ESCAPE_CODE,
-    },
-    {
-      title: translate('Cost'),
-      render: ({ row }) => defaultCurrency(row.cost || 0),
-      orderField: 'cost',
+      key: 'approved_by',
     },
   ];
 
-  if (state.parent !== 'project') {
-    columns.splice(3, 0, {
-      title: translate('Project'),
-      render: ({ row }) => row.project_name,
-    });
-  }
+  useMarketplacePublicTabs();
 
   return (
     <Table
       {...props}
       columns={columns}
+      placeholderComponent={<OrderTablePlaceholder />}
       verboseName={translate('Orders')}
       hasQuery={true}
       showPageSizeSelector={true}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
-      filters={<CustomerOrdersListFilter />}
+      expandableRow={OrdersListExpandableRow}
+      filters={<MarketplaceOrdersListFilter />}
+      hoverableRow={({ row }) => (
+        <OrderProviderActions row={row} refetch={props.fetch} />
+      )}
+      hasOptionalColumns
     />
   );
 };
@@ -108,7 +121,6 @@ const exportRow = (row) => [
   row.consumer_reviewed_by_full_name ||
     row.consumer_reviewed_by_username ||
     DASH_ESCAPE_CODE,
-  row.cost,
 ];
 
 const exportFields = [
@@ -117,23 +129,16 @@ const exportFields = [
   'State',
   'Approved at',
   'Approved by',
-  'Cost',
 ];
 
 const mapStateToFilter = createSelector(
-  getProject,
-  getCustomer,
-  getFormValues(CUSTOMER_ORDERS_LIST_FILTER_FORM_ID),
-  (project, customer, filterValues: any) => {
+  getFormValues(MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID),
+  (filterValues: any) => {
     const filter: Record<string, string> = {};
-
-    if (project) {
-      filter.project_uuid = project.uuid;
-    } else {
-      filter.customer_uuid = customer.uuid;
-    }
-
     if (filterValues) {
+      if (filterValues.organization) {
+        filter.customer_uuid = filterValues.organization.uuid;
+      }
       if (filterValues.project) {
         filter.project_uuid = filterValues.project.uuid;
       }
@@ -146,8 +151,10 @@ const mapStateToFilter = createSelector(
       if (filterValues.offering) {
         filter.offering_uuid = filterValues.offering.uuid;
       }
+      if (filterValues.provider) {
+        filter.provider_uuid = filterValues.provider.customer_uuid;
+      }
     }
-
     return filter;
   },
 );

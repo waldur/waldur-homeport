@@ -33,10 +33,6 @@ const OfferingBookingResourcesCalendarContainer = lazyComponent(
     ),
   'OfferingBookingResourcesCalendarContainer',
 );
-const OfferingOrdersList = lazyComponent(
-  () => import('../details/OfferingOrdersList'),
-  'OfferingOrdersList',
-);
 const OfferingResourcesList = lazyComponent(
   () => import('../details/OfferingResourcesList'),
   'OfferingResourcesList',
@@ -97,11 +93,6 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           component: OfferingBookingResourcesCalendarContainer,
         }
       : null,
-    {
-      title: translate('Orders'),
-      key: 'orders',
-      component: OfferingOrdersList,
-    },
     {
       title: translate('Resources'),
       key: 'resources',

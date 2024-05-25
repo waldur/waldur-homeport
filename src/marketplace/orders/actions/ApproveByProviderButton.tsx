@@ -13,7 +13,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 
 import {
-  TABLE_SUPPORT_ORDERS,
+  TABLE_MARKETPLACE_ORDERS,
   TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
   TABLE_PENDING_PUBLIC_ORDERS,
   TABLE_PUBLIC_ORDERS,
@@ -32,7 +32,9 @@ export const ApproveByProviderButton: FunctionComponent<
     try {
       await approveOrderByProvider(props.orderUuid);
       const newOrder = await getOrder(props.orderUuid);
-      dispatch(updateEntity(TABLE_SUPPORT_ORDERS, props.orderUuid, newOrder));
+      dispatch(
+        updateEntity(TABLE_MARKETPLACE_ORDERS, props.orderUuid, newOrder),
+      );
       // update orders table on the main page
       dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.orderUuid, newOrder));
       // update pending orders tables on the drawer
