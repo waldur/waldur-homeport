@@ -6,10 +6,10 @@ import { ListGroup, ListGroupItem, Stack } from 'react-bootstrap';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import IconEmpty from '@waldur/navigation/header/file-search.svg';
 
 import { Resource } from '../types';
 
+import IconEmpty from './file-search.svg';
 import { ItemIcon } from './ItemIcon';
 
 const ResourceListItem = ({ item, loading }) => (

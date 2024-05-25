@@ -39,6 +39,14 @@ describe('Search Popup', () => {
           title: 'VMs',
         },
       ])
+      .intercept('GET', '/api/projects/**', (req) => {
+        req.reply({
+          body: [],
+          headers: {
+            'x-result-count': '0',
+          },
+        });
+      })
       .intercept('GET', '/api/projects/6f3ae6f43d284ca196afeb467880b3b9/', {
         fixture: 'projects/alice_azure.json',
       })
@@ -193,34 +201,48 @@ describe('Search Popup', () => {
       .intercept(
         'GET',
         'api/marketplace-resources/?query=ccc&state=Creating&state=OK&state=Erred&state=Updating&state=Terminating&field=name&field=uuid&field=category_title&field=offering_thumbnail&field=customer_name&field=project_name&field=project_uuid&field=state',
-        [],
+        (req) => {
+          req.reply({
+            body: [],
+            headers: {
+              'x-result-count': '0',
+            },
+          });
+        },
       )
       .intercept(
         'GET',
         'api/marketplace-resources/?query=admin&state=Creating&state=OK&state=Erred&state=Updating&state=Terminating&field=name&field=uuid&field=category_title&field=offering_thumbnail&field=customer_name&field=project_name&field=project_uuid&field=state',
-        [
-          {
-            offering_thumbnail: null,
-            category_title: 'Private clouds',
-            uuid: 'bfd8892313df41dea830c3bb1add09a3',
-            state: 'OK',
-            project_uuid: '635e9c2d57ae48f28973f5d455fda3fd',
-            project_name: 'First project',
-            customer_name: 'test',
-            name: 'admin',
-          },
-          {
-            offering_thumbnail:
-              'https://demo-next.waldur.com/media/files/marketplace_service_offering_thumbnails/Desktop_Ubuntu_20.04.png',
-            category_title: 'VMs',
-            uuid: '88041d6695c34d53ae512cedd14fb14b',
-            state: 'OK',
-            project_uuid: '559cee11d35a444395522b63e95e670d',
-            project_name: 'First project',
-            customer_name: 'Demo Org',
-            name: 'admin',
-          },
-        ],
+        (req) => {
+          req.reply({
+            headers: {
+              'x-result-count': '2',
+            },
+            body: [
+              {
+                offering_thumbnail: null,
+                category_title: 'Private clouds',
+                uuid: 'bfd8892313df41dea830c3bb1add09a3',
+                state: 'OK',
+                project_uuid: '635e9c2d57ae48f28973f5d455fda3fd',
+                project_name: 'First project',
+                customer_name: 'test',
+                name: 'admin',
+              },
+              {
+                offering_thumbnail:
+                  'https://demo-next.waldur.com/media/files/marketplace_service_offering_thumbnails/Desktop_Ubuntu_20.04.png',
+                category_title: 'VMs',
+                uuid: '88041d6695c34d53ae512cedd14fb14b',
+                state: 'OK',
+                project_uuid: '559cee11d35a444395522b63e95e670d',
+                project_name: 'First project',
+                customer_name: 'Demo Org',
+                name: 'admin',
+              },
+            ],
+          });
+        },
       )
       .setToken()
       .visit('/profile/')
@@ -228,27 +250,30 @@ describe('Search Popup', () => {
   });
 
   it('should open the search popup', () => {
-    cy.get('#searchIconContainer').click();
+    cy.get('#searchContainer').click();
   });
 
   it('should open the search popup and be writable', () => {
-    cy.get('#searchIconContainer').click();
-    cy.get('#GlobalSearch input[name=search]').click().focused().type('test');
+    cy.get('#searchContainer').click().focused().type('test');
   });
   it('when searched for a keyword and matches it should come up', () => {
-    cy.get('#searchIconContainer').click();
-    cy.get('#GlobalSearch input[name=search]').click().focused().type('admin'),
-      { delay: 100 };
-    cy.get('#GlobalSearch .fs-6.fw-semibold').each(($row) => {
-      cy.wrap($row).should('have.text', 'admin');
-    });
+    cy.get('#searchContainer').click().focused().type('admin', { delay: 100 });
+    cy.get('#GlobalSearch .tab-content')
+      .contains('h6', 'Resources')
+      .parent()
+      .within(() =>
+        cy.get('a .fs-6.fw-semibold').each(($row) => {
+          cy.wrap($row).should('have.text', 'admin');
+        }),
+      );
   });
   it('when searched for a keyword and not matches, "No result found" message should come up', () => {
-    cy.get('#searchIconContainer').debug().click();
-    cy.get('#GlobalSearch input[name=search]').click().focused().type('ccc');
-    cy.get('#GlobalSearch .text-gray-600.fs-5.mb-2').should(
-      'have.text',
-      'No result found',
-    );
+    cy.get('#searchContainer').debug().click().focused().type('ccc');
+    cy.get('#GlobalSearch .tab-content')
+      .contains('h6', 'Resources')
+      .parent()
+      .within(() =>
+        cy.get('.text-muted').should('have.text', 'No result found'),
+      );
   });
 });

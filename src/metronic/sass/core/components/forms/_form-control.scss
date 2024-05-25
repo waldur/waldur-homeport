@@ -4,8 +4,6 @@
 
 // Form control
 .form-control {
-  box-shadow: none !important;
-
   // Dropdown shown state
   .dropdown.show > & {
     color: $input-focus-color;

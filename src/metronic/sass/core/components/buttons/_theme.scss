@@ -395,3 +395,27 @@
     $bg-color-active
   );
 }
+
+// Outline default style
+.btn.btn-outline.btn-outline-default {
+  $color: $gray-700;
+  $icon-color: $gray-700;
+  $border-color: $gray-300;
+  $bg-color: null;
+
+  $color-active: $primary;
+  $icon-color-active: $primary;
+  $border-color-active: $primary;
+  $bg-color-active: $primary-light;
+
+  @include button-custom-variant(
+    $color,
+    $icon-color,
+    $border-color,
+    $bg-color,
+    $color-active,
+    $icon-color-active,
+    $border-color-active,
+    $bg-color-active
+  );
+}

@@ -21,6 +21,8 @@
 .login-button-icon img,
 .login-button-icon svg {
   max-height: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .login-button-text {
