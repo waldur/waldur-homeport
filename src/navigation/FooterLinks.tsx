@@ -12,7 +12,6 @@ import { MenuComponent } from '@waldur/metronic/components';
 import { DocsLink } from '@waldur/navigation/header/DocsLink';
 import { IssuesLink } from '@waldur/navigation/IssuesLink';
 import { showSuccess } from '@waldur/store/notify';
-import './FooterLinks.scss';
 
 const SupportSubMenuItem = ({ title, onCopy }) =>
   title && (

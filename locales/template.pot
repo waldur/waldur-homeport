@@ -7454,7 +7454,6 @@ msgstr ""
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
 #: src/permissions/constants.tsx
@@ -8469,7 +8468,6 @@ msgstr ""
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
-#: src/navigation/sidebar/ManagementMenu.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/openstack/deploy/steps.ts
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
