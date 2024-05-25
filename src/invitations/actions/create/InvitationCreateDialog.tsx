@@ -22,7 +22,7 @@ interface OwnProps {
 
 export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
   form: INVITATION_CREATE_FORM_ID,
-  enableReinitialize: true,
+  enableReinitialize: false,
   initialValues: { rows: [{}] },
 })(({ resolve, submitting, handleSubmit, change, reset, valid }) => {
   const {
