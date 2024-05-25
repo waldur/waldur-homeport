@@ -85,14 +85,6 @@ const CustomerOrdersList = lazyComponent(
   () => import('./orders/list/CustomerOrdersList'),
   'CustomerOrdersList',
 );
-const ProjectResourcesContainer = lazyComponent(
-  () => import('./resources/list/ProjectResourcesContainer'),
-  'ProjectResourcesContainer',
-);
-const ProjectResourcesAllList = lazyComponent(
-  () => import('./resources/list/ProjectResourcesAllList'),
-  'ProjectResourcesAllList',
-);
 const OrganizationResourcesAllList = lazyComponent(
   () => import('./resources/list/OrganizationResourcesAllList'),
   'OrganizationResourcesAllList',
@@ -686,28 +678,6 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Orders'),
     },
   },
-
-  {
-    name: 'marketplace-project-resources',
-    url: 'marketplace-resources/:category_uuid/',
-    component: ProjectResourcesContainer,
-    parent: 'project',
-    data: {
-      hideHeaderMenu: true,
-    },
-  },
-
-  {
-    name: 'marketplace-project-resources-all',
-    url: 'marketplace-resources/',
-    component: ProjectResourcesAllList,
-    parent: 'project',
-    data: {
-      breadcrumb: () => translate('All resources'),
-      hideHeaderMenu: true,
-    },
-  },
-
   {
     name: 'marketplace-organization-resources-all',
     url: 'marketplace-resources/',

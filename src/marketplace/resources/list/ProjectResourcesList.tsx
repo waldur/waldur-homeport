@@ -10,7 +10,6 @@ import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-ac
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
-import { getProject } from '@waldur/workspace/selectors';
 
 import { ResourceImportButton } from '../import/ResourceImportButton';
 
@@ -27,25 +26,23 @@ import { resourcesListRequiredFields } from './utils';
 interface OwnProps {
   category_uuid: string;
   columns: CategoryColumn[];
-  offerings;
 }
 
 export const ProjectResourcesList: FunctionComponent<OwnProps> = (ownProps) => {
-  const project = useSelector(getProject);
   const filterValues: any = useSelector(
     getFormValues('ProjectResourcesFilter'),
   );
 
   const filter = useMemo(() => {
     const filter: Record<string, any> = {};
-    if (project) {
-      filter.project_uuid = project.uuid;
-    }
     if (ownProps.category_uuid) {
       filter.category_uuid = ownProps.category_uuid;
     }
     if (filterValues?.offering) {
       filter.offering_uuid = filterValues.offering.uuid;
+    }
+    if (filterValues?.project) {
+      filter.project_uuid = filterValues.project.uuid;
     }
     if (filterValues?.runtime_state) {
       filter.runtime_state = filterValues.runtime_state.value;
@@ -53,12 +50,15 @@ export const ProjectResourcesList: FunctionComponent<OwnProps> = (ownProps) => {
     if (filterValues?.state) {
       filter.state = filterValues.state.map((option) => option.value);
     }
+    if (filterValues?.organization) {
+      filter.customer_uuid = filterValues.organization.uuid;
+    }
     filter.field = resourcesListRequiredFields();
     return filter;
-  }, [filterValues, project, ownProps.category_uuid]);
+  }, [filterValues, ownProps.category_uuid]);
 
   const props = useTable({
-    table: `ProjectResourcesList-${project.uuid}-${ownProps.category_uuid}`,
+    table: `ProjectResourcesList-${ownProps.category_uuid}`,
     fetchData: createFetcher('marketplace-resources'),
     filter,
     queryField: 'query',
@@ -96,10 +96,7 @@ export const ProjectResourcesList: FunctionComponent<OwnProps> = (ownProps) => {
   const tableActions = (
     <>
       {isFeatureVisible(MarketplaceFeatures.import_resources) && (
-        <ResourceImportButton
-          category_uuid={ownProps.category_uuid}
-          project_uuid={project?.uuid}
-        />
+        <ResourceImportButton category_uuid={ownProps.category_uuid} />
       )}
       <CreateResourceButton category_uuid={ownProps.category_uuid} />
     </>
@@ -121,7 +118,9 @@ export const ProjectResourcesList: FunctionComponent<OwnProps> = (ownProps) => {
       expandableRow={ExpandableResourceSummary}
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
-      filters={<ProjectResourcesFilter offerings={ownProps.offerings} />}
+      filters={
+        <ProjectResourcesFilter category_uuid={ownProps.category_uuid} />
+      }
     />
   );
 };

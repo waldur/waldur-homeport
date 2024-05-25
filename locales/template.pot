@@ -676,8 +676,8 @@ msgstr ""
 msgid "All proposals"
 msgstr ""
 
-#: src/marketplace/routes.ts
 #: src/navigation/sidebar/ResourcesMenu.tsx
+#: src/user/routes.ts
 msgid "All resources"
 msgstr ""
 
@@ -6948,6 +6948,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/list/OfferingFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesList.tsx
@@ -7437,6 +7438,8 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersFilter.tsx
 #: src/marketplace/orders/list/OrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8444,6 +8447,7 @@ msgstr ""
 #: src/marketplace/orders/list/SupportOrdersList.tsx
 #: src/marketplace/orders/list/SupportOrdersListFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
@@ -8594,7 +8598,7 @@ msgstr ""
 msgid "Project removal"
 msgstr ""
 
-#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/list/UserResourcesContainer.tsx
 msgid "Project resources"
 msgstr ""
 
@@ -10578,6 +10582,7 @@ msgstr ""
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
 #: src/issues/create/IssueQuickCreate.tsx
 #: src/marketplace/resources/actions/MoveToProjectAutocomplete.tsx
+#: src/marketplace/resources/import/ResourceImportDialog.tsx
 #: src/marketplace/resources/list/ProjectFilter.tsx
 #: src/marketplace/robot-accounts/ProviderProjectFilter.tsx
 msgid "Select project..."
@@ -13050,7 +13055,7 @@ msgstr ""
 msgid "Unable to load category"
 msgstr ""
 
-#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/list/UserResourcesContainer.tsx
 msgid "Unable to load category details"
 msgstr ""
 
@@ -15518,7 +15523,7 @@ msgstr ""
 msgid "{agent} - {status}. Last request: {time}"
 msgstr ""
 
-#: src/marketplace/resources/list/ProjectResourcesContainer.tsx
+#: src/marketplace/resources/list/UserResourcesContainer.tsx
 msgid "{category} resources"
 msgstr ""
 

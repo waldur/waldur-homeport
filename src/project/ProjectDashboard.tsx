@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { ProjectResourcesAllList } from '@waldur/marketplace/resources/list/ProjectResourcesAllList';
+import { UserResourcesAllList } from '@waldur/marketplace/resources/list/UserResourcesAllList';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getProject, getUser } from '@waldur/workspace/selectors';
@@ -27,7 +27,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   return (
     <>
       {!shouldConcealPrices && <ProjectDashboardCostLimits project={project} />}
-      <ProjectResourcesAllList initialPageSize={5} className="mb-6" />
+      <UserResourcesAllList
+        initialPageSize={5}
+        className="mb-6"
+        hasProjectFilter={false}
+      />
       <ProjectEventsView />
     </>
   );

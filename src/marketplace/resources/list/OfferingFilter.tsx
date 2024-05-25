@@ -1,26 +1,26 @@
 import React from 'react';
-import { Field } from 'redux-form';
 
-import { Select } from '@waldur/form/themed-select';
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
+import { resourceOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
-import { OfferingChoice } from './types';
-
-export const OfferingFilter: React.FC<{ options: OfferingChoice[] }> = ({
-  options,
+export const OfferingFilter: React.FC<{ category_uuid }> = ({
+  category_uuid,
 }) => (
-  <Field
+  <AsyncSelectField
     name="offering"
-    component={(fieldProps) => (
-      <Select
-        placeholder={translate('Select offering...')}
-        options={options}
-        value={fieldProps.input.value}
-        onChange={(value) => fieldProps.input.onChange(value)}
-        isClearable={true}
-        getOptionLabel={(option) => option.name}
-        getOptionValue={(option) => option.uuid}
-      />
-    )}
+    label={translate('Offering')}
+    placeholder={translate('Select offering...')}
+    loadOptions={(query, prevOptions, page) =>
+      resourceOfferingsAutocomplete(
+        { name: query },
+        prevOptions,
+        page,
+        category_uuid,
+      )
+    }
+    getOptionLabel={({ name }) => name}
+    getOptionValue={({ url }) => url}
+    required={true}
   />
 );

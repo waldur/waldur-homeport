@@ -73,6 +73,14 @@ const IssueDetailsContainer = lazyComponent(
   () => import('../issues/IssueDetails'),
   'IssueDetails',
 );
+const UserResourcesContainer = lazyComponent(
+  () => import('@waldur/marketplace/resources/list/UserResourcesContainer'),
+  'UserResourcesContainer',
+);
+const UserResourcesAllList = lazyComponent(
+  () => import('@waldur/marketplace/resources/list/UserResourcesAllList'),
+  'UserResourcesAllList',
+);
 
 const UserDetails = lazyComponent(() => import('./UserDetails'), 'UserDetails');
 
@@ -229,6 +237,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Resources'),
       priority: 110,
+      skipBreadcrumb: true,
     },
   },
   {
@@ -243,5 +252,23 @@ export const states: StateDeclaration[] = [
     name: 'user-email-change',
     url: '/user_email_change/:token/',
     component: UserEmailChangeCallback,
+  },
+  {
+    name: 'profile.user-resources',
+    url: 'resources/:category_uuid/',
+    component: UserResourcesContainer,
+    data: {
+      hideHeaderMenu: true,
+    },
+  },
+  {
+    name: 'profile.all-user-resources',
+    url: 'all-resources/',
+    component: UserResourcesAllList,
+    data: {
+      breadcrumb: () => translate('All resources'),
+      hideHeaderMenu: true,
+      skipBreadcrumb: true,
+    },
   },
 ];

@@ -42,12 +42,5 @@ export const getCustomersPage = (
     itemCount: parseResultCount(response),
   }));
 
-export const getProjectCounters = (projectUuid: string) =>
-  get(`/marketplace-project-categories/${projectUuid}/`).then(
-    (response) => response.data,
-  );
-
-export const getOrganizationCounters = (customerUuid: string) =>
-  get(`/marketplace-customer-categories/${customerUuid}/`).then(
-    (response) => response.data,
-  );
+export const getGlobalCounters = () =>
+  get(`/marketplace-global-categories/`).then((response) => response.data);

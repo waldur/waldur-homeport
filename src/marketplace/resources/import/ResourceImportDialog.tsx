@@ -1,9 +1,12 @@
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { Field, reduxForm } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
+import { moveToProjectAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -13,7 +16,7 @@ import { ResourcesList } from './ResourcesList';
 import { ImportDialogProps } from './types';
 import { useImportDialog } from './useImportDialog';
 
-export const ResourceImportDialog: React.FC<ImportDialogProps> = (props) => {
+const PureResourceImportDialog: React.FC<ImportDialogProps> = (props) => {
   const {
     offering,
     selectOffering,
@@ -57,6 +60,19 @@ export const ResourceImportDialog: React.FC<ImportDialogProps> = (props) => {
                 className="float-e-margins"
                 title={translate('Step 1. Select offering')}
               >
+                <Field
+                  name="project"
+                  component={AsyncSelectField}
+                  placeholder={translate('Select project...')}
+                  isClearable={true}
+                  defaultOptions
+                  loadOptions={(query, prevOptions, { page }) =>
+                    moveToProjectAutocomplete(query, prevOptions, page)
+                  }
+                  getOptionValue={(option) => option.name}
+                  getOptionLabel={(option) => option.name}
+                  required
+                />
                 <OfferingsList
                   choices={offeringsProps.value}
                   value={offering}
@@ -98,3 +114,7 @@ export const ResourceImportDialog: React.FC<ImportDialogProps> = (props) => {
     </ModalDialog>
   );
 };
+
+export const ResourceImportDialog = reduxForm<{}, ImportDialogProps>({
+  form: 'ResourceImportDialog',
+})(PureResourceImportDialog);
