@@ -75,7 +75,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
       <UserResourcesAllList
         initialPageSize={5}
         className="mb-6"
-        hasProjectFilter={false}
+        project={project}
       />
       <ProjectEventsView />
     </>

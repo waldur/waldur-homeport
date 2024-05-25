@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -7,6 +7,7 @@ import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resour
 import { createFetcher } from '@waldur/table';
 import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
+import { Project } from '@waldur/workspace/types';
 
 import { ResourcesAllListTable } from './ResourcesAllListTable';
 import { resourcesListRequiredFields } from './utils';
@@ -44,11 +45,15 @@ const mapStateToFilter = createSelector(
 );
 
 interface UserResourcesAllListProps extends Partial<TableProps> {
-  hasProjectFilter?: boolean;
+  project?: Project;
 }
 
 export const UserResourcesAllList: FC<UserResourcesAllListProps> = (props) => {
-  const filter = useSelector(mapStateToFilter);
+  const stateFilter = useSelector(mapStateToFilter);
+  const filter = useMemo(
+    () => ({ project_uuid: props.project?.uuid, ...stateFilter }),
+    [props.project],
+  );
   const tableProps = useTable({
     table: `UserResourcesAllList`,
     fetchData: createFetcher('marketplace-resources'),
@@ -61,7 +66,7 @@ export const UserResourcesAllList: FC<UserResourcesAllListProps> = (props) => {
       {...tableProps}
       {...props}
       hasProjectColumn
-      hasProjectFilter={props.hasProjectFilter}
+      hasProjectFilter={!props.project}
     />
   );
 };
