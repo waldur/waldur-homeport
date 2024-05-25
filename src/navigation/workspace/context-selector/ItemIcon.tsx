@@ -3,15 +3,22 @@ import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 
 import { getItemAbbreviation } from './utils';
 
-export const ItemIcon = ({ item }) =>
+export const ItemIcon = ({ item, circle = false, className = '' }) =>
   item.image ? (
-    <Image src={item.image} size={40} />
+    <Image src={item.image} size={40} circle={circle} classes={className} />
   ) : (
-    <div className="symbol symbol-40px">
-      <ImagePlaceholder width="40px" height="40px" backgroundColor="#e2e2e2">
-        <div className="symbol-label fs-6 fw-bold">
-          {getItemAbbreviation(item)}
-        </div>
+    <div
+      className={
+        `symbol symbol-40px ${className}` + (circle ? ' symbol-circle' : '')
+      }
+    >
+      <ImagePlaceholder
+        width="40px"
+        height="40px"
+        backgroundColor="#F1F7EF"
+        circle={circle}
+      >
+        {getItemAbbreviation(item)}
       </ImagePlaceholder>
     </div>
   );

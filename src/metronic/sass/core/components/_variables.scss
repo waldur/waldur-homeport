@@ -6,6 +6,7 @@
 // Bootstrap base colors
 $white: #ffffff !default;
 $black: #000000 !default;
+$gray-50: if(isDarkMode(), #111a13, #f9fafb) !default; // Custom variable
 $gray-100: if(isDarkMode(), #1a261d, #f5f8fa) !default;
 $gray-200: if(isDarkMode(), #405448, #eff2f5) !default;
 $gray-300: if(isDarkMode(), #45594a, #e4e6ef) !default;
@@ -22,6 +23,7 @@ $dark-mode-page-bg-color: #172219 !default;
 
 // Bootstrap gray colors map
 $grays: (
+  '50': $gray-50,
   '100': $gray-100,
   '200': $gray-200,
   '300': $gray-300,
@@ -84,6 +86,8 @@ $primary-inverse: if(
 ) !default; // Custom variable
 
 // Primary base
+$primary-50: if(isDarkMode(), #1a261d, #f1f7ef); // Custom variable
+$primary-100: if(isDarkMode(), #2b3d2f, #e6f0e3); // Custom variable
 $primary-600: if(isDarkMode(), #6f977f, #286100); // Custom variable
 
 // Secondary colors
@@ -145,6 +149,9 @@ $theme-colors: (
   // custom color type
   'light': $light,
   'primary': $primary,
+  'primary-50': $primary-50,
+  'primary-100': $primary-100,
+  'primary-600': $primary-600,
   'secondary': $secondary,
   'success': $success,
   'info': $info,

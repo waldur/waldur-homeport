@@ -7,6 +7,7 @@
 // Theme colors
 // Primary base
 $primary-50: if(isDarkMode(), #1a261d, #f1f7ef);
+$primary-100: if(isDarkMode(), #2b3d2f, #e6f0e3);
 $primary-200: if(isDarkMode(), #405448, #c3dabb);
 $primary-300: if(isDarkMode(), #5d806b, #97bf89);
 $primary-600: if(isDarkMode(), #6f977f, #286100);
@@ -14,8 +15,8 @@ $primary-700: if(isDarkMode(), #adcba2, #174000);
 $primary-800: if(isDarkMode(), #ffffff, #1d2b1c);
 
 // Primary
-$primary: if(isDarkMode(), #78bf69, #009ef7);
-$primary-active: if(isDarkMode(), #53a642, #0095e8);
+$primary: if(isDarkMode(), #78bf69, $primary-600);
+$primary-active: if(isDarkMode(), #53a642, $primary-700);
 $primary-light: if(isDarkMode(), #214729, #f1faff);
 $primary-inverse: if(isDarkMode(), #172219, #ffffff);
 

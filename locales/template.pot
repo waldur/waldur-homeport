@@ -559,7 +559,7 @@ msgstr ""
 msgid "Administration"
 msgstr ""
 
-#: src/navigation/header/SearchToggle.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 msgid "Advanced Search"
 msgstr ""
 
@@ -687,6 +687,10 @@ msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
 msgid "All resources will be scheduled for termination once the date is reached."
+msgstr ""
+
+#: src/navigation/header/search/SearchPopover.tsx
+msgid "All results"
 msgstr ""
 
 #: src/proposals/routes.ts
@@ -1759,7 +1763,7 @@ msgstr ""
 #: src/marketplace/orders/actions/CancelTerminationOrderButton.tsx
 #: src/marketplace/orders/details/CancelOrderButton.tsx
 #: src/modal/CloseDialogButton.tsx
-#: src/navigation/header/SearchToggle.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/table/TableFilterActions.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -1953,6 +1957,10 @@ msgstr ""
 
 #: src/table/TableFilters.tsx
 msgid "Clear filters"
+msgstr ""
+
+#: src/navigation/header/search/NoResult.tsx
+msgid "Clear search"
 msgstr ""
 
 #: src/marketplace/offerings/details/GoogleCalendarLink.tsx
@@ -2301,7 +2309,7 @@ msgstr ""
 msgid "Contact vendor"
 msgstr ""
 
-#: src/navigation/header/SearchFilters.tsx
+#: src/navigation/header/search/SearchFilters.tsx
 msgid "Contains the word"
 msgstr ""
 
@@ -4307,6 +4315,7 @@ msgid "Favorite pages"
 msgstr ""
 
 #: src/navigation/header/FavoritePagesDropdown.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 msgid "Favourites"
 msgstr ""
 
@@ -6728,12 +6737,13 @@ msgid "No resource"
 msgstr ""
 
 #: src/marketplace/resources/resource-selector/ResourcesList.tsx
-#: src/navigation/header/SearchToggle.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 msgid "No result found"
 msgstr ""
 
 #: src/auth/saml2/ProviderField.tsx
 #: src/form/AsyncSelectField.tsx
+#: src/navigation/header/search/NoResult.tsx
 msgid "No results found"
 msgstr ""
 
@@ -7587,6 +7597,7 @@ msgstr ""
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 #: src/navigation/sidebar/OrganizationsListMenu.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
@@ -8176,8 +8187,11 @@ msgstr ""
 msgid "Please stop the instance before its removal."
 msgstr ""
 
+#: src/navigation/header/search/NoResult.tsx
+msgid "Please try again"
+msgstr ""
+
 #: src/marketplace/resources/resource-selector/ResourcesList.tsx
-#: src/navigation/header/SearchToggle.tsx
 msgid "Please try again with a different query"
 msgstr ""
 
@@ -8656,6 +8670,7 @@ msgstr ""
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 #: src/navigation/sidebar/ProjectsListMenu.tsx
 #: src/navigation/workspace/context-selector/OrganizationsPanel.tsx
 #: src/project/ProjectsList.tsx
@@ -9046,6 +9061,10 @@ msgstr ""
 
 #: src/vmware/actions/RebootAction.tsx
 msgid "Reboot"
+msgstr ""
+
+#: src/navigation/header/search/SearchPopover.tsx
+msgid "Recent"
 msgstr ""
 
 #: src/support/dashboard/SupportStatistics.tsx
@@ -9744,6 +9763,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/project-selector/ProjectsList.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 #: src/reporting/quotas/constants.tsx
@@ -10322,8 +10342,8 @@ msgid "Script language: {language}"
 msgstr ""
 
 #: src/core/AsyncSearchBox.tsx
-#: src/navigation/header/SearchFilters.tsx
-#: src/navigation/header/SearchToggle.tsx
+#: src/navigation/header/search/SearchFilters.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
@@ -10341,7 +10361,7 @@ msgstr ""
 msgid "Search offering..."
 msgstr ""
 
-#: src/navigation/header/SearchToggle.tsx
+#: src/navigation/header/search/SearchInput.tsx
 #: src/navigation/workspace/context-selector/ContextSelectorDropdown.tsx
 #: src/navigation/workspace/context-selector/GuestDropdown.tsx
 msgid "Search..."
@@ -14710,6 +14730,10 @@ msgstr ""
 
 #: src/marketplace/UserPluginOptionsForm.tsx
 msgid "Warning: Service provider option will clear all usernames of the existing offering users"
+msgstr ""
+
+#: src/navigation/header/search/NoResult.tsx
+msgid "We didn't much any result."
 msgstr ""
 
 #: src/marketplace/resources/resource-pending/OrderErredView.tsx
