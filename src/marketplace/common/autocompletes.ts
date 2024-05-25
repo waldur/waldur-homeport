@@ -169,3 +169,24 @@ export const userAutocomplete = async (
   const response = await getUsers(params);
   return returnReactSelectAsyncPaginateObject(response, prevOptions, page);
 };
+
+export const resourceOfferingsAutocomplete = async (
+  query: object,
+  prevOptions,
+  currentPage: number,
+  category_uuid,
+) => {
+  const response = await getSelectData(
+    `/marketplace-resource-offerings/${category_uuid}/`,
+    {
+      ...query,
+      page: currentPage,
+      page_size: ENV.pageSize,
+    },
+  );
+  return returnReactSelectAsyncPaginateObject(
+    response,
+    prevOptions,
+    currentPage,
+  );
+};

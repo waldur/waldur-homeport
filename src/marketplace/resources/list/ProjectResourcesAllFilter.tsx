@@ -11,18 +11,32 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
 import { ProjectFilter } from './ProjectFilter';
+import { RelatedCustomerFilter } from './RelatedCustomerFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
 import { NON_TERMINATED_STATES } from './SupportResourcesFilter';
 
-const PureProjectResourcesAllFilter: FunctionComponent<any> = (props) => {
+interface ProjectResourcesAllFilterProps {
+  hasProjectFilter?: boolean;
+  change?: any;
+}
+
+const PureProjectResourcesAllFilter: FunctionComponent<
+  ProjectResourcesAllFilterProps
+> = (props) => {
   const customer = useSelector(getCustomer);
   useEffect(() => {
     props.change('project', undefined);
   }, [customer]);
-
   return (
     <>
+      <TableFilterItem
+        title={translate('Organization')}
+        name="organization"
+        badgeValue={(value) => value?.name}
+      >
+        <RelatedCustomerFilter />
+      </TableFilterItem>
       <TableFilterItem
         title={translate('Offering')}
         name="offering"
@@ -37,13 +51,15 @@ const PureProjectResourcesAllFilter: FunctionComponent<any> = (props) => {
       >
         <CategoryFilter />
       </TableFilterItem>
-      <TableFilterItem
-        title={translate('Project')}
-        name="project"
-        badgeValue={(value) => value?.name}
-      >
-        <ProjectFilter customer_uuid={customer?.uuid} />
-      </TableFilterItem>
+      {props.hasProjectFilter !== false ? (
+        <TableFilterItem
+          title={translate('Project')}
+          name="project"
+          badgeValue={(value) => value?.name}
+        >
+          <ProjectFilter customer_uuid={customer?.uuid} />
+        </TableFilterItem>
+      ) : null}
       <TableFilterItem
         title={translate('Runtime state')}
         name="runtime_state"
@@ -58,7 +74,7 @@ const PureProjectResourcesAllFilter: FunctionComponent<any> = (props) => {
   );
 };
 
-const enhance = reduxForm({
+const enhance = reduxForm<{}, ProjectResourcesAllFilterProps>({
   form: PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
   destroyOnUnmount: false,
   onChange: syncFiltersToURL,

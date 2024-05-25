@@ -24,6 +24,7 @@ interface FieldProps {
 
 interface ResourcesAllListTableProps extends TableProps {
   hasProjectColumn?: boolean;
+  hasProjectFilter?: boolean;
 }
 
 export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
@@ -32,7 +33,9 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
   return (
     <Table
       {...props}
-      filters={<ProjectResourcesAllFilter />}
+      filters={
+        <ProjectResourcesAllFilter hasProjectFilter={props.hasProjectFilter} />
+      }
       columns={[
         {
           title: translate('Name'),

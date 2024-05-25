@@ -1,4 +1,4 @@
-import { SquaresFour, CaretDoubleDown } from '@phosphor-icons/react';
+import { CaretDoubleDown, SquaresFour } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
@@ -8,13 +8,9 @@ import { useSelector } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { ANONYMOUS_CONFIG } from '@waldur/table/api';
-import {
-  getCustomer,
-  getProject,
-  getResource,
-} from '@waldur/workspace/selectors';
+import { getResource } from '@waldur/workspace/selectors';
 
-import { getOrganizationCounters, getProjectCounters } from '../workspace/api';
+import { getGlobalCounters } from '../workspace/api';
 
 import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';
@@ -56,42 +52,30 @@ const CustomToggle = ({ onClick, itemsCount, badge, expanded }) => (
   </div>
 );
 
-const RenderMenuItems = ({ items, project, counters = {} }) => {
+const RenderMenuItems = ({ items, counters = {} }) => {
   const { state } = useCurrentStateAndParams();
   const resource = useSelector(getResource);
   return (
     <>
-      {items.map((item) =>
-        project ? (
-          <MenuItem
-            key={item.uuid}
-            title={item.title}
-            badge={getCounterText(counters[item.uuid])}
-            state="marketplace-project-resources"
-            params={{
-              uuid: project.uuid,
-              category_uuid: item.uuid,
-            }}
-            activeState={
-              resource?.category_uuid === item.uuid ? state.name : undefined
-            }
-          />
-        ) : (
-          <MenuItem
-            key={item.uuid}
-            title={item.title}
-            state="profile.no-project"
-          />
-        ),
-      )}
+      {items.map((item) => (
+        <MenuItem
+          key={item.uuid}
+          title={item.title}
+          badge={getCounterText(counters[item.uuid])}
+          state="profile.user-resources"
+          params={{
+            category_uuid: item.uuid,
+          }}
+          activeState={
+            resource?.category_uuid === item.uuid ? state.name : undefined
+          }
+        />
+      ))}
     </>
   );
 };
 
 export const ResourcesMenu = ({ anonymous = false }) => {
-  const currentCustomer = useSelector(getCustomer);
-  const project = useSelector(getProject);
-
   const { data: categories } = useQuery(
     ['ResourcesMenu', 'Categories'],
     () =>
@@ -106,21 +90,8 @@ export const ResourcesMenu = ({ anonymous = false }) => {
   );
 
   const { data: counters = {} } = useQuery(
-    [
-      'ResourcesMenu',
-      'Counters',
-      project?.uuid || 'N/A',
-      currentCustomer?.uuid || 'N/A',
-    ],
-    () => {
-      if (project) {
-        return getProjectCounters(project.uuid);
-      } else if (currentCustomer) {
-        return getOrganizationCounters(currentCustomer.uuid);
-      } else {
-        return {};
-      }
-    },
+    ['ResourcesMenu', 'Counters'],
+    getGlobalCounters,
     { refetchOnWindowFocus: false },
   );
   const [expanded, setExpanded] = useState(false);
@@ -155,19 +126,14 @@ export const ResourcesMenu = ({ anonymous = false }) => {
       itemId="resources-menu"
       icon={<SquaresFour />}
     >
-      {project && (
-        <MenuItem
-          title={translate('All resources')}
-          badge={getCounterText(allResourcesCount)}
-          state="marketplace-project-resources-all"
-          params={{
-            uuid: project.uuid,
-          }}
-        />
-      )}
+      <MenuItem
+        title={translate('All resources')}
+        badge={getCounterText(allResourcesCount)}
+        state="profile.all-user-resources"
+      />
+
       <RenderMenuItems
         items={sortedCategories.slice(0, MAX_COLLAPSE_MENU_COUNT)}
-        project={project}
         counters={counters}
       />
       {sortedCategories.length > MAX_COLLAPSE_MENU_COUNT ? (
@@ -175,7 +141,6 @@ export const ResourcesMenu = ({ anonymous = false }) => {
           {expanded && (
             <RenderMenuItems
               items={sortedCategories.slice(MAX_COLLAPSE_MENU_COUNT)}
-              project={project}
               counters={counters}
             />
           )}
