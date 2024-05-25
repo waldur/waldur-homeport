@@ -5,10 +5,11 @@ import { Tip } from '@waldur/core/Tooltip';
 import { User } from '@waldur/workspace/types';
 
 interface SymbolsGroupProps {
-  items: Object[];
+  items: object[];
   max?: number;
   nameKey?: string;
   emailKey?: string;
+  imageKey?: string;
   length?: number;
   size?: number;
   onClick?(): void;
@@ -30,6 +31,7 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
   max = 8,
   nameKey = 'full_name',
   emailKey = 'email',
+  imageKey = 'image',
   items,
   length,
   size = 35,
@@ -45,10 +47,10 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
     {items.slice(0, max).map((item: User, index: number) => (
       <div key={index} className={`symbol symbol-circle symbol-${size}px`}>
         <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
-          {item.image ? (
+          {item[imageKey] ? (
             <img
-              src={item.image}
-              alt={item.image}
+              src={item[imageKey]}
+              alt={item[imageKey]}
               className={`rounded-circle w-${size}px h-${size}px`}
             />
           ) : item[emailKey] ? (

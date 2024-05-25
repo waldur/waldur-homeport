@@ -14,25 +14,35 @@ interface TeamWidgetProps {
     options: any[];
     totalItems: number;
   }>;
+  scope: { url?: string; uuid?: string };
   /** Number of users increased/decreased this month */
   changes?: number;
   onBadgeClick?(): void;
   onAddClick?(): void;
   showAdd?: boolean;
   className?: string;
+  nameKey?: string;
+  emailKey?: string;
+  imageKey?: string;
 }
 
 export const TeamWidget: FC<TeamWidgetProps> = ({
   api,
+  scope,
   changes,
   onBadgeClick,
   onAddClick,
   showAdd = true,
   className,
+  nameKey,
+  emailKey,
+  imageKey,
 }) => {
-  const { data, isLoading, error, refetch } = useQuery(['TeamWidget'], api, {
-    staleTime: 3 * 60 * 1000,
-  });
+  const { data, isLoading, error, refetch } = useQuery(
+    ['TeamWidget', scope?.uuid],
+    api,
+    { staleTime: 3 * 60 * 1000 },
+  );
 
   const changesPercent = useMemo(() => {
     if (!changes || !data?.totalItems) return 0;
@@ -86,6 +96,9 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
                 onClick={onBadgeClick}
                 size={40}
                 length={data.totalItems}
+                nameKey={nameKey}
+                emailKey={emailKey}
+                imageKey={imageKey}
               />
             ) : null}
             {showAdd && (

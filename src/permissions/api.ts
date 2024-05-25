@@ -98,6 +98,12 @@ export const fetchSelectCustomerUsers = (customerUuid: string, params = {}) =>
     ...params,
   });
 
+export const fetchSelectProjectUsers = (projectUuid: string, params = {}) =>
+  getSelectData<GenericPermission>(`/projects/${projectUuid}/list_users/`, {
+    field: ['user_uuid', 'user_full_name', 'user_email', 'role_name'],
+    ...params,
+  });
+
 export const fetchAllProjectUsers = (projectId: string) =>
   getAll<GenericPermission>(`/projects/${projectId}/list_users/`, {
     params: {

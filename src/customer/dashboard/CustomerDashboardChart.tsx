@@ -76,6 +76,7 @@ export const CustomerDashboardChart: FunctionComponent<
             api={() =>
               fetchSelectCustomerUsers(customer.uuid, { page_size: 5 })
             }
+            scope={customer}
             changes={changes}
             onBadgeClick={goToUsers}
             onAddClick={callback}
