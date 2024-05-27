@@ -21,14 +21,17 @@ export const ServiceProvidersList: FunctionComponent = () => {
     {
       title: translate('Name'),
       render: ({ row }) => row.customer_name,
+      keys: ['customer_name'],
     },
     {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
+      keys: ['created'],
     },
     {
       title: translate('Offerings'),
       render: ({ row }) => row.offering_count,
+      keys: ['offering_count'],
     },
   ];
 

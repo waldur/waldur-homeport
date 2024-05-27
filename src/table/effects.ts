@@ -1,3 +1,4 @@
+import { concat, uniq } from 'lodash';
 import {
   delay,
   call,
@@ -25,11 +26,22 @@ function* fetchList(action) {
   try {
     const state = yield select(getTableState(table));
     const options = getTableOptions(table);
+
+    let fields = [];
+    if (extraFilter?.field || Object.keys(state.activeColumns).length) {
+      const customFields = extraFilter?.field || ['uuid'];
+      const activeFields = Object.values(state.activeColumns)
+        .filter(Boolean)
+        .flat();
+      fields = uniq(concat(customFields, activeFields));
+    }
+
     const request: TableRequest = {
       currentPage: state.pagination.currentPage,
       pageSize: state.pagination.pageSize,
       filter: {
         ...extraFilter,
+        field: fields,
       },
     };
     if (options.queryField && state.query !== '') {

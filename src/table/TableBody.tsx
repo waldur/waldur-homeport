@@ -26,7 +26,7 @@ type TableBodyProps = Pick<
   | 'fieldType'
   | 'fieldName'
   | 'validate'
-  | 'concealedColumns'
+  | 'activeColumns'
 >;
 
 const TableCells = ({ row, columns }) => (
@@ -58,12 +58,12 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   fieldType,
   fieldName,
   validate,
-  concealedColumns,
+  activeColumns,
 }) => {
   const visibleColumns = useMemo(
     () =>
-      columns.filter((column) => !column.key || !concealedColumns[column.key]),
-    [concealedColumns, columns],
+      columns.filter((column, index) => !column.keys || activeColumns[index]),
+    [activeColumns, columns],
   );
   const trClick = useCallback(
     (row, index, e) => {

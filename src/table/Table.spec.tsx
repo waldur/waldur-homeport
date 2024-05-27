@@ -17,7 +17,7 @@ describe('Table', () => {
       field: null,
       loading: false,
     },
-    concealedColumns: {},
+    activeColumns: {},
   };
 
   describe('special states', () => {
@@ -83,7 +83,7 @@ describe('Table', () => {
               name: 'Web server',
             },
           ]}
-          concealedColumns={{}}
+          activeColumns={{}}
         />,
       );
     });

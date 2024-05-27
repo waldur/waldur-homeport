@@ -20,7 +20,7 @@ export const renderTable = (Component, tableId, rowId, row) => {
       currentPage: 1,
     },
     toggled: {},
-    concealedColumns: {},
+    activeColumns: {},
   };
   const store = mockStore({
     tables: {
