@@ -26,9 +26,6 @@ export const ResourceShowMoreComponents = ({
 }) => {
   const dispatch = useDispatch();
 
-  if (components?.length < 5) {
-    return null;
-  }
   return (
     <button
       type="button"
