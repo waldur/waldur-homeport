@@ -49,6 +49,8 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
     return (changes / (data.totalItems - changes)) * 100;
   }, [changes, data?.totalItems]);
 
+  const count = data?.totalItems ?? 0;
+
   return (
     <Card className={className}>
       <Card.Body className="d-flex flex-column">
@@ -59,7 +61,11 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
           <Col>
             <Row className="align-items-center gap-4">
               <h1 className="mb-0 text-nowrap fs-1x col col-sm-12 col-md col-xxl-12">
-                {translate('{count} members', { count: data?.totalItems ?? 0 })}
+                {count == 0
+                  ? translate('No members')
+                  : count === 1
+                    ? translate('1 member')
+                    : translate('{count} members', { count })}
               </h1>
               {changesPercent !== 0 && (
                 <Col xs="auto" className="text-gray-700 text-nowrap fs-6">
