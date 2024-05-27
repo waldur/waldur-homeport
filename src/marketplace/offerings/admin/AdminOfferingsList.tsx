@@ -8,8 +8,8 @@ import { getStates } from '../list/OfferingStateFilter';
 
 import { AdminOfferingsFilter } from './AdminOfferingsFilter';
 import {
-  ADMIN_OFFERINGS_FILTER_FORM_ID,
   ADMIN_OFFERING_TABLE_NAME,
+  ADMIN_OFFERINGS_FILTER_FORM_ID,
 } from './constants';
 
 export const mapStateToFilter = createSelector(
@@ -27,6 +27,9 @@ export const mapStateToFilter = createSelector(
     }
     if (filterValues?.offering_type) {
       filter.type = filterValues.offering_type.value;
+    }
+    if (filterValues?.category) {
+      filter.category_uuid = filterValues.category.uuid;
     }
     return filter;
   },

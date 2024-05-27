@@ -8,7 +8,6 @@ import { useTable } from '@waldur/table/utils';
 import { useMarketplacePublicTabs } from '../utils';
 
 import { TABLE_SERVICE_PROVIDERS } from './constants';
-import { ServiceProviderCard } from './ServiceProviderCard';
 
 export const ServiceProvidersList: FunctionComponent = () => {
   useMarketplacePublicTabs();
@@ -36,12 +35,9 @@ export const ServiceProvidersList: FunctionComponent = () => {
     <Table
       {...props}
       columns={columns}
-      gridItem={({ row }) => <ServiceProviderCard provider={row} />}
-      gridSize={{ lg: 6, xl: 4 }}
       verboseName={translate('Service providers')}
       hasQuery={true}
       showPageSizeSelector={true}
-      hasOptionalColumns
     />
   );
 };
