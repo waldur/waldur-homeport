@@ -4,7 +4,6 @@ import { formatFilesize } from '@waldur/core/utils';
 import { ResourceDetailsLink } from '@waldur/marketplace/resources/details/ResourceDetailsLink';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { validateIP } from '@waldur/marketplace/utils';
-import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import { IPList } from '@waldur/resource/IPList';
 
 import { Resource } from '../types';
@@ -40,9 +39,9 @@ export const CategoryColumnField: FunctionComponent<
       return (
         <ResourceDetailsLink
           item={{
-            offering_type: INSTANCE_TYPE,
             resource_uuid: metadata.instance_uuid,
-            resource_type: INSTANCE_TYPE,
+            backend_id: metadata.backend_id,
+            end_date: metadata.backend_id,
           }}
         >
           {metadata.instance_name}

@@ -9,7 +9,7 @@ import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/Ex
 import { PublicResourceActions } from '@waldur/marketplace/resources/list/PublicResourceActions';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category, Offering } from '@waldur/marketplace/types';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 import {
   getCustomer,
@@ -44,9 +44,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => (
-        <PublicResourceLink row={row} customer={props.customer} />
-      ),
+      render: PublicResourceLink,
       orderField: 'name',
     },
     {

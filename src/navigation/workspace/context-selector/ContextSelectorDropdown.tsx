@@ -4,11 +4,11 @@ import {
   useRouter,
 } from '@uirouter/react';
 import {
-  useState,
   FunctionComponent,
-  useRef,
-  useEffect,
   useCallback,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
 import { Col, FormControl } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
@@ -247,7 +247,7 @@ export const ContextSelectorDropdown: FunctionComponent = () => {
               <Col className="d-flex flex-column justify-content-center" xs={5}>
                 <Link
                   className="btn btn-sm btn-link text-white text-decoration-underline my-3"
-                  state="profile.organizations"
+                  state="organizations"
                   onClick={() => MenuComponent.hideDropdowns(undefined)}
                 >
                   {translate('Manage organizations')}

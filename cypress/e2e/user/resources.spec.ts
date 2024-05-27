@@ -7,14 +7,12 @@ describe('Resources in personal space', () => {
       .mockChecklists()
       .mockCustomers()
       .setToken()
-      .visit('/profile/user-resources/')
+      .visit('/all-resources/')
       .waitForPage();
   });
 
   it('Assure the resources list is visible', () => {
-    cy.get(
-      '#kt_content_container .card-toolbar .card-title:contains(Resources)',
-    ).should('be.visible');
+    cy.get('h1:contains(Resources)').should('be.visible');
 
     cy.get('.card-table .card-body tbody tr').should('have.length', 2);
   });

@@ -1,13 +1,10 @@
-import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { translate } from '@waldur/i18n';
 import { isStaffOrSupport as isStaffOrSupportSelector } from '@waldur/workspace/selectors';
 
-import { ResourcesList } from './ResourcesList';
-
-export const ResourcesListContainer: FC = () => {
+export const useResourcesListBanner = () => {
   const isStaffOrSupport = useSelector(isStaffOrSupportSelector);
 
   usePermissionView(() => {
@@ -23,6 +20,4 @@ export const ResourcesListContainer: FC = () => {
       return null;
     }
   }, [isStaffOrSupport]);
-
-  return <ResourcesList />;
 };

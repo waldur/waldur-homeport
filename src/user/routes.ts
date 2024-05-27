@@ -52,10 +52,6 @@ const ProjectsList = lazyComponent(
   () => import('@waldur/user/affiliations/ProjectsList'),
   'ProjectsList',
 );
-const ResourcesListContainer = lazyComponent(
-  () => import('@waldur/user/resources/ResourcesListContainer'),
-  'ResourcesListContainer',
-);
 const UserIssuesList = lazyComponent(
   () => import('./UserIssuesList'),
   'UserIssuesList',
@@ -73,9 +69,9 @@ const IssueDetailsContainer = lazyComponent(
   () => import('../issues/IssueDetails'),
   'IssueDetails',
 );
-const UserResourcesContainer = lazyComponent(
-  () => import('@waldur/marketplace/resources/list/UserResourcesContainer'),
-  'UserResourcesContainer',
+const CategoryResourcesContainer = lazyComponent(
+  () => import('@waldur/marketplace/resources/list/CategoryResourcesContainer'),
+  'CategoryResourcesContainer',
 );
 const UserResourcesAllList = lazyComponent(
   () => import('@waldur/marketplace/resources/list/UserResourcesAllList'),
@@ -223,30 +219,16 @@ export const states: StateDeclaration[] = [
     component: EmptyProjectPlaceholder,
   },
   {
-    name: 'profile.projects',
-    url: 'projects/',
+    name: 'projects',
+    url: '/projects/',
     component: ProjectsList,
-    data: {
-      hideHeaderMenu: true,
-    },
+    parent: 'layout',
   },
   {
-    name: 'profile.resources',
-    url: 'user-resources/',
-    component: ResourcesListContainer,
-    data: {
-      breadcrumb: () => translate('Resources'),
-      priority: 110,
-      skipBreadcrumb: true,
-    },
-  },
-  {
-    name: 'profile.organizations',
-    url: 'organizations/',
+    name: 'organizations',
+    url: '/organizations/',
     component: OrganizationsList,
-    data: {
-      hideHeaderMenu: true,
-    },
+    parent: 'layout',
   },
   {
     name: 'user-email-change',
@@ -254,21 +236,15 @@ export const states: StateDeclaration[] = [
     component: UserEmailChangeCallback,
   },
   {
-    name: 'profile.user-resources',
-    url: 'resources/:category_uuid/',
-    component: UserResourcesContainer,
-    data: {
-      hideHeaderMenu: true,
-    },
+    name: 'user-resources',
+    url: '/resources/:category_uuid/',
+    component: CategoryResourcesContainer,
+    parent: 'layout',
   },
   {
-    name: 'profile.all-user-resources',
-    url: 'all-resources/',
+    name: 'all-user-resources',
+    url: '/all-resources/',
     component: UserResourcesAllList,
-    data: {
-      breadcrumb: () => translate('All resources'),
-      hideHeaderMenu: true,
-      skipBreadcrumb: true,
-    },
+    parent: 'layout',
   },
 ];

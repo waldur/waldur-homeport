@@ -6,23 +6,23 @@ import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { getUser } from '@waldur/workspace/selectors';
 
 const SetBackendIdDialog = lazyComponent(
   () => import('./SetBackendIdDialog'),
   'SetBackendIdDialog',
 );
 
-export const SetBackendIdButton: FC<any> = ({ resource, refetch }) => {
+export const SetBackendIdButton: FC<{ resource; refetch }> = ({
+  resource,
+  refetch,
+}) => {
   const user = useSelector(getUser);
-  const customer = useSelector(getCustomer);
-  const isServiceProviderContext = resource.provider_uuid === customer.uuid;
   if (
     !hasPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_BACKEND_ID,
-      customerId: customer.uuid,
-    }) &&
-    !isServiceProviderContext
+      customerId: resource.customer_uuid,
+    })
   ) {
     return null;
   }

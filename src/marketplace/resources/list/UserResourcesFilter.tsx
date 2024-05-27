@@ -34,18 +34,18 @@ const PureProjectResourcesFilter = ({ category_uuid }) => {
         <RelatedCustomerFilter />
       </TableFilterItem>
       <TableFilterItem
-        title={translate('Offering')}
-        name="offering"
-        badgeValue={(value) => value?.name}
-      >
-        <OfferingFilter category_uuid={category_uuid} />
-      </TableFilterItem>
-      <TableFilterItem
         title={translate('Project')}
         name="project"
         badgeValue={(value) => value?.name}
       >
         <ProjectFilter customer_uuid={customer?.uuid} />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Offering')}
+        name="offering"
+        badgeValue={(value) => value?.name}
+      >
+        <OfferingFilter category_uuid={category_uuid} />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Runtime state')}
@@ -61,8 +61,8 @@ const PureProjectResourcesFilter = ({ category_uuid }) => {
   );
 };
 
-export const ProjectResourcesFilter = reduxForm<FormData, { category_uuid }>({
-  form: 'ProjectResourcesFilter',
+export const UserResourcesFilter = reduxForm<FormData, { category_uuid }>({
+  form: 'UserResourcesFilter',
   onChange: syncFiltersToURL,
   initialValues: getInitialValues({
     state: NON_TERMINATED_STATES,

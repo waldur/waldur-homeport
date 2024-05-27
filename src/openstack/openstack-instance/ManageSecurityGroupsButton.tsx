@@ -6,9 +6,8 @@ import { translate } from '@waldur/i18n';
 export const ManageSecurityGroupsButton: FunctionComponent<any> = (props) =>
   props.resource.parent_uuid ? (
     <Link
-      state="marketplace-project-resource-details"
+      state="marketplace-resource-details"
       params={{
-        uuid: props.resource.project_uuid,
         resource_uuid: props.resource.parent_uuid,
         tab: 'security_groups',
       }}

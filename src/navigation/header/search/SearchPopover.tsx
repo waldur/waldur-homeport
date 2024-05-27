@@ -168,9 +168,8 @@ const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
                   .map((resource, resourceIndex) => (
                     <SearchItem
                       key={resourceIndex}
-                      to="marketplace-project-resource-details"
+                      to="marketplace-resource-details"
                       params={{
-                        uuid: resource.project_uuid,
                         resource_uuid: resource.uuid,
                       }}
                       image={resource.offering_thumbnail}
@@ -260,9 +259,8 @@ const ResourcesTabContent = ({ result, clearSearch }: TabContentProps) => {
               {resourceGroups[item].map((resource, resourceIndex) => (
                 <SearchItem
                   key={resourceIndex}
-                  to="marketplace-project-resource-details"
+                  to="marketplace-resource-details"
                   params={{
-                    uuid: resource.project_uuid,
                     resource_uuid: resource.uuid,
                   }}
                   image={resource.offering_thumbnail}

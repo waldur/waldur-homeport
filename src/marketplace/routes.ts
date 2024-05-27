@@ -152,15 +152,6 @@ const getPublicRoutesParams = () => ({
   ],
 });
 
-const getResourceDetailsParams = {
-  component: ResourceDetailsPage,
-  data: {
-    useExtraTabs: true,
-    skipBreadcrumb: true,
-    skipHero: true,
-  },
-};
-
 export const states: StateDeclaration[] = [
   {
     name: 'public',
@@ -499,40 +490,16 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-public-resource-details',
-    url: 'resource-details/:resource_uuid?tab',
-    parent: 'organization',
-    ...getResourceDetailsParams,
+    name: 'marketplace-resource-details',
+    url: '/resource-details/:resource_uuid?tab',
+    parent: 'layout',
+    component: ResourceDetailsPage,
+    data: {
+      useExtraTabs: true,
+      skipBreadcrumb: true,
+      skipHero: true,
+    },
   },
-
-  {
-    name: 'marketplace-admin-resource-details',
-    url: 'resource-details/:resource_uuid?tab',
-    parent: 'admin',
-    ...getResourceDetailsParams,
-  },
-
-  {
-    name: 'marketplace-profile-resource-details',
-    url: 'resource-details/:resource_uuid?tab',
-    parent: 'profile',
-    ...getResourceDetailsParams,
-  },
-
-  {
-    name: 'marketplace-provider-resource-details',
-    url: 'resources/:resource_uuid?tab',
-    parent: 'provider-resources',
-    ...getResourceDetailsParams,
-  },
-
-  {
-    name: 'marketplace-project-resource-details',
-    url: 'resource-details/:resource_uuid?tab',
-    parent: 'project',
-    ...getResourceDetailsParams,
-  },
-
   {
     name: 'marketplace-admin-resources',
     url: '',

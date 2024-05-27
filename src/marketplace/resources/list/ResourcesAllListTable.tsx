@@ -24,7 +24,7 @@ interface FieldProps {
 
 interface ResourcesAllListTableProps extends TableProps {
   hasProjectColumn?: boolean;
-  hasProjectFilter?: boolean;
+  hasCustomerColumn?: boolean;
 }
 
 export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
@@ -34,7 +34,10 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
     <Table
       {...props}
       filters={
-        <ProjectResourcesAllFilter hasProjectFilter={props.hasProjectFilter} />
+        <ProjectResourcesAllFilter
+          hasProjectFilter={props.hasProjectColumn}
+          hasCustomerFilter={props.hasCustomerColumn}
+        />
       }
       columns={[
         {
@@ -50,6 +53,14 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           title: translate('Offering'),
           render: ({ row }: FieldProps) => <>{row.offering_name}</>,
         },
+        ...(props.hasCustomerColumn
+          ? [
+              {
+                title: translate('Organization'),
+                render: ({ row }) => <>{row.customer_name}</>,
+              },
+            ]
+          : []),
         ...(props.hasProjectColumn
           ? [
               {

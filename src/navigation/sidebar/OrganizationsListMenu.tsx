@@ -8,7 +8,7 @@ export const OrganizationsListMenu = () => {
   return (
     <MenuItem
       title={translate('Organizations')}
-      state="profile.organizations"
+      state="organizations"
       icon={<Buildings />}
       child={false}
     />

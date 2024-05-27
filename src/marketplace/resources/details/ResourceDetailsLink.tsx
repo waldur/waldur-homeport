@@ -4,10 +4,9 @@ import { Link } from '@waldur/core/Link';
 import { BackendIdTip } from '@waldur/core/Tooltip';
 
 import { EndDateTooltip } from '../list/EndDateTooltip';
-import { ResourceReference } from '../types';
 
 interface ResourceDetailsLinkProps {
-  item: ResourceReference;
+  item: { resource_uuid; backend_id; end_date };
   children?: React.ReactNode;
 }
 
@@ -18,9 +17,7 @@ export const ResourceDetailsLink: FunctionComponent<
     <Link
       state="resource-details"
       params={{
-        resource_type: props.item.resource_type,
         resource_uuid: props.item.resource_uuid,
-        uuid: props.item.project_uuid,
       }}
       label={props.children}
     />

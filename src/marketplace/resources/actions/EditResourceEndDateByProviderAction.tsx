@@ -9,7 +9,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { getUser } from '@waldur/workspace/selectors';
 
 const EditResourceEndDateDialog = lazyComponent(
   () => import('./EditResourceEndDateDialog'),
@@ -27,7 +27,6 @@ export const EditResourceEndDateByProviderAction = ({
 }: EditResourceEndDateByProviderActionProps) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
-  const customer = useSelector(getCustomer);
 
   const callback = () =>
     dispatch(
@@ -47,7 +46,7 @@ export const EditResourceEndDateByProviderAction = ({
 
   return hasPermission(user, {
     permission: PermissionEnum.SET_RESOURCE_END_DATE,
-    customerId: customer.uuid,
+    customerId: resource.customer_uuid,
   }) || user.is_support ? (
     <ActionItem title={translate('Set termination date')} action={callback} />
   ) : null;

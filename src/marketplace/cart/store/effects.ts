@@ -13,11 +13,10 @@ import * as api from '@waldur/marketplace/common/api';
 import { OrderResponse } from '@waldur/marketplace/orders/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import {
-  SET_CURRENT_PROJECT,
   SET_CURRENT_CUSTOMER,
+  SET_CURRENT_PROJECT,
 } from '@waldur/workspace/constants';
-import { getProject, getWorkspace } from '@waldur/workspace/selectors';
-import { WorkspaceType } from '@waldur/workspace/types';
+import { getProject } from '@waldur/workspace/selectors';
 
 import * as actions from './actions';
 import * as constants from './constants';
@@ -108,19 +107,8 @@ function* addItem(action) {
       });
       yield put(showSuccess(translate('Order has been submitted.')));
       yield put(actions.createOrderSuccess());
-      const workspace: WorkspaceType = yield select(getWorkspace);
-      let resourceDetailsLinkState;
-      let parentUuid;
-      if (workspace === WorkspaceType.ORGANIZATION) {
-        resourceDetailsLinkState = 'marketplace-provider-resource-details';
-        parentUuid = order.customer_uuid;
-      } else {
-        resourceDetailsLinkState = 'marketplace-project-resource-details';
-        parentUuid = order.project_uuid;
-      }
       yield put(
-        triggerTransition(resourceDetailsLinkState, {
-          uuid: parentUuid,
+        triggerTransition('marketplace-resource-details', {
           resource_uuid: order.marketplace_resource_uuid,
         }),
       );

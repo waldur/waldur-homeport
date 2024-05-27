@@ -55,10 +55,9 @@ const ResourceWarning = (props: ResourceNameProps) =>
 export const ResourceName = (props: ResourceNameProps) =>
   props.resource.marketplace_resource_uuid ? (
     <Link
-      state="marketplace-project-resource-details"
+      state="marketplace-resource-details"
       params={{
         resource_uuid: props.resource.marketplace_resource_uuid,
-        uuid: props.resource.project_uuid,
       }}
       label={props.resource.name}
     />

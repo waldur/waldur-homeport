@@ -45,7 +45,7 @@ describe('OpenStack Volume detail view', () => {
 
       .log('Visit OpenStackTenant Volume detail view')
       .visit(
-        '/projects/5d3016240ccf4181b4cdc0baa0e41d5c/resource-details/53b9bda915ab4dc0aac93a8f4fe83d30',
+        '/resource-details/53b9bda915ab4dc0aac93a8f4fe83d30',
       )
       .get('.public-dashboard-hero-body');
   });

@@ -34,6 +34,8 @@ export const UnifiedSidebar = () => {
       [
         'marketplace-project-resources-all',
         'marketplace-project-resources',
+        'user-resources',
+        'all-user-resources',
       ].includes(state.name) ||
       params.resource_uuid
     ) {
