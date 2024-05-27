@@ -60,10 +60,12 @@ export const ResourceDetailsHero = ({
           )
         }
         quickFooter={
-          <ResourceShowMoreComponents
-            resource={resource}
-            components={components}
-          />
+          components?.length > 4 ? (
+            <ResourceShowMoreComponents
+              resource={resource}
+              components={components}
+            />
+          ) : null
         }
       >
         <ResourceDetailsHeaderBody resource={resource} offering={offering} />

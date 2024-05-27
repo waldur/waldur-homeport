@@ -36,7 +36,7 @@ export const PublicDashboardHero2: FC<
           className="d-flex"
         >
           <Card className="w-100 mb-md-0 mb-4">
-            <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-10 flex-grow-1 py-6">
+            <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-10 flex-grow-1 p-6">
               <Tip
                 label={props.logoTooltip}
                 id={`tip-header-${props.logoTooltip}`}
@@ -49,7 +49,7 @@ export const PublicDashboardHero2: FC<
                 />
               </Tip>
               <div className="d-flex flex-column flex-grow-1">
-                <div className="d-flex flex-grow-1 flex-sm-row flex-column-reverse">
+                <div className="d-flex flex-sm-row flex-column-reverse">
                   {/* Title */}
                   <div className="flex-grow-1">{props.title}</div>
                   {/* Actions */}
@@ -59,7 +59,7 @@ export const PublicDashboardHero2: FC<
                     </div>
                   )}
                 </div>
-                <div className="mt-6">
+                <div>
                   {/* Details */}
                   {props.children}
                 </div>
@@ -71,8 +71,8 @@ export const PublicDashboardHero2: FC<
         {!props.hideQuickSection && (
           <Col md={6} sm={12} className="d-flex">
             <Card className="flex-grow-1">
-              <Card.Body className="d-flex flex-column py-6">
-                <Row className="mb-5">
+              <Card.Body className="d-flex flex-column p-6 pb-2">
+                <Row>
                   <Col xs>{props.quickBody}</Col>
                   {/* Quick actions */}
                   {props.quickActions && (
@@ -84,6 +84,7 @@ export const PublicDashboardHero2: FC<
                     className={classNames(
                       'flex-grow-1 d-flex align-items-end',
                       props.quickFooterClassName,
+                      'mt-5',
                     )}
                   >
                     {props.quickFooter}

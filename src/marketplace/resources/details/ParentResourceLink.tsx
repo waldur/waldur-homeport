@@ -30,4 +30,6 @@ export const ParentResourceLink = ({ resource }: { resource: Resource }) =>
         )}
       </i>
     </p>
-  ) : null;
+  ) : (
+    <p className="me-1"> </p>
+  );
