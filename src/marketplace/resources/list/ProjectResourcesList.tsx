@@ -26,6 +26,7 @@ import { resourcesListRequiredFields } from './utils';
 interface OwnProps {
   category_uuid: string;
   columns: CategoryColumn[];
+  standalone?: boolean;
 }
 
 export const ProjectResourcesList: FunctionComponent<OwnProps> = (ownProps) => {
@@ -121,6 +122,7 @@ export const ProjectResourcesList: FunctionComponent<OwnProps> = (ownProps) => {
       filters={
         <ProjectResourcesFilter category_uuid={ownProps.category_uuid} />
       }
+      standalone={ownProps.standalone}
     />
   );
 };

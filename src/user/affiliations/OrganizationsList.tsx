@@ -25,5 +25,5 @@ export const OrganizationsList = () => {
       return null;
     }
   }, [isStaffOrSupport]);
-  return <BaseOrganizationsList user={user} />;
+  return <BaseOrganizationsList user={user} standalone />;
 };

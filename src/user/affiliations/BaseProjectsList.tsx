@@ -37,7 +37,8 @@ export const BaseProjectsList: FunctionComponent<{
   filter;
   filters?;
   hasActionBar?;
-}> = ({ filter, filters, hasActionBar = true }) => {
+  standalone?;
+}> = ({ filter, filters, hasActionBar = true, standalone = false }) => {
   const currentProject = useSelector(getProject);
   const props = useTable({
     table: PROJECTS_LIST,
@@ -118,6 +119,7 @@ export const BaseProjectsList: FunctionComponent<{
       fullWidth={true}
       filters={filters}
       hasActionBar={hasActionBar}
+      standalone={standalone}
     />
   );
 };

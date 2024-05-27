@@ -67,6 +67,7 @@ export const UserResourcesAllList: FC<UserResourcesAllListProps> = (props) => {
       {...props}
       hasProjectColumn
       hasProjectFilter={!props.project}
+      standalone={props.standalone ?? true}
     />
   );
 };
