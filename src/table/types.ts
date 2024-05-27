@@ -54,7 +54,8 @@ export interface Column<RowType = any> {
   className?: string;
   orderField?: string;
   visible?: boolean;
-  key?: string;
+  /** The keys that are required for optional columns to be fetched. */
+  keys?: string[];
 }
 
 export type DisplayMode = 'table' | 'grid';
@@ -90,7 +91,7 @@ export interface TableState {
   toggled?: Record<string, boolean>;
   selectedRows?: any[];
   firstFetch?: boolean;
-  concealedColumns: Record<string, boolean>;
+  activeColumns: Record<string, boolean>;
 }
 
 export interface Sorting {

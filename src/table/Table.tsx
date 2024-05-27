@@ -80,7 +80,7 @@ export interface TableProps<RowType = any> extends TableState {
   validate?: BaseFieldProps['validate'];
   footer?: React.ReactNode;
   hasOptionalColumns?: boolean;
-  toggleColumn?(column): void;
+  toggleColumn?(index, column): void;
   initialMode?: 'grid' | 'table';
   standalone?: boolean;
 }
@@ -306,7 +306,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               onSelectAllRows={this.props.selectAllRows}
               selectedRows={this.props.selectedRows}
               fieldType={this.props.fieldType}
-              concealedColumns={this.props.concealedColumns}
+              activeColumns={this.props.activeColumns}
             />
           )}
           <TableBody
@@ -325,7 +325,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             fieldType={this.props.fieldType}
             fieldName={this.props.fieldName}
             validate={this.props.validate}
-            concealedColumns={this.props.concealedColumns}
+            activeColumns={this.props.activeColumns}
           />
         </table>
       </ErrorBoundary>
@@ -414,6 +414,9 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     filters,
     firstFetch,
     renderFiltersDrawer,
+    hasOptionalColumns,
+    columns,
+    toggleColumn,
   } = props;
 
   useEffect(() => {
@@ -428,6 +431,14 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
       fetch();
     }
   }, [fetch, filterPosition, applyFilters]);
+
+  useEffect(() => {
+    if (columns?.length && hasOptionalColumns) {
+      columns.forEach((column, index) => {
+        toggleColumn(index, column);
+      });
+    }
+  }, []);
 
   return <TableClass {...props} />;
 }

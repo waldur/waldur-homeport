@@ -201,7 +201,8 @@ export const useTable = (options: TableOptionsType) => {
     [dispatch, table],
   );
   const toggleColumn = useCallback(
-    (column: any) => dispatch(actions.toggleColumn(table, column)),
+    (index: number, column: any) =>
+      dispatch(actions.toggleColumn(table, index, column)),
     [dispatch, table],
   );
 

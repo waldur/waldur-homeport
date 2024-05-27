@@ -13,23 +13,23 @@ export const TableColumnButton: FC<TableProps> = (props) => {
       placement="bottom"
       overlay={
         <Popover>
-          {props.columns
-            .filter((column) => column.key)
-            .map((column, index) => (
+          {props.columns.map((column, index) =>
+            column.keys ? (
               <Dropdown.Item
-                onClick={() => props.toggleColumn(column)}
+                onClick={() => props.toggleColumn(index, column)}
                 key={index}
               >
                 <span className="svg-icon svg-icon-2 svg-icon-white me-3">
-                  {props.concealedColumns[column.key] ? (
-                    <CheckboxEmptyIcon />
-                  ) : (
+                  {props.activeColumns[index] ? (
                     <CheckboxIcon />
+                  ) : (
+                    <CheckboxEmptyIcon />
                   )}
                 </span>
                 {column.title}
               </Dropdown.Item>
-            ))}
+            ) : null,
+          )}
         </Popover>
       }
       rootClose

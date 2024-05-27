@@ -18,7 +18,7 @@ interface TableHeaderProps {
   onSelectAllRows?(rows: any[]): void;
   selectedRows?: any[];
   fieldType?: TableProps['fieldType'];
-  concealedColumns?: Record<string, boolean>;
+  activeColumns?: Record<string, boolean>;
 }
 
 function handleOrdering(currentSorting: Sorting, field: string): Sorting {
@@ -71,13 +71,13 @@ export const TableHeader: FC<TableHeaderProps> = ({
   onSelectAllRows,
   selectedRows,
   fieldType,
-  concealedColumns,
+  activeColumns,
 }) => {
   const isAllSelected = selectedRows?.length >= rows?.length;
   const visibleColumns = useMemo(
     () =>
-      columns.filter((column) => !column.key || !concealedColumns[column.key]),
-    [concealedColumns, columns],
+      columns.filter((column, index) => !column.keys || activeColumns[index]),
+    [activeColumns, columns],
   );
 
   return (

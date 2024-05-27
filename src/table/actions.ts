@@ -229,10 +229,11 @@ export const resetSelection = (table: string) => ({
   },
 });
 
-export const toggleColumn = (table: string, column) => ({
+export const toggleColumn = (table: string, index, column) => ({
   type: TOGGLE_COLUMN,
   payload: {
     table,
+    index,
     column,
   },
 });
