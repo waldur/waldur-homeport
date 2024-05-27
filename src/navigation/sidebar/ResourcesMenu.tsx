@@ -17,11 +17,6 @@ import { MenuItem } from './MenuItem';
 
 const MAX_COLLAPSE_MENU_COUNT = 5;
 
-const getCounterText = (counter: number) => {
-  if (counter) return `(${counter})`;
-  return undefined;
-};
-
 const CustomToggle = ({ onClick, itemsCount, badge, expanded }) => (
   <div
     className="menu-item"
@@ -61,7 +56,7 @@ const RenderMenuItems = ({ items, counters = {} }) => {
         <MenuItem
           key={item.uuid}
           title={item.title}
-          badge={getCounterText(counters[item.uuid])}
+          badge={counters[item.uuid]}
           state="profile.user-resources"
           params={{
             category_uuid: item.uuid,
@@ -128,7 +123,7 @@ export const ResourcesMenu = ({ anonymous = false }) => {
     >
       <MenuItem
         title={translate('All resources')}
-        badge={getCounterText(allResourcesCount)}
+        badge={allResourcesCount}
         state="profile.all-user-resources"
       />
 
@@ -146,7 +141,7 @@ export const ResourcesMenu = ({ anonymous = false }) => {
           )}
           <CustomToggle
             itemsCount={sortedCategories.slice(MAX_COLLAPSE_MENU_COUNT).length}
-            badge={getCounterText(collapsedResourcesCount)}
+            badge={collapsedResourcesCount}
             onClick={() => setExpanded(!expanded)}
             expanded={expanded}
           />

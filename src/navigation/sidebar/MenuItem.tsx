@@ -1,6 +1,7 @@
 import { UISref, useIsActive } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
+import { Badge } from 'react-bootstrap';
 
 interface MenuItemProps {
   title: ReactNode;
@@ -36,7 +37,11 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
             </span>
           )}
           <span className="menu-title">{props.title}</span>
-          {props.badge && <span className="menu-badge">{props.badge}</span>}
+          {props.badge && (
+            <span className="menu-badge">
+              <Badge bg="primary">{props.badge}</Badge>
+            </span>
+          )}
         </a>
       </UISref>
     </div>
