@@ -5,11 +5,14 @@ import { translate } from '@waldur/i18n';
 import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
 import { OfferingStateFilter } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
+import { CategoryFilter } from '@waldur/marketplace/resources/list/CategoryFilter';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { ADMIN_OFFERINGS_FILTER_FORM_ID } from './constants';
 
-const PureAdminOfferingsFilter: FunctionComponent = () => (
+const PureAdminOfferingsFilter: FunctionComponent<{ showCategory? }> = ({
+  showCategory,
+}) => (
   <>
     <TableFilterItem title={translate('State')} name="state">
       <OfferingStateFilter />
@@ -28,10 +31,19 @@ const PureAdminOfferingsFilter: FunctionComponent = () => (
     >
       <OfferingTypeAutocomplete />
     </TableFilterItem>
+    {showCategory ? (
+      <TableFilterItem
+        title={translate('Category')}
+        name="category"
+        badgeValue={(value) => value?.title}
+      >
+        <CategoryFilter />
+      </TableFilterItem>
+    ) : null}
   </>
 );
 
-const enhance = reduxForm({
+const enhance = reduxForm<{}, { showCategory? }>({
   form: ADMIN_OFFERINGS_FILTER_FORM_ID,
   destroyOnUnmount: false,
 });

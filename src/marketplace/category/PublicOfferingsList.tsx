@@ -15,7 +15,8 @@ import { Offering } from '../types';
 
 export const PublicOfferingsList: FunctionComponent<{
   filter?;
-}> = ({ filter }) => {
+  showCategory?;
+}> = ({ filter, showCategory }) => {
   const baseFilter = useSelector(mapStateToFilter);
 
   const mergedFilter = useMemo(
@@ -57,6 +58,13 @@ export const PublicOfferingsList: FunctionComponent<{
     },
   ];
 
+  if (showCategory) {
+    columns.push({
+      title: translate('Category'),
+      render: ({ row }) => row.category_title,
+    });
+  }
+
   return (
     <Table
       {...props}
@@ -65,7 +73,7 @@ export const PublicOfferingsList: FunctionComponent<{
       hasQuery={true}
       gridSize={{ lg: 6, xl: 4 }}
       gridItem={({ row }) => <OfferingCard offering={row} />}
-      filters={<AdminOfferingsFilter />}
+      filters={<AdminOfferingsFilter showCategory={showCategory} />}
       initialMode="grid"
     />
   );
