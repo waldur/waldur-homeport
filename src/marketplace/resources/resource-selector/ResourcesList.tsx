@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { isEmpty } from 'lodash';
-import { useState, useCallback, FunctionComponent } from 'react';
+import { FunctionComponent, useCallback, useState } from 'react';
 import { ListGroup, ListGroupItem, Stack } from 'react-bootstrap';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
@@ -39,8 +39,7 @@ export const ResourcesList: FunctionComponent<{
       }
       setRedirecting(resource.uuid);
       router.stateService
-        .go('marketplace-project-resource-details', {
-          uuid: resource.project_uuid,
+        .go('marketplace-resource-details', {
           resource_uuid: resource.uuid,
         })
         .catch(() => {

@@ -11,7 +11,6 @@ import { ResourceHeader } from './ResourceHeader';
 export const ResourceRow = ({
   invoice,
   resource,
-  customer,
   showPrice,
   showVat,
   refreshInvoiceItems,
@@ -21,11 +20,7 @@ export const ResourceRow = ({
     <>
       <tr onClick={onToggle}>
         <td colSpan={showPrice ? 6 : 7}>
-          <ResourceHeader
-            toggled={toggled}
-            resource={resource}
-            customer={customer}
-          />
+          <ResourceHeader toggled={toggled} resource={resource} />
         </td>
         {showPrice && showVat && <td>{defaultCurrency(resource.total)}</td>}
         {showPrice && !showVat && <td>{defaultCurrency(resource.price)}</td>}

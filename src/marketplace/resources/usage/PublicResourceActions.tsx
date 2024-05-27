@@ -23,11 +23,12 @@ interface PublicResourceActionsProps {
     | 'project_name'
     | 'backend_id'
   >;
+  fetch;
 }
 
 export const PublicResourceActions: FunctionComponent<
   PublicResourceActionsProps
-> = ({ row }) => {
+> = ({ row, fetch }) => {
   const is_support_only = useSelector(isSupportOnly);
   if (!row.is_usage_based || !row.plan || row.state === 'Creating') {
     return <>N/A</>;
@@ -47,7 +48,7 @@ export const PublicResourceActions: FunctionComponent<
           disabled={disabled}
         />
       )}
-      <SetBackendIdButton resource={row} />
+      <SetBackendIdButton resource={row} refetch={fetch} />
     </ButtonGroup>
   );
 };

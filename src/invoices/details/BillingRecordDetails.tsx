@@ -97,7 +97,6 @@ export const BillingRecordDetails: FunctionComponent<
                               key={resourceIndex}
                               invoice={invoice}
                               resource={resource}
-                              customer={customer}
                               showPrice={true}
                               showVat={false}
                               refreshInvoiceItems={refreshInvoiceItems}

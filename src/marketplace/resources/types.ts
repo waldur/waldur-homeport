@@ -1,7 +1,7 @@
 import { OrderDetailsType } from '../orders/types';
 import { AttributesType } from '../types';
 
-export interface ResourceReference {
+interface ResourceReference {
   marketplace_resource_uuid?: string;
   offering_type: string;
   resource_uuid: string;

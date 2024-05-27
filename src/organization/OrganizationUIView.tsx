@@ -1,8 +1,8 @@
 import {
-  UIView,
-  useRouter,
   StateDeclaration,
+  UIView,
   useCurrentStateAndParams,
+  useRouter,
 } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
@@ -12,7 +12,6 @@ import { CustomerProfile } from '@waldur/customer/dashboard/CustomerProfile';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { ORGNIZATION_MENU_EXCLUDE_STATES } from '@waldur/navigation/constants';
 import { usePageHero } from '@waldur/navigation/context';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import {
@@ -35,7 +34,6 @@ const getDashboardState = (state: StateDeclaration) => {
 
 const PageHero = ({ customer }) => {
   const router = useRouter();
-  const { state } = useCurrentStateAndParams();
   const goTo = (state) =>
     router.stateService.go(state, { uuid: customer.uuid });
 
@@ -50,15 +48,7 @@ const PageHero = ({ customer }) => {
     customer?.is_service_provider &&
     (checkIsServiceManager(customer, user) || isOwnerOrStaff);
 
-  const hideHero = ORGNIZATION_MENU_EXCLUDE_STATES.some(
-    (name) => state.name.includes(name) || String(state.parent).includes(name),
-  );
-
   const showRoleSelector = showCallManagement || showServiceProvider;
-
-  if (hideHero) {
-    return null;
-  }
 
   const dashboardState = getDashboardState(router.globals.current);
 

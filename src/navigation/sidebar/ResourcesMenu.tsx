@@ -57,7 +57,7 @@ const RenderMenuItems = ({ items, counters = {} }) => {
           key={item.uuid}
           title={item.title}
           badge={counters[item.uuid]}
-          state="profile.user-resources"
+          state="user-resources"
           params={{
             category_uuid: item.uuid,
           }}
@@ -124,7 +124,7 @@ export const ResourcesMenu = ({ anonymous = false }) => {
       <MenuItem
         title={translate('All resources')}
         badge={allResourcesCount}
-        state="profile.all-user-resources"
+        state="all-user-resources"
       />
 
       <RenderMenuItems

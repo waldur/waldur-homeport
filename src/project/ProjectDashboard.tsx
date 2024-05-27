@@ -8,7 +8,7 @@ import { getDailyQuotasOfCurrentMonth } from '@waldur/dashboard/api';
 import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { useCreateInvitation } from '@waldur/invitations/actions/hooks';
-import { UserResourcesAllList } from '@waldur/marketplace/resources/list/UserResourcesAllList';
+import { ProjectResourcesList } from '@waldur/marketplace/resources/list/ProjectResourcesList';
 import { fetchSelectProjectUsers } from '@waldur/permissions/api';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -72,7 +72,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           />
         </Col>
       </Row>
-      <UserResourcesAllList
+      <ProjectResourcesList
         initialPageSize={5}
         className="mb-6"
         project={project}

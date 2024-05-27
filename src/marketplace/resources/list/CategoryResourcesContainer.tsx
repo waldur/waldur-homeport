@@ -7,9 +7,9 @@ import { translate } from '@waldur/i18n';
 import { getCategory } from '@waldur/marketplace/common/api';
 import { useTitle } from '@waldur/navigation/title';
 
-import { ProjectResourcesList } from './ProjectResourcesList';
+import { CategoryResourcesList } from './CategoryResourcesList';
 
-export const UserResourcesContainer: React.FC = () => {
+export const CategoryResourcesContainer: React.FC = () => {
   const {
     params: { category_uuid },
   } = useCurrentStateAndParams();
@@ -24,7 +24,7 @@ export const UserResourcesContainer: React.FC = () => {
   useTitle(
     value
       ? translate('{category} resources', { category: value.title })
-      : translate('Project resources'),
+      : translate('Resources'),
   );
 
   if (loading) {
@@ -33,7 +33,7 @@ export const UserResourcesContainer: React.FC = () => {
     return <>{translate('Unable to load category details')}</>;
   } else {
     return (
-      <ProjectResourcesList
+      <CategoryResourcesList
         columns={value.columns}
         category_uuid={category_uuid}
         standalone

@@ -15,9 +15,8 @@ export const ParentResourceLink = ({ resource }: { resource: Resource }) =>
           {
             resource: (
               <UISref
-                to="marketplace-project-resource-details"
+                to="marketplace-resource-details"
                 params={{
-                  uuid: resource.project_uuid,
                   resource_uuid: resource.parent_uuid,
                 }}
               >

@@ -8,7 +8,7 @@ export const ProjectsListMenu = () => {
   return (
     <MenuItem
       title={translate('Projects')}
-      state="profile.projects"
+      state="projects"
       icon={<ClipboardText />}
       child={false}
     />

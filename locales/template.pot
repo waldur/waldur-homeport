@@ -468,7 +468,6 @@ msgstr ""
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 #: src/proposals/proposal/create/resource-requests-step/AddResourceButton.tsx
-#: src/user/resources/ResourcesList.tsx
 msgid "Add resource"
 msgstr ""
 
@@ -677,7 +676,6 @@ msgid "All proposals"
 msgstr ""
 
 #: src/navigation/sidebar/ResourcesMenu.tsx
-#: src/user/routes.ts
 msgid "All resources"
 msgstr ""
 
@@ -1849,8 +1847,6 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/proposals/proposal/create/ResourceRequestsSummary.tsx
 #: src/proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx
-#: src/user/resources/ResourcesFilter.tsx
-#: src/user/resources/ResourcesList.tsx
 msgid "Category"
 msgstr ""
 
@@ -2687,7 +2683,7 @@ msgstr ""
 #: src/marketplace/orders/details/DetailsSection.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
@@ -2700,7 +2696,6 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/user/UserOfferingList.tsx
 #: src/user/UserPermissionRequestsList.tsx
-#: src/user/resources/ResourcesList.tsx
 msgid "Created at"
 msgstr ""
 
@@ -6252,7 +6247,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/change-plan/utils.tsx
 #: src/marketplace/resources/import/ResourcesList.tsx
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/robot-accounts/RobotAccountExpandable.tsx
@@ -6313,7 +6308,6 @@ msgstr ""
 #: src/resource/support/SharedProviderResources.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
-#: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "Name"
@@ -6938,13 +6932,13 @@ msgstr ""
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/OfferingFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -6968,8 +6962,6 @@ msgstr ""
 #: src/reporting/plan-usage/PlanUsageList.tsx
 #: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/user/UserOfferingList.tsx
-#: src/user/resources/ResourcesFilter.tsx
-#: src/user/resources/ResourcesList.tsx
 msgid "Offering"
 msgstr ""
 
@@ -7423,8 +7415,10 @@ msgstr ""
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
+#: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
+#: src/marketplace/resources/list/ResourcesAllListTable.tsx
+#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -7443,8 +7437,6 @@ msgstr ""
 #: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/affiliations/ProjectsListFilter.tsx
 #: src/user/affiliations/UserAffiliationsList.tsx
-#: src/user/resources/ResourcesFilter.tsx
-#: src/user/resources/ResourcesList.tsx
 #: src/user/support/UserDetailsTable.tsx
 #: src/user/support/UserFilter.tsx
 #: src/user/support/UserList.tsx
@@ -8426,11 +8418,12 @@ msgstr ""
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
+#: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8452,8 +8445,6 @@ msgstr ""
 #: src/reporting/resource-usage/ResourceUsageFilter.tsx
 #: src/slurm/deploy/steps.ts
 #: src/support/deploy-steps.ts
-#: src/user/resources/ResourcesFilter.tsx
-#: src/user/resources/ResourcesList.tsx
 #: src/vmware/deploy/steps.ts
 msgid "Project"
 msgstr ""
@@ -8575,10 +8566,6 @@ msgstr ""
 
 #: src/project/ProjectRemoveDialog.tsx
 msgid "Project removal"
-msgstr ""
-
-#: src/marketplace/resources/list/UserResourcesContainer.tsx
-msgid "Project resources"
 msgstr ""
 
 #: src/customer/team/CustomerUsersListFilter.tsx
@@ -9720,7 +9707,8 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingDetailsUIView.tsx
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
+#: src/marketplace/resources/list/CategoryResourcesContainer.tsx
+#: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/routes.ts
@@ -9734,8 +9722,6 @@ msgstr ""
 #: src/navigation/workspace/context-selector/ProjectsPanel.tsx
 #: src/reporting/quotas/constants.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
-#: src/user/resources/ResourcesList.tsx
-#: src/user/routes.ts
 msgid "Resources"
 msgstr ""
 
@@ -10071,9 +10057,8 @@ msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
+#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
-#: src/user/resources/ResourcesFilter.tsx
 msgid "Runtime state"
 msgstr ""
 
@@ -11336,13 +11321,13 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
+#: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesFilter.tsx
-#: src/marketplace/resources/list/ProjectResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
 #: src/marketplace/resources/list/SupportResourcesFilter.tsx
+#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
@@ -11393,8 +11378,6 @@ msgstr ""
 #: src/user/UserPermissionRequestsList.tsx
 #: src/user/UserPermissionRequestsStateFilter.tsx
 #: src/user/hooks/HooksList.tsx
-#: src/user/resources/ResourcesFilter.tsx
-#: src/user/resources/ResourcesList.tsx
 #: src/vmware/DisksList.tsx
 #: src/vmware/PortsList.tsx
 msgid "State"
@@ -13028,7 +13011,7 @@ msgstr ""
 msgid "Unable to load category"
 msgstr ""
 
-#: src/marketplace/resources/list/UserResourcesContainer.tsx
+#: src/marketplace/resources/list/CategoryResourcesContainer.tsx
 msgid "Unable to load category details"
 msgstr ""
 
@@ -14980,7 +14963,7 @@ msgstr ""
 msgid "Your request is being processed."
 msgstr ""
 
-#: src/user/resources/ResourcesListContainer.tsx
+#: src/marketplace/resources/list/useResourcesListBanner.ts
 msgid "Your role allows to see all existing resources"
 msgstr ""
 
@@ -15500,7 +15483,7 @@ msgstr ""
 msgid "{agent} - {status}. Last request: {time}"
 msgstr ""
 
-#: src/marketplace/resources/list/UserResourcesContainer.tsx
+#: src/marketplace/resources/list/CategoryResourcesContainer.tsx
 msgid "{category} resources"
 msgstr ""
 

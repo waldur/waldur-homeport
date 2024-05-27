@@ -1,15 +1,12 @@
 import { Badge } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
-import { usePublicResourceState } from '@waldur/marketplace/resources/list/PublicResourceLink';
 import { Field } from '@waldur/resource/summary';
 import { Volume } from '@waldur/resource/types';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 interface VolumeBadgeProps {
   volume: Volume;
@@ -17,11 +14,6 @@ interface VolumeBadgeProps {
 }
 
 const VolumeBadgeTipView = ({ volume, resourceName }: VolumeBadgeProps) => {
-  const customer = useSelector(getCustomer);
-  const stateAndParams = usePublicResourceState(
-    { ...volume, uuid: volume.marketplace_resource_uuid },
-    customer,
-  );
   return (
     <div className="text-start p-2">
       <Field label={translate('Attached to')} value={resourceName} isStuck />
@@ -38,8 +30,10 @@ const VolumeBadgeTipView = ({ volume, resourceName }: VolumeBadgeProps) => {
       <Field label={translate('Mount')} value={volume.device} isStuck hasCopy />
       {volume.marketplace_resource_uuid && (
         <Link
-          state={stateAndParams.state}
-          params={stateAndParams.params}
+          state="marketplace-resource-details"
+          params={{
+            resource_uuid: volume.marketplace_resource_uuid,
+          }}
           className="btn btn-sm btn-dark mt-2"
         >
           {translate('Go to detail view')}

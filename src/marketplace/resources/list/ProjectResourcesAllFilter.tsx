@@ -18,6 +18,7 @@ import { NON_TERMINATED_STATES } from './SupportResourcesFilter';
 
 interface ProjectResourcesAllFilterProps {
   hasProjectFilter?: boolean;
+  hasCustomerFilter?: boolean;
   change?: any;
 }
 
@@ -30,13 +31,6 @@ const PureProjectResourcesAllFilter: FunctionComponent<
   }, [customer]);
   return (
     <>
-      <TableFilterItem
-        title={translate('Organization')}
-        name="organization"
-        badgeValue={(value) => value?.name}
-      >
-        <RelatedCustomerFilter />
-      </TableFilterItem>
       <TableFilterItem
         title={translate('Offering')}
         name="offering"
@@ -51,7 +45,16 @@ const PureProjectResourcesAllFilter: FunctionComponent<
       >
         <CategoryFilter />
       </TableFilterItem>
-      {props.hasProjectFilter !== false ? (
+      {props.hasCustomerFilter ? (
+        <TableFilterItem
+          title={translate('Organization')}
+          name="organization"
+          badgeValue={(value) => value?.name}
+        >
+          <RelatedCustomerFilter />
+        </TableFilterItem>
+      ) : null}
+      {props.hasProjectFilter ? (
         <TableFilterItem
           title={translate('Project')}
           name="project"

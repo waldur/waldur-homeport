@@ -1,8 +1,8 @@
 import { Accordion } from 'react-bootstrap';
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { ResourceReference } from '@waldur/marketplace/resources/types';
 import { OrderDetailsProps } from '@waldur/marketplace/types';
 
 import { DetailsField } from '../../common/DetailsField';
@@ -10,7 +10,6 @@ import { OrderConsumerActions } from '../actions/OrderConsumerActions';
 import { OrderStateCell } from '../list/OrderStateCell';
 
 import { CancelOrderButton } from './CancelOrderButton';
-import { OrderResourceLink } from './OrderResourceLink';
 import { OrderSummaryMessage } from './OrderSummaryMessage';
 import { OrderTypeIndicator } from './OrderTypeIndicator';
 
@@ -51,9 +50,13 @@ export const SummarySection = ({
       )}
       {order.marketplace_resource_uuid && (
         <DetailsField label={translate('Resource')}>
-          <OrderResourceLink item={order as ResourceReference}>
-            {translate('Resource link')}
-          </OrderResourceLink>
+          <Link
+            state="marketplace-resource-details"
+            params={{
+              resource_uuid: order.marketplace_resource_uuid,
+            }}
+            label={translate('Resource link')}
+          />
         </DetailsField>
       )}
       <DetailsField label={translate('Actions')}>

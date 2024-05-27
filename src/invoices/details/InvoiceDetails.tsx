@@ -96,7 +96,6 @@ export const InvoiceDetails = ({
                         key={resourceIndex}
                         invoice={invoice}
                         resource={resource}
-                        customer={customer}
                         showPrice={showPrice}
                         showVat={invoice.issuer_details.vat_code}
                         refreshInvoiceItems={refreshInvoiceItems}
