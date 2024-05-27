@@ -32,7 +32,7 @@ export const CategoriesList: FC = () => {
     );
   }
 
-  const items = showAll ? categories.data : categories.data.slice(0, 5);
+  const items = showAll ? categories.data : categories.data.slice(0, 6);
 
   return (
     <>
