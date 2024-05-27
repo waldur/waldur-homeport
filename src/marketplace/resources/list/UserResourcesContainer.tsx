@@ -36,6 +36,7 @@ export const UserResourcesContainer: React.FC = () => {
       <ProjectResourcesList
         columns={value.columns}
         category_uuid={category_uuid}
+        standalone
       />
     );
   }

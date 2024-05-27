@@ -41,5 +41,11 @@ export const ProjectsList = () => {
     }
   }, [isStaffOrSupport]);
   const filter = useSelector(mapStateToFilter);
-  return <BaseProjectsList filters={<ProjectsListFilter />} filter={filter} />;
+  return (
+    <BaseProjectsList
+      filters={<ProjectsListFilter />}
+      filter={filter}
+      standalone
+    />
+  );
 };

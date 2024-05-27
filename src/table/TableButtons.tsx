@@ -64,7 +64,7 @@ export const TableButtons: FunctionComponent<TableProps> = (props) => {
             onClick={() => props.openFiltersDrawer(props.filters)}
           />
         )}
-        {props.actions}
+        {!props.standalone && props.actions}
         {Boolean(props.gridItem && props.columns.length) && (
           <TableDisplayModeButton
             mode={props.mode}

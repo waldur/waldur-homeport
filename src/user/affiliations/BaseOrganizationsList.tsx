@@ -37,7 +37,8 @@ const exportFields = [
 export const BaseOrganizationsList: FunctionComponent<{
   user;
   hasActionBar?;
-}> = ({ user, hasActionBar = true }) => {
+  standalone?;
+}> = ({ user, hasActionBar = true, standalone = false }) => {
   const filter = useSelector(mapStateToFilter);
   filter.user_uuid = user.uuid;
 
@@ -100,6 +101,7 @@ export const BaseOrganizationsList: FunctionComponent<{
       expandableRow={({ row }) => <OrganizationDetails customer={row} />}
       fullWidth={true}
       hasActionBar={hasActionBar}
+      standalone={standalone}
       actions={<OrganizationCreateButton />}
       filters={<OrganizationsFilter />}
     />

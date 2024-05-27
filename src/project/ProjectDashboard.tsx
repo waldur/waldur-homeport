@@ -76,6 +76,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
         initialPageSize={5}
         className="mb-6"
         project={project}
+        standalone={false}
       />
       <ProjectEventsView />
     </>
