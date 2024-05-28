@@ -18,5 +18,5 @@ const LogoMap = {
 
 export const IdentityProviderLogo = ({ name }) => {
   const Logo = LogoMap[name] || LogoMap.waldur;
-  return <Logo style={{ width: '100%' }} />;
+  return <Logo style={{ width: '100%', maxHeight: 40 }} />;
 };
