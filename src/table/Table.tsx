@@ -6,6 +6,7 @@ import { BaseFieldProps } from 'redux-form';
 
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
+import { ErrorView } from '@waldur/navigation/header/search/ErrorView';
 
 import './Table.scss';
 import { GridBody } from './GridBody';
@@ -259,20 +260,22 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     }
 
     if (this.props.error) {
-      return (
-        <div className="text-center mt-4">
-          <p>{translate('Unable to fetch data.')}</p>
-          <TableRefreshButton {...this.props} />
-        </div>
-      );
+      return <ErrorView />;
     }
 
     if (!this.props.loading && !this.hasRows()) {
       if (this.props.placeholderComponent) {
         return this.props.placeholderComponent;
       } else {
-        const { query, verboseName } = this.props;
-        return <TablePlaceholder {...{ query, verboseName }} />;
+        const { query, verboseName, setQuery } = this.props;
+        return (
+          <TablePlaceholder
+            query={query}
+            verboseName={verboseName}
+            clearSearch={() => setQuery('')}
+            fetch={this.props.fetch}
+          />
+        );
       }
     }
 

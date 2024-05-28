@@ -187,6 +187,11 @@
     }
   }
 
+  .search-no-result,
+  .search-error {
+    margin-top: -2rem;
+  }
+
   /* TABLE FULL IN CARD */
   &.full-width {
     .table-filter {
@@ -216,6 +221,11 @@
       .table-filters {
         padding-left: 2.5rem;
         padding-right: 2.5rem;
+      }
+
+      .search-no-result,
+      .search-error {
+        margin-top: 0;
       }
     }
 

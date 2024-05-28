@@ -5,7 +5,6 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
-import { UserOfferingListPlaceholder } from '@waldur/user/UserOfferingListPlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
@@ -52,7 +51,6 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       {...tableProps}
       columns={columns}
       verboseName={translate('remote accounts')}
-      placeholderComponent={<UserOfferingListPlaceholder />}
       showPageSizeSelector={true}
       hasQuery={true}
       hasActionBar={hasActionBar}

@@ -24,6 +24,10 @@ msgstr ""
 msgid "1 - Very negative"
 msgstr ""
 
+#: src/dashboard/TeamWidget.tsx
+msgid "1 member"
+msgstr ""
+
 #: src/issues/feedback/utils.ts
 msgid "10 - Very positive"
 msgstr ""
@@ -1831,8 +1835,10 @@ msgid "Categories"
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistCustomer.tsx
+#: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/actions/OfferingCreateDialog.tsx
+#: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/details/PublicOfferingGeneral.tsx
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/offerings/list/OfferingsList.tsx
@@ -1953,6 +1959,7 @@ msgid "Clear filters"
 msgstr ""
 
 #: src/navigation/header/search/NoResult.tsx
+#: src/table/TablePlaceholder.tsx
 msgid "Clear search"
 msgstr ""
 
@@ -2297,6 +2304,10 @@ msgstr ""
 msgid "Contact phone"
 msgstr ""
 
+#: src/navigation/header/search/ErrorView.tsx
+msgid "Contact support"
+msgstr ""
+
 #: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
 msgid "Contact vendor"
@@ -2623,10 +2634,6 @@ msgstr ""
 #: src/openstack/openstack-network/actions/CreateSubnetAction.tsx
 #: src/openstack/openstack-network/actions/CreateSubnetDialog.tsx
 msgid "Create subnet"
-msgstr ""
-
-#: src/project/ProjectTablePlaceholder.tsx
-msgid "Create your first project"
 msgstr ""
 
 #: src/administration/TokensList.tsx
@@ -5458,10 +5465,6 @@ msgstr ""
 msgid "Issues"
 msgstr ""
 
-#: src/issues/list/IssuesListPlaceholder.tsx
-msgid "Issues are trackable requests to the operator."
-msgstr ""
-
 #: src/openstack/OpenStackForm.tsx
 #: src/openstack/OpenStackTenantForm.tsx
 msgid "It is used to automatically assign floating IP to your virtual machine."
@@ -5474,6 +5477,10 @@ msgstr ""
 
 #: src/invoices/details/InvoiceItemMoveDialog.tsx
 msgid "Item {item} has been moved from invoice {origin} to {target}."
+msgstr ""
+
+#: src/table/utils.tsx
+msgid "Items"
 msgstr ""
 
 #: src/slurm/details/SubmitJobDialog.tsx
@@ -6623,10 +6630,6 @@ msgstr ""
 msgid "No end date"
 msgstr ""
 
-#: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
-msgid "No entries to show here"
-msgstr ""
-
 #: src/proposals/proposal/create-review/ReviewComment.tsx
 msgid "No explanation"
 msgstr ""
@@ -6645,6 +6648,10 @@ msgstr ""
 
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 msgid "No member"
+msgstr ""
+
+#: src/dashboard/TeamWidget.tsx
+msgid "No members"
 msgstr ""
 
 #: src/marketplace/offerings/details/OfferingAutocomplete.tsx
@@ -6740,12 +6747,12 @@ msgstr ""
 msgid "No variable defined"
 msgstr ""
 
-#: src/invitations/InvitationButtons.tsx
-msgid "No, continue using current email"
+#: src/table/utils.tsx
+msgid "No {verboseName} found"
 msgstr ""
 
-#: src/proposals/round/proposals/ProposalsPlaceholder.tsx
-msgid "Nobody has submitted proposals yet."
+#: src/invitations/InvitationButtons.tsx
+msgid "No, continue using current email"
 msgstr ""
 
 #: src/rancher/node/ClusterNodesList.tsx
@@ -6809,12 +6816,6 @@ msgid "Notes (not visible to user)"
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
-#: src/proposals/offering-requests/OfferingRequestsListPlaceholder.tsx
-#: src/proposals/proposal/ProposalsListPlaceholder.tsx
-#: src/proposals/review/ReviewsListPlaceholder.tsx
-#: src/proposals/round/proposals/ProposalsPlaceholder.tsx
-#: src/proposals/update/offerings/CallOfferingsTablePlaceholder.tsx
-#: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
 msgid "Nothing to see here"
 msgstr ""
 
@@ -6848,10 +6849,6 @@ msgstr ""
 #: src/user/hooks/HooksList.tsx
 #: src/user/routes.ts
 msgid "Notifications"
-msgstr ""
-
-#: src/user/hooks/HookListTablePlaceholder.tsx
-msgid "Notifications allow to be informed when a certain event has occurred."
 msgstr ""
 
 #: src/customer/cost-policies/utils.ts
@@ -7007,10 +7004,6 @@ msgstr ""
 msgid "Offering doesn't have endpoints."
 msgstr ""
 
-#: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
-msgid "Offering doesn't have images."
-msgstr ""
-
 #: src/marketplace/offerings/update/options/OfferingOptionsSectionPure.tsx
 msgid "Offering doesn't have input variables."
 msgstr ""
@@ -7120,6 +7113,7 @@ msgstr ""
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/marketplace/category/utils.ts
+#: src/marketplace/landing/OfferingsGroup.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
@@ -8098,8 +8092,8 @@ msgstr ""
 msgid "Please provide requested limits and a reason."
 msgstr ""
 
-#: src/marketplace/offerings/images/ImagesListPlaceholder.tsx
-msgid "Please provide visual material describing the Offering"
+#: src/navigation/header/search/ErrorView.tsx
+msgid "Please refresh the page or get in touch for support."
 msgstr ""
 
 #: src/marketplace/offerings/actions/RequestActionDialog.tsx
@@ -8158,6 +8152,10 @@ msgstr ""
 
 #: src/marketplace/resources/resource-selector/ResourcesList.tsx
 msgid "Please try again with a different query"
+msgstr ""
+
+#: src/table/TablePlaceholder.tsx
+msgid "Please try again with different keywords or check your filters"
 msgstr ""
 
 #: src/marketplace/offerings/InternalNameField.tsx
@@ -8451,10 +8449,6 @@ msgstr ""
 
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Project ID"
-msgstr ""
-
-#: src/project/ProjectTablePlaceholder.tsx
-msgid "Project aggregates and isolates teams and resources."
 msgstr ""
 
 #: src/project/ProjectDashboardCostLimits.tsx
@@ -8829,10 +8823,6 @@ msgstr ""
 msgid "Public"
 msgstr ""
 
-#: src/user/keys/KeysListTablePlaceholder.tsx
-msgid "Public SSH keys will be injected into services that allow key-based access."
-msgstr ""
-
 #: src/proposals/PublicCallsPage.tsx
 msgid "Public calls"
 msgstr ""
@@ -9088,6 +9078,10 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
+#: src/navigation/header/search/ErrorView.tsx
+msgid "Refresh page"
+msgstr ""
+
 #: src/marketplace/service-providers/ServiceProviderManagement.tsx
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "Regenerate"
@@ -9207,10 +9201,6 @@ msgstr ""
 #: src/user/routes.ts
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Remote accounts"
-msgstr ""
-
-#: src/user/UserOfferingListPlaceholder.tsx
-msgid "Remote accounts are used for accessing external services you have access to."
 msgstr ""
 
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
@@ -9731,10 +9721,6 @@ msgstr ""
 
 #: src/marketplace/service-providers/ProviderProjectResourcesDialog.tsx
 msgid "Resources in project and provider"
-msgstr ""
-
-#: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
-msgid "Resources represent the services you are using."
 msgstr ""
 
 #: src/marketplace/robot-accounts/CreateRobotAccountDialog.tsx
@@ -10300,6 +10286,10 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: src/table/TablePlaceholder.tsx
+msgid "Search again"
+msgstr ""
+
 #: src/marketplace/resources/actions/ActionDialogBody.tsx
 msgid "Search by name"
 msgstr ""
@@ -10388,10 +10378,6 @@ msgstr ""
 
 #: src/marketplace/orders/list/OrderTablePlaceholder.tsx
 msgid "Seems there's nothing here"
-msgstr ""
-
-#: src/marketplace/resources/list/PublicResourcesListPlaceholder.tsx
-msgid "Seems you don't have any public resources yet"
 msgstr ""
 
 #: src/marketplace/resources/list/CustomerResourcesListPlaceholder.tsx
@@ -11219,6 +11205,7 @@ msgid "Snapshots count"
 msgstr ""
 
 #: src/customer/list/ExportAsEmailDialog.tsx
+#: src/navigation/header/search/ErrorView.tsx
 #: src/proposals/proposal/create-review/CreateReviewDialog.tsx
 #: src/proposals/proposal/create-review/ProposalReviewCreatePage.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
@@ -12099,28 +12086,8 @@ msgstr ""
 msgid "Then download (if needed) and run kubectl"
 msgstr ""
 
-#: src/user/keys/KeysListTablePlaceholder.tsx
-msgid "There are no SSH keys yet."
-msgstr ""
-
 #: src/resource/actions/ResourceActionComponent.tsx
 msgid "There are no actions."
-msgstr ""
-
-#: src/proposals/CallsAvailableOfferingsList.tsx
-msgid "There are no available offerings at the moment."
-msgstr ""
-
-#: src/proposals/PublicAvailableOfferingsTablePlaceholder.tsx
-msgid "There are no available offerings yet."
-msgstr ""
-
-#: src/proposals/CallsForProposalsList.tsx
-msgid "There are no calls for proposals at the moment."
-msgstr ""
-
-#: src/proposals/PublicCallsTablePlaceholder.tsx
-msgid "There are no calls for proposals yet."
 msgstr ""
 
 #: src/i18n/constants.ts
@@ -12131,7 +12098,6 @@ msgstr ""
 msgid "There are no categories in marketplace yet."
 msgstr ""
 
-#: src/marketplace/category/admin/CategoriesListTablePlaceholder.tsx
 #: src/marketplace/offerings/import/SelectCategoryTab.tsx
 msgid "There are no categories yet."
 msgstr ""
@@ -12139,10 +12105,6 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
 msgid "There are no categories."
-msgstr ""
-
-#: src/marketplace/category/admin/GroupsListTablePlaceholder.tsx
-msgid "There are no category groups yet."
 msgstr ""
 
 #: src/marketplace-checklist/ChecklistOverview.tsx
@@ -12184,7 +12146,6 @@ msgid "There are no offerings in catalog yet."
 msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
-#: src/marketplace/landing/OfferingsGroup.tsx
 msgid "There are no offerings in marketplace yet."
 msgstr ""
 
@@ -12241,14 +12202,6 @@ msgstr ""
 msgid "There are no projects."
 msgstr ""
 
-#: src/proposals/call-management/CallManagementTablePlaceholder.tsx
-msgid "There are no proposal calls yet."
-msgstr ""
-
-#: src/user/UserOfferingListPlaceholder.tsx
-msgid "There are no remote accounts yet."
-msgstr ""
-
 #: src/marketplace/resources/details/ResourceIssues.tsx
 msgid "There are no resource issues."
 msgstr ""
@@ -12267,10 +12220,6 @@ msgstr ""
 
 #: src/core/AsyncSearchBox.tsx
 msgid "There are no results for this keyword."
-msgstr ""
-
-#: src/table/utils.tsx
-msgid "There are no {verboseName} found matching the filter."
 msgstr ""
 
 #: src/table/utils.tsx
@@ -12927,10 +12876,6 @@ msgstr ""
 
 #: src/user/support/UserEmailChangeCallback.tsx
 msgid "Unable to fetch current user."
-msgstr ""
-
-#: src/table/Table.tsx
-msgid "Unable to fetch data."
 msgstr ""
 
 #: src/issues/comments/utils.ts
@@ -14677,6 +14622,10 @@ msgstr ""
 msgid "We didn't get any results."
 msgstr ""
 
+#: src/navigation/header/search/ErrorView.tsx
+msgid "We had some trouble loading this page."
+msgstr ""
+
 #: src/marketplace/resources/resource-pending/OrderErredView.tsx
 msgid "We're sorry, but the resource creation process has failed."
 msgstr ""
@@ -14805,10 +14754,6 @@ msgstr ""
 msgid "You can add a message to be attached to the invitation email the users receives."
 msgstr ""
 
-#: src/proposals/proposal/ProposalsListPlaceholder.tsx
-msgid "You can create your first proposal."
-msgstr ""
-
 #: src/marketplace/orders/list/OrderTablePlaceholder.tsx
 msgid "You can find offerings to order in the marketplace"
 msgstr ""
@@ -14829,10 +14774,6 @@ msgstr ""
 msgid "You can remove this organization by pressing the button"
 msgstr ""
 
-#: src/proposals/update/rounds/CallRoundsTablePlaceholder.tsx
-msgid "You can set the first round for this call."
-msgstr ""
-
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx
 msgid "You can start filling this table by creating your first offering."
 msgstr ""
@@ -14843,10 +14784,6 @@ msgstr ""
 
 #: src/administration/languages/LanguageOptionsForm.tsx
 msgid "You cannot unselect the default language"
-msgstr ""
-
-#: src/marketplace/resources/list/EmptyResourcesListPlaceholder.tsx
-msgid "You do not have any resources yet."
 msgstr ""
 
 #: src/auth/PermissionLayout.tsx
@@ -14881,20 +14818,12 @@ msgstr ""
 msgid "You have entered data in form. When drawer is closed form data would be lost."
 msgstr ""
 
-#: src/user/hooks/HookListTablePlaceholder.tsx
-msgid "You have no notifications yet."
-msgstr ""
-
 #: src/quotas/QuotasTable.tsx
 msgid "You have no quotas yet."
 msgstr ""
 
 #: src/i18n/constants.ts
 msgid "You have the right to request service without additional approval."
-msgstr ""
-
-#: src/issues/list/IssuesListPlaceholder.tsx
-msgid "You haven't created any issues yet."
 msgstr ""
 
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -14951,10 +14880,6 @@ msgstr ""
 msgid "Your invitation was accepted."
 msgstr ""
 
-#: src/project/ProjectTablePlaceholder.tsx
-msgid "Your organization does not have any projects yet."
-msgstr ""
-
 #: src/invitations/utils.ts
 msgid "Your permission request has been submitted."
 msgstr ""
@@ -14977,6 +14902,10 @@ msgstr ""
 
 #: src/navigation/workspace/context-selector/OrganizationSummary.tsx
 msgid "Your role:"
+msgstr ""
+
+#: src/table/utils.tsx
+msgid "Your search \"{query}\" did not match any {verboseName}."
 msgstr ""
 
 #: src/auth/AuthHeader.tsx
@@ -15158,10 +15087,6 @@ msgstr ""
 
 #: src/UserAgreementComponent.tsx
 msgid "is not defined."
-msgstr ""
-
-#: src/table/utils.tsx
-msgid "items"
 msgstr ""
 
 #: src/slurm/details/AllocationJobsTable.tsx

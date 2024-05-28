@@ -16,7 +16,6 @@ import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { EndingField } from '../EndingField';
 
 import { ProposalsListExpandableRow } from './ProposalsListExpandableRow';
-import { ProposalsListPlaceholder } from './ProposalsListPlaceholder';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
 
 const filtersSelector = createSelector(
@@ -56,7 +55,6 @@ export const UserProposalsList: FC = () => {
   return (
     <Table
       {...tableProps}
-      placeholderComponent={<ProposalsListPlaceholder />}
       columns={[
         {
           title: translate('Proposal'),

@@ -5,7 +5,6 @@ import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-import { EmptyResourcesListPlaceholder } from '../resources/list/EmptyResourcesListPlaceholder';
 import { ResourceNameField } from '../resources/list/ResourceNameField';
 import { ResourceStateField } from '../resources/list/ResourceStateField';
 
@@ -55,7 +54,6 @@ export const ProviderProjectResourcesList: FunctionComponent<{
         },
       ]}
       verboseName={translate('Resources')}
-      placeholderComponent={<EmptyResourcesListPlaceholder />}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}

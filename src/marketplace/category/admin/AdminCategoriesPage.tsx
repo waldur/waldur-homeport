@@ -13,7 +13,6 @@ import { Category } from '@waldur/marketplace/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-import { CategoriesListTablePlaceholder } from './CategoriesListTablePlaceholder';
 import { CategoryCreateButton } from './CategoryCreateButton';
 import { CategoryDeleteButton } from './CategoryDeleteButton';
 import { CategoryEditButton } from './CategoryEditButton';
@@ -118,7 +117,6 @@ export const AdminCategoriesPage: FunctionComponent = () => {
       )}
       hasQuery={true}
       actions={<CategoryCreateButton refetch={tableProps.fetch} />}
-      placeholderComponent={<CategoriesListTablePlaceholder />}
     />
   );
 };

@@ -64,13 +64,8 @@ export const OfferingsGroup = () => {
       gridItem={({ row }) => <OfferingCard offering={row} />}
       gridSize={{ lg: 6, xl: 4 }}
       mode="grid"
-      placeholderComponent={
-        <h3 className="text-center">
-          {translate('There are no offerings in marketplace yet.')}
-        </h3>
-      }
       title={translate('Latest offerings')}
-      verboseName={translate('Latest offerings')}
+      verboseName={translate('Offerings')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       actions={
         <Link state="public.offerings" className="btn btn-light">

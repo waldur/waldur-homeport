@@ -185,7 +185,7 @@ const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
         ) : null}
         <NoResult
           isVisible={!result.data?.resultsCount && result.status !== 'loading'}
-          clearSearch={clearSearch}
+          callback={clearSearch}
         />
       </Col>
     </Row>
@@ -212,7 +212,7 @@ const OrganizationsTabContent = ({ result, clearSearch }: TabContentProps) => {
         isVisible={
           isEmpty(result.data?.customers) && result.status !== 'loading'
         }
-        clearSearch={clearSearch}
+        callback={clearSearch}
       />
     </>
   );
@@ -239,7 +239,7 @@ const ProjectsTabContent = ({ result, clearSearch }: TabContentProps) => {
         isVisible={
           isEmpty(result.data?.projects) && result.status !== 'loading'
         }
-        clearSearch={clearSearch}
+        callback={clearSearch}
       />
     </>
   );
@@ -274,7 +274,7 @@ const ResourcesTabContent = ({ result, clearSearch }: TabContentProps) => {
       ) : null}
       <NoResult
         isVisible={isEmpty(resourceGroups) && result.status !== 'loading'}
-        clearSearch={clearSearch}
+        callback={clearSearch}
       />
     </>
   );

@@ -24,11 +24,6 @@ export const CallsAvailableOfferingsList: FC = () => {
       gridItem={({ row }) => <AvailableOfferingCard availableOffering={row} />}
       gridSize={{ lg: 6, xl: 4 }}
       mode="grid"
-      placeholderComponent={
-        <h3 className="text-center">
-          {translate('There are no available offerings at the moment.')}
-        </h3>
-      }
       title={translate('Available offerings')}
       verboseName={translate('Available offerings')}
       actions={

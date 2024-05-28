@@ -14,7 +14,6 @@ import { useTable } from '@waldur/table/utils';
 import { useOfferingDropdownActions } from '../offerings/hooks';
 import { CreateOfferingButton } from '../offerings/list/CreateOfferingButton';
 import { OfferingActions } from '../offerings/list/OfferingActions';
-import { OfferingsListTablePlaceholder } from '../offerings/list/OfferingsListTablePlaceholder';
 import { OfferingStateCell } from '../offerings/list/OfferingStateCell';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 import { ServiceProvider } from '../types';
@@ -61,9 +60,6 @@ export const ProviderOfferingsComponent: FC<
   return (
     <Table
       {...tableProps}
-      placeholderComponent={
-        <OfferingsListTablePlaceholder showActions={true} />
-      }
       columns={[
         {
           title: translate('Offering / Category'),

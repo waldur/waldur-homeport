@@ -26,7 +26,6 @@ import {
 import { PublicResourceLink } from './PublicResourceLink';
 import { PublicResourcesFilter } from './PublicResourcesFilter';
 import { PublicResourcesLimits } from './PublicResourcesLimits';
-import { PublicResourcesListPlaceholder } from './PublicResourcesListPlaceholder';
 import { ResourceStateField } from './ResourceStateField';
 
 interface ResourceFilter {
@@ -89,7 +88,6 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   return (
     <Table
       {...props}
-      placeholderComponent={<PublicResourcesListPlaceholder />}
       columns={columns}
       verboseName={translate('Resources')}
       title={translate('Resources')}

@@ -13,7 +13,6 @@ import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/s
 import { useFullPage } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { AvailableOfferingCard } from '@waldur/proposals/AvailableOfferingCard';
-import { PublicAvailableOfferingsTablePlaceholder } from '@waldur/proposals/PublicAvailableOfferingsTablePlaceholder';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
@@ -89,7 +88,6 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
           verboseName={translate('Available offerings')}
           initialSorting={{ field: 'name', mode: 'desc' }}
           hasQuery={true}
-          placeholderComponent={<PublicAvailableOfferingsTablePlaceholder />}
           filters={<OfferingsFilter />}
         />
       </div>

@@ -41,4 +41,15 @@ export class TableQuery extends Component<TableQueryProps, State> {
       />
     );
   }
+
+  componentDidUpdate(prevProps: Readonly<TableQueryProps>): void {
+    // This block is implemented to make the "Clear search" button work
+    if (
+      !this.props.query &&
+      prevProps.query &&
+      prevProps.query === this.state.query
+    ) {
+      this.setState({ query: '' });
+    }
+  }
 }

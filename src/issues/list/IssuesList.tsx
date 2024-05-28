@@ -7,7 +7,6 @@ import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { IssueLinkField } from '@waldur/issues/list/IssueLinkField';
 import { IssuesListExpandableRow } from '@waldur/issues/list/IssuesListExpandableRow';
-import { IssuesListPlaceholder } from '@waldur/issues/list/IssuesListPlaceholder';
 import { StatusColumn } from '@waldur/issues/list/StatusColumn';
 import { TitleColumn } from '@waldur/issues/list/TitleColumn';
 import { Table, createFetcher } from '@waldur/table';
@@ -171,7 +170,6 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
       verboseName={translate('support requests')}
       hasQuery={true}
       showPageSizeSelector={true}
-      placeholderComponent={<IssuesListPlaceholder />}
       enableExport={true}
       actions={props.scope && <IssueCreateButton scope={props.scope} />}
       expandableRow={({ row }) => (

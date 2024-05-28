@@ -15,7 +15,6 @@ import { ResourceImportButton } from '../import/ResourceImportButton';
 
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
-import { EmptyResourcesListPlaceholder } from './EmptyResourcesListPlaceholder';
 import { ExpandableResourceSummary } from './ExpandableResourceSummary';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
@@ -116,7 +115,6 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       {...props}
       columns={columns}
       verboseName={translate('Resources')}
-      placeholderComponent={<EmptyResourcesListPlaceholder />}
       hoverableRow={({ row }) => (
         <ResourceActionsButton row={row} refetch={props.fetch} />
       )}

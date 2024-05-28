@@ -12,7 +12,6 @@ import { useTable } from '@waldur/table/utils';
 import { GroupCreateButton } from './GroupCreateButton';
 import { GroupDeleteButton } from './GroupDeleteButton';
 import { GroupEditButton } from './GroupEditButton';
-import { GroupsListTablePlaceholder } from './GroupsListTablePlaceholder';
 
 export const CategoryGroupsList: FunctionComponent = () => {
   const tableProps = useTable({
@@ -60,7 +59,6 @@ export const CategoryGroupsList: FunctionComponent = () => {
       )}
       hasQuery={true}
       actions={<GroupCreateButton refetch={tableProps.fetch} />}
-      placeholderComponent={<GroupsListTablePlaceholder />}
     />
   );
 };
