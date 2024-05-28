@@ -16,7 +16,6 @@ import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { ReviewItemAction } from './ReviewItemActions';
 import { ReviewsListExpandableRow } from './ReviewsListExpandableRow';
-import { ReviewsListPlaceholder } from './ReviewsListPlaceholder';
 
 const filtersSelector = createSelector(
   getCustomer,
@@ -65,7 +64,6 @@ export const CustomerReviewsList: FC<{}> = () => {
   return (
     <Table<ProposalReview>
       {...tableProps}
-      placeholderComponent={<ReviewsListPlaceholder />}
       columns={[
         {
           title: translate('Proposal'),

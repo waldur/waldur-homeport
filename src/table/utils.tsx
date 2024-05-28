@@ -76,16 +76,26 @@ export const transformRows = (rows: any[]) => {
 
 export const renderFieldOrDash = (field) => (field ? field : DASH_ESCAPE_CODE);
 
-export function getMessage({ query, verboseName }) {
-  const context = { verboseName: verboseName || translate('items') };
+export function getNoResultMessage({ query, verboseName }) {
+  const context = {
+    verboseName: String(verboseName || translate('Items')).toLowerCase(),
+    query: query,
+  };
   if (query) {
     return translate(
-      'There are no {verboseName} found matching the filter.',
+      'Your search "{query}" did not match any {verboseName}.',
       context,
     );
   } else {
     return translate('There are no {verboseName} yet.', context);
   }
+}
+
+export function getNoResultTitle({ verboseName }) {
+  const context = {
+    verboseName: String(verboseName || translate('Items')).toLowerCase(),
+  };
+  return translate('No {verboseName} found', context);
 }
 
 export const getFiltersFormId = (filters: JSX.Element) => {

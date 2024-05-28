@@ -10,7 +10,6 @@ import { useTable } from '@waldur/table/utils';
 import { ProposalRowActions } from '../../proposal/ProposalRowActions';
 
 import { ProposalExpandableRow } from './ProposalExpandableRow';
-import { ProposalsPlaceholder } from './ProposalsPlaceholder';
 
 interface RoundProposalsListProps {
   round_uuid: string;
@@ -31,7 +30,6 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
       {...tableProps}
       id="proposals"
       className="mb-7"
-      placeholderComponent={<ProposalsPlaceholder />}
       columns={[
         {
           title: translate('Name'),

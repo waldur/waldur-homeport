@@ -14,7 +14,6 @@ import { formatCallOfferingState } from '../utils';
 
 import { OfferingRequestItemActions } from './OfferingRequestItemActions';
 import { OfferingRequestsListExpandableRow } from './OfferingRequestsListExpandableRow';
-import { OfferingRequestsListPlaceholder } from './OfferingRequestsListPlaceholder';
 import { OfferingRequestsTableFilter } from './OfferingRequestsTableFilter';
 
 interface OfferingRequestsListProps {
@@ -58,7 +57,6 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
   return (
     <Table
       {...tableProps}
-      placeholderComponent={<OfferingRequestsListPlaceholder />}
       columns={[
         {
           title: translate('Call'),

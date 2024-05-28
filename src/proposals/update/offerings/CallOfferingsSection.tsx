@@ -9,7 +9,6 @@ import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { AddOfferingButton } from './AddOfferingButton';
 import { CallOfferingExpandableRow } from './CallOfferingExpandableRow';
-import { CallOfferingsTablePlaceholder } from './CallOfferingsTablePlaceholder';
 
 interface CallOfferingsSectionProps {
   call: Call;
@@ -27,12 +26,6 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
     <Table
       {...tableProps}
       id="offerings"
-      placeholderComponent={
-        <CallOfferingsTablePlaceholder
-          call={props.call}
-          refetch={tableProps.fetch}
-        />
-      }
       columns={[
         {
           title: translate('Offering name'),

@@ -7,7 +7,6 @@ import { Table, createFetcher } from '@waldur/table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/utils';
 import { KeysListExpandableRow } from '@waldur/user/keys/KeysListExpandableRow';
-import { KeysListTablePlaceholder } from '@waldur/user/keys/KeysListTablePlaceholder';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { KeyCreateButton } from './KeyCreateButton';
@@ -76,7 +75,6 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
       showPageSizeSelector={true}
       verboseName={translate('SSH keys')}
       actions={isStaffOrSelf && <KeyCreateButton />}
-      placeholderComponent={<KeysListTablePlaceholder />}
       enableExport={true}
       expandableRow={KeysListExpandableRow}
       hasActionBar={hasActionBar}

@@ -22,11 +22,6 @@ export const CallsForProposalsList: FC = () => {
       gridItem={({ row }) => <CallCard call={row} />}
       gridSize={{ lg: 6, xl: 4 }}
       mode="grid"
-      placeholderComponent={
-        <h3 className="text-center">
-          {translate('There are no calls for proposals at the moment.')}
-        </h3>
-      }
       title={translate('Open calls')}
       verboseName={translate('Open calls')}
       actions={

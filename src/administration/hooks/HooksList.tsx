@@ -8,7 +8,6 @@ import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
-import { HookListTablePlaceholder } from '@waldur/user/hooks/HookListTablePlaceholder';
 import { HookRemoveButton } from '@waldur/user/hooks/HookRemoveButton';
 import { formatEventTitle } from '@waldur/user/hooks/utils';
 
@@ -102,7 +101,6 @@ export const HooksList: FunctionComponent = () => {
       ]}
       showPageSizeSelector={true}
       verboseName={translate('Notifications')}
-      placeholderComponent={<HookListTablePlaceholder />}
       hoverableRow={({ row }) => (
         <div className="list_active_button_container">
           <HookUpdateButton row={row} />

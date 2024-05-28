@@ -20,7 +20,6 @@ import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { CallCard } from './CallCard';
 import background from './proposal-calls.png';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
-import { PublicCallsTablePlaceholder } from './PublicCallsTablePlaceholder';
 import { formatCallState, getRoundsWithStatus } from './utils';
 
 const mapStateToFilter = createSelector(
@@ -130,7 +129,6 @@ export const PublicCallsPage: FunctionComponent = () => {
           verboseName={translate('Public calls')}
           initialSorting={{ field: 'name', mode: 'desc' }}
           hasQuery={true}
-          placeholderComponent={<PublicCallsTablePlaceholder />}
           expandableRow={PublicCallExpandableRow}
           filters={<CallAllFiltersWithDefaultState />}
         />

@@ -18,7 +18,6 @@ import { formatCallState } from '../utils';
 import { CallCreateButton } from './CallCreateButton';
 import { CallEditButton } from './CallEditButton';
 import { CallExpandableRow } from './CallExpandableRow';
-import { CallManagementTablePlaceholder } from './CallManagementTablePlaceholder';
 
 const mapStateToFilter = createSelector(
   getCustomer,
@@ -78,7 +77,6 @@ export const CallManagementPage: FunctionComponent = () => {
       hoverableRow={({ row }) => <CallEditButton row={row} />}
       hasQuery={true}
       actions={<CallCreateButton refetch={tableProps.fetch} />}
-      placeholderComponent={<CallManagementTablePlaceholder />}
       expandableRow={CallExpandableRow}
       filters={<CallAllFilters />}
     />

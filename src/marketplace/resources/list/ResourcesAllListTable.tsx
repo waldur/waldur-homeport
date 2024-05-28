@@ -11,7 +11,6 @@ import { TableProps } from '@waldur/table/Table';
 
 import { Resource } from '../types';
 
-import { EmptyResourcesListPlaceholder } from './EmptyResourcesListPlaceholder';
 import { ExpandableResourceSummary } from './ExpandableResourceSummary';
 import { ProjectResourcesAllFilter } from './ProjectResourcesAllFilter';
 import { ResourceActionsButton } from './ResourceActionsButton';
@@ -81,7 +80,6 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       ]}
       title={translate('Resources')}
       verboseName={translate('Resources')}
-      placeholderComponent={<EmptyResourcesListPlaceholder />}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hoverableRow={({ row }) => (
         <ResourceActionsButton row={row} refetch={props.fetch} />

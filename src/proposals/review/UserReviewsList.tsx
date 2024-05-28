@@ -15,7 +15,6 @@ import { EndingField } from '../EndingField';
 
 import { ReviewItemAction } from './ReviewItemActions';
 import { ReviewsListExpandableRow } from './ReviewsListExpandableRow';
-import { ReviewsListPlaceholder } from './ReviewsListPlaceholder';
 import { ReviewsTableFilter } from './ReviewsTableFilter';
 
 const filtersSelctor = createSelector(
@@ -47,7 +46,6 @@ export const UserReviewsList: FC = () => {
   return (
     <Table<ProposalReview>
       {...tableProps}
-      placeholderComponent={<ReviewsListPlaceholder />}
       columns={[
         {
           title: translate('Proposal'),

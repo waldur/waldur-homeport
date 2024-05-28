@@ -18,7 +18,6 @@ import { ProjectCreateButton } from './ProjectCreateButton';
 import { ProjectDetailsButton } from './ProjectDetailsButton';
 import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
 import { ProjectLink } from './ProjectLink';
-import { ProjectTablePlaceholder } from './ProjectTablePlaceholder';
 
 export const ProjectsList: FunctionComponent<{}> = () => {
   const customer = useSelector(getCustomer);
@@ -94,7 +93,6 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
-      placeholderComponent={<ProjectTablePlaceholder />}
       actions={<ProjectCreateButton />}
       hoverableRow={({ row }) => (
         <ButtonGroup>

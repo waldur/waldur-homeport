@@ -9,7 +9,6 @@ import { useTable } from '@waldur/table/utils';
 
 import { CreateImageButton } from './CreateImageButton';
 import { DeleteImageButton } from './DeleteImageButton';
-import { ImagesListPlaceholder } from './ImagesListPlaceholder';
 import { ImageThumbnail } from './ImageThumbnail';
 
 export const OfferingImagesList: FunctionComponent<{ offering }> = ({
@@ -58,7 +57,6 @@ export const OfferingImagesList: FunctionComponent<{ offering }> = ({
       title={translate('Images')}
       id="images"
       columns={columns}
-      placeholderComponent={<ImagesListPlaceholder />}
       verboseName={translate('Offerings images')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       actions={<CreateImageButton offering={offering} />}

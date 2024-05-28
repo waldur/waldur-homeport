@@ -8,7 +8,6 @@ import { Call, Round } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-import { CallRoundsTablePlaceholder } from './CallRoundsTablePlaceholder';
 import { RoundCreateButton } from './RoundCreateButton';
 import { RoundExpandableRow } from './RoundExpandableRow';
 
@@ -30,12 +29,6 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
       {...tableProps}
       id="rounds"
       className="mb-7"
-      placeholderComponent={
-        <CallRoundsTablePlaceholder
-          call={props.call}
-          refetch={tableProps.fetch}
-        />
-      }
       columns={[
         {
           title: translate('Round name'),
