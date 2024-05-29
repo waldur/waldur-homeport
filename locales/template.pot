@@ -204,6 +204,10 @@ msgstr ""
 msgid "Accounting type"
 msgstr ""
 
+#: src/administration/routes.ts
+msgid "Accounts"
+msgstr ""
+
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/project/ProjectDashboardCostPolicies.tsx
 #: src/resource/actions/AsyncActionItem.tsx
@@ -1848,7 +1852,6 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/proposals/proposal/create/ResourceRequestsSummary.tsx
@@ -1977,7 +1980,6 @@ msgstr ""
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/usage/ResourceMetaInfo.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/reporting/resource-usage/ResourceUsageList.tsx
@@ -5559,10 +5561,10 @@ msgstr ""
 msgid "LEXIS link creation request has been submitted."
 msgstr ""
 
+#: src/administration/routes.ts
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
 #: src/marketplace/resources/lexis/LexisLinkCard.tsx
-#: src/marketplace/routes.ts
 msgid "LEXIS links"
 msgstr ""
 
@@ -6934,7 +6936,6 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
@@ -8420,7 +8421,6 @@ msgstr ""
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
@@ -9927,6 +9927,7 @@ msgstr ""
 msgid "Robot account type"
 msgstr ""
 
+#: src/administration/routes.ts
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/robot-accounts/RobotAccountCard.tsx
 #: src/marketplace/routes.ts
@@ -11313,7 +11314,6 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
-#: src/marketplace/resources/list/SupportResourcesFilter.tsx
 #: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsFilter.tsx

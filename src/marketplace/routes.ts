@@ -3,7 +3,6 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { fetchCustomer } from '@waldur/customer/workspace/CustomerWorkspace';
-import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
@@ -81,9 +80,9 @@ const PublicResourcesList = lazyComponent(
   () => import('./resources/list/PublicResourcesList'),
   'PublicResourcesList',
 );
-const SupportResourcesList = lazyComponent(
-  () => import('./resources/list/SupportResourcesList'),
-  'SupportResourcesList',
+const UserResourcesAllList = lazyComponent(
+  () => import('@waldur/marketplace/resources/list/UserResourcesAllList'),
+  'UserResourcesAllList',
 );
 const ProviderDetails = lazyComponent(
   () => import('./service-providers/ProviderDetails'),
@@ -120,10 +119,6 @@ const OfferingRequestsList = lazyComponent(
 const ProjectsListContainer = lazyComponent(
   () => import('@waldur/project/ProjectsListContainer'),
   'ProjectsListContainer',
-);
-const BasicLexisLinkList = lazyComponent(
-  () => import('./resources/lexis/BasicLexisLinkList'),
-  'BasicLexisLinkList',
 );
 const OfferingPublicUIView = lazyComponent(
   () => import('./offerings/OfferingPublicUIView'),
@@ -501,47 +496,12 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'marketplace-admin-resources',
-    url: '',
-    component: UIView,
-    abstract: true,
+    name: 'marketplace-admin-resources-list',
+    url: 'resources/',
+    component: UserResourcesAllList,
     parent: 'admin',
     data: {
       breadcrumb: () => translate('Resources'),
-    },
-  },
-  {
-    name: 'marketplace-admin-resources-list',
-    url: 'resources/',
-    component: SupportResourcesList,
-    parent: 'marketplace-admin-resources',
-    data: {
-      breadcrumb: () => translate('Resources'),
-    },
-  },
-  {
-    name: 'marketplace-admin-lexis-links-list',
-    url: 'lexis-links/',
-    component: BasicLexisLinkList,
-    parent: 'marketplace-admin-resources',
-    data: {
-      breadcrumb: () => translate('LEXIS links'),
-      permissions: [
-        () => {
-          if (isFeatureVisible(MarketplaceFeatures.lexis_links)) {
-            return true;
-          }
-        },
-      ],
-    },
-  },
-  {
-    name: 'marketplace-admin-robot-accounts',
-    url: 'robot-accounts/',
-    component: ProviderRobotAccountList,
-    parent: 'marketplace-admin-resources',
-    data: {
-      breadcrumb: () => translate('Robot accounts'),
     },
   },
 

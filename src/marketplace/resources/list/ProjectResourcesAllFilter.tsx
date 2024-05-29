@@ -12,9 +12,11 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { CategoryFilter } from './CategoryFilter';
 import { ProjectFilter } from './ProjectFilter';
 import { RelatedCustomerFilter } from './RelatedCustomerFilter';
-import { ResourceStateFilter } from './ResourceStateFilter';
+import {
+  NON_TERMINATED_STATES,
+  ResourceStateFilter,
+} from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
-import { NON_TERMINATED_STATES } from './SupportResourcesFilter';
 
 interface ProjectResourcesAllFilterProps {
   hasProjectFilter?: boolean;
