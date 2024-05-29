@@ -3,10 +3,11 @@ import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { FILTER_OFFERING_RESOURCE } from '@waldur/marketplace/details/constants';
-import { ResourceStateFilter } from '@waldur/marketplace/resources/list/ResourceStateFilter';
+import {
+  NON_TERMINATED_STATES,
+  ResourceStateFilter,
+} from '@waldur/marketplace/resources/list/ResourceStateFilter';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
-
-import { NON_TERMINATED_STATES } from '../resources/list/SupportResourcesFilter';
 
 const PureOfferingResourcesFilter: FunctionComponent = () => (
   <TableFilterItem title={translate('State')} name="state" ellipsis={false}>

@@ -23,8 +23,10 @@ import {
 
 import { CategoryFilter } from './CategoryFilter';
 import { RelatedCustomerFilter } from './RelatedCustomerFilter';
-import { ResourceStateFilter } from './ResourceStateFilter';
-import { NON_TERMINATED_STATES } from './SupportResourcesFilter';
+import {
+  NON_TERMINATED_STATES,
+  ResourceStateFilter,
+} from './ResourceStateFilter';
 
 type StateProps = ReturnType<typeof mapStateToProps> & InjectedFormProps;
 

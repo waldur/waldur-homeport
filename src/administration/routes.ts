@@ -2,7 +2,8 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { SupportFeatures } from '@waldur/FeaturesEnums';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures, SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
@@ -39,6 +40,16 @@ const CategoryGroupsList = lazyComponent(
 const AdminCategoriesPage = lazyComponent(
   () => import('@waldur/marketplace/category/admin/AdminCategoriesPage'),
   'AdminCategoriesPage',
+);
+
+const ProviderRobotAccountList = lazyComponent(
+  () => import('@waldur/marketplace/robot-accounts/ProviderRobotAccountList'),
+  'ProviderRobotAccountList',
+);
+
+const BasicLexisLinkList = lazyComponent(
+  () => import('@waldur/marketplace/resources/lexis/BasicLexisLinkList'),
+  'BasicLexisLinkList',
 );
 
 const OrganizationUpdateContainer = lazyComponent(
@@ -126,13 +137,13 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-users',
+    name: 'admin-accounts',
     parent: 'admin',
     abstract: true,
     component: UIView,
     url: '',
     data: {
-      breadcrumb: () => translate('Users'),
+      breadcrumb: () => translate('Accounts'),
     },
   },
 
@@ -189,7 +200,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-user-users',
     url: 'users/?role',
-    parent: 'admin-users',
+    parent: 'admin-accounts',
     component: UserList,
     data: {
       feature: SupportFeatures.users,
@@ -199,7 +210,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-user-notifications',
     url: 'users/notifications/',
-    parent: 'admin-users',
+    parent: 'admin-accounts',
     component: HooksList,
     data: {
       breadcrumb: () => translate('Notifications'),
@@ -208,10 +219,35 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-user-active-sessions',
     url: 'users/active-sessions/',
-    parent: 'admin-users',
+    parent: 'admin-accounts',
     component: TokensList,
     data: {
       breadcrumb: () => translate('Active sessions'),
+    },
+  },
+  {
+    name: 'admin-user-robot-accounts',
+    url: 'robot-accounts/',
+    component: ProviderRobotAccountList,
+    parent: 'admin-accounts',
+    data: {
+      breadcrumb: () => translate('Robot accounts'),
+    },
+  },
+  {
+    name: 'admin-user-lexis-links-list',
+    url: 'lexis-links/',
+    component: BasicLexisLinkList,
+    parent: 'admin-accounts',
+    data: {
+      breadcrumb: () => translate('LEXIS links'),
+      permissions: [
+        () => {
+          if (isFeatureVisible(MarketplaceFeatures.lexis_links)) {
+            return true;
+          }
+        },
+      ],
     },
   },
 
