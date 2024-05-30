@@ -8,11 +8,9 @@ import {
 } from '@waldur/metronic/components';
 import { useLayout } from '@waldur/metronic/layout/core';
 
-import { ContextSelectorToggle } from '../workspace/context-selector/ContextSelectorToggle';
-
 import { BrandName } from './BrandName';
-import { SidebarFooter } from './SidebarFooter';
 import './Sidebar.scss';
+import { SidebarFooter } from './SidebarFooter';
 
 export function getSidebarToggle() {
   const menuElement = document.querySelector('#kt_aside_toggle');
@@ -32,29 +30,6 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
       DrawerComponent.reinitialization();
       ScrollComponent.reinitialization();
       MenuComponent.reinitialization();
-
-      // Expand sidebar when project selector is shown
-      const contextSelectorElement =
-        document.querySelector('.context-selector');
-      if (!contextSelectorElement) {
-        return;
-      }
-      const contextSelector = MenuComponent.getInstance(
-        contextSelectorElement as HTMLElement,
-      );
-      if (!contextSelector) {
-        return;
-      }
-      contextSelector.on('kt.menu.dropdown.shown', function () {
-        if (document.body.hasAttribute('data-kt-aside-minimize')) {
-          layout.setLayout({
-            aside: {
-              ...layout.config.aside,
-              minimized: true,
-            },
-          });
-        }
-      });
     }
   }, [sidebarRef, layout]);
 
@@ -71,7 +46,6 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
       data-kt-drawer-toggle="#kt_aside_mobile_toggle"
     >
       <BrandName />
-      <ContextSelectorToggle />
 
       <div className="aside-menu flex-grow-1 overflow-hidden">
         <div
@@ -80,7 +54,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
           data-kt-scroll="true"
           data-kt-scroll-activate="{default: false, lg: true}"
           data-kt-scroll-height="auto"
-          data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_toolbar, #kt_aside_footer"
+          data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer"
           data-kt-scroll-wrappers="#kt_aside_menu"
           data-kt-scroll-offset="0"
         >

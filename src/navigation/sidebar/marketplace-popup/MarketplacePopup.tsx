@@ -1,6 +1,5 @@
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Col, FormControl, Row } from 'react-bootstrap';
-import ReactDOM from 'react-dom';
 import { useSelector } from 'react-redux';
 
 import useOnScreen from '@waldur/core/useOnScreen';
@@ -45,48 +44,41 @@ export const MarketplacePopup: FunctionComponent = () => {
   }, [isVisible]);
 
   return (
-    <>
-      {isVisible &&
-        ReactDOM.createPortal(
-          <div className="fade modal-backdrop show" />,
-          document.getElementById('kt_aside_toolbar'),
-        )}
-      <div
-        id="marketplaces-selector"
-        ref={refPopup}
-        className="marketplaces-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 pb-4 fs-6 h-100"
-        data-kt-menu="true"
-        data-popper-placement="end"
-      >
-        <div className="marketplaces-selector-header">
-          <Row>
-            <MarketplacePopupTitle isVisible={isVisible} />
-            <Col xs={12} sm={7} xl={6}>
-              <div className="form-group">
-                <FormControl
-                  id="marketplaces-selector-search-box"
-                  ref={refSearch}
-                  type="text"
-                  className="form-control-solid text-center"
-                  autoFocus
-                  value={filter}
-                  onChange={(event) => setFilter(event.target.value)}
-                  placeholder={translate('Search offering...')}
-                />
-              </div>
-            </Col>
-          </Row>
-        </div>
-        <div className="d-flex flex-column flex-md-row h-100">
-          {isVisible && currentCustomer && currentProject && (
-            <DataLoader
-              filter={filter}
-              currentCustomer={currentCustomer}
-              currentProject={currentProject}
-            />
-          )}
-        </div>
+    <div
+      id="marketplaces-selector"
+      ref={refPopup}
+      className="marketplaces-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 pb-4 fs-6 h-100"
+      data-kt-menu="true"
+      data-popper-placement="end"
+    >
+      <div className="marketplaces-selector-header">
+        <Row>
+          <MarketplacePopupTitle isVisible={isVisible} />
+          <Col xs={12} sm={7} xl={6}>
+            <div className="form-group">
+              <FormControl
+                id="marketplaces-selector-search-box"
+                ref={refSearch}
+                type="text"
+                className="form-control-solid text-center"
+                autoFocus
+                value={filter}
+                onChange={(event) => setFilter(event.target.value)}
+                placeholder={translate('Search offering...')}
+              />
+            </div>
+          </Col>
+        </Row>
       </div>
-    </>
+      <div className="d-flex flex-column flex-md-row h-100">
+        {isVisible && currentCustomer && currentProject && (
+          <DataLoader
+            filter={filter}
+            currentCustomer={currentCustomer}
+            currentProject={currentProject}
+          />
+        )}
+      </div>
+    </div>
   );
 };

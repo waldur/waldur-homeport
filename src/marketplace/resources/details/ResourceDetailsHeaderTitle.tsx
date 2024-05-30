@@ -3,7 +3,6 @@ import { FunctionComponent } from 'react';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 
 import { ResourceStateField } from '../list/ResourceStateField';
-import { ResourceSelectorToggle } from '../resource-selector/ResourceSelector';
 import { Resource } from '../types';
 
 import { ParentResourceLink } from './ParentResourceLink';
@@ -18,7 +17,11 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
   return (
     <>
       <div className="d-flex flex-wrap gap-2 mb-2">
-        <ResourceSelectorToggle resource={resource} />
+        <div className="btn btn-flush d-flex align-items-center">
+          <h3 className="text-start text-decoration-underline mb-0 me-2">
+            {resource.name}
+          </h3>
+        </div>
         <CopyToClipboardButton
           value={resource.name}
           className="text-hover-primary cursor-pointer"
