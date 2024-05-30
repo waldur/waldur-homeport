@@ -33,10 +33,11 @@ export const setCurrentWorkspace = (workspace: WorkspaceType) => ({
   },
 });
 
-export const setCurrentUser = (user) => ({
+export const setCurrentUser = (user, impersonated = false) => ({
   type: SET_CURRENT_USER,
   payload: {
     user,
+    impersonated,
   },
 });
 

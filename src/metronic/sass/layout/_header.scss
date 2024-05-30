@@ -32,6 +32,11 @@
       box-shadow: none;
     }
 
+    // Fixed header and enabled page bar modes
+    .header-fixed.outstanding-bar-enabled & {
+      top: var(--kt-pagebar-height);
+    }
+
     // Aside default enabled, aside fixed & header sticky modes
     .aside-enabled.aside-fixed.header-fixed & {
       left: get($aside-config, width);
@@ -81,6 +86,11 @@
     // Fixed header and fixed toolbar modes
     .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed & {
       box-shadow: none;
+    }
+
+    // Fixed header and enabled page bar modes
+    .header-tablet-and-mobile-fixed.outstanding-bar-enabled & {
+      top: var(--kt-pagebar-height);
     }
 
     // Header menu

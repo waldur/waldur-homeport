@@ -6,11 +6,18 @@ import { getCustomer, getProject } from '@waldur/project/api';
 import { router } from '@waldur/router';
 import { showError } from '@waldur/store/notify';
 import {
+  clearImpersonationData,
+  getCurrentUser,
+  setImpersonationData,
+} from '@waldur/user/UsersService';
+import {
   setCurrentCustomer,
   setCurrentProject,
+  setCurrentUser,
 } from '@waldur/workspace/actions';
 import {
   getCustomer as getCustomerSelector,
+  getImpersonatorUser,
   getProject as getProjectSelector,
 } from '@waldur/workspace/selectors';
 
@@ -71,6 +78,26 @@ function* initWorkspace(action) {
   }
 }
 
+function* initImpersonation(action) {
+  if (!action.payload.user) {
+    return;
+  }
+  if (!action.payload.impersonated) {
+    const impersonatorUser = yield select(getImpersonatorUser);
+    const storedImpersonatedUserUuid =
+      WorkspaceStorage.getImpersonatedUserUuid();
+    if (!impersonatorUser && storedImpersonatedUserUuid) {
+      try {
+        setImpersonationData(storedImpersonatedUserUuid);
+        const user = yield call(getCurrentUser);
+        yield put(setCurrentUser(user, true));
+      } catch (error) {
+        clearImpersonationData();
+      }
+    }
+  }
+}
+
 function rememberCustomerId(action) {
   const { customer } = action.payload;
   if (customer) WorkspaceStorage.setCustomerId(customer.uuid);
@@ -84,6 +111,7 @@ function rememberProjectId(action) {
 export default function* workspaceSaga() {
   yield takeEvery(REFRESH_CURRENT_CUSTOMER, refreshCurrentCustomer);
   yield takeEvery(SET_CURRENT_USER, initWorkspace);
+  yield takeEvery(SET_CURRENT_USER, initImpersonation);
   yield takeEvery(SET_CURRENT_CUSTOMER, rememberCustomerId);
   yield takeEvery(SET_CURRENT_PROJECT, rememberProjectId);
 }

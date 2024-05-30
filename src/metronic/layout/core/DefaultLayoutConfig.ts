@@ -44,6 +44,10 @@ export const DefaultLayoutConfig: ILayout = {
     display: true,
     width: 'fluid',
   },
+  outstandingBar: {
+    display: true,
+    width: 'fluid',
+  },
   toolbar: {
     display: true, // Display toolbar
     width: 'fluid', // Set fixed|fluid to change width type,

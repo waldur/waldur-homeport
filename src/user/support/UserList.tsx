@@ -17,6 +17,7 @@ import { User } from '@waldur/workspace/types';
 
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserFilter } from './UserFilter';
+import { UserImpersonateButton } from './UserImpersonateButton';
 import { UserTableActions } from './UserTableActions';
 
 const renderFieldOrDash = (field) => {
@@ -92,6 +93,15 @@ const ProjectRolesField = ({ row }) => {
 
 const SupportStatusField = ({ row }) => {
   return <BooleanField value={row.is_support} />;
+};
+
+const RowActions = ({ row }) => {
+  return (
+    <>
+      <UserImpersonateButton row={row} />
+      <UserDetailsButton row={row} />
+    </>
+  );
 };
 
 const mapStateToFilter = createSelector(
@@ -190,7 +200,7 @@ export const UserList: FunctionComponent = () => {
           className: 'text-center',
         },
       ]}
-      hoverableRow={UserDetailsButton}
+      hoverableRow={RowActions}
       showPageSizeSelector={true}
       verboseName={translate('users')}
       enableExport={true}

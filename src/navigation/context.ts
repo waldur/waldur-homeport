@@ -15,6 +15,7 @@ export interface LayoutContextInterface {
   fullPage: boolean;
   setFullPage(value: boolean): void;
   setPageHero(component: React.ReactNode);
+  setPageBar(component: React.ReactNode);
   setBreadcrumbs(component: React.ReactNode);
 }
 
