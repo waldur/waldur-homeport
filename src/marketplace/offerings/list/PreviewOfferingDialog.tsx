@@ -3,10 +3,10 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import {
-  PureOfferingConfiguratorProps,
   OfferingFormData,
+  PureOfferingConfiguratorProps,
 } from '@waldur/marketplace/details/types';
 import {
   Offering,
@@ -51,7 +51,7 @@ const storeConnector = connect<{}, {}, PreviewOfferingOwnProps, RootState>(
 const formConnector = reduxForm<
   OfferingFormData,
   PureOfferingConfiguratorProps
->({ form: FORM_ID, touchOnChange: true });
+>({ form: ORDER_FORM_ID, touchOnChange: true });
 
 const enhance = compose(storeConnector, formConnector);
 

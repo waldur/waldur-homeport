@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { showOfferingPlanDescription } from '@waldur/marketplace/details/plan/actions';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -43,7 +43,7 @@ export const PurePlanDescriptionButton = (
 };
 
 const mapStateToProps = (state: RootState, ownProps) => ({
-  formData: getFormValues(ownProps.formId || FORM_ID)(state),
+  formData: getFormValues(ownProps.formId || ORDER_FORM_ID)(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { FormGroup } from '../offerings/FormGroup';
 
 import { ProjectCreateGroup } from './ProjectCreateGroup';
 import { ProjectSelectField } from './ProjectSelectField';
+import { orderCustomerSelector } from './utils';
 
 interface ProjectFieldProps {
   previewMode?: boolean;
@@ -19,7 +19,7 @@ export const ProjectField: FC<ProjectFieldProps> = ({
   previewMode,
   hideLabel,
 }) => {
-  const customer = useSelector(getCustomer);
+  const customer = useSelector(orderCustomerSelector);
   return customer?.projects ? (
     <FormGroup
       label={hideLabel ? undefined : translate('Project')}

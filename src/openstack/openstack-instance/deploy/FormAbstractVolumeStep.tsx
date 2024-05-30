@@ -11,7 +11,7 @@ import { SliderNumberField } from '@waldur/form/SliderNumberField';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 
 import { VolumeTypeChoice } from '../utils';
@@ -28,7 +28,7 @@ export const FormAbstractVolumeStep = (
   const { data, isLoading } = useVolumeDataLoader(props.offering);
 
   const volumeType: VolumeTypeChoice = useSelector((state) =>
-    formValueSelector(FORM_ID)(state, props.typeField),
+    formValueSelector(ORDER_FORM_ID)(state, props.typeField),
   );
 
   const hideVolumeTypeSelector = isFeatureVisible(

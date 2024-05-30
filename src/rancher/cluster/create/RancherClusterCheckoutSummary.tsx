@@ -1,13 +1,11 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
-import { OfferingDetailsProps } from '@waldur/marketplace/details/OfferingDetails';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
+import { orderFormAttributesSelector } from '@waldur/marketplace/utils';
 import { NodeRole } from '@waldur/rancher/types';
 import { RootState } from '@waldur/store/reducers';
 
@@ -35,11 +33,11 @@ const getTotalCores = (nodes) => sum(getFlavorField('cores', nodes));
 const getTotalRam = (nodes) => sum(getFlavorField('ram', nodes));
 
 const getStats = (state: RootState) => {
-  const formData: any = getFormValues(FORM_ID)(state);
-  if (!formData || !formData.attributes) {
+  const attributes: any = orderFormAttributesSelector(state);
+  if (!attributes) {
     return {};
   }
-  const nodes = formData.attributes.nodes;
+  const nodes = attributes.nodes;
   const nodeCount = nodes.length;
   const etcdCount = countNodesByRole('etcd', nodes);
   const workerCount = countNodesByRole('worker', nodes);
@@ -96,8 +94,6 @@ const PureRancherExtraComponent = (props) =>
 
 const RancherExtraComponent = connector(PureRancherExtraComponent);
 
-export const RancherClusterCheckoutSummary: FunctionComponent<
-  OfferingDetailsProps
-> = (props) => (
-  <OrderSummary {...props} extraComponent={RancherExtraComponent} />
-);
+export const RancherClusterCheckoutSummary: FunctionComponent<any> = (
+  props,
+) => <OrderSummary {...props} extraComponent={RancherExtraComponent} />;

@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { useExtraTabs } from '@waldur/navigation/context';
 import { Tab } from '@waldur/navigation/Tab';
 import { RootState } from '@waldur/store/reducers';
@@ -13,8 +13,13 @@ import { RootState } from '@waldur/store/reducers';
 import { getCategoryItems } from './category/utils';
 import { useLandingCategories } from './landing/hooks';
 
-export const formDataSelector = (state: RootState) =>
-  (getFormValues(FORM_ID)(state) || {}) as any;
+export const orderFormDataSelector = (state: RootState) =>
+  (getFormValues(ORDER_FORM_ID)(state) || {}) as any;
+
+export const orderFormAttributesSelector = (state: RootState) => {
+  const formData = orderFormDataSelector(state);
+  return formData.attributes || {};
+};
 
 export const formatResourceShort = (resource) => {
   return (
