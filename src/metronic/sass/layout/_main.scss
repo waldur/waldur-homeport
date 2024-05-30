@@ -55,6 +55,11 @@ body {
         #{get($header-config, fixed, height, desktop)} + var(--kt-toolbar-height)
       );
     }
+
+    // Fixed header & enabled page bar modes
+    .header-fixed.outstanding-bar-enabled & {
+      margin-top: var(--kt-pagebar-height);
+    }
   }
 }
 
@@ -86,6 +91,11 @@ body {
       padding-top: calc(
         #{get($header-config, fixed, height, tablet-and-mobile)} + var(--kt-toolbar-height-tablet-and-mobile)
       );
+    }
+
+    // Fixed header & enabled page bar modes
+    .header-fixed.outstanding-bar-enabled & {
+      margin-top: var(--kt-pagebar-height);
     }
   }
 }

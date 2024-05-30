@@ -37,6 +37,18 @@
       border-bottom: get($toolbar-config, border-bottom);
     }
 
+    // Fixed toolbar & enabled page bar modes
+    .toolbar-fixed.outstanding-bar-enabled & {
+      top: var(--kt-pagebar-height);
+    }
+
+    // Fixed header & fixed toolbar & enabled page bar modes
+    .header-fixed.toolbar-fixed.outstanding-bar-enabled & {
+      top: calc(
+        #{get($header-config, fixed, height, desktop)} + var(--kt-pagebar-height)
+      );
+    }
+
     // Enabled hero & fixed toolbar modes
     .hero-enabled.toolbar-fixed & {
       position: sticky;
@@ -82,6 +94,19 @@
       top: get($header-config, default, height, tablet-and-mobile);
       border-top: get($toolbar-config, border-top);
       border-bottom: get($toolbar-config, border-bottom);
+    }
+
+    // Fixed toolbar & enabled page bar modes
+    .toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled & {
+      top: var(--kt-pagebar-height);
+    }
+
+    // Fixed header & fixed toolbar & enabled page bar modes
+    .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled
+      & {
+      top: calc(
+        #{get($header-config, default, height, tablet-and-mobile)} + var(--kt-pagebar-height)
+      );
     }
 
     // Enabled hero & fixed toolbar modes

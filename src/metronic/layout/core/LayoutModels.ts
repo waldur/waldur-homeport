@@ -57,6 +57,11 @@ export interface IHero {
   width: 'fixed' | 'fluid';
 }
 
+export interface IOutstandingBar {
+  display: boolean;
+  width: 'fixed' | 'fluid';
+}
+
 export interface IToolbar {
   display: boolean;
   width: 'fixed' | 'fluid';
@@ -118,6 +123,7 @@ export interface ILayout {
   aside: IAside;
   content: IContent;
   hero: IHero;
+  outstandingBar: IOutstandingBar;
   toolbar: IToolbar;
   footer: IFooter;
   sidebar?: ISidebar;
@@ -135,6 +141,7 @@ export interface ILayoutCSSClasses {
   asideToggle: Array<string>;
   sidebar: Array<string>;
   heroContainer: Array<string>;
+  outstandingBarContainer: Array<string>;
   toolbar: Array<string>;
   toolbarContainer: Array<string>;
   content: Array<string>;

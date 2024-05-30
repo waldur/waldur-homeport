@@ -26,7 +26,10 @@ import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { showSuccess } from '@waldur/store/notify';
 import store from '@waldur/store/store';
-import { UsersService } from '@waldur/user/UsersService';
+import {
+  clearImpersonationData,
+  UsersService,
+} from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
 import {
@@ -123,6 +126,7 @@ export function clearTokenHeader() {
 function localLogout(params?) {
   storeCurrentState();
   store.dispatch(setCurrentUser(undefined));
+  clearImpersonationData();
   clearTokenHeader();
   removeToken();
   router.stateService.go('login', params);

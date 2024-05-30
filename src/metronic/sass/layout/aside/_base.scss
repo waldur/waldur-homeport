@@ -115,6 +115,11 @@
       z-index: get($aside-config, z-index);
     }
 
+    // Fixed aside and enabled page bar modes
+    .aside-fixed.outstanding-bar-enabled & {
+      top: var(--kt-pagebar-height);
+    }
+
     // Static aside mode
     .aside-static & {
       position: relative;

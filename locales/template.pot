@@ -1875,6 +1875,10 @@ msgstr ""
 msgid "Category name"
 msgstr ""
 
+#: src/administration/ImpersonationBar.tsx
+msgid "Caution! You are impersonating {impersonated}. Logged in as: {impersonator}"
+msgstr ""
+
 #: src/auth/valimo/AuthValimoDialog.tsx
 msgid "Challenge code"
 msgstr ""
@@ -4992,6 +4996,10 @@ msgstr ""
 
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "Impact field name"
+msgstr ""
+
+#: src/user/support/UserImpersonateButton.tsx
+msgid "Impersonate"
 msgstr ""
 
 #: src/marketplace/resources/import/ImportButton.tsx
@@ -11319,6 +11327,10 @@ msgstr ""
 msgid "Stop"
 msgstr ""
 
+#: src/administration/ImpersonationBar.tsx
+msgid "Stop impersonating"
+msgstr ""
+
 #: src/resource/state/constants.ts
 msgid "Stopping"
 msgstr ""
@@ -12775,6 +12787,10 @@ msgstr ""
 msgid "Unable to grant permission."
 msgstr ""
 
+#: src/user/support/UserImpersonateButton.tsx
+msgid "Unable to impersonate the user."
+msgstr ""
+
 #: src/rancher/cluster/ImportYAMLDialog.tsx
 msgid "Unable to import YAML."
 msgstr ""
@@ -13226,6 +13242,10 @@ msgstr ""
 
 #: src/resource/actions/OpenConsoleLogActionItem.tsx
 msgid "Unable to show console log."
+msgstr ""
+
+#: src/administration/ImpersonationBar.tsx
+msgid "Unable to stop impersonating."
 msgstr ""
 
 #: src/marketplace/resources/lexis/CreateLexisLinkDialog.tsx

@@ -11,6 +11,7 @@ import {
   ILayoutHTMLAttributes,
   ILayoutCSSVariables,
   IPageTitle,
+  IOutstandingBar,
 } from './LayoutModels';
 
 const LAYOUT_CONFIG_KEY = 'LayoutConfig';
@@ -47,6 +48,7 @@ export function getEmptyCssClasses() {
     asideMenu: [],
     asideToggle: [],
     heroContainer: [],
+    outstandingBarContainer: [],
     toolbar: [],
     toolbarContainer: [],
     content: [],
@@ -132,6 +134,22 @@ export class LayoutSetup {
     );
   }
 
+  private static initOutstandingBar(config: IOutstandingBar): void {
+    if (!config.display) {
+      return;
+    }
+
+    document.body.classList.add('outstanding-bar-enabled');
+    LayoutSetup.classes.outstandingBarContainer.push(
+      config.width === 'fluid' ? 'container-fluid' : 'container',
+    );
+
+    // Height setup
+    let bodyStyles = document.body.getAttribute('style');
+    bodyStyles += ' --kt-pagebar-height: 64px;';
+    document.body.setAttribute('style', bodyStyles);
+  }
+
   private static initToolbar(config: IToolbar): void {
     if (!config.display) {
       return;
@@ -154,7 +172,7 @@ export class LayoutSetup {
     const type = config.layout;
     const typeOptions = config.layouts[type];
     if (typeOptions) {
-      let bodyStyles = '';
+      let bodyStyles = document.body.getAttribute('style');
       if (typeOptions.height) {
         bodyStyles += ` --kt-toolbar-height: ${typeOptions.height};`;
       }
@@ -245,6 +263,7 @@ export class LayoutSetup {
     LayoutSetup.initHeader(config.header);
     LayoutSetup.initPageTitle(config.pageTitle as IPageTitle);
     LayoutSetup.initHero(config.hero);
+    LayoutSetup.initOutstandingBar(config.outstandingBar);
     LayoutSetup.initToolbar(config.toolbar);
     LayoutSetup.initContent(config.content);
     LayoutSetup.initAside(config.aside);

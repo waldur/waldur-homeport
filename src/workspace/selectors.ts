@@ -7,6 +7,9 @@ import { User, Customer, Project, WorkspaceType } from './types';
 
 export const getUser = (state: RootState): User => state.workspace.user;
 
+export const getImpersonatorUser = (state: RootState): User =>
+  state.workspace.impersonatorUser;
+
 export const getCustomer = (state: RootState): Customer =>
   state.workspace.customer;
 

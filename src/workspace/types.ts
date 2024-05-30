@@ -167,6 +167,7 @@ export enum WorkspaceType {
 
 export interface WorkspaceState {
   user: User;
+  impersonatorUser: User;
   customer?: Customer;
   project?: Project;
   workspace?: WorkspaceType;

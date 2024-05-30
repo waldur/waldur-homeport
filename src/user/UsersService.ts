@@ -1,12 +1,24 @@
+import Axios from 'axios';
+
 import { ENV } from '@waldur/configs/default';
 import { get, getById, patch } from '@waldur/core/api';
 import store from '@waldur/store/store';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
+import { WorkspaceStorage } from '@waldur/workspace/WorkspaceStorage';
 
 export const getCurrentUser = (config?) =>
   get<UserDetails>('/users/me/', config).then((response) => response.data);
+
+export const setImpersonationData = (userUuid) => {
+  Axios.defaults.headers['X-IMPERSONATED-USER-UUID'] = userUuid;
+  WorkspaceStorage.setImpersonatedUserUuid(userUuid);
+};
+export const clearImpersonationData = () => {
+  delete Axios.defaults.headers['X-IMPERSONATED-USER-UUID'];
+  WorkspaceStorage.clearImpersonatedUserUuid();
+};
 
 class UsersServiceClass {
   get(userId) {
@@ -23,7 +35,10 @@ class UsersServiceClass {
       return Promise.resolve(cached);
     }
     return getCurrentUser().then((user) => {
-      store.dispatch(setCurrentUser(user));
+      const isImpersonated = Boolean(
+        Axios.defaults.headers['X-IMPERSONATED-USER-UUID'],
+      );
+      store.dispatch(setCurrentUser(user, isImpersonated));
       return user;
     });
   }

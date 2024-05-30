@@ -1,0 +1,22 @@
+.impersonation-bar {
+  background-color: #dc6803;
+  color: white;
+
+  .icon {
+    background: #ff8e00 !important;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  button {
+    background-color: #fef0c7;
+    color: #dc6803;
+    text-wrap: nowrap;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+
+    @media (max-width: 991px) {
+      font-size: 12px !important;
+    }
+  }
+}
