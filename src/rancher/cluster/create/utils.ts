@@ -4,13 +4,13 @@ import { formValueSelector } from 'redux-form';
 import { ENV } from '@waldur/configs/default';
 import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
 import {
-  loadSecurityGroups,
   getFlavors,
   getSubnets,
   getVolumeTypes,
+  loadSecurityGroups,
 } from '@waldur/openstack/api';
 import { Flavor, Subnet } from '@waldur/openstack/openstack-instance/types';
 import {
@@ -108,7 +108,7 @@ export const getDataVolumes = (nodeIndex, allValues) => {
 };
 
 export const formTenantSelector = (state: RootState): string =>
-  formValueSelector(FORM_ID)(state, 'attributes.tenant_settings');
+  formValueSelector(ORDER_FORM_ID)(state, 'attributes.tenant_settings');
 
 export const formNodesSelector = (state: RootState): NodeField[] =>
-  formValueSelector(FORM_ID)(state, 'attributes.nodes');
+  formValueSelector(ORDER_FORM_ID)(state, 'attributes.nodes');

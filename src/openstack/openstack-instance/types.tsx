@@ -1,6 +1,4 @@
-import { Offering } from '@waldur/marketplace/types';
 import { VirtualMachine, Volume } from '@waldur/resource/types';
-import { Project } from '@waldur/workspace/types';
 
 import { SecurityGroup } from '../openstack-security-groups/types';
 
@@ -63,14 +61,4 @@ export interface Flavor extends ServiceComponent {
 export interface Image extends ServiceComponent {
   url: string;
   name: string;
-}
-
-export interface OpenStackInstanceFormData {
-  name?: string;
-  service?: { name: string };
-  image?: { name: string };
-  flavor?: Flavor;
-  attributes?: Record<string, any>;
-  project?: Project;
-  offering?: Offering;
 }

@@ -11,21 +11,16 @@ import { translate } from '@waldur/i18n';
 import { formProjectSelector } from '@waldur/marketplace/deploy/utils';
 import { useTitle } from '@waldur/navigation/title';
 
-import { getPublicOffering, getCategory, getPlugins } from '../common/api';
-
-import { OfferingDetails } from './OfferingDetails';
-import { getTabs } from './OfferingTabs';
+import { getPlugins, getPublicOffering } from '../common/api';
+import { DeployPage } from '../deploy/DeployPage';
 
 async function loadData(offering_uuid: string) {
   const offering = await getPublicOffering(offering_uuid);
-  const category = await getCategory(offering.category_uuid);
-  const sections = category.sections;
-  const tabs = getTabs({ offering, sections });
   const plugins = await getPlugins();
   const limits = plugins.find(
     (plugin) => plugin.offering_type === offering.type,
   ).available_limits;
-  return { offering, tabs, limits };
+  return { offering, limits };
 }
 
 export const OfferingDetailsPage: React.FC = () => {
@@ -99,11 +94,5 @@ export const OfferingDetailsPage: React.FC = () => {
     return null;
   }
 
-  return (
-    <OfferingDetails
-      offering={value.offering}
-      tabs={value.tabs}
-      limits={value.limits}
-    />
-  );
+  return <DeployPage offering={value.offering} limits={value.limits} />;
 };

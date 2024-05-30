@@ -1,27 +1,17 @@
 import { translate } from '@waldur/i18n';
+import {
+  CustomerStep,
+  PlanStep,
+  ProjectStep,
+} from '@waldur/marketplace/deploy/steps/constants';
 import { FormAdditionalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormAdditionalConfigurationStep';
 import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
-import { FormPlanStep } from '@waldur/marketplace/deploy/steps/FormPlanStep';
-import { FormProjectStep } from '@waldur/marketplace/deploy/steps/FormProjectStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 
 export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
-  {
-    label: translate('Project'),
-    id: 'step-project',
-    fields: ['project'],
-    required: true,
-    requiredFields: ['project'],
-    component: FormProjectStep,
-  },
-  {
-    label: translate('Plan'),
-    id: 'step-plan',
-    fields: ['plan'],
-    required: true,
-    requiredFields: ['plan'],
-    component: FormPlanStep,
-  },
+  CustomerStep,
+  ProjectStep,
+  PlanStep,
   {
     label: translate('Additional configuration'),
     id: 'step-additional-configuration',

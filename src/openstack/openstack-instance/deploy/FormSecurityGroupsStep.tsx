@@ -9,7 +9,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { openModalDialog } from '@waldur/modal/actions';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
@@ -48,7 +48,7 @@ const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
 
 const ShowPreviewButton = () => {
   const securityGroups = useSelector((state) =>
-    formValueSelector(FORM_ID)(state, 'attributes.security_groups'),
+    formValueSelector(ORDER_FORM_ID)(state, 'attributes.security_groups'),
   );
   const dispatch = useDispatch();
   const callback = useCallback(() => {

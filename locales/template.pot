@@ -1130,6 +1130,10 @@ msgstr ""
 msgid "Are you sure you want to select template? Note this will reset the node plan."
 msgstr ""
 
+#: src/marketplace/details/CustomerField.tsx
+msgid "Are you sure you want to select the {name} organization? Please note that entered data will be lost."
+msgstr ""
+
 #: src/proposals/proposal/create/ProposalSubmissionStep.tsx
 msgid "Are you sure you want to send the proposal to team verification step?"
 msgstr ""
@@ -2235,6 +2239,7 @@ msgstr ""
 #: src/marketplace/cart/ShoppingCartButtonContainer.tsx
 #: src/marketplace/category/admin/CategoryDeleteButton.tsx
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
+#: src/marketplace/details/CustomerField.tsx
 #: src/marketplace/offerings/images/DeleteImageButton.tsx
 #: src/marketplace/offerings/update/components/DeleteComponentButton.tsx
 #: src/marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx
@@ -2872,6 +2877,7 @@ msgstr ""
 msgid "Custom scripts"
 msgstr ""
 
+#: src/marketplace/deploy/steps/constants.ts
 #: src/organization/OrganizationUIView.tsx
 #: src/proposals/CallsAvailableOfferingsPage.tsx
 msgid "Customer"
@@ -7335,6 +7341,8 @@ msgstr ""
 #: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx
 #: src/marketplace/category/PublicOfferingsList.tsx
+#: src/marketplace/deploy/steps/FormCustomerStep.tsx
+#: src/marketplace/details/CustomerField.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/tabs.ts
@@ -7867,8 +7875,8 @@ msgstr ""
 msgid "Phone: {phone_number}"
 msgstr ""
 
-#: src/booking/deploy/steps.ts
 #: src/marketplace/deploy/steps/FormPlanStep.tsx
+#: src/marketplace/deploy/steps/constants.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/plan/PlanSection.tsx
 #: src/marketplace/offerings/PriceList.tsx
@@ -7879,14 +7887,10 @@ msgstr ""
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/navigation/header/confirmation-drawer/OrderExpandableRow.tsx
-#: src/openstack/deploy/steps.ts
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx
 #: src/proposals/update/offerings/CallOfferingExpandableRow.tsx
-#: src/rancher/cluster/create/steps.ts
 #: src/reporting/plan-usage/PlanUsageDialog.tsx
 #: src/reporting/plan-usage/PlanUsageList.tsx
-#: src/slurm/deploy/steps.ts
-#: src/support/deploy-steps.ts
 msgid "Plan"
 msgstr ""
 
@@ -8324,7 +8328,6 @@ msgid "Progress"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/booking/deploy/steps.ts
 #: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/team/OrganizationProjectSelectField.tsx
 #: src/customer/team/ProjectGroup.tsx
@@ -8337,6 +8340,7 @@ msgstr ""
 #: src/marketplace-checklist/CustomerChecklistOverview.tsx
 #: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx
 #: src/marketplace/deploy/steps/FormProjectStep.tsx
+#: src/marketplace/deploy/steps/constants.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
@@ -8351,23 +8355,16 @@ msgstr ""
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
-#: src/openstack/deploy/steps.ts
 #: src/openstack/openstack-instance/deploy/CheckoutSummary.tsx
-#: src/openstack/openstack-instance/deploy/steps.ts
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
-#: src/openstack/openstack-volume/deploy/steps.ts
 #: src/permissions/constants.tsx
 #: src/project/routes.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
 #: src/rancher/cluster/apps/ClusterApplicationsList.tsx
-#: src/rancher/cluster/create/steps.ts
 #: src/rancher/cluster/hpas/ClusterHPAList.tsx
 #: src/rancher/template/ApplicationConfiguration.tsx
 #: src/reporting/resource-usage/ResourceUsageFilter.tsx
-#: src/slurm/deploy/steps.ts
-#: src/support/deploy-steps.ts
-#: src/vmware/deploy/steps.ts
 msgid "Project"
 msgstr ""
 
@@ -10415,6 +10412,7 @@ msgid "Select organization roles"
 msgstr ""
 
 #: src/auth/saml2/ProviderField.tsx
+#: src/marketplace/details/CustomerField.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx

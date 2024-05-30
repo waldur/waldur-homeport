@@ -1,7 +1,10 @@
 import { translate } from '@waldur/i18n';
+import {
+  CustomerStep,
+  ProjectStep,
+} from '@waldur/marketplace/deploy/steps/constants';
 import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
 import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
-import { FormProjectStep } from '@waldur/marketplace/deploy/steps/FormProjectStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 import { VOLUME_TYPE } from '@waldur/openstack/constants';
 import { getVolumeNameValidators } from '@waldur/openstack/utils';
@@ -9,14 +12,8 @@ import { getVolumeNameValidators } from '@waldur/openstack/utils';
 import { FormVolumeStep } from './FormVolumeStep';
 
 export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
-  {
-    label: translate('Project'),
-    id: 'step-project',
-    fields: ['project'],
-    required: true,
-    requiredFields: ['project'],
-    component: FormProjectStep,
-  },
+  CustomerStep,
+  ProjectStep,
   {
     label: translate('Cloud region'),
     id: 'step-cloud-region',

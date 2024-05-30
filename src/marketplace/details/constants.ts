@@ -1,4 +1,4 @@
-export const FORM_ID = 'marketplaceOffering';
+export const ORDER_FORM_ID = 'OrderForm';
 
 export const TABLE_OFFERING_RESOURCE = 'OfferingResourcesList';
 

@@ -1,6 +1,6 @@
 import { createElement, FunctionComponent, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { getFormValues, isValid } from 'redux-form';
+import { isValid } from 'redux-form';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
@@ -9,13 +9,14 @@ import { FieldError } from '@waldur/form';
 import { FloatingButton } from '@waldur/form/FloatingButton';
 import { translate } from '@waldur/i18n';
 import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { formErrorsSelector } from '../deploy/utils';
+import { orderFormDataSelector } from '../utils';
 
 import { OrderSummaryPlanRows } from './plan/OrderSummaryPlanRows';
 import { PricesData } from './plan/types';
@@ -107,8 +108,8 @@ interface OrderSummaryStateProps {
 const mapStateToProps = (state, ownProps) => ({
   customer: getCustomer(state),
   prices: pricesSelector(state, ownProps),
-  formData: getFormValues(FORM_ID)(state),
-  formValid: isValid(FORM_ID)(state),
+  formData: orderFormDataSelector(state),
+  formValid: isValid(ORDER_FORM_ID)(state),
   errors: formErrorsSelector(state),
   shouldConcealPrices: isVisible(state, MarketplaceFeatures.conceal_prices),
 });

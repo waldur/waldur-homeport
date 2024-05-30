@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Fragment, useCallback } from 'react';
 import { Button, Form, FormCheck } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Field, FieldArray, arrayPush, arrayRemoveAll } from 'redux-form';
+import { arrayPush, arrayRemoveAll, Field, FieldArray } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FormGroup, SelectField, StringField } from '@waldur/form';
@@ -11,7 +11,7 @@ import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { FORM_ID } from '@waldur/marketplace/details/constants';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { Flavor } from '@waldur/openstack/openstack-instance/types';
 import { listClusterTemplates } from '@waldur/rancher/api';
@@ -203,7 +203,7 @@ export const FormNodesStep = (props: FormStepProps) => {
         ),
       ).then(() => {
         props.change('attributes.template', template);
-        dispatch(arrayRemoveAll(FORM_ID, NODES_FIELD_ARRAY));
+        dispatch(arrayRemoveAll(ORDER_FORM_ID, NODES_FIELD_ARRAY));
         template.nodes.forEach((node, i) => {
           const _flavors = flavors.filter((flavor) =>
             filterFlavor(node, flavor),
@@ -215,7 +215,7 @@ export const FormNodesStep = (props: FormStepProps) => {
               )
             : undefined;
           dispatch(
-            arrayPush(FORM_ID, NODES_FIELD_ARRAY, {
+            arrayPush(ORDER_FORM_ID, NODES_FIELD_ARRAY, {
               name: translate('Rancher node ') + (i + 1),
               units: 1,
               roles: node.roles,

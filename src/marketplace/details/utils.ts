@@ -1,12 +1,12 @@
-import { formValueSelector } from 'redux-form';
+import { formValueSelector, isDirty } from 'redux-form';
 
 import { OrderRequest } from '@waldur/marketplace/cart/types';
 import {
-  getFormSerializer,
   getFormLimitSerializer,
+  getFormSerializer,
 } from '@waldur/marketplace/common/registry';
 
-import { FORM_ID } from './constants';
+import { ORDER_FORM_ID } from './constants';
 import { OrderSummaryProps } from './types';
 
 const formatOrder = (props: OrderSummaryProps, request) => {
@@ -64,4 +64,9 @@ export const formatOrderForCreate = (props: OrderSummaryProps) => {
   return formatOrder(props, request);
 };
 
-export const formSelector = formValueSelector(FORM_ID);
+export const orderFormValues = formValueSelector(ORDER_FORM_ID);
+
+export const orderFormIsDirty = isDirty(ORDER_FORM_ID);
+
+export const orderCustomerSelector = (state) =>
+  orderFormValues(state, 'customer');

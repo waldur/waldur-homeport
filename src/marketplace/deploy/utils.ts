@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { isValid, getFormSyncErrors } from 'redux-form';
+import { getFormSyncErrors, isValid } from 'redux-form';
 
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import CentOS from '@waldur/images/appstore/centos.svg';
@@ -12,8 +12,8 @@ import Windows from '@waldur/images/appstore/windows.svg';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 
-import { FORM_ID } from '../details/constants';
-import { formDataSelector } from '../utils';
+import { ORDER_FORM_ID } from '../details/constants';
+import { orderFormDataSelector } from '../utils';
 
 import { BoxRadioChoice } from './steps/BoxRadioField';
 import { OfferingConfigurationFormStep } from './types';
@@ -93,12 +93,12 @@ export const concealPricesSelector = (state: RootState) =>
   isVisible(state, MarketplaceFeatures.conceal_prices);
 
 export const formProjectSelector = (state: RootState) => {
-  const formData = formDataSelector(state);
+  const formData = orderFormDataSelector(state);
   return formData.project;
 };
 
 export const formIsValidSelector = (state: RootState) =>
-  isValid(FORM_ID)(state);
+  isValid(ORDER_FORM_ID)(state);
 
 export const formErrorsSelector = (state: RootState) =>
-  getFormSyncErrors(FORM_ID)(state) as any;
+  getFormSyncErrors(ORDER_FORM_ID)(state) as any;

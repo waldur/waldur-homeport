@@ -8,20 +8,22 @@ import { ProjectCreateDialog } from '@waldur/project/ProjectCreateDialog';
 
 import { FormGroup } from '../offerings/FormGroup';
 
-import { FORM_ID } from './constants';
-import { formSelector } from './utils';
+import { ORDER_FORM_ID } from './constants';
+import { orderFormValues } from './utils';
 
 const FIELD_ID = 'project_create_request';
 
 export const ProjectCreateGroup = () => {
   const dispatch = useDispatch();
-  const initialValues = useSelector((state) => formSelector(state, FIELD_ID));
+  const initialValues = useSelector((state) =>
+    orderFormValues(state, FIELD_ID),
+  );
   const openProjectCreateDialog = () =>
     dispatch(
       openModalDialog(ProjectCreateDialog, {
         size: 'lg',
         onSubmit: (formData) => {
-          dispatch(change(FORM_ID, FIELD_ID, formData));
+          dispatch(change(ORDER_FORM_ID, FIELD_ID, formData));
           dispatch(closeModalDialog());
         },
         onCancel: () => {

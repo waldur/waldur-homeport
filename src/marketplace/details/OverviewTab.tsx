@@ -46,9 +46,7 @@ export const OverviewTab: FunctionComponent<OverviewTabProps> = (props) => {
           </>
         )}
 
-        <h4 className="header-bottom-border">
-          {translate('Provider location')}
-        </h4>
+        <h4>{translate('Provider location')}</h4>
         <LeafletMap
           latitude={props.offering.latitude}
           longitude={props.offering.longitude}

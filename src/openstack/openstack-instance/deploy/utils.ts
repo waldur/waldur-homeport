@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
-import { FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
+import { orderFormAttributesSelector } from '@waldur/marketplace/utils';
 import { loadVolumeTypes } from '@waldur/openstack/api';
 import {
   formatVolumeTypeChoices,
@@ -14,18 +13,10 @@ import {
 import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
 import { RootState } from '@waldur/store/reducers';
 
-import { Flavor, OpenStackInstanceFormData } from '../types';
-
-const formDataSelector = (state: RootState) =>
-  (getFormValues(FORM_ID)(state) || {}) as OpenStackInstanceFormData;
-
-export const formAttributesSelector = (state: RootState) => {
-  const formData = formDataSelector(state);
-  return formData.attributes || {};
-};
+import { Flavor } from '../types';
 
 export const formFlavorSelector = (state: RootState) => {
-  const formAttrs = formAttributesSelector(state);
+  const formAttrs = orderFormAttributesSelector(state);
   return formAttrs.flavor as Flavor;
 };
 
@@ -41,7 +32,7 @@ export const getOfferingLimit = (
 };
 
 export const useQuotasData = (offering: Offering) => {
-  const formData = useSelector(formAttributesSelector);
+  const formData = useSelector(orderFormAttributesSelector);
   const usages = useMemo(
     () => parseQuotasUsage(offering.quotas || []),
     [offering],

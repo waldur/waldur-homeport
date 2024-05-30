@@ -18,17 +18,19 @@ import { translate } from '@waldur/i18n';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
 import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
-import { getProject } from '@waldur/workspace/selectors';
 
 import { getOrderFormComponent } from '../common/registry';
-import { FORM_ID } from '../details/constants';
+import { ORDER_FORM_ID } from '../details/constants';
 import { getDefaultLimits } from '../offerings/utils';
 import { OrderResponse } from '../orders/types';
-import { formDataSelector, isExperimentalUiComponentsVisible } from '../utils';
+import {
+  isExperimentalUiComponentsVisible,
+  orderFormDataSelector,
+} from '../utils';
 
 import { DeployPageActions } from './DeployPageActions';
 import { DeployPageSidebar } from './DeployPageSidebar';
-import { hasStepWithField } from './utils';
+import { formProjectSelector, hasStepWithField } from './utils';
 
 import './DeployPage.scss';
 
@@ -53,16 +55,16 @@ export const BaseDeployPage = ({
 
   const isEdit = useMemo(() => Boolean(props.cartItem), [props]);
 
-  const project = useSelector(getProject);
+  const project = useSelector(formProjectSelector);
 
   const isProjectInactive = useMemo(() => {
-    if (formData?.project?.end_date) {
-      const endDate = parseDate(formData?.project?.end_date);
+    if (project?.end_date) {
+      const endDate = parseDate(project?.end_date);
       const now = parseDate(null);
       return endDate.hasSame(now, 'day') || endDate < now;
     }
     return false;
-  }, [formData?.project]);
+  }, [project]);
 
   const plans = useMemo(
     () => selectedOffering.plans.filter((plan) => plan.archived === false),
@@ -238,7 +240,11 @@ export const BaseDeployPage = ({
                 observed={completedSteps[i]}
                 change={props.change}
                 params={step.params}
-                disabled={step.id !== 'step-project' && isProjectInactive}
+                disabled={
+                  step.id !== 'step-project' &&
+                  isProjectInactive &&
+                  step.id !== 'step-customer'
+                }
               />
             </div>
           ))}
@@ -269,7 +275,11 @@ export const BaseDeployPage = ({
               change={props.change}
               params={step.params}
               required={Boolean(step.requiredFields?.length)}
-              disabled={step.id !== 'step-project' && isProjectInactive}
+              disabled={
+                step.id !== 'step-project' &&
+                isProjectInactive &&
+                step.id !== 'step-customer'
+              }
             />
           </div>
         ))}
@@ -289,10 +299,10 @@ export const BaseDeployPage = ({
 };
 
 export const DeployPage = reduxForm<{}, DeployPageProps>({
-  form: FORM_ID,
+  form: ORDER_FORM_ID,
   touchOnChange: true,
 })((props) => {
-  const formData = useSelector(formDataSelector);
+  const formData = useSelector(orderFormDataSelector);
   const selectedOffering: Offering = formData?.offering || props?.offering;
   const OrderFormComponent = getOrderFormComponent(selectedOffering.type);
   return (
