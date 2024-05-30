@@ -8,6 +8,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import {
+  useBreadcrumbs,
   useExtraTabs,
   usePageHero,
   useToolbarActions,
@@ -19,6 +20,7 @@ import { ProjectUsersList } from '@waldur/project/team/ProjectUsersList';
 import { setCurrentResource } from '@waldur/workspace/actions';
 
 import { fetchData } from './fetchData';
+import { ResourceBreadcrumbs } from './ResourceBreadcrumbs';
 import { ResourceDetailsHero } from './ResourceDetailsHero';
 
 export const ResourceDetailsPage: FunctionComponent<{}> = () => {
@@ -31,7 +33,9 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
   );
 
-  useTitle(data?.resource.category_title);
+  useTitle(data?.resource.name);
+
+  useBreadcrumbs(<ResourceBreadcrumbs resource={data?.resource} />);
 
   usePermissionView(() => {
     if (data?.resource) {

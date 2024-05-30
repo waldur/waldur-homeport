@@ -12,7 +12,6 @@ import { getTitle } from '../title';
 
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 import { FavoritePagesDropdown } from './FavoritePagesDropdown';
-import { ProjectSelectorDropdown } from './project-selector/ProjectSelectorDropdown';
 import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './search/SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
@@ -29,11 +28,11 @@ const AsideMobileToggle: FunctionComponent = () => (
 );
 
 interface AppHeaderProps {
-  hideProjectSelector?: boolean;
+  breadcrumbs?;
 }
 
 export const AppHeader: FunctionComponent<AppHeaderProps> = ({
-  hideProjectSelector = false,
+  breadcrumbs,
 }) => {
   const pageTitle = useSelector(getTitle);
   const router = useRouter();
@@ -63,18 +62,15 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
           <div className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1">
-            {Boolean(pageTitle || routerTitle) && (
+            {breadcrumbs ? (
+              <div className="d-flex align-items-center">{breadcrumbs}</div>
+            ) : pageTitle || routerTitle ? (
               <div className="page-title d-flex align-items-center me-3">
                 <h1 className="text-dark fw-boldest fs-2 my-1">
                   {pageTitle || routerTitle}
                 </h1>
               </div>
-            )}
-            {user && !hideProjectSelector && (
-              <div className="d-flex align-items-center ms-1 ms-lg-3 me-auto">
-                <ProjectSelectorDropdown />
-              </div>
-            )}
+            ) : null}
             {user && <SearchToggle />}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">

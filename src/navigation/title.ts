@@ -36,7 +36,7 @@ export const reducer = (state = { title: '', subtitle: '' }, action) => {
 export function* effects() {
   yield takeEvery(SET_TITLE, (action: SetTitleAction) => {
     document.title =
-      ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE + ' | ' + action.payload.title;
+      action.payload.title + ' | ' + ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE;
   });
 }
 

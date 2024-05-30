@@ -1077,8 +1077,9 @@ $spinner-border-width-sm: 0.145em !default;
 
 // Breadcrumbs
 $breadcrumb-divider-color: $gray-600 !default;
-$breadcrumb-active-color: $primary !default;
+$breadcrumb-active-color: $gray-800;
 $breadcrumb-item-padding-x: 0.5rem !default;
+$breadcrumb-margin-bottom: 0px;
 
 // Tables
 //

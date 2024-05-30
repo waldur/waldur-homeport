@@ -26,6 +26,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const { state } = useCurrentStateAndParams();
   const currentUser = useSelector(getUser);
   const [actions, setActions] = useState(null);
+  const [breadcrumbs, setBreadcrumbs] = useState(null);
   const [extraTabs, setExtraTabs] = useState<Tab[]>([]);
   const [fullPage, setFullPage] = useState(false);
   const [PageHero, setPageHero] = useState<React.ReactNode>(null);
@@ -37,6 +38,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       fullPage,
       setFullPage,
       setPageHero,
+      setBreadcrumbs,
     }),
     [setActions, extraTabs, setExtraTabs, fullPage, setFullPage, setPageHero],
   );
@@ -74,9 +76,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
             <div className="wrapper d-flex flex-column flex-row-fluid">
               <CookiesConsent />
               {!state?.data?.hideHeader && (
-                <AppHeader
-                  hideProjectSelector={state?.data?.hideProjectSelector}
-                />
+                <AppHeader breadcrumbs={breadcrumbs} />
               )}
               <WarningBar />
               <div

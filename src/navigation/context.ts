@@ -15,6 +15,7 @@ export interface LayoutContextInterface {
   fullPage: boolean;
   setFullPage(value: boolean): void;
   setPageHero(component: React.ReactNode);
+  setBreadcrumbs(component: React.ReactNode);
 }
 
 export const LayoutContext = createContext<Partial<LayoutContextInterface>>({});
@@ -61,6 +62,19 @@ export const useToolbarActions = (
     layoutContext.setActions(component);
     return () => {
       layoutContext.setActions(null);
+    };
+  }, [layoutContext, ...deps]);
+};
+
+export const useBreadcrumbs = (
+  component: ReactNode,
+  deps: DependencyList = [],
+) => {
+  const layoutContext = useContext(LayoutContext);
+  useEffect(() => {
+    layoutContext.setBreadcrumbs(component);
+    return () => {
+      layoutContext.setBreadcrumbs(null);
     };
   }, [layoutContext, ...deps]);
 };
