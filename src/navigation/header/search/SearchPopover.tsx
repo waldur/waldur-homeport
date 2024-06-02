@@ -9,6 +9,7 @@ import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
 import { Badge, Button, Col, Nav, Row, Tab } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { FavoritePageService } from '../favorite-pages/FavoritePageService';
 
@@ -69,36 +70,38 @@ const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
   return (
     <Row className="mx-0">
       <Col md={12} lg={6} className="py-5 px-0">
-        <div className="mb-3">
-          <SectionTitle title={translate('Recent')} />
-          {recentItems.map((item) => (
-            <div
-              key={item.uuid}
-              className="d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-primary-50"
-            >
-              {item.menu === 'organization' ? (
-                <Buildings
-                  size={22}
-                  weight="bold"
-                  className="text-gray-700 me-4"
-                />
-              ) : item.menu === 'project' ? (
-                <ClipboardText
-                  size={22}
-                  weight="bold"
-                  className="text-gray-700 me-4"
-                />
-              ) : (
-                <SquaresFour
-                  size={22}
-                  weight="bold"
-                  className="text-gray-700 me-4"
-                />
-              )}
-              <span className="fs-6 fw-semibold">{item.title}</span>
-            </div>
-          ))}
-        </div>
+        {isExperimentalUiComponentsVisible() && (
+          <div className="mb-3">
+            <SectionTitle title={translate('Recent')} />
+            {recentItems.map((item) => (
+              <div
+                key={item.uuid}
+                className="d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-primary-50"
+              >
+                {item.menu === 'organization' ? (
+                  <Buildings
+                    size={22}
+                    weight="bold"
+                    className="text-gray-700 me-4"
+                  />
+                ) : item.menu === 'project' ? (
+                  <ClipboardText
+                    size={22}
+                    weight="bold"
+                    className="text-gray-700 me-4"
+                  />
+                ) : (
+                  <SquaresFour
+                    size={22}
+                    weight="bold"
+                    className="text-gray-700 me-4"
+                  />
+                )}
+                <span className="fs-6 fw-semibold">{item.title}</span>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="mb-3">
           <SectionTitle title={translate('Favourites')} />
           {favPages.length > 0 ? (
