@@ -71,9 +71,9 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
                 </h1>
               </div>
             ) : null}
-            {user && <SearchToggle />}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
+            {user && <SearchToggle />}
             {user && <FavoritePagesDropdown />}
             {user && hasSupport && <QuickIssueDrawerToggle />}
             {user && <ConfirmationDrawerToggle />}
