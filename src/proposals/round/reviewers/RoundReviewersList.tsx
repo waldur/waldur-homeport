@@ -2,18 +2,18 @@ import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { RoundReviewersListExpandableRow } from '@waldur/proposals/round/reviewers/RoundReviewersListExpandableRow';
-import { Reviewer } from '@waldur/proposals/types';
+import { Reviewer, Round } from '@waldur/proposals/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 interface RoundReviewersListProps {
-  round_uuid: string;
+  round: Round;
 }
 
 export const RoundReviewersList: FC<RoundReviewersListProps> = (props) => {
   const tableProps = useTable({
     table: 'RoundReviewersList',
-    fetchData: createFetcher(`call-rounds/${props.round_uuid}/reviewers`),
+    fetchData: createFetcher(`call-rounds/${props.round.uuid}/reviewers`),
   });
 
   return (

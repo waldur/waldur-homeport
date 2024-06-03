@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { Call, Round } from '@waldur/proposals/types';
 import { formatProposalState } from '@waldur/proposals/utils';
 import { Table } from '@waldur/table';
 import { createFetcher } from '@waldur/table/api';
@@ -12,15 +13,15 @@ import { ProposalRowActions } from '../../proposal/ProposalRowActions';
 import { ProposalExpandableRow } from './ProposalExpandableRow';
 
 interface RoundProposalsListProps {
-  round_uuid: string;
-  call_uuid: string;
+  round: Round;
+  call: Call;
 }
 
 export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
   const tableProps = useTable({
     table: 'RoundProposalsList',
     fetchData: createFetcher(
-      `proposal-protected-calls/${props.call_uuid}/rounds/${props.round_uuid}`,
+      `proposal-protected-calls/${props.call.uuid}/rounds/${props.round.uuid}`,
     ),
     queryField: 'name',
   });
@@ -54,7 +55,7 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
       hasQuery={true}
       hoverableRow={({ row }) => (
         <ProposalRowActions
-          row={{ ...row, call_uuid: props.call_uuid }}
+          row={{ ...row, call_uuid: props.call.uuid }}
           refetch={tableProps.fetch}
         />
       )}
