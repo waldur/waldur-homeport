@@ -91,7 +91,7 @@ export const PublicDashboardHero: FC<
     >
       <div className="public-dashboard-hero__table">
         <div className="public-dashboard-hero__cell">
-          <div className="container-xxl py-16">{body}</div>
+          <div className="container-fluid py-16">{body}</div>
         </div>
       </div>
     </div>

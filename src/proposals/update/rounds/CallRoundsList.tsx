@@ -34,7 +34,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
           title: translate('Round name'),
           render: ({ row }) => (
             <Link
-              state="protected-call.round"
+              state="protected-call-round.details"
               params={{ round_uuid: row.uuid, call_uuid: props.call.uuid }}
               label={row.name}
             />

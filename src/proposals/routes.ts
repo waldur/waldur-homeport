@@ -28,6 +28,10 @@ const CallUpdateContainer = lazyComponent(
   'CallUpdateContainer',
 );
 
+const RoundUIView = lazyComponent(
+  () => import('./round/RoundUIView'),
+  'RoundUIView',
+);
 const RoundPage = lazyComponent(() => import('./round/RoundPage'), 'RoundPage');
 
 const ProposalManagePage = lazyComponent(
@@ -152,9 +156,17 @@ export const states: StateDeclaration[] = [
     url: 'edit/?tab',
     component: CallUpdateContainer,
   },
+
   {
-    name: 'protected-call.round',
-    url: 'round/:round_uuid/',
+    name: 'protected-call-round',
+    url: '',
+    abstract: true,
+    parent: 'protected-call',
+    component: RoundUIView,
+  },
+  {
+    name: 'protected-call-round.details',
+    url: 'round/:round_uuid/?tab',
     component: RoundPage,
   },
   {

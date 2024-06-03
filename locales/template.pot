@@ -727,7 +727,7 @@ msgid "Allocation pools"
 msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
-#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/RoundUIView.tsx
 #: src/proposals/round/allocation/RoundAllocationSection.tsx
 msgid "Allocation strategy"
 msgstr ""
@@ -1693,7 +1693,7 @@ msgstr ""
 msgid "Call manager"
 msgstr ""
 
-#: src/proposals/round/RoundPage.tsx
+#: src/proposals/round/RoundUIView.tsx
 msgid "Call round"
 msgstr ""
 
@@ -8628,7 +8628,7 @@ msgstr ""
 
 #: src/navigation/sidebar/CallPublicMenu.tsx
 #: src/proposals/proposal/CustomerProposalsList.tsx
-#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/RoundUIView.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/routes.ts
 #: src/proposals/update/rounds/CallRoundsList.tsx
@@ -9770,7 +9770,7 @@ msgstr ""
 
 #: src/proposals/PublicCallExpandableRow.tsx
 #: src/proposals/call-management/CallExpandableRow.tsx
-#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/RoundUIView.tsx
 #: src/proposals/round/review/RoundReviewSection.tsx
 #: src/proposals/update/rounds/RoundExpandableRow.tsx
 #: src/proposals/update/rounds/WizardFormSecondPage.tsx
@@ -9821,7 +9821,7 @@ msgstr ""
 msgid "Reviewer"
 msgstr ""
 
-#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/RoundUIView.tsx
 #: src/proposals/round/reviewers/RoundReviewersList.tsx
 #: src/proposals/update/CallUpdateContainer.tsx
 msgid "Reviewers"
@@ -11374,7 +11374,7 @@ msgstr ""
 msgid "Submission"
 msgstr ""
 
-#: src/proposals/round/RoundPageBar.tsx
+#: src/proposals/round/RoundUIView.tsx
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
 msgid "Submission strategy"
 msgstr ""
