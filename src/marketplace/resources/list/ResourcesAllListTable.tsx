@@ -1,13 +1,20 @@
 import { PlusCircle } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { useRouter } from '@uirouter/react';
+import { FC, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { change } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
+import { setMarketplaceFilter } from '@waldur/marketplace/landing/filter/store/actions';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Table } from '@waldur/table';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { TableProps } from '@waldur/table/Table';
+import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 import { Resource } from '../types';
 
@@ -24,7 +31,53 @@ interface FieldProps {
 interface ResourcesAllListTableProps extends TableProps {
   hasProjectColumn?: boolean;
   hasCustomerColumn?: boolean;
+  context?: 'organization' | 'project';
 }
+
+const CreateResourceButton = ({
+  context,
+}: Pick<ResourcesAllListTableProps, 'context'>) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const customer = useSelector(getCustomer);
+  const project = useSelector(getProject);
+  const callback = useCallback(() => {
+    // Set organization filter to offerings
+    dispatch(change(MARKETPLACE_LANDING_FILTER_FORM, 'organization', customer));
+    dispatch(
+      setMarketplaceFilter({
+        label: translate('Organization'),
+        name: 'organization',
+        value: customer,
+        getValueLabel: (value) => value?.name,
+      }),
+    );
+    if (context === 'project') {
+      dispatch(change(MARKETPLACE_LANDING_FILTER_FORM, 'project', project));
+      dispatch(
+        setMarketplaceFilter({
+          label: translate('Project'),
+          name: 'project',
+          value: project,
+          getValueLabel: (value) => value?.name,
+        }),
+      );
+    } else {
+      // Remove project filter if exist
+      dispatch(change(MARKETPLACE_LANDING_FILTER_FORM, 'project', undefined));
+      dispatch(setMarketplaceFilter({ name: 'project', value: null }));
+    }
+    router.stateService.go('public.marketplace-landing');
+  }, [dispatch, router, context, customer, project]);
+  return (
+    <ActionButton
+      action={callback}
+      iconNode={<PlusCircle />}
+      title={translate('Add resource')}
+      variant="primary"
+    />
+  );
+};
 
 export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
   props,
@@ -90,14 +143,18 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
       actions={
-        <Link state="public.marketplace-landing">
-          <Button variant="primary">
-            <span className="svg-icon svg-icon-2">
-              <PlusCircle />
-            </span>
-            {translate('Add resource')}
-          </Button>
-        </Link>
+        props.context ? (
+          <CreateResourceButton context={props.context} />
+        ) : (
+          <Link state="public.marketplace-landing">
+            <Button variant="primary">
+              <span className="svg-icon svg-icon-2">
+                <PlusCircle />
+              </span>
+              {translate('Add resource')}
+            </Button>
+          </Link>
+        )
       }
     />
   );

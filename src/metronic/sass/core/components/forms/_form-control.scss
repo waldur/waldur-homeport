@@ -62,6 +62,10 @@
   @include placeholder($gray-500);
 }
 
+.placeholder-gray-700 {
+  @include placeholder($gray-700);
+}
+
 .placeholder-white {
   @include placeholder($white);
 }

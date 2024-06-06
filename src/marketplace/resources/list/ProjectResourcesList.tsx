@@ -55,5 +55,5 @@ export const ProjectResourcesList: FC<ProjectResourcesListProps> = (props) => {
     filter,
   });
 
-  return <ResourcesAllListTable {...tableProps} {...props} />;
+  return <ResourcesAllListTable {...tableProps} {...props} context="project" />;
 };

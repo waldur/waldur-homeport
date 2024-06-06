@@ -76,7 +76,7 @@ const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
   );
 };
 
-const RemoveButton = ({ onClick }) => (
+export const RemoveFilterBadgeButton = ({ onClick }) => (
   <button
     type="button"
     className="text-btn ps-2 text-hover-danger"
@@ -86,11 +86,11 @@ const RemoveButton = ({ onClick }) => (
   </button>
 );
 
-const TableSidebarFilterValues = ({
+export const TableSidebarFilterValues = ({
   value,
   getValueLabel,
-  badgeValue,
-  ellipsis,
+  badgeValue = null,
+  ellipsis = false,
   remove,
 }) => {
   return !['', undefined].includes(value) ? (
@@ -102,7 +102,7 @@ const TableSidebarFilterValues = ({
         >
           <Badge bg="secondary" className="text-dark">
             {badgeValue(value)}
-            <RemoveButton onClick={() => remove(value, value)} />
+            <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
           </Badge>
         </div>
       ) : null
@@ -116,7 +116,7 @@ const TableSidebarFilterValues = ({
             style={!ellipsis ? { maxWidth: 'unset' } : undefined}
           >
             {getValueLabel(v)}
-            <RemoveButton onClick={() => remove(value, v)} />
+            <RemoveFilterBadgeButton onClick={() => remove(value, v)} />
           </Badge>
         ))}
       </>
@@ -127,7 +127,7 @@ const TableSidebarFilterValues = ({
         style={!ellipsis ? { maxWidth: 'unset' } : undefined}
       >
         {getValueLabel(value)}
-        <RemoveButton onClick={() => remove(value, value)} />
+        <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
       </Badge>
     )
   ) : null;

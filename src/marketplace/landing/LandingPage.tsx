@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
@@ -8,10 +9,17 @@ import {
   isExperimentalUiComponentsVisible,
   useMarketplacePublicTabs,
 } from '@waldur/marketplace/utils';
-import { useFullPage } from '@waldur/navigation/context';
+import {
+  useExtraToolbar,
+  useFullPage,
+  useToolbarActions,
+} from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 
 import { CategoriesList } from './CategoriesList';
+import { PageBarFilters } from './filter/PageBarFilters';
+import { getMarketplaceFilters } from './filter/store/selectors';
+import { MarketplaceLandingFilter } from './MarketplaceLandingFilter';
 import { OfferingsGroup } from './OfferingsGroup';
 import { OfferingsSearchBox } from './OfferingsSearchBox';
 
@@ -24,6 +32,11 @@ export const LandingPage: FC<{}> = () => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   useMarketplacePublicTabs();
+
+  const filters = useSelector(getMarketplaceFilters);
+  useToolbarActions(<MarketplaceLandingFilter />);
+  useExtraToolbar(filters.length ? <PageBarFilters /> : null);
+
   return (
     <div className="marketplace-landing-page">
       {showExperimentalUiComponents && (

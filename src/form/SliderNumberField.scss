@@ -1,3 +1,5 @@
+@import './BoxNumberInput';
+
 .slider-number-input {
   display: flex;
   align-items: center;
@@ -45,42 +47,17 @@
     border-radius: 6px;
     background-color: var(--bs-light);
 
+    @include box-number-input();
     input[type='number'] {
       margin-right: 2px;
-      border-radius: 5px;
-      border-color: var(--bs-border-color);
       padding: 0 0.5rem;
+      text-align: start;
       width: 70px;
-      min-width: 60px;
-      font-weight: 600;
-
-      /* Hide arrows */
-
-      /* Firefox */
-      appearance: textfield;
-
-      /* Chrome, Safari, Edge, Opera */
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button {
-        appearance: none;
-        margin: 0;
-      }
-
-      &:focus,
-      &:active {
-        color: var(--bs-primary);
-      }
     }
-
     .plus-btn,
     .minus-btn {
-      display: block;
       height: 18px !important;
-      width: 20px !important;
-
-      i {
-        font-size: 0.85rem;
-      }
+      padding: 0;
     }
   }
 

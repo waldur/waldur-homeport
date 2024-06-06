@@ -12,6 +12,7 @@ import {
   ILayoutCSSVariables,
   IPageTitle,
   IOutstandingBar,
+  IExtraToolbar,
 } from './LayoutModels';
 
 const LAYOUT_CONFIG_KEY = 'LayoutConfig';
@@ -184,6 +185,19 @@ export class LayoutSetup {
     }
   }
 
+  private static initExtraToolbar(config: IExtraToolbar): void {
+    if (!config.display) {
+      return;
+    }
+
+    document.body.classList.add('extra-toolbar-enabled');
+
+    // Height setup
+    let bodyStyles = document.body.getAttribute('style');
+    bodyStyles += ' --kt-extra-toolbar-height: 36px;';
+    document.body.setAttribute('style', bodyStyles);
+  }
+
   private static initPageTitle(config: IPageTitle): void {
     if (!config.display) {
       return;
@@ -265,6 +279,7 @@ export class LayoutSetup {
     LayoutSetup.initHero(config.hero);
     LayoutSetup.initOutstandingBar(config.outstandingBar);
     LayoutSetup.initToolbar(config.toolbar);
+    LayoutSetup.initExtraToolbar(config.extraToolbar);
     LayoutSetup.initContent(config.content);
     LayoutSetup.initAside(config.aside);
     LayoutSetup.initFooter(config.footer);

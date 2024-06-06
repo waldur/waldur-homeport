@@ -14,6 +14,11 @@ import { WorkspaceType } from '@waldur/workspace/types';
 
 import { OfferingCard } from '../common/OfferingCard';
 
+import {
+  getContextFiltersForOfferings,
+  getMarketplaceFilters,
+} from './filter/store/selectors';
+
 const field = [
   'uuid',
   'name',
@@ -34,13 +39,20 @@ const mapStateToFilter = createSelector(
   getCustomer,
   getProject,
   getWorkspace,
-  (customer, project, workspace) => {
+  getMarketplaceFilters,
+  (customer, project, workspace, marketplaceFilters) => {
+    let contextFilter = getContextFiltersForOfferings(marketplaceFilters);
+    if (!contextFilter) {
+      contextFilter = {
+        allowed_customer_uuid: customer?.uuid,
+        project_uuid: project?.uuid,
+      };
+    }
     const filter: Record<string, any> = {
       page_size: 6,
       field,
       state: ['Active', 'Paused'],
-      allowed_customer_uuid: customer?.uuid,
-      project_uuid: project?.uuid,
+      ...contextFilter,
     };
     if (workspace === WorkspaceType.USER) {
       filter.shared = true;

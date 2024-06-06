@@ -1,12 +1,20 @@
 import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash';
-import { ComponentType, FC, useCallback, useState } from 'react';
+import {
+  ComponentType,
+  FC,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
 
 import { InfiniteList } from './InfiniteList';
+import useOnScreen from './useOnScreen';
 
 interface DataPage {
   data: any[];
@@ -49,6 +57,7 @@ export const AsyncSearchBox: FC<AsyncSearchBoxProps> = ({
   className,
   wrapperClassName,
 }) => {
+  const [enabled, setEnabled] = useState(false);
   const [query, setQuery] = useState('');
 
   const applyQuery = useCallback(
@@ -64,8 +73,17 @@ export const AsyncSearchBox: FC<AsyncSearchBoxProps> = ({
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,
       meta: { api, params: { ...params, [queryField]: query } },
+      refetchOnWindowFocus: false,
+      enabled,
     },
   );
+
+  const refPopup = useRef<HTMLInputElement>();
+  const isVisible = useOnScreen(refPopup);
+  // Start fetching data when popup is visible
+  useEffect(() => {
+    if (isVisible) setEnabled(true);
+  }, [isVisible]);
 
   return (
     <div id="search-box-wrapper" className={wrapperClassName}>
@@ -83,6 +101,7 @@ export const AsyncSearchBox: FC<AsyncSearchBoxProps> = ({
         />
       </div>
       <div
+        ref={refPopup}
         className="search-results-dropdown menu menu-sub menu-sub-dropdown menu-column border mw-400px mh-300px p-5"
         data-kt-menu="true"
       >

@@ -10,6 +10,16 @@
   padding: get($toolbar-config, padding);
 }
 
+.extra-toolbar {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 1rem 1rem -0.75rem rgba(0, 0, 0, 0.05) !important;
+  border-top: 1px solid var(--bs-border-color);
+  border-bottom: 1px solid var(--bs-border-color);
+}
+
 // Desktop mode
 @include media-breakpoint-up(lg) {
   .toolbar {
@@ -42,6 +52,11 @@
       top: var(--kt-pagebar-height);
     }
 
+    // Fixed toolbar & enabled extra-toolbar modes
+    .toolbar-fixed.extra-toolbar-enabled & {
+      box-shadow: none;
+    }
+
     // Fixed header & fixed toolbar & enabled page bar modes
     .header-fixed.toolbar-fixed.outstanding-bar-enabled & {
       top: calc(
@@ -53,7 +68,19 @@
     .hero-enabled.toolbar-fixed & {
       position: sticky;
     }
+  }
 
+  .extra-toolbar {
+    // With header & fixed toolbar
+    .header-fixed.toolbar-fixed & {
+      top: calc(
+        #{get($header-config, fixed, height, desktop)} + var(--kt-toolbar-height)
+      );
+    }
+  }
+
+  .toolbar,
+  .extra-toolbar {
     // Aside default enabled, aside fixed & header sticky modes
     .aside-enabled.aside-fixed.toolbar-fixed & {
       left: get($aside-config, width);
@@ -101,6 +128,11 @@
       top: var(--kt-pagebar-height);
     }
 
+    // Fixed toolbar & enabled extra-toolbar modes
+    .toolbar-tablet-and-mobile-fixed.extra-toolbar-enabled & {
+      box-shadow: none;
+    }
+
     // Fixed header & fixed toolbar & enabled page bar modes
     .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled
       & {
@@ -117,6 +149,15 @@
     // Page title
     .page-title[data-kt-swapper='true'] {
       display: none !important;
+    }
+  }
+
+  .extra-toolbar {
+    // With header & fixed toolbar
+    .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed & {
+      top: calc(
+        #{get($header-config, fixed, height, tablet-and-mobile)} + var(--kt-toolbar-height-tablet-and-mobile)
+      );
     }
   }
 }

@@ -79,6 +79,10 @@ export const DefaultLayoutConfig: ILayout = {
       },
     },
   },
+  extraToolbar: {
+    display: true,
+    width: 'fluid',
+  },
   footer: {
     width: 'fluid', // Set fixed|fluid to change width type
   },
