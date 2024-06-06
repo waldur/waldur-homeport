@@ -7,6 +7,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { OrganizationUIView } from '@waldur/organization/OrganizationUIView';
+import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import { fetchProvider, loadContext } from './resolve';
@@ -409,6 +410,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization',
     data: {
       breadcrumb: () => translate('My offerings'),
+      permissions: [isOwnerOrStaff],
     },
   },
 

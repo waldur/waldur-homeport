@@ -8,7 +8,7 @@ import { translate } from '@waldur/i18n';
 import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
 import { hasSupport } from '@waldur/issues/hooks';
 import { OrganizationUIView } from '@waldur/organization/OrganizationUIView';
-import { isStaff } from '@waldur/workspace/selectors';
+import { isOwnerOrStaff, isStaff } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import { fetchCustomer } from './workspace/CustomerWorkspace';
@@ -127,6 +127,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Dashboard'),
       priority: 100,
+      permissions: [isOwnerOrStaff],
     },
   },
 
@@ -197,6 +198,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization-team',
     data: {
       breadcrumb: () => translate('Group invitations'),
+      permissions: [isOwnerOrStaff],
     },
   },
 
@@ -207,6 +209,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization-team',
     data: {
       breadcrumb: () => translate('Permission log'),
+      permissions: [isOwnerOrStaff],
     },
   },
 
@@ -217,6 +220,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization-team',
     data: {
       breadcrumb: () => translate('Reviews'),
+      permissions: [isOwnerOrStaff],
     },
   },
 
@@ -243,7 +247,7 @@ export const states: StateDeclaration[] = [
           if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
             return isStaff(state);
           }
-          return true;
+          return isOwnerOrStaff(state);
         },
       ],
     },
@@ -283,6 +287,7 @@ export const states: StateDeclaration[] = [
     component: CostPoliciesList,
     data: {
       breadcrumb: () => translate('Cost policies'),
+      permissions: [isOwnerOrStaff],
     },
   },
 ];

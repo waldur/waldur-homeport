@@ -13,6 +13,7 @@ import { translate } from '@waldur/i18n';
 import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
+import { checkCustomerUser, getUser } from '@waldur/workspace/selectors';
 
 import { CUSTOMERS_FILTER_FORM_ID } from '../constants';
 
@@ -33,6 +34,31 @@ const exportFields = [
   'Projects',
   'Created',
 ];
+
+const OrganizationField = ({ row }) => {
+  const user = useSelector(getUser);
+  const hasOrganizationPermission = checkCustomerUser(row, user);
+  const hasProjectPermission = user.permissions.find(
+    (permission) =>
+      permission.scope_type === 'project' &&
+      permission.customer_uuid === row.uuid,
+  );
+  return hasOrganizationPermission ? (
+    <Link
+      state="organization.dashboard"
+      params={{ uuid: row.uuid }}
+      label={row.name}
+    />
+  ) : hasProjectPermission ? (
+    <Link
+      state="marketplace-projects"
+      params={{ uuid: row.uuid }}
+      label={row.name}
+    />
+  ) : (
+    <>{row.name}</>
+  );
+};
 
 export const BaseOrganizationsList: FunctionComponent<{
   user;
@@ -55,13 +81,7 @@ export const BaseOrganizationsList: FunctionComponent<{
     {
       title: translate('Organization'),
       orderField: 'name',
-      render: ({ row }) => (
-        <Link
-          state="organization.dashboard"
-          params={{ uuid: row.uuid }}
-          label={row.name}
-        />
-      ),
+      render: OrganizationField,
     },
     {
       title: translate('Abbreviation'),

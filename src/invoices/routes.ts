@@ -2,6 +2,7 @@ import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
+import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 const BillingDetails = lazyComponent(
   () => import('./details/BillingDetails'),
@@ -22,6 +23,7 @@ export const states: StateDeclaration[] = [
         ENV.accountingMode === 'accounting'
           ? translate('Accounting')
           : translate('Billing'),
+      permissions: [isOwnerOrStaff],
     },
   },
 
