@@ -36,10 +36,16 @@ export async function fetchCustomer(transition: Transition) {
       }
       store.dispatch(setCurrentWorkspace(WorkspaceType.ORGANIZATION));
 
+      const projectPermissions = currentUser.permissions?.filter(
+        ({ scope_type, customer_uuid }) =>
+          scope_type === 'project' && customer_uuid === currentCustomer.uuid,
+      );
+
       if (
         !checkCustomerUser(currentCustomer, currentUser) &&
         !checkIsServiceManager(currentCustomer, currentUser) &&
-        !currentUser.is_support
+        !currentUser.is_support &&
+        !projectPermissions?.length
       ) {
         store.dispatch(triggerTransition('errorPage.notFound', {}));
       }

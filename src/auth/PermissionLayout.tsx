@@ -162,6 +162,11 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
             (permission) =>
               permission.scope_uuid === params.uuid &&
               permission.scope_type === 'customer',
+          ) &&
+          !user.permissions.find(
+            (permission) =>
+              permission.scope_type === 'project' &&
+              permission.customer_uuid === params.uuid,
           )
         ) {
           setPermission('restricted');
