@@ -9,6 +9,7 @@ import { projectAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
 interface ProjectFilterProps {
   customer_uuid?: string;
+  isDisabled?: boolean;
 }
 
 const getOptionLabel = (option) => (
@@ -37,6 +38,7 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No projects')}
         isClearable={true}
+        isDisabled={props.isDisabled}
       />
     )}
   />

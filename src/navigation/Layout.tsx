@@ -34,6 +34,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const [fullPage, setFullPage] = useState(false);
   const [PageHero, setPageHero] = useState<React.ReactNode>(null);
   const [PageBar, setPageBar] = useState<React.ReactNode>(null);
+  const [ExtraToolbar, setExtraToolbar] = useState<React.ReactNode>(null);
   const context = useMemo<Partial<LayoutContextInterface>>(
     () => ({
       setActions,
@@ -44,6 +45,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setPageHero,
       setPageBar,
       setBreadcrumbs,
+      setExtraToolbar,
     }),
     [
       setActions,
@@ -53,6 +55,8 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setFullPage,
       setPageHero,
       setPageBar,
+      setBreadcrumbs,
+      setExtraToolbar,
     ],
   );
 
@@ -65,13 +69,14 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
     layout.setLayout({
       aside: currentUser ? DefaultLayoutConfig.aside : false,
       toolbar: showToolbar ? DefaultLayoutConfig.toolbar : false,
+      extraToolbar: ExtraToolbar ? DefaultLayoutConfig.extraToolbar : false,
       hero: PageHero ? DefaultLayoutConfig.hero : false,
       outstandingBar: PageBar ? DefaultLayoutConfig.outstandingBar : false,
       content: {
         width: fullPage || PageHero ? 'fluid' : 'fixed',
       },
     });
-  }, [showToolbar, fullPage, PageHero, PageBar, currentUser]);
+  }, [showToolbar, fullPage, PageHero, PageBar, ExtraToolbar, currentUser]);
 
   useEffect(() => {
     if (AuthService.isAuthenticated() && !currentUser) {
@@ -117,6 +122,9 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
                   </div>
                 )}
                 {showToolbar && <Toolbar actions={actions} />}
+                {ExtraToolbar && (
+                  <div className="extra-toolbar">{ExtraToolbar}</div>
+                )}
                 <div className="post w-100 d-flex flex-column-fluid">
                   {children}
                   <MasterLayout />

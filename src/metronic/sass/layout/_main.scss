@@ -56,6 +56,15 @@ body {
       );
     }
 
+    // Fixed header & fixed toolbar & enabled extra-toolbar modes
+    .header-fixed.toolbar-fixed.extra-toolbar-enabled & {
+      padding-top: calc(
+        #{get($header-config, fixed, height, desktop)} + var(
+            --kt-toolbar-height
+          ) + var(--kt-extra-toolbar-height)
+      );
+    }
+
     // Fixed header & enabled page bar modes
     .header-fixed.outstanding-bar-enabled & {
       margin-top: var(--kt-pagebar-height);
@@ -90,6 +99,16 @@ body {
     .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed & {
       padding-top: calc(
         #{get($header-config, fixed, height, tablet-and-mobile)} + var(--kt-toolbar-height-tablet-and-mobile)
+      );
+    }
+
+    // Fixed header & fixed toolbar & enabled extra-toolbar modes
+    .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed.extra-toolbar-enabled
+      & {
+      padding-top: calc(
+        #{get($header-config, fixed, height, tablet-and-mobile)} + var(
+            --kt-toolbar-height-tablet-and-mobile
+          ) + var(--kt-extra-toolbar-height)
       );
     }
 

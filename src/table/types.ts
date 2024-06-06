@@ -69,7 +69,7 @@ export interface Pagination {
 export interface FilterItem {
   label: string;
   name: string;
-  value: any[];
+  value: any;
   component: () => JSX.Element;
 }
 

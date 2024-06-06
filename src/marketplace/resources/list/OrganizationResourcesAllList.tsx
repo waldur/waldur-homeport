@@ -56,5 +56,12 @@ export const OrganizationResourcesAllList: FC<Partial<TableProps>> = (
     filter,
   });
 
-  return <ResourcesAllListTable {...tableProps} {...props} hasProjectColumn />;
+  return (
+    <ResourcesAllListTable
+      {...tableProps}
+      {...props}
+      hasProjectColumn
+      context="organization"
+    />
+  );
 };

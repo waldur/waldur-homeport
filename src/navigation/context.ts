@@ -14,6 +14,7 @@ export interface LayoutContextInterface {
   setExtraTabs(tabs: Tab[]): void;
   fullPage: boolean;
   setFullPage(value: boolean): void;
+  setExtraToolbar(component: React.ReactNode);
   setPageHero(component: React.ReactNode);
   setPageBar(component: React.ReactNode);
   setBreadcrumbs(component: React.ReactNode);
@@ -39,6 +40,19 @@ export const useFullPage = () => {
       layoutContext.setFullPage(false);
     };
   }, [layoutContext]);
+};
+
+export const useExtraToolbar = (
+  component: ReactNode,
+  deps: DependencyList = [],
+) => {
+  const layoutContext = useContext(LayoutContext);
+  useEffect(() => {
+    layoutContext.setExtraToolbar(component);
+    return () => {
+      layoutContext.setExtraToolbar(null);
+    };
+  }, [layoutContext, ...deps]);
 };
 
 export const usePageHero = (

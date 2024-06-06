@@ -60,3 +60,9 @@
     background-color: theme-light-color($name);
   }
 }
+
+.badge-outline.badge-outline-default {
+  color: $gray-700;
+  border: 1px solid $input-border-color;
+  background-color: unset;
+}

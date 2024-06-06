@@ -94,6 +94,11 @@ export interface IToolbar {
   };
 }
 
+export interface IExtraToolbar {
+  display: boolean;
+  width: 'fixed' | 'fluid';
+}
+
 export interface IPageTitle {
   display: boolean;
   breadCrumbs: boolean;
@@ -125,6 +130,7 @@ export interface ILayout {
   hero: IHero;
   outstandingBar: IOutstandingBar;
   toolbar: IToolbar;
+  extraToolbar: IExtraToolbar;
   footer: IFooter;
   sidebar?: ISidebar;
   main?: IMain;

@@ -860,6 +860,7 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
+#: src/marketplace/landing/MarketplaceLandingFilter.tsx
 #: src/proposals/AvailableOfferingCard.tsx
 #: src/proposals/CallCard.tsx
 #: src/table/TableFilterActions.tsx
@@ -1767,6 +1768,7 @@ msgstr ""
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
 #: src/issues/comments/IssueCommentsForm.tsx
+#: src/marketplace/landing/MarketplaceLandingFilter.tsx
 #: src/marketplace/orders/actions/CancelTerminationOrderButton.tsx
 #: src/marketplace/orders/details/CancelOrderButton.tsx
 #: src/modal/CloseDialogButton.tsx
@@ -1960,6 +1962,7 @@ msgstr ""
 msgid "Civil number"
 msgstr ""
 
+#: src/marketplace/landing/filter/PageBarFilters.tsx
 #: src/table/TableFilters.tsx
 msgid "Clear filters"
 msgstr ""
@@ -4356,6 +4359,18 @@ msgstr ""
 
 #: src/issues/attachments/utils.ts
 msgid "Files"
+msgstr ""
+
+#: src/marketplace/landing/MarketplaceLandingFilter.tsx
+msgid "Filter by organization/project"
+msgstr ""
+
+#: src/marketplace/landing/MarketplaceLandingFilter.tsx
+msgid "Filter results by chosen organization and project"
+msgstr ""
+
+#: src/marketplace/landing/filter/PageBarFilters.tsx
+msgid "Filtered by"
 msgstr ""
 
 #: src/table/utils.tsx
@@ -7351,6 +7366,7 @@ msgstr ""
 #: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/deploy/steps/FormCustomerStep.tsx
 #: src/marketplace/details/CustomerField.tsx
+#: src/marketplace/landing/MarketplaceLandingFilter.tsx
 #: src/marketplace/offerings/admin/AdminOfferingsFilter.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/tabs.ts
@@ -8352,6 +8368,7 @@ msgstr ""
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
+#: src/marketplace/landing/MarketplaceLandingFilter.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/resources/list/CategoryResourcesList.tsx

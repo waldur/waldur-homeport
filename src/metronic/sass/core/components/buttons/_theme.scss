@@ -345,17 +345,22 @@
   );
 }
 
-// Outline default style
+// Outline default style (Tertairy style)
 .btn.btn-outline.btn-outline-default {
   $color: $gray-700;
   $icon-color: $gray-700;
   $border-color: $gray-300;
   $bg-color: null;
 
-  $color-active: $primary;
-  $icon-color-active: $primary;
-  $border-color-active: $primary;
-  $bg-color-active: $primary-light;
+  $color-active: $gray-700;
+  $icon-color-active: $gray-700;
+  $border-color-active: $gray-300;
+  $bg-color-active: $gray-50;
+
+  $color-dark: $gray-700;
+  $icon-color-dark: $gray-700;
+  $border-color-dark: $gray-500;
+  $bg-color-dark: $gray-100;
 
   @include button-custom-variant(
     $color,
@@ -365,6 +370,17 @@
     $color-active,
     $icon-color-active,
     $border-color-active,
-    $bg-color-active
+    $bg-color-active,
+    $color-dark,
+    $icon-color-dark,
+    $border-color-dark,
+    $bg-color-dark
   );
+
+  .btn-check:focus + &,
+  &:focus:not(.btn-active) {
+    background-color: unset !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem $gray-200 !important;
+  }
 }
