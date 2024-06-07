@@ -17,6 +17,10 @@ const ProjectManage = lazyComponent(
   () => import('./ProjectManage'),
   'ProjectManage',
 );
+const ProjectResourcesPage = lazyComponent(
+  () => import('./ProjectResourcesPage'),
+  'ProjectResourcesPage',
+);
 const ProjectEventsView = lazyComponent(
   () => import('./ProjectEventsList'),
   'ProjectEventsView',
@@ -94,6 +98,15 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Settings'),
       skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'project.resources',
+    url: 'resources/',
+    component: ProjectResourcesPage,
+    data: {
+      breadcrumb: () => translate('Resources'),
     },
   },
 

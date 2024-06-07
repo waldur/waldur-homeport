@@ -9651,6 +9651,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderProjectResourcesList.tsx
 #: src/navigation/header/search/SearchPopover.tsx
 #: src/navigation/sidebar/ResourcesMenu.tsx
+#: src/project/routes.ts
 #: src/reporting/quotas/constants.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 msgid "Resources"
