@@ -340,10 +340,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
       this.props.setDisplayMode(this.props.initialMode);
     }
     const doFetch = !this.props.initialPageSize && !this.props.initialSorting;
-    if (this.props.firstFetch && this.props.initialPageSize) {
+    if (this.props.initialPageSize) {
       this.props.updatePageSize(this.props.initialPageSize);
     }
-    if (this.props.firstFetch && this.props.initialSorting) {
+    if (this.props.initialSorting) {
       this.props.sortList(this.props.initialSorting);
     }
     if (
