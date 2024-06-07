@@ -71,7 +71,11 @@ export const UnifiedSidebar = () => {
       <CallPublicMenu />
       <MenuItem
         activeState={
-          state.name.includes('marketplace') ? state.name : undefined
+          ['public.marketplace', 'public-offering'].some((name) =>
+            state.name.startsWith(name),
+          )
+            ? state.name
+            : undefined
         }
         icon={<ShoppingCart />}
         title={translate('Marketplace')}

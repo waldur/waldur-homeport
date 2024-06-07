@@ -79,7 +79,7 @@ export const UserProposalsList: FC = () => {
       expandableRow={ProposalsListExpandableRow}
       hoverableRow={({ row }) => (
         <Link
-          state="public-calls.manage-proposal"
+          state="proposals.manage-proposal"
           params={{
             proposal_uuid: row.uuid,
           }}
