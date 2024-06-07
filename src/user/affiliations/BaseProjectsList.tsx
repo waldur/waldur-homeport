@@ -36,9 +36,8 @@ const exportFields = [
 export const BaseProjectsList: FunctionComponent<{
   filter;
   filters?;
-  hasActionBar?;
   standalone?;
-}> = ({ filter, filters, hasActionBar = true, standalone = false }) => {
+}> = ({ filter, filters, standalone = false }) => {
   const currentProject = useSelector(getProject);
   const props = useTable({
     table: PROJECTS_LIST,
@@ -118,7 +117,6 @@ export const BaseProjectsList: FunctionComponent<{
       expandableRow={ProjectExpandableRow}
       fullWidth={true}
       filters={filters}
-      hasActionBar={hasActionBar}
       standalone={standalone}
     />
   );
