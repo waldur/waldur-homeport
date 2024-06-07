@@ -7526,7 +7526,6 @@ msgstr ""
 #: src/navigation/sidebar/OrganizationsListMenu.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
-#: src/user/support/UserDetailsDialog.tsx
 msgid "Organizations"
 msgstr ""
 
@@ -8573,7 +8572,6 @@ msgstr ""
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
-#: src/user/support/UserDetailsDialog.tsx
 msgid "Projects"
 msgstr ""
 
@@ -9943,6 +9941,7 @@ msgid "Roles"
 msgstr ""
 
 #: src/user/affiliations/UserAffiliationsList.tsx
+#: src/user/support/UserDetailsDialog.tsx
 msgid "Roles and permissions"
 msgstr ""
 

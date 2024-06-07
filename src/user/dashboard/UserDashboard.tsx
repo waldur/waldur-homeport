@@ -26,7 +26,7 @@ export const UserDashboard: FC = () => {
     <>
       <UserWelcome user={user} />
       <UserProfile user={user} />
-      <UserAffiliationsList />
+      <UserAffiliationsList user={user} />
     </>
   );
 };

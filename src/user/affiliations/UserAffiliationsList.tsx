@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -8,10 +7,15 @@ import { formatRole, formatRoleType } from '@waldur/permissions/utils';
 import { Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { useTable } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
 
-export const UserAffiliationsList: FunctionComponent = () => {
-  const user = useSelector(getUser);
+interface UserAffiliationsListProps {
+  user;
+  hasActionBar?: boolean;
+}
+
+export const UserAffiliationsList: FunctionComponent<
+  UserAffiliationsListProps
+> = ({ user, hasActionBar = true }) => {
   const props = useTable({
     table: 'UserAffiliationsList',
     fetchData: () =>
@@ -84,6 +88,7 @@ export const UserAffiliationsList: FunctionComponent = () => {
       verboseName={translate('affiliations')}
       title={translate('Roles and permissions')}
       initialPageSize={100}
+      hasActionBar={hasActionBar}
     />
   );
 };

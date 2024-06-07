@@ -15,10 +15,9 @@ import { UserOfferingList } from '@waldur/user/UserOfferingList';
 import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
-import { BaseOrganizationsList } from '../affiliations/BaseOrganizationsList';
+import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
 import { UserActivateButton } from './UserActivateButton';
-import { UserProjectsList } from './UserProjectsList';
 
 interface UserDetailsDialogProps {
   resolve: { user: UserDetails };
@@ -62,11 +61,8 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
         <Tab eventKey={5} title={translate('Remote accounts')}>
           <UserOfferingList user={user} hasActionBar={false} />
         </Tab>
-        <Tab eventKey={6} title={translate('Organizations')}>
-          <BaseOrganizationsList user={user} hasActionBar={false} />
-        </Tab>
-        <Tab eventKey={7} title={translate('Projects')}>
-          <UserProjectsList user={user} hasActionBar={false} />
+        <Tab eventKey={8} title={translate('Roles and permissions')}>
+          <UserAffiliationsList user={user} hasActionBar={false} />
         </Tab>
       </Tabs>
     </ModalDialog>
