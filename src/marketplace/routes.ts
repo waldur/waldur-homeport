@@ -25,10 +25,6 @@ const ProviderDashboard = lazyComponent(
     import('@waldur/marketplace/service-providers/dashboard/ProviderDashboard'),
   'ProviderDashboard',
 );
-const Layout = lazyComponent(
-  () => import('@waldur/navigation/Layout'),
-  'Layout',
-);
 const CategoryPage = lazyComponent(
   () => import('./category/CategoryPage'),
   'CategoryPage',
@@ -153,7 +149,8 @@ export const states: StateDeclaration[] = [
     name: 'public',
     url: '',
     abstract: true,
-    component: Layout,
+    component: UIView,
+    parent: 'layout',
     ...getPublicRoutesParams(),
   },
 
