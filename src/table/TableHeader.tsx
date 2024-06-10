@@ -1,6 +1,6 @@
 import { CaretDown, CaretUp, CaretUpDown } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import './TableHeader.scss';
@@ -71,14 +71,8 @@ export const TableHeader: FC<TableHeaderProps> = ({
   onSelectAllRows,
   selectedRows,
   fieldType,
-  activeColumns,
 }) => {
   const isAllSelected = selectedRows?.length >= rows?.length;
-  const visibleColumns = useMemo(
-    () =>
-      columns.filter((column, index) => !column.keys || activeColumns[index]),
-    [activeColumns, columns],
-  );
 
   return (
     <thead>
@@ -95,7 +89,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
           </th>
         ) : null}
         {expandableRow && <th style={{ width: '10px' }} />}
-        {visibleColumns.map(
+        {columns.map(
           (column, index) =>
             (column.visible ?? true) && (
               <TableTh

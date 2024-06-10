@@ -1,6 +1,6 @@
 import { CaretDown, CaretRight } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import React, { FunctionComponent, useCallback, useMemo } from 'react';
+import React, { FunctionComponent, useCallback } from 'react';
 import { FormCheck } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
@@ -26,7 +26,6 @@ type TableBodyProps = Pick<
   | 'fieldType'
   | 'fieldName'
   | 'validate'
-  | 'activeColumns'
 >;
 
 const TableCells = ({ row, columns }) => (
@@ -58,13 +57,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   fieldType,
   fieldName,
   validate,
-  activeColumns,
 }) => {
-  const visibleColumns = useMemo(
-    () =>
-      columns.filter((column, index) => !column.keys || activeColumns[index]),
-    [activeColumns, columns],
-  );
   const trClick = useCallback(
     (row, index, e) => {
       if (!expandableRow) return;
@@ -177,7 +170,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             )}
           </td>
         )}
-        <TableCells row={row} columns={visibleColumns} />
+        <TableCells row={row} columns={columns} />
         {hoverableRow && (
           <td className="row-actions">
             <div>{React.createElement(hoverableRow, { row, fetch })}</div>

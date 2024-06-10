@@ -1,6 +1,6 @@
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Button, Card, Col, ColProps, Row, Stack } from 'react-bootstrap';
 import { BaseFieldProps } from 'redux-form';
 
@@ -86,6 +86,61 @@ export interface TableProps<RowType = any> extends TableState {
   initialMode?: 'grid' | 'table';
   standalone?: boolean;
 }
+
+const TableComponent = (props: TableProps) => {
+  const visibleColumns = useMemo(
+    () =>
+      props.hasOptionalColumns
+        ? props.columns.filter(
+            (column, index) => !column.keys || props.activeColumns[index],
+          )
+        : props.columns,
+    [props.activeColumns, props.columns],
+  );
+
+  return (
+    <table
+      className={classNames(
+        'table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer',
+        {
+          'table-expandable': Boolean(props.expandableRow),
+          'table-hover': props.hoverable,
+        },
+      )}
+    >
+      {props.hasHeaders && (
+        <TableHeader
+          rows={props.rows}
+          onSortClick={props.sortList}
+          currentSorting={props.sorting}
+          columns={visibleColumns}
+          expandableRow={!!props.expandableRow}
+          enableMultiSelect={props.enableMultiSelect}
+          onSelectAllRows={props.selectAllRows}
+          selectedRows={props.selectedRows}
+          fieldType={props.fieldType}
+        />
+      )}
+      <TableBody
+        rows={props.rows}
+        columns={visibleColumns}
+        rowClass={props.rowClass}
+        expandableRow={props.expandableRow}
+        expandableRowClassName={props.expandableRowClassName}
+        hoverableRow={props.hoverableRow}
+        enableMultiSelect={props.enableMultiSelect}
+        selectRow={props.selectRow}
+        selectedRows={props.selectedRows}
+        toggleRow={props.toggleRow}
+        toggled={props.toggled}
+        fetch={props.fetch}
+        fieldType={props.fieldType}
+        fieldName={props.fieldName}
+        validate={props.validate}
+      />
+    </table>
+  );
+};
 
 class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
   static defaultProps = {
@@ -293,48 +348,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
       </ErrorBoundary>
     ) : (
       <ErrorBoundary fallback={ErrorMessage}>
-        <table
-          className={classNames(
-            'table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer',
-            {
-              'table-expandable': Boolean(this.props.expandableRow),
-              'table-hover': this.props.hoverable,
-            },
-          )}
-        >
-          {this.props.hasHeaders && (
-            <TableHeader
-              rows={this.props.rows}
-              onSortClick={this.props.sortList}
-              currentSorting={this.props.sorting}
-              columns={this.props.columns}
-              expandableRow={!!this.props.expandableRow}
-              enableMultiSelect={this.props.enableMultiSelect}
-              onSelectAllRows={this.props.selectAllRows}
-              selectedRows={this.props.selectedRows}
-              fieldType={this.props.fieldType}
-              activeColumns={this.props.activeColumns}
-            />
-          )}
-          <TableBody
-            rows={this.props.rows}
-            columns={this.props.columns}
-            rowClass={this.props.rowClass}
-            expandableRow={this.props.expandableRow}
-            expandableRowClassName={this.props.expandableRowClassName}
-            hoverableRow={this.props.hoverableRow}
-            enableMultiSelect={this.props.enableMultiSelect}
-            selectRow={this.props.selectRow}
-            selectedRows={this.props.selectedRows}
-            toggleRow={this.props.toggleRow}
-            toggled={this.props.toggled}
-            fetch={this.props.fetch}
-            fieldType={this.props.fieldType}
-            fieldName={this.props.fieldName}
-            validate={this.props.validate}
-            activeColumns={this.props.activeColumns}
-          />
-        </table>
+        <TableComponent {...this.props} />
       </ErrorBoundary>
     );
   }
