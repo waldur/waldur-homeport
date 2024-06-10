@@ -165,6 +165,7 @@ msgstr ""
 msgid "Account status"
 msgstr ""
 
+#: src/invoices/list/BillingRecordsList.tsx
 #: src/invoices/routes.ts
 msgid "Accounting"
 msgstr ""

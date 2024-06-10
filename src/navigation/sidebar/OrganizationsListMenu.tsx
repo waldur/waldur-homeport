@@ -15,7 +15,11 @@ export const OrganizationsListMenu = () => {
       title={translate('Organizations')}
       state="organizations"
       activeState={
-        isDescendantOf('organization', state) ? state.name : undefined
+        isDescendantOf('organization', state) ||
+        isDescendantOf('call-management', state) ||
+        isDescendantOf('marketplace-provider', state)
+          ? state.name
+          : undefined
       }
       icon={<Buildings />}
       child={false}
