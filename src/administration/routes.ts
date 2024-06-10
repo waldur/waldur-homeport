@@ -101,7 +101,6 @@ export const states: StateDeclaration[] = [
     data: {
       title: () => translate('Administration'),
       permissions: [isStaffOrSupport],
-      hideProjectSelector: true,
     },
   },
 

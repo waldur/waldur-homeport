@@ -89,7 +89,6 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: WorkspaceType.USER,
       title: () => UsersService.getCachedUser()?.full_name,
-      hideProjectSelector: true,
     },
     component: UserDetails,
   },

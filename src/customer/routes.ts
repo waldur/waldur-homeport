@@ -86,7 +86,6 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: WorkspaceType.ORGANIZATION,
       title: () => translate('Organization'),
-      hideProjectSelector: true,
       skipInitWorkspace: true,
     },
     parent: 'layout',

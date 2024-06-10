@@ -94,7 +94,6 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       title: () => translate('Call management'),
-      hideProjectSelector: true,
       skipInitWorkspace: true,
     },
     resolve: [
@@ -185,7 +184,6 @@ export const states: StateDeclaration[] = [
     component: UIView,
     data: {
       title: () => translate('Calls for proposals'),
-      hideProjectSelector: true,
     },
   },
   {
@@ -196,7 +194,6 @@ export const states: StateDeclaration[] = [
     component: UIView,
     data: {
       title: () => translate('Proposals'),
-      hideProjectSelector: true,
     },
   },
   {
@@ -207,7 +204,6 @@ export const states: StateDeclaration[] = [
     component: UIView,
     data: {
       title: () => translate('Reviews'),
-      hideProjectSelector: true,
     },
   },
 
@@ -271,7 +267,6 @@ export const states: StateDeclaration[] = [
     url: '',
     component: PublicCallsPage,
     data: {
-      hideProjectSelector: true,
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },
@@ -280,7 +275,6 @@ export const states: StateDeclaration[] = [
     url: ':call_uuid/?tab',
     component: PublicCallDetailsContainer,
     data: {
-      hideProjectSelector: true,
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },
@@ -288,8 +282,6 @@ export const states: StateDeclaration[] = [
     name: 'proposals.manage-proposal',
     url: ':proposal_uuid/',
     component: ProposalManagePage,
-    data: {
-      hideProjectSelector: true,
-    },
+    data: {},
   },
 ];

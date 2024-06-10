@@ -49,7 +49,6 @@ export const states: StateDeclaration[] = [
       workspace: WorkspaceType.SUPPORT,
       title: () => translate('Support'),
       permissions: [isStaffOrSupport],
-      hideProjectSelector: true,
     },
   },
 

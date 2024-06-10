@@ -142,6 +142,9 @@ const getPublicRoutesParams = () => ({
       deps: ['$transition$'],
     },
   ],
+  data: {
+    auth: false,
+  },
 });
 
 export const states: StateDeclaration[] = [
@@ -159,9 +162,6 @@ export const states: StateDeclaration[] = [
     url: '/marketplace-provider-offering/:offering_uuid/',
     component: OfferingDetailsPage,
     parent: 'public',
-    data: {
-      hideProjectSelector: true,
-    },
   },
 
   {
@@ -187,7 +187,6 @@ export const states: StateDeclaration[] = [
     component: LandingPage,
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-      hideProjectSelector: true,
     },
   },
 
@@ -198,7 +197,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Orders'),
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-      hideProjectSelector: true,
     },
   },
 
@@ -216,7 +214,6 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
-      hideProjectSelector: true,
     },
   },
   {
@@ -226,7 +223,6 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
-      hideProjectSelector: true,
     },
   },
   {
@@ -236,7 +232,6 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
-      hideProjectSelector: true,
     },
   },
   {
@@ -246,7 +241,6 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
-      hideProjectSelector: true,
     },
   },
 
@@ -274,7 +268,6 @@ export const states: StateDeclaration[] = [
       auth: true,
       workspace: WorkspaceType.ORGANIZATION,
       title: () => translate('Service provider'),
-      hideProjectSelector: true,
     },
     resolve: [
       {
@@ -559,7 +552,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Service providers'),
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
-      hideProjectSelector: true,
     },
   },
 ];
