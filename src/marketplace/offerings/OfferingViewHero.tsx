@@ -1,6 +1,6 @@
 import { ArrowsClockwise, Question } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useRouter, useCurrentStateAndParams } from '@uirouter/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { Button, Nav, Tab } from 'react-bootstrap';
 
@@ -88,9 +88,8 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 label={translate(
                   'The public view is currently inactive as this offering is in draft status.',
                 )}
-                className="d-flex"
               >
-                <Nav.Link disabled className="text-center w-60px">
+                <Nav.Link disabled className="d-flex text-center w-60px">
                   {translate('Public')}
                   <Question size={18} className="ms-1" />
                 </Nav.Link>
