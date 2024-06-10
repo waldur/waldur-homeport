@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { Button, Nav, Tab } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { createSelector } from 'reselect';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -12,6 +14,10 @@ import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero
 import { translate } from '@waldur/i18n';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { Field } from '@waldur/resource/summary';
+import {
+  isOwnerOrStaff,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 import { getProviderOffering, getPublicOffering } from '../common/api';
 import { getLabel } from '../common/registry';
@@ -26,6 +32,12 @@ interface OfferingViewHeroProps {
   refetch?(): void;
   isRefetching?: boolean;
 }
+
+const serviceManagerOrOwnerOrStaffSelector = createSelector(
+  isOwnerOrStaff,
+  isServiceManagerSelector,
+  (ownerOrStaff, serviceManager) => ownerOrStaff || serviceManager,
+);
 
 export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
   const router = useRouter();
@@ -66,6 +78,10 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
     'marketplace-offering-update',
   ].includes(state.name);
 
+  const canManageAndEditOfferings = useSelector(
+    serviceManagerOrOwnerOrStaffSelector,
+  );
+
   if (isLoading) {
     return <LoadingSpinner />;
   } else if (error) {
@@ -79,58 +95,63 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
 
   return (
     <div className="container-fluid mb-8 mt-6">
-      <Tab.Container defaultActiveKey={state.name} onSelect={goTo}>
-        <Nav variant="tabs" className="nav-line-tabs mb-4">
-          {offering.state === 'Draft' ? (
-            <Nav.Item>
-              <Tip
-                id="tip-public-offering-disabled"
-                label={translate(
-                  'The public view is currently inactive as this offering is in draft status.',
-                )}
-              >
-                <Nav.Link disabled className="d-flex text-center w-60px">
+      {canManageAndEditOfferings && (
+        <Tab.Container defaultActiveKey={state.name} onSelect={goTo}>
+          <Nav variant="tabs" className="nav-line-tabs mb-4">
+            {offering.state === 'Draft' ? (
+              <Nav.Item>
+                <Tip
+                  id="tip-public-offering-disabled"
+                  label={translate(
+                    'The public view is currently inactive as this offering is in draft status.',
+                  )}
+                >
+                  <Nav.Link
+                    disabled
+                    className="d-flex align-items-center text-center w-60px opacity-50"
+                  >
+                    {translate('Public')}
+                    <Question size={18} className="ms-1" />
+                  </Nav.Link>
+                </Tip>
+              </Nav.Item>
+            ) : (
+              <Nav.Item>
+                <Nav.Link
+                  eventKey="public-offering.marketplace-public-offering"
+                  className="text-center w-60px"
+                >
                   {translate('Public')}
-                  <Question size={18} className="ms-1" />
                 </Nav.Link>
-              </Tip>
-            </Nav.Item>
-          ) : (
+              </Nav.Item>
+            )}
             <Nav.Item>
               <Nav.Link
-                eventKey="public-offering.marketplace-public-offering"
+                eventKey={
+                  isDescendantOf('admin', state)
+                    ? 'admin-marketplace-offering-details'
+                    : 'marketplace-offering-details'
+                }
                 className="text-center w-60px"
               >
-                {translate('Public')}
+                {translate('Manage')}
               </Nav.Link>
             </Nav.Item>
-          )}
-          <Nav.Item>
-            <Nav.Link
-              eventKey={
-                isDescendantOf('admin', state)
-                  ? 'admin-marketplace-offering-details'
-                  : 'marketplace-offering-details'
-              }
-              className="text-center w-60px"
-            >
-              {translate('Manage')}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link
-              eventKey={
-                isDescendantOf('admin', state)
-                  ? 'admin-marketplace-offering-update'
-                  : 'marketplace-offering-update'
-              }
-              className="text-center w-60px"
-            >
-              {translate('Edit')}
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Tab.Container>
+            <Nav.Item>
+              <Nav.Link
+                eventKey={
+                  isDescendantOf('admin', state)
+                    ? 'admin-marketplace-offering-update'
+                    : 'marketplace-offering-update'
+                }
+                className="text-center w-60px"
+              >
+                {translate('Edit')}
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
+        </Tab.Container>
+      )}
       <PublicDashboardHero2
         hideQuickSection
         logo={offering.thumbnail}
