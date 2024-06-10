@@ -84,6 +84,7 @@ export const BillingRecordsList: FunctionComponent = () => {
       ]}
       hoverableRow={SendNotificationButton}
       verboseName={translate('records')}
+      title={translate('Accounting')}
       enableExport={true}
     />
   );
