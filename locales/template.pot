@@ -10334,7 +10334,6 @@ msgstr ""
 #: src/form/themed-select.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/user/affiliations/OrganizationHoverableRow.tsx
 #: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Select"
 msgstr ""
@@ -10609,7 +10608,6 @@ msgstr ""
 
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/user/affiliations/OrganizationHoverableRow.tsx
 #: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Selected"
 msgstr ""

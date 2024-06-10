@@ -17,8 +17,6 @@ import { checkCustomerUser, getUser } from '@waldur/workspace/selectors';
 
 import { CUSTOMERS_FILTER_FORM_ID } from '../constants';
 
-import { OrganizationHoverableRow } from './OrganizationHoverableRow';
-
 const exportRow = (row) => [
   row.name,
   row.email || DASH_ESCAPE_CODE,
@@ -111,12 +109,7 @@ export const BaseOrganizationsList: FunctionComponent<{
       hasQuery={true}
       showPageSizeSelector={true}
       enableExport={true}
-      hoverableRow={({ row }) => (
-        <>
-          <OrganizationHoverableRow row={row} />
-          <OrganizationEditButton customer={row} />
-        </>
-      )}
+      hoverableRow={({ row }) => <OrganizationEditButton customer={row} />}
       expandableRow={({ row }) => <OrganizationDetails customer={row} />}
       fullWidth={true}
       standalone={standalone}

@@ -7,7 +7,6 @@ import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { OrganizationExpandableRow } from '@waldur/user/affiliations/OrganizationExpandableRow';
-import { OrganizationHoverableRow } from '@waldur/user/affiliations/OrganizationHoverableRow';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 
 export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
@@ -90,7 +89,6 @@ export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
       rowClass={({ row }) =>
         props.currentOrganization?.uuid === row.uuid ? 'bg-gray-200' : ''
       }
-      hoverableRow={OrganizationHoverableRow}
       expandableRow={OrganizationExpandableRow}
       fullWidth={true}
     />
