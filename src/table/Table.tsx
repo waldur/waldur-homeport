@@ -4,12 +4,13 @@ import React, { useEffect } from 'react';
 import { Button, Card, Col, ColProps, Row, Stack } from 'react-bootstrap';
 import { BaseFieldProps } from 'redux-form';
 
+import { titleCase } from '@waldur/core/utils';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
 import { ErrorView } from '@waldur/navigation/header/search/ErrorView';
 
-import './Table.scss';
 import { GridBody } from './GridBody';
+import './Table.scss';
 import { TableBody } from './TableBody';
 import { TableButtons } from './TableButtons';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -23,11 +24,11 @@ import { TableQuery } from './TableQuery';
 import { TableRefreshButton } from './TableRefreshButton';
 import {
   Column,
-  TableState,
+  DisplayMode,
+  ExportConfig,
   Sorting,
   TableDropdownItem,
-  ExportConfig,
-  DisplayMode,
+  TableState,
 } from './types';
 
 export interface TableProps<RowType = any> extends TableState {
@@ -128,7 +129,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                   <Col xs className="order-0 mw-25 pe-5">
                     <Card.Title>
                       <span className="me-2">
-                        {this.props.title || this.props.alterTitle}
+                        {this.props.title ||
+                          (this.props.verboseName &&
+                            titleCase(this.props.verboseName)) ||
+                          this.props.alterTitle}
                       </span>
                       <TableRefreshButton {...this.props} />
                     </Card.Title>
