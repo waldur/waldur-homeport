@@ -1,13 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getDailyQuotasOfCurrentMonth } from '@waldur/dashboard/api';
 import { TeamWidget } from '@waldur/dashboard/TeamWidget';
+import { WidgetCard } from '@waldur/dashboard/WidgetCard';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { useCreateInvitation } from '@waldur/invitations/actions/hooks';
+import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
 import { fetchSelectCustomerUsers } from '@waldur/permissions/api';
 import { Customer, User } from '@waldur/workspace/types';
 
@@ -54,21 +57,33 @@ export const CustomerDashboardChart: FunctionComponent<
       <Row>
         {data.map((item, index) => (
           <Col key={index} md={6} sm={12} className="mb-6">
-            <Card className="h-100">
-              <Card.Body>
-                <Row>
-                  <Col xs={7}>
-                    <EChart options={item.options} height="100px" />
-                  </Col>
-                  <Col>
-                    <h1 className="fw-bold">{item.chart.current}</h1>
-                    <h5 className="fw-bold text-uppercase">
-                      {item.chart.title}
-                    </h5>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
+            <WidgetCard
+              cardTitle={item.chart.title}
+              title={item.chart.current}
+              className="h-100"
+              meta={
+                item.chart.changes
+                  ? translate(
+                      '{changes} vs last month',
+                      {
+                        changes: (
+                          <ChangesAmountBadge
+                            changes={item.chart.changes}
+                            showOnInfinity
+                            showOnZero
+                            asBadge={false}
+                          />
+                        ),
+                      },
+                      formatJsxTemplate,
+                    )
+                  : null
+              }
+            >
+              <Col xs={7}>
+                <EChart options={item.options} height="100px" />
+              </Col>
+            </WidgetCard>
           </Col>
         ))}
         <Col md={6} sm={12} className="mb-6">
