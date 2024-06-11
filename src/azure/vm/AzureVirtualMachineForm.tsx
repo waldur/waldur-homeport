@@ -12,7 +12,6 @@ import {
 } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
-import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import {
@@ -46,7 +45,6 @@ export const AzureVirtualMachineForm: React.FC<
   return (
     <form>
       <FormContainer submitting={false}>
-        <ProjectField />
         <StringField
           label={translate('Name')}
           name="attributes.name"

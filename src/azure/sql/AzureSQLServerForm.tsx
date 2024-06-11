@@ -5,7 +5,6 @@ import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
-import { ProjectField } from '@waldur/marketplace/details/ProjectField';
 import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
 
 import { loadLocationOptions } from '../vm/utils';
@@ -16,7 +15,6 @@ export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
   return (
     <form>
       <FormContainer submitting={false}>
-        <ProjectField />
         <StringField
           label={translate('SQL server name')}
           name="attributes.name"

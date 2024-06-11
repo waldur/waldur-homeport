@@ -2,9 +2,11 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, change } from 'redux-form';
 
+import { getFirst } from '@waldur/core/api';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { Project } from '@waldur/workspace/types';
 
 import { organizationAutocomplete } from '../common/autocompletes';
 import { FormGroup } from '../offerings/FormGroup';
@@ -14,7 +16,7 @@ import { orderCustomerSelector } from './utils';
 
 const loadOptions = (query, prevOptions, page) =>
   organizationAutocomplete(query, prevOptions, page, {
-    field: ['name', 'uuid', 'projects'],
+    field: ['name', 'uuid'],
     o: 'name',
   });
 
@@ -33,7 +35,10 @@ export const CustomerField: FC = () => {
             onChange={async (value) => {
               if (!customer) {
                 fieldProps.input.onChange(value);
-                dispatch(change(ORDER_FORM_ID, 'project', value.projects[0]));
+                const project = await getFirst<Project>('/projects/', {
+                  customer: value.uuid,
+                });
+                dispatch(change(ORDER_FORM_ID, 'project', project));
                 return;
               }
               try {
@@ -47,7 +52,10 @@ export const CustomerField: FC = () => {
                   ),
                 );
                 fieldProps.input.onChange(value);
-                dispatch(change(ORDER_FORM_ID, 'project', value.projects[0]));
+                const project = await getFirst<Project>('/projects/', {
+                  customer: value.uuid,
+                });
+                dispatch(change(ORDER_FORM_ID, 'project', project));
               } catch (error) {
                 // Swallow
               }

@@ -21,6 +21,7 @@ import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
 
 import { getOrderFormComponent } from '../common/registry';
 import { ORDER_FORM_ID } from '../details/constants';
+import { getMarketplaceFilters } from '../landing/filter/store/selectors';
 import { getDefaultLimits } from '../offerings/utils';
 import { OrderResponse } from '../orders/types';
 import {
@@ -52,6 +53,8 @@ export const BaseDeployPage = ({
   ...props
 }) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+
+  const marketplaceFilters = useSelector(getMarketplaceFilters);
 
   const isEdit = useMemo(() => Boolean(props.cartItem), [props]);
 
@@ -87,8 +90,19 @@ export const BaseDeployPage = ({
   // Initialize project and cloud and initial attributes
   useEffectOnce(() => {
     const initialData = {};
-    if (hasStepWithField(formSteps, 'project') && project) {
-      Object.assign(initialData, { project });
+
+    const customerFilter = marketplaceFilters?.find(
+      (item) => item.name === 'organization',
+    );
+    const projectFilter = marketplaceFilters?.find(
+      (item) => item.name === 'project',
+    );
+
+    if (customerFilter?.value) {
+      Object.assign(initialData, { customer: customerFilter.value });
+    }
+    if (projectFilter?.value) {
+      Object.assign(initialData, { project: projectFilter.value });
     }
     if (hasStepWithField(formSteps, 'offering') && selectedOffering) {
       Object.assign(initialData, { offering: selectedOffering });
