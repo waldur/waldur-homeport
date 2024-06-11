@@ -7,11 +7,11 @@ import { translate } from '@waldur/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import {
   getCategory,
-  getProviderOffering,
   getPlugins,
+  getProviderOffering,
 } from '@waldur/marketplace/common/api';
 import { Offering } from '@waldur/marketplace/types';
-import { usePageHero } from '@waldur/navigation/context';
+import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
@@ -24,6 +24,7 @@ import {
 } from '../common/registry';
 import { ValidationIcon } from '../common/ValidationIcon';
 
+import { OfferingBreadcrumbs } from './OfferingBreadcrumbs';
 import { OfferingViewHero } from './OfferingViewHero';
 import { getServiceSettingsForm } from './update/integration/registry';
 import { SCRIPT_ROWS } from './update/integration/utils';
@@ -207,6 +208,11 @@ export const OfferingEditUIView = () => {
       isRefetching={isRefetching}
     />,
     [offering_uuid, refetch, isRefetching],
+  );
+
+  useBreadcrumbs(
+    data?.offering ? <OfferingBreadcrumbs offering={data.offering} /> : null,
+    [data],
   );
 
   return (

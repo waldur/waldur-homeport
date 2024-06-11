@@ -1285,7 +1285,6 @@ msgstr ""
 #: src/marketplace/resources/details/ActivityCard.tsx
 #: src/marketplace/resources/details/fetchData.tsx
 #: src/marketplace/service-providers/dashboard/ProviderEventsTable.tsx
-#: src/project/ProjectActions.tsx
 #: src/project/ProjectEventsList.tsx
 #: src/project/routes.ts
 #: src/user/UserActions.tsx
@@ -1730,6 +1729,8 @@ msgstr ""
 #: src/navigation/sidebar/CallPublicMenu.tsx
 #: src/proposals/CallsForProposals.tsx
 #: src/proposals/PublicCallsPage.tsx
+#: src/proposals/details/CallBreadcrumbs.tsx
+#: src/proposals/round/RoundBreadcrumbs.tsx
 #: src/proposals/routes.ts
 msgid "Calls for proposals"
 msgstr ""
@@ -5449,7 +5450,6 @@ msgstr ""
 #: src/issues/routes.ts
 #: src/navigation/IssuesLink.tsx
 #: src/navigation/header/QuickIssueDrawerToggle.tsx
-#: src/project/ProjectActions.tsx
 #: src/project/routes.ts
 #: src/user/UserActions.tsx
 #: src/user/routes.ts
@@ -7072,6 +7072,7 @@ msgstr ""
 #: src/broadcasts/RecipientsList.tsx
 #: src/marketplace/category/utils.ts
 #: src/marketplace/landing/OfferingsGroup.tsx
+#: src/marketplace/offerings/OfferingBreadcrumbs.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
@@ -7510,6 +7511,7 @@ msgstr ""
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
+#: src/marketplace/offerings/OfferingBreadcrumbs.tsx
 #: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/resources/details/ResourceBreadcrumbs.tsx
@@ -7518,6 +7520,10 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/navigation/header/search/SearchPopover.tsx
 #: src/navigation/sidebar/OrganizationsListMenu.tsx
+#: src/organization/OrganizationBreadcrumbs.tsx
+#: src/project/ProjectBreadcrumbs.tsx
+#: src/proposals/details/CallBreadcrumbs.tsx
+#: src/proposals/round/RoundBreadcrumbs.tsx
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Organizations"
@@ -8561,6 +8567,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/navigation/header/search/SearchPopover.tsx
 #: src/navigation/sidebar/ProjectsListMenu.tsx
+#: src/project/ProjectBreadcrumbs.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/BaseOrganizationsList.tsx
@@ -9965,6 +9972,7 @@ msgid "Round strategy in active round"
 msgstr ""
 
 #: src/proposals/details/PublicCallDetails.tsx
+#: src/proposals/round/RoundBreadcrumbs.tsx
 #: src/proposals/update/CallUpdateContainer.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Rounds"

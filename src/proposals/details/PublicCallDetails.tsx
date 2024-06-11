@@ -1,12 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { usePageHero } from '@waldur/navigation/context';
+import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
 import { Call } from '../types';
 
+import { CallBreadcrumbs } from './CallBreadcrumbs';
 import { CallDescriptionCard } from './CallDescriptionCard';
 import { CallDocumentsCard } from './CallDocumentsCard';
 import { CallOfferingsCard } from './CallOfferingsCard';
@@ -55,6 +56,8 @@ export const PublicCallDetails: FunctionComponent<PublicCallDetailsProps> = ({
   call,
 }) => {
   usePageHero(<PageHero call={call} />);
+
+  useBreadcrumbs(<CallBreadcrumbs call={call} />);
 
   const tabs = useMemo(() => getTabs(), []);
   const {

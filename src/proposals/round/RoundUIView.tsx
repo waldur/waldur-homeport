@@ -3,13 +3,14 @@ import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { usePageHero } from '@waldur/navigation/context';
+import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
 import { getProtectedCall, getProtectedCallRound } from '../api';
 
+import { RoundBreadcrumbs } from './RoundBreadcrumbs';
 import { RoundPageHero } from './RoundPageHero';
 
 const ProposalsList = lazyComponent(
@@ -97,6 +98,11 @@ export const RoundUIView = () => {
 
   usePageHero(
     round && call ? <RoundPageHero call={call} round={round} /> : null,
+    [round, call],
+  );
+
+  useBreadcrumbs(
+    round && call ? <RoundBreadcrumbs round={round} call={call} /> : null,
     [round, call],
   );
 
