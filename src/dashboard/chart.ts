@@ -10,6 +10,7 @@ export const getScopeChartOptions = (
   dates: string[],
   values: Value[],
   hLines?: HLine[],
+  color?: string,
 ) => ({
   tooltip: {
     trigger: 'axis',
@@ -33,6 +34,7 @@ export const getScopeChartOptions = (
     {
       type: 'line',
       data: values,
+      color,
       markLine: !hLines?.length
         ? undefined
         : {

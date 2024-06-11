@@ -1,58 +1,108 @@
-import { useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { Eye, GearSix } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import { useRouter } from '@uirouter/react';
+import { useCallback } from 'react';
+import { Col } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { Panel } from '@waldur/core/Panel';
-import { CostPolicy } from '@waldur/customer/cost-policies/types';
-import { translate } from '@waldur/i18n';
+import { EChart } from '@waldur/core/EChart';
+import { lazyComponent } from '@waldur/core/lazyComponent';
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { WidgetCard } from '@waldur/dashboard/WidgetCard';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
+import { openModalDialog } from '@waldur/modal/actions';
 import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
-import { ProjectDashboardChart } from './ProjectDashboardChart';
-import { ProjectDashboardCostPolicies } from './ProjectDashboardCostPolicies';
+import { loadChart } from './utils';
+
+const CostPoliciesDetailsDialog = lazyComponent(
+  () => import('./CostPoliciesDetailsDialog'),
+  'CostPoliciesDetailsDialog',
+);
 
 export const ProjectDashboardCostLimits = ({
   project,
 }: {
   project: Project;
 }) => {
-  const [costPolicies, setCostPolicies] = useState<CostPolicy[]>([]);
+  const router = useRouter();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
 
+  const { data, isLoading, error, refetch } = useQuery(
+    ['ProjectDashboardChart', project.uuid],
+    () => loadChart(project),
+    { staleTime: 5 * 60 * 1000 },
+  );
+
+  const dispatch = useDispatch();
+  const viewDetails = useCallback(
+    () =>
+      dispatch(
+        openModalDialog(CostPoliciesDetailsDialog, {
+          resolve: { project },
+          size: 'lg',
+        }),
+      ),
+    [dispatch, project],
+  );
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  } else if (error) {
+    return (
+      <LoadingErred
+        message={translate('Unable to load data.')}
+        loadData={refetch}
+      />
+    );
+  }
   return (
-    <Panel
-      title={translate('Project cost')}
-      actions={
-        isOwnerOrStaff && (
-          <Link
-            state="organization.cost-policies"
-            params={{ uuid: project.customer_uuid }}
-            className="btn btn-light btn-sm min-w-100px"
-          >
-            {translate('Manage policies')}
-          </Link>
-        )
+    <WidgetCard
+      cardTitle={translate('Project cost')}
+      title={data.chart.current}
+      className="h-100"
+      actions={[
+        isOwnerOrStaff
+          ? {
+              label: translate('Manage policy'),
+              icon: <GearSix />,
+              callback: () =>
+                router.stateService.go('organization.cost-policies', {
+                  uuid: project.customer_uuid,
+                }),
+            }
+          : null,
+        {
+          label: translate('View details'),
+          icon: <Eye />,
+          callback: viewDetails,
+        },
+      ].filter(Boolean)}
+      meta={
+        data.chart.changes
+          ? translate(
+              '{changes} vs last month',
+              {
+                changes: (
+                  <ChangesAmountBadge
+                    changes={data.chart.changes}
+                    showOnInfinity
+                    showOnZero
+                    asBadge={false}
+                  />
+                ),
+              },
+              formatJsxTemplate,
+            )
+          : null
       }
     >
-      <div className="d-flex flex-column">
-        <Row className="mb-10">
-          <ProjectDashboardChart
-            project={project}
-            costPolicies={costPolicies}
-          />
-        </Row>
-        <Row className="flex-grow-1">
-          <Col>
-            <div className="h-100">
-              <ProjectDashboardCostPolicies
-                project={project}
-                setCostPolicies={setCostPolicies}
-              />
-            </div>
-          </Col>
-        </Row>
-      </div>
-    </Panel>
+      <Col xs={7}>
+        <EChart options={data.options} height="100px" />
+      </Col>
+    </WidgetCard>
   );
 };

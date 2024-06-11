@@ -210,7 +210,6 @@ msgid "Accounts"
 msgstr ""
 
 #: src/customer/cost-policies/CostPoliciesList.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/resource/actions/AsyncActionItem.tsx
 msgid "Action"
 msgstr ""
@@ -3994,7 +3993,6 @@ msgstr ""
 #: src/administration/dashboard/AdministrationProfile.tsx
 #: src/core/InfiniteList.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Error"
 msgstr ""
 
@@ -4338,7 +4336,6 @@ msgstr ""
 
 #: src/core/InfiniteList.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Fetching..."
 msgstr ""
 
@@ -4762,7 +4759,6 @@ msgid "Has ended"
 msgstr ""
 
 #: src/customer/cost-policies/CostPoliciesList.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Has fired"
 msgstr ""
 
@@ -5685,7 +5681,6 @@ msgstr ""
 
 #: src/core/InfiniteList.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Load more"
 msgstr ""
 
@@ -5693,7 +5688,6 @@ msgstr ""
 #: src/customer/list/TotalCostComponent.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
 #: src/openstack/openstack-instance/deploy/FormImageStep.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/vmware/deploy/FormTemplateStep.tsx
 msgid "Loading"
 msgstr ""
@@ -5713,7 +5707,6 @@ msgstr ""
 
 #: src/core/InfiniteList.tsx
 #: src/marketplace/deploy/steps/FormCloudStep.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 msgid "Loading more..."
 msgstr ""
 
@@ -5815,7 +5808,7 @@ msgid "Manage offering user group"
 msgstr ""
 
 #: src/project/ProjectDashboardCostLimits.tsx
-msgid "Manage policies"
+msgid "Manage policy"
 msgstr ""
 
 #: src/openstack/openstack-instance/ManageSecurityGroupsButton.tsx
@@ -6545,6 +6538,7 @@ msgid "Next trigger at"
 msgstr ""
 
 #: src/administration/FeaturesList.tsx
+#: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
@@ -6556,7 +6550,6 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
@@ -8134,7 +8127,6 @@ msgstr ""
 
 #: src/openstack/openstack-server-groups/ServerGroupsList.tsx
 #: src/openstack/openstack-tenant/actions/CreateServerGroupForm.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/utils.ts
 msgid "Policy"
 msgstr ""
@@ -12177,10 +12169,6 @@ msgstr ""
 msgid "This website uses cookies to ensure you get the best experience on our website."
 msgstr ""
 
-#: src/project/ProjectDashboardCostPolicies.tsx
-msgid "Threshold"
-msgstr ""
-
 #: src/marketplace/offerings/images/OfferingImagesList.tsx
 msgid "Thumbnail"
 msgstr ""
@@ -12918,7 +12906,7 @@ msgstr ""
 #: src/marketplace/resources/change-limits/ChangeLimitsBody.tsx
 #: src/marketplace/resources/change-plan/ChangePlanBody.tsx
 #: src/marketplace/resources/import/ResourceImportDialog.tsx
-#: src/project/ProjectDashboardChart.tsx
+#: src/project/ProjectDashboardCostLimits.tsx
 #: src/rancher/cluster/actions/RancherClusterKubeconfigDialog.tsx
 #: src/rancher/cluster/create/CreateNodeDialog.tsx
 #: src/rancher/template/CatalogTemplateContainer.tsx
@@ -14449,6 +14437,10 @@ msgstr ""
 msgid "View call"
 msgstr ""
 
+#: src/project/ProjectDashboardCostLimits.tsx
+msgid "View details"
+msgstr ""
+
 #: src/marketplace/common/OfferingCard.tsx
 #: src/proposals/AvailableOfferingCard.tsx
 msgid "View offering"
@@ -14457,6 +14449,10 @@ msgstr ""
 #: src/marketplace/resources/resource-pending/OrderErredView.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "View order"
+msgstr ""
+
+#: src/project/CostPoliciesDetailsDialog.tsx
+msgid "View policy"
 msgstr ""
 
 #: src/marketplace/offerings/images/ImageDetailsDialog.tsx
@@ -14616,6 +14612,7 @@ msgid "YAML has been updated."
 msgstr ""
 
 #: src/administration/FeaturesList.tsx
+#: src/customer/cost-policies/CostPoliciesList.tsx
 #: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
@@ -14627,7 +14624,6 @@ msgstr ""
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
-#: src/project/ProjectDashboardCostPolicies.tsx
 #: src/project/ProjectRemoveDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
@@ -15307,7 +15303,9 @@ msgstr ""
 msgid "{category} resources"
 msgstr ""
 
+#: src/customer/dashboard/CustomerDashboardChart.tsx
 #: src/dashboard/TeamWidget.tsx
+#: src/project/ProjectDashboardCostLimits.tsx
 msgid "{changes} vs last month"
 msgstr ""
 

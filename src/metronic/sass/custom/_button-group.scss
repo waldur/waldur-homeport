@@ -1,0 +1,12 @@
+.dropdown-item {
+  color: $gray-700;
+  font-size: 14px;
+
+  .svg-icon {
+    margin-right: 0.75rem;
+    svg {
+      height: 1.6rem !important;
+      width: 1.6rem !important;
+    }
+  }
+}

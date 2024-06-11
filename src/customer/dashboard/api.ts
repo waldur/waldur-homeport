@@ -1,6 +1,7 @@
 import { getList } from '@waldur/core/api';
 import { formatCostChart } from '@waldur/dashboard/api';
 import { getScopeChartOptions } from '@waldur/dashboard/chart';
+import { LINE_CHART_COLOR } from '@waldur/dashboard/constants';
 import { Scope, Chart, InvoiceSummary } from '@waldur/dashboard/types';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 
@@ -28,6 +29,8 @@ export const loadSummary = async (customer) => {
     options: getScopeChartOptions(
       chart.data.map((item) => item.label),
       chart.data.map((item) => item.value),
+      null,
+      LINE_CHART_COLOR,
     ),
   }));
 };

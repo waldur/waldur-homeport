@@ -1,3 +1,6 @@
+import { Check, X } from '@phosphor-icons/react';
+import { FC } from 'react';
+import { Badge } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -5,6 +8,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { ProjectLink } from '@waldur/project/ProjectLink';
 import { Table, createFetcher } from '@waldur/table';
+import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -20,11 +24,20 @@ const filtersSelector = createSelector(getCustomer, (customer) => {
   return result;
 });
 
-export const CostPoliciesList = () => {
-  const filter = useSelector(filtersSelector);
+interface CostPoliciesListTableProps extends Partial<TableProps> {
+  table: string;
+  hideColumns?: ('project' | 'price_estimate')[];
+}
+
+export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
+  table,
+  filter,
+  hideColumns = [],
+  ...props
+}) => {
   const tableProps = useTable({
-    table: `CostPoliciesList`,
-    filter,
+    table,
+    filter: filter,
     fetchData: createFetcher('marketplace-project-estimated-cost-policies'),
     queryField: 'query',
   });
@@ -33,7 +46,7 @@ export const CostPoliciesList = () => {
     <Table
       {...tableProps}
       columns={[
-        {
+        !hideColumns.includes('project') && {
           title: translate('Project'),
           render: ({ row }) => (
             <ProjectLink
@@ -59,17 +72,26 @@ export const CostPoliciesList = () => {
         },
         {
           title: translate('Has fired'),
-          render: ({ row }) => (
-            <i
-              className={
-                row.has_fired === true
-                  ? 'fa fa-check text-info'
-                  : 'fa fa-times text-danger'
-              }
-            />
-          ),
+          render: ({ row }) =>
+            row.has_fired === true ? (
+              <Badge
+                bg={null}
+                className="fs-8 fw-bolder lh-base badge-light-danger badge-pill"
+              >
+                <X size={12} className="text-danger me-2" />
+                {translate('No')}
+              </Badge>
+            ) : (
+              <Badge
+                bg={null}
+                className="fs-8 fw-bolder lh-base badge-light-success badge-pill"
+              >
+                <Check size={12} className="text-success me-2" />
+                {translate('Yes')}
+              </Badge>
+            ),
         },
-        {
+        !hideColumns.includes('price_estimate') && {
           title: translate('Project estimated current cost'),
           render: ({ row }) => (
             <>
@@ -81,7 +103,7 @@ export const CostPoliciesList = () => {
             </>
           ),
         },
-      ]}
+      ].filter(Boolean)}
       verboseName={translate('Cost policies')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hoverableRow={({ row }) => (
@@ -90,6 +112,13 @@ export const CostPoliciesList = () => {
       hasQuery={true}
       showPageSizeSelector={true}
       actions={<CostPolicyCreateButton refetch={tableProps.fetch} />}
+      {...props}
     />
   );
+};
+
+export const CostPoliciesList = () => {
+  const filter = useSelector(filtersSelector);
+
+  return <CostPoliciesListTable table="CostPoliciesList" filter={filter} />;
 };

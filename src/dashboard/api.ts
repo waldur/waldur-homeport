@@ -85,9 +85,18 @@ export const formatCostChart = (invoices: InvoiceSummary[]): Chart => {
     };
   });
 
+  const lastMonths = items.slice(-2);
+  let changesPercent = 0;
+  const lastMonthCost = Number(lastMonths[0].value);
+  const currentMonthCost = Number(lastMonths[1].value);
+  if (lastMonthCost || lastMonthCost === 0) {
+    changesPercent = ((currentMonthCost - lastMonthCost) / lastMonthCost) * 100;
+  }
+
   return {
     title: translate('Estimated cost'),
     data,
     current: defaultCurrency(items[items.length - 1].value),
+    changes: changesPercent,
   };
 };
