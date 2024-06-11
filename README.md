@@ -74,7 +74,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_EXPOSE_HEADERS = (
     'x-result-count',
     'Link',
+    'x-impersonated-user-uuid',
 )
+
+# enable support for impersonation headers
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = (
+    *default_headers,
+    "X-Impersonated-User-Uuid",
+)
+
 ```
 
 [1]: https://github.com/waldur/waldur-mastermind
