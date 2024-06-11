@@ -2598,10 +2598,6 @@ msgstr ""
 msgid "Create project permission"
 msgstr ""
 
-#: src/marketplace/details/ProjectCreateGroup.tsx
-msgid "Create project request"
-msgstr ""
-
 #: src/proposals/proposal/create/AddProposalDialog.tsx
 msgid "Create proposal"
 msgstr ""
@@ -3726,10 +3722,6 @@ msgstr ""
 #: src/customer/team/EditProjectUserDialog.tsx
 #: src/project/team/EditUserDialog.tsx
 msgid "Edit project member"
-msgstr ""
-
-#: src/marketplace/details/ProjectCreateGroup.tsx
-msgid "Edit project request ({name})"
 msgstr ""
 
 #: src/marketplace/offerings/update/plans/EditPlanQuotasButton.tsx
@@ -8091,6 +8083,10 @@ msgstr ""
 msgid "Please select at least one language to save changes"
 msgstr ""
 
+#: src/marketplace/details/ProjectField.tsx
+msgid "Please select organization first."
+msgstr ""
+
 #: src/openstack/openstack-instance/actions/RestartAction.tsx
 msgid "Please start instance first."
 msgstr ""
@@ -8364,7 +8360,6 @@ msgstr ""
 #: src/marketplace/deploy/steps/FormProjectStep.tsx
 #: src/marketplace/deploy/steps/constants.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
-#: src/marketplace/details/ProjectCreateGroup.tsx
 #: src/marketplace/details/ProjectField.tsx
 #: src/marketplace/landing/MarketplaceLandingFilter.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersList.tsx

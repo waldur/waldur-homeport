@@ -1,6 +1,6 @@
 import { PlusCircle } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
@@ -17,19 +17,7 @@ const ProjectCreateDialog = lazyComponent(
   'ProjectCreateDialog',
 );
 
-interface ProjectCreateButtonProps {
-  title?: string;
-  icon?: boolean;
-  variant?: string;
-  className?: string;
-}
-
-export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
-  title = translate('Add project'),
-  variant = 'primary',
-  icon = true,
-  className,
-}) => {
+export const ProjectCreateButton: FC = () => {
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
   const disabled =
@@ -41,7 +29,7 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
   const dispatch = useDispatch();
   return (
     <ActionButton
-      title={title}
+      title={translate('Add project')}
       action={() =>
         dispatch(
           openModalDialog(ProjectCreateDialog, {
@@ -65,10 +53,9 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
             )
           : undefined
       }
-      iconNode={icon ? <PlusCircle /> : null}
-      variant={variant}
+      iconNode={<PlusCircle />}
+      variant="primary"
       disabled={disabled}
-      className={className}
     />
   );
 };
