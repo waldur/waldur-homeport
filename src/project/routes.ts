@@ -78,6 +78,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Team'),
       skipInitWorkspace: true,
+      priority: 120,
     },
   },
 
@@ -107,6 +108,7 @@ export const states: StateDeclaration[] = [
     component: ProjectResourcesPage,
     data: {
       breadcrumb: () => translate('Resources'),
+      priority: 110,
     },
   },
 
@@ -116,8 +118,8 @@ export const states: StateDeclaration[] = [
     component: ProjectIssuesList,
     data: {
       breadcrumb: () => translate('Issues'),
-      skipBreadcrumb: true,
       permissions: [hasSupport],
+      priority: 140,
     },
   },
   {
@@ -135,7 +137,7 @@ export const states: StateDeclaration[] = [
     component: ProjectEventsView,
     data: {
       breadcrumb: () => translate('Audit logs'),
-      skipBreadcrumb: true,
+      priority: 130,
     },
   },
   {

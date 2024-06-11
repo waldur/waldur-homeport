@@ -8,14 +8,12 @@ import { getDailyQuotasOfCurrentMonth } from '@waldur/dashboard/api';
 import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { useCreateInvitation } from '@waldur/invitations/actions/hooks';
-import { ProjectResourcesList } from '@waldur/marketplace/resources/list/ProjectResourcesList';
 import { fetchSelectProjectUsers } from '@waldur/permissions/api';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
 import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
-import { ProjectEventsView } from './ProjectEventsList';
 
 export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldConcealPrices = useSelector((state: RootState) =>
@@ -50,35 +48,26 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     return null;
   }
   return (
-    <>
-      <Row>
-        {!shouldConcealPrices && (
-          <Col md={6} sm={12} className="mb-6">
-            <ProjectDashboardCostLimits project={project} />
-          </Col>
-        )}
+    <Row>
+      {!shouldConcealPrices && (
         <Col md={6} sm={12} className="mb-6">
-          <TeamWidget
-            api={() => fetchSelectProjectUsers(project.uuid, { page_size: 5 })}
-            scope={project}
-            changes={changes}
-            onBadgeClick={goToUsers}
-            onAddClick={callback}
-            showAdd={canInvite}
-            className="h-100"
-            nameKey="user_full_name"
-            emailKey="user_email"
-            imageKey="user_image"
-          />
+          <ProjectDashboardCostLimits project={project} />
         </Col>
-      </Row>
-      <ProjectResourcesList
-        initialPageSize={5}
-        className="mb-6"
-        project={project}
-        standalone={false}
-      />
-      <ProjectEventsView />
-    </>
+      )}
+      <Col md={6} sm={12} className="mb-6">
+        <TeamWidget
+          api={() => fetchSelectProjectUsers(project.uuid, { page_size: 5 })}
+          scope={project}
+          changes={changes}
+          onBadgeClick={goToUsers}
+          onAddClick={callback}
+          showAdd={canInvite}
+          className="h-100"
+          nameKey="user_full_name"
+          emailKey="user_email"
+          imageKey="user_image"
+        />
+      </Col>
+    </Row>
   );
 };
