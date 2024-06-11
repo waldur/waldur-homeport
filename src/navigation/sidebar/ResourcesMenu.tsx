@@ -62,7 +62,10 @@ const RenderMenuItems = ({ items, counters = {} }) => {
             category_uuid: item.uuid,
           }}
           activeState={
-            resource?.category_uuid === item.uuid ? state.name : undefined
+            state.name === 'marketplace-resource-details' &&
+            resource?.category_uuid === item.uuid
+              ? state.name
+              : undefined
           }
         />
       ))}
