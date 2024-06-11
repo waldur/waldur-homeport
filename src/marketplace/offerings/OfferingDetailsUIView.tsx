@@ -8,17 +8,18 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import {
   getCategory,
-  getProviderOffering,
   getOfferingPlansUsage,
+  getProviderOffering,
 } from '@waldur/marketplace/common/api';
 import { Offering } from '@waldur/marketplace/types';
-import { usePageHero } from '@waldur/navigation/context';
+import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
 import { isExperimentalUiComponentsVisible } from '../utils';
 
+import { OfferingBreadcrumbs } from './OfferingBreadcrumbs';
 import { OfferingViewHero } from './OfferingViewHero';
 
 const OfferingDetailsStatistics = lazyComponent(
@@ -166,6 +167,11 @@ export const OfferingDetailsUIView = () => {
       isRefetching={isRefetching}
     />,
     [offering_uuid, refetch, isRefetching],
+  );
+
+  useBreadcrumbs(
+    data?.offering ? <OfferingBreadcrumbs offering={data.offering} /> : null,
+    [data],
   );
 
   return (

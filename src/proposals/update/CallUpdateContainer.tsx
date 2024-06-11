@@ -6,13 +6,14 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
 import { translate } from '@waldur/i18n';
 import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
-import { usePageHero } from '@waldur/navigation/context';
+import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 import { RoleEnum } from '@waldur/permissions/enums';
 
 import { getProtectedCall } from '../api';
+import { CallBreadcrumbs } from '../details/CallBreadcrumbs';
 import { CallTabs } from '../details/CallTabs';
 import { TeamSection } from '../team/TeamSection';
 
@@ -91,6 +92,8 @@ const Body = ({ call, refetch, loading }) => {
   );
 
   usePageHero(<PageHero call={call} refetch={refetch} />);
+
+  useBreadcrumbs(<CallBreadcrumbs call={call} />);
 
   const {
     tabSpec: { component: Component },

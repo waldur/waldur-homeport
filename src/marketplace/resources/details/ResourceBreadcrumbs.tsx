@@ -15,13 +15,16 @@ export const ResourceBreadcrumbs = ({ resource }) =>
       >
         <Breadcrumb.Item>{resource.customer_name}</Breadcrumb.Item>
       </UISref>
-      <UISref to="projects">
+      <UISref
+        to="organization.projects"
+        params={{ uuid: resource.customer_uuid }}
+      >
         <Breadcrumb.Item>{translate('Projects')}</Breadcrumb.Item>
       </UISref>
       <UISref to="project.dashboard" params={{ uuid: resource.project_uuid }}>
         <Breadcrumb.Item>{resource.project_name}</Breadcrumb.Item>
       </UISref>
-      <UISref to="all-user-resources">
+      <UISref to="project.resources" params={{ uuid: resource.project_uuid }}>
         <Breadcrumb.Item>{translate('Resources')}</Breadcrumb.Item>
       </UISref>
       <Breadcrumb.Item active>{resource.name}</Breadcrumb.Item>

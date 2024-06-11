@@ -1,9 +1,10 @@
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useSelector } from 'react-redux';
 
-import { usePageHero } from '@waldur/navigation/context';
+import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { ProjectBreadcrumbs } from './ProjectBreadcrumbs';
 import { ProjectProfile } from './ProjectProfile';
 
 const PageHero = ({ project }) => {
@@ -17,16 +18,20 @@ const PageHero = ({ project }) => {
 const ProjectContainerWithHero = (props) => {
   const project = useSelector(getProject);
 
-  usePageHero(project ? <PageHero project={project} /> : null);
+  usePageHero(<PageHero project={project} />);
 
-  if (!project) {
-    return null;
-  }
+  useBreadcrumbs(<ProjectBreadcrumbs project={project} />);
+
   return <UIView {...props} />;
 };
 
 export const ProjectContainer = (props) => {
   const { state } = useCurrentStateAndParams();
+  const project = useSelector(getProject);
+
+  if (!project) {
+    return null;
+  }
 
   if (state.data?.skipHero) {
     return <UIView {...props} />;

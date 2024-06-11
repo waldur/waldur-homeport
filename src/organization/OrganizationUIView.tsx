@@ -12,7 +12,7 @@ import { CustomerProfile } from '@waldur/customer/dashboard/CustomerProfile';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { usePageHero } from '@waldur/navigation/context';
+import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import {
   checkIsServiceManager,
@@ -20,6 +20,8 @@ import {
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
+
+import { OrganizationBreadcrumbs } from './OrganizationBreadcrumbs';
 
 const getDashboardState = (state: StateDeclaration) => {
   if (isDescendantOf('organization', state)) {
@@ -92,6 +94,8 @@ const WithHero = (props) => {
   const customer = useSelector(getCustomer);
 
   usePageHero(<PageHero customer={customer} />);
+
+  useBreadcrumbs(<OrganizationBreadcrumbs customer={customer} />);
 
   return <UIView {...props} />;
 };

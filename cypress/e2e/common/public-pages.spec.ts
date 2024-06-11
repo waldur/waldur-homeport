@@ -124,7 +124,7 @@ describe('Public calls for proposals pages', () => {
 
     cy.url()
       .should('include', '/calls/3b8fc588d37f434eabc68d2a0b4a4bbe')
-      .get('.page-title')
+      .get('.breadcrumb-item')
       .should('contain', 'Long time call')
       .get('button').contains('Apply to round');
   });

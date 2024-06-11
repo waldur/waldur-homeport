@@ -24,7 +24,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
                 'The public view is currently inactive as this call is archived or draft.',
               )}
             >
-              <Nav.Link disabled className="text-center w-60px">
+              <Nav.Link disabled className="text-center w-60px d-flex">
                 {translate('Public')}
                 <Question size={18} className="ms-1" />
               </Nav.Link>
