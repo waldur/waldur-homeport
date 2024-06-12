@@ -16,7 +16,8 @@ import { Offering } from '../types';
 export const PublicOfferingsList: FunctionComponent<{
   filter?;
   showCategory?;
-}> = ({ filter, showCategory }) => {
+  initialMode?;
+}> = ({ filter, showCategory, initialMode }) => {
   const baseFilter = useSelector(mapStateToFilter);
 
   const mergedFilter = useMemo(
@@ -74,7 +75,7 @@ export const PublicOfferingsList: FunctionComponent<{
       gridSize={{ lg: 6, xl: 4 }}
       gridItem={({ row }) => <OfferingCard offering={row} />}
       filters={<AdminOfferingsFilter showCategory={showCategory} />}
-      initialMode="grid"
+      initialMode={initialMode === 'table' ? 'table' : 'grid'}
     />
   );
 };

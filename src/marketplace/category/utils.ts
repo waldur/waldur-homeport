@@ -27,15 +27,32 @@ export const countSelectedFilterValues = (filterValues, key) => {
   return counter;
 };
 
+interface CategoryItem {
+  title: string;
+  to: string;
+  params?: { category_uuid?: string; initialMode?: string };
+}
+
 export const getCategoryItems = (categories: Category[]) => {
   if (!categories.length) return [];
-  const children = categories
+  const totalOfferingCount = categories.reduce(
+    (sum, category) => sum + category.offering_count,
+    0,
+  );
+  const children: CategoryItem[] = categories
     .sort((a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0))
     .map((category) => ({
       title: `${category.title}`,
       to: 'public.marketplace-category',
       params: { category_uuid: category.uuid },
     }));
+
+  children.unshift({
+    title: `${translate('All offerings')} (${totalOfferingCount})`,
+    to: 'public.offerings',
+    params: { initialMode: 'table' },
+  });
+
   return [
     {
       title: translate('Offerings'),

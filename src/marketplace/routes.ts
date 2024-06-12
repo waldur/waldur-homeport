@@ -227,7 +227,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'public.offerings',
-    url: '/marketplace-public-offerings/',
+    url: '/marketplace-public-offerings/?{initialMode}',
     component: AllOfferingsList,
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
