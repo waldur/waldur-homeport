@@ -7,11 +7,11 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { useExtraTabs } from '@waldur/navigation/context';
+import { useOfferingCategories } from '@waldur/navigation/sidebar/ResourcesMenu';
 import { Tab } from '@waldur/navigation/Tab';
 import { RootState } from '@waldur/store/reducers';
 
 import { getCategoryItems } from './category/utils';
-import { useLandingCategories } from './landing/hooks';
 
 export const orderFormDataSelector = (state: RootState) =>
   (getFormValues(ORDER_FORM_ID)(state) || {}) as any;
@@ -42,7 +42,7 @@ export const validateIP = (value) => {
 };
 
 export const useMarketplacePublicTabs = () => {
-  const categories = useLandingCategories();
+  const categories = useOfferingCategories();
 
   const tabs = useMemo(() => {
     const _tabs: Tab[] = [
@@ -59,9 +59,7 @@ export const useMarketplacePublicTabs = () => {
         to: 'public.marketplace-orders',
       },
     ];
-    return _tabs.concat(
-      getCategoryItems(categories.isFetched ? categories.data : []),
-    );
-  }, [categories.isFetched, categories.data]);
+    return _tabs.concat(getCategoryItems(categories || []));
+  }, [categories]);
   useExtraTabs(tabs);
 };

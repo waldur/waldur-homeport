@@ -73,7 +73,7 @@ const RenderMenuItems = ({ items, counters = {} }) => {
   );
 };
 
-export const ResourcesMenu = ({ anonymous = false }) => {
+export const useOfferingCategories = (anonymous = false) => {
   const { data: categories } = useQuery(
     ['ResourcesMenu', 'Categories'],
     () =>
@@ -86,7 +86,11 @@ export const ResourcesMenu = ({ anonymous = false }) => {
       }),
     { refetchOnWindowFocus: false },
   );
+  return categories;
+};
 
+export const ResourcesMenu = ({ anonymous = false }) => {
+  const categories = useOfferingCategories(anonymous);
   const { data: counters = {} } = useQuery(
     ['ResourcesMenu', 'Counters'],
     getGlobalCounters,

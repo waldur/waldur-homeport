@@ -32,7 +32,7 @@ export const getCategoryItems = (categories: Category[]) => {
   const children = categories
     .sort((a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0))
     .map((category) => ({
-      title: `${category.title} (${category.offering_count})`,
+      title: `${category.title}`,
       to: 'public.marketplace-category',
       params: { category_uuid: category.uuid },
     }));
