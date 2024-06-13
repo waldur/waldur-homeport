@@ -317,7 +317,7 @@ export const SearchPopover = ({
           setQuery={setQuery}
           className="px-5 mb-6 d-lg-none"
         />
-        <Tab.Container id="left-tabs-example" defaultActiveKey="all">
+        <Tab.Container defaultActiveKey="all">
           <div className="overflow-auto">
             <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
               <Nav.Item className="text-nowrap ms-5">
