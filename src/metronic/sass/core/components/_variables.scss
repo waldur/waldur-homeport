@@ -88,6 +88,7 @@ $primary-inverse: if(
 // Primary base
 $primary-50: if(isDarkMode(), #1a261d, #f1f7ef); // Custom variable
 $primary-100: if(isDarkMode(), #2b3d2f, #e6f0e3); // Custom variable
+$primary-300: if(isDarkMode(), #5d806b, #97bf89); // Custom variable
 $primary-600: if(isDarkMode(), #6f977f, #286100); // Custom variable
 
 // Secondary colors
@@ -151,6 +152,7 @@ $theme-colors: (
   'primary': $primary,
   'primary-50': $primary-50,
   'primary-100': $primary-100,
+  'primary-300': $primary-300,
   'primary-600': $primary-600,
   'secondary': $secondary,
   'success': $success,

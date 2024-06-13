@@ -9,16 +9,8 @@ import {
 import { useLayout } from '@waldur/metronic/layout/core';
 
 import { BrandName } from './BrandName';
-import './Sidebar.scss';
 import { SidebarFooter } from './SidebarFooter';
-
-export function getSidebarToggle() {
-  const menuElement = document.querySelector('#kt_aside_toggle');
-  if (!menuElement) {
-    return;
-  }
-  return ToggleComponent.getInstance(menuElement as HTMLElement);
-}
+import './Sidebar.scss';
 
 export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);

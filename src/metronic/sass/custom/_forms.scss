@@ -8,8 +8,12 @@
 
 /* FORM CONTROL (INPUT) */
 .form-control {
-  border-radius: 9px;
-  font-size: 0.95rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  box-shadow: unset;
+  font-weight: 400;
+  padding-top: 0.53rem;
+  padding-bottom: 0.53rem;
 
   &:focus {
     border-color: $primary-300;

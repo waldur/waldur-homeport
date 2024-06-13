@@ -1,84 +1,101 @@
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
-import { Col, FormControl, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { debounce } from 'lodash';
+import { useCallback, useEffect, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
+import { getFormValues, reduxForm } from 'redux-form';
 
-import useOnScreen from '@waldur/core/useOnScreen';
+import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
-
-import { getSidebarToggle } from '../Sidebar';
+import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
+import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { Customer, Project } from '@waldur/workspace/types';
 
 import { DataLoader } from './DataLoader';
-import { MarketplacePopupTitle } from './MarketplacePopupTitle';
 
 export const RECENTLY_ADDED_OFFERINGS_UUID =
   'recently_added_offerings_category';
 
-export const MarketplacePopup: FunctionComponent = () => {
-  const currentCustomer = useSelector(getCustomer);
-  const currentProject = useSelector(getProject);
+const ADD_RESOURCE_DIALOG_FORM = 'AddResourceDialogForm';
+
+interface FormData {
+  organization?: Customer;
+  project?: Project;
+}
+
+export const MarketplacePopup = reduxForm<FormData>({
+  form: ADD_RESOURCE_DIALOG_FORM,
+  destroyOnUnmount: false,
+})((props) => {
   const [filter, setFilter] = useState('');
 
-  const refPopup = useRef<HTMLDivElement>();
-  const refSearch = useRef<HTMLInputElement>();
-  const isVisible = useOnScreen(refPopup);
-  // Search input autofocus
+  const dispatch = useDispatch<any>();
+  const formValues = useSelector(getFormValues(props.form)) as FormData;
+
+  // Clear project filter if organization is cleared
   useEffect(() => {
-    if (isVisible && refSearch.current) refSearch.current.focus();
-  }, [isVisible, refSearch]);
-
-  useEffect(() => {
-    if (isVisible && refPopup.current) {
-      refPopup.current.style.zIndex = '1055';
-      refPopup.current.style.transform = 'translate(265px, 65px)';
-
-      const control = getSidebarToggle();
-      if (!control) {
-        return;
-      }
-
-      if (document.body.hasAttribute('data-kt-aside-minimize')) {
-        control.toggle();
-      }
+    if (!formValues?.project) return;
+    if (
+      !formValues?.organization ||
+      formValues.organization.uuid !== formValues.project.customer_uuid
+    ) {
+      dispatch(props.change('project', undefined));
     }
-  }, [isVisible]);
+  }, [formValues, props.change]);
+
+  const applyQuery = useCallback(
+    debounce((value) => {
+      setFilter(String(value).trim());
+    }, 500),
+    [setFilter],
+  );
 
   return (
-    <div
-      id="marketplaces-selector"
-      ref={refPopup}
-      className="marketplaces-selector menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold rounded-0 pb-4 fs-6 h-100"
-      data-kt-menu="true"
-      data-popper-placement="end"
+    <ModalDialog
+      title={translate('Add resource')}
+      subtitle={translate(
+        'Select an organization and project, then choose a category, an offering, and follow the prompts',
+      )}
+      closeButton
+      bodyClassName="p-0 pb-4"
+      headerClassName="border-0 pb-4"
     >
-      <div className="marketplaces-selector-header">
-        <Row>
-          <MarketplacePopupTitle isVisible={isVisible} />
-          <Col xs={12} sm={7} xl={6}>
-            <div className="form-group">
-              <FormControl
-                id="marketplaces-selector-search-box"
-                ref={refSearch}
-                type="text"
-                className="form-control-solid text-center"
-                autoFocus
-                value={filter}
-                onChange={(event) => setFilter(event.target.value)}
-                placeholder={translate('Search offering...')}
+      <div id="marketplaces-selector">
+        <div className="px-7">
+          <Row className="gx-4 mb-4">
+            <Col lg={6} className="mb-4 mb-lg-0">
+              <OrganizationAutocomplete
+                placeholder={translate('Select an organization')}
               />
-            </div>
-          </Col>
-        </Row>
+            </Col>
+            <Col lg={6}>
+              <ProjectFilter
+                customer_uuid={formValues?.organization?.uuid}
+                isDisabled={!formValues?.organization?.uuid}
+                placeholder={translate('Select a project')}
+              />
+            </Col>
+          </Row>
+          <Row className="mb-4">
+            <Col xs={12}>
+              <FilterBox
+                id="marketplaces-selector-search-box"
+                type="search"
+                placeholder={translate('Search an offering')}
+                inputClassName="placeholder-gray-700"
+                onChange={(e) => applyQuery(e.target.value)}
+                autoFocus
+              />
+            </Col>
+          </Row>
+        </div>
+        <div className="border-bottom mx-7" />
+        <DataLoader
+          filter={filter}
+          customer={formValues?.organization}
+          project={formValues?.project}
+        />
       </div>
-      <div className="d-flex flex-column flex-md-row h-100">
-        {isVisible && currentCustomer && currentProject && (
-          <DataLoader
-            filter={filter}
-            currentCustomer={currentCustomer}
-            currentProject={currentProject}
-          />
-        )}
-      </div>
-    </div>
+    </ModalDialog>
   );
-};
+});

@@ -83,9 +83,6 @@ export const getPublicOfferingsOptions = (params?: {}) =>
 export const getAllProviderOfferings = (options?: {}) =>
   getAll<Offering>('/marketplace-provider-offerings/', options);
 
-export const getAllPublicOfferings = (options?: {}) =>
-  getAll<Offering>('/marketplace-public-offerings/', options);
-
 export const getAllOfferingPermissions = (options?: AxiosRequestConfig) =>
   getAll<OfferingPermission>('/marketplace-offering-permissions/', options);
 

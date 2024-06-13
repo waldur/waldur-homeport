@@ -318,7 +318,7 @@ Build test docker image:
       --cache=true
       --build-arg="DOCKER_REGISTRY=${DOCKER_REGISTRY}"
       --build-arg="ASSET_PATH=/${CI_MERGE_REQUEST_ID}/"
-      --destination "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}"
+      --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"
 
 Test k8s deployment:
   stage: validate
@@ -348,6 +348,9 @@ Test k8s deployment:
     - kubectl apply -f k8s-test/deployment.yaml --wait
     - kubectl apply -f k8s-test/service.yaml
     - kubectl apply -f k8s-test/ingress.yaml
+    - kubectl rollout restart deployment waldur-homeport-test-${CI_MERGE_REQUEST_ID}
+    # Wait for rollout completion
+    - kubectl rollout status deployment waldur-homeport-test-${CI_MERGE_REQUEST_ID} -w --timeout 120s
     - POD_NAME=$(kubectl get pods -o name -l app=waldur-homeport-test-${CI_MERGE_REQUEST_ID})
     - echo $POD_NAME
     # Wait until the pod is ready to ensure the image is pulled

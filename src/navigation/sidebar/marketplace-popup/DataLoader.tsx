@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { useDebounce } from 'react-use';
 
-import { queryClient } from '@waldur/Application';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -13,15 +11,15 @@ import { Category } from '@waldur/marketplace/types';
 import { CategoriesPanel } from './CategoriesPanel';
 import { RECENTLY_ADDED_OFFERINGS_UUID } from './MarketplacePopup';
 import { OfferingsPanel } from './OfferingsPanel';
-import { fetchCategories, fetchLastNOfferings, fetchOfferings } from './utils';
+import { fetchCategories, fetchLastNOfferings } from './utils';
 import { WelcomeView } from './WelcomeView';
 
-export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
+export const DataLoader = ({ filter, customer, project }) => {
   const [selectedCategory, selectCategory] = useState<Category>();
 
   const { data: lastOfferings } = useQuery(
-    ['MarketplacePopupNOfferings', currentCustomer.uuid, currentProject.uuid],
-    () => fetchLastNOfferings(currentCustomer, currentProject),
+    ['MarketplacePopupNOfferings', customer?.uuid, project?.uuid],
+    () => fetchLastNOfferings(customer, project),
     { staleTime: 1 * 60 * 1000 },
   );
 
@@ -29,6 +27,7 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
     data: categoryGroups,
     isLoading: loadingGroups,
     error: errorGroups,
+    refetch: loadCategoryGroups,
   } = useQuery(['MarketplaceCategoryGroups'], () => getCategoryGroups(), {
     staleTime: 1 * 60 * 1000,
   });
@@ -38,52 +37,12 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
     isLoading: loadingCategories,
     error: errorCategories,
     refetch: loadCategories,
-  } = useQuery(['MarketplacePopupCategories'], () => {
-    const data = queryClient.fetchQuery({
-      queryKey: [
-        'MarketplacePopupCategories-' + filter,
-        currentCustomer.uuid,
-        currentProject.uuid,
-      ],
-      queryFn: () => fetchCategories(currentCustomer, currentProject, filter),
-      staleTime: 1 * 60 * 1000,
-    });
-    return data;
-  });
-
-  const {
-    data: offerings,
-    isLoading: loadingOfferings,
-    error: errorOfferings,
-    refetch: loadOfferings,
-  } = useQuery(['MarketplacePopupOfferings', selectedCategory?.uuid], () => {
-    if (
-      selectedCategory &&
-      selectedCategory.uuid === RECENTLY_ADDED_OFFERINGS_UUID
-    ) {
-      return Promise.resolve(lastOfferings);
-    } else if (!selectedCategory) {
-      return Promise.resolve([]);
-    }
-
-    const data = queryClient.fetchQuery({
-      queryKey: [
-        'MarketplacePopupOfferings-' + filter,
-        currentCustomer.uuid,
-        currentProject.uuid,
-        selectedCategory?.uuid,
-      ],
-      queryFn: () =>
-        fetchOfferings(
-          currentCustomer,
-          currentProject,
-          selectedCategory,
-          filter,
-        ),
-      staleTime: 1 * 60 * 1000,
-    });
-    return data;
-  });
+    isFetching: fetchingCategories,
+  } = useQuery(
+    ['MarketplacePopupCategories', filter, customer?.uuid, project?.uuid],
+    () => fetchCategories(customer, project, filter),
+    { staleTime: 1 * 60 * 1000, keepPreviousData: true },
+  );
 
   const categories = useMemo(() => {
     if (!Array.isArray(mainCategories)) return [];
@@ -105,35 +64,29 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
     return getGroupedCategories(nonZeroCategories, categoryGroups);
   }, [mainCategories, categoryGroups, lastOfferings]);
 
-  // search with delay
-  useDebounce(
-    () => {
-      loadCategories();
-      if (selectedCategory) {
-        loadOfferings();
-      }
-    },
-    500,
-    [filter],
-  );
-
   const selectCategoryAndLoadData = (category: Category) => {
     if (!category) return;
     selectCategory(category);
-    loadOfferings();
   };
 
   return (
-    <>
+    <div
+      className={
+        'd-flex flex-column flex-lg-row h-100' +
+        (selectedCategory ? ' category-selected' : '')
+      }
+    >
       {loadingCategories || loadingGroups ? (
         <div className="message-wrapper p-4">
           <LoadingSpinner />
         </div>
       ) : errorCategories || errorGroups ? (
         <div className="message-wrapper">
-          <p className="text-center text-danger my-10 mx-4">
-            {translate('Unable to load categories')}
-          </p>
+          <LoadingErred
+            message={translate('Unable to load categories')}
+            loadData={() => loadCategoryGroups() && loadCategories()}
+            className="text-danger my-10 mx-4"
+          />
         </div>
       ) : (
         <CategoriesPanel
@@ -141,26 +94,22 @@ export const DataLoader = ({ filter, currentCustomer, currentProject }) => {
           selectedCategory={selectedCategory}
           selectCategory={selectCategoryAndLoadData}
           filter={filter}
+          loading={fetchingCategories}
         />
       )}
 
       {!selectedCategory ? (
-        <WelcomeView customer={currentCustomer} />
-      ) : loadingOfferings ? (
-        <div className="message-wrapper p-4">
-          <LoadingSpinner />
-        </div>
-      ) : errorOfferings ? (
-        <div className="message-wrapper">
-          <p className="text-center my-10 mx-4">
-            <LoadingErred
-              loadData={() => selectCategoryAndLoadData(selectedCategory)}
-            />
-          </p>
-        </div>
+        <WelcomeView />
       ) : (
-        <OfferingsPanel offerings={offerings} category={selectedCategory} />
+        <OfferingsPanel
+          lastOfferings={lastOfferings}
+          customer={customer}
+          project={project}
+          category={selectedCategory}
+          filter={filter}
+          goBack={() => selectCategory(null)}
+        />
       )}
-    </>
+    </div>
   );
 };

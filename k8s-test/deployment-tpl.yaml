@@ -16,7 +16,7 @@ spec:
         - name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
       containers:
       - name: waldur-homeport-test-${CI_MERGE_REQUEST_ID}
-        image: ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}
+        image: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}
         resources:
           limits:
             cpu: '1'

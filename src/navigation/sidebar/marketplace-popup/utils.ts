@@ -1,7 +1,7 @@
 import {
-  getAllPublicOfferings,
   getCategories,
   getPublicOfferingsList,
+  getPublicOfferingsOptions,
 } from '@waldur/marketplace/common/api';
 import { Category } from '@waldur/marketplace/types';
 import { Customer, Project } from '@waldur/workspace/types';
@@ -13,7 +13,7 @@ export const fetchCategories = async (
 ) => {
   return await getCategories({
     params: {
-      allowed_customer_uuid: customer.uuid,
+      ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
       ...(project ? { project_uuid: project.uuid } : {}),
       field: ['uuid', 'title', 'offering_count', 'icon', 'group'],
       has_offerings: true,
@@ -22,33 +22,37 @@ export const fetchCategories = async (
   });
 };
 
-export const fetchOfferings = async (
+export const fetchOfferingsByPage = (
   customer: Customer,
   project: Project,
   category: Category,
   search: string,
+  page: number,
+  pageSize: number,
 ) => {
-  const offerings = await getAllPublicOfferings({
-    params: {
-      allowed_customer_uuid: customer.uuid,
-      ...(project ? { project_uuid: project.uuid } : {}),
-      category_uuid: category.uuid,
-      name: search,
-      field: [
-        'uuid',
-        'category_uuid',
-        'customer_uuid',
-        'category_title',
-        'name',
-        'description',
-        'image',
-        'state',
-        'paused_reason',
-      ],
-      state: ['Active', 'Paused'],
-    },
-  });
-  return offerings;
+  return getPublicOfferingsOptions({
+    ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
+    ...(project ? { project_uuid: project.uuid } : {}),
+    category_uuid: category.uuid,
+    name: search,
+    field: [
+      'uuid',
+      'category_uuid',
+      'customer_uuid',
+      'category_title',
+      'name',
+      'description',
+      'image',
+      'state',
+      'paused_reason',
+    ],
+    state: ['Active', 'Paused'],
+    page,
+    page_size: pageSize,
+  }).then((res) => ({
+    pageElements: res.options,
+    itemCount: res.totalItems,
+  }));
 };
 
 export const fetchLastNOfferings = async (
@@ -59,7 +63,7 @@ export const fetchLastNOfferings = async (
   const offerings = await getPublicOfferingsList({
     page: 1,
     page_size,
-    allowed_customer_uuid: customer.uuid,
+    ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
     ...(project ? { project_uuid: project.uuid } : {}),
     field: [
       'uuid',
