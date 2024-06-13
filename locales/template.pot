@@ -2574,7 +2574,6 @@ msgstr ""
 
 #: src/customer/create/CustomerCreateDialog.tsx
 #: src/customer/create/CustomerCreateForm.tsx
-#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
 msgid "Create organization"
 msgstr ""
 
@@ -3247,7 +3246,7 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
-#: src/user/affiliations/BaseProjectsList.tsx
+#: src/user/affiliations/ProjectExpandableRow.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Description"
 msgstr ""
@@ -6625,10 +6624,6 @@ msgstr ""
 msgid "No offerings"
 msgstr ""
 
-#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
-msgid "No organization"
-msgstr ""
-
 #: src/administration/organizations/OrganizationGroupFilter.tsx
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
 msgid "No organization group types"
@@ -6655,10 +6650,6 @@ msgstr ""
 
 #: src/user/affiliations/OrganizationExpandableRow.tsx
 msgid "No permissions data."
-msgstr ""
-
-#: src/navigation/workspace/EmptyProjectPlaceholder.tsx
-msgid "No project"
 msgstr ""
 
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
@@ -14675,14 +14666,6 @@ msgstr ""
 
 #: src/marketplace/deploy/OfferingTosNotification.tsx
 msgid "You also agree to the service provider’s <tos>terms of service</tos>."
-msgstr ""
-
-#: src/navigation/workspace/EmptyProjectPlaceholder.tsx
-msgid "You are not part of a project. Create a project or request access from your organization administrator."
-msgstr ""
-
-#: src/navigation/workspace/EmptyOrganizationsPlaceholder.tsx
-msgid "You are not part of an organisation. Create an organization or request access from your organization administrator."
 msgstr ""
 
 #: src/invitations/actions/create/CustomMessageInput.tsx
