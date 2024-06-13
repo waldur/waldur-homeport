@@ -3,8 +3,13 @@ import { Breadcrumb } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const ResourceBreadcrumbs = ({ resource }) =>
-  resource ? (
+import { ResourcePopoverToggle } from './ResourcePopoverToggle';
+
+export const ResourceBreadcrumbs = ({ resource }) => {
+  if (!resource) {
+    return null;
+  }
+  return (
     <Breadcrumb>
       <UISref to="organizations">
         <Breadcrumb.Item>{translate('Organizations')}</Breadcrumb.Item>
@@ -24,9 +29,15 @@ export const ResourceBreadcrumbs = ({ resource }) =>
       <UISref to="project.dashboard" params={{ uuid: resource.project_uuid }}>
         <Breadcrumb.Item>{resource.project_name}</Breadcrumb.Item>
       </UISref>
-      <UISref to="project.resources" params={{ uuid: resource.project_uuid }}>
-        <Breadcrumb.Item>{translate('Resources')}</Breadcrumb.Item>
+      <UISref
+        to="project.resources"
+        params={{
+          uuid: resource.project_uuid,
+        }}
+      >
+        <Breadcrumb.Item>{resource.category_title}</Breadcrumb.Item>
       </UISref>
-      <Breadcrumb.Item active>{resource.name}</Breadcrumb.Item>
+      <ResourcePopoverToggle resource={resource} />
     </Breadcrumb>
-  ) : null;
+  );
+};

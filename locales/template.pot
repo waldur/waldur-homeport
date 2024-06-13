@@ -9635,7 +9635,6 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingDetailsUIView.tsx
-#: src/marketplace/resources/details/ResourceBreadcrumbs.tsx
 #: src/marketplace/resources/list/CategoryResourcesContainer.tsx
 #: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
@@ -10220,6 +10219,7 @@ msgid "Script language: {language}"
 msgstr ""
 
 #: src/core/AsyncSearchBox.tsx
+#: src/core/BreadcrumbDropdown.tsx
 #: src/navigation/header/search/SearchFilters.tsx
 #: src/navigation/header/search/SearchPopover.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
@@ -12106,6 +12106,10 @@ msgstr ""
 msgid "There are no plans"
 msgstr ""
 
+#: src/project/ProjectBreadcrumbs.tsx
+msgid "There are no projects."
+msgstr ""
+
 #: src/marketplace/resources/details/ResourceIssues.tsx
 msgid "There are no resource issues."
 msgstr ""
@@ -12122,7 +12126,12 @@ msgstr ""
 msgid "There are no resources available."
 msgstr ""
 
+#: src/marketplace/resources/details/ResourceBreadcrumbs.tsx
+msgid "There are no resources."
+msgstr ""
+
 #: src/core/AsyncSearchBox.tsx
+#: src/core/BreadcrumbDropdown.tsx
 msgid "There are no results for this keyword."
 msgstr ""
 
@@ -12386,6 +12395,14 @@ msgstr ""
 
 #: src/marketplace/landing/OfferingsSearchBox.tsx
 msgid "Type in name of offering or provider"
+msgstr ""
+
+#: src/project/ProjectBreadcrumbs.tsx
+msgid "Type in name of project"
+msgstr ""
+
+#: src/marketplace/resources/details/ResourceBreadcrumbs.tsx
+msgid "Type in name of resource"
 msgstr ""
 
 #: src/administration/service-desk/ZammadSettings.tsx
