@@ -113,9 +113,9 @@ const OfferingRequestsList = lazyComponent(
   () => import('@waldur/proposals/offering-requests/OfferingRequestsList'),
   'OfferingRequestsList',
 );
-const ProjectsListContainer = lazyComponent(
-  () => import('@waldur/project/ProjectsListContainer'),
-  'ProjectsListContainer',
+const ProjectsList = lazyComponent(
+  () => import('@waldur/project/ProjectsList'),
+  'ProjectsList',
 );
 const OfferingPublicUIView = lazyComponent(
   () => import('./offerings/OfferingPublicUIView'),
@@ -407,7 +407,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-projects',
     url: 'marketplace-projects/',
-    component: ProjectsListContainer,
+    component: ProjectsList,
     parent: 'organization',
     data: {
       breadcrumb: () => translate('Projects'),
