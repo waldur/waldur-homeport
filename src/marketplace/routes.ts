@@ -77,10 +77,6 @@ const PublicResourcesList = lazyComponent(
   () => import('./resources/list/PublicResourcesList'),
   'PublicResourcesList',
 );
-const UserResourcesAllList = lazyComponent(
-  () => import('@waldur/marketplace/resources/list/UserResourcesAllList'),
-  'UserResourcesAllList',
-);
 const ProviderDetails = lazyComponent(
   () => import('./service-providers/ProviderDetails'),
   'ProviderDetails',
@@ -487,16 +483,6 @@ export const states: StateDeclaration[] = [
       skipHero: true,
     },
   },
-  {
-    name: 'marketplace-admin-resources-list',
-    url: 'resources/',
-    component: UserResourcesAllList,
-    parent: 'admin',
-    data: {
-      breadcrumb: () => translate('Resources'),
-    },
-  },
-
   {
     name: 'admin-marketplace-offerings',
     parent: 'admin-marketplace',

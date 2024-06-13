@@ -40,14 +40,6 @@ const UserApiKey = lazyComponent(
   () => import('./api-key/UserApiKey'),
   'UserApiKey',
 );
-const EmptyOrganizationsPlaceholder = lazyComponent(
-  () => import('@waldur/navigation/workspace/EmptyOrganizationsPlaceholder'),
-  'EmptyOrganizationsPlaceholder',
-);
-const EmptyProjectPlaceholder = lazyComponent(
-  () => import('@waldur/navigation/workspace/EmptyProjectPlaceholder'),
-  'EmptyProjectPlaceholder',
-);
 const ProjectsList = lazyComponent(
   () => import('@waldur/user/affiliations/ProjectsList'),
   'ProjectsList',
@@ -206,16 +198,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('API token'),
     },
-  },
-  {
-    name: 'profile.no-customer',
-    url: 'no-customer/',
-    component: EmptyOrganizationsPlaceholder,
-  },
-  {
-    name: 'profile.no-project',
-    url: 'no-project/',
-    component: EmptyProjectPlaceholder,
   },
   {
     name: 'projects',
