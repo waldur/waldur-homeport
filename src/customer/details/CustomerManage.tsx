@@ -13,7 +13,7 @@ import { useFullPage } from '@waldur/navigation/context';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showError, showSuccess } from '@waldur/store/notify';
-import { getUser, getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
 import { CustomerEditPanels } from './CustomerEditPanels';
@@ -76,7 +76,7 @@ export const CustomerManage: FunctionComponent = () => {
   return (
     <PageBarProvider>
       <CustomerManagePageBar />
-      <div className="container-xxl py-10">
+      <div className="container-fluid py-10">
         <CustomerEditPanels
           customer={customer}
           callback={updateCustomer}

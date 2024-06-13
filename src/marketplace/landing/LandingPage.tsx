@@ -55,10 +55,10 @@ export const LandingPage: FC<{}> = () => {
           <OfferingsSearchBox />
         </div>
       </LandingHeroSection>
-      <div className="container-xxl mt-20 mb-10">
+      <div className="container-fluid mt-20 mb-10">
         <CategoriesList />
       </div>
-      <div className="container-xxl mb-20">
+      <div className="container-fluid mb-20">
         <OfferingsGroup />
       </div>
     </div>

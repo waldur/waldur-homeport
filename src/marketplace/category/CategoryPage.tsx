@@ -49,11 +49,11 @@ export const CategoryPage: FunctionComponent = () => {
   }
 
   return (
-    <div className="marketplace-category-page">
+    <>
       <HeroSection item={category.data} />
-      <div className="container-xxl py-20">
+      <div className="container-fluid py-20">
         <CategoryOfferingsList category={category.data} />
       </div>
-    </div>
+    </>
   );
 };

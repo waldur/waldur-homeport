@@ -149,7 +149,7 @@ const StatisticProgressItem = ({ item }: { item: StatisticItem }) => {
 export const OfferingDetailsStatistics: FunctionComponent = () => {
   return (
     <div className="offering-statistics bg-body">
-      <div className="container-xxl">
+      <div className="container-fluid">
         <Row className="pt-14 pb-6">
           {dummyData.map((item, i) => (
             <Col xs={6} sm={3} xl key={i}>

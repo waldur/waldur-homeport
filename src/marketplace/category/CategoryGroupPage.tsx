@@ -45,11 +45,11 @@ export const CategoryGroupPage: FunctionComponent = () => {
   }
 
   return (
-    <div className="marketplace-category-page">
+    <>
       <HeroSection item={categoryGroup.data} />
-      <div className="container-xxl py-20">
+      <div className="container-fluid py-20">
         <CategoryGroupOfferingsList categoryGroup={categoryGroup.data} />
       </div>
-    </div>
+    </>
   );
 };

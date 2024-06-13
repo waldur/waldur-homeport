@@ -99,7 +99,7 @@ export const PageBarTabs: FC<PageBarTabsProps> = (props) => {
 
   return (
     <div className="page-bar-container bg-body shadow-sm">
-      <div className="container-xxl">
+      <div className="container-fluid">
         <div className="d-flex scroll-x pt-2">
           <div className="d-flex align-items-center w-100">
             {tabs.map((tab) => (

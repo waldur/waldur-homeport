@@ -55,13 +55,13 @@ export const PublicCallsPage: FunctionComponent = () => {
   });
 
   return (
-    <div className="public-calls-page">
+    <>
       <LandingHeroSection
         header={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
         title={translate('Calls for proposals')}
         backgroundImage={background}
       />
-      <div className="container-xxl mt-20 mb-10">
+      <div className="container-fluid mt-20 mb-10">
         <Table<Call>
           title={translate('Calls for proposals')}
           {...tableProps}
@@ -133,6 +133,6 @@ export const PublicCallsPage: FunctionComponent = () => {
           filters={<CallAllFiltersWithDefaultState />}
         />
       </div>
-    </div>
+    </>
   );
 };

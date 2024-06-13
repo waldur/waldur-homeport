@@ -64,7 +64,7 @@ export const OrganizationUpdateContainer: FunctionComponent = () => {
   ) : canEdit ? (
     <PageBarProvider>
       <CustomerManagePageBar />
-      <div className="container-xxl py-10">
+      <div className="container-fluid py-10">
         <CustomerEditPanels
           customer={customer}
           canUpdate={true}

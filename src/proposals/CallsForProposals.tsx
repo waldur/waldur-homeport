@@ -20,7 +20,7 @@ export const CallsForProposals: FunctionComponent = () => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (
-    <div className="public-calls-page">
+    <>
       {showExperimentalUiComponents && (
         <NewbiesGuideNotification
           guideState="calls-for-proposals-dashboard"
@@ -55,6 +55,6 @@ export const CallsForProposals: FunctionComponent = () => {
       <div className="container-fluid my-14">
         <CallsAvailableOfferingsList />
       </div>
-    </div>
+    </>
   );
 };
