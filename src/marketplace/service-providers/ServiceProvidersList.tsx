@@ -41,6 +41,7 @@ export const ServiceProvidersList: FunctionComponent = () => {
       verboseName={translate('Service providers')}
       hasQuery={true}
       showPageSizeSelector={true}
+      standalone
     />
   );
 };

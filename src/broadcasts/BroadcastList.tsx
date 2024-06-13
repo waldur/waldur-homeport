@@ -73,6 +73,7 @@ export const BroadcastList: FunctionComponent<{}> = () => {
       }
       hasQuery={true}
       title={translate('Broadcasts')}
+      standalone
     />
   );
 };

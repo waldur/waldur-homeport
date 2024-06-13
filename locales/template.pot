@@ -647,16 +647,10 @@ msgstr ""
 msgid "All actions"
 msgstr ""
 
-#: src/proposals/CallsAvailableOfferingsPage.tsx
-msgid "All available offerings"
-msgstr ""
-
-#: src/proposals/PublicCallsPage.tsx
 #: src/proposals/routes.ts
 msgid "All calls"
 msgstr ""
 
-#: src/marketplace/category/AllOfferingsList.tsx
 #: src/marketplace/category/utils.ts
 #: src/marketplace/landing/OfferingsGroup.tsx
 msgid "All offerings"
@@ -5852,11 +5846,6 @@ msgstr ""
 msgid "Marketplace UUID"
 msgstr ""
 
-#: src/marketplace/category/CategoryGroupPage.tsx
-#: src/marketplace/category/CategoryPage.tsx
-msgid "Marketplace offerings"
-msgstr ""
-
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 msgid "Mass move resources"
 msgstr ""
@@ -7063,6 +7052,7 @@ msgstr ""
 #: src/broadcasts/BroadcastExpandableRow.tsx
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
+#: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/category/utils.ts
 #: src/marketplace/landing/OfferingsGroup.tsx
 #: src/marketplace/offerings/OfferingBreadcrumbs.tsx
@@ -9635,7 +9625,6 @@ msgstr ""
 #: src/customer/routes.ts
 #: src/marketplace/details/OfferingResourcesList.tsx
 #: src/marketplace/offerings/OfferingDetailsUIView.tsx
-#: src/marketplace/resources/list/CategoryResourcesContainer.tsx
 #: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
@@ -12106,7 +12095,7 @@ msgstr ""
 msgid "There are no plans"
 msgstr ""
 
-#: src/project/ProjectBreadcrumbs.tsx
+#: src/project/ProjectPopoverToggle.tsx
 msgid "There are no projects."
 msgstr ""
 
@@ -12126,7 +12115,7 @@ msgstr ""
 msgid "There are no resources available."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceBreadcrumbs.tsx
+#: src/marketplace/resources/details/ResourcePopoverToggle.tsx
 msgid "There are no resources."
 msgstr ""
 
@@ -12397,11 +12386,11 @@ msgstr ""
 msgid "Type in name of offering or provider"
 msgstr ""
 
-#: src/project/ProjectBreadcrumbs.tsx
+#: src/project/ProjectPopoverToggle.tsx
 msgid "Type in name of project"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourceBreadcrumbs.tsx
+#: src/marketplace/resources/details/ResourcePopoverToggle.tsx
 msgid "Type in name of resource"
 msgstr ""
 
@@ -15318,10 +15307,6 @@ msgstr ""
 
 #: src/marketplace/offerings/details/ConnectionStatusIndicator.tsx
 msgid "{agent} - {status}. Last request: {time}"
-msgstr ""
-
-#: src/marketplace/resources/list/CategoryResourcesContainer.tsx
-msgid "{category} resources"
 msgstr ""
 
 #: src/customer/dashboard/CustomerDashboardChart.tsx

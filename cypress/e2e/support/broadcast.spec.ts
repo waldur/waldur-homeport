@@ -41,11 +41,7 @@ describe('Broadcast', () => {
   });
 
   it('renders title', () => {
-    cy.get('div.card-title.h5')
-      .should('exist')
-      .within(() => {
-        cy.get('span.me-2').should('exist').should('contain', 'Broadcast');
-      });
+    cy.get('h1').should('contain', 'Broadcast');
   });
 
   it('Create a broadcast', () => {

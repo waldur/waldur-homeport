@@ -5,7 +5,6 @@ import { useAsync } from 'react-use';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getCategory } from '@waldur/marketplace/common/api';
-import { useTitle } from '@waldur/navigation/title';
 
 import { CategoryResourcesList } from './CategoryResourcesList';
 
@@ -21,11 +20,6 @@ export const CategoryResourcesContainer: React.FC = () => {
       }),
     [category_uuid],
   );
-  useTitle(
-    value
-      ? translate('{category} resources', { category: value.title })
-      : translate('Resources'),
-  );
 
   if (loading) {
     return <LoadingSpinner />;
@@ -36,6 +30,7 @@ export const CategoryResourcesContainer: React.FC = () => {
       <CategoryResourcesList
         columns={value.columns}
         category_uuid={category_uuid}
+        category_title={value.title}
         standalone
       />
     );

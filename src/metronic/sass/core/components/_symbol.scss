@@ -15,12 +15,6 @@
     background-color: if(isDarkMode(), #ffffff, inherit);
   }
 
-  // Darkmode background in providers
-  .providers-brands & {
-    background-color: if(isDarkMode(), #ffffff, inherit);
-    padding: if(isDarkMode(), 0 24px, inherit);
-  }
-
   // Label
   .symbol-label {
     display: flex;

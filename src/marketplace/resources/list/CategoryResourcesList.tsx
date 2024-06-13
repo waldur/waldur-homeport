@@ -24,6 +24,7 @@ import { resourcesListRequiredFields } from './utils';
 
 interface OwnProps {
   category_uuid: string;
+  category_title: string;
   columns: CategoryColumn[];
   standalone;
 }
@@ -113,6 +114,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
   return (
     <Table
       {...props}
+      title={ownProps.category_title}
       columns={columns}
       verboseName={translate('Resources')}
       hoverableRow={({ row }) => (

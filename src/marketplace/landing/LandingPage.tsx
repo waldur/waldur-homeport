@@ -14,7 +14,6 @@ import {
   useFullPage,
   useToolbarActions,
 } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
 
 import { CategoriesList } from './CategoriesList';
 import { PageBarFilters } from './filter/PageBarFilters';
@@ -27,7 +26,6 @@ import './LandingPage.scss';
 
 export const LandingPage: FC<{}> = () => {
   useFullPage();
-  useTitle(translate('Marketplace'));
 
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 

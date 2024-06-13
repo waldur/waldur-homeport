@@ -1,5 +1,4 @@
 import { List } from '@phosphor-icons/react';
-import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -35,10 +34,6 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   breadcrumbs,
 }) => {
   const pageTitle = useSelector(getTitle);
-  const router = useRouter();
-  const routerTitle = router.globals.$current.path
-    .find((part) => part.data?.title)
-    ?.data.title();
   const user = useSelector(getUser);
   const imageUrl = fixURL('/icons/sidebar_logo_mobile/');
 
@@ -64,16 +59,16 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           <div className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1">
             {breadcrumbs ? (
               <div className="d-flex align-items-center">{breadcrumbs}</div>
-            ) : pageTitle || routerTitle ? (
+            ) : pageTitle ? (
               <div className="page-title d-flex align-items-center me-3">
-                <h1 className="text-dark fw-boldest fs-2 my-1">
-                  {pageTitle || routerTitle}
-                </h1>
+                <h1 className="text-dark fw-boldest fs-2 my-1">{pageTitle}</h1>
               </div>
-            ) : null}
+            ) : (
+              <SearchToggle />
+            )}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
-            {user && <SearchToggle />}
+            {user && (breadcrumbs || pageTitle) && <SearchToggle />}
             {user && <FavoritePagesDropdown />}
             {user && hasSupport && <QuickIssueDrawerToggle />}
             {user && <ConfirmationDrawerToggle />}

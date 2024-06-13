@@ -33,11 +33,7 @@ describe('Public marketplace pages', () => {
           fixture: 'offerings/hpcCategory.json',
         },
       )
-      .intercept(
-        'GET',
-        '/api/marketplace-category-groups/',
-        [],
-      )
+      .intercept('GET', '/api/marketplace-category-groups/', [])
       .visit('/marketplace/');
   });
 
@@ -65,9 +61,7 @@ describe('Public marketplace pages', () => {
     cy.get('.category-card').contains('HPC').click();
 
     // Wait until page loaded
-    cy.get('.marketplace-category-page .category-hero__main', {
-      timeout: 5000,
-    }).should('contain', 'HPC');
+    cy.contains('h1', 'HPC');
   });
 });
 
@@ -99,9 +93,7 @@ describe('Public calls for proposals pages', () => {
   });
 
   it('Assure that calls landing page is visible without auth token', () => {
-    cy.get('.public-calls-page:contains(Calls for proposals)').should(
-      'be.visible',
-    );
+    cy.get('h1').should('contain', 'Calls for proposals');
     cy.get('#kt_content_container .card-table .card-title').should(
       'contain',
       'Open calls',
@@ -126,15 +118,13 @@ describe('Public calls for proposals pages', () => {
       .should('include', '/calls/3b8fc588d37f434eabc68d2a0b4a4bbe')
       .get('.breadcrumb-item')
       .should('contain', 'Long time call')
-      .get('button').contains('Apply to round');
+      .get('button')
+      .contains('Apply to round');
   });
 
   it('Assure that all calls page is visible without auth token', () => {
     cy.get('.toolbar .menu-link').contains('All calls').click();
-    cy.get('#kt_content_container .card-table .card-title').should(
-      'contain',
-      'Calls for proposals',
-    );
+    cy.get('h1').should('contain', 'Calls for proposals');
     cy.get('#kt_content_container .card-table table tbody tr').should(
       'have.length',
       1,
@@ -145,10 +135,7 @@ describe('Public calls for proposals pages', () => {
     cy.get('#kt_content_container')
       .contains('a.btn', 'Available offerings')
       .click();
-    cy.get('#kt_content_container .card-table .card-title').should(
-      'contain',
-      'Available offerings',
-    );
+    cy.get('h1').should('contain', 'Available offerings');
     cy.get('#kt_content_container .card-table table tbody tr').should(
       'have.length',
       2,

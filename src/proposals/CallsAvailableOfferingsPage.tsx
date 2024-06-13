@@ -11,7 +11,6 @@ import { OfferingsFilter } from '@waldur/marketplace/offerings/list/OfferingsFil
 import { OfferingStateCell } from '@waldur/marketplace/offerings/list/OfferingStateCell';
 import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { useFullPage } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
 import { AvailableOfferingCard } from '@waldur/proposals/AvailableOfferingCard';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
@@ -36,7 +35,6 @@ const mapStateToFilter = createSelector(
 export const CallsAvailableOfferingsPage: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
   useFullPage();
-  useTitle(translate('All available offerings'));
 
   const tableProps = useTable({
     table: 'PublicAvailableOfferingsList',

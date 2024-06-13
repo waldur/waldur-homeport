@@ -9,7 +9,6 @@ import {
   getCategoryGroup,
 } from '@waldur/marketplace/common/api';
 import { useFullPage } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
 
 import { useMarketplacePublicTabs } from '../utils';
 
@@ -32,7 +31,6 @@ export const CategoryGroupPage: FunctionComponent = () => {
       })),
   });
   useFullPage();
-  useTitle(translate('Marketplace offerings'));
 
   useMarketplacePublicTabs();
 

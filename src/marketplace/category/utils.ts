@@ -35,10 +35,6 @@ interface CategoryItem {
 
 export const getCategoryItems = (categories: Category[]) => {
   if (!categories.length) return [];
-  const totalOfferingCount = categories.reduce(
-    (sum, category) => sum + category.offering_count,
-    0,
-  );
   const children: CategoryItem[] = categories
     .sort((a, b) => (a.title > b.title ? 1 : b.title > a.title ? -1 : 0))
     .map((category) => ({
@@ -48,7 +44,7 @@ export const getCategoryItems = (categories: Category[]) => {
     }));
 
   children.unshift({
-    title: `${translate('All offerings')} (${totalOfferingCount})`,
+    title: translate('All offerings'),
     to: 'public.offerings',
     params: { initialMode: 'table' },
   });

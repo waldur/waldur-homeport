@@ -59,6 +59,7 @@ export const SupportFeedbackList: FC = () => {
       enableExport={true}
       showPageSizeSelector={true}
       filters={<SupportFeedbackListFilter />}
+      standalone
     />
   );
 };
