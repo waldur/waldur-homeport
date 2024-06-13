@@ -11,7 +11,7 @@ import {
   TABLE_MARKETPLACE_ORDERS,
 } from '@waldur/marketplace/orders/list/constants';
 import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { useTable } from '@waldur/table/utils';
 
@@ -107,6 +107,7 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
         <OrderProviderActions row={row} refetch={props.fetch} />
       )}
       hasOptionalColumns
+      standalone
     />
   );
 };

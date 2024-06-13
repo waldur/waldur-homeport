@@ -33,6 +33,7 @@ export const BroadcastTemplateList = () => {
         <BroadcastTemplateActions row={row} refetch={tableProps.fetch} />
       )}
       hasQuery={true}
+      standalone
     />
   );
 };

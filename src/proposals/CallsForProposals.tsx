@@ -7,7 +7,6 @@ import { NewbiesGuideNotification } from '@waldur/dashboard/hero/NewbiesGuideNot
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
 import { CallsAvailableOfferingsList } from '@waldur/proposals/CallsAvailableOfferingsList';
 import { CallsForProposalsList } from '@waldur/proposals/CallsForProposalsList';
 
@@ -15,8 +14,6 @@ import background from './proposal-calls.png';
 
 export const CallsForProposals: FunctionComponent = () => {
   useFullPage();
-  useTitle(translate('Calls for proposals'));
-
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (

@@ -76,6 +76,8 @@ export const PublicOfferingsList: FunctionComponent<{
       gridItem={({ row }) => <OfferingCard offering={row} />}
       filters={<AdminOfferingsFilter showCategory={showCategory} />}
       initialMode={initialMode === 'table' ? 'table' : 'grid'}
+      standalone
+      title={translate('Offerings')}
     />
   );
 };

@@ -10,7 +10,6 @@ import { Link } from '@waldur/core/Link';
 import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
 import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
 import { CallAllFiltersWithDefaultState } from '@waldur/proposals/call-management/CallAllFilters';
 import { CALL_FILTER_FORM_ID } from '@waldur/proposals/constants';
 import { Call } from '@waldur/proposals/types';
@@ -44,7 +43,6 @@ export const PublicCallsPage: FunctionComponent = () => {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
   useFullPage();
-  useTitle(translate('All calls'));
 
   const tableProps = useTable({
     table: 'PublicCallsList',

@@ -28,7 +28,7 @@ export const SearchToggle = () => {
       rootClose={true}
     >
       <div
-        className="d-flex align-items-center ms-1 ms-lg-3"
+        className="d-flex align-items-center"
         id="searchContainer"
         onClick={() => setShow(true)}
         aria-hidden="true"

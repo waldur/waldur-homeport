@@ -11,7 +11,6 @@ import {
   useFullPage,
   useToolbarActions,
 } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
 
 import { PageBarFilters } from '../landing/filter/PageBarFilters';
 import { getMarketplaceFilters } from '../landing/filter/store/selectors';
@@ -30,9 +29,6 @@ export const CategoryPage: FunctionComponent = () => {
     queryFn: () => getCategory(category_uuid),
   });
   useFullPage();
-  useTitle(
-    category.data ? category.data.title : translate('Marketplace offerings'),
-  );
 
   useMarketplacePublicTabs();
 
