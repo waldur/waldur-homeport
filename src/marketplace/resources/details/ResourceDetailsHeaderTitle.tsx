@@ -17,11 +17,7 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
   return (
     <>
       <div className="d-flex flex-wrap gap-2 mb-2">
-        <div className="btn btn-flush d-flex align-items-center">
-          <h3 className="text-start text-decoration-underline mb-0 me-2">
-            {resource.name}
-          </h3>
-        </div>
+        <h3 className="mb-0 me-2">{resource.name}</h3>
         <CopyToClipboardButton
           value={resource.name}
           className="text-hover-primary cursor-pointer"
