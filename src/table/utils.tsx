@@ -17,11 +17,11 @@ import { registerTable } from './registry';
 import { getTableState } from './store';
 import { TableFilterActions } from './TableFilterActions';
 import {
-  TableOptionsType,
-  Sorting,
+  DisplayMode,
   ExportConfig,
   FilterItem,
-  DisplayMode,
+  Sorting,
+  TableOptionsType,
 } from './types';
 
 const ExportDialog = lazyComponent(
@@ -211,8 +211,8 @@ export const useTable = (options: TableOptionsType) => {
     [dispatch, table],
   );
   const toggleColumn = useCallback(
-    (index: number, column: any) =>
-      dispatch(actions.toggleColumn(table, index, column)),
+    (index: number, column: any, value?: boolean) =>
+      dispatch(actions.toggleColumn(table, index, column, value)),
     [dispatch, table],
   );
 

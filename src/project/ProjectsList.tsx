@@ -8,7 +8,7 @@ import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
-import { Table, createFetcher } from '@waldur/table';
+import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { formatLongText, useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';

@@ -82,7 +82,7 @@ export interface TableProps<RowType = any> extends TableState {
   validate?: BaseFieldProps['validate'];
   footer?: React.ReactNode;
   hasOptionalColumns?: boolean;
-  toggleColumn?(index, column): void;
+  toggleColumn?(index, column, value?): void;
   initialMode?: 'grid' | 'table';
   standalone?: boolean;
 }
@@ -456,7 +456,7 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
   useEffect(() => {
     if (columns?.length && hasOptionalColumns) {
       columns.forEach((column, index) => {
-        toggleColumn(index, column);
+        toggleColumn(index, column, column.optional ? false : true);
       });
     }
   }, []);

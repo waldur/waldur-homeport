@@ -5,7 +5,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createByKey } from '@waldur/store/utils';
 
 import * as actions from './actions';
-import { TableState, StateTables } from './types';
+import { StateTables, TableState } from './types';
 
 const INITIAL_STATE: TableState = {
   entities: {},
@@ -275,9 +275,14 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         ...state,
         activeColumns: {
           ...state.activeColumns,
-          [action.payload.index]: state.activeColumns[action.payload.index]
-            ? false
-            : action.payload.column.keys,
+          [action.payload.index]:
+            action.payload.value === false
+              ? false
+              : action.payload.value === true
+                ? action.payload.column.keys
+                : state.activeColumns[action.payload.index]
+                  ? false
+                  : action.payload.column.keys,
         },
       };
 
