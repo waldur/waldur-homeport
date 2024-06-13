@@ -6,13 +6,14 @@ import { createSelector } from 'reselect';
 import { OrganizationsFilter } from '@waldur/administration/organizations/OrganizationsFilter';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
+import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
 import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
-import { OrganizationDetails } from '@waldur/customer/list/OrganizationDetails';
 import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
 import { translate } from '@waldur/i18n';
+import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { renderFieldOrDash, useTable } from '@waldur/table/utils';
+import { useTable } from '@waldur/table/utils';
 import { checkCustomerUser, getUser } from '@waldur/workspace/selectors';
 
 import { CUSTOMERS_FILTER_FORM_ID } from '../constants';
@@ -79,24 +80,153 @@ export const BaseOrganizationsList: FunctionComponent<{
       title: translate('Organization'),
       orderField: 'name',
       render: OrganizationField,
+      keys: ['name'],
+    },
+    {
+      title: translate('UUID'),
+      render: ({ row }) => <>{row.uuid}</>,
+      keys: ['uuid'],
+      optional: true,
     },
     {
       title: translate('Abbreviation'),
       orderField: 'abbreviation',
       render: ({ row }) => <>{row.abbreviation || DASH_ESCAPE_CODE}</>,
+      keys: ['abbreviation'],
+    },
+    {
+      title: translate('Organization group'),
+      render: ({ row }) => (
+        <>
+          {row.organization_group_parent_name && (
+            <>
+              {row.organization_group_parent_name} {RIGHT_ARROW_HTML}{' '}
+            </>
+          )}
+          {row.organization_group_name}
+        </>
+      ),
+      keys: ['organization_group_name', 'organization_group_parent_name'],
+      optional: true,
     },
     {
       title: translate('Email'),
       render: ({ row }) => <>{row.email || DASH_ESCAPE_CODE}</>,
+      keys: ['email'],
+    },
+    {
+      title: translate('Agreement number'),
+      render: ({ row }) => <>{row.agreement_number || DASH_ESCAPE_CODE}</>,
+      keys: ['agreement_number'],
+      optional: true,
     },
     {
       title: translate('Projects'),
       render: ({ row }) => <>{row.projects_count || 0}</>,
+      keys: ['projects_count'],
     },
     {
       title: translate('Created'),
       orderField: 'created',
-      render: ({ row }) => <>{renderFieldOrDash(formatDate(row.created))}</>,
+      render: ({ row }) => <>{formatDate(row.created)}</>,
+      keys: ['created'],
+    },
+    {
+      title: translate('Contact details'),
+      render: ({ row }) => <>{row.contact_details || DASH_ESCAPE_CODE}</>,
+      keys: ['contact_details'],
+      optional: true,
+    },
+    {
+      title: translate('Country'),
+      render: ({ row }) =>
+        row.country ? (
+          <CountryFlag countryCode={row.country} />
+        ) : (
+          DASH_ESCAPE_CODE
+        ),
+      keys: ['country'],
+      optional: true,
+    },
+    {
+      title: translate('Address'),
+      render: ({ row }) => <>{row.address || DASH_ESCAPE_CODE}</>,
+      keys: ['address'],
+      optional: true,
+    },
+    {
+      title: translate('Postal'),
+      render: ({ row }) => <>{row.postal || DASH_ESCAPE_CODE}</>,
+      keys: ['postal'],
+      optional: true,
+    },
+    {
+      title: translate('Phone number'),
+      render: ({ row }) => <>{row.phone_number || DASH_ESCAPE_CODE}</>,
+      keys: ['phone_number'],
+      optional: true,
+    },
+    {
+      title: translate('Access subnets'),
+      render: ({ row }) => <>{row.access_subnets || DASH_ESCAPE_CODE}</>,
+      keys: ['access_subnets'],
+      optional: true,
+    },
+    {
+      title: translate('Accounting start date'),
+      render: ({ row }) => (
+        <>
+          {row.accounting_start_date
+            ? formatDateTime(row.accounting_start_date)
+            : DASH_ESCAPE_CODE}
+        </>
+      ),
+      keys: ['access_subnets'],
+      optional: true,
+    },
+    {
+      title: translate('Bank account'),
+      render: ({ row }) => <>{row.bank_account || DASH_ESCAPE_CODE}</>,
+      keys: ['bank_account'],
+      optional: true,
+    },
+    {
+      title: translate('Bank name'),
+      render: ({ row }) => <>{row.bank_name || DASH_ESCAPE_CODE}</>,
+      keys: ['bank_name'],
+      optional: true,
+    },
+    {
+      title: translate('Default tax percent'),
+      render: ({ row }) => <>{row.default_tax_percent || DASH_ESCAPE_CODE}</>,
+      keys: ['default_tax_percent'],
+      optional: true,
+    },
+    {
+      title: translate('Registration code'),
+      render: ({ row }) => <>{row.registration_code || DASH_ESCAPE_CODE}</>,
+      keys: ['registration_code'],
+      optional: true,
+    },
+    {
+      title: translate('VAT code'),
+      render: ({ row }) => <>{row.vat_code || DASH_ESCAPE_CODE}</>,
+      keys: ['vat_code'],
+      optional: true,
+    },
+    {
+      title: translate('Domain'),
+      render: ({ row }) => <>{row.domain || DASH_ESCAPE_CODE}</>,
+      keys: ['domain'],
+      optional: true,
+    },
+    {
+      title: translate('Is service provider'),
+      render: ({ row }) => (
+        <>{row.is_service_provider ? translate('Yes') : translate('No')}</>
+      ),
+      keys: ['is_service_provider'],
+      optional: true,
     },
   ];
 
@@ -110,11 +240,11 @@ export const BaseOrganizationsList: FunctionComponent<{
       showPageSizeSelector={true}
       enableExport={true}
       hoverableRow={({ row }) => <OrganizationEditButton customer={row} />}
-      expandableRow={({ row }) => <OrganizationDetails customer={row} />}
       fullWidth={true}
       standalone={standalone}
       actions={<OrganizationCreateButton />}
       filters={<OrganizationsFilter />}
+      hasOptionalColumns
     />
   );
 };
@@ -136,36 +266,6 @@ const mapStateToFilter = createSelector(
     if (filterValues?.organization_group) {
       filter.organization_group_uuid = filterValues.organization_group.uuid;
     }
-
-    // select required fields
-    filter.field = [
-      'uuid',
-      'name',
-      'abbreviation',
-      'email',
-      'agreement_number',
-      'created',
-      'created_by_full_name',
-      'created_by_username',
-      'contact_details',
-      'country',
-      'address',
-      'postal',
-      'phone_number',
-      'access_subnets',
-      'accounting_start_date',
-      'bank_account',
-      'bank_name',
-      'default_tax_percent',
-      'registration_code',
-      'vat_code',
-      'domain',
-      'is_service_provider',
-      'organization_group_name',
-      'organization_group_parent_name',
-      'projects_count',
-    ];
-
     return filter;
   },
 );

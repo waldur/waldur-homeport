@@ -77,7 +77,6 @@ msgstr ""
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
 #: src/marketplace/offerings/import/SelectOrganizationTab.tsx
 #: src/marketplace/service-providers/ProviderDetailsBody.tsx
@@ -153,7 +152,7 @@ msgstr ""
 msgid "Access subnet has been updated."
 msgstr ""
 
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Access subnets"
 msgstr ""
 
@@ -196,7 +195,7 @@ msgid "Accounting running"
 msgstr ""
 
 #: src/customer/details/CustomerBillingPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Accounting start date"
 msgstr ""
 
@@ -545,8 +544,8 @@ msgid "Additionally service provider can charge for usage of the following compo
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Address"
 msgstr ""
 
@@ -622,10 +621,10 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileUpdateDialog.tsx
 #: src/invoices/details/BillingRecordDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Agreement number"
 msgstr ""
 
@@ -1441,12 +1440,12 @@ msgid "Backing up"
 msgstr ""
 
 #: src/customer/details/CustomerBillingPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Bank account"
 msgstr ""
 
 #: src/customer/details/CustomerBillingPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Bank name"
 msgstr ""
 
@@ -2298,7 +2297,7 @@ msgid "Contact"
 msgstr ""
 
 #: src/customer/details/CustomerContactPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Contact details"
 msgstr ""
 
@@ -2393,8 +2392,8 @@ msgstr ""
 msgid "Could not create organization"
 msgstr ""
 
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectCountryField.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Country"
 msgstr ""
 
@@ -2642,7 +2641,6 @@ msgstr ""
 #: src/administration/hooks/HooksList.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerPermissionsReviewList.tsx
 #: src/invoices/list/InvoicesFilter.tsx
 #: src/issues/IssueSummary.tsx
@@ -3062,7 +3060,7 @@ msgstr ""
 msgid "Default resource termination offset in days"
 msgstr ""
 
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Default tax percent"
 msgstr ""
 
@@ -3472,8 +3470,8 @@ msgstr ""
 msgid "Documents have been removed."
 msgstr ""
 
-#: src/customer/list/OrganizationDetails.tsx
 #: src/openstack/OpenStackTenantForm.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Domain"
 msgstr ""
 
@@ -3790,7 +3788,6 @@ msgstr ""
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/details/CustomerContactPanel.tsx
 #: src/customer/list/ExportAsEmailDialog.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/team/CustomerUsersList.tsx
 #: src/invitations/InvitationsList.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
@@ -5414,7 +5411,7 @@ msgstr ""
 msgid "Is external"
 msgstr ""
 
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Is service provider"
 msgstr ""
 
@@ -6196,7 +6193,6 @@ msgstr ""
 #: src/broadcasts/BroadcastTemplateList.tsx
 #: src/customer/create/CustomerCreateForm.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileCreateDialog.tsx
 #: src/customer/payment-profiles/PaymentProfileDetails.tsx
 #: src/customer/payment-profiles/PaymentProfileList.tsx
@@ -6535,7 +6531,6 @@ msgstr ""
 
 #: src/administration/FeaturesList.tsx
 #: src/customer/cost-policies/CostPoliciesList.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
@@ -6548,6 +6543,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 msgid "No"
 msgstr ""
@@ -7412,8 +7408,8 @@ msgstr ""
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/administration/organizations/OrganizationsFilter.tsx
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/SelectOrganizationGroupField.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Organization group"
 msgstr ""
 
@@ -7878,7 +7874,7 @@ msgid "Phone"
 msgstr ""
 
 #: src/customer/details/CustomerContactPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/support/UserEditForm.tsx
 #: src/user/support/UserList.tsx
 msgid "Phone number"
@@ -8164,7 +8160,7 @@ msgstr ""
 msgid "Positive"
 msgstr ""
 
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Postal"
 msgstr ""
 
@@ -9042,7 +9038,7 @@ msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Registration code"
 msgstr ""
 
@@ -10223,6 +10219,7 @@ msgstr ""
 #: src/navigation/header/search/SearchFilters.tsx
 #: src/navigation/header/search/SearchPopover.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
+#: src/table/TableColumnsButton.tsx
 #: src/table/TableQuery.tsx
 msgid "Search"
 msgstr ""
@@ -12421,10 +12418,10 @@ msgid "URL"
 msgstr ""
 
 #: src/customer/details/CustomerDetailsPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 msgid "UUID"
 msgstr ""
@@ -14272,7 +14269,7 @@ msgid "VAT"
 msgstr ""
 
 #: src/customer/details/CustomerBillingPanel.tsx
-#: src/customer/list/OrganizationDetails.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "VAT code"
 msgstr ""
 
@@ -14632,7 +14629,6 @@ msgstr ""
 
 #: src/administration/FeaturesList.tsx
 #: src/customer/cost-policies/CostPoliciesList.tsx
-#: src/customer/list/OrganizationDetails.tsx
 #: src/customer/list/ServiceProviderFilter.tsx
 #: src/marketplace-checklist/AnswerGroup.tsx
 #: src/marketplace-checklist/AnswersTable.tsx
@@ -14646,6 +14642,7 @@ msgstr ""
 #: src/project/ProjectRemoveDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
+#: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
