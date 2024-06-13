@@ -56,6 +56,7 @@ export interface Column<RowType = any> {
   visible?: boolean;
   /** The keys that are required for optional columns to be fetched. */
   keys?: string[];
+  optional?: boolean;
 }
 
 export type DisplayMode = 'table' | 'grid';

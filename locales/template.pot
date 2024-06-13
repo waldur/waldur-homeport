@@ -1415,7 +1415,7 @@ msgstr ""
 #: src/project/ProjectUpdateForm.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 msgid "Backend ID"
 msgstr ""
 
@@ -3245,6 +3245,7 @@ msgstr ""
 #: src/resource/actions/base.ts
 #: src/resource/summary/ResourceSummaryBase.tsx
 #: src/slurm/RequestLimitsChangeDialog.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/support/UserEditForm.tsx
 msgid "Description"
 msgstr ""
@@ -5086,7 +5087,7 @@ msgid "Incorrect organization details"
 msgstr ""
 
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 msgid "Industry project"
 msgstr ""
 
@@ -6534,7 +6535,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/ExpandablePortRow.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 msgid "No"
 msgstr ""
 
@@ -6845,7 +6846,7 @@ msgstr ""
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 msgid "OECD FoS code"
 msgstr ""
 
@@ -7379,6 +7380,10 @@ msgstr ""
 #: src/marketplace-remote/RemoteOfferingSecretOptions.tsx
 #: src/marketplace-remote/marketplace.ts
 msgid "Organization UUID"
+msgstr ""
+
+#: src/user/affiliations/BaseProjectsList.tsx
+msgid "Organization abbreviation"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
@@ -10319,7 +10324,6 @@ msgstr ""
 #: src/form/themed-select.tsx
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Select"
 msgstr ""
 
@@ -10593,7 +10597,6 @@ msgstr ""
 
 #: src/marketplace/resources/import/OfferingsList.tsx
 #: src/marketplace/resources/import/ResourceRow.tsx
-#: src/user/affiliations/ProjectHoverableRow.tsx
 msgid "Selected"
 msgstr ""
 
@@ -12416,6 +12419,7 @@ msgstr ""
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 msgid "UUID"
 msgstr ""
 
@@ -13017,7 +13021,6 @@ msgid "Unable to load plan details."
 msgstr ""
 
 #: src/project/ProjectExpandableRowContainer.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
 msgid "Unable to load project resources."
 msgstr ""
 
@@ -14637,7 +14640,7 @@ msgstr ""
 #: src/project/ProjectRemoveDialog.tsx
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/resource/summary/ScheduleSummary.tsx
-#: src/user/affiliations/ProjectExpandableRow.tsx
+#: src/user/affiliations/BaseProjectsList.tsx
 #: src/user/hooks/HookRemoveDialog.tsx
 #: src/user/keys/KeyRemoveDialog.tsx
 msgid "Yes"

@@ -46,7 +46,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
             )}
           </Col>
           <Col className="d-flex flex-column justify-content-between">
-            <Row className="mb-6">
+            <Row>
               <Col>
                 <h2 className="mb-0">
                   {project.name}
