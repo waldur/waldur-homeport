@@ -1,4 +1,3 @@
-import { CustomerRole } from '@waldur/core/constants';
 import { BasePermission } from '@waldur/permissions/types';
 import { Quota } from '@waldur/quotas/types';
 
@@ -155,7 +154,6 @@ export interface Customer {
   projects?: Project[];
   payment_profiles?: PaymentProfile[];
   users_count?: number;
-  role: CustomerRole;
 }
 
 export enum WorkspaceType {
