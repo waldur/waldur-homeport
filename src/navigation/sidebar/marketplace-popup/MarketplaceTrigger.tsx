@@ -1,30 +1,44 @@
-import { useIsActive } from '@uirouter/react';
-import classNames from 'classnames';
-import { FunctionComponent } from 'react';
+import { Plus } from '@phosphor-icons/react';
+import { FunctionComponent, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
 
-import { MarketplacePopup } from './MarketplacePopup';
+import './MarketplaceTrigger.scss';
+
+const MarketplacePopup = lazyComponent(
+  () => import('./MarketplacePopup'),
+  'MarketplacePopup',
+);
 
 export const MarketplaceTrigger: FunctionComponent = () => {
-  const isActive = useIsActive('marketplace-offering-public');
+  const dispatch = useDispatch();
+  const openFormDialog = useCallback(
+    () =>
+      dispatch(
+        openModalDialog(MarketplacePopup, {
+          size: 'lg',
+        }),
+      ),
+    [dispatch],
+  );
+
   return (
-    <div
-      className={classNames('menu-item', { here: isActive })}
-      data-kt-menu-trigger="click"
-      data-kt-menu-attach=".page .header"
-      data-kt-menu-placement="bottom-start"
-      data-kt-menu-flip="bottom"
-    >
-      <span className="menu-link">
+    <div className="menu-item add-resource-toggle">
+      <span
+        className="menu-link btn btn-outline btn-outline-default"
+        aria-hidden="true"
+        onClick={openFormDialog}
+      >
         <span className="menu-icon justify-content-center">
           <span className="svg-icon svg-icon-2">
-            <i className="fa fa-plus fs-2" />
+            <Plus weight="bold" />
           </span>
         </span>
         <span className="menu-title">{translate('Add resource')}</span>
       </span>
-      <MarketplacePopup />
     </div>
   );
 };

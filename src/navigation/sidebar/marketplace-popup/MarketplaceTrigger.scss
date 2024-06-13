@@ -1,0 +1,37 @@
+.aside .menu-item.add-resource-toggle {
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+  margin-bottom: 1.75rem;
+
+  .menu-link {
+    border-width: 2px;
+    border-color: var(--bs-primary-300);
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    justify-content: center;
+
+    .menu-title {
+      flex-grow: 0;
+    }
+
+    .menu-icon {
+      width: auto;
+
+      .svg-icon {
+        margin-right: 0;
+
+        svg {
+          height: 1.55rem !important;
+          width: 1.55rem !important;
+        }
+      }
+    }
+
+    &:not(:hover) {
+      .menu-title,
+      .menu-icon .svg-icon svg {
+        color: var(--bs-primary-300) !important;
+      }
+    }
+  }
+}

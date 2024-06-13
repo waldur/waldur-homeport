@@ -9,6 +9,7 @@ import { projectAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
 interface ProjectFilterProps {
   customer_uuid?: string;
+  placeholder?: string;
   isDisabled?: boolean;
 }
 
@@ -27,7 +28,7 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
     name="project"
     component={(fieldProps) => (
       <AsyncPaginate
-        placeholder={translate('Select project...')}
+        placeholder={props.placeholder || translate('Select project...')}
         loadOptions={(query, prevOptions, { page }) =>
           projectAutocomplete(props.customer_uuid, query, prevOptions, page)
         }
@@ -39,6 +40,8 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
         noOptionsMessage={() => translate('No projects')}
         isClearable={true}
         isDisabled={props.isDisabled}
+        className="metronic-select-container"
+        classNamePrefix="metronic-select"
       />
     )}
   />

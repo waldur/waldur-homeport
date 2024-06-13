@@ -3,15 +3,6 @@
 $dark-color: #1f2e23;
 
 #marketplaces-selector {
-  .marketplaces-selector-header {
-    background-color: $dark-color;
-    border-bottom: 1px solid lighten($dark-color, 5%);
-    padding: 2rem 3rem;
-
-    .button-close {
-      display: none;
-    }
-  }
   .welcome-view-container {
     width: 50%;
     flex-basis: 50%;
@@ -26,9 +17,10 @@ $dark-color: #1f2e23;
 
   .list-group {
     border-radius: unset;
+    padding-bottom: 2rem;
   }
   .list-group-item {
-    padding: 1.25rem 1.5rem 1.25rem 3rem;
+    padding: 1.05rem 1.5rem 1.05rem 1.75rem;
     cursor: pointer;
 
     &.active {
@@ -39,20 +31,23 @@ $dark-color: #1f2e23;
   .category-listing {
     width: 50%;
     flex-basis: 50%;
+    border-right: 1px solid $border-color;
 
     .scrollbar {
-      height: calc(100vh - 160px) !important;
+      height: calc(100vh - 270px) !important;
+      min-height: 200px;
+      max-height: 320px;
     }
     .list-group-item {
       background-color: $white !important;
       color: $black !important;
       border: 0;
       &:hover {
-        background-color: #f6faf7 !important;
+        background-color: $gray-50 !important;
         color: unset !important;
       }
       &.active {
-        background-color: #f6faf7 !important;
+        background-color: $gray-50 !important;
         color: unset !important;
         z-index: unset;
       }
@@ -73,15 +68,17 @@ $dark-color: #1f2e23;
     width: 50%;
     flex-basis: 50%;
 
-    .scrollbar {
-      height: calc(100vh - 225px) !important;
+    .scrollbar-view {
+      height: calc(100vh - 270px) !important;
+      min-height: 200px;
+      max-height: 320px;
     }
-    .offerings-footer {
-      position: relative;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 0.75rem;
+
+    .btn-back {
+      display: none;
+    }
+    .divider {
+      display: none;
     }
 
     .list-group-item {
@@ -90,7 +87,7 @@ $dark-color: #1f2e23;
       border: 0;
 
       &:hover {
-        background-color: if(isDarkMode(), $hover-bg, #f6faf7);
+        background-color: if(isDarkMode(), $hover-bg, $gray-50);
       }
       &.active {
         background-color: if(isDarkMode(), $gray-400, $gray-700);
@@ -98,7 +95,7 @@ $dark-color: #1f2e23;
           color: if(isDarkMode(), $dark-inverse, $white);
         }
         .description {
-          color: if(isDarkMode(), $gray-300, $text-muted);
+          color: if(isDarkMode(), $gray-300, $gray-700);
         }
       }
       &.disabled {
@@ -109,7 +106,7 @@ $dark-color: #1f2e23;
         }
       }
       .description {
-        color: $text-muted;
+        color: $gray-700;
       }
     }
   }
@@ -119,8 +116,8 @@ $dark-color: #1f2e23;
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 50%;
-    flex-basis: 50%;
+    min-width: 50%;
+    min-height: 100px;
   }
 }
 
@@ -150,53 +147,52 @@ $dark-color: #1f2e23;
 }
 
 // Mobile screens
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   #marketplaces-selector {
-    transform: translate(10px, 10px) !important;
-    max-width: calc(100% - 20px);
+    .category-listing {
+      width: 100%;
+      height: 50%;
+      border-right: unset;
 
-    .marketplaces-selector-header {
-      padding: 1.5rem;
+      .scrollbar {
+        max-height: 346px;
+      }
+    }
+    .offering-listing {
+      display: none;
+      width: 100%;
+      height: 50%;
 
-      .button-close {
+      .scrollbar-view {
+        max-height: 299px;
+      }
+
+      .btn-back {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .divider {
         display: block;
       }
     }
 
-    .list-group-item {
-      padding: 0.75rem;
-    }
-
-    .category-listing {
-      width: 100%;
-      height: 50%;
-
-      .scrollbar {
-        height: calc((100vh - 90px) / 2) !important;
-      }
-    }
-    .offering-listing {
-      width: 100%;
-      height: 50%;
-
-      .scrollbar {
-        height: calc((100vh - 185px) / 2) !important;
-      }
-    }
-
     .welcome-view-container {
-      width: 100%;
-      height: 50%;
-
-      .welcome-view {
-        height: 100%;
-        min-height: 100px;
-      }
+      display: none;
     }
 
     .message-wrapper {
       width: 100%;
       height: 50%;
+    }
+
+    .category-selected {
+      .category-listing {
+        display: none;
+      }
+      .offering-listing {
+        display: block;
+      }
     }
   }
 }

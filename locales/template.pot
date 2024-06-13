@@ -474,6 +474,7 @@ msgstr ""
 #: src/marketplace/resources/actions/AddResourceButton.tsx
 #: src/marketplace/resources/list/CreateResourceButton.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
 #: src/navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx
 #: src/proposals/proposal/create/resource-requests-step/AddResourceButton.tsx
 msgid "Add resource"
@@ -1836,6 +1837,7 @@ msgstr ""
 #: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/routes.ts
 #: src/marketplace/category/admin/AdminCategoriesPage.tsx
+#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
 msgid "Categories"
 msgstr ""
 
@@ -4285,6 +4287,10 @@ msgstr ""
 msgid "Facility"
 msgstr ""
 
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "Failed"
+msgstr ""
+
 #: src/resource/state/utils.ts
 msgid "Failed to operate with backend."
 msgstr ""
@@ -4321,6 +4327,10 @@ msgstr ""
 #: src/issues/feedback/SupportFeedback.tsx
 #: src/issues/routes.ts
 msgid "Feedback"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "Fetching"
 msgstr ""
 
 #: src/core/InfiniteList.tsx
@@ -4630,6 +4640,10 @@ msgstr ""
 
 #: src/invitations/actions/create/FormButtons.tsx
 msgid "Go back"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
+msgid "Go back to categories"
 msgstr ""
 
 #: src/openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx
@@ -7065,6 +7079,7 @@ msgstr ""
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
 #: src/marketplace/service-providers/ServiceProvidersList.tsx
 #: src/marketplace/service-providers/dashboard/ProviderDashboard.tsx
+#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
 #: src/proposals/details/CallOfferingsCard.tsx
 #: src/proposals/details/PublicCallDetails.tsx
 #: src/proposals/update/CallUpdateContainer.tsx
@@ -10225,16 +10240,16 @@ msgstr ""
 msgid "Search again"
 msgstr ""
 
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Search an offering"
+msgstr ""
+
 #: src/marketplace/resources/actions/ActionDialogBody.tsx
 msgid "Search by name"
 msgstr ""
 
 #: src/invitations/actions/create/RoleAndProjectSelectField.tsx
 msgid "Search for project"
-msgstr ""
-
-#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
-msgid "Search offering..."
 msgstr ""
 
 #: src/navigation/header/search/SearchInput.tsx
@@ -10288,10 +10303,6 @@ msgstr ""
 msgid "See all calls"
 msgstr ""
 
-#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
-msgid "See all offerings"
-msgstr ""
-
 #: src/proposals/round/RoundPageHero.tsx
 msgid "See call"
 msgstr ""
@@ -10331,6 +10342,10 @@ msgstr ""
 msgid "Select a date"
 msgstr ""
 
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Select a project"
+msgstr ""
+
 #: src/customer/list/AccountingPeriodField.tsx
 msgid "Select accounting period"
 msgstr ""
@@ -10341,6 +10356,14 @@ msgstr ""
 
 #: src/rancher/template/SelectControl.tsx
 msgid "Select an option..."
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Select an organization"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/MarketplacePopup.tsx
+msgid "Select an organization and project, then choose a category, an offering, and follow the prompts"
 msgstr ""
 
 #: src/booking/components/WeekdaysGroup.tsx
@@ -10990,10 +11013,6 @@ msgstr ""
 
 #: src/navigation/sidebar/ResourcesMenu.tsx
 msgid "Show {count} more"
-msgstr ""
-
-#: src/navigation/sidebar/marketplace-popup/MarketplacePopupTitle.tsx
-msgid "Showing services available for"
 msgstr ""
 
 #: src/table/TableInfo.tsx
@@ -12057,10 +12076,6 @@ msgstr ""
 
 #: src/marketplace/common/OfferingGrid.tsx
 msgid "There are no offerings in marketplace yet."
-msgstr ""
-
-#: src/navigation/sidebar/marketplace-popup/OfferingsPanel.tsx
-msgid "There are no offerings yet for this category."
 msgstr ""
 
 #: src/marketplace/offerings/import/SelectOfferingTab.tsx
@@ -14893,10 +14908,6 @@ msgstr ""
 msgid "catalogues"
 msgstr ""
 
-#: src/navigation/sidebar/marketplace-popup/MarketplacePopupTitle.tsx
-msgid "change"
-msgstr ""
-
 #: src/marketplace/offerings/PriceList.tsx
 msgid "components"
 msgstr ""
@@ -15326,10 +15337,6 @@ msgstr ""
 msgid "{count} hours"
 msgstr ""
 
-#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
-msgid "{count} items"
-msgstr ""
-
 #: src/dashboard/TeamWidget.tsx
 #: src/marketplace/service-providers/OrganizationProjectsExpandable.tsx
 msgid "{count} members"
@@ -15341,6 +15348,14 @@ msgstr ""
 
 #: src/user/dashboard/UserProfile.tsx
 msgid "{count} more affiliations"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
+msgid "{count} offering"
+msgstr ""
+
+#: src/navigation/sidebar/marketplace-popup/CategoriesPanel.tsx
+msgid "{count} offerings"
 msgstr ""
 
 #: src/marketplace/service-providers/ProjectsCountColumn.tsx

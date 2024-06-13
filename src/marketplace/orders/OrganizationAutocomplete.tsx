@@ -37,6 +37,8 @@ export const OrganizationAutocomplete: FunctionComponent<
           props.noOptionsMessage || translate('No organizations')
         }
         isClearable={true}
+        className="metronic-select-container"
+        classNamePrefix="metronic-select"
       />
     )}
   />

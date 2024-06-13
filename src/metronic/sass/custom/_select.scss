@@ -1,0 +1,86 @@
+.metronic-select-container {
+  .metronic-select {
+    &__control {
+      border-radius: 8px;
+      border-color: $gray-300;
+      font-size: 1.2rem;
+      font-weight: 400;
+
+      &--is-focused,
+      &--is-focused:hover {
+        border-color: $primary-300;
+        box-shadow: 0 0 0 4px rgba($primary-300, 0.25);
+      }
+    }
+
+    &__value-container {
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+    }
+
+    &__placeholder {
+      color: $gray-700;
+    }
+
+    &__indicator {
+      color: $gray-700;
+
+      &-separator {
+        display: none;
+      }
+    }
+
+    // dropdown-indicator rotate
+    &__dropdown-indicator {
+      transition: $rotate-transition;
+      backface-visibility: hidden;
+    }
+    &__control--menu-is-open {
+      .metronic-select__dropdown-indicator {
+        transform: rotateZ(180deg);
+
+        [direction='rtl'] & {
+          transform: rotateZ(-180deg);
+        }
+      }
+    }
+  }
+}
+
+// Menu/List
+.metronic-select__menu {
+  border-radius: 8px !important;
+
+  .metronic-select {
+    &__option {
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &--is-focused,
+      &--is-selected {
+        color: $dark;
+        background-color: $gray-50;
+
+        &:active {
+          background-color: $gray-200;
+        }
+      }
+      &--is-selected::after {
+        display: block;
+        width: 16px;
+        height: 16px;
+        content: ' ';
+        background-image: if(
+          isDarkMode(),
+          url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iI2ZmZmZmZiIgdmlld0JveD0iMCAwIDI1NiAyNTYiPjxwYXRoIGQ9Ik0yMjkuNjYsNzcuNjZsLTEyOCwxMjhhOCw4LDAsMCwxLTExLjMyLDBsLTU2LTU2YTgsOCwwLDAsMSwxMS4zMi0xMS4zMkw5NiwxODguNjksMjE4LjM0LDY2LjM0YTgsOCwwLDAsMSwxMS4zMiwxMS4zMloiPjwvcGF0aD48L3N2Zz4=),
+          url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iIzAwMDAwMCIgdmlld0JveD0iMCAwIDI1NiAyNTYiPjxwYXRoIGQ9Ik0yMjkuNjYsNzcuNjZsLTEyOCwxMjhhOCw4LDAsMCwxLTExLjMyLDBsLTU2LTU2YTgsOCwwLDAsMSwxMS4zMi0xMS4zMkw5NiwxODguNjksMjE4LjM0LDY2LjM0YTgsOCwwLDAsMSwxMS4zMiwxMS4zMloiPjwvcGF0aD48L3N2Zz4=)
+        );
+        background-repeat: no-repeat;
+        background-position: 50%;
+        background-color: transparent;
+      }
+    }
+  }
+}

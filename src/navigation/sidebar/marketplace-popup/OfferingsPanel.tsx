@@ -1,24 +1,64 @@
+import { CaretLeft } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
-import { useState, useCallback, FunctionComponent, useMemo } from 'react';
+import {
+  useState,
+  useCallback,
+  FunctionComponent,
+  useMemo,
+  forwardRef,
+} from 'react';
 import { ListGroupItem, Stack } from 'react-bootstrap';
+import { Scrollbars } from 'react-custom-scrollbars';
+import { FixedSizeList as List } from 'react-window';
+import paginate from 'react-window-paginated';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { Link } from '@waldur/core/Link';
 import { TextWithoutFormatting } from '@waldur/core/TextWithoutFormatting';
 import { Tip } from '@waldur/core/Tooltip';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { Category, Offering } from '@waldur/marketplace/types';
+import { Offering } from '@waldur/marketplace/types';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 
-import { BaseList } from './BaseList';
+import { RECENTLY_ADDED_OFFERINGS_UUID } from './MarketplacePopup';
+import { fetchOfferingsByPage } from './utils';
 
-const EmptyOfferingsPlaceholder: FunctionComponent = () => (
-  <div className="message-wrapper text-danger">
-    {translate('There are no offerings yet for this category.')}
-  </div>
+const PaginatedList = paginate(List);
+
+const CustomScrollbars = ({ onScroll, forwardedRef, style, children }) => {
+  const refSetter = useCallback(
+    (scrollbarsRef) => {
+      if (scrollbarsRef) {
+        forwardedRef(scrollbarsRef.view);
+      } else {
+        forwardedRef(null);
+      }
+    },
+    [forwardedRef],
+  );
+
+  return (
+    <Scrollbars
+      ref={refSetter}
+      style={{ ...style, overflow: 'hidden' }}
+      onScroll={onScroll}
+      className="scrollbar-view"
+    >
+      {children}
+    </Scrollbars>
+  );
+};
+
+const CustomScrollbarsVirtualList = forwardRef((props: any, ref) => (
+  <CustomScrollbars {...props} forwardedRef={ref} />
+));
+
+const VirtualPaginatedList: FunctionComponent<any> = (props) => (
+  <PaginatedList {...props} outerElementType={CustomScrollbarsVirtualList} />
 );
+
+const VIRTUALIZED_SELECTOR_PAGE_SIZE = 20;
 
 const EmptyOfferingListPlaceholder: FunctionComponent = () => (
   <div className="message-wrapper ellipsis">
@@ -27,11 +67,29 @@ const EmptyOfferingListPlaceholder: FunctionComponent = () => (
 );
 
 const OfferingListItem: FunctionComponent<{
-  item: Offering;
+  data;
+  style;
+  item: Offering & { isFetching; isFailed };
   onClick;
   selectedItem: Offering;
-}> = ({ item, onClick, selectedItem }) => {
+}> = ({ item, onClick, selectedItem, style }) => {
   const abbreviation = useMemo(() => getItemAbbreviation(item), [item]);
+
+  if (item.isFetching) {
+    return (
+      <ListGroupItem className="text-center" style={style}>
+        <span className="text-muted">{translate('Fetching')}</span>
+      </ListGroupItem>
+    );
+  }
+
+  if (item.isFailed) {
+    return (
+      <ListGroupItem className="text-center" style={style}>
+        <span className="text-muted">{translate('Failed')}</span>
+      </ListGroupItem>
+    );
+  }
 
   return (
     <Tip
@@ -46,10 +104,11 @@ const OfferingListItem: FunctionComponent<{
         className={classNames({
           active: selectedItem && item.uuid === selectedItem.uuid,
         })}
+        style={style}
         onClick={() => onClick(item)}
         disabled={item.state === 'Paused'}
       >
-        <Stack direction="horizontal" gap={4}>
+        <Stack direction="horizontal" gap={3}>
           {item.image ? (
             <div className="symbol symbol-40px">
               <img src={item.image} alt="offering" />
@@ -57,8 +116,8 @@ const OfferingListItem: FunctionComponent<{
           ) : (
             <div className="symbol">
               <ImagePlaceholder
-                width="50px"
-                height="50px"
+                width="40px"
+                height="40px"
                 backgroundColor="#e2e2e2"
               >
                 {abbreviation && (
@@ -70,7 +129,7 @@ const OfferingListItem: FunctionComponent<{
             </div>
           )}
           <div>
-            <h6 className="title ellipsis mb-0">{truncate(item.name, 40)}</h6>
+            <h5 className="title ellipsis mb-1">{truncate(item.name, 40)}</h5>
             <p className="description ellipsis fs-7 mb-0">
               <TextWithoutFormatting html={truncate(item.description, 120)} />
             </p>
@@ -82,9 +141,13 @@ const OfferingListItem: FunctionComponent<{
 };
 
 export const OfferingsPanel: FunctionComponent<{
-  offerings: Offering[];
-  category: Category;
-}> = ({ offerings, category }) => {
+  lastOfferings: Offering[];
+  customer;
+  project;
+  category;
+  filter;
+  goBack;
+}> = ({ lastOfferings, customer, project, category, filter, goBack }) => {
   const [selectedOffering, selectOffering] = useState<Offering>();
 
   const router = useRouter();
@@ -99,36 +162,62 @@ export const OfferingsPanel: FunctionComponent<{
     [router, selectOffering],
   );
 
+  const getPage = (page) => {
+    if (category && category.uuid === RECENTLY_ADDED_OFFERINGS_UUID) {
+      return Promise.resolve({
+        pageElements: lastOfferings,
+        itemCount: lastOfferings.length,
+      });
+    } else if (!category) {
+      return Promise.resolve({
+        pageElements: [],
+        itemCount: 0,
+      });
+    }
+    return fetchOfferingsByPage(
+      customer,
+      project,
+      category,
+      filter,
+      page + 1,
+      VIRTUALIZED_SELECTOR_PAGE_SIZE,
+    );
+  };
+
   return (
     <div className="offering-listing">
-      {offerings?.length > 0 ? (
-        <>
-          <BaseList
-            items={offerings}
-            selectedItem={selectedOffering}
-            selectItem={handleOfferingClick}
-            EmptyPlaceholder={EmptyOfferingListPlaceholder}
-            ItemComponent={OfferingListItem}
-          />
-          <div className="offerings-footer">
-            <div className="text-center">
-              <span data-kt-menu-dismiss="true">
-                <Link
-                  state="public.marketplace-category"
-                  params={{
-                    category_uuid: category?.uuid,
-                  }}
-                  className="btn btn-dark"
-                >
-                  {translate('See all offerings')}
-                </Link>
-              </span>
-            </div>
-          </div>
-        </>
-      ) : (
-        <EmptyOfferingsPlaceholder />
-      )}
+      <button
+        type="button"
+        className="btn-back text-anchor fw-bold p-2 ms-5 my-2"
+        onClick={goBack}
+      >
+        <CaretLeft size={14} weight="bold" />
+        {translate('Go back to categories')}
+      </button>
+      <div className="divider border-bottom mx-7" />
+      <h6 className="text-gray-700 fw-bold mt-4 mb-2 ms-7">
+        {translate('Offerings')}
+      </h6>
+      <VirtualPaginatedList
+        height={500}
+        itemSize={68}
+        getPage={getPage}
+        key={`${filter}-${customer?.uuid}-${project?.uuid}-${category?.uuid}`}
+        elementsPerPage={VIRTUALIZED_SELECTOR_PAGE_SIZE}
+        noResultsRenderer={EmptyOfferingListPlaceholder}
+      >
+        {(listItemProps) => {
+          const item = listItemProps.data[listItemProps.index];
+          return (
+            <OfferingListItem
+              {...listItemProps}
+              item={item}
+              selectedItem={selectedOffering}
+              onClick={handleOfferingClick}
+            />
+          );
+        }}
+      </VirtualPaginatedList>
     </div>
   );
 };
