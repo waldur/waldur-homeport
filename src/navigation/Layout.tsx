@@ -73,7 +73,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       hero: PageHero ? DefaultLayoutConfig.hero : false,
       outstandingBar: PageBar ? DefaultLayoutConfig.outstandingBar : false,
       content: {
-        width: fullPage || PageHero ? 'fluid' : 'fixed',
+        width: 'fluid',
       },
     });
   }, [showToolbar, fullPage, PageHero, PageBar, ExtraToolbar, currentUser]);

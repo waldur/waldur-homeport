@@ -49,10 +49,10 @@ export const CallsForProposals: FunctionComponent = () => {
           </Link>
         </div>
       </LandingHeroSection>
-      <div className="container my-14">
+      <div className="container-fluid my-14">
         <CallsForProposalsList />
       </div>
-      <div className="container my-14">
+      <div className="container-fluid my-14">
         <CallsAvailableOfferingsList />
       </div>
     </div>
