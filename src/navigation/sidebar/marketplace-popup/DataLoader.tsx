@@ -97,7 +97,7 @@ export const DataLoader = ({ filter, customer, project }) => {
         />
       )}
 
-      {selectedCategory && project && (
+      {selectedCategory && (
         <OfferingsPanel
           lastOfferings={lastOfferings}
           customer={customer}
