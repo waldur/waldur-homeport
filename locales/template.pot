@@ -1596,7 +1596,6 @@ msgstr ""
 #: src/customer/payments/PaymentUpdateDialog.tsx
 #: src/invoices/list/MarkAsPaidDialog.tsx
 #: src/marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx
-#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
 msgid "Browse"
 msgstr ""
 
@@ -6537,6 +6536,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/update/attributes/utils.tsx
+#: src/marketplace/resources/options/ResourceOptionsCard.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -10504,10 +10504,6 @@ msgstr ""
 
 #: src/invitations/actions/RoleGroup.tsx
 msgid "Select role..."
-msgstr ""
-
-#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
-msgid "Select root category"
 msgstr ""
 
 #: src/table/SavedFilterSelect.tsx
@@ -14565,10 +14561,6 @@ msgstr ""
 msgid "Welcome to"
 msgstr ""
 
-#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
-msgid "Welcome to marketplace"
-msgstr ""
-
 #: src/i18n/constants.ts
 msgid "Welcome to service catalog"
 msgstr ""
@@ -14635,6 +14627,7 @@ msgstr ""
 #: src/marketplace-checklist/ChecklistCustomer.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
 #: src/marketplace/offerings/update/attributes/utils.tsx
+#: src/marketplace/resources/options/ResourceOptionsCard.tsx
 #: src/modal/ConfirmationDialog.tsx
 #: src/openstack/openstack-network/OpenStackNetworkSummary.tsx
 #: src/openstack/openstack-subnet/OpenStackSubNetSummary.tsx
@@ -14821,10 +14814,6 @@ msgstr ""
 
 #: src/auth/AuthHeader.tsx
 msgid "Your session has expired, please enter credentials to continue."
-msgstr ""
-
-#: src/navigation/sidebar/marketplace-popup/WelcomeView.tsx
-msgid "Your source for everything as a service."
 msgstr ""
 
 #: src/administration/service-desk/ZammadSettings.tsx

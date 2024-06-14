@@ -48,8 +48,7 @@ export const OfferingOptionsSectionPure: FC<
             <tbody>
               {data?.order?.map((key) => (
                 <tr key={key}>
-                  <td className="col-md-3">{data.options[key]?.label}</td>
-                  <td className="col-md-9">
+                  <td className="col-md-3">
                     {
                       FIELD_TYPES.find(
                         (fieldType) =>
@@ -57,6 +56,8 @@ export const OfferingOptionsSectionPure: FC<
                       ).label
                     }
                   </td>
+                  <td className="col-md-3">{data.options[key]?.label}</td>
+                  <td className="col-md-6">{data.options[key]?.help_text}</td>
                   <td className="row-actions">
                     <div>
                       <EditOptionButton

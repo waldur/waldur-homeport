@@ -3,18 +3,6 @@
 $dark-color: #1f2e23;
 
 #marketplaces-selector {
-  .welcome-view-container {
-    width: 50%;
-    flex-basis: 50%;
-
-    .welcome-view {
-      background-image: linear-gradient($dark-color, $primary-active);
-      height: 50%;
-      min-height: 150px;
-      max-height: 500px;
-    }
-  }
-
   .list-group {
     border-radius: unset;
     padding-bottom: 2rem;
@@ -175,10 +163,6 @@ $dark-color: #1f2e23;
       .divider {
         display: block;
       }
-    }
-
-    .welcome-view-container {
-      display: none;
     }
 
     .message-wrapper {

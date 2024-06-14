@@ -16,6 +16,25 @@ interface ResourceOptionsCardProps {
   isLoading?;
 }
 
+const OptionRow = ({ option, value, resource, refetch }) => (
+  <tr>
+    <td className="col-md-3">{option.label}</td>
+    <td className="col-md-3">{option.help_text}</td>
+    <td className="col-md-6">
+      {value === true ? translate('Yes') : translate('No')}
+    </td>
+    <td className="row-actions">
+      <div>
+        <UpdateResourceOptionButton
+          resource={resource}
+          refetch={refetch}
+          option={option}
+        />
+      </div>
+    </td>
+  </tr>
+);
+
 export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
   const resourceOptions = props.offering.resource_options;
   if (!resourceOptions?.order?.length) {
@@ -34,26 +53,16 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
           <Table bordered={true} hover={true} responsive={true}>
             <tbody>
               {resourceOptions.order?.map((key) => (
-                <tr key={key}>
-                  <td className="col-md-3">
-                    {resourceOptions.options[key]?.label}
-                  </td>
-                  <td className="col-md-9">
-                    {(props.resource.options && props.resource.options[key]) ||
-                      'N/A'}
-                  </td>
-                  <td className="row-actions">
-                    <div>
-                      <UpdateResourceOptionButton
-                        {...props}
-                        option={{
-                          ...resourceOptions?.options[key],
-                          name: key,
-                        }}
-                      />
-                    </div>
-                  </td>
-                </tr>
+                <OptionRow
+                  key={key}
+                  option={{
+                    ...resourceOptions.options[key],
+                    name: key,
+                  }}
+                  value={props.resource.options && props.resource.options[key]}
+                  resource={props.resource}
+                  refetch={props.refetch}
+                />
               ))}
             </tbody>
           </Table>

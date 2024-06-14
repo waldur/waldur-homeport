@@ -12,7 +12,6 @@ import { CategoriesPanel } from './CategoriesPanel';
 import { RECENTLY_ADDED_OFFERINGS_UUID } from './MarketplacePopup';
 import { OfferingsPanel } from './OfferingsPanel';
 import { fetchCategories, fetchLastNOfferings } from './utils';
-import { WelcomeView } from './WelcomeView';
 
 export const DataLoader = ({ filter, customer, project }) => {
   const [selectedCategory, selectCategory] = useState<Category>();
@@ -98,9 +97,7 @@ export const DataLoader = ({ filter, customer, project }) => {
         />
       )}
 
-      {!selectedCategory ? (
-        <WelcomeView />
-      ) : (
+      {selectedCategory && project && (
         <OfferingsPanel
           lastOfferings={lastOfferings}
           customer={customer}
