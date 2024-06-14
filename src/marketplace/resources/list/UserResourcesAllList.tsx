@@ -10,7 +10,6 @@ import { useTable } from '@waldur/table/utils';
 import { Project } from '@waldur/workspace/types';
 
 import { ResourcesAllListTable } from './ResourcesAllListTable';
-import { useResourcesListBanner } from './useResourcesListBanner';
 import { resourcesListRequiredFields } from './utils';
 
 const mapStateToFilter = createSelector(
@@ -50,7 +49,6 @@ interface UserResourcesAllListProps extends Partial<TableProps> {
 }
 
 export const UserResourcesAllList: FC<UserResourcesAllListProps> = (props) => {
-  useResourcesListBanner();
   const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: `UserResourcesAllList`,
