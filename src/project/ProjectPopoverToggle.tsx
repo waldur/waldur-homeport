@@ -6,9 +6,15 @@ import { Breadcrumb, OverlayTrigger, Popover } from 'react-bootstrap';
 import { fixURL } from '@waldur/core/api';
 import { BreadcrumbDropdown } from '@waldur/core/BreadcrumbDropdown';
 import { translate } from '@waldur/i18n';
+import { useFavoritePages } from '@waldur/navigation/header/favorite-pages/FavoritePageService';
 import { SearchItem } from '@waldur/navigation/header/search/SearchItem';
 
-const ProjectListItem = ({ row }) => (
+const ProjectListItem = ({
+  row,
+  addFavoritePage,
+  removeFavorite,
+  isFavorite,
+}) => (
   <SearchItem
     key={row.uuid}
     to="project.dashboard"
@@ -16,8 +22,37 @@ const ProjectListItem = ({ row }) => (
     title={row.name}
     subtitle={row.customer_name}
     image={row.image}
+    addFavoritePage={addFavoritePage}
+    removeFavorite={removeFavorite}
+    isFavorite={isFavorite}
   />
 );
+
+const ProjectBreadcrumbPopover = ({ project }) => {
+  const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
+
+  return (
+    <BreadcrumbDropdown
+      api={fixURL('/projects/')}
+      queryField="query"
+      params={{
+        customer: project.customer_uuid,
+        field: ['name', 'uuid', 'image'],
+      }}
+      RowComponent={({ row }) => (
+        <ProjectListItem
+          row={row}
+          addFavoritePage={addFavoritePage}
+          removeFavorite={removeFavorite}
+          isFavorite={isFavorite}
+        />
+      )}
+      placeholder={translate('Type in name of project') + '...'}
+      emptyMessage={translate('There are no projects.')}
+    />
+  );
+};
+
 export const ProjectPopoverToggle = ({ project }) => {
   const [show, setShow] = useState(false);
   const handleClickOutside = useCallback(
@@ -51,19 +86,7 @@ export const ProjectPopoverToggle = ({ project }) => {
       show={show}
       overlay={
         <Popover id="ProjectBreadcrumbPopover">
-          {show && (
-            <BreadcrumbDropdown
-              api={fixURL('/projects/')}
-              queryField="query"
-              params={{
-                customer: project.customer_uuid,
-                field: ['name', 'uuid', 'image'],
-              }}
-              RowComponent={ProjectListItem}
-              placeholder={translate('Type in name of project') + '...'}
-              emptyMessage={translate('There are no projects.')}
-            />
-          )}
+          {show && <ProjectBreadcrumbPopover project={project} />}
         </Popover>
       }
       rootClose={true}

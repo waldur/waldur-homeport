@@ -368,7 +368,7 @@ msgstr ""
 msgid "Add component"
 msgstr ""
 
-#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
+#: src/navigation/header/search/SearchPopover.tsx
 msgid "Add current page"
 msgstr ""
 
@@ -515,10 +515,6 @@ msgstr ""
 
 #: src/proposals/proposal/create-review/steps/FormSummaryStep.tsx
 msgid "Add your comment here"
-msgstr ""
-
-#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
-msgid "Add your favorite pages here"
 msgstr ""
 
 #: src/marketplace/details/DetailsPage.tsx
@@ -4294,11 +4290,6 @@ msgstr ""
 msgid "Failed to operate with backend."
 msgstr ""
 
-#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
-msgid "Favorite pages"
-msgstr ""
-
-#: src/navigation/header/FavoritePagesDropdown.tsx
 #: src/navigation/header/search/SearchPopover.tsx
 msgid "Favourites"
 msgstr ""
@@ -6637,10 +6628,6 @@ msgstr ""
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
-msgstr ""
-
-#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
-msgid "No page added yet"
 msgstr ""
 
 #: src/navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx
@@ -10131,14 +10118,6 @@ msgstr ""
 
 #: src/proposals/proposal/create-review/steps/FormSummaryStep.tsx
 msgid "Save summary"
-msgstr ""
-
-#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
-msgid "Saved"
-msgstr ""
-
-#: src/navigation/header/favorite-pages/FavoritePagesContainer.tsx
-msgid "Saving"
 msgstr ""
 
 #: src/rancher/cluster/ClusterWorkloadsList.tsx
@@ -15091,10 +15070,6 @@ msgstr ""
 
 #: src/user/UserOfferingList.tsx
 msgid "remote accounts"
-msgstr ""
-
-#: src/navigation/header/favorite-pages/FavoritePageItem.tsx
-msgid "remove"
 msgstr ""
 
 #: src/marketplace-remote/BaseProjectUpdateRequestsList.tsx

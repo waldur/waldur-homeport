@@ -6,9 +6,10 @@ import { fixURL } from '@waldur/core/api';
 import { BreadcrumbDropdown } from '@waldur/core/BreadcrumbDropdown';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { useFavoritePages } from '@waldur/navigation/header/favorite-pages/FavoritePageService';
 import { SearchItem } from '@waldur/navigation/header/search/SearchItem';
 
-const ResourceRow = ({ row }) => (
+const ResourceRow = ({ row, addFavoritePage, removeFavorite, isFavorite }) => (
   <SearchItem
     to="marketplace-resource-details"
     params={{
@@ -17,24 +18,38 @@ const ResourceRow = ({ row }) => (
     image={row.offering_thumbnail}
     title={row.name}
     subtitle={formatDateTime(row.created)}
+    addFavoritePage={addFavoritePage}
+    removeFavorite={removeFavorite}
+    isFavorite={isFavorite}
   />
 );
 
-const ResourceBreadcrumbPopover = ({ resource }) => (
-  <BreadcrumbDropdown
-    api={fixURL('/marketplace-resources/')}
-    queryField="query"
-    params={{
-      state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-      project_uuid: resource.project_uuid,
-      category_uuid: resource.category_uuid,
-      field: ['name', 'uuid', 'offering_thumbnail', 'state', 'created'],
-    }}
-    RowComponent={ResourceRow}
-    placeholder={translate('Type in name of resource') + '...'}
-    emptyMessage={translate('There are no resources.')}
-  />
-);
+const ResourceBreadcrumbPopover = ({ resource }) => {
+  const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
+
+  return (
+    <BreadcrumbDropdown
+      api={fixURL('/marketplace-resources/')}
+      queryField="query"
+      params={{
+        state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+        project_uuid: resource.project_uuid,
+        category_uuid: resource.category_uuid,
+        field: ['name', 'uuid', 'offering_thumbnail', 'state', 'created'],
+      }}
+      RowComponent={({ row }) => (
+        <ResourceRow
+          row={row}
+          addFavoritePage={addFavoritePage}
+          removeFavorite={removeFavorite}
+          isFavorite={isFavorite}
+        />
+      )}
+      placeholder={translate('Type in name of resource') + '...'}
+      emptyMessage={translate('There are no resources.')}
+    />
+  );
+};
 
 export const ResourcePopoverToggle = ({ resource }) => {
   const [show, setShow] = useState(false);

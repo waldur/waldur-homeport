@@ -1,8 +1,8 @@
 import {
   Buildings,
   ClipboardText,
+  Plus,
   SquaresFour,
-  Star,
 } from '@phosphor-icons/react';
 import { groupBy, isEmpty } from 'lodash';
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
@@ -11,7 +11,7 @@ import { Badge, Button, Col, Nav, Row, Tab } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
-import { FavoritePageService } from '../favorite-pages/FavoritePageService';
+import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 
 import { NoResult } from './NoResult';
 import { SearchFilters } from './SearchFilters';
@@ -24,11 +24,13 @@ interface SearchPopoverProps {
   query: string;
   show: boolean;
   setQuery;
+  close(): void;
 }
 
-interface TabContentProps {
+interface TabContentProps extends Partial<ReturnType<typeof useFavoritePages>> {
   result: SearchResult;
   clearSearch(): void;
+  close(): void;
 }
 
 const recentItems = [
@@ -63,10 +65,17 @@ const SectionNoResult = () => (
   <p className="text-muted mb-5 mx-5">{translate('No result found')}</p>
 );
 
-const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
-  const getFavPagesList = () => FavoritePageService.list().reverse();
-  const [favPages] = useState(() => getFavPagesList().slice(0, 3));
-
+const AllResultsTabContent = ({
+  result,
+  clearSearch,
+  favPages,
+  addCurrentPageFavorite,
+  isCurrentPageFavorite,
+  addFavoritePage,
+  removeFavorite,
+  isFavorite,
+  close,
+}: TabContentProps) => {
   return (
     <Row className="mx-0">
       <Col md={12} lg={6} className="py-5 px-0">
@@ -113,13 +122,25 @@ const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
                 title={page.title}
                 subtitle={page.subtitle}
                 image={page.image}
-                badge={
-                  <Star size={20} weight="fill" className="text-warning" />
-                }
+                isFavorite={isFavorite} // always true
+                removeFavorite={removeFavorite}
+                onClick={close}
               />
             ))
           ) : (
             <SectionNoResult />
+          )}
+          {!isCurrentPageFavorite && (
+            <Button
+              variant="link"
+              className="d-flex ms-8"
+              onClick={addCurrentPageFavorite}
+            >
+              <span className="svg-icon svg-icon-2">
+                <Plus />
+              </span>
+              {translate('Add current page')}
+            </Button>
           )}
         </div>
       </Col>
@@ -138,6 +159,10 @@ const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
                       params={{ uuid: item.uuid }}
                       title={item.name}
                       image={item.image}
+                      isFavorite={isFavorite}
+                      addFavoritePage={addFavoritePage}
+                      removeFavorite={removeFavorite}
+                      onClick={close}
                     />
                   ))
               ) : (
@@ -157,6 +182,10 @@ const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
                       title={item.name}
                       subtitle={item.customer_name}
                       image={item.image}
+                      isFavorite={isFavorite}
+                      addFavoritePage={addFavoritePage}
+                      removeFavorite={removeFavorite}
+                      onClick={close}
                     />
                   ))
               ) : (
@@ -178,6 +207,10 @@ const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
                       image={resource.offering_thumbnail}
                       title={resource.name}
                       subtitle={`${resource.customer_name} / ${resource.project_name}`}
+                      isFavorite={isFavorite}
+                      addFavoritePage={addFavoritePage}
+                      removeFavorite={removeFavorite}
+                      onClick={close}
                     />
                   ))
               ) : (
@@ -195,7 +228,14 @@ const AllResultsTabContent = ({ result, clearSearch }: TabContentProps) => {
   );
 };
 
-const OrganizationsTabContent = ({ result, clearSearch }: TabContentProps) => {
+const OrganizationsTabContent = ({
+  result,
+  clearSearch,
+  isFavorite,
+  addFavoritePage,
+  removeFavorite,
+  close,
+}: TabContentProps) => {
   return (
     <>
       {result.data?.customersCount ? (
@@ -207,6 +247,10 @@ const OrganizationsTabContent = ({ result, clearSearch }: TabContentProps) => {
               params={{ uuid: item.uuid }}
               title={item.name}
               image={item.image}
+              isFavorite={isFavorite}
+              addFavoritePage={addFavoritePage}
+              removeFavorite={removeFavorite}
+              onClick={close}
             />
           ))}
         </div>
@@ -221,7 +265,14 @@ const OrganizationsTabContent = ({ result, clearSearch }: TabContentProps) => {
   );
 };
 
-const ProjectsTabContent = ({ result, clearSearch }: TabContentProps) => {
+const ProjectsTabContent = ({
+  result,
+  clearSearch,
+  isFavorite,
+  addFavoritePage,
+  removeFavorite,
+  close,
+}: TabContentProps) => {
   return (
     <>
       {result.data?.projectsCount ? (
@@ -234,6 +285,10 @@ const ProjectsTabContent = ({ result, clearSearch }: TabContentProps) => {
               title={item.name}
               subtitle={item.customer_name}
               image={item.image}
+              isFavorite={isFavorite}
+              addFavoritePage={addFavoritePage}
+              removeFavorite={removeFavorite}
+              onClick={close}
             />
           ))}
         </div>
@@ -248,7 +303,14 @@ const ProjectsTabContent = ({ result, clearSearch }: TabContentProps) => {
   );
 };
 
-const ResourcesTabContent = ({ result, clearSearch }: TabContentProps) => {
+const ResourcesTabContent = ({
+  result,
+  clearSearch,
+  isFavorite,
+  addFavoritePage,
+  removeFavorite,
+  close,
+}: TabContentProps) => {
   const resourceGroups = result.data?.resources
     ? groupBy(result.data.resources, 'category_title')
     : null;
@@ -269,6 +331,10 @@ const ResourcesTabContent = ({ result, clearSearch }: TabContentProps) => {
                   image={resource.offering_thumbnail}
                   title={resource.name}
                   subtitle={`${resource.customer_name} / ${resource.project_name}`}
+                  isFavorite={isFavorite}
+                  addFavoritePage={addFavoritePage}
+                  removeFavorite={removeFavorite}
+                  onClick={close}
                 />
               ))}
             </Fragment>
@@ -288,7 +354,16 @@ export const SearchPopover = ({
   query,
   show,
   setQuery,
+  close,
 }: SearchPopoverProps) => {
+  const {
+    favPages,
+    isCurrentPageFavorite,
+    addCurrentPageFavorite,
+    addFavoritePage,
+    removeFavorite,
+    isFavorite,
+  } = useFavoritePages();
   const [menuState, setMenuState] = useState<'main' | 'advanced'>('main');
 
   const refSearch = useRef<HTMLInputElement>();
@@ -364,19 +439,47 @@ export const SearchPopover = ({
           </div>
           <Tab.Content className="overflow-auto min-h-200px">
             <Tab.Pane eventKey="all">
-              <AllResultsTabContent result={result} clearSearch={clearSearch} />
+              <AllResultsTabContent
+                result={result}
+                clearSearch={clearSearch}
+                favPages={favPages}
+                addCurrentPageFavorite={addCurrentPageFavorite}
+                isCurrentPageFavorite={isCurrentPageFavorite}
+                isFavorite={isFavorite}
+                addFavoritePage={addFavoritePage}
+                removeFavorite={removeFavorite}
+                close={close}
+              />
             </Tab.Pane>
             <Tab.Pane eventKey="organizations">
               <OrganizationsTabContent
                 result={result}
                 clearSearch={clearSearch}
+                isFavorite={isFavorite}
+                addFavoritePage={addFavoritePage}
+                removeFavorite={removeFavorite}
+                close={close}
               />
             </Tab.Pane>
             <Tab.Pane eventKey="projects">
-              <ProjectsTabContent result={result} clearSearch={clearSearch} />
+              <ProjectsTabContent
+                result={result}
+                clearSearch={clearSearch}
+                isFavorite={isFavorite}
+                addFavoritePage={addFavoritePage}
+                removeFavorite={removeFavorite}
+                close={close}
+              />
             </Tab.Pane>
             <Tab.Pane eventKey="resources">
-              <ResourcesTabContent result={result} clearSearch={clearSearch} />
+              <ResourcesTabContent
+                result={result}
+                clearSearch={clearSearch}
+                isFavorite={isFavorite}
+                addFavoritePage={addFavoritePage}
+                removeFavorite={removeFavorite}
+                close={close}
+              />
             </Tab.Pane>
           </Tab.Content>
         </Tab.Container>
