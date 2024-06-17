@@ -66,7 +66,7 @@ export const UnifiedSidebar = () => {
       ) : null}
       <OrganizationsListMenu />
       <ProjectsListMenu />
-      <ResourcesMenu />
+      <ResourcesMenu user={user} />
       <ReportingMenu />
       <CallPublicMenu />
       <MenuItem
