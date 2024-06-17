@@ -34,7 +34,7 @@ export const CategoryPage: FunctionComponent = () => {
 
   const filters = useSelector(getMarketplaceFilters);
   useToolbarActions(<MarketplaceLandingFilter />);
-  useExtraToolbar(filters.length ? <PageBarFilters /> : null);
+  useExtraToolbar(filters.length ? <PageBarFilters /> : null, [filters]);
 
   if (category.isLoading) {
     return <LoadingSpinner />;
