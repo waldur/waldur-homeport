@@ -1,11 +1,12 @@
 import { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 
 import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
+import { setMarketplaceFilter } from '@waldur/marketplace/landing/filter/store/actions';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -41,6 +42,21 @@ export const MarketplacePopup = reduxForm<FormData>({
     ) {
       dispatch(props.change('project', undefined));
     }
+  }, [formValues, props.change]);
+
+  useEffect(() => {
+    if (!formValues) {
+      return;
+    }
+    dispatch(
+      setMarketplaceFilter({
+        name: 'organization',
+        value: formValues.organization,
+      }),
+    );
+    dispatch(
+      setMarketplaceFilter({ name: 'project', value: formValues.project }),
+    );
   }, [formValues, props.change]);
 
   const applyQuery = useCallback(
