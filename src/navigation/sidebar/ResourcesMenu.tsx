@@ -89,10 +89,11 @@ export const useOfferingCategories = (anonymous = false) => {
   return categories;
 };
 
-export const ResourcesMenu = ({ anonymous = false }) => {
+export const ResourcesMenu = ({ anonymous = false, user }) => {
   const categories = useOfferingCategories(anonymous);
+  // We will clean counters on impersonation (on change user)
   const { data: counters = {} } = useQuery(
-    ['ResourcesMenu', 'Counters'],
+    ['ResourcesMenu', 'Counters', user?.uuid],
     getGlobalCounters,
     { refetchOnWindowFocus: false },
   );
