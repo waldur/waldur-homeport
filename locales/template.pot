@@ -1664,7 +1664,6 @@ msgstr ""
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
 #: src/proposals/proposal/CustomerProposalsList.tsx
-#: src/proposals/proposal/ProposalsListExpandableRow.tsx
 #: src/proposals/proposal/ProposalsTableFilter.tsx
 #: src/proposals/proposal/UserProposalsList.tsx
 #: src/proposals/review/CustomerReviewsList.tsx
@@ -2657,6 +2656,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectsList.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
 #: src/proposals/round/proposals/ProposalsList.tsx
 #: src/proposals/utils.ts
 #: src/rancher/cluster/ClusterIngressesList.tsx
@@ -3545,6 +3545,10 @@ msgstr ""
 #: src/proposals/round/submission/RoundSubmissionSection.tsx
 #: src/proposals/update/rounds/WizardFormFirstPage.tsx
 msgid "Duration"
+msgstr ""
+
+#: src/proposals/proposal/UserProposalsList.tsx
+msgid "Duration in days"
 msgstr ""
 
 #: src/openstack/OpenStackPluginOptionsForm.tsx
@@ -6259,7 +6263,6 @@ msgstr ""
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/call-management/CallManagementPage.tsx
-#: src/proposals/proposal/ProposalsListExpandableRow.tsx
 #: src/proposals/proposal/create-review/CreateReviewDialog.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
 #: src/proposals/review/ReviewsListExpandableRow.tsx
@@ -6847,6 +6850,7 @@ msgstr ""
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 msgid "OECD FoS code"
 msgstr ""
@@ -9938,7 +9942,6 @@ msgid "Roles and permissions"
 msgstr ""
 
 #: src/proposals/proposal/CustomerProposalsList.tsx
-#: src/proposals/proposal/ProposalsListExpandableRow.tsx
 #: src/proposals/review/ReviewsListExpandableRow.tsx
 #: src/proposals/round/RoundPageHero.tsx
 msgid "Round"
@@ -12416,6 +12419,7 @@ msgstr ""
 #: src/customer/details/CustomerDetailsPanel.tsx
 #: src/marketplace/resources/details/ResourceSummary.tsx
 #: src/marketplace/resources/list/ExpandableResourceSummary.tsx
+#: src/proposals/proposal/UserProposalsList.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
