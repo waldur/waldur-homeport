@@ -1,17 +1,31 @@
 import { Question } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { Nav, Tab } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
+import { checkCustomerUser, getUser } from '@waldur/workspace/selectors';
 
 import { Call } from '../types';
+import { checkIsCallManager } from '../utils';
 
 export const CallTabs = ({ call }: { call: Call }) => {
   const router = useRouter();
   const { state } = useCurrentStateAndParams();
   const goTo = (state) =>
     router.stateService.go(state, { call_uuid: call.uuid });
+
+  const canEdit = useSelector((state: RootState) => {
+    const user = getUser(state);
+    if (checkCustomerUser({ uuid: call.customer_uuid } as any, user))
+      return true;
+    if (checkIsCallManager(call, user)) return true;
+    return false;
+  });
+
+  if (!canEdit) return null;
 
   return (
     <Tab.Container defaultActiveKey={state.name} onSelect={goTo}>

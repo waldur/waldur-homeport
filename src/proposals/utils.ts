@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 
 import { translate } from '@waldur/i18n';
+import { RoleEnum } from '@waldur/permissions/enums';
 import {
   Call,
   CallOfferingState,
@@ -13,6 +14,7 @@ import {
   RoundFormData,
   RoundReviewStrategy,
 } from '@waldur/proposals/types';
+import { User } from '@waldur/workspace/types';
 
 export const getRoundReviewStrategyOptions = () =>
   [
@@ -173,3 +175,11 @@ export const getRoundInitialValues = (round: Round): RoundFormData => ({
   // FIX: we don't have timezone in round object on the backend?
   timezone: DateTime.local().zoneName,
 });
+
+export const checkIsCallManager = (call: Call, user: User): boolean =>
+  !!user?.permissions?.find(
+    (permission) =>
+      permission.scope_type === 'call' &&
+      permission.scope_uuid === call?.uuid &&
+      permission.role_name === RoleEnum.CALL_MANAGER,
+  );
