@@ -63,6 +63,7 @@ export interface Call {
   state: CallState;
   manager: string;
   customer_name: string;
+  customer_uuid: string;
   created_by: string;
 
   backend_id?: string;
