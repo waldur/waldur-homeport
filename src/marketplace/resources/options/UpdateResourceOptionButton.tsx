@@ -1,10 +1,14 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
+import { getUser } from '@waldur/workspace/selectors';
 
 const UpdateResourceOptionDialog = lazyComponent(
   () => import('./UpdateResourceOptionDialog'),
@@ -16,6 +20,7 @@ export const UpdateResourceOptionButton: FunctionComponent<{
   option;
   refetch?;
 }> = (props) => {
+  const user = useSelector(getUser);
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
@@ -25,8 +30,18 @@ export const UpdateResourceOptionButton: FunctionComponent<{
     );
   };
   return (
-    <Button onClick={callback} size="sm" className="me-3">
-      <i className="fa fa-pencil" /> {translate('Edit')}
+    <Button
+      onClick={callback}
+      size="sm"
+      disabled={
+        !hasPermission(user, {
+          permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,
+          projectId: props.resource.project_uuid,
+          customerId: props.resource.customer_uuid,
+        })
+      }
+    >
+      <PencilSimple /> {translate('Edit')}
     </Button>
   );
 };
