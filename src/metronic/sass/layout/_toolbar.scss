@@ -77,6 +77,14 @@
         #{get($header-config, fixed, height, desktop)} + var(--kt-toolbar-height)
       );
     }
+    // With header & fixed toolbar & enabled page bar modes
+    .header-fixed.toolbar-fixed.outstanding-bar-enabled & {
+      top: calc(
+        #{get($header-config, fixed, height, desktop)} + var(
+            --kt-toolbar-height
+          ) + var(--kt-pagebar-height)
+      );
+    }
   }
 
   .toolbar,
@@ -157,6 +165,15 @@
     .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed & {
       top: calc(
         #{get($header-config, fixed, height, tablet-and-mobile)} + var(--kt-toolbar-height-tablet-and-mobile)
+      );
+    }
+    // With header & fixed toolbar & enabled page bar modes
+    .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled
+      & {
+      top: calc(
+        #{get($header-config, fixed, height, tablet-and-mobile)} + var(
+            --kt-toolbar-height-tablet-and-mobile
+          ) + var(--kt-pagebar-height)
       );
     }
   }

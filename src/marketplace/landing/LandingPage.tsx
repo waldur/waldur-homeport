@@ -33,7 +33,7 @@ export const LandingPage: FC<{}> = () => {
 
   const filters = useSelector(getMarketplaceFilters);
   useToolbarActions(<MarketplaceLandingFilter />);
-  useExtraToolbar(filters.length ? <PageBarFilters /> : null);
+  useExtraToolbar(filters.length ? <PageBarFilters /> : null, [filters]);
 
   return (
     <div className="marketplace-landing-page">
