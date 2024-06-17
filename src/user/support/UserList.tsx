@@ -148,7 +148,7 @@ export const UserList: FunctionComponent = () => {
       'email',
       'phone_number',
       'organization',
-      'customer_permissions',
+      'permissions',
     ],
   });
 
