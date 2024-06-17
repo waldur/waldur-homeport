@@ -10,6 +10,8 @@ import { CategoryLink } from '../links/CategoryLink';
 
 import { CategoryCard } from './CategoryCard';
 
+const ITEMS_IN_ROW = 6;
+
 export const CategoriesList: FC = () => {
   const categories = useCategories();
   const [showAll, setShowAll] = useState(false);
@@ -32,7 +34,9 @@ export const CategoriesList: FC = () => {
     );
   }
 
-  const items = showAll ? categories.data : categories.data.slice(0, 6);
+  const items = showAll
+    ? categories.data
+    : categories.data.slice(0, ITEMS_IN_ROW);
 
   return (
     <>
@@ -46,17 +50,19 @@ export const CategoriesList: FC = () => {
           </Col>
         ))}
       </Row>
-      <div className="d-flex flex-column justify-content-center flex-grow-1">
-        <Button
-          variant="link"
-          size="sm"
-          className="text-decoration-underline my-1"
-          role="button"
-          onClick={() => setShowAll((value) => !value)}
-        >
-          {showAll ? translate('See less') : translate('See more')}
-        </Button>
-      </div>
+      {categories.data.length >= ITEMS_IN_ROW ? (
+        <div className="d-flex flex-column justify-content-center flex-grow-1">
+          <Button
+            variant="link"
+            size="sm"
+            className="text-decoration-underline my-1"
+            role="button"
+            onClick={() => setShowAll((value) => !value)}
+          >
+            {showAll ? translate('See less') : translate('See more')}
+          </Button>
+        </div>
+      ) : null}
     </>
   );
 };
