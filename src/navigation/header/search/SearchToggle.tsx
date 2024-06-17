@@ -22,6 +22,7 @@ export const SearchToggle = () => {
             query={query}
             show={show}
             setQuery={setQuery}
+            close={() => setShow(false)}
           />
         </Popover>
       }

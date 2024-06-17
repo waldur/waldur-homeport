@@ -10,7 +10,6 @@ import { getUser } from '@waldur/workspace/selectors';
 import { getTitle } from '../title';
 
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
-import { FavoritePagesDropdown } from './FavoritePagesDropdown';
 import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './search/SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
@@ -69,7 +68,6 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             {user && (breadcrumbs || pageTitle) && <SearchToggle />}
-            {user && <FavoritePagesDropdown />}
             {user && hasSupport && <QuickIssueDrawerToggle />}
             {user && <ConfirmationDrawerToggle />}
             <div className="d-flex align-items-center ms-1 ms-lg-3">
