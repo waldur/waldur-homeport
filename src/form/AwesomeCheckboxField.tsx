@@ -11,11 +11,12 @@ interface AwesomeCheckboxFieldProps extends FormField {
   className?: string;
   checked?: boolean;
   tooltip?: ReactNode;
+  help_text?: ReactNode;
 }
 
 export const AwesomeCheckboxField: FunctionComponent<
   AwesomeCheckboxFieldProps
-> = ({ input, label, className, tooltip }) => (
+> = ({ input, label, className, tooltip, help_text }) => (
   <div
     className={classNames(
       'form-check form-switch form-check-custom form-check-solid',
@@ -33,6 +34,7 @@ export const AwesomeCheckboxField: FunctionComponent<
         </Tip>
       )}
       <span className="fw-bold">{label}</span>
+      {help_text && <p className="text-muted">{help_text}</p>}
     </label>
   </div>
 );

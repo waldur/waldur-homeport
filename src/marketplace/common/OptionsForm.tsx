@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { required } from '@waldur/core/validators';
 import {
   FormContainer,
-  TextField,
-  StringField,
-  SelectField,
   NumberField,
+  SelectField,
+  StringField,
+  TextField,
 } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
@@ -67,7 +67,8 @@ export const OptionsForm = ({ options, submitting }: OptionsFormProps) => {
               OptionField = AwesomeCheckboxField;
               params = {
                 hideLabel: true,
-                tooltip: option.help_text,
+                help_text: option.help_text,
+                tooltip: '',
               };
               break;
 
