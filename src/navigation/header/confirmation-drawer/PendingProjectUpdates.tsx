@@ -9,6 +9,5 @@ export const PendingProjectUpdates = () => (
   <BaseProjectUpdateRequestsList
     filter={filter}
     title={translate('Project updates')}
-    fullWidth
   />
 );

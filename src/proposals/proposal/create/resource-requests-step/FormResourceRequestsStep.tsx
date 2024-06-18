@@ -135,7 +135,6 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
         }
         hasActionBar={false}
         expandableRow={ResourceRequestExpandableRow}
-        fullWidth
         hoverableRow={({ row, fetch }) =>
           !readOnlyMode ? (
             <ResourceRequestItemActions

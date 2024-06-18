@@ -6630,7 +6630,6 @@ msgid "No organization groups"
 msgstr ""
 
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
-#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
@@ -10425,7 +10424,6 @@ msgstr ""
 #: src/auth/saml2/ProviderField.tsx
 #: src/marketplace/details/CustomerField.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
-#: src/marketplace/resources/list/RelatedCustomerFilter.tsx
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "Select organization..."

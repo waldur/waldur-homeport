@@ -240,7 +240,6 @@ export const BaseOrganizationsList: FunctionComponent<{
       showPageSizeSelector={true}
       enableExport={true}
       hoverableRow={({ row }) => <OrganizationEditButton customer={row} />}
-      fullWidth={true}
       standalone={standalone}
       actions={<OrganizationCreateButton />}
       filters={<OrganizationsFilter />}

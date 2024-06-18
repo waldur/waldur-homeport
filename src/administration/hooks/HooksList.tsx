@@ -110,7 +110,6 @@ export const HooksList: FunctionComponent = () => {
       enableExport={true}
       hasQuery={true}
       filters={<HooksListFilter />}
-      fullWidth
     />
   );
 };

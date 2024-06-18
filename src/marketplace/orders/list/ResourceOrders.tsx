@@ -71,7 +71,6 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
       columns={columns}
       verboseName={translate('orders')}
       hoverableRow={CancelTerminationOrderButton}
-      fullWidth
     />
   );
 };

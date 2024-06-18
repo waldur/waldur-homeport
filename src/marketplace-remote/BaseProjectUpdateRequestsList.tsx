@@ -11,9 +11,8 @@ import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable
 export const BaseProjectUpdateRequestsList: FunctionComponent<{
   filter;
   title?;
-  fullWidth?;
   filters?;
-}> = ({ filter, title, fullWidth, filters }) => {
+}> = ({ filter, title, filters }) => {
   const props = useTable({
     table: 'marketplace-project-update-requests',
     fetchData: createFetcher('marketplace-project-update-requests'),
@@ -50,7 +49,6 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
       )}
       expandableRow={ProjectUpdateRequestExpandable}
       verboseName={translate('requests')}
-      fullWidth={fullWidth}
       filters={filters}
     />
   );

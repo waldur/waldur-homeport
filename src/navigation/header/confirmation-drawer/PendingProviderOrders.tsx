@@ -63,7 +63,6 @@ export const PendingProviderOrders: React.FC<{}> = () => {
         hoverableRow={({ row }) => (
           <OrderProviderActions row={row} refetch={tableProps.fetch} />
         )}
-        fullWidth={true}
       />
       <BulkProviderActions orders={tableProps.rows} />
     </div>

@@ -61,7 +61,6 @@ export const ResourceRequestsSummary = ({
           ]}
           hasActionBar={false}
           expandableRow={ResourceRequestExpandableRow}
-          fullWidth
         />
         <FieldReviewComments
           reviews={reviews}

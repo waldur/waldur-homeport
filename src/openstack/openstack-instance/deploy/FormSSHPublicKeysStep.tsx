@@ -77,7 +77,6 @@ export const FormSSHPublicKeysStep = (props: FormStepProps) => {
         ]}
         verboseName={translate('SSH keys')}
         hasActionBar={false}
-        fullWidth
         hoverable
         fieldType="radio"
         fieldName="attributes.ssh_public_key"
