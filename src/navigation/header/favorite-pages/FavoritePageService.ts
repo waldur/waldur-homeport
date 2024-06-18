@@ -9,15 +9,22 @@ import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getItem, removeItem, setItem } from '@waldur/auth/AuthStorage';
+import { translate } from '@waldur/i18n';
 import {
   getCategory,
   getProviderOffering,
   getPublicOffering,
 } from '@waldur/marketplace/common/api';
+import { Resource } from '@waldur/marketplace/resources/types';
 import { getTitle } from '@waldur/navigation/title';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import store from '@waldur/store/store';
-import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getProject,
+  getResource,
+  getUser,
+} from '@waldur/workspace/selectors';
 import { Customer, Project, UserDetails } from '@waldur/workspace/types';
 
 const FAVORITE_PAGES_KEY = 'waldur/favorite/pages';
@@ -36,6 +43,7 @@ interface FavoritePageContext {
   customer?: Customer;
   user?: UserDetails;
   project?: Project;
+  resource?: Resource;
 }
 
 class FavoritePageServiceClass {
@@ -86,7 +94,9 @@ const getDataForFavoritePage = async (
   params: RawParams,
   context: FavoritePageContext,
 ) => {
-  let title, subtitle, image;
+  let title = store.getState().title?.title;
+  let subtitle = store.getState().title?.subtitle;
+  let image;
   if (state.name.startsWith('marketplace-offering') && params.offering_uuid) {
     const offering = await getProviderOffering(params.offering_uuid, {
       params: { field: ['name', 'customer_name', 'thumbnail'] },
@@ -106,7 +116,7 @@ const getDataForFavoritePage = async (
     image = offering.thumbnail;
   } else if (
     (state.name.startsWith('marketplace-category') ||
-      state.name === 'public.marketplace-category') &&
+      ['public.marketplace-category', 'user-resources'].includes(state.name)) &&
     params.category_uuid
   ) {
     const category = await getCategory(params.category_uuid, {
@@ -114,6 +124,9 @@ const getDataForFavoritePage = async (
     });
     subtitle = category.title;
     image = category.icon;
+    if (state.name === 'user-resources') {
+      title = translate('List of resources');
+    }
   } else if (isDescendantOf('profile', state)) {
     image = context.user?.image;
   } else if (isDescendantOf('admin', state)) {
@@ -136,6 +149,12 @@ const getDataForFavoritePage = async (
     title = context.project?.name;
     image = context.project?.image;
     subtitle = titleFromState;
+  } else if (state.name === 'all-user-resources') {
+    title = translate('List of all resources');
+  } else if (state.name === 'marketplace-resource-details') {
+    title = context.resource?.name;
+    image = context.resource?.offering_thumbnail;
+    subtitle = `${context.resource?.customer_name} / ${context.resource?.project_name}`;
   } else {
     image = '';
   }
@@ -150,6 +169,7 @@ export const useFavoritePages = () => {
   const user = useSelector(getUser) as UserDetails;
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
+  const resource = useSelector(getResource);
 
   const getPagesList = () => FavoritePageService.list().reverse();
   const [favPages, setFavPages] = useState(() => getPagesList());
@@ -199,6 +219,7 @@ export const useFavoritePages = () => {
       user,
       customer,
       project,
+      resource,
     }).then((data) => {
       const newPage = {
         title: data.title || altTitle,

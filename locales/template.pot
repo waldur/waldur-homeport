@@ -5663,8 +5663,16 @@ msgstr ""
 msgid "List importable resources"
 msgstr ""
 
+#: src/navigation/header/favorite-pages/FavoritePageService.ts
+msgid "List of all resources"
+msgstr ""
+
 #: src/administration/service-desk/AtlassianSettings.tsx
 msgid "List of excluded attachment types"
+msgstr ""
+
+#: src/navigation/header/favorite-pages/FavoritePageService.ts
+msgid "List of resources"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
