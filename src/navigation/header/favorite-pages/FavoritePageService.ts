@@ -116,7 +116,9 @@ const getDataForFavoritePage = async (
     image = offering.thumbnail;
   } else if (
     (state.name.startsWith('marketplace-category') ||
-      ['public.marketplace-category', 'user-resources'].includes(state.name)) &&
+      ['public.marketplace-category', 'category-resources'].includes(
+        state.name,
+      )) &&
     params.category_uuid
   ) {
     const category = await getCategory(params.category_uuid, {
@@ -124,7 +126,7 @@ const getDataForFavoritePage = async (
     });
     subtitle = category.title;
     image = category.icon;
-    if (state.name === 'user-resources') {
+    if (state.name === 'category-resources') {
       title = translate('List of resources');
     }
   } else if (isDescendantOf('profile', state)) {
@@ -149,7 +151,7 @@ const getDataForFavoritePage = async (
     title = context.project?.name;
     image = context.project?.image;
     subtitle = titleFromState;
-  } else if (state.name === 'all-user-resources') {
+  } else if (state.name === 'all-resources') {
     title = translate('List of all resources');
   } else if (state.name === 'marketplace-resource-details') {
     title = context.resource?.name;

@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
-import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
+import { syncFiltersToURL } from '@waldur/core/filters';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -9,10 +10,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { OfferingFilter } from './OfferingFilter';
 import { ProjectFilter } from './ProjectFilter';
 import { RelatedCustomerFilter } from './RelatedCustomerFilter';
-import {
-  NON_TERMINATED_STATES,
-  ResourceStateFilter,
-} from './ResourceStateFilter';
+import { ResourceStateFilter } from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
 import { OfferingChoice } from './types';
 
@@ -59,15 +57,22 @@ const PureProjectResourcesFilter = ({ category_uuid }) => {
       <TableFilterItem title={translate('State')} name="state">
         <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
       </TableFilterItem>
+      <TableFilterItem
+        title={translate('Include terminated')}
+        name="include_terminated"
+      >
+        <Field
+          name="include_terminated"
+          component={AwesomeCheckboxField}
+          label={translate('Include terminated')}
+        />
+      </TableFilterItem>
     </>
   );
 };
 
-export const UserResourcesFilter = reduxForm<FormData, { category_uuid }>({
-  form: 'UserResourcesFilter',
+export const AllResourcesFilter = reduxForm<FormData, { category_uuid }>({
+  form: 'AllResourcesFilter',
   onChange: syncFiltersToURL,
-  initialValues: getInitialValues({
-    state: NON_TERMINATED_STATES,
-  }),
   destroyOnUnmount: false,
 })(PureProjectResourcesFilter);

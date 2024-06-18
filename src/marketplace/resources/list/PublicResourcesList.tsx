@@ -27,6 +27,7 @@ import { PublicResourceLink } from './PublicResourceLink';
 import { PublicResourcesFilter } from './PublicResourcesFilter';
 import { PublicResourcesLimits } from './PublicResourcesLimits';
 import { ResourceStateField } from './ResourceStateField';
+import { NON_TERMINATED_STATES } from './ResourceStateFilter';
 
 interface ResourceFilter {
   state?: any;
@@ -34,6 +35,7 @@ interface ResourceFilter {
   project?: Project;
   category?: Category;
   offering?: Offering;
+  include_terminated?: boolean;
 }
 
 export const TableComponent: FunctionComponent<any> = (props) => {
@@ -148,7 +150,7 @@ export const mapStateToFilter = createSelector(
   isOwnerOrStaff,
   (state, formId) => getFormValues(formId)(state),
   (customer, user, isServiceManager, ownerOrStaff, filters: ResourceFilter) => {
-    const filter: Record<string, string | boolean> = {};
+    const filter: Record<string, string | string[] | boolean> = {};
 
     // Public resources should only contain resources from billable offerings.
     filter.billable = true;
@@ -156,22 +158,27 @@ export const mapStateToFilter = createSelector(
     if (customer) {
       filter.provider_uuid = customer.uuid;
     }
-    if (filters) {
-      if (filters.offering) {
-        filter.offering_uuid = filters.offering.uuid;
+    if (filters?.offering) {
+      filter.offering_uuid = filters.offering.uuid;
+    }
+    if (filters?.state) {
+      filter.state = filters.state.map((option) => option.value) as string[];
+      if (filters?.include_terminated) {
+        filter.state = [...filter.state, 'Terminated'];
       }
-      if (filters.state) {
-        filter.state = filters.state.map((option) => option.value);
+    } else {
+      if (!filters?.include_terminated) {
+        filter.state = NON_TERMINATED_STATES.map((option) => option.value);
       }
-      if (filters.organization) {
-        filter.customer_uuid = filters.organization.uuid;
-      }
-      if (filters.project) {
-        filter.project_uuid = filters.project.uuid;
-      }
-      if (filters.category) {
-        filter.category_uuid = filters.category.uuid;
-      }
+    }
+    if (filters?.organization) {
+      filter.customer_uuid = filters.organization.uuid;
+    }
+    if (filters?.project) {
+      filter.project_uuid = filters.project.uuid;
+    }
+    if (filters?.category) {
+      filter.category_uuid = filters.category.uuid;
     }
     if (isServiceManager && !ownerOrStaff) {
       filter.service_manager_uuid = user.uuid;

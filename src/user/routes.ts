@@ -65,9 +65,9 @@ const CategoryResourcesContainer = lazyComponent(
   () => import('@waldur/marketplace/resources/list/CategoryResourcesContainer'),
   'CategoryResourcesContainer',
 );
-const UserResourcesAllList = lazyComponent(
-  () => import('@waldur/marketplace/resources/list/UserResourcesAllList'),
-  'UserResourcesAllList',
+const AllResourcesList = lazyComponent(
+  () => import('@waldur/marketplace/resources/list/AllResourcesList'),
+  'AllResourcesList',
 );
 
 const UserDetails = lazyComponent(() => import('./UserDetails'), 'UserDetails');
@@ -217,15 +217,15 @@ export const states: StateDeclaration[] = [
     component: UserEmailChangeCallback,
   },
   {
-    name: 'user-resources',
+    name: 'category-resources',
     url: '/resources/:category_uuid/',
     component: CategoryResourcesContainer,
     parent: 'layout',
   },
   {
-    name: 'all-user-resources',
+    name: 'all-resources',
     url: '/all-resources/',
-    component: UserResourcesAllList,
+    component: AllResourcesList,
     parent: 'layout',
   },
 ];

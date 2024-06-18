@@ -562,10 +562,6 @@ msgstr ""
 msgid "Administration"
 msgstr ""
 
-#: src/navigation/header/search/SearchPopover.tsx
-msgid "Advanced Search"
-msgstr ""
-
 #: src/vmware/deploy/FormAdvancedOptionsStep.tsx
 #: src/vmware/deploy/steps.ts
 msgid "Advanced options"
@@ -1762,7 +1758,6 @@ msgstr ""
 #: src/marketplace/orders/actions/CancelTerminationOrderButton.tsx
 #: src/marketplace/orders/details/CancelOrderButton.tsx
 #: src/modal/CloseDialogButton.tsx
-#: src/navigation/header/search/SearchPopover.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/table/TableFilterActions.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -2311,10 +2306,6 @@ msgstr ""
 #: src/marketplace/offerings/details/PublicOfferingGetHelp.tsx
 #: src/marketplace/offerings/details/PublicOfferingPricing.tsx
 msgid "Contact vendor"
-msgstr ""
-
-#: src/navigation/header/search/SearchFilters.tsx
-msgid "Contains the word"
 msgstr ""
 
 #: src/administration/agreements/CreateUserAgreementsForm.tsx
@@ -5082,6 +5073,13 @@ msgstr ""
 msgid "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
 msgstr ""
 
+#: src/marketplace/details/OfferingResourcesFilter.tsx
+#: src/marketplace/resources/list/AllResourcesFilter.tsx
+#: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
+#: src/marketplace/resources/list/PublicResourcesFilter.tsx
+msgid "Include terminated"
+msgstr ""
+
 #: src/booking/components/WeekendsGroup.tsx
 msgid "Include weekends"
 msgstr ""
@@ -6871,12 +6869,12 @@ msgstr ""
 #: src/marketplace/orders/details/SummarySection.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
+#: src/marketplace/resources/list/AllResourcesFilter.tsx
 #: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/OfferingFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
-#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/service-providers/OfferingPermissionCreateDialog.tsx
 #: src/marketplace/service-providers/OfferingPermissionsList.tsx
 #: src/marketplace/service-providers/ProviderCampaignResourceExpandable.tsx
@@ -7352,10 +7350,10 @@ msgstr ""
 #: src/marketplace/offerings/import/tabs.ts
 #: src/marketplace/offerings/list/OfferingsList.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
+#: src/marketplace/resources/list/AllResourcesFilter.tsx
 #: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
-#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -8361,11 +8359,11 @@ msgstr ""
 #: src/marketplace/landing/MarketplaceLandingFilter.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersList.tsx
 #: src/marketplace/orders/list/MarketplaceOrdersListFilter.tsx
+#: src/marketplace/resources/list/AllResourcesFilter.tsx
 #: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
-#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountFilter.tsx
 #: src/marketplace/robot-accounts/ProviderRobotAccountList.tsx
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
@@ -9976,8 +9974,8 @@ msgid "Running accounting"
 msgstr ""
 
 #: src/marketplace/resources/details/ResourceSummary.tsx
+#: src/marketplace/resources/list/AllResourcesFilter.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
-#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx
 msgid "Runtime state"
 msgstr ""
@@ -10206,8 +10204,6 @@ msgstr ""
 
 #: src/core/AsyncSearchBox.tsx
 #: src/core/BreadcrumbDropdown.tsx
-#: src/navigation/header/search/SearchFilters.tsx
-#: src/navigation/header/search/SearchPopover.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/table/TableColumnsButton.tsx
 #: src/table/TableQuery.tsx
@@ -11212,12 +11208,12 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/marketplace/orders/list/ResourceOrders.tsx
 #: src/marketplace/resources/lexis/BasicLexisLinkList.tsx
+#: src/marketplace/resources/list/AllResourcesFilter.tsx
 #: src/marketplace/resources/list/CategoryResourcesList.tsx
 #: src/marketplace/resources/list/ProjectResourcesAllFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesFilter.tsx
 #: src/marketplace/resources/list/PublicResourcesList.tsx
 #: src/marketplace/resources/list/ResourcesAllListTable.tsx
-#: src/marketplace/resources/list/UserResourcesFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsFilter.tsx
 #: src/marketplace/service-providers/ProviderOfferingsList.tsx
@@ -11780,7 +11776,6 @@ msgid "Terminate resource {resourceName}"
 msgstr ""
 
 #: src/marketplace/orders/list/OrderStateFilter.tsx
-#: src/marketplace/resources/list/ResourceStateFilter.tsx
 #: src/marketplace/service-providers/ProviderCampaignStateFilter.tsx
 msgid "Terminated"
 msgstr ""

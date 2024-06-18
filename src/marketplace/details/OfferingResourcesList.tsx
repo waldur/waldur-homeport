@@ -15,6 +15,7 @@ import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 import { ResourceStateField } from '../resources/list/ResourceStateField';
+import { NON_TERMINATED_STATES } from '../resources/list/ResourceStateFilter';
 
 import { OfferingResourcesFilter } from './OfferingResourcesFilter';
 
@@ -29,9 +30,16 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     getFormValues(FILTER_OFFERING_RESOURCE),
   );
   const filter = useMemo(() => {
-    const filter: Record<string, string> = {};
+    const filter: Record<string, string | string[]> = {};
     if (filterValues?.state) {
       filter.state = filterValues.state.map((option) => option.value);
+      if (filterValues?.include_terminated) {
+        filter.state = [...filter.state, 'Terminated'];
+      }
+    } else {
+      if (!filterValues?.include_terminated) {
+        filter.state = NON_TERMINATED_STATES.map((option) => option.value);
+      }
     }
     return {
       offering_uuid: ownProps.offering.uuid,

@@ -11,7 +11,6 @@ export const getStates = () => [
   { value: 'Erred', label: translate('Erred') },
   { value: 'Updating', label: translate('Updating') },
   { value: 'Terminating', label: translate('Terminating') },
-  { value: 'Terminated', label: translate('Terminated') },
 ];
 
 export const NON_TERMINATED_STATES = getStates().filter(

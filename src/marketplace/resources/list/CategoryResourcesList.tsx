@@ -13,13 +13,14 @@ import { useTable } from '@waldur/table/utils';
 
 import { ResourceImportButton } from '../import/ResourceImportButton';
 
+import { AllResourcesFilter } from './AllResourcesFilter';
 import { CategoryColumnField } from './CategoryColumnField';
 import { CreateResourceButton } from './CreateResourceButton';
 import { ExpandableResourceSummary } from './ExpandableResourceSummary';
 import { ResourceActionsButton } from './ResourceActionsButton';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
-import { UserResourcesFilter } from './UserResourcesFilter';
+import { NON_TERMINATED_STATES } from './ResourceStateFilter';
 import { resourcesListRequiredFields } from './utils';
 
 interface OwnProps {
@@ -32,7 +33,7 @@ interface OwnProps {
 export const CategoryResourcesList: FunctionComponent<OwnProps> = (
   ownProps,
 ) => {
-  const filterValues: any = useSelector(getFormValues('UserResourcesFilter'));
+  const filterValues: any = useSelector(getFormValues('AllResourcesFilter'));
 
   const filter = useMemo(() => {
     const filter: Record<string, any> = {};
@@ -50,6 +51,13 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     }
     if (filterValues?.state) {
       filter.state = filterValues.state.map((option) => option.value);
+      if (filterValues.include_terminated) {
+        filter.state = [...filter.state, 'Terminated'];
+      }
+    } else {
+      if (!filterValues?.include_terminated) {
+        filter.state = NON_TERMINATED_STATES.map((option) => option.value);
+      }
     }
     if (filterValues?.organization) {
       filter.customer_uuid = filterValues.organization.uuid;
@@ -128,7 +136,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
       standalone={ownProps.standalone}
-      filters={<UserResourcesFilter category_uuid={ownProps.category_uuid} />}
+      filters={<AllResourcesFilter category_uuid={ownProps.category_uuid} />}
     />
   );
 };
