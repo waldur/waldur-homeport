@@ -11,7 +11,6 @@ export const CostPoliciesDetailsDialog = ({ resolve: { project } }) => {
         hasActionBar={false}
         hoverableRow={null}
         hideColumns={['project', 'price_estimate']}
-        fullWidth
       />
     </ModalDialog>
   );

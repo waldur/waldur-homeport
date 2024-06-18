@@ -41,7 +41,6 @@ export const AuthenticationEvents: FunctionComponent<{ user }> = ({ user }) => {
         },
       ]}
       verboseName={translate('Authentication events')}
-      fullWidth={true}
     />
   );
 };

@@ -14,7 +14,6 @@ export const UserIssuesTable: FC = () => {
       filter={filter}
       hiddenColumns={['caller', 'time_in_progress']}
       title={translate('User issues')}
-      fullWidth
       initialPageSize={5}
     />
   );

@@ -90,7 +90,6 @@ export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
         props.currentOrganization?.uuid === row.uuid ? 'bg-gray-200' : ''
       }
       expandableRow={OrganizationExpandableRow}
-      fullWidth={true}
     />
   );
 };

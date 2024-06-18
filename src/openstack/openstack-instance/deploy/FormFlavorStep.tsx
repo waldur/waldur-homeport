@@ -11,7 +11,7 @@ import {
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
-import { createFetcher, Table } from '@waldur/table';
+import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 import { Flavor } from '../types';
@@ -110,7 +110,6 @@ export const FormFlavorStep = (props: FormStepProps) => {
         ]}
         verboseName={translate('flavors')}
         hasActionBar={false}
-        fullWidth
         hoverable
         fieldType="radio"
         fieldName="attributes.flavor"

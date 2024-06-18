@@ -70,7 +70,6 @@ export interface TableProps<RowType = any> extends TableState {
   alterTitle?: React.ReactNode;
   hasActionBar?: boolean;
   hasHeaders?: boolean;
-  fullWidth?: boolean;
   enableMultiSelect?: boolean;
   multiSelectActions?: React.ComponentType<{ rows: any[]; refetch }>;
   selectRow?(row: any): void;
@@ -147,7 +146,6 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     rows: [],
     columns: [],
     hasQuery: false,
-    fullWidth: false,
     hasPagination: true,
     hasActionBar: true,
     hasHeaders: true,
@@ -170,7 +168,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
         <Card
           className={classNames(
             'card-table',
-            this.props.fullWidth ? 'full-width' : '',
+            'full-width',
             this.props.fieldName ? 'field-table' : '',
             this.props.className,
           )}

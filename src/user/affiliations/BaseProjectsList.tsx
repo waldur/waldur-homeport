@@ -157,7 +157,6 @@ export const BaseProjectsList: FunctionComponent<{
       showPageSizeSelector={true}
       enableExport={true}
       expandableRow={ProjectExpandableRow}
-      fullWidth={true}
       filters={filters}
       standalone={standalone}
       hasOptionalColumns
