@@ -62,6 +62,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
           ]}
           verboseName={translate('Network interfaces')}
           hasActionBar={false}
+          fullWidth
           hoverable
           fieldType="checkbox"
           fieldName="attributes.networks"
