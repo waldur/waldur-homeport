@@ -5,7 +5,7 @@ import {
   SquaresFour,
 } from '@phosphor-icons/react';
 import { groupBy, isEmpty } from 'lodash';
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react';
+import { Fragment, useCallback, useEffect, useRef } from 'react';
 import { Badge, Button, Col, Nav, Row, Tab } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -14,7 +14,6 @@ import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 
 import { NoResult } from './NoResult';
-import { SearchFilters } from './SearchFilters';
 import { SearchInput } from './SearchInput';
 import { SearchItem } from './SearchItem';
 import { SearchResult } from './useSearch';
@@ -364,8 +363,6 @@ export const SearchPopover = ({
     removeFavorite,
     isFavorite,
   } = useFavoritePages();
-  const [menuState, setMenuState] = useState<'main' | 'advanced'>('main');
-
   const refSearch = useRef<HTMLInputElement>();
   useEffect(() => {
     if (refSearch.current) {
@@ -373,147 +370,110 @@ export const SearchPopover = ({
     }
   }, []);
 
-  const doSearch = () => {
-    setMenuState('main');
-    result.refetch();
-  };
-
   const clearSearch = useCallback(() => {
     setQuery('');
   }, [setQuery]);
 
   return (
     <div className="pt-5">
-      <div className={`${menuState === 'main' ? '' : 'd-none'}`}>
-        <SearchInput
-          result={result}
-          query={query}
-          show={show}
-          setQuery={setQuery}
-          className="px-5 mb-6 d-lg-none"
-        />
-        <Tab.Container defaultActiveKey="all">
-          <div className="overflow-auto">
-            <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-              <Nav.Item className="text-nowrap ms-5">
-                <Nav.Link eventKey="all">
-                  {translate('All results')}
-                  {Boolean(result.data) && (
-                    <Badge bg={null} className="badge-pill ms-2">
-                      {result.data.resultsCount}
-                    </Badge>
-                  )}
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="text-nowrap">
-                <Nav.Link eventKey="organizations">
-                  {translate('Organizations')}
-                  {Boolean(result.data) && (
-                    <Badge bg={null} className="badge-pill ms-2">
-                      {result.data.customersCount}
-                    </Badge>
-                  )}
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="text-nowrap">
-                <Nav.Link eventKey="projects">
-                  {translate('Projects')}
-                  {Boolean(result.data) && (
-                    <Badge bg={null} className="badge-pill ms-2">
-                      {result.data.projectsCount}
-                    </Badge>
-                  )}
-                </Nav.Link>
-              </Nav.Item>
-              <Nav.Item className="text-nowrap me-5">
-                <Nav.Link eventKey="resources">
-                  {translate('Resources')}
-                  {Boolean(result.data) && (
-                    <Badge bg={null} className="badge-pill ms-2">
-                      {result.data.resourcesCount}
-                    </Badge>
-                  )}
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-          </div>
-          <Tab.Content className="overflow-auto min-h-200px">
-            <Tab.Pane eventKey="all">
-              <AllResultsTabContent
-                result={result}
-                clearSearch={clearSearch}
-                favPages={favPages}
-                addCurrentPageFavorite={addCurrentPageFavorite}
-                isCurrentPageFavorite={isCurrentPageFavorite}
-                isFavorite={isFavorite}
-                addFavoritePage={addFavoritePage}
-                removeFavorite={removeFavorite}
-                close={close}
-              />
-            </Tab.Pane>
-            <Tab.Pane eventKey="organizations">
-              <OrganizationsTabContent
-                result={result}
-                clearSearch={clearSearch}
-                isFavorite={isFavorite}
-                addFavoritePage={addFavoritePage}
-                removeFavorite={removeFavorite}
-                close={close}
-              />
-            </Tab.Pane>
-            <Tab.Pane eventKey="projects">
-              <ProjectsTabContent
-                result={result}
-                clearSearch={clearSearch}
-                isFavorite={isFavorite}
-                addFavoritePage={addFavoritePage}
-                removeFavorite={removeFavorite}
-                close={close}
-              />
-            </Tab.Pane>
-            <Tab.Pane eventKey="resources">
-              <ResourcesTabContent
-                result={result}
-                clearSearch={clearSearch}
-                isFavorite={isFavorite}
-                addFavoritePage={addFavoritePage}
-                removeFavorite={removeFavorite}
-                close={close}
-              />
-            </Tab.Pane>
-          </Tab.Content>
-        </Tab.Container>
-      </div>
-
-      <form className={`pt-1 ${menuState === 'advanced' ? '' : 'd-none'}`}>
-        <h3 className="fw-bold text-dark mb-7">
-          {translate('Advanced Search')}
-        </h3>
-
-        <SearchFilters />
-
-        <div className="d-flex justify-content-end">
-          <Button
-            variant="light"
-            size="sm"
-            onClick={() => {
-              setMenuState('main');
-            }}
-            className="fw-bolder btn-active-light-primary me-2"
-          >
-            {translate('Cancel')}
-          </Button>
-
-          <Button
-            variant="primary"
-            size="sm"
-            className="fw-bolder"
-            onClick={doSearch}
-          >
-            {translate('Search')}
-          </Button>
+      <SearchInput
+        result={result}
+        query={query}
+        show={show}
+        setQuery={setQuery}
+        className="px-5 mb-6 d-lg-none"
+      />
+      <Tab.Container defaultActiveKey="all">
+        <div className="overflow-auto">
+          <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
+            <Nav.Item className="text-nowrap ms-5">
+              <Nav.Link eventKey="all">
+                {translate('All results')}
+                {Boolean(result.data) && (
+                  <Badge bg={null} className="badge-pill ms-2">
+                    {result.data.resultsCount}
+                  </Badge>
+                )}
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item className="text-nowrap">
+              <Nav.Link eventKey="organizations">
+                {translate('Organizations')}
+                {Boolean(result.data) && (
+                  <Badge bg={null} className="badge-pill ms-2">
+                    {result.data.customersCount}
+                  </Badge>
+                )}
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item className="text-nowrap">
+              <Nav.Link eventKey="projects">
+                {translate('Projects')}
+                {Boolean(result.data) && (
+                  <Badge bg={null} className="badge-pill ms-2">
+                    {result.data.projectsCount}
+                  </Badge>
+                )}
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item className="text-nowrap me-5">
+              <Nav.Link eventKey="resources">
+                {translate('Resources')}
+                {Boolean(result.data) && (
+                  <Badge bg={null} className="badge-pill ms-2">
+                    {result.data.resourcesCount}
+                  </Badge>
+                )}
+              </Nav.Link>
+            </Nav.Item>
+          </Nav>
         </div>
-      </form>
+        <Tab.Content className="overflow-auto min-h-200px">
+          <Tab.Pane eventKey="all">
+            <AllResultsTabContent
+              result={result}
+              clearSearch={clearSearch}
+              favPages={favPages}
+              addCurrentPageFavorite={addCurrentPageFavorite}
+              isCurrentPageFavorite={isCurrentPageFavorite}
+              isFavorite={isFavorite}
+              addFavoritePage={addFavoritePage}
+              removeFavorite={removeFavorite}
+              close={close}
+            />
+          </Tab.Pane>
+          <Tab.Pane eventKey="organizations">
+            <OrganizationsTabContent
+              result={result}
+              clearSearch={clearSearch}
+              isFavorite={isFavorite}
+              addFavoritePage={addFavoritePage}
+              removeFavorite={removeFavorite}
+              close={close}
+            />
+          </Tab.Pane>
+          <Tab.Pane eventKey="projects">
+            <ProjectsTabContent
+              result={result}
+              clearSearch={clearSearch}
+              isFavorite={isFavorite}
+              addFavoritePage={addFavoritePage}
+              removeFavorite={removeFavorite}
+              close={close}
+            />
+          </Tab.Pane>
+          <Tab.Pane eventKey="resources">
+            <ResourcesTabContent
+              result={result}
+              clearSearch={clearSearch}
+              isFavorite={isFavorite}
+              addFavoritePage={addFavoritePage}
+              removeFavorite={removeFavorite}
+              close={close}
+            />
+          </Tab.Pane>
+        </Tab.Content>
+      </Tab.Container>
     </div>
   );
 };

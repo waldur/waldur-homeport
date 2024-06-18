@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import {
-  getInitialValues,
   syncFiltersToURL,
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { PUBLIC_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
@@ -58,6 +58,16 @@ const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => {
       <TableFilterItem title={translate('State')} name="state">
         <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
       </TableFilterItem>
+      <TableFilterItem
+        title={translate('Include terminated')}
+        name="include_terminated"
+      >
+        <Field
+          name="include_terminated"
+          component={AwesomeCheckboxField}
+          label={translate('Include terminated')}
+        />
+      </TableFilterItem>
     </>
   );
 };
@@ -78,9 +88,6 @@ const filterSelector = createSelector(
 const mapStateToProps = (state: RootState) => ({
   offeringFilter: filterSelector(state),
   onChange: syncFiltersToURL,
-  initialValues: getInitialValues({
-    state: NON_TERMINATED_STATES,
-  }),
 });
 
 const enhance = compose(

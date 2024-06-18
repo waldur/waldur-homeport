@@ -1,8 +1,9 @@
 import { FunctionComponent, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
-import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
+import { syncFiltersToURL } from '@waldur/core/filters';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
@@ -12,10 +13,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { CategoryFilter } from './CategoryFilter';
 import { ProjectFilter } from './ProjectFilter';
 import { RelatedCustomerFilter } from './RelatedCustomerFilter';
-import {
-  NON_TERMINATED_STATES,
-  ResourceStateFilter,
-} from './ResourceStateFilter';
+import { ResourceStateFilter } from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
 
 interface ProjectResourcesAllFilterProps {
@@ -75,6 +73,16 @@ const PureProjectResourcesAllFilter: FunctionComponent<
       <TableFilterItem title={translate('State')} name="state">
         <ResourceStateFilter reactSelectProps={{ isMulti: true }} />
       </TableFilterItem>
+      <TableFilterItem
+        title={translate('Include terminated')}
+        name="include_terminated"
+      >
+        <Field
+          name="include_terminated"
+          component={AwesomeCheckboxField}
+          label={translate('Include terminated')}
+        />
+      </TableFilterItem>
     </>
   );
 };
@@ -83,9 +91,6 @@ const enhance = reduxForm<{}, ProjectResourcesAllFilterProps>({
   form: PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
   destroyOnUnmount: false,
   onChange: syncFiltersToURL,
-  initialValues: getInitialValues({
-    state: NON_TERMINATED_STATES,
-  }),
 });
 
 export const ProjectResourcesAllFilter = enhance(PureProjectResourcesAllFilter);

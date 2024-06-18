@@ -10,6 +10,7 @@ import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ResourcesAllListTable } from './ResourcesAllListTable';
+import { NON_TERMINATED_STATES } from './ResourceStateFilter';
 import { resourcesListRequiredFields } from './utils';
 
 const mapStateToFilter = createSelector(
@@ -20,24 +21,29 @@ const mapStateToFilter = createSelector(
     if (customer) {
       result.customer_uuid = customer.uuid;
     }
-    if (filters) {
-      if (filters.offering) {
-        result.offering_uuid = filters.offering.uuid;
+    if (filters?.offering) {
+      result.offering_uuid = filters.offering.uuid;
+    }
+    if (filters?.state) {
+      result.state = filters.state.value;
+    }
+    if (filters?.category) {
+      result.category_uuid = filters.category.uuid;
+    }
+    if (filters?.project) {
+      result.project_uuid = filters.project.uuid;
+    }
+    if (filters?.runtime_state) {
+      result.runtime_state = filters.runtime_state.value;
+    }
+    if (filters?.state) {
+      result.state = filters.state.map((option) => option.value) as string[];
+      if (filters?.include_terminated) {
+        result.state = [...result.state, 'Terminated'];
       }
-      if (filters.state) {
-        result.state = filters.state.value;
-      }
-      if (filters.category) {
-        result.category_uuid = filters.category.uuid;
-      }
-      if (filters.project) {
-        result.project_uuid = filters.project.uuid;
-      }
-      if (filters.runtime_state) {
-        result.runtime_state = filters.runtime_state.value;
-      }
-      if (filters.state) {
-        result.state = filters.state.map((option) => option.value);
+    } else {
+      if (!filters?.include_terminated) {
+        result.state = NON_TERMINATED_STATES.map((option) => option.value);
       }
     }
     result.field = resourcesListRequiredFields();
