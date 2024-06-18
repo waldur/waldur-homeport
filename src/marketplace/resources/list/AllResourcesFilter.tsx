@@ -4,12 +4,12 @@ import { Field, reduxForm } from 'redux-form';
 import { syncFiltersToURL } from '@waldur/core/filters';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
+import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OfferingFilter } from './OfferingFilter';
 import { ProjectFilter } from './ProjectFilter';
-import { RelatedCustomerFilter } from './RelatedCustomerFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
 import { OfferingChoice } from './types';
@@ -31,7 +31,7 @@ const PureProjectResourcesFilter = ({ category_uuid }) => {
         name="organization"
         badgeValue={(value) => value?.name}
       >
-        <RelatedCustomerFilter />
+        <OrganizationAutocomplete />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Project')}
