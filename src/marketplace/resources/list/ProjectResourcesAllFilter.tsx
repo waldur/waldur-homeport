@@ -1,5 +1,4 @@
-import { FunctionComponent, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import { syncFiltersToURL } from '@waldur/core/filters';
@@ -9,7 +8,6 @@ import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/Offe
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
 import { ProjectFilter } from './ProjectFilter';
@@ -25,10 +23,6 @@ interface ProjectResourcesAllFilterProps {
 const PureProjectResourcesAllFilter: FunctionComponent<
   ProjectResourcesAllFilterProps
 > = (props) => {
-  const customer = useSelector(getCustomer);
-  useEffect(() => {
-    props.change('project', undefined);
-  }, [customer]);
   return (
     <>
       <TableFilterItem
@@ -60,7 +54,7 @@ const PureProjectResourcesAllFilter: FunctionComponent<
           name="project"
           badgeValue={(value) => value?.name}
         >
-          <ProjectFilter customer_uuid={customer?.uuid} />
+          <ProjectFilter />
         </TableFilterItem>
       ) : null}
       <TableFilterItem
