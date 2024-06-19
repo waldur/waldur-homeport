@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { syncFiltersToURL } from '@waldur/core/filters';
@@ -6,7 +5,6 @@ import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OfferingFilter } from './OfferingFilter';
 import { ProjectFilter } from './ProjectFilter';
@@ -22,8 +20,6 @@ interface FormData {
 }
 
 const PureProjectResourcesFilter = ({ category_uuid }) => {
-  const customer = useSelector(getCustomer);
-
   return (
     <>
       <TableFilterItem
@@ -38,7 +34,7 @@ const PureProjectResourcesFilter = ({ category_uuid }) => {
         name="project"
         badgeValue={(value) => value?.name}
       >
-        <ProjectFilter customer_uuid={customer?.uuid} />
+        <ProjectFilter />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Offering')}
