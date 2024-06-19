@@ -11,6 +11,7 @@ import {
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
+import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { PUBLIC_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -22,7 +23,6 @@ import {
 } from '@waldur/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
-import { RelatedCustomerFilter } from './RelatedCustomerFilter';
 import {
   NON_TERMINATED_STATES,
   ResourceStateFilter,
@@ -46,7 +46,7 @@ const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => {
         name="organization"
         badgeValue={(value) => value?.name}
       >
-        <RelatedCustomerFilter />
+        <OrganizationAutocomplete />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Category')}

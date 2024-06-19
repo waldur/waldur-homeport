@@ -6,13 +6,13 @@ import { syncFiltersToURL } from '@waldur/core/filters';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
+import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CategoryFilter } from './CategoryFilter';
 import { ProjectFilter } from './ProjectFilter';
-import { RelatedCustomerFilter } from './RelatedCustomerFilter';
 import { ResourceStateFilter } from './ResourceStateFilter';
 import { RuntimeStateFilter } from './RuntimeStateFilter';
 
@@ -51,7 +51,7 @@ const PureProjectResourcesAllFilter: FunctionComponent<
           name="organization"
           badgeValue={(value) => value?.name}
         >
-          <RelatedCustomerFilter />
+          <OrganizationAutocomplete />
         </TableFilterItem>
       ) : null}
       {props.hasProjectFilter ? (
