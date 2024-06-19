@@ -37,7 +37,7 @@ export const createProject = (project) => {
     // if user tries to keep the current image we should not send the image key
     data.image = undefined;
   }
-  return sendForm('POST', `${ENV.apiEndpoint}api/projects/`, data);
+  return sendForm<{ uuid }>('POST', `${ENV.apiEndpoint}api/projects/`, data);
 };
 
 export const updateProject = (project) => {

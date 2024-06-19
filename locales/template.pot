@@ -464,6 +464,7 @@ msgstr ""
 msgid "Add plan"
 msgstr ""
 
+#: src/project/GlobalProjectCreateButton.tsx
 #: src/project/ProjectCreateButton.tsx
 #: src/project/ProjectCreateForm.tsx
 msgid "Add project"
@@ -1758,6 +1759,7 @@ msgstr ""
 #: src/marketplace/orders/actions/CancelTerminationOrderButton.tsx
 #: src/marketplace/orders/details/CancelOrderButton.tsx
 #: src/modal/CloseDialogButton.tsx
+#: src/project/GlobalProjectCreateDialog.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/table/TableFilterActions.tsx
 #: src/user/support/UserEmailChangeDialog.tsx
@@ -2418,6 +2420,7 @@ msgstr ""
 #: src/openstack/openstack-tenant/actions/CreateServerGroupAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotAction.tsx
 #: src/openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx
+#: src/project/GlobalProjectCreateDialog.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/proposal/create-review/CreateReviewDialog.tsx
 #: src/proposals/proposal/create/AddProposalDialog.tsx
@@ -2570,6 +2573,7 @@ msgid "Create port"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
+#: src/project/GlobalProjectCreateDialog.tsx
 #: src/project/ProjectCreateDialog.tsx
 msgid "Create project"
 msgstr ""
@@ -6631,6 +6635,7 @@ msgstr ""
 
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
+#: src/project/GlobalProjectCreateDialog.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "No organizations"
 msgstr ""
@@ -7358,6 +7363,7 @@ msgstr ""
 #: src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx
 #: src/navigation/header/confirmation-drawer/PendingProviderOrders.tsx
 #: src/permissions/constants.tsx
+#: src/project/GlobalProjectCreateDialog.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/offering-requests/OfferingRequestsList.tsx
 #: src/proposals/offering-requests/OfferingRequestsTableFilter.tsx
@@ -8450,6 +8456,7 @@ msgstr ""
 msgid "Project for civilian purpose?"
 msgstr ""
 
+#: src/project/GlobalProjectCreateDialog.tsx
 #: src/project/effects.ts
 msgid "Project has been created."
 msgstr ""
@@ -10425,6 +10432,7 @@ msgstr ""
 #: src/marketplace/details/CustomerField.tsx
 #: src/marketplace/orders/OrganizationAutocomplete.tsx
 #: src/marketplace/robot-accounts/ProviderCustomerFilter.tsx
+#: src/project/GlobalProjectCreateDialog.tsx
 #: src/project/MoveToOrganizationAutocomplete.tsx
 msgid "Select organization..."
 msgstr ""
@@ -12646,6 +12654,10 @@ msgstr ""
 
 #: src/vmware/actions/CreatePortDialog.tsx
 msgid "Unable to create port."
+msgstr ""
+
+#: src/project/GlobalProjectCreateDialog.tsx
+msgid "Unable to create project."
 msgstr ""
 
 #: src/issues/create/utils.ts
