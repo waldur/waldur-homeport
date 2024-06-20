@@ -6,8 +6,8 @@ import { translate } from '@waldur/i18n';
 import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 import { RoleEnum } from '@waldur/permissions/enums';
-import { formatRole } from '@waldur/permissions/utils';
 import { Call } from '@waldur/proposals/types';
+import { RolePopover } from '@waldur/user/affiliations/RolePopover';
 
 import { EditGeneralInfoButton } from './EditGeneralInfoButton';
 
@@ -81,8 +81,12 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
             <tr>
               <td className="col-md-3">{translate('Default project role')}</td>
               <td className="col-md-9">
-                {formatRole(props.call.default_project_role_name) ||
-                  formatRole(RoleEnum.PROJECT_ADMIN)}
+                <RolePopover
+                  roleName={
+                    props.call.default_project_role_name ||
+                    RoleEnum.PROJECT_ADMIN
+                  }
+                />
               </td>
               <td className="row-actions">
                 <div>
