@@ -1,5 +1,5 @@
-import './LandingPage.css';
 import { useEffect } from 'react';
+import './LandingPage.css';
 
 import { CookiesConsent } from '@waldur/navigation/cookies/CookiesConsent';
 

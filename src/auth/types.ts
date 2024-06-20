@@ -23,6 +23,7 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  DEFAULT_IDP: string;
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;
   MASTERMIND_URL: string;

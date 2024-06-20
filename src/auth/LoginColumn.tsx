@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 import { getIdentityProviders } from '@waldur/administration/api';
 import { ENV } from '@waldur/configs/default';
@@ -15,6 +16,7 @@ import { LocalLogin } from './LocalLogin';
 import { PoweredBy } from './PoweredBy';
 import { useAuthFeatures } from './useAuthFeatures';
 import { UserAuthWarning } from './UserAuthWarning';
+import { getOauthURL } from './utils';
 
 import './LoginColumn.scss';
 
@@ -25,6 +27,22 @@ export const LoginColumn = () => {
     ['IdentityProvidersConfigurations'],
     () => getIdentityProviders(),
   );
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+    if (!ENV.plugins.WALDUR_CORE.DEFAULT_IDP) {
+      return;
+    }
+    const provider = data.find(
+      (provider) => provider.provider === ENV.plugins.WALDUR_CORE.DEFAULT_IDP,
+    );
+    if (!provider) {
+      return;
+    }
+    window.location.href = getOauthURL(provider);
+  }, [data]);
 
   return (
     <div className="login-column">
