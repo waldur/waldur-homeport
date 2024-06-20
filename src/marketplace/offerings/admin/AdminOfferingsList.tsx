@@ -15,10 +15,7 @@ import {
 export const mapStateToFilter = createSelector(
   getFormValues(ADMIN_OFFERINGS_FILTER_FORM_ID),
   (filterValues: any) => {
-    const filter: Record<string, any> = {
-      billable: true,
-      shared: true,
-    };
+    const filter: Record<string, any> = {};
     if (filterValues?.organization) {
       filter.customer_uuid = filterValues.organization.uuid;
     }
