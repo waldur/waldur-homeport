@@ -50,7 +50,7 @@ export const CategoriesList: FC = () => {
           </Col>
         ))}
       </Row>
-      {categories.data.length >= ITEMS_IN_ROW ? (
+      {categories.data.length > ITEMS_IN_ROW ? (
         <div className="d-flex flex-column justify-content-center flex-grow-1">
           <Button
             variant="link"
