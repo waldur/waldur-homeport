@@ -8,7 +8,7 @@ import {
   UserContext,
 } from '@waldur/events/utils';
 import { formatJsxTemplate, gettext, translate } from '@waldur/i18n';
-import { formatRole } from '@waldur/permissions/utils';
+import { RolePopover } from '@waldur/user/affiliations/RolePopover';
 
 import { PermissionsEnum } from '../EventsEnums';
 
@@ -53,7 +53,11 @@ const getEventContext = (event: RoleEvent) => ({
   ...getUserContext(event),
   ...getAffectedUserContext(event),
   ...getScopeLink(event),
-  role_name: formatRole(event.role_name) || 'N/A',
+  role_name: event.role_name ? (
+    <RolePopover roleName={event.role_name} />
+  ) : (
+    'N/A'
+  ),
 });
 
 const formatRoleGrantedEvent = (event: RoleEvent) => {

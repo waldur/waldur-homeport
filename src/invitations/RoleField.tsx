@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { formatRole } from '@waldur/permissions/utils';
+import { RolePopover } from '@waldur/user/affiliations/RolePopover';
 
 import { Invitation } from './types';
 
 export const RoleField: FunctionComponent<{ invitation: Invitation }> = ({
   invitation,
-}) => <>{formatRole(invitation.role_name)}</>;
+}) => <RolePopover roleName={invitation.role_name} />;

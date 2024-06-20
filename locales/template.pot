@@ -9893,6 +9893,10 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
+#: src/user/affiliations/RolePopover.tsx
+msgid "Role details: {roleName}"
+msgstr ""
+
 #: src/customer/team/CustomerUsersList.tsx
 #: src/project/team/ProjectUsersList.tsx
 msgid "Role expiration"
