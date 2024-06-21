@@ -6,8 +6,8 @@ import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
 import { Call } from '../types';
+import { getCallBreadcrumbItems } from '../utils';
 
-import { CallBreadcrumbs } from './CallBreadcrumbs';
 import { CallDescriptionCard } from './CallDescriptionCard';
 import { CallDocumentsCard } from './CallDocumentsCard';
 import { CallOfferingsCard } from './CallOfferingsCard';
@@ -57,7 +57,8 @@ export const PublicCallDetails: FunctionComponent<PublicCallDetailsProps> = ({
 }) => {
   usePageHero(<PageHero call={call} />);
 
-  useBreadcrumbs(<CallBreadcrumbs call={call} />);
+  const breadcrumbItems = useMemo(() => getCallBreadcrumbItems(call), [call]);
+  useBreadcrumbs(breadcrumbItems);
 
   const tabs = useMemo(() => getTabs(), []);
   const {

@@ -17,10 +17,12 @@ import { AppFooter } from './AppFooter';
 import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
 import { AppHeader } from './header/AppHeader';
+import { BreadcrumbMain } from './header/breadcrumb/BreadcrumbMain';
 import { OutstandingBar } from './OutstandingBar';
 import { UnifiedSidebar } from './sidebar/UnifiedSidebar';
 import { Tab } from './Tab';
 import { Toolbar } from './Toolbar';
+import { IBreadcrumbItem } from './types';
 import { useTabs } from './useTabs';
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
@@ -29,7 +31,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const currentUser = useSelector(getUser);
   const impersonatorUser = useSelector(getImpersonatorUser);
   const [actions, setActions] = useState(null);
-  const [breadcrumbs, setBreadcrumbs] = useState(null);
+  const [breadcrumbs, setBreadcrumbs] = useState<IBreadcrumbItem[]>([]);
   const [extraTabs, setExtraTabs] = useState<Tab[]>([]);
   const [fullPage, setFullPage] = useState(false);
   const [PageHero, setPageHero] = useState<React.ReactNode>(null);
@@ -45,6 +47,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setPageHero,
       setPageBar,
       setBreadcrumbs,
+      breadcrumbs,
       setExtraToolbar,
     }),
     [
@@ -56,6 +59,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
       setPageHero,
       setPageBar,
       setBreadcrumbs,
+      breadcrumbs,
       setExtraToolbar,
     ],
   );
@@ -107,8 +111,9 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
             <div className="wrapper d-flex flex-column flex-row-fluid">
               <CookiesConsent />
               {!state?.data?.hideHeader && (
-                <AppHeader breadcrumbs={breadcrumbs} />
+                <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
               )}
+              <BreadcrumbMain mobile />
               <WarningBar />
               <div
                 className={classNames(
