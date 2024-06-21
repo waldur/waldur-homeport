@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { useEffect } from 'react';
 
 import { getIdentityProviders } from '@waldur/administration/api';
@@ -27,8 +28,12 @@ export const LoginColumn = () => {
     ['IdentityProvidersConfigurations'],
     () => getIdentityProviders(),
   );
+  const { params } = useCurrentStateAndParams();
 
   useEffect(() => {
+    if (params?.disableAutoLogin) {
+      return;
+    }
     if (!data) {
       return;
     }
@@ -42,7 +47,7 @@ export const LoginColumn = () => {
       return;
     }
     window.location.href = getOauthURL(provider);
-  }, [data]);
+  }, [data, params]);
 
   return (
     <div className="login-column">
