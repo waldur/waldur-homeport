@@ -126,7 +126,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Dashboard'),
       priority: 100,
-      permissions: [isOwnerOrStaff],
     },
   },
 
