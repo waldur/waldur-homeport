@@ -1,5 +1,6 @@
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
+import { IBreadcrumbItem } from '@waldur/navigation/types';
 
 const ARTICLE_CODE_PATTERN = new RegExp(
   '^[A-Za-z0-9][A-Za-z0-9-_]*[A-Za-z0-9]$',
@@ -39,4 +40,35 @@ export const scrollToSectionById = (section: string) => {
     left: 0,
     top: el.offsetTop - 180,
   });
+};
+
+export const getOfferingBreadcrumbItems = (offering): IBreadcrumbItem[] => {
+  if (!offering) return [];
+  return [
+    {
+      key: 'organizations',
+      text: translate('Organizations'),
+      to: 'organizations',
+    },
+    {
+      key: 'organization.dashboard',
+      text: offering.customer_name,
+      to: 'organization.dashboard',
+      params: { uuid: offering.customer_uuid },
+      ellipsis: 'xl',
+    },
+    {
+      key: 'marketplace-vendor-offerings',
+      text: translate('Offerings'),
+      to: 'marketplace-vendor-offerings',
+      params: { uuid: offering.customer_uuid },
+      ellipsis: 'md',
+    },
+    {
+      key: 'offering',
+      text: offering.name,
+      truncate: true,
+      active: true,
+    },
+  ];
 };

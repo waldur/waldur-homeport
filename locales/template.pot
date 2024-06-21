@@ -1715,9 +1715,9 @@ msgstr ""
 #: src/navigation/sidebar/CallPublicMenu.tsx
 #: src/proposals/CallsForProposals.tsx
 #: src/proposals/PublicCallsPage.tsx
-#: src/proposals/details/CallBreadcrumbs.tsx
-#: src/proposals/round/RoundBreadcrumbs.tsx
+#: src/proposals/round/RoundUIView.tsx
 #: src/proposals/routes.ts
+#: src/proposals/utils.ts
 msgid "Calls for proposals"
 msgstr ""
 
@@ -7058,8 +7058,8 @@ msgstr ""
 #: src/marketplace/category/PublicOfferingsList.tsx
 #: src/marketplace/category/utils.ts
 #: src/marketplace/landing/OfferingsGroup.tsx
-#: src/marketplace/offerings/OfferingBreadcrumbs.tsx
 #: src/marketplace/offerings/list/OfferingsList.tsx
+#: src/marketplace/offerings/utils.ts
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/CampaignForm.tsx
 #: src/marketplace/service-providers/CampaignUpdateForm.tsx
@@ -7503,19 +7503,19 @@ msgstr ""
 #: src/broadcasts/BroadcastForm.tsx
 #: src/broadcasts/RecipientsList.tsx
 #: src/customer/list/CustomerList.tsx
-#: src/marketplace/offerings/OfferingBreadcrumbs.tsx
 #: src/marketplace/offerings/OfferingDetailsUIView.tsx
 #: src/marketplace/offerings/expandable/OfferingCustomersList.tsx
-#: src/marketplace/resources/details/ResourceBreadcrumbs.tsx
+#: src/marketplace/offerings/utils.ts
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/navigation/header/search/SearchPopover.tsx
 #: src/navigation/sidebar/OrganizationsListMenu.tsx
-#: src/organization/OrganizationBreadcrumbs.tsx
-#: src/project/ProjectBreadcrumbs.tsx
-#: src/proposals/details/CallBreadcrumbs.tsx
-#: src/proposals/round/RoundBreadcrumbs.tsx
+#: src/organization/OrganizationUIView.tsx
+#: src/project/ProjectContainer.tsx
+#: src/proposals/round/RoundUIView.tsx
+#: src/proposals/utils.ts
 #: src/resource/support/SharedProviderTabs.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
 msgid "Organizations"
@@ -8557,13 +8557,13 @@ msgstr ""
 #: src/administration/dashboard/AdminStatistics.tsx
 #: src/administration/organizations/OrganizationGroupOrganizationsList.tsx
 #: src/customer/routes.ts
-#: src/marketplace/resources/details/ResourceBreadcrumbs.tsx
+#: src/marketplace/resources/details/ResourceDetailsPage.tsx
 #: src/marketplace/routes.ts
 #: src/marketplace/service-providers/ProviderOrganizationsList.tsx
 #: src/marketplace/service-providers/ProviderUserCustomersList.tsx
 #: src/navigation/header/search/SearchPopover.tsx
 #: src/navigation/sidebar/ProjectsListMenu.tsx
-#: src/project/ProjectBreadcrumbs.tsx
+#: src/project/ProjectContainer.tsx
 #: src/project/ProjectsList.tsx
 #: src/rancher/cluster/tabs.ts
 #: src/user/affiliations/BaseOrganizationsList.tsx
@@ -9969,7 +9969,7 @@ msgid "Round strategy in active round"
 msgstr ""
 
 #: src/proposals/details/PublicCallDetails.tsx
-#: src/proposals/round/RoundBreadcrumbs.tsx
+#: src/proposals/round/RoundUIView.tsx
 #: src/proposals/update/CallUpdateContainer.tsx
 #: src/proposals/update/rounds/CallRoundsList.tsx
 msgid "Rounds"
@@ -10213,7 +10213,7 @@ msgid "Script language: {language}"
 msgstr ""
 
 #: src/core/AsyncSearchBox.tsx
-#: src/core/BreadcrumbDropdown.tsx
+#: src/navigation/header/breadcrumb/BreadcrumbDropdown.tsx
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
 #: src/table/TableColumnsButton.tsx
 #: src/table/TableQuery.tsx
@@ -12092,7 +12092,7 @@ msgstr ""
 msgid "There are no plans"
 msgstr ""
 
-#: src/project/ProjectPopoverToggle.tsx
+#: src/project/ProjectBreadcrumbPopover.tsx
 msgid "There are no projects."
 msgstr ""
 
@@ -12112,12 +12112,12 @@ msgstr ""
 msgid "There are no resources available."
 msgstr ""
 
-#: src/marketplace/resources/details/ResourcePopoverToggle.tsx
+#: src/marketplace/resources/details/ResourceBreadcrumbPopover.tsx
 msgid "There are no resources."
 msgstr ""
 
 #: src/core/AsyncSearchBox.tsx
-#: src/core/BreadcrumbDropdown.tsx
+#: src/navigation/header/breadcrumb/BreadcrumbDropdown.tsx
 msgid "There are no results for this keyword."
 msgstr ""
 
@@ -12383,11 +12383,11 @@ msgstr ""
 msgid "Type in name of offering or provider"
 msgstr ""
 
-#: src/project/ProjectPopoverToggle.tsx
+#: src/project/ProjectBreadcrumbPopover.tsx
 msgid "Type in name of project"
 msgstr ""
 
-#: src/marketplace/resources/details/ResourcePopoverToggle.tsx
+#: src/marketplace/resources/details/ResourceBreadcrumbPopover.tsx
 msgid "Type in name of resource"
 msgstr ""
 

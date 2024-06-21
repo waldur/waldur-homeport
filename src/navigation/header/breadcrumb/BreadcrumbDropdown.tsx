@@ -2,11 +2,10 @@ import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash';
 import { ComponentType, FC, useCallback, useState } from 'react';
 
+import { InfiniteList } from '@waldur/core/InfiniteList';
 import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
 import { parseResponse } from '@waldur/table/api';
-
-import { InfiniteList } from './InfiniteList';
 
 interface DataPage {
   data: any[];
@@ -65,8 +64,8 @@ export const BreadcrumbDropdown: FC<BreadcrumbDropdownProps> = ({
   );
 
   return (
-    <div className="border mw-400px">
-      <div className="p-5 ">
+    <div>
+      <div className="p-5">
         <FilterBox
           type="search"
           placeholder={placeholder}

@@ -1,0 +1,32 @@
+.breadcrumb-container .breadcrumb {
+  flex-wrap: nowrap;
+  flex-grow: 1;
+
+  .breadcrumb-item {
+    text-wrap: nowrap;
+    min-width: 20px;
+
+    &:last-child {
+      flex-grow: 1;
+    }
+  }
+}
+
+$mobileHeaderHeight: get($header-config, default, height, tablet-and-mobile);
+
+.breadcrumb-mobile {
+  background-color: $body-bg;
+  height: $mobileHeaderHeight;
+  position: fixed;
+  top: $mobileHeaderHeight;
+  z-index: 1;
+  border-bottom: 1px solid $border-color;
+
+  + .content {
+    margin-top: $mobileHeaderHeight;
+  }
+
+  .outstanding-bar-enabled & {
+    top: calc(#{$mobileHeaderHeight} + var(--kt-pagebar-height));
+  }
+}

@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { Tab } from './Tab';
+import { IBreadcrumbItem } from './types';
 
 export interface LayoutContextInterface {
   setActions(actions: React.ReactNode): void;
@@ -17,7 +18,8 @@ export interface LayoutContextInterface {
   setExtraToolbar(component: React.ReactNode);
   setPageHero(component: React.ReactNode);
   setPageBar(component: React.ReactNode);
-  setBreadcrumbs(component: React.ReactNode);
+  breadcrumbs: IBreadcrumbItem[];
+  setBreadcrumbs(items: IBreadcrumbItem[]);
 }
 
 export const LayoutContext = createContext<Partial<LayoutContextInterface>>({});
@@ -81,15 +83,12 @@ export const useToolbarActions = (
   }, [layoutContext, ...deps]);
 };
 
-export const useBreadcrumbs = (
-  component: ReactNode,
-  deps: DependencyList = [],
-) => {
+export const useBreadcrumbs = (items: IBreadcrumbItem[]) => {
   const layoutContext = useContext(LayoutContext);
   useEffect(() => {
-    layoutContext.setBreadcrumbs(component);
+    layoutContext.setBreadcrumbs(items);
     return () => {
-      layoutContext.setBreadcrumbs(null);
+      layoutContext.setBreadcrumbs([]);
     };
-  }, [layoutContext, ...deps]);
+  }, [items, layoutContext]);
 };

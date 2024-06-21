@@ -9,6 +9,7 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { getTitle } from '../title';
 
+import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './search/SearchToggle';
@@ -26,11 +27,11 @@ const AsideMobileToggle: FunctionComponent = () => (
 );
 
 interface AppHeaderProps {
-  breadcrumbs?;
+  hasBreadcrumbs?: boolean;
 }
 
 export const AppHeader: FunctionComponent<AppHeaderProps> = ({
-  breadcrumbs,
+  hasBreadcrumbs,
 }) => {
   const pageTitle = useSelector(getTitle);
   const user = useSelector(getUser);
@@ -54,10 +55,10 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             </div>
           </div>
         </div>
-        <div className="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+        <div className="d-flex align-items-stretch justify-content-between flex-grow-1">
           <div className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1">
-            {breadcrumbs ? (
-              <div className="d-flex align-items-center">{breadcrumbs}</div>
+            {hasBreadcrumbs ? (
+              <BreadcrumbMain />
             ) : pageTitle ? (
               <div className="page-title d-flex align-items-center me-3">
                 <h1 className="text-dark fw-boldest fs-2 my-1">{pageTitle}</h1>
@@ -67,7 +68,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             )}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
-            {user && (breadcrumbs || pageTitle) && <SearchToggle />}
+            {user && (hasBreadcrumbs || pageTitle) && <SearchToggle />}
             {user && hasSupport && <QuickIssueDrawerToggle />}
             {user && <ConfirmationDrawerToggle />}
             <div className="d-flex align-items-center ms-1 ms-lg-3">

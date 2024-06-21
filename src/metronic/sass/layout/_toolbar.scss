@@ -103,6 +103,13 @@
   }
 }
 
+$mobile-breadcrumb-height: get(
+  $header-config,
+  default,
+  height,
+  tablet-and-mobile
+);
+
 // Tablet & mobile modes
 @include media-breakpoint-down(lg) {
   .toolbar {
@@ -130,10 +137,25 @@
       border-top: get($toolbar-config, border-top);
       border-bottom: get($toolbar-config, border-bottom);
     }
+    // And with breadcrumb
+    .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed
+      .breadcrumb-mobile
+      + .content
+      & {
+      top: get($header-config, default, height, tablet-and-mobile) +
+        $mobile-breadcrumb-height;
+    }
 
     // Fixed toolbar & enabled page bar modes
     .toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled & {
       top: var(--kt-pagebar-height);
+    }
+    // And with breadcrumb
+    .toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled
+      .breadcrumb-mobile
+      + .content
+      & {
+      top: calc(#{$mobile-breadcrumb-height} + var(--kt-pagebar-height));
     }
 
     // Fixed toolbar & enabled extra-toolbar modes
@@ -146,6 +168,16 @@
       & {
       top: calc(
         #{get($header-config, default, height, tablet-and-mobile)} + var(--kt-pagebar-height)
+      );
+    }
+    // And with breadcrumb
+    .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled
+      .breadcrumb-mobile
+      + .content
+      & {
+      top: calc(
+        #{get($header-config, default, height, tablet-and-mobile) +
+          $mobile-breadcrumb-height} + var(--kt-pagebar-height)
       );
     }
 

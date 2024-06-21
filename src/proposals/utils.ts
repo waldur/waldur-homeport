@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 
 import { translate } from '@waldur/i18n';
+import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { RoleEnum } from '@waldur/permissions/enums';
 import {
   Call,
@@ -183,3 +184,31 @@ export const checkIsCallManager = (call: Call, user: User): boolean =>
       permission.scope_uuid === call?.uuid &&
       permission.role_name === RoleEnum.CALL_MANAGER,
   );
+
+export const getCallBreadcrumbItems = (call: Call): IBreadcrumbItem[] => [
+  {
+    key: 'organizations',
+    text: translate('Organizations'),
+    to: 'organizations',
+  },
+  {
+    key: 'organization.dashboard',
+    text: call.customer_name,
+    to: 'organization.dashboard',
+    params: { uuid: call.customer_uuid },
+    ellipsis: 'xl',
+  },
+  {
+    key: 'call-list',
+    text: translate('Calls for proposals'),
+    to: 'call-management.call-list',
+    params: { uuid: call.customer_uuid },
+    ellipsis: 'xl',
+  },
+  {
+    key: 'call',
+    text: call.name,
+    truncate: true,
+    active: true,
+  },
+];
