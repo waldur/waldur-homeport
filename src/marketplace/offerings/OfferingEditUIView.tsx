@@ -24,10 +24,10 @@ import {
 } from '../common/registry';
 import { ValidationIcon } from '../common/ValidationIcon';
 
-import { OfferingBreadcrumbs } from './OfferingBreadcrumbs';
 import { OfferingViewHero } from './OfferingViewHero';
 import { getServiceSettingsForm } from './update/integration/registry';
 import { SCRIPT_ROWS } from './update/integration/utils';
+import { getOfferingBreadcrumbItems } from './utils';
 
 const OverviewSection = lazyComponent(
   () => import('./update/overview/OverviewSection'),
@@ -210,10 +210,11 @@ export const OfferingEditUIView = () => {
     [offering_uuid, refetch, isRefetching],
   );
 
-  useBreadcrumbs(
-    data?.offering ? <OfferingBreadcrumbs offering={data.offering} /> : null,
-    [data],
+  const breadcrumbItems = useMemo(
+    () => getOfferingBreadcrumbItems(data?.offering),
+    [data?.offering],
   );
+  useBreadcrumbs(breadcrumbItems);
 
   return (
     <UIView

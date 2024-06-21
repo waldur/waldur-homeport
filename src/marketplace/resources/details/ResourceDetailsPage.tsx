@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent, useCallback, useEffect } from 'react';
+import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
@@ -14,13 +14,14 @@ import {
   useToolbarActions,
 } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 import { ProjectUsersBadge } from '@waldur/project/ProjectUsersBadge';
 import { ProjectUsersList } from '@waldur/project/team/ProjectUsersList';
 import { setCurrentResource } from '@waldur/workspace/actions';
 
 import { fetchData } from './fetchData';
-import { ResourceBreadcrumbs } from './ResourceBreadcrumbs';
+import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { ResourceDetailsHero } from './ResourceDetailsHero';
 
 export const ResourceDetailsPage: FunctionComponent<{}> = () => {
@@ -35,7 +36,53 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
 
   useTitle(data?.resource.name);
 
-  useBreadcrumbs(<ResourceBreadcrumbs resource={data?.resource} />);
+  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
+    if (!data?.resource) return [];
+    return [
+      {
+        key: 'organizations',
+        text: translate('Organizations'),
+        to: 'organizations',
+      },
+      {
+        key: 'organization.dashboard',
+        text: data.resource.customer_name,
+        to: 'organization.dashboard',
+        params: { uuid: data.resource.customer_uuid },
+        ellipsis: 'xl',
+      },
+      {
+        key: 'organization.projects',
+        text: translate('Projects'),
+        to: 'organization.projects',
+        params: { uuid: data.resource.customer_uuid },
+        ellipsis: 'md',
+      },
+      {
+        key: 'project.dashboard',
+        text: data.resource.project_name,
+        to: 'project.dashboard',
+        params: { uuid: data.resource.project_uuid },
+        ellipsis: 'xl',
+      },
+      {
+        key: 'project.resources',
+        text: data.resource.category_title,
+        to: 'project.resources',
+        params: { uuid: data.resource.project_uuid },
+        ellipsis: 'xxl',
+      },
+      {
+        key: 'resource',
+        text: data.resource.name,
+        dropdown: <ResourceBreadcrumbPopover resource={data.resource} />,
+        truncate: true,
+        active: true,
+      },
+    ];
+  }, [data?.resource]);
+
+  useBreadcrumbs(breadcrumbItems);
 
   usePermissionView(() => {
     if (data?.resource) {

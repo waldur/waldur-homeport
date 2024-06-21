@@ -3,10 +3,12 @@ import { FunctionComponent } from 'react';
 import { formatDate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { formatRole, formatRoleType } from '@waldur/permissions/utils';
+import { formatRoleType } from '@waldur/permissions/utils';
 import { Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { useTable } from '@waldur/table/utils';
+
+import { RolePopover } from './RolePopover';
 
 interface UserAffiliationsListProps {
   user;
@@ -67,7 +69,7 @@ export const UserAffiliationsList: FunctionComponent<
     },
     {
       title: translate('Role name'),
-      render: ({ row }) => <>{formatRole(row.role_name)}</>,
+      render: ({ row }) => <RolePopover roleName={row.role_name} />,
     },
     {
       title: translate('Valid till'),

@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
+import { useMemo } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
-import { PageBarTab } from '@waldur/navigation/types';
+import { IBreadcrumbItem, PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
 import { getProtectedCall, getProtectedCallRound } from '../api';
 
-import { RoundBreadcrumbs } from './RoundBreadcrumbs';
 import { RoundPageHero } from './RoundPageHero';
 
 const ProposalsList = lazyComponent(
@@ -101,10 +101,54 @@ export const RoundUIView = () => {
     [round, call],
   );
 
-  useBreadcrumbs(
-    round && call ? <RoundBreadcrumbs round={round} call={call} /> : null,
+  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
+    () =>
+      !(round && call)
+        ? []
+        : [
+            {
+              key: 'organizations',
+              text: translate('Organizations'),
+              to: 'organizations',
+            },
+            {
+              key: 'organization.dashboard',
+              text: call.customer_name,
+              to: 'organization.dashboard',
+              params: { uuid: call.customer_uuid },
+              ellipsis: 'xl',
+            },
+            {
+              key: 'call-list',
+              text: translate('Calls for proposals'),
+              to: 'call-management.call-list',
+              params: { uuid: call.customer_uuid },
+              ellipsis: 'xl',
+            },
+            {
+              key: 'call',
+              text: call.name,
+              to: 'protected-call.main',
+              params: { call_uuid: call.uuid },
+              ellipsis: 'xl',
+            },
+            {
+              key: 'call-rounds',
+              text: translate('Rounds'),
+              to: 'protected-call.main',
+              params: { call_uuid: call.uuid, tab: 'rounds' },
+              ellipsis: 'md',
+            },
+            {
+              key: 'round',
+              text: round.name,
+              truncate: true,
+              active: true,
+            },
+          ],
     [round, call],
   );
+  useBreadcrumbs(breadcrumbItems);
 
   return (
     <UIView

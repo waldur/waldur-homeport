@@ -19,8 +19,8 @@ import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
 import { isExperimentalUiComponentsVisible } from '../utils';
 
-import { OfferingBreadcrumbs } from './OfferingBreadcrumbs';
 import { OfferingViewHero } from './OfferingViewHero';
+import { getOfferingBreadcrumbItems } from './utils';
 
 const OfferingDetailsStatistics = lazyComponent(
   () =>
@@ -169,10 +169,11 @@ export const OfferingDetailsUIView = () => {
     [offering_uuid, refetch, isRefetching],
   );
 
-  useBreadcrumbs(
-    data?.offering ? <OfferingBreadcrumbs offering={data.offering} /> : null,
-    [data],
+  const breadcrumbItems = useMemo(
+    () => getOfferingBreadcrumbItems(data?.offering),
+    [data?.offering],
   );
+  useBreadcrumbs(breadcrumbItems);
 
   return (
     <UIView

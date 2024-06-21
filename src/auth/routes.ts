@@ -21,7 +21,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'login',
-    url: '/login/',
+    url: '/login/?disableAutoLogin',
     component: LandingPage,
     params: {
       toState: '',

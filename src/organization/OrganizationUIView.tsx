@@ -4,7 +4,7 @@ import {
   useCurrentStateAndParams,
   useRouter,
 } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -13,6 +13,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
+import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import {
   checkIsServiceManager,
@@ -20,8 +21,6 @@ import {
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@waldur/workspace/selectors';
-
-import { OrganizationBreadcrumbs } from './OrganizationBreadcrumbs';
 
 const getDashboardState = (state: StateDeclaration) => {
   if (isDescendantOf('organization', state)) {
@@ -95,7 +94,22 @@ const WithHero = (props) => {
 
   usePageHero(<PageHero customer={customer} />);
 
-  useBreadcrumbs(<OrganizationBreadcrumbs customer={customer} />);
+  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
+    () => [
+      {
+        key: 'organizations',
+        text: translate('Organizations'),
+        to: 'organizations',
+      },
+      {
+        key: 'organization',
+        text: customer.name,
+        active: true,
+      },
+    ],
+    [customer],
+  );
+  useBreadcrumbs(breadcrumbItems);
 
   return <UIView {...props} />;
 };
