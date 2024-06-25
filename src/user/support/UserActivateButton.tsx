@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
-import { UserDetails, User } from '@waldur/workspace/types';
+import { User, UserDetails } from '@waldur/workspace/types';
 
 import * as actions from './actions';
 
@@ -18,8 +18,8 @@ interface UserActivateButtonProps {
 
 const getConfirmationText = (isActive, name) => {
   return isActive
-    ? translate(`Are you sure you want to deactivate {name}?`, { name })
-    : translate(`Are you sure you want to activate {name}?`, { name });
+    ? translate('Are you sure you want to deactivate {name}?', { name })
+    : translate('Are you sure you want to activate {name}?', { name });
 };
 
 const PureUserActivateButton = (props: UserActivateButtonProps) => {

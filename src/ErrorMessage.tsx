@@ -9,7 +9,7 @@ export const ErrorMessage: FallbackRender = (props) => (
   <>
     <ImageTablePlaceholder
       illustration={<Illustration />}
-      title={translate(`An error has occurred.`)}
+      title={translate('An error has occurred.')}
       description={props.error.message}
       action={
         <Button onClick={() => location.reload()} variant="success">

@@ -21,7 +21,7 @@
     "ci:start": "yarn build && yarn ci:conf && yarn serve build --single --listen 8001",
     "ci:run": "cypress run",
     "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run",
-    "gettext:extract": "angular-gettext-cli --files 'src/**/*.+(js|ts|tsx|html)' --exclude '**/*.spec.(js|ts|tsx)' --dest './locales/template.pot' --marker-names translate,gettext --no-line-numbers"
+    "gettext:extract": "node extractLiteralsFromFiles.js"
   },
   "dependencies": {
     "@cloudfour/simple-svg-placeholder": "^1.1.0",
@@ -65,8 +65,6 @@
     "monaco-editor-webpack-plugin": "^7.1.0",
     "papaparse": "^5.2.0",
     "pdfmake": "^0.2.2",
-    "po-loader": "^0.5.0",
-    "po2json": "1.0.0-beta-3",
     "prop-types": "^15.6.2",
     "qs": "^6.9.3",
     "react": "^18.3.0",
@@ -111,7 +109,7 @@
     "@types/lodash": "^4.14.21",
     "@types/luxon": "^2.0.4",
     "@types/marked": "^4.0.1",
-    "@types/node": "^20.11.30",
+    "@types/node": "^20.14.6",
     "@types/qs": "^6.9.5",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
@@ -122,7 +120,6 @@
     "@types/redux-form": "^8.3.10",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
-    "angular-gettext-cli": "^1.2.0",
     "autoprefixer": "^10.3.7",
     "copy-webpack-plugin": "^9.0.1",
     "cross-env": "^7.0.3",
@@ -227,7 +224,8 @@
       "config": [
         "webpack.config.*.js"
       ]
-    }
+    },
+    "ignore": ["extractLiteralsFromFiles.js"]
   },
   "stylelint": {
     "extends": "stylelint-config-recommended-scss",
