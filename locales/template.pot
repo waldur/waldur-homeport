@@ -581,6 +581,10 @@ msgstr ""
 msgid "Affected resource field name"
 msgstr ""
 
+#: src/user/support/UserList.tsx
+msgid "Affilations"
+msgstr ""
+
 #: src/user/dashboard/UserProfile.tsx
 msgid "Affiliation"
 msgstr ""
@@ -605,6 +609,10 @@ msgstr ""
 
 #: src/marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx
 msgid "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
+msgstr ""
+
+#: src/user/support/UserList.tsx
+msgid "Aggremment date"
 msgstr ""
 
 #: src/administration/branding/BrandingForm.tsx
@@ -1947,6 +1955,7 @@ msgstr ""
 #: src/invitations/InvitationExpandableRow.tsx
 #: src/invitations/actions/CivilNumberGroup.tsx
 #: src/invitations/actions/create/EmailsListGroup.tsx
+#: src/user/support/UserList.tsx
 msgid "Civil number"
 msgstr ""
 
@@ -2980,6 +2989,7 @@ msgid "Date and time when item usage has started"
 msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserList.tsx
 msgid "Date joined"
 msgstr ""
 
@@ -3236,6 +3246,7 @@ msgstr ""
 #: src/slurm/RequestLimitsChangeDialog.tsx
 #: src/user/affiliations/ProjectExpandableRow.tsx
 #: src/user/support/UserEditForm.tsx
+#: src/user/support/UserList.tsx
 msgid "Description"
 msgstr ""
 
@@ -4902,12 +4913,20 @@ msgstr ""
 msgid "Identity provider"
 msgstr ""
 
+#: src/user/support/UserList.tsx
+msgid "Identity provider fields"
+msgstr ""
+
 #: src/administration/providers/CreateProviderDialog.tsx
 msgid "Identity provider has been added successfully."
 msgstr ""
 
 #: src/administration/providers/UpdateProviderDialog.tsx
 msgid "Identity provider has been updated successfully."
+msgstr ""
+
+#: src/user/support/UserList.tsx
+msgid "Identity provider name"
 msgstr ""
 
 #: src/administration/routes.ts
@@ -5478,6 +5497,7 @@ msgid "Job position"
 msgstr ""
 
 #: src/invitations/actions/UserDetailsGroup.tsx
+#: src/user/support/UserList.tsx
 msgid "Job title"
 msgstr ""
 
@@ -8179,6 +8199,7 @@ msgid "Powered by"
 msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserList.tsx
 msgid "Preferred language"
 msgstr ""
 
@@ -9050,6 +9071,7 @@ msgid "Registration code"
 msgstr ""
 
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserList.tsx
 msgid "Registration method"
 msgstr ""
 
@@ -9388,6 +9410,7 @@ msgstr ""
 
 #: src/user/support/EmailChangeForm.tsx
 #: src/user/support/RequestedEmail.tsx
+#: src/user/support/UserList.tsx
 msgid "Requested email"
 msgstr ""
 
@@ -12419,6 +12442,7 @@ msgstr ""
 #: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/user/affiliations/BaseOrganizationsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
+#: src/user/support/UserList.tsx
 msgid "UUID"
 msgstr ""
 
@@ -14207,6 +14231,7 @@ msgstr ""
 #: src/slurm/marketplace.ts
 #: src/user/UserOfferingList.tsx
 #: src/user/support/UserDetailsTable.tsx
+#: src/user/support/UserList.tsx
 #: src/vmware/VMwareForm.tsx
 msgid "Username"
 msgstr ""

@@ -16,13 +16,13 @@ describe('Users', () => {
         fixture: 'support/customers.json',
       })
 
-      .intercept('GET', '/api/users/?page=1&page_size=10&query=Tara%20Pierce', {
+      .intercept('GET', '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&query=Tara%20Pierce', {
         fixture: 'support/user-search-by-name.json',
       })
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&query=0024c6a7885940bbb156e82073bc0244',
+        '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&query=0024c6a7885940bbb156e82073bc0244',
         {
           fixture: 'support/user-search-by-name.json',
         },
@@ -30,29 +30,29 @@ describe('Users', () => {
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf',
+        '/api/users/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active',
         {
           fixture: 'support/user-search-by-name.json',
         },
       )
 
-      .intercept('GET', '/api/users/?page=1&page_size=10&is_staff=true', {
+      .intercept('GET', '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&is_staff=true', {
         fixture: 'support/users.json',
       })
 
-      .intercept('GET', '/api/users/?page=1&page_size=10&role=&status=true', {
+      .intercept('GET', '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&role=&status=true', {
         fixture: 'support/users.json',
       })
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&query=TaraPierce%40example.com',
+        '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&query=TaraPierce%40example.com',
         {
           fixture: 'support/user-search-by-name.json',
         },
       )
 
-      .intercept('GET', '/api/users/?page=1&page_size=10', {
+      .intercept('GET', '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active', {
         fixture: 'support/users.json',
       })
       .as('getUsers')
