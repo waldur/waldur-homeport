@@ -38,11 +38,6 @@ body {
   color: $body-color;
 }
 
-// Angular integration
-router-outlet {
-  display: none;
-}
-
 canvas {
   user-select: none;
 }
