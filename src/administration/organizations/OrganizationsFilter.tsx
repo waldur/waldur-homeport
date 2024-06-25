@@ -2,10 +2,7 @@ import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
 import { OrganizationGroupFilter } from '@waldur/administration/organizations/OrganizationGroupFilter';
-import {
-  AccountingRunningField,
-  getOptions as AccountingRunningFieldOptions,
-} from '@waldur/customer/list/AccountingRunningField';
+import { AccountingRunningField } from '@waldur/customer/list/AccountingRunningField';
 import { SelectOrganizationGroupFieldPure } from '@waldur/customer/list/SelectOrganizationGroupField';
 import { ServiceProviderFilter } from '@waldur/customer/list/ServiceProviderFilter';
 import { translate } from '@waldur/i18n';
@@ -47,8 +44,5 @@ const PureSupportCustomerFilter: FunctionComponent = () => (
 
 export const OrganizationsFilter = reduxForm<{}, any>({
   form: CUSTOMERS_FILTER_FORM_ID,
-  initialValues: {
-    accounting_is_running: AccountingRunningFieldOptions()[0],
-  },
   destroyOnUnmount: false,
 })(PureSupportCustomerFilter);
