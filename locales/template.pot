@@ -6186,6 +6186,10 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
+#: src/proposals/proposal/create/ProposalSubmissionStep.tsx
+msgid "NB! After clicking Yes, you will not be able to edit the proposal!"
+msgstr ""
+
 #: src/administration/organizations/OrganizationGroupFromDialog.tsx
 #: src/administration/organizations/OrganizationGroupTypesList.tsx
 #: src/administration/organizations/OrganizationGroupsList.tsx
