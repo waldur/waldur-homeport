@@ -1,32 +1,25 @@
 {
   "upload": {
-    "deprecateMissing": true,
+    "deprecateMissing": false,
     "files": [
       {
-        "type": "pot",
+        "type": "json",
         "group": "source",
-        "pattern": "template-for-localazy.pot",
+        "pattern": "template-for-localazy.json",
         "features": ["use_key_for_content", "filter_untranslated"],
         "lang": "inherited"
       },
       {
         "group": "existing",
-        "pattern": "locales/*.po",
-        "type": "po",
-        "excludes": [
-          "locales/templates.pot",
-          "locales/par.po",
-          "locales/iwm.po",
-          "locales/neic.po",
-          "locales/ita.po"
-        ],
+        "pattern": "locales/*.json",
+        "type": "json",
         "features": ["filter_untranslated"],
-        "file": "template-for-localazy.pot",
+        "file": "template.json",
         "lang": "${autodetectLang}"
       }
     ]
   },
   "download": {
-    "files": "locales/${lang}.po"
+    "files": "locales/${lang}.json"
   }
 }

@@ -5,5 +5,5 @@ export const validateStaffAction = (ctx: ActionContext) => {
   if (ctx?.user.is_staff) {
     return;
   }
-  return translate(`Only staff users are allowed to perform this action.`);
+  return translate('Only staff users are allowed to perform this action.');
 };

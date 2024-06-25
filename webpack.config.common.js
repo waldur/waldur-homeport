@@ -218,43 +218,6 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.po$/,
-        use: [
-          {
-            loader: 'json-loader',
-          },
-          {
-            loader: 'po-loader',
-            options: {
-              format: 'mf',
-              mfOptions: {
-                replacements: [
-                  {
-                    pattern: /%(\d+)(?:\$\w)?/g,
-                    replacement: (_, n) => `{${n - 1}}`,
-                  },
-                  {
-                    pattern: /%\((\w+)\)\w/g,
-                    replacement: '{$1}',
-                  },
-                  {
-                    pattern: /%\w/g,
-                    replacement: function () {
-                      return `{${this.n++}}`;
-                    },
-                    state: { n: 0 },
-                  },
-                  {
-                    pattern: /%%/g,
-                    replacement: '%',
-                  },
-                ],
-              },
-            },
-          },
-        ],
-      },
     ],
   },
   plugins: [

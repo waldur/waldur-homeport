@@ -21,5 +21,5 @@ export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
 
 export const validateMaxLength = (value: string) =>
   value && value.length > 2000
-    ? translate(`Must be 2000 characters or less.`)
+    ? translate('Must be 2000 characters or less.')
     : undefined;

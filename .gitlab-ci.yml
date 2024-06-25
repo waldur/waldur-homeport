@@ -234,7 +234,7 @@ Upload translatable strings:
   image:
     name: registry.hpc.ut.ee/mirror/localazy/cli:latest
   script:
-    - sed 's/{\([^}]*\)\}/{__\1__}/g' locales/template.pot > template-for-localazy.pot
+    - sed 's/{\([^}]*\)\}/{__\1__}/g' template.json > template-for-localazy.json
     - localazy upload source -w $LOCALAZY_WRITE_KEY -r $LOCALAZY_READ_KEY
   before_script: []
 
@@ -253,7 +253,7 @@ Download translation:
     - git fetch
     - git branch -D new-translations || echo "No translation branch" # cleanup
     - localazy download -w $LOCALAZY_WRITE_KEY -r $LOCALAZY_READ_KEY
-    - find locales -type f -name '*.po' -exec sed -i 's/{__\([^}]*\)__\}/{\1}/g' {} \;
+    - find locales -type f -name '*.json' -exec sed -i 's/{__\([^}]*\)__\}/{\1}/g' {} \;
     - git status
     - git add locales/*
     - git commit locales -m "Updates translations" || exit 0

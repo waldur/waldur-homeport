@@ -7,7 +7,7 @@ import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
 export const CustomerResourcesListPlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder
     illustration={<Illustration />}
-    title={translate(`Nothing to show here`)}
-    description={translate(`Seems you don't have any resources yet`)}
+    title={translate('Nothing to show here')}
+    description={translate("Seems you don't have any resources yet")}
   />
 );

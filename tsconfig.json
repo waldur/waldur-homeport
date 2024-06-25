@@ -14,13 +14,35 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@waldur/*": ["src/*"],
-      "react": [ "./node_modules/@types/react" ],
-      "react-dom": [ "./node_modules/@types/react-dom" ],
+      "@waldur/*": [
+        "src/*"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "react-dom": [
+        "./node_modules/@types/react-dom"
+      ],
     },
-    "lib": ["es2021", "dom"]
+    "lib": [
+      "es2021",
+      "dom"
+    ]
   },
-  "include": ["./src/**/*", "./typings.d.ts", "cypress.config.ts"],
-  "exclude": ["./cypress/**/*", "./cypress.config.ts"],
-  "typeRoots": ["./node_modules/@types", "./typings.d.ts"]
+  "include": [
+    "./src/**/*",
+    "./typings.d.ts",
+    "cypress.config.ts",
+    "extractLiteralsFromFiles.ts"
+  ],
+  "exclude": [
+    "./cypress/**/*",
+    "./cypress.config.ts",
+    "node_modules/@types/webpack",
+    "node_modules/@types/enzyme"
+  ],
+  "typeRoots": [
+    "./node_modules/@types",
+    "./typings.d.ts"
+  ]
 }
