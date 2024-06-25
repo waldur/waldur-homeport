@@ -27,6 +27,7 @@ export const waitForConfirmation = (
   dispatch,
   title: ReactNode,
   body: ReactNode,
+  nb?: ReactNode,
 ) => {
   const deferred = createDeferred();
   const params = {
@@ -34,6 +35,7 @@ export const waitForConfirmation = (
       deferred,
       title,
       body,
+      nb,
     },
   };
   dispatch(openModalDialog(ConfirmationDialog, params));
