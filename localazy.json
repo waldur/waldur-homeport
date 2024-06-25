@@ -1,6 +1,6 @@
 {
   "upload": {
-    "deprecateMissing": false,
+    "deprecateMissing": true,
     "files": [
       {
         "type": "json",
