@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { RoleEnum } from '@waldur/permissions/enums';
@@ -95,6 +96,15 @@ const SupportStatusField = ({ row }) => {
   return <BooleanField value={row.is_support} />;
 };
 
+const renderListOrDash = (list) => {
+  return (
+    <>
+      {list && list.length > 0
+        ? list.map((item, index) => <div key={index}>{item}</div>)
+        : DASH_ESCAPE_CODE}
+    </>
+  );
+};
 const RowActions = ({ row }) => {
   return (
     <>
@@ -152,56 +162,148 @@ export const UserList: FunctionComponent = () => {
     ],
   });
 
+  const columns = [
+    {
+      title: translate('Full name'),
+      render: FullNameField,
+      orderField: 'full_name',
+      keys: ['full_name'],
+    },
+    {
+      title: translate('Email'),
+      render: EmailField,
+      orderField: 'email',
+      keys: ['email'],
+    },
+    {
+      title: translate('Phone number'),
+      render: PhoneNumberField,
+      orderField: 'phone_number',
+      keys: ['phone_number'],
+    },
+    {
+      title: translate('Organization'),
+      render: OrganizationField,
+      orderField: 'organization',
+    },
+    {
+      title: translate('Organization roles'),
+      render: OrganizationRolesField,
+      keys: ['permissions'],
+    },
+    {
+      title: translate('Project roles'),
+      render: ProjectRolesField,
+      keys: ['permissions'],
+    },
+    {
+      title: translate('Staff'),
+      render: StaffStatusField,
+      className: 'text-center',
+      keys: ['is_staff'],
+      optional: true,
+    },
+    {
+      title: translate('Support'),
+      render: SupportStatusField,
+      className: 'text-center',
+      keys: ['is_support'],
+      optional: true,
+    },
+    {
+      title: translate('Status'),
+      render: UserStatusField,
+      className: 'text-center',
+      keys: ['is_active'],
+    },
+    {
+      title: translate('Affilations'),
+      render: ({ row }) => renderListOrDash(row.affiliations),
+      keys: ['affiliations'],
+      optional: true,
+    },
+    {
+      title: translate('Civil number'),
+      render: ({ row }) => renderFieldOrDash(row.civil_number),
+      keys: ['civil_number'],
+      optional: true,
+    },
+    {
+      title: translate('Job title'),
+      render: ({ row }) => renderFieldOrDash(row.job_title),
+      keys: ['job_title'],
+      optional: true,
+    },
+    {
+      title: translate('Date joined'),
+      render: ({ row }) => formatDateTime(row.date_joined),
+      keys: ['date_joined'],
+      optional: true,
+    },
+    {
+      title: translate('Aggremment date'),
+      render: ({ row }) => formatDateTime(row.agreement_date),
+      keys: ['agreement_date'],
+      optional: true,
+    },
+    {
+      title: translate('Username'),
+      render: ({ row }) => renderFieldOrDash(row.username),
+      keys: ['username'],
+      optional: true,
+    },
+    {
+      title: translate('UUID'),
+      render: ({ row }) => <>{row.uuid}</>,
+      keys: ['uuid'],
+      optional: true,
+    },
+    {
+      title: translate('Description'),
+      render: ({ row }) => renderFieldOrDash(row.description),
+      keys: ['description'],
+      optional: true,
+    },
+    {
+      title: translate('Identity provider name'),
+      render: ({ row }) => renderFieldOrDash(row.identity_provider_name),
+      keys: ['identity_provider_name'],
+      optional: true,
+    },
+    {
+      title: translate('Identity provider fields'),
+      render: ({ row }) => renderListOrDash(row.identity_provider_fields),
+      keys: ['identity_provider_fields'],
+      optional: true,
+    },
+    {
+      title: translate('Requested email'),
+      render: ({ row }) => renderFieldOrDash(row.requested_email),
+      keys: ['requested_email'],
+      optional: true,
+    },
+    {
+      title: translate('Registration method'),
+      render: ({ row }) => renderFieldOrDash(row.registration_method),
+      keys: ['registration_method'],
+      optional: true,
+    },
+    {
+      title: translate('Preferred language'),
+      render: ({ row }) => renderFieldOrDash(row.preferred_language),
+      keys: ['preferred_language'],
+      optional: true,
+    },
+  ];
+
   return (
     <Table
       {...props}
       filters={<UserFilter />}
-      columns={[
-        {
-          title: translate('Full name'),
-          render: FullNameField,
-          orderField: 'full_name',
-        },
-        {
-          title: translate('Email'),
-          render: EmailField,
-          orderField: 'email',
-        },
-        {
-          title: translate('Phone number'),
-          render: PhoneNumberField,
-          orderField: 'phone_number',
-        },
-        {
-          title: translate('Organization'),
-          render: OrganizationField,
-        },
-        {
-          title: translate('Organization roles'),
-          render: OrganizationRolesField,
-        },
-        {
-          title: translate('Project roles'),
-          render: ProjectRolesField,
-        },
-        {
-          title: translate('Staff'),
-          render: StaffStatusField,
-          className: 'text-center',
-        },
-        {
-          title: translate('Support'),
-          render: SupportStatusField,
-          className: 'text-center',
-        },
-        {
-          title: translate('Status'),
-          render: UserStatusField,
-          className: 'text-center',
-        },
-      ]}
+      columns={columns}
       hoverableRow={RowActions}
       showPageSizeSelector={true}
+      hasOptionalColumns
       verboseName={translate('users')}
       enableExport={true}
       actions={<UserTableActions refetch={props.fetch} />}
