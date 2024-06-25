@@ -176,6 +176,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization-team',
     data: {
       breadcrumb: () => translate('Users'),
+      permissions: [isOwnerOrStaff],
     },
   },
 
@@ -196,7 +197,6 @@ export const states: StateDeclaration[] = [
     parent: 'organization-team',
     data: {
       breadcrumb: () => translate('Group invitations'),
-      permissions: [isOwnerOrStaff],
     },
   },
 
@@ -207,7 +207,6 @@ export const states: StateDeclaration[] = [
     parent: 'organization-team',
     data: {
       breadcrumb: () => translate('Permission log'),
-      permissions: [isOwnerOrStaff],
     },
   },
 
@@ -218,7 +217,6 @@ export const states: StateDeclaration[] = [
     parent: 'organization-team',
     data: {
       breadcrumb: () => translate('Reviews'),
-      permissions: [isOwnerOrStaff],
     },
   },
 

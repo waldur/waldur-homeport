@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
 import { ProjectsList } from '@waldur/project/ProjectsList';
 import {
-  getUser,
-  getCustomer,
   checkIsServiceManager,
+  getCustomer,
+  getUser,
+  isOwnerOrStaff,
 } from '@waldur/workspace/selectors';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
@@ -19,6 +20,7 @@ export const CustomerDashboard: FunctionComponent = () => {
     () => checkIsServiceManager(customer, user),
     [customer, user],
   );
+  const canSeeCharts = useSelector(isOwnerOrStaff);
 
   if (!customer) return null;
 
@@ -28,7 +30,9 @@ export const CustomerDashboard: FunctionComponent = () => {
         <CustomerProfile customer={customer} />
       ) : (
         <>
-          <CustomerDashboardChart customer={customer} user={user} />
+          {canSeeCharts && (
+            <CustomerDashboardChart customer={customer} user={user} />
+          )}
           <CustomerChecklistOverview customer={customer} />
           <div className="mb-6">
             <ProjectsList />
