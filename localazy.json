@@ -6,7 +6,7 @@
         "type": "json",
         "group": "source",
         "pattern": "template-for-localazy.json",
-        "features": ["source_is_key", "filter_untranslated"],
+        "features": ["filter_untranslated"],
         "lang": "inherited"
       },
       {
