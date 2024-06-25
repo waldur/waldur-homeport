@@ -11,6 +11,7 @@ export const ProjectStep = {
   required: true,
   requiredFields: ['project'],
   component: FormProjectStep,
+  isActive: (offering) => offering.shared,
 };
 
 export const CustomerStep = {
@@ -20,6 +21,7 @@ export const CustomerStep = {
   required: true,
   requiredFields: ['customer'],
   component: FormCustomerStep,
+  isActive: (offering) => offering.shared,
 };
 
 export const PlanStep = {

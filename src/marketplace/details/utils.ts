@@ -9,7 +9,8 @@ import {
 import { ORDER_FORM_ID } from './constants';
 import { OrderSummaryProps } from './types';
 
-const formatOrder = (props: OrderSummaryProps, request) => {
+export const formatOrderForCreate = (props: OrderSummaryProps) => {
+  const request: OrderRequest = { offering: props.offering };
   const serializer = getFormSerializer(props.offering.type);
   const limitSerializer = getFormLimitSerializer(props.offering.type);
   if (props.formData) {
@@ -42,26 +43,9 @@ const formatOrder = (props: OrderSummaryProps, request) => {
         ...limitSerializer(props.formData.limits),
       };
     }
-    const project = props.project || props.formData.project;
-    if (project) {
-      request.project = project.url;
-    }
-    if (props.formData.project_create_request) {
-      request.project_create_request = props.formData.project_create_request;
-    }
-    if (props.formData.customer_create_request) {
-      request.customer_create_request = props.formData.customer_create_request;
-    }
-    if (props.formData.customer) {
-      request.customer = props.formData.customer;
-    }
+    request.project = props.formData.project?.url;
   }
   return request;
-};
-
-export const formatOrderForCreate = (props: OrderSummaryProps) => {
-  const request: OrderRequest = { offering: props.offering };
-  return formatOrder(props, request);
 };
 
 export const orderFormValues = formValueSelector(ORDER_FORM_ID);

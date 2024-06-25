@@ -12,10 +12,9 @@ import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCa
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
-import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-import { formErrorsSelector } from '../deploy/utils';
+import { formCustomerSelector, formErrorsSelector } from '../deploy/utils';
 import { orderFormDataSelector } from '../utils';
 
 import { OrderSummaryPlanRows } from './plan/OrderSummaryPlanRows';
@@ -31,7 +30,7 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
       {props.formData && props.formData.plan && (
         <OrderSummaryPlanRows
           priceData={props.prices}
-          customer={props.customer}
+          customer={props.formData.customer}
         />
       )}
     </div>
@@ -53,6 +52,8 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
   const errorsExist =
     projectError || props.errors?.attributes || props.errors?.limits;
 
+  const item = useMemo(() => formatOrderForCreate(props), [props]);
+
   return (
     <FloatingButton>
       {errorsExist && (
@@ -72,7 +73,7 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
           className="w-100"
         >
           <ShoppingCartButtonContainer
-            item={formatOrderForCreate(props)}
+            item={item}
             flavor="primary"
             disabled={Boolean(errorsExist) || !props.formValid}
             className="w-100"
@@ -81,7 +82,7 @@ export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
       )}
       {!errorsExist && (
         <ShoppingCartButtonContainer
-          item={formatOrderForCreate(props)}
+          item={item}
           flavor="primary"
           disabled={!props.formValid}
           className="w-100"
@@ -106,7 +107,7 @@ interface OrderSummaryStateProps {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  customer: getCustomer(state),
+  customer: formCustomerSelector(state),
   prices: pricesSelector(state, ownProps),
   formData: orderFormDataSelector(state),
   formValid: isValid(ORDER_FORM_ID)(state),

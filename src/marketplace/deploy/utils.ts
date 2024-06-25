@@ -97,6 +97,11 @@ export const formProjectSelector = (state: RootState) => {
   return formData.project;
 };
 
+export const formCustomerSelector = (state: RootState) => {
+  const formData = orderFormDataSelector(state);
+  return formData.customer;
+};
+
 export const formIsValidSelector = (state: RootState) =>
   isValid(ORDER_FORM_ID)(state);
 

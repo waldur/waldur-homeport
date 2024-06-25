@@ -16,7 +16,7 @@ import { orderCustomerSelector } from './utils';
 
 const loadOptions = (query, prevOptions, page) =>
   organizationAutocomplete(query, prevOptions, page, {
-    field: ['name', 'uuid'],
+    field: ['name', 'uuid', 'payment_profiles'],
     o: 'name',
   });
 

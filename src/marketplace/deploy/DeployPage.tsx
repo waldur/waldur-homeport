@@ -91,6 +91,16 @@ export const BaseDeployPage = ({
   useEffectOnce(() => {
     const initialData = {};
 
+    if (selectedOffering.project) {
+      Object.assign(initialData, {
+        project: {
+          name: selectedOffering.project_name,
+          uuid: selectedOffering.project_uuid,
+          url: selectedOffering.project,
+        },
+      });
+    }
+
     const customerFilter = marketplaceFilters?.find(
       (item) => item.name === 'organization',
     );
