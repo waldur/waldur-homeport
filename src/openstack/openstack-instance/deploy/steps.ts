@@ -31,6 +31,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     requiredFields: ['offering'],
     component: FormCloudStep,
     params: { type: INSTANCE_TYPE },
+    isActive: (offering) => offering.shared,
   },
   {
     label: translate('Image'),

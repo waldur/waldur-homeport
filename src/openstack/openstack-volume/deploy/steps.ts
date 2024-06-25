@@ -22,6 +22,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     requiredFields: ['offering'],
     component: FormCloudStep,
     params: { type: VOLUME_TYPE },
+    isActive: (offering) => offering.shared,
   },
   {
     label: translate('Volume'),
