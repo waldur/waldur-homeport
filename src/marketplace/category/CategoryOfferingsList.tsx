@@ -18,5 +18,5 @@ export const CategoryOfferingsList: FunctionComponent<{
     return { category_uuid: category.uuid, ...contextFilter };
   }, [category, marketplaceFilters]);
 
-  return <PublicOfferingsList filter={filter} />;
+  return <PublicOfferingsList filter={filter} showOrganization={false} />;
 };

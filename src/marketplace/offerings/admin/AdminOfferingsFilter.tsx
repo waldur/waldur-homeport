@@ -10,20 +10,27 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { ADMIN_OFFERINGS_FILTER_FORM_ID } from './constants';
 
-const PureAdminOfferingsFilter: FunctionComponent<{ showCategory? }> = ({
-  showCategory,
-}) => (
+interface AdminOfferingsFilterOwnProps {
+  showCategory?;
+  showOrganization?;
+}
+
+const PureAdminOfferingsFilter: FunctionComponent<
+  AdminOfferingsFilterOwnProps
+> = ({ showCategory, showOrganization = true }) => (
   <>
     <TableFilterItem title={translate('State')} name="state">
       <OfferingStateFilter />
     </TableFilterItem>
-    <TableFilterItem
-      title={translate('Organization')}
-      name="organization"
-      badgeValue={(value) => value?.name}
-    >
-      <OrganizationAutocomplete />
-    </TableFilterItem>
+    {showOrganization ? (
+      <TableFilterItem
+        title={translate('Organization')}
+        name="organization"
+        badgeValue={(value) => value?.name}
+      >
+        <OrganizationAutocomplete />
+      </TableFilterItem>
+    ) : null}
     <TableFilterItem
       title={translate('Integration type')}
       name="offering_type"
@@ -43,7 +50,7 @@ const PureAdminOfferingsFilter: FunctionComponent<{ showCategory? }> = ({
   </>
 );
 
-const enhance = reduxForm<{}, { showCategory? }>({
+const enhance = reduxForm<{}, AdminOfferingsFilterOwnProps>({
   form: ADMIN_OFFERINGS_FILTER_FORM_ID,
   destroyOnUnmount: false,
 });
