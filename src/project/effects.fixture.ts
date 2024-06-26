@@ -4,7 +4,7 @@ import * as api from './api';
 import * as effects from './effects';
 
 export const setupFixture = (state = {}) => {
-  const mockUpdateProject = jest.spyOn(api, 'updateProject');
+  const mockUpdateProject = jest.spyOn(api, 'updateProjectPartially');
   jest.spyOn(api, 'dangerouslyUpdateProject').mockReturnValue(null);
   const updateProject = (action) =>
     runSaga(store, effects.handleUpdateProject, action).toPromise();

@@ -1,11 +1,36 @@
 .image-input {
   // Input Changed to Empty State
   &.image-input-changed.image-input-empty {
+    [data-image-input-action='cancel'],
     [data-kt-image-input-action='cancel'] {
       display: flex;
     }
 
+    [data-image-input-action='remove'],
     [data-kt-image-input-action='remove'] {
+      display: none;
+    }
+  }
+
+  [data-image-input-action='cancel'] {
+    display: none;
+  }
+
+  // Input Changed State
+  &.image-input-changed {
+    [data-image-input-action='cancel'] {
+      display: flex;
+    }
+
+    [data-image-input-action='remove'] {
+      display: none;
+    }
+  }
+
+  // Input Empty State
+  &.image-input-empty {
+    [data-image-input-action='remove'],
+    [data-image-input-action='cancel'] {
       display: none;
     }
   }

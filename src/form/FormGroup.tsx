@@ -84,11 +84,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
       {!floating && labelNode}
       {cloneElement(children as any, newProps)}
       {floating && labelNode}
-      {description && (
-        <Form.Text muted={true} className="mb-0">
-          {description}
-        </Form.Text>
-      )}
+      {description && <Form.Text>{description}</Form.Text>}
       {meta.touched && <FieldError error={meta.error} />}
     </div>
   );

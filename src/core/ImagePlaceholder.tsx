@@ -14,7 +14,7 @@ interface ImagePlaceholderProps {
 export const ImagePlaceholder: FC<PropsWithChildren<ImagePlaceholderProps>> = ({
   width = '24px',
   height = '24px',
-  backgroundColor = '#eee',
+  backgroundColor,
   circle,
   minWidth,
   className,

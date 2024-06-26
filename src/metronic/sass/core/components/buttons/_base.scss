@@ -85,7 +85,7 @@
 // Icons
 .btn {
   // Default font-size for all buttons
-  &:not(.btn-sm):not(.btn-lg) {
+  &:not(.btn-lg) {
     font-size: 14px;
   }
 
@@ -97,9 +97,12 @@
     vertical-align: middle;
     line-height: 0;
   }
-  &.btn-icon-right i {
-    margin: 0;
-    margin-left: 0.35rem;
+  &.btn-icon-right {
+    .svg-icon,
+    i {
+      margin: 0;
+      margin-left: 0.35rem;
+    }
   }
 
   // Svg icon

@@ -2,20 +2,31 @@
 /* LABEL */
 .col-form-label,
 .form-label {
-  font-size: 0.95rem; // fs-7
+  font-size: 1.075rem; // fs-6
   font-weight: 500; // fw-bold
+  color: $gray-800;
+}
+
+.form-text {
+  font-size: 1.075rem;
+  font-weight: 400;
+  color: $gray-800;
+  display: block;
+  line-height: 1;
 }
 
 /* FORM CONTROL (INPUT) */
 .form-control {
   border-radius: 8px;
-  font-size: 1.2rem;
+  font-size: 1.24rem;
+  color: $dark;
   box-shadow: unset;
   font-weight: 400;
-  padding-top: 0.53rem;
-  padding-bottom: 0.53rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 
   &:focus {
+    color: $dark;
     border-color: $primary-300;
     box-shadow: 0 0 0 4px rgba($primary-300, 0.25);
   }

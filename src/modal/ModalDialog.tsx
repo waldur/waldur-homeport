@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
 interface ModalDialogProps {
-  title: ReactNode;
+  title?: ReactNode;
   subtitle?: ReactNode;
   footer?: ReactNode;
   closeButton?: boolean;
@@ -11,6 +11,7 @@ interface ModalDialogProps {
   headerClassName?: string;
   footerClassName?: string;
   children?: ReactNode;
+  headerLess?: boolean;
 }
 
 export const ModalDialog: FC<ModalDialogProps> = ({
@@ -22,17 +23,22 @@ export const ModalDialog: FC<ModalDialogProps> = ({
   bodyClassName,
   headerClassName,
   footerClassName,
+  headerLess,
 }) => (
   <div>
-    <Modal.Header
-      closeButton={closeButton}
-      className={classNames(headerClassName, !title && 'without-border')}
-    >
-      <div>
-        <Modal.Title>{title}</Modal.Title>
-        {subtitle && <h6 className="text-gray-700 fw-bold mt-1">{subtitle}</h6>}
-      </div>
-    </Modal.Header>
+    {!headerLess && (
+      <Modal.Header
+        closeButton={closeButton}
+        className={classNames(headerClassName, !title && 'without-border')}
+      >
+        <div>
+          <Modal.Title>{title}</Modal.Title>
+          {subtitle && (
+            <h6 className="text-gray-700 fw-bold mt-1">{subtitle}</h6>
+          )}
+        </div>
+      </Modal.Header>
+    )}
     <Modal.Body className={bodyClassName}>{children}</Modal.Body>
     {footer && (
       <Modal.Footer className={footerClassName}>{footer}</Modal.Footer>
