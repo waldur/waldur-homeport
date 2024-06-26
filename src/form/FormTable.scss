@@ -1,0 +1,42 @@
+.card.form-table-card {
+  .card-body {
+    padding: 1rem 1.85rem;
+  }
+}
+
+.table.form-table {
+  margin-bottom: 0;
+
+  tr:not(:last-child) {
+    border-bottom: 1px solid var(--bs-border-color);
+  }
+
+  th,
+  td {
+    font-size: 1.075rem;
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+  }
+
+  th {
+    color: var(--bs-gray-800);
+    font-weight: 500;
+
+    &:first-child {
+      padding-left: 0;
+    }
+  }
+  td {
+    color: var(--bs-gray-700);
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .col-actions {
+    text-align: right;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}

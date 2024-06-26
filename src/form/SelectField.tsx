@@ -26,6 +26,8 @@ export const SelectField: FunctionComponent<any> = (props) => {
           props.input.onBlur(props.input.value);
         }
       }}
+      className="metronic-select-container"
+      classNamePrefix="metronic-select"
     />
   );
 };

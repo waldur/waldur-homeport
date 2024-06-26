@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { Image } from '@waldur/core/Image';
-import { SVGImagePlaceholder } from '@waldur/core/SVGImagePlaceholder';
+import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 
 interface DashboardHeroLogo2Props {
   logo: string;
@@ -19,13 +19,13 @@ export const DashboardHeroLogo2: FC<DashboardHeroLogo2Props> = ({
       {props.logo ? (
         <Image src={props.logo} size={size} isContain circle={props.circle} />
       ) : (
-        <SVGImagePlaceholder
-          width={size}
-          height={size}
-          text={props.logoAlt ? props.logoAlt[0] : ''}
-          fontSize={60}
+        <ImagePlaceholder
+          width={`${size}px`}
+          height={`${size}px`}
           circle={props.circle}
-        />
+        >
+          {props.logoAlt}
+        </ImagePlaceholder>
       )}
     </div>
   );

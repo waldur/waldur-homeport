@@ -1,14 +1,67 @@
 const projectFixturePath = 'projects/alice_azure.json';
 
 const currentYear = new Date().getFullYear();
-const nextYear = new Date(currentYear + 1, 5, 20);
+const currentMonth = new Date().getMonth();
+const nextMonthISO = new Date(currentYear, (currentMonth + 1) % 12, 20)
+  .toISOString()
+  .split('T')[0];
+const next3Months = new Date(currentYear, (currentMonth + 3) % 12, 20);
 
 const editedProject = {
   uuid: 'df4193e2bee24a4c8e339474d74c5f8c',
   name: 'Test name',
   description: 'Test description',
   backend_id: '123456789',
-  end_date: nextYear.toISOString().split('T')[0],
+  end_date: next3Months.toISOString().split('T')[0],
+};
+
+const openTab = (tab: string) => {
+  cy.get('.toolbar').contains('.menu-link', tab).click();
+};
+
+const openEditDialog = (label: string) => {
+  cy.get('.card .table')
+    .contains('tr th:first-child', label)
+    .parent()
+    .find('td:last-child .btn')
+    .click();
+};
+
+type InputType = 'input' | 'textarea' | 'date';
+
+const getField = (field: string, type: InputType = 'input') => {
+  if (type === 'date') {
+    return cy.get('.modal input.flatpickr-input');
+  } else {
+    return cy.get(`.modal ${type}[name="${field}"]`);
+  }
+};
+
+const updateField = (
+  label: string,
+  field: string,
+  value: string,
+  type: InputType = 'input',
+) => {
+  openEditDialog(label);
+
+  if (type === 'date') {
+    cy.selectFlatpickrDate('.modal form input.flatpickr-input', value);
+  } else {
+    getField(field, type).clear().type(value);
+  }
+
+  cy.get('.modal form button[type="submit"]')
+    .should('be.visible')
+    .click()
+
+    .wait('@updateProject')
+    .its('request.body')
+    .should('contain', value);
+};
+
+const closeEditDialog = () => {
+  cy.get('.modal').contains('button', 'Cancel').click();
 };
 
 describe('Project manage', { testIsolation: false }, () => {
@@ -20,9 +73,9 @@ describe('Project manage', { testIsolation: false }, () => {
       .intercept('GET', '/api/projects/oecd_codes/', [])
       .fixture(projectFixturePath)
       .then((project) => {
-        cy.intercept('GET', `/api/projects/${project.uuid}/`, {
-          fixture: projectFixturePath,
-        })
+        // Assume next year date as project end date, because the date-picker does not accept the date before today.
+        project.end_date = nextMonthISO;
+        cy.intercept('GET', `/api/projects/${project.uuid}/`, project)
           .intercept('GET', `/api/customers/${project.customer_uuid}/`, {
             fixture: 'customers/alice.json',
           })
@@ -37,56 +90,66 @@ describe('Project manage', { testIsolation: false }, () => {
     });
   });
 
-  it('Assure that the project info is filled in correctly', () => {
+  it('Assure that image tab view is present', () => {
     cy.fixture(projectFixturePath).then((project) => {
-      cy
-        // Ensure that customer_name field is present and disabled
-        .get('input[name="customer_name"]')
+      cy.get('form .card-body div.image-input').should(
+        project.image ? 'not.have.class' : 'have.class',
+        'image-input-empty',
+      );
+    });
+  });
+
+  it('Assure that on the general tab, the project info is filled in correctly', () => {
+    openTab('General');
+    cy.fixture(projectFixturePath).then((project) => {
+      // Ensure that name field is present
+      openEditDialog('Name');
+      getField('name').should('have.value', project.name);
+      closeEditDialog();
+      // Ensure that customer_name field is present and disabled
+      openEditDialog('Owner');
+      getField('customer_name')
         .should('have.value', project.customer_name)
-        .should('be.disabled')
+        .should('be.disabled');
+      closeEditDialog();
+      // Ensure that end_date picker is present
+      openEditDialog('End date');
+      project.end_date = nextMonthISO;
+      getField('end_date', 'date').should('have.value', project.end_date ?? '');
+      closeEditDialog();
+      // Ensure that description field is present
+      openEditDialog('Description');
+      getField('description', 'textarea').should(
+        'have.value',
+        project.description,
+      );
+      closeEditDialog();
+    });
+  });
 
-        // Ensure that name field is present
-        .get('input[name="name"]')
-        .should('have.value', project.name)
-
-        // Ensure that description field is present
-        .get('textarea[name="description"]')
-        .should('have.value', project.description)
-
-        // Ensure that end_date picker is present
-        .get('.card-body form input.flatpickr-input')
-        .should('have.value', project.end_date ?? '')
-
-        // Ensure that backend_id field is present
-        .get('input[name="backend_id"]')
-        .should('have.value', project.backend_id)
-
-        // Ensure that image field is present
-        .get('.card-body form div.image-input')
-        .should(
-          project.image ? 'not.have.class' : 'have.class',
-          'image-input-empty',
-        )
-
-        // Ensure that submit button is not present when we have not changed anything yet
-        .get('.card-body form button[type="submit"]')
-        .should('have.length', 0);
+  it('Assure that on the metadata tab, the project info is filled in correctly', () => {
+    openTab('Metadata');
+    cy.fixture(projectFixturePath).then((project) => {
+      // Ensure that backend_id field is present
+      openEditDialog('Backend ID');
+      getField('backend_id').should('have.value', project.backend_id);
+      closeEditDialog();
     });
   });
 
   it('Assure that the date picker works fine', () => {
-    const initialDate = new Date(currentYear + 3, 6, 21)
+    const initialDate = new Date(currentYear, (currentMonth + 3) % 12, 21)
       .toISOString()
       .split('T')[0];
 
-    // Edit the name field to make sure the submit button is visible
-    cy.get('input[name="name"]').clear().type('testing date picker');
+    openTab('General');
+    openEditDialog('End date');
 
     cy
       // Update end_date picker with the initial date
-      .selectFlatpickrDate('.card-body form input.flatpickr-input', initialDate)
+      .selectFlatpickrDate('.modal input.flatpickr-input', initialDate)
 
-      .get('.card-body form button[type="submit"]')
+      .get('.modal button[type="submit"]')
       .should('be.visible')
       .click()
 
@@ -94,11 +157,13 @@ describe('Project manage', { testIsolation: false }, () => {
       .its('request.body')
       .should('contain', initialDate);
 
+    openEditDialog('End date');
     cy
       // Clear and save end_date picker
-      .selectFlatpickrDate('.card-body form input.flatpickr-input', null)
+      .selectFlatpickrDate('.modal input.flatpickr-input', initialDate)
+      .selectFlatpickrDate('.modal input.flatpickr-input', null)
 
-      .get('.card-body form button[type="submit"]')
+      .get('.modal button[type="submit"]')
       .should('be.visible')
       .click()
 
@@ -106,14 +171,15 @@ describe('Project manage', { testIsolation: false }, () => {
       .its('request.body')
       .should('not.contain', initialDate);
 
+    openEditDialog('End date');
     cy
       // Update end_date picker with a new date
       .selectFlatpickrDate(
-        '.card-body form input.flatpickr-input',
+        '.modal input.flatpickr-input',
         editedProject.end_date,
       )
 
-      .get('.card-body form button[type="submit"]')
+      .get('.modal button[type="submit"]')
       .should('be.visible')
       .click()
 
@@ -123,38 +189,23 @@ describe('Project manage', { testIsolation: false }, () => {
   });
 
   it('Allows to update project info', () => {
-    cy
-      // Edit name field
-      .get('input[name="name"]')
-      .clear()
-      .type(editedProject.name)
+    openTab('General');
+    // Edit name field
+    updateField('Name', 'name', editedProject.name);
 
-      // Edit description field
-      .get('textarea[name="description"]')
-      .clear()
-      .type(editedProject.description)
+    // Edit description field
+    updateField(
+      'Description',
+      'description',
+      editedProject.description,
+      'textarea',
+    );
 
-      // Edit end_date picker
-      .selectFlatpickrDate(
-        '.card-body form input.flatpickr-input',
-        editedProject.end_date,
-      )
+    // Edit end_date picker
+    updateField('End date', 'end_date', editedProject.end_date, 'date');
 
-      // Edit backend_id field
-      .get('input[name="backend_id"]')
-      .clear()
-      .type(editedProject.backend_id)
-
-      // Ensure that submit button is not present when we have not changed anything yet
-      .get('.card-body form button[type="submit"]')
-      .should('be.visible')
-      .click()
-
-      .wait('@updateProject')
-      .its('request.body')
-      .should('contain', editedProject.name)
-      .should('contain', editedProject.description)
-      .should('contain', editedProject.backend_id)
-      .should('contain', editedProject.end_date);
+    openTab('Metadata');
+    // Edit backend_id field
+    updateField('Backend ID', 'backend_id', editedProject.backend_id);
   });
 });

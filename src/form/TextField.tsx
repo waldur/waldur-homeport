@@ -8,11 +8,12 @@ interface TextFieldProps extends FormField {
   placeholder?: string;
   rows?: number;
   style?;
+  solid?: boolean;
 }
 
 export const TextField: FunctionComponent<TextFieldProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { input, label, rows, hideLabel, validate, ...rest } = props;
+  const { input, label, rows, hideLabel, validate, solid, ...rest } = props;
 
   const storeScroll = useCallback((e) => {
     const target = (e.target || e.currentTarget) as HTMLTextAreaElement;
@@ -22,7 +23,7 @@ export const TextField: FunctionComponent<TextFieldProps> = (props) => {
   return (
     <Form.Control
       as="textarea"
-      className="form-control-solid"
+      className={solid && 'form-control-solid'}
       style={props.style}
       placeholder="  "
       onScroll={storeScroll}

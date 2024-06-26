@@ -42,7 +42,7 @@ export const SearchInput = ({
         </span>
         <input
           type="text"
-          className="search-input form-control placeholder-gray-700 ps-13 fs-4"
+          className="search-input form-control placeholder-gray-700 ps-13 fs-4 h-40px"
           name="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}

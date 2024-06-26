@@ -7,7 +7,7 @@ import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 
 interface ActionButtonProps {
-  title: string;
+  title?: string;
   action: (event?: any) => void;
   iconNode?: ReactNode;
   className?: string;
