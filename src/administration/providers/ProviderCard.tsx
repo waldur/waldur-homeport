@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Card, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
+import { OIDC_TYPES } from '@waldur/auth/providers/constants';
 import { IdentityProviderLogo } from '@waldur/auth/providers/IdentityProviderLogo';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -80,8 +81,6 @@ export const ProviderCard: FC<ProviderCardProps> = ({
       }),
     );
   };
-
-  const OIDC_TYPES = ['tara', 'eduteams', 'keycloak'];
 
   return (
     <Card className="bg-light min-h-150px border border-secondary border-hover">
