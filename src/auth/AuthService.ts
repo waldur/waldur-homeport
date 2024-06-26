@@ -38,7 +38,7 @@ import {
   setAuthenticationMethod,
 } from './AuthMethodStorage';
 import { getRedirect, resetRedirect, setRedirect } from './AuthRedirectStorage';
-import { SAML2_IDP } from './providers/constants';
+import { OIDC_TYPES, SAML2_IDP } from './providers/constants';
 import { getToken, removeToken, setToken } from './TokenStorage';
 
 function setAuthHeader(token) {
@@ -123,14 +123,18 @@ export function clearTokenHeader() {
   delete Axios.defaults.headers.Authorization;
 }
 
-function localLogout(params?) {
+function clearAuthCache() {
   storeCurrentState();
   store.dispatch(setCurrentUser(undefined));
   clearImpersonationData();
   clearTokenHeader();
   removeToken();
-  router.stateService.go('login', params);
   resetAuthenticationMethod();
+}
+
+function localLogout(params?) {
+  clearAuthCache();
+  router.stateService.go('login', params);
 }
 
 function logout() {
@@ -146,7 +150,11 @@ function logout() {
         ),
       ),
     );
+    clearAuthCache();
     window.location.href = ENV.apiEndpoint + 'api-auth/saml2/logout/';
+  } else if (OIDC_TYPES.includes(authenticationMethod)) {
+    clearAuthCache();
+    router.stateService.go('home.oidc_logout');
   } else {
     localLogout();
   }

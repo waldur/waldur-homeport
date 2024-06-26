@@ -59,8 +59,11 @@ export function* handleUpdateProject(action) {
   const successMessage = translate('Project has been updated.');
   const errorMessage = translate('Project could not be updated.');
 
+  const uuid = action.payload.uuid;
+  const updatedData = action.payload.data;
+
   try {
-    const response = yield call(api.updateProject, action.payload);
+    const response = yield call(api.updateProjectPartially, uuid, updatedData);
     const project = response.data;
     yield call(api.dangerouslyUpdateProject, action.payload.cache, project);
     yield put(updateProject.success());
@@ -77,10 +80,21 @@ export function* handleUpdateProject(action) {
       ...errorData,
     });
     if (error.response && error.response.status === 413) {
-      formError = new SubmissionError({
-        _error: translate('File too large. Please select a smaller file.'),
-        ...errorData,
-      });
+      const imageError = translate(
+        'File too large. Please select a smaller file.',
+      );
+      if (typeof errorData === 'string') {
+        formError = new SubmissionError({
+          _error: errorMessage,
+          image: imageError,
+        });
+      } else {
+        formError = new SubmissionError({
+          _error: errorMessage,
+          image: imageError,
+          ...errorData,
+        });
+      }
     }
     yield put(updateProject.failure(formError));
   }
@@ -116,7 +130,13 @@ function* handleMoveProject(action) {
 }
 
 function* handleProjectDelete(action) {
-  const successMessage = translate('Project has been removed successfully.');
+  const successMessage = translate(
+    'Project {project} from {organization} was successfully removed',
+    {
+      project: action.payload.project.name,
+      organization: action.payload.project.customer_name,
+    },
+  );
   const errorMessage = translate('An error occurred on project removal.');
 
   const projectId = action.payload.project.uuid;
@@ -132,6 +152,7 @@ function* handleProjectDelete(action) {
     // Refresh the current customer to update ui for other modules
     yield put(refreshCurrentCustomer());
     if (isCurrentProject) {
+      yield put(triggerTransition('projects', {}));
       yield put(setCurrentProject(undefined));
     }
   } catch (error) {

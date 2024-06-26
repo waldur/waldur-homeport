@@ -65,6 +65,17 @@ $theme-dark-inverse-colors: (
   'secondary': $secondary-dark-inverse,
 ) !default; // Custom variable
 
+// Buttons + Forms
+//
+$input-btn-padding-y-sm: 0.195rem !default;
+
+$btn-padding-y-sm: $input-btn-padding-y-sm !default;
+$btn-padding-x-sm: 0.62rem !default;
+
 // Modals
 
+// Padding applied to the modal body
+$modal-inner-padding: 1.85rem !default;
+
 $modal-lg: 840px !default;
+$modal-sm: 400px !default;

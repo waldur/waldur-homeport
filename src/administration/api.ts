@@ -43,7 +43,7 @@ export const getIdentityProviders = () =>
   getAll<{ provider }>('/identity-providers/');
 
 export const getIdentityProvider = (type) =>
-  get<{ client_id }>(`/identity-providers/${type}/`).then(
+  get<{ client_id; logout_url }>(`/identity-providers/${type}/`).then(
     (response) => response.data,
   );
 

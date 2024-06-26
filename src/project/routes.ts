@@ -7,6 +7,7 @@ import { hasSupport } from '@waldur/issues/hooks';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import { ProjectContainer } from './ProjectContainer';
+import { ProjectManageContainer } from './ProjectManageContainer';
 import { loadProject } from './resolve';
 
 const ProjectDashboard = lazyComponent(
@@ -93,8 +94,16 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'project.manage',
-    url: 'manage/',
+    name: 'project-manage-container',
+    url: '',
+    abstract: true,
+    parent: 'project',
+    component: ProjectManageContainer,
+  },
+  {
+    name: 'project-manage',
+    url: 'manage/?tab',
+    parent: 'project-manage-container',
     component: ProjectManage,
     data: {
       breadcrumb: () => translate('Settings'),

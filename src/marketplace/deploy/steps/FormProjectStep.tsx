@@ -14,7 +14,11 @@ export const FormProjectStep = (props: FormStepProps) => {
       disabled={props.disabled}
       required={props.required}
     >
-      <ProjectField hideLabel />
+      {props.offering.shared ? (
+        <ProjectField hideLabel />
+      ) : (
+        props.offering.project_name
+      )}
     </VStepperFormStepCard>
   );
 };

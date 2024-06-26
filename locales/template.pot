@@ -1364,6 +1364,10 @@ msgstr ""
 msgid "Available quota usage: {usage}"
 msgstr ""
 
+#: src/project/ProjectManageContainer.tsx
+msgid "Avatar"
+msgstr ""
+
 #: src/rancher/cluster/hpas/utils.ts
 msgid "Average utilization"
 msgstr ""
@@ -1406,6 +1410,8 @@ msgstr ""
 #: src/marketplace/resources/usage/ResourceUsageForm.tsx
 #: src/project/ProjectExpandableRowContainer.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/project/manage/EditFieldDialog.tsx
+#: src/project/manage/ProjectMetadata.tsx
 #: src/resource/summary/ResourceMetadataDialog.tsx
 #: src/slurm/details/AllocationJobsTable.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
@@ -1751,6 +1757,7 @@ msgstr ""
 #: src/administration/roles/RoleDescriptionForm.tsx
 #: src/administration/roles/RoleForm.tsx
 #: src/customer/cost-policies/CostPolicyCreateForm.tsx
+#: src/form/WideImageField.tsx
 #: src/invitations/GroupInvitationCancelButton.tsx
 #: src/invitations/GroupinvitationButtons.tsx
 #: src/invitations/actions/InvitationCancelButton.tsx
@@ -1873,6 +1880,7 @@ msgstr ""
 msgid "Challenge code"
 msgstr ""
 
+#: src/form/WideImageField.tsx
 #: src/marketplace/resources/change-limits/ChangeLimitsComponent.tsx
 #: src/marketplace/resources/resource-pending/OrderInProgressView.tsx
 msgid "Change"
@@ -2207,6 +2215,10 @@ msgstr ""
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx
 #: src/proposals/update/offerings/CallOfferingCreateDialog.tsx
 msgid "Configure request"
+msgstr ""
+
+#: src/project/manage/EditFieldDialog.tsx
+msgid "Confirm"
 msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
@@ -3087,6 +3099,7 @@ msgstr ""
 #: src/openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx
 #: src/openstack/openstack-security-groups/rule-editor/ActionsField.tsx
 #: src/project/DeleteAction.tsx
+#: src/project/manage/ProjectDelete.tsx
 #: src/rancher/catalog/CatalogDeleteButton.tsx
 #: src/rancher/cluster/IngressActions.tsx
 #: src/rancher/cluster/ServiceActions.tsx
@@ -3128,7 +3141,7 @@ msgid "Delete offering screenshot"
 msgstr ""
 
 #: src/administration/roles/PermissionOptions.tsx
-#: src/project/ProjectDelete.tsx
+#: src/project/manage/ProjectDelete.tsx
 msgid "Delete project"
 msgstr ""
 
@@ -3150,10 +3163,6 @@ msgstr ""
 
 #: src/azure/sql/DestroyServerAction.tsx
 msgid "Deleting PostgreSQL server will cause deletion of all databases created within server."
-msgstr ""
-
-#: src/project/ProjectDelete.tsx
-msgid "Deletion"
 msgstr ""
 
 #: src/booking/components/modal/BookingResourceDetailsDialog.tsx
@@ -3217,6 +3226,7 @@ msgstr ""
 #: src/openstack/openstack-volume/VolumeSnapshotsList.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/manage/ProjectGeneral.tsx
 #: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
 #: src/proposals/details/CallDescriptionCard.tsx
@@ -3593,6 +3603,7 @@ msgstr ""
 #: src/openstack/openstack-subnet/EditSubnetAction.tsx
 #: src/openstack/openstack-tenant/actions/EditAction.tsx
 #: src/openstack/openstack-volume/actions/EditAction.tsx
+#: src/project/ProjectContainer.tsx
 #: src/project/team/EditUserButton.tsx
 #: src/proposals/call-management/CallEditButton.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
@@ -3888,6 +3899,8 @@ msgstr ""
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectUpdateForm.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/manage/EditFieldDialog.tsx
+#: src/project/manage/ProjectGeneral.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 msgid "End date"
 msgstr ""
@@ -4589,6 +4602,7 @@ msgstr ""
 #: src/marketplace/offerings/OfferingEditUIView.tsx
 #: src/marketplace/offerings/OfferingPublicUIView.tsx
 #: src/marketplace/offerings/update/overview/OverviewSection.tsx
+#: src/project/ProjectManageContainer.tsx
 #: src/proposals/update/CallUpdateContainer.tsx
 #: src/proposals/update/general/CallGeneralSection.tsx
 msgid "General"
@@ -4952,6 +4966,10 @@ msgstr ""
 #: src/marketplace/offerings/images/ImageThumbnail.tsx
 #: src/marketplace/offerings/update/ImageUploadField.tsx
 msgid "Image here"
+msgstr ""
+
+#: src/form/WideImageField.tsx
+msgid "Image is too large"
 msgstr ""
 
 #: src/reporting/openstack/ImagesList.tsx
@@ -5794,7 +5812,6 @@ msgstr ""
 
 #: src/customer/dashboard/CustomerActions.tsx
 #: src/marketplace/offerings/OfferingViewHero.tsx
-#: src/project/ProjectActions.tsx
 #: src/user/UserActions.tsx
 #: src/user/support/UserDetailsDialog.tsx
 msgid "Manage"
@@ -5999,6 +6016,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
+#: src/project/ProjectManageContainer.tsx
 #: src/resource/summary/ResourceSummaryBase.tsx
 msgid "Metadata"
 msgstr ""
@@ -6263,6 +6281,7 @@ msgstr ""
 #: src/openstack/openstack-volume/deploy/CheckoutSummary.tsx
 #: src/project/ProjectDetails.tsx
 #: src/project/ProjectsList.tsx
+#: src/project/manage/ProjectGeneral.tsx
 #: src/proposals/CallsAvailableOfferingsPage.tsx
 #: src/proposals/PublicCallsPage.tsx
 #: src/proposals/call-management/CallFormDialog.tsx
@@ -6850,6 +6869,8 @@ msgstr ""
 #: src/marketplace-remote/ProjectUpdateRequestExpandable.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/project/manage/EditFieldDialog.tsx
+#: src/project/manage/ProjectMetadata.tsx
 #: src/proposals/proposal/UserProposalsList.tsx
 #: src/user/affiliations/BaseProjectsList.tsx
 msgid "OECD FoS code"
@@ -7142,6 +7163,10 @@ msgstr ""
 
 #: src/invitations/actions/InvitationCancelButton.tsx
 msgid "Only pending invitation can be canceled."
+msgstr ""
+
+#: src/project/manage/ProjectDelete.tsx
+msgid "Only projects without existing resources can be removed."
 msgstr ""
 
 #: src/openstack/utils.ts
@@ -7541,6 +7566,10 @@ msgstr ""
 
 #: src/administration/notifications/NotificationFilter.tsx
 msgid "Overridden"
+msgstr ""
+
+#: src/project/manage/ProjectGeneral.tsx
+msgid "Owner"
 msgstr ""
 
 #: src/marketplace/referral/ReferralsList.tsx
@@ -8008,6 +8037,7 @@ msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/project/manage/EditFieldDialog.tsx
 msgid "Please mark if project is aimed at industrial use"
 msgstr ""
 
@@ -8064,6 +8094,7 @@ msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/project/manage/EditFieldDialog.tsx
 msgid "Please select OECD code corresponding to field of science and technology"
 msgstr ""
 
@@ -8409,6 +8440,7 @@ msgstr ""
 #: src/marketplace/orders/list/OrdersListExpandableRow.tsx
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/project/manage/EditFieldDialog.tsx
 msgid "Project description"
 msgstr ""
 
@@ -8461,10 +8493,6 @@ msgid "Project has been created."
 msgstr ""
 
 #: src/project/effects.ts
-msgid "Project has been removed successfully."
-msgstr ""
-
-#: src/project/effects.ts
 msgid "Project has been updated."
 msgstr ""
 
@@ -8489,6 +8517,7 @@ msgid "Project name"
 msgstr ""
 
 #: src/project/ProjectUpdateForm.tsx
+#: src/project/manage/EditFieldDialog.tsx
 msgid "Project owner"
 msgstr ""
 
@@ -8509,10 +8538,6 @@ msgstr ""
 #: src/rancher/cluster/users/ClusterUsersList.tsx
 #: src/user/support/UserList.tsx
 msgid "Project roles"
-msgstr ""
-
-#: src/project/ProjectManage.tsx
-msgid "Project settings"
 msgstr ""
 
 #: src/proposals/proposal/create/ProjectDetailsStep.tsx
@@ -8551,6 +8576,10 @@ msgstr ""
 
 #: src/project/events.ts
 msgid "Project {project_name} has been deleted."
+msgstr ""
+
+#: src/project/effects.ts
+msgid "Project {project} from {organization} was successfully removed"
 msgstr ""
 
 #: src/administration/dashboard/AdminStatistics.tsx
@@ -9167,6 +9196,7 @@ msgstr ""
 #: src/customer/team/DeleteProjectUserButton.tsx
 #: src/customer/team/UserRemoveButton.tsx
 #: src/form/DateField.tsx
+#: src/form/WideImageField.tsx
 #: src/invoices/details/InvoiceItemDelete.tsx
 #: src/marketplace/category/admin/CategoryDeleteButton.tsx
 #: src/marketplace/category/admin/GroupDeleteButton.tsx
@@ -9176,6 +9206,7 @@ msgstr ""
 #: src/openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx
 #: src/openstack/openstack-tenant/IpAddressList.tsx
 #: src/openstack/openstack-tenant/StaticRoutesTable.tsx
+#: src/project/ProjectManageContainer.tsx
 #: src/project/team/UserRemoveButton.tsx
 #: src/proposals/details/CallOfferingDeleteButton.tsx
 #: src/proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx
@@ -9196,6 +9227,10 @@ msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "Removed organizations cannot be restored!"
+msgstr ""
+
+#: src/project/manage/ProjectDelete.tsx
+msgid "Removed projects cannot be restored."
 msgstr ""
 
 #: src/openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx
@@ -9326,10 +9361,6 @@ msgstr ""
 
 #: src/invitations/GroupInvitationConfirmDialog.tsx
 msgid "Request permission"
-msgstr ""
-
-#: src/project/ProjectDelete.tsx
-msgid "Request project deletion"
 msgstr ""
 
 #: src/marketplace/offerings/actions/OfferingStateActions.tsx
@@ -10091,6 +10122,7 @@ msgstr ""
 #: src/marketplace/resources/mass-actions/MultiMoveDialog.tsx
 #: src/marketplace/resources/usage/utils.ts
 #: src/project/MoveProjectDialog.tsx
+#: src/project/manage/ProjectAvatar.tsx
 #: src/project/team/EditUserDialog.tsx
 #: src/proposals/proposal/create-review/CommentFormDialog.tsx
 #: src/proposals/team/AddUserDialog.tsx
@@ -11879,6 +11911,7 @@ msgstr ""
 
 #: src/project/ProjectCreateForm.tsx
 #: src/project/ProjectUpdateForm.tsx
+#: src/project/manage/EditFieldDialog.tsx
 msgid "The date is inclusive. Once reached, all project resource will be scheduled for termination."
 msgstr ""
 
@@ -13926,6 +13959,14 @@ msgstr ""
 msgid "Upload additional documents, which support the proposal and help to review it."
 msgstr ""
 
+#: src/form/WideImageField.tsx
+msgid "Upload an image JPG or PNG"
+msgstr ""
+
+#: src/form/WideImageField.tsx
+msgid "Upload an image JPG or PNG, under {maxSize}"
+msgstr ""
+
 #: src/proposals/proposal/create/ProjectDetailsStep.tsx
 msgid "Upload supporting documentation"
 msgstr ""
@@ -14425,6 +14466,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
+#: src/project/ProjectContainer.tsx
 #: src/proposals/proposal/ProposalRowActions.tsx
 #: src/proposals/proposal/UserProposalsList.tsx
 #: src/proposals/review/CustomerReviewsList.tsx
@@ -14676,6 +14718,10 @@ msgstr ""
 
 #: src/customer/details/CustomerRemovePanel.tsx
 msgid "You can remove this organization by pressing the button"
+msgstr ""
+
+#: src/project/manage/ProjectDelete.tsx
+msgid "You can remove this project by pressing the button above."
 msgstr ""
 
 #: src/marketplace/offerings/list/OfferingsListTablePlaceholder.tsx

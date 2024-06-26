@@ -4,7 +4,10 @@
   justify-content: center;
   border-radius: 7px;
   flex-shrink: 0;
-  color: var(--bs-dark);
+  color: var(--bs-primary);
+  background-color: var(--bs-primary-50);
+  font-size: 18px;
+  font-weight: 500;
 }
 .image-placeholder.circle {
   border-radius: 50%;

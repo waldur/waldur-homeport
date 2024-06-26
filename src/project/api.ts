@@ -40,24 +40,23 @@ export const createProject = (project) => {
   return sendForm<{ uuid }>('POST', `${ENV.apiEndpoint}api/projects/`, data);
 };
 
-export const updateProject = (project) => {
-  const data = {
-    name: project.name,
-    description: project.description,
-    end_date: project.end_date ? formatDate(project.end_date) : null,
-    backend_id: project.backend_id,
-    oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
-    is_industry: project.is_industry,
-    image: project.image,
-  };
-  if (!project.image) {
+export const updateProjectPartially = (
+  projectUuid: string,
+  values: Record<string, any>,
+) => {
+  const data = { ...values };
+  if ('end_date' in data) {
+    data.end_date = formatDate(data.end_date);
+  }
+  if ('oecd_fos_2007_code' in data) {
+    data.oecd_fos_2007_code = data.oecd_fos_2007_code?.value;
+  }
+  if ('image' in data && !data.image) {
     data.image = '';
-  } else if (!(project.image instanceof File)) {
-    data.image = undefined;
   }
   return sendForm(
     'PATCH',
-    `${ENV.apiEndpoint}api/projects/${project.uuid}/`,
+    `${ENV.apiEndpoint}api/projects/${projectUuid}/`,
     data,
   );
 };

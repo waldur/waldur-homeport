@@ -46,6 +46,15 @@ interface DeployPageProps {
   initialAttributes?: AttributesType;
 }
 
+interface DeployFormData {
+  project?: { name; uuid; url };
+  customer?;
+  offering?;
+  attributes?: AttributesType;
+  limits?;
+  plan?;
+}
+
 export const BaseDeployPage = ({
   formData,
   inputFormSteps,
@@ -89,16 +98,22 @@ export const BaseDeployPage = ({
 
   // Initialize project and cloud and initial attributes
   useEffectOnce(() => {
-    const initialData = {};
+    const initialValues: DeployFormData = {};
 
     if (selectedOffering.project) {
-      Object.assign(initialData, {
-        project: {
-          name: selectedOffering.project_name,
-          uuid: selectedOffering.project_uuid,
-          url: selectedOffering.project,
-        },
-      });
+      initialValues.project = {
+        name: selectedOffering.project_name,
+        uuid: selectedOffering.project_uuid,
+        url: selectedOffering.project,
+      };
+    }
+
+    if (!selectedOffering.shared) {
+      initialValues.customer = {
+        name: selectedOffering.customer_name,
+        uuid: selectedOffering.customer_uuid,
+        url: selectedOffering.customer,
+      };
     }
 
     const customerFilter = marketplaceFilters?.find(
@@ -109,13 +124,13 @@ export const BaseDeployPage = ({
     );
 
     if (customerFilter?.value) {
-      Object.assign(initialData, { customer: customerFilter.value });
+      initialValues.customer = customerFilter.value;
     }
     if (projectFilter?.value) {
-      Object.assign(initialData, { project: projectFilter.value });
+      initialValues.project = projectFilter.value;
     }
     if (hasStepWithField(formSteps, 'offering') && selectedOffering) {
-      Object.assign(initialData, { offering: selectedOffering });
+      initialValues.offering = selectedOffering;
     }
 
     // initial attributes
@@ -134,30 +149,26 @@ export const BaseDeployPage = ({
     if (props.offering.type === OFFERING_TYPE_BOOKING) {
       // initial attributes.schedules
       if (attributes.schedules) {
-        Object.assign(attributes, {
-          schedules: attributes.schedules.map((schedule) => ({
-            ...schedule,
-            start: new Date(schedule.start),
-            end: new Date(schedule.end),
-          })),
-        });
+        attributes.schedules = attributes.schedules.map((schedule) => ({
+          ...schedule,
+          start: new Date(schedule.start),
+          end: new Date(schedule.end),
+        }));
       } else {
-        Object.assign(attributes, { schedules: [] });
+        attributes.schedules = [];
       }
     }
-    Object.assign(initialData, { attributes });
+    initialValues.attributes = attributes;
 
     if (props.initialLimits || props.limits) {
-      Object.assign(initialData, {
-        limits: props.initialLimits || props.limits,
-      });
+      initialValues.limits = props.initialLimits || props.limits;
     }
     if (props.plan) {
-      Object.assign(initialData, { plan: props.plan });
+      initialValues.plan = props.plan;
     }
 
-    if (Object.keys(initialData).length > 0) {
-      props.initialize(initialData);
+    if (Object.keys(initialValues).length > 0) {
+      props.initialize(initialValues);
     }
   });
 

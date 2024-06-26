@@ -217,7 +217,7 @@ export const UserList: FunctionComponent = () => {
       keys: ['is_active'],
     },
     {
-      title: translate('Affilations'),
+      title: translate('Affiliations'),
       render: ({ row }) => renderListOrDash(row.affiliations),
       keys: ['affiliations'],
       optional: true,
@@ -241,7 +241,7 @@ export const UserList: FunctionComponent = () => {
       optional: true,
     },
     {
-      title: translate('Aggremment date'),
+      title: translate('Aggreement date'),
       render: ({ row }) => formatDateTime(row.agreement_date),
       keys: ['agreement_date'],
       optional: true,

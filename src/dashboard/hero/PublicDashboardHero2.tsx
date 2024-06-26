@@ -20,6 +20,7 @@ interface PublicDashboardHero2Props {
   quickFooterClassName?: string;
   className?: string;
   hideQuickSection?: boolean;
+  cardBordered?: boolean;
 }
 
 export const PublicDashboardHero2: FC<
@@ -35,7 +36,12 @@ export const PublicDashboardHero2: FC<
           sm={props.hideQuickSection ? undefined : 12}
           className="d-flex"
         >
-          <Card className="w-100 mb-md-0 mb-4">
+          <Card
+            className={classNames(
+              'w-100 mb-md-0 mb-4',
+              props.cardBordered && 'card-bordered',
+            )}
+          >
             <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-10 flex-grow-1 p-6">
               <Tip
                 label={props.logoTooltip}
