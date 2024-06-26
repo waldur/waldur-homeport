@@ -12,7 +12,10 @@ import {
 import { OrderOfferingSubmitButton } from '@waldur/marketplace/details/OrderSummary';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
 import { Offering } from '@waldur/marketplace/types';
-import { orderFormAttributesSelector } from '@waldur/marketplace/utils';
+import {
+  orderFormAttributesSelector,
+  orderFormDataSelector,
+} from '@waldur/marketplace/utils';
 import { RootState } from '@waldur/store/reducers';
 
 const getDailyPrice = (attributesData, components) => {
@@ -43,6 +46,7 @@ export const CheckoutSummary = ({
 }: CheckoutSummaryProps) => {
   const formIsValid = useSelector(formIsValidSelector);
   const formAttributesData = useSelector(orderFormAttributesSelector);
+  const formData = useSelector(orderFormDataSelector);
   const errors = useSelector(formErrorsSelector);
 
   const prices = useSelector((state: RootState) =>
@@ -80,7 +84,7 @@ export const CheckoutSummary = ({
       </div>
 
       <OrderOfferingSubmitButton
-        formData={{ attributes: formAttributesData }}
+        formData={formData}
         updateMode={updateMode}
         offering={offering}
         errors={errors}
