@@ -16,7 +16,7 @@ const formatParam = (param: string) => {
   }
 };
 
-const getQueryParams = () => {
+export const getQueryParams = () => {
   const search = router.urlService.search();
   let urlParams = {};
   for (const [key, value] of Object.entries(search)) {

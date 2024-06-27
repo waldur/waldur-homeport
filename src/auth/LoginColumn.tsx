@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams } from '@uirouter/react';
 import { useEffect } from 'react';
 
 import { getIdentityProviders } from '@waldur/administration/api';
 import { ENV } from '@waldur/configs/default';
 import { fixURL } from '@waldur/core/api';
+import { getQueryParams } from '@waldur/core/filters';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -28,10 +28,10 @@ export const LoginColumn = () => {
     ['IdentityProvidersConfigurations'],
     () => getIdentityProviders(),
   );
-  const { params } = useCurrentStateAndParams();
+  const params = getQueryParams();
 
   useEffect(() => {
-    if (params?.disableAutoLogin) {
+    if (params['disableAutoLogin'] === '') {
       return;
     }
     if (!data) {
