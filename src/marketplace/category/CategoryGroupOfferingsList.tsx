@@ -9,5 +9,5 @@ export const CategoryGroupOfferingsList: FunctionComponent<{
     () => ({ category_group_uuid: categoryGroup.uuid }),
     [categoryGroup],
   );
-  return <PublicOfferingsList filter={filter} />;
+  return <PublicOfferingsList showOrganization={false} filter={filter} />;
 };
