@@ -154,7 +154,9 @@ function logout() {
     window.location.href = ENV.apiEndpoint + 'api-auth/saml2/logout/';
   } else if (OIDC_TYPES.includes(authenticationMethod)) {
     clearAuthCache();
-    router.stateService.go('home.oidc_logout');
+    router.stateService.go('home.oidc_logout', {
+      provider: authenticationMethod,
+    });
   } else {
     localLogout();
   }
