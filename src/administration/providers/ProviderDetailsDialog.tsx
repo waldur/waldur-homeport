@@ -71,6 +71,7 @@ export const ProviderDetailsDialog = (props) => {
                   {renderUrlItem('userinfo_url', 'User info URL')}
                   {renderUrlItem('token_url', 'Token URL')}
                   {renderUrlItem('auth_url', 'Auth URL')}
+                  {renderUrlItem('logout_url', 'Logout URL')}
                   {renderUrlItem('management_url', 'Management URL')}
                 </>
               )}
