@@ -122,6 +122,11 @@
 .card.card-table {
   border: unset;
 
+  &.grid-table .table-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
   .card-header {
     border-bottom-style: dashed;
   }
@@ -199,7 +204,7 @@
       padding-right: 0;
     }
 
-    .card-body {
+    &:not(.grid-table) .card-body {
       padding-top: 0;
       padding-left: 0;
       padding-right: 0;
