@@ -10,6 +10,4 @@ export const OrderConsumerActions: FC<OrderActionProps> = (props) =>
       <ApproveByConsumerButton {...props} />
       <RejectByConsumerButton {...props} />
     </>
-  ) : (
-    <>N/A</>
-  );
+  ) : null;

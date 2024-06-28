@@ -51,6 +51,9 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
           <Question />
         </Tip>
       )}
+      {props.iconNode && (
+        <span className="svg-icon svg-icon-2">{props.iconNode}</span>
+      )}
       {props.title}
     </Component>
   ) : (

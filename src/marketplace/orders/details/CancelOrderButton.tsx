@@ -2,10 +2,11 @@ import { Prohibit } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { cancelOrder } from '@waldur/marketplace/common/api';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
 
 interface CancelOrderButtonProps {
   uuid: string;
@@ -30,12 +31,18 @@ export const CancelOrderButton: FC<CancelOrderButtonProps> = (props) => {
   };
 
   return (
-    <ActionButton
-      className="btn btn-sm btn-danger mb-2"
-      title={translate('Cancel')}
-      action={callback}
-      pending={loading}
-      iconNode={<Prohibit />}
-    />
+    <>
+      {loading ? (
+        <LoadingSpinnerIcon className="me-1" />
+      ) : (
+        <ActionItem
+          className="text-danger"
+          title={translate('Cancel')}
+          action={callback}
+          disabled={loading}
+          iconNode={<Prohibit />}
+        />
+      )}
+    </>
   );
 };

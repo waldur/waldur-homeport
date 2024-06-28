@@ -10,6 +10,7 @@ import { OverviewTab } from './OverviewTab';
 interface OfferingTabsProps {
   sections: Section[];
   offering: Offering;
+  order?: any;
 }
 
 export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {

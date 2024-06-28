@@ -11,7 +11,7 @@ interface ResourceLinkProps {
 
 export const ResourceLink: FunctionComponent<ResourceLinkProps> = (props) => (
   <Link
-    state="resource-details"
+    state="marketplace-resource-details"
     params={{
       resource_type: props.type,
       resource_uuid: props.uuid,

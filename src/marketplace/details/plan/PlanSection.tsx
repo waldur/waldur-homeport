@@ -1,4 +1,4 @@
-import { Accordion } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { DetailsField } from '@waldur/marketplace/common/DetailsField';
@@ -6,6 +6,7 @@ import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDesc
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { OrderResponse } from '@waldur/marketplace/orders/types';
 import { Offering } from '@waldur/marketplace/types';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 interface PlanDetailsProps {
   order: OrderResponse;
@@ -17,16 +18,20 @@ const renderValue = (value) => (value ? value : <>&mdash;</>);
 export const PlanSection = (props: PlanDetailsProps) => {
   const { plan_name, plan_description } = props.order;
   if (!plan_name) {
-    return null;
+    return <NoResult message={translate('No plans found for this order')} />;
   }
   return (
-    <Accordion.Item eventKey="plan">
-      <Accordion.Header>
-        {props.order.type === 'Create'
-          ? translate('New plan')
-          : translate('Plan')}
-      </Accordion.Header>
-      <Accordion.Body>
+    <Card>
+      <Card.Header className="custom-card-header custom-padding-zero">
+        <Card.Title>
+          <h3>
+            {props.order.type === 'Create'
+              ? translate('New plan')
+              : translate('Plan')}
+          </h3>
+        </Card.Title>
+      </Card.Header>
+      <Card.Body>
         <DetailsField label={translate('Name')}>
           {renderValue(plan_name)}
         </DetailsField>
@@ -47,7 +52,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
             offering={props.offering}
           />
         </DetailsField>
-      </Accordion.Body>
-    </Accordion.Item>
+      </Card.Body>
+    </Card>
   );
 };

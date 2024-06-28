@@ -105,7 +105,7 @@ export const ExpandableEventDetailsTable: FunctionComponent<
         key={event.context.order.uuid}
         label={translate('Order')}
         value={event.context.order.uuid}
-        state="marketplace-order-details-project"
+        state="marketplace-orders.details"
         params={{ order_uuid: event.context.order.uuid }}
       />
     )}

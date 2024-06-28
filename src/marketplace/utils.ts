@@ -9,6 +9,7 @@ import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { useExtraTabs } from '@waldur/navigation/context';
 import { useOfferingCategories } from '@waldur/navigation/sidebar/ResourcesMenu';
 import { Tab } from '@waldur/navigation/Tab';
+import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { RootState } from '@waldur/store/reducers';
 
 import { getCategoryItems } from './category/utils';
@@ -63,3 +64,47 @@ export const useMarketplacePublicTabs = () => {
   }, [categories]);
   useExtraTabs(tabs);
 };
+
+export const getOrderBreadcrumbItems = (order): IBreadcrumbItem[] => [
+  {
+    key: 'marketplace',
+    text: translate('Marketplace'),
+    to: 'public.marketplace-landing',
+  },
+  {
+    key: 'offerings',
+    text: translate('Offerings'),
+    to: 'public.offerings',
+  },
+  {
+    key: 'offering',
+    text: order.offering_name,
+    to: 'public-offering.marketplace-public-offering',
+    params: { uuid: order.offering_uuid },
+  },
+  {
+    key: 'resources',
+    text: translate('Resources'),
+    to: 'all-resources',
+  },
+  {
+    key: 'resource',
+    text: order.resource_name,
+    to: 'marketplace-resource-details',
+    params: { resource_uuid: order.marketplace_resource_uuid },
+  },
+  {
+    key: 'orders',
+    text: translate('Orders'),
+    to: 'marketplace-resource-details',
+    params: {
+      resource_uuid: order.marketplace_resource_uuid,
+      tab: 'order-history',
+    },
+  },
+  {
+    key: 'order',
+    text: order.attributes.name + ' (' + order.type + ')',
+    active: true,
+  },
+];

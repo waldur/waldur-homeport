@@ -1,9 +1,10 @@
 import { isEmpty } from 'lodash';
-import { Accordion } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { Limits } from '@waldur/marketplace/common/registry';
 import { OfferingComponent } from '@waldur/marketplace/types';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 export const LimitsSection = ({
   components,
@@ -13,15 +14,19 @@ export const LimitsSection = ({
   limits: Limits;
 }) => {
   if (components.length === 0 || isEmpty(limits)) {
-    return null;
+    return <NoResult message={translate('No limits found for this order')} />;
   }
   return (
-    <Accordion.Item eventKey="limits">
-      <Accordion.Header>{translate('Limits')}</Accordion.Header>
-      <Accordion.Body>
-        <table className="table table-bordered">
+    <Card>
+      <Card.Header className="custom-card-header custom-padding-zero">
+        <Card.Title>
+          <h3>{translate('Limits')}</h3>
+        </Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <table className="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
           <thead>
-            <tr>
+            <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
               <th className="col-sm-1">{translate('Name')}</th>
               <th className="col-sm-1">{translate('Measured unit')}</th>
               <th className="col-sm-1">{translate('Limit')}</th>
@@ -42,7 +47,7 @@ export const LimitsSection = ({
             ))}
           </tbody>
         </table>
-      </Accordion.Body>
-    </Accordion.Item>
+      </Card.Body>
+    </Card>
   );
 };

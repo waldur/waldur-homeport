@@ -1,69 +1,127 @@
-import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams } from '@uirouter/react';
-import React from 'react';
+import { FunctionComponent, useMemo } from 'react';
 
-import { ENV } from '@waldur/configs/default';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
 import { translate } from '@waldur/i18n';
-import * as api from '@waldur/marketplace/common/api';
-import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
-import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
+import { PlanSection } from '@waldur/marketplace/details/plan/PlanSection';
+import { getOrderBreadcrumbItems } from '@waldur/marketplace/utils';
+import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { PageBarTab } from '@waldur/navigation/types';
+import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
+import { OrderActionsButton } from '../actions/OrderActionsButton';
 import { OrderRefreshButton } from '../actions/OrderRefreshButton';
 
+import { ErrorDetailsTab } from './ErrorDetailsTab';
+import { LimitsSection } from './LimitsSection';
 import { OrderAccordion } from './OrderAccordion';
+import { OrderDetailsApprovalsTab } from './OrderDetailsApprovalsTab';
+import { OrderDetailsHeaderBody } from './OrderDetailsHeaderBody';
+import { OrderDetailsHeaderTitle } from './OrderDetailsHeaderTitle';
+import { OrderDetailsQuickBody } from './OrderDetailsQuickBody';
+import { OrderMetadataTab } from './OrderMetadataTab';
+import { OutputTab } from './OutputTab';
+import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
-async function loadOrder(order_uuid) {
-  const order = await api.getOrder(order_uuid);
-  const offering = await api.getPublicOffering(order.offering_uuid);
-  const plugins = await api.getPlugins();
-  const limits = plugins.find(
-    (plugin) => plugin.offering_type === offering.type,
-  ).available_limits;
-  const category = await api.getCategory(offering.category_uuid);
-  const sections = category.sections;
-  const tabs = getTabs({ offering, sections });
-  return {
-    order,
-    offering,
-    tabs,
-    limits,
-  };
+import '@waldur/core/CustomCard.scss';
+
+const getOrderPageTabs = (data): PageBarTab[] => {
+  const limitParser = getFormLimitParser(data.order.offering_type);
+  const limits = limitParser(data.order.limits);
+  return [
+    {
+      key: 'approvals',
+      title: translate('Approvals'),
+      component: () => (
+        <OrderDetailsApprovalsTab order={data.order} offering={data.offering} />
+      ),
+    },
+    {
+      key: 'metadata',
+      title: translate('Metadata'),
+      component: () => (
+        <OrderMetadataTab order={data.order} offering={data.offering} />
+      ),
+    },
+    {
+      key: 'user-submitted-fields',
+      title: translate('User submitted fields'),
+      component: () => <UserSubmittedFieldsTab order={data.order} />,
+    },
+    {
+      key: 'output',
+      title: translate('Output'),
+      component: () => <OutputTab order={data.order} />,
+    },
+    {
+      key: 'error-details',
+      title: translate('Error details'),
+      component: () => <ErrorDetailsTab order={data.order} />,
+    },
+    {
+      key: 'accounting',
+      title: translate('Accounting'),
+      component: () => (
+        <PlanSection offering={data.offering} order={data.order} />
+      ),
+    },
+    {
+      key: 'limits',
+      title: translate('Limits'),
+      component: () => (
+        <LimitsSection components={data.offering.components} limits={limits} />
+      ),
+    },
+  ];
+};
+
+interface OrderDetailsProps {
+  offering: any;
+  order: any;
+  data: any;
+  refetch: any;
 }
 
-export const OrderDetails: React.FC<{}> = () => {
+const PageHero = ({ data }) => (
+  <PublicDashboardHero2
+    className="container-fluid mb-8 mt-6"
+    logo={data.offering.thumbnail}
+    logoAlt={data.offering.name}
+    logoTooltip={data.offering.name}
+    backgroundImage={data.offering.thumbnail}
+    title={<OrderDetailsHeaderTitle order={data.order} />}
+    quickBody={<OrderDetailsQuickBody order={data.order} />}
+    quickActions={
+      <div className="d-flex flex-column flex-wrap gap-2">
+        <OrderRefreshButton loadData={data.refetch} />
+        <OrderActionsButton order={data.order} loadData={data.refetch} />
+      </div>
+    }
+  >
+    <OrderDetailsHeaderBody order={data.order} />
+  </PublicDashboardHero2>
+);
+
+export const OrderDetails: FunctionComponent<OrderDetailsProps> = (data) => {
   useTitle(translate('Order details'));
-  const {
-    params: { order_uuid },
-  } = useCurrentStateAndParams();
-
-  const { isLoading, error, data, refetch } = useQuery(
-    ['OrderDetails', order_uuid],
-    () => loadOrder(order_uuid),
-    {
-      refetchInterval: ENV.defaultPullInterval * 1000,
-    },
+  usePageHero(<PageHero data={data} />);
+  const breadcrumbItems = useMemo(
+    () => getOrderBreadcrumbItems(data.order),
+    [data.order],
   );
+  useBreadcrumbs(breadcrumbItems);
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
-  if (error) {
-    return (
-      <h3 className="text-center">
-        {translate('Unable to load order details.')}
-      </h3>
-    );
-  }
+  const tabs = useMemo(() => getOrderPageTabs(data), []);
+  const {
+    tabSpec: { component: Component },
+  } = usePageTabsTransmitter(tabs);
 
   if (data) {
     return (
       <>
-        <OrderRefreshButton loadData={refetch} />
-        <OrderAccordion {...data} loadData={refetch} />
-        <OfferingTabsComponent tabs={data.tabs} />
+        <Component />
+        <OrderAccordion {...data} loadData={data.refetch} />
       </>
     );
   }

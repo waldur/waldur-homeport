@@ -71,9 +71,11 @@ export const UnifiedSidebar = () => {
       <CallPublicMenu />
       <MenuItem
         activeState={
-          ['public.marketplace', 'public-offering'].some((name) =>
-            state.name.startsWith(name),
-          )
+          [
+            'public.marketplace',
+            'public-offering',
+            'marketplace-orders.details',
+          ].some((name) => state.name.startsWith(name))
             ? state.name
             : undefined
         }
