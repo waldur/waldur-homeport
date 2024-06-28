@@ -23,6 +23,7 @@ export interface ExternalLink {
 }
 
 interface CoreConfiguration {
+  INVITATION_USE_WEBHOOKS: boolean;
   DEFAULT_IDP: string;
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;
