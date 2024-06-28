@@ -1,5 +1,7 @@
+import classNames from 'classnames';
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import {
   DrawerComponent,
   MenuComponent,
@@ -10,6 +12,7 @@ import { useLayout } from '@waldur/metronic/layout/core';
 
 import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
+
 import './Sidebar.scss';
 
 export const Sidebar: React.FC<PropsWithChildren> = (props) => {
@@ -28,7 +31,17 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   return (
     <nav
       ref={sidebarRef}
-      className="aside aside-dark aside-hoverable"
+      className={classNames(
+        'aside aside-hoverable',
+        {
+          'aside-dark':
+            ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE === 'dark' ||
+            !ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE,
+        },
+        {
+          'aside-light': ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE === 'light',
+        },
+      )}
       data-kt-drawer="true"
       data-kt-drawer-name="aside"
       data-kt-drawer-activate="{default: true, lg: false}"

@@ -61,6 +61,7 @@ export const AdministrationBranding = () => {
         'BRAND_LABEL_COLOR',
         'HERO_LINK_LABEL',
         'HERO_LINK_URL',
+        'SIDEBAR_STYLE',
         ...LOGOS,
       ])(ENV.plugins.WALDUR_CORE),
     [],

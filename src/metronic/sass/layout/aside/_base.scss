@@ -40,6 +40,9 @@
     // Logo
     .aside-logo {
       background-color: get($aside-config, logo-bg-color);
+      h3 {
+        color: white;
+      }
     }
 
     // Aside toggle
