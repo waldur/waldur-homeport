@@ -125,6 +125,10 @@ const ServiceProvidersList = lazyComponent(
   () => import('./service-providers/ServiceProvidersList'),
   'ServiceProvidersList',
 );
+const ProviderEventsTable = lazyComponent(
+  () => import('./service-providers/dashboard/ProviderEventsTable'),
+  'ProviderEventsTable',
+);
 
 const OrderDetailsContainer = lazyComponent(
   () => import('./orders/OrderDetailsContainer'),
@@ -291,6 +295,17 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-provider-events',
+    url: 'events/',
+    component: ProviderEventsTable,
+    parent: 'marketplace-provider',
+    data: {
+      breadcrumb: () => translate('Audit logs'),
+      priority: 160,
+    },
+  },
+
+  {
     name: 'marketplace-provider-customers',
     parent: 'marketplace-provider',
     abstract: true,
@@ -397,6 +412,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('My offerings'),
       permissions: [isOwnerOrStaff],
+      priority: 130,
     },
   },
 
@@ -407,6 +423,7 @@ export const states: StateDeclaration[] = [
     parent: 'organization',
     data: {
       breadcrumb: () => translate('Projects'),
+      priority: 105,
     },
   },
 

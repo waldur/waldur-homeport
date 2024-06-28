@@ -55,7 +55,7 @@ describe('Offerings list actions in Provider dashboard page', () => {
       .intercept('GET', '/api/marketplace-plugins/', {
         fixture: 'marketplace/plugins.json',
       })
-      .visit('/providers/6983ac22f2bb469189311ab21e493359/dashboard/')
+      .visit('/providers/6983ac22f2bb469189311ab21e493359/offerings/')
       .waitForPage();
   });
 
