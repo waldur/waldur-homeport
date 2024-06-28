@@ -44,7 +44,7 @@ const PureBrandingForm: FunctionComponent<any> = (props) => (
       <StringField
         name="BRAND_COLOR"
         label={translate(
-          'Hex color definition is used in landing page for login button.',
+          'Hex color definition is used for sidebar background.',
         )}
         disabled={props.disabled}
       />
