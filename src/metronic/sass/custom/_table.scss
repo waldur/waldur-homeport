@@ -114,6 +114,31 @@
   }
 }
 
+// Shadow hover
+.table-container.table-hover-shadow {
+  tbody > tr:hover {
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    border-radius: $border-radius-lg;
+    box-shadow: if(
+      isDarkMode(),
+      0 0.1rem 1rem 0.25rem rgba($white, 0.05),
+      $box-shadow-sm
+    );
+    transition: $transition-base;
+  }
+
+  // On grid view
+  .card:hover {
+    box-shadow: if(
+      isDarkMode(),
+      0 0.1rem 1rem 0.25rem rgba($white, 0.05),
+      $box-shadow-sm
+    );
+    transition: $transition-base;
+  }
+}
+
 .table-responsive {
   overflow: inherit;
 }
