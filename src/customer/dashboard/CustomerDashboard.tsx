@@ -1,7 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CustomerChecklistOverview } from '@waldur/marketplace-checklist/CustomerChecklistOverview';
 import { ProjectsList } from '@waldur/project/ProjectsList';
 import {
   checkIsServiceManager,
@@ -33,7 +32,6 @@ export const CustomerDashboard: FunctionComponent = () => {
           {canSeeCharts && (
             <CustomerDashboardChart customer={customer} user={user} />
           )}
-          <CustomerChecklistOverview customer={customer} />
           <div className="mb-6">
             <ProjectsList />
           </div>

@@ -1,10 +1,12 @@
 import { useState, FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { getCustomer } from '@waldur/workspace/selectors';
 
 import {
   getChecklists,
@@ -72,10 +74,9 @@ const CategoryPanel = ({ category, checklists, customer }) => {
   );
 };
 
-export const CustomerChecklistOverview: FunctionComponent<{ customer }> = ({
-  customer,
-}) => {
+export const CustomerChecklistOverview: FunctionComponent = () => {
   const asyncState = useAsync(loadData, []);
+  const customer = useSelector(getCustomer);
 
   if (asyncState.loading) {
     return <LoadingSpinner />;

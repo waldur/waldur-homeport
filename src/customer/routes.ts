@@ -3,7 +3,7 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
 import { hasSupport } from '@waldur/issues/hooks';
@@ -75,6 +75,10 @@ const CostPoliciesList = lazyComponent(
 const OrganizationResourcesAllList = lazyComponent(
   () => import('../marketplace/resources/list/OrganizationResourcesAllList'),
   'OrganizationResourcesAllList',
+);
+const CustomerChecklistOverview = lazyComponent(
+  () => import('../marketplace-checklist/CustomerChecklistOverview'),
+  'CustomerChecklistOverview',
 );
 
 export const states: StateDeclaration[] = [
@@ -284,6 +288,16 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Cost policies'),
       permissions: [isOwnerOrStaff],
+    },
+  },
+
+  {
+    name: 'organization.checklists',
+    url: 'checklists/',
+    component: CustomerChecklistOverview,
+    data: {
+      breadcrumb: () => translate('Checklists'),
+      feature: MarketplaceFeatures.show_experimental_ui_components,
     },
   },
 ];
