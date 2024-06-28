@@ -24,6 +24,7 @@ export const states: StateDeclaration[] = [
           ? translate('Accounting')
           : translate('Billing'),
       permissions: [isOwnerOrStaff],
+      priority: 135,
     },
   },
 

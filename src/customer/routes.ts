@@ -112,6 +112,7 @@ export const states: StateDeclaration[] = [
     component: OrganizationResourcesAllList,
     data: {
       breadcrumb: () => translate('Resources'),
+      priority: 110,
     },
   },
   {
@@ -122,6 +123,7 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Team'),
+      priority: 130,
     },
   },
 
@@ -141,7 +143,7 @@ export const states: StateDeclaration[] = [
     component: CustomerEventsList,
     data: {
       breadcrumb: () => translate('Audit logs'),
-      skipBreadcrumb: true,
+      priority: 180,
     },
   },
 
@@ -248,6 +250,7 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Payments'),
+      priority: 140,
       permissions: [
         (state) => {
           if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
@@ -294,6 +297,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Cost policies'),
       permissions: [isOwnerOrStaff],
+      priority: 130,
     },
   },
 
@@ -304,6 +308,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Checklists'),
       feature: MarketplaceFeatures.show_experimental_ui_components,
+      priority: 130,
     },
   },
 ];

@@ -1,4 +1,4 @@
-import { GearSix, ListMagnifyingGlass, Warning } from '@phosphor-icons/react';
+import { GearSix, Warning } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -18,17 +18,6 @@ export const CustomerActions = ({ customer }) => {
           <GearSix />
         </span>
         {translate('Manage')}
-      </Link>
-
-      <Link
-        state="organization.events"
-        params={{ uuid: customer.uuid }}
-        className="btn btn-secondary me-3"
-      >
-        <span className="svg-icon svg-icon-2">
-          <ListMagnifyingGlass />
-        </span>
-        {translate('Audit logs')}
       </Link>
 
       {showIssues && (
