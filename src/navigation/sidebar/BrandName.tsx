@@ -26,7 +26,9 @@ export const BrandName: FunctionComponent = () => {
   const sidebarLogo =
     theme === 'dark' && ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_DARK
       ? sidebarLogoDarkUrl
-      : sidebarLogoUrl;
+      : ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO
+        ? sidebarLogoUrl
+        : undefined;
 
   return (
     <div
