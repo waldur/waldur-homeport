@@ -64,14 +64,14 @@ export const AdminStatistics = () => {
             <StatisticsCard
               title={translate('Organizations')}
               value={data.organizations}
-              to={{ state: 'admin.customers' }}
+              to={{ state: 'organizations' }}
             />
           </Col>
           <Col md={6} lg={4}>
             <StatisticsCard
               title={translate('Projects')}
               value={data.projects}
-              to={{ state: 'admin.projects' }}
+              to={{ state: 'projects' }}
             />
           </Col>
           <Col md={6} lg={4}>
@@ -99,7 +99,7 @@ export const AdminStatistics = () => {
             <StatisticsCard
               title={translate('Resources')}
               value={data.resources}
-              to={{ state: 'marketplace-admin-resources-list' }}
+              to={{ state: 'all-resources' }}
             />
           </Col>
         </>
