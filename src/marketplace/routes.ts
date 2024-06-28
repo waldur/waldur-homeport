@@ -69,10 +69,6 @@ const MarketplaceOrdersList = lazyComponent(
   () => import('./orders/list/MarketplaceOrdersList'),
   'MarketplaceOrdersList',
 );
-const OrderDetails = lazyComponent(
-  () => import('./orders/details/OrderDetails'),
-  'OrderDetails',
-);
 const PublicResourcesList = lazyComponent(
   () => import('./resources/list/PublicResourcesList'),
   'PublicResourcesList',
@@ -128,6 +124,11 @@ const OfferingEditUIView = lazyComponent(
 const ServiceProvidersList = lazyComponent(
   () => import('./service-providers/ServiceProvidersList'),
   'ServiceProvidersList',
+);
+
+const OrderDetailsContainer = lazyComponent(
+  () => import('./orders/OrderDetailsContainer'),
+  'OrderDetailsContainer',
 );
 
 const getPublicRoutesParams = () => ({
@@ -192,7 +193,6 @@ export const states: StateDeclaration[] = [
     component: MarketplaceOrdersList,
     data: {
       breadcrumb: () => translate('Orders'),
-      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },
 
@@ -428,17 +428,17 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'marketplace-order-details-project',
-    url: 'marketplace-order-details/:order_uuid/',
-    component: OrderDetails,
-    parent: 'project',
+    name: 'marketplace-orders',
+    url: '/marketplace-order-details/',
+    abstract: true,
+    component: UIView,
+    parent: 'public',
   },
 
   {
-    name: 'marketplace-order-details-customer',
-    url: 'marketplace-order-details/:order_uuid/',
-    component: OrderDetails,
-    parent: 'organization',
+    name: 'marketplace-orders.details',
+    url: ':order_uuid/?tab',
+    component: OrderDetailsContainer,
   },
 
   {

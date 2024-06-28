@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { isValid } from 'redux-form';
 
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { SummaryTable } from '@waldur/marketplace/details/OrderSummary';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
@@ -19,12 +18,7 @@ import { Customer, Project } from '@waldur/workspace/types';
 
 const PureOrderDetailsSummary: React.FC<OrderSummaryProps> = (
   props: OrderSummaryProps,
-) => (
-  <>
-    <OfferingLogo src={props.offering.thumbnail} size="sm" />
-    <SummaryTable {...props} />
-  </>
-);
+) => <SummaryTable {...props} />;
 
 interface OrderDetailsSummary {
   customer: Customer;

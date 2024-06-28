@@ -1,3 +1,4 @@
+import { Check } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { approveOrderByConsumer } from '@waldur/marketplace/common/api';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
@@ -41,14 +43,18 @@ export const ApproveByConsumerButton: FC<OrderActionProps> = ({
   }
   return wrapTooltip(
     translate('You need approval to finish purchasing of services.'),
-    <button
-      type="button"
-      className="btn btn-primary btn-sm me-1"
-      onClick={() => mutate()}
-      disabled={isLoading}
-    >
-      <i className="fa fa-check" /> {translate('Approve')}{' '}
-      {isLoading && <LoadingSpinnerIcon className="me-1" />}
-    </button>,
+    <>
+      {isLoading ? (
+        <LoadingSpinnerIcon className="me-1" />
+      ) : (
+        <ActionItem
+          className="text-success"
+          title={translate('Approve')}
+          action={mutate}
+          disabled={isLoading}
+          iconNode={<Check />}
+        />
+      )}
+    </>,
   );
 };

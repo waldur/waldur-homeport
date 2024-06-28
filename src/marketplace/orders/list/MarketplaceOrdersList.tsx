@@ -36,12 +36,12 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
       title: translate('Name'),
       render: ({ row }) => (
         <Link
-          state="marketplace-order-details-project"
-          params={{ order_uuid: row.uuid, uuid: row.project_uuid }}
+          state="marketplace-orders.details"
+          params={{ order_uuid: row.uuid }}
           label={row.attributes.name}
         />
       ),
-      keys: ['attributes', 'project_uuid'],
+      keys: ['attributes'],
     },
     {
       title: translate('Created at'),
