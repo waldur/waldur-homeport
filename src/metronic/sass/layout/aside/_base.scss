@@ -83,6 +83,16 @@
   &.aside-light {
     background-color: $white;
   }
+
+  &.aside-accent {
+    background-color: var(--waldur-aside-bg-color);
+
+    .aside-logo {
+      h3 {
+        color: white;
+      }
+    }
+  }
 }
 
 // Desktop mode

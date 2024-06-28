@@ -29,14 +29,21 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   }, [sidebarRef, layout]);
 
   const sidebarStyle = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
+  const asideClassNames = {
+    'aside-dark': sidebarStyle === 'dark',
+    'aside-light': sidebarStyle === 'light',
+    'aside-accent': sidebarStyle === 'accent',
+  };
+  const menuClassNames = {
+    'menu-title-gray-800': sidebarStyle === 'dark',
+    'menu-title-dark': sidebarStyle === 'light',
+    'menu-title-white': sidebarStyle === 'accent',
+  };
 
   return (
     <nav
       ref={sidebarRef}
-      className={classNames('aside aside-hoverable', {
-        'aside-dark': sidebarStyle === 'dark',
-        'aside-light': sidebarStyle === 'light',
-      })}
+      className={classNames('aside aside-hoverable', asideClassNames)}
       data-kt-drawer="true"
       data-kt-drawer-name="aside"
       data-kt-drawer-activate="{default: true, lg: false}"
@@ -59,7 +66,10 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
           data-kt-scroll-offset="0"
         >
           <div
-            className="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
+            className={classNames(
+              'menu menu-column menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500',
+              menuClassNames,
+            )}
             id="kt_aside_menu"
             data-kt-menu="true"
           >
@@ -67,7 +77,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
           </div>
         </div>
       </div>
-      <SidebarFooter />
+      <SidebarFooter menuClassNames={menuClassNames} />
     </nav>
   );
 };

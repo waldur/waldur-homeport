@@ -28,6 +28,15 @@ function initSentry() {
   }
 }
 
+function initCssVariables() {
+  if (ENV.plugins.WALDUR_CORE.BRAND_COLOR) {
+    document.documentElement.style.setProperty(
+      '--waldur-aside-bg-color',
+      ENV.plugins.WALDUR_CORE.BRAND_COLOR,
+    );
+  }
+}
+
 export let MatomoInstance: MatomoTracker = null;
 
 export function afterBootstrap() {
@@ -45,4 +54,5 @@ export function afterBootstrap() {
   store.dispatch(initConfig(ENV));
   LanguageUtilsService.checkLanguage();
   attachTransitions();
+  initCssVariables();
 }
