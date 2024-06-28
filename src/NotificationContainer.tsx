@@ -1,17 +1,17 @@
 import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NotificationsSystem, {
-  bootstrapTheme,
   atalhoTheme,
+  bootstrapTheme,
   dismissNotification,
 } from 'reapop';
 
-import { RootState } from './store/reducers';
+import { themeSelector } from './navigation/theme/store';
 
 export const NotificationContainer: FunctionComponent = () => {
   const dispatch = useDispatch();
   const notifications = useSelector((state: any) => state.notifications);
-  const theme = useSelector((state: RootState) => state.theme.theme);
+  const theme = useSelector(themeSelector);
   return (
     <NotificationsSystem
       theme={theme === 'dark' ? atalhoTheme : bootstrapTheme}

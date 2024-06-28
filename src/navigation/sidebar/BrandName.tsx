@@ -1,10 +1,14 @@
 import { FunctionComponent, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { fixURL } from '@waldur/core/api';
 import { useLayout } from '@waldur/metronic/layout/core';
 
+import { themeSelector } from '../theme/store';
+
 export const BrandName: FunctionComponent = () => {
+  const theme = useSelector(themeSelector);
   const layout = useLayout();
   // switch aside.minimized to keep sidebar state between pages
   const toggleSidebar = useCallback(() => {
@@ -16,26 +20,30 @@ export const BrandName: FunctionComponent = () => {
     });
   }, [layout]);
 
-  const imageUrl = fixURL('/icons/sidebar_logo/');
+  const sidebarLogoUrl = fixURL('/icons/sidebar_logo/');
   const sidebarLogoMobileUrl = fixURL('/icons/sidebar_logo_mobile/');
+  const sidebarLogoDarkUrl = fixURL('/icons/sidebar_logo_dark/');
+  const sidebarLogo =
+    theme === 'dark' && ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_DARK
+      ? sidebarLogoDarkUrl
+      : sidebarLogoUrl;
 
   return (
     <div
       className="aside-logo flex-column-auto position-relative"
       id="kt_aside_logo"
     >
-      {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE &&
-      ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
+      {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE && sidebarLogo ? (
         <>
           <img
             src={sidebarLogoMobileUrl}
             alt="logo"
             className="mh-50px mw-200px logo_mobile"
           />
-          <img src={imageUrl} alt="logo" className="mh-50px mw-200px logo" />
+          <img src={sidebarLogo} alt="logo" className="mh-50px mw-200px logo" />
         </>
-      ) : ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO ? (
-        <img src={imageUrl} alt="logo" className="mh-50px mw-200px logo" />
+      ) : sidebarLogo ? (
+        <img src={sidebarLogo} alt="logo" className="mh-50px mw-200px logo" />
       ) : (
         <h3 className="mt-2" style={{ color: 'white' }}>
           {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}

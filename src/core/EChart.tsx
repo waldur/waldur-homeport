@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ResizeObserver from 'resize-observer-polyfill';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { themeSelector } from '@waldur/navigation/theme/store';
 import { RootState } from '@waldur/store/reducers';
 
 interface ChartProps {
@@ -108,7 +109,7 @@ class EChartComponent extends Component<ChartProps> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  theme: state.theme.theme,
+  theme: themeSelector(state),
 });
 
 export const EChart = connect(mapStateToProps)(EChartComponent);
