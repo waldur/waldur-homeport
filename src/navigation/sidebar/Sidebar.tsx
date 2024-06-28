@@ -28,20 +28,15 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
     }
   }, [sidebarRef, layout]);
 
+  const sidebarStyle = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
+
   return (
     <nav
       ref={sidebarRef}
-      className={classNames(
-        'aside aside-hoverable',
-        {
-          'aside-dark':
-            ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE === 'dark' ||
-            !ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE,
-        },
-        {
-          'aside-light': ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE === 'light',
-        },
-      )}
+      className={classNames('aside aside-hoverable', {
+        'aside-dark': sidebarStyle === 'dark',
+        'aside-light': sidebarStyle === 'light',
+      })}
       data-kt-drawer="true"
       data-kt-drawer-name="aside"
       data-kt-drawer-activate="{default: true, lg: false}"
