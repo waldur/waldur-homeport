@@ -170,6 +170,9 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             'card-table',
             'full-width',
             this.props.fieldName ? 'field-table' : '',
+            this.props.mode === 'grid' &&
+              Boolean(this.props.gridItem) &&
+              'grid-table',
             this.props.className,
           )}
           id={this.props.id}
@@ -263,12 +266,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
 
           <Card.Body>
             <div className="table-responsive dataTables_wrapper">
-              <div
-                className={classNames(
-                  'table-container',
-                  this.props.mode === 'grid' && this.props.gridItem && 'px-3',
-                )}
-              >
+              <div className={classNames('table-container')}>
                 {this.renderBody()}
               </div>
             </div>
