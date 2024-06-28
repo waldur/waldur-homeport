@@ -10,7 +10,9 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 const RoleDetailsDialog = ({ role }) => (
   <ModalDialog
-    title={translate('Role details: {roleName}', { roleName: role.name })}
+    title={translate('Role details: {roleName}', {
+      roleName: role.description || role.name,
+    })}
   >
     {PermissionOptions.filter((entity) =>
       entity.options.find((option) => role.permissions.includes(option.value)),
