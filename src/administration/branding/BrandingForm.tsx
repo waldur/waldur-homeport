@@ -87,6 +87,14 @@ const PureBrandingForm: FunctionComponent<any> = (props) => (
       />
       <ImageField
         floating={false}
+        label={translate(
+          'Image rendered at the top of sidebar menu in dark mode.',
+        )}
+        name="SIDEBAR_LOGO_DARK"
+        initialValue={ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_DARK}
+      />
+      <ImageField
+        floating={false}
         label={translate('Custom favicon .png image file')}
         name="FAVICON"
         initialValue={ENV.plugins.WALDUR_CORE.FAVICON}

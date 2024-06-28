@@ -37,6 +37,7 @@ interface CoreConfiguration {
   POWERED_BY_LOGO: string;
   SIDEBAR_LOGO: string;
   SIDEBAR_LOGO_MOBILE: string;
+  SIDEBAR_LOGO_DARK: string;
   HOMEPORT_SENTRY_DSN: string;
   HOMEPORT_SENTRY_ENVIRONMENT: string;
   HOMEPORT_SENTRY_TRACES_SAMPLE_RATE: number;
