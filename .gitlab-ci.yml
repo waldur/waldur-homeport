@@ -178,7 +178,6 @@ Publish latest docker image:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --cache=true
       --build-arg="DOCKER_REGISTRY=${DOCKER_REGISTRY}"
       --build-arg="VERSION=latest"
       --destination "opennode/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}"
@@ -203,7 +202,6 @@ Publish docker image with specific version:
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --cache=true
       --build-arg="DOCKER_REGISTRY=${DOCKER_REGISTRY}"
       --build-arg="VERSION=$CI_COMMIT_TAG"
       --destination "opennode/${CI_PROJECT_NAME}:${CI_COMMIT_TAG}"
