@@ -15,6 +15,7 @@ interface TableFilterItem {
   getValueLabel?(value: any): string | number;
   ellipsis?: boolean;
   showValueBadge?: boolean;
+  hideRemoveButton?: boolean;
 }
 
 const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
@@ -92,6 +93,7 @@ export const TableSidebarFilterValues = ({
   badgeValue = null,
   ellipsis = false,
   remove,
+  hideRemoveButton = false,
 }) => {
   return !['', undefined].includes(value) ? (
     badgeValue ? (
@@ -102,7 +104,9 @@ export const TableSidebarFilterValues = ({
         >
           <Badge bg="secondary" className="text-dark">
             {badgeValue(value)}
-            <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+            {!hideRemoveButton && (
+              <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+            )}
           </Badge>
         </div>
       ) : null
@@ -116,7 +120,9 @@ export const TableSidebarFilterValues = ({
             style={!ellipsis ? { maxWidth: 'unset' } : undefined}
           >
             {getValueLabel(v)}
-            <RemoveFilterBadgeButton onClick={() => remove(value, v)} />
+            {!hideRemoveButton && (
+              <RemoveFilterBadgeButton onClick={() => remove(value, v)} />
+            )}
           </Badge>
         ))}
       </>
@@ -127,7 +133,9 @@ export const TableSidebarFilterValues = ({
         style={!ellipsis ? { maxWidth: 'unset' } : undefined}
       >
         {getValueLabel(value)}
-        <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+        {!hideRemoveButton && (
+          <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+        )}
       </Badge>
     )
   ) : null;
@@ -160,6 +168,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
             badgeValue={props.badgeValue}
             ellipsis={props.ellipsis}
             remove={removeValue}
+            hideRemoveButton={props.hideRemoveButton}
           />
         ),
       });
@@ -210,6 +219,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
                 badgeValue={props.badgeValue}
                 ellipsis={props.ellipsis}
                 remove={removeValue}
+                hideRemoveButton={props.hideRemoveButton}
               />
             )}
           />

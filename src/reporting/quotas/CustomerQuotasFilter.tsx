@@ -14,6 +14,7 @@ export const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
     name="quota"
     badgeValue={(value) => value?.title}
     ellipsis={false}
+    hideRemoveButton
   >
     <Field
       name="quota"

@@ -11,7 +11,7 @@ import { getFiltersFormId } from './utils';
 interface TableFiltersProps
   extends Pick<
     TableProps,
-    'filters' | 'renderFiltersDrawer' | 'filtersStorage'
+    'filters' | 'renderFiltersDrawer' | 'filtersStorage' | 'hideClearFilters'
   > {}
 
 export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
@@ -30,13 +30,15 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
   return props.filtersStorage.length > 0 ? (
     <Row className="card-toolbar w-100 my-4">
       <Col xs={12} md="auto" className="order-md-1 mb-4 mb-md-0 text-end">
-        <Button
-          variant="flush"
-          className="btn-active-text-primary"
-          onClick={clearFilters}
-        >
-          {translate('Clear filters')}
-        </Button>
+        {!props.hideClearFilters && (
+          <Button
+            variant="flush"
+            className="btn-active-text-primary"
+            onClick={clearFilters}
+          >
+            {translate('Clear filters')}
+          </Button>
+        )}
       </Col>
       <Col className="d-flex flex-wrap gap-4">
         {props.filtersStorage.map((item) => (

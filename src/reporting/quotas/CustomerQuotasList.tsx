@@ -50,6 +50,7 @@ export const CustomerQuotasList = () => {
       ]}
       showPageSizeSelector={true}
       filters={<CustomerQuotasFilter />}
+      hideClearFilters
     />
   );
 };
