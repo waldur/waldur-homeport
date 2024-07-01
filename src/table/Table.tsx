@@ -84,6 +84,7 @@ export interface TableProps<RowType = any> extends TableState {
   toggleColumn?(index, column, value?): void;
   initialMode?: 'grid' | 'table';
   standalone?: boolean;
+  hideClearFilters?: boolean;
 }
 
 const TableComponent = (props: TableProps) => {
@@ -260,6 +261,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                 filtersStorage={this.props.filtersStorage}
                 filters={this.props.filters}
                 renderFiltersDrawer={this.props.renderFiltersDrawer}
+                hideClearFilters={this.props.hideClearFilters}
               />
             </Card.Header>
           ) : null}
