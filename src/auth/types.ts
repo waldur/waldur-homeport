@@ -24,7 +24,7 @@ export interface ExternalLink {
 
 interface CoreConfiguration {
   INVITATION_USE_WEBHOOKS: boolean;
-  DEFAULT_IDP: string;
+  DEFAULT_IDP: { provider: string; auth_url: string; client_id: string };
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;
   MASTERMIND_URL: string;
