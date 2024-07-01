@@ -34,20 +34,12 @@ export const LoginColumn = () => {
     if (params['disableAutoLogin'] === '') {
       return;
     }
-    if (!data) {
-      return;
-    }
-    if (!ENV.plugins.WALDUR_CORE.DEFAULT_IDP) {
-      return;
-    }
-    const provider = data.find(
-      (provider) => provider.provider === ENV.plugins.WALDUR_CORE.DEFAULT_IDP,
-    );
+    const provider = ENV.plugins.WALDUR_CORE.DEFAULT_IDP;
     if (!provider) {
       return;
     }
     window.location.href = getOauthURL(provider);
-  }, [data, params]);
+  }, [params]);
 
   return (
     <div className="login-column">
