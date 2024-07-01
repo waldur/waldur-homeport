@@ -9,7 +9,6 @@ interface OrganizationAutocompleteProps {
   label?: string;
   placeholder?: string;
   noOptionsMessage?: string;
-  isServiceProvider?: boolean;
 }
 
 export const OrganizationAutocomplete: FunctionComponent<
@@ -24,8 +23,6 @@ export const OrganizationAutocomplete: FunctionComponent<
           organizationAutocomplete(query, prevOptions, page, {
             field: ['name', 'uuid'],
             o: 'name',
-            is_service_provider: props.isServiceProvider,
-            has_resources: props.isServiceProvider ? undefined : true,
           })
         }
         defaultOptions
