@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+import { AtLeast } from '@waldur/core/types';
 import { RoleEnum } from '@waldur/permissions/enums';
 import { RootState } from '@waldur/store/reducers';
 
@@ -36,7 +37,10 @@ export const isSupportOnly = (state: RootState): boolean =>
 export const isStaffOrSupport = (state: RootState): boolean =>
   isStaff(state) || isSupport(state);
 
-export const checkIsOwner = (customer: Customer, user: User): boolean =>
+export const checkIsOwner = (
+  customer: AtLeast<Customer, 'uuid'>,
+  user: User,
+): boolean =>
   !!user?.permissions?.find(
     (permission) =>
       permission.scope_type === 'customer' &&
@@ -55,7 +59,10 @@ export const checkIsServiceManager = (
       permission.role_name === RoleEnum.CUSTOMER_MANAGER,
   );
 
-export const checkCustomerUser = (customer: Customer, user: User): boolean => {
+export const checkCustomerUser = (
+  customer: AtLeast<Customer, 'uuid'>,
+  user: User,
+): boolean => {
   if (user && user.is_staff) {
     return true;
   }

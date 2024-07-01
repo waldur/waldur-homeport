@@ -1417,6 +1417,8 @@
   "Offering has been paused.": "",
   "Offering has been updated successfully.": "",
   "Offering invoices synchronization has been scheduled.": "",
+  "Offering is restricted to {organization}": "",
+  "Offering is restricted to {project} in {organization}": "",
   "Offering managers": "",
   "Offering managers:": "",
   "Offering name": "",

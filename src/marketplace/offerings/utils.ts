@@ -1,6 +1,8 @@
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
+import { checkCustomerUser } from '@waldur/workspace/selectors';
+import { User } from '@waldur/workspace/types';
 
 const ARTICLE_CODE_PATTERN = new RegExp(
   '^[A-Za-z0-9][A-Za-z0-9-_]*[A-Za-z0-9]$',
@@ -71,4 +73,28 @@ export const getOfferingBreadcrumbItems = (offering): IBreadcrumbItem[] => {
       active: true,
     },
   ];
+};
+
+export const isOfferingRestrictedToProject = (
+  offering: Offering,
+  user: User,
+) => {
+  const isStaffOrOwner = checkCustomerUser(
+    { uuid: offering.customer_uuid },
+    user,
+  );
+  const isRestrictedAndNotAllowed =
+    !offering.shared &&
+    offering.project_uuid &&
+    !user.permissions.find(
+      (permission) =>
+        permission.scope_type === 'project' &&
+        permission.scope_uuid === offering.project_uuid,
+    );
+  const isAllowed = isStaffOrOwner || !isRestrictedAndNotAllowed;
+
+  return {
+    isRestricted: !offering.shared,
+    isAllowed,
+  };
 };
