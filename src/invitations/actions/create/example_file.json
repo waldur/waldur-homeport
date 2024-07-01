@@ -1,18 +1,8 @@
 ﻿{
-  "fields": ["Email", "Role", "Project", "Organization"],
+  "fields": ["Email", "Role"],
   "data": [
-    [
-      "CraigAlvarado@example.com",
-      "Project member",
-      "Programmable uniform hierarchy",
-      "Villegas Ltd"
-    ],
-    [
-      "JoannWaters@example.com",
-      "System administrator",
-      "Cross-platform multimedia paradigm",
-      "Wheeler, Mcmahon and Rivera"
-    ],
-    ["DonnaSchwartz@example.com", "Organization owner", "", "Pruitt-Brown"]
+    ["CraigAlvarado@example.com", "Project member"],
+    ["JoannWaters@example.com", "System administrator"],
+    ["DonnaSchwartz@example.com", "Organization owner"]
   ]
 }
