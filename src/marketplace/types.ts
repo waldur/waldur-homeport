@@ -93,7 +93,6 @@ export interface OrganizationGroup {
 }
 
 export interface Offering extends GeolocationPoint {
-  project_name?: string;
   quotas?: Quota[];
   uuid?: string;
   url?: string;
@@ -118,6 +117,8 @@ export interface Offering extends GeolocationPoint {
   customer_uuid?: string;
   customer_name?: string;
   customer_image?: string;
+  project_name?: string;
+  project_uuid?: string;
   attributes: AttributesType;
   components: OfferingComponent[];
   options?: OfferingOptions;
