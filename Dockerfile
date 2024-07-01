@@ -17,7 +17,7 @@ RUN echo $ASSET_PATH && yarn build
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 COPY --from=build /app/build/index.html /usr/share/nginx/html/index.orig.html
-COPY --from=build /app/build-info/COMMIT_SHA /COMMIT_SHA
+COPY --from=build /app/build-info/ /build-info/
 
 ENV API_URL="http://localhost:8080"
 ENV TITLE="Waldur | Cloud Service Management"
