@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { ProposalBadge } from '@waldur/proposals/proposal/ProposalBadge';
 import { Call, Round } from '@waldur/proposals/types';
-import { formatProposalState } from '@waldur/proposals/utils';
 import { Table } from '@waldur/table';
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/utils';
@@ -46,7 +46,7 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{formatProposalState(row.state)}</>,
+          render: ({ row }) => <ProposalBadge state={row.state} />,
         },
       ]}
       title={translate('Proposals')}
