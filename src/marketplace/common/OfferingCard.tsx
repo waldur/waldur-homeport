@@ -7,8 +7,22 @@ import { Link } from '@waldur/core/Link';
 import { ModelCard1 } from '@waldur/core/ModelCard1';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import azureIcon from '@waldur/images/appstore/icon-azure.png';
+import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
+import rancherIcon from '@waldur/images/appstore/icon-rancher.png';
+import slurmIcon from '@waldur/images/appstore/icon-slurm.png';
+import vmwareIcon from '@waldur/images/appstore/icon-vmware.png';
 import Placeholder from '@waldur/images/logo_w.svg';
+import {
+  INSTANCE_TYPE,
+  SHARED_INSTANCE_TYPE,
+  TENANT_TYPE,
+  VOLUME_TYPE,
+} from '@waldur/openstack/constants';
+import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
+import { SLURM_PLUGIN, SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 import { wrapTooltip } from '@waldur/table/ActionButton';
+import { VMWARE_VM } from '@waldur/vmware/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { OfferingLink } from '../links/OfferingLink';
@@ -16,6 +30,35 @@ import { isOfferingRestrictedToProject } from '../offerings/utils';
 import { Offering } from '../types';
 
 import './OfferingCard.scss';
+
+const getOfferingImage = (offering: Offering) => {
+  if (offering.image) return offering.image;
+  if (offering.thumbnail) return offering.thumbnail;
+  switch (offering.type) {
+    case INSTANCE_TYPE:
+    case SHARED_INSTANCE_TYPE:
+    case VOLUME_TYPE:
+    case TENANT_TYPE:
+      return openstackIcon;
+
+    case 'Azure.SQLServer':
+    case 'Azure.VirtualMachine':
+      return azureIcon;
+
+    case MARKETPLACE_RANCHER:
+      return rancherIcon;
+
+    case SLURM_PLUGIN:
+    case SLURM_REMOTE_PLUGIN:
+      return slurmIcon;
+
+    case VMWARE_VM:
+      return vmwareIcon;
+
+    default:
+      return null;
+  }
+};
 
 interface OfferingCardProps {
   offering: Offering;
@@ -50,7 +93,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) => {
                 .join(' - ')
         }
         logo={props.offering.thumbnail}
-        image={props.offering.image}
+        image={getOfferingImage(props.offering)}
         placeholder={
           <span className="svg-icon svg-icon-5tx svg-icon-dark">
             <Placeholder className="mh-90px" />
