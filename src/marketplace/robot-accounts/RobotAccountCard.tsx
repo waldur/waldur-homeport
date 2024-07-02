@@ -1,7 +1,5 @@
-import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
-import { translate } from '@waldur/i18n';
 import { countRobotAccounts } from '@waldur/marketplace/common/api';
 
 import { RobotAccountList } from './RobotAccountList';
@@ -11,16 +9,5 @@ export const RobotAccountCard = ({ resource }) => {
   if (!result.value) {
     return null;
   }
-  return (
-    <Card>
-      <Card.Header>
-        <Card.Title>
-          <h3>{translate('Robot accounts')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <RobotAccountList resource={resource} />
-      </Card.Body>
-    </Card>
-  );
+  return <RobotAccountList resource={resource} />;
 };
