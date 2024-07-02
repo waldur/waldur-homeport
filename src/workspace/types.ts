@@ -107,7 +107,7 @@ export interface Project {
   is_industry?: boolean;
 }
 
-type PhoneNumber =
+export type PhoneNumber =
   | string
   | {
       national_number: string;

@@ -13,6 +13,7 @@ import { RootState } from '@waldur/store/reducers';
 import { isOwnerOrStaff, isStaff } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
+import { CustomerManageContainer } from './details/CustomerManageContainer';
 import { fetchCustomer } from './workspace/CustomerWorkspace';
 
 const ProjectsList = lazyComponent(
@@ -233,9 +234,17 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'organization.manage',
-    url: 'manage/',
+    name: 'organization-manage-container',
+    url: '',
+    abstract: true,
+    parent: 'organization',
+    component: CustomerManageContainer,
+  },
+  {
+    name: 'organization-manage',
+    url: 'manage/?tab',
     component: CustomerManage,
+    parent: 'organization-manage-container',
     data: {
       breadcrumb: () => translate('Settings'),
       skipBreadcrumb: true,

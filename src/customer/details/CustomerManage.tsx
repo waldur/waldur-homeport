@@ -1,20 +1,19 @@
 import { FunctionComponent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/configs/default';
-import { sendForm } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PageBarProvider } from '@waldur/marketplace/context';
 import { openModalDialog } from '@waldur/modal/actions';
-import { useFullPage } from '@waldur/navigation/context';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showError, showSuccess } from '@waldur/store/notify';
+import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
+import { updateCustomer } from './api';
 import { CustomerCallManagerPanel } from './CustomerCallManagerPanel';
 import { CustomerEditPanels } from './CustomerEditPanels';
 import { CustomerManagePageBar } from './CustomerManagePageBar';
@@ -26,9 +25,11 @@ const CustomerErrorDialog = lazyComponent(
   'CustomerErrorDialog',
 );
 
-export const CustomerManage: FunctionComponent = () => {
-  useFullPage();
+interface OwnProps {
+  tabSpec;
+}
 
+export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
   const canEditCustomer = hasPermission(user, {
@@ -36,31 +37,22 @@ export const CustomerManage: FunctionComponent = () => {
     customerId: customer.uuid,
   });
 
-  const updateCustomer = useCallback(
+  const update = useCallback(
     async (formData, dispatch) => {
       if (canEditCustomer) {
-        const data = { ...formData };
-        if ('image' in data) {
-          if (!data.image) {
-            data.image = '';
-          } else if (!(data.image instanceof File)) {
-            data.image = undefined;
-          }
-        }
-        if ('country' in data && data.country) {
-          data.country = data.country.value;
-        }
-
         try {
-          const response = await sendForm(
-            'PATCH',
-            `${ENV.apiEndpoint}api/customers/${customer.uuid}/`,
-            data,
-          );
+          const response = await updateCustomer(customer.uuid, formData);
           dispatch(showSuccess(translate('Organization updated successfully')));
+          if (response.data?.uuid === customer.uuid) {
+            dispatch(setCurrentCustomer(response.data));
+          }
           return response;
         } catch (error) {
           dispatch(showError(error.message));
+          // Throw exception to the edit dialog
+          if (!('image' in formData)) {
+            throw error;
+          }
         }
       } else {
         dispatch(
@@ -73,13 +65,23 @@ export const CustomerManage: FunctionComponent = () => {
     [canEditCustomer, customer],
   );
 
+  if (tabSpec) {
+    return (
+      <tabSpec.component
+        customer={customer}
+        callback={update}
+        canUpdate={canEditCustomer}
+      />
+    );
+  }
+
   return (
     <PageBarProvider>
       <CustomerManagePageBar />
       <div className="container-fluid py-10">
         <CustomerEditPanels
           customer={customer}
-          callback={updateCustomer}
+          callback={update}
           canUpdate={canEditCustomer}
         />
         <CustomerMarketplacePanel />

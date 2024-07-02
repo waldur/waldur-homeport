@@ -5,11 +5,13 @@ import {
   Normalizer,
   Formatter,
   Parser,
+  WrappedFieldMetaProps,
 } from 'redux-form';
 
 export interface FormField {
   name?: string;
   input?: WrappedFieldInputProps;
+  meta?: WrappedFieldMetaProps;
   required?: boolean;
   label?: ReactNode;
   description?: ReactNode;

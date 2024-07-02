@@ -1,183 +1,208 @@
-import { useQuery } from '@tanstack/react-query';
-import { Button, Card } from 'react-bootstrap';
-import { connect, useSelector } from 'react-redux';
-import { compose } from 'redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { Check, Spinner, Trash, X } from '@phosphor-icons/react';
+import { useMutation } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import { SelectField, StringField, SubmitButton } from '@waldur/form';
-import { FormSectionContainer } from '@waldur/form/FormSectionContainer';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { getAllOrganizationGroups } from '@waldur/marketplace/common/api';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { getNativeNameVisible } from '@waldur/store/config';
-import { RootState } from '@waldur/store/reducers';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { SetLocationButton } from '../list/SetLocationButton';
 
+import { CustomerMediaPanel } from './CustomerMediaPanel';
+import { FieldEditButton } from './FieldEditButton';
 import { CustomerEditPanelProps } from './types';
 
-const enhance = compose(
-  connect((_: RootState, ownProps: CustomerEditPanelProps) => {
-    const customer = ownProps.customer;
-    const initialValues = {
-      uuid: customer.uuid,
-      name: customer.name,
-      native_name: customer.native_name,
-      abbreviation: customer.abbreviation,
-      organization_group: customer.organization_group,
-      domain: customer.domain,
-      registration_code: customer.registration_code,
-      agreement_number: customer.agreement_number,
-      sponsor_number: customer.sponsor_number,
-      address: customer.address,
-      access_subnets: customer.access_subnets,
-      postal: customer.postal,
-    };
-    return { initialValues };
-  }),
-  reduxForm({
-    form: 'organizationEdit',
-  }),
-);
-
-type OwnProps = CustomerEditPanelProps & InjectedFormProps;
-
-export const CustomerDetailsPanel = enhance((props: OwnProps) => {
+export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
   const nativeNameVisible = useSelector(getNativeNameVisible);
 
-  const {
-    isLoading: groupsLoading,
-    error: groupsError,
-    data: organizationGroups,
-    refetch: refetchGroups,
-  } = useQuery(['organizationGroups'], () =>
-    getAllOrganizationGroups().then((items) => {
-      return items.map((item) => ({
-        name: [item.parent_name, item.name].filter(Boolean).join(' ➔ '),
-        value: item.url,
-      }));
-    }),
+  const dispatch = useDispatch();
+  const { mutate: removeLocation, isLoading: isRemovingLocation } = useMutation(
+    async () => {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Confirmation'),
+          translate('Are you sure you want to remove the location?'),
+        );
+      } catch {
+        return;
+      }
+
+      try {
+        await props.callback({ latitude: null, longitude: null }, dispatch);
+        dispatch(showSuccess(translate('Location has been removed.')));
+      } catch (e) {
+        dispatch(
+          showErrorResponse(e, translate('Unable to remove the location.')),
+        );
+      }
+    },
+  );
+
+  const detailsRows = useMemo(
+    () =>
+      [
+        {
+          label: translate('Name'),
+          key: 'name',
+          value: props.customer.name,
+        },
+        nativeNameVisible
+          ? {
+              label: translate('Native name'),
+              key: 'native_name',
+              value: props.customer.native_name,
+            }
+          : null,
+        {
+          label: translate('Abbreviation'),
+          key: 'abbreviation',
+          value: props.customer.abbreviation,
+        },
+        {
+          label: translate('Organization group'),
+          key: 'organization_group',
+          value: [
+            props.customer.organization_group_parent_name,
+            props.customer.organization_group_name,
+          ]
+            .filter(Boolean)
+            .join(' ➔ '),
+        },
+        isFeatureVisible(CustomerFeatures.show_domain)
+          ? {
+              label: translate('Domain name'),
+              key: 'domain',
+              value: props.customer.domain,
+            }
+          : null,
+        ENV.plugins.WALDUR_CORE.ORGANIZATION_SUBNETS_VISIBLE
+          ? {
+              label: translate('Subnets'),
+              key: 'access_subnets',
+              value: props.customer.access_subnets,
+            }
+          : null,
+        {
+          label: translate('Address'),
+          key: 'address',
+          value: props.customer.address,
+        },
+        {
+          label: translate('Postal code'),
+          key: 'postal',
+          value: props.customer.postal,
+        },
+      ].filter(Boolean),
+    [props.customer, nativeNameVisible],
+  );
+
+  const identifiersRows = useMemo(
+    () => [
+      {
+        label: translate('Registration code'),
+        key: 'registration_code',
+        value: props.customer.registration_code,
+      },
+      {
+        label: translate('Agreement number'),
+        key: 'agreement_number',
+        value: props.customer.agreement_number,
+      },
+      {
+        label: translate('Sponsor number'),
+        key: 'sponsor_number',
+        value: props.customer.sponsor_number,
+      },
+    ],
+    [props.customer],
   );
 
   return (
-    <Card id="basic-details">
-      <Card.Header>
-        <Card.Title>
-          <h3>{translate('Basic details')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <form onSubmit={props.handleSubmit(props.callback)}>
-          <FormSectionContainer
-            label={translate('Basic details') + ':'}
-            submitting={props.submitting}
-            floating={true}
-          >
-            <StringField name="name" label={translate('Name')} />
+    <>
+      <CustomerMediaPanel {...props} />
 
-            {nativeNameVisible ? (
-              <StringField
-                name="native_name"
-                label={translate('Native name')}
-              />
-            ) : null}
-
-            <StringField
-              name="abbreviation"
-              label={translate('Abbreviation')}
+      <FormTable.Card
+        title={translate('Details')}
+        className="card-bordered mb-7"
+      >
+        <FormTable>
+          {detailsRows.map((row) => (
+            <FormTable.Item
+              key={row.key}
+              label={row.label}
+              value={row.value || 'N/A'}
+              actions={
+                <FieldEditButton
+                  customer={props.customer}
+                  name={row.key}
+                  callback={props.callback}
+                />
+              }
             />
+          ))}
+          <FormTable.Item
+            label={translate('Location')}
+            value={
+              props.customer.latitude && props.customer.longitude ? (
+                <Check weight="bold" className="text-info" />
+              ) : (
+                <X weight="bold" className="text-danger" />
+              )
+            }
+            actions={
+              <>
+                <ActionButton
+                  iconNode={
+                    !isRemovingLocation ? (
+                      <Trash weight="bold" className="text-danger" />
+                    ) : (
+                      <Spinner className="fa-spin" />
+                    )
+                  }
+                  action={removeLocation}
+                  variant="secondary"
+                  className="btn-sm btn-icon me-3"
+                />
+                <SetLocationButton customer={props.customer} />
+              </>
+            }
+          />
+        </FormTable>
+      </FormTable.Card>
 
-            {groupsLoading ? (
-              <LoadingSpinner />
-            ) : groupsError ? (
-              <LoadingErred
-                loadData={refetchGroups}
-                message={translate('Unable to load organization groups.')}
-              />
-            ) : (
-              <SelectField
-                name="organization_group"
-                label={translate('Organization group')}
-                options={organizationGroups}
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.value}
-                simpleValue
-                floating={false}
-              />
-            )}
-
-            {isFeatureVisible(CustomerFeatures.show_domain) ? (
-              <StringField
-                name="domain"
-                label={translate('Domain name')}
-                description={translate('Home organization domain name')}
-              />
-            ) : null}
-
-            <StringField name="address" label={translate('Address')} />
-
-            {ENV.plugins.WALDUR_CORE.ORGANIZATION_SUBNETS_VISIBLE ? (
-              <StringField
-                name="access_subnets"
-                label={translate('Subnets')}
-                description={translate(
-                  'Subnets from where connection to self-service is allowed.',
-                )}
-              />
-            ) : null}
-
-            <StringField name="postal" label={translate('Postal code')} />
-          </FormSectionContainer>
-
-          <FormSectionContainer
-            label={translate('Identifiers') + ':'}
-            submitting={props.submitting}
-            floating={true}
-          >
-            <StringField name="uuid" label={translate('UUID')} disabled />
-            <StringField
-              name="registration_code"
-              label={translate('Registration code')}
+      <FormTable.Card
+        title={translate('Identifiers')}
+        className="card-bordered"
+      >
+        <FormTable>
+          <FormTable.Item
+            label={translate('UUID')}
+            value={props.customer.uuid || 'N/A'}
+          />
+          {identifiersRows.map((row) => (
+            <FormTable.Item
+              key={row.key}
+              label={row.label}
+              value={row.value || 'N/A'}
+              actions={
+                <FieldEditButton
+                  customer={props.customer}
+                  name={row.key}
+                  callback={props.callback}
+                />
+              }
             />
-            <StringField
-              name="agreement_number"
-              label={translate('Agreement number')}
-            />
-            <StringField
-              name="sponsor_number"
-              label={translate('Sponsor number')}
-            />
-          </FormSectionContainer>
-
-          <SetLocationButton customer={props.customer} />
-
-          {props.dirty && (
-            <div className="pull-right">
-              <Button
-                variant="secondary"
-                size="sm"
-                className="me-2"
-                onClick={props.reset}
-              >
-                {translate('Discard')}
-              </Button>
-              <SubmitButton
-                className="btn btn-primary btn-sm me-2"
-                submitting={props.submitting}
-                label={
-                  props.canUpdate
-                    ? translate('Save changes')
-                    : translate('Propose changes')
-                }
-              />
-            </div>
-          )}
-        </form>
-      </Card.Body>
-    </Card>
+          ))}
+        </FormTable>
+      </FormTable.Card>
+    </>
   );
-});
+};

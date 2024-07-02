@@ -6,6 +6,12 @@ export interface CustomerEditPanelProps {
   canUpdate?: boolean;
 }
 
+export interface EditCustomerProps {
+  customer: Customer;
+  name: string;
+  callback(formData, dispatch): Promise<any>;
+}
+
 export interface AccessSubnet {
   uuid: string;
   inet: string;

@@ -1,84 +1,57 @@
-import { Button, Card } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { FC, useMemo } from 'react';
 
-import { StringField, SubmitButton, TextField } from '@waldur/form';
-import { EmailField } from '@waldur/form/EmailField';
-import { FormSectionContainer } from '@waldur/form/FormSectionContainer';
+import { formatPhoneNumber } from '@waldur/core/utils';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
 
+import { FieldEditButton } from './FieldEditButton';
 import { CustomerEditPanelProps } from './types';
 
-const enhance = compose(
-  connect((_: RootState, ownProps: CustomerEditPanelProps) => {
-    const customer = ownProps.customer;
-    const initialValues = {
-      email: customer.email,
-      phone_number: customer.phone_number,
-      contact_details: customer.contact_details,
-      homepage: customer.homepage,
-    };
-    return { initialValues };
-  }),
-  reduxForm({
-    form: 'organizationContactEdit',
-  }),
-);
-
-type OwnProps = CustomerEditPanelProps & InjectedFormProps;
-
-export const CustomerContactPanel = enhance((props: OwnProps) => {
-  return (
-    <Card id="contact" className="mt-5">
-      <Card.Header>
-        <Card.Title>
-          <h3>{translate('Contact')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <form onSubmit={props.handleSubmit(props.callback)}>
-          <FormSectionContainer
-            label={translate('Contact') + ':'}
-            submitting={props.submitting}
-            floating={true}
-          >
-            <EmailField name="email" label={translate('Email')} />
-            <StringField
-              name="phone_number"
-              label={translate('Phone number')}
-            />
-            <TextField
-              name="contact_details"
-              label={translate('Contact details')}
-            />
-            <StringField name="homepage" label={translate('Homepage')} />
-          </FormSectionContainer>
-
-          {props.dirty && (
-            <div className="pull-right">
-              <Button
-                variant="secondary"
-                size="sm"
-                className="me-2"
-                onClick={props.reset}
-              >
-                {translate('Discard')}
-              </Button>
-              <SubmitButton
-                className="btn btn-primary btn-sm me-2"
-                submitting={props.submitting}
-                label={
-                  props.canUpdate
-                    ? translate('Save changes')
-                    : translate('Propose changes')
-                }
-              />
-            </div>
-          )}
-        </form>
-      </Card.Body>
-    </Card>
+export const CustomerContactPanel: FC<CustomerEditPanelProps> = (props) => {
+  const rows = useMemo(
+    () => [
+      {
+        label: translate('Email'),
+        key: 'email',
+        value: props.customer.email,
+      },
+      {
+        label: translate('Phone number'),
+        key: 'phone_number',
+        value: formatPhoneNumber(props.customer.phone_number),
+      },
+      {
+        label: translate('Contact details'),
+        key: 'contact_details',
+        value: props.customer.contact_details,
+      },
+      {
+        label: translate('Homepage'),
+        key: 'homepage',
+        value: props.customer.homepage,
+      },
+    ],
+    [props.customer],
   );
-});
+
+  return (
+    <FormTable.Card className="card-bordered">
+      <FormTable>
+        {rows.map((row) => (
+          <FormTable.Item
+            key={row.key}
+            label={row.label}
+            value={row.value || 'N/A'}
+            actions={
+              <FieldEditButton
+                customer={props.customer}
+                name={row.key}
+                callback={props.callback}
+              />
+            }
+          />
+        ))}
+      </FormTable>
+    </FormTable.Card>
+  );
+};
