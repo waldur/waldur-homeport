@@ -1,4 +1,5 @@
 import {
+  ArrowClockwise,
   Buildings,
   ClipboardText,
   Plus,
@@ -8,12 +9,13 @@ import { groupBy, isEmpty } from 'lodash';
 import { Fragment, useCallback, useEffect, useRef } from 'react';
 import { Badge, Button, Col, Nav, Row, Tab } from 'react-bootstrap';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 
 import { NoResult } from './NoResult';
+import { useRecentSearch } from './RecentSearchService';
 import { SearchInput } from './SearchInput';
 import { SearchItem } from './SearchItem';
 import { SearchResult } from './useSearch';
@@ -26,29 +28,13 @@ interface SearchPopoverProps {
   close(): void;
 }
 
-interface TabContentProps extends Partial<ReturnType<typeof useFavoritePages>> {
+interface TabContentProps
+  extends Partial<ReturnType<typeof useFavoritePages>>,
+    Partial<ReturnType<typeof useRecentSearch>> {
   result: SearchResult;
   clearSearch(): void;
   close(): void;
 }
-
-const recentItems = [
-  {
-    uuid: '1',
-    title: 'Item #1',
-    menu: 'organization',
-  },
-  {
-    uuid: '2',
-    title: 'Item #2',
-    menu: 'project',
-  },
-  {
-    uuid: '3',
-    title: 'Item #3',
-    menu: 'resource',
-  },
-];
 
 const SectionTitle = ({ title, className = '' }) => (
   <h6
@@ -73,26 +59,31 @@ const AllResultsTabContent = ({
   addFavoritePage,
   removeFavorite,
   isFavorite,
+  recentSearchItems,
+  addRecentSearch,
   close,
 }: TabContentProps) => {
   return (
     <Row className="mx-0">
       <Col md={12} lg={6} className="py-5 px-0">
-        {isExperimentalUiComponentsVisible() && (
+        {Boolean(recentSearchItems?.length) && (
           <div className="mb-3">
             <SectionTitle title={translate('Recent')} />
-            {recentItems.map((item) => (
-              <div
-                key={item.uuid}
+            {recentSearchItems.map((item) => (
+              <Link
+                key={item.id}
                 className="d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-primary-50"
+                state={item.state}
+                params={item.params}
+                onClick={close}
               >
-                {item.menu === 'organization' ? (
+                {item.type === 'organization' ? (
                   <Buildings
                     size={22}
                     weight="bold"
                     className="text-gray-700 me-4"
                   />
-                ) : item.menu === 'project' ? (
+                ) : item.type === 'project' ? (
                   <ClipboardText
                     size={22}
                     weight="bold"
@@ -105,8 +96,11 @@ const AllResultsTabContent = ({
                     className="text-gray-700 me-4"
                   />
                 )}
-                <span className="fs-6 fw-semibold">{item.title}</span>
-              </div>
+                <span className="fs-6 fw-semibold flex-grow-1">
+                  {item.title}
+                </span>
+                <ArrowClockwise size={20} className="text-dark" />
+              </Link>
             ))}
           </div>
         )}
@@ -149,21 +143,22 @@ const AllResultsTabContent = ({
             <div className="mb-3 mt-5">
               <SectionTitle title={translate('Organizations')} />
               {result.data?.customersCount ? (
-                result.data.customers
-                  .slice(0, 3)
-                  .map((item) => (
-                    <SearchItem
-                      key={item.uuid}
-                      to="organization.dashboard"
-                      params={{ uuid: item.uuid }}
-                      title={item.name}
-                      image={item.image}
-                      isFavorite={isFavorite}
-                      addFavoritePage={addFavoritePage}
-                      removeFavorite={removeFavorite}
-                      onClick={close}
-                    />
-                  ))
+                result.data.customers.slice(0, 3).map((item) => (
+                  <SearchItem
+                    key={item.uuid}
+                    to="organization.dashboard"
+                    params={{ uuid: item.uuid }}
+                    title={item.name}
+                    image={item.image}
+                    isFavorite={isFavorite}
+                    addFavoritePage={addFavoritePage}
+                    removeFavorite={removeFavorite}
+                    onClick={(item) => {
+                      addRecentSearch(item, 'organization');
+                      close();
+                    }}
+                  />
+                ))
               ) : (
                 <SectionNoResult />
               )}
@@ -171,22 +166,23 @@ const AllResultsTabContent = ({
             <div className="mb-3">
               <SectionTitle title={translate('Projects')} />
               {result.data?.projectsCount ? (
-                result.data.projects
-                  .slice(0, 3)
-                  .map((item) => (
-                    <SearchItem
-                      key={item.uuid}
-                      to="project.dashboard"
-                      params={{ uuid: item.uuid }}
-                      title={item.name}
-                      subtitle={item.customer_name}
-                      image={item.image}
-                      isFavorite={isFavorite}
-                      addFavoritePage={addFavoritePage}
-                      removeFavorite={removeFavorite}
-                      onClick={close}
-                    />
-                  ))
+                result.data.projects.slice(0, 3).map((item) => (
+                  <SearchItem
+                    key={item.uuid}
+                    to="project.dashboard"
+                    params={{ uuid: item.uuid }}
+                    title={item.name}
+                    subtitle={item.customer_name}
+                    image={item.image}
+                    isFavorite={isFavorite}
+                    addFavoritePage={addFavoritePage}
+                    removeFavorite={removeFavorite}
+                    onClick={(item) => {
+                      addRecentSearch(item, 'project');
+                      close();
+                    }}
+                  />
+                ))
               ) : (
                 <SectionNoResult />
               )}
@@ -209,7 +205,10 @@ const AllResultsTabContent = ({
                       isFavorite={isFavorite}
                       addFavoritePage={addFavoritePage}
                       removeFavorite={removeFavorite}
-                      onClick={close}
+                      onClick={(item) => {
+                        addRecentSearch(item, 'resource');
+                        close();
+                      }}
                     />
                   ))
               ) : (
@@ -233,6 +232,7 @@ const OrganizationsTabContent = ({
   isFavorite,
   addFavoritePage,
   removeFavorite,
+  addRecentSearch,
   close,
 }: TabContentProps) => {
   return (
@@ -249,7 +249,10 @@ const OrganizationsTabContent = ({
               isFavorite={isFavorite}
               addFavoritePage={addFavoritePage}
               removeFavorite={removeFavorite}
-              onClick={close}
+              onClick={(item) => {
+                addRecentSearch(item, 'organization');
+                close();
+              }}
             />
           ))}
         </div>
@@ -270,6 +273,7 @@ const ProjectsTabContent = ({
   isFavorite,
   addFavoritePage,
   removeFavorite,
+  addRecentSearch,
   close,
 }: TabContentProps) => {
   return (
@@ -287,7 +291,10 @@ const ProjectsTabContent = ({
               isFavorite={isFavorite}
               addFavoritePage={addFavoritePage}
               removeFavorite={removeFavorite}
-              onClick={close}
+              onClick={(item) => {
+                addRecentSearch(item, 'project');
+                close();
+              }}
             />
           ))}
         </div>
@@ -308,6 +315,7 @@ const ResourcesTabContent = ({
   isFavorite,
   addFavoritePage,
   removeFavorite,
+  addRecentSearch,
   close,
 }: TabContentProps) => {
   const resourceGroups = result.data?.resources
@@ -333,7 +341,10 @@ const ResourcesTabContent = ({
                   isFavorite={isFavorite}
                   addFavoritePage={addFavoritePage}
                   removeFavorite={removeFavorite}
-                  onClick={close}
+                  onClick={(item) => {
+                    addRecentSearch(item, 'resource');
+                    close();
+                  }}
                 />
               ))}
             </Fragment>
@@ -373,6 +384,8 @@ export const SearchPopover = ({
   const clearSearch = useCallback(() => {
     setQuery('');
   }, [setQuery]);
+
+  const { recentSearchItems, addRecentSearch } = useRecentSearch();
 
   return (
     <div className="pt-5">
@@ -433,6 +446,8 @@ export const SearchPopover = ({
             <AllResultsTabContent
               result={result}
               clearSearch={clearSearch}
+              recentSearchItems={recentSearchItems}
+              addRecentSearch={addRecentSearch}
               favPages={favPages}
               addCurrentPageFavorite={addCurrentPageFavorite}
               isCurrentPageFavorite={isCurrentPageFavorite}
@@ -446,6 +461,7 @@ export const SearchPopover = ({
             <OrganizationsTabContent
               result={result}
               clearSearch={clearSearch}
+              addRecentSearch={addRecentSearch}
               isFavorite={isFavorite}
               addFavoritePage={addFavoritePage}
               removeFavorite={removeFavorite}
@@ -456,6 +472,7 @@ export const SearchPopover = ({
             <ProjectsTabContent
               result={result}
               clearSearch={clearSearch}
+              addRecentSearch={addRecentSearch}
               isFavorite={isFavorite}
               addFavoritePage={addFavoritePage}
               removeFavorite={removeFavorite}
@@ -466,6 +483,7 @@ export const SearchPopover = ({
             <ResourcesTabContent
               result={result}
               clearSearch={clearSearch}
+              addRecentSearch={addRecentSearch}
               isFavorite={isFavorite}
               addFavoritePage={addFavoritePage}
               removeFavorite={removeFavorite}

@@ -8,14 +8,14 @@ import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 
 import './SearchItem.scss';
 
-interface SearchItemProps {
+export interface SearchItemProps {
   title: string;
   subtitle?: string;
   image?: string;
   to: string;
   params?: { [key: string]: string };
   badge?: ReactNode;
-  onClick?();
+  onClick?(item: SearchItemProps);
   isFavorite?: ReturnType<typeof useFavoritePages>['isFavorite'];
   addFavoritePage?: ReturnType<typeof useFavoritePages>['addFavoritePage'];
   removeFavorite: ReturnType<typeof useFavoritePages>['removeFavorite'];
@@ -30,7 +30,7 @@ export const SearchItem = (props: SearchItemProps) => {
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a
         className="search-result-item d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-primary-50"
-        onClick={props.onClick}
+        onClick={() => props.onClick(props)}
         aria-hidden={true}
       >
         <ItemIcon
