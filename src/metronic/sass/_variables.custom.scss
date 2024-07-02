@@ -65,6 +65,10 @@ $theme-dark-inverse-colors: (
   'secondary': $secondary-dark-inverse,
 ) !default; // Custom variable
 
+// Card
+$card-py: 1.23rem !default;
+$card-px: 1.85rem !default;
+
 // Buttons + Forms
 //
 $input-btn-padding-y-sm: 0.195rem !default;

@@ -15,6 +15,8 @@ import { translate } from '@waldur/i18n';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import {
   checkIsServiceManager,
   getCustomer,
@@ -23,7 +25,9 @@ import {
 } from '@waldur/workspace/selectors';
 
 const getDashboardState = (state: StateDeclaration) => {
-  if (isDescendantOf('organization', state)) {
+  if (state.name === 'organization-manage') {
+    return state.name;
+  } else if (isDescendantOf('organization', state)) {
     return 'organization.dashboard';
   } else if (isDescendantOf('call-management', state)) {
     return 'call-management.dashboard';
@@ -49,13 +53,18 @@ const PageHero = ({ customer }) => {
     customer?.is_service_provider &&
     (checkIsServiceManager(customer, user) || isOwnerOrStaff);
 
-  const showRoleSelector = showCallManagement || showServiceProvider;
+  const canEditCustomer = hasPermission(user, {
+    permission: PermissionEnum.UPDATE_CUSTOMER,
+    customerId: customer.uuid,
+  });
+
+  const showTabs = showCallManagement || showServiceProvider || canEditCustomer;
 
   const dashboardState = getDashboardState(router.globals.current);
 
   return (
     <div className="container-fluid mb-8 mt-6">
-      {showRoleSelector && (
+      {showTabs && (
         <Tabs
           defaultActiveKey={dashboardState}
           className="nav-line-tabs mb-4"
@@ -76,6 +85,9 @@ const PageHero = ({ customer }) => {
               eventKey="marketplace-provider-dashboard"
               title={translate('Service provider')}
             />
+          )}
+          {canEditCustomer && (
+            <Tab eventKey="organization-manage" title={translate('Edit')} />
           )}
         </Tabs>
       )}

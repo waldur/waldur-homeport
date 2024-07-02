@@ -1,67 +1,75 @@
-import { Card } from 'react-bootstrap';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { UploadSimple } from '@phosphor-icons/react';
+import { useEffect, useMemo } from 'react';
+import { Button, Card } from 'react-bootstrap';
+import { connect, useDispatch } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 
-import { SubmitButton } from '@waldur/form';
-import { FormSectionContainer } from '@waldur/form/FormSectionContainer';
-import { ImageField } from '@waldur/form/ImageField';
+import { WideImageField } from '@waldur/form/WideImageField';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
+import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 
+import { EDIT_CUSTOMER_IMAGE_ID } from './constants';
 import { CustomerEditPanelProps } from './types';
 
-const enhance = compose(
-  connect((_: RootState, ownProps: CustomerEditPanelProps) => {
-    const customer = ownProps.customer;
-    const initialValues = {
-      image: customer.image,
-    };
-    return { initialValues };
+export const CustomerMediaPanel = connect<{}, {}, CustomerEditPanelProps>(
+  (_, ownProps) => ({
+    initialValues: { image: ownProps.customer.image },
   }),
-  reduxForm({
-    form: 'organizationMediaEdit',
+)(
+  reduxForm<{ image }, CustomerEditPanelProps>({
+    form: EDIT_CUSTOMER_IMAGE_ID,
+  })((props) => {
+    const abbreviation = useMemo(
+      () => getItemAbbreviation(props.customer),
+      [props.customer],
+    );
+
+    const dispatch = useDispatch<any>();
+    useEffect(() => {
+      // Can not use enableReinitialize on reduxForm because of infinite render loop issue
+      dispatch(props.change('image', props.customer.image));
+    }, [dispatch, props.customer]);
+
+    return (
+      <Card className="card-bordered mb-7">
+        <Card.Header>
+          <Card.Title>
+            <h3>{translate('Logo')}</h3>
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <form onSubmit={props.handleSubmit(props.callback)}>
+            <Field
+              name="image"
+              component={(fieldProps) => (
+                <WideImageField
+                  alt={abbreviation}
+                  initialValue={props.customer.image}
+                  max={2 * 1024 * 1024} // 2MB
+                  size={65}
+                  extraActions={({ isChanged, isTooLarge }) =>
+                    isChanged || props.submitting ? (
+                      <Button
+                        type="submit"
+                        variant="primary"
+                        size="sm"
+                        className="btn-icon-right"
+                        disabled={props.submitting || isTooLarge}
+                      >
+                        {translate('Save')}
+                        <span className="svg-icon svg-icon-5">
+                          <UploadSimple />
+                        </span>
+                      </Button>
+                    ) : null
+                  }
+                  {...fieldProps}
+                />
+              )}
+            />
+          </form>
+        </Card.Body>
+      </Card>
+    );
   }),
 );
-
-type OwnProps = CustomerEditPanelProps & InjectedFormProps<any>;
-
-export const CustomerMediaPanel = enhance((props: OwnProps) => {
-  return (
-    <Card id="media" className="mt-5">
-      <Card.Header>
-        <Card.Title>
-          <h3>{translate('Media')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <form onSubmit={props.handleSubmit(props.callback)}>
-          <FormSectionContainer
-            label={translate('Organization logo') + ':'}
-            submitting={props.submitting}
-          >
-            <ImageField
-              name="image"
-              initialValue={props.initialValues.image}
-              hideLabel
-            />
-          </FormSectionContainer>
-
-          {props.dirty && (
-            <div className="pull-right">
-              <SubmitButton
-                className="btn btn-primary btn-sm me-2"
-                submitting={props.submitting}
-                label={
-                  props.canUpdate
-                    ? translate('Save changes')
-                    : translate('Propose changes')
-                }
-              />
-            </div>
-          )}
-        </form>
-      </Card.Body>
-    </Card>
-  );
-});

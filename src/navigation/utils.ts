@@ -1,5 +1,5 @@
-import { useCurrentStateAndParams } from '@uirouter/react';
-import { useMemo } from 'react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import { useEffect, useMemo } from 'react';
 
 import { router } from '@waldur/router';
 
@@ -62,6 +62,17 @@ export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
       return flatTabs[0];
     }
   }, [tabs, params?.tab]);
+
+  const router = useRouter();
+  useEffect(() => {
+    if (!params?.tab && tabSpec) {
+      router.stateService.go(
+        state,
+        { ...params, tab: tabSpec.key },
+        { location: 'replace' },
+      );
+    }
+  }, [router, tabSpec, state, params?.tab]);
 
   return { tabSpec };
 };

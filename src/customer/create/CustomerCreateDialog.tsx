@@ -54,7 +54,7 @@ export const CustomerCreateDialog: React.FC<OwnProps> = ({ resolve }) => {
         dispatch(showSuccess(translate('Organization has been created.')));
         const newUser = await getCurrentUser();
         dispatch(setCurrentUser(newUser));
-        router.stateService.go('organization.manage', {
+        router.stateService.go('organization-manage', {
           uuid: customer.uuid,
         });
         dispatch(reset('CustomerCreateDialog'));

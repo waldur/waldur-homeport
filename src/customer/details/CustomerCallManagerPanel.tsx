@@ -87,7 +87,7 @@ export const CustomerCallManagerPanel: FunctionComponent = () => {
   );
 
   return (
-    <Card className="mt-5">
+    <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
           <h3 className="me-2">{translate('Call manager')}</h3>

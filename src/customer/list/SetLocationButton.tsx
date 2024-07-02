@@ -1,4 +1,4 @@
-import { MapPin } from '@phosphor-icons/react/dist/ssr';
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -44,9 +44,10 @@ const PureSetLocationButton: FunctionComponent<SetLocationButtonProps> = (
   props,
 ) => (
   <ActionButton
-    title={translate('Set location')}
-    iconNode={<MapPin />}
+    iconNode={<PencilSimple weight="bold" />}
     action={props.openDialog}
+    variant="secondary"
+    className="btn-sm btn-icon"
   />
 );
 

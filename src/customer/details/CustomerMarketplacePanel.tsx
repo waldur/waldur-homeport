@@ -16,7 +16,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
     return null;
   } else {
     return (
-      <Card className="mt-5">
+      <Card className="card-bordered">
         <Card.Header>
           <Card.Title>
             <h3>{translate('Service provider')}</h3>

@@ -4,23 +4,19 @@ import { FunctionComponent } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { openIssueCreateDialog } from '@waldur/issues/create/actions';
-import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { deleteCustomer } from '@waldur/project/api';
 import { showError } from '@waldur/store/notify';
-import store from '@waldur/store/store';
 import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
-const OrganizationRemovalErrorDialog = lazyComponent(
-  () => import('@waldur/customer/details/OrganizationRemovalErrorDialog'),
-  'OrganizationRemovalErrorDialog',
+const CustomerRemoveDialog = lazyComponent(
+  () => import('@waldur/customer/details/CustomerRemoveDialog'),
+  'CustomerRemoveDialog',
 );
 
 export const CustomerRemovePanel: FunctionComponent = () => {
@@ -36,51 +32,36 @@ export const CustomerRemovePanel: FunctionComponent = () => {
   const removeCustomer = () => {
     const hasProjects = customer.projects.length > 0;
     if (hasProjects) {
-      if (!ENV.plugins.WALDUR_SUPPORT.ENABLED) {
-        const notification = hasProjects
-          ? translate(
-              'Organization contains projects. Please remove them first.',
-            )
-          : '';
-        return notification
-          ? dispatch(showError(notification))
-          : dispatch(openModalDialog(OrganizationRemovalErrorDialog));
-      }
-      return dispatch(
-        openIssueCreateDialog({
-          issue: {
-            customer,
-            type: ISSUE_IDS.CHANGE_REQUEST,
-            summary: translate('Organization removal'),
-          },
-          hideProjectAndResourceFields: true,
-          options: {
-            title: translate('Organization removal'),
-            hideTitle: true,
-            descriptionLabel: translate('Reason'),
-            descriptionPlaceholder: translate(
-              'Why do you need to remove organization with existing projects?',
-            ),
-            submitTitle: translate('Request removal'),
-          },
-        }),
+      const notification = translate(
+        'Before removing organization, please make sure that all projects are removed.',
       );
+      return dispatch(showError(notification));
     }
-
-    const confirmDelete = confirm(translate('Confirm deletion?'));
-    if (confirmDelete) {
-      store.dispatch(setCurrentCustomer(null));
-      deleteCustomer(customer.uuid).then(
-        () => {
-          router.stateService.go('profile.details');
+    // Show confirmation dialog
+    dispatch(
+      openModalDialog(CustomerRemoveDialog, {
+        resolve: {
+          action: () => {
+            return deleteCustomer(customer.uuid)
+              .then(() => {
+                router.stateService.go('organizations').then(() => {
+                  dispatch(setCurrentCustomer(null));
+                });
+              })
+              .catch((error) => {
+                const msg = error.response.data?.detail || error.message;
+                dispatch(showError(msg));
+              });
+          },
+          customerName: customer.name,
         },
-        () => store.dispatch(setCurrentCustomer(customer)),
-      );
-    }
+        size: 'sm',
+      }),
+    );
   };
 
   return canDeleteCustomer ? (
-    <Card className="mt-5">
+    <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
           <h3 className="text-danger">{translate('Remove organization')}</h3>

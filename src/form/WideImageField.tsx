@@ -9,17 +9,17 @@ import {
   useRef,
 } from 'react';
 import { Button } from 'react-bootstrap';
-import { WrappedFieldProps } from 'redux-form';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
+import { FormField } from './types';
 import './ImageField.scss';
 
 type ImageType = File | string;
 
-interface WideImageFieldProps extends WrappedFieldProps {
+interface WideImageFieldProps extends FormField {
   size?: number;
   alt?: string;
   initialValue?: ImageType;

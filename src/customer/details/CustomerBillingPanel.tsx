@@ -40,7 +40,7 @@ type OwnProps = CustomerEditPanelProps & InjectedFormProps;
 
 export const CustomerBillingPanel = enhance((props: OwnProps) => {
   return (
-    <Card id="billing" className="mt-5">
+    <Card id="billing" className="card-bordered">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Billing')}</h3>

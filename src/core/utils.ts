@@ -1,4 +1,5 @@
 import { ENV } from '@waldur/configs/default';
+import { PhoneNumber } from '@waldur/workspace/types';
 
 export function wait(amount = 0) {
   return new Promise((resolve) => setTimeout(resolve, amount));
@@ -54,6 +55,12 @@ export const formatSnakeCase = (input) =>
 export const getAbbreviation = (text: string, length = 0) => {
   const abbr = text.replace(/(\w)\w*\W*/g, (_, i) => i.toUpperCase());
   return length > 0 ? abbr.substring(0, length) : abbr;
+};
+
+export const formatPhoneNumber = (phoneNumber: PhoneNumber) => {
+  if (!phoneNumber) return null;
+  if (typeof phoneNumber === 'string') return phoneNumber;
+  return phoneNumber.country_code + '-' + phoneNumber.national_number;
 };
 
 export const listToDict = (key, value) => (list) => {

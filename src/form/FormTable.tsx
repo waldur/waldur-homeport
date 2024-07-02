@@ -22,6 +22,7 @@ const FormTableItem: FC<FormTableItemProps> = (props) => {
 
 type FormTableCardProps = FC<
   PropsWithChildren<{
+    title?: ReactNode;
     className?: string;
   }>
 >;
@@ -29,6 +30,13 @@ type FormTableCardProps = FC<
 const FormTableCard: FormTableCardProps = (props) => {
   return (
     <Card className={classNames('form-table-card', props.className)}>
+      {props.title && (
+        <Card.Header>
+          <Card.Title>
+            <h3>{props.title}</h3>
+          </Card.Title>
+        </Card.Header>
+      )}
       <Card.Body>{props.children}</Card.Body>
     </Card>
   );
