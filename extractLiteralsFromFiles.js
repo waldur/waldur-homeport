@@ -1,8 +1,8 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+var ts = require('typescript');
 var fs = require('fs');
 var path = require('path');
-var ts = require('typescript');
 // Function to extract string literals from binary expressions
 function extractStringFromBinaryExpression(node) {
   var left = node.left;
@@ -29,7 +29,7 @@ function extractStringFromBinaryExpression(node) {
   return null;
 }
 // Function to extract string literals from the first argument of the translate function
-function extractStringLiteralFromTranslate(node, literals) {
+function extractStringLiteralFromTranslate(node, literals, filePath) {
   if (
     ts.isCallExpression(node) &&
     ts.isIdentifier(node.expression) &&
@@ -44,15 +44,18 @@ function extractStringLiteralFromTranslate(node, literals) {
       literal = extractStringFromBinaryExpression(firstArg);
     }
     if (literal !== null) {
-      literals.add(literal);
+      if (!literals.has(literal)) {
+        literals.set(literal, new Set());
+      }
+      literals.get(literal).add(filePath);
     }
   }
   ts.forEachChild(node, function (childNode) {
-    return extractStringLiteralFromTranslate(childNode, literals);
+    return extractStringLiteralFromTranslate(childNode, literals, filePath);
   });
 }
 // Function to process a single file
-function processFile(filePath, literals) {
+function processFile(filePath, literals, baseDir) {
   var sourceCode = fs.readFileSync(filePath, 'utf8');
   var sourceFile = ts.createSourceFile(
     filePath,
@@ -60,7 +63,8 @@ function processFile(filePath, literals) {
     ts.ScriptTarget.Latest,
     true,
   );
-  extractStringLiteralFromTranslate(sourceFile, literals);
+  var relativeFilePath = path.relative(baseDir, filePath);
+  extractStringLiteralFromTranslate(sourceFile, literals, relativeFilePath);
 }
 // Function to recursively find all .ts and .tsx files in the specified directory
 function getAllTSFiles(dirPath, arrayOfFiles) {
@@ -81,16 +85,18 @@ function getAllTSFiles(dirPath, arrayOfFiles) {
 // Main function
 function main(dirPath, outputFilePath) {
   var tsFiles = getAllTSFiles(dirPath);
-  var literals = new Set();
+  var literals = new Map();
   tsFiles.forEach(function (filePath) {
-    processFile(filePath, literals);
+    processFile(filePath, literals, dirPath);
   });
-  // Convert the Set to an object with empty string values and sort its keys
+  // Convert the Map to an object and sort its keys
   var sortedLiterals = Object.fromEntries(
-    Array.from(literals)
+    Array.from(literals.entries())
       .sort()
-      .map(function (literal) {
-        return [literal, ''];
+      .map(function (_a) {
+        var literal = _a[0],
+          files = _a[1];
+        return [literal, { description: Array.from(files).join(', ') }];
       }),
   );
   // Save the extracted literals to a JSON file

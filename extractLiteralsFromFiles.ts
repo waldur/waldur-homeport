@@ -39,7 +39,8 @@ function extractStringFromBinaryExpression(
 // Function to extract string literals from the first argument of the translate function
 function extractStringLiteralFromTranslate(
   node: ts.Node,
-  literals: Set<string>,
+  literals: Map<string, Set<string>>,
+  filePath: string,
 ) {
   if (
     ts.isCallExpression(node) &&
@@ -57,17 +58,24 @@ function extractStringLiteralFromTranslate(
     }
 
     if (literal !== null) {
-      literals.add(literal);
+      if (!literals.has(literal)) {
+        literals.set(literal, new Set<string>());
+      }
+      literals.get(literal)!.add(filePath);
     }
   }
 
   ts.forEachChild(node, (childNode) =>
-    extractStringLiteralFromTranslate(childNode, literals),
+    extractStringLiteralFromTranslate(childNode, literals, filePath),
   );
 }
 
 // Function to process a single file
-function processFile(filePath: string, literals: Set<string>) {
+function processFile(
+  filePath: string,
+  literals: Map<string, Set<string>>,
+  baseDir: string,
+) {
   const sourceCode = fs.readFileSync(filePath, 'utf8');
   const sourceFile = ts.createSourceFile(
     filePath,
@@ -75,7 +83,8 @@ function processFile(filePath: string, literals: Set<string>) {
     ts.ScriptTarget.Latest,
     true,
   );
-  extractStringLiteralFromTranslate(sourceFile, literals);
+  const relativeFilePath = path.relative(baseDir, filePath);
+  extractStringLiteralFromTranslate(sourceFile, literals, relativeFilePath);
 }
 
 // Function to recursively find all .ts and .tsx files in the specified directory
@@ -97,17 +106,20 @@ function getAllTSFiles(dirPath: string, arrayOfFiles: string[] = []): string[] {
 // Main function
 function main(dirPath: string, outputFilePath: string) {
   const tsFiles = getAllTSFiles(dirPath);
-  const literals = new Set<string>();
+  const literals = new Map<string, Set<string>>();
 
   tsFiles.forEach((filePath) => {
-    processFile(filePath, literals);
+    processFile(filePath, literals, dirPath);
   });
 
-  // Convert the Set to an object with empty string values and sort its keys
+  // Convert the Map to an object and sort its keys
   const sortedLiterals = Object.fromEntries(
-    Array.from(literals)
+    Array.from(literals.entries())
       .sort()
-      .map((literal) => [literal, '']),
+      .map(([literal, files]) => [
+        literal,
+        { description: Array.from(files).join(', ') },
+      ]),
   );
 
   // Save the extracted literals to a JSON file
