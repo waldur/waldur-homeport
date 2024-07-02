@@ -8,16 +8,14 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PROPOSALS_FILTER_FORM_ID } from '@waldur/proposals/constants';
-import {
-  formatProposalState,
-  getProposalStateOptions,
-} from '@waldur/proposals/utils';
+import { getProposalStateOptions } from '@waldur/proposals/utils';
 import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
 import { EndingField } from '../EndingField';
 
+import { ProposalBadge } from './ProposalBadge';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
 
 const filtersSelector = createSelector(
@@ -72,7 +70,7 @@ export const UserProposalsList: FC = () => {
     },
     {
       title: translate('State'),
-      render: ({ row }) => <>{formatProposalState(row.state)}</>,
+      render: ({ row }) => <ProposalBadge state={row.state} />,
       keys: ['state'],
       orderField: 'state',
     },

@@ -5,10 +5,7 @@ import { createSelector } from 'reselect';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import {
-  formatProposalState,
-  getNonCanceledProposalStates,
-} from '@waldur/proposals/utils';
+import { getNonCanceledProposalStates } from '@waldur/proposals/utils';
 import { createFetcher, Table } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -16,6 +13,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { PROPOSALS_FILTER_FORM_ID } from '../constants';
 import { EndingField } from '../EndingField';
 
+import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
 import { ProposalsTableFilter } from './ProposalsTableFilter';
 
@@ -80,7 +78,7 @@ export const CustomerProposalsList: FC<{}> = () => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{formatProposalState(row.state)}</>,
+          render: ({ row }) => <ProposalBadge state={row.state} />,
         },
       ]}
       title={translate('Proposals')}

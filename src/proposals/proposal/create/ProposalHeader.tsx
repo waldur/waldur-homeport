@@ -1,7 +1,8 @@
-import { Badge, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { formatProposalState } from '@waldur/proposals/utils';
+
+import { ProposalBadge } from '../ProposalBadge';
 
 export const ProposalHeader = ({ proposal }) => (
   <Card>
@@ -10,9 +11,7 @@ export const ProposalHeader = ({ proposal }) => (
         <h3 className="mb-0">
           {translate('Proposal')} - {proposal.name}
         </h3>
-        <Badge bg="light" text="dark" className="ms-4">
-          {formatProposalState(proposal.state)}
-        </Badge>
+        <ProposalBadge state={proposal.state} />
       </div>
       <p className="text-muted fst-italic">UUID: {proposal.uuid}</p>
     </Card.Body>
