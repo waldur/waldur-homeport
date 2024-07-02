@@ -16,6 +16,10 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
     table: 'marketplace-robot-accounts',
     fetchData: createFetcher('marketplace-robot-accounts'),
     filter,
+    queryField: 'type',
+    exportAll: true,
+    exportRow: (row) => [row.type, row.username || 'N/A'],
+    exportFields: ['Type', 'Username'],
   });
   const columns = [
     {
@@ -37,8 +41,9 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
     <Table
       {...tableProps}
       columns={columns}
+      hasQuery={true}
+      enableExport={true}
       verboseName={translate('robot accounts')}
-      hasActionBar={false}
       expandableRow={RobotAccountExpandable}
       hoverableRow={({ row }) => (
         <RobotAccountActions refetch={tableProps.fetch} row={row} />
