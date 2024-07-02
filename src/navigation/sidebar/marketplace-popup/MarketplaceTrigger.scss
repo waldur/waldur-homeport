@@ -35,3 +35,27 @@
     }
   }
 }
+
+.aside-light .menu-item.add-resource-toggle {
+  .menu-link {
+    border-color: var(--waldur-aside-bg-color);
+    &:not(:hover) {
+      .menu-title,
+      .menu-icon .svg-icon svg {
+        color: var(--waldur-aside-bg-color) !important;
+      }
+    }
+  }
+}
+
+.aside-accent .menu-item.add-resource-toggle {
+  .menu-link {
+    border-color: white;
+    &:not(:hover) {
+      .menu-title,
+      .menu-icon .svg-icon svg {
+        color: white !important;
+      }
+    }
+  }
+}
