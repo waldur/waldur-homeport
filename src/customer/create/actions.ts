@@ -8,6 +8,5 @@ const CustomerCreateDialog = lazyComponent(
 
 export const customerCreateDialog = (resolve?) =>
   openModalDialog(CustomerCreateDialog, {
-    size: 'lg',
     resolve: { role: 'CUSTOMER', ...resolve },
   });
