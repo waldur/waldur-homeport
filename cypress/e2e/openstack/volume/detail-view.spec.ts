@@ -54,7 +54,7 @@ describe('OpenStack Volume detail view', () => {
     cy.log('Open "Attach OpenStack Volume to Instance" dialog')
       .get('button')
       .contains('Actions')
-      .click({ force: true })
+      .click()
       .get('.dropdown-item')
       .contains('Attach')
       .click({ force: true })
