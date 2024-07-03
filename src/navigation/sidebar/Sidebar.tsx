@@ -36,7 +36,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   };
   const menuClassNames = {
     'menu-title-gray-800': sidebarStyle === 'dark',
-    'menu-title-dark': sidebarStyle === 'light',
+    'menu-title-dark-always': sidebarStyle === 'light',
     'menu-title-white': sidebarStyle === 'accent',
   };
 
