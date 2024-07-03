@@ -1,7 +1,9 @@
 import { Plus } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -24,11 +26,15 @@ export const MarketplaceTrigger: FunctionComponent = () => {
       ),
     [dispatch],
   );
+  const sidebarStyle = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
 
   return (
     <div className="menu-item add-resource-toggle">
       <span
-        className="menu-link btn btn-outline btn-outline-default"
+        className={classNames('menu-link btn btn-outline', {
+          'btn-outline-default': sidebarStyle === 'dark',
+          'btn-outline-primary': sidebarStyle === 'light',
+        })}
         aria-hidden="true"
         onClick={openFormDialog}
       >

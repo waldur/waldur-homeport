@@ -82,6 +82,14 @@
   // Light theme
   &.aside-light {
     background-color: $white;
+
+    .menu-state-title-primary .add-resource-toggle .menu-link:hover {
+      background-color: var(--waldur-aside-bg-color);
+      color: white !important;
+      .menu-title {
+        color: white !important;
+      }
+    }
   }
 
   &.aside-accent {
