@@ -14,10 +14,9 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { OrderActionProps } from './types';
 
-export const RejectByConsumerButton: FC<OrderActionProps> = ({
-  order,
-  refetch,
-}) => {
+export const RejectByConsumerButton: FC<
+  OrderActionProps & { className?: string }
+> = ({ order, as, className, refetch }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const { mutate, isLoading } = useMutation(async () => {
@@ -46,7 +45,8 @@ export const RejectByConsumerButton: FC<OrderActionProps> = ({
         <LoadingSpinnerIcon className="me-1" />
       ) : (
         <ActionItem
-          className="text-danger"
+          as={as}
+          className={className}
           title={translate('Reject')}
           action={mutate}
           disabled={isLoading}
