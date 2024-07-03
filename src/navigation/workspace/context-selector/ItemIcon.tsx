@@ -17,6 +17,7 @@ export const ItemIcon = ({ item, circle = false, className = '' }) =>
         height="40px"
         backgroundColor="#F1F7EF"
         circle={circle}
+        className="fs-7"
       >
         {getItemAbbreviation(item)}
       </ImagePlaceholder>
