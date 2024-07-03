@@ -4,9 +4,11 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { Panel } from '@waldur/core/Panel';
 import { getDailyQuotasOfCurrentMonth } from '@waldur/dashboard/api';
 import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { translate } from '@waldur/i18n';
 import { useCreateInvitation } from '@waldur/invitations/actions/hooks';
 import { fetchSelectProjectUsers } from '@waldur/permissions/api';
 import { isVisible } from '@waldur/store/config';
@@ -48,26 +50,33 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     return null;
   }
   return (
-    <Row>
-      {!shouldConcealPrices && (
+    <>
+      <Row>
+        {!shouldConcealPrices && (
+          <Col md={6} sm={12} className="mb-6">
+            <ProjectDashboardCostLimits project={project} />
+          </Col>
+        )}
         <Col md={6} sm={12} className="mb-6">
-          <ProjectDashboardCostLimits project={project} />
+          <TeamWidget
+            api={() => fetchSelectProjectUsers(project.uuid, { page_size: 5 })}
+            scope={project}
+            changes={changes}
+            onBadgeClick={goToUsers}
+            onAddClick={callback}
+            showAdd={canInvite}
+            className="h-100"
+            nameKey="user_full_name"
+            emailKey="user_email"
+            imageKey="user_image"
+          />
         </Col>
-      )}
-      <Col md={6} sm={12} className="mb-6">
-        <TeamWidget
-          api={() => fetchSelectProjectUsers(project.uuid, { page_size: 5 })}
-          scope={project}
-          changes={changes}
-          onBadgeClick={goToUsers}
-          onAddClick={callback}
-          showAdd={canInvite}
-          className="h-100"
-          nameKey="user_full_name"
-          emailKey="user_email"
-          imageKey="user_image"
-        />
-      </Col>
-    </Row>
+      </Row>
+      {project.description ? (
+        <Panel title={translate('Description')}>
+          <p className="text-pre text-muted">{project.description}</p>
+        </Panel>
+      ) : null}
+    </>
   );
 };

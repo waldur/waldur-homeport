@@ -61,7 +61,6 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
           </span>
         )}
       </Stack>
-      {project.description ? <p>{project.description}</p> : null}
     </PublicDashboardHero2>
   );
 };
