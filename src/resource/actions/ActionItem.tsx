@@ -2,7 +2,7 @@ import { Question } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash';
 import { FC, ReactNode, useContext } from 'react';
-import { Dropdown } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { ResourceActionMenuContext } from '@waldur/marketplace/resources/actions/ResourceActionMenuContext';
@@ -37,7 +37,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
   if (actionMenuContext?.hideNonImportant && !props.important) {
     return null;
   }
-  return Component === Dropdown.Item ? (
+  return Component === Dropdown.Item || Component === Button ? (
     <Component
       className={classNames('d-flex gap-1', props.className)}
       // Workaround for rendering tooltips for disabled dropdown menu items.
@@ -45,6 +45,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
       style={props.disabled ? { opacity: 0.3 } : undefined}
       onClick={() => !props.disabled && props.action()}
       as="button"
+      variant={Component === Button ? '' : undefined}
     >
       {props.tooltip && (
         <Tip label={props.tooltip} id={`action-reason-${uniqueId()}`}>

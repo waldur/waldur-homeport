@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { ProgressSteps } from '@waldur/core/ProgressSteps';
@@ -107,10 +108,11 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
           ({translate('View order')})
         </OrderDetailsLink>
         {resource.order_in_progress.state === 'pending-consumer' && (
-          <div className="ms-6 d-inline-block">
+          <div className="ms-6 d-inline-flex gap-2">
             <OrderConsumerActions
               order={resource.order_in_progress}
               refetch={refetch}
+              as={Button}
             />
           </div>
         )}
