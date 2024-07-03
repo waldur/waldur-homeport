@@ -2356,7 +2356,7 @@
     "message": "Dark"
   },
   "Dashboard": {
-    "description": "administration/routes.ts, customer/routes.ts, issues/routes.ts, marketplace/routes.ts, marketplace/utils.ts, project/routes.ts, proposals/routes.ts, reporting/routes.ts, user/routes.ts",
+    "description": "administration/routes.ts, issues/routes.ts, marketplace/routes.ts, marketplace/utils.ts, proposals/routes.ts, reporting/routes.ts",
     "message": "Dashboard"
   },
   "Data storage": {
@@ -6015,6 +6015,10 @@
     "description": "workspace/effects.ts",
     "message": "Organization could not be refreshed."
   },
+  "Organization dashboard": {
+    "description": "customer/routes.ts",
+    "message": "Organization dashboard"
+  },
   "Organization events": {
     "description": "customer/workspace/CustomerEventsFilter.tsx",
     "message": "Organization events"
@@ -6830,6 +6834,10 @@
   "Project could not be updated.": {
     "description": "project/effects.ts",
     "message": "Project could not be updated."
+  },
+  "Project dashboard": {
+    "description": "project/routes.ts",
+    "message": "Project dashboard"
   },
   "Project description": {
     "description": "marketplace/orders/list/OrdersListExpandableRow.tsx, project/ProjectCreateForm.tsx, project/ProjectUpdateForm.tsx, project/manage/EditFieldDialog.tsx",
@@ -11510,6 +11518,10 @@
   "User could not been updated": {
     "description": "user/support/effects.ts",
     "message": "User could not been updated"
+  },
+  "User dashboard": {
+    "description": "user/routes.ts",
+    "message": "User dashboard"
   },
   "User data": {
     "description": "openstack/openstack-instance/OpenstackInstanceDetails.tsx",

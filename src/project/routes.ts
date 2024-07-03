@@ -88,7 +88,7 @@ export const states: StateDeclaration[] = [
     url: '',
     component: ProjectDashboard,
     data: {
-      breadcrumb: () => translate('Dashboard'),
+      breadcrumb: () => translate('Project dashboard'),
       priority: 100,
     },
   },

@@ -133,7 +133,7 @@ export const states: StateDeclaration[] = [
     url: 'dashboard/',
     component: CustomerDashboard,
     data: {
-      breadcrumb: () => translate('Dashboard'),
+      breadcrumb: () => translate('Organization dashboard'),
       priority: 100,
     },
   },
