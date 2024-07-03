@@ -118,7 +118,7 @@ function main(dirPath: string, outputFilePath: string) {
       .sort()
       .map(([literal, files]) => [
         literal,
-        { description: Array.from(files).join(', ') },
+        { description: Array.from(files).join(', '), message: literal },
       ]),
   );
 

@@ -1,8 +1,8 @@
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
-var ts = require('typescript');
 var fs = require('fs');
 var path = require('path');
+var ts = require('typescript');
 // Function to extract string literals from binary expressions
 function extractStringFromBinaryExpression(node) {
   var left = node.left;
@@ -96,7 +96,10 @@ function main(dirPath, outputFilePath) {
       .map(function (_a) {
         var literal = _a[0],
           files = _a[1];
-        return [literal, { description: Array.from(files).join(', ') }];
+        return [
+          literal,
+          { description: Array.from(files).join(', '), message: literal },
+        ];
       }),
   );
   // Save the extracted literals to a JSON file
