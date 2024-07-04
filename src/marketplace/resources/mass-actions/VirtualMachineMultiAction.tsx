@@ -1,6 +1,8 @@
 import { useCallback, useMemo } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { INSTANCE_TYPE } from '@waldur/openstack/constants';
@@ -12,14 +14,14 @@ export const VirtualMachineMultiAction = ({
   validators,
   apiMethod,
   title,
-  iconClass,
+  iconNode,
   refetch,
 }: {
   rows;
   validators;
   apiMethod;
   title;
-  iconClass?;
+  iconNode;
   refetch;
 }) => {
   const dispatch = useDispatch();
@@ -65,13 +67,15 @@ export const VirtualMachineMultiAction = ({
     return null;
   }
   return (
-    <button
-      disabled={validVms.length === 0}
-      className="btn btn-primary me-3"
-      onClick={callback}
-      title={title}
-    >
-      <i className={'fa ' + iconClass || 'fa-play'} />
-    </button>
+    <Tip id="VirtualMachineMultiAction" label={title}>
+      <Button
+        disabled={validVms.length === 0}
+        variant="primary"
+        className="me-3"
+        onClick={callback}
+      >
+        <span className="svg-icon svg-icon-2">{iconNode}</span>
+      </Button>
+    </Tip>
   );
 };
