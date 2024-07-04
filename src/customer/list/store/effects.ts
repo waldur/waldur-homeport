@@ -1,4 +1,3 @@
-import { triggerTransition } from '@uirouter/redux';
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -11,22 +10,6 @@ import { setCurrentCustomer } from '@waldur/workspace/actions';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import * as constants from '../constants';
-
-function* organizationUpdate(action) {
-  try {
-    const { ...payload } = action.payload;
-    yield call(api.updateOrganization, payload);
-    yield put(
-      showSuccess(translate('Organization has been updated successfully.')),
-    );
-    yield put(triggerTransition('organizations', {}));
-  } catch (error) {
-    const errorMessage = `${translate(
-      'Unable to update organization.',
-    )} ${format(error)}`;
-    yield put(showError(errorMessage));
-  }
-}
 
 function* organizationLocation(action) {
   try {
@@ -47,6 +30,5 @@ function* organizationLocation(action) {
 }
 
 export default function* () {
-  yield takeEvery(constants.UPDATE_ORGANIZATION, organizationUpdate);
   yield takeEvery(constants.SET_ORGANIZATION_LOCATION, organizationLocation);
 }

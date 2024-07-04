@@ -4584,7 +4584,7 @@
     "message": "Limit-based"
   },
   "Limits": {
-    "description": "marketplace/orders/details/LimitsSection.tsx, marketplace/orders/details/OrderDetails.tsx, marketplace/resources/list/PublicResourcesList.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx",
+    "description": "marketplace/details/plan/PlanSection.tsx, marketplace/orders/details/LimitsSection.tsx, marketplace/orders/details/OrderDetails.tsx, marketplace/resources/list/PublicResourcesList.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx",
     "message": "Limits"
   },
   "Link OpenStack Instance": {
@@ -6051,10 +6051,6 @@
     "description": "customer/create/CustomerCreateDialog.tsx",
     "message": "Organization has been created."
   },
-  "Organization has been updated successfully.": {
-    "description": "customer/list/store/effects.ts",
-    "message": "Organization has been updated successfully."
-  },
   "Organization has signed a fixed price agreement": {
     "description": "invoices/list/AgreementInfo.tsx",
     "message": "Organization has signed a fixed price agreement"
@@ -6078,14 +6074,6 @@
   "Organization roles": {
     "description": "marketplace-checklist/ChecklistCustomer.tsx, user/support/UserList.tsx",
     "message": "Organization roles"
-  },
-  "Organization update ({name})": {
-    "description": "customer/list/OrganizationUpdateContainer.tsx",
-    "message": "Organization update ({name})"
-  },
-  "Organization update": {
-    "description": "customer/list/OrganizationUpdateContainer.tsx",
-    "message": "Organization update"
   },
   "Organization updated successfully": {
     "description": "customer/details/CustomerManage.tsx",
@@ -6346,10 +6334,6 @@
   "Periods": {
     "description": "booking/BookingCheckoutSummary.tsx, booking/deploy/FormPeriodsStep.tsx, booking/deploy/steps.ts",
     "message": "Periods"
-  },
-  "Permission denied": {
-    "description": "customer/list/OrganizationUpdateContainer.tsx",
-    "message": "Permission denied"
   },
   "Permission expires at": {
     "description": "user/affiliations/PermissionDetails.tsx",
@@ -10471,10 +10455,6 @@
     "description": "issues/CustomerSupportRating.tsx",
     "message": "Unable to load customer support satisfaction overall rating."
   },
-  "Unable to load customer.": {
-    "description": "customer/list/OrganizationUpdateContainer.tsx",
-    "message": "Unable to load customer."
-  },
   "Unable to load data": {
     "description": "invoices/list/OverviewLastMonths.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/expandable/OfferingUsageChart.tsx, marketplace/resources/usage/ResourceUsageTabsContainer.tsx, marketplace/service-providers/dashboard/ProviderWidgets.tsx",
     "message": "Unable to load data"
@@ -11042,10 +11022,6 @@
   "Unable to update organization group.": {
     "description": "administration/organizations/OrganizationGroupFromDialog.tsx",
     "message": "Unable to update organization group."
-  },
-  "Unable to update organization.": {
-    "description": "customer/list/store/effects.ts",
-    "message": "Unable to update organization."
   },
   "Unable to update payment profile.": {
     "description": "customer/payment-profiles/store/effects.ts",

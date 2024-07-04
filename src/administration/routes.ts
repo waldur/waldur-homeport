@@ -52,11 +52,6 @@ const BasicLexisLinkList = lazyComponent(
   'BasicLexisLinkList',
 );
 
-const OrganizationUpdateContainer = lazyComponent(
-  () => import('@waldur/customer/list/OrganizationUpdateContainer'),
-  'OrganizationUpdateContainer',
-);
-
 const UserList = lazyComponent(
   () => import('@waldur/user/support/UserList'),
   'UserList',
@@ -297,12 +292,6 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Organization group types'),
     },
   },
-  {
-    name: 'admin.customer-update',
-    url: 'customer-update/:customer_uuid/',
-    component: OrganizationUpdateContainer,
-  },
-
   {
     name: 'admin-identity',
     url: 'identity/',
