@@ -1,6 +1,5 @@
 export const SUPPORT_CUSTOMER_LIST = 'supportCustomerList';
 
-export const UPDATE_ORGANIZATION = 'waldur/customer/UPDATE_ORGANIZATION';
 export const SET_ORGANIZATION_LOCATION =
   'waldur/customer/SET_ORGANIZATION_LOCATION';
 

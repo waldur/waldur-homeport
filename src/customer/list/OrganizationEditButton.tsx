@@ -33,8 +33,8 @@ export const OrganizationEditButton: FunctionComponent<
       iconNode={<PencilSimple />}
       className="btn-active-primary ms-3"
       action={() =>
-        router.stateService.go('admin.customer-update', {
-          customer_uuid: props.customer.uuid,
+        router.stateService.go('organization-manage', {
+          uuid: props.customer.uuid,
         })
       }
     />
