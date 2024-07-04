@@ -52,7 +52,7 @@ export const ProjectResourcesList: FC<ProjectResourcesListProps> = (props) => {
   const stateFilter = useSelector(mapStateToFilter);
   const filter = useMemo(
     () => ({ project_uuid: props.project.uuid, ...stateFilter }),
-    [props.project],
+    [props.project, stateFilter],
   );
   const tableProps = useTable({
     table: `ProjectResourcesList`,
