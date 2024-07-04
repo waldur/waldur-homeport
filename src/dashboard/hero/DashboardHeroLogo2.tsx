@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import { getAbbreviation } from '@waldur/core/utils';
 
 interface DashboardHeroLogo2Props {
   logo: string;
@@ -24,7 +25,7 @@ export const DashboardHeroLogo2: FC<DashboardHeroLogo2Props> = ({
           height={`${size}px`}
           circle={props.circle}
         >
-          {props.logoAlt}
+          {getAbbreviation(props.logoAlt)}
         </ImagePlaceholder>
       )}
     </div>

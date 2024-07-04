@@ -89,7 +89,6 @@ const PageHero = ({ data }) => (
     logo={data.offering.thumbnail}
     logoAlt={data.offering.name}
     logoTooltip={data.offering.name}
-    backgroundImage={data.offering.thumbnail}
     title={<OrderDetailsHeaderTitle order={data.order} />}
     quickBody={<OrderDetailsQuickBody order={data.order} />}
     quickActions={
