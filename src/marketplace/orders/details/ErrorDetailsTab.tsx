@@ -27,7 +27,10 @@ export const ErrorDetailsTab = ({ order }) => {
           </Row>
         </Card.Body>
       ) : (
-        <NoResult message={translate('No errors found for this order')} />
+        <NoResult
+          title={translate('No errors found for this order')}
+          message={null}
+        />
       )}
     </Card>
   );

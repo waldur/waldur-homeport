@@ -40,22 +40,25 @@ export const NoResult: FC<NoResultProps> = ({
         <div>
           <h4 className="fw-bold mb-2">{title}</h4>
           <div className="d-flex flex-column align-items-center text-muted fs-6">
-            {message || (
-              <p className="mb-0">
-                {translate("We didn't get any results.")}
-                <br />
-                {translate('Please try again')}
-              </p>
-            )}
+            {message !== null &&
+              (message || (
+                <p className="mb-0">
+                  {translate("We didn't get any results.")}
+                  <br />
+                  {translate('Please try again')}
+                </p>
+              ))}
           </div>
         </div>
-        <Button
-          variant="outline"
-          className="btn-outline-default w-50 mw-350px"
-          onClick={callback}
-        >
-          {buttonTitle}
-        </Button>
+        {callback && (
+          <Button
+            variant="outline"
+            className="btn-outline-default w-50 mw-350px"
+            onClick={callback}
+          >
+            {buttonTitle}
+          </Button>
+        )}
       </div>
     </div>
   );
