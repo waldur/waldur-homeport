@@ -17,7 +17,10 @@ export const OutputTab = ({ order }) => {
           <CodeBlockPreview code={order.output} />
         </Card.Body>
       ) : (
-        <NoResult message={translate('No outputs found for this order')} />
+        <NoResult
+          title={translate('No outputs found for this order')}
+          message={null}
+        />
       )}
     </Card>
   );

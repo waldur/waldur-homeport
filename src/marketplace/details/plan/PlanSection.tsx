@@ -18,7 +18,22 @@ const renderValue = (value) => (value ? value : <>&mdash;</>);
 export const PlanSection = (props: PlanDetailsProps) => {
   const { plan_name, plan_description } = props.order;
   if (!plan_name) {
-    return <NoResult message={translate('No plans found for this order')} />;
+    return (
+      <Card>
+        <Card.Header className="custom-card-header custom-padding-zero">
+          <Card.Title>
+            <h3>{translate('Limits')}</h3>
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <NoResult
+            title={translate('No plans found for this order')}
+            buttonTitle={null}
+            message={null}
+          />
+        </Card.Body>
+      </Card>
+    );
   }
   return (
     <Card>

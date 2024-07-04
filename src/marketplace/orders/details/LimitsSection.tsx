@@ -14,7 +14,22 @@ export const LimitsSection = ({
   limits: Limits;
 }) => {
   if (components.length === 0 || isEmpty(limits)) {
-    return <NoResult message={translate('No limits found for this order')} />;
+    return (
+      <Card>
+        <Card.Header className="custom-card-header custom-padding-zero">
+          <Card.Title>
+            <h3>{translate('Limits')}</h3>
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <NoResult
+            title={translate('No limits found for this order')}
+            buttonTitle={null}
+            message={null}
+          />
+        </Card.Body>
+      </Card>
+    );
   }
   return (
     <Card>
