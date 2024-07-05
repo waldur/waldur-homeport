@@ -7,9 +7,15 @@ import { translate } from '@waldur/i18n';
 
 import CheckboxIcon from './Checkbox.svg';
 import CheckboxEmptyIcon from './CheckboxEmpty.svg';
+import { OPTIONAL_COLUMN_ACTIONS_KEY } from './constants';
 import { TableProps } from './Table';
 
-const ColumnsPopover = ({ columns, toggleColumn, activeColumns }) => {
+const ColumnsPopover = ({
+  columns,
+  toggleColumn,
+  activeColumns,
+  hasActions,
+}) => {
   const [query, setQuery] = useState('');
 
   const matches = useMemo(
@@ -50,6 +56,22 @@ const ColumnsPopover = ({ columns, toggleColumn, activeColumns }) => {
             </Dropdown.Item>
           ) : null,
         )}
+        {hasActions && (
+          <Dropdown.Item
+            onClick={() =>
+              toggleColumn(OPTIONAL_COLUMN_ACTIONS_KEY, { keys: [] })
+            }
+          >
+            <span className="svg-icon svg-icon-2 svg-icon-white me-3">
+              {activeColumns[OPTIONAL_COLUMN_ACTIONS_KEY] ? (
+                <CheckboxIcon />
+              ) : (
+                <CheckboxEmptyIcon />
+              )}
+            </span>
+            {translate('Actions')}
+          </Dropdown.Item>
+        )}
       </div>
     </div>
   );
@@ -59,6 +81,7 @@ export const TableColumnButton: FC<TableProps> = ({
   columns,
   activeColumns,
   toggleColumn,
+  hoverableRow,
 }) => (
   <OverlayTrigger
     trigger="click"
@@ -69,6 +92,7 @@ export const TableColumnButton: FC<TableProps> = ({
           columns={columns}
           activeColumns={activeColumns}
           toggleColumn={toggleColumn}
+          hasActions={Boolean(hoverableRow)}
         />
       </Popover>
     }

@@ -171,6 +171,10 @@
     "description": "administration/routes.ts",
     "message": "Accounts"
   },
+  "Action column is hidden.": {
+    "description": "table/HiddenActionsMessage.tsx",
+    "message": "Action column is hidden."
+  },
   "Action has been applied.": {
     "description": "resource/actions/AsyncActionButton.tsx",
     "message": "Action has been applied."
@@ -180,7 +184,7 @@
     "message": "Action"
   },
   "Actions": {
-    "description": "administration/roles/RoleActions.tsx, customer/payments/PaymentsList.tsx, invitations/UserPermissionRequestsList.tsx, invoices/details/InvoiceItemActions.tsx, marketplace/offerings/actions/ActionsDropdown.tsx, marketplace/offerings/list/OfferingActions.tsx, marketplace/offerings/update/plans/PlanActions.tsx, marketplace/orders/actions/OrderActionsButton.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/actions/ModalActionsButton.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/list/PublicResourceActions.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsListActions.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/update/CallActions.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, resource/actions/ResourceActionComponent.tsx, user/keys/KeysList.tsx",
+    "description": "administration/roles/RoleActions.tsx, customer/payments/PaymentsList.tsx, invitations/UserPermissionRequestsList.tsx, invoices/details/InvoiceItemActions.tsx, marketplace/offerings/actions/ActionsDropdown.tsx, marketplace/offerings/list/OfferingActions.tsx, marketplace/offerings/update/plans/PlanActions.tsx, marketplace/orders/actions/OrderActionsButton.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/actions/ModalActionsButton.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/list/PublicResourceActions.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsListActions.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/update/CallActions.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, resource/actions/ResourceActionComponent.tsx, table/TableColumnsButton.tsx, table/TableHeader.tsx, user/keys/KeysList.tsx",
     "message": "Actions"
   },
   "Activate": {
@@ -7863,6 +7867,10 @@
     "description": "resource/state/constants.ts",
     "message": "Restarting"
   },
+  "Restore column": {
+    "description": "table/HiddenActionsMessage.tsx",
+    "message": "Restore column"
+  },
   "Restore virtual machine from backup {name}": {
     "description": "openstack/openstack-backup/actions/BackupRestoreDialog.tsx",
     "message": "Restore virtual machine from backup {name}"
@@ -9034,6 +9042,10 @@
   "Snapshots": {
     "description": "openstack/openstack-instance/tabs.ts, openstack/openstack-tenant/tabs.ts, openstack/openstack-volume/tabs.ts",
     "message": "Snapshots"
+  },
+  "Some functionality may not be accessible.": {
+    "description": "table/HiddenActionsMessage.tsx",
+    "message": "Some functionality may not be accessible."
   },
   "Something went wrong": {
     "description": "customer/list/ExportAsEmailDialog.tsx, navigation/header/search/ErrorView.tsx, proposals/proposal/create/AddProposalDialog.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/proposal/create/ProposalTeamVerificationStep.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create-review/CreateReviewDialog.tsx, proposals/proposal/create-review/ProposalReviewCreatePage.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx",

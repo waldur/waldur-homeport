@@ -9,8 +9,10 @@ import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
 import { ErrorView } from '@waldur/navigation/header/search/ErrorView';
 
+import { OPTIONAL_COLUMN_ACTIONS_KEY } from './constants';
 import { GridBody } from './GridBody';
 import './Table.scss';
+import { HiddenActionsMessage } from './HiddenActionsMessage';
 import { TableBody } from './TableBody';
 import { TableButtons } from './TableButtons';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -98,6 +100,11 @@ const TableComponent = (props: TableProps) => {
     [props.activeColumns, props.columns],
   );
 
+  const showActions = useMemo(() => {
+    if (props.hoverableRow && !props.hasOptionalColumns) return true;
+    return Boolean(props.activeColumns[OPTIONAL_COLUMN_ACTIONS_KEY]);
+  }, [props.hoverableRow, props.hasOptionalColumns, props.activeColumns]);
+
   return (
     <table
       className={classNames(
@@ -115,6 +122,7 @@ const TableComponent = (props: TableProps) => {
           currentSorting={props.sorting}
           columns={visibleColumns}
           expandableRow={!!props.expandableRow}
+          showActions={showActions}
           enableMultiSelect={props.enableMultiSelect}
           onSelectAllRows={props.selectAllRows}
           selectedRows={props.selectedRows}
@@ -127,7 +135,7 @@ const TableComponent = (props: TableProps) => {
         rowClass={props.rowClass}
         expandableRow={props.expandableRow}
         expandableRowClassName={props.expandableRowClassName}
-        hoverableRow={props.hoverableRow}
+        hoverableRow={showActions ? props.hoverableRow : undefined}
         enableMultiSelect={props.enableMultiSelect}
         selectRow={props.selectRow}
         selectedRows={props.selectedRows}
@@ -150,6 +158,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     hasPagination: true,
     hasActionBar: true,
     hasHeaders: true,
+  };
+
+  state = {
+    closedHiddenActionsMessage: false,
   };
 
   render() {
@@ -265,6 +277,19 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               />
             </Card.Header>
           ) : null}
+
+          {!this.state.closedHiddenActionsMessage &&
+            this.props.hasOptionalColumns &&
+            this.props.activeColumns[OPTIONAL_COLUMN_ACTIONS_KEY] === false && (
+              <Card.Header className="border-2 border-bottom">
+                <HiddenActionsMessage
+                  toggleColumn={this.props.toggleColumn}
+                  close={() =>
+                    this.setState({ closedHiddenActionsMessage: true })
+                  }
+                />
+              </Card.Header>
+            )}
 
           <Card.Body>
             <div className="table-responsive dataTables_wrapper">
@@ -436,6 +461,7 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     hasOptionalColumns,
     columns,
     toggleColumn,
+    hoverableRow,
   } = props;
 
   useEffect(() => {
@@ -456,6 +482,10 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
       columns.forEach((column, index) => {
         toggleColumn(index, column, column.optional ? false : true);
       });
+      // Add actions column to the optional columns
+      if (hoverableRow) {
+        toggleColumn(OPTIONAL_COLUMN_ACTIONS_KEY, { keys: [] }, true);
+      }
     }
   }, []);
 
