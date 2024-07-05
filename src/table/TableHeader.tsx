@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
+import { translate } from '@waldur/i18n';
+
 import './TableHeader.scss';
 
 import { TableProps } from './Table';
@@ -13,6 +15,7 @@ interface TableHeaderProps {
   onSortClick?(sorting: Sorting): void;
   currentSorting?: Sorting;
   expandableRow?: boolean;
+  showActions?: boolean;
   rows: any[];
   enableMultiSelect?: boolean;
   onSelectAllRows?(rows: any[]): void;
@@ -66,6 +69,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
   onSortClick,
   currentSorting,
   expandableRow = false,
+  showActions,
   rows,
   enableMultiSelect,
   onSelectAllRows,
@@ -100,6 +104,9 @@ export const TableHeader: FC<TableHeaderProps> = ({
               />
             ),
         )}
+        {showActions ? (
+          <th className="header-actions">{translate('Actions')}</th>
+        ) : null}
       </tr>
     </thead>
   );
