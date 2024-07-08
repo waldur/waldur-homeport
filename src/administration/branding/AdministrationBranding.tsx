@@ -7,6 +7,7 @@ import { ENV } from '@waldur/configs/default';
 import { sendForm } from '@waldur/core/api';
 import { pick } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { setTheme } from '@waldur/navigation/theme/ThemeStorage';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
@@ -43,6 +44,10 @@ export const AdministrationBranding = () => {
       }
       await saveConfig(formData);
       dispatch(showSuccess(translate('Configuration has been updated.')));
+      if (formData.DISABLE_DARK_THEME) {
+        setTheme('light');
+      }
+
       location.reload();
     } catch (e) {
       dispatch(
@@ -62,6 +67,7 @@ export const AdministrationBranding = () => {
         'HERO_LINK_LABEL',
         'HERO_LINK_URL',
         'SIDEBAR_STYLE',
+        'DISABLE_DARK_THEME',
         ...LOGOS,
       ])(ENV.plugins.WALDUR_CORE),
     [],
