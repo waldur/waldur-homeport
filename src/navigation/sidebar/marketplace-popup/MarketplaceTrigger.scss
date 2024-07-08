@@ -59,3 +59,23 @@
     }
   }
 }
+
+// On aside collapsed - not on mobile & not on hover
+@media (min-width: 992px) {
+  .aside {
+    &:not(.aside-hoverable),
+    &:not(:hover) {
+      .menu-item.add-resource-toggle .menu-link {
+        transition: all 0.2s;
+
+        [data-kt-aside-minimize='on'] & {
+          justify-content: start;
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+          width: 43px;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
