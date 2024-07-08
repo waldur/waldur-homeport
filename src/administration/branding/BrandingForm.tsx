@@ -10,6 +10,7 @@ import {
   StringField,
   SubmitButton,
 } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { ImageField } from '@waldur/form/ImageField';
 import { translate } from '@waldur/i18n';
 
@@ -121,6 +122,11 @@ const PureBrandingForm: FunctionComponent<any> = (props) => (
         label={translate('Sidebar style')}
         options={SIDEBAR_STYLES}
         simpleValue
+      />
+      <AwesomeCheckboxField
+        name="DISABLE_DARK_THEME"
+        label={translate('Disable dark theme')}
+        floating={false}
       />
     </FormContainer>
     <Form.Group>

@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { AuthService } from '@waldur/auth/AuthService';
+import { ENV } from '@waldur/configs/default';
 import Avatar from '@waldur/core/Avatar';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
@@ -126,8 +127,12 @@ export const UserDropdownMenu: FunctionComponent = () => {
           </div>
         )}
 
-        <div className="separator my-2" />
-        <ThemeSwitcher />
+        {!ENV.plugins.WALDUR_CORE.DISABLE_DARK_THEME && (
+          <>
+            <div className="separator my-2" />
+            <ThemeSwitcher />
+          </>
+        )}
 
         {user && (
           <>
