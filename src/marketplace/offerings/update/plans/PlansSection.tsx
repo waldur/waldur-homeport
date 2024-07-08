@@ -22,7 +22,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
   const user = useSelector(getUser);
   const {
     data: plans,
-    refetch,
+    refetch: refetchPlans,
     isRefetching,
   } = useQuery<{}, {}, Plan[]>(
     ['OfferingPlans', props.offering.uuid],
@@ -32,6 +32,11 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
       enabled: false,
     },
   );
+
+  const refresh = () => {
+    props.refetch();
+    refetchPlans();
+  };
 
   if (!plans) {
     return null;
@@ -43,7 +48,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
         <Card.Title className="h5">
           <ValidationIcon value={plans.length > 0} />
           <span className="me-2">{translate('Accounting plans')}</span>
-          <RefreshButton refetch={refetch} loading={isRefetching} />
+          <RefreshButton refetch={refresh} loading={isRefetching} />
         </Card.Title>
         {!hidePlanAddButton(props.offering.type, plans) &&
           hasPermission(user, {
@@ -51,7 +56,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
             customerId: props.offering.customer_uuid,
           }) && (
             <div className="card-toolbar">
-              <AddPlanButton refetch={refetch} offering={props.offering} />
+              <AddPlanButton refetch={refresh} offering={props.offering} />
             </div>
           )}
       </Card.Header>
@@ -68,7 +73,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
           <PlansTable
             plans={plans}
             offering={props.offering}
-            refetch={refetch}
+            refetch={refresh}
             user={user}
           />
         )}
