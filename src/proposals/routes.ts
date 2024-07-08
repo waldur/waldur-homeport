@@ -22,6 +22,10 @@ const PublicCallDetailsContainer = lazyComponent(
   () => import('./details/PublicCallDetailsContainer'),
   'PublicCallDetailsContainer',
 );
+const PublicCallDetails = lazyComponent(
+  () => import('./details/PublicCallDetails'),
+  'PublicCallDetails',
+);
 
 const CallUpdateContainer = lazyComponent(
   () => import('./update/CallUpdateContainer'),
@@ -271,9 +275,16 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'public-calls.details',
-    url: ':call_uuid/?tab',
+    name: 'public-call',
+    url: ':call_uuid/',
+    abstract: true,
     component: PublicCallDetailsContainer,
+    parent: 'public-calls',
+  },
+  {
+    name: 'public-call.details',
+    url: '?tab',
+    component: PublicCallDetails,
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },

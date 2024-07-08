@@ -47,7 +47,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
         ) : (
           <Nav.Item>
             <Nav.Link
-              eventKey="public-calls.details"
+              eventKey="public-call.details"
               className="text-center w-60px"
             >
               {translate('Public')}

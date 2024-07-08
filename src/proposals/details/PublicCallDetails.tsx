@@ -1,69 +1,16 @@
-import { FunctionComponent, useMemo } from 'react';
-
-import { translate } from '@waldur/i18n';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/utils';
+import { FunctionComponent } from 'react';
 
 import { Call } from '../types';
-import { getCallBreadcrumbItems } from '../utils';
-
-import { CallDescriptionCard } from './CallDescriptionCard';
-import { CallDocumentsCard } from './CallDocumentsCard';
-import { CallOfferingsCard } from './CallOfferingsCard';
-import { CallRoundsList } from './CallRoundsList';
-import { CallTabs } from './CallTabs';
-import { PublicCallDetailsHero } from './PublicCallDetailsHero';
 
 interface PublicCallDetailsProps {
   call: Call;
-  refreshCall;
+  refresh;
+  tabSpec;
 }
-
-const getTabs = (): PageBarTab[] => {
-  return [
-    {
-      key: 'description',
-      title: translate('Description'),
-      component: CallDescriptionCard,
-    },
-    {
-      key: 'rounds',
-      title: translate('Rounds'),
-      component: CallRoundsList,
-    },
-    {
-      key: 'documents',
-      title: translate('Documents'),
-      component: CallDocumentsCard,
-    },
-    {
-      key: 'offerings',
-      title: translate('Offerings'),
-      component: CallOfferingsCard,
-    },
-  ];
-};
-
-const PageHero = ({ call }) => (
-  <div className="container-fluid mb-8 mt-6">
-    <CallTabs call={call} />
-    <PublicCallDetailsHero call={call} />
-  </div>
-);
 
 export const PublicCallDetails: FunctionComponent<PublicCallDetailsProps> = ({
   call,
+  tabSpec,
 }) => {
-  usePageHero(<PageHero call={call} />);
-
-  const breadcrumbItems = useMemo(() => getCallBreadcrumbItems(call), [call]);
-  useBreadcrumbs(breadcrumbItems);
-
-  const tabs = useMemo(() => getTabs(), []);
-  const {
-    tabSpec: { component: Component },
-  } = usePageTabsTransmitter(tabs);
-
-  return <Component call={call} />;
+  return tabSpec ? <tabSpec.component call={call} /> : null;
 };
