@@ -6,7 +6,7 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { removeCategory } from './api';
 
@@ -45,12 +45,13 @@ export const CategoryDeleteButton = (props: CategoryDeleteButtonProps) => {
   }, [dispatch, setRemoving, props]);
 
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Remove')}
       action={openDialog}
-      variant="danger"
+      variant="outline-danger"
       iconNode={<Trash />}
       pending={removing}
+      size="sm"
     />
   );
 };

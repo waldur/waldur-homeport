@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { UsageReportContext } from './types';
 
@@ -25,11 +25,12 @@ export const ResourceCreateUsageButton: FunctionComponent<
       }),
     );
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Report usage')}
       iconNode={<PlusCircle />}
       action={openDialog}
       disabled={props.disabled}
+      size="sm"
     />
   );
 };

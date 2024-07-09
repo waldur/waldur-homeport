@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -5,7 +6,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
-import { ActionButtonSmall } from '@waldur/table/ActionButtonSmall';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { removeHook } from './api';
 
@@ -43,13 +44,12 @@ export const HookRemoveButton: FC<HookRemoveButtonProps> = (props) => {
     );
 
   return (
-    <ActionButtonSmall
+    <RowActionButton
       title={translate('Remove')}
       action={action}
-      disable={removing}
-      className="btn btn-secondary"
-    >
-      <i className={removing ? 'fa fa-spinner fa-spin' : 'fa fa-trash'} />
-    </ActionButtonSmall>
+      pending={removing}
+      iconNode={<Trash />}
+      size="sm"
+    />
   );
 };

@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 const UpdateOfferingPermissionExpirationTimeDialog = lazyComponent(
@@ -35,10 +35,11 @@ export const UpdateOfferingPermissionExpirationTimeButton: FunctionComponent<{
     );
   };
   return canUpdatePermission ? (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Edit')}
       iconNode={<PencilSimple />}
+      size="sm"
     />
   ) : null;
 };

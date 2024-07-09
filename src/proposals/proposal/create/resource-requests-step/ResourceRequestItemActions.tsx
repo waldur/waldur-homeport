@@ -8,7 +8,7 @@ import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { removeProposalResource } from '@waldur/proposals/api';
 import { Proposal, ProposalResource } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 const ResourceRequestFormDialog = lazyComponent(
   () => import('./ResourceRequestFormDialog'),
@@ -70,15 +70,16 @@ export const ResourceRequestItemActions = ({
 
   return (
     <>
-      <ActionButton
+      <RowActionButton
         action={openEditResourceDialog}
         title={translate('Edit')}
-        variant="primary"
+        size="sm"
       />
-      <ActionButton
+      <RowActionButton
         action={remove}
         title={translate('Remove')}
         pending={isRemoving}
+        size="sm"
       />
     </>
   );

@@ -44,7 +44,7 @@ export const CustomerReviewsList: FC<{}> = () => {
         params={{
           review_uuid: row.uuid,
         }}
-        className="btn btn-primary"
+        className="btn btn-outline btn-outline-primary btn-sm border-gray-400 btn-active-secondary px-2"
       >
         {translate('View')}
       </Link>

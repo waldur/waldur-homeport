@@ -1,10 +1,11 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButtonSmall } from '@waldur/table/ActionButtonSmall';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { ServiceProvider } from '../types';
 
@@ -22,9 +23,7 @@ export const ProviderOfferingUserUpdateButton: FC<{
 }> = (props) => {
   const dispatch = useDispatch();
   return (
-    <ActionButtonSmall
-      title={translate('Edit')}
-      className="ms-2 rounded btn-light border-0"
+    <RowActionButton
       action={() =>
         dispatch(
           openModalDialog(ProviderOfferingUserUpdateDialog, {
@@ -33,8 +32,9 @@ export const ProviderOfferingUserUpdateButton: FC<{
           }),
         )
       }
-    >
-      <i className="fa fa-edit" />
-    </ActionButtonSmall>
+      title={translate('Edit')}
+      iconNode={<PencilSimple />}
+      size="sm"
+    />
   );
 };

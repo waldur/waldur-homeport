@@ -9,7 +9,7 @@ import {
   getOrder,
 } from '@waldur/marketplace/common/api';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 
 import {
@@ -57,12 +57,13 @@ export const ApproveByProviderButton: FunctionComponent<
     }
   });
   return (
-    <ActionButton
+    <RowActionButton
       className="btn btn-sm btn-secondary"
       title={translate('Approve')}
       action={mutate}
       pending={isLoading}
       iconNode={<Check />}
+      size="sm"
     />
   );
 };

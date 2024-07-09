@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
@@ -95,10 +94,10 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       showPageSizeSelector={true}
       actions={<ProjectCreateButton />}
       hoverableRow={({ row }) => (
-        <ButtonGroup>
+        <>
           <ProjectsListActions project={row} />
           <ProjectDetailsButton project={row} />
-        </ButtonGroup>
+        </>
       )}
       expandableRow={ProjectExpandableRowContainer}
       enableExport={true}

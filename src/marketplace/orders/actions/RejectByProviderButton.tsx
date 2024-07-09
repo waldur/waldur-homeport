@@ -15,7 +15,7 @@ import {
   TABLE_PUBLIC_ORDERS,
 } from '@waldur/marketplace/orders/list/constants';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 
 interface RejectByProviderButtonProps {
@@ -58,12 +58,13 @@ export const RejectByProviderButton: FunctionComponent<
     }
   });
   return (
-    <ActionButton
+    <RowActionButton
       className="btn btn-sm btn-secondary"
       title={translate('Reject')}
       action={mutate}
       pending={isLoading}
       iconNode={<Prohibit />}
+      size="sm"
     />
   );
 };

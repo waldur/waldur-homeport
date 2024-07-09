@@ -1,3 +1,4 @@
+import { Eye } from '@phosphor-icons/react';
 import { debounce } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
@@ -14,6 +15,7 @@ import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { openModalDialog } from '@waldur/modal/actions';
 import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 import { Table, createFetcher } from '@waldur/table';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { useTable } from '@waldur/table/utils';
 
 const OpenStackSecurityGroupsDialog = lazyComponent(
@@ -40,9 +42,12 @@ const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
     );
   };
   return (
-    <Button className="ms-2" size="sm" variant="light" onClick={callback}>
-      <i className="fa fa-eye" /> {translate('Show rules')}
-    </Button>
+    <RowActionButton
+      title={translate('Show rules')}
+      iconNode={<Eye />}
+      size="sm"
+      action={callback}
+    />
   );
 };
 

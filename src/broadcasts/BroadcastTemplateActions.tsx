@@ -1,4 +1,3 @@
-import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { BroadcastTemplateDeleteButton } from '@waldur/broadcasts/BroadcastTemplateDeleteButton';
@@ -9,10 +8,10 @@ export const BroadcastTemplateActions = ({ row, refetch }) => {
   const isStaff = useSelector(isStaffSelector);
   if (isStaff) {
     return (
-      <ButtonGroup>
+      <>
         <BroadcastTemplateUpdateButton template={row} refetch={refetch} />
         <BroadcastTemplateDeleteButton template={row} refetch={refetch} />
-      </ButtonGroup>
+      </>
     );
   } else {
     return null;

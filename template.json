@@ -184,7 +184,7 @@
     "message": "Action"
   },
   "Actions": {
-    "description": "administration/roles/RoleActions.tsx, customer/payments/PaymentsList.tsx, invitations/UserPermissionRequestsList.tsx, invoices/details/InvoiceItemActions.tsx, marketplace/offerings/actions/ActionsDropdown.tsx, marketplace/offerings/list/OfferingActions.tsx, marketplace/offerings/update/plans/PlanActions.tsx, marketplace/orders/actions/OrderActionsButton.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/actions/ModalActionsButton.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/list/PublicResourceActions.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsListActions.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/update/CallActions.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, resource/actions/ResourceActionComponent.tsx, table/TableColumnsButton.tsx, table/TableHeader.tsx, user/keys/KeysList.tsx",
+    "description": "customer/payments/PaymentsList.tsx, invitations/UserPermissionRequestsList.tsx, invoices/details/InvoiceItemActions.tsx, marketplace/offerings/actions/ActionsDropdown.tsx, marketplace/offerings/update/plans/PlanActions.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/actions/ModalActionsButton.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsListActions.tsx, proposals/update/CallActions.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, table/ActionsDropdown.tsx, table/TableColumnsButton.tsx, table/TableHeader.tsx, user/keys/KeysList.tsx",
     "message": "Actions"
   },
   "Activate": {
@@ -2667,6 +2667,10 @@
     "description": "openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx",
     "message": "Direction"
   },
+  "Disable dark theme": {
+    "description": "administration/branding/BrandingForm.tsx",
+    "message": "Disable dark theme"
+  },
   "Disable gateway IP advertising via DHCP": {
     "description": "openstack/openstack-subnet/fields.tsx",
     "message": "Disable gateway IP advertising via DHCP"
@@ -4632,7 +4636,7 @@
     "message": "Load more"
   },
   "Loading actions": {
-    "description": "marketplace/resources/actions/ActionsPopover.tsx, resource/actions/ResourceActionComponent.tsx",
+    "description": "marketplace/resources/actions/ActionsPopover.tsx, resource/actions/ResourceActionComponent.tsx, table/ActionsDropdown.tsx",
     "message": "Loading actions"
   },
   "Loading assets": {
@@ -9676,7 +9680,7 @@
     "message": "Then"
   },
   "There are no actions.": {
-    "description": "resource/actions/ResourceActionComponent.tsx",
+    "description": "resource/actions/ResourceActionComponent.tsx, table/ActionsDropdown.tsx",
     "message": "There are no actions."
   },
   "There are no categories in marketplace yet.": {
@@ -10408,7 +10412,7 @@
     "message": "Unable to link invoice to the payment."
   },
   "Unable to load actions": {
-    "description": "marketplace/resources/actions/ActionsPopover.tsx, resource/actions/ResourceActionComponent.tsx",
+    "description": "marketplace/resources/actions/ActionsPopover.tsx, resource/actions/ResourceActionComponent.tsx, table/ActionsDropdown.tsx",
     "message": "Unable to load actions"
   },
   "Unable to load application template details.": {

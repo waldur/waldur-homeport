@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { openUserPopover } from '@waldur/user/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -26,10 +26,11 @@ export const UserDetailsButton: React.FC<UserDetailsButtonProps> = ({
       }),
     );
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Details')}
       iconNode={<Eye />}
+      size="sm"
     />
   );
 };

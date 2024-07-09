@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { OrderConsumerActions } from '@waldur/marketplace/orders/actions/OrderConsumerActions';
@@ -55,7 +56,11 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
         initialSorting={{ field: 'created', mode: 'desc' }}
         initialPageSize={5}
         hoverableRow={({ row }) => (
-          <OrderConsumerActions order={row} refetch={tableProps.fetch} />
+          <OrderConsumerActions
+            order={row}
+            refetch={tableProps.fetch}
+            as={Button}
+          />
         )}
       />
       <BulkConsumerActions

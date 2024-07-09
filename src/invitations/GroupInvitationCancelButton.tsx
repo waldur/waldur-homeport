@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { cancelGroupInvitation } from '@waldur/invitations/api';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 interface GroupInvitationCancelButtonProps {
   permissionRequest: any;
@@ -40,11 +40,11 @@ export const GroupInvitationCancelButton: FunctionComponent<
     }
   };
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Cancel')}
       iconNode={<Prohibit />}
-      className="btn-secondary"
+      size="sm"
     />
   );
 };

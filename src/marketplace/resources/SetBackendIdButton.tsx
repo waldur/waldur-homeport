@@ -32,6 +32,8 @@ export const SetBackendIdButton: FC<{ resource; refetch }> = ({
       modalComponent={SetBackendIdDialog}
       extraResolve={{ refetch }}
       resource={resource}
+      rowAction
+      size="sm"
     />
   );
 };

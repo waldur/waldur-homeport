@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { Project } from '@waldur/workspace/types';
 
 const ProjectDetailsDialog = lazyComponent(
@@ -23,11 +23,11 @@ export const ProjectDetailsButton = ({ project }: { project: Project }) => {
     [dispatch, project],
   );
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Details')}
       action={callback}
-      className="d-flex align-items-center ms-3"
       iconNode={<Eye />}
+      size="sm"
     />
   );
 };

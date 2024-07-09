@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { cancelTerminationOrder } from '@waldur/marketplace/common/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { OrderResponse } from '../types';
@@ -40,12 +40,13 @@ export const CancelTerminationOrderButton = ({
     row.offering_type === REMOTE_OFFERING_TYPE
   ) {
     return (
-      <ActionButton
+      <RowActionButton
         className="btn btn-sm btn-secondary me-2"
         title={translate('Cancel')}
         action={mutate}
         pending={isLoading}
         iconNode={<Prohibit />}
+        size="sm"
       />
     );
   }

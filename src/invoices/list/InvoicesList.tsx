@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -82,11 +81,11 @@ export const InvoicesList: FunctionComponent = () => {
       verboseName={translate('invoices')}
       enableExport={true}
       hoverableRow={({ row }) => (
-        <ButtonGroup>
+        <>
           <SendNotificationButton row={row} />
           <MarkAsPaidButton row={row} refetch={props.fetch} />
           <InvoicePayButton invoice={row} />
-        </ButtonGroup>
+        </>
       )}
     />
   );

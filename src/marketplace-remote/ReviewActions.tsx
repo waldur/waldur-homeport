@@ -1,5 +1,3 @@
-import { ButtonGroup } from 'react-bootstrap';
-
 import { ReviewApproveAction } from './ReviewApproveAction';
 import { ReviewRejectAction } from './ReviewRejectAction';
 
@@ -9,7 +7,7 @@ export const ReviewActions = ({
   approveMethod,
   rejectMethod,
 }) => (
-  <ButtonGroup>
+  <>
     <ReviewApproveAction
       request={request}
       refetch={refetch}
@@ -20,5 +18,5 @@ export const ReviewActions = ({
       refetch={refetch}
       apiMethod={rejectMethod}
     />
-  </ButtonGroup>
+  </>
 );

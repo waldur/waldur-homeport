@@ -18,14 +18,12 @@ import {
 import { HooksListFilter } from './HooksListFilter';
 import { HookUpdateButton } from './HookUpdateButton';
 
-import '@waldur/user/hooks/HookList.scss';
-
 const StateField = ({ row }) => {
   const cls = row.is_active ? 'bg-success' : 'bg-danger';
   const title = row.is_active ? translate('Enabled') : translate('Disabled');
   return (
     <span
-      className={`status-circle d-inline-block rounded square ${cls}`}
+      className={`status-circle d-inline-block rounded w-10px h-10px ${cls}`}
       title={title}
       role="button"
     />
@@ -102,10 +100,10 @@ export const HooksList: FunctionComponent = () => {
       showPageSizeSelector={true}
       verboseName={translate('Notifications')}
       hoverableRow={({ row }) => (
-        <div className="list_active_button_container">
+        <>
           <HookUpdateButton row={row} />
           <HookRemoveButton refetch={tableProps.fetch} url={row.url} />
-        </div>
+        </>
       )}
       enableExport={true}
       hasQuery={true}

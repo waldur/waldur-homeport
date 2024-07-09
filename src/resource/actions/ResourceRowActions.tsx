@@ -16,9 +16,9 @@ export const ResourceRowActions: FunctionComponent<{ resource; refetch }> = ({
     return null;
   }
   return (
-    <div className="d-flex">
+    <>
       <ActionButtonResource url={resource.url} refetch={refetch} />
       <ResourceSummaryButton url={resource.url} />
-    </div>
+    </>
   );
 };

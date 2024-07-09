@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getUser, getProject } from '@waldur/workspace/selectors';
 
 import { InvitationService } from '../InvitationService';
@@ -61,13 +61,13 @@ export const InvitationCancelButton: FC<{
   }, [user, customer, invitation]);
 
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Cancel')}
       iconNode={<Prohibit />}
       disabled={isDisabled}
       tooltip={tooltip}
-      className="btn-secondary ms-3"
+      size="sm"
     />
   );
 };

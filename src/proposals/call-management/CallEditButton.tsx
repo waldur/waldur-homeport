@@ -7,7 +7,7 @@ export const CallEditButton = ({ row }) => (
   <Link
     state="protected-call.main"
     params={{ call_uuid: row.uuid }}
-    className="btn btn-light"
+    className="btn btn-outline btn-outline-dark border-gray-400 btn-active-secondary btn-sm px-2"
   >
     <span className="svg-icon svg-icon-2">
       <PencilSimple />

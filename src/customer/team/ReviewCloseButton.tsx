@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { closeReview } from './api';
 
@@ -23,10 +23,11 @@ export const ReviewCloseButton: FC<ReviewCloseButtonProps> = ({ reviewId }) => {
     }
   };
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Perform review')}
       iconNode={<Prohibit />}
+      size="sm"
     />
   );
 };

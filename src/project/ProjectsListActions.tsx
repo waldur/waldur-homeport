@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { DropdownButton } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { Project } from '@waldur/workspace/types';
 
 import { DeleteAction } from './DeleteAction';
@@ -16,9 +16,9 @@ interface ProjectsListActionsProps {
 export const ProjectsListActions: FC<ProjectsListActionsProps> = ({
   project,
 }) => (
-  <DropdownButton title={translate('Actions')} className="dropdown-btn">
+  <ActionsDropdownComponent title={translate('Actions')}>
     {ActionsList.map((ActionComponent, index) => (
       <ActionComponent key={index} project={project} />
     ))}
-  </DropdownButton>
+  </ActionsDropdownComponent>
 );

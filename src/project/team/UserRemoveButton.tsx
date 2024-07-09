@@ -9,7 +9,7 @@ import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { GenericPermission } from '@waldur/permissions/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 
 interface UserRemoveButtonProps {
@@ -64,10 +64,11 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
     }
   };
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Remove')}
       iconNode={<Trash />}
+      size="sm"
     />
   );
 };

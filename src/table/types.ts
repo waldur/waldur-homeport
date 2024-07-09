@@ -119,3 +119,9 @@ export interface ExportConfig {
   format: 'clipboard' | 'pdf' | 'excel' | 'csv';
   withFilters?: boolean;
 }
+
+export type DropdownActionItemType<T = any> = React.ComponentType<{
+  row?: T;
+  refetch?(): void;
+  as?: React.ComponentType;
+}>;

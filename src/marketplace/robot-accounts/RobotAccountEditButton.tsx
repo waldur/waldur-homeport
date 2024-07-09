@@ -6,7 +6,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 const RobotAccountEditDialog = lazyComponent(
@@ -32,10 +32,11 @@ export const RobotAccountEditButton = (props) => {
     return null;
   }
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Edit')}
       action={callback}
       iconNode={<PencilSimple />}
+      size="sm"
     />
   );
 };

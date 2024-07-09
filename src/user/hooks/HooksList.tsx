@@ -13,14 +13,13 @@ import { HookCreateButton } from './HookCreateButton';
 import { HookRemoveButton } from './HookRemoveButton';
 import { HookUpdateButton } from './HookUpdateButton';
 import { formatEventTitle } from './utils';
-import './HookList.scss';
 
 const StateField = ({ row }) => {
   const cls = row.is_active ? 'bg-success' : 'bg-danger';
   const title = row.is_active ? translate('Enabled') : translate('Disabled');
   return (
     <span
-      className={`status-circle d-inline-block rounded square ${cls}`}
+      className={`status-circle d-inline-block rounded w-10px h-10px ${cls}`}
       title={title}
     />
   );
@@ -78,10 +77,10 @@ export const HooksList: FunctionComponent = () => {
       verboseName={translate('Notifications')}
       actions={<HookCreateButton />}
       hoverableRow={({ row }) => (
-        <div className="list_active_button_container">
+        <>
           <HookUpdateButton row={row} />
           <HookRemoveButton url={row.url} refetch={props.fetch} />
-        </div>
+        </>
       )}
       enableExport={true}
     />

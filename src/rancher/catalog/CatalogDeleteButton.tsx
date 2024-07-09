@@ -6,7 +6,7 @@ import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 const CatalogDeleteDialog = lazyComponent(
   () => import('./CatalogDeleteDialog'),
@@ -26,10 +26,11 @@ export const CatalogDeleteButton: FunctionComponent<any> = (props) => {
     return null;
   }
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Delete')}
       action={callback}
       iconNode={<Trash />}
+      size="sm"
     />
   );
 };

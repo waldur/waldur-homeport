@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { disableNotification, enableNotification } from './api';
 
@@ -42,13 +42,12 @@ export const NotificationToggleButton: FunctionComponent<{
     refetch();
   };
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={notification.enabled ? translate('Disable') : translate('Enable')}
       iconNode={notification.enabled ? <BellSimple /> : <BellSimpleSlash />}
-      className={`ms-3 btn ${
-        notification.enabled ? 'btn-danger' : 'btn-success'
-      }`}
+      variant={notification.enabled ? 'outline-danger' : 'outline-success'}
+      size="sm"
     />
   );
 };

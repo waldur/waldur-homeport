@@ -6,7 +6,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 const ResourceShowUsageDialog = lazyComponent(
   () => import('./ResourceShowUsageDialog'),
@@ -29,11 +29,11 @@ interface ResourceUsageButton {
 const PureResourceUsageButton: FunctionComponent<ResourceUsageButton> = (
   props,
 ) => (
-  <ActionButton
+  <RowActionButton
     title={translate('Show usage')}
     iconNode={<Eye />}
     action={props.openDialog}
-    className="me-3"
+    size="sm"
   />
 );
 

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteBroadcastTemplate } from '@waldur/broadcasts/api';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 export const BroadcastTemplateDeleteButton = ({ template, refetch }) => {
   const dispatch = useDispatch();
@@ -28,11 +28,12 @@ export const BroadcastTemplateDeleteButton = ({ template, refetch }) => {
     await refetch();
   };
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Remove')}
       action={openDialog}
-      variant="light-danger"
+      variant="outline-danger"
       iconNode={<Trash />}
+      size="sm"
     />
   );
 };
