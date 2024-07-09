@@ -7,6 +7,7 @@
     color: $dark;
     text-transform: uppercase;
     font-weight: 500;
+    white-space: nowrap;
   }
 
   tbody > tr > td {
@@ -102,6 +103,11 @@
 
 .table-responsive {
   overflow: inherit;
+  overflow-x: auto;
+
+  .table-container {
+    width: 100%;
+  }
 }
 
 /* TABLE IN CARD */
