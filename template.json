@@ -2667,6 +2667,10 @@
     "description": "openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx",
     "message": "Direction"
   },
+  "Disable dark theme": {
+    "description": "administration/branding/BrandingForm.tsx",
+    "message": "Disable dark theme"
+  },
   "Disable gateway IP advertising via DHCP": {
     "description": "openstack/openstack-subnet/fields.tsx",
     "message": "Disable gateway IP advertising via DHCP"
@@ -4799,10 +4803,6 @@
     "description": "openstack/openstack-snapshot-schedule/OpenStackSnapshotScheduleSummary.tsx",
     "message": "Max # of snapshots"
   },
-  "Max applicants": {
-    "description": "proposals/update/ProposalCallQuotas.tsx",
-    "message": "Max applicants"
-  },
   "Max number of VM snapshots": {
     "description": "openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx",
     "message": "Max number of VM snapshots"
@@ -5067,6 +5067,10 @@
     "description": "invitations/actions/CivilNumberGroup.tsx",
     "message": "Must start with a country prefix ie EE34501234215"
   },
+  "My Proposals": {
+    "description": "proposals/details/PublicCallDetailsHero.tsx, proposals/update/CallUpdateHero.tsx",
+    "message": "My Proposals"
+  },
   "My offerings": {
     "description": "marketplace/routes.ts",
     "message": "My offerings"
@@ -5282,6 +5286,14 @@
   "Next hop (IP)": {
     "description": "openstack/openstack-tenant/StaticRoutesTable.tsx",
     "message": "Next hop (IP)"
+  },
+  "Next round ends": {
+    "description": "proposals/details/CallDetailsHeaderBody.tsx",
+    "message": "Next round ends"
+  },
+  "Next round starts": {
+    "description": "proposals/details/CallDetailsHeaderBody.tsx",
+    "message": "Next round starts"
   },
   "Next section": {
     "description": "proposals/proposal/create-review/steps/FormProjectDetailsStep.tsx",
@@ -5866,6 +5878,10 @@
   "Open round ends": {
     "description": "proposals/details/CallDetailsHeaderBody.tsx, proposals/round/RoundPageHeaderBody.tsx",
     "message": "Open round ends"
+  },
+  "Open round started": {
+    "description": "proposals/details/CallDetailsHeaderBody.tsx",
+    "message": "Open round started"
   },
   "Open source identity and access management solution.": {
     "description": "administration/providers/IdentityProvidersList.tsx",
@@ -7712,7 +7728,7 @@
     "message": "Resource already has this plan."
   },
   "Resource availability": {
-    "description": "proposals/call-management/CallExpandableRow.tsx, proposals/update/ProposalCallQuotas.tsx",
+    "description": "proposals/call-management/CallExpandableRow.tsx",
     "message": "Resource availability"
   },
   "Resource configuration": {
@@ -8004,7 +8020,7 @@
     "message": "Reviewed by"
   },
   "Reviewed": {
-    "description": "proposals/round/RoundQuotas.tsx, proposals/update/ProposalCallQuotas.tsx",
+    "description": "proposals/round/RoundQuotas.tsx",
     "message": "Reviewed"
   },
   "Reviewer": {

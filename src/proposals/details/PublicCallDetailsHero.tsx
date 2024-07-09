@@ -1,8 +1,11 @@
 import { FC, useMemo } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { translate } from '@waldur/i18n';
 import { getCallStatus } from '@waldur/proposals/utils';
+import { router } from '@waldur/router';
 
 import { Call } from '../types';
 
@@ -36,14 +39,25 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
           <p className="text-muted">{call.customer_name}</p>
         </>
       }
+      quickBody={
+        call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />
+      }
       quickActions={
-        <div className="d-flex gap-5 justify-content-between">
+        <div className="d-flex flex-column flex-wrap gap-2">
           <PublicCallApplyButton call={call} />
+          <Button
+            onClick={() =>
+              router.stateService.go('proposals-call-proposals', {
+                call: JSON.stringify(call),
+              })
+            }
+            variant="light"
+          >
+            {translate('My Proposals')}
+          </Button>
         </div>
       }
       quickFooterClassName="justify-content-center"
-    >
-      {call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />}
-    </PublicDashboardHero2>
+    />
   );
 };
