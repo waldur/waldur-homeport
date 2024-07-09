@@ -6,7 +6,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 export const DeleteImageButton = ({ row }) => {
@@ -37,5 +37,7 @@ export const DeleteImageButton = ({ row }) => {
   ) {
     return null;
   }
-  return <ActionButton title={translate('Delete')} action={handler} />;
+  return (
+    <RowActionButton title={translate('Delete')} action={handler} size="sm" />
+  );
 };

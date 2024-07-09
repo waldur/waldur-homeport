@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 const ResourceSummaryModal = lazyComponent(
   () => import('./ResourceSummaryModal'),
@@ -29,8 +29,11 @@ export const ResourceSummaryButton: React.FC<ResourceSummaryButtonProps> = ({
     );
   };
   return (
-    <Button variant="light" disabled={disabled} onClick={showDetailsModal}>
-      {translate('Details')}
-    </Button>
+    <RowActionButton
+      title={translate('Details')}
+      size="sm"
+      action={showDetailsModal}
+      disabled={disabled}
+    />
   );
 };

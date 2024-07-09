@@ -1,12 +1,11 @@
-import { FunctionComponent } from 'enzyme';
-import { DropdownButton } from 'react-bootstrap';
+import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
 import { EditResourceEndDateByProviderAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateByProviderAction';
 import { EditResourceEndDateByStaffAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateByStaffAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { CreateRobotAccountAction } from '@waldur/marketplace/robot-accounts/CreateRobotAccountAction';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
 import { MoveResourceAction } from '../actions/MoveResourceAction';
 import { TerminateAction } from '../terminate/TerminateAction';
@@ -34,12 +33,7 @@ export const PublicResourceActions: FunctionComponent<
   PublicResourceActionsProps
 > = ({ resource, refetch }) => {
   return (
-    <DropdownButton
-      title={translate('Actions')}
-      variant="light"
-      size="sm"
-      data-cy="public-resources-list-actions-dropdown-btn"
-    >
+    <ActionsDropdownComponent data-cy="public-resources-list-actions-dropdown-btn">
       {ActionsList.map((ActionComponent: any, index: number) => (
         <ActionComponent
           key={index}
@@ -50,6 +44,6 @@ export const PublicResourceActions: FunctionComponent<
           refetch={refetch}
         />
       ))}
-    </DropdownButton>
+    </ActionsDropdownComponent>
   );
 };

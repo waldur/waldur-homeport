@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { BroadcastResponseData } from './types';
 import { parseBroadcast } from './utils';
@@ -33,12 +33,11 @@ export const BroadcastUpdateButton: FunctionComponent<{
       }),
     );
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Update')}
       iconNode={<PencilSimple />}
-      variant="light"
-      className="me-3"
+      size="sm"
     />
   );
 };

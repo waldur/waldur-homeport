@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { detachDocuments } from '@waldur/proposals/update/documents/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 export const RemoveDocumentButton = (props) => {
   const dispatch = useDispatch();
@@ -27,11 +27,11 @@ export const RemoveDocumentButton = (props) => {
     }
   };
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Remove')}
       iconNode={<Trash />}
-      className="btn btn-sm btn-danger"
+      size="sm"
     />
   );
 };

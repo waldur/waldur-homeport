@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { removeAccessSubnet } from './api';
 import { AccessSubnet } from './types';
@@ -49,12 +49,13 @@ export const AccessSubnetDeleteButton = (
   }, [dispatch, props]);
 
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Remove')}
       action={openDialog}
-      variant="danger"
+      variant="outline-danger"
       pending={removing}
       iconNode={<Trash />}
+      size="sm"
     />
   );
 };

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 const ViewYAMLDialog = lazyComponent(
   () => import('./ViewYAMLDialog'),
@@ -20,7 +20,7 @@ export const ViewYAMLButton = ({
 }) => {
   const dispatch = useDispatch();
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('View YAML')}
       action={() =>
         dispatch(
@@ -32,6 +32,7 @@ export const ViewYAMLButton = ({
       }
       iconNode={<PencilSimple />}
       disabled={disabled}
+      size="sm"
     />
   );
 };

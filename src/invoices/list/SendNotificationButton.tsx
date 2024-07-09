@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { post } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
@@ -33,7 +33,7 @@ export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
   };
 
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Send notification')}
       disabled={row.state !== 'created'}
       iconNode={<Share />}
@@ -43,6 +43,7 @@ export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
           : ''
       }
       action={onClick}
+      size="sm"
     />
   );
 };

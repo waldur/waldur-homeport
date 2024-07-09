@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 const OrganizationGroupEditDialog = lazyComponent(
   () => import('./OrganizationGroupFromDialog'),
@@ -26,11 +26,12 @@ export const OrganizationGroupEditButton = ({ row, refetch }) => {
   );
 
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Edit')}
       action={openFormDialog}
       iconNode={<PencilSimple />}
       variant="primary"
+      size="sm"
     />
   );
 };

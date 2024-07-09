@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 const UserDetailsDialog = lazyComponent(
   () => import('./UserDetailsDialog'),
@@ -14,8 +14,9 @@ const UserDetailsDialog = lazyComponent(
 export const UserDetailsButton: FunctionComponent<{ row }> = ({ row }) => {
   const dispatch = useDispatch();
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Details')}
+      size="sm"
       action={() =>
         dispatch(
           openModalDialog(UserDetailsDialog, {

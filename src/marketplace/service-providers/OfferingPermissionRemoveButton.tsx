@@ -8,7 +8,7 @@ import { deleteOfferingPermission } from '@waldur/permissions/api';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 interface OfferingPermissionRemoveButtonProps {
@@ -50,10 +50,11 @@ export const OfferingPermissionRemoveButton: React.FC<
     }
   };
   return canDeletePermission ? (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Revoke')}
       iconNode={<Trash />}
+      size="sm"
     />
   ) : null;
 };

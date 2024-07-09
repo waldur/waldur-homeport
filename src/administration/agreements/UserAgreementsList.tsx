@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -31,10 +30,10 @@ export const UserAgreementsList: FunctionComponent<{}> = () => {
       ]}
       verboseName={translate('user agreements')}
       hoverableRow={({ row }) => (
-        <ButtonGroup>
+        <>
           <UserAgreementsEditButton row={row} refetch={props.fetch} />
           <UserAgreementDeleteButton userAgreement={row} />
-        </ButtonGroup>
+        </>
       )}
       expandableRow={UserAgreementsExpandableRow}
       expandableRowClassName="bg-gray-200"

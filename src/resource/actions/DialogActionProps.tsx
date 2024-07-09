@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { ButtonVariant } from 'react-bootstrap/esm/types';
 
 import { DialogSizeType } from '@waldur/modal/actions';
 import { ActionValidator } from '@waldur/resource/actions/types';
@@ -20,6 +21,9 @@ interface ActionButtonProps {
   className?: string;
   staff?: boolean;
   important?: boolean;
+  variant?: ButtonVariant;
+  rowAction?: boolean;
+  size?: 'lg' | 'sm';
 }
 
 export interface DialogActionProps<T>

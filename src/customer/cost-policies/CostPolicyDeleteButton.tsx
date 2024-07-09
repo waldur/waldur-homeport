@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { deleteCostPolicy } from './api';
 
@@ -28,11 +28,12 @@ export const CostPolicyDeleteButton = ({ row, refetch }) => {
     });
   };
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Remove')}
       action={openDialog}
-      variant="light-danger"
+      variant="outline-danger"
       iconNode={<Trash />}
+      size="sm"
     />
   );
 };

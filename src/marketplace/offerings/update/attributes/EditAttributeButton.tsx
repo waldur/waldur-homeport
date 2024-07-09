@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { ATTRIBUTE_FORM_ID } from './constants';
 import { EditAttributeDialogProps } from './types';
@@ -28,10 +28,11 @@ export const EditAttributeButton: FunctionComponent<
     );
   };
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Edit')}
       iconNode={<PencilSimple />}
+      size="sm"
     />
   );
 };

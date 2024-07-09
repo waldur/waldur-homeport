@@ -9,7 +9,7 @@ import {
 } from '@waldur/proposals/api';
 import { CallOffering } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 interface OfferingRequestItemActionsProps {
   row: CallOffering;
@@ -85,17 +85,19 @@ export const OfferingRequestItemActions = ({
   );
   return row.state === 'requested' ? (
     <>
-      <ActionButton
+      <RowActionButton
         action={accept}
         title={translate('Accept')}
-        variant="primary"
+        variant="light-primary"
         pending={isAcceptLoading || isRejectLoading}
+        size="sm"
       />
-      <ActionButton
+      <RowActionButton
         action={reject}
         title={translate('Reject')}
-        variant="danger"
+        variant="light-danger"
         pending={isAcceptLoading || isRejectLoading}
+        size="sm"
       />
     </>
   ) : null;

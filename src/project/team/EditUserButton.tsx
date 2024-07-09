@@ -8,7 +8,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { GenericPermission } from '@waldur/permissions/types';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 
 const EditUserDialog = lazyComponent(
@@ -50,10 +50,11 @@ export const EditUserButton: React.FC<EditUserButtonProps> = ({
       }),
     );
   return (
-    <ActionButton
+    <RowActionButton
       action={callback}
       title={translate('Edit')}
       iconNode={<PencilSimple />}
+      size="sm"
     />
   );
 };

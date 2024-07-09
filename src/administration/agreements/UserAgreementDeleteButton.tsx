@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 const UserAgreementDeleteDialog = lazyComponent(
   () => import('./UserAgreementDeleteDialog'),
@@ -26,10 +26,11 @@ export const UserAgreementDeleteButton: FC<{ userAgreement }> = ({
     [],
   );
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Delete')}
       action={callback}
       iconNode={<Trash />}
+      size="sm"
     />
   );
 };

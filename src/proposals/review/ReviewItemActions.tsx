@@ -9,7 +9,7 @@ import {
 } from '@waldur/proposals/api';
 import { ProposalReview } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 interface ReviewItemActionProps {
   row: ProposalReview;
@@ -76,16 +76,17 @@ export const ReviewItemAction = ({ row, fetch }: ReviewItemActionProps) => {
   );
   return row.state === 'created' ? (
     <>
-      <ActionButton
+      <RowActionButton
         action={accept}
         title={translate('Start review')}
-        variant="primary"
+        size="sm"
+        variant="outline-primary"
         pending={isAcceptLoading || isRejectLoading}
       />
-      <ActionButton
+      <RowActionButton
         action={reject}
         title={translate('Send back')}
-        variant="light"
+        size="sm"
         pending={isAcceptLoading || isRejectLoading}
       />
     </>

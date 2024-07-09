@@ -52,14 +52,14 @@ describe('Team', () => {
   });
 
   it('Allows to view permission details', () => {
-    cy.get('.btn-group button').contains('Details').click({ force: true });
+    cy.get('.row-actions button').contains('Details').click({ force: true });
     cy.get('.modal-title').contains('User details');
     cy.get('.modal-content').get('table').should('be.visible');
     cy.wait('@getUserDetails');
   });
 
   it('Allows to remove team member', () => {
-    cy.get('.btn-group button')
+    cy.get('.row-actions button')
       .contains('Remove')
       .click({ force: true })
       .get('button')
@@ -73,7 +73,7 @@ describe('Team', () => {
   });
 
   it('Allows to edit permission', () => {
-    cy.get('.btn-group button').contains('Edit').click({ force: true });
+    cy.get('.row-actions button').contains('Edit').click({ force: true });
     cy.get('.modal-title')
       .contains('Edit customer member')
       .get('.modal-content')

@@ -5,7 +5,7 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { deleteRequestedOffering } from '@waldur/proposals/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 export const CallOfferingDeleteButton = ({ row, refetch }) => {
   const dispatch = useDispatch();
@@ -36,11 +36,12 @@ export const CallOfferingDeleteButton = ({ row, refetch }) => {
     }
   };
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Remove')}
       action={openDialog}
-      variant="light-danger"
+      variant="outline-danger"
       iconNode={<Trash />}
+      size="sm"
     />
   );
 };

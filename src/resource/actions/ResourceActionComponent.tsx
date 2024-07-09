@@ -1,7 +1,8 @@
 import { FunctionComponent } from 'react';
-import { DropdownButton, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
 import { ActionItemType } from './types';
 
@@ -20,14 +21,7 @@ interface ResourceActionComponentProps {
 export const ResourceActionComponent: FunctionComponent<
   ResourceActionComponentProps
 > = (props) => (
-  <DropdownButton
-    title={translate('Actions')}
-    onToggle={props.onToggle}
-    disabled={props.disabled}
-    variant="light"
-    data-cy="actions-dropdown-btn"
-    className="me-3 d-inline-block"
-  >
+  <ActionsDropdownComponent onToggle={props.onToggle} disabled={props.disabled}>
     {props.open ? (
       props.loading ? (
         <Dropdown.Item eventKey="1">
@@ -54,5 +48,5 @@ export const ResourceActionComponent: FunctionComponent<
         </Dropdown.Item>
       )
     ) : null}
-  </DropdownButton>
+  </ActionsDropdownComponent>
 );

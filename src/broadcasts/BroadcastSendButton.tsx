@@ -1,9 +1,9 @@
 import { Share } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { sendBroadcast } from './api';
 
@@ -20,11 +20,11 @@ export const BroadcastSendButton = ({ broadcast, refetch }) => {
     }
   };
   return (
-    <Button onClick={callback} variant="light">
-      <span className="svg-icon svg-icon-2">
-        <Share />
-      </span>{' '}
-      {translate('Send')}
-    </Button>
+    <RowActionButton
+      action={callback}
+      title={translate('Send')}
+      iconNode={<Share />}
+      size="sm"
+    />
   );
 };

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { deleteLexisLink } from '@waldur/marketplace/common/api';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 export const LexisLinkDeleteButton = ({ row, refetch }) => {
   const dispatch = useDispatch();
@@ -29,11 +29,12 @@ export const LexisLinkDeleteButton = ({ row, refetch }) => {
     });
   };
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Remove')}
       action={openDialog}
       variant="light-danger"
       iconNode={<Trash />}
+      size="sm"
     />
   );
 };

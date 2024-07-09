@@ -1,3 +1,4 @@
+import { Money } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -18,12 +19,15 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({ invoice }) => {
   }
   return (
     <a
-      className="btn btn-warning btn-sm"
+      className="btn btn-outline btn-outline-warning border-warning btn-active-warning px-2',"
       href={invoice.payment_url}
       target="_self"
       rel="noopener noreferrer"
     >
-      <i className="fa fa-money" /> {translate('Pay')}
+      <span className="svg-icon svg-icon-2">
+        <Money />
+      </span>
+      {translate('Pay')}
     </a>
   );
 };

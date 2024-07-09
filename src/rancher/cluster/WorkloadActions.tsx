@@ -1,12 +1,11 @@
 import { Swap, Trash } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { deleteEntity } from '@waldur/table/actions';
 
 import { redeployWorkload, deleteWorkload } from '../api';
@@ -39,20 +38,22 @@ export const WorkloadActions: FunctionComponent<{ workload }> = ({
   const disabled = redeployResult.loading || deleteResult.loading;
 
   return (
-    <ButtonGroup>
+    <>
       <ViewYAMLButton resource={workload} disabled={disabled} />
-      <ActionButton
+      <RowActionButton
         title={translate('Redeploy')}
         action={redeployCallback}
         iconNode={<Swap />}
         disabled={disabled}
+        size="sm"
       />
-      <ActionButton
+      <RowActionButton
         title={translate('Delete')}
         action={deleteCallback}
         iconNode={<Trash />}
         disabled={disabled}
+        size="sm"
       />
-    </ButtonGroup>
+    </>
   );
 };

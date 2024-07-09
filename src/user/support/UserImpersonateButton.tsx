@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { UsersService, setImpersonationData } from '../UsersService';
@@ -29,11 +29,12 @@ export const UserImpersonateButton: FunctionComponent<{ row }> = ({ row }) => {
   }
 
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Impersonate')}
       action={mutate}
       iconNode={<Eye />}
       pending={isLoading}
+      size="sm"
     />
   );
 };

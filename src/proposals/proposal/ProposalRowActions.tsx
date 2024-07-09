@@ -7,6 +7,7 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 import { forceApproveProposal, rejectProposal } from '../api';
@@ -74,46 +75,41 @@ export const ProposalRowActions = ({ row, refetch }) => {
     }
   };
   return (
-    <Dropdown>
-      <Dropdown.Toggle variant="primary" id="dropdown-basic">
-        {translate('Actions')}
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        {isStaff && (
-          <Dropdown.Item onClick={() => openCreateReviewDialog(row)}>
-            {translate('Create review')}
-          </Dropdown.Item>
-        )}
-        <Dropdown.Item
-          as={Link}
-          state="call-management.proposal-details"
-          params={{ proposal_uuid: row.uuid }}
-        >
-          {translate('View')}
+    <ActionsDropdownComponent>
+      {isStaff && (
+        <Dropdown.Item onClick={() => openCreateReviewDialog(row)}>
+          {translate('Create review')}
         </Dropdown.Item>
-        {!isRejectButtonDisabled && (
-          <>
-            <Dropdown.Item
-              onClick={() => handleRejectProposal(row.uuid)}
-              className={
-                'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
-              }
-              disabled={isRejectButtonDisabled}
-            >
-              {translate('Reject')}
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => handleForceApproveProposal(row.uuid)}
-              className={
-                'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
-              }
-              disabled={isRejectButtonDisabled}
-            >
-              {translate('Force approve')}
-            </Dropdown.Item>
-          </>
-        )}
-      </Dropdown.Menu>
-    </Dropdown>
+      )}
+      <Dropdown.Item
+        as={Link}
+        state="call-management.proposal-details"
+        params={{ proposal_uuid: row.uuid }}
+      >
+        {translate('View')}
+      </Dropdown.Item>
+      {!isRejectButtonDisabled && (
+        <>
+          <Dropdown.Item
+            onClick={() => handleRejectProposal(row.uuid)}
+            className={
+              'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
+            }
+            disabled={isRejectButtonDisabled}
+          >
+            {translate('Reject')}
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={() => handleForceApproveProposal(row.uuid)}
+            className={
+              'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
+            }
+            disabled={isRejectButtonDisabled}
+          >
+            {translate('Force approve')}
+          </Dropdown.Item>
+        </>
+      )}
+    </ActionsDropdownComponent>
   );
 };

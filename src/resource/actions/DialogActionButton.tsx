@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionButton, RowActionButton } from '@waldur/table/ActionButton';
 
 import { DialogActionProps } from './DialogActionProps';
 import { useModalDialogCallback } from './useModalDialogCallback';
@@ -15,6 +15,7 @@ export const DialogActionButton: <T>(
   formId,
   validators,
   extraResolve,
+  rowAction,
   ...rest
 }) => {
   const validationState = useValidators(validators, resource);
@@ -25,5 +26,9 @@ export const DialogActionButton: <T>(
     formId,
     extraResolve,
   );
-  return <ActionButton {...rest} {...validationState} action={callback} />;
+  if (rowAction) {
+    return <RowActionButton {...rest} {...validationState} action={callback} />;
+  } else {
+    return <ActionButton {...rest} {...validationState} action={callback} />;
+  }
 };

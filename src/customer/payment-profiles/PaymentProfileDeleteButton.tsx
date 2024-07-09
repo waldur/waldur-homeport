@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { removePaymentProfile } from '@waldur/customer/payment-profiles/store/actions';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 export const PaymentProfileDeleteButton = (props) => {
   const dispatch = useDispatch();
@@ -26,10 +26,11 @@ export const PaymentProfileDeleteButton = (props) => {
     );
   };
   return (
-    <ActionButton
+    <RowActionButton
       title={translate('Delete')}
       action={openDialog}
       iconNode={<Trash />}
+      size="sm"
       {...props.tooltipAndDisabledAttributes}
     />
   );

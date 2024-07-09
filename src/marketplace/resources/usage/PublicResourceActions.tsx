@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { Resource } from '@waldur/marketplace/resources/types';
@@ -35,7 +34,7 @@ export const PublicResourceActions: FunctionComponent<
   }
   const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
   return (
-    <ButtonGroup>
+    <>
       <ResourceShowUsageButton resource={row} />
       {!is_support_only && (
         <ResourceCreateUsageButton
@@ -49,6 +48,6 @@ export const PublicResourceActions: FunctionComponent<
         />
       )}
       <SetBackendIdButton resource={row} refetch={fetch} />
-    </ButtonGroup>
+    </>
   );
 };

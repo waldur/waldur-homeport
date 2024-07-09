@@ -1,8 +1,9 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import { ActionButtonSmall } from '@waldur/table/ActionButtonSmall';
+import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { showHookUpdateDialog } from './actions';
 
@@ -14,13 +15,12 @@ interface HookUpdateButtonProps {
 export const PureHookUpdateButton: FunctionComponent<HookUpdateButtonProps> = (
   props,
 ) => (
-  <ActionButtonSmall
+  <RowActionButton
     title={translate('Update')}
     action={() => props.showHookUpdateDialog(props.row)}
-    className="btn btn-secondary"
-  >
-    <i className="fa fa-pencil" />
-  </ActionButtonSmall>
+    iconNode={<PencilSimple />}
+    size="sm"
+  />
 );
 
 const mapDispatchToProps = (dispatch) => ({
