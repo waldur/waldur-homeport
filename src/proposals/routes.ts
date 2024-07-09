@@ -241,6 +241,12 @@ export const states: StateDeclaration[] = [
     },
   },
   {
+    name: 'proposals-call-proposals',
+    url: 'call/:call',
+    parent: 'proposals',
+    component: UserProposalsList,
+  },
+  {
     name: 'reviews-all-reviews',
     url: '',
     parent: 'reviews',

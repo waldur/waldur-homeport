@@ -1,16 +1,18 @@
 import { FC, useMemo } from 'react';
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { translate } from '@waldur/i18n';
 import { getCallStatus } from '@waldur/proposals/utils';
+import { router } from '@waldur/router';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CallDetailsHeaderBody } from '../details/CallDetailsHeaderBody';
 import { Call } from '../types';
 
 import { CallActions } from './CallActions';
-import { ProposalCallQuotas } from './ProposalCallQuotas';
 
 interface CallUpdateHeroProps {
   call: Call;
@@ -39,16 +41,25 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
         </>
       }
       quickActions={
-        <div className="d-flex gap-5 justify-content-between">
+        <div className="d-flex flex-column flex-wrap gap-2">
           <CallActions call={call} refetch={refetch} />
+          <Button
+            onClick={() =>
+              router.stateService.go('proposals-call-proposals', {
+                call_uuid: call.uuid,
+              })
+            }
+            variant="light"
+          >
+            {translate('My Proposals')}
+          </Button>
         </div>
       }
-      quickBody={<ProposalCallQuotas call={call} />}
+      quickBody={
+        call.state !== 'archived' &&
+        call.rounds.length > 0 && <CallDetailsHeaderBody call={call} />
+      }
       quickFooterClassName="justify-content-center"
-    >
-      {call.state !== 'archived' && call.rounds.length > 0 && (
-        <CallDetailsHeaderBody call={call} />
-      )}
-    </PublicDashboardHero2>
+    />
   );
 };

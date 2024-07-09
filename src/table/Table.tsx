@@ -456,7 +456,6 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     filterPosition,
     applyFilters,
     filters,
-    firstFetch,
     renderFiltersDrawer,
     hasOptionalColumns,
     columns,
@@ -466,7 +465,7 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
 
   useEffect(() => {
     // We need to render the filters at the beginning to read the initial filters
-    if (filterPosition === 'sidebar' && firstFetch) {
+    if (filterPosition === 'sidebar') {
       renderFiltersDrawer(filters);
     }
   }, []);

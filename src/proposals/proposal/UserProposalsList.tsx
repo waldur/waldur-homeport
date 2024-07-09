@@ -1,3 +1,4 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -34,6 +35,10 @@ const filtersSelector = createSelector(
 );
 
 export const UserProposalsList: FC = () => {
+  const {
+    params: { call },
+  } = useCurrentStateAndParams();
+  const callObj = call ? JSON.parse(decodeURIComponent(call)) : undefined;
   const filter = useSelector(filtersSelector);
 
   const tableProps = useTable({
@@ -48,8 +53,9 @@ export const UserProposalsList: FC = () => {
       state: getProposalStateOptions().filter(
         (option) => option.value !== 'canceled' && option.value !== 'rejected',
       ),
+      call: callObj,
     }),
-    [],
+    [callObj],
   );
 
   const columns = [
