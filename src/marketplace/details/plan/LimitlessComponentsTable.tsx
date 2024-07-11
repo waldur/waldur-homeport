@@ -19,9 +19,9 @@ export const LimitlessComponentsTable = ({
     isVisible(state, MarketplaceFeatures.conceal_prices),
   );
   return (
-    <table className="table table-bordered">
+    <table className="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
       <thead>
-        <tr>
+        <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
           <th>{translate('Component name')}</th>
           <th>{translate('Unit')}</th>
           {!shouldConcealPrices && (

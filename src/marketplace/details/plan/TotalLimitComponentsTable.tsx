@@ -31,9 +31,9 @@ export const TotalLimitComponentsTable: FunctionComponent<
     isVisible(state, MarketplaceFeatures.conceal_prices),
   );
   return (
-    <Table bordered={true}>
+    <Table className="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
       <thead>
-        <tr>
+        <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
           <th className="col-sm-1">{translate('Component name')}</th>
           <th className="col-sm-1">{translate('Unit')}</th>
           <th className="col-md-2 col-sm-3">{translate('Quantity')}</th>

@@ -207,6 +207,11 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
 const getPlan = (state, props) => {
   if (props.viewMode && props.order) {
     if (props.order.plan_uuid) {
+      if (props.type && props.type === 'old') {
+        return props.offering.plans.find(
+          (plan) => plan.uuid === props.order.old_plan_uuid,
+        );
+      }
       return props.offering.plans.find(
         (plan) => plan.uuid === props.order.plan_uuid,
       );

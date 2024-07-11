@@ -16,7 +16,7 @@ import { Component, PlanDetailsTableProps } from './types';
 import { pricesSelector } from './utils';
 
 const HeaderRow = (props: { periods?: string[] }) => (
-  <tr>
+  <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
     <th className="col-sm-1" style={{ width: '5%' }}>
       {translate('Component name')}
     </th>
@@ -99,7 +99,7 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     <div className={props.formGroupClassName}>
       <div className={props.columnClassName}>
         {hasExtraRows && (
-          <Table bordered={true}>
+          <Table className="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
             <thead>
               <HeaderRow
                 periods={!activeFixedPriceProfile ? props.periods : []}
