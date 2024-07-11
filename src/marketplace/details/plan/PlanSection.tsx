@@ -15,14 +15,54 @@ interface PlanDetailsProps {
 
 const renderValue = (value) => (value ? value : <>&mdash;</>);
 
+const PlanCard = ({
+  title,
+  planName,
+  planDescription,
+  order,
+  offering,
+  type,
+}) => (
+  <Card>
+    <Card.Header className="custom-card-header custom-padding-zero">
+      <Card.Title>
+        <h3>{translate(title)}</h3>
+      </Card.Title>
+    </Card.Header>
+    <Card.Body>
+      <DetailsField label={translate('Name')}>
+        {renderValue(planName)}
+      </DetailsField>
+      {planDescription ? (
+        <DetailsField label={translate('Description')}>
+          <PlanDescriptionButton
+            className="btn btn-sm btn-secondary"
+            planDescription={planDescription}
+          />
+        </DetailsField>
+      ) : null}
+      <DetailsField>
+        <PlanDetailsTable
+          formGroupClassName="form-group row"
+          columnClassName="col-sm-12"
+          viewMode={true}
+          order={order}
+          offering={offering}
+          type={type}
+        />
+      </DetailsField>
+    </Card.Body>
+  </Card>
+);
+
 export const PlanSection = (props: PlanDetailsProps) => {
-  const { plan_name, plan_description } = props.order;
+  const { plan_name, plan_description, old_plan_name } = props.order;
   if (!plan_name) {
     return (
       <Card>
         <Card.Header className="custom-card-header custom-padding-zero">
           <Card.Title>
-            <h3>{translate('Limits')}</h3>
+            <h3>{translate('Plan')}</h3>
           </Card.Title>
         </Card.Header>
         <Card.Body>
@@ -35,39 +75,39 @@ export const PlanSection = (props: PlanDetailsProps) => {
       </Card>
     );
   }
+
   return (
-    <Card>
-      <Card.Header className="custom-card-header custom-padding-zero">
-        <Card.Title>
-          <h3>
-            {props.order.type === 'Create'
-              ? translate('New plan')
-              : translate('Plan')}
-          </h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <DetailsField label={translate('Name')}>
-          {renderValue(plan_name)}
-        </DetailsField>
-        {plan_description ? (
-          <DetailsField label={translate('Description')}>
-            <PlanDescriptionButton
-              className="btn btn-sm btn-secondary"
-              planDescription={plan_description}
-            />
-          </DetailsField>
-        ) : null}
-        <DetailsField>
-          <PlanDetailsTable
-            formGroupClassName="form-group row"
-            columnClassName="col-sm-12"
-            viewMode={true}
+    <>
+      {props.order.type === 'Update' ? (
+        <>
+          <PlanCard
+            title="Old plan"
+            planName={old_plan_name}
+            planDescription={plan_description}
             order={props.order}
             offering={props.offering}
+            type="old"
           />
-        </DetailsField>
-      </Card.Body>
-    </Card>
+          <hr />
+          <PlanCard
+            title="New plan"
+            planName={plan_name}
+            planDescription={plan_description}
+            order={props.order}
+            offering={props.offering}
+            type="new"
+          />
+        </>
+      ) : (
+        <PlanCard
+          title="Plan"
+          planName={plan_name}
+          planDescription={plan_description}
+          order={props.order}
+          offering={props.offering}
+          type="new"
+        />
+      )}
+    </>
   );
 };

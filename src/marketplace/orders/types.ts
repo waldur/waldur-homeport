@@ -45,6 +45,10 @@ export interface OrderResponse {
   plan_uuid?: string;
   plan?: string;
   plan_name?: string;
+  old_plan_name?: string;
+  new_plan_name?: string;
+  old_plan_uuid?: string;
+  new_plan_uuid?: string;
   plan_description?: string;
   plan_unit?: BillingPeriod;
   project: string;
