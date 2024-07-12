@@ -1,6 +1,10 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 
+import {
+  syncFiltersToURL,
+  useReinitializeFilterFromUrl,
+} from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/list/constants';
@@ -33,57 +37,64 @@ const getOrderStateFilterOptions = (): {
   { value: 'rejected', label: translate('Rejected') },
 ];
 
-const PureMarketplaceOrdersListFilter = () => (
-  <>
-    <TableFilterItem
-      title={translate('Offering')}
-      name="offering"
-      badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
-    >
-      <OfferingAutocomplete />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('Organization')}
-      name="organization"
-      badgeValue={(value) => value?.name}
-    >
-      <OrganizationAutocomplete />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('Project')}
-      name="project"
-      badgeValue={(value) => value?.name}
-    >
-      <ProjectFilter />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('Service provider')}
-      name="provider"
-      getValueLabel={(option) => option.customer_name}
-    >
-      <ProviderAutocomplete />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('State')}
-      name="state"
-      badgeValue={(value) => value?.label}
-      ellipsis={false}
-    >
-      <OrderStateFilter options={getOrderStateFilterOptions} />
-    </TableFilterItem>
-    <TableFilterItem
-      title={translate('Type')}
-      name="type"
-      badgeValue={(value) => value?.label}
-      ellipsis={true}
-    >
-      <OrderTypeFilter />
-    </TableFilterItem>
-  </>
-);
+const PureMarketplaceOrdersListFilter = (props) => {
+  useReinitializeFilterFromUrl(props.form, {
+    state: getOrderStateFilterOptions()[0],
+  });
+  return (
+    <>
+      <TableFilterItem
+        title={translate('Offering')}
+        name="offering"
+        badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
+      >
+        <OfferingAutocomplete />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Organization')}
+        name="organization"
+        badgeValue={(value) => value?.name}
+      >
+        <OrganizationAutocomplete />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Project')}
+        name="project"
+        badgeValue={(value) => value?.name}
+      >
+        <ProjectFilter />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Service provider')}
+        name="provider"
+        getValueLabel={(option) => option.customer_name}
+      >
+        <ProviderAutocomplete />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('State')}
+        name="state"
+        badgeValue={(value) => value?.label}
+        ellipsis={false}
+      >
+        <OrderStateFilter options={getOrderStateFilterOptions} />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Type')}
+        name="type"
+        badgeValue={(value) => value?.label}
+        ellipsis={true}
+      >
+        <OrderTypeFilter />
+      </TableFilterItem>
+    </>
+  );
+};
 
 export const MarketplaceOrdersListFilter = reduxForm({
   form: MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID,
+  onChange: syncFiltersToURL,
+  touchOnChange: true,
   initialValues: {
     state: getOrderStateFilterOptions()[0],
   },
