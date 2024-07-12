@@ -1,6 +1,6 @@
 import { Question } from '@phosphor-icons/react';
 import { cloneDeep } from 'lodash';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -129,7 +129,14 @@ const mapStateToFilter = createSelector(
 );
 
 export const UserList: FunctionComponent = () => {
-  const filter = useSelector(mapStateToFilter);
+  const filterValues = useSelector(mapStateToFilter);
+  const filter = useMemo(() => {
+    return {
+      ...filterValues,
+      field: ['uuid', 'url', 'identity_provider_fields', 'registration_method'],
+    };
+  }, [filterValues]);
+
   const props = useTable({
     table: `userList`,
     fetchData: createFetcher('users'),

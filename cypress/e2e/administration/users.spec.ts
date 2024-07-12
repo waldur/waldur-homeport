@@ -1,3 +1,5 @@
+const fieldQueryParam = "field=uuid&field=url&field=identity_provider_fields&field=registration_method&field=full_name&field=email&field=phone_number&field=permissions&field=is_active";
+
 describe('Users', () => {
   beforeEach(() => {
     cy.mockChecklists()
@@ -15,14 +17,13 @@ describe('Users', () => {
       .intercept('GET', '/api/customers/**', {
         fixture: 'support/customers.json',
       })
-
-      .intercept('GET', '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&query=Tara%20Pierce', {
+      .intercept('GET', `/api/users/?page=1&page_size=10&${fieldQueryParam}&query=Tara%20Pierce`, {
         fixture: 'support/user-search-by-name.json',
       })
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&query=0024c6a7885940bbb156e82073bc0244',
+        `/api/users/?page=1&page_size=10&${fieldQueryParam}&query=0024c6a7885940bbb156e82073bc0244`,
         {
           fixture: 'support/user-search-by-name.json',
         },
@@ -30,29 +31,29 @@ describe('Users', () => {
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active',
+        `/api/users/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf&${fieldQueryParam}`,
         {
           fixture: 'support/user-search-by-name.json',
         },
       )
 
-      .intercept('GET', '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&is_staff=true', {
+      .intercept('GET', `/api/users/?page=1&page_size=10&${fieldQueryParam}&is_staff=true`, {
         fixture: 'support/users.json',
       })
 
-      .intercept('GET', '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&role=&status=true', {
+      .intercept('GET', `/api/users/?page=1&page_size=10&${fieldQueryParam}&role=&status=true`, {
         fixture: 'support/users.json',
       })
 
       .intercept(
         'GET',
-        '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&query=TaraPierce%40example.com',
+        `/api/users/?page=1&page_size=10&${fieldQueryParam}&query=TaraPierce%40example.com`,
         {
           fixture: 'support/user-search-by-name.json',
         },
       )
 
-      .intercept('GET', '/api/users/?page=1&page_size=10&field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active', {
+      .intercept('GET', `/api/users/?page=1&page_size=10&${fieldQueryParam}`, {
         fixture: 'support/users.json',
       })
       .as('getUsers')
