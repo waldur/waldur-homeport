@@ -74,7 +74,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
       </Row>
       {project.description ? (
         <Panel title={translate('Description')}>
-          <p className="text-pre text-muted">{project.description}</p>
+          <p>{project.description}</p>
         </Panel>
       ) : null}
     </>
