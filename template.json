@@ -4592,7 +4592,7 @@
     "message": "Limit-based"
   },
   "Limits": {
-    "description": "marketplace/details/plan/PlanSection.tsx, marketplace/orders/details/LimitsSection.tsx, marketplace/orders/details/OrderDetails.tsx, marketplace/resources/list/PublicResourcesList.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx",
+    "description": "marketplace/orders/details/LimitsSection.tsx, marketplace/orders/details/OrderDetails.tsx, marketplace/resources/list/PublicResourcesList.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx",
     "message": "Limits"
   },
   "Link OpenStack Instance": {
@@ -5228,7 +5228,7 @@
     "message": "New offering"
   },
   "New plan": {
-    "description": "marketplace/details/plan/PlanSection.tsx, marketplace/resources/change-plan/ChangePlanComponent.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx",
+    "description": "marketplace/resources/change-plan/ChangePlanComponent.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx",
     "message": "New plan"
   },
   "New policy": {

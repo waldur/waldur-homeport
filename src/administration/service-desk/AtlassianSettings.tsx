@@ -163,5 +163,17 @@ export const AtlassianSettings = () => (
       className="mt-3"
       label={translate('Pull priorities')}
     />
+    <AwesomeCheckboxField
+      hideLabel
+      name="ATLASSIAN_SHARED_USERNAME"
+      className="mt-3"
+      label={translate('Is Service Desk username the same as in Waldur')}
+    />
+    <AwesomeCheckboxField
+      hideLabel
+      name="ATLASSIAN_CUSTOM_ISSUE_FIELD_MAPPING_ENABLED"
+      className="mt-3"
+      label={translate('Should extra issue field mappings be applied')}
+    />
   </FormContainer>
 );
