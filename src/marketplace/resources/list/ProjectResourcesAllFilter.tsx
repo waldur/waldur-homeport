@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { syncFiltersToURL } from '@waldur/core/filters';
+import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
@@ -85,6 +85,7 @@ const enhance = reduxForm<{}, ProjectResourcesAllFilterProps>({
   form: PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
   destroyOnUnmount: false,
   onChange: syncFiltersToURL,
+  initialValues: getInitialValues(),
 });
 
 export const ProjectResourcesAllFilter = enhance(PureProjectResourcesAllFilter);

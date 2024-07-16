@@ -224,7 +224,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'all-resources',
-    url: '/all-resources/',
+    url: '/all-resources/?offering',
     component: AllResourcesList,
     parent: 'layout',
   },

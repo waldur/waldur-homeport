@@ -86,6 +86,14 @@ export const getOrderBreadcrumbItems = (order): IBreadcrumbItem[] => [
     key: 'resources',
     text: translate('Resources'),
     to: 'all-resources',
+    params: {
+      offering: JSON.stringify({
+        uuid: order.offering_uuid,
+        name: order.offering_name,
+        category_title: order.category_title,
+        thumbnail: order.offering_thumbnail,
+      }),
+    },
   },
   {
     key: 'resource',
