@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { terminateResource } from '@waldur/marketplace/common/api';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 export const MultiDestroyAction = ({ rows, refetch }) => {
   const dispatch = useDispatch();
@@ -34,15 +35,12 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
   }, [dispatch, validResources, refetch]);
 
   return (
-    <button
-      disabled={validResources.length === 0}
-      className="btn btn-danger"
-      onClick={callback}
+    <ActionItem
       title={translate('Destroy')}
-    >
-      <span className="svg-icon svg-icon-2">
-        <Trash />
-      </span>
-    </button>
+      action={callback}
+      disabled={validResources.length !== rows.length}
+      iconNode={<Trash />}
+      className="text-danger"
+    />
   );
 };
