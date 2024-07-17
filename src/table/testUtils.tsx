@@ -21,6 +21,7 @@ export const renderTable = (Component, tableId, rowId, row) => {
     },
     toggled: {},
     activeColumns: {},
+    columnPositions: [],
   };
   const store = mockStore({
     tables: {

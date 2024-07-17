@@ -26,6 +26,8 @@ export const SELECT_ROW = 'waldur/table/SELECT_ROW';
 export const SELECT_ALL_ROWS = 'waldur/table/SELECT_ALL_ROWS';
 export const RESET_SELECTION = 'waldur/table/RESET_SELECTION';
 export const TOGGLE_COLUMN = 'waldur/table/TOGGLE_COLUMN';
+export const INIT_COLUMN_POSITIONS = 'waldur/table/INIT_COLUMN_POSITIONS';
+export const SWAP_COLUMNS = 'waldur/table/SWAP_COLUMNS';
 
 export const fetchListStart = (
   table: string,
@@ -229,17 +231,36 @@ export const resetSelection = (table: string) => ({
   },
 });
 
-export const toggleColumn = (
-  table: string,
-  index,
-  column,
-  value?: boolean,
-) => ({
+export const toggleColumn = (table: string, id, column, value?: boolean) => ({
   type: TOGGLE_COLUMN,
   payload: {
     table,
-    index,
+    id,
     column,
     value,
+  },
+});
+
+export const initColumnPositions = (
+  table: string,
+  columnPositions: string[],
+) => ({
+  type: INIT_COLUMN_POSITIONS,
+  payload: {
+    table,
+    columnPositions,
+  },
+});
+
+export const swapColumns = (
+  table: string,
+  column1: string,
+  column2: string,
+) => ({
+  type: SWAP_COLUMNS,
+  payload: {
+    table,
+    column1,
+    column2,
   },
 });

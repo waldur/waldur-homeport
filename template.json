@@ -475,13 +475,13 @@
     "description": "marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx",
     "message": "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
   },
-  "Aggreement date": {
-    "description": "user/support/UserList.tsx",
-    "message": "Aggreement date"
-  },
   "Agree and proceed": {
     "description": "administration/branding/BrandingForm.tsx, user/support/UserEditForm.tsx",
     "message": "Agree and proceed"
+  },
+  "Agreement date": {
+    "description": "user/support/UserList.tsx",
+    "message": "Agreement date"
   },
   "Agreement number": {
     "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, customer/list/CustomerList.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, invoices/details/BillingRecordDetails.tsx, user/affiliations/BaseOrganizationsList.tsx",
@@ -4390,6 +4390,10 @@
   "Invoiced to": {
     "description": "marketplace/deploy/CheckoutFooter.tsx",
     "message": "Invoiced to"
+  },
+  "Is Service Desk username the same as in Waldur": {
+    "description": "administration/service-desk/AtlassianSettings.tsx",
+    "message": "Is Service Desk username the same as in Waldur"
   },
   "Is active": {
     "description": "openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx",
@@ -8854,6 +8858,10 @@
   "Short title for the project, which explains the project goal as much as possible.": {
     "description": "proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx",
     "message": "Short title for the project, which explains the project goal as much as possible."
+  },
+  "Should extra issue field mappings be applied": {
+    "description": "administration/service-desk/AtlassianSettings.tsx",
+    "message": "Should extra issue field mappings be applied"
   },
   "Show all": {
     "description": "marketplace/resources/actions/ActionsPopover.tsx",

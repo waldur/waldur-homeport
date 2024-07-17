@@ -63,28 +63,33 @@ export const UserProposalsList: FC = () => {
       title: translate('Proposal'),
       render: ({ row }) => <>{row.name}</>,
       keys: ['name'],
+      id: 'proposal',
     },
     {
       title: translate('Call'),
       render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
       keys: ['call_name'],
+      id: 'call',
     },
     {
       title: translate('Ending'),
       render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
       keys: ['round'],
+      id: 'ending',
     },
     {
       title: translate('State'),
       render: ({ row }) => <ProposalBadge state={row.state} />,
       keys: ['state'],
       orderField: 'state',
+      id: 'state',
     },
     {
       title: translate('UUID'),
       render: ({ row }) => <>{row.uuid}</>,
       keys: ['uuid'],
       optional: true,
+      id: 'uuid',
     },
     {
       title: translate('Created'),
@@ -92,14 +97,17 @@ export const UserProposalsList: FC = () => {
       keys: ['created'],
       orderField: 'created',
       optional: true,
+      id: 'created',
     },
     {
       title: translate('Duration in days'),
       render: ({ row }) => <>{row.duration_in_days || DASH_ESCAPE_CODE}</>,
       keys: ['duration_in_days'],
       optional: true,
+      id: 'duration_in_days',
     },
   ];
+
   if (isFeatureVisible(ProjectFeatures.oecd_fos_2007_code)) {
     columns.push({
       title: translate('OECD FoS code'),
@@ -112,6 +120,7 @@ export const UserProposalsList: FC = () => {
       ),
       optional: true,
       keys: ['oecd_fos_2007_code', 'oecd_fos_2007_label'],
+      id: 'oecd_fos_code',
     });
   }
 

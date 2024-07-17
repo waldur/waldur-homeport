@@ -11,8 +11,8 @@ import { ErrorView } from '@waldur/navigation/header/search/ErrorView';
 
 import { OPTIONAL_COLUMN_ACTIONS_KEY } from './constants';
 import { GridBody } from './GridBody';
-import './Table.scss';
 import { HiddenActionsMessage } from './HiddenActionsMessage';
+import './Table.scss';
 import { TableBody } from './TableBody';
 import { TableButtons } from './TableButtons';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -83,7 +83,9 @@ export interface TableProps<RowType = any> extends TableState {
   validate?: BaseFieldProps['validate'];
   footer?: React.ReactNode;
   hasOptionalColumns?: boolean;
-  toggleColumn?(index, column, value?): void;
+  toggleColumn?(id, column, value?): void;
+  initColumnPositions?(ids: string[]): void;
+  swapColumns?(column1: string, column2: string): void;
   initialMode?: 'grid' | 'table';
   standalone?: boolean;
   hideClearFilters?: boolean;
@@ -94,7 +96,7 @@ const TableComponent = (props: TableProps) => {
     () =>
       props.hasOptionalColumns
         ? props.columns.filter(
-            (column, index) => !column.keys || props.activeColumns[index],
+            (column) => !column.keys || props.activeColumns[column.id],
           )
         : props.columns,
     [props.activeColumns, props.columns],
@@ -127,6 +129,8 @@ const TableComponent = (props: TableProps) => {
           onSelectAllRows={props.selectAllRows}
           selectedRows={props.selectedRows}
           fieldType={props.fieldType}
+          columnPositions={props.columnPositions}
+          hasOptionalColumns={props.hasOptionalColumns}
         />
       )}
       <TableBody
@@ -145,6 +149,8 @@ const TableComponent = (props: TableProps) => {
         fieldType={props.fieldType}
         fieldName={props.fieldName}
         validate={props.validate}
+        columnPositions={props.columnPositions}
+        hasOptionalColumns={props.hasOptionalColumns}
       />
     </table>
   );
@@ -461,6 +467,7 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     columns,
     toggleColumn,
     hoverableRow,
+    initColumnPositions,
   } = props;
 
   useEffect(() => {
@@ -478,13 +485,19 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
 
   useEffect(() => {
     if (columns?.length && hasOptionalColumns) {
-      columns.forEach((column, index) => {
-        toggleColumn(index, column, column.optional ? false : true);
+      columns.forEach((column) => {
+        toggleColumn(column.id, column, column.optional ? false : true);
       });
       // Add actions column to the optional columns
       if (hoverableRow) {
         toggleColumn(OPTIONAL_COLUMN_ACTIONS_KEY, { keys: [] }, true);
       }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (columns?.length) {
+      initColumnPositions(columns.map((column) => column.id));
     }
   }, []);
 

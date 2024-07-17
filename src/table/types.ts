@@ -49,6 +49,7 @@ export interface TableOptionsType<RowType = any> {
 }
 
 export interface Column<RowType = any> {
+  id?: string;
   title: ReactNode;
   render: React.ComponentType<{ row: RowType }>;
   className?: string;
@@ -93,6 +94,7 @@ export interface TableState {
   selectedRows?: any[];
   firstFetch?: boolean;
   activeColumns: Record<string, boolean>;
+  columnPositions: string[];
 }
 
 export interface Sorting {
