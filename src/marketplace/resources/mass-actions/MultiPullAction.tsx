@@ -1,3 +1,4 @@
+import { GitPullRequest } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -9,6 +10,7 @@ import {
   TENANT_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 const apiMethods = {
   [INSTANCE_TYPE]: pullInstance,
@@ -61,12 +63,11 @@ export const MultiPullAction = ({ rows, refetch }) => {
     return null;
   }
   return (
-    <button
-      disabled={validResources.length === 0}
-      className="btn btn-primary me-3"
-      onClick={callback}
-    >
-      {translate('Pull')}
-    </button>
+    <ActionItem
+      title={translate('Pull')}
+      action={callback}
+      disabled={validResources.length !== rows.length}
+      iconNode={<GitPullRequest />}
+    />
   );
 };

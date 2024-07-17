@@ -1,11 +1,10 @@
 import { useCallback, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { INSTANCE_TYPE } from '@waldur/openstack/constants';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { parseValidators } from '@waldur/resource/actions/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -67,15 +66,11 @@ export const VirtualMachineMultiAction = ({
     return null;
   }
   return (
-    <Tip id="VirtualMachineMultiAction" label={title}>
-      <Button
-        disabled={validVms.length === 0}
-        variant="primary"
-        className="me-3"
-        onClick={callback}
-      >
-        <span className="svg-icon svg-icon-2">{iconNode}</span>
-      </Button>
-    </Tip>
+    <ActionItem
+      title={title}
+      action={callback}
+      disabled={validVms.length === 0}
+      iconNode={iconNode}
+    />
   );
 };

@@ -496,7 +496,7 @@
     "message": "Alert"
   },
   "All actions": {
-    "description": "marketplace/resources/ResourceActions.tsx",
+    "description": "marketplace/resources/ResourceActions.tsx, marketplace/resources/mass-actions/ResourceMultiSelectAction.tsx",
     "message": "All actions"
   },
   "All calls": {
@@ -4390,6 +4390,10 @@
   "Invoiced to": {
     "description": "marketplace/deploy/CheckoutFooter.tsx",
     "message": "Invoiced to"
+  },
+  "Is Service Desk username the same as in Waldur": {
+    "description": "administration/service-desk/AtlassianSettings.tsx",
+    "message": "Is Service Desk username the same as in Waldur"
   },
   "Is active": {
     "description": "openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx",
@@ -8854,6 +8858,10 @@
   "Short title for the project, which explains the project goal as much as possible.": {
     "description": "proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx",
     "message": "Short title for the project, which explains the project goal as much as possible."
+  },
+  "Should extra issue field mappings be applied": {
+    "description": "administration/service-desk/AtlassianSettings.tsx",
+    "message": "Should extra issue field mappings be applied"
   },
   "Show all": {
     "description": "marketplace/resources/actions/ActionsPopover.tsx",
