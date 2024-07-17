@@ -1,6 +1,6 @@
 import { CaretDown, CaretRight } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import React, { FunctionComponent, useCallback } from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
@@ -26,18 +26,37 @@ type TableBodyProps = Pick<
   | 'fieldType'
   | 'fieldName'
   | 'validate'
+  | 'columnPositions'
+  | 'hasOptionalColumns'
 >;
 
-const TableCells = ({ row, columns }) => (
+const TableCells = ({
+  row,
+  columns,
+  columnsMap,
+  columnPositions,
+  hasOptionalColumns,
+}) => (
   <>
-    {columns.map(
-      (column, colIndex) =>
-        (column.visible ?? true) && (
-          <td key={colIndex} className={column.className}>
-            {React.createElement(column.render, { row })}
-          </td>
-        ),
-    )}
+    {hasOptionalColumns
+      ? columnPositions
+          .filter((id) => columnsMap[id])
+          .map(
+            (id) =>
+              (columnsMap[id].visible ?? true) && (
+                <td key={id} className={columnsMap[id].className}>
+                  {React.createElement(columnsMap[id].render, { row })}
+                </td>
+              ),
+          )
+      : columns.map(
+          (column, colIndex) =>
+            (column.visible ?? true) && (
+              <td key={colIndex} className={column.className}>
+                {React.createElement(column.render, { row })}
+              </td>
+            ),
+        )}
   </>
 );
 
@@ -57,7 +76,18 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   fieldType,
   fieldName,
   validate,
+  columnPositions,
+  hasOptionalColumns,
 }) => {
+  const columnsMap = useMemo(
+    () =>
+      columns.reduce(
+        (result, column) => ({ ...result, [column.id]: column }),
+        {},
+      ),
+    [columns],
+  );
+
   const trClick = useCallback(
     (row, index, e) => {
       if (!expandableRow) return;
@@ -170,7 +200,13 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             )}
           </td>
         )}
-        <TableCells row={row} columns={columns} />
+        <TableCells
+          row={row}
+          columns={columns}
+          columnsMap={columnsMap}
+          columnPositions={columnPositions}
+          hasOptionalColumns={hasOptionalColumns}
+        />
         {hoverableRow && (
           <td className="row-actions">
             <div>{React.createElement(hoverableRow, { row, fetch })}</div>

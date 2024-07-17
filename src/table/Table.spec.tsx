@@ -1,4 +1,4 @@
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { TableLoadingSpinnerContainer } from '@waldur/table/TableLoadingSpinnerContainer';
@@ -18,6 +18,7 @@ describe('Table', () => {
       loading: false,
     },
     activeColumns: {},
+    columnPositions: [],
   };
 
   describe('special states', () => {
@@ -84,6 +85,7 @@ describe('Table', () => {
             },
           ]}
           activeColumns={{}}
+          columnPositions={[]}
         />,
       );
     });

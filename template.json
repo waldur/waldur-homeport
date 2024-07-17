@@ -475,13 +475,13 @@
     "description": "marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx",
     "message": "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
   },
-  "Aggreement date": {
-    "description": "user/support/UserList.tsx",
-    "message": "Aggreement date"
-  },
   "Agree and proceed": {
     "description": "administration/branding/BrandingForm.tsx, user/support/UserEditForm.tsx",
     "message": "Agree and proceed"
+  },
+  "Agreement date": {
+    "description": "user/support/UserList.tsx",
+    "message": "Agreement date"
   },
   "Agreement number": {
     "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, customer/list/CustomerList.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, invoices/details/BillingRecordDetails.tsx, user/affiliations/BaseOrganizationsList.tsx",

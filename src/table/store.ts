@@ -1,3 +1,4 @@
+import { arrayMove } from '@dnd-kit/sortable';
 import { isEqual } from 'lodash';
 import { Reducer } from 'redux';
 
@@ -32,6 +33,7 @@ const INITIAL_STATE: TableState = {
   selectedRows: [],
   firstFetch: true,
   activeColumns: {},
+  columnPositions: [],
 };
 
 const deleteEntity = (state, action) => {
@@ -275,16 +277,33 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         ...state,
         activeColumns: {
           ...state.activeColumns,
-          [action.payload.index]:
+          [action.payload.id]:
             action.payload.value === false
               ? false
               : action.payload.value === true
                 ? action.payload.column.keys
-                : state.activeColumns[action.payload.index]
+                : state.activeColumns[action.payload.id]
                   ? false
                   : action.payload.column.keys,
         },
       };
+
+    case actions.INIT_COLUMN_POSITIONS: {
+      return {
+        ...state,
+        columnPositions: action.payload.columnPositions,
+      };
+    }
+
+    case actions.SWAP_COLUMNS: {
+      const oldIndex = state.columnPositions.indexOf(action.payload.column1);
+      const newIndex = state.columnPositions.indexOf(action.payload.column2);
+
+      return {
+        ...state,
+        columnPositions: arrayMove(state.columnPositions, oldIndex, newIndex),
+      };
+    }
 
     default:
       return state;

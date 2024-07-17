@@ -1,6 +1,6 @@
 import { CaretDown, CaretUp, CaretUpDown } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -22,6 +22,8 @@ interface TableHeaderProps {
   selectedRows?: any[];
   fieldType?: TableProps['fieldType'];
   activeColumns?: Record<string, boolean>;
+  columnPositions: string[];
+  hasOptionalColumns?: boolean;
 }
 
 function handleOrdering(currentSorting: Sorting, field: string): Sorting {
@@ -66,6 +68,7 @@ const TableTh = ({ column, onSortClick, currentSorting }) => (
 
 export const TableHeader: FC<TableHeaderProps> = ({
   columns,
+  columnPositions,
   onSortClick,
   currentSorting,
   expandableRow = false,
@@ -75,8 +78,18 @@ export const TableHeader: FC<TableHeaderProps> = ({
   onSelectAllRows,
   selectedRows,
   fieldType,
+  hasOptionalColumns,
 }) => {
   const isAllSelected = selectedRows?.length >= rows?.length;
+
+  const columnMap = useMemo(
+    () =>
+      columns.reduce(
+        (result, column) => ({ ...result, [column.id]: column }),
+        {},
+      ),
+    [columns],
+  );
 
   return (
     <thead>
@@ -93,17 +106,31 @@ export const TableHeader: FC<TableHeaderProps> = ({
           </th>
         ) : null}
         {expandableRow && <th style={{ width: '10px' }} />}
-        {columns.map(
-          (column, index) =>
-            (column.visible ?? true) && (
-              <TableTh
-                key={index}
-                column={column}
-                onSortClick={onSortClick}
-                currentSorting={currentSorting}
-              />
-            ),
-        )}
+        {hasOptionalColumns
+          ? columnPositions
+              .filter((id) => columnMap[id])
+              .map(
+                (id) =>
+                  (columnMap[id].visible ?? true) && (
+                    <TableTh
+                      key={id}
+                      column={columnMap[id]}
+                      onSortClick={onSortClick}
+                      currentSorting={currentSorting}
+                    />
+                  ),
+              )
+          : columns.map(
+              (column, index) =>
+                (column.visible ?? true) && (
+                  <TableTh
+                    key={index}
+                    column={column}
+                    onSortClick={onSortClick}
+                    currentSorting={currentSorting}
+                  />
+                ),
+            )}
         {showActions ? (
           <th className="header-actions">{translate('Actions')}</th>
         ) : null}

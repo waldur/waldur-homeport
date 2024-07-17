@@ -211,8 +211,17 @@ export const useTable = (options: TableOptionsType) => {
     [dispatch, table],
   );
   const toggleColumn = useCallback(
-    (index: number, column: any, value?: boolean) =>
-      dispatch(actions.toggleColumn(table, index, column, value)),
+    (id: string, column: any, value?: boolean) =>
+      dispatch(actions.toggleColumn(table, id, column, value)),
+    [dispatch, table],
+  );
+  const initColumnPositions = useCallback(
+    (ids: string[]) => dispatch(actions.initColumnPositions(table, ids)),
+    [dispatch, table],
+  );
+  const swapColumns = useCallback(
+    (column1: string, column2: string) =>
+      dispatch(actions.swapColumns(table, column1, column2)),
     [dispatch, table],
   );
 
@@ -238,6 +247,8 @@ export const useTable = (options: TableOptionsType) => {
     selectAllRows,
     resetSelection,
     toggleColumn,
+    initColumnPositions,
+    swapColumns,
     ...tableState,
     rows,
     alterTitle,

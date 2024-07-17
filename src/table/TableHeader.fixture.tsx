@@ -15,6 +15,7 @@ export const renderWrapper = (columns, currentSorting?, expandableRow?) =>
       columns={columns}
       currentSorting={currentSorting}
       expandableRow={expandableRow}
+      columnPositions={columns.map((c) => c.id)}
     />,
     { attachTo: document.createElement('table') },
   );

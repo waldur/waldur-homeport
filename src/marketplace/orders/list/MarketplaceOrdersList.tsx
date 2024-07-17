@@ -42,33 +42,39 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
         />
       ),
       keys: ['attributes'],
+      id: 'name',
     },
     {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
       keys: ['created'],
+      id: 'created',
     },
     {
       title: translate('Created by'),
       render: ({ row }) => row.created_by_full_name || row.created_by_username,
       keys: ['created_by_full_name', 'created_by_username'],
+      id: 'created_by',
     },
     {
       title: translate('State'),
       render: ({ row }) => row.state,
       orderField: 'state',
       keys: ['state'],
+      id: 'state',
     },
     {
       title: translate('Project'),
       render: ({ row }) => row.project_name,
       keys: ['project_name'],
+      id: 'project',
     },
     {
       title: translate('Client organization'),
       render: ({ row }) => row.customer_name,
       keys: ['customer_name'],
+      id: 'client_organization',
     },
     {
       title: translate('Approved at'),
@@ -78,6 +84,7 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
           : DASH_ESCAPE_CODE,
       orderField: 'consumer_reviewed_at',
       keys: ['consumer_reviewed_at'],
+      id: 'approved_at',
     },
     {
       title: translate('Approved by'),
@@ -86,9 +93,9 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
         row.consumer_reviewed_by_username ||
         DASH_ESCAPE_CODE,
       keys: ['consumer_reviewed_by_full_name', 'consumer_reviewed_by_username'],
+      id: 'approved_by',
     },
   ];
-
   useMarketplacePublicTabs();
 
   return (
