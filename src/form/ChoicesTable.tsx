@@ -6,8 +6,8 @@ import { Tip } from '@waldur/core/Tooltip';
 import {
   CustomComponentInputProps,
   FilterOptions,
-  SelectDialogFieldColumn,
   SelectDialogFieldChoice,
+  SelectDialogFieldColumn,
 } from '@waldur/form/types';
 
 import './ChoicesTable.scss';
@@ -97,11 +97,11 @@ export const ChoicesTable: FC<ChoicesTableProps> = (props) => {
 
   const choices = useMemo(() => {
     if (props.filterOptions && filter) {
-      return choices.filter(
+      return props.choices.filter(
         (choice) => choice[props.filterOptions.name] === filter,
       );
     }
-    return choices;
+    return props.choices;
   }, [props.choices]);
 
   return (
