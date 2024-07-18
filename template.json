@@ -2560,7 +2560,7 @@
     "message": "Deploy Longhorn block storage after cluster is deployed"
   },
   "Deploy": {
-    "description": "marketplace/common/OfferingCard.tsx, marketplace/offerings/details/PublicOfferingDetails.tsx, marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx",
+    "description": "marketplace/category/PublicOfferingsList.tsx, marketplace/common/OfferingCard.tsx, marketplace/offerings/details/PublicOfferingDetails.tsx, marketplace/offerings/details/PublicOfferingPricingPlanItem.tsx",
     "message": "Deploy"
   },
   "Deployment ID": {
