@@ -2,7 +2,6 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -21,9 +20,10 @@ import background from './proposal-calls.png';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { formatCallState, getRoundsWithStatus } from './utils';
 
-const mapStateToFilter = createSelector(
-  getFormValues(CALL_FILTER_FORM_ID),
-  (filters: any) => {
+const usePublicCallsFilter = (offering_uuid?: string) => {
+  const filters = useSelector(getFormValues(CALL_FILTER_FORM_ID)) as any;
+
+  return useMemo(() => {
     const result: Record<string, any> = {};
     if (filters) {
       if (filters.state) {
@@ -33,22 +33,25 @@ const mapStateToFilter = createSelector(
         result.has_active_round = filters.has_active_round;
       }
     }
+    if (offering_uuid) {
+      result.offering_uuid = offering_uuid;
+    }
     return result;
-  },
-);
+  }, [filters, offering_uuid]);
+};
 
 export const PublicCallsPage: FunctionComponent = () => {
-  const filter = useSelector(mapStateToFilter);
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
   useFullPage();
 
+  const filter = usePublicCallsFilter(offering_uuid);
+
   const tableProps = useTable({
     table: 'PublicCallsList',
-    fetchData: createFetcher('proposal-public-calls', {
-      params: { ...filter, offering_uuid: offering_uuid },
-    }),
+    fetchData: createFetcher('proposal-public-calls'),
+    filter,
     queryField: 'name',
   });
 
