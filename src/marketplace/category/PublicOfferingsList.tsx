@@ -6,12 +6,30 @@ import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { OfferingCard } from '../common/OfferingCard';
+import { OfferingLink } from '../links/OfferingLink';
 import { AdminOfferingsFilter } from '../offerings/admin/AdminOfferingsFilter';
 import { mapStateToFilter } from '../offerings/admin/AdminOfferingsList';
 import { OfferingStateField } from '../offerings/OfferingStateField';
+import { isOfferingRestrictedToProject } from '../offerings/utils';
 import { Offering } from '../types';
+
+const RowActions = ({ row }) => {
+  const user = useSelector(getUser);
+  const { isAllowed } = isOfferingRestrictedToProject(row, user);
+
+  return (
+    <OfferingLink
+      offering_uuid={row.uuid}
+      className="btn btn-outline btn-outline-dark btn-sm border-gray-400 btn-active-secondary px-2"
+      disabled={!isAllowed}
+    >
+      {translate('Deploy')}
+    </OfferingLink>
+  );
+};
 
 export const PublicOfferingsList: FunctionComponent<{
   filter?;
@@ -84,6 +102,7 @@ export const PublicOfferingsList: FunctionComponent<{
       initialMode={initialMode === 'table' ? 'table' : 'grid'}
       standalone
       title={translate('Offerings')}
+      hoverableRow={RowActions}
     />
   );
 };
