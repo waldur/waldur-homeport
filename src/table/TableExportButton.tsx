@@ -17,12 +17,13 @@ export const TableExportButton: FunctionComponent<TableExportButtonProps> = ({
 }) => {
   return (
     <Button
-      variant="light"
+      variant="outline-default"
+      className="btn-outline"
       onClick={() => openExportDialog('clipboard', props)}
       disabled={props.rows?.length === 0}
     >
-      <span className="svg-icon svg-icon-2">
-        <Export />
+      <span className="svg-icon svg-icon-1">
+        <Export weight="bold" />
       </span>
       {translate('Export')}
     </Button>

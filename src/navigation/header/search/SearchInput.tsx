@@ -38,7 +38,7 @@ export const SearchInput = ({
           name="fakepasswordremembered"
         />
         <span className="position-absolute top-50 translate-middle-y ms-4">
-          <MagnifyingGlass weight="bold" size={18} className="text-gray-700" />
+          <MagnifyingGlass weight="bold" size={18} className="text-grey-500" />
         </span>
         <input
           type="text"
@@ -50,7 +50,7 @@ export const SearchInput = ({
         />
         {show && isLoading ? (
           <span className="position-absolute top-50 end-0 translate-middle-y lh-0 me-4">
-            <span className="spinner-border h-15px w-15px align-middle text-gray-700" />
+            <span className="spinner-border h-15px w-15px align-middle text-grey-500" />
           </span>
         ) : null}
         <button
@@ -61,7 +61,7 @@ export const SearchInput = ({
           )}
           onClick={() => setQuery('')}
         >
-          <X weight="bold" size={16} className="text-gray-700" />
+          <X weight="bold" size={16} className="text-grey-500" />
         </button>
 
         {/* Filters toggle */}

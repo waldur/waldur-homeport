@@ -1,4 +1,5 @@
 import React from 'react';
+import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -11,6 +12,7 @@ interface ProjectFilterProps {
   customer_uuid?: string;
   placeholder?: string;
   isDisabled?: boolean;
+  reactSelectProps?: Partial<SelectProps>;
 }
 
 const getOptionLabel = (option) => (
@@ -42,6 +44,7 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
         isDisabled={props.isDisabled}
         className="metronic-select-container"
         classNamePrefix="metronic-select"
+        {...props.reactSelectProps}
       />
     )}
   />

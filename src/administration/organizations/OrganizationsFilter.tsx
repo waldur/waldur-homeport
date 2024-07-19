@@ -5,6 +5,7 @@ import { OrganizationGroupFilter } from '@waldur/administration/organizations/Or
 import { AccountingRunningField } from '@waldur/customer/list/AccountingRunningField';
 import { SelectOrganizationGroupFieldPure } from '@waldur/customer/list/SelectOrganizationGroupField';
 import { ServiceProviderFilter } from '@waldur/customer/list/ServiceProviderFilter';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { CUSTOMERS_FILTER_FORM_ID } from '@waldur/user/constants';
@@ -16,7 +17,7 @@ const PureSupportCustomerFilter: FunctionComponent = () => (
       name="accounting_is_running"
       badgeValue={(value) => value?.label}
     >
-      <AccountingRunningField />
+      <AccountingRunningField reactSelectProps={REACT_SELECT_TABLE_FILTER} />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Service provider')}
@@ -30,7 +31,9 @@ const PureSupportCustomerFilter: FunctionComponent = () => (
       name="organization_group"
       badgeValue={(value) => value?.name}
     >
-      <SelectOrganizationGroupFieldPure />
+      <SelectOrganizationGroupFieldPure
+        reactSelectProps={REACT_SELECT_TABLE_FILTER}
+      />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Organization group type')}

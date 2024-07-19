@@ -22,7 +22,7 @@ declare global {
       selectTheFirstOptionOfDropdown(): Chainable;
       selectTableFilter(
         label: string,
-        value: string,
+        value?: string,
         apply?: boolean,
         type?: boolean,
       ): Chainable;
@@ -112,27 +112,51 @@ Cypress.Commands.add(
   (label, value, apply = true, type = false) => {
     cy.acceptCookies();
     cy.get('.card-table button.btn-toggle-filters').should('exist').click();
-    cy.get('#kt_drawer_body').within(() => {
-      cy.contains('.filter-toggle .accordion-button', label)
+    let filterType: 'select' | 'checkbox' = 'select'
+    cy.wrap(filterType).as('filterType')
+    cy.get('.card-table .table-filters-menu:not(.column-filter)').within(() => {
+      cy.contains('.menu-link', label)
         .click()
-        .contains('.filter-toggle .accordion-button', label)
-        .parent()
+        .contains('.menu-link', label)
         .parent()
         .within(() => {
-          if (type && value) {
-            cy.get(`.filter-field`).click().type(value);
-          } else {
-            cy.get(`.filter-field`).click();
-          }
+          cy.get('.menu-sub .filter-field > *').then(($el) => {
+            if ($el.hasClass('form-check')) {
+              filterType = 'checkbox';
+              cy.wrap(filterType).as('filterType')
+            }
+          });
+
+          cy.get('@filterType').then(() => {
+            if (filterType === 'checkbox') {
+              cy.get(`.menu-sub .filter-field .form-check input`).click({ force: true });
+            } else if (filterType === 'select') {
+              if (type && value) {
+                cy.get(`.menu-sub .filter-field div[class$="-control"]`).click().type(value);
+              } else {
+                cy.get(`.menu-sub .filter-field div[class$="-control"]`).click();
+              }
+            }
+          })
         });
     });
-    if (value === null || value === undefined) {
-      cy.selectTheFirstOptionOfDropdown();
-    } else {
-      cy.get('*div[id^="react-select"]').contains(value).click({ force: true });
-    }
+    
+    cy.get('@filterType').then(() => {
+      if (filterType === 'select') {
+        if (value === null || value === undefined) {
+          cy.selectTheFirstOptionOfDropdown();
+        } else {
+          cy.get('*div[id^="react-select"]').contains(value).click({ force: true });
+        }
+      }
+    })
     if (apply) {
-      cy.contains('#kt_drawer_footer button', 'Apply').click();
+      cy.get('.card-table .table-filters-menu:not(.column-filter)').within(() => {
+        cy.contains('.menu-link', label)
+          .parent()
+          .contains('.filter-footer button', 'Apply')
+          .click();
+      });
       // Make sure the fetch fn is performed
       cy.get('[data-cy=loading-spinner]')
         .first()
@@ -140,9 +164,7 @@ Cypress.Commands.add(
           //@ts-ignore
           const className = $el[0].parentNode.className;
           if (className.indexOf('fa-spin') < 0) {
-            cy.get('[data-cy=loading-spinner]')
-              .first()
-              .click();
+            cy.get('[data-cy=loading-spinner]').first().click();
           }
         });
     }

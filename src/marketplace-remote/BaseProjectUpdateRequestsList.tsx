@@ -25,9 +25,14 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
         {
           title: translate('Organization'),
           render: ({ row }) => row.customer_name,
+          filter: 'organization',
         },
         { title: translate('Project'), render: ({ row }) => row.old_name },
-        { title: translate('State'), render: ({ row }) => row.state },
+        {
+          title: translate('State'),
+          render: ({ row }) => row.state,
+          filter: 'state',
+        },
         {
           title: translate('Created'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,

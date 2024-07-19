@@ -8,6 +8,7 @@ import {
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
 import { SelectField } from '@waldur/form';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -40,6 +41,7 @@ const PureNotificationFilter: FunctionComponent<{ form }> = ({ form }) => {
             noUpdateOnBlur={true}
             simpleValue={true}
             isClearable={true}
+            {...REACT_SELECT_TABLE_FILTER}
           />
         )}
       />

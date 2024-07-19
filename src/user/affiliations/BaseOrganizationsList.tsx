@@ -111,6 +111,7 @@ export const BaseOrganizationsList: FunctionComponent<{
       ),
       keys: ['organization_group_name', 'organization_group_parent_name'],
       optional: true,
+      filter: 'organization_group',
       id: 'organization_group',
     },
     {
@@ -248,6 +249,7 @@ export const BaseOrganizationsList: FunctionComponent<{
       ),
       keys: ['is_service_provider'],
       optional: true,
+      filter: 'is_service_provider',
       id: 'is_service_provider',
     },
   ];

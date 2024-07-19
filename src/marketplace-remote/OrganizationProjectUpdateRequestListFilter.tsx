@@ -1,5 +1,6 @@
 import { reduxForm } from 'redux-form';
 
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -14,7 +15,7 @@ const Filter = () => (
       badgeValue={(value) => value?.name}
       ellipsis={false}
     >
-      <OrganizationAutocomplete />
+      <OrganizationAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
     </TableFilterItem>
     <TableFilterItem title={translate('State')} name="state">
       <RequestStateFilter />

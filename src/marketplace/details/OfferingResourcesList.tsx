@@ -80,6 +80,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     {
       title: translate('State'),
       render: ({ row }) => <ResourceStateField resource={row} />,
+      filter: 'state',
     },
   ];
 

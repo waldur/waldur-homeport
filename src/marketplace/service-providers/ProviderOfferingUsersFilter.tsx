@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -27,7 +28,10 @@ const PureProviderOfferingUsersFilter: FunctionComponent<{}> = () => {
       name="offering"
       badgeValue={(value) => value.name}
     >
-      <OfferingAutocomplete offeringFilter={offeringFilter} />
+      <OfferingAutocomplete
+        offeringFilter={offeringFilter}
+        reactSelectProps={REACT_SELECT_TABLE_FILTER}
+      />
     </TableFilterItem>
   );
 };

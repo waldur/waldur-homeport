@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
 import { AsyncPaginate } from '@waldur/form/themed-select';
@@ -9,6 +10,7 @@ interface OrganizationAutocompleteProps {
   label?: string;
   placeholder?: string;
   noOptionsMessage?: string;
+  reactSelectProps?: Partial<SelectProps>;
 }
 
 export const OrganizationAutocomplete: FunctionComponent<
@@ -36,6 +38,7 @@ export const OrganizationAutocomplete: FunctionComponent<
         isClearable={true}
         className="metronic-select-container"
         classNamePrefix="metronic-select"
+        {...props.reactSelectProps}
       />
     )}
   />

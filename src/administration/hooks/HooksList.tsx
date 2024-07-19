@@ -70,6 +70,7 @@ export const HooksList: FunctionComponent = () => {
           title: translate('State'),
           className: 'text-center all',
           render: StateField,
+          filter: 'state',
         },
         {
           title: translate('Method'),

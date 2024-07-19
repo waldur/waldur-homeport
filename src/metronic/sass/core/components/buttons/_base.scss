@@ -8,7 +8,9 @@
   outline: none !important;
 
   // Reset focus shadow
-  &:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(:focus) {
+  &:not(.btn-shadow):not(.shadow):not(.shadow-sm):not(.shadow-lg):not(
+      .btn-outline.show
+    ):not(:focus) {
     box-shadow: none !important;
   }
 

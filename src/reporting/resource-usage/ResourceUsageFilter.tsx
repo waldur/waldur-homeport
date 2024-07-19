@@ -5,6 +5,7 @@ import { reduxForm, formValueSelector } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { AccountingPeriodField } from '@waldur/customer/list/AccountingPeriodField';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { PeriodOption } from '@waldur/form/types';
 import { makeLastTwelveMonthsFilterPeriods } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
@@ -30,14 +31,17 @@ const PureResourceUsageFilter: FunctionComponent<ResourceUsageFilterProps> = (
       badgeValue={(value) => value?.label}
       ellipsis={false}
     >
-      <AccountingPeriodField options={props.options} />
+      <AccountingPeriodField
+        options={props.options}
+        reactSelectProps={REACT_SELECT_TABLE_FILTER}
+      />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Organization')}
       name="organization"
       badgeValue={(value) => value?.name}
     >
-      <OrganizationAutocomplete />
+      <OrganizationAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Project')}
@@ -46,6 +50,7 @@ const PureResourceUsageFilter: FunctionComponent<ResourceUsageFilterProps> = (
     >
       <ProjectFilter
         customer_uuid={props.customer ? props.customer.uuid : null}
+        reactSelectProps={REACT_SELECT_TABLE_FILTER}
       />
     </TableFilterItem>
     <TableFilterItem
@@ -53,7 +58,10 @@ const PureResourceUsageFilter: FunctionComponent<ResourceUsageFilterProps> = (
       name="offering"
       badgeValue={(value) => `${value.category_title} / ${value.name}`}
     >
-      <OfferingAutocomplete offeringFilter={{ shared: true }} />
+      <OfferingAutocomplete
+        offeringFilter={{ shared: true }}
+        reactSelectProps={REACT_SELECT_TABLE_FILTER}
+      />
     </TableFilterItem>
   </>
 );

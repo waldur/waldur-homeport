@@ -34,6 +34,7 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
     {
       title: translate('Offering'),
       render: ({ row }) => row.offering_name,
+      filter: 'offering',
     },
     {
       title: translate('User'),

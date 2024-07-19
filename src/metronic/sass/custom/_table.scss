@@ -262,3 +262,69 @@
     }
   }
 }
+
+// Filters menu and its inputs
+.card.card-table .table-filters-menu {
+  white-space: normal;
+
+  .filter-field {
+    padding-top: 0;
+  }
+
+  // Select
+  .metronic-select-container {
+    margin: 0 -1rem -0.65rem;
+
+    .metronic-select {
+      &__control {
+        border-radius: 0;
+        border: 0;
+        border-bottom: 1px solid $border-color;
+        padding-bottom: 0.5rem;
+        box-shadow: none;
+      }
+
+      &__dropdown-indicator {
+        display: none;
+      }
+    }
+  }
+
+  // Select Menu/List
+  .metronic-select__menu {
+    position: relative;
+    box-shadow: unset;
+    margin: 0;
+
+    .metronic-select__option {
+      padding-top: 2px;
+      padding-bottom: 2px;
+      height: 50px;
+
+      > * {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+    }
+  }
+
+  // Column filter
+  &.column-filter {
+    text-transform: none;
+    text-align: start;
+    height: 0;
+    width: 0;
+
+    .menu-link {
+      display: none;
+    }
+  }
+}
+.card.card-table th:not(:first-child) .table-filters-menu.column-filter {
+  .menu-sub-dropdown {
+    margin-left: -125px !important;
+  }
+}

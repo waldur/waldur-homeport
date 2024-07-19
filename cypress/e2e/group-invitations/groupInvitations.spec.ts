@@ -19,7 +19,7 @@ describe('Group invitations', () => {
       )
       .intercept(
         'GET',
-        '/api/user-group-invitations/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf',
+        '/api/user-group-invitations/?page=1&page_size=10&is_active=&customer_uuid=895e38d197e748459189f19285119edf',
         {
           fixture: 'group-invitations/user-group-invitations.json',
         },
@@ -54,11 +54,7 @@ describe('Group invitations', () => {
   });
 
   it('When click Show only active group invitations check box then show only active invitations items', () => {
-    cy.get('.table-filter')
-      .contains('Show only active group invitations')
-      .parent()
-      .find('input[type="checkbox"]')
-      .click()
+    cy.selectTableFilter('Group invitations')
       .get('table tbody tr')
       .should('have.length', 1);
   });

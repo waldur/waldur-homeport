@@ -9,6 +9,7 @@ import {
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
@@ -39,14 +40,19 @@ const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => {
         name="offering"
         badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
       >
-        <OfferingAutocomplete offeringFilter={props.offeringFilter} />
+        <OfferingAutocomplete
+          offeringFilter={props.offeringFilter}
+          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Client organization')}
         name="organization"
         badgeValue={(value) => value?.name}
       >
-        <OrganizationAutocomplete />
+        <OrganizationAutocomplete
+          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Category')}
@@ -61,6 +67,7 @@ const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => {
       <TableFilterItem
         title={translate('Include terminated')}
         name="include_terminated"
+        badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
         <Field
           name="include_terminated"

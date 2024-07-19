@@ -74,7 +74,7 @@ describe('Users', () => {
 
   it('should full name search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('.form-control-solid.ps-10.form-control[placeholder="Search ..."]')
+      cy.get('.card-table .form-control[placeholder="Search..."]')
         .type('Tara Pierce')
         .get('table tbody tr')
         .should('have.length', 1);
@@ -83,7 +83,7 @@ describe('Users', () => {
 
   it('should username search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('.form-control-solid.ps-10.form-control[placeholder="Search ..."]')
+      cy.get('.card-table .form-control[placeholder="Search..."]')
         .type('0024c6a7885940bbb156e82073bc0244')
         .get('table tbody tr')
         .should('have.length', 1);
@@ -99,7 +99,7 @@ describe('Users', () => {
 
   it('should email search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.get('.form-control-solid.ps-10.form-control[placeholder="Search ..."]')
+      cy.get('.card-table .form-control[placeholder="Search..."]')
         .type('TaraPierce@example.com')
         .get('table tbody tr')
         .should('have.length', 1);

@@ -66,6 +66,7 @@ export const CustomerProposalsList: FC<{}> = () => {
               label={row.call_name}
             />
           ),
+          filter: 'call',
         },
         {
           title: translate('Round'),
@@ -79,6 +80,7 @@ export const CustomerProposalsList: FC<{}> = () => {
         {
           title: translate('State'),
           render: ({ row }) => <ProposalBadge state={row.state} />,
+          filter: 'state',
         },
       ]}
       title={translate('Proposals')}

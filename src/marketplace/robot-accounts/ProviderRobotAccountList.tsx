@@ -49,10 +49,12 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
     {
       title: translate('Organization'),
       render: ({ row }) => row.customer_name,
+      filter: 'customer',
     },
     {
       title: translate('Project'),
       render: ({ row }) => row.project_name,
+      filter: 'project',
     },
     {
       title: translate('Resource'),

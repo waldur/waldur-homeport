@@ -1,6 +1,9 @@
 import { Field } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
+import {
+  AsyncPaginate,
+  REACT_SELECT_TABLE_FILTER,
+} from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { userAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
@@ -18,6 +21,7 @@ export const UserAutocomplete = () => (
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No users')}
         isClearable={true}
+        {...REACT_SELECT_TABLE_FILTER}
       />
     )}
   />

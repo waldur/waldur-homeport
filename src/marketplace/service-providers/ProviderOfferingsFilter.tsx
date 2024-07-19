@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
 import { getInitialValues } from '@waldur/core/filters';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
 import {
@@ -27,7 +28,7 @@ const PureProviderOfferingsFilter: FunctionComponent = () => (
     </TableFilterItem>
 
     <TableFilterItem title={translate('Integration type')} name="offering_type">
-      <OfferingTypeAutocomplete />
+      <OfferingTypeAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
     </TableFilterItem>
   </>
 );

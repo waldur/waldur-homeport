@@ -24,7 +24,7 @@ const INITIAL_STATE: TableState = {
     field: null,
     loading: false,
   },
-  filterPosition: 'sidebar',
+  filterPosition: 'menu',
   filtersStorage: [],
   savedFilters: [],
   selectedSavedFilter: null,
@@ -173,7 +173,8 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         (filter) => filter.name === item.name,
       );
       const isEmpty =
-        !item.value && item.value !== false && !item.value?.length;
+        (!item.value && item.value !== false) ||
+        (Array.isArray(item.value) && !item.value.length);
 
       if (index > -1) {
         if (isEqual(state.filtersStorage[index].value, item.value)) {

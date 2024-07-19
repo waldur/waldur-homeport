@@ -15,6 +15,7 @@ const PureOfferingResourcesFilter: FunctionComponent = () => (
     <TableFilterItem
       title={translate('Include terminated')}
       name="include_terminated"
+      badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
     >
       <Field
         name="include_terminated"

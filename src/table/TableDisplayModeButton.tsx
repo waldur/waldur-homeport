@@ -17,14 +17,18 @@ export const TableDisplayModeButton = (
       }
     >
       <Button
-        variant="light"
-        className="btn-icon btn-toggle-mode"
+        variant="outline-default"
+        className="btn-outline btn-icon btn-toggle-mode"
         onClick={() =>
           props.setDisplayMode(props.mode === 'grid' ? 'table' : 'grid')
         }
       >
-        <span className="svg-icon svg-icon-2">
-          {props.mode === 'grid' ? <List /> : <GridFour />}
+        <span className="svg-icon svg-icon-1">
+          {props.mode === 'grid' ? (
+            <List weight="bold" />
+          ) : (
+            <GridFour weight="bold" />
+          )}
         </span>
       </Button>
     </Tip>

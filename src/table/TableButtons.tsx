@@ -1,4 +1,9 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 import { translate } from '@waldur/i18n';
 
@@ -12,7 +17,12 @@ import { TableDropdownItem } from './types';
 
 import './TableButtons.scss';
 
-export const TableButtons: FunctionComponent<TableProps> = (props) => {
+interface TableButtonsProps extends TableProps {
+  toggleFilterMenu?(): void;
+  showFilterMenuToggle?: boolean;
+}
+
+export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
   const [dropdownActions, setDropdownActions] = useState<TableDropdownItem[]>(
     [],
   );
@@ -56,14 +66,40 @@ export const TableButtons: FunctionComponent<TableProps> = (props) => {
     );
   }, [props.dropdownActions, props.openExportDialog, showExportInDropdown]);
 
+  const onClickFilterButton = useCallback(
+    (event) => {
+      if (props.filterPosition === 'sidebar') {
+        props.openFiltersDrawer(props.filters);
+      } else {
+        if (!props.filtersStorage?.length) {
+          props.toggleFilterMenu();
+        }
+        const parent: HTMLElement = event.target.closest('.card-table');
+        if (!parent) return;
+        const btns = parent.getElementsByClassName(
+          'btn-add-filter',
+        ) as HTMLCollectionOf<HTMLButtonElement>;
+        if (btns?.length) {
+          if (!props.showFilterMenuToggle || props.filtersStorage?.length) {
+            btns.item(0).click();
+            event.stopPropagation();
+          }
+        }
+      }
+    },
+    [
+      props.openFiltersDrawer,
+      props.toggleFilterMenu,
+      props.filterPosition,
+      props.showFilterMenuToggle,
+    ],
+  );
+
   if (!props.selectedRows?.length) {
     return (
       <>
-        {props.filterPosition === 'sidebar' && props.filters && (
-          <TableFilterButton
-            onClick={() => props.openFiltersDrawer(props.filters)}
-          />
-        )}
+        {['menu', 'sidebar'].includes(props.filterPosition) &&
+          props.filters && <TableFilterButton onClick={onClickFilterButton} />}
         {!props.standalone && props.actions}
         {Boolean(props.gridItem && props.columns.length) && (
           <TableDisplayModeButton

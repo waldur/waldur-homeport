@@ -9,6 +9,7 @@ import {
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
 import { SelectField } from '@waldur/form';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { getNativeNameVisible } from '@waldur/store/config';
@@ -34,7 +35,9 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = ({ form }) => {
         name="organization"
         badgeValue={(value) => value?.name}
       >
-        <OrganizationAutocomplete />
+        <OrganizationAutocomplete
+          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        />
       </TableFilterItem>
       <TableFilterItem name="role" title={translate('Role')}>
         <Field
@@ -48,6 +51,7 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = ({ form }) => {
               isMulti={true}
               noUpdateOnBlur={true}
               isClearable={true}
+              {...REACT_SELECT_TABLE_FILTER}
             />
           )}
         />
@@ -71,6 +75,7 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = ({ form }) => {
               noUpdateOnBlur={true}
               simpleValue={true}
               isClearable={true}
+              {...REACT_SELECT_TABLE_FILTER}
             />
           )}
         />

@@ -89,6 +89,7 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
         {
           title: translate('Role in organization'),
           render: RoleField,
+          filter: 'organization_role',
         },
         {
           title: translate('Role expiration'),

@@ -69,6 +69,7 @@ export const UserProposalsList: FC = () => {
       title: translate('Call'),
       render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
       keys: ['call_name'],
+      filter: 'call',
       id: 'call',
     },
     {
@@ -82,6 +83,7 @@ export const UserProposalsList: FC = () => {
       render: ({ row }) => <ProposalBadge state={row.state} />,
       keys: ['state'],
       orderField: 'state',
+      filter: 'state',
       id: 'state',
     },
     {

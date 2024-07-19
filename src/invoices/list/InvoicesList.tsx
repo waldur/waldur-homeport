@@ -44,6 +44,7 @@ export const InvoicesList: FunctionComponent = () => {
     {
       title: translate('State'),
       render: ({ row }) => row.state,
+      filter: 'state',
     },
     {
       title: translate('Invoice date'),

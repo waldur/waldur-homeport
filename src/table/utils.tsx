@@ -182,6 +182,14 @@ export const useTable = (options: TableOptionsType) => {
     (query) => dispatch(actions.setFilterQuery(table, query)),
     [dispatch, table],
   );
+  const setFilter = useCallback(
+    (item: FilterItem) => dispatch(actions.setFilter(table, item)),
+    [dispatch, table],
+  );
+  const applyFiltersFn = useCallback(
+    (apply: boolean) => dispatch(actions.applyFilters(table, apply)),
+    [dispatch, table],
+  );
   const updatePageSize = useCallback(
     (size) => dispatch(actions.updatePageSize(table, size)),
     [dispatch, table],
@@ -239,6 +247,8 @@ export const useTable = (options: TableOptionsType) => {
     renderFiltersDrawer,
     setDisplayMode,
     setQuery,
+    setFilter,
+    applyFiltersFn,
     updatePageSize,
     resetPagination,
     sortList,
@@ -250,6 +260,7 @@ export const useTable = (options: TableOptionsType) => {
     initColumnPositions,
     swapColumns,
     ...tableState,
+    table,
     rows,
     alterTitle,
   };

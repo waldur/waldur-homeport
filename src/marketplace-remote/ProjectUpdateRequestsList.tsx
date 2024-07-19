@@ -38,7 +38,11 @@ export const ProjectUpdateRequestsList: FunctionComponent = () => {
           title: translate('Offering'),
           render: ({ row }) => row.offering_name,
         },
-        { title: translate('State'), render: ({ row }) => row.state },
+        {
+          title: translate('State'),
+          render: ({ row }) => row.state,
+          filter: 'state',
+        },
         {
           title: translate('Created'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,

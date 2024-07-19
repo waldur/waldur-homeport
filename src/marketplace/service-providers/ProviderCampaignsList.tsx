@@ -63,6 +63,7 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
         {
           title: translate('Status'),
           render: CampaignStateIndicator,
+          filter: 'state',
         },
         {
           title: translate('Start date'),

@@ -110,6 +110,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           {
             title: translate('Offering'),
             render: ({ row }) => <>{row.requested_offering.offering_name}</>,
+            filter: 'offering',
           },
           {
             title: translate('Provider'),

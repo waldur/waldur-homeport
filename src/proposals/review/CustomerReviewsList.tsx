@@ -82,6 +82,7 @@ export const CustomerReviewsList: FC<{}> = () => {
               label={row.call_name}
             />
           ),
+          filter: 'call',
         },
         {
           title: translate('Review due'),
@@ -90,6 +91,7 @@ export const CustomerReviewsList: FC<{}> = () => {
         {
           title: translate('State'),
           render: ({ row }) => <>{formatReviewState(row.state)}</>,
+          filter: 'state',
         },
       ]}
       title={translate('Reviews')}
