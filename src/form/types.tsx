@@ -25,6 +25,7 @@ export interface FormField {
   // See also: https://github.com/erikras/redux-form/issues/2768#issuecomment-292770517
   noUpdateOnBlur?: boolean;
   floating?: boolean;
+  spaceless?: boolean;
 }
 
 export interface CustomComponentInputProps<T> {

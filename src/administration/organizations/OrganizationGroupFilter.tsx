@@ -1,7 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
+import {
+  AsyncPaginate,
+  REACT_SELECT_TABLE_FILTER,
+} from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 import { organizationGroupTypeAutocomplete } from './api';
@@ -21,6 +24,7 @@ export const OrganizationGroupFilter: FunctionComponent = () => (
         noOptionsMessage={() => translate('No organization group types')}
         isMulti={true}
         isClearable={true}
+        {...REACT_SELECT_TABLE_FILTER}
       />
     )}
   />

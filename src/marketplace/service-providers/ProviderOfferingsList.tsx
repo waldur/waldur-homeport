@@ -68,6 +68,7 @@ export const ProviderOfferingsComponent: FC<
         {
           title: translate('Type'),
           render: ({ row }) => getLabel(row.type),
+          filter: 'offering_type',
         },
         {
           title: translate('Resources'),
@@ -81,6 +82,7 @@ export const ProviderOfferingsComponent: FC<
         {
           title: translate('State'),
           render: OfferingStateCell,
+          filter: 'state',
         },
       ]}
       verboseName={translate('Offerings')}

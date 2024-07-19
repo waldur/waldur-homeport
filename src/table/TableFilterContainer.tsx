@@ -12,6 +12,9 @@ interface ITableFilterContext {
   filterPosition: TableState['filterPosition'];
   form: string;
   setFilter: (item: FilterItem) => void;
+  apply?: () => void;
+  columnFilter?: boolean;
+  selectedSavedFilter?: TableState['selectedSavedFilter'];
 }
 
 export const TableFilterContext = React.createContext<ITableFilterContext>(

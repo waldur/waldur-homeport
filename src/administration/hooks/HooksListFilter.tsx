@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { Select } from '@waldur/form/themed-select';
+import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -28,6 +28,7 @@ const PureHooksListFilter: FunctionComponent<{}> = () => (
           onChange={(value) => prop.input.onChange(value)}
           options={states}
           isClearable={true}
+          {...REACT_SELECT_TABLE_FILTER}
         />
       )}
     />

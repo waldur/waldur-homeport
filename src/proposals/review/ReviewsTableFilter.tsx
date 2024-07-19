@@ -4,7 +4,7 @@ import {
   syncFiltersToURL,
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
-import { Select } from '@waldur/form/themed-select';
+import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { CallAutocomplete } from '@waldur/proposals/CallAutocomplete';
 import { getReviewStateOptions } from '@waldur/proposals/utils';
@@ -26,6 +26,7 @@ const PureReviewsTableFilter = ({ form }) => {
               onChange={(item) => fieldProps.input.onChange(item)}
               isMulti={true}
               isClearable={true}
+              {...REACT_SELECT_TABLE_FILTER}
             />
           )}
         />
@@ -35,7 +36,7 @@ const PureReviewsTableFilter = ({ form }) => {
         name="call"
         badgeValue={(value) => value?.name}
       >
-        <CallAutocomplete />
+        <CallAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
       </TableFilterItem>
     </>
   );

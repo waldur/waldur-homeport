@@ -55,6 +55,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Client organization'),
       render: ({ row }) => <>{row.customer_name}</>,
+      filter: 'organization',
     },
     {
       title: translate('Project'),
@@ -63,6 +64,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Category'),
       render: ({ row }) => <>{row.category_title}</>,
+      filter: 'category',
     },
     {
       title: translate('Plan'),
@@ -84,6 +86,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('State'),
       render: ({ row }) => <ResourceStateField resource={row} />,
+      filter: 'state',
     },
   ];
 

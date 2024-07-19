@@ -56,6 +56,7 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
         {
           title: translate('Active'),
           render: ({ row }) => <BooleanField value={row.is_active} />,
+          filter: 'is_active',
         },
       ]}
       verboseName={translate('group invitations')}
@@ -64,7 +65,6 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
         <GroupInvitationRowActions row={row} refetch={props.fetch} />
       )}
       expandableRow={GroupInvitationsListExpandableRow}
-      filterPosition="header"
     />
   );
 };

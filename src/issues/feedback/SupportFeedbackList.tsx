@@ -36,11 +36,13 @@ export const SupportFeedbackList: FC = () => {
       title: translate('User'),
       render: ({ row }) => row.user_full_name,
       orderField: 'user_full_name',
+      filter: 'user',
     },
     {
       title: translate('Evaluation'),
       render: ({ row }) => row.evaluation,
       orderField: 'evaluation',
+      filter: 'evaluation',
     },
     {
       title: translate('Created'),

@@ -58,6 +58,7 @@ export interface Column<RowType = any> {
   /** The keys that are required for optional columns to be fetched. */
   keys?: string[];
   optional?: boolean;
+  filter?: string;
 }
 
 export type DisplayMode = 'table' | 'grid';
@@ -85,10 +86,12 @@ export interface TableState {
   pagination?: Pagination;
   query?: string;
   sorting?: SortingState;
-  filterPosition?: 'sidebar' | 'header';
+  filterPosition?: 'menu' | 'sidebar' | 'header';
   filtersStorage?: FilterItem[];
   savedFilters?: TableFiltersGroup[];
   selectedSavedFilter?: TableFiltersGroup;
+  /** Don't apply the filters at first (let's set it `false`), because the filters are empty and the request will be invalid. \
+   * Therefore, in the next renders, this variable will be changed to `true` to read the actual filters. */
   applyFilters?: boolean;
   toggled?: Record<string, boolean>;
   selectedRows?: any[];

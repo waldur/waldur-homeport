@@ -23,6 +23,7 @@ const PureCallAllFilters = ({ form }) => {
       <TableFilterItem
         title={translate('Active round')}
         name="has_active_round"
+        badgeValue={(value) => (value ? translate('Yes') : null)}
       >
         <CallActiveRoundFilter />
       </TableFilterItem>

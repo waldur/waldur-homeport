@@ -53,6 +53,7 @@ const InvitationsListComponent: FunctionComponent = () => {
           title: translate('Status'),
           orderField: 'state',
           render: ({ row }) => row.state,
+          filter: 'state',
         },
         {
           title: translate('Created at'),

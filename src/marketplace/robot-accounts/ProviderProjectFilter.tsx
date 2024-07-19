@@ -1,7 +1,10 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
+import {
+  AsyncPaginate,
+  REACT_SELECT_TABLE_FILTER,
+} from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
 import { providerProjectAutocomplete } from './autocompletes';
@@ -33,6 +36,7 @@ export const ProviderProjectFilter: React.FC<ProviderProjectFilterProps> = (
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No projects')}
         isClearable={true}
+        {...REACT_SELECT_TABLE_FILTER}
       />
     )}
   />

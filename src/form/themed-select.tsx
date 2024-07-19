@@ -1,6 +1,13 @@
+import { MagnifyingGlass, X } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import BaseSelect, { Props as SelectProps, ThemeConfig } from 'react-select';
+import BaseSelect, {
+  components,
+  ClearIndicatorProps,
+  Props as SelectProps,
+  ThemeConfig,
+  ControlProps,
+} from 'react-select';
 import { AsyncPaginate as BaseAsyncPaginate } from 'react-select-async-paginate';
 import BaseWindowedSelect from 'react-windowed-select';
 
@@ -19,6 +26,41 @@ export const REACT_SELECT_MENU_NO_PORTALING: Partial<SelectProps> = {
   styles: undefined,
   menuPosition: undefined,
   menuPlacement: undefined,
+};
+
+export const FilterSelectClearIndicator = (props: ClearIndicatorProps) => {
+  const {
+    innerProps: { ref, ...restInnerProps },
+  } = props;
+  return (
+    <div {...restInnerProps} ref={ref}>
+      <div
+        style={{ padding: '0px 5px', marginRight: '7px', cursor: 'pointer' }}
+      >
+        <X size={20} weight="bold" className="text-grey-500" />
+      </div>
+    </div>
+  );
+};
+
+export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
+  <components.Control {...props}>
+    {!(props.hasValue && props.selectProps.components.SingleValue) && (
+      <MagnifyingGlass size={20} weight="bold" className="text-grey-500 ms-3" />
+    )}
+    {children}
+  </components.Control>
+);
+
+export const REACT_SELECT_TABLE_FILTER: Partial<SelectProps> = {
+  className: 'metronic-select-container',
+  classNamePrefix: 'metronic-select',
+  menuIsOpen: true,
+  components: {
+    Control: FilterSelectControl,
+    ClearIndicator: FilterSelectClearIndicator,
+  },
+  ...REACT_SELECT_MENU_NO_PORTALING,
 };
 
 const DARK_COLORS = {

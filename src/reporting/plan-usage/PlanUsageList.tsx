@@ -37,10 +37,12 @@ export const PlanUsageList: FunctionComponent = () => {
     {
       title: translate('Service provider'),
       render: ({ row }: PlanUsageRowProps) => <>{row.customer_provider_name}</>,
+      filter: 'provider',
     },
     {
       title: translate('Offering'),
       render: ({ row }: PlanUsageRowProps) => <>{row.offering_name}</>,
+      filter: 'offering',
     },
     {
       title: translate('Plan'),

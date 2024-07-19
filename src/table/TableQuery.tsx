@@ -34,10 +34,9 @@ export class TableQuery extends Component<TableQueryProps, State> {
     return (
       <FilterBox
         type="search"
-        placeholder={translate('Search') + ' ...'}
+        placeholder={translate('Search') + '...'}
         value={this.state.query}
         onChange={this.setQuery}
-        solid
       />
     );
   }

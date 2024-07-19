@@ -100,16 +100,19 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
         {
           title: translate('Category'),
           render: ({ row }: FieldProps) => <>{row.category_title}</>,
+          filter: 'category',
         },
         {
           title: translate('Offering'),
           render: ({ row }: FieldProps) => <>{row.offering_name}</>,
+          filter: 'offering',
         },
         ...(props.hasCustomerColumn
           ? [
               {
                 title: translate('Organization'),
                 render: ({ row }) => <>{row.customer_name}</>,
+                filter: 'organization',
               },
             ]
           : []),
@@ -118,6 +121,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
               {
                 title: translate('Project'),
                 render: ({ row }) => <>{row.project_name}</>,
+                filter: 'project',
               },
             ]
           : []),
@@ -129,6 +133,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
         {
           title: translate('State'),
           render: ({ row }) => <ResourceStateField resource={row} />,
+          filter: 'state',
         },
       ]}
       title={translate('Resources')}

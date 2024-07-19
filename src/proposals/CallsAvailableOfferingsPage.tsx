@@ -77,6 +77,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
             {
               title: translate('State'),
               render: OfferingStateCell,
+              filter: 'state',
             },
           ]}
           gridItem={({ row }) => (

@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { PeriodOption } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -22,14 +23,17 @@ const PureCustomerListFilter: FunctionComponent<CustomerListFilterProps> = (
       badgeValue={(value) => value?.label}
       ellipsis={false}
     >
-      <AccountingPeriodField options={props.accountingPeriods} />
+      <AccountingPeriodField
+        options={props.accountingPeriods}
+        reactSelectProps={REACT_SELECT_TABLE_FILTER}
+      />
     </TableFilterItem>
     <TableFilterItem
       title={translate('Accounting running')}
       name="accounting_is_running"
       badgeValue={(value) => value?.label}
     >
-      <AccountingRunningField />
+      <AccountingRunningField reactSelectProps={REACT_SELECT_TABLE_FILTER} />
     </TableFilterItem>
   </>
 );

@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import './TableHeader.scss';
 
 import { TableProps } from './Table';
+import { TableFiltersMenu } from './TableFiltersMenu';
 import { Column, Sorting } from './types';
 
 interface TableHeaderProps {
@@ -22,6 +23,9 @@ interface TableHeaderProps {
   selectedRows?: any[];
   fieldType?: TableProps['fieldType'];
   activeColumns?: Record<string, boolean>;
+  filters?: TableProps['filters'];
+  setFilter?: TableProps['setFilter'];
+  applyFiltersFn?: TableProps['applyFiltersFn'];
   columnPositions: string[];
   hasOptionalColumns?: boolean;
 }
@@ -50,7 +54,14 @@ function renderSortingIcon(column: Column, sorting: Sorting) {
   }
 }
 
-const TableTh = ({ column, onSortClick, currentSorting }) => (
+const TableTh = ({
+  column,
+  onSortClick,
+  currentSorting,
+  filters,
+  setFilter,
+  applyFiltersFn,
+}) => (
   <th
     className={
       classNames(column.className, column.orderField && 'sorting-column') ||
@@ -63,6 +74,15 @@ const TableTh = ({ column, onSortClick, currentSorting }) => (
   >
     {column.title}
     {renderSortingIcon(column, currentSorting)}
+    {column.filter && filters && (
+      <TableFiltersMenu
+        filters={filters}
+        filterPosition="menu"
+        setFilter={setFilter}
+        applyFiltersFn={applyFiltersFn}
+        openName={column.filter}
+      />
+    )}
   </th>
 );
 
@@ -78,6 +98,9 @@ export const TableHeader: FC<TableHeaderProps> = ({
   onSelectAllRows,
   selectedRows,
   fieldType,
+  filters,
+  setFilter,
+  applyFiltersFn,
   hasOptionalColumns,
 }) => {
   const isAllSelected = selectedRows?.length >= rows?.length;
@@ -117,6 +140,9 @@ export const TableHeader: FC<TableHeaderProps> = ({
                       column={columnMap[id]}
                       onSortClick={onSortClick}
                       currentSorting={currentSorting}
+                      filters={filters}
+                      setFilter={setFilter}
+                      applyFiltersFn={applyFiltersFn}
                     />
                   ),
               )
@@ -128,6 +154,9 @@ export const TableHeader: FC<TableHeaderProps> = ({
                     column={column}
                     onSortClick={onSortClick}
                     currentSorting={currentSorting}
+                    filters={filters}
+                    setFilter={setFilter}
+                    applyFiltersFn={applyFiltersFn}
                   />
                 ),
             )}

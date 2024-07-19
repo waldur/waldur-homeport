@@ -67,14 +67,17 @@ export const PublicOfferingsList: FunctionComponent<{
     {
       title: translate('Organization'),
       render: ({ row }) => renderFieldOrDash(row.customer_name),
+      filter: showOrganization ? 'organization' : undefined,
     },
     {
       title: translate('Type'),
       render: ({ row }) => <>{getLabel(row.type)}</>,
+      filter: 'offering_type',
     },
     {
       title: translate('State'),
       render: ({ row }) => <OfferingStateField offering={row} />,
+      filter: 'state',
     },
   ];
 
@@ -82,6 +85,7 @@ export const PublicOfferingsList: FunctionComponent<{
     columns.push({
       title: translate('Category'),
       render: ({ row }) => row.category_title,
+      filter: 'category',
     });
   }
 

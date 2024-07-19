@@ -6,6 +6,7 @@
 // Bootstrap base colors
 $white: #ffffff !default;
 $black: #000000 !default;
+$gray-25: if(isDarkMode(), #0d140f, #fcfcfd) !default; // Custom variable
 $gray-50: if(isDarkMode(), #111a13, #f9fafb) !default; // Custom variable
 $gray-100: if(isDarkMode(), #1a261d, #f5f8fa) !default;
 $gray-200: if(isDarkMode(), #405448, #eff2f5) !default;
@@ -16,6 +17,17 @@ $gray-600: if(isDarkMode(), #b8ccbd, #7e8299) !default;
 $gray-700: if(isDarkMode(), #adcba2, #5e6278) !default;
 $gray-800: if(isDarkMode(), #ffffff, #3f4254) !default;
 $gray-900: if(isDarkMode(), #ffffff, #181c32) !default;
+
+// Temporary gray colors (based on DS)
+$grey-100: if(isDarkMode(), #1a261d, #f2f4f7) !default; // Custom variable
+$grey-200: if(isDarkMode(), #405448, #e4e7ec) !default; // Custom variable
+$grey-300: if(isDarkMode(), #45594a, #d0d5dd) !default; // Custom variable
+$grey-400: if(isDarkMode(), #507359, #98a2b3) !default; // Custom variable
+$grey-500: if(isDarkMode(), #e0f2da, #667085) !default; // Custom variable
+$grey-600: if(isDarkMode(), #b8ccbd, #475467) !default; // Custom variable
+$grey-700: if(isDarkMode(), #adcba2, #344054) !default; // Custom variable
+$grey-800: if(isDarkMode(), #d6ecce, #1d2939) !default; // Custom variable
+$grey-900: if(isDarkMode(), #ffffff, #101828) !default; // Custom variable
 $text-muted: $gray-500 !default;
 
 // Dark Mode
@@ -23,6 +35,7 @@ $dark-mode-page-bg-color: #172219 !default;
 
 // Bootstrap gray colors map
 $grays: (
+  '25': $gray-25,
   '50': $gray-50,
   '100': $gray-100,
   '200': $gray-200,
@@ -161,6 +174,16 @@ $theme-colors: (
   'danger': $danger,
   'dark': $dark,
   'dark-always': $dark-always,
+  // temporary gray colors
+  'grey-100': $grey-100,
+  'grey-200': $grey-200,
+  'grey-300': $grey-300,
+  'grey-400': $grey-400,
+  'grey-500': $grey-500,
+  'grey-600': $grey-600,
+  'grey-700': $grey-700,
+  'grey-800': $grey-800,
+  'grey-900': $grey-900,
 ) !default;
 
 // Hover colors
@@ -223,6 +246,16 @@ $theme-text-colors: (
   'gray-700': $gray-700,
   'gray-800': $gray-800,
   'gray-900': $gray-900,
+  // temporary gray colors
+  'grey-100': $grey-100,
+  'grey-200': $grey-200,
+  'grey-300': $grey-300,
+  'grey-400': $grey-400,
+  'grey-500': $grey-500,
+  'grey-600': $grey-600,
+  'grey-700': $grey-700,
+  'grey-800': $grey-800,
+  'grey-900': $grey-900,
 ) !default; // Custom variable
 
 // Options

@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
 import { OfferingStateFilter } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
@@ -28,7 +29,9 @@ const PureAdminOfferingsFilter: FunctionComponent<
         name="organization"
         badgeValue={(value) => value?.name}
       >
-        <OrganizationAutocomplete />
+        <OrganizationAutocomplete
+          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        />
       </TableFilterItem>
     ) : null}
     <TableFilterItem
@@ -36,7 +39,7 @@ const PureAdminOfferingsFilter: FunctionComponent<
       name="offering_type"
       badgeValue={(value) => value?.label}
     >
-      <OfferingTypeAutocomplete />
+      <OfferingTypeAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
     </TableFilterItem>
     {showCategory ? (
       <TableFilterItem

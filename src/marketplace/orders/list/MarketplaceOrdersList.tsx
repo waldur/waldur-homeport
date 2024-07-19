@@ -62,18 +62,21 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
       render: ({ row }) => row.state,
       orderField: 'state',
       keys: ['state'],
+      filter: 'state',
       id: 'state',
     },
     {
       title: translate('Project'),
       render: ({ row }) => row.project_name,
       keys: ['project_name'],
+      filter: 'project',
       id: 'project',
     },
     {
       title: translate('Client organization'),
       render: ({ row }) => row.customer_name,
       keys: ['customer_name'],
+      filter: 'organization',
       id: 'client_organization',
     },
     {

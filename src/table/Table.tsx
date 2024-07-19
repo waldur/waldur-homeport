@@ -28,17 +28,21 @@ import {
   Column,
   DisplayMode,
   ExportConfig,
+  FilterItem,
   Sorting,
   TableDropdownItem,
   TableState,
 } from './types';
 
 export interface TableProps<RowType = any> extends TableState {
+  table?: string;
   rows: any[];
   fetch: () => void;
   gotoPage?: (page: number) => void;
   hasQuery?: boolean;
   setQuery?: (query: string) => void;
+  setFilter?: (item: FilterItem) => void;
+  applyFiltersFn?: (apply: boolean) => void;
   columns?: Array<Column<RowType>>;
   setDisplayMode?: (mode: DisplayMode) => void;
   gridItem?: React.ComponentType<{ row: RowType }>;
@@ -129,6 +133,9 @@ const TableComponent = (props: TableProps) => {
           onSelectAllRows={props.selectAllRows}
           selectedRows={props.selectedRows}
           fieldType={props.fieldType}
+          filters={props.filters}
+          setFilter={props.setFilter}
+          applyFiltersFn={props.applyFiltersFn}
           columnPositions={props.columnPositions}
           hasOptionalColumns={props.hasOptionalColumns}
         />
@@ -168,6 +175,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
 
   state = {
     closedHiddenActionsMessage: false,
+    /** Controls whether the add filter toggle is displayed, \
+     * but only if we don't have an active filter. Otherwise, it has no effect. \
+     * Used with `filterPosition = 'menu'`*/
+    showFilterMenuToggle: false,
   };
 
   render() {
@@ -219,7 +230,16 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                 >
                   {this.showActionsColumn() && (
                     <div className="d-flex justify-content-end text-nowrap gap-3">
-                      <TableButtons {...this.props} />
+                      <TableButtons
+                        {...this.props}
+                        showFilterMenuToggle={this.state.showFilterMenuToggle}
+                        toggleFilterMenu={() =>
+                          this.setState({
+                            showFilterMenuToggle:
+                              !this.state.showFilterMenuToggle,
+                          })
+                        }
+                      />
                     </div>
                   )}
                 </Col>
@@ -271,18 +291,32 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             </Card.Header>
           ) : null}
 
-          {this.props.filterPosition === 'sidebar' &&
-          this.props.filtersStorage.length &&
-          this.props.filters ? (
-            <Card.Header className="border-2 border-bottom">
-              <TableFilters
-                filtersStorage={this.props.filtersStorage}
-                filters={this.props.filters}
-                renderFiltersDrawer={this.props.renderFiltersDrawer}
-                hideClearFilters={this.props.hideClearFilters}
-              />
-            </Card.Header>
-          ) : null}
+          {this.props.filters
+            ? (this.props.filterPosition === 'menu' ||
+                (this.props.filterPosition === 'sidebar' &&
+                  this.props.filtersStorage.length > 0)) && (
+                <Card.Header
+                  className={classNames('border-2 border-bottom', {
+                    'd-none':
+                      !this.state.showFilterMenuToggle &&
+                      this.props.filterPosition === 'menu' &&
+                      !this.props.filtersStorage.length,
+                  })}
+                >
+                  <TableFilters
+                    table={this.props.table}
+                    filtersStorage={this.props.filtersStorage}
+                    filters={this.props.filters}
+                    renderFiltersDrawer={this.props.renderFiltersDrawer}
+                    hideClearFilters={this.props.hideClearFilters}
+                    filterPosition={this.props.filterPosition}
+                    setFilter={this.props.setFilter}
+                    applyFiltersFn={this.props.applyFiltersFn}
+                    selectedSavedFilter={this.props.selectedSavedFilter}
+                  />
+                </Card.Header>
+              )
+            : null}
 
           {!this.state.closedHiddenActionsMessage &&
             this.props.hasOptionalColumns &&
@@ -461,6 +495,7 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     fetch,
     filterPosition,
     applyFilters,
+    applyFiltersFn,
     filters,
     renderFiltersDrawer,
     hasOptionalColumns,
@@ -474,6 +509,8 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     // We need to render the filters at the beginning to read the initial filters
     if (filterPosition === 'sidebar') {
       renderFiltersDrawer(filters);
+    } else if (filterPosition === 'menu') {
+      applyFiltersFn(true);
     }
   }, []);
 

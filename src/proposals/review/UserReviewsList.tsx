@@ -54,6 +54,7 @@ export const UserReviewsList: FC = () => {
         {
           title: translate('Call'),
           render: ({ row }) => <>{renderFieldOrDash(row.call_name)}</>,
+          filter: 'call',
         },
         {
           title: translate('Review due'),
@@ -62,6 +63,7 @@ export const UserReviewsList: FC = () => {
         {
           title: translate('State'),
           render: ({ row }) => <>{formatReviewState(row.state)}</>,
+          filter: 'state',
         },
       ]}
       title={translate('My reviews')}

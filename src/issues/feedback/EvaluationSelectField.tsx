@@ -1,6 +1,6 @@
 import { Field } from 'redux-form';
 
-import { Select } from '@waldur/form/themed-select';
+import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { feedbackOptions } from '@waldur/issues/feedback/utils';
 
@@ -21,6 +21,7 @@ export const EvaluationSelectField = () => (
         onBlur={(e) => e.preventDefault()}
         options={getOptions()}
         isClearable={true}
+        {...REACT_SELECT_TABLE_FILTER}
       />
     )}
   />

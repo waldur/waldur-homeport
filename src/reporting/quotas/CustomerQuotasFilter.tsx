@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import { SelectField } from '@waldur/form';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -25,6 +26,7 @@ export const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
       getOptionLabel={(option: QuotaChoice) => option.title}
       placeholder={translate('Select quota') + '...'}
       noUpdateOnBlur
+      {...REACT_SELECT_TABLE_FILTER}
     />
   </TableFilterItem>
 );

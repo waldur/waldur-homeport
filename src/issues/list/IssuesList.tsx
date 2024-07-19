@@ -122,6 +122,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         title: translate('Status'),
         render: StatusColumn,
         orderField: 'status',
+        filter: 'status',
       },
       {
         title: translate('Title'),

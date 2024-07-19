@@ -1,6 +1,6 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Form } from 'react-bootstrap';
-import { components } from 'react-select';
+import { components, Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
 import { organizationGroupAutocomplete } from '@waldur/customer/list/api';
@@ -12,7 +12,7 @@ interface SelectOrganizationGroupFieldProps {
   isFilterForm?: boolean;
 }
 
-const Option: FunctionComponent<any> = (props) => (
+const Option: FC<any> = (props) => (
   <components.Option {...props}>
     {props.data.parent_name ? (
       <>
@@ -23,7 +23,7 @@ const Option: FunctionComponent<any> = (props) => (
   </components.Option>
 );
 
-const SingleValue: FunctionComponent<any> = (props) => {
+const SingleValue: FC<any> = (props) => {
   const parent_name: string = props.data.name.split(' ')[0];
   const name: string = props.data.name.split(' ')[2];
   return (
@@ -33,7 +33,13 @@ const SingleValue: FunctionComponent<any> = (props) => {
   );
 };
 
-export const SelectOrganizationGroupFieldPure: FunctionComponent = () => (
+interface SelectFieldProps {
+  reactSelectProps?: Partial<SelectProps>;
+}
+
+export const SelectOrganizationGroupFieldPure: FC<SelectFieldProps> = (
+  props,
+) => (
   <Field
     name="organization_group"
     component={(fieldProps) => (
@@ -48,12 +54,13 @@ export const SelectOrganizationGroupFieldPure: FunctionComponent = () => (
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No organization groups')}
         isClearable={true}
+        {...props.reactSelectProps}
       />
     )}
   />
 );
 
-export const SelectOrganizationGroupField: FunctionComponent<
+export const SelectOrganizationGroupField: FC<
   SelectOrganizationGroupFieldProps
 > = (props) => (
   <Form.Group className={props.isFilterForm ? ' col-sm-3' : ''}>

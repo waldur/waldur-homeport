@@ -35,14 +35,17 @@ export const ResourceUsageList: FC = () => {
     {
       title: translate('Client organization'),
       render: ({ row }) => <>{row.customer_name}</>,
+      filter: 'organization',
     },
     {
       title: translate('Client project'),
       render: ({ row }) => <>{row.project_name}</>,
+      filter: 'project',
     },
     {
       title: translate('Offering type'),
       render: ({ row }) => <>{row.offering_name}</>,
+      filter: 'offering',
     },
     {
       title: translate('Resource name'),

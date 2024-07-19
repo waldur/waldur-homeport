@@ -195,6 +195,7 @@ export const UserList: FunctionComponent = () => {
       title: translate('Organization'),
       render: OrganizationField,
       orderField: 'organization',
+      filter: 'organization',
       id: 'organization',
     },
     {
@@ -230,6 +231,7 @@ export const UserList: FunctionComponent = () => {
       render: UserStatusField,
       className: 'text-center',
       keys: ['is_active'],
+      filter: 'is_active',
       id: 'is_active',
     },
     {

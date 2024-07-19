@@ -68,6 +68,7 @@ export const BillingRecordsList: FunctionComponent = () => {
         {
           title: translate('State'),
           render: ({ row }) => row.state,
+          filter: 'state',
         },
         {
           title: translate('Record period'),

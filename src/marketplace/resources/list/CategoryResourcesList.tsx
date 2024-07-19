@@ -81,6 +81,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     {
       title: translate('Offering'),
       render: ({ row }) => row.offering_name,
+      filter: 'offering',
     },
   ];
 
@@ -93,15 +94,18 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
   columns.push({
     title: translate('Organization'),
     render: ({ row }) => <>{row.customer_name}</>,
+    filter: 'organization',
   });
   columns.push({
     title: translate('Project'),
     render: ({ row }) => <>{row.project_name}</>,
+    filter: 'project',
   });
   columns.push(
     {
       title: translate('State'),
       render: ({ row }) => <ResourceStateField resource={row} />,
+      filter: 'state',
     },
     {
       title: translate('Created at'),

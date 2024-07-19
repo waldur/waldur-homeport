@@ -48,6 +48,7 @@ const CallColumns = [
   {
     title: translate('State'),
     render: ({ row }) => <>{formatCallState(row.state)}</>,
+    filter: 'state',
   },
   {
     title: translate('Active round'),
@@ -69,6 +70,7 @@ const CallColumns = [
         </>
       );
     },
+    filter: 'has_active_round',
   },
 ];
 

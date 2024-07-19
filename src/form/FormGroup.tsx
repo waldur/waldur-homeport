@@ -38,6 +38,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     floating = false,
     actions,
     clearOnUnmount,
+    spaceless,
     ...rest
   } = props;
 
@@ -78,7 +79,8 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           'form-floating': floating,
           'flex-grow-1': Boolean(actions),
         },
-        'position-relative mb-7',
+        'position-relative',
+        !spaceless && 'mb-7',
       )}
     >
       {!floating && labelNode}

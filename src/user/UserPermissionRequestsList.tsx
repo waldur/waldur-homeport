@@ -72,6 +72,7 @@ export const UserPermissionRequestsList = () => {
     {
       title: translate('State'),
       render: PermissionRequestStateField,
+      filter: 'state',
     },
   ];
   return (

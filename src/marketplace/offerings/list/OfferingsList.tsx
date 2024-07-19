@@ -45,6 +45,7 @@ export const BaseOfferingsList: FunctionComponent<{
         {
           title: translate('Organization'),
           render: ({ row }) => renderFieldOrDash(row.customer_name),
+          filter: 'organization',
         },
       ]
     : [];
@@ -59,6 +60,7 @@ export const BaseOfferingsList: FunctionComponent<{
     {
       title: translate('Category'),
       render: ({ row }) => <>{row.category_title}</>,
+      filter: 'category',
     },
     {
       title: translate('Created'),
@@ -68,10 +70,12 @@ export const BaseOfferingsList: FunctionComponent<{
     {
       title: translate('State'),
       render: OfferingStateCell,
+      filter: 'state',
     },
     {
       title: translate('Type'),
       render: ({ row }) => <>{getLabel(row.type)}</>,
+      filter: 'offering_type',
     },
   ];
 

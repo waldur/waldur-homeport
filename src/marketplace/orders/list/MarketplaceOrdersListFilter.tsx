@@ -5,6 +5,7 @@ import {
   syncFiltersToURL,
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/list/constants';
@@ -48,28 +49,30 @@ const PureMarketplaceOrdersListFilter = (props) => {
         name="offering"
         badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
       >
-        <OfferingAutocomplete />
+        <OfferingAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Organization')}
         name="organization"
         badgeValue={(value) => value?.name}
       >
-        <OrganizationAutocomplete />
+        <OrganizationAutocomplete
+          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Project')}
         name="project"
         badgeValue={(value) => value?.name}
       >
-        <ProjectFilter />
+        <ProjectFilter reactSelectProps={REACT_SELECT_TABLE_FILTER} />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Service provider')}
         name="provider"
         getValueLabel={(option) => option.customer_name}
       >
-        <ProviderAutocomplete />
+        <ProviderAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
       </TableFilterItem>
       <TableFilterItem
         title={translate('State')}

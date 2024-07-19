@@ -70,6 +70,7 @@ export const CallManagementPage: FunctionComponent = () => {
           title: translate('State'),
           orderField: 'state',
           render: ({ row }) => <>{formatCallState(row.state)}</>,
+          filter: 'state',
         },
       ]}
       verboseName={translate('Calls')}

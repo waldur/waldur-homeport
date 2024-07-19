@@ -61,14 +61,17 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
         {
           title: translate('Call'),
           render: ({ row }) => <b>{row.call_name}</b>,
+          filter: 'call',
         },
         {
           title: translate('Organization'),
           render: ({ row }) => <>{row.call_managing_organisation}</>,
+          filter: 'organization',
         },
         {
           title: translate('Offering'),
           render: ({ row }) => <>{row.offering_name}</>,
+          filter: 'offering',
         },
         {
           title: translate('Period'),
@@ -79,6 +82,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
         {
           title: translate('State'),
           render: ({ row }) => <>{formatCallOfferingState(row.state)}</>,
+          filter: 'state',
         },
       ]}
       title={translate('Requests for offerings')}

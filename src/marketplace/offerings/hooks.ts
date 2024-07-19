@@ -18,7 +18,7 @@ export const useOfferingDropdownActions = () => {
   const user = useSelector(getUser);
   const canCreateOffering = hasPermission(user, {
     permission: PermissionEnum.CREATE_OFFERING,
-    customerId: customer.uuid,
+    customerId: customer?.uuid,
   });
   const showOfferingListActions =
     customer && customer.is_service_provider && canCreateOffering;

@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
@@ -30,7 +31,7 @@ const PureProjectResourcesAllFilter: FunctionComponent<
         name="offering"
         badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
       >
-        <OfferingAutocomplete />
+        <OfferingAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Category')}
@@ -45,7 +46,9 @@ const PureProjectResourcesAllFilter: FunctionComponent<
           name="organization"
           badgeValue={(value) => value?.name}
         >
-          <OrganizationAutocomplete />
+          <OrganizationAutocomplete
+            reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          />
         </TableFilterItem>
       ) : null}
       {props.hasProjectFilter ? (
@@ -54,7 +57,7 @@ const PureProjectResourcesAllFilter: FunctionComponent<
           name="project"
           badgeValue={(value) => value?.name}
         >
-          <ProjectFilter />
+          <ProjectFilter reactSelectProps={REACT_SELECT_TABLE_FILTER} />
         </TableFilterItem>
       ) : null}
       <TableFilterItem
@@ -70,6 +73,7 @@ const PureProjectResourcesAllFilter: FunctionComponent<
       <TableFilterItem
         title={translate('Include terminated')}
         name="include_terminated"
+        badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
         <Field
           name="include_terminated"

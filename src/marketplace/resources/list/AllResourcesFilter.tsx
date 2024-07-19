@@ -2,6 +2,7 @@ import { Field, reduxForm } from 'redux-form';
 
 import { syncFiltersToURL } from '@waldur/core/filters';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -27,14 +28,16 @@ const PureProjectResourcesFilter = ({ category_uuid }) => {
         name="organization"
         badgeValue={(value) => value?.name}
       >
-        <OrganizationAutocomplete />
+        <OrganizationAutocomplete
+          reactSelectProps={REACT_SELECT_TABLE_FILTER}
+        />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Project')}
         name="project"
         badgeValue={(value) => value?.name}
       >
-        <ProjectFilter />
+        <ProjectFilter reactSelectProps={REACT_SELECT_TABLE_FILTER} />
       </TableFilterItem>
       <TableFilterItem
         title={translate('Offering')}
@@ -56,6 +59,7 @@ const PureProjectResourcesFilter = ({ category_uuid }) => {
       <TableFilterItem
         title={translate('Include terminated')}
         name="include_terminated"
+        badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
       >
         <Field
           name="include_terminated"

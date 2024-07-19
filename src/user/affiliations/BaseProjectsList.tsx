@@ -66,6 +66,7 @@ export const BaseProjectsList: FunctionComponent<{
           <>{row.customer_name}</>
         ),
       keys: ['customer_uuid', 'customer_name'],
+      filter: 'organization',
       id: 'organization',
     },
     {

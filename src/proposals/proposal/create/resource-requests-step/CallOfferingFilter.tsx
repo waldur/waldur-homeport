@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { Select } from '@waldur/form/themed-select';
+import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { CallOffering } from '@waldur/proposals/types';
 
@@ -19,6 +19,7 @@ export const CallOfferingFilter: React.FC<{ options: CallOffering[] }> = ({
         isClearable={true}
         getOptionLabel={(option) => option.offering_name}
         getOptionValue={(option) => option.offering_uuid}
+        {...REACT_SELECT_TABLE_FILTER}
       />
     )}
   />
