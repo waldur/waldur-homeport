@@ -45,6 +45,7 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
     >
       <BreadcrumbItem
         ref={refItem}
+        key={item.key}
         to={item.to}
         params={item.params}
         ellipsis={item.ellipsis}

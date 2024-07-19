@@ -103,6 +103,7 @@ export const Breadcrumbs = () => {
             ellipsis={item.ellipsis}
             truncate={item.truncate}
             active={item.active}
+            maxLength={item.maxLength}
           >
             {item.text}
           </BreadcrumbItem>

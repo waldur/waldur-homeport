@@ -197,6 +197,7 @@ export const getCallBreadcrumbItems = (call: Call): IBreadcrumbItem[] => [
     to: 'organization.dashboard',
     params: call ? { uuid: call.customer_uuid } : undefined,
     ellipsis: 'xl',
+    maxLength: 11,
   },
   {
     key: 'call-list',

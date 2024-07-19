@@ -17,4 +17,5 @@ export interface IBreadcrumbItem {
   params?: object;
   ellipsis?: 'md' | 'xl' | 'xxl';
   truncate?: boolean;
+  maxLength?: number;
 }

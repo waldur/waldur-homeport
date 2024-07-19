@@ -58,6 +58,7 @@ export const getOfferingBreadcrumbItems = (offering): IBreadcrumbItem[] => {
       to: 'organization.dashboard',
       params: { uuid: offering.customer_uuid },
       ellipsis: 'xl',
+      maxLength: 11,
     },
     {
       key: 'marketplace-vendor-offerings',

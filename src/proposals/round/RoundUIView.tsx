@@ -117,6 +117,7 @@ export const RoundUIView = () => {
               to: 'organization.dashboard',
               params: { uuid: call.customer_uuid },
               ellipsis: 'xl',
+              maxLength: 11,
             },
             {
               key: 'call-list',
