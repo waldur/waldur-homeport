@@ -19,11 +19,12 @@ interface ResourceUsageTabsContainerProps {
   };
   months?: number;
   hideHeader?: boolean;
+  displayMode?: 'chart' | 'table';
 }
 
 export const ResourceUsageTabsContainer: FunctionComponent<
   ResourceUsageTabsContainerProps
-> = ({ resource, months, hideHeader }) => {
+> = ({ resource, months, hideHeader, displayMode }) => {
   const { loading, error, value } = useAsync(
     () =>
       getComponentsAndUsages(
@@ -52,6 +53,7 @@ export const ResourceUsageTabsContainer: FunctionComponent<
           colorEnd: 0.65,
           useEndAsStart: true,
         })}
+        displayMode={displayMode}
       />
     </>
   );

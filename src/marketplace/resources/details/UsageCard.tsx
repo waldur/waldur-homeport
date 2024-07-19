@@ -1,5 +1,6 @@
+import { ChartBar, Table } from '@phosphor-icons/react';
 import { useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 import { SelectControl } from '@waldur/form/SelectControl';
 import { translate } from '@waldur/i18n';
@@ -8,6 +9,8 @@ import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer'
 import { getUsageHistoryPeriodOptions } from '../usage/utils';
 
 export const UsageCard = ({ resource }) => {
+  const [mode, setMode] = useState<'chart' | 'table'>('chart');
+
   const resourceRef = useMemo(
     () => ({
       offering_uuid: resource.offering_uuid,
@@ -31,22 +34,34 @@ export const UsageCard = ({ resource }) => {
         <Card.Title>
           <h3>{translate('Usage history')}</h3>
         </Card.Title>
-        {periodOptions.length > 1 && (
-          <div className="card-toolbar">
+        <div className="card-toolbar gap-4">
+          {periodOptions.length > 1 && (
             <SelectControl
               options={periodOptions}
               value={period}
               onChange={setPeriod}
               className="w-150px"
             />
-          </div>
-        )}
+          )}
+          <Button
+            variant="outline-default"
+            className="btn-outline btn-icon"
+            onClick={() =>
+              setMode((prev) => (prev === 'chart' ? 'table' : 'chart'))
+            }
+          >
+            <span className="svg-icon svg-icon-2">
+              {mode === 'chart' ? <Table /> : <ChartBar />}
+            </span>
+          </Button>
+        </div>
       </Card.Header>
       <Card.Body>
         <ResourceUsageTabsContainer
           resource={resourceRef}
           months={period.value}
           hideHeader={true}
+          displayMode={mode}
         />
       </Card.Body>
     </Card>

@@ -6,6 +6,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import { ResourceUsageChart } from '@waldur/marketplace/resources/usage/ResourceUsageChart';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
+import { ResourceUsageTable } from './ResourceUsageTable';
 import { ComponentUsage } from './types';
 import { getBillingTypeLabel } from './utils';
 
@@ -14,6 +15,7 @@ interface ResourceUsageTabsProps {
   usages: ComponentUsage[];
   months?: number;
   colors: string[];
+  displayMode?: 'chart' | 'table';
 }
 
 export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
@@ -42,14 +44,21 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
           key={index}
           eventKey={`tab-${index}`}
         >
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <ResourceUsageChart
+          {props.displayMode === 'table' ? (
+            <ResourceUsageTable
               offeringComponent={component}
               usages={props.usages}
-              months={props.months}
-              chartColor={props.colors[index]}
             />
-          </div>
+          ) : (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <ResourceUsageChart
+                offeringComponent={component}
+                usages={props.usages}
+                months={props.months}
+                chartColor={props.colors[index]}
+              />
+            </div>
+          )}
         </Tab>
       ))}
     </Tabs>

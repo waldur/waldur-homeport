@@ -2412,7 +2412,7 @@
     "message": "Date of reporting"
   },
   "Date": {
-    "description": "customer/payments/PaymentCreateDialog.tsx, customer/payments/PaymentUpdateDialog.tsx, customer/payments/PaymentsList.tsx, dashboard/chart.ts, invitations/actions/create/SendingStatus.tsx, invoices/list/MarkAsPaidDialog.tsx, issues/feedback/SupportFeedbackListFilter.tsx, marketplace/resources/usage/utils.ts",
+    "description": "customer/payments/PaymentCreateDialog.tsx, customer/payments/PaymentUpdateDialog.tsx, customer/payments/PaymentsList.tsx, dashboard/chart.ts, invitations/actions/create/SendingStatus.tsx, invoices/list/MarkAsPaidDialog.tsx, issues/feedback/SupportFeedbackListFilter.tsx, marketplace/resources/usage/ResourceUsageTable.tsx, marketplace/resources/usage/utils.ts",
     "message": "Date"
   },
   "Days": {
