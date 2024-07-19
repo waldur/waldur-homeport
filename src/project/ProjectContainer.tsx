@@ -79,6 +79,7 @@ const ProjectContainerWithHero = (props) => {
         to: 'organization.dashboard',
         params: { uuid: project.customer_uuid },
         ellipsis: 'md',
+        maxLength: 11,
       },
       {
         key: 'organization.projects',
