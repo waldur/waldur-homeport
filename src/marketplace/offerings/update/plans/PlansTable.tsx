@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { PlanActions } from './PlanActions';
 
 export const PlansTable = ({ plans, offering, refetch, user }) => (
-  <Table bordered={true} hover={true} responsive={true}>
+  <Table bordered={true} hover={true}>
     <tbody>
       {plans.map((plan, planIndex) => (
         <tr key={planIndex}>

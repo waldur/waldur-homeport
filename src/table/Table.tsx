@@ -298,7 +298,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             )}
 
           <Card.Body>
-            <div className="table-responsive dataTables_wrapper">
+            <div className="dataTables_wrapper">
               <div className={classNames('table-container table-hover-shadow')}>
                 {this.renderBody()}
               </div>
