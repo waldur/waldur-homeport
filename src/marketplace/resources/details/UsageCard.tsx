@@ -8,15 +8,14 @@ import { translate } from '@waldur/i18n';
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 import { getUsageHistoryPeriodOptions } from '../usage/utils';
 
-export const UsageCard = ({ resource }) => {
+export const UsageCard = ({ resource, offering }) => {
   const [mode, setMode] = useState<'chart' | 'table'>('chart');
-
   const resourceRef = useMemo(
     () => ({
       offering_uuid: resource.offering_uuid,
       resource_uuid: resource.uuid,
     }),
-    [resource],
+    [resource, offering],
   );
   const periodOptions = useMemo(
     () => getUsageHistoryPeriodOptions(resource.created),
@@ -59,6 +58,7 @@ export const UsageCard = ({ resource }) => {
       <Card.Body>
         <ResourceUsageTabsContainer
           resource={resourceRef}
+          offering={offering}
           months={period.value}
           hideHeader={true}
           displayMode={mode}

@@ -20,25 +20,25 @@ interface ResourceUsageTabsContainerProps {
   months?: number;
   hideHeader?: boolean;
   displayMode?: 'chart' | 'table';
+  offering?: any;
 }
 
 export const ResourceUsageTabsContainer: FunctionComponent<
   ResourceUsageTabsContainerProps
-> = ({ resource, months, hideHeader, displayMode }) => {
+> = ({ resource, months, hideHeader, displayMode, offering }) => {
   const { loading, error, value } = useAsync(
-    () =>
-      getComponentsAndUsages(
-        resource.offering_uuid,
-        resource.resource_uuid,
-        months,
-      ),
+    () => getComponentsAndUsages(resource.resource_uuid, offering, months),
     [resource, months],
   );
 
   return loading ? (
     <LoadingSpinner />
   ) : error ? (
-    <>{translate('Unable to load data')}</>
+    <>
+      {translate('Unable to load data')}
+      <br />
+      {error.message}
+    </>
   ) : !value.components.length ? (
     <h3>{translate('Offering does not have any usage-based components.')}</h3>
   ) : (
