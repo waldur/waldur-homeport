@@ -60,23 +60,41 @@ const getUsageBasedOfferingComponents = (offering) => {
 };
 
 export const getComponentsAndUsages = async (
-  offering_uuid: string,
   resource_uuid: string,
+  offering: any,
   months: number,
 ) => {
-  if (!offering_uuid || !resource_uuid) {
+  if (!resource_uuid) {
     return { components: null, usages: null };
   }
-  const offering = await getPublicOffering(offering_uuid);
-  const components = await getUsageBasedOfferingComponents(offering);
+
+  let components;
+  try {
+    components = await getUsageBasedOfferingComponents(offering);
+  } catch (error) {
+    throw new Error(
+      `Error while getting components for offering, ${error.message}`,
+    );
+  }
+
   const date_after = months
     ? DateTime.now().startOf('month').minus({ months }).toFormat('yyyy-MM-dd')
     : undefined;
-  let usages = await getComponentUsages(resource_uuid, date_after, {
-    fields: ['type', 'usage', 'date'],
-  });
+
+  let usages;
+  try {
+    usages = await getComponentUsages(resource_uuid, date_after, {
+      fields: ['type', 'usage', 'date'],
+    });
+  } catch (error) {
+    throw new Error(
+      `Error while getting usages for resource: ${resource_uuid}, ${error.message}`,
+    );
+  }
+
   if (offering.type === SLURM_PLUGIN) {
     usages = usages.map(parseSlurmUsage);
   }
+
   return { components, usages };
 };
