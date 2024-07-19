@@ -10,7 +10,8 @@ import {
   showSuccess,
 } from '@waldur/store/notify';
 import store from '@waldur/store/store';
-import { UsersService } from '@waldur/user/UsersService';
+import { UsersService, getCurrentUser } from '@waldur/user/UsersService';
+import { setCurrentUser } from '@waldur/workspace/actions';
 
 import { InvitationService } from './InvitationService';
 import { clearInvitationToken, setInvitationToken } from './InvitationStorage';
@@ -84,29 +85,29 @@ export function submitPermissionRequest(token) {
     });
 }
 
-export function acceptInvitation(token, replaceEmail) {
-  return InvitationService.accept(token, replaceEmail)
-    .then(() => {
-      store.dispatch(showSuccess(translate('Your invitation was accepted.')));
+export async function acceptInvitation(token, replaceEmail) {
+  try {
+    await InvitationService.accept(token, replaceEmail);
+    store.dispatch(showSuccess(translate('Your invitation was accepted.')));
+    clearInvitationToken();
+    const newUser = await getCurrentUser();
+    store.dispatch(setCurrentUser(newUser));
+  } catch (error) {
+    if (error.response?.status === 404) {
+      store.dispatch(showError(translate('Invitation is not found.')));
+    } else if (error.response?.status === 400) {
       clearInvitationToken();
-      // TODO: Invalidate customers list
-    })
-    .catch((error) => {
-      if (error.response?.status === 404) {
-        store.dispatch(showError(translate('Invitation is not found.')));
-      } else if (error.response?.status === 400) {
-        clearInvitationToken();
-        store.dispatch(showError(translate('Invitation is not valid.')));
-      } else if (error.response?.status === 500) {
-        store.dispatch(
-          showError(
-            translate(
-              'Internal server error occurred. Please try again or contact support.',
-            ),
+      store.dispatch(showError(translate('Invitation is not valid.')));
+    } else if (error.response?.status === 500) {
+      store.dispatch(
+        showError(
+          translate(
+            'Internal server error occurred. Please try again or contact support.',
           ),
-        );
-      }
-    });
+        ),
+      );
+    }
+  }
 }
 
 function submitGroupRequest(token) {
