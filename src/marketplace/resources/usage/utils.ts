@@ -163,3 +163,17 @@ export const getUsageHistoryPeriodOptions = (startDate = null) => {
 export const getBillingTypeLabel = (value) =>
   getAccountingTypeOptions().find((option) => option.value === value)?.label ||
   'N/A';
+
+export const getTableData = (
+  component: OfferingComponent,
+  usages: ComponentUsage[],
+) => {
+  return usages
+    .filter((usage) => usage.type === component.type)
+    .map((usage) => {
+      return {
+        date: parseDate(usage.billing_period).toFormat('MM/yyyy'),
+        usage: Number(usage.usage),
+      };
+    });
+};
