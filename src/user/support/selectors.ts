@@ -36,6 +36,3 @@ export const isVisibleForSupportOrStaff = (state: RootState) => {
 
 export const userLanguageIsVisible = (state: RootState) =>
   isVisible(state, UserFeatures.preferred_language);
-
-export const userCompetenceIsVisible = (state: RootState) =>
-  isVisible(state, UserFeatures.competence);

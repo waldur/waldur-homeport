@@ -72,10 +72,6 @@
         "description": "Render preferred language column in users list."
       },
       {
-        "key": "competence",
-        "description": "Render competence column in users list."
-      },
-      {
         "key": "ssh_keys",
         "description": "Enable SSH keys management in user workspace."
       },

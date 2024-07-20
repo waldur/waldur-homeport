@@ -36,7 +36,6 @@ export interface UserDetails extends User {
   requested_email?: string;
   registration_method: string;
   preferred_language: string;
-  competence: string;
   date_joined: string;
   organization: string;
   job_title: string;

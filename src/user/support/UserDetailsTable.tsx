@@ -13,15 +13,10 @@ import {
 import { UserDetails } from '@waldur/workspace/types';
 
 import { Row } from './Row';
-import {
-  userLanguageIsVisible,
-  userCompetenceIsVisible,
-  isVisibleForSupportOrStaff,
-} from './selectors';
+import { userLanguageIsVisible, isVisibleForSupportOrStaff } from './selectors';
 
 interface StateProps {
   userLanguageIsVisible: boolean;
-  userCompetenceIsVisible: boolean;
   isVisibleForSupportOrStaff: boolean;
   nativeNameVisible: boolean;
 }
@@ -50,11 +45,6 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
         label={translate('Preferred language')}
         value={props.user.preferred_language}
         isVisible={props.userLanguageIsVisible}
-      />
-      <Row
-        label={translate('Competence')}
-        value={props.user.competence}
-        isVisible={props.userCompetenceIsVisible}
       />
       <Row
         label={translate('Registration method')}
@@ -94,7 +84,6 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
 
 const mapStateToProps = (state: RootState) => ({
   userLanguageIsVisible: userLanguageIsVisible(state),
-  userCompetenceIsVisible: userCompetenceIsVisible(state),
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
   nativeNameVisible: getNativeNameVisible(state),
 });
