@@ -54,3 +54,6 @@ export const orderFormIsDirty = isDirty(ORDER_FORM_ID);
 
 export const orderCustomerSelector = (state) =>
   orderFormValues(state, 'customer');
+
+export const orderProjectSelector = (state) =>
+  orderFormValues(state, 'project');
