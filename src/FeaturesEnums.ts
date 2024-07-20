@@ -53,7 +53,6 @@ export enum TelemetryFeatures {
 }
 
 export enum UserFeatures {
-  competence = 'user.competence',
   notifications = 'user.notifications',
   preferred_language = 'user.preferred_language',
   ssh_keys = 'user.ssh_keys',
