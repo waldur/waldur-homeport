@@ -8,10 +8,11 @@ export const KeysListExpandableRow: FunctionComponent<any> = ({ row }) =>
     <div className="container-fluid m-t">
       <p>
         <b className="me-2">{translate('Public key')}:</b>
-        <CopyToClipboardContainer
-          value={row.public_key}
-          label={row.public_key}
-        />
+        <CopyToClipboardContainer value={row.public_key} />
+      </p>
+      <p>
+        <b className="me-2">{translate('Fingerprint (MD5)')}:</b>
+        <CopyToClipboardContainer value={row.fingerprint_md5} />
       </p>
     </div>
   ) : null;

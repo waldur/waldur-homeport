@@ -22,23 +22,36 @@ export const RobotAccountExpandable: FC<{ row: RobotAccount }> = ({ row }) => {
     <>
       {row.users.length > 0 ? (
         <>
-          <strong>{translate('Users')}</strong>
+          <strong>{translate('Connected users and their keys')}</strong>
           <ul>
             {row.users.map((user, index) => (
               <li key={index}>
                 {user.full_name} ({user.username})
                 {groupedKeys[user.uuid]?.length > 0 && (
                   <p>
-                    <strong>{translate('SSH keys')}</strong>
                     <ul>
                       {groupedKeys[user.uuid].map((key, index) => (
                         <li key={index}>
                           <p>
-                            {translate('Name')}: {key.name}
+                            {translate('Key name')}: {key.name}
                           </p>
                           <p>
-                            {translate('Fingerprint')}:{' '}
-                            <CopyToClipboardContainer value={key.fingerprint} />
+                            {translate('Fingerprint (MD5)')}:{' '}
+                            <CopyToClipboardContainer
+                              value={key.fingerprint_md5}
+                            />
+                          </p>
+                          <p>
+                            {translate('Fingerprint (SHA256)')}:{' '}
+                            <CopyToClipboardContainer
+                              value={key.fingerprint_sha256}
+                            />
+                          </p>
+                          <p>
+                            {translate('Fingerprint (SHA512)')}:{' '}
+                            <CopyToClipboardContainer
+                              value={key.fingerprint_sha512}
+                            />
                           </p>
                           <p>
                             {translate('Public key')}:{' '}
@@ -56,13 +69,25 @@ export const RobotAccountExpandable: FC<{ row: RobotAccount }> = ({ row }) => {
       ) : null}
       {row.fingerprints.length > 0 ? (
         <>
-          <strong>{translate('SSH keys')}</strong>
+          <strong>{translate('Robot SSH keys')}</strong>
           <ul>
             {row.fingerprints.map((value, index) => (
               <li key={index}>
                 <p>
-                  {translate('Fingerprint')}:{' '}
-                  <CopyToClipboardContainer value={value} />
+                  {translate('Fingerprint (MD5)')}:{' '}
+                  <CopyToClipboardContainer value={value.md5} />
+                </p>
+                <p>
+                  {translate('Fingerprint (SHA256)')}:{' '}
+                  <CopyToClipboardContainer value={value.sha256} />
+                </p>
+                <p>
+                  {translate('Fingerprint (SHA512)')}:{' '}
+                  <CopyToClipboardContainer value={value.sha512} />
+                </p>
+                <p>
+                  {translate('Public key')}:{' '}
+                  <CopyToClipboardContainer value={row.keys[index]} />
                 </p>
               </li>
             ))}

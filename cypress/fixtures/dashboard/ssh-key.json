@@ -2,8 +2,10 @@
   "url": "http://localhost:8001/api/keys/62d919b5ed09439b96fab24e1f074edd/",
   "uuid": "62d919b5ed09439b96fab24e1f074edd",
   "name": "text key cy",
-  "public_key": "ssh-rsa AAAAB3NzaC1yo2EAAAADAQABAAABAQDqYjg9x9ZePpYOSsapYfzSf5SQKDOmIpuYsOhP87c3KqjHLhU8Y5BNrUPPrhJKW+i6CkZnQuBtVjHdhz0q/hAD05L0F1tGcez4doG9AbsZyS1mfmQ4molO18w1Cliw1wFrOe66+klsFYuIdzrkbIQIezb66RZN6P21nyRejgG7egNHrrU9gWDpzPTIaFKwDndqibTU89YyvRqCy8a5HYtAcrDyarHAymT9isUohPSem7FBj+t7Sdfu7UFmkl6r5Sc+fgj5CcjnZqAFBmb5rY2YuwCVUqi96ac027Wdy1LCSThqWTttpdiRpOiJxjLynI8rkcwxQftgUKvMdJBDEdAn",
-  "fingerprint": "4d:8e:79:d1:a7:ea:b0:1e:39:fe:93:55:6d:d3:0c:7a",
+  "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCNwCYA7JS4bQG5CrLDTmb0PpYI7CVxs1hO+QShUdSWHomKcUmGFEYMJ5b60ydMlS3B32SYGQqlfeKuGfb79XwgpmuS+9/cWIVpEatqbraL/xngpZ1cUFc9FdQJZLnytGg6r91896r73LHnkO6Gh0VggLDzaYqJKHLrHKz25UFZ7V6heTDK+xh4aN9QYoTahK8JKJs8mnH16ACQYtAq4lCXd8C5rPz9oQrAngQsXZ17qyxZLNTq8RHcvd4y+p8JRE6aWvN8aX3bLKMobmtsGJ7LYAf8itEgJX1RPA0fTc7bPYmsc4yuwyHs8BhwBYCaHnEfnZ6fMnw6c4RkF7jx3Ng9",
+  "fingerprint_md5": "2c:d5:8b:6a:01:91:2c:f1:00:4f:fd:d9:57:a5:a7:b6",
+  "fingerprint_sha256": "SHA256:SpCbp8Vqc+Pcg6zYmMviac59zLYXDjH5udvk3pxGOn8",
+  "fingerprint_sha512": "SHA512:I4wUdF4RBHlLRRWejhjCfGtkw4eXJkPc9iIB7jfAvSsvGAtAGpLQCqmZAWQu2YDyZwcGBuoMWj8OhHR7PmCFnA",
   "user_uuid": "3a836bc76e1b40349ec1a0d8220f374f",
   "is_shared": false,
   "type": "ssh-rsa"

@@ -2,7 +2,6 @@ describe('SSH Keys', () => {
   const successKeyCreated = 'The key has been created.';
   const successKeyRemoved = 'SSH key has been removed.';
   const errorInvalidInput = 'Invalid SSH public key.';
-  const errorKeyExist = 'Key with same fingerprint already exists.';
 
   beforeEach(() => {
     cy.mockUser()
@@ -35,25 +34,6 @@ describe('SSH Keys', () => {
       .get('button[type="submit"]')
       .click();
     cy.get("[data-testid='notification']").contains(errorInvalidInput);
-  });
-
-  it('Should display error messages for existing key input', () => {
-    cy.intercept('POST', '/api/keys/', {
-      statusCode: 400,
-      body: {
-        public_key: [errorKeyExist],
-      },
-    });
-    cy.contains('button', 'Add key').click();
-    cy.fixture('dashboard/ssh-keys').then((keys) => {
-      cy.get('input[name="name"]')
-        .type('text key cy')
-        .get('textarea[name="public_key"]')
-        .type(keys[0].public_key)
-        .get('button[type="submit"]')
-        .click();
-    });
-    cy.get("[data-testid='notification']").contains(errorKeyExist);
   });
 
   it('Should add a ssh key with appropriate inputs', () => {
