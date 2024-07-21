@@ -5,7 +5,6 @@ import { Col, Row } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getDailyQuotasOfCurrentMonth } from '@waldur/dashboard/api';
 import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { WidgetCard } from '@waldur/dashboard/WidgetCard';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
@@ -29,24 +28,12 @@ export const CustomerDashboardChart: FunctionComponent<
     () => loadSummary(customer),
     { staleTime: 5 * 60 * 1000 },
   );
-  const { data: changes, refetch: refetchChanges } = useQuery(
-    ['customerTeamChanges', customer.uuid],
-    async () => {
-      const dailyQuotas = await getDailyQuotasOfCurrentMonth(
-        'nc_user_count',
-        customer,
-      );
-      return dailyQuotas.reduce((v, acc) => acc + v, 0);
-    },
-    { staleTime: 5 * 60 * 1000 },
-  );
 
   const router = useRouter();
   const goToUsers = () => router.stateService.go('organization-users');
 
   const { callback, canInvite } = useCreateInvitation({
     roleTypes: ['customer', 'project'],
-    refetch: refetchChanges,
   });
 
   if (isLoading) {
@@ -92,7 +79,7 @@ export const CustomerDashboardChart: FunctionComponent<
               fetchSelectCustomerUsers(customer.uuid, { page_size: 5 })
             }
             scope={customer}
-            changes={changes}
+            changes={null}
             onBadgeClick={goToUsers}
             onAddClick={callback}
             showAdd={canInvite}
