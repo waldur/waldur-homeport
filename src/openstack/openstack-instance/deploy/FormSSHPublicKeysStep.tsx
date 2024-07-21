@@ -71,8 +71,8 @@ export const FormSSHPublicKeysStep = (props: FormStepProps) => {
             render: ({ row }) => row.type,
           },
           {
-            title: translate('Fingerprint'),
-            render: ({ row }) => row.fingerprint,
+            title: translate('Fingerprint (MD5)'),
+            render: ({ row }) => row.fingerprint_md5,
           },
         ]}
         verboseName={translate('SSH keys')}

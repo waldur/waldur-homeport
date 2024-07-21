@@ -3,18 +3,22 @@
     "url": "http://localhost:8001/api/keys/60cad761fc3a45c89a450289372987c5/",
     "uuid": "60cad761fc3a45c89a450289372987c5",
     "name": "test",
-    "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCMy/2FlqM5oF4MKxbzIlIf26WvHZDjTXZ3TKrEapx4bg07rrxA3TRWLB1oD6EM7kExYVbcj2wgqGxKd4BZhfsNFljJJJj//4SV6hcsGaqU8A+I1/kFs80Etk+xgZWrSoSXI7Nl/Nm5QuixdTMMSwwI4nsXkJQ7QW/NhsON3aaa9NIcZ3q6xnGUIG3H0HVeyb1dhOMYtfqjmH+5VzTu8X0Lwwpd/v16vjXqteAayDjtxxzB5T9EIgDhYzMj8ZtLBhNEkH375cabRbMZy3ahtFScnpcYarKqVNfw3ypSGiW6GCje0FCKBvhL19jousSTgg4bPnXPbIehxh7SlyJJZ0W1",
-    "fingerprint": "a6:3d:82:05:77:16:11:3c:6b:6f:dd:97:ea:39:32:b0",
+    "public_key": "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBACxAZOEBIbrlWgEK7LFGuqD1DJ7xcQbh7yZh06Z/FJjmDy6/NXLHxPsA2Rp3L0LPxaV2NFUcA5CBdv+lCnNoL0ZRgGKboO+psYcVoKgdy3ERKOVomcQrJfWAX+CoTdv85GOOt1JNUFPy6I0IsxvEaWyNUBf+d5nLNfHhKfXeQ/RwR4/OQ==",
+    "fingerprint_md5": "d6:5b:c4:6d:e3:a6:b9:ee:6a:d6:6d:cc:a5:0b:a8:62",
+    "fingerprint_sha256": "SHA256:eaDxWeGm9N8NKLsjQ7p52qiOlU3i5bx6FUyvvsLgSFI",
+    "fingerprint_sha512": "SHA512:AQd1+t3+FDS1fThWgEmyOebdaqfGiqg0zWzUvGHqIVj8Vr6H5xKQuhQY4ZAtSu1XQFsNV4v10Nt2MygijFt8qA",
     "user_uuid": "3f153be7a4804b3abcbc4a607b3ac136",
     "is_shared": false,
-    "type": "ssh-rsa"
+    "type": "ecdsa-sha2-nistp521"
   },
   {
     "url": "http://localhost:8001/api/keys/62d419b5ed09439b96fab24e1f074edd/",
     "uuid": "62d419b5ed09439b96fab24e1f074edd",
     "name": "test2",
     "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDqYjg9x9ZePpYOSsapYfzSf5SQKDOmIpuYsOhP87c3KqjHLhU8Y5BNrUPPrhJKW+i1CkZnQuBtVjHdhz0q/hAD05L0F1tGcez4dyG9AbsZyS1mfnQ4molO18w1Cliw1wFrOe66+klsFYuIdzrkbIQIezb66RZN6P21nyRejgG7egNHrrU9gWDpzPTIaFKwDndqibTU89YyvRqCy8a5HYtAcrDyarHAymT9isUohPSem7FBj+t7Sdfu7UFmkl6r5Sc+fgj5CcjnZqAFBmb5rY2YuwCVUqi96ac027Wdy1LCSThqWTttpdiRpOiJxjLynI8rkcwxQftgUKvMdJBDEdAn",
-    "fingerprint": "4d:8e:79:d1:a7:ea:b0:1e:39:fe:93:55:6d:d3:0c:7a",
+    "fingerprint_md5": "4d:8e:79:d1:a7:ea:b0:1e:39:fe:93:55:6d:d3:0c:7a",
+    "fingerprint_sha256": "SHA256:gMr0Yb7sN7kCTVfjCPqvqfYNaN+JOci7jAR5TDeF7tA",
+    "fingerprint_sha512": "SHA512:Nq2QEZMWXHWEuQevQbbfuDllIEP0kmGeSF1fM4z673Dw0CV6nMUmYjeFtPkPSN8aCrDQ4eH07oneWJbf+xUGmw",
     "user_uuid": "3f153be7a4804b3abcbc4a607b3ac136",
     "is_shared": false,
     "type": "ssh-rsa"
@@ -24,7 +28,9 @@
     "uuid": "8243accfe6754cbaad2a9f8f4398cced",
     "name": "my_key",
     "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCMy/2FlqM5oF4MKxbzIlIf26WvHZDjTXZ3TKrEapx4bg07rrxA3TRWLB1oD6EM7kExYVbcj2wgqGxKd4BZhfsNFljJJJj//4SV6hcsGaqU8A+I1/kFs80Etk+xgZWrSoSXI7Nl/Nm5QuixdTMMSwwI4nsXkJQ7QW/NhsON3aaa9NIcZ3q6xnGUIG3H0HVeyb1dhOMYtfqjmH+5VzTu8X0Lowpd/v16vjXqteAayDjtxxzB5T9EIgDhYzMj8ZtLBhNEkH375cabRbMZy3ahtFScnpcYarKqVNfx3ypSGiW6GCje0FCKBvhL19jousSTgg4bPnXPbIehxh7SlyJJZ0W1",
-    "fingerprint": "7a:21:d0:1d:29:bc:df:67:39:f5:1e:bd:60:30:98:6e",
+    "fingerprint_md5": "7a:21:d0:1d:29:bc:df:67:39:f5:1e:bd:60:30:98:6e",
+    "fingerprint_sha256": "SHA256:L8SkXFkM8fjzPJKYYwfU6KYPsnauEoofPvb/41LDwKQ",
+    "fingerprint_sha512": "SHA512:Ydj/3S79ZUH83zdvxYRYd3EVUaKuwst+jJ7VUVNzMH1YjfNNHOG2AnbRl1YU0EIpLq1pTM510Ej92hVrwvJSqw",
     "user_uuid": "3f153be7a4804b3abcbc4a607b3ac136",
     "is_shared": false,
     "type": "ssh-rsa"

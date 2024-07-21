@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
+import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { Column } from '@waldur/table/types';
@@ -27,10 +27,31 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
   const props = useTable({
     table: 'keysList',
     fetchData: createFetcher('keys'),
-    exportRow: (row) => [row.name, row.fingerprint],
+    exportRow: (row) => [
+      row.name,
+      row.public_key,
+      row.type,
+      row.fingerprint_md5,
+      row.fingerprint_sha256,
+      row.fingerprint_sha512,
+    ],
     exportAll: true,
-    exportFields: ['Title', 'Fingerprint'],
-    exportKeys: ['name', 'fingerprint'],
+    exportFields: [
+      'Title',
+      'Public key',
+      'Type',
+      'Fingerprint (MD5)',
+      'Fingerprint (SHA256)',
+      'Fingerprint (SHA512)',
+    ],
+    exportKeys: [
+      'name',
+      'public_key',
+      'type',
+      'fingerprint_md5',
+      'fingerprint_sha256',
+      'fingerprint_sha512',
+    ],
     queryField: 'name',
     filter,
   });
@@ -40,20 +61,20 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
       render: ({ row }) => row.name,
     },
     {
-      title: translate('Fingerprint'),
+      title: translate('Type'),
+      render: ({ row }) => row.type,
+    },
+    {
+      title: translate('Fingerprint (SHA256)'),
       render: ({ row }) => (
-        <>
-          {row.fingerprint}
-          <CopyToClipboardButton
-            value={row.fingerprint}
-            className="ms-1 text-hover-primary cursor-pointer d-inline-block"
-          />
-        </>
+        <CopyToClipboardContainer value={row.fingerprint_sha256} />
       ),
     },
     {
-      title: translate('Type'),
-      render: ({ row }) => row.type,
+      title: translate('Fingerprint (SHA512)'),
+      render: ({ row }) => (
+        <CopyToClipboardContainer value={row.fingerprint_sha512} />
+      ),
     },
   ];
 
