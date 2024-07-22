@@ -8,7 +8,6 @@ import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
 import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
-import { OrganizationEditButton } from '@waldur/customer/list/OrganizationEditButton';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { createFetcher, Table } from '@waldur/table';
@@ -263,7 +262,6 @@ export const BaseOrganizationsList: FunctionComponent<{
       hasQuery={true}
       showPageSizeSelector={true}
       enableExport={true}
-      hoverableRow={({ row }) => <OrganizationEditButton customer={row} />}
       standalone={standalone}
       actions={<OrganizationCreateButton />}
       filters={<OrganizationsFilter />}
