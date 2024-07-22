@@ -73,6 +73,7 @@ interface CoreConfiguration {
   OECD_FOS_2007_CODE_MANDATORY: boolean;
   LANGUAGE_CHOICES: string[];
   DISABLE_DARK_THEME: boolean;
+  USER_TABLE_COLUMNS: string;
 }
 
 interface MarketplaceConfiguration {
