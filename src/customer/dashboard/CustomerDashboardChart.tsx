@@ -34,6 +34,7 @@ export const CustomerDashboardChart: FunctionComponent<
 
   const { callback, canInvite } = useCreateInvitation({
     roleTypes: ['customer', 'project'],
+    enableBulkUpload: true,
   });
 
   if (isLoading) {

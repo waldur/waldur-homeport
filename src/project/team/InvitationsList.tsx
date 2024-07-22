@@ -78,6 +78,7 @@ const InvitationsListComponent: FunctionComponent = () => {
           project={project}
           roleTypes={['project']}
           refetch={props.fetch}
+          enableBulkUpload={true}
         />
       }
       hasQuery={true}

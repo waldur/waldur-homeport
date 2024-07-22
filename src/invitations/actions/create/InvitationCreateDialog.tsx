@@ -111,7 +111,7 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
             className="border-end border-gray-300 border-2 mx-5 p-0"
           />
           <Col className="my-auto pb-20">
-            {step === 1 ? (
+            {step === 1 && resolve.enableBulkUpload ? (
               <BulkUpload onImport={populateRows} />
             ) : step === 2 ? (
               <CustomMessageInput />

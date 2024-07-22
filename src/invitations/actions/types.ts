@@ -20,6 +20,7 @@ export interface InvitationContext extends GenericInvitationContext {
   customer: Customer;
   project?: Project;
   refetch?(): void;
+  enableBulkUpload?: boolean;
 }
 
 export interface GroupInviteRow {

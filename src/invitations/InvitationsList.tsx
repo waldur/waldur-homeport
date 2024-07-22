@@ -81,6 +81,7 @@ export const InvitationsList: FunctionComponent = () => {
         <InvitationCreateButton
           roleTypes={['customer', 'project']}
           refetch={props.fetch}
+          enableBulkUpload={true}
         />
       }
       hasQuery={true}
