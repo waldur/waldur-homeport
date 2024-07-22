@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { fixURL } from '@waldur/core/api';
+import { Link } from '@waldur/core/Link';
 import { useLayout } from '@waldur/metronic/layout/core';
 
 import { themeSelector } from '../theme/store';
@@ -35,20 +36,26 @@ export const BrandName: FunctionComponent = () => {
       className="aside-logo flex-column-auto position-relative"
       id="kt_aside_logo"
     >
-      {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE && sidebarLogo ? (
-        <>
-          <img
-            src={sidebarLogoMobileUrl}
-            alt="logo"
-            className="mh-50px mw-200px logo_mobile"
-          />
+      <Link state="profile.details">
+        {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE && sidebarLogo ? (
+          <>
+            <img
+              src={sidebarLogoMobileUrl}
+              alt="logo"
+              className="mh-50px mw-200px logo_mobile"
+            />
+            <img
+              src={sidebarLogo}
+              alt="logo"
+              className="mh-50px mw-200px logo"
+            />
+          </>
+        ) : sidebarLogo ? (
           <img src={sidebarLogo} alt="logo" className="mh-50px mw-200px logo" />
-        </>
-      ) : sidebarLogo ? (
-        <img src={sidebarLogo} alt="logo" className="mh-50px mw-200px logo" />
-      ) : (
-        <h3 className="mt-2">{ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}</h3>
-      )}
+        ) : (
+          <h3 className="mt-2">{ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}</h3>
+        )}
+      </Link>
       <div
         id="kt_aside_toggle"
         className="btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate active"
