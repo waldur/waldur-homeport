@@ -3504,7 +3504,7 @@
     "message": "Find solution"
   },
   "Fingerprint (MD5)": {
-    "description": "marketplace/robot-accounts/RobotAccountExpandable.tsx, user/keys/KeysListExpandableRow.tsx",
+    "description": "marketplace/robot-accounts/RobotAccountExpandable.tsx, openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx, user/keys/KeysListExpandableRow.tsx",
     "message": "Fingerprint (MD5)"
   },
   "Fingerprint (SHA256)": {
@@ -3514,10 +3514,6 @@
   "Fingerprint (SHA512)": {
     "description": "marketplace/robot-accounts/RobotAccountExpandable.tsx, user/keys/KeysList.tsx",
     "message": "Fingerprint (SHA512)"
-  },
-  "Fingerprint": {
-    "description": "openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx",
-    "message": "Fingerprint"
   },
   "First name": {
     "description": "administration/TokensList.tsx, user/support/UserEditForm.tsx",
