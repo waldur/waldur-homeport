@@ -51,6 +51,11 @@ export const useMarketplacePublicTabs = () => {
         title: translate('Dashboard'),
         to: 'public.marketplace-landing',
       },
+    ];
+
+    const categoryTabs = getCategoryItems(categories || []);
+
+    const additionalTabs: Tab[] = [
       {
         title: translate('Service providers'),
         to: 'public.marketplace-providers',
@@ -60,7 +65,8 @@ export const useMarketplacePublicTabs = () => {
         to: 'public.marketplace-orders',
       },
     ];
-    return _tabs.concat(getCategoryItems(categories || []));
+
+    return _tabs.concat(categoryTabs, additionalTabs);
   }, [categories]);
   useExtraTabs(tabs);
 };
