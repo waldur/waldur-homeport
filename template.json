@@ -11475,9 +11475,9 @@
     "description": "marketplace/resources/list/ResourceStateFilter.tsx, resource/state/constants.ts",
     "message": "Updating"
   },
-  "Upload a CSV file containing the columns email and role. If you are unsure, you can download an example file as a template": {
+  "Upload a CSV file containing the email. Optionally you may specify role and project. If you are unsure, you can download an example file as a template.": {
     "description": "invitations/actions/create/BulkUpload.tsx",
-    "message": "Upload a CSV file containing the columns email and role. If you are unsure, you can download an example file as a template"
+    "message": "Upload a CSV file containing the email. Optionally you may specify role and project. If you are unsure, you can download an example file as a template."
   },
   "Upload additional documents, which support the proposal and help to review it.": {
     "description": "proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx",

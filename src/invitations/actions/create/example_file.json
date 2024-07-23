@@ -1,8 +1,8 @@
 ﻿{
-  "fields": ["Email", "Role"],
+  "fields": ["Email", "Role", "Project"],
   "data": [
-    ["CraigAlvarado@example.com", "Project member"],
-    ["JoannWaters@example.com", "System administrator"],
-    ["DonnaSchwartz@example.com", "Organization owner"]
+    ["CraigAlvarado@example.com", "Project member", "5eeab7fe3f5745c98b97f8e6cfcb8618"],
+    ["JoannWaters@example.com", "System administrator", "Adaptive client-driven data-warehouse"],
+    ["DonnaSchwartz@example.com", "Organization owner", ""]
   ]
 }

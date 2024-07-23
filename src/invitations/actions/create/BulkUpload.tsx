@@ -9,7 +9,11 @@ import { saveAsCsv } from '@waldur/table/export';
 
 import example_file from './example_file.json';
 
-export type EmailRolePairs = Array<{ email: string; role?: string }>;
+export type EmailRolePairs = Array<{
+  email: string;
+  role?: string;
+  project?: string;
+}>;
 
 interface OwnProps {
   onImport(items: EmailRolePairs): void;
@@ -38,13 +42,17 @@ export const BulkUpload: FC<OwnProps> = (props) => {
             const roleIndex = results.data[0].findIndex((str) =>
               str.toLowerCase().includes('role'),
             );
+            const projectIndex = results.data[0].findIndex((str) =>
+              str.toLowerCase().includes('project'),
+            );
             const items: EmailRolePairs = [];
             // slice 1 to ignore csv header row
             results.data.slice(1).forEach((row) => {
               const email = row[emailIndex];
               const role = row[roleIndex];
+              const project = row[projectIndex];
               if (email && !items.some((item) => item.email === email)) {
-                items.push({ email, role });
+                items.push({ email, role, project });
               }
             });
             props.onImport(items);
@@ -64,7 +72,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
       <h2 className="mb-6">{translate('Bulk upload')}</h2>
       <p className="mb-6">
         {translate(
-          'Upload a CSV file containing the columns email and role. If you are unsure, you can download an example file as a template',
+          'Upload a CSV file containing the email. Optionally you may specify role and project. If you are unsure, you can download an example file as a template.',
         )}
         :
       </p>
