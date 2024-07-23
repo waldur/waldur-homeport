@@ -70,12 +70,6 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
         <CopyToClipboardContainer value={row.fingerprint_sha256} />
       ),
     },
-    {
-      title: translate('Fingerprint (SHA512)'),
-      render: ({ row }) => (
-        <CopyToClipboardContainer value={row.fingerprint_sha512} />
-      ),
-    },
   ];
 
   if (isStaffOrSelf) {
