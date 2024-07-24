@@ -11,6 +11,10 @@ export const KeysListExpandableRow: FunctionComponent<any> = ({ row }) =>
         <CopyToClipboardContainer value={row.public_key} />
       </p>
       <p>
+        <b className="me-2">{translate('Fingerprint (SHA512)')}:</b>
+        <CopyToClipboardContainer value={row.fingerprint_sha512} />
+      </p>
+      <p>
         <b className="me-2">{translate('Fingerprint (MD5)')}:</b>
         <CopyToClipboardContainer value={row.fingerprint_md5} />
       </p>
