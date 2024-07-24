@@ -187,6 +187,10 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
             label={translate('UUID')}
             value={props.customer.uuid || 'N/A'}
           />
+          <FormTable.Item
+            label={translate('Slug')}
+            value={props.customer.slug}
+          />
           {identifiersRows.map((row) => (
             <FormTable.Item
               key={row.key}
