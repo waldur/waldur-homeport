@@ -1,8 +1,9 @@
-import { useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -13,13 +14,18 @@ import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
 import { ProviderOfferingUsersFilter } from './ProviderOfferingUsersFilter';
 import { ProviderOfferingUserUpdateButton } from './ProviderOfferingUserUpdateButton';
 
-export const ProviderOfferingUsersListComponent = ({ provider }) => {
+export const ProviderOfferingUsersListComponent: FunctionComponent<{
+  provider?;
+  hasOrganizationColumn?: boolean;
+}> = ({ provider, hasOrganizationColumn }) => {
   const filterValues = useSelector(
     getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
-  ) as { offering? };
+  ) as { offering?; provider? };
   const filter = useMemo(
     () => ({
-      provider_uuid: provider.customer_uuid,
+      provider_uuid: hasOrganizationColumn
+        ? filterValues?.provider?.customer_uuid
+        : provider?.customer_uuid,
       offering_uuid: filterValues?.offering?.uuid,
     }),
     [provider, filterValues],
@@ -30,12 +36,28 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
     filter,
     queryField: 'query',
   });
+  const organizationColumn = hasOrganizationColumn
+    ? [
+        {
+          title: translate('Organization'),
+          render: ({ row }) => row.customer_name,
+          filter: 'provider',
+        },
+      ]
+    : [];
   const columns = [
     {
       title: translate('Offering'),
-      render: ({ row }) => row.offering_name,
+      render: ({ row }) => (
+        <Link
+          state="public-offering.marketplace-public-offering"
+          params={{ uuid: row.offering_uuid }}
+          label={row.offering_name}
+        />
+      ),
       filter: 'offering',
     },
+    ...organizationColumn,
     {
       title: translate('User'),
       render: ({ row }) => row.user_full_name,
@@ -68,7 +90,11 @@ export const ProviderOfferingUsersListComponent = ({ provider }) => {
       columns={columns}
       verboseName={translate('Offering users')}
       showPageSizeSelector={true}
-      filters={<ProviderOfferingUsersFilter />}
+      filters={
+        <ProviderOfferingUsersFilter
+          hasOrganizationColumn={hasOrganizationColumn}
+        />
+      }
       hoverableRow={({ row }) => (
         <ProviderOfferingUserUpdateButton
           row={row}
