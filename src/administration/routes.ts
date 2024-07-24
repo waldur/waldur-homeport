@@ -86,6 +86,11 @@ const AdministrationLanguages = lazyComponent(
   'AdministrationLanguages',
 );
 
+const OfferingUsersList = lazyComponent(
+  () => import('./users/OfferingUsersList'),
+  'OfferingUsersList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -226,6 +231,15 @@ export const states: StateDeclaration[] = [
     parent: 'admin-accounts',
     data: {
       breadcrumb: () => translate('Robot accounts'),
+    },
+  },
+  {
+    name: 'admin-user-offering-users',
+    url: 'offering-users/',
+    component: OfferingUsersList,
+    parent: 'admin-accounts',
+    data: {
+      breadcrumb: () => translate('Offering users'),
     },
   },
   {
