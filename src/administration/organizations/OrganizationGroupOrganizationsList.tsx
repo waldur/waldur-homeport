@@ -1,5 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 
+import { ENV } from '@waldur/configs/default';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -23,20 +24,6 @@ export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
     fetchData: createFetcher('customers'),
     queryField: 'name',
     filter,
-    exportRow: (row) => [
-      row.name,
-      row.email || DASH_ESCAPE_CODE,
-      row.organization_group_name || DASH_ESCAPE_CODE,
-      row.projects_count || 0,
-      formatDateTime(row.created),
-    ],
-    exportFields: [
-      'Name',
-      'Email',
-      'Organization group',
-      'Projects',
-      'Created',
-    ],
   });
   const columns = [
     {
@@ -48,32 +35,45 @@ export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
           label={row.name}
         />
       ),
+      export: 'name',
     },
     {
       title: translate('Abbreviation'),
       render: ({ row }) => <>{row.abbreviation || DASH_ESCAPE_CODE}</>,
+      export: 'abbreviation',
     },
     {
       title: translate('Role'),
       render: RoleField,
+      export: (row) => {
+        const role = ENV.roles.find((role) => role.name === row.role_name);
+        return role?.description || role?.name || DASH_ESCAPE_CODE;
+      },
+      exportKeys: ['role_name'],
     },
     {
       title: translate('Email'),
       render: ({ row }) => <>{row.email || DASH_ESCAPE_CODE}</>,
+      export: 'email',
     },
     {
       title: translate('Organization group'),
       render: ({ row }) => (
         <>{row.organization_group_name || DASH_ESCAPE_CODE}</>
       ),
+      export: 'organization_group_name',
     },
     {
       title: translate('Projects'),
       render: ({ row }) => <>{row.projects_count || 0}</>,
+      export: (row) => row.projects_count || 0,
+      exportKeys: ['projects_count'],
     },
     {
       title: translate('Created'),
       render: ({ row }) => <>{renderFieldOrDash(formatDate(row.created))}</>,
+      export: (row) => formatDateTime(row.created),
+      exportKeys: ['created'],
     },
   ];
 

@@ -23,31 +23,33 @@ export const SupportFeedbackList: FC = () => {
     table: SUPPORT_FEEDBACK_LIST,
     fetchData: createFetcher('support-feedbacks'),
     filter,
-    exportRow,
-    exportFields,
     queryField: 'query',
   });
   const columns = [
     {
       title: translate('Issue'),
       render: IssueField,
+      export: 'issue_uuid',
     },
     {
       title: translate('User'),
       render: ({ row }) => row.user_full_name,
       orderField: 'user_full_name',
       filter: 'user',
+      export: 'user_name',
     },
     {
       title: translate('Evaluation'),
       render: ({ row }) => row.evaluation,
       orderField: 'evaluation',
       filter: 'evaluation',
+      export: 'evaluation',
     },
     {
       title: translate('Created'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
+      export: 'created',
     },
   ];
   return (
@@ -65,20 +67,6 @@ export const SupportFeedbackList: FC = () => {
     />
   );
 };
-
-const exportRow = (row) => [
-  row.issue_uuid,
-  row.user_name,
-  row.evaluation,
-  row.created,
-];
-
-const exportFields = [
-  translate('Issue'),
-  translate('User'),
-  translate('Evaluation'),
-  translate('Created'),
-];
 
 const mapStateToProps = createSelector(
   getFormValues(SUPPORT_FEEDBACK_LIST_FILTER_FORM),

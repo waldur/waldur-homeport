@@ -39,9 +39,6 @@ export const BaseEventsList: FunctionComponent<{
       filter,
       fetchData: createFetcher('events'),
       queryField: 'message',
-      exportFields: ['message', 'created'],
-      exportRow: (row) => [row.message, row.created],
-      exportKeys: ['message', 'created'],
       pullInterval: ENV.countersTimerInterval * 1000,
     }),
     [table, filter],
@@ -54,11 +51,13 @@ export const BaseEventsList: FunctionComponent<{
         {
           title: translate('Message'),
           render: ({ row }) => eventsRegistry.formatEvent(row),
+          export: 'message',
         },
         {
           title: translate('Timestamp'),
           render: EventDateField,
           orderField: 'created',
+          export: 'created',
         },
       ]}
       hasQuery={true}

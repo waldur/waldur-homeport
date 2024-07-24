@@ -47,46 +47,64 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       title: translate('Name'),
       render: PublicResourceLink,
       orderField: 'name',
+      export: 'name',
+    },
+    {
+      visible: false,
+      title: translate('Resource UUID'),
+      render: null,
+      export: 'uuid',
     },
     {
       title: translate('Offering type'),
       render: ({ row }) => <>{row.offering_name}</>,
+      export: 'offering_name',
     },
     {
       title: translate('Client organization'),
       render: ({ row }) => <>{row.customer_name}</>,
       filter: 'organization',
+      export: 'customer_name',
     },
     {
       title: translate('Project'),
       render: ({ row }) => <>{row.project_name}</>,
+      export: 'project_name',
     },
     {
       title: translate('Category'),
       render: ({ row }) => <>{row.category_title}</>,
       filter: 'category',
+      export: 'category_title',
     },
     {
       title: translate('Plan'),
       render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
+      export: 'plan_name',
     },
     {
       title: translate('Limits'),
       render: PublicResourcesLimits,
+      export: (row) => JSON.stringify(row.limits),
+      exportKeys: ['limits'],
     },
     {
       title: translate('Effective ID'),
       render: ({ row }) => <>{row.effective_id || 'N/A'}</>,
+      export: 'effective_id',
     },
     {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
+      export: (row) => formatDateTime(row.created),
+      exportKeys: ['created'],
     },
     {
       title: translate('State'),
       render: ({ row }) => <ResourceStateField resource={row} />,
       filter: 'state',
+      export: 'state',
     },
   ];
 
@@ -110,39 +128,9 @@ export const TableComponent: FunctionComponent<any> = (props) => {
   );
 };
 
-const exportRow = (row) => [
-  row.name,
-  row.uuid,
-  row.offering_name,
-  row.customer_name,
-  row.project_name,
-  row.category_title,
-  row.plan_name,
-  JSON.stringify(row.limits),
-  row.effective_id,
-  formatDateTime(row.created),
-  row.state,
-];
-
-const exportFields = [
-  'Name',
-  'Resource UUID',
-  'Offering type',
-  'Client organization',
-  'Project',
-  'Category',
-  'Plan',
-  'Limits',
-  'Effective ID',
-  'Created at',
-  'State',
-];
-
 export const TableOptions = {
   table: TABLE_PUBLIC_RESOURCE,
   fetchData: createFetcher('marketplace-resources'),
-  exportRow,
-  exportFields,
   queryField: 'query',
 };
 

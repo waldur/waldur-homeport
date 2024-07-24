@@ -5,10 +5,6 @@ import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-const exportFields = ['name', 'description', 'catalog'];
-
-const exportRow = (row) => [row.name, row.description, row.catalog_name];
-
 export const ClusterTemplatesList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
@@ -21,8 +17,6 @@ export const ClusterTemplatesList: FunctionComponent<{ resourceScope }> = ({
   const props = useTable({
     table: 'rancher-cluster-templates',
     fetchData: createFetcher('rancher-templates'),
-    exportFields,
-    exportRow,
     filter,
     queryField: 'name',
   });
@@ -45,19 +39,23 @@ export const ClusterTemplatesList: FunctionComponent<{ resourceScope }> = ({
             </Link>
           ),
           orderField: 'name',
+          export: 'name',
         },
         {
           title: translate('Description'),
           render: ({ row }) => <>{row.description}</>,
+          export: 'description',
         },
         {
           title: translate('Catalog'),
           render: ({ row }) => <>{row.catalog_name}</>,
           orderField: 'catalog_name',
+          export: 'catalog_name',
         },
         {
           title: translate('State'),
           render: ({ row }) => <>{row.runtime_state}</>,
+          export: 'runtime_state',
         },
       ]}
       verboseName={translate('application templates')}

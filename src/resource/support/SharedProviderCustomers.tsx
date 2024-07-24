@@ -28,28 +28,30 @@ export const SharedProviderCustomers: FC<{ provider_uuid: string }> = ({
   const props = useTable({
     table: 'SharedProviderCustomers',
     fetchData: createFetcher('openstack-shared-settings-customers'),
-    exportRow,
-    exportFields,
-    exportKeys,
-    exportAll: true,
     filter,
   });
   const columns: Array<Column<Customer & { vm_count: string }>> = [
     {
       title: translate('Organization'),
       render: OrganizationLink,
+      export: 'name',
     },
     {
       title: translate('Abbreviation'),
       render: AbbreviationField,
+      export: 'abbreviation',
     },
     {
       title: translate('Created'),
       render: CreatedDateField,
+      export: (row) => formatDate(row.created),
+      exportKeys: ['created'],
     },
     {
       title: translate('VMs'),
       render: ({ row }) => <>{row.vm_count}</>,
+      export: (row) => row.vm_count.toString(),
+      exportKeys: ['vm_count'],
     },
   ];
 
@@ -63,19 +65,3 @@ export const SharedProviderCustomers: FC<{ provider_uuid: string }> = ({
     />
   );
 };
-
-const exportRow = (row: Customer & { vm_count: string }) => [
-  row.name,
-  row.abbreviation,
-  formatDate(row.created),
-  row.vm_count.toString(),
-];
-
-const exportFields = () => [
-  translate('Organization'),
-  translate('Abbreviation'),
-  translate('Created'),
-  translate('VMs'),
-];
-
-const exportKeys = ['name', 'abbreviation', 'created', 'vm_count'];

@@ -17,20 +17,6 @@ export const PlanUsageList: FunctionComponent = () => {
   const props = useTable({
     table: 'PlanUsages',
     fetchData: createFetcher('marketplace-plans/usage_stats'),
-    exportRow: (row) => [
-      row.customer_provider_name,
-      row.offering_name,
-      row.plan_name,
-      row.limit,
-      row.usage,
-    ],
-    exportFields: [
-      'Service provider',
-      'Offering',
-      'Plan',
-      'Limit',
-      'Active plan count',
-    ],
     filter,
   });
   const columns = [
@@ -38,30 +24,37 @@ export const PlanUsageList: FunctionComponent = () => {
       title: translate('Service provider'),
       render: ({ row }: PlanUsageRowProps) => <>{row.customer_provider_name}</>,
       filter: 'provider',
+      export: 'customer_provider_name',
     },
     {
       title: translate('Offering'),
       render: ({ row }: PlanUsageRowProps) => <>{row.offering_name}</>,
       filter: 'offering',
+      export: 'offering_name',
     },
     {
       title: translate('Plan'),
       render: ({ row }: PlanUsageRowProps) => <>{row.plan_name}</>,
+      export: 'plan_name',
     },
     {
       title: translate('Active count'),
       render: ({ row }: PlanUsageRowProps) => <>{row.usage}</>,
       orderField: 'usage',
+      exportTitle: translate('Active plan count'),
+      export: 'usage',
     },
     {
       title: translate('Limit'),
       render: ({ row }: PlanUsageRowProps) => <>{row.limit || 'N/A'}</>,
       orderField: 'limit',
+      export: 'limit',
     },
     {
       title: translate('Remaining'),
       render: PlanRemainingColumn,
       orderField: 'remaining',
+      export: false,
     },
   ];
 

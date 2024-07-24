@@ -7,10 +7,6 @@ import { useTable } from '@waldur/table/utils';
 
 import { RolesRenderer } from './RolesRenderer';
 
-const exportFields = ['Full name', 'Username'];
-
-const exportRow = (row) => [row.full_name, row.user_name];
-
 export const ClusterUsersList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
@@ -24,8 +20,6 @@ export const ClusterUsersList: FunctionComponent<{ resourceScope }> = ({
     table: 'rancher-cluster-users',
     fetchData: createFetcher('rancher-users'),
     filter,
-    exportFields,
-    exportRow,
     queryField: 'user_username',
   });
   return (
@@ -35,10 +29,12 @@ export const ClusterUsersList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Full name'),
           render: ({ row }) => <>{row.full_name}</>,
+          export: 'full_name',
         },
         {
           title: translate('Username'),
           render: ({ row }) => <>{row.user_name}</>,
+          export: 'user_name',
         },
         {
           title: translate('Cluster roles'),
@@ -51,6 +47,7 @@ export const ClusterUsersList: FunctionComponent<{ resourceScope }> = ({
               )}
             </>
           ),
+          export: false,
         },
         {
           title: translate('Project roles'),
@@ -63,12 +60,14 @@ export const ClusterUsersList: FunctionComponent<{ resourceScope }> = ({
               )}
             </>
           ),
+          export: false,
         },
         {
           title: translate('Is active'),
           render: ({ row }) => (
             <>{row.is_active ? translate('Yes') : translate('No')}</>
           ),
+          export: false,
         },
       ]}
       verboseName={translate('users')}

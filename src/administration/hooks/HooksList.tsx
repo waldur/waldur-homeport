@@ -51,14 +51,6 @@ export const HooksList: FunctionComponent = () => {
     table: ADMIN_HOOK_LIST_ID,
     fetchData: createFetcher('hooks'),
     queryField: 'query',
-    exportRow: (row) => [
-      titleCase(row.hook_type),
-      getDestinationField(row),
-      getEventsField(row),
-    ],
-    exportAll: true,
-    exportFields: ['Method', 'Destination', 'Events'],
-    exportKeys: ['hook_type', 'destination_url', 'email', 'event_groups'],
     filter,
   });
 
@@ -71,31 +63,44 @@ export const HooksList: FunctionComponent = () => {
           className: 'text-center all',
           render: StateField,
           filter: 'state',
+          export: (row) =>
+            row.is_active ? translate('Enabled') : translate('Disabled'),
+          exportKeys: ['is_active'],
         },
         {
           title: translate('Method'),
           render: ({ row }) => titleCase(row.hook_type),
+          export: (row) => titleCase(row.hook_type),
+          exportKeys: ['hook_type'],
         },
         {
           title: translate('Person'),
           render: ({ row }) => <>{row.author_fullname}</>,
+          export: 'author_fullname',
         },
         {
           title: translate('Email'),
           render: ({ row }) => <>{row.author_email}</>,
+          export: 'author_email',
         },
         {
           title: translate('Destination'),
           render: ({ row }) => getDestinationField(row),
+          export: (row) => getDestinationField(row),
+          exportKeys: ['destination_url', 'email'],
         },
         {
           title: translate('Events'),
           render: ({ row }) => getEventsField(row),
+          export: (row) => getEventsField(row),
+          exportKeys: ['event_groups'],
         },
         {
           title: translate('Created'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
+          export: (row) => formatDateTime(row.created),
+          exportKeys: ['created'],
         },
       ]}
       showPageSizeSelector={true}

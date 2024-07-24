@@ -44,8 +44,6 @@ export const BillingRecordsList: FunctionComponent = () => {
     table: table,
     fetchData: createFetcher('invoices'),
     filter,
-    exportRow,
-    exportFields,
     queryField: 'number',
   });
 
@@ -64,15 +62,19 @@ export const BillingRecordsList: FunctionComponent = () => {
               {row.number}
             </Link>
           ),
+          export: 'number',
         },
         {
           title: translate('State'),
           render: ({ row }) => row.state,
           filter: 'state',
+          export: 'state',
         },
         {
           title: translate('Record period'),
           render: RecordPeriodField,
+          export: (row) => formatPeriod(row),
+          exportKeys: ['year', 'month'],
         },
         {
           title: (
@@ -81,6 +83,9 @@ export const BillingRecordsList: FunctionComponent = () => {
             </>
           ),
           render: ({ row }) => defaultCurrency(row.price),
+          exportTitle: translate('Total'),
+          export: (row) => defaultCurrency(row.price),
+          exportKeys: ['price'],
         },
       ]}
       hoverableRow={SendNotificationButton}
@@ -90,12 +95,3 @@ export const BillingRecordsList: FunctionComponent = () => {
     />
   );
 };
-
-const exportRow = (row) => [
-  row.number,
-  row.state,
-  formatPeriod(row),
-  defaultCurrency(row.price),
-];
-
-const exportFields = ['Record number', 'State', 'Record period', 'Total'];

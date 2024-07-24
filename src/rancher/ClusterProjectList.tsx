@@ -18,8 +18,6 @@ export const ClusterProjectList: FunctionComponent<{ resourceScope }> = ({
   const props = useTable({
     table: 'rancher-projects',
     fetchData: createFetcher('rancher-projects'),
-    exportFields: ['name', 'description', 'state'],
-    exportRow: (row) => [row.name, row.description, row.runtime_state],
     filter,
   });
   return (
@@ -29,14 +27,17 @@ export const ClusterProjectList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Name'),
           render: ({ row }) => <>{row.name}</>,
+          export: 'name',
         },
         {
           title: translate('Description'),
           render: ({ row }) => <>{row.description}</>,
+          export: 'description',
         },
         {
           title: translate('State'),
           render: ({ row }) => <>{row.runtime_state}</>,
+          export: 'runtime_state',
         },
       ]}
       verboseName={translate('projects')}

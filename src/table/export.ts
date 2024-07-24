@@ -1,9 +1,10 @@
 import copy from 'copy-to-clipboard';
 import FileSaver from 'file-saver';
+import { isEqual } from 'lodash';
 import Papa from 'papaparse';
 import { put, call, select } from 'redux-saga/effects';
 
-import { orderByFilter } from '@waldur/core/utils';
+import { isEmpty, orderByFilter } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showSuccess } from '@waldur/store/notify';
@@ -11,6 +12,7 @@ import { RootState } from '@waldur/store/reducers';
 import { fetchAll } from '@waldur/table/api';
 
 import { blockStart, blockStop, exportTableAs } from './actions';
+import { DASH_ESCAPE_CODE } from './constants';
 import exportExcel from './excel';
 import { exportAsPdf } from './exportAsPdf';
 import { getTableOptions } from './registry';
@@ -48,7 +50,39 @@ export function* exportTable(action: ReturnType<typeof exportTableAs>) {
     ...options
   } = getTableOptions(table);
 
-  if (options.exportAll) {
+  const customExport = Boolean(exportFields || exportRow);
+
+  // Calculate array for export data automatically
+  let exportColumns = [];
+  if (!customExport) {
+    // Apply order of columns
+    if (
+      props.columnPositions &&
+      !isEmpty(props.columnPositions.filter(Boolean))
+    ) {
+      props.columnPositions.forEach((colName) => {
+        const column = props.columns.find((col) => col.id === colName);
+        if (column) {
+          exportColumns.push(column);
+        }
+      });
+    } else {
+      exportColumns = props.columns;
+    }
+
+    // Apply enabled columns
+    if (props.activeColumns && !isEmpty(props.activeColumns)) {
+      const activeColumnsKeys = Object.values(props.activeColumns);
+      exportColumns = exportColumns.filter((col) =>
+        activeColumnsKeys.some((keys) => isEqual(keys, col.keys)),
+      );
+    }
+
+    // Remove false columns
+    exportColumns = exportColumns.filter((col) => col.export !== false);
+  }
+
+  if (config.allPages) {
     const state = yield select(getTableState(table));
     yield put(blockStart(table));
     const request: TableRequest = {
@@ -62,23 +96,73 @@ export function* exportTable(action: ReturnType<typeof exportTableAs>) {
     if (state.sorting && state.sorting.field) {
       request.filter.o = orderByFilter(state.sorting);
     }
-    if (exportKeys && exportKeys.length > 0) {
-      request.filter.field = exportKeys;
+
+    if (customExport) {
+      if (exportKeys && exportKeys.length > 0) {
+        request.filter.field = exportKeys;
+      }
+    } else if (exportColumns.length > 0) {
+      const autoExportKeys = [];
+      exportColumns.map((col) => {
+        if (typeof col.export === 'string') {
+          autoExportKeys.push(col.export);
+        } else if (col.exportKeys) {
+          autoExportKeys.push(col.exportKeys);
+        } else if (col.keys) {
+          autoExportKeys.push(col.keys);
+        }
+      });
+      if (autoExportKeys.length > 0) {
+        request.filter.field = autoExportKeys;
+      }
     }
 
     rows = yield call(fetchAll, fetchData, request);
     yield put(blockStop(table));
   }
 
-  const fields =
-    typeof exportFields === 'function' ? exportFields(props) : exportFields;
+  let data;
+  if (exportFields || exportRow) {
+    // Generate custom export data
+    const fields =
+      typeof exportFields === 'function' ? exportFields(props) : exportFields;
 
-  const data = {
-    fields,
-    data: exportData
-      ? exportData(rows, props)
-      : rows.map((row) => exportRow(row, props)),
-  };
+    data = {
+      fields,
+      data: exportData
+        ? exportData(rows, props)
+        : rows.map((row) => exportRow(row, props)),
+    };
+  } else {
+    // Generate export data automatically
+    const fields = exportColumns.map(
+      (col) =>
+        col.exportTitle || (typeof col.title === 'string' ? col.title : col.id),
+    );
+
+    data = {
+      fields,
+      data: rows.map((row) =>
+        exportColumns.map((col) => {
+          if (col.export && typeof col.export === 'function') {
+            return col.export(row);
+          }
+          const value =
+            row[col.export] ||
+            row[col.keys ? col.keys[0] : null] ||
+            row[col.orderField] ||
+            row[col.id];
+
+          if (typeof value === 'string' || [null, undefined].includes(value)) {
+            return value || DASH_ESCAPE_CODE;
+          } else {
+            return value;
+          }
+        }),
+      ),
+    };
+  }
+
   yield call(exporters[config.format], table, data);
   yield put(
     showSuccess(

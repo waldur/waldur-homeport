@@ -38,18 +38,11 @@ const mapStateToFilter = createSelector(
 
 export const NotificationList = () => {
   const filter = useSelector(mapStateToFilter);
-  const exportRow = (row) => {
-    const templatesContent = row.templates.map((template) => template.content);
-    return [row.key, ...templatesContent];
-  };
   const tableProps = useTable({
     table: 'notification',
     fetchData: createFetcher('notification-messages'),
     filter,
     queryField: 'query',
-    exportRow: exportRow,
-    exportAll: true,
-    exportKeys: ['key', 'templates'],
   });
   const hasOverriddenTemplate = (row) => {
     return row.templates.some((template) => template.is_content_overridden);
@@ -77,15 +70,26 @@ export const NotificationList = () => {
               )}
             </>
           ),
+          export: 'key',
         },
         {
           title: translate('Created at'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
+          export: false,
         },
         {
           title: translate('Enabled'),
           render: ({ row }) => <BooleanField value={row.enabled} />,
+          export: false,
+        },
+        {
+          visible: false,
+          title: translate('Templates'),
+          render: null,
+          export: (row) =>
+            JSON.stringify(row.templates.map((template) => template.content)),
+          exportKeys: ['templates'],
         },
       ]}
       verboseName={translate('notifications')}

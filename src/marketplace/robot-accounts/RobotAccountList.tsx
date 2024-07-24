@@ -17,14 +17,12 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
     fetchData: createFetcher('marketplace-robot-accounts'),
     filter,
     queryField: 'type',
-    exportAll: true,
-    exportRow: (row) => [row.type, row.username || 'N/A'],
-    exportFields: ['Type', 'Username'],
   });
   const columns = [
     {
       title: translate('Type'),
       render: ({ row }) => row.type || 'N/A',
+      export: 'type',
     },
     {
       title: translate('Username'),
@@ -34,6 +32,7 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
         ) : (
           'N/A'
         ),
+      export: 'username',
     },
   ];
 

@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -56,26 +56,37 @@ export const CustomerList: FunctionComponent<{
   );
   const accountingPeriodIsCurrent =
     customerListFilter?.accounting_period?.value.current;
+  const vatMessage =
+    ENV.accountingMode === 'accounting'
+      ? translate('VAT is not included')
+      : translate('VAT is included');
+
   const columns: Column<Customer>[] = [
     {
       title: translate('Organization'),
       render: OrganizationLink,
       orderField: 'name',
+      export: 'name',
     },
     {
       title: translate('Abbreviation'),
       render: AbbreviationField,
       orderField: 'abbreviation',
+      export: 'abbreviation',
     },
     {
       title: translate('Created'),
       render: CreatedDateField,
       orderField: 'created',
+      export: (row) => formatDate(row.created),
+      exportKeys: ['created'],
     },
     {
       title: translate('Start day of accounting'),
       render: AccountingStartDateField,
       orderField: 'accounting_start_date',
+      export: (row) => formatDate(row.accounting_start_date),
+      exportKeys: ['accounting_start_date'],
     },
     {
       title: translate('Registration code'),
@@ -86,6 +97,7 @@ export const CustomerList: FunctionComponent<{
       title: translate('Agreement number'),
       render: AgreementNumberField,
       orderField: 'agreement_number',
+      export: 'agreement_number',
     },
   ];
 
@@ -94,12 +106,17 @@ export const CustomerList: FunctionComponent<{
       title: renderTitleWithPriceTooltip(translate('Estimated cost')),
       render: EstimatedCostField,
       orderField: 'estimated_cost',
+      exportTitle: `${translate('Estimated cost')} (${vatMessage})`,
+      export: (row) => ExportEstimatedCostField({ row }),
+      exportKeys: ['payment_profiles', 'billing_price_estimate'],
     });
   } else {
     columns.push({
       title: renderTitleWithPriceTooltip(translate('Cost')),
       render: CurrentCostField,
       orderField: 'total_cost',
+      exportTitle: `${translate('Cost')} (${vatMessage})`,
+      export: (row) => ExportEstimatedCostField({ row }),
     });
   }
 
@@ -108,46 +125,11 @@ export const CustomerList: FunctionComponent<{
     [customerListFilter],
   );
 
-  const exportRow = useCallback(
-    (row) => {
-      const base = [
-        row.name,
-        row.abbreviation,
-        formatDate(row.created),
-        formatDate(row.accounting_start_date),
-        renderFieldOrDash(row.agreement_number),
-      ];
-      return accountingPeriodIsCurrent
-        ? [...base, ExportEstimatedCostField({ row })]
-        : base;
-    },
-    [accountingPeriodIsCurrent],
-  );
-
-  const exportFields = useMemo(() => {
-    const base = [
-      translate('Organization'),
-      translate('Abbreviation'),
-      translate('Created'),
-      translate('Start day of accounting'),
-      translate('Agreement number'),
-    ];
-    const vatNotIncluded = ENV.accountingMode === 'accounting';
-    const vatMessage = vatNotIncluded
-      ? translate('VAT is not included')
-      : translate('VAT is included');
-    return accountingPeriodIsCurrent
-      ? [...base, `${translate('Estimated cost')} (${vatMessage})`]
-      : [...base, `${translate('Cost')} (${vatMessage})`];
-  }, [accountingPeriodIsCurrent]);
-
   const props = useTable({
     table: 'customerList',
     fetchData: createFetcher('financial-reports'),
     queryField: 'query',
     filter,
-    exportRow,
-    exportFields,
   });
 
   return (

@@ -8,7 +8,6 @@ import { useTable } from '@waldur/table/utils';
 import { CatalogCreateButton } from './CatalogCreateButton';
 import { CatalogDeleteButton } from './CatalogDeleteButton';
 
-const exportRow = (row) => [row.name, row.description, row.catalog_url];
 export const ClusterCatalogList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
@@ -21,8 +20,6 @@ export const ClusterCatalogList: FunctionComponent<{ resourceScope }> = ({
   const props = useTable({
     table: 'rancher-catalogs',
     fetchData: createFetcher('rancher-catalogs'),
-    exportFields: ['name', 'description', 'catalog_url'],
-    exportRow,
     filter,
   });
   const columns = useMemo(
@@ -40,14 +37,17 @@ export const ClusterCatalogList: FunctionComponent<{ resourceScope }> = ({
             label={row.name}
           />
         ),
+        export: 'name',
       },
       {
         title: translate('Description'),
         render: ({ row }) => <>{row.description}</>,
+        export: 'description',
       },
       {
         title: translate('URL'),
         render: ({ row }) => <>{row.catalog_url}</>,
+        export: 'catalog_url',
       },
     ],
     [resourceScope],
