@@ -27,8 +27,6 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
     table: TABLE_MARKETPLACE_ORDERS,
     fetchData: createFetcher('marketplace-orders'),
     filter,
-    exportFields,
-    exportRow,
     queryField: 'query',
   });
   const columns = [
@@ -43,6 +41,7 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
       ),
       keys: ['attributes'],
       id: 'name',
+      export: (row) => row.attributes.name,
     },
     {
       title: translate('Created at'),
@@ -50,12 +49,14 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
       orderField: 'created',
       keys: ['created'],
       id: 'created',
+      export: (row) => formatDateTime(row.created),
     },
     {
       title: translate('Created by'),
       render: ({ row }) => row.created_by_full_name || row.created_by_username,
       keys: ['created_by_full_name', 'created_by_username'],
       id: 'created_by',
+      export: (row) => row.created_by_full_name || row.created_by_username,
     },
     {
       title: translate('State'),
@@ -88,6 +89,10 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
       orderField: 'consumer_reviewed_at',
       keys: ['consumer_reviewed_at'],
       id: 'approved_at',
+      export: (row) =>
+        row.consumer_reviewed_at
+          ? formatDateTime(row.consumer_reviewed_at)
+          : DASH_ESCAPE_CODE,
     },
     {
       title: translate('Approved by'),
@@ -97,6 +102,10 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
         DASH_ESCAPE_CODE,
       keys: ['consumer_reviewed_by_full_name', 'consumer_reviewed_by_username'],
       id: 'approved_by',
+      export: (row) =>
+        row.consumer_reviewed_by_full_name ||
+        row.consumer_reviewed_by_username ||
+        DASH_ESCAPE_CODE,
     },
   ];
   useMarketplacePublicTabs();
@@ -121,26 +130,6 @@ export const MarketplaceOrdersList: FunctionComponent = () => {
     />
   );
 };
-
-const exportRow = (row) => [
-  formatDateTime(row.created),
-  row.created_by_full_name || row.created_by_username,
-  row.state,
-  row.consumer_reviewed_at
-    ? formatDateTime(row.consumer_reviewed_at)
-    : DASH_ESCAPE_CODE,
-  row.consumer_reviewed_by_full_name ||
-    row.consumer_reviewed_by_username ||
-    DASH_ESCAPE_CODE,
-];
-
-const exportFields = [
-  'Created at',
-  'Created by',
-  'State',
-  'Approved at',
-  'Approved by',
-];
 
 const mapStateToFilter = createSelector(
   getFormValues(MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID),

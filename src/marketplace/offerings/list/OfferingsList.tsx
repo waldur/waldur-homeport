@@ -6,23 +6,12 @@ import { getLabel } from '@waldur/marketplace/common/registry';
 import { Table, createFetcher } from '@waldur/table';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 
-import { Offering } from '../../types';
 import { useOfferingDropdownActions } from '../hooks';
 
 import { OfferingActions } from './OfferingActions';
 import { OfferingNameColumn } from './OfferingNameColumn';
 import { OfferingsListTablePlaceholder } from './OfferingsListTablePlaceholder';
 import { OfferingStateCell } from './OfferingStateCell';
-
-const exportRow = (row: Offering) => [
-  row.name,
-  formatDateTime(row.created),
-  row.category_title,
-  row.state,
-  row.type,
-];
-
-const exportFields = ['Name', 'Created', 'Category', 'State', 'Type'];
 
 export const BaseOfferingsList: FunctionComponent<{
   table: string;
@@ -35,8 +24,6 @@ export const BaseOfferingsList: FunctionComponent<{
     table,
     filter,
     fetchData: createFetcher('marketplace-provider-offerings'),
-    exportRow,
-    exportFields,
     queryField: 'keyword',
   });
 
@@ -46,6 +33,7 @@ export const BaseOfferingsList: FunctionComponent<{
           title: translate('Organization'),
           render: ({ row }) => renderFieldOrDash(row.customer_name),
           filter: 'organization',
+          export: 'customer_name',
         },
       ]
     : [];
@@ -55,27 +43,34 @@ export const BaseOfferingsList: FunctionComponent<{
       title: translate('Name'),
       render: OfferingNameColumn,
       orderField: 'name',
+      export: 'name',
     },
     ...organizationColumn,
     {
       title: translate('Category'),
       render: ({ row }) => <>{row.category_title}</>,
       filter: 'category',
+      export: 'category_title',
     },
     {
       title: translate('Created'),
       render: ({ row }) => <>{formatDateTime(row.created)}</>,
       orderField: 'created',
+      export: (row) => formatDateTime(row.created),
+      exportKeys: ['created'],
     },
     {
       title: translate('State'),
       render: OfferingStateCell,
       filter: 'state',
+      export: 'state',
     },
     {
       title: translate('Type'),
       render: ({ row }) => <>{getLabel(row.type)}</>,
       filter: 'offering_type',
+      export: (row) => getLabel(row.type),
+      exportKeys: ['type'],
     },
   ];
 

@@ -17,22 +17,6 @@ import { checkCustomerUser, getUser } from '@waldur/workspace/selectors';
 
 import { CUSTOMERS_FILTER_FORM_ID } from '../constants';
 
-const exportRow = (row) => [
-  row.name,
-  row.email || DASH_ESCAPE_CODE,
-  row.organization_group_name || DASH_ESCAPE_CODE,
-  row.projects_count || 0,
-  formatDateTime(row.created),
-];
-
-const exportFields = [
-  'Name',
-  'Email',
-  'Organization group',
-  'Projects',
-  'Created',
-];
-
 const OrganizationField = ({ row }) => {
   const user = useSelector(getUser);
   const hasOrganizationPermission = checkCustomerUser(row, user);
@@ -70,8 +54,6 @@ export const BaseOrganizationsList: FunctionComponent<{
     fetchData: createFetcher('customers'),
     queryField: 'name',
     filter,
-    exportRow,
-    exportFields,
   });
 
   const columns = [
@@ -138,6 +120,7 @@ export const BaseOrganizationsList: FunctionComponent<{
       render: ({ row }) => <>{formatDate(row.created)}</>,
       keys: ['created'],
       id: 'created',
+      export: (row) => formatDateTime(row.created),
     },
     {
       title: translate('Contact details'),

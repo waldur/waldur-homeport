@@ -41,7 +41,6 @@ export interface TableOptionsType<RowType = any> {
   exportKeys?: string[];
   exportData?: (rows: RowType[], props: any) => string[][];
   exportRow?: (row: RowType, props: any) => string[];
-  exportAll?: boolean;
   placeholderComponent?: React.ComponentType;
   pullInterval?: number | (() => number);
   filters?: React.ReactNode;
@@ -59,6 +58,9 @@ export interface Column<RowType = any> {
   keys?: string[];
   optional?: boolean;
   filter?: string;
+  export?: string | boolean | ((row: RowType) => string | number);
+  exportTitle?: string;
+  exportKeys?: string[];
 }
 
 export type DisplayMode = 'table' | 'grid';
@@ -123,6 +125,7 @@ export interface TableDropdownItem {
 export interface ExportConfig {
   format: 'clipboard' | 'pdf' | 'excel' | 'csv';
   withFilters?: boolean;
+  allPages?: boolean;
 }
 
 export type DropdownActionItemType<T = any> = React.ComponentType<{

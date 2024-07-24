@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -46,58 +46,6 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
   const user = useSelector(getUser);
   const supportOrStaff = user?.is_staff || user?.is_support || false;
 
-  const exportRow = useCallback(
-    (row) => {
-      const result = [
-        row.key || 'N/A',
-        row.status || 'N/A',
-        row.summary,
-        row.description,
-      ];
-      if (supportOrStaff && !hiddenColumns.includes('resource_type')) {
-        result.push(row.resource_type || 'N/A');
-      }
-      if (!hiddenColumns.includes('customer')) {
-        result.push(row.customer_name || 'N/A');
-      }
-      if (!hiddenColumns.includes('project')) {
-        result.push(row.project_name || 'N/A');
-      }
-      result.push(row.caller_full_name || 'N/A');
-      if (supportOrStaff) {
-        result.push(row.reporter_name || 'N/A');
-      }
-      if (supportOrStaff) {
-        result.push(row.assignee_name || 'N/A');
-      }
-      result.push(formatDate(row.created));
-      result.push(formatRelative(row.created));
-      return result;
-    },
-    [supportOrStaff, hiddenColumns],
-  );
-
-  const exportFields = useCallback(
-    () =>
-      [
-        translate('Key'),
-        translate('Status'),
-        translate('Title'),
-        translate('Description'),
-        supportOrStaff &&
-          !hiddenColumns.includes('resource_type') &&
-          translate('Service type'),
-        !hiddenColumns.includes('customer') && translate('Organization'),
-        !hiddenColumns.includes('project') && translate('Project'),
-        translate('Caller'),
-        supportOrStaff && translate('Reporter'),
-        supportOrStaff && translate('Assigned to'),
-        translate('Created'),
-        supportOrStaff && translate('Time in progress'),
-      ].filter((label) => label),
-    [supportOrStaff, hiddenColumns],
-  );
-
   const filter = useSelector(mapStateToFilter);
 
   const tableProps = useTable({
@@ -105,8 +53,6 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
     fetchData: createFetcher('support-issues'),
     queryField: 'query',
     filter: props.filter || filter,
-    exportRow,
-    exportFields,
   });
 
   const columns = useMemo(() => {
@@ -117,24 +63,46 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         render: ({ row }) => (
           <IssueLinkField label={row.key || 'N/A'} row={row} />
         ),
+        export: (row) => row.key || 'N/A',
+        exportKeys: ['key'],
       },
       {
         title: translate('Status'),
         render: StatusColumn,
         orderField: 'status',
         filter: 'status',
+        export: (row) => row.status || 'N/A',
+        exportKeys: ['status'],
       },
       {
         title: translate('Title'),
         render: TitleColumn,
         orderField: 'summary',
+        export: 'summary',
+      },
+      {
+        visible: false,
+        title: translate('Title'),
+        render: null,
+        export: 'description',
       },
     ];
+    if (supportOrStaff && !hiddenColumns.includes('resource_type')) {
+      columns.push({
+        visible: false,
+        title: translate('Service type'),
+        render: null,
+        export: (row) => row.resource_type || 'N/A',
+        exportKeys: ['resource_type'],
+      });
+    }
     if (!hiddenColumns.includes('customer')) {
       columns.push({
         title: translate('Organization'),
         orderField: 'customer_name',
         render: ({ row }) => row.customer_name || 'N/A',
+        export: (row) => row.customer_name || 'N/A',
+        exportKeys: ['customer_name'],
       });
     }
     if (!hiddenColumns.includes('project')) {
@@ -142,6 +110,8 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         title: translate('Project'),
         orderField: 'project_name',
         render: ({ row }) => row.project_name || 'N/A',
+        export: (row) => row.project_name || 'N/A',
+        exportKeys: ['project_name'],
       });
     }
     if (!hiddenColumns.includes('caller')) {
@@ -149,13 +119,41 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         title: translate('Caller'),
         orderField: 'caller_full_name',
         render: ({ row }) => row.caller_full_name || 'N/A',
+        export: (row) => row.caller_full_name || 'N/A',
+        exportKeys: ['caller_full_name'],
       });
     }
+
+    if (supportOrStaff) {
+      columns.push({
+        visible: false,
+        title: translate('Reporter'),
+        render: null,
+        export: (row) => row.reporter_name || 'N/A',
+        exportKeys: ['reporter_name'],
+      });
+      columns.push({
+        visible: false,
+        title: translate('Assigned to'),
+        render: null,
+        export: (row) => row.assignee_name || 'N/A',
+        exportKeys: ['assignee_name'],
+      });
+    }
+    columns.push({
+      visible: false,
+      title: translate('Created'),
+      render: null,
+      export: (row) => formatDate(row.created),
+      exportKeys: ['created'],
+    });
 
     if (supportOrStaff && !hiddenColumns.includes('time_in_progress')) {
       columns.push({
         title: translate('Time in progress'),
         render: ({ row }) => <>{formatRelative(row.created)}</>,
+        export: (row) => formatRelative(row.created),
+        exportKeys: ['created'],
       });
     }
     return columns;

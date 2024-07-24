@@ -39,14 +39,6 @@ export const HooksList: FunctionComponent = () => {
     table: HOOK_LIST_ID,
     fetchData: createFetcher('hooks'),
     filter,
-    exportRow: (row) => [
-      titleCase(row.hook_type),
-      getDestinationField(row),
-      getEventsField(row),
-    ],
-    exportAll: true,
-    exportFields: ['Method', 'Destination', 'Events'],
-    exportKeys: ['hook_type', 'destination_url', 'email', 'event_groups'],
   });
   return (
     <Table
@@ -56,21 +48,28 @@ export const HooksList: FunctionComponent = () => {
           title: translate('State'),
           className: 'text-center all',
           render: StateField,
+          export: false,
         },
         {
           title: translate('Method'),
           className: 'min-tablet-l',
           render: ({ row }) => titleCase(row.hook_type),
+          export: (row) => titleCase(row.hook_type),
+          exportKeys: ['hook_type'],
         },
         {
           title: translate('Destination'),
           className: 'min-tablet-l',
           render: ({ row }) => getDestinationField(row),
+          export: (row) => getDestinationField(row),
+          exportKeys: ['destination_url', 'email'],
         },
         {
           title: translate('Events'),
           className: 'min-tablet-l',
           render: ({ row }) => getEventsField(row),
+          export: (row) => getEventsField(row),
+          exportKeys: ['event_groups'],
         },
       ]}
       showPageSizeSelector={true}

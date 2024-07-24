@@ -38,8 +38,6 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
     fetchData: createFetcher('openstack-security-groups'),
     filter,
     queryField: 'query',
-    exportRow,
-    exportFields: ['Name', 'Security groups'],
   });
   return (
     <Table
@@ -49,15 +47,28 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
           title: translate('Name'),
           render: ({ row }) => <>{row.name}</>,
           orderField: 'name',
+          export: 'name',
+        },
+        {
+          visible: false,
+          title: translate('Security groups'),
+          render: null,
+          export: (row) =>
+            row.rules.map((rule) => {
+              return JSON.stringify(rule).replaceAll(/"/g, "'");
+            }),
+          exportKeys: ['rules'],
         },
         {
           title: translate('Description'),
           render: ({ row }) => row.description,
+          export: false,
         },
         {
           title: translate('State'),
           render: ({ row }) => <ResourceState resource={row} />,
           className: 'col-sm-2',
+          export: false,
         },
       ]}
       expandableRow={SecurityGroupExpandableRow}
@@ -81,10 +92,3 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
     />
   );
 };
-
-const exportRow = (row) => [
-  row.name,
-  row.rules.map((rule) => {
-    return JSON.stringify(rule).replaceAll(/"/g, "'");
-  }),
-];

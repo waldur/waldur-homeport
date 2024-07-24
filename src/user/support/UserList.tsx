@@ -154,31 +154,6 @@ export const UserList: FunctionComponent = () => {
     fetchData: createFetcher('users'),
     queryField: 'query',
     filter,
-    exportFields: [
-      'Full name',
-      'Username',
-      'Email',
-      'Phone number',
-      'Organization',
-      'Organizations owner',
-    ],
-    exportAll: true,
-    exportRow: (row) => [
-      row.full_name,
-      row.username,
-      row.email,
-      row.phone_number,
-      row.organization,
-      getOrganizationsWhereOwner(row),
-    ],
-    exportKeys: [
-      'full_name',
-      'username',
-      'email',
-      'phone_number',
-      'organization',
-      'permissions',
-    ],
   });
 
   const columns: Column[] = [
@@ -209,18 +184,22 @@ export const UserList: FunctionComponent = () => {
       orderField: 'organization',
       filter: 'organization',
       id: 'organization',
+      export: 'organization',
     },
     {
       title: translate('Organization roles'),
       render: OrganizationRolesField,
       keys: ['permissions'],
       id: 'organization_roles',
+      exportTitle: translate('Organizations owner'),
+      export: (row) => getOrganizationsWhereOwner(row),
     },
     {
       title: translate('Project roles'),
       render: ProjectRolesField,
       keys: ['permissions'],
       id: 'project_roles',
+      export: false,
     },
     {
       title: translate('Staff'),
@@ -228,6 +207,7 @@ export const UserList: FunctionComponent = () => {
       className: 'text-center',
       keys: ['is_staff'],
       id: 'is_staff',
+      export: (row) => (row.is_staff ? translate('Yes') : translate('No')),
     },
     {
       title: translate('Support'),
@@ -235,6 +215,7 @@ export const UserList: FunctionComponent = () => {
       className: 'text-center',
       keys: ['is_support'],
       id: 'is_support',
+      export: (row) => (row.is_support ? translate('Yes') : translate('No')),
     },
     {
       title: translate('Status'),
@@ -243,6 +224,8 @@ export const UserList: FunctionComponent = () => {
       keys: ['is_active'],
       filter: 'is_active',
       id: 'is_active',
+      export: (row) =>
+        row.is_active ? translate('Active') : translate('Inactive'),
     },
     {
       title: translate('Affiliations'),
@@ -267,12 +250,14 @@ export const UserList: FunctionComponent = () => {
       render: ({ row }) => formatDateTime(row.date_joined),
       keys: ['date_joined'],
       id: 'date_joined',
+      export: (row) => formatDateTime(row.date_joined),
     },
     {
       title: translate('Agreement date'),
       render: ({ row }) => formatDateTime(row.agreement_date),
       keys: ['agreement_date'],
       id: 'agreement_date',
+      export: (row) => formatDateTime(row.agreement_date),
     },
     {
       title: translate('Username'),
@@ -370,6 +355,8 @@ export const formatRoleFilter = (filter) => {
 
 export const getOrganizationsWhereOwner = (user: Partial<User>) =>
   user.permissions
-    .filter((perm) => perm.role_name === RoleEnum.CUSTOMER_OWNER)
-    .map((perm) => perm.scope_name)
-    .join(', ');
+    ? user.permissions
+        .filter((perm) => perm.role_name === RoleEnum.CUSTOMER_OWNER)
+        .map((perm) => perm.scope_name)
+        .join(', ')
+    : DASH_ESCAPE_CODE;

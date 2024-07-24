@@ -3,7 +3,6 @@ import { FunctionComponent, useMemo } from 'react';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { IMAGES_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
-import { Offering } from '@waldur/marketplace/types';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
@@ -23,31 +22,29 @@ export const OfferingImagesList: FunctionComponent<{ offering }> = ({
     table: IMAGES_TABLE_NAME,
     fetchData: createFetcher('marketplace-screenshots'),
     filter,
-    exportRow: (row: Offering) => [
-      row.name,
-      row.description,
-      formatDateTime(row.created),
-    ],
-    exportFields: ['Name', 'Description', 'Created'],
   });
   const columns = [
     {
       title: translate('Thumbnail'),
       render: ({ row }) => <ImageThumbnail image={row} />,
+      export: false,
     },
     {
       title: translate('Name'),
       render: ({ row }) => row.name,
       orderField: 'name',
+      export: 'name',
     },
     {
       title: translate('Description'),
       render: ({ row }) => row.description,
+      export: 'description',
     },
     {
       title: translate('Created'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
+      export: (row) => formatDateTime(row.created),
     },
   ];
 

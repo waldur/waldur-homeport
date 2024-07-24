@@ -27,8 +27,6 @@ export const ResourceUsageList: FC = () => {
   const props = useTable({
     table: 'ResourceUsageReports',
     fetchData: createFetcher('marketplace-component-usages'),
-    exportRow,
-    exportFields,
     filter,
   });
   const columns: Array<Column<UsageReport>> = [
@@ -36,32 +34,47 @@ export const ResourceUsageList: FC = () => {
       title: translate('Client organization'),
       render: ({ row }) => <>{row.customer_name}</>,
       filter: 'organization',
+      export: 'customer_name',
     },
     {
       title: translate('Client project'),
       render: ({ row }) => <>{row.project_name}</>,
       filter: 'project',
+      export: 'project_name',
     },
     {
       title: translate('Offering type'),
       render: ({ row }) => <>{row.offering_name}</>,
       filter: 'offering',
+      export: 'offering_name',
     },
     {
       title: translate('Resource name'),
       render: ({ row }) => <>{row.resource_name}</>,
+      export: 'resource_name',
     },
     {
       title: translate('Plan component name'),
       render: ({ row }) => <>{row.name}</>,
+      export: 'name',
     },
     {
       title: translate('Date of reporting'),
       render: ({ row }) => <>{formatDateTime(row.date)}</>,
+      export: (row) => formatDateTime(row.date),
+      exportKeys: ['date'],
     },
     {
       title: translate('Value'),
       render: ({ row }) => <>{row.usage + ' ' + row.measured_unit}</>,
+      export: (row) => row.usage + ' ' + row.measured_unit,
+      exportKeys: ['usage', 'measured_unit'],
+    },
+    {
+      visible: false,
+      title: translate('Comment'),
+      render: null,
+      export: 'description',
     },
   ];
 
@@ -77,28 +90,6 @@ export const ResourceUsageList: FC = () => {
     />
   );
 };
-
-const exportRow = (row: UsageReport) => [
-  row.customer_name,
-  row.project_name,
-  row.offering_name,
-  row.resource_name,
-  row.name,
-  formatDateTime(row.created),
-  row.usage + ' ' + row.measured_unit,
-  row.description,
-];
-
-const exportFields = () => [
-  translate('Client organization'),
-  translate('Client project'),
-  translate('Offering type'),
-  translate('Resource name'),
-  translate('Plan component name'),
-  translate('Date of reporting'),
-  translate('Value'),
-  translate('Comment'),
-];
 
 const mapStateToFilter = createSelector(
   getFormValues(FORM_ID),

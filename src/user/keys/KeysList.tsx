@@ -27,31 +27,6 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
   const props = useTable({
     table: 'keysList',
     fetchData: createFetcher('keys'),
-    exportRow: (row) => [
-      row.name,
-      row.public_key,
-      row.type,
-      row.fingerprint_md5,
-      row.fingerprint_sha256,
-      row.fingerprint_sha512,
-    ],
-    exportAll: true,
-    exportFields: [
-      'Title',
-      'Public key',
-      'Type',
-      'Fingerprint (MD5)',
-      'Fingerprint (SHA256)',
-      'Fingerprint (SHA512)',
-    ],
-    exportKeys: [
-      'name',
-      'public_key',
-      'type',
-      'fingerprint_md5',
-      'fingerprint_sha256',
-      'fingerprint_sha512',
-    ],
     queryField: 'name',
     filter,
   });
@@ -59,16 +34,37 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
     {
       title: translate('Title'),
       render: ({ row }) => row.name,
+      export: 'name',
+    },
+    {
+      visible: false,
+      title: translate('Public key'),
+      render: null,
+      export: 'public_key',
     },
     {
       title: translate('Type'),
       render: ({ row }) => row.type,
+      export: 'type',
+    },
+    {
+      visible: false,
+      title: translate('Fingerprint (MD5)'),
+      render: null,
+      export: 'fingerprint_md5',
     },
     {
       title: translate('Fingerprint (SHA256)'),
       render: ({ row }) => (
         <CopyToClipboardContainer value={row.fingerprint_sha256} />
       ),
+      export: 'fingerprint_sha256',
+    },
+    {
+      visible: false,
+      title: translate('Fingerprint (SHA512)'),
+      render: null,
+      export: 'fingerprint_sha512',
     },
   ];
 
@@ -79,6 +75,7 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
         <KeyRemoveButton uuid={row.uuid} refetch={props.fetch} />
       ),
       className: 'text-center col-md-2',
+      export: false,
     });
   }
 

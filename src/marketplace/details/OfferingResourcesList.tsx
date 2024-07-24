@@ -12,6 +12,7 @@ import { PublicResourceLink } from '@waldur/marketplace/resources/list/PublicRes
 import { PublicResourceActions } from '@waldur/marketplace/resources/usage/PublicResourceActions';
 import { Offering } from '@waldur/marketplace/types';
 import { Table, createFetcher } from '@waldur/table';
+import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/utils';
 
 import { ResourceStateField } from '../resources/list/ResourceStateField';
@@ -50,37 +51,47 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     table: TABLE_OFFERING_RESOURCE,
     fetchData: createFetcher('marketplace-resources'),
     filter,
-    exportRow,
-    exportFields,
     queryField: 'query',
   });
-  const columns = [
+  const columns: Column[] = [
     {
       title: translate('Name'),
       render: PublicResourceLink,
       orderField: 'name',
+      export: 'name',
+    },
+    {
+      visible: false,
+      title: translate('Resource UUID'),
+      render: null,
+      export: 'uuid',
     },
     {
       title: translate('Client organization'),
       render: ({ row }) => <>{row.customer_name}</>,
+      export: 'customer_name',
     },
     {
       title: translate('Project'),
       render: ({ row }) => <>{row.project_name}</>,
+      export: 'project_name',
     },
     {
       title: translate('Plan'),
       render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
+      export: 'plan_name',
     },
     {
       title: translate('Created at'),
       render: ({ row }) => <>{formatDateTime(row.created)}</>,
       orderField: 'created',
+      export: false,
     },
     {
       title: translate('State'),
       render: ({ row }) => <ResourceStateField resource={row} />,
       filter: 'state',
+      export: 'state',
     },
   ];
 
@@ -100,21 +111,3 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     />
   );
 };
-
-const exportRow = (row) => [
-  row.name,
-  row.uuid,
-  row.customer_name,
-  row.project_name,
-  row.plan_name,
-  row.state,
-];
-
-const exportFields = [
-  'Name',
-  'Resource UUID',
-  'Client organization',
-  'Client project',
-  'Plan',
-  'State',
-];

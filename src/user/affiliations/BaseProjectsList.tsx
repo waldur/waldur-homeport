@@ -11,25 +11,10 @@ import { GlobalProjectCreateButton } from '@waldur/project/GlobalProjectCreateBu
 import { ProjectLink } from '@waldur/project/ProjectLink';
 import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/utils';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
-
-const exportRow = (row) => [
-  row.name,
-  row.customer_name,
-  row.resources_count || 0,
-  row.expiration_time ? formatDateTime(row.expiration_time) : DASH_ESCAPE_CODE,
-  formatDateTime(row.created),
-];
-
-const exportFields = [
-  'Project',
-  'Organization',
-  'Resources',
-  'End date',
-  'Created',
-];
 
 export const BaseProjectsList: FunctionComponent<{
   filter;
@@ -41,16 +26,15 @@ export const BaseProjectsList: FunctionComponent<{
     fetchData: createFetcher('projects'),
     queryField: 'name',
     filter,
-    exportRow,
-    exportFields,
   });
-  const columns = [
+  const columns: Column[] = [
     {
       title: translate('Name'),
       orderField: 'name',
       render: ProjectLink,
       keys: ['name'],
       id: 'name',
+      export: 'name',
     },
     {
       title: translate('Organization'),
@@ -68,6 +52,7 @@ export const BaseProjectsList: FunctionComponent<{
       keys: ['customer_uuid', 'customer_name'],
       filter: 'organization',
       id: 'organization',
+      export: 'customer_name',
     },
     {
       title: translate('Organization abbreviation'),
@@ -81,6 +66,7 @@ export const BaseProjectsList: FunctionComponent<{
       render: ({ row }) => <>{row.resources_count || 0}</>,
       keys: ['resources_count', 'marketplace_resource_count'],
       id: 'resources',
+      export: (row) => row.resources_count || 0,
     },
     {
       title: translate('End date'),
@@ -90,6 +76,8 @@ export const BaseProjectsList: FunctionComponent<{
       ),
       keys: ['end_date'],
       id: 'end_date',
+      export: (row) =>
+        row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE,
     },
     {
       title: translate('Created'),
@@ -98,6 +86,7 @@ export const BaseProjectsList: FunctionComponent<{
       ),
       keys: ['created'],
       id: 'created',
+      export: (row) => formatDateTime(row.created),
     },
     {
       title: translate('Backend ID'),
@@ -128,6 +117,10 @@ export const BaseProjectsList: FunctionComponent<{
       ),
       keys: ['billing_price_estimate'],
       id: 'cost_estimation',
+      export: (row) =>
+        defaultCurrency(
+          (row.billing_price_estimate && row.billing_price_estimate.total) || 0,
+        ),
     });
   }
 
@@ -144,6 +137,10 @@ export const BaseProjectsList: FunctionComponent<{
       optional: true,
       keys: ['oecd_fos_2007_code', 'oecd_fos_2007_label'],
       id: 'oecd_fos_code',
+      export: (row) =>
+        row.oecd_fos_2007_code
+          ? `${row.oecd_fos_2007_code}. ${row.oecd_fos_2007_label}`
+          : DASH_ESCAPE_CODE,
     });
   }
 
@@ -156,6 +153,7 @@ export const BaseProjectsList: FunctionComponent<{
       optional: true,
       keys: ['is_industry'],
       id: 'industry_project',
+      export: (row) => (row.is_industry ? translate('Yes') : translate('No')),
     });
   }
 

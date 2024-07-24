@@ -29,16 +29,13 @@ export const SharedProviderResources: FC<{ provider_uuid: string }> = ({
   const props = useTable({
     table: 'SharedProviderResources',
     fetchData: createFetcher('openstack-shared-settings-instances'),
-    exportRow,
-    exportFields,
-    exportKeys,
     filter,
-    exportAll: true,
   });
   const columns: Array<Column<CustomerResource>> = [
     {
       title: translate('Name'),
       render: ({ row }) => <ResourceName resource={row} />,
+      export: 'name',
     },
     {
       title: translate('Organization'),
@@ -47,14 +44,24 @@ export const SharedProviderResources: FC<{ provider_uuid: string }> = ({
           row={{ uuid: row.customer_uuid, name: row.customer_name }}
         />
       ),
+      export: 'customer_name',
     },
     {
       title: translate('Created at'),
       render: ({ row }) => <>{formatDateTime(row.created)}</>,
+      export: (row) => formatDateTime(row.created),
+      exportKeys: ['created'],
+    },
+    {
+      visible: false,
+      title: translate('Type'),
+      render: null,
+      export: 'resource_type',
     },
     {
       title: translate('State'),
       render: ({ row }) => <ResourceState resource={row} />,
+      export: 'state',
     },
   ];
 
@@ -71,27 +78,3 @@ export const SharedProviderResources: FC<{ provider_uuid: string }> = ({
     />
   );
 };
-
-const exportRow = (row: CustomerResource) => [
-  row.name,
-  row.customer_name,
-  formatDateTime(row.created),
-  row.resource_type,
-  row.state,
-];
-
-const exportFields = () => [
-  translate('Name'),
-  translate('Organization'),
-  translate('Created at'),
-  translate('Type'),
-  translate('State'),
-];
-
-const exportKeys = [
-  'name',
-  'customer_name',
-  'created',
-  'resource_type',
-  'state',
-];
