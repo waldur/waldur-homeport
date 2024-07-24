@@ -156,6 +156,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
       standalone={ownProps.standalone}
+      minHeight={400}
       filters={<AllResourcesFilter category_uuid={ownProps.category_uuid} />}
       hasOptionalColumns
     />

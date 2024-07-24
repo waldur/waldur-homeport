@@ -48,7 +48,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
   }, [dispatch, props, formValues]);
 
   return props.filterPosition === 'menu' || props.filtersStorage.length > 0 ? (
-    <Row className="card-toolbar w-100 my-4">
+    <Row className="card-toolbar w-100 my-4 g-0 gap-4">
       <Col xs={12} md="auto" className="order-md-1 mb-4 mb-md-0 text-end">
         {!props.hideClearFilters && props.filtersStorage.length > 0 && (
           <Button
