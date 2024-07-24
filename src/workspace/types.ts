@@ -85,6 +85,7 @@ interface BillingPriceEstimate {
 }
 
 export interface Project {
+  slug?: string;
   name: string;
   uuid: string;
   url: string;
@@ -115,6 +116,7 @@ export type PhoneNumber =
 
 // Customer has only two mandatory fields: name and email, rest are optional.
 export interface Customer {
+  slug?: string;
   projects_count?: number;
   url?: string;
   uuid?: string;

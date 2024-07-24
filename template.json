@@ -9091,6 +9091,10 @@
     "description": "openstack/openstack-backup/actions/utils.tsx, openstack/openstack-instance/utils.ts",
     "message": "Skip floating IP assignment"
   },
+  "Slug": {
+    "description": "customer/details/CustomerDetailsPanel.tsx, project/manage/ProjectMetadata.tsx",
+    "message": "Slug"
+  },
   "Snapshot schedule for volume has been created.": {
     "description": "openstack/openstack-volume/actions/CreateSnapshotScheduleDialog.tsx",
     "message": "Snapshot schedule for volume has been created."

@@ -28,6 +28,7 @@ interface ReportSection {
 export type Report = ReportSection[];
 
 export interface Resource extends ResourceReference {
+  slug?: string;
   description: any;
   name?: string;
   uuid: string;

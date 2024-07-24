@@ -49,6 +49,7 @@ export const ResourceSummary: FunctionComponent<
       value={resource.uuid}
       valueClass="ellipsis"
     />
+    <Field label={translate('Slug')} value={resource.slug} />
     <Field label={translate('Backend ID')} value={resource.backend_id} />
     <Field label={translate('Effective ID')} value={resource.effective_id} />
     <Field label={translate('Plugin ID')} value={resource.resource_uuid} />
