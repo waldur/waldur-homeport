@@ -28,7 +28,20 @@ export const ActionsDropdownComponent: FunctionComponent<
     >
       {label || translate('Actions')}
     </Dropdown.Toggle>
-    <Dropdown.Menu>{children}</Dropdown.Menu>
+    <Dropdown.Menu
+      popperConfig={{
+        modifiers: [
+          {
+            name: 'flip',
+            options: {
+              fallbackPlacements: ['top', 'left', 'bottom'],
+            },
+          },
+        ],
+      }}
+    >
+      {children}
+    </Dropdown.Menu>
   </Dropdown>
 );
 

@@ -57,6 +57,7 @@ export interface TableProps<RowType = any> extends TableState {
   id?: string;
   rowClass?: (({ row }) => string) | string;
   hoverable?: boolean;
+  minHeight?: number;
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
   initialPageSize?: number;
@@ -210,9 +211,9 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
           {this.props.blocked && <div className="table-block" />}
           {this.props.hasActionBar && (
             <Card.Header className="border-2 border-bottom">
-              <Row className="card-toolbar w-100">
+              <Row className="card-toolbar g-0 gap-4 w-100">
                 {!this.props.standalone && (
-                  <Col xs className="order-0 mw-25 pe-5">
+                  <Col xs className="order-0 mw-sm-25">
                     <Card.Title>
                       <span className="me-2">
                         {this.props.title ||
@@ -224,12 +225,9 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                     </Card.Title>
                   </Col>
                 )}
-                <Col
-                  xs="auto"
-                  className="order-1 order-md-2 min-w-25 ms-auto ps-5"
-                >
+                <Col sm="auto" className="order-1 order-sm-2 min-w-25 ms-auto">
                   {this.showActionsColumn() && (
-                    <div className="d-flex justify-content-end text-nowrap gap-3">
+                    <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3">
                       <TableButtons
                         {...this.props}
                         showFilterMenuToggle={this.state.showFilterMenuToggle}
@@ -245,9 +243,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                 </Col>
                 {this.showQueryColumn() && (
                   <Col
-                    xs
+                    xs={!this.showActionsColumn()}
+                    sm={Boolean(this.showActionsColumn())}
                     className={classNames(
-                      'order-2 order-md-1 mw-lg-350px',
+                      'order-2 order-sm-1 mw-lg-350px',
                       !this.props.standalone && 'mx-auto',
                     )}
                   >
@@ -332,7 +331,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             )}
 
           <Card.Body>
-            <div className="dataTables_wrapper">
+            <div
+              className="table-responsive dataTables_wrapper"
+              style={{ minHeight: this.props.minHeight }}
+            >
               <div className={classNames('table-container table-hover-shadow')}>
                 {this.renderBody()}
               </div>

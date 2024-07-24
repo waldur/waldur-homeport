@@ -208,18 +208,18 @@
         td:first-child,
         th:first-child,
         tr:first-child {
-          padding-left: 2.5rem;
+          padding-left: $card-px;
         }
         td:last-child,
         th:last-child,
         tr:last-child {
-          padding-right: 2.5rem;
+          padding-right: $card-px;
         }
       }
 
       .table-filters {
-        padding-left: 2.5rem;
-        padding-right: 2.5rem;
+        padding-left: $card-px;
+        padding-right: $card-px;
       }
 
       .search-no-result,
@@ -229,7 +229,7 @@
     }
 
     .table-pagination {
-      padding: 0 2.5rem !important;
+      padding: 0 $card-px !important;
     }
   }
 
