@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { Table, createFetcher } from '@waldur/table';
+import { SLUG_COLUMN } from '@waldur/table/slug';
 import { useTable } from '@waldur/table/utils';
 
 import { ResourceImportButton } from '../import/ResourceImportButton';
@@ -77,11 +78,15 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       title: translate('Name'),
       render: ResourceNameField,
       orderField: 'name',
+      id: 'name',
+      keys: ['name'],
     },
     {
       title: translate('Offering'),
       render: ({ row }) => row.offering_name,
       filter: 'offering',
+      id: 'offering',
+      keys: ['offering_name'],
     },
   ];
 
@@ -89,29 +94,40 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     columns.push({
       title: column.title,
       render: ({ row }) => CategoryColumnField({ row, column }),
+      id: `category-${column.index}`,
+      keys: ['backend_metadata', `category-${column.index}`],
     });
   });
   columns.push({
     title: translate('Organization'),
     render: ({ row }) => <>{row.customer_name}</>,
     filter: 'organization',
+    id: 'organization',
+    keys: ['customer_name'],
   });
   columns.push({
     title: translate('Project'),
     render: ({ row }) => <>{row.project_name}</>,
     filter: 'project',
+    id: 'project',
+    keys: ['project_name'],
   });
   columns.push(
     {
       title: translate('State'),
       render: ({ row }) => <ResourceStateField resource={row} />,
       filter: 'state',
+      id: 'state',
+      keys: ['state', 'backend_metadata'],
     },
     {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
       orderField: 'created',
+      id: 'created',
+      keys: ['created'],
     },
+    SLUG_COLUMN,
   );
 
   const tableActions = (
@@ -141,6 +157,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       multiSelectActions={ResourceMultiSelectAction}
       standalone={ownProps.standalone}
       filters={<AllResourcesFilter category_uuid={ownProps.category_uuid} />}
+      hasOptionalColumns
     />
   );
 };

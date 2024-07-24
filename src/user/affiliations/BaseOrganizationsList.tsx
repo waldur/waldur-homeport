@@ -12,6 +12,7 @@ import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { SLUG_COLUMN } from '@waldur/table/slug';
 import { useTable } from '@waldur/table/utils';
 import { checkCustomerUser, getUser } from '@waldur/workspace/selectors';
 
@@ -234,6 +235,7 @@ export const BaseOrganizationsList: FunctionComponent<{
       filter: 'is_service_provider',
       id: 'is_service_provider',
     },
+    SLUG_COLUMN,
   ];
 
   return (

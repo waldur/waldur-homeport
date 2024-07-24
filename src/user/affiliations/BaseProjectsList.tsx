@@ -11,6 +11,7 @@ import { GlobalProjectCreateButton } from '@waldur/project/GlobalProjectCreateBu
 import { ProjectLink } from '@waldur/project/ProjectLink';
 import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { SLUG_COLUMN } from '@waldur/table/slug';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/utils';
 
@@ -102,6 +103,7 @@ export const BaseProjectsList: FunctionComponent<{
       keys: ['uuid'],
       id: 'uuid',
     },
+    SLUG_COLUMN,
   ];
 
   if (isFeatureVisible(ProjectFeatures.estimated_cost)) {

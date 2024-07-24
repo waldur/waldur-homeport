@@ -5,6 +5,7 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { Table, createFetcher } from '@waldur/table';
+import { SLUG_COLUMN } from '@waldur/table/slug';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -63,22 +64,31 @@ export const PublicOfferingsList: FunctionComponent<{
         </Link>
       ),
       orderField: 'name',
+      id: 'name',
+      keys: ['name'],
     },
     {
       title: translate('Organization'),
       render: ({ row }) => renderFieldOrDash(row.customer_name),
       filter: showOrganization ? 'organization' : undefined,
+      id: 'organization',
+      keys: ['customer_name'],
     },
     {
       title: translate('Type'),
       render: ({ row }) => <>{getLabel(row.type)}</>,
       filter: 'offering_type',
+      id: 'offering_type',
+      keys: ['type'],
     },
     {
       title: translate('State'),
       render: ({ row }) => <OfferingStateField offering={row} />,
       filter: 'state',
+      id: 'state',
+      keys: ['state'],
     },
+    SLUG_COLUMN,
   ];
 
   if (showCategory) {
@@ -86,6 +96,8 @@ export const PublicOfferingsList: FunctionComponent<{
       title: translate('Category'),
       render: ({ row }) => row.category_title,
       filter: 'category',
+      id: 'category',
+      keys: ['category_title'],
     });
   }
 
@@ -107,6 +119,7 @@ export const PublicOfferingsList: FunctionComponent<{
       standalone
       title={translate('Offerings')}
       hoverableRow={RowActions}
+      hasOptionalColumns
     />
   );
 };

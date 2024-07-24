@@ -13,6 +13,7 @@ import { setMarketplaceFilter } from '@waldur/marketplace/landing/filter/store/a
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Table } from '@waldur/table';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { SLUG_COLUMN } from '@waldur/table/slug';
 import { TableProps } from '@waldur/table/Table';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
@@ -96,16 +97,22 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           title: translate('Name'),
           render: ResourceNameField,
           orderField: 'name',
+          id: 'name',
+          keys: ['name'],
         },
         {
           title: translate('Category'),
           render: ({ row }: FieldProps) => <>{row.category_title}</>,
           filter: 'category',
+          id: 'category',
+          keys: ['category_title'],
         },
         {
           title: translate('Offering'),
           render: ({ row }: FieldProps) => <>{row.offering_name}</>,
           filter: 'offering',
+          id: 'offering',
+          keys: ['offering_name'],
         },
         ...(props.hasCustomerColumn
           ? [
@@ -113,6 +120,8 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
                 title: translate('Organization'),
                 render: ({ row }) => <>{row.customer_name}</>,
                 filter: 'organization',
+                id: 'organization',
+                keys: ['customer_name'],
               },
             ]
           : []),
@@ -122,6 +131,8 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
                 title: translate('Project'),
                 render: ({ row }) => <>{row.project_name}</>,
                 filter: 'project',
+                id: 'project',
+                keys: ['project_name'],
               },
             ]
           : []),
@@ -129,13 +140,19 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           title: translate('Created at'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
+          id: 'created',
+          keys: ['created'],
         },
         {
           title: translate('State'),
           render: ({ row }) => <ResourceStateField resource={row} />,
           filter: 'state',
+          id: 'state',
+          keys: ['state', 'backend_metadata'],
         },
+        SLUG_COLUMN,
       ]}
+      hasOptionalColumns
       title={translate('Resources')}
       verboseName={translate('Resources')}
       initialSorting={{ field: 'created', mode: 'desc' }}

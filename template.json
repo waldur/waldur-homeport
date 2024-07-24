@@ -9108,7 +9108,7 @@
     "message": "Skip floating IP assignment"
   },
   "Slug": {
-    "description": "customer/details/CustomerDetailsPanel.tsx, marketplace/resources/details/ResourceSummary.tsx, project/manage/ProjectMetadata.tsx",
+    "description": "customer/details/CustomerDetailsPanel.tsx, marketplace/resources/details/ResourceSummary.tsx, project/manage/ProjectMetadata.tsx, table/slug.tsx",
     "message": "Slug"
   },
   "Snapshot schedule for volume has been created.": {

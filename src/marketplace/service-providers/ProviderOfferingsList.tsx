@@ -8,6 +8,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { createFetcher, Table } from '@waldur/table';
+import { SLUG_COLUMN } from '@waldur/table/slug';
 import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
 
@@ -64,26 +65,37 @@ export const ProviderOfferingsComponent: FC<
         {
           title: translate('Offering / Category'),
           render: OfferingNameColumn,
+          id: 'name',
+          keys: ['name', 'backend_id', 'uuid', 'category_title'],
         },
         {
           title: translate('Type'),
           render: ({ row }) => getLabel(row.type),
           filter: 'offering_type',
+          id: 'type',
+          keys: ['type'],
         },
         {
           title: translate('Resources'),
           render: ResourcesCountColumn,
+          id: 'resources_count',
+          keys: ['resources_count'],
         },
         {
           title: translate('Estimated cost'),
           render: ({ row }) =>
             defaultCurrency(row.billing_price_estimate?.total || 0),
+          id: 'billing_price_estimate',
+          keys: ['billing_price_estimate'],
         },
         {
           title: translate('State'),
           render: OfferingStateCell,
           filter: 'state',
+          id: 'state',
+          keys: ['state'],
         },
+        SLUG_COLUMN,
       ]}
       verboseName={translate('Offerings')}
       dropdownActions={dropdownActions}
@@ -94,6 +106,7 @@ export const ProviderOfferingsComponent: FC<
       {...extraTableProps}
       filters={<ProviderOfferingsFilter />}
       hasQuery={true}
+      hasOptionalColumns
     />
   );
 };
