@@ -1,16 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Field } from 'redux-form';
 
-import { getAll } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { ProjectCreateButton } from '@waldur/project/ProjectCreateButton';
-import { Project } from '@waldur/workspace/types';
+import { setCurrentProject } from '@waldur/workspace/actions';
 
+import { projectAutocomplete } from '../common/autocompletes';
 import { FormGroup } from '../offerings/FormGroup';
 
-import { ProjectSelectField } from './ProjectSelectField';
 import { orderCustomerSelector } from './utils';
 
 interface ProjectFieldProps {
@@ -22,20 +21,10 @@ export const ProjectField: FC<ProjectFieldProps> = ({
   previewMode,
   hideLabel,
 }) => {
+  const dispatch = useDispatch();
   const customer = useSelector(orderCustomerSelector);
-  const query = useQuery(
-    ['ProjectField', customer?.uuid],
-    () =>
-      getAll<Project>('/projects/', {
-        params: { customer: customer.uuid },
-      }),
-    { enabled: Boolean(customer?.uuid) },
-  );
   if (!customer) {
     return translate('Please select organization first.');
-  }
-  if (query.isLoading) {
-    return <LoadingSpinner />;
   }
   return (
     <FormGroup
@@ -43,11 +32,29 @@ export const ProjectField: FC<ProjectFieldProps> = ({
       required={true}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        {query.data?.length > 0 && (
-          <div style={{ flexGrow: 1, marginRight: 10 }}>
-            <ProjectSelectField projects={query.data} />
-          </div>
-        )}
+        <div style={{ flexGrow: 1, marginRight: 10 }}>
+          <Field
+            name="project"
+            component={(fieldProps) => (
+              <AsyncPaginate
+                placeholder={translate('Select project...')}
+                noOptionsMessage={() => translate('No projects found')}
+                loadOptions={(query, prevOptions, { page }) =>
+                  projectAutocomplete(customer.uuid, query, prevOptions, page)
+                }
+                label={translate('Project')}
+                value={fieldProps.input.value}
+                onChange={(value) => {
+                  fieldProps.input.onChange(value);
+                  dispatch(setCurrentProject(value));
+                }}
+                getOptionValue={(option) => option.url}
+                getOptionLabel={(option) => option.name}
+                isClearable={false}
+              />
+            )}
+          />
+        </div>
         {!previewMode && <ProjectCreateButton />}
       </div>
     </FormGroup>

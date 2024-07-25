@@ -14,7 +14,13 @@ export const FormCustomerStep = (props: FormStepProps) => {
       disabled={props.disabled}
       required={props.required}
     >
-      {props.offering.shared ? <CustomerField /> : props.offering.customer_name}
+      {props.offering.shared ? (
+        <CustomerField
+          organizationGroups={props.offering.organization_groups}
+        />
+      ) : (
+        props.offering.customer_name
+      )}
     </VStepperFormStepCard>
   );
 };
