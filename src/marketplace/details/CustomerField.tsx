@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field, change } from 'redux-form';
 
 import { getFirst } from '@waldur/core/api';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { Project } from '@waldur/workspace/types';
@@ -14,13 +14,9 @@ import { FormGroup } from '../offerings/FormGroup';
 import { ORDER_FORM_ID } from './constants';
 import { orderCustomerSelector } from './utils';
 
-const loadOptions = (query, prevOptions, page) =>
-  organizationAutocomplete(query, prevOptions, page, {
-    field: ['name', 'uuid', 'payment_profiles'],
-    o: 'name',
-  });
-
-export const CustomerField: FC = () => {
+export const CustomerField: FC<{ organizationGroups }> = ({
+  organizationGroups,
+}) => {
   const dispatch = useDispatch();
   const customer = useSelector(orderCustomerSelector);
   return (
@@ -28,8 +24,7 @@ export const CustomerField: FC = () => {
       <Field
         name="customer"
         component={(fieldProps) => (
-          <AsyncSelectField
-            name="customer"
+          <AsyncPaginate
             label={translate('Organization')}
             value={fieldProps.input.value}
             onChange={async (value) => {
@@ -61,7 +56,18 @@ export const CustomerField: FC = () => {
               }
             }}
             placeholder={translate('Select organization...')}
-            loadOptions={loadOptions}
+            loadOptions={(query, prevOptions, { page }) =>
+              organizationAutocomplete(query, prevOptions, page, {
+                organization_group_uuid: organizationGroups.map(
+                  (group) => group.uuid,
+                ),
+                field: ['name', 'uuid', 'payment_profiles'],
+                o: 'name',
+              })
+            }
+            noOptionsMessage={() => translate('No organizations found')}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.uuid}
           />
         )}
       />
