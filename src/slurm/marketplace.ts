@@ -74,4 +74,5 @@ registerOfferingType({
   providerType: 'SLURM remote',
   attributes: (): Attribute[] => [],
   allowToUpdateService: true,
+  showOptions: true,
 });
