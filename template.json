@@ -5439,6 +5439,10 @@
     "description": "customer/list/SelectOrganizationGroupField.tsx",
     "message": "No organization groups"
   },
+  "No organizations found": {
+    "description": "marketplace/details/CustomerField.tsx",
+    "message": "No organizations found"
+  },
   "No organizations": {
     "description": "marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/GlobalProjectCreateDialog.tsx, project/MoveToOrganizationAutocomplete.tsx",
     "message": "No organizations"
@@ -5462,6 +5466,10 @@
   "No projects are assigned to this user.": {
     "description": "customer/team/CustomerUsersListExpandableRow.tsx",
     "message": "No projects are assigned to this user."
+  },
+  "No projects found": {
+    "description": "marketplace/details/ProjectField.tsx",
+    "message": "No projects found"
   },
   "No projects": {
     "description": "customer/cost-policies/CostPolicyCreateForm.tsx, marketplace/resources/actions/MoveToProjectAutocomplete.tsx, marketplace/resources/list/ProjectFilter.tsx, marketplace/robot-accounts/ProviderProjectFilter.tsx",
@@ -8568,7 +8576,7 @@
     "message": "Select project"
   },
   "Select project...": {
-    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, issues/create/IssueQuickCreate.tsx, marketplace/resources/actions/MoveToProjectAutocomplete.tsx, marketplace/resources/import/ResourceImportDialog.tsx, marketplace/resources/list/ProjectFilter.tsx, marketplace/robot-accounts/ProviderProjectFilter.tsx",
+    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, issues/create/IssueQuickCreate.tsx, marketplace/details/ProjectField.tsx, marketplace/resources/actions/MoveToProjectAutocomplete.tsx, marketplace/resources/import/ResourceImportDialog.tsx, marketplace/resources/list/ProjectFilter.tsx, marketplace/robot-accounts/ProviderProjectFilter.tsx",
     "message": "Select project..."
   },
   "Select provider...": {
