@@ -51,7 +51,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
               const email = row[emailIndex];
               const role = row[roleIndex];
               const project = row[projectIndex];
-              if (email && !items.some((item) => item.email === email)) {
+              if (email) {
                 items.push({ email, role, project });
               }
             });
