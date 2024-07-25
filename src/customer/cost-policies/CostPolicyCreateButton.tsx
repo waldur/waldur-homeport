@@ -24,7 +24,7 @@ interface SubmitedFormData {
 
 const submit = (formData: SubmitedFormData) => {
   const data: CostPolicyFormData = {
-    project: formData.project.url,
+    scope: formData.project.url,
     actions: formData.actions.value,
     limit_cost: formData.limit_cost,
   };
