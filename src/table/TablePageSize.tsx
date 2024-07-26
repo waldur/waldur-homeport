@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { translate } from '@waldur/i18n';
 import { Pagination } from '@waldur/table/types';
 import './TablePageSize.scss';
 
@@ -14,9 +15,12 @@ export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
     return null;
   }
   return (
-    <label>
+    <div className="d-flex align-items-center">
+      <label className="text-grey-500 text-nowrap">
+        {translate('Rows per page')}:
+      </label>
       <select
-        className="form-select form-select-sm form-select-solid"
+        className="form-select form-select-sm form-select-transparent ps-2 pe-9"
         onChange={(event) => {
           props.updatePageSize(parseInt(event.target.value, 10));
         }}
@@ -28,6 +32,6 @@ export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
           </option>
         ))}
       </select>
-    </label>
+    </div>
   );
 };

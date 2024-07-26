@@ -19,7 +19,6 @@ import { TableFilterContainer } from './TableFilterContainer';
 import { TableFilters } from './TableFilters';
 import { TableHeader } from './TableHeader';
 import { TableLoadingSpinnerContainer } from './TableLoadingSpinnerContainer';
-import { TablePageSize } from './TablePageSize';
 import { TablePagination } from './TablePagination';
 import { TablePlaceholder } from './TablePlaceholder';
 import { TableQuery } from './TableQuery';
@@ -340,32 +339,13 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               </div>
             </div>
             {this.props.hasPagination && (
-              <Row className="table-pagination px-0">
-                <Col
-                  sm="auto"
-                  md={2}
-                  className="d-flex align-items-start justify-content-start"
-                >
-                  {this.props.showPageSizeSelector && (
-                    <TablePageSize
-                      {...this.props.pagination}
-                      updatePageSize={this.props.updatePageSize}
-                    />
-                  )}
-                </Col>
-                <Col
-                  sm
-                  md={8}
-                  className="d-flex flex-column align-items-end justify-content-start align-items-md-center"
-                >
-                  {this.hasRows() && (
-                    <TablePagination
-                      {...this.props.pagination}
-                      gotoPage={this.props.gotoPage}
-                    />
-                  )}
-                </Col>
-              </Row>
+              <TablePagination
+                {...this.props.pagination}
+                hasRows={this.hasRows()}
+                showPageSizeSelector={this.props.showPageSizeSelector}
+                updatePageSize={this.props.updatePageSize}
+                gotoPage={this.props.gotoPage}
+              />
             )}
             {this.props.footer}
           </Card.Body>
