@@ -79,6 +79,10 @@ const OrganizationResourcesAllList = lazyComponent(
   () => import('../marketplace/resources/list/OrganizationResourcesAllList'),
   'OrganizationResourcesAllList',
 );
+const CustomerOrdersList = lazyComponent(
+  () => import('./orders/CustomerOrdersList'),
+  'CustomerOrdersList',
+);
 const CustomerChecklistOverview = lazyComponent(
   () => import('../marketplace-checklist/CustomerChecklistOverview'),
   'CustomerChecklistOverview',
@@ -114,6 +118,16 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Resources'),
       priority: 110,
+    },
+  },
+  {
+    name: 'organization-orders',
+    parent: 'organization',
+    url: 'marketplace-orders/',
+    component: CustomerOrdersList,
+    data: {
+      breadcrumb: () => translate('Orders'),
+      priority: 120,
     },
   },
   {

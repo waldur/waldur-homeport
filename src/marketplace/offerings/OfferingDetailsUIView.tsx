@@ -38,6 +38,10 @@ const OfferingResourcesList = lazyComponent(
   () => import('../details/OfferingResourcesList'),
   'OfferingResourcesList',
 );
+const OfferingOrdersList = lazyComponent(
+  () => import('./details/OfferingOrdersList'),
+  'OfferingOrdersList',
+);
 const PlanUsageList = lazyComponent(
   () => import('./details/PlanUsageList'),
   'PlanUsageList',
@@ -98,6 +102,11 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       title: translate('Resources'),
       key: 'resources',
       component: OfferingResourcesList,
+    },
+    {
+      title: translate('Orders'),
+      key: 'orders',
+      component: OfferingOrdersList,
     },
     offering.type !== OFFERING_TYPE_BOOKING && offering.billable
       ? { title: translate('Plans'), key: 'plans', component: PlanUsageList }

@@ -1,12 +1,13 @@
-import React from 'react';
 import { reduxForm } from 'redux-form';
 
 import {
   syncFiltersToURL,
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
+import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/customer/constants';
 import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { OFFERING_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/list/constants';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
@@ -44,22 +45,26 @@ const PureMarketplaceOrdersListFilter = (props) => {
   });
   return (
     <>
-      <TableFilterItem
-        title={translate('Offering')}
-        name="offering"
-        badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
-      >
-        <OfferingAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
-      </TableFilterItem>
-      <TableFilterItem
-        title={translate('Organization')}
-        name="organization"
-        badgeValue={(value) => value?.name}
-      >
-        <OrganizationAutocomplete
-          reactSelectProps={REACT_SELECT_TABLE_FILTER}
-        />
-      </TableFilterItem>
+      {props.hasOffering && (
+        <TableFilterItem
+          title={translate('Offering')}
+          name="offering"
+          badgeValue={(value) => `${value?.category_title} / ${value?.name}`}
+        >
+          <OfferingAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+        </TableFilterItem>
+      )}
+      {props.hasOrganization && (
+        <TableFilterItem
+          title={translate('Organization')}
+          name="organization"
+          badgeValue={(value) => value?.name}
+        >
+          <OrganizationAutocomplete
+            reactSelectProps={REACT_SELECT_TABLE_FILTER}
+          />
+        </TableFilterItem>
+      )}
       <TableFilterItem
         title={translate('Project')}
         name="project"
@@ -67,13 +72,15 @@ const PureMarketplaceOrdersListFilter = (props) => {
       >
         <ProjectFilter reactSelectProps={REACT_SELECT_TABLE_FILTER} />
       </TableFilterItem>
-      <TableFilterItem
-        title={translate('Service provider')}
-        name="provider"
-        getValueLabel={(option) => option.customer_name}
-      >
-        <ProviderAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
-      </TableFilterItem>
+      {props.hasOrganization && (
+        <TableFilterItem
+          title={translate('Service provider')}
+          name="provider"
+          getValueLabel={(option) => option.customer_name}
+        >
+          <ProviderAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+        </TableFilterItem>
+      )}
       <TableFilterItem
         title={translate('State')}
         name="state"
@@ -102,4 +109,24 @@ export const MarketplaceOrdersListFilter = reduxForm({
     state: getOrderStateFilterOptions()[0],
   },
   destroyOnUnmount: false,
-})(PureMarketplaceOrdersListFilter) as React.ComponentType;
+})((props) => (
+  <PureMarketplaceOrdersListFilter {...props} hasOffering hasOrganization />
+)) as React.ComponentType;
+
+export const OfferingOrdersListFilter = reduxForm({
+  form: OFFERING_ORDERS_LIST_FILTER_FORM_ID,
+  touchOnChange: true,
+  initialValues: {
+    state: getOrderStateFilterOptions()[0],
+  },
+  destroyOnUnmount: false,
+})((props) => <PureMarketplaceOrdersListFilter {...props} hasOrganization />);
+
+export const CustomerOrdersListFilter = reduxForm({
+  form: CUSTOMER_ORDERS_LIST_FILTER_FORM_ID,
+  touchOnChange: true,
+  initialValues: {
+    state: getOrderStateFilterOptions()[0],
+  },
+  destroyOnUnmount: false,
+})((props) => <PureMarketplaceOrdersListFilter {...props} hasOffering />);
