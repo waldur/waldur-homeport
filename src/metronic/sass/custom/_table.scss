@@ -230,6 +230,28 @@
 
     .table-pagination {
       padding: 0 $card-px !important;
+
+      .page-item {
+        .page-link {
+          color: $grey-500;
+          width: 40px;
+          height: 40px;
+        }
+        .page-link:focus,
+        .page-link:hover,
+        &.active .page-link {
+          color: $primary;
+          background-color: $primary-50;
+        }
+      }
+
+      .form-select {
+        color: $dark;
+
+        option {
+          background-color: $body-bg;
+        }
+      }
     }
   }
 

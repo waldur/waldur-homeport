@@ -6215,6 +6215,10 @@
     "description": "error/InvalidObjectPage.tsx",
     "message": "Page is not found."
   },
+  "Page {page} of {total}": {
+    "description": "table/TablePagination.tsx",
+    "message": "Page {page} of {total}"
+  },
   "Paid": {
     "description": "invoices/list/InvoicesFilter.tsx, reporting/invoices/utils.ts",
     "message": "Paid"
@@ -8206,6 +8210,10 @@
   "Routers": {
     "description": "openstack/openstack-tenant/tabs.ts",
     "message": "Routers"
+  },
+  "Rows per page": {
+    "description": "table/TablePageSize.tsx",
+    "message": "Rows per page"
   },
   "Running accounting": {
     "description": "customer/list/AccountingRunningField.tsx",
