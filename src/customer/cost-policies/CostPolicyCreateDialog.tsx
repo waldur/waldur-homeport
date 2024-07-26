@@ -4,11 +4,12 @@ import { Modal } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 
 import { CostPolicyCreateForm } from './CostPolicyCreateForm';
-import { CostPolicyFormData } from './types';
+import { CostPolicyFormData, CostPolicyType } from './types';
 
 interface CostPolicyCreateDialogProps {
   onSubmit(formData: CostPolicyFormData): void;
   onCancel(): void;
+  type: CostPolicyType;
 }
 
 export const CostPolicyCreateDialog: FC<CostPolicyCreateDialogProps> = (

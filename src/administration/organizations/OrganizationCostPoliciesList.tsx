@@ -2,43 +2,38 @@ import { Check, X } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Badge } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { CostPolicyCreateButton } from '@waldur/customer/cost-policies/CostPolicyCreateButton';
+import { CostPolicyDeleteButton } from '@waldur/customer/cost-policies/CostPolicyDeleteButton';
+import { getCostPolicyActionOptions } from '@waldur/customer/cost-policies/utils';
+import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { translate } from '@waldur/i18n';
-import { ProjectLink } from '@waldur/project/ProjectLink';
 import { Table, createFetcher } from '@waldur/table';
-import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
 
-import { CostPolicyCreateButton } from './CostPolicyCreateButton';
-import { CostPolicyDeleteButton } from './CostPolicyDeleteButton';
-import { getCostPolicyActionOptions } from './utils';
+import { OrganizationCostPoliciesFilter } from './OrganizationCostPoliciesFilter';
 
-const filtersSelector = createSelector(getCustomer, (customer) => {
-  const result: Record<string, any> = {};
-  if (customer) {
-    result.customer_uuid = customer.uuid;
-  }
-  return result;
-});
+const filtersSelector = createSelector(
+  getFormValues('OrgCostPoliciesFilter'),
+  (filterValues: any) => {
+    const result: Record<string, any> = {};
+    if (filterValues?.organization) {
+      result.customer_uuid = filterValues.organization.uuid;
+    }
+    return result;
+  },
+);
 
-interface CostPoliciesListTableProps extends Partial<TableProps> {
-  table: string;
-  hideColumns?: ('project' | 'price_estimate')[];
-}
+export const OrganizationCostPoliciesList: FC = () => {
+  const filter = useSelector(filtersSelector);
 
-export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
-  table,
-  filter,
-  hideColumns = [],
-  ...props
-}) => {
   const tableProps = useTable({
-    table,
+    table: 'OrgCostPoliciesList',
     filter: filter,
-    fetchData: createFetcher('marketplace-project-estimated-cost-policies'),
+    fetchData: createFetcher('marketplace-customer-estimated-cost-policies'),
     queryField: 'query',
   });
 
@@ -46,13 +41,14 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
     <Table
       {...tableProps}
       columns={[
-        !hideColumns.includes('project') && {
-          title: translate('Project'),
+        {
+          title: translate('Organization'),
           render: ({ row }) => (
-            <ProjectLink
-              row={{ ...row, name: row.scope_name, uuid: row.scope_uuid }}
+            <OrganizationLink
+              row={{ name: row.scope_name, uuid: row.scope_uuid }}
             />
           ),
+          filter: 'organization',
         },
         {
           title: translate('Cost threshold'),
@@ -91,8 +87,8 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
               </Badge>
             ),
         },
-        !hideColumns.includes('price_estimate') && {
-          title: translate('Project estimated current cost'),
+        {
+          title: translate('Estimated current cost'),
           render: ({ row }) => (
             <>
               {defaultCurrency(
@@ -103,28 +99,25 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
             </>
           ),
         },
-      ].filter(Boolean)}
+      ]}
       verboseName={translate('Cost policies')}
       initialSorting={{ field: 'created', mode: 'desc' }}
+      filters={<OrganizationCostPoliciesFilter />}
       hoverableRow={({ row }) => (
         <CostPolicyDeleteButton
           row={row}
-          type="project"
+          type="organization"
           refetch={tableProps.fetch}
         />
       )}
       hasQuery={true}
       showPageSizeSelector={true}
       actions={
-        <CostPolicyCreateButton type="project" refetch={tableProps.fetch} />
+        <CostPolicyCreateButton
+          type="organization"
+          refetch={tableProps.fetch}
+        />
       }
-      {...props}
     />
   );
-};
-
-export const CostPoliciesList = () => {
-  const filter = useSelector(filtersSelector);
-
-  return <CostPoliciesListTable table="CostPoliciesList" filter={filter} />;
 };

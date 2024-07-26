@@ -5,7 +5,7 @@ import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures, SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
 
 const AdministrationDashboard = lazyComponent(
   () => import('./dashboard/AdministrationDashboard'),
@@ -79,6 +79,11 @@ const OrganizationGroupsList = lazyComponent(
 const OrganizationGroupTypesList = lazyComponent(
   () => import('./organizations/OrganizationGroupTypesList'),
   'OrganizationGroupTypesList',
+);
+
+const OrganizationCostPoliciesList = lazyComponent(
+  () => import('./organizations/OrganizationCostPoliciesList'),
+  'OrganizationCostPoliciesList',
 );
 
 const AdministrationLanguages = lazyComponent(
@@ -304,6 +309,16 @@ export const states: StateDeclaration[] = [
     component: OrganizationGroupTypesList,
     data: {
       breadcrumb: () => translate('Organization group types'),
+    },
+  },
+  {
+    name: 'admin-organization-cost-policies',
+    url: 'organization-cost-policies/',
+    parent: 'admin-organizations',
+    component: OrganizationCostPoliciesList,
+    data: {
+      breadcrumb: () => translate('Cost policies'),
+      permissions: [isStaff],
     },
   },
   {

@@ -6,10 +6,10 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n/translate';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
-import { Project } from '@waldur/workspace/types';
+import { Customer, Project } from '@waldur/workspace/types';
 
-import { createCostPolicy } from './api';
-import { CostPolicyFormData } from './types';
+import { createOrganizationCostPolicy, createProjectCostPolicy } from './api';
+import { CostPolicyFormData, CostPolicyType } from './types';
 
 const CostPolicyCreateDialog = lazyComponent(
   () => import('./CostPolicyCreateDialog'),
@@ -17,21 +17,32 @@ const CostPolicyCreateDialog = lazyComponent(
 );
 
 interface SubmitedFormData {
-  project: Project;
+  scope: Project | Customer;
   actions: { value; label };
   limit_cost: number;
 }
 
-const submit = (formData: SubmitedFormData) => {
+const submit = (formData: SubmitedFormData, type: CostPolicyType) => {
   const data: CostPolicyFormData = {
-    scope: formData.project.url,
+    scope: formData.scope.url,
     actions: formData.actions.value,
     limit_cost: formData.limit_cost,
   };
-  return createCostPolicy(data);
+  if (type === 'project') {
+    return createProjectCostPolicy(data);
+  }
+  return createOrganizationCostPolicy(data);
 };
 
-export const CostPolicyCreateButton = ({ refetch }) => {
+interface CostPolicyCreateButtonProps {
+  refetch(): void;
+  type: CostPolicyType;
+}
+
+export const CostPolicyCreateButton = ({
+  refetch,
+  type,
+}: CostPolicyCreateButtonProps) => {
   const dispatch = useDispatch();
   const openCostPolicyCreateDialog = useCallback(
     () =>
@@ -39,7 +50,7 @@ export const CostPolicyCreateButton = ({ refetch }) => {
         openModalDialog(CostPolicyCreateDialog, {
           size: 'lg',
           onSubmit: (formData) => {
-            return submit(formData).then(() => {
+            return submit(formData, type).then(() => {
               dispatch(closeModalDialog());
               refetch();
             });
@@ -47,6 +58,7 @@ export const CostPolicyCreateButton = ({ refetch }) => {
           onCancel: () => {
             dispatch(closeModalDialog());
           },
+          type,
         }),
       ),
     [dispatch],
