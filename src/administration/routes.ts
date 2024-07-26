@@ -57,6 +57,11 @@ const UserList = lazyComponent(
   'UserList',
 );
 
+const InvitationList = lazyComponent(
+  () => import('./InvitationList'),
+  'InvitationList',
+);
+
 const IdentityProvidersList = lazyComponent(
   () => import('./providers/IdentityProvidersList'),
   'IdentityProvidersList',
@@ -261,6 +266,16 @@ export const states: StateDeclaration[] = [
           }
         },
       ],
+    },
+  },
+
+  {
+    name: 'admin-invitations',
+    url: 'invitations/',
+    component: InvitationList,
+    parent: 'admin-accounts',
+    data: {
+      breadcrumb: () => translate('Invitations'),
     },
   },
 
