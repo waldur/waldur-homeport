@@ -7,11 +7,13 @@ export interface CostPolicyFormData {
 export interface CostPolicy extends CostPolicyFormData {
   uuid: string;
   url: string;
-  project_name: string;
-  project_uuid: string;
+  scope_name: string;
+  scope_uuid: string;
   created: string;
   created_by_full_name: string;
   created_by_username: string;
   has_fired: boolean;
-  billing_price_estimate: number;
+  billing_price_estimate: object;
 }
+
+export type CostPolicyType = 'project' | 'organization';

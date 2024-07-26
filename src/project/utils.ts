@@ -1,5 +1,5 @@
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { getCostPolicies } from '@waldur/customer/cost-policies/api';
+import { getProjectCostPolicies } from '@waldur/customer/cost-policies/api';
 import { formatCostChart } from '@waldur/dashboard/api';
 import { getScopeChartOptions } from '@waldur/dashboard/chart';
 import { LINE_CHART_COLOR } from '@waldur/dashboard/constants';
@@ -13,8 +13,8 @@ import { ProjectCounterResourceItem } from './types';
 export async function loadChart(project: Project) {
   const [invoices, costPolicies] = await Promise.all([
     fetchLast12MonthProjectCosts(project.uuid),
-    getCostPolicies({
-      project_uuid: project.uuid,
+    getProjectCostPolicies({
+      scope_uuid: project.uuid,
       page: 1,
       page_size: 3,
     }),

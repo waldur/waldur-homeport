@@ -13,16 +13,19 @@ import {
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import { projectAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import {
+  organizationAutocomplete,
+  projectAutocomplete,
+} from '@waldur/marketplace/common/autocompletes';
 import { ProjectCostField } from '@waldur/project/ProjectCostField';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { CostPolicyFormData } from './types';
+import { CostPolicyFormData, CostPolicyType } from './types';
 import { getCostPolicyActionOptions } from './utils';
 
 export const CostPolicyCreateForm = reduxForm<
   CostPolicyFormData,
-  { onSubmit; onCancel }
+  { onSubmit; onCancel; type: CostPolicyType }
 >({
   form: 'costPolicyCreate',
 })((props) => {
@@ -31,32 +34,54 @@ export const CostPolicyCreateForm = reduxForm<
   return (
     <form onSubmit={props.handleSubmit(props.onSubmit)}>
       <FormContainer submitting={props.submitting}>
-        <AsyncSelectField
-          name="project"
-          label={
-            <>
-              1. {translate('Select project')}
-              <span className="text-danger"> *</span>
-            </>
-          }
-          validate={required}
-          placeholder={translate('Select project...')}
-          loadOptions={(query, prevOptions, { page }) =>
-            projectAutocomplete(
-              currentOrganization?.uuid,
-              query,
-              prevOptions,
-              page,
-              { field: ['name', 'uuid', 'url', 'billing_price_estimate'] },
-            )
-          }
-          getOptionValue={(option) => option.url}
-          getOptionLabel={(option) =>
-            `${option.name} / est. ${ProjectCostField({ row: option })} ` +
-            translate('this month')
-          }
-          noOptionsMessage={() => translate('No projects')}
-        />
+        {props.type === 'project' ? (
+          <AsyncSelectField
+            name="scope"
+            label={
+              <>
+                1. {translate('Select project')}
+                <span className="text-danger"> *</span>
+              </>
+            }
+            validate={required}
+            placeholder={translate('Select project') + '...'}
+            loadOptions={(query, prevOptions, { page }) =>
+              projectAutocomplete(
+                currentOrganization?.uuid,
+                query,
+                prevOptions,
+                page,
+                { field: ['name', 'uuid', 'url', 'billing_price_estimate'] },
+              )
+            }
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) =>
+              `${option.name} / est. ${ProjectCostField({ row: option })} ` +
+              translate('this month')
+            }
+            noOptionsMessage={() => translate('No projects')}
+          />
+        ) : (
+          <AsyncSelectField
+            name="scope"
+            label={
+              <>
+                1. {translate('Select organization')}
+                <span className="text-danger"> *</span>
+              </>
+            }
+            validate={required}
+            placeholder={translate('Select organization') + '...'}
+            loadOptions={(query, prevOptions, { page }) =>
+              organizationAutocomplete(query, prevOptions, page, {
+                field: ['name', 'uuid', 'url'],
+              })
+            }
+            getOptionValue={(option) => option.url}
+            getOptionLabel={(option) => option.name}
+            noOptionsMessage={() => translate('No organizations')}
+          />
+        )}
         <Form.Group className="mb-7">
           <Form.Label>
             2. {translate('When')}
@@ -87,7 +112,7 @@ export const CostPolicyCreateForm = reduxForm<
               <Select
                 value={fieldProps.input.value}
                 onChange={(value) => fieldProps.input.onChange(value)}
-                options={getCostPolicyActionOptions()}
+                options={getCostPolicyActionOptions(props.type)}
                 getOptionValue={(option) => option.value}
                 getOptionLabel={(option) => option.label}
               />

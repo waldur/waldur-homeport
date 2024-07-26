@@ -180,7 +180,7 @@
     "message": "Action has been applied."
   },
   "Action": {
-    "description": "customer/cost-policies/CostPoliciesList.tsx, resource/actions/AsyncActionItem.tsx",
+    "description": "administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx, resource/actions/AsyncActionItem.tsx",
     "message": "Action"
   },
   "Actions": {
@@ -838,6 +838,10 @@
   "Are you sure you want to delete the LEXIS link of {resource_name}?": {
     "description": "marketplace/resources/lexis/LexisLinkDeleteButton.tsx",
     "message": "Are you sure you want to delete the LEXIS link of {resource_name}?"
+  },
+  "Are you sure you want to delete the cost policy for organization {name}?": {
+    "description": "customer/cost-policies/CostPolicyDeleteButton.tsx",
+    "message": "Are you sure you want to delete the cost policy for organization {name}?"
   },
   "Are you sure you want to delete the cost policy for project {name}?": {
     "description": "customer/cost-policies/CostPolicyDeleteButton.tsx",
@@ -1944,11 +1948,11 @@
     "message": "Cost estimation"
   },
   "Cost policies": {
-    "description": "customer/cost-policies/CostPoliciesList.tsx, customer/routes.ts",
+    "description": "administration/organizations/OrganizationCostPoliciesList.tsx, administration/routes.ts, customer/cost-policies/CostPoliciesList.tsx, customer/routes.ts",
     "message": "Cost policies"
   },
   "Cost threshold": {
-    "description": "customer/cost-policies/CostPoliciesList.tsx",
+    "description": "administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx",
     "message": "Cost threshold"
   },
   "Cost": {
@@ -3215,6 +3219,10 @@
     "description": "customer/list/CustomerList.tsx, dashboard/api.ts, invoices/list/EstimatedCost.tsx, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/ProviderOrganizationsList.tsx, marketplace/service-providers/ProviderUserCustomersList.tsx, project/ProjectsList.tsx",
     "message": "Estimated cost"
   },
+  "Estimated current cost": {
+    "description": "administration/organizations/OrganizationCostPoliciesList.tsx",
+    "message": "Estimated current cost"
+  },
   "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included.": {
     "description": "marketplace/orders/details/OrderSummaryMessage.tsx",
     "message": "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
@@ -3844,7 +3852,7 @@
     "message": "Has ended"
   },
   "Has fired": {
-    "description": "customer/cost-policies/CostPoliciesList.tsx",
+    "description": "administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx",
     "message": "Has fired"
   },
   "Health checks": {
@@ -5444,7 +5452,7 @@
     "message": "No organizations found"
   },
   "No organizations": {
-    "description": "marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/GlobalProjectCreateDialog.tsx, project/MoveToOrganizationAutocomplete.tsx",
+    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/GlobalProjectCreateDialog.tsx, project/MoveToOrganizationAutocomplete.tsx",
     "message": "No organizations"
   },
   "No outputs found for this order": {
@@ -5516,7 +5524,7 @@
     "message": "No, continue using current email"
   },
   "No": {
-    "description": "administration/FeaturesList.tsx, customer/cost-policies/CostPoliciesList.tsx, customer/list/ServiceProviderFilter.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/update/attributes/utils.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/options/ResourceOptionsCard.tsx, marketplace-checklist/AnswerGroup.tsx, marketplace-checklist/AnswersTable.tsx, marketplace-checklist/ChecklistCustomer.tsx, modal/ConfirmationDialog.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-tenant/ExpandablePortRow.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/support/UserList.tsx",
+    "description": "administration/FeaturesList.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx, customer/list/ServiceProviderFilter.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/update/attributes/utils.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/options/ResourceOptionsCard.tsx, marketplace-checklist/AnswerGroup.tsx, marketplace-checklist/AnswersTable.tsx, marketplace-checklist/ChecklistCustomer.tsx, modal/ConfirmationDialog.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-tenant/ExpandablePortRow.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/support/UserList.tsx",
     "message": "No"
   },
   "Node has been created.": {
@@ -6160,7 +6168,7 @@
     "message": "Organization updated successfully"
   },
   "Organization": {
-    "description": "administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/details/CustomerRemoveDialog.tsx, customer/list/CustomerList.tsx, customer/routes.ts, events/ExpandableEventDetailsTable.tsx, invitations/actions/UserDetailsGroup.tsx, issues/IssueSummary.tsx, issues/create/IssueHeader.tsx, issues/list/IssuesList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/steps/FormCustomerStep.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/list/OfferingsList.tsx, marketplace/orders/details/OrderDetailsHeaderBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/robot-accounts/ProviderRobotAccountFilter.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace-checklist/ChecklistOverview.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, project/GlobalProjectCreateDialog.tsx, proposals/PublicCallsList.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, resource/support/SharedProviderCustomers.tsx, resource/support/SharedProviderResources.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/affiliations/ProjectsListFilter.tsx, user/affiliations/UserAffiliationsList.tsx, user/support/UserDetailsTable.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
+    "description": "administration/organizations/OrganizationCostPoliciesFilter.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/details/CustomerRemoveDialog.tsx, customer/list/CustomerList.tsx, customer/routes.ts, events/ExpandableEventDetailsTable.tsx, invitations/actions/UserDetailsGroup.tsx, issues/IssueSummary.tsx, issues/create/IssueHeader.tsx, issues/list/IssuesList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/steps/FormCustomerStep.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/list/OfferingsList.tsx, marketplace/orders/details/OrderDetailsHeaderBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/robot-accounts/ProviderRobotAccountFilter.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace-checklist/ChecklistOverview.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, project/GlobalProjectCreateDialog.tsx, proposals/PublicCallsList.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, resource/support/SharedProviderCustomers.tsx, resource/support/SharedProviderResources.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/affiliations/ProjectsListFilter.tsx, user/affiliations/UserAffiliationsList.tsx, user/support/UserDetailsTable.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
     "message": "Organization"
   },
   "Organizations owner": {
@@ -8547,6 +8555,10 @@
     "description": "customer/team/OrganizationRoleSelectField.tsx",
     "message": "Select organization roles"
   },
+  "Select organization": {
+    "description": "customer/cost-policies/CostPolicyCreateForm.tsx",
+    "message": "Select organization"
+  },
   "Select organization...": {
     "description": "auth/saml2/ProviderField.tsx, marketplace/details/CustomerField.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/GlobalProjectCreateDialog.tsx, project/MoveToOrganizationAutocomplete.tsx",
     "message": "Select organization..."
@@ -8576,7 +8588,7 @@
     "message": "Select project"
   },
   "Select project...": {
-    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, issues/create/IssueQuickCreate.tsx, marketplace/details/ProjectField.tsx, marketplace/resources/actions/MoveToProjectAutocomplete.tsx, marketplace/resources/import/ResourceImportDialog.tsx, marketplace/resources/list/ProjectFilter.tsx, marketplace/robot-accounts/ProviderProjectFilter.tsx",
+    "description": "issues/create/IssueQuickCreate.tsx, marketplace/details/ProjectField.tsx, marketplace/resources/actions/MoveToProjectAutocomplete.tsx, marketplace/resources/import/ResourceImportDialog.tsx, marketplace/resources/list/ProjectFilter.tsx, marketplace/robot-accounts/ProviderProjectFilter.tsx",
     "message": "Select project..."
   },
   "Select provider...": {
@@ -12080,7 +12092,7 @@
     "message": "Yes, use invitation email"
   },
   "Yes": {
-    "description": "administration/FeaturesList.tsx, customer/cost-policies/CostPoliciesList.tsx, customer/list/ServiceProviderFilter.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/update/attributes/utils.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/options/ResourceOptionsCard.tsx, marketplace-checklist/AnswerGroup.tsx, marketplace-checklist/AnswersTable.tsx, marketplace-checklist/ChecklistCustomer.tsx, modal/ConfirmationDialog.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-tenant/ExpandablePortRow.tsx, project/ProjectRemoveDialog.tsx, proposals/call-management/CallAllFilters.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/hooks/HookRemoveDialog.tsx, user/keys/KeyRemoveDialog.tsx, user/support/UserList.tsx",
+    "description": "administration/FeaturesList.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx, customer/list/ServiceProviderFilter.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/update/attributes/utils.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/options/ResourceOptionsCard.tsx, marketplace-checklist/AnswerGroup.tsx, marketplace-checklist/AnswersTable.tsx, marketplace-checklist/ChecklistCustomer.tsx, modal/ConfirmationDialog.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-tenant/ExpandablePortRow.tsx, project/ProjectRemoveDialog.tsx, proposals/call-management/CallAllFilters.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/hooks/HookRemoveDialog.tsx, user/keys/KeyRemoveDialog.tsx, user/support/UserList.tsx",
     "message": "Yes"
   },
   "You also agree to the service provider’s <pp>privacy policy</pp>.": {
