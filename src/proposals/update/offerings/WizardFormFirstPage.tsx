@@ -45,8 +45,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
               <OfferingAutocomplete
                 offeringFilter={{
                   category_uuid,
-                  customer_uuid: props.data.call.customer_uuid,
-                  shared: true,
+                  allowed_customer_uuid: props.data.call.customer_uuid,
                 }}
                 validate={required}
                 providerOfferings={false}
