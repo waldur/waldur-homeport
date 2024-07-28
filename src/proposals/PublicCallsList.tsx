@@ -17,6 +17,8 @@ import { formatCallState, getRoundsWithStatus } from './utils';
 
 interface PublicCallsListProps {
   offering_uuid: string;
+  provider_uuid?: string;
+  initialMode?: 'table' | 'grid';
 }
 
 const CallColumns = [
@@ -77,7 +79,10 @@ const CallColumns = [
 export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
   props,
 ) => {
-  const usePublicCallsFilter = (offering_uuid?: string) => {
+  const usePublicCallsFilter = (
+    offering_uuid?: string,
+    provider_uuid?: string,
+  ) => {
     const filters = useSelector(getFormValues(CALL_FILTER_FORM_ID)) as any;
 
     return useMemo(() => {
@@ -93,10 +98,13 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
       if (offering_uuid) {
         result.offering_uuid = offering_uuid;
       }
+      if (provider_uuid) {
+        result.offerings_provider_uuid = provider_uuid;
+      }
       return result;
-    }, [filters, offering_uuid]);
+    }, [filters, offering_uuid, provider_uuid]);
   };
-  const filter = usePublicCallsFilter(props.offering_uuid);
+  const filter = usePublicCallsFilter(props.offering_uuid, props.provider_uuid);
   const tableProps = useTable({
     table: 'PublicCallsList',
     fetchData: createFetcher('proposal-public-calls'),
@@ -108,6 +116,7 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
       title={translate('Calls for proposals')}
       {...tableProps}
       columns={CallColumns}
+      initialMode={props.initialMode ? props.initialMode : 'table'}
       gridItem={({ row }) => <CallCard call={row} />}
       gridSize={{ lg: 6, xl: 4 }}
       verboseName={translate('Public calls')}

@@ -135,6 +135,11 @@ const OrderDetailsContainer = lazyComponent(
   'OrderDetailsContainer',
 );
 
+const ProviderDetailsContainer = lazyComponent(
+  () => import('./service-providers/details/ProviderDetailsContainer'),
+  'ProviderDetailsContainer',
+);
+
 const getPublicRoutesParams = () => ({
   resolve: [
     {
@@ -281,6 +286,20 @@ export const states: StateDeclaration[] = [
         deps: ['$transition$'],
       },
     ],
+  },
+
+  {
+    name: 'marketplace-providers',
+    url: '/marketplace-provider-details/',
+    component: UIView,
+    abstract: true,
+    parent: 'public',
+  },
+
+  {
+    name: 'marketplace-providers.details',
+    url: ':customer_uuid/?tab',
+    component: ProviderDetailsContainer,
   },
 
   {

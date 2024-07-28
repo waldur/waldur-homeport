@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -19,7 +20,13 @@ export const ServiceProvidersList: FunctionComponent = () => {
   const columns = [
     {
       title: translate('Name'),
-      render: ({ row }) => row.customer_name,
+      render: ({ row }) => (
+        <Link
+          state="marketplace-providers.details"
+          params={{ customer_uuid: row.customer_uuid }}
+          label={row.customer_name}
+        />
+      ),
       keys: ['customer_name'],
     },
     {

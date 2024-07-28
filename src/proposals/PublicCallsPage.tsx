@@ -9,7 +9,13 @@ import { useFullPage } from '@waldur/navigation/context';
 import background from './proposal-calls.png';
 import { PublicCallsList } from './PublicCallsList';
 
-export const PublicCallsPage: FunctionComponent = () => {
+interface PublicCallsPageProps {
+  provider_uuid?: string;
+}
+
+export const PublicCallsPage: FunctionComponent<PublicCallsPageProps> = ({
+  provider_uuid,
+}) => {
   const {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
@@ -23,7 +29,10 @@ export const PublicCallsPage: FunctionComponent = () => {
         backgroundImage={background}
       />
       <div className="container-fluid mt-20 mb-10">
-        <PublicCallsList offering_uuid={offering_uuid} />
+        <PublicCallsList
+          offering_uuid={offering_uuid}
+          provider_uuid={provider_uuid}
+        />
       </div>
     </>
   );
