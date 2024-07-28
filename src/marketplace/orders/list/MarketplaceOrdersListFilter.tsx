@@ -43,6 +43,8 @@ const PureMarketplaceOrdersListFilter = (props) => {
   useReinitializeFilterFromUrl(props.form, {
     state: getOrderStateFilterOptions()[0],
   });
+  const { provider_uuid } = props;
+
   return (
     <>
       {props.hasOffering && (
@@ -72,7 +74,7 @@ const PureMarketplaceOrdersListFilter = (props) => {
       >
         <ProjectFilter reactSelectProps={REACT_SELECT_TABLE_FILTER} />
       </TableFilterItem>
-      {props.hasOrganization && (
+      {props.hasOrganization && !provider_uuid && (
         <TableFilterItem
           title={translate('Service provider')}
           name="provider"
@@ -111,7 +113,9 @@ export const MarketplaceOrdersListFilter = reduxForm({
   destroyOnUnmount: false,
 })((props) => (
   <PureMarketplaceOrdersListFilter {...props} hasOffering hasOrganization />
-)) as React.ComponentType;
+)) as React.ComponentType<{
+  provider_uuid?: string;
+}>;
 
 export const OfferingOrdersListFilter = reduxForm({
   form: OFFERING_ORDERS_LIST_FILTER_FORM_ID,

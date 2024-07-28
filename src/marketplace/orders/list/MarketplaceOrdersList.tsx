@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -12,23 +12,18 @@ import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import { MarketplaceOrdersListFilter } from './MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from './OrdersTableComponent';
 
-export const MarketplaceOrdersList: FunctionComponent = () => {
-  const filter = useSelector(mapStateToFilter);
-  useMarketplacePublicTabs();
-
-  return (
-    <OrdersTableComponent
-      table={TABLE_MARKETPLACE_ORDERS}
-      filters={<MarketplaceOrdersListFilter />}
-      filter={filter}
-      standalone
-    />
-  );
-};
+interface MarketplaceOrdersListProps {
+  provider_uuid?: string;
+}
 
 const mapStateToFilter = createSelector(
   getFormValues(MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID),
-  (filterValues: any) => {
+  (filterValues: any) => filterValues,
+);
+
+const useMarketplaceOrdersFilter = (provider_uuid?: string) => {
+  const filterValues = useSelector(mapStateToFilter);
+  return useMemo(() => {
     const filter: Record<string, string> = {};
     if (filterValues) {
       if (filterValues.organization) {
@@ -46,10 +41,29 @@ const mapStateToFilter = createSelector(
       if (filterValues.offering) {
         filter.offering_uuid = filterValues.offering.uuid;
       }
-      if (filterValues.provider) {
+      if (filterValues.provider && !provider_uuid) {
         filter.provider_uuid = filterValues.provider.customer_uuid;
       }
     }
+    if (provider_uuid) {
+      filter.provider_uuid = provider_uuid;
+    }
     return filter;
-  },
-);
+  }, [filterValues, provider_uuid]);
+};
+
+export const MarketplaceOrdersList: FunctionComponent<
+  MarketplaceOrdersListProps
+> = ({ provider_uuid }) => {
+  const filter = useMarketplaceOrdersFilter(provider_uuid);
+  useMarketplacePublicTabs();
+
+  return (
+    <OrdersTableComponent
+      table={TABLE_MARKETPLACE_ORDERS}
+      filters={<MarketplaceOrdersListFilter provider_uuid={provider_uuid} />}
+      filter={filter}
+      standalone
+    />
+  );
+};

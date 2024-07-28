@@ -1,43 +1,47 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
-import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import {
+  getPublicOfferingsList,
   getServiceProviderByCustomer,
-  getProviderOfferings,
 } from '@waldur/marketplace/common/api';
-import { useTitle } from '@waldur/navigation/title';
 
-import { ProviderDetailsBody } from './ProviderDetailsBody';
+import { ServiceProviderDetails } from './ServiceProviderDetails';
 
-export async function loadProviderData(customerId) {
+async function loadProviderData(customerId) {
   const provider = await getServiceProviderByCustomer({
     customer_uuid: customerId,
   });
-  const offerings = await getProviderOfferings(customerId);
+  const offerings = await getPublicOfferingsList({
+    customer_uuid: customerId,
+    o: 'state',
+  });
   return { provider, offerings };
 }
 
-export const ProviderDetails: FunctionComponent = () => {
+export const ProviderDetailsContainer: React.FC<{}> = () => {
   const {
     params: { customer_uuid },
   } = useCurrentStateAndParams();
 
-  const { loading, value, error } = useAsync(
+  const { isLoading, error, data } = useQuery(
+    ['ProviderDetailsContainer', customer_uuid],
     () => loadProviderData(customer_uuid),
-    [customer_uuid],
   );
 
-  useTitle(value ? value.provider.name : translate('Provider details'));
-
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
     return <>{translate('Unable to load service provider.')}</>;
   }
-  return <ProviderDetailsBody {...value} />;
+  return (
+    <ServiceProviderDetails
+      provider={data.provider}
+      offerings={data.offerings}
+    />
+  );
 };
