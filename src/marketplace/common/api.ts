@@ -464,6 +464,9 @@ export const updateOfferingLogo = (offeringUuid: string, formData) =>
 export const createOfferingUser = (payload) =>
   post(`/marketplace-offering-users/`, payload);
 
+export const updateOfferingUserRestrictionStatus = (uuid, data) =>
+  post(`/marketplace-offering-users/${uuid}/update_restricted/`, data);
+
 export const pullRemoteOfferingDetails = (uuid) =>
   post(`/remote-waldur-api/pull_offering_details/${uuid}/`);
 

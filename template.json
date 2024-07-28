@@ -991,6 +991,10 @@
     "description": "resource/actions/UnlinkActionItem.tsx",
     "message": "Are you sure you want to unlink {name} {resourceType}? "
   },
+  "Are you sure you want to update the restriction status of this user?": {
+    "description": "marketplace/service-providers/RestrictOfferingUser.tsx",
+    "message": "Are you sure you want to update the restriction status of this user?"
+  },
   "Are you sure you want to {action} this call?": {
     "description": "proposals/update/CallActions.tsx",
     "message": "Are you sure you want to {action} this call?"
@@ -1864,7 +1868,7 @@
     "message": "Confirmation notification template"
   },
   "Confirmation": {
-    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, administration/service-desk/AdministrationServiceDesk.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invitations/GroupInvitationCancelButton.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/cart/ShoppingCartButtonContainer.tsx, marketplace/category/admin/CategoryDeleteButton.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/details/CustomerField.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, rancher/cluster/create/FormNodesStep.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx",
+    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, administration/service-desk/AdministrationServiceDesk.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invitations/GroupInvitationCancelButton.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/cart/ShoppingCartButtonContainer.tsx, marketplace/category/admin/CategoryDeleteButton.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/details/CustomerField.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, rancher/cluster/create/FormNodesStep.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx",
     "message": "Confirmation"
   },
   "Confirming that data is correct": {
@@ -7975,6 +7979,10 @@
     "description": "openstack/openstack-backup/actions/RestoreAction.tsx, openstack/openstack-snapshot/RestoreSnapshotAction.tsx",
     "message": "Restore"
   },
+  "Restrict": {
+    "description": "marketplace/service-providers/RestrictOfferingUser.tsx",
+    "message": "Restrict"
+  },
   "Restricted page": {
     "description": "auth/PermissionLayout.tsx",
     "message": "Restricted page"
@@ -7986,6 +7994,10 @@
   "Restricted": {
     "description": "auth/PermissionLayout.tsx",
     "message": "Restricted"
+  },
+  "Restriction status has been updated.": {
+    "description": "marketplace/service-providers/RestrictOfferingUser.tsx",
+    "message": "Restriction status has been updated."
   },
   "Restroing": {
     "description": "resource/state/constants.ts",
@@ -11207,6 +11219,10 @@
     "description": "administration/service-desk/AdministrationServiceDesk.tsx, administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx",
     "message": "Unable to update the configurations."
   },
+  "Unable to update the restriction status.": {
+    "description": "marketplace/service-providers/RestrictOfferingUser.tsx",
+    "message": "Unable to update the restriction status."
+  },
   "Unable to update username.": {
     "description": "marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx",
     "message": "Unable to update username."
@@ -11298,6 +11314,10 @@
   "Unpublish as Google Calendar": {
     "description": "marketplace/offerings/update/integration/GoogleCalendarActions.tsx",
     "message": "Unpublish as Google Calendar"
+  },
+  "Unrestrict": {
+    "description": "marketplace/service-providers/RestrictOfferingUser.tsx",
+    "message": "Unrestrict"
   },
   "Update LEXIS link options": {
     "description": "marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx",
