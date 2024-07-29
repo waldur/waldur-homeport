@@ -30,7 +30,9 @@ export const SearchItem = (props: SearchItemProps) => {
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
       <a
         className="search-result-item d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-primary-50"
-        onClick={() => props.onClick(props)}
+        onClick={(e) =>
+          props.onClick ? props.onClick(props) : e.stopPropagation()
+        }
         aria-hidden={true}
       >
         <ItemIcon

@@ -77,7 +77,9 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
       {
         key: 'resource',
         text: data.resource.name,
-        dropdown: <ResourceBreadcrumbPopover resource={data.resource} />,
+        dropdown: (close) => (
+          <ResourceBreadcrumbPopover resource={data.resource} close={close} />
+        ),
         truncate: true,
         active: true,
       },

@@ -5,7 +5,13 @@ import { BreadcrumbDropdown } from '@waldur/navigation/header/breadcrumb/Breadcr
 import { useFavoritePages } from '@waldur/navigation/header/favorite-pages/FavoritePageService';
 import { SearchItem } from '@waldur/navigation/header/search/SearchItem';
 
-const ResourceRow = ({ row, addFavoritePage, removeFavorite, isFavorite }) => (
+const ResourceRow = ({
+  row,
+  addFavoritePage,
+  removeFavorite,
+  isFavorite,
+  close,
+}) => (
   <SearchItem
     to="marketplace-resource-details"
     params={{
@@ -17,10 +23,11 @@ const ResourceRow = ({ row, addFavoritePage, removeFavorite, isFavorite }) => (
     addFavoritePage={addFavoritePage}
     removeFavorite={removeFavorite}
     isFavorite={isFavorite}
+    onClick={close}
   />
 );
 
-export const ResourceBreadcrumbPopover = ({ resource }) => {
+export const ResourceBreadcrumbPopover = ({ resource, close }) => {
   const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
 
   return (
@@ -39,6 +46,7 @@ export const ResourceBreadcrumbPopover = ({ resource }) => {
           addFavoritePage={addFavoritePage}
           removeFavorite={removeFavorite}
           isFavorite={isFavorite}
+          close={close}
         />
       )}
       placeholder={translate('Type in name of resource') + '...'}

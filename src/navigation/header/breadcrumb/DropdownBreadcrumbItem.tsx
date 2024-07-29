@@ -38,7 +38,10 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
           id={`BreadcrumbPopover-${item.key}`}
           className="mw-400px min-w-200px py-2"
         >
-          {show && item.dropdown}
+          {show &&
+            (typeof item.dropdown === 'function'
+              ? item.dropdown(() => setShow(false))
+              : item.dropdown)}
         </Popover>
       }
       rootClose={true}
