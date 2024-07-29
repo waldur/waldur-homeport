@@ -155,7 +155,7 @@ Cypress.Commands.add(
         cy.contains('.menu-link', label)
           .parent()
           .contains('.filter-footer button', 'Apply')
-          .click();
+          .click({ force: true });
       });
       // Make sure the fetch fn is performed
       cy.get('[data-cy=loading-spinner]')
