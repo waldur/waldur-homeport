@@ -91,7 +91,9 @@ const ProjectContainerWithHero = (props) => {
       {
         key: 'project',
         text: project.name,
-        dropdown: <ProjectBreadcrumbPopover project={project} />,
+        dropdown: (close) => (
+          <ProjectBreadcrumbPopover project={project} close={close} />
+        ),
         truncate: true,
         active: true,
       },

@@ -9,6 +9,7 @@ const ProjectListItem = ({
   addFavoritePage,
   removeFavorite,
   isFavorite,
+  close,
 }) => (
   <SearchItem
     key={row.uuid}
@@ -20,10 +21,11 @@ const ProjectListItem = ({
     addFavoritePage={addFavoritePage}
     removeFavorite={removeFavorite}
     isFavorite={isFavorite}
+    onClick={close}
   />
 );
 
-export const ProjectBreadcrumbPopover = ({ project }) => {
+export const ProjectBreadcrumbPopover = ({ project, close }) => {
   const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
 
   return (
@@ -40,6 +42,7 @@ export const ProjectBreadcrumbPopover = ({ project }) => {
           addFavoritePage={addFavoritePage}
           removeFavorite={removeFavorite}
           isFavorite={isFavorite}
+          close={close}
         />
       )}
       placeholder={translate('Type in name of project') + '...'}
