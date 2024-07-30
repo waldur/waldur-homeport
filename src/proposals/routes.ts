@@ -179,6 +179,13 @@ export const states: StateDeclaration[] = [
     parent: 'call-management',
   },
 
+  {
+    name: 'proposal-review-view',
+    url: 'review/:review_uuid/view/',
+    component: ProposalReviewCreatePage,
+    parent: 'reviews',
+  },
+
   // Public calls
   {
     name: 'calls-for-proposals',
