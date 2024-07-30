@@ -170,7 +170,11 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
       hasQuery={true}
       showPageSizeSelector={true}
       enableExport={true}
-      actions={props.scope && <IssueCreateButton scope={props.scope} />}
+      actions={
+        props.scope && (
+          <IssueCreateButton scope={props.scope} refetch={tableProps.fetch} />
+        )
+      }
       expandableRow={({ row }) => (
         <IssuesListExpandableRow row={row} supportOrStaff={supportOrStaff} />
       )}
