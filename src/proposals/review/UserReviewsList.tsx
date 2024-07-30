@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ProposalReview } from '@waldur/proposals/types';
 import { formatReviewState } from '@waldur/proposals/utils';
@@ -43,6 +44,21 @@ export const UserReviewsList: FC = () => {
     filter,
   });
 
+  const ReviewItemActions = ({ row, fetch }) => (
+    <>
+      <Link
+        state="proposal-review-view"
+        params={{
+          review_uuid: row.uuid,
+        }}
+        className="btn btn-outline btn-outline-dark btn-sm border-gray-400 btn-active-secondary px-2"
+      >
+        {translate('View')}
+      </Link>
+      <ReviewItemAction row={row} fetch={fetch} />
+    </>
+  );
+
   return (
     <Table<ProposalReview>
       {...tableProps}
@@ -69,7 +85,7 @@ export const UserReviewsList: FC = () => {
       title={translate('My reviews')}
       verboseName={translate('My reviews')}
       hasQuery={true}
-      hoverableRow={ReviewItemAction}
+      hoverableRow={ReviewItemActions}
       expandableRow={ReviewsListExpandableRow}
       filters={<ReviewsTableFilter />}
     />
