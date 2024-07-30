@@ -60,7 +60,7 @@ const ShowPreviewButton = () => {
     dispatch(
       openModalDialog(OpenStackSecurityGroupsDialog, {
         resolve: { securityGroups: securityGroups },
-        size: 'lg',
+        size: 'xl',
       }),
     );
   }, [securityGroups]);
