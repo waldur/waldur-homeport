@@ -229,7 +229,7 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
       description: description.join('\n'),
       caller: user.url,
     };
-    sendIssueCreateRequest(payload, dispatch);
+    sendIssueCreateRequest(payload, dispatch, resolve.refetch);
   };
   return (
     <>

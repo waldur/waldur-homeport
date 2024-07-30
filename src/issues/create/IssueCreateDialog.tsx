@@ -29,6 +29,7 @@ interface CreateIssueDialogProps {
     defer: { resolve(): void; reject(): void };
     hideProjectAndResourceFields?: boolean;
     standaloneTicket?: boolean;
+    refetch(): void;
   };
 }
 
@@ -47,6 +48,7 @@ const selector = formValueSelector(ISSUE_CREATION_FORM_ID);
 const createIssue = async (
   formData: IssueFormData,
   issue: CreateIssueProps,
+  refetch: () => void,
   dispatch,
 ) => {
   const description = issue.additionalDetails
@@ -76,7 +78,7 @@ const createIssue = async (
   if (formData.issueTemplate) {
     payload.template = formData.issueTemplate.url;
   }
-  await sendIssueCreateRequest(payload, dispatch, formData.files);
+  await sendIssueCreateRequest(payload, dispatch, refetch, formData.files);
 };
 
 export const IssueCreateDialog: FunctionComponent<CreateIssueDialogProps> = ({
@@ -101,7 +103,8 @@ export const IssueCreateDialog: FunctionComponent<CreateIssueDialogProps> = ({
   const templateState = useAsync(getTemplates);
 
   const onCreateIssue = useCallback(
-    (formData) => createIssue(formData, resolve.issue, dispatch),
+    (formData) =>
+      createIssue(formData, resolve.issue, resolve.refetch, dispatch),
     [resolve.issue, dispatch],
   );
 

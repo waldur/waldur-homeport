@@ -16,11 +16,16 @@ const PureIssueCreateButton: FunctionComponent<any> = (props) => (
   />
 );
 
-const createRequestDialog = (scope) =>
-  openIssueCreateDialog({ issue: scope }, ISSUE_CREATION_FORM_ID);
+const createRequestDialog = (scope, refetch) => {
+  return openIssueCreateDialog(
+    { issue: scope, refetch },
+    ISSUE_CREATION_FORM_ID,
+  );
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: () => dispatch(createRequestDialog(ownProps.scope)),
+  onClick: () =>
+    dispatch(createRequestDialog(ownProps.scope, ownProps.refetch)),
 });
 
 const enhance = connect(null, mapDispatchToProps);
