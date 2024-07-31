@@ -15,5 +15,7 @@ export const ResourceState: FunctionComponent<ResourceStateProps> = (props) =>
     <StateIndicator
       {...getResourceState(props.resource)}
       roundless={props.roundless}
+      outline
+      pill
     />
   ) : null;

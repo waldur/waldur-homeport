@@ -24,7 +24,7 @@ export const ResourceSummaryField = ({ resource }) => (
         })}
       >
         {' '}
-        <Question />
+        <Question size={17} />
       </Tip>
     )}
   </>

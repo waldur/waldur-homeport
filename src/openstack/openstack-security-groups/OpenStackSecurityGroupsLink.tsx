@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import { connect } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -10,9 +11,12 @@ const OpenStackSecurityGroupsDialog = lazyComponent(
 
 export const PureOpenStackSecurityGroupsLink = (props) =>
   props.items && props.items.length > 0 ? (
-    <button className="text-btn text-dark" onClick={props.openDetailsDialog}>
+    <button
+      className="btn btn-link btn-flush"
+      onClick={props.openDetailsDialog}
+    >
       {props.items.map((item) => item.name).join(', ')}
-      <i className="fa fa-info-circle ms-1" aria-hidden="true" />
+      <Question size={17} className="ms-1" />
     </button>
   ) : (
     <>&mdash;</>

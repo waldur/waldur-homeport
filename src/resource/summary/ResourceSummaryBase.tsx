@@ -1,6 +1,6 @@
 import { ENV } from '@waldur/configs/default';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { ParentResourceLink } from '@waldur/marketplace/resources/details/ParentResourceLink';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
 
@@ -8,20 +8,29 @@ import { CreatedField } from './CreatedField';
 import { ErrorMessageField } from './ErrorMessageField';
 import { Field } from './Field';
 import { ResourceMetadataLink } from './ResourceMetadataLink';
-import { ResourceTitle } from './ResourceTitle';
 import { ResourceSummaryProps } from './types';
 
-export function ResourceSummaryBase<T extends Resource = any>(
+export function ResourceSummaryBase<T extends Resource = Resource>(
   props: ResourceSummaryProps<T>,
 ) {
   const { resource } = props;
   return (
     <>
-      <div className="mb-6">
-        <ResourceTitle resource={resource} />
-        <ParentResourceLink resource={resource as any} />
-      </div>
-
+      <Field label={translate('Name')} value={resource.name} hasCopy />
+      {(resource as any).parent_uuid && (resource as any).parent_name ? (
+        <Field
+          label={translate('Part of')}
+          value={
+            <Link
+              state="marketplace-resource-details"
+              params={{
+                resource_uuid: (resource as any).parent_uuid,
+              }}
+              label={(resource as any).parent_name}
+            />
+          }
+        />
+      ) : null}
       <Field label={translate('State')} value={<ResourceState {...props} />} />
       <ErrorMessageField {...props} />
       {!props.resource.marketplace_offering_uuid && (

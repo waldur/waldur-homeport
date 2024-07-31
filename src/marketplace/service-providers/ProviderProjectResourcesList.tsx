@@ -50,7 +50,9 @@ export const ProviderProjectResourcesList: FunctionComponent<{
         },
         {
           title: translate('State'),
-          render: ({ row }) => <ResourceStateField resource={row} />,
+          render: ({ row }) => (
+            <ResourceStateField resource={row} outline pill />
+          ),
         },
       ]}
       verboseName={translate('Resources')}

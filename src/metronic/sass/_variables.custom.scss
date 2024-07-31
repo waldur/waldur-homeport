@@ -17,7 +17,7 @@ $primary-800: if(isDarkMode(), #ffffff, #1d2b1c);
 // Primary
 $primary: if(isDarkMode(), #78bf69, $primary-600);
 $primary-active: if(isDarkMode(), #53a642, $primary-700);
-$primary-light: if(isDarkMode(), #214729, #f1faff);
+$primary-light: if(isDarkMode(), #214729, $primary-50);
 $primary-inverse: if(isDarkMode(), #172219, #ffffff);
 
 // Secondary
@@ -28,28 +28,51 @@ $secondary-light: $primary-50 !default;
 $secondary-inverse: $primary-700 !default;
 $secondary-dark-inverse: $primary-800 !default;
 
+// Light/Gray
+$grey-200: if(isDarkMode(), #405448, #e4e7ec) !default; // Custom variable
+
 // Success
-$success: if(isDarkMode(), #53a642, #50cd89);
-$success-active: if(isDarkMode(), #22c100, #47be7d);
-$success-light: if(isDarkMode(), #1c3238, #e8fff3);
+$success-50: #ecfdf3;
+$success-200: #a6f4c5;
+$success-500: #12b76a;
+$success-600: #039855;
+$success-700: #027a48;
+$success: if(isDarkMode(), #53a642, $success-600);
+$success-active: if(isDarkMode(), #22c100, $success-700);
+$success-light: if(isDarkMode(), #1c3238, $success-50);
 $success-inverse: #ffffff;
 
 // Info
-$info: if(isDarkMode(), #8950fc, #7239ea);
-$info-active: if(isDarkMode(), #7337ee, #5014d0);
-$info-light: if(isDarkMode(), #2f264f, #f8f5ff);
+$info-50: #f4f3ff;
+$info-200: #d9d6fe;
+$info-500: #7a5af8;
+$info-600: #6938ef;
+$info-700: #5925dc;
+$info: if(isDarkMode(), #8950fc, $info-600);
+$info-active: if(isDarkMode(), #7337ee, $info-700);
+$info-light: if(isDarkMode(), #2f264f, $info-50);
 $info-inverse: #ffffff;
 
 // Danger
-$danger: if(isDarkMode(), #ff7e39, #f1416c);
-$danger-active: if(isDarkMode(), #f5641e, #d9214e);
-$danger-light: if(isDarkMode(), #3a2434, #fff5f8);
+$danger-50: #fef3f2 !default;
+$danger-200: #fecdca !default;
+$danger-500: #f04438 !default;
+$danger-600: #d92d20 !default;
+$danger-700: #b42318 !default;
+$danger: if(isDarkMode(), #ff7e39, $danger-600);
+$danger-active: if(isDarkMode(), #f5641e, $danger-700);
+$danger-light: if(isDarkMode(), #3a2434, $danger-50);
 $danger-inverse: #ffffff;
 
 // Warning
-$warning: if(isDarkMode(), #ffa800, #ffc700);
-$warning-active: if(isDarkMode(), #ee9d01, #f1bc00);
-$warning-light: if(isDarkMode(), #392f28, #fff8dd);
+$warning-50: #fffaeb !default;
+$warning-200: #fedf89 !default;
+$warning-500: #f79009 !default;
+$warning-600: #dc6803 !default;
+$warning-700: #b54708 !default;
+$warning: if(isDarkMode(), #ffa800, $warning-600);
+$warning-active: if(isDarkMode(), #ee9d01, $warning-700);
+$warning-light: if(isDarkMode(), #392f28, $warning-50);
 $warning-inverse: #ffffff;
 
 $dropdown-item-padding-x: 1.1rem;
@@ -63,6 +86,17 @@ $theme-dark-colors: (
 // Dark inverse colors
 $theme-dark-inverse-colors: (
   'secondary': $secondary-dark-inverse,
+) !default; // Custom variable
+
+// 200 colors
+$theme-200-colors: (
+  'primary': $primary-200,
+  'secondary': $secondary-active,
+  'light': $grey-200,
+  'success': $success-200,
+  'info': $info-200,
+  'warning': $warning-200,
+  'danger': $danger-200,
 ) !default; // Custom variable
 
 // Card
@@ -83,3 +117,11 @@ $modal-inner-padding: 1.85rem !default;
 
 $modal-lg: 840px !default;
 $modal-sm: 400px !default;
+
+// Badges
+$badge-font-size: 1.08rem !default;
+$badge-font-size-sm: 0.92rem !default;
+$badge-font-size-lg: 1.08rem !default;
+$badge-padding-y: 0.285em !default;
+$badge-padding-y-sm: 0.34em !default; // Custom variable
+$badge-padding-y-lg: 0.43em !default; // Custom variable

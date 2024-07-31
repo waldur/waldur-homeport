@@ -27,7 +27,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       logoAlt={call.name}
       title={
         <>
-          <div className="d-flex flex-wrap gap-2 mb-2">
+          <div className="d-flex flex-wrap gap-2 mb-2 align-items-center">
             <h3>{call.name}</h3>
             <StateIndicator
               variant={status.color}

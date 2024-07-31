@@ -14,8 +14,10 @@ export interface StateIndicatorProps {
   active?: boolean;
   roundless?: boolean;
   light?: boolean;
+  outline?: boolean;
   pill?: boolean;
   hasBullet?: boolean;
+  size?: 'sm' | 'lg';
 }
 
 const wrapTooltip = (label, children) =>
@@ -31,22 +33,27 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
   wrapTooltip(
     props.tooltip,
     <Badge
-      bg={!props.light ? props.variant : null}
-      className={classNames('fs-8 fw-bolder lh-base', [
+      bg={!(props.light || props.outline) ? props.variant : null}
+      className={classNames([
+        'badge-' +
+          (props.outline ? 'outline-' : props.light ? 'light-' : '') +
+          props.variant,
+        props.size && `badge-${props.size}`,
         props.roundless && 'rounded-0',
-        'badge-' + (props.light ? 'light-' : '') + props.variant,
         props.pill && 'badge-pill',
       ])}
     >
       {props.hasBullet && (
         <span
-          className={`bullet bullet-dot bg-${props.light ? props.variant : 'white'} me-2 h-5px w-5px align-middle`}
+          className={`bullet bullet-dot bg-${props.light || props.outline ? props.variant : 'white'} me-2 h-5px w-5px align-middle`}
         />
       )}
       {props.label.toUpperCase()}{' '}
       {props.active && (
         <LoadingSpinnerIcon
-          className={(props.light ? 'text-' : 'badge-') + props.variant}
+          className={
+            (props.light || props.outline ? 'text-' : 'badge-') + props.variant
+          }
         />
       )}
     </Badge>,

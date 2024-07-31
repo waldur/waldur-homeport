@@ -16,7 +16,7 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
 > = ({ resource }) => {
   return (
     <>
-      <div className="d-flex flex-wrap gap-2 mb-2">
+      <div className="d-flex flex-wrap gap-2 mb-2 align-items-center">
         <h3 className="mb-0 me-2">{resource.name}</h3>
         <CopyToClipboardButton
           value={resource.name}

@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -24,12 +25,12 @@ export const ResourceMetadataLink = <T extends Resource = any>(
 ) => {
   const dispatch = useDispatch();
   return (
-    <button
-      type="button"
-      className="text-btn text-dark"
+    <Button
+      variant="link"
+      className="btn-flush"
       onClick={() => dispatch(openDetailsDialog(props))}
     >
       {translate('Show')}
-    </button>
+    </Button>
   );
 };

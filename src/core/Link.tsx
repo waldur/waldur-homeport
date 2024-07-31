@@ -1,4 +1,5 @@
 import { UISref } from '@uirouter/react';
+import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
 
 interface LinkProps {
@@ -17,7 +18,11 @@ export const Link: FunctionComponent<LinkProps> = (props) => (
     <a
       target={props.target}
       onClick={props.onClick}
-      className={props.className}
+      className={classNames(
+        props.className,
+        typeof (props.label || props.children) === 'string' &&
+          'btn btn-link btn-flush text-start',
+      )}
       onKeyPress={(e) => e.key === 'Enter' && props.onClick(e)}
       role={props.onClick ? 'button' : undefined}
     >

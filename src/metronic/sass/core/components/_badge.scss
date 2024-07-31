@@ -31,6 +31,7 @@
   &.badge-sm {
     min-width: $badge-size-sm;
     font-size: $badge-font-size-sm;
+    padding: $badge-padding-y-sm $badge-padding-x;
 
     &.badge-circle {
       width: $badge-size-sm;
@@ -41,6 +42,7 @@
   &.badge-lg {
     min-width: $badge-size-lg;
     font-size: $badge-font-size-lg;
+    padding: $badge-padding-y-lg $badge-padding-x;
 
     &.badge-circle {
       width: $badge-size-lg;
@@ -53,11 +55,19 @@
   .badge-#{$name} {
     color: theme-inverse-color($name);
     background-color: $value;
+    border: 1px solid $value;
   }
 
   .badge-light-#{$name} {
     color: $value;
     background-color: theme-light-color($name);
+    border: 1px solid theme-light-color($name);
+  }
+
+  .badge-outline-#{$name} {
+    color: theme-active-color($name);
+    background-color: theme-light-color($name);
+    border: 1px solid theme-200-color($name);
   }
 }
 

@@ -102,7 +102,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('State'),
-      render: ({ row }) => <ResourceStateField resource={row} />,
+      render: ({ row }) => <ResourceStateField resource={row} outline pill />,
       filter: 'state',
       export: 'state',
     },

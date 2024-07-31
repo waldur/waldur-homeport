@@ -89,7 +89,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     },
     {
       title: translate('State'),
-      render: ({ row }) => <ResourceStateField resource={row} />,
+      render: ({ row }) => <ResourceStateField resource={row} outline pill />,
       filter: 'state',
       export: 'state',
     },

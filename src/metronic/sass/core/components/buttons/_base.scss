@@ -39,9 +39,14 @@
     border-radius: 0;
     padding-left: 0 !important;
     padding-right: 0 !important;
-    text-decoration: none;
+    color: $primary;
     font-weight: $btn-font-weight;
     box-shadow: none !important;
+
+    &:focus,
+    &:hover {
+      text-decoration: underline !important;
+    }
   }
 
   // Outline dashed

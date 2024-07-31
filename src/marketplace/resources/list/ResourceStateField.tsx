@@ -7,12 +7,14 @@ export const ResourceStateField = ({
   resource,
   roundless,
   light,
+  outline,
   pill,
   hasBullet,
 }: {
   resource: Resource;
   roundless?: boolean;
   light?: boolean;
+  outline?: boolean;
   pill?: boolean;
   hasBullet?: boolean;
 }) => {
@@ -38,6 +40,7 @@ export const ResourceStateField = ({
       active={isActive}
       roundless={roundless}
       light={light}
+      outline={outline}
       pill={pill}
       hasBullet={hasBullet}
       tooltip={
