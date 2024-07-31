@@ -9,6 +9,7 @@ import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandabl
 import { useTitle } from '@waldur/navigation/title';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
+import { exportRoleField } from '@waldur/user/affiliations/RolePopover';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { InvitationCreateButton } from './actions/create/InvitationCreateButton';
@@ -54,26 +55,31 @@ export const InvitationsList: FunctionComponent = () => {
             </div>
           ),
           orderField: 'email',
+          export: (row) => row.email,
         },
         {
           title: translate('Role'),
           render: ({ row }) => <RoleField invitation={row} />,
+          export: exportRoleField,
         },
         {
           title: translate('Status'),
           orderField: 'state',
           render: ({ row }) => row.state,
           filter: 'state',
+          export: (row) => row.state,
         },
         {
           title: translate('Created at'),
           orderField: 'created',
           render: ({ row }) => formatDate(row.created),
+          export: (row) => formatDate(row.created),
         },
         {
           title: translate('Expires at'),
           orderField: 'expires',
           render: ({ row }) => formatDate(row.expires),
+          export: (row) => formatDate(row.expires),
         },
       ]}
       verboseName={translate('team invitations')}
@@ -85,6 +91,7 @@ export const InvitationsList: FunctionComponent = () => {
         />
       }
       hasQuery={true}
+      enableExport
       hoverableRow={({ row }) => (
         <>
           <InvitationSendButton invitation={row} />

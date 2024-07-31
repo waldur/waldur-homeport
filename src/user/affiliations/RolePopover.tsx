@@ -7,6 +7,7 @@ import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 const RoleDetailsDialog = ({ role }) => (
   <ModalDialog
@@ -46,4 +47,9 @@ export const RolePopover = ({ roleName }) => {
       />
     </>
   );
+};
+
+export const exportRoleField = (row) => {
+  const role = ENV.roles.find((role) => role.name === row.role_name);
+  return role?.description || role?.name || DASH_ESCAPE_CODE;
 };
