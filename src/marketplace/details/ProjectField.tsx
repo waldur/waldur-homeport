@@ -40,7 +40,9 @@ export const ProjectField: FC<ProjectFieldProps> = ({
                 placeholder={translate('Select project...')}
                 noOptionsMessage={() => translate('No projects found')}
                 loadOptions={(query, prevOptions, { page }) =>
-                  projectAutocomplete(customer.uuid, query, prevOptions, page)
+                  projectAutocomplete(customer.uuid, query, prevOptions, page, {
+                    field: ['name', 'url'],
+                  })
                 }
                 label={translate('Project')}
                 value={fieldProps.input.value}
