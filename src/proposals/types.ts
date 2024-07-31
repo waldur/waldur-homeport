@@ -175,6 +175,7 @@ export interface ProposalReview {
   proposal_name: string;
   review_end_date: string;
   round_uuid: string;
+  round_name: string;
   call_name: string;
   call_uuid: string;
 }
