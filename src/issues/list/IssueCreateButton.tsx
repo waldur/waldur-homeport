@@ -13,6 +13,7 @@ const PureIssueCreateButton: FunctionComponent<any> = (props) => (
     title={translate('Create')}
     action={props.onClick}
     iconNode={<PlusCircle />}
+    variant="primary"
   />
 );
 
