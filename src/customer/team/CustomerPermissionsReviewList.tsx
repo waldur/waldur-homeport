@@ -30,16 +30,19 @@ export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
           title: translate('Created'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
+          export: (row) => formatDateTime(row.created),
         },
         {
           title: translate('Performed'),
           render: ({ row }) => (
             <>{row.closed ? formatDateTime(row.closed) : 'N/A'}</>
           ),
+          export: (row) => (row.closed ? formatDateTime(row.closed) : 'N/A'),
         },
         {
           title: translate('Performed by'),
           render: ({ row }) => <>{row.reviewer_full_name || 'N/A'}</>,
+          export: (row) => row.reviewer_full_name || 'N/A',
         },
         {
           title: translate('State'),
@@ -48,6 +51,8 @@ export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
               {row.is_pending ? translate('Pending') : translate('Performed')}
             </>
           ),
+          export: (row) =>
+            row.is_pending ? translate('Pending') : translate('Performed'),
         },
       ]}
       verboseName={translate('permission reviews')}
@@ -56,6 +61,7 @@ export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
           {row.is_pending ? <ReviewCloseButton reviewId={row.uuid} /> : 'N/A'}
         </>
       )}
+      enableExport
     />
   );
 };

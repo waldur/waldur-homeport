@@ -12,6 +12,7 @@ import { createFetcher, Table } from '@waldur/table';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { useTable } from '@waldur/table/utils';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
+import { exportRoleField } from '@waldur/user/affiliations/RolePopover';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CustomerUserRowActions } from './CustomerUserRowActions';
@@ -81,23 +82,28 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
               <p className="mb-0">{row.full_name || row.username}</p>
             </div>
           ),
+          export: (row) => row.full_name || row.username,
         },
         {
           title: translate('Email'),
           render: ({ row }) => row.email || 'N/A',
+          export: (row) => row.email || 'N/A',
         },
         {
           title: translate('Role in organization'),
           render: RoleField,
           filter: 'organization_role',
+          export: exportRoleField,
         },
         {
           title: translate('Role expiration'),
           render: ({ row }) => renderRoleExpirationDate(row),
+          export: (row) => renderRoleExpirationDate(row),
         },
       ]}
       verboseName={translate('team members')}
       hasQuery={true}
+      enableExport
       hoverableRow={({ row }) => (
         <CustomerUserRowActions row={row} refetch={props.fetch} />
       )}
