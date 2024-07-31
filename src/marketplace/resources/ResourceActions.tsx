@@ -12,7 +12,12 @@ import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
 import { ActionsList } from './actions/ActionsList';
 
-export const ResourceActions = ({ resource, scope, refetch }) => {
+export const ResourceActions = ({
+  resource,
+  scope,
+  refetch,
+  labeled = false,
+}) => {
   const extraActions = useMemo(() => {
     return ActionRegistry.getActions(resource.resource_type).filter(
       (action) => !ActionsList.includes(action),
@@ -27,11 +32,15 @@ export const ResourceActions = ({ resource, scope, refetch }) => {
         url={resource.scope}
         name={resource.name}
         refetch={refetch}
+        labeled={labeled}
       />
     );
   }
   return (
-    <ActionsDropdownComponent label={translate('All actions')}>
+    <ActionsDropdownComponent
+      label={translate('All actions')}
+      labeled={labeled}
+    >
       {ActionsList.map((ActionComponent, index) => (
         <ActionComponent key={index} resource={resource} refetch={refetch} />
       ))}

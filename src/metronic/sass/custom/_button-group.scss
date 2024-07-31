@@ -10,3 +10,7 @@
     }
   }
 }
+
+.dropdown-toggle.no-arrow::after {
+  content: none;
+}

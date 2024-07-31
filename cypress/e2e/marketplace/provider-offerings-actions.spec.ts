@@ -62,7 +62,7 @@ describe('Offerings list actions in Provider dashboard page', () => {
   it("edit action should redirect to provider's offering update page", () => {
     cy.get('td .dropdown')
       .first()
-      .contains('Actions')
+      .find('button.dropdown-toggle')
       .click({ force: true })
       .get('.dropdown-item')
       .contains('Edit')
@@ -79,9 +79,9 @@ describe('Offerings list actions in Provider dashboard page', () => {
   it('preview order form action should open the preview offering modal', () => {
     cy.get('td .dropdown')
       .first()
-      .contains('Actions')
+      .find('button.dropdown-toggle')
       .click({ force: true })
-      .get('.dropdown-item')
+      .get('table .dropdown-item')
       .contains('Preview order form')
       .click({ force: true });
 
@@ -104,9 +104,9 @@ describe('Offerings list actions in Provider dashboard page', () => {
   it('open public page action should redirect to public-offering', () => {
     cy.get('td .dropdown')
       .first()
-      .contains('Actions')
+      .find('button.dropdown-toggle')
       .click({ force: true })
-      .get('.dropdown-item')
+      .get('table .dropdown-item')
       .contains('Open public page')
       .click({ force: true })
       .waitForPage();
