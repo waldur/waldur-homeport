@@ -9,7 +9,7 @@ import {
   formErrorsSelector,
   formIsValidSelector,
 } from '@waldur/marketplace/deploy/utils';
-import { OrderOfferingSubmitButton } from '@waldur/marketplace/details/OrderSummary';
+import { OrderSubmitButton } from '@waldur/marketplace/details/OrderSubmitButton';
 import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
 import { Offering } from '@waldur/marketplace/types';
 import {
@@ -128,7 +128,7 @@ export const CheckoutSummary = ({
         />
       </div>
 
-      <OrderOfferingSubmitButton
+      <OrderSubmitButton
         formData={formData}
         updateMode={updateMode}
         offering={offering}

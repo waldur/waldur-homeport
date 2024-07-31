@@ -1,14 +1,8 @@
-import { createElement, FunctionComponent, useMemo } from 'react';
+import { createElement, FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { isValid } from 'redux-form';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { FieldError } from '@waldur/form';
-import { FloatingButton } from '@waldur/form/FloatingButton';
-import { translate } from '@waldur/i18n';
-import { ShoppingCartButtonContainer } from '@waldur/marketplace/cart/ShoppingCartButtonContainer';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
 import { isVisible } from '@waldur/store/config';
@@ -17,11 +11,11 @@ import { Customer } from '@waldur/workspace/types';
 import { formCustomerSelector, formErrorsSelector } from '../deploy/utils';
 import { orderFormDataSelector } from '../utils';
 
+import { OrderSubmitButton } from './OrderSubmitButton';
 import { OrderSummaryPlanRows } from './plan/OrderSummaryPlanRows';
 import { PricesData } from './plan/types';
 import { pricesSelector } from './plan/utils';
 import { OfferingFormData, OrderSummaryProps } from './types';
-import { formatOrderForCreate } from './utils';
 
 export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
   return (
@@ -37,65 +31,10 @@ export const SummaryTable: FunctionComponent<OrderSummaryProps> = (props) => {
   );
 };
 
-export const OrderOfferingSubmitButton = (props: OrderSummaryProps) => {
-  const projectError = useMemo(() => {
-    if (props.formData?.project?.end_date) {
-      const endDate = parseDate(props.formData.project.end_date);
-      const now = parseDate(null);
-      if (endDate.hasSame(now, 'day') || endDate < now) {
-        return translate('Project has reached its end date.');
-      }
-    }
-    return null;
-  }, [props.formData?.project]);
-
-  const errorsExist =
-    projectError || props.errors?.attributes || props.errors?.limits;
-
-  const item = useMemo(() => formatOrderForCreate(props), [props]);
-
-  return (
-    <FloatingButton>
-      {errorsExist && (
-        <Tip
-          label={
-            <FieldError
-              error={
-                projectError || {
-                  ...props.errors?.attributes,
-                  ...props.errors?.limits,
-                }
-              }
-            />
-          }
-          id="offering-button-errors"
-          autoWidth
-          className="w-100"
-        >
-          <ShoppingCartButtonContainer
-            item={item}
-            flavor="primary"
-            disabled={Boolean(errorsExist) || !props.formValid}
-            className="w-100"
-          />
-        </Tip>
-      )}
-      {!errorsExist && (
-        <ShoppingCartButtonContainer
-          item={item}
-          flavor="primary"
-          disabled={!props.formValid}
-          className="w-100"
-        />
-      )}
-    </FloatingButton>
-  );
-};
-
 const PureOrderSummary: FunctionComponent<OrderSummaryProps> = (props) => (
   <>
     <SummaryTable {...props} />
-    <OrderOfferingSubmitButton {...props} />
+    <OrderSubmitButton {...props} />
   </>
 );
 
