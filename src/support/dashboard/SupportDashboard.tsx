@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 
 import { AdministrationProfile } from '@waldur/administration/dashboard/AdministrationProfile';
 import { HealthChecks } from '@waldur/administration/dashboard/HealthChecks';
@@ -13,6 +14,7 @@ import {
   getBackendHealthStatus,
   isWorking,
 } from '@waldur/navigation/BackendHealthStatusIndicator';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { SupportStatistics } from './SupportStatistics';
 
@@ -25,6 +27,7 @@ export const SupportDashboard: FC = () => {
 
   const healthy = isWorking(data);
   const isSupportEnabled = ENV.plugins.WALDUR_SUPPORT?.ENABLED;
+  const user = useSelector(getUser);
 
   return (
     <>
@@ -47,6 +50,7 @@ export const SupportDashboard: FC = () => {
           filter={{ status: 'Open' }}
           initialPageSize={5}
           showPageSizeSelector={false}
+          scope={user}
         />
       ) : null}
 
