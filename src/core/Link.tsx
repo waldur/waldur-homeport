@@ -20,8 +20,7 @@ export const Link: FunctionComponent<LinkProps> = (props) => (
       onClick={props.onClick}
       className={classNames(
         props.className,
-        typeof (props.label || props.children) === 'string' &&
-          'btn btn-link btn-flush text-start',
+        typeof (props.label || props.children) === 'string' && 'text-anchor',
       )}
       onKeyPress={(e) => e.key === 'Enter' && props.onClick(e)}
       role={props.onClick ? 'button' : undefined}
