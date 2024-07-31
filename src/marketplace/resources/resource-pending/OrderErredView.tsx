@@ -1,17 +1,19 @@
-import { FC, useCallback } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { triggerTransition } from '@uirouter/redux';
+import { FC } from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ProgressSteps } from '@waldur/core/ProgressSteps';
 import { omit } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { addItemRequest } from '@waldur/marketplace/cart/store/actions';
-import { isAddingItem } from '@waldur/marketplace/cart/store/selectors';
-import { OrderRequest } from '@waldur/marketplace/cart/types';
+import { createOrder } from '@waldur/marketplace/common/api';
+import { formatOrderForCreate } from '@waldur/marketplace/details/utils';
 import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { Resource } from '../types';
 
@@ -100,30 +102,40 @@ const getSteps = (resource: Resource) => {
 };
 
 export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
-  const isRetrying = useSelector(isAddingItem);
   const dispatch = useDispatch();
-  const retry = useCallback(() => {
-    waitForConfirmation(
+  const { mutate, isLoading } = useMutation(async () => {
+    await waitForConfirmation(
       dispatch,
       translate('Confirmation'),
       translate('Are you sure you want to retry to submit this order?'),
-    ).then(() => {
-      const item: OrderRequest = {
+    );
+    const item: any = {
+      formData: {
         attributes: resource.attributes || resource.creation_order.attributes,
         limits: resource.limits || resource.creation_order.limits,
-        offering: {
-          // We only need the url in the order request
-          url: resource.offering || resource.creation_order.offering,
-        },
         plan: {
           // We only need the url in the order request
           url: resource.plan || resource.creation_order.plan,
         },
         project: resource.project || resource.creation_order.project,
-      };
-      dispatch(addItemRequest(item));
-    });
-  }, [dispatch, resource]);
+      },
+      offering: {
+        // We only need the url in the order request
+        url: resource.offering || resource.creation_order.offering,
+      },
+    };
+    try {
+      const order: any = await createOrder(formatOrderForCreate(item));
+      dispatch(showSuccess(translate('Order has been submitted.')));
+      dispatch(
+        triggerTransition('marketplace-resource-details', {
+          resource_uuid: order.data.marketplace_resource_uuid,
+        }),
+      );
+    } catch (error) {
+      dispatch(showErrorResponse(error, translate('Unable to submit order.')));
+    }
+  });
 
   if (!resource.creation_order || resource.creation_order.state !== 'erred') {
     return null;
@@ -149,11 +161,11 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
             variant="success"
             size="sm"
             className="btn-icon-right"
-            onClick={retry}
-            disabled={isRetrying}
+            onClick={() => mutate()}
+            disabled={isLoading}
           >
             {translate('Retry')}
-            <i className={'fa fa-refresh' + (isRetrying ? ' fa-spin' : '')} />
+            <i className={'fa fa-refresh' + (isLoading ? ' fa-spin' : '')} />
           </Button>
         </div>
       </div>
