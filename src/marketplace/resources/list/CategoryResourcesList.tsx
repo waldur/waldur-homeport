@@ -80,6 +80,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       orderField: 'name',
       id: 'name',
       keys: ['name'],
+      export: (row) => row.name || row.offering_name, // render as ResourceNameField label
     },
     {
       title: translate('Offering'),
@@ -87,6 +88,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       filter: 'offering',
       id: 'offering',
       keys: ['offering_name'],
+      export: (row) => row.offering_name,
     },
   ];
 
@@ -96,6 +98,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       render: ({ row }) => CategoryColumnField({ row, column }),
       id: `category-${column.index}`,
       keys: ['backend_metadata', `category-${column.index}`],
+      export: (row) => CategoryColumnField({ row, column }),
     });
   });
   columns.push({
@@ -104,6 +107,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     filter: 'organization',
     id: 'organization',
     keys: ['customer_name'],
+    export: (row) => row.customer_name,
   });
   columns.push({
     title: translate('Project'),
@@ -111,6 +115,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     filter: 'project',
     id: 'project',
     keys: ['project_name'],
+    export: (row) => row.project_name,
   });
   columns.push(
     {
@@ -119,6 +124,10 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       filter: 'state',
       id: 'state',
       keys: ['state', 'backend_metadata'],
+      export: (row) =>
+        row.backend_metadata?.runtime_state ||
+        row.backend_metadata?.state ||
+        row.state,
     },
     {
       title: translate('Created at'),
@@ -126,6 +135,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       orderField: 'created',
       id: 'created',
       keys: ['created'],
+      export: (row) => formatDateTime(row.created),
     },
     SLUG_COLUMN,
   );
@@ -154,6 +164,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}
       enableMultiSelect={true}
+      enableExport
       multiSelectActions={ResourceMultiSelectAction}
       standalone={ownProps.standalone}
       minHeight={400}

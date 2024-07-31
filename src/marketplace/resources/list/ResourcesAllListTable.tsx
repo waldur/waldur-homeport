@@ -99,6 +99,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           orderField: 'name',
           id: 'name',
           keys: ['name'],
+          export: (row) => row.name || row.offering_name, // render as ResourceNameField label
         },
         {
           title: translate('Category'),
@@ -106,6 +107,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           filter: 'category',
           id: 'category',
           keys: ['category_title'],
+          export: (row) => row.category_title,
         },
         {
           title: translate('Offering'),
@@ -113,6 +115,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           filter: 'offering',
           id: 'offering',
           keys: ['offering_name'],
+          export: (row) => row.offering_name,
         },
         ...(props.hasCustomerColumn
           ? [
@@ -122,6 +125,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
                 filter: 'organization',
                 id: 'organization',
                 keys: ['customer_name'],
+                export: (row) => row.customer_name,
               },
             ]
           : []),
@@ -133,6 +137,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
                 filter: 'project',
                 id: 'project',
                 keys: ['project_name'],
+                export: (row) => row.project_name,
               },
             ]
           : []),
@@ -142,6 +147,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           orderField: 'created',
           id: 'created',
           keys: ['created'],
+          export: (row) => formatDateTime(row.created),
         },
         {
           title: translate('State'),
@@ -151,6 +157,10 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           filter: 'state',
           id: 'state',
           keys: ['state', 'backend_metadata'],
+          export: (row) =>
+            row.backend_metadata?.runtime_state ||
+            row.backend_metadata?.state ||
+            row.state,
         },
         SLUG_COLUMN,
       ]}
@@ -162,6 +172,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
         <ResourceActionsButton row={row} refetch={props.fetch} />
       )}
       hasQuery={true}
+      enableExport
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}
       enableMultiSelect={true}
