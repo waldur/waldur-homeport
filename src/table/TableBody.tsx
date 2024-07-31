@@ -1,4 +1,4 @@
-import { CaretDown, CaretRight } from '@phosphor-icons/react';
+import { CaretDown } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
@@ -160,44 +160,45 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
       >
         {(enableMultiSelect || fieldType) && (
           <td className="row-control">
-            {fieldType && fieldProps ? (
-              <>
-                {isChecked &&
-                  fieldProps.meta.touched &&
-                  fieldProps.meta.error && (
-                    <Tip
-                      label={fieldProps.meta.error}
-                      id={`tableErrorTip-${rowIndex}`}
-                      className="error-mark"
-                    >
-                      <i className="fa fa-exclamation-circle" />
-                    </Tip>
-                  )}
+            <div>
+              {fieldType && fieldProps ? (
+                <>
+                  {isChecked &&
+                    fieldProps.meta.touched &&
+                    fieldProps.meta.error && (
+                      <Tip
+                        label={fieldProps.meta.error}
+                        id={`tableErrorTip-${rowIndex}`}
+                        className="error-mark"
+                      >
+                        <i className="fa fa-exclamation-circle" />
+                      </Tip>
+                    )}
+                  <FormCheck
+                    name={fieldProps.input.name}
+                    type={fieldType}
+                    className="form-check form-check-custom form-check-sm"
+                    checked={isChecked}
+                    onChange={() => onChangeField(row, fieldProps.input)}
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                </>
+              ) : (
                 <FormCheck
-                  name={fieldProps.input.name}
-                  type={fieldType}
                   className="form-check form-check-custom form-check-sm"
                   checked={isChecked}
-                  onChange={() => onChangeField(row, fieldProps.input)}
-                  onClick={(e) => e.stopPropagation()}
+                  onChange={() => selectRow(row)}
                 />
-              </>
-            ) : (
-              <FormCheck
-                className="form-check form-check-custom form-check-sm"
-                checked={isChecked}
-                onChange={() => selectRow(row)}
-              />
-            )}
+              )}
+            </div>
           </td>
         )}
         {expandableRow && (
-          <td data-cy="row-expander">
-            {toggled[getId(row, rowIndex)] ? (
-              <CaretDown size={15} />
-            ) : (
-              <CaretRight size={15} />
-            )}
+          <td
+            data-cy="row-expander"
+            className={toggled[getId(row, rowIndex)] ? 'active' : ''}
+          >
+            <CaretDown size={20} weight="bold" className="rotate-180" />
           </td>
         )}
         <TableCells
@@ -231,7 +232,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
           )}
           {expandableRow && toggled[getId(row, rowIndex)] && (
             <tr className={expandableRowClassName}>
-              <td colSpan={columns.length + 1}>
+              <td colSpan={columns.length + 1 + (hoverableRow ? 1 : 0)}>
                 {React.createElement(expandableRow, { row })}
               </td>
             </tr>

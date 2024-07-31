@@ -114,7 +114,7 @@ const TableComponent = (props: TableProps) => {
   return (
     <table
       className={classNames(
-        'table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer',
+        'table align-middle table-row-bordered fs-6 gy-5 dataTable no-footer',
         {
           'table-expandable': Boolean(props.expandableRow),
           'table-hover': props.hoverable,

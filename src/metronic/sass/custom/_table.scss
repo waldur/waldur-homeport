@@ -27,15 +27,9 @@
 
   /* TR */
   &.table-expandable tr {
-    th:first-child,
-    td:first-child {
-      border-left: 4px solid transparent;
-    }
     &.expanded,
     &.expanded + tr {
-      > td:first-child {
-        border-left-color: $gray-500;
-      }
+      background-color: $gray-50;
     }
   }
   thead > tr > th.header-actions {
@@ -58,7 +52,7 @@
       }
     }
 
-    > td.row-control {
+    > td.row-control > div {
       display: flex;
       align-items: center;
 
@@ -79,7 +73,7 @@
 
 // Shadow hover
 .table-container.table-hover-shadow {
-  tbody > tr:hover {
+  tbody > tr:not(.expanded + tr):hover {
     border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
     border-radius: $border-radius-lg;
@@ -92,7 +86,7 @@
   }
 
   // On grid view
-  .card:hover {
+  .card:not(.card-table):hover {
     box-shadow: if(
       isDarkMode(),
       0 0.1rem 1rem 0.25rem rgba($white, 0.05),

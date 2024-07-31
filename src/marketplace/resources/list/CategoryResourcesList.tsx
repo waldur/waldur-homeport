@@ -115,7 +115,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
   columns.push(
     {
       title: translate('State'),
-      render: ({ row }) => <ResourceStateField resource={row} />,
+      render: ({ row }) => <ResourceStateField resource={row} outline pill />,
       filter: 'state',
       id: 'state',
       keys: ['state', 'backend_metadata'],

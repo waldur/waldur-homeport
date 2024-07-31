@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -16,13 +17,13 @@ interface DispatchProps {
 type Props = OwnProps & DispatchProps;
 
 const PurePlanDetailsLink: FunctionComponent<Props> = (props) => (
-  <button
-    className="text-btn text-dark"
-    type="button"
+  <Button
+    variant="link"
+    className="btn-flush"
     onClick={props.showPlanDetailsDialog}
   >
-    {translate('Show')} <i className="fa fa-external-link" />
-  </button>
+    {translate('Show')}
+  </Button>
 );
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({

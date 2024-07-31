@@ -1,4 +1,5 @@
 import { useCallback, FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -15,9 +16,8 @@ export const KeyValueButton: FunctionComponent<{ items; title }> = (props) => {
   }, [dispatch, props.items, props.title]);
 
   return (
-    <button type="button" className="text-btn" onClick={showDetails}>
-      {translate('Show details')}{' '}
-      <i className="fa fa-external-link cursor-pointer" />
-    </button>
+    <Button variant="link" className="btn-flush" onClick={showDetails}>
+      {translate('Show details')}
+    </Button>
   );
 };

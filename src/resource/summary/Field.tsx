@@ -5,6 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { Tip } from '@waldur/core/Tooltip';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 interface FieldProps {
   label: string;
@@ -20,7 +21,7 @@ interface FieldProps {
 export const Field: FunctionComponent<FieldProps> = (props) =>
   props.value || props.children ? (
     <Row className={classNames('mb-1', props.className)}>
-      <Col sm={props.isStuck ? 'auto' : 3} className="text-dark fw-bolder">
+      <Col sm={props.isStuck ? 'auto' : 3} className="text-grey-700 fw-bold">
         {props.label.length > 20 ? (
           <Tip label={props.label} id="fieldLabel">
             {props.label}:
@@ -31,19 +32,19 @@ export const Field: FunctionComponent<FieldProps> = (props) =>
       </Col>
       <Col
         sm={props.isStuck ? undefined : 9}
-        className={classNames('text-dark', props.valueClass)}
+        className={classNames('text-grey-500', props.valueClass)}
       >
-        {props.value || props.children}
+        {props.value || props.children || DASH_ESCAPE_CODE}
         {props.helpText && (
           <Tip label={props.helpText} id="fieldHelpText">
             {' '}
-            <Question />
+            <Question size={17} />
           </Tip>
         )}
         {props.hasCopy && (
           <CopyToClipboardButton
             value={props.value}
-            size={15}
+            size={17}
             className="mx-2 text-hover-primary cursor-pointer d-inline z-index-1"
           />
         )}

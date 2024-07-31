@@ -22,7 +22,7 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
   const offeringName = truncate(order.offering_name, 50);
   return (
     <>
-      <div className="d-flex flex-wrap gap-2 mb-2">
+      <div className="d-flex flex-wrap gap-2 mb-2 align-items-center">
         <div className="btn btn-flush d-flex align-items-center">
           <h3 className="text-start text-decoration-underline mb-0 me-2">
             {order.attributes.name}

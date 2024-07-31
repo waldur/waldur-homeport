@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import { Eye, EyeSlash } from '@phosphor-icons/react';
 import React from 'react';
 import { useToggle } from 'react-use';
 
@@ -13,13 +13,16 @@ export const UserPassword: React.FC<UserPasswordProps> = (props) => {
   return (
     <>
       <button
-        className={classNames('text-btn fa', {
-          'fa-eye': !showPassword,
-          'fa-eye-slash': showPassword,
-        })}
-        title={translate('Show password')}
+        className="text-btn"
+        type="button"
+        title={
+          showPassword ? translate('Hide password') : translate('Show password')
+        }
         onClick={toggle}
-      />{' '}
+      >
+        {showPassword ? <EyeSlash size={17} /> : <Eye size={17} />}
+        &nbsp;
+      </button>
       {showPassword ? props.password : '***************'}
     </>
   );

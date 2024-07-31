@@ -1,6 +1,6 @@
 import { CaretDown, CaretUp, CaretUpDown } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo, useRef } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -114,6 +114,14 @@ export const TableHeader: FC<TableHeaderProps> = ({
     [columns],
   );
 
+  const refCheck = useRef<HTMLInputElement>();
+  useEffect(() => {
+    if (refCheck?.current) {
+      refCheck.current.indeterminate =
+        !isAllSelected && selectedRows?.length > 0;
+    }
+  }, [refCheck?.current, isAllSelected, selectedRows]);
+
   return (
     <thead>
       <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
@@ -122,6 +130,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
         ) : enableMultiSelect ? (
           <th style={{ width: '10px' }}>
             <FormCheck
+              ref={refCheck}
               className="form-check form-check-custom form-check-sm"
               checked={isAllSelected}
               onChange={() => onSelectAllRows(rows)}

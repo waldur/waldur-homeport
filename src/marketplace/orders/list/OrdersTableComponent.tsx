@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -24,10 +24,23 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
   hideColumns = [],
   ...rest
 }) => {
+  const tableFilter = useMemo(() => {
+    return {
+      field: [
+        'uuid',
+        'project_description',
+        'resource_name',
+        'type',
+        'plan_name',
+        'offering_name',
+      ],
+      ...filter,
+    };
+  }, [filter]);
   const props = useTable({
     table,
     fetchData: createFetcher('marketplace-orders'),
-    filter,
+    filter: tableFilter,
     queryField: 'query',
   });
   const columns = [

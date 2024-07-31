@@ -23,7 +23,7 @@ const formatErrorField = (props: ResourceSummaryProps) => {
   return (
     <>
       <Tip id="error-traceback" label={props.resource.error_traceback}>
-        <Question />
+        <Question size={17} />
       </Tip>{' '}
       {props.resource.error_message}
     </>

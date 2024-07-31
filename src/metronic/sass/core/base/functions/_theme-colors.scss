@@ -21,3 +21,7 @@
 @function theme-dark-inverse-color($key: 'primary') {
   @return get($theme-dark-inverse-colors, $key);
 }
+
+@function theme-200-color($key: 'primary') {
+  @return get($theme-200-colors, $key);
+}
