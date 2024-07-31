@@ -47,6 +47,7 @@ export const ResourceDetailsHero = ({
               }}
               scope={scope}
               refetch={refetch}
+              labeled
             />
           </div>
         }
