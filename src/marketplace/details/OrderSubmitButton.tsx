@@ -63,7 +63,10 @@ export const OrderSubmitButton = (props: OrderSummaryProps) => {
       className="w-100"
     >
       {isLoading && <LoadingSpinnerIcon className="me-1" />}
-      <ShoppingCart /> {translate('Create')}
+      <span className="svg-icon svg-icon-2">
+        <ShoppingCart />
+      </span>
+      {translate('Create')}
     </Button>
   );
 
