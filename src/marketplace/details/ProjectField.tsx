@@ -41,7 +41,8 @@ export const ProjectField: FC<ProjectFieldProps> = ({
                 noOptionsMessage={() => translate('No projects found')}
                 loadOptions={(query, prevOptions, { page }) =>
                   projectAutocomplete(customer.uuid, query, prevOptions, page, {
-                    field: ['name', 'url'],
+                    // UUID is used in suggest name API request
+                    field: ['name', 'url', 'uuid'],
                   })
                 }
                 label={translate('Project')}
