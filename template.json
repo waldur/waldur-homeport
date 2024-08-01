@@ -8031,22 +8031,6 @@
     "description": "openstack/openstack-volume/actions/RetypeAction.tsx",
     "message": "Retype"
   },
-  "Revied by consumer at": {
-    "description": "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
-    "message": "Revied by consumer at"
-  },
-  "Revied by consumer": {
-    "description": "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
-    "message": "Revied by consumer"
-  },
-  "Revied by provider at": {
-    "description": "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
-    "message": "Revied by provider at"
-  },
-  "Revied by provider": {
-    "description": "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
-    "message": "Revied by provider"
-  },
   "Review details": {
     "description": "proposals/round/proposals/ProposalReviewsDetailButton.tsx",
     "message": "Review details"
@@ -8110,6 +8094,22 @@
   "Reviewed at": {
     "description": "invitations/UserPermissionRequestsList.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, user/UserPermissionRequestsList.tsx",
     "message": "Reviewed at"
+  },
+  "Reviewed by consumer at": {
+    "description": "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
+    "message": "Reviewed by consumer at"
+  },
+  "Reviewed by consumer": {
+    "description": "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
+    "message": "Reviewed by consumer"
+  },
+  "Reviewed by provider at": {
+    "description": "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
+    "message": "Reviewed by provider at"
+  },
+  "Reviewed by provider": {
+    "description": "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
+    "message": "Reviewed by provider"
   },
   "Reviewed by": {
     "description": "marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, user/UserPermissionRequestsList.tsx",
