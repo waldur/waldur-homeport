@@ -3444,7 +3444,7 @@
     "message": "Features have been updated."
   },
   "Features": {
-    "description": "administration/FeaturesList.tsx, administration/routes.ts, marketplace/details/OfferingTabs.tsx",
+    "description": "administration/routes.ts, marketplace/details/OfferingTabs.tsx",
     "message": "Features"
   },
   "Fee applied according to the maximum value reported by service provider over the whole active state of resource.": {
@@ -5536,7 +5536,7 @@
     "message": "No, continue using current email"
   },
   "No": {
-    "description": "administration/FeaturesList.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx, customer/list/ServiceProviderFilter.tsx, invitations/GroupInvitationsList.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/update/attributes/utils.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/options/ResourceOptionsCard.tsx, marketplace-checklist/AnswerGroup.tsx, marketplace-checklist/AnswersTable.tsx, marketplace-checklist/ChecklistCustomer.tsx, modal/ConfirmationDialog.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-tenant/ExpandablePortRow.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/support/UserList.tsx",
+    "description": "administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx, customer/list/ServiceProviderFilter.tsx, invitations/GroupInvitationsList.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/update/attributes/utils.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/options/ResourceOptionsCard.tsx, marketplace-checklist/AnswerGroup.tsx, marketplace-checklist/AnswersTable.tsx, marketplace-checklist/ChecklistCustomer.tsx, modal/ConfirmationDialog.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-tenant/ExpandablePortRow.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/support/UserList.tsx",
     "message": "No"
   },
   "Node has been created.": {
@@ -5908,7 +5908,7 @@
     "message": "Only active"
   },
   "Only pending and expired invitations can be sent again.": {
-    "description": "invitations/actions/InvitationSendButton.tsx",
+    "description": "invitations/MultiResendAction.tsx, invitations/actions/InvitationSendButton.tsx",
     "message": "Only pending and expired invitations can be sent again."
   },
   "Only pending invitation can be canceled.": {
@@ -12128,7 +12128,7 @@
     "message": "Yes, use invitation email"
   },
   "Yes": {
-    "description": "administration/FeaturesList.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx, customer/list/ServiceProviderFilter.tsx, invitations/GroupInvitationsList.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/update/attributes/utils.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/options/ResourceOptionsCard.tsx, marketplace-checklist/AnswerGroup.tsx, marketplace-checklist/AnswersTable.tsx, marketplace-checklist/ChecklistCustomer.tsx, modal/ConfirmationDialog.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-tenant/ExpandablePortRow.tsx, project/ProjectRemoveDialog.tsx, proposals/call-management/CallAllFilters.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/hooks/HookRemoveDialog.tsx, user/keys/KeyRemoveDialog.tsx, user/support/UserList.tsx",
+    "description": "administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx, customer/list/ServiceProviderFilter.tsx, invitations/GroupInvitationsList.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/update/attributes/utils.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/options/ResourceOptionsCard.tsx, marketplace-checklist/AnswerGroup.tsx, marketplace-checklist/AnswersTable.tsx, marketplace-checklist/ChecklistCustomer.tsx, modal/ConfirmationDialog.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-tenant/ExpandablePortRow.tsx, project/ProjectRemoveDialog.tsx, proposals/call-management/CallAllFilters.tsx, rancher/cluster/users/ClusterUsersList.tsx, resource/summary/ScheduleSummary.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/hooks/HookRemoveDialog.tsx, user/keys/KeyRemoveDialog.tsx, user/support/UserList.tsx",
     "message": "Yes"
   },
   "You also agree to the service provider’s <pp>privacy policy</pp>.": {
@@ -12204,7 +12204,7 @@
     "message": "You don't have permission to cancel this invitation."
   },
   "You don't have permission to send this invitation.": {
-    "description": "invitations/actions/InvitationSendButton.tsx",
+    "description": "invitations/MultiResendAction.tsx, invitations/actions/InvitationSendButton.tsx",
     "message": "You don't have permission to send this invitation."
   },
   "You have entered data in form. When dialog is closed form data would be lost.": {
