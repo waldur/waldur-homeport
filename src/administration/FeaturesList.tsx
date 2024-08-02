@@ -1,16 +1,15 @@
-import { Fragment, useEffect } from 'react';
-import { Button, Table } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { connect, useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
-import { Field, initialize, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 
 import { TelemetryExampleButton } from '@waldur/administration/TelemetryExampleButton';
 import { ENV } from '@waldur/configs/default';
 import { get, post } from '@waldur/core/api';
-import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Panel } from '@waldur/core/Panel';
 import { TelemetryFeatures } from '@waldur/FeaturesEnums';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -29,18 +28,14 @@ const loadFeatures = () => get<FeatureSection[]>('/features-description/');
 
 const saveFeatures = (payload) => post('/feature-values/', payload);
 
-const parseBool = (val) => (val === true ? 'true' : 'false');
-
-const serializeBool = (val) => (val === 'true' ? true : false);
-
-const processMap = (processor) => (data) =>
+const processMap = (data) =>
   Object.keys(data).reduce(
     (acc, sKey) => ({
       ...acc,
       [sKey]: Object.keys(data[sKey]).reduce(
         (acc, fKey) => ({
           ...acc,
-          [fKey]: processor(data[sKey][fKey]),
+          [fKey]: data[sKey][fKey],
         }),
         {},
       ),
@@ -48,90 +43,66 @@ const processMap = (processor) => (data) =>
     {},
   );
 
-const parseFeatures = processMap(parseBool);
-
-const serializeFeatures = processMap(serializeBool);
-
-const FORM_ID = 'features';
-
-export const FeaturesList = reduxForm({
-  form: 'features',
-})(({ handleSubmit }) => {
-  const dispatch = useDispatch();
-  const { loading, error, value } = useAsync(loadFeatures);
-  useEffect(() => {
-    if (value) {
-      dispatch(initialize(FORM_ID, parseFeatures(ENV.FEATURES)));
+export const FeaturesList = connect(() => ({
+  initialValues: processMap(ENV.FEATURES),
+}))(
+  reduxForm({
+    form: 'features',
+  })(({ handleSubmit }) => {
+    const dispatch = useDispatch();
+    const { loading, error, value } = useAsync(loadFeatures);
+    if (loading) {
+      return <LoadingSpinner />;
     }
-  }, [value, dispatch]);
-
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-  if (error) {
-    return <>{translate('Unable to load page')}</>;
-  }
-  const choices = [
-    { value: 'true', label: translate('Yes') },
-    { value: 'false', label: translate('No') },
-  ];
-  const saveFeaturesCallback = async (formData) => {
-    try {
-      await saveFeatures(serializeFeatures(formData));
-      dispatch(showSuccess(translate('Features have been updated.')));
-      location.reload();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to update features.')));
+    if (error) {
+      return <>{translate('Unable to load page')}</>;
     }
-  };
+    const saveFeaturesCallback = async (formData) => {
+      try {
+        await saveFeatures(formData);
+        dispatch(showSuccess(translate('Features have been updated.')));
+        location.reload();
+      } catch (e) {
+        dispatch(showErrorResponse(e, translate('Unable to update features.')));
+      }
+    };
 
-  return (
-    <Panel title={translate('Features')}>
+    return (
       <form onSubmit={handleSubmit(saveFeaturesCallback)}>
-        <Table
-          responsive={true}
-          bordered={true}
-          striped={true}
-          className="mt-3"
-        >
-          <tbody>
-            {value.data.map((section) => (
-              <Fragment key={section.key}>
-                <tr>
-                  <td colSpan={2}>
-                    <h3>{section.description}</h3>
+        {value.data.map((section) => (
+          <FormTable.Card
+            key={section.key}
+            title={section.description}
+            className="card-bordered mb-7"
+          >
+            <FormTable>
+              {section.items.map((item) => (
+                <tr key={item.key}>
+                  <td>
+                    {item.description}
+                    {`${section.key}.${item.key}` ===
+                    TelemetryFeatures.send_metrics ? (
+                      <div>
+                        <TelemetryExampleButton />
+                      </div>
+                    ) : null}
+                  </td>
+                  <td className="col-md-1">
+                    <Field
+                      name={`${section.key}.${item.key}`}
+                      component={AwesomeCheckboxField}
+                      floating={false}
+                    />
                   </td>
                 </tr>
-
-                {section.items.map((item) => (
-                  <tr key={item.key}>
-                    <td>
-                      {item.description}
-                      {`${section.key}.${item.key}` ===
-                      TelemetryFeatures.send_metrics ? (
-                        <div>
-                          <TelemetryExampleButton />
-                        </div>
-                      ) : null}
-                    </td>
-                    <td>
-                      <Field
-                        name={`${section.key}.${item.key}`}
-                        choices={choices}
-                        component={CustomRadioButton}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </Fragment>
-            ))}
-          </tbody>
-        </Table>
-
+              ))}
+            </FormTable>
+          </FormTable.Card>
+        ))}
         <Button type="submit" variant="primary">
           {translate('Save')}
         </Button>
       </form>
-    </Panel>
-  );
-});
+    );
+  }),
+);
