@@ -611,6 +611,18 @@
     "description": "marketplace/offerings/update/components/ComponentBooleanLimitField.tsx",
     "message": "Allow to enable/disable component only"
   },
+  "Allow to hide OpenStack volume type selector when instance or volume is provisioned.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Allow to hide OpenStack volume type selector when instance or volume is provisioned."
+  },
+  "Allow to import resources from service provider to project.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Allow to import resources from service provider to project."
+  },
+  "Allow to select mount point for data volume when Rancher cluster is provisioned.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Allow to select mount point for data volume when Rancher cluster is provisioned."
+  },
   "Allowed address pairs update was scheduled.": {
     "description": "openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx",
     "message": "Allowed address pairs update was scheduled."
@@ -622,6 +634,10 @@
   "Allowed file types": {
     "description": "form/ImageField.tsx",
     "message": "Allowed file types"
+  },
+  "Allows to hide domain field in organization detail.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Allows to hide domain field in organization detail."
   },
   "Amount": {
     "description": "marketplace/offerings/PriceList.tsx, marketplace/offerings/update/plans/QuotasTable.tsx, marketplace/resources/usage/ResourceUsageForm.tsx",
@@ -1503,6 +1519,10 @@
     "description": "marketplace/routes.ts",
     "message": "Campaigns"
   },
+  "Cancel all selected invitations.": {
+    "description": "invitations/MultiCancelAction.tsx",
+    "message": "Cancel all selected invitations."
+  },
   "Cancel invitation": {
     "description": "invitations/InvitationButtons.tsx",
     "message": "Cancel invitation"
@@ -1520,7 +1540,7 @@
     "message": "Cancel request"
   },
   "Cancel": {
-    "description": "administration/roles/RoleDescriptionForm.tsx, administration/roles/RoleForm.tsx, customer/cost-policies/CostPolicyCreateForm.tsx, form/WideImageField.tsx, invitations/GroupInvitationCancelButton.tsx, invitations/GroupinvitationButtons.tsx, invitations/actions/InvitationCancelButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/orders/actions/CancelTerminationOrderButton.tsx, marketplace/orders/details/CancelOrderButton.tsx, modal/CloseDialogButton.tsx, project/GlobalProjectCreateDialog.tsx, project/ProjectCreateForm.tsx, table/TableFilterActions.tsx, table/TableFilterItem.tsx, user/support/UserEmailChangeDialog.tsx",
+    "description": "administration/roles/RoleDescriptionForm.tsx, administration/roles/RoleForm.tsx, customer/cost-policies/CostPolicyCreateForm.tsx, form/WideImageField.tsx, invitations/GroupInvitationCancelButton.tsx, invitations/GroupinvitationButtons.tsx, invitations/MultiCancelAction.tsx, invitations/actions/InvitationCancelButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/orders/actions/CancelTerminationOrderButton.tsx, marketplace/orders/details/CancelOrderButton.tsx, modal/CloseDialogButton.tsx, project/GlobalProjectCreateDialog.tsx, project/ProjectCreateForm.tsx, table/TableFilterActions.tsx, table/TableFilterItem.tsx, user/support/UserEmailChangeDialog.tsx",
     "message": "Cancel"
   },
   "Canceled": {
@@ -1834,6 +1854,14 @@
   "Compute": {
     "description": "openstack/openstack-tenant/tabs.ts, quotas/constants.ts",
     "message": "Compute"
+  },
+  "Conceal \"Change request\" from a selection of issue types for non-staff/non-support users.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Conceal \"Change request\" from a selection of issue types for non-staff/non-support users."
+  },
+  "Conceal civil number in invitation creation dialog.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Conceal civil number in invitation creation dialog."
   },
   "Configuration has been updated.": {
     "description": "administration/branding/AdministrationBranding.tsx",
@@ -2747,6 +2775,10 @@
     "description": "openstack/openstack-network/actions/CreateSubnetDialog.tsx",
     "message": "Do not configure a gateway for this subnet"
   },
+  "Do not render prices in order details.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Do not render prices in order details."
+  },
   "Do you really want to delete comment?": {
     "description": "issues/comments/IssueCommentDeleteDialog.tsx",
     "message": "Do you really want to delete comment?"
@@ -3043,6 +3075,18 @@
     "description": "openstack/openstack-subnet/OpenStackSubNetSummary.tsx",
     "message": "Enable DHCP"
   },
+  "Enable OECD code.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Enable OECD code."
+  },
+  "Enable SSH keys management in user workspace.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Enable SSH keys management in user workspace."
+  },
+  "Enable VM type overview in support workspace.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Enable VM type overview in support workspace."
+  },
   "Enable by default": {
     "description": "marketplace/offerings/update/components/ComponentBooleanDefaultLimitField.tsx",
     "message": "Enable by default"
@@ -3050,6 +3094,10 @@
   "Enable call manager": {
     "description": "customer/details/CustomerCallManagerPanel.tsx",
     "message": "Enable call manager"
+  },
+  "Enable email and webhook notifications management in user workspace.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Enable email and webhook notifications management in user workspace."
   },
   "Enable limit": {
     "description": "marketplace/offerings/update/components/ComponentLimitEnableField.tsx",
@@ -3063,6 +3111,10 @@
     "description": "administration/notifications/NotificationToggleButton.tsx, administration/roles/RoleToggleButton.tsx, administration/service-desk/AdministrationServiceDesk.tsx, customer/payment-profiles/PaymentProfileEnableButton.tsx",
     "message": "Enable"
   },
+  "Enabled LEXIS link integrations for offerings.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Enabled LEXIS link integrations for offerings."
+  },
   "Enabled checklists have been updated.": {
     "description": "marketplace-checklist/ChecklistCustomer.tsx",
     "message": "Enabled checklists have been updated."
@@ -3070,6 +3122,14 @@
   "Enabled default gateway": {
     "description": "openstack/openstack-subnet/OpenStackSubNetSummary.tsx",
     "message": "Enabled default gateway"
+  },
+  "Enabled display of call management functionality.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Enabled display of call management functionality."
+  },
+  "Enabled display of experimental or mocked components in marketplace.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Enabled display of experimental or mocked components in marketplace."
   },
   "Enabled": {
     "description": "administration/hooks/HooksList.tsx, administration/notifications/NotificationList.tsx, administration/providers/ProviderCard.tsx, administration/providers/ProviderForm.tsx, administration/service-desk/AdministrationServiceDesk.tsx, customer/payment-profiles/PaymentProfileList.tsx, marketplace-checklist/ChecklistCustomer.tsx, user/hooks/HookForm.tsx, user/hooks/HooksList.tsx",
@@ -4379,9 +4439,17 @@
     "description": "invitations/InvitationReject.tsx",
     "message": "Invitation rejection"
   },
+  "Invitations have been cancelled.": {
+    "description": "invitations/MultiCancelAction.tsx",
+    "message": "Invitations have been cancelled."
+  },
   "Invitations have been sent again.": {
     "description": "invitations/MultiResendAction.tsx",
     "message": "Invitations have been sent again."
+  },
+  "Invitations management": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Invitations management"
   },
   "Invitations": {
     "description": "administration/InvitationList.tsx, administration/routes.ts, customer/routes.ts, invitations/InvitationsList.tsx, project/routes.ts, proposals/team/InvitationsList.tsx, proposals/team/TeamSection.tsx",
@@ -4791,6 +4859,18 @@
     "description": "openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-network/actions/SetMtuDialog.tsx",
     "message": "MTU"
   },
+  "Make civil number field mandatory in invitation creation form.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Make civil number field mandatory in invitation creation form."
+  },
+  "Make payments menu visible for staff users only.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Make payments menu visible for staff users only."
+  },
+  "Make tax number field mandatory in invitation creation form.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Make tax number field mandatory in invitation creation form."
+  },
   "Manage campaign": {
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "Manage campaign"
@@ -4846,6 +4926,10 @@
   "Marketplace UUID": {
     "description": "resource/summary/ResourceMetadataDialog.tsx",
     "message": "Marketplace UUID"
+  },
+  "Marketplace offerings and resources": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Marketplace offerings and resources"
   },
   "Marketplace": {
     "description": "administration/routes.ts, marketplace/landing/LandingPage.tsx, marketplace/routes.ts, marketplace/utils.ts, navigation/sidebar/UnifiedSidebar.tsx",
@@ -5915,6 +5999,10 @@
     "description": "invitations/actions/InvitationCancelButton.tsx",
     "message": "Only pending invitation can be canceled."
   },
+  "Only pending invitations can be canceled.": {
+    "description": "invitations/MultiCancelAction.tsx",
+    "message": "Only pending invitations can be canceled."
+  },
   "Only projects without existing resources can be removed.": {
     "description": "project/manage/ProjectDelete.tsx",
     "message": "Only projects without existing resources can be removed."
@@ -5994,6 +6082,10 @@
   "OpenStack networks has been created.": {
     "description": "openstack/openstack-tenant/actions/CreateNetworkDialog.tsx",
     "message": "OpenStack networks has been created."
+  },
+  "OpenStack resources provisioning": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "OpenStack resources provisioning"
   },
   "OpenStack shared instance": {
     "description": "openstack/openstack-instance/marketplace.ts",
@@ -6178,6 +6270,10 @@
   "Organization updated successfully": {
     "description": "customer/details/CustomerManage.tsx",
     "message": "Organization updated successfully"
+  },
+  "Organization workspace": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Organization workspace"
   },
   "Organization": {
     "description": "administration/InvitationsFilter.tsx, administration/organizations/OrganizationCostPoliciesFilter.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/details/CustomerRemoveDialog.tsx, customer/list/CustomerList.tsx, customer/routes.ts, events/ExpandableEventDetailsTable.tsx, invitations/actions/UserDetailsGroup.tsx, issues/IssueSummary.tsx, issues/create/IssueHeader.tsx, issues/list/IssuesList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/steps/FormCustomerStep.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/list/OfferingsList.tsx, marketplace/orders/details/OrderDetailsHeaderBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/robot-accounts/ProviderRobotAccountFilter.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-checklist/ChecklistOverview.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, project/GlobalProjectCreateDialog.tsx, proposals/PublicCallsList.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, resource/support/SharedProviderCustomers.tsx, resource/support/SharedProviderResources.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/affiliations/ProjectsListFilter.tsx, user/affiliations/UserAffiliationsList.tsx, user/support/UserDetailsTable.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
@@ -7039,6 +7135,10 @@
     "description": "marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, marketplace-remote/routes.ts, navigation/header/confirmation-drawer/PendingProjectUpdates.tsx",
     "message": "Project updates"
   },
+  "Project workspace": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Project workspace"
+  },
   "Project {project} from {organization} was successfully removed": {
     "description": "project/effects.ts",
     "message": "Project {project} from {organization} was successfully removed"
@@ -7355,6 +7455,10 @@
     "description": "rancher/cluster/create/FormNodesStep.tsx",
     "message": "Rancher node "
   },
+  "Rancher resources provisioning": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Rancher resources provisioning"
+  },
   "Rancher secret key": {
     "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/marketplace.ts",
     "message": "Rancher secret key"
@@ -7591,6 +7695,34 @@
     "description": "customer/details/CustomerRemovePanel.tsx",
     "message": "Removing the organization will delete all related resources."
   },
+  "Render \"Show user details\" button in invitation creation form.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Render \"Show user details\" button in invitation creation form."
+  },
+  "Render estimated cost column in projects list.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Render estimated cost column in projects list."
+  },
+  "Render list of SLURM jobs as a separate tab in allocation details page.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Render list of SLURM jobs as a separate tab in allocation details page."
+  },
+  "Render list of users in support workspace.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Render list of users in support workspace."
+  },
+  "Render marketplace plan components pricelist in support workspace.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Render marketplace plan components pricelist in support workspace."
+  },
+  "Render overview of shared marketplace service providers in support workspace.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Render overview of shared marketplace service providers in support workspace."
+  },
+  "Render preferred language column in users list.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Render preferred language column in users list."
+  },
   "Report details": {
     "description": "marketplace/resources/report/ShowReportDialog.tsx",
     "message": "Report details"
@@ -7770,6 +7902,10 @@
   "Research field (OECD code)": {
     "description": "proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx",
     "message": "Research field (OECD code)"
+  },
+  "Resend all selected invitations.": {
+    "description": "invitations/MultiResendAction.tsx",
+    "message": "Resend all selected invitations."
   },
   "Resend": {
     "description": "invitations/MultiResendAction.tsx, invitations/actions/InvitationSendButton.tsx",
@@ -8262,6 +8398,10 @@
   "SLURM remote allocation": {
     "description": "slurm/marketplace.ts",
     "message": "SLURM remote allocation"
+  },
+  "SLURM resources provisioning": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "SLURM resources provisioning"
   },
   "SQL server description": {
     "description": "azure/sql/AzureSQLServerForm.tsx",
@@ -8763,6 +8903,10 @@
     "description": "customer/list/ExportAsEmailDialog.tsx",
     "message": "Send report"
   },
+  "Send telemetry metrics.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Send telemetry metrics."
+  },
   "Send": {
     "description": "broadcasts/BroadcastSendButton.tsx, customer/list/FinancialReportSendButton.tsx",
     "message": "Send"
@@ -9003,6 +9147,10 @@
     "description": "administration/TelemetryExampleButton.tsx",
     "message": "Show example"
   },
+  "Show industry flag.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Show industry flag."
+  },
   "Show less": {
     "description": "navigation/sidebar/ResourcesMenu.tsx",
     "message": "Show less"
@@ -9046,6 +9194,10 @@
   "Show shared": {
     "description": "reporting/openstack/VmOverviewFilter.tsx",
     "message": "Show shared"
+  },
+  "Show tax number field in invitation creation form.": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Show tax number field in invitation creation form."
   },
   "Show usage": {
     "description": "marketplace/resources/list/ShowUsageAction.tsx, marketplace/resources/usage/ResourceShowUsageButton.tsx",
@@ -9411,6 +9563,10 @@
     "description": "user/support/utils.ts",
     "message": "Support user"
   },
+  "Support workspace": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Support workspace"
+  },
   "Support": {
     "description": "administration/dashboard/AdministrationProfile.tsx, issues/routes.ts, navigation/FooterLinks.tsx, navigation/sidebar/SupportMenu.tsx, user/support/UserList.tsx, user/support/utils.ts",
     "message": "Support"
@@ -9574,6 +9730,10 @@
   "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only.": {
     "description": "marketplace/offerings/InternalNameField.tsx",
     "message": "Technical name intended for integration and automated reporting. Please use Latin letters without spaces only."
+  },
+  "Telemetry settings": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "Telemetry settings"
   },
   "Template details": {
     "description": "rancher/template/TemplateDetail.tsx",
@@ -10255,6 +10415,10 @@
     "description": "invitations/actions/InvitationCancelButton.tsx",
     "message": "Unable to cancel invitation."
   },
+  "Unable to cancel invitations.": {
+    "description": "invitations/MultiCancelAction.tsx",
+    "message": "Unable to cancel invitations."
+  },
   "Unable to cancel order.": {
     "description": "marketplace/orders/actions/CancelTerminationOrderButton.tsx, marketplace/orders/details/CancelOrderButton.tsx",
     "message": "Unable to cancel order."
@@ -10688,7 +10852,7 @@
     "message": "Unable to load organizations"
   },
   "Unable to load page": {
-    "description": "UserAgreementComponent.tsx, administration/FeaturesList.tsx",
+    "description": "UserAgreementComponent.tsx",
     "message": "Unable to load page"
   },
   "Unable to load plan details.": {
@@ -11739,6 +11903,10 @@
     "description": "user/support/UserDetailsTable.tsx",
     "message": "User type"
   },
+  "User workspace": {
+    "description": "features/FeaturesDescription.tsx",
+    "message": "User workspace"
+  },
   "User {affected_user_link} has got {role_name} role in {scope_link}.": {
     "description": "permissions/events.tsx",
     "message": "User {affected_user_link} has got {role_name} role in {scope_link}."
@@ -12198,6 +12366,10 @@
   "You don't have enough privileges to perform this operation.": {
     "description": "project/ProjectCreateButton.tsx",
     "message": "You don't have enough privileges to perform this operation."
+  },
+  "You don't have permission to cancel these invitations.": {
+    "description": "invitations/MultiCancelAction.tsx",
+    "message": "You don't have permission to cancel these invitations."
   },
   "You don't have permission to cancel this invitation.": {
     "description": "invitations/actions/InvitationCancelButton.tsx",

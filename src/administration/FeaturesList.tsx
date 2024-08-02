@@ -1,30 +1,16 @@
 import { Button } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 import { Field, reduxForm } from 'redux-form';
 
 import { TelemetryExampleButton } from '@waldur/administration/TelemetryExampleButton';
 import { ENV } from '@waldur/configs/default';
-import { get, post } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { post } from '@waldur/core/api';
+import { FeaturesDescription } from '@waldur/features/FeaturesDescription';
 import { TelemetryFeatures } from '@waldur/FeaturesEnums';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-
-interface FeatureItem {
-  key: string;
-  description: string;
-}
-
-interface FeatureSection {
-  key: string;
-  description: string;
-  items: FeatureItem[];
-}
-
-const loadFeatures = () => get<FeatureSection[]>('/features-description/');
 
 const saveFeatures = (payload) => post('/feature-values/', payload);
 
@@ -50,13 +36,6 @@ export const FeaturesList = connect(() => ({
     form: 'features',
   })(({ handleSubmit }) => {
     const dispatch = useDispatch();
-    const { loading, error, value } = useAsync(loadFeatures);
-    if (loading) {
-      return <LoadingSpinner />;
-    }
-    if (error) {
-      return <>{translate('Unable to load page')}</>;
-    }
     const saveFeaturesCallback = async (formData) => {
       try {
         await saveFeatures(formData);
@@ -69,7 +48,7 @@ export const FeaturesList = connect(() => ({
 
     return (
       <form onSubmit={handleSubmit(saveFeaturesCallback)}>
-        {value.data.map((section) => (
+        {FeaturesDescription.map((section) => (
           <FormTable.Card
             key={section.key}
             title={section.description}
