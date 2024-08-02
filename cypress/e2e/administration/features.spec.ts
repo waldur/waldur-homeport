@@ -18,16 +18,13 @@ describe('Features', () => {
   });
 
   it('renders title', () => {
-    cy.get('.card-title.h5').contains('Features').should('be.visible');
+    cy.get('.card-title.h5')
+      .contains('Organization workspace')
+      .should('be.visible');
   });
 
   it('should yes & no radio button select works correctly', () => {
-    cy.get('.custom-checkmark')
-      .eq(1)
-      .click()
-      .get('.custom-checkmark')
-      .eq(2)
-      .click();
+    cy.get('.form-switch').eq(1).click().get('.form-switch').eq(2).click();
 
     cy.contains('button', 'Save').click();
     cy.waitFor('@submit_updated_feature');
