@@ -16,6 +16,7 @@ import { InvitationCreateButton } from './actions/create/InvitationCreateButton'
 import { InvitationCancelButton } from './actions/InvitationCancelButton';
 import { InvitationSendButton } from './actions/InvitationSendButton';
 import { InvitationsFilter } from './InvitationsFilter';
+import { InvitationsMultiSelectActions } from './InvitationsMultiSelectActions';
 import { RoleField } from './RoleField';
 
 export const InvitationsList: FunctionComponent = () => {
@@ -99,6 +100,8 @@ export const InvitationsList: FunctionComponent = () => {
         </>
       )}
       expandableRow={InvitationExpandableRow}
+      enableMultiSelect
+      multiSelectActions={InvitationsMultiSelectActions}
     />
   );
 };

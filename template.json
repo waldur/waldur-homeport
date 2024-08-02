@@ -504,7 +504,7 @@
     "message": "Alert"
   },
   "All actions": {
-    "description": "marketplace/resources/ResourceActions.tsx, marketplace/resources/mass-actions/ResourceMultiSelectAction.tsx",
+    "description": "invitations/InvitationsMultiSelectActions.tsx, marketplace/resources/ResourceActions.tsx, marketplace/resources/mass-actions/ResourceMultiSelectAction.tsx",
     "message": "All actions"
   },
   "All calls": {
@@ -4379,6 +4379,10 @@
     "description": "invitations/InvitationReject.tsx",
     "message": "Invitation rejection"
   },
+  "Invitations have been sent again.": {
+    "description": "invitations/MultiResendAction.tsx",
+    "message": "Invitations have been sent again."
+  },
   "Invitations": {
     "description": "administration/InvitationList.tsx, administration/routes.ts, customer/routes.ts, invitations/InvitationsList.tsx, project/routes.ts, proposals/team/InvitationsList.tsx, proposals/team/TeamSection.tsx",
     "message": "Invitations"
@@ -7768,7 +7772,7 @@
     "message": "Research field (OECD code)"
   },
   "Resend": {
-    "description": "invitations/actions/InvitationSendButton.tsx",
+    "description": "invitations/MultiResendAction.tsx, invitations/actions/InvitationSendButton.tsx",
     "message": "Resend"
   },
   "Reserved slot by {name}": {
@@ -10866,6 +10870,10 @@
   "Unable to resend invitation.": {
     "description": "invitations/actions/InvitationSendButton.tsx",
     "message": "Unable to resend invitation."
+  },
+  "Unable to resend invitations.": {
+    "description": "invitations/MultiResendAction.tsx",
+    "message": "Unable to resend invitations."
   },
   "Unable to restore VM snapshot.": {
     "description": "openstack/openstack-backup/actions/utils.tsx",
