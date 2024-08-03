@@ -5,3 +5,5 @@ cypress
 src/permissions/enums.ts
 src/EventsEnums.ts
 src/FeaturesEnums.ts
+src/SettingsDescription.ts
+src/features/FeaturesDescription.ts
