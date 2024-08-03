@@ -68,8 +68,8 @@ const InvitationsListComponent: FunctionComponent = () => {
       ]}
       hoverableRow={({ row }) => (
         <>
-          <InvitationSendButton invitation={row} />
-          <InvitationCancelButton invitation={row} refetch={props.fetch} />
+          <InvitationSendButton row={row} />
+          <InvitationCancelButton row={row} refetch={props.fetch} />
         </>
       )}
       verboseName={translate('Team invitations')}

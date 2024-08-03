@@ -273,8 +273,11 @@ describe('Invitations', () => {
   });
 
   it('Resend invitation', () => {
-    cy.get('tr')
-      .get('button')
+    cy.get('td .dropdown')
+      .first()
+      .find('button.dropdown-toggle')
+      .click()
+      .get('.dropdown-menu')
       .contains('Resend')
       .click()
       .get('[role="alert"]')
@@ -282,8 +285,11 @@ describe('Invitations', () => {
   });
 
   it('Cancel invitation', () => {
-    cy.get('tr')
-      .get('button')
+    cy.get('td .dropdown')
+      .first()
+      .find('button.dropdown-toggle')
+      .click()
+      .get('.dropdown-menu')
       .contains('Cancel')
       .click()
       .get('[role="alert"]')

@@ -38,6 +38,10 @@ class InvitationServiceClass {
     return this.executeAction(invitation_uuid, 'send');
   }
 
+  delete(invitation_uuid) {
+    return this.executeAction(invitation_uuid, 'delete');
+  }
+
   approve(token) {
     return post(`/user-invitations/approve/`, {
       token,
