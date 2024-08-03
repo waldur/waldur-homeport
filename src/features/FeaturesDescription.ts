@@ -174,3 +174,4 @@ export const FeaturesDescription: FeatureSection[] = [
     ],
   },
 ];
+
