@@ -13,8 +13,7 @@ import { exportRoleField } from '@waldur/user/affiliations/RolePopover';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { InvitationCreateButton } from './actions/create/InvitationCreateButton';
-import { InvitationCancelButton } from './actions/InvitationCancelButton';
-import { InvitationSendButton } from './actions/InvitationSendButton';
+import { InvitationActions } from './InvitationActions';
 import { InvitationsFilter } from './InvitationsFilter';
 import { InvitationsMultiSelectActions } from './InvitationsMultiSelectActions';
 import { RoleField } from './RoleField';
@@ -94,10 +93,7 @@ export const InvitationsList: FunctionComponent = () => {
       hasQuery={true}
       enableExport
       hoverableRow={({ row }) => (
-        <>
-          <InvitationSendButton invitation={row} />
-          <InvitationCancelButton invitation={row} refetch={props.fetch} />
-        </>
+        <InvitationActions invitation={row} refetch={props.fetch} />
       )}
       expandableRow={InvitationExpandableRow}
       enableMultiSelect

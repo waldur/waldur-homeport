@@ -55,8 +55,8 @@ export const InvitationsList: FunctionComponent<{ table; hideRole }> = ({
       ].filter(Boolean)}
       hoverableRow={({ row }) => (
         <>
-          <InvitationSendButton invitation={row} />
-          <InvitationCancelButton invitation={row} refetch={table.fetch} />
+          <InvitationSendButton row={row} />
+          <InvitationCancelButton row={row} refetch={table.fetch} />
         </>
       )}
       title={translate('Invitations')}

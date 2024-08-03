@@ -2543,6 +2543,10 @@
     "description": "user/support/UserDeleteAccount.tsx",
     "message": "Delete account"
   },
+  "Delete all selected invitations.": {
+    "description": "invitations/MultiDeleteAction.tsx",
+    "message": "Delete all selected invitations."
+  },
   "Delete catalog": {
     "description": "rancher/catalog/CatalogDeleteDialog.tsx",
     "message": "Delete catalog"
@@ -2592,7 +2596,7 @@
     "message": "Delete volumes"
   },
   "Delete": {
-    "description": "administration/agreements/UserAgreementDeleteButton.tsx, administration/notifications/ManageCommonFooterDialog.tsx, customer/details/CustomerRemoveDialog.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, issues/comments/IssueCommentDeleteDialog.tsx, issues/comments/IssueCommentItem.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/list/DeleteOfferingButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/resources/users/DeleteUserButton.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx, openstack/openstack-security-groups/rule-editor/ActionsField.tsx, project/DeleteAction.tsx, project/manage/ProjectDelete.tsx, rancher/catalog/CatalogDeleteButton.tsx, rancher/cluster/IngressActions.tsx, rancher/cluster/ServiceActions.tsx, rancher/cluster/WorkloadActions.tsx, resource/actions/ResourceDeleteButton.tsx",
+    "description": "administration/agreements/UserAgreementDeleteButton.tsx, administration/notifications/ManageCommonFooterDialog.tsx, customer/details/CustomerRemoveDialog.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, invitations/InvitationDeleteButton.tsx, invitations/MultiDeleteAction.tsx, issues/comments/IssueCommentDeleteDialog.tsx, issues/comments/IssueCommentItem.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/list/DeleteOfferingButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/resources/users/DeleteUserButton.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx, openstack/openstack-security-groups/rule-editor/ActionsField.tsx, project/DeleteAction.tsx, project/manage/ProjectDelete.tsx, rancher/catalog/CatalogDeleteButton.tsx, rancher/cluster/IngressActions.tsx, rancher/cluster/ServiceActions.tsx, rancher/cluster/WorkloadActions.tsx, resource/actions/ResourceDeleteButton.tsx",
     "message": "Delete"
   },
   "Deleting PostgreSQL server will cause deletion of all databases created within server.": {
@@ -4407,6 +4411,10 @@
     "description": "invitations/actions/InvitationCancelButton.tsx",
     "message": "Invitation has been canceled."
   },
+  "Invitation has been deleted.": {
+    "description": "invitations/InvitationDeleteButton.tsx",
+    "message": "Invitation has been deleted."
+  },
   "Invitation has been rejected.": {
     "description": "invitations/InvitationReject.tsx",
     "message": "Invitation has been rejected."
@@ -4442,6 +4450,10 @@
   "Invitations have been cancelled.": {
     "description": "invitations/MultiCancelAction.tsx",
     "message": "Invitations have been cancelled."
+  },
+  "Invitations have been deleted.": {
+    "description": "invitations/MultiDeleteAction.tsx",
+    "message": "Invitations have been deleted."
   },
   "Invitations have been sent again.": {
     "description": "invitations/MultiResendAction.tsx",
@@ -10607,6 +10619,14 @@
     "description": "openstack/openstack-instance/actions/DestroyDialog.tsx",
     "message": "Unable to delete instance."
   },
+  "Unable to delete invitation.": {
+    "description": "invitations/InvitationDeleteButton.tsx",
+    "message": "Unable to delete invitation."
+  },
+  "Unable to delete invitations.": {
+    "description": "invitations/MultiDeleteAction.tsx",
+    "message": "Unable to delete invitations."
+  },
   "Unable to delete invoice item.": {
     "description": "invoices/details/InvoiceItemDelete.tsx",
     "message": "Unable to delete invoice item."
@@ -12350,6 +12370,10 @@
   "You cannot unselect the default language": {
     "description": "administration/languages/LanguageOptionsForm.tsx",
     "message": "You cannot unselect the default language"
+  },
+  "You do not have permission to delete invitations.": {
+    "description": "invitations/MultiDeleteAction.tsx",
+    "message": "You do not have permission to delete invitations."
   },
   "You do not have sufficient privileges to visit this page. Ensure you have the correct rights for accessing this page for customer \"{customer}\"": {
     "description": "auth/PermissionLayout.tsx",
