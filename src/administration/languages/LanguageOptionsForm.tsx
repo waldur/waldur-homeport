@@ -15,7 +15,7 @@ import {
   showError,
 } from '@waldur/store/notify';
 
-import { saveConfig } from '../service-desk/api';
+import { saveConfig } from '../settings/api';
 
 interface LanguageOptionProps {
   languageChoices: any;

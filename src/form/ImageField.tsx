@@ -25,7 +25,7 @@ const style = {
 };
 
 const previewImage = (imageFile: ImageType, element: HTMLImageElement) => {
-  if (!imageFile) {
+  if (!imageFile || !element) {
     return;
   }
   if (typeof imageFile === 'string') {

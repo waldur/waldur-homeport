@@ -166,7 +166,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
           {isChanged && input.value instanceof File ? (
             <>
               {input.value.name} {formatFilesize(input.value.size, 'B')}{' '}
-              {props.meta.touched && props.meta.error ? (
+              {props.meta?.touched && props.meta.error ? (
                 <span className="text-danger">({props.meta.error})</span>
               ) : isTooLarge ? (
                 <span className="text-danger">

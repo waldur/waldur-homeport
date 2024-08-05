@@ -13,7 +13,7 @@ const AdministrationDashboard = lazyComponent(
 );
 
 const AdministrationBranding = lazyComponent(
-  () => import('./branding/AdministrationBranding'),
+  () => import('./settings/AdministrationBranding'),
   'AdministrationBranding',
 );
 

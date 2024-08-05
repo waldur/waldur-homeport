@@ -227,7 +227,10 @@
         "webpack.config.*.js"
       ]
     },
-    "ignore": ["extractLiteralsFromFiles.js", "src/SettingsDescription.ts"]
+    "ignore": [
+      "extractLiteralsFromFiles.js",
+      "src/SettingsDescription.ts"
+    ]
   },
   "stylelint": {
     "extends": "stylelint-config-recommended-scss",
