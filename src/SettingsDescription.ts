@@ -254,9 +254,9 @@ export const SettingsDescription = [
       },
       {
         key: 'ATLASSIAN_API_URL',
-        description: translate('Atlassian server URL'),
+        description: translate('Atlassian API server URL'),
         default: 'http://example.com/',
-        type: 'string',
+        type: 'url_field',
       },
       {
         key: 'ATLASSIAN_USERNAME',
@@ -421,9 +421,9 @@ export const SettingsDescription = [
     items: [
       {
         key: 'ZAMMAD_API_URL',
-        description: translate('Address of Zammad server. For example <http://localhost:8080/>'),
+        description: translate('Zammad API server URL. For example <http://localhost:8080/>'),
         default: '',
-        type: 'string',
+        type: 'url_field',
       },
       {
         key: 'ZAMMAD_TOKEN',
@@ -470,7 +470,7 @@ export const SettingsDescription = [
         key: 'SMAX_API_URL',
         description: translate('SMAX API server URL. For example <http://localhost:8080/>'),
         default: '',
-        type: 'string',
+        type: 'url_field',
       },
       {
         key: 'SMAX_TENANT_ID',
