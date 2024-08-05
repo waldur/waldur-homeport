@@ -66,7 +66,7 @@ const PublicOfferingGetHelp = lazyComponent(
   'PublicOfferingGetHelp',
 );
 
-const getTabs = (): PageBarTab[] => {
+const getTabs = (offering?): PageBarTab[] => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return [
     {
@@ -84,11 +84,13 @@ const getTabs = (): PageBarTab[] => {
       key: 'components',
       component: PublicOfferingComponents,
     },
-    {
-      title: translate('Images'),
-      key: 'images',
-      component: PublicOfferingImages,
-    },
+    offering?.screenshots.length
+      ? {
+          title: translate('Images'),
+          key: 'images',
+          component: PublicOfferingImages,
+        }
+      : null,
     showExperimentalUiComponents
       ? {
           title: translate('Getting started'),
@@ -183,7 +185,7 @@ export const OfferingPublicUIView = () => {
       : translate('Offering details'),
   );
 
-  const tabs = useMemo(() => getTabs(), []);
+  const tabs = useMemo(() => getTabs(data?.value?.offering), [data]);
   const { tabSpec } = usePageTabsTransmitter(tabs);
 
   usePageHero(
