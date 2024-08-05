@@ -10,7 +10,7 @@ import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { isStaffOrSupport as isStaffOrSupportSelector } from '@waldur/workspace/selectors';
 
-import { getDBSettings, saveConfig } from './api';
+import { getDBSettings, saveConfig } from '../settings/api';
 
 const AdministrationServiceDeskUpdateDialog = lazyComponent(
   () => import('./AdministrationServiceDeskUpdateDialog'),

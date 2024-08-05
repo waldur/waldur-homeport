@@ -11,7 +11,6 @@ import { createFetcher, Table } from '@waldur/table';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { useTable } from '@waldur/table/utils';
 
-import { ManageCommonFooterButton } from './ManageCommonFooterButton';
 import { NotificationActions } from './NotificationActions';
 import { NotificationExpandableRow } from './NotificationExpandableRow';
 import { NotificationFilter } from './NotificationFilter';
@@ -101,7 +100,6 @@ export const NotificationList = () => {
       showPageSizeSelector={true}
       expandableRowClassName="bg-gray-200"
       hasQuery={true}
-      actions={<ManageCommonFooterButton refetch={tableProps.fetch} />}
       enableExport={true}
       filters={<NotificationFilter />}
     />

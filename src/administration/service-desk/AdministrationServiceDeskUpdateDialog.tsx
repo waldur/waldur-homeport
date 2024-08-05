@@ -9,7 +9,8 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { saveConfig } from './api';
+import { saveConfig } from '../settings/api';
+
 import { SupportSettingsForm } from './SupportSettingsForm';
 
 export const AdministrationServiceDeskUpdateDialog = reduxForm<
