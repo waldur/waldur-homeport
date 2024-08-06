@@ -435,10 +435,6 @@
     "description": "marketplace/details/plan/PlanDetailsList.tsx, marketplace/details/plan/PlanDetailsTable.tsx",
     "message": "Additionally service provider can charge for usage of the following components"
   },
-  "Address of Zammad server. For example <http://localhost:8080/>": {
-    "description": "SettingsDescription.ts",
-    "message": "Address of Zammad server. For example <http://localhost:8080/>"
-  },
   "Address": {
     "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx, user/affiliations/BaseOrganizationsList.tsx",
     "message": "Address"
@@ -1083,9 +1079,9 @@
     "description": "administration/roles/RolesList.tsx",
     "message": "Assigned users count"
   },
-  "Atlassian server URL": {
+  "Atlassian API server URL": {
     "description": "SettingsDescription.ts",
-    "message": "Atlassian server URL"
+    "message": "Atlassian API server URL"
   },
   "Atlassian settings": {
     "description": "SettingsDescription.ts",
@@ -6740,7 +6736,7 @@
     "message": "Plan unit"
   },
   "Plan": {
-    "description": "marketplace/deploy/steps/FormPlanStep.tsx, marketplace/deploy/steps/constants.ts, marketplace/details/OfferingResourcesList.tsx, marketplace/details/plan/PlanSection.tsx, marketplace/offerings/PriceList.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/details/PlanDetailsField.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/list/ExpandableResourceSummary.tsx, marketplace/resources/list/PublicResourcesList.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx, proposals/update/offerings/CallOfferingExpandableRow.tsx, reporting/plan-usage/PlanUsageDialog.tsx, reporting/plan-usage/PlanUsageList.tsx",
+    "description": "marketplace/deploy/steps/FormPlanStep.tsx, marketplace/deploy/steps/constants.ts, marketplace/details/OfferingResourcesList.tsx, marketplace/details/plan/PlanSection.tsx, marketplace/offerings/PriceList.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/details/PlanDetailsField.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/list/PublicResourcesList.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx, proposals/update/offerings/CallOfferingExpandableRow.tsx, reporting/plan-usage/PlanUsageDialog.tsx, reporting/plan-usage/PlanUsageList.tsx",
     "message": "Plan"
   },
   "Planned quota usage: {usage}": {
@@ -7132,7 +7128,7 @@
     "message": "Project end date is {date}"
   },
   "Project end date": {
-    "description": "events/ExpandableEventDetailsTable.tsx, marketplace/resources/details/EndDateField.tsx",
+    "description": "events/ExpandableEventDetailsTable.tsx, marketplace/resources/details/EndDateField.tsx, marketplace/resources/list/ResourcesAllListTable.tsx",
     "message": "Project end date"
   },
   "Project estimated current cost": {
@@ -9936,7 +9932,7 @@
     "message": "Terminating"
   },
   "Termination date": {
-    "description": "marketplace/deploy/steps/TerminationDateField.tsx, marketplace/resources/actions/EditResourceEndDateDialog.tsx, marketplace/resources/details/EndDateField.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ExpandableResourceSummary.tsx, resource/summary/ResourceSummaryBase.tsx",
+    "description": "marketplace/deploy/steps/TerminationDateField.tsx, marketplace/resources/actions/EditResourceEndDateDialog.tsx, marketplace/resources/details/EndDateField.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, resource/summary/ResourceSummaryBase.tsx",
     "message": "Termination date"
   },
   "Termination date: {date}": {
@@ -10536,7 +10532,7 @@
     "message": "URL"
   },
   "UUID": {
-    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ExpandableResourceSummary.tsx, proposals/proposal/UserProposalsList.tsx, proposals/review/CustomerReviewsList.tsx, proposals/review/UserReviewsList.tsx, resource/summary/ResourceMetadataDialog.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/support/UserList.tsx",
+    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, proposals/proposal/UserProposalsList.tsx, proposals/review/CustomerReviewsList.tsx, proposals/review/UserReviewsList.tsx, resource/summary/ResourceMetadataDialog.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/support/UserList.tsx",
     "message": "UUID"
   },
   "Unable to accept booking.": {
@@ -12682,6 +12678,10 @@
   "Your session has expired, please enter credentials to continue.": {
     "description": "auth/AuthHeader.tsx",
     "message": "Your session has expired, please enter credentials to continue."
+  },
+  "Zammad API server URL. For example <http://localhost:8080/>": {
+    "description": "SettingsDescription.ts",
+    "message": "Zammad API server URL. For example <http://localhost:8080/>"
   },
   "Zammad group": {
     "description": "administration/service-desk/ZammadSettings.tsx",

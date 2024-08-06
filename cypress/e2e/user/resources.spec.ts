@@ -26,12 +26,5 @@ describe('Resources in personal space', () => {
 
     cy.get('.card-table .card-body tbody tr').should('have.length', 3);
 
-    cy.fixture('marketplace/resources.json').then((resources) => {
-      const firstResource = resources.at(0);
-      cy.get('.card-table .card-body tbody tr.expanded')
-        .next()
-        .contains(firstResource.uuid)
-        .should('be.visible');
-    });
   });
 });

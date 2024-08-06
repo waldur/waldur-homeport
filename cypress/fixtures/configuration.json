@@ -34,7 +34,9 @@
     "IDENTITY_PROVIDER_LABEL": null,
     "IDENTITY_PROVIDER_URL": null
   },
-  "WALDUR_MARKETPLACE": {},
+  "WALDUR_MARKETPLACE": {
+    "ENABLE_RESOURCE_END_DATE": true
+  },
   "WALDUR_FREEIPA": {
     "ENABLED": true,
     "USERNAME_PREFIX": "waldur_"
