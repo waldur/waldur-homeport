@@ -53,7 +53,6 @@ export const ProviderOfferingsList = (props) => {
       {...tableProps}
       initialMode={props.initialMode}
       columns={columns}
-      standalone
       title={translate('Offerings')}
       gridSize={{ lg: 6, xl: 4 }}
       gridItem={({ row }) => <OfferingCard offering={row} />}
@@ -63,7 +62,7 @@ export const ProviderOfferingsList = (props) => {
 
 export const ProviderDashboardTab = (props) => {
   return (
-    <div className="container-fluid mt-20 mb-10">
+    <div className="mb-10">
       <Card>
         <Card.Body>
           <ProviderOfferingsList
