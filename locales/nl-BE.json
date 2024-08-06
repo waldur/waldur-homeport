@@ -1,774 +1,2300 @@
 {
-  "1 - Very negative": "1 - Zeer negatief",
-  "10 - Very positive": "10 - Zeer positief",
-  "<Link>Terms of Service</Link> have been accepted on <Date></Date>": "<Link>Servicevoorwaarden</Link> werden geaccepteerd op <Date></Date>",
-  "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM.": "Een minimale verwachte configuratie om te werken is 4 vCPU en 4 GB RAM.",
-  "A one-time fee applied on activation.": "Een eenmalige vergoeding bij activering.",
-  "A profile has been created.": "Er is een profiel aangemaakt.",
-  "API secret code:": "API geheime code:",
-  "API token": "API-token",
-  "Abbreviation": "Afkorting",
-  "About": "Over",
-  "Accept": "Accepteren",
-  "Accept invitation": "Uitnodiging accepteren",
-  "Accepted": "Geaccepteerd",
-  "Access": "Toegang",
-  "Access policies": "Toegangsbeleid",
-  "Access policy has been updated successfully.": "Het toegangsbeleid is met succes bijgewerkt.",
-  "Access subnets": "Toegang tot subnetten",
-  "Account removal": "Account verwijderen",
-  "Accounting": "Boekhouding",
-  "Accounting period": "Boekhoudperiode",
-  "Accounting plans": "Boekhoudkundige plannen",
-  "Accounting record": "Boekhoudkundige gegevens",
-  "Accounting running": "Boekhouding wordt uitgevoerd",
-  "Accounting start date": "Begindatum boekhouding",
-  "Accounting type": "Soort boekhouding",
-  "Action": "Actie",
-  "Action has been applied.": "Actie is toegepast.",
-  "Actions": "Acties",
-  "Activate": "Activeer",
-  "Activating": "Wordt geactiveerd",
-  "Active": "Actief",
-  "Active clients": "Actieve klanten",
-  "Active count": "Actief aantal",
-  "Active user will be able to login into the portal.": "Actieve gebruiker zal in staat zijn om in te loggen op het portaal.",
-  "Add": "Toevoegen",
-  "Add Waldur user SSH keys to the FreeIPA profile": "Waldur-gebruiker SSH-sleutels toevoegen aan het FreeIPA-profiel",
-  "Add address": "Adres toevoegen",
-  "Add comment": "Reactie toevoegen",
-  "Add component": "Component toevoegen",
-  "Add data volume": "Volume gegevens toevoegen",
-  "Add group": "Groep toevoegen",
-  "Add image": "Afbeelding toevoegen",
-  "Add key": "Sleutel toevoegen",
-  "Add member": "Lid toevoegen",
-  "Add new offering": "Nieuw aanbod toevoegen",
-  "Add notification": "Melding toevoegen",
-  "Add offering": "Aanbod toevoegen",
-  "Add organization": "Organisatie toevoegen",
-  "Add pair": "Paar toevoegen",
-  "Add payment": "Betaling toevoegen",
-  "Add payment profile": "Betalingsprofiel toevoegen",
-  "Add plan": "Plan toevoegen",
-  "Add project": "Project toevoegen",
-  "Add resource": "Bron toevoegen",
-  "Add route": "Voeg route toe",
-  "Add rule": "Regel toevoegen",
-  "Add to a new namespace": "Toevoegen aan een nieuwe naamruimte",
-  "Add user": "Gebruiker toevoegen",
-  "Additional space to apply to storage quota to be used by snapshots.": "Extra ruimte toepassen op opslagquota om te worden gebruikt door momentopnamen.",
-  "Additionally service provider can charge for usage of the following components": "Bovendien kan de serviceprovider kosten in rekening brengen voor het gebruik van de volgende onderdelen",
-  "Address": "Adres",
-  "Admin password": "Beheerderswachtwoord",
-  "Admin username": "Admin gebruikersnaam",
-  "Administration": "Administratie",
-  "Advanced options": "Geavanceerde opties",
-  "Affected resource": "Getroffen bron",
-  "Affiliations": "Affiliaties",
-  "Affinity": "Affiniteit",
-  "After secret API code has been regenerated, it will not be possible to submit usage with the old key.": "Nadat de geheime API-code is geregenereerd, is het niet mogelijk om het gebruik met de oude sleutel in te dienen.",
-  "Agree and proceed": "Ga akkoord en ga verder",
-  "Agreement number": "Nummer overeenkomst",
-  "Alert": "Alarm",
-  "All": "allemaal",
-  "All ports": "Alle poorten",
-  "All resources have been imported.": "Alle bronnen werden geïmporteerd.",
-  "Allocation name": "Naam toewijzing",
-  "Allocation pools": "Toewijzing pools",
-  "Allow bookings to be scheduled at weekends": "Sta toe dat boekingen in het weekend worden gepland",
-  "Allow to enable/disable component only": "Alleen toelating om component in/uit te schakelen",
-  "Allowed address pairs": "Toegestane adresparen",
-  "Allowed address pairs update was scheduled.": "Update voor toegestane adresparen werd gepland.",
-  "Amount": "Aantal",
-  "An error has occurred.": "Er is een fout opgetreden",
-  "An error occurred on project removal.": "Er is een fout opgetreden bij het verwijderen van projecten.",
-  "Annotations": "Aantekeningen",
-  "Anonymized": "Geanonimiseerd",
-  "Answer": "Antwoord",
-  "Answers": "Antwoorden",
-  "Answers have been submitted": "Antwoorden werden ingediend",
-  "Any": "Enig",
-  "Application configuration": "Applicatieconfiguratie",
-  "Application details": "Applicatiedetails",
-  "Application has been created.": "Applicatie werd gecreëerd.",
-  "Application templates": "Applicatie-sjablonen",
-  "Apply": "Toepassen",
-  "Approve": "Fiatteren",
-  "Approve payment": "Betaling goedkeuren",
-  "Approved": "Goedgekeurd",
-  "Approved at": "Goedgekeurd op",
-  "Approved by": "Goedgekeurd door",
-  "Archive": "Archief",
-  "Archived": "Gearchiveerde",
-  "Are you sure you want to delete the image?": "Weet u zeker dat u de afbeelding wilt verwijderen?",
-  "Are you sure you want to delete the payment profile?": "Weet u zeker dat u het betalingsprofiel wilt verwijderen?",
-  "Are you sure you want to delete the payment?": "Weet u zeker dat u de betaling wilt verwijderen?",
-  "Are you sure you want to revoke this permission?": "Weet u zeker dat u deze toestemming wilt intrekken?",
-  "Are you sure you want to select template? Note this will reset the node plan.": "Weet u zeker dat u een sjabloon wilt selecteren? Houd er rekening mee dat dit het knooppuntenplan opnieuw zal instellen.",
-  "Are you sure you would like to delete the hook?": "Weet u zeker dat u de haak wilt verwijderen?",
-  "Are you sure you would like to delete the key?": "Weet u zeker dat u de sleutel wilt verwijderen?",
-  "Article code": "Artikelcode",
-  "Ask a question": "Stel een vraag",
-  "Assigned to": "Toegewezen aan",
-  "Attach": "Toevoegen",
-  "Attach OpenStack Volume to Instance": "Voeg OpenStack Volume toe aan instantie",
-  "Attach has been scheduled.": "Toevoegen werd gepland",
-  "Attach volume": "Volume toevoegen",
-  "Attached": "Gehecht",
-  "Attached to": "Toegevoegd aan",
-  "Attaching": "Toevoegen",
-  "Attachment is broken.": "Toevoeging is verbroken",
-  "Attachments": "Bijlagen",
-  "Attribute": "Kenmerk",
-  "Attributes": "Attributen",
-  "Audit log": "Audit logboek",
-  "Audit logs": "Audit logboeken",
-  "Authenticate using Mobile ID": "Authenticeren met mobiele id",
-  "Authentication events": "Authenticatie events",
-  "Authentication token": "Authenticatie token",
-  "Authentication with Mobile ID has been canceled by user or timed out. Details:": "Verificatie met mobiele id is geannuleerd door de gebruiker of er is een time-out opgetreden. Details:",
-  "Author": "Auteur",
-  "Auto apply": "Automatisch toepassen",
-  "Auto approve in service provider projects": "Automatisch goedkeuren in projecten van serviceproviders",
-  "Auto-assign floating IP": "Automatisch zwevend IP-adres toewijzen",
-  "Auto-generated": "Automatisch gegenereerd",
-  "Availability": "Beschikbaarheid",
-  "Availability zone": "Beschikbaarheidszone",
-  "Average utilization": "Gemiddeld gebruik",
-  "Average value": "Gemiddelde waarde",
-  "Azure Active Directory Application Secret": "Azure actieve directory applicatie geheim",
-  "Azure Virtual Machine": "Azure virtuele machine",
-  "Back": "Terug",
-  "Back to login": "Terug naar inloggen",
-  "Backend ID has been successfully set.": "Backend ID werd met succes ingesteld.",
-  "Backend health status": "Status van de backend",
-  "Backing up": "Back-ups maken",
-  "Bank account": "Bankrekening",
-  "Bank name": "Naam bank",
-  "Base image name": "Naam base-afbeelding",
-  "Batch script file": "Batch-scriptbestand",
-  "Billing": "Facturering",
-  "Billing period": "Facturatieperiode",
-  "Billing periods": "Factureringstermijnen",
-  "Billing type": "Type facturering",
-  "Booking": "Boeking",
-  "Booking has been accepted.": "Boeking is geaccepteerd.",
-  "Booking has been cancelled.": "Boeking is geannuleerd.",
-  "Bookings": "Boekingen",
-  "Bootable": "Opstartbaar",
-  "Branch": "Vestiging",
-  "Broadcast": "Uitzending",
-  "Browse": "Bladeren",
-  "Bulk upload": "Bulksgewijs uploaden",
-  "Business hours": "Openingstijden",
-  "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.": "Door te authenticeren gaat u akkoord met de <tos>Servicevoorwaarden</tos> en <pp>het Privacybeleid</pp>.",
-  "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed.": "Door de levensduur van het token in te stellen op onbepaalde tijd staat u iedereen die het token heeft toe om uw acties na te doen totdat het token is gewijzigd.",
-  "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.": "Door het formulier in te dienen, gaat u akkoord met <tos>de Servicevoorwaarden</tos> en <pp>het Privacybeleid</pp>.",
-  "CPU limit (hours)": "CPU-limiet (uren)",
-  "CPU usage": "CPU-gebruik",
-  "Calendar": "Kalender",
-  "Call": "Roepen",
-  "Caller": "Beller",
-  "Calls": "Oproepen",
-  "Campaign name": "Naam campagne",
-  "Campaigns": "Campagnes",
-  "Cancel": "Annuleer",
-  "Cancel invitation": "Uitnodiging annuleren",
-  "Cancel order": "Bestelling annuleren",
-  "Cancel payment": "Betaling annuleren",
-  "Cancel request": "Verzoek annuleren",
-  "Canceled": "Geannuleerd",
-  "Cannot create floating IP if tenant external network is not defined.": "Kan zwevende IP niet maken als extern netwerk van de huurder niet is gedefinieerd.",
-  "Capacity": "Capaciteit",
-  "Catalog": "Catalogus",
-  "Catalog URL": "Catalogus URL",
-  "Catalog has been created.": "Catalogus is gemaakt.",
-  "Catalog has been deleted.": "Catalogus is verwijderd.",
-  "Catalogues": "Catalogi",
-  "Categories": "Categorieën",
-  "Category": "categorie",
-  "Category name": "Naam categorie",
-  "Challenge code": "Uitdaging code",
-  "Change": "Wijzig",
-  "Change Request": "Aanvraag wijziging",
-  "Change flavor": "Smaak wijzigen",
-  "Change limits": "Limieten wijzigen",
-  "Change plan": "Plan wijzigen",
-  "Change request - client’s request to perform a generic modification of data or service.": "Verzoek wijzigen - verzoek van de klant om een algemene wijziging van gegevens of service uit te voeren.",
-  "Change resource limits": "Beperkingen voor bronnen wijzigen",
-  "Change resource plan": "Plan voor bron wijzigen",
-  "Change user email": "E-mail van gebruiker wijzigen",
-  "Changing flavor": "Veranderende smaak",
-  "Changing password": "Wachtwoord wijzigen",
-  "Check name": "Check naam",
-  "Checklists": "Controlelijsten",
-  "Choices as comma-separated list": "Keuzes als door komma's gescheiden lijst",
-  "Civil number": "Burgerlijk nummer",
-  "Click to see Google Calendar": "Klik om Google Agenda te bekijken",
-  "Client ID": "Client id",
-  "Client organization": "Client organisatie",
-  "Clone": "Kloon",
-  "Close": "Sluit",
-  "Closed": "Gesloten",
-  "Cloud": "WOLK",
-  "Cloud block storage size": "Grootte van cloudblok-opslag",
-  "Cloud init template": "Cloud init sjabloon",
-  "Cluster name": "Cluster naam",
-  "Cluster roles": "Cluster-rollen",
-  "Code is too short.": "Code is te kort.",
-  "Code should consist of latin symbols, numbers, dashes and underscores.": "Code moet bestaan uit Latijnse symbolen, cijfers, streepjes en onderstrepingstekens.",
-  "Collation": "Sortering",
-  "Comment": "Commentaar",
-  "Comments": "Opmerkingen",
-  "Compensation has been created.": "Compensatie is gecreëerd.",
-  "Competence": "Bekwaamheid",
-  "Completed": "Volbracht",
-  "Compliance": "Naleving",
-  "Component": "Bestanddeel",
-  "Component name": "Naam component",
-  "Components": "Componenten",
-  "Compute": "Berekenen",
-  "Compute generation": "Berekeningsgeneratie",
-  "Configuration": "Configuratie",
-  "Configuration options": "Configuratie-opties",
-  "Configure": "Configureren",
-  "Confirm deletion?": "Verwijdering bevestigen?",
-  "Confirmation": "Bevestiging",
-  "Confirmation notification template": "Template voor bevestigingskennisgeving",
-  "Confirming that data is correct": "Bevestigen dat de gegevens correct zijn",
-  "Connect subnet": "Subnet verbinden",
-  "Connected subnets": "Verbonden subnetten",
-  "Connection details": "Verbindingsdetails",
-  "Contact details": "Contactgegevens",
-  "Contact email": "Contact e-mail",
-  "Contact phone": "Contact telefoon",
-  "Content": "Tevreden",
-  "Continue": "Ga verder",
-  "Contract sum": "Contract som",
-  "Control plane": "Controlevliegtuig",
-  "Copy": "Kopieer",
-  "Copy to clipboard": "Naar klembord kopiëren",
-  "Cost": "Gebruikskosten",
-  "Could not create organization": "Kon organisatie niet creëren",
-  "Country": "Land",
-  "Create": "Scheppen",
-  "Create Network adapter": "Creëer netwerkadaptor",
-  "Create VM snapshot for OpenStack instance": "Creëer VM momentopname voor OpenStack-instantie",
-  "Create VM snapshot schedule for OpenStack instance": "Creëer VM momentopnameschema voor OpenStack-instantie",
-  "Create a broadcast": "Creëer een uitzending",
-  "Create application": "Toepassing maken",
-  "Create catalog": "Creëer catalogus",
-  "Create compensation": "Creëer compensatie",
-  "Create disk": "Creëer schijf",
-  "Create group invitation": "Creëer groepsuitnodiging",
-  "Create horizontal pod autoscaler": "Creëer horizontale pod-autoscaler",
-  "Create message": "Bericht aanmaken",
-  "Create network for OpenStack tenant": "Creëer netwerk voor OpenStack-huurder",
-  "Create node": "Creëer knooppunt",
-  "Create notification": "Creëer notificatie",
-  "Create offering user": "Creëer aanbiedend gebruiker",
-  "Create organization": "Creëer organisatie",
-  "Create port": "Creëer poort",
-  "Create project": "Creëer project",
-  "Create request": "Creëer aanvraag",
-  "Create snapshot for OpenStack volume": "Creëer momentopname voor OpenStack-volume",
-  "Create snapshot schedule for OpenStack volume": "Creëer snapshot-schema voor OpenStack-volume",
-  "Create subnet": "Creëer subnet",
-  "Created": "Geschapen",
-  "Created at": "Gemaakt op",
-  "Created by": "Gemaakt door",
-  "Creating": "Creëren",
-  "Creating a backup schedule": "Een back-upschema creëren",
-  "Creating a floating IP": "Creëer een zwevend IP-adres",
-  "Creating a new network": "Creëer een nieuw netwerk",
-  "Creating a security group": "Creëer een beveiligingsgroep",
-  "Creating a subnet": "Creëer een subnet",
-  "Creating snapshot schedule": "Creëer momentopnameschema",
-  "Creation": "Creatie",
-  "Credentials": "Referenties",
-  "Current email": "Huidige e-mail",
-  "Current flavor": "Huidige smaak",
-  "Current limit": "Huidige limiet",
-  "Current plan": "Huidig plan",
-  "Current price": "Huidige prijs",
-  "Current replicas": "Huidige replica's",
-  "Current size": "Huidige grootte",
-  "Current type": "Huidig type",
-  "Custom scripts": "Aangepaste scripts",
-  "Customer": "Klant",
-  "Customer support satisfaction overall rating": "Klantenservicevredenheid algemene beoordeling",
-  "Customers": "Klanten",
-  "DNS name servers": "DNS-naamservers",
-  "Daily available booking time range": "Dagelijks beschikbare boekingsperiode",
-  "Dark theme": "Donker thema",
-  "Data volume size": "Grootte van het gegevensvolume",
-  "Data volume type": "Type gegevensvolume",
-  "Date": "Datum",
-  "Date and time when item usage has ended": "Datum en tijd waarop het itemgebruik is beëindigd",
-  "Date and time when item usage has started": "Datum en tijd waarop het itemgebruik is begonnen",
-  "Date joined": "Datum samengevoegd",
-  "Date of reporting": "Datum van rapportage",
-  "Days": "Dagen",
-  "Deactivate": "Deactiveren",
-  "Deactivating": "Deactiveren",
-  "Default SLURM account for user": "Standaard SLURM-account voor gebruiker",
-  "Default account": "Standaard rekening",
-  "Default availability zone for provisioned instances.": "Standaardbeschikbaarheidszone voor ingerichte instanties.",
-  "Default cluster label": "Standaard clusterlabel",
-  "Default tax percent": "Standaard takspercentage",
-  "Default value": "Standaardwaarde",
-  "Delete": "verwijderen",
-  "Delete account": "Account verwijderen",
-  "Delete catalog": "Verwijder catalogus",
-  "Delete project": "Project verwijderen",
-  "Delete volumes": "Verwijder volumes",
-  "Deleting PostgreSQL server will cause deletion of all databases created within server.": "Verwijderen van de PostgreSQL-server zal databases die binnen de server werden gemaakt werwijderen.",
-  "Deny": "Ontkennen",
-  "Deploy Longhorn block storage after cluster is deployed": "Longhorn-blokopslag implementeren nadat cluster is geïmplementeerd",
-  "Description": "Beschrijving",
-  "Desired replicas": "Gewenste replica's",
-  "Destination": "Reisdoel",
-  "Destination (CIDR)": "Bestemming (CIDR)",
-  "Destination URL": "Bestemmings-URL",
-  "Destination port": "Bestemmingspoort",
-  "Destroy": "Vernietigen",
-  "Destroy resource": "Bron vernietigen",
-  "Destroying": "Vernietigen",
-  "Detach": "Losmaken",
-  "Detaching": "Losmaken",
-  "Details": "Bijzonderheden",
-  "Device": "Apparaat",
-  "Device ID": "Apparaat-ID",
-  "Device owner": "Eigenaar van apparaat",
-  "Direction": "Richting",
-  "Disable": "Uitschakelen",
-  "Disable gateway IP advertising via DHCP": "IP-reclame voor gateway uitschakelen via DHCP",
-  "Disabled": "Invalide",
-  "Discard": "Afdanken",
-  "Disconnect subnet": "Verbinding met subnet verbreken",
-  "Discount": "Korting",
-  "Disk extension has been scheduled.": "De schijfextensie is gepland.",
-  "Disk has been created.": "Schijf is gecreëerd..",
-  "Disks": "Schijven",
-  "Display name": "Weergavenaam",
-  "Do not configure a gateway for this subnet": "Configureer geen gateway voor dit subnet",
-  "Do you really want to delete comment?": "Wilt u echt commentaar verwijderen?",
-  "Do you want to submit permission request?": "Wilt u een toestemmingsverzoek indienen?",
-  "Docker version": "Docker-versie",
-  "Documentation": "Documentatie",
-  "Documents": " Documenten",
-  "Domain": "Domein",
-  "Domain name": "Domeinnaam",
-  "Domain name. If not defined default domain will be used.": "Domeinnaam. Indien niet gedefinieerd zal standaarddomein worden gebruikt.",
-  "Done": "KLAAR",
-  "Download full price list": "Download de volledige prijslijst",
-  "Draft": "Concept",
-  "Drop files to attach them to the issue.": "Zet bestanden neer om ze bij het probleem te voegen.",
-  "Drop files to attach, or": "Bestanden neerzetten om bij te voegen, of",
-  "Due date": "Vervaldatum",
-  "Duration": "Duur",
-  "Dynamic — use separate volume types for tracking pricing": "Dynamisch — gebruik afzonderlijke volumetypen voor het bijhouden van prijzen",
-  "Each mount point should be used once at most.": "Elk koppelpunt moet maximaal één keer worden gebruikt.",
-  "Each usage report must be connected with a billing plan to assure correct calculation of accounting data.": "Elk gebruiksrapport moet gekoppeld zijn aan een factureringsplan om een correcte berekening van de boekhoudgegevens te garanderen.",
-  "Edit": "Bewerk",
-  "Edit YAML": "Bewerk YAML",
-  "Edit item": "Item bewerken",
-  "Edit permissions": "Bewerk machtigingen",
-  "Edit profile": "Profiel bewerken",
-  "Edit project member": "Bewerk projectlid",
-  "Edit request": "Bewerk aanvraag",
-  "Effective ID": "Effectieve ID",
-  "Egress": "Uitgang",
-  "Email": "E-mail",
-  "Email address": "E-mailadres",
-  "Email change request has been cancelled.": "Aanvraag voor het wijzigen van e-mail is geannuleerd.",
-  "Email has been updated.": "E-mail is bijgewerkt.",
-  "Email verification has been sent. Please check your inbox.": "Verificatie per e-mail is verzonden. Controleer uw inbox.",
-  "Enable": "Inschakelen",
-  "Enable DHCP": "DHCP inschakelen",
-  "Enable by default": "Standaard inschakelen",
-  "Enable limit": "Limiet inschakelen",
-  "Enable profile after creation": "Profiel inschakelen na creatie",
-  "Enabled": "INGESCHAKELD",
-  "Enabled checklists have been updated.": "Ingeschakelde controlelijsten zijn bijgewerkt.",
-  "Enabled default gateway": "Standaard gateway ingeschakeld",
-  "Encountered an empty component": "Er is een lege component aangetroffen",
-  "End": "Beëindig",
-  "End date": "eind datum",
-  "End time": "Eindtijd",
-  "Ensure this field has no more than 30 characters.": "Zorg ervoor dat dit veld niet meer dan 30 tekens bevat.",
-  "Enter IPv4 address.": "Voer IPv4-adres in.",
-  "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.": "Voer een enkele poort (22) of een poortbereik (5000-6000) in of laat gewoon leeg voor alle poorten.",
-  "Enter address...": "Voer adres in...",
-  "Enter private IPv4 CIDR.": "Voer privé IPv4 CIDR in.",
-  "Erred": "Foutief",
-  "Error message": "Foutmelding",
-  "Error traceback": "Fout bij traceback",
-  "Esimated price per month": "Geschatte prijs per maand",
-  "Estimate": "Schatten",
-  "Estimated cost": "Geschatte kosten",
-  "Ethernet type": "Ethernet-type",
-  "Evaluation": "Evaluatie",
-  "Event type": "Event-type",
-  "Event types": "Event-types",
-  "Events": "Gebeurtenissen",
-  "Every": "Alle",
-  "Every day": "Elke dag",
-  "Every day at": "Elke dag om",
-  "Every hour": "Elk uur",
-  "Every minute": "Elke minuut",
-  "Every month": "Elke maand",
-  "Every month service provider can report up to the amount requested by user.": "Elke maand kan serviceprovider rapporteren tot het door de gebruiker gevraagde bedrag.",
-  "Every week": "Elke week",
-  "Every year": "Elk jaar",
-  "Every year service provider can report up to the amount requested by user.": "Elk jaar kan de serviceprovider tot het door de gebruiker gevraagde bedrag rapporteren.",
-  "Executing": "Uitvoeren",
-  "Expiration time": "Vervaltijd",
-  "Expired": "Vervallen",
-  "Expires at": "Vervalt op",
-  "Export": "Exporteren",
-  "Export as": "Exporteren als",
-  "Extend": "Uitbreiden",
-  "Extend OpenStack volume": "OpenStack-volume uitbreiden",
-  "Extend disk": "Schijf uitbreiden",
-  "Extending": "Uitbreiden",
-  "External IP": "Extern IP",
-  "External links": "Externe links",
-  "External network ID": "Extern netwerk-ID",
-  "Facility": "Faciliteit",
-  "Failed to operate with backend.": "Kan niet werken met backend.",
-  "Favourites": "Favorieten",
-  "Features": "Functies",
-  "Features have been updated.": "De functies zijn bijgewerkt.",
-  "Fee applied according to the maximum value reported by service provider over the whole active state of resource.": "Vergoeding toegepast op basis van de maximale waarde die door de dienstverlener wordt gerapporteerd over de gehele actieve staat van de bron.",
-  "Fee applied each time this plan is activated.": "Kost die wordt toegepast telkens wanneer dit plan wordt geactiveerd.",
-  "Feedback": "Terugkoppeling",
-  "Field": "Veld",
-  "File": "Bestand",
-  "Files": "archief",
-  "Filtered by": "Gefilterd op",
-  "Find solution": "Oplossing zoeken",
-  "Fingerprint": "Vingerafdruk",
-  "First": "Eerste",
-  "First name": "Voornaam",
-  "Fixed IPs": "Vaste IP's",
-  "Fixed price": "Vaste prijs",
-  "Fixed — use common storage quota": "Opgelost — gemeenschappelijk opslagquotum gebruiken",
-  "Fixed-price contract": "Contract met vaste prijs",
-  "Flavor": "Smaak",
-  "Flavor change has been scheduled.": "Smaakverandering is gepland.",
-  "Flavor exclude regex": "Smaak exclusief regex",
-  "Flavor name": "Naam smaak",
-  "Flavors": "Smaken",
-  "Flavors matching this regex expression will not be pulled from the backend.": "Smaken die overeenkomen met deze regex-expressie zullen niet uit de backend worden getrokken.",
-  "Flavors regex": "Smaken regex",
-  "Floating IP count": "Floating IP-telling",
-  "Floating IPs update has been scheduled.": "Floating IPs update is gepland.",
-  "Folder": "Map",
-  "For": "Voor",
-  "Force destroy": "Forceer vernietigen",
-  "Format": "Formatteren",
-  "Free": "Vrij",
-  "FreeIPA": "Gratis IPA",
-  "FreeIPA account": "Gratis IPA-rekening",
-  "FreeIPA extension is disabled.": "Gratis IPA-extensie is uitgeschakeld.",
-  "From": "Uit",
-  "From date": "vanaf datum",
-  "Full description": "Volledige beschrijving",
-  "Full name": "Volledige naam",
-  "GPU limit (hours)": "GPU-limiet (uren)",
-  "GPU usage": "GPU-gebruik",
-  "GUID is expected.": "GUID wordt verwacht.",
-  "Gateway IP of this subnet": "Gateway-IP van dit subnet",
-  "General": "Algemeen",
-  "Generate Kubeconfig file": "Kubeconfig bestand genereren",
-  "Generate password": "Wachtwoord genereren",
-  "Getting started": "Slag",
-  "Go back": "Terug",
-  "Go to marketplace": "Ga naar Marketplace",
-  "Go to profile": "Ga naar profiel",
-  "Google Calendar has been published successfully.": "Google Agenda werd succesvol gepubliceerd.",
-  "Google Calendar has been synced successfully.": "Google Agenda werd succesvol gesynchroniseerd.",
-  "Google Calendar has been unpublished successfully.": "Google Agenda werd met succes ongepubliceerd.",
-  "Grant permission": "Toestemming verlenen",
-  "Group": "Groep",
-  "Group invitation has been cancelled.": "Uitnodiging voor de groep is geannuleerd.",
-  "Group invitations": "Uitnodigingen voor groepen",
-  "Growth": "Groei",
-  "Guaranteed time of VM snapshot retention. If null - keep forever.": "Gegarandeerde tijd van VM-momentopname-retentie. Indien nul - altijd behouden.",
-  "Guaranteed time of snapshot retention. If null - keep forever.": "Gegarandeerde tijd van momentopname-retentie. Indien nul - altijd behouden.",
-  "Guaranteed time of volume snapshot retention. If null - keep forever.": "Gegarandeerde tijd van volume momentopname-retentie. Indien nul - altijd behouden.",
-  "Guest": "Gast",
-  "Guest OS": "Gast OS",
-  "HTML content": "HTML-inhoud",
-  "Hello": "Hallo",
-  "Hide": "Verbergen",
-  "Hide diff": "Verberg diff",
-  "Home organization domain name": "Domeinnaam voor thuisorganisatie",
-  "Hook has been removed.": "Haak werd verwijderd.",
-  "Hook removal": "Haak verwijderen",
-  "Horizontal pod autoscaler has been created.": "Horizontale pod autoscaler is gemaakt.",
-  "Horizontal pod autoscaler has been updated.": "Horizontale pod autoscaler is bijgewerkt.",
-  "Hostname": "Hostnaam",
-  "Hostname or IP address of gateway node": "Hostnaam of IP-adres van gatewayknooppunt",
-  "Hostname or IP address of master node": "Hostnaam of IP-adres van hoofdknooppunt",
-  "Hours": "uren",
-  "I agree": "Ik ben het ermee eens",
-  "ID": "legitimatiebewijs",
-  "ID code": "ID-code",
-  "IP address": "IP-adres",
-  "IP address is already used by router.": "IP-adres is al in gebruik door de router.",
-  "IP protocol": "IP-protocol",
-  "IP version": "IP-versie",
-  "Icon": "Icoon",
-  "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon.": "De opgegeven identiteit is geselecteerd via de SAML2-detectieservice. U wordt weldra doorgestuurd naar de inlogpagina.",
-  "If you want user to provide additional details when ordering, please configure input form for the user below": "Als u wilt dat de gebruiker extra details verstrekt bij het bestellen, configureer dan het invoerformulier voor de gebruiker hieronder",
-  "Image": "Beeld",
-  "Image has been added.": "Afbeelding is toegevoegd.",
-  "Image has been removed.": "Afbeelding is verwijderd.",
-  "Image here": "Afbeelding hier",
-  "Image name": "Naam afbeelding",
-  "Images": "Afbeeldingen",
-  "Import": "Importeren",
-  "Import YAML": "YAML importeren",
-  "Import offering": "Aanbod importeren",
-  "Import resource": "Bron importeren",
-  "Integration": "integratie",
-  "Invoice": "Factuur",
-  "Invoice number": "Factuurnummer",
-  "Issue": "Uitgiftedatum",
-  "Issues": "Kwesties",
-  "Item": "Item ",
-  "Jobs": "Banen",
-  "Key": "sleutel",
-  "Labels": "Etiketten",
-  "Language": "Taal",
-  "Last name": "Achternaam",
-  "Last update": "Laatste update",
-  "Learn more": "Meer informatie",
-  "Limit": "Limiet",
-  "Link": "Verbinden",
-  "Load more": "Meer laden",
-  "Location": "Plaats",
-  "Log out": "Uitloggen",
-  "Login": "Inloggen",
-  "Management": "Beheer",
-  "Member": "Lid",
-  "Members": "leden",
-  "Message": "Bericht",
-  "Metadata": "Metagegevens",
-  "Method": "Methode",
-  "Modified": "Gemodificeerd",
-  "Monthly": "Maandelijks",
-  "Months": "Maanden",
-  "More actions": "Meer acties",
-  "Move": "Bewegen",
-  "N/A": "N.V.T",
-  "Name": "Naam",
-  "Network": "Netwerk",
-  "Networks": "Netwerken",
-  "New email address": "Nieuw e-mailadres",
-  "New price": "Nieuwe prijs",
-  "Next": "Volgend",
-  "No": "NEE",
-  "No access": "Geen toegang",
-  "No end date": "Geen eind datum",
-  "None": "Geen",
-  "Not configured": "niet geconfigureerd",
-  "Not signed in": "Niet aangemeld",
-  "Nothing to see here": "Niets te zien hier",
-  "Notifications": "Meldingen",
-  "OR": "of",
-  "Ok": "OK",
-  "One time": "Eenmaal",
-  "One-time": "Eenmalige",
-  "Open": "Openen",
-  "Optional": "Facultatief",
-  "Order": "Bestelling",
-  "Order history": "Bestelgeschiedenis",
-  "Orders": "Bestellingen",
-  "Organization": "Organisatie",
-  "Organizations": "Organisaties",
-  "Others": "Anderen",
-  "Paid": "uitgekeerd",
-  "Password": "Wachtwoord",
-  "Pause": "PAUZEREN",
-  "Paused": "Gepauzeerd",
-  "Payments": "Betalingen",
-  "Pending": "In behandeling",
-  "Period": "Periode",
-  "Permissions": "Machtigingen",
-  "Person": "Persoon",
-  "Phone": "Telefoon",
-  "Phone number": "Telefoonnummer",
-  "Plans": "Plannen",
-  "Policy": "Beleid",
-  "Postal code": "Postcode",
-  "Preview": "Voorbeeld",
-  "Previous": "Vorig",
-  "Price": "Prijs",
-  "Price per hour": "Prijs per uur",
-  "Pricing": "Prijzen",
-  "Priority": "Voorrang",
-  "Privacy Policy": "Privacy voorwaarden",
-  "Privacy policy": "Privacy voorwaarden",
-  "Profile settings": "Profielinstellingen",
-  "Progress": "Vooruitgang",
-  "Project description": "Beschrijving van het project",
-  "Project details": "Details van het project",
-  "Project name": "Naam van het project",
-  "Projects": "Projecten",
-  "Quantity": "Hoeveelheid",
-  "Question": "Vraag",
-  "Reason": "Reden",
-  "Recipient": "Ontvanger",
-  "Recommended": "Aanbevolen",
-  "Refresh": "Verversen",
-  "Reject": "Afkeuren",
-  "Rejected": "Afgekeurd",
-  "Remaining": "Overig",
-  "Remove": "Verwijderen",
-  "Report": "Rapport",
-  "Reporting": "Berichtgeving",
-  "Request change": "Wijziging aanvragen",
-  "Requested": "Aangevraagd",
-  "Requested by": "Aangevraagd door",
-  "Required": "Vereist",
-  "Resend": "Verzenden",
-  "Reset": "Terugstellen",
-  "Resolved": "Vastbesloten",
-  "Resource": "Hulpbron",
-  "Restart": "Herstarten",
-  "Restore": "Terugzetten",
-  "Restricted": "Beperkt",
-  "Retry": "Opnieuw",
-  "Reviews": "Beoordelingen",
-  "Role": "Rol",
-  "Roles": "Rollen",
-  "Save": "Sla op",
-  "Save as a template": "Opslaan als sjabloon",
-  "Save changes": "Wijzigingen opslaan",
-  "Scale": "Schub",
-  "Schedule": "Rooster",
-  "Scheduled": "Gepland",
-  "Score": "Partituur",
-  "Search": "Zoeken",
-  "Search...": "Zoeken...",
-  "Second": "seconde",
-  "Section": "Afdeling",
-  "See more": "Meer weergeven",
-  "Select": "Selecteren",
-  "Select a date": "Selecteer een datum",
-  "Select status": "Selecteer Status",
-  "Select type": "Selecteer type",
-  "Selected": "Uitverkoren",
-  "Send": "Verzenden",
-  "Send invitation": "Uitnodiging verzenden",
-  "Settings": "Instellingen",
-  "Shared": "Gedeeld",
-  "Show": "Tonen",
-  "Show details": "Toon details",
-  "Show less": "Toon minder",
-  "Show more": "toon meer",
-  "Sign in": "Aanmelden",
-  "Site description": "Site beschrijving",
-  "Site name": "Naam van de site",
-  "Size": "Grootte",
-  "Something went wrong": "Er is iets misgegaan",
-  "Start": "Beginnen",
-  "Start date": "start datum",
-  "Start time": "aanvangstijd",
-  "State": "Staat",
-  "Stop": "Stoppen",
-  "Subject": "Onderwerp",
-  "Submit": "Opslaan",
-  "Submit report": "Rapport indienen",
-  "Subtotal": "Subtotaal",
-  "Success": "Succes",
-  "Sum": "Som",
-  "Summary": "Samenvatting",
-  "Support": "Steunen",
-  "Synchronize": "Synchroniseren",
-  "System volume": "Systeemvolume",
-  "TAX": "Belasting",
-  "TOTAL": "Totaal",
-  "Target": "DOEL",
-  "Tax": "Belasting",
-  "Team members": "Teamleden",
-  "Template": "Sjabloon",
-  "Tenant": "Huurder",
-  "Tenant ID": "Tenant-ID",
-  "Terms of Service": "Service voorwaarden",
-  "Terms of service": "Service voorwaarden",
-  "Then": "dan",
-  "This field is required.": "Dit veld is verplicht.",
-  "Time": "Tijd",
-  "Timestamp": "Tijdstempel",
-  "Title": "Titel",
-  "To": "Naar",
-  "Token": "token",
-  "Total": "Totaal",
-  "Total price": "Totale prijs",
-  "Try again": "Opnieuw proberen",
-  "URL": "Url",
-  "Unconfirmed": "Onbevestigd",
-  "Unknown": "Onbekend",
-  "Unknown error": "Onbekende fout",
-  "Unlimited": "Onbegrensd",
-  "Unlink": "Ontkoppelen",
-  "Usage": "Gebruik",
-  "Used": "gebruikt",
-  "User": "Gebruiker",
-  "User agreements": "Gebruikersovereenkomsten",
-  "User input": "Gebruikersinvoer",
-  "User roles": "Gebruikersrollen",
-  "Username": "Gebruikersnaam",
-  "Users": "Gebruikers",
-  "VAT": "BTW",
-  "Value": "Waarde",
-  "View": "Bekijken",
-  "View all": "Alles weergeven",
-  "Volume": "VOLUME",
-  "Welcome to": "WELKOM BIJ",
-  "When": "Wanneer",
-  "Yes": "Ja",
-  "and": " en ",
-  "application": "Applicatie",
-  "applications": "Applications",
-  "approval": "Goedkeuring",
-  "browse": "Bladeren",
-  "campaigns": "Campagnes",
-  "day": "Dag",
-  "events": "Gebeurtenissen",
-  "hour": "uur",
-  "invoices": "Facturen",
-  "jobs": "Banen",
-  "minute": "minuut",
-  "month": "Maand",
-  "network": "Netwerk",
-  "networks": "Netwerken",
-  "notifications": "Meldingen",
-  "of": "van",
-  "on": "OP",
-  "orders": "Bestellingen",
-  "organizations": "Organisaties",
-  "payments": "Betalingen",
-  "pending": "In behandeling",
-  "plans": "Plannen",
-  "projects": "Projecten",
-  "records": "Archief",
-  "requests": "Verzoeken",
-  "resource": "Hulpbron",
-  "reviews": "Beoordelingen",
-  "roles": "Rollen",
-  "services": "Services",
-  "support": "Steunen",
-  "team members": "Teamleden",
-  "this month": "Deze maand",
-  "tokens": "Tokens",
-  "user agreements": "Gebruikersovereenkomsten",
-  "users": "Gebruikers",
-  "week": "Week",
-  "year": "Jaar"
+  "1 - Very negative": {
+    "message": "1 - Zeer negatief"
+  },
+  "10 - Very positive": {
+    "message": "10 - Zeer positief"
+  },
+  "<Link>Terms of Service</Link> have been accepted on <Date></Date>": {
+    "message": "<Link>Servicevoorwaarden</Link> werden geaccepteerd op <Date></Date>"
+  },
+  "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM.": {
+    "message": "Een minimale verwachte configuratie om te werken is 4 vCPU en 4 GB RAM."
+  },
+  "A one-time fee applied on activation.": {
+    "message": "Een eenmalige vergoeding bij activering."
+  },
+  "A profile has been created.": {
+    "message": "Er is een profiel aangemaakt."
+  },
+  "API secret code:": {
+    "message": "API geheime code:"
+  },
+  "API token": {
+    "message": "API-token"
+  },
+  "Abbreviation": {
+    "message": "Afkorting"
+  },
+  "About": {
+    "message": "Over"
+  },
+  "Accept": {
+    "message": "Accepteren"
+  },
+  "Accept invitation": {
+    "message": "Uitnodiging accepteren"
+  },
+  "Accepted": {
+    "message": "Geaccepteerd"
+  },
+  "Access": {
+    "message": "Toegang"
+  },
+  "Access policies": {
+    "message": "Toegangsbeleid"
+  },
+  "Access policy has been updated successfully.": {
+    "message": "Het toegangsbeleid is met succes bijgewerkt."
+  },
+  "Access subnets": {
+    "message": "Toegang tot subnetten"
+  },
+  "Account removal": {
+    "message": "Account verwijderen"
+  },
+  "Accounting": {
+    "message": "Boekhouding"
+  },
+  "Accounting period": {
+    "message": "Boekhoudperiode"
+  },
+  "Accounting plans": {
+    "message": "Boekhoudkundige plannen"
+  },
+  "Accounting record": {
+    "message": "Boekhoudkundige gegevens"
+  },
+  "Accounting running": {
+    "message": "Boekhouding wordt uitgevoerd"
+  },
+  "Accounting start date": {
+    "message": "Begindatum boekhouding"
+  },
+  "Accounting type": {
+    "message": "Soort boekhouding"
+  },
+  "Action": {
+    "message": "Actie"
+  },
+  "Action has been applied.": {
+    "message": "Actie is toegepast."
+  },
+  "Actions": {
+    "message": "Acties"
+  },
+  "Activate": {
+    "message": "Activeer"
+  },
+  "Activating": {
+    "message": "Wordt geactiveerd"
+  },
+  "Active": {
+    "message": "Actief"
+  },
+  "Active clients": {
+    "message": "Actieve klanten"
+  },
+  "Active count": {
+    "message": "Actief aantal"
+  },
+  "Active user will be able to login into the portal.": {
+    "message": "Actieve gebruiker zal in staat zijn om in te loggen op het portaal."
+  },
+  "Add": {
+    "message": "Toevoegen"
+  },
+  "Add Waldur user SSH keys to the FreeIPA profile": {
+    "message": "Waldur-gebruiker SSH-sleutels toevoegen aan het FreeIPA-profiel"
+  },
+  "Add address": {
+    "message": "Adres toevoegen"
+  },
+  "Add comment": {
+    "message": "Reactie toevoegen"
+  },
+  "Add component": {
+    "message": "Component toevoegen"
+  },
+  "Add data volume": {
+    "message": "Volume gegevens toevoegen"
+  },
+  "Add group": {
+    "message": "Groep toevoegen"
+  },
+  "Add image": {
+    "message": "Afbeelding toevoegen"
+  },
+  "Add key": {
+    "message": "Sleutel toevoegen"
+  },
+  "Add member": {
+    "message": "Lid toevoegen"
+  },
+  "Add new offering": {
+    "message": "Nieuw aanbod toevoegen"
+  },
+  "Add notification": {
+    "message": "Melding toevoegen"
+  },
+  "Add offering": {
+    "message": "Aanbod toevoegen"
+  },
+  "Add organization": {
+    "message": "Organisatie toevoegen"
+  },
+  "Add pair": {
+    "message": "Paar toevoegen"
+  },
+  "Add payment": {
+    "message": "Betaling toevoegen"
+  },
+  "Add payment profile": {
+    "message": "Betalingsprofiel toevoegen"
+  },
+  "Add plan": {
+    "message": "Plan toevoegen"
+  },
+  "Add project": {
+    "message": "Project toevoegen"
+  },
+  "Add resource": {
+    "message": "Bron toevoegen"
+  },
+  "Add route": {
+    "message": "Voeg route toe"
+  },
+  "Add rule": {
+    "message": "Regel toevoegen"
+  },
+  "Add to a new namespace": {
+    "message": "Toevoegen aan een nieuwe naamruimte"
+  },
+  "Add user": {
+    "message": "Gebruiker toevoegen"
+  },
+  "Additional space to apply to storage quota to be used by snapshots.": {
+    "message": "Extra ruimte toepassen op opslagquota om te worden gebruikt door momentopnamen."
+  },
+  "Additionally service provider can charge for usage of the following components": {
+    "message": "Bovendien kan de serviceprovider kosten in rekening brengen voor het gebruik van de volgende onderdelen"
+  },
+  "Address": {
+    "message": "Adres"
+  },
+  "Admin password": {
+    "message": "Beheerderswachtwoord"
+  },
+  "Admin username": {
+    "message": "Admin gebruikersnaam"
+  },
+  "Administration": {
+    "message": "Administratie"
+  },
+  "Advanced options": {
+    "message": "Geavanceerde opties"
+  },
+  "Affected resource": {
+    "message": "Getroffen bron"
+  },
+  "Affiliations": {
+    "message": "Affiliaties"
+  },
+  "Affinity": {
+    "message": "Affiniteit"
+  },
+  "After secret API code has been regenerated, it will not be possible to submit usage with the old key.": {
+    "message": "Nadat de geheime API-code is geregenereerd, is het niet mogelijk om het gebruik met de oude sleutel in te dienen."
+  },
+  "Agree and proceed": {
+    "message": "Ga akkoord en ga verder"
+  },
+  "Agreement number": {
+    "message": "Nummer overeenkomst"
+  },
+  "Alert": {
+    "message": "Alarm"
+  },
+  "All": {
+    "message": "allemaal"
+  },
+  "All ports": {
+    "message": "Alle poorten"
+  },
+  "All resources have been imported.": {
+    "message": "Alle bronnen werden geïmporteerd."
+  },
+  "Allocation name": {
+    "message": "Naam toewijzing"
+  },
+  "Allocation pools": {
+    "message": "Toewijzing pools"
+  },
+  "Allow bookings to be scheduled at weekends": {
+    "message": "Sta toe dat boekingen in het weekend worden gepland"
+  },
+  "Allow to enable/disable component only": {
+    "message": "Alleen toelating om component in/uit te schakelen"
+  },
+  "Allowed address pairs": {
+    "message": "Toegestane adresparen"
+  },
+  "Allowed address pairs update was scheduled.": {
+    "message": "Update voor toegestane adresparen werd gepland."
+  },
+  "Amount": {
+    "message": "Aantal"
+  },
+  "An error has occurred.": {
+    "message": "Er is een fout opgetreden"
+  },
+  "An error occurred on project removal.": {
+    "message": "Er is een fout opgetreden bij het verwijderen van projecten."
+  },
+  "Annotations": {
+    "message": "Aantekeningen"
+  },
+  "Anonymized": {
+    "message": "Geanonimiseerd"
+  },
+  "Answer": {
+    "message": "Antwoord"
+  },
+  "Answers": {
+    "message": "Antwoorden"
+  },
+  "Answers have been submitted": {
+    "message": "Antwoorden werden ingediend"
+  },
+  "Any": {
+    "message": "Enig"
+  },
+  "Application configuration": {
+    "message": "Applicatieconfiguratie"
+  },
+  "Application details": {
+    "message": "Applicatiedetails"
+  },
+  "Application has been created.": {
+    "message": "Applicatie werd gecreëerd."
+  },
+  "Application templates": {
+    "message": "Applicatie-sjablonen"
+  },
+  "Apply": {
+    "message": "Toepassen"
+  },
+  "Approve": {
+    "message": "Fiatteren"
+  },
+  "Approve payment": {
+    "message": "Betaling goedkeuren"
+  },
+  "Approved": {
+    "message": "Goedgekeurd"
+  },
+  "Approved at": {
+    "message": "Goedgekeurd op"
+  },
+  "Approved by": {
+    "message": "Goedgekeurd door"
+  },
+  "Archive": {
+    "message": "Archief"
+  },
+  "Archived": {
+    "message": "Gearchiveerde"
+  },
+  "Are you sure you want to delete the image?": {
+    "message": "Weet u zeker dat u de afbeelding wilt verwijderen?"
+  },
+  "Are you sure you want to delete the payment profile?": {
+    "message": "Weet u zeker dat u het betalingsprofiel wilt verwijderen?"
+  },
+  "Are you sure you want to delete the payment?": {
+    "message": "Weet u zeker dat u de betaling wilt verwijderen?"
+  },
+  "Are you sure you want to revoke this permission?": {
+    "message": "Weet u zeker dat u deze toestemming wilt intrekken?"
+  },
+  "Are you sure you want to select template? Note this will reset the node plan.": {
+    "message": "Weet u zeker dat u een sjabloon wilt selecteren? Houd er rekening mee dat dit het knooppuntenplan opnieuw zal instellen."
+  },
+  "Are you sure you would like to delete the hook?": {
+    "message": "Weet u zeker dat u de haak wilt verwijderen?"
+  },
+  "Are you sure you would like to delete the key?": {
+    "message": "Weet u zeker dat u de sleutel wilt verwijderen?"
+  },
+  "Article code": {
+    "message": "Artikelcode"
+  },
+  "Ask a question": {
+    "message": "Stel een vraag"
+  },
+  "Assigned to": {
+    "message": "Toegewezen aan"
+  },
+  "Attach": {
+    "message": "Toevoegen"
+  },
+  "Attach OpenStack Volume to Instance": {
+    "message": "Voeg OpenStack Volume toe aan instantie"
+  },
+  "Attach has been scheduled.": {
+    "message": "Toevoegen werd gepland"
+  },
+  "Attach volume": {
+    "message": "Volume toevoegen"
+  },
+  "Attached": {
+    "message": "Gehecht"
+  },
+  "Attached to": {
+    "message": "Toegevoegd aan"
+  },
+  "Attaching": {
+    "message": "Toevoegen"
+  },
+  "Attachment is broken.": {
+    "message": "Toevoeging is verbroken"
+  },
+  "Attachments": {
+    "message": "Bijlagen"
+  },
+  "Attribute": {
+    "message": "Kenmerk"
+  },
+  "Attributes": {
+    "message": "Attributen"
+  },
+  "Audit log": {
+    "message": "Audit logboek"
+  },
+  "Audit logs": {
+    "message": "Audit logboeken"
+  },
+  "Authenticate using Mobile ID": {
+    "message": "Authenticeren met mobiele id"
+  },
+  "Authentication events": {
+    "message": "Authenticatie events"
+  },
+  "Authentication token": {
+    "message": "Authenticatie token"
+  },
+  "Authentication with Mobile ID has been canceled by user or timed out. Details:": {
+    "message": "Verificatie met mobiele id is geannuleerd door de gebruiker of er is een time-out opgetreden. Details:"
+  },
+  "Author": {
+    "message": "Auteur"
+  },
+  "Auto apply": {
+    "message": "Automatisch toepassen"
+  },
+  "Auto approve in service provider projects": {
+    "message": "Automatisch goedkeuren in projecten van serviceproviders"
+  },
+  "Auto-assign floating IP": {
+    "message": "Automatisch zwevend IP-adres toewijzen"
+  },
+  "Auto-generated": {
+    "message": "Automatisch gegenereerd"
+  },
+  "Availability": {
+    "message": "Beschikbaarheid"
+  },
+  "Availability zone": {
+    "message": "Beschikbaarheidszone"
+  },
+  "Average utilization": {
+    "message": "Gemiddeld gebruik"
+  },
+  "Average value": {
+    "message": "Gemiddelde waarde"
+  },
+  "Azure Active Directory Application Secret": {
+    "message": "Azure actieve directory applicatie geheim"
+  },
+  "Azure Virtual Machine": {
+    "message": "Azure virtuele machine"
+  },
+  "Back": {
+    "message": "Terug"
+  },
+  "Back to login": {
+    "message": "Terug naar inloggen"
+  },
+  "Backend ID has been successfully set.": {
+    "message": "Backend ID werd met succes ingesteld."
+  },
+  "Backend health status": {
+    "message": "Status van de backend"
+  },
+  "Backing up": {
+    "message": "Back-ups maken"
+  },
+  "Bank account": {
+    "message": "Bankrekening"
+  },
+  "Bank name": {
+    "message": "Naam bank"
+  },
+  "Base image name": {
+    "message": "Naam base-afbeelding"
+  },
+  "Batch script file": {
+    "message": "Batch-scriptbestand"
+  },
+  "Billing": {
+    "message": "Facturering"
+  },
+  "Billing period": {
+    "message": "Facturatieperiode"
+  },
+  "Billing periods": {
+    "message": "Factureringstermijnen"
+  },
+  "Billing type": {
+    "message": "Type facturering"
+  },
+  "Booking": {
+    "message": "Boeking"
+  },
+  "Booking has been accepted.": {
+    "message": "Boeking is geaccepteerd."
+  },
+  "Booking has been cancelled.": {
+    "message": "Boeking is geannuleerd."
+  },
+  "Bookings": {
+    "message": "Boekingen"
+  },
+  "Bootable": {
+    "message": "Opstartbaar"
+  },
+  "Branch": {
+    "message": "Vestiging"
+  },
+  "Broadcast": {
+    "message": "Uitzending"
+  },
+  "Browse": {
+    "message": "Bladeren"
+  },
+  "Bulk upload": {
+    "message": "Bulksgewijs uploaden"
+  },
+  "Business hours": {
+    "message": "Openingstijden"
+  },
+  "By authenticating you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.": {
+    "message": "Door te authenticeren gaat u akkoord met de <tos>Servicevoorwaarden</tos> en <pp>het Privacybeleid</pp>."
+  },
+  "By setting token lifetime to indefinite you are allowing anyone who has the token to impersonate your actions till the token has been changed.": {
+    "message": "Door de levensduur van het token in te stellen op onbepaalde tijd staat u iedereen die het token heeft toe om uw acties na te doen totdat het token is gewijzigd."
+  },
+  "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.": {
+    "message": "Door het formulier in te dienen, gaat u akkoord met <tos>de Servicevoorwaarden</tos> en <pp>het Privacybeleid</pp>."
+  },
+  "CPU limit (hours)": {
+    "message": "CPU-limiet (uren)"
+  },
+  "CPU usage": {
+    "message": "CPU-gebruik"
+  },
+  "Calendar": {
+    "message": "Kalender"
+  },
+  "Call": {
+    "message": "Roepen"
+  },
+  "Caller": {
+    "message": "Beller"
+  },
+  "Calls": {
+    "message": "Oproepen"
+  },
+  "Campaign name": {
+    "message": "Naam campagne"
+  },
+  "Campaigns": {
+    "message": "Campagnes"
+  },
+  "Cancel": {
+    "message": "Annuleer"
+  },
+  "Cancel invitation": {
+    "message": "Uitnodiging annuleren"
+  },
+  "Cancel order": {
+    "message": "Bestelling annuleren"
+  },
+  "Cancel payment": {
+    "message": "Betaling annuleren"
+  },
+  "Cancel request": {
+    "message": "Verzoek annuleren"
+  },
+  "Canceled": {
+    "message": "Geannuleerd"
+  },
+  "Cannot create floating IP if tenant external network is not defined.": {
+    "message": "Kan zwevende IP niet maken als extern netwerk van de huurder niet is gedefinieerd."
+  },
+  "Capacity": {
+    "message": "Capaciteit"
+  },
+  "Catalog": {
+    "message": "Catalogus"
+  },
+  "Catalog URL": {
+    "message": "Catalogus URL"
+  },
+  "Catalog has been created.": {
+    "message": "Catalogus is gemaakt."
+  },
+  "Catalog has been deleted.": {
+    "message": "Catalogus is verwijderd."
+  },
+  "Catalogues": {
+    "message": "Catalogi"
+  },
+  "Categories": {
+    "message": "Categorieën"
+  },
+  "Category": {
+    "message": "categorie"
+  },
+  "Category name": {
+    "message": "Naam categorie"
+  },
+  "Challenge code": {
+    "message": "Uitdaging code"
+  },
+  "Change": {
+    "message": "Wijzig"
+  },
+  "Change Request": {
+    "message": "Aanvraag wijziging"
+  },
+  "Change flavor": {
+    "message": "Smaak wijzigen"
+  },
+  "Change limits": {
+    "message": "Limieten wijzigen"
+  },
+  "Change plan": {
+    "message": "Plan wijzigen"
+  },
+  "Change request - client’s request to perform a generic modification of data or service.": {
+    "message": "Verzoek wijzigen - verzoek van de klant om een algemene wijziging van gegevens of service uit te voeren."
+  },
+  "Change resource limits": {
+    "message": "Beperkingen voor bronnen wijzigen"
+  },
+  "Change resource plan": {
+    "message": "Plan voor bron wijzigen"
+  },
+  "Change user email": {
+    "message": "E-mail van gebruiker wijzigen"
+  },
+  "Changing flavor": {
+    "message": "Veranderende smaak"
+  },
+  "Changing password": {
+    "message": "Wachtwoord wijzigen"
+  },
+  "Check name": {
+    "message": "Check naam"
+  },
+  "Checklists": {
+    "message": "Controlelijsten"
+  },
+  "Choices as comma-separated list": {
+    "message": "Keuzes als door komma's gescheiden lijst"
+  },
+  "Civil number": {
+    "message": "Burgerlijk nummer"
+  },
+  "Click to see Google Calendar": {
+    "message": "Klik om Google Agenda te bekijken"
+  },
+  "Client ID": {
+    "message": "Client id"
+  },
+  "Client organization": {
+    "message": "Client organisatie"
+  },
+  "Clone": {
+    "message": "Kloon"
+  },
+  "Close": {
+    "message": "Sluit"
+  },
+  "Closed": {
+    "message": "Gesloten"
+  },
+  "Cloud": {
+    "message": "WOLK"
+  },
+  "Cloud block storage size": {
+    "message": "Grootte van cloudblok-opslag"
+  },
+  "Cloud init template": {
+    "message": "Cloud init sjabloon"
+  },
+  "Cluster name": {
+    "message": "Cluster naam"
+  },
+  "Cluster roles": {
+    "message": "Cluster-rollen"
+  },
+  "Code is too short.": {
+    "message": "Code is te kort."
+  },
+  "Code should consist of latin symbols, numbers, dashes and underscores.": {
+    "message": "Code moet bestaan uit Latijnse symbolen, cijfers, streepjes en onderstrepingstekens."
+  },
+  "Collation": {
+    "message": "Sortering"
+  },
+  "Comment": {
+    "message": "Commentaar"
+  },
+  "Comments": {
+    "message": "Opmerkingen"
+  },
+  "Compensation has been created.": {
+    "message": "Compensatie is gecreëerd."
+  },
+  "Completed": {
+    "message": "Volbracht"
+  },
+  "Compliance": {
+    "message": "Naleving"
+  },
+  "Component": {
+    "message": "Bestanddeel"
+  },
+  "Component name": {
+    "message": "Naam component"
+  },
+  "Components": {
+    "message": "Componenten"
+  },
+  "Compute": {
+    "message": "Berekenen"
+  },
+  "Compute generation": {
+    "message": "Berekeningsgeneratie"
+  },
+  "Configuration": {
+    "message": "Configuratie"
+  },
+  "Configuration options": {
+    "message": "Configuratie-opties"
+  },
+  "Configure": {
+    "message": "Configureren"
+  },
+  "Confirmation": {
+    "message": "Bevestiging"
+  },
+  "Confirmation notification template": {
+    "message": "Template voor bevestigingskennisgeving"
+  },
+  "Confirming that data is correct": {
+    "message": "Bevestigen dat de gegevens correct zijn"
+  },
+  "Connect subnet": {
+    "message": "Subnet verbinden"
+  },
+  "Connected subnets": {
+    "message": "Verbonden subnetten"
+  },
+  "Connection details": {
+    "message": "Verbindingsdetails"
+  },
+  "Contact details": {
+    "message": "Contactgegevens"
+  },
+  "Contact email": {
+    "message": "Contact e-mail"
+  },
+  "Contact phone": {
+    "message": "Contact telefoon"
+  },
+  "Content": {
+    "message": "Tevreden"
+  },
+  "Continue": {
+    "message": "Ga verder"
+  },
+  "Contract sum": {
+    "message": "Contract som"
+  },
+  "Control plane": {
+    "message": "Controlevliegtuig"
+  },
+  "Copy": {
+    "message": "Kopieer"
+  },
+  "Copy to clipboard": {
+    "message": "Naar klembord kopiëren"
+  },
+  "Cost": {
+    "message": "Gebruikskosten"
+  },
+  "Could not create organization": {
+    "message": "Kon organisatie niet creëren"
+  },
+  "Country": {
+    "message": "Land"
+  },
+  "Create": {
+    "message": "Scheppen"
+  },
+  "Create Network adapter": {
+    "message": "Creëer netwerkadaptor"
+  },
+  "Create VM snapshot for OpenStack instance": {
+    "message": "Creëer VM momentopname voor OpenStack-instantie"
+  },
+  "Create VM snapshot schedule for OpenStack instance": {
+    "message": "Creëer VM momentopnameschema voor OpenStack-instantie"
+  },
+  "Create a broadcast": {
+    "message": "Creëer een uitzending"
+  },
+  "Create application": {
+    "message": "Toepassing maken"
+  },
+  "Create catalog": {
+    "message": "Creëer catalogus"
+  },
+  "Create compensation": {
+    "message": "Creëer compensatie"
+  },
+  "Create disk": {
+    "message": "Creëer schijf"
+  },
+  "Create group invitation": {
+    "message": "Creëer groepsuitnodiging"
+  },
+  "Create horizontal pod autoscaler": {
+    "message": "Creëer horizontale pod-autoscaler"
+  },
+  "Create message": {
+    "message": "Bericht aanmaken"
+  },
+  "Create network for OpenStack tenant": {
+    "message": "Creëer netwerk voor OpenStack-huurder"
+  },
+  "Create node": {
+    "message": "Creëer knooppunt"
+  },
+  "Create notification": {
+    "message": "Creëer notificatie"
+  },
+  "Create offering user": {
+    "message": "Creëer aanbiedend gebruiker"
+  },
+  "Create organization": {
+    "message": "Creëer organisatie"
+  },
+  "Create port": {
+    "message": "Creëer poort"
+  },
+  "Create project": {
+    "message": "Creëer project"
+  },
+  "Create request": {
+    "message": "Creëer aanvraag"
+  },
+  "Create snapshot for OpenStack volume": {
+    "message": "Creëer momentopname voor OpenStack-volume"
+  },
+  "Create snapshot schedule for OpenStack volume": {
+    "message": "Creëer snapshot-schema voor OpenStack-volume"
+  },
+  "Create subnet": {
+    "message": "Creëer subnet"
+  },
+  "Created": {
+    "message": "Geschapen"
+  },
+  "Created at": {
+    "message": "Gemaakt op"
+  },
+  "Created by": {
+    "message": "Gemaakt door"
+  },
+  "Creating": {
+    "message": "Creëren"
+  },
+  "Creating a backup schedule": {
+    "message": "Een back-upschema creëren"
+  },
+  "Creating a floating IP": {
+    "message": "Creëer een zwevend IP-adres"
+  },
+  "Creating a new network": {
+    "message": "Creëer een nieuw netwerk"
+  },
+  "Creating a security group": {
+    "message": "Creëer een beveiligingsgroep"
+  },
+  "Creating a subnet": {
+    "message": "Creëer een subnet"
+  },
+  "Creating snapshot schedule": {
+    "message": "Creëer momentopnameschema"
+  },
+  "Creation": {
+    "message": "Creatie"
+  },
+  "Credentials": {
+    "message": "Referenties"
+  },
+  "Current email": {
+    "message": "Huidige e-mail"
+  },
+  "Current flavor": {
+    "message": "Huidige smaak"
+  },
+  "Current limit": {
+    "message": "Huidige limiet"
+  },
+  "Current plan": {
+    "message": "Huidig plan"
+  },
+  "Current price": {
+    "message": "Huidige prijs"
+  },
+  "Current replicas": {
+    "message": "Huidige replica's"
+  },
+  "Current size": {
+    "message": "Huidige grootte"
+  },
+  "Current type": {
+    "message": "Huidig type"
+  },
+  "Custom scripts": {
+    "message": "Aangepaste scripts"
+  },
+  "Customer": {
+    "message": "Klant"
+  },
+  "Customer support satisfaction overall rating": {
+    "message": "Klantenservicevredenheid algemene beoordeling"
+  },
+  "Customers": {
+    "message": "Klanten"
+  },
+  "DNS name servers": {
+    "message": "DNS-naamservers"
+  },
+  "Daily available booking time range": {
+    "message": "Dagelijks beschikbare boekingsperiode"
+  },
+  "Dark theme": {
+    "message": "Donker thema"
+  },
+  "Data volume size": {
+    "message": "Grootte van het gegevensvolume"
+  },
+  "Data volume type": {
+    "message": "Type gegevensvolume"
+  },
+  "Date": {
+    "message": "Datum"
+  },
+  "Date and time when item usage has ended": {
+    "message": "Datum en tijd waarop het itemgebruik is beëindigd"
+  },
+  "Date and time when item usage has started": {
+    "message": "Datum en tijd waarop het itemgebruik is begonnen"
+  },
+  "Date joined": {
+    "message": "Datum samengevoegd"
+  },
+  "Date of reporting": {
+    "message": "Datum van rapportage"
+  },
+  "Days": {
+    "message": "Dagen"
+  },
+  "Deactivate": {
+    "message": "Deactiveren"
+  },
+  "Deactivating": {
+    "message": "Deactiveren"
+  },
+  "Default SLURM account for user": {
+    "message": "Standaard SLURM-account voor gebruiker"
+  },
+  "Default account": {
+    "message": "Standaard rekening"
+  },
+  "Default availability zone for provisioned instances.": {
+    "message": "Standaardbeschikbaarheidszone voor ingerichte instanties."
+  },
+  "Default cluster label": {
+    "message": "Standaard clusterlabel"
+  },
+  "Default tax percent": {
+    "message": "Standaard takspercentage"
+  },
+  "Default value": {
+    "message": "Standaardwaarde"
+  },
+  "Delete": {
+    "message": "verwijderen"
+  },
+  "Delete account": {
+    "message": "Account verwijderen"
+  },
+  "Delete catalog": {
+    "message": "Verwijder catalogus"
+  },
+  "Delete project": {
+    "message": "Project verwijderen"
+  },
+  "Delete volumes": {
+    "message": "Verwijder volumes"
+  },
+  "Deleting PostgreSQL server will cause deletion of all databases created within server.": {
+    "message": "Verwijderen van de PostgreSQL-server zal databases die binnen de server werden gemaakt werwijderen."
+  },
+  "Deny": {
+    "message": "Ontkennen"
+  },
+  "Deploy Longhorn block storage after cluster is deployed": {
+    "message": "Longhorn-blokopslag implementeren nadat cluster is geïmplementeerd"
+  },
+  "Description": {
+    "message": "Beschrijving"
+  },
+  "Desired replicas": {
+    "message": "Gewenste replica's"
+  },
+  "Destination": {
+    "message": "Reisdoel"
+  },
+  "Destination (CIDR)": {
+    "message": "Bestemming (CIDR)"
+  },
+  "Destination URL": {
+    "message": "Bestemmings-URL"
+  },
+  "Destination port": {
+    "message": "Bestemmingspoort"
+  },
+  "Destroy": {
+    "message": "Vernietigen"
+  },
+  "Destroy resource": {
+    "message": "Bron vernietigen"
+  },
+  "Destroying": {
+    "message": "Vernietigen"
+  },
+  "Detach": {
+    "message": "Losmaken"
+  },
+  "Detaching": {
+    "message": "Losmaken"
+  },
+  "Details": {
+    "message": "Bijzonderheden"
+  },
+  "Device": {
+    "message": "Apparaat"
+  },
+  "Device ID": {
+    "message": "Apparaat-ID"
+  },
+  "Device owner": {
+    "message": "Eigenaar van apparaat"
+  },
+  "Direction": {
+    "message": "Richting"
+  },
+  "Disable": {
+    "message": "Uitschakelen"
+  },
+  "Disable gateway IP advertising via DHCP": {
+    "message": "IP-reclame voor gateway uitschakelen via DHCP"
+  },
+  "Disabled": {
+    "message": "Invalide"
+  },
+  "Discard": {
+    "message": "Afdanken"
+  },
+  "Disconnect subnet": {
+    "message": "Verbinding met subnet verbreken"
+  },
+  "Discount": {
+    "message": "Korting"
+  },
+  "Disk extension has been scheduled.": {
+    "message": "De schijfextensie is gepland."
+  },
+  "Disk has been created.": {
+    "message": "Schijf is gecreëerd.."
+  },
+  "Disks": {
+    "message": "Schijven"
+  },
+  "Display name": {
+    "message": "Weergavenaam"
+  },
+  "Do not configure a gateway for this subnet": {
+    "message": "Configureer geen gateway voor dit subnet"
+  },
+  "Do you really want to delete comment?": {
+    "message": "Wilt u echt commentaar verwijderen?"
+  },
+  "Do you want to submit permission request?": {
+    "message": "Wilt u een toestemmingsverzoek indienen?"
+  },
+  "Docker version": {
+    "message": "Docker-versie"
+  },
+  "Documentation": {
+    "message": "Documentatie"
+  },
+  "Documents": {
+    "message": " Documenten"
+  },
+  "Domain": {
+    "message": "Domein"
+  },
+  "Domain name": {
+    "message": "Domeinnaam"
+  },
+  "Domain name. If not defined default domain will be used.": {
+    "message": "Domeinnaam. Indien niet gedefinieerd zal standaarddomein worden gebruikt."
+  },
+  "Done": {
+    "message": "KLAAR"
+  },
+  "Download full price list": {
+    "message": "Download de volledige prijslijst"
+  },
+  "Draft": {
+    "message": "Concept"
+  },
+  "Drop files to attach them to the issue.": {
+    "message": "Zet bestanden neer om ze bij het probleem te voegen."
+  },
+  "Drop files to attach, or": {
+    "message": "Bestanden neerzetten om bij te voegen, of"
+  },
+  "Due date": {
+    "message": "Vervaldatum"
+  },
+  "Duration": {
+    "message": "Duur"
+  },
+  "Dynamic — use separate volume types for tracking pricing": {
+    "message": "Dynamisch — gebruik afzonderlijke volumetypen voor het bijhouden van prijzen"
+  },
+  "Each mount point should be used once at most.": {
+    "message": "Elk koppelpunt moet maximaal één keer worden gebruikt."
+  },
+  "Each usage report must be connected with a billing plan to assure correct calculation of accounting data.": {
+    "message": "Elk gebruiksrapport moet gekoppeld zijn aan een factureringsplan om een correcte berekening van de boekhoudgegevens te garanderen."
+  },
+  "Edit": {
+    "message": "Bewerk"
+  },
+  "Edit YAML": {
+    "message": "Bewerk YAML"
+  },
+  "Edit item": {
+    "message": "Item bewerken"
+  },
+  "Edit permissions": {
+    "message": "Bewerk machtigingen"
+  },
+  "Edit profile": {
+    "message": "Profiel bewerken"
+  },
+  "Edit project member": {
+    "message": "Bewerk projectlid"
+  },
+  "Edit request": {
+    "message": "Bewerk aanvraag"
+  },
+  "Effective ID": {
+    "message": "Effectieve ID"
+  },
+  "Egress": {
+    "message": "Uitgang"
+  },
+  "Email": {
+    "message": "E-mail"
+  },
+  "Email address": {
+    "message": "E-mailadres"
+  },
+  "Email change request has been cancelled.": {
+    "message": "Aanvraag voor het wijzigen van e-mail is geannuleerd."
+  },
+  "Email has been updated.": {
+    "message": "E-mail is bijgewerkt."
+  },
+  "Email verification has been sent. Please check your inbox.": {
+    "message": "Verificatie per e-mail is verzonden. Controleer uw inbox."
+  },
+  "Enable": {
+    "message": "Inschakelen"
+  },
+  "Enable DHCP": {
+    "message": "DHCP inschakelen"
+  },
+  "Enable by default": {
+    "message": "Standaard inschakelen"
+  },
+  "Enable limit": {
+    "message": "Limiet inschakelen"
+  },
+  "Enable profile after creation": {
+    "message": "Profiel inschakelen na creatie"
+  },
+  "Enabled": {
+    "message": "INGESCHAKELD"
+  },
+  "Enabled checklists have been updated.": {
+    "message": "Ingeschakelde controlelijsten zijn bijgewerkt."
+  },
+  "Enabled default gateway": {
+    "message": "Standaard gateway ingeschakeld"
+  },
+  "Encountered an empty component": {
+    "message": "Er is een lege component aangetroffen"
+  },
+  "End": {
+    "message": "Beëindig"
+  },
+  "End date": {
+    "message": "eind datum"
+  },
+  "End time": {
+    "message": "Eindtijd"
+  },
+  "Ensure this field has no more than 30 characters.": {
+    "message": "Zorg ervoor dat dit veld niet meer dan 30 tekens bevat."
+  },
+  "Enter IPv4 address.": {
+    "message": "Voer IPv4-adres in."
+  },
+  "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.": {
+    "message": "Voer een enkele poort (22) of een poortbereik (5000-6000) in of laat gewoon leeg voor alle poorten."
+  },
+  "Enter address...": {
+    "message": "Voer adres in..."
+  },
+  "Enter private IPv4 CIDR.": {
+    "message": "Voer privé IPv4 CIDR in."
+  },
+  "Erred": {
+    "message": "Foutief"
+  },
+  "Error message": {
+    "message": "Foutmelding"
+  },
+  "Error traceback": {
+    "message": "Fout bij traceback"
+  },
+  "Esimated price per month": {
+    "message": "Geschatte prijs per maand"
+  },
+  "Estimate": {
+    "message": "Schatten"
+  },
+  "Estimated cost": {
+    "message": "Geschatte kosten"
+  },
+  "Ethernet type": {
+    "message": "Ethernet-type"
+  },
+  "Evaluation": {
+    "message": "Evaluatie"
+  },
+  "Event type": {
+    "message": "Event-type"
+  },
+  "Event types": {
+    "message": "Event-types"
+  },
+  "Events": {
+    "message": "Gebeurtenissen"
+  },
+  "Every": {
+    "message": "Alle"
+  },
+  "Every day": {
+    "message": "Elke dag"
+  },
+  "Every day at": {
+    "message": "Elke dag om"
+  },
+  "Every hour": {
+    "message": "Elk uur"
+  },
+  "Every minute": {
+    "message": "Elke minuut"
+  },
+  "Every month": {
+    "message": "Elke maand"
+  },
+  "Every month service provider can report up to the amount requested by user.": {
+    "message": "Elke maand kan serviceprovider rapporteren tot het door de gebruiker gevraagde bedrag."
+  },
+  "Every week": {
+    "message": "Elke week"
+  },
+  "Every year": {
+    "message": "Elk jaar"
+  },
+  "Every year service provider can report up to the amount requested by user.": {
+    "message": "Elk jaar kan de serviceprovider tot het door de gebruiker gevraagde bedrag rapporteren."
+  },
+  "Executing": {
+    "message": "Uitvoeren"
+  },
+  "Expiration time": {
+    "message": "Vervaltijd"
+  },
+  "Expired": {
+    "message": "Vervallen"
+  },
+  "Expires at": {
+    "message": "Vervalt op"
+  },
+  "Export": {
+    "message": "Exporteren"
+  },
+  "Export as": {
+    "message": "Exporteren als"
+  },
+  "Extend": {
+    "message": "Uitbreiden"
+  },
+  "Extend OpenStack volume": {
+    "message": "OpenStack-volume uitbreiden"
+  },
+  "Extend disk": {
+    "message": "Schijf uitbreiden"
+  },
+  "Extending": {
+    "message": "Uitbreiden"
+  },
+  "External IP": {
+    "message": "Extern IP"
+  },
+  "External links": {
+    "message": "Externe links"
+  },
+  "External network ID": {
+    "message": "Extern netwerk-ID"
+  },
+  "Facility": {
+    "message": "Faciliteit"
+  },
+  "Failed to operate with backend.": {
+    "message": "Kan niet werken met backend."
+  },
+  "Favourites": {
+    "message": "Favorieten"
+  },
+  "Features": {
+    "message": "Functies"
+  },
+  "Features have been updated.": {
+    "message": "De functies zijn bijgewerkt."
+  },
+  "Fee applied according to the maximum value reported by service provider over the whole active state of resource.": {
+    "message": "Vergoeding toegepast op basis van de maximale waarde die door de dienstverlener wordt gerapporteerd over de gehele actieve staat van de bron."
+  },
+  "Fee applied each time this plan is activated.": {
+    "message": "Kost die wordt toegepast telkens wanneer dit plan wordt geactiveerd."
+  },
+  "Feedback": {
+    "message": "Terugkoppeling"
+  },
+  "Field": {
+    "message": "Veld"
+  },
+  "File": {
+    "message": "Bestand"
+  },
+  "Files": {
+    "message": "archief"
+  },
+  "Filtered by": {
+    "message": "Gefilterd op"
+  },
+  "Find solution": {
+    "message": "Oplossing zoeken"
+  },
+  "First": {
+    "message": "Eerste"
+  },
+  "First name": {
+    "message": "Voornaam"
+  },
+  "Fixed IPs": {
+    "message": "Vaste IP's"
+  },
+  "Fixed price": {
+    "message": "Vaste prijs"
+  },
+  "Fixed — use common storage quota": {
+    "message": "Opgelost — gemeenschappelijk opslagquotum gebruiken"
+  },
+  "Fixed-price contract": {
+    "message": "Contract met vaste prijs"
+  },
+  "Flavor": {
+    "message": "Smaak"
+  },
+  "Flavor change has been scheduled.": {
+    "message": "Smaakverandering is gepland."
+  },
+  "Flavor exclude regex": {
+    "message": "Smaak exclusief regex"
+  },
+  "Flavor name": {
+    "message": "Naam smaak"
+  },
+  "Flavors": {
+    "message": "Smaken"
+  },
+  "Flavors matching this regex expression will not be pulled from the backend.": {
+    "message": "Smaken die overeenkomen met deze regex-expressie zullen niet uit de backend worden getrokken."
+  },
+  "Flavors regex": {
+    "message": "Smaken regex"
+  },
+  "Floating IP count": {
+    "message": "Floating IP-telling"
+  },
+  "Floating IPs update has been scheduled.": {
+    "message": "Floating IPs update is gepland."
+  },
+  "Folder": {
+    "message": "Map"
+  },
+  "For": {
+    "message": "Voor"
+  },
+  "Force destroy": {
+    "message": "Forceer vernietigen"
+  },
+  "Format": {
+    "message": "Formatteren"
+  },
+  "Free": {
+    "message": "Vrij"
+  },
+  "FreeIPA": {
+    "message": "Gratis IPA"
+  },
+  "FreeIPA account": {
+    "message": "Gratis IPA-rekening"
+  },
+  "FreeIPA extension is disabled.": {
+    "message": "Gratis IPA-extensie is uitgeschakeld."
+  },
+  "From": {
+    "message": "Uit"
+  },
+  "From date": {
+    "message": "vanaf datum"
+  },
+  "Full description": {
+    "message": "Volledige beschrijving"
+  },
+  "Full name": {
+    "message": "Volledige naam"
+  },
+  "GPU limit (hours)": {
+    "message": "GPU-limiet (uren)"
+  },
+  "GPU usage": {
+    "message": "GPU-gebruik"
+  },
+  "GUID is expected.": {
+    "message": "GUID wordt verwacht."
+  },
+  "Gateway IP of this subnet": {
+    "message": "Gateway-IP van dit subnet"
+  },
+  "General": {
+    "message": "Algemeen"
+  },
+  "Generate Kubeconfig file": {
+    "message": "Kubeconfig bestand genereren"
+  },
+  "Generate password": {
+    "message": "Wachtwoord genereren"
+  },
+  "Getting started": {
+    "message": "Slag"
+  },
+  "Go back": {
+    "message": "Terug"
+  },
+  "Go to marketplace": {
+    "message": "Ga naar Marketplace"
+  },
+  "Go to profile": {
+    "message": "Ga naar profiel"
+  },
+  "Google Calendar has been published successfully.": {
+    "message": "Google Agenda werd succesvol gepubliceerd."
+  },
+  "Google Calendar has been synced successfully.": {
+    "message": "Google Agenda werd succesvol gesynchroniseerd."
+  },
+  "Google Calendar has been unpublished successfully.": {
+    "message": "Google Agenda werd met succes ongepubliceerd."
+  },
+  "Grant permission": {
+    "message": "Toestemming verlenen"
+  },
+  "Group": {
+    "message": "Groep"
+  },
+  "Group invitation has been cancelled.": {
+    "message": "Uitnodiging voor de groep is geannuleerd."
+  },
+  "Group invitations": {
+    "message": "Uitnodigingen voor groepen"
+  },
+  "Growth": {
+    "message": "Groei"
+  },
+  "Guaranteed time of VM snapshot retention. If null - keep forever.": {
+    "message": "Gegarandeerde tijd van VM-momentopname-retentie. Indien nul - altijd behouden."
+  },
+  "Guaranteed time of snapshot retention. If null - keep forever.": {
+    "message": "Gegarandeerde tijd van momentopname-retentie. Indien nul - altijd behouden."
+  },
+  "Guaranteed time of volume snapshot retention. If null - keep forever.": {
+    "message": "Gegarandeerde tijd van volume momentopname-retentie. Indien nul - altijd behouden."
+  },
+  "Guest": {
+    "message": "Gast"
+  },
+  "Guest OS": {
+    "message": "Gast OS"
+  },
+  "Hello": {
+    "message": "Hallo"
+  },
+  "Hide": {
+    "message": "Verbergen"
+  },
+  "Hide diff": {
+    "message": "Verberg diff"
+  },
+  "Home organization domain name": {
+    "message": "Domeinnaam voor thuisorganisatie"
+  },
+  "Hook has been removed.": {
+    "message": "Haak werd verwijderd."
+  },
+  "Hook removal": {
+    "message": "Haak verwijderen"
+  },
+  "Horizontal pod autoscaler has been created.": {
+    "message": "Horizontale pod autoscaler is gemaakt."
+  },
+  "Horizontal pod autoscaler has been updated.": {
+    "message": "Horizontale pod autoscaler is bijgewerkt."
+  },
+  "Hostname": {
+    "message": "Hostnaam"
+  },
+  "Hostname or IP address of gateway node": {
+    "message": "Hostnaam of IP-adres van gatewayknooppunt"
+  },
+  "Hostname or IP address of master node": {
+    "message": "Hostnaam of IP-adres van hoofdknooppunt"
+  },
+  "Hours": {
+    "message": "uren"
+  },
+  "I agree": {
+    "message": "Ik ben het ermee eens"
+  },
+  "ID": {
+    "message": "legitimatiebewijs"
+  },
+  "ID code": {
+    "message": "ID-code"
+  },
+  "IP address": {
+    "message": "IP-adres"
+  },
+  "IP address is already used by router.": {
+    "message": "IP-adres is al in gebruik door de router."
+  },
+  "IP protocol": {
+    "message": "IP-protocol"
+  },
+  "IP version": {
+    "message": "IP-versie"
+  },
+  "Icon": {
+    "message": "Icoon"
+  },
+  "Identity provided has been selected via SAML2 discovery service. You will be redirected to the login page soon.": {
+    "message": "De opgegeven identiteit is geselecteerd via de SAML2-detectieservice. U wordt weldra doorgestuurd naar de inlogpagina."
+  },
+  "If you want user to provide additional details when ordering, please configure input form for the user below": {
+    "message": "Als u wilt dat de gebruiker extra details verstrekt bij het bestellen, configureer dan het invoerformulier voor de gebruiker hieronder"
+  },
+  "Image": {
+    "message": "Beeld"
+  },
+  "Image has been added.": {
+    "message": "Afbeelding is toegevoegd."
+  },
+  "Image has been removed.": {
+    "message": "Afbeelding is verwijderd."
+  },
+  "Image here": {
+    "message": "Afbeelding hier"
+  },
+  "Image name": {
+    "message": "Naam afbeelding"
+  },
+  "Images": {
+    "message": "Afbeeldingen"
+  },
+  "Import": {
+    "message": "Importeren"
+  },
+  "Import YAML": {
+    "message": "YAML importeren"
+  },
+  "Import offering": {
+    "message": "Aanbod importeren"
+  },
+  "Import resource": {
+    "message": "Bron importeren"
+  },
+  "Integration": {
+    "message": "integratie"
+  },
+  "Invoice": {
+    "message": "Factuur"
+  },
+  "Invoice number": {
+    "message": "Factuurnummer"
+  },
+  "Issue": {
+    "message": "Uitgiftedatum"
+  },
+  "Issues": {
+    "message": "Kwesties"
+  },
+  "Item": {
+    "message": "Item "
+  },
+  "Jobs": {
+    "message": "Banen"
+  },
+  "Key": {
+    "message": "sleutel"
+  },
+  "Labels": {
+    "message": "Etiketten"
+  },
+  "Language": {
+    "message": "Taal"
+  },
+  "Last name": {
+    "message": "Achternaam"
+  },
+  "Last update": {
+    "message": "Laatste update"
+  },
+  "Learn more": {
+    "message": "Meer informatie"
+  },
+  "Limit": {
+    "message": "Limiet"
+  },
+  "Link": {
+    "message": "Verbinden"
+  },
+  "Load more": {
+    "message": "Meer laden"
+  },
+  "Location": {
+    "message": "Plaats"
+  },
+  "Log out": {
+    "message": "Uitloggen"
+  },
+  "Login": {
+    "message": "Inloggen"
+  },
+  "Management": {
+    "message": "Beheer"
+  },
+  "Member": {
+    "message": "Lid"
+  },
+  "Members": {
+    "message": "leden"
+  },
+  "Message": {
+    "message": "Bericht"
+  },
+  "Metadata": {
+    "message": "Metagegevens"
+  },
+  "Method": {
+    "message": "Methode"
+  },
+  "Modified": {
+    "message": "Gemodificeerd"
+  },
+  "Monthly": {
+    "message": "Maandelijks"
+  },
+  "Months": {
+    "message": "Maanden"
+  },
+  "More actions": {
+    "message": "Meer acties"
+  },
+  "Move": {
+    "message": "Bewegen"
+  },
+  "N/A": {
+    "message": "N.V.T"
+  },
+  "Name": {
+    "message": "Naam"
+  },
+  "Network": {
+    "message": "Netwerk"
+  },
+  "Networks": {
+    "message": "Netwerken"
+  },
+  "New email address": {
+    "message": "Nieuw e-mailadres"
+  },
+  "New price": {
+    "message": "Nieuwe prijs"
+  },
+  "Next": {
+    "message": "Volgend"
+  },
+  "No": {
+    "message": "NEE"
+  },
+  "No access": {
+    "message": "Geen toegang"
+  },
+  "No end date": {
+    "message": "Geen eind datum"
+  },
+  "None": {
+    "message": "Geen"
+  },
+  "Not configured": {
+    "message": "niet geconfigureerd"
+  },
+  "Not signed in": {
+    "message": "Niet aangemeld"
+  },
+  "Nothing to see here": {
+    "message": "Niets te zien hier"
+  },
+  "Notifications": {
+    "message": "Meldingen"
+  },
+  "OR": {
+    "message": "of"
+  },
+  "Ok": {
+    "message": "OK"
+  },
+  "One time": {
+    "message": "Eenmaal"
+  },
+  "One-time": {
+    "message": "Eenmalige"
+  },
+  "Open": {
+    "message": "Openen"
+  },
+  "Optional": {
+    "message": "Facultatief"
+  },
+  "Order": {
+    "message": "Bestelling"
+  },
+  "Order history": {
+    "message": "Bestelgeschiedenis"
+  },
+  "Orders": {
+    "message": "Bestellingen"
+  },
+  "Organization": {
+    "message": "Organisatie"
+  },
+  "Organizations": {
+    "message": "Organisaties"
+  },
+  "Others": {
+    "message": "Anderen"
+  },
+  "Paid": {
+    "message": "uitgekeerd"
+  },
+  "Password": {
+    "message": "Wachtwoord"
+  },
+  "Pause": {
+    "message": "PAUZEREN"
+  },
+  "Paused": {
+    "message": "Gepauzeerd"
+  },
+  "Payments": {
+    "message": "Betalingen"
+  },
+  "Pending": {
+    "message": "In behandeling"
+  },
+  "Period": {
+    "message": "Periode"
+  },
+  "Permissions": {
+    "message": "Machtigingen"
+  },
+  "Person": {
+    "message": "Persoon"
+  },
+  "Phone": {
+    "message": "Telefoon"
+  },
+  "Phone number": {
+    "message": "Telefoonnummer"
+  },
+  "Plans": {
+    "message": "Plannen"
+  },
+  "Policy": {
+    "message": "Beleid"
+  },
+  "Postal code": {
+    "message": "Postcode"
+  },
+  "Preview": {
+    "message": "Voorbeeld"
+  },
+  "Previous": {
+    "message": "Vorig"
+  },
+  "Price": {
+    "message": "Prijs"
+  },
+  "Price per hour": {
+    "message": "Prijs per uur"
+  },
+  "Pricing": {
+    "message": "Prijzen"
+  },
+  "Priority": {
+    "message": "Voorrang"
+  },
+  "Privacy Policy": {
+    "message": "Privacy voorwaarden"
+  },
+  "Privacy policy": {
+    "message": "Privacy voorwaarden"
+  },
+  "Profile settings": {
+    "message": "Profielinstellingen"
+  },
+  "Progress": {
+    "message": "Vooruitgang"
+  },
+  "Project description": {
+    "message": "Beschrijving van het project"
+  },
+  "Project details": {
+    "message": "Details van het project"
+  },
+  "Project name": {
+    "message": "Naam van het project"
+  },
+  "Projects": {
+    "message": "Projecten"
+  },
+  "Quantity": {
+    "message": "Hoeveelheid"
+  },
+  "Question": {
+    "message": "Vraag"
+  },
+  "Reason": {
+    "message": "Reden"
+  },
+  "Recipient": {
+    "message": "Ontvanger"
+  },
+  "Recommended": {
+    "message": "Aanbevolen"
+  },
+  "Refresh": {
+    "message": "Verversen"
+  },
+  "Reject": {
+    "message": "Afkeuren"
+  },
+  "Rejected": {
+    "message": "Afgekeurd"
+  },
+  "Remaining": {
+    "message": "Overig"
+  },
+  "Remove": {
+    "message": "Verwijderen"
+  },
+  "Report": {
+    "message": "Rapport"
+  },
+  "Reporting": {
+    "message": "Berichtgeving"
+  },
+  "Request change": {
+    "message": "Wijziging aanvragen"
+  },
+  "Requested": {
+    "message": "Aangevraagd"
+  },
+  "Requested by": {
+    "message": "Aangevraagd door"
+  },
+  "Required": {
+    "message": "Vereist"
+  },
+  "Resend": {
+    "message": "Verzenden"
+  },
+  "Reset": {
+    "message": "Terugstellen"
+  },
+  "Resolved": {
+    "message": "Vastbesloten"
+  },
+  "Resource": {
+    "message": "Hulpbron"
+  },
+  "Restart": {
+    "message": "Herstarten"
+  },
+  "Restore": {
+    "message": "Terugzetten"
+  },
+  "Restricted": {
+    "message": "Beperkt"
+  },
+  "Retry": {
+    "message": "Opnieuw"
+  },
+  "Reviews": {
+    "message": "Beoordelingen"
+  },
+  "Role": {
+    "message": "Rol"
+  },
+  "Roles": {
+    "message": "Rollen"
+  },
+  "Save": {
+    "message": "Sla op"
+  },
+  "Save as a template": {
+    "message": "Opslaan als sjabloon"
+  },
+  "Save changes": {
+    "message": "Wijzigingen opslaan"
+  },
+  "Scale": {
+    "message": "Schub"
+  },
+  "Schedule": {
+    "message": "Rooster"
+  },
+  "Scheduled": {
+    "message": "Gepland"
+  },
+  "Score": {
+    "message": "Partituur"
+  },
+  "Search": {
+    "message": "Zoeken"
+  },
+  "Search...": {
+    "message": "Zoeken..."
+  },
+  "Second": {
+    "message": "seconde"
+  },
+  "Section": {
+    "message": "Afdeling"
+  },
+  "See more": {
+    "message": "Meer weergeven"
+  },
+  "Select": {
+    "message": "Selecteren"
+  },
+  "Select a date": {
+    "message": "Selecteer een datum"
+  },
+  "Select status": {
+    "message": "Selecteer Status"
+  },
+  "Select type": {
+    "message": "Selecteer type"
+  },
+  "Selected": {
+    "message": "Uitverkoren"
+  },
+  "Send": {
+    "message": "Verzenden"
+  },
+  "Send invitation": {
+    "message": "Uitnodiging verzenden"
+  },
+  "Settings": {
+    "message": "Instellingen"
+  },
+  "Shared": {
+    "message": "Gedeeld"
+  },
+  "Show": {
+    "message": "Tonen"
+  },
+  "Show details": {
+    "message": "Toon details"
+  },
+  "Show less": {
+    "message": "Toon minder"
+  },
+  "Show more": {
+    "message": "toon meer"
+  },
+  "Sign in": {
+    "message": "Aanmelden"
+  },
+  "Size": {
+    "message": "Grootte"
+  },
+  "Something went wrong": {
+    "message": "Er is iets misgegaan"
+  },
+  "Start": {
+    "message": "Beginnen"
+  },
+  "Start date": {
+    "message": "start datum"
+  },
+  "Start time": {
+    "message": "aanvangstijd"
+  },
+  "State": {
+    "message": "Staat"
+  },
+  "Stop": {
+    "message": "Stoppen"
+  },
+  "Subject": {
+    "message": "Onderwerp"
+  },
+  "Submit": {
+    "message": "Opslaan"
+  },
+  "Submit report": {
+    "message": "Rapport indienen"
+  },
+  "Subtotal": {
+    "message": "Subtotaal"
+  },
+  "Success": {
+    "message": "Succes"
+  },
+  "Sum": {
+    "message": "Som"
+  },
+  "Summary": {
+    "message": "Samenvatting"
+  },
+  "Support": {
+    "message": "Steunen"
+  },
+  "Synchronize": {
+    "message": "Synchroniseren"
+  },
+  "System volume": {
+    "message": "Systeemvolume"
+  },
+  "TAX": {
+    "message": "Belasting"
+  },
+  "TOTAL": {
+    "message": "Totaal"
+  },
+  "Target": {
+    "message": "DOEL"
+  },
+  "Tax": {
+    "message": "Belasting"
+  },
+  "Team members": {
+    "message": "Teamleden"
+  },
+  "Template": {
+    "message": "Sjabloon"
+  },
+  "Tenant": {
+    "message": "Huurder"
+  },
+  "Tenant ID": {
+    "message": "Tenant-ID"
+  },
+  "Terms of Service": {
+    "message": "Service voorwaarden"
+  },
+  "Terms of service": {
+    "message": "Service voorwaarden"
+  },
+  "Then": {
+    "message": "dan"
+  },
+  "This field is required.": {
+    "message": "Dit veld is verplicht."
+  },
+  "Time": {
+    "message": "Tijd"
+  },
+  "Timestamp": {
+    "message": "Tijdstempel"
+  },
+  "Title": {
+    "message": "Titel"
+  },
+  "To": {
+    "message": "Naar"
+  },
+  "Token": {
+    "message": "token"
+  },
+  "Total": {
+    "message": "Totaal"
+  },
+  "Total price": {
+    "message": "Totale prijs"
+  },
+  "Try again": {
+    "message": "Opnieuw proberen"
+  },
+  "URL": {
+    "message": "Url"
+  },
+  "Unconfirmed": {
+    "message": "Onbevestigd"
+  },
+  "Unknown": {
+    "message": "Onbekend"
+  },
+  "Unknown error": {
+    "message": "Onbekende fout"
+  },
+  "Unlimited": {
+    "message": "Onbegrensd"
+  },
+  "Unlink": {
+    "message": "Ontkoppelen"
+  },
+  "Usage": {
+    "message": "Gebruik"
+  },
+  "Used": {
+    "message": "gebruikt"
+  },
+  "User": {
+    "message": "Gebruiker"
+  },
+  "User agreements": {
+    "message": "Gebruikersovereenkomsten"
+  },
+  "User input": {
+    "message": "Gebruikersinvoer"
+  },
+  "User roles": {
+    "message": "Gebruikersrollen"
+  },
+  "Username": {
+    "message": "Gebruikersnaam"
+  },
+  "Users": {
+    "message": "Gebruikers"
+  },
+  "VAT": {
+    "message": "BTW"
+  },
+  "Value": {
+    "message": "Waarde"
+  },
+  "View": {
+    "message": "Bekijken"
+  },
+  "View all": {
+    "message": "Alles weergeven"
+  },
+  "Volume": {
+    "message": "VOLUME"
+  },
+  "Welcome to": {
+    "message": "WELKOM BIJ"
+  },
+  "When": {
+    "message": "Wanneer"
+  },
+  "Yes": {
+    "message": "Ja"
+  },
+  "and": {
+    "message": " en "
+  },
+  "application": {
+    "message": "Applicatie"
+  },
+  "applications": {
+    "message": "Applications"
+  },
+  "approval": {
+    "message": "Goedkeuring"
+  },
+  "browse": {
+    "message": "Bladeren"
+  },
+  "campaigns": {
+    "message": "Campagnes"
+  },
+  "day": {
+    "message": "Dag"
+  },
+  "events": {
+    "message": "Gebeurtenissen"
+  },
+  "hour": {
+    "message": "uur"
+  },
+  "invoices": {
+    "message": "Facturen"
+  },
+  "jobs": {
+    "message": "Banen"
+  },
+  "minute": {
+    "message": "minuut"
+  },
+  "month": {
+    "message": "Maand"
+  },
+  "network": {
+    "message": "Netwerk"
+  },
+  "networks": {
+    "message": "Netwerken"
+  },
+  "notifications": {
+    "message": "Meldingen"
+  },
+  "of": {
+    "message": "van"
+  },
+  "on": {
+    "message": "OP"
+  },
+  "orders": {
+    "message": "Bestellingen"
+  },
+  "organizations": {
+    "message": "Organisaties"
+  },
+  "payments": {
+    "message": "Betalingen"
+  },
+  "pending": {
+    "message": "In behandeling"
+  },
+  "plans": {
+    "message": "Plannen"
+  },
+  "projects": {
+    "message": "Projecten"
+  },
+  "records": {
+    "message": "Archief"
+  },
+  "requests": {
+    "message": "Verzoeken"
+  },
+  "resource": {
+    "message": "Hulpbron"
+  },
+  "reviews": {
+    "message": "Beoordelingen"
+  },
+  "roles": {
+    "message": "Rollen"
+  },
+  "services": {
+    "message": "Services"
+  },
+  "support": {
+    "message": "Steunen"
+  },
+  "team members": {
+    "message": "Teamleden"
+  },
+  "this month": {
+    "message": "Deze maand"
+  },
+  "tokens": {
+    "message": "Tokens"
+  },
+  "user agreements": {
+    "message": "Gebruikersovereenkomsten"
+  },
+  "users": {
+    "message": "Gebruikers"
+  },
+  "week": {
+    "message": "Week"
+  },
+  "year": {
+    "message": "Jaar"
+  }
 }

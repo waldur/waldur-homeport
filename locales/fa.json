@@ -1,491 +1,1457 @@
 {
-  "(VAT is not included)": "مالیات بر ارزش افزوده گنجانده نشده است",
-  "A profile has been created.": "پروفایل ایجاد شده است.",
-  "API secret code:": "کد مخفی API:",
-  "Abbreviation": "اختصار",
-  "Accept": "پذیرفتن",
-  "Accepted": "پذیرفته شده",
-  "Access": "دسترسی",
-  "Account removal": "حذف حساب",
-  "Accounting": "حسابداری",
-  "Accounting period": "دوره حسابداری",
-  "Accounting plans": "برنامه های حسابداری",
-  "Accounting record": "سابقه حسابداری",
-  "Accounting start date": "تاریخ شروع حسابداری",
-  "Accounting type": "نوع حسابداری",
-  "Actions": "عمل",
-  "Activate": "فعال کردن",
-  "Activating": "فعال کردن",
-  "Active": "فعال",
-  "Active count": "حساب فعال",
-  "Active user will be able to login into the portal.": "کاربر فعال قادر خواهد بود به پرتال وارد شود.",
-  "Add": "اضافه کردن",
-  "Add comment": "اضافه کردن نظر",
-  "Add component": "افزودن اجزا",
-  "Add data volume": "افزودن حجم داده",
-  "Add key": "اضافه کردن کلید",
-  "Add member": "اضافه کردن عضو",
-  "Add new offering": "پیشنهاد جدید اضافه کنید",
-  "Add notification": "اعلان را اضافه کنید",
-  "Add offering": "پیشنهاد را اضافه کنید",
-  "Add organization": "سازمان را اضافه کنید",
-  "Add payment profile": "پروفایل پرداخت را اضافه کنید",
-  "Add plan": "اضافه کردن برنامه",
-  "Add project": "اضافه کردن پروژه",
-  "Add resource": "اضافه کردن منبع",
-  "Add rule": "اضافه کردن قانون",
-  "Add to a new namespace": "یک فضای نام جدید اضافه کنید",
-  "Additional space to apply to storage quota to be used by snapshots.": "فضای اضافی برای اعمال به سهمیه ذخیره سازی به توسط عکس های فوری مورد استفاده قرار گیرد.",
-  "Additionally service provider can charge for usage of the following components": "علاوه بر این ارائه دهنده خدمات می تواند برای استفاده از اجزای زیر شارژ",
-  "Address": "آدرس",
-  "Admin password": "گذرواژه مدیریت",
-  "Admin username": "نام کاربری ادمین",
-  "Affected resource": "منابع آسیب دیده",
-  "After secret API code has been regenerated, it will not be possible to submit usage with the old key.": "پس از کد API مخفی بازسازی شده است, آن امکان پذیر نخواهد بود برای ارسال استفاده با کلید های قدیمی.",
-  "Agreement number": "شماره توافق نامه",
-  "Alert": "هشدار",
-  "All": "همه",
-  "All resources have been imported.": "تمام منابع وارد شده اند.",
-  "Allocation name": "نام تخصیص",
-  "Allocation pools": "استخر های تخصیص",
-  "Allow bookings to be scheduled at weekends": "اجازه رزرو در تعطیلات آخر هفته برنامه ریزی شود",
-  "Amount": "مقدار",
-  "An error occurred on project removal.": "خطایی در حذف پروژه رخ داد.",
-  "Annotations": "حاشیه نویسی",
-  "Answer": "پاسخ",
-  "Answers": "پاسخ ها",
-  "Answers have been submitted": "پاسخ ها را مشاهده کنید",
-  "Any": "هیچ",
-  "Application configuration": "پیکر بندی برنامه ها",
-  "Application details": "جزییات برنامه ها",
-  "Application has been created.": "برنامه ها ایجاد شده اند.",
-  "Application templates": "قالب های برنامه ها",
-  "Applications": "برنامه ها",
-  "Apply": "درخواست دادن",
-  "Approve": "تایید",
-  "Approve payment": "تایید هزینه",
-  "Approved at": "تایید شده در",
-  "Approved by": "تایید شده توسط",
-  "Archive": "بایگانی",
-  "Archived": "بایگانی شده",
-  "Are you sure you want to delete the payment profile?": "آیا مطمئن هستید که می خواهید نمایه پرداخت را حذف کنید ؟",
-  "Are you sure you would like to delete the hook?": "آیا مطمئن هستید که می خواهید hook را حذف کنید ؟",
-  "Are you sure you would like to delete the key?": "آیا شما مطمئن هستید که میخواهید key را پاک کنید؟",
-  "Article code": "کد مقاله",
-  "Assigned to": "اختصاص یافته به",
-  "Attach": "پیوستن",
-  "Attached to": "پیوستن به",
-  "Attaching": "پیوستن",
-  "Attachments": "ضمیمه",
-  "Attributes": "ویژگی ها",
-  "Audit log": "گزارش حسابرسی",
-  "Audit logs": "گزارش های حسابرسی",
-  "Authenticate using Mobile ID": "تأیید اعتبار با استفاده از شناسه تلفن همراه",
-  "Authentication events": "رویدادهای تأیید اعتبار",
-  "Authentication with Mobile ID has been canceled by user or timed out. Details:": "احراز هویت با شناسه تلفن همراه توسط کاربر لغو شده و یا به پایان رسیده است. جزئیات:",
-  "Auto-assign floating IP": "اختصاص دادن خودکار IP شناور",
-  "Auto-generated": "تولید خودکار",
-  "Availability": "دسترسی",
-  "Availability zone": "دسترسی zone",
-  "Azure Active Directory Application Secret": "راز برنامه Azure Active Directory",
-  "Azure PostgreSQL database server": "سرور پایگاه داده Azure PostgreSQL",
-  "Azure Virtual Machine": "ماشین مجازی Azure",
-  "Back": "بازگشت",
-  "Back to login": "بازگشت به ورود",
-  "Backing up": "پشتیبان گیری",
-  "Bank account": "حساب بانکی",
-  "Bank name": "نام بانک",
-  "Base image name": "نام تصویر پایه",
-  "Billing": "صورتحساب",
-  "Billing period": "دوره صورتحساب",
-  "Booking": "رزرو",
-  "Booking has been accepted.": "رزرو تایید شده است.",
-  "Bookings": "رزرو",
-  "Bootable": "بوت کردن",
-  "Branch": "شعبه",
-  "Browse": "مرور کردن",
-  "Business hours": "ساعات کاری",
-  "CPU usage": "استفاده CPU",
-  "Caller": "تماس گیرنده",
-  "Cancel": "لغو",
-  "Cancel invitation": "لغو دعوت",
-  "Cancel payment": "لغو صورتحساب",
-  "Cancel request": "لغو درخواست",
-  "Canceled": "لغو شده",
-  "Cannot create floating IP if tenant external network is not defined.": "اگر شبکه خارجی tenant تعریف نشده باشد نمیتوانید IP شناور ایجاد کنید.",
-  "Catalog": "کاتالوگ",
-  "Catalog URL": "کاتالوگ URL",
-  "Catalog has been created.": "کاتالوگ ایجاد شده است.",
-  "Catalog has been deleted.": "کاتالوگ حذف شده است.",
-  "Catalogues": "کاتالوگ ها",
-  "Categories": "دسته بندی ها",
-  "Category": "دسته بندی",
-  "Challenge code": "کد چالش",
-  "Change Request": "درخواست تغییر",
-  "Change flavor": "تغییر flavor",
-  "Change limits": "محدودیت ها را تغییر دهید",
-  "Change plan": "تغییر برنامه",
-  "Change request - client’s request to perform a generic modification of data or service.": "تغییر درخواست-درخواست client’s برای انجام اصلاح عمومی داده ها یا خدمات.",
-  "Change resource limits": "منابع محدودیت ها را تغییر دهید",
-  "Change resource plan": "منابع برنامه ها را تغییر دهید",
-  "Change user email": "ایمیل کاربر را تغییر دهید",
-  "Changing flavor": "تغییر دادن flavor",
-  "Changing password": "تغییر دادن رمز",
-  "Choices as comma-separated list": "گزینه هایی به عنوان کاما -لیست جدا",
-  "Client ID": "شناسه Client",
-  "Client organization": "سازماندهی Client",
-  "Client project": "پروژه Client",
-  "Close": "بستن",
-  "Cloud RAM": "ابر RAM",
-  "Cloud init template": "قالب اولیه ابر",
-  "Cloud vCPU": "ابر vCPU",
-  "Cluster name": "نام Cluster",
-  "Code is too short.": "کد خیلی کوتاه است.",
-  "Collation": "جمع بندی",
-  "Comment": "یادداشت",
-  "Comments": "یادداشت ها",
-  "Competence": "صلاحیت",
-  "Compliance": "انطباق",
-  "Component name": "اسم مولفه",
-  "Compute generation": "محاسبه نسل",
-  "Configuration": "پیکربندی",
-  "Configuration options": "گزینه های پیکر بندی",
-  "Configure": "پیکر بندی کنید",
-  "Confirm deletion?": "حذف را تایید میکنید؟",
-  "Confirmation": "تاییدیه",
-  "Connected subnets": "subnet ها متصل شدند",
-  "Connection details": "جزئیات اتصال",
-  "Contact email": "تماس با ایمیل",
-  "Contact phone": "شماره تماس",
-  "Control plane": "کنترل برنامه",
-  "Copy to clipboard": "در clipboard کپی کنید",
-  "Cost": "هزینه",
-  "Could not create organization": "سازماندهی نشد",
-  "Country": "کشور",
-  "Create": "ایجاد کردن",
-  "Create Network adapter": "ایجاد کردن Network adapter",
-  "Create VM snapshot for OpenStack instance": "ایجاد کردن تصویر VM برای OpenStack instance",
-  "Create VM snapshot schedule for OpenStack instance": "ایجاد کردن تصویر برنامه VM برای OpenStack instance",
-  "Create application": "برنامه ایجاد کنید.",
-  "Create catalog": "کاتالوگ ایجاد کنید.",
-  "Create disk": "دیسک ایجاد کنید",
-  "Create network for OpenStack tenant": "برای OpenStack tenant، شبکه ایجاد کنید",
-  "Create node": "ایجاد node",
-  "Create notification": "ایجاد اعلان",
-  "Create organization": "ایجاد سازمان",
-  "Create project": "ایجاد پروژه",
-  "Create request": "ایجاد درخواست",
-  "Create snapshot for OpenStack volume": "ایجاد کردن تصویر برای OpenStack volume",
-  "Create snapshot schedule for OpenStack volume": "برای OpenStack volume، عکس فوری ایجاد کنید",
-  "Create subnet": "ایجاد subnet",
-  "Created": "ایجاد شده",
-  "Created at": "ایجاد شده در",
-  "Created by": "ایجاد شده به وسیله",
-  "Creating": "ایجاد کردن",
-  "Creating a backup schedule": "ایجاد کردن یک برنامه پشتیبان",
-  "Creating a floating IP": "ایجاد کردن IP شناور",
-  "Creating a new network": "ایجاد کردن یک شیکه جدید",
-  "Creating a security group": "ایجاد کردن یک گروه امنیت",
-  "Creating a subnet": "ایجاد کردن یک subnet",
-  "Creating snapshot schedule": "ایجاد کردن برنامه عکس فوری",
-  "Current email": "ایمیل فعلی",
-  "Current flavor": "flavor فعلی",
-  "Current limit": "محدودیت فعلی",
-  "Current plan": "برنامه فعلی",
-  "Current size": "اندازه فعلی",
-  "Daily available booking time range": "محدوده زمان رزرو روزانه موجود",
-  "Dashboard": "داشبورد",
-  "Data volume type": "نوع Data volume",
-  "Date": "تاریخ",
-  "Date joined": "تاریخ پیوستن",
-  "Date of reporting": "تاریخ گزارش",
-  "Deactivate": "غیرفعال",
-  "Deactivating": "غیرفعال کردن",
-  "Default SLURM account for user": "حساب پیش فرض SLURM برای کاربر",
-  "Default account": "حساب پیش فرض",
-  "Default availability zone for provisioned instances.": "منطقه دسترسی پیش فرض تهیه شده برای instance.",
-  "Default cluster label": "لیبل cluster پیش فرض",
-  "Default value": "مقدار پیش فرض",
-  "Delete": "حذف",
-  "Delete catalog": "حذف کاتالوگ",
-  "Delete volumes": "حذف volumes",
-  "Deleting PostgreSQL server will cause deletion of all databases created within server.": "حذف کردن سرور PostgreSQLباعث خواهدشد تمام پایگاه داده ای که توسط سرور ایجاد شده است حذف شود.",
-  "Description": "توضیحات",
-  "Destination": "مقصد",
-  "Destination URL": "مقصد URL",
-  "Destroy": "از بین رفتن",
-  "Destroying": "از بین میبرد",
-  "Detach": "جدا",
-  "Detaching": "جدا کردن",
-  "Details": "جزئیات",
-  "Device": "دستگاه",
-  "Disable gateway IP advertising via DHCP": "غیر فعال کردن تبلیغات gateway IP از طریق DHCP",
-  "Disabled": "غیرفعال شده",
-  "Display name": "نمایش نام",
-  "Do not configure a gateway for this subnet": "gateway را برای این subnet پیکربندی نکنید",
-  "Do you really want to delete comment?": "آیا واقعا میخواهید یادداشت ها را حذف کنید؟",
-  "Docker version": "نسخه Docker",
-  "Documentation": "مستندات",
-  "Documents": "اسناد",
-  "Domain name": "نام Domain",
-  "Domain name. If not defined default domain will be used.": "اگر نام Domain تعریف نشده باشد،از Domain پیش فرض استفاده میشود.",
-  "Done": "انجام شده",
-  "Draft": "پیش نویس",
-  "Drop files to attach them to the issue.": "فایل ها را رها کنید تا به موضوع متصل شوند.",
-  "Drop files to attach, or": "فایل ها را برای متصل شدن رها کنید، یا",
-  "Due date": "موعد مقرر",
-  "Each mount point should be used once at most.": "هر mount point باید حداکثر یکبار استفاده شود.",
-  "Each usage report must be connected with a billing plan to assure correct calculation of accounting data.": "برای اطمینان از محاسبه صحیح داده های حسابداری، هر گزارش باید به برنامه صورتحساب متصل باشد.",
-  "Edit": "ویرایش",
-  "Edit project member": "ویرایش اعضا پروژه",
-  "Email": "ایمیل",
-  "Email change request has been cancelled.": "درخواست تغییر ایمیل لغو شده است.",
-  "Email has been updated.": "ایمیل بروز رسانی شده است.",
-  "Email verification has been sent. Please check your inbox.": "تایید ایمیل ارسال شده است.لطفا صندوق ورودی خودرا چک کنید.",
-  "Enable": "فعال کردن",
-  "Enable DHCP": "فعال کردن DHCP",
-  "Enabled": "فعال شده",
-  "Enabled default gateway": "فعال کردن پیش فرض gateway",
-  "Encountered an empty component": "مواجه شدن با یک component خالی",
-  "End": "پایان",
-  "End date": "تاریخ پایان",
-  "End time": "زمان پایان",
-  "Enter private IPv4 CIDR.": "IPv4 CID خصوصی وارد کنید.",
-  "Erred": "خراب",
-  "Error message": "پیغام خطا",
-  "Esimated price per month": "قیمت تخمین زده شده برای هر ماه",
-  "Estimated cost": "هزینه تخمین زده شده",
-  "Event type": "نوع رویداد",
-  "Event types": "انواع رویداد",
-  "Events": "رویدادها",
-  "Every day": "هرروز",
-  "Every day at": "هر روز در",
-  "Every hour": "هر ساعت",
-  "Every minute": "هر دقیقه",
-  "Every month": "هرماه",
-  "Every month service provider can report up to the amount requested by user.": "ارائه دهنده خدمات هرماه میتواند میزان درخواست شده توسط کاربر را گزارش کند.",
-  "Every week": "هر هفته",
-  "Every year": "هر سال",
-  "Executing": "اجرای",
-  "Expiration time": "زمان انقضا",
-  "Expired": "انقضا",
-  "Expires at": "منقضی میشود",
-  "Export as": "صادرات به عنوان",
-  "Extend": "گسترش",
-  "Extend OpenStack volume": "گسترش OpenStack volume",
-  "Extending": "درحال گسترش",
-  "External IP": "IP خارجی",
-  "External links": "لینک های خارجی",
-  "External network ID": "network ID خارجی",
-  "Failed to operate with backend.": "عملکرد با backend انجام نشد.",
-  "Features": "امکانات",
-  "Fee applied each time this plan is activated.": "هر بار که این طرح فعال می شود هزینه اعمال می شود.",
-  "File": "پرونده",
-  "Files": "پرونده ها",
-  "Find solution": "پیدا کردن راه حل",
-  "Fingerprint": "اثر انگشت",
-  "Fixed price": "قیمت ثابت",
-  "Fixed — use common storage quota": "ثابت- از حافظه مشترک quota استفاده کنید",
-  "Fixed-price contract": "ثابت-قرارداد قیمت",
-  "Flavor name": "نام Flavor",
-  "Floating IP": "IP شناور",
-  "Floating IP count": "تعداد IP شناور",
-  "Floating IPs": "IPs شناور",
-  "Folder": "پوشه",
-  "For": "برای",
-  "Force destroy": "نابود کردن",
-  "FreeIPA account": "حساب FreeIPA",
-  "From": "از",
-  "Full description": "توضیحات کامل",
-  "Full name": "نام کامل",
-  "Gateway IP of this subnet": "Gateway IP برای این subnet",
-  "General": "عمومی",
-  "Generate Kubeconfig file": "فایل Kubeconfig را تولید کنید",
-  "Generate password": "رمز تولید کنید",
-  "Go to marketplace": "به marketplace بروید",
-  "Guaranteed time of VM snapshot retention. If null - keep forever.": "تضمین نگه داری زمان عکس فوری VM. اگر خالی باشد. برای همیشه نگه دارید.",
-  "Guaranteed time of snapshot retention. If null - keep forever.": "تضمین نگه داری زمان عکس فوری. اگر خالی باشد. برای همیشه نگه دارید.",
-  "Hook has been removed.": "Hook، حذف شده است.",
-  "Hook removal": "حذف Hook.",
-  "Hostname": "نام Host",
-  "Icon": "آیکون",
-  "Image": "تصویر",
-  "Image name": "نام تصویر",
-  "Images": "تصویرها",
-  "Import": "وارد کردن",
-  "Import resource": "وارد کردن منبع",
-  "Importing resources": "وارد کردن منابع",
-  "In the format of GUID": "در قالب GUID",
-  "Inactive user will not be able to login into the portal.": "کاربر غیرفعال قادر به ورود به پرتال نخواهد بود.",
-  "Incident": "حادثه",
-  "Incident - client issue with service usage or availability (interruptions, degradation of quality).": "حادثه-client issue بااستفاده از خدمات یادر دسترس بودن(وقفه، تخریب کیفیت )",
-  "Include weekends": "آخر هفته ها را شامل میشود",
-  "Incorrect organization details": "اطلاعات نادرست سازمان",
-  "Informational": "اطلاعاتی",
-  "Informational - client’s request to get or provide additional information related to a service.": "client’sبرای گرفتن یا تهیه اطلاعات اضافی مرتبط به سرویس درخواست میدهد.",
-  "Initial admin password": "رمز اولیه ادمین",
-  "Initial admin username": "نام کاربری اولیه ادمین",
-  "Instance does not have any floating IPs yet.": "Instance هنوز هیچ IPs شناوری ندارد.",
-  "Instance does not have any security groups yet.": "Instance هنوز هیچ security groups ندارد.",
-  "Instance is already active.": "درحال حاضر Instance فعال است.",
-  "Instance is already stopped.": "Instance قبلا متوقف شده است.",
-  "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first.": "Instance هنوز به هیچ subnet داخلی وصل نشده است.لطفا ابتدا به یک subnet داخلی وصل شوید.",
-  "Instance should be OK, or erred. Please contact support.": "Instance یا باید درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید.",
-  "Instance should be shutoff and OK or erred. Please contact support.": "Instance باید غیر فعال و درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید.",
-  "Instances count": "شمردن Instance",
-  "Internal": "داخلی",
-  "Internal IP": "IP داخلی",
-  "Internal IPs": "IPs داخلی",
-  "Internal name": "نام داخلی",
-  "Internal network ID": "network ID داخلی",
-  "Internal network allocation pool": "اختصاص شبکه داخلی",
-  "Internal network mask (CIDR)": "network mask (CIDR) داخلی",
-  "Internal server error occurred. Please try again or contact support.": "خطا سرور داخلی رخ داده است. لطفا با پشتیبانی تماس بگیرید.",
-  "Invalid URL. Unable to parse payment details.": "URL نامعتبر.تجزیه و تحلیل جزیئات پرداخت امکان پذیر نیست.",
-  "Invitation approval": "تایید دعوت",
-  "Invitation could not be accepted": "دعوت مورد تایید نیست",
-  "Invitation email is:": "ایمیل دعوت:",
-  "Invitation has been approved.": "دعوت تایید شده است.",
-  "Invitation has been canceled.": "دعوت لغو شده است.",
-  "Invitation has been rejected.": "دعوت رد شده است.",
-  "Invitation has been sent again.": "دعوت مجدد ارسال شده است.",
-  "Invitation is not found.": "دعوت پیدا نشد.",
-  "Invitation is not valid anymore.": "دعوت دیگر معتبر نیست.",
-  "Invitation is not valid.": "دعوت معتبر نیست.",
-  "Invitation link": "لینک دعوت",
-  "Invitation rejection": "رد دعوت",
-  "Invitations": "دعوت ها",
-  "Invite user": "کاربر را دعوت کنید",
-  "Invoice": "فاکتور",
-  "Invoice No.": "شماره فاکتور.",
-  "Invoice date": "تاریخ فاکتور",
-  "Invoice number": "شماره فاکتور",
-  "Invoiced to": "صورتحساب به",
-  "Is active": "فعال است",
-  "Is external": "خارجی است",
-  "It is used to automatically assign floating IP to your virtual machine.": "به صورت خودکار برای اختصاص به IPشناور در ماشین مجازی استفاده میشود.",
-  "Item": "مورد",
-  "Job position": "موقعیت شغلی",
-  "Job title": "عنوان شغلی",
-  "Keep forever": "برای همیشه نگه دارید",
-  "Keep until": "نگه دارید تا",
-  "Kept until": "نگه داشته شده تا",
-  "Kubeconfig file": "فایل Kubeconfig",
-  "Kubernetes version": "ورژن Kubernetes",
-  "Label that is visible to users in Marketplace.": "برچسب قابل مشاهده برای کاربران در Marketplace.",
-  "Labels": "برچسب ها",
-  "Learn more": "بیشتر بدانید",
-  "Lifetime will be updated and reset upon saving the form.": "پس از ذخیره فرم، طول عمر بروزرسانی و تنظیم مجدد میشود.",
-  "Limit": "محدود",
-  "Limit amount": "مقدار محدود",
-  "Limit period": "دوره محدود",
-  "Limits": "محدودیت ها",
-  "Link": "لینک",
-  "Link OpenStack Instance": "لینک  OpenStack Instance",
-  "Loading": "بارگذاری",
-  "Loading actions": "اعمال بارگیری",
-  "Location": "مکان",
-  "Log out": "خروج",
-  "Logging user in": "ورود کاربر",
-  "Login": "ورود",
-  "Login failed": "ورود ناموفق",
-  "Logo": "آرم",
-  "Logout failed": "خروج نا موفق",
-  "MAC address": "آدرس MAC",
-  "Manage": "مدیریت کنید",
-  "Manage security groups": "مدیریت security groups",
-  "Management": "مدیریت",
-  "Max # of VM snapshots": "حداکثر \\# از VM snapshots",
-  "Max # of snapshots": "حداکثر \\# از عکس فوری",
-  "Max number of VM snapshots": "حداکثر تعداد از VM snapshots",
-  "Maximal number of resources": "حداکثر تعداد از منابع",
-  "Maximal value": "حداکثر مقدار",
-  "Maximum RAM for each VM": "حداکثر RAM برای هر VM",
-  "Maximum allowed value": "حداکثر مقدار مجاز",
-  "Maximum capacity for each disk": "حداکثر ظرفیت برای هر disk",
-  "Maximum monthly": "حداکثر ماهانه",
-  "Maximum total": "حداکثر کل",
-  "Maximum total size of the disk space per VM": "حداکثر اندازه کل از فضای دیسک هر VM",
-  "Maximum username length with mandatory username prefix is 32 characters.": "حداکثر طول نام کاربری با پیشوند نام کاربری prefix،باید 32 کاراکتر باشد.",
-  "Maximum vCPU for each VM": "حداکثر vCPU برای هر",
-  "Measured unit": "واحد اندازه گیری",
-  "Member": "عضو",
-  "Memory per vCore": "حافظه برای هر vCore",
-  "Memory size in GiB": "اندازه حافظه در GiB",
-  "Message": "پیغام",
-  "Method": "روش",
-  "Minimal value": "حداقل مقدار",
-  "Minimum allowed value": "حداقل مقدار مجاز",
-  "Minimum booking time slot duration.": "حداقل مدت زمان رزرو slot.",
-  "Mobile phone number": "شماره تلفن همراه",
-  "Monthly cost": "هزینه ماهانه",
-  "Monthly invoices": "صورتحساب ماهانه",
-  "Must start with a country prefix ie EE34501234215": "باید با کشور prefix شروع شود مثل EE34501234215",
-  "My offerings": "پیشنهادات من",
-  "Name": "نام",
-  "Name is duplicated. Choose other name.": "نام تکراری است .اسم دیگری انتخاب کنید.",
-  "Name is too short, names should be at least two alphanumeric characters.": "نام بسیار کوتاه است، اسم ها باید حداقل دو حرف الفبا داشته باشند.",
-  "Name of your organization.": "اسم سازمان شما.",
-  "Name should consist of latin symbols and numbers.": "نام باید شامل اعداد و نماد ها باشد.",
-  "Name should contain at least 3 symbols.": "نام باید حداقل شامل 3 نماد باشد.",
-  "Namespace": "فضای نام",
-  "Namespace should be unique.": "فضای نام باید منحصر به فرد باشد.",
-  "Native name": "اسم بومی",
-  "Negative": "منفی",
-  "Network": "شبکه",
-  "Networks": "شبکه ها",
-  "New email": "ایمیل جدید",
-  "New flavor": "flavor جدید",
-  "New limit": "محدودیت جدید",
-  "New plan": "برنامه جدید",
-  "New size": "اندازه جدید",
-  "Next": "بعدی",
-  "No": "خیر",
-  "No access info.": "دسترسی اطلاعات ندارد.",
-  "No results found": "نتیجه ای یافت نشد",
-  "No, continue using current email": "خیر،به استفاده از ایمیل فعلی ادامه دهید",
-  "Node has been created.": "Node ایجاد شده است.",
-  "Not assigned": "اختصاص داده نشده",
-  "Not running accounting": "عدم اجرای حسابداری",
-  "Nothing to see here": "اینجا چیزی جهت مشاهده نیست",
-  "Nothing to show here": "اینجا چیزی جهت نمایش نیست",
-  "Notification has been created.": "اعلان ایجاد شده است.",
-  "Notification has been updated.": "اعلان به روز شده است.",
-  "Notification method": "روش اطلاع رسانی",
-  "Notifications": "اعلان ها",
-  "Number of CPU cores per socket": "تعدادی از هسته های CPU برای هر socket",
-  "Number of cores in a VM": "تعدادی از هسته ها در VM",
-  "Number of created instances": "تعدادی از instance های ایجاد شده",
-  "Number of running instances": "تعدادی از instance های دز حال اجرا",
-  "OK": "باشه",
-  "Object is not found.": "شیء یافت نشد.",
-  "Offering": "پیشنهاد",
-  "Offering details": "ارائه جزییات",
-  "Offering has been created.": "پیشنهاد ایجاد شده است.",
-  "Offering state has been updated.": "حالت پیشنهادی بروز رسانی شده است.",
-  "Offering type": "نوع پیشنهاد",
-  "Offerings": "پیشنهادات",
-  "One-time": "یکبار",
-  "One-time on plan switch": "یکبار در  plan switch",
-  "Only pending and expired invitations can be sent again.": "فقط دعوت های تاریخ گذشته یا منتظر ارسال میتوانند مجدد ارسال شوند.",
-  "Only pending invitation can be canceled.": "فقط دعوت های منتظر ارسال را میتوان لغو کرد.",
-  "Only staff and organization users are allowed to open console.": "فقط کارمندان و کاربران سازمان، مجاز به باز کردن console هستند.",
-  "Only staff can manage OpenStack tenant.": "فقط کارمندان میتوانند OpenStack tenant را مدیریت کنند.",
-  "Open": "باز",
-  "Open console": "console را باز کنید",
-  "OpenStack Images": "تصویر های OpenStack",
-  "Order details": "جزییات سفارش",
-  "Order has been approved.": "سفارش تایید شده است.",
-  "Order has been rejected.": "سفارش رد شده است.",
-  "Order has been submitted.": "سفارش ارسال شده است.",
-  "Orders": "سفارش ها",
-  "Organization": "سازمان",
-  "Organization contains projects. Please remove them first.": "سازمان شامل پروژه ها است.لطفا ابتدا آنها را حذف کنید.",
-  "Organization events": "رویدادهای سازمان",
-  "Organization has been created.": "سازمان ایجاد شده است.",
-  "Organization has signed a fixed price agreement": "سازمان توافق نامه قیمت ثابت را امضا کرده است",
-  "Organization name": "نام سازمان",
-  "Organization removal": "حذف سازمان",
-  "Organization roles": "نقش سازمان",
-  "Organizations": "سازمان ها"
+  "(VAT is not included)": {
+    "message": "مالیات بر ارزش افزوده گنجانده نشده است"
+  },
+  "A profile has been created.": {
+    "message": "پروفایل ایجاد شده است."
+  },
+  "API secret code:": {
+    "message": "کد مخفی API:"
+  },
+  "Abbreviation": {
+    "message": "اختصار"
+  },
+  "Accept": {
+    "message": "پذیرفتن"
+  },
+  "Accepted": {
+    "message": "پذیرفته شده"
+  },
+  "Access": {
+    "message": "دسترسی"
+  },
+  "Account removal": {
+    "message": "حذف حساب"
+  },
+  "Accounting": {
+    "message": "حسابداری"
+  },
+  "Accounting period": {
+    "message": "دوره حسابداری"
+  },
+  "Accounting plans": {
+    "message": "برنامه های حسابداری"
+  },
+  "Accounting record": {
+    "message": "سابقه حسابداری"
+  },
+  "Accounting start date": {
+    "message": "تاریخ شروع حسابداری"
+  },
+  "Accounting type": {
+    "message": "نوع حسابداری"
+  },
+  "Actions": {
+    "message": "عمل"
+  },
+  "Activate": {
+    "message": "فعال کردن"
+  },
+  "Activating": {
+    "message": "فعال کردن"
+  },
+  "Active": {
+    "message": "فعال"
+  },
+  "Active count": {
+    "message": "حساب فعال"
+  },
+  "Active user will be able to login into the portal.": {
+    "message": "کاربر فعال قادر خواهد بود به پرتال وارد شود."
+  },
+  "Add": {
+    "message": "اضافه کردن"
+  },
+  "Add comment": {
+    "message": "اضافه کردن نظر"
+  },
+  "Add component": {
+    "message": "افزودن اجزا"
+  },
+  "Add data volume": {
+    "message": "افزودن حجم داده"
+  },
+  "Add key": {
+    "message": "اضافه کردن کلید"
+  },
+  "Add member": {
+    "message": "اضافه کردن عضو"
+  },
+  "Add new offering": {
+    "message": "پیشنهاد جدید اضافه کنید"
+  },
+  "Add notification": {
+    "message": "اعلان را اضافه کنید"
+  },
+  "Add offering": {
+    "message": "پیشنهاد را اضافه کنید"
+  },
+  "Add organization": {
+    "message": "سازمان را اضافه کنید"
+  },
+  "Add payment profile": {
+    "message": "پروفایل پرداخت را اضافه کنید"
+  },
+  "Add plan": {
+    "message": "اضافه کردن برنامه"
+  },
+  "Add project": {
+    "message": "اضافه کردن پروژه"
+  },
+  "Add resource": {
+    "message": "اضافه کردن منبع"
+  },
+  "Add rule": {
+    "message": "اضافه کردن قانون"
+  },
+  "Add to a new namespace": {
+    "message": "یک فضای نام جدید اضافه کنید"
+  },
+  "Additional space to apply to storage quota to be used by snapshots.": {
+    "message": "فضای اضافی برای اعمال به سهمیه ذخیره سازی به توسط عکس های فوری مورد استفاده قرار گیرد."
+  },
+  "Additionally service provider can charge for usage of the following components": {
+    "message": "علاوه بر این ارائه دهنده خدمات می تواند برای استفاده از اجزای زیر شارژ"
+  },
+  "Address": {
+    "message": "آدرس"
+  },
+  "Admin password": {
+    "message": "گذرواژه مدیریت"
+  },
+  "Admin username": {
+    "message": "نام کاربری ادمین"
+  },
+  "Affected resource": {
+    "message": "منابع آسیب دیده"
+  },
+  "After secret API code has been regenerated, it will not be possible to submit usage with the old key.": {
+    "message": "پس از کد API مخفی بازسازی شده است, آن امکان پذیر نخواهد بود برای ارسال استفاده با کلید های قدیمی."
+  },
+  "Agreement number": {
+    "message": "شماره توافق نامه"
+  },
+  "Alert": {
+    "message": "هشدار"
+  },
+  "All": {
+    "message": "همه"
+  },
+  "All resources have been imported.": {
+    "message": "تمام منابع وارد شده اند."
+  },
+  "Allocation name": {
+    "message": "نام تخصیص"
+  },
+  "Allocation pools": {
+    "message": "استخر های تخصیص"
+  },
+  "Allow bookings to be scheduled at weekends": {
+    "message": "اجازه رزرو در تعطیلات آخر هفته برنامه ریزی شود"
+  },
+  "Amount": {
+    "message": "مقدار"
+  },
+  "An error occurred on project removal.": {
+    "message": "خطایی در حذف پروژه رخ داد."
+  },
+  "Annotations": {
+    "message": "حاشیه نویسی"
+  },
+  "Answer": {
+    "message": "پاسخ"
+  },
+  "Answers": {
+    "message": "پاسخ ها"
+  },
+  "Answers have been submitted": {
+    "message": "پاسخ ها را مشاهده کنید"
+  },
+  "Any": {
+    "message": "هیچ"
+  },
+  "Application configuration": {
+    "message": "پیکر بندی برنامه ها"
+  },
+  "Application details": {
+    "message": "جزییات برنامه ها"
+  },
+  "Application has been created.": {
+    "message": "برنامه ها ایجاد شده اند."
+  },
+  "Application templates": {
+    "message": "قالب های برنامه ها"
+  },
+  "Applications": {
+    "message": "برنامه ها"
+  },
+  "Apply": {
+    "message": "درخواست دادن"
+  },
+  "Approve": {
+    "message": "تایید"
+  },
+  "Approve payment": {
+    "message": "تایید هزینه"
+  },
+  "Approved at": {
+    "message": "تایید شده در"
+  },
+  "Approved by": {
+    "message": "تایید شده توسط"
+  },
+  "Archive": {
+    "message": "بایگانی"
+  },
+  "Archived": {
+    "message": "بایگانی شده"
+  },
+  "Are you sure you want to delete the payment profile?": {
+    "message": "آیا مطمئن هستید که می خواهید نمایه پرداخت را حذف کنید ؟"
+  },
+  "Are you sure you would like to delete the hook?": {
+    "message": "آیا مطمئن هستید که می خواهید hook را حذف کنید ؟"
+  },
+  "Are you sure you would like to delete the key?": {
+    "message": "آیا شما مطمئن هستید که میخواهید key را پاک کنید؟"
+  },
+  "Article code": {
+    "message": "کد مقاله"
+  },
+  "Assigned to": {
+    "message": "اختصاص یافته به"
+  },
+  "Attach": {
+    "message": "پیوستن"
+  },
+  "Attached to": {
+    "message": "پیوستن به"
+  },
+  "Attaching": {
+    "message": "پیوستن"
+  },
+  "Attachments": {
+    "message": "ضمیمه"
+  },
+  "Attributes": {
+    "message": "ویژگی ها"
+  },
+  "Audit log": {
+    "message": "گزارش حسابرسی"
+  },
+  "Audit logs": {
+    "message": "گزارش های حسابرسی"
+  },
+  "Authenticate using Mobile ID": {
+    "message": "تأیید اعتبار با استفاده از شناسه تلفن همراه"
+  },
+  "Authentication events": {
+    "message": "رویدادهای تأیید اعتبار"
+  },
+  "Authentication with Mobile ID has been canceled by user or timed out. Details:": {
+    "message": "احراز هویت با شناسه تلفن همراه توسط کاربر لغو شده و یا به پایان رسیده است. جزئیات:"
+  },
+  "Auto-assign floating IP": {
+    "message": "اختصاص دادن خودکار IP شناور"
+  },
+  "Auto-generated": {
+    "message": "تولید خودکار"
+  },
+  "Availability": {
+    "message": "دسترسی"
+  },
+  "Availability zone": {
+    "message": "دسترسی zone"
+  },
+  "Azure Active Directory Application Secret": {
+    "message": "راز برنامه Azure Active Directory"
+  },
+  "Azure PostgreSQL database server": {
+    "message": "سرور پایگاه داده Azure PostgreSQL"
+  },
+  "Azure Virtual Machine": {
+    "message": "ماشین مجازی Azure"
+  },
+  "Back": {
+    "message": "بازگشت"
+  },
+  "Back to login": {
+    "message": "بازگشت به ورود"
+  },
+  "Backing up": {
+    "message": "پشتیبان گیری"
+  },
+  "Bank account": {
+    "message": "حساب بانکی"
+  },
+  "Bank name": {
+    "message": "نام بانک"
+  },
+  "Base image name": {
+    "message": "نام تصویر پایه"
+  },
+  "Billing": {
+    "message": "صورتحساب"
+  },
+  "Billing period": {
+    "message": "دوره صورتحساب"
+  },
+  "Booking": {
+    "message": "رزرو"
+  },
+  "Booking has been accepted.": {
+    "message": "رزرو تایید شده است."
+  },
+  "Bookings": {
+    "message": "رزرو"
+  },
+  "Bootable": {
+    "message": "بوت کردن"
+  },
+  "Branch": {
+    "message": "شعبه"
+  },
+  "Browse": {
+    "message": "مرور کردن"
+  },
+  "Business hours": {
+    "message": "ساعات کاری"
+  },
+  "CPU usage": {
+    "message": "استفاده CPU"
+  },
+  "Caller": {
+    "message": "تماس گیرنده"
+  },
+  "Cancel": {
+    "message": "لغو"
+  },
+  "Cancel invitation": {
+    "message": "لغو دعوت"
+  },
+  "Cancel payment": {
+    "message": "لغو صورتحساب"
+  },
+  "Cancel request": {
+    "message": "لغو درخواست"
+  },
+  "Canceled": {
+    "message": "لغو شده"
+  },
+  "Cannot create floating IP if tenant external network is not defined.": {
+    "message": "اگر شبکه خارجی tenant تعریف نشده باشد نمیتوانید IP شناور ایجاد کنید."
+  },
+  "Catalog": {
+    "message": "کاتالوگ"
+  },
+  "Catalog URL": {
+    "message": "کاتالوگ URL"
+  },
+  "Catalog has been created.": {
+    "message": "کاتالوگ ایجاد شده است."
+  },
+  "Catalog has been deleted.": {
+    "message": "کاتالوگ حذف شده است."
+  },
+  "Catalogues": {
+    "message": "کاتالوگ ها"
+  },
+  "Categories": {
+    "message": "دسته بندی ها"
+  },
+  "Category": {
+    "message": "دسته بندی"
+  },
+  "Challenge code": {
+    "message": "کد چالش"
+  },
+  "Change Request": {
+    "message": "درخواست تغییر"
+  },
+  "Change flavor": {
+    "message": "تغییر flavor"
+  },
+  "Change limits": {
+    "message": "محدودیت ها را تغییر دهید"
+  },
+  "Change plan": {
+    "message": "تغییر برنامه"
+  },
+  "Change request - client’s request to perform a generic modification of data or service.": {
+    "message": "تغییر درخواست-درخواست client’s برای انجام اصلاح عمومی داده ها یا خدمات."
+  },
+  "Change resource limits": {
+    "message": "منابع محدودیت ها را تغییر دهید"
+  },
+  "Change resource plan": {
+    "message": "منابع برنامه ها را تغییر دهید"
+  },
+  "Change user email": {
+    "message": "ایمیل کاربر را تغییر دهید"
+  },
+  "Changing flavor": {
+    "message": "تغییر دادن flavor"
+  },
+  "Changing password": {
+    "message": "تغییر دادن رمز"
+  },
+  "Choices as comma-separated list": {
+    "message": "گزینه هایی به عنوان کاما -لیست جدا"
+  },
+  "Client ID": {
+    "message": "شناسه Client"
+  },
+  "Client organization": {
+    "message": "سازماندهی Client"
+  },
+  "Client project": {
+    "message": "پروژه Client"
+  },
+  "Close": {
+    "message": "بستن"
+  },
+  "Cloud RAM": {
+    "message": "ابر RAM"
+  },
+  "Cloud init template": {
+    "message": "قالب اولیه ابر"
+  },
+  "Cloud vCPU": {
+    "message": "ابر vCPU"
+  },
+  "Cluster name": {
+    "message": "نام Cluster"
+  },
+  "Code is too short.": {
+    "message": "کد خیلی کوتاه است."
+  },
+  "Collation": {
+    "message": "جمع بندی"
+  },
+  "Comment": {
+    "message": "یادداشت"
+  },
+  "Comments": {
+    "message": "یادداشت ها"
+  },
+  "Compliance": {
+    "message": "انطباق"
+  },
+  "Component name": {
+    "message": "اسم مولفه"
+  },
+  "Compute generation": {
+    "message": "محاسبه نسل"
+  },
+  "Configuration": {
+    "message": "پیکربندی"
+  },
+  "Configuration options": {
+    "message": "گزینه های پیکر بندی"
+  },
+  "Configure": {
+    "message": "پیکر بندی کنید"
+  },
+  "Confirmation": {
+    "message": "تاییدیه"
+  },
+  "Connected subnets": {
+    "message": "subnet ها متصل شدند"
+  },
+  "Connection details": {
+    "message": "جزئیات اتصال"
+  },
+  "Contact email": {
+    "message": "تماس با ایمیل"
+  },
+  "Contact phone": {
+    "message": "شماره تماس"
+  },
+  "Control plane": {
+    "message": "کنترل برنامه"
+  },
+  "Copy to clipboard": {
+    "message": "در clipboard کپی کنید"
+  },
+  "Cost": {
+    "message": "هزینه"
+  },
+  "Could not create organization": {
+    "message": "سازماندهی نشد"
+  },
+  "Country": {
+    "message": "کشور"
+  },
+  "Create": {
+    "message": "ایجاد کردن"
+  },
+  "Create Network adapter": {
+    "message": "ایجاد کردن Network adapter"
+  },
+  "Create VM snapshot for OpenStack instance": {
+    "message": "ایجاد کردن تصویر VM برای OpenStack instance"
+  },
+  "Create VM snapshot schedule for OpenStack instance": {
+    "message": "ایجاد کردن تصویر برنامه VM برای OpenStack instance"
+  },
+  "Create application": {
+    "message": "برنامه ایجاد کنید."
+  },
+  "Create catalog": {
+    "message": "کاتالوگ ایجاد کنید."
+  },
+  "Create disk": {
+    "message": "دیسک ایجاد کنید"
+  },
+  "Create network for OpenStack tenant": {
+    "message": "برای OpenStack tenant، شبکه ایجاد کنید"
+  },
+  "Create node": {
+    "message": "ایجاد node"
+  },
+  "Create notification": {
+    "message": "ایجاد اعلان"
+  },
+  "Create organization": {
+    "message": "ایجاد سازمان"
+  },
+  "Create project": {
+    "message": "ایجاد پروژه"
+  },
+  "Create request": {
+    "message": "ایجاد درخواست"
+  },
+  "Create snapshot for OpenStack volume": {
+    "message": "ایجاد کردن تصویر برای OpenStack volume"
+  },
+  "Create snapshot schedule for OpenStack volume": {
+    "message": "برای OpenStack volume، عکس فوری ایجاد کنید"
+  },
+  "Create subnet": {
+    "message": "ایجاد subnet"
+  },
+  "Created": {
+    "message": "ایجاد شده"
+  },
+  "Created at": {
+    "message": "ایجاد شده در"
+  },
+  "Created by": {
+    "message": "ایجاد شده به وسیله"
+  },
+  "Creating": {
+    "message": "ایجاد کردن"
+  },
+  "Creating a backup schedule": {
+    "message": "ایجاد کردن یک برنامه پشتیبان"
+  },
+  "Creating a floating IP": {
+    "message": "ایجاد کردن IP شناور"
+  },
+  "Creating a new network": {
+    "message": "ایجاد کردن یک شیکه جدید"
+  },
+  "Creating a security group": {
+    "message": "ایجاد کردن یک گروه امنیت"
+  },
+  "Creating a subnet": {
+    "message": "ایجاد کردن یک subnet"
+  },
+  "Creating snapshot schedule": {
+    "message": "ایجاد کردن برنامه عکس فوری"
+  },
+  "Current email": {
+    "message": "ایمیل فعلی"
+  },
+  "Current flavor": {
+    "message": "flavor فعلی"
+  },
+  "Current limit": {
+    "message": "محدودیت فعلی"
+  },
+  "Current plan": {
+    "message": "برنامه فعلی"
+  },
+  "Current size": {
+    "message": "اندازه فعلی"
+  },
+  "Daily available booking time range": {
+    "message": "محدوده زمان رزرو روزانه موجود"
+  },
+  "Dashboard": {
+    "message": "داشبورد"
+  },
+  "Data volume type": {
+    "message": "نوع Data volume"
+  },
+  "Date": {
+    "message": "تاریخ"
+  },
+  "Date joined": {
+    "message": "تاریخ پیوستن"
+  },
+  "Date of reporting": {
+    "message": "تاریخ گزارش"
+  },
+  "Deactivate": {
+    "message": "غیرفعال"
+  },
+  "Deactivating": {
+    "message": "غیرفعال کردن"
+  },
+  "Default SLURM account for user": {
+    "message": "حساب پیش فرض SLURM برای کاربر"
+  },
+  "Default account": {
+    "message": "حساب پیش فرض"
+  },
+  "Default availability zone for provisioned instances.": {
+    "message": "منطقه دسترسی پیش فرض تهیه شده برای instance."
+  },
+  "Default cluster label": {
+    "message": "لیبل cluster پیش فرض"
+  },
+  "Default value": {
+    "message": "مقدار پیش فرض"
+  },
+  "Delete": {
+    "message": "حذف"
+  },
+  "Delete catalog": {
+    "message": "حذف کاتالوگ"
+  },
+  "Delete volumes": {
+    "message": "حذف volumes"
+  },
+  "Deleting PostgreSQL server will cause deletion of all databases created within server.": {
+    "message": "حذف کردن سرور PostgreSQLباعث خواهدشد تمام پایگاه داده ای که توسط سرور ایجاد شده است حذف شود."
+  },
+  "Description": {
+    "message": "توضیحات"
+  },
+  "Destination": {
+    "message": "مقصد"
+  },
+  "Destination URL": {
+    "message": "مقصد URL"
+  },
+  "Destroy": {
+    "message": "از بین رفتن"
+  },
+  "Destroying": {
+    "message": "از بین میبرد"
+  },
+  "Detach": {
+    "message": "جدا"
+  },
+  "Detaching": {
+    "message": "جدا کردن"
+  },
+  "Details": {
+    "message": "جزئیات"
+  },
+  "Device": {
+    "message": "دستگاه"
+  },
+  "Disable gateway IP advertising via DHCP": {
+    "message": "غیر فعال کردن تبلیغات gateway IP از طریق DHCP"
+  },
+  "Disabled": {
+    "message": "غیرفعال شده"
+  },
+  "Display name": {
+    "message": "نمایش نام"
+  },
+  "Do not configure a gateway for this subnet": {
+    "message": "gateway را برای این subnet پیکربندی نکنید"
+  },
+  "Do you really want to delete comment?": {
+    "message": "آیا واقعا میخواهید یادداشت ها را حذف کنید؟"
+  },
+  "Docker version": {
+    "message": "نسخه Docker"
+  },
+  "Documentation": {
+    "message": "مستندات"
+  },
+  "Documents": {
+    "message": "اسناد"
+  },
+  "Domain name": {
+    "message": "نام Domain"
+  },
+  "Domain name. If not defined default domain will be used.": {
+    "message": "اگر نام Domain تعریف نشده باشد،از Domain پیش فرض استفاده میشود."
+  },
+  "Done": {
+    "message": "انجام شده"
+  },
+  "Draft": {
+    "message": "پیش نویس"
+  },
+  "Drop files to attach them to the issue.": {
+    "message": "فایل ها را رها کنید تا به موضوع متصل شوند."
+  },
+  "Drop files to attach, or": {
+    "message": "فایل ها را برای متصل شدن رها کنید، یا"
+  },
+  "Due date": {
+    "message": "موعد مقرر"
+  },
+  "Each mount point should be used once at most.": {
+    "message": "هر mount point باید حداکثر یکبار استفاده شود."
+  },
+  "Each usage report must be connected with a billing plan to assure correct calculation of accounting data.": {
+    "message": "برای اطمینان از محاسبه صحیح داده های حسابداری، هر گزارش باید به برنامه صورتحساب متصل باشد."
+  },
+  "Edit": {
+    "message": "ویرایش"
+  },
+  "Edit project member": {
+    "message": "ویرایش اعضا پروژه"
+  },
+  "Email": {
+    "message": "ایمیل"
+  },
+  "Email change request has been cancelled.": {
+    "message": "درخواست تغییر ایمیل لغو شده است."
+  },
+  "Email has been updated.": {
+    "message": "ایمیل بروز رسانی شده است."
+  },
+  "Email verification has been sent. Please check your inbox.": {
+    "message": "تایید ایمیل ارسال شده است.لطفا صندوق ورودی خودرا چک کنید."
+  },
+  "Enable": {
+    "message": "فعال کردن"
+  },
+  "Enable DHCP": {
+    "message": "فعال کردن DHCP"
+  },
+  "Enabled": {
+    "message": "فعال شده"
+  },
+  "Enabled default gateway": {
+    "message": "فعال کردن پیش فرض gateway"
+  },
+  "Encountered an empty component": {
+    "message": "مواجه شدن با یک component خالی"
+  },
+  "End": {
+    "message": "پایان"
+  },
+  "End date": {
+    "message": "تاریخ پایان"
+  },
+  "End time": {
+    "message": "زمان پایان"
+  },
+  "Enter private IPv4 CIDR.": {
+    "message": "IPv4 CID خصوصی وارد کنید."
+  },
+  "Erred": {
+    "message": "خراب"
+  },
+  "Error message": {
+    "message": "پیغام خطا"
+  },
+  "Esimated price per month": {
+    "message": "قیمت تخمین زده شده برای هر ماه"
+  },
+  "Estimated cost": {
+    "message": "هزینه تخمین زده شده"
+  },
+  "Event type": {
+    "message": "نوع رویداد"
+  },
+  "Event types": {
+    "message": "انواع رویداد"
+  },
+  "Events": {
+    "message": "رویدادها"
+  },
+  "Every day": {
+    "message": "هرروز"
+  },
+  "Every day at": {
+    "message": "هر روز در"
+  },
+  "Every hour": {
+    "message": "هر ساعت"
+  },
+  "Every minute": {
+    "message": "هر دقیقه"
+  },
+  "Every month": {
+    "message": "هرماه"
+  },
+  "Every month service provider can report up to the amount requested by user.": {
+    "message": "ارائه دهنده خدمات هرماه میتواند میزان درخواست شده توسط کاربر را گزارش کند."
+  },
+  "Every week": {
+    "message": "هر هفته"
+  },
+  "Every year": {
+    "message": "هر سال"
+  },
+  "Executing": {
+    "message": "اجرای"
+  },
+  "Expiration time": {
+    "message": "زمان انقضا"
+  },
+  "Expired": {
+    "message": "انقضا"
+  },
+  "Expires at": {
+    "message": "منقضی میشود"
+  },
+  "Export as": {
+    "message": "صادرات به عنوان"
+  },
+  "Extend": {
+    "message": "گسترش"
+  },
+  "Extend OpenStack volume": {
+    "message": "گسترش OpenStack volume"
+  },
+  "Extending": {
+    "message": "درحال گسترش"
+  },
+  "External IP": {
+    "message": "IP خارجی"
+  },
+  "External links": {
+    "message": "لینک های خارجی"
+  },
+  "External network ID": {
+    "message": "network ID خارجی"
+  },
+  "Failed to operate with backend.": {
+    "message": "عملکرد با backend انجام نشد."
+  },
+  "Features": {
+    "message": "امکانات"
+  },
+  "Fee applied each time this plan is activated.": {
+    "message": "هر بار که این طرح فعال می شود هزینه اعمال می شود."
+  },
+  "File": {
+    "message": "پرونده"
+  },
+  "Files": {
+    "message": "پرونده ها"
+  },
+  "Find solution": {
+    "message": "پیدا کردن راه حل"
+  },
+  "Fixed price": {
+    "message": "قیمت ثابت"
+  },
+  "Fixed — use common storage quota": {
+    "message": "ثابت- از حافظه مشترک quota استفاده کنید"
+  },
+  "Fixed-price contract": {
+    "message": "ثابت-قرارداد قیمت"
+  },
+  "Flavor name": {
+    "message": "نام Flavor"
+  },
+  "Floating IP": {
+    "message": "IP شناور"
+  },
+  "Floating IP count": {
+    "message": "تعداد IP شناور"
+  },
+  "Floating IPs": {
+    "message": "IPs شناور"
+  },
+  "Folder": {
+    "message": "پوشه"
+  },
+  "For": {
+    "message": "برای"
+  },
+  "Force destroy": {
+    "message": "نابود کردن"
+  },
+  "FreeIPA account": {
+    "message": "حساب FreeIPA"
+  },
+  "From": {
+    "message": "از"
+  },
+  "Full description": {
+    "message": "توضیحات کامل"
+  },
+  "Full name": {
+    "message": "نام کامل"
+  },
+  "Gateway IP of this subnet": {
+    "message": "Gateway IP برای این subnet"
+  },
+  "General": {
+    "message": "عمومی"
+  },
+  "Generate Kubeconfig file": {
+    "message": "فایل Kubeconfig را تولید کنید"
+  },
+  "Generate password": {
+    "message": "رمز تولید کنید"
+  },
+  "Go to marketplace": {
+    "message": "به marketplace بروید"
+  },
+  "Guaranteed time of VM snapshot retention. If null - keep forever.": {
+    "message": "تضمین نگه داری زمان عکس فوری VM. اگر خالی باشد. برای همیشه نگه دارید."
+  },
+  "Guaranteed time of snapshot retention. If null - keep forever.": {
+    "message": "تضمین نگه داری زمان عکس فوری. اگر خالی باشد. برای همیشه نگه دارید."
+  },
+  "Hook has been removed.": {
+    "message": "Hook، حذف شده است."
+  },
+  "Hook removal": {
+    "message": "حذف Hook."
+  },
+  "Hostname": {
+    "message": "نام Host"
+  },
+  "Icon": {
+    "message": "آیکون"
+  },
+  "Image": {
+    "message": "تصویر"
+  },
+  "Image name": {
+    "message": "نام تصویر"
+  },
+  "Images": {
+    "message": "تصویرها"
+  },
+  "Import": {
+    "message": "وارد کردن"
+  },
+  "Import resource": {
+    "message": "وارد کردن منبع"
+  },
+  "Importing resources": {
+    "message": "وارد کردن منابع"
+  },
+  "In the format of GUID": {
+    "message": "در قالب GUID"
+  },
+  "Inactive user will not be able to login into the portal.": {
+    "message": "کاربر غیرفعال قادر به ورود به پرتال نخواهد بود."
+  },
+  "Incident": {
+    "message": "حادثه"
+  },
+  "Incident - client issue with service usage or availability (interruptions, degradation of quality).": {
+    "message": "حادثه-client issue بااستفاده از خدمات یادر دسترس بودن(وقفه، تخریب کیفیت )"
+  },
+  "Include weekends": {
+    "message": "آخر هفته ها را شامل میشود"
+  },
+  "Incorrect organization details": {
+    "message": "اطلاعات نادرست سازمان"
+  },
+  "Informational": {
+    "message": "اطلاعاتی"
+  },
+  "Informational - client’s request to get or provide additional information related to a service.": {
+    "message": "client’sبرای گرفتن یا تهیه اطلاعات اضافی مرتبط به سرویس درخواست میدهد."
+  },
+  "Initial admin password": {
+    "message": "رمز اولیه ادمین"
+  },
+  "Initial admin username": {
+    "message": "نام کاربری اولیه ادمین"
+  },
+  "Instance does not have any floating IPs yet.": {
+    "message": "Instance هنوز هیچ IPs شناوری ندارد."
+  },
+  "Instance does not have any security groups yet.": {
+    "message": "Instance هنوز هیچ security groups ندارد."
+  },
+  "Instance is already active.": {
+    "message": "درحال حاضر Instance فعال است."
+  },
+  "Instance is already stopped.": {
+    "message": "Instance قبلا متوقف شده است."
+  },
+  "Instance is not connected to any internal subnets yet. Please connect it to internal subnet first.": {
+    "message": "Instance هنوز به هیچ subnet داخلی وصل نشده است.لطفا ابتدا به یک subnet داخلی وصل شوید."
+  },
+  "Instance should be OK, or erred. Please contact support.": {
+    "message": "Instance یا باید درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید."
+  },
+  "Instance should be shutoff and OK or erred. Please contact support.": {
+    "message": "Instance باید غیر فعال و درست باشد یا خطا بدهد.لطفا با پشتیبانی تماس بگیرید."
+  },
+  "Instances count": {
+    "message": "شمردن Instance"
+  },
+  "Internal": {
+    "message": "داخلی"
+  },
+  "Internal IP": {
+    "message": "IP داخلی"
+  },
+  "Internal IPs": {
+    "message": "IPs داخلی"
+  },
+  "Internal name": {
+    "message": "نام داخلی"
+  },
+  "Internal network ID": {
+    "message": "network ID داخلی"
+  },
+  "Internal network allocation pool": {
+    "message": "اختصاص شبکه داخلی"
+  },
+  "Internal network mask (CIDR)": {
+    "message": "network mask (CIDR) داخلی"
+  },
+  "Internal server error occurred. Please try again or contact support.": {
+    "message": "خطا سرور داخلی رخ داده است. لطفا با پشتیبانی تماس بگیرید."
+  },
+  "Invalid URL. Unable to parse payment details.": {
+    "message": "URL نامعتبر.تجزیه و تحلیل جزیئات پرداخت امکان پذیر نیست."
+  },
+  "Invitation approval": {
+    "message": "تایید دعوت"
+  },
+  "Invitation could not be accepted": {
+    "message": "دعوت مورد تایید نیست"
+  },
+  "Invitation email is:": {
+    "message": "ایمیل دعوت:"
+  },
+  "Invitation has been approved.": {
+    "message": "دعوت تایید شده است."
+  },
+  "Invitation has been canceled.": {
+    "message": "دعوت لغو شده است."
+  },
+  "Invitation has been rejected.": {
+    "message": "دعوت رد شده است."
+  },
+  "Invitation has been sent again.": {
+    "message": "دعوت مجدد ارسال شده است."
+  },
+  "Invitation is not found.": {
+    "message": "دعوت پیدا نشد."
+  },
+  "Invitation is not valid anymore.": {
+    "message": "دعوت دیگر معتبر نیست."
+  },
+  "Invitation is not valid.": {
+    "message": "دعوت معتبر نیست."
+  },
+  "Invitation link": {
+    "message": "لینک دعوت"
+  },
+  "Invitation rejection": {
+    "message": "رد دعوت"
+  },
+  "Invitations": {
+    "message": "دعوت ها"
+  },
+  "Invite user": {
+    "message": "کاربر را دعوت کنید"
+  },
+  "Invoice": {
+    "message": "فاکتور"
+  },
+  "Invoice No.": {
+    "message": "شماره فاکتور."
+  },
+  "Invoice date": {
+    "message": "تاریخ فاکتور"
+  },
+  "Invoice number": {
+    "message": "شماره فاکتور"
+  },
+  "Invoiced to": {
+    "message": "صورتحساب به"
+  },
+  "Is active": {
+    "message": "فعال است"
+  },
+  "Is external": {
+    "message": "خارجی است"
+  },
+  "It is used to automatically assign floating IP to your virtual machine.": {
+    "message": "به صورت خودکار برای اختصاص به IPشناور در ماشین مجازی استفاده میشود."
+  },
+  "Item": {
+    "message": "مورد"
+  },
+  "Job position": {
+    "message": "موقعیت شغلی"
+  },
+  "Job title": {
+    "message": "عنوان شغلی"
+  },
+  "Keep forever": {
+    "message": "برای همیشه نگه دارید"
+  },
+  "Keep until": {
+    "message": "نگه دارید تا"
+  },
+  "Kept until": {
+    "message": "نگه داشته شده تا"
+  },
+  "Kubeconfig file": {
+    "message": "فایل Kubeconfig"
+  },
+  "Kubernetes version": {
+    "message": "ورژن Kubernetes"
+  },
+  "Label that is visible to users in Marketplace.": {
+    "message": "برچسب قابل مشاهده برای کاربران در Marketplace."
+  },
+  "Labels": {
+    "message": "برچسب ها"
+  },
+  "Learn more": {
+    "message": "بیشتر بدانید"
+  },
+  "Lifetime will be updated and reset upon saving the form.": {
+    "message": "پس از ذخیره فرم، طول عمر بروزرسانی و تنظیم مجدد میشود."
+  },
+  "Limit": {
+    "message": "محدود"
+  },
+  "Limit amount": {
+    "message": "مقدار محدود"
+  },
+  "Limit period": {
+    "message": "دوره محدود"
+  },
+  "Limits": {
+    "message": "محدودیت ها"
+  },
+  "Link": {
+    "message": "لینک"
+  },
+  "Link OpenStack Instance": {
+    "message": "لینک  OpenStack Instance"
+  },
+  "Loading": {
+    "message": "بارگذاری"
+  },
+  "Loading actions": {
+    "message": "اعمال بارگیری"
+  },
+  "Location": {
+    "message": "مکان"
+  },
+  "Log out": {
+    "message": "خروج"
+  },
+  "Logging user in": {
+    "message": "ورود کاربر"
+  },
+  "Login": {
+    "message": "ورود"
+  },
+  "Login failed": {
+    "message": "ورود ناموفق"
+  },
+  "Logo": {
+    "message": "آرم"
+  },
+  "Logout failed": {
+    "message": "خروج نا موفق"
+  },
+  "MAC address": {
+    "message": "آدرس MAC"
+  },
+  "Manage": {
+    "message": "مدیریت کنید"
+  },
+  "Manage security groups": {
+    "message": "مدیریت security groups"
+  },
+  "Management": {
+    "message": "مدیریت"
+  },
+  "Max # of VM snapshots": {
+    "message": "حداکثر \\# از VM snapshots"
+  },
+  "Max # of snapshots": {
+    "message": "حداکثر \\# از عکس فوری"
+  },
+  "Max number of VM snapshots": {
+    "message": "حداکثر تعداد از VM snapshots"
+  },
+  "Maximal number of resources": {
+    "message": "حداکثر تعداد از منابع"
+  },
+  "Maximal value": {
+    "message": "حداکثر مقدار"
+  },
+  "Maximum RAM for each VM": {
+    "message": "حداکثر RAM برای هر VM"
+  },
+  "Maximum allowed value": {
+    "message": "حداکثر مقدار مجاز"
+  },
+  "Maximum capacity for each disk": {
+    "message": "حداکثر ظرفیت برای هر disk"
+  },
+  "Maximum monthly": {
+    "message": "حداکثر ماهانه"
+  },
+  "Maximum total": {
+    "message": "حداکثر کل"
+  },
+  "Maximum total size of the disk space per VM": {
+    "message": "حداکثر اندازه کل از فضای دیسک هر VM"
+  },
+  "Maximum username length with mandatory username prefix is 32 characters.": {
+    "message": "حداکثر طول نام کاربری با پیشوند نام کاربری prefix،باید 32 کاراکتر باشد."
+  },
+  "Maximum vCPU for each VM": {
+    "message": "حداکثر vCPU برای هر"
+  },
+  "Measured unit": {
+    "message": "واحد اندازه گیری"
+  },
+  "Member": {
+    "message": "عضو"
+  },
+  "Memory per vCore": {
+    "message": "حافظه برای هر vCore"
+  },
+  "Memory size in GiB": {
+    "message": "اندازه حافظه در GiB"
+  },
+  "Message": {
+    "message": "پیغام"
+  },
+  "Method": {
+    "message": "روش"
+  },
+  "Minimal value": {
+    "message": "حداقل مقدار"
+  },
+  "Minimum allowed value": {
+    "message": "حداقل مقدار مجاز"
+  },
+  "Minimum booking time slot duration.": {
+    "message": "حداقل مدت زمان رزرو slot."
+  },
+  "Mobile phone number": {
+    "message": "شماره تلفن همراه"
+  },
+  "Monthly cost": {
+    "message": "هزینه ماهانه"
+  },
+  "Monthly invoices": {
+    "message": "صورتحساب ماهانه"
+  },
+  "Must start with a country prefix ie EE34501234215": {
+    "message": "باید با کشور prefix شروع شود مثل EE34501234215"
+  },
+  "My offerings": {
+    "message": "پیشنهادات من"
+  },
+  "Name": {
+    "message": "نام"
+  },
+  "Name is duplicated. Choose other name.": {
+    "message": "نام تکراری است .اسم دیگری انتخاب کنید."
+  },
+  "Name is too short, names should be at least two alphanumeric characters.": {
+    "message": "نام بسیار کوتاه است، اسم ها باید حداقل دو حرف الفبا داشته باشند."
+  },
+  "Name of your organization.": {
+    "message": "اسم سازمان شما."
+  },
+  "Name should consist of latin symbols and numbers.": {
+    "message": "نام باید شامل اعداد و نماد ها باشد."
+  },
+  "Name should contain at least 3 symbols.": {
+    "message": "نام باید حداقل شامل 3 نماد باشد."
+  },
+  "Namespace": {
+    "message": "فضای نام"
+  },
+  "Namespace should be unique.": {
+    "message": "فضای نام باید منحصر به فرد باشد."
+  },
+  "Native name": {
+    "message": "اسم بومی"
+  },
+  "Negative": {
+    "message": "منفی"
+  },
+  "Network": {
+    "message": "شبکه"
+  },
+  "Networks": {
+    "message": "شبکه ها"
+  },
+  "New email": {
+    "message": "ایمیل جدید"
+  },
+  "New flavor": {
+    "message": "flavor جدید"
+  },
+  "New limit": {
+    "message": "محدودیت جدید"
+  },
+  "New plan": {
+    "message": "برنامه جدید"
+  },
+  "New size": {
+    "message": "اندازه جدید"
+  },
+  "Next": {
+    "message": "بعدی"
+  },
+  "No": {
+    "message": "خیر"
+  },
+  "No access info.": {
+    "message": "دسترسی اطلاعات ندارد."
+  },
+  "No results found": {
+    "message": "نتیجه ای یافت نشد"
+  },
+  "No, continue using current email": {
+    "message": "خیر،به استفاده از ایمیل فعلی ادامه دهید"
+  },
+  "Node has been created.": {
+    "message": "Node ایجاد شده است."
+  },
+  "Not assigned": {
+    "message": "اختصاص داده نشده"
+  },
+  "Not running accounting": {
+    "message": "عدم اجرای حسابداری"
+  },
+  "Nothing to see here": {
+    "message": "اینجا چیزی جهت مشاهده نیست"
+  },
+  "Nothing to show here": {
+    "message": "اینجا چیزی جهت نمایش نیست"
+  },
+  "Notification has been created.": {
+    "message": "اعلان ایجاد شده است."
+  },
+  "Notification has been updated.": {
+    "message": "اعلان به روز شده است."
+  },
+  "Notification method": {
+    "message": "روش اطلاع رسانی"
+  },
+  "Notifications": {
+    "message": "اعلان ها"
+  },
+  "Number of CPU cores per socket": {
+    "message": "تعدادی از هسته های CPU برای هر socket"
+  },
+  "Number of cores in a VM": {
+    "message": "تعدادی از هسته ها در VM"
+  },
+  "Number of created instances": {
+    "message": "تعدادی از instance های ایجاد شده"
+  },
+  "Number of running instances": {
+    "message": "تعدادی از instance های دز حال اجرا"
+  },
+  "OK": {
+    "message": "باشه"
+  },
+  "Object is not found.": {
+    "message": "شیء یافت نشد."
+  },
+  "Offering": {
+    "message": "پیشنهاد"
+  },
+  "Offering details": {
+    "message": "ارائه جزییات"
+  },
+  "Offering has been created.": {
+    "message": "پیشنهاد ایجاد شده است."
+  },
+  "Offering state has been updated.": {
+    "message": "حالت پیشنهادی بروز رسانی شده است."
+  },
+  "Offering type": {
+    "message": "نوع پیشنهاد"
+  },
+  "Offerings": {
+    "message": "پیشنهادات"
+  },
+  "One-time": {
+    "message": "یکبار"
+  },
+  "One-time on plan switch": {
+    "message": "یکبار در  plan switch"
+  },
+  "Only pending and expired invitations can be sent again.": {
+    "message": "فقط دعوت های تاریخ گذشته یا منتظر ارسال میتوانند مجدد ارسال شوند."
+  },
+  "Only pending invitation can be canceled.": {
+    "message": "فقط دعوت های منتظر ارسال را میتوان لغو کرد."
+  },
+  "Only staff and organization users are allowed to open console.": {
+    "message": "فقط کارمندان و کاربران سازمان، مجاز به باز کردن console هستند."
+  },
+  "Only staff can manage OpenStack tenant.": {
+    "message": "فقط کارمندان میتوانند OpenStack tenant را مدیریت کنند."
+  },
+  "Open": {
+    "message": "باز"
+  },
+  "Open console": {
+    "message": "console را باز کنید"
+  },
+  "OpenStack Images": {
+    "message": "تصویر های OpenStack"
+  },
+  "Order details": {
+    "message": "جزییات سفارش"
+  },
+  "Order has been approved.": {
+    "message": "سفارش تایید شده است."
+  },
+  "Order has been rejected.": {
+    "message": "سفارش رد شده است."
+  },
+  "Order has been submitted.": {
+    "message": "سفارش ارسال شده است."
+  },
+  "Orders": {
+    "message": "سفارش ها"
+  },
+  "Organization": {
+    "message": "سازمان"
+  },
+  "Organization events": {
+    "message": "رویدادهای سازمان"
+  },
+  "Organization has been created.": {
+    "message": "سازمان ایجاد شده است."
+  },
+  "Organization has signed a fixed price agreement": {
+    "message": "سازمان توافق نامه قیمت ثابت را امضا کرده است"
+  },
+  "Organization name": {
+    "message": "نام سازمان"
+  },
+  "Organization removal": {
+    "message": "حذف سازمان"
+  },
+  "Organization roles": {
+    "message": "نقش سازمان"
+  },
+  "Organizations": {
+    "message": "سازمان ها"
+  }
 }
