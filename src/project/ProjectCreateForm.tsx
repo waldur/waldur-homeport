@@ -7,6 +7,7 @@ import { reduxForm } from 'redux-form';
 import { ENV } from '@waldur/configs/default';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import {
   TextField,
@@ -20,8 +21,6 @@ import { DateField } from '@waldur/form/DateField';
 import { ImageField } from '@waldur/form/ImageField';
 import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
-import { isVisible } from '@waldur/store/config';
-import { RootState } from '@waldur/store/reducers';
 import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
@@ -53,12 +52,6 @@ export const ProjectCreateForm = reduxForm<
   const { loading, error, value } = useAsync(loadData);
   const customer = useSelector(getCustomer);
   const workspace = useSelector(getWorkspace);
-  const showCode = useSelector((state: RootState) =>
-    isVisible(state, ProjectFeatures.oecd_fos_2007_code),
-  );
-  const showIndustry = useSelector((state: RootState) =>
-    isVisible(state, ProjectFeatures.show_industry_flag),
-  );
   const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
   if (loading) {
@@ -77,12 +70,16 @@ export const ProjectCreateForm = reduxForm<
     <form onSubmit={props.handleSubmit(props.onSubmit)}>
       <FormContainer submitting={props.submitting}>
         {ProjectNameField({ customer })}
-        <TextField
-          label={translate('Project description')}
-          name="description"
-          validate={validateMaxLength}
-        />
-        {showCode ? (
+        {isFeatureVisible(
+          ProjectFeatures.show_description_in_create_dialog,
+        ) && (
+          <TextField
+            label={translate('Project description')}
+            name="description"
+            validate={validateMaxLength}
+          />
+        )}
+        {isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
           <SelectField
             floating={false}
             label={translate('OECD FoS code')}
@@ -98,7 +95,7 @@ export const ProjectCreateForm = reduxForm<
             required={isCodeRequired}
           />
         ) : null}
-        {showIndustry && (
+        {isFeatureVisible(ProjectFeatures.show_industry_flag) && (
           <AwesomeCheckboxField
             name="is_industry"
             label={translate(
@@ -107,25 +104,30 @@ export const ProjectCreateForm = reduxForm<
             hideLabel={true}
           />
         )}
-        {value.projectTypes.length >= 1 && (
-          <SelectField
-            label={translate('Project type')}
-            name="type"
-            options={value.projectTypes}
-            getOptionValue={(option) => option.url}
-            getOptionLabel={(option) => option.name}
-            isClearable={true}
+        {isFeatureVisible(ProjectFeatures.show_type_in_create_dialog) &&
+          value.projectTypes.length >= 1 && (
+            <SelectField
+              label={translate('Project type')}
+              name="type"
+              options={value.projectTypes}
+              getOptionValue={(option) => option.url}
+              getOptionLabel={(option) => option.name}
+              isClearable={true}
+            />
+          )}
+        {isFeatureVisible(ProjectFeatures.show_end_date_in_create_dialog) && (
+          <DateField
+            name="end_date"
+            label={translate('End date')}
+            description={translate(
+              'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
+            )}
+            minDate={DateTime.now().plus({ days: 1 }).toISO()}
           />
         )}
-        <DateField
-          name="end_date"
-          label={translate('End date')}
-          description={translate(
-            'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
-          )}
-          minDate={DateTime.now().plus({ days: 1 }).toISO()}
-        />
-        <ImageField label={translate('Project image')} name="image" />
+        {isFeatureVisible(ProjectFeatures.show_image_in_create_dialog) && (
+          <ImageField label={translate('Project image')} name="image" />
+        )}
         <Form.Group className="text-end">
           <FieldError error={props.error} />
           <SubmitButton
