@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { DotsThreeVertical } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 
 import { TableDropdownItem } from './types';
@@ -19,17 +19,16 @@ export const TableMoreActions: FunctionComponent<TableMoreActionsProps> = ({
   }, []);
 
   return (
-    <div className="ms-3">
+    <div className="ms-auto">
       <Button
-        variant="primary"
-        className="rotate"
+        variant="active-light-primary"
+        className="btn-icon btn-text-grey-500 no-arrow"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom-end"
         data-kt-menu-attach="parent"
       >
-        {translate('More actions')}
-        <span className="svg-icon svg-icon-3 rotate-180 ms-3 me-0">
-          <i className="fa fa-chevron-down p-0" />
+        <span className="svg-icon svg-icon-1">
+          <DotsThreeVertical weight="bold" />
         </span>
       </Button>
 
@@ -48,9 +47,9 @@ export const TableMoreActions: FunctionComponent<TableMoreActionsProps> = ({
                 data-kt-menu-placement="left-start"
               >
                 <a className="menu-link px-3">
-                  {item.icon && (
-                    <span className="menu-icon">
-                      <i className={item.icon} />
+                  {item.iconNode && (
+                    <span className="menu-icon svg-icon svg-icon-2 text-dark">
+                      {item.iconNode}
                     </span>
                   )}
                   <span className="menu-title">{item.label}</span>
@@ -68,9 +67,9 @@ export const TableMoreActions: FunctionComponent<TableMoreActionsProps> = ({
                         className="menu-link px-3"
                         aria-hidden="true"
                       >
-                        {child.icon && (
-                          <span className="menu-icon">
-                            <i className={child.icon} />
+                        {item.iconNode && (
+                          <span className="menu-icon svg-icon svg-icon-2 text-dark">
+                            {item.iconNode}
                           </span>
                         )}
                         {child.label}
@@ -86,9 +85,9 @@ export const TableMoreActions: FunctionComponent<TableMoreActionsProps> = ({
                   className="menu-link px-3"
                   aria-hidden="true"
                 >
-                  {item.icon && (
-                    <span className="menu-icon">
-                      <i className={item.icon} />
+                  {item.iconNode && (
+                    <span className="menu-icon svg-icon svg-icon-2 text-dark">
+                      {item.iconNode}
                     </span>
                   )}
                   {item.label}

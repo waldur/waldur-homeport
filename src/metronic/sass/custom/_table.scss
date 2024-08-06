@@ -280,6 +280,7 @@
 }
 
 // Filters menu and its inputs
+.drawer .filter-container,
 .card.card-table .table-filters-menu {
   white-space: normal;
 
@@ -327,6 +328,13 @@
     }
   }
 
+  // Sidebar accordion items
+  .accordion-item {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
   // Column filter
   &.column-filter {
     text-transform: none;
@@ -342,5 +350,30 @@
 .card.card-table th:not(:first-child) .table-filters-menu.column-filter {
   .menu-sub-dropdown {
     margin-left: -125px !important;
+  }
+}
+
+// Mobile mode
+$mobile-spacing: get($content-spacing, tablet-and-mobile);
+@include media-breakpoint-down(sm) {
+  .card.card-table.full-width {
+    margin-left: -$mobile-spacing;
+    margin-right: -$mobile-spacing;
+    border-radius: 0;
+
+    .card-header,
+    .table-pagination {
+      padding-left: $mobile-spacing !important;
+      padding-right: $mobile-spacing !important;
+    }
+
+    td:first-child,
+    th:first-child {
+      padding-left: $mobile-spacing !important;
+    }
+    td:last-child,
+    th:last-child {
+      padding-right: $mobile-spacing !important;
+    }
   }
 }

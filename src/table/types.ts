@@ -65,6 +65,8 @@ export interface Column<RowType = any> {
 
 export type DisplayMode = 'table' | 'grid';
 
+export type FilterPosition = 'menu' | 'sidebar' | 'header';
+
 export interface Pagination {
   resultCount: number;
   currentPage: number;
@@ -88,7 +90,7 @@ export interface TableState {
   pagination?: Pagination;
   query?: string;
   sorting?: SortingState;
-  filterPosition?: 'menu' | 'sidebar' | 'header';
+  filterPosition?: FilterPosition;
   filtersStorage?: FilterItem[];
   savedFilters?: TableFiltersGroup[];
   selectedSavedFilter?: TableFiltersGroup;
@@ -113,13 +115,14 @@ interface SortingState extends Sorting {
 
 export interface TableDropdownItem {
   label: string;
-  icon?: string;
+  iconNode?: ReactNode;
   action?: () => void;
   children?: Array<{
     label: string;
-    icon?: string;
+    iconNode?: ReactNode;
     action: () => void;
   }>;
+  isMobileAction?: boolean;
 }
 
 export interface ExportConfig {

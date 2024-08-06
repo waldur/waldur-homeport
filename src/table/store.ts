@@ -167,6 +167,12 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         },
       };
 
+    case actions.SET_FILTER_POSITION:
+      return {
+        ...state,
+        filterPosition: action.payload.filterPosition,
+      };
+
     case actions.SET_FILTER: {
       const item = action.payload.item;
       const index = state.filtersStorage.findIndex(

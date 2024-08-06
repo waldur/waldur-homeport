@@ -1715,6 +1715,10 @@
     "description": "navigation/header/search/NoResult.tsx, table/TablePlaceholder.tsx",
     "message": "Clear search"
   },
+  "Clear": {
+    "description": "table/TableFilters.tsx",
+    "message": "Clear"
+  },
   "Click to see Google Calendar": {
     "description": "marketplace/offerings/details/GoogleCalendarLink.tsx",
     "message": "Click to see Google Calendar"
@@ -4216,7 +4220,7 @@
     "message": "Import offering"
   },
   "Import offerings": {
-    "description": "marketplace/offerings/hooks.ts",
+    "description": "marketplace/offerings/hooks.tsx",
     "message": "Import offerings"
   },
   "Import project": {
@@ -5226,10 +5230,6 @@
   "Months": {
     "description": "invoices/details/ResourceLimitPeriodsTable.tsx",
     "message": "Months"
-  },
-  "More actions": {
-    "description": "table/TableMoreActions.tsx",
-    "message": "More actions"
   },
   "Mount point": {
     "description": "rancher/cluster/create/VolumeMountPointGroup.tsx",
