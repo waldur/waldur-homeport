@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -102,6 +103,13 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           export: (row) => row.name || row.offering_name, // render as ResourceNameField label
         },
         {
+          title: translate('UUID'),
+          render: ({ row }) => <>{row.uuid}</>,
+          id: 'uuid',
+          keys: ['uuid'],
+          optional: true,
+        },
+        {
           title: translate('Category'),
           render: ({ row }: FieldProps) => <>{row.category_title}</>,
           filter: 'category',
@@ -116,6 +124,13 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
           id: 'offering',
           keys: ['offering_name'],
           export: (row) => row.offering_name,
+        },
+        {
+          title: translate('Plan'),
+          render: ({ row }: FieldProps) => <>{row.plan_name || 'N/A'}</>,
+          id: 'plan',
+          keys: ['plan_name'],
+          optional: true,
         },
         ...(props.hasCustomerColumn
           ? [
@@ -142,12 +157,27 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
             ]
           : []),
         {
+          title: translate('Project end date'),
+          render: ({ row }) => <>{row.project_end_date || 'N/A'}</>,
+          id: 'project_end_date',
+          keys: ['project_end_date'],
+          optional: true,
+        },
+        {
           title: translate('Created at'),
           render: ({ row }) => <>{formatDateTime(row.created)}</>,
           orderField: 'created',
           id: 'created',
           keys: ['created'],
           export: (row) => formatDateTime(row.created),
+        },
+        ENV.plugins.WALDUR_MARKETPLACE.ENABLE_RESOURCE_END_DATE && {
+          title: translate('Termination date'),
+          render: ({ row }) => <>{row.end_date || 'N/A'}</>,
+          id: 'end_date',
+          keys: ['end_date'],
+          optional: true,
+          export: (row) => row.end_date,
         },
         {
           title: translate('State'),

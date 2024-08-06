@@ -38,6 +38,7 @@
     "project_uuid": "63b4385cc3f649e7a8b08c46e68598c1",
     "project_name": "testproject",
     "project_description": "test",
+    "project_end_date": null,
     "customer_uuid": "1f13cbdf1878479ebcb0b218be3cd87d",
     "customer_name": "Andersen Ltd",
     "backend_metadata": {},
@@ -86,6 +87,7 @@
     "project": "/api/projects/8e0c5bda0eb24424b205cdb1a136470d/",
     "project_uuid": "8e0c5bda0eb24424b205cdb1a136470d",
     "project_name": "Decentralized explicit array",
+    "project_end_date": null,
     "customer_uuid": "4dd32642c41e47ebad702e5f1e1c340b",
     "customer_name": "Myers-Taylor",
     "backend_metadata": {
