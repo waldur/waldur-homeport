@@ -241,7 +241,6 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom-start"
-            data-kt-menu-flip="bottom"
             data-cy="table-add-filter-button"
           >
             <Plus size={28} />

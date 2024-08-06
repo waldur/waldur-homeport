@@ -20,6 +20,7 @@ import {
   DisplayMode,
   ExportConfig,
   FilterItem,
+  FilterPosition,
   Sorting,
   TableOptionsType,
 } from './types';
@@ -182,6 +183,11 @@ export const useTable = (options: TableOptionsType) => {
     (query) => dispatch(actions.setFilterQuery(table, query)),
     [dispatch, table],
   );
+  const setFilterPosition = useCallback(
+    (filterPosition: FilterPosition) =>
+      dispatch(actions.setFilterPosition(table, filterPosition)),
+    [dispatch, table],
+  );
   const setFilter = useCallback(
     (item: FilterItem) => dispatch(actions.setFilter(table, item)),
     [dispatch, table],
@@ -247,6 +253,7 @@ export const useTable = (options: TableOptionsType) => {
     renderFiltersDrawer,
     setDisplayMode,
     setQuery,
+    setFilterPosition,
     setFilter,
     applyFiltersFn,
     updatePageSize,

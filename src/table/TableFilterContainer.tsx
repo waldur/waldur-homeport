@@ -1,7 +1,9 @@
 import React from 'react';
 import { Accordion } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
+import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { RootState } from '@waldur/store/reducers';
 
 import { SavedFilterSelect } from './SavedFilterSelect';
@@ -31,13 +33,19 @@ interface TableFilterContainerProps {
 export const TableFilterContainer: React.FC<TableFilterContainerProps> = (
   props,
 ) => {
-  const filterPosition = useSelector((state: RootState) => {
+  const originalFilterPosition = useSelector((state: RootState) => {
     if (props.table && state.tables && state.tables[props.table]) {
       return state.tables[props.table].filterPosition;
     }
     return 'header';
   });
   const filtersFormId = getFiltersFormId(props.filters);
+
+  const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+  const filterPosition =
+    isSm && originalFilterPosition === 'menu'
+      ? 'sidebar'
+      : originalFilterPosition;
 
   return (
     <TableFilterContext.Provider
@@ -49,12 +57,10 @@ export const TableFilterContainer: React.FC<TableFilterContainerProps> = (
     >
       {filterPosition === 'sidebar' ? (
         // Sidebar filters
-        <>
+        <div className="filter-container">
           <SavedFilterSelect table={props.table} formId={filtersFormId} />
-          <Accordion flush alwaysOpen>
-            {props.filters}
-          </Accordion>
-        </>
+          <Accordion alwaysOpen>{props.filters}</Accordion>
+        </div>
       ) : (
         // Header filters
         <div className="d-flex scroll-x">

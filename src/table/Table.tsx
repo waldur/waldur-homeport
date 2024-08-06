@@ -2,8 +2,10 @@ import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import React, { useEffect, useMemo } from 'react';
 import { Button, Card, Col, ColProps, Row, Stack } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 import { BaseFieldProps } from 'redux-form';
 
+import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { titleCase } from '@waldur/core/utils';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
@@ -28,6 +30,7 @@ import {
   DisplayMode,
   ExportConfig,
   FilterItem,
+  FilterPosition,
   Sorting,
   TableDropdownItem,
   TableState,
@@ -42,6 +45,7 @@ export interface TableProps<RowType = any> extends TableState {
   setQuery?: (query: string) => void;
   setFilter?: (item: FilterItem) => void;
   applyFiltersFn?: (apply: boolean) => void;
+  setFilterPosition?: (filterPosition: FilterPosition) => void;
   columns?: Array<Column<RowType>>;
   setDisplayMode?: (mode: DisplayMode) => void;
   gridItem?: React.ComponentType<{ row: RowType }>;
@@ -70,6 +74,7 @@ export interface TableProps<RowType = any> extends TableState {
   toggleRow?(row: any): void;
   toggled?: Record<string, boolean>;
   enableExport?: boolean;
+  showExportInDropdown?: boolean;
   placeholderComponent?: React.ReactNode;
   filters?: JSX.Element;
   title?: React.ReactNode;
@@ -185,14 +190,14 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     return (
       <>
         {this.props.standalone && (
-          <div className="d-flex justify-content-between gap-4 mb-7">
+          <div className="d-flex justify-content-between gap-4 mb-6">
             <Stack direction="horizontal" gap={2}>
               <h1 className="mb-0">
                 {this.props.title || this.props.alterTitle}
               </h1>
               <TableRefreshButton {...this.props} />
             </Stack>
-            <div>{this.props.actions}</div>
+            <div className="d-none d-sm-block">{this.props.actions}</div>
           </div>
         )}
         <Card
@@ -475,7 +480,8 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
 export default function Table<RowType = any>(props: TableProps<RowType>) {
   const {
     fetch,
-    filterPosition,
+    filterPosition: originalFilterPosition,
+    setFilterPosition,
     applyFilters,
     applyFiltersFn,
     filters,
@@ -486,6 +492,17 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     hoverableRow,
     initColumnPositions,
   } = props;
+
+  const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+
+  const filterPosition =
+    isSm && originalFilterPosition === 'menu'
+      ? 'sidebar'
+      : originalFilterPosition;
+
+  useEffect(() => {
+    setFilterPosition(originalFilterPosition);
+  }, []);
 
   useEffect(() => {
     // We need to render the filters at the beginning to read the initial filters
@@ -520,5 +537,5 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     }
   }, []);
 
-  return <TableClass {...props} />;
+  return <TableClass {...props} filterPosition={filterPosition} />;
 }

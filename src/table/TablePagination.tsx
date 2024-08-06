@@ -5,7 +5,7 @@ import {
   CaretRight,
 } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Button, Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import Pagination from '@waldur/table/Pagination';
@@ -101,14 +101,14 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
       {/* Mobile view */}
       <div className="table-pagination d-flex d-md-none align-items-center justify-content-between mt-6">
         <div className={'page-item me-1' + (prevDisabled ? ' disabled' : '')}>
-          <button
-            type="button"
-            className="page-link px-1"
+          <Button
+            variant="outline"
+            className="btn-outline-default btn-icon w-35px h-35px"
             disabled={prevDisabled}
             onClick={() => props.gotoPage(props.currentPage - 1)}
           >
             <ArrowLeft size={20} weight="bold" />
-          </button>
+          </Button>
         </div>
         {props.hasRows && (
           <div className="text-dark text-nowrap fs-6 me-4">
@@ -119,14 +119,14 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
           </div>
         )}
         <div className={'page-item' + (nextDisabled ? ' disabled' : '')}>
-          <button
-            type="button"
-            className="page-link px-1"
+          <Button
+            variant="outline"
+            className="btn-outline-default btn-icon w-35px h-35px"
             disabled={nextDisabled}
             onClick={() => props.gotoPage(props.currentPage + 1)}
           >
             <ArrowRight size={20} weight="bold" />
-          </button>
+          </Button>
         </div>
       </div>
     </>

@@ -1,3 +1,4 @@
+import { Plus } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -5,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { TableDropdownItem } from '@waldur/table/types';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 const OfferingImportDialog = lazyComponent(
@@ -12,7 +14,7 @@ const OfferingImportDialog = lazyComponent(
   'OfferingImportDialog',
 );
 
-export const useOfferingDropdownActions = () => {
+export const useOfferingDropdownActions = (): TableDropdownItem[] => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
@@ -30,7 +32,7 @@ export const useOfferingDropdownActions = () => {
   return [
     {
       label: translate('Import offerings'),
-      icon: 'fa fa-plus',
+      iconNode: <Plus />,
       action: () => {
         dispatch(openModalDialog(OfferingImportDialog, { size: 'lg' }));
       },

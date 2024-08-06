@@ -1,10 +1,13 @@
+import { Export } from '@phosphor-icons/react';
 import React, {
   FunctionComponent,
   useCallback,
   useEffect,
   useState,
 } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
+import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 
 import { TableProps } from './Table';
@@ -26,21 +29,24 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
   const [dropdownActions, setDropdownActions] = useState<TableDropdownItem[]>(
     [],
   );
-  const showExportInDropdown = Boolean(
-    props.enableExport && props.actions && props.dropdownActions?.length,
-  );
+
+  const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+
+  const showExportInDropdown =
+    (props.enableExport && props.showExportInDropdown) ||
+    (props.enableExport && isSm);
 
   useEffect(() => {
     setDropdownActions(
       (props.dropdownActions && props.dropdownActions instanceof Array
-        ? props.dropdownActions
+        ? props.dropdownActions.filter((x) => x.isMobileAction && isSm)
         : []
       ).concat(
         showExportInDropdown
           ? [
               {
                 label: translate('Export'),
-                icon: 'fa fa-download',
+                iconNode: <Export />,
                 children: [
                   {
                     label: translate('Copy to clipboard'),
@@ -64,7 +70,12 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
           : [],
       ),
     );
-  }, [props.dropdownActions, props.openExportDialog, showExportInDropdown]);
+  }, [
+    props.dropdownActions,
+    props.openExportDialog,
+    showExportInDropdown,
+    isSm,
+  ]);
 
   const onClickFilterButton = useCallback(
     (event) => {
@@ -96,27 +107,40 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
   );
 
   if (!props.selectedRows?.length) {
+    const showDefaultActions =
+      dropdownActions?.length ||
+      props.enableExport ||
+      props.filters ||
+      Boolean(props.gridItem && props.columns.length) ||
+      props.hasOptionalColumns;
+
     return (
       <>
-        {['menu', 'sidebar'].includes(props.filterPosition) &&
-          props.filters && <TableFilterButton onClick={onClickFilterButton} />}
-        {!props.standalone && props.actions}
-        {Boolean(props.gridItem && props.columns.length) && (
-          <TableDisplayModeButton
-            mode={props.mode}
-            setDisplayMode={props.setDisplayMode}
-          />
-        )}
-        {props.hasOptionalColumns && <TableColumnButton {...props} />}
-        {showExportInDropdown ? (
-          <TableMoreActions actions={dropdownActions} />
-        ) : (
-          <>
-            {props.enableExport && <TableExportButton {...props} />}
-            {dropdownActions.length > 0 && (
-              <TableMoreActions actions={dropdownActions} />
+        {(!props.standalone || isSm) && props.actions}
+        {showDefaultActions && (
+          <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3 flex-grow-1 flex-sm-grow-0">
+            {['menu', 'sidebar'].includes(props.filterPosition) &&
+              props.filters && (
+                <TableFilterButton onClick={onClickFilterButton} />
+              )}
+            {Boolean(props.gridItem && props.columns.length) && (
+              <TableDisplayModeButton
+                mode={props.mode}
+                setDisplayMode={props.setDisplayMode}
+              />
             )}
-          </>
+            {props.hasOptionalColumns && <TableColumnButton {...props} />}
+            {showExportInDropdown ? (
+              <TableMoreActions actions={dropdownActions} />
+            ) : (
+              <>
+                {props.enableExport && <TableExportButton {...props} />}
+                {dropdownActions.length > 0 && (
+                  <TableMoreActions actions={dropdownActions} />
+                )}
+              </>
+            )}
+          </div>
         )}
       </>
     );
