@@ -11,6 +11,7 @@ import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { CallAllFiltersWithDefaultState } from './call-management/CallAllFilters';
 import { CallCard } from './CallCard';
 import { CALL_FILTER_FORM_ID } from './constants';
+import { PublicCallApplyButton } from './details/PublicCallApplyButton';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { Call } from './types';
 import { formatCallState, getRoundsWithStatus } from './utils';
@@ -124,6 +125,14 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
       hasQuery={true}
       expandableRow={PublicCallExpandableRow}
       filters={<CallAllFiltersWithDefaultState />}
+      hoverableRow={({ row }) => (
+        <PublicCallApplyButton
+          call={row}
+          title={translate('Apply')}
+          variant="flush"
+          className="text-btn"
+        />
+      )}
     />
   );
 };
