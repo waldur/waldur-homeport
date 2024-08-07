@@ -16,6 +16,7 @@ export const states: StateDeclaration[] = [
     data: {
       feature: SupportFeatures.shared_providers,
       breadcrumb: () => translate('Shared providers'),
+      priority: 104,
     },
   },
 ];

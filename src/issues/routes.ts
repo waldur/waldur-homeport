@@ -36,6 +36,10 @@ const BroadcastTemplateList = lazyComponent(
   () => import('../broadcasts/BroadcastTemplateList'),
   'BroadcastTemplateList',
 );
+const BaseEventsList = lazyComponent(
+  () => import('@waldur/events/BaseEventsList'),
+  'BaseEventsList',
+);
 
 export const states: StateDeclaration[] = [
   {
@@ -79,6 +83,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Issues'),
       permissions: [isStaffOrSupport, hasSupport],
+      priority: 103,
     },
   },
 
@@ -98,6 +103,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Feedback'),
       permissions: [isStaffOrSupport, hasSupport],
+      priority: 102,
     },
   },
 
@@ -107,6 +113,7 @@ export const states: StateDeclaration[] = [
     component: BroadcastList,
     data: {
       breadcrumb: () => translate('Broadcast'),
+      priority: 100,
     },
   },
 
@@ -116,6 +123,17 @@ export const states: StateDeclaration[] = [
     component: BroadcastTemplateList,
     data: {
       breadcrumb: () => translate('Broadcast templates'),
+      priority: 101,
+    },
+  },
+
+  {
+    name: 'support.audit-logs',
+    url: 'audit-logs/',
+    component: BaseEventsList,
+    data: {
+      breadcrumb: () => translate('Audit logs'),
+      priority: 105,
     },
   },
 ];

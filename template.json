@@ -1140,7 +1140,7 @@
     "message": "Audit log"
   },
   "Audit logs": {
-    "description": "customer/routes.ts, marketplace/resources/details/ActivityCard.tsx, marketplace/resources/details/fetchData.tsx, marketplace/routes.ts, marketplace/service-providers/dashboard/ProviderEventsTable.tsx, project/ProjectEventsList.tsx, project/routes.ts, user/UserActions.tsx, user/routes.ts",
+    "description": "customer/routes.ts, issues/routes.ts, marketplace/resources/details/ActivityCard.tsx, marketplace/resources/details/fetchData.tsx, marketplace/routes.ts, marketplace/service-providers/dashboard/ProviderEventsTable.tsx, project/ProjectEventsList.tsx, project/routes.ts, user/UserActions.tsx, user/routes.ts",
     "message": "Audit logs"
   },
   "Authenticate using Mobile ID": {
@@ -9255,6 +9255,10 @@
     "description": "resource/actions/OpenConsoleLogActionItem.tsx",
     "message": "Show console log"
   },
+  "Show description field in project create dialog.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Show description field in project create dialog."
+  },
   "Show details": {
     "description": "marketplace/resources/KeyValueButton.tsx",
     "message": "Show details"
@@ -9263,6 +9267,10 @@
     "description": "rancher/cluster/ViewYAMLDialog.tsx",
     "message": "Show diff"
   },
+  "Show end date field in project create dialog.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Show end date field in project create dialog."
+  },
   "Show error": {
     "description": "marketplace/resources/resource-pending/OrderErredView.tsx",
     "message": "Show error"
@@ -9270,6 +9278,10 @@
   "Show example": {
     "description": "administration/TelemetryExampleButton.tsx",
     "message": "Show example"
+  },
+  "Show image field in project create dialog.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Show image field in project create dialog."
   },
   "Show industry flag.": {
     "description": "features/FeaturesDescription.ts",
@@ -9322,6 +9334,10 @@
   "Show tax number field in invitation creation form.": {
     "description": "features/FeaturesDescription.ts",
     "message": "Show tax number field in invitation creation form."
+  },
+  "Show type field in project create dialog.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Show type field in project create dialog."
   },
   "Show usage": {
     "description": "marketplace/resources/list/ShowUsageAction.tsx, marketplace/resources/usage/ResourceShowUsageButton.tsx",
