@@ -242,6 +242,10 @@ export const ResourcesEnum = {
   resource_update_succeeded: 'resource_update_succeeded',
 };
 
+export const ReviewEnum = {
+  review_canceled: 'review_canceled',
+};
+
 export const SshEnum = {
   ssh_key_creation_succeeded: 'ssh_key_creation_succeeded',
   ssh_key_deletion_succeeded: 'ssh_key_deletion_succeeded',
