@@ -254,8 +254,13 @@ Download translation:
     - find locales -type f -name '*.json' -exec sed -i 's/{__\([^}]*\)__\}/{\1}/g' {} \;
     - |
       for file in locales/*.json; do
-        jq 'to_entries | map({(.key): .value.message}) | add' "$file" > temp.json && mv temp.json "$file"
+        echo $file
+        if [[ $file == "locales/en.json" ]]; then
+          continue
+        fi
+        jq 'to_entries | map({(.key): .value.message}) | add' "$file" $file > temp.json  && mv temp.json "$file" 
       done
+    - rm -f  temp.json
     - git status
     - git add locales/*
     - git commit locales -m "Updates translations" || exit 0
