@@ -744,7 +744,7 @@
     "message": "Apply to round"
   },
   "Apply": {
-    "description": "marketplace/landing/MarketplaceLandingFilter.tsx, proposals/AvailableOfferingCard.tsx, proposals/CallCard.tsx, table/TableFilterActions.tsx, table/TableFilterItem.tsx",
+    "description": "marketplace/landing/MarketplaceLandingFilter.tsx, proposals/AvailableOfferingCard.tsx, proposals/CallCard.tsx, proposals/PublicCallsList.tsx, table/TableFilterActions.tsx, table/TableFilterItem.tsx",
     "message": "Apply"
   },
   "Approvals": {
@@ -3308,7 +3308,7 @@
     "message": "Error in fetching groups"
   },
   "Error message": {
-    "description": "events/ExpandableEventDetailsTable.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/resource-pending/ResourceOrderErrorDialog.tsx, resource/summary/ErrorMessageField.tsx",
+    "description": "events/ExpandableEventDetailsTable.tsx, invitations/InvitationExpandableRow.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/resource-pending/ResourceOrderErrorDialog.tsx, resource/summary/ErrorMessageField.tsx",
     "message": "Error message"
   },
   "Error trace": {
@@ -3458,6 +3458,10 @@
   "Executing": {
     "description": "marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrderStateCell.tsx, marketplace/orders/list/OrderStateFilter.tsx",
     "message": "Executing"
+  },
+  "Execution state": {
+    "description": "invitations/InvitationsList.tsx, project/team/InvitationsList.tsx, proposals/team/InvitationsList.tsx",
+    "message": "Execution state"
   },
   "Existing quota usage: {usage}": {
     "description": "quotas/QuotaUsageBarChart.tsx",

@@ -43,5 +43,14 @@ export const InvitationExpandableRow: React.FC<{
         {ENV.plugins.WALDUR_CORE.COMMON_FOOTER_TEXT}
       </p>
     )}
+    <p>
+      <b>{translate('Execution state')}: </b>
+      {row.execution_state}
+    </p>
+    {row.error_message && (
+      <p>
+        <b>{translate('Error message')}: </b> {row.error_message}
+      </p>
+    )}
   </>
 );
