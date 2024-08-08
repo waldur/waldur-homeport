@@ -53,7 +53,7 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
       verboseName={translate('Proposals')}
       expandableRow={ProposalExpandableRow}
       hasQuery={true}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ProposalRowActions
           row={{ ...row, call_uuid: props.call.uuid }}
           refetch={tableProps.fetch}

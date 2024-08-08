@@ -45,14 +45,16 @@ export const OrganizationGroupsList: FunctionComponent = () => {
         },
       ]}
       verboseName={translate('Organization groups')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <OrganizationGroupDetailsButton organizationGroup={row} />
           <OrganizationGroupEditButton row={row} refetch={tableProps.fetch} />
           <OrganizationGroupDeleteButton row={row} refetch={tableProps.fetch} />
         </>
       )}
-      actions={<OrganizationGroupCreateButton refetch={tableProps.fetch} />}
+      tableActions={
+        <OrganizationGroupCreateButton refetch={tableProps.fetch} />
+      }
       initialSorting={{ field: 'name', mode: 'desc' }}
       hasQuery={true}
     />

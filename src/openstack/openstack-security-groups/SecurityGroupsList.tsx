@@ -73,14 +73,14 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
       ]}
       expandableRow={SecurityGroupExpandableRow}
       enableExport={true}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
       verboseName={translate('security groups')}
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}
       hasQuery={true}
-      actions={
+      tableActions={
         <ButtonGroup>
           <CreateSecurityGroupAction
             resource={resourceScope}

@@ -3460,7 +3460,7 @@
     "message": "Executing"
   },
   "Execution state": {
-    "description": "invitations/InvitationsList.tsx, project/team/InvitationsList.tsx, proposals/team/InvitationsList.tsx",
+    "description": "invitations/InvitationExpandableRow.tsx",
     "message": "Execution state"
   },
   "Existing quota usage: {usage}": {

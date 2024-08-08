@@ -30,10 +30,10 @@ export const ResourceUsersList = ({ resource, offering }) => {
         },
       ]}
       verboseName={translate('roles')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <DeleteUserButton user={row} refetch={tableProps.fetch} />
       )}
-      actions={
+      tableActions={
         <AddUserButton
           resource={resource}
           offering={offering}

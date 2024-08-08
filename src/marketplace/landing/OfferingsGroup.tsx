@@ -79,7 +79,7 @@ export const OfferingsGroup = () => {
       title={translate('Latest offerings')}
       verboseName={translate('Offerings')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      actions={
+      tableActions={
         <Link state="public.offerings" className="btn btn-light">
           {translate('All offerings')}
         </Link>

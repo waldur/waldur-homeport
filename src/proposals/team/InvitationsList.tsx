@@ -53,7 +53,7 @@ export const InvitationsList: FunctionComponent<{ table; hideRole }> = ({
           render: ({ row }) => formatDate(row.expires),
         },
       ].filter(Boolean)}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <InvitationSendButton row={row} />
           <InvitationCancelButton row={row} refetch={table.fetch} />

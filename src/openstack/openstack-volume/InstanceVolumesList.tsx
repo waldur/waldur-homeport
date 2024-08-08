@@ -57,9 +57,9 @@ export const InstanceVolumesList: FunctionComponent<{ resourceScope }> = ({
           render: ({ row }) => <ResourceState resource={row} />,
         },
       ]}
-      actions={<AttachVolumeAction resource={resourceScope} />}
+      tableActions={<AttachVolumeAction resource={resourceScope} />}
       verboseName={translate('volumes')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ModalActionsRouter
           url={row.url}
           name={row.name}

@@ -51,7 +51,7 @@ export const ClusterWorkloadsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('workloads')}
-      hoverableRow={({ row }) => <WorkloadActions workload={row} />}
+      rowActions={({ row }) => <WorkloadActions workload={row} />}
     />
   );
 };

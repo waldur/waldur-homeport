@@ -104,13 +104,13 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
       verboseName={translate('team members')}
       hasQuery={true}
       enableExport
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <CustomerUserRowActions row={row} refetch={props.fetch} />
       )}
       expandableRow={({ row }) => (
         <CustomerUsersListExpandableRow row={row} refetch={props.fetch} />
       )}
-      actions={<UserAddButton refetch={props.fetch} />}
+      tableActions={<UserAddButton refetch={props.fetch} />}
     />
   );
 };

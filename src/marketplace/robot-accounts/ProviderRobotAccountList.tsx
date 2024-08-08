@@ -82,7 +82,7 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
       columns={columns}
       verboseName={translate('robot accounts')}
       expandableRow={RobotAccountExpandable}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <RobotAccountActions refetch={tableProps.fetch} row={row} />
       )}
     />

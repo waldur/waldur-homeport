@@ -55,7 +55,7 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
         verboseName={translate('Orders')}
         initialSorting={{ field: 'created', mode: 'desc' }}
         initialPageSize={5}
-        hoverableRow={({ row }) => (
+        rowActions={({ row }) => (
           <OrderConsumerActions
             order={row}
             refetch={tableProps.fetch}

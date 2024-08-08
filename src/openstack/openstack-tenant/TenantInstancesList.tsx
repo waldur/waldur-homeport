@@ -79,13 +79,13 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('instances')}
-      actions={
+      tableActions={
         <AddResourceButton
           resource={resourceScope}
           offeringType={INSTANCE_TYPE}
         />
       }
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ModalActionsRouter
           url={row.url}
           name={row.name}

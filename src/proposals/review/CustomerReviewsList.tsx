@@ -121,7 +121,7 @@ export const CustomerReviewsList: FC<{}> = () => {
       verboseName={translate('Reviews')}
       hasQuery={true}
       filters={<ReviewsTableFilter />}
-      hoverableRow={ReviewItemActions}
+      rowActions={ReviewItemActions}
       hasOptionalColumns
     />
   );

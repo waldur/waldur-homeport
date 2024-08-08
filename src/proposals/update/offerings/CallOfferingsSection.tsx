@@ -50,11 +50,11 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
       ]}
       title={translate('Offerings')}
       verboseName={translate('Offerings')}
-      actions={
+      tableActions={
         <AddOfferingButton call={props.call} refetch={tableProps.fetch} />
       }
       expandableRow={CallOfferingExpandableRow}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <CallOfferingDeleteButton row={row} refetch={tableProps.fetch} />
       )}
     />

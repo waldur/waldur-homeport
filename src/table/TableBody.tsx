@@ -16,7 +16,7 @@ type TableBodyProps = Pick<
   | 'rowClass'
   | 'expandableRow'
   | 'expandableRowClassName'
-  | 'hoverableRow'
+  | 'rowActions'
   | 'enableMultiSelect'
   | 'selectRow'
   | 'selectedRows'
@@ -66,7 +66,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   rowClass,
   expandableRow,
   expandableRowClassName,
-  hoverableRow,
+  rowActions,
   enableMultiSelect,
   selectRow,
   selectedRows,
@@ -208,9 +208,9 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
           columnPositions={columnPositions}
           hasOptionalColumns={hasOptionalColumns}
         />
-        {hoverableRow && (
+        {rowActions && (
           <td className="row-actions">
-            <div>{React.createElement(hoverableRow, { row, fetch })}</div>
+            <div>{React.createElement(rowActions, { row, fetch })}</div>
           </td>
         )}
       </tr>
@@ -232,7 +232,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
           )}
           {expandableRow && toggled[getId(row, rowIndex)] && (
             <tr className={expandableRowClassName}>
-              <td colSpan={columns.length + 1 + (hoverableRow ? 1 : 0)}>
+              <td colSpan={columns.length + 1 + (rowActions ? 1 : 0)}>
                 {React.createElement(expandableRow, { row })}
               </td>
             </tr>

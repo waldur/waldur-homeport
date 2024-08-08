@@ -51,9 +51,9 @@ export const DisksList: FunctionComponent<{ resourceScope }> = ({
       ]}
       verboseName={translate('disks')}
       hasQuery={false}
-      actions={<CreateDiskAction resource={resourceScope} />}
+      tableActions={<CreateDiskAction resource={resourceScope} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={tableProps.fetch} />
       )}
     />

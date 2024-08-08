@@ -67,8 +67,8 @@ export const TenantNetworksList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('networks')}
-      actions={<CreateNetworkAction resource={resourceScope} />}
-      hoverableRow={({ row }) => (
+      tableActions={<CreateNetworkAction resource={resourceScope} />}
+      rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}

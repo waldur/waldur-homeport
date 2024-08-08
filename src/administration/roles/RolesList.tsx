@@ -50,11 +50,11 @@ export const RolesList = () => {
         },
       ]}
       verboseName={translate('roles')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <RoleActions row={row} refetch={tableProps.fetch} />
       )}
       showPageSizeSelector={true}
-      actions={<RoleCreateButton refetch={tableProps.fetch} />}
+      tableActions={<RoleCreateButton refetch={tableProps.fetch} />}
     />
   );
 };

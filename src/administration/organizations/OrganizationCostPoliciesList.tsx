@@ -103,7 +103,7 @@ export const OrganizationCostPoliciesList: FC = () => {
       verboseName={translate('Cost policies')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       filters={<OrganizationCostPoliciesFilter />}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <CostPolicyDeleteButton
           row={row}
           type="organization"
@@ -112,7 +112,7 @@ export const OrganizationCostPoliciesList: FC = () => {
       )}
       hasQuery={true}
       showPageSizeSelector={true}
-      actions={
+      tableActions={
         <CostPolicyCreateButton
           type="organization"
           refetch={tableProps.fetch}

@@ -66,8 +66,8 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
         },
       ]}
       verboseName={translate('group invitations')}
-      actions={<GroupInvitationCreateButton refetch={props.fetch} />}
-      hoverableRow={({ row }) => (
+      tableActions={<GroupInvitationCreateButton refetch={props.fetch} />}
+      rowActions={({ row }) => (
         <GroupInvitationRowActions row={row} refetch={props.fetch} />
       )}
       expandableRow={GroupInvitationsListExpandableRow}

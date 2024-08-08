@@ -54,7 +54,7 @@ export interface TableProps<RowType = any> extends TableState {
   openFiltersDrawer?: (filters: React.ReactNode) => void;
   renderFiltersDrawer?: (filters: React.ReactNode) => void;
   dropdownActions?: TableDropdownItem[];
-  actions?: React.ReactNode;
+  tableActions?: React.ReactNode;
   verboseName?: string;
   className?: string;
   id?: string;
@@ -70,7 +70,7 @@ export interface TableProps<RowType = any> extends TableState {
   initialSorting?: Sorting;
   expandableRow?: React.ComponentType<{ row: any }>;
   expandableRowClassName?: string;
-  hoverableRow?: React.ComponentType<{ row; fetch }>;
+  rowActions?: React.ComponentType<{ row; fetch }>;
   toggleRow?(row: any): void;
   toggled?: Record<string, boolean>;
   enableExport?: boolean;
@@ -112,9 +112,9 @@ const TableComponent = (props: TableProps) => {
   );
 
   const showActions = useMemo(() => {
-    if (props.hoverableRow && !props.hasOptionalColumns) return true;
+    if (props.rowActions && !props.hasOptionalColumns) return true;
     return Boolean(props.activeColumns[OPTIONAL_COLUMN_ACTIONS_KEY]);
-  }, [props.hoverableRow, props.hasOptionalColumns, props.activeColumns]);
+  }, [props.rowActions, props.hasOptionalColumns, props.activeColumns]);
 
   return (
     <table
@@ -151,7 +151,7 @@ const TableComponent = (props: TableProps) => {
         rowClass={props.rowClass}
         expandableRow={props.expandableRow}
         expandableRowClassName={props.expandableRowClassName}
-        hoverableRow={showActions ? props.hoverableRow : undefined}
+        rowActions={showActions ? props.rowActions : undefined}
         enableMultiSelect={props.enableMultiSelect}
         selectRow={props.selectRow}
         selectedRows={props.selectedRows}
@@ -197,7 +197,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               </h1>
               <TableRefreshButton {...this.props} />
             </Stack>
-            <div className="d-none d-sm-block">{this.props.actions}</div>
+            <div className="d-none d-sm-block">{this.props.tableActions}</div>
           </div>
         )}
         <Card
@@ -468,7 +468,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
   showActionsColumn() {
     return (
       (this.props.enableMultiSelect && this.props.multiSelectActions) ||
-      this.props.actions ||
+      this.props.tableActions ||
       this.props.dropdownActions?.length ||
       this.props.enableExport ||
       this.props.filters ||
@@ -489,7 +489,7 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     hasOptionalColumns,
     columns,
     toggleColumn,
-    hoverableRow,
+    rowActions,
     initColumnPositions,
   } = props;
 
@@ -525,7 +525,7 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
         toggleColumn(column.id, column, column.optional ? false : true);
       });
       // Add actions column to the optional columns
-      if (hoverableRow) {
+      if (rowActions) {
         toggleColumn(OPTIONAL_COLUMN_ACTIONS_KEY, { keys: [] }, true);
       }
     }

@@ -47,7 +47,7 @@ export const AllocationJobsTable: FunctionComponent<{ resourceScope }> = ({
       title={translate('Jobs')}
       columns={columns}
       verboseName={translate('jobs')}
-      actions={<SubmitJobAction resource={resourceScope} />}
+      tableActions={<SubmitJobAction resource={resourceScope} />}
     />
   );
 };

@@ -76,13 +76,13 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('floating IPs')}
-      actions={
+      tableActions={
         <ButtonGroup>
           <PullFloatingIpsAction resource={resourceScope} />
           <CreateFloatingIpAction resource={resourceScope} />
         </ButtonGroup>
       }
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={tableProps.fetch} />
       )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}

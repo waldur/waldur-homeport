@@ -66,14 +66,14 @@ const InvitationsListComponent: FunctionComponent = () => {
           render: ({ row }) => formatDate(row.expires),
         },
       ]}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <InvitationSendButton row={row} />
           <InvitationCancelButton row={row} refetch={props.fetch} />
         </>
       )}
       verboseName={translate('Team invitations')}
-      actions={
+      tableActions={
         <InvitationCreateButton
           project={project}
           roleTypes={['project']}

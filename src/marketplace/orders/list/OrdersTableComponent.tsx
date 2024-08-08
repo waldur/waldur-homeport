@@ -134,7 +134,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       expandableRow={OrdersListExpandableRow}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <OrderProviderActions row={row} refetch={props.fetch} />
       )}
       hasOptionalColumns

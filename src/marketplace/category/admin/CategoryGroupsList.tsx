@@ -51,14 +51,14 @@ export const CategoryGroupsList: FunctionComponent = () => {
       ]}
       verboseName={translate('Category groups')}
       initialSorting={{ field: 'title', mode: 'desc' }}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <GroupEditButton row={row} refetch={tableProps.fetch} />
           <GroupDeleteButton row={row} refetch={tableProps.fetch} />
         </>
       )}
       hasQuery={true}
-      actions={<GroupCreateButton refetch={tableProps.fetch} />}
+      tableActions={<GroupCreateButton refetch={tableProps.fetch} />}
     />
   );
 };

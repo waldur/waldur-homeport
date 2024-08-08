@@ -83,7 +83,7 @@ export const InvitationsList: FunctionComponent = () => {
         },
       ]}
       verboseName={translate('team invitations')}
-      actions={
+      tableActions={
         <InvitationCreateButton
           roleTypes={['customer', 'project']}
           refetch={props.fetch}
@@ -92,7 +92,7 @@ export const InvitationsList: FunctionComponent = () => {
       }
       hasQuery={true}
       enableExport
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <InvitationActions invitation={row} refetch={props.fetch} />
       )}
       expandableRow={InvitationExpandableRow}

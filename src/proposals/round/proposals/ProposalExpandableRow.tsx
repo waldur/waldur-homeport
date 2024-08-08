@@ -39,7 +39,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     <Table
       {...tableProps}
       columns={columns}
-      hoverableRow={ProposalReviewsDetailButton}
+      rowActions={ProposalReviewsDetailButton}
       hasActionBar={false}
     />
   );

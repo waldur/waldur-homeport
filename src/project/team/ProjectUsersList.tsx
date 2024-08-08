@@ -50,10 +50,10 @@ export const ProjectUsersList = () => {
         },
       ]}
       hasQuery={true}
-      actions={<AddUserButton refetch={tableProps.fetch} />}
+      tableActions={<AddUserButton refetch={tableProps.fetch} />}
       title={translate('Team members')}
       verboseName={translate('Team members')}
-      hoverableRow={ProjectPermisionActions}
+      rowActions={ProjectPermisionActions}
     />
   );
 };

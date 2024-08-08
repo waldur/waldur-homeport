@@ -54,9 +54,9 @@ export const PortsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('ports')}
-      actions={<CreatePortAction resource={resourceScope} />}
+      tableActions={<CreatePortAction resource={resourceScope} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
     />

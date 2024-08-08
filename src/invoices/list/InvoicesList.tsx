@@ -90,7 +90,7 @@ export const InvoicesList: FunctionComponent = () => {
       columns={columns}
       verboseName={translate('invoices')}
       enableExport={true}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <SendNotificationButton row={row} />
           <MarkAsPaidButton row={row} refetch={props.fetch} />

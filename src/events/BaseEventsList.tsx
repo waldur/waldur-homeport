@@ -67,7 +67,7 @@ export const BaseEventsList: FunctionComponent<{
       hasQuery={true}
       title={title || translate('Events')}
       verboseName={translate('events')}
-      actions={actions || <EventTypesButton />}
+      tableActions={actions || <EventTypesButton />}
       dropdownActions={dropdownActions}
       enableExport={true}
       expandableRow={ExpandableEventDetails}

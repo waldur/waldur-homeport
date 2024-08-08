@@ -73,7 +73,7 @@ export const PaymentsList: FunctionComponent = () => {
       columns={columns}
       verboseName={translate('payments')}
       showPageSizeSelector={true}
-      actions={<CreatePaymentButton activePaymentProfile={profile} />}
+      tableActions={<CreatePaymentButton activePaymentProfile={profile} />}
     />
   );
 };

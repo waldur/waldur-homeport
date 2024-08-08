@@ -93,8 +93,8 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
-      actions={<ProjectCreateButton />}
-      hoverableRow={({ row }) => (
+      tableActions={<ProjectCreateButton />}
+      rowActions={({ row }) => (
         <>
           <ProjectsListActions project={row} />
           <ProjectDetailsButton project={row} />

@@ -61,7 +61,7 @@ export const BackupsSchedulesList: FunctionComponent<{ resourceScope }> = ({
       ]}
       verboseName={translate('VM snapshot schedules')}
       hasQuery={false}
-      actions={<CreateBackupScheduleAction resource={resourceScope} />}
+      tableActions={<CreateBackupScheduleAction resource={resourceScope} />}
     />
   );
 };

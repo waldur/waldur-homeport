@@ -24,7 +24,7 @@ export const CallsForProposalsList: FC = () => {
       mode="grid"
       title={translate('Open calls')}
       verboseName={translate('Open calls')}
-      actions={
+      tableActions={
         <Link
           state="calls-for-proposals-all-calls"
           label={translate('View all')}

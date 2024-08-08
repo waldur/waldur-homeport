@@ -56,8 +56,8 @@ export const OfferingImagesList: FunctionComponent<{ offering }> = ({
       columns={columns}
       verboseName={translate('Offerings images')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      actions={<CreateImageButton offering={offering} />}
-      hoverableRow={DeleteImageButton}
+      tableActions={<CreateImageButton offering={offering} />}
+      rowActions={DeleteImageButton}
     />
   );
 };

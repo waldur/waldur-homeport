@@ -109,14 +109,14 @@ export const AdminCategoriesPage: FunctionComponent = () => {
       ]}
       verboseName={translate('Categories')}
       initialSorting={{ field: 'title', mode: 'desc' }}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <CategoryEditButton row={row} refetch={tableProps.fetch} />
           <CategoryDeleteButton row={row} refetch={tableProps.fetch} />
         </>
       )}
       hasQuery={true}
-      actions={<CategoryCreateButton refetch={tableProps.fetch} />}
+      tableActions={<CategoryCreateButton refetch={tableProps.fetch} />}
     />
   );
 };

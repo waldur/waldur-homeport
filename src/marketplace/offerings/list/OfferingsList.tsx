@@ -87,7 +87,7 @@ export const BaseOfferingsList: FunctionComponent<{
       dropdownActions={showActions && dropdownActions}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
-      hoverableRow={
+      rowActions={
         showActions
           ? ({ row }) => <OfferingActions row={row} refetch={props.fetch} />
           : null

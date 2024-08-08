@@ -26,7 +26,7 @@ export const CallsAvailableOfferingsList: FC = () => {
       mode="grid"
       title={translate('Available offerings')}
       verboseName={translate('Available offerings')}
-      actions={
+      tableActions={
         <Link
           state="calls-for-proposals-all-available-offerings"
           label={translate('View all')}

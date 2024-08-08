@@ -119,7 +119,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <PublicResourceActions resource={row} refetch={props.fetch} />
       )}
       enableMultiSelect={true}

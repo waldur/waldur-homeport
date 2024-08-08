@@ -172,7 +172,7 @@ export const BaseProjectsList: FunctionComponent<{
       filters={filters}
       standalone={standalone}
       hasOptionalColumns
-      actions={<GlobalProjectCreateButton refetch={props.fetch} />}
+      tableActions={<GlobalProjectCreateButton refetch={props.fetch} />}
     />
   );
 };

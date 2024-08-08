@@ -60,7 +60,7 @@ export const PendingProviderOrders: React.FC<{}> = () => {
         initialSorting={{ field: 'created', mode: 'desc' }}
         initialPageSize={5}
         expandableRow={OrderExpandableRow}
-        hoverableRow={({ row }) => (
+        rowActions={({ row }) => (
           <OrderProviderActions row={row} refetch={tableProps.fetch} />
         )}
       />

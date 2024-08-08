@@ -66,7 +66,7 @@ export const PlanUsageList: FunctionComponent = () => {
       showPageSizeSelector={true}
       enableExport={true}
       initialSorting={{ field: 'usage', mode: 'desc' }}
-      hoverableRow={PlanUsageButton}
+      rowActions={PlanUsageButton}
       filters={<PlanUsageFilter />}
     />
   );

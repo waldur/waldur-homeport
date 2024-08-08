@@ -71,7 +71,7 @@ export const OfferingCustomersList: FunctionComponent<
       columns={columns}
       title={translate('Organizations')}
       verboseName={translate('Organizations')}
-      actions={<OfferingCustomersListFilter uniqueFormId={uniqueFormId} />}
+      tableActions={<OfferingCustomersListFilter uniqueFormId={uniqueFormId} />}
       hasQuery={false}
       showPageSizeSelector={true}
     />

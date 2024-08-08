@@ -58,12 +58,12 @@ export const BroadcastList: FunctionComponent<{}> = () => {
         },
       ]}
       verboseName={translate('broadcasts')}
-      actions={<BroadcastCreateButton refetch={props.fetch} />}
+      tableActions={<BroadcastCreateButton refetch={props.fetch} />}
       expandableRow={BroadcastExpandableRow}
       initialPageSize={10}
       showPageSizeSelector={true}
       expandableRowClassName="bg-gray-200"
-      hoverableRow={({ row }) =>
+      rowActions={({ row }) =>
         row.state === 'DRAFT' ? (
           <>
             <BroadcastUpdateButton broadcast={row} refetch={props.fetch} />

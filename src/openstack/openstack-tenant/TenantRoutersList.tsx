@@ -59,7 +59,7 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('routers')}
-      hoverableRow={({ row }) => <SetRoutersButton router={row} />}
+      rowActions={({ row }) => <SetRoutersButton router={row} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hasQuery={true}
     />

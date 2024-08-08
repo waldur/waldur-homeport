@@ -78,9 +78,9 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
       ]}
       showPageSizeSelector={true}
       verboseName={translate('campaigns')}
-      actions={<CampaignCreateButton refetch={props.fetch} />}
+      tableActions={<CampaignCreateButton refetch={props.fetch} />}
       hasQuery={true}
-      hoverableRow={ProviderCampaignActions}
+      rowActions={ProviderCampaignActions}
       expandableRow={ExpandableRow}
       filters={<ProviderCampaignFilter />}
     />

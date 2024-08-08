@@ -70,7 +70,7 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
       title={translate('Resource orders')}
       columns={columns}
       verboseName={translate('orders')}
-      hoverableRow={CancelTerminationOrderButton}
+      rowActions={CancelTerminationOrderButton}
     />
   );
 };
