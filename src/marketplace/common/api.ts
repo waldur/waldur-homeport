@@ -530,3 +530,6 @@ export const createLexisLink = (data) =>
 
 export const deleteLexisLink = (lexisLinkURL: string) =>
   Axios.delete(lexisLinkURL);
+
+export const unlinkOrder = (orderUuid: string) =>
+  post(`/marketplace-orders/${orderUuid}/unlink/`);

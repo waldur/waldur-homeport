@@ -14,12 +14,14 @@ import {
   TABLE_PENDING_PUBLIC_ORDERS,
   TABLE_PUBLIC_ORDERS,
 } from '@waldur/marketplace/orders/list/constants';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 
+import { OrderResponse } from '../types';
+
 interface RejectByProviderButtonProps {
-  orderUuid: string;
+  row: OrderResponse;
   refetch?: () => void;
 }
 
@@ -29,21 +31,21 @@ export const RejectByProviderButton: FunctionComponent<
   const dispatch = useDispatch();
   const { mutate, isLoading } = useMutation(async () => {
     try {
-      await rejectOrderByProvider(props.orderUuid);
-      const newOrder = await getOrder(props.orderUuid);
+      await rejectOrderByProvider(props.row.uuid);
+      const newOrder = await getOrder(props.row.uuid);
       dispatch(
-        updateEntity(TABLE_MARKETPLACE_ORDERS, props.orderUuid, newOrder),
+        updateEntity(TABLE_MARKETPLACE_ORDERS, props.row.uuid, newOrder),
       );
       // update orders table on the main page
-      dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.orderUuid, newOrder));
+      dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.row.uuid, newOrder));
       // update pending orders tables on the drawer
       dispatch(
-        updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.orderUuid, newOrder),
+        updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.row.uuid, newOrder),
       );
       dispatch(
         updateEntity(
           TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
-          props.orderUuid,
+          props.row.uuid,
           newOrder,
         ),
       );
@@ -58,13 +60,12 @@ export const RejectByProviderButton: FunctionComponent<
     }
   });
   return (
-    <RowActionButton
-      className="btn btn-sm btn-secondary"
+    <ActionItem
+      className="text-danger"
       title={translate('Reject')}
       action={mutate}
-      pending={isLoading}
+      disabled={isLoading}
       iconNode={<Prohibit />}
-      size="sm"
     />
   );
 };
