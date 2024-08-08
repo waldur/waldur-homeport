@@ -59,7 +59,7 @@ export const InternalIpsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('internal IPs')}
-      actions={<UpdateInternalIpsAction resource={resourceScope} />}
+      tableActions={<UpdateInternalIpsAction resource={resourceScope} />}
     />
   );
 };

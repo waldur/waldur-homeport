@@ -29,7 +29,7 @@ export const UserAgreementsList: FunctionComponent<{}> = () => {
         },
       ]}
       verboseName={translate('user agreements')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <UserAgreementsEditButton row={row} refetch={props.fetch} />
           <UserAgreementDeleteButton userAgreement={row} />
@@ -37,7 +37,7 @@ export const UserAgreementsList: FunctionComponent<{}> = () => {
       )}
       expandableRow={UserAgreementsExpandableRow}
       expandableRowClassName="bg-gray-200"
-      actions={<UserAgreementCreateButton refetch={props.fetch} />}
+      tableActions={<UserAgreementCreateButton refetch={props.fetch} />}
     />
   );
 };

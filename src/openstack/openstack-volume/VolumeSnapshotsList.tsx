@@ -62,7 +62,7 @@ export const VolumeSnapshotsList: FunctionComponent<{ resourceScope }> = ({
       ]}
       verboseName={translate('snapshots')}
       hasQuery={false}
-      actions={<CreateSnapshotAction resource={resourceScope} />}
+      tableActions={<CreateSnapshotAction resource={resourceScope} />}
     />
   );
 };

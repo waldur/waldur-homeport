@@ -75,9 +75,9 @@ export const CallManagementPage: FunctionComponent = () => {
       ]}
       verboseName={translate('Calls')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      hoverableRow={({ row }) => <CallEditButton row={row} />}
+      rowActions={({ row }) => <CallEditButton row={row} />}
       hasQuery={true}
-      actions={<CallCreateButton refetch={tableProps.fetch} />}
+      tableActions={<CallCreateButton refetch={tableProps.fetch} />}
       expandableRow={CallExpandableRow}
       filters={<CallAllFilters />}
     />

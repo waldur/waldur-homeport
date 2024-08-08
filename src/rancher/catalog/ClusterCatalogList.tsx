@@ -57,8 +57,8 @@ export const ClusterCatalogList: FunctionComponent<{ resourceScope }> = ({
       {...props}
       columns={columns}
       verboseName={translate('catalogues')}
-      actions={<CatalogCreateButton cluster={resourceScope} />}
-      hoverableRow={({ row }) =>
+      tableActions={<CatalogCreateButton cluster={resourceScope} />}
+      rowActions={({ row }) =>
         row.scope_type === 'cluster' ? (
           <CatalogDeleteButton catalog={row} />
         ) : null

@@ -88,7 +88,7 @@ export const BillingRecordsList: FunctionComponent = () => {
           exportKeys: ['price'],
         },
       ]}
-      hoverableRow={SendNotificationButton}
+      rowActions={SendNotificationButton}
       verboseName={translate('records')}
       title={translate('Accounting')}
       enableExport={true}

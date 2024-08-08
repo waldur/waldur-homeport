@@ -162,7 +162,7 @@ export const TableColumnButton: FC<TableProps> = ({
   toggleColumn,
   swapColumns,
   columnPositions,
-  hoverableRow,
+  rowActions,
 }) => (
   <OverlayTrigger
     trigger="click"
@@ -175,7 +175,7 @@ export const TableColumnButton: FC<TableProps> = ({
           toggleColumn={toggleColumn}
           swapColumns={swapColumns}
           columnPositions={columnPositions}
-          hasActions={Boolean(hoverableRow)}
+          hasActions={Boolean(rowActions)}
         />
       </Popover>
     }

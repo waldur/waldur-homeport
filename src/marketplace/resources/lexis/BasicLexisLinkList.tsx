@@ -52,7 +52,7 @@ export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
       {...props}
       columns={columns}
       verboseName={translate('LEXIS links')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <LexisLinkDeleteButton row={row} refetch={props.fetch} />
       )}
       title={translate('LEXIS links')}

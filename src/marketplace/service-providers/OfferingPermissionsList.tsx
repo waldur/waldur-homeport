@@ -48,9 +48,9 @@ export const OfferingPermissionsList: FunctionComponent = () => {
             row.expiration_time ? formatDateTime(row.expiration_time) : 'N/A',
         },
       ]}
-      hoverableRow={OfferingPermissionActions}
+      rowActions={OfferingPermissionActions}
       verboseName={translate('offering permissions')}
-      actions={<OfferingPermissionCreateButton fetch={tableProps.fetch} />}
+      tableActions={<OfferingPermissionCreateButton fetch={tableProps.fetch} />}
     />
   );
 };

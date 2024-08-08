@@ -134,7 +134,7 @@ export const UserProposalsList: FC = () => {
       verboseName={translate('My proposals')}
       hasQuery={true}
       hasOptionalColumns
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <Link
           state="proposals.manage-proposal"
           params={{

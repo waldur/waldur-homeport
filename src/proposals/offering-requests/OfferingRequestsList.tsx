@@ -89,7 +89,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
       verboseName={translate('Requests for offerings')}
       hasQuery={true}
       expandableRow={OfferingRequestsListExpandableRow}
-      hoverableRow={OfferingRequestItemActions}
+      rowActions={OfferingRequestItemActions}
       filters={<OfferingRequestsTableFilter />}
     />
   );

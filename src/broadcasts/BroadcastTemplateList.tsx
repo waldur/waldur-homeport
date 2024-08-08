@@ -24,12 +24,14 @@ export const BroadcastTemplateList = () => {
         },
       ]}
       verboseName={translate('broadcast templates')}
-      actions={<BroadcastTemplateCreateButton refetch={tableProps.fetch} />}
+      tableActions={
+        <BroadcastTemplateCreateButton refetch={tableProps.fetch} />
+      }
       expandableRow={BroadcastTemplateExpandableRow}
       initialPageSize={10}
       showPageSizeSelector={true}
       expandableRowClassName="bg-gray-200"
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <BroadcastTemplateActions row={row} refetch={tableProps.fetch} />
       )}
       hasQuery={true}

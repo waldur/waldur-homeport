@@ -87,7 +87,7 @@ export const CustomerProposalsList: FC<{}> = () => {
       verboseName={translate('Proposals')}
       hasQuery={true}
       filters={<ProposalsTableFilter form={PROPOSALS_FILTER_FORM_ID} />}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ProposalRowActions refetch={tableProps.fetch} row={row} />
       )}
     />

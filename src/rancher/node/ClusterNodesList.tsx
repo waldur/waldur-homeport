@@ -64,8 +64,8 @@ export const ClusterNodesList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('Kubernetes nodes')}
-      actions={<CreateNodeAction resource={resourceScope} />}
-      hoverableRow={({ row }) => (
+      tableActions={<CreateNodeAction resource={resourceScope} />}
+      rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}

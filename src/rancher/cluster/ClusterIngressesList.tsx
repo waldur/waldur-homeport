@@ -58,7 +58,7 @@ export const ClusterIngressesList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('ingresses')}
-      actions={<ImportYAMLButton cluster_id={resourceScope.uuid} />}
+      tableActions={<ImportYAMLButton cluster_id={resourceScope.uuid} />}
     />
   );
 };

@@ -47,7 +47,7 @@ const ProviderUsersListComponent = ({ provider }) => {
           render: ProjectsCountColumn,
         },
       ]}
-      hoverableRow={UserDetailsButton}
+      rowActions={UserDetailsButton}
       showPageSizeSelector={true}
       verboseName={translate('users')}
       expandableRow={ExpandableRow}

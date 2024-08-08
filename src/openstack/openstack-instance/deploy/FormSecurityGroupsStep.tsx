@@ -171,7 +171,7 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
         ]}
         verboseName={translate('Security groups')}
         hasActionBar={false}
-        hoverableRow={ShowSecurityGroupsButton}
+        rowActions={ShowSecurityGroupsButton}
         hoverable
         fieldType="checkbox"
         fieldName="attributes.security_groups"

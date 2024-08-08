@@ -106,7 +106,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
       initialPageSize={5}
       hasQuery={true}
       showPageSizeSelector={true}
-      hoverableRow={PublicResourceActions}
+      rowActions={PublicResourceActions}
       filters={<OfferingResourcesFilter />}
     />
   );

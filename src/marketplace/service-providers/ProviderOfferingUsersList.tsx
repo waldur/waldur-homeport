@@ -107,7 +107,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
           hasOrganizationColumn={hasOrganizationColumn}
         />
       }
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <ProviderOfferingUserUpdateButton
             row={row}

@@ -71,13 +71,13 @@ export const PaymentProfileList: FunctionComponent<{}> = () => {
       columns={columns}
       verboseName={translate('payment profiles')}
       showPageSizeSelector={true}
-      actions={
+      tableActions={
         <PaymentProfileCreateButton
           refetch={props.fetch}
           {...tooltipAndDisabledAttributes}
         />
       }
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <PaymentProfileActions
           profile={row}
           refetch={props.fetch}

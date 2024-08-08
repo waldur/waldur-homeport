@@ -61,7 +61,7 @@ export const ServerGroupsList: FunctionComponent<{ resourceScope }> = ({
       verboseName={translate('server groups')}
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}
-      actions={
+      tableActions={
         <ButtonGroup>
           <PullServerGroupsAction resource={resourceScope} />
           <CreateServerGroupAction resource={resourceScope} />

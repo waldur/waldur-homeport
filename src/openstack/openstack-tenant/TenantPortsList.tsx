@@ -70,7 +70,7 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
           render: ({ row }) => <>{row.network_name || 'N/A'}</>,
         },
       ]}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ResourceRowActions resource={row} refetch={props.fetch} />
       )}
       expandableRow={ExpandablePortRow}

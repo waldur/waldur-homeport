@@ -68,7 +68,7 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('subnets')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}

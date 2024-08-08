@@ -141,7 +141,7 @@ export const CustomerList: FunctionComponent<{
       showPageSizeSelector={true}
       enableExport={true}
       expandableRow={CustomerExpandableRow}
-      actions={<FinancialReportSendButton />}
+      tableActions={<FinancialReportSendButton />}
       filters={
         <CustomerListFilter
           initialValues={initialValues}

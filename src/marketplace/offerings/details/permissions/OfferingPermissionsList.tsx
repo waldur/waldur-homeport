@@ -37,13 +37,13 @@ export const OfferingPermissionsList = ({ offering }) => {
       title={translate('Offering permissions')}
       verboseName={translate('Offering permissions')}
       showPageSizeSelector={true}
-      actions={
+      tableActions={
         <OfferingPermissionCreateButton
           offering={offering}
           refetch={tableProps.fetch}
         />
       }
-      hoverableRow={OfferingPermissionActions}
+      rowActions={OfferingPermissionActions}
     />
   );
 };

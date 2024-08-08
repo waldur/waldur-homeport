@@ -116,7 +116,7 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
 
     return (
       <>
-        {(!props.standalone || isSm) && props.actions}
+        {(!props.standalone || isSm) && props.tableActions}
         {showDefaultActions && (
           <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3 flex-grow-1 flex-sm-grow-0">
             {['menu', 'sidebar'].includes(props.filterPosition) &&

@@ -75,7 +75,7 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
       }
       verboseName={translate('Rounds')}
       hasQuery={true}
-      actions={
+      tableActions={
         <RoundCreateButton call={props.call} refetch={tableProps.fetch} />
       }
       expandableRow={RoundExpandableRow}

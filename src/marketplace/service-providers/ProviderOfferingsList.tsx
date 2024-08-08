@@ -99,8 +99,8 @@ export const ProviderOfferingsComponent: FC<
       ]}
       verboseName={translate('Offerings')}
       dropdownActions={dropdownActions}
-      actions={<CreateOfferingButton fetch={tableProps.fetch} />}
-      hoverableRow={(row) => (
+      tableActions={<CreateOfferingButton fetch={tableProps.fetch} />}
+      rowActions={(row) => (
         <OfferingActions row={row.row} refetch={tableProps.fetch} />
       )}
       {...extraTableProps}

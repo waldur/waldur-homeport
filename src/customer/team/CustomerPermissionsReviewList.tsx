@@ -56,7 +56,7 @@ export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
         },
       ]}
       verboseName={translate('permission reviews')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           {row.is_pending ? <ReviewCloseButton reviewId={row.uuid} /> : 'N/A'}
         </>

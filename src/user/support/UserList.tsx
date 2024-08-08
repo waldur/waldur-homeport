@@ -326,12 +326,12 @@ export const UserList: FunctionComponent = () => {
       {...props}
       filters={<UserFilter />}
       columns={columns}
-      hoverableRow={RowActions}
+      rowActions={RowActions}
       showPageSizeSelector={true}
       hasOptionalColumns
       verboseName={translate('users')}
       enableExport={true}
-      actions={<UserTableActions refetch={props.fetch} />}
+      tableActions={<UserTableActions refetch={props.fetch} />}
       hasQuery={true}
     />
   );

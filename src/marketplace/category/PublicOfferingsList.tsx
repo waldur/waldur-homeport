@@ -118,7 +118,7 @@ export const PublicOfferingsList: FunctionComponent<{
       initialMode={initialMode === 'table' ? 'table' : 'grid'}
       standalone
       title={translate('Offerings')}
-      hoverableRow={RowActions}
+      rowActions={RowActions}
       hasOptionalColumns
     />
   );

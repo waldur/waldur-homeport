@@ -45,7 +45,7 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
       verboseName={translate('offering users')}
       showPageSizeSelector={true}
       initialPageSize={5}
-      actions={
+      tableActions={
         offering.secret_options.service_provider_can_create_offering_user && (
           <CreateOfferingUserButton
             offering={offering}

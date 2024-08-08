@@ -248,7 +248,7 @@ export const BaseOrganizationsList: FunctionComponent<{
       showPageSizeSelector={true}
       enableExport={true}
       standalone={standalone}
-      actions={<OrganizationCreateButton />}
+      tableActions={<OrganizationCreateButton />}
       filters={<OrganizationsFilter />}
       hasOptionalColumns
     />

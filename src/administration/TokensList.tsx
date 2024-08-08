@@ -42,7 +42,7 @@ export const TokensList = () => {
       ]}
       verboseName={translate('tokens')}
       showPageSizeSelector={true}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <TokenDeleteButton row={row} refetch={tableProps.fetch} />
       )}
     />

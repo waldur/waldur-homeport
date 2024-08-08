@@ -39,13 +39,13 @@ export const CustomerAccessControlPanel: FunctionComponent<
       ]}
       verboseName={translate('Access control')}
       hasQuery
-      actions={
+      tableActions={
         <AccessSubnetCreateButton
           refetch={tableProps.fetch}
           customer_uuid={customer_uuid}
         />
       }
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <>
           <AccessSubnetEditButton row={row} refetch={tableProps.fetch} />
           <AccessSubnetDeleteButton row={row} refetch={tableProps.fetch} />

@@ -62,12 +62,12 @@ export const TenantVolumesList: FunctionComponent<{ resource }> = ({
         },
       ]}
       hasQuery={true}
-      actions={
+      tableActions={
         <AddResourceButton resource={resource} offeringType={VOLUME_TYPE} />
       }
       verboseName={translate('volumes')}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ModalActionsRouter
           url={row.url}
           name={row.name}

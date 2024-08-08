@@ -106,7 +106,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
       ].filter(Boolean)}
       verboseName={translate('Cost policies')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <CostPolicyDeleteButton
           row={row}
           type="project"
@@ -115,7 +115,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
       )}
       hasQuery={true}
       showPageSizeSelector={true}
-      actions={
+      tableActions={
         <CostPolicyCreateButton type="project" refetch={tableProps.fetch} />
       }
       {...props}

@@ -47,7 +47,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('floating IPs')}
-      actions={<UpdateFloatingIpsActionButton resource={resourceScope} />}
+      tableActions={<UpdateFloatingIpsActionButton resource={resourceScope} />}
     />
   );
 };

@@ -44,7 +44,7 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
       enableExport={true}
       verboseName={translate('robot accounts')}
       expandableRow={RobotAccountExpandable}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <RobotAccountActions refetch={tableProps.fetch} row={row} />
       )}
     />

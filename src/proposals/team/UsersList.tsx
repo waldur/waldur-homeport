@@ -45,7 +45,7 @@ export const UsersList: FC<UsersListProps> = ({
       columns={columns}
       title={translate('Users')}
       verboseName={translate('users')}
-      hoverableRow={
+      rowActions={
         readOnly
           ? null
           : ({ row }) => (

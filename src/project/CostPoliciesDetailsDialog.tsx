@@ -9,7 +9,7 @@ export const CostPoliciesDetailsDialog = ({ resolve: { project } }) => {
         table="ProjectCostPoliciesList"
         filter={{ project_uuid: project.uuid }}
         hasActionBar={false}
-        hoverableRow={null}
+        rowActions={null}
         hideColumns={['project', 'price_estimate']}
       />
     </ModalDialog>

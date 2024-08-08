@@ -93,7 +93,7 @@ export const NotificationList = () => {
       ]}
       verboseName={translate('notifications')}
       expandableRow={NotificationExpandableRow}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <NotificationActions row={row} refetch={tableProps.fetch} />
       )}
       initialPageSize={10}

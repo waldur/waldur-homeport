@@ -125,7 +125,7 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
       hasQuery={true}
       expandableRow={PublicCallExpandableRow}
       filters={<CallAllFiltersWithDefaultState />}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <PublicCallApplyButton
           call={row}
           title={translate('Apply')}

@@ -49,7 +49,7 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
         },
       ]}
       title={title || translate('Project updates')}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ProjectUpdateRequestActions request={row} refetch={props.fetch} />
       )}
       expandableRow={ProjectUpdateRequestExpandable}

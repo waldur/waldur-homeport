@@ -198,7 +198,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       title={translate('Resources')}
       verboseName={translate('Resources')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      hoverableRow={({ row }) => (
+      rowActions={({ row }) => (
         <ResourceActionsButton row={row} refetch={props.fetch} />
       )}
       hasQuery={true}
@@ -207,7 +207,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       expandableRow={ExpandableResourceSummary}
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
-      actions={
+      tableActions={
         props.context ? (
           <CreateResourceButton context={props.context} />
         ) : (
