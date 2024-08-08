@@ -8,8 +8,8 @@ import {
   approveOrderByProvider,
   getOrder,
 } from '@waldur/marketplace/common/api';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 
 import {
@@ -18,9 +18,10 @@ import {
   TABLE_PENDING_PUBLIC_ORDERS,
   TABLE_PUBLIC_ORDERS,
 } from '../list/constants';
+import { OrderResponse } from '../types';
 
 interface SupportOrderApproveButtonProps {
-  orderUuid: string;
+  row: OrderResponse;
   refetch?: () => void;
 }
 
@@ -30,21 +31,21 @@ export const ApproveByProviderButton: FunctionComponent<
   const dispatch = useDispatch();
   const { mutate, isLoading } = useMutation(async () => {
     try {
-      await approveOrderByProvider(props.orderUuid);
-      const newOrder = await getOrder(props.orderUuid);
+      await approveOrderByProvider(props.row.uuid);
+      const newOrder = await getOrder(props.row.uuid);
       dispatch(
-        updateEntity(TABLE_MARKETPLACE_ORDERS, props.orderUuid, newOrder),
+        updateEntity(TABLE_MARKETPLACE_ORDERS, props.row.uuid, newOrder),
       );
       // update orders table on the main page
-      dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.orderUuid, newOrder));
+      dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.row.uuid, newOrder));
       // update pending orders tables on the drawer
       dispatch(
-        updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.orderUuid, newOrder),
+        updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.row.uuid, newOrder),
       );
       dispatch(
         updateEntity(
           TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
-          props.orderUuid,
+          props.row.uuid,
           newOrder,
         ),
       );
@@ -57,13 +58,12 @@ export const ApproveByProviderButton: FunctionComponent<
     }
   });
   return (
-    <RowActionButton
-      className="btn btn-sm btn-secondary"
+    <ActionItem
+      className="text-success"
       title={translate('Approve')}
       action={mutate}
-      pending={isLoading}
+      disabled={isLoading}
       iconNode={<Check />}
-      size="sm"
     />
   );
 };
