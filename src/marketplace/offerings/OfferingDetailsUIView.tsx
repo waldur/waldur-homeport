@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
-import { useMemo } from 'react';
-import { useEffectOnce } from 'react-use';
+import { useCallback, useMemo } from 'react';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -13,7 +12,6 @@ import {
 } from '@waldur/marketplace/common/api';
 import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
@@ -71,14 +69,16 @@ const OfferingEventsList = lazyComponent(
   'OfferingEventsList',
 );
 
-async function loadData(offering_uuid: string) {
-  const [offering, plansUsage] = await Promise.all([
-    getProviderOffering(offering_uuid),
-    getOfferingPlansUsage(offering_uuid),
-  ]);
+async function loadOfferingData(offering_uuid: string) {
+  const offering = await getProviderOffering(offering_uuid);
   const category = await getCategory(offering.category_uuid);
 
-  return { offering, category, plansUsage };
+  return { offering, category };
+}
+
+async function loadPlansUsage(offering_uuid: string) {
+  const plansUsage = await getOfferingPlansUsage(offering_uuid);
+  return plansUsage;
 }
 
 const getTabs = (offering: Offering): PageBarTab[] => {
@@ -151,21 +151,37 @@ export const OfferingDetailsUIView = () => {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
 
-  const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    ['providerOfferingDetail', offering_uuid],
-    () => loadData(offering_uuid),
-    { enabled: false },
+  const {
+    isLoading: isLoadingOffering,
+    error: errorOffering,
+    data: offeringData,
+    refetch: refetchOffering,
+    isRefetching: isRefetchingOffering,
+  } = useQuery(
+    ['providerOfferingData', offering_uuid],
+    () => loadOfferingData(offering_uuid),
+    { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
+  );
+  const {
+    isLoading: isLoadingPlansUsage,
+    error: errorPlansUsage,
+    data: plansUsage,
+    refetch: refetchPlansUsage,
+    isRefetching: isRefetchingPlansUsage,
+  } = useQuery(
+    ['offeringPlansUsage', offering_uuid],
+    () => loadPlansUsage(offering_uuid),
+    { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
   );
 
-  useEffectOnce(() => {
-    refetch();
-  });
-
-  useTitle(data ? data.offering?.name : translate('Offering details'));
+  const refetch = useCallback(() => {
+    refetchOffering();
+    refetchPlansUsage();
+  }, [refetchOffering, refetchPlansUsage]);
 
   const tabs = useMemo(
-    () => (data?.offering ? getTabs(data.offering) : []),
-    [data?.offering],
+    () => (offeringData?.offering ? getTabs(offeringData.offering) : []),
+    [offeringData?.offering],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
 
@@ -173,14 +189,14 @@ export const OfferingDetailsUIView = () => {
     <OfferingViewHero
       offeringUuid={offering_uuid}
       refetch={refetch}
-      isRefetching={isRefetching}
+      isRefetching={isRefetchingOffering || isRefetchingPlansUsage}
     />,
-    [offering_uuid, refetch, isRefetching],
+    [offering_uuid, refetch, isRefetchingOffering, isRefetchingPlansUsage],
   );
 
   const breadcrumbItems = useMemo(
-    () => getOfferingBreadcrumbItems(data?.offering),
-    [data?.offering],
+    () => getOfferingBreadcrumbItems(offeringData?.offering),
+    [offeringData?.offering],
   );
   useBreadcrumbs(breadcrumbItems);
 
@@ -191,9 +207,12 @@ export const OfferingDetailsUIView = () => {
           {...props}
           key={key}
           refetch={refetch}
-          data={data}
-          isLoading={isLoading}
-          error={error}
+          data={{
+            ...offeringData,
+            plansUsage,
+          }}
+          isLoading={isLoadingOffering || isLoadingPlansUsage}
+          error={errorOffering || errorPlansUsage}
           tabSpec={tabSpec}
         />
       )}

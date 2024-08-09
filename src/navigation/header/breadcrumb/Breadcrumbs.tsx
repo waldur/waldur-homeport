@@ -100,6 +100,7 @@ export const Breadcrumbs = () => {
             key={item.key}
             to={item.to}
             params={item.params}
+            onClick={item.onClick}
             ellipsis={item.ellipsis}
             truncate={item.truncate}
             active={item.active}

@@ -5020,7 +5020,7 @@
     "message": "Marketplace offerings and resources"
   },
   "Marketplace": {
-    "description": "SettingsDescription.ts, administration/routes.ts, administration/settings/AdministrationBranding.tsx, marketplace/landing/LandingPage.tsx, marketplace/routes.ts, marketplace/utils.ts, navigation/sidebar/UnifiedSidebar.tsx",
+    "description": "SettingsDescription.ts, administration/routes.ts, administration/settings/AdministrationBranding.tsx, marketplace/landing/LandingPage.tsx, marketplace/offerings/utils.ts, marketplace/routes.ts, marketplace/utils.ts, navigation/sidebar/UnifiedSidebar.tsx",
     "message": "Marketplace"
   },
   "Mass move resources": {
@@ -5880,7 +5880,7 @@
     "message": "Offering details synchronization has been scheduled."
   },
   "Offering details": {
-    "description": "marketplace/details/OverviewTab.tsx, marketplace/offerings/OfferingDetailsUIView.tsx, marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/OfferingDetailsButton.tsx, marketplace/offerings/details/OfferingDetailsDialog.tsx",
+    "description": "marketplace/details/OverviewTab.tsx, marketplace/offerings/details/OfferingDetailsButton.tsx, marketplace/offerings/details/OfferingDetailsDialog.tsx",
     "message": "Offering details"
   },
   "Offering does not have any usage-based components.": {
@@ -6368,7 +6368,7 @@
     "message": "Organizations owner"
   },
   "Organizations": {
-    "description": "administration/dashboard/AdminStatistics.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/routes.ts, broadcasts/BroadcastExpandableRow.tsx, broadcasts/BroadcastForm.tsx, broadcasts/RecipientsList.tsx, customer/list/CustomerList.tsx, marketplace/offerings/OfferingDetailsUIView.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/offerings/utils.ts, marketplace/resources/details/ResourceDetailsPage.tsx, marketplace/routes.ts, marketplace/service-providers/ProviderOrganizationsList.tsx, marketplace/service-providers/ProviderUserCustomersList.tsx, navigation/header/search/SearchPopover.tsx, navigation/sidebar/OrganizationsListMenu.tsx, organization/OrganizationUIView.tsx, project/ProjectContainer.tsx, proposals/round/RoundUIView.tsx, proposals/utils.ts, resource/support/SharedProviderTabs.tsx, user/affiliations/BaseOrganizationsList.tsx",
+    "description": "administration/dashboard/AdminStatistics.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/routes.ts, broadcasts/BroadcastExpandableRow.tsx, broadcasts/BroadcastForm.tsx, broadcasts/RecipientsList.tsx, customer/list/CustomerList.tsx, marketplace/offerings/OfferingDetailsUIView.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/resources/details/ResourceDetailsPage.tsx, marketplace/routes.ts, marketplace/service-providers/ProviderOrganizationsList.tsx, marketplace/service-providers/ProviderUserCustomersList.tsx, navigation/header/search/SearchPopover.tsx, navigation/sidebar/OrganizationsListMenu.tsx, organization/OrganizationUIView.tsx, project/ProjectContainer.tsx, proposals/round/RoundUIView.tsx, proposals/utils.ts, resource/support/SharedProviderTabs.tsx, user/affiliations/BaseOrganizationsList.tsx",
     "message": "Organizations"
   },
   "Other requirements?": {

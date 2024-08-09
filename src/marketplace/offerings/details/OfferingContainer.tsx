@@ -22,7 +22,7 @@ interface OwnProps {
 export const OfferingContainer: FC<OwnProps> = (props) => {
   const data = props.data;
 
-  if (props.isLoading && !data) {
+  if (props.isLoading) {
     return <LoadingSpinner />;
   }
 

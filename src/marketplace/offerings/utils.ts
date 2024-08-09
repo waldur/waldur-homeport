@@ -1,8 +1,12 @@
+import { change } from 'redux-form';
+
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { checkCustomerUser } from '@waldur/workspace/selectors';
 import { User } from '@waldur/workspace/types';
+
+import { ADMIN_OFFERINGS_FILTER_FORM_ID } from './admin/constants';
 
 const ARTICLE_CODE_PATTERN = new RegExp(
   '^[A-Za-z0-9][A-Za-z0-9-_]*[A-Za-z0-9]$',
@@ -45,18 +49,17 @@ export const scrollToSectionById = (section: string) => {
 };
 
 export const getOfferingBreadcrumbItems = (offering): IBreadcrumbItem[] => {
-  if (!offering) return [];
   return [
     {
-      key: 'organizations',
-      text: translate('Organizations'),
-      to: 'organizations',
+      key: 'marketplace',
+      text: translate('Marketplace'),
+      to: 'public.marketplace-landing',
     },
     {
-      key: 'organization.dashboard',
-      text: offering.customer_name,
-      to: 'organization.dashboard',
-      params: { uuid: offering.customer_uuid },
+      key: 'service-provider',
+      text: offering?.customer_name || '...',
+      to: 'marketplace-providers.details',
+      params: offering ? { customer_uuid: offering.customer_uuid } : undefined,
       ellipsis: 'xl',
       maxLength: 11,
     },
@@ -64,12 +67,57 @@ export const getOfferingBreadcrumbItems = (offering): IBreadcrumbItem[] => {
       key: 'marketplace-vendor-offerings',
       text: translate('Offerings'),
       to: 'marketplace-vendor-offerings',
-      params: { uuid: offering.customer_uuid },
+      params: offering ? { uuid: offering.customer_uuid } : undefined,
       ellipsis: 'md',
     },
     {
       key: 'offering',
-      text: offering.name,
+      text: offering?.name || '...',
+      truncate: true,
+      active: true,
+    },
+  ];
+};
+
+export const getPublicOfferingBreadcrumbItems = (
+  offering,
+  dispatch,
+  router,
+): IBreadcrumbItem[] => {
+  return [
+    {
+      key: 'marketplace',
+      text: translate('Marketplace'),
+      to: 'public.marketplace-landing',
+    },
+    {
+      key: 'service-provider',
+      text: offering?.customer_name || '...',
+      to: 'marketplace-providers.details',
+      params: offering ? { customer_uuid: offering.customer_uuid } : undefined,
+      ellipsis: 'xl',
+      maxLength: 11,
+    },
+    {
+      key: 'marketplace-offerings',
+      text: translate('Offerings'),
+      ellipsis: 'md',
+      onClick: () => {
+        if (!offering) return;
+        // Set organization filter to offerings
+        const customer = {
+          name: offering.customer_name,
+          uuid: offering.customer_uuid,
+        };
+        dispatch(
+          change(ADMIN_OFFERINGS_FILTER_FORM_ID, 'organization', customer),
+        );
+        router.stateService.go('public.offerings');
+      },
+    },
+    {
+      key: 'offering',
+      text: offering?.name || '...',
       truncate: true,
       active: true,
     },
