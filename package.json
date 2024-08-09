@@ -228,8 +228,7 @@
       ]
     },
     "ignore": [
-      "extractLiteralsFromFiles.js",
-      "src/SettingsDescription.ts"
+      "extractLiteralsFromFiles.js"
     ]
   },
   "stylelint": {

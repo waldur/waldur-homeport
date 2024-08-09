@@ -2,7 +2,6 @@ import { PencilSimple } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -12,14 +11,14 @@ const ConfigurationEditDialog = lazyComponent(
   'ConfigurationEditDialog',
 );
 
-export const ConfigurationEditButton = ({ item }) => {
+export const ConfigurationEditButton = ({ item, value }) => {
   const dispatch = useDispatch();
   const openFormDialog = useCallback(
     () =>
       dispatch(
         openModalDialog(ConfigurationEditDialog, {
           resolve: { item },
-          initialValues: { value: ENV.plugins.WALDUR_CORE[item.key] },
+          initialValues: { value },
           size: 'md',
         }),
       ),

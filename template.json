@@ -60,7 +60,7 @@
     "message": "A profile has been created."
   },
   "API URL": {
-    "description": "administration/service-desk/AtlassianSettings.tsx, administration/service-desk/SmaxSettings.tsx, administration/service-desk/ZammadSettings.tsx, marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts",
+    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts",
     "message": "API URL"
   },
   "API secret code:": {
@@ -456,12 +456,8 @@
     "message": "Advanced options"
   },
   "Affected resource field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Affected resource field name"
-  },
-  "Affected resource field": {
-    "description": "administration/service-desk/SmaxSettings.tsx",
-    "message": "Affected resource field"
   },
   "Affected resource": {
     "description": "issues/IssueSummary.tsx, issues/create/IssueQuickCreate.tsx",
@@ -930,10 +926,6 @@
   "Are you sure you want to destroy {count} resources?": {
     "description": "marketplace/resources/mass-actions/MultiDestroyAction.tsx",
     "message": "Are you sure you want to destroy {count} resources?"
-  },
-  "Are you sure you want to enable {serviceDesk}? This will disable all the other service desks.": {
-    "description": "administration/service-desk/AdministrationServiceDesk.tsx",
-    "message": "Are you sure you want to enable {serviceDesk}? This will disable all the other service desks."
   },
   "Are you sure you want to prohibit this organization from managing calls?": {
     "description": "customer/details/CustomerCallManagerPanel.tsx",
@@ -1508,7 +1500,7 @@
     "message": "Call"
   },
   "Caller field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Caller field name"
   },
   "Caller": {
@@ -1811,10 +1803,6 @@
     "description": "azure/sql/AzureSQLDatabaseSummary.tsx",
     "message": "Collation"
   },
-  "Comma seperated issue types": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Comma seperated issue types"
-  },
   "Comma-separated list of columns for users table.": {
     "description": "SettingsDescription.ts",
     "message": "Comma-separated list of columns for users table."
@@ -1827,17 +1815,9 @@
     "description": "SettingsDescription.ts",
     "message": "Comma-separated list of file extenstions not allowed for attachment."
   },
-  "Comment cooldown duration": {
-    "description": "administration/service-desk/ZammadSettings.tsx",
-    "message": "Comment cooldown duration"
-  },
   "Comment prefix with user info.": {
     "description": "SettingsDescription.ts",
     "message": "Comment prefix with user info."
-  },
-  "Comment prefix": {
-    "description": "administration/service-desk/ZammadSettings.tsx",
-    "message": "Comment prefix"
   },
   "Comment": {
     "description": "invitations/PermissionRequestActionDialog.tsx, invitations/UserPermissionRequestsList.tsx, issues/comments/IssueCommentsFormMainContainer.spec.tsx, issues/comments/IssueCommentsFormMainContainer.tsx, issues/feedback/SupportFeedback.tsx, issues/feedback/SupportFeedbackListExpandableRow.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, marketplace-remote/ReviewDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, reporting/resource-usage/ResourceUsageList.tsx, user/UserPermissionRequestsList.tsx",
@@ -1948,7 +1928,7 @@
     "message": "Confirmation notification template"
   },
   "Confirmation": {
-    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, administration/service-desk/AdministrationServiceDesk.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invitations/GroupInvitationCancelButton.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/category/admin/CategoryDeleteButton.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/details/CustomerField.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, rancher/cluster/create/FormNodesStep.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx",
+    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invitations/GroupInvitationCancelButton.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/category/admin/CategoryDeleteButton.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/details/CustomerField.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, rancher/cluster/create/FormNodesStep.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx",
     "message": "Confirmation"
   },
   "Confirming that data is correct": {
@@ -2287,10 +2267,6 @@
     "description": "marketplace/resources/resource-pending/OrderErredView.tsx",
     "message": "Creation has failed"
   },
-  "Creation source field": {
-    "description": "administration/service-desk/SmaxSettings.tsx",
-    "message": "Creation source field"
-  },
   "Creation source name.": {
     "description": "SettingsDescription.ts",
     "message": "Creation source name."
@@ -2567,10 +2543,6 @@
     "description": "SettingsDescription.ts",
     "message": "Default logo for offering"
   },
-  "Default offering issue type": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Default offering issue type"
-  },
   "Default project role": {
     "description": "proposals/update/general/CallGeneralSection.tsx, proposals/update/general/EditGeneralInfoDialog.tsx",
     "message": "Default project role"
@@ -2691,10 +2663,6 @@
     "description": "SettingsDescription.ts",
     "message": "Description of the Waldur deployment."
   },
-  "Description template": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Description template"
-  },
   "Description": {
     "description": "administration/roles/RolesList.tsx, azure/vm/AzureVirtualMachineForm.tsx, customer/details/AccessSubnetCreateForm.tsx, customer/details/AccessSubnetEditDialog.tsx, customer/details/CustomerAccessControlPanel.tsx, issues/list/IssuesListExpandableRow.tsx, marketplace/category/admin/AdminCategoriesPage.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/CategoryGroupsList.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, marketplace/details/OfferingTabs.tsx, marketplace/details/plan/PlanSection.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/actions/RequestActionDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/details/PublicOfferingInfo.tsx, marketplace/offerings/images/CreateImageDialog.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, marketplace/offerings/update/plans/PlanForm.tsx, marketplace/orders/details/OrderDetailsApprovalsTab.tsx, marketplace/resources/details/ResourceIssuesCard.tsx, marketplace/resources/usage/utils.ts, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/details/ServiceProviderDetails.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-instance/deploy/FormSecurityGroupsStep.tsx, openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx, openstack/openstack-security-groups/SecurityGroupsList.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx, openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectDashboard.tsx, project/ProjectDetails.tsx, project/ProjectsList.tsx, project/manage/ProjectGeneral.tsx, proposals/CallsAvailableOfferingsPage.tsx, proposals/call-management/CallFormDialog.tsx, proposals/details/CallDescriptionCard.tsx, proposals/details/PublicCallDetailsContainer.tsx, proposals/update/general/CallGeneralSection.tsx, proposals/update/general/EditGeneralInfoDialog.tsx, rancher/ClusterProjectList.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/catalog/ClusterCatalogList.tsx, rancher/cluster/hpas/HPACreateDialog.tsx, rancher/cluster/hpas/HPAUpdateDialog.tsx, rancher/template/ApplicationConfiguration.tsx, rancher/template/CatalogTemplateList.tsx, rancher/template/ClusterTemplateList.tsx, resource/actions/base.ts, resource/summary/ResourceSummaryBase.tsx, slurm/RequestLimitsChangeDialog.tsx, user/affiliations/ProjectExpandableRow.tsx, user/support/UserEditForm.tsx, user/support/UserList.tsx",
     "message": "Description"
@@ -2792,11 +2760,11 @@
     "message": "Disable this to export only the rows on the current page"
   },
   "Disable": {
-    "description": "administration/notifications/NotificationToggleButton.tsx, administration/roles/RoleToggleButton.tsx, administration/service-desk/AdministrationServiceDesk.tsx",
+    "description": "administration/notifications/NotificationToggleButton.tsx, administration/roles/RoleToggleButton.tsx",
     "message": "Disable"
   },
   "Disabled": {
-    "description": "administration/hooks/HooksList.tsx, administration/providers/ProviderCard.tsx, administration/service-desk/AdministrationServiceDesk.tsx, customer/payment-profiles/PaymentProfileList.tsx, user/hooks/HooksList.tsx, user/support/utils.ts",
+    "description": "administration/hooks/HooksList.tsx, administration/providers/ProviderCard.tsx, customer/payment-profiles/PaymentProfileList.tsx, user/hooks/HooksList.tsx, user/support/utils.ts",
     "message": "Disabled"
   },
   "Discard": {
@@ -3128,7 +3096,7 @@
     "message": "Email verification has been sent. Please check your inbox."
   },
   "Email": {
-    "description": "administration/InvitationList.tsx, administration/hooks/HooksList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/providers/ProviderUsersDialog.tsx, administration/service-desk/AtlassianSettings.tsx, broadcasts/RecipientsList.tsx, customer/details/CustomerContactPanel.tsx, customer/details/EditFieldDialog.tsx, customer/list/ExportAsEmailDialog.tsx, customer/team/CustomerUsersList.tsx, invitations/InvitationsList.tsx, invitations/actions/create/EmailsListGroup.tsx, project/team/InvitationsList.tsx, project/team/ProjectUsersList.tsx, proposals/round/reviewers/RoundReviewersList.tsx, proposals/team/InvitationsList.tsx, proposals/team/UsersList.tsx, user/affiliations/BaseOrganizationsList.tsx, user/hooks/HookTypeField.tsx, user/support/EmailField.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx",
+    "description": "administration/InvitationList.tsx, administration/hooks/HooksList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/providers/ProviderUsersDialog.tsx, broadcasts/RecipientsList.tsx, customer/details/CustomerContactPanel.tsx, customer/details/EditFieldDialog.tsx, customer/list/ExportAsEmailDialog.tsx, customer/team/CustomerUsersList.tsx, invitations/InvitationsList.tsx, invitations/actions/create/EmailsListGroup.tsx, project/team/InvitationsList.tsx, project/team/ProjectUsersList.tsx, proposals/round/reviewers/RoundReviewersList.tsx, proposals/team/InvitationsList.tsx, proposals/team/UsersList.tsx, user/affiliations/BaseOrganizationsList.tsx, user/hooks/HookTypeField.tsx, user/support/EmailField.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx",
     "message": "Email"
   },
   "Email: {email}": {
@@ -3176,7 +3144,7 @@
     "message": "Enable profile after creation"
   },
   "Enable": {
-    "description": "administration/notifications/NotificationToggleButton.tsx, administration/roles/RoleToggleButton.tsx, administration/service-desk/AdministrationServiceDesk.tsx, customer/payment-profiles/PaymentProfileEnableButton.tsx",
+    "description": "administration/notifications/NotificationToggleButton.tsx, administration/roles/RoleToggleButton.tsx, customer/payment-profiles/PaymentProfileEnableButton.tsx",
     "message": "Enable"
   },
   "Enabled LEXIS link integrations for offerings.": {
@@ -3200,7 +3168,7 @@
     "message": "Enabled display of experimental or mocked components in marketplace."
   },
   "Enabled": {
-    "description": "administration/hooks/HooksList.tsx, administration/notifications/NotificationList.tsx, administration/providers/ProviderCard.tsx, administration/providers/ProviderForm.tsx, administration/service-desk/AdministrationServiceDesk.tsx, customer/payment-profiles/PaymentProfileList.tsx, marketplace-checklist/ChecklistCustomer.tsx, user/hooks/HookForm.tsx, user/hooks/HooksList.tsx",
+    "description": "administration/hooks/HooksList.tsx, administration/notifications/NotificationList.tsx, administration/providers/ProviderCard.tsx, administration/providers/ProviderForm.tsx, customer/payment-profiles/PaymentProfileList.tsx, marketplace-checklist/ChecklistCustomer.tsx, user/hooks/HookForm.tsx, user/hooks/HooksList.tsx",
     "message": "Enabled"
   },
   "Encountered an empty component": {
@@ -4200,7 +4168,7 @@
     "message": "Images"
   },
   "Impact field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Impact field name"
   },
   "Impersonate": {
@@ -4568,7 +4536,7 @@
     "message": "Invoiced to"
   },
   "Is Service Desk username the same as in Waldur": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Is Service Desk username the same as in Waldur"
   },
   "Is active": {
@@ -4591,17 +4559,9 @@
     "description": "events/ExpandableEventDetailsTable.tsx, marketplace/orders/list/ResourceOrders.tsx",
     "message": "Issue link"
   },
-  "Issue request feedback field name": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Issue request feedback field name"
-  },
   "Issue type used for request-based item processing.": {
     "description": "SettingsDescription.ts",
     "message": "Issue type used for request-based item processing."
-  },
-  "Issue types": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Issue types"
   },
   "Issue": {
     "description": "issues/feedback/SupportFeedbackList.tsx, marketplace/orders/details/OrderDetailsQuickBody.tsx",
@@ -4831,10 +4791,6 @@
     "description": "navigation/header/favorite-pages/FavoritePageService.ts",
     "message": "List of all resources"
   },
-  "List of excluded attachment types": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "List of excluded attachment types"
-  },
   "List of resources": {
     "description": "navigation/header/favorite-pages/FavoritePageService.ts",
     "message": "List of resources"
@@ -4908,7 +4864,7 @@
     "message": "Login failed"
   },
   "Login": {
-    "description": "administration/service-desk/SmaxSettings.tsx, auth/SigninForm.tsx, auth/saml2/AuthSaml2Dialog.tsx",
+    "description": "auth/SigninForm.tsx, auth/saml2/AuthSaml2Dialog.tsx",
     "message": "Login"
   },
   "Logo has been updated successfully.": {
@@ -4987,10 +4943,6 @@
     "description": "proposals/update/CallUpdateContainer.tsx",
     "message": "Managers"
   },
-  "Map waldur users to service desk agents": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Map waldur users to service desk agents"
-  },
   "Mark as paid": {
     "description": "invoices/list/MarkAsPaidButton.tsx",
     "message": "Mark as paid"
@@ -5002,10 +4954,6 @@
   "Mark invoice as paid": {
     "description": "invoices/list/MarkAsPaidDialog.tsx",
     "message": "Mark invoice as paid"
-  },
-  "Marker for comment": {
-    "description": "administration/service-desk/ZammadSettings.tsx",
-    "message": "Marker for comment"
   },
   "Marker for comment. Used for separating comments made via Waldur from natively added comments.": {
     "description": "SettingsDescription.ts",
@@ -6264,7 +6212,7 @@
     "message": "Ordinary plan"
   },
   "Organisation field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Organisation field name"
   },
   "Organisation field name.": {
@@ -6298,10 +6246,6 @@
   "Organization events": {
     "description": "customer/workspace/CustomerEventsFilter.tsx",
     "message": "Organization events"
-  },
-  "Organization field": {
-    "description": "administration/service-desk/SmaxSettings.tsx",
-    "message": "Organization field"
   },
   "Organization group details of {orgName}": {
     "description": "administration/organizations/OrganizationGroupDetailsDialog.tsx",
@@ -6444,7 +6388,7 @@
     "message": "Password for access user"
   },
   "Password": {
-    "description": "administration/service-desk/AtlassianSettings.tsx, administration/service-desk/SmaxSettings.tsx, auth/SigninForm.tsx, azure/sql/AzureSQLServerSummary.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, vmware/VMwareForm.tsx",
+    "description": "auth/SigninForm.tsx, azure/sql/AzureSQLServerSummary.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, vmware/VMwareForm.tsx",
     "message": "Password"
   },
   "Pause offering": {
@@ -7095,10 +7039,6 @@
     "description": "marketplace/deploy/DeployPageSidebar.tsx",
     "message": "Progress"
   },
-  "Project ID": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Project ID"
-  },
   "Project cost": {
     "description": "project/ProjectDashboardCostLimits.tsx",
     "message": "Project cost"
@@ -7148,16 +7088,12 @@
     "message": "Project events"
   },
   "Project field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Project field name"
   },
   "Project field name.": {
     "description": "SettingsDescription.ts",
     "message": "Project field name."
-  },
-  "Project field": {
-    "description": "administration/service-desk/SmaxSettings.tsx",
-    "message": "Project field"
   },
   "Project for civilian purpose?": {
     "description": "proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx",
@@ -7462,10 +7398,6 @@
   "Pull orders": {
     "description": "marketplace/offerings/update/integration/RemoteActions.tsx",
     "message": "Pull orders"
-  },
-  "Pull priorities": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Pull priorities"
   },
   "Pull resources invoices": {
     "description": "marketplace/offerings/update/integration/RemoteActions.tsx",
@@ -7852,7 +7784,7 @@
     "message": "Reported value is reused every month until changed."
   },
   "Reporter field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Reporter field name"
   },
   "Reporter": {
@@ -7991,10 +7923,6 @@
     "description": "marketplace/routes.ts, proposals/offering-requests/OfferingRequestsList.tsx, proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx",
     "message": "Requests for offerings"
   },
-  "Requests offering code for all issues": {
-    "description": "administration/service-desk/SmaxSettings.tsx",
-    "message": "Requests offering code for all issues"
-  },
   "Requests offering code for all issues.": {
     "description": "SettingsDescription.ts",
     "message": "Requests offering code for all issues."
@@ -8040,7 +7968,7 @@
     "message": "Reset"
   },
   "Resolution SLA field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Resolution SLA field name"
   },
   "Resolution": {
@@ -8504,7 +8432,7 @@
     "message": "SAML2 single logout has been started. Please wait until it completes."
   },
   "SLA field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "SLA field name"
   },
   "SLURM allocation": {
@@ -8554,10 +8482,6 @@
   "SSH public keys": {
     "description": "marketplace/robot-accounts/CreateRobotAccountDialog.tsx, openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx",
     "message": "SSH public keys"
-  },
-  "Satisfaction field name": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Satisfaction field name"
   },
   "Save & dry run script": {
     "description": "marketplace/offerings/update/integration/EditScriptDialog.tsx",
@@ -9068,7 +8992,7 @@
     "message": "Service desk ID or key"
   },
   "Service desk integration settings": {
-    "description": "SettingsDescription.ts",
+    "description": "SettingsDescription.ts, administration/service-desk/AdministrationServiceDesk.tsx",
     "message": "Service desk integration settings"
   },
   "Service desk": {
@@ -9248,7 +9172,7 @@
     "message": "Short title for the project, which explains the project goal as much as possible."
   },
   "Should extra issue field mappings be applied": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Should extra issue field mappings be applied"
   },
   "Show all": {
@@ -9418,10 +9342,6 @@
   "Shutdown": {
     "description": "vmware/actions/ShutdownAction.tsx",
     "message": "Shutdown"
-  },
-  "Sidebar style": {
-    "description": "administration/settings/ConfigurationEditDialog.tsx",
-    "message": "Sidebar style"
   },
   "Sign in with local account": {
     "description": "auth/LocalLogin.tsx",
@@ -9695,10 +9615,6 @@
     "description": "customer/payments/PaymentCreateDialog.tsx, customer/payments/PaymentUpdateDialog.tsx, customer/payments/PaymentsList.tsx",
     "message": "Sum"
   },
-  "Summary template": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Summary template"
-  },
   "Summary": {
     "description": "azure/vm/AzureVirtualMachineSummary.tsx, issues/IssueDetails.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx, openstack/openstack-tenant/TenantInstancesList.tsx, proposals/proposal/create-review/steps/FormSummaryStep.tsx, rancher/cluster/apps/ApplicationDetailsDialog.tsx, rancher/template/TemplateDetail.tsx, resource/summary/VirtualMachineSummary.tsx, vmware/VMwareVirtualMachineSummary.tsx",
     "message": "Summary"
@@ -9888,7 +9804,7 @@
     "message": "Template details"
   },
   "Template field name": {
-    "description": "SettingsDescription.ts, administration/service-desk/AtlassianSettings.tsx",
+    "description": "SettingsDescription.ts",
     "message": "Template field name"
   },
   "Template files": {
@@ -9912,7 +9828,7 @@
     "message": "Templates"
   },
   "Tenant ID": {
-    "description": "administration/service-desk/SmaxSettings.tsx, azure/provider/AzureForm.tsx, openstack/OpenStackTenantForm.tsx",
+    "description": "azure/provider/AzureForm.tsx, openstack/OpenStackTenantForm.tsx",
     "message": "Tenant ID"
   },
   "Tenant name": {
@@ -10098,10 +10014,6 @@
   "The name must be shorter than 15 characters.": {
     "description": "azure/common/validators.ts",
     "message": "The name must be shorter than 15 characters."
-  },
-  "The name of the group to which the ticket will be added": {
-    "description": "administration/service-desk/ZammadSettings.tsx",
-    "message": "The name of the group to which the ticket will be added"
   },
   "The name of the group to which the ticket will be added. If not specified, the first group will be used.": {
     "description": "SettingsDescription.ts",
@@ -10452,7 +10364,7 @@
     "message": "Token lifetime"
   },
   "Token": {
-    "description": "administration/service-desk/AtlassianSettings.tsx, administration/service-desk/ZammadSettings.tsx, marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts, navigation/header/UserToken.tsx",
+    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts, navigation/header/UserToken.tsx",
     "message": "Token"
   },
   "Too many empty fields": {
@@ -10523,10 +10435,6 @@
     "description": "marketplace/resources/details/ResourceBreadcrumbPopover.tsx",
     "message": "Type in name of resource"
   },
-  "Type of a comment": {
-    "description": "administration/service-desk/ZammadSettings.tsx",
-    "message": "Type of a comment"
-  },
   "Type of a comment. Default is email because it allows support to reply to tickets directly in Zammad<https://docs.zammad.org/en/latest/api/ticket/articles.html#articles/>": {
     "description": "SettingsDescription.ts",
     "message": "Type of a comment. Default is email because it allows support to reply to tickets directly in Zammad<https://docs.zammad.org/en/latest/api/ticket/articles.html#articles/>"
@@ -10534,10 +10442,6 @@
   "Type of linked issue field name": {
     "description": "SettingsDescription.ts",
     "message": "Type of linked issue field name"
-  },
-  "Type of linked issue": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Type of linked issue"
   },
   "Type of support backend. Possible values: atlassian, zammad, smax.": {
     "description": "SettingsDescription.ts",
@@ -11119,6 +11023,10 @@
     "description": "marketplace-checklist/UserChecklist.tsx, marketplace-checklist/useChecklist.tsx",
     "message": "Unable to load questions and answers."
   },
+  "Unable to load service desk configuration.": {
+    "description": "administration/service-desk/AdministrationServiceDesk.tsx",
+    "message": "Unable to load service desk configuration."
+  },
   "Unable to load service provider.": {
     "description": "marketplace/service-providers/CampaignFooter.tsx, marketplace/service-providers/ProviderDetails.tsx, marketplace/service-providers/ServiceProviderManagement.tsx, marketplace/service-providers/details/ProviderDetailsContainer.tsx",
     "message": "Unable to load service provider."
@@ -11632,7 +11540,7 @@
     "message": "Unable to update static routes."
   },
   "Unable to update the configurations.": {
-    "description": "administration/service-desk/AdministrationServiceDesk.tsx, administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx",
+    "description": "administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx",
     "message": "Unable to update the configurations."
   },
   "Unable to update the restriction status.": {
@@ -12015,21 +11923,9 @@
     "description": "rancher/template/NamespaceField.tsx",
     "message": "Use an existing namespace"
   },
-  "Use automatic request mapping": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Use automatic request mapping"
-  },
-  "Use old API": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Use old API"
-  },
   "Use sudo": {
     "description": "slurm/SlurmForm.tsx, slurm/marketplace.ts",
     "message": "Use sudo"
-  },
-  "Use teenage API": {
-    "description": "administration/service-desk/AtlassianSettings.tsx",
-    "message": "Use teenage API"
   },
   "Used by one resource": {
     "description": "marketplace/offerings/update/plans/PlansTable.tsx",
@@ -12204,7 +12100,7 @@
     "message": "Username prefix"
   },
   "Username": {
-    "description": "administration/TokensList.tsx, administration/service-desk/AtlassianSettings.tsx, auth/SigninForm.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, slurm/marketplace.ts, user/UserOfferingList.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
+    "description": "administration/TokensList.tsx, auth/SigninForm.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, slurm/marketplace.ts, user/UserOfferingList.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
     "message": "Username"
   },
   "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.).": {
@@ -12352,7 +12248,7 @@
     "message": "Vendor support pages"
   },
   "Verify SSL": {
-    "description": "administration/providers/ProviderForm.tsx, administration/service-desk/AtlassianSettings.tsx, administration/service-desk/SmaxSettings.tsx",
+    "description": "administration/providers/ProviderForm.tsx",
     "message": "Verify SSL"
   },
   "Verify email": {
@@ -12706,10 +12602,6 @@
   "Zammad API server URL. For example <http://localhost:8080/>": {
     "description": "SettingsDescription.ts",
     "message": "Zammad API server URL. For example <http://localhost:8080/>"
-  },
-  "Zammad group": {
-    "description": "administration/service-desk/ZammadSettings.tsx",
-    "message": "Zammad group"
   },
   "Zammad settings": {
     "description": "SettingsDescription.ts",
