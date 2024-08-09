@@ -12,7 +12,6 @@ import {
 } from '@waldur/marketplace/common/api';
 import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
@@ -72,12 +71,8 @@ const RolesSection = lazyComponent(
 
 const getOfferingData = async (offering_uuid) => {
   const offering = await getProviderOffering(offering_uuid);
-  const plugins = await getPlugins();
-  const components = plugins.find(
-    (plugin) => plugin.offering_type === offering.type,
-  ).components;
   const category = await getCategory(offering.category_uuid);
-  return { offering, category, components };
+  return { offering, category };
 };
 
 type Awaited<T> = T extends PromiseLike<infer U> ? U : T;
@@ -187,13 +182,25 @@ export const OfferingEditUIView = () => {
     params: { offering_uuid },
   } = useCurrentStateAndParams();
 
-  const { data, isLoading, error, refetch, isRefetching } = useQuery(
-    ['OfferingUpdateContainer', offering_uuid],
+  const { isLoading, error, data, refetch, isRefetching } = useQuery(
+    ['providerOfferingData', offering_uuid],
     () => getOfferingData(offering_uuid),
-    { refetchOnWindowFocus: false },
+    { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
   );
 
-  useTitle(data ? data.offering.name : translate('Offering details'));
+  const { data: plugins } = useQuery(['marketplacePlugins'], getPlugins, {
+    refetchOnWindowFocus: false,
+    staleTime: 3 * 60 * 1000,
+  });
+
+  const components = useMemo(
+    () =>
+      data?.offering && plugins
+        ? plugins.find((plugin) => plugin.offering_type === data.offering.type)
+            .components
+        : [],
+    [plugins, data?.offering],
+  );
 
   const tabs = useMemo(
     () => (data?.offering ? getTabs(data.offering) : []),
@@ -223,7 +230,10 @@ export const OfferingEditUIView = () => {
           {...props}
           key={key}
           refetch={refetch}
-          data={data}
+          data={{
+            ...data,
+            components,
+          }}
           isLoading={isLoading}
           isRefetching={isRefetching}
           error={error}

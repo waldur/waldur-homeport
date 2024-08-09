@@ -31,7 +31,7 @@ export const AllOfferingsList = () => {
   return (
     <PublicOfferingsList
       showCategory
-      showOrganization={false}
+      showOrganization
       initialMode={initialMode}
       filter={filter}
     />
