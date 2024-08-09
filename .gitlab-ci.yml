@@ -258,9 +258,9 @@ Download translation:
         if [[ $file == "locales/en.json" ]]; then
           continue
         fi
-        jq 'to_entries | map({(.key): .value.message}) | add' "$file" $file > temp.json  && mv temp.json "$file" 
+        jq 'to_entries | map({(.key): .value.message}) | add' "$file" > temp.json  && mv temp.json "$file"
       done
-    - rm -f  temp.json
+    - rm -f temp.json
     - git status
     - git add locales/*
     - git commit locales -m "Updates translations" || exit 0
