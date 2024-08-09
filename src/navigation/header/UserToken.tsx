@@ -24,7 +24,7 @@ export const UserToken = ({ token }) => {
           <FormControl
             value={token}
             readOnly={true}
-            className="form-control-solid"
+            className="form-control-solid h-30px"
             size="sm"
             placeholder={translate('Token')}
             style={{

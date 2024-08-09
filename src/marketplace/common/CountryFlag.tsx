@@ -11,12 +11,14 @@ const isoCountryCodeToFlagEmoji = (country) =>
 
 interface CountryFlagProps {
   countryCode: string;
+  fontSize?: number;
 }
 
 export const CountryFlag: FunctionComponent<CountryFlagProps> = ({
   countryCode,
+  fontSize = 24,
 }) => (
-  <span style={{ fontSize: '24px' }}>
+  <span style={{ fontSize: fontSize + 'px' }}>
     {isoCountryCodeToFlagEmoji(countryCode)}
   </span>
 );
