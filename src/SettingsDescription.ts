@@ -223,36 +223,6 @@ export const SettingsDescription = [
     description: translate('Atlassian settings'),
     items: [
       {
-        key: 'ATLASSIAN_USE_OLD_API',
-        description: translate('Toggler for legacy API usage.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
-        key: 'ATLASSIAN_USE_TEENAGE_API',
-        description: translate('Toggler for teenage API usage.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
-        key: 'ATLASSIAN_USE_AUTOMATIC_REQUEST_MAPPING',
-        description: translate('Toggler for automatic request mapping.'),
-        default: true,
-        type: 'boolean',
-      },
-      {
-        key: 'ATLASSIAN_MAP_WALDUR_USERS_TO_SERVICEDESK_AGENTS',
-        description: translate('Toggler for mapping between waldur user and service desk agents.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
-        key: 'ATLASSIAN_STRANGE_SETTING',
-        description: translate('A constant in the API path, sometimes differs'),
-        default: 1,
-        type: 'integer',
-      },
-      {
         key: 'ATLASSIAN_API_URL',
         description: translate('Atlassian API server URL'),
         default: 'http://example.com/',
@@ -268,7 +238,7 @@ export const SettingsDescription = [
         key: 'ATLASSIAN_PASSWORD',
         description: translate('Password for access user'),
         default: 'PASSWORD',
-        type: 'string',
+        type: 'secret_field',
       },
       {
         key: 'ATLASSIAN_EMAIL',
@@ -280,13 +250,7 @@ export const SettingsDescription = [
         key: 'ATLASSIAN_TOKEN',
         description: translate('Token for access user'),
         default: '',
-        type: 'string',
-      },
-      {
-        key: 'ATLASSIAN_VERIFY_SSL',
-        description: translate('Toggler for SSL verification'),
-        default: false,
-        type: 'boolean',
+        type: 'secret_field',
       },
       {
         key: 'ATLASSIAN_PROJECT_ID',
@@ -305,12 +269,6 @@ export const SettingsDescription = [
         description: translate('Comma-separated list of file extenstions not allowed for attachment.'),
         default: '',
         type: 'string',
-      },
-      {
-        key: 'ATLASSIAN_PULL_PRIORITIES',
-        description: translate('Toggler for pulling priorities from backend'),
-        default: true,
-        type: 'boolean',
       },
       {
         key: 'ATLASSIAN_ISSUE_TYPES',
@@ -414,6 +372,48 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'ATLASSIAN_VERIFY_SSL',
+        description: translate('Toggler for SSL verification'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ATLASSIAN_USE_OLD_API',
+        description: translate('Toggler for legacy API usage.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ATLASSIAN_USE_TEENAGE_API',
+        description: translate('Toggler for teenage API usage.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ATLASSIAN_USE_AUTOMATIC_REQUEST_MAPPING',
+        description: translate('Toggler for automatic request mapping.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'ATLASSIAN_MAP_WALDUR_USERS_TO_SERVICEDESK_AGENTS',
+        description: translate('Toggler for mapping between waldur user and service desk agents.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ATLASSIAN_STRANGE_SETTING',
+        description: translate('A constant in the API path, sometimes differs'),
+        default: 1,
+        type: 'integer',
+      },
+      {
+        key: 'ATLASSIAN_PULL_PRIORITIES',
+        description: translate('Toggler for pulling priorities from backend'),
+        default: true,
+        type: 'boolean',
+      },
     ],
   },
   {
@@ -429,7 +429,7 @@ export const SettingsDescription = [
         key: 'ZAMMAD_TOKEN',
         description: translate('Authorization token.'),
         default: '',
-        type: 'string',
+        type: 'secret_field',
       },
       {
         key: 'ZAMMAD_GROUP',
@@ -488,7 +488,7 @@ export const SettingsDescription = [
         key: 'SMAX_PASSWORD',
         description: translate('Authorization password.'),
         default: '',
-        type: 'string',
+        type: 'secret_field',
       },
       {
         key: 'SMAX_ORGANISATION_FIELD',

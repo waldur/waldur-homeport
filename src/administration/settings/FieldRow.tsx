@@ -1,31 +1,29 @@
-import { ENV } from '@waldur/configs/default';
 import { translate } from '@waldur/i18n';
 
 import { ConfigurationEditButton } from './ConfigurationEditButton';
 import { getKeyTitle } from './utils';
 
-const ColorField = ({ item }) => (
+const ColorField = ({ value }) => (
   <div className="symbol symbol-50px symbol-circle">
     <div
       className="symbol-label"
       style={{
-        backgroundColor: ENV.plugins.WALDUR_CORE[item.key],
+        backgroundColor: value,
       }}
     />
   </div>
 );
-const ImageField = ({ item }) => (
+const ImageField = ({ value }) => (
   <div className="symbol symbol-50px symbol-circle">
     <div
       className="symbol-label"
       style={{
-        backgroundImage: `url(${ENV.plugins.WALDUR_CORE[item.key]})`,
+        backgroundImage: `url(${value})`,
       }}
     />
   </div>
 );
-export const FieldRow = ({ item }) => {
-  const value = ENV.plugins.WALDUR_CORE[item.key] || item.default;
+export const FieldRow = ({ item, value }) => {
   return (
     <tr>
       <td className="col-md-4">
@@ -36,9 +34,9 @@ export const FieldRow = ({ item }) => {
       </td>
       <td className="col-md">
         {item.type === 'image_field' ? (
-          <ImageField item={item} />
+          <ImageField value={value} />
         ) : item.type === 'color_field' ? (
-          <ColorField item={item} />
+          <ColorField value={value} />
         ) : item.type === 'boolean' ? (
           value === true ? (
             translate('Yes')
@@ -50,7 +48,7 @@ export const FieldRow = ({ item }) => {
         )}
       </td>
       <td className="col-md-auto col-actions">
-        <ConfigurationEditButton item={item} />
+        <ConfigurationEditButton item={item} value={value} />
       </td>
     </tr>
   );

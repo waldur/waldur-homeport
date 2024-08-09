@@ -33,6 +33,21 @@ const SIDEBAR_STYLES = [
   },
 ];
 
+const SUPPORT_BACKENDS = [
+  {
+    label: 'Atlassian',
+    value: 'atlassian',
+  },
+  {
+    label: 'Zammad',
+    value: 'zammad',
+  },
+  {
+    label: 'SMAX',
+    value: 'smax',
+  },
+];
+
 const colorPalette = [
   '#307300',
   '#4E5BA6',
@@ -119,8 +134,16 @@ export const ConfigurationEditDialog = reduxForm<
             <SelectField
               floating={false}
               name="value"
-              label={translate('Sidebar style')}
+              label={item.description}
               options={SIDEBAR_STYLES}
+              simpleValue
+            />
+          ) : item.key === 'WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE' ? (
+            <SelectField
+              floating={false}
+              name="value"
+              label={item.description}
+              options={SUPPORT_BACKENDS}
               simpleValue
             />
           ) : item.type === 'color_field' ? (
