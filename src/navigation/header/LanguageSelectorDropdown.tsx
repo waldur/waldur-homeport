@@ -36,9 +36,12 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
       <div className="menu-link px-5">
         <span className="menu-title position-relative">
           {translate('Language')}
-          <span className="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">
+          <span className="d-flex flex-center gap-2 fs-8 rounded bg-light px-3 py-1 position-absolute translate-middle-y top-50 end-0">
             {currentLanguage.label}{' '}
-            <CountryFlag countryCode={LanguageCountry[currentLanguage.code]} />
+            <CountryFlag
+              countryCode={LanguageCountry[currentLanguage.code]}
+              fontSize={16}
+            />
           </span>
         </span>
       </div>
