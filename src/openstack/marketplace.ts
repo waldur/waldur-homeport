@@ -93,6 +93,11 @@ const OpenStackOptionsSummary = (): Attribute[] => [
     title: translate('Snapshot size limit'),
     type: 'integer',
   },
+  {
+    key: 'default_internal_network_mtu',
+    title: translate('Default internal network MTU'),
+    type: 'integer',
+  },
 ];
 
 const serializeVolumeTypeLimits = (limits) =>
