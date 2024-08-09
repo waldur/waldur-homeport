@@ -17,15 +17,17 @@ const GlobalProjectCreateDialog = lazyComponent(
 
 export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
   const user = useSelector(getUser);
-  const disabled = user.permissions
-    .filter((perm) => perm.scope_type === 'customer')
-    .every(
-      (perm) =>
-        !hasPermission(user, {
-          permission: PermissionEnum.CREATE_PROJECT,
-          customerId: perm.scope_uuid,
-        }),
-    );
+  const disabled =
+    !user.is_staff &&
+    user.permissions
+      .filter((perm) => perm.scope_type === 'customer')
+      .every(
+        (perm) =>
+          !hasPermission(user, {
+            permission: PermissionEnum.CREATE_PROJECT,
+            customerId: perm.scope_uuid,
+          }),
+      );
   const dispatch = useDispatch();
   if (disabled) {
     return null;
