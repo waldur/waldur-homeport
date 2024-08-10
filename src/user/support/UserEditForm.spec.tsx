@@ -2,10 +2,10 @@ import { shallow } from 'enzyme';
 
 import { ordinaryUser, staffUser } from '@waldur/user/support/fixtures';
 import { TermsOfService } from '@waldur/user/support/TermsOfService';
-import { PureUserEditForm } from '@waldur/user/support/UserEditForm';
+import { UserEditForm } from '@waldur/user/support/UserEditForm';
 
 const renderForm = (props) =>
-  shallow(<PureUserEditForm handleSubmit={jest.fn()} {...props} />);
+  shallow(<UserEditForm handleSubmit={jest.fn()} {...props} />);
 
 describe('UserEditForm', () => {
   it('should render form with all possible fields for STAFF user', () => {

@@ -10,7 +10,6 @@ import { UserDetails } from '@waldur/workspace/types';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
-import { UserProfile } from './UserProfile';
 import { UserWelcome } from './UserWelcome';
 
 export const UserDashboard: FC = () => {
@@ -25,7 +24,6 @@ export const UserDashboard: FC = () => {
   ) : (
     <>
       <UserWelcome user={user} />
-      <UserProfile user={user} />
       <UserAffiliationsList user={user} />
     </>
   );

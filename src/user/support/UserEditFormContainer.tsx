@@ -1,42 +1,17 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
 import { getNativeNameVisible, getConfig } from '@waldur/store/config';
 import {
   fieldIsVisible,
   isRequired,
   isVisibleForSupportOrStaff,
+  userTokenIsVisible,
 } from '@waldur/user/support/selectors';
 import { UserEditForm } from '@waldur/user/support/UserEditForm';
+import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
 import * as actions from './actions';
-import { EmailChangeForm } from './EmailChangeForm';
-
-interface OwnProps {
-  user: UserDetails;
-}
-
-const UserUpdateComponent: React.FC<
-  OwnProps &
-    ReturnType<typeof mapStateToProps> &
-    ReturnType<typeof mapDispatchToProps>
-> = (props) => {
-  return (
-    <Card className="mb-6">
-      <Card.Header>{translate('Profile settings')}</Card.Header>
-      <Card.Body>
-        {!props.user.email ? (
-          <EmailChangeForm user={props.user} />
-        ) : (
-          <UserEditForm {...props} />
-        )}
-      </Card.Body>
-    </Card>
-  );
-};
 
 const getProtectedMethods = (state: any): string[] => {
   const plugins = getConfig(state).plugins;
@@ -46,8 +21,10 @@ const getProtectedMethods = (state: any): string[] => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
+  currentUser: getUser(state) as UserDetails,
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
   initialValues: ownProps.user,
+  userTokenIsVisible: userTokenIsVisible(state, ownProps),
   fieldIsVisible: fieldIsVisible(ownProps),
   isRequired,
   nativeNameIsVisible: getNativeNameVisible(state),
@@ -83,4 +60,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 const enhance = connect(mapStateToProps, mapDispatchToProps);
 
-export const UserEditFormContainer = enhance(UserUpdateComponent);
+export const UserEditFormContainer = enhance(UserEditForm);

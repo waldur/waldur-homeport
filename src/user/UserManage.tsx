@@ -1,28 +1,22 @@
 import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
-import { getUser } from '@waldur/workspace/selectors';
 import { UserDetails } from '@waldur/workspace/types';
 
-import { IdentityProviderContainer } from './support/IdentityProviderContainer';
-import { UserDeleteAccount } from './support/UserDeleteAccount';
-import { UserEditFormContainer } from './support/UserEditFormContainer';
+interface OwnProps {
+  tabSpec;
+  user: UserDetails;
+  isPersonal?: boolean;
+}
 
-export const UserManage: FunctionComponent = () => {
-  useTitle(translate('Settings'));
-
-  const user = useSelector(getUser) as UserDetails;
-  if (!user) {
-    return <LoadingSpinner />;
+export const UserManage: FunctionComponent<OwnProps> = ({
+  tabSpec,
+  user,
+  isPersonal,
+}) => {
+  if (tabSpec) {
+    return (
+      <tabSpec.component user={user} showDeleteButton={!isPersonal} hasHeader />
+    );
   }
-  return (
-    <>
-      <IdentityProviderContainer user={user} />
-      <UserEditFormContainer user={user} />
-      <UserDeleteAccount user={user} />
-    </>
-  );
+  return null;
 };

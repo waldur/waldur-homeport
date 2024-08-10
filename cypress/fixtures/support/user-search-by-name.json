@@ -11,6 +11,7 @@
     "organization": "Howard-Martin",
     "civil_number": "367-32-5567",
     "description": "",
+    "identity_provider_fields": [],
     "is_staff": true,
     "is_active": true,
     "is_support": false,

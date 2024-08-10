@@ -7,6 +7,7 @@ import {
   useContext,
   useState,
   PropsWithChildren,
+  ReactNode,
 } from 'react';
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -21,7 +22,7 @@ import {
   isStaffOrSupport,
 } from '@waldur/workspace/selectors';
 
-type Permission = 'allowed' | 'limited' | 'restricted';
+type Permission = 'allowed' | 'limited' | 'restricted' | 'custom';
 interface PermissionMessage {
   title: string;
   message: string;
@@ -32,18 +33,20 @@ interface PermissionOptions {
   className?: string;
 }
 
+type Banner = PermissionMessage | ReactNode;
+
 interface PermissionContextInterface {
   permission: Permission;
   setPermission: (value: Permission) => void;
-  banner: PermissionMessage;
-  setBanner: (value: PermissionMessage) => void;
+  banner: Banner;
+  setBanner: (value: Banner) => void;
   pageMessage: PermissionMessage;
   setPageMessage: (value: PermissionMessage) => void;
   clearPermissionView: () => void;
 }
 interface PermissionViewProps {
   permission: Permission;
-  banner?: PermissionMessage;
+  banner?: Banner;
   pageMessage?: PermissionMessage;
 }
 
@@ -53,7 +56,7 @@ export const PermissionContext = createContext<
 
 const PermissionDataProvider: FC<PropsWithChildren> = ({ children }) => {
   const [permission, setPermission] = useState<Permission>('allowed');
-  const [banner, setBanner] = useState<PermissionMessage>({
+  const [banner, setBanner] = useState<Banner>({
     title: '',
     message: '',
   });
@@ -123,6 +126,8 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
   const customer = useSelector(getCustomer);
   const { state, params } = useCurrentStateAndParams();
 
+  const [hasPermissionView, setHasPermissionView] = useState(false);
+
   // Check users permissions
   useEffect(() => {
     if (!hasAllAccess && state.name && user) {
@@ -155,6 +160,9 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
               },
             ),
           });
+          setHasPermissionView(true);
+        } else {
+          setHasPermissionView(false);
         }
       } else if (isDescendantOf('organization', state)) {
         if (
@@ -185,6 +193,9 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
               },
             ),
           });
+          setHasPermissionView(true);
+        } else {
+          setHasPermissionView(false);
         }
       } else if (
         user.permissions.filter((permission) =>
@@ -199,14 +210,27 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
             'Your account is not part of any organization. Your view will be restricted.',
           ),
         });
+        setHasPermissionView(true);
+      } else {
+        setHasPermissionView(false);
       }
+    } else {
+      setHasPermissionView(false);
     }
     return () => {
-      if (permission !== 'allowed') {
+      if (permission !== 'allowed' && hasPermissionView) {
         clearPermissionView();
       }
     };
-  }, [state, params, project, customer, user]);
+  }, [
+    state,
+    params,
+    project,
+    customer,
+    user,
+    hasPermissionView,
+    setHasPermissionView,
+  ]);
 
   return permission === 'restricted' && pageMessage ? (
     <RestrictedView />

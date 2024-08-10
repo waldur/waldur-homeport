@@ -1,28 +1,23 @@
 import { ENV } from '@waldur/configs/default';
-import { patch, post, sendForm } from '@waldur/core/api';
+import { deleteById, getById, patch, post, sendForm } from '@waldur/core/api';
+import { UserDetails } from '@waldur/workspace/types';
 
-export const updateUser = (user) => {
-  const data = {
-    native_name: user.native_name,
-    first_name: user.first_name,
-    last_name: user.last_name,
-    email: user.email,
-    image: user.image,
-    organization: user.organization,
-    job_title: user.job_title,
-    description: user.description,
-    phone_number: user.phone_number,
-    agree_with_policy: user.agree_with_policy,
-    token_lifetime: user.token_lifetime.value,
-  };
-  if (!user.image) {
-    // If user tries to remove image
+export const getUser = (userUuid) => getById<UserDetails>('/users/', userUuid);
+
+export const updateUser = (userUuid: string, values: Record<string, any>) => {
+  const data = { ...values };
+  if ('image' in data && !data.image) {
     data.image = '';
-  } else if (!(user.image instanceof File)) {
-    // if user tries to keep the current image we should not send the image key
-    data.image = undefined;
   }
-  return sendForm('PATCH', `${ENV.apiEndpoint}api/users/${user.uuid}/`, data);
+  if ('token_lifetime' in data && data.token_lifetime) {
+    data.token_lifetime = data.token_lifetime.value;
+  }
+
+  return sendForm<UserDetails>(
+    'PATCH',
+    `${ENV.apiEndpoint}api/users/${userUuid}/`,
+    data,
+  );
 };
 
 export const activateUser = (userUuid) =>
@@ -32,3 +27,6 @@ export const deactivateUser = (userUuid) =>
   patch(`/users/${userUuid}/`, { is_active: false });
 
 export const addRemoteUser = (cuid) => post('/remote-eduteams/', { cuid });
+
+export const deleteUser = (userUuid) =>
+  deleteById<UserDetails>('/users/', userUuid);

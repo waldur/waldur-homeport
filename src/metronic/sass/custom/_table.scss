@@ -14,15 +14,15 @@
     color: $gray-600;
   }
 
-  td:first-child,
-  th:first-child,
-  tr:first-child {
-    padding-left: 0.75rem;
-  }
-  td:last-child,
-  th:last-child,
-  tr:last-child {
-    padding-right: 0.75rem;
+  &:not(.px-0) {
+    td:first-child,
+    th:first-child {
+      padding-left: 0.75rem;
+    }
+    td:last-child,
+    th:last-child {
+      padding-right: 0.75rem;
+    }
   }
 
   /* TR */

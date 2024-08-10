@@ -33,15 +33,12 @@ export function attachTransitions() {
       try {
         const result = await UsersService.isCurrentUserValid();
         if (result) {
-          if (transition.to().name == 'initialdata') {
-            return transition.router.stateService.target('profile.details');
-          }
           return;
         }
-        if (transition.to().name == 'initialdata') {
+        if (transition.to().name == 'profile-manage') {
           return;
         }
-        return transition.router.stateService.target('initialdata');
+        return transition.router.stateService.target('profile-manage');
       } catch (e) {
         // eslint-disable-next-line no-console
         console.log(e);

@@ -1,3 +1,19 @@
+const openUpdateDialog = (label: string) => {
+  cy.get('.card .table')
+    .contains('tr th:first-child', label)
+    .parent()
+    .find('td:last-child .btn')
+    .click();
+};
+
+const closeUpdateDialog = () => {
+  cy.get('.modal').contains('button', 'Cancel').click();
+};
+
+const getInputField = (field: string, type: 'input' | 'textarea' = 'input') => {
+  return cy.get(`.modal ${type}[name="${field}"]`);
+};
+
 describe('User manage', () => {
   beforeEach(() => {
     cy.mockUser()
@@ -18,34 +34,54 @@ describe('User manage', () => {
   });
 
   it('allows to update user details', () => {
-    cy
+    cy.fixture('users/alice.json').then((user) => {
       // Ensure that first_name input field is present
-      .get('input[name="first_name"]')
+      openUpdateDialog('First name');
+      getInputField('first_name').should('have.value', user.first_name);
+      closeUpdateDialog();
 
       // Ensure that Change email button is present
-      .get('button')
-      .contains('Request change')
-      .click();
+      openUpdateDialog('Email');
+      cy.get('.modal-footer button:contains(Request change)').should(
+        'be.disabled',
+      );
+      cy.get('.modal input[type="email"]').type('example@test.com');
+      cy.get('.modal-footer button:contains(Request change)')
+        .should('not.be.disabled')
+        .click();
 
-    // Close dialog
-    cy.get('.modal-footer')
-      .should('be.visible')
-      .get('.modal-footer button:contains(Cancel)')
-      .click();
-    // Ensure that organization input field is present
-    cy.get('input[name="organization"]')
+      // Ensure that last name input field is present
+      openUpdateDialog('Last name');
+      getInputField('last_name').should('have.value', user.last_name);
+      closeUpdateDialog();
+
+      // Ensure that organization input field is present
+      openUpdateDialog('Organization name');
+      getInputField('organization')
+        .should('have.value', user.organization || '')
+        // Adding text to ensure that 'discard' and 'save changes' buttons appear
+        .type('abc');
+      cy.get('.modal-footer button:contains(Submit)')
+        .should('not.be.disabled')
+        .click();
 
       // Ensure that job_title input field is present
-      .get('input[name="job_title"]')
+      openUpdateDialog('Job position');
+      getInputField('job_title').should('have.value', user.job_title);
+      closeUpdateDialog();
 
       // Ensure that description input field is present
-      .get('input[name="description"]')
-
-      // Adding text to ensure that 'discard' and 'save changes' buttons appear
-      .type('some text')
+      openUpdateDialog('Description');
+      getInputField('description', 'textarea').should(
+        'have.value',
+        user.description,
+      );
+      closeUpdateDialog();
 
       // Ensure that phone_number input field is present
-      .get('input[name="phone_number"]');
+      openUpdateDialog('Phone number');
+      getInputField('phone_number').should('have.value', user.phone_number);
+      closeUpdateDialog();
 
     // Ensure that Request deletion button works
     /*.get('input[type="checkbox"]')
@@ -65,5 +101,6 @@ describe('User manage', () => {
       .get('button')
       .contains('Discard')
       .click()*/
+    });
   });
 });

@@ -20,7 +20,7 @@ type Props = OwnProps & DispatchProps;
 const PureCloseDialogButton = ({
   dismiss,
   label,
-  variant = 'secondary',
+  variant = 'outline btn-outline-default',
   className,
 }: Props) => (
   <Button className={className} onClick={dismiss} variant={variant}>

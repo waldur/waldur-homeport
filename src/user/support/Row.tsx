@@ -9,9 +9,9 @@ interface RowProps {
 export const Row: FunctionComponent<RowProps> = (props) =>
   props.isVisible !== false && props.value ? (
     <tr>
-      <td>
+      <th>
         <strong>{props.label}</strong>
-      </td>
+      </th>
       <td>{props.value}</td>
     </tr>
   ) : null;

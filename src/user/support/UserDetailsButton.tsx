@@ -21,7 +21,7 @@ export const UserDetailsButton: FunctionComponent<{ row }> = ({ row }) => {
         dispatch(
           openModalDialog(UserDetailsDialog, {
             resolve: { user: row },
-            size: 'xl',
+            size: 'lg',
           }),
         )
       }

@@ -1,20 +1,47 @@
+import { WarningCircle } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
+import { wrapTooltip } from '@waldur/table/ActionButton';
 import './FormTable.scss';
 
 interface FormTableItemProps {
-  label: ReactNode;
+  label?: ReactNode;
+  description?: ReactNode;
   value: ReactNode;
+  warnTooltip?: string;
   actions?: ReactNode;
 }
 
 const FormTableItem: FC<FormTableItemProps> = (props) => {
   return (
     <tr>
-      <th className="col-md-3">{props.label}:</th>
-      <td className="col-md">{props.value}</td>
+      {props.description ? (
+        <th className="col-md-4">
+          <div className="fw-bolder">
+            {props.label}
+            {Boolean(props.warnTooltip) &&
+              wrapTooltip(
+                props.warnTooltip,
+                <WarningCircle size={20} className="ms-2 text-warning mb-1" />,
+              )}
+          </div>
+          <div className="fw-normal">{props.description}</div>
+        </th>
+      ) : props.label ? (
+        <th className="col-md-3">
+          {props.label}:{' '}
+          {Boolean(props.warnTooltip) &&
+            wrapTooltip(
+              props.warnTooltip,
+              <WarningCircle size={20} className="ms-2 text-warning mb-1" />,
+            )}
+        </th>
+      ) : null}
+      <td className="col-md" colSpan={props.label ? undefined : 2}>
+        {props.value}
+      </td>
       <td className="col-md-auto col-actions">{props.actions}</td>
     </tr>
   );

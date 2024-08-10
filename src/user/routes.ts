@@ -8,6 +8,7 @@ import { hasSupport } from '@waldur/issues/hooks';
 import { getConfig } from '@waldur/store/config';
 import { WorkspaceType } from '@waldur/workspace/types';
 
+import { PersonalManageContainer } from './PersonalManageContainer';
 import { UsersService } from './UsersService';
 
 const FreeIpaAccount = lazyComponent(
@@ -76,6 +77,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'profile',
     url: '/profile/',
+    parent: 'layout',
     abstract: true,
     data: {
       auth: true,
@@ -93,6 +95,7 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Credentials'),
+      priority: 110,
     },
   },
 
@@ -111,7 +114,6 @@ export const states: StateDeclaration[] = [
     component: UserEventsWrapper,
     data: {
       breadcrumb: () => translate('Audit logs'),
-      skipBreadcrumb: true,
     },
   },
   {
@@ -120,7 +122,6 @@ export const states: StateDeclaration[] = [
     component: UserIssuesList,
     data: {
       breadcrumb: () => translate('Issues'),
-      skipBreadcrumb: true,
       permissions: [hasSupport],
     },
   },
@@ -150,11 +151,20 @@ export const states: StateDeclaration[] = [
     data: {
       feature: UserFeatures.notifications,
       breadcrumb: () => translate('Notifications'),
+      priority: 120,
     },
   },
   {
-    name: 'profile.manage',
-    url: 'manage/',
+    name: 'profile-manage-container',
+    url: '',
+    parent: 'profile',
+    component: PersonalManageContainer,
+    abstract: true,
+  },
+  {
+    name: 'profile-manage',
+    url: 'manage/?tab',
+    parent: 'profile-manage-container',
     component: UserManage,
     data: {
       breadcrumb: () => translate('Settings'),
@@ -188,6 +198,7 @@ export const states: StateDeclaration[] = [
     component: UserPermissionRequestsList,
     data: {
       breadcrumb: () => translate('Permission requests'),
+      priority: 130,
     },
   },
   {

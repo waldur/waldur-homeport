@@ -19,7 +19,7 @@ export const UserWelcome = ({ user }: { user: UserDetails }) => {
   }
 
   return (
-    <Card className="mb-6">
+    <Card className="mb-7">
       <Card.Body>
         <Row>
           <Col xs="auto" className="order-1 order-sm-0 px-5">
@@ -34,7 +34,7 @@ export const UserWelcome = ({ user }: { user: UserDetails }) => {
                   link: (
                     <Link
                       label={translate('Edit profile')}
-                      state="profile.manage"
+                      state="profile-manage"
                       className="text-capitalize"
                     />
                   ),

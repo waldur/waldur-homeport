@@ -47,7 +47,7 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
         dispatch(setCurrentUser(currentUser));
         await wait(1000);
       }
-      dispatch(triggerTransition('profile.manage', {}));
+      dispatch(triggerTransition('profile-manage', {}));
     }
     load();
   }, [dispatch]);

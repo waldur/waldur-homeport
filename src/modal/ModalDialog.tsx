@@ -2,9 +2,13 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
-interface ModalDialogProps {
+import Bg from '@waldur/navigation/header/search/Background.svg';
+
+export interface ModalDialogProps {
   title?: ReactNode;
   subtitle?: ReactNode;
+  iconNode?: ReactNode;
+  iconColor?: string;
   footer?: ReactNode;
   closeButton?: boolean;
   bodyClassName?: string;
@@ -18,6 +22,8 @@ export const ModalDialog: FC<ModalDialogProps> = ({
   closeButton = false,
   title,
   subtitle,
+  iconNode,
+  iconColor,
   children,
   footer,
   bodyClassName,
@@ -29,12 +35,30 @@ export const ModalDialog: FC<ModalDialogProps> = ({
     {!headerLess && (
       <Modal.Header
         closeButton={closeButton}
-        className={classNames(headerClassName, !title && 'without-border')}
+        className={classNames(
+          headerClassName,
+          !title && 'without-border',
+          iconNode && 'has-icon',
+        )}
       >
         <div>
-          <Modal.Title>{title}</Modal.Title>
+          {Boolean(iconNode) && (
+            <>
+              <Bg className="icon-background" />
+              <div
+                className={classNames(
+                  'modal-icon mb-6',
+                  iconColor && `text-${iconColor}`,
+                  iconColor ? `bg-light-${iconColor}` : 'bg-secondary',
+                )}
+              >
+                {iconNode}
+              </div>
+            </>
+          )}
+          <Modal.Title className="fw-bold">{title}</Modal.Title>
           {subtitle && (
-            <h6 className="text-gray-700 fw-bold mt-1">{subtitle}</h6>
+            <h6 className="text-grey-500 fw-normal mt-3">{subtitle}</h6>
           )}
         </div>
       </Modal.Header>

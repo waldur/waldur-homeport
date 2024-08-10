@@ -1,6 +1,5 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-// import { Layout } from '@waldur/navigation/Layout';
 
 const Layout = lazyComponent(
   () => import('@waldur/navigation/Layout'),
@@ -8,8 +7,6 @@ const Layout = lazyComponent(
 );
 
 const LandingPage = lazyComponent(() => import('./LandingPage'), 'LandingPage');
-
-const AuthInit = lazyComponent(() => import('./AuthInit'), 'AuthInit');
 
 export const states: StateDeclaration[] = [
   {
@@ -29,16 +26,6 @@ export const states: StateDeclaration[] = [
     },
     data: {
       anonymous: true,
-    },
-  },
-
-  {
-    name: 'initialdata',
-    parent: 'home',
-    url: '/initial-data/',
-    component: AuthInit,
-    data: {
-      auth: true,
     },
   },
 
