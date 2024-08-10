@@ -3,6 +3,7 @@ import { Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -24,6 +25,7 @@ interface StateProps {
 interface OwnProps {
   user: UserDetails;
   profile?: any;
+  hasHeader?: boolean;
 }
 
 type UserDetailsTableProps = StateProps & OwnProps;
@@ -31,7 +33,7 @@ type UserDetailsTableProps = StateProps & OwnProps;
 const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
   props,
 ) => (
-  <Table responsive={true} bordered={true}>
+  <Table responsive={true} bordered={true} className="text-grey-700 px-0">
     <tbody>
       <Row label={translate('Full name')} value={props.user.full_name} />
       {props.nativeNameVisible && (
@@ -82,6 +84,17 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
   </Table>
 );
 
+const UserDetailsTableContainer: FunctionComponent<UserDetailsTableProps> = (
+  props,
+) =>
+  props.hasHeader ? (
+    <Panel title={translate('Details')}>
+      <PureUserDetailsTable {...props} />
+    </Panel>
+  ) : (
+    <PureUserDetailsTable {...props} />
+  );
+
 const mapStateToProps = (state: RootState) => ({
   userLanguageIsVisible: userLanguageIsVisible(state),
   isVisibleForSupportOrStaff: isVisibleForSupportOrStaff(state),
@@ -90,4 +103,4 @@ const mapStateToProps = (state: RootState) => ({
 
 const enhance = connect<StateProps, {}, OwnProps>(mapStateToProps);
 
-export const UserDetailsTable = enhance(PureUserDetailsTable);
+export const UserDetailsTable = enhance(UserDetailsTableContainer);

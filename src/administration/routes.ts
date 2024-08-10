@@ -5,6 +5,7 @@ import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures, SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { UserManageContainer } from '@waldur/user/UserManageContainer';
 import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
 
 const AdministrationDashboard = lazyComponent(
@@ -55,6 +56,11 @@ const BasicLexisLinkList = lazyComponent(
 const UserList = lazyComponent(
   () => import('@waldur/user/support/UserList'),
   'UserList',
+);
+
+const UserManage = lazyComponent(
+  () => import('@waldur/user/UserManage'),
+  'UserManage',
 );
 
 const InvitationList = lazyComponent(
@@ -214,6 +220,23 @@ export const states: StateDeclaration[] = [
     data: {
       feature: SupportFeatures.users,
       breadcrumb: () => translate('Users'),
+    },
+  },
+  {
+    name: 'admin-user-user-manage-container',
+    url: '',
+    parent: 'admin-accounts',
+    component: UserManageContainer,
+    abstract: true,
+    data: { skipBreadcrumb: true },
+  },
+  {
+    name: 'admin-user-user-manage',
+    url: 'users/:user_uuid/?tab',
+    parent: 'admin-user-user-manage-container',
+    component: UserManage,
+    data: {
+      feature: SupportFeatures.users,
     },
   },
   {

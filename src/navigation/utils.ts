@@ -33,16 +33,19 @@ export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
       tab.children
         ? {
             title: tab.title,
+            disabled: tab.disabled,
             children: tab.children.map((child) => ({
               title: child.title,
               to: state.name,
               params: { tab: child.key },
+              disabled: child.disabled,
             })),
           }
         : {
             title: tab.title,
             to: state.name,
             params: { tab: tab.key },
+            disabled: tab.disabled,
           },
     );
   }, [state, tabs]);

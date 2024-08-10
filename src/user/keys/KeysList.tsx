@@ -17,7 +17,7 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
   hasActionBar = true,
 }) => {
   const currentUser = useSelector(getUser);
-  const isStaffOrSelf = currentUser.is_staff || user.uuid === currentUser.uuid;
+  const isSelf = user.uuid === currentUser.uuid;
   const filter = useMemo(
     () => ({
       user_uuid: user.uuid,
@@ -68,7 +68,7 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
     },
   ];
 
-  if (isStaffOrSelf) {
+  if (isSelf) {
     columns.push({
       title: translate('Actions'),
       render: ({ row }) => (
@@ -86,7 +86,7 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
       hasQuery={true}
       showPageSizeSelector={true}
       verboseName={translate('SSH keys')}
-      tableActions={isStaffOrSelf && <KeyCreateButton />}
+      tableActions={isSelf && <KeyCreateButton />}
       enableExport={true}
       expandableRow={KeysListExpandableRow}
       hasActionBar={hasActionBar}

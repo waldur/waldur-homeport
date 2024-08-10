@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { RoleEnum } from '@waldur/permissions/enums';
@@ -33,7 +34,13 @@ const PhoneNumberField = ({ row }) => (
 
 const EmailField = ({ row }) => <>{renderFieldOrDash(row.email)}</>;
 
-const FullNameField = ({ row }) => <>{renderFieldOrDash(row.full_name)}</>;
+const FullNameField = ({ row }) => (
+  <Link
+    state="admin-user-user-manage"
+    params={{ user_uuid: row.uuid }}
+    label={renderFieldOrDash(row.full_name)}
+  />
+);
 
 const OrganizationField = ({ row }) => (
   <>{renderFieldOrDash(row.organization)}</>

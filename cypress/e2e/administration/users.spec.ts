@@ -56,7 +56,17 @@ describe('Users', () => {
       .intercept('GET', `/api/users/?page=1&page_size=10&${fieldQueryParam}`, {
         fixture: 'support/users.json',
       })
-      .as('getUsers')
+      .as('getUsers');
+    
+    cy.fixture('support/user-search-by-name.json')
+      .then((users) => {
+        const user = users[0];
+        cy.intercept(
+          'GET',
+          '/api/users/57223602e47648b0bef2da4c1d430f5f/',
+          user,
+        );
+      })
 
       .setToken()
 
@@ -120,14 +130,14 @@ describe('Users', () => {
     });
   });
 
-  it('should open details modal when click details button', () => {
-    cy.contains('button', 'Details')
+  it('should open manage page when click details button', () => {
+    cy.get('table tbody tr:first-child td:first-child a:contains("Tara Pierce")')
       .click({ force: true })
-      .get('.modal-title')
-      .contains('User details of Tara Pierce')
+      .get('.public-dashboard-hero')
+      .contains('Tara Pierce')
       .should('be.visible', true)
-      .get('.modal-footer')
-      .contains('button', 'Done')
+      .get('.form-table-card .card-header')
+      .contains('Profile settings')
       .should('be.visible', true)
       .click();
   });

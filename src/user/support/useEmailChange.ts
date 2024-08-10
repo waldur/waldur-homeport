@@ -33,5 +33,25 @@ export const useEmailChange = (user) => {
     dispatch(setCurrentUser({ ...user, requested_email: email }));
   }, [user, email, dispatch]);
 
-  return { handleSubmit, submitting, email, setEmail };
+  const cancelRequest = useCallback(async () => {
+    try {
+      setSubmitting(true);
+      await post(`/users/${user.uuid}/cancel_change_email/`, { user });
+      dispatch(setCurrentUser({ ...user, requested_email: null }));
+    } catch (error) {
+      setSubmitting(false);
+      const errorMessage = `${translate('Unable to cancel request.')} ${format(
+        error,
+      )}`;
+      dispatch(showError(errorMessage));
+      return;
+    }
+    setSubmitting(false);
+    dispatch(
+      showSuccess(translate('Email change request has been cancelled.')),
+    );
+    dispatch(closeModalDialog());
+  }, [user, setSubmitting, dispatch]);
+
+  return { handleSubmit, cancelRequest, submitting, email, setEmail };
 };

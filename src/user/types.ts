@@ -1,3 +1,7 @@
+import { ReactNode } from 'react';
+
+import { UserDetails } from '@waldur/workspace/types';
+
 export interface SshKey {
   url: string;
   uuid: string;
@@ -9,4 +13,16 @@ export interface SshKey {
   user_uuid: string;
   is_shared: boolean;
   type: string;
+}
+
+export interface EditUserProps {
+  user: UserDetails;
+  name: string;
+  label?: ReactNode;
+  description?: ReactNode;
+  requiredMsg?: string;
+  disabled?: boolean;
+  protected?: boolean;
+  protectedMsg?: string;
+  callback(formData, dispatch): Promise<any>;
 }

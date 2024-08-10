@@ -11,8 +11,13 @@ import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 
 import { useTabs } from './useTabs';
 
-const MenuLink: FunctionComponent<UISrefProps> = ({ to, params, children }) =>
-  to ? (
+const MenuLink: FunctionComponent<UISrefProps & { disabled?: boolean }> = ({
+  to,
+  params,
+  disabled,
+  children,
+}) =>
+  to && !disabled ? (
     <UISref to={to} params={params}>
       {children}
     </UISref>
@@ -81,8 +86,17 @@ export const TabsList: FunctionComponent = () => {
             })}
             data-kt-menu-trigger="click"
           >
-            <MenuLink to={parentTab.to} params={parentTab.params}>
-              <a className="menu-link py-3">
+            <MenuLink
+              to={parentTab.to}
+              params={parentTab.params}
+              disabled={parentTab.disabled}
+            >
+              <a
+                className={classNames(
+                  'menu-link py-3',
+                  parentTab.disabled && 'disabled',
+                )}
+              >
                 <span className="menu-title">{parentTab.title}</span>
               </a>
             </MenuLink>

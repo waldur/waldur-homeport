@@ -1,7 +1,9 @@
+import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
-import { Layout } from '@waldur/navigation/Layout';
+import { usePageHero } from '@waldur/navigation/context';
 import { getProjectPermission } from '@waldur/permissions/utils';
 import { getProject, getCustomer } from '@waldur/project/api';
 import { router } from '@waldur/router';
@@ -14,10 +16,15 @@ import {
 } from '@waldur/workspace/actions';
 import {
   getProject as getProjectSelector,
+  getUser,
   getUser as getUserSelector,
 } from '@waldur/workspace/selectors';
-import { WorkspaceType } from '@waldur/workspace/types';
+import {
+  UserDetails as IUserDetails,
+  WorkspaceType,
+} from '@waldur/workspace/types';
 
+import { UserProfileHero } from './dashboard/UserProfileHero';
 import { UsersService } from './UsersService';
 
 async function loadUser() {
@@ -54,9 +61,14 @@ async function loadUser() {
 }
 
 export const UserDetails: FunctionComponent = () => {
+  const user = useSelector(getUser) as IUserDetails;
+  const { state } = useCurrentStateAndParams();
+
   useEffectOnce(() => {
     loadUser();
   });
 
-  return <Layout />;
+  usePageHero(<UserProfileHero user={user} isLoading={!user} />, [user, state]);
+
+  return <UIView />;
 };

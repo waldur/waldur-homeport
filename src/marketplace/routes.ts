@@ -7,6 +7,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { OrganizationUIView } from '@waldur/organization/OrganizationUIView';
+import { UserManageContainer } from '@waldur/user/UserManageContainer';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
@@ -84,6 +85,10 @@ const ProviderOrganizationsList = lazyComponent(
 const ProviderUsersList = lazyComponent(
   () => import('./service-providers/ProviderUsersList'),
   'ProviderUsersList',
+);
+const UserManage = lazyComponent(
+  () => import('@waldur/user/UserManage'),
+  'UserManage',
 );
 const ProviderCampaignsList = lazyComponent(
   () => import('./service-providers/ProviderCampaignsList'),
@@ -411,6 +416,19 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Users'),
     },
+  },
+  {
+    name: 'marketplace-provider-user-manage-container',
+    parent: 'marketplace-provider-customers',
+    url: '',
+    component: UserManageContainer,
+    abstract: true,
+  },
+  {
+    name: 'marketplace-provider-user-manage',
+    parent: 'marketplace-provider-user-manage-container',
+    url: 'users/:user_uuid/?tab',
+    component: UserManage,
   },
 
   {

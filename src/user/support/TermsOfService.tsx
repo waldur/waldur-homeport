@@ -7,13 +7,15 @@ import { formatJsx, translate } from '@waldur/i18n';
 interface TermsOfServiceProps {
   initial?: boolean;
   agreementDate: string;
+  className?: string;
 }
 
 export const TermsOfService: FunctionComponent<TermsOfServiceProps> = ({
   initial = false,
   agreementDate,
+  className,
 }) => (
-  <div className="mb-8">
+  <div className={className}>
     {!initial
       ? agreementDate &&
         translate(

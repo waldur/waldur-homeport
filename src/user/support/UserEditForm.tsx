@@ -1,32 +1,33 @@
-import { FunctionComponent } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { FunctionComponent, useCallback, useMemo } from 'react';
 
-import {
-  FieldError,
-  FormContainer,
-  StringField,
-  SubmitButton,
-} from '@waldur/form';
-import { ImageField } from '@waldur/form/ImageField';
+import { formatDateTime } from '@waldur/core/dateUtils';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { StaticField } from '@waldur/user/support/StaticField';
+import { showError, showSuccess } from '@waldur/store/notify';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import { UserDetails } from '@waldur/workspace/types';
 
-import { EmailField } from './EmailField';
-import { TermsOfService } from './TermsOfService';
+import { ChangeEmailButton } from './ChangeEmailButton';
+import { FieldEditButton } from './FieldEditButton';
+import { IdentityProviderContainer } from './IdentityProviderContainer';
+import { TermsOfServiceCheckbox } from './TermsOfServiceCheckbox';
+import { UserEditAvatarFormItem } from './UserEditAvatarFormItem';
+
+const getDefaultRequiredMsg = (field, isSelf) =>
+  isSelf
+    ? translate('Your {field} is required', { field })
+    : translate("The user's {field} is required", { field });
 
 interface UserEditFormData {
-  first_name: string;
-  last_name: string;
-  email: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
   user_status?: string;
   id_code?: string;
-  organization: string;
-  job_position: string;
-  description: string;
-  phone_number: string;
+  organization?: string;
+  job_position?: string;
+  description?: string;
+  phone_number?: string;
 }
 interface OwnProps {
   updateUser(data: UserEditFormData): Promise<void>;
@@ -35,170 +36,247 @@ interface OwnProps {
   fieldIsVisible: (field: string) => boolean;
   isRequired: (field: string) => boolean;
   nativeNameIsVisible: boolean;
+  currentUser: UserDetails; // logged-in user
   user: UserDetails;
   fieldIsProtected(field: string): boolean;
 }
 
-export const PureUserEditForm: FunctionComponent<
-  OwnProps & InjectedFormProps<{}, OwnProps>
-> = (props) => (
-  <form onSubmit={props.handleSubmit(props.updateUser)}>
-    <FormContainer submitting={props.submitting} floating={true}>
-      <EmailField
-        user={props.user}
-        protected={props.fieldIsProtected('email')}
-      />
-      {!props.fieldIsProtected('first_name') && (
-        <StringField
-          name="first_name"
-          label={translate('First name')}
-          required={props.isRequired('first_name')}
-        />
-      )}
-      {!props.fieldIsProtected('last_name') && (
-        <StringField
-          name="last_name"
-          label={translate('Last name')}
-          required={props.isRequired('last_name')}
-        />
-      )}
-      {props.nativeNameIsVisible && !props.fieldIsProtected('native_name') && (
-        <StringField
-          label={translate('Native name')}
-          name="native_name"
-          required={props.isRequired('native_name')}
-        />
-      )}
-      {props.nativeNameIsVisible && props.fieldIsProtected('native_name') && (
-        <StaticField
-          label={translate('Native name')}
-          value={props.user.native_name}
-          protected
-          disabled
-        />
-      )}
-      {props.isVisibleForSupportOrStaff && (
-        <StaticField
-          label={translate('User status')}
-          value={formatUserStatus(props.user)}
-          disabled
-        />
-      )}
-      {props.user.civil_number && (
-        <StaticField
-          label={translate('ID code')}
-          value={props.user.civil_number}
-          disabled
-        />
-      )}
-      {props.fieldIsVisible('organization') &&
-        !props.fieldIsProtected('organization') && (
-          <StringField
-            label={translate('Organization name')}
-            name="organization"
-            required={props.isRequired('organization')}
-          />
-        )}
-      {props.fieldIsVisible('organization') &&
-        props.fieldIsProtected('organization') && (
-          <StaticField
-            label={translate('Organization name')}
-            value={props.user.organization}
-            disabled
-            protected
-          />
-        )}
-      {props.fieldIsVisible('job_title') &&
-        !props.fieldIsProtected('job_title') && (
-          <StringField
-            label={translate('Job position')}
-            name="job_title"
-            required={props.isRequired('job_title')}
-          />
-        )}
-      {props.fieldIsVisible('job_title') &&
-        props.fieldIsProtected('job_title') && (
-          <StaticField
-            label={translate('Job position')}
-            value={props.user.job_title}
-            disabled
-            protected
-          />
-        )}
-      {Array.isArray(props.user.affiliations) &&
-      props.user.affiliations.length > 0 ? (
-        <StaticField
-          label={translate('Affiliations')}
-          value={props.user.affiliations.join(', ')}
-          disabled
-          protected
-        />
-      ) : null}
-      {props.isVisibleForSupportOrStaff && (
-        <StringField
-          label={translate('Description')}
-          name="description"
-          required={props.isRequired('description')}
-        />
-      )}
-      {props.fieldIsVisible('phone_number') &&
-        !props.fieldIsProtected('phone_number') && (
-          <StringField
-            label={translate('Phone number')}
-            name="phone_number"
-            required={props.isRequired('phone_number')}
-          />
-        )}
-      {props.fieldIsVisible('phone_number') &&
-        props.fieldIsProtected('phone_number') && (
-          <StaticField
-            label={translate('Phone number')}
-            value={props.user.phone_number}
-            disabled
-            protected
-          />
-        )}
-      <hr />
-      <ImageField name="image" initialValue={props.user.image} />
-      <TermsOfService
-        initial={props.initial}
-        agreementDate={props.user.agreement_date}
-      />
-    </FormContainer>
-    <Form.Group>
-      <div className="pull-right">
-        <FieldError error={props.error} />
-        {props.dirty && (
-          <Button
-            variant="secondary"
-            size="sm"
-            className="me-2"
-            onClick={props.reset}
-          >
-            {translate('Discard')}
-          </Button>
-        )}
-        {!props.initial ? (
-          props.dirty ? (
-            <SubmitButton
-              className="btn btn-primary btn-sm me-2"
-              submitting={props.submitting}
-              label={translate('Save changes')}
+export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
+  const isSelf = props.currentUser.uuid === props.user.uuid;
+
+  const update = useCallback(
+    async (formData, dispatch) => {
+      try {
+        const response = await props.updateUser(formData);
+        dispatch(showSuccess(translate('Profile updated successfully')));
+        return response;
+      } catch (error) {
+        dispatch(showError(error.message));
+        // Throw exception to the edit dialog
+        if (!('image' in formData)) {
+          throw error;
+        }
+      }
+    },
+    [props.updateUser],
+  );
+
+  const detailsRows = useMemo(
+    () =>
+      [
+        {
+          label: translate('First name'),
+          key: 'first_name',
+          value: props.user.first_name,
+          description: isSelf
+            ? translate('Display your first name on your profile')
+            : translate("Display the user's first name on their profile"),
+          requiredMsg: props.isRequired('first_name')
+            ? getDefaultRequiredMsg(translate('First name'), isSelf)
+            : null,
+          protected: props.fieldIsProtected('first_name'),
+        },
+        {
+          label: translate('Last name'),
+          key: 'last_name',
+          value: props.user.last_name,
+          description: isSelf
+            ? translate('Display your last name on your profile')
+            : translate("Display the user's last name on their profile"),
+          requiredMsg: props.isRequired('last_name')
+            ? getDefaultRequiredMsg(translate('Last name'), isSelf)
+            : null,
+          protected: props.fieldIsProtected('last_name'),
+        },
+        props.nativeNameIsVisible
+          ? {
+              label: translate('Native name'),
+              key: 'native_name',
+              value: props.user.native_name,
+              requiredMsg: props.isRequired('native_name')
+                ? getDefaultRequiredMsg(translate('Native name'), isSelf)
+                : null,
+              protected: props.fieldIsProtected('native_name'),
+            }
+          : null,
+        props.fieldIsVisible('phone_number')
+          ? {
+              label: translate('Phone number'),
+              key: 'phone_number',
+              value: props.user.phone_number,
+              protected: props.fieldIsProtected('phone_number'),
+              requiredMsg: props.isRequired('phone_number')
+                ? translate('{pronoun} phone number', {
+                    pronoun: isSelf ? translate('Your') : translate("User's"),
+                  })
+                : null,
+              description: isSelf
+                ? translate('Enter your contact number')
+                : translate('Enter a contact number for the user'),
+            }
+          : null,
+        {
+          label: translate('Email'),
+          key: 'email',
+          value: props.user.email,
+          requiredMsg: props.isRequired('email')
+            ? translate(
+                '{pronoun} email is required for account notifications and password recovery',
+                { pronoun: isSelf ? translate('Your') : translate("User's") },
+              )
+            : null,
+          description: isSelf
+            ? translate(
+                'Provide an email address for communication and recovery',
+              )
+            : translate(
+                "Provide an email address for the user's communication and recovery",
+              ),
+          actions: (
+            <ChangeEmailButton
+              user={props.user}
+              protected={props.fieldIsProtected('email')}
             />
-          ) : null
-        ) : (
-          <SubmitButton
-            submitting={props.submitting}
-            label={translate('Agree and proceed')}
+          ),
+        },
+        {
+          label: translate('Date joined'),
+          value: formatDateTime(props.user.date_joined),
+          key: 'date_joined',
+          protected: true,
+          protectedMsg: translate('Read-only field'),
+          description: translate('The date the user has joined'),
+        },
+        props.isVisibleForSupportOrStaff
+          ? {
+              label: translate('User type'),
+              value: formatUserStatus(props.user),
+              key: 'type',
+              protected: true,
+              description: isSelf
+                ? translate('Describe your user account type')
+                : translate("Describe user's account type"),
+            }
+          : null,
+        props.user.civil_number
+          ? {
+              label: translate('ID code'),
+              value: props.user.civil_number,
+              protected: true,
+              key: translate('civil_number'),
+            }
+          : null,
+        props.fieldIsVisible('organization')
+          ? {
+              label: translate('Organization name'),
+              key: 'organization',
+              value: props.user.organization,
+              protected: props.fieldIsProtected('organization'),
+              description: isSelf
+                ? translate(
+                    'Specify the name of the organization you are affiliated with',
+                  )
+                : translate(
+                    'Specify the name of the organization the user is affiliated with',
+                  ),
+            }
+          : null,
+        props.fieldIsVisible('job_title')
+          ? {
+              label: translate('Job position'),
+              key: 'job_title',
+              value: props.user.job_title,
+              protected: props.fieldIsProtected('job_title'),
+              description: isSelf
+                ? translate(
+                    'Describe your role or position within the organization',
+                  )
+                : translate(
+                    "Describe the user's role or position within the organization",
+                  ),
+            }
+          : null,
+        Array.isArray(props.user.affiliations) &&
+        props.user.affiliations.length > 0
+          ? {
+              label: translate('Affiliations'),
+              value: props.user.affiliations.join(', '),
+              key: 'affiliations',
+              protected: true,
+            }
+          : null,
+        props.isVisibleForSupportOrStaff
+          ? {
+              label: translate('Description'),
+              value: props.user.description,
+              key: 'description',
+              description: isSelf
+                ? translate(
+                    'Provide additional information about your profile or role',
+                  )
+                : translate(
+                    "Provide additional information about the user's profile or role",
+                  ),
+              requiredMsg: props.isRequired('description')
+                ? getDefaultRequiredMsg(translate('Description'), isSelf)
+                : null,
+            }
+          : null,
+      ].filter(Boolean),
+    [
+      props.user,
+      props.nativeNameIsVisible,
+      props.fieldIsProtected,
+      props.fieldIsVisible,
+      props.isVisibleForSupportOrStaff,
+    ],
+  );
+
+  return (
+    <>
+      <IdentityProviderContainer user={props.user} />
+      <FormTable.Card
+        title={translate('Profile settings')}
+        className="card-bordered mb-7"
+      >
+        <FormTable>
+          {isSelf && (
+            <FormTable.Item
+              value={
+                <TermsOfServiceCheckbox user={props.user} update={update} />
+              }
+            />
+          )}
+          <UserEditAvatarFormItem
+            user={props.user}
+            callback={update}
+            isSelf={isSelf}
           />
-        )}
-      </div>
-    </Form.Group>
-  </form>
-);
-
-const enhance = reduxForm<{}, OwnProps>({
-  form: 'userEdit',
-});
-
-export const UserEditForm = enhance(PureUserEditForm);
+          {detailsRows.map((row) => (
+            <FormTable.Item
+              key={row.key}
+              label={row.label}
+              description={row.description}
+              value={row.value || '—'}
+              warnTooltip={row.requiredMsg}
+              actions={
+                row.actions || (
+                  <FieldEditButton
+                    user={props.user}
+                    name={row.key}
+                    label={row.label}
+                    description={row.description}
+                    callback={update}
+                    requiredMsg={row.requiredMsg}
+                    protected={row.protected}
+                    protectedMsg={row.protectedMsg}
+                  />
+                )
+              }
+            />
+          ))}
+        </FormTable>
+      </FormTable.Card>
+    </>
+  );
+};
