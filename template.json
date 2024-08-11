@@ -419,6 +419,10 @@
     "description": "administration/providers/CreateProviderDialog.tsx, customer/team/AddProjectUserButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/deploy/DeployPage.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-instance/deploy/FormNetworkStep.tsx, rancher/cluster/create/FormNodesStep.tsx",
     "message": "Add"
   },
+  "Additional account description invisible to user": {
+    "description": "user/support/UserEditForm.tsx",
+    "message": "Additional account description invisible to user"
+  },
   "Additional configuration": {
     "description": "proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, support/deploy-steps.ts",
     "message": "Additional configuration"
@@ -7390,14 +7394,6 @@
   "Protected fields": {
     "description": "administration/providers/ProviderForm.tsx",
     "message": "Protected fields"
-  },
-  "Provide additional information about the user's profile or role": {
-    "description": "user/support/UserEditForm.tsx",
-    "message": "Provide additional information about the user's profile or role"
-  },
-  "Provide additional information about your profile or role": {
-    "description": "user/support/UserEditForm.tsx",
-    "message": "Provide additional information about your profile or role"
   },
   "Provide an email address for communication and recovery": {
     "description": "user/support/UserEditForm.tsx, user/support/UserEmailChangeDialog.tsx",

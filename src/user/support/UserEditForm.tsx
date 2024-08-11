@@ -119,6 +119,7 @@ export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
           label: translate('Email'),
           key: 'email',
           value: props.user.email,
+          protected: props.fieldIsProtected('email'),
           requiredMsg: props.isRequired('email')
             ? translate(
                 '{pronoun} email is required for account notifications and password recovery',
@@ -132,12 +133,12 @@ export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
             : translate(
                 "Provide an email address for the user's communication and recovery",
               ),
-          actions: (
+          actions: !props.fieldIsProtected('email') ? (
             <ChangeEmailButton
               user={props.user}
               protected={props.fieldIsProtected('email')}
             />
-          ),
+          ) : null,
         },
         {
           label: translate('Date joined'),
@@ -210,13 +211,9 @@ export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
               label: translate('Description'),
               value: props.user.description,
               key: 'description',
-              description: isSelf
-                ? translate(
-                    'Provide additional information about your profile or role',
-                  )
-                : translate(
-                    "Provide additional information about the user's profile or role",
-                  ),
+              description: translate(
+                'Additional account description invisible to user',
+              ),
               requiredMsg: props.isRequired('description')
                 ? getDefaultRequiredMsg(translate('Description'), isSelf)
                 : null,
