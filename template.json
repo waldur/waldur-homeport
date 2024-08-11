@@ -3047,10 +3047,6 @@
     "description": "marketplace/offerings/update/plans/EditPlanPricesButton.tsx",
     "message": "Edit prices"
   },
-  "Edit profile": {
-    "description": "user/dashboard/UserWelcome.tsx",
-    "message": "Edit profile"
-  },
   "Edit project member": {
     "description": "customer/team/AddProjectUserDialog.tsx, customer/team/EditProjectUserDialog.tsx, project/team/EditUserDialog.tsx",
     "message": "Edit project member"
@@ -7087,10 +7083,6 @@
     "description": "vmware/deploy/FormProcessorStep.tsx, vmware/deploy/steps.ts",
     "message": "Processor"
   },
-  "Profile completion": {
-    "description": "user/dashboard/UserWelcome.tsx",
-    "message": "Profile completion"
-  },
   "Profile is disabled.": {
     "description": "freeipa/FreeIPAAccountEdit.tsx",
     "message": "Profile is disabled."
@@ -10007,10 +9999,6 @@
     "description": "issues/feedback/SupportFeedback.tsx",
     "message": "Thank you for your response!"
   },
-  "Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing \"{link}\" and filling out the blank fields.": {
-    "description": "user/dashboard/UserWelcome.tsx",
-    "message": "Thanks for signing up. In order to help you make the most out of the platform, please complete your profile by pressing \"{link}\" and filling out the blank fields."
-  },
   "The CPU quota is over the limit": {
     "description": "openstack/openstack-instance/deploy/FormFlavorStep.tsx",
     "message": "The CPU quota is over the limit"
@@ -12518,10 +12506,6 @@
   "Welcome to": {
     "description": "marketplace/landing/LandingPage.tsx",
     "message": "Welcome to"
-  },
-  "Welcome, {user}!": {
-    "description": "user/dashboard/UserWelcome.tsx",
-    "message": "Welcome, {user}!"
   },
   "When": {
     "description": "customer/cost-policies/CostPolicyCreateForm.tsx",

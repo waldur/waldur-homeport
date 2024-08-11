@@ -10,8 +10,6 @@ import { UserDetails } from '@waldur/workspace/types';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
-import { UserWelcome } from './UserWelcome';
-
 export const UserDashboard: FC = () => {
   const user = useSelector(getUser) as UserDetails;
 
@@ -22,9 +20,6 @@ export const UserDashboard: FC = () => {
   ) : asyncState.error ? (
     <>{translate('Unable to load data.')}</>
   ) : (
-    <>
-      <UserWelcome user={user} />
-      <UserAffiliationsList user={user} />
-    </>
+    <UserAffiliationsList user={user} />
   );
 };
