@@ -27,5 +27,5 @@ export const EditComponentButton: FunctionComponent<{
       }),
     );
   };
-  return <RowEditButton onClick={callback} className="me-3" />;
+  return <RowEditButton onClick={callback} className="me-3" size="sm" />;
 };

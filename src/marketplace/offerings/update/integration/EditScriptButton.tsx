@@ -27,5 +27,5 @@ export const EditScriptButton: FunctionComponent<ScriptEditorProps> = (
       }),
     );
   };
-  return <RowEditButton onClick={callback} />;
+  return <RowEditButton onClick={callback} size="sm" />;
 };

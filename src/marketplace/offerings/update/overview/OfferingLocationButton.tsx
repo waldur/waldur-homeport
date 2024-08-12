@@ -54,5 +54,5 @@ export const OfferingLocationButton = ({ offering, refetch }) => {
   if (offering.state === ARCHIVED) {
     return null;
   }
-  return <RowEditButton onClick={callback} />;
+  return <RowEditButton onClick={callback} size="sm" />;
 };

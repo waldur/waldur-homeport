@@ -29,5 +29,5 @@ export const EditOptionButton: FunctionComponent<
       }),
     );
   };
-  return <RowEditButton onClick={callback} />;
+  return <RowEditButton onClick={callback} size="sm" />;
 };

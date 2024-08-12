@@ -9,16 +9,18 @@ interface RowEditButtonProps {
   onClick;
   title?: string;
   variant?: Variant;
+  size?: 'sm' | 'lg';
   className?: string;
 }
 
 export const RowEditButton: FC<RowEditButtonProps> = ({
   title = translate('Edit'),
   variant,
+  size,
   onClick,
   className,
 }) => (
-  <Button variant={variant} onClick={onClick} size="sm" className={className}>
+  <Button variant={variant} onClick={onClick} size={size} className={className}>
     <span className="svg-icon svg-icon-2">
       <PencilSimple />
     </span>{' '}
