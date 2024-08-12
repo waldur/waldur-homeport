@@ -10,6 +10,7 @@ interface PublicDashboardHero2Props {
   backgroundImage?: string;
   logo: string;
   logoAlt?: string;
+  logoSize?: number;
   logoCircle?: boolean;
   logoTooltip?: string;
   title: ReactNode;
@@ -51,7 +52,7 @@ export const PublicDashboardHero2: FC<
                   logo={props.logo}
                   logoAlt={props.logoAlt}
                   circle={props.logoCircle}
-                  size={50}
+                  size={props.logoSize || 50}
                 />
               </Tip>
               <div className="d-flex flex-column flex-grow-1">

@@ -155,6 +155,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
       <PublicDashboardHero2
         hideQuickSection
         logo={offering.thumbnail}
+        logoSize={100}
         logoAlt={offering.name}
         logoTooltip={offering.category_title}
         title={
