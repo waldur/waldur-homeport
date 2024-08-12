@@ -49,7 +49,7 @@ export const IntegrationSection: FC<OfferingSectionProps> = (props) => {
           <span className="me-2">{translate('Integration')}</span>
           <RefreshButton refetch={props.refetch} loading={props.loading} />
         </Card.Title>
-        <div className="card-toolbar">
+        <div className="card-toolbar gap-3">
           {isFeatureVisible(MarketplaceFeatures.lexis_links) ? (
             <EditLexisLinkIntegrationButton
               offering={props.offering}

@@ -34,6 +34,6 @@ export const OfferingLogoButton: FC<{ offering; refetch }> = (props) => {
         customerId: customer.uuid,
       }))
   )
-    return <RowEditButton onClick={callback} />;
+    return <RowEditButton onClick={callback} size="sm" />;
   return null;
 };

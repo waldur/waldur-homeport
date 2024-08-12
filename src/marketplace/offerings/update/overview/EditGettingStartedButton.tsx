@@ -24,5 +24,5 @@ export const EditGettingStartedButton: FC<{ offering; refetch }> = (props) => {
       }),
     );
   };
-  return <RowEditButton onClick={callback} />;
+  return <RowEditButton onClick={callback} size="sm" />;
 };

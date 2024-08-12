@@ -25,5 +25,5 @@ export const EditOverviewButton: FC<EditOfferingProps> = (props) => {
       }),
     );
   };
-  return <RowEditButton onClick={callback} />;
+  return <RowEditButton onClick={callback} size="sm" />;
 };

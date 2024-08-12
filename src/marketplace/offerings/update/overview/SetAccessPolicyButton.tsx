@@ -27,5 +27,5 @@ export const SetAccessPolicyButton = ({ offering, refetch }) => {
   if (!isVisible(offering.state, user.is_staff)) {
     return null;
   }
-  return <RowEditButton onClick={callback} />;
+  return <RowEditButton onClick={callback} size="sm" />;
 };
