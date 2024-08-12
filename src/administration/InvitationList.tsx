@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { RoleField } from '@waldur/invitations/RoleField';
@@ -39,7 +40,12 @@ export const InvitationList: FunctionComponent = () => {
       columns={[
         {
           title: translate('Email'),
-          render: ({ row }) => row.email,
+          render: ({ row }) => (
+            <div className="d-flex align-items-center gap-1">
+              {row.email}
+              <CopyToClipboardButton value={row.email} />
+            </div>
+          ),
           orderField: 'email',
         },
         {

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import Avatar from '@waldur/core/Avatar';
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
@@ -52,6 +53,7 @@ export const InvitationsList: FunctionComponent = () => {
                 size={25}
               />
               {row.email}
+              <CopyToClipboardButton value={row.email} />
             </div>
           ),
           orderField: 'email',
