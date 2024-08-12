@@ -1,6 +1,6 @@
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Button, Card, Col, ColProps, Row, Stack } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { BaseFieldProps } from 'redux-form';
@@ -489,6 +489,7 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
     hasOptionalColumns,
     columns,
     toggleColumn,
+    activeColumns,
     rowActions,
     initColumnPositions,
   } = props;
@@ -530,6 +531,22 @@ export default function Table<RowType = any>(props: TableProps<RowType>) {
       }
     }
   }, []);
+
+  // Refetch the table if a column is added (Compare with the previous keys that were fetched)
+  const prevActiveCols = useRef<string[]>([]);
+  useEffect(() => {
+    const currentKeys = Object.entries(activeColumns)
+      .filter(([, v]) => Boolean(v))
+      .map(([key]) => key);
+    const isSubset = currentKeys.every((k) =>
+      prevActiveCols.current.includes(k),
+    );
+
+    if (!isSubset) {
+      fetch();
+      prevActiveCols.current = currentKeys;
+    }
+  }, [activeColumns, prevActiveCols]);
 
   useEffect(() => {
     if (columns?.length) {
