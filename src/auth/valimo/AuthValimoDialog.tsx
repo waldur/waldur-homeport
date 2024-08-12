@@ -1,3 +1,4 @@
+import { SignIn } from '@phosphor-icons/react';
 import delay from '@redux-saga/delay-p';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
@@ -120,7 +121,10 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
       </Modal.Body>
       <Modal.Footer>
         <SubmitButton invalid={invalid} submitting={submitting}>
-          <i className="fa fa-sign-in" /> {translate('Sign in')}
+          <span className="svg-icon svg-icon-2">
+            <SignIn />
+          </span>{' '}
+          {translate('Sign in')}
         </SubmitButton>
         <CloseDialogButton />
       </Modal.Footer>

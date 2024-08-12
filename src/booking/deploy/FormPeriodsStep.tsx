@@ -1,3 +1,4 @@
+import { Plus } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { uniqueId } from 'lodash';
 import { DateTime, Duration } from 'luxon';
@@ -154,7 +155,9 @@ const renderScheduleRows = ({
         </div>
       ))}
       <Button variant="light" className="text-nowrap" onClick={addRow}>
-        <i className="fa fa-plus" />
+        <span className="svg-icon svg-icon-2">
+          <Plus />
+        </span>
         {translate('Add time period')}
       </Button>
     </>

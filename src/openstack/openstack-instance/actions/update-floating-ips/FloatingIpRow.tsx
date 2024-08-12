@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { Copy, Trash } from '@phosphor-icons/react';
 import copy from 'copy-to-clipboard';
 import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
@@ -41,7 +41,7 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
               className="text-btn pe-3"
             >
               <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
-                <i className="fa fa-copy fa-lg" />
+                <Copy size={20} />
               </Tip>
             </button>
             {pair.address}

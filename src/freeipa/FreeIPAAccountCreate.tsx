@@ -1,3 +1,4 @@
+import { Plus } from '@phosphor-icons/react';
 import { useEffect, useCallback } from 'react';
 import { FormGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -75,7 +76,10 @@ export const FreeIPAAccountCreate = reduxForm<
         <FormGroup>
           <div className="pull-right">
             <SubmitButton submitting={submitting} invalid={invalid}>
-              <i className="fa fa-plus" /> {translate('Create')}
+              <span className="svg-icon svg-icon-2">
+                <Plus />
+              </span>{' '}
+              {translate('Create')}
             </SubmitButton>
           </div>
         </FormGroup>

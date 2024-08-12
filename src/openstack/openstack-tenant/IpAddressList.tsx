@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { Plus, Trash } from '@phosphor-icons/react';
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
@@ -33,7 +33,10 @@ const IPAddressRow = ({ address, onRemove }) => (
 
 const IPAddressAddButton = ({ onClick }) => (
   <Button variant="default" onClick={onClick} size="sm">
-    <i className="fa fa-plus" /> {translate('Add address')}
+    <span className="svg-icon svg-icon-2">
+      <Plus />
+    </span>{' '}
+    {translate('Add address')}
   </Button>
 );
 

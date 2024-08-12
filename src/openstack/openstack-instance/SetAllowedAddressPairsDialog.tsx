@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { Plus, Trash } from '@phosphor-icons/react';
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
@@ -66,7 +66,10 @@ const PairRow = ({ pair, onRemove }) => (
 
 const PairAddButton = ({ onClick }) => (
   <Button variant="default" onClick={onClick}>
-    <i className="fa fa-plus" /> {translate('Add pair')}
+    <span className="svg-icon svg-icon-2">
+      <Plus />
+    </span>{' '}
+    {translate('Add pair')}
   </Button>
 );
 

@@ -1,3 +1,4 @@
+import { Plus } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -52,7 +53,9 @@ export const FormSSHPublicKeysStep = (props: FormStepProps) => {
             size="sm"
             onClick={openFormDialog}
           >
-            <i className="fa fa-plus" />
+            <span className="svg-icon svg-icon-2">
+              <Plus />
+            </span>
             {translate('New public key')}
           </Button>
         </div>

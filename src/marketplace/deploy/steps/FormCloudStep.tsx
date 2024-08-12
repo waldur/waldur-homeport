@@ -1,3 +1,4 @@
+import { Plus } from '@phosphor-icons/react';
 import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
@@ -166,7 +167,9 @@ export const FormCloudStep = (props: FormStepProps) => {
             </div>
             <div className="d-flex gap-10 justify-content-end">
               <Button variant="light" className="text-nowrap" size="sm">
-                <i className="fa fa-plus" />
+                <span className="svg-icon svg-icon-2">
+                  <Plus />
+                </span>
                 {translate('New cloud')}
               </Button>
             </div>

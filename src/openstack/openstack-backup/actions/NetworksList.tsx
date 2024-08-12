@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { Plus, Trash } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -22,7 +22,10 @@ type NetworkChoices = Pick<BackupFormChoices, 'subnets' | 'floatingIps'>;
 
 const AddButton = ({ onClick, disabled }) => (
   <Button variant="default" onClick={onClick} disabled={disabled}>
-    <i className="fa fa-plus" /> {translate('Add')}
+    <span className="svg-icon svg-icon-2">
+      <Plus />
+    </span>{' '}
+    {translate('Add')}
   </Button>
 );
 
