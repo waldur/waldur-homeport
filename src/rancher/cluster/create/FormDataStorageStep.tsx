@@ -1,3 +1,4 @@
+import { Plus } from '@phosphor-icons/react';
 import { Fragment, useCallback, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -78,7 +79,9 @@ const renderDataVolumeRows = ({
               fields.push({ size: 1, volume_type: defaultVolumeType })
             }
           >
-            <i className="fa fa-plus" />
+            <span className="svg-icon svg-icon-2">
+              <Plus />
+            </span>
             {translate('Add data volume')}
           </Button>
         </td>

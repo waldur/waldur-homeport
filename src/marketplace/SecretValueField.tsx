@@ -1,7 +1,10 @@
+import { Eye, EyeSlash } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useToggle } from 'react-use';
+
+import { translate } from '@waldur/i18n';
 
 interface SecretValueFieldProps {
   value: string;
@@ -10,11 +13,6 @@ interface SecretValueFieldProps {
 
 export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
   const [showSecret, onToggle] = useToggle(false);
-
-  const iconClass = classNames('text-btn fa password-icon', {
-    'fa-eye-slash': showSecret,
-    'fa-eye': !showSecret,
-  });
 
   return (
     <div className={classNames('has-password', props.className)}>
@@ -25,11 +23,13 @@ export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
         autoComplete="new-password"
       />
       <button
-        className={iconClass}
+        className="text-btn password-icon"
         type="button"
-        title={showSecret ? 'Hide' : 'Show'}
+        title={showSecret ? translate('Hide') : translate('Show')}
         onClick={onToggle}
-      />
+      >
+        {!showSecret ? <Eye /> : <EyeSlash />}
+      </button>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { Plus } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -31,7 +32,10 @@ export const CreateOfferingButton = ({ fetch }: { fetch? }) => {
   ) {
     return (
       <Button className="btn btn-success btn-md" onClick={callback}>
-        <i className="fa fa-plus" /> {translate('Add new offering')}
+        <span className="svg-icon svg-icon-2">
+          <Plus />
+        </span>{' '}
+        {translate('Add new offering')}
       </Button>
     );
   } else {

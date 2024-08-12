@@ -1,3 +1,4 @@
+import { Copy } from '@phosphor-icons/react';
 import copy from 'copy-to-clipboard';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -23,7 +24,7 @@ const SupportSubMenuItem = ({ title, onCopy }) =>
       <span className="menu-title">{title}</span>
       <span className="menu-badge">
         <button className="btn btn-active-icon-primary btn-flush ms-2">
-          <i className="fa fa-copy" />
+          <Copy />
         </button>
       </span>
     </span>

@@ -1,3 +1,4 @@
+import { Plus } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Fragment, useCallback } from 'react';
 import { Button, Form, FormCheck } from 'react-bootstrap';
@@ -166,7 +167,9 @@ const renderNodeRows = ({ fields, flavors }: any) => {
         </Form.Group>
       )}
       <Button variant="light" className="text-nowrap" onClick={addRow}>
-        <i className="fa fa-plus" />
+        <span className="svg-icon svg-icon-2">
+          <Plus />
+        </span>
         {translate('Add')}
       </Button>
     </>
