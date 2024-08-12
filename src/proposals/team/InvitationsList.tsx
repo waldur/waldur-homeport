@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import Avatar from '@waldur/core/Avatar';
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { InvitationCancelButton } from '@waldur/invitations/actions/InvitationCancelButton';
@@ -27,6 +28,7 @@ export const InvitationsList: FunctionComponent<{ table; hideRole }> = ({
                 size={25}
               />
               {row.email}
+              <CopyToClipboardButton value={row.email} />
             </div>
           ),
           orderField: 'email',
