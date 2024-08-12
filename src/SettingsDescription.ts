@@ -562,5 +562,27 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('Localization'),
+    items: [
+      {
+        key: 'LANGUAGE_CHOICES',
+        description: translate('List of enabled languages'),
+        default: 'en,et,lt,lv,ru,it,de,da,sv,es,fr,nb,ar,cs',
+        type: 'string',
+      },
+    ],
+  },
+  {
+    description: translate('User settings'),
+    items: [
+      {
+        key: 'AUTO_APPROVE_USER_TOS',
+        description: translate('Configure whether a user needs to approve TOS.'),
+        default: false,
+        type: 'boolean',
+      },
+    ],
+  },
 ];
 

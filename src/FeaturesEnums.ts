@@ -33,6 +33,7 @@ export enum ProjectFeatures {
   show_end_date_in_create_dialog = 'project.show_end_date_in_create_dialog',
   show_image_in_create_dialog = 'project.show_image_in_create_dialog',
   show_industry_flag = 'project.show_industry_flag',
+  show_start_date_in_create_dialog = 'project.show_start_date_in_create_dialog',
   show_type_in_create_dialog = 'project.show_type_in_create_dialog',
 }
 
