@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+// WARNING: This file is auto-generated from src/waldur_core/core/management/commands/print_permissions_description.py
+// Do not edit it manually. All manual changes would be overridden.
 import { translate } from '@waldur/i18n';
 
 export const PermissionOptions = [
@@ -105,13 +108,22 @@ export const PermissionOptions = [
   {
     label: translate('Order'),
     options: [
-      { label: translate('Approve order'), value: 'ORDER.APPROVE' },
+      {
+        label: translate('Approve order'),
+        value: 'ORDER.APPROVE',
+      },
       {
         label: translate('Approve private order'),
         value: 'ORDER.APPROVE_PRIVATE',
       },
-      { label: translate('Reject order'), value: 'ORDER.REJECT' },
-      { label: translate('Destroy order'), value: 'ORDER.DESTROY' },
+      {
+        label: translate('Reject order'),
+        value: 'ORDER.REJECT',
+      },
+      {
+        label: translate('Destroy order'),
+        value: 'ORDER.DESTROY',
+      },
       {
         label: translate('Cancel order'),
         value: 'ORDER.CANCEL',
@@ -121,7 +133,10 @@ export const PermissionOptions = [
   {
     label: translate('Resource'),
     options: [
-      { label: translate('Terminate resource'), value: 'RESOURCE.TERMINATE' },
+      {
+        label: translate('Terminate resource'),
+        value: 'RESOURCE.TERMINATE',
+      },
       {
         label: translate('List importable resources'),
         value: 'RESOURCE.LIST_IMPORTABLE',
@@ -130,8 +145,14 @@ export const PermissionOptions = [
         label: translate('Set resource end date'),
         value: 'RESOURCE.SET_END_DATE',
       },
-      { label: translate('Set resource usage'), value: 'RESOURCE.SET_USAGE' },
-      { label: translate('Switch resource plan'), value: 'RESOURCE.SET_PLAN' },
+      {
+        label: translate('Set resource usage'),
+        value: 'RESOURCE.SET_USAGE',
+      },
+      {
+        label: translate('Switch resource plan'),
+        value: 'RESOURCE.SET_PLAN',
+      },
       {
         label: translate('Update resource limits'),
         value: 'RESOURCE.SET_LIMITS',
@@ -144,7 +165,10 @@ export const PermissionOptions = [
         label: translate('Submit resource report'),
         value: 'RESOURCE.SUBMIT_REPORT',
       },
-      { label: translate('List resource users'), value: 'RESOURCE.LIST_USERS' },
+      {
+        label: translate('List resource users'),
+        value: 'RESOURCE.LIST_USERS',
+      },
       {
         label: translate('Complete resource downscaling'),
         value: 'RESOURCE.COMPLETE_DOWNSCALING',
@@ -186,7 +210,6 @@ export const PermissionOptions = [
         label: translate('Create offering permission'),
         value: 'OFFERING.CREATE_PERMISSION',
       },
-
       {
         label: translate('Update project permission'),
         value: 'PROJECT.UPDATE_PERMISSION',
@@ -199,7 +222,6 @@ export const PermissionOptions = [
         label: translate('Update offering permission'),
         value: 'OFFERING.UPDATE_PERMISSION',
       },
-
       {
         label: translate('Delete project permission'),
         value: 'PROJECT.DELETE_PERMISSION',
