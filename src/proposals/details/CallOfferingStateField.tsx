@@ -10,6 +10,8 @@ export const CallOfferingStateField = ({
 }) => (
   <StateIndicator
     label={formatCallOfferingState(row.state)}
-    variant={row.state === 'accepted' ? 'success' : 'secondary'}
+    variant={row.state === 'accepted' ? 'success' : 'warning'}
+    pill
+    light
   />
 );

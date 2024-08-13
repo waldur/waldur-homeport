@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { CallOffering } from '@waldur/proposals/types';
@@ -13,24 +12,23 @@ export const OfferingRequestsListExpandableRow: FunctionComponent<OwnProps> = ({
   row,
 }) => (
   <div className="container-fluid m-t">
-    <Container>
-      <Row className="mb-6">
-        <Col sm={6}>
-          <Field
-            label={translate('Contact')}
-            value={`${row.created_by_name} / ${row.created_by_email}`}
-          />
-        </Col>
-        <Col sm={6}>
-          {typeof row.attributes?.limits === 'object' &&
-            Object.entries(row.attributes.limits).map(
-              ([key, value]: [string, string]) => (
-                <Field key={key} label={key} value={value} />
-              ),
-            )}
-        </Col>
-      </Row>
-      <Field label={translate('Message')} value={row.description} isStuck />
-    </Container>
+    {typeof row.attributes?.limits === 'object' && (
+      <>
+        <h3>{translate('Components')}</h3>
+        {Object.entries(row.attributes.limits).map(
+          ([key, value]: [string, string]) => (
+            <Field key={key} label={key} value={value} isStuck />
+          ),
+        )}
+      </>
+    )}
+    <br />
+    <hr />
+    <Field
+      label={translate('Contact')}
+      value={`${row.created_by_name} / ${row.created_by_email}`}
+      isStuck
+    />
+    <Field label={translate('Message')} value={row.description} isStuck />
   </div>
 );
