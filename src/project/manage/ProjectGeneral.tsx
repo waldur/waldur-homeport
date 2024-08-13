@@ -24,6 +24,11 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
         value: project.customer_name || 'N/A',
       },
       {
+        label: translate('Start date'),
+        key: 'start_date',
+        value: project.start_date || 'N/A',
+      },
+      {
         label: translate('End date'),
         key: 'end_date',
         value: project.end_date || 'N/A',

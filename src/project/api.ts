@@ -24,6 +24,7 @@ export const createProject = (project) => {
     name: project.name,
     description: project.description,
     end_date: project.end_date ? formatDate(project.end_date) : undefined,
+    start_date: project.start_date ? formatDate(project.start_date) : undefined,
     customer: project.customer.url,
     type: project.type?.url,
     oecd_fos_2007_code: project.oecd_fos_2007_code?.value,
@@ -47,6 +48,9 @@ export const updateProjectPartially = (
   const data = { ...values };
   if ('end_date' in data) {
     data.end_date = formatDate(data.end_date);
+  }
+  if ('start_date' in data) {
+    data.start_date = formatDate(data.start_date);
   }
   if ('oecd_fos_2007_code' in data) {
     data.oecd_fos_2007_code = data.oecd_fos_2007_code?.value;

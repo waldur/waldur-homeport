@@ -115,6 +115,16 @@ export const ProjectCreateForm = reduxForm<
               isClearable={true}
             />
           )}
+        {isFeatureVisible(ProjectFeatures.show_start_date_in_create_dialog) && (
+          <DateField
+            name="start_date"
+            label={translate('Start date')}
+            description={translate(
+              'Once start date is reached, invitations and orders are processed.',
+            )}
+            minDate={DateTime.now().plus({ days: 1 }).toISO()}
+          />
+        )}
         {isFeatureVisible(ProjectFeatures.show_end_date_in_create_dialog) && (
           <DateField
             name="end_date"
