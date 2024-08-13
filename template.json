@@ -1928,7 +1928,7 @@
     "message": "Component"
   },
   "Components": {
-    "description": "marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingComponents.tsx, marketplace/offerings/details/PublicOfferingGeneral.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/details/ResourceComponentsDialog.tsx",
+    "description": "marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingComponents.tsx, marketplace/offerings/details/PublicOfferingGeneral.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/details/ResourceComponentsDialog.tsx, proposals/offering-requests/OfferingRequestsListExpandableRow.tsx",
     "message": "Components"
   },
   "Compute generation": {
@@ -3047,10 +3047,6 @@
     "description": "marketplace/offerings/update/components/EditComponentDialog.tsx",
     "message": "Edit component"
   },
-  "Edit customer member": {
-    "description": "customer/team/EditUserDialog.tsx",
-    "message": "Edit customer member"
-  },
   "Edit default project role": {
     "description": "proposals/update/general/CallGeneralSection.tsx",
     "message": "Edit default project role"
@@ -3082,6 +3078,10 @@
   "Edit option": {
     "description": "marketplace/offerings/update/options/EditOptionDialog.tsx",
     "message": "Edit option"
+  },
+  "Edit organization member": {
+    "description": "customer/team/EditUserDialog.tsx",
+    "message": "Edit organization member"
   },
   "Edit permissions": {
     "description": "customer/team/PendingReviewDialog.tsx",

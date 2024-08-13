@@ -105,7 +105,7 @@ export const EditUserDialog = connect(
     return (
       <form onSubmit={handleSubmit(saveUser)}>
         <Modal.Header>
-          <Modal.Title>{translate('Edit customer member')}</Modal.Title>
+          <Modal.Title>{translate('Edit organization member')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <FormContainer submitting={submitting}>
