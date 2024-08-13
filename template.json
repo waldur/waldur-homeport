@@ -1923,6 +1923,10 @@
     "description": "proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx",
     "message": "Configure request"
   },
+  "Configure whether a user needs to approve TOS.": {
+    "description": "SettingsDescription.ts",
+    "message": "Configure whether a user needs to approve TOS."
+  },
   "Configure": {
     "description": "administration/service-desk/AdministrationServiceDesk.tsx, openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsSetAction.tsx",
     "message": "Configure"
@@ -4032,7 +4036,7 @@
     "message": "Hide password"
   },
   "Hide": {
-    "description": "form/SecretField.tsx",
+    "description": "form/SecretField.tsx, marketplace/SecretValueField.tsx",
     "message": "Hide"
   },
   "Home directory prefix": {
@@ -4847,6 +4851,10 @@
     "description": "navigation/header/favorite-pages/FavoritePageService.ts",
     "message": "List of all resources"
   },
+  "List of enabled languages": {
+    "description": "SettingsDescription.ts",
+    "message": "List of enabled languages"
+  },
   "List of resources": {
     "description": "navigation/header/favorite-pages/FavoritePageService.ts",
     "message": "List of resources"
@@ -4882,6 +4890,10 @@
   "Local identity provider": {
     "description": "administration/providers/IdentityProvidersList.tsx",
     "message": "Local identity provider"
+  },
+  "Localization": {
+    "description": "SettingsDescription.ts",
+    "message": "Localization"
   },
   "Location has been removed.": {
     "description": "customer/details/CustomerDetailsPanel.tsx",
@@ -6043,9 +6055,9 @@
     "description": "proposals/utils.ts",
     "message": "On decision"
   },
-  "Once start date is reached, invoices and orders are processed.": {
+  "Once start date is reached, invitations and orders are processed.": {
     "description": "project/ProjectCreateForm.tsx, project/manage/EditFieldDialog.tsx",
-    "message": "Once start date is reached, invoices and orders are processed."
+    "message": "Once start date is reached, invitations and orders are processed."
   },
   "One project": {
     "description": "marketplace/service-providers/ProjectsCountColumn.tsx",
@@ -9384,7 +9396,7 @@
     "message": "Show {count} more"
   },
   "Show": {
-    "description": "form/SecretField.tsx, marketplace/details/plan/PlanDetailsLink.tsx, resource/summary/ResourceMetadataLink.tsx",
+    "description": "form/SecretField.tsx, marketplace/SecretValueField.tsx, marketplace/details/plan/PlanDetailsLink.tsx, resource/summary/ResourceMetadataLink.tsx",
     "message": "Show"
   },
   "Showing {sliceStart} to {sliceEnd} of {resultCount} entries.": {
@@ -12146,6 +12158,10 @@
   "User roles": {
     "description": "administration/routes.ts",
     "message": "User roles"
+  },
+  "User settings": {
+    "description": "SettingsDescription.ts",
+    "message": "User settings"
   },
   "User submitted fields": {
     "description": "marketplace/orders/details/OrderDetails.tsx, marketplace/orders/details/UserSubmittedFieldsTab.tsx",
