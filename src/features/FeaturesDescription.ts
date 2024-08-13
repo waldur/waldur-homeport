@@ -191,6 +191,10 @@ export const FeaturesDescription: FeatureSection[] = [
         key: 'ssh_keys',
         description: translate('Enable SSH keys management in user workspace.'),
       },
+      {
+        key: 'disable_user_termination',
+        description: translate('Disable display of user termination actions from user profile.'),
+      },
     ],
   },
 ];

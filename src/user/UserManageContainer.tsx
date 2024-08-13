@@ -7,6 +7,8 @@ import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { IBreadcrumbItem, PageBarTab } from '@waldur/navigation/types';
@@ -106,7 +108,8 @@ export const UserManageContainer = ({ isPersonal }) => {
               : UserDetailsTable,
           title: translate('User profile'),
         },
-        {
+        (!isFeatureVisible(UserFeatures.disable_user_termination) ||
+          currentUser.is_staff) && {
           key: 'termination',
           component: isValidUser
             ? isPersonal
