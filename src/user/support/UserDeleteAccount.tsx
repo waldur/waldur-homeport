@@ -75,6 +75,7 @@ export const UserDeleteAccount: FC<{ user: UserDetails }> = ({ user }) => {
         <li>{translate('This action cannot be undone.')}</li>
       </ul>
       <Form.Check
+        id="confirm-deletion"
         type="checkbox"
         checked={confirm}
         onChange={(value) => setConfirm(value.target.checked)}

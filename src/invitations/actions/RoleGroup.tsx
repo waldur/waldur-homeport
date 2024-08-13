@@ -22,7 +22,7 @@ export const RoleGroup: FunctionComponent<{ roles: Role[] }> = ({ roles }) => (
           validate={[required]}
           value={fieldProps.input.value}
           onChange={(item) => fieldProps.input.onChange(item)}
-          getOptionLabel={(item) => item.description}
+          getOptionLabel={(item) => item.description || item.name}
           getOptionValue={(item) => item.uuid}
         />
       )}
