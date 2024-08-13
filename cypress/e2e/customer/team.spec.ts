@@ -75,7 +75,7 @@ describe('Team', () => {
   it('Allows to edit permission', () => {
     cy.get('.row-actions button').contains('Edit').click({ force: true });
     cy.get('.modal-title')
-      .contains('Edit customer member')
+      .contains('Edit organization member')
       .get('.modal-content')
 
       // Open Role dropdown
