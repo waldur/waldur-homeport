@@ -1,5 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
@@ -37,13 +38,16 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
     {
       title: translate('ID'),
       render: ({ row }) => (
-        <OrderDetailsLink
-          order_uuid={row.uuid}
-          customer_uuid={row.customer_uuid}
-          project_uuid={row.project_uuid}
-        >
-          {row.uuid}
-        </OrderDetailsLink>
+        <div className="d-flex align-items-center gap-1">
+          <OrderDetailsLink
+            order_uuid={row.uuid}
+            customer_uuid={row.customer_uuid}
+            project_uuid={row.project_uuid}
+          >
+            {row.uuid}
+          </OrderDetailsLink>
+          <CopyToClipboardButton value={row.uuid} />
+        </div>
       ),
     },
     {
