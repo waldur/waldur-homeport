@@ -9,8 +9,6 @@ import { ENV } from '@waldur/configs/default';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { SelectField, SubmitButton, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
@@ -97,15 +95,23 @@ export const EditFieldDialogPure = reduxForm<
               validate={validateMaxLength}
             />
           ) : props.resolve.name === 'is_industry' ? (
-            isFeatureVisible(ProjectFeatures.show_industry_flag) && (
-              <AwesomeCheckboxField
-                name="is_industry"
-                label={translate(
-                  'Please mark if project is aimed at industrial use',
-                )}
-                hideLabel={true}
-              />
-            )
+            <AwesomeCheckboxField
+              name="is_industry"
+              label={translate(
+                'Please mark if project is aimed at industrial use',
+              )}
+              hideLabel={true}
+            />
+          ) : props.resolve.name === 'start_date' ? (
+            <Field
+              name="start_date"
+              label={translate('Start date')}
+              description={translate(
+                'Once start date is reached, invitations and orders are processed.',
+              )}
+              component={DateField}
+              minDate={DateTime.now().plus({ days: 1 }).toISO()}
+            />
           ) : props.resolve.name === 'end_date' ? (
             <Field
               name="end_date"
@@ -121,8 +127,7 @@ export const EditFieldDialogPure = reduxForm<
               <LoadingSpinner />
             ) : error ? (
               <LoadingErred loadData={refetch} />
-            ) : oecdCodes &&
-              isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
+            ) : oecdCodes ? (
               <SelectField
                 floating={false}
                 label={translate('OECD FoS code')}

@@ -110,6 +110,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Show industry flag.'),
       },
       {
+        key: 'show_start_date_in_create_dialog',
+        description: translate('Show start date field in project create dialog.'),
+      },
+      {
         key: 'show_type_in_create_dialog',
         description: translate('Show type field in project create dialog.'),
       },

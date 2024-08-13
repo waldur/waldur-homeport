@@ -55,6 +55,11 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
           <span>{`${project.oecd_fos_2007_code}. ${project.oecd_fos_2007_label}`}</span>
         )}
         {project.type && <span>{project.type}</span>}
+        {project.start_date && (
+          <span>
+            {translate('Start date:')} {formatDate(project.start_date)}
+          </span>
+        )}
         {project.end_date && (
           <span>
             {translate('End date:')} {formatDate(project.end_date)}

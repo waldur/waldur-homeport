@@ -24,20 +24,6 @@ export const ProjectsList: FunctionComponent<{}> = () => {
   const filter = useMemo(
     () => ({
       customer: customer.uuid,
-      field: [
-        'uuid',
-        'name',
-        'description',
-        'created',
-        'billing_price_estimate',
-        'type_name',
-        'end_date',
-        'backend_id',
-        'oecd_fos_2007_code',
-        'is_industry',
-        'marketplace_resource_count',
-        'image',
-      ],
       o: 'name',
     }),
     [customer],
@@ -54,11 +40,24 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       render: ProjectLink,
       orderField: 'name',
       export: 'name',
+      id: 'name',
+      keys: [
+        'uuid',
+        'name',
+        'is_industry',
+        'backend_id',
+        'marketplace_resource_count',
+        'oecd_fos_2007_code',
+        'type_name',
+        'image',
+      ],
     },
     {
       title: translate('Description'),
       render: ({ row }) => <>{formatLongText(row.description)}</>,
       export: 'description',
+      id: 'description',
+      keys: ['description'],
     },
     {
       title: translate('Created'),
@@ -66,6 +65,19 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       orderField: 'created',
       export: (row) => formatDateTime(row.created),
       exportKeys: ['created'],
+      id: 'created',
+      keys: ['created'],
+    },
+    {
+      title: translate('Start date'),
+      render: ({ row }) => (
+        <>{row.start_date ? formatDate(row.start_date) : DASH_ESCAPE_CODE}</>
+      ),
+      orderField: 'start_date',
+      export: false,
+      id: 'start_date',
+      optional: true,
+      keys: ['start_date'],
     },
     {
       title: translate('End date'),
@@ -74,6 +86,8 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       ),
       orderField: 'end_date',
       export: false,
+      id: 'end_date',
+      keys: ['end_date'],
     },
   ];
   if (isFeatureVisible(ProjectFeatures.estimated_cost)) {
@@ -81,6 +95,8 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       title: translate('Estimated cost'),
       render: ProjectCostField,
       export: false,
+      id: 'estimated_cost',
+      keys: ['billing_price_estimate'],
     });
   }
 
@@ -102,6 +118,7 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       )}
       expandableRow={ProjectExpandableRowContainer}
       enableExport={true}
+      hasOptionalColumns
     />
   );
 };
