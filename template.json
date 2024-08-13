@@ -499,6 +499,14 @@
     "description": "administration/agreements/CreateUserAgreementsForm.tsx",
     "message": "Agreement type"
   },
+  "Agricultural biotechnology": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Agricultural biotechnology"
+  },
+  "Agriculture, forestry, and fisheries": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Agriculture, forestry, and fisheries"
+  },
   "Alert": {
     "description": "marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx",
     "message": "Alert"
@@ -658,6 +666,10 @@
   "An error occurred while removing documents. Please try again.": {
     "description": "proposals/update/documents/RemoveDocumentButton.tsx",
     "message": "An error occurred while removing documents. Please try again."
+  },
+  "Animal and dairy science": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Animal and dairy science"
   },
   "Annotations": {
     "description": "rancher/node/RancherNodeSummary.tsx",
@@ -1059,6 +1071,10 @@
     "description": "invoices/details/ComponentRow.tsx, invoices/details/InvoiceItemUpdateDialog.tsx, marketplace/offerings/ArticleCodeField.tsx",
     "message": "Article code"
   },
+  "Arts (arts, history of arts, performing arts, music)": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Arts (arts, history of arts, performing arts, music)"
+  },
   "Ask a question": {
     "description": "marketplace/offerings/details/PublicOfferingFAQ.tsx",
     "message": "Ask a question"
@@ -1291,6 +1307,10 @@
     "description": "customer/details/CustomerManageContainer.tsx, customer/details/CustomerManagePageBar.tsx",
     "message": "Basic details"
   },
+  "Basic medicine": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Basic medicine"
+  },
   "Batch script file": {
     "description": "slurm/details/SubmitJobDialog.tsx",
     "message": "Batch script file"
@@ -1334,6 +1354,10 @@
   "Billing": {
     "description": "customer/details/CustomerBillingPanel.tsx, customer/details/CustomerManageContainer.tsx, customer/details/CustomerManagePageBar.tsx, invoices/routes.ts",
     "message": "Billing"
+  },
+  "Biological sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Biological sciences"
   },
   "Block creation of new resources": {
     "description": "customer/cost-policies/utils.ts",
@@ -1699,9 +1723,21 @@
     "description": "customer/routes.ts, marketplace-checklist/ChecklistCustomer.tsx, user/UserPopover.tsx",
     "message": "Checklists"
   },
+  "Chemical engineering": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Chemical engineering"
+  },
+  "Chemical sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Chemical sciences"
+  },
   "Choices as comma-separated list": {
     "description": "marketplace/offerings/update/options/OptionForm.tsx",
     "message": "Choices as comma-separated list"
+  },
+  "Civil engineering": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Civil engineering"
   },
   "Civil number": {
     "description": "invitations/InvitationExpandableRow.tsx, invitations/actions/CivilNumberGroup.tsx, invitations/actions/create/EmailsListGroup.tsx, user/support/UserList.tsx",
@@ -1738,6 +1774,10 @@
   "Client secret": {
     "description": "administration/providers/ProviderForm.tsx, azure/provider/AzureForm.tsx",
     "message": "Client secret"
+  },
+  "Clinical medicine": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Clinical medicine"
   },
   "Clone of": {
     "description": "marketplace/offerings/update/plans/AddPlanDialog.tsx",
@@ -1898,6 +1938,10 @@
   "Compute": {
     "description": "openstack/openstack-tenant/tabs.ts, quotas/constants.ts",
     "message": "Compute"
+  },
+  "Computer and information sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Computer and information sciences"
   },
   "Conceal \"Change request\" from a selection of issue types for non-staff/non-support users.": {
     "description": "features/FeaturesDescription.ts",
@@ -2967,6 +3011,14 @@
     "description": "marketplace/resources/usage/ResourceUsageForm.tsx",
     "message": "Each usage report must be connected with a billing plan to assure correct calculation of accounting data."
   },
+  "Earth and related environmental sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Earth and related environmental sciences"
+  },
+  "Economics and business": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Economics and business"
+  },
   "Edit Access Subnet": {
     "description": "customer/details/AccessSubnetEditDialog.tsx",
     "message": "Edit Access Subnet"
@@ -3107,6 +3159,10 @@
     "description": "administration/agreements/UserAgreementsEditButton.tsx, administration/notifications/NotificationUpdateButton.tsx, administration/organizations/OrganizationGroupEditButton.tsx, administration/organizations/OrganizationGroupFromDialog.tsx, administration/providers/ProviderCard.tsx, broadcasts/BroadcastTemplateUpdateButton.tsx, customer/details/AccessSubnetEditButton.tsx, customer/payment-profiles/PaymentProfileEditButton.tsx, customer/payments/EditPaymentButton.tsx, customer/team/EditProjectUserButton.tsx, customer/team/UserEditButton.tsx, issues/comments/IssueCommentItem.tsx, marketplace/category/admin/CategoryEditButton.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupEditButton.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/deploy/DeployPage.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/list/EditOfferingButton.tsx, marketplace/offerings/update/RowEditButton.tsx, marketplace/offerings/update/attributes/EditAttributeButton.tsx, marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx, marketplace/resources/actions/EditAction.tsx, marketplace/resources/options/UpdateResourceOptionButton.tsx, marketplace/robot-accounts/RobotAccountEditButton.tsx, marketplace/service-providers/ProviderCampaignUpdateButton.tsx, marketplace/service-providers/ProviderOfferingUserUpdateButton.tsx, marketplace/service-providers/UpdateOfferingPermissionExpirationTimeButton.tsx, openstack/openstack-backup/actions/EditAction.tsx, openstack/openstack-backup-schedule/actions/EditAction.tsx, openstack/openstack-instance/actions/EditAction.tsx, openstack/openstack-network/actions/EditNetworkAction.tsx, openstack/openstack-security-groups/EditAction.tsx, openstack/openstack-snapshot/EditAction.tsx, openstack/openstack-snapshot-schedule/actions/EditAction.tsx, openstack/openstack-subnet/EditSubnetAction.tsx, openstack/openstack-tenant/actions/EditAction.tsx, openstack/openstack-volume/actions/EditAction.tsx, organization/OrganizationUIView.tsx, project/ProjectContainer.tsx, project/team/EditUserButton.tsx, proposals/call-management/CallEditButton.tsx, proposals/call-management/CallFormDialog.tsx, proposals/details/CallTabs.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx, proposals/round/allocation/EditAllocationInfoButton.tsx, proposals/round/allocation/EditRoundAllocationDialog.tsx, proposals/round/review/EditReviewInfoButton.tsx, proposals/round/review/EditRoundReviewDialog.tsx, proposals/round/submission/EditRoundSubmissionDialog.tsx, proposals/round/submission/EditSubmissionInfoButton.tsx, proposals/update/general/EditGeneralInfoButton.tsx, rancher/cluster/hpas/HPAUpdateButton.tsx, slurm/EditAction.tsx, user/dashboard/UserProfileHero.tsx, vmware/actions/EditAction.tsx",
     "message": "Edit"
   },
+  "Educational sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Educational sciences"
+  },
   "Effective ID": {
     "description": "marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/PublicResourcesList.tsx",
     "message": "Effective ID"
@@ -3114,6 +3170,10 @@
   "Egress": {
     "description": "openstack/openstack-security-groups/rule-editor/DirectionField.tsx, openstack/openstack-security-groups/utils.ts",
     "message": "Egress"
+  },
+  "Electrical engineering, electronic engineering, information engineering": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Electrical engineering, electronic engineering, information engineering"
   },
   "Email address": {
     "description": "user/hooks/HookForm.tsx",
@@ -3294,6 +3354,14 @@
   "Environment variables have been updated successfully.": {
     "description": "marketplace/offerings/update/integration/EditVarsDialog.tsx",
     "message": "Environment variables have been updated successfully."
+  },
+  "Environmental biotechnology": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Environmental biotechnology"
+  },
+  "Environmental engineering": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Environmental engineering"
   },
   "Erred resources": {
     "description": "marketplace/service-providers/dashboard/ProviderWidgets.tsx",
@@ -3999,9 +4067,17 @@
     "description": "administration/organizations/OrganizationCostPoliciesList.tsx, customer/cost-policies/CostPoliciesList.tsx",
     "message": "Has fired"
   },
+  "Health biotechnology": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Health biotechnology"
+  },
   "Health checks": {
     "description": "administration/dashboard/HealthChecks.tsx",
     "message": "Health checks"
+  },
+  "Health sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Health sciences"
   },
   "Healthy": {
     "description": "administration/dashboard/AdministrationProfile.tsx",
@@ -4038,6 +4114,10 @@
   "Hide": {
     "description": "form/SecretField.tsx, marketplace/SecretValueField.tsx",
     "message": "Hide"
+  },
+  "History and archaeology": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "History and archaeology"
   },
   "Home directory prefix": {
     "description": "marketplace/UserPluginOptionsForm.tsx",
@@ -4310,6 +4390,10 @@
   "Incorrect organization details": {
     "description": "customer/details/CustomerErrorDialog.tsx",
     "message": "Incorrect organization details"
+  },
+  "Industrial biotechnology": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Industrial biotechnology"
   },
   "Industry project": {
     "description": "marketplace-remote/ProjectUpdateRequestExpandable.tsx, user/affiliations/BaseProjectsList.tsx",
@@ -4759,6 +4843,10 @@
     "description": "navigation/header/LanguageSelectorDropdown.tsx",
     "message": "Language"
   },
+  "Languages and literature": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Languages and literature"
+  },
   "Languages": {
     "description": "administration/routes.ts",
     "message": "Languages"
@@ -4786,6 +4874,10 @@
   "Latest review completion date": {
     "description": "proposals/round/review/RoundReviewSection.tsx, proposals/update/rounds/WizardFormSecondPage.tsx",
     "message": "Latest review completion date"
+  },
+  "Law": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Law"
   },
   "Learn more": {
     "description": "auth/HeroButton.tsx, navigation/cookies/CookiesConsent.tsx",
@@ -5047,6 +5139,14 @@
     "description": "marketplace/resources/mass-actions/MultiMoveDialog.tsx",
     "message": "Mass move resources"
   },
+  "Materials engineering": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Materials engineering"
+  },
+  "Mathematics": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Mathematics"
+  },
   "Max # of VM snapshots": {
     "description": "openstack/openstack-backup-schedule/OpenStackBackupScheduleSummary.tsx",
     "message": "Max # of VM snapshots"
@@ -5131,9 +5231,21 @@
     "description": "marketplace/offerings/PriceList.tsx, marketplace/offerings/update/components/ComponentMeasuredUnitField.tsx, marketplace/orders/details/LimitsSection.tsx",
     "message": "Measured unit"
   },
+  "Mechanical engineering": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Mechanical engineering"
+  },
+  "Media and communications": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Media and communications"
+  },
   "Media": {
     "description": "customer/details/CustomerManagePageBar.tsx",
     "message": "Media"
+  },
+  "Medical engineering": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Medical engineering"
   },
   "Member": {
     "description": "customer/team/CustomerUsersList.tsx, project/team/ProjectUsersList.tsx",
@@ -5402,6 +5514,10 @@
   "Namespace": {
     "description": "rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/ClusterWorkloadsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, rancher/cluster/hpas/HPACreateDialog.tsx, rancher/template/NamespaceField.tsx",
     "message": "Namespace"
+  },
+  "Nano technology": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Nano technology"
   },
   "Native name": {
     "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, invitations/actions/UserDetailsGroup.tsx, marketplace/service-providers/ProviderDetailsBody.tsx, user/support/UserDetailsTable.tsx, user/support/UserEditForm.tsx",
@@ -6387,9 +6503,33 @@
     "description": "administration/dashboard/AdminStatistics.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/routes.ts, broadcasts/BroadcastExpandableRow.tsx, broadcasts/BroadcastForm.tsx, broadcasts/RecipientsList.tsx, customer/list/CustomerList.tsx, marketplace/offerings/OfferingDetailsUIView.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/resources/details/ResourceDetailsPage.tsx, marketplace/routes.ts, marketplace/service-providers/ProviderOrganizationsList.tsx, marketplace/service-providers/ProviderUserCustomersList.tsx, navigation/header/search/SearchPopover.tsx, navigation/sidebar/OrganizationsListMenu.tsx, organization/OrganizationUIView.tsx, project/ProjectContainer.tsx, proposals/round/RoundUIView.tsx, proposals/utils.ts, resource/support/SharedProviderTabs.tsx, user/affiliations/BaseOrganizationsList.tsx",
     "message": "Organizations"
   },
+  "Other agricultural sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Other agricultural sciences"
+  },
+  "Other engineering and technologies": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Other engineering and technologies"
+  },
+  "Other humanities": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Other humanities"
+  },
+  "Other medical sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Other medical sciences"
+  },
+  "Other natural sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Other natural sciences"
+  },
   "Other requirements?": {
     "description": "marketplace/offerings/details/PublicOfferingPricing.tsx",
     "message": "Other requirements?"
+  },
+  "Other social sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Other social sciences"
   },
   "Others": {
     "description": "reporting/invoices/utils.ts",
@@ -6703,6 +6843,10 @@
     "description": "administration/hooks/HooksList.tsx",
     "message": "Person"
   },
+  "Philosophy, ethics and religion": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Philosophy, ethics and religion"
+  },
   "Phone number": {
     "description": "customer/details/CustomerContactPanel.tsx, customer/details/EditFieldDialog.tsx, user/affiliations/BaseOrganizationsList.tsx, user/support/UserEditForm.tsx, user/support/UserList.tsx",
     "message": "Phone number"
@@ -6718,6 +6862,10 @@
   "Phone: {phone_number}": {
     "description": "marketplace/service-providers/CustomerContactColumn.tsx",
     "message": "Phone: {phone_number}"
+  },
+  "Physical sciences": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Physical sciences"
   },
   "Plan capacity is full.": {
     "description": "marketplace/resources/change-plan/utils.tsx",
@@ -6930,6 +7078,10 @@
   "Policy": {
     "description": "openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-tenant/actions/CreateServerGroupForm.tsx, project/utils.ts",
     "message": "Policy"
+  },
+  "Political science": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Political science"
   },
   "Port has been created.": {
     "description": "vmware/actions/CreatePortDialog.tsx",
@@ -7442,6 +7594,10 @@
   "Provision new resource": {
     "description": "marketplace/orders/details/OrderDetailsQuickBody.tsx",
     "message": "Provision new resource"
+  },
+  "Psychology": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Psychology"
   },
   "Public calls": {
     "description": "proposals/PublicCallsList.tsx",
@@ -9495,6 +9651,14 @@
     "description": "openstack/openstack-instance/tabs.ts, openstack/openstack-tenant/tabs.ts, openstack/openstack-volume/tabs.ts",
     "message": "Snapshots"
   },
+  "Social and economic geography": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Social and economic geography"
+  },
+  "Sociology": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Sociology"
+  },
   "Some functionality may not be accessible.": {
     "description": "table/HiddenActionsMessage.tsx",
     "message": "Some functionality may not be accessible."
@@ -9814,6 +9978,10 @@
   "System": {
     "description": "marketplace/resources/resource-pending/OrderErredView.tsx",
     "message": "System"
+  },
+  "Systems engineering": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Systems engineering"
   },
   "TAX": {
     "description": "invoices/details/InvoiceDetails.tsx",
@@ -12402,6 +12570,10 @@
   "Version": {
     "description": "administration/TelemetryExampleDialog.tsx, administration/dashboard/AdministrationProfile.tsx, marketplace/offerings/details/PublicOfferingGeneral.tsx, navigation/AppFooter.tsx, rancher/cluster/apps/ApplicationDetailsDialog.tsx, rancher/template/ApplicationConfiguration.tsx",
     "message": "Version"
+  },
+  "Veterinary science": {
+    "description": "project/OECD_FOS_2007_CODES.ts",
+    "message": "Veterinary science"
   },
   "View YAML": {
     "description": "rancher/cluster/ViewYAMLButton.tsx",

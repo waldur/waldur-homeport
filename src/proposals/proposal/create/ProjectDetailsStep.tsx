@@ -1,4 +1,3 @@
-import { useAsync } from 'react-use';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
@@ -12,7 +11,7 @@ import {
   VStepperFormStepProps,
 } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import { loadOecdCodes } from '@waldur/project/api';
+import { OECD_FOS_2007_CODES } from '@waldur/project/OECD_FOS_2007_CODES';
 import { ProposalReview } from '@waldur/proposals/types';
 import { ActionButton } from '@waldur/table/ActionButton';
 
@@ -25,7 +24,6 @@ const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
 export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const reviews: ProposalReview[] = props.params?.reviews;
-  const { loading, value: oecdCodes } = useAsync(loadOecdCodes);
 
   return (
     <VStepperFormStepCard
@@ -33,7 +31,6 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       step={props.step}
       id={props.id}
       completed={props.observed}
-      loading={loading}
       actions={
         <div className="d-flex justify-content-end flex-grow-1">
           <ActionButton
@@ -121,7 +118,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_has_civilian_purpose"
       />
-      {oecdCodes && isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
+      {isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
         <Field
           name="oecd_fos_2007_code"
           component={FormGroup}
@@ -137,7 +134,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           }
         >
           <SelectField
-            options={oecdCodes}
+            options={OECD_FOS_2007_CODES}
             getOptionValue={(option) => option.value}
             getOptionLabel={(option) => `${option.value}. ${option.label}`}
             isClearable={true}

@@ -25,6 +25,7 @@ import { getCustomer, getWorkspace } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
 import * as api from './api';
+import { OECD_FOS_2007_CODES } from './OECD_FOS_2007_CODES';
 import { ProjectNameField } from './ProjectNameField';
 
 export interface ProjectCreateFormData {
@@ -36,10 +37,8 @@ export interface ProjectCreateFormData {
 
 const loadData = async () => {
   const projectTypes = await api.loadProjectTypes();
-  const oecdCodes = await api.loadOecdCodes();
   return {
     projectTypes,
-    oecdCodes,
   };
 };
 
@@ -87,7 +86,7 @@ export const ProjectCreateForm = reduxForm<
               'Please select OECD code corresponding to field of science and technology',
             )}
             name="oecd_fos_2007_code"
-            options={value.oecdCodes}
+            options={OECD_FOS_2007_CODES}
             getOptionValue={(option) => option.value}
             getOptionLabel={(option) => `${option.value}. ${option.label}`}
             isClearable={true}

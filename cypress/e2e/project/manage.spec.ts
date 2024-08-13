@@ -70,7 +70,6 @@ describe('Project manage', { testIsolation: false }, () => {
       .mockChecklists()
       .mockCustomers()
       .setToken()
-      .intercept('GET', '/api/projects/oecd_codes/', [])
       .fixture(projectFixturePath)
       .then((project) => {
         // Assume next year date as project end date, because the date-picker does not accept the date before today.

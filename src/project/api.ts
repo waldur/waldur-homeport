@@ -11,8 +11,6 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { InvoiceSummary } from '@waldur/dashboard/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
-import { OecdCode } from './types';
-
 export const getProject = (projectId: string) =>
   getById<Project>('/projects/', projectId);
 
@@ -80,9 +78,6 @@ export const deleteProject = (projectId: string) =>
 
 export const loadProjectTypes = () =>
   get<{ url; name }[]>(`/project-types/`).then((response) => response.data);
-
-export const loadOecdCodes = () =>
-  get<OecdCode[]>(`/projects/oecd_codes/`).then((response) => response.data);
 
 export const dangerouslyUpdateProject = (cache, project) => {
   cache.name = project.name;

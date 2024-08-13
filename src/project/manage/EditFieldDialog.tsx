@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import { pick } from 'lodash';
 import { DateTime } from 'luxon';
 import { useCallback } from 'react';
@@ -6,8 +5,6 @@ import { connect } from 'react-redux';
 import { Field, SubmissionError, reduxForm } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { SelectField, SubmitButton, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
@@ -23,8 +20,8 @@ import { getConfig } from '@waldur/store/config';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { updateProject } from '../actions';
-import { loadOecdCodes } from '../api';
 import { EDIT_PROJECT_FORM_ID } from '../constants';
+import { OECD_FOS_2007_CODES } from '../OECD_FOS_2007_CODES';
 import { ProjectNameField } from '../ProjectNameField';
 import { EditProjectProps } from '../types';
 
@@ -53,13 +50,6 @@ export const EditFieldDialogPure = reduxForm<
     },
     [props.updateProject],
   );
-
-  const {
-    data: oecdCodes,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery(['OecdCodes'], loadOecdCodes, { staleTime: 5 * 60 * 1000 });
 
   return (
     <form onSubmit={props.handleSubmit(processRequest)}>
@@ -123,26 +113,20 @@ export const EditFieldDialogPure = reduxForm<
               minDate={DateTime.now().plus({ days: 1 }).toISO()}
             />
           ) : props.resolve.name === 'oecd_fos_2007_code' ? (
-            isLoading ? (
-              <LoadingSpinner />
-            ) : error ? (
-              <LoadingErred loadData={refetch} />
-            ) : oecdCodes ? (
-              <SelectField
-                floating={false}
-                label={translate('OECD FoS code')}
-                help_text={translate(
-                  'Please select OECD code corresponding to field of science and technology',
-                )}
-                name="oecd_fos_2007_code"
-                options={oecdCodes}
-                getOptionValue={(option) => option.value}
-                getOptionLabel={(option) => `${option.value}. ${option.label}`}
-                isClearable={true}
-                validate={isCodeRequired ? required : undefined}
-                required={isCodeRequired}
-              />
-            ) : null
+            <SelectField
+              floating={false}
+              label={translate('OECD FoS code')}
+              help_text={translate(
+                'Please select OECD code corresponding to field of science and technology',
+              )}
+              name="oecd_fos_2007_code"
+              options={OECD_FOS_2007_CODES}
+              getOptionValue={(option) => option.value}
+              getOptionLabel={(option) => `${option.value}. ${option.label}`}
+              isClearable={true}
+              validate={isCodeRequired ? required : undefined}
+              required={isCodeRequired}
+            />
           ) : props.resolve.name === 'backend_id' ? (
             <StringField label={translate('Backend ID')} name="backend_id" />
           ) : null}
