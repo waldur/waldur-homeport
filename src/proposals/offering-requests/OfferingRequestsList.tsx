@@ -10,7 +10,7 @@ import { useTable } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OFFERING_REQUESTS_FILTER_FORM_ID } from '../constants';
-import { formatCallOfferingState } from '../utils';
+import { CallOfferingStateField } from '../details/CallOfferingStateField';
 
 import { OfferingRequestItemActions } from './OfferingRequestItemActions';
 import { OfferingRequestsListExpandableRow } from './OfferingRequestsListExpandableRow';
@@ -64,7 +64,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
           filter: 'call',
         },
         {
-          title: translate('Organization'),
+          title: translate('Call manager'),
           render: ({ row }) => <>{row.call_managing_organisation}</>,
           filter: 'organization',
         },
@@ -74,14 +74,14 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
           filter: 'offering',
         },
         {
-          title: translate('Period'),
+          title: translate('Plan'),
           render: ({ row }) => (
-            <>{row.plan ? row.plan.name : translate('Ordinary plan')}</>
+            <>{row.plan ? row.plan_details.name : translate('Ordinary plan')}</>
           ),
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{formatCallOfferingState(row.state)}</>,
+          render: CallOfferingStateField,
           filter: 'state',
         },
       ]}
