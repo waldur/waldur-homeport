@@ -54,11 +54,13 @@ const savePermissions = async (
         expiration_time: formData.expiration_time,
       });
     } else {
-      await deleteCustomerUser({
-        customer: customer.uuid,
-        user: resolve.customer.uuid,
-        role: resolve.customer.role_name,
-      });
+      if (resolve.customer.role_name) {
+        await deleteCustomerUser({
+          customer: customer.uuid,
+          user: resolve.customer.uuid,
+          role: resolve.customer.role_name,
+        });
+      }
       await addCustomerUser({
         customer: customer.uuid,
         user: resolve.customer.uuid,
