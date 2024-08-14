@@ -16,7 +16,7 @@ export const UserAutocomplete = () => (
         loadOptions={userAutocomplete}
         defaultOptions
         getOptionValue={({ url }) => url}
-        getOptionLabel={({ full_name, email }) => full_name || email}
+        getOptionLabel={({ full_name, username }) => full_name || username}
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
         noOptionsMessage={() => translate('No users')}
