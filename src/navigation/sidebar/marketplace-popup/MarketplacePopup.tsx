@@ -19,12 +19,20 @@ export const RECENTLY_ADDED_OFFERINGS_UUID =
 
 const ADD_RESOURCE_DIALOG_FORM = 'AddResourceDialogForm';
 
+interface MarketplacePopupProps {
+  resolve?: {
+    organization?: Customer;
+    project?: Project;
+    categoryUuid?: string;
+  };
+}
+
 interface FormData {
   organization?: Customer;
   project?: Project;
 }
 
-export const MarketplacePopup = reduxForm<FormData>({
+export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
   form: ADD_RESOURCE_DIALOG_FORM,
   destroyOnUnmount: false,
 })((props) => {
@@ -32,6 +40,14 @@ export const MarketplacePopup = reduxForm<FormData>({
 
   const dispatch = useDispatch<any>();
   const formValues = useSelector(getFormValues(props.form)) as FormData;
+
+  // Init filters (if exists)
+  const [ready, setReady] = useState(false); // To avoid unnecessary fetching of categories data
+  useEffect(() => {
+    dispatch(props.change('organization', props.resolve?.organization));
+    dispatch(props.change('project', props.resolve?.project));
+    setReady(true);
+  }, []);
 
   // Clear project filter if organization is cleared
   useEffect(() => {
@@ -106,11 +122,14 @@ export const MarketplacePopup = reduxForm<FormData>({
           </Row>
         </div>
         <div className="border-bottom mx-7" />
-        <DataLoader
-          filter={filter}
-          customer={formValues?.organization}
-          project={formValues?.project}
-        />
+        {ready && (
+          <DataLoader
+            filter={filter}
+            customer={formValues?.organization}
+            project={formValues?.project}
+            categoryUuid={props.resolve?.categoryUuid}
+          />
+        )}
       </div>
     </ModalDialog>
   );
