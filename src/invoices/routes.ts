@@ -15,16 +15,13 @@ const BillingTabs = lazyComponent(
 
 export const states: StateDeclaration[] = [
   {
-    name: 'organization.billing',
+    name: 'organization-billing.billing',
     url: 'billing/',
     component: BillingTabs,
     data: {
-      breadcrumb: () =>
-        ENV.accountingMode === 'accounting'
-          ? translate('Accounting')
-          : translate('Billing'),
+      breadcrumb: () => translate('Invoices'),
       permissions: [isOwnerOrStaff],
-      priority: 135,
+      priority: 130,
     },
   },
 
