@@ -144,7 +144,7 @@ export interface Offering extends GeolocationPoint {
   organization_groups: OrganizationGroup[];
   parent_description?: string;
   parent_name?: string;
-  getting_started?: any;
+  getting_started?: string;
   integration_status: any;
 }
 
