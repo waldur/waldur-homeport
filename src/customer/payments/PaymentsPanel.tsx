@@ -1,7 +1,10 @@
 import { useEffect, useState, FunctionComponent } from 'react';
+import { Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { Link } from '@waldur/core/Link';
 import { PaymentsList } from '@waldur/customer/payments/PaymentsList';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
 import {
   getCustomer,
@@ -28,6 +31,23 @@ export const PaymentsPanel: FunctionComponent = () => {
     activePaymentProfile
   ) {
     return isStaff || isSupport ? <PaymentsList /> : null;
+  } else if (!activePaymentProfile) {
+    return (
+      <Alert variant="light">
+        {translate(
+          'You do not have an active payment profile, visit {link} to create a payment profile.',
+          {
+            link: (
+              <Link
+                state="organization-payment-profiles"
+                label={translate('Payment profiles')}
+              />
+            ),
+          },
+          formatJsxTemplate,
+        )}
+      </Alert>
+    );
   } else {
     return null;
   }

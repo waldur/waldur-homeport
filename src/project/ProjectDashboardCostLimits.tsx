@@ -70,7 +70,7 @@ export const ProjectDashboardCostLimits = ({
               label: translate('Manage policy'),
               icon: <GearSix />,
               callback: () =>
-                router.stateService.go('organization.cost-policies', {
+                router.stateService.go('organization-cost-policies', {
                   uuid: project.customer_uuid,
                 }),
             }

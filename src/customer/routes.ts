@@ -266,44 +266,53 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'organization-payments',
+    name: 'organization-billing',
     abstract: true,
     parent: 'organization',
     component: UIView,
     url: '',
     data: {
-      breadcrumb: () => translate('Payments'),
+      breadcrumb: () => translate('Accounting'),
       priority: 140,
-      permissions: [
-        (state) => {
-          if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
-            return isStaff(state);
-          }
-          return isOwnerOrStaff(state);
-        },
-      ],
+      permissions: [isOwnerOrStaff],
     },
   },
 
   {
     name: 'organization-payment-profiles',
     url: 'payment-profiles/',
-    parent: 'organization-payments',
+    parent: 'organization-billing',
     component: PaymentProfilesPanel,
     data: {
       breadcrumb: () => translate('Payment profiles'),
+      permissions: [
+        (state) => {
+          if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
+            return isStaff(state);
+          }
+          return true;
+        },
+      ],
     },
   },
 
   {
     name: 'organization-payment-list',
     url: 'payments/',
-    parent: 'organization-payments',
+    parent: 'organization-billing',
     component: CustomerPayments,
     data: {
       breadcrumb: () => translate('Payments list'),
       permissions: [
         (state) => {
+          if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
+            if (!isStaff(state)) {
+              return false;
+            }
+          }
+          if (!state.workspace.customer) {
+            return true;
+          }
           const activePaymentProfile = getActivePaymentProfile(
             state.workspace.customer.payment_profiles,
           );
@@ -314,13 +323,14 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'organization.cost-policies',
+    name: 'organization-cost-policies',
     url: 'cost-policies/',
+    parent: 'organization-billing',
     component: CostPoliciesList,
     data: {
       breadcrumb: () => translate('Cost policies'),
       permissions: [isOwnerOrStaff],
-      priority: 130,
+      priority: 135,
     },
   },
 

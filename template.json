@@ -180,7 +180,7 @@
     "message": "Accounting type"
   },
   "Accounting": {
-    "description": "invoices/list/BillingRecordsList.tsx, invoices/routes.ts, marketplace/orders/details/OrderDetails.tsx",
+    "description": "customer/routes.ts, invoices/list/BillingRecordsList.tsx, marketplace/orders/details/OrderDetails.tsx",
     "message": "Accounting"
   },
   "Accounts": {
@@ -1352,7 +1352,7 @@
     "message": "Billing type"
   },
   "Billing": {
-    "description": "customer/details/CustomerBillingPanel.tsx, customer/details/CustomerManageContainer.tsx, customer/details/CustomerManagePageBar.tsx, invoices/routes.ts",
+    "description": "customer/details/CustomerBillingPanel.tsx, customer/details/CustomerManageContainer.tsx, customer/details/CustomerManagePageBar.tsx",
     "message": "Billing"
   },
   "Biological sciences": {
@@ -4679,6 +4679,10 @@
     "description": "marketplace/deploy/CheckoutFooter.tsx",
     "message": "Invoiced to"
   },
+  "Invoices": {
+    "description": "invoices/routes.ts",
+    "message": "Invoices"
+  },
   "Is Service Desk username the same as in Waldur": {
     "description": "SettingsDescription.ts",
     "message": "Is Service Desk username the same as in Waldur"
@@ -6672,7 +6676,7 @@
     "message": "Payment profile has been updated."
   },
   "Payment profiles": {
-    "description": "customer/routes.ts",
+    "description": "customer/payments/PaymentsPanel.tsx, customer/routes.ts",
     "message": "Payment profiles"
   },
   "Payment succeeded.": {
@@ -6682,10 +6686,6 @@
   "Payments list": {
     "description": "customer/routes.ts",
     "message": "Payments list"
-  },
-  "Payments": {
-    "description": "customer/routes.ts",
-    "message": "Payments"
   },
   "Pending approval by requesting organization": {
     "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
@@ -12798,6 +12798,10 @@
   "You cannot unselect the default language": {
     "description": "administration/languages/LanguageOptionsForm.tsx",
     "message": "You cannot unselect the default language"
+  },
+  "You do not have an active payment profile, visit {link} to create a payment profile.": {
+    "description": "customer/payments/PaymentsPanel.tsx",
+    "message": "You do not have an active payment profile, visit {link} to create a payment profile."
   },
   "You do not have permission to delete invitations.": {
     "description": "invitations/MultiDeleteAction.tsx",
