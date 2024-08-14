@@ -350,7 +350,7 @@
   $color: $grey-700;
   $icon-color: $grey-700;
   $border-color: $grey-300;
-  $bg-color: null;
+  $bg-color: $body-bg;
 
   $color-active: $grey-700;
   $icon-color-active: $grey-700;
@@ -380,7 +380,7 @@
   .btn-check:focus + &,
   &:focus:not(.btn-active):not(:active),
   &.show:not(.btn-active):not(:active) {
-    background-color: unset !important;
+    background-color: $bg-color !important;
     outline: 0;
     border-color: $border-color;
     box-shadow: 0 0 0 0.25rem $gray-200;

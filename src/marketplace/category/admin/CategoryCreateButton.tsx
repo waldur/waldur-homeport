@@ -24,7 +24,7 @@ export const CategoryCreateButton = ({ refetch }) => {
 
   return (
     <ActionButton
-      title={translate('Add category')}
+      title={translate('Add')}
       action={openFormDialog}
       iconNode={<PlusCircle />}
       variant="primary"

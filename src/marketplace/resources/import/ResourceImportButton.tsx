@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { DownloadSimple } from '@phosphor-icons/react';
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -21,9 +21,9 @@ const PureResourceImportButton: React.FC<ResourceImportButtonProps> = (
   props,
 ) => (
   <ActionButton
-    title={translate('Import resource')}
+    title={translate('Import')}
     action={props.openDialog}
-    iconNode={<PlusCircle />}
+    iconNode={<DownloadSimple weight="bold" />}
   />
 );
 

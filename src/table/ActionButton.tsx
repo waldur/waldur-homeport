@@ -34,7 +34,7 @@ export const wrapTooltip = (label, children, rest?) =>
 
 const ActionButtonPure: FC<ActionButtonProps> = ({
   className,
-  variant = 'light',
+  variant = 'outline btn-outline-default',
   ...props
 }) =>
   wrapTooltip(

@@ -20,7 +20,7 @@ const OrganizationCreateButtonPure: FunctionComponent<
 > = ({ isVisible, onClick }) =>
   isVisible ? (
     <ActionButton
-      title={translate('Add organization')}
+      title={translate('Add')}
       action={onClick}
       iconNode={<PlusCircle />}
       variant="primary"

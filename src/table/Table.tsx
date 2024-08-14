@@ -197,7 +197,9 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               </h1>
               <TableRefreshButton {...this.props} />
             </Stack>
-            <div className="d-none d-sm-block">{this.props.tableActions}</div>
+            <div className="d-none d-sm-flex gap-3">
+              {this.props.tableActions}
+            </div>
           </div>
         )}
         <Card

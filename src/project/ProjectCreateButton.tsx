@@ -29,7 +29,7 @@ export const ProjectCreateButton: FC = () => {
   const dispatch = useDispatch();
   return (
     <ActionButton
-      title={translate('Add project')}
+      title={translate('Add')}
       action={() =>
         dispatch(
           openModalDialog(ProjectCreateDialog, {
