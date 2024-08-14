@@ -2831,6 +2831,10 @@
     "description": "table/ExportDialog.tsx",
     "message": "Disable this to export only the rows on the current page"
   },
+  "Disable user termination in user workspace.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Disable user termination in user workspace."
+  },
   "Disable": {
     "description": "administration/notifications/NotificationToggleButton.tsx, administration/roles/RoleToggleButton.tsx",
     "message": "Disable"

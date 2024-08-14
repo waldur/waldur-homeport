@@ -17,7 +17,8 @@ export const CreateOfferingUserDialog = ({
       label: translate('User'),
       type: 'async_select',
       loadOptions: userAutocomplete,
-      getOptionLabel: ({ full_name, username }) => full_name || username,
+      getOptionLabel: ({ full_name, email, username }) =>
+        full_name || email || username,
     },
     {
       name: 'username',
