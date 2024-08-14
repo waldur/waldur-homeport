@@ -147,6 +147,8 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                 name="sponsor_number"
                 label={translate('Sponsor number')}
               />
+            ) : props.resolve.name === 'slug' ? (
+              <StringField name="slug" label={translate('Slug')} />
             ) : // Contact fields
             props.resolve.name === 'email' ? (
               <EmailField name="email" label={translate('Email')} />

@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { getUser } from '@waldur/workspace/selectors';
 import { Project } from '@waldur/workspace/types';
 
 import { FieldEditButton } from './FieldEditButton';
@@ -15,6 +17,7 @@ interface ProjectMetadataProps {
 export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
   project,
 }) => {
+  const user = useSelector(getUser);
   return (
     <FormTable.Card className="card-bordered">
       <FormTable>
@@ -37,7 +40,15 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
           value={project.backend_id || 'N/A'}
           actions={<FieldEditButton project={project} name="backend_id" />}
         />
-        <FormTable.Item label={translate('Slug')} value={project.slug} />
+        <FormTable.Item
+          label={translate('Slug')}
+          value={project.slug}
+          actions={
+            user.is_staff ? (
+              <FieldEditButton project={project} name="slug" />
+            ) : null
+          }
+        />
       </FormTable>
     </FormTable.Card>
   );

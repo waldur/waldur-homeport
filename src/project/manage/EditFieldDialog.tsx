@@ -129,6 +129,8 @@ export const EditFieldDialogPure = reduxForm<
             />
           ) : props.resolve.name === 'backend_id' ? (
             <StringField label={translate('Backend ID')} name="backend_id" />
+          ) : props.resolve.name === 'slug' ? (
+            <StringField label={translate('Slug')} name="slug" />
           ) : null}
         </FormContainer>
       </ModalDialog>

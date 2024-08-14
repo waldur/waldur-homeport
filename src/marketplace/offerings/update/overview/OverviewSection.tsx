@@ -51,6 +51,12 @@ const attributes: Attribute[] = [
     type: 'string',
     maxLength: 200,
   },
+  {
+    key: 'slug',
+    title: translate('Slug'),
+    type: 'string',
+    maxLength: 50,
+  },
 ];
 
 export const OverviewSection: FC<OfferingSectionProps> = (props) => {

@@ -6,6 +6,7 @@ import { CreateLexisLinkAction } from '@waldur/marketplace/resources/lexis/Creat
 import { ShowReportAction } from '@waldur/marketplace/resources/report/ShowReportAction';
 import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
+import { SetSlugAction } from '@waldur/marketplace/resources/SetSlugAction';
 import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
 
@@ -21,6 +22,7 @@ export const ActionsList = [
   ChangePlanAction,
   ChangeLimitsAction,
   SetBackendIdAction,
+  SetSlugAction,
   TerminateAction,
   UnlinkActionItem,
   EditResourceEndDateAction,
