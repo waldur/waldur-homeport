@@ -48,12 +48,6 @@ describe('Public marketplace pages', () => {
     cy.get('.offering-card:contains("Test request-based item")')
       .contains('a', 'View offering')
       .click();
-
-    // Wait until page loaded
-    cy.get('.publicOfferingDetails', { timeout: 5000 }).should(
-      'contain',
-      'Test request-based item',
-    );
   });
 
   it('Assure that public category page is visible without auth token', () => {

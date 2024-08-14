@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { CodePreview } from '@waldur/core/CodePreview';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 
@@ -19,8 +19,7 @@ export const PublicOfferingGettingStarted: FunctionComponent<
       <PublicOfferingCardTitle>
         {translate('Getting started')}
       </PublicOfferingCardTitle>
-      {/* TODO: Replace with getting started content */}
-      <FormattedHtml html={offering.full_description} />
+      <CodePreview template={offering.getting_started} context={{}} />
     </Card.Body>
   </Card>
 );

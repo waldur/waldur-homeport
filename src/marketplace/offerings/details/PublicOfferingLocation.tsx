@@ -13,7 +13,7 @@ interface OwnProps {
   offering: Offering;
 }
 
-export const PublicOfferingFacility: FunctionComponent<OwnProps> = ({
+export const PublicOfferingLocation: FunctionComponent<OwnProps> = ({
   offering,
 }) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
@@ -22,7 +22,7 @@ export const PublicOfferingFacility: FunctionComponent<OwnProps> = ({
     <Card className="mb-10">
       <Card.Body>
         <PublicOfferingCardTitle>
-          {translate('Facility')}
+          {translate('Location')}
         </PublicOfferingCardTitle>
         <Row>
           <Col xs={12} lg className="mb-5 mb-lg-0">

@@ -1204,7 +1204,7 @@
     "message": "Availability"
   },
   "Availability:": {
-    "description": "marketplace/offerings/details/PublicOfferingFacility.tsx",
+    "description": "marketplace/offerings/details/PublicOfferingLocation.tsx",
     "message": "Availability:"
   },
   "Available offerings": {
@@ -1463,10 +1463,6 @@
     "description": "user/support/TermsOfService.tsx",
     "message": "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
   },
-  "By {customer}": {
-    "description": "marketplace/offerings/details/PublicOfferingGeneral.tsx",
-    "message": "By {customer}"
-  },
   "By": {
     "description": "proposals/round/proposals/ProposalsList.tsx",
     "message": "By"
@@ -1636,7 +1632,7 @@
     "message": "Category name"
   },
   "Category": {
-    "description": "marketplace/category/PublicOfferingsList.tsx, marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/details/PublicOfferingGeneral.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/attributes/AttributesSection.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/list/PublicResourcesList.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace-checklist/ChecklistCustomer.tsx, proposals/proposal/create/ResourceRequestsSummary.tsx, proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx",
+    "description": "marketplace/category/PublicOfferingsList.tsx, marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/attributes/AttributesSection.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/list/PublicResourcesList.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace-checklist/ChecklistCustomer.tsx, proposals/proposal/create/ResourceRequestsSummary.tsx, proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx",
     "message": "Category"
   },
   "Caution! You are impersonating {impersonated}. Logged in as: {impersonator}": {
@@ -1912,7 +1908,7 @@
     "message": "Component"
   },
   "Components": {
-    "description": "marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingComponents.tsx, marketplace/offerings/details/PublicOfferingGeneral.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/details/ResourceComponentsDialog.tsx, proposals/offering-requests/OfferingRequestsListExpandableRow.tsx",
+    "description": "marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingComponents.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/details/ResourceComponentsDialog.tsx, proposals/offering-requests/OfferingRequestsListExpandableRow.tsx",
     "message": "Components"
   },
   "Compute generation": {
@@ -3627,10 +3623,6 @@
     "description": "marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingFAQ.tsx",
     "message": "FAQ"
   },
-  "Facility": {
-    "description": "marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingFacility.tsx",
-    "message": "Facility"
-  },
   "Failed to operate with backend.": {
     "description": "resource/state/utils.ts",
     "message": "Failed to operate with backend."
@@ -3916,7 +3908,7 @@
     "message": "Gateway"
   },
   "General": {
-    "description": "marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, project/ProjectManageContainer.tsx, proposals/update/CallUpdateContainer.tsx, proposals/update/general/CallGeneralSection.tsx",
+    "description": "marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, project/ProjectManageContainer.tsx, proposals/update/CallUpdateContainer.tsx, proposals/update/general/CallGeneralSection.tsx",
     "message": "General"
   },
   "Generate Kubeconfig file": {
@@ -4996,7 +4988,7 @@
     "message": "Location of {name} organization"
   },
   "Location": {
-    "description": "azure/AzureResourceSummary.tsx, azure/sql/AzureSQLServerForm.tsx, azure/vm/AzureVirtualMachineForm.tsx, customer/details/CustomerDetailsPanel.tsx, marketplace/offerings/update/overview/OverviewSection.tsx",
+    "description": "azure/AzureResourceSummary.tsx, azure/sql/AzureSQLServerForm.tsx, azure/vm/AzureVirtualMachineForm.tsx, customer/details/CustomerDetailsPanel.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingLocation.tsx, marketplace/offerings/update/overview/OverviewSection.tsx",
     "message": "Location"
   },
   "Log out": {
@@ -5728,7 +5720,7 @@
     "message": "No limits found for this order"
   },
   "No location available": {
-    "description": "marketplace/offerings/details/PublicOfferingFacility.tsx",
+    "description": "marketplace/offerings/details/PublicOfferingLocation.tsx",
     "message": "No location available"
   },
   "No members": {
@@ -9719,10 +9711,6 @@
     "description": "azure/vm/actions/StartAction.tsx, openstack/openstack-instance/actions/StartAction.tsx, proposals/PublicCallsList.tsx, vmware/actions/StartAction.tsx",
     "message": "Start"
   },
-  "Starting at": {
-    "description": "marketplace/offerings/details/PublicOfferingGeneral.tsx",
-    "message": "Starting at"
-  },
   "Starting": {
     "description": "resource/state/constants.ts",
     "message": "Starting"
@@ -12572,7 +12560,7 @@
     "message": "Verifying email change"
   },
   "Version": {
-    "description": "administration/TelemetryExampleDialog.tsx, administration/dashboard/AdministrationProfile.tsx, marketplace/offerings/details/PublicOfferingGeneral.tsx, navigation/AppFooter.tsx, rancher/cluster/apps/ApplicationDetailsDialog.tsx, rancher/template/ApplicationConfiguration.tsx",
+    "description": "administration/TelemetryExampleDialog.tsx, administration/dashboard/AdministrationProfile.tsx, navigation/AppFooter.tsx, rancher/cluster/apps/ApplicationDetailsDialog.tsx, rancher/template/ApplicationConfiguration.tsx",
     "message": "Version"
   },
   "Veterinary science": {

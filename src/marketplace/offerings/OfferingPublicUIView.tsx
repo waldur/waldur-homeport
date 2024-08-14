@@ -24,10 +24,6 @@ import { isExperimentalUiComponentsVisible } from '../utils';
 import { OfferingViewHero } from './OfferingViewHero';
 import { getPublicOfferingBreadcrumbItems } from './utils';
 
-const PublicOfferingGeneral = lazyComponent(
-  () => import('./details/PublicOfferingGeneral'),
-  'PublicOfferingGeneral',
-);
 const PublicOfferingInfo = lazyComponent(
   () => import('./details/PublicOfferingInfo'),
   'PublicOfferingInfo',
@@ -56,9 +52,9 @@ const PublicOfferingPricing = lazyComponent(
   () => import('./details/PublicOfferingPricing'),
   'PublicOfferingPricing',
 );
-const PublicOfferingFacility = lazyComponent(
-  () => import('./details/PublicOfferingFacility'),
-  'PublicOfferingFacility',
+const PublicOfferingLocation = lazyComponent(
+  () => import('./details/PublicOfferingLocation'),
+  'PublicOfferingLocation',
 );
 const PublicOfferingGetHelp = lazyComponent(
   () => import('./details/PublicOfferingGetHelp'),
@@ -66,17 +62,33 @@ const PublicOfferingGetHelp = lazyComponent(
 );
 
 const getTabs = (offering?): PageBarTab[] => {
+  if (!offering) {
+    // Return an empty array or placeholders until the offering is loaded
+    return [];
+  }
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+  const showDescriptionTab =
+    offering?.full_description || offering?.attributes.length;
+
+  const showGettingStartedTab = offering?.getting_started;
+
   return [
-    {
-      title: translate('General'),
-      key: 'general',
-      component: PublicOfferingGeneral,
-    },
-    {
+    showDescriptionTab && {
       title: translate('Description'),
       key: 'description',
       component: PublicOfferingInfo,
+    },
+    showGettingStartedTab
+      ? {
+          title: translate('Getting started'),
+          key: 'getting-started',
+          component: PublicOfferingGettingStarted,
+        }
+      : null,
+    {
+      title: translate('Pricing'),
+      key: 'pricing',
+      component: PublicOfferingPricing,
     },
     {
       title: translate('Components'),
@@ -88,13 +100,6 @@ const getTabs = (offering?): PageBarTab[] => {
           title: translate('Images'),
           key: 'images',
           component: PublicOfferingImages,
-        }
-      : null,
-    showExperimentalUiComponents
-      ? {
-          title: translate('Getting started'),
-          key: 'getting-started',
-          component: PublicOfferingGettingStarted,
         }
       : null,
     showExperimentalUiComponents
@@ -111,16 +116,13 @@ const getTabs = (offering?): PageBarTab[] => {
           component: PublicOfferingReviews,
         }
       : null,
-    {
-      title: translate('Pricing'),
-      key: 'pricing',
-      component: PublicOfferingPricing,
-    },
-    {
-      title: translate('Facility'),
-      key: 'facility',
-      component: PublicOfferingFacility,
-    },
+    offering.latitude && offering.longitude
+      ? {
+          title: translate('Location'),
+          key: 'location',
+          component: PublicOfferingLocation,
+        }
+      : null,
     showExperimentalUiComponents
       ? {
           title: translate('Get help'),
