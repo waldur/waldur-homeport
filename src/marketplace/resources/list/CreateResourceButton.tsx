@@ -34,8 +34,8 @@ export const CreateResourceButton: FC<CreateResourceButtonProps> = (props) => {
   return (
     <ActionButton
       action={openFormDialog}
-      iconNode={<PlusCircle />}
-      title={translate('Add resource')}
+      iconNode={<PlusCircle weight="bold" />}
+      title={translate('Add')}
       variant="primary"
     />
   );

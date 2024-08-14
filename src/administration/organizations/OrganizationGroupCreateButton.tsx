@@ -27,7 +27,7 @@ export const OrganizationGroupCreateButton = ({ refetch }) => {
 
   return (
     <ActionButton
-      title={translate('Add organization group')}
+      title={translate('Add')}
       action={openFormDialog}
       iconNode={<PlusCircle />}
       variant="primary"

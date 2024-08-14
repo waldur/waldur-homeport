@@ -275,10 +275,6 @@
     "description": "proposals/call-management/CallCreateButton.tsx",
     "message": "Add call"
   },
-  "Add category": {
-    "description": "marketplace/category/admin/CategoryCreateButton.tsx",
-    "message": "Add category"
-  },
   "Add comment": {
     "description": "issues/comments/IssueCommentsFormMainContainer.spec.tsx, issues/comments/IssueCommentsFormMainContainer.tsx, proposals/proposal/create-review/AddCommentButton.tsx, proposals/proposal/create-review/CommentFormDialog.tsx",
     "message": "Add comment"
@@ -310,10 +306,6 @@
   "Add filter": {
     "description": "table/TableFiltersMenu.tsx",
     "message": "Add filter"
-  },
-  "Add group": {
-    "description": "marketplace/category/admin/GroupCreateButton.tsx",
-    "message": "Add group"
   },
   "Add identity provider": {
     "description": "administration/providers/CreateProviderDialog.tsx, administration/providers/ProviderCard.tsx",
@@ -351,14 +343,6 @@
     "description": "marketplace/offerings/update/options/AddOptionButton.tsx, marketplace/offerings/update/options/AddOptionDialog.tsx",
     "message": "Add option"
   },
-  "Add organization group": {
-    "description": "administration/organizations/OrganizationGroupCreateButton.tsx",
-    "message": "Add organization group"
-  },
-  "Add organization": {
-    "description": "customer/list/OrganizationCreateButton.tsx",
-    "message": "Add organization"
-  },
   "Add pair": {
     "description": "openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx",
     "message": "Add pair"
@@ -376,11 +360,11 @@
     "message": "Add plan"
   },
   "Add project": {
-    "description": "project/GlobalProjectCreateButton.tsx, project/ProjectCreateButton.tsx, project/ProjectCreateForm.tsx",
+    "description": "project/ProjectCreateForm.tsx",
     "message": "Add project"
   },
   "Add resource": {
-    "description": "marketplace/details/DetailsPage.tsx, marketplace/resources/actions/AddResourceButton.tsx, marketplace/resources/list/CreateResourceButton.tsx, navigation/sidebar/marketplace-popup/MarketplacePopup.tsx, navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx, proposals/proposal/create/resource-requests-step/AddResourceButton.tsx",
+    "description": "marketplace/details/DetailsPage.tsx, marketplace/resources/actions/AddResourceButton.tsx, navigation/sidebar/marketplace-popup/MarketplacePopup.tsx, navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx, proposals/proposal/create/resource-requests-step/AddResourceButton.tsx",
     "message": "Add resource"
   },
   "Add role": {
@@ -416,7 +400,7 @@
     "message": "Add {category}"
   },
   "Add": {
-    "description": "administration/providers/CreateProviderDialog.tsx, customer/team/AddProjectUserButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/deploy/DeployPage.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-instance/deploy/FormNetworkStep.tsx, rancher/cluster/create/FormNodesStep.tsx",
+    "description": "administration/organizations/OrganizationGroupCreateButton.tsx, administration/providers/CreateProviderDialog.tsx, customer/list/OrganizationCreateButton.tsx, customer/team/AddProjectUserButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/category/admin/CategoryCreateButton.tsx, marketplace/category/admin/GroupCreateButton.tsx, marketplace/deploy/DeployPage.tsx, marketplace/resources/list/CreateResourceButton.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-instance/deploy/FormNetworkStep.tsx, project/GlobalProjectCreateButton.tsx, project/ProjectCreateButton.tsx, rancher/cluster/create/FormNodesStep.tsx",
     "message": "Add"
   },
   "Additional account description invisible to user": {
@@ -4344,11 +4328,11 @@
     "message": "Import public key"
   },
   "Import resource": {
-    "description": "marketplace/resources/import/ResourceImportButton.tsx, marketplace/resources/import/ResourceImportDialog.tsx",
+    "description": "marketplace/resources/import/ResourceImportDialog.tsx",
     "message": "Import resource"
   },
   "Import": {
-    "description": "marketplace/resources/import/ImportButton.tsx",
+    "description": "marketplace/resources/import/ImportButton.tsx, marketplace/resources/import/ResourceImportButton.tsx",
     "message": "Import"
   },
   "Importing resources": {

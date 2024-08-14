@@ -34,7 +34,7 @@ export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
   }
   return (
     <ActionButton
-      title={translate('Add project')}
+      title={translate('Add')}
       action={() =>
         dispatch(
           openModalDialog(GlobalProjectCreateDialog, {
