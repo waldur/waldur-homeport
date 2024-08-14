@@ -5135,6 +5135,10 @@
     "description": "resource/summary/ResourceMetadataDialog.tsx",
     "message": "Marketplace UUID"
   },
+  "Marketplace offering": {
+    "description": "marketplace/offerings/OfferingViewHero.tsx",
+    "message": "Marketplace offering"
+  },
   "Marketplace offerings and resources": {
     "description": "features/FeaturesDescription.ts",
     "message": "Marketplace offerings and resources"
@@ -9367,6 +9371,10 @@
     "description": "openstack/openstack-security-groups/SetRulesAction.tsx",
     "message": "Set rules"
   },
+  "Set slug": {
+    "description": "marketplace/resources/SetSlugAction.tsx, marketplace/resources/SetSlugDialog.tsx",
+    "message": "Set slug"
+  },
   "Set static routes": {
     "description": "openstack/openstack-tenant/SetRoutersButton.tsx",
     "message": "Set static routes"
@@ -9631,8 +9639,12 @@
     "description": "openstack/openstack-backup/actions/utils.tsx, openstack/openstack-instance/utils.ts",
     "message": "Skip floating IP assignment"
   },
+  "Slug has been successfully set.": {
+    "description": "marketplace/resources/SetSlugDialog.tsx",
+    "message": "Slug has been successfully set."
+  },
   "Slug": {
-    "description": "customer/details/CustomerDetailsPanel.tsx, marketplace/resources/details/ResourceSummary.tsx, project/manage/ProjectMetadata.tsx, table/slug.tsx",
+    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, marketplace/resources/SetSlugDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectMetadata.tsx, table/slug.tsx",
     "message": "Slug"
   },
   "Snapshot schedule for volume has been created.": {
@@ -11542,6 +11554,10 @@
   "Unable to set backend ID.": {
     "description": "marketplace/resources/SetBackendIdDialog.tsx",
     "message": "Unable to set backend ID."
+  },
+  "Unable to set slug.": {
+    "description": "marketplace/resources/SetSlugDialog.tsx",
+    "message": "Unable to set slug."
   },
   "Unable to show console log.": {
     "description": "resource/actions/OpenConsoleLogActionItem.tsx",

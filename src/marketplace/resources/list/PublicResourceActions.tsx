@@ -8,6 +8,7 @@ import { CreateRobotAccountAction } from '@waldur/marketplace/robot-accounts/Cre
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
 import { MoveResourceAction } from '../actions/MoveResourceAction';
+import { SetSlugAction } from '../SetSlugAction';
 import { TerminateAction } from '../terminate/TerminateAction';
 
 import { ReportUsageAction } from './ReportUsageAction';
@@ -17,6 +18,7 @@ const ActionsList = [
   ShowUsageAction,
   ReportUsageAction,
   SetBackendIdAction,
+  SetSlugAction,
   MoveResourceAction,
   EditResourceEndDateByProviderAction,
   EditResourceEndDateByStaffAction,

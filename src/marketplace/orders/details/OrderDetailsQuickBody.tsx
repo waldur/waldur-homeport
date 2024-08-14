@@ -31,7 +31,7 @@ export const OrderDetailsQuickBody = ({ order }) => {
             <Link
               state="support.detail"
               params={{ issue_uuid: order.issue.uuid }}
-              label={order.issue.key || order.issue.uuid || 'N/A'}
+              label={order.issue.key || order.issue.uuid}
               className="text-link"
             />
           ) : (

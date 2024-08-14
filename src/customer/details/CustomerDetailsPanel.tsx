@@ -12,6 +12,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { SetLocationButton } from '../list/SetLocationButton';
 
@@ -21,6 +22,7 @@ import { CustomerEditPanelProps } from './types';
 
 export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
   const nativeNameVisible = useSelector(getNativeNameVisible);
+  const user = useSelector(getUser);
 
   const dispatch = useDispatch();
   const { mutate: removeLocation, isLoading: isRemovingLocation } = useMutation(
@@ -185,11 +187,20 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
         <FormTable>
           <FormTable.Item
             label={translate('UUID')}
-            value={props.customer.uuid || 'N/A'}
+            value={props.customer.uuid}
           />
           <FormTable.Item
             label={translate('Slug')}
             value={props.customer.slug}
+            actions={
+              user.is_staff ? (
+                <FieldEditButton
+                  customer={props.customer}
+                  name="slug"
+                  callback={props.callback}
+                />
+              ) : null
+            }
           />
           {identifiersRows.map((row) => (
             <FormTable.Item
