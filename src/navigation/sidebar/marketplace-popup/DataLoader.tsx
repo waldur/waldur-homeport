@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -13,12 +13,17 @@ import { RECENTLY_ADDED_OFFERINGS_UUID } from './MarketplacePopup';
 import { OfferingsPanel } from './OfferingsPanel';
 import { fetchCategories, fetchLastNOfferings } from './utils';
 
-export const DataLoader = ({ filter, customer, project }) => {
+export const DataLoader = ({
+  filter,
+  customer,
+  project,
+  categoryUuid = null,
+}) => {
   const [selectedCategory, selectCategory] = useState<Category>();
 
   const { data: lastOfferings } = useQuery(
-    ['MarketplacePopupNOfferings', customer?.uuid, project?.uuid],
-    () => fetchLastNOfferings(customer, project),
+    ['MarketplacePopupNOfferings', customer?.uuid, project?.uuid, categoryUuid],
+    () => (categoryUuid ? null : fetchLastNOfferings(customer, project)),
     { staleTime: 1 * 60 * 1000 },
   );
 
@@ -60,13 +65,35 @@ export const DataLoader = ({ filter, customer, project }) => {
       nonZeroCategories.unshift(recentlyAddedOfferingsCategory);
     }
     // Group categories
-    return getGroupedCategories(nonZeroCategories, categoryGroups);
+    const groupedCategories = getGroupedCategories(
+      nonZeroCategories,
+      categoryGroups,
+    );
+    if (categoryUuid) {
+      const cat = groupedCategories.find((g) => {
+        if (g.categories?.length) {
+          // find in sub-categories
+          return g.categories.some((c) => c.uuid === categoryUuid);
+        }
+        return g.uuid === categoryUuid;
+      });
+
+      return cat ? [cat] : [];
+    }
+    return groupedCategories;
   }, [mainCategories, categoryGroups, lastOfferings]);
 
   const selectCategoryAndLoadData = (category: Category) => {
     if (!category) return;
     selectCategory(category);
   };
+
+  useEffect(() => {
+    // Open category if there is only one item
+    if (categoryUuid && categories.length === 1) {
+      selectCategory(categories[0]);
+    }
+  }, [categoryUuid, categories, selectCategory]);
 
   return (
     <div

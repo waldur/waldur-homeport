@@ -380,7 +380,7 @@
     "message": "Add project"
   },
   "Add resource": {
-    "description": "marketplace/details/DetailsPage.tsx, marketplace/resources/actions/AddResourceButton.tsx, marketplace/resources/list/CreateResourceButton.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, navigation/sidebar/marketplace-popup/MarketplacePopup.tsx, navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx, proposals/proposal/create/resource-requests-step/AddResourceButton.tsx",
+    "description": "marketplace/details/DetailsPage.tsx, marketplace/resources/actions/AddResourceButton.tsx, marketplace/resources/list/CreateResourceButton.tsx, navigation/sidebar/marketplace-popup/MarketplacePopup.tsx, navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx, proposals/proposal/create/resource-requests-step/AddResourceButton.tsx",
     "message": "Add resource"
   },
   "Add role": {

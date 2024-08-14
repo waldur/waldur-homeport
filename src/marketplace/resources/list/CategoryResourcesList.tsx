@@ -145,7 +145,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       {isFeatureVisible(MarketplaceFeatures.import_resources) && (
         <ResourceImportButton category_uuid={ownProps.category_uuid} />
       )}
-      <CreateResourceButton category_uuid={ownProps.category_uuid} />
+      <CreateResourceButton categoryUuid={ownProps.category_uuid} />
     </>
   );
 
