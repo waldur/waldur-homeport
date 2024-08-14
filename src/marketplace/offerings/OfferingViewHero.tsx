@@ -12,6 +12,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
 import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { Field } from '@waldur/resource/summary';
 import {
@@ -56,6 +57,8 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         : getProviderOffering(props.offeringUuid),
     { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
   );
+
+  useTitle(offering ? offering.name : translate('Marketplace offering'));
 
   const goTo = (stateName) =>
     router.stateService.go(
