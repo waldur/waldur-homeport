@@ -496,7 +496,7 @@
     "message": "Alert"
   },
   "All actions": {
-    "description": "invitations/InvitationsMultiSelectActions.tsx, marketplace/resources/ResourceActions.tsx, marketplace/resources/mass-actions/ResourceMultiSelectAction.tsx",
+    "description": "invitations/InvitationsMultiSelectActions.tsx, marketplace/orders/actions/OrderActionsButton.tsx, marketplace/resources/ResourceActions.tsx, marketplace/resources/mass-actions/ResourceMultiSelectAction.tsx",
     "message": "All actions"
   },
   "All calls": {
@@ -7816,7 +7816,7 @@
     "message": "Refresh page"
   },
   "Refresh": {
-    "description": "marketplace/orders/actions/OrderRefreshButton.tsx, marketplace/resources/details/RefreshButton.tsx, navigation/BackendHealthStatusDialog.tsx",
+    "description": "marketplace/common/RefreshButton.tsx, navigation/BackendHealthStatusDialog.tsx",
     "message": "Refresh"
   },
   "Regenerate": {

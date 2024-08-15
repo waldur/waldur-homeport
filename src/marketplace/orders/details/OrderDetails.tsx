@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 
 import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
 import { translate } from '@waldur/i18n';
+import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { PlanSection } from '@waldur/marketplace/details/plan/PlanSection';
 import { getOrderBreadcrumbItems } from '@waldur/marketplace/utils';
@@ -11,7 +12,6 @@ import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
 import { OrderActionsButton } from '../actions/OrderActionsButton';
-import { OrderRefreshButton } from '../actions/OrderRefreshButton';
 
 import { ErrorDetailsTab } from './ErrorDetailsTab';
 import { LimitsSection } from './LimitsSection';
@@ -81,9 +81,10 @@ interface OrderDetailsProps {
   order: any;
   data: any;
   refetch: any;
+  isRefetching: boolean;
 }
 
-const PageHero = ({ data }) => (
+const PageHero = ({ data, isRefetching }) => (
   <PublicDashboardHero2
     className="container-fluid mb-8 mt-6"
     logo={data.offering.thumbnail}
@@ -93,7 +94,7 @@ const PageHero = ({ data }) => (
     quickBody={<OrderDetailsQuickBody order={data.order} />}
     quickActions={
       <div className="d-flex flex-column flex-wrap gap-2">
-        <OrderRefreshButton loadData={data.refetch} />
+        <RefreshButton refetch={data.refetch} isLoading={isRefetching} />
         <OrderActionsButton order={data.order} loadData={data.refetch} />
       </div>
     }
@@ -104,7 +105,7 @@ const PageHero = ({ data }) => (
 
 export const OrderDetails: FunctionComponent<OrderDetailsProps> = (data) => {
   useTitle(translate('Order details'));
-  usePageHero(<PageHero data={data} />);
+  usePageHero(<PageHero data={data} isRefetching={data.isRefetching} />);
   const breadcrumbItems = useMemo(
     () => getOrderBreadcrumbItems(data.order),
     [data.order],
