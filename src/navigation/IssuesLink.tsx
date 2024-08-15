@@ -15,6 +15,7 @@ const QuickIssueContainer = lazyComponent(
 export const IssuesLink: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
+  const showIssues = useSelector(hasSupport);
 
   const openDrawer = () => {
     dispatch(
@@ -24,7 +25,7 @@ export const IssuesLink: React.FC = () => {
     );
   };
 
-  return hasSupport && user ? (
+  return showIssues && user ? (
     <span className="menu-link px-2">
       <span className="menu-title" aria-hidden="true" onClick={openDrawer}>
         {translate('Issues')}
