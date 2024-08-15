@@ -91,6 +91,7 @@ describe('Project manage', { testIsolation: false }, () => {
 
   it('Assure that image tab view is present', () => {
     cy.fixture(projectFixturePath).then((project) => {
+      cy.visit(`/projects/${project.uuid}/manage/?tab=avatar`).waitForPage();
       cy.get('form .card-body div.image-input').should(
         project.image ? 'not.have.class' : 'have.class',
         'image-input-empty',

@@ -24,14 +24,14 @@ const ProjectDelete = lazyComponent(
 
 const tabs: PageBarTab[] = [
   {
-    key: 'avatar',
-    component: ProjectAvatar,
-    title: translate('Avatar'),
-  },
-  {
     key: 'general',
     component: ProjectGeneral,
     title: translate('General'),
+  },
+  {
+    key: 'avatar',
+    component: ProjectAvatar,
+    title: translate('Avatar'),
   },
   {
     key: 'metadata',
