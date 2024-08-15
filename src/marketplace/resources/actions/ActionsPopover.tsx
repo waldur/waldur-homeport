@@ -1,7 +1,7 @@
-import { FC, PropsWithChildren, useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -20,8 +20,18 @@ const ModalMessage: FC<PropsWithChildren> = ({ children }) => (
   </div>
 );
 
-export const ActionsPopover = ({ url, name, refetch, ActionsList }) => {
-  const { loading, error, value } = useAsync(() => loadData(url), [url]);
+export const ActionsPopover = ({
+  url,
+  name,
+  refetch: refetchParent,
+  ActionsList,
+}) => {
+  const {
+    isLoading: loading,
+    error,
+    data: value,
+    refetch: refetchChild,
+  } = useQuery(['ActionsPopover', url], () => loadData(url));
   const actionMenuContextValue = useMemo<ResourceActionMenuContextModel>(
     () => ({
       hideDisabled: false,
@@ -30,6 +40,10 @@ export const ActionsPopover = ({ url, name, refetch, ActionsList }) => {
       hideNonImportant: true,
     }),
     [],
+  );
+  const refetch = useCallback(
+    () => Promise.all([refetchParent(), refetchChild()]),
+    [refetchParent, refetchChild],
   );
   const dispatch = useDispatch();
   const callback = () => {
