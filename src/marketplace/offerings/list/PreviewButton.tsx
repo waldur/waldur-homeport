@@ -1,10 +1,10 @@
 import { Eye } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 const PreviewOfferingDialog = lazyComponent(
   () => import('./PreviewOfferingDialog'),
@@ -14,9 +14,10 @@ const PreviewOfferingDialog = lazyComponent(
 export const PreviewButton = ({ offering }) => {
   const dispatch = useDispatch();
   return (
-    <Button
-      variant="secondary"
-      onClick={() =>
+    <ActionButton
+      title={translate('Preview order form')}
+      iconNode={<Eye weight="bold" />}
+      action={() =>
         dispatch(
           openModalDialog(PreviewOfferingDialog, {
             resolve: { offering },
@@ -24,12 +25,6 @@ export const PreviewButton = ({ offering }) => {
           }),
         )
       }
-      size="sm"
-    >
-      <span className="svg-icon svg-icon-4">
-        <Eye />
-      </span>{' '}
-      {translate('Preview order form')}
-    </Button>
+    />
   );
 };

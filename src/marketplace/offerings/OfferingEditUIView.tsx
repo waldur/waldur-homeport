@@ -210,11 +210,13 @@ export const OfferingEditUIView = () => {
 
   usePageHero(
     <OfferingViewHero
-      offeringUuid={offering_uuid}
+      offering={data?.offering}
       refetch={refetch}
       isRefetching={isRefetching}
+      isLoading={isLoading}
+      error={error}
     />,
-    [offering_uuid, refetch, isRefetching],
+    [data?.offering, refetch, isRefetching, isLoading, error],
   );
 
   const breadcrumbItems = useMemo(

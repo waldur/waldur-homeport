@@ -95,17 +95,17 @@ export const OfferingStateActions = ({ offering, refreshOffering }) => {
 
   if (offering.state == ARCHIVED) {
     return (
-      <Button variant="light" size="sm" onClick={() => setDraft()}>
+      <Button variant="light" onClick={() => setDraft()}>
         {draftTitle}
       </Button>
     );
   }
   return (
     <Dropdown as={ButtonGroup}>
-      <Button variant="primary" size="sm" onClick={() => callback()}>
+      <Button variant="primary" onClick={() => callback()}>
         {title}
       </Button>
-      <Dropdown.Toggle split size="sm" variant="primary" className="px-4" />
+      <Dropdown.Toggle split variant="primary" className="px-4" />
       <Dropdown.Menu>
         {offering.state !== DRAFT && (
           <Dropdown.Item onClick={() => setDraft()}>{draftTitle}</Dropdown.Item>
