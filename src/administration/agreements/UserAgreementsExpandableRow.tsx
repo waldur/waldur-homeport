@@ -2,10 +2,8 @@ import Markdown from 'markdown-to-jsx';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { UserAgreementsFormData } from '@waldur/administration/agreements/UserAgreementsForm';
-
 export const UserAgreementsExpandableRow: FunctionComponent<{
-  row: UserAgreementsFormData;
+  row;
 }> = ({ row }) => (
   <Row>
     <Col sm={8}>

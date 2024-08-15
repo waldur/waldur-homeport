@@ -1,21 +1,26 @@
 import { Modal } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 
-import {
-  UserAgreementsForm,
-  UserAgreementsFormData,
-} from '@waldur/administration/agreements/UserAgreementsForm';
+import { patch } from '@waldur/core/api';
+import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 
 interface UserAgreementsEditDialogOwnProps {
   resolve: {
-    initialValues: UserAgreementsFormData;
+    initialValues;
     refetch(): void;
   };
-  formValues: UserAgreementsFormData;
+  formValues;
 }
+
+const agreementTypeLabelMap = {
+  pp: translate('Privacy policy'),
+  tos: translate('Terms of service'),
+};
 
 export const UserAgreementsEditDialog = connect(
   (state: RootState, ownProps: UserAgreementsEditDialogOwnProps) => ({
@@ -23,21 +28,34 @@ export const UserAgreementsEditDialog = connect(
     initialValues: ownProps.resolve.initialValues,
   }),
 )(
-  reduxForm<UserAgreementsFormData, UserAgreementsEditDialogOwnProps>({
+  reduxForm<any, UserAgreementsEditDialogOwnProps>({
     form: 'UserAgreementsForm',
-  })(({ submitting, formValues, handleSubmit, resolve, initialValues }) => {
+  })(({ submitting, handleSubmit, resolve, initialValues }) => {
+    const dispatch = useDispatch();
+    const callback = async (formValues) => {
+      await patch(formValues.url, formValues);
+      await resolve.refetch();
+      dispatch(showSuccess(translate('User agreement was updated')));
+      dispatch(closeModalDialog());
+    };
+
     return (
-      <form>
+      <form onSubmit={handleSubmit(callback)}>
         <Modal.Header closeButton className="without-border">
-          <h2 className="fw-bolder">{translate('Edit user agreements')}</h2>
+          <h2 className="fw-bolder">{translate('Edit user agreement')}</h2>
         </Modal.Header>
-        <UserAgreementsForm
-          submitting={submitting}
-          formValues={formValues}
-          handleSubmit={handleSubmit}
-          initialValues={initialValues}
-          refetch={resolve.refetch}
-        />
+        <FormContainer submitting={submitting}>
+          <TextField
+            label={
+              agreementTypeLabelMap[initialValues.agreement_type.toLowerCase()]
+            }
+            name="content"
+            style={{ height: '520px' }}
+          />
+          <div className="mb-5 text-end">
+            <SubmitButton submitting={submitting} label={translate('Save')} />
+          </div>
+        </FormContainer>
       </form>
     );
   }),

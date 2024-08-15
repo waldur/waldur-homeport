@@ -480,7 +480,7 @@
     "message": "Agreement number"
   },
   "Agreement type": {
-    "description": "administration/agreements/CreateUserAgreementsForm.tsx",
+    "description": "administration/agreements/UserAgreementCreateDialog.tsx",
     "message": "Agreement type"
   },
   "Agricultural biotechnology": {
@@ -2016,7 +2016,7 @@
     "message": "Contact"
   },
   "Content": {
-    "description": "administration/agreements/CreateUserAgreementsForm.tsx, administration/notifications/NotificationForm.tsx",
+    "description": "administration/agreements/UserAgreementCreateDialog.tsx, administration/notifications/NotificationForm.tsx",
     "message": "Content"
   },
   "Continue": {
@@ -3127,9 +3127,9 @@
     "description": "marketplace/offerings/update/integration/EditSchedulesButton.tsx",
     "message": "Edit schedules"
   },
-  "Edit user agreements": {
+  "Edit user agreement": {
     "description": "administration/agreements/UserAgreementsEditDialog.tsx",
-    "message": "Edit user agreements"
+    "message": "Edit user agreement"
   },
   "Edit {name}": {
     "description": "administration/organizations/OrganizationGroupFromDialog.tsx",
@@ -7220,7 +7220,7 @@
     "message": "Privacy policy link"
   },
   "Privacy policy": {
-    "description": "about.tsx, administration/agreements/CreateUserAgreementsForm.tsx, administration/agreements/UserAgreementsForm.tsx, navigation/FooterLinks.tsx",
+    "description": "about.tsx, administration/agreements/UserAgreementCreateDialog.tsx, administration/agreements/UserAgreementsEditDialog.tsx, navigation/FooterLinks.tsx",
     "message": "Privacy policy"
   },
   "Private cloud": {
@@ -8748,7 +8748,7 @@
     "message": "Save summary"
   },
   "Save": {
-    "description": "administration/FeaturesList.tsx, administration/agreements/CreateUserAgreementsForm.tsx, administration/agreements/UserAgreementsForm.tsx, administration/languages/LanguageOptionsForm.tsx, administration/notifications/NotificationForm.tsx, administration/providers/UpdateProviderDialog.tsx, administration/roles/RoleDescriptionForm.tsx, administration/roles/RoleForm.tsx, broadcasts/BroadcastSaveAsTemplateDialog.tsx, broadcasts/BroadcastTemplateForm.tsx, customer/details/CustomerMediaPanel.tsx, customer/team/AddProjectUserDialog.tsx, customer/team/EditProjectUserDialog.tsx, customer/team/EditUserDialog.tsx, map/SetLocationDialog.tsx, marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx, marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx, marketplace/offerings/expandable/utils.ts, marketplace/offerings/update/attributes/EditAttributeDialog.tsx, marketplace/offerings/update/attributes/EditCategoryDialog.tsx, marketplace/offerings/update/components/EditComponentDialog.tsx, marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx, marketplace/offerings/update/integration/EditScriptDialog.tsx, marketplace/offerings/update/integration/EditVarsDialog.tsx, marketplace/offerings/update/options/EditOptionDialog.tsx, marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx, marketplace/offerings/update/plans/EditPlanPricesDialog.tsx, marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx, marketplace/resources/actions/EditResourceEndDateDialog.tsx, marketplace/resources/actions/MoveResourceDialog.tsx, marketplace/resources/mass-actions/MultiMoveDialog.tsx, marketplace/resources/usage/utils.ts, marketplace-checklist/ChecklistCustomer.tsx, project/MoveProjectDialog.tsx, project/manage/ProjectAvatar.tsx, project/team/EditUserDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, proposals/team/AddUserDialog.tsx, proposals/update/documents/AttachDocumentsDialog.tsx, proposals/update/general/EditGeneralInfoDialog.tsx, reporting/invoices/utils.ts, table/SaveFilterDialog.tsx, user/support/UserEditAvatarFormItem.tsx",
+    "description": "administration/FeaturesList.tsx, administration/agreements/UserAgreementCreateDialog.tsx, administration/agreements/UserAgreementsEditDialog.tsx, administration/languages/LanguageOptionsForm.tsx, administration/notifications/NotificationForm.tsx, administration/providers/UpdateProviderDialog.tsx, administration/roles/RoleDescriptionForm.tsx, administration/roles/RoleForm.tsx, broadcasts/BroadcastSaveAsTemplateDialog.tsx, broadcasts/BroadcastTemplateForm.tsx, customer/details/CustomerMediaPanel.tsx, customer/team/AddProjectUserDialog.tsx, customer/team/EditProjectUserDialog.tsx, customer/team/EditUserDialog.tsx, map/SetLocationDialog.tsx, marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx, marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx, marketplace/offerings/expandable/utils.ts, marketplace/offerings/update/attributes/EditAttributeDialog.tsx, marketplace/offerings/update/attributes/EditCategoryDialog.tsx, marketplace/offerings/update/components/EditComponentDialog.tsx, marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx, marketplace/offerings/update/integration/EditScriptDialog.tsx, marketplace/offerings/update/integration/EditVarsDialog.tsx, marketplace/offerings/update/options/EditOptionDialog.tsx, marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx, marketplace/offerings/update/plans/EditPlanPricesDialog.tsx, marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx, marketplace/resources/actions/EditResourceEndDateDialog.tsx, marketplace/resources/actions/MoveResourceDialog.tsx, marketplace/resources/mass-actions/MultiMoveDialog.tsx, marketplace/resources/usage/utils.ts, marketplace-checklist/ChecklistCustomer.tsx, project/MoveProjectDialog.tsx, project/manage/ProjectAvatar.tsx, project/team/EditUserDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, proposals/team/AddUserDialog.tsx, proposals/update/documents/AttachDocumentsDialog.tsx, proposals/update/general/EditGeneralInfoDialog.tsx, reporting/invoices/utils.ts, table/SaveFilterDialog.tsx, user/support/UserEditAvatarFormItem.tsx",
     "message": "Save"
   },
   "Saved filters": {
@@ -10168,7 +10168,7 @@
     "message": "Terms of service link"
   },
   "Terms of service": {
-    "description": "administration/agreements/CreateUserAgreementsForm.tsx, administration/agreements/UserAgreementsForm.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, navigation/FooterLinks.tsx",
+    "description": "administration/agreements/UserAgreementCreateDialog.tsx, administration/agreements/UserAgreementsEditDialog.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, navigation/FooterLinks.tsx",
     "message": "Terms of service"
   },
   "Text has been copied": {
@@ -10900,7 +10900,7 @@
     "message": "Unable to create a campaign."
   },
   "Unable to create a user agreement.": {
-    "description": "administration/agreements/CreateUserAgreementsForm.tsx",
+    "description": "administration/agreements/UserAgreementCreateDialog.tsx",
     "message": "Unable to create a user agreement."
   },
   "Unable to create access subnet.": {
@@ -12228,7 +12228,7 @@
     "message": "Used"
   },
   "User agreement has been created": {
-    "description": "administration/agreements/CreateUserAgreementsForm.tsx",
+    "description": "administration/agreements/UserAgreementCreateDialog.tsx",
     "message": "User agreement has been created"
   },
   "User agreement has been deleted.": {
@@ -12236,7 +12236,7 @@
     "message": "User agreement has been deleted."
   },
   "User agreement was updated": {
-    "description": "administration/agreements/UserAgreementsForm.tsx",
+    "description": "administration/agreements/UserAgreementsEditDialog.tsx",
     "message": "User agreement was updated"
   },
   "User agreements": {
