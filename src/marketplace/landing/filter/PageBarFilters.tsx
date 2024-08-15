@@ -67,7 +67,11 @@ export const PageBarFilters = () => {
             >
               {item.label}
               <Badge bg="" className="badge-outline badge-outline-default">
-                {item.getValueLabel(item.value)}
+                {item.getValueLabel
+                  ? item.getValueLabel(item.value)
+                  : typeof item.value === 'string'
+                    ? item.value
+                    : 'N/A'}
                 <RemoveFilterBadgeButton
                   onClick={() => removeFilter(item.name)}
                 />
