@@ -1,4 +1,5 @@
 import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { INSTANCE_TYPE, VOLUME_TYPE } from '@waldur/openstack/constants';
 import { formatResourceType } from '@waldur/resource/utils';
 
@@ -8,7 +9,6 @@ import { ResourceActions } from '../ResourceActions';
 
 import { getMarketplaceResourceLogo } from './MarketplaceResourceLogo';
 import { InstanceComponents } from './openstack-instance/InstanceComponents';
-import { RefreshButton } from './RefreshButton';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';

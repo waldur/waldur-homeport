@@ -25,7 +25,7 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
   const {
     params: { order_uuid },
   } = useCurrentStateAndParams();
-  const { isLoading, error, data, refetch } = useQuery(
+  const { isLoading, error, data, refetch, isRefetching } = useQuery(
     ['OrderDetails', order_uuid],
     () => loadOrder(order_uuid),
   );
@@ -41,6 +41,7 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
       refetch={refetch}
       order={data.order}
       offering={data.offering}
+      isRefetching={isRefetching}
     />
   ) : null;
 };
