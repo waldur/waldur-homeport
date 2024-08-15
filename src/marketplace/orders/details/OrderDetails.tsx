@@ -94,7 +94,11 @@ const PageHero = ({ data, isRefetching }) => (
     quickBody={<OrderDetailsQuickBody order={data.order} />}
     quickActions={
       <div className="d-flex flex-column flex-wrap gap-2">
-        <RefreshButton refetch={data.refetch} isLoading={isRefetching} />
+        <RefreshButton
+          refetch={data.refetch}
+          isLoading={isRefetching}
+          size="sm"
+        />
         <OrderActionsButton order={data.order} loadData={data.refetch} />
       </div>
     }

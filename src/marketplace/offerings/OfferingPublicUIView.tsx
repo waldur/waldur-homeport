@@ -183,12 +183,14 @@ export const OfferingPublicUIView = () => {
 
   usePageHero(
     <OfferingViewHero
-      offeringUuid={uuid}
+      offering={data?.offering}
       refetch={refetch}
+      isLoading={isLoading}
       isRefetching={isRefetching}
+      error={error}
       isPublic
     />,
-    [uuid, isRefetching, refetch],
+    [data?.offering, isRefetching, refetch, error, isLoading],
   );
 
   const router = useRouter();

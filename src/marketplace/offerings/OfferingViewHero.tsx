@@ -1,12 +1,12 @@
-import { ArrowsClockwise, Question } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
+import { Question, RocketLaunch } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { FC } from 'react';
-import { Button, Nav, Tab } from 'react-bootstrap';
+import { FC, useMemo } from 'react';
+import { Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
+import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
@@ -20,18 +20,21 @@ import {
   isServiceManagerSelector,
 } from '@waldur/workspace/selectors';
 
-import { getProviderOffering, getPublicOffering } from '../common/api';
+import { RefreshButton } from '../common/RefreshButton';
 import { getLabel } from '../common/registry';
+import { Offering } from '../types';
 
 import { OfferingStateActions } from './actions/OfferingStateActions';
 import { PreviewButton } from './list/PreviewButton';
 import { OfferingStateField } from './OfferingStateField';
 
 interface OfferingViewHeroProps {
-  offeringUuid: string;
+  offering: Offering;
   isPublic?: boolean;
   refetch?(): void;
   isRefetching?: boolean;
+  isLoading?: boolean;
+  error?: any;
 }
 
 const serviceManagerOrOwnerOrStaffSelector = createSelector(
@@ -44,19 +47,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
   const router = useRouter();
   const { state } = useCurrentStateAndParams();
 
-  const {
-    data: offering,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery(
-    ['OfferingOfHero', props.offeringUuid, props.isPublic],
-    () =>
-      props.isPublic
-        ? getPublicOffering(props.offeringUuid)
-        : getProviderOffering(props.offeringUuid),
-    { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
-  );
+  const offering = props.offering;
 
   useTitle(offering ? offering.name : translate('Marketplace offering'));
 
@@ -71,10 +62,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
           },
     );
 
-  const refetchData = () => {
-    refetch();
-    props.refetch();
-  };
+  const canDeploy = useMemo(() => offering?.state === 'Active', [offering]);
 
   const isEditPage = [
     'admin-marketplace-offering-update',
@@ -85,12 +73,12 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
     serviceManagerOrOwnerOrStaffSelector,
   );
 
-  if (isLoading) {
+  if (props.isLoading) {
     return <LoadingSpinner />;
-  } else if (error) {
+  } else if (props.error) {
     return (
       <LoadingErred
-        loadData={refetch}
+        loadData={props.refetch}
         message={translate('Unable to load offering details.')}
       />
     );
@@ -177,6 +165,25 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         }
         actions={
           <>
+            {props.isPublic && (
+              <Tip
+                id="tip-deploy"
+                label={
+                  offering.state === 'Paused' ? offering.paused_reason : null
+                }
+              >
+                <Link
+                  state={canDeploy ? 'marketplace-offering-public' : ''}
+                  params={{ offering_uuid: offering.uuid }}
+                  className={`btn btn-primary ${canDeploy ? '' : 'disabled'}`}
+                >
+                  <span className="svg-icon svg-icon-2">
+                    <RocketLaunch weight="bold" />
+                  </span>
+                  {translate('Deploy')}
+                </Link>
+              </Tip>
+            )}
             <PreviewButton offering={offering} />
             {isEditPage && (
               <OfferingStateActions
@@ -184,18 +191,10 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 refreshOffering={props.refetch}
               />
             )}
-            <Button
-              variant="secondary"
-              size="sm"
-              className="btn-icon"
-              onClick={refetchData}
-            >
-              <ArrowsClockwise
-                size={18}
-                data-cy="loading-spinner"
-                className={props.isRefetching ? 'fa-spin' : undefined}
-              />
-            </Button>
+            <RefreshButton
+              refetch={props.refetch}
+              isLoading={props.isRefetching}
+            />
           </>
         }
       >

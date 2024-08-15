@@ -39,7 +39,7 @@ export const ResourceDetailsHero = ({
         title={<ResourceDetailsHeaderTitle resource={resource} />}
         quickActions={
           <div className="d-flex flex-column flex-wrap gap-2">
-            <RefreshButton refetch={refetch} isLoading={isLoading} />
+            <RefreshButton refetch={refetch} isLoading={isLoading} size="sm" />
             <ResourceActions
               resource={{
                 ...resource,
