@@ -3,9 +3,9 @@ import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
+import { router } from '@waldur/router';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
@@ -16,6 +16,11 @@ const CreateReviewDialog = lazyComponent(
   () => import('./create-review/CreateReviewDialog'),
   'CreateReviewDialog',
 );
+
+const linkToProposalDetails = (proposalUuid) =>
+  router.stateService.go('call-management.proposal-details', {
+    proposal_uuid: proposalUuid,
+  });
 
 export const ProposalRowActions = ({ row, refetch }) => {
   const isStaff = useSelector(isStaffSelector);
@@ -81,11 +86,7 @@ export const ProposalRowActions = ({ row, refetch }) => {
           {translate('Create review')}
         </Dropdown.Item>
       )}
-      <Dropdown.Item
-        as={Link}
-        state="call-management.proposal-details"
-        params={{ proposal_uuid: row.uuid }}
-      >
+      <Dropdown.Item onClick={() => linkToProposalDetails(row.uuid)}>
         {translate('View')}
       </Dropdown.Item>
       {!isRejectButtonDisabled && (
