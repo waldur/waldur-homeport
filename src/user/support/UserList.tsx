@@ -9,6 +9,8 @@ import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { RoleEnum } from '@waldur/permissions/enums';
 import { formatRole } from '@waldur/permissions/utils';
@@ -315,6 +317,15 @@ export const UserList: FunctionComponent = () => {
       id: 'preferred_language',
     },
   ];
+
+  if (isFeatureVisible(UserFeatures.show_slug)) {
+    columns.push({
+      title: translate('Shortname'),
+      render: ({ row }) => row.slug,
+      keys: ['slug'],
+      id: 'slug',
+    });
+  }
 
   const validColumns = columns.map((column) => column.id);
   const enabledColumns = ENV.plugins.WALDUR_CORE.USER_TABLE_COLUMNS

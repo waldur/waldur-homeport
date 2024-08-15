@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Panel } from '@waldur/core/Panel';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -43,6 +45,9 @@ const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
       <Row label={translate('Phone numbers')} value={props.user.phone_number} />
       <Row label={translate('Username')} value={props.user.username} />
       <Row label={translate('Email')} value={props.user.email} />
+      {isFeatureVisible(UserFeatures.show_slug) && (
+        <Row label={translate('Shortname')} value={props.user.slug} />
+      )}
       <Row
         label={translate('Preferred language')}
         value={props.user.preferred_language}
