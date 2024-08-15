@@ -48,6 +48,7 @@ export interface UserDetails extends User {
   identity_provider_label?: string;
   identity_provider_management_url?: string;
   identity_provider_fields?: string[];
+  slug?: string;
 }
 
 interface PaymentProfileAttributes {

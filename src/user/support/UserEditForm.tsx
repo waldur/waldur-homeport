@@ -1,6 +1,8 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { showError, showSuccess } from '@waldur/store/notify';
@@ -217,6 +219,14 @@ export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
               requiredMsg: props.isRequired('description')
                 ? getDefaultRequiredMsg(translate('Description'), isSelf)
                 : null,
+            }
+          : null,
+        isFeatureVisible(UserFeatures.show_slug)
+          ? {
+              label: translate('Shortname'),
+              value: props.user.slug,
+              protected: !props.currentUser.is_staff,
+              key: 'slug',
             }
           : null,
       ].filter(Boolean),

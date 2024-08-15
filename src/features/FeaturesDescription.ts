@@ -192,6 +192,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Render preferred language column in users list.'),
       },
       {
+        key: 'show_slug',
+        description: translate('Enable display of slug field in user summary.'),
+      },
+      {
         key: 'ssh_keys',
         description: translate('Enable SSH keys management in user workspace.'),
       },
