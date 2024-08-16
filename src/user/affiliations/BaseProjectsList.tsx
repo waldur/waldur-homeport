@@ -99,6 +99,7 @@ export const BaseProjectsList: FunctionComponent<{
         <>{row.created ? formatDate(row.created) : DASH_ESCAPE_CODE}</>
       ),
       keys: ['created'],
+      orderField: 'created',
       id: 'created',
       export: (row) => formatDateTime(row.created),
     },
