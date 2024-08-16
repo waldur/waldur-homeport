@@ -38,6 +38,13 @@ export const InstanceMainComponent = ({ resourceScope }) => {
             .join(', ')}
           hasCopy
         />
+        <Field
+          label={translate('External IP')}
+          value={resourceScope.offering_external_ips
+            .map((item) => item)
+            .join(', ')}
+          hasCopy
+        />
       </Card.Body>
     </Card>
   );

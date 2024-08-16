@@ -30,6 +30,7 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
         'state',
         'error_message',
         'fixed_ips',
+        'offering_external_ips',
         'project_uuid',
       ],
     }),
