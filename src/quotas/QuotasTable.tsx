@@ -9,7 +9,7 @@ import { themeSelector } from '@waldur/navigation/theme/store';
 
 import { QUOTA_CATEGORIES } from './constants';
 import { Quota } from './types';
-import { formatQuotaValue, formatQuotaName } from './utils';
+import { formatQuotaValue, formatQuotaName, formatQuota } from './utils';
 
 interface Resource {
   quotas: Quota[];
@@ -71,26 +71,7 @@ const ResourceQuotaChart = ({ value, max }) => {
 };
 
 const ResourceQuotaItem = ({ quota }: { quota: Quota }) => {
-  const data = useMemo(() => {
-    const formattedUsage = formatQuotaValue(quota.usage, quota.name);
-    const formattedLimit = formatQuotaValue(quota.limit, quota.name);
-    let usage, usageValue;
-    if (formattedUsage === '∞') {
-      usage = formattedUsage;
-      usageValue = Infinity;
-    } else {
-      usage = String(formattedUsage).match(/\d+/)[0];
-      usageValue = Number(usage);
-    }
-    let limitValue;
-    const limit = formattedLimit;
-    if (formattedLimit === '∞') {
-      limitValue = Infinity;
-    } else {
-      limitValue = Number(String(formattedLimit).match(/\d+/)[0]);
-    }
-    return { usage, usageValue, limit, limitValue };
-  }, [quota]);
+  const data = useMemo(() => formatQuota(quota), [quota]);
 
   return (
     <div className="resource-quota-item fw-bold d-flex mb-6">

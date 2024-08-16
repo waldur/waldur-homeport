@@ -12,6 +12,13 @@ interface ResourceSummaryProps {
 export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
   props,
 ) => {
+  const CustomSummaryComponent = ResourceSummaryRegistry.getCustom(
+    props.resource.resource_type,
+  );
+  if (CustomSummaryComponent) {
+    return <CustomSummaryComponent resource={props.resource} />;
+  }
+
   const SummaryComponent = ResourceSummaryRegistry.get(
     props.resource.resource_type,
   );

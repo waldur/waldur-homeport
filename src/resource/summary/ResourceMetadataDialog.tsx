@@ -1,6 +1,7 @@
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
 
 import { Resource } from '../types';
 
@@ -42,6 +43,22 @@ export const ResourceMetadataDialog = <T extends Resource = any>(
         helpText={translate('Unique ID of a resource in a backend system')}
         hasCopy
       />
+    )}
+    {props.resolve.resource.resource_type === 'OpenStack.Tenant' && (
+      <>
+        <Field
+          label={translate('Internal network ID')}
+          value={
+            (props.resolve.resource as OpenStackTenant).internal_network_id
+          }
+        />
+        <Field
+          label={translate('External network ID')}
+          value={
+            (props.resolve.resource as OpenStackTenant).external_network_id
+          }
+        />
+      </>
     )}
   </ModalDialog>
 );

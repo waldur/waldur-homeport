@@ -15,6 +15,6 @@ const OpenStackRouterSummary = lazyComponent(
   'OpenStackRouterSummary',
 );
 
-ResourceSummary.register('OpenStack.Tenant', OpenStackTenantSummary);
+ResourceSummary.registerCustom('OpenStack.Tenant', OpenStackTenantSummary);
 ResourceSummary.register('OpenStack.Router', OpenStackRouterSummary);
 ActionRegistry.register('OpenStack.Port', [DestroyPortAction]);

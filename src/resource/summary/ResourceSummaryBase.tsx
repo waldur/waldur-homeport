@@ -10,13 +10,19 @@ import { Field } from './Field';
 import { ResourceMetadataLink } from './ResourceMetadataLink';
 import { ResourceSummaryProps } from './types';
 
+interface ExtraProps {
+  hideBaseInfo?: boolean;
+}
+
 export function ResourceSummaryBase<T extends Resource = Resource>(
-  props: ResourceSummaryProps<T>,
+  props: ResourceSummaryProps<T> & ExtraProps,
 ) {
   const { resource } = props;
   return (
     <>
-      <Field label={translate('Name')} value={resource.name} hasCopy />
+      {!props.hideBaseInfo && (
+        <Field label={translate('Name')} value={resource.name} hasCopy />
+      )}
       {(resource as any).parent_uuid && (resource as any).parent_name ? (
         <Field
           label={translate('Part of')}
@@ -31,7 +37,12 @@ export function ResourceSummaryBase<T extends Resource = Resource>(
           }
         />
       ) : null}
-      <Field label={translate('State')} value={<ResourceState {...props} />} />
+      {!props.hideBaseInfo && (
+        <Field
+          label={translate('State')}
+          value={<ResourceState {...props} />}
+        />
+      )}
       <ErrorMessageField {...props} />
       {!props.resource.marketplace_offering_uuid && (
         <Field label={translate('Provider')} value={resource.service_name} />
