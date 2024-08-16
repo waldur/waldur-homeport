@@ -2,6 +2,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { titleCase, formatFilesize } from '@waldur/core/utils';
 
 import { QUOTA_NAMES, QUOTA_FILTERS } from './constants';
+import { Quota } from './types';
 
 export const formatQuotaName = (name) => {
   if (QUOTA_NAMES[name]) {
@@ -26,4 +27,32 @@ export const formatQuotaValue = (value, name) => {
   } else {
     return value;
   }
+};
+
+export const formatQuota = (quota: Quota) => {
+  const formattedUsage = formatQuotaValue(quota.usage, quota.name);
+  const formattedLimit = formatQuotaValue(quota.limit, quota.name);
+  let usage, usageValue;
+  if (formattedUsage === '∞') {
+    usage = formattedUsage;
+    usageValue = Infinity;
+  } else {
+    usage = String(formattedUsage).match(/\d+/)[0];
+    usageValue = Number(usage);
+  }
+  let limitValue;
+  const limit = formattedLimit;
+  if (formattedLimit === '∞') {
+    limitValue = Infinity;
+  } else {
+    limitValue = Number(String(formattedLimit).match(/\d+/)[0]);
+  }
+  return {
+    name: quota.name,
+    label: formatQuotaName(quota.name),
+    usage,
+    usageValue,
+    limit,
+    limitValue,
+  };
 };

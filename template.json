@@ -3616,7 +3616,7 @@
     "message": "External links"
   },
   "External network ID": {
-    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx",
+    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, resource/summary/ResourceMetadataDialog.tsx",
     "message": "External network ID"
   },
   "External username": {
@@ -4496,7 +4496,7 @@
     "message": "Internal name"
   },
   "Internal network ID": {
-    "description": "openstack/openstack-tenant/OpenStackTenantSummary.tsx",
+    "description": "resource/summary/ResourceMetadataDialog.tsx",
     "message": "Internal network ID"
   },
   "Internal network allocation pool": {
@@ -7692,7 +7692,7 @@
     "message": "Quotas have been updated successfully."
   },
   "Quotas": {
-    "description": "marketplace/resources/details/TenantMainComponent.tsx, marketplace/resources/details/fetchData.tsx",
+    "description": "marketplace/resources/details/TenantMainComponent.tsx, marketplace/resources/details/fetchData.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx",
     "message": "Quotas"
   },
   "RAM limit (GB-hours)": {
@@ -9888,7 +9888,7 @@
     "message": "Sum"
   },
   "Summary": {
-    "description": "azure/vm/AzureVirtualMachineSummary.tsx, issues/IssueDetails.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx, openstack/openstack-tenant/TenantInstancesList.tsx, proposals/proposal/create-review/steps/FormSummaryStep.tsx, rancher/cluster/apps/ApplicationDetailsDialog.tsx, rancher/template/TemplateDetail.tsx, resource/summary/VirtualMachineSummary.tsx, vmware/VMwareVirtualMachineSummary.tsx",
+    "description": "azure/vm/AzureVirtualMachineSummary.tsx, issues/IssueDetails.tsx, openstack/openstack-tenant/TenantInstancesList.tsx, proposals/proposal/create-review/steps/FormSummaryStep.tsx, rancher/cluster/apps/ApplicationDetailsDialog.tsx, rancher/template/TemplateDetail.tsx, resource/summary/VirtualMachineSummary.tsx, vmware/VMwareVirtualMachineSummary.tsx",
     "message": "Summary"
   },
   "Support user": {
@@ -13498,10 +13498,6 @@
   "{usage} of {limit} used": {
     "description": "quotas/QuotaUsageBarChart.tsx",
     "message": "{usage} of {limit} used"
-  },
-  "{usage} of {limit} {name}": {
-    "description": "openstack/openstack-tenant/OpenStackTenantSummary.tsx",
-    "message": "{usage} of {limit} {name}"
   },
   "{usage} of {limit}": {
     "description": "quotas/QuotasTable.tsx",
