@@ -38,6 +38,7 @@ export const ClusterTemplatesList: FunctionComponent<{ resourceScope }> = ({
               {row.name}
             </Link>
           ),
+          copyField: (row) => row.name,
           orderField: 'name',
           export: 'name',
         },

@@ -57,6 +57,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     {
       title: translate('Name'),
       render: PublicResourceLink,
+      copyField: (row) => row.name || row.offering_name,
       orderField: 'name',
       export: 'name',
     },

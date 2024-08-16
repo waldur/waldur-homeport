@@ -35,6 +35,7 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
         {
           title: translate('Name'),
           render: ({ row }) => <>{row.name}</>,
+          copyField: (row) => row.name,
         },
         {
           title: translate('By'),

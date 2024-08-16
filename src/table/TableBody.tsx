@@ -4,6 +4,7 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { Tip } from '@waldur/core/Tooltip';
 
 import { TableProps } from './Table';
@@ -45,7 +46,24 @@ const TableCells = ({
             (id) =>
               (columnsMap[id].visible ?? true) && (
                 <td key={id} className={columnsMap[id].className}>
-                  {React.createElement(columnsMap[id].render, { row })}
+                  {(() => {
+                    const renderedContent = React.createElement(
+                      columnsMap[id].render,
+                      { row },
+                    );
+                    const valueToCopy = columnsMap[id].copyField
+                      ? columnsMap[id].copyField(row)
+                      : '';
+                    if (columnsMap[id].copyField) {
+                      return (
+                        <div className="d-flex align-items-center gap-1">
+                          {renderedContent}
+                          <CopyToClipboardButton value={valueToCopy} />
+                        </div>
+                      );
+                    }
+                    return renderedContent;
+                  })()}
                 </td>
               ),
           )
@@ -53,7 +71,23 @@ const TableCells = ({
           (column, colIndex) =>
             (column.visible ?? true) && (
               <td key={colIndex} className={column.className}>
-                {React.createElement(column.render, { row })}
+                {(() => {
+                  const renderedContent = React.createElement(column.render, {
+                    row,
+                  });
+                  const valueToCopy = column.copyField
+                    ? column.copyField(row)
+                    : '';
+                  if (column.copyField) {
+                    return (
+                      <div className="d-flex align-items-center gap-1">
+                        {renderedContent}
+                        <CopyToClipboardButton value={valueToCopy} />
+                      </div>
+                    );
+                  }
+                  return renderedContent;
+                })()}
               </td>
             ),
         )}

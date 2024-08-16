@@ -27,6 +27,7 @@ export const ClusterProjectList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Name'),
           render: ({ row }) => <>{row.name}</>,
+          copyField: (row) => row.name,
           export: 'name',
         },
         {

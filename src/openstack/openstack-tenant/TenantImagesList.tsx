@@ -27,6 +27,7 @@ export const TenantImagesList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Name'),
           render: ({ row }) => row.name,
+          copyField: (row) => row.name,
         },
         {
           title: translate('Minimal RAM'),

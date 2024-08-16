@@ -22,6 +22,7 @@ export const ProviderOfferingsList = (props) => {
           {row.name}
         </Link>
       ),
+      copyField: (row) => row.name,
       orderField: 'name',
     },
     {

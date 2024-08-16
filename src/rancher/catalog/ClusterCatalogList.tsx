@@ -37,6 +37,7 @@ export const ClusterCatalogList: FunctionComponent<{ resourceScope }> = ({
             label={row.name}
           />
         ),
+        copyField: (row) => row.name,
         export: 'name',
       },
       {

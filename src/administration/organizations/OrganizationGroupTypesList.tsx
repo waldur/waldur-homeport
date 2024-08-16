@@ -19,6 +19,7 @@ export const OrganizationGroupTypesList: FunctionComponent = () => {
         {
           title: translate('Name'),
           render: ({ row }) => <>{row.name}</>,
+          copyField: (row) => row.name,
         },
       ]}
       verboseName={translate('Organization group types')}

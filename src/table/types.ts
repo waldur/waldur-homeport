@@ -54,6 +54,7 @@ export interface Column<RowType = any> {
   className?: string;
   orderField?: string;
   visible?: boolean;
+  copyField?: (row: RowType) => string | number;
   /** The keys that are required for optional columns to be fetched. */
   keys?: string[];
   optional?: boolean;

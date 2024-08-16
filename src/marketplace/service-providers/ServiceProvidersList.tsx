@@ -27,6 +27,7 @@ export const ServiceProvidersList: FunctionComponent = () => {
           label={row.customer_name}
         />
       ),
+      copyField: (row) => row.customer_name,
       keys: ['customer_name'],
     },
     {

@@ -30,6 +30,7 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
           {row.username || row.user_uuid}
         </Link>
       ),
+      copyField: (row) => row.username || row.user_uuid,
     },
     {
       title: translate('Created at'),

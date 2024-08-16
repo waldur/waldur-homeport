@@ -30,6 +30,7 @@ export const TenantSnapshotsList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Name'),
           render: ({ row }) => <ResourceName resource={row} />,
+          copyField: (row) => row.name,
           orderField: 'name',
         },
         {

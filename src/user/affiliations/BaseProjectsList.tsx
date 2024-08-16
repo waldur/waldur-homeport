@@ -33,6 +33,7 @@ export const BaseProjectsList: FunctionComponent<{
       title: translate('Name'),
       orderField: 'name',
       render: ProjectLink,
+      copyField: (row) => row.name,
       keys: ['name'],
       id: 'name',
       export: 'name',

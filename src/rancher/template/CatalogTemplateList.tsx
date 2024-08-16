@@ -52,6 +52,7 @@ export const CatalogTemplatesList: FC<OwnProps> = (props) => {
               {row.name}
             </Link>
           ),
+          copyField: (row) => row.name,
           orderField: 'name',
         },
         {
