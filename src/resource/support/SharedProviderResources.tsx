@@ -35,6 +35,7 @@ export const SharedProviderResources: FC<{ provider_uuid: string }> = ({
     {
       title: translate('Name'),
       render: ({ row }) => <ResourceName resource={row} />,
+      copyField: (row) => row.name,
       export: 'name',
     },
     {

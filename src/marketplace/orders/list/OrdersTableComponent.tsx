@@ -55,6 +55,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       ),
       keys: ['attributes'],
       id: 'name',
+      copyField: (row) => row.attributes.name,
       export: (row) => row.attributes.name,
     },
     {

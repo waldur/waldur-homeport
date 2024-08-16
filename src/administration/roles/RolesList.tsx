@@ -31,6 +31,7 @@ export const RolesList = () => {
               )}
             </>
           ),
+          copyField: (row) => row.name,
         },
         {
           title: translate('Scope'),

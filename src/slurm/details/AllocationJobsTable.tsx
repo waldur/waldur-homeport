@@ -15,6 +15,7 @@ export const AllocationJobsTable: FunctionComponent<{ resourceScope }> = ({
     {
       title: translate('Name'),
       render: ({ row }) => <ResourceName resource={row} />,
+      copyField: (row) => row.name,
     },
     {
       title: translate('User'),

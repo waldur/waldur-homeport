@@ -52,6 +52,7 @@ export const PaymentProfileList: FunctionComponent<{}> = () => {
       title: translate('Name'),
       render: ({ row }) => row.name,
       orderField: 'name',
+      copyField: (row) => row.name,
     },
     {
       title: translate('Status'),

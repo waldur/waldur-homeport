@@ -55,6 +55,7 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
         {
           title: translate('Name'),
           render: ({ row }) => row.name,
+          copyField: (row) => row.name,
         },
         {
           title: translate('Coupon'),

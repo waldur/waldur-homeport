@@ -37,6 +37,7 @@ export const OrganizationGroupsList: FunctionComponent = () => {
           title: translate('Name'),
           render: ({ row }) => <>{row.name}</>,
           orderField: 'name',
+          copyField: (row) => row.name,
         },
         {
           title: translate('Organisations'),

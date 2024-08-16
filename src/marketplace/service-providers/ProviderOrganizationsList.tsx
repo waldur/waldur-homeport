@@ -24,6 +24,7 @@ const ProviderOrganizationsListComponent = ({ provider }) => {
     {
       title: translate('Name'),
       render: CustomerNameColumn,
+      copyField: (row) => row.name,
     },
     {
       title: translate('Projects'),

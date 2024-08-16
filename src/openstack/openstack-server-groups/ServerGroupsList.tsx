@@ -38,11 +38,13 @@ export const ServerGroupsList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Name'),
           render: ({ row }) => row.name,
+          copyField: (row) => row.name,
           orderField: 'name',
         },
         {
           title: translate('Policy'),
           render: ({ row }) => ResourcePolicy(row),
+          copyField: null,
           orderField: 'policy',
         },
         {

@@ -38,6 +38,7 @@ export const ProjectsList: FunctionComponent<{}> = () => {
     {
       title: translate('Name'),
       render: ProjectLink,
+      copyField: (row) => row.name,
       orderField: 'name',
       export: 'name',
       id: 'name',

@@ -24,6 +24,7 @@ export const ProviderCampaignResourceExpandable = ({ campaign }) => {
         {
           title: translate('Name'),
           render: PublicResourceLink,
+          copyField: (row) => row.name || row.offering_name,
         },
         {
           title: translate('Category'),

@@ -46,6 +46,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Name'),
       render: PublicResourceLink,
+      copyField: (row) => row.name || row.offering_name,
       orderField: 'name',
       export: 'name',
     },

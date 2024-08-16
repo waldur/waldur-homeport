@@ -34,6 +34,7 @@ export const CustomerQuotasList = () => {
           render: ({ row }) => (
             <>{row.customer_abbreviation || row.customer_name}</>
           ),
+          copyField: (row) => row.customer_abbreviation || row.customer_name,
           orderField: 'name',
         },
         {

@@ -39,6 +39,7 @@ export const TenantVolumesList: FunctionComponent<{ resource }> = ({
         {
           title: translate('Name'),
           render: ({ row }) => <ResourceName resource={row} />,
+          copyField: (row) => row.name,
         },
         {
           title: translate('Size'),

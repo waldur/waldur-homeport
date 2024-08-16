@@ -32,6 +32,7 @@ export const OfferingImagesList: FunctionComponent<{ offering }> = ({
     {
       title: translate('Name'),
       render: ({ row }) => row.name,
+      copyField: (row) => row.name,
       orderField: 'name',
       export: 'name',
     },
