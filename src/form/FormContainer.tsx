@@ -7,7 +7,6 @@ export interface FormContainerProps {
   className?: string;
   submitting: boolean;
   clearOnUnmount?: boolean;
-  floating?: boolean;
 }
 
 export const FormContainer: React.FC<PropsWithChildren<FormContainerProps>> = (
@@ -20,7 +19,6 @@ export const FormContainer: React.FC<PropsWithChildren<FormContainerProps>> = (
       {React.Children.map(props.children, (input: any) =>
         input && input.props && input.props.name ? (
           <Field
-            floating={props.floating}
             {...input.props}
             component={FormGroup}
             disabled={props.submitting || input.props.disabled}

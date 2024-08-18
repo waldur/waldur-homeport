@@ -132,7 +132,6 @@ export const ConfigurationEditDialog = reduxForm<
             <TextField name="value" label={item.description} />
           ) : item.key === 'SIDEBAR_STYLE' ? (
             <SelectField
-              floating={false}
               name="value"
               label={item.description}
               options={SIDEBAR_STYLES}
@@ -140,7 +139,6 @@ export const ConfigurationEditDialog = reduxForm<
             />
           ) : item.key === 'WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE' ? (
             <SelectField
-              floating={false}
               name="value"
               label={item.description}
               options={SUPPORT_BACKENDS}

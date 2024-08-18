@@ -80,7 +80,6 @@ export const ProjectCreateForm = reduxForm<
         )}
         {isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
           <SelectField
-            floating={false}
             label={translate('OECD FoS code')}
             help_text={translate(
               'Please select OECD code corresponding to field of science and technology',

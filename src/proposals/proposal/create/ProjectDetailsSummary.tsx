@@ -39,7 +39,6 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         tooltip={translate(
           'Short title for the project, which explains the project goal as much as possible.',
         )}
-        floating
         proposal={proposal}
         onAddCommentClick={onAddCommentClick}
         reviews={reviews}
@@ -50,7 +49,6 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         valueField="project_summary"
         commentField="comment_project_summary"
         tooltip={translate('Brief description of the project.')}
-        floating
         onAddCommentClick={onAddCommentClick}
         reviews={reviews}
         proposal={proposal}
@@ -63,7 +61,6 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         tooltip={translate(
           'Explanation of the scientific case of the project for which the resources are intended to be used.',
         )}
-        floating
         onAddCommentClick={onAddCommentClick}
         reviews={reviews}
         proposal={proposal}
@@ -86,7 +83,6 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
       <ReadOnlyFormControl
         label={translate('Research field (OECD code)')}
         value={proposal.oecd_fos_2007_label || 'N/A'}
-        floating
         actions={
           <QuestionMark
             tooltip={translate(
@@ -117,7 +113,6 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         tooltip={translate(
           'Expected project duration in days once resources have been granted.',
         )}
-        floating
         onAddCommentClick={onAddCommentClick}
         reviews={reviews}
         proposal={proposal}

@@ -109,7 +109,6 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                   getOptionLabel={(option) => option.name}
                   getOptionValue={(option) => option.value}
                   simpleValue
-                  floating={false}
                 />
               )
             ) : props.resolve.name === 'domain' ? (

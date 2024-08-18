@@ -34,7 +34,6 @@ export const TerminationDateField = ({ offering }) => {
       description={translate(
         'The date is inclusive. Once reached, resource will be scheduled for termination.',
       )}
-      floating
     >
       <DateField {...dateFieldProps} />
     </Field>

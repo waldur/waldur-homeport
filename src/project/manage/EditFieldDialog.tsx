@@ -114,7 +114,6 @@ export const EditFieldDialogPure = reduxForm<
             />
           ) : props.resolve.name === 'oecd_fos_2007_code' ? (
             <SelectField
-              floating={false}
               label={translate('OECD FoS code')}
               help_text={translate(
                 'Please select OECD code corresponding to field of science and technology',

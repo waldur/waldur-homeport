@@ -48,11 +48,7 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
           </>
         }
       >
-        <FormContainer
-          submitting={false}
-          clearOnUnmount={false}
-          floating={true}
-        >
+        <FormContainer submitting={false} clearOnUnmount={false}>
           <StringField
             name="name"
             label={translate('Name')}
@@ -62,7 +58,6 @@ const PaymentProfileUpdateDialog: FunctionComponent<any> = (props) => {
           />
 
           <SelectField
-            floating={false}
             name="payment_type"
             label={translate('Type')}
             required={true}

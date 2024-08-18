@@ -3604,11 +3604,11 @@
     "message": "Extending"
   },
   "External IP": {
-    "description": "azure/vm/AzureVirtualMachineSummary.tsx, resource/summary/VirtualMachineSummary.tsx",
+    "description": "azure/vm/AzureVirtualMachineSummary.tsx, marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx, resource/summary/VirtualMachineSummary.tsx",
     "message": "External IP"
   },
   "External IPs": {
-    "description": "openstack/openstack-tenant/TenantInstancesList.tsx",
+    "description": "openstack/openstack-tenant/OpenStackRouterSummary.tsx, openstack/openstack-tenant/TenantInstancesList.tsx",
     "message": "External IPs"
   },
   "External links": {
@@ -4096,7 +4096,7 @@
     "message": "Hide password"
   },
   "Hide": {
-    "description": "form/SecretField.tsx, marketplace/SecretValueField.tsx",
+    "description": "form/SecretField.tsx, marketplace/SecretValueField.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx",
     "message": "Hide"
   },
   "History and archaeology": {

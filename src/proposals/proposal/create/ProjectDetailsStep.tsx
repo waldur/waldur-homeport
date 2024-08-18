@@ -47,7 +47,6 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         label={translate('Project title')}
         validate={required}
         required
-        floating
         actions={
           <QuestionMark
             tooltip={translate(
@@ -69,7 +68,6 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         label={translate('Project summary')}
         validate={required}
         required
-        floating
         actions={
           <QuestionMark
             tooltip={translate('Brief description of the project.')}
@@ -87,7 +85,6 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         component={FormGroup}
         maxLength={1000}
         label={translate('Detailed description')}
-        floating
         actions={
           <QuestionMark
             tooltip={translate(
@@ -166,7 +163,6 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         label={translate('Project duration in days')}
         validate={[required, number]}
         required
-        floating
         actions={
           <QuestionMark
             tooltip={translate(

@@ -15,7 +15,6 @@ interface CommentSectionProps {
   commentField: string;
   label: string;
   tooltip: string;
-  floating?: boolean;
   onAddCommentClick?;
 }
 
@@ -25,7 +24,6 @@ export const CommentSection: FC<PropsWithChildren<CommentSectionProps>> = ({
   commentField,
   label,
   tooltip,
-  floating,
   onAddCommentClick,
   reviews,
   children,
@@ -34,7 +32,6 @@ export const CommentSection: FC<PropsWithChildren<CommentSectionProps>> = ({
     <ReadOnlyFormControl
       label={label}
       value={proposal[valueField]}
-      floating={floating}
       actions={
         <>
           <QuestionMark tooltip={tooltip} />

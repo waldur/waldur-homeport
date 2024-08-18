@@ -44,7 +44,6 @@ export const SelectCountryField: FunctionComponent = () => {
     <Form.Group className="mb-7">
       <Field
         name="country"
-        floating={false}
         component={WindowedSelectField}
         components={{ Option, SingleValue }}
         label={translate('Country')}

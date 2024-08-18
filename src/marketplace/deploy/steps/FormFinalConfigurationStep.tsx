@@ -29,7 +29,6 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         component={FormGroup}
         maxLength={1000}
         label={translate('Description')}
-        floating
       >
         <TextField />
       </Field>

@@ -109,7 +109,6 @@ export const CategoryEditDialog = connect<
         >
           <FormContainer submitting={props.submitting}>
             <ImageField
-              floating={false}
               label={translate('Icon')}
               name="icon"
               initialValue={props.initialValues?.icon}
