@@ -70,7 +70,6 @@ export const FeaturesList = connect(() => ({
                     <Field
                       name={`${section.key}.${item.key}`}
                       component={AwesomeCheckboxField}
-                      floating={false}
                     />
                   </td>
                 </tr>

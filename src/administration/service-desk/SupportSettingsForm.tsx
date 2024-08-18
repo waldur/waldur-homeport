@@ -52,7 +52,6 @@ export const SupportSettingsForm = ({ name }) => {
               ? field.description
               : getKeyTitle(field.key))
           }
-          floating={field.type !== 'secret_field'}
         >
           <FieldRow field={field} />
         </Field>

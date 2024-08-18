@@ -12,7 +12,7 @@ interface FreeIPAAccountEditOwnProps {
 }
 
 const UsernameGroup = ({ profile }) => (
-  <div className="form-floating mb-7">
+  <div className=" mb-7">
     <Form.Control
       readOnly
       defaultValue={profile.username}
@@ -28,7 +28,7 @@ export const FreeIPAAccountEdit: React.FC<FreeIPAAccountEditOwnProps> = ({
 }) => {
   const [loading, setLoading] = React.useState<boolean>();
   return (
-    <FormContainer submitting={loading} floating={true}>
+    <FormContainer submitting={loading}>
       <UsernameGroup profile={profile} />
       <Form.Group>
         <div className="pull-right">

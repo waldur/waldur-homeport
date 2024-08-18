@@ -51,7 +51,6 @@ export const CustomerBillingPanel = enhance((props: OwnProps) => {
           <FormSectionContainer
             label={translate('Details') + ':'}
             submitting={props.submitting}
-            floating={true}
           >
             <DateField
               name="accounting_start_date"
@@ -66,7 +65,6 @@ export const CustomerBillingPanel = enhance((props: OwnProps) => {
           <FormSectionContainer
             label={translate('Tax') + ':'}
             submitting={props.submitting}
-            floating={true}
           >
             <StringField name="vat_code" label={translate('VAT code')} />
             <NumberField

@@ -21,7 +21,7 @@ export const InputGroup: FunctionComponent<InputGroupProps> = ({
   type,
   helpText,
 }) => (
-  <div className="form-floating mb-7">
+  <div className=" mb-7">
     <Field
       name={name}
       component={InputField}

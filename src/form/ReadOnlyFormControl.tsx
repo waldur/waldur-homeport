@@ -15,7 +15,6 @@ interface ReadOnlyFormControlProps {
   className?: string;
   plaintext?: boolean;
   disabled?: boolean;
-  floating?: boolean;
   actions?: ReactNode;
 }
 
@@ -29,7 +28,6 @@ export const ReadOnlyFormControl: FunctionComponent<
     plaintext,
     disabled,
     className,
-    floating,
     addon,
     children,
     actions,
@@ -49,12 +47,11 @@ export const ReadOnlyFormControl: FunctionComponent<
       className={classNames(
         'mb-7',
         className,
-        floating && 'form-floating',
         addon && 'form-addon',
         Boolean(actions) && 'flex-grow-1',
       )}
     >
-      {!floating && labelNode}
+      {labelNode}
       {children ? (
         cloneElement(children as any, childProps)
       ) : (
@@ -71,7 +68,6 @@ export const ReadOnlyFormControl: FunctionComponent<
           {description}
         </Form.Text>
       )}
-      {floating && labelNode}
       {addon && <span className="form-control-addon">{addon}</span>}
     </div>
   );

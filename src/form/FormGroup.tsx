@@ -35,7 +35,6 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     hideLabel,
     meta,
     children,
-    floating = false,
     actions,
     clearOnUnmount,
     spaceless,
@@ -76,16 +75,14 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     <div
       className={classNames(
         {
-          'form-floating': floating,
           'flex-grow-1': Boolean(actions),
         },
         'position-relative',
         !spaceless && 'mb-7',
       )}
     >
-      {!floating && labelNode}
+      {labelNode}
       {cloneElement(children as any, newProps)}
-      {floating && labelNode}
       {description && <Form.Text>{description}</Form.Text>}
       {meta.touched && <FieldError error={meta.error} />}
     </div>

@@ -46,19 +46,16 @@ export const RoundAllocationSection: FC<RoundAllocationSectionProps> = ({
           label={translate('Deciding entity')}
           value={formatRoundAllocationStrategy(round.deciding_entity)}
           className="col-12 col-md-6"
-          floating
         />
         <ReadOnlyFormControl
           label={translate('Minimum average scoring for allocation')}
           value={round.minimal_average_scoring}
           className="col-12 col-md-6"
-          floating
         />
         <ReadOnlyFormControl
           label={translate('Allocation time')}
           value={formatRoundAllocationTime(round.allocation_time)}
           className="col-12 col-md-6"
-          floating
         />
         {round.allocation_time === 'fixed_date' && (
           <ReadOnlyFormControl
@@ -69,7 +66,6 @@ export const RoundAllocationSection: FC<RoundAllocationSectionProps> = ({
                 : round.allocation_date
             }
             className="col-12 col-md-6"
-            floating
           />
         )}
       </Card.Body>

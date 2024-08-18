@@ -22,7 +22,7 @@ const ResourceNameField = (props) => {
 
   return (
     <div className="d-flex justify-content-between">
-      <div className="flex-grow-1 me-3 form-floating">
+      <div className="flex-grow-1 me-3 ">
         <StringField input={props.input} />
         <Form.Label className="required">{props.label}</Form.Label>
       </div>

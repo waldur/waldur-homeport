@@ -44,11 +44,7 @@ const PaymentProfileCreate = (props) => {
           </>
         }
       >
-        <FormContainer
-          submitting={false}
-          clearOnUnmount={false}
-          floating={true}
-        >
+        <FormContainer submitting={false} clearOnUnmount={false}>
           <StringField
             name="name"
             label={translate('Name')}
@@ -58,7 +54,6 @@ const PaymentProfileCreate = (props) => {
           />
 
           <SelectField
-            floating={false}
             name="payment_type"
             label={translate('Type')}
             required={true}
