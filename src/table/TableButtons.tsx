@@ -82,9 +82,7 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
       if (props.filterPosition === 'sidebar') {
         props.openFiltersDrawer(props.filters);
       } else {
-        if (!props.filtersStorage?.length) {
-          props.toggleFilterMenu();
-        }
+        props.toggleFilterMenu();
         const parent: HTMLElement = event.target.closest('.card-table');
         if (!parent) return;
         const btns = parent.getElementsByClassName(
@@ -121,7 +119,10 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
           <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3 flex-grow-1 flex-sm-grow-0">
             {['menu', 'sidebar'].includes(props.filterPosition) &&
               props.filters && (
-                <TableFilterButton onClick={onClickFilterButton} />
+                <TableFilterButton
+                  onClick={onClickFilterButton}
+                  hasFilter={!!props.filtersStorage?.length}
+                />
               )}
             {Boolean(props.gridItem && props.columns.length) && (
               <TableDisplayModeButton
