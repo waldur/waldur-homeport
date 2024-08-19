@@ -62,6 +62,7 @@ export const formatOrderForCreate = (props: OrderSummaryProps) => ({
   plan: props.formData?.plan?.url,
   attributes: formatAttributes(props),
   limits: formatLimits(props),
+  accepting_terms_of_service: true,
 });
 
 export const orderFormValues = formValueSelector(ORDER_FORM_ID);
