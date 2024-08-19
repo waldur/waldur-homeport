@@ -304,8 +304,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                   className={classNames('border-2 border-bottom', {
                     'd-none':
                       !this.state.showFilterMenuToggle &&
-                      this.props.filterPosition === 'menu' &&
-                      !this.props.filtersStorage.length,
+                      this.props.filterPosition === 'menu',
                   })}
                 >
                   <TableFilters
