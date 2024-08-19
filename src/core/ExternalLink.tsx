@@ -1,3 +1,4 @@
+import { ArrowSquareOut } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 interface ExternalLinkProps {
@@ -14,6 +15,11 @@ export const ExternalLink: FunctionComponent<ExternalLinkProps> = (props) => (
     rel="noopener noreferrer"
     className={props.className}
   >
-    {!props.iconless && <i className="fa fa-external-link" />} {props.label}
+    {!props.iconless && (
+      <span className="svg-icon svg-icon-2">
+        <ArrowSquareOut />
+      </span>
+    )}{' '}
+    {props.label}
   </a>
 );

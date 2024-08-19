@@ -1,3 +1,4 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useAsyncFn, useEffectOnce } from 'react-use';
@@ -27,7 +28,10 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
         <>
           <div className="pull-right">
             <Button size="sm" onClick={reFetch}>
-              <i className="fa fa-refresh" /> {translate('Refresh')}
+              <span className="svg-icon svg-icon-2">
+                <ArrowsClockwise />
+              </span>{' '}
+              {translate('Refresh')}
             </Button>
           </div>
           <table className="table table-hover no-margins">

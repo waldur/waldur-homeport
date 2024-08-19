@@ -1,3 +1,4 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
@@ -67,7 +68,7 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
               className="btn btn-icon btn-active-light"
               onClick={() => refetch()}
             >
-              <i className="fa fa-refresh fs-4" />
+              <ArrowsClockwise />
             </button>
           )}
         </Card.Title>

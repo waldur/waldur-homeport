@@ -1,3 +1,10 @@
+import {
+  CheckSquare,
+  PuzzlePiece,
+  Question,
+  Warning,
+} from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 
 export const ISSUE_IDS = {
@@ -16,17 +23,10 @@ const getIssueTypeLabel = (issueType) =>
   })[issueType];
 
 export const ISSUE_ICONS = {
-  INCIDENT: 'fa-exclamation-triangle',
-  CHANGE_REQUEST: 'fa-check-square',
-  SERVICE_REQUEST: 'fa-puzzle-piece',
-  INFORMATIONAL: 'fa-question-circle',
-};
-
-export const ISSUE_TEXT_CLASSES = {
-  INCIDENT: 'text-danger',
-  INFORMATIONAL: 'text-warning',
-  CHANGE_REQUEST: 'text-success',
-  SERVICE_REQUEST: 'text-info',
+  INCIDENT: <Warning className="text-danger" />,
+  CHANGE_REQUEST: <CheckSquare className="text-warning" />,
+  SERVICE_REQUEST: <PuzzlePiece className="text-success" />,
+  INFORMATIONAL: <Question className="text-info" />,
 };
 
 const getIssueDescription = (issueType) =>
@@ -47,8 +47,7 @@ const getIssueDescription = (issueType) =>
 
 export const getIssueTypeChoices = () =>
   Object.keys(ISSUE_IDS).map((item) => ({
-    iconClass: ISSUE_ICONS[item],
-    textClass: ISSUE_TEXT_CLASSES[item],
+    iconNode: ISSUE_ICONS[item],
     label: getIssueTypeLabel(item),
     description: getIssueDescription(item),
     id: ISSUE_IDS[item],

@@ -1,12 +1,12 @@
+import { ArrowSquareOut, CaretDown } from '@phosphor-icons/react';
+
 import { Link } from '@waldur/core/Link';
 
 export const ResourceHeader = ({ toggled, resource }) => (
   <div className="fs-6">
-    {toggled ? (
-      <i className="fa fa-chevron-down" />
-    ) : (
-      <i className="fa fa-chevron-right" />
-    )}{' '}
+    <span className={toggled ? 'active' : ''}>
+      <CaretDown size={20} weight="bold" className="rotate-180" />
+    </span>{' '}
     {resource.name} {resource.offering_name && `/ ${resource.offering_name} `}
     {resource.uuid ? (
       <Link
@@ -14,7 +14,7 @@ export const ResourceHeader = ({ toggled, resource }) => (
         params={{ resource_uuid: resource.uuid }}
         className="hidden-print"
       >
-        <i className="fa fa-external-link" />
+        <ArrowSquareOut />
       </Link>
     ) : null}
   </div>

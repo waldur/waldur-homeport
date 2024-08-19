@@ -1,3 +1,4 @@
+import { ArrowsClockwise, Warning } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { translate } from './i18n';
@@ -9,34 +10,35 @@ export const LoadingScreen: FunctionComponent<{
   error?: Error;
 }> = ({ loading, error }) => {
   return (
-    <>
-      {loading ? (
-        <div className="loading-screen-container">
-          <div className="loading-screen">
-            <h1 className="loading-title">{translate('Loading assets')}</h1>
+    <div className="loading-screen-container">
+      <div className="loading-screen">
+        {loading ? (
+          <h1 className="loading-title">{translate('Loading assets')}</h1>
+        ) : null}
+        {error ? (
+          <div className="erred-screen">
+            <div className="erred-screen-icon">
+              <Warning />
+            </div>
+            <h1>{translate('Unable to bootstrap application.')}</h1>
+            {error.message ? (
+              <p className="erred-screen-message">{error.message}</p>
+            ) : null}
+            <button
+              type="button"
+              className="btn btn-success text-uppercase"
+              onClick={() => {
+                location.reload();
+              }}
+            >
+              <span className="svg-icon svg-icon-2">
+                <ArrowsClockwise />
+              </span>{' '}
+              {translate('Retry')}
+            </button>
           </div>
-        </div>
-      ) : null}
-      {error ? (
-        <div className="erred-screen center-block">
-          <div className="erred-screen-icon">
-            <i className="fa fa-exclamation-triangle" />
-          </div>
-          <h1>{translate('Unable to bootstrap application.')}</h1>
-          {error.message ? (
-            <p className="erred-screen-message">{error.message}</p>
-          ) : null}
-          <button
-            type="button"
-            className="btn btn-success text-uppercase"
-            onClick={() => {
-              location.reload();
-            }}
-          >
-            <i className="fa fa-refresh" /> {translate('Retry')}
-          </button>
-        </div>
-      ) : null}
-    </>
+        ) : null}
+      </div>
+    </div>
   );
 };

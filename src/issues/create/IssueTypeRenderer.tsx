@@ -6,7 +6,6 @@ export const IssueTypeRenderer: FunctionComponent<IssueTypeOption> = (
   option,
 ) => (
   <>
-    <i className={`fa ${option.iconClass} ${option.textClass}`} />{' '}
-    {option.label}
+    {option.iconNode} {option.label}
   </>
 );

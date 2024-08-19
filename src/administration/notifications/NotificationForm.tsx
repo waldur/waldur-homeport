@@ -1,3 +1,4 @@
+import { ArrowCounterClockwise } from '@phosphor-icons/react';
 import { Button, Modal, Tab, Tabs } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change, Field, FieldArray } from 'redux-form';
@@ -41,7 +42,9 @@ const renderFields = ({ fields, submitting, meta: { pristine } }: any) => {
                   size="sm"
                 >
                   <>
-                    <i className="fa fa-undo" />
+                    <span className="svg-icon svg-icon-2">
+                      <ArrowCounterClockwise />
+                    </span>{' '}
                     {translate('Reset')}
                   </>
                 </Button>

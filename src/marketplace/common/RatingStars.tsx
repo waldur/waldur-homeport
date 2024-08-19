@@ -1,7 +1,9 @@
+import { Star } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
 import { range } from '@waldur/core/utils';
+
 import './RatingStars.scss';
 
 interface RatingStarsProps {
@@ -25,10 +27,10 @@ export const RatingStars: FC<RatingStarsProps> = ({
     title={`${props.rating}/${max}`}
   >
     {range(Math.floor(props.rating)).map((key) => (
-      <i className={classNames('fa fa-star filled', props.color)} key={key} />
+      <Star weight="fill" className={props.color} key={key} />
     ))}
     {range(max - Math.floor(props.rating)).map((key) => (
-      <i className="fa fa-star" key={key} />
+      <Star key={key} />
     ))}
   </div>
 );

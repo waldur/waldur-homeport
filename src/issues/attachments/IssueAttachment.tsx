@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { Trash, Warning } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
@@ -86,7 +86,7 @@ export const PureIssueAttachment: FunctionComponent<
       ) : (
         <>
           <div className="attachment-item__thumb">
-            <i className="fa fa-exclamation-triangle" />
+            <Warning />
           </div>
           <div className="attachment-item__description">
             <div className="attachment-item__description-name">

@@ -1,3 +1,4 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -17,7 +18,10 @@ export const LoadingErred: FunctionComponent<LoadingErredProps> = ({
   <div className={`text-center ${className ?? ''}`}>
     <h3>{message || translate('Unable to load data.')}</h3>
     <Button onClick={loadData}>
-      <i className="fa fa-refresh" /> {translate('Reload')}
+      <span className="svg-icon svg-icon-2">
+        <ArrowsClockwise />
+      </span>{' '}
+      {translate('Reload')}
     </Button>
   </div>
 );
