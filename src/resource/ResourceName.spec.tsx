@@ -56,6 +56,6 @@ describe('ResourceName', () => {
   it('renders a warning', () => {
     const wrapper = renderLink({ is_link_valid: false });
     const icon = wrapper.find('i').prop('className');
-    expect(icon).toContain('fa-exclamation-triangle');
+    expect(icon).toContain('Warning');
   });
 });

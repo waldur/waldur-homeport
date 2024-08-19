@@ -73,11 +73,11 @@ describe('QuotaUsageBarChartDescription', () => {
 
   it("should render danger message if quota's usage exceeds limit", () => {
     const wrapper = renderWrapper({ quota: quotas[1] });
-    expect(wrapper.find('.fa-exclamation-triangle')).toHaveLength(1);
+    expect(wrapper.find('Warning')).toHaveLength(1);
   });
 
   it("should not render danger message if quota's usage does not exceed limit", () => {
     const wrapper = renderWrapper({ quota: quotas[0] });
-    expect(wrapper.find('.fa-exclamation-triangle')).toHaveLength(0);
+    expect(wrapper.find('Warning')).toHaveLength(0);
   });
 });

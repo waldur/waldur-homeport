@@ -1,3 +1,4 @@
+import { Warning } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
@@ -48,7 +49,7 @@ const ResourceWarning = (props: ResourceNameProps) =>
       label={translate('Provider does not comply with project policies')}
     >
       {' '}
-      <i className="fa fa-exclamation-triangle text-muted" />
+      <Warning className="text-muted" />
     </Tip>
   ) : null;
 

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Customer, Project } from '@waldur/workspace/types';
 
 export interface IssueOptions {
@@ -53,8 +55,7 @@ export interface IssueResponse {
 }
 
 export interface IssueTypeOption {
-  iconClass: string;
-  textClass: string;
+  iconNode: ReactNode;
   label: string;
   description: string;
   id: string;

@@ -1,3 +1,4 @@
+import { ArrowSquareOut } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { formatRelative, formatDateTime } from '@waldur/core/dateUtils';
@@ -58,7 +59,9 @@ export const IssueSummary = ({ issue }) => {
           label={translate('Link')}
           value={
             <a href={issue.link} target="_blank" rel="noopener noreferrer">
-              <i className="fa fa-external-link" />{' '}
+              <span className="svg-icon svg-icon-2">
+                <ArrowSquareOut />
+              </span>{' '}
               {translate('Open in Service Desk')}
             </a>
           }

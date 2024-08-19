@@ -1,3 +1,4 @@
+import { Warning } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
@@ -59,7 +60,7 @@ export const QuotaUsageBarChartDescription = ({ quota }) => (
           label={translate('Quota usage exceeds available limit.')}
         >
           {' '}
-          <i className="fa fa-exclamation-triangle" />
+          <Warning />
         </Tip>
       )}
     </p>

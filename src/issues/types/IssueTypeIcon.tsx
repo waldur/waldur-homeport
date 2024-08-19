@@ -1,17 +1,15 @@
-import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { Tip } from '@waldur/core/Tooltip';
 
-import { ISSUE_ICONS, ISSUE_TEXT_CLASSES } from './constants';
+import { ISSUE_ICONS } from './constants';
 
 export const IssueTypeIcon: FunctionComponent<{ type }> = ({ type }) => {
   const typeId = type.toUpperCase().replace(' ', '_');
-  const iconClass = ISSUE_ICONS[typeId] || ISSUE_ICONS.INCIDENT;
-  const textClass = ISSUE_TEXT_CLASSES[typeId] || ISSUE_TEXT_CLASSES.INCIDENT;
+  const iconNode = ISSUE_ICONS[typeId] || ISSUE_ICONS.INCIDENT;
   return (
     <Tip id="issue-type-icon" label={type}>
-      <i className={classNames('fa', iconClass, textClass)} />
+      {iconNode}
     </Tip>
   );
 };

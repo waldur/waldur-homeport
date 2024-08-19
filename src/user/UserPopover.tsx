@@ -1,3 +1,4 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button, Modal, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -57,7 +58,10 @@ export const UserPopover: FunctionComponent<{ resolve }> = ({ resolve }) => {
     <>
       <p>{translate('Unable to load user.')}</p>
       <Button onClick={callback}>
-        <i className="fa fa-refresh" /> {translate('Try again')}
+        <span className="svg-icon svg-icon-2">
+          <ArrowsClockwise />
+        </span>{' '}
+        {translate('Try again')}
       </Button>
     </>
   ) : value?.user ? (

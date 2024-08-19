@@ -1,4 +1,4 @@
-import { Eye, Plus } from '@phosphor-icons/react';
+import { Eye, Plus, Warning } from '@phosphor-icons/react';
 import { debounce } from 'lodash';
 import { useCallback, useMemo, useState } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
@@ -157,10 +157,7 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
                     )}
                     id="default_security_group_tooltip"
                   >
-                    <i
-                      className="fa fa-exclamation-triangle"
-                      style={{ color: 'red' }}
-                    />
+                    <Warning className="text-danger" />
                   </Tip>
                 )}
               </>
