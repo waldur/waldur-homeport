@@ -18,8 +18,6 @@ import { TableFilterButton } from './TableFilterButton';
 import { TableMoreActions } from './TableMoreActions';
 import { TableDropdownItem } from './types';
 
-import './TableButtons.scss';
-
 interface TableButtonsProps extends TableProps {
   toggleFilterMenu?(): void;
   showFilterMenuToggle?: boolean;
