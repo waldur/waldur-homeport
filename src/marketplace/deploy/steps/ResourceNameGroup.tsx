@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
@@ -24,7 +24,6 @@ const ResourceNameField = (props) => {
     <div className="d-flex justify-content-between">
       <div className="flex-grow-1 me-3 ">
         <StringField input={props.input} />
-        <Form.Label className="required">{props.label}</Form.Label>
       </div>
       {project ? (
         <Button
@@ -50,13 +49,12 @@ const ResourceNameField = (props) => {
 export const ResourceNameGroup = ({ nameValidate, nameLabel, offering }) => (
   <Field
     name="attributes.name"
+    label={nameLabel || translate('Name')}
     component={FormGroup}
+    required={true}
     description={translate('This name will be visible in accounting data.')}
     validate={nameValidate || getNameFieldValidators()}
   >
-    <ResourceNameField
-      label={nameLabel || translate('Name')}
-      offering={offering}
-    />
+    <ResourceNameField offering={offering} />
   </Field>
 );
