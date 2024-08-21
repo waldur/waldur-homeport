@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 
 import { ActionButton, RowActionButton } from '@waldur/table/ActionButton';
 
+import { ActionItem } from './ActionItem';
 import { DialogActionProps } from './DialogActionProps';
 import { useModalDialogCallback } from './useModalDialogCallback';
 import { useValidators } from './useValidators';
@@ -16,6 +17,7 @@ export const DialogActionButton: <T>(
   validators,
   extraResolve,
   rowAction,
+  actionItem,
   ...rest
 }) => {
   const validationState = useValidators(validators, resource);
@@ -28,6 +30,8 @@ export const DialogActionButton: <T>(
   );
   if (rowAction) {
     return <RowActionButton {...rest} {...validationState} action={callback} />;
+  } else if (actionItem) {
+    return <ActionItem {...rest} {...validationState} action={callback} />;
   } else {
     return <ActionButton {...rest} {...validationState} action={callback} />;
   }

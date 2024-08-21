@@ -63,12 +63,23 @@ export const getComponentsAndUsages = async (
   resource_uuid: string,
   offering: any,
   months: number,
+  offering_uuid: string,
 ) => {
   if (!resource_uuid) {
     return { components: null, usages: null };
   }
 
   let components;
+  if (!offering) {
+    if (!offering_uuid) {
+      throw new Error('Offering or offering_uuid is missing.');
+    }
+    try {
+      offering = await getPublicOffering(offering_uuid);
+    } catch (error) {
+      throw new Error(`Error while getting offering, ${error.message}`);
+    }
+  }
   try {
     components = await getUsageBasedOfferingComponents(offering);
   } catch (error) {

@@ -27,7 +27,13 @@ export const ResourceUsageTabsContainer: FunctionComponent<
   ResourceUsageTabsContainerProps
 > = ({ resource, months, hideHeader, displayMode, offering }) => {
   const { loading, error, value } = useAsync(
-    () => getComponentsAndUsages(resource.resource_uuid, offering, months),
+    () =>
+      getComponentsAndUsages(
+        resource.resource_uuid,
+        offering,
+        months,
+        resource.offering_uuid,
+      ),
     [resource, months],
   );
 
