@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Resource } from '@waldur/marketplace/resources/types';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { isSupportOnly } from '@waldur/workspace/selectors';
 
 import { SetBackendIdButton } from '../SetBackendIdButton';
@@ -34,20 +35,28 @@ export const PublicResourceActions: FunctionComponent<
   }
   const disabled = !['OK', 'Updating', 'Terminating'].includes(row.state);
   return (
-    <>
-      <ResourceShowUsageButton resource={row} />
-      {!is_support_only && (
-        <ResourceCreateUsageButton
-          offering_uuid={row.offering_uuid}
-          resource_uuid={row.uuid}
-          resource_name={row.name}
-          customer_name={row.customer_name}
-          project_name={row.project_name}
-          backend_id={row.backend_id}
-          disabled={disabled}
-        />
-      )}
-      <SetBackendIdButton resource={row} refetch={fetch} />
-    </>
+    <ActionsDropdown
+      row={row}
+      refetch={fetch}
+      actions={[
+        ResourceShowUsageButton,
+        !is_support_only
+          ? (props) => (
+              <ResourceCreateUsageButton
+                {...props}
+                offering_uuid={row.offering_uuid}
+                resource_uuid={row.uuid}
+                resource_name={row.name}
+                customer_name={row.customer_name}
+                project_name={row.project_name}
+                backend_id={row.backend_id}
+                disabled={disabled}
+              />
+            )
+          : null,
+        SetBackendIdButton,
+      ].filter(Boolean)}
+      data-cy="public-resources-list-actions-dropdown-btn"
+    />
   );
 };

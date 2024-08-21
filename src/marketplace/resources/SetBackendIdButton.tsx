@@ -1,3 +1,4 @@
+import { Wrench } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -13,15 +14,12 @@ const SetBackendIdDialog = lazyComponent(
   'SetBackendIdDialog',
 );
 
-export const SetBackendIdButton: FC<{ resource; refetch }> = ({
-  resource,
-  refetch,
-}) => {
+export const SetBackendIdButton: FC<{ row; refetch }> = ({ row, refetch }) => {
   const user = useSelector(getUser);
   if (
     !hasPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_BACKEND_ID,
-      customerId: resource.customer_uuid,
+      customerId: row.customer_uuid,
     })
   ) {
     return null;
@@ -31,9 +29,9 @@ export const SetBackendIdButton: FC<{ resource; refetch }> = ({
       title={translate('Set backend ID')}
       modalComponent={SetBackendIdDialog}
       extraResolve={{ refetch }}
-      resource={resource}
-      rowAction
-      size="sm"
+      resource={row}
+      actionItem
+      iconNode={<Wrench />}
     />
   );
 };

@@ -23,6 +23,7 @@ interface ActionButtonProps {
   important?: boolean;
   variant?: ButtonVariant;
   rowAction?: boolean;
+  actionItem?: boolean;
   size?: 'lg' | 'sm';
 }
 
