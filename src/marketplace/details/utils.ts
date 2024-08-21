@@ -58,7 +58,7 @@ const formatAttributes = (props) => {
 
 export const formatOrderForCreate = (props: OrderSummaryProps) => ({
   offering: props.offering.url,
-  project: props.formData?.project?.url,
+  project: props.formData?.project?.url || props.offering.project,
   plan: props.formData?.plan?.url,
   attributes: formatAttributes(props),
   limits: formatLimits(props),

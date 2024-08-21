@@ -117,6 +117,7 @@ export interface Offering extends GeolocationPoint {
   customer_uuid?: string;
   customer_name?: string;
   customer_image?: string;
+  project?: string;
   project_name?: string;
   project_uuid?: string;
   attributes: AttributesType;
