@@ -163,6 +163,9 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
               />
             ) : props.resolve.name === 'homepage' ? (
               <StringField name="homepage" label={translate('Homepage')} />
+            ) : // Service provider
+            props.resolve.name === 'description' ? (
+              <TextField name="description" label={translate('Description')} />
             ) : null}
           </FormContainer>
         </ModalDialog>

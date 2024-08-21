@@ -1,3 +1,4 @@
+import { ServiceProvider } from '@waldur/marketplace/types';
 import { Customer } from '@waldur/workspace/types';
 
 export interface CustomerEditPanelProps {
@@ -7,7 +8,7 @@ export interface CustomerEditPanelProps {
 }
 
 export interface EditCustomerProps {
-  customer: Customer;
+  customer: Customer | ServiceProvider;
   name: string;
   callback(formData, dispatch): Promise<any>;
 }

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { canRegisterServiceProviderForCustomer } from '@waldur/marketplace/service-providers/selectors';
 import { ServiceProviderManagement } from '@waldur/marketplace/service-providers/ServiceProviderManagement';
@@ -16,16 +16,12 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
     return null;
   } else {
     return (
-      <Card className="card-bordered">
-        <Card.Header>
-          <Card.Title>
-            <h3>{translate('Service provider')}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <ServiceProviderManagement />
-        </Card.Body>
-      </Card>
+      <FormTable.Card
+        title={translate('Service provider')}
+        className="card-bordered"
+      >
+        <ServiceProviderManagement />
+      </FormTable.Card>
     );
   }
 };
