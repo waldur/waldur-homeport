@@ -4,7 +4,6 @@ import Markdown from 'markdown-to-jsx';
 import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/configs/default';
-import { formatDateTime } from '@waldur/core/dateUtils';
 
 import { LoadingSpinner } from './core/LoadingSpinner';
 import { translate } from './i18n';
@@ -56,13 +55,6 @@ export const UserAgreementComponent: FunctionComponent<
     <div>
       <div className="mb-6 card">
         <div className="card-body">
-          <p className="mb-10">
-            <em className="fw-light ms-4">
-              {translate('Last update')}: {formatDateTime(option.modified)}
-            </em>
-          </p>
-
-          <h2 className="fw-bold">{props.title}</h2>
           <Markdown>{option.content}</Markdown>
         </div>
       </div>

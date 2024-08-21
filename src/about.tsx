@@ -15,7 +15,7 @@ const Layout = lazyComponent(
 );
 
 const TosPage = () => {
-  useTitle(translate('Terms of Service'));
+  useTitle(translate('User agreements'));
   return (
     <UserAgreementComponent
       agreement_type={USER_AGREEMENT_TYPES.terms_of_service}
@@ -25,7 +25,7 @@ const TosPage = () => {
 };
 
 const PrivacyPage = () => {
-  useTitle(translate('Privacy Policy'));
+  useTitle(translate('User agreements'));
   return (
     <UserAgreementComponent
       agreement_type={USER_AGREEMENT_TYPES.privacy_policy}

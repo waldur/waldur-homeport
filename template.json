@@ -4847,10 +4847,6 @@
     "description": "administration/TokensList.tsx, user/support/UserEditForm.tsx",
     "message": "Last name"
   },
-  "Last update": {
-    "description": "UserAgreementComponent.tsx",
-    "message": "Last update"
-  },
   "Last {month} month": {
     "description": "marketplace/resources/usage/utils.ts",
     "message": "Last {month} month"
@@ -12252,7 +12248,7 @@
     "message": "User agreement was updated"
   },
   "User agreements": {
-    "description": "administration/routes.ts",
+    "description": "about.tsx, administration/routes.ts",
     "message": "User agreements"
   },
   "User could not been updated": {
