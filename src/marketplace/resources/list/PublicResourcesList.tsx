@@ -48,51 +48,73 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       render: PublicResourceLink,
       copyField: (row) => row.name || row.offering_name,
       orderField: 'name',
+      id: 'name',
       export: 'name',
+      keys: ['name'],
     },
     {
-      visible: false,
       title: translate('Resource UUID'),
-      render: null,
+      id: 'uuid',
+      keys: ['uuid'],
+      render: ({ row }) => <>{row.uuid}</>,
       export: 'uuid',
+      optional: true,
     },
     {
-      title: translate('Offering type'),
+      title: translate('Offering'),
       render: ({ row }) => <>{row.offering_name}</>,
       export: 'offering_name',
+      keys: ['offering_name'],
+      id: 'offering_name',
     },
     {
       title: translate('Client organization'),
       render: ({ row }) => <>{row.customer_name}</>,
       filter: 'organization',
+      keys: ['customer_name'],
       export: 'customer_name',
+      id: 'customer_name',
     },
     {
       title: translate('Project'),
       render: ({ row }) => <>{row.project_name}</>,
+      keys: ['project_name'],
+      filter: 'project_name',
       export: 'project_name',
+      id: 'project_name',
     },
     {
       title: translate('Category'),
       render: ({ row }) => <>{row.category_title}</>,
       filter: 'category',
+      keys: ['category_title'],
       export: 'category_title',
+      id: 'category_title',
     },
     {
       title: translate('Plan'),
       render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
       export: 'plan_name',
+      keys: ['plan_name'],
+      optional: true,
+      id: 'plan',
     },
     {
       title: translate('Limits'),
       render: PublicResourcesLimits,
       export: (row) => JSON.stringify(row.limits),
+      keys: ['limits'],
       exportKeys: ['limits'],
+      optional: true,
+      id: 'limits',
     },
     {
       title: translate('Effective ID'),
       render: ({ row }) => <>{row.effective_id || 'N/A'}</>,
       export: 'effective_id',
+      optional: true,
+      keys: ['effective_id'],
+      id: 'effective_id',
     },
     {
       title: translate('Created at'),
@@ -100,12 +122,18 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       orderField: 'created',
       export: (row) => formatDateTime(row.created),
       exportKeys: ['created'],
+      id: 'created',
     },
     {
       title: translate('State'),
       render: ({ row }) => <ResourceStateField resource={row} outline pill />,
       filter: 'state',
-      export: 'state',
+      id: 'state',
+      keys: ['state', 'backend_metadata'],
+      export: (row) =>
+        row.backend_metadata?.runtime_state ||
+        row.backend_metadata?.state ||
+        row.state,
     },
   ];
 
@@ -118,6 +146,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       enableExport={true}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
+      hasOptionalColumns
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}
       rowActions={({ row }) => (
