@@ -17,6 +17,7 @@ import { InvitationCreateButton } from './actions/create/InvitationCreateButton'
 import { InvitationActions } from './InvitationActions';
 import { InvitationsFilter } from './InvitationsFilter';
 import { InvitationsMultiSelectActions } from './InvitationsMultiSelectActions';
+import { formatInvitationState } from './InvitationStateFilter';
 import { RoleField } from './RoleField';
 
 export const InvitationsList: FunctionComponent = () => {
@@ -67,7 +68,7 @@ export const InvitationsList: FunctionComponent = () => {
         {
           title: translate('Status'),
           orderField: 'state',
-          render: ({ row }) => row.state,
+          render: ({ row }) => formatInvitationState(row.state),
           filter: 'state',
           export: (row) => row.state,
         },

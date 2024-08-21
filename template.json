@@ -4559,6 +4559,10 @@
     "description": "invitations/actions/InvitationSendButton.tsx",
     "message": "Invitation has been sent again."
   },
+  "Invitation is in {state}": {
+    "description": "invitations/InvitationConfirmDialog.tsx",
+    "message": "Invitation is in {state}"
+  },
   "Invitation is not found.": {
     "description": "invitations/utils.ts",
     "message": "Invitation is not found."

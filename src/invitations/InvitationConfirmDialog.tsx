@@ -1,8 +1,10 @@
-import { useCallback, FunctionComponent } from 'react';
+import { useRouter } from '@uirouter/react';
+import { useCallback, FunctionComponent, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 
+import { getInvitationLinkProps } from '@waldur/administration/getInvitationLinkProps';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -12,11 +14,13 @@ import { InvitationButtons } from './InvitationButtons';
 import { InvitationErrorMessage } from './InvitationErrorMessage';
 import { InvitationMessage } from './InvitationMessage';
 import { InvitationService } from './InvitationService';
+import { formatInvitationState } from './InvitationStateFilter';
 
 export const InvitationConfirmDialog: FunctionComponent<{
   resolve: { token; deferred };
 }> = ({ resolve: { token, deferred } }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const user = useSelector(getUser);
   const asyncResult = useAsync(() =>
@@ -41,6 +45,15 @@ export const InvitationConfirmDialog: FunctionComponent<{
     deferred.resolve({ replaceEmail: false, invitation });
   }, [close, deferred, invitation]);
 
+  useEffect(() => {
+    if (invitation?.state === 'Accepted') {
+      const linkProps = getInvitationLinkProps(invitation);
+      if (linkProps) {
+        router.stateService.go(linkProps.state, linkProps.params);
+      }
+    }
+  }, [invitation]);
+
   return (
     <>
       <Modal.Header>
@@ -58,12 +71,16 @@ export const InvitationConfirmDialog: FunctionComponent<{
           </>
         ) : asyncResult.error ? (
           <InvitationErrorMessage dismiss={dismiss} />
-        ) : asyncResult.value ? (
+        ) : invitation?.state === 'Pending' ? (
           <InvitationMessage invitation={invitation} user={user} />
+        ) : invitation?.state ? (
+          translate('Invitation is in {state}', {
+            state: formatInvitationState(invitation.state),
+          })
         ) : null}
       </Modal.Body>
       <Modal.Footer>
-        {!user ? null : asyncResult.value ? (
+        {!user ? null : invitation?.state === 'Pending' ? (
           <InvitationButtons
             user={user}
             invitation={invitation}
