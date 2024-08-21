@@ -30,6 +30,12 @@ export const choices = [
     value: 'accepted',
   },
 ];
+
+export const formatInvitationState = (value) => {
+  const choice = choices.find((choice) => choice.value === value);
+  return choice ? choice.label : null;
+};
+
 export const InvitationStateFilter = () => (
   <TableFilterItem title={translate('State')} name="state">
     <Field
