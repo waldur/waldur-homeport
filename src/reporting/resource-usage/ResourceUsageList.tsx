@@ -43,7 +43,7 @@ export const ResourceUsageList: FC = () => {
       export: 'project_name',
     },
     {
-      title: translate('Offering type'),
+      title: translate('Offering'),
       render: ({ row }) => <>{row.offering_name}</>,
       filter: 'offering',
       export: 'offering_name',
