@@ -1644,7 +1644,7 @@
     "message": "Challenge code"
   },
   "Change Request": {
-    "description": "issues/types/constants.ts",
+    "description": "issues/types/constants.tsx",
     "message": "Change Request"
   },
   "Change avatar": {
@@ -1668,7 +1668,7 @@
     "message": "Change plan"
   },
   "Change request - client’s request to perform a generic modification of data or service.": {
-    "description": "issues/types/constants.ts",
+    "description": "issues/types/constants.tsx",
     "message": "Change request - client’s request to perform a generic modification of data or service."
   },
   "Change resource limits": {
@@ -4356,11 +4356,11 @@
     "message": "Inactive"
   },
   "Incident - client issue with service usage or availability (interruptions, degradation of quality).": {
-    "description": "issues/types/constants.ts",
+    "description": "issues/types/constants.tsx",
     "message": "Incident - client issue with service usage or availability (interruptions, degradation of quality)."
   },
   "Incident": {
-    "description": "issues/types/constants.ts",
+    "description": "issues/types/constants.tsx",
     "message": "Incident"
   },
   "Include terminated": {
@@ -4392,11 +4392,11 @@
     "message": "Information is coming from {identityProvider}"
   },
   "Informational - client’s request to get or provide additional information related to a service.": {
-    "description": "issues/types/constants.ts",
+    "description": "issues/types/constants.tsx",
     "message": "Informational - client’s request to get or provide additional information related to a service."
   },
   "Informational": {
-    "description": "issues/types/constants.ts",
+    "description": "issues/types/constants.tsx",
     "message": "Informational"
   },
   "Ingress": {
@@ -6112,7 +6112,7 @@
     "message": "Offering terms of service"
   },
   "Offering type": {
-    "description": "marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/list/PublicResourcesList.tsx, reporting/resource-usage/ResourceUsageList.tsx",
+    "description": "marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/list/PublicResourcesList.tsx",
     "message": "Offering type"
   },
   "Offering usage synchronization has been scheduled.": {
@@ -6132,7 +6132,7 @@
     "message": "Offering users"
   },
   "Offering": {
-    "description": "administration/roles/PermissionOptions.tsx, marketplace/deploy/CheckoutFooter.tsx, marketplace/offerings/PriceList.tsx, marketplace/offerings/import/tabs.ts, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/OfferingFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderOfferingUsersFilter.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/proposal/create/ResourceRequestsSummary.tsx, proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx, proposals/proposal/create/resource-requests-step/ProposalResourcesFilter.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx, proposals/update/offerings/WizardFormSecondPage.tsx, reporting/plan-usage/PlanUsageDialog.tsx, reporting/plan-usage/PlanUsageFilter.tsx, reporting/plan-usage/PlanUsageList.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, user/UserOfferingList.tsx",
+    "description": "administration/roles/PermissionOptions.tsx, marketplace/deploy/CheckoutFooter.tsx, marketplace/offerings/PriceList.tsx, marketplace/offerings/import/tabs.ts, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/OfferingFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderOfferingUsersFilter.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/proposal/create/ResourceRequestsSummary.tsx, proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx, proposals/proposal/create/resource-requests-step/ProposalResourcesFilter.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx, proposals/update/offerings/WizardFormSecondPage.tsx, reporting/plan-usage/PlanUsageDialog.tsx, reporting/plan-usage/PlanUsageFilter.tsx, reporting/plan-usage/PlanUsageList.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, reporting/resource-usage/ResourceUsageList.tsx, user/UserOfferingList.tsx",
     "message": "Offering"
   },
   "Offerings count": {
@@ -9220,11 +9220,11 @@
     "message": "Server"
   },
   "Service Request - client’s request to modify, add, change or remove partially or completely a particular service.": {
-    "description": "issues/types/constants.ts",
+    "description": "issues/types/constants.tsx",
     "message": "Service Request - client’s request to modify, add, change or remove partially or completely a particular service."
   },
   "Service Request": {
-    "description": "issues/types/constants.ts",
+    "description": "issues/types/constants.tsx",
     "message": "Service Request"
   },
   "Service desk ID or key": {
