@@ -335,7 +335,7 @@ export const createServiceProvider = (params) =>
   );
 
 export const updateServiceProvider = (uuid, params) =>
-  patch(`/marketplace-service-providers/${uuid}/`, params);
+  patch<ServiceProvider>(`/marketplace-service-providers/${uuid}/`, params);
 
 export const getServiceProviderByCustomer = (params, options?) =>
   getFirst<ServiceProvider>('/marketplace-service-providers/', params, options);

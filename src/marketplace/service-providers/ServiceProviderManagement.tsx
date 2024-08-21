@@ -1,8 +1,11 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { SubmissionError } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { FieldEditButton } from '@waldur/customer/details/FieldEditButton';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import * as api from '@waldur/marketplace/common/api';
 import { ServiceProvider } from '@waldur/marketplace/types';
@@ -55,7 +58,7 @@ class ServiceProviderWrapper extends Component<
   state = {
     registering: false,
     loading: false,
-    serviceProvider: null,
+    serviceProvider: null as ServiceProvider,
   };
 
   registerServiceProvider = async () => {
@@ -73,6 +76,24 @@ class ServiceProviderWrapper extends Component<
       this.setState({ registering: false });
       this.props.showError(errorMessage);
     }
+  };
+
+  update = (formData) => {
+    return api
+      .updateServiceProvider(this.state.serviceProvider.uuid, formData)
+      .then((res) => {
+        this.setState({ loading: false, serviceProvider: res.data });
+        return res;
+      })
+      .catch((error) => {
+        const errorMessage =
+          error?.response?.message || translate('Something went wrong');
+        const errorData = error?.response?.data;
+        throw new SubmissionError({
+          _error: errorMessage,
+          ...errorData,
+        });
+      });
   };
 
   async getServiceProvider() {
@@ -103,31 +124,47 @@ class ServiceProviderWrapper extends Component<
       return <LoadingSpinner />;
     } else if (this.state.serviceProvider) {
       return (
-        <div className="d-flex justify-content-between">
-          <div>
-            <p>
-              {`${translate('Registered at:')} ${formatDateTime(
-                this.state.serviceProvider.created,
-              )}`}
-            </p>
-            <p>
-              {translate('API secret code:')}
-              <SecretValueField value={this.props.secretCode.code} />
-            </p>
+        <>
+          <div className="d-flex justify-content-between">
+            <div>
+              <p>
+                {`${translate('Registered at:')} ${formatDateTime(
+                  this.state.serviceProvider.created,
+                )}`}
+              </p>
+              <p>
+                {translate('API secret code:')}
+                <SecretValueField value={this.props.secretCode.code} />
+              </p>
+            </div>
+            <div>
+              <ActionButton
+                title={translate('Regenerate')}
+                action={() =>
+                  this.props.showSecretCodeRegenerateConfirm(
+                    this.state.serviceProvider,
+                  )
+                }
+                pending={this.props.secretCode.generating}
+                className="btn btn-primary"
+              />
+            </div>
           </div>
-          <div>
-            <ActionButton
-              title={translate('Regenerate')}
-              action={() =>
-                this.props.showSecretCodeRegenerateConfirm(
-                  this.state.serviceProvider,
-                )
+
+          <FormTable>
+            <FormTable.Item
+              label={translate('Description')}
+              value={this.state.serviceProvider?.description}
+              actions={
+                <FieldEditButton
+                  customer={this.state.serviceProvider}
+                  name="description"
+                  callback={this.update}
+                />
               }
-              pending={this.props.secretCode.generating}
-              className="btn btn-primary"
             />
-          </div>
-        </div>
+          </FormTable>
+        </>
       );
     } else if (this.props.canRegisterServiceProvider) {
       return (
