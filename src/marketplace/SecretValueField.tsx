@@ -19,8 +19,13 @@ export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
       <Form.Control
         readOnly={true}
         value={props.value}
-        type={showSecret ? 'text' : 'password'}
-        autoComplete="new-password"
+        style={
+          showSecret
+            ? null
+            : {
+                fontFamily: 'text-security-disc',
+              }
+        }
       />
       <button
         className="text-btn password-icon"
