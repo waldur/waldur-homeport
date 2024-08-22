@@ -74,16 +74,7 @@ export const OrderSubmitButton = (props: OrderSummaryProps) => {
     <FloatingButton>
       {errorsExist ? (
         <Tip
-          label={
-            <FieldError
-              error={
-                projectError || {
-                  ...props.errors?.attributes,
-                  ...props.errors?.limits,
-                }
-              }
-            />
-          }
+          label={<FieldError error={projectError || props.errors} />}
           id="offering-button-errors"
           autoWidth
           className="w-100"
