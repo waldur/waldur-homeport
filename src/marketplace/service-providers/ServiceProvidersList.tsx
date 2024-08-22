@@ -31,6 +31,11 @@ export const ServiceProvidersList: FunctionComponent = () => {
       keys: ['customer_name'],
     },
     {
+      title: translate('Description'),
+      render: ({ row }) => row.description || '—',
+      keys: ['description'],
+    },
+    {
       title: translate('Created at'),
       render: ({ row }) => formatDateTime(row.created),
       keys: ['created'],
