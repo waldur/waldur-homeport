@@ -43,7 +43,10 @@ export const UpdateResourceOptionDialog = connect(
     const submitForm = async (formData) => {
       try {
         await submitResourceOptions(props.resolve.resource.uuid, {
-          options: formData.attributes,
+          options: {
+            ...props.resolve.resource.options,
+            ...formData.attributes,
+          },
         });
         dispatch(showSuccess(translate('Options have been updated')));
         if (props.resolve.refetch) {
