@@ -97,6 +97,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           <div className="d-flex justify-content-end flex-grow-1">
             <AddCommentButton
               onClick={() => onAddCommentClick('comment_resource_requests')}
+              review={reviews?.[0]}
             />
           </div>
         ) : null

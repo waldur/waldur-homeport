@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import ReactStars from 'react-rating-stars-component';
+import { useDispatch } from 'react-redux';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
 import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
-import { FormGroup, TextField } from '@waldur/form';
+import { Tip } from '@waldur/core/Tooltip';
+import { FieldError, FormGroup, TextField } from '@waldur/form';
+import { FloatingButton } from '@waldur/form/FloatingButton';
 import {
   VStepperFormStepCard,
   VStepperFormStepProps,
@@ -12,6 +15,8 @@ import {
 import { translate } from '@waldur/i18n';
 import { updateProposalReview } from '@waldur/proposals/api';
 import { REVIEW_SUMMARY_FORM_ID } from '@waldur/proposals/constants';
+import { getReviewStateOptions } from '@waldur/proposals/utils';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface FormData {
   summary_score: number;
@@ -33,9 +38,26 @@ const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
     });
   }, [params]);
 
-  const updateReview = (formData: FormData) => {
-    updateProposalReview(formData, params.reviews[0].uuid);
+  const dispatch = useDispatch();
+
+  const updateReview = async (formData: FormData) => {
+    try {
+      await updateProposalReview(formData, params.reviews[0].uuid);
+      dispatch(showSuccess(translate('Review has been updated.')));
+    } catch (e) {
+      dispatch(showErrorResponse(e, translate('Unable to update review.')));
+    }
   };
+
+  // Disable the button if the review is not in "in_review" or "created" state
+  const disabled =
+    params.reviews[0].state !== getReviewStateOptions()[1].value &&
+    params.reviews[0].state !== getReviewStateOptions()[0].value;
+  const Btn = (
+    <Button disabled={disabled} onClick={handleSubmit(updateReview)}>
+      {translate('Save summary')}
+    </Button>
+  );
 
   return (
     <VStepperFormStepCard
@@ -77,9 +99,22 @@ const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
       >
         <TextField />
       </Field>
-      <Button onClick={handleSubmit(updateReview)}>
-        {translate('Save summary')}
-      </Button>
+      <FloatingButton>
+        {disabled ? (
+          <Tip
+            label={
+              <FieldError
+                error={translate('Reviews in final states are not editable')}
+              />
+            }
+            id="save-summary-button-errors"
+          >
+            {Btn}
+          </Tip>
+        ) : (
+          Btn
+        )}
+      </FloatingButton>
     </VStepperFormStepCard>
   );
 };

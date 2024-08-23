@@ -2,11 +2,15 @@ import { Button } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { getReviewStateOptions } from '@waldur/proposals/utils';
 
-export const AddCommentButton = ({ onClick }) => {
+export const AddCommentButton = ({ onClick, review }) => {
+  const disabled =
+    review?.state !== getReviewStateOptions()[0].value &&
+    review?.state !== getReviewStateOptions()[1].value;
   return (
     <Tip id="form-add-comment-tooltip" label={translate('Add comment')}>
-      <Button variant="flush" onClick={onClick}>
+      <Button variant="flush" onClick={onClick} disabled={disabled}>
         <span className="svg-icon svg-icon-muted svg-icon-4x">
           <svg
             width="24"
