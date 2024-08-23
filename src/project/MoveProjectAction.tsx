@@ -1,3 +1,4 @@
+import { ArrowsOutCardinal } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -29,6 +30,7 @@ export const MoveProjectAction = ({ project }: { project: Project }) => {
       title={translate('Move project')}
       action={callback}
       disabled={!isStaff}
+      iconNode={<ArrowsOutCardinal />}
     />
   );
 };

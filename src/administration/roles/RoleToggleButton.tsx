@@ -1,3 +1,4 @@
+import { CheckSquare, XSquare } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -38,6 +39,7 @@ export const RoleToggleButton: FunctionComponent<{
       action={callback}
       title={row.is_active ? translate('Disable') : translate('Enable')}
       icon={row.is_active ? 'fa fa-toggle-on' : 'fa fa-toggle-off'}
+      iconNode={row.is_active ? <XSquare /> : <CheckSquare />}
     />
   );
 };

@@ -42,10 +42,11 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
       className={classNames('d-flex gap-1', props.className)}
       // Workaround for rendering tooltips for disabled dropdown menu items.
       // See also: https://stackoverflow.com/questions/57349166/
-      style={props.disabled ? { opacity: 0.3 } : undefined}
+      style={props.disabled ? { opacity: 0.4 } : undefined}
       onClick={() => !props.disabled && props.action()}
       as="button"
       variant={Component === Button ? '' : undefined}
+      disabled={props.disabled && !props.tooltip}
     >
       {props.tooltip && (
         <Tip label={props.tooltip} id={`action-reason-${uniqueId()}`}>

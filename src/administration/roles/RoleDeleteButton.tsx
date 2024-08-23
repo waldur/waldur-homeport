@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -33,6 +34,7 @@ export const RoleDeleteButton = ({ row, refetch }) => {
       action={openDialog}
       disabled={row.users_count > 0}
       tooltip={translate('Users should be revoked before role is removed.')}
+      iconNode={<Trash />}
     />
   );
 };

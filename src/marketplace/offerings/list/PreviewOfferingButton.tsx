@@ -1,3 +1,4 @@
+import { Eye } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -29,6 +30,9 @@ export const PreviewOfferingButton = ({ row }) => {
         );
       }}
     >
+      <span className="svg-icon svg-icon-2">
+        <Eye />
+      </span>
       {translate('Preview order form')}
     </Dropdown.Item>
   );

@@ -35,7 +35,7 @@ type UserDetailsTableProps = StateProps & OwnProps;
 const PureUserDetailsTable: FunctionComponent<UserDetailsTableProps> = (
   props,
 ) => (
-  <Table responsive={true} bordered={true} className="text-grey-700 px-0">
+  <Table responsive={true} bordered={true} className="text-gray-700 px-0">
     <tbody>
       <Row label={translate('Full name')} value={props.user.full_name} />
       {props.nativeNameVisible && (

@@ -1,10 +1,11 @@
+import { ChatText, Check, Eye, X } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { router } from '@waldur/router';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
@@ -82,33 +83,33 @@ export const ProposalRowActions = ({ row, refetch }) => {
   return (
     <ActionsDropdownComponent>
       {isStaff && (
-        <Dropdown.Item onClick={() => openCreateReviewDialog(row)}>
-          {translate('Create review')}
-        </Dropdown.Item>
+        <ActionItem
+          title={translate('Create review')}
+          action={() => openCreateReviewDialog(row)}
+          iconNode={<ChatText />}
+        />
       )}
-      <Dropdown.Item onClick={() => linkToProposalDetails(row.uuid)}>
-        {translate('View')}
-      </Dropdown.Item>
+      <ActionItem
+        title={translate('View')}
+        action={() => linkToProposalDetails(row.uuid)}
+        iconNode={<Eye />}
+      />
       {!isRejectButtonDisabled && (
         <>
-          <Dropdown.Item
-            onClick={() => handleRejectProposal(row.uuid)}
-            className={
-              'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
-            }
+          <ActionItem
+            title={translate('Reject')}
+            action={() => handleRejectProposal(row.uuid)}
+            iconNode={<X />}
             disabled={isRejectButtonDisabled}
-          >
-            {translate('Reject')}
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => handleForceApproveProposal(row.uuid)}
-            className={
-              'text-danger' + (isRejectButtonDisabled ? ' opacity-50' : '')
-            }
+            className="text-danger"
+          />
+          <ActionItem
+            title={translate('Force approve')}
+            action={() => handleForceApproveProposal(row.uuid)}
+            iconNode={<Check />}
             disabled={isRejectButtonDisabled}
-          >
-            {translate('Force approve')}
-          </Dropdown.Item>
+            className="text-danger"
+          />
         </>
       )}
     </ActionsDropdownComponent>
