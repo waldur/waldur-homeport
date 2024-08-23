@@ -38,6 +38,7 @@ export const CommentSection: FC<PropsWithChildren<CommentSectionProps>> = ({
           {onAddCommentClick && (
             <AddCommentButton
               onClick={() => onAddCommentClick({ commentField, label })}
+              review={reviews?.[0]}
             />
           )}
         </>

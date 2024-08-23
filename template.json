@@ -8495,6 +8495,10 @@
     "description": "marketplace-remote/ReviewDialog.tsx",
     "message": "Review has been submitted."
   },
+  "Review has been updated.": {
+    "description": "proposals/proposal/create-review/steps/FormSummaryStep.tsx",
+    "message": "Review has been updated."
+  },
   "Review progress": {
     "description": "proposals/proposal/create-review/CreatePageSidebar.tsx",
     "message": "Review progress"
@@ -8550,6 +8554,10 @@
   "Reviewers": {
     "description": "proposals/round/RoundUIView.tsx, proposals/round/reviewers/RoundReviewersList.tsx, proposals/update/CallUpdateContainer.tsx",
     "message": "Reviewers"
+  },
+  "Reviews in final states are not editable": {
+    "description": "proposals/proposal/create-review/steps/FormSummaryStep.tsx",
+    "message": "Reviews in final states are not editable"
   },
   "Reviews": {
     "description": "customer/routes.ts, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingReviews.tsx, navigation/sidebar/CallPublicMenu.tsx, proposals/review/CustomerReviewsList.tsx, proposals/routes.ts, proposals/update/rounds/CallRoundsList.tsx",
@@ -11810,6 +11818,10 @@
   "Unable to update quotas.": {
     "description": "marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx",
     "message": "Unable to update quotas."
+  },
+  "Unable to update review.": {
+    "description": "proposals/proposal/create-review/steps/FormSummaryStep.tsx",
+    "message": "Unable to update review."
   },
   "Unable to update schedules.": {
     "description": "marketplace/offerings/update/integration/EditSchedulesDialog.tsx",
