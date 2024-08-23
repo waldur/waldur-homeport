@@ -1,3 +1,4 @@
+import { ShoppingCart } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -12,6 +13,9 @@ export const OpenPublicOffering = ({ row }) => (
       uuid: row.uuid,
     }}
   >
+    <span className="svg-icon svg-icon-2">
+      <ShoppingCart />
+    </span>
     {translate('Open public page')}
   </Dropdown.Item>
 );

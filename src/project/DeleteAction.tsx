@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -26,6 +27,7 @@ export const DeleteAction = ({ project }) => {
       title={translate('Delete')}
       action={callback}
       disabled={!isOwnerOrStaff}
+      iconNode={<Trash />}
     />
   );
 };

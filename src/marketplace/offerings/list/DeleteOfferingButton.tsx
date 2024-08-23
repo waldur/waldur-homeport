@@ -1,3 +1,4 @@
+import { Trash } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -53,6 +54,9 @@ export const DeleteOfferingButton = ({ row, refetch }) => {
         handleDeleteConfirmation();
       }}
     >
+      <span className="svg-icon svg-icon-2">
+        <Trash />
+      </span>
       {translate('Delete')}
     </Dropdown.Item>
   );

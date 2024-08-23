@@ -34,8 +34,8 @@ export const TableDropdownToggle = ({
     </Dropdown.Toggle>
   ) : (
     <Dropdown.Toggle
-      variant="active-light-primary"
-      className="btn-icon btn-text-grey-500 no-arrow"
+      variant="active-light"
+      className="btn-icon no-arrow"
       disabled={disabled}
     >
       <DotsThreeVertical size={22} weight="bold" />

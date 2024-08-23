@@ -346,43 +346,77 @@
 }
 
 // Outline default style (Tertairy style)
-.btn.btn-outline.btn-outline-default {
-  $color: $grey-700;
-  $icon-color: $grey-700;
-  $border-color: $grey-300;
-  $bg-color: $body-bg;
+.btn.btn-outline {
+  &.btn-outline-default {
+    $color: $gray-700;
+    $icon-color: $gray-700;
+    $border-color: $grey-300;
+    $bg-color: $body-bg;
 
-  $color-active: $grey-700;
-  $icon-color-active: $grey-700;
-  $border-color-active: $grey-300;
-  $bg-color-active: $gray-50;
+    $color-active: $gray-700;
+    $icon-color-active: $gray-700;
+    $border-color-active: $grey-300;
+    $bg-color-active: $gray-50;
 
-  $color-dark: $grey-700;
-  $icon-color-dark: $grey-700;
-  $border-color-dark: $grey-500;
-  $bg-color-dark: $grey-100;
+    $color-dark: $gray-700;
+    $icon-color-dark: $gray-700;
+    $border-color-dark: $grey-500;
+    $bg-color-dark: $grey-100;
 
-  @include button-custom-variant(
-    $color,
-    $icon-color,
-    $border-color,
-    $bg-color,
-    $color-active,
-    $icon-color-active,
-    $border-color-active,
-    $bg-color-active,
-    $color-dark,
-    $icon-color-dark,
-    $border-color-dark,
-    $bg-color-dark
-  );
+    @include button-custom-variant(
+      $color,
+      $icon-color,
+      $border-color,
+      $bg-color,
+      $color-active,
+      $icon-color-active,
+      $border-color-active,
+      $bg-color-active,
+      $color-dark,
+      $icon-color-dark,
+      $border-color-dark,
+      $bg-color-dark
+    );
 
-  .btn-check:focus + &,
-  &:focus:not(.btn-active):not(:active),
-  &.show:not(.btn-active):not(:active) {
-    background-color: $bg-color !important;
-    outline: 0;
-    border-color: $border-color;
-    box-shadow: 0 0 0 0.25rem $gray-200;
+    .btn-check:focus + &,
+    &:focus:not(.btn-active):not(:active),
+    &.show:not(.btn-active):not(:active) {
+      background-color: $bg-color !important;
+      outline: 0;
+      border-color: $border-color;
+      box-shadow: 0 0 0 0.25rem $gray-200;
+    }
+  }
+
+  &.btn-active-outline-default {
+    $color: null;
+    $icon-color: null;
+    $border-color: null;
+    $bg-color: null;
+
+    $color-active: $gray-700;
+    $icon-color-active: $gray-700;
+    $border-color-active: $grey-300;
+    $bg-color-active: $gray-50;
+
+    $color-dark: $gray-700;
+    $icon-color-dark: $gray-700;
+    $border-color-dark: $grey-500;
+    $bg-color-dark: $grey-100;
+
+    @include button-custom-variant(
+      $color,
+      $icon-color,
+      $border-color,
+      $bg-color,
+      $color-active,
+      $icon-color-active,
+      $border-color-active,
+      $bg-color-active,
+      $color-dark,
+      $icon-color-dark,
+      $border-color-dark,
+      $bg-color-dark
+    );
   }
 }

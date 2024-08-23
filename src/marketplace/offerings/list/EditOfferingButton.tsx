@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -37,6 +38,9 @@ export const EditOfferingButton = ({ row }) => {
         uuid: row.customer_uuid || customer.uuid,
       }}
     >
+      <span className="svg-icon svg-icon-2">
+        <PencilSimple />
+      </span>
       {translate('Edit')}
     </Dropdown.Item>
   );

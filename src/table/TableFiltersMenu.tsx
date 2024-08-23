@@ -247,7 +247,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
           </Button>
           <div
             ref={menuEl}
-            className="table-filters-menu menu menu-sub menu-sub-dropdown menu-column menu-grey-700 menu-state-bg-light menu-state-primary fw-bold py-1 fs-6 w-250px"
+            className="table-filters-menu menu menu-sub menu-sub-dropdown menu-column menu-gray-700 menu-state-bg-light menu-state-primary fw-bold py-1 fs-6 w-250px"
             data-kt-menu="true"
             data-cy="table-add-filter-menu"
           >
