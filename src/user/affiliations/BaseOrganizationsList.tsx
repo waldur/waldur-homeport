@@ -53,7 +53,7 @@ export const BaseOrganizationsList: FunctionComponent<{
   const props = useTable({
     table: 'customerList',
     fetchData: createFetcher('customers'),
-    queryField: 'name',
+    queryField: 'query',
     filter,
   });
 
