@@ -73,7 +73,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
         {
           title: translate('Has fired'),
           render: ({ row }) =>
-            row.has_fired === true ? (
+            !row.has_fired ? (
               <Badge
                 bg={null}
                 className="fs-8 fw-bolder lh-base badge-light-danger badge-pill"
