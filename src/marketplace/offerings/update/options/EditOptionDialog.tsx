@@ -74,7 +74,7 @@ export const EditOptionDialog = connect<{}, {}, { resolve: { option } }>(
           <Modal.Title>{translate('Edit option')}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <OptionForm />
+          <OptionForm resourceType={props.resolve.type} />
         </Modal.Body>
         <Modal.Footer>
           <SubmitButton

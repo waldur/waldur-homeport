@@ -32,7 +32,7 @@ const TypeGroup = () => (
   </FormGroup>
 );
 
-export const OptionForm = () => {
+export const OptionForm = ({ resourceType }) => {
   const optionValue = useSelector(selector) as any;
   const type = optionValue.type.value;
 
@@ -72,13 +72,15 @@ export const OptionForm = () => {
           <Field name="default" type="text" component={InputField} />
         </FormGroup>
       )}
-      <FormGroup>
-        <Field
-          name="required"
-          component={AwesomeCheckboxField}
-          label={translate('Required')}
-        />
-      </FormGroup>
+      {resourceType === 'options' ? (
+        <FormGroup>
+          <Field
+            name="required"
+            component={AwesomeCheckboxField}
+            label={translate('Required')}
+          />
+        </FormGroup>
+      ) : null}
     </>
   );
 };

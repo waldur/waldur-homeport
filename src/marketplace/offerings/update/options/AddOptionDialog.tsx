@@ -65,7 +65,7 @@ export const AddOptionDialog = reduxForm<
         <Modal.Title>{translate('Add option')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <OptionForm />
+        <OptionForm resourceType={props.resolve.type} />
       </Modal.Body>
       <Modal.Footer>
         <SubmitButton
