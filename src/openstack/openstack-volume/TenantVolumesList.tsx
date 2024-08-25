@@ -15,14 +15,12 @@ import { VOLUME_TYPE } from '../constants';
 
 import { formatInstance } from './OpenStackVolumeSummary';
 
-export const TenantVolumesList: FunctionComponent<{ resource }> = ({
-  resource,
-}) => {
+export const TenantVolumesList: FunctionComponent<{ scope }> = ({ scope }) => {
   const filter = useMemo(
     () => ({
-      service_settings_uuid: resource.child_settings,
+      service_settings_uuid: scope.child_settings,
     }),
-    [resource],
+    [scope],
   );
 
   const props = useTable({
@@ -64,7 +62,7 @@ export const TenantVolumesList: FunctionComponent<{ resource }> = ({
       ]}
       hasQuery={true}
       tableActions={
-        <AddResourceButton resource={resource} offeringType={VOLUME_TYPE} />
+        <AddResourceButton resource={scope} offeringType={VOLUME_TYPE} />
       }
       verboseName={translate('volumes')}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
