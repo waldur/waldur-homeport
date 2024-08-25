@@ -536,6 +536,9 @@ export const states: StateDeclaration[] = [
       skipBreadcrumb: true,
       skipHero: true,
     },
+    params: {
+      tab: { inherit: false },
+    },
   },
   {
     name: 'admin-marketplace-offerings',
