@@ -60,7 +60,8 @@ export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
     if (!flatTabs?.length) {
       return null;
     } else if (params.tab) {
-      return flatTabs.find((tab) => tab.key === params.tab);
+      // If invalid tab name is specified, use first tab instead
+      return flatTabs.find((tab) => tab.key === params.tab) || flatTabs[0];
     } else {
       return flatTabs[0];
     }
