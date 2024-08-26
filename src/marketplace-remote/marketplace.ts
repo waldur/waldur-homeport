@@ -35,7 +35,6 @@ registerOfferingType({
     return translate('Remote offering');
   },
   ...COMMON_OPTIONS,
-  showOptions: false,
   showBackendId: true,
   secretOptionsForm: RemoteOfferingSecretOptions,
   optionsSummary: RemoteOfferingOptionsSummary,
