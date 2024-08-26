@@ -33,6 +33,9 @@ export const OptionValue = ({
   option: OptionField;
   value;
 }) => {
+  if (value === null || value === '') {
+    return 'N/A';
+  }
   const Renderer = OptionValueRenders[option.type];
   if (Renderer) {
     return Renderer(value);
