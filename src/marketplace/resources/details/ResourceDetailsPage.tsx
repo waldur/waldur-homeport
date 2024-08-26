@@ -154,7 +154,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
       offering={data.offering}
       title={tabSpec.title}
       refetch={refetch}
-      isLoading={isLoading}
+      isLoading={isLoading || isRefetching}
     />
   ) : null;
 };
