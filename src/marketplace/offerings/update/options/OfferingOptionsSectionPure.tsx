@@ -3,7 +3,6 @@ import { Card, Table } from 'react-bootstrap';
 
 import { FormFieldsContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
-import { showOfferingOptions } from '@waldur/marketplace/common/registry';
 
 import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';
@@ -17,9 +16,6 @@ export const OfferingOptionsSectionPure: FC<
   OfferingSectionProps & { title; type }
 > = (props) => {
   const { readOnlyFields } = useContext(FormFieldsContext);
-  if (!showOfferingOptions(props.offering.type)) {
-    return null;
-  }
   const data = props.offering[props.type];
   return (
     <Card id={props.type}>

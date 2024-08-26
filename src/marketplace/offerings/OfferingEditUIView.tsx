@@ -19,7 +19,6 @@ import {
   getPluginOptionsForm,
   getSecretOptionsForm,
   showComponentsList,
-  showOfferingOptions,
 } from '../common/registry';
 import { ValidationIcon } from '../common/ValidationIcon';
 
@@ -113,33 +112,28 @@ const getTabs = (offering: Offering): PageBarTab[] => {
     });
   }
 
-  tabs.push({
-    key: 'endpoints',
-    component: OfferingEndpointsSection,
-    title: translate('Endpoints'),
-  });
-
-  // Offering options & Resource options
-  if (showOfferingOptions(offering.type)) {
-    tabs.push(
-      {
-        key: 'options',
-        component: OfferingOptionsSection,
-        title: translate('User input'),
-      },
-      {
-        key: 'resource_options',
-        component: OfferingResourceOptionsSection,
-        title: translate('Resource options'),
-      },
-    );
-  }
-
-  tabs.push({
-    key: 'category',
-    component: AttributesSection,
-    title: translate('Category'),
-  });
+  tabs.push(
+    {
+      key: 'endpoints',
+      component: OfferingEndpointsSection,
+      title: translate('Endpoints'),
+    },
+    {
+      key: 'options',
+      component: OfferingOptionsSection,
+      title: translate('User input'),
+    },
+    {
+      key: 'resource_options',
+      component: OfferingResourceOptionsSection,
+      title: translate('Resource options'),
+    },
+    {
+      key: 'category',
+      component: AttributesSection,
+      title: translate('Category'),
+    },
+  );
 
   // Components
   if (showComponentsList(offering.type)) {

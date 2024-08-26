@@ -37,7 +37,6 @@ export const COMMON_OPTIONS = {
   pluginOptionsForm: UserPluginOptionsForm,
   optionsSummary: OfferingOptionsSummary,
   serializer,
-  showOptions: true,
   showComponents: true,
 };
 

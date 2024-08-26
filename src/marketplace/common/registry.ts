@@ -45,7 +45,6 @@ interface OfferingConfiguration<
   limitSerializer?: LimitParser;
   limitParser?: LimitParser;
   label: string;
-  showOptions?: boolean;
   showComponents?: boolean;
   onlyOnePlan?: boolean;
   providerType?: string;
@@ -135,12 +134,6 @@ export function getCreatableOfferings(): Option[] {
       label: REGISTRY[key].label,
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
-}
-
-export function showOfferingOptions(offeringType: string) {
-  return (
-    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].showOptions
-  );
 }
 
 export function showBackendId(offeringType: string) {

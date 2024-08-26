@@ -72,7 +72,6 @@ registerOfferingType({
   checkoutSummaryComponent: BookingCheckoutSummary,
   pluginOptionsForm: UserPluginOptionsForm,
   detailsComponent: BookingDetails,
-  showOptions: true,
   showComponents: true,
   schedulable: true,
   serializer,
