@@ -5,6 +5,8 @@ import { OrderDetailsType } from '@waldur/marketplace/orders/types';
 import { Quota } from '@waldur/quotas/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
+import { FieldType } from './offerings/update/options/types';
+
 export type BillingPeriod = 'hour' | 'day' | 'half_month' | 'month';
 
 interface BaseComponent {
@@ -49,7 +51,7 @@ export interface Plan {
 }
 
 export interface OptionField {
-  type?: string;
+  type?: FieldType;
   label: string;
   help_text?: string;
   required?: boolean;

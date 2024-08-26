@@ -7,6 +7,7 @@ import { Offering } from '@waldur/marketplace/types';
 
 import { Resource } from '../types';
 
+import { OptionValue } from './OptionValue';
 import { UpdateResourceOptionButton } from './UpdateResourceOptionButton';
 
 interface ResourceOptionsCardProps {
@@ -21,7 +22,7 @@ const OptionRow = ({ option, value, resource, refetch }) => (
     <td className="col-md-3">{option.label}</td>
     <td className="col-md-3">{option.help_text}</td>
     <td className="col-md-6">
-      {value === true ? translate('Yes') : translate('No')}
+      <OptionValue option={option} value={value} />
     </td>
     <td className="row-actions">
       <div>
