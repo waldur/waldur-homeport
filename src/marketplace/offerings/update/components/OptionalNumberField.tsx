@@ -4,7 +4,7 @@ import { WrappedFieldProps } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
-const isEmpty = (value) =>
+export const isEmpty = (value) =>
   value === '' || value === null || typeof value === 'undefined';
 
 export const OptionalNumberField: FunctionComponent<WrappedFieldProps> = ({

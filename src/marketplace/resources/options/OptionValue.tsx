@@ -4,6 +4,7 @@ import { formatDate, formatTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
+import { isEmpty } from '@waldur/marketplace/offerings/update/components/OptionalNumberField';
 import { FieldType } from '@waldur/marketplace/offerings/update/options/types';
 import { OptionField } from '@waldur/marketplace/types';
 
@@ -33,7 +34,7 @@ export const OptionValue = ({
   option: OptionField;
   value;
 }) => {
-  if (value === null || value === '') {
+  if (isEmpty(value)) {
     return 'N/A';
   }
   const Renderer = OptionValueRenders[option.type];
