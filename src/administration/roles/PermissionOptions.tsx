@@ -103,6 +103,10 @@ export const PermissionOptions = [
         label: translate('Create offering user'),
         value: 'OFFERING.CREATE_USER',
       },
+      {
+        label: translate('Update offering user'),
+        value: 'OFFERING.UPDATE_USER',
+      },
     ],
   },
   {
