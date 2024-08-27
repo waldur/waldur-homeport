@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditButton } from '@waldur/form/EditButton';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { removeProposalResource } from '@waldur/proposals/api';
@@ -70,11 +71,7 @@ export const ResourceRequestItemActions = ({
 
   return (
     <>
-      <RowActionButton
-        action={openEditResourceDialog}
-        title={translate('Edit')}
-        size="sm"
-      />
+      <EditButton onClick={openEditResourceDialog} size="sm" />
       <RowActionButton
         action={remove}
         title={translate('Remove')}

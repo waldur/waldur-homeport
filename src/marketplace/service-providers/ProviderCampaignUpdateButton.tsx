@@ -1,11 +1,9 @@
-import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
+import { EditButton } from '@waldur/form/EditButton';
 import { openModalDialog } from '@waldur/modal/actions';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
 const CampaignUpdateDialog = lazyComponent(
   () => import('./CampaignUpdateDialog'),
@@ -25,12 +23,5 @@ export const ProviderCampaignUpdateButton: FunctionComponent<{
       }),
     );
   };
-  return (
-    <RowActionButton
-      action={callback}
-      title={translate('Edit')}
-      iconNode={<PencilSimple />}
-      size="sm"
-    />
-  );
+  return <EditButton onClick={callback} size="sm" />;
 };

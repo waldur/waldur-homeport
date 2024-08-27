@@ -1,13 +1,12 @@
-import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { setOrganizationLocation } from '@waldur/customer/list/store/actions';
+import { EditButton } from '@waldur/form/EditButton';
 import { translate } from '@waldur/i18n';
 import { GeolocationPoint } from '@waldur/map/types';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { Customer } from '@waldur/workspace/types';
 
 const SetLocationDialog = lazyComponent(
@@ -42,14 +41,7 @@ const openSetLocationDialog = (
 
 const PureSetLocationButton: FunctionComponent<SetLocationButtonProps> = (
   props,
-) => (
-  <ActionButton
-    iconNode={<PencilSimple weight="bold" />}
-    action={props.openDialog}
-    variant="secondary"
-    className="btn-sm btn-icon"
-  />
-);
+) => <EditButton onClick={props.openDialog} size="sm" />;
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   openDialog: () => dispatch(openSetLocationDialog(dispatch, ownProps)),

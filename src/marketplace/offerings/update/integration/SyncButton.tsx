@@ -40,9 +40,17 @@ export const SyncButton = ({ offering, refetch }) => {
   const enabled = ['OK', 'Erred'].includes(offering.scope_state);
 
   return (
-    <Button onClick={callback} variant="light" disabled={!enabled}>
+    <Button
+      onClick={callback}
+      variant="outline btn-outline-default"
+      disabled={!enabled}
+    >
       <span className="svg-icon svg-icon-2">
-        {enabled ? <ArrowsClockwise /> : <Spinner className="fa-spin" />}
+        {enabled ? (
+          <ArrowsClockwise weight="bold" />
+        ) : (
+          <Spinner className="fa-spin" />
+        )}
       </span>{' '}
       {translate('Synchronize')}
     </Button>
