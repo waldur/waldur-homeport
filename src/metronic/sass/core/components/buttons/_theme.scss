@@ -348,20 +348,20 @@
 // Outline default style (Tertairy style)
 .btn.btn-outline {
   &.btn-outline-default {
-    $color: $gray-700;
-    $icon-color: $gray-700;
-    $border-color: $grey-300;
+    $color: if(isDarkMode(), $primary-800, $gray-700);
+    $icon-color: if(isDarkMode(), $primary-800, $gray-700);
+    $border-color: if(isDarkMode(), $primary-300, $grey-300);
     $bg-color: $body-bg;
 
-    $color-active: $gray-700;
-    $icon-color-active: $gray-700;
-    $border-color-active: $grey-300;
-    $bg-color-active: $gray-50;
+    $color-active: if(isDarkMode(), $primary-800, $gray-700);
+    $icon-color-active: if(isDarkMode(), $primary-800, $gray-700);
+    $border-color-active: if(isDarkMode(), $primary-300, $grey-300);
+    $bg-color-active: if(isDarkMode(), $primary-50, $gray-50);
 
-    $color-dark: $gray-700;
-    $icon-color-dark: $gray-700;
-    $border-color-dark: $grey-500;
-    $bg-color-dark: $grey-100;
+    $color-dark: if(isDarkMode(), $primary-800, $gray-700);
+    $icon-color-dark: if(isDarkMode(), $primary-800, $gray-700);
+    $border-color-dark: if(isDarkMode(), $primary-500, $grey-500);
+    $bg-color-dark: if(isDarkMode(), $primary-100, $grey-100);
 
     @include button-custom-variant(
       $color,
@@ -378,13 +378,17 @@
       $bg-color-dark
     );
 
-    .btn-check:focus + &,
     &:focus:not(.btn-active):not(:active),
     &.show:not(.btn-active):not(:active) {
       background-color: $bg-color !important;
       outline: 0;
       border-color: $border-color;
       box-shadow: 0 0 0 0.25rem $gray-200;
+    }
+
+    .btn-check:checked + &,
+    .btn-check:active + & {
+      background-color: $border-color-active !important;
     }
   }
 

@@ -4847,10 +4847,6 @@
     "description": "administration/TokensList.tsx, user/support/UserEditForm.tsx",
     "message": "Last name"
   },
-  "Last {month} month": {
-    "description": "marketplace/resources/usage/utils.ts",
-    "message": "Last {month} month"
-  },
   "Latest date for resource termination": {
     "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx",
     "message": "Latest date for resource termination"
@@ -13418,6 +13414,10 @@
   "{from}-{to} of {all} items": {
     "description": "table/TablePagination.tsx",
     "message": "{from}-{to} of {all} items"
+  },
+  "{month} months": {
+    "description": "marketplace/resources/usage/utils.ts",
+    "message": "{month} months"
   },
   "{name} ({questions_count} questions)": {
     "description": "marketplace-checklist/useChecklist.tsx",
