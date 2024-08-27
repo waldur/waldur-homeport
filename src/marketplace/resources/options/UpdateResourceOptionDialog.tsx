@@ -34,7 +34,7 @@ export const UpdateResourceOptionDialog = connect(
     const { name, ...option } = props.resolve.option;
     const options = useMemo(() => {
       return {
-        options: { [name]: option },
+        options: { [name]: { ...option, required: false } },
         order: [name],
       };
     }, [name, option]);
@@ -43,10 +43,7 @@ export const UpdateResourceOptionDialog = connect(
     const submitForm = async (formData) => {
       try {
         await submitResourceOptions(props.resolve.resource.uuid, {
-          options: {
-            ...props.resolve.resource.options,
-            ...formData.attributes,
-          },
+          options: formData.attributes,
         });
         dispatch(showSuccess(translate('Options have been updated')));
         if (props.resolve.refetch) {
