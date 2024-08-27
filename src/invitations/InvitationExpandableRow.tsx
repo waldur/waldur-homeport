@@ -4,13 +4,14 @@ import { ENV } from '@waldur/configs/default';
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
 import { formatRoleType } from '@waldur/permissions/utils';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 import { Invitation } from './types';
 
 export const InvitationExpandableRow: React.FC<{
   row: Invitation;
 }> = ({ row }) => (
-  <>
+  <ExpandableContainer hasMultiSelect>
     <p>
       <b>{translate('Invitation link')}: </b>
       <CopyToClipboardContainer
@@ -52,5 +53,5 @@ export const InvitationExpandableRow: React.FC<{
         <b>{translate('Error message')}: </b> {row.error_message}
       </p>
     )}
-  </>
+  </ExpandableContainer>
 );

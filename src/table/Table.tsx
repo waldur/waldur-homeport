@@ -1,14 +1,13 @@
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Button, Card, Col, ColProps, Row, Stack } from 'react-bootstrap';
+import { Card, Col, ColProps, Row, Stack } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { BaseFieldProps } from 'redux-form';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { titleCase } from '@waldur/core/utils';
 import { ErrorMessage } from '@waldur/ErrorMessage';
-import { translate } from '@waldur/i18n';
 import { ErrorView } from '@waldur/navigation/header/search/ErrorView';
 
 import { OPTIONAL_COLUMN_ACTIONS_KEY } from './constants';
@@ -221,7 +220,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                 {!this.props.standalone && (
                   <Col xs className="order-0 mw-sm-25">
                     <Card.Title>
-                      <span className="me-2">
+                      <span className="h3 me-2">
                         {this.props.title ||
                           (this.props.verboseName &&
                             titleCase(this.props.verboseName)) ||
@@ -247,7 +246,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                     </div>
                   )}
                 </Col>
-                {this.showQueryColumn() && (
+                {this.props.hasQuery && (
                   <Col
                     xs={!this.showActionsColumn()}
                     sm={Boolean(this.showActionsColumn())}
@@ -256,33 +255,11 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                       !this.props.standalone && 'mx-auto',
                     )}
                   >
-                    {!this.props.selectedRows?.length ? (
-                      this.props.hasQuery && (
-                        <TableQuery
-                          query={this.props.query}
-                          setQuery={this.props.setQuery}
-                        />
-                      )
-                    ) : (
-                      <>
-                        <Button
-                          variant="light"
-                          className="btn-icon me-2"
-                          size="sm"
-                          onClick={this.props.resetSelection}
-                        >
-                          <i className="fa fa-times fs-5" />
-                        </Button>
-                        <span className="me-2 border-bottom-dashed border-2">
-                          {this.props.selectedRows?.length === 1
-                            ? translate('{count} row selected', {
-                                count: this.props.selectedRows?.length,
-                              })
-                            : translate('{count} rows selected', {
-                                count: this.props.selectedRows?.length,
-                              })}
-                        </span>
-                      </>
+                    {this.props.hasQuery && (
+                      <TableQuery
+                        query={this.props.query}
+                        setQuery={this.props.setQuery}
+                      />
                     )}
                   </Col>
                 )}
@@ -460,12 +437,6 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     return this.props.rows && this.props.rows.length > 0;
   }
 
-  showQueryColumn() {
-    return (
-      (this.props.enableMultiSelect && this.props.selectedRows?.length) ||
-      this.props.hasQuery
-    );
-  }
   showActionsColumn() {
     return (
       (this.props.enableMultiSelect && this.props.multiSelectActions) ||

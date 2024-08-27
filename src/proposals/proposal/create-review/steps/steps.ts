@@ -1,17 +1,24 @@
 import { VStepperFormStep } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 
-import { FormEvaluateProjectDetailsStep } from './FormEvaluateProjectDetailsStep';
+import { FormResourceRequestsStep } from '../../create/resource-requests-step/FormResourceRequestsStep';
+
+import { FormProjectDetailsStep } from './FormProjectDetailsStep';
 import FormSummaryStep from './FormSummaryStep';
 
-export const createProposalSteps: VStepperFormStep[] = [
+export const createReviewSteps: VStepperFormStep[] = [
   {
-    label: translate('Evaluate project details'),
-    id: 'step-evaluate-project',
-    component: FormEvaluateProjectDetailsStep,
+    label: translate('Project details'),
+    id: 'step-project',
+    component: FormProjectDetailsStep,
   },
   {
-    label: translate('Rating and comments'),
+    label: translate('Resource requests'),
+    id: 'step-resource-requests',
+    component: FormResourceRequestsStep,
+  },
+  {
+    label: translate('Summary'),
     id: 'step-summary',
     component: FormSummaryStep,
   },

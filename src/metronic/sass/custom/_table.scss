@@ -200,13 +200,11 @@
 
       .table {
         td:first-child,
-        th:first-child,
-        tr:first-child {
+        th:first-child {
           padding-left: $card-px;
         }
         td:last-child,
-        th:last-child,
-        tr:last-child {
+        th:last-child {
           padding-right: $card-px;
         }
       }

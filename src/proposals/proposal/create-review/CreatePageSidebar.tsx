@@ -1,34 +1,12 @@
-import { Badge } from 'react-bootstrap';
+import { PageBarTabs } from '@waldur/marketplace/common/PageBarTabs';
 
-import { FloatingSubmitButton } from '@waldur/form/FloatingSubmitButton';
-import { FormSteps } from '@waldur/form/FormSteps';
-import { SidebarProps } from '@waldur/form/SidebarProps';
-import { TosNotification } from '@waldur/form/TosNotification';
-import { translate } from '@waldur/i18n';
-import { Proposal } from '@waldur/proposals/types';
+import { createReviewSteps } from './steps/steps';
 
-interface CreatePageSidebarProps extends SidebarProps {
-  proposal: Proposal;
-}
+const tabs = createReviewSteps.map((step) => ({
+  key: step.id,
+  title: step.label,
+}));
 
-export const CreatePageSidebar = (props: CreatePageSidebarProps) => (
-  <>
-    <p className="text-muted fst-italic fs-7 mb-2">
-      UUID: {props.proposal?.uuid}
-    </p>
-    <Badge bg="light" text="dark" className="mb-7">
-      {translate('In review')}
-    </Badge>
-    <h6 className="fs-7">{translate('Review progress')}</h6>
-    <FormSteps
-      steps={props.steps}
-      completedSteps={props.completedSteps}
-      errors={[]}
-    />
-    <FloatingSubmitButton
-      submitting={props.submitting}
-      label={translate('Submit review')}
-    />
-    <TosNotification />
-  </>
+export const CreatePageSidebar = () => (
+  <PageBarTabs tabs={tabs} mode="tabs-left" />
 );

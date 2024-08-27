@@ -11,15 +11,18 @@ import {
   UsageReportRequest,
 } from '@waldur/marketplace/resources/usage/types';
 import { Table, createFetcher } from '@waldur/table';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/utils';
 
 import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
 
 const UsageExpandableRow = ({ row }) => (
-  <p>
-    <strong>{translate('Comment')}</strong>: {row.description || 'N/A'}
-  </p>
+  <ExpandableContainer>
+    <p>
+      <strong>{translate('Comment')}</strong>: {row.description || 'N/A'}
+    </p>
+  </ExpandableContainer>
 );
 
 export const ResourceUsageList: FC = () => {

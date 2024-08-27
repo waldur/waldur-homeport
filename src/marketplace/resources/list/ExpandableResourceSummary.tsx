@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { Container } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -12,11 +11,12 @@ import {
   BASIC_OFFERING_TYPE,
   SUPPORT_OFFERING_TYPE,
 } from '@waldur/support/constants';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 import { KeyValueButton } from '../KeyValueButton';
 
 const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => (
-  <Container>
+  <ExpandableContainer hasMultiSelect asTable>
     <Field
       label={translate('Plan details')}
       value={row.plan_uuid && <PlanDetailsLink resource={row.uuid} />}
@@ -33,7 +33,7 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => (
         )
       }
     />
-  </Container>
+  </ExpandableContainer>
 );
 
 const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
@@ -58,6 +58,7 @@ const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
         parent_uuid: row.parent_uuid,
         parent_name: row.parent_name,
       }}
+      hasMultiSelect
     />
   );
 };

@@ -21,7 +21,7 @@ export const ExpandableEventField: FunctionComponent<
     value = <Link state={props.state} params={props.params} label={value} />;
   }
   return (
-    <Row className="mb-1">
+    <Row className="mb-1 field-row">
       <Col sm={3}>{props.label}</Col>
       <Col sm={9}>{value}</Col>
     </Row>

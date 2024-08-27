@@ -1,3 +1,4 @@
+import { Question } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import {
   FunctionComponent,
@@ -7,6 +8,8 @@ import {
 } from 'react';
 import { Form } from 'react-bootstrap';
 
+import { Tip } from '@waldur/core/Tooltip';
+
 interface ReadOnlyFormControlProps {
   label: string;
   value: any;
@@ -15,7 +18,10 @@ interface ReadOnlyFormControlProps {
   className?: string;
   plaintext?: boolean;
   disabled?: boolean;
+  floating?: boolean;
+  inline?: boolean;
   actions?: ReactNode;
+  tooltip?: string;
 }
 
 export const ReadOnlyFormControl: FunctionComponent<
@@ -28,9 +34,12 @@ export const ReadOnlyFormControl: FunctionComponent<
     plaintext,
     disabled,
     className,
+    floating,
+    inline,
     addon,
     children,
     actions,
+    tooltip,
     ...rest
   } = props;
   const childProps = {
@@ -40,18 +49,33 @@ export const ReadOnlyFormControl: FunctionComponent<
     readOnly: true,
     disabled,
   };
-  const labelNode = <Form.Label>{label}</Form.Label>;
+  const labelNode = tooltip ? (
+    <div className="d-flex justify-content-between flex-grow-1">
+      <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>
+      <Tip
+        id={'tip' + (label || tooltip).substring(0, 20).replaceAll(' ', '-')}
+        label={tooltip}
+        placement="left"
+      >
+        <Question size={20} weight="bold" className="text-grey-500" />
+      </Tip>
+    </div>
+  ) : (
+    <Form.Label className={inline ? 'mb-0' : undefined}>{label}</Form.Label>
+  );
 
   const main = (
     <div
       className={classNames(
         'mb-7',
         className,
+        floating && 'form-floating',
         addon && 'form-addon',
         Boolean(actions) && 'flex-grow-1',
+        inline && 'd-flex align-items-center',
       )}
     >
-      {labelNode}
+      {!floating && labelNode}
       {children ? (
         cloneElement(children as any, childProps)
       ) : (
@@ -68,6 +92,7 @@ export const ReadOnlyFormControl: FunctionComponent<
           {description}
         </Form.Text>
       )}
+      {floating && labelNode}
       {addon && <span className="form-control-addon">{addon}</span>}
     </div>
   );

@@ -5,6 +5,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 const InfoSummary: FunctionComponent<{ infoObj }> = ({ infoObj }) => {
@@ -24,7 +25,7 @@ const InfoSummary: FunctionComponent<{ infoObj }> = ({ infoObj }) => {
 };
 
 export const OrderExpandableRow: FunctionComponent<{ row }> = ({ row }) => (
-  <Container>
+  <ExpandableContainer asTable>
     <Field label={translate('Created by')} value={row.created_by_full_name} />
     <Field
       label={translate('Limits')}
@@ -47,5 +48,5 @@ export const OrderExpandableRow: FunctionComponent<{ row }> = ({ row }) => (
       label={translate('Created at')}
       value={formatDateTime(row.created)}
     />
-  </Container>
+  </ExpandableContainer>
 );

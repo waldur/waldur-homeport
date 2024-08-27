@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import { translate } from '@waldur/i18n';
 import { CallOffering } from '@waldur/proposals/types';
 import { Field } from '@waldur/resource/summary';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 interface OwnProps {
   row: CallOffering;
@@ -11,7 +12,7 @@ interface OwnProps {
 export const OfferingRequestsListExpandableRow: FunctionComponent<OwnProps> = ({
   row,
 }) => (
-  <div className="container-fluid m-t">
+  <ExpandableContainer>
     {typeof row.attributes?.limits === 'object' && (
       <>
         <h3>{translate('Components')}</h3>
@@ -30,5 +31,5 @@ export const OfferingRequestsListExpandableRow: FunctionComponent<OwnProps> = ({
       isStuck
     />
     <Field label={translate('Message')} value={row.description} isStuck />
-  </div>
+  </ExpandableContainer>
 );

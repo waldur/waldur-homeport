@@ -93,7 +93,7 @@ export const RemoveFilterBadgeButton = ({ onClick }) => (
     className="text-btn ps-2 text-hover-danger"
     onClick={onClick}
   >
-    <X weight="bold" />
+    <X weight="bold" size={20} />
   </button>
 );
 
@@ -112,7 +112,7 @@ export const TableSidebarFilterValues = ({
           className="filter-value"
           style={!ellipsis ? { maxWidth: 'unset' } : undefined}
         >
-          <Badge bg="secondary" className="text-dark">
+          <Badge bg="light" className="text-dark">
             {badgeValue(value)}
             {!hideRemoveButton && (
               <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
@@ -125,7 +125,7 @@ export const TableSidebarFilterValues = ({
         {value.map((v, i) => (
           <Badge
             key={i}
-            bg="secondary"
+            bg="light"
             className="filter-value text-dark"
             style={!ellipsis ? { maxWidth: 'unset' } : undefined}
           >
@@ -138,7 +138,7 @@ export const TableSidebarFilterValues = ({
       </>
     ) : (
       <Badge
-        bg="secondary"
+        bg="light"
         className="filter-value text-dark"
         style={!ellipsis ? { maxWidth: 'unset' } : undefined}
       >

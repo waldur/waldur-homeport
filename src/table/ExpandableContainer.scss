@@ -1,0 +1,46 @@
+$expandArrowWidth: 40px;
+
+table .expandable-container {
+  margin-left: $expandArrowWidth;
+
+  &.has-multiselect {
+    margin-left: calc($expandArrowWidth + 39px);
+  }
+
+  // As table
+  &.as-table {
+    display: table;
+    box-sizing: border-box;
+    text-indent: initial;
+    unicode-bidi: isolate;
+    caption-side: bottom;
+    border-collapse: collapse;
+
+    // tr
+    div.field-row {
+      display: table-row;
+      vertical-align: middle;
+      unicode-bidi: isolate;
+      border-color: inherit;
+
+      > div {
+        // td
+        display: table-cell;
+        vertical-align: inherit;
+        unicode-bidi: isolate;
+
+        padding: 0;
+        width: auto;
+
+        // th
+        &:first-child {
+          font-weight: bold;
+          text-align: -internal-center;
+
+          padding-right: 60px;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
