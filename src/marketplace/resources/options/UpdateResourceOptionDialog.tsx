@@ -24,7 +24,10 @@ interface UpdateResourceOptionDialogProps {
 export const UpdateResourceOptionDialog = connect(
   (_, ownProps: UpdateResourceOptionDialogProps) => ({
     initialValues: {
-      attributes: ownProps.resolve.resource.options,
+      attributes: {
+        [ownProps.resolve.option.name]:
+          ownProps.resolve.resource.options[ownProps.resolve.option.name],
+      },
     },
   }),
 )(
