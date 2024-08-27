@@ -5,12 +5,13 @@ import { FunctionComponent } from 'react';
 import { formatDate } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 export const IssuesListExpandableRow: FunctionComponent<{
   row;
   supportOrStaff;
 }> = ({ row, supportOrStaff }) => (
-  <div className="container-fluid">
+  <ExpandableContainer>
     <div className="issue-list-expandable-row col-sm-12">
       <div className="mb-1">
         <dt>{translate('Reporter')}:</dt>
@@ -45,5 +46,5 @@ export const IssuesListExpandableRow: FunctionComponent<{
         </div>
       )}
     </div>
-  </div>
+  </ExpandableContainer>
 );

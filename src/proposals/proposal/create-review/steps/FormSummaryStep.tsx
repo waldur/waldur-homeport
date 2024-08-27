@@ -1,17 +1,20 @@
+import { Star } from '@phosphor-icons/react';
 import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import ReactStars from 'react-rating-stars-component';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 
-import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
-import { Tip } from '@waldur/core/Tooltip';
-import { FieldError, FormGroup, TextField } from '@waldur/form';
-import { FloatingButton } from '@waldur/form/FloatingButton';
 import {
-  VStepperFormStepCard,
-  VStepperFormStepProps,
-} from '@waldur/form/VStepperFormStep';
+  RATING_STAR_ACTIVE_COLOR,
+  RATING_STAR_INACTIVE_COLOR,
+} from '@waldur/core/constants';
+import { Panel } from '@waldur/core/Panel';
+import { Tip } from '@waldur/core/Tooltip';
+import { FormGroup, SubmitButton, TextField, FieldError } from '@waldur/form';
+import { FloatingButton } from '@waldur/form/FloatingButton';
+import { TosNotification } from '@waldur/form/TosNotification';
+import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { updateProposalReview } from '@waldur/proposals/api';
 import { REVIEW_SUMMARY_FORM_ID } from '@waldur/proposals/constants';
@@ -60,62 +63,81 @@ const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
   );
 
   return (
-    <VStepperFormStepCard
-      title={translate('Summary')}
-      step={props.step}
-      id={props.id}
-      completed={props.observed}
-    >
-      <Field
-        name="summary_score"
-        component={(fieldProps) => (
-          <ReactStars
-            count={5}
-            size={24}
-            edit={true}
-            isHalf={false}
-            activeColor={RATING_STAR_ACTIVE_COLOR}
-            value={fieldProps.input.value || 0}
-            onChange={(value) => fieldProps.input.onChange(value)}
-          />
-        )}
-        label={translate('Final score')}
+    <div className="d-flex flex-column gap-5">
+      <Panel title={props.title} id={props.id}>
+        <Field
+          name="summary_score"
+          component={(fieldProps) => (
+            <FormGroup {...fieldProps} label={translate('Rate')}>
+              <div className="d-flex align-items-center gap-4">
+                <ReactStars
+                  count={5}
+                  size={20}
+                  edit={true}
+                  isHalf={false}
+                  emptyIcon={<Star weight="fill" />}
+                  filledIcon={<Star weight="fill" />}
+                  color={RATING_STAR_INACTIVE_COLOR}
+                  activeColor={RATING_STAR_ACTIVE_COLOR}
+                  value={fieldProps.input.value || 0}
+                  onChange={(value) => fieldProps.input.onChange(value)}
+                />
+                <span className="text-grey-700 mt-2">
+                  {fieldProps.input.value === 1
+                    ? translate('1 star')
+                    : translate('{count} stars', {
+                        count: fieldProps.input.value,
+                      })}
+                </span>
+              </div>
+            </FormGroup>
+          )}
+        />
+        <Field
+          name="summary_public_comment"
+          component={FormGroup}
+          maxLength={1000}
+          label={translate('Comments')}
+          placeholder={translate('Add your comment here')}
+        >
+          <TextField />
+        </Field>
+        <Field
+          name="summary_private_comment"
+          component={FormGroup}
+          maxLength={1000}
+          label={translate('Notes (not visible to user)')}
+          placeholder={translate('Add your notes here')}
+        >
+          <TextField />
+        </Field>
+        {/* <Button onClick={handleSubmit(updateReview)}>
+          {translate('Save summary')}
+        </Button> */}
+        <FloatingButton>
+          {disabled ? (
+            <Tip
+              label={
+                <FieldError
+                  error={translate('Reviews in final states are not editable')}
+                />
+              }
+              id="save-summary-button-errors"
+            >
+              {Btn}
+            </Tip>
+          ) : (
+            Btn
+          )}
+        </FloatingButton>
+      </Panel>
+
+      <SubmitButton
+        submitting={props.submitting}
+        label={translate('Submit review')}
       />
-      <Field
-        name="summary_public_comment"
-        component={FormGroup}
-        maxLength={1000}
-        label={translate('Comments')}
-        placeholder={translate('Add your comment here')}
-      >
-        <TextField />
-      </Field>
-      <Field
-        name="summary_private_comment"
-        component={FormGroup}
-        maxLength={1000}
-        label={translate('Notes (not visible to user)')}
-        placeholder={translate('Add your comment here')}
-      >
-        <TextField />
-      </Field>
-      <FloatingButton>
-        {disabled ? (
-          <Tip
-            label={
-              <FieldError
-                error={translate('Reviews in final states are not editable')}
-              />
-            }
-            id="save-summary-button-errors"
-          >
-            {Btn}
-          </Tip>
-        ) : (
-          Btn
-        )}
-      </FloatingButton>
-    </VStepperFormStepCard>
+      <TosNotification className="text-center text-grey-500 mb-0" />
+    </div>
   );
 };
 

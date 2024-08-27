@@ -56,7 +56,7 @@ export const OpenStackInstanceVolumeBadge = ({
       autoWidth
       rootClose
     >
-      <Badge bg="light" text="dark" className="cursor-pointer me-3 mb-1">
+      <Badge bg="grey-200" text="dark" className="cursor-pointer me-3 mb-1">
         <img src={openstackIcon} alt="openstack" width={15} className="me-2" />
         {volume.name} ({formatFilesize(volume.size)}, {volume.type_name})
       </Badge>

@@ -24,11 +24,11 @@ const Body: FC<PropsWithChildren<{ className? }>> = (props) => (
   </div>
 );
 
-const Sidebar: FC<PropsWithChildren> = (props) => {
+const Sidebar: FC<PropsWithChildren<{ transparent?: boolean }>> = (props) => {
   const isVMode = useMediaQuery({ maxWidth: 1200 });
   useFullPage();
 
-  return (
+  return !props.transparent ? (
     <div
       className={
         isVMode
@@ -39,6 +39,16 @@ const Sidebar: FC<PropsWithChildren> = (props) => {
       <Card className="card-flush border-0 w-100">
         <Card.Body>{props.children}</Card.Body>
       </Card>
+    </div>
+  ) : (
+    <div
+      className={
+        isVMode
+          ? 'v-stepper-form-sidebar container-xxl d-none'
+          : 'v-stepper-form-sidebar'
+      }
+    >
+      {props.children}
     </div>
   );
 };

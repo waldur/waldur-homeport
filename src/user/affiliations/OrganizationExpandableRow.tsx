@@ -1,8 +1,8 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -21,10 +21,10 @@ export const OrganizationExpandableRow: React.FC<{
   return permissions.length === 0 ? (
     <>{translate('No permissions data.')}</>
   ) : (
-    <Container>
+    <ExpandableContainer asTable>
       {permissions.map((permission, index) => (
         <PermissionDetails key={index} permission={permission} />
       ))}
-    </Container>
+    </ExpandableContainer>
   );
 };

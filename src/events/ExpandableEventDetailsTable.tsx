@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Container } from 'react-bootstrap';
 
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { translate } from '@waldur/i18n';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 import { ExpandableEventField } from './ExpandableEventField';
 import { Event } from './types';
@@ -18,7 +18,7 @@ const showLink = (event, isStaffOrSupport) =>
 export const ExpandableEventDetailsTable: FunctionComponent<
   ExpandableEventDetailsTableProps
 > = ({ event, isStaffOrSupport }) => (
-  <Container>
+  <ExpandableContainer asTable>
     {isStaffOrSupport ? (
       <ExpandableEventField
         label={translate('User')}
@@ -123,5 +123,5 @@ export const ExpandableEventDetailsTable: FunctionComponent<
         value={event.context.new_value}
       />
     )}
-  </Container>
+  </ExpandableContainer>
 );

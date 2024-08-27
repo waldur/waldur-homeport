@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 import { Call } from '@waldur/proposals/types';
 import { Field } from '@waldur/resource/summary';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 import {
   formatRoundAllocationStrategy,
@@ -27,7 +28,7 @@ export const CallExpandableRow: FunctionComponent<{
   }, [row]);
 
   return (
-    <>
+    <ExpandableContainer asTable>
       <Field
         label={translate('Next cutoff')}
         value={
@@ -55,6 +56,6 @@ export const CallExpandableRow: FunctionComponent<{
         value="44.54/100 % (i)"
         className="text-nowrap"
       />
-    </>
+    </ExpandableContainer>
   );
 };

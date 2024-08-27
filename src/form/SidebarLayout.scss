@@ -8,6 +8,11 @@ $headerAndToolbarHeight: calc(65px + var(--kt-toolbar-height));
   flex-shrink: 0;
   height: calc(100vh - $headerAndToolbarHeight);
 
+  &:not(.drawer) {
+    top: calc($headerAndToolbarHeight + 20px);
+    height: fit-content;
+  }
+
   .stepper {
     &.stepper-pills {
       &.stepper-column {

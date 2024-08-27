@@ -1,6 +1,6 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, ReactNode, useContext, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Nav, TabContainer } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 
@@ -80,6 +80,7 @@ interface PageBarTabsProps {
   tabs: PageBarTab[];
   right?: ReactNode;
   showFirstTab?: boolean;
+  mode?: 'bar' | 'tabs-left';
 }
 
 export const PageBarTabs: FC<PageBarTabsProps> = (props) => {
@@ -97,7 +98,9 @@ export const PageBarTabs: FC<PageBarTabsProps> = (props) => {
     }
   }, [props.showFirstTab, tabs, params, state, router]);
 
-  return (
+  if (!tabs.length) return;
+
+  return (props.mode ?? 'bar') === 'bar' ? (
     <div className="page-bar-container bg-body shadow-sm">
       <div className="container-fluid">
         <div className="d-flex scroll-x pt-2">
@@ -129,5 +132,26 @@ export const PageBarTabs: FC<PageBarTabsProps> = (props) => {
         </div>
       </div>
     </div>
-  );
+  ) : props.mode === 'tabs-left' ? (
+    <TabContainer
+      defaultActiveKey={tabs[0].key}
+      activeKey={visibleSectionId}
+      onSelect={(key) => scrollToSectionById(key)}
+    >
+      <Nav variant="tabs" className="page-tabs-container nav-line-tabs">
+        {tabs.map((tab) => (
+          <Nav.Item key={tab.key}>
+            <Nav.Link
+              eventKey={tab.key}
+              as={Link}
+              state={tab.state ?? state.name}
+              params={tab.params ?? { '#': tab.key }}
+            >
+              {tab.title}
+            </Nav.Link>
+          </Nav.Item>
+        ))}
+      </Nav>
+    </TabContainer>
+  ) : null;
 };

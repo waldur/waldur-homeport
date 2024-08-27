@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import { SshKey } from '@waldur/user/types';
 
 import { RobotAccount } from './types';
@@ -19,7 +20,7 @@ export const RobotAccountExpandable: FC<{ row: RobotAccount }> = ({ row }) => {
     [row],
   );
   return (
-    <>
+    <ExpandableContainer>
       {row.users.length > 0 ? (
         <>
           <strong>{translate('Connected users and their keys')}</strong>
@@ -94,6 +95,6 @@ export const RobotAccountExpandable: FC<{ row: RobotAccount }> = ({ row }) => {
           </ul>
         </>
       ) : null}
-    </>
+    </ExpandableContainer>
   );
 };

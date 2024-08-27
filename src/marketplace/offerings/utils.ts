@@ -38,13 +38,13 @@ export const getDefaultLimits = (offering: Offering): Record<string, number> =>
     {},
   );
 
-export const scrollToSectionById = (section: string) => {
+export const scrollToSectionById = (section: string, extraOffset = 180) => {
   const el = document.getElementById(section);
   if (!el) return;
   window.scroll({
     behavior: 'smooth',
     left: 0,
-    top: el.offsetTop - 180,
+    top: el.offsetTop - extraOffset,
   });
 };
 

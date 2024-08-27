@@ -1,12 +1,13 @@
 import { FunctionComponent } from 'react';
-import { Container } from 'react-bootstrap';
 
 import * as ResourceSummaryRegistry from '@waldur/resource/summary/registry';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 import { ResourceSummaryBase } from './ResourceSummaryBase';
 
 interface ResourceSummaryProps {
   resource: any;
+  hasMultiSelect?: boolean;
 }
 
 export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
@@ -23,9 +24,9 @@ export const ResourceSummary: FunctionComponent<ResourceSummaryProps> = (
     props.resource.resource_type,
   );
   return (
-    <Container>
+    <ExpandableContainer hasMultiSelect={props.hasMultiSelect} asTable>
       <ResourceSummaryBase resource={props.resource} />
       {SummaryComponent && <SummaryComponent resource={props.resource} />}
-    </Container>
+    </ExpandableContainer>
   );
 };

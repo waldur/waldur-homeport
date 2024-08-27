@@ -25,6 +25,12 @@ interface PageBarContextModel {
   visibleSectionId?: string;
 }
 
+interface PageBarProviderProps {
+  scrollTrackSide?: 'top' | 'bottom';
+  /** Distance from top or bottom to detect sections - in px */
+  scrollOffset?: number;
+}
+
 export const PageBarContext = createContext<PageBarContextModel>({
   tabs: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -33,7 +39,11 @@ export const PageBarContext = createContext<PageBarContextModel>({
   clearTabs: () => {},
 });
 
-export const PageBarProvider: FC<PropsWithChildren> = ({ children }) => {
+export const PageBarProvider: FC<PropsWithChildren<PageBarProviderProps>> = ({
+  children,
+  scrollOffset = 100,
+  scrollTrackSide = 'bottom',
+}) => {
   const [tabs, setTabs] = useState<PageBarTab[]>([]);
 
   const addTabs = (_tabs: PageBarTab[]) => {
@@ -80,8 +90,8 @@ export const PageBarProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const visibleSectionId = useScrollTracker({
     sectionIds: tabKeys,
-    trackSide: 'bottom',
-    offset: 100,
+    trackSide: scrollTrackSide,
+    offset: scrollOffset,
   });
 
   const value: PageBarContextModel = {

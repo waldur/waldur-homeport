@@ -13,3 +13,32 @@ body:not(.toolbar-fixed) {
     top: 65px; /* header height */
   }
 }
+
+.nav.page-tabs-container {
+  flex-direction: column;
+  padding-left: 1.75rem;
+  border-bottom: none;
+
+  .nav-item {
+    display: flex;
+    margin: 0;
+
+    .nav-link {
+      border: none;
+      border-left: 2px solid transparent;
+      border-radius: 0;
+      padding: 0.75rem 1rem;
+      margin: 0;
+      font-weight: 600;
+
+      &.active {
+        border: none;
+        border-left: 2px solid var(--bs-primary) !important;
+      }
+      &:hover {
+        border-bottom: none;
+        border-left: 2px solid transparent;
+      }
+    }
+  }
+}
