@@ -2,9 +2,8 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditButton } from '@waldur/form/EditButton';
 import { openModalDialog } from '@waldur/modal/actions';
-
-import { RowEditButton } from '../RowEditButton';
 
 import { GETTING_STARTED_FORM_ID } from './constants';
 
@@ -24,5 +23,5 @@ export const EditGettingStartedButton: FC<{ offering; refetch }> = (props) => {
       }),
     );
   };
-  return <RowEditButton onClick={callback} size="sm" />;
+  return <EditButton onClick={callback} size="sm" />;
 };

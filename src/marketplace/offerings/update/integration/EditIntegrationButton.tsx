@@ -1,11 +1,11 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-
-import { RowEditButton } from '../RowEditButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { EDIT_INTEGRATION_FORM_ID } from './constants';
 
@@ -29,10 +29,10 @@ export const EditIntegrationButton: FunctionComponent<{
     );
   };
   return (
-    <RowEditButton
-      onClick={callback}
+    <ActionButton
+      iconNode={<PencilSimple weight="bold" />}
       title={translate('Edit integration options')}
-      variant="light"
+      action={callback}
     />
   );
 };

@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditButton } from '@waldur/form/EditButton';
 import { openModalDialog } from '@waldur/modal/actions';
 
-import { RowEditButton } from '../RowEditButton';
 import { OfferingSectionProps } from '../types';
 
 import { OPTION_FORM_ID } from './constants';
@@ -29,5 +29,5 @@ export const EditOptionButton: FunctionComponent<
       }),
     );
   };
-  return <RowEditButton onClick={callback} size="sm" />;
+  return <EditButton onClick={callback} size="sm" />;
 };

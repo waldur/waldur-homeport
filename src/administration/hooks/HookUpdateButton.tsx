@@ -1,11 +1,10 @@
-import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditButton } from '@waldur/form/EditButton';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { ADMIN_HOOK_LIST_ID } from './constants';
 
@@ -29,10 +28,9 @@ export const HookUpdateButton: FunctionComponent<HookUpdateButtonProps> = ({
 }) => {
   const dispatch = useDispatch();
   return (
-    <RowActionButton
-      title={translate('Update')}
-      action={() => dispatch(showHookUpdateDialog(row))}
-      iconNode={<PencilSimple />}
+    <EditButton
+      label={translate('Update')}
+      onClick={() => dispatch(showHookUpdateDialog(row))}
       size="sm"
     />
   );

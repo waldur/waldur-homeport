@@ -2,9 +2,8 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditButton } from '@waldur/form/EditButton';
 import { openModalDialog } from '@waldur/modal/actions';
-
-import { RowEditButton } from '../RowEditButton';
 
 import { OVERVIEW_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';
@@ -25,5 +24,5 @@ export const EditOverviewButton: FC<EditOfferingProps> = (props) => {
       }),
     );
   };
-  return <RowEditButton onClick={callback} size="sm" />;
+  return <EditButton onClick={callback} size="sm" />;
 };

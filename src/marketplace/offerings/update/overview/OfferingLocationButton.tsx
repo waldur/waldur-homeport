@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditButton } from '@waldur/form/EditButton';
 import { translate } from '@waldur/i18n';
 import { GeolocationPoint } from '@waldur/map/types';
 import { updateOfferingLocation } from '@waldur/marketplace/common/api';
@@ -9,7 +10,6 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ARCHIVED } from '../../store/constants';
-import { RowEditButton } from '../RowEditButton';
 
 const SetLocationDialog = lazyComponent(
   () => import('@waldur/map/SetLocationDialog'),
@@ -54,5 +54,5 @@ export const OfferingLocationButton = ({ offering, refetch }) => {
   if (offering.state === ARCHIVED) {
     return null;
   }
-  return <RowEditButton onClick={callback} size="sm" />;
+  return <EditButton onClick={callback} size="sm" />;
 };

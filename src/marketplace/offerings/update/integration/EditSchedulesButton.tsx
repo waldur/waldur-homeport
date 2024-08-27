@@ -1,3 +1,4 @@
+import { PencilSimple } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -5,8 +6,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { isOfferingTypeSchedulable } from '@waldur/marketplace/common/registry';
 import { openModalDialog } from '@waldur/modal/actions';
-
-import { RowEditButton } from '../RowEditButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { EDIT_SCHEDULES_FORM_ID } from './constants';
 
@@ -34,10 +34,10 @@ export const EditSchedulesButton: FunctionComponent<{
     return null;
   }
   return (
-    <RowEditButton
-      onClick={callback}
+    <ActionButton
+      action={callback}
       title={translate('Edit schedules')}
-      variant="light"
+      iconNode={<PencilSimple weight="bold" />}
     />
   );
 };
