@@ -1,8 +1,7 @@
 import { ChartBar, Table } from '@phosphor-icons/react';
 import { useMemo, useState } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
-import { SelectControl } from '@waldur/form/SelectControl';
 import { translate } from '@waldur/i18n';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
@@ -23,8 +22,8 @@ export const UsageCard = ({ resource, offering }) => {
   );
   const [period, setPeriod] = useState(
     periodOptions.length > 1
-      ? periodOptions[periodOptions.length - 2]
-      : periodOptions[0],
+      ? periodOptions[periodOptions.length - 2].value
+      : periodOptions[0].value,
   );
 
   return resource.is_usage_based || resource.is_limit_based ? (
@@ -35,12 +34,24 @@ export const UsageCard = ({ resource, offering }) => {
         </Card.Title>
         <div className="card-toolbar gap-4">
           {periodOptions.length > 1 && (
-            <SelectControl
-              options={periodOptions}
+            <ToggleButtonGroup
+              type="radio"
+              name="period"
               value={period}
+              defaultValue={period}
               onChange={setPeriod}
-              className="w-150px"
-            />
+            >
+              {periodOptions.map((option) => (
+                <ToggleButton
+                  key={option.value}
+                  id={'tbg-' + option.value}
+                  value={option.value}
+                  variant="outline btn-outline-default"
+                >
+                  {option.label}
+                </ToggleButton>
+              ))}
+            </ToggleButtonGroup>
           )}
           <Button
             variant="outline-default"
@@ -59,7 +70,7 @@ export const UsageCard = ({ resource, offering }) => {
         <ResourceUsageTabsContainer
           resource={resourceRef}
           offering={offering}
-          months={period.value}
+          months={period}
           hideHeader={true}
           displayMode={mode}
         />
