@@ -54,7 +54,7 @@ const serializeNode = (cluster, formData) => ({
 
 const loadNodeCreateData = async (cluster: Cluster) => {
   const offering = await getPublicOffering(cluster.marketplace_offering_uuid);
-  return await loadData(cluster.tenant_settings, offering);
+  return await loadData(cluster, offering);
 };
 
 export const CreateNodeDialog = reduxForm<FormData, OwnProps>({

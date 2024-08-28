@@ -95,6 +95,7 @@ export interface OrganizationGroup {
 }
 
 export interface Offering extends GeolocationPoint {
+  parent_scope_uuid?: string;
   quotas?: Quota[];
   uuid?: string;
   url?: string;

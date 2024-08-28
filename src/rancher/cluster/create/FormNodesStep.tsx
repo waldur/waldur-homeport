@@ -180,15 +180,16 @@ export const FormNodesStep = (props: FormStepProps) => {
   const dispatch = useDispatch();
   const tenant = useSelector(formTenantSelector);
 
-  const { data: volumeData } = useVolumeDataLoader(tenant);
+  const { data: volumeData } = useVolumeDataLoader(tenant?.url);
   const { data: templates, isLoading: templateLoading } = useQuery(
     ['nodes-step-templates'],
     () => listClusterTemplates(),
     { staleTime: 3 * 60 * 1000 },
   );
   const { data: flavors, isLoading } = useQuery<{}, {}, Flavor[]>(
-    ['nodes-step-flavors', tenant, props.offering.uuid],
-    () => (tenant && props.offering ? loadFlavors(tenant, props.offering) : []),
+    ['nodes-step-flavors', tenant?.url, props.offering.uuid],
+    () =>
+      tenant && props.offering ? loadFlavors(tenant.url, props.offering) : [],
     { staleTime: 3 * 60 * 1000 },
   );
 

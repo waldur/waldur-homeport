@@ -23,7 +23,10 @@ export const useUpdateSecurityGroupsForm = (
 ) => {
   const asyncState = useAsync(
     () =>
-      loadSecurityGroups(resource.service_settings_uuid).then((groups) =>
+      loadSecurityGroups({
+        tenant_uuid: resource.service_settings_scope_uuid,
+        fields: ['name', 'url'],
+      }).then((groups) =>
         groups.map((group) => ({
           label: group.name,
           value: group.url,

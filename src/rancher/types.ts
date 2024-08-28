@@ -59,6 +59,7 @@ export interface Cluster {
   project: string;
   project_uuid?: string;
   tenant_settings?: string;
+  tenant_settings_scope_uuid: string;
 }
 
 export interface Secret {
