@@ -53,7 +53,10 @@ const loadData = async (
 ): Promise<BackupFormChoices> => {
   const [flavors, securityGroups, floatingIps, subnets] = await Promise.all([
     loadFlavors(resource.service_settings_uuid),
-    loadSecurityGroups(resource.service_settings_uuid),
+    loadSecurityGroups({
+      tenant_uuid: resource.service_settings_scope_uuid,
+      fields: ['url', 'name'],
+    }),
     loadFloatingIps(resource.service_settings_uuid),
     loadSubnets(resource.service_settings_uuid),
   ]);

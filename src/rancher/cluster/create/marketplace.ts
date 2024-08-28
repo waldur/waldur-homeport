@@ -66,6 +66,7 @@ const serializer = ({
   nodes,
   ssh_public_key,
   security_groups,
+  tenant_settings,
   ...clusterRest
 }) => ({
   ...clusterRest,
@@ -74,6 +75,7 @@ const serializer = ({
   security_groups: security_groups
     ? security_groups.map((group) => ({ url: group.url }))
     : undefined,
+  tenant_settings: tenant_settings ? tenant_settings.url : undefined,
 });
 
 registerOfferingType({

@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { getUUID } from '@waldur/core/utils';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
@@ -13,12 +12,15 @@ import { FormSecurityGroupsStep } from '@waldur/openstack/openstack-instance/dep
 import { formTenantSelector } from './utils';
 
 export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
-  const tenant = useSelector(formTenantSelector);
+  const tenant_settings = useSelector(formTenantSelector);
 
   // Fetch default security group
   const { data: defaultItems } = useQuery(
-    ['security-groups-step-default', tenant],
-    () => (tenant ? loadSecurityGroups(getUUID(tenant), 'default') : []),
+    ['security-groups-step-default', tenant_settings],
+    () =>
+      tenant_settings
+        ? loadSecurityGroups({ tenant: tenant_settings.scope, name: 'default' })
+        : [],
     { staleTime: 3 * 60 * 1000 },
   );
 
@@ -35,11 +37,8 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
     }
   }, [props.change, defaultItems]);
 
-  return tenant ? (
-    <FormSecurityGroupsStep
-      {...props}
-      offering={{ ...props.offering, scope_uuid: getUUID(tenant) }}
-    />
+  return tenant_settings ? (
+    <FormSecurityGroupsStep {...props} offering={props.offering} />
   ) : (
     <VStepperFormStepCard
       title={translate('Security groups')}

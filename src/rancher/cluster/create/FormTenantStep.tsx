@@ -17,7 +17,7 @@ const loadData = (customer_uuid) =>
       customer_uuid,
       shared: false,
       type: 'OpenStackTenant',
-      field: ['name', 'url'],
+      field: ['name', 'url', 'scope'],
     },
   });
 
@@ -31,7 +31,7 @@ export const FormTenantStep = (props: FormStepProps) => {
 
   useEffect(() => {
     if (data?.length === 1) {
-      props.change('attributes.tenant_settings', data[0].url);
+      props.change('attributes.tenant_settings', data[0]);
     }
   }, [data]);
 
@@ -52,7 +52,6 @@ export const FormTenantStep = (props: FormStepProps) => {
       >
         <SelectField
           options={data}
-          simpleValue={true}
           getOptionValue={(option) => option.url}
           getOptionLabel={(option) => option.name}
           isClearable={true}

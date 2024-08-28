@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { formValueSelector } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
-import { getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
@@ -18,7 +17,7 @@ import {
   getDefaultVolumeType,
 } from '@waldur/openstack/openstack-instance/utils';
 import { listClusterTemplates } from '@waldur/rancher/api';
-import { NodeField } from '@waldur/rancher/types';
+import { Cluster, NodeField } from '@waldur/rancher/types';
 import { formatFlavor } from '@waldur/resource/utils';
 import { RootState } from '@waldur/store/reducers';
 
@@ -59,15 +58,17 @@ export const getRancherMountPointChoices = () => {
   }));
 };
 
-export const loadData = async (settings: string, offering: Offering) => {
-  const params = { settings };
-  const flavors = await loadFlavors(settings, offering);
-  const subnets = await loadSubnets(settings);
+export const loadData = async (cluster: Cluster, offering: Offering) => {
+  const params = { settings: cluster.tenant_settings };
+  const flavors = await loadFlavors(cluster.tenant_settings, offering);
+  const subnets = await loadSubnets(cluster.tenant_settings);
   const volumeTypes = await getVolumeTypes(params);
   const templates = await listClusterTemplates();
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
   const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
-  const securityGroups = await loadSecurityGroups(getUUID(settings));
+  const securityGroups = await loadSecurityGroups({
+    tenant_uuid: cluster.tenant_settings_scope_uuid,
+  });
   return {
     subnets,
     flavors,
@@ -107,7 +108,7 @@ export const getDataVolumes = (nodeIndex, allValues) => {
   }
 };
 
-export const formTenantSelector = (state: RootState): string =>
+export const formTenantSelector = (state: RootState) =>
   formValueSelector(ORDER_FORM_ID)(state, 'attributes.tenant_settings');
 
 export const formNodesSelector = (state: RootState): NodeField[] =>

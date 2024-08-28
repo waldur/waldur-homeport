@@ -84,7 +84,7 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
 
   const filter = useMemo(
     () => ({
-      settings_uuid: props.offering.scope_uuid,
+      tenant_uuid: props.offering.parent_scope_uuid,
       name: query ? query : undefined,
     }),
     [props.offering, query],
@@ -92,7 +92,7 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
 
   const tableProps = useTable({
     table: 'deploy-security-groups',
-    fetchData: createFetcher('openstacktenant-security-groups'),
+    fetchData: createFetcher('openstack-security-groups'),
     onFetch: (rows, _, firstFetch) => {
       if (!firstFetch || !rows?.length) return;
       const defaultItem = rows.find((row) => row?.name === 'default');
