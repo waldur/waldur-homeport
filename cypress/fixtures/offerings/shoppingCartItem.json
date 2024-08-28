@@ -18,7 +18,7 @@
     "attributes": {
       "subnets": [
         {
-          "network": "/api/openstacktenant-networks/9b8fa00872fc4c0599b0c0d8ea41f473/",
+          "network": "/api/openstack-networks/9b8fa00872fc4c0599b0c0d8ea41f473/",
           "enable_dhcp": true,
           "url": "/api/openstacktenant-subnets/8a07dca67f71459daab5f7f02147a367/",
           "dns_nameservers": [],

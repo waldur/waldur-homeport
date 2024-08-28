@@ -14,6 +14,6 @@
     "ip_version": 4,
     "enable_dhcp": true,
     "dns_nameservers": [],
-    "network": "/api/openstacktenant-networks/d6d3de58dce94596970a67cc59ba5c6e/"
+    "network": "/api/openstack-networks/d6d3de58dce94596970a67cc59ba5c6e/"
   }
 ]
