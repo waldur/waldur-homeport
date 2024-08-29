@@ -31,7 +31,7 @@ export const CreateOfferingButton = ({ fetch }: { fetch? }) => {
     })
   ) {
     return (
-      <Button className="btn btn-success btn-md" onClick={callback}>
+      <Button className="btn btn-primary btn-md" onClick={callback}>
         <span className="svg-icon svg-icon-2">
           <Plus />
         </span>{' '}
