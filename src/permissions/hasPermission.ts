@@ -25,6 +25,9 @@ export function checkScope(
 }
 
 export const hasPermission = (user: User, request: PermissionRequest) => {
+  if (user.is_staff) {
+    return true;
+  }
   if (request.projectId) {
     if (checkScope(user, 'project', request.projectId, request.permission)) {
       return true;

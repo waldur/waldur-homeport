@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { updateOfferingUserRestrictionStatus } from '@waldur/marketplace/common/api';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
 export const RestrictOfferingUserButton: FC<{
   row: any;
@@ -41,7 +41,7 @@ export const RestrictOfferingUserButton: FC<{
     }
   };
   return (
-    <RowActionButton
+    <ActionItem
       action={callback}
       title={
         props.row.is_restricted
@@ -49,7 +49,6 @@ export const RestrictOfferingUserButton: FC<{
           : translate('Restrict')
       }
       iconNode={props.row.is_restricted ? <Check /> : <Prohibit />}
-      size="sm"
     />
   );
 };

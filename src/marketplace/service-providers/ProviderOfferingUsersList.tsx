@@ -5,31 +5,20 @@ import { getFormValues } from 'redux-form';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
+import { OfferingUserRowActions } from '../offerings/actions/OfferingUserRowActions';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
 import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
+import { CreateProviderOfferingUserButton } from './CreateProviderOfferingUserButton';
 import { ProviderOfferingUsersFilter } from './ProviderOfferingUsersFilter';
-import { ProviderOfferingUserUpdateButton } from './ProviderOfferingUserUpdateButton';
-import { RestrictOfferingUserButton } from './RestrictOfferingUser';
 
 export const ProviderOfferingUsersListComponent: FunctionComponent<{
   provider?;
   hasOrganizationColumn?: boolean;
 }> = ({ provider, hasOrganizationColumn }) => {
-  const user = useSelector(getUser);
-  const customer = useSelector(getCustomer);
-
-  const canUpdateRestrictedStatus = hasPermission(user, {
-    permission: PermissionEnum.UPDATE_OFFERING_USER_RESTRICTION,
-    customerId: customer.uuid,
-  });
-
   const filterValues = useSelector(
     getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
   ) as { offering?; provider? };
@@ -107,17 +96,15 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
           hasOrganizationColumn={hasOrganizationColumn}
         />
       }
+      tableActions={
+        <CreateProviderOfferingUserButton refetch={tableProps.fetch} />
+      }
       rowActions={({ row }) => (
-        <>
-          <ProviderOfferingUserUpdateButton
-            row={row}
-            provider={provider}
-            refetch={tableProps.fetch}
-          />
-          {canUpdateRestrictedStatus && (
-            <RestrictOfferingUserButton row={row} refetch={tableProps.fetch} />
-          )}
-        </>
+        <OfferingUserRowActions
+          row={row}
+          fetch={tableProps.fetch}
+          provider={provider}
+        />
       )}
       hasQuery={true}
     />

@@ -457,6 +457,12 @@ export const createOfferingUser = (payload) =>
 export const updateOfferingUserRestrictionStatus = (uuid, data) =>
   post(`/marketplace-offering-users/${uuid}/update_restricted/`, data);
 
+export const updateOfferingUser = (uuid, data) =>
+  patch(`/marketplace-offering-users/${uuid}/`, data);
+
+export const deleteOfferingUser = (uuid) =>
+  deleteById(`/marketplace-offering-users/`, uuid);
+
 export const pullRemoteOfferingDetails = (uuid) =>
   post(`/remote-waldur-api/pull_offering_details/${uuid}/`);
 
@@ -511,7 +517,11 @@ export const deleteRobotAccount = (id) =>
 export const updateRobotAccount = (id, payload) =>
   patch(`/marketplace-robot-accounts/${id}/`, payload);
 
-export const updateOfferingUser = (provider_uuid, user_uuid, username) =>
+export const updateProviderOfferingsUser = (
+  provider_uuid,
+  user_uuid,
+  username,
+) =>
   post(
     `/marketplace-service-providers/${provider_uuid}/set_offerings_username/`,
     { user_uuid, username },

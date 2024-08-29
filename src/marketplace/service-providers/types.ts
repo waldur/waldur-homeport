@@ -1,6 +1,7 @@
 import { Offering, ServiceProvider } from '@waldur/marketplace/types';
 
 export interface OfferingUser {
+  uuid?: string;
   username?: string;
   offering_uuid: string;
   user_uuid: string;

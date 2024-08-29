@@ -6,6 +6,8 @@ import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
+import { OfferingUserRowActions } from '../actions/OfferingUserRowActions';
+
 import { CreateOfferingUserButton } from './CreateOfferingUserButton';
 
 export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
@@ -24,13 +26,18 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
   });
   const columns = [
     {
-      title: translate('Name'),
+      title: translate('UUID'),
       render: ({ row }) => (
         <Link state="users.details" params={{ uuid: row.user_uuid }}>
-          {row.username || row.user_uuid}
+          {row.user_uuid}
         </Link>
       ),
-      copyField: (row) => row.username || row.user_uuid,
+      copyField: (row) => row.user_uuid,
+    },
+    {
+      title: translate('Name'),
+      render: ({ row }) => row.username || row.user_full_name,
+      copyField: (row) => row.username || row.user_full_name,
     },
     {
       title: translate('Created at'),
@@ -54,6 +61,13 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
           />
         )
       }
+      rowActions={({ row }) => (
+        <OfferingUserRowActions
+          row={row}
+          fetch={props.fetch}
+          offering={offering}
+        />
+      )}
     />
   );
 };
