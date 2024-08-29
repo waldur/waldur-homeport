@@ -58,7 +58,7 @@ const loadData = async (
       fields: ['url', 'name'],
     }),
     loadFloatingIps(resource.service_settings_uuid),
-    loadSubnets(resource.service_settings_uuid),
+    loadSubnets({ tenant_uuid: resource.service_settings_scope_uuid }),
   ]);
 
   return {

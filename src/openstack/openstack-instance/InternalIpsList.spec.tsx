@@ -7,7 +7,7 @@ const renderList = () => {
   const item: InternalIP = {
     fixed_ips: [{ ip_address: '192.168.42.14', subnet_id: '' }],
     mac_address: 'fa:16:3e:93:f0:7d',
-    subnet: 'api/openstacktenant-subnets/7350f289a6d14e4bbd780ee59b2899e6/',
+    subnet: 'api/openstack-subnets/7350f289a6d14e4bbd780ee59b2899e6/',
     subnet_uuid: '7350f289a6d14e4bbd780ee59b2899e6',
     subnet_name: 'theses-and-papers-on-mach-sub-net',
     subnet_description: '',

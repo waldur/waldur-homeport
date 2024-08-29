@@ -15,12 +15,16 @@ const CreateNetworkDialog = lazyComponent(
 
 const validators = [validateState('OK')];
 
-export const CreateNetworkAction: FC<TenantActionProps> = ({ resource }) => (
+export const CreateNetworkAction: FC<TenantActionProps> = ({
+  resource,
+  refetch,
+}) => (
   <DialogActionButton
     title={translate('Create')}
     iconNode={<PlusCircle />}
     modalComponent={CreateNetworkDialog}
     resource={resource}
     validators={validators}
+    extraResolve={{ refetch }}
   />
 );

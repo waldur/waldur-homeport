@@ -18,13 +18,14 @@ interface UpdateInternalIpsFormData {
 export const useUpdateInternalIpsForm = (resource: OpenStackInstance) => {
   const asyncState = useAsync(
     () =>
-      loadSubnets(resource.service_settings_uuid).then((subnets) =>
-        subnets.map((subnet) => ({
-          label: formatSubnet(subnet),
-          value: subnet.url,
-        })),
+      loadSubnets({ tenant_uuid: resource.service_settings_scope_uuid }).then(
+        (subnets) =>
+          subnets.map((subnet) => ({
+            label: formatSubnet(subnet),
+            value: subnet.url,
+          })),
       ),
-    [resource.service_settings_uuid],
+    [resource.service_settings_scope_uuid],
   );
   const dispatch = useDispatch();
   const submitRequest = async (formData: UpdateInternalIpsFormData) => {

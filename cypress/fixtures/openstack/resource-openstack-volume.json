@@ -29,7 +29,7 @@
     "data_volume_type": "/api/openstacktenant-volume-types/7cb497fe76af4b34adbffad15fee2f34/",
     "internal_ips_set": [
       {
-        "subnet": "/api/openstacktenant-subnets/0ce526a515cf4ffc9b53d0b0952153c5/"
+        "subnet": "/api/openstack-subnets/0ce526a515cf4ffc9b53d0b0952153c5/"
       }
     ],
     "system_volume_size": 28672,

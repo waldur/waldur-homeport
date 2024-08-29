@@ -1,6 +1,6 @@
 [
   {
-    "url": "/api/openstacktenant-subnets/073d0e76587e4c1d9055a49b2d298d17/",
+    "url": "/api/openstack-subnets/073d0e76587e4c1d9055a49b2d298d17/",
     "uuid": "073d0e76587e4c1d9055a49b2d298d17",
     "name": "blaaa-sub-net",
     "cidr": "192.168.42.0/24",
