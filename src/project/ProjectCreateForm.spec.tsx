@@ -36,7 +36,7 @@ const renderForm = async () => {
   });
   const wrapper = mount(
     <Provider store={store}>
-      <ProjectCreateForm onSubmit={jest.fn()} onCancel={jest.fn()} />
+      <ProjectCreateForm onSubmit={jest.fn()} />
     </Provider>,
   );
   await actWait();

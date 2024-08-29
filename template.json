@@ -363,10 +363,6 @@
     "description": "marketplace/offerings/update/plans/AddPlanButton.tsx, marketplace/offerings/update/plans/AddPlanDialog.tsx",
     "message": "Add plan"
   },
-  "Add project": {
-    "description": "project/ProjectCreateForm.tsx",
-    "message": "Add project"
-  },
   "Add resource": {
     "description": "marketplace/details/DetailsPage.tsx, marketplace/resources/actions/AddResourceButton.tsx, navigation/sidebar/marketplace-popup/MarketplacePopup.tsx, navigation/sidebar/marketplace-popup/MarketplaceTrigger.tsx, proposals/proposal/create/resource-requests-step/AddResourceButton.tsx",
     "message": "Add resource"
@@ -1588,7 +1584,7 @@
     "message": "Cancel request"
   },
   "Cancel": {
-    "description": "administration/roles/RoleDescriptionForm.tsx, administration/roles/RoleForm.tsx, customer/cost-policies/CostPolicyCreateForm.tsx, form/WideImageField.tsx, invitations/GroupInvitationCancelButton.tsx, invitations/GroupinvitationButtons.tsx, invitations/MultiCancelAction.tsx, invitations/actions/InvitationCancelButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/orders/actions/CancelTerminationOrderButton.tsx, marketplace/orders/details/CancelOrderButton.tsx, modal/CloseDialogButton.tsx, project/GlobalProjectCreateDialog.tsx, project/ProjectCreateForm.tsx, table/TableFilterActions.tsx, table/TableFilterItem.tsx",
+    "description": "administration/roles/RoleDescriptionForm.tsx, administration/roles/RoleForm.tsx, customer/cost-policies/CostPolicyCreateForm.tsx, form/WideImageField.tsx, invitations/GroupInvitationCancelButton.tsx, invitations/GroupinvitationButtons.tsx, invitations/MultiCancelAction.tsx, invitations/actions/InvitationCancelButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/orders/actions/CancelTerminationOrderButton.tsx, marketplace/orders/details/CancelOrderButton.tsx, modal/CloseDialogButton.tsx, table/TableFilterActions.tsx, table/TableFilterItem.tsx",
     "message": "Cancel"
   },
   "Canceled": {
@@ -1722,6 +1718,10 @@
   "Choices as comma-separated list": {
     "description": "marketplace/offerings/update/options/OptionForm.tsx",
     "message": "Choices as comma-separated list"
+  },
+  "Choose a science code identifying project activities.": {
+    "description": "project/ProjectCreateForm.tsx",
+    "message": "Choose a science code identifying project activities."
   },
   "Civil engineering": {
     "description": "project/OECD_FOS_2007_CODES.ts",
@@ -2224,7 +2224,7 @@
     "message": "Create project permission"
   },
   "Create project": {
-    "description": "administration/roles/PermissionOptions.tsx, project/GlobalProjectCreateDialog.tsx, project/ProjectCreateDialog.tsx",
+    "description": "administration/roles/PermissionOptions.tsx, project/ProjectCreateDialog.tsx",
     "message": "Create project"
   },
   "Create proposal": {
@@ -2268,7 +2268,7 @@
     "message": "Create subnet"
   },
   "Create": {
-    "description": "administration/agreements/UserAgreementCreateButton.tsx, administration/organizations/OrganizationGroupFromDialog.tsx, broadcasts/BroadcastCreateButton.tsx, broadcasts/BroadcastTemplateCreateButton.tsx, customer/cost-policies/CostPolicyCreateForm.tsx, customer/details/AccessSubnetCreateForm.tsx, freeipa/FreeIPAAccountCreate.tsx, issues/create/IssueCreateDialog.tsx, issues/list/IssueCreateButton.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/CreateOfferingUserButton.tsx, marketplace/offerings/update/components/AddComponentDialog.tsx, marketplace/offerings/update/endpoints/AddEndpointDialog.tsx, marketplace/offerings/update/options/AddOptionDialog.tsx, marketplace/offerings/update/plans/AddPlanDialog.tsx, marketplace/offerings/update/roles/AddRoleDialog.tsx, marketplace/orders/list/OrderTypeCell.tsx, marketplace/orders/list/OrderTypeFilter.tsx, marketplace/resources/details/ResourceIssuesCard.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/service-providers/CampaignCreateButton.tsx, openstack/openstack-instance/actions/CreateBackupAction.tsx, openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx, openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx, openstack/openstack-tenant/actions/CreateNetworkAction.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx, openstack/openstack-tenant/actions/CreateServerGroupAction.tsx, openstack/openstack-volume/actions/CreateSnapshotAction.tsx, openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx, project/GlobalProjectCreateDialog.tsx, proposals/call-management/CallFormDialog.tsx, proposals/proposal/create/AddProposalDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create-review/CreateReviewDialog.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx, proposals/update/rounds/CallRoundCreateForm.tsx, rancher/catalog/CatalogCreateButton.tsx, rancher/cluster/hpas/HPACreateButton.tsx, user/hooks/HookDetailsDialog.tsx",
+    "description": "administration/agreements/UserAgreementCreateButton.tsx, administration/organizations/OrganizationGroupFromDialog.tsx, broadcasts/BroadcastCreateButton.tsx, broadcasts/BroadcastTemplateCreateButton.tsx, customer/cost-policies/CostPolicyCreateForm.tsx, customer/details/AccessSubnetCreateForm.tsx, freeipa/FreeIPAAccountCreate.tsx, issues/create/IssueCreateDialog.tsx, issues/list/IssueCreateButton.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/CreateOfferingUserButton.tsx, marketplace/offerings/update/components/AddComponentDialog.tsx, marketplace/offerings/update/endpoints/AddEndpointDialog.tsx, marketplace/offerings/update/options/AddOptionDialog.tsx, marketplace/offerings/update/plans/AddPlanDialog.tsx, marketplace/offerings/update/roles/AddRoleDialog.tsx, marketplace/orders/list/OrderTypeCell.tsx, marketplace/orders/list/OrderTypeFilter.tsx, marketplace/resources/details/ResourceIssuesCard.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/service-providers/CampaignCreateButton.tsx, openstack/openstack-instance/actions/CreateBackupAction.tsx, openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx, openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx, openstack/openstack-tenant/actions/CreateNetworkAction.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx, openstack/openstack-tenant/actions/CreateServerGroupAction.tsx, openstack/openstack-volume/actions/CreateSnapshotAction.tsx, openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx, project/ProjectCreateDialog.tsx, proposals/call-management/CallFormDialog.tsx, proposals/proposal/create/AddProposalDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create-review/CreateReviewDialog.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx, proposals/update/rounds/CallRoundCreateForm.tsx, rancher/catalog/CatalogCreateButton.tsx, rancher/cluster/hpas/HPACreateButton.tsx, user/hooks/HookDetailsDialog.tsx",
     "message": "Create"
   },
   "Created at": {
@@ -3108,7 +3108,7 @@
     "message": "Edit reference code"
   },
   "Edit request": {
-    "description": "project/ProjectCreateForm.tsx",
+    "description": "project/ProjectCreateDialog.tsx",
     "message": "Edit request"
   },
   "Edit resource request": {
@@ -3326,6 +3326,10 @@
   "Enter a contact number for the user": {
     "description": "user/support/UserEditForm.tsx",
     "message": "Enter a contact number for the user"
+  },
+  "Enter a description": {
+    "description": "project/ProjectCreateForm.tsx",
+    "message": "Enter a description"
   },
   "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.": {
     "description": "openstack/openstack-security-groups/rule-editor/PortRangeField.tsx",
@@ -5740,7 +5744,7 @@
     "message": "No organizations found"
   },
   "No organizations": {
-    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/GlobalProjectCreateDialog.tsx, project/MoveToOrganizationAutocomplete.tsx",
+    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/MoveToOrganizationAutocomplete.tsx, project/ProjectCreateForm.tsx",
     "message": "No organizations"
   },
   "No outputs found for this order": {
@@ -6476,7 +6480,7 @@
     "message": "Organization workspace"
   },
   "Organization": {
-    "description": "administration/InvitationsFilter.tsx, administration/organizations/OrganizationCostPoliciesFilter.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/details/CustomerRemoveDialog.tsx, customer/list/CustomerList.tsx, customer/routes.ts, events/ExpandableEventDetailsTable.tsx, invitations/actions/UserDetailsGroup.tsx, issues/IssueSummary.tsx, issues/create/IssueHeader.tsx, issues/list/IssuesList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/steps/FormCustomerStep.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/list/OfferingsList.tsx, marketplace/orders/details/OrderDetailsHeaderBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/robot-accounts/ProviderRobotAccountFilter.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-checklist/ChecklistOverview.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, project/GlobalProjectCreateDialog.tsx, proposals/PublicCallsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, resource/support/SharedProviderCustomers.tsx, resource/support/SharedProviderResources.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/affiliations/ProjectsListFilter.tsx, user/affiliations/UserAffiliationsList.tsx, user/support/UserDetailsTable.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
+    "description": "administration/InvitationsFilter.tsx, administration/organizations/OrganizationCostPoliciesFilter.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/details/CustomerRemoveDialog.tsx, customer/list/CustomerList.tsx, customer/routes.ts, events/ExpandableEventDetailsTable.tsx, invitations/actions/UserDetailsGroup.tsx, issues/IssueSummary.tsx, issues/create/IssueHeader.tsx, issues/list/IssuesList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/steps/FormCustomerStep.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/list/OfferingsList.tsx, marketplace/orders/details/OrderDetailsHeaderBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/robot-accounts/ProviderRobotAccountFilter.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-checklist/ChecklistOverview.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, project/ProjectCreateForm.tsx, proposals/PublicCallsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, resource/support/SharedProviderCustomers.tsx, resource/support/SharedProviderResources.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/affiliations/ProjectsListFilter.tsx, user/affiliations/UserAffiliationsList.tsx, user/support/UserDetailsTable.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
     "message": "Organization"
   },
   "Organizations owner": {
@@ -6996,7 +7000,7 @@
     "message": "Please search for your organization"
   },
   "Please select OECD code corresponding to field of science and technology": {
-    "description": "project/ProjectCreateForm.tsx, project/manage/EditFieldDialog.tsx",
+    "description": "project/manage/EditFieldDialog.tsx",
     "message": "Please select OECD code corresponding to field of science and technology"
   },
   "Please select a script language to use dry-run": {
@@ -7320,7 +7324,7 @@
     "message": "Project for civilian purpose?"
   },
   "Project has been created.": {
-    "description": "project/GlobalProjectCreateDialog.tsx, project/effects.ts",
+    "description": "project/GlobalProjectCreateButton.tsx, project/effects.ts",
     "message": "Project has been created."
   },
   "Project has been updated.": {
@@ -7546,6 +7550,10 @@
   "Provide an email address for the user's communication and recovery": {
     "description": "user/support/UserEditForm.tsx",
     "message": "Provide an email address for the user's communication and recovery"
+  },
+  "Provide the required information to set up a new project.": {
+    "description": "project/ProjectCreateDialog.tsx",
+    "message": "Provide the required information to set up a new project."
   },
   "Provider UUID": {
     "description": "marketplace/orders/details/OrderMetadataTab.tsx",
@@ -9020,7 +9028,7 @@
     "message": "Select organization"
   },
   "Select organization...": {
-    "description": "auth/saml2/ProviderField.tsx, marketplace/details/CustomerField.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/GlobalProjectCreateDialog.tsx, project/MoveToOrganizationAutocomplete.tsx",
+    "description": "auth/saml2/ProviderField.tsx, marketplace/details/CustomerField.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/MoveToOrganizationAutocomplete.tsx",
     "message": "Select organization..."
   },
   "Select organizations...": {
@@ -9150,6 +9158,10 @@
   "Select": {
     "description": "form/themed-select.tsx, marketplace/resources/import/OfferingsList.tsx, marketplace/resources/import/ResourceRow.tsx",
     "message": "Select"
+  },
+  "Select...": {
+    "description": "project/ProjectCreateForm.tsx",
+    "message": "Select..."
   },
   "Selected": {
     "description": "marketplace/resources/import/OfferingsList.tsx, marketplace/resources/import/ResourceRow.tsx, table/TableButtons.tsx",
@@ -10992,7 +11004,7 @@
     "message": "Unable to create port."
   },
   "Unable to create project.": {
-    "description": "project/GlobalProjectCreateDialog.tsx",
+    "description": "project/GlobalProjectCreateButton.tsx",
     "message": "Unable to create project."
   },
   "Unable to create request.": {
@@ -12998,6 +13010,10 @@
   "disks": {
     "description": "vmware/DisksList.tsx",
     "message": "disks"
+  },
+  "e.g. Community Health Outreach": {
+    "description": "project/ProjectNameField.tsx",
+    "message": "e.g. Community Health Outreach"
   },
   "e.g. MyApp": {
     "description": "rancher/template/NamespaceField.tsx",
