@@ -34,15 +34,13 @@ export const ProjectCreateButton: FC = () => {
         dispatch(
           openModalDialog(ProjectCreateDialog, {
             size: 'lg',
+            formId: 'projectCreate',
             onSubmit: (formData) => {
               createProject(formData, dispatch).then(() => {
                 dispatch(closeModalDialog());
               });
             },
-            onCancel: () => {
-              dispatch(closeModalDialog());
-            },
-            initialValues: null,
+            initialValues: { customer },
           }),
         )
       }

@@ -37,6 +37,7 @@ export const ProjectNameField: FunctionComponent<ProjectNameFieldProps> = ({
   <StringField
     label={translate('Project name')}
     name="name"
+    placeholder={translate('e.g. Community Health Outreach')}
     description={translate('This name will be visible in accounting data.')}
     required={true}
     validate={validateProjectName}

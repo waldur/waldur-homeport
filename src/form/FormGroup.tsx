@@ -21,6 +21,7 @@ export interface FormGroupProps extends FormField {
   meta: WrappedFieldMetaProps;
   clearOnUnmount?: boolean;
   actions?: ReactNode;
+  containerClassName?: string;
 }
 
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
@@ -38,6 +39,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     actions,
     clearOnUnmount,
     spaceless,
+    containerClassName,
     ...rest
   } = props;
 
@@ -79,6 +81,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
         },
         'position-relative',
         !spaceless && 'mb-7',
+        !actions && containerClassName,
       )}
     >
       {labelNode}
@@ -89,7 +92,12 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   );
   if (actions) {
     return (
-      <div className="d-flex align-items-start gap-4">
+      <div
+        className={classNames(
+          'd-flex align-items-start gap-4',
+          containerClassName,
+        )}
+      >
         {main}
         {actions}
       </div>

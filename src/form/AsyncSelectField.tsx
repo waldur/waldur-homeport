@@ -11,7 +11,11 @@ const Select = ({ input, loadOptions, ...rest }) => (
     loadOptions={(query, prevOptions, { page }) =>
       loadOptions(query, prevOptions, page)
     }
+    classNamePrefix="metronic-select"
     {...rest}
+    className={
+      'metronic-select-container' + (rest.className ? ` ${rest.className}` : '')
+    }
   />
 );
 
