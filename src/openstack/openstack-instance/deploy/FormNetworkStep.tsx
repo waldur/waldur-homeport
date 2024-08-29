@@ -133,7 +133,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
     ['network-step', props.offering.uuid],
     () => {
       return Promise.all([
-        loadSubnets(props.offering.scope_uuid),
+        loadSubnets({ tenant_uuid: props.offering.parent_scope_uuid }),
         loadFloatingIps(props.offering.scope_uuid),
       ]).then((res) => {
         return {

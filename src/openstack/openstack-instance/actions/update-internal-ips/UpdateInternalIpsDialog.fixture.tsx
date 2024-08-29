@@ -11,7 +11,7 @@ import {
 import { UpdateInternalIpsDialog } from './UpdateInternalIpsDialog';
 
 export const fakeSubnet = {
-  url: '/api/openstacktenant-subnets/51e584157094493ca121f71642c0a409/',
+  url: '/api/openstack-subnets/51e584157094493ca121f71642c0a409/',
   name: 'p60347-sub-net',
   cidr: '192.168.42.0/24',
 } as unknown as Subnet;

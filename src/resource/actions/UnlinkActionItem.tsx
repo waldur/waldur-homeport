@@ -25,7 +25,7 @@ const getConfirmationText = (resource) => {
 export const UnlinkActionItem: FC<{ resource }> = ({ resource }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
-  if (!user.is_staff) {
+  if (!user.is_staff || !resource.marketplace_resource_uuid) {
     return null;
   }
   const callback = async () => {

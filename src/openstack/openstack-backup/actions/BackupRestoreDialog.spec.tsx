@@ -318,8 +318,7 @@ describe('BackupRestoreDialog', () => {
       floating_ips: [],
       internal_ips_set: [
         {
-          subnet:
-            '/api/openstacktenant-subnets/51e584157094493ca121f71642c0a409/',
+          subnet: '/api/openstack-subnets/51e584157094493ca121f71642c0a409/',
         },
       ],
       security_groups: [
@@ -402,15 +401,13 @@ describe('BackupRestoreDialog', () => {
       flavor: fakeFlavors[0].url,
       floating_ips: [
         {
-          subnet:
-            '/api/openstacktenant-subnets/51e584157094493ca121f71642c0a409/',
+          subnet: '/api/openstack-subnets/51e584157094493ca121f71642c0a409/',
           url: 'floating_ip_url',
         },
       ],
       internal_ips_set: [
         {
-          subnet:
-            '/api/openstacktenant-subnets/51e584157094493ca121f71642c0a409/',
+          subnet: '/api/openstack-subnets/51e584157094493ca121f71642c0a409/',
         },
       ],
       security_groups: [

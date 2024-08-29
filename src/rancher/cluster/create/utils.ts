@@ -47,8 +47,8 @@ export const loadFlavors = (settings: string, offering: Offering) => {
   }).then((data) => data.map(formatFlavorOption));
 };
 
-export const loadSubnets = (settings: string) =>
-  getSubnets({ settings }).then((data) => data.map(formatSubnetOption));
+export const loadSubnets = (tenant_uuid: string) =>
+  getSubnets({ tenant_uuid }).then((data) => data.map(formatSubnetOption));
 
 export const getRancherMountPointChoices = () => {
   const mountPoints = ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_CHOICES;
@@ -61,7 +61,7 @@ export const getRancherMountPointChoices = () => {
 export const loadData = async (cluster: Cluster, offering: Offering) => {
   const params = { settings: cluster.tenant_settings };
   const flavors = await loadFlavors(cluster.tenant_settings, offering);
-  const subnets = await loadSubnets(cluster.tenant_settings);
+  const subnets = await loadSubnets(cluster.tenant_settings_scope_uuid);
   const volumeTypes = await getVolumeTypes(params);
   const templates = await listClusterTemplates();
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);

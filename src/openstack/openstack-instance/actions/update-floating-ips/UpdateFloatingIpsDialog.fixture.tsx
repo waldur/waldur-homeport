@@ -24,7 +24,7 @@ export const fakeInstance = {
       url: '/api/openstacktenant-floating-ips/6d596ebfa7a5444abd634d6285a22339/',
       uuid: '6d596ebfa7a5444abd634d6285a22339',
       address: '172.17.65.174',
-      subnet: '/api/openstacktenant-subnets/7350f289a6d14e4bbd780ee59b2899e6/',
+      subnet: '/api/openstack-subnets/7350f289a6d14e4bbd780ee59b2899e6/',
       subnet_uuid: '7350f289a6d14e4bbd780ee59b2899e6',
       subnet_name: 'theses-and-papers-on-mach-sub-net',
       subnet_cidr: '192.168.42.0/24',
@@ -32,7 +32,7 @@ export const fakeInstance = {
   ],
   internal_ips_set: [
     {
-      subnet: '/api/openstacktenant-subnets/7350f289a6d14e4bbd780ee59b2899e6/',
+      subnet: '/api/openstack-subnets/7350f289a6d14e4bbd780ee59b2899e6/',
       subnet_uuid: '7350f289a6d14e4bbd780ee59b2899e6',
       subnet_name: 'theses-and-papers-on-mach-sub-net',
       subnet_cidr: '192.168.42.0/24',

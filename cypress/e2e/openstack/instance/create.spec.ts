@@ -26,7 +26,7 @@ xdescribe('OpenStackInstanceCreateForm', () => {
       .intercept('GET', '/api/openstacktenant-security-groups/', {
         fixture: 'offerings/securityGroups.json',
       })
-      .intercept('GET', '/api/openstacktenant-subnets/', {
+      .intercept('GET', '/api/openstack-subnets/', {
         fixture: 'offerings/subnets.json',
       })
       .intercept('GET', '/api/openstacktenant-floating-ips/', {

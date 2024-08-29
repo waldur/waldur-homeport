@@ -20,7 +20,7 @@
         {
           "network": "/api/openstack-networks/9b8fa00872fc4c0599b0c0d8ea41f473/",
           "enable_dhcp": true,
-          "url": "/api/openstacktenant-subnets/8a07dca67f71459daab5f7f02147a367/",
+          "url": "/api/openstack-subnets/8a07dca67f71459daab5f7f02147a367/",
           "dns_nameservers": [],
           "uuid": "8a07dca67f71459daab5f7f02147a367",
           "label": "baip-demo-sub-net (192.168.42.0/24)",

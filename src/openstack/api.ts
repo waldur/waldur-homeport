@@ -165,8 +165,8 @@ export const loadVolumeTypes = (settings_uuid: string) =>
     params: { settings_uuid },
   });
 
-export const loadSubnets = (settings_uuid: string) =>
-  getAll<Subnet>('/openstacktenant-subnets/', { params: { settings_uuid } });
+export const loadSubnets = (params) =>
+  getAll<Subnet>('/openstack-subnets/', { params });
 
 export const loadFloatingIps = (settings_uuid: string) =>
   getAll<FloatingIp>('/openstacktenant-floating-ips/', {
@@ -204,7 +204,7 @@ export const getFlavors = (params) =>
   getAll<Flavor>('/openstacktenant-flavors/', { params });
 
 export const getSubnets = (params) =>
-  getAll<Subnet>('/openstacktenant-subnets/', { params });
+  getAll<Subnet>('/openstack-subnets/', { params });
 
 export const getVolumeTypes = (params) =>
   getAll<VolumeType>('/openstacktenant-volume-types/', { params });
