@@ -115,13 +115,15 @@ export const offeringsAutocomplete = async (
     'category_title',
     'thumbnail',
     'customer_name',
+    'secret_options',
+    'customer_uuid',
   ],
 ) => {
   const params = {
     field,
     o: 'name',
     state: 'Active',
-    ...query,
+    name: query,
     page: currentPage,
     page_size: ENV.pageSize,
   };

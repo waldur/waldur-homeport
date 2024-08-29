@@ -13,7 +13,7 @@ import { OfferingUser } from './types';
 
 export const ProviderOfferingUserUpdateDialog: FC<{
   resolve: { row: OfferingUser; refetch(): void; provider: ServiceProvider };
-}> = ({ resolve: { row, provider, refetch } }) => {
+}> = ({ resolve: { row, refetch } }) => {
   const dispatch = useDispatch();
 
   const fields = [
@@ -32,11 +32,9 @@ export const ProviderOfferingUserUpdateDialog: FC<{
       initialValues={{ username: row.username }}
       submitForm={async (formData) => {
         try {
-          await updateOfferingUser(
-            provider.uuid,
-            row.user_uuid,
-            formData.username,
-          );
+          await updateOfferingUser(row.uuid, {
+            username: formData.username,
+          });
           dispatch(showSuccess(translate('Username has been updated.')));
           dispatch(closeModalDialog());
           if (refetch) {

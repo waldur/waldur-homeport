@@ -843,6 +843,10 @@
     "description": "marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx",
     "message": "Are you sure you want to delete endpoint {name}?"
   },
+  "Are you sure you want to delete offering user {username}?": {
+    "description": "marketplace/service-providers/ProviderOfferingUserDeleteButton.tsx",
+    "message": "Are you sure you want to delete offering user {username}?"
+  },
   "Are you sure you want to delete option {name}?": {
     "description": "marketplace/offerings/update/options/DeleteOptionButton.tsx",
     "message": "Are you sure you want to delete option {name}?"
@@ -2200,7 +2204,7 @@
     "message": "Create offering screenshot"
   },
   "Create offering user": {
-    "description": "administration/roles/PermissionOptions.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx",
+    "description": "administration/roles/PermissionOptions.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx",
     "message": "Create offering user"
   },
   "Create offering": {
@@ -2647,6 +2651,10 @@
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "Delete offering screenshot"
   },
+  "Delete offering user": {
+    "description": "marketplace/service-providers/ProviderOfferingUserDeleteButton.tsx",
+    "message": "Delete offering user"
+  },
   "Delete offering": {
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "Delete offering"
@@ -2672,7 +2680,7 @@
     "message": "Delete volumes"
   },
   "Delete": {
-    "description": "administration/agreements/UserAgreementDeleteButton.tsx, customer/details/CustomerRemoveDialog.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, invitations/InvitationDeleteButton.tsx, invitations/MultiDeleteAction.tsx, issues/comments/IssueCommentDeleteDialog.tsx, issues/comments/IssueCommentItem.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/list/DeleteOfferingButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/resources/users/DeleteUserButton.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx, openstack/openstack-security-groups/rule-editor/ActionsField.tsx, project/DeleteAction.tsx, project/manage/ProjectDelete.tsx, rancher/catalog/CatalogDeleteButton.tsx, rancher/cluster/IngressActions.tsx, rancher/cluster/ServiceActions.tsx, rancher/cluster/WorkloadActions.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserTermination.tsx",
+    "description": "administration/agreements/UserAgreementDeleteButton.tsx, customer/details/CustomerRemoveDialog.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, invitations/InvitationDeleteButton.tsx, invitations/MultiDeleteAction.tsx, issues/comments/IssueCommentDeleteDialog.tsx, issues/comments/IssueCommentItem.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/list/DeleteOfferingButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/ProviderOfferingUserDeleteButton.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx, openstack/openstack-security-groups/rule-editor/ActionsField.tsx, project/DeleteAction.tsx, project/manage/ProjectDelete.tsx, rancher/catalog/CatalogDeleteButton.tsx, rancher/cluster/IngressActions.tsx, rancher/cluster/ServiceActions.tsx, rancher/cluster/WorkloadActions.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserTermination.tsx",
     "message": "Delete"
   },
   "Deleting PostgreSQL server will cause deletion of all databases created within server.": {
@@ -4711,6 +4719,10 @@
     "description": "customer/dashboard/CustomerActions.tsx, customer/routes.ts, issues/list/IssuesList.tsx, issues/routes.ts, navigation/IssuesLink.tsx, navigation/header/QuickIssueDrawerToggle.tsx, project/routes.ts, user/routes.ts",
     "message": "Issues"
   },
+  "It is not allowed to create users for current offering.": {
+    "description": "marketplace/service-providers/CreateProviderOfferingUserDialog.tsx",
+    "message": "It is not allowed to create users for current offering."
+  },
   "It is used as default page title if it's not specified explicitly.": {
     "description": "SettingsDescription.ts",
     "message": "It is used as default page title if it's not specified explicitly."
@@ -6116,8 +6128,12 @@
     "message": "Offering usage synchronization has been scheduled."
   },
   "Offering user has been created.": {
-    "description": "marketplace/offerings/details/CreateOfferingUserDialog.tsx",
+    "description": "marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx",
     "message": "Offering user has been created."
+  },
+  "Offering user has been deleted.": {
+    "description": "marketplace/service-providers/ProviderOfferingUserDeleteButton.tsx",
+    "message": "Offering user has been deleted."
   },
   "Offering users synchronization has been scheduled.": {
     "description": "marketplace/offerings/store/effects.ts",
@@ -6128,7 +6144,7 @@
     "message": "Offering users"
   },
   "Offering": {
-    "description": "administration/roles/PermissionOptions.tsx, marketplace/deploy/CheckoutFooter.tsx, marketplace/offerings/PriceList.tsx, marketplace/offerings/import/tabs.ts, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/OfferingFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/list/PublicResourcesList.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderOfferingUsersFilter.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/proposal/create/ResourceRequestsSummary.tsx, proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx, proposals/proposal/create/resource-requests-step/ProposalResourcesFilter.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx, proposals/update/offerings/WizardFormSecondPage.tsx, reporting/plan-usage/PlanUsageDialog.tsx, reporting/plan-usage/PlanUsageFilter.tsx, reporting/plan-usage/PlanUsageList.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, reporting/resource-usage/ResourceUsageList.tsx, user/UserOfferingList.tsx",
+    "description": "administration/roles/PermissionOptions.tsx, marketplace/deploy/CheckoutFooter.tsx, marketplace/offerings/PriceList.tsx, marketplace/offerings/import/tabs.ts, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/OfferingFilter.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/list/PublicResourcesList.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderOfferingUsersFilter.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, permissions/constants.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/proposal/create/ResourceRequestsSummary.tsx, proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx, proposals/proposal/create/resource-requests-step/ProposalResourcesFilter.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage.tsx, proposals/update/offerings/WizardFormSecondPage.tsx, reporting/plan-usage/PlanUsageDialog.tsx, reporting/plan-usage/PlanUsageFilter.tsx, reporting/plan-usage/PlanUsageList.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, reporting/resource-usage/ResourceUsageList.tsx, user/UserOfferingList.tsx",
     "message": "Offering"
   },
   "Offerings count": {
@@ -10764,7 +10780,7 @@
     "message": "URL"
   },
   "UUID": {
-    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, proposals/proposal/UserProposalsList.tsx, proposals/review/CustomerReviewsList.tsx, proposals/review/UserReviewsList.tsx, resource/summary/ResourceMetadataDialog.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/support/UserList.tsx",
+    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, marketplace/offerings/details/OfferingUsersTable.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, proposals/proposal/UserProposalsList.tsx, proposals/review/CustomerReviewsList.tsx, proposals/review/UserReviewsList.tsx, resource/summary/ResourceMetadataDialog.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, user/support/UserList.tsx",
     "message": "UUID"
   },
   "Unable to accept booking.": {
@@ -10976,7 +10992,7 @@
     "message": "Unable to create notification."
   },
   "Unable to create offering user.": {
-    "description": "marketplace/offerings/details/CreateOfferingUserDialog.tsx",
+    "description": "marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx",
     "message": "Unable to create offering user."
   },
   "Unable to create offering.": {
@@ -11066,6 +11082,10 @@
   "Unable to delete invoice item.": {
     "description": "invoices/details/InvoiceItemDelete.tsx",
     "message": "Unable to delete invoice item."
+  },
+  "Unable to delete offering user.": {
+    "description": "marketplace/service-providers/ProviderOfferingUserDeleteButton.tsx",
+    "message": "Unable to delete offering user."
   },
   "Unable to delete payment.": {
     "description": "customer/payments/store/effects.ts",
@@ -12067,6 +12087,10 @@
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "Update offering thumbnail"
   },
+  "Update offering user": {
+    "description": "administration/roles/PermissionOptions.tsx",
+    "message": "Update offering user"
+  },
   "Update offering": {
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "Update offering"
@@ -12388,7 +12412,7 @@
     "message": "User's"
   },
   "User": {
-    "description": "customer/team/UserGroup.tsx, events/ExpandableEventDetailsTable.tsx, issues/feedback/SupportFeedbackList.tsx, issues/feedback/SupportFeedbackListFilter.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/resources/users/ResourceUsersList.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/ProviderUsersList.tsx, project/team/AddUserDialog.tsx, project/team/UserGroup.tsx, proposals/team/AddUserDialog.tsx, proposals/team/UsersList.tsx, slurm/details/AllocationJobsTable.tsx, user/UserManageContainer.tsx",
+    "description": "customer/team/UserGroup.tsx, events/ExpandableEventDetailsTable.tsx, issues/feedback/SupportFeedbackList.tsx, issues/feedback/SupportFeedbackListFilter.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/resources/users/ResourceUsersList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/ProviderUsersList.tsx, project/team/AddUserDialog.tsx, project/team/UserGroup.tsx, proposals/team/AddUserDialog.tsx, proposals/team/UsersList.tsx, slurm/details/AllocationJobsTable.tsx, user/UserManageContainer.tsx",
     "message": "User"
   },
   "Username anonymized prefix": {
@@ -12420,7 +12444,7 @@
     "message": "Username prefix"
   },
   "Username": {
-    "description": "administration/TokensList.tsx, auth/SigninForm.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, slurm/marketplace.ts, user/UserOfferingList.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
+    "description": "administration/TokensList.tsx, auth/SigninForm.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, slurm/marketplace.ts, user/UserOfferingList.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
     "message": "Username"
   },
   "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.).": {
@@ -12818,6 +12842,10 @@
   "You do not have permission to delete invitations.": {
     "description": "invitations/MultiDeleteAction.tsx",
     "message": "You do not have permission to delete invitations."
+  },
+  "You do not have permission to perform this action.": {
+    "description": "marketplace/service-providers/CreateProviderOfferingUserDialog.tsx",
+    "message": "You do not have permission to perform this action."
   },
   "You do not have sufficient privileges to visit this page. Ensure you have the correct rights for accessing this page for customer \"{customer}\"": {
     "description": "auth/PermissionLayout.tsx",
