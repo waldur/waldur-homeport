@@ -15,7 +15,7 @@ export const ProjectsListMenu = () => {
       title={translate('Projects')}
       state="projects"
       activeState={isDescendantOf('project', state) ? state.name : undefined}
-      icon={<ClipboardText />}
+      icon={<ClipboardText weight="bold" />}
       child={false}
     />
   );

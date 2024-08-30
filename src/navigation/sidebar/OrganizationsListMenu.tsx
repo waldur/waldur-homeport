@@ -21,7 +21,7 @@ export const OrganizationsListMenu = () => {
           ? state.name
           : undefined
       }
-      icon={<Buildings />}
+      icon={<Buildings weight="bold" />}
       child={false}
     />
   );

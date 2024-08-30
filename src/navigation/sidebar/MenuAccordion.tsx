@@ -24,6 +24,8 @@ export const MenuAccordion: React.FC<PropsWithChildren<MenuAccordionProps>> = (
       <span className="menu-title">{props.title}</span>
       <span className="menu-arrow" />
     </span>
-    <div className="menu-sub menu-sub-accordion">{props.children}</div>
+    <div className="menu-sub menu-sub-accordion menu-rounded-0">
+      {props.children}
+    </div>
   </div>
 );

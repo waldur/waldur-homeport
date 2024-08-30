@@ -1,21 +1,3 @@
 .aside:not(:hover) #kt_aside_toggle {
   display: none;
 }
-
-.aside {
-  .menu {
-    .menu-item.menu-accordion.show > .menu-link:not(:hover) {
-      background-color: transparent !important;
-
-      .menu-title,
-      .menu-icon,
-      .menu-arrow {
-        color: #96ab9b !important;
-      }
-
-      .menu-arrow:after {
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 8 9%27 fill=%27%2396ab9b%27%3E%3Cpath fill-rule=%27evenodd%27 clip-rule=%27evenodd%27 d=%27M5.935 4.579c.103.2.084.457-.064.635l-3 3.609a.47.47 0 01-.706.032.589.589 0 01-.035-.777l2.676-3.22-2.65-2.922a.589.589 0 01.001-.777.469.469 0 01.707.001l2.988 3.296a.53.53 0 01.083.123z%27/%3E%3C/svg%3E') !important;
-      }
-    }
-  }
-}

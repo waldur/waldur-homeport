@@ -81,19 +81,11 @@
 
   // Light theme
   &.aside-light {
-    background-color: $white;
-
-    .menu-state-title-primary .add-resource-toggle .menu-link:hover {
-      background-color: var(--waldur-aside-bg-color);
-      color: white !important;
-      .menu-title {
-        color: white !important;
-      }
-    }
+    background-color: if(isDarkMode(), get($aside-config, bg-color), $gray-25);
   }
 
   &.aside-accent {
-    background-color: var(--waldur-aside-bg-color);
+    background-color: if(isDarkMode(), get($aside-config, bg-color), $white);
 
     .aside-logo {
       h3 {

@@ -5,6 +5,8 @@
 // Aside menu
 .aside-menu {
   .menu {
+    padding: 0 get($aside-config, margin-x);
+
     // Link padding x
     @include menu-link-padding-x(get($aside-config, padding-x));
 
@@ -15,14 +17,18 @@
     );
   }
 
+  &.menu {
+    padding: 0 get($aside-config, margin-x);
+  }
+
   // Item
   .menu-item {
     padding: 0;
 
     // Menu Link
     .menu-link {
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
+      padding-top: 0.55rem;
+      padding-bottom: 0.55rem;
     }
 
     // Icon
@@ -32,8 +38,7 @@
   }
 }
 
-// Aside dark theme
-.aside-dark {
+.aside {
   border-right: get($aside-config, border-right);
 
   .hover-scroll-overlay-y {
@@ -44,58 +49,151 @@
       get($aside-config, scrollbar-hover-color)
     );
   }
-
-  .menu {
-    .menu-item {
-      .menu-section {
-        color: #253629 !important;
-      }
-
-      //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state(
-        #96ab9b,
-        #9fbf86,
-        #96ab9b,
-        #96ab9b,
-        null
-      );
-      @include menu-link-hover-state(
-        $dark,
-        $dark,
-        $primary,
-        $dark,
-        if(isDarkMode(), #172219, #f1f3f6)
-      );
-      @include menu-link-here-state(
-        $dark,
-        $dark,
-        $primary,
-        $dark,
-        if(isDarkMode(), #172219, #f1f3f6)
-      );
-      @include menu-link-show-state(
-        $dark,
-        $dark,
-        $primary,
-        $dark,
-        if(isDarkMode(), #172219, #f1f3f6)
-      );
-      @include menu-link-active-state(
-        $dark,
-        $dark,
-        $primary,
-        $dark,
-        if(isDarkMode(), #172219, #f1f3f6)
-      );
-    }
-  }
 }
 
-// Aside light theme
-.aside-light {
-  .menu {
-    .menu-title {
-      font-weight: 500;
+// Dark aside colors
+$dark-title: $gray-800;
+$dark-icon: $grey-600;
+$dark-arrow: $gray-600;
+$dark-arrow-state: $gray-800;
+$dark-bg-hover: $gray-50;
+$dark-bg-active: $grey-100;
+$dark-bg-subitem: $grey-200;
+$dark-badge-color: $gray-800;
+$dark-badge-bg: $grey-100;
+$dark-badge-border: $grey-400;
+$dark-accordion-active: $grey-100;
+$dark-footer-separator: $grey-300;
+
+$asides: (
+  dark: (
+    title: if(isDarkMode(), $dark-title, $primary-100),
+    icon: if(isDarkMode(), $dark-icon, $primary-300),
+    arrow: if(isDarkMode(), $dark-arrow, $primary-300),
+    arrow-state: if(isDarkMode(), $dark-arrow-state, $primary-100),
+    bg-hover: if(isDarkMode(), $dark-bg-hover, $primary-900),
+    bg-active: if(isDarkMode(), $dark-bg-active, $primary-800),
+    bg-subitem: if(isDarkMode(), $dark-bg-subitem, $primary-700),
+    badge-color: if(isDarkMode(), $dark-badge-color, $primary-100),
+    badge-bg: if(isDarkMode(), $dark-badge-bg, transparent),
+    badge-border: if(isDarkMode(), $dark-badge-border, $primary-300),
+    accordion-active: if(isDarkMode(), $dark-accordion-active, $primary-800),
+    footer-separator: if(isDarkMode(), $dark-footer-separator, $primary-700),
+  ),
+  light: (
+    title: if(isDarkMode(), $dark-title, $gray-700),
+    icon: if(isDarkMode(), $dark-icon, $grey-500),
+    arrow: if(isDarkMode(), $dark-arrow, $grey-400),
+    arrow-state: if(isDarkMode(), $dark-arrow-state, $grey-500),
+    bg-hover: if(isDarkMode(), $dark-bg-hover, $gray-50),
+    bg-active: if(isDarkMode(), $dark-bg-active, $grey-100),
+    bg-subitem: if(isDarkMode(), $dark-bg-subitem, $grey-200),
+    badge-color: if(isDarkMode(), $dark-badge-color, $gray-700),
+    badge-bg: if(isDarkMode(), $dark-badge-bg, transparent),
+    badge-border: if(isDarkMode(), $dark-badge-border, $grey-200),
+    accordion-active: if(isDarkMode(), $dark-accordion-active, $grey-100),
+    footer-separator: if(isDarkMode(), $dark-footer-separator, $grey-200),
+  ),
+  accent: (
+    title: if(isDarkMode(), $dark-title, $primary-800),
+    icon: if(isDarkMode(), $dark-icon, $primary-400),
+    arrow: if(isDarkMode(), $dark-arrow, $primary-400),
+    arrow-state: if(isDarkMode(), $dark-arrow-state, $primary-500),
+    bg-hover: if(isDarkMode(), $dark-bg-hover, $primary-25),
+    bg-active: if(isDarkMode(), $dark-bg-active, $primary-50),
+    bg-subitem: if(isDarkMode(), $dark-bg-subitem, $primary-100),
+    badge-color: if(isDarkMode(), $dark-badge-color, $primary-800),
+    badge-bg: if(isDarkMode(), $dark-badge-bg, transparent),
+    badge-border: if(isDarkMode(), $dark-badge-border, $primary-200),
+    accordion-active: if(isDarkMode(), $dark-accordion-active, $primary-50),
+    footer-separator: if(isDarkMode(), $dark-footer-separator, $primary-200),
+  ),
+);
+
+@each $name, $value in $asides {
+  .aside-#{$name} {
+    .menu {
+      .menu-item {
+        .menu-section {
+          color: #253629 !important;
+        }
+
+        $title-color: get($value, title);
+        $icon-color: get($value, icon);
+        $arrow-color: get($value, arrow);
+        $arrow-state-color: get($value, arrow-state);
+
+        //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
+        @include menu-link-default-state(
+          $title-color,
+          $icon-color,
+          transparent,
+          $arrow-color,
+          null
+        );
+        @include menu-link-hover-state(
+          $title-color,
+          $icon-color,
+          transparent,
+          $arrow-state-color,
+          get($value, bg-hover)
+        );
+        @include menu-link-here-state(
+          $title-color,
+          $icon-color,
+          transparent,
+          $arrow-state-color,
+          get($value, bg-active)
+        );
+        @include menu-link-show-state(
+          $title-color,
+          $icon-color,
+          transparent,
+          $arrow-state-color,
+          get($value, bg-active)
+        );
+        @include menu-link-active-state(
+          $title-color,
+          $icon-color,
+          transparent,
+          $arrow-state-color,
+          get($value, bg-active)
+        );
+
+        &.menu-accordion {
+          &.hover {
+            background: get($value, accordion-active);
+          }
+
+          .menu-sub-accordion .menu-item {
+            @include menu-link-here-state(
+              $title-color,
+              $icon-color,
+              transparent,
+              $arrow-state-color,
+              get($value, bg-subitem)
+            );
+            @include menu-link-show-state(
+              $title-color,
+              $icon-color,
+              transparent,
+              $arrow-state-color,
+              get($value, bg-subitem)
+            );
+          }
+        }
+
+        .menu-badge {
+          .badge {
+            color: get($value, badge-color);
+            background-color: get($value, badge-bg);
+            border: 1px solid get($value, badge-border);
+          }
+        }
+      }
+    }
+    .aside-footer.has-divider::before {
+      background: get($value, footer-separator);
     }
   }
 }
