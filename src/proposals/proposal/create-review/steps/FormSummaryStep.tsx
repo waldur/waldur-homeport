@@ -82,7 +82,7 @@ const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
                   value={fieldProps.input.value || 0}
                   onChange={(value) => fieldProps.input.onChange(value)}
                 />
-                <span className="text-grey-700 mt-2">
+                <span className="text-gray-700 mt-2">
                   {fieldProps.input.value === 1
                     ? translate('1 star')
                     : translate('{count} stars', {

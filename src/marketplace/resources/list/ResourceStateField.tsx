@@ -34,7 +34,7 @@ export const ResourceStateField = ({
           : state === 'Terminated'
             ? 'warning'
             : ['SHUTOFF', 'STOPPED', 'SUSPENDED'].includes(runtimeState)
-              ? 'secondary'
+              ? 'default'
               : 'primary'
       }
       active={isActive}

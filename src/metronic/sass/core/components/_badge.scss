@@ -49,6 +49,17 @@
       height: $badge-size-lg;
     }
   }
+
+  &.has-bullet::before {
+    content: ' ';
+    display: inline-block;
+    background-color: $dark;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    transform: translate(-50%, -20%);
+    margin-right: 3px;
+  }
 }
 
 @each $name, $value in $theme-colors {
@@ -56,23 +67,39 @@
     color: theme-inverse-color($name);
     background-color: $value;
     border: 1px solid $value;
+
+    &.has-bullet::before {
+      background-color: theme-inverse-color($name);
+    }
   }
 
   .badge-light-#{$name} {
     color: $value;
     background-color: theme-light-color($name);
     border: 1px solid theme-light-color($name);
+
+    &.has-bullet::before {
+      background-color: $value;
+    }
   }
 
   .badge-outline-#{$name} {
     color: theme-active-color($name);
     background-color: theme-light-color($name);
     border: 1px solid theme-200-color($name);
+
+    &.has-bullet::before {
+      background-color: theme-active-color($name);
+    }
   }
 }
 
-.badge-outline.badge-outline-default {
+.badge-outline-default {
   color: $gray-700;
-  border: 1px solid $input-border-color;
-  background-color: unset;
+  border: 1px solid $grey-200;
+  background-color: $grey-100;
+
+  &.has-bullet::before {
+    background-color: $gray-700;
+  }
 }

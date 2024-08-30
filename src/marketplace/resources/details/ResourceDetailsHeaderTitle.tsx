@@ -23,7 +23,7 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
           className="text-hover-primary cursor-pointer"
           size={20}
         />
-        <ResourceStateField resource={resource} pill light hasBullet />
+        <ResourceStateField resource={resource} pill outline hasBullet />
       </div>
       <ParentResourceLink resource={resource} />
     </>
