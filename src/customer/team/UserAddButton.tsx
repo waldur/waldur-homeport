@@ -45,7 +45,7 @@ export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
           }),
         )
       }
-      title={translate('Add member')}
+      title={translate('Add')}
       iconNode={<PlusCircle />}
       disabled={!canAddUser}
     />

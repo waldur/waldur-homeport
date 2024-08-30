@@ -1,11 +1,9 @@
-import { PlusCircle } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { Customer, Project } from '@waldur/workspace/types';
 
 const MarketplacePopup = lazyComponent(
@@ -31,12 +29,5 @@ export const CreateResourceButton: FC<CreateResourceButtonProps> = (props) => {
       ),
     [dispatch],
   );
-  return (
-    <ActionButton
-      action={openFormDialog}
-      iconNode={<PlusCircle weight="bold" />}
-      title={translate('Add')}
-      variant="primary"
-    />
-  );
+  return <AddButton action={openFormDialog} />;
 };

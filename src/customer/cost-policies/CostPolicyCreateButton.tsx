@@ -1,11 +1,9 @@
-import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n/translate';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { Customer, Project } from '@waldur/workspace/types';
 
 import { createOrganizationCostPolicy, createProjectCostPolicy } from './api';
@@ -64,12 +62,5 @@ export const CostPolicyCreateButton = ({
     [dispatch],
   );
 
-  return (
-    <ActionButton
-      title={translate('New policy')}
-      iconNode={<PlusCircle />}
-      action={openCostPolicyCreateDialog}
-      variant="primary"
-    />
-  );
+  return <AddButton action={openCostPolicyCreateDialog} />;
 };

@@ -60,14 +60,14 @@ describe('Group invitations', () => {
   });
 
   it('Should open modal when Create group invitation button is clicked', () => {
-    cy.contains('button', 'Create group invitation')
+    cy.contains('button', 'Add')
       .click()
       .get('.modal-title')
       .should('be.visible');
   });
 
   it('Should close modal when cancel button is clicked', () => {
-    cy.contains('button', 'Create group invitation')
+    cy.contains('button', 'Add')
       .click()
       .get('.modal-footer')
       .contains('button', 'Cancel')
@@ -77,7 +77,7 @@ describe('Group invitations', () => {
   });
 
   it('Should invitation works correctly using role (Organization owner)', () => {
-    cy.contains('button', 'Create group invitation')
+    cy.contains('button', 'Add')
       .click()
       .get('label')
       .selectRole('Organization owner')
@@ -88,7 +88,7 @@ describe('Group invitations', () => {
   });
 
   it('Should invitation works correctly using role (Project manager)', () => {
-    cy.contains('button', 'Create group invitation')
+    cy.contains('button', 'Add')
       .click()
       .selectRole('Project manager')
       .openDropdownByLabel('Project*')
@@ -100,7 +100,7 @@ describe('Group invitations', () => {
   });
 
   it('Should invitation works correctly using role (System administrator)', () => {
-    cy.contains('button', 'Create group invitation')
+    cy.contains('button', 'Add')
       .click()
       .selectRole('System administrator')
       .openDropdownByLabel('Project*')
@@ -112,7 +112,7 @@ describe('Group invitations', () => {
   });
 
   it('Should invitation works correctly using role (Project member)', () => {
-    cy.contains('button', 'Create group invitation')
+    cy.contains('button', 'Add')
       .click()
       .selectRole('Project member')
       .openDropdownByLabel('Project*')

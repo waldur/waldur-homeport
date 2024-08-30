@@ -47,7 +47,7 @@ describe('Broadcast', () => {
   it('Create a broadcast', () => {
     cy.wait('@getNotifications').then(() => {
       cy.get('#kt_content_container button.btn-primary')
-        .contains('Create')
+        .contains('Add')
         .click()
         .get('input[name="subject"]')
         .type('Test')
