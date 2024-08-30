@@ -70,7 +70,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
                 (isMd ? '' : ' flex-wrap')
               }
             >
-              <span className="text-grey-700 fw-bold">{item.label}:</span>
+              <span className="text-gray-700 fw-bold">{item.label}:</span>
               <item.component />
             </Badge>
           ))}

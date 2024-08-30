@@ -66,7 +66,7 @@ export const PageBarFilters = () => {
               className="fw-bold"
             >
               {item.label}
-              <Badge bg="" className="badge-outline badge-outline-default">
+              <Badge bg="" className="badge-outline-default">
                 {item.getValueLabel
                   ? item.getValueLabel(item.value)
                   : typeof item.value === 'string'

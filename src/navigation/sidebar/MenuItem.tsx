@@ -42,7 +42,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
           {props.badge && (
             <span className="menu-badge">
               {ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE === 'light' ? (
-                <Badge bg="" className="badge-outline badge-outline-default">
+                <Badge bg="" className="badge-outline-default">
                   {props.badge}
                 </Badge>
               ) : (

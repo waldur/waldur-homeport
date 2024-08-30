@@ -41,13 +41,9 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
         props.size && `badge-${props.size}`,
         props.roundless && 'rounded-0',
         props.pill && 'badge-pill',
+        props.hasBullet && 'has-bullet',
       ])}
     >
-      {props.hasBullet && (
-        <span
-          className={`bullet bullet-dot bg-${props.light || props.outline ? props.variant : 'white'} me-2 h-5px w-5px translate-middle-y`}
-        />
-      )}
       {props.label.toUpperCase()}{' '}
       {props.active && (
         <LoadingSpinnerIcon
