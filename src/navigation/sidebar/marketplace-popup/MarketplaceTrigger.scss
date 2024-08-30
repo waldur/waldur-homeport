@@ -1,7 +1,5 @@
 .aside .menu-item.add-resource-toggle {
-  padding-right: 1.25rem;
-  padding-left: 1.25rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.85rem;
 
   .menu-link {
     border-width: 2px;
@@ -30,51 +28,7 @@
     &:not(:hover) {
       .menu-title,
       .menu-icon .svg-icon svg {
-        color: var(--bs-primary-300) !important;
-      }
-    }
-  }
-}
-
-.aside-light .menu-item.add-resource-toggle {
-  .menu-link {
-    border-color: var(--waldur-aside-bg-color);
-    &:not(:hover) {
-      .menu-title,
-      .menu-icon .svg-icon svg {
-        color: var(--waldur-aside-bg-color) !important;
-      }
-    }
-  }
-}
-
-.aside-accent .menu-item.add-resource-toggle {
-  .menu-link {
-    border-color: white;
-    &:not(:hover) {
-      .menu-title,
-      .menu-icon .svg-icon svg {
-        color: white !important;
-      }
-    }
-  }
-}
-
-// On aside collapsed - not on mobile & not on hover
-@media (min-width: 992px) {
-  .aside {
-    &:not(.aside-hoverable),
-    &:not(:hover) {
-      .menu-item.add-resource-toggle .menu-link {
-        transition: all 0.2s;
-
-        [data-kt-aside-minimize='on'] & {
-          justify-content: start;
-          padding-left: 0.75rem;
-          padding-right: 0.75rem;
-          width: 43px;
-          white-space: nowrap;
-        }
+        color: var(--bs-primary-300);
       }
     }
   }

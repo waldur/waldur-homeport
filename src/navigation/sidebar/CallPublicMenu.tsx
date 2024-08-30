@@ -21,7 +21,7 @@ export const CallPublicMenu = () => {
     <MenuAccordion
       title={translate('Calls')}
       itemId="calls-menu"
-      icon={<ChatTeardropText />}
+      icon={<ChatTeardropText weight="bold" />}
     >
       <MenuItem
         title={translate('Calls for proposals')}

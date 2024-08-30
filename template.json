@@ -5359,6 +5359,10 @@
     "description": "invoices/details/ResourceLimitPeriodsTable.tsx",
     "message": "Months"
   },
+  "More resources": {
+    "description": "navigation/sidebar/ResourcesMenu.tsx",
+    "message": "More resources"
+  },
   "Mount point": {
     "description": "rancher/cluster/create/VolumeMountPointGroup.tsx",
     "message": "Mount point"

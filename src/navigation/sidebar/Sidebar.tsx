@@ -56,7 +56,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
 
       <div className="aside-menu flex-grow-1 overflow-hidden">
         <div
-          className="hover-scroll-overlay-y my-5 my-lg-5"
+          className="hover-scroll-overlay-y my-4"
           id="kt_aside_menu_wrapper"
           data-kt-scroll="true"
           data-kt-scroll-activate="{default: false, lg: true}"
@@ -67,7 +67,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
         >
           <div
             className={classNames(
-              'menu menu-column menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500',
+              'menu menu-column menu-rounded gap-1 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500 fw-bold',
               menuClassNames,
             )}
             id="kt_aside_menu"

@@ -11,7 +11,7 @@ export const AdminMenu = () => {
       state="admin.dashboard"
       activeState="admin"
       child={false}
-      icon={<GearSix />}
+      icon={<GearSix weight="bold" />}
     />
   );
 };

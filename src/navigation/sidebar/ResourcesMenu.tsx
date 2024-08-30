@@ -1,4 +1,4 @@
-import { CaretDoubleDown, SquaresFour } from '@phosphor-icons/react';
+import { CaretDown, SquaresFour } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
@@ -17,32 +17,41 @@ import { MenuItem } from './MenuItem';
 
 const MAX_COLLAPSE_MENU_COUNT = 5;
 
-const CustomToggle = ({ onClick, itemsCount, badge, expanded }) => (
+const CustomToggle = ({
+  onClick,
+  itemsCount,
+  moreResourcesCount,
+  expanded,
+}) => (
   <div
-    className="menu-item"
+    className={classNames('menu-item menu-show-more', expanded && 'active')}
     data-kt-menu-trigger="trigger"
     aria-hidden="true"
     onClick={onClick}
   >
-    <span className="menu-link">
+    <span
+      className="menu-link"
+      title={
+        !expanded
+          ? moreResourcesCount + ' ' + translate('More resources')
+          : null
+      }
+    >
+      <span className="menu-bullet" />
       <span className="menu-title">
-        <div
-          className={classNames(
-            'btn btn-flex btn-color-success fs-base p-0 ms-2 mb-2 collapsible rotate collapsed',
-            expanded && 'active',
-          )}
-        >
+        <div className="btn btn-flex btn-color-primary-300 p-0 collapsible collapsed">
           <span>
             {expanded
               ? translate('Show less')
               : translate('Show {count} more', { count: itemsCount })}
           </span>
-          <span className="svg-icon ms-2 svg-icon-3 rotate-180">
-            <CaretDoubleDown />
-          </span>
         </div>
       </span>
-      {!expanded && <span className="menu-badge">{badge}</span>}
+      <span className={classNames('menu-badge rotate', expanded && 'active')}>
+        <span className="svg-icon svg-icon-3 svg-icon-primary-300 rotate-180">
+          <CaretDown weight="bold" />
+        </span>
+      </span>
     </span>
   </div>
 );
@@ -127,7 +136,7 @@ export const ResourcesMenu = ({ anonymous = false, user }) => {
     <MenuAccordion
       title={translate('Resources')}
       itemId="resources-menu"
-      icon={<SquaresFour />}
+      icon={<SquaresFour weight="bold" />}
     >
       <MenuItem
         title={translate('All resources')}
@@ -149,7 +158,7 @@ export const ResourcesMenu = ({ anonymous = false, user }) => {
           )}
           <CustomToggle
             itemsCount={sortedCategories.slice(MAX_COLLAPSE_MENU_COUNT).length}
-            badge={collapsedResourcesCount}
+            moreResourcesCount={collapsedResourcesCount}
             onClick={() => setExpanded(!expanded)}
             expanded={expanded}
           />

@@ -17,7 +17,7 @@ export const ReportingMenu = () => {
       state="reporting-dashboard"
       activeState="reporting"
       child={false}
-      icon={<ChartBar />}
+      icon={<ChartBar weight="bold" />}
     />
   );
 };

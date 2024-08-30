@@ -79,7 +79,7 @@ export const UnifiedSidebar = () => {
             ? state.name
             : undefined
         }
-        icon={<ShoppingCart />}
+        icon={<ShoppingCart weight="bold" />}
         title={translate('Marketplace')}
         state="public.marketplace-landing"
         child={false}

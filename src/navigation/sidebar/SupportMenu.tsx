@@ -11,7 +11,7 @@ export const SupportMenu = () => {
       state="support-dashboard"
       activeState="support"
       child={false}
-      icon={<Headset />}
+      icon={<Headset weight="bold" />}
     />
   );
 };

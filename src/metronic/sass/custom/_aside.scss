@@ -1,0 +1,183 @@
+.aside {
+  .menu {
+    .menu-item {
+      &.menu-accordion {
+        &.hover {
+          background: if(isDarkMode(), $grey-300, $primary-700);
+          border-radius: $border-radius;
+          overflow: hidden;
+
+          > .menu-link:not(:hover) {
+            background-color: transparent !important;
+          }
+        }
+
+        // Accordion arrow rotation
+        &:not(.menu-dropdown),
+        &:not(.menu-dropdown) {
+          &.hiding >,
+          &:not(.showing) > {
+            .menu-link {
+              .menu-arrow:after {
+                transform: rotate(90deg);
+              }
+            }
+          }
+
+          &.showing,
+          &:not(.hiding).show {
+            > .menu-link {
+              .menu-arrow:after {
+                @include menu-link-arrow-rotate(270deg, -270deg);
+              }
+            }
+          }
+        }
+      }
+
+      .menu-link {
+        height: 40px;
+
+        .menu-title {
+          font-size: get($aside-config, font-size);
+          font-weight: 500;
+        }
+
+        .menu-arrow {
+          width: 1.3rem;
+          height: 1.3rem;
+        }
+
+        // Menu Icon
+        .menu-icon {
+          width: get($aside-config, icon-size);
+          margin-right: 12px;
+
+          .svg-icon {
+            @include svg-icon-size(get($aside-config, icon-size), true);
+          }
+        }
+      }
+    }
+  }
+
+  .aside-footer.has-divider::before {
+    content: ' ';
+    height: 1px;
+    display: block;
+    background: if(isDarkMode(), $grey-400, $primary-700);
+    margin: 0 get($aside-config, margin-x);
+  }
+}
+
+// On aside collapsed - not on mobile & not on hover
+@media (min-width: 992px) {
+  .aside {
+    &:not(.aside-hoverable),
+    &:not(:hover) {
+      .menu-item {
+        .menu-link {
+          transition: all 0.2s;
+
+          [data-kt-aside-minimize='on'] & {
+            justify-content: start;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            width: 43px;
+            white-space: nowrap;
+          }
+        }
+
+        &.menu-accordion {
+          [data-kt-aside-minimize='on'] & {
+            width: 43px;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Add resource button
+$dark-add-resource-border: $grey-600;
+$dark-add-resource-color: $grey-600;
+$dark-add-resource-state-color: $gray-700;
+$dark-show-more-color: $grey-600;
+$dark-show-more-active-icon: $gray-800;
+
+$custom-aside: (
+  dark: (
+    add-resource-border:
+      if(isDarkMode(), $dark-add-resource-border, $primary-300),
+    add-resource-color: if(isDarkMode(), $dark-add-resource-color, $primary-300),
+    add-resource-state-color:
+      if(isDarkMode(), $dark-add-resource-state-color, $primary-200),
+    show-more-color: if(isDarkMode(), $dark-show-more-color, $primary-300),
+    show-more-active-icon:
+      if(isDarkMode(), $dark-show-more-active-icon, $primary-100),
+  ),
+  light: (
+    add-resource-border: if(isDarkMode(), $dark-add-resource-border, $grey-300),
+    add-resource-color: if(isDarkMode(), $dark-add-resource-color, $gray-700),
+    add-resource-state-color:
+      if(isDarkMode(), $dark-add-resource-state-color, $grey-600),
+    show-more-color: if(isDarkMode(), $dark-show-more-color, $grey-500),
+    show-more-active-icon:
+      if(isDarkMode(), $dark-show-more-active-icon, $grey-600),
+  ),
+  accent: (
+    add-resource-border:
+      if(isDarkMode(), $dark-add-resource-border, var(--waldur-aside-bg-color)),
+    add-resource-color:
+      if(isDarkMode(), $dark-add-resource-color, var(--waldur-aside-bg-color)),
+    add-resource-state-color:
+      if(
+        isDarkMode(),
+        $dark-add-resource-state-color,
+        var(--waldur-aside-bg-color)
+      ),
+    show-more-color: if(isDarkMode(), $dark-show-more-color, $primary-400),
+    show-more-active-icon:
+      if(isDarkMode(), $dark-show-more-active-icon, $primary-600),
+  ),
+);
+
+.aside {
+  @each $name, $value in $custom-aside {
+    &.aside-#{$name} .menu-item {
+      &.add-resource-toggle {
+        .menu-link {
+          border-color: get($value, add-resource-border);
+          &:not(:hover) {
+            .menu-title,
+            .menu-icon .svg-icon svg {
+              color: get($value, add-resource-color);
+            }
+          }
+          &:hover {
+            .menu-title,
+            .menu-icon .svg-icon svg {
+              color: get($value, add-resource-state-color);
+            }
+          }
+        }
+      }
+      &.menu-show-more {
+        .menu-link {
+          .menu-title .btn {
+            color: get($value, show-more-color);
+          }
+          .menu-badge .svg-icon {
+            @include svg-icon-color(get($value, show-more-color));
+          }
+        }
+        &.active .menu-link {
+          .menu-badge .svg-icon {
+            @include svg-icon-color(get($value, show-more-active-icon));
+          }
+        }
+      }
+    }
+  }
+}

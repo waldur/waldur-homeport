@@ -3,8 +3,6 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Badge } from 'react-bootstrap';
 
-import { ENV } from '@waldur/configs/default';
-
 interface MenuItemProps {
   title: ReactNode;
   badge?: ReactNode;
@@ -41,13 +39,9 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
           <span className="menu-title">{props.title}</span>
           {props.badge && (
             <span className="menu-badge">
-              {ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE === 'light' ? (
-                <Badge bg="" className="badge-outline-default">
-                  {props.badge}
-                </Badge>
-              ) : (
-                <Badge bg="primary">{props.badge}</Badge>
-              )}
+              <Badge bg="" pill>
+                {props.badge}
+              </Badge>
             </span>
           )}
         </a>
