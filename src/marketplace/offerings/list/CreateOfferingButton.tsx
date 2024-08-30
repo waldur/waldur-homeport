@@ -1,9 +1,7 @@
-import { Plus } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -30,14 +28,7 @@ export const CreateOfferingButton = ({ fetch }: { fetch? }) => {
       customerId: customer.uuid,
     })
   ) {
-    return (
-      <Button className="btn btn-primary btn-md" onClick={callback}>
-        <span className="svg-icon svg-icon-2">
-          <Plus />
-        </span>{' '}
-        {translate('Add new offering')}
-      </Button>
-    );
+    return <AddButton action={callback} />;
   } else {
     return null;
   }

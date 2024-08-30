@@ -275,10 +275,6 @@
     "description": "proposals/update/documents/AttachDocumentsDialog.tsx",
     "message": "Add call attachments"
   },
-  "Add call": {
-    "description": "proposals/call-management/CallCreateButton.tsx",
-    "message": "Add call"
-  },
   "Add comment": {
     "description": "issues/comments/IssueCommentsFormMainContainer.spec.tsx, issues/comments/IssueCommentsFormMainContainer.tsx, proposals/proposal/create-review/AddCommentButton.tsx, proposals/proposal/create-review/CommentFormDialog.tsx",
     "message": "Add comment"
@@ -327,10 +323,6 @@
     "description": "customer/team/UserAddButton.tsx",
     "message": "Add member"
   },
-  "Add new offering": {
-    "description": "marketplace/offerings/list/CreateOfferingButton.tsx",
-    "message": "Add new offering"
-  },
   "Add notification": {
     "description": "user/hooks/HookCreateButton.tsx",
     "message": "Add notification"
@@ -352,11 +344,11 @@
     "message": "Add pair"
   },
   "Add payment profile": {
-    "description": "customer/payment-profiles/PaymentProfileCreateButton.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx",
+    "description": "customer/payment-profiles/PaymentProfileCreateDialog.tsx",
     "message": "Add payment profile"
   },
   "Add payment": {
-    "description": "customer/payments/CreatePaymentButton.tsx, customer/payments/PaymentCreateDialog.tsx",
+    "description": "customer/payments/PaymentCreateDialog.tsx",
     "message": "Add payment"
   },
   "Add plan": {
@@ -404,7 +396,7 @@
     "message": "Add {category}"
   },
   "Add": {
-    "description": "administration/organizations/OrganizationGroupCreateButton.tsx, administration/providers/CreateProviderDialog.tsx, customer/list/OrganizationCreateButton.tsx, customer/team/AddProjectUserButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/category/admin/CategoryCreateButton.tsx, marketplace/category/admin/GroupCreateButton.tsx, marketplace/deploy/DeployPage.tsx, marketplace/resources/list/CreateResourceButton.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-instance/deploy/FormNetworkStep.tsx, project/GlobalProjectCreateButton.tsx, project/ProjectCreateButton.tsx, rancher/cluster/create/FormNodesStep.tsx",
+    "description": "administration/providers/CreateProviderDialog.tsx, core/AddButton.tsx, customer/list/OrganizationCreateButton.tsx, customer/team/AddProjectUserButton.tsx, customer/team/UserAddButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/deploy/DeployPage.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-instance/deploy/FormNetworkStep.tsx, project/GlobalProjectCreateButton.tsx, project/ProjectCreateButton.tsx, rancher/cluster/create/FormNodesStep.tsx",
     "message": "Add"
   },
   "Additional account description invisible to user": {
@@ -2168,7 +2160,7 @@
     "message": "Create disk"
   },
   "Create group invitation": {
-    "description": "invitations/actions/GroupInvitationCreateButton.tsx, invitations/actions/GroupInvitationCreateDialog.tsx",
+    "description": "invitations/actions/GroupInvitationCreateDialog.tsx",
     "message": "Create group invitation"
   },
   "Create horizontal pod autoscaler": {
@@ -2272,7 +2264,7 @@
     "message": "Create subnet"
   },
   "Create": {
-    "description": "administration/agreements/UserAgreementCreateButton.tsx, administration/organizations/OrganizationGroupFromDialog.tsx, broadcasts/BroadcastCreateButton.tsx, broadcasts/BroadcastTemplateCreateButton.tsx, customer/cost-policies/CostPolicyCreateForm.tsx, customer/details/AccessSubnetCreateForm.tsx, freeipa/FreeIPAAccountCreate.tsx, issues/create/IssueCreateDialog.tsx, issues/list/IssueCreateButton.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/CreateOfferingUserButton.tsx, marketplace/offerings/update/components/AddComponentDialog.tsx, marketplace/offerings/update/endpoints/AddEndpointDialog.tsx, marketplace/offerings/update/options/AddOptionDialog.tsx, marketplace/offerings/update/plans/AddPlanDialog.tsx, marketplace/offerings/update/roles/AddRoleDialog.tsx, marketplace/orders/list/OrderTypeCell.tsx, marketplace/orders/list/OrderTypeFilter.tsx, marketplace/resources/details/ResourceIssuesCard.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/service-providers/CampaignCreateButton.tsx, openstack/openstack-instance/actions/CreateBackupAction.tsx, openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx, openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx, openstack/openstack-tenant/actions/CreateNetworkAction.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx, openstack/openstack-tenant/actions/CreateServerGroupAction.tsx, openstack/openstack-volume/actions/CreateSnapshotAction.tsx, openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx, project/ProjectCreateDialog.tsx, proposals/call-management/CallFormDialog.tsx, proposals/proposal/create/AddProposalDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create-review/CreateReviewDialog.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx, proposals/update/rounds/CallRoundCreateForm.tsx, rancher/catalog/CatalogCreateButton.tsx, rancher/cluster/hpas/HPACreateButton.tsx, user/hooks/HookDetailsDialog.tsx",
+    "description": "administration/organizations/OrganizationGroupFromDialog.tsx, customer/cost-policies/CostPolicyCreateForm.tsx, customer/details/AccessSubnetCreateForm.tsx, freeipa/FreeIPAAccountCreate.tsx, issues/create/IssueCreateDialog.tsx, issues/list/IssueCreateButton.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/CreateOfferingUserButton.tsx, marketplace/offerings/update/components/AddComponentDialog.tsx, marketplace/offerings/update/endpoints/AddEndpointDialog.tsx, marketplace/offerings/update/options/AddOptionDialog.tsx, marketplace/offerings/update/plans/AddPlanDialog.tsx, marketplace/offerings/update/roles/AddRoleDialog.tsx, marketplace/orders/list/OrderTypeCell.tsx, marketplace/orders/list/OrderTypeFilter.tsx, marketplace/resources/details/ResourceIssuesCard.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/service-providers/CampaignCreateButton.tsx, marketplace/service-providers/CreateProviderOfferingUserButton.tsx, openstack/openstack-instance/actions/CreateBackupAction.tsx, openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx, openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx, openstack/openstack-tenant/actions/CreateNetworkAction.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx, openstack/openstack-tenant/actions/CreateServerGroupAction.tsx, openstack/openstack-volume/actions/CreateSnapshotAction.tsx, openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx, project/ProjectCreateDialog.tsx, proposals/call-management/CallFormDialog.tsx, proposals/proposal/create/AddProposalDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create-review/CreateReviewDialog.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx, proposals/update/rounds/CallRoundCreateForm.tsx, rancher/catalog/CatalogCreateButton.tsx, rancher/cluster/hpas/HPACreateButton.tsx, user/hooks/HookDetailsDialog.tsx",
     "message": "Create"
   },
   "Created at": {
@@ -4623,10 +4615,6 @@
     "description": "invitations/actions/create/CustomMessageWrapper.tsx, invitations/actions/create/EmailsListGroupWrapper.tsx",
     "message": "Invite by email"
   },
-  "Invite user": {
-    "description": "invitations/actions/create/InvitationCreateButton.tsx",
-    "message": "Invite user"
-  },
   "Invoice No.": {
     "description": "invoices/details/InvoiceDetails.tsx",
     "message": "Invoice No."
@@ -5592,7 +5580,7 @@
     "message": "New plan"
   },
   "New policy": {
-    "description": "customer/cost-policies/CostPolicyCreateButton.tsx, customer/cost-policies/CostPolicyCreateDialog.tsx",
+    "description": "customer/cost-policies/CostPolicyCreateDialog.tsx",
     "message": "New policy"
   },
   "New price": {
@@ -5612,7 +5600,7 @@
     "message": "New resources cannot be scheduled for creation."
   },
   "New role": {
-    "description": "administration/roles/RoleCreateButton.tsx, administration/roles/RoleCreateDialog.tsx",
+    "description": "administration/roles/RoleCreateDialog.tsx",
     "message": "New role"
   },
   "New round": {

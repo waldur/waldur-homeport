@@ -1,14 +1,13 @@
-import { PlusCircle } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
+import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
@@ -62,11 +61,8 @@ export const GroupInvitationCreateButton: FC<{
       customerId: customer.uuid,
     });
   return (
-    <ActionButton
+    <AddButton
       action={callback}
-      title={translate('Create group invitation')}
-      iconNode={<PlusCircle />}
-      variant="primary"
       disabled={!canManage}
       tooltip={!canManage && translate('You can not create group invitations.')}
     />

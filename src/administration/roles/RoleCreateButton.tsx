@@ -1,12 +1,10 @@
-import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
+import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n/translate';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
 
 import { createRole, getRoles } from './api';
 
@@ -35,12 +33,5 @@ export const RoleCreateButton = ({ refetch }) => {
     [dispatch],
   );
 
-  return (
-    <ActionButton
-      title={translate('New role')}
-      iconNode={<PlusCircle />}
-      action={openRoleCreateDialog}
-      variant="primary"
-    />
-  );
+  return <AddButton action={openRoleCreateDialog} />;
 };
