@@ -50,7 +50,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       orderField: 'name',
       id: 'name',
       export: 'name',
-      keys: ['name'],
+      keys: ['name', 'backend_id'],
     },
     {
       title: translate('Resource UUID'),
@@ -115,6 +115,14 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       optional: true,
       keys: ['effective_id'],
       id: 'effective_id',
+    },
+    {
+      title: translate('Backend ID'),
+      render: ({ row }) => <>{row.backend_id || 'N/A'}</>,
+      export: 'backend_id',
+      optional: true,
+      keys: ['backend_id'],
+      id: 'backend_id',
     },
     {
       title: translate('Created at'),
