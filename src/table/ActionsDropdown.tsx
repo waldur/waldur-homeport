@@ -27,7 +27,7 @@ export const TableDropdownToggle = ({
     <Dropdown.Toggle
       variant="outline-dark"
       size="sm"
-      className="outline-dark btn-outline border-gray-400 btn-active-secondary w-100px px-2"
+      className="outline-dark btn-outline border-gray-400 btn-active-secondary min-w-100px px-2"
       disabled={disabled}
     >
       {label || translate('Actions')}

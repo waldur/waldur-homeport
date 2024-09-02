@@ -38,7 +38,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
                 'The public view is currently inactive as this call is archived or draft.',
               )}
             >
-              <Nav.Link disabled className="text-center w-60px d-flex">
+              <Nav.Link disabled className="text-center min-w-60px d-flex">
                 {translate('Public')}
                 <Question size={18} className="ms-1" />
               </Nav.Link>
@@ -48,7 +48,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
           <Nav.Item>
             <Nav.Link
               eventKey="public-call.details"
-              className="text-center w-60px"
+              className="text-center min-w-60px"
             >
               {translate('Public')}
             </Nav.Link>
@@ -57,7 +57,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
         <Nav.Item>
           <Nav.Link
             eventKey="protected-call.main"
-            className="text-center w-60px"
+            className="text-center min-w-60px"
           >
             {translate('Edit')}
           </Nav.Link>

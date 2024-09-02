@@ -18,7 +18,7 @@ export const RefreshButton = ({
   return (
     <Button
       variant="outline-dark"
-      className="btn-outline btn-active-secondary btn-icon-dark border-gray-400 w-100px px-2"
+      className="btn-outline btn-active-secondary btn-icon-dark border-gray-400 min-w-100px px-2"
       size={size}
       onClick={!isLoading ? refetch : undefined}
     >

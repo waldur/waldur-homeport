@@ -60,14 +60,14 @@ export const UserProfileHero: FC<UserProfileHeroProps> = ({
             title={translate('View')}
             disabled={!isValidUser}
             tabClassName={
-              'text-center w-60px' + (isValidUser ? '' : ' opacity-50')
+              'text-center min-w-60px' + (isValidUser ? '' : ' opacity-50')
             }
           />
         )}
         <Tab
           eventKey="profile-manage"
           title={translate('Edit')}
-          tabClassName="text-center w-60px"
+          tabClassName="text-center min-w-60px"
         />
       </Tabs>
       <UserProfile user={user} />
