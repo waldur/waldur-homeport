@@ -1,9 +1,6 @@
 import { reduxForm } from 'redux-form';
 
-import {
-  syncFiltersToURL,
-  useReinitializeFilterFromUrl,
-} from '@waldur/core/filters';
+import { syncFiltersToURL } from '@waldur/core/filters';
 import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/customer/constants';
 import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
@@ -12,6 +9,7 @@ import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/Offe
 import { MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/list/constants';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
+import { PROVIDER_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/service-providers/constants';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { ProviderAutocomplete } from '../ProviderAutocomplete';
@@ -40,9 +38,6 @@ const getOrderStateFilterOptions = (): {
 ];
 
 const PureMarketplaceOrdersListFilter = (props) => {
-  useReinitializeFilterFromUrl(props.form, {
-    state: getOrderStateFilterOptions()[0],
-  });
   const { provider_uuid } = props;
 
   return (
@@ -106,6 +101,20 @@ const PureMarketplaceOrdersListFilter = (props) => {
 export const MarketplaceOrdersListFilter = reduxForm({
   form: MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID,
   onChange: syncFiltersToURL,
+  initialValues: {
+    state: getOrderStateFilterOptions()[0],
+  },
+  touchOnChange: true,
+  destroyOnUnmount: false,
+})((props) => (
+  <PureMarketplaceOrdersListFilter {...props} hasOffering hasOrganization />
+)) as React.ComponentType<{
+  provider_uuid?: string;
+}>;
+
+export const ProviderOrdersListFilter = reduxForm({
+  form: PROVIDER_ORDERS_LIST_FILTER_FORM_ID,
+  onChange: syncFiltersToURL,
   touchOnChange: true,
   initialValues: {
     state: getOrderStateFilterOptions()[0],
@@ -129,8 +138,5 @@ export const OfferingOrdersListFilter = reduxForm({
 export const CustomerOrdersListFilter = reduxForm({
   form: CUSTOMER_ORDERS_LIST_FILTER_FORM_ID,
   touchOnChange: true,
-  initialValues: {
-    state: getOrderStateFilterOptions()[0],
-  },
   destroyOnUnmount: false,
 })((props) => <PureMarketplaceOrdersListFilter {...props} hasOffering />);
