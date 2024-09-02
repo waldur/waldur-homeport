@@ -83,7 +83,7 @@ export const RowActionButton: FC<ActionButtonProps> = ({
     props.tooltip,
     <Button
       className={classNames(
-        'btn-outline border-gray-400 btn-active-secondary px-2',
+        'btn-outline border-gray-400 btn-active-secondary bg-gray-25 px-2',
         className,
         { disabled: props.disabled || props.pending },
       )}

@@ -37,7 +37,7 @@ const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
     dispatch(
       openModalDialog(OpenStackSecurityGroupsDialog, {
         resolve: { securityGroups: [props.row] },
-        size: 'lg',
+        size: 'xl',
       }),
     );
   };
