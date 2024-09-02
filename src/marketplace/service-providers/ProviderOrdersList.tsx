@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { MarketplaceOrdersListFilter } from '../orders/list/MarketplaceOrdersListFilter';
+import { ProviderOrdersListFilter } from '../orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '../orders/list/OrdersTableComponent';
 
 import { PROVIDER_ORDERS_LIST_FILTER_FORM_ID } from './constants';
@@ -50,7 +50,7 @@ export const ProviderOrdersList = ({ provider }) => {
     <OrdersTableComponent
       table="ProviderOrdersList"
       filters={
-        <MarketplaceOrdersListFilter provider_uuid={provider.customer_uuid} />
+        <ProviderOrdersListFilter provider_uuid={provider.customer_uuid} />
       }
       filter={filter}
     />

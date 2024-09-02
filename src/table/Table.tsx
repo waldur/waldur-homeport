@@ -1,5 +1,6 @@
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
+import { isEqual } from 'lodash';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { Card, Col, ColProps, Row, Stack } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
@@ -421,6 +422,8 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     } else if (prevProps.query !== this.props.query) {
       this.props.resetPagination();
       this.props.fetch();
+    } else if (!isEqual(prevProps.filtersStorage, this.props.filtersStorage)) {
+      this.props.resetPagination();
     } else if (
       prevProps.sorting !== this.props.sorting &&
       this.props.sorting.loading
