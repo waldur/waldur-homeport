@@ -123,6 +123,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       export: (row) => formatDateTime(row.created),
       exportKeys: ['created'],
       id: 'created',
+      keys: ['created'],
     },
     {
       title: translate('State'),
