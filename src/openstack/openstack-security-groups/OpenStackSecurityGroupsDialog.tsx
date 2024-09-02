@@ -18,7 +18,7 @@ export const OpenStackSecurityGroupsTable: FunctionComponent<{
   securityGroups: SecurityGroup[];
 }> = ({ securityGroups }) => {
   return (
-    <Table>
+    <Table responsive>
       <thead>
         <tr>
           <th />
