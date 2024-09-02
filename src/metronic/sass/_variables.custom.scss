@@ -50,10 +50,11 @@ $success-inverse: #ffffff;
 // Info
 $info-50: #f4f3ff;
 $info-200: #d9d6fe;
+$info-300: #bdb4fe;
 $info-500: #7a5af8;
 $info-600: #6938ef;
 $info-700: #5925dc;
-$info: if(isDarkMode(), #8950fc, $info-600);
+$info: if(isDarkMode(), $info-300, $info-600);
 $info-active: if(isDarkMode(), #7337ee, $info-700);
 $info-light: if(isDarkMode(), #2f264f, $info-50);
 $info-inverse: #ffffff;

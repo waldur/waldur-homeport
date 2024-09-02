@@ -13,7 +13,7 @@ export const OfferingStateField = ({ offering }: { offering: Offering }) => {
           [DRAFT]: 'light',
           [ACTIVE]: 'success',
           [PAUSED]: 'warning',
-          [ARCHIVED]: 'dark',
+          [ARCHIVED]: 'info',
         }[offering.state]
       }
       light
