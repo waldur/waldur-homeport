@@ -40,7 +40,7 @@ const PageHero = ({ project }) => {
             <Nav.Item>
               <Nav.Link
                 eventKey="project.dashboard"
-                className="text-center w-60px"
+                className="text-center min-w-60px"
               >
                 {translate('View')}
               </Nav.Link>
@@ -48,7 +48,7 @@ const PageHero = ({ project }) => {
             <Nav.Item>
               <Nav.Link
                 eventKey="project-manage"
-                className="text-center w-60px"
+                className="text-center min-w-60px"
               >
                 {translate('Edit')}
               </Nav.Link>

@@ -99,7 +99,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 >
                   <Nav.Link
                     disabled
-                    className="d-flex align-items-center text-center w-60px opacity-50"
+                    className="d-flex align-items-center text-center min-w-60px opacity-50"
                   >
                     {translate('Public')}
                     <Question size={18} className="ms-1" />
@@ -110,7 +110,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               <Nav.Item>
                 <Nav.Link
                   eventKey="public-offering.marketplace-public-offering"
-                  className="text-center w-60px"
+                  className="text-center min-w-60px"
                 >
                   {translate('Public')}
                 </Nav.Link>
@@ -123,7 +123,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     ? 'admin-marketplace-offering-details'
                     : 'marketplace-offering-details'
                 }
-                className="text-center w-60px"
+                className="text-center min-w-60px"
               >
                 {translate('Manage')}
               </Nav.Link>
@@ -135,7 +135,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     ? 'admin-marketplace-offering-update'
                     : 'marketplace-offering-update'
                 }
-                className="text-center w-60px"
+                className="text-center min-w-60px"
               >
                 {translate('Edit')}
               </Nav.Link>
