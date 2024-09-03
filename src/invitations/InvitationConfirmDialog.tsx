@@ -15,6 +15,7 @@ import { InvitationErrorMessage } from './InvitationErrorMessage';
 import { InvitationMessage } from './InvitationMessage';
 import { InvitationService } from './InvitationService';
 import { formatInvitationState } from './InvitationStateFilter';
+import { clearInvitationToken } from './InvitationStorage';
 
 export const InvitationConfirmDialog: FunctionComponent<{
   resolve: { token; deferred };
@@ -51,6 +52,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
       if (linkProps) {
         router.stateService.go(linkProps.state, linkProps.params);
       }
+      clearInvitationToken();
       close();
     }
   }, [invitation]);

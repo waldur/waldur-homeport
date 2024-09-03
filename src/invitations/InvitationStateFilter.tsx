@@ -7,27 +7,27 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 export const choices = [
   {
     label: translate('Requested'),
-    value: 'Requested',
+    value: 'requested',
   },
   {
     label: translate('Rejected'),
-    value: 'Rejected',
+    value: 'rejected',
   },
   {
     label: translate('Pending'),
-    value: 'Pending',
+    value: 'pending',
   },
   {
     label: translate('Canceled'),
-    value: 'Canceled',
+    value: 'canceled',
   },
   {
     label: translate('Expired'),
-    value: 'Expired',
+    value: 'expired',
   },
   {
     label: translate('Accepted'),
-    value: 'Accepted',
+    value: 'accepted',
   },
 ];
 
