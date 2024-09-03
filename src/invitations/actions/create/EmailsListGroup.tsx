@@ -1,21 +1,22 @@
-import { Trash } from '@phosphor-icons/react';
+import { Question, Trash } from '@phosphor-icons/react';
 import { Fragment, useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
+import { ENV } from '@waldur/configs/default';
 import { email, required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { EmailField } from '@waldur/form/EmailField';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
-import { CivilNumberGroup } from '../CivilNumberGroup';
 import { LoadUserDetailsButton } from '../LoadUserDetailsButton';
-import { TaxNumberGroup } from '../TaxNumberGroup';
 import { GroupInviteRow, StoredUserDetails } from '../types';
 import { UserDetailsGroup } from '../UserDetailsGroup';
 
 import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
+import { Tip } from '@waldur/core/Tooltip';
 
 export const EmailsListGroup = ({
   fields,
@@ -71,10 +72,25 @@ export const EmailsListGroup = ({
                   {!isFeatureVisible(
                     InvitationsFeatures.conceal_civil_number,
                   ) && (
-                    <td className="id-column">{translate('Civil number')}</td>
+                    <td className="id-column">
+                      {ENV.plugins.WALDUR_CORE.INVITATION_CIVIL_NUMBER_LABEL ||
+                        translate('Civil number')}
+                    </td>
                   )}
                   {isFeatureVisible(InvitationsFeatures.show_tax_number) && (
-                    <td className="tax-column">{translate('Tax number')}</td>
+                    <td className="tax-column">
+                      {ENV.plugins.WALDUR_CORE.INVITATION_TAX_NUMBER_LABEL ||
+                        translate('Tax number')}
+                      <Tip
+                        label={translate(
+                          'Must start with a country prefix ie EE34501234215',
+                        )}
+                        id="taxTooltip"
+                      >
+                        {' '}
+                        <Question />
+                      </Tip>
+                    </td>
                   )}
                   <td className="role-column">{translate('Role')}</td>
                   <td className="w-5px" />
@@ -98,29 +114,46 @@ export const EmailsListGroup = ({
                           InvitationsFeatures.conceal_civil_number,
                         ) ? null : (
                           <td>
-                            <CivilNumberGroup
+                            <Field
                               name={`${user}.civil_number`}
+                              component={InputField}
                               disabled={disabled}
+                              validate={
+                                isFeatureVisible(
+                                  InvitationsFeatures.civil_number_required,
+                                )
+                                  ? required
+                                  : undefined
+                              }
                             />
                           </td>
                         )}
                         {isFeatureVisible(
                           InvitationsFeatures.show_tax_number,
-                        ) &&
-                          isFeatureVisible(
-                            InvitationsFeatures.require_user_details,
-                          ) && (
-                            <td>
-                              <TaxNumberGroup
-                                name={`${user}.tax_number`}
-                                disabled={disabled}
-                              />
+                        ) && (
+                          <td>
+                            <Field
+                              name={`${user}.tax_number`}
+                              component={InputField}
+                              disabled={disabled}
+                              validate={
+                                isFeatureVisible(
+                                  InvitationsFeatures.tax_number_required,
+                                )
+                                  ? required
+                                  : undefined
+                              }
+                            />
+                            {isFeatureVisible(
+                              InvitationsFeatures.require_user_details,
+                            ) && (
                               <LoadUserDetailsButton
                                 loading={disabled}
                                 onClick={() => fetchUserDetails(fields.get(i))}
                               />
-                            </td>
-                          )}
+                            )}
+                          </td>
+                        )}
                         <td className="role-column">
                           <RoleAndProjectSelectField
                             name={`${user}.role_project`}

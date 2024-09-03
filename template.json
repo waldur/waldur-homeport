@@ -5420,7 +5420,7 @@
     "message": "Must be {length} characters or less."
   },
   "Must start with a country prefix ie EE34501234215": {
-    "description": "invitations/actions/CivilNumberGroup.tsx",
+    "description": "invitations/actions/CivilNumberGroup.tsx, invitations/actions/create/EmailsListGroup.tsx",
     "message": "Must start with a country prefix ie EE34501234215"
   },
   "My Proposals": {
