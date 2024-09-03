@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 import { Project } from '@waldur/workspace/types';
 
 import { FieldEditButton } from './FieldEditButton';
+import { ProjectAvatar } from './ProjectAvatar';
 
 interface ProjectGeneralProps {
   project: Project;
@@ -43,17 +44,21 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
   );
 
   return (
-    <FormTable.Card className="card-bordered">
-      <FormTable>
-        {rows.map((row) => (
-          <FormTable.Item
-            key={row.key}
-            label={row.label}
-            value={row.value}
-            actions={<FieldEditButton project={project} name={row.key} />}
-          />
-        ))}
-      </FormTable>
-    </FormTable.Card>
+    <>
+      <ProjectAvatar project={project} />
+
+      <FormTable.Card title={translate('Details')} className="card-bordered">
+        <FormTable>
+          {rows.map((row) => (
+            <FormTable.Item
+              key={row.key}
+              label={row.label}
+              value={row.value}
+              actions={<FieldEditButton project={project} name={row.key} />}
+            />
+          ))}
+        </FormTable>
+      </FormTable.Card>
+    </>
   );
 };

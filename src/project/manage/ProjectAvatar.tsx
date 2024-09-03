@@ -1,7 +1,7 @@
 import { UploadSimple } from '@phosphor-icons/react';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
 import { WideImageField } from '@waldur/form/WideImageField';
@@ -27,12 +27,17 @@ export const ProjectAvatar = connect<{}, {}, ProjectAvatarProps>(
 )(
   reduxForm<FormData, ProjectAvatarProps>({
     form: EDIT_PROJECT_IMAGE_ID,
-    enableReinitialize: true,
   })((props) => {
     const abbreviation = useMemo(
       () => getItemAbbreviation(props.project),
       [props.project],
     );
+
+    const dispatch = useDispatch<any>();
+    useEffect(() => {
+      // Can not use enableReinitialize on reduxForm because of infinite render loop issue
+      dispatch(props.change('image', props.project.image));
+    }, [dispatch, props.project]);
 
     const processRequest = useCallback(
       (values: FormData, dispatch) => {
@@ -48,9 +53,14 @@ export const ProjectAvatar = connect<{}, {}, ProjectAvatarProps>(
       <Card
         as="form"
         onSubmit={props.handleSubmit(processRequest)}
-        className="card-bordered"
+        className="card-bordered mb-7"
       >
-        <Card.Body className="d-flex flex-column flex-sm-row gap-8">
+        <Card.Header>
+          <Card.Title>
+            <h3>{translate('Avatar')}</h3>
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
           <Field
             name="image"
             component={(fieldProps) => (
