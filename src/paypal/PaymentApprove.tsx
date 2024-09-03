@@ -47,8 +47,8 @@ export const PaymentApprove: FunctionComponent = () => {
     })();
   });
   return (
-    <div className="invitation-vertical-center">
-      <div className="container">
+    <div className="d-flex flex-column flex-root">
+      <div className="d-flex flex-column flex-center flex-column-fluid p-10">
         {translate('Payment is being processed, please wait.')}
       </div>
     </div>

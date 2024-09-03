@@ -23,8 +23,8 @@ export const InvitationAccept: FunctionComponent = () => {
   });
 
   return (
-    <div className="invitation-vertical-center">
-      <div className="container">
+    <div className="d-flex flex-column flex-root">
+      <div className="d-flex flex-column flex-center flex-column-fluid p-10">
         <LoadingSpinner />
         <p>{translate('Your invitation is being processed.')}</p>
         <p>{translate('You will be redirected in a moment.')}</p>

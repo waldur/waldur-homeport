@@ -1256,7 +1256,7 @@
     "message": "Backend ID has been successfully set."
   },
   "Backend ID": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/SetBackendIdDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/usage/ResourceMetaInfo.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, project/ProjectExpandableRowContainer.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectMetadata.tsx, resource/summary/ResourceMetadataDialog.tsx, slurm/details/AllocationJobsTable.tsx, user/affiliations/BaseProjectsList.tsx",
+    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/SetBackendIdDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/list/PublicResourcesList.tsx, marketplace/resources/usage/ResourceMetaInfo.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, project/ProjectExpandableRowContainer.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectMetadata.tsx, resource/summary/ResourceMetadataDialog.tsx, slurm/details/AllocationJobsTable.tsx, user/affiliations/BaseProjectsList.tsx",
     "message": "Backend ID"
   },
   "Backend health status": {
@@ -4563,9 +4563,9 @@
     "description": "invitations/actions/InvitationSendButton.tsx",
     "message": "Invitation has been sent again."
   },
-  "Invitation is in {state}": {
+  "Invitation is in {state} state.": {
     "description": "invitations/InvitationConfirmDialog.tsx",
-    "message": "Invitation is in {state}"
+    "message": "Invitation is in {state} state."
   },
   "Invitation is not found.": {
     "description": "invitations/utils.ts",

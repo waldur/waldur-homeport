@@ -1,8 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useCallback, FunctionComponent, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 
 import { getInvitationLinkProps } from '@waldur/administration/getInvitationLinkProps';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -23,10 +23,10 @@ export const InvitationConfirmDialog: FunctionComponent<{
   const router = useRouter();
 
   const user = useSelector(getUser);
-  const asyncResult = useAsync(() =>
+  const asyncResult = useQuery(['invitation', token], () =>
     InvitationService.details(token).then((response) => response.data),
   );
-  const invitation = asyncResult.value;
+  const invitation = asyncResult.data;
 
   const close = useCallback(() => dispatch(closeModalDialog()), [dispatch]);
 
@@ -51,6 +51,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
       if (linkProps) {
         router.stateService.go(linkProps.state, linkProps.params);
       }
+      close();
     }
   }, [invitation]);
 
@@ -60,7 +61,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
         <Modal.Title>{translate('Invitation confirmation')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {!user ? null : asyncResult.loading ? (
+        {!user ? null : asyncResult.isLoading ? (
           <>
             <LoadingSpinner />
             <p className="text-center">
@@ -69,12 +70,12 @@ export const InvitationConfirmDialog: FunctionComponent<{
               )}
             </p>
           </>
-        ) : asyncResult.error ? (
+        ) : asyncResult.isError ? (
           <InvitationErrorMessage dismiss={dismiss} />
         ) : invitation?.state === 'Pending' ? (
           <InvitationMessage invitation={invitation} user={user} />
         ) : invitation?.state ? (
-          translate('Invitation is in {state}', {
+          translate('Invitation is in {state} state.', {
             state: formatInvitationState(invitation.state),
           })
         ) : null}
