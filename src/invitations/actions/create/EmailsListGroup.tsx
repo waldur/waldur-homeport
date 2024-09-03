@@ -4,6 +4,7 @@ import { Button, Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/configs/default';
+import { Tip } from '@waldur/core/Tooltip';
 import { email, required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { InvitationsFeatures } from '@waldur/FeaturesEnums';
@@ -16,7 +17,6 @@ import { GroupInviteRow, StoredUserDetails } from '../types';
 import { UserDetailsGroup } from '../UserDetailsGroup';
 
 import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
-import { Tip } from '@waldur/core/Tooltip';
 
 export const EmailsListGroup = ({
   fields,
