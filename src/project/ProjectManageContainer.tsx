@@ -5,10 +5,6 @@ import { translate } from '@waldur/i18n';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
-const ProjectAvatar = lazyComponent(
-  () => import('./manage/ProjectAvatar'),
-  'ProjectAvatar',
-);
 const ProjectGeneral = lazyComponent(
   () => import('./manage/ProjectGeneral'),
   'ProjectGeneral',
@@ -27,11 +23,6 @@ const tabs: PageBarTab[] = [
     key: 'general',
     component: ProjectGeneral,
     title: translate('General'),
-  },
-  {
-    key: 'avatar',
-    component: ProjectAvatar,
-    title: translate('Avatar'),
   },
   {
     key: 'metadata',
