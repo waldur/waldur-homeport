@@ -47,7 +47,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
   }, [close, deferred, invitation]);
 
   useEffect(() => {
-    if (invitation?.state === 'Accepted') {
+    if (invitation?.state === 'accepted') {
       const linkProps = getInvitationLinkProps(invitation);
       if (linkProps) {
         router.stateService.go(linkProps.state, linkProps.params);
@@ -74,7 +74,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
           </>
         ) : asyncResult.isError ? (
           <InvitationErrorMessage dismiss={dismiss} />
-        ) : invitation?.state === 'Pending' ? (
+        ) : invitation?.state === 'pending' ? (
           <InvitationMessage invitation={invitation} user={user} />
         ) : invitation?.state ? (
           translate('Invitation is in {state} state.', {
@@ -83,7 +83,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
         ) : null}
       </Modal.Body>
       <Modal.Footer>
-        {!user ? null : invitation?.state === 'Pending' ? (
+        {!user ? null : invitation?.state === 'pending' ? (
           <InvitationButtons
             user={user}
             invitation={invitation}
