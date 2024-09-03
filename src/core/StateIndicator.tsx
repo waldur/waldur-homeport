@@ -36,7 +36,11 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
       bg={!(props.light || props.outline) ? props.variant : null}
       className={classNames([
         'badge-' +
-          (props.outline ? 'outline-' : props.light ? 'light-' : '') +
+          (props.outline
+            ? 'outline-'
+            : props.light && props.variant !== 'light'
+              ? 'light-'
+              : '') +
           props.variant,
         props.size && `badge-${props.size}`,
         props.roundless && 'rounded-0',
