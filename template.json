@@ -1724,7 +1724,7 @@
     "message": "Civil engineering"
   },
   "Civil number": {
-    "description": "invitations/InvitationExpandableRow.tsx, invitations/actions/CivilNumberGroup.tsx, invitations/actions/create/EmailsListGroup.tsx, user/support/UserList.tsx",
+    "description": "invitations/InvitationExpandableRow.tsx, invitations/actions/create/EmailsListGroup.tsx, user/support/UserList.tsx",
     "message": "Civil number"
   },
   "Clear filters": {
@@ -5420,7 +5420,7 @@
     "message": "Must be {length} characters or less."
   },
   "Must start with a country prefix ie EE34501234215": {
-    "description": "invitations/actions/CivilNumberGroup.tsx, invitations/actions/create/EmailsListGroup.tsx",
+    "description": "invitations/actions/create/EmailsListGroup.tsx",
     "message": "Must start with a country prefix ie EE34501234215"
   },
   "My Proposals": {
@@ -10048,7 +10048,7 @@
     "message": "Targets"
   },
   "Tax number": {
-    "description": "invitations/actions/TaxNumberGroup.tsx, invitations/actions/create/EmailsListGroup.tsx",
+    "description": "invitations/actions/create/EmailsListGroup.tsx",
     "message": "Tax number"
   },
   "Tax percentage": {
