@@ -45,7 +45,6 @@ const mapStateToFilter = createSelector(
     if (filters?.organization) {
       result.customer_uuid = filters.organization.uuid;
     }
-    result.field = resourcesListRequiredFields();
     return result;
   },
 );
@@ -61,6 +60,7 @@ export const AllResourcesList: FC<AllResourcesListProps> = (props) => {
     fetchData: createFetcher('marketplace-resources'),
     queryField: 'query',
     filter,
+    mandatoryFields: resourcesListRequiredFields(),
   });
 
   return (

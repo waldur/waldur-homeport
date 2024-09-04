@@ -9,7 +9,6 @@ import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { createFetcher, Table } from '@waldur/table';
 import { SLUG_COLUMN } from '@waldur/table/slug';
-import { TableProps } from '@waldur/table/Table';
 import { useTable } from '@waldur/table/utils';
 
 import { useOfferingDropdownActions } from '../offerings/hooks';
@@ -26,7 +25,6 @@ import { ResourcesCountColumn } from './ResourcesCountColumn';
 
 interface ProviderOfferingsComponentProps {
   provider: ServiceProvider;
-  extraTableProps?: Partial<TableProps>;
 }
 
 const mapStateToFilter = createSelector(
@@ -43,9 +41,18 @@ const mapStateToFilter = createSelector(
   },
 );
 
-export const ProviderOfferingsComponent: FC<
-  ProviderOfferingsComponentProps
-> = ({ provider, extraTableProps = {} }) => {
+const mandatoryFields = [
+  'uuid',
+  'customer_uuid', // EditOfferingButton, DeleteOfferingButton
+  'state', // PreviewOfferingButton, DeleteOfferingButton
+  'components', // PreviewOfferingButton
+  'type', // PreviewOfferingButton
+  'resources_count', // DeleteOfferingButton
+];
+
+const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
+  provider,
+}) => {
   const filter = useSelector(mapStateToFilter);
 
   const tableProps = useTable({
@@ -55,6 +62,7 @@ export const ProviderOfferingsComponent: FC<
     ),
     filter,
     queryField: 'name',
+    mandatoryFields,
   });
   const dropdownActions = useOfferingDropdownActions();
 
@@ -103,7 +111,6 @@ export const ProviderOfferingsComponent: FC<
       rowActions={(row) => (
         <OfferingActions row={row.row} refetch={tableProps.fetch} />
       )}
-      {...extraTableProps}
       filters={<ProviderOfferingsFilter />}
       hasQuery={true}
       hasOptionalColumns
@@ -117,12 +124,5 @@ export const ProviderOfferingsList = ({ provider }) => {
   if (!provider) {
     return <CustomerResourcesListPlaceholder />;
   }
-  return (
-    <ProviderOfferingsComponent
-      provider={provider}
-      extraTableProps={{
-        filters: <ProviderOfferingsFilter />,
-      }}
-    />
-  );
+  return <ProviderOfferingsComponent provider={provider} />;
 };

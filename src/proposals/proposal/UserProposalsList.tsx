@@ -34,6 +34,8 @@ const filtersSelector = createSelector(
   },
 );
 
+const mandatoryFields = ['uuid', 'proposal_name', 'state'];
+
 export const UserProposalsList: FC = () => {
   const {
     params: { call },
@@ -46,6 +48,7 @@ export const UserProposalsList: FC = () => {
     fetchData: createFetcher('proposal-proposals'),
     queryField: 'name',
     filter,
+    mandatoryFields,
   });
 
   const initialValues = useMemo(

@@ -32,6 +32,23 @@ const RowActions = ({ row }) => {
   );
 };
 
+const mandatoryFields = [
+  // OfferingCard
+  'uuid',
+  'name',
+  'state',
+  'paused_reason',
+  'customer_name',
+  'project_name',
+  'thumbnail',
+  'image',
+  'type',
+  // OfferingCard and RowActions
+  'customer_uuid',
+  'shared',
+  'project_uuid',
+];
+
 export const PublicOfferingsList: FunctionComponent<{
   filter?;
   showCategory?;
@@ -50,6 +67,7 @@ export const PublicOfferingsList: FunctionComponent<{
     filter: mergedFilter,
     fetchData: createFetcher('marketplace-public-offerings'),
     queryField: 'keyword',
+    mandatoryFields,
   });
 
   const columns = [

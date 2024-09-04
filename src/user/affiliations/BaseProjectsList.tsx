@@ -17,6 +17,13 @@ import { useTable } from '@waldur/table/utils';
 
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 
+const mandatoryFields = [
+  // Expandable view
+  'uuid',
+  'marketplace_resource_count',
+  'description',
+];
+
 export const BaseProjectsList: FunctionComponent<{
   filter;
   filters?;
@@ -27,6 +34,7 @@ export const BaseProjectsList: FunctionComponent<{
     fetchData: createFetcher('projects'),
     queryField: 'name',
     filter,
+    mandatoryFields,
   });
   const columns: Column[] = [
     {
@@ -34,7 +42,7 @@ export const BaseProjectsList: FunctionComponent<{
       orderField: 'name',
       render: ProjectLink,
       copyField: (row) => row.name,
-      keys: ['name'],
+      keys: ['name', 'is_industry'],
       id: 'name',
       export: 'name',
     },
