@@ -38,7 +38,7 @@ interface ResourceFilter {
   include_terminated?: boolean;
 }
 
-export const TableComponent: FunctionComponent<any> = (props) => {
+const TableComponent: FunctionComponent<any> = (props) => {
   React.useEffect(() => {
     props.resetPagination();
   }, [props.filter]);
@@ -50,7 +50,7 @@ export const TableComponent: FunctionComponent<any> = (props) => {
       orderField: 'name',
       id: 'name',
       export: 'name',
-      keys: ['name', 'backend_id'],
+      keys: ['name', 'backend_id', 'uuid'],
     },
     {
       title: translate('Resource UUID'),
@@ -217,6 +217,26 @@ export const mapStateToFilter = createSelector(
   },
 );
 
+const mandatoryFields = [
+  'uuid', // Almost all actions
+  'name', // Almost all actions
+  'url', // CreateRobotAccountAction
+  'customer_uuid', // ReportUsageAction, SetBackendIdAction
+  'customer_name', // ShowUsageAction, ReportUsageAction
+  'project_uuid', // CreateRobotAccountAction
+  'project_name', // ShowUsageAction, ReportUsageAction
+  'offering_uuid', // ShowUsageAction, ReportUsageAction
+  'offering_customer_uuid', // CreateRobotAccountAction
+  'offering_plugin_options', // CreateRobotAccountAction
+  'backend_id', // ShowUsageAction, ReportUsageAction, SetBackendIdAction
+  'is_usage_based', // ShowUsageAction, ReportUsageAction
+  'is_limit_based', // ShowUsageAction, ReportUsageAction
+  'state', // Almost all actions
+  'slug', // SetSlugAction
+  'end_date', // EditResourceEndDateByProviderAction, EditResourceEndDateByStaffAction
+  'resource_type', // TerminateAction
+];
+
 export const PublicResourcesList: React.ComponentType<any> = () => {
   const filter = useSelector((state) =>
     mapStateToFilter(state, PUBLIC_RESOURCES_LIST_FILTER_FORM_ID),
@@ -224,6 +244,7 @@ export const PublicResourcesList: React.ComponentType<any> = () => {
   const tableProps = useTable({
     ...TableOptions,
     filter,
+    mandatoryFields,
   });
   return <TableComponent {...tableProps} filters={<PublicResourcesFilter />} />;
 };

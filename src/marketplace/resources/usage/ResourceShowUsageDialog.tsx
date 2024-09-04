@@ -21,6 +21,8 @@ export const ResourceShowUsageDialog: FunctionComponent<
     })}
     footer={<CloseDialogButton label={translate('Close')} />}
   >
-    <ResourceUsageTabsContainer resource={resolve.resource} />
+    <ResourceUsageTabsContainer
+      resource={{ resource_uuid: resolve.resource.uuid, ...resolve.resource }}
+    />
   </ModalDialog>
 );

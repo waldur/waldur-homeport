@@ -1,4 +1,4 @@
-import { DotsThreeVertical } from '@phosphor-icons/react';
+import { DotsThreeVertical, Spinner } from '@phosphor-icons/react';
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { Dropdown, DropdownProps } from 'react-bootstrap';
 
@@ -12,8 +12,8 @@ interface ActionsDropdownProps {
   open?: boolean;
   labeled?: boolean;
   loading?: boolean;
-  error?: object;
-  actions: DropdownActionItemType[];
+  error?: any;
+  actions?: DropdownActionItemType[];
   row?: any;
   refetch?(): void;
 }
@@ -65,11 +65,14 @@ export const ActionsDropdownComponent: FunctionComponent<
   </Dropdown>
 );
 
-export const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
+export const ActionsDropdown: FunctionComponent<
+  PropsWithChildren<ActionsDropdownProps>
+> = ({
   open = true,
   loading,
   error,
   actions,
+  children,
   row,
   refetch,
   ...rest
@@ -78,12 +81,15 @@ export const ActionsDropdown: FunctionComponent<ActionsDropdownProps> = ({
     {open ? (
       loading ? (
         <Dropdown.Item eventKey="1">
+          <Spinner size={20} className="fa-spin me-2" />
           {translate('Loading actions')}
         </Dropdown.Item>
       ) : error ? (
         <Dropdown.Item eventKey="1">
           {translate('Unable to load actions')}
         </Dropdown.Item>
+      ) : children ? (
+        children
       ) : actions ? (
         <>
           {actions.map((ActionComponent, index) => (

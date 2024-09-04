@@ -35,6 +35,9 @@ function* fetchList(action) {
         .flat();
       fields = uniq(concat(customFields, activeFields));
     }
+    if (options.mandatoryFields) {
+      fields = uniq(concat(fields, options.mandatoryFields));
+    }
 
     const request: TableRequest = {
       currentPage: state.pagination.currentPage,

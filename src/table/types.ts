@@ -45,6 +45,7 @@ export interface TableOptionsType<RowType = any> {
   pullInterval?: number | (() => number);
   filters?: React.ReactNode;
   filter?;
+  mandatoryFields?: string[];
 }
 
 export interface Column<RowType = any> {

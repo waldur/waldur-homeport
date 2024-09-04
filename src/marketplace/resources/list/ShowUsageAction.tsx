@@ -23,6 +23,7 @@ export const ShowUsageAction = ({ resource }: { resource: Resource }) => {
       }),
     );
   };
+  const isDisabled = !resource.is_usage_based && !resource.is_limit_based;
   return (
     <ActionItem
       title={translate('Show usage')}
@@ -34,7 +35,11 @@ export const ShowUsageAction = ({ resource }: { resource: Resource }) => {
           resource_uuid: resource.marketplace_resource_uuid || resource.uuid,
         })
       }
-      disabled={!resource.is_usage_based && !resource.is_limit_based}
+      disabled={isDisabled}
+      tooltip={
+        isDisabled &&
+        translate('The resource is not based on usage or limitations.')
+      }
     />
   );
 };
