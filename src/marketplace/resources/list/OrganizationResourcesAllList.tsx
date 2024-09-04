@@ -46,7 +46,6 @@ const mapStateToFilter = createSelector(
         result.state = NON_TERMINATED_STATES.map((option) => option.value);
       }
     }
-    result.field = resourcesListRequiredFields();
     return result;
   },
 );
@@ -60,6 +59,7 @@ export const OrganizationResourcesAllList: FC<Partial<TableProps>> = (
     fetchData: createFetcher('marketplace-resources'),
     queryField: 'query',
     filter,
+    mandatoryFields: resourcesListRequiredFields(),
   });
 
   return (

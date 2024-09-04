@@ -34,8 +34,8 @@ export const ProjectExpandableRow: React.FC<{
         .map((permission, index) => (
           <PermissionDetails key={index} permission={permission} />
         ))}
-      {counters.map((row, index) => (
-        <Field key={index} label={row.label} value={row.value} />
+      {counters.map((item, index) => (
+        <Field key={index} label={item.label} value={item.value} />
       ))}
       <Field label={translate('Description')} value={row.description} />
     </ExpandableContainer>

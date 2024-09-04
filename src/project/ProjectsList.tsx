@@ -19,6 +19,14 @@ import { ProjectDetailsButton } from './ProjectDetailsButton';
 import { ProjectExpandableRowContainer } from './ProjectExpandableRowContainer';
 import { ProjectLink } from './ProjectLink';
 
+const mandatoryFields = [
+  'uuid',
+  'name', // Actions
+  'customer_name', // DeleteAction
+  'marketplace_resource_count', // Expandable view
+  'backend_id', // Expandable view
+];
+
 export const ProjectsList: FunctionComponent<{}> = () => {
   const customer = useSelector(getCustomer);
   const filter = useMemo(
@@ -33,6 +41,7 @@ export const ProjectsList: FunctionComponent<{}> = () => {
     fetchData: createFetcher('projects'),
     queryField: 'query',
     filter,
+    mandatoryFields,
   });
   const columns: Column[] = [
     {
@@ -42,16 +51,7 @@ export const ProjectsList: FunctionComponent<{}> = () => {
       orderField: 'name',
       export: 'name',
       id: 'name',
-      keys: [
-        'uuid',
-        'name',
-        'is_industry',
-        'backend_id',
-        'marketplace_resource_count',
-        'oecd_fos_2007_code',
-        'type_name',
-        'image',
-      ],
+      keys: ['uuid', 'name', 'is_industry'],
     },
     {
       title: translate('Description'),

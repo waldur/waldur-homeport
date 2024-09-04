@@ -33,6 +33,8 @@ const filtersSelctor = createSelector(
   },
 );
 
+const mandatoryFields = ['uuid', 'proposal_name', 'state'];
+
 export const UserReviewsList: FC = () => {
   const filter = useSelector(filtersSelctor);
 
@@ -41,6 +43,7 @@ export const UserReviewsList: FC = () => {
     fetchData: createFetcher('proposal-reviews'),
     queryField: 'proposal_name',
     filter,
+    mandatoryFields,
   });
 
   const ReviewItemActions = ({ row, fetch }) => (

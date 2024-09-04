@@ -63,7 +63,6 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     if (filterValues?.organization) {
       filter.customer_uuid = filterValues.organization.uuid;
     }
-    filter.field = resourcesListRequiredFields();
     return filter;
   }, [filterValues, ownProps.category_uuid]);
 
@@ -72,6 +71,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     fetchData: createFetcher('marketplace-resources'),
     filter,
     queryField: 'query',
+    mandatoryFields: resourcesListRequiredFields(),
   });
   const columns: any[] = [
     {

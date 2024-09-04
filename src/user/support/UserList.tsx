@@ -1,6 +1,6 @@
 import { Question } from '@phosphor-icons/react';
 import { cloneDeep } from 'lodash';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -149,20 +149,37 @@ const DEFAULT_ENABLED_COLUMNS = [
   'is_active',
 ];
 
-export const UserList: FunctionComponent = () => {
-  const filterValues = useSelector(mapStateToFilter);
-  const filter = useMemo(() => {
-    return {
-      ...filterValues,
-      field: ['uuid', 'url', 'identity_provider_fields', 'registration_method'],
-    };
-  }, [filterValues]);
+const mandatoryFields = [
+  'uuid',
+  // UserDetailsButton
+  'full_name',
+  'native_name',
+  'civil_number',
+  'phone_number',
+  'username',
+  'email',
+  'slug',
+  'preferred_language',
+  'identity_provider_label',
+  'date_joined',
+  'organization',
+  'job_title',
+  'affiliations',
+  'is_staff',
+  'is_support',
+  'is_active',
+  'url',
+  'permissions',
+];
 
+export const UserList: FunctionComponent = () => {
+  const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: `userList`,
     fetchData: createFetcher('users'),
     queryField: 'query',
     filter,
+    mandatoryFields,
   });
 
   const columns: Column[] = [

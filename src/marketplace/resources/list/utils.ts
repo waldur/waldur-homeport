@@ -1,30 +1,23 @@
 export const resourcesListRequiredFields = () => [
   'uuid',
   'name',
-  'attributes',
-  'end_date',
-  'created',
-  'offering_name',
-  'offering_type',
-  'backend_metadata',
-  'backend_id',
-  'state',
-  'scope',
-  'report',
-  'plan_uuid',
-  'plan_name',
-  'marketplace_plan_uuid',
-  'is_limit_based',
-  'parent_uuid',
-  'parent_name',
-  'provider_uuid',
-  'project_uuid',
-  'customer_uuid',
-  'customer_name',
-  'project_name',
-  'category_title',
-  'description',
-  'can_terminate',
-  'resource_type',
-  'resource_uuid',
+  'attributes', // Expandable view
+  'available_actions', // CreateLexisLinkAction
+  'end_date', // EditResourceEndDateAction
+  'offering_type', // Expandable view, Actions
+  'offering_customer_uuid', // SubmitReportAction, EditResourceEndDateAction
+  'backend_metadata', // Mass-actions
+  'backend_id', // SetBackendIdAction
+  'slug', // SetSlugAction
+  'scope', // Expandable view, Actions
+  'report', // ShowReportAction, SubmitReportAction
+  'plan_uuid', // Expandable view, ChangeLimitsAction
+  'marketplace_plan_uuid', // ChangeLimitsAction
+  'is_limit_based', // ChangeLimitsAction
+  'parent_uuid', // Expandable view
+  'parent_name', // Expandable view
+  'customer_uuid', // SetBackendIdAction
+  'description', // EditAction
+  'resource_type', // EditAction, TerminateAction, UnlinkActionItem, Mass-actions
+  'resource_uuid', // Mass-actions
 ];

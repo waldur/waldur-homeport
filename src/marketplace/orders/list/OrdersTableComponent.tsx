@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -18,30 +18,33 @@ interface OrdersTableComponentProps extends Partial<TableProps> {
   hideColumns?: 'organization'[];
 }
 
+const mandatoryFields = [
+  'uuid',
+  // Row actions
+  'state',
+  // Expandable row
+  'project_description',
+  'customer_uuid',
+  'project_uuid',
+  'offering_name',
+  'attributes',
+  'resource_name',
+  'type',
+  'plan_name',
+];
+
 export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
   table,
   filter,
   hideColumns = [],
   ...rest
 }) => {
-  const tableFilter = useMemo(() => {
-    return {
-      field: [
-        'uuid',
-        'project_description',
-        'resource_name',
-        'type',
-        'plan_name',
-        'offering_name',
-      ],
-      ...filter,
-    };
-  }, [filter]);
   const props = useTable({
     table,
     fetchData: createFetcher('marketplace-orders'),
-    filter: tableFilter,
+    filter,
     queryField: 'query',
+    mandatoryFields,
   });
   const columns = [
     {

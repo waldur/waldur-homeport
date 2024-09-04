@@ -22,8 +22,8 @@ export const ProjectExpandableRowContainer: React.FC<{
     <ExpandableContainer asTable>
       {counters.length === 0
         ? translate('There are no resources')
-        : counters.map((row, index) => (
-            <Field key={index} label={row.label} value={row.value} />
+        : counters.map((item, index) => (
+            <Field key={index} label={item.label} value={item.value} />
           ))}
       <Field label={translate('Backend ID')} value={row.backend_id} />
     </ExpandableContainer>

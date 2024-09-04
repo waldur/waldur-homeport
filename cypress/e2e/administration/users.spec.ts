@@ -1,4 +1,4 @@
-const fieldQueryParam = "field=uuid&field=url&field=identity_provider_fields&field=registration_method&field=full_name&field=email&field=phone_number&field=permissions&field=is_active";
+const fieldQueryParam = "field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&field=native_name&field=civil_number&field=username&field=slug&field=preferred_language&field=identity_provider_label&field=date_joined&field=organization&field=job_title&field=affiliations&field=is_staff&field=is_support&field=url";
 
 describe('Users', () => {
   beforeEach(() => {
