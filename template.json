@@ -10347,6 +10347,10 @@
     "description": "marketplace/offerings/OfferingViewHero.tsx",
     "message": "The public view is currently inactive as this offering is in draft status."
   },
+  "The resource is not based on usage or limitations.": {
+    "description": "marketplace/resources/list/ReportUsageAction.tsx, marketplace/resources/list/ShowUsageAction.tsx",
+    "message": "The resource is not based on usage or limitations."
+  },
   "The role has been disabled": {
     "description": "administration/roles/RoleToggleButton.tsx",
     "message": "The role has been disabled"

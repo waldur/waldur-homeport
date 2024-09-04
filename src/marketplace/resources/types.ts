@@ -12,7 +12,7 @@ interface ResourceReference {
   project_end_date?: string;
 }
 
-type ResourceState =
+export type ResourceState =
   | 'Creating'
   | 'OK'
   | 'Erred'
