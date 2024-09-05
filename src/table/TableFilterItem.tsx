@@ -286,6 +286,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
       }
       dispatch(change(form, props.name, newValue, true));
       _setFilter(newValue);
+      apply(false);
     },
     [dispatch, form, props.name, _setFilter],
   );

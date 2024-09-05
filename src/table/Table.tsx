@@ -139,6 +139,7 @@ const TableComponent = (props: TableProps) => {
           selectedRows={props.selectedRows}
           fieldType={props.fieldType}
           filters={props.filters}
+          filtersStorage={props.filtersStorage}
           setFilter={props.setFilter}
           applyFiltersFn={props.applyFiltersFn}
           columnPositions={props.columnPositions}

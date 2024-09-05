@@ -14,7 +14,7 @@ interface ITableFilterContext {
   filterPosition: TableState['filterPosition'];
   form: string;
   setFilter: (item: FilterItem) => void;
-  apply?: () => void;
+  apply?: (hideMenu?: boolean) => void;
   columnFilter?: boolean;
   selectedSavedFilter?: TableState['selectedSavedFilter'];
 }
