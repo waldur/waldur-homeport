@@ -7,7 +7,6 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { OrganizationUIView } from '@waldur/organization/OrganizationUIView';
-import { UserManageContainer } from '@waldur/user/UserManageContainer';
 import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 import { WorkspaceType } from '@waldur/workspace/types';
 
@@ -420,13 +419,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Users'),
     },
-  },
-  {
-    name: 'marketplace-provider-user-manage-container',
-    parent: 'marketplace-provider-customers',
-    url: '',
-    component: UserManageContainer,
-    abstract: true,
   },
   {
     name: 'marketplace-provider-user-manage',
