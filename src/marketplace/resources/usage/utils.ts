@@ -142,21 +142,29 @@ export const getEChartOptions = (
 };
 
 export const getUsageHistoryPeriodOptions = (startDate = null) => {
-  const diff = Math.abs(parseDate(startDate).diffNow().as('months'));
+  const now = DateTime.now();
+  const start = parseDate(startDate);
+  let totalMonths = Math.max(
+    0,
+    (now.year - start.year) * 12 + (now.month - start.month),
+  );
+  if (now.day >= start.day || totalMonths > 0) {
+    totalMonths += 1;
+  }
   const options: Array<{ value; label }> = [];
-  if (diff > 6) {
+  if (totalMonths > 6) {
     options.push({
       value: 6,
       label: translate('{month} months', { month: 6 }),
     });
   }
-  if (diff > 12) {
+  if (totalMonths > 12) {
     options.push({
       value: 12,
       label: translate('{month} months', { month: 12 }),
     });
   }
-  options.push({ value: Math.ceil(diff), label: translate('From creation') });
+  options.push({ value: totalMonths, label: translate('From creation') });
   return options;
 };
 
