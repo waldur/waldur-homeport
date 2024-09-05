@@ -27,7 +27,7 @@
       }
     ],
     "data_volume_type": "/api/openstacktenant-volume-types/7cb497fe76af4b34adbffad15fee2f34/",
-    "internal_ips_set": [
+    "ports": [
       {
         "subnet": "/api/openstack-subnets/0ce526a515cf4ffc9b53d0b0952153c5/"
       }
@@ -65,7 +65,7 @@
     "state": "OK",
     "action": "",
     "external_ips": ["193.40.33.44"],
-    "internal_ips": ["192.168.42.120"],
+    "ports": ["192.168.42.120"],
     "runtime_state": "available",
     "action_details": {}
   },

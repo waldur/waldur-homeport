@@ -16,7 +16,7 @@ export const getStateMessages = (translate) => ({
   update_security_groups: translate('Updating security groups'),
   backup: translate('Backing up'),
   create_backup_schedule: translate('Creating a backup schedule'),
-  update_internal_ips_set: translate('Updating internal IPs'),
+  update_ports: translate('Updating internal IPs'),
   update_floating_ips: translate('Updating floating IPs'),
   activate: translate('Activating'),
   deactivate: translate('Deactivating'),

@@ -17,6 +17,7 @@ const validators = [validateState('OK')];
 
 export const CreateSnapshotScheduleAction: FC<VolumeActionProps> = ({
   resource,
+  refetch,
 }) => (
   <DialogActionButton
     title={translate('Create')}
@@ -24,5 +25,6 @@ export const CreateSnapshotScheduleAction: FC<VolumeActionProps> = ({
     modalComponent={CreateSnapshotScheduleDialog}
     resource={resource}
     validators={validators}
+    extraResolve={{ refetch }}
   />
 );

@@ -1,4 +1,4 @@
-import { VirtualMachine, Volume } from '@waldur/resource/types';
+import { BaseResource, VirtualMachine, Volume } from '@waldur/resource/types';
 
 import { SecurityGroup } from '../openstack-security-groups/types';
 
@@ -33,13 +33,8 @@ export interface Subnet {
   network_name?: string;
 }
 
-export interface FloatingIp {
-  url: string;
-  uuid: string;
-  settings: string;
+export interface FloatingIp extends BaseResource {
   address: string;
-  runtime_state: string;
-  is_booked: boolean;
   subnet?: string;
   subnet_name?: string;
 }

@@ -25,7 +25,7 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
         'name',
         'description',
         'created',
-        'internal_ips',
+        'ports',
         'external_ips',
         'offering_external_ips',
         'state',

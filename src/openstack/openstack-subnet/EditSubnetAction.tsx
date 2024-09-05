@@ -18,5 +18,6 @@ export const EditSubnetAction: ActionItemType = ({ resource, refetch }) => (
     modalComponent={EditSubnetDialog}
     resource={resource}
     extraResolve={{ refetch }}
+    dialogSize="lg"
   />
 );

@@ -65,8 +65,14 @@ export const ServerGroupsList: FunctionComponent<{ resourceScope }> = ({
       showPageSizeSelector={true}
       tableActions={
         <ButtonGroup>
-          <PullServerGroupsAction resource={resourceScope} />
-          <CreateServerGroupAction resource={resourceScope} />
+          <PullServerGroupsAction
+            resource={resourceScope}
+            refetch={props.fetch}
+          />
+          <CreateServerGroupAction
+            resource={resourceScope}
+            refetch={props.fetch}
+          />
         </ButtonGroup>
       }
     />

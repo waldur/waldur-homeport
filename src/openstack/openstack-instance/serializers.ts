@@ -19,7 +19,7 @@ const serializeFloatingIPs = (networks) => {
     });
 };
 
-const serializeInternalIps = (networks) => {
+const serializePorts = (networks) => {
   if (!networks?.length || !networks[0]?.subnet) {
     return undefined;
   }
@@ -68,7 +68,7 @@ export const instanceSerializer = ({
   ssh_public_key: ssh_public_key ? ssh_public_key.url : undefined,
   security_groups: serializeSecurityGroups(security_groups),
   server_group: serializeServerGroup(server_group),
-  internal_ips_set: serializeInternalIps(networks),
+  ports: serializePorts(networks),
   floating_ips: serializeFloatingIPs(networks),
   system_volume_size,
   data_volume_size: data_volume_size ? data_volume_size : undefined,

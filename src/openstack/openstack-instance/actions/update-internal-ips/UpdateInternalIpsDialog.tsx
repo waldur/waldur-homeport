@@ -3,17 +3,18 @@ import { FC } from 'react';
 import { OpenStackInstance } from '../../types';
 
 import { UpdateInternalIpsForm } from './UpdateInternalIpsForm';
-import { useUpdateInternalIpsForm } from './utils';
+import { useUpdatePortsForm } from './utils';
 
 interface UpdateInternalIpsDialogProps {
   resolve: {
     resource: OpenStackInstance;
+    refetch?;
   };
 }
 
 export const UpdateInternalIpsDialog: FC<UpdateInternalIpsDialogProps> = ({
-  resolve: { resource },
+  resolve: { resource, refetch },
 }) => {
-  const formState = useUpdateInternalIpsForm(resource);
+  const formState = useUpdatePortsForm(resource, refetch);
   return <UpdateInternalIpsForm {...formState} />;
 };

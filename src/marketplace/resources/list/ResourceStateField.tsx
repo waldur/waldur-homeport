@@ -23,13 +23,16 @@ export const ResourceStateField = ({
   const isActive =
     ['Creating', 'Updating', 'Terminating'].includes(resource.state) ||
     (backendState && !['OK', 'Erred'].includes(backendState));
+  const isErred = [runtimeState, resource.state, backendState].includes(
+    'Erred',
+  );
 
   const state = runtimeState || backendState || resource.state;
   return (
     <StateIndicator
       label={state}
       variant={
-        state === 'Erred'
+        isErred
           ? 'danger'
           : state === 'Terminated'
             ? 'warning'

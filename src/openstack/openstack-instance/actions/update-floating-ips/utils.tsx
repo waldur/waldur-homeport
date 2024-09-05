@@ -26,7 +26,11 @@ interface FloatingIPsFormData {
 export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
   const asyncState = useAsync(
     () =>
-      loadFloatingIps(resource.service_settings_uuid).then((floatingIps) => [
+      loadFloatingIps({
+        tenant_uuid: resource.service_settings_scope_uuid,
+        free: 'True',
+        fields: ['url', 'address'],
+      }).then((floatingIps) => [
         {
           value: true,
           label: translate('Auto-assign floating IP'),
@@ -42,15 +46,15 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
   const subnets = useMemo(
     () => [
       { value: '', label: translate('Select connected subnet') },
-      ...resource.internal_ips_set.map((internal_ip) => ({
-        value: internal_ip.subnet,
+      ...resource.ports.map((port) => ({
+        value: port.subnet,
         label: formatSubnet({
-          name: internal_ip.subnet_name,
-          cidr: internal_ip.subnet_cidr,
+          name: port.subnet_name,
+          cidr: port.subnet_cidr,
         }),
       })),
     ],
-    [resource.internal_ips_set],
+    [resource.ports],
   );
 
   const initialValues = useMemo<FloatingIPsFormData>(

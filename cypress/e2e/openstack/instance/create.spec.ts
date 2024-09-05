@@ -29,7 +29,7 @@ xdescribe('OpenStackInstanceCreateForm', () => {
       .intercept('GET', '/api/openstack-subnets/', {
         fixture: 'offerings/subnets.json',
       })
-      .intercept('GET', '/api/openstacktenant-floating-ips/', {
+      .intercept('GET', '/api/openstack-floating-ips/', {
         fixture: 'offerings/floatingIps.json',
       })
       .intercept('GET', '/api/openstacktenant-instance-availability-zones/', [])

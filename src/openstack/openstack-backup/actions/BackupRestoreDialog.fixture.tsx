@@ -43,7 +43,7 @@ export const fakeBackup = {
       name: 'IMAPS',
     },
   ],
-  instance_internal_ips_set: [
+  instance_ports: [
     {
       subnet: fakeSubnet.url,
       subnet_name: fakeSubnet.name,
@@ -52,7 +52,7 @@ export const fakeBackup = {
   ],
   instance_floating_ips: [
     {
-      url: '/api/openstacktenant-floating-ips/fd9245c1468b4cf0b73d33d4dcdce219/',
+      url: '/api/openstack-floating-ips/fd9245c1468b4cf0b73d33d4dcdce219/',
       uuid: 'fd9245c1468b4cf0b73d33d4dcdce219',
       address: '8.8.8.8',
       subnet: fakeSubnet.url,

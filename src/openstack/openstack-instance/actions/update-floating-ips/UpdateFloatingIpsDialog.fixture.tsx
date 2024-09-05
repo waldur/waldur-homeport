@@ -21,7 +21,7 @@ export const fakeInstance = {
   service_settings_uuid: 'a500a20d8f7040eabb9e0103d5f119af',
   floating_ips: [
     {
-      url: '/api/openstacktenant-floating-ips/6d596ebfa7a5444abd634d6285a22339/',
+      url: '/api/openstack-floating-ips/6d596ebfa7a5444abd634d6285a22339/',
       uuid: '6d596ebfa7a5444abd634d6285a22339',
       address: '172.17.65.174',
       subnet: '/api/openstack-subnets/7350f289a6d14e4bbd780ee59b2899e6/',
@@ -30,7 +30,7 @@ export const fakeInstance = {
       subnet_cidr: '192.168.42.0/24',
     },
   ],
-  internal_ips_set: [
+  ports: [
     {
       subnet: '/api/openstack-subnets/7350f289a6d14e4bbd780ee59b2899e6/',
       subnet_uuid: '7350f289a6d14e4bbd780ee59b2899e6',
@@ -42,11 +42,11 @@ export const fakeInstance = {
 
 export const fakeFloatingIPs = [
   {
-    url: '/api/openstacktenant-floating-ips/377b9ffae7c24783a204ec37c505710c/',
+    url: '/api/openstack-floating-ips/377b9ffae7c24783a204ec37c505710c/',
     address: '172.17.66.254',
   },
   {
-    url: '/api/openstacktenant-floating-ips/44ececd11e674287abc87b2cdf503948/',
+    url: '/api/openstack-floating-ips/44ececd11e674287abc87b2cdf503948/',
     address: '172.17.65.0',
   },
 ] as unknown as FloatingIp[];

@@ -21,7 +21,7 @@ export const fakeInstance = {
   uuid: 'bcbb973635754084a5b292ecb2274e33',
   service_settings_uuid: 'a500a20d8f7040eabb9e0103d5f119af',
   floating_ips: [],
-  internal_ips_set: [
+  ports: [
     {
       subnet: fakeSubnet.url,
       subnet_name: fakeSubnet.name,

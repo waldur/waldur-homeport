@@ -122,7 +122,7 @@ describe('BackupRestoreDialog', () => {
   it('initiates form with empty networks list if instance does not have it', async () => {
     const dialog = new DialogFixture(store, {
       ...fakeBackup,
-      instance_internal_ips_set: [],
+      instance_ports: [],
     });
     await dialog.render();
     await dialog.update();
@@ -134,7 +134,7 @@ describe('BackupRestoreDialog', () => {
     await dialog.render();
     await dialog.update();
     expect(dialog.wrapper.find('tr').length).toBe(
-      fakeBackup.instance_internal_ips_set.length,
+      fakeBackup.instance_ports.length,
     );
   });
 
@@ -149,7 +149,7 @@ describe('BackupRestoreDialog', () => {
     apiMock.loadSubnets.mockResolvedValue([fakeSubnet]);
     const dialog = new DialogFixture(store, {
       ...fakeBackup,
-      instance_internal_ips_set: [],
+      instance_ports: [],
     });
     await dialog.render();
     await dialog.update();
@@ -160,7 +160,7 @@ describe('BackupRestoreDialog', () => {
     apiMock.loadSubnets.mockResolvedValue([fakeSubnet]);
     const dialog = new DialogFixture(store, {
       ...fakeBackup,
-      instance_internal_ips_set: [],
+      instance_ports: [],
     });
     await dialog.render();
     await dialog.update();
@@ -172,7 +172,7 @@ describe('BackupRestoreDialog', () => {
     apiMock.loadSubnets.mockResolvedValue([fakeSubnet]);
     const dialog = new DialogFixture(store, {
       ...fakeBackup,
-      instance_internal_ips_set: [],
+      instance_ports: [],
     });
     await dialog.render();
     await dialog.update();
@@ -184,7 +184,7 @@ describe('BackupRestoreDialog', () => {
     apiMock.loadSubnets.mockResolvedValue([fakeSubnet]);
     const dialog = new DialogFixture(store, {
       ...fakeBackup,
-      instance_internal_ips_set: [],
+      instance_ports: [],
     });
     await dialog.render();
     await dialog.update();
@@ -316,7 +316,7 @@ describe('BackupRestoreDialog', () => {
     expect(apiMock.restoreBackup).toBeCalledWith(fakeBackup.uuid, {
       flavor: fakeFlavors[0].url,
       floating_ips: [],
-      internal_ips_set: [
+      ports: [
         {
           subnet: '/api/openstack-subnets/51e584157094493ca121f71642c0a409/',
         },
@@ -405,7 +405,7 @@ describe('BackupRestoreDialog', () => {
           url: 'floating_ip_url',
         },
       ],
-      internal_ips_set: [
+      ports: [
         {
           subnet: '/api/openstack-subnets/51e584157094493ca121f71642c0a409/',
         },
