@@ -14,6 +14,7 @@ interface WidgetCardProps {
   meta?: ReactNode;
   actions?: WidgetCardAction[];
   className?: string;
+  right?: ReactNode;
 }
 
 export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
@@ -23,6 +24,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
   actions,
   className,
   children,
+  right,
 }) => {
   return (
     <Card className={className}>
@@ -73,8 +75,9 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
               )}
             </Row>
           </Col>
-          {children}
+          {right}
         </Row>
+        {children}
       </Card.Body>
     </Card>
   );

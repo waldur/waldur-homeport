@@ -1,5 +1,8 @@
 import { translate } from '@waldur/i18n';
 
+import { LINE_CHART_COLOR } from './constants';
+import { Chart } from './types';
+
 type Value = string | number;
 interface HLine {
   label: string;
@@ -119,3 +122,11 @@ export const getResourceChartOptions = (
     series,
   };
 };
+
+export const getLineChartOptions = (chart: Chart, hLines?: HLine[]) =>
+  getScopeChartOptions(
+    chart.data.map((item) => item.label),
+    chart.data.map((item) => item.value),
+    hLines,
+    LINE_CHART_COLOR,
+  );

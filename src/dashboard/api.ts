@@ -5,7 +5,7 @@ import { parseDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 
-import { Chart, InvoiceSummary, Scope } from './types';
+import { Scope, Chart, ChartData, InvoiceSummary } from './types';
 
 interface DailyQuota {
   [key: string]: number[];
@@ -21,17 +21,46 @@ const getDailyQuotas = (params) =>
     (response) => response.data,
   );
 
-export async function getDailyQuotasOfCurrentMonth(
-  quota: string,
-  scope: Scope,
-): Promise<number[]> {
-  const firstDayOfMonth = DateTime.now().startOf('month').toISODate();
+const formatTeamSizeChart = (values: number[]): Chart => {
+  const data: ChartData = values.map((value, index) => {
+    const date = DateTime.now()
+      .minus({ days: 30 })
+      .startOf('day')
+      .plus({ days: index });
+    return {
+      label: translate('{value} at {date}', {
+        value,
+        date: date.toISODate(),
+      }),
+      value,
+    };
+  });
+
+  let changesPercent = 0;
+  const lastCount = Number(values[0]);
+  const currentCount = Number(values[values.length - 1]);
+  if (lastCount || currentCount === 0) {
+    changesPercent = ((currentCount - lastCount) / lastCount) * 100;
+  }
+
+  return {
+    title: translate('Team size'),
+    units: null,
+    current: currentCount,
+    data,
+    changes: changesPercent,
+  };
+};
+
+export async function getTeamSizeChart(scope: Scope): Promise<Chart> {
+  const quota = 'nc_user_count';
+  const start = DateTime.now().minus({ days: 30 }).toISODate();
   const values = await getDailyQuotas({
     scope: scope.url,
-    quota_names: quota,
-    start: firstDayOfMonth,
+    quota_names: [quota],
+    start,
   });
-  return values[quota];
+  return formatTeamSizeChart(values[quota]);
 }
 
 export const padMissingValues = (items: DateValuePair[]): DateValuePair[] =>

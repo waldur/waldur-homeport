@@ -5,7 +5,6 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { Panel } from '@waldur/core/Panel';
-import { getDailyQuotasOfCurrentMonth } from '@waldur/dashboard/api';
 import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -16,6 +15,7 @@ import { RootState } from '@waldur/store/reducers';
 import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
+import { getProjectTeamChart } from './utils';
 
 export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldConcealPrices = useSelector((state: RootState) =>
@@ -28,22 +28,15 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   const router = useRouter();
   const goToUsers = () => router.stateService.go('project-users');
 
-  const { data: changes, refetch: refetchChanges } = useQuery(
-    ['projectTeamChanges', project?.uuid],
-    async () => {
-      const dailyQuotas = await getDailyQuotasOfCurrentMonth(
-        'nc_user_count',
-        project,
-      );
-      return dailyQuotas.reduce((v, acc) => acc + v, 0);
-    },
+  const { data: teamData } = useQuery(
+    ['projectTeamData', project?.uuid],
+    async () => await getProjectTeamChart(project),
     { staleTime: 5 * 60 * 1000 },
   );
 
   const { callback, canInvite } = useCreateInvitation({
     project: project,
     roleTypes: ['project'],
-    refetch: refetchChanges,
   });
 
   if (!project || !user) {
@@ -61,7 +54,8 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           <TeamWidget
             api={() => fetchSelectProjectUsers(project.uuid, { page_size: 5 })}
             scope={project}
-            changes={changes}
+            chartData={teamData}
+            showChart
             onBadgeClick={goToUsers}
             onAddClick={callback}
             showAdd={canInvite}
