@@ -10072,7 +10072,7 @@
     "message": "Team members"
   },
   "Team size": {
-    "description": "dashboard/TeamWidget.tsx",
+    "description": "dashboard/TeamWidget.tsx, dashboard/api.ts",
     "message": "Team size"
   },
   "Team verification": {

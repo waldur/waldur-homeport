@@ -99,10 +99,11 @@ export const ProjectDashboardCostLimits = ({
             )
           : null
       }
-    >
-      <Col xs={7}>
-        <EChart options={data.options} height="100px" />
-      </Col>
-    </WidgetCard>
+      right={
+        <Col xs={7}>
+          <EChart options={data.options} height="100px" />
+        </Col>
+      }
+    />
   );
 };

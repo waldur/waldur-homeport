@@ -4,6 +4,7 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
+import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { WidgetCard } from '@waldur/dashboard/WidgetCard';
@@ -23,7 +24,7 @@ interface CustomerDashboardProps {
 export const CustomerDashboardChart: FunctionComponent<
   CustomerDashboardProps
 > = ({ customer }) => {
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, error, refetch } = useQuery(
     ['customerDashboardCharts', customer.uuid],
     () => loadSummary(customer),
     { staleTime: 5 * 60 * 1000 },
@@ -39,24 +40,26 @@ export const CustomerDashboardChart: FunctionComponent<
 
   if (isLoading) {
     return <LoadingSpinner />;
+  } else if (error) {
+    return <LoadingErred loadData={refetch} />;
   }
-  if (Array.isArray(data)) {
+  if (data.costChart || data.teamChart) {
     return (
       <Row>
-        {data.map((item, index) => (
-          <Col key={index} md={6} sm={12} className="mb-6">
+        {Boolean(data.costChart) && (
+          <Col md={6} sm={12} className="mb-6">
             <WidgetCard
-              cardTitle={item.chart.title}
-              title={item.chart.current}
+              cardTitle={data.costChart.chart.title}
+              title={data.costChart.chart.current}
               className="h-100"
               meta={
-                item.chart.changes
+                data.costChart.chart.changes
                   ? translate(
                       '{changes} vs last month',
                       {
                         changes: (
                           <ChangesAmountBadge
-                            changes={item.chart.changes}
+                            changes={data.costChart.chart.changes}
                             showOnInfinity
                             showOnZero
                             asBadge={false}
@@ -67,26 +70,30 @@ export const CustomerDashboardChart: FunctionComponent<
                     )
                   : null
               }
-            >
-              <Col xs={7}>
-                <EChart options={item.options} height="100px" />
-              </Col>
-            </WidgetCard>
+              right={
+                <Col xs={7}>
+                  <EChart options={data.costChart.options} height="100px" />
+                </Col>
+              }
+            />
           </Col>
-        ))}
-        <Col md={6} sm={12} className="mb-6">
-          <TeamWidget
-            api={() =>
-              fetchSelectCustomerUsers(customer.uuid, { page_size: 5 })
-            }
-            scope={customer}
-            changes={null}
-            onBadgeClick={goToUsers}
-            onAddClick={callback}
-            showAdd={canInvite}
-            className="h-100"
-          />
-        </Col>
+        )}
+        {Boolean(data.teamChart) && (
+          <Col md={6} sm={12} className="mb-6">
+            <TeamWidget
+              api={() =>
+                fetchSelectCustomerUsers(customer.uuid, { page_size: 5 })
+              }
+              chartData={data.teamChart}
+              showChart
+              scope={customer}
+              onBadgeClick={goToUsers}
+              onAddClick={callback}
+              showAdd={canInvite}
+              className="h-100"
+            />
+          </Col>
+        )}
       </Row>
     );
   }
