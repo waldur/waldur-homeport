@@ -21,5 +21,6 @@ export const UpdateFloatingIpsActionButton: ActionItemType = ({
     validators={validators}
     modalComponent={UpdateFloatingIpsDialog}
     extraResolve={{ refetch }}
+    dialogSize="lg"
   />
 );

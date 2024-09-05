@@ -26,7 +26,7 @@ interface AllowedAddressPair {
 
 interface OwnProps {
   resolve: {
-    internalIp: {
+    port: {
       allowed_address_pairs: AllowedAddressPair[];
     };
     instance: {
@@ -103,7 +103,7 @@ const PairsTable: React.FC<any> = ({ fields }) =>
 
 const enhance = compose(
   connect<{}, {}, OwnProps>((_, ownProps) => ({
-    initialValues: { pairs: ownProps.resolve.internalIp.allowed_address_pairs },
+    initialValues: { pairs: ownProps.resolve.port.allowed_address_pairs },
   })),
   reduxForm<FormData, OwnProps>({
     form: 'SetAllowedAddressPairsDialog',
@@ -118,7 +118,7 @@ export const SetAllowedAddressPairsDialog = enhance(
         await post(
           `/openstacktenant-instances/${resolve.instance.uuid}/update_allowed_address_pairs/`,
           {
-            subnet: resolve.internalIp.subnet,
+            subnet: resolve.port.subnet,
             allowed_address_pairs: formData.pairs || [],
           },
         );
@@ -140,7 +140,7 @@ export const SetAllowedAddressPairsDialog = enhance(
             'Set allowed address pairs ({instance} / {ipAddress})',
             {
               instance: resolve.instance.name,
-              ipAddress: formatAddressList(resolve.internalIp),
+              ipAddress: formatAddressList(resolve.port),
             },
           )}
           footer={

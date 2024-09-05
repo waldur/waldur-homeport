@@ -14,15 +14,15 @@ const SetAllowedAddressPairsDialog = lazyComponent(
 
 export const SetAllowedAddressPairsButton: FunctionComponent<{
   instance;
-  internalIp;
-}> = ({ instance, internalIp }) => {
+  port;
+}> = ({ instance, port }) => {
   const dispatch = useDispatch();
   const openDialog = () =>
     dispatch(
       openModalDialog(SetAllowedAddressPairsDialog, {
         resolve: {
           instance,
-          internalIp,
+          port,
         },
         size: 'lg',
       }),

@@ -60,7 +60,12 @@ export const SnapshotSchedulesList: FunctionComponent<{ resourceScope }> = ({
       ]}
       verboseName={translate('snapshot schedules')}
       hasQuery={false}
-      tableActions={<CreateSnapshotScheduleAction resource={resourceScope} />}
+      tableActions={
+        <CreateSnapshotScheduleAction
+          resource={resourceScope}
+          refetch={props.fetch}
+        />
+      }
     />
   );
 };

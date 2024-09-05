@@ -24,7 +24,7 @@ describe('UpdateInternalIpsDialog', () => {
 
   it('sends REST API request when form is being submitted', async () => {
     // Arrange
-    apiMock.updateInternalIps.mockResolvedValue(null);
+    apiMock.updatePorts.mockResolvedValue(null);
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
@@ -34,8 +34,8 @@ describe('UpdateInternalIpsDialog', () => {
     await dialog.update();
 
     // Assert
-    expect(apiMock.updateInternalIps).toBeCalledWith(fakeInstance.uuid, {
-      internal_ips_set: [
+    expect(apiMock.updatePorts).toBeCalledWith(fakeInstance.uuid, {
+      ports: [
         {
           subnet: fakeSubnet.url,
         },
@@ -45,7 +45,7 @@ describe('UpdateInternalIpsDialog', () => {
 
   it('allows to disconnect VM from subnet', async () => {
     // Arrange
-    apiMock.updateInternalIps.mockResolvedValue(null);
+    apiMock.updatePorts.mockResolvedValue(null);
     const dialog = new DialogFixture(store);
     await dialog.render();
     await dialog.update();
@@ -56,8 +56,8 @@ describe('UpdateInternalIpsDialog', () => {
     await dialog.update();
 
     // Assert
-    expect(apiMock.updateInternalIps).toBeCalledWith(fakeInstance.uuid, {
-      internal_ips_set: [],
+    expect(apiMock.updatePorts).toBeCalledWith(fakeInstance.uuid, {
+      ports: [],
     });
   });
 });

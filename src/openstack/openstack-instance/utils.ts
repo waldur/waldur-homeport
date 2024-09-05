@@ -1,8 +1,10 @@
 import { translate } from '@waldur/i18n';
-import { InternalIP } from '@waldur/resource/types';
+import { Port } from '@waldur/resource/types';
 import { formatFlavor } from '@waldur/resource/utils';
 
 import { Quota, VolumeType } from '../types';
+
+import { FloatingIp } from './types';
 
 const getTotalStorage = (formData) =>
   (formData.system_volume_size || 0) + (formData.data_volume_size || 0);
@@ -136,7 +138,7 @@ export function flavorValidator(model, choice) {
   return false;
 }
 
-export const formatAddressList = (row: InternalIP) =>
+export const formatAddressList = (row: Port) =>
   row.fixed_ips.map((fip) => fip.ip_address).join(', ') || 'N/A';
 
 export const getQuotas = ({ formData, usages, limits }) => {
@@ -164,13 +166,14 @@ export const getQuotas = ({ formData, usages, limits }) => {
   return quotas;
 };
 
-export const getDefaultFloatingIps = () => [
-  {
-    address: translate('Skip floating IP assignment'),
-    url: 'false',
-  },
-  {
-    address: translate('Auto-assign floating IP'),
-    url: 'true',
-  },
-];
+export const getDefaultFloatingIps = () =>
+  [
+    {
+      address: translate('Skip floating IP assignment'),
+      url: 'false',
+    },
+    {
+      address: translate('Auto-assign floating IP'),
+      url: 'true',
+    },
+  ] as FloatingIp[];

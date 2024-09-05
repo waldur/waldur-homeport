@@ -13107,10 +13107,6 @@
     "description": "openstack/openstack-tenant/TenantInstancesList.tsx",
     "message": "instances"
   },
-  "internal IPs": {
-    "description": "openstack/openstack-instance/InternalIpsList.tsx",
-    "message": "internal IPs"
-  },
   "invitations": {
     "description": "administration/InvitationList.tsx, proposals/team/InvitationsList.tsx",
     "message": "invitations"
@@ -13216,7 +13212,7 @@
     "message": "plans"
   },
   "ports": {
-    "description": "openstack/openstack-tenant/TenantPortsList.tsx, vmware/PortsList.tsx",
+    "description": "openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-tenant/TenantPortsList.tsx, vmware/PortsList.tsx",
     "message": "ports"
   },
   "projects": {

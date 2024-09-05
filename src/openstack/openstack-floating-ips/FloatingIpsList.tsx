@@ -79,7 +79,10 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
       tableActions={
         <ButtonGroup>
           <PullFloatingIpsAction resource={resourceScope} />
-          <CreateFloatingIpAction resource={resourceScope} />
+          <CreateFloatingIpAction
+            resource={resourceScope}
+            refetch={tableProps.fetch}
+          />
         </ButtonGroup>
       }
       rowActions={({ row }) => (

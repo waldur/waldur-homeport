@@ -31,7 +31,7 @@ export const UpdateInternalIpsForm = connectForm(
             <Form.Label>{translate('Connected subnets')}</Form.Label>
             <Field
               component={SelectField}
-              name="internal_ips_set"
+              name="ports"
               placeholder={translate('Select subnets to connect to...')}
               options={asyncState.value}
               isMulti={true}

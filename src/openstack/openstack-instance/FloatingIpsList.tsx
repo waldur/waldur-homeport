@@ -7,8 +7,9 @@ import { VirtualMachine } from '@waldur/resource/types';
 import { Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
+export const FloatingIpsList: FunctionComponent<{ resourceScope; refetch }> = ({
   resourceScope,
+  refetch,
 }) => {
   const fetchData = useCallback(
     () =>
@@ -35,7 +36,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
         },
         {
           title: translate('MAC address'),
-          render: ({ row }) => row.internal_ip_mac_address,
+          render: ({ row }) => row.port_mac_address,
         },
         {
           title: translate('Subnet name'),
@@ -47,7 +48,15 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('floating IPs')}
-      tableActions={<UpdateFloatingIpsActionButton resource={resourceScope} />}
+      tableActions={
+        <UpdateFloatingIpsActionButton
+          resource={resourceScope}
+          refetch={() => {
+            refetch();
+            props.fetch();
+          }}
+        />
+      }
     />
   );
 };

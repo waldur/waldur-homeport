@@ -10,12 +10,16 @@ import { TenantActionProps } from './types';
 
 const validators = [validateState('OK')];
 
-export const PullServerGroupsAction: FC<TenantActionProps> = ({ resource }) => (
+export const PullServerGroupsAction: FC<TenantActionProps> = ({
+  resource,
+  refetch,
+}) => (
   <AsyncActionButton
     title={translate('Synchronise')}
     iconNode={<ArrowsClockwise />}
     resource={resource}
     validators={validators}
     apiMethod={pullTenantServerGroups}
+    refetch={refetch}
   />
 );

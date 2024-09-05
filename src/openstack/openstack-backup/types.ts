@@ -1,4 +1,4 @@
-import { Resource, InternalIP } from '@waldur/resource/types';
+import { Resource, Port } from '@waldur/resource/types';
 
 import { SecurityGroupRule } from '../types';
 
@@ -11,5 +11,5 @@ interface NestedSecurityGroup {
 
 export interface OpenStackBackup extends Resource {
   instance_security_groups: NestedSecurityGroup[];
-  instance_internal_ips_set: InternalIP[];
+  instance_ports: Port[];
 }

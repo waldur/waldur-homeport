@@ -15,12 +15,14 @@ const UpdateInternalIpsDialog = lazyComponent(
 
 interface UpdateInternalIpsActionProps {
   resource: OpenStackInstance;
+  refetch;
 }
 
 const validators = [validateState('OK')];
 
 export const UpdateInternalIpsAction: FC<UpdateInternalIpsActionProps> = ({
   resource,
+  refetch,
 }) => (
   <DialogActionButton
     title={translate('Configure')}
@@ -28,5 +30,6 @@ export const UpdateInternalIpsAction: FC<UpdateInternalIpsActionProps> = ({
     modalComponent={UpdateInternalIpsDialog}
     resource={resource}
     validators={validators}
+    extraResolve={{ refetch }}
   />
 );

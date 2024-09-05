@@ -15,12 +15,16 @@ const CreateSnapshotDialog = lazyComponent(
 
 const validators = [validateState('OK')];
 
-export const CreateSnapshotAction: FC<VolumeActionProps> = ({ resource }) => (
+export const CreateSnapshotAction: FC<VolumeActionProps> = ({
+  resource,
+  refetch,
+}) => (
   <DialogActionButton
     title={translate('Create')}
     iconNode={<PlusCircle />}
     modalComponent={CreateSnapshotDialog}
     resource={resource}
     validators={validators}
+    extraResolve={{ refetch }}
   />
 );

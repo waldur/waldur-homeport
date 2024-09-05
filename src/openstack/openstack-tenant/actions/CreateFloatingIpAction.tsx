@@ -20,12 +20,16 @@ function checkExternalNetwork(ctx: ActionContext<OpenStackTenant>): string {
 
 const validators = [validateState('OK'), checkExternalNetwork];
 
-export const CreateFloatingIpAction: FC<TenantActionProps> = ({ resource }) => (
+export const CreateFloatingIpAction: FC<TenantActionProps> = ({
+  resource,
+  refetch,
+}) => (
   <AsyncActionButton
     title={translate('Create')}
     iconNode={<PlusCircle />}
     resource={resource}
     validators={validators}
     apiMethod={createFloatingIp}
+    refetch={refetch}
   />
 );

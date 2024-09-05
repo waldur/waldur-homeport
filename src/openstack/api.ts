@@ -19,7 +19,7 @@ import {
 
 export interface BackupRestoreRequestBody {
   flavor: string;
-  internal_ips_set: {
+  ports: {
     subnet: string;
   }[];
   floating_ips: {
@@ -54,8 +54,8 @@ export interface CreateServerGroupRequestBody {
   policy: string;
 }
 
-interface UpdateInternalIpsRequestBody {
-  internal_ips_set: {
+interface UpdatePortsRequestBody {
+  ports: {
     subnet: string;
   }[];
 }
@@ -168,13 +168,9 @@ export const loadVolumeTypes = (settings_uuid: string) =>
 export const loadSubnets = (params) =>
   getAll<Subnet>('/openstack-subnets/', { params });
 
-export const loadFloatingIps = (settings_uuid: string) =>
-  getAll<FloatingIp>('/openstacktenant-floating-ips/', {
-    params: {
-      is_booked: 'False',
-      free: 'True',
-      settings_uuid,
-    },
+export const loadFloatingIps = (params) =>
+  getAll<FloatingIp>('/openstack-floating-ips/', {
+    params,
   });
 
 export const setFloatingIps = (id: string, data) =>
@@ -190,10 +186,8 @@ export const getInstanceConsoleLog = (id: string) =>
     (response) => response.data,
   );
 
-export const updateInternalIps = (
-  id: string,
-  data: UpdateInternalIpsRequestBody,
-) => post(`/openstacktenant-instances/${id}/update_internal_ips_set/`, data);
+export const updatePorts = (id: string, data: UpdatePortsRequestBody) =>
+  post(`/openstacktenant-instances/${id}/update_ports/`, data);
 
 export const updateSecurityGroups = (
   id: string,

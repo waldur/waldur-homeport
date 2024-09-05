@@ -47,10 +47,10 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
     if (attributes.system_volume_type) {
       systemVolumeType = await getData(attributes.system_volume_type);
     }
-    if (attributes.internal_ips_set) {
+    if (attributes.ports) {
       try {
         const networksMap = {};
-        attributes.internal_ips_set.map((item) => {
+        attributes.ports.map((item) => {
           networksMap[item.subnet] = 'false';
         });
         if (attributes.floating_ips) {

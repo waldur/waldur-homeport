@@ -17,6 +17,7 @@ const validators = [validateState('OK')];
 
 export const CreateServerGroupAction: FC<TenantActionProps> = ({
   resource,
+  refetch,
 }) => (
   <DialogActionButton
     title={translate('Create')}
@@ -24,5 +25,6 @@ export const CreateServerGroupAction: FC<TenantActionProps> = ({
     modalComponent={CreateServerGroupDialog}
     resource={resource}
     validators={validators}
+    extraResolve={{ refetch }}
   />
 );

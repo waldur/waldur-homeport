@@ -5,8 +5,9 @@ export interface AzureVirtualMachine extends AzureResource {
   password: string;
   size_name: string;
   image_name: string;
-  internal_ips: string[];
+  ports: string[];
   external_ips: string[];
+  internal_ips: string[];
 }
 
 export interface AzureSQLServer extends AzureResource {

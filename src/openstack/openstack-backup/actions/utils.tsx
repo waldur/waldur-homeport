@@ -57,8 +57,15 @@ const loadData = async (
       tenant_uuid: resource.service_settings_scope_uuid,
       fields: ['url', 'name'],
     }),
-    loadFloatingIps(resource.service_settings_uuid),
-    loadSubnets({ tenant_uuid: resource.service_settings_scope_uuid }),
+    loadFloatingIps({
+      tenant_uuid: resource.service_settings_scope_uuid,
+      free: 'True',
+      fields: ['url', 'address'],
+    }),
+    loadSubnets({
+      tenant_uuid: resource.service_settings_scope_uuid,
+      fields: ['url', 'name', 'cidr'],
+    }),
   ]);
 
   return {
@@ -104,8 +111,8 @@ const getInitialValues = (
     value: choice.url,
     label: choice.name,
   })),
-  networks: resource.instance_internal_ips_set
-    ? resource.instance_internal_ips_set.map((item) => ({
+  networks: resource.instance_ports
+    ? resource.instance_ports.map((item) => ({
         floating_ip: SKIP_FLOATING_IP_ASSIGNMENT,
         subnet: item.subnet,
       }))
@@ -116,7 +123,7 @@ const serializeBackupRestoreFormData = (
   form: BackupRestoreFormData,
 ): BackupRestoreRequestBody => ({
   flavor: form.flavor.value,
-  internal_ips_set: form.networks
+  ports: form.networks
     .filter((item) => item.subnet)
     .map((item) => ({
       subnet: item.subnet,

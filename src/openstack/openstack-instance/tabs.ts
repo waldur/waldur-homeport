@@ -35,7 +35,7 @@ NestedResourceTabsConfiguration.register(INSTANCE_TYPE, () => [
     key: 'networking',
     children: [
       {
-        key: 'internal_ips',
+        key: 'ports',
         title: translate('Internal IPs'),
         component: InternalIpsList,
       },

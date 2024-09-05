@@ -61,7 +61,7 @@ describe('UpdateFloatingIpsDialog', () => {
   it('renders placeholder if instance is not connected to internal IPs', async () => {
     const dialog = new DialogFixture(store, {
       ...fakeInstance,
-      internal_ips_set: [],
+      ports: [],
     });
     await dialog.render();
     await dialog.update();
@@ -158,7 +158,7 @@ describe('UpdateFloatingIpsDialog', () => {
     // Act
     const subnet = '/api/openstack-subnets/7350f289a6d14e4bbd780ee59b2899e6/';
     const floating_ip =
-      '/api/openstacktenant-floating-ips/377b9ffae7c24783a204ec37c505710c/';
+      '/api/openstack-floating-ips/377b9ffae7c24783a204ec37c505710c/';
     dialog.deleteRow();
     dialog.addRow();
     dialog.subnet = subnet;
