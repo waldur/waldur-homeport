@@ -24,6 +24,7 @@ interface TableHeaderProps {
   fieldType?: TableProps['fieldType'];
   activeColumns?: Record<string, boolean>;
   filters?: TableProps['filters'];
+  filtersStorage?: TableProps['filtersStorage'];
   setFilter?: TableProps['setFilter'];
   applyFiltersFn?: TableProps['applyFiltersFn'];
   columnPositions: string[];
@@ -59,6 +60,7 @@ const TableTh = ({
   onSortClick,
   currentSorting,
   filters,
+  filtersStorage,
   setFilter,
   applyFiltersFn,
 }) => (
@@ -78,6 +80,7 @@ const TableTh = ({
       <TableFiltersMenu
         filters={filters}
         filterPosition="menu"
+        filtersStorage={filtersStorage}
         setFilter={setFilter}
         applyFiltersFn={applyFiltersFn}
         openName={column.filter}
@@ -99,6 +102,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
   selectedRows,
   fieldType,
   filters,
+  filtersStorage,
   setFilter,
   applyFiltersFn,
   hasOptionalColumns,
@@ -150,6 +154,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
                       onSortClick={onSortClick}
                       currentSorting={currentSorting}
                       filters={filters}
+                      filtersStorage={filtersStorage}
                       setFilter={setFilter}
                       applyFiltersFn={applyFiltersFn}
                     />
@@ -164,6 +169,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
                     onSortClick={onSortClick}
                     currentSorting={currentSorting}
                     filters={filters}
+                    filtersStorage={filtersStorage}
                     setFilter={setFilter}
                     applyFiltersFn={applyFiltersFn}
                   />

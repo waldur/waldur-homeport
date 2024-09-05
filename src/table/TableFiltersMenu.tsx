@@ -1,9 +1,9 @@
 import { CaretRight, FunnelSimple, Plus, Star } from '@phosphor-icons/react';
-import { isEqual, throttle } from 'lodash';
+import { debounce, isEqual, throttle } from 'lodash';
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { getFormValues, change } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -150,7 +150,11 @@ const openSubmenu = throttle(
 interface TableFiltersMenuProps
   extends Pick<
     TableProps,
-    'filters' | 'filterPosition' | 'setFilter' | 'applyFiltersFn'
+    | 'filters'
+    | 'filterPosition'
+    | 'filtersStorage'
+    | 'setFilter'
+    | 'applyFiltersFn'
   > {
   table?: TableProps['table'];
   selectedSavedFilter?: TableProps['selectedSavedFilter'];
@@ -167,7 +171,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
     MenuComponent.reinitialization();
   }, []);
 
-  // Add show/hide event listeners on menu
+  // Add show event listener on menu
   useEffect(() => {
     if (menuEl?.current) {
       menuInstance.current = MenuComponent.getInstance(menuEl.current);
@@ -185,9 +189,42 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
     }
   }, [menuEl?.current]);
 
-  const apply = () => {
+  const dispatch = useDispatch();
+  const formValues = useSelector(getFormValues(filtersFormId));
+  // Add hide event listener on menu (cancel/reset the filter changes if they are not applied yet)
+  useEffect(() => {
+    if (menuEl?.current) {
+      menuInstance.current = MenuComponent.getInstance(menuEl.current);
+      if (menuInstance.current) {
+        const resetFilters = debounce(() => {
+          const keys = props.filtersStorage.map((f) => f.name);
+          if (formValues) {
+            keys.push(...Object.keys(formValues));
+          }
+          keys.forEach((name) => {
+            const filter = props.filtersStorage.find((fs) => fs.name === name);
+            if (!isEqual(formValues?.[name], filter?.value)) {
+              dispatch(change(filtersFormId, name, filter?.value || null));
+            }
+          });
+        }, 100);
+        menuInstance.current.on('kt.menu.dropdown.hidden', () => {
+          // Reset all filters
+          // We are using `debounce`, because there may be multiple menu instances, no need to fire the listener for each one.
+          resetFilters();
+        });
+      }
+    }
+  }, [menuEl?.current, props.filtersStorage, formValues]);
+
+  const apply = (hideMenu = true) => {
     props.applyFiltersFn(true);
-    menuInstance.current.hide(menuInstance.current.getElement());
+    if (hideMenu) {
+      // A small delay is needed for the popup listener to be updated with new filters data and then fired
+      setTimeout(() => {
+        menuInstance.current.hide(menuInstance.current.getElement());
+      }, 100);
+    }
   };
 
   const [existed, setExisted] = useState(true);

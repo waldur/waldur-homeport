@@ -79,6 +79,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
               table={props.table}
               filters={props.filters}
               filterPosition={props.filterPosition}
+              filtersStorage={props.filtersStorage}
               setFilter={props.setFilter}
               applyFiltersFn={props.applyFiltersFn}
               selectedSavedFilter={props.selectedSavedFilter}
