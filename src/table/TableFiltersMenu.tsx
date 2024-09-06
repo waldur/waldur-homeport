@@ -252,14 +252,14 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
       {props.openName ? (
         <>
           <button
-            className="text-anchor"
+            className="text-btn"
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom"
             data-kt-menu-flip="bottom"
             data-cy={`${props.openName}-add-filter-button`}
           >
-            <FunnelSimple size={17} width={30} />
+            <FunnelSimple size={16} weight="bold" />
           </button>
           <div
             ref={menuEl}

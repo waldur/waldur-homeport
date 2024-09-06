@@ -14,7 +14,7 @@ import { ErrorView } from '@waldur/navigation/header/search/ErrorView';
 import { OPTIONAL_COLUMN_ACTIONS_KEY } from './constants';
 import { GridBody } from './GridBody';
 import { HiddenActionsMessage } from './HiddenActionsMessage';
-import './Table.scss';
+import { SortingIconGradient } from './SortingIconGradient';
 import { TableBody } from './TableBody';
 import { TableButtons } from './TableButtons';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -35,6 +35,7 @@ import {
   TableDropdownItem,
   TableState,
 } from './types';
+import './Table.scss';
 
 export interface TableProps<RowType = any> extends TableState {
   table?: string;
@@ -119,7 +120,7 @@ const TableComponent = (props: TableProps) => {
   return (
     <table
       className={classNames(
-        'table align-middle table-row-bordered fs-6 gy-5 dataTable no-footer',
+        'table align-middle table-row-bordered fs-6 gy-4 dataTable no-footer',
         {
           'table-expandable': Boolean(props.expandableRow),
           'table-hover': props.hoverable,
@@ -319,6 +320,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               className="table-responsive dataTables_wrapper"
               style={{ minHeight: this.props.minHeight }}
             >
+              <SortingIconGradient />
               <div className={classNames('table-container table-hover-shadow')}>
                 {this.renderBody()}
               </div>

@@ -1,4 +1,4 @@
-import { CaretDown, CaretUp, CaretUpDown } from '@phosphor-icons/react';
+import { CaretUpDown } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useEffect, useMemo, useRef } from 'react';
 import { FormCheck } from 'react-bootstrap';
@@ -46,13 +46,14 @@ function handleOrdering(currentSorting: Sorting, field: string): Sorting {
 function renderSortingIcon(column: Column, sorting: Sorting) {
   if (!column.orderField || !sorting) {
     return null;
-  } else if (column.orderField !== sorting.field) {
-    return <CaretUpDown size={17} width={30} />;
-  } else if (sorting.mode === 'asc') {
-    return <CaretUp size={17} width={30} />;
-  } else {
-    return <CaretDown size={17} width={30} />;
   }
+  return (
+    <CaretUpDown
+      size={16}
+      weight="bold"
+      className={column.orderField === sorting.field ? sorting.mode : undefined}
+    />
+  );
 }
 
 const TableTh = ({
@@ -66,8 +67,11 @@ const TableTh = ({
 }) => (
   <th
     className={
-      classNames(column.className, column.orderField && 'sorting-column') ||
-      undefined
+      classNames(
+        column.className,
+        column.orderField && 'sorting-column',
+        column.filter && filters && 'filter-column',
+      ) || undefined
     }
     onClick={
       column.orderField &&
@@ -128,7 +132,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
 
   return (
     <thead>
-      <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
+      <tr className="text-start text-muted fw-bolder fs-7 gs-0 align-middle">
         {fieldType ? (
           <th style={{ width: '10px' }} />
         ) : enableMultiSelect ? (
