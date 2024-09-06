@@ -358,6 +358,8 @@ Test k8s deployment:
     - kubectl rollout restart deployment waldur-homeport-test-${CI_MERGE_REQUEST_ID}
     # Wait for rollout completion
     - kubectl rollout status deployment waldur-homeport-test-${CI_MERGE_REQUEST_ID} -w --timeout 120s
+    # Wait a bit more to avoid race conditions
+    - sleep 5
     - POD_NAME=$(kubectl get pods -o name -l app=waldur-homeport-test-${CI_MERGE_REQUEST_ID})
     - echo $POD_NAME
     # Wait until the pod is ready to ensure the image is pulled
