@@ -18,7 +18,7 @@ const CellDescription = ({
   title,
   description,
 }: QuotaCellProps) => (
-  <span className="fw-bold text-nowrap ellipsis">
+  <span className="fw-bolder fs-7 text-dark text-nowrap ellipsis">
     {limit
       ? `${usage.toLocaleString()}/${limit.toLocaleString()}`
       : usage.toLocaleString()}
@@ -61,7 +61,7 @@ export const QuotaCell = ({
       <ProgressBar
         variant={percent < 33 ? 'success' : percent < 66 ? 'warning' : 'danger'}
         now={percent}
-        className="h-6px w-100 mt-1"
+        className="h-4px resource-progress shadow-none w-100 mt-1"
       />
     </div>
   );

@@ -1,0 +1,3 @@
+.resource-progress {
+  background-color: if(isDarkMode(), $primary-200, $primary-50);
+}

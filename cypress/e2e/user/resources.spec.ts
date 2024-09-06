@@ -2,6 +2,11 @@ describe('Resources in personal space', () => {
   beforeEach(() => {
     cy.intercept('GET', '/api/marketplace-resources/**', {
       fixture: 'marketplace/resources.json',
+    });
+    cy.intercept('GET', '/api/marketplace-resources/**/offering/**', {
+      body: {
+        components: [],
+      },
     })
       .mockUser()
       .mockChecklists()
@@ -25,6 +30,5 @@ describe('Resources in personal space', () => {
       .should('have.class', 'expanded');
 
     cy.get('.card-table .card-body tbody tr').should('have.length', 3);
-
   });
 });
