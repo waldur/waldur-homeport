@@ -20,8 +20,11 @@ interface FieldProps {
 
 export const Field: FunctionComponent<FieldProps> = (props) =>
   props.value || props.children ? (
-    <Row className={classNames('field-row mb-1', props.className)}>
-      <Col sm={props.isStuck ? 'auto' : 3} className="text-gray-700 fw-bold">
+    <Row className={classNames('field-row g-0 mb-1', props.className)}>
+      <Col
+        sm={props.isStuck ? 'auto' : 3}
+        className="field-label text-gray-700 fw-bold"
+      >
         {props.label.length > 20 ? (
           <Tip label={props.label} id="fieldLabel">
             {props.label}:

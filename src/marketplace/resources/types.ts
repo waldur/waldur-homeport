@@ -62,6 +62,7 @@ export interface Resource extends ResourceReference {
   effective_id?: string;
   access_url?: string;
   limits: Record<string, number>;
+  limit_usage?: Record<string, number>;
   current_usages?: Record<string, number>;
   plan_uuid?: string;
   plan_name?: string;

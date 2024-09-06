@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { getResourceDetails } from '@waldur/marketplace/common/api';
 import { PlanDetailsLink } from '@waldur/marketplace/details/plan/PlanDetailsLink';
 import { Field } from '@waldur/resource/summary';
+import { ResourceComponentsSummary } from '@waldur/resource/summary/ResourceComponentsSummary';
 import { ResourceSummary as ResourceSummaryResources } from '@waldur/resource/summary/ResourceSummary';
 import {
   BASIC_OFFERING_TYPE,
@@ -14,6 +15,7 @@ import {
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 import { KeyValueButton } from '../KeyValueButton';
+import { Resource } from '../types';
 
 const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => (
   <ExpandableContainer hasMultiSelect asTable>
@@ -63,10 +65,16 @@ const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
   );
 };
 
-export const ExpandableResourceSummary: FunctionComponent<{ row }> = ({
-  row,
-}) => (
+export const ExpandableResourceSummary: FunctionComponent<{
+  row: Resource;
+}> = ({ row }) => (
   <>
+    {(row.is_limit_based || row.is_usage_based) &&
+      !(row.resource_type || '').startsWith('OpenStack') && (
+        <ExpandableContainer hasMultiSelect>
+          <ResourceComponentsSummary resource={row} />
+        </ExpandableContainer>
+      )}
     {!row.scope ||
     [SUPPORT_OFFERING_TYPE, BASIC_OFFERING_TYPE].includes(row.offering_type) ? (
       <StaticResourceSummary row={row} />

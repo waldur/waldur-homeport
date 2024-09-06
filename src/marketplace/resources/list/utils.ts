@@ -13,7 +13,11 @@ export const resourcesListRequiredFields = () => [
   'report', // ShowReportAction, SubmitReportAction
   'plan_uuid', // Expandable view, ChangeLimitsAction
   'marketplace_plan_uuid', // ChangeLimitsAction
-  'is_limit_based', // ChangeLimitsAction
+  'is_limit_based', // Expandable view, ChangeLimitsAction
+  'is_usage_based', // Expandable view
+  'limits', // Expandable view
+  'limit_usage', // Expandable view
+  'current_usages', // Expandable view
   'parent_uuid', // Expandable view
   'parent_name', // Expandable view
   'customer_uuid', // SetBackendIdAction

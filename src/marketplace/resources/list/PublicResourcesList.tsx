@@ -229,8 +229,11 @@ const mandatoryFields = [
   'offering_customer_uuid', // CreateRobotAccountAction
   'offering_plugin_options', // CreateRobotAccountAction
   'backend_id', // ShowUsageAction, ReportUsageAction, SetBackendIdAction
-  'is_usage_based', // ShowUsageAction, ReportUsageAction
-  'is_limit_based', // ShowUsageAction, ReportUsageAction
+  'is_usage_based', // Expandable view, ShowUsageAction, ReportUsageAction
+  'is_limit_based', // Expandable view, ShowUsageAction, ReportUsageAction
+  'limits', // Expandable view
+  'limit_usage', // Expandable view
+  'current_usages', // Expandable view
   'state', // Almost all actions
   'slug', // SetSlugAction
   'end_date', // EditResourceEndDateByProviderAction, EditResourceEndDateByStaffAction

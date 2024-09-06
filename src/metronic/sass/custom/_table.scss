@@ -29,7 +29,7 @@
   &.table-expandable tr {
     &.expanded,
     &.expanded + tr {
-      background-color: $gray-50;
+      background-color: if(isDarkMode(), $primary-50, $gray-50);
     }
   }
   thead > tr > th.header-actions {

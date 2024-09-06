@@ -29,11 +29,10 @@ table .expandable-container {
         vertical-align: inherit;
         unicode-bidi: isolate;
 
-        padding: 0;
         width: auto;
 
         // th
-        &:first-child {
+        &.field-label {
           font-weight: bold;
           text-align: -internal-center;
 
