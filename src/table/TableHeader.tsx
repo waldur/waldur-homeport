@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 
 import './TableHeader.scss';
 
+import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';
 import { TableProps } from './Table';
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { Column, Sorting } from './types';
@@ -75,7 +76,18 @@ const TableTh = ({
     }
     onClick={
       column.orderField &&
-      (() => onSortClick(handleOrdering(currentSorting, column.orderField)))
+      ((ev) => {
+        const toggles = document.getElementsByClassName(
+          COLUMN_FILTER_TOGGLE_CLASS,
+        );
+        for (let i = 0; i < toggles.length; i++) {
+          if (toggles.item(i).contains(ev.target as HTMLElement)) {
+            return;
+          }
+        }
+
+        onSortClick(handleOrdering(currentSorting, column.orderField));
+      })
     }
   >
     {column.title}
