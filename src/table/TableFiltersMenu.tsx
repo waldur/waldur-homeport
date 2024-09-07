@@ -13,6 +13,7 @@ import { MenuComponent } from '@waldur/metronic/components';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
+import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';
 import { SavedFilterSelect } from './SavedFilterSelect';
 import { selectSelectedSavedFilter } from './selectors';
 import { TableProps } from './Table';
@@ -252,7 +253,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
       {props.openName ? (
         <>
           <button
-            className="text-btn"
+            className={COLUMN_FILTER_TOGGLE_CLASS + ' text-btn'}
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom"
