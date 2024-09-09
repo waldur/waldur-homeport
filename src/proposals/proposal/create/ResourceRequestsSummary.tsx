@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -23,16 +22,9 @@ export const ResourceRequestsSummary = ({
   proposal,
   reviews,
 }: ResourceRequestsSummaryProps) => {
-  const filter = useMemo(
-    () => ({
-      proposal_uuid: proposal.uuid,
-    }),
-    [proposal],
-  );
   const tableProps = useTable({
     table: 'ProposalResourcesList',
-    fetchData: createFetcher('proposal-requested-resources'),
-    filter,
+    fetchData: createFetcher(`proposal-proposals/${proposal.uuid}/resources`),
   });
 
   return (
