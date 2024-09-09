@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -55,19 +54,11 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
     },
   );
 
-  const filterValues = useSelector(mapStateToFilter);
-
-  const filter = useMemo(
-    () => ({
-      proposal_uuid: proposal.uuid,
-      ...filterValues,
-    }),
-    [proposal, filterValues],
-  );
+  const filter = useSelector(mapStateToFilter);
 
   const tableProps = useTable({
     table: 'ProposalResourcesList',
-    fetchData: createFetcher('proposal-requested-resources'),
+    fetchData: createFetcher(`proposal-proposals/${proposal.uuid}/resources`),
     filter,
     onFetch(rows) {
       if (change) {
