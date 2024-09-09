@@ -318,7 +318,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
           <Card.Body>
             <div
               className="table-responsive dataTables_wrapper"
-              style={{ minHeight: this.props.minHeight }}
+              style={{ minHeight: this.props.minHeight || 300 }}
             >
               <SortingIconGradient />
               <div className={classNames('table-container table-hover-shadow')}>
