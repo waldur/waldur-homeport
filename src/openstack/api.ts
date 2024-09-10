@@ -137,11 +137,11 @@ export const stopInstance = (id: string) =>
 export const restartInstance = (id: string) =>
   post(`/openstacktenant-instances/${id}/restart/`);
 
-export const loadFlavors = (settings_uuid: string) =>
-  getAll<Flavor>('/openstacktenant-flavors/', { params: { settings_uuid } });
+export const loadFlavors = (params) =>
+  getAll<Flavor>('/openstack-flavors/', { params });
 
-export const loadImages = (settings_uuid: string) =>
-  getAll<Image>('/openstacktenant-images/', { params: { settings_uuid } });
+export const loadImages = (params) =>
+  getAll<Image>('/openstack-images/', { params });
 
 export const loadSecurityGroups = (params) =>
   getAll<SecurityGroup>('/openstack-security-groups/', {
@@ -160,9 +160,9 @@ export const updateSecurityGroup = (id: string, data) =>
 export const setSecurityGroupRules = (id: string, data) =>
   post(`/openstack-security-groups/${id}/set_rules/`, data);
 
-export const loadVolumeTypes = (settings_uuid: string) =>
-  getAll<VolumeType>('/openstacktenant-volume-types/', {
-    params: { settings_uuid },
+export const loadVolumeTypes = (params) =>
+  getAll<VolumeType>('/openstack-volume-types/', {
+    params,
   });
 
 export const loadSubnets = (params) =>
@@ -193,15 +193,6 @@ export const updateSecurityGroups = (
   id: string,
   data: UpdateSecurityGroupsRequestBody,
 ) => post(`/openstacktenant-instances/${id}/update_security_groups/`, data);
-
-export const getFlavors = (params) =>
-  getAll<Flavor>('/openstacktenant-flavors/', { params });
-
-export const getSubnets = (params) =>
-  getAll<Subnet>('/openstack-subnets/', { params });
-
-export const getVolumeTypes = (params) =>
-  getAll<VolumeType>('/openstacktenant-volume-types/', { params });
 
 export const getInstances = (params) =>
   getAll<OpenStackInstance>('/openstacktenant-instances/', {

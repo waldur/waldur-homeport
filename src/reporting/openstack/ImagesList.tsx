@@ -28,7 +28,7 @@ export const ImagesList: FunctionComponent<{}> = () => {
 
   const props = useTable({
     table: 'imagesList',
-    fetchData: createFetcher('openstacktenant-images/usage_stats'),
+    fetchData: createFetcher('openstack-images/usage_stats'),
     filter,
   });
 

@@ -53,7 +53,7 @@ export const useVolumeDataLoader = (offering: Offering) => {
     ['volumeTypes', offering.uuid],
     async () => {
       const volumeTypes = offering.scope_uuid
-        ? await loadVolumeTypes(offering.scope_uuid)
+        ? await loadVolumeTypes({ tenant_uuid: offering.parent_scope_uuid })
         : [];
       const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
       const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);

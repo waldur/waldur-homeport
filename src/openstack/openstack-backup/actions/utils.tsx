@@ -52,18 +52,21 @@ const loadData = async (
   resource: OpenStackBackup,
 ): Promise<BackupFormChoices> => {
   const [flavors, securityGroups, floatingIps, subnets] = await Promise.all([
-    loadFlavors(resource.service_settings_uuid),
+    loadFlavors({
+      tenant_uuid: resource.tenant_uuid,
+      fields: ['url', 'name', 'cores', 'ram'],
+    }),
     loadSecurityGroups({
-      tenant_uuid: resource.service_settings_scope_uuid,
+      tenant_uuid: resource.tenant_uuid,
       fields: ['url', 'name'],
     }),
     loadFloatingIps({
-      tenant_uuid: resource.service_settings_scope_uuid,
+      tenant_uuid: resource.tenant_uuid,
       free: 'True',
       fields: ['url', 'address'],
     }),
     loadSubnets({
-      tenant_uuid: resource.service_settings_scope_uuid,
+      tenant_uuid: resource.tenant_uuid,
       fields: ['url', 'name', 'cidr'],
     }),
   ]);

@@ -19,7 +19,11 @@ import { listClusterTemplates } from '@waldur/rancher/api';
 
 import { NODES_FIELD_ARRAY } from './constants';
 import { LonghornWorkerWarning } from './LonghornWorkerWarning';
-import { formTenantSelector, loadFlavors, useVolumeDataLoader } from './utils';
+import {
+  formTenantSelector,
+  filterFlavors,
+  useVolumeDataLoader,
+} from './utils';
 
 import './FormNodesStep.scss';
 
@@ -178,18 +182,20 @@ const renderNodeRows = ({ fields, flavors }: any) => {
 
 export const FormNodesStep = (props: FormStepProps) => {
   const dispatch = useDispatch();
-  const tenant = useSelector(formTenantSelector);
+  const tenantSettings = useSelector(formTenantSelector);
 
-  const { data: volumeData } = useVolumeDataLoader(tenant?.url);
+  const { data: volumeData } = useVolumeDataLoader(tenantSettings);
   const { data: templates, isLoading: templateLoading } = useQuery(
     ['nodes-step-templates'],
     () => listClusterTemplates(),
     { staleTime: 3 * 60 * 1000 },
   );
   const { data: flavors, isLoading } = useQuery<{}, {}, Flavor[]>(
-    ['nodes-step-flavors', tenant?.url, props.offering.uuid],
+    ['nodes-step-flavors', tenantSettings?.url, props.offering.uuid],
     () =>
-      tenant && props.offering ? loadFlavors(tenant.url, props.offering) : [],
+      tenantSettings && props.offering
+        ? filterFlavors(tenantSettings.scope_uuid, props.offering)
+        : [],
     { staleTime: 3 * 60 * 1000 },
   );
 

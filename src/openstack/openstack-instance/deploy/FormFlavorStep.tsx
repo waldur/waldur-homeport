@@ -28,13 +28,13 @@ export const FormFlavorStep = (props: FormStepProps) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const filter = useMemo(
-    () => ({ settings_uuid: props.offering.scope_uuid }),
+    () => ({ tenant_uuid: props.offering.parent_scope_uuid }),
     [props.offering],
   );
 
   const tableProps = useTable({
-    table: 'deploy-openstacktenant-flavors',
-    fetchData: createFetcher('openstacktenant-flavors'),
+    table: 'deploy-openstack-flavors',
+    fetchData: createFetcher('openstack-flavors'),
     filter,
     queryField: 'name',
     staleTime: 3 * 60 * 1000,

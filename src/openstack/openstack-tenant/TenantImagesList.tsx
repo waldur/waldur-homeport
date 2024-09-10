@@ -10,13 +10,13 @@ export const TenantImagesList: FunctionComponent<{ resourceScope }> = ({
 }) => {
   const filter = useMemo(
     () => ({
-      settings_uuid: resourceScope.child_settings,
+      tenant_uuid: resourceScope.uuid,
     }),
     [resourceScope],
   );
   const props = useTable({
-    table: 'openstacktenant-images',
-    fetchData: createFetcher('openstacktenant-images'),
+    table: 'openstack-images',
+    fetchData: createFetcher('openstack-images'),
     filter,
     queryField: 'name',
   });

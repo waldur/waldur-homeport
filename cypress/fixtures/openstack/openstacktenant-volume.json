@@ -35,7 +35,7 @@
   "image": null,
   "image_metadata": "",
   "image_name": "",
-  "type": "/api/openstacktenant-volume-types/d344e704e1a74543b1af093355117a29/",
+  "type": "/api/openstack-volume-types/d344e704e1a74543b1af093355117a29/",
   "type_name": "rbd-ec",
   "runtime_state": "available",
   "availability_zone": null,

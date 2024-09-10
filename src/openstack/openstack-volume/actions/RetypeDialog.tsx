@@ -15,7 +15,9 @@ export const RetypeDialog: FC<ActionDialogProps> = ({
   const dispatch = useDispatch();
 
   const asyncState = useAsync(async () => {
-    const types = await loadVolumeTypes(resource.service_settings_uuid);
+    const types = await loadVolumeTypes({
+      tenant_uuid: resource.tenant_uuid,
+    });
     return {
       types: types
         .map((volumeType) => ({
