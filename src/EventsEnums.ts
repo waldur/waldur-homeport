@@ -129,8 +129,6 @@ export const ResourcesEnum = {
   marketplace_resource_update_limits_succeeded: 'marketplace_resource_update_limits_succeeded',
   marketplace_resource_update_requested: 'marketplace_resource_update_requested',
   marketplace_resource_update_succeeded: 'marketplace_resource_update_succeeded',
-  openstack_flavor_created: 'openstack_flavor_created',
-  openstack_flavor_deleted: 'openstack_flavor_deleted',
   openstack_floating_ip_attached: 'openstack_floating_ip_attached',
   openstack_floating_ip_connected: 'openstack_floating_ip_connected',
   openstack_floating_ip_description_updated: 'openstack_floating_ip_description_updated',
