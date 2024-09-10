@@ -10480,7 +10480,7 @@
     "message": "There are no plans"
   },
   "There are no projects.": {
-    "description": "project/ProjectBreadcrumbPopover.tsx",
+    "description": "invitations/actions/hooks.ts, project/ProjectBreadcrumbPopover.tsx",
     "message": "There are no projects."
   },
   "There are no resource issues.": {
