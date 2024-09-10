@@ -27,7 +27,7 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
   const asyncState = useAsync(
     () =>
       loadFloatingIps({
-        tenant_uuid: resource.service_settings_scope_uuid,
+        tenant_uuid: resource.tenant_uuid,
         free: 'True',
         fields: ['url', 'address'],
       }).then((floatingIps) => [

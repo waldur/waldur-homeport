@@ -18,14 +18,13 @@ interface UpdatePortsFormData {
 export const useUpdatePortsForm = (resource: OpenStackInstance, refetch) => {
   const asyncState = useAsync(
     () =>
-      loadSubnets({ tenant_uuid: resource.service_settings_scope_uuid }).then(
-        (subnets) =>
-          subnets.map((subnet) => ({
-            label: formatSubnet(subnet),
-            value: subnet.url,
-          })),
+      loadSubnets({ tenant_uuid: resource.tenant_uuid }).then((subnets) =>
+        subnets.map((subnet) => ({
+          label: formatSubnet(subnet),
+          value: subnet.url,
+        })),
       ),
-    [resource.service_settings_scope_uuid],
+    [resource.tenant_uuid],
   );
   const dispatch = useDispatch();
   const submitRequest = async (formData: UpdatePortsFormData) => {

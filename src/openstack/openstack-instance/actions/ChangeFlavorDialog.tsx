@@ -22,7 +22,10 @@ export const ChangeFlavorDialog: FC<ActionDialogProps> = ({
   const dispatch = useDispatch();
 
   const asyncState = useAsync(async () => {
-    const flavors = await loadFlavors(resource.service_settings_uuid);
+    const flavors = await loadFlavors({
+      tenant_uuid: resource.tenant_uuid,
+      fields: ['url', 'name', 'cores', 'ram'],
+    });
     return {
       flavors: flavors
         .filter((flavor) => flavor.name !== resource.flavor_name)

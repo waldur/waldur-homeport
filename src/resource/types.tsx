@@ -39,7 +39,6 @@ export interface Resource extends BaseResource {
   resource_type: string;
   service_settings_state: string;
   service_settings_error_message?: string;
-  service_settings_scope_uuid?: string;
   error_message?: string;
   action?: string;
   action_details?: {

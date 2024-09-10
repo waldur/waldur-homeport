@@ -17,6 +17,7 @@ export interface OpenStackInstance extends VirtualMachine {
   hypervisor_hostname?: string;
   rancher_cluster?: RancherClusterReference;
   volumes?: Volume[];
+  tenant_uuid?: string;
 }
 
 export interface Subnet {

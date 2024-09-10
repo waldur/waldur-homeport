@@ -17,8 +17,8 @@
   "plan": null,
   "attributes": {
     "name": "teenus1",
-    "image": "/api/openstacktenant-images/35f2a96d1a404c2f8e225242a51219d8/",
-    "flavor": "/api/openstacktenant-flavors/8d997de73f904b3a9006817404644888/",
+    "image": "/api/openstack-images/35f2a96d1a404c2f8e225242a51219d8/",
+    "flavor": "/api/openstack-flavors/8d997de73f904b3a9006817404644888/",
     "floating_ips": [],
     "ssh_public_key": "/api/keys/ccff63750da546e2af82ab2a1fc6eddd/",
     "security_groups": [
@@ -26,14 +26,14 @@
         "url": "/api/openstacktenant-security-groups/e5e964c9f7d042a794c3888318b8f74d/"
       }
     ],
-    "data_volume_type": "/api/openstacktenant-volume-types/7cb497fe76af4b34adbffad15fee2f34/",
+    "data_volume_type": "/api/openstack-volume-types/7cb497fe76af4b34adbffad15fee2f34/",
     "ports": [
       {
         "subnet": "/api/openstack-subnets/0ce526a515cf4ffc9b53d0b0952153c5/"
       }
     ],
     "system_volume_size": 28672,
-    "system_volume_type": "/api/openstacktenant-volume-types/7cb497fe76af4b34adbffad15fee2f34/"
+    "system_volume_type": "/api/openstack-volume-types/7cb497fe76af4b34adbffad15fee2f34/"
   },
   "offering_plugin_options": {
     "storage_mode": "dynamic"

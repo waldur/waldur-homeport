@@ -65,7 +65,7 @@ export const fakeBackup = {
 
 export const fakeFlavors = [
   {
-    url: '/api/openstacktenant-flavors/7e9a8c7f17f34706bf755abdae41fe3a/',
+    url: '/api/openstack-flavors/7e9a8c7f17f34706bf755abdae41fe3a/',
     uuid: '7e9a8c7f17f34706bf755abdae41fe3a',
     name: 'm1.xsmall',
     settings: '/api/service-settings/a926568f29df442e8eb447459d3121a1/',
@@ -74,7 +74,7 @@ export const fakeFlavors = [
     disk: 10240,
   },
   {
-    url: '/api/openstacktenant-flavors/7a8c733bd6bf4560ae8b2d08129e1840/',
+    url: '/api/openstack-flavors/7a8c733bd6bf4560ae8b2d08129e1840/',
     uuid: '7a8c733bd6bf4560ae8b2d08129e1840',
     name: 'm1.small',
     settings: '/api/service-settings/a926568f29df442e8eb447459d3121a1/',

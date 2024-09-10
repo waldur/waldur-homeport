@@ -40,7 +40,7 @@
       "image": {
         "name": "Centosa",
         "settings": "/api/service-settings/b13719a4b49344f699706716058209c5/",
-        "url": "/api/openstacktenant-images/b7c42df5f67a4e36b9ea4ab99d9d3193/",
+        "url": "/api/openstack-images/b7c42df5f67a4e36b9ea4ab99d9d3193/",
         "min_ram": 0,
         "min_disk": 0,
         "uuid": "b7c42df5f67a4e36b9ea4ab99d9d3193"
@@ -54,7 +54,7 @@
       "flavor": {
         "uuid": "a15bd0d6f03b4784966dcb484c2b0f61",
         "settings": "/api/service-settings/b13719a4b49344f699706716058209c5/",
-        "url": "/api/openstacktenant-flavors/a15bd0d6f03b4784966dcb484c2b0f61/",
+        "url": "/api/openstack-flavors/a15bd0d6f03b4784966dcb484c2b0f61/",
         "ram": 2048,
         "disabled": false,
         "cores": 1,

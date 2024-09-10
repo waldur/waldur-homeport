@@ -27,7 +27,7 @@ export const FlavorsList: FunctionComponent<{}> = () => {
   const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: 'flavorsList',
-    fetchData: createFetcher('openstacktenant-flavors/usage_stats'),
+    fetchData: createFetcher('openstack-flavors/usage_stats'),
     filter,
   });
   return (

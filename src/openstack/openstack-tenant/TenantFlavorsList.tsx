@@ -10,14 +10,14 @@ export const TenantFlavorsList: FunctionComponent<{ resourceScope }> = ({
 }) => {
   const filter = useMemo(
     () => ({
-      settings_uuid: resourceScope.child_settings,
+      tenant_uuid: resourceScope.uuid,
     }),
     [resourceScope],
   );
 
   const props = useTable({
-    table: 'openstacktenant-flavors',
-    fetchData: createFetcher('openstacktenant-flavors'),
+    table: 'openstack-flavors',
+    fetchData: createFetcher('openstack-flavors'),
     filter,
     queryField: 'name',
   });

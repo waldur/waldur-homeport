@@ -12,4 +12,5 @@ interface NestedSecurityGroup {
 export interface OpenStackBackup extends Resource {
   instance_security_groups: NestedSecurityGroup[];
   instance_ports: Port[];
+  tenant_uuid: string;
 }

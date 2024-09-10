@@ -13,7 +13,7 @@ import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPl
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
-import { formTenantSelector, loadSubnets } from './utils';
+import { formTenantSelector, formatSubnets } from './utils';
 
 export const FormNetworkStep = (props: FormStepProps) => {
   const tenant = useSelector(formTenantSelector);
@@ -21,7 +21,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
 
   const { data, isLoading } = useQuery(
     ['network-step', tenant?.url],
-    () => (tenant ? loadSubnets(tenant.url) : []),
+    () => (tenant ? formatSubnets(tenant.url) : []),
     { staleTime: 3 * 60 * 1000 },
   );
 

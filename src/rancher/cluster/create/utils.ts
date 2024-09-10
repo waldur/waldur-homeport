@@ -6,9 +6,9 @@ import { translate } from '@waldur/i18n';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { Offering } from '@waldur/marketplace/types';
 import {
-  getFlavors,
-  getSubnets,
-  getVolumeTypes,
+  loadFlavors,
+  loadSubnets,
+  loadVolumeTypes,
   loadSecurityGroups,
 } from '@waldur/openstack/api';
 import { Flavor, Subnet } from '@waldur/openstack/openstack-instance/types';
@@ -39,16 +39,15 @@ const formatFlavorOption = (flavor: Flavor) => ({
   value: flavor.url,
 });
 
-export const loadFlavors = (settings: string, offering: Offering) => {
-  const params = { settings };
-  return getFlavors({
-    ...params,
+export const filterFlavors = (tenant_uuid: string, offering: Offering) => {
+  return loadFlavors({
+    tenant_uuid,
     name_iregex: offering.plugin_options?.flavors_regex,
   }).then((data) => data.map(formatFlavorOption));
 };
 
-export const loadSubnets = (tenant_uuid: string) =>
-  getSubnets({ tenant_uuid }).then((data) => data.map(formatSubnetOption));
+export const formatSubnets = (tenant_uuid: string) =>
+  loadSubnets({ tenant_uuid }).then((data) => data.map(formatSubnetOption));
 
 export const getRancherMountPointChoices = () => {
   const mountPoints = ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_CHOICES;
@@ -59,10 +58,14 @@ export const getRancherMountPointChoices = () => {
 };
 
 export const loadData = async (cluster: Cluster, offering: Offering) => {
-  const params = { settings: cluster.tenant_settings };
-  const flavors = await loadFlavors(cluster.tenant_settings, offering);
-  const subnets = await loadSubnets(cluster.tenant_settings_scope_uuid);
-  const volumeTypes = await getVolumeTypes(params);
+  const flavors = await filterFlavors(
+    cluster.tenant_settings_scope_uuid,
+    offering,
+  );
+  const subnets = await formatSubnets(cluster.tenant_settings_scope_uuid);
+  const volumeTypes = await loadVolumeTypes({
+    tenant_uuid: cluster.tenant_settings_scope_uuid,
+  });
   const templates = await listClusterTemplates();
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
   const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
@@ -80,11 +83,13 @@ export const loadData = async (cluster: Cluster, offering: Offering) => {
   };
 };
 
-export const useVolumeDataLoader = (settings: string) => {
+export const useVolumeDataLoader = (tenantSettings) => {
   return useQuery(
-    ['volumeTypes', settings],
+    ['volumeTypes', tenantSettings],
     async () => {
-      const volumeTypes = settings ? await getVolumeTypes({ settings }) : [];
+      const volumeTypes = tenantSettings
+        ? await loadVolumeTypes({ tenant: tenantSettings.scope })
+        : [];
       const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
       const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
       return {
