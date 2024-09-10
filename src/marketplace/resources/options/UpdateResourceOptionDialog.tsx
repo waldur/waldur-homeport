@@ -26,7 +26,9 @@ export const UpdateResourceOptionDialog = connect(
     initialValues: {
       attributes: {
         [ownProps.resolve.option.name]:
-          ownProps.resolve.resource.options[ownProps.resolve.option.name],
+          ownProps.resolve.resource && ownProps.resolve.resource.options
+            ? ownProps.resolve.resource.options[ownProps.resolve.option.name]
+            : null,
       },
     },
   }),
