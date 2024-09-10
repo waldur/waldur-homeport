@@ -8,6 +8,7 @@ import React, {
 import { FormControl } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
+import { Tip } from '@waldur/core/Tooltip';
 import { required } from '@waldur/core/validators';
 import { FormField } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
@@ -16,7 +17,7 @@ import { Role } from '@waldur/permissions/types';
 import { Customer, Project } from '@waldur/workspace/types';
 
 interface RoleAndProjectSelectPopupProps {
-  roles: Role[];
+  roles: (Role & { tooltip? })[];
   customer: Customer;
   currentProject: Project;
   selectedRole: Role;
@@ -91,21 +92,33 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
                 className="menu-item px-3"
                 data-kt-menu-trigger
               >
-                <span
-                  className={
-                    'menu-link px-3' +
-                    (selectedRole?.uuid === role.uuid ? ' active' : '')
-                  }
-                  onClick={() => onClickRole(role)}
-                  aria-hidden="true"
-                >
-                  <span className="menu-title">
-                    {role.description || role.name}
+                {role.is_active ? (
+                  <span
+                    className={
+                      'menu-link px-3' +
+                      (selectedRole?.uuid === role.uuid ? ' active' : '')
+                    }
+                    onClick={() => onClickRole(role)}
+                    aria-hidden="true"
+                  >
+                    <span className="menu-title">
+                      {role.description || role.name}
+                    </span>
+                    {showProjects && !currentProject && (
+                      <span className="menu-arrow" />
+                    )}
                   </span>
-                  {showProjects && !currentProject && (
-                    <span className="menu-arrow" />
-                  )}
-                </span>
+                ) : (
+                  <Tip
+                    id={'tip-project-role-' + role.name}
+                    label={role.tooltip}
+                    className="menu-link disabled px-3"
+                  >
+                    <span className="menu-title">
+                      {role.description || role.name}
+                    </span>
+                  </Tip>
+                )}
               </div>
             ) : (
               <div
@@ -177,9 +190,7 @@ interface RoleAndProjectSelectProps
   extends Omit<RoleAndProjectSelectFieldProps, 'name'>,
     FormField {}
 
-export const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (
-  props,
-) => {
+const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {
   const { roles, customer, currentProject, placeholder } = props;
 
   const selectedRole = props.input.value?.role;

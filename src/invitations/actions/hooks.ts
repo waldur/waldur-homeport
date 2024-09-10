@@ -4,6 +4,7 @@ import { useAsyncFn } from 'react-use';
 
 import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { translate } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { PermissionMap } from '@waldur/permissions/enums';
 import { checkScope } from '@waldur/permissions/hasPermission';
@@ -54,28 +55,35 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
       [usersDetails, setUsersDetails],
     );
 
-  // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
-  const roles = useMemo(
-    () =>
-      context.roles
-        ? ENV.roles.filter((role) => context.roles.includes(role.name))
-        : ENV.roles.filter(
-            (role) =>
-              InvitationPolicyService.canManageRole(context, role) &&
-              role.is_active,
-          ),
-    [context],
-  );
-  const defaultRole = useMemo(
-    () => (roles.length > 0 ? roles[0] : null),
-    [roles, context],
-  );
-
   const defaultProject = useMemo(
     () =>
       context.roleTypes.includes('project') &&
       (context.project || context.customer.projects?.[0]),
     [context],
+  );
+
+  // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
+  const roles = useMemo(() => {
+    const _roles = context.roles
+      ? ENV.roles.filter((role) => context.roles.includes(role.name))
+      : ENV.roles.filter(
+          (role) =>
+            InvitationPolicyService.canManageRole(context, role) &&
+            role.is_active,
+        );
+    if (defaultProject) {
+      return _roles;
+    }
+    return _roles.map((role) => ({
+      ...role,
+      is_active: !role.name.startsWith('PROJECT'),
+      tooltip: translate('There are no projects.'),
+    }));
+  }, [context, defaultProject]);
+
+  const defaultRole = useMemo(
+    () => (roles.length > 0 ? roles[0] : null),
+    [roles, context],
   );
 
   const [creationResult, setCreationResult] = useState(null);
