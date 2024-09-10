@@ -180,7 +180,7 @@
     "message": "Accounting start date"
   },
   "Accounting type": {
-    "description": "marketplace/offerings/update/components/ComponentAccountingTypeField.tsx, marketplace/resources/usage/ResourceUsageForm.tsx",
+    "description": "marketplace/offerings/update/components/ComponentAccountingTypeField.tsx",
     "message": "Accounting type"
   },
   "Accounting": {
@@ -1852,7 +1852,7 @@
     "message": "Comment prefix with user info."
   },
   "Comment": {
-    "description": "invitations/PermissionRequestActionDialog.tsx, invitations/UserPermissionRequestsList.tsx, issues/comments/IssueCommentsFormMainContainer.spec.tsx, issues/comments/IssueCommentsFormMainContainer.tsx, issues/feedback/SupportFeedback.tsx, issues/feedback/SupportFeedbackListExpandableRow.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, marketplace-remote/ReviewDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, reporting/resource-usage/ResourceUsageList.tsx, user/UserPermissionRequestsList.tsx",
+    "description": "invitations/PermissionRequestActionDialog.tsx, invitations/UserPermissionRequestsList.tsx, issues/comments/IssueCommentsFormMainContainer.spec.tsx, issues/comments/IssueCommentsFormMainContainer.tsx, issues/feedback/SupportFeedback.tsx, issues/feedback/SupportFeedbackListExpandableRow.tsx, marketplace-remote/ReviewDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, reporting/resource-usage/ResourceUsageList.tsx, user/UserPermissionRequestsList.tsx",
     "message": "Comment"
   },
   "Comments": {
@@ -3328,7 +3328,7 @@
     "message": "Enter a contact number for the user"
   },
   "Enter a description": {
-    "description": "project/ProjectCreateForm.tsx",
+    "description": "marketplace/resources/usage/ResourceUsageForm.tsx, project/ProjectCreateForm.tsx",
     "message": "Enter a description"
   },
   "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports.": {
@@ -8367,9 +8367,9 @@
     "description": "marketplace/resources/usage/ResourceShowUsageDialog.tsx",
     "message": "Resource usage for {resourceName}"
   },
-  "Resource usage for {resource}": {
+  "Resource usage": {
     "description": "marketplace/resources/usage/ResourceCreateUsageDialog.tsx",
-    "message": "Resource usage for {resource}"
+    "message": "Resource usage"
   },
   "Resource {type} {activeStep}": {
     "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",

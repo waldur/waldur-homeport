@@ -27,7 +27,7 @@ const PureProjectRemoveDialog = (props: ProjectRemoveDialogProps) => (
         }}
         className="btn btn-sm btn-danger"
       />,
-      <CloseDialogButton key={2} className="btn btn-sm btn-secondary" />,
+      <CloseDialogButton key={2} className="btn btn-sm" />,
     ]}
   >
     {translate('Are you sure you would like to delete project {projectName}?', {

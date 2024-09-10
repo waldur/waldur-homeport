@@ -130,6 +130,21 @@ $utilities: map-merge(
   top: 5px;
   right: 0;
   background: transparent;
+
+  .form-label ~ & {
+    top: 2.2rem;
+  }
+  .is-invalid ~ & {
+    right: 2rem;
+  }
+}
+
+.form-control.has-unit {
+  padding-right: 3.8rem;
+
+  &.is-invalid {
+    padding-right: 5.5rem;
+  }
 }
 
 .content-wrapper {

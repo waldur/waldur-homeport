@@ -17,9 +17,7 @@ const ResourceCreateUsageDialog = lazyComponent(
   'ResourceCreateUsageDialog',
 );
 
-const validators = [
-  validateState('Creation Scheduled', 'Creating', 'Terminated'),
-];
+const validators = [validateState('OK')];
 
 export const ReportUsageAction = ({ resource }: { resource: Resource }) => {
   const dispatch = useDispatch();

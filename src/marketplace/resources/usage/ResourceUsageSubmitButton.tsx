@@ -10,11 +10,16 @@ import { UsageReportContext } from './types';
 
 export const ResourceUsageSubmitButton = enhance(
   (props: ResourceUsageFormProps) => (
-    <form onSubmit={props.handleSubmit(props.submitReport)}>
-      <CloseDialogButton />
+    <form
+      onSubmit={props.handleSubmit(props.submitReport)}
+      className="d-flex flex-grow-1 gap-2"
+    >
+      <CloseDialogButton className="flex-equal" />
       <SubmitButton
+        disabled={props.invalid}
         submitting={props.submitting}
         label={translate('Submit usage report')}
+        className="btn btn-primary flex-equal"
       />
     </form>
   ),

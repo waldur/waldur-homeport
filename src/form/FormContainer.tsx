@@ -9,6 +9,7 @@ export interface FormContainerProps {
   submitting: boolean;
   clearOnUnmount?: boolean;
   asRow?: boolean;
+  space?: number;
 }
 
 export const FormContainer: React.FC<PropsWithChildren<FormContainerProps>> = (
@@ -24,6 +25,7 @@ export const FormContainer: React.FC<PropsWithChildren<FormContainerProps>> = (
         {React.Children.map(props.children, (input: any) =>
           input && input.props && input.props.name ? (
             <Field
+              space={props.space}
               {...input.props}
               component={FormGroup}
               disabled={props.submitting || input.props.disabled}
