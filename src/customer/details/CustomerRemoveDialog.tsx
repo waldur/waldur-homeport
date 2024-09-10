@@ -31,10 +31,7 @@ export const PureCustomerRemoveDialog = reduxForm<
       footerClassName="border-0 pt-0 gap-2"
       footer={
         <>
-          <CloseDialogButton
-            variant="outline btn-outline-default"
-            className="flex-grow-1"
-          />
+          <CloseDialogButton className="flex-grow-1" />
           <ActionButton
             title={translate('Delete')}
             variant="light-danger"

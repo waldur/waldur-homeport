@@ -36,7 +36,7 @@ export const ServiceProviderSecretCodeGenerateConfirm = (
               )
             }
           />
-          <CloseDialogButton className="btn btn-danger" />
+          <CloseDialogButton variant="danger" />
         </>
       }
     >

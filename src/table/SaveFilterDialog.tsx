@@ -36,15 +36,12 @@ export const SaveFilterDialog = reduxForm<{ name }, SaveFilterDialogProps>({
         footerClassName="border-0 pt-0 gap-2"
         footer={
           <>
-            <CloseDialogButton
-              variant="outline-default"
-              className="btn-outline flex-grow-1"
-            />
+            <CloseDialogButton className="flex-equal" />
             <SubmitButton
               disabled={props.invalid || !props.dirty}
               submitting={props.submitting}
               label={translate('Save')}
-              className="btn btn-primary flex-grow-1"
+              className="btn btn-primary flex-equal"
             />
           </>
         }

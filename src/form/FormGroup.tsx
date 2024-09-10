@@ -40,6 +40,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     clearOnUnmount,
     spaceless,
     containerClassName,
+    space = 7,
     ...rest
   } = props;
 
@@ -82,6 +83,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
         'position-relative',
         !spaceless && 'mb-7',
         !actions && containerClassName,
+        !spaceless && `mb-${space}`,
       )}
     >
       {labelNode}

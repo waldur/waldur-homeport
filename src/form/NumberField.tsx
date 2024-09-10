@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { CSSProperties, FunctionComponent } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 
@@ -10,18 +11,20 @@ interface NumberFieldProps extends FormField {
   max?: number | string;
   unit?: string;
   placeholder?: string;
+  solid?: boolean;
 }
 
 export const NumberField: FunctionComponent<NumberFieldProps> = ({
   input,
   unit,
   placeholder = '  ',
+  solid,
   ...rest
 }) => {
   const control = (
     <Form.Control
       {...input}
-      className="form-control-solid"
+      className={classNames(solid && 'form-control-solid', unit && 'has-unit')}
       type="number"
       placeholder={placeholder}
       {...rest}
