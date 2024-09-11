@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card, Col, Form, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
@@ -39,12 +39,26 @@ const UserEditTokenComponent: React.FC<UserEditTokenComponentProps> = (
   return (
     <Card className="mb-6">
       <Card.Header>
-        <Card.Title>
-          <h3>{translate('API token')}</h3>
-        </Card.Title>
+        <Row className="card-toolbar g-0 gap-4 w-100">
+          <Col xs className="order-0 mw-sm-25">
+            <Card.Title>
+              <span className="h3 me-2">{translate('API token')}</span>
+            </Card.Title>
+          </Col>
+          <Col sm="auto" className="order-1 order-sm-2 min-w-25 ms-auto">
+            <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3">
+              <SubmitButton
+                className="btn btn-primary btn-metro me-2"
+                submitting={props.submitting}
+                label={translate('Save changes')}
+                onClick={props.handleSubmit(props.updateUser)}
+              />
+            </div>
+          </Col>
+        </Row>
       </Card.Header>
       <Card.Body>
-        <form onSubmit={props.handleSubmit(props.updateUser)}>
+        <form>
           <FormContainer submitting={props.submitting}>
             {props.userTokenIsVisible && (
               <SecretField name="token" label={translate('API token')} />
@@ -62,11 +76,6 @@ const UserEditTokenComponent: React.FC<UserEditTokenComponentProps> = (
           <Form.Group>
             <div className="pull-right">
               <FieldError error={props.error} />
-              <SubmitButton
-                className="btn btn-primary btn-metro btn-sm me-2"
-                submitting={props.submitting}
-                label={translate('Save changes')}
-              />
             </div>
           </Form.Group>
         </form>
