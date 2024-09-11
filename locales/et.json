@@ -2069,7 +2069,6 @@
   "Resource termination request has been submitted.": "Ressursi importimist on alustatud",
   "Resource type": "Ressursi tüüp",
   "Resource usage for {resourceName}": "{resourceName} ressursikasutus",
-  "Resource usage for {resource}": "{resource} ressursikasutus",
   "Resource {type} {activeStep}": "Ressurss {type} {activeStep}",
   "Resources": "Ressursid",
   "Resources import has failed.": "Ressursside import nurjus.",
