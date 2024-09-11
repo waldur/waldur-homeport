@@ -38,7 +38,7 @@ export const SearchInput = ({
           name="fakepasswordremembered"
         />
         <span className="position-absolute top-50 translate-middle-y ms-4">
-          <MagnifyingGlass weight="bold" size={18} className="text-grey-500" />
+          <MagnifyingGlass weight="bold" size={20} className="text-grey-500" />
         </span>
         <input
           type="text"
