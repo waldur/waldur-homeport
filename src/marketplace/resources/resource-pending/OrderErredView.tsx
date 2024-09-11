@@ -117,7 +117,10 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
           // We only need the url in the order request
           url: resource.plan || resource.creation_order.plan,
         },
-        project: resource.project || resource.creation_order.project,
+        project: {
+          // We only need the url in the order request
+          url: resource.project || resource.creation_order.project,
+        },
       },
       offering: {
         // We only need the url in the order request
