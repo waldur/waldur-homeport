@@ -41,9 +41,9 @@ export const SearchToggle = () => {
           show={show}
           className="d-none d-lg-block"
         />
-        <div className="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px d-lg-none">
-          <span className="svg-icon svg-icon-1">
-            <MagnifyingGlass />
+        <div className="btn btn-icon btn-icon-grey-500 btn-active-secondary w-35px h-35px w-md-40px h-md-40px d-lg-none">
+          <span className="svg-icon">
+            <MagnifyingGlass className="w-20px h-20px" weight="bold" />
           </span>
         </div>
       </div>
