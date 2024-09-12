@@ -104,7 +104,7 @@ export const categoryAutocomplete = async (
 };
 
 export const offeringsAutocomplete = async (
-  query: object,
+  query: string | object,
   prevOptions,
   currentPage: number,
   providerOfferings = true,
@@ -119,11 +119,12 @@ export const offeringsAutocomplete = async (
     'customer_uuid',
   ],
 ) => {
+  const queryObject = typeof query === 'string' ? { name: query } : query;
   const params = {
     field,
     o: 'name',
     state: 'Active',
-    name: query,
+    ...queryObject,
     page: currentPage,
     page_size: ENV.pageSize,
   };
