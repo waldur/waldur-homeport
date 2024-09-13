@@ -1,7 +1,7 @@
 import { Question, RocketLaunch } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useMemo } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { Nav, Tab, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
@@ -14,7 +14,6 @@ import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
-import { Field } from '@waldur/resource/summary';
 import {
   isOwnerOrStaff,
   isServiceManagerSelector,
@@ -145,22 +144,32 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
       )}
       <PublicDashboardHero2
         hideQuickSection
+        cardBordered
+        mobileBottomActions
         logo={offering.thumbnail}
         logoSize={100}
         logoAlt={offering.name}
         logoTooltip={offering.category_title}
         title={
           <>
-            <div className="d-flex flex-wrap gap-2">
-              <h3>{offering.name}</h3>
+            <div className="d-flex flex-wrap align-items-center gap-2 mb-2">
+              <h3 className="mb-0">{offering.name}</h3>
               <CopyToClipboardButton
                 value={offering.name}
                 className="text-hover-primary cursor-pointer"
                 size={20}
               />
-              <OfferingStateField offering={offering} />
+              <OfferingStateField
+                offering={offering}
+                mode="outline"
+                hasBullet
+              />
             </div>
-            <p className="text-muted mb-0">{offering.customer_name}</p>
+            <p className="text-muted mb-0">
+              {translate('By {organization}', {
+                organization: offering.customer_name,
+              })}
+            </p>
           </>
         }
         actions={
@@ -171,11 +180,12 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 label={
                   offering.state === 'Paused' ? offering.paused_reason : null
                 }
+                className="order-2 order-sm-1 flex-sm-column-auto flex-root"
               >
                 <Link
                   state={canDeploy ? 'marketplace-offering-public' : ''}
                   params={{ offering_uuid: offering.uuid }}
-                  className={`btn btn-primary ${canDeploy ? '' : 'disabled'}`}
+                  className={`btn btn-primary w-100 ${canDeploy ? '' : 'disabled'}`}
                 >
                   <span className="svg-icon svg-icon-2">
                     <RocketLaunch weight="bold" />
@@ -189,24 +199,33 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               <OfferingStateActions
                 offering={offering}
                 refreshOffering={props.refetch}
+                className="order-2 order-sm-1 flex-sm-column-auto flex-root"
               />
             )}
             <RefreshButton
               refetch={props.refetch}
               isLoading={props.isRefetching}
+              className="order-3 flex-sm-column-auto flex-root"
             />
           </>
         }
       >
-        <Field
-          label={translate('Shared/Billing enabled')}
-          value={
-            (offering.shared ? translate('Yes') : translate('No')) +
-            '/' +
-            (offering.billable ? translate('Yes') : translate('No'))
-          }
-        />
-        <Field label={translate('Type')} value={getLabel(offering.type)} />
+        <Table className="mb-0 px-0">
+          <tr>
+            <th className="fw-bold w-sm-175px">
+              {translate('Shared/Billing enabled')}:
+            </th>
+            <td>
+              {(offering.shared ? translate('Yes') : translate('No')) +
+                '/' +
+                (offering.billable ? translate('Yes') : translate('No'))}
+            </td>
+          </tr>
+          <tr>
+            <th className="fw-bold w-sm-175px">{translate('Type')}:</th>
+            <td>{getLabel(offering.type)}</td>
+          </tr>
+        </Table>
       </PublicDashboardHero2>
     </div>
   );

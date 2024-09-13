@@ -20,7 +20,11 @@ const PauseOfferingDialog = lazyComponent(
   'PauseOfferingDialog',
 );
 
-export const OfferingStateActions = ({ offering, refreshOffering }) => {
+export const OfferingStateActions = ({
+  offering,
+  refreshOffering,
+  className = undefined,
+}) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const updateOfferingState = async (target, reason = null) => {
@@ -95,13 +99,13 @@ export const OfferingStateActions = ({ offering, refreshOffering }) => {
 
   if (offering.state == ARCHIVED) {
     return (
-      <Button variant="light" onClick={() => setDraft()}>
+      <Button variant="light" onClick={() => setDraft()} className={className}>
         {draftTitle}
       </Button>
     );
   }
   return (
-    <Dropdown as={ButtonGroup}>
+    <Dropdown as={ButtonGroup} className={className}>
       <Button variant="primary" onClick={() => callback()}>
         {title}
       </Button>

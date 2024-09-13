@@ -4,7 +4,17 @@ import { Offering } from '../types';
 
 import { ACTIVE, ARCHIVED, DRAFT, PAUSED } from './store/constants';
 
-export const OfferingStateField = ({ offering }: { offering: Offering }) => {
+interface OfferingStateFieldProps {
+  offering: Offering;
+  mode?: 'light' | 'outline';
+  hasBullet?: boolean;
+}
+
+export const OfferingStateField = ({
+  offering,
+  mode = 'light',
+  hasBullet,
+}: OfferingStateFieldProps) => {
   return (
     <StateIndicator
       label={offering.state}
@@ -16,7 +26,9 @@ export const OfferingStateField = ({ offering }: { offering: Offering }) => {
           [ARCHIVED]: 'info',
         }[offering.state]
       }
-      light
+      light={mode === 'light'}
+      outline={mode === 'outline'}
+      hasBullet={hasBullet}
       pill
     />
   );
