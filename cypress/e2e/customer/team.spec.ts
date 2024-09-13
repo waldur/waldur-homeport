@@ -17,7 +17,7 @@ describe('Team', () => {
       .intercept('GET', '/api/marketplace-orders/', [])
       .intercept(
         'GET',
-        '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/users/?page=1&page_size=10&o=concatenated_name',
+        '/api/customers/bf6d515c9e6e445f9c339021b30fc96b/users/**',
         {
           fixture: 'customers/customer_users.json',
         },

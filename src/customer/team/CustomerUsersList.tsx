@@ -44,6 +44,17 @@ const mapStateToFilter = createSelector(
   },
 );
 
+const mandatoryFields = [
+  // Required for actions and expandable view
+  'uuid',
+  'email',
+  'expiration_time',
+  'full_name',
+  'role_name',
+  'username',
+  'projects',
+];
+
 export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
   filters,
 }) => {
@@ -54,6 +65,7 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
     fetchData: createFetcher(`customers/${customer.uuid}/users`),
     queryField: 'user_keyword',
     filter,
+    mandatoryFields,
   });
   return (
     <Table
@@ -79,26 +91,42 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
                   size={25}
                 />
               )}
-              <p className="mb-0">{row.full_name || row.username}</p>
+              <p className="mb-0">{row.full_name || DASH_ESCAPE_CODE}</p>
             </div>
           ),
-          export: (row) => row.full_name || row.username,
+          export: 'full_name',
+          id: 'member',
+          keys: ['full_name', 'username', 'image'],
         },
         {
           title: translate('Email'),
-          render: ({ row }) => row.email || 'N/A',
-          export: (row) => row.email || 'N/A',
+          render: ({ row }) => row.email || DASH_ESCAPE_CODE,
+          export: 'email',
+          id: 'email',
+          keys: ['email'],
+        },
+        {
+          title: translate('Username'),
+          render: ({ row }) => row.username,
+          export: 'username',
+          id: 'username',
+          keys: ['username'],
+          optional: true,
         },
         {
           title: translate('Role in organization'),
           render: RoleField,
           filter: 'organization_role',
           export: exportRoleField,
+          id: 'role_name',
+          keys: ['role_name'],
         },
         {
           title: translate('Role expiration'),
           render: ({ row }) => renderRoleExpirationDate(row),
           export: (row) => renderRoleExpirationDate(row),
+          id: 'expiration_time',
+          keys: ['expiration_time'],
         },
       ]}
       verboseName={translate('team members')}
@@ -111,6 +139,7 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
         <CustomerUsersListExpandableRow row={row} refetch={props.fetch} />
       )}
       tableActions={<UserAddButton refetch={props.fetch} />}
+      hasOptionalColumns
     />
   );
 };
