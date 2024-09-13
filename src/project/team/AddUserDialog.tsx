@@ -125,7 +125,7 @@ export const AddUserDialog = reduxForm<
                 ? usersAutocomplete({ query }, prevOptions, page)
                 : customerUsersAutocomplete(
                     currentCustomer.uuid,
-                    { full_name_and_email: query },
+                    { user_keyword: query },
                     prevOptions,
                     page,
                   )

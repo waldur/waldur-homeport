@@ -52,7 +52,7 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
   const props = useTable({
     table: 'customer-users',
     fetchData: createFetcher(`customers/${customer.uuid}/users`),
-    queryField: 'full_name_and_email',
+    queryField: 'user_keyword',
     filter,
   });
   return (
