@@ -15,6 +15,7 @@ interface PublicDashboardHero2Props {
   logoTooltip?: string;
   title: ReactNode;
   actions?: ReactNode;
+  mobileBottomActions?: boolean;
   quickActions?: ReactNode;
   quickBody?: ReactNode;
   quickFooter?: ReactNode;
@@ -43,7 +44,7 @@ export const PublicDashboardHero2: FC<
               props.cardBordered && 'card-bordered',
             )}
           >
-            <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-10 flex-grow-1 p-6">
+            <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-6 flex-grow-1 p-6">
               <Tip
                 label={props.logoTooltip}
                 id={`tip-header-${props.logoTooltip}`}
@@ -55,13 +56,20 @@ export const PublicDashboardHero2: FC<
                   size={props.logoSize || 50}
                 />
               </Tip>
-              <div className="d-flex flex-column flex-grow-1">
+              <div className="d-flex flex-column flex-grow-1 gap-3">
                 <div className="d-flex flex-sm-row flex-column-reverse">
                   {/* Title */}
                   <div className="flex-grow-1">{props.title}</div>
                   {/* Actions */}
                   {props.actions && (
-                    <div className="d-flex align-self-end align-self-sm-start gap-3">
+                    <div
+                      className={
+                        (props.mobileBottomActions
+                          ? 'd-none d-sm-flex '
+                          : 'd-flex') +
+                        'flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3'
+                      }
+                    >
                       {props.actions}
                     </div>
                   )}
@@ -70,6 +78,12 @@ export const PublicDashboardHero2: FC<
                   {/* Details */}
                   {props.children}
                 </div>
+                {/* Actions - at the end */}
+                {props.actions && props.mobileBottomActions && (
+                  <div className="d-sm-none d-flex flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3">
+                    {props.actions}
+                  </div>
+                )}
               </div>
             </Card.Body>
           </Card>

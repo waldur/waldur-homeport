@@ -1463,6 +1463,10 @@
     "description": "user/support/TermsOfService.tsx",
     "message": "By submitting the form you are agreeing to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>."
   },
+  "By {organization}": {
+    "description": "marketplace/offerings/OfferingViewHero.tsx",
+    "message": "By {organization}"
+  },
   "By": {
     "description": "proposals/round/proposals/ProposalsList.tsx",
     "message": "By"

@@ -17,6 +17,7 @@ export const PreviewButton = ({ offering }) => {
     <ActionButton
       title={translate('Preview order form')}
       iconNode={<Eye weight="bold" />}
+      className="order-1 order-sm-2 w-100 w-sm-auto"
       action={() =>
         dispatch(
           openModalDialog(PreviewOfferingDialog, {
