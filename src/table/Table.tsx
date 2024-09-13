@@ -92,6 +92,7 @@ export interface TableProps<RowType = any> extends TableState {
   fieldName?: string;
   validate?: BaseFieldProps['validate'];
   footer?: React.ReactNode;
+  /** If enabled, set `keys` and `id` for each column. Also pass the required keys separately. */
   hasOptionalColumns?: boolean;
   toggleColumn?(id, column, value?): void;
   initColumnPositions?(ids: string[]): void;
