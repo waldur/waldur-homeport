@@ -16,6 +16,7 @@ interface EditButtonProps extends ButtonProps {
   iconRight?: boolean;
   variant?: Variant;
   size?: 'sm' | 'lg';
+  width?: number | 'auto';
   btnIcon?: boolean;
 }
 
@@ -26,12 +27,15 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
     state,
     params,
     iconRight = true,
-    variant = 'primary',
+    variant = 'secondary',
     size,
+    width = 90,
     btnIcon,
     className,
     ...rest
   } = props;
+
+  const widthClass = `min-w-sm-${width === 'auto' ? width : width + 'px'}`;
 
   return state ? (
     <Link
@@ -42,6 +46,7 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
         btnIcon && 'btn-icon',
         size && `btn-${size}`,
         iconRight && 'btn-icon-right',
+        widthClass,
         className,
       )}
       {...rest}
@@ -60,7 +65,7 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
       size={size}
       variant={variant}
       iconRight={iconRight}
-      className={className}
+      className={classNames(widthClass, className)}
       {...rest}
     />
   );
