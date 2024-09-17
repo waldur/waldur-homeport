@@ -1,8 +1,18 @@
-.sorting-column {
-  cursor: pointer;
-}
-
-.sorting-column > svg,
 .filter-column > button {
   margin-left: 4px;
+}
+
+.sorting-column > span {
+  vertical-align: middle;
+
+  .sorting-buttons {
+    display: inline-flex;
+    flex-direction: column;
+    vertical-align: middle;
+    margin-left: 4px;
+
+    > button {
+      display: flex;
+    }
+  }
 }

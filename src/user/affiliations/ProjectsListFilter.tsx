@@ -10,10 +10,11 @@ const PureProjectsListFilter = () => (
   <TableFilterItem
     title={translate('Organization')}
     name="organization"
-    badgeValue={(value) => value?.name}
-    ellipsis={false}
+    getValueLabel={(option) => option.name}
   >
-    <OrganizationAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+    <OrganizationAutocomplete
+      reactSelectProps={{ ...REACT_SELECT_TABLE_FILTER, isMulti: true }}
+    />
   </TableFilterItem>
 );
 

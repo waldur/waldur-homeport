@@ -1,4 +1,3 @@
-import { CaretUpDown } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useEffect, useMemo, useRef } from 'react';
 import { FormCheck } from 'react-bootstrap';
@@ -7,7 +6,6 @@ import { translate } from '@waldur/i18n';
 
 import './TableHeader.scss';
 
-import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';
 import { TableProps } from './Table';
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { Column, Sorting } from './types';
@@ -30,30 +28,64 @@ interface TableHeaderProps {
   applyFiltersFn?: TableProps['applyFiltersFn'];
   columnPositions: string[];
   hasOptionalColumns?: boolean;
+  toggleFilterMenu(show?): void;
 }
 
-function handleOrdering(currentSorting: Sorting, field: string): Sorting {
-  let mode: 'asc' | 'desc' = 'asc';
-  if (field === currentSorting.field) {
-    if (currentSorting.mode === 'asc') {
-      mode = 'desc';
-    } else if (currentSorting.mode === 'desc') {
-      mode = 'asc';
-    }
-  }
-  return { field, mode };
-}
-
-function renderSortingIcon(column: Column, sorting: Sorting) {
+function renderSortingIcon(
+  column: Column,
+  sorting: Sorting,
+  sort: TableHeaderProps['onSortClick'],
+) {
   if (!column.orderField || !sorting) {
     return null;
   }
+  const onClickSort = (mode: Sorting['mode']) =>
+    (column.orderField !== sorting.field || sorting.mode !== mode) &&
+    sort({ field: column.orderField, mode });
+
   return (
-    <CaretUpDown
-      size={16}
-      weight="bold"
-      className={column.orderField === sorting.field ? sorting.mode : undefined}
-    />
+    <span>
+      <span className="sorting-buttons">
+        <button
+          onClick={() => onClickSort('asc')}
+          className={classNames(
+            'text-btn',
+            column.orderField === sorting.field &&
+              sorting.mode === 'asc' &&
+              'active',
+          )}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="8"
+            fill="currentColor"
+            viewBox="0 0 256 128"
+          >
+            <path d="M 126 45 l 39.51 39.52 a 12 12 0 0 0 17 -17 l -48 -48 a 12 12 0 0 0 -17 0 l -48 48 a 12 12 0 0 0 17 17 Z" />
+          </svg>
+        </button>
+        <button
+          onClick={() => onClickSort('desc')}
+          className={classNames(
+            'text-btn',
+            column.orderField === sorting.field &&
+              sorting.mode === 'desc' &&
+              'active',
+          )}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="8"
+            fill="currentColor"
+            viewBox="0 0 256 128"
+          >
+            <path d="M 184.49 39.51 a 12 12 0 0 1 0 17 l -48 48 a 12 12 0 0 1 -17 0 l -48 -48 a 12 12 0 0 1 17 -17 L 128 79 l 39.51 -39.52 A 12 12 0 0 1 184.49 39.51 Z" />
+          </svg>
+        </button>
+      </span>
+    </span>
   );
 }
 
@@ -65,6 +97,7 @@ const TableTh = ({
   filtersStorage,
   setFilter,
   applyFiltersFn,
+  toggleFilterMenu,
 }) => (
   <th
     className={
@@ -74,24 +107,11 @@ const TableTh = ({
         column.filter && filters && 'filter-column',
       ) || undefined
     }
-    onClick={
-      column.orderField &&
-      ((ev) => {
-        const toggles = document.getElementsByClassName(
-          COLUMN_FILTER_TOGGLE_CLASS,
-        );
-        for (let i = 0; i < toggles.length; i++) {
-          if (toggles.item(i).contains(ev.target as HTMLElement)) {
-            return;
-          }
-        }
-
-        onSortClick(handleOrdering(currentSorting, column.orderField));
-      })
-    }
   >
-    {column.title}
-    {renderSortingIcon(column, currentSorting)}
+    <span>
+      {column.title}
+      {renderSortingIcon(column, currentSorting, onSortClick)}
+    </span>
     {column.filter && filters && (
       <TableFiltersMenu
         filters={filters}
@@ -100,6 +120,7 @@ const TableTh = ({
         setFilter={setFilter}
         applyFiltersFn={applyFiltersFn}
         openName={column.filter}
+        toggleFilterMenu={toggleFilterMenu}
       />
     )}
   </th>
@@ -122,6 +143,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
   setFilter,
   applyFiltersFn,
   hasOptionalColumns,
+  toggleFilterMenu,
 }) => {
   const isAllSelected = selectedRows?.length >= rows?.length;
 
@@ -173,6 +195,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
                       filtersStorage={filtersStorage}
                       setFilter={setFilter}
                       applyFiltersFn={applyFiltersFn}
+                      toggleFilterMenu={toggleFilterMenu}
                     />
                   ),
               )
@@ -188,6 +211,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
                     filtersStorage={filtersStorage}
                     setFilter={setFilter}
                     applyFiltersFn={applyFiltersFn}
+                    toggleFilterMenu={toggleFilterMenu}
                   />
                 ),
             )}

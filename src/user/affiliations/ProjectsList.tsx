@@ -12,8 +12,12 @@ const mapStateToFilter = createSelector(
   getUser,
   (stateFilter: any, user) => {
     const filter: any = {};
-    if (stateFilter && stateFilter.organization) {
-      filter.customer = stateFilter.organization.uuid;
+    if (
+      stateFilter &&
+      stateFilter.organization &&
+      Array.isArray(stateFilter.organization)
+    ) {
+      filter.customer = stateFilter.organization.map((x) => x.uuid).join(',');
     }
     filter.user_uuid = user.uuid;
     return filter;

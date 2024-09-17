@@ -16,6 +16,7 @@ export const renderWrapper = (columns, currentSorting?, expandableRow?) =>
       currentSorting={currentSorting}
       expandableRow={expandableRow}
       columnPositions={columns.map((c) => c.id)}
+      toggleFilterMenu={null}
     />,
     { attachTo: document.createElement('table') },
   );

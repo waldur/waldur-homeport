@@ -14,7 +14,6 @@ import { ErrorView } from '@waldur/navigation/header/search/ErrorView';
 import { OPTIONAL_COLUMN_ACTIONS_KEY } from './constants';
 import { GridBody } from './GridBody';
 import { HiddenActionsMessage } from './HiddenActionsMessage';
-import { SortingIconGradient } from './SortingIconGradient';
 import { TableBody } from './TableBody';
 import { TableButtons } from './TableButtons';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -102,7 +101,9 @@ export interface TableProps<RowType = any> extends TableState {
   hideClearFilters?: boolean;
 }
 
-const TableComponent = (props: TableProps) => {
+const TableComponent = (
+  props: TableProps & { toggleFilterMenu?(show?): void },
+) => {
   const visibleColumns = useMemo(
     () =>
       props.hasOptionalColumns
@@ -146,6 +147,7 @@ const TableComponent = (props: TableProps) => {
           applyFiltersFn={props.applyFiltersFn}
           columnPositions={props.columnPositions}
           hasOptionalColumns={props.hasOptionalColumns}
+          toggleFilterMenu={props.toggleFilterMenu}
         />
       )}
       <TableBody
@@ -183,11 +185,15 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
 
   state = {
     closedHiddenActionsMessage: false,
-    /** Controls whether the add filter toggle is displayed, \
-     * but only if we don't have an active filter. Otherwise, it has no effect. \
+    /** Controls whether the main add filter toggle is displayed. \
      * Used with `filterPosition = 'menu'`*/
     showFilterMenuToggle: false,
   };
+
+  constructor(props) {
+    super(props);
+    this.toggleFilterMenu = this.toggleFilterMenu.bind(this);
+  }
 
   render() {
     return (
@@ -240,12 +246,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                       <TableButtons
                         {...this.props}
                         showFilterMenuToggle={this.state.showFilterMenuToggle}
-                        toggleFilterMenu={() =>
-                          this.setState({
-                            showFilterMenuToggle:
-                              !this.state.showFilterMenuToggle,
-                          })
-                        }
+                        toggleFilterMenu={this.toggleFilterMenu}
                       />
                     </div>
                   )}
@@ -321,7 +322,6 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               className="table-responsive dataTables_wrapper"
               style={{ minHeight: this.props.minHeight || 300 }}
             >
-              <SortingIconGradient />
               <div className={classNames('table-container table-hover-shadow')}>
                 {this.renderBody()}
               </div>
@@ -381,7 +381,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
       </ErrorBoundary>
     ) : (
       <ErrorBoundary fallback={ErrorMessage}>
-        <TableComponent {...this.props} />
+        <TableComponent
+          {...this.props}
+          toggleFilterMenu={this.toggleFilterMenu}
+        />
       </ErrorBoundary>
     );
   }
@@ -438,6 +441,12 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
 
   componentWillUnmount() {
     this.props.resetSelection();
+  }
+
+  toggleFilterMenu(show: boolean = null) {
+    this.setState({
+      showFilterMenuToggle: show ?? !this.state.showFilterMenuToggle,
+    });
   }
 
   hasRows() {

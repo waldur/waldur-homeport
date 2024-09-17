@@ -160,6 +160,7 @@ interface TableFiltersMenuProps
   table?: TableProps['table'];
   selectedSavedFilter?: TableProps['selectedSavedFilter'];
   openName?: string;
+  toggleFilterMenu?(show?): void;
 }
 
 export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
@@ -226,6 +227,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
         menuInstance.current.hide(menuInstance.current.getElement());
       }, 100);
     }
+    props.toggleFilterMenu && props.toggleFilterMenu(true);
   };
 
   const [existed, setExisted] = useState(true);
