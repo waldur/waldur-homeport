@@ -12,13 +12,15 @@ const isoCountryCodeToFlagEmoji = (country) =>
 interface CountryFlagProps {
   countryCode: string;
   fontSize?: number;
+  className?: string;
 }
 
 export const CountryFlag: FunctionComponent<CountryFlagProps> = ({
   countryCode,
   fontSize = 24,
+  className,
 }) => (
-  <span style={{ fontSize: fontSize + 'px' }}>
+  <span style={{ fontSize: fontSize + 'px' }} className={className}>
     {isoCountryCodeToFlagEmoji(countryCode)}
   </span>
 );
