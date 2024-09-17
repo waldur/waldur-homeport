@@ -8,6 +8,7 @@ import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitR
 import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
 import { SetSlugAction } from '@waldur/marketplace/resources/SetSlugAction';
 import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
+import { SetErredActionItem } from '@waldur/resource/actions/SetErredActionItem';
 import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
@@ -25,6 +26,7 @@ export const ActionsList = [
   SetSlugAction,
   TerminateAction,
   UnlinkActionItem,
+  SetErredActionItem,
   EditResourceEndDateAction,
   SyncResourceAction,
   CreateLexisLinkAction,

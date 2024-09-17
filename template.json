@@ -987,6 +987,10 @@
     "description": "proposals/proposal/create/ProposalSubmissionStep.tsx",
     "message": "Are you sure you want to send the proposal to team verification step?"
   },
+  "Are you sure you want to set {name} {resourceType} to erred state? ": {
+    "description": "resource/actions/SetErredActionItem.tsx",
+    "message": "Are you sure you want to set {name} {resourceType} to erred state? "
+  },
   "Are you sure you want to start reviewing proposal {name}?": {
     "description": "proposals/review/ReviewItemActions.tsx",
     "message": "Are you sure you want to start reviewing proposal {name}?"
@@ -8291,6 +8295,10 @@
     "description": "azure/AzureResourceSummary.tsx",
     "message": "Resource group"
   },
+  "Resource has been set as erred.": {
+    "description": "resource/actions/SetErredActionItem.tsx",
+    "message": "Resource has been set as erred."
+  },
   "Resource has been unlinked.": {
     "description": "resource/actions/UnlinkActionItem.tsx",
     "message": "Resource has been unlinked."
@@ -9334,6 +9342,10 @@
   "Set allowed address pairs": {
     "description": "openstack/openstack-instance/SetAllowedAddressPairsButton.tsx",
     "message": "Set allowed address pairs"
+  },
+  "Set as erred": {
+    "description": "resource/actions/SetErredActionItem.tsx",
+    "message": "Set as erred"
   },
   "Set backend ID": {
     "description": "marketplace/resources/SetBackendIdAction.tsx, marketplace/resources/SetBackendIdButton.tsx, marketplace/resources/SetBackendIdDialog.tsx",
@@ -11567,6 +11579,10 @@
     "description": "marketplace/resources/SetBackendIdDialog.tsx",
     "message": "Unable to set backend ID."
   },
+  "Unable to set resource to erred state.": {
+    "description": "resource/actions/SetErredActionItem.tsx",
+    "message": "Unable to set resource to erred state."
+  },
   "Unable to set slug.": {
     "description": "marketplace/resources/SetSlugDialog.tsx",
     "message": "Unable to set slug."
@@ -11948,7 +11964,7 @@
     "message": "Unlink invoice"
   },
   "Unlink resource": {
-    "description": "resource/actions/UnlinkActionItem.tsx",
+    "description": "resource/actions/SetErredActionItem.tsx, resource/actions/UnlinkActionItem.tsx",
     "message": "Unlink resource"
   },
   "Unlink": {
