@@ -1,3 +1,5 @@
+import { Play } from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 import { activateSnapshotSchedule } from '@waldur/openstack/api';
 import { AsyncActionItem } from '@waldur/resource/actions/AsyncActionItem';
@@ -21,5 +23,6 @@ export const ActivateSnapshotScheduleAction: ActionItemType = ({
     resource={resource}
     validators={validators}
     refetch={refetch}
+    iconNode={<Play />}
   />
 );

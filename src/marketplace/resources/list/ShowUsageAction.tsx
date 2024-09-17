@@ -1,3 +1,4 @@
+import { ChartPie } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -27,6 +28,7 @@ export const ShowUsageAction = ({ resource }: { resource: Resource }) => {
   return (
     <ActionItem
       title={translate('Show usage')}
+      iconNode={<ChartPie />}
       action={() =>
         callback({
           ...resource,

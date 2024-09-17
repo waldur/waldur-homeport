@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ButtonVariant } from 'react-bootstrap/esm/types';
+import { ButtonVariant, Variant } from 'react-bootstrap/esm/types';
 
 import { DialogSizeType } from '@waldur/modal/actions';
 import { ActionValidator } from '@waldur/resource/actions/types';
@@ -35,4 +35,5 @@ export interface DialogActionProps<T>
   extraResolve?: any;
   iconClass?: string;
   iconNode?: ReactNode;
+  iconColor?: Variant;
 }

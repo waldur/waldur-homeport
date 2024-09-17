@@ -1,3 +1,5 @@
+import { ClockClockwise } from '@phosphor-icons/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
@@ -18,5 +20,6 @@ export const RestoreAction: ActionItemType = ({ resource, refetch }) => (
     modalComponent={BackupRestoreDialog}
     resource={resource}
     extraResolve={{ refetch }}
+    iconNode={<ClockClockwise />}
   />
 );

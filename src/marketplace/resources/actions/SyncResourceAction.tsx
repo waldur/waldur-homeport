@@ -1,3 +1,4 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -20,6 +21,11 @@ export const SyncResourceAction = ({ resource, ...rest }) => {
   };
 
   return resource.offering_type === OFFERING_TYPE_CUSTOM_SCRIPTS ? (
-    <ActionItem title={translate('Synchronise')} action={callback} {...rest} />
+    <ActionItem
+      title={translate('Synchronise')}
+      action={callback}
+      {...rest}
+      iconNode={<ArrowsClockwise />}
+    />
   ) : null;
 };

@@ -1,3 +1,4 @@
+import { Code } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -29,6 +30,7 @@ export const SetBackendIdAction: ActionItemType = ({ resource, refetch }) => {
       modalComponent={SetBackendIdDialog}
       extraResolve={{ refetch }}
       resource={resource}
+      iconNode={<Code />}
     />
   );
 };

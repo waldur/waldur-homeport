@@ -1,3 +1,4 @@
+import { CodeBlock } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -39,6 +40,7 @@ export const OpenConsoleLogActionItem: <T extends { uuid: string }>(
     <ActionItem
       title={translate('Show console log')}
       action={callback}
+      iconNode={<CodeBlock />}
       {...validationState}
     />
   );

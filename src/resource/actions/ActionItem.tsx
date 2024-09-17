@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { uniqueId } from 'lodash';
 import { FC, ReactNode, useContext } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
+import { Variant } from 'react-bootstrap/esm/types';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { ResourceActionMenuContext } from '@waldur/marketplace/resources/actions/ResourceActionMenuContext';
@@ -12,6 +13,7 @@ export interface ActionItemProps {
   action: () => void;
   icon?: string;
   iconNode?: ReactNode;
+  iconColor?: Variant;
   staff?: boolean;
   important?: boolean;
   className?: string;
@@ -39,24 +41,40 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
   }
   return Component === Dropdown.Item || Component === Button ? (
     <Component
-      className={classNames('d-flex gap-1', props.className)}
+      className={classNames(
+        'd-flex gap-3',
+        props.className,
+        props.disabled && 'bg-hover-lighten',
+      )}
       // Workaround for rendering tooltips for disabled dropdown menu items.
       // See also: https://stackoverflow.com/questions/57349166/
-      style={props.disabled ? { opacity: 0.4 } : undefined}
       onClick={() => !props.disabled && props.action()}
       as="button"
       variant={Component === Button ? '' : undefined}
       disabled={props.disabled && !props.tooltip}
     >
+      <div className={props.disabled ? 'opacity-50' : undefined}>
+        {props.iconNode && (
+          <span
+            className={classNames(
+              'svg-icon svg-icon-2',
+              props.iconColor && `svg-icon-${props.iconColor}`,
+            )}
+          >
+            {props.iconNode}
+          </span>
+        )}
+        {props.title}
+      </div>
       {props.tooltip && (
-        <Tip label={props.tooltip} id={`action-reason-${uniqueId()}`}>
-          <Question />
+        <Tip
+          label={props.tooltip}
+          id={`action-reason-${uniqueId()}`}
+          className="ms-auto"
+        >
+          <Question size={20} />
         </Tip>
       )}
-      {props.iconNode && (
-        <span className="svg-icon svg-icon-2">{props.iconNode}</span>
-      )}
-      {props.title}
     </Component>
   ) : (
     <Component {...props} />

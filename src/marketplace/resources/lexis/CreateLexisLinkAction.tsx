@@ -1,3 +1,4 @@
+import { LinkSimple } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -49,6 +50,6 @@ export const CreateLexisLinkAction: FC<CreateLexisLinkActionProps> = ({
   ) {
     return null;
   } else {
-    return <ActionItem {...props} />;
+    return <ActionItem {...props} iconNode={<LinkSimple />} />;
   }
 };

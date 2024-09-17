@@ -1,3 +1,4 @@
+import { FileText } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -49,6 +50,7 @@ export const ReportUsageAction = ({ resource }: { resource: Resource }) => {
   return (
     <ActionItem
       title={translate('Report usage')}
+      iconNode={<FileText />}
       action={() =>
         callback({
           offering_uuid: resource.offering_uuid,

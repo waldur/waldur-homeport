@@ -1,3 +1,5 @@
+import { X } from '@phosphor-icons/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
@@ -29,5 +31,7 @@ export const ForceDestroyAction: ActionItemType = ({ resource, refetch }) => (
     className="text-danger"
     resource={resource}
     extraResolve={{ refetch }}
+    iconNode={<X />}
+    iconColor="danger"
   />
 );

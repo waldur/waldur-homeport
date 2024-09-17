@@ -1,3 +1,5 @@
+import { Plugs } from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 import { detachVolume } from '@waldur/openstack/api';
 import { AsyncActionItem } from '@waldur/resource/actions/AsyncActionItem';
@@ -23,5 +25,6 @@ export const DetachAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     refetch={refetch}
     important
+    iconNode={<Plugs />}
   />
 );

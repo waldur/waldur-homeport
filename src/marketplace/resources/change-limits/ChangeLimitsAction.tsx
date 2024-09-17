@@ -1,3 +1,5 @@
+import { PencilSimple } from '@phosphor-icons/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
@@ -27,7 +29,7 @@ const useChangeLimits = ({ resource, refetch }) => {
     action,
     tooltip,
     disabled,
-    iconClass: 'fa-edit',
+    iconNode: <PencilSimple />,
     important: true,
   };
 };

@@ -1,3 +1,5 @@
+import { Stop } from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 import { deactivateBackupSchedule } from '@waldur/openstack/api';
 import { AsyncActionItem } from '@waldur/resource/actions/AsyncActionItem';
@@ -18,5 +20,6 @@ export const DeactivateAction: ActionItemType = ({ resource, refetch }) => (
     resource={resource}
     validators={validators}
     refetch={refetch}
+    iconNode={<Stop />}
   />
 );

@@ -1,3 +1,5 @@
+import { TerminalWindow } from '@phosphor-icons/react';
+
 import { ENV } from '@waldur/configs/default';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -18,7 +20,7 @@ export const RequestDirectAccessAction: ActionItemType = ({
       title={translate('Request direct access')}
       modalComponent={RequestDirectAccessDialog}
       resource={resource}
-      iconClass="fa-server"
+      iconNode={<TerminalWindow />}
       {...rest}
     />
   ) : null;

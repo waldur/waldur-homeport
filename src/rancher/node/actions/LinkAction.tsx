@@ -1,3 +1,4 @@
+import { LinkSimple } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -23,6 +24,7 @@ export const LinkAction: ActionItemType = ({ resource, refetch }) => {
         resource={resource}
         extraResolve={{ refetch }}
         staff
+        iconNode={<LinkSimple />}
       />
     );
   }

@@ -1,3 +1,4 @@
+import { LinkBreak } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -51,6 +52,7 @@ export const UnlinkAction: ActionItemType = ({ resource, refetch }) => {
         title={translate('Unlink instance')}
         action={callback}
         staff
+        iconNode={<LinkBreak />}
       />
     );
   }

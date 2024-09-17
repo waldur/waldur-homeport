@@ -1,3 +1,4 @@
+import { ArrowsOutCardinal } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -27,6 +28,11 @@ export const MoveResourceAction: ActionItemType = ({ resource, refetch }) => {
     );
 
   return isStaff ? (
-    <ActionItem title={translate('Move')} action={callback} staff />
+    <ActionItem
+      title={translate('Move')}
+      action={callback}
+      staff
+      iconNode={<ArrowsOutCardinal />}
+    />
   ) : null;
 };
