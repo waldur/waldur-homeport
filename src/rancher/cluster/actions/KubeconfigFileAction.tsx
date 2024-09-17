@@ -1,3 +1,4 @@
+import { FileCode } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -31,6 +32,7 @@ export const KubeconfigFileAction: ActionItemType = ({ resource }) => {
       modalComponent={RancherClusterKubeconfigDialog}
       resource={resource}
       validators={validators}
+      iconNode={<FileCode />}
     />
   );
 };

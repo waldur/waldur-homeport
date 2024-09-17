@@ -1,3 +1,5 @@
+import { PencilSimple } from '@phosphor-icons/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { validateStaffAction } from '@waldur/marketplace/resources/actions/utils';
@@ -24,6 +26,7 @@ const useSetLimits = ({ resource, refetch }) => {
     action,
     tooltip,
     disabled,
+    iconNode: <PencilSimple />,
   };
 };
 

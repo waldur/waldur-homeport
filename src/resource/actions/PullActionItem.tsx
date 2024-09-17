@@ -1,3 +1,4 @@
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { AxiosResponse } from 'axios';
 import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
@@ -59,5 +60,12 @@ export const PullActionItem: <T extends { uuid: string; backend_id?: string }>(
   props: PullActionItemProps<T>,
 ) => ReactElement = (props) => {
   const buttonProps = usePull(props);
-  return <ActionItem {...buttonProps} as={props.as} staff={props.staff} />;
+  return (
+    <ActionItem
+      {...buttonProps}
+      as={props.as}
+      staff={props.staff}
+      iconNode={<ArrowsClockwise />}
+    />
+  );
 };

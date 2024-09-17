@@ -1,3 +1,5 @@
+import { Headset } from '@phosphor-icons/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
@@ -13,5 +15,6 @@ export const RequestLimitsChangeAction: ActionItemType = ({ resource }) => (
     title={translate('Request limits change')}
     modalComponent={RequestLimitsChangeDialog}
     resource={resource}
+    iconNode={<Headset />}
   />
 );

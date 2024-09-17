@@ -1,3 +1,5 @@
+import { Power } from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 import { AsyncActionItem } from '@waldur/resource/actions/AsyncActionItem';
 import {
@@ -17,5 +19,6 @@ export const ShutdownAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     apiMethod={shutdownVirtualMachine}
     refetch={refetch}
+    iconNode={<Power />}
   />
 );

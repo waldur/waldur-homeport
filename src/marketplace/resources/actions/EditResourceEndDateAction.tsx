@@ -1,3 +1,4 @@
+import { PencilSimpleLine } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -48,6 +49,10 @@ export const EditResourceEndDateAction: ActionItemType = ({
     return null;
   }
   return (
-    <ActionItem title={translate('Set termination date')} action={callback} />
+    <ActionItem
+      title={translate('Set termination date')}
+      action={callback}
+      iconNode={<PencilSimpleLine />}
+    />
   );
 };

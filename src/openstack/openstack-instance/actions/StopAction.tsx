@@ -1,3 +1,5 @@
+import { Stop } from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 import { stopInstance } from '@waldur/openstack/api';
 import { OpenStackInstance } from '@waldur/openstack/openstack-instance/types';
@@ -32,5 +34,10 @@ export const getProps = () =>
   }) as AsyncActionItemProps<OpenStackInstance>;
 
 export const StopAction: ActionItemType = ({ resource, ...rest }) => (
-  <AsyncActionItem {...getProps()} resource={resource} {...rest} />
+  <AsyncActionItem
+    {...getProps()}
+    resource={resource}
+    {...rest}
+    iconNode={<Stop />}
+  />
 );

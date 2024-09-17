@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { X } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -39,7 +39,7 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
       title={translate('Destroy')}
       action={callback}
       disabled={validResources.length !== rows.length}
-      iconNode={<Trash />}
+      iconNode={<X />}
       className="text-danger"
     />
   );

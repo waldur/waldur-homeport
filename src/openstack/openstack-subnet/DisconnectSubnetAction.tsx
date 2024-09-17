@@ -1,3 +1,5 @@
+import { Plugs } from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 import { disconnectSubnet } from '@waldur/openstack/api';
 import { AsyncActionItem } from '@waldur/resource/actions/AsyncActionItem';
@@ -14,5 +16,6 @@ export const DisconnectSubnetAction: ActionItemType = ({
     resource={resource}
     validators={[validateState('OK')]}
     refetch={refetch}
+    iconNode={<Plugs />}
   />
 );

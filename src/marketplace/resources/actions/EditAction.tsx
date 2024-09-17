@@ -1,3 +1,5 @@
+import { PencilSimple } from '@phosphor-icons/react';
+
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { validateState } from '@waldur/resource/actions/base';
@@ -24,5 +26,6 @@ export const EditAction: ActionItemType = ({ resource, refetch }) =>
       modalComponent={EditDialog}
       resource={resource}
       extraResolve={{ refetch }}
+      iconNode={<PencilSimple />}
     />
   );

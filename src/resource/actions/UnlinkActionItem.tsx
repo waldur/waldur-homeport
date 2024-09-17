@@ -1,3 +1,4 @@
+import { LinkBreak } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -54,6 +55,7 @@ export const UnlinkActionItem: FC<{ resource }> = ({ resource }) => {
       action={callback}
       className="text-danger"
       staff
+      iconNode={<LinkBreak />}
     />
   );
 };
