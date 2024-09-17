@@ -14,16 +14,21 @@
       svg {
         color: $grey-400;
       }
-      &.sorting-column > svg {
-        &.asc {
-          fill: url(#sorting-gradient-asc);
+      &.sorting-column .sorting-buttons > button {
+        &:hover svg {
+          color: $grey-500;
         }
-        &.desc {
-          fill: url(#sorting-gradient-desc);
+        &.active svg {
+          color: $primary;
         }
       }
-      &.filter-column > button:hover svg {
-        color: $primary;
+      &.filter-column > button {
+        &:hover svg {
+          color: $grey-500;
+        }
+        &.show svg {
+          color: $primary;
+        }
       }
     }
   }
