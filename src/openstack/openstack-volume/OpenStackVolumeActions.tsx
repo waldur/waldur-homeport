@@ -6,6 +6,7 @@ import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 import { ShowUsageAction } from '@waldur/marketplace/resources/list/ShowUsageAction';
 import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
+import { SetErredActionItem } from '@waldur/resource/actions/SetErredActionItem';
 import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
 
 import { AttachAction } from './actions/AttachAction';
@@ -37,6 +38,7 @@ export const OpenstackVolumeActions = (props) => (
     <ActionGroup title={translate('Staff actions')}>
       <MoveResourceAction {...props} />
       <UnlinkActionItem {...props} />
+      <SetErredActionItem {...props} />
     </ActionGroup>
 
     <ActionGroup title={translate('Dangerous actions')}>

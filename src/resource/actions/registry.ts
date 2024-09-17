@@ -1,3 +1,4 @@
+import { SetErredActionItem } from './SetErredActionItem';
 import { ActionItemType } from './types';
 import { UnlinkActionItem } from './UnlinkActionItem';
 
@@ -9,7 +10,11 @@ class ActionConfiguration {
   }
 
   getActions(type) {
-    return [...(this.actions[type] || []), UnlinkActionItem];
+    return [
+      ...(this.actions[type] || []),
+      UnlinkActionItem,
+      SetErredActionItem,
+    ];
   }
 }
 
