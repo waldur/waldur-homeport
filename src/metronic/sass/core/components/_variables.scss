@@ -26,7 +26,7 @@ $grey-300: if(isDarkMode(), #61646c, #d0d5dd) !default; // Custom variable
 $grey-400: if(isDarkMode(), #85888e, #98a2b3) !default; // Custom variable
 $grey-500: if(isDarkMode(), #94969c, #667085) !default; // Custom variable
 $grey-600: if(isDarkMode(), #cecfd2, #475467) !default; // Custom variable
-$text-muted: $gray-500 !default;
+$text-muted: $grey-500 !default;
 
 // Dark Mode
 $dark-mode-page-bg-color: #172219 !default;
@@ -1245,6 +1245,7 @@ $symbol-sizes: (
   35px: 35px,
   40px: 40px,
   45px: 45px,
+  48px: 48px,
   default: 50px,
   50px: 50px,
   55px: 55px,

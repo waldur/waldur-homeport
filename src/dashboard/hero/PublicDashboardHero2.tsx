@@ -5,6 +5,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { Tip } from '@waldur/core/Tooltip';
 
 import { DashboardHeroLogo2 } from './DashboardHeroLogo2';
+import './PublicDashboardHero2.scss';
 
 interface PublicDashboardHero2Props {
   backgroundImage?: string;
@@ -44,7 +45,7 @@ export const PublicDashboardHero2: FC<
               props.cardBordered && 'card-bordered',
             )}
           >
-            <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-6 flex-grow-1 p-6">
+            <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch flex-grow-1">
               <Tip
                 label={props.logoTooltip}
                 id={`tip-header-${props.logoTooltip}`}
@@ -53,7 +54,7 @@ export const PublicDashboardHero2: FC<
                   logo={props.logo}
                   logoAlt={props.logoAlt}
                   circle={props.logoCircle}
-                  size={props.logoSize || 50}
+                  size={props.logoSize || 48}
                 />
               </Tip>
               <div className="d-flex flex-column flex-grow-1 gap-3">

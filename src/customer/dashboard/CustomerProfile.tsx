@@ -1,7 +1,7 @@
-import { Card, Col, Row, Stack } from 'react-bootstrap';
+import { At, DeviceMobile, Hexagon } from '@phosphor-icons/react';
+import { Col, Row, Stack } from 'react-bootstrap';
 
-import { Image } from '@waldur/core/Image';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { ProviderOfferingPermissions } from '@waldur/marketplace/service-providers/dashboard/ProviderOfferingPermissions';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
@@ -18,62 +18,59 @@ export const CustomerProfile = ({
   customer,
   fromServiceProvider,
 }: CustomerProfileProps) => (
-  <Card>
-    <Card.Body>
-      <Row>
-        <Col xs="auto">
-          {customer.image ? (
-            <Image src={customer.image} size={100} />
-          ) : (
-            <div className="symbol">
-              <ImagePlaceholder
-                width="100px"
-                height="100px"
-                backgroundColor="#e2e2e2"
-              >
-                <div className="symbol-label fs-2 fw-bold w-100 h-100">
-                  {getItemAbbreviation(customer)}
-                </div>
-              </ImagePlaceholder>
-            </div>
+  <PublicDashboardHero2
+    hideQuickSection
+    logo={customer.image}
+    logoAlt={getItemAbbreviation(customer)}
+    logoCircle
+    cardBordered
+    title={
+      <div>
+        <Stack direction="horizontal" gap={4} className="text-muted mb-3">
+          {customer.country && (
+            <CountryFlag
+              countryCode={customer.country}
+              fontSize={22}
+              className="h-25px"
+            />
           )}
-        </Col>
-        <Col>
-          <Row className="mb-6">
-            <Col>
-              <Stack
-                direction="horizontal"
-                gap={2}
-                className="gap-6 text-muted mb-1"
-              >
-                {customer.country && (
-                  <CountryFlag countryCode={customer.country} />
-                )}
-                <h2 className="mb-0">{customer.name}</h2>
-              </Stack>
-              <Stack direction="horizontal" className="gap-6 text-muted">
-                {[
-                  customer.organization_group_name,
-                  customer.email,
-                  typeof customer.phone_number === 'string'
-                    ? customer.phone_number
-                    : undefined,
-                ].map((item, i) => item && <span key={i}>{item}</span>)}
-              </Stack>
-            </Col>
-            <Col xs="auto">
-              <CustomerActions customer={customer} />
-            </Col>
-          </Row>
-          {fromServiceProvider ? (
-            <Row>
-              <Col xs={12}>
-                <ProviderOfferingPermissions customer={customer} />
-              </Col>
-            </Row>
-          ) : null}
+          <h3 className="mb-0">{customer.name}</h3>
+        </Stack>
+        <Stack
+          direction="horizontal"
+          gap={5}
+          className="flex-wrap text-muted lh-1"
+        >
+          {customer.organization_group_name && (
+            <span className="text-nowrap">
+              <Hexagon size={18} weight="duotone" className="me-1" />
+              {customer.organization_group_name}
+            </span>
+          )}
+          {customer.email && (
+            <span className="text-nowrap">
+              <At size={18} weight="duotone" className="me-1" />
+              {customer.email}
+            </span>
+          )}
+          {customer.phone_number &&
+            typeof customer.phone_number === 'string' && (
+              <span className="text-nowrap">
+                <DeviceMobile size={18} weight="duotone" className="me-1" />
+                {customer.phone_number}
+              </span>
+            )}
+        </Stack>
+      </div>
+    }
+    actions={<CustomerActions customer={customer} />}
+  >
+    {fromServiceProvider ? (
+      <Row>
+        <Col xs={12}>
+          <ProviderOfferingPermissions customer={customer} />
         </Col>
       </Row>
-    </Card.Body>
-  </Card>
+    ) : null}
+  </PublicDashboardHero2>
 );
