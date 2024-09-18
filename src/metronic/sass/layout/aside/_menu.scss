@@ -90,7 +90,7 @@ $asides: (
     bg-subitem: if(isDarkMode(), $dark-bg-subitem, $grey-200),
     badge-color: if(isDarkMode(), $dark-badge-color, $gray-700),
     badge-bg: if(isDarkMode(), $dark-badge-bg, transparent),
-    badge-border: if(isDarkMode(), $dark-badge-border, $grey-200),
+    badge-border: if(isDarkMode(), $dark-badge-border, $grey-300),
     accordion-active: if(isDarkMode(), $dark-accordion-active, $grey-100),
     footer-separator: if(isDarkMode(), $dark-footer-separator, $grey-200),
   ),
