@@ -1347,6 +1347,10 @@
     "description": "project/OECD_FOS_2007_CODES.ts",
     "message": "Biological sciences"
   },
+  "Blacklisted volume types": {
+    "description": "openstack/OpenStackTenantForm.tsx",
+    "message": "Blacklisted volume types"
+  },
   "Block creation of new resources": {
     "description": "customer/cost-policies/utils.ts",
     "message": "Block creation of new resources"
@@ -4938,6 +4942,10 @@
   "List of all resources": {
     "description": "navigation/header/favorite-pages/FavoritePageService.ts",
     "message": "List of all resources"
+  },
+  "List of coma-separated strings volume types.": {
+    "description": "openstack/OpenStackTenantForm.tsx",
+    "message": "List of coma-separated strings volume types."
   },
   "List of enabled languages": {
     "description": "SettingsDescription.ts",
