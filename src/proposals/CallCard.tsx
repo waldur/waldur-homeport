@@ -1,6 +1,7 @@
 import { FC } from 'react';
-import { Badge, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatDate, formatRelativeWithHour } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { ModelCard1 } from '@waldur/core/ModelCard1';
@@ -18,14 +19,14 @@ export const CallCard: FC<{ call }> = ({ call }) => {
       subtitle={call.customer_name}
       body={call.description}
       footer={
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between align-items-center">
           {!nextRound ? (
             <div className="text-muted">{translate('No rounds')}</div>
           ) : nextRound.status.label === 'Open' ? (
-            <Badge bg="warning" text="dark">
+            <Badge variant="warning" outline pill>
               {translate('Cutoff')}
               {': '}
-              <strong>{formatRelativeWithHour(nextRound.cutoff_time)}</strong>
+              {formatRelativeWithHour(nextRound.cutoff_time)}
             </Badge>
           ) : nextRound.status.label === 'Ended' ? (
             <div className="text-muted">

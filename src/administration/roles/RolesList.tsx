@@ -1,5 +1,4 @@
-import { Badge } from 'react-bootstrap';
-
+import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
 import { formatRoleType } from '@waldur/permissions/utils';
 import { createFetcher, Table } from '@waldur/table';
@@ -25,7 +24,7 @@ export const RolesList = () => {
             <>
               {row.name}{' '}
               {row.is_system_role && (
-                <Badge bg="primary" className="ms-2">
+                <Badge outline pill className="ms-2">
                   {translate('System role')}
                 </Badge>
               )}

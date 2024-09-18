@@ -49,6 +49,8 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
                     <StateIndicator
                       label={value}
                       variant={value === 'working' ? 'primary' : 'danger'}
+                      outline
+                      pill
                     />
                   </td>
                 </tr>

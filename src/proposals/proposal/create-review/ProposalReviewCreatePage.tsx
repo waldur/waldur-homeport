@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { createRef, useCallback, useRef, useState } from 'react';
-import { Badge } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Badge } from '@waldur/core/Badge';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -150,12 +150,7 @@ export const ProposalReviewCreatePage = (props) => {
           <div className="my-8 border-bottom">
             <div className="hstack gap-4 mb-2">
               <h1 className="mb-0">{data.review.proposal_name}</h1>
-              <Badge
-                bg="grey-100"
-                text="dark"
-                pill
-                className="badge-outline-light"
-              >
+              <Badge variant="default" outline pill>
                 {formatReviewState(data.review.state)}
               </Badge>
             </div>

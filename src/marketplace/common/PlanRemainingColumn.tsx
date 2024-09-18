@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
-import { Badge } from 'react-bootstrap';
+
+import { Badge } from '@waldur/core/Badge';
 
 const getColor = (value) =>
   value === null
@@ -11,7 +12,7 @@ const getColor = (value) =>
         : 'success';
 
 export const PlanRemainingColumn: FunctionComponent<{ row }> = ({ row }) => (
-  <Badge bg={getColor(row.remaining)}>
+  <Badge variant={getColor(row.remaining)} outline pill>
     {row.remaining === null ? 'N/A' : row.remaining}
   </Badge>
 );

@@ -1,9 +1,10 @@
 import { X } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Badge, Button, Stack } from 'react-bootstrap';
+import { Button, Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
+import { Badge } from '@waldur/core/Badge';
 import { syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
@@ -66,7 +67,7 @@ export const PageBarFilters = () => {
               className="fw-bold"
             >
               {item.label}
-              <Badge bg="" className="badge-outline-default">
+              <Badge variant="default" outline pill>
                 {item.getValueLabel
                   ? item.getValueLabel(item.value)
                   : typeof item.value === 'string'

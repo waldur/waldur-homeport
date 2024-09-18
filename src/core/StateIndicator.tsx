@@ -1,10 +1,7 @@
-import classNames from 'classnames';
 import { FunctionComponent } from 'react';
-import { Badge } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 
-import { Tip } from '@waldur/core/Tooltip';
-
+import { Badge } from './Badge';
 import { LoadingSpinnerIcon } from './LoadingSpinner';
 
 export interface StateIndicatorProps {
@@ -20,41 +17,17 @@ export interface StateIndicatorProps {
   size?: 'sm' | 'lg';
 }
 
-const wrapTooltip = (label, children) =>
-  label ? (
-    <Tip label={label} id="state-indicator">
-      {children}
-    </Tip>
-  ) : (
-    children
-  );
-
-export const StateIndicator: FunctionComponent<StateIndicatorProps> = (props) =>
-  wrapTooltip(
-    props.tooltip,
-    <Badge
-      bg={!(props.light || props.outline) ? props.variant : null}
-      className={classNames([
-        'badge-' +
-          (props.outline
-            ? 'outline-'
-            : props.light && props.variant !== 'light'
-              ? 'light-'
-              : '') +
-          props.variant,
-        props.size && `badge-${props.size}`,
-        props.roundless && 'rounded-0',
-        props.pill && 'badge-pill',
-        props.hasBullet && 'has-bullet',
-      ])}
-    >
-      {props.label.toUpperCase()}{' '}
-      {props.active && (
-        <LoadingSpinnerIcon
-          className={
-            (props.light || props.outline ? 'text-' : 'badge-') + props.variant
-          }
-        />
-      )}
-    </Badge>,
-  );
+export const StateIndicator: FunctionComponent<StateIndicatorProps> = (
+  props,
+) => (
+  <Badge {...props}>
+    {props.label.toUpperCase()}{' '}
+    {props.active && (
+      <LoadingSpinnerIcon
+        className={
+          (props.light || props.outline ? 'text-' : 'badge-') + props.variant
+        }
+      />
+    )}
+  </Badge>
+);

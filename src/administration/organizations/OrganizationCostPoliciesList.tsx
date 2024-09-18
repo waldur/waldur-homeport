@@ -1,10 +1,10 @@
 import { Check, X } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Badge } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { Badge } from '@waldur/core/Badge';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { CostPolicyCreateButton } from '@waldur/customer/cost-policies/CostPolicyCreateButton';
 import { CostPolicyDeleteButton } from '@waldur/customer/cost-policies/CostPolicyDeleteButton';
@@ -70,18 +70,12 @@ export const OrganizationCostPoliciesList: FC = () => {
           title: translate('Has fired'),
           render: ({ row }) =>
             row.has_fired === true ? (
-              <Badge
-                bg={null}
-                className="fs-8 fw-bolder lh-base badge-light-danger badge-pill"
-              >
+              <Badge variant="danger" outline pill size="sm">
                 <X size={12} className="text-danger me-2" />
                 {translate('No')}
               </Badge>
             ) : (
-              <Badge
-                bg={null}
-                className="fs-8 fw-bolder lh-base badge-light-success badge-pill"
-              >
+              <Badge variant="success" outline pill size="sm">
                 <Check size={12} className="text-success me-2" />
                 {translate('Yes')}
               </Badge>

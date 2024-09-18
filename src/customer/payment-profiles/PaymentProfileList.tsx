@@ -59,7 +59,9 @@ export const PaymentProfileList: FunctionComponent<{}> = () => {
       render: ({ row }) => (
         <StateIndicator
           label={row.is_active ? translate('Enabled') : translate('Disabled')}
-          variant={row.is_active ? 'success' : 'plain'}
+          variant={row.is_active ? 'success' : 'default'}
+          outline
+          pill
         />
       ),
       orderField: 'is_active',

@@ -6,7 +6,7 @@ import { StateIndicator } from '@waldur/core/StateIndicator';
 type BackupStateType = 'Unsupported' | 'Unset' | 'Warning' | 'OK';
 
 const LABEL_CLASSES: { [key in BackupStateType]: Variant } = {
-  Unsupported: 'plain',
+  Unsupported: 'default',
   Unset: 'danger',
   Warning: 'warning',
   OK: 'info',
@@ -26,5 +26,7 @@ export const BackupState: FunctionComponent<BackupStateIndicatorProps> = (
     label={props.resource.backup_state}
     variant={LABEL_CLASSES[props.resource.backup_state] || 'info'}
     tooltip={props.resource.last_backup}
+    outline
+    pill
   />
 );

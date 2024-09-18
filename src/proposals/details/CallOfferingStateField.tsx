@@ -12,6 +12,6 @@ export const CallOfferingStateField = ({
     label={formatCallOfferingState(row.state)}
     variant={row.state === 'accepted' ? 'success' : 'warning'}
     pill
-    light
+    outline
   />
 );
