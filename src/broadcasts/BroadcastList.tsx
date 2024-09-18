@@ -43,11 +43,13 @@ export const BroadcastList: FunctionComponent<{}> = () => {
               label={row.state}
               variant={
                 row.state === 'DRAFT'
-                  ? 'dark'
+                  ? 'default'
                   : row.state === 'SENT'
                     ? 'success'
                     : 'info'
               }
+              outline
+              pill
             />
           ),
         },

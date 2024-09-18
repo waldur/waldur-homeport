@@ -33,7 +33,7 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
           className="text-hover-primary cursor-pointer"
           size={20}
         />
-        <OrderStateField order={order} pill light hasBullet />
+        <OrderStateField order={order} pill outline hasBullet />
       </div>
       <ResourceLink
         type={order.resource_type}

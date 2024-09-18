@@ -17,6 +17,8 @@ export const PermissionRequestStateField: FunctionComponent<{ row }> = ({
             ? 'warning'
             : 'primary'
       }
+      outline
+      pill
     />
   );
 };

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Badge } from 'react-bootstrap';
 
+import { Badge } from '@waldur/core/Badge';
 import { FloatingSubmitButton } from '@waldur/form/FloatingSubmitButton';
 import { FormSteps } from '@waldur/form/FormSteps';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
@@ -33,7 +33,9 @@ export const ProposalRejectionStep: FC<{
         <div className="mb-7">
           <h4>{proposal.name}</h4>
           <p className="text-muted fst-italic fs-8">UUID: {proposal.uuid}</p>
-          <Badge bg="danger">{formatProposalState(proposal.state)}</Badge>
+          <Badge variant="danger" outline pill>
+            {formatProposalState(proposal.state)}
+          </Badge>
         </div>
 
         <h6 className="fs-7">{translate('Application progress')}</h6>

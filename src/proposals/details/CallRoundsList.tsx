@@ -48,6 +48,8 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
             <StateIndicator
               label={row.status.label}
               variant={row.status.color}
+              outline
+              pill
             />
           ),
         },

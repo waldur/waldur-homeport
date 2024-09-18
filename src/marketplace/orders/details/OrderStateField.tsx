@@ -1,6 +1,6 @@
 import { StateIndicator } from '@waldur/core/StateIndicator';
 
-export const OrderStateField = ({ order, pill, light, hasBullet }) => {
+export const OrderStateField = ({ order, pill, outline, hasBullet }) => {
   return (
     <StateIndicator
       label={order.state}
@@ -15,7 +15,7 @@ export const OrderStateField = ({ order, pill, light, hasBullet }) => {
       }
       active={false}
       pill={pill}
-      light={light}
+      outline={outline}
       hasBullet={hasBullet}
     />
   );

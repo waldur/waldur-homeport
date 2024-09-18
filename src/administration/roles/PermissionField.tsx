@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { Accordion, Badge, Card } from 'react-bootstrap';
+import { Accordion, Card } from 'react-bootstrap';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
 
 import { PermissionOptions } from './PermissionOptions';
@@ -26,13 +27,15 @@ const PermissionEntity = (props) => {
         <Accordion.Header>
           <div className="flex-grow-1">{props.entity.label}</div>{' '}
           <Badge
-            bg={
+            variant={
               accessType === 'FULL_ACCESS'
                 ? 'success'
                 : accessType === 'PARTIAL_ACCESS'
                   ? 'primary'
                   : 'danger'
             }
+            outline
+            pill
             className="mx-2"
           >
             {accessType === 'FULL_ACCESS'

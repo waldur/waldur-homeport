@@ -32,7 +32,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
             <StateIndicator
               variant={status.color}
               label={status.label}
-              light
+              outline
               pill
             />
           </div>

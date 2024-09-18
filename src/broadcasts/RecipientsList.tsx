@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Badge } from 'react-bootstrap';
 
+import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -8,7 +8,7 @@ import { useTable } from '@waldur/table/utils';
 const BadgesList = ({ items }) => (
   <>
     {items.map((c, index) => (
-      <Badge key={index} className="me-3">
+      <Badge key={index} className="me-3" outline pill>
         {c.name}
       </Badge>
     ))}

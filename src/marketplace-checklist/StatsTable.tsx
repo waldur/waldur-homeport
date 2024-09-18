@@ -35,6 +35,8 @@ export const StatsTable = ({
                     ? 'warning'
                     : 'primary'
               }
+              outline
+              pill
             />
           </td>
         </tr>

@@ -33,7 +33,7 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
             <StateIndicator
               variant={status.color}
               label={status.label}
-              light
+              outline
               pill
             />
           </div>

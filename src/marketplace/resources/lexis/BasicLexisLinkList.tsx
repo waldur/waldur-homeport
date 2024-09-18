@@ -42,6 +42,8 @@ export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
                 ? 'warning'
                 : 'primary'
           }
+          outline
+          pill
         />
       ),
     },

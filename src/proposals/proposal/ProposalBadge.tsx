@@ -1,23 +1,22 @@
-import { Badge } from 'react-bootstrap';
+import { Badge } from '@waldur/core/Badge';
 
 import { formatProposalState } from '../utils';
-import './ProposalBadge.scss';
 
 const stateColorMapping = {
-  draft: 'custom-badge-draft',
-  team_verification: 'custom-badge-team-verification',
-  submitted: 'custom-badge-submitted',
-  in_review: 'custom-badge-in-review',
-  in_revision: 'custom-badge-in-revision',
-  accepted: 'custom-badge-accepted',
-  rejected: 'custom-badge-rejected',
-  canceled: 'custom-badge-canceled',
+  draft: 'default',
+  team_verification: 'default',
+  submitted: 'warning',
+  in_review: 'warning',
+  in_revision: 'default',
+  accepted: 'primary',
+  rejected: 'danger',
+  canceled: 'danger',
 };
 
 export const ProposalBadge = ({ state }) => {
-  const className = stateColorMapping[state] || 'custom-badge-default';
+  const variant = stateColorMapping[state] || 'default';
   return (
-    <Badge className={`ms-4 ${className}`} bg={null}>
+    <Badge variant={variant} outline pill className="ms-4">
       {formatProposalState(state)}
     </Badge>
   );

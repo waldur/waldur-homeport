@@ -2,11 +2,12 @@ import classNames from 'classnames';
 import { cloneDeep } from 'lodash';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
-import { Badge, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { bookingStateAliases } from '@waldur/booking/BookingStateField';
 import { BookingResource, EventInput } from '@waldur/booking/types';
+import { Badge } from '@waldur/core/Badge';
 import { parseDate } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -167,7 +168,7 @@ export const BookingResourceListItem = ({
                     {parseDate(layout.schedule.end).toFormat("LLL dd',' HH:mm")}
                   </span>
                   {item.attributes.schedules.length > 1 && (
-                    <Badge bg="" className="badge-secondary my-1">
+                    <Badge className="my-1" outline pill>
                       {translate('+{count} more schedules', {
                         count: item.attributes.schedules.length - 1,
                       })}
