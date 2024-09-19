@@ -1,6 +1,7 @@
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { updateCallRound } from '@waldur/proposals/api';
@@ -44,15 +45,13 @@ export const EditRoundAllocationDialog: FC<EditRoundAllocationDialogProps> = (
   );
 
   return (
-    <WizardFormThirdPage
+    <WizardFormContainer
       form="RoundEditForm"
       title={translate('Edit round allocation')}
       onSubmit={submit}
-      onPrev={null}
-      onStep={null}
       submitLabel={translate('Edit')}
-      step={0}
       steps={[translate('Allocation')]}
+      wizardForms={[WizardFormThirdPage]}
       initialValues={{
         deciding_entity: initialValues.deciding_entity,
         minimal_average_scoring: initialValues.minimal_average_scoring,

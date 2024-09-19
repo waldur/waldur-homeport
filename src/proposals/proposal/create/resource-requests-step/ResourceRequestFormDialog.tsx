@@ -2,6 +2,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
+import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -14,7 +15,6 @@ import {
   ProposalResource,
   ProposalResourceFormData,
 } from '@waldur/proposals/types';
-import { CallOfferingCreateForm } from '@waldur/proposals/update/offerings/CallOfferingCreateForm';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { ResourceRequestWizardFormFirstPage } from './ResourceRequestWizardFormFirstPage';
@@ -113,7 +113,7 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
   }, [mainOffering]);
 
   return (
-    <CallOfferingCreateForm
+    <WizardFormContainer
       form="ProposalResourceForm"
       title={
         isEdit ? translate('Edit resource request') : translate('New resource')

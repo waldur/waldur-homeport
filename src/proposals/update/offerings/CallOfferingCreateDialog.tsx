@@ -2,13 +2,13 @@ import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { fixURL } from '@waldur/core/api';
+import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { createCallOffering } from '@waldur/proposals/api';
 import { CallOfferingFormData, Call } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { CallOfferingCreateForm } from './CallOfferingCreateForm';
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';
 import { WizardFormThirdPage } from './WizardFormThirdPage';
@@ -67,7 +67,8 @@ export const CallOfferingCreateDialog: FC<CallOfferingCreateDialogProps> = (
     [dispatch, props.resolve],
   );
   return (
-    <CallOfferingCreateForm
+    <WizardFormContainer
+      form="CallOfferingForm"
       title={translate('New offering')}
       submitLabel={translate('Create')}
       onSubmit={createRound}
