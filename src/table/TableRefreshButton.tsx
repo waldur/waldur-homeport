@@ -16,7 +16,10 @@ export const TableRefreshButton = (props: TableProps) =>
   (props.sorting && props.sorting.loading) ? (
     <LoadingSpinner />
   ) : (
-    <button className="btn btn-icon btn-active-light" onClick={props.fetch}>
+    <button
+      className="btn btn-icon btn-active-light"
+      onClick={() => props.fetch(true)}
+    >
       <ArrowsClockwise size={20} data-cy="loading-spinner" />
     </button>
   );

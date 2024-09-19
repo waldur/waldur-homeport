@@ -26,7 +26,7 @@ export const TablePlaceholder: FunctionComponent<TablePlaceholderProps> = ({
 
   return (
     <NoResult
-      callback={query ? clearSearch : fetch}
+      callback={query ? clearSearch : () => fetch(true)}
       title={title}
       message={
         <>

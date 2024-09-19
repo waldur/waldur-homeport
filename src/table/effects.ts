@@ -21,7 +21,7 @@ import { getTableState } from './store';
 import { TableRequest } from './types';
 
 function* fetchList(action) {
-  const { table, extraFilter, pullInterval } = action.payload;
+  const { table, extraFilter, pullInterval, force } = action.payload;
   const controller = new AbortController();
   try {
     const state = yield select(getTableState(table));
@@ -54,7 +54,7 @@ function* fetchList(action) {
       request.filter.o = orderByFilter(state.sorting);
     }
     request.options = { signal: controller.signal };
-    if (options.staleTime) {
+    if (options.staleTime && !force) {
       request.options.staleTime = options.staleTime;
     }
 
