@@ -113,9 +113,14 @@ export const useTable = (options: TableOptionsType) => {
   const dispatch = useDispatch();
 
   const fetch = useCallback(
-    () =>
+    (force = false) =>
       dispatch(
-        actions.fetchListStart(table, options.filter, options.pullInterval),
+        actions.fetchListStart(
+          table,
+          options.filter,
+          options.pullInterval,
+          force,
+        ),
       ),
     [dispatch, table, options.filter, options.pullInterval],
   );

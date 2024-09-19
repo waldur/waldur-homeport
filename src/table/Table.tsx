@@ -39,7 +39,7 @@ import './Table.scss';
 export interface TableProps<RowType = any> extends TableState {
   table?: string;
   rows: any[];
-  fetch: () => void;
+  fetch: (force?: boolean) => void;
   gotoPage?: (page: number) => void;
   hasQuery?: boolean;
   setQuery?: (query: string) => void;

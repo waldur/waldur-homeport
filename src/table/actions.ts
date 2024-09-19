@@ -40,12 +40,14 @@ export const fetchListStart = (
   table: string,
   extraFilter?: Record<string, any>,
   pullInterval?: number | (() => number),
+  force?: boolean,
 ) => ({
   type: FETCH_LIST_START,
   payload: {
     table,
     extraFilter,
     pullInterval,
+    force,
   },
 });
 
