@@ -3,6 +3,7 @@ import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { parseDate } from '@waldur/core/dateUtils';
+import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { updateCallRound } from '@waldur/proposals/api';
@@ -50,15 +51,13 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
   );
 
   return (
-    <WizardFormFirstPage
+    <WizardFormContainer
       form="RoundEditForm"
       title={translate('Edit round submission')}
-      onSubmit={submit}
-      onPrev={null}
-      onStep={null}
       submitLabel={translate('Edit')}
-      step={0}
+      onSubmit={submit}
       steps={[translate('Submission')]}
+      wizardForms={[WizardFormFirstPage]}
       initialValues={{
         timezone: DateTime.local().zoneName,
         start_time: props.resolve.round.start_time,

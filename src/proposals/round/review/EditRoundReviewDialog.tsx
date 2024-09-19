@@ -1,6 +1,7 @@
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { updateCallRound } from '@waldur/proposals/api';
@@ -44,15 +45,13 @@ export const EditRoundReviewDialog: FC<EditRoundReviewDialogProps> = (
   );
 
   return (
-    <WizardFormSecondPage
+    <WizardFormContainer
       form="RoundEditForm"
       title={translate('Edit round review')}
       onSubmit={submit}
-      onPrev={null}
-      onStep={null}
       submitLabel={translate('Edit')}
-      step={0}
       steps={[translate('Review')]}
+      wizardForms={[WizardFormSecondPage]}
       initialValues={{
         review_strategy: initialValues.review_strategy,
         review_duration_in_days: initialValues.review_duration_in_days,

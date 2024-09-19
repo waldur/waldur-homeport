@@ -41,7 +41,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
                 if (planObject) {
                   wizardProps.change('plan', planObject);
                 }
-              } else {
+              } else if (typeof plan !== 'object') {
                 wizardProps.change('plan', null);
               }
             }

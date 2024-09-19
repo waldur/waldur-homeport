@@ -24,6 +24,7 @@ export interface WizardFormStepProps
   onStep?(step: number): void;
   validate?(values: any): any;
   data?: any;
+  reinitialize(): void;
 }
 
 interface WizardFormProps extends WizardFormStepProps, InjectedFormProps {
@@ -35,6 +36,7 @@ interface WizardFormProps extends WizardFormStepProps, InjectedFormProps {
 const WizardFormPure: FC<WizardFormProps> = (props) => {
   useEffect(() => {
     // Touch the form at the beginning to avoid going to the next step without a validation
+    props.reinitialize();
     if (!props.anyTouched) props.touch();
   }, []);
 
@@ -102,7 +104,6 @@ export const WizardForm = compose(
   reduxForm<{}, any>({
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
-    enableReinitialize: true,
     keepDirtyOnReinitialize: true,
   }),
 )(WizardFormPure);
