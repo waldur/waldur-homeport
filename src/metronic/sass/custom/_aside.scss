@@ -61,6 +61,10 @@
     }
   }
 
+  &:not(:hover) .aside-logo #kt_aside_toggle {
+    display: none;
+  }
+
   .aside-footer.has-divider::before {
     content: ' ';
     height: 1px;

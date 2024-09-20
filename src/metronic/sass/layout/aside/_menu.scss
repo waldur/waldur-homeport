@@ -192,6 +192,9 @@ $asides: (
         }
       }
     }
+    .aside-logo {
+      @include svg-icon-color(get($value, icon));
+    }
     .aside-footer.has-divider::before {
       background: get($value, footer-separator);
     }
