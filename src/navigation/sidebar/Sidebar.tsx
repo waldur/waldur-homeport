@@ -13,8 +13,6 @@ import { useLayout } from '@waldur/metronic/layout/core';
 import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
 
-import './Sidebar.scss';
-
 export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
   const layout = useLayout();

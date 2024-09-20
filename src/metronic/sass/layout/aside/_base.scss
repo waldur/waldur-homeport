@@ -107,7 +107,7 @@
       justify-content: space-between;
       align-items: center;
       height: get($header-config, default, height, desktop);
-      padding: 0 get($aside-config, padding-x);
+      padding: 0 get($aside-config, margin-x);
     }
 
     .logo_mobile {
