@@ -1,11 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { Table, createFetcher } from '@waldur/table';
 import { SLUG_COLUMN } from '@waldur/table/slug';
+import { Column } from '@waldur/table/types';
 import { renderFieldOrDash, useTable } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -70,7 +72,7 @@ export const PublicOfferingsList: FunctionComponent<{
     mandatoryFields,
   });
 
-  const columns = [
+  const columns: Column[] = [
     {
       title: translate('Name'),
       render: ({ row }: { row: Offering }) => (
@@ -120,6 +122,14 @@ export const PublicOfferingsList: FunctionComponent<{
     });
   }
 
+  columns.push({
+    title: translate('Created at'),
+    render: ({ row }) => formatDateTime(row.created),
+    orderField: 'created',
+    id: 'created',
+    keys: ['created'],
+  });
+
   return (
     <Table
       {...props}
@@ -134,6 +144,7 @@ export const PublicOfferingsList: FunctionComponent<{
           showOrganization={showOrganization}
         />
       }
+      initialSorting={{ field: 'created', mode: 'desc' }}
       initialMode={initialMode === 'table' ? 'table' : 'grid'}
       standalone
       title={translate('Offerings')}
