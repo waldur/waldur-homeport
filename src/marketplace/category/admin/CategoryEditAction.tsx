@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { EditAction } from '@waldur/form/EditAction';
 import { openModalDialog } from '@waldur/modal/actions';
 
 const CategoryEditDialog = lazyComponent(
@@ -10,7 +10,7 @@ const CategoryEditDialog = lazyComponent(
   'CategoryEditDialog',
 );
 
-export const CategoryEditButton = ({ row, refetch }) => {
+export const CategoryEditAction = ({ row, refetch }) => {
   const dispatch = useDispatch();
   const openFormDialog = useCallback(
     () =>
@@ -23,5 +23,5 @@ export const CategoryEditButton = ({ row, refetch }) => {
     [dispatch],
   );
 
-  return <EditButton onClick={openFormDialog} size="sm" />;
+  return <EditAction action={openFormDialog} />;
 };

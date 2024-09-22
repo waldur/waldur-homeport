@@ -204,7 +204,7 @@
     "message": "Action"
   },
   "Actions": {
-    "description": "customer/payments/PaymentsList.tsx, invitations/UserPermissionRequestsList.tsx, invoices/details/InvoiceItemActions.tsx, marketplace/offerings/actions/ActionsDropdown.tsx, marketplace/offerings/update/plans/PlanActions.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsListActions.tsx, proposals/update/CallActions.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, table/ActionsDropdown.tsx, table/TableColumnsButton.tsx, table/TableHeader.tsx, user/keys/KeysList.tsx",
+    "description": "customer/payments/PaymentsList.tsx, invitations/UserPermissionRequestsList.tsx, invoices/details/InvoiceItemActions.tsx, marketplace/category/admin/ColumnsList.tsx, marketplace/offerings/actions/ActionsDropdown.tsx, marketplace/offerings/update/plans/PlanActions.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsListActions.tsx, proposals/update/CallActions.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, table/ActionsDropdown.tsx, table/TableColumnsButton.tsx, table/TableHeader.tsx, user/keys/KeysList.tsx",
     "message": "Actions"
   },
   "Activate": {
@@ -274,6 +274,10 @@
   "Add call attachments": {
     "description": "proposals/update/documents/AttachDocumentsDialog.tsx",
     "message": "Add call attachments"
+  },
+  "Add column": {
+    "description": "marketplace/category/admin/ColumnsList.tsx",
+    "message": "Add column"
   },
   "Add comment": {
     "description": "issues/comments/IssueCommentsFormMainContainer.spec.tsx, issues/comments/IssueCommentsFormMainContainer.tsx, proposals/proposal/create-review/AddCommentButton.tsx, proposals/proposal/create-review/CommentFormDialog.tsx",
@@ -396,7 +400,7 @@
     "message": "Add {category}"
   },
   "Add": {
-    "description": "administration/providers/CreateProviderDialog.tsx, core/AddButton.tsx, customer/list/OrganizationCreateButton.tsx, customer/team/AddProjectUserButton.tsx, customer/team/UserAddButton.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/deploy/DeployPage.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-instance/deploy/FormNetworkStep.tsx, project/GlobalProjectCreateButton.tsx, project/ProjectCreateButton.tsx, rancher/cluster/create/FormNodesStep.tsx",
+    "description": "administration/providers/CreateProviderDialog.tsx, core/AddButton.tsx, customer/list/OrganizationCreateButton.tsx, customer/team/AddProjectUserButton.tsx, customer/team/UserAddButton.tsx, form/EditAction.tsx, issues/comments/IssueCommentsForm.tsx, marketplace/deploy/DeployPage.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-instance/deploy/FormNetworkStep.tsx, project/GlobalProjectCreateButton.tsx, project/ProjectCreateButton.tsx, rancher/cluster/create/FormNodesStep.tsx",
     "message": "Add"
   },
   "Additional account description invisible to user": {
@@ -900,7 +904,7 @@
     "message": "Are you sure you want to delete the {title} category group?"
   },
   "Are you sure you want to delete the {title} category?": {
-    "description": "marketplace/category/admin/CategoryDeleteButton.tsx",
+    "description": "marketplace/category/admin/CategoryDeleteAction.tsx",
     "message": "Are you sure you want to delete the {title} category?"
   },
   "Are you sure you want to delete this offering?": {
@@ -954,6 +958,10 @@
   "Are you sure you want to remove the {name} resource request?": {
     "description": "proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx",
     "message": "Are you sure you want to remove the {name} resource request?"
+  },
+  "Are you sure you want to remove this column: {title}?": {
+    "description": "marketplace/category/admin/ColumnsList.tsx",
+    "message": "Are you sure you want to remove this column: {title}?"
   },
   "Are you sure you want to remove {userName}?": {
     "description": "customer/team/UserRemoveButton.tsx, project/team/UserRemoveButton.tsx, proposals/team/UserRemoveButton.tsx",
@@ -1128,7 +1136,7 @@
     "message": "Attribute has been updated."
   },
   "Attribute": {
-    "description": "marketplace/offerings/update/attributes/EditAttributeDialog.tsx",
+    "description": "marketplace/category/admin/ColumnsList.tsx, marketplace/offerings/update/attributes/EditAttributeDialog.tsx",
     "message": "Attribute"
   },
   "Attributes": {
@@ -1627,6 +1635,10 @@
     "description": "administration/dashboard/AdminStatistics.tsx, administration/routes.ts, marketplace/category/admin/AdminCategoriesPage.tsx, navigation/sidebar/marketplace-popup/CategoriesPanel.tsx",
     "message": "Categories"
   },
+  "Category columns have been successfully saved.": {
+    "description": "marketplace/category/utils.ts",
+    "message": "Category columns have been successfully saved."
+  },
   "Category groups": {
     "description": "administration/routes.ts, marketplace/category/admin/CategoryGroupsList.tsx",
     "message": "Category groups"
@@ -1638,6 +1650,10 @@
   "Category name": {
     "description": "invoices/list/InvoicesStatsList.tsx",
     "message": "Category name"
+  },
+  "Category {category} does not contain a column yet.": {
+    "description": "marketplace/category/admin/ColumnsList.tsx",
+    "message": "Category {category} does not contain a column yet."
   },
   "Category": {
     "description": "marketplace/category/PublicOfferingsList.tsx, marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/attributes/AttributesSection.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/PublicResourcesFilter.tsx, marketplace/resources/list/PublicResourcesList.tsx, marketplace/resources/list/ResourcesAllListTable.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace-checklist/ChecklistCustomer.tsx, proposals/proposal/create/ResourceRequestsSummary.tsx, proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx",
@@ -1843,6 +1859,10 @@
     "description": "azure/sql/AzureSQLDatabaseSummary.tsx",
     "message": "Collation"
   },
+  "Column has been removed successfully.": {
+    "description": "marketplace/category/admin/ColumnsList.tsx",
+    "message": "Column has been removed successfully."
+  },
   "Comma-separated list of columns for users table.": {
     "description": "SettingsDescription.ts",
     "message": "Comma-separated list of columns for users table."
@@ -1955,6 +1975,10 @@
     "description": "rancher/template/TemplateDetail.tsx",
     "message": "Configuration"
   },
+  "Configure columns": {
+    "description": "marketplace/category/admin/CategoryManageColumns.tsx",
+    "message": "Configure columns"
+  },
   "Configure request": {
     "description": "proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx",
     "message": "Configure request"
@@ -1980,7 +2004,7 @@
     "message": "Confirmation notification template"
   },
   "Confirmation": {
-    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invitations/GroupInvitationCancelButton.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/category/admin/CategoryDeleteButton.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/details/CustomerField.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, rancher/cluster/create/FormNodesStep.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserTermination.tsx",
+    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invitations/GroupInvitationCancelButton.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/ColumnsList.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/details/CustomerField.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, rancher/cluster/create/FormNodesStep.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserTermination.tsx",
     "message": "Confirmation"
   },
   "Confirming that data is correct": {
@@ -3403,6 +3427,10 @@
     "description": "marketplace/category/admin/AdminCategoriesPage.tsx",
     "message": "Error in fetching groups"
   },
+  "Error loading columns.": {
+    "description": "marketplace/category/admin/CategoryColumnsForm.tsx",
+    "message": "Error loading columns."
+  },
   "Error message": {
     "description": "events/ExpandableEventDetailsTable.tsx, invitations/InvitationExpandableRow.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/resource-pending/ResourceOrderErrorDialog.tsx, resource/summary/ErrorMessageField.tsx",
     "message": "Error message"
@@ -4387,6 +4415,14 @@
     "description": "customer/details/CustomerErrorDialog.tsx",
     "message": "Incorrect organization details"
   },
+  "Index allows to reorder columns": {
+    "description": "marketplace/category/admin/ColumnRow.tsx",
+    "message": "Index allows to reorder columns"
+  },
+  "Index": {
+    "description": "marketplace/category/admin/ColumnsList.tsx",
+    "message": "Index"
+  },
   "Industrial biotechnology": {
     "description": "project/OECD_FOS_2007_CODES.ts",
     "message": "Industrial biotechnology"
@@ -4974,6 +5010,10 @@
   "Loading": {
     "description": "core/InfiniteList.tsx, customer/list/TotalCostComponent.tsx, marketplace/deploy/steps/FormCloudStep.tsx, openstack/openstack-instance/deploy/FormImageStep.tsx, vmware/deploy/FormTemplateStep.tsx",
     "message": "Loading"
+  },
+  "Loading...": {
+    "description": "marketplace/category/admin/CategoryColumnsForm.tsx",
+    "message": "Loading..."
   },
   "Local identity provider": {
     "description": "administration/providers/IdentityProvidersList.tsx",
@@ -5852,7 +5892,7 @@
     "message": "Non-detachable and non-resizable boot disk"
   },
   "None": {
-    "description": "openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx",
+    "description": "marketplace/category/admin/ColumnRow.tsx, openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx",
     "message": "None"
   },
   "Not allowed": {
@@ -7960,7 +8000,7 @@
     "message": "Remove organization"
   },
   "Remove": {
-    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerManageContainer.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, form/DateField.tsx, form/WideImageField.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/category/admin/CategoryDeleteButton.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/offerings/RemoveButton.tsx, marketplace/offerings/update/ImageUploadField.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, project/ProjectManageContainer.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/documents/RemoveDocumentButton.tsx, user/hooks/HookRemoveButton.tsx, user/keys/KeyRemoveButton.tsx",
+    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerManageContainer.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, form/DateField.tsx, form/WideImageField.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/offerings/RemoveButton.tsx, marketplace/offerings/update/ImageUploadField.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, project/ProjectManageContainer.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/documents/RemoveDocumentButton.tsx, user/hooks/HookRemoveButton.tsx, user/keys/KeyRemoveButton.tsx",
     "message": "Remove"
   },
   "Removed organizations cannot be restored!": {
@@ -8250,6 +8290,10 @@
   "Resource already has this plan.": {
     "description": "marketplace/resources/change-plan/utils.tsx",
     "message": "Resource already has this plan."
+  },
+  "Resource attribute is rendered as table cell": {
+    "description": "marketplace/category/admin/ColumnRow.tsx",
+    "message": "Resource attribute is rendered as table cell"
   },
   "Resource availability": {
     "description": "proposals/call-management/CallExpandableRow.tsx",
@@ -9350,6 +9394,10 @@
   "Set backend ID": {
     "description": "marketplace/resources/SetBackendIdAction.tsx, marketplace/resources/SetBackendIdButton.tsx, marketplace/resources/SetBackendIdDialog.tsx",
     "message": "Set backend ID"
+  },
+  "Set columns in {name} category": {
+    "description": "marketplace/category/admin/CategoryColumnsForm.tsx",
+    "message": "Set columns in {name} category"
   },
   "Set external username": {
     "description": "marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx",
@@ -10607,8 +10655,12 @@
     "description": "events/BaseEventsList.tsx",
     "message": "Timestamp"
   },
+  "Title is rendered as column header": {
+    "description": "marketplace/category/admin/ColumnRow.tsx",
+    "message": "Title is rendered as column header"
+  },
   "Title": {
-    "description": "issues/create/IssueCreateDialog.tsx, issues/list/IssuesList.tsx, marketplace/category/admin/AdminCategoriesPage.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/CategoryGroupsList.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/referral/ReferralsList.tsx, user/keys/KeysList.tsx",
+    "description": "issues/create/IssueCreateDialog.tsx, issues/list/IssuesList.tsx, marketplace/category/admin/AdminCategoriesPage.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/CategoryGroupsList.tsx, marketplace/category/admin/ColumnsList.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/referral/ReferralsList.tsx, user/keys/KeysList.tsx",
     "message": "Title"
   },
   "To accept the invitation, please sign in to your account.": {
@@ -11480,8 +11532,12 @@
     "message": "Unable to remove category group."
   },
   "Unable to remove category.": {
-    "description": "marketplace/category/admin/CategoryDeleteButton.tsx",
+    "description": "marketplace/category/admin/CategoryDeleteAction.tsx",
     "message": "Unable to remove category."
+  },
+  "Unable to remove column.": {
+    "description": "marketplace/category/admin/ColumnsList.tsx",
+    "message": "Unable to remove column."
   },
   "Unable to remove component.": {
     "description": "marketplace/offerings/update/components/DeleteComponentButton.tsx",
@@ -11554,6 +11610,10 @@
   "Unable to save broadcast.": {
     "description": "broadcasts/BroadcastFooter.tsx",
     "message": "Unable to save broadcast."
+  },
+  "Unable to save category columns. Please try again.": {
+    "description": "marketplace/category/utils.ts",
+    "message": "Unable to save category columns. Please try again."
   },
   "Unable to save location.": {
     "description": "customer/list/store/effects.ts, marketplace/offerings/update/overview/OfferingLocationButton.tsx",
@@ -12758,6 +12818,14 @@
   "Why would you want to go away? Help us become better please!": {
     "description": "user/support/UserDeleteAccount.tsx",
     "message": "Why would you want to go away? Help us become better please!"
+  },
+  "Widget field allows to customise table cell rendering": {
+    "description": "marketplace/category/admin/ColumnRow.tsx",
+    "message": "Widget field allows to customise table cell rendering"
+  },
+  "Widget": {
+    "description": "marketplace/category/admin/ColumnsList.tsx",
+    "message": "Widget"
   },
   "Worker": {
     "description": "rancher/cluster/create/FormNodesStep.tsx, rancher/cluster/create/NodeRoleField.tsx",

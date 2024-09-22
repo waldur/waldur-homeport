@@ -190,6 +190,7 @@ export interface Section {
 }
 
 export interface CategoryColumn {
+  uuid?: string;
   index: number;
   title: string;
   attribute?: string;
