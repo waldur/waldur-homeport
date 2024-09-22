@@ -5,17 +5,17 @@ import { useDispatch } from 'react-redux';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { removeCategory } from './api';
 
-interface CategoryDeleteButtonProps {
+interface CategoryDeleteActionProps {
   row: Category;
   refetch;
 }
 
-export const CategoryDeleteButton = (props: CategoryDeleteButtonProps) => {
+export const CategoryDeleteAction = (props: CategoryDeleteActionProps) => {
   const dispatch = useDispatch();
   const [removing, setRemoving] = useState(false);
 
@@ -45,13 +45,12 @@ export const CategoryDeleteButton = (props: CategoryDeleteButtonProps) => {
   }, [dispatch, setRemoving, props]);
 
   return (
-    <RowActionButton
+    <ActionItem
       title={translate('Remove')}
+      className="text-danger"
       action={openDialog}
-      variant="outline-danger"
       iconNode={<Trash />}
-      pending={removing}
-      size="sm"
+      disabled={removing}
     />
   );
 };

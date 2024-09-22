@@ -14,8 +14,7 @@ import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
 import { CategoryCreateButton } from './CategoryCreateButton';
-import { CategoryDeleteButton } from './CategoryDeleteButton';
-import { CategoryEditButton } from './CategoryEditButton';
+import { CategoryRowActions } from './CategoryRowActions';
 
 const categoryFields = {
   fields: ['uuid', 'title', 'description', 'icon', 'offering_count', 'group'],
@@ -110,10 +109,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
       verboseName={translate('Categories')}
       initialSorting={{ field: 'title', mode: 'desc' }}
       rowActions={({ row }) => (
-        <>
-          <CategoryEditButton row={row} refetch={tableProps.fetch} />
-          <CategoryDeleteButton row={row} refetch={tableProps.fetch} />
-        </>
+        <CategoryRowActions row={row} refetch={tableProps.fetch} />
       )}
       hasQuery={true}
       tableActions={<CategoryCreateButton refetch={tableProps.fetch} />}
