@@ -37,9 +37,9 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Tenant'),
     id: 'step-tenant',
-    fields: ['attributes.tenant_settings'],
+    fields: ['attributes.tenant'],
     required: true,
-    requiredFields: ['attributes.tenant_settings'],
+    requiredFields: ['attributes.tenant'],
     component: FormTenantStep,
   },
   {

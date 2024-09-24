@@ -1,7 +1,6 @@
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import {
   INSTANCE_TYPE,
-  SHARED_INSTANCE_TYPE,
   TENANT_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
@@ -12,7 +11,6 @@ export const VALID_OFFERING_TYPES = [
   TENANT_TYPE,
   VOLUME_TYPE,
   INSTANCE_TYPE,
-  SHARED_INSTANCE_TYPE,
   SLURM_PLUGIN,
   MARKETPLACE_RANCHER,
   OFFERING_TYPE_CUSTOM_SCRIPTS,

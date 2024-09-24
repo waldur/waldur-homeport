@@ -6,30 +6,6 @@ const OpenStackForm = lazyComponent(
   () => import('./OpenStackForm'),
   'OpenStackForm',
 );
-const OpenStackTenantForm = lazyComponent(
-  () => import('./OpenStackTenantForm'),
-  'OpenStackTenantForm',
-);
-
-ProvidersRegistry.register({
-  name: 'OpenStack',
-  type: 'OpenStackTenant',
-  icon: 'icon-openstack.png',
-  endpoint: 'openstacktenant',
-  component: OpenStackTenantForm,
-  serializer: pick([
-    'backend_url',
-    'username',
-    'password',
-    'tenant_id',
-    'external_network_id',
-    'domain',
-    'availability_zone',
-    'flavor_exclude_regex',
-    'volume_type_blacklist',
-    'verify_ssl',
-  ]),
-});
 
 ProvidersRegistry.register({
   name: 'OpenStack',
@@ -49,5 +25,7 @@ ProvidersRegistry.register({
     'max_concurrent_provision_instance',
     'max_concurrent_provision_volume',
     'max_concurrent_provision_snapshot',
+    'flavor_exclude_regex',
+    'volume_type_blacklist',
   ]),
 });

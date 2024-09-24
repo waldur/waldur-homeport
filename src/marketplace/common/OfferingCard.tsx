@@ -15,7 +15,6 @@ import vmwareIcon from '@waldur/images/appstore/icon-vmware.png';
 import Placeholder from '@waldur/images/logo_w.svg';
 import {
   INSTANCE_TYPE,
-  SHARED_INSTANCE_TYPE,
   TENANT_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
@@ -36,7 +35,6 @@ const getOfferingImage = (offering: Offering) => {
   if (offering.thumbnail) return offering.thumbnail;
   switch (offering.type) {
     case INSTANCE_TYPE:
-    case SHARED_INSTANCE_TYPE:
     case VOLUME_TYPE:
     case TENANT_TYPE:
       return openstackIcon;

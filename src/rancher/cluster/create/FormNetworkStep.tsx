@@ -21,7 +21,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
 
   const { data, isLoading } = useQuery(
     ['network-step', tenant?.url],
-    () => (tenant ? formatSubnets(tenant.url) : []),
+    () => (tenant ? formatSubnets(tenant.uuid) : []),
     { staleTime: 3 * 60 * 1000 },
   );
 

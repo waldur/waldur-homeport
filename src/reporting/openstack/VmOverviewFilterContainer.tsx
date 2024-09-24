@@ -1,16 +1,16 @@
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 
+import { getAll } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
-import { loadServiceProviders } from './api';
 import { formatServiceProviders } from './utils';
 import { VmOverviewFilter } from './VmOverviewFilter';
 
 const VmOverviewFilterComponent = (props) => {
   const { error, value, loading } = useAsync(async () => {
-    const serviceProviders = await loadServiceProviders();
+    const serviceProviders = await getAll('/openstack-tenants/');
     return formatServiceProviders(serviceProviders);
   }, []);
   if (loading) {

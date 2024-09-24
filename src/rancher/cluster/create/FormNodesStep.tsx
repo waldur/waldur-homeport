@@ -182,19 +182,19 @@ const renderNodeRows = ({ fields, flavors }: any) => {
 
 export const FormNodesStep = (props: FormStepProps) => {
   const dispatch = useDispatch();
-  const tenantSettings = useSelector(formTenantSelector);
+  const tenant = useSelector(formTenantSelector);
 
-  const { data: volumeData } = useVolumeDataLoader(tenantSettings);
+  const { data: volumeData } = useVolumeDataLoader(tenant);
   const { data: templates, isLoading: templateLoading } = useQuery(
     ['nodes-step-templates'],
     () => listClusterTemplates(),
     { staleTime: 3 * 60 * 1000 },
   );
   const { data: flavors, isLoading } = useQuery<{}, {}, Flavor[]>(
-    ['nodes-step-flavors', tenantSettings?.url, props.offering.uuid],
+    ['nodes-step-flavors', tenant?.url, props.offering.uuid],
     () =>
-      tenantSettings && props.offering
-        ? filterFlavors(tenantSettings.scope_uuid, props.offering)
+      tenant && props.offering
+        ? filterFlavors(tenant.uuid, props.offering)
         : [],
     { staleTime: 3 * 60 * 1000 },
   );

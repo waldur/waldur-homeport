@@ -12,7 +12,6 @@ import { InstanceComponents } from './openstack-instance/InstanceComponents';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';
-import { ResourceShowMoreComponents } from './ResourceShowMoreComponents';
 import { VolumeComponents } from './VolumeComponents';
 
 export const ResourceDetailsHero = ({
@@ -59,14 +58,6 @@ export const ResourceDetailsHero = ({
           ) : (
             <ResourceComponents resource={resource} components={components} />
           )
-        }
-        quickFooter={
-          components?.length > 4 && resource.offering_type !== VOLUME_TYPE ? (
-            <ResourceShowMoreComponents
-              resource={resource}
-              components={components}
-            />
-          ) : null
         }
       >
         <ResourceDetailsHeaderBody resource={resource} offering={offering} />
