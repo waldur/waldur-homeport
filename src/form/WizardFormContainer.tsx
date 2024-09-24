@@ -46,6 +46,9 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
   // Can not use enableReinitialize on reduxForm because of infinite render loop issue
   const reinitialize = useCallback(() => {
     if (initialized) return;
+    if (!props.initialValues) {
+      return;
+    }
     uniq(
       Object.keys(props.initialValues).concat(Object.keys(formValues)),
     ).forEach((key) => {
