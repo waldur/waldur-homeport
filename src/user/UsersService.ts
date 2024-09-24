@@ -50,8 +50,9 @@ class UsersServiceClass {
   isCurrentUserValid() {
     return this.getCurrentUser().then((user) => {
       return (
-        !this.mandatoryFieldsMissing(user) &&
-        (user as UserDetails).agreement_date
+        user.is_staff ||
+        (!this.mandatoryFieldsMissing(user) &&
+          (user as UserDetails).agreement_date)
       );
     });
   }
