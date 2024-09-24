@@ -80,12 +80,12 @@ export const loadData = async (cluster: Cluster, offering: Offering) => {
   };
 };
 
-export const useVolumeDataLoader = (tenantSettings) => {
+export const useVolumeDataLoader = (tenant) => {
   return useQuery(
-    ['volumeTypes', tenantSettings],
+    ['volumeTypes', tenant],
     async () => {
-      const volumeTypes = tenantSettings
-        ? await loadVolumeTypes({ tenant: tenantSettings.scope })
+      const volumeTypes = tenant
+        ? await loadVolumeTypes({ tenant: tenant.url })
         : [];
       const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
       const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
@@ -111,7 +111,7 @@ export const getDataVolumes = (nodeIndex, allValues) => {
 };
 
 export const formTenantSelector = (state: RootState) =>
-  formValueSelector(ORDER_FORM_ID)(state, 'attributes.tenant_settings');
+  formValueSelector(ORDER_FORM_ID)(state, 'attributes.tenant');
 
 export const formNodesSelector = (state: RootState): NodeField[] =>
   formValueSelector(ORDER_FORM_ID)(state, 'attributes.nodes');

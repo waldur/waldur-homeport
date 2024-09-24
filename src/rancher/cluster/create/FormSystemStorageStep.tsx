@@ -19,9 +19,9 @@ import {
 } from './utils';
 
 export const FormSystemStorageStep = (props: FormStepProps) => {
-  const tenantSettings = useSelector(formTenantSelector);
+  const tenant = useSelector(formTenantSelector);
   const nodes = useSelector(formNodesSelector);
-  const { data, isLoading } = useVolumeDataLoader(tenantSettings);
+  const { data, isLoading } = useVolumeDataLoader(tenant);
 
   const limit = 10240; // GB
 

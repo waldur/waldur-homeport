@@ -68,7 +68,7 @@
     "message": "A profile has been created."
   },
   "API URL": {
-    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts",
+    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts, openstack/OpenStackForm.tsx, openstack/marketplace.ts",
     "message": "API URL"
   },
   "API secret code:": {
@@ -1208,7 +1208,7 @@
     "message": "Automatic based on review scoring"
   },
   "Availability zone": {
-    "description": "azure/vm/AzureVirtualMachineForm.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-instance/OpenStackInstanceSummary.tsx, openstack/openstack-instance/OpenstackInstanceDetails.tsx, openstack/openstack-volume/OpenStackVolumeSummary.tsx, openstack/openstack-volume/OpenstackVolumeDetails.tsx",
+    "description": "azure/vm/AzureVirtualMachineForm.tsx, openstack/OpenStackForm.tsx, openstack/marketplace.ts, openstack/openstack-instance/OpenStackInstanceSummary.tsx, openstack/openstack-instance/OpenstackInstanceDetails.tsx, openstack/openstack-volume/OpenStackVolumeSummary.tsx, openstack/openstack-volume/OpenstackVolumeDetails.tsx",
     "message": "Availability zone"
   },
   "Availability": {
@@ -1356,7 +1356,7 @@
     "message": "Biological sciences"
   },
   "Blacklisted volume types": {
-    "description": "openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "Blacklisted volume types"
   },
   "Block creation of new resources": {
@@ -2604,7 +2604,7 @@
     "message": "Default account"
   },
   "Default availability zone for provisioned instances.": {
-    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "Default availability zone for provisioned instances."
   },
   "Default cluster label": {
@@ -2967,12 +2967,8 @@
     "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, openstack/OpenStackForm.tsx, openstack/marketplace.ts",
     "message": "Domain name"
   },
-  "Domain name. If not defined default domain will be used.": {
-    "description": "openstack/OpenStackTenantForm.tsx",
-    "message": "Domain name. If not defined default domain will be used."
-  },
   "Domain": {
-    "description": "openstack/OpenStackTenantForm.tsx, user/affiliations/BaseOrganizationsList.tsx",
+    "description": "user/affiliations/BaseOrganizationsList.tsx",
     "message": "Domain"
   },
   "Done": {
@@ -3664,7 +3660,7 @@
     "message": "External links"
   },
   "External network ID": {
-    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, resource/summary/ResourceMetadataDialog.tsx",
+    "description": "openstack/OpenStackForm.tsx, openstack/marketplace.ts, resource/summary/ResourceMetadataDialog.tsx",
     "message": "External network ID"
   },
   "External username": {
@@ -3812,7 +3808,7 @@
     "message": "Flavor change has been scheduled."
   },
   "Flavor exclude regex": {
-    "description": "openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "Flavor exclude regex"
   },
   "Flavor name": {
@@ -3828,7 +3824,7 @@
     "message": "Flavor"
   },
   "Flavors matching this regex expression will not be pulled from the backend.": {
-    "description": "openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "Flavors matching this regex expression will not be pulled from the backend."
   },
   "Flavors regex": {
@@ -4780,7 +4776,7 @@
     "message": "It is used in marketplace order header."
   },
   "It is used to automatically assign floating IP to your virtual machine.": {
-    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "It is used to automatically assign floating IP to your virtual machine."
   },
   "Item {item} has been moved from invoice {origin} to {target}.": {
@@ -4840,7 +4836,7 @@
     "message": "Keys"
   },
   "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)": {
-    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
   },
   "Kubeconfig file": {
@@ -4979,9 +4975,9 @@
     "description": "navigation/header/favorite-pages/FavoritePageService.ts",
     "message": "List of all resources"
   },
-  "List of coma-separated strings volume types.": {
-    "description": "openstack/OpenStackTenantForm.tsx",
-    "message": "List of coma-separated strings volume types."
+  "List of coma-separated volume types which should not be possible to select when creating VM/Volume.": {
+    "description": "openstack/OpenStackForm.tsx",
+    "message": "List of coma-separated volume types which should not be possible to select when creating VM/Volume."
   },
   "List of enabled languages": {
     "description": "SettingsDescription.ts",
@@ -6355,10 +6351,6 @@
     "description": "features/FeaturesDescription.ts",
     "message": "OpenStack resources provisioning"
   },
-  "OpenStack shared instance": {
-    "description": "openstack/openstack-instance/marketplace.ts",
-    "message": "OpenStack shared instance"
-  },
   "OpenStack subnet": {
     "description": "openstack/openstack-subnet/EditSubnetDialog.tsx",
     "message": "OpenStack subnet"
@@ -6652,7 +6644,7 @@
     "message": "Password for access user"
   },
   "Password": {
-    "description": "auth/SigninForm.tsx, azure/sql/AzureSQLServerSummary.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, vmware/VMwareForm.tsx",
+    "description": "auth/SigninForm.tsx, azure/sql/AzureSQLServerSummary.tsx, openstack/OpenStackForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, vmware/VMwareForm.tsx",
     "message": "Password"
   },
   "Pause offering": {
@@ -10200,7 +10192,7 @@
     "message": "Temporarily block account"
   },
   "Tenant ID": {
-    "description": "azure/provider/AzureForm.tsx, openstack/OpenStackTenantForm.tsx",
+    "description": "azure/provider/AzureForm.tsx",
     "message": "Tenant ID"
   },
   "Tenant name": {
@@ -10208,11 +10200,11 @@
     "message": "Tenant name"
   },
   "Tenant user password": {
-    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "Tenant user password"
   },
   "Tenant user username": {
-    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "Tenant user username"
   },
   "Tenant": {
@@ -12528,7 +12520,7 @@
     "message": "Username prefix"
   },
   "Username": {
-    "description": "administration/TokensList.tsx, auth/SigninForm.tsx, customer/team/CustomerUsersList.tsx, customer/team/UserGroup.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, project/team/ProjectUsersList.tsx, project/team/UserGroup.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, slurm/marketplace.ts, user/UserOfferingList.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
+    "description": "administration/TokensList.tsx, auth/SigninForm.tsx, customer/team/CustomerUsersList.tsx, customer/team/UserGroup.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, openstack/OpenStackForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, project/team/ProjectUsersList.tsx, project/team/UserGroup.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, slurm/marketplace.ts, user/UserOfferingList.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
     "message": "Username"
   },
   "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.).": {
@@ -12680,7 +12672,7 @@
     "message": "Verify SSL"
   },
   "Verify server certificate": {
-    "description": "openstack/OpenStackForm.tsx, openstack/OpenStackTenantForm.tsx",
+    "description": "openstack/OpenStackForm.tsx",
     "message": "Verify server certificate"
   },
   "Verify team": {

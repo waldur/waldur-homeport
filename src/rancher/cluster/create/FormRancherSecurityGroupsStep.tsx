@@ -12,15 +12,13 @@ import { FormSecurityGroupsStep } from '@waldur/openstack/openstack-instance/dep
 import { formTenantSelector } from './utils';
 
 export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
-  const tenant_settings = useSelector(formTenantSelector);
+  const tenant = useSelector(formTenantSelector);
 
   // Fetch default security group
   const { data: defaultItems } = useQuery(
-    ['security-groups-step-default', tenant_settings],
+    ['security-groups-step-default', tenant],
     () =>
-      tenant_settings
-        ? loadSecurityGroups({ tenant: tenant_settings.scope, name: 'default' })
-        : [],
+      tenant ? loadSecurityGroups({ tenant: tenant.url, name: 'default' }) : [],
     { staleTime: 3 * 60 * 1000 },
   );
 
@@ -37,7 +35,7 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
     }
   }, [props.change, defaultItems]);
 
-  return tenant_settings ? (
+  return tenant ? (
     <FormSecurityGroupsStep {...props} offering={props.offering} />
   ) : (
     <VStepperFormStepCard

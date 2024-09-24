@@ -11,27 +11,23 @@ import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-const loadData = (customer_uuid) =>
-  getAll<any>('/service-settings/', {
-    params: {
-      customer_uuid,
-      shared: false,
-      type: 'OpenStackTenant',
-      field: ['name', 'url', 'scope'],
-    },
-  });
-
 export const FormTenantStep = (props: FormStepProps) => {
   const customer = useSelector(getCustomer);
   const { data, isLoading } = useQuery(
     ['tenant-step', customer.uuid],
-    () => loadData(customer.uuid),
+    () =>
+      getAll<any>('/openstack-tenants/', {
+        params: {
+          customer_uuid: customer.uuid,
+          field: ['name', 'url', 'uuid'],
+        },
+      }),
     { staleTime: 3 * 60 * 1000 },
   );
 
   useEffect(() => {
     if (data?.length === 1) {
-      props.change('attributes.tenant_settings', data[0]);
+      props.change('attributes.tenant', data[0]);
     }
   }, [data]);
 
@@ -45,11 +41,7 @@ export const FormTenantStep = (props: FormStepProps) => {
       disabled={props.disabled}
       required={props.required}
     >
-      <Field
-        name="attributes.tenant_settings"
-        component={FormGroup}
-        validate={required}
-      >
+      <Field name="attributes.tenant" component={FormGroup} validate={required}>
         <SelectField
           options={data}
           getOptionValue={(option) => option.url}
