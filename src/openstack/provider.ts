@@ -26,6 +26,7 @@ ProvidersRegistry.register({
     'domain',
     'availability_zone',
     'flavor_exclude_regex',
+    'volume_type_blacklist',
     'verify_ssl',
   ]),
 });

@@ -62,6 +62,13 @@ export const OpenStackTenantForm: FunctionComponent<{
         'Flavors matching this regex expression will not be pulled from the backend.',
       )}
     />
+    <StringField
+      name="volume_type_blacklist"
+      label={translate('Blacklisted volume types')}
+      description={translate(
+        'List of coma-separated volume types which should not be possible to select when creating VM/Volume.',
+      )}
+    />
     <AwesomeCheckboxField
       hideLabel={true}
       label={translate('Verify server certificate')}
