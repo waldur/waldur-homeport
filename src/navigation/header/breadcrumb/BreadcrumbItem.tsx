@@ -1,5 +1,6 @@
 import { UISref } from '@uirouter/react';
 import classNames from 'classnames';
+import { uniqueId } from 'lodash';
 import { PropsWithChildren, forwardRef } from 'react';
 import { Breadcrumb, BreadcrumbItemProps } from 'react-bootstrap';
 
@@ -8,7 +9,6 @@ import { TruncatedText } from '@waldur/core/TruncatedText';
 import { truncate as truncateText } from '@waldur/core/utils';
 
 interface OwnProps extends BreadcrumbItemProps {
-  key: string;
   ellipsis?: 'md' | 'xl' | 'xxl';
   truncate?: boolean;
   maxLength?: number; // to truncate title always
@@ -20,7 +20,6 @@ interface OwnProps extends BreadcrumbItemProps {
 export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
   (props, ref) => {
     const {
-      key,
       ellipsis = undefined,
       truncate,
       maxLength,
@@ -43,7 +42,7 @@ export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
               {children.length > maxLength + 5 ? (
                 <Tip
                   label={children}
-                  id={'tip-breadcrumb-' + key}
+                  id={'tip-breadcrumb-' + uniqueId()}
                   placement="bottom"
                 >
                   {truncateText(children, maxLength)}

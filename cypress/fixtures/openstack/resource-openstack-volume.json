@@ -5,7 +5,7 @@
   "offering_description": "Watch anyone dog member quite.",
   "offering_image": null,
   "offering_thumbnail": null,
-  "offering_type": "OpenStackTenant.Volume",
+  "offering_type": "OpenStack.Volume",
   "offering_terms_of_service": "Age third last stock material chance American.",
   "offering_shared": false,
   "offering_billable": false,
@@ -23,7 +23,7 @@
     "ssh_public_key": "/api/keys/ccff63750da546e2af82ab2a1fc6eddd/",
     "security_groups": [
       {
-        "url": "/api/openstacktenant-security-groups/e5e964c9f7d042a794c3888318b8f74d/"
+        "url": "/api/openstack-security-groups/e5e964c9f7d042a794c3888318b8f74d/"
       }
     ],
     "data_volume_type": "/api/openstack-volume-types/7cb497fe76af4b34adbffad15fee2f34/",
@@ -43,7 +43,7 @@
   "created": "2022-05-08T18:31:38.671333Z",
   "modified": "2022-10-24T15:55:41.171864Z",
   "url": "/api/marketplace-resources/53b9bda915ab4dc0aac93a8f4fe83d30/",
-  "scope": "/api/openstacktenant-volumes/df15b1f2dc7c445cadb2996594b0a6c3/",
+  "scope": "/api/openstack-volumes/df15b1f2dc7c445cadb2996594b0a6c3/",
   "description": "",
   "state": "OK",
   "resource_uuid": "df15b1f2dc7c445cadb2996594b0a6c3",
@@ -51,7 +51,7 @@
   "effective_id": "",
   "access_url": "",
   "endpoints": [],
-  "resource_type": "OpenStackTenant.Volume",
+  "resource_type": "OpenStack.Volume",
   "project": "/api/projects/5d3016240ccf4181b4cdc0baa0e41d5c/",
   "project_uuid": "5d3016240ccf4181b4cdc0baa0e41d5c",
   "project_name": "Object-based dedicated software",

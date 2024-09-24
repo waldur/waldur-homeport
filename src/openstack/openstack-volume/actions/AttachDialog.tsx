@@ -21,10 +21,9 @@ export const AttachDialog: FC<ActionDialogProps> = ({
       attach_volume_uuid: resource.uuid,
       field: ['url', 'name'],
     };
-    const instances = await getAll<VirtualMachine>(
-      '/openstacktenant-instances/',
-      { params },
-    );
+    const instances = await getAll<VirtualMachine>('/openstack-instances/', {
+      params,
+    });
     return {
       instances: instances.map((choice) => ({
         value: choice.url,

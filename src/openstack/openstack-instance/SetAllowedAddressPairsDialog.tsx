@@ -116,7 +116,7 @@ export const SetAllowedAddressPairsDialog = enhance(
     const setAllowedAddressPairs = async (formData: FormData) => {
       try {
         await post(
-          `/openstacktenant-instances/${resolve.instance.uuid}/update_allowed_address_pairs/`,
+          `/openstack-instances/${resolve.instance.uuid}/update_allowed_address_pairs/`,
           {
             subnet: resolve.port.subnet,
             allowed_address_pairs: formData.pairs || [],

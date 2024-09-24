@@ -323,10 +323,10 @@ describe('BackupRestoreDialog', () => {
       ],
       security_groups: [
         {
-          url: '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
+          url: '/api/openstack-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
         },
         {
-          url: '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
+          url: '/api/openstack-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
         },
       ],
     });
@@ -412,10 +412,10 @@ describe('BackupRestoreDialog', () => {
       ],
       security_groups: [
         {
-          url: '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
+          url: '/api/openstack-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
         },
         {
-          url: '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
+          url: '/api/openstack-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
         },
       ],
     });

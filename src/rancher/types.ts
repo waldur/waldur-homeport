@@ -58,8 +58,8 @@ export interface Cluster {
   service_settings: string;
   project: string;
   project_uuid?: string;
-  tenant_settings?: string;
-  tenant_settings_scope_uuid: string;
+  tenant?: string;
+  tenant_uuid?: string;
 }
 
 export interface Secret {

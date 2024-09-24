@@ -83,9 +83,6 @@ interface MarketplaceConfiguration {
 
 interface OpenStackConfiguration {
   TENANT_CREDENTIALS_VISIBLE: boolean;
-}
-
-interface OpenStackTenantConfiguration {
   ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS: boolean;
   REQUIRE_AVAILABILITY_ZONE: boolean;
 }
@@ -130,7 +127,6 @@ export interface PluginConfiguration {
   WALDUR_CORE: CoreConfiguration;
   WALDUR_MARKETPLACE: MarketplaceConfiguration;
   WALDUR_OPENSTACK: Partial<OpenStackConfiguration>;
-  WALDUR_OPENSTACK_TENANT: Partial<OpenStackTenantConfiguration>;
   WALDUR_MARKETPLACE_OPENSTACK: Partial<MarketplaceOpenStackTenantConfiguration>;
   WALDUR_RANCHER: RancherConfiguration;
   WALDUR_VMWARE: Partial<VMWareConfiguration>;

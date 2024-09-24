@@ -23,8 +23,8 @@ export const InstanceVolumesList: FunctionComponent<{ resourceScope }> = ({
     [resourceScope],
   );
   const props = useTable({
-    table: 'openstacktenant-volumes',
-    fetchData: createFetcher('openstacktenant-volumes'),
+    table: 'openstack-volumes',
+    fetchData: createFetcher('openstack-volumes'),
     filter,
   });
 

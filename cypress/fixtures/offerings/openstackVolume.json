@@ -111,7 +111,7 @@
     }
   ],
   "screenshots": [],
-  "type": "OpenStackTenant.Volume",
+  "type": "OpenStack.Volume",
   "shared": false,
   "billable": false,
   "scope": "/api/service-settings/03532f2636b942bfb21eb75c4f31d722/",

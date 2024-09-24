@@ -84,10 +84,10 @@ export const FormSecurityGroupsStep = (props: FormStepProps) => {
 
   const filter = useMemo(
     () => ({
-      tenant_uuid: props.offering.parent_scope_uuid,
+      tenant_uuid: props.offering.scope_uuid,
       name: query ? query : undefined,
     }),
-    [props.offering, query],
+    [props.offering.scope_uuid, query],
   );
 
   const tableProps = useTable({

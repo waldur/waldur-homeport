@@ -38,7 +38,7 @@ export const TelemetryExampleDialog: FunctionComponent = () => (
       <li>Waldur.RemoteOffering</li>
       <li>Marketplace.Booking</li>
       <li>Marketplace.Rancher</li>
-      <li>OpenStackTenant.Volume</li>
+      <li>OpenStack.Volume</li>
       <li>VMware.VirtualMachine</li>
       <li>Marketplace.Basic</li>
     </ul>

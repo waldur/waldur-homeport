@@ -11,9 +11,9 @@ const EditDialog = lazyComponent(() => import('./EditDialog'), 'EditDialog');
 const validators = [validateState('OK')];
 
 const CUSTOM_EDIT_ACTION_RESOURCE_TYPES = [
-  'OpenStackTenant.Instance',
+  'OpenStack.Instance',
   'OpenStack.Tenant',
-  'OpenStackTenant.Volume',
+  'OpenStack.Volume',
   'SLURM.Allocation',
   'VMware.VirtualMachine',
 ];

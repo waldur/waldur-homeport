@@ -28,8 +28,8 @@ export const FormFlavorStep = (props: FormStepProps) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const filter = useMemo(
-    () => ({ tenant_uuid: props.offering.parent_scope_uuid }),
-    [props.offering],
+    () => ({ tenant_uuid: props.offering.scope_uuid }),
+    [props.offering.scope_uuid],
   );
 
   const tableProps = useTable({

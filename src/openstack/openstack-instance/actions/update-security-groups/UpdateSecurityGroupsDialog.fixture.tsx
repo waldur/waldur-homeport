@@ -10,11 +10,11 @@ import { UpdateSecurityGroupsDialog } from './UpdateSecurityGroupsDialog';
 
 export const fakeSecurityGroups = [
   {
-    url: '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
+    url: '/api/openstack-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
     name: 'SSH',
   },
   {
-    url: '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
+    url: '/api/openstack-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
     name: 'Default',
   },
 ] as unknown as SecurityGroup[];

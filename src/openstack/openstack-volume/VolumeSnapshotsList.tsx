@@ -22,8 +22,8 @@ export const VolumeSnapshotsList: FunctionComponent<{ resourceScope }> = ({
   );
 
   const props = useTable({
-    table: 'openstacktenant-snapshots',
-    fetchData: createFetcher('openstacktenant-snapshots'),
+    table: 'openstack-snapshots',
+    fetchData: createFetcher('openstack-snapshots'),
     filter,
   });
 

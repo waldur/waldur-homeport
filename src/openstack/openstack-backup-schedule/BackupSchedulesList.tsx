@@ -22,8 +22,8 @@ export const BackupsSchedulesList: FunctionComponent<{ resourceScope }> = ({
   );
 
   const props = useTable({
-    table: 'openstacktenant-backup-schedules',
-    fetchData: createFetcher('openstacktenant-backup-schedules'),
+    table: 'openstack-backup-schedules',
+    fetchData: createFetcher('openstack-backup-schedules'),
     filter,
   });
 

@@ -18,7 +18,7 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
 }) => {
   const filter = useMemo(
     () => ({
-      service_settings_uuid: resourceScope.child_settings,
+      tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
         'url',
@@ -49,8 +49,8 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
     [resourceScope],
   );
   const props = useTable({
-    table: 'openstacktenant-instances',
-    fetchData: createFetcher('openstacktenant-instances'),
+    table: 'openstack-instances',
+    fetchData: createFetcher('openstack-instances'),
     queryField: 'name',
     filter,
   });

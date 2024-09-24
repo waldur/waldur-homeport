@@ -7,4 +7,4 @@ const OpenStackSnapshotSummary = lazyComponent(
 );
 import './actions';
 
-ResourceSummary.register('OpenStackTenant.Snapshot', OpenStackSnapshotSummary);
+ResourceSummary.register('OpenStack.Snapshot', OpenStackSnapshotSummary);
