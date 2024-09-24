@@ -33,7 +33,7 @@ export const FormImageStep = (props: FormStepProps) => {
     ['deployImages', props.offering?.scope_uuid],
     () =>
       props.offering.scope_uuid
-        ? loadImages({ tenant_uuid: props.offering.parent_scope_uuid })
+        ? loadImages({ tenant_uuid: props.offering.scope_uuid })
         : Promise.resolve([]),
     { staleTime: 3 * 60 * 1000 },
   );

@@ -80,8 +80,7 @@ export const validatePermissionsForConsoleAction = (ctx: ActionContext) => {
   }
   if (
     !ctx.user.is_support &&
-    ENV.plugins.WALDUR_OPENSTACK_TENANT
-      .ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS
+    ENV.plugins.WALDUR_OPENSTACK.ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS
   ) {
     return;
   }

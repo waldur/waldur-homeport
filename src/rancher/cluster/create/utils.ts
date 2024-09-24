@@ -58,19 +58,16 @@ export const getRancherMountPointChoices = () => {
 };
 
 export const loadData = async (cluster: Cluster, offering: Offering) => {
-  const flavors = await filterFlavors(
-    cluster.tenant_settings_scope_uuid,
-    offering,
-  );
-  const subnets = await formatSubnets(cluster.tenant_settings_scope_uuid);
+  const flavors = await filterFlavors(cluster.tenant_uuid, offering);
+  const subnets = await formatSubnets(cluster.tenant_uuid);
   const volumeTypes = await loadVolumeTypes({
-    tenant_uuid: cluster.tenant_settings_scope_uuid,
+    tenant_uuid: cluster.tenant_uuid,
   });
   const templates = await listClusterTemplates();
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
   const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);
   const securityGroups = await loadSecurityGroups({
-    tenant_uuid: cluster.tenant_settings_scope_uuid,
+    tenant_uuid: cluster.tenant_uuid,
   });
   return {
     subnets,

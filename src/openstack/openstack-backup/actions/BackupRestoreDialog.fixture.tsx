@@ -22,7 +22,7 @@ export const fakeSubnet = {
 } as unknown as Subnet;
 
 export const fakeBackup = {
-  url: '/api/openstacktenant-backups/21693289bd78400db79fb2a0ef2ba177/',
+  url: '/api/openstack-backups/21693289bd78400db79fb2a0ef2ba177/',
   uuid: '21693289bd78400db79fb2a0ef2ba177',
   name: 'After 9th lab',
   service: '/api/openstacktenant/9a70f7a88c514886912c307b8c89a6b3/',
@@ -30,16 +30,16 @@ export const fakeBackup = {
   service_uuid: '9a70f7a88c514886912c307b8c89a6b3',
   service_settings: '/api/service-settings/43c3b302130c414faa138c14d0e69017/',
   service_settings_uuid: '43c3b302130c414faa138c14d0e69017',
-  resource_type: 'OpenStackTenant.Backup',
-  instance: '/api/openstacktenant-instances/6f271860e0764d8cb79573226b726b53/',
+  resource_type: 'OpenStack.Backup',
+  instance: '/api/openstack-instances/6f271860e0764d8cb79573226b726b53/',
   instance_name: 'empowerseamlessinfrastructures',
   instance_security_groups: [
     {
-      url: '/api/openstacktenant-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
+      url: '/api/openstack-security-groups/fce1fed2b8dd40b8b98252c4df76007f/',
       name: 'traefik',
     },
     {
-      url: '/api/openstacktenant-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
+      url: '/api/openstack-security-groups/5bf390b13f194a1fa3fd397631eaac19/',
       name: 'IMAPS',
     },
   ],

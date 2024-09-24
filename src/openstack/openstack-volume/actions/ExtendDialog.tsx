@@ -51,10 +51,7 @@ export const VolumeExtendDialog = reduxForm<
         disk_size: formData.size * 1024,
       };
       try {
-        await post(
-          `/openstacktenant-volumes/${resource.uuid}/extend/`,
-          payload,
-        );
+        await post(`/openstack-volumes/${resource.uuid}/extend/`, payload);
         dispatch(
           showSuccess(translate('Volume extension has been scheduled.')),
         );

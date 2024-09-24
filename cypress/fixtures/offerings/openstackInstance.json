@@ -69,7 +69,7 @@
     }
   ],
   "screenshots": [],
-  "type": "OpenStackTenant.Instance",
+  "type": "OpenStack.Instance",
   "shared": false,
   "billable": true,
   "scope": "/api/service-settings/671f2f1f45f146cfb94a5ab1d0506162/",

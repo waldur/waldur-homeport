@@ -12,7 +12,7 @@ import { Volume } from '@waldur/resource/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 const getAttachableVolumes = (instanceId, query) =>
-  getAll('/openstacktenant-volumes/', {
+  getAll('/openstack-volumes/', {
     params: {
       name: query,
       attach_instance_uuid: instanceId,

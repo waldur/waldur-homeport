@@ -20,14 +20,14 @@ export const TenantVolumesList: FunctionComponent<{ resourceScope }> = ({
 }) => {
   const filter = useMemo(
     () => ({
-      service_settings_uuid: resourceScope.child_settings,
+      tenant_uuid: resourceScope.uuid,
     }),
     [resourceScope],
   );
 
   const props = useTable({
-    table: 'openstacktenant-volumes',
-    fetchData: createFetcher('openstacktenant-volumes'),
+    table: 'openstack-volumes',
+    fetchData: createFetcher('openstack-volumes'),
     filter,
     queryField: 'name',
   });

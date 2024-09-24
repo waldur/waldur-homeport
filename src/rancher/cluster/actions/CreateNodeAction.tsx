@@ -13,8 +13,7 @@ const CreateNodeDialog = lazyComponent(
 );
 
 export const CreateNodeAction: FC<{ resource: Cluster }> = ({ resource }) =>
-  !ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE &&
-  Boolean(resource.tenant_settings) ? (
+  !ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE && Boolean(resource.tenant) ? (
     <DialogActionButton
       title={translate('Create node')}
       iconNode={<PlusCircle />}

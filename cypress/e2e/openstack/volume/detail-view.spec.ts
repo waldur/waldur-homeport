@@ -16,16 +16,16 @@ describe('OpenStack Volume detail view', () => {
       .intercept(
         'GET',
         '/api/marketplace-resources/53b9bda915ab4dc0aac93a8f4fe83d30/details/',
-        { fixture: 'openstack/openstacktenant-volume.json' },
+        { fixture: 'openstack/openstack-volume.json' },
       )
       .intercept(
         'GET',
-        '/api/openstacktenant-volumes/df15b1f2dc7c445cadb2996594b0a6c3/',
-        { fixture: 'openstack/openstacktenant-volume.json' },
+        '/api/openstack-volumes/df15b1f2dc7c445cadb2996594b0a6c3/',
+        { fixture: 'openstack/openstack-volume.json' },
         )
       .as('getOpenstackTenantVolume')
-      .intercept('GET', '/api/openstacktenant-instances/**', {
-        fixture: 'openstack/openstacktenant-instances.json',
+      .intercept('GET', '/api/openstack-instances/**', {
+        fixture: 'openstack/openstack-instances.json',
       })
       .intercept(
         'GET',
@@ -35,7 +35,7 @@ describe('OpenStack Volume detail view', () => {
       .intercept('GET', '/api/marketplace-cart-items/**', {
         fixture: 'offerings/shoppingCartItem.json',
       })
-      .intercept('GET', '/api/openstacktenant-snapshots/', [])
+      .intercept('GET', '/api/openstack-snapshots/', [])
       .intercept('GET', '/api/projects/**', {
         fixture: 'projects/alice_azure.json',
       })

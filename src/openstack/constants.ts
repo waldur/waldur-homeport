@@ -1,10 +1,10 @@
-export const TENANT_TYPE = 'OpenStack.Admin';
+export const TENANT_TYPE = 'OpenStack.Tenant';
 
-export const INSTANCE_TYPE = 'OpenStackTenant.Instance';
+export const INSTANCE_TYPE = 'OpenStack.Instance';
 
-export const VOLUME_TYPE = 'OpenStackTenant.Volume';
+export const VOLUME_TYPE = 'OpenStack.Volume';
 
-export const SHARED_INSTANCE_TYPE = 'OpenStackTenant.SharedInstance';
+export const SHARED_INSTANCE_TYPE = 'OpenStack.SharedInstance';
 
 export const FIXED_STORAGE_MODE = 'fixed';
 

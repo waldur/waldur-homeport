@@ -21,8 +21,8 @@ export const SnapshotSchedulesList: FunctionComponent<{ resourceScope }> = ({
     [resourceScope],
   );
   const props = useTable({
-    table: 'openstacktenant-snapshot-schedules',
-    fetchData: createFetcher('openstacktenant-snapshot-schedules'),
+    table: 'openstack-snapshot-schedules',
+    fetchData: createFetcher('openstack-snapshot-schedules'),
     filter,
   });
   return (

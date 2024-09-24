@@ -61,7 +61,7 @@ export const ResourceDetailsHero = ({
           )
         }
         quickFooter={
-          components?.length > 4 ? (
+          components?.length > 4 && resource.offering_type !== VOLUME_TYPE ? (
             <ResourceShowMoreComponents
               resource={resource}
               components={components}

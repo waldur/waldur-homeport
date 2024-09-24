@@ -5,7 +5,7 @@
     "offering_uuid": "3bcdcdb0987545f0b50e6eed26bb49d6",
     "offering_description": "",
     "offering_thumbnail": null,
-    "offering_type": "OpenStackTenant.Instance",
+    "offering_type": "OpenStack.Instance",
     "provider_name": "ActiveSys",
     "provider_uuid": "9f43128e9eb24c288b6577568420dc1c",
     "category_title": "Compute",
@@ -66,7 +66,7 @@
         {
           "description": "Default security group",
           "settings": "/api/service-settings/b13719a4b49344f699706716058209c5/",
-          "url": "/api/openstacktenant-security-groups/3773c164fc4849a3947cccaa06ba2905/",
+          "url": "/api/openstack-security-groups/3773c164fc4849a3947cccaa06ba2905/",
           "uuid": "3773c164fc4849a3947cccaa06ba2905",
           "rules": [
             {

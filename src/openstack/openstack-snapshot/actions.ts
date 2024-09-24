@@ -5,7 +5,7 @@ import { EditAction } from './EditAction';
 import { PullSnapshotAction } from './PullSnapshotAction';
 import { RestoreSnapshotAction } from './RestoreSnapshotAction';
 
-ActionRegistry.register('OpenStackTenant.Snapshot', [
+ActionRegistry.register('OpenStack.Snapshot', [
   EditAction,
   PullSnapshotAction,
   RestoreSnapshotAction,

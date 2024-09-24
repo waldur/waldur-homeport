@@ -29,12 +29,12 @@
     "components": []
   },
   {
-    "offering_type": "OpenStackTenant.Volume",
+    "offering_type": "OpenStack.Volume",
     "available_limits": [],
     "components": []
   },
   {
-    "offering_type": "OpenStackTenant.Instance",
+    "offering_type": "OpenStack.Instance",
     "available_limits": [],
     "components": []
   },

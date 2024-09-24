@@ -23,7 +23,7 @@ xdescribe('OpenStackInstanceCreateForm', () => {
         fixture: 'offerings/flavors.json',
       })
       .intercept('GET', '/api/keys/', { fixture: 'offerings/sshKeys.json' })
-      .intercept('GET', '/api/openstacktenant-security-groups/', {
+      .intercept('GET', '/api/openstack-security-groups/', {
         fixture: 'offerings/securityGroups.json',
       })
       .intercept('GET', '/api/openstack-subnets/', {
@@ -32,7 +32,7 @@ xdescribe('OpenStackInstanceCreateForm', () => {
       .intercept('GET', '/api/openstack-floating-ips/', {
         fixture: 'offerings/floatingIps.json',
       })
-      .intercept('GET', '/api/openstacktenant-instance-availability-zones/', [])
+      .intercept('GET', '/api/openstack-instance-availability-zones/', [])
       .intercept('GET', '/api/openstack-volume-types/', [])
       .visit(
         '/organizations/bf6d515c9e6e445f9c339021b30fc96b/marketplace-offering/3bcdcdb0987545f0b50e6eed26bb49d6/',

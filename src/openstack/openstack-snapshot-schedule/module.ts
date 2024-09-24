@@ -8,8 +8,8 @@ const OpenStackSnapshotScheduleSummary = lazyComponent(
   'OpenStackSnapshotScheduleSummary',
 );
 
-ActionRegistry.register('OpenStackTenant.SnapshotSchedule', actions);
+ActionRegistry.register('OpenStack.SnapshotSchedule', actions);
 ResourceSummary.register(
-  'OpenStackTenant.SnapshotSchedule',
+  'OpenStack.SnapshotSchedule',
   OpenStackSnapshotScheduleSummary,
 );

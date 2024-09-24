@@ -45,7 +45,7 @@ export const fetchInstanceOptions = async (
   currentPage: number,
   customerId,
 ) => {
-  let response = await getSelectData('/openstacktenant-instances/', {
+  let response = await getSelectData('/openstack-instances/', {
     field: ['name', 'backend_id', 'project_name'],
     customer_uuid: customerId,
     name: query,

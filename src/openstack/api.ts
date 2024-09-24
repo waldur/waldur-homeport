@@ -120,22 +120,22 @@ export const destroyNetwork = (id: string) =>
   deleteById('/openstack-networks/', id);
 
 export const pullSnapshot = (id: string) =>
-  post(`/openstacktenant-snapshots/${id}/pull/`);
+  post(`/openstack-snapshots/${id}/pull/`);
 
 export const destroySnapshot = (id: string) =>
-  deleteById('/openstacktenant-snapshots/', id);
+  deleteById('/openstack-snapshots/', id);
 
 export const pullInstance = (id: string) =>
-  post(`/openstacktenant-instances/${id}/pull/`);
+  post(`/openstack-instances/${id}/pull/`);
 
 export const startInstance = (id: string) =>
-  post(`/openstacktenant-instances/${id}/start/`);
+  post(`/openstack-instances/${id}/start/`);
 
 export const stopInstance = (id: string) =>
-  post(`/openstacktenant-instances/${id}/stop/`);
+  post(`/openstack-instances/${id}/stop/`);
 
 export const restartInstance = (id: string) =>
-  post(`/openstacktenant-instances/${id}/restart/`);
+  post(`/openstack-instances/${id}/restart/`);
 
 export const loadFlavors = (params) =>
   getAll<Flavor>('/openstack-flavors/', { params });
@@ -174,28 +174,28 @@ export const loadFloatingIps = (params) =>
   });
 
 export const setFloatingIps = (id: string, data) =>
-  post(`/openstacktenant-instances/${id}/update_floating_ips/`, data);
+  post(`/openstack-instances/${id}/update_floating_ips/`, data);
 
 export const getInstanceConsoleUrl = (id: string) =>
-  get<{ url: string }>(`/openstacktenant-instances/${id}/console/`).then(
+  get<{ url: string }>(`/openstack-instances/${id}/console/`).then(
     (response) => response.data.url,
   );
 
 export const getInstanceConsoleLog = (id: string) =>
-  get<string>(`/openstacktenant-instances/${id}/console_log/`).then(
+  get<string>(`/openstack-instances/${id}/console_log/`).then(
     (response) => response.data,
   );
 
 export const updatePorts = (id: string, data: UpdatePortsRequestBody) =>
-  post(`/openstacktenant-instances/${id}/update_ports/`, data);
+  post(`/openstack-instances/${id}/update_ports/`, data);
 
 export const updateSecurityGroups = (
   id: string,
   data: UpdateSecurityGroupsRequestBody,
-) => post(`/openstacktenant-instances/${id}/update_security_groups/`, data);
+) => post(`/openstack-instances/${id}/update_security_groups/`, data);
 
 export const getInstances = (params) =>
-  getAll<OpenStackInstance>('/openstacktenant-instances/', {
+  getAll<OpenStackInstance>('/openstack-instances/', {
     params,
   });
 
@@ -240,10 +240,10 @@ export const setNetworkMtu = (id, mtu) =>
   post(`/openstack-networks/${id}/set_mtu/`, { mtu });
 
 export const updateInstance = (id: string, data) =>
-  put(`/openstacktenant-instances/${id}/`, data);
+  put(`/openstack-instances/${id}/`, data);
 
 export const changeFlavor = (id: string, data: ChangeFlavorRequestBody) =>
-  post(`/openstacktenant-instances/${id}/change_flavor/`, data);
+  post(`/openstack-instances/${id}/change_flavor/`, data);
 
 export const destroyInstance = (
   id: string,
@@ -261,69 +261,69 @@ export const forceDestroyInstance = (
 export const destroyPort = (id: string) => deleteById('/openstack-ports/', id);
 
 export const updateVolume = (id: string, data) =>
-  put(`/openstacktenant-volumes/${id}/`, data);
+  put(`/openstack-volumes/${id}/`, data);
 
 export const retypeVolume = (id: string, data) =>
-  post(`/openstacktenant-volumes/${id}/retype/`, data);
+  post(`/openstack-volumes/${id}/retype/`, data);
 
 export const updateSnapshot = (id: string, data) =>
-  put(`/openstacktenant-snapshots/${id}/`, data);
+  put(`/openstack-snapshots/${id}/`, data);
 
 export const restoreSnapshot = (id: string, data) =>
-  post(`/openstacktenant-snapshots/${id}/restore/`, data);
+  post(`/openstack-snapshots/${id}/restore/`, data);
 
 export const updateBackup = (id: string, data) =>
-  put(`/openstacktenant-backups/${id}/`, data);
+  put(`/openstack-backups/${id}/`, data);
 
 export const destroyBackup = (id: string) =>
-  deleteById('/openstacktenant-backups/', id);
+  deleteById('/openstack-backups/', id);
 
 export const restoreBackup = (id: string, data: BackupRestoreRequestBody) =>
-  post(`/openstacktenant-backups/${id}/restore/`, data);
+  post(`/openstack-backups/${id}/restore/`, data);
 
 export const createBackup = (id: string, data) =>
-  post(`/openstacktenant-instances/${id}/backup/`, data);
+  post(`/openstack-instances/${id}/backup/`, data);
 
 export const createSnapshot = (id: string, data) =>
-  post(`/openstacktenant-volumes/${id}/snapshot/`, data);
+  post(`/openstack-volumes/${id}/snapshot/`, data);
 
 export const pullVolume = (id: string) =>
-  post(`/openstacktenant-volumes/${id}/pull/`);
+  post(`/openstack-volumes/${id}/pull/`);
 
 export const detachVolume = (id: string) =>
-  post(`/openstacktenant-volumes/${id}/detach/`);
+  post(`/openstack-volumes/${id}/detach/`);
 
 export const createBackupSchedule = (id: string, data) =>
-  post(`/openstacktenant-instances/${id}/create_backup_schedule/`, data);
+  post(`/openstack-instances/${id}/create_backup_schedule/`, data);
 
 export const attachVolume = (volumeId, instanceUrl) =>
-  post(`/openstacktenant-volumes/${volumeId}/attach/`, {
+  post(`/openstack-volumes/${volumeId}/attach/`, {
     instance: instanceUrl,
   });
 
 export const createSnapshotSchedule = (id: string, data) =>
-  post(`/openstacktenant-volumes/${id}/create_snapshot_schedule/`, data);
+  post(`/openstack-volumes/${id}/create_snapshot_schedule/`, data);
 
 export const updateBackupSchedule = (id: string, data) =>
-  put(`/openstacktenant-backup-schedules/${id}/`, data);
+  put(`/openstack-backup-schedules/${id}/`, data);
 
 export const activateBackupSchedule = (id: string) =>
-  post(`/openstacktenant-backup-schedules/${id}/activate/`);
+  post(`/openstack-backup-schedules/${id}/activate/`);
 
 export const deactivateBackupSchedule = (id: string) =>
-  post(`/openstacktenant-backup-schedules/${id}/deactivate/`);
+  post(`/openstack-backup-schedules/${id}/deactivate/`);
 
 export const destroyBackupSchedule = (id: string) =>
-  deleteById('/openstacktenant-backup-schedules/', id);
+  deleteById('/openstack-backup-schedules/', id);
 
 export const updateSnapshotSchedule = (id: string, data) =>
-  put(`/openstacktenant-snapshot-schedules/${id}/`, data);
+  put(`/openstack-snapshot-schedules/${id}/`, data);
 
 export const destroySnapshotSchedule = (id: string) =>
-  deleteById('/openstacktenant-snapshot-schedules/', id);
+  deleteById('/openstack-snapshot-schedules/', id);
 
 export const activateSnapshotSchedule = (id: string) =>
-  post(`/openstacktenant-snapshot-schedules/${id}/activate/`);
+  post(`/openstack-snapshot-schedules/${id}/activate/`);
 
 export const deactivateSnapshotSchedule = (id: string) =>
-  post(`/openstacktenant-snapshot-schedules/${id}/deactivate/`);
+  post(`/openstack-snapshot-schedules/${id}/deactivate/`);

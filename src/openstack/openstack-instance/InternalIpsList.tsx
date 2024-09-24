@@ -16,13 +16,12 @@ export const InternalIpsList: FunctionComponent<{ resourceScope; refetch }> = ({
 }) => {
   const fetchData = useCallback(
     () =>
-      getById<VirtualMachine>(
-        '/openstacktenant-instances/',
-        resourceScope.uuid,
-      ).then((vm) => ({
-        rows: vm.ports,
-        resultCount: vm.ports.length,
-      })),
+      getById<VirtualMachine>('/openstack-instances/', resourceScope.uuid).then(
+        (vm) => ({
+          rows: vm.ports,
+          resultCount: vm.ports.length,
+        }),
+      ),
     [resourceScope],
   );
   const props = useTable({

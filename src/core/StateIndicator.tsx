@@ -17,12 +17,13 @@ export interface StateIndicatorProps {
   size?: 'sm' | 'lg';
 }
 
-export const StateIndicator: FunctionComponent<StateIndicatorProps> = (
-  props,
-) => (
+export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
+  active,
+  ...props
+}) => (
   <Badge {...props}>
     {props.label.toUpperCase()}{' '}
-    {props.active && (
+    {active && (
       <LoadingSpinnerIcon
         className={
           (props.light || props.outline ? 'text-' : 'badge-') + props.variant

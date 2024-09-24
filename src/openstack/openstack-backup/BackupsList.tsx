@@ -17,7 +17,7 @@ export const BackupsList: FunctionComponent<{ resourceScope }> = ({
   const filter = useMemo(() => {
     const fields = {
       [INSTANCE_TYPE]: 'instance',
-      'OpenStackTenant.BackupSchedule': 'backup_schedule',
+      'OpenStack.BackupSchedule': 'backup_schedule',
     };
     const { resource_type, url } = resourceScope;
     const field = fields[resource_type];
@@ -28,8 +28,8 @@ export const BackupsList: FunctionComponent<{ resourceScope }> = ({
     }
   }, [resourceScope]);
   const props = useTable({
-    table: 'openstacktenant-backups',
-    fetchData: createFetcher('openstacktenant-backups'),
+    table: 'openstack-backups',
+    fetchData: createFetcher('openstack-backups'),
     filter,
   });
   return (

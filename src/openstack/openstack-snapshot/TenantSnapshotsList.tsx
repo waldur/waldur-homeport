@@ -14,13 +14,13 @@ export const TenantSnapshotsList: FunctionComponent<{ resourceScope }> = ({
 }) => {
   const filter = useMemo(
     () => ({
-      service_settings_uuid: resourceScope.child_settings,
+      tenant_uuid: resourceScope.uuid,
     }),
     [resourceScope],
   );
   const props = useTable({
-    table: 'openstacktenant-snapshots',
-    fetchData: createFetcher('openstacktenant-snapshots'),
+    table: 'openstack-snapshots',
+    fetchData: createFetcher('openstack-snapshots'),
     filter,
   });
   return (

@@ -13,13 +13,12 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope; refetch }> = ({
 }) => {
   const fetchData = useCallback(
     () =>
-      getById<VirtualMachine>(
-        '/openstacktenant-instances/',
-        resourceScope.uuid,
-      ).then((vm) => ({
-        rows: vm.floating_ips,
-        resultCount: vm.floating_ips.length,
-      })),
+      getById<VirtualMachine>('/openstack-instances/', resourceScope.uuid).then(
+        (vm) => ({
+          rows: vm.floating_ips,
+          resultCount: vm.floating_ips.length,
+        }),
+      ),
     [resourceScope],
   );
   const props = useTable({

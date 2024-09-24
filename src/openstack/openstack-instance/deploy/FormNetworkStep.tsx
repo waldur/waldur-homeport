@@ -130,12 +130,12 @@ export const FormNetworkStep = (props: FormStepProps) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const { data, isLoading } = useQuery(
-    ['network-step', props.offering.uuid],
+    ['network-step', props.offering.scope_uuid],
     () => {
       return Promise.all([
-        loadSubnets({ tenant_uuid: props.offering.parent_scope_uuid }),
+        loadSubnets({ tenant_uuid: props.offering.scope_uuid }),
         loadFloatingIps({
-          tenant_uuid: props.offering.parent_scope_uuid,
+          tenant_uuid: props.offering.scope_uuid,
           free: 'True',
           fields: ['url', 'address'],
         }),

@@ -40,7 +40,7 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
           value: item.url,
         })),
       ]),
-    [resource.service_settings_uuid],
+    [resource.tenant_uuid],
   );
 
   const subnets = useMemo(
