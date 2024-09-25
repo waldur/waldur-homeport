@@ -9,6 +9,7 @@ import { ActionsList } from './ActionsList';
 interface ResourceActionsButtonProps {
   resource: Resource;
   refetch?(): void;
+  labeled?: boolean;
 }
 
 export const ResourceActionsButton: FunctionComponent<
@@ -23,6 +24,7 @@ export const ResourceActionsButton: FunctionComponent<
       actions={ActionsList}
       resource={props.resource}
       refetch={props.refetch}
+      labeled={props.labeled}
     />
   );
 };

@@ -16,12 +16,17 @@ interface ResourceActionComponentProps {
   resource: any;
   marketplaceResource?: any;
   refetch?(): void;
+  labeled?: boolean;
 }
 
 export const ResourceActionComponent: FunctionComponent<
   ResourceActionComponentProps
 > = (props) => (
-  <ActionsDropdownComponent onToggle={props.onToggle} disabled={props.disabled}>
+  <ActionsDropdownComponent
+    labeled={props.labeled}
+    onToggle={props.onToggle}
+    disabled={props.disabled}
+  >
     {props.open ? (
       props.loading ? (
         <Dropdown.Item eventKey="1">

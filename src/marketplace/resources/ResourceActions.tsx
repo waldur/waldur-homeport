@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalActionsRouter';
+import { ResourceActionsButton as BaseResourceActionsButton } from '@waldur/marketplace/resources/actions/ResourceActionsButton';
 import {
   INSTANCE_TYPE,
   TENANT_TYPE,
@@ -23,6 +24,21 @@ export const ResourceActions = ({
       (action) => !ActionsList.includes(action),
     );
   }, [resource]);
+  if (!scope) {
+    return (
+      <BaseResourceActionsButton
+        resource={
+          {
+            ...resource,
+            marketplace_resource_uuid: resource.uuid,
+          } as any
+        }
+        refetch={refetch}
+        labeled
+      />
+    );
+  }
+
   if (
     [INSTANCE_TYPE, VOLUME_TYPE, TENANT_TYPE].includes(resource.offering_type)
   ) {
