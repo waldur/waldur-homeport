@@ -1,6 +1,7 @@
 import { ErrorBoundary } from '@sentry/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { UIView } from '@uirouter/react';
+import { AxiosError } from 'axios';
 import { FunctionComponent } from 'react';
 import { Provider } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -15,10 +16,21 @@ import { LoadingScreen } from './LoadingScreen';
 import { LayoutProvider } from './metronic/layout/core';
 import { MasterInit } from './metronic/layout/MasterInit';
 import { NotificationContainer } from './NotificationContainer';
+import { router } from './router';
 import { ThemeSelector } from './ThemeSelector';
 import { UIRouter } from './UIRouter';
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      onError: (error) => {
+        if ((error as AxiosError)?.response?.status == 404) {
+          router.stateService.go('errorPage.notFound');
+        }
+      },
+    },
+  },
+});
 
 export const Application: FunctionComponent = () => {
   const { loading, error, value } = useAsync(loadConfig);

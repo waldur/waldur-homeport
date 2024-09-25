@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { AxiosError } from 'axios';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -27,7 +26,6 @@ import { ResourceDetailsHero } from './ResourceDetailsHero';
 
 export const ResourceDetailsPage: FunctionComponent<{}> = () => {
   const { params } = useCurrentStateAndParams();
-  const router = useRouter();
   const dispatch = useDispatch();
 
   const { data, refetch, isLoading, isRefetching } = useQuery(
@@ -36,11 +34,6 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     {
       refetchOnWindowFocus: false,
       staleTime: 3 * 60 * 1000,
-      onError: (error) => {
-        if ((error as AxiosError)?.response?.status == 404) {
-          router.stateService.go('errorPage.notFound');
-        }
-      },
     },
   );
 
