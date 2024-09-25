@@ -290,7 +290,6 @@
   "Documents": "Dokumenter",
   "Domain": "Domæne",
   "Domain name": "Domænenavn",
-  "Domain name. If not defined default domain will be used.": "Domænenavn. Hvis ikke defineret standard domæne vil blive brugt.",
   "Done": "Færdig",
   "Draft": "Udkast",
   "Drop files to attach them to the issue.": "Slip filer for at vedhæfte dem til problemet.",

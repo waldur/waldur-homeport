@@ -276,7 +276,6 @@
   "Docker version": "Version de Docker",
   "Domain": "Domaine",
   "Domain name": "Nom de domaine",
-  "Domain name. If not defined default domain will be used.": "Nom de domaine. S'il n'est pas défini, le domaine par défaut sera utilisé.",
   "Done": "Fait",
   "Draft": "Brouillon",
   "Drop files to attach them to the issue.": "Déposez des fichiers pour les joindre au problème.",

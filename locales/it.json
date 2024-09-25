@@ -290,7 +290,6 @@
   "Documents": "Documenti",
   "Domain": "Dominio",
   "Domain name": "Nome del dominio",
-  "Domain name. If not defined default domain will be used.": "Nome di dominio. Se non definito verrà utilizzato il dominio predefinito.",
   "Done": "Fatto",
   "Draft": "Bozza",
   "Drop files to attach them to the issue.": "Rilascia i file per allegarli al problema.",

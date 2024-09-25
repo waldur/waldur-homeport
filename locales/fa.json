@@ -219,7 +219,6 @@
   "Documentation": "مستندات",
   "Documents": "اسناد",
   "Domain name": "نام Domain",
-  "Domain name. If not defined default domain will be used.": "اگر نام Domain تعریف نشده باشد،از Domain پیش فرض استفاده میشود.",
   "Done": "انجام شده",
   "Draft": "پیش نویس",
   "Drop files to attach them to the issue.": "فایل ها را رها کنید تا به موضوع متصل شوند.",
