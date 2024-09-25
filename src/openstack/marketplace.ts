@@ -98,6 +98,11 @@ const OpenStackOptionsSummary = (): Attribute[] => [
     title: translate('Default internal network MTU'),
     type: 'integer',
   },
+  {
+    key: 'volume_type_blacklist',
+    title: translate('Blacklisted volume types'),
+    type: 'string',
+  },
 ];
 
 const serializeVolumeTypeLimits = (limits) =>
