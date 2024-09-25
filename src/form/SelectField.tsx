@@ -11,12 +11,22 @@ export const SelectField: FunctionComponent<any> = (props) => {
       name={input.name}
       value={
         (simpleValue || typeof input.value !== 'object') && options
-          ? options.filter((option) => getOptionValue(option) === input.value)
+          ? props.isMulti
+            ? options.filter((option) =>
+                input.value.includes(getOptionValue(option)),
+              )
+            : options.filter((option) => getOptionValue(option) === input.value)
           : input.value
       }
       onChange={(newValue: any) =>
         simpleValue
-          ? input.onChange(newValue ? getOptionValue(newValue) : null)
+          ? input.onChange(
+              newValue
+                ? props.isMulti
+                  ? newValue.map((v) => getOptionValue(v))
+                  : getOptionValue(newValue)
+                : null,
+            )
           : input.onChange(newValue)
       }
       options={options}

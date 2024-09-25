@@ -81,7 +81,6 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
           'flex-grow-1': Boolean(actions),
         },
         'position-relative',
-        !spaceless && 'mb-7',
         !actions && containerClassName,
         !spaceless && `mb-${space}`,
       )}

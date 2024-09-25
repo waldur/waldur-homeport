@@ -1,4 +1,5 @@
 import { isEmpty } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
 
 export const isValidAttribute = (data: any): boolean => {
   if (typeof data === 'string' && data.trim().length > 0) {
@@ -15,3 +16,14 @@ export const isValidAttribute = (data: any): boolean => {
   }
   return false;
 };
+
+export const getOfferingPolicyActionOptions = () => [
+  {
+    value: 'block_creation_of_new_resources',
+    label: translate('Block creation of new resources'),
+  },
+  {
+    value: 'notify_organization_owners',
+    label: translate('Notify organization owners'),
+  },
+];
