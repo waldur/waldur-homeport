@@ -58,6 +58,14 @@ export const BaseEventsList: FunctionComponent<{
           export: 'message',
         },
         {
+          title: translate('User'),
+          render: ({ row }) =>
+            row.context.user_full_name ||
+            row.context.user_username || <>&mdash;</>,
+          orderField: 'user',
+          export: 'user',
+        },
+        {
           title: translate('Timestamp'),
           render: EventDateField,
           orderField: 'created',
