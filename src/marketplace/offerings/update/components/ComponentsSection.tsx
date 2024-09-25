@@ -48,6 +48,7 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
               {props.offering.components.map((component, componentIndex) => (
                 <tr key={componentIndex}>
                   <td className="col-md-3">{component.name}</td>
+                  <td className="col-md-3">{component.type}</td>
                   <td className="col-md-3">{component.measured_unit}</td>
                   <td className="col-md-3">
                     {getBillingTypeLabel(component.billing_type)}

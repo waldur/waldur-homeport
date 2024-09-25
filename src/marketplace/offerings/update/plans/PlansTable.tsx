@@ -22,6 +22,7 @@ export const PlansTable = ({ plans, offering, refetch, user }) => (
                     count: plan.resources_count,
                   })}
           </td>
+          <td className="col-md-2">{plan.uuid}</td>
           <td className="row-actions">
             <PlanActions
               offering={offering}
