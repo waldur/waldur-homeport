@@ -64,6 +64,14 @@ const OfferingUsageChart = lazyComponent(
   () => import('./expandable/OfferingUsageChart'),
   'OfferingUsageChart',
 );
+const OfferingCostPolicies = lazyComponent(
+  () => import('./details/policies/OfferingCostPolicies'),
+  'OfferingCostPolicies',
+);
+const OfferingUsagePolicies = lazyComponent(
+  () => import('./details/policies/OfferingUsagePolicies'),
+  'OfferingUsagePolicies',
+);
 const OfferingEventsList = lazyComponent(
   () => import('./expandable/OfferingEventsList'),
   'OfferingEventsList',
@@ -138,6 +146,22 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           component: OfferingUsageChart,
         }
       : null,
+    {
+      title: translate('Policy'),
+      key: 'policy',
+      children: [
+        {
+          key: 'cost-policy',
+          title: translate('Cost policy'),
+          component: OfferingCostPolicies,
+        },
+        {
+          key: 'usage-policy',
+          title: translate('Usage policy'),
+          component: OfferingUsagePolicies,
+        },
+      ],
+    },
     {
       title: translate('Events'),
       key: 'events',

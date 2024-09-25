@@ -1,4 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { translate } from '@waldur/i18n';
+
+import { getAllOrganizationGroups } from './api';
 
 // See also: https://github.com/erikras/redux-form/issues/1852
 export const parseIntField = (value) => parseInt(value, 10) || 0;
@@ -73,3 +77,17 @@ export function getBillingPeriods(unit: string): BillingPeriodDescription {
       };
   }
 }
+
+export const useOrganizationGroups = () =>
+  useQuery(
+    ['organizationGroups'],
+    () =>
+      getAllOrganizationGroups().then((items) => {
+        return items.map((item) => ({
+          ...item,
+          name: [item.parent_name, item.name].filter(Boolean).join(' ➔ '),
+          value: item.url,
+        }));
+      }),
+    { staleTime: 5 * 60 * 1000 },
+  );

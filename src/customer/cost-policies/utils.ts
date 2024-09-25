@@ -25,3 +25,10 @@ export const getCostPolicyActionOptions = (type: CostPolicyType = 'project') =>
       label: translate('Schedule termination of existing resources'),
     },
   ].filter(Boolean);
+
+export const policyPeriodOptions = {
+  total: { value: 1, label: translate('Total') },
+  oneMonth: { value: 2, label: translate('{count} month', { count: 1 }) },
+  threeMonth: { value: 3, label: translate('{count} month', { count: 3 }) },
+  twelveMonth: { value: 4, label: translate('{count} month', { count: 12 }) },
+};
