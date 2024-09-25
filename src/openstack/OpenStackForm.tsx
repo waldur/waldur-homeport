@@ -53,17 +53,17 @@ export const OpenStackForm: FunctionComponent<{ container }> = ({
         'It is used to automatically assign floating IP to your virtual machine.',
       )}
     />
+    <AwesomeCheckboxField
+      hideLabel={true}
+      label={translate('Verify server certificate')}
+      name="verify_ssl"
+    />
     <StringField
       name="availability_zone"
       label={translate('Availability zone')}
       description={translate(
         'Default availability zone for provisioned instances.',
       )}
-    />
-    <AwesomeCheckboxField
-      hideLabel={true}
-      label={translate('Verify server certificate')}
-      name="verify_ssl"
     />
     <NumberField
       label={translate(

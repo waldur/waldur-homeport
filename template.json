@@ -1356,7 +1356,7 @@
     "message": "Biological sciences"
   },
   "Blacklisted volume types": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "openstack/OpenStackForm.tsx, openstack/marketplace.ts",
     "message": "Blacklisted volume types"
   },
   "Block creation of new resources": {
