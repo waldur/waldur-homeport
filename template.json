@@ -12536,7 +12536,7 @@
     "message": "User's"
   },
   "User": {
-    "description": "customer/team/UserGroup.tsx, events/ExpandableEventDetailsTable.tsx, issues/feedback/SupportFeedbackList.tsx, issues/feedback/SupportFeedbackListFilter.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/resources/users/ResourceUsersList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/ProviderUsersList.tsx, project/team/AddUserDialog.tsx, project/team/UserGroup.tsx, proposals/team/AddUserDialog.tsx, proposals/team/UsersList.tsx, slurm/details/AllocationJobsTable.tsx, user/UserManageContainer.tsx",
+    "description": "customer/team/UserGroup.tsx, events/BaseEventsList.tsx, events/ExpandableEventDetailsTable.tsx, issues/feedback/SupportFeedbackList.tsx, issues/feedback/SupportFeedbackListFilter.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/resources/users/ResourceUsersList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/ProviderUsersList.tsx, project/team/AddUserDialog.tsx, project/team/UserGroup.tsx, proposals/team/AddUserDialog.tsx, proposals/team/UsersList.tsx, slurm/details/AllocationJobsTable.tsx, user/UserManageContainer.tsx",
     "message": "User"
   },
   "Username anonymized prefix": {
@@ -13175,6 +13175,10 @@
     "description": "form/CronField.tsx",
     "message": "day"
   },
+  "description": {
+    "description": "user/support/UserEditForm.tsx",
+    "message": "description"
+  },
   "disks": {
     "description": "vmware/DisksList.tsx",
     "message": "disks"
@@ -13210,6 +13214,10 @@
   "events": {
     "description": "events/BaseEventsList.tsx",
     "message": "events"
+  },
+  "first name": {
+    "description": "user/support/UserEditForm.tsx",
+    "message": "first name"
   },
   "flavors": {
     "description": "openstack/openstack-instance/deploy/FormFlavorStep.tsx, openstack/openstack-tenant/TenantFlavorsList.tsx",
@@ -13267,6 +13275,10 @@
     "description": "slurm/details/AllocationJobsTable.tsx",
     "message": "jobs"
   },
+  "last name": {
+    "description": "user/support/UserEditForm.tsx",
+    "message": "last name"
+  },
   "milli CPUs": {
     "description": "rancher/cluster/hpas/utils.ts",
     "message": "milli CPUs"
@@ -13278,6 +13290,10 @@
   "month": {
     "description": "form/CronField.tsx",
     "message": "month"
+  },
+  "native name": {
+    "description": "user/support/UserEditForm.tsx",
+    "message": "native name"
   },
   "network": {
     "description": "openstack/openstack-network/actions/EditNetworkDialog.tsx",

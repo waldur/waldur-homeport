@@ -74,7 +74,7 @@ export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
             ? translate('Display your first name on your profile')
             : translate("Display the user's first name on their profile"),
           requiredMsg: props.isRequired('first_name')
-            ? getDefaultRequiredMsg(translate('First name'), isSelf)
+            ? getDefaultRequiredMsg(translate('first name'), isSelf)
             : null,
           protected: props.fieldIsProtected('first_name'),
         },
@@ -86,7 +86,7 @@ export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
             ? translate('Display your last name on your profile')
             : translate("Display the user's last name on their profile"),
           requiredMsg: props.isRequired('last_name')
-            ? getDefaultRequiredMsg(translate('Last name'), isSelf)
+            ? getDefaultRequiredMsg(translate('last name'), isSelf)
             : null,
           protected: props.fieldIsProtected('last_name'),
         },
@@ -96,7 +96,7 @@ export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
               key: 'native_name',
               value: props.user.native_name,
               requiredMsg: props.isRequired('native_name')
-                ? getDefaultRequiredMsg(translate('Native name'), isSelf)
+                ? getDefaultRequiredMsg(translate('native name'), isSelf)
                 : null,
               protected: props.fieldIsProtected('native_name'),
             }
@@ -217,7 +217,7 @@ export const UserEditForm: FunctionComponent<OwnProps> = (props) => {
                 'Additional account description invisible to user',
               ),
               requiredMsg: props.isRequired('description')
-                ? getDefaultRequiredMsg(translate('Description'), isSelf)
+                ? getDefaultRequiredMsg(translate('description'), isSelf)
                 : null,
             }
           : null,
