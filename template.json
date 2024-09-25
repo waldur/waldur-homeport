@@ -12024,7 +12024,7 @@
     "message": "Unlink invoice"
   },
   "Unlink resource": {
-    "description": "resource/actions/SetErredActionItem.tsx, resource/actions/UnlinkActionItem.tsx",
+    "description": "resource/actions/UnlinkActionItem.tsx",
     "message": "Unlink resource"
   },
   "Unlink": {

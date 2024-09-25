@@ -33,7 +33,7 @@ export const SetErredActionItem: FC<{ resource }> = ({ resource }) => {
     try {
       await waitForConfirmation(
         dispatch,
-        translate('Unlink resource'),
+        translate('Set as erred'),
         getConfirmationText(resource),
       );
     } catch {
