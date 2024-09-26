@@ -1,4 +1,5 @@
-const fieldQueryParam = "field=uuid&field=full_name&field=email&field=phone_number&field=permissions&field=is_active&field=native_name&field=civil_number&field=username&field=slug&field=preferred_language&field=identity_provider_label&field=date_joined&field=organization&field=job_title&field=affiliations&field=is_staff&field=is_support&field=url";
+const fieldQueryParam =
+  'field=uuid&field=full_name&field=email&field=phone_number&field=organization&field=permissions&field=is_active&field=native_name&field=civil_number&field=username&field=slug&field=preferred_language&field=identity_provider_label&field=date_joined&field=job_title&field=affiliations&field=is_staff&field=is_support&field=url';
 
 describe('Users', () => {
   beforeEach(() => {
@@ -17,9 +18,13 @@ describe('Users', () => {
       .intercept('GET', '/api/customers/**', {
         fixture: 'support/customers.json',
       })
-      .intercept('GET', `/api/users/?page=1&page_size=10&${fieldQueryParam}&query=Tara%20Pierce`, {
-        fixture: 'support/user-search-by-name.json',
-      })
+      .intercept(
+        'GET',
+        `/api/users/?page=1&page_size=10&${fieldQueryParam}&query=Tara%20Pierce`,
+        {
+          fixture: 'support/user-search-by-name.json',
+        },
+      )
 
       .intercept(
         'GET',
@@ -37,13 +42,21 @@ describe('Users', () => {
         },
       )
 
-      .intercept('GET', `/api/users/?page=1&page_size=10&${fieldQueryParam}&is_staff=true`, {
-        fixture: 'support/users.json',
-      })
+      .intercept(
+        'GET',
+        `/api/users/?page=1&page_size=10&${fieldQueryParam}&is_staff=true`,
+        {
+          fixture: 'support/users.json',
+        },
+      )
 
-      .intercept('GET', `/api/users/?page=1&page_size=10&${fieldQueryParam}&role=&status=true`, {
-        fixture: 'support/users.json',
-      })
+      .intercept(
+        'GET',
+        `/api/users/?page=1&page_size=10&${fieldQueryParam}&role=&status=true`,
+        {
+          fixture: 'support/users.json',
+        },
+      )
 
       .intercept(
         'GET',
@@ -57,7 +70,7 @@ describe('Users', () => {
         fixture: 'support/users.json',
       })
       .as('getUsers');
-    
+
     cy.fixture('support/user-search-by-name.json')
       .then((users) => {
         const user = users[0];
@@ -131,7 +144,9 @@ describe('Users', () => {
   });
 
   it('should open manage page when click details button', () => {
-    cy.get('table tbody tr:first-child td:first-child a:contains("Tara Pierce")')
+    cy.get(
+      'table tbody tr:first-child td:first-child a:contains("Tara Pierce")',
+    )
       .click({ force: true })
       .get('.public-dashboard-hero')
       .contains('Tara Pierce')
