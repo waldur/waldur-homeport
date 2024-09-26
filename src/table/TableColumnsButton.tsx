@@ -42,7 +42,7 @@ const SortableItem = (props) => {
       {...attributes}
       {...listeners}
     >
-      <span className="svg-icon svg-icon-2 svg-icon-white me-3">
+      <span className="svg-icon svg-icon-2 svg-icon-gray me-3">
         <DotsSixVertical size={32} />
       </span>{' '}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
