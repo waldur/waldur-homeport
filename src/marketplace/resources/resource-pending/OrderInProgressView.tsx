@@ -1,5 +1,6 @@
+import { Info } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { ProgressSteps } from '@waldur/core/ProgressSteps';
@@ -23,33 +24,42 @@ const getTranslatedOrderType = (type) =>
 
 const getSteps = (resource: Resource) => {
   const order = resource.order_in_progress;
-  const steps: Array<{ label; description?; completed; color? }> = [];
+  const steps: Array<{ label; description?; completed; variant? }> = [];
   steps.push({
-    label: translate('Created'),
+    label: translate('Order created'),
     description: [
-      resource.order_in_progress.created_by_full_name,
-      formatDateTime(resource.order_in_progress.created),
+      [
+        resource.order_in_progress.created_by_full_name,
+        formatDateTime(resource.order_in_progress.created),
+      ].join(', '),
     ],
     completed: true,
   });
+  const isStep2Completed = order.state !== 'pending-consumer';
   steps.push({
     label:
       order.state === 'pending-consumer'
         ? translate('Pending approval')
         : translate('Approved'),
-    description:
-      order.state !== 'pending-consumer'
-        ? [
+    description: isStep2Completed
+      ? [
+          [
             order.consumer_reviewed_by_full_name,
             formatDateTime(order.consumer_reviewed_at),
-          ]
-        : [translate('Pending approval by requesting organization')],
-    completed: order.state !== 'pending-consumer',
-    color: 'bg-warning',
+          ].join(', '),
+        ]
+      : [translate('Pending organization approval')],
+    completed: isStep2Completed,
   });
   steps.push({
     label: getTranslatedOrderType(order.type),
-    description: null,
+    description: [
+      translate('Resource {type} process', {
+        type: getTranslatedOrderType(
+          resource.order_in_progress.type,
+        ).toLowerCase(),
+      }),
+    ],
     completed:
       steps[steps.length - 1].completed &&
       order.state !== 'pending-provider' &&
@@ -71,9 +81,9 @@ const getSteps = (resource: Resource) => {
                 ? translate('Rejected')
                 : translate('Done'),
         ]
-      : null,
+      : [translate('Resource successfully created')],
     completed: isStep4Completed,
-    color: order.state === 'done' ? 'bg-success' : 'bg-danger',
+    variant: order.state === 'done' ? 'success' : 'danger',
   });
   return steps;
 };
@@ -87,36 +97,35 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   }
   const steps = getSteps(resource);
   return (
-    <ProgressSteps steps={steps} bgClass="bg-gray-100">
-      <div className="fw-bolder mb-5">
-        <span>
-          {translate('Resource {type} {activeStep}', {
-            type: getTranslatedOrderType(
-              resource.order_in_progress.type,
-            ).toLowerCase(),
-            activeStep: !steps[1].completed
-              ? translate('approval')
-              : translate('pending'),
-          })}
-          ...{' '}
-        </span>
-        <OrderDetailsLink
-          order_uuid={resource.order_in_progress.uuid}
-          project_uuid={resource.order_in_progress.project_uuid}
-          className="text-link"
-        >
-          ({translate('View order')})
-        </OrderDetailsLink>
-        {resource.order_in_progress.state === 'pending-consumer' && (
-          <div className="ms-6 d-inline-flex gap-2">
-            <OrderConsumerActions
-              order={resource.order_in_progress}
-              refetch={refetch}
-              as={Button}
-            />
+    <div className="container-fluid mt-6">
+      <Card className="card-bordered border-grey-300 border-dashed border-1 overflow-hidden">
+        <Card.Body className="d-flex flex-column flex-sm-row align-items-center gap-4">
+          <ProgressSteps
+            steps={steps}
+            bgClass="bg-body"
+            className="flex-grow-1"
+          />
+          <div className="d-flex flex-sm-column gap-3 text-nowrap">
+            {resource.order_in_progress.state === 'pending-consumer' && (
+              <OrderConsumerActions
+                order={resource.order_in_progress}
+                refetch={refetch}
+                as={Button}
+              />
+            )}
+            <OrderDetailsLink
+              order_uuid={resource.order_in_progress.uuid}
+              project_uuid={resource.order_in_progress.project_uuid}
+              className="btn btn-sm btn-outline btn-outline-default"
+            >
+              <span className="svg-icon svg-icon-4">
+                <Info weight="bold" />
+              </span>
+              {translate('View order')}
+            </OrderDetailsLink>
           </div>
-        )}
-      </div>
-    </ProgressSteps>
+        </Card.Body>
+      </Card>
+    </div>
   );
 };

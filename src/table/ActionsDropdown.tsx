@@ -1,6 +1,7 @@
 import { DotsThreeVertical, Spinner } from '@phosphor-icons/react';
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { Dropdown, DropdownProps } from 'react-bootstrap';
+import { Variant } from 'react-bootstrap/esm/types';
 
 import { translate } from '@waldur/i18n';
 
@@ -18,16 +19,26 @@ interface ActionsDropdownProps {
   refetch?(): void;
 }
 
+interface TableDropdownToggleProps {
+  label?: string;
+  disabled?: boolean;
+  labeled?: boolean;
+  variant?: Variant;
+  className?: string;
+}
+
 export const TableDropdownToggle = ({
   label = '',
   disabled = false,
   labeled = false,
-}) => {
+  variant = 'outline btn-outline-default',
+  className = 'min-w-100px w-100',
+}: TableDropdownToggleProps) => {
   return labeled ? (
     <Dropdown.Toggle
-      variant="outline-dark"
+      variant={variant}
       size="sm"
-      className="outline-dark btn-outline border-gray-400 btn-active-secondary min-w-100px px-2"
+      className={className}
       disabled={disabled}
     >
       {label || translate('Actions')}
@@ -44,10 +55,25 @@ export const TableDropdownToggle = ({
 };
 
 export const ActionsDropdownComponent: FunctionComponent<
-  PropsWithChildren<DropdownProps & { label?; labeled?; disabled? }>
-> = ({ onToggle, disabled, children, label, labeled, ...rest }) => (
+  PropsWithChildren<DropdownProps & TableDropdownToggleProps>
+> = ({
+  onToggle,
+  disabled,
+  children,
+  label,
+  labeled,
+  variant,
+  className,
+  ...rest
+}) => (
   <Dropdown onToggle={onToggle} {...rest}>
-    <TableDropdownToggle label={label} labeled={labeled} disabled={disabled} />
+    <TableDropdownToggle
+      label={label}
+      labeled={labeled}
+      disabled={disabled}
+      variant={variant}
+      className={className}
+    />
     <Dropdown.Menu
       popperConfig={{
         modifiers: [

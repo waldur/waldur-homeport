@@ -3,7 +3,6 @@ import { useAsync } from 'react-use';
 import { get } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { DetailsField } from '@waldur/marketplace/common/DetailsField';
 import { OrderDetailsProps } from '@waldur/marketplace/types';
 import { FloatingIp } from '@waldur/openstack/openstack-instance/types';
 import {
@@ -11,6 +10,7 @@ import {
   formatVolumeTypeLabel,
   getDefaultFloatingIps,
 } from '@waldur/openstack/openstack-instance/utils';
+import { Field } from '@waldur/resource/summary';
 import { formatFlavor, getData } from '@waldur/resource/utils';
 
 export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
@@ -116,54 +116,52 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
   return (
     <>
       {attributesData?.image && (
-        <DetailsField label={translate('Image')}>
-          {attributesData.image.name}
-        </DetailsField>
+        <Field label={translate('Image')}>{attributesData.image.name}</Field>
       )}
       {attributesData?.flavor && (
-        <DetailsField label={translate('Flavor')}>
+        <Field label={translate('Flavor')}>
           {formatFlavor(attributesData.flavor)}
-        </DetailsField>
+        </Field>
       )}
       {attributesData?.availabilityZone && (
-        <DetailsField label={translate('Availability zone')}>
+        <Field label={translate('Availability zone')}>
           {attributesData.availabilityZone.name}
-        </DetailsField>
+        </Field>
       )}
       {attributes.system_volume_size && (
-        <DetailsField label={translate('System volume size')}>
+        <Field label={translate('System volume size')}>
           {attributes.system_volume_size / 1024} GB
-        </DetailsField>
+        </Field>
       )}
       {attributesData?.systemVolumeType && (
-        <DetailsField label={translate('System volume type')}>
+        <Field label={translate('System volume type')}>
           {formatVolumeTypeLabel(attributesData.systemVolumeType)}
-        </DetailsField>
+        </Field>
       )}
       {attributes.data_volume_size && (
-        <DetailsField label={translate('Data volume size')}>
+        <Field label={translate('Data volume size')}>
           {attributes.data_volume_size / 1024} GB
-        </DetailsField>
+        </Field>
       )}
       {attributesData?.dataVolumeType && (
-        <DetailsField label={translate('Data volume type')}>
+        <Field label={translate('Data volume type')}>
           {formatVolumeTypeLabel(attributesData.dataVolumeType)}
-        </DetailsField>
+        </Field>
       )}
       {attributesData?.publicKey && (
-        <DetailsField label={translate('SSH public key')}>
+        <Field label={translate('SSH public key')}>
           {attributesData.publicKey.name}
-        </DetailsField>
+        </Field>
       )}
       {attributesData?.securityGroups && (
-        <DetailsField label={translate('Security groups')}>
+        <Field label={translate('Security groups')}>
           {attributesData.securityGroups.map((securityGroup, index) => (
             <p key={index}>{securityGroup.name}</p>
           ))}
-        </DetailsField>
+        </Field>
       )}
       {attributesData?.networks && (
-        <DetailsField label={translate('Networks')}>
+        <Field label={translate('Networks')}>
           {attributesData.networks.map((network, index) => (
             <p key={index}>
               {network.subnet.label}
@@ -171,12 +169,12 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
               {network.floatingIp.address}
             </p>
           ))}
-        </DetailsField>
+        </Field>
       )}
       {attributes.user_data && (
-        <DetailsField label={translate('User data')}>
+        <Field label={translate('User data')}>
           <pre>{attributes.user_data}</pre>
-        </DetailsField>
+        </Field>
       )}
     </>
   );

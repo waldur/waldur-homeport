@@ -50,7 +50,7 @@ export const QuotaCell = ({
         : Number(limit);
   const percent = Math.round((Number(usage) / limitValue) * 100);
   return (
-    <div className="d-flex flex-column mb-4">
+    <div className="d-flex flex-column mb-3">
       <CellDescription
         title={title}
         usage={usage}

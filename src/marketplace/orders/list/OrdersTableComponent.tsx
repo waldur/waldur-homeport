@@ -12,6 +12,7 @@ import { OrderProviderActions } from '../actions/OrderProviderActions';
 
 import { OrdersListExpandableRow } from './OrdersListExpandableRow';
 import { OrderTablePlaceholder } from './OrderTablePlaceholder';
+import { OrderTypeCell } from './OrderTypeCell';
 
 interface OrdersTableComponentProps extends Partial<TableProps> {
   table: string;
@@ -53,7 +54,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
         <Link
           state="marketplace-orders.details"
           params={{ order_uuid: row.uuid }}
-          label={row.attributes.name}
+          label={row.attributes.name || row.uuid}
         />
       ),
       keys: ['attributes'],
@@ -83,6 +84,13 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       keys: ['state'],
       filter: 'state',
       id: 'state',
+    },
+    {
+      title: translate('Type'),
+      render: OrderTypeCell,
+      keys: ['type'],
+      filter: 'type',
+      id: 'type',
     },
     {
       title: translate('Project'),

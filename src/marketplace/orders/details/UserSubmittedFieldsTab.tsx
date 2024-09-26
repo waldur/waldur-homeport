@@ -5,7 +5,7 @@ import { KeyValueTable } from '@waldur/marketplace/resources/KeyValueTable';
 
 export const UserSubmittedFieldsTab = ({ order }) => {
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header className="custom-card-header custom-padding-zero">
         <Card.Title>
           <h3>{translate('User submitted fields')}</h3>

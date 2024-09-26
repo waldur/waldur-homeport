@@ -5,7 +5,7 @@ import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 export const ErrorDetailsTab = ({ order }) => {
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header className="custom-card-header custom-padding-zero">
         <Card.Title>
           <h3>{translate('Error details')}</h3>

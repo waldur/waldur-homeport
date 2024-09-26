@@ -53,10 +53,7 @@ export const ResourceActions = ({
     );
   }
   return (
-    <ActionsDropdownComponent
-      label={translate('All actions')}
-      labeled={labeled}
-    >
+    <ActionsDropdownComponent label={translate('Actions')} labeled={labeled}>
       {ActionsList.map((ActionComponent, index) => (
         <ActionComponent key={index} resource={resource} refetch={refetch} />
       ))}

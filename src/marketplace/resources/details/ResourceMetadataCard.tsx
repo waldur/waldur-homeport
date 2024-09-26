@@ -11,7 +11,7 @@ export const ResourceMetadataCard = ({ resource, scope }) => {
     ResourceSummaryRegistry.get(resource.resource_type) || ResourceSummaryBase;
 
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Resource details')}</h3>

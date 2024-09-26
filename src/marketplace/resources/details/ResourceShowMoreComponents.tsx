@@ -29,7 +29,7 @@ export const ResourceShowMoreComponents = ({
   return (
     <button
       type="button"
-      className="text-link"
+      className="text-anchor fw-bold"
       onClick={() =>
         dispatch(showResourceComponentsDialog(resource, components))
       }

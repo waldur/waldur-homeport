@@ -215,6 +215,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
           className={classNames(
             'card-table',
             'full-width',
+            'card-bordered',
             this.props.fieldName ? 'field-table' : '',
             this.props.mode === 'grid' &&
               Boolean(this.props.gridItem) &&

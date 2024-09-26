@@ -5,7 +5,7 @@ import { QuotasTable } from '@waldur/quotas/QuotasTable';
 
 export const TenantMainComponent = ({ resourceScope }) => {
   return resourceScope ? (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Quotas')}</h3>

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { DetailsField } from '@waldur/marketplace/common/DetailsField';
 import { OrderDetailsProps } from '@waldur/marketplace/types';
+import { Field } from '@waldur/resource/summary';
 import { BooleanField } from '@waldur/table/BooleanField';
 
 const renderValue = (value) => (value ? value : <>&mdash;</>);
@@ -17,13 +17,13 @@ export const OfferingConfigurationDetails: FunctionComponent<
   return (
     <>
       {keys.map((key, index) => (
-        <DetailsField label={options[key].label} key={index}>
+        <Field label={options[key].label} key={index}>
           {typeof attributes[key] === 'boolean' ? (
             <BooleanField value={attributes[key]} />
           ) : (
             renderValue(attributes[key])
           )}
-        </DetailsField>
+        </Field>
       ))}
     </>
   );

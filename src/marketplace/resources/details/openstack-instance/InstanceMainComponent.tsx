@@ -10,7 +10,7 @@ export const InstanceMainComponent = ({ resourceScope }) => {
     return null;
   }
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Details')}</h3>

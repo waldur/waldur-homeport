@@ -15,7 +15,7 @@ export const LimitsSection = ({
 }) => {
   if (components.length === 0 || isEmpty(limits)) {
     return (
-      <Card>
+      <Card className="card-bordered">
         <Card.Header className="custom-card-header custom-padding-zero">
           <Card.Title>
             <h3>{translate('Limits')}</h3>
@@ -32,14 +32,14 @@ export const LimitsSection = ({
     );
   }
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header className="custom-card-header custom-padding-zero">
         <Card.Title>
           <h3>{translate('Limits')}</h3>
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <table className="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
+        <table className="table align-middle table-row-bordered fs-6 gy-4 dataTable no-footer">
           <thead>
             <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
               <th className="col-sm-1">{translate('Name')}</th>

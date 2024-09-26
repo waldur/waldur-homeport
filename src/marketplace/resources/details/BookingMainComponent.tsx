@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 
 export const BookingMainComponent = ({ resource, refetch }) => {
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header>
         <Card.Title>{translate('Bookings')}</Card.Title>
       </Card.Header>

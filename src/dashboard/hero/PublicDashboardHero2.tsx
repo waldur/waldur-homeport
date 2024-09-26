@@ -22,6 +22,7 @@ interface PublicDashboardHero2Props {
   quickFooter?: ReactNode;
   quickFooterClassName?: string;
   className?: string;
+  containerClassName?: string;
   hideQuickSection?: boolean;
   cardBordered?: boolean;
 }
@@ -30,7 +31,9 @@ export const PublicDashboardHero2: FC<
   PropsWithChildren<PublicDashboardHero2Props>
 > = (props) => {
   return (
-    <div className="public-dashboard-hero">
+    <div
+      className={classNames('public-dashboard-hero', props.containerClassName)}
+    >
       <Row
         className={classNames('public-dashboard-hero-body', props.className)}
       >
@@ -92,8 +95,13 @@ export const PublicDashboardHero2: FC<
 
         {!props.hideQuickSection && (
           <Col md={6} sm={12} className="d-flex">
-            <Card className="flex-grow-1">
-              <Card.Body className="d-flex flex-column p-6 pb-2">
+            <Card
+              className={classNames(
+                'flex-grow-1',
+                props.cardBordered && 'card-bordered',
+              )}
+            >
+              <Card.Body className="d-flex flex-column">
                 <Row>
                   <Col xs>{props.quickBody}</Col>
                   {/* Quick actions */}

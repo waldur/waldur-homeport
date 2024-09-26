@@ -7,6 +7,8 @@ import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { Tip } from '@waldur/core/Tooltip';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
+import './Field.css';
+
 interface FieldProps {
   label: string;
   helpText?: string;

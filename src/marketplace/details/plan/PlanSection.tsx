@@ -23,7 +23,7 @@ const PlanCard = ({
   offering,
   type,
 }) => (
-  <Card>
+  <Card className="card-bordered">
     <Card.Header className="custom-card-header custom-padding-zero">
       <Card.Title>
         <h3>{translate(title)}</h3>
@@ -59,7 +59,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
   const { plan_name, plan_description, old_plan_name } = props.order;
   if (!plan_name) {
     return (
-      <Card>
+      <Card className="card-bordered">
         <Card.Header className="custom-card-header custom-padding-zero">
           <Card.Title>
             <h3>{translate('Plan')}</h3>

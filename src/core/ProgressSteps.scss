@@ -13,22 +13,25 @@
             text-align: center;
 
             .stepper-title {
-              color: var(--bs-gray-800);
-              font-size: 0.9rem;
+              color: var(--bs-gray-700);
+              font-size: 14px;
+              font-weight: 500;
             }
 
             .stepper-desc {
-              color: var(--bs-gray-600);
+              color: var(--bs-grey-500);
+              font-size: 14px;
             }
           }
 
           .stepper-icon {
-            background: var(--bs-gray-300);
+            background: var(--bs-grey-100);
             border-radius: 50%;
             margin-right: 0;
             margin-bottom: 0.75rem;
             z-index: 1;
 
+            svg,
             i {
               color: white;
             }
@@ -42,7 +45,7 @@
             .stepper-line {
               position: absolute;
               height: 2px;
-              background-color: var(--bs-gray-300);
+              background-color: var(--bs-grey-200);
               width: 500px;
               right: 0;
             }

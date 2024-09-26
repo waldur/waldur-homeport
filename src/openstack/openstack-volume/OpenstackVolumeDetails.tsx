@@ -3,8 +3,8 @@ import { useAsync } from 'react-use';
 import { get } from '@waldur/core/api';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { DetailsField } from '@waldur/marketplace/common/DetailsField';
 import { OrderResponse } from '@waldur/marketplace/orders/types';
+import { Field } from '@waldur/resource/summary';
 
 import { formatVolumeTypeLabel } from '../openstack-instance/utils';
 import { VolumeType } from '../types';
@@ -26,16 +26,16 @@ export const OpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
   );
   return (
     <>
-      <DetailsField label={translate('Size')}>{formatSize(props)}</DetailsField>
+      <Field label={translate('Size')}>{formatSize(props)}</Field>
       {order.attributes.availability_zone_name && (
-        <DetailsField label={translate('Availability zone')}>
+        <Field label={translate('Availability zone')}>
           {order.attributes.availability_zone_name}
-        </DetailsField>
+        </Field>
       )}
       {volumeType && (
-        <DetailsField label={translate('Volume type')}>
+        <Field label={translate('Volume type')}>
           {formatVolumeTypeLabel(volumeType)}
-        </DetailsField>
+        </Field>
       )}
     </>
   );

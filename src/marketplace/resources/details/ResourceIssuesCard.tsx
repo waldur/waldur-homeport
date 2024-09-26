@@ -35,7 +35,7 @@ const CreateIssueButton = ({ resource }) => {
 export const ResourceIssuesCard = ({ resource }) => {
   const showIssues = useSelector(hasSupport);
   return showIssues ? (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
           <h3>{translate('Tickets')}</h3>
