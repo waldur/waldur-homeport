@@ -209,6 +209,7 @@ export const UserList: FunctionComponent = () => {
       render: OrganizationField,
       orderField: 'organization',
       filter: 'organization',
+      keys: ['organization'],
       id: 'organization',
       export: 'organization',
     },
@@ -225,7 +226,7 @@ export const UserList: FunctionComponent = () => {
       render: ProjectRolesField,
       keys: ['permissions'],
       id: 'project_roles',
-      export: false,
+      export: (row) => getProjectRole(row),
     },
     {
       title: translate('Staff'),
@@ -395,3 +396,19 @@ export const getOrganizationsWhereOwner = (user: Partial<User>) =>
         .map((perm) => perm.scope_name)
         .join(', ')
     : DASH_ESCAPE_CODE;
+
+const getProjectRole = (user: Partial<User>) => {
+  const permissions = user.permissions?.filter(
+    ({ scope_type }) => scope_type === 'project',
+  );
+  if (permissions.length > 0) {
+    return permissions
+      .map(
+        (p) =>
+          `${p.customer_name}/${p.scope_name} (${formatRole(p.role_name)})`,
+      )
+      .join(', ');
+  } else {
+    return DASH_ESCAPE_CODE;
+  }
+};
