@@ -50,7 +50,11 @@ export const ProposalManagePage = () => {
     <ProposalDetails proposal={proposal} reviews={reviews} />
   ) : (
     <>
-      <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
+      <ProgressSteps
+        proposal={proposal}
+        bgClass="bg-body"
+        className="mb-10 pt-8 pb-6"
+      />
       {proposal.state === 'team_verification' ? (
         <ProposalTeamVerificationStep
           proposal={proposal}

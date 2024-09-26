@@ -26,20 +26,32 @@ $header-config: (
   // Default Mode
   default:
     (
-      height: (
+      outer-height: (
         desktop: 65px,
         tablet-and-mobile: 55px,
       ),
+      // Height - border width
+      height:
+        (
+          desktop: 64px,
+          tablet-and-mobile: 54px,
+        ),
       bg-color: if(isDarkMode(), #253629, $white),
       border-bottom: 1px solid $border-color,
     ),
   // Fixed Mode
   fixed:
     (
-      height: (
+      outer-height: (
         desktop: 65px,
         tablet-and-mobile: 55px,
       ),
+      // Height - border width
+      height:
+        (
+          desktop: 64px,
+          tablet-and-mobile: 54px,
+        ),
       z-index: 100,
       bg-color: if(isDarkMode(), #253629, $white),
       border-bottom: 1px solid $border-color,
@@ -57,14 +69,9 @@ $toolbar-config: (
   ),
   padding: 0.5rem 0,
   bg-color: if(isDarkMode(), #213025, $white),
-  box-shadow:
-    if(
-      isDarkMode(),
-      0px 10px 30px 0px rgba(17, 26, 19, 0.05),
-      0px 10px 30px 0px rgba(82, 63, 105, 0.05)
-    ),
-  border-top: 0,
-  border-bottom: if(isDarkMode(), 1px solid $border-color, 0),
+  box-shadow: none,
+  border-top: 1px solid $border-color,
+  border-bottom: 1px solid $border-color,
 ) !default;
 
 // Aside

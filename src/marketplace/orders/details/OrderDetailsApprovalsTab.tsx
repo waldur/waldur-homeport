@@ -8,7 +8,7 @@ import { OrderSummaryMessage } from './OrderSummaryMessage';
 
 export const OrderDetailsApprovalsTab = ({ order, offering }) => {
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header className="custom-card-header custom-padding-zero">
         <Card.Title>
           <h3>{translate('Approvals')}</h3>

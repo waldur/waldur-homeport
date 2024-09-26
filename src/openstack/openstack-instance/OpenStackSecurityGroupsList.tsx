@@ -23,7 +23,7 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
   props,
 ) => {
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header>
         <Card.Title>
           {translate('Security groups details')}

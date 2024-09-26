@@ -441,8 +441,8 @@ $container-max-widths: (
 // Define common padding and border radius sizes and more.
 
 $border-width: 1px !default;
-$border-color: $gray-200 !default;
-$border-dashed-color: $gray-300 !default; // Custom variable
+$border-color: $grey-200 !default;
+$border-dashed-color: $grey-300 !default; // Custom variable
 
 $border-widths: (
   0: 0,
@@ -501,8 +501,8 @@ $box-shadow: 0 0.5rem 1.5rem 0.5rem rgba($black, 0.075) !default;
 $box-shadow-lg: 0 1rem 2rem 1rem rgba($black, 0.1) !default;
 
 // Border settings
-$border-color: $gray-200 !default;
-$border-dashed-color: $gray-300 !default; // Custom variable
+$border-color: $grey-200 !default;
+$border-dashed-color: $grey-300 !default; // Custom variable
 $border-width: 1px !default;
 
 // Grid columns
@@ -1209,6 +1209,8 @@ $custom-sizes: (
   90px: 90px,
   95px: 95px,
   100px: 100px,
+  110px: 110px,
+  120px: 120px,
   125px: 125px,
   150px: 150px,
   175px: 175px,

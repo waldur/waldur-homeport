@@ -34,7 +34,11 @@ export const ProposalDetails = ({
 
   return (
     <>
-      <ProgressSteps proposal={proposal} bgClass="bg-body" className="mb-10" />
+      <ProgressSteps
+        proposal={proposal}
+        bgClass="bg-body"
+        className="mb-10 pt-8 pb-6"
+      />
       <SidebarLayout.Body className="mb-10">
         <ProposalHeader proposal={proposal} />
         <ProjectDetailsSummary proposal={proposal} reviews={reviews} />

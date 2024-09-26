@@ -42,7 +42,7 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
     return null;
   }
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header className="border-2 border-bottom">
         <Card.Title className="h5">
           {translate('Options')}

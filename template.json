@@ -204,7 +204,7 @@
     "message": "Action"
   },
   "Actions": {
-    "description": "customer/payments/PaymentsList.tsx, invitations/UserPermissionRequestsList.tsx, invoices/details/InvoiceItemActions.tsx, marketplace/category/admin/ColumnsList.tsx, marketplace/offerings/actions/ActionsDropdown.tsx, marketplace/offerings/update/plans/PlanActions.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsListActions.tsx, proposals/update/CallActions.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, table/ActionsDropdown.tsx, table/TableColumnsButton.tsx, table/TableHeader.tsx, user/keys/KeysList.tsx",
+    "description": "customer/payments/PaymentsList.tsx, invitations/UserPermissionRequestsList.tsx, invoices/details/InvoiceItemActions.tsx, marketplace/category/admin/ColumnsList.tsx, marketplace/offerings/actions/ActionsDropdown.tsx, marketplace/offerings/update/plans/PlanActions.tsx, marketplace/orders/actions/OrderActionsButton.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/resources/ResourceActions.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-backup-schedule/BackupSchedulesList.tsx, openstack/openstack-instance/InternalIpsList.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-snapshot-schedule/SnapshotSchedulesList.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsListActions.tsx, proposals/update/CallActions.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, table/ActionsDropdown.tsx, table/TableColumnsButton.tsx, table/TableHeader.tsx, user/keys/KeysList.tsx",
     "message": "Actions"
   },
   "Activate": {
@@ -496,7 +496,7 @@
     "message": "Alert"
   },
   "All actions": {
-    "description": "invitations/InvitationsMultiSelectActions.tsx, marketplace/orders/actions/OrderActionsButton.tsx, marketplace/resources/ResourceActions.tsx, marketplace/resources/mass-actions/ResourceMultiSelectAction.tsx",
+    "description": "invitations/InvitationsMultiSelectActions.tsx, marketplace/resources/mass-actions/ResourceMultiSelectAction.tsx",
     "message": "All actions"
   },
   "All calls": {
@@ -2320,7 +2320,7 @@
     "message": "Created by"
   },
   "Created": {
-    "description": "administration/TokensList.tsx, administration/hooks/HooksList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/list/CustomerList.tsx, customer/team/CustomerPermissionsReviewList.tsx, invoices/list/InvoicesFilter.tsx, issues/IssueSummary.tsx, issues/feedback/SupportFeedbackList.tsx, issues/list/IssuesList.tsx, issues/list/IssuesListExpandableRow.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/resource-pending/OrderInProgressView.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsList.tsx, proposals/call-management/CallManagementPage.tsx, proposals/proposal/UserProposalsList.tsx, proposals/round/proposals/ProposalsList.tsx, proposals/utils.ts, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/ClusterWorkloadsList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, resource/summary/ResourceSummaryBase.tsx, resource/support/SharedProviderCustomers.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, vmware/DisksList.tsx, vmware/PortsList.tsx",
+    "description": "administration/TokensList.tsx, administration/hooks/HooksList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/list/CustomerList.tsx, customer/team/CustomerPermissionsReviewList.tsx, invoices/list/InvoicesFilter.tsx, issues/IssueSummary.tsx, issues/feedback/SupportFeedbackList.tsx, issues/list/IssuesList.tsx, issues/list/IssuesListExpandableRow.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsList.tsx, proposals/call-management/CallManagementPage.tsx, proposals/proposal/UserProposalsList.tsx, proposals/round/proposals/ProposalsList.tsx, proposals/utils.ts, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/ClusterWorkloadsList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, resource/summary/ResourceSummaryBase.tsx, resource/support/SharedProviderCustomers.tsx, user/affiliations/BaseOrganizationsList.tsx, user/affiliations/BaseProjectsList.tsx, vmware/DisksList.tsx, vmware/PortsList.tsx",
     "message": "Created"
   },
   "Creating a backup schedule": {
@@ -6071,6 +6071,10 @@
     "description": "marketplace/offerings/list/DeleteOfferingButton.tsx",
     "message": "Offering deleted successfully."
   },
+  "Offering description": {
+    "description": "marketplace/orders/details/OrderMetadataTab.tsx",
+    "message": "Offering description"
+  },
   "Offering details synchronization has been scheduled.": {
     "description": "marketplace/offerings/store/effects.ts",
     "message": "Offering details synchronization has been scheduled."
@@ -6222,10 +6226,6 @@
   "Offerings": {
     "description": "administration/dashboard/AdminStatistics.tsx, broadcasts/BroadcastExpandableRow.tsx, broadcasts/BroadcastForm.tsx, broadcasts/RecipientsList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/category/utils.ts, marketplace/landing/OfferingsGroup.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/utils.ts, marketplace/routes.ts, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, marketplace/service-providers/ProviderDetailsBody.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/ServiceProvidersList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace/service-providers/details/ServiceProviderDetails.tsx, marketplace/utils.ts, navigation/sidebar/marketplace-popup/OfferingsPanel.tsx, proposals/details/CallOfferingsCard.tsx, proposals/details/PublicCallDetailsContainer.tsx, proposals/update/CallUpdateContainer.tsx, proposals/update/offerings/CallOfferingsSection.tsx",
     "message": "Offerings"
-  },
-  "Offerring description": {
-    "description": "marketplace/orders/details/OrderMetadataTab.tsx",
-    "message": "Offerring description"
   },
   "Ok": {
     "description": "events/TypeListDialog.tsx, marketplace/details/plan/PlanDescription.tsx, marketplace/offerings/actions/RequestActionDialog.tsx, marketplace/orders/TermsOfServiceDialog.tsx, marketplace/resources/MarketplaceKeyValueDialog.tsx, marketplace/resources/report/ShowReportDialog.tsx, openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx, rancher/cluster/apps/ApplicationDetailsDialog.tsx, reporting/plan-usage/PlanUsageDialog.tsx, slurm/RequestLimitsChangeDialog.tsx",
@@ -6406,6 +6406,10 @@
   "Options": {
     "description": "marketplace/resources/details/fetchData.tsx, marketplace/resources/options/ResourceOptionsCard.tsx",
     "message": "Options"
+  },
+  "Order created": {
+    "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
+    "message": "Order created"
   },
   "Order details": {
     "description": "marketplace/orders/details/OrderDetails.tsx",
@@ -6747,10 +6751,6 @@
     "description": "customer/routes.ts",
     "message": "Payments list"
   },
-  "Pending approval by requesting organization": {
-    "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
-    "message": "Pending approval by requesting organization"
-  },
   "Pending approval": {
     "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
     "message": "Pending approval"
@@ -6770,6 +6770,10 @@
   "Pending offering requests": {
     "description": "proposals/call-management/CallManagementStatistics.tsx",
     "message": "Pending offering requests"
+  },
+  "Pending organization approval": {
+    "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
+    "message": "Pending organization approval"
   },
   "Pending proposals": {
     "description": "proposals/call-management/CallManagementStatistics.tsx",
@@ -8427,6 +8431,10 @@
     "description": "openstack/openstack-backup-schedule/actions/DeactivateAction.tsx, openstack/openstack-snapshot-schedule/actions/DeactivateSnapshotScheduleAction.tsx",
     "message": "Resource schedule is already deactivated."
   },
+  "Resource successfully created": {
+    "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
+    "message": "Resource successfully created"
+  },
   "Resource termination date is required": {
     "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx",
     "message": "Resource termination date is required"
@@ -8451,9 +8459,9 @@
     "description": "marketplace/resources/usage/ResourceCreateUsageDialog.tsx",
     "message": "Resource usage"
   },
-  "Resource {type} {activeStep}": {
+  "Resource {type} process": {
     "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
-    "message": "Resource {type} {activeStep}"
+    "message": "Resource {type} process"
   },
   "Resource": {
     "description": "administration/roles/PermissionOptions.tsx, events/ExpandableEventDetailsTable.tsx, issues/create/IssueHeader.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx",
@@ -10864,7 +10872,7 @@
     "message": "Type of support backend. Possible values: atlassian, zammad, smax."
   },
   "Type": {
-    "description": "administration/agreements/UserAgreementsList.tsx, administration/organizations/OrganizationGroupsList.tsx, administration/roles/RoleForm.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileDetails.tsx, customer/payment-profiles/PaymentProfileList.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, customer/workspace/CustomerEventsFilter.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/import/SelectOfferingTab.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/orders/details/OrderDetailsQuickBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/orders/list/ResourceOrders.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-volume/InstanceVolumesList.tsx, openstack/openstack-volume/TenantVolumesList.tsx, project/ProjectEventsFilter.tsx, resource/support/SharedProviderResources.tsx, user/keys/KeysList.tsx, vmware/deploy/FormNetworkStep.tsx",
+    "description": "administration/agreements/UserAgreementsList.tsx, administration/organizations/OrganizationGroupsList.tsx, administration/roles/RoleForm.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileDetails.tsx, customer/payment-profiles/PaymentProfileList.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, customer/workspace/CustomerEventsFilter.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/import/SelectOfferingTab.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/orders/details/OrderDetailsQuickBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/orders/list/OrdersTableComponent.tsx, marketplace/orders/list/ResourceOrders.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, openstack/openstack-instance/deploy/FormSSHPublicKeysStep.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-volume/InstanceVolumesList.tsx, openstack/openstack-volume/TenantVolumesList.tsx, project/ProjectEventsFilter.tsx, resource/support/SharedProviderResources.tsx, user/keys/KeysList.tsx, vmware/deploy/FormNetworkStep.tsx",
     "message": "Type"
   },
   "Types of offering": {
@@ -12847,10 +12855,6 @@
     "description": "navigation/header/search/ErrorView.tsx",
     "message": "We had some trouble loading this page."
   },
-  "We're sorry, but the resource creation process has failed.": {
-    "description": "marketplace/resources/resource-pending/OrderErredView.tsx",
-    "message": "We're sorry, but the resource creation process has failed."
-  },
   "Webhook": {
     "description": "user/hooks/HookTypeField.tsx",
     "message": "Webhook"
@@ -13123,10 +13127,6 @@
     "description": "rancher/cluster/apps/ClusterApplicationsList.tsx",
     "message": "applications"
   },
-  "approval": {
-    "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
-    "message": "approval"
-  },
   "at": {
     "description": "form/CronField.tsx",
     "message": "at"
@@ -13358,10 +13358,6 @@
   "payments": {
     "description": "customer/payments/PaymentsList.tsx",
     "message": "payments"
-  },
-  "pending": {
-    "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
-    "message": "pending"
   },
   "permission reviews": {
     "description": "customer/team/CustomerPermissionsReviewList.tsx",

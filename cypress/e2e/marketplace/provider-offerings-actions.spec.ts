@@ -63,8 +63,8 @@ describe('Offerings list actions in Provider dashboard page', () => {
     cy.get('td .dropdown')
       .first()
       .find('button.dropdown-toggle')
-      .click({ force: true })
-      .get('.dropdown-item')
+      .click()
+      .get('#kt_content_container table .dropdown-item')
       .contains('Edit')
       .click({ force: true });
 
@@ -80,8 +80,8 @@ describe('Offerings list actions in Provider dashboard page', () => {
     cy.get('td .dropdown')
       .first()
       .find('button.dropdown-toggle')
-      .click({ force: true })
-      .get('table .dropdown-item')
+      .click()
+      .get('#kt_content_container table .dropdown-item')
       .contains('Preview order form')
       .click({ force: true });
 
@@ -105,8 +105,8 @@ describe('Offerings list actions in Provider dashboard page', () => {
     cy.get('td .dropdown')
       .first()
       .find('button.dropdown-toggle')
-      .click({ force: true })
-      .get('table .dropdown-item')
+      .click()
+      .get('#kt_content_container table .dropdown-item')
       .contains('Open public page')
       .click({ force: true })
       .waitForPage();

@@ -12,14 +12,19 @@
   }
 }
 
-$mobileHeaderHeight: get($header-config, default, height, tablet-and-mobile);
+$mobileHeaderHeight: get(
+  $header-config,
+  default,
+  outer-height,
+  tablet-and-mobile
+);
 
 .breadcrumb-mobile {
   background-color: $body-bg;
   height: $mobileHeaderHeight;
   position: fixed;
   top: $mobileHeaderHeight;
-  z-index: 1;
+  z-index: 20;
   border-bottom: 1px solid $border-color;
 
   + .content {

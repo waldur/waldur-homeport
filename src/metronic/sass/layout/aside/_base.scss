@@ -106,7 +106,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: get($header-config, default, height, desktop);
+      height: get($header-config, default, outer-height, desktop);
       padding: 0 get($aside-config, margin-x);
     }
 

@@ -30,14 +30,15 @@ export const ResourceDetailsHero = ({
         <OrderErredView resource={resource} />
       ) : null}
       <PublicDashboardHero2
-        className="container-fluid mb-8 mt-6"
+        containerClassName="container-fluid mb-8 mt-6"
+        cardBordered
         logo={getMarketplaceResourceLogo(resource)}
         logoAlt={resource.category_title}
         logoTooltip={formatResourceType(resource)}
         backgroundImage={offering.image}
         title={<ResourceDetailsHeaderTitle resource={resource} />}
         quickActions={
-          <div className="d-flex flex-column flex-wrap gap-2">
+          <div className="d-flex flex-column flex-wrap gap-2 w-sm-120px">
             <RefreshButton refetch={refetch} isLoading={isLoading} size="sm" />
             <ResourceActions
               resource={{

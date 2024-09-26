@@ -20,6 +20,7 @@ export interface ActionItemProps {
   disabled?: boolean;
   tooltip?: string;
   as?;
+  size?: 'sm' | 'lg';
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => {
@@ -51,6 +52,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
       onClick={() => !props.disabled && props.action()}
       as="button"
       variant={Component === Button ? '' : undefined}
+      size={Component === Button ? props.size : undefined}
       disabled={props.disabled && !props.tooltip}
     >
       <div className={props.disabled ? 'opacity-50' : undefined}>

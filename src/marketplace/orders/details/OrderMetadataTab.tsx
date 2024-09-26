@@ -8,7 +8,7 @@ import { Field } from '@waldur/resource/summary';
 export const OrderMetadataTab = ({ order, offering }) => {
   const DetailsComponent = getDetailsComponent(order.offering_type);
   return (
-    <Card>
+    <Card className="card-bordered">
       <Card.Header className="custom-card-header custom-padding-zero">
         <Card.Title>
           <h3>{translate('Metadata')}</h3>
@@ -51,7 +51,7 @@ export const OrderMetadataTab = ({ order, offering }) => {
             value={order.offering_billable ? 'Yes' : 'No'}
           />
           <Field
-            label={translate('Offerring description')}
+            label={translate('Offering description')}
             value={<FormattedHtml html={order.offering_description} />}
           />
           <Field

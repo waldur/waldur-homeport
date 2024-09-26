@@ -31,7 +31,7 @@ const getSortedSteps = (proposal: Proposal) => [
     ? {
         label: translate('Rejected'),
         state: ['rejected'],
-        color: 'bg-danger',
+        variant: 'danger',
       }
     : {
         label: translate('Accepted'),
@@ -40,7 +40,7 @@ const getSortedSteps = (proposal: Proposal) => [
 ];
 
 const getSteps = (proposal: Proposal) => {
-  const steps: Array<{ label; description?; completed; color? }> = [];
+  const steps: Array<{ label; description?; completed; variant? }> = [];
   const sortedSteps = getSortedSteps(proposal);
   const currentStateIndex =
     sortedSteps.findIndex((step) => step.state.includes(proposal.state)) - 1;
@@ -48,7 +48,7 @@ const getSteps = (proposal: Proposal) => {
     steps.push({
       label: step.label,
       completed: i <= currentStateIndex,
-      color: step.color,
+      variant: step.variant,
     });
   });
   return steps;

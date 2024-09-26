@@ -25,7 +25,6 @@ export const CustomerAccessControlPanel: FunctionComponent<
     <Table
       {...tableProps}
       id="access-control"
-      className="card-bordered"
       title={translate('Access control')}
       columns={[
         {

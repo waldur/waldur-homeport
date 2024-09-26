@@ -1,5 +1,7 @@
+import { Check, Circle } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, ReactNode } from 'react';
+import { Variant } from 'react-bootstrap/esm/types';
 
 import './ProgressSteps.scss';
 
@@ -8,9 +10,9 @@ interface ProgressStepsProps {
     label: any;
     description?: any;
     completed: any;
-    icon?: any;
+    icon?: ReactNode;
     labelClass?: string;
-    color?: string;
+    variant?: Variant;
   }>;
   bgClass?: string;
   className?: string;
@@ -23,14 +25,8 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
   children,
 }) => {
   return (
-    <div
-      className={classNames(
-        'progress-steps-view pt-8 pb-6',
-        className,
-        bgClass,
-      )}
-    >
-      <div className="container-xxl d-flex flex-column align-items-center">
+    <div className={classNames('progress-steps-view', className, bgClass)}>
+      <div className="d-flex flex-column align-items-center">
         {children}
         <div className="stepper stepper-pills d-flex flex-column w-100">
           <div className="stepper-nav flex-wrap align-items-start justify-content-around w-100">
@@ -51,17 +47,22 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                     <div
                       className={classNames(
                         'stepper-icon w-25px h-25px',
-                        current ? step.color || 'bg-success' : '',
+                        current ? `bg-${step.variant || 'warning'}` : '',
+                        current
+                          ? `ring-light-${step.variant || 'warning'} ring-4`
+                          : '',
                       )}
                     >
-                      {step.icon &&
-                        (typeof step.icon === 'string' ? (
+                      {step.icon ? (
+                        typeof step.icon === 'string' ? (
                           <i className={'fa ' + step.icon} />
                         ) : (
                           step.icon
-                        ))}
-                      {!step.icon && step.completed && (
-                        <i className="fa fa-check" />
+                        )
+                      ) : step.completed ? (
+                        <Check size={16} weight="bold" />
+                      ) : (
+                        <Circle size={10} weight="fill" />
                       )}
                     </div>
                     <div
@@ -70,20 +71,32 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                         bgClass,
                       )}
                     >
-                      <div className="stepper-line" />
+                      <div
+                        className={classNames(
+                          'stepper-line',
+                          current && `bg-${step.variant || 'warning'}`,
+                        )}
+                        style={{ width: 100 / steps.length + 'vw' }}
+                      />
                     </div>
 
                     <div className="stepper-label">
                       <div
                         className={classNames(
                           'stepper-title h3',
+                          current && `text-${step.variant || 'warning'}`,
                           step.labelClass,
                         )}
                       >
                         {step.label}
                       </div>
                       {step.description && (
-                        <div className="stepper-desc">
+                        <div
+                          className={classNames(
+                            'stepper-desc',
+                            current && `text-${step.variant || 'warning'}`,
+                          )}
+                        >
                           {step.description.map((line, i) => (
                             <div key={i}>{line}</div>
                           ))}

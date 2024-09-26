@@ -1,0 +1,59 @@
+//
+// Ring
+//
+
+// Gray ring colors
+@each $color, $value in $grays {
+  // Initial
+  .ring-gray-#{$color} {
+    outline-color: $value !important;
+  }
+}
+
+@each $name, $value in $theme-colors {
+  .ring-#{$name} {
+    outline: 1px solid $value;
+  }
+
+  .ring-light-#{$name} {
+    outline: 1px solid theme-light-color($name);
+  }
+}
+
+// Hover border colors
+@each $color, $value in $theme-colors {
+  .ring-hover-#{$color}:hover {
+    outline-color: $value !important;
+  }
+
+  .ring-active-#{$color}.active {
+    outline-color: $value !important;
+  }
+}
+
+// Dashed style
+.ring-dashed {
+  outline-style: dashed !important;
+}
+
+// Dotted style
+.ring-dotted {
+  outline-style: dotted !important;
+}
+
+// Width
+.ring-1 {
+  outline-width: 1px !important;
+}
+.ring-2 {
+  outline-width: 2px !important;
+}
+.ring-3 {
+  outline-width: 3px !important;
+}
+.ring-4 {
+  outline-width: 4px !important;
+}
+.ring-5 {
+  outline-width: 5px !important;
+}
