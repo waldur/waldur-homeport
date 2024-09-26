@@ -42,6 +42,7 @@ export const RoleGroup: FunctionComponent<{ types: RoleType[] }> = ({
       getOptionValue={({ name }) => name}
       validate={[required]}
       components={{ Option: RoleOption }}
+      noUpdateOnBlur
     />
   </Form.Group>
 );
