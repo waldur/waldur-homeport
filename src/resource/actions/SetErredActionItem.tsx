@@ -23,7 +23,10 @@ const getConfirmationText = (resource) => {
   );
 };
 
-export const SetErredActionItem: FC<{ resource }> = ({ resource }) => {
+export const SetErredActionItem: FC<{ resource; refetch }> = ({
+  resource,
+  refetch,
+}) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   if (!user.is_staff) {
@@ -44,6 +47,7 @@ export const SetErredActionItem: FC<{ resource }> = ({ resource }) => {
       await post(
         `/marketplace-resources/${resource.marketplace_resource_uuid}/set_as_erred/`,
       );
+      refetch();
       dispatch(showSuccess(translate('Resource has been set as erred.')));
     } catch (e) {
       dispatch(
