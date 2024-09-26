@@ -79,7 +79,7 @@ export const ResourceSummary: FunctionComponent<
     <Field label={translate('Error message')}>
       {resource.error_message || scope?.error_message}
     </Field>
-    <Field label={translate('Error traceback')}>
+    <Field label={translate('Error traceback')} valueClass="text-pre">
       {resource.error_traceback || scope?.error_traceback}
     </Field>
 
