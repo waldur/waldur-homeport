@@ -81,7 +81,13 @@ const getSteps = (resource: Resource) => {
                 ? translate('Rejected')
                 : translate('Done'),
         ]
-      : [translate('Resource successfully created')],
+      : [
+          order.type === 'Create'
+            ? translate('Resource successfully created')
+            : order.type === 'Terminate'
+              ? translate('Resource successfully terminated')
+              : translate('Resource successfully updated'),
+        ],
     completed: isStep4Completed,
     variant: order.state === 'done' ? 'success' : 'danger',
   });
