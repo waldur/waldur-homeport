@@ -11,6 +11,13 @@
         border-color: $primary-300;
         box-shadow: 0 0 0 4px rgba($primary-300, 0.25);
       }
+
+      &--is-disabled {
+        background-color: if(isDarkMode(), $primary-100, $gray-200);
+        .metronic-select__placeholder {
+          color: if(isDarkMode(), $primary-300, $gray-700);
+        }
+      }
     }
 
     &__value-container {

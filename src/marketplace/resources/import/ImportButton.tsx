@@ -1,20 +1,17 @@
-import classNames from 'classnames';
 import { FunctionComponent } from 'react';
+import { Button } from 'react-bootstrap';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
 export const ImportButton: FunctionComponent<{
-  disabled;
+  disabled?;
   submitting;
-  onClick;
-}> = ({ disabled, submitting, onClick }) => (
-  <button
-    className={classNames('btn btn-primary', {
-      disabled: disabled || submitting,
-    })}
-    type="button"
-    onClick={onClick}
+}> = ({ disabled, submitting }) => (
+  <Button
+    disabled={disabled || submitting}
+    className="flex-equal"
+    type="submit"
   >
     {submitting && (
       <>
@@ -22,5 +19,5 @@ export const ImportButton: FunctionComponent<{
       </>
     )}
     {translate('Import')}
-  </button>
+  </Button>
 );

@@ -58,7 +58,7 @@ export const ModalDialog: FC<ModalDialogProps> = ({
           )}
           <Modal.Title className="fw-bold">{title}</Modal.Title>
           {subtitle && (
-            <h6 className="text-grey-500 fw-normal mt-3">{subtitle}</h6>
+            <h6 className="text-grey-500 fw-normal mt-2">{subtitle}</h6>
           )}
         </div>
       </Modal.Header>

@@ -147,7 +147,20 @@ export const OfferingsPanel: FunctionComponent<{
   category;
   filter;
   goBack;
-}> = ({ lastOfferings, customer, project, category, filter, goBack }) => {
+  importable?: boolean;
+  selectable?: boolean;
+  onSelect?(offering: Offering): void;
+}> = ({
+  lastOfferings,
+  customer,
+  project,
+  category,
+  filter,
+  goBack,
+  importable,
+  selectable,
+  onSelect,
+}) => {
   const [selectedOffering, selectOffering] = useState<Offering>();
 
   const router = useRouter();
@@ -155,11 +168,14 @@ export const OfferingsPanel: FunctionComponent<{
   const handleOfferingClick = useCallback(
     (offering: Offering) => {
       selectOffering(offering);
-      router.stateService.go('marketplace-offering-public', {
-        offering_uuid: offering.uuid,
-      });
+      onSelect && onSelect(offering);
+      if (!selectable) {
+        router.stateService.go('marketplace-offering-public', {
+          offering_uuid: offering.uuid,
+        });
+      }
     },
-    [router, selectOffering],
+    [router, selectOffering, onSelect, selectable],
   );
 
   const getPage = (page) => {
@@ -181,6 +197,7 @@ export const OfferingsPanel: FunctionComponent<{
       filter,
       page + 1,
       VIRTUALIZED_SELECTOR_PAGE_SIZE,
+      importable,
     );
   };
 
