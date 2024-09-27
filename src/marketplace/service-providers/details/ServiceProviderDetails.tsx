@@ -3,6 +3,8 @@ import { Stack } from 'react-bootstrap';
 import { useTitle } from 'react-use';
 
 import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { Offering, ServiceProvider } from '@waldur/marketplace/types';
@@ -16,8 +18,9 @@ import { getProviderBreadcrumbItems } from '../utils';
 import { ProviderCallsTab } from './ProviderCallsTab';
 import { ProviderDashboardTab } from './ProviderDashboardTab';
 import { ProviderOfferingsTab } from './ProviderOfferingsTab';
-import '@waldur/core/CustomCard.scss';
 import { ProviderOrdersTab } from './ProviderOrdersTab';
+
+import '@waldur/core/CustomCard.scss';
 
 interface ProviderDetailsProps {
   provider: ServiceProvider;
@@ -36,7 +39,9 @@ const getProviderPageTabs = (data): PageBarTab[] => {
       title: translate('Offerings'),
       component: () => <ProviderOfferingsTab offerings={data.offerings} />,
     },
-    {
+    isFeatureVisible(
+      MarketplaceFeatures.show_call_management_functionality,
+    ) && {
       key: 'calls',
       title: translate('Calls'),
       component: () => (
@@ -48,7 +53,7 @@ const getProviderPageTabs = (data): PageBarTab[] => {
       title: translate('Orders'),
       component: () => <ProviderOrdersTab provider={data.provider} />,
     },
-  ];
+  ].filter(Boolean);
 };
 
 const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
