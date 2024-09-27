@@ -1,12 +1,12 @@
 import { Card } from 'react-bootstrap';
 
-import { MarketplaceOrdersList } from '@waldur/marketplace/orders/list/MarketplaceOrdersList';
+import { ProviderOrdersList } from '../ProviderOrdersList';
 
 export const ProviderOrdersTab = (props) => {
   return (
     <Card>
       <Card.Body>
-        <MarketplaceOrdersList provider_uuid={props.provider_uuid} />
+        <ProviderOrdersList provider={props.provider} />
       </Card.Body>
     </Card>
   );

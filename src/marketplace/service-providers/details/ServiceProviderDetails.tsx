@@ -46,9 +46,7 @@ const getProviderPageTabs = (data): PageBarTab[] => {
     {
       key: 'orders',
       title: translate('Orders'),
-      component: () => (
-        <ProviderOrdersTab provider_uuid={data.provider.customer_uuid} />
-      ),
+      component: () => <ProviderOrdersTab provider={data.provider} />,
     },
   ];
 };

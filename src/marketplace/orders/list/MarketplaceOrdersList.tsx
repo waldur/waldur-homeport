@@ -21,7 +21,7 @@ const mapStateToFilter = createSelector(
   (filterValues: any) => filterValues,
 );
 
-const useMarketplaceOrdersFilter = (provider_uuid?: string) => {
+const useMarketplaceOrdersFilter = () => {
   const filterValues = useSelector(mapStateToFilter);
   return useMemo(() => {
     const filter: Record<string, string> = {};
@@ -41,27 +41,24 @@ const useMarketplaceOrdersFilter = (provider_uuid?: string) => {
       if (filterValues.offering) {
         filter.offering_uuid = filterValues.offering.uuid;
       }
-      if (filterValues.provider && !provider_uuid) {
+      if (filterValues.provider) {
         filter.provider_uuid = filterValues.provider.customer_uuid;
       }
     }
-    if (provider_uuid) {
-      filter.provider_uuid = provider_uuid;
-    }
     return filter;
-  }, [filterValues, provider_uuid]);
+  }, [filterValues]);
 };
 
 export const MarketplaceOrdersList: FunctionComponent<
   MarketplaceOrdersListProps
-> = ({ provider_uuid }) => {
-  const filter = useMarketplaceOrdersFilter(provider_uuid);
+> = () => {
+  const filter = useMarketplaceOrdersFilter();
   useMarketplacePublicTabs();
 
   return (
     <OrdersTableComponent
       table={TABLE_MARKETPLACE_ORDERS}
-      filters={<MarketplaceOrdersListFilter provider_uuid={provider_uuid} />}
+      filters={<MarketplaceOrdersListFilter />}
       filter={filter}
       standalone
     />
