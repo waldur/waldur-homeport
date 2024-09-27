@@ -1,110 +1,100 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAsync, useAsyncFn } from 'react-use';
+import { useCallback, useMemo, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { change, getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import {
-  getAllProviderOfferings,
-  getImportableResources,
-  importResource,
-} from '@waldur/marketplace/common/api';
+import { importResource } from '@waldur/marketplace/common/api';
 import { ImportableResource, Offering, Plan } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { createEntity } from '@waldur/table/actions';
+import { Customer, Project } from '@waldur/workspace/types';
 
-import { ImportDialogProps } from './types';
+export const IMPORT_RESOURCE_FORM_ID = 'ResourceImportDialog';
 
-const getOfferingsForImport = (resolve) =>
-  getAllProviderOfferings({ params: { ...resolve, importable: true } });
+interface FormData {
+  organization: Customer;
+  project: Project;
+  resources: ImportableResource[];
+}
 
-const toggleElement = (element, list) =>
-  list.includes(element)
-    ? list.filter((item) => item !== element)
-    : [...list, element];
-
-export const useImportDialog = (props: ImportDialogProps) => {
+export const useImportDialog = () => {
+  const [step, setStep] = useState(1); // 3 steps
   const [offering, setOffering] = useState<Offering>();
-  const [resources, setResources] = useState<ImportableResource[]>([]);
   const [plans, setPlans] = useState<Record<string, Plan>>({});
-  const [submitting, setSubmitting] = useState(false);
+
+  const formValues = useSelector((state) =>
+    getFormValues(IMPORT_RESOURCE_FORM_ID)(state),
+  ) as FormData;
 
   const submitEnabled = useMemo(
     () =>
-      resources.length > 0 &&
+      formValues?.resources?.length > 0 &&
       (!offering.billable ||
-        resources.every(
+        formValues?.resources.every(
           (resource) => plans[resource.backend_id] !== undefined,
         )),
-    [resources, plans, offering],
+    [formValues, plans, offering],
   );
+
+  const nextEnabled =
+    step === 1
+      ? formValues?.organization && formValues?.project
+      : step === 2
+        ? offering
+        : false;
 
   const selectOffering = (value: Offering) => {
     setOffering(value);
-    setResources([]);
+    change(IMPORT_RESOURCE_FORM_ID, 'resources', []);
   };
   const assignPlan = (resource: ImportableResource, plan: Plan) =>
     setPlans({ ...plans, [resource.backend_id]: plan });
-  const toggleResource = (resource: ImportableResource) =>
-    setResources(toggleElement(resource, resources));
-
-  const offeringsProps = useAsync(
-    () => getOfferingsForImport(props.resolve),
-    [props.resolve],
-  );
-
-  const [resourceProps, resourceCallback] = useAsyncFn(
-    () => getImportableResources(offering.uuid),
-    [offering],
-  );
-
-  useEffect(() => {
-    if (offering) {
-      resourceCallback();
-    }
-  }, [resourceCallback, offering]);
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async () => {
-    setSubmitting(true);
-    try {
-      for (const resource of resources) {
-        const payload = {
-          offering_uuid: offering.uuid,
-          backend_id: resource.backend_id,
-          project: props.resolve.project_uuid,
-          plan: plans[resource.backend_id] && plans[resource.backend_id].uuid,
-        };
-        const marketplaceResource = await importResource(payload);
+  const handleSubmit = useCallback(
+    async (_formValues: FormData) => {
+      try {
+        for (const resource of _formValues.resources) {
+          const payload = {
+            offering_uuid: offering.uuid,
+            backend_id: resource.backend_id,
+            project: _formValues.project.uuid,
+            plan: plans[resource.backend_id] && plans[resource.backend_id].uuid,
+          };
+          const marketplaceResource = await importResource(payload);
+          dispatch(
+            createEntity(
+              'ProjectResourcesList',
+              marketplaceResource.uuid,
+              marketplaceResource,
+            ),
+          );
+        }
+        dispatch(showSuccess(translate('All resources have been imported.')));
+      } catch (e) {
         dispatch(
-          createEntity(
-            'ProjectResourcesList',
-            marketplaceResource.uuid,
-            marketplaceResource,
-          ),
+          showErrorResponse(e, translate('Resources import has failed.')),
         );
+        return;
       }
-      dispatch(showSuccess(translate('All resources have been imported.')));
-    } catch (e) {
-      setSubmitting(false);
-      dispatch(showErrorResponse(e, translate('Resources import has failed.')));
-      return;
-    }
-    dispatch(closeModalDialog());
-  };
+      dispatch(closeModalDialog());
+    },
+    [dispatch, offering, plans],
+  );
 
   return {
+    step,
+    setStep,
     offering,
+    organization: formValues?.organization,
+    project: formValues?.project,
     selectOffering,
-    offeringsProps,
-    resources,
-    resourceProps,
-    toggleResource,
     plans,
     assignPlan,
+    nextEnabled,
     submitEnabled,
     handleSubmit,
-    submitting,
   };
 };

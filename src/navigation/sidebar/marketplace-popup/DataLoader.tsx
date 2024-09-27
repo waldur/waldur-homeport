@@ -18,12 +18,18 @@ export const DataLoader = ({
   customer,
   project,
   categoryUuid = null,
+  showRecentlyAddedOfferings = true,
+  onSelectOffering = undefined,
+  importableOfferings = false,
 }) => {
   const [selectedCategory, selectCategory] = useState<Category>();
 
   const { data: lastOfferings } = useQuery(
     ['MarketplacePopupNOfferings', customer?.uuid, project?.uuid, categoryUuid],
-    () => (categoryUuid ? null : fetchLastNOfferings(customer, project)),
+    () =>
+      categoryUuid || !showRecentlyAddedOfferings
+        ? null
+        : fetchLastNOfferings(customer, project),
     { staleTime: 1 * 60 * 1000 },
   );
 
@@ -132,6 +138,9 @@ export const DataLoader = ({
           category={selectedCategory}
           filter={filter}
           goBack={() => selectCategory(null)}
+          selectable={Boolean(onSelectOffering)}
+          onSelect={onSelectOffering}
+          importable={importableOfferings}
         />
       )}
     </div>

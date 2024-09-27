@@ -80,10 +80,10 @@ $dark-color: #1f2e23;
       &.active {
         background-color: if(isDarkMode(), $gray-400, $gray-700);
         .title {
-          color: if(isDarkMode(), $dark-inverse, $white);
+          color: $white;
         }
         .description {
-          color: if(isDarkMode(), $gray-300, $gray-700);
+          color: if(isDarkMode(), $gray-800, $grey-100);
         }
       }
       &.disabled {

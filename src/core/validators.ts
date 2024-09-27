@@ -14,6 +14,11 @@ export const isGuid = (value) => {
 export const required = (value) =>
   value || value === 0 ? undefined : translate('This field is required.');
 
+export const requiredArray = (value) =>
+  Array.isArray(value) && value.length
+    ? undefined
+    : translate('This field is required.');
+
 export const number = (value) =>
   !value || !isNaN(value) ? undefined : translate('Must be a number.');
 

@@ -3,7 +3,10 @@ import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { ResourceImportButton } from '@waldur/marketplace/resources/import/ResourceImportButton';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Table } from '@waldur/table';
 import { SLUG_COLUMN } from '@waldur/table/slug';
@@ -169,7 +172,14 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       expandableRow={ExpandableResourceSummary}
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
-      tableActions={<AddResourceButton context={props.context} />}
+      tableActions={
+        <>
+          {isFeatureVisible(MarketplaceFeatures.import_resources) && (
+            <ResourceImportButton />
+          )}
+          <AddResourceButton context={props.context} />
+        </>
+      }
     />
   );
 };

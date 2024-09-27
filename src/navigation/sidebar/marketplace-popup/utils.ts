@@ -1,5 +1,6 @@
 import {
   getCategories,
+  getProviderOfferingsOptions,
   getPublicOfferingsList,
   getPublicOfferingsOptions,
 } from '@waldur/marketplace/common/api';
@@ -29,17 +30,23 @@ export const fetchOfferingsByPage = (
   search: string,
   page: number,
   pageSize: number,
+  importable: boolean = false,
 ) => {
-  return getPublicOfferingsOptions({
+  const api = importable
+    ? getProviderOfferingsOptions
+    : getPublicOfferingsOptions;
+  return api({
     ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
     ...(project ? { project_uuid: project.uuid } : {}),
+    ...(importable ? { importable: true } : {}),
     category_uuid: category.uuid,
     name: search,
     field: [
       'uuid',
       'category_uuid',
-      'customer_uuid',
       'category_title',
+      'customer_uuid',
+      'customer_name',
       'name',
       'description',
       'image',

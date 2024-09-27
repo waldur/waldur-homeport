@@ -21,7 +21,6 @@ import {
   Category,
   CategoryComponentUsage,
   CategoryGroup,
-  ImportableResource,
   Offering,
   OfferingPermission,
   OrganizationGroup,
@@ -382,11 +381,6 @@ export const changeLimits = (
   post(`/marketplace-resources/${resource_uuid}/update_limits/`, {
     limits,
   }).then((response) => response.data);
-
-export const getImportableResources = (offering_uuid: string) =>
-  getAll<ImportableResource>(
-    `/marketplace-provider-offerings/${offering_uuid}/importable_resources/`,
-  );
 
 export const importResource = ({ offering_uuid, ...payload }) =>
   post<Resource>(
