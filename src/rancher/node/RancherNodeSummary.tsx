@@ -1,17 +1,14 @@
 import { translate } from '@waldur/i18n';
 import { KeyValueButton } from '@waldur/marketplace/resources/KeyValueButton';
-import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 
 import { NodeRoleField } from './NodeRoleField';
 
 const formatInstance = (resource) =>
-  resource.instance ? (
+  resource.instance_marketplace_uuid ? (
     <ResourceLink
-      type={INSTANCE_TYPE}
-      uuid={resource.instance_uuid}
-      project={resource.project_uuid}
+      uuid={resource.instance_marketplace_uuid}
       label={resource.instance_name}
     />
   ) : (
@@ -77,7 +74,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         }
       />
       <Field
-        label={translate('OpenStack Instance')}
+        label={translate('OpenStack instance')}
         value={formatInstance(props.resource)}
       />
     </>

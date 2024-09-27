@@ -65,9 +65,7 @@ export const OpenStackInstanceSummary = (
           label={translate('Rancher cluster')}
           value={
             <ResourceLink
-              type="Rancher.Cluster"
-              uuid={props.resource.rancher_cluster.uuid}
-              project={props.resource.project_uuid}
+              uuid={props.resource.rancher_cluster.marketplace_uuid}
               label={props.resource.rancher_cluster.name}
             />
           }

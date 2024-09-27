@@ -14,9 +14,7 @@ export const AzureSQLDatabaseSummary = (
       <PureAzureResourceSummary {...props} />
       <Field label={translate('Server')}>
         <ResourceLink
-          type="Azure.SQLServer"
-          uuid={resource.server_uuid}
-          project={resource.project_uuid}
+          uuid={resource.server_marketplace_uuid}
           label={resource.server_name}
         />
       </Field>
