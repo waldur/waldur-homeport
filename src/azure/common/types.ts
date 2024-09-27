@@ -20,6 +20,7 @@ export interface AzureSQLServer extends AzureResource {
 export interface AzureSQLDatabase extends AzureResource {
   server_name: string;
   server_uuid: string;
+  server_marketplace_uuid: string;
   charset: string;
   collation: string;
 }

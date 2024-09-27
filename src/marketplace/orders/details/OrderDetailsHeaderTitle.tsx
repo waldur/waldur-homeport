@@ -36,9 +36,7 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
         <OrderStateField order={order} pill outline hasBullet />
       </div>
       <ResourceLink
-        type={order.resource_type}
         uuid={order.marketplace_resource_uuid}
-        project={order.project_uuid}
         label={resourceLabel}
       />{' '}
       / {offeringName}

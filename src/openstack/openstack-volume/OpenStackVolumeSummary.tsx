@@ -1,9 +1,7 @@
-import { formatFilesize, getUUID } from '@waldur/core/utils';
+import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
-
-import { INSTANCE_TYPE } from '../constants';
 
 const formatSize = (props) => {
   const filesize = formatFilesize(props.resource.size);
@@ -13,11 +11,9 @@ const formatSize = (props) => {
 };
 
 export const formatInstance = (resource) =>
-  resource.instance ? (
+  resource.instance_marketplace_uuid ? (
     <ResourceLink
-      type={INSTANCE_TYPE}
-      uuid={getUUID(resource.instance)}
-      project={resource.project_uuid}
+      uuid={resource.instance_marketplace_uuid}
       label={resource.instance_name}
     />
   ) : (

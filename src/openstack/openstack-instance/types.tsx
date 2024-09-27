@@ -3,7 +3,7 @@ import { BaseResource, VirtualMachine, Volume } from '@waldur/resource/types';
 import { SecurityGroup } from '../openstack-security-groups/types';
 
 interface RancherClusterReference {
-  uuid: string;
+  marketplace_uuid: string;
   name: string;
 }
 
