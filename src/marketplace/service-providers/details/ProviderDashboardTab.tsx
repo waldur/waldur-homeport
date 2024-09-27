@@ -1,6 +1,8 @@
 import { Card } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { OfferingCard } from '@waldur/marketplace/common/OfferingCard';
 import { getLabel } from '@waldur/marketplace/common/registry';
@@ -72,16 +74,22 @@ export const ProviderDashboardTab = (props) => {
           />
         </Card.Body>
       </Card>
-      <hr />
-      <Card>
-        <Card.Body>
-          <PublicCallsList
-            provider_uuid={props.data.provider.customer_uuid}
-            offering_uuid={null}
-            initialMode="grid"
-          />
-        </Card.Body>
-      </Card>
+      {isFeatureVisible(
+        MarketplaceFeatures.show_call_management_functionality,
+      ) && (
+        <>
+          <hr />
+          <Card>
+            <Card.Body>
+              <PublicCallsList
+                provider_uuid={props.data.provider.customer_uuid}
+                offering_uuid={null}
+                initialMode="grid"
+              />
+            </Card.Body>
+          </Card>
+        </>
+      )}
     </div>
   );
 };
