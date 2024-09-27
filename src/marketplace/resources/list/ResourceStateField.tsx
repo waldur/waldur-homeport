@@ -48,7 +48,7 @@ export const ResourceStateField = ({
       pill={pill}
       hasBullet={hasBullet}
       tooltip={
-        resource.backend_metadata.action
+        resource.backend_metadata?.action
           ? translate('{action} in progress', {
               action: resource.backend_metadata.action,
             })
