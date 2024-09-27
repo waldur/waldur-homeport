@@ -108,9 +108,7 @@ export const MarketplaceOrdersListFilter = reduxForm({
   destroyOnUnmount: false,
 })((props) => (
   <PureMarketplaceOrdersListFilter {...props} hasOffering hasOrganization />
-)) as React.ComponentType<{
-  provider_uuid?: string;
-}>;
+));
 
 export const ProviderOrdersListFilter = reduxForm({
   form: PROVIDER_ORDERS_LIST_FILTER_FORM_ID,
