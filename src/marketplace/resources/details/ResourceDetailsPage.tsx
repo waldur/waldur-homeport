@@ -9,7 +9,6 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import {
   useBreadcrumbs,
-  useExtraTabs,
   usePageHero,
   useToolbarActions,
 } from '@waldur/navigation/context';
@@ -20,7 +19,7 @@ import { ProjectUsersBadge } from '@waldur/project/ProjectUsersBadge';
 import { ProjectUsersList } from '@waldur/project/team/ProjectUsersList';
 import { setCurrentResource } from '@waldur/workspace/actions';
 
-import { fetchData } from './fetchData';
+import { fetchData, getResourceTabs } from './fetchData';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { ResourceDetailsHero } from './ResourceDetailsHero';
 
@@ -36,6 +35,8 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
       staleTime: 3 * 60 * 1000,
     },
   );
+
+  const tabs = useMemo(() => (data ? getResourceTabs(data) : []), [data]);
 
   useTitle(data?.resource.name);
 
@@ -128,8 +129,6 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     [data, refetch, isRefetching],
   );
 
-  useExtraTabs(data?.tabs || []);
-
   const openTeamModal = useCallback(() => {
     dispatch(openModalDialog(ProjectUsersList, { size: 'xl' }));
   }, []);
@@ -144,7 +143,7 @@ export const ResourceDetailsPage: FunctionComponent<{}> = () => {
     [openTeamModal],
   );
 
-  const { tabSpec } = usePageTabsTransmitter(data?.tabs || []);
+  const { tabSpec } = usePageTabsTransmitter(tabs);
 
   if (!data && isLoading) {
     return <LoadingSpinner />;
