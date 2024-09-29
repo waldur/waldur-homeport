@@ -34,15 +34,13 @@ import { ResourceMetadataCard } from './ResourceMetadataCard';
 import { TenantMainComponent } from './TenantMainComponent';
 import { UsageCard } from './UsageCard';
 
-export const fetchData = async (resourceId) => {
-  const resource = await getResource(resourceId);
-  let scope;
-  if (resource.scope) {
-    scope = await getResourceDetails(resourceId);
-  }
-  const offering = await getResourceOffering(resource.uuid);
-  const components = offering.components;
-
+export const getResourceTabs = ({
+  resource,
+  offering,
+  scope,
+  lexisLinksCount,
+  robotAccountsCount,
+}) => {
   // Generate tabs
   const tabs: PageBarTab[] = [];
 
@@ -93,22 +91,14 @@ export const fetchData = async (resourceId) => {
     tabs.push(...NestedResourceTabsConfiguration.get(scope.resource_type));
   }
 
-  if (isFeatureVisible(MarketplaceFeatures.lexis_links)) {
-    const lexisLinksCount = await countLexisLinks({
-      resource_uuid: resource.uuid,
+  if (lexisLinksCount) {
+    tabs.push({
+      key: 'lexis-links',
+      title: translate('LEXIS links'),
+      component: LexisLinkCard,
     });
-    if (lexisLinksCount) {
-      tabs.push({
-        key: 'lexis-links',
-        title: translate('LEXIS links'),
-        component: LexisLinkCard,
-      });
-    }
   }
 
-  const robotAccountsCount = await countRobotAccounts({
-    resource: resource.url,
-  });
   if (robotAccountsCount) {
     tabs.push({
       key: 'robot-accounts',
@@ -171,6 +161,34 @@ export const fetchData = async (resourceId) => {
       },
     ],
   });
+  return tabs;
+};
 
-  return { resource, scope, components, offering, tabs };
+export const fetchData = async (resourceId) => {
+  const resource = await getResource(resourceId);
+  let scope;
+  if (resource.scope) {
+    scope = await getResourceDetails(resourceId);
+  }
+  const offering = await getResourceOffering(resource.uuid);
+  const components = offering.components;
+
+  let lexisLinksCount = 0;
+  if (isFeatureVisible(MarketplaceFeatures.lexis_links)) {
+    lexisLinksCount = await countLexisLinks({
+      resource_uuid: resource.uuid,
+    });
+  }
+  const robotAccountsCount = await countRobotAccounts({
+    resource: resource.url,
+  });
+
+  return {
+    resource,
+    scope,
+    components,
+    offering,
+    lexisLinksCount,
+    robotAccountsCount,
+  };
 };
