@@ -39,6 +39,7 @@ import './Table.scss';
 export interface TableProps<RowType = any> extends TableState {
   table?: string;
   rows: any[];
+  rowKey?: string;
   fetch: (force?: boolean) => void;
   gotoPage?: (page: number) => void;
   hasQuery?: boolean;
@@ -154,6 +155,7 @@ const TableComponent = (
         rows={props.rows}
         columns={visibleColumns}
         rowClass={props.rowClass}
+        rowKey={props.rowKey}
         expandableRow={props.expandableRow}
         expandableRowClassName={props.expandableRowClassName}
         rowActions={showActions ? props.rowActions : undefined}
@@ -177,6 +179,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
   static defaultProps = {
     rows: [],
     columns: [],
+    rowKey: 'uuid',
     hasQuery: false,
     hasPagination: true,
     hasActionBar: true,

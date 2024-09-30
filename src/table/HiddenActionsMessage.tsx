@@ -27,6 +27,7 @@ export const HiddenActionsMessage: FunctionComponent<
           {translate('Some functionality may not be accessible.')}
         </p>
         <button
+          type="button"
           className="text-anchor fw-bold"
           onClick={() =>
             toggleColumn(OPTIONAL_COLUMN_ACTIONS_KEY, { keys: [] }, true)

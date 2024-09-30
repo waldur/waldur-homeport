@@ -52,6 +52,7 @@ export const fetchOfferingsByPage = (
       'image',
       'state',
       'paused_reason',
+      'plans',
     ],
     state: ['Active', 'Paused'],
     page,

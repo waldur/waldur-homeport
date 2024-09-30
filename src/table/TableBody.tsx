@@ -15,6 +15,7 @@ type TableBodyProps = Pick<
   | 'rows'
   | 'columns'
   | 'rowClass'
+  | 'rowKey'
   | 'expandableRow'
   | 'expandableRowClassName'
   | 'rowActions'
@@ -45,7 +46,15 @@ const TableCells = ({
           .map(
             (id) =>
               (columnsMap[id].visible ?? true) && (
-                <td key={id} className={columnsMap[id].className}>
+                <td
+                  key={id}
+                  className={columnsMap[id].className}
+                  onClick={
+                    columnsMap[id].disabledClick
+                      ? (e) => e.stopPropagation()
+                      : undefined
+                  }
+                >
                   {(() => {
                     const renderedContent = React.createElement(
                       columnsMap[id].render,
@@ -70,7 +79,13 @@ const TableCells = ({
       : columns.map(
           (column, colIndex) =>
             (column.visible ?? true) && (
-              <td key={colIndex} className={column.className}>
+              <td
+                key={colIndex}
+                className={column.className}
+                onClick={
+                  column.disabledClick ? (e) => e.stopPropagation() : undefined
+                }
+              >
                 {(() => {
                   const renderedContent = React.createElement(column.render, {
                     row,
@@ -98,6 +113,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
   rows,
   columns,
   rowClass,
+  rowKey,
   expandableRow,
   expandableRowClassName,
   rowActions,
@@ -140,14 +156,14 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
 
   const isRowSelected = (row: any) => {
     if (!selectedRows) return false;
-    return selectedRows.some((item) => item.uuid === row.uuid);
+    return selectedRows.some((item) => item[rowKey] === row[rowKey]);
   };
 
   const onChangeField = useCallback(
     (row, input) => {
       if (fieldType === 'checkbox') {
         const newValues: any[] = input.value || [];
-        const index = newValues.findIndex((v) => v.uuid === row.uuid);
+        const index = newValues.findIndex((v) => v[rowKey] === row[rowKey]);
         // Is field checked
         if (index > -1) {
           newValues.splice(index, 1);
@@ -167,9 +183,11 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
     let isChecked = false;
     if (fieldProps) {
       if (Array.isArray(fieldProps.input.value)) {
-        isChecked = fieldProps.input.value.some((v) => v.uuid === row.uuid);
+        isChecked = fieldProps.input.value.some(
+          (v) => v[rowKey] === row[rowKey],
+        );
       } else {
-        isChecked = fieldProps.input.value?.uuid === row.uuid;
+        isChecked = fieldProps.input.value?.[rowKey] === row[rowKey];
       }
     } else {
       isChecked = isRowSelected(row);
