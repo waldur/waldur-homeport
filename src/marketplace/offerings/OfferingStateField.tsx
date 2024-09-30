@@ -15,6 +15,7 @@ export const OfferingStateField = ({
   mode = 'light',
   hasBullet,
 }: OfferingStateFieldProps) => {
+  const disabled = [DRAFT, ARCHIVED].includes(offering.state);
   return (
     <StateIndicator
       label={offering.state}
@@ -23,11 +24,11 @@ export const OfferingStateField = ({
           [DRAFT]: 'light',
           [ACTIVE]: 'success',
           [PAUSED]: 'warning',
-          [ARCHIVED]: 'info',
+          [ARCHIVED]: 'light',
         }[offering.state]
       }
-      light={mode === 'light'}
-      outline={mode === 'outline'}
+      light={mode === 'light' && !disabled}
+      outline={mode === 'outline' && !disabled}
       hasBullet={hasBullet}
       pill
     />
