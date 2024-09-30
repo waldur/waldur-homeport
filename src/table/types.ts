@@ -63,6 +63,7 @@ export interface Column<RowType = any> {
   export?: string | boolean | ((row: RowType) => string | number);
   exportTitle?: string;
   exportKeys?: string[];
+  disabledClick?: boolean;
 }
 
 export type DisplayMode = 'table' | 'grid';

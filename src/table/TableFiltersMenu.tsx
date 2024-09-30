@@ -255,6 +255,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
       {props.openName ? (
         <>
           <button
+            type="button"
             className={COLUMN_FILTER_TOGGLE_CLASS + ' text-btn'}
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"

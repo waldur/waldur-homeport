@@ -8,8 +8,6 @@ import { ResourceIcon } from '@waldur/resource/ResourceName';
 import { createFetcher, Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-import { ResourceStateField } from '../list/ResourceStateField';
-
 const serializeResource = (resource) => ({
   name: resource.name,
   uuid: resource.backend_id,
@@ -49,34 +47,33 @@ export const ResourcesList: FunctionComponent<{
           orderField: 'name',
         },
         {
+          title: translate('Type'),
+          render: ({ row }) => row.type,
+        },
+        {
           title: translate('Backend ID'),
           render: ({ row }) => row.backend_id,
         },
         {
-          title: translate('State'),
+          title: translate('Plan'),
           render: ({ row }) => (
-            <ResourceStateField resource={row} outline pill />
+            <Select
+              placeholder={translate('Plan')}
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              options={offering.plans}
+              value={plans[row.backend_id]}
+              onChange={(plan) => assignPlan(row, plan)}
+              isClearable={false}
+            />
           ),
+          className: 'min-w-150px',
+          disabledClick: true,
         },
-        offering.billable
-          ? {
-              title: translate('Plan'),
-              render: ({ row }) => (
-                <Select
-                  placeholder={translate('Plan')}
-                  getOptionValue={(option) => option.uuid}
-                  getOptionLabel={(option) => option.name}
-                  options={offering.plans}
-                  value={plans[row.backend_id]}
-                  onChange={(plan) => assignPlan(row, plan)}
-                  isClearable={false}
-                />
-              ),
-            }
-          : null,
-      ].filter(Boolean)}
+      ]}
       title={translate('Resources')}
       verboseName={translate('Resources')}
+      rowKey="backend_id"
       hasQuery
       fieldType="checkbox"
       fieldName="resources"

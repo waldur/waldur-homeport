@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { TableProps } from '@waldur/table/Table';
 
 export const LoadingSpinner: FunctionComponent = () => (
-  <button className="btn btn-icon btn-flush">
+  <button type="button" className="btn btn-icon btn-flush">
     <span className="fa-spin">
       <ArrowsClockwise size={20} data-cy="loading-spinner" />
     </span>
@@ -17,6 +17,7 @@ export const TableRefreshButton = (props: TableProps) =>
     <LoadingSpinner />
   ) : (
     <button
+      type="button"
       className="btn btn-icon btn-active-light"
       onClick={() => props.fetch(true)}
     >

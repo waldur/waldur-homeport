@@ -291,6 +291,8 @@ export interface PluginMetadata {
 export interface ImportableResource {
   backend_id: string;
   name: string;
+  type: string;
+  description: string;
 }
 
 export interface OfferingPermission {

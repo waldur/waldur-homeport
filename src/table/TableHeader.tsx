@@ -47,6 +47,7 @@ function renderSortingIcon(
     <span>
       <span className="sorting-buttons">
         <button
+          type="button"
           onClick={() => onClickSort('asc')}
           className={classNames(
             'text-btn',
@@ -66,6 +67,7 @@ function renderSortingIcon(
           </svg>
         </button>
         <button
+          type="button"
           onClick={() => onClickSort('desc')}
           className={classNames(
             'text-btn',
