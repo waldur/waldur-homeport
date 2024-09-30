@@ -1,26 +1,34 @@
 import { FunctionComponent } from 'react';
 import { components, Props as SelectProps } from 'react-select';
 
+import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import {
   AsyncPaginate,
   FilterSelectClearIndicator,
   FilterSelectControl,
 } from '@waldur/form/themed-select';
 
-const renderIcon = (src: string, imgStyle: any) => (
-  <img
-    src={src}
-    alt="thumb"
-    style={{
-      display: 'inline-block',
-      marginRight: 10,
-      position: 'relative',
-      top: -2,
-      verticalAlign: 'middle',
-      ...imgStyle,
-    }}
-  />
-);
+const renderIcon = (src: string, imgStyle: any) =>
+  src ? (
+    <img
+      src={src}
+      alt="thumb"
+      style={{
+        display: 'inline-block',
+        marginRight: 10,
+        position: 'relative',
+        top: -2,
+        verticalAlign: 'middle',
+        ...imgStyle,
+      }}
+    />
+  ) : (
+    <ImagePlaceholder
+      width={imgStyle.width}
+      height={imgStyle.width}
+      className="me-3"
+    />
+  );
 
 const Option = (props) => {
   const img = renderIcon(props.data.thumbnail, { width: 19 });

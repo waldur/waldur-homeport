@@ -23,7 +23,7 @@ const PureProviderOfferingUsersFilter: FunctionComponent<
   const customer = useSelector(getCustomer);
   const offeringFilter = useMemo(
     () => ({
-      customer_uuid: customer.uuid,
+      customer_uuid: hasOrganizationColumn ? undefined : customer?.uuid,
       billable: true,
       shared: true,
       state: undefined,
@@ -49,7 +49,7 @@ const PureProviderOfferingUsersFilter: FunctionComponent<
           name="provider"
           getValueLabel={(option) => option.customer_name}
         >
-          <ProviderAutocomplete />
+          <ProviderAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
         </TableFilterItem>
       )}
     </>
