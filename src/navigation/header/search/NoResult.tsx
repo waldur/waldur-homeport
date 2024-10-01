@@ -15,6 +15,7 @@ interface NoResultProps {
   buttonTitle?: string;
   callback?(): void;
   isVisible?: boolean;
+  className?: string;
   style?: CSSProperties;
 }
 
@@ -24,11 +25,16 @@ export const NoResult: FC<NoResultProps> = ({
   buttonTitle = translate('Clear search'),
   callback,
   isVisible = true,
+  className,
   style,
 }) => {
   return (
     <div
-      className={classNames('search-no-result', !isVisible && 'd-none')}
+      className={classNames(
+        'search-no-result',
+        !isVisible && 'd-none',
+        className,
+      )}
       style={style}
     >
       <Bg className="background" />

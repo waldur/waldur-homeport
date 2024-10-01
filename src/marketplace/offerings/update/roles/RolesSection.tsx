@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { Table } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
@@ -41,6 +42,15 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
           },
         ]}
         verboseName={translate('Roles')}
+        placeholderComponent={
+          <NoResult
+            callback={props.refetch}
+            title={translate('No roles found')}
+            message={translate("Offering doesn't have roles.")}
+            buttonTitle={translate('Search again')}
+            className="mt-n5"
+          />
+        }
         hasActionBar={false}
         rowActions={({ row }) => (
           <DeleteRoleButton role={row} refetch={props.refetch} />

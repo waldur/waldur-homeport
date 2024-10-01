@@ -4,6 +4,7 @@ import { fixURL } from '@waldur/core/api';
 import { InfiniteList } from '@waldur/core/InfiniteList';
 import { translate } from '@waldur/i18n';
 import { Issue } from '@waldur/issues/list/types';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { parseResponse } from '@waldur/table/api';
 
 import { IssueRow } from './IssueRow';
@@ -41,7 +42,15 @@ export const ResourceIssues = ({ resource }) => {
     <InfiniteList
       RowComponent={IssueRow}
       context={context}
-      emptyMessage={translate('There are no resource issues.')}
+      emptyMessage={
+        <NoResult
+          callback={context.refetch}
+          title={translate('No issues found')}
+          message={translate('There are no resource issues.')}
+          buttonTitle={translate('Search again')}
+          className="mt-n5"
+        />
+      }
     />
   );
 };

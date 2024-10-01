@@ -3,6 +3,7 @@ import { Card, Table } from 'react-bootstrap';
 
 import { FormFieldsContext } from '@waldur/form/context';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';
@@ -31,14 +32,14 @@ export const OfferingOptionsSectionPure: FC<
         ) : null}
       </Card.Header>
       <Card.Body>
-        {data?.order?.length === 0 ? (
-          <div className="justify-content-center row">
-            <div className="col-sm-4">
-              <p className="text-center">
-                {translate("Offering doesn't have input variables.")}
-              </p>
-            </div>
-          </div>
+        {!data?.order?.length ? (
+          <NoResult
+            callback={props.refetch}
+            title={translate('No input variables found')}
+            message={translate("Offering doesn't have input variables.")}
+            buttonTitle={translate('Search again')}
+            className="mt-n5"
+          />
         ) : (
           <Table bordered={true} hover={true} responsive={true}>
             <tbody>
