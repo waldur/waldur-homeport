@@ -5775,6 +5775,10 @@
     "description": "marketplace/service-providers/OrganizationProjectsExpandable.tsx",
     "message": "No end date"
   },
+  "No endpoints found": {
+    "description": "marketplace/offerings/update/endpoints/OfferingEndpointsSection.tsx",
+    "message": "No endpoints found"
+  },
   "No errors found for this order": {
     "description": "marketplace/orders/details/ErrorDetailsTab.tsx",
     "message": "No errors found for this order"
@@ -5787,9 +5791,17 @@
     "description": "marketplace/category/admin/AdminCategoriesPage.tsx",
     "message": "No group"
   },
+  "No input variables found": {
+    "description": "marketplace/offerings/update/options/OfferingOptionsSectionPure.tsx",
+    "message": "No input variables found"
+  },
   "No invoice data available.": {
     "description": "customer/list/CustomerExpandableRow.tsx",
     "message": "No invoice data available."
+  },
+  "No issues found": {
+    "description": "marketplace/resources/details/ResourceIssues.tsx",
+    "message": "No issues found"
   },
   "No limits found for this order": {
     "description": "marketplace/orders/details/LimitsSection.tsx",
@@ -5866,6 +5878,10 @@
   "No results found": {
     "description": "auth/saml2/ProviderField.tsx, form/AsyncSelectField.tsx, navigation/header/search/NoResult.tsx",
     "message": "No results found"
+  },
+  "No roles found": {
+    "description": "marketplace/offerings/update/roles/RolesSection.tsx",
+    "message": "No roles found"
   },
   "No rounds": {
     "description": "proposals/CallCard.tsx",
@@ -6102,6 +6118,10 @@
   "Offering doesn't have plans.": {
     "description": "marketplace/offerings/update/plans/PlansSection.tsx",
     "message": "Offering doesn't have plans."
+  },
+  "Offering doesn't have roles.": {
+    "description": "marketplace/offerings/update/roles/RolesSection.tsx",
+    "message": "Offering doesn't have roles."
   },
   "Offering has been created.": {
     "description": "marketplace/offerings/actions/OfferingCreateDialog.tsx",
@@ -8932,7 +8952,7 @@
     "message": "Script language: {language}"
   },
   "Search again": {
-    "description": "table/TablePlaceholder.tsx",
+    "description": "marketplace/offerings/update/endpoints/OfferingEndpointsSection.tsx, marketplace/offerings/update/options/OfferingOptionsSectionPure.tsx, marketplace/offerings/update/roles/RolesSection.tsx, marketplace/resources/details/ResourceIssues.tsx, table/TablePlaceholder.tsx",
     "message": "Search again"
   },
   "Search an offering": {

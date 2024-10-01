@@ -1,5 +1,5 @@
 import { InfiniteQueryObserverResult } from '@tanstack/react-query';
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 
 import { translate } from '@waldur/i18n';
 
@@ -10,14 +10,18 @@ export const InfiniteList = ({
 }: {
   context: InfiniteQueryObserverResult<{ data: any[] }>;
   RowComponent;
-  emptyMessage: string;
+  emptyMessage: ReactNode;
 }) =>
   context.status === 'loading' ? (
     <p className="text-center text-dark mb-0">{translate('Loading')}</p>
   ) : context.status === 'error' ? (
     <p className="text-center text-dark mb-0">{translate('Error')}</p>
   ) : context.data.pages[0].data.length === 0 ? (
-    <p className="text-center text-dark mb-0">{emptyMessage}</p>
+    typeof emptyMessage === 'string' ? (
+      <p className="text-center text-dark mb-0">{emptyMessage}</p>
+    ) : (
+      emptyMessage
+    )
   ) : (
     <>
       <div className="timeline">

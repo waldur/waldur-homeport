@@ -1,11 +1,12 @@
 import { PlusCircle } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { hasSupport } from '@waldur/issues/hooks';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ResourceIssues } from './ResourceIssues';
 
@@ -23,12 +24,11 @@ const CreateIssueButton = ({ resource }) => {
     );
   }, [dispatch, resource]);
   return (
-    <Button variant="light" onClick={callback}>
-      <span className="svg-icon svg-icon-2">
-        <PlusCircle />
-      </span>
-      {translate('Create')}
-    </Button>
+    <ActionButton
+      iconNode={<PlusCircle />}
+      title={translate('Create')}
+      action={callback}
+    />
   );
 };
 
