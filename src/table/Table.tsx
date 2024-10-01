@@ -62,6 +62,7 @@ export interface TableProps<RowType = any> extends TableState {
   rowClass?: (({ row }) => string) | string;
   hoverable?: boolean;
   minHeight?: number;
+  cardBordered?: boolean;
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
   initialPageSize?: number;
@@ -184,6 +185,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     hasPagination: true,
     hasActionBar: true,
     hasHeaders: true,
+    cardBordered: true,
   };
 
   state = {
@@ -218,7 +220,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
           className={classNames(
             'card-table',
             'full-width',
-            'card-bordered',
+            this.props.cardBordered && 'card-bordered',
             this.props.fieldName ? 'field-table' : '',
             this.props.mode === 'grid' &&
               Boolean(this.props.gridItem) &&
