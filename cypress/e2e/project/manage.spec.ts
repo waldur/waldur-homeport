@@ -1,7 +1,8 @@
 const projectFixturePath = 'projects/alice_azure.json';
 
-const currentYear = new Date().getFullYear();
-const currentMonth = new Date().getMonth();
+const _date = new Date(new Date().getFullYear() + 1, 5, 20);
+const currentYear = _date.getFullYear();
+const currentMonth = _date.getMonth();
 const nextMonthISO = new Date(currentYear, (currentMonth + 1) % 12, 20)
   .toISOString()
   .split('T')[0];

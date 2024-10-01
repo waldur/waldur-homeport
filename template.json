@@ -6103,10 +6103,6 @@
     "description": "marketplace/offerings/update/plans/PlansSection.tsx",
     "message": "Offering doesn't have plans."
   },
-  "Offering doesn't have roles.": {
-    "description": "marketplace/offerings/update/roles/RolesSection.tsx",
-    "message": "Offering doesn't have roles."
-  },
   "Offering has been created.": {
     "description": "marketplace/offerings/actions/OfferingCreateDialog.tsx",
     "message": "Offering has been created."
@@ -8724,7 +8720,7 @@
     "message": "Role name"
   },
   "Role": {
-    "description": "administration/InvitationList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/team/CustomerUsersListExpandableRow.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationRoleFilter.tsx, invitations/InvitationsList.tsx, invitations/actions/RoleGroup.tsx, invitations/actions/create/EmailsListGroup.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/resources/users/ResourceUsersList.tsx, project/team/InvitationsList.tsx, project/team/RoleGroup.tsx, proposals/team/InvitationsList.tsx, proposals/team/UsersList.tsx, rancher/cluster/create/NodeRoleGroup.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/PermissionDetails.tsx, user/support/UserFilter.tsx",
+    "description": "administration/InvitationList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/team/CustomerUsersListExpandableRow.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationRoleFilter.tsx, invitations/InvitationsList.tsx, invitations/actions/RoleGroup.tsx, invitations/actions/create/EmailsListGroup.tsx, marketplace/offerings/update/roles/RolesSection.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/resources/users/ResourceUsersList.tsx, project/team/InvitationsList.tsx, project/team/RoleGroup.tsx, proposals/team/InvitationsList.tsx, proposals/team/UsersList.tsx, rancher/cluster/create/NodeRoleGroup.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/PermissionDetails.tsx, user/support/UserFilter.tsx",
     "message": "Role"
   },
   "Roles and permissions": {
