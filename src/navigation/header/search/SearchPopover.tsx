@@ -201,7 +201,7 @@ const AllResultsTabContent = ({
                       }}
                       image={resource.offering_thumbnail}
                       title={resource.name}
-                      subtitle={`${resource.customer_name} / ${resource.project_name}`}
+                      subtitle={`${resource.customer_name} / ${resource.project_name} / ${resource.category_title}`}
                       isFavorite={isFavorite}
                       addFavoritePage={addFavoritePage}
                       removeFavorite={removeFavorite}
