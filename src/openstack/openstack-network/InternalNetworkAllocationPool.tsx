@@ -21,8 +21,7 @@ export const InternalNetworkAllocationPool: FunctionComponent = () => {
   const body = cidr ? getAllocationPool(cidr) : <>&mdash;</>;
   return (
     <Form.Group>
-      <label>{translate('Internal network allocation pool')}</label>
-      {body}
+      <label>{translate('Internal network allocation pool')}</label> {body}
     </Form.Group>
   );
 };
