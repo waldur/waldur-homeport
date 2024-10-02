@@ -11,7 +11,7 @@ import { IssueRequestPayload, IssueResponse } from './types';
 export const sendIssueCreateRequest = async (
   payload: IssueRequestPayload,
   dispatch,
-  refetch,
+  refetch?,
   files?: FileList,
 ) => {
   try {
@@ -29,11 +29,11 @@ export const sendIssueCreateRequest = async (
         }),
       ),
     );
-    refetch();
+    if (refetch) refetch();
     dispatch(triggerTransition('support.detail', { uuid: issue.uuid }));
     dispatch(closeModalDialog());
   } catch (e) {
     dispatch(showErrorResponse(e, translate('Unable to create request.')));
-    refetch();
+    if (refetch) refetch();
   }
 };
