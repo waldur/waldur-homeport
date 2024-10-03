@@ -15,21 +15,24 @@ const CostPolicyCreateDialog = lazyComponent(
 );
 
 interface SubmitedFormData {
-  scope: Project | Customer;
+  scope: (Project | Customer)[];
   actions: { value; label };
   limit_cost: number;
 }
 
 const submit = (formData: SubmitedFormData, type: CostPolicyType) => {
-  const data: CostPolicyFormData = {
-    scope: formData.scope.url,
-    actions: formData.actions.value,
-    limit_cost: formData.limit_cost,
-  };
-  if (type === 'project') {
-    return createProjectCostPolicy(data);
-  }
-  return createOrganizationCostPolicy(data);
+  const promises = formData.scope.map((scope) => {
+    const data: CostPolicyFormData = {
+      scope: scope.url,
+      actions: formData.actions.value,
+      limit_cost: formData.limit_cost,
+    };
+    if (type === 'project') {
+      return createProjectCostPolicy(data);
+    }
+    return createOrganizationCostPolicy(data);
+  });
+  return Promise.all(promises);
 };
 
 interface CostPolicyCreateButtonProps {
