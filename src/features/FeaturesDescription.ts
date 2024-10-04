@@ -46,6 +46,16 @@ export const FeaturesDescription: FeatureSection[] = [
     ],
   },
   {
+    key: 'invoice',
+    description: translate('Invoice settings'),
+    items: [
+      {
+        key: 'display_credit_management',
+        description: translate('Display credit management.'),
+      },
+    ],
+  },
+  {
     key: 'marketplace',
     description: translate('Marketplace offerings and resources'),
     items: [
