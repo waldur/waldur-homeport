@@ -44,11 +44,9 @@ const OrganizationField = ({ row }) => {
 };
 
 export const BaseOrganizationsList: FunctionComponent<{
-  user;
   standalone?;
-}> = ({ user, standalone = false }) => {
+}> = ({ standalone = false }) => {
   const filter = useSelector(mapStateToFilter);
-  filter.user_uuid = user.uuid;
 
   const props = useTable({
     table: 'customerList',

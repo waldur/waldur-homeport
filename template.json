@@ -2907,6 +2907,10 @@
     "description": "vmware/tabs.ts",
     "message": "Disks"
   },
+  "Display credit management.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Display credit management."
+  },
   "Display name": {
     "description": "marketplace/offerings/DisplayNameField.tsx",
     "message": "Display name"
@@ -4702,6 +4706,10 @@
   "Invoice period": {
     "description": "invoices/details/InvoiceDetails.tsx",
     "message": "Invoice period"
+  },
+  "Invoice settings": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Invoice settings"
   },
   "Invoice statistics": {
     "description": "invoices/list/InvoicesStatsList.tsx",
