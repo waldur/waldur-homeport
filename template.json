@@ -6791,6 +6791,10 @@
     "description": "marketplace/resources/resource-pending/OrderInProgressView.tsx",
     "message": "Pending organization approval"
   },
+  "Pending project": {
+    "description": "invitations/InvitationStateFilter.tsx",
+    "message": "Pending project"
+  },
   "Pending proposals": {
     "description": "proposals/call-management/CallManagementStatistics.tsx",
     "message": "Pending proposals"
