@@ -15,7 +15,6 @@ export enum InvitationsFeatures {
 }
 
 export enum InvoiceFeatures {
-  display_credit_management = 'invoice.display_credit_management',
 }
 
 export enum MarketplaceFeatures {
