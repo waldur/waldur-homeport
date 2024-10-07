@@ -18,7 +18,7 @@ export const choices = [
     value: 'pending',
   },
   {
-    label: translate('Pending project'),
+    label: translate('Pending project start'),
     value: 'project',
   },
   {
