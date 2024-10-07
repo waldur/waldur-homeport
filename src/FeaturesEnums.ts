@@ -14,6 +14,10 @@ export enum InvitationsFeatures {
   tax_number_required = 'invitations.tax_number_required',
 }
 
+export enum InvoiceFeatures {
+  display_credit_management = 'invoice.display_credit_management',
+}
+
 export enum MarketplaceFeatures {
   conceal_prices = 'marketplace.conceal_prices',
   import_resources = 'marketplace.import_resources',
@@ -68,6 +72,7 @@ export enum UserFeatures {
 export type FeaturesEnum =
   | CustomerFeatures
   | InvitationsFeatures
+  | InvoiceFeatures
   | MarketplaceFeatures
   | OpenstackFeatures
   | ProjectFeatures
