@@ -158,9 +158,12 @@ export const updateResourceEndDateByProvider = (
   resourceUuid: string,
   end_date: string,
 ) =>
-  post(`/marketplace-resources/${resourceUuid}/set_end_date_by_provider/`, {
-    end_date,
-  });
+  post(
+    `/marketplace-provider-resources/${resourceUuid}/set_end_date_by_provider/`,
+    {
+      end_date,
+    },
+  );
 
 export const updateResourceEndDateByStaff = (
   resourceUuid: string,
@@ -191,13 +194,16 @@ export const getSubResourcesOfferings = (resourceId: string) =>
   );
 
 export const submitReport = (resourceId: string, payload) =>
-  post(`/marketplace-resources/${resourceId}/submit_report/`, payload);
+  post(`/marketplace-provider-resources/${resourceId}/submit_report/`, payload);
 
 export const submitResourceOptions = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/update_options/`, payload);
 
 export const setBackendId = (resourceId: string, payload) =>
-  post(`/marketplace-resources/${resourceId}/set_backend_id/`, payload);
+  post(
+    `/marketplace-provider-resources/${resourceId}/set_backend_id/`,
+    payload,
+  );
 
 export const setSlug = (resourceId: string, payload) =>
   post(`/marketplace-resources/${resourceId}/set_slug/`, payload);
@@ -356,6 +362,9 @@ export const submitUsageReport = (payload) =>
 
 export const getResource = (id: string, options?: AxiosRequestConfig) =>
   getById<Resource>('/marketplace-resources/', id, options);
+
+export const getProviderResource = (id: string, options?: AxiosRequestConfig) =>
+  getById<Resource>('/marketplace-provider-resources/', id, options);
 
 export const switchPlan = (resource_uuid: string, plan_url: string) =>
   post(`/marketplace-resources/${resource_uuid}/switch_plan/`, {

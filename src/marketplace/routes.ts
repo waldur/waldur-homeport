@@ -69,9 +69,9 @@ const MarketplaceOrdersList = lazyComponent(
   () => import('./orders/list/MarketplaceOrdersList'),
   'MarketplaceOrdersList',
 );
-const PublicResourcesList = lazyComponent(
-  () => import('./resources/list/PublicResourcesList'),
-  'PublicResourcesList',
+const ProviderResourcesList = lazyComponent(
+  () => import('./resources/list/ProviderResourcesList'),
+  'ProviderResourcesList',
 );
 const ProviderDetails = lazyComponent(
   () => import('./service-providers/ProviderDetails'),
@@ -494,7 +494,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'marketplace-public-resources',
     url: 'resources-list/?{state}',
-    component: PublicResourcesList,
+    component: ProviderResourcesList,
     parent: 'provider-resources',
     data: {
       breadcrumb: () => translate('Resources'),
