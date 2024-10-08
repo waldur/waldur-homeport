@@ -1,3 +1,4 @@
+import { Clock } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -47,6 +48,7 @@ export const EditResourceEndDateByStaffAction = ({
       title={translate('Set termination date')}
       action={callback}
       staff
+      iconNode={<Clock />}
     />
   ) : null;
 };

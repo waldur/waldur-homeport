@@ -3,7 +3,10 @@ import React from 'react';
 import { useAsyncFn, useBoolean } from 'react-use';
 
 import { getResource } from '@waldur/marketplace/common/api';
-import { ActionsList } from '@waldur/marketplace/resources/actions/ActionsList';
+import {
+  CustomerResourceActions,
+  StaffActions,
+} from '@waldur/marketplace/resources/actions/ActionsList';
 
 import { ActionRegistry } from './registry';
 import { ResourceActionComponent } from './ResourceActionComponent';
@@ -17,16 +20,23 @@ interface ActionButtonResourceProps {
 async function loadData(url: string) {
   const response = await Axios.get(url);
   const resource = response.data;
-  let actions = ActionRegistry.getActions(resource.resource_type);
+  let staffActions = ActionRegistry.getActions(resource.resource_type);
+  let customerResourceActions = [];
   let marketplaceResource;
   if (resource.marketplace_resource_uuid) {
-    const extraActions = actions.filter(
-      (action) => !ActionsList.includes(action as any),
+    const extraActions = staffActions.filter(
+      (action) => !StaffActions.includes(action as any),
     );
-    actions = ActionsList.concat(extraActions as any);
+    staffActions = StaffActions.concat(extraActions as any);
+    customerResourceActions = CustomerResourceActions;
     marketplaceResource = await getResource(resource.marketplace_resource_uuid);
   }
-  return { resource, marketplaceResource, actions };
+  return {
+    resource,
+    marketplaceResource,
+    staffActions,
+    customerResourceActions,
+  };
 }
 
 export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (

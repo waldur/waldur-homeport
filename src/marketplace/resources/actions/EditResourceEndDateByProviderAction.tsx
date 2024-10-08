@@ -1,3 +1,4 @@
+import { Clock } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/configs/default';
@@ -48,6 +49,10 @@ export const EditResourceEndDateByProviderAction = ({
     permission: PermissionEnum.SET_RESOURCE_END_DATE,
     customerId: resource.customer_uuid,
   }) || user.is_support ? (
-    <ActionItem title={translate('Set termination date')} action={callback} />
+    <ActionItem
+      title={translate('Set termination date')}
+      action={callback}
+      iconNode={<Clock />}
+    />
   ) : null;
 };

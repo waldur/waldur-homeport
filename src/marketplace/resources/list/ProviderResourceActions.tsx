@@ -4,28 +4,25 @@ import { useBoolean } from 'react-use';
 import { Resource } from '@waldur/marketplace/resources/types';
 import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
-import { CustomerResourceActions, StaffActions } from './ActionsList';
+import { StaffActions, ProviderActionsList } from '../actions/ActionsList';
 
-interface ResourceActionsButtonProps {
+interface ProviderResourceActionsProps {
   resource: Resource;
-  refetch?(): void;
-  labeled?: boolean;
+  refetch(): void;
 }
 
-export const ResourceActionsButton: FunctionComponent<
-  ResourceActionsButtonProps
-> = (props) => {
+export const ProviderResourceActions: FunctionComponent<
+  ProviderResourceActionsProps
+> = ({ resource, refetch }) => {
   const [open, onToggle] = useBoolean(false);
-
   return (
     <ResourceActionComponent
       open={open}
       onToggle={onToggle}
-      customerResourceActions={CustomerResourceActions}
+      providerResourceActions={ProviderActionsList}
       staffActions={StaffActions}
-      resource={props.resource}
-      refetch={props.refetch}
-      labeled={props.labeled}
+      resource={resource}
+      refetch={refetch}
     />
   );
 };

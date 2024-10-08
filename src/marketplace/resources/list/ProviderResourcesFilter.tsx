@@ -13,7 +13,7 @@ import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { PUBLIC_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
+import { PROVIDER_RESOURCES_LIST_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import {
@@ -31,7 +31,7 @@ import {
 
 type StateProps = ReturnType<typeof mapStateToProps> & InjectedFormProps;
 
-const PurePublicResourcesFilter: FunctionComponent<StateProps> = (props) => {
+const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
   useReinitializeFilterFromUrl(props.form, { state: NON_TERMINATED_STATES });
   return (
     <>
@@ -100,11 +100,11 @@ const mapStateToProps = (state: RootState) => ({
 const enhance = compose(
   connect(mapStateToProps),
   reduxForm({
-    form: PUBLIC_RESOURCES_LIST_FILTER_FORM_ID,
+    form: PROVIDER_RESOURCES_LIST_FILTER_FORM_ID,
     onChange: syncFiltersToURL,
     destroyOnUnmount: false,
     enableReinitialize: true,
   }),
 );
 
-export const PublicResourcesFilter = enhance(PurePublicResourcesFilter);
+export const ProviderResourcesFilter = enhance(PureProviderResourcesFilter);

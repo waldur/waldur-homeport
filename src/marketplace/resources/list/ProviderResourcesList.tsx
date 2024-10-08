@@ -6,7 +6,6 @@ import { createSelector } from 'reselect';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
-import { PublicResourceActions } from '@waldur/marketplace/resources/list/PublicResourceActions';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { createFetcher, Table } from '@waldur/table';
@@ -20,11 +19,12 @@ import {
 import { Customer, Project } from '@waldur/workspace/types';
 
 import {
-  PUBLIC_RESOURCES_LIST_FILTER_FORM_ID,
+  PROVIDER_RESOURCES_LIST_FILTER_FORM_ID,
   TABLE_PUBLIC_RESOURCE,
 } from './constants';
+import { ProviderResourceActions } from './ProviderResourceActions';
+import { ProviderResourcesFilter } from './ProviderResourcesFilter';
 import { PublicResourceLink } from './PublicResourceLink';
-import { PublicResourcesFilter } from './PublicResourcesFilter';
 import { PublicResourcesLimits } from './PublicResourcesLimits';
 import { ResourceStateField } from './ResourceStateField';
 import { NON_TERMINATED_STATES } from './ResourceStateFilter';
@@ -159,7 +159,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}
       rowActions={({ row }) => (
-        <PublicResourceActions resource={row} refetch={props.fetch} />
+        <ProviderResourceActions resource={row} refetch={props.fetch} />
       )}
       enableMultiSelect={true}
       multiSelectActions={ResourceMultiSelectAction}
@@ -169,7 +169,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 export const TableOptions = {
   table: TABLE_PUBLIC_RESOURCE,
-  fetchData: createFetcher('marketplace-resources'),
+  fetchData: createFetcher('marketplace-provider-resources'),
   queryField: 'query',
 };
 
@@ -240,14 +240,16 @@ const mandatoryFields = [
   'resource_type', // TerminateAction
 ];
 
-export const PublicResourcesList: React.ComponentType<any> = () => {
+export const ProviderResourcesList: React.ComponentType<any> = () => {
   const filter = useSelector((state) =>
-    mapStateToFilter(state, PUBLIC_RESOURCES_LIST_FILTER_FORM_ID),
+    mapStateToFilter(state, PROVIDER_RESOURCES_LIST_FILTER_FORM_ID),
   );
   const tableProps = useTable({
     ...TableOptions,
     filter,
     mandatoryFields,
   });
-  return <TableComponent {...tableProps} filters={<PublicResourcesFilter />} />;
+  return (
+    <TableComponent {...tableProps} filters={<ProviderResourcesFilter />} />
+  );
 };
