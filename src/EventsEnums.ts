@@ -33,6 +33,7 @@ export const CustomersEnum = {
   payment_added: 'payment_added',
   payment_created: 'payment_created',
   payment_removed: 'payment_removed',
+  reduction_of_credit_due_to_minimal_consumption: 'reduction_of_credit_due_to_minimal_consumption',
 };
 
 export const InvoicesEnum = {
