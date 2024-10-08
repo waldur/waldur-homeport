@@ -11,7 +11,7 @@ import { InvitationService } from '../InvitationService';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
-const statesForResend = ['pending', 'expired'];
+const statesForResend = ['pending', 'expired', 'canceled'];
 
 export const InvitationSendButton = ({ row }) => {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ export const InvitationSendButton = ({ row }) => {
 
     if (statesForResend.indexOf(row.state) === -1) {
       return translate(
-        'Only pending and expired invitations can be sent again.',
+        'Only pending, expired and canceled invitations can be sent again.',
       );
     }
   }, [user, customer, row]);

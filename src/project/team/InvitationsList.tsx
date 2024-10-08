@@ -14,6 +14,7 @@ import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationP
 import { InvitationSendButton } from '@waldur/invitations/actions/InvitationSendButton';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
+import { formatInvitationState } from '@waldur/invitations/InvitationStateFilter';
 import { RoleField } from '@waldur/invitations/RoleField';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
@@ -54,7 +55,7 @@ const InvitationsListComponent: FunctionComponent = () => {
         {
           title: translate('Status'),
           orderField: 'state',
-          render: ({ row }) => row.state,
+          render: ({ row }) => formatInvitationState(row.state),
           filter: 'state',
         },
         {

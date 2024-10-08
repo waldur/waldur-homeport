@@ -36,7 +36,7 @@ export const InvitationCancelButton = ({ row, refetch }) => {
     ) {
       return true;
     }
-    if (row.state !== 'pending') {
+    if (row.state !== 'pending' && row.state !== 'project') {
       return true;
     }
     return false;
@@ -52,8 +52,8 @@ export const InvitationCancelButton = ({ row, refetch }) => {
       return translate("You don't have permission to cancel this invitation.");
     }
 
-    if (row.state !== 'pending') {
-      return translate('Only pending invitation can be canceled.');
+    if (row.state !== 'pending' && row.state !== 'project') {
+      return translate('Only pending or planned invitations can be canceled.');
     }
   }, [user, customer, row]);
 
