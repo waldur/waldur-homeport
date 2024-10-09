@@ -11,6 +11,7 @@ import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
 import { ProviderActionsGroup } from '../../marketplace/resources/actions/ProviderActionsGroup';
 
 import { EditAction } from './actions/EditAction';
+import { MigrateTenantAction } from './actions/MigrateTenantAction';
 import { PullTenantAction } from './actions/PullTenantAction';
 import { RequestDirectAccessAction } from './actions/RequestDirectAccessAction';
 
@@ -19,6 +20,7 @@ export const OpenstackTenantActions = (props) => (
     <ActionGroup title={translate('Resource actions')}>
       <EditAction {...props} />
       <RequestDirectAccessAction {...props} />
+      <MigrateTenantAction {...props} />
     </ActionGroup>
 
     <ActionGroup title={translate('Billing actions')}>

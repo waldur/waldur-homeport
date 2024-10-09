@@ -24,6 +24,7 @@ export enum MarketplaceFeatures {
 
 export enum OpenstackFeatures {
   hide_volume_type_selector = 'openstack.hide_volume_type_selector',
+  show_migrations = 'openstack.show_migrations',
 }
 
 export enum ProjectFeatures {

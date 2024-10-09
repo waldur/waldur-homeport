@@ -327,3 +327,8 @@ export const activateSnapshotSchedule = (id: string) =>
 
 export const deactivateSnapshotSchedule = (id: string) =>
   post(`/openstack-snapshot-schedules/${id}/deactivate/`);
+
+export const createMigration = (payload) =>
+  post(`/openstack-migrations/`, payload);
+
+export const runMigration = (id) => post(`/openstack-migrations/${id}/run/`);

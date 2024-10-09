@@ -79,6 +79,10 @@ export const FeaturesDescription: FeatureSection[] = [
         key: 'hide_volume_type_selector',
         description: translate('Allow to hide OpenStack volume type selector when instance or volume is provisioned.'),
       },
+      {
+        key: 'show_migrations',
+        description: translate('Show OpenStack tenant migrations action and tab'),
+      },
     ],
   },
   {

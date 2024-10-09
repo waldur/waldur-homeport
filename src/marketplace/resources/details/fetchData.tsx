@@ -1,6 +1,11 @@
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures, SlurmFeatures } from '@waldur/FeaturesEnums';
+import {
+  MarketplaceFeatures,
+  OpenstackFeatures,
+  SlurmFeatures,
+} from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 import {
@@ -10,29 +15,89 @@ import {
   getResourceDetails,
   getResourceOffering,
 } from '@waldur/marketplace/common/api';
-import { ResourceOrders } from '@waldur/marketplace/orders/list/ResourceOrders';
-import { RobotAccountCard } from '@waldur/marketplace/robot-accounts/RobotAccountCard';
 import { PageBarTab } from '@waldur/navigation/types';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
 import { NestedResourceTabsConfiguration } from '@waldur/resource/tabs/NestedResourceTabsConfiguration';
 import { getResourceAccessEndpoints } from '@waldur/resource/utils';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
-import { AllocationJobsTable } from '@waldur/slurm/details/AllocationJobsTable';
-import { AllocationUsersTable } from '@waldur/slurm/details/AllocationUsersTable';
 import store from '@waldur/store/store';
 
-import { LexisLinkCard } from '../lexis/LexisLinkCard';
-import { ResourceOptionsCard } from '../options/ResourceOptionsCard';
-import { ResourceUsersList } from '../users/ResourceUsersList';
+const ResourceOrders = lazyComponent(
+  () => import('@waldur/marketplace/orders/list/ResourceOrders'),
+  'ResourceOrders',
+);
 
-import { ActivityCard } from './ActivityCard';
-import { BookingMainComponent } from './BookingMainComponent';
-import { GettingStartedCard } from './GettingStartedCard';
-import { InstanceMainComponent } from './openstack-instance/InstanceMainComponent';
-import { ResourceIssuesCard } from './ResourceIssuesCard';
-import { ResourceMetadataCard } from './ResourceMetadataCard';
-import { TenantMainComponent } from './TenantMainComponent';
-import { UsageCard } from './UsageCard';
+const RobotAccountCard = lazyComponent(
+  () => import('@waldur/marketplace/robot-accounts/RobotAccountCard'),
+  'RobotAccountCard',
+);
+
+const AllocationJobsTable = lazyComponent(
+  () => import('@waldur/slurm/details/AllocationJobsTable'),
+  'AllocationJobsTable',
+);
+
+const AllocationUsersTable = lazyComponent(
+  () => import('@waldur/slurm/details/AllocationUsersTable'),
+  'AllocationUsersTable',
+);
+
+const LexisLinkCard = lazyComponent(
+  () => import('../lexis/LexisLinkCard'),
+  'LexisLinkCard',
+);
+
+const ResourceOptionsCard = lazyComponent(
+  () => import('../options/ResourceOptionsCard'),
+  'ResourceOptionsCard',
+);
+
+const ResourceUsersList = lazyComponent(
+  () => import('../users/ResourceUsersList'),
+  'ResourceUsersList',
+);
+
+const ActivityCard = lazyComponent(
+  () => import('./ActivityCard'),
+  'ActivityCard',
+);
+
+const BookingMainComponent = lazyComponent(
+  () => import('./BookingMainComponent'),
+  'BookingMainComponent',
+);
+
+const GettingStartedCard = lazyComponent(
+  () => import('./GettingStartedCard'),
+  'GettingStartedCard',
+);
+
+const InstanceMainComponent = lazyComponent(
+  () => import('./openstack-instance/InstanceMainComponent'),
+  'InstanceMainComponent',
+);
+
+const ResourceIssuesCard = lazyComponent(
+  () => import('./ResourceIssuesCard'),
+  'ResourceIssuesCard',
+);
+
+const ResourceMetadataCard = lazyComponent(
+  () => import('./ResourceMetadataCard'),
+  'ResourceMetadataCard',
+);
+
+const TenantMainComponent = lazyComponent(
+  () => import('./TenantMainComponent'),
+  'TenantMainComponent',
+);
+
+const TenantMigrationsList = lazyComponent(
+  () => import('@waldur/openstack/openstack-tenant/TenantMigrationsList'),
+  'TenantMigrationsList',
+);
+
+const UsageCard = lazyComponent(() => import('./UsageCard'), 'UsageCard');
 
 export const getResourceTabs = ({
   resource,
@@ -59,6 +124,13 @@ export const getResourceTabs = ({
       title: translate('Quotas'),
       component: TenantMainComponent,
     });
+    if (isFeatureVisible(OpenstackFeatures.show_migrations)) {
+      tabs.push({
+        key: 'Migrations',
+        title: translate('Migrations'),
+        component: TenantMigrationsList,
+      });
+    }
   } else if (resource.offering_type === INSTANCE_TYPE && scope) {
     tabs.push({
       key: 'vm-details',
