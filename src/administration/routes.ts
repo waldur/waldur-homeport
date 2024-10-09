@@ -97,6 +97,11 @@ const OrganizationCostPoliciesList = lazyComponent(
   'OrganizationCostPoliciesList',
 );
 
+const OrganizationCreditsList = lazyComponent(
+  () => import('./organizations/OrganizationCreditsList'),
+  'OrganizationCreditsList',
+);
+
 const AdministrationLanguages = lazyComponent(
   () => import('./languages/AdministrationLanguages'),
   'AdministrationLanguages',
@@ -359,6 +364,17 @@ export const states: StateDeclaration[] = [
       permissions: [isStaff],
     },
   },
+  {
+    name: 'organization-credit-management',
+    url: 'organization-credits/',
+    parent: 'admin-organizations',
+    component: OrganizationCreditsList,
+    data: {
+      breadcrumb: () => translate('Credit management'),
+      permissions: [isStaff],
+    },
+  },
+
   {
     name: 'admin-identity',
     url: 'identity/',

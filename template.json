@@ -555,6 +555,10 @@
     "description": "customer/list/AccountingRunningField.tsx, customer/list/ServiceProviderFilter.tsx, invitations/GroupInvitationsFilter.tsx, marketplace/offerings/update/attributes/utils.tsx, rancher/node/NodeRoleField.tsx",
     "message": "All"
   },
+  "Allocated credit (in {currency})": {
+    "description": "customer/credits/CreditsListTable.tsx",
+    "message": "Allocated credit (in {currency})"
+  },
   "Allocated offerings": {
     "description": "proposals/round/RoundQuotas.tsx",
     "message": "Allocated offerings"
@@ -910,6 +914,10 @@
   "Are you sure you want to delete the {title} category?": {
     "description": "marketplace/category/admin/CategoryDeleteAction.tsx",
     "message": "Are you sure you want to delete the {title} category?"
+  },
+  "Are you sure you want to delete this credit?": {
+    "description": "customer/credits/DeleteCreditButton.tsx",
+    "message": "Are you sure you want to delete this credit?"
   },
   "Are you sure you want to delete this offering?": {
     "description": "marketplace/offerings/list/DeleteOfferingButton.tsx",
@@ -2195,6 +2203,10 @@
     "description": "invoices/details/InvoiceItemCompensation.tsx",
     "message": "Create compensation"
   },
+  "Create credit": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Create credit"
+  },
   "Create customer permission": {
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "Create customer permission"
@@ -2308,7 +2320,7 @@
     "message": "Create subnet"
   },
   "Create": {
-    "description": "administration/organizations/OrganizationGroupFromDialog.tsx, customer/cost-policies/CostPolicyCreateDialog.tsx, customer/details/AccessSubnetCreateForm.tsx, freeipa/FreeIPAAccountCreate.tsx, issues/create/IssueCreateDialog.tsx, issues/list/IssueCreateButton.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/CreateOfferingUserButton.tsx, marketplace/offerings/details/policies/PolicyCreateDialog.tsx, marketplace/offerings/update/components/AddComponentDialog.tsx, marketplace/offerings/update/endpoints/AddEndpointDialog.tsx, marketplace/offerings/update/options/AddOptionDialog.tsx, marketplace/offerings/update/plans/AddPlanDialog.tsx, marketplace/offerings/update/roles/AddRoleDialog.tsx, marketplace/orders/list/OrderTypeCell.tsx, marketplace/orders/list/OrderTypeFilter.tsx, marketplace/resources/details/ResourceIssuesCard.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/service-providers/CampaignCreateButton.tsx, marketplace/service-providers/CreateProviderOfferingUserButton.tsx, openstack/openstack-instance/actions/CreateBackupAction.tsx, openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx, openstack/openstack-tenant/CreateMigrationButton.tsx, openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx, openstack/openstack-tenant/actions/CreateNetworkAction.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx, openstack/openstack-tenant/actions/CreateServerGroupAction.tsx, openstack/openstack-volume/actions/CreateSnapshotAction.tsx, openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx, project/ProjectCreateDialog.tsx, proposals/call-management/CallFormDialog.tsx, proposals/proposal/create/AddProposalDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create-review/CreateReviewDialog.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx, proposals/update/rounds/CallRoundCreateDialog.tsx, rancher/catalog/CatalogCreateButton.tsx, rancher/cluster/hpas/HPACreateButton.tsx, user/hooks/HookDetailsDialog.tsx",
+    "description": "administration/organizations/OrganizationGroupFromDialog.tsx, customer/cost-policies/CostPolicyCreateDialog.tsx, customer/credits/CreditFormDialog.tsx, customer/details/AccessSubnetCreateForm.tsx, freeipa/FreeIPAAccountCreate.tsx, issues/create/IssueCreateDialog.tsx, issues/list/IssueCreateButton.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/CreateOfferingUserButton.tsx, marketplace/offerings/details/policies/PolicyCreateDialog.tsx, marketplace/offerings/update/components/AddComponentDialog.tsx, marketplace/offerings/update/endpoints/AddEndpointDialog.tsx, marketplace/offerings/update/options/AddOptionDialog.tsx, marketplace/offerings/update/plans/AddPlanDialog.tsx, marketplace/offerings/update/roles/AddRoleDialog.tsx, marketplace/orders/list/OrderTypeCell.tsx, marketplace/orders/list/OrderTypeFilter.tsx, marketplace/resources/details/ResourceIssuesCard.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/service-providers/CampaignCreateButton.tsx, marketplace/service-providers/CreateProviderOfferingUserButton.tsx, openstack/openstack-instance/actions/CreateBackupAction.tsx, openstack/openstack-instance/actions/CreateBackupScheduleAction.tsx, openstack/openstack-tenant/CreateMigrationButton.tsx, openstack/openstack-tenant/actions/CreateFloatingIpAction.tsx, openstack/openstack-tenant/actions/CreateNetworkAction.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupAction.tsx, openstack/openstack-tenant/actions/CreateServerGroupAction.tsx, openstack/openstack-volume/actions/CreateSnapshotAction.tsx, openstack/openstack-volume/actions/CreateSnapshotScheduleAction.tsx, project/ProjectCreateDialog.tsx, proposals/call-management/CallFormDialog.tsx, proposals/proposal/create/AddProposalDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create-review/CreateReviewDialog.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx, proposals/update/rounds/CallRoundCreateDialog.tsx, rancher/catalog/CatalogCreateButton.tsx, rancher/cluster/hpas/HPACreateButton.tsx, user/hooks/HookDetailsDialog.tsx",
     "message": "Create"
   },
   "Created at": {
@@ -2366,6 +2378,26 @@
   "Credentials": {
     "description": "marketplace/offerings/import/tabs.ts, user/routes.ts",
     "message": "Credentials"
+  },
+  "Credit deleted successfully.": {
+    "description": "customer/credits/DeleteCreditButton.tsx",
+    "message": "Credit deleted successfully."
+  },
+  "Credit end date": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Credit end date"
+  },
+  "Credit management": {
+    "description": "administration/routes.ts, customer/credits/CreditsListTable.tsx",
+    "message": "Credit management"
+  },
+  "Credit usage": {
+    "description": "customer/credits/CreditUsageButton.tsx",
+    "message": "Credit usage"
+  },
+  "Credits": {
+    "description": "customer/credits/CreditsListTable.tsx",
+    "message": "Credits"
   },
   "Current VAT code: {value}.": {
     "description": "customer/details/CustomerErrorDialog.tsx",
@@ -2668,7 +2700,7 @@
     "message": "Delete catalog"
   },
   "Delete confirmation": {
-    "description": "marketplace/offerings/list/DeleteOfferingButton.tsx",
+    "description": "customer/credits/DeleteCreditButton.tsx, marketplace/offerings/list/DeleteOfferingButton.tsx",
     "message": "Delete confirmation"
   },
   "Delete customer permission": {
@@ -2716,7 +2748,7 @@
     "message": "Delete volumes"
   },
   "Delete": {
-    "description": "administration/agreements/UserAgreementDeleteButton.tsx, customer/details/CustomerRemoveDialog.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, invitations/InvitationDeleteButton.tsx, invitations/MultiDeleteAction.tsx, issues/comments/IssueCommentDeleteDialog.tsx, issues/comments/IssueCommentItem.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/list/DeleteOfferingButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/ProviderOfferingUserDeleteButton.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx, openstack/openstack-security-groups/rule-editor/ActionsField.tsx, project/DeleteAction.tsx, project/manage/ProjectDelete.tsx, rancher/catalog/CatalogDeleteButton.tsx, rancher/cluster/IngressActions.tsx, rancher/cluster/ServiceActions.tsx, rancher/cluster/WorkloadActions.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserTermination.tsx",
+    "description": "administration/agreements/UserAgreementDeleteButton.tsx, customer/credits/DeleteCreditButton.tsx, customer/details/CustomerRemoveDialog.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, invitations/InvitationDeleteButton.tsx, invitations/MultiDeleteAction.tsx, issues/comments/IssueCommentDeleteDialog.tsx, issues/comments/IssueCommentItem.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/list/DeleteOfferingButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/ProviderOfferingUserDeleteButton.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx, openstack/openstack-security-groups/rule-editor/ActionsField.tsx, project/DeleteAction.tsx, project/manage/ProjectDelete.tsx, rancher/catalog/CatalogDeleteButton.tsx, rancher/cluster/IngressActions.tsx, rancher/cluster/ServiceActions.tsx, rancher/cluster/WorkloadActions.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserTermination.tsx",
     "message": "Delete"
   },
   "Deleting PostgreSQL server will cause deletion of all databases created within server.": {
@@ -3083,6 +3115,10 @@
     "description": "marketplace/offerings/update/components/EditComponentDialog.tsx",
     "message": "Edit component"
   },
+  "Edit credit": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Edit credit"
+  },
   "Edit default project role": {
     "description": "proposals/update/general/CallGeneralSection.tsx",
     "message": "Edit default project role"
@@ -3192,7 +3228,7 @@
     "message": "Edit {title}"
   },
   "Edit": {
-    "description": "administration/organizations/OrganizationGroupFromDialog.tsx, administration/providers/ProviderCard.tsx, customer/payments/EditPaymentButton.tsx, customer/team/EditProjectUserButton.tsx, form/EditAction.tsx, form/EditButton.tsx, issues/comments/IssueCommentItem.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/deploy/DeployPage.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/list/EditOfferingButton.tsx, marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx, marketplace/resources/actions/EditAction.tsx, marketplace/resources/options/UpdateResourceOptionButton.tsx, openstack/openstack-backup/actions/EditAction.tsx, openstack/openstack-backup-schedule/actions/EditAction.tsx, openstack/openstack-instance/actions/EditAction.tsx, openstack/openstack-network/actions/EditNetworkAction.tsx, openstack/openstack-security-groups/EditAction.tsx, openstack/openstack-snapshot/EditAction.tsx, openstack/openstack-snapshot-schedule/actions/EditAction.tsx, openstack/openstack-subnet/EditSubnetAction.tsx, openstack/openstack-tenant/actions/EditAction.tsx, openstack/openstack-volume/actions/EditAction.tsx, organization/OrganizationUIView.tsx, project/ProjectContainer.tsx, proposals/call-management/CallFormDialog.tsx, proposals/details/CallTabs.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/round/allocation/EditAllocationInfoButton.tsx, proposals/round/allocation/EditRoundAllocationDialog.tsx, proposals/round/review/EditReviewInfoButton.tsx, proposals/round/review/EditRoundReviewDialog.tsx, proposals/round/submission/EditRoundSubmissionDialog.tsx, proposals/round/submission/EditSubmissionInfoButton.tsx, proposals/update/general/EditGeneralInfoButton.tsx, rancher/cluster/hpas/HPAUpdateButton.tsx, slurm/EditAction.tsx, user/dashboard/UserProfileHero.tsx, vmware/actions/EditAction.tsx",
+    "description": "administration/organizations/OrganizationGroupFromDialog.tsx, administration/providers/ProviderCard.tsx, customer/credits/CreditFormDialog.tsx, customer/credits/EditCreditButton.tsx, customer/payments/EditPaymentButton.tsx, customer/team/EditProjectUserButton.tsx, form/EditAction.tsx, form/EditButton.tsx, issues/comments/IssueCommentItem.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/deploy/DeployPage.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/list/EditOfferingButton.tsx, marketplace/offerings/update/plans/EditPlanDescriptionButton.tsx, marketplace/resources/actions/EditAction.tsx, marketplace/resources/options/UpdateResourceOptionButton.tsx, openstack/openstack-backup/actions/EditAction.tsx, openstack/openstack-backup-schedule/actions/EditAction.tsx, openstack/openstack-instance/actions/EditAction.tsx, openstack/openstack-network/actions/EditNetworkAction.tsx, openstack/openstack-security-groups/EditAction.tsx, openstack/openstack-snapshot/EditAction.tsx, openstack/openstack-snapshot-schedule/actions/EditAction.tsx, openstack/openstack-subnet/EditSubnetAction.tsx, openstack/openstack-tenant/actions/EditAction.tsx, openstack/openstack-volume/actions/EditAction.tsx, organization/OrganizationUIView.tsx, project/ProjectContainer.tsx, proposals/call-management/CallFormDialog.tsx, proposals/details/CallTabs.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/round/allocation/EditAllocationInfoButton.tsx, proposals/round/allocation/EditRoundAllocationDialog.tsx, proposals/round/review/EditReviewInfoButton.tsx, proposals/round/review/EditRoundReviewDialog.tsx, proposals/round/submission/EditRoundSubmissionDialog.tsx, proposals/round/submission/EditSubmissionInfoButton.tsx, proposals/update/general/EditGeneralInfoButton.tsx, rancher/cluster/hpas/HPAUpdateButton.tsx, slurm/EditAction.tsx, user/dashboard/UserProfileHero.tsx, vmware/actions/EditAction.tsx",
     "message": "Edit"
   },
   "Educational sciences": {
@@ -3379,6 +3415,10 @@
     "description": "openstack/openstack-security-groups/rule-editor/PortRangeField.tsx",
     "message": "Enter a single port (22) or a port range (5000-6000) or just leave blank for all ports."
   },
+  "Enter a value": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Enter a value"
+  },
   "Enter address...": {
     "description": "map/LocationContainer.tsx",
     "message": "Enter address..."
@@ -3458,6 +3498,10 @@
   "Error traceback": {
     "description": "marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/resource-pending/ResourceOrderErrorDialog.tsx",
     "message": "Error traceback"
+  },
+  "Error while deleting credit.": {
+    "description": "customer/credits/DeleteCreditButton.tsx",
+    "message": "Error while deleting credit."
   },
   "Error while deleting offering.": {
     "description": "marketplace/offerings/list/DeleteOfferingButton.tsx",
@@ -5371,6 +5415,10 @@
     "description": "proposals/update/rounds/RoundExpandableRow.tsx",
     "message": "Minimal average scoring"
   },
+  "Minimal consumption": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Minimal consumption"
+  },
   "Minimal disk": {
     "description": "openstack/openstack-tenant/TenantImagesList.tsx",
     "message": "Minimal disk"
@@ -5832,7 +5880,7 @@
     "message": "No members"
   },
   "No offerings": {
-    "description": "marketplace/offerings/details/OfferingAutocomplete.tsx",
+    "description": "customer/credits/CreditFormDialog.tsx, marketplace/offerings/details/OfferingAutocomplete.tsx",
     "message": "No offerings"
   },
   "No organization group types": {
@@ -5848,7 +5896,7 @@
     "message": "No organizations found"
   },
   "No organizations": {
-    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/MoveToOrganizationAutocomplete.tsx, project/ProjectCreateForm.tsx",
+    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, customer/credits/CreditFormDialog.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/MoveToOrganizationAutocomplete.tsx, project/ProjectCreateForm.tsx",
     "message": "No organizations"
   },
   "No outputs found for this order": {
@@ -6256,7 +6304,7 @@
     "message": "Offerings images"
   },
   "Offerings": {
-    "description": "administration/dashboard/AdminStatistics.tsx, broadcasts/BroadcastExpandableRow.tsx, broadcasts/BroadcastForm.tsx, broadcasts/RecipientsList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/category/utils.ts, marketplace/landing/OfferingsGroup.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/utils.ts, marketplace/routes.ts, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, marketplace/service-providers/ProviderDetailsBody.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/ServiceProvidersList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace/service-providers/details/ServiceProviderDetails.tsx, marketplace/utils.ts, navigation/sidebar/marketplace-popup/OfferingsPanel.tsx, proposals/details/CallOfferingsCard.tsx, proposals/details/PublicCallDetailsContainer.tsx, proposals/update/CallUpdateContainer.tsx, proposals/update/offerings/CallOfferingsSection.tsx",
+    "description": "administration/dashboard/AdminStatistics.tsx, broadcasts/BroadcastExpandableRow.tsx, broadcasts/BroadcastForm.tsx, broadcasts/RecipientsList.tsx, customer/credits/CreditsListTable.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/category/utils.ts, marketplace/landing/OfferingsGroup.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/utils.ts, marketplace/routes.ts, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx, marketplace/service-providers/ProviderDetailsBody.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/ServiceProvidersList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace/service-providers/details/ServiceProviderDetails.tsx, marketplace/utils.ts, navigation/sidebar/marketplace-popup/OfferingsPanel.tsx, proposals/details/CallOfferingsCard.tsx, proposals/details/PublicCallDetailsContainer.tsx, proposals/update/CallUpdateContainer.tsx, proposals/update/offerings/CallOfferingsSection.tsx",
     "message": "Offerings"
   },
   "Ok": {
@@ -6568,7 +6616,7 @@
     "message": "Organization has signed a fixed price agreement"
   },
   "Organization name": {
-    "description": "user/support/UserEditForm.tsx",
+    "description": "customer/credits/CreditsListTable.tsx, user/support/UserEditForm.tsx",
     "message": "Organization name"
   },
   "Organization quotas": {
@@ -8992,7 +9040,7 @@
     "message": "Search an offering"
   },
   "Search and select organization": {
-    "description": "customer/cost-policies/CostPolicyCreateForm.tsx",
+    "description": "customer/cost-policies/CostPolicyCreateForm.tsx, customer/credits/CreditFormDialog.tsx",
     "message": "Search and select organization"
   },
   "Search and select project": {
@@ -9163,6 +9211,10 @@
     "description": "issues/create/IssueCreateForm.tsx",
     "message": "Select issue template..."
   },
+  "Select offering(s)": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Select offering(s)"
+  },
   "Select offering": {
     "description": "proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx",
     "message": "Select offering"
@@ -9170,6 +9222,10 @@
   "Select offering...": {
     "description": "marketplace/offerings/details/OfferingAutocomplete.tsx, marketplace/resources/list/OfferingFilter.tsx, marketplace/service-providers/OfferingPermissionCreateDialog.tsx, proposals/proposal/create/resource-requests-step/CallOfferingFilter.tsx",
     "message": "Select offering..."
+  },
+  "Select offerings": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Select offerings"
   },
   "Select offerings...": {
     "description": "broadcasts/BroadcastForm.tsx, marketplace/service-providers/CampaignForm.tsx, marketplace/service-providers/CampaignUpdateForm.tsx",
@@ -9190,6 +9246,10 @@
   "Select organization(s)": {
     "description": "customer/cost-policies/CostPolicyCreateForm.tsx",
     "message": "Select organization(s)"
+  },
+  "Select organization": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Select organization"
   },
   "Select organization...": {
     "description": "auth/saml2/ProviderField.tsx, marketplace/details/CustomerField.tsx, marketplace/orders/OrganizationAutocomplete.tsx, marketplace/robot-accounts/ProviderCustomerFilter.tsx, project/MoveToOrganizationAutocomplete.tsx",
@@ -12788,7 +12848,7 @@
     "message": "Value should not be negative."
   },
   "Value": {
-    "description": "marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx, marketplace/resources/KeyValueTable.tsx, marketplace/resources/usage/utils.ts, rancher/cluster/apps/ApplicationDetailsDialog.tsx, reporting/quotas/CustomerQuotasList.tsx, reporting/resource-usage/ResourceUsageList.tsx",
+    "description": "customer/credits/CreditFormDialog.tsx, marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx, marketplace/resources/KeyValueTable.tsx, marketplace/resources/usage/utils.ts, rancher/cluster/apps/ApplicationDetailsDialog.tsx, reporting/quotas/CustomerQuotasList.tsx, reporting/resource-usage/ResourceUsageList.tsx",
     "message": "Value"
   },
   "Vendor support pages": {
