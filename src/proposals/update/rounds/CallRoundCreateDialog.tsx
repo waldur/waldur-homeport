@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { createCallRound } from '@waldur/proposals/api';
 import { RoundFormData, Call } from '@waldur/proposals/types';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';
@@ -45,12 +46,17 @@ export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
 ) => {
   const dispatch = useDispatch();
   const createRound = useCallback(
-    (formData: RoundFormData, _dispatch, formProps) => {
-      return createCallRound(props.resolve.call.uuid, formData).then(() => {
-        formProps.destroy();
-        dispatch(closeModalDialog());
-        props.resolve.refetch();
-      });
+    async (formData: RoundFormData, _dispatch, formProps) => {
+      try {
+        await createCallRound(props.resolve.call.uuid, formData).then(() => {
+          formProps.destroy();
+          dispatch(closeModalDialog());
+          props.resolve.refetch();
+        });
+        dispatch(showSuccess(translate('Round has been created.')));
+      } catch (e) {
+        dispatch(showErrorResponse(e));
+      }
     },
     [dispatch, props.resolve],
   );
