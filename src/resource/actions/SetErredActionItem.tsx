@@ -29,7 +29,7 @@ export const SetErredActionItem: FC<{ resource; refetch }> = ({
 }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
-  if (!user.is_staff) {
+  if (!user.is_staff || !resource.marketplace_resource_uuid) {
     return null;
   }
   const callback = async () => {

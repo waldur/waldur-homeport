@@ -2907,10 +2907,6 @@
     "description": "vmware/tabs.ts",
     "message": "Disks"
   },
-  "Display credit management.": {
-    "description": "features/FeaturesDescription.ts",
-    "message": "Display credit management."
-  },
   "Display name": {
     "description": "marketplace/offerings/DisplayNameField.tsx",
     "message": "Display name"
@@ -4707,10 +4703,6 @@
     "description": "invoices/details/InvoiceDetails.tsx",
     "message": "Invoice period"
   },
-  "Invoice settings": {
-    "description": "features/FeaturesDescription.ts",
-    "message": "Invoice settings"
-  },
   "Invoice statistics": {
     "description": "invoices/list/InvoicesStatsList.tsx",
     "message": "Invoice statistics"
@@ -6296,16 +6288,20 @@
     "message": "Only active"
   },
   "Only pending and expired invitations can be sent again.": {
-    "description": "invitations/MultiResendAction.tsx, invitations/actions/InvitationSendButton.tsx",
+    "description": "invitations/MultiResendAction.tsx",
     "message": "Only pending and expired invitations can be sent again."
-  },
-  "Only pending invitation can be canceled.": {
-    "description": "invitations/actions/InvitationCancelButton.tsx",
-    "message": "Only pending invitation can be canceled."
   },
   "Only pending invitations can be canceled.": {
     "description": "invitations/MultiCancelAction.tsx",
     "message": "Only pending invitations can be canceled."
+  },
+  "Only pending or planned invitations can be canceled.": {
+    "description": "invitations/actions/InvitationCancelButton.tsx",
+    "message": "Only pending or planned invitations can be canceled."
+  },
+  "Only pending, expired and canceled invitations can be sent again.": {
+    "description": "invitations/actions/InvitationSendButton.tsx",
+    "message": "Only pending, expired and canceled invitations can be sent again."
   },
   "Only projects without existing resources can be removed.": {
     "description": "project/manage/ProjectDelete.tsx",
@@ -7664,7 +7660,7 @@
     "message": "Provider UUID"
   },
   "Provider actions": {
-    "description": "marketplace/resources/actions/ProviderActionsGroup.tsx",
+    "description": "marketplace/resources/actions/ProviderActionsGroup.tsx, resource/actions/ResourceActionComponent.tsx",
     "message": "Provider actions"
   },
   "Provider details": {
@@ -8762,6 +8758,10 @@
   "Round closing soon": {
     "description": "proposals/call-management/CallManagementStatistics.tsx",
     "message": "Round closing soon"
+  },
+  "Round has been created.": {
+    "description": "proposals/update/rounds/CallRoundCreateDialog.tsx",
+    "message": "Round has been created."
   },
   "Round name": {
     "description": "proposals/details/CallRoundsList.tsx, proposals/update/rounds/CallRoundsList.tsx",
