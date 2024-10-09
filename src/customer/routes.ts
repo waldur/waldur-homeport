@@ -151,7 +151,6 @@ export const states: StateDeclaration[] = [
       priority: 100,
     },
   },
-
   {
     name: 'organization.events',
     url: 'events/',
