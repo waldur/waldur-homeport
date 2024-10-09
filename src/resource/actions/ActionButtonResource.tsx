@@ -20,14 +20,12 @@ interface ActionButtonResourceProps {
 async function loadData(url: string) {
   const response = await Axios.get(url);
   const resource = response.data;
-  let staffActions = ActionRegistry.getActions(resource.resource_type);
+  const resourceTypeActions = ActionRegistry.getActions(resource.resource_type);
+  let staffActions = [];
   let customerResourceActions = [];
   let marketplaceResource;
   if (resource.marketplace_resource_uuid) {
-    const extraActions = staffActions.filter(
-      (action) => !StaffActions.includes(action as any),
-    );
-    staffActions = StaffActions.concat(extraActions as any);
+    staffActions = StaffActions;
     customerResourceActions = CustomerResourceActions;
     marketplaceResource = await getResource(resource.marketplace_resource_uuid);
   }
@@ -36,6 +34,7 @@ async function loadData(url: string) {
     marketplaceResource,
     staffActions,
     customerResourceActions,
+    resourceTypeActions,
   };
 }
 

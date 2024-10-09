@@ -16,7 +16,8 @@ interface ResourceActionComponentProps {
   error?: object;
   customerResourceActions?: ActionItemType[];
   providerResourceActions?: ActionItemType[];
-  staffActions: ActionItemType[];
+  staffActions?: ActionItemType[];
+  resourceTypeActions?: ActionItemType[];
   resource: any;
   marketplaceResource?: any;
   refetch?(): void;
@@ -42,8 +43,22 @@ export const ResourceActionComponent: FunctionComponent<
           <Dropdown.Item eventKey="1">
             {translate('Unable to load actions')}
           </Dropdown.Item>
-        ) : props.customerResourceActions || props.staffActions ? (
+        ) : props.customerResourceActions ||
+          props.staffActions ||
+          props.resourceTypeActions ? (
           <>
+            {props.resourceTypeActions?.length > 0 && (
+              <>
+                {props.resourceTypeActions.map((ActionComponent, index) => (
+                  <ActionComponent
+                    key={`resource-${index}`}
+                    resource={props.resource}
+                    marketplaceResource={props.marketplaceResource}
+                    refetch={props.refetch}
+                  />
+                ))}
+              </>
+            )}
             {props.customerResourceActions?.length > 0 && (
               <>
                 <Dropdown.Header>
