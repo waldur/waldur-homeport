@@ -22,6 +22,7 @@ import {
 } from '../common/registry';
 import { ValidationIcon } from '../common/ValidationIcon';
 
+import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { OfferingViewHero } from './OfferingViewHero';
 import { getServiceSettingsForm } from './update/integration/registry';
 import { SCRIPT_ROWS } from './update/integration/utils';
@@ -177,7 +178,7 @@ export const OfferingEditUIView = () => {
   } = useCurrentStateAndParams();
 
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    ['providerOfferingData', offering_uuid],
+    [PROVIDER_OFFERING_DATA_QUERY_KEY, offering_uuid],
     () => getOfferingData(offering_uuid),
     { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
   );

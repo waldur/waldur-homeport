@@ -7,6 +7,7 @@ import { reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { createProviderOfferingComponent } from '@waldur/marketplace/common/api';
+import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@waldur/marketplace/offerings/constants';
 import { OfferingData } from '@waldur/marketplace/offerings/OfferingEditUIView';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -41,7 +42,7 @@ export const AddComponentDialog = reduxForm<
           ),
         );
         queryClient.setQueryData<OfferingData>(
-          ['OfferingUpdateContainer', props.resolve.offering.uuid],
+          [PROVIDER_OFFERING_DATA_QUERY_KEY, props.resolve.offering.uuid],
           (oldData) => ({
             ...oldData,
             offering: { ...oldData.offering, components: newComponents },

@@ -21,6 +21,7 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { isExperimentalUiComponentsVisible } from '../utils';
 
+import { PUBLIC_OFFERING_DATA_QUERY_KEY } from './constants';
 import { OfferingViewHero } from './OfferingViewHero';
 import { getPublicOfferingBreadcrumbItems } from './utils';
 
@@ -143,7 +144,7 @@ export const OfferingPublicUIView = () => {
   const user = useSelector(getUser);
 
   const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    ['publicOfferingData', uuid, user?.uuid],
+    [PUBLIC_OFFERING_DATA_QUERY_KEY, uuid, user?.uuid],
     async () => {
       if (user) {
         const offering = await getPublicOffering(uuid);

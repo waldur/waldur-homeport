@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { removeProviderOfferingComponent } from '@waldur/marketplace/common/api';
+import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@waldur/marketplace/offerings/constants';
 import { OfferingData } from '@waldur/marketplace/offerings/OfferingEditUIView';
 import { formatComponent } from '@waldur/marketplace/offerings/store/utils';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -35,7 +36,7 @@ export const DeleteComponentButton = ({ offering, component }) => {
       const data = formatComponent(component);
       await removeProviderOfferingComponent(offering.uuid, data);
       queryClient.setQueryData<OfferingData>(
-        ['OfferingUpdateContainer', offering.uuid],
+        [PROVIDER_OFFERING_DATA_QUERY_KEY, offering.uuid],
         (oldData) => ({
           ...oldData,
           offering: { ...oldData.offering, components: newComponents },
