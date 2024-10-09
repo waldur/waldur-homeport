@@ -11,6 +11,5 @@ export const ConsoleAction: ActionItemType = ({ resource }) => (
     apiMethod={getInstanceConsoleUrl}
     validators={validators}
     resource={resource}
-    staff
   />
 );
