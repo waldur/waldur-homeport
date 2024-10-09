@@ -17,6 +17,7 @@ import { usePageTabsTransmitter } from '@waldur/navigation/utils';
 
 import { isExperimentalUiComponentsVisible } from '../utils';
 
+import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { OfferingViewHero } from './OfferingViewHero';
 import { getOfferingBreadcrumbItems } from './utils';
 
@@ -182,7 +183,7 @@ export const OfferingDetailsUIView = () => {
     refetch: refetchOffering,
     isRefetching: isRefetchingOffering,
   } = useQuery(
-    ['providerOfferingData', offering_uuid],
+    [PROVIDER_OFFERING_DATA_QUERY_KEY, offering_uuid],
     () => loadOfferingData(offering_uuid),
     { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
   );

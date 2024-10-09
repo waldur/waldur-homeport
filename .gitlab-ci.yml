@@ -318,11 +318,12 @@ Build test docker image:
         }
       }
       EOF
-    - cat /kaniko/.docker/config.json
     - /kaniko/executor
       --context "${CI_PROJECT_DIR}"
       --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
       --cache=true
+      --registry-map docker.io=registry.hpc.ut.ee/mirror
+      --registry-map index.docker.io=registry.hpc.ut.ee/mirror
       --build-arg="DOCKER_REGISTRY=${DOCKER_REGISTRY}"
       --build-arg="ASSET_PATH=/${CI_MERGE_REQUEST_ID}/"
       --destination "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHORT_SHA}"
