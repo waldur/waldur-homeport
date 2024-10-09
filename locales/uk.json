@@ -1082,7 +1082,6 @@
   "One-time on plan switch": "Одноразове перемикання плану",
   "Only a created invoice can be marked as paid.": "Лише створений рахунок-фактуру можна позначити як оплачений.",
   "Only pending and expired invitations can be sent again.": "Повторно можна надіслати лише ті запрошення, які очікують на розгляд, і запрошення, термін дії яких минув.",
-  "Only pending invitation can be canceled.": "Можна скасувати лише запрошення, що очікує на розгляд.",
   "Only staff and organization users are allowed to open console.": "Лише співробітникам і користувачам організації дозволено відкривати консоль.",
   "Only staff can manage OpenStack tenant.": "Лише персонал може керувати клієнтом OpenStack.",
   "Only staff users are allowed to perform this action.": "Цю дію можуть виконувати лише штатні користувачі.",

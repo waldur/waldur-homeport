@@ -1058,7 +1058,6 @@
   "One-time on plan switch": "Jednorázový přepínač plánu",
   "Only a created invoice can be marked as paid.": "Pouze vytvořenou fakturu lze označit jako zaplacenou.",
   "Only pending and expired invitations can be sent again.": "Znovu lze odeslat pouze čekající a prošlé pozvánky.",
-  "Only pending invitation can be canceled.": "Zrušit lze pouze čekající pozvánku.",
   "Only staff and organization users are allowed to open console.": "Konzoli mohou otevřít pouze zaměstnanci a uživatelé organizace.",
   "Only staff can manage OpenStack tenant.": "Pouze zaměstnanci mohou spravovat klienta OpenStack.",
   "Only staff users are allowed to perform this action.": "Tuto akci mohou provádět pouze zaměstnanci.",

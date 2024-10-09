@@ -1060,7 +1060,6 @@
   "One-time on plan switch": "Engångsförseande på planbrytare",
   "Only a created invoice can be marked as paid.": "Endast en skapad faktura kan markeras som betald.",
   "Only pending and expired invitations can be sent again.": "Endast väntande och utgångna inbjudningar kan skickas igen.",
-  "Only pending invitation can be canceled.": "Endast väntande inbjudan kan avbrytas.",
   "Only staff and organization users are allowed to open console.": "Endast användare av personal och organisation får öppna konsolen.",
   "Only staff can manage OpenStack tenant.": "Endast personal kan hantera OpenStack-hyresgästen.",
   "Only staff users are allowed to perform this action.": "Endast personalanvändare får utföra den här åtgärden.",

@@ -648,7 +648,6 @@
   "One-time on plan switch": "Interruttore di piano una tantum",
   "Only a created invoice can be marked as paid.": "Solo una fattura creata può essere contrassegnata come pagata.",
   "Only pending and expired invitations can be sent again.": "Solo gli inviti in sospeso e scaduti possono essere inviati di nuovo.",
-  "Only pending invitation can be canceled.": "Solo l'invito in sospeso può essere annullato.",
   "Only staff and organization users are allowed to open console.": "Solo gli utenti del personale e dell'organizzazione possono aprire la console.",
   "Only staff can manage OpenStack tenant.": "Solo il personale può gestire il tenant OpenStack.",
   "Only staff users are allowed to perform this action.": "Solo gli utenti del personale sono autorizzati a eseguire questa azione.",

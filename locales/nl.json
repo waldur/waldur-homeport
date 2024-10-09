@@ -641,7 +641,6 @@
   "One-time on plan switch": "Eenmalige wissel op plan",
   "Only a created invoice can be marked as paid.": "Alleen een aangemaakte factuur kan als betaald worden gemarkeerd.",
   "Only pending and expired invitations can be sent again.": "Alleen in afwachting zijnde en verlopen uitnodigingen kunnen opnieuw worden verzonden.",
-  "Only pending invitation can be canceled.": "Alleen in afwachting zijnde uitnodiging kan worden geannuleerd.",
   "Only staff and organization users are allowed to open console.": "Alleen personeels- en organisatiegebruikers mogen de console openen.",
   "Only staff can manage OpenStack tenant.": "Alleen personeel kan OpenStack-huurder beheren.",
   "Only staff users are allowed to perform this action.": "Alleen personeelsgebruikers mogen deze actie uitvoeren.",

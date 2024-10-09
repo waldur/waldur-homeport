@@ -1077,7 +1077,6 @@
   "One-time on plan switch": "Vienreizējs plāna slēdzis",
   "Only a created invoice can be marked as paid.": "Tikai izveidots rēķins var tikt atzīmēts kā apmaksāts.",
   "Only pending and expired invitations can be sent again.": "Atkārtoti var nosūtīt tikai neapstiprinātos ielūgumus, kuriem beidzies derīguma termiņš.",
-  "Only pending invitation can be canceled.": "Var atcelt tikai neapstiprināto ielūgumu.",
   "Only staff and organization users are allowed to open console.": "Konsoli drīkst atvērt tikai darbinieki un organizācijas lietotāji.",
   "Only staff can manage OpenStack tenant.": "OpenStack nomnieku var pārvaldīt tikai darbinieki.",
   "Only staff users are allowed to perform this action.": "Šo darbību drīkst veikt tikai personāla lietotāji.",

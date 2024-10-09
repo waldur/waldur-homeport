@@ -647,7 +647,6 @@
   "One-time on plan switch": "Engangskontakt på planen",
   "Only a created invoice can be marked as paid.": "Kun en oprettet faktura kan markeres som betalt.",
   "Only pending and expired invitations can be sent again.": "Kun ventende og udløbne invitationer kan sendes igen.",
-  "Only pending invitation can be canceled.": "Kun afventende invitation kan annulleres.",
   "Only staff and organization users are allowed to open console.": "Kun medarbejder- og organisationsbrugere har tilladelse til at åbne konsollen.",
   "Only staff can manage OpenStack tenant.": "Kun medarbejdere kan håndtere OpenStack-lejer.",
   "Only staff users are allowed to perform this action.": "Kun medarbejderbrugere har tilladelse til at udføre denne handling.",

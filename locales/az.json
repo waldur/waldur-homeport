@@ -1132,7 +1132,6 @@
   "One-time on plan switch": "Birdəfəlik plan keçidi",
   "Only a created invoice can be marked as paid.": "Yalnız yaradılmış faktura ödənişli olaraq qeyd edilə bilər.",
   "Only pending and expired invitations can be sent again.": "Yalnız gözlənilən və bitmiş dəvətnamələr yenidən göndərilə bilər.",
-  "Only pending invitation can be canceled.": "Yalnız natamam dəvət ləğv edilə bilər.",
   "Only staff and organization users are allowed to open console.": "Yalnız işçilər və təşkilat istifadəçilərinə konsol açmağa icazə verilir.",
   "Only staff can manage OpenStack tenant.": "Yalnız işçilər OpenStack icarəçisini idarə edə bilər.",
   "Only staff users are allowed to perform this action.": "Yalnız işçi heyəti istifadəçilərinə bu hərəkəti həyata keçirməyə icazə verilir.",

@@ -1084,7 +1084,6 @@
   "One-time on plan switch": "প্ল্যান সুইচ অন-টাইম",
   "Only a created invoice can be marked as paid.": "শুধুমাত্র একটি তৈরি চালানকে অর্থপ্রদান হিসাবে চিহ্নিত করা যেতে পারে।",
   "Only pending and expired invitations can be sent again.": "শুধুমাত্র মুলতুবি থাকা এবং মেয়াদোত্তীর্ণ আমন্ত্রণগুলি আবার পাঠানো যাবে।",
-  "Only pending invitation can be canceled.": "শুধুমাত্র মুলতুবি থাকা আমন্ত্রণ বাতিল করা যেতে পারে।",
   "Only staff and organization users are allowed to open console.": "শুধুমাত্র কর্মী এবং প্রতিষ্ঠান ব্যবহারকারীদের কনসোল খুলতে অনুমতি দেওয়া হয়.",
   "Only staff can manage OpenStack tenant.": "শুধুমাত্র কর্মীরা OpenStack ভাড়াটে পরিচালনা করতে পারেন।",
   "Only staff users are allowed to perform this action.": "শুধুমাত্র স্টাফ ব্যবহারকারীদের এই কর্ম সঞ্চালনের অনুমতি দেওয়া হয়.",

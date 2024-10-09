@@ -1068,7 +1068,6 @@
   "One-time on plan switch": "Cambio de plan una sola vez",
   "Only a created invoice can be marked as paid.": "Solo una factura creada se puede marcar como pagada.",
   "Only pending and expired invitations can be sent again.": "Solo las invitaciones pendientes y expiradas se pueden enviar de nuevo.",
-  "Only pending invitation can be canceled.": "Solo se puede cancelar la invitación pendiente.",
   "Only staff and organization users are allowed to open console.": "Solo los usuarios del personal y de la organización pueden abrir la consola.",
   "Only staff can manage OpenStack tenant.": "Solo el personal puede gestionar el inquilino de OpenStack.",
   "Only staff users are allowed to perform this action.": "Solo los usuarios del personal pueden realizar esta acción.",

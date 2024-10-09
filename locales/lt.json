@@ -1075,7 +1075,6 @@
   "One-time on plan switch": "Vienkartinis plano perjungimas",
   "Only a created invoice can be marked as paid.": "Tik sukurtą sąskaitą faktūrą galima pažymėti kaip apmokėtą.",
   "Only pending and expired invitations can be sent again.": "Vėl galima siųsti tik laukiančius ir nebegaliojančius kvietimus.",
-  "Only pending invitation can be canceled.": "Atšaukti galima tik laukiantį kvietimą.",
   "Only staff and organization users are allowed to open console.": "Konsolei atidaryti leidžiama tik darbuotojams ir organizacijos vartotojams.",
   "Only staff can manage OpenStack tenant.": "Tik „OpenStack“ nuomininką gali valdyti personalas.",
   "Only staff users are allowed to perform this action.": "Tik personalo vartotojams leidžiama atlikti šį veiksmą.",

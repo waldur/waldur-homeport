@@ -1088,7 +1088,6 @@
   "One-time on plan switch": "เพียงครั้งเดียวในการเปลี่ยนแผน",
   "Only a created invoice can be marked as paid.": "เฉพาะใบแจ้งหนี้ที่สร้างขึ้นเท่านั้นที่สามารถทำเครื่องหมายว่าชำระเงินแล้ว",
   "Only pending and expired invitations can be sent again.": "เฉพาะคำเชิญที่รอดำเนินการและหมดอายุแล้วเท่านั้นที่สามารถส่งอีกครั้งได้",
-  "Only pending invitation can be canceled.": "เฉพาะคำเชิญที่รอดำเนินการเท่านั้นที่สามารถยกเลิกได้",
   "Only staff and organization users are allowed to open console.": "เฉพาะผู้ใช้พนักงานและองค์กรเท่านั้นที่สามารถเปิดคอนโซลได้",
   "Only staff can manage OpenStack tenant.": "มีเพียงพนักงานเท่านั้นที่สามารถจัดการผู้เช่า OpenStack ได้",
   "Only staff users are allowed to perform this action.": "เฉพาะผู้ใช้ที่เป็นพนักงานเท่านั้นที่ได้รับอนุญาตให้ดำเนินการนี้",

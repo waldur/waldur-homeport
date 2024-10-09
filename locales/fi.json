@@ -1074,7 +1074,6 @@
   "One-time on plan switch": "Kertaluonteinen suunnitelman vaihto",
   "Only a created invoice can be marked as paid.": "Vain luotu lasku voidaan merkitä maksetuksi.",
   "Only pending and expired invitations can be sent again.": "Vain odottavat ja vanhentuneet kutsut voidaan lähettää uudelleen.",
-  "Only pending invitation can be canceled.": "Vain odottava kutsu voidaan peruuttaa.",
   "Only staff and organization users are allowed to open console.": "Vain henkilöstön ja organisaation käyttäjät voivat avata konsolin.",
   "Only staff can manage OpenStack tenant.": "Vain henkilökunta voi hallita OpenStack-vuokralaista.",
   "Only staff users are allowed to perform this action.": "Vain henkilöstön käyttäjät voivat suorittaa tämän toiminnon.",

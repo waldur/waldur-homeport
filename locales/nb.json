@@ -1061,7 +1061,6 @@
   "One-time on plan switch": "Engang på plan bryter",
   "Only a created invoice can be marked as paid.": "Bare en opprettet faktura kan merkes som betalt.",
   "Only pending and expired invitations can be sent again.": "Bare ventende og utløpte invitasjoner kan sendes på nytt.",
-  "Only pending invitation can be canceled.": "Bare ventende invitasjon kan avbrytes.",
   "Only staff and organization users are allowed to open console.": "Bare ansatte og organisasjonsbrukere har lov til å åpne konsollen.",
   "Only staff can manage OpenStack tenant.": "Bare ansatte kan administrere OpenStack-leier.",
   "Only staff users are allowed to perform this action.": "Bare ansatte har lov til å utføre denne handlingen.",

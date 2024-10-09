@@ -454,7 +454,6 @@
   "One-time": "یکبار",
   "One-time on plan switch": "یکبار در  plan switch",
   "Only pending and expired invitations can be sent again.": "فقط دعوت های تاریخ گذشته یا منتظر ارسال میتوانند مجدد ارسال شوند.",
-  "Only pending invitation can be canceled.": "فقط دعوت های منتظر ارسال را میتوان لغو کرد.",
   "Only staff and organization users are allowed to open console.": "فقط کارمندان و کاربران سازمان، مجاز به باز کردن console هستند.",
   "Only staff can manage OpenStack tenant.": "فقط کارمندان میتوانند OpenStack tenant را مدیریت کنند.",
   "Open": "باز",

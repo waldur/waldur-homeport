@@ -1055,7 +1055,6 @@
   "One-time on plan switch": "План боюнча бир жолку которуштуруу",
   "Only a created invoice can be marked as paid.": "Түзүлгөн эсеп-фактура гана төлөндү деп белгилениши мүмкүн.",
   "Only pending and expired invitations can be sent again.": "Күтүүдөгү жана мөөнөтү бүткөн чакырууларды гана кайра жөнөтсө болот.",
-  "Only pending invitation can be canceled.": "Күтүүдөгү чакырууну гана жокко чыгарууга болот.",
   "Only staff and organization users are allowed to open console.": "Кызматкерлерге жана уюмдун колдонуучуларына гана консолду ачууга уруксат берилет.",
   "Only staff can manage OpenStack tenant.": "OpenStack ижарачысын кызматкерлер гана башкара алат.",
   "Only staff users are allowed to perform this action.": "Кызматтык колдонуучуларга гана бул аракетти аткарууга уруксат берилет.",

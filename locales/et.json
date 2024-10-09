@@ -1532,7 +1532,6 @@
   "Only a created invoice can be marked as paid.": "Tasuks saab märkida ainult loodud arve.",
   "Only active": "Ainult aktiivsed",
   "Only pending and expired invitations can be sent again.": "Ainult ootel olevat või aegunud kutset saab uuesti saata.",
-  "Only pending invitation can be canceled.": "Ainult ootel olevat kutset saab katkestada.",
   "Only pending invitations can be canceled.": "Ainult ootel olevaid kutseid saab tühistada.",
   "Only projects without existing resources can be removed.": "Eemaldada saab ainult olemasolevate ressurssideta projekte.",
   "Only staff and organization users are allowed to open console.": "Ainult personali hulka kuuluv kasutaja saab uuendada organisatsiooni poliitikat.",
