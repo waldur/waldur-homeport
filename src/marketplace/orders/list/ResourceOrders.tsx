@@ -9,7 +9,7 @@ import { Resource } from '@waldur/marketplace/resources/types';
 import { Table, createFetcher } from '@waldur/table';
 import { useTable } from '@waldur/table/utils';
 
-import { CancelTerminationOrderButton } from '../actions/CancelTerminationOrderButton';
+import { ResourceOrderRowActions } from '../actions/ResourceOrdersRowActions';
 
 import { OrderStateCell } from './OrderStateCell';
 import { OrderTypeCell } from './OrderTypeCell';
@@ -74,7 +74,9 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
       title={translate('Resource orders')}
       columns={columns}
       verboseName={translate('orders')}
-      rowActions={CancelTerminationOrderButton}
+      rowActions={({ row }) => (
+        <ResourceOrderRowActions row={row} refetch={tableProps.fetch} />
+      )}
     />
   );
 };

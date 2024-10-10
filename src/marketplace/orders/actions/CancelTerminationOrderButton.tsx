@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { cancelTerminationOrder } from '@waldur/marketplace/common/api';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { OrderResponse } from '../types';
@@ -40,11 +40,10 @@ export const CancelTerminationOrderButton = ({
     row.offering_type === REMOTE_OFFERING_TYPE
   ) {
     return (
-      <RowActionButton
-        className="btn btn-sm btn-secondary me-2"
+      <ActionItem
         title={translate('Cancel')}
         action={mutate}
-        pending={isLoading}
+        disabled={isLoading}
         iconNode={<Prohibit />}
         size="sm"
       />
