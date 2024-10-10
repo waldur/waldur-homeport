@@ -466,6 +466,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
       this.props.dropdownActions?.length ||
       this.props.enableExport ||
       this.props.filters ||
+      this.props.hasOptionalColumns ||
       Boolean(this.props.gridItem && this.props.columns.length)
     );
   }
