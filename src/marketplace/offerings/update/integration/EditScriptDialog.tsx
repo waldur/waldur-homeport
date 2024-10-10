@@ -109,15 +109,16 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
         );
         if (asyncDryRunResult.data.get_state_display === 'erred') {
           dispatch(showError('An error occurred during script execution.'));
+        } else {
+          dispatch(
+            showSuccess(
+              translate('{type} script was executed successfully', {
+                type: props.resolve.dry_run,
+              }),
+            ),
+          );
         }
         setScriptExecutionResult(asyncDryRunResult.data.output);
-        dispatch(
-          showSuccess(
-            translate('{type} script was executed successfully', {
-              type: props.resolve.dry_run,
-            }),
-          ),
-        );
       } catch (e) {
         dispatch(
           showErrorResponse(
