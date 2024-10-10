@@ -112,6 +112,11 @@ const OfferingUsersList = lazyComponent(
   'OfferingUsersList',
 );
 
+const FreeIPAUsersList = lazyComponent(
+  () => import('./users/FreeIPAUsersList'),
+  'FreeIPAUsersList',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -260,6 +265,15 @@ export const states: StateDeclaration[] = [
     component: TokensList,
     data: {
       breadcrumb: () => translate('Active sessions'),
+    },
+  },
+  {
+    name: 'admin-user-freeipa-users',
+    url: 'freeipa-users/',
+    parent: 'admin-accounts',
+    component: FreeIPAUsersList,
+    data: {
+      breadcrumb: () => translate('FreeIPA users'),
     },
   },
   {
