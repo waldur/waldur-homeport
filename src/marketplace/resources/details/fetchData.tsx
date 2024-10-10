@@ -124,13 +124,6 @@ export const getResourceTabs = ({
       title: translate('Quotas'),
       component: TenantMainComponent,
     });
-    if (isFeatureVisible(OpenstackFeatures.show_migrations)) {
-      tabs.push({
-        key: 'Migrations',
-        title: translate('Migrations'),
-        component: TenantMigrationsList,
-      });
-    }
   } else if (resource.offering_type === INSTANCE_TYPE && scope) {
     tabs.push({
       key: 'vm-details',
@@ -233,6 +226,18 @@ export const getResourceTabs = ({
       },
     ],
   });
+
+  if (
+    resource.offering_type === TENANT_TYPE &&
+    scope &&
+    isFeatureVisible(OpenstackFeatures.show_migrations)
+  ) {
+    tabs.push({
+      key: 'Migrations',
+      title: translate('Migrations'),
+      component: TenantMigrationsList,
+    });
+  }
   return tabs;
 };
 
