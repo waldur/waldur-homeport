@@ -21,6 +21,7 @@ export const CallEnum = {
 };
 
 export const CustomersEnum = {
+  create_of_credit_by_staff: 'create_of_credit_by_staff',
   customer_creation_succeeded: 'customer_creation_succeeded',
   customer_deletion_succeeded: 'customer_deletion_succeeded',
   customer_update_succeeded: 'customer_update_succeeded',
@@ -33,10 +34,14 @@ export const CustomersEnum = {
   payment_added: 'payment_added',
   payment_created: 'payment_created',
   payment_removed: 'payment_removed',
+  reduction_of_credit: 'reduction_of_credit',
   reduction_of_credit_due_to_minimal_consumption: 'reduction_of_credit_due_to_minimal_consumption',
+  set_to_zero_overdue_credit: 'set_to_zero_overdue_credit',
+  update_of_credit_by_staff: 'update_of_credit_by_staff',
 };
 
 export const InvoicesEnum = {
+  create_of_credit_by_staff: 'create_of_credit_by_staff',
   invoice_canceled: 'invoice_canceled',
   invoice_created: 'invoice_created',
   invoice_creation_succeeded: 'invoice_creation_succeeded',
@@ -48,6 +53,10 @@ export const InvoicesEnum = {
   invoice_update_succeeded: 'invoice_update_succeeded',
   payment_created: 'payment_created',
   payment_removed: 'payment_removed',
+  reduction_of_credit: 'reduction_of_credit',
+  reduction_of_credit_due_to_minimal_consumption: 'reduction_of_credit_due_to_minimal_consumption',
+  set_to_zero_overdue_credit: 'set_to_zero_overdue_credit',
+  update_of_credit_by_staff: 'update_of_credit_by_staff',
 };
 
 export const JiraEnum = {
