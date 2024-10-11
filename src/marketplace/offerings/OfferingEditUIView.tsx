@@ -115,9 +115,25 @@ const getTabs = (offering: Offering): PageBarTab[] => {
 
   tabs.push(
     {
-      key: 'endpoints',
-      component: OfferingEndpointsSection,
-      title: translate('Endpoints'),
+      key: 'public_information',
+      title: translate('Public information'),
+      children: [
+        {
+          key: 'endpoints',
+          component: OfferingEndpointsSection,
+          title: translate('Endpoints'),
+        },
+        {
+          key: 'category',
+          component: AttributesSection,
+          title: translate('Category'),
+        },
+        {
+          key: 'images',
+          component: OfferingImagesList,
+          title: translate('Images'),
+        },
+      ],
     },
     {
       key: 'options',
@@ -129,45 +145,35 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       component: OfferingResourceOptionsSection,
       title: translate('Resource options'),
     },
-    {
-      key: 'category',
-      component: AttributesSection,
-      title: translate('Category'),
-    },
-  );
-
-  // Components
-  if (showComponentsList(offering.type)) {
-    tabs.push({
-      key: 'components',
-      component: ComponentsSection,
-      title: (
-        <>
-          <ValidationIcon value={offering.components.length > 0} />
-          {translate('Accounting components')}
-        </>
-      ),
-    });
-  }
-
-  tabs.push(
-    {
-      key: 'plans',
-      component: PlansSection,
-      title: (
-        <>
-          <ValidationIcon value={offering.plans.length > 0} />
-          {translate('Accounting plans')}
-        </>
-      ),
-    },
-    {
-      key: 'images',
-      component: OfferingImagesList,
-      title: translate('Images'),
-    },
     { key: 'roles', component: RolesSection, title: translate('Roles') },
   );
+
+  tabs.push({
+    title: translate('Accounting'),
+    key: 'accounting',
+    children: [
+      {
+        title: (
+          <>
+            <ValidationIcon value={offering.plans.length > 0} />
+            {translate('Accounting plans')}
+          </>
+        ),
+        key: 'plans',
+        component: PlansSection,
+      },
+      showComponentsList(offering.type) && {
+        key: 'components',
+        component: ComponentsSection,
+        title: (
+          <>
+            <ValidationIcon value={offering.components.length > 0} />
+            {translate('Accounting components')}
+          </>
+        ),
+      },
+    ],
+  });
 
   return tabs;
 };
