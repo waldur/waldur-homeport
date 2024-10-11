@@ -37,6 +37,10 @@ export const TenantMigrationsList: FunctionComponent<{ resource }> = ({
           ),
         },
         {
+          title: translate('Destination offering'),
+          render: ({ row }) => row.dst_offering_name,
+        },
+        {
           title: translate('Created'),
           render: ({ row }) => formatDateTime(row.created),
         },
