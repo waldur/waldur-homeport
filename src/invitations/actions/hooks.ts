@@ -177,11 +177,15 @@ export const useCreateInvitation = (
             case 'project':
               scope = context.project || project;
               break;
+
             default:
               break;
           }
         }
-        return checkScope(user, roleType, scope?.uuid, PermissionMap[roleType]);
+        return (
+          checkScope(user, roleType, scope?.uuid, PermissionMap[roleType]) ||
+          checkScope(user, 'customer', customer.uuid, PermissionMap[roleType])
+        );
       }),
     [context, user, customer, project],
   );

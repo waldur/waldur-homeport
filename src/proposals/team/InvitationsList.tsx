@@ -57,7 +57,7 @@ export const InvitationsList: FunctionComponent<{ table; hideRole }> = ({
       ].filter(Boolean)}
       rowActions={({ row }) => (
         <>
-          <InvitationSendButton row={row} refetch={table.fetch} />
+          <InvitationSendButton row={row} />
           <InvitationCancelButton row={row} refetch={table.fetch} />
         </>
       )}

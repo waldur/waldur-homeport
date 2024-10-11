@@ -41,34 +41,33 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     return null;
   }
   return Component === Dropdown.Item || Component === Button ? (
-    <>
-      <Component
-        className={classNames(
-          'd-flex gap-3',
-          props.className,
-          props.disabled && 'bg-hover-lighten',
+    <Component
+      className={classNames(
+        'd-flex gap-3',
+        props.className,
+        props.disabled && 'bg-hover-lighten',
+      )}
+      // Workaround for rendering tooltips for disabled dropdown menu items.
+      // See also: https://stackoverflow.com/questions/57349166/
+      onClick={() => !props.disabled && props.action()}
+      as="button"
+      variant={Component === Button ? '' : undefined}
+      size={Component === Button ? props.size : undefined}
+      disabled={props.disabled && !props.tooltip}
+    >
+      <div className={props.disabled ? 'opacity-50' : undefined}>
+        {props.iconNode && (
+          <span
+            className={classNames(
+              'svg-icon svg-icon-2',
+              props.iconColor && `svg-icon-${props.iconColor}`,
+            )}
+          >
+            {props.iconNode}
+          </span>
         )}
-        // Workaround for rendering tooltips for disabled dropdown menu items.
-        // See also: https://stackoverflow.com/questions/57349166/
-        onClick={() => !props.disabled && props.action()}
-        variant={Component === Button ? '' : undefined}
-        size={Component === Button ? props.size : undefined}
-        disabled={props.disabled}
-      >
-        <div className={props.disabled ? 'opacity-50' : undefined}>
-          {props.iconNode && (
-            <span
-              className={classNames(
-                'svg-icon svg-icon-2',
-                props.iconColor && `svg-icon-${props.iconColor}`,
-              )}
-            >
-              {props.iconNode}
-            </span>
-          )}
-          {props.title}
-        </div>
-      </Component>
+        {props.title}
+      </div>
       {props.tooltip && (
         <Tip
           label={props.tooltip}
@@ -78,7 +77,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
           <Question size={20} />
         </Tip>
       )}
-    </>
+    </Component>
   ) : (
     <Component {...props} />
   );
