@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { translate } from '@waldur/i18n';
 import { runMigration } from '@waldur/openstack/api';
 import { AsyncActionButton } from '@waldur/resource/actions/AsyncActionButton';
+import { validateState } from '@waldur/resource/actions/base';
 
 import { TenantActionProps } from './types';
 
@@ -17,5 +18,6 @@ export const ExecuteMigrationAction: FC<TenantActionProps> = ({
     resource={resource}
     apiMethod={runMigration}
     refetch={refetch}
+    validators={[validateState('Creation Scheduled')]}
   />
 );
