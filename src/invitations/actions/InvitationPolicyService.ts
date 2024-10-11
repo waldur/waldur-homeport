@@ -15,8 +15,9 @@ export const InvitationPolicyService = {
     const permission = PermissionMap[role.content_type];
     return hasPermission(context.user, {
       permission: permission,
-      customerId: context.customer.uuid,
+      customerId: context.customer?.uuid,
       projectId: context.project?.uuid,
+      scopeId: context.scope?.uuid,
     });
   },
 
@@ -28,8 +29,9 @@ export const InvitationPolicyService = {
     const permission = PermissionMap[invitation.scope_type];
     return hasPermission(context.user, {
       permission: permission,
-      customerId: context.customer.uuid,
+      customerId: context.customer?.uuid,
       projectId: context.project?.uuid,
+      scopeId: invitation.scope_uuid,
     });
   },
 
