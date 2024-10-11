@@ -8,6 +8,7 @@ import { useTable } from '@waldur/table/utils';
 
 import { ExecuteMigrationAction } from './actions/ExecuteMigrationAction';
 import { CreateMigrationButton } from './CreateMigrationButton';
+import { MigrationExpandableRow } from './MigrationExpandableRow';
 
 export const TenantMigrationsList: FunctionComponent<{ resource }> = ({
   resource,
@@ -56,6 +57,7 @@ export const TenantMigrationsList: FunctionComponent<{ resource }> = ({
       tableActions={
         <CreateMigrationButton resource={resource} refetch={props.fetch} />
       }
+      expandableRow={MigrationExpandableRow}
     />
   );
 };

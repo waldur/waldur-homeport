@@ -10147,6 +10147,10 @@
     "description": "customer/details/EditFieldDialog.tsx",
     "message": "Subnets from where connection to self-service is allowed."
   },
+  "Subnets mapping": {
+    "description": "openstack/openstack-tenant/MigrationExpandableRow.tsx",
+    "message": "Subnets mapping"
+  },
   "Subnets": {
     "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, openstack/openstack-network/TenantNetworksList.tsx, openstack/openstack-tenant/actions/MigrateTenantDialog.tsx, openstack/openstack-tenant/tabs.ts",
     "message": "Subnets"
@@ -12986,6 +12990,10 @@
   "Volume type": {
     "description": "openstack/openstack-instance/OpenStackInstanceVolumeBadge.tsx, openstack/openstack-volume/OpenStackVolumeSummary.tsx, openstack/openstack-volume/OpenstackVolumeDetails.tsx, openstack/openstack-volume/actions/RetypeDialog.tsx, rancher/cluster/create/VolumeTypeGroup.tsx",
     "message": "Volume type"
+  },
+  "Volume types mapping": {
+    "description": "openstack/openstack-tenant/MigrationExpandableRow.tsx",
+    "message": "Volume types mapping"
   },
   "Volume types": {
     "description": "openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
