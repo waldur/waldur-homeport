@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Table, createFetcher } from '@waldur/table';
@@ -38,7 +38,7 @@ export const TenantMigrationsList: FunctionComponent<{ resource }> = ({
         },
         {
           title: translate('Created'),
-          render: ({ row }) => formatDate(row.created),
+          render: ({ row }) => formatDateTime(row.created),
         },
         {
           title: translate('State'),

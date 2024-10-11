@@ -184,7 +184,7 @@
     "message": "Accounting type"
   },
   "Accounting": {
-    "description": "customer/routes.ts, invoices/list/BillingRecordsList.tsx, marketplace/orders/details/OrderDetails.tsx",
+    "description": "customer/routes.ts, invoices/list/BillingRecordsList.tsx, marketplace/offerings/OfferingEditUIView.tsx, marketplace/orders/details/OrderDetails.tsx",
     "message": "Accounting"
   },
   "Accounts": {
@@ -252,7 +252,7 @@
     "message": "Active sessions"
   },
   "Active": {
-    "description": "administration/roles/RolesList.tsx, invitations/GroupInvitationsList.tsx, marketplace/offerings/list/OfferingStateCell.tsx, marketplace/offerings/list/OfferingStateFilter.tsx, marketplace/offerings/update/plans/PlansTable.tsx, marketplace/service-providers/ProviderCampaignStateFilter.tsx, proposals/utils.ts, user/support/UserList.tsx, user/support/utils.ts",
+    "description": "administration/roles/RolesList.tsx, administration/users/FreeIPAUsersList.tsx, invitations/GroupInvitationsList.tsx, marketplace/offerings/list/OfferingStateCell.tsx, marketplace/offerings/list/OfferingStateFilter.tsx, marketplace/offerings/update/plans/PlansTable.tsx, marketplace/service-providers/ProviderCampaignStateFilter.tsx, proposals/utils.ts, user/support/UserList.tsx, user/support/utils.ts",
     "message": "Active"
   },
   "Add Waldur user SSH keys to the FreeIPA profile": {
@@ -471,12 +471,8 @@
     "description": "marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx",
     "message": "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
   },
-  "Aggreement date": {
-    "description": "administration/users/FreeIPAUsersList.tsx",
-    "message": "Aggreement date"
-  },
   "Agreement date": {
-    "description": "user/support/UserList.tsx",
+    "description": "administration/users/FreeIPAUsersList.tsx, user/support/UserList.tsx",
     "message": "Agreement date"
   },
   "Agreement number": {
@@ -1022,6 +1018,10 @@
   "Are you sure you want to submit the order?": {
     "description": "marketplace/details/OrderSubmitButton.tsx",
     "message": "Are you sure you want to submit the order?"
+  },
+  "Are you sure you want to submit the proposal?": {
+    "description": "proposals/proposal/create/ProposalTeamVerificationStep.tsx",
+    "message": "Are you sure you want to submit the proposal?"
   },
   "Are you sure you want to submit this review for the {name} proposal?": {
     "description": "proposals/proposal/create-review/ProposalReviewCreatePage.tsx",
@@ -2024,7 +2024,7 @@
     "message": "Confirmation notification template"
   },
   "Confirmation": {
-    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invitations/GroupInvitationCancelButton.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/ColumnsList.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/details/CustomerField.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/details/policies/PolicyDeleteButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, rancher/cluster/create/FormNodesStep.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserTermination.tsx",
+    "description": "administration/TokenDeleteButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/roles/RoleDeleteButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invitations/GroupInvitationCancelButton.tsx, invoices/details/InvoiceItemDelete.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/ColumnsList.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/details/CustomerField.tsx, marketplace/details/OrderSubmitButton.tsx, marketplace/offerings/details/policies/PolicyDeleteButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/ProposalRowActions.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/proposal/create/ProposalTeamVerificationStep.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, rancher/cluster/create/FormNodesStep.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserTermination.tsx",
     "message": "Confirmation"
   },
   "Confirming that data is correct": {
@@ -3774,6 +3774,10 @@
   "Fetching...": {
     "description": "core/InfiniteList.tsx, marketplace/deploy/steps/FormCloudStep.tsx",
     "message": "Fetching..."
+  },
+  "Field is synchronised from the remote offering": {
+    "description": "marketplace/offerings/update/overview/OverviewSection.tsx",
+    "message": "Field is synchronised from the remote offering"
   },
   "Field": {
     "description": "marketplace-remote/ProjectUpdateRequestExpandable.tsx",
@@ -7787,6 +7791,10 @@
     "description": "proposals/round/proposals/ProposalReviewsDetailButton.tsx",
     "message": "Public comment"
   },
+  "Public information": {
+    "description": "marketplace/offerings/OfferingEditUIView.tsx",
+    "message": "Public information"
+  },
   "Public key": {
     "description": "marketplace/robot-accounts/RobotAccountExpandable.tsx, user/keys/KeyCreateDialog.tsx, user/keys/KeysList.tsx, user/keys/KeysListExpandableRow.tsx",
     "message": "Public key"
@@ -8263,6 +8271,10 @@
     "description": "openstack/openstack-tenant/actions/RequestDirectAccessAction.tsx",
     "message": "Request direct access"
   },
+  "Request downscaling of resources": {
+    "description": "customer/cost-policies/utils.ts",
+    "message": "Request downscaling of resources"
+  },
   "Request editing": {
     "description": "marketplace/offerings/actions/OfferingStateActions.tsx",
     "message": "Request editing"
@@ -8298,6 +8310,10 @@
   "Request publishing": {
     "description": "marketplace/offerings/actions/OfferingStateActions.tsx",
     "message": "Request publishing"
+  },
+  "Request restriction of project member access to resources": {
+    "description": "customer/cost-policies/utils.ts",
+    "message": "Request restriction of project member access to resources"
   },
   "Request title": {
     "description": "issues/create/IssueCreateDialog.tsx",
@@ -10016,7 +10032,7 @@
     "message": "Statistics"
   },
   "Status": {
-    "description": "administration/InvitationList.tsx, administration/notifications/NotificationFilter.tsx, administration/providers/ProviderUsersDialog.tsx, administration/users/FreeIPAUsersList.tsx, customer/payment-profiles/PaymentProfileList.tsx, invitations/InvitationsList.tsx, invitations/actions/create/SendingStatus.tsx, issues/IssueSummary.tsx, issues/list/IssuesFilter.tsx, issues/list/IssuesList.tsx, marketplace/offerings/details/ConnectionStatusIndicator.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, navigation/BackendHealthStatusDialog.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/round/proposals/ProposalExpandableRow.tsx, proposals/team/InvitationsList.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
+    "description": "administration/InvitationList.tsx, administration/notifications/NotificationFilter.tsx, administration/providers/ProviderUsersDialog.tsx, customer/payment-profiles/PaymentProfileList.tsx, invitations/InvitationsList.tsx, invitations/actions/create/SendingStatus.tsx, issues/IssueSummary.tsx, issues/list/IssuesFilter.tsx, issues/list/IssuesList.tsx, marketplace/offerings/details/ConnectionStatusIndicator.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, navigation/BackendHealthStatusDialog.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/round/proposals/ProposalExpandableRow.tsx, proposals/team/InvitationsList.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
     "message": "Status"
   },
   "Step": {
@@ -12550,6 +12566,10 @@
   "Used": {
     "description": "quotas/QuotasTable.tsx",
     "message": "Used"
+  },
+  "User UUID": {
+    "description": "administration/users/FreeIPAUsersList.tsx",
+    "message": "User UUID"
   },
   "User agreement has been created": {
     "description": "administration/agreements/UserAgreementCreateDialog.tsx",
