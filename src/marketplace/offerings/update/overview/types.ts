@@ -9,4 +9,5 @@ export interface EditOfferingProps {
   offering;
   refetch;
   attribute: Attribute;
+  disabled?: boolean;
 }
