@@ -24,6 +24,16 @@ export const getCostPolicyActionOptions = (type: CostPolicyType = 'project') =>
       value: 'terminate_resources',
       label: translate('Schedule termination of existing resources'),
     },
+    {
+      value: 'request_downscaling',
+      label: translate('Request downscaling of resources'),
+    },
+    {
+      value: 'restrict_members',
+      label: translate(
+        'Request restriction of project member access to resources',
+      ),
+    },
   ].filter(Boolean);
 
 export const policyPeriodOptions = {
