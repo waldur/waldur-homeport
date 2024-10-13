@@ -13,6 +13,7 @@ import { SetErredActionItem } from '@waldur/resource/actions/SetErredActionItem'
 import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
+import { ReportUsageAction } from '../list/ReportUsageAction';
 import { ShowUsageAction } from '../list/ShowUsageAction';
 
 import { EditAction } from './EditAction';
@@ -48,6 +49,7 @@ export const CustomerResourceActions = [
 
 export const ProviderActionsList = [
   ShowUsageAction,
+  ReportUsageAction,
   SetBackendIdAction,
   SubmitReportAction,
   CreateLexisLinkAction,
