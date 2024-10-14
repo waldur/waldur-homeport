@@ -92,7 +92,7 @@ export const MigrateTenantDialog = connect<
             return {};
           }
           const sourceVolumeTypes = await loadVolumeTypes({
-            tenant_uuid: resource.scope_uuid,
+            tenant_uuid: resource.uuid,
           });
           const destinationVolumeTypes = await loadVolumeTypes({
             settings_uuid: offering.scope_uuid,
@@ -131,7 +131,7 @@ export const MigrateTenantDialog = connect<
                     prevOptions,
                     currentPage,
                     false,
-                    ['name', 'uuid', 'customer_name', 'plans'],
+                    ['name', 'uuid', 'customer_name', 'plans', 'scope_uuid'],
                   )
                 }
                 getOptionLabel={({ name, customer_name }) => (
