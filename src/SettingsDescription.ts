@@ -148,7 +148,7 @@ export const SettingsDescription = [
       },
       {
         key: 'SIDEBAR_LOGO',
-        description: translate('The image rendered at the top of sidebar menu in light mode.'),
+        description: translate('The image rendered at the top of sidebar menu in HomePort.'),
         default: '',
         type: 'image_field',
       },

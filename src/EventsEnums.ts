@@ -59,15 +59,6 @@ export const InvoicesEnum = {
   update_of_credit_by_staff: 'update_of_credit_by_staff',
 };
 
-export const JiraEnum = {
-  comment_creation_succeeded: 'comment_creation_succeeded',
-  comment_deletion_succeeded: 'comment_deletion_succeeded',
-  comment_update_succeeded: 'comment_update_succeeded',
-  issue_creation_succeeded: 'issue_creation_succeeded',
-  issue_deletion_succeeded: 'issue_deletion_succeeded',
-  issue_update_succeeded: 'issue_update_succeeded',
-};
-
 export const PaymentsEnum = {
   payment_approval_succeeded: 'payment_approval_succeeded',
   payment_cancel_succeeded: 'payment_cancel_succeeded',
@@ -127,6 +118,7 @@ export const ResourcesEnum = {
   marketplace_resource_downscaled: 'marketplace_resource_downscaled',
   marketplace_resource_erred_on_backend: 'marketplace_resource_erred_on_backend',
   marketplace_resource_has_been_changed: 'marketplace_resource_has_been_changed',
+  marketplace_resource_paused: 'marketplace_resource_paused',
   marketplace_resource_terminate_canceled: 'marketplace_resource_terminate_canceled',
   marketplace_resource_terminate_failed: 'marketplace_resource_terminate_failed',
   marketplace_resource_terminate_requested: 'marketplace_resource_terminate_requested',
