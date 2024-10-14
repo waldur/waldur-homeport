@@ -10,6 +10,7 @@ import { themeSelector } from '../theme/store';
 
 export const BrandName: FunctionComponent = () => {
   const theme = useSelector(themeSelector);
+  const sidebarTheme = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
   const layout = useLayout();
   // switch aside.minimized to keep sidebar state between pages
   const toggleSidebar = useCallback(() => {
@@ -25,7 +26,8 @@ export const BrandName: FunctionComponent = () => {
   const sidebarLogoMobileUrl = fixURL('/icons/sidebar_logo_mobile/');
   const sidebarLogoDarkUrl = fixURL('/icons/sidebar_logo_dark/');
   const sidebarLogo =
-    theme === 'dark' && ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_DARK
+    (theme === 'dark' || sidebarTheme === 'dark') &&
+    ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_DARK
       ? sidebarLogoDarkUrl
       : ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO
         ? sidebarLogoUrl
