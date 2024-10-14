@@ -40,7 +40,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
       if (role.uuid !== selectedRole?.uuid) {
         select(
           role,
-          selectedProject || currentProject || customer.projects?.[0],
+          selectedProject || currentProject || customer?.projects?.[0],
         );
 
         if (currentProject) {
@@ -70,13 +70,13 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
   const [query, setQuery] = useState('');
   const projects = useMemo(() => {
     const q = query.toLowerCase();
-    return customer.projects.filter((project) =>
+    return customer?.projects.filter((project) =>
       project.name.toLowerCase().includes(q),
     );
   }, [customer, query]);
 
   const showProjects = selectedRole?.content_type === 'project';
-  const hasProject = Boolean(customer.projects?.length);
+  const hasProject = Boolean(customer?.projects?.length);
 
   return (
     <div

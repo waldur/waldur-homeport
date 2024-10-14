@@ -50,4 +50,5 @@ export interface PermissionRequest {
   permission: string;
   projectId?: string;
   customerId?: string;
+  scopeId?: string;
 }

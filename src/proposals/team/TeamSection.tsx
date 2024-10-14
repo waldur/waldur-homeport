@@ -92,6 +92,7 @@ export const TeamSection: FC<
           </div>
           <div className="col d-flex justify-content-end text-nowrap">
             <AddUserButton refetch={usersTable.fetch} {...props} />
+            &nbsp;
             <InvitationCreateButton
               {...props}
               refetch={invitationsTable.fetch}

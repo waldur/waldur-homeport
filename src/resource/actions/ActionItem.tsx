@@ -41,43 +41,44 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     return null;
   }
   return Component === Dropdown.Item || Component === Button ? (
-    <Component
-      className={classNames(
-        'd-flex gap-3',
-        props.className,
-        props.disabled && 'bg-hover-lighten',
-      )}
-      // Workaround for rendering tooltips for disabled dropdown menu items.
-      // See also: https://stackoverflow.com/questions/57349166/
-      onClick={() => !props.disabled && props.action()}
-      as="button"
-      variant={Component === Button ? '' : undefined}
-      size={Component === Button ? props.size : undefined}
-      disabled={props.disabled && !props.tooltip}
-    >
-      <div className={props.disabled ? 'opacity-50' : undefined}>
-        {props.iconNode && (
-          <span
-            className={classNames(
-              'svg-icon svg-icon-2',
-              props.iconColor && `svg-icon-${props.iconColor}`,
-            )}
-          >
-            {props.iconNode}
-          </span>
+    <div className="d-flex align-items-center">
+      <Component
+        className={classNames(
+          'd-flex gap-3',
+          props.className,
+          props.disabled && 'bg-hover-lighten',
         )}
-        {props.title}
-      </div>
+        // Workaround for rendering tooltips for disabled dropdown menu items.
+        // See also: https://stackoverflow.com/questions/57349166/
+        onClick={() => !props.disabled && props.action()}
+        variant={Component === Button ? '' : undefined}
+        size={Component === Button ? props.size : undefined}
+        disabled={props.disabled}
+      >
+        <div className={props.disabled ? 'opacity-50' : undefined}>
+          {props.iconNode && (
+            <span
+              className={classNames(
+                'svg-icon svg-icon-2',
+                props.iconColor && `svg-icon-${props.iconColor}`,
+              )}
+            >
+              {props.iconNode}
+            </span>
+          )}
+          {props.title}
+        </div>
+      </Component>
       {props.tooltip && (
         <Tip
           label={props.tooltip}
           id={`action-reason-${uniqueId()}`}
-          className="ms-auto"
+          className="ms-1 me-3"
         >
           <Question size={20} />
         </Tip>
       )}
-    </Component>
+    </div>
   ) : (
     <Component {...props} />
   );
