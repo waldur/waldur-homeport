@@ -71,7 +71,7 @@ const InvitationsListComponent: FunctionComponent = () => {
       ]}
       rowActions={({ row }) => (
         <>
-          <InvitationSendButton row={row} />
+          <InvitationSendButton row={row} refetch={props.fetch} />
           <InvitationCancelButton row={row} refetch={props.fetch} />
         </>
       )}

@@ -38,4 +38,12 @@ export const hasPermission = (user: User, request: PermissionRequest) => {
       return true;
     }
   }
+  if (request.scopeId) {
+    if (
+      checkScope(user, 'call', request.scopeId, request.permission) ||
+      checkScope(user, 'proposal', request.scopeId, request.permission)
+    ) {
+      return true;
+    }
+  }
 };

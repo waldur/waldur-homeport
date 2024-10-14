@@ -7,6 +7,7 @@ import { Form } from '@waldur/form/Form';
 import { FormSteps } from '@waldur/form/FormSteps';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { submitProposal } from '@waldur/proposals/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -32,6 +33,15 @@ export const ProposalTeamVerificationStep: FC<{
 }> = ({ proposal, reviews, refetch }) => {
   const submitForm = useCallback(
     async (_, dispatch) => {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Confirmation'),
+          translate('Are you sure you want to submit the proposal?'),
+        );
+      } catch {
+        return;
+      }
       try {
         await submitProposal(proposal.uuid);
         refetch && refetch();
