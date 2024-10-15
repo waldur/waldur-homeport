@@ -379,7 +379,7 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'organization-credit-management',
+    name: 'admin-organization-credit-management',
     url: 'organization-credits/',
     parent: 'admin-organizations',
     component: OrganizationCreditsList,

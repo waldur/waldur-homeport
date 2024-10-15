@@ -1,3 +1,4 @@
+import { CustomerCredit } from '@waldur/customer/credits/types';
 import { BasePermission } from '@waldur/permissions/types';
 import { Quota } from '@waldur/quotas/types';
 
@@ -136,6 +137,7 @@ export interface Customer {
   contact_details?: string;
   country_name?: string;
   country?: string;
+  credit?: CustomerCredit;
   default_tax_percent?: string;
   native_name?: string;
   phone_number?: PhoneNumber;

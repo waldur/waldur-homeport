@@ -8,29 +8,29 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/notify';
 
-import { createCustomerCredit } from './api';
-import { CustomerCreditFormData } from './types';
+import { createProjectCredit } from './api';
+import { ProjectCreditFormData } from './types';
 
-const CreditFormDialog = lazyComponent(
-  () => import('./CreditFormDialog'),
-  'CreditFormDialog',
+const ProjectCreditFormDialog = lazyComponent(
+  () => import('./ProjectCreditFormDialog'),
+  'ProjectCreditFormDialog',
 );
 
-export const CreateCreditButton = ({ refetch }) => {
+export const ProjectCreateCreditButton = ({ refetch }) => {
   const dispatch = useDispatch();
   const openFormDialog = useCallback(
     () =>
       dispatch(
-        openModalDialog(CreditFormDialog, {
+        openModalDialog(ProjectCreditFormDialog, {
           size: 'lg',
-          formId: 'CustomerCreditCreateForm',
+          formId: 'ProjectCreditCreateForm',
           onSubmit: (formData) => {
-            const payload: CustomerCreditFormData = {
-              ...formData,
-              customer: formData.customer.url,
-              offerings: formData.offerings.map((offering) => offering.url),
+            const payload: ProjectCreditFormData = {
+              project: formData.project.url,
+              value: formData.value,
+              use_organisation_credit: formData.use_organisation_credit,
             };
-            return createCustomerCredit(payload)
+            return createProjectCredit(payload)
               .then(() => {
                 dispatch(closeModalDialog());
                 refetch();

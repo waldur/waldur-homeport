@@ -82,6 +82,7 @@ export const ProposalSubmissionStep: FC<{ proposal; reviews?; refetch }> = ({
         translate(
           'Are you sure you want to send the proposal to team verification step?',
         ),
+        false,
         translate(
           'NB! After clicking Yes, you will not be able to edit the proposal!',
         ),

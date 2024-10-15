@@ -10,9 +10,9 @@ import { CreateCreditButton } from './CreateCreditButton';
 import { CreditActions } from './CreditActions';
 import { CustomerCredit } from './types';
 
-interface CreditsAllListTableProps extends TableProps {}
+interface CreditsListTableProps extends TableProps {}
 
-export const CreditsListTable: FC<CreditsAllListTableProps> = (props) => {
+export const CreditsListTable: FC<CreditsListTableProps> = (props) => {
   return (
     <Table<CustomerCredit>
       {...props}

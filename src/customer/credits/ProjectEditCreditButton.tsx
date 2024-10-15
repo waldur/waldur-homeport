@@ -9,40 +9,38 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/notify';
 
-import { updateCustomerCredit } from './api';
-import { CustomerCreditFormData } from './types';
+import { updateProjectCredit } from './api';
+import { ProjectCreditFormData } from './types';
 
-const CreditFormDialog = lazyComponent(
-  () => import('./CreditFormDialog'),
-  'CreditFormDialog',
+const ProjectCreditFormDialog = lazyComponent(
+  () => import('./ProjectCreditFormDialog'),
+  'ProjectCreditFormDialog',
 );
 
-export const EditCreditButton = ({ row, refetch }) => {
+export const ProjectEditCreditButton = ({ row, refetch }) => {
   const dispatch = useDispatch();
   const openCreditFormDialog = useCallback(
     () =>
       dispatch(
-        openModalDialog(CreditFormDialog, {
+        openModalDialog(ProjectCreditFormDialog, {
           size: 'lg',
-          formId: 'CustomerCreditEditForm',
+          formId: 'ProjectCreditEditForm',
           initialValues: {
             value: row.value,
-            customer: {
-              uuid: row.customer_uuid,
-              name: row.customer_name,
-              url: row.customer,
+            project: {
+              uuid: row.project_uuid,
+              name: row.project_name,
+              url: row.project,
             },
-            offerings: row.offerings,
-            end_date: row.end_date,
-            minimal_consumption: row.minimal_consumption,
+            use_organisation_credit: row.use_organisation_credit,
           },
           onSubmit: (formData) => {
-            const payload: CustomerCreditFormData = {
-              ...formData,
-              customer: formData.customer.url,
-              offerings: formData.offerings.map((offering) => offering.url),
+            const payload: ProjectCreditFormData = {
+              project: formData.project.url,
+              value: formData.value,
+              use_organisation_credit: formData.use_organisation_credit,
             };
-            return updateCustomerCredit(row.uuid, payload)
+            return updateProjectCredit(row.uuid, payload)
               .then(() => {
                 dispatch(closeModalDialog());
                 refetch();
