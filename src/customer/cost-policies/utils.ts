@@ -29,6 +29,10 @@ export const getCostPolicyActionOptions = (type: CostPolicyType = 'project') =>
       label: translate('Request downscaling of resources'),
     },
     {
+      value: 'request_pausing',
+      label: translate('Request pausing of resources'),
+    },
+    {
       value: 'restrict_members',
       label: translate(
         'Request restriction of project member access to resources',
