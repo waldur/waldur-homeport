@@ -8,8 +8,6 @@ const Layout = lazyComponent(
 
 const LandingPage = lazyComponent(() => import('./LandingPage'), 'LandingPage');
 
-const LogoutPage = lazyComponent(() => import('./LogoutPage'), 'LogoutPage');
-
 export const states: StateDeclaration[] = [
   {
     name: 'home',
@@ -28,19 +26,6 @@ export const states: StateDeclaration[] = [
     },
     data: {
       anonymous: true,
-    },
-  },
-
-  {
-    name: 'logout',
-    url: '/logout/',
-    component: LogoutPage,
-    params: {
-      toState: '',
-      toParams: {},
-    },
-    data: {
-      auth: true,
     },
   },
 

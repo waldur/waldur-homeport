@@ -10595,13 +10595,13 @@
     "description": "SettingsDescription.ts",
     "message": "The image rendered at the top of mobile sidebar menu in HomePort."
   },
-  "The image rendered at the top of sidebar menu in HomePort.": {
-    "description": "SettingsDescription.ts",
-    "message": "The image rendered at the top of sidebar menu in HomePort."
-  },
   "The image rendered at the top of sidebar menu in dark mode.": {
     "description": "SettingsDescription.ts",
     "message": "The image rendered at the top of sidebar menu in dark mode."
+  },
+  "The image rendered at the top of sidebar menu in light mode.": {
+    "description": "SettingsDescription.ts",
+    "message": "The image rendered at the top of sidebar menu in light mode."
   },
   "The image used in marketplace order header.": {
     "description": "SettingsDescription.ts",
@@ -12654,10 +12654,6 @@
   "User agreements": {
     "description": "about.tsx, administration/routes.ts",
     "message": "User agreements"
-  },
-  "User are being logged out.": {
-    "description": "auth/LogoutPage.tsx",
-    "message": "User are being logged out."
   },
   "User could not been updated": {
     "description": "user/support/effects.ts",

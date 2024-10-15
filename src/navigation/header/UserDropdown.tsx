@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
+import { AuthService } from '@waldur/auth/AuthService';
 import { ENV } from '@waldur/configs/default';
 import Avatar from '@waldur/core/Avatar';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
@@ -116,12 +117,13 @@ export const UserDropdownMenu: FunctionComponent = () => {
 
         {user && (
           <div className="menu-item px-5" data-kt-menu-trigger="click">
-            <Link
-              state="logout"
-              label={translate('Log out')}
+            <span
+              onClick={AuthService.logout}
               className="menu-link px-5"
               aria-hidden="true"
-            />
+            >
+              {translate('Log out')}
+            </span>
           </div>
         )}
 

@@ -123,10 +123,8 @@ export function clearTokenHeader() {
   delete Axios.defaults.headers.Authorization;
 }
 
-function clearAuthCache(skip = false) {
-  if (!skip) {
-    storeCurrentState();
-  }
+function clearAuthCache() {
+  storeCurrentState();
   store.dispatch(setCurrentUser(undefined));
   clearImpersonationData();
   clearTokenHeader();
@@ -176,7 +174,6 @@ export const AuthService = {
   signin,
   redirectOnSuccess,
   localLogout,
-  clearAuthCache,
   logout,
   storeRedirect,
 };
