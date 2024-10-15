@@ -17,6 +17,8 @@ import {
 } from '@waldur/workspace/selectors';
 import { WorkspaceType, Project } from '@waldur/workspace/types';
 
+import { getCustomerCredit } from '../credits/api';
+
 export async function fetchCustomer(transition: Transition) {
   const project = getProjectSelector(store.getState());
   const currentUser = getUser(store.getState());
@@ -27,6 +29,8 @@ export async function fetchCustomer(transition: Transition) {
   } else {
     try {
       const currentCustomer = await getCustomer(customerId);
+      const credit = await getCustomerCredit(currentCustomer?.uuid);
+      Object.assign(currentCustomer, { credit });
       store.dispatch(setCurrentCustomer(currentCustomer));
       if (!project || project.customer_uuid != customerId) {
         const newProject = await getFirst<Project>('/projects/', {

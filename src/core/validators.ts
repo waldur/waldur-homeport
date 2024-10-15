@@ -22,6 +22,9 @@ export const requiredArray = (value) =>
 export const number = (value) =>
   !value || !isNaN(value) ? undefined : translate('Must be a number.');
 
+export const lessThanOrEqual = (n) => (value: number) =>
+  value && value > n ? translate('Must be {n} or less.', { n }) : undefined;
+
 export const max = (length) => (value) =>
   value && value.length > length
     ? translate('Must be {length} characters or less.', { length })

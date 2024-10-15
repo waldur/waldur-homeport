@@ -75,6 +75,10 @@ const CostPoliciesList = lazyComponent(
   () => import('./cost-policies/CostPoliciesList'),
   'CostPoliciesList',
 );
+const ProjectCreditsList = lazyComponent(
+  () => import('./credits/ProjectCreditsList'),
+  'ProjectCreditsList',
+);
 const OrganizationResourcesAllList = lazyComponent(
   () => import('../marketplace/resources/list/OrganizationResourcesAllList'),
   'OrganizationResourcesAllList',
@@ -330,6 +334,21 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Cost policies'),
       permissions: [isOwnerOrStaff],
       priority: 135,
+    },
+  },
+
+  {
+    name: 'project-credit-management',
+    url: 'credit-management/',
+    parent: 'organization-billing',
+    component: ProjectCreditsList,
+    data: {
+      breadcrumb: () => translate('Credit management'),
+      permissions: [
+        isOwnerOrStaff,
+        (state) => Boolean(state.workspace.customer?.credit),
+      ],
+      priority: 137,
     },
   },
 

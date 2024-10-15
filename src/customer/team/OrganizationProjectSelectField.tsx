@@ -6,7 +6,7 @@ import { SelectField, FormGroup } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-export const OrganizationProjectSelectField = () => {
+export const OrganizationProjectSelectField = ({ disabled = false }) => {
   const currentCustomer = useSelector(getCustomer);
 
   return (
@@ -15,12 +15,14 @@ export const OrganizationProjectSelectField = () => {
       label={translate('Project')}
       component={FormGroup}
       validate={[required]}
+      required
     >
       <SelectField
         options={currentCustomer?.projects}
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.url}
         isClearable={false}
+        isDisabled={disabled}
       />
     </Field>
   );
