@@ -8,6 +8,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CreateCreditButton } from './CreateCreditButton';
 import { CreditActions } from './CreditActions';
+import { CreditHistoryLogButton } from './CreditHistoryLogButton';
 import { CustomerCredit } from './types';
 
 interface CreditsListTableProps extends TableProps {}
@@ -44,7 +45,12 @@ export const CreditsListTable: FC<CreditsListTableProps> = (props) => {
       hasQuery
       enableExport
       rowActions={CreditActions}
-      tableActions={<CreateCreditButton refetch={props.fetch} />}
+      tableActions={
+        <>
+          <CreditHistoryLogButton />
+          <CreateCreditButton refetch={props.fetch} />
+        </>
+      }
     />
   );
 };

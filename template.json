@@ -4255,6 +4255,10 @@
     "description": "project/OECD_FOS_2007_CODES.ts",
     "message": "History and archaeology"
   },
+  "History log": {
+    "description": "customer/credits/CreditHistoryLogButton.tsx, customer/credits/CreditHistoryLogDialog.tsx",
+    "message": "History log"
+  },
   "Home directory prefix": {
     "description": "marketplace/UserPluginOptionsForm.tsx",
     "message": "Home directory prefix"
