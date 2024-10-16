@@ -58,6 +58,10 @@ export interface Resource extends ResourceReference {
   customer_uuid?: string;
   is_usage_based?: boolean;
   is_limit_based?: boolean;
+
+  requested_downscaling: boolean;
+  restrict_member_access: boolean;
+  requested_pausing: boolean;
   backend_id?: string;
   effective_id?: string;
   access_url?: string;

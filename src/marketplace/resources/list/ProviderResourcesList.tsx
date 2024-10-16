@@ -1,8 +1,10 @@
+import { Check, X } from '@phosphor-icons/react';
 import React, { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
@@ -123,6 +125,66 @@ const TableComponent: FunctionComponent<any> = (props) => {
       optional: true,
       keys: ['backend_id'],
       id: 'backend_id',
+    },
+    {
+      title: translate('Requested downscaling'),
+      render: ({ row }) =>
+        !row.requested_downscaling ? (
+          <Badge variant="danger" outline pill size="sm">
+            <X size={12} className="text-danger me-2" />
+            {translate('No')}
+          </Badge>
+        ) : (
+          <Badge variant="success" outline pill size="sm">
+            <Check size={12} className="text-success me-2" />
+            {translate('Yes')}
+          </Badge>
+        ),
+      export: 'requested_downscaling',
+      keys: ['requested_downscaling'],
+      exportKeys: ['requested_downscaling'],
+      optional: true,
+      id: 'requested_downscaling',
+    },
+    {
+      title: translate('Restrict member access'),
+      render: ({ row }) =>
+        !row.restrict_member_access ? (
+          <Badge variant="danger" outline pill size="sm">
+            <X size={12} className="text-danger me-2" />
+            {translate('No')}
+          </Badge>
+        ) : (
+          <Badge variant="success" outline pill size="sm">
+            <Check size={12} className="text-success me-2" />
+            {translate('Yes')}
+          </Badge>
+        ),
+      export: 'restrict_member_access',
+      keys: ['restrict_member_access'],
+      exportKeys: ['restrict_member_access'],
+      optional: true,
+      id: 'restrict_member_access',
+    },
+    {
+      title: translate('Requested pausing'),
+      render: ({ row }) =>
+        !row.requested_pausing ? (
+          <Badge variant="danger" outline pill size="sm">
+            <X size={12} className="text-danger me-2" />
+            {translate('No')}
+          </Badge>
+        ) : (
+          <Badge variant="success" outline pill size="sm">
+            <Check size={12} className="text-success me-2" />
+            {translate('Yes')}
+          </Badge>
+        ),
+      export: 'requested_pausing',
+      keys: ['requested_pausing'],
+      exportKeys: ['requested_pausing'],
+      optional: true,
+      id: 'requested_pausing',
     },
     {
       title: translate('Created at'),
