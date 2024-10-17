@@ -39,6 +39,10 @@
     "description": "user/support/TermsOfServiceCheckbox.tsx",
     "message": "<tos>Terms of Service</tos> and <pp>Privacy policy</pp> have been accepted on <date></date>"
   },
+  "A client-accessible domain name override in case Openstack is returning an internal domain": {
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "message": "A client-accessible domain name override in case Openstack is returning an internal domain"
+  },
   "A constant in the API path, sometimes differs": {
     "description": "SettingsDescription.ts",
     "message": "A constant in the API path, sometimes differs"
@@ -150,6 +154,10 @@
   "Account deletion": {
     "description": "user/support/UserDeleteAccount.tsx",
     "message": "Account deletion"
+  },
+  "Account name generation policy": {
+    "description": "marketplace/UserPluginOptionsForm.tsx",
+    "message": "Account name generation policy"
   },
   "Account status": {
     "description": "user/support/UserDetailsTable.tsx, user/support/UserTermination.tsx",
@@ -2062,6 +2070,14 @@
   "Connection details": {
     "description": "azure/sql/AzureSQLServerSummary.tsx",
     "message": "Connection details"
+  },
+  "Console domain override": {
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "message": "Console domain override"
+  },
+  "Console type": {
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "message": "Console type"
   },
   "Contact details": {
     "description": "customer/details/CustomerContactPanel.tsx, customer/details/EditFieldDialog.tsx, user/affiliations/BaseOrganizationsList.tsx",
@@ -7603,6 +7619,10 @@
     "description": "marketplace-checklist/ChecklistCustomer.tsx, rancher/cluster/users/ClusterUsersList.tsx, user/support/UserList.tsx",
     "message": "Project roles"
   },
+  "Project slug": {
+    "description": "marketplace/UserPluginOptionsForm.tsx",
+    "message": "Project slug"
+  },
   "Project summary": {
     "description": "proposals/proposal/create/ProjectDetailsStep.tsx",
     "message": "Project summary"
@@ -11090,6 +11110,10 @@
   "Type of a comment. Default is email because it allows support to reply to tickets directly in Zammad<https://docs.zammad.org/en/latest/api/ticket/articles.html#articles/>": {
     "description": "SettingsDescription.ts",
     "message": "Type of a comment. Default is email because it allows support to reply to tickets directly in Zammad<https://docs.zammad.org/en/latest/api/ticket/articles.html#articles/>"
+  },
+  "Type of console access protocol used by Openstack (novnc, xvpvnc, spice-html5, rdp-html5, serial)": {
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "message": "Type of console access protocol used by Openstack (novnc, xvpvnc, spice-html5, rdp-html5, serial)"
   },
   "Type of linked issue field name": {
     "description": "SettingsDescription.ts",
