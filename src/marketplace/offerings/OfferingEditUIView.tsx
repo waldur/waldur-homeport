@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
+import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
@@ -14,8 +15,14 @@ import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
+import { TENANT_TYPE } from '@waldur/openstack/constants';
+import {
+  BASIC_OFFERING_TYPE,
+  SUPPORT_OFFERING_TYPE,
+} from '@waldur/support/constants';
 
 import {
+  allowToUpdateService,
   getPluginOptionsForm,
   getSecretOptionsForm,
   showComponentsList,
@@ -32,9 +39,21 @@ const OverviewSection = lazyComponent(
   () => import('./update/overview/OverviewSection'),
   'OverviewSection',
 );
-const IntegrationSection = lazyComponent(
-  () => import('./update/integration/IntegrationSection'),
-  'IntegrationSection',
+const CredentialsSection = lazyComponent(
+  () => import('./update/integration/CredentialsSection'),
+  'CredentialsSection',
+);
+const LifecyclePolicySection = lazyComponent(
+  () => import('./update/integration/LifecyclePolicySection'),
+  'LifecyclePolicySection',
+);
+const UserManagementSection = lazyComponent(
+  () => import('./update/integration/UserManagementSection'),
+  'UserManagementSection',
+);
+const ProvisioningConfigSection = lazyComponent(
+  () => import('./update/integration/ProvisioningConfigSection'),
+  'ProvisioningConfigSection',
 );
 const OfferingEndpointsSection = lazyComponent(
   () => import('./update/endpoints/OfferingEndpointsSection'),
@@ -96,7 +115,6 @@ const getTabs = (offering: Offering): PageBarTab[] => {
   if (ServiceSettingsForm || SecretOptionsForm || PluginOptionsForm) {
     tabs.push({
       key: 'integration',
-      component: IntegrationSection,
       title: (
         <>
           <ValidationIcon
@@ -110,6 +128,42 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           {translate('Integration')}
         </>
       ),
+      children: [
+        ServiceSettingsForm && allowToUpdateService(offering.type)
+          ? {
+              key: 'credentials',
+              component: CredentialsSection,
+              title: translate('Credentials'),
+            }
+          : null,
+        PluginOptionsForm
+          ? {
+              key: 'lifecycle-policy',
+              component: LifecyclePolicySection,
+              title: translate('Lifecycle policy'),
+            }
+          : null,
+        SecretOptionsForm || PluginOptionsForm
+          ? {
+              key: 'user-management',
+              component: UserManagementSection,
+              title: translate('User management'),
+            }
+          : null,
+        [
+          SUPPORT_OFFERING_TYPE,
+          BASIC_OFFERING_TYPE,
+          OFFERING_TYPE_CUSTOM_SCRIPTS,
+          OFFERING_TYPE_BOOKING,
+        ].includes(offering.type) ||
+        (offering.type === TENANT_TYPE && allowToUpdateService(offering.type))
+          ? {
+              key: 'provisioning-configuration',
+              component: ProvisioningConfigSection,
+              title: translate('Provisioning configuration'),
+            }
+          : null,
+      ].filter(Boolean),
     });
   }
 
@@ -172,7 +226,7 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           </>
         ),
       },
-    ],
+    ].filter(Boolean),
   });
 
   return tabs;

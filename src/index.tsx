@@ -19,7 +19,7 @@ import './user/module';
 import './azure/module';
 import './booking/marketplace';
 import './marketplace-script/marketplace';
-import './marketplace-remote/marketplace';
+import './marketplace-remote/module';
 import './paypal/events';
 import './vmware/module';
 

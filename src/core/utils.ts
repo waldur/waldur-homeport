@@ -178,7 +178,7 @@ export const orderByFilter = (sorting: {
  * const x = {a: {z: "z1", x: "x1"}, b: "b1"};
  * flattenObject(x) === {'a.z': "z1", 'a.x': "x1", b: "b1"}
  */
-export const flattenObject = (obj) => {
+export const flattenObject = (obj): Record<string, any> => {
   const result = {};
 
   for (const i in obj) {

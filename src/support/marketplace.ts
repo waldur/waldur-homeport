@@ -1,7 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
-import { Attribute } from '@waldur/marketplace/types';
 
 import { BASIC_OFFERING_TYPE, SUPPORT_OFFERING_TYPE } from './constants';
 import { serializer } from './serializer';
@@ -14,28 +13,19 @@ const UserPluginOptionsForm = lazyComponent(
   () => import('@waldur/marketplace/UserPluginOptionsForm'),
   'UserPluginOptionsForm',
 );
-const OfferingPluginSecretOptionsForm = lazyComponent(
-  () => import('./OfferingPluginSecretOptionsForm'),
-  'OfferingPluginSecretOptionsForm',
+const UserSecretOptionsForm = lazyComponent(
+  () => import('@waldur/marketplace/UserSecretOptionsForm'),
+  'UserSecretOptionsForm',
 );
 const RequestOrderForm = lazyComponent(
   () => import('./RequestOrderForm'),
   'RequestOrderForm',
 );
 
-const OfferingOptionsSummary = (): Attribute[] => [
-  {
-    key: 'template_confirmation_comment',
-    title: translate('Confirmation notification template'),
-    type: 'string',
-  },
-];
-
 export const COMMON_OPTIONS = {
   orderFormComponent: RequestOrderForm,
   detailsComponent: OfferingConfigurationDetails,
   pluginOptionsForm: UserPluginOptionsForm,
-  optionsSummary: OfferingOptionsSummary,
   serializer,
   showComponents: true,
 };
@@ -46,7 +36,7 @@ registerOfferingType({
     return translate('Request-based item');
   },
   ...COMMON_OPTIONS,
-  secretOptionsForm: OfferingPluginSecretOptionsForm,
+  secretOptionsForm: UserSecretOptionsForm,
 });
 
 registerOfferingType({
@@ -55,5 +45,5 @@ registerOfferingType({
     return translate('Request-based item (without Service Desk)');
   },
   ...COMMON_OPTIONS,
-  secretOptionsForm: OfferingPluginSecretOptionsForm,
+  secretOptionsForm: UserSecretOptionsForm,
 });
