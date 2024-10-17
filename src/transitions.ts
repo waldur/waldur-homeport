@@ -109,10 +109,12 @@ export function attachTransitions() {
     // Erred state is terminal, user should not be redirected from erred state to login
     // so that he would be able to read error message details
     if (error && error.detail && error.detail.status === 401) {
-      return AuthService.localLogout({
+      setRedirect({
         toState: transition.to().name,
         toParams: transition.to().params,
       });
+      AuthService.clearAuthCache();
+      return transition.router.stateService.target('login');
     }
     if (error && error['redirectTo'] && error['status'] !== -1) {
       return transition.router.stateService.target(error['redirectTo']);
