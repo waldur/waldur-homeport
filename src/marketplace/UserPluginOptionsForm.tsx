@@ -5,6 +5,7 @@ import { required } from '@waldur/core/validators';
 import { SelectField, NumberField, StringField } from '@waldur/form';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
 
 import { FieldEditButton } from './offerings/update/integration/FieldEditButton';
 import { OfferingEditPanelFormProps } from './offerings/update/integration/types';
@@ -31,6 +32,12 @@ const USERNAME_GENERATION_POLICY_OPTIONS = [
     value: 'freeipa',
   },
 ];
+const ACCOUNT_NAME_GENERATION_POLICY_OPTIONS = [
+  {
+    label: translate('Project slug'),
+    value: 'project_slug',
+  },
+];
 
 const getTooltip = (currentValue, defaultValue) =>
   !currentValue
@@ -49,6 +56,19 @@ export const UserPluginOptionsForm: FunctionComponent<
   const fields = useMemo(
     () =>
       [
+        props.offering.type === SLURM_REMOTE_PLUGIN && {
+          label: translate('Account name generation policy'),
+          key: 'plugin_options.account_name_generation_policy',
+          component: SelectField,
+          value: ACCOUNT_NAME_GENERATION_POLICY_OPTIONS.find(
+            (op) => op.value === pluginOptions?.account_name_generation_policy,
+          )?.label,
+          fieldProps: {
+            options: ACCOUNT_NAME_GENERATION_POLICY_OPTIONS,
+            simpleValue: true,
+            isClearable: true,
+          },
+        },
         {
           label: translate('Username generation policy'),
           key: 'plugin_options.username_generation_policy',
