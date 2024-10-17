@@ -1,15 +1,7 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { pick } from '@waldur/core/utils';
 import * as ProvidersRegistry from '@waldur/marketplace/offerings/update/integration/registry';
 
 const AzureForm = lazyComponent(() => import('./AzureForm'), 'AzureForm');
-
-const serializer = pick([
-  'tenant_id',
-  'client_id',
-  'client_secret',
-  'subscription_id',
-]);
 
 ProvidersRegistry.register({
   name: 'Azure',
@@ -17,5 +9,4 @@ ProvidersRegistry.register({
   icon: 'icon-azure.png',
   endpoint: 'azure',
   component: AzureForm,
-  serializer,
 });

@@ -1,14 +1,15 @@
-import { FunctionComponent } from 'react';
-import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
+import { get } from 'lodash';
+import { FunctionComponent, useMemo } from 'react';
 
-import { FormContainer, NumberField, SelectField } from '@waldur/form';
+import { NumberField, SelectField } from '@waldur/form';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { pluginOptionsSelector } from '@waldur/marketplace/UserPluginOptionsForm';
+import { FieldEditButton } from '@waldur/marketplace/offerings/update/integration/FieldEditButton';
+import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
 
 import { DYNAMIC_STORAGE_MODE, FIXED_STORAGE_MODE } from './constants';
 
-export const STORAGE_MODE_OPTIONS = [
+const STORAGE_MODE_OPTIONS = [
   {
     label: translate('Fixed — use common storage quota'),
     value: FIXED_STORAGE_MODE,
@@ -21,37 +22,60 @@ export const STORAGE_MODE_OPTIONS = [
   },
 ];
 
-export const OpenStackPluginOptionsForm: FunctionComponent<{ container }> = ({
-  container,
-}) => {
-  const pluginOptions = useSelector(pluginOptionsSelector);
-
-  return (
-    <FormContainer {...container}>
-      <SelectField
-        name="storage_mode"
-        label={translate('Storage mode')}
-        options={STORAGE_MODE_OPTIONS}
-        simpleValue={true}
-        required={true}
-        isClearable={false}
-      />
-      <Field
-        name="default_internal_network_mtu"
-        component={NumberField}
-        label={translate('Default internal network MTU')}
-        className="mt-3"
-      />
-      {pluginOptions && pluginOptions.storage_mode == 'dynamic' && (
-        <NumberField
-          name="snapshot_size_limit_gb"
-          label={translate('Snapshot size limit')}
-          unit="GB"
-          description={translate(
+export const OpenStackPluginOptionsForm: FunctionComponent<
+  OfferingEditPanelFormProps
+> = (props) => {
+  const fields = useMemo(
+    () =>
+      [
+        {
+          label: translate('Storage mode'),
+          key: 'plugin_options.storage_mode',
+          component: SelectField,
+          value: STORAGE_MODE_OPTIONS.find(
+            (op) => op.value === props.offering.plugin_options?.storage_mode,
+          )?.label,
+          fieldProps: {
+            options: STORAGE_MODE_OPTIONS,
+            simpleValue: true,
+            required: true,
+            isClearable: false,
+          },
+        },
+        {
+          label: translate('Default internal network MTU'),
+          key: 'plugin_options.default_internal_network_mtu',
+          component: NumberField,
+        },
+        props.offering.plugin_options?.storage_mode == 'dynamic' && {
+          label: translate('Snapshot size limit'),
+          key: 'plugin_options.snapshot_size_limit_gb',
+          component: NumberField,
+          description: translate(
             'Additional space to apply to storage quota to be used by snapshots.',
-          )}
-        />
-      )}
-    </FormContainer>
+          ),
+          fieldProps: { unit: 'GB' },
+        },
+      ].filter(Boolean),
+    [props],
   );
+
+  return fields.map((field) => (
+    <FormTable.Item
+      key={field.key}
+      label={field.label}
+      description={field.description}
+      value={field.value || get(props.offering, field.key, 'N/A')}
+      actions={
+        <FieldEditButton
+          title={props.title}
+          scope={props.offering}
+          name={field.key}
+          callback={props.callback}
+          fieldComponent={field.component}
+          fieldProps={field.fieldProps}
+        />
+      }
+    />
+  ));
 };

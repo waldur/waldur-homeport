@@ -1,43 +1,73 @@
+import { get } from 'lodash';
 import { FunctionComponent } from 'react';
 
 import { required } from '@waldur/core/validators';
-import { StringField, FormContainer } from '@waldur/form';
+import { StringField } from '@waldur/form';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { FieldEditButton } from '@waldur/marketplace/offerings/update/integration/FieldEditButton';
+import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
 
-export const SlurmForm: FunctionComponent<{ container }> = ({ container }) => (
-  <FormContainer {...container}>
-    <StringField
-      name="hostname"
-      label={translate('Hostname')}
-      description={translate('Hostname or IP address of master node')}
-      required={true}
-      validate={required}
+const fields = [
+  {
+    label: translate('Hostname'),
+    key: 'service_attributes.hostname',
+    description: translate('Hostname or IP address of master node'),
+    component: StringField,
+    fieldProps: { required: true, validate: required },
+  },
+  {
+    label: translate('Username'),
+    key: 'service_attributes.username',
+    component: StringField,
+    fieldProps: { required: true, validate: required },
+  },
+  {
+    label: translate('Port'),
+    key: 'service_attributes.port',
+    component: StringField,
+  },
+  {
+    label: translate('Gateway'),
+    key: 'service_attributes.gateway',
+    description: translate('Hostname or IP address of gateway node'),
+    component: StringField,
+  },
+  {
+    label: translate('Use sudo'),
+    key: 'service_attributes.use_sudo',
+    description: translate('Set to true to activate privilege escalation'),
+    component: StringField,
+  },
+  {
+    label: translate('Default account'),
+    key: 'service_attributes.default_account',
+    description: translate('Default SLURM account for user'),
+    component: StringField,
+    fieldProps: { required: true, validate: required },
+  },
+];
+
+export const SlurmForm: FunctionComponent<OfferingEditPanelFormProps> = (
+  props,
+) =>
+  fields.map((field) => (
+    <FormTable.Item
+      key={field.key}
+      label={field.label}
+      description={field.description}
+      value={get(props.offering, field.key, 'N/A')}
+      actions={
+        <FieldEditButton
+          title={props.title}
+          scope={props.offering}
+          name={field.key}
+          callback={props.callback}
+          fieldComponent={field.component}
+          fieldProps={field.fieldProps}
+        />
+      }
     />
-    <StringField
-      name="username"
-      label={translate('Username')}
-      required={true}
-      validate={required}
-    />
-    <StringField name="port" label={translate('Port')} />
-    <StringField
-      name="gateway"
-      label={translate('Gateway')}
-      description={translate('Hostname or IP address of gateway node')}
-    />
-    <StringField
-      name="use_sudo"
-      label={translate('Use sudo')}
-      description={translate('Set to true to activate privilege escalation')}
-    />
-    <StringField
-      name="default_account"
-      label={translate('Default account')}
-      description={translate('Default SLURM account for user')}
-      required={true}
-      validate={required}
-    />
-  </FormContainer>
-);
+  ));
 
 export const SlurmRemoteForm = () => null;

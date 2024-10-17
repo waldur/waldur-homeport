@@ -16,11 +16,6 @@ export const getTypeDisplay = (type) =>
 export const getServiceIcon = (type) =>
   `images/appstore/${providers[type].icon}`;
 
-export const getSerializer = (type) => {
-  const conf = findProvider(type);
-  return (conf && conf.serializer) || ((x) => x);
-};
-
 export const getServiceSettingsForm = (type) => {
   const providerType = getProviderType(type);
   if (providerType) {

@@ -1,11 +1,11 @@
 import {
   Offering,
-  Attribute,
   OrderDetailsProps,
   OfferingComponent,
 } from '@waldur/marketplace/types';
 
 import { CheckoutSummaryProps } from '../deploy/types';
+import { OfferingEditPanelFormProps } from '../offerings/update/integration/types';
 
 const REGISTRY: { [key: string]: Omit<OfferingConfiguration, 'type'> } = {};
 
@@ -25,11 +25,11 @@ interface OfferingConfiguration<
   /**
    *  Please use only lazy component here to enable code-splitting.
    */
-  pluginOptionsForm?: React.ComponentType<any>;
+  pluginOptionsForm?: React.ComponentType<OfferingEditPanelFormProps>;
   /**
    *  Please use only lazy component here to enable code-splitting.
    */
-  secretOptionsForm?: React.ComponentType<any>;
+  secretOptionsForm?: React.ComponentType<OfferingEditPanelFormProps>;
   /**
    *  Please use only lazy component here to enable code-splitting.
    */
@@ -48,8 +48,6 @@ interface OfferingConfiguration<
   showComponents?: boolean;
   onlyOnePlan?: boolean;
   providerType?: string;
-  attributes?(): Attribute[];
-  optionsSummary?(): Attribute[];
   disableOfferingCreation?: boolean;
   schedulable?: boolean;
   showBackendId?: boolean;
@@ -196,19 +194,6 @@ export function getLabel(offeringType: string) {
     (REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].label) ||
     offeringType
   );
-}
-
-export function getAttributes(offeringType: string) {
-  const func =
-    REGISTRY.hasOwnProperty(offeringType) && REGISTRY[offeringType].attributes;
-  return func ? func() : [];
-}
-
-export function getOptionsSummary(offeringType: string) {
-  const func =
-    REGISTRY.hasOwnProperty(offeringType) &&
-    REGISTRY[offeringType].optionsSummary;
-  return func ? func() : [];
 }
 
 function getOfferingComponentsFilter(offeringType: string) {

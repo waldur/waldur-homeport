@@ -128,6 +128,7 @@ export interface Offering extends GeolocationPoint {
   resource_options?: OfferingOptions;
   plugin_options?: Record<string, any>;
   secret_options?: Record<string, any>;
+  service_attributes?: Record<string, any>;
   plans?: Plan[];
   type: string;
   state: OfferingState;

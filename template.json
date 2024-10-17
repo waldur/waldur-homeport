@@ -68,7 +68,7 @@
     "message": "A profile has been created."
   },
   "API URL": {
-    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts, openstack/OpenStackForm.tsx, openstack/marketplace.ts",
+    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, openstack/OpenStackForm.tsx",
     "message": "API URL"
   },
   "API secret code:": {
@@ -610,10 +610,6 @@
   "Allow bookings to be scheduled at weekends": {
     "description": "booking/components/WeekendsGroup.tsx",
     "message": "Allow bookings to be scheduled at weekends"
-  },
-  "Allow service provider to create offering users": {
-    "description": "marketplace/offerings/update/integration/OfferingAttributes.tsx",
-    "message": "Allow service provider to create offering users"
   },
   "Allow to enable/disable component only": {
     "description": "marketplace/offerings/update/components/ComponentBooleanLimitField.tsx",
@@ -1224,7 +1220,7 @@
     "message": "Auto apply"
   },
   "Auto approve in service provider projects": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/offerings/update/integration/OfferingAttributes.tsx",
+    "description": "marketplace/offerings/update/integration/LifecyclePolicySection.tsx",
     "message": "Auto approve in service provider projects"
   },
   "Auto-assign floating IP": {
@@ -1240,7 +1236,7 @@
     "message": "Automatic based on review scoring"
   },
   "Availability zone": {
-    "description": "azure/vm/AzureVirtualMachineForm.tsx, openstack/OpenStackForm.tsx, openstack/marketplace.ts, openstack/openstack-instance/OpenStackInstanceSummary.tsx, openstack/openstack-instance/OpenstackInstanceDetails.tsx, openstack/openstack-volume/OpenStackVolumeSummary.tsx, openstack/openstack-volume/OpenstackVolumeDetails.tsx",
+    "description": "azure/vm/AzureVirtualMachineForm.tsx, marketplace/offerings/update/integration/ProvisioningConfigSection.tsx, openstack/openstack-instance/OpenStackInstanceSummary.tsx, openstack/openstack-instance/OpenstackInstanceDetails.tsx, openstack/openstack-volume/OpenStackVolumeSummary.tsx, openstack/openstack-volume/OpenstackVolumeDetails.tsx",
     "message": "Availability zone"
   },
   "Availability": {
@@ -1300,7 +1296,7 @@
     "message": "Backend ID has been successfully set."
   },
   "Backend ID": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/SetBackendIdDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/list/ProviderResourcesList.tsx, marketplace/resources/usage/ResourceMetaInfo.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, project/ProjectExpandableRowContainer.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectMetadata.tsx, resource/summary/ResourceMetadataDialog.tsx, slurm/details/AllocationJobsTable.tsx, user/affiliations/BaseProjectsList.tsx",
+    "description": "marketplace/offerings/update/integration/CredentialsSection.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/SetBackendIdDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/resources/list/ProviderResourcesList.tsx, marketplace/resources/usage/ResourceMetaInfo.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, project/ProjectExpandableRowContainer.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectMetadata.tsx, resource/summary/ResourceMetadataDialog.tsx, slurm/details/AllocationJobsTable.tsx, user/affiliations/BaseProjectsList.tsx",
     "message": "Backend ID"
   },
   "Backend health status": {
@@ -1328,7 +1324,7 @@
     "message": "Bank name"
   },
   "Base image name": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/marketplace.ts",
+    "description": "rancher/RancherProviderForm.tsx",
     "message": "Base image name"
   },
   "Basic details": {
@@ -1388,7 +1384,7 @@
     "message": "Biological sciences"
   },
   "Blacklisted volume types": {
-    "description": "openstack/OpenStackForm.tsx, openstack/marketplace.ts",
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
     "message": "Blacklisted volume types"
   },
   "Block creation of new resources": {
@@ -1856,7 +1852,7 @@
     "message": "Cloud block storage size"
   },
   "Cloud init template": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/marketplace.ts",
+    "description": "rancher/RancherProviderForm.tsx",
     "message": "Cloud init template"
   },
   "Cloud region": {
@@ -2036,11 +2032,11 @@
     "message": "Confirm your review"
   },
   "Confirm": {
-    "description": "administration/settings/ConfigurationEditDialog.tsx, customer/credits/ProjectCreditFormDialog.tsx, customer/details/EditFieldDialog.tsx, project/manage/EditFieldDialog.tsx",
+    "description": "administration/settings/ConfigurationEditDialog.tsx, customer/credits/ProjectCreditFormDialog.tsx, customer/details/EditFieldDialog.tsx, marketplace/offerings/update/integration/EditFieldDialog.tsx, project/manage/EditFieldDialog.tsx",
     "message": "Confirm"
   },
   "Confirmation notification template": {
-    "description": "support/OfferingPluginSecretOptionsForm.tsx, support/marketplace.ts",
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
     "message": "Confirmation notification template"
   },
   "Confirmation": {
@@ -2146,6 +2142,10 @@
   "Costs": {
     "description": "marketplace/offerings/OfferingDetailsUIView.tsx",
     "message": "Costs"
+  },
+  "Could be \"{value}\"": {
+    "description": "marketplace/UserPluginOptionsForm.tsx",
+    "message": "Could be \"{value}\""
   },
   "Could not create organization": {
     "description": "customer/create/CustomerCreateDialog.tsx",
@@ -2400,7 +2400,7 @@
     "message": "Creation"
   },
   "Credentials": {
-    "description": "marketplace/offerings/import/tabs.ts, user/routes.ts",
+    "description": "marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/import/tabs.ts, marketplace/offerings/update/integration/CredentialsSection.tsx, user/routes.ts",
     "message": "Credentials"
   },
   "Credit deleted successfully.": {
@@ -2672,11 +2672,11 @@
     "message": "Default SLURM account for user"
   },
   "Default account": {
-    "description": "slurm/SlurmForm.tsx, slurm/marketplace.ts",
+    "description": "slurm/SlurmForm.tsx",
     "message": "Default account"
   },
   "Default availability zone for provisioned instances.": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
     "message": "Default availability zone for provisioned instances."
   },
   "Default cluster label": {
@@ -2684,7 +2684,7 @@
     "message": "Default cluster label"
   },
   "Default internal network MTU": {
-    "description": "openstack/OpenStackPluginOptionsForm.tsx, openstack/marketplace.ts",
+    "description": "openstack/OpenStackPluginOptionsForm.tsx",
     "message": "Default internal network MTU"
   },
   "Default logo for offering": {
@@ -2696,7 +2696,7 @@
     "message": "Default project role"
   },
   "Default resource termination offset in days": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx",
+    "description": "marketplace/offerings/update/integration/LifecyclePolicySection.tsx",
     "message": "Default resource termination offset in days"
   },
   "Default tax percent": {
@@ -3048,7 +3048,7 @@
     "message": "Documents"
   },
   "Domain name": {
-    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, openstack/OpenStackForm.tsx, openstack/marketplace.ts",
+    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, openstack/OpenStackForm.tsx",
     "message": "Domain name"
   },
   "Domain": {
@@ -3174,10 +3174,6 @@
   "Edit environment variables": {
     "description": "marketplace/offerings/update/integration/EditVarsButton.tsx, marketplace/offerings/update/integration/EditVarsDialog.tsx",
     "message": "Edit environment variables"
-  },
-  "Edit integration options": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationButton.tsx",
-    "message": "Edit integration options"
   },
   "Edit item": {
     "description": "invoices/details/InvoiceItemUpdate.tsx",
@@ -3764,7 +3760,7 @@
     "message": "External links"
   },
   "External network ID": {
-    "description": "openstack/OpenStackForm.tsx, openstack/marketplace.ts, resource/summary/ResourceMetadataDialog.tsx",
+    "description": "openstack/OpenStackForm.tsx, resource/summary/ResourceMetadataDialog.tsx",
     "message": "External network ID"
   },
   "External username": {
@@ -3916,7 +3912,7 @@
     "message": "Flavor change has been scheduled."
   },
   "Flavor exclude regex": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
     "message": "Flavor exclude regex"
   },
   "Flavor name": {
@@ -3932,7 +3928,7 @@
     "message": "Flavor"
   },
   "Flavors matching this regex expression will not be pulled from the backend.": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
     "message": "Flavors matching this regex expression will not be pulled from the backend."
   },
   "Flavors regex": {
@@ -4064,7 +4060,7 @@
     "message": "Gateway IP"
   },
   "Gateway": {
-    "description": "slurm/SlurmForm.tsx, slurm/marketplace.ts",
+    "description": "slurm/SlurmForm.tsx",
     "message": "Gateway"
   },
   "General": {
@@ -4304,7 +4300,7 @@
     "message": "Hostname or IP address of master node"
   },
   "Hostname": {
-    "description": "slurm/SlurmForm.tsx, slurm/marketplace.ts, vmware/VMwareForm.tsx",
+    "description": "slurm/SlurmForm.tsx, vmware/VMwareForm.tsx",
     "message": "Hostname"
   },
   "Hours": {
@@ -4648,7 +4644,7 @@
     "message": "Integration type"
   },
   "Integration": {
-    "description": "marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/update/integration/IntegrationSection.tsx, marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx",
+    "description": "marketplace/offerings/OfferingEditUIView.tsx",
     "message": "Integration"
   },
   "Internal IP": {
@@ -5016,7 +5012,7 @@
     "message": "Last name"
   },
   "Latest date for resource termination": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx",
+    "description": "marketplace/offerings/update/integration/LifecyclePolicySection.tsx",
     "message": "Latest date for resource termination"
   },
   "Latest offerings": {
@@ -5034,6 +5030,10 @@
   "Learn more": {
     "description": "auth/HeroButton.tsx, navigation/cookies/CookiesConsent.tsx",
     "message": "Learn more"
+  },
+  "Lifecycle policy": {
+    "description": "marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/update/integration/LifecyclePolicySection.tsx",
+    "message": "Lifecycle policy"
   },
   "Lifetime will be updated and reset upon saving the form.": {
     "description": "user/api-key/TokenLifetimeField.tsx",
@@ -5096,7 +5096,7 @@
     "message": "List of all resources"
   },
   "List of coma-separated volume types which should not be possible to select when creating VM/Volume.": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
     "message": "List of coma-separated volume types which should not be possible to select when creating VM/Volume."
   },
   "List of enabled languages": {
@@ -5255,10 +5255,6 @@
     "description": "rancher/cluster/create/steps.ts",
     "message": "Management offering"
   },
-  "Management": {
-    "description": "marketplace/offerings/update/integration/OfferingAttributes.tsx",
-    "message": "Management"
-  },
   "Managers": {
     "description": "proposals/update/CallUpdateContainer.tsx",
     "message": "Managers"
@@ -5328,7 +5324,7 @@
     "message": "Maximal number of resources"
   },
   "Maximal resource termination offset in days": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx",
+    "description": "marketplace/offerings/update/integration/LifecyclePolicySection.tsx",
     "message": "Maximal resource termination offset in days"
   },
   "Maximal value": {
@@ -5355,17 +5351,17 @@
     "description": "marketplace/offerings/update/components/ComponentLimitPeriodField.tsx",
     "message": "Maximum monthly"
   },
-  "Maximum parallel executions of provisioning operations for instances.": {
-    "description": "openstack/OpenStackForm.tsx, openstack/marketplace.ts",
-    "message": "Maximum parallel executions of provisioning operations for instances."
+  "Maximum parallel executions of provisioning operations for instances": {
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "message": "Maximum parallel executions of provisioning operations for instances"
   },
-  "Maximum parallel executions of provisioning operations for snapshots.": {
-    "description": "openstack/OpenStackForm.tsx, openstack/marketplace.ts",
-    "message": "Maximum parallel executions of provisioning operations for snapshots."
+  "Maximum parallel executions of provisioning operations for snapshots": {
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "message": "Maximum parallel executions of provisioning operations for snapshots"
   },
-  "Maximum parallel executions of provisioning operations for volumes.": {
-    "description": "openstack/OpenStackForm.tsx, openstack/marketplace.ts",
-    "message": "Maximum parallel executions of provisioning operations for volumes."
+  "Maximum parallel executions of provisioning operations for volumes": {
+    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "message": "Maximum parallel executions of provisioning operations for volumes"
   },
   "Maximum size": {
     "description": "proposals/proposal/create/UploadDocumentationFiles.tsx",
@@ -6264,7 +6260,7 @@
     "message": "Offering has been paused."
   },
   "Offering has been updated successfully.": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/offerings/update/overview/EditGettingStartedDialog.tsx, marketplace/offerings/update/overview/EditOverviewDialog.tsx",
+    "description": "marketplace/offerings/update/integration/utils.ts, marketplace/offerings/update/overview/EditGettingStartedDialog.tsx, marketplace/offerings/update/overview/EditOverviewDialog.tsx",
     "message": "Offering has been updated successfully."
   },
   "Offering invoices synchronization has been scheduled.": {
@@ -6628,7 +6624,7 @@
     "message": "Organisations"
   },
   "Organization UUID": {
-    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts",
+    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx",
     "message": "Organization UUID"
   },
   "Organization abbreviation": {
@@ -6816,7 +6812,7 @@
     "message": "Password for access user"
   },
   "Password": {
-    "description": "auth/SigninForm.tsx, azure/sql/AzureSQLServerSummary.tsx, openstack/OpenStackForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, vmware/VMwareForm.tsx",
+    "description": "auth/SigninForm.tsx, azure/sql/AzureSQLServerSummary.tsx, openstack/OpenStackForm.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, vmware/VMwareForm.tsx",
     "message": "Password"
   },
   "Pause offering": {
@@ -7324,7 +7320,7 @@
     "message": "Port security enabled"
   },
   "Port": {
-    "description": "slurm/SlurmForm.tsx, slurm/marketplace.ts",
+    "description": "slurm/SlurmForm.tsx",
     "message": "Port"
   },
   "Ports": {
@@ -7827,6 +7823,10 @@
     "description": "marketplace/orders/details/OrderDetailsQuickBody.tsx",
     "message": "Provision new resource"
   },
+  "Provisioning configuration": {
+    "description": "marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/update/integration/ProvisioningConfigSection.tsx, marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx",
+    "message": "Provisioning configuration"
+  },
   "Psychology": {
     "description": "project/OECD_FOS_2007_CODES.ts",
     "message": "Psychology"
@@ -7956,7 +7956,7 @@
     "message": "RAM"
   },
   "Rancher access key": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/marketplace.ts",
+    "description": "rancher/RancherProviderForm.tsx",
     "message": "Rancher access key"
   },
   "Rancher cluster": {
@@ -7972,11 +7972,11 @@
     "message": "Rancher resources provisioning"
   },
   "Rancher secret key": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/marketplace.ts",
+    "description": "rancher/RancherProviderForm.tsx",
     "message": "Rancher secret key"
   },
   "Rancher server URL": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/marketplace.ts",
+    "description": "rancher/RancherProviderForm.tsx",
     "message": "Rancher server URL"
   },
   "Rate": {
@@ -8624,7 +8624,7 @@
     "message": "Resource successfully updated"
   },
   "Resource termination date is required": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx",
+    "description": "marketplace/offerings/update/integration/LifecyclePolicySection.tsx",
     "message": "Resource termination date is required"
   },
   "Resource termination date": {
@@ -9048,7 +9048,7 @@
     "message": "Save summary"
   },
   "Save": {
-    "description": "administration/FeaturesList.tsx, administration/agreements/UserAgreementCreateDialog.tsx, administration/agreements/UserAgreementsEditDialog.tsx, administration/languages/LanguageOptionsForm.tsx, administration/notifications/NotificationForm.tsx, administration/providers/UpdateProviderDialog.tsx, administration/roles/RoleDescriptionForm.tsx, administration/roles/RoleForm.tsx, broadcasts/BroadcastSaveAsTemplateDialog.tsx, broadcasts/BroadcastTemplateForm.tsx, customer/details/CustomerMediaPanel.tsx, customer/team/AddProjectUserDialog.tsx, customer/team/EditProjectUserDialog.tsx, customer/team/EditUserDialog.tsx, map/SetLocationDialog.tsx, marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx, marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx, marketplace/offerings/expandable/utils.ts, marketplace/offerings/update/attributes/EditAttributeDialog.tsx, marketplace/offerings/update/attributes/EditCategoryDialog.tsx, marketplace/offerings/update/components/EditComponentDialog.tsx, marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx, marketplace/offerings/update/integration/EditScriptDialog.tsx, marketplace/offerings/update/integration/EditVarsDialog.tsx, marketplace/offerings/update/options/EditOptionDialog.tsx, marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx, marketplace/offerings/update/plans/EditPlanPricesDialog.tsx, marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx, marketplace/resources/actions/EditResourceEndDateDialog.tsx, marketplace/resources/actions/MoveResourceDialog.tsx, marketplace/resources/mass-actions/MultiMoveDialog.tsx, marketplace/resources/usage/utils.ts, marketplace-checklist/ChecklistCustomer.tsx, project/MoveProjectDialog.tsx, project/manage/ProjectAvatar.tsx, project/team/EditUserDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, proposals/team/AddUserDialog.tsx, proposals/update/documents/AttachDocumentsDialog.tsx, proposals/update/general/EditGeneralInfoDialog.tsx, reporting/invoices/utils.ts, table/SaveFilterDialog.tsx, user/support/UserEditAvatarFormItem.tsx",
+    "description": "administration/FeaturesList.tsx, administration/agreements/UserAgreementCreateDialog.tsx, administration/agreements/UserAgreementsEditDialog.tsx, administration/languages/LanguageOptionsForm.tsx, administration/notifications/NotificationForm.tsx, administration/providers/UpdateProviderDialog.tsx, administration/roles/RoleDescriptionForm.tsx, administration/roles/RoleForm.tsx, broadcasts/BroadcastSaveAsTemplateDialog.tsx, broadcasts/BroadcastTemplateForm.tsx, customer/details/CustomerMediaPanel.tsx, customer/team/AddProjectUserDialog.tsx, customer/team/EditProjectUserDialog.tsx, customer/team/EditUserDialog.tsx, map/SetLocationDialog.tsx, marketplace/offerings/actions/SetAccessPolicyDialogForm.tsx, marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx, marketplace/offerings/expandable/utils.ts, marketplace/offerings/update/attributes/EditAttributeDialog.tsx, marketplace/offerings/update/attributes/EditCategoryDialog.tsx, marketplace/offerings/update/components/EditComponentDialog.tsx, marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx, marketplace/offerings/update/integration/EditScriptDialog.tsx, marketplace/offerings/update/integration/EditVarsDialog.tsx, marketplace/offerings/update/options/EditOptionDialog.tsx, marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx, marketplace/offerings/update/plans/EditPlanPricesDialog.tsx, marketplace/offerings/update/plans/EditPlanQuotasDialog.tsx, marketplace/resources/actions/EditResourceEndDateDialog.tsx, marketplace/resources/actions/MoveResourceDialog.tsx, marketplace/resources/mass-actions/MultiMoveDialog.tsx, marketplace/resources/usage/utils.ts, marketplace-checklist/ChecklistCustomer.tsx, project/MoveProjectDialog.tsx, project/manage/ProjectAvatar.tsx, project/team/EditUserDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, proposals/team/AddUserDialog.tsx, proposals/update/documents/AttachDocumentsDialog.tsx, proposals/update/general/EditGeneralInfoDialog.tsx, reporting/invoices/utils.ts, table/SaveFilterDialog.tsx, user/support/UserEditAvatarFormItem.tsx",
     "message": "Save"
   },
   "Saved filters": {
@@ -9120,7 +9120,7 @@
     "message": "Script language"
   },
   "Script language: {language}": {
-    "description": "marketplace/offerings/update/integration/EditScriptDialog.tsx, marketplace/offerings/update/integration/ScriptIntegrationSummary.tsx",
+    "description": "marketplace/offerings/update/integration/EditScriptDialog.tsx",
     "message": "Script language: {language}"
   },
   "Search again": {
@@ -9992,7 +9992,7 @@
     "message": "Snapshot schedules"
   },
   "Snapshot size limit": {
-    "description": "openstack/OpenStackPluginOptionsForm.tsx, openstack/marketplace.ts",
+    "description": "openstack/OpenStackPluginOptionsForm.tsx",
     "message": "Snapshot size limit"
   },
   "Snapshots count": {
@@ -10124,7 +10124,7 @@
     "message": "Stopping"
   },
   "Storage mode": {
-    "description": "openstack/OpenStackPluginOptionsForm.tsx, openstack/marketplace.ts",
+    "description": "openstack/OpenStackPluginOptionsForm.tsx",
     "message": "Storage mode"
   },
   "Storage size in GiB": {
@@ -10472,7 +10472,7 @@
     "message": "Tenant ID"
   },
   "Tenant name": {
-    "description": "openstack/OpenStackForm.tsx, openstack/deploy/steps.ts, openstack/marketplace.ts",
+    "description": "openstack/OpenStackForm.tsx, openstack/deploy/steps.ts",
     "message": "Tenant name"
   },
   "Tenant user password": {
@@ -11016,7 +11016,7 @@
     "message": "Token lifetime"
   },
   "Token": {
-    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, marketplace-remote/marketplace.ts, navigation/header/UserToken.tsx",
+    "description": "marketplace-remote/RemoteOfferingSecretOptions.tsx, navigation/header/UserToken.tsx",
     "message": "Token"
   },
   "Too many empty fields": {
@@ -12168,7 +12168,7 @@
     "message": "Unable to update offering state."
   },
   "Unable to update offering.": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx, marketplace/offerings/update/overview/EditGettingStartedDialog.tsx, marketplace/offerings/update/overview/EditOverviewDialog.tsx",
+    "description": "marketplace/offerings/update/integration/utils.ts, marketplace/offerings/update/overview/EditGettingStartedDialog.tsx, marketplace/offerings/update/overview/EditOverviewDialog.tsx",
     "message": "Unable to update offering."
   },
   "Unable to update options.": {
@@ -12378,10 +12378,6 @@
   "Update image": {
     "description": "marketplace/offerings/actions/UpdateOfferingLogoDialog.tsx",
     "message": "Update image"
-  },
-  "Update integration options": {
-    "description": "marketplace/offerings/update/integration/EditIntegrationDialog.tsx",
-    "message": "Update integration options"
   },
   "Update internal IPs for OpenStack instance {name}": {
     "description": "openstack/openstack-instance/actions/update-internal-ips/UpdateInternalIpsForm.tsx",
@@ -12636,7 +12632,7 @@
     "message": "Use organization credit"
   },
   "Use sudo": {
-    "description": "slurm/SlurmForm.tsx, slurm/marketplace.ts",
+    "description": "slurm/SlurmForm.tsx",
     "message": "Use sudo"
   },
   "Used by one resource": {
@@ -12743,6 +12739,10 @@
     "description": "navigation/header/quick-issue-drawer/UserIssuesTable.tsx",
     "message": "User issues"
   },
+  "User management": {
+    "description": "marketplace/offerings/OfferingEditUIView.tsx, marketplace/offerings/update/integration/UserManagementSection.tsx",
+    "message": "User management"
+  },
   "User profile": {
     "description": "user/UserManageContainer.tsx",
     "message": "User profile"
@@ -12832,7 +12832,7 @@
     "message": "Username prefix"
   },
   "Username": {
-    "description": "administration/TokensList.tsx, administration/users/FreeIPAUsersList.tsx, auth/SigninForm.tsx, customer/team/CustomerUsersList.tsx, customer/team/UserGroup.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, openstack/OpenStackForm.tsx, openstack/marketplace.ts, openstack/openstack-tenant/OpenStackTenantSummary.tsx, project/team/ProjectUsersList.tsx, project/team/UserGroup.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, slurm/marketplace.ts, user/UserOfferingList.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
+    "description": "administration/TokensList.tsx, administration/users/FreeIPAUsersList.tsx, auth/SigninForm.tsx, customer/team/CustomerUsersList.tsx, customer/team/UserGroup.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/ResourceSummary.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, openstack/OpenStackForm.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx, project/team/ProjectUsersList.tsx, project/team/UserGroup.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, user/UserOfferingList.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
     "message": "Username"
   },
   "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.).": {

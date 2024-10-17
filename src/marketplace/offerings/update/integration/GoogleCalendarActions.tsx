@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { translate } from '@waldur/i18n';
+import { isOfferingTypeSchedulable } from '@waldur/marketplace/common/registry';
 import { ARCHIVED } from '@waldur/marketplace/offerings/store/constants';
 import {
   getUser,
@@ -22,6 +23,7 @@ export const GoogleCalendarActions = ({ offering }) => {
   const isVisible =
     offering.type === OFFERING_TYPE_BOOKING &&
     ![ARCHIVED].includes(offering.state) &&
+    isOfferingTypeSchedulable(offering.type) &&
     (user?.is_staff || isOwner);
   if (!isVisible) {
     return null;

@@ -1,50 +1,58 @@
-import { FunctionComponent, useEffect } from 'react';
-import { Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { Field, change, formValueSelector } from 'redux-form';
+import { FunctionComponent } from 'react';
 
+import { formatYesNo } from '@waldur/core/utils';
 import { StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 
-import { EDIT_INTEGRATION_FORM_ID } from './offerings/update/integration/constants';
+import { FieldEditButton } from './offerings/update/integration/FieldEditButton';
+import { OfferingEditPanelFormProps } from './offerings/update/integration/types';
 
-const FIELD_NAME = 'secret_options.service_provider_can_create_offering_user';
+const FIELD_PREFIX = 'secret_options.';
 
-export const canCreateUserSelector = (state) =>
-  formValueSelector(EDIT_INTEGRATION_FORM_ID)(state, FIELD_NAME);
-
-export const UserSecretOptionsForm: FunctionComponent<{}> = () => {
-  const dispatch = useDispatch();
-  const canCreateUser = useSelector(canCreateUserSelector);
-
-  useEffect(() => {
-    if (canCreateUser === undefined) {
-      dispatch(change(EDIT_INTEGRATION_FORM_ID, FIELD_NAME, true));
-    }
-  }, [dispatch, canCreateUser]);
+export const UserSecretOptionsForm: FunctionComponent<
+  OfferingEditPanelFormProps
+> = (props) => {
+  const canCreateUser =
+    props.offering.secret_options?.service_provider_can_create_offering_user;
 
   return (
     <>
-      <Field
-        component={AwesomeCheckboxField}
-        name="service_provider_can_create_offering_user"
+      <FormTable.Item
         label={translate('Service provider can create offering user')}
-        className="mt-3"
+        value={formatYesNo(
+          props.offering.secret_options
+            ?.service_provider_can_create_offering_user,
+        )}
+        actions={
+          <FieldEditButton
+            title={props.title}
+            scope={props.offering}
+            name={FIELD_PREFIX + 'service_provider_can_create_offering_user'}
+            callback={props.callback}
+            fieldComponent={AwesomeCheckboxField}
+            hideLabel
+          />
+        }
       />
-      {canCreateUser && (
-        <>
-          <Form.Label className="mt-3">
-            {translate('Shared user password')}
-          </Form.Label>
-          <Field component={StringField} name="shared_user_password" />
-          <Form.Text muted={true}>
-            {translate(
-              'If defined, will be set as a password for all offering users',
-            )}
-          </Form.Text>
-        </>
-      )}
+      <FormTable.Item
+        label={translate('Shared user password')}
+        value={props.offering.secret_options?.shared_user_password || 'N/A'}
+        description={translate(
+          'If defined, will be set as a password for all offering users',
+        )}
+        disabled={!canCreateUser}
+        actions={
+          <FieldEditButton
+            title={props.title}
+            scope={props.offering}
+            name={FIELD_PREFIX + 'shared_user_password'}
+            callback={props.callback}
+            fieldComponent={StringField}
+          />
+        }
+      />
     </>
   );
 };

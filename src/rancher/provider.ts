@@ -1,5 +1,4 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { pick } from '@waldur/core/utils';
 import * as ProvidersRegistry from '@waldur/marketplace/offerings/update/integration/registry';
 
 const RancherProviderForm = lazyComponent(
@@ -7,19 +6,10 @@ const RancherProviderForm = lazyComponent(
   'RancherProviderForm',
 );
 
-const serializer = pick([
-  'backend_url',
-  'username',
-  'password',
-  'base_image_name',
-  'cloud_init_template',
-]);
-
 ProvidersRegistry.register({
   name: 'Rancher',
   type: 'Rancher',
   icon: 'icon-rancher.png',
   endpoint: 'rancher',
   component: RancherProviderForm,
-  serializer,
 });

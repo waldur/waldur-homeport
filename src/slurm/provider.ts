@@ -8,24 +8,12 @@ const SlurmRemoteForm = lazyComponent(
   'SlurmRemoteForm',
 );
 
-const serializer = (fields) => ({
-  hostname: fields.hostname,
-  username: fields.username,
-  port: fields.port,
-  gateway: fields.gateway,
-  use_sudo: fields.use_sudo,
-  default_account: fields.default_account,
-});
-
-const serializerRemote = () => ({});
-
 ProvidersRegistry.register({
   name: 'Batch processing',
   type: 'SLURM',
   icon: 'icon-slurm.png',
   endpoint: 'slurm',
   component: SlurmForm,
-  serializer,
 });
 
 ProvidersRegistry.register({
@@ -34,5 +22,4 @@ ProvidersRegistry.register({
   icon: 'icon-slurm.png',
   endpoint: 'slurm',
   component: SlurmRemoteForm,
-  serializer: serializerRemote,
 });
