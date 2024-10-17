@@ -31,8 +31,6 @@ const AuthLogoutFailed = lazyComponent(
   'AuthLogoutFailed',
 );
 
-const OIDCLogout = lazyComponent(() => import('./OIDCLogout'), 'OIDCLogout');
-
 export const states: StateDeclaration[] = [
   {
     name: 'home.login_completed',
@@ -82,15 +80,6 @@ export const states: StateDeclaration[] = [
     component: AuthLogoutFailed,
     data: {
       erred: true,
-    },
-  },
-
-  {
-    name: 'home.oidc_logout',
-    url: '/oidc_logout/:provider/',
-    component: OIDCLogout,
-    data: {
-      anonymous: true,
     },
   },
 ];
