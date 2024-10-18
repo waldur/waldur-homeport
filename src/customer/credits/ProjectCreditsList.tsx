@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ENV } from '@waldur/configs/default';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { formatYesNo } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { createFetcher, Table } from '@waldur/table';
@@ -28,10 +28,8 @@ export const ProjectCreditsList: FC = () => {
           export: 'project_name',
         },
         {
-          title: translate('Allocated credit ({currency})', {
-            currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-          }),
-          render: ({ row }) => <>{row.value}</>,
+          title: translate('Allocated credit'),
+          render: ({ row }) => defaultCurrency(row.value),
           orderField: 'value',
           export: 'value',
         },
