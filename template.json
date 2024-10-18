@@ -483,6 +483,10 @@
     "description": "marketplace/service-providers/ServiceProviderSecretCodeGenerateConfirm.tsx",
     "message": "After secret API code has been regenerated, it will not be possible to submit usage with the old key."
   },
+  "Aggregate usage and limits": {
+    "description": "marketplace/aggregate-limits/AggregateLimitWidget.tsx",
+    "message": "Aggregate usage and limits"
+  },
   "Agreement date": {
     "description": "administration/users/FreeIPAUsersList.tsx, user/support/UserList.tsx",
     "message": "Agreement date"
@@ -1836,7 +1840,7 @@
     "message": "Clone"
   },
   "Close": {
-    "description": "administration/TelemetryExampleDialog.tsx, booking/components/modal/BookingResourceDetailsDialog.tsx, broadcasts/RecipientsListDialog.tsx, invitations/actions/create/FormButtons.tsx, marketplace/details/plan/EstimateUsageComponentDialog.tsx, marketplace/offerings/images/ImageDetailsDialog.tsx, marketplace/referral/OfferingReferralsDialog.tsx, marketplace/resources/usage/ResourceShowUsageDialog.tsx, marketplace/service-providers/ProviderProjectResourcesDialog.tsx, proposals/round/proposals/ProposalReviewsDetailButton.tsx, resource/summary/ResourceMetadataDialog.tsx, resource/summary/ResourceSummaryModal.tsx, user/UserPopover.tsx, user/support/UserDetailsDialog.tsx, user/support/UserRemovalMessageDialog.tsx",
+    "description": "administration/TelemetryExampleDialog.tsx, booking/components/modal/BookingResourceDetailsDialog.tsx, broadcasts/RecipientsListDialog.tsx, invitations/actions/create/FormButtons.tsx, marketplace/aggregate-limits/AllComponentsDialog.tsx, marketplace/details/plan/EstimateUsageComponentDialog.tsx, marketplace/offerings/images/ImageDetailsDialog.tsx, marketplace/referral/OfferingReferralsDialog.tsx, marketplace/resources/usage/ResourceShowUsageDialog.tsx, marketplace/service-providers/ProviderProjectResourcesDialog.tsx, proposals/round/proposals/ProposalReviewsDetailButton.tsx, resource/summary/ResourceMetadataDialog.tsx, resource/summary/ResourceSummaryModal.tsx, user/UserPopover.tsx, user/support/UserDetailsDialog.tsx, user/support/UserRemovalMessageDialog.tsx",
     "message": "Close"
   },
   "Closed issues (this month)": {
@@ -1980,7 +1984,7 @@
     "message": "Component"
   },
   "Components": {
-    "description": "marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingComponents.tsx, marketplace/offerings/details/policies/OfferingUsagePolicies.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/details/ResourceComponentsDialog.tsx, proposals/offering-requests/OfferingRequestsListExpandableRow.tsx",
+    "description": "marketplace/aggregate-limits/AllComponentsDialog.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/details/PublicOfferingComponents.tsx, marketplace/offerings/details/policies/OfferingUsagePolicies.tsx, marketplace/orders/details/OrderMetadataTab.tsx, marketplace/resources/details/ResourceComponentsDialog.tsx, proposals/offering-requests/OfferingRequestsListExpandableRow.tsx",
     "message": "Components"
   },
   "Compute generation": {
@@ -9844,7 +9848,7 @@
     "message": "Show monthly estimates"
   },
   "Show more": {
-    "description": "marketplace/resources/details/ResourceShowMoreComponents.tsx",
+    "description": "marketplace/aggregate-limits/AggregateLimitsShowMoreButton.tsx, marketplace/resources/details/ResourceShowMoreComponents.tsx",
     "message": "Show more"
   },
   "Show offering": {

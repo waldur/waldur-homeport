@@ -10,7 +10,7 @@ interface WidgetCardAction {
 
 interface WidgetCardProps {
   cardTitle: ReactNode;
-  title: ReactNode;
+  title?: ReactNode;
   meta?: ReactNode;
   actions?: WidgetCardAction[];
   className?: string;

@@ -9,6 +9,7 @@ import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useCreateInvitation } from '@waldur/invitations/actions/hooks';
+import { AggregateLimitWidget } from '@waldur/marketplace/aggregate-limits/AggregateLimitWidget';
 import { fetchSelectProjectUsers } from '@waldur/permissions/api';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -64,6 +65,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
             emailKey="user_email"
             imageKey="user_image"
           />
+        </Col>
+      </Row>
+      <Row style={{ minHeight: '14rem' }}>
+        <Col md={6} sm={12} className="mb-6">
+          <AggregateLimitWidget project={project} />
         </Col>
       </Row>
       {project.description ? (
