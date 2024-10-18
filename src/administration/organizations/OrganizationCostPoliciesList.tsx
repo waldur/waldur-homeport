@@ -1,10 +1,9 @@
-import { Check, X } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 
-import { Badge } from '@waldur/core/Badge';
+import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { CostPolicyCreateButton } from '@waldur/customer/cost-policies/CostPolicyCreateButton';
 import { CostPolicyDeleteButton } from '@waldur/customer/cost-policies/CostPolicyDeleteButton';
@@ -51,10 +50,6 @@ export const OrganizationCostPoliciesList: FC = () => {
           filter: 'organization',
         },
         {
-          title: translate('Cost threshold'),
-          render: ({ row }) => <>{defaultCurrency(row.limit_cost)}</>,
-        },
-        {
           title: translate('Action'),
           render: ({ row }) => (
             <>
@@ -68,21 +63,19 @@ export const OrganizationCostPoliciesList: FC = () => {
         },
         {
           title: translate('Has fired'),
-          render: ({ row }) =>
-            row.has_fired === true ? (
-              <Badge variant="danger" outline pill size="sm">
-                <X size={12} className="text-danger me-2" />
-                {translate('No')}
-              </Badge>
-            ) : (
-              <Badge variant="success" outline pill size="sm">
-                <Check size={12} className="text-success me-2" />
-                {translate('Yes')}
-              </Badge>
-            ),
+          render: ({ row }) => <BooleanBadge value={row.has_fired} />,
         },
         {
-          title: translate('Estimated current cost'),
+          title: translate('Credit'),
+          render: ({ row }) =>
+            row.customer_credit ? defaultCurrency(row.customer_credit) : 'N/A',
+        },
+        {
+          title: translate('Cost threshold'),
+          render: ({ row }) => <>{defaultCurrency(row.limit_cost)}</>,
+        },
+        {
+          title: translate('Estimated cost'),
           render: ({ row }) => (
             <>
               {defaultCurrency(
