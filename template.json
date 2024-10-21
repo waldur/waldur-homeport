@@ -3835,6 +3835,10 @@
     "description": "marketplace-remote/ProjectUpdateRequestExpandable.tsx",
     "message": "Field"
   },
+  "File download failed": {
+    "description": "issues/attachments/FileDownloader.tsx",
+    "message": "File download failed"
+  },
   "File too large. Please select a smaller file.": {
     "description": "project/effects.ts",
     "message": "File too large. Please select a smaller file."

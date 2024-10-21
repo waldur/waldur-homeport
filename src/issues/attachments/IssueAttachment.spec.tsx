@@ -4,7 +4,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
 import { attachment } from './fixture';
-import { PureIssueAttachment } from './IssueAttachment';
+import { IssueAttachment } from './IssueAttachment';
 
 describe('IssueAttachment', () => {
   const inititalProps = {
@@ -14,7 +14,7 @@ describe('IssueAttachment', () => {
     openModal: () => undefined,
   };
   const renderWrapper = (props?) =>
-    shallow(<PureIssueAttachment {...inititalProps} {...props} />);
+    shallow(<IssueAttachment {...inititalProps} {...props} />);
 
   it('renders thumbnail', () => {
     const wrapper = renderWrapper({ attachment });
