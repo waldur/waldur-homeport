@@ -7,6 +7,7 @@ import { ImpersonationBar } from '@waldur/administration/ImpersonationBar';
 import { AuthService } from '@waldur/auth/AuthService';
 import { PermissionDataProvider } from '@waldur/auth/PermissionLayout';
 import WarningBar from '@waldur/auth/WarningBar';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { DefaultLayoutConfig, useLayout } from '@waldur/metronic/layout/core';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
 import { getCurrentUser } from '@waldur/user/UsersService';
@@ -131,7 +132,11 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
                   <div className="extra-toolbar">{ExtraToolbar}</div>
                 )}
                 <div className="post w-100 d-flex flex-column-fluid">
-                  {children}
+                  {state.data.auth && !currentUser ? (
+                    <LoadingSpinner />
+                  ) : (
+                    children
+                  )}
                   <MasterLayout />
                 </div>
               </div>
