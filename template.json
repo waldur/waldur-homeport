@@ -2643,10 +2643,6 @@
     "description": "openstack/openstack-instance/deploy/FormDataVolumeStep.tsx, openstack/openstack-instance/deploy/steps.ts",
     "message": "Data volume"
   },
-  "Database tables": {
-    "description": "administration/SystemInfoPage.tsx",
-    "message": "Database tables"
-  },
   "Datacite DOI": {
     "description": "marketplace/offerings/details/PublicOfferingAttributesSection.tsx",
     "message": "Datacite DOI"
@@ -11074,6 +11070,10 @@
   "Too many empty fields": {
     "description": "invitations/actions/create/EmailsListGroup.tsx",
     "message": "Too many empty fields"
+  },
+  "Top 10 largest database tables": {
+    "description": "administration/SystemInfoPage.tsx",
+    "message": "Top 10 largest database tables"
   },
   "Total CPU": {
     "description": "rancher/cluster/create/RancherClusterCheckoutSummary.tsx",
