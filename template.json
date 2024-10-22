@@ -3424,7 +3424,7 @@
     "message": "End date of the agreement is {date}."
   },
   "End date": {
-    "description": "booking/deploy/CustomRangeDatePicker.tsx, customer/dashboard/CreditStatusWidget.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, project/ProjectCreateForm.tsx, project/ProjectsList.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectGeneral.tsx, user/affiliations/BaseProjectsList.tsx",
+    "description": "administration/organizations/OrganizationCreditsList.tsx, booking/deploy/CustomRangeDatePicker.tsx, customer/dashboard/CreditStatusWidget.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, project/ProjectCreateForm.tsx, project/ProjectsList.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectGeneral.tsx, user/affiliations/BaseProjectsList.tsx",
     "message": "End date"
   },
   "End date:": {
@@ -5504,7 +5504,7 @@
     "message": "Minimal average scoring"
   },
   "Minimal consumption": {
-    "description": "customer/credits/CreditFormDialog.tsx",
+    "description": "administration/organizations/OrganizationCreditsList.tsx, customer/credits/CreditFormDialog.tsx",
     "message": "Minimal consumption"
   },
   "Minimal disk": {
