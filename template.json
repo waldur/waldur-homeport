@@ -2635,6 +2635,10 @@
     "description": "openstack/openstack-instance/deploy/FormDataVolumeStep.tsx, openstack/openstack-instance/deploy/steps.ts",
     "message": "Data volume"
   },
+  "Database tables": {
+    "description": "administration/SystemInfoPage.tsx",
+    "message": "Database tables"
+  },
   "Datacite DOI": {
     "description": "marketplace/offerings/details/PublicOfferingAttributesSection.tsx",
     "message": "Datacite DOI"
@@ -3779,6 +3783,10 @@
     "description": "openstack/OpenStackForm.tsx, resource/summary/ResourceMetadataDialog.tsx",
     "message": "External network ID"
   },
+  "External size": {
+    "description": "administration/SystemInfoPage.tsx",
+    "message": "External size"
+  },
   "External username": {
     "description": "marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx",
     "message": "External username"
@@ -4698,6 +4706,10 @@
   "Internal server error occurred. Please try again or contact support.": {
     "description": "invitations/utils.ts",
     "message": "Internal server error occurred. Please try again or contact support."
+  },
+  "Internal size": {
+    "description": "administration/SystemInfoPage.tsx",
+    "message": "Internal size"
   },
   "Internal": {
     "description": "issues/comments/IssueCommentItem.tsx",
@@ -10331,6 +10343,10 @@
     "description": "user/support/UserEmailChangeDialog.tsx",
     "message": "Synchronized from identity provider"
   },
+  "System info": {
+    "description": "administration/routes.ts",
+    "message": "System info"
+  },
   "System role": {
     "description": "administration/roles/RolesList.tsx",
     "message": "System role"
@@ -10390,6 +10406,10 @@
   "Table settings": {
     "description": "SettingsDescription.ts",
     "message": "Table settings"
+  },
+  "Table": {
+    "description": "administration/SystemInfoPage.tsx",
+    "message": "Table"
   },
   "Taking a snapshot": {
     "description": "resource/state/constants.ts",
@@ -11083,6 +11103,10 @@
     "description": "marketplace/offerings/details/OfferingDetailsStatistics.tsx",
     "message": "Total resources"
   },
+  "Total size": {
+    "description": "administration/SystemInfoPage.tsx",
+    "message": "Total size"
+  },
   "Total storage": {
     "description": "openstack/openstack-instance/deploy/CheckoutSummary.tsx, rancher/cluster/create/RancherClusterCheckoutSummary.tsx",
     "message": "Total storage"
@@ -11628,7 +11652,7 @@
     "message": "Unable to load customer support satisfaction overall rating."
   },
   "Unable to load data": {
-    "description": "invoices/list/OverviewLastMonths.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/expandable/OfferingUsageChart.tsx, marketplace/resources/usage/ResourceUsageTabsContainer.tsx, marketplace/service-providers/dashboard/ProviderWidgets.tsx",
+    "description": "administration/SystemInfoPage.tsx, invoices/list/OverviewLastMonths.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/expandable/OfferingUsageChart.tsx, marketplace/resources/usage/ResourceUsageTabsContainer.tsx, marketplace/service-providers/dashboard/ProviderWidgets.tsx",
     "message": "Unable to load data"
   },
   "Unable to load data.": {
