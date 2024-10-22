@@ -10,7 +10,6 @@ import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { WidgetCard } from '@waldur/dashboard/WidgetCard';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { useCreateInvitation } from '@waldur/invitations/actions/hooks';
-import { AggregateLimitWidget } from '@waldur/marketplace/aggregate-limits/AggregateLimitWidget';
 import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
 import { fetchSelectCustomerUsers } from '@waldur/permissions/api';
 import { Customer, User } from '@waldur/workspace/types';
@@ -46,63 +45,56 @@ export const CustomerDashboardChart: FunctionComponent<
   }
   if (data.costChart || data.teamChart) {
     return (
-      <>
-        <Row>
-          {Boolean(data.costChart) && (
-            <Col md={6} sm={12} className="mb-6">
-              <WidgetCard
-                cardTitle={data.costChart.chart.title}
-                title={data.costChart.chart.current}
-                className="h-100"
-                meta={
-                  data.costChart.chart.changes
-                    ? translate(
-                        '{changes} vs last month',
-                        {
-                          changes: (
-                            <ChangesAmountBadge
-                              changes={data.costChart.chart.changes}
-                              showOnInfinity
-                              showOnZero
-                              asBadge={false}
-                            />
-                          ),
-                        },
-                        formatJsxTemplate,
-                      )
-                    : null
-                }
-                right={
-                  <Col xs={7}>
-                    <EChart options={data.costChart.options} height="100px" />
-                  </Col>
-                }
-              />
-            </Col>
-          )}
-          {Boolean(data.teamChart) && (
-            <Col md={6} sm={12} className="mb-6">
-              <TeamWidget
-                api={() =>
-                  fetchSelectCustomerUsers(customer.uuid, { page_size: 5 })
-                }
-                chartData={data.teamChart}
-                showChart
-                scope={customer}
-                onBadgeClick={goToUsers}
-                onAddClick={callback}
-                showAdd={canInvite}
-                className="h-100"
-              />
-            </Col>
-          )}
-        </Row>
-        <Row style={{ minHeight: '14rem' }}>
+      <Row>
+        {Boolean(data.costChart) && (
           <Col md={6} sm={12} className="mb-6">
-            <AggregateLimitWidget customer={customer} />
+            <WidgetCard
+              cardTitle={data.costChart.chart.title}
+              title={data.costChart.chart.current}
+              className="h-100"
+              meta={
+                data.costChart.chart.changes
+                  ? translate(
+                      '{changes} vs last month',
+                      {
+                        changes: (
+                          <ChangesAmountBadge
+                            changes={data.costChart.chart.changes}
+                            showOnInfinity
+                            showOnZero
+                            asBadge={false}
+                          />
+                        ),
+                      },
+                      formatJsxTemplate,
+                    )
+                  : null
+              }
+              right={
+                <Col xs={7}>
+                  <EChart options={data.costChart.options} height="100px" />
+                </Col>
+              }
+            />
           </Col>
-        </Row>
-      </>
+        )}
+        {Boolean(data.teamChart) && (
+          <Col md={6} sm={12} className="mb-6">
+            <TeamWidget
+              api={() =>
+                fetchSelectCustomerUsers(customer.uuid, { page_size: 5 })
+              }
+              chartData={data.teamChart}
+              showChart
+              scope={customer}
+              onBadgeClick={goToUsers}
+              onAddClick={callback}
+              showAdd={canInvite}
+              className="h-100"
+            />
+          </Col>
+        )}
+      </Row>
     );
   }
   return null;

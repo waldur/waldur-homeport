@@ -1,7 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { AggregateLimitWidget } from '@waldur/marketplace/aggregate-limits/AggregateLimitWidget';
+import { getCustomerStats } from '@waldur/marketplace/aggregate-limits/api';
 import { ProjectsList } from '@waldur/project/ProjectsList';
 import {
   checkIsServiceManager,
@@ -13,6 +16,16 @@ import {
 import { CreditStatusWidget } from './CreditStatusWidget';
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerProfile } from './CustomerProfile';
+
+const shouldShowAggregateLimitWidget = (uuid) => {
+  const { data } = useQuery(
+    ['customer-stats', uuid],
+    () => getCustomerStats(uuid),
+    { refetchOnWindowFocus: false, staleTime: 60 * 1000 },
+  );
+
+  return data?.data.components?.length > 0;
+};
 
 export const CustomerDashboard: FunctionComponent = () => {
   const user = useSelector(getUser);
@@ -34,12 +47,17 @@ export const CustomerDashboard: FunctionComponent = () => {
           {canSeeCharts && (
             <CustomerDashboardChart customer={customer} user={user} />
           )}
-          {Boolean(customer.credit) && (
-            <Row>
-              <Col md={6} sm={12} className="mb-6" />
+          {(shouldShowAggregateLimitWidget(customer.uuid) ||
+            Boolean(customer.credit)) && (
+            <Row style={{ minHeight: '14rem' }}>
               <Col md={6} sm={12} className="mb-6">
-                <CreditStatusWidget customer={customer} />
+                <AggregateLimitWidget customer={customer} />
               </Col>
+              {Boolean(customer.credit) && (
+                <Col md={6} sm={12} className="mb-6">
+                  <CreditStatusWidget customer={customer} />
+                </Col>
+              )}
             </Row>
           )}
           <div className="mb-6">
