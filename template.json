@@ -575,6 +575,10 @@
     "description": "customer/credits/ProjectCreditFormDialog.tsx",
     "message": "Allocate credit ({currency})"
   },
+  "Allocated\nto projects": {
+    "description": "customer/dashboard/CreditStatusWidget.tsx",
+    "message": "Allocated\nto projects"
+  },
   "Allocated credit": {
     "description": "administration/organizations/OrganizationCreditsList.tsx, customer/credits/ProjectCreditsList.tsx",
     "message": "Allocated credit"
@@ -582,6 +586,10 @@
   "Allocated offerings": {
     "description": "proposals/round/RoundQuotas.tsx",
     "message": "Allocated offerings"
+  },
+  "Allocated": {
+    "description": "customer/dashboard/CreditStatusWidget.tsx",
+    "message": "Allocated"
   },
   "Allocation date": {
     "description": "proposals/round/allocation/RoundAllocationSection.tsx, proposals/update/rounds/RoundExpandableRow.tsx, proposals/update/rounds/WizardFormThirdPage.tsx",
@@ -2448,7 +2456,7 @@
     "message": "Credits available for this organization: {currency} {credits}"
   },
   "Credits": {
-    "description": "administration/organizations/OrganizationCreditsList.tsx, customer/credits/ProjectCreditsList.tsx",
+    "description": "administration/organizations/OrganizationCreditsList.tsx, customer/credits/ProjectCreditsList.tsx, customer/dashboard/CreditStatusWidget.tsx",
     "message": "Credits"
   },
   "Current VAT code: {value}.": {
@@ -3420,7 +3428,7 @@
     "message": "End date of the agreement is {date}."
   },
   "End date": {
-    "description": "booking/deploy/CustomRangeDatePicker.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, project/ProjectCreateForm.tsx, project/ProjectsList.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectGeneral.tsx, user/affiliations/BaseProjectsList.tsx",
+    "description": "booking/deploy/CustomRangeDatePicker.tsx, customer/dashboard/CreditStatusWidget.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, project/ProjectCreateForm.tsx, project/ProjectsList.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectGeneral.tsx, user/affiliations/BaseProjectsList.tsx",
     "message": "End date"
   },
   "End date:": {
@@ -11112,7 +11120,7 @@
     "message": "Total storage"
   },
   "Total": {
-    "description": "customer/cost-policies/utils.ts, invoices/details/ResourceLimitPeriodsTable.tsx, invoices/list/BillingRecordsList.tsx, invoices/list/InvoicesList.tsx, invoices/list/MonthOverview.tsx, marketplace/deploy/CheckoutFooter.tsx, marketplace/details/plan/OrderSummaryPlanRows.tsx, marketplace/details/plan/PlanDetailsList.tsx, marketplace/details/plan/PlanDetailsTable.tsx, marketplace/details/plan/PlanDetailsTable2.tsx, marketplace/details/plan/TotalLimitComponentsList.tsx, marketplace/details/plan/TotalLimitComponentsTable.tsx, marketplace/resources/change-limits/ChangeLimitsComponent.tsx, reporting/invoices/utils.ts",
+    "description": "customer/cost-policies/utils.ts, customer/dashboard/CreditStatusWidget.tsx, invoices/details/ResourceLimitPeriodsTable.tsx, invoices/list/BillingRecordsList.tsx, invoices/list/InvoicesList.tsx, invoices/list/MonthOverview.tsx, marketplace/deploy/CheckoutFooter.tsx, marketplace/details/plan/OrderSummaryPlanRows.tsx, marketplace/details/plan/PlanDetailsList.tsx, marketplace/details/plan/PlanDetailsTable.tsx, marketplace/details/plan/PlanDetailsTable2.tsx, marketplace/details/plan/TotalLimitComponentsList.tsx, marketplace/details/plan/TotalLimitComponentsTable.tsx, marketplace/resources/change-limits/ChangeLimitsComponent.tsx, reporting/invoices/utils.ts",
     "message": "Total"
   },
   "Tracked using UTC timezone, displayed with your browser’s timezone.": {
@@ -13878,6 +13886,10 @@
   "{agent} - {status}. Last request: {time}": {
     "description": "marketplace/offerings/details/ConnectionStatusIndicator.tsx",
     "message": "{agent} - {status}. Last request: {time}"
+  },
+  "{amount} spent last month": {
+    "description": "customer/dashboard/CreditStatusWidget.tsx",
+    "message": "{amount} spent last month"
   },
   "{changes} vs last month": {
     "description": "customer/dashboard/CustomerDashboardChart.tsx, dashboard/TeamWidget.tsx, project/ProjectDashboardCostLimits.tsx",

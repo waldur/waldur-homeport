@@ -23,3 +23,10 @@ export interface InvoiceSummary {
   month: number;
   price: number;
 }
+
+export interface RingChartOption {
+  title: string;
+  label: string;
+  value: number;
+  max?: number;
+}

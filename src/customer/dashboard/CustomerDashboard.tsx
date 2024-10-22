@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { ProjectsList } from '@waldur/project/ProjectsList';
@@ -9,6 +10,7 @@ import {
   isOwnerOrStaff,
 } from '@waldur/workspace/selectors';
 
+import { CreditStatusWidget } from './CreditStatusWidget';
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerProfile } from './CustomerProfile';
 
@@ -31,6 +33,14 @@ export const CustomerDashboard: FunctionComponent = () => {
         <>
           {canSeeCharts && (
             <CustomerDashboardChart customer={customer} user={user} />
+          )}
+          {Boolean(customer.credit) && (
+            <Row>
+              <Col md={6} sm={12} className="mb-6" />
+              <Col md={6} sm={12} className="mb-6">
+                <CreditStatusWidget customer={customer} />
+              </Col>
+            </Row>
           )}
           <div className="mb-6">
             <ProjectsList />

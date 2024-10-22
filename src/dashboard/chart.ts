@@ -1,7 +1,7 @@
 import { translate } from '@waldur/i18n';
 
 import { LINE_CHART_COLOR } from './constants';
-import { Chart } from './types';
+import { Chart, RingChartOption } from './types';
 
 type Value = string | number;
 interface HLine {
@@ -130,3 +130,70 @@ export const getLineChartOptions = (chart: Chart, hLines?: HLine[]) =>
     hLines,
     LINE_CHART_COLOR,
   );
+
+export const getRingChartOptions = (props: RingChartOption) => {
+  const emptySpace = (props.max || 100) - props.value;
+  return {
+    title: {
+      text: props.title,
+      left: 'center',
+      top: '26%',
+      textStyle: {
+        color: '#344054',
+        fontSize: 15,
+        fontWeight: '500',
+      },
+    },
+    grid: {
+      left: 0,
+      top: 0,
+      right: 0,
+      bottom: 0,
+    },
+    color: ['#307300', '#e6f0e3'],
+    series: [
+      {
+        type: 'pie',
+        startAngle: '90',
+        avoidLabelOverlap: false,
+        label: {
+          show: true,
+          position: 'center',
+          padding: [30, 0, 0, 0],
+          textStyle: {
+            color: '#0c111d',
+            fontSize: 16,
+            fontWeight: '600',
+          },
+        },
+        labelLine: {
+          show: false,
+        },
+        emphasis: {
+          label: {
+            fontSize: 17,
+          },
+        },
+        hoverOffset: 2,
+        data: [
+          {
+            value: props.value,
+            name: props.label,
+          },
+          {
+            value: emptySpace,
+            itemStyle: {
+              color: '#e6f0e3',
+            },
+            emphasis: {
+              itemStyle: {
+                color: '#e6f0e3',
+              },
+            },
+          },
+        ],
+        radius: ['83%', '98%'],
+      },
+    ],
+  };
+};
