@@ -7,6 +7,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { NumberField, StringField, TextField } from '@waldur/form';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import { allowToUpdateService } from '@waldur/marketplace/common/registry';
 import { TENANT_TYPE } from '@waldur/openstack/constants';
@@ -105,6 +106,7 @@ export const ProvisioningConfigSection: FC<OfferingEditPanelProps> = (
       TENANT_TYPE,
       OFFERING_TYPE_CUSTOM_SCRIPTS,
       OFFERING_TYPE_BOOKING,
+      REMOTE_OFFERING_TYPE,
     ].includes(props.offering.type) ||
     (props.offering.type === TENANT_TYPE &&
       !allowToUpdateService(props.offering.type))

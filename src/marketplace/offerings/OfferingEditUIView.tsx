@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import {
   getCategory,
@@ -155,6 +156,7 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           BASIC_OFFERING_TYPE,
           OFFERING_TYPE_CUSTOM_SCRIPTS,
           OFFERING_TYPE_BOOKING,
+          REMOTE_OFFERING_TYPE,
         ].includes(offering.type) ||
         (offering.type === TENANT_TYPE && allowToUpdateService(offering.type))
           ? {
