@@ -58,10 +58,10 @@ export const IssueDetails: FunctionComponent = () => {
             </Card.Title>
           </Card.Header>
           <Card.Body>
-            {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'smax' ? (
-              <FormattedHtml html={linkify(issue?.description)} />
-            ) : (
+            {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
               <FormattedJira text={linkify(issue?.description)} />
+            ) : (
+              <FormattedHtml html={linkify(issue?.description)} />
             )}
           </Card.Body>
         </Card>

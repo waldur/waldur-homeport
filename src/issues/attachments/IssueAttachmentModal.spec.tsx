@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
-import { PureIssueAttachmentModal } from './IssueAttachmentModal';
+import { IssueAttachmentModal } from './IssueAttachmentModal';
 
 describe('IssueAttachmentModal', () => {
   const resolve = {
@@ -10,7 +10,7 @@ describe('IssueAttachmentModal', () => {
     name: 'panda.jpg',
   };
   const renderWrapper = (props?) =>
-    shallow(<PureIssueAttachmentModal resolve={resolve} {...props} />);
+    shallow(<IssueAttachmentModal resolve={resolve} {...props} />);
 
   it('renders image, title with correct link and name', () => {
     const wrapper = renderWrapper();

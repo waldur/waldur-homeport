@@ -116,7 +116,7 @@ interface FreeIPAConfiguration {
 interface SupportConfiguration {
   ENABLED: boolean;
   DISPLAY_REQUEST_TYPE: boolean;
-  ACTIVE_BACKEND_TYPE: string;
+  ACTIVE_BACKEND_TYPE: 'atlassian' | 'zammad' | 'smax';
 }
 
 export interface PluginConfiguration {

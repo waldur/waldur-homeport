@@ -1,10 +1,11 @@
-import DOMPurify from 'dompurify';
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import { ENV } from '@waldur/configs/default';
 import { formatMediumDateTime } from '@waldur/core/dateUtils';
+import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { FormattedJira } from '@waldur/core/FormattedJira';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { getAbbreviation } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -148,18 +149,18 @@ const PureIssueCommentItem: FunctionComponent<PureIssueCommentItemProps> = (
             )}
           </div>
         </div>
+
         <p
           className="fw-normal fs-5 text-gray-700 m-0"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(
-              ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'smax'
-                ? comment.description
-                : utils.formatJiraMarkup(comment.description),
-            ),
-          }}
           onClick={onCommentClick}
           aria-hidden="true"
-        />
+        >
+          {ENV.plugins.WALDUR_SUPPORT.ACTIVE_BACKEND_TYPE === 'atlassian' ? (
+            <FormattedJira text={comment.description} />
+          ) : (
+            <FormattedHtml html={comment.description} />
+          )}
+        </p>
         <IssueCommentsFormContainer
           formId={comment.uuid}
           defaultMessage={comment.description}
