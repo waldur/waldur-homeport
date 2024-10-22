@@ -117,6 +117,11 @@ const FreeIPAUsersList = lazyComponent(
   'FreeIPAUsersList',
 );
 
+const SystemInfoPage = lazyComponent(
+  () => import('./SystemInfoPage'),
+  'SystemInfoPage',
+);
+
 export const states: StateDeclaration[] = [
   {
     name: 'admin',
@@ -169,6 +174,16 @@ export const states: StateDeclaration[] = [
     url: '',
     data: {
       breadcrumb: () => translate('Accounts'),
+    },
+  },
+
+  {
+    name: 'admin-system-info',
+    url: 'system-info/',
+    parent: 'admin-settings',
+    component: SystemInfoPage,
+    data: {
+      breadcrumb: () => translate('System info'),
     },
   },
 
