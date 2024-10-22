@@ -12,6 +12,7 @@ interface ChartProps {
   height?: string;
   theme?: any;
   options: any;
+  className?: string;
 }
 
 class EChartComponent extends Component<ChartProps> {
@@ -92,11 +93,14 @@ class EChartComponent extends Component<ChartProps> {
   }
 
   render() {
-    const { width, height } = this.props;
+    const { width, height, className } = this.props;
     const { loading } = this.state;
     const style = { width, height };
     return (
-      <div className="content-center-center" style={style}>
+      <div
+        className={classNames('content-center-center', className)}
+        style={style}
+      >
         {loading && <LoadingSpinner />}
         <div
           className={classNames({ hidden: loading })}

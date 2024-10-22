@@ -6,6 +6,7 @@ interface ChangesAmountBadgeProps {
   showOnZero?: boolean;
   fractionDigits?: number;
   asBadge?: boolean;
+  unit?: string;
 }
 export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   changes,
@@ -13,6 +14,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   showOnZero,
   fractionDigits = 2,
   asBadge = true,
+  unit = '%',
 }) => {
   let className = asBadge ? 'badge badge-light-' : 'text-';
   const arrowClassName = asBadge ? '' : 'fs-4';
@@ -32,7 +34,8 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
       changes !== -Infinity ? (
         <span className={className}>
           <span className={arrowClassName}>↓</span>{' '}
-          {Math.abs(changes).toFixed(fractionDigits)}%
+          {Math.abs(changes).toFixed(fractionDigits)}
+          {unit}
         </span>
       ) : showOnInfinity ? (
         <span className={className + ' ' + arrowClassName}>↓</span>
@@ -40,12 +43,13 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
     ) : changes !== Infinity ? (
       <span className={className}>
         <span className={arrowClassName}>↑</span>{' '}
-        {changes.toFixed(fractionDigits)}%
+        {changes.toFixed(fractionDigits)}
+        {unit}
       </span>
     ) : showOnInfinity ? (
       <span className={className + ' ' + arrowClassName}>↑</span>
     ) : null
   ) : showOnZero ? (
-    <span className={className}>0%</span>
+    <span className={className}>0{unit}</span>
   ) : null;
 };

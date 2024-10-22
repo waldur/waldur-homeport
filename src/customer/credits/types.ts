@@ -9,6 +9,7 @@ export interface CustomerCredit {
   minimal_consumption: string; // number
   offerings: Pick<Offering, 'uuid' | 'name' | 'type' | 'url'>[];
   value: string; // number
+  allocated_to_projects: number;
 }
 
 export interface CustomerCreditFormData {
