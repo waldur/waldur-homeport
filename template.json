@@ -10651,9 +10651,9 @@
     "description": "administration/providers/ProviderForm.tsx",
     "message": "The endpoint for user details management."
   },
-  "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}": {
+  "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}, {options_KEY}, {backend_metadata_KEY}": {
     "description": "marketplace/offerings/update/overview/EditGettingStartedDialog.tsx",
-    "message": "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}"
+    "message": "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}, {options_KEY}, {backend_metadata_KEY}"
   },
   "The image rendered at hero section of HomePort landing page.": {
     "description": "SettingsDescription.ts",
