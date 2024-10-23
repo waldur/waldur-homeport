@@ -23,12 +23,13 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { CostPolicyFormData, CostPolicyType } from './types';
 import { getCostPolicyActionOptions } from './utils';
 
-interface CostPolicyCreateFormProps
+interface CostPolicyFormProps
   extends Partial<InjectedFormProps<CostPolicyFormData>> {
   type: CostPolicyType;
+  isEdit: boolean;
 }
 
-export const CostPolicyCreateForm: FC<CostPolicyCreateFormProps> = (props) => {
+export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
   const currentOrganization = useSelector(getCustomer);
 
   return (
@@ -50,6 +51,7 @@ export const CostPolicyCreateForm: FC<CostPolicyCreateFormProps> = (props) => {
             )
           }
           isMulti
+          isDisabled={props.isEdit}
           getOptionValue={(option) => option.url}
           getOptionLabel={(option) =>
             `${option.name} / est. ${ProjectCostField({ row: option })} ` +
@@ -70,6 +72,7 @@ export const CostPolicyCreateForm: FC<CostPolicyCreateFormProps> = (props) => {
             })
           }
           isMulti
+          isDisabled={props.isEdit}
           getOptionValue={(option) => option.url}
           getOptionLabel={(option) => option.name}
           noOptionsMessage={() => translate('No organizations')}
