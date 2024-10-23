@@ -4,8 +4,9 @@ import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
 import {
   getComponentUsages,
   getComponentUserUsages,
+  getProviderOffering,
   getPublicOffering,
-  getResourcePlanPeriods,
+  getProviderResourcePlanPeriods,
 } from '@waldur/marketplace/common/api';
 
 import { UsageReportContext, ResourcePlanPeriod } from './types';
@@ -26,13 +27,15 @@ export const getPeriodLabel = (
   }
 };
 
-export const getUsageComponents = async (params: UsageReportContext) => {
+export const getProviderUsageComponents = async (
+  params: UsageReportContext,
+) => {
   let components = null;
   if (params.offering_uuid) {
-    const offering = await getPublicOffering(params.offering_uuid);
+    const offering = await getProviderOffering(params.offering_uuid);
     components = await getUsageBasedOfferingComponents(offering);
   }
-  const periods = await getResourcePlanPeriods(params.resource_uuid);
+  const periods = await getProviderResourcePlanPeriods(params.resource_uuid);
   const options =
     periods.length > 0
       ? periods.map((period) => ({

@@ -5,7 +5,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { MetronicModalDialog } from '@waldur/modal/MetronicModalDialog';
 
-import { getUsageComponents } from './api';
+import { getProviderUsageComponents } from './api';
 import { ResourceUsageFormContainer } from './ResourceUsageFormContainer';
 import { ResourceUsageSubmitButton } from './ResourceUsageSubmitButton';
 import { UsageReportContext } from './types';
@@ -18,7 +18,7 @@ export const ResourceCreateUsageDialog: FunctionComponent<
   ResourceCreateUsageDialogProps
 > = (props) => {
   const { loading, error, value } = useAsync(
-    () => getUsageComponents(props.resolve),
+    () => getProviderUsageComponents(props.resolve),
     [props.resolve],
   );
 
