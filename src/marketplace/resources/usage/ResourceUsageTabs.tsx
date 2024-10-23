@@ -7,12 +7,13 @@ import { ResourceUsageChart } from '@waldur/marketplace/resources/usage/Resource
 import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { ResourceUsageTable } from './ResourceUsageTable';
-import { ComponentUsage } from './types';
+import { ComponentUsage, ComponentUserUsage } from './types';
 import { getBillingTypeLabel } from './utils';
 
 interface ResourceUsageTabsProps {
   components: OfferingComponent[];
   usages: ComponentUsage[];
+  userUsages?: ComponentUserUsage[];
   months?: number;
   colors: string[];
   displayMode?: 'chart' | 'table';
@@ -54,6 +55,7 @@ export const ResourceUsageTabs: FunctionComponent<ResourceUsageTabsProps> = (
               <ResourceUsageChart
                 offeringComponent={component}
                 usages={props.usages}
+                userUsages={props.userUsages}
                 months={props.months}
                 chartColor={props.colors[index]}
               />

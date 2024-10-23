@@ -567,6 +567,10 @@
     "description": "proposals/routes.ts",
     "message": "All reviews"
   },
+  "All users": {
+    "description": "marketplace/resources/details/UsageCard.tsx",
+    "message": "All users"
+  },
   "All": {
     "description": "customer/list/AccountingRunningField.tsx, customer/list/ServiceProviderFilter.tsx, invitations/GroupInvitationsFilter.tsx, marketplace/offerings/update/attributes/utils.tsx, rancher/node/NodeRoleField.tsx",
     "message": "All"
@@ -3576,7 +3580,7 @@
     "message": "Error while deleting offering."
   },
   "Error": {
-    "description": "administration/dashboard/AdministrationProfile.tsx, core/InfiniteList.tsx, marketplace/deploy/steps/FormCloudStep.tsx",
+    "description": "administration/dashboard/AdministrationProfile.tsx, core/InfiniteList.tsx, marketplace/deploy/steps/FormCloudStep.tsx, marketplace/resources/details/UsageCard.tsx",
     "message": "Error"
   },
   "Esimated price per month": {

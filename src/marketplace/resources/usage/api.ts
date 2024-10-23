@@ -3,11 +3,10 @@ import { DateTime } from 'luxon';
 import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
 import {
   getComponentUsages,
+  getComponentUserUsages,
   getPublicOffering,
   getResourcePlanPeriods,
 } from '@waldur/marketplace/common/api';
-import { SLURM_PLUGIN } from '@waldur/slurm/constants';
-import { parseSlurmUsage } from '@waldur/slurm/details/utils';
 
 import { UsageReportContext, ResourcePlanPeriod } from './types';
 
@@ -93,9 +92,13 @@ export const getComponentsAndUsages = async (
     : undefined;
 
   let usages;
+  let userUsages;
   try {
     usages = await getComponentUsages(resource_uuid, date_after, {
       fields: ['type', 'usage', 'date'],
+    });
+    userUsages = await getComponentUserUsages(resource_uuid, date_after, {
+      fields: ['component_type', 'usage', 'date'],
     });
   } catch (error) {
     throw new Error(
@@ -103,9 +106,5 @@ export const getComponentsAndUsages = async (
     );
   }
 
-  if (offering.type === SLURM_PLUGIN) {
-    usages = usages.map(parseSlurmUsage);
-  }
-
-  return { components, usages };
+  return { components, usages, userUsages };
 };

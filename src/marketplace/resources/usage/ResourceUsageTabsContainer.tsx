@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { useAsync } from 'react-use';
 
 import { generateColors } from '@waldur/core/generateColors';
@@ -21,11 +21,12 @@ interface ResourceUsageTabsContainerProps {
   hideHeader?: boolean;
   displayMode?: 'chart' | 'table';
   offering?: any;
+  users?: any[];
 }
 
 export const ResourceUsageTabsContainer: FunctionComponent<
   ResourceUsageTabsContainerProps
-> = ({ resource, months, hideHeader, displayMode, offering }) => {
+> = ({ resource, months, hideHeader, displayMode, offering, users }) => {
   const { loading, error, value } = useAsync(
     () =>
       getComponentsAndUsages(
@@ -35,6 +36,18 @@ export const ResourceUsageTabsContainer: FunctionComponent<
         resource.offering_uuid,
       ),
     [resource, months],
+  );
+
+  const userUsages = useMemo(
+    () =>
+      users?.length && value?.userUsages
+        ? value.userUsages.filter((usage) =>
+            users.some(
+              (user) => usage.username === user.offering_user_username,
+            ),
+          )
+        : value?.userUsages,
+    [value, users],
   );
 
   return loading ? (
@@ -53,6 +66,7 @@ export const ResourceUsageTabsContainer: FunctionComponent<
       <ResourceUsageTabs
         components={value.components}
         usages={value.usages}
+        userUsages={userUsages}
         months={months}
         colors={generateColors(value.components.length, {
           colorStart: 0.25,
