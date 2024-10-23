@@ -1,4 +1,5 @@
 import { translate } from '@waldur/i18n';
+import { ThemeName } from '@waldur/navigation/theme/types';
 
 import { LINE_CHART_COLOR } from './constants';
 import { Chart, RingChartOption } from './types';
@@ -131,7 +132,10 @@ export const getLineChartOptions = (chart: Chart, hLines?: HLine[]) =>
     LINE_CHART_COLOR,
   );
 
-export const getRingChartOptions = (props: RingChartOption) => {
+export const getRingChartOptions = (
+  props: RingChartOption,
+  theme: ThemeName,
+) => {
   const emptySpace = (props.max || 100) - props.value;
   return {
     title: {
@@ -139,7 +143,7 @@ export const getRingChartOptions = (props: RingChartOption) => {
       left: 'center',
       top: '26%',
       textStyle: {
-        color: '#344054',
+        color: theme === 'light' ? '#667085' : '#98a2b3',
         fontSize: 15,
         fontWeight: '500',
       },
@@ -150,7 +154,7 @@ export const getRingChartOptions = (props: RingChartOption) => {
       right: 0,
       bottom: 0,
     },
-    color: ['#307300', '#e6f0e3'],
+    color: theme === 'light' ? ['#307300', '#e6f0e3'] : ['#78bf69', '#2b3d2f'],
     series: [
       {
         type: 'pie',
@@ -161,7 +165,7 @@ export const getRingChartOptions = (props: RingChartOption) => {
           position: 'center',
           padding: [30, 0, 0, 0],
           textStyle: {
-            color: '#0c111d',
+            color: theme === 'light' ? '#101828' : '#f9fafb',
             fontSize: 16,
             fontWeight: '600',
           },
@@ -183,11 +187,11 @@ export const getRingChartOptions = (props: RingChartOption) => {
           {
             value: emptySpace,
             itemStyle: {
-              color: '#e6f0e3',
+              color: theme === 'light' ? '#e6f0e3' : '#2b3d2f',
             },
             emphasis: {
               itemStyle: {
-                color: '#e6f0e3',
+                color: theme === 'light' ? '#e6f0e3' : '#2b3d2f',
               },
             },
           },
