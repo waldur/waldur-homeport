@@ -30,6 +30,17 @@ export const GettingStartedCard = ({ resource, offering }) => {
               backend_id: resource.effective_id || resource.backend_id,
               resource_name: resource.name,
               resource_username: resource.username || 'username',
+              ...Object.fromEntries(
+                Object.entries(resource.backend_metadata || {}).map(
+                  ([key, value]) => [`backend_metadata_${key}`, value],
+                ),
+              ),
+              ...Object.fromEntries(
+                Object.entries(resource.options || {}).map(([key, value]) => [
+                  `options_${key}`,
+                  value,
+                ]),
+              ),
             }}
           />
         ) : (

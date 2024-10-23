@@ -67,7 +67,7 @@ export const EditGettingStartedDialog = connect(
                     label={
                       <Tip
                         label={translate(
-                          'The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}',
+                          'The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}, {options_key}, {backend_metadata_key}',
                         )}
                         id="template"
                       >
@@ -95,6 +95,8 @@ export const EditGettingStartedDialog = connect(
                   resource_name: 'RESOURCE_NAME',
                   resource_username: 'RESOURCE_USERNAME',
                   backend_id: 'BACKEND_ID',
+                  options_key: 'OPTIONS_VALUE',
+                  backend_metadata_key: 'BACKEND_METADATA_VALUE',
                 }}
               />
             </Col>
