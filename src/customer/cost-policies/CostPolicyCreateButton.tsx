@@ -9,9 +9,9 @@ import { Customer, Project } from '@waldur/workspace/types';
 import { createOrganizationCostPolicy, createProjectCostPolicy } from './api';
 import { CostPolicyFormData, CostPolicyType } from './types';
 
-const CostPolicyCreateDialog = lazyComponent(
-  () => import('./CostPolicyCreateDialog'),
-  'CostPolicyCreateDialog',
+const CostPolicyFormDialog = lazyComponent(
+  () => import('./CostPolicyFormDialog'),
+  'CostPolicyFormDialog',
 );
 
 interface SubmitedFormData {
@@ -45,19 +45,17 @@ export const CostPolicyCreateButton = ({
   type,
 }: CostPolicyCreateButtonProps) => {
   const dispatch = useDispatch();
-  const openCostPolicyCreateDialog = useCallback(
+  const openCostPolicyFormDialog = useCallback(
     () =>
       dispatch(
-        openModalDialog(CostPolicyCreateDialog, {
+        openModalDialog(CostPolicyFormDialog, {
           size: 'lg',
+          formId: 'CostPolicyCreateForm',
           onSubmit: (formData) => {
             return submit(formData, type).then(() => {
               dispatch(closeModalDialog());
               refetch();
             });
-          },
-          onCancel: () => {
-            dispatch(closeModalDialog());
           },
           type,
         }),
@@ -65,5 +63,5 @@ export const CostPolicyCreateButton = ({
     [dispatch],
   );
 
-  return <AddButton action={openCostPolicyCreateDialog} />;
+  return <AddButton action={openCostPolicyFormDialog} />;
 };

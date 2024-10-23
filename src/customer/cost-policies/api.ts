@@ -1,5 +1,5 @@
 import { ENV } from '@waldur/configs/default';
-import { deleteById, getList, post, sendForm } from '@waldur/core/api';
+import { deleteById, getList, post, put, sendForm } from '@waldur/core/api';
 import {
   OfferingCostPolicyFormData,
   OfferingUsagePolicyFormData,
@@ -18,6 +18,13 @@ export const createProjectCostPolicy = (formData: CostPolicyFormData) => {
   );
 };
 
+export const updateProjectCostPolicy = (
+  uuid: string,
+  formData: CostPolicyFormData,
+) => {
+  return put(`/marketplace-project-estimated-cost-policies/${uuid}/`, formData);
+};
+
 export const deleteProjectCostPolicy = (uuid: string) =>
   deleteById('/marketplace-project-estimated-cost-policies/', uuid);
 
@@ -25,6 +32,16 @@ export const createOrganizationCostPolicy = (formData: CostPolicyFormData) => {
   return sendForm(
     'POST',
     `${ENV.apiEndpoint}api/marketplace-customer-estimated-cost-policies/`,
+    formData,
+  );
+};
+
+export const updateOrganizationCostPolicy = (
+  uuid: string,
+  formData: CostPolicyFormData,
+) => {
+  return put(
+    `/marketplace-customer-estimated-cost-policies/${uuid}/`,
     formData,
   );
 };
