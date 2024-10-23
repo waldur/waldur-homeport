@@ -32,7 +32,11 @@ import { Customer, Project } from '@waldur/workspace/types';
 
 import { PlanUsageRow } from '../../reporting/plan-usage/types';
 import { Resource } from '../resources/types';
-import { ComponentUsage, ResourcePlanPeriod } from '../resources/usage/types';
+import {
+  ComponentUsage,
+  ComponentUserUsage,
+  ResourcePlanPeriod,
+} from '../resources/usage/types';
 
 export const getPlugins = () =>
   get<PluginMetadata[]>('/marketplace-plugins/').then(
@@ -63,6 +67,15 @@ export const getComponentUsages = (
   params?: {},
 ) =>
   getAll<ComponentUsage>('/marketplace-component-usages/', {
+    params: { resource_uuid, date_after, ...(params || {}) },
+  });
+
+export const getComponentUserUsages = (
+  resource_uuid: string,
+  date_after?: string,
+  params?: {},
+) =>
+  getAll<ComponentUserUsage>('/marketplace-component-user-usages/', {
     params: { resource_uuid, date_after, ...(params || {}) },
   });
 
@@ -177,6 +190,9 @@ export const getResourceDetails = (resourceId: string) =>
   get<any>(`/marketplace-resources/${resourceId}/details/`).then(
     (response) => response.data,
   );
+
+export const getResourceTeam = (resourceId: string) =>
+  getAll<any>(`/marketplace-resources/${resourceId}/team/`);
 
 export const getResourcePlanPeriods = (resourceId: string) =>
   getAll<ResourcePlanPeriod>(

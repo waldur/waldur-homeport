@@ -38,6 +38,30 @@ export interface ComponentUsage {
   recurring: boolean;
 }
 
+export interface ComponentUserUsage {
+  uuid: string;
+  user: string; // url
+  username: string;
+  component_usage: string; // url
+  measured_unit: string;
+  usage: number;
+  component_type: string;
+  date: string;
+  billing_period?: string;
+  description: string;
+  backend_id: string;
+  resource_name: string;
+  resource_uuid: string;
+  offering_name: string;
+  offering_uuid: string;
+  project_name: string;
+  project_uuid: string;
+  customer_name: string;
+  customer_uuid: string;
+  created: string;
+  modified: string;
+}
+
 export interface ResourcePlanPeriod {
   uuid: string;
   plan_name: string;

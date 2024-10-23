@@ -1,8 +1,12 @@
 import { ChartBar, Table } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { Button, Card, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { getResourceTeam } from '@waldur/marketplace/common/api';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 import { getUsageHistoryPeriodOptions } from '../usage/utils';
@@ -26,6 +30,18 @@ export const UsageCard = ({ resource, offering }) => {
       : periodOptions[0].value,
   );
 
+  const [users, setUsers] = useState([]);
+  const {
+    data: team,
+    isLoading: teamIsLoading,
+    error: teamError,
+    refetch: refetchTeam,
+  } = useQuery(
+    ['ResourceTeam', resource.uuid],
+    () => getResourceTeam(resource.uuid),
+    { staleTime: 3 * 60 * 1000 },
+  );
+
   return resource.is_usage_based || resource.is_limit_based ? (
     <Card className="card-bordered">
       <Card.Header>
@@ -33,6 +49,22 @@ export const UsageCard = ({ resource, offering }) => {
           <h3>{translate('Usage history')}</h3>
         </Card.Title>
         <div className="card-toolbar gap-4">
+          {teamError ? (
+            <LoadingErred message={translate('Error')} loadData={refetchTeam} />
+          ) : (
+            <Select
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.full_name}
+              value={users}
+              isMulti
+              placeholder={translate('All users')}
+              onChange={(value) => setUsers(value)}
+              options={team || []}
+              isLoading={teamIsLoading}
+              className="metronic-select-container min-w-150px min-w-lg-200px"
+              classNamePrefix="metronic-select"
+            />
+          )}
           {periodOptions.length > 1 && (
             <ToggleButtonGroup
               type="radio"
@@ -73,6 +105,7 @@ export const UsageCard = ({ resource, offering }) => {
           months={period}
           hideHeader={true}
           displayMode={mode}
+          users={users}
         />
       </Card.Body>
     </Card>
