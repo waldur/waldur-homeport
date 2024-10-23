@@ -55,9 +55,14 @@ const PureMoveResourceDialog: FunctionComponent<any> = (props) => {
   return (
     <form onSubmit={props.handleSubmit(submitRequest)}>
       <ModalDialog
-        title={translate('Move resource {resourceName}', {
-          resourceName: props.resolve.resource.name,
-        })}
+        title={translate(
+          'Move resource {resourceName} from {projectName} ({customerName})',
+          {
+            resourceName: props.resolve.resource.name,
+            projectName: props.resolve.resource.project_name,
+            customerName: props.resolve.resource.customer_name,
+          },
+        )}
         footer={
           <>
             <CloseDialogButton />
