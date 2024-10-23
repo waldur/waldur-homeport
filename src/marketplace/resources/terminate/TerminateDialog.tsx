@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { terminateResource } from '@waldur/marketplace/common/api';
 import { orderCanBeApproved as orderCanBeApprovedSelector } from '@waldur/marketplace/orders/actions/selectors';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -51,9 +51,14 @@ export const TerminateDialog = reduxForm<
   return (
     <form onSubmit={props.handleSubmit(callback)}>
       <ModalDialog
-        title={translate('Terminate resource {resourceName}', {
-          resourceName: resource.name,
-        })}
+        title={translate(
+          'Terminate resource {resourceName} from {projectName} ({customerName})',
+          {
+            resourceName: resource.name,
+            projectName: resource.project_name,
+            customerName: resource.customer_name,
+          },
+        )}
         footer={
           <>
             <CloseDialogButton />
@@ -70,10 +75,13 @@ export const TerminateDialog = reduxForm<
         }
       >
         {translate(
-          'Are you sure you would like to terminate resource {resourceName}?',
+          'Are you sure you would like to terminate resource {resourceName} from project {projectName} ({customerName})?',
           {
-            resourceName: resource.name,
+            resourceName: <strong>{resource.name}</strong>,
+            projectName: <strong>{resource.project_name}</strong>,
+            customerName: <strong>{resource.customer_name}</strong>,
           },
+          formatJsxTemplate,
         )}
         {dialogSubtitle && <FormattedHtml html={dialogSubtitle} />}
       </ModalDialog>

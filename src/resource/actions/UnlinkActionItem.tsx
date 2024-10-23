@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { post } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getUser } from '@waldur/workspace/selectors';
@@ -14,12 +14,15 @@ import { ActionItem } from './ActionItem';
 
 const getConfirmationText = (resource) => {
   const context = {
-    name: resource.name.toUpperCase(),
     resourceType: formatResourceType(resource) || 'resource',
+    resourceName: <strong>{resource.name}</strong>,
+    projectName: <strong>{resource.project_name}</strong>,
+    customerName: <strong>{resource.customer_name}</strong>,
   };
   return translate(
-    'Are you sure you want to unlink {name} {resourceType}? ',
+    'Are you sure you want to unlink {resourceName} {resourceType} from {projectName} ({customerName})? ',
     context,
+    formatJsxTemplate,
   );
 };
 
