@@ -4,7 +4,8 @@ export interface CustomerCredit {
   uuid: string;
   url: string;
   customer: string;
-  customer_name?: string;
+  customer_name: string;
+  customer_uuid: string;
   end_date: string;
   minimal_consumption: string; // number
   consumption_last_month: number;
