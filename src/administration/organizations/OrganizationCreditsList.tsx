@@ -2,13 +2,22 @@ import { FC } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Link } from '@waldur/core/Link';
 import { CreateCreditButton } from '@waldur/customer/credits/CreateCreditButton';
 import { CreditActions } from '@waldur/customer/credits/CreditActions';
 import { CreditHistoryLogButton } from '@waldur/customer/credits/CreditHistoryLogButton';
 import { CustomerCredit } from '@waldur/customer/credits/types';
 import { translate } from '@waldur/i18n';
 import { createFetcher, Table } from '@waldur/table';
-import { renderFieldOrDash, useTable } from '@waldur/table/utils';
+import { useTable } from '@waldur/table/utils';
+
+const OrganizationField = ({ row }) => (
+  <Link
+    state="organization.dashboard"
+    params={{ uuid: row.customer_uuid }}
+    label={row.customer_name}
+  />
+);
 
 export const OrganizationCreditsList: FC<{}> = () => {
   const tableProps = useTable({
@@ -23,7 +32,7 @@ export const OrganizationCreditsList: FC<{}> = () => {
       columns={[
         {
           title: translate('Organization name'),
-          render: ({ row }) => renderFieldOrDash(row.customer_name),
+          render: OrganizationField,
           export: 'customer_name',
         },
         {
