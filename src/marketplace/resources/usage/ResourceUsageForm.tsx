@@ -101,28 +101,28 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
 
   return (
     <form onSubmit={props.handleSubmit(props.submitReport)}>
-      <FormContainer submitting={props.submitting}>
-        <div className="text-grey-500 mb-4">
-          <SummaryField
-            label={translate('Client organization')}
-            value={props.params.customer_name}
-          />
-          ,{' '}
-          <SummaryField
-            label={translate('Client project')}
-            value={props.params.project_name}
-          />
-          ,{' '}
-          {props.params.backend_id && (
-            <>
-              <SummaryField
-                label={translate('Backend ID')}
-                value={props.params.backend_id}
-              />
-              ,{' '}
-            </>
-          )}
-          {props.periods.length > 1 ? (
+      <div className="text-grey-500 mb-4">
+        <SummaryField
+          label={translate('Client organization')}
+          value={props.params.customer_name}
+        />
+        ,{' '}
+        <SummaryField
+          label={translate('Client project')}
+          value={props.params.project_name}
+        />
+        ,{' '}
+        {props.params.backend_id && (
+          <>
+            <SummaryField
+              label={translate('Backend ID')}
+              value={props.params.backend_id}
+            />
+            ,{' '}
+          </>
+        )}
+        {props.periods.length > 1 ? (
+          <FormContainer submitting={props.submitting}>
             <SelectField
               name="period"
               label={translate('Plan')}
@@ -133,172 +133,169 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
               onChange={props.onPeriodChange}
               isClearable={false}
             />
-          ) : (
-            <StaticPlanField />
-          )}
-        </div>
-        {props.components.length > 0 && (
-          <Tab.Container defaultActiveKey={props.components[0].uuid}>
-            <div className="d-flex">
-              <Nav
-                ref={refNav}
-                variant="tabs"
-                className="nav-line-tabs flex-grow-1 mb-4"
-              >
-                {props.components.map((component) => {
-                  const isHidden = wrappedComponents.some(
-                    (c) => component.uuid === c.uuid,
-                  );
-                  return (
-                    <Nav.Item
-                      key={component.uuid}
-                      className={isHidden && 'h-0'}
-                    >
-                      <Nav.Link eventKey={component.uuid}>
-                        {Boolean(errors.components?.[component.type]) && (
-                          <Tip
-                            id={`tip-${component.uuid}-error`}
-                            label={
-                              isHidden ? null : (
-                                <FieldError
-                                  error={errors.components[component.type]}
-                                />
-                              )
-                            }
-                            autoWidth
-                          >
-                            <WarningCircle
-                              size={18}
-                              weight="bold"
-                              className="text-danger me-1"
-                            />
-                          </Tip>
-                        )}
-                        {component.name}
-                        <Tip
-                          id={`tip-${component.uuid}-type`}
-                          label={
-                            isHidden
-                              ? null
-                              : getBillingTypeLabel(component.billing_type)
-                          }
-                        >
-                          <Question size={18} weight="bold" className="ms-1" />
-                        </Tip>
-                      </Nav.Link>
-                    </Nav.Item>
-                  );
-                })}
-              </Nav>
-              {wrappedComponents.length > 0 ? (
-                <Nav variant="tabs" className="nav-line-tabs mb-4">
-                  <Nav.Item>
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="active-light-primary"
-                        className="btn-icon btn-text-grey-500 no-arrow w-35px h-35px"
-                      >
-                        <DotsThree size={22} weight="bold" />
-                        {wrappedComponents.some((comp) =>
-                          Boolean(errors.components?.[comp.type]),
-                        ) && (
-                          <HeaderButtonBullet
-                            size={10}
-                            blink={false}
-                            variant="danger"
-                            className="me-n2"
-                          />
-                        )}
-                      </Dropdown.Toggle>
-                      <Dropdown.Menu>
-                        <div className="mh-200px overflow-auto">
-                          {wrappedComponents.map((component) => (
-                            <Dropdown.Item
-                              key={component.uuid}
-                              eventKey={component.uuid}
-                              className="d-flex justify-content-between"
-                            >
-                              {Boolean(errors.components?.[component.type]) && (
-                                <Tip
-                                  id={`tip-${component.uuid}-error`}
-                                  label={
-                                    <FieldError
-                                      error={errors.components[component.type]}
-                                    />
-                                  }
-                                  autoWidth
-                                >
-                                  <WarningCircle
-                                    size={18}
-                                    weight="bold"
-                                    className="text-danger me-1"
-                                  />
-                                </Tip>
-                              )}
-                              {component.name}
-                              <Tip
-                                id={`tip-${component.uuid}-type`}
-                                label={getBillingTypeLabel(
-                                  component.billing_type,
-                                )}
-                              >
-                                <Question size={18} className="ms-1" />
-                              </Tip>
-                            </Dropdown.Item>
-                          ))}
-                        </div>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Nav.Item>
-                </Nav>
-              ) : (
-                <div className="w-35px" />
-              )}
-            </div>
-            <Tab.Content>
-              {props.components.map((component) => (
-                <Tab.Pane key={component.uuid} eventKey={component.uuid}>
-                  <FormContainer submitting={props.submitting} space={4}>
-                    <NumberField
-                      name={`components.${component.type}.amount`}
-                      key={`${component.uuid}.amount`}
-                      hideLabel
-                      description={component.description}
-                      unit={component.measured_unit}
-                      max={
-                        component.limit_period
-                          ? component.limit_amount
-                          : undefined
-                      }
-                      required={true}
-                      validate={required}
-                      placeholder={translate('Amount') + ' *'}
-                    />
-
-                    <TextField
-                      name={`components.${component.type}.description`}
-                      key={`${component.uuid}.description`}
-                      placeholder={translate('Enter a description') + '...'}
-                      hideLabel
-                      rows={3}
-                    />
-
-                    <AwesomeCheckboxField
-                      name={`components.${component.type}.recurring`}
-                      key={`${component.uuid}.recurring`}
-                      label={translate(
-                        'Reported value is reused every month until changed.',
-                      )}
-                      hideLabel
-                      spaceless
-                    />
-                  </FormContainer>
-                </Tab.Pane>
-              ))}
-            </Tab.Content>
-          </Tab.Container>
+          </FormContainer>
+        ) : (
+          <StaticPlanField />
         )}
-      </FormContainer>
+      </div>
+      {props.components.length > 0 && (
+        <Tab.Container defaultActiveKey={props.components[0].uuid}>
+          <div className="d-flex">
+            <Nav
+              ref={refNav}
+              variant="tabs"
+              className="nav-line-tabs flex-grow-1 mb-4"
+            >
+              {props.components.map((component) => {
+                const isHidden = wrappedComponents.some(
+                  (c) => component.uuid === c.uuid,
+                );
+                return (
+                  <Nav.Item key={component.uuid} className={isHidden && 'h-0'}>
+                    <Nav.Link eventKey={component.uuid}>
+                      {Boolean(errors.components?.[component.type]) && (
+                        <Tip
+                          id={`tip-${component.uuid}-error`}
+                          label={
+                            isHidden ? null : (
+                              <FieldError
+                                error={errors.components[component.type]}
+                              />
+                            )
+                          }
+                          autoWidth
+                        >
+                          <WarningCircle
+                            size={18}
+                            weight="bold"
+                            className="text-danger me-1"
+                          />
+                        </Tip>
+                      )}
+                      {component.name}
+                      <Tip
+                        id={`tip-${component.uuid}-type`}
+                        label={
+                          isHidden
+                            ? null
+                            : getBillingTypeLabel(component.billing_type)
+                        }
+                      >
+                        <Question size={18} weight="bold" className="ms-1" />
+                      </Tip>
+                    </Nav.Link>
+                  </Nav.Item>
+                );
+              })}
+            </Nav>
+            {wrappedComponents.length > 0 ? (
+              <Nav variant="tabs" className="nav-line-tabs mb-4">
+                <Nav.Item>
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant="active-light-primary"
+                      className="btn-icon btn-text-grey-500 no-arrow w-35px h-35px"
+                    >
+                      <DotsThree size={22} weight="bold" />
+                      {wrappedComponents.some((comp) =>
+                        Boolean(errors.components?.[comp.type]),
+                      ) && (
+                        <HeaderButtonBullet
+                          size={10}
+                          blink={false}
+                          variant="danger"
+                          className="me-n2"
+                        />
+                      )}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <div className="mh-200px overflow-auto">
+                        {wrappedComponents.map((component) => (
+                          <Dropdown.Item
+                            key={component.uuid}
+                            eventKey={component.uuid}
+                            className="d-flex justify-content-between"
+                          >
+                            {Boolean(errors.components?.[component.type]) && (
+                              <Tip
+                                id={`tip-${component.uuid}-error`}
+                                label={
+                                  <FieldError
+                                    error={errors.components[component.type]}
+                                  />
+                                }
+                                autoWidth
+                              >
+                                <WarningCircle
+                                  size={18}
+                                  weight="bold"
+                                  className="text-danger me-1"
+                                />
+                              </Tip>
+                            )}
+                            {component.name}
+                            <Tip
+                              id={`tip-${component.uuid}-type`}
+                              label={getBillingTypeLabel(
+                                component.billing_type,
+                              )}
+                            >
+                              <Question size={18} className="ms-1" />
+                            </Tip>
+                          </Dropdown.Item>
+                        ))}
+                      </div>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Nav.Item>
+              </Nav>
+            ) : (
+              <div className="w-35px" />
+            )}
+          </div>
+          <Tab.Content>
+            {props.components.map((component) => (
+              <Tab.Pane key={component.uuid} eventKey={component.uuid}>
+                <FormContainer submitting={props.submitting} space={4}>
+                  <NumberField
+                    name={`components.${component.type}.amount`}
+                    key={`${component.uuid}.amount`}
+                    hideLabel
+                    description={component.description}
+                    unit={component.measured_unit}
+                    max={
+                      component.limit_period
+                        ? component.limit_amount
+                        : undefined
+                    }
+                    required={true}
+                    validate={required}
+                    placeholder={translate('Amount') + ' *'}
+                  />
+
+                  <TextField
+                    name={`components.${component.type}.description`}
+                    key={`${component.uuid}.description`}
+                    placeholder={translate('Enter a description') + '...'}
+                    hideLabel
+                    rows={3}
+                  />
+
+                  <AwesomeCheckboxField
+                    name={`components.${component.type}.recurring`}
+                    key={`${component.uuid}.recurring`}
+                    label={translate(
+                      'Reported value is reused every month until changed.',
+                    )}
+                    hideLabel
+                    spaceless
+                  />
+                </FormContainer>
+              </Tab.Pane>
+            ))}
+          </Tab.Content>
+        </Tab.Container>
+      )}
     </form>
   );
 };
