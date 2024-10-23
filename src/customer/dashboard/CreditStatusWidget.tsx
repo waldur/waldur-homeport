@@ -31,7 +31,7 @@ export const CreditStatusWidget: FC<CreditStatusWidgetProps> = (props) => {
               {
                 amount: (
                   <ChangesAmountBadge
-                    changes={0}
+                    changes={credit.consumption_last_month}
                     showOnInfinity
                     showOnZero
                     asBadge={false}
