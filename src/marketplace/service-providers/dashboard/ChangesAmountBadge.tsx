@@ -43,7 +43,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
     ) : changes !== Infinity ? (
       <span className={className}>
         <span className={arrowClassName}>↑</span>{' '}
-        {changes.toFixed(fractionDigits)}
+        {changes?.toFixed(fractionDigits)}
         {unit}
       </span>
     ) : showOnInfinity ? (

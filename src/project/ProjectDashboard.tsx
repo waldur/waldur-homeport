@@ -10,6 +10,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useCreateInvitation } from '@waldur/invitations/actions/hooks';
 import { AggregateLimitWidget } from '@waldur/marketplace/aggregate-limits/AggregateLimitWidget';
+import { getProjectStats } from '@waldur/marketplace/aggregate-limits/api';
 import { fetchSelectProjectUsers } from '@waldur/permissions/api';
 import { isVisible } from '@waldur/store/config';
 import { RootState } from '@waldur/store/reducers';
@@ -17,6 +18,16 @@ import { getProject, getUser } from '@waldur/workspace/selectors';
 
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
 import { getProjectTeamChart } from './utils';
+
+const shouldShowAggregateLimitWidget = (uuid) => {
+  const { data } = useQuery(
+    ['project-stats', uuid],
+    () => getProjectStats(uuid),
+    { refetchOnWindowFocus: false, staleTime: 60 * 1000 },
+  );
+
+  return data?.data.components?.length > 0;
+};
 
 export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldConcealPrices = useSelector((state: RootState) =>
@@ -45,7 +56,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   }
   return (
     <>
-      <Row>
+      <Row style={{ height: '18rem' }}>
         {!shouldConcealPrices && (
           <Col md={6} sm={12} className="mb-6">
             <ProjectDashboardCostLimits project={project} />
@@ -67,11 +78,13 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           />
         </Col>
       </Row>
-      <Row style={{ minHeight: '14rem' }}>
-        <Col md={6} sm={12} className="mb-6">
-          <AggregateLimitWidget project={project} />
-        </Col>
-      </Row>
+      {shouldShowAggregateLimitWidget(project.uuid) && (
+        <Row style={{ height: '18rem' }}>
+          <Col md={6} sm={12} className="mb-6">
+            <AggregateLimitWidget project={project} />
+          </Col>
+        </Row>
+      )}
       {project.description ? (
         <Panel title={translate('Description')}>
           <p>{project.description}</p>
