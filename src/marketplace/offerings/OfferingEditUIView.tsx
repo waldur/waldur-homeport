@@ -5,7 +5,6 @@ import { useMemo } from 'react';
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import {
   getCategory,
@@ -16,15 +15,11 @@ import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/utils';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
-import {
-  BASIC_OFFERING_TYPE,
-  SUPPORT_OFFERING_TYPE,
-} from '@waldur/support/constants';
 
 import {
   allowToUpdateService,
   getPluginOptionsForm,
+  getProvisioningConfigForm,
   getSecretOptionsForm,
   showComponentsList,
 } from '../common/registry';
@@ -112,8 +107,14 @@ const getTabs = (offering: Offering): PageBarTab[] => {
   const ServiceSettingsForm = getServiceSettingsForm(offering.type);
   const SecretOptionsForm = getSecretOptionsForm(offering.type);
   const PluginOptionsForm = getPluginOptionsForm(offering.type);
+  const provisioningConfigForm = getProvisioningConfigForm(offering.type);
 
-  if (ServiceSettingsForm || SecretOptionsForm || PluginOptionsForm) {
+  if (
+    ServiceSettingsForm ||
+    SecretOptionsForm ||
+    PluginOptionsForm ||
+    provisioningConfigForm
+  ) {
     tabs.push({
       key: 'integration',
       title: (
@@ -151,14 +152,10 @@ const getTabs = (offering: Offering): PageBarTab[] => {
               title: translate('User management'),
             }
           : null,
-        [
-          SUPPORT_OFFERING_TYPE,
-          BASIC_OFFERING_TYPE,
-          OFFERING_TYPE_CUSTOM_SCRIPTS,
-          OFFERING_TYPE_BOOKING,
-          REMOTE_OFFERING_TYPE,
-        ].includes(offering.type) ||
-        (offering.type === TENANT_TYPE && allowToUpdateService(offering.type))
+        provisioningConfigForm ||
+        [OFFERING_TYPE_CUSTOM_SCRIPTS, OFFERING_TYPE_BOOKING].includes(
+          offering.type,
+        )
           ? {
               key: 'provisioning-configuration',
               component: ProvisioningConfigSection,

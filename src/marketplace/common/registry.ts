@@ -33,6 +33,10 @@ interface OfferingConfiguration<
   /**
    *  Please use only lazy component here to enable code-splitting.
    */
+  provisioningConfigForm?: React.ComponentType<OfferingEditPanelFormProps>;
+  /**
+   *  Please use only lazy component here to enable code-splitting.
+   */
   detailsComponent?: React.ComponentType<OrderDetailsProps>;
   /**
    *  Please use only lazy component here to enable code-splitting.
@@ -173,6 +177,13 @@ export function getSecretOptionsForm(offeringType: string) {
   return (
     REGISTRY.hasOwnProperty(offeringType) &&
     REGISTRY[offeringType].secretOptionsForm
+  );
+}
+
+export function getProvisioningConfigForm(offeringType: string) {
+  return (
+    REGISTRY.hasOwnProperty(offeringType) &&
+    REGISTRY[offeringType].provisioningConfigForm
   );
 }
 

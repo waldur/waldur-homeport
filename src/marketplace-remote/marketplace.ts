@@ -1,16 +1,21 @@
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { registerOfferingType } from '@waldur/marketplace/common/registry';
 import { COMMON_OPTIONS } from '@waldur/support/marketplace';
 
 import { REMOTE_OFFERING_TYPE } from './constants';
 
+const RemoteOfferingSecretOptions = lazyComponent(
+  () => import('./RemoteOfferingSecretOptions'),
+  'RemoteOfferingSecretOptions',
+);
+
 registerOfferingType({
   type: REMOTE_OFFERING_TYPE,
   get label() {
     return translate('Remote offering');
   },
-  providerType: 'Remote',
   ...COMMON_OPTIONS,
   showBackendId: true,
-  allowToUpdateService: true,
+  provisioningConfigForm: RemoteOfferingSecretOptions,
 });

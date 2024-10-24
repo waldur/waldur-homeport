@@ -40,7 +40,7 @@
     "message": "<tos>Terms of Service</tos> and <pp>Privacy policy</pp> have been accepted on <date></date>"
   },
   "A client-accessible domain name override in case Openstack is returning an internal domain": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "A client-accessible domain name override in case Openstack is returning an internal domain"
   },
   "A constant in the API path, sometimes differs": {
@@ -1256,7 +1256,7 @@
     "message": "Automatic based on review scoring"
   },
   "Availability zone": {
-    "description": "azure/vm/AzureVirtualMachineForm.tsx, marketplace/offerings/update/integration/ProvisioningConfigSection.tsx, openstack/openstack-instance/OpenStackInstanceSummary.tsx, openstack/openstack-instance/OpenstackInstanceDetails.tsx, openstack/openstack-volume/OpenStackVolumeSummary.tsx, openstack/openstack-volume/OpenstackVolumeDetails.tsx",
+    "description": "azure/vm/AzureVirtualMachineForm.tsx, openstack/OpenStackProvisioningConfigForm.tsx, openstack/openstack-instance/OpenStackInstanceSummary.tsx, openstack/openstack-instance/OpenstackInstanceDetails.tsx, openstack/openstack-volume/OpenStackVolumeSummary.tsx, openstack/openstack-volume/OpenstackVolumeDetails.tsx",
     "message": "Availability zone"
   },
   "Availability": {
@@ -1404,7 +1404,7 @@
     "message": "Biological sciences"
   },
   "Blacklisted volume types": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Blacklisted volume types"
   },
   "Block creation of new resources": {
@@ -2056,7 +2056,7 @@
     "message": "Confirm"
   },
   "Confirmation notification template": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "marketplace/ProvisioningConfigForm.tsx",
     "message": "Confirmation notification template"
   },
   "Confirmation": {
@@ -2084,11 +2084,11 @@
     "message": "Connection details"
   },
   "Console domain override": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Console domain override"
   },
   "Console type": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Console type"
   },
   "Contact details": {
@@ -2708,7 +2708,7 @@
     "message": "Default account"
   },
   "Default availability zone for provisioned instances.": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Default availability zone for provisioned instances."
   },
   "Default cluster label": {
@@ -3952,7 +3952,7 @@
     "message": "Flavor change has been scheduled."
   },
   "Flavor exclude regex": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Flavor exclude regex"
   },
   "Flavor name": {
@@ -3968,7 +3968,7 @@
     "message": "Flavor"
   },
   "Flavors matching this regex expression will not be pulled from the backend.": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Flavors matching this regex expression will not be pulled from the backend."
   },
   "Flavors regex": {
@@ -5140,7 +5140,7 @@
     "message": "List of all resources"
   },
   "List of coma-separated volume types which should not be possible to select when creating VM/Volume.": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "List of coma-separated volume types which should not be possible to select when creating VM/Volume."
   },
   "List of enabled languages": {
@@ -5396,15 +5396,15 @@
     "message": "Maximum monthly"
   },
   "Maximum parallel executions of provisioning operations for instances": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Maximum parallel executions of provisioning operations for instances"
   },
   "Maximum parallel executions of provisioning operations for snapshots": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Maximum parallel executions of provisioning operations for snapshots"
   },
   "Maximum parallel executions of provisioning operations for volumes": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Maximum parallel executions of provisioning operations for volumes"
   },
   "Maximum size": {
@@ -11156,7 +11156,7 @@
     "message": "Type of a comment. Default is email because it allows support to reply to tickets directly in Zammad<https://docs.zammad.org/en/latest/api/ticket/articles.html#articles/>"
   },
   "Type of console access protocol used by Openstack (novnc, xvpvnc, spice-html5, rdp-html5, serial)": {
-    "description": "marketplace/offerings/update/integration/ProvisioningConfigSection.tsx",
+    "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Type of console access protocol used by Openstack (novnc, xvpvnc, spice-html5, rdp-html5, serial)"
   },
   "Type of linked issue field name": {
