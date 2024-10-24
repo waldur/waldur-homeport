@@ -53,7 +53,6 @@ interface CoreConfiguration {
   EXTERNAL_LINKS: ExternalLink[];
   DOCS_URL: string;
   SUPPORT_PORTAL_URL: string;
-  GOOGLE_ANALYTICS_ID: string;
   AUTHENTICATION_METHODS: string[];
   INVITATIONS_ENABLED: boolean;
   VALIDATE_INVITATION_EMAIL: boolean;
