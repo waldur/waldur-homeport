@@ -30,6 +30,13 @@ export const CreateCreditButton = ({ refetch }) => {
               customer: formData.customer.url,
               offerings: formData.offerings.map((offering) => offering.url),
             };
+            if (
+              !payload.minimal_consumption ||
+              payload.minimal_consumption !== '0'
+            ) {
+              delete payload.minimal_consumption;
+            }
+
             return createCustomerCredit(payload)
               .then(() => {
                 dispatch(closeModalDialog());

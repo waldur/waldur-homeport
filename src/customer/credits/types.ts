@@ -8,6 +8,7 @@ export interface CustomerCredit {
   customer_uuid: string;
   end_date: string;
   minimal_consumption: string; // number
+  minimal_consumption_logic: 'fixed' | 'linear';
   consumption_last_month: number;
   offerings: Pick<Offering, 'uuid' | 'name' | 'type' | 'url'>[];
   value: string; // number
@@ -20,6 +21,7 @@ export interface CustomerCreditFormData {
   offerings: string[];
   end_date: string;
   minimal_consumption: string;
+  minimal_consumption_logic: 'fixed' | 'linear';
 }
 
 export interface ProjectCredit {

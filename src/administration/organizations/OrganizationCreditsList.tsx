@@ -1,3 +1,4 @@
+import { startCase } from 'lodash';
 import { FC } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
@@ -44,10 +45,15 @@ export const OrganizationCreditsList: FC<{}> = () => {
             row.offerings.map((offering) => offering.name).join(', '),
         },
         {
+          title: translate('Consumption logic'),
+          render: ({ row }) => startCase(row.minimal_consumption_logic),
+          export: 'minimal_consumption_logic',
+        },
+        {
           title: translate('Minimal consumption'),
           render: ({ row }) => defaultCurrency(row.minimal_consumption),
           orderField: 'minimal_consumption',
-          export: 'minimal_consumption',
+          export: (row) => defaultCurrency(row.minimal_consumption),
         },
         {
           title: translate('End date'),
@@ -60,7 +66,7 @@ export const OrganizationCreditsList: FC<{}> = () => {
           title: translate('Allocated credit'),
           render: ({ row }) => defaultCurrency(row.value),
           orderField: 'value',
-          export: 'value',
+          export: (row) => defaultCurrency(row.value),
         },
       ]}
       title={translate('Credit management')}

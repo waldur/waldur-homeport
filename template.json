@@ -63,6 +63,14 @@
     "description": "rancher/cluster/create/LonghornWorkerWarning.tsx",
     "message": "A minimal expected configuration of worker is 4 vCPU and 4 GB RAM."
   },
+  "A minimal guaranteed credit reduction per month": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "A minimal guaranteed credit reduction per month"
+  },
+  "A minimum amount deducted monthly, calculated based on the end date": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "A minimum amount deducted monthly, calculated based on the end date"
+  },
   "A one-time fee applied on activation.": {
     "description": "marketplace/details/plan/PlanDetailsList.tsx, marketplace/details/plan/PlanDetailsTable.tsx",
     "message": "A one-time fee applied on activation."
@@ -2091,6 +2099,10 @@
     "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Console type"
   },
+  "Consumption logic": {
+    "description": "administration/organizations/OrganizationCreditsList.tsx, customer/credits/CreditFormDialog.tsx",
+    "message": "Consumption logic"
+  },
   "Contact details": {
     "description": "customer/details/CustomerContactPanel.tsx, customer/details/EditFieldDialog.tsx, user/affiliations/BaseOrganizationsList.tsx",
     "message": "Contact details"
@@ -3943,6 +3955,10 @@
     "description": "openstack/OpenStackPluginOptionsForm.tsx",
     "message": "Fixed — use common storage quota"
   },
+  "Fixed": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Fixed"
+  },
   "Fixed-price contract": {
     "description": "customer/payment-profiles/utils.ts",
     "message": "Fixed-price contract"
@@ -5107,6 +5123,10 @@
     "description": "marketplace/orders/details/LimitsSection.tsx, marketplace/orders/details/OrderDetails.tsx, marketplace/resources/list/ProviderResourcesList.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx",
     "message": "Limits"
   },
+  "Linear": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Linear"
+  },
   "Link OpenStack Instance": {
     "description": "rancher/node/actions/LinkAction.tsx, rancher/node/actions/LinkDialog.tsx",
     "message": "Link OpenStack Instance"
@@ -5511,8 +5531,12 @@
     "description": "proposals/update/rounds/RoundExpandableRow.tsx",
     "message": "Minimal average scoring"
   },
+  "Minimal consumption (per month)": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "Minimal consumption (per month)"
+  },
   "Minimal consumption": {
-    "description": "administration/organizations/OrganizationCreditsList.tsx, customer/credits/CreditFormDialog.tsx",
+    "description": "administration/organizations/OrganizationCreditsList.tsx",
     "message": "Minimal consumption"
   },
   "Minimal disk": {
@@ -10774,6 +10798,10 @@
   "The value is not valid IP v6 CIDR": {
     "description": "openstack/openstack-security-groups/rule-editor/CIDRField.tsx",
     "message": "The value is not valid IP v6 CIDR"
+  },
+  "The value will be calculated after saving the credit": {
+    "description": "customer/credits/CreditFormDialog.tsx",
+    "message": "The value will be calculated after saving the credit"
   },
   "The worker node is expected to have at least 4 vCPU and 4 GB RAM to run Longhorn.": {
     "description": "rancher/cluster/create/LonghornWorkerWarning.tsx",

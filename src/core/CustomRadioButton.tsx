@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
 import { FormField } from '@waldur/form/types';
@@ -6,14 +7,17 @@ import './CustomRadioButton.scss';
 
 interface CustomRadioButtonProps extends FormField {
   choices: Choice[];
+  direction?: 'vertical' | 'horizontal';
 }
 
-export const CustomRadioButton: FunctionComponent<CustomRadioButtonProps> = (
-  props,
-) => (
-  <div className="custom-radio-button">
-    {props.choices.map((choice, index) => (
-      <label key={index} className="d-flex align-items-center mb-3">
+export const CustomRadioButton: FunctionComponent<CustomRadioButtonProps> = ({
+  choices,
+  direction = 'vertical',
+  ...props
+}) => (
+  <div className={classNames('custom-radio-button', direction)}>
+    {choices.map((choice, index) => (
+      <label key={index} className="d-flex mb-3">
         <input
           {...props.input}
           type="radio"
@@ -22,7 +26,12 @@ export const CustomRadioButton: FunctionComponent<CustomRadioButtonProps> = (
           {...props}
         />
         <div className="custom-checkmark" />
-        <span className="radio-label">{choice.label}</span>
+        <div className="radio-text">
+          <span className="radio-label">{choice.label}</span>
+          {Boolean(choice.description) && (
+            <span className="radio-description">{choice.description}</span>
+          )}
+        </div>
       </label>
     ))}
   </div>
