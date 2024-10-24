@@ -29,7 +29,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
     className += 'warning';
   }
 
-  return changes !== 0 && !Number.isNaN(changes) ? (
+  return changes === undefined && changes !== 0 && !Number.isNaN(changes) ? (
     changes < 0 ? (
       changes !== -Infinity ? (
         <span className={className}>

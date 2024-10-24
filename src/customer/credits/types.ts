@@ -29,6 +29,7 @@ export interface ProjectCredit {
   url: string;
   project: string;
   project_name: string;
+  offerings: Pick<Offering, 'uuid' | 'name' | 'type' | 'url'>[];
   value: string; // number
   use_organisation_credit: boolean;
   consumption_last_month: number;

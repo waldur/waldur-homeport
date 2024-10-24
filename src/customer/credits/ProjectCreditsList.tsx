@@ -34,6 +34,14 @@ export const ProjectCreditsList: FC = () => {
           export: 'value',
         },
         {
+          title: translate('Eligible offerings'),
+          render: ({ row }) => (
+            <>{row.offerings.map((offering) => offering.name).join(', ')}</>
+          ),
+          export: (row) =>
+            row.offerings.map((offering) => offering.name).join(', '),
+        },
+        {
           title: translate('Use organization credit'),
           render: ({ row }) => <>{formatYesNo(row.use_organisation_credit)}</>,
           orderField: 'use_organisation_credit',
