@@ -35,6 +35,7 @@ export const EditCreditButton = ({ row, refetch }) => {
             offerings: row.offerings,
             end_date: row.end_date,
             minimal_consumption: row.minimal_consumption,
+            minimal_consumption_logic: row.minimal_consumption_logic,
           },
           onSubmit: (formData) => {
             const payload: CustomerCreditFormData = {
@@ -42,6 +43,10 @@ export const EditCreditButton = ({ row, refetch }) => {
               customer: formData.customer.url,
               offerings: formData.offerings.map((offering) => offering.url),
             };
+            if (!payload.minimal_consumption) {
+              payload.minimal_consumption = '0';
+            }
+
             return updateCustomerCredit(row.uuid, payload)
               .then(() => {
                 dispatch(closeModalDialog());
