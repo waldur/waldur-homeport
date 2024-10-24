@@ -2511,7 +2511,6 @@
   "The date the user has joined": "Kuupäev, mil kasutaja on liitunud.",
   "The endpoint for endpoint discovery.": "Lõpp-punkti avastamise lõpp-punkt.",
   "The endpoint for user details management.": "Kasutajaandmete haldamise lõpp-punkt.",
-  "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}": "Saadaval on järgmised asendusmuutujad: {resource_name}, {resource_username}, {backend_id}",
   "The image rendered at hero section of HomePort landing page.": "HomePorti pealehe jaotises kuvatud pilt.",
   "The image rendered at the bottom of login menu in HomePort.": "HomePorti sisselogimismenüü allservas kuvatud pilt.",
   "The image rendered at the top of mobile sidebar menu in HomePort.": "Mobiilivaates HomePort-i külgriba menüü ülaosas kuvatud pilt.",
