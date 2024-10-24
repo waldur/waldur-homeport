@@ -17,6 +17,10 @@ const UserSecretOptionsForm = lazyComponent(
   () => import('@waldur/marketplace/UserSecretOptionsForm'),
   'UserSecretOptionsForm',
 );
+const ProvisioningConfigForm = lazyComponent(
+  () => import('@waldur/marketplace/ProvisioningConfigForm'),
+  'ProvisioningConfigForm',
+);
 const RequestOrderForm = lazyComponent(
   () => import('./RequestOrderForm'),
   'RequestOrderForm',
@@ -37,6 +41,7 @@ registerOfferingType({
   },
   ...COMMON_OPTIONS,
   secretOptionsForm: UserSecretOptionsForm,
+  provisioningConfigForm: ProvisioningConfigForm,
 });
 
 registerOfferingType({
@@ -46,4 +51,5 @@ registerOfferingType({
   },
   ...COMMON_OPTIONS,
   secretOptionsForm: UserSecretOptionsForm,
+  provisioningConfigForm: ProvisioningConfigForm,
 });
