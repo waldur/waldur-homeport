@@ -1071,9 +1071,9 @@
     "description": "marketplace/orders/actions/OrderUnlinkButton.tsx",
     "message": "Are you sure you want to unlink the order?"
   },
-  "Are you sure you want to unlink {name} {resourceType}? ": {
+  "Are you sure you want to unlink {resourceName} {resourceType} from {projectName} ({customerName})? ": {
     "description": "resource/actions/UnlinkActionItem.tsx",
-    "message": "Are you sure you want to unlink {name} {resourceType}? "
+    "message": "Are you sure you want to unlink {resourceName} {resourceType} from {projectName} ({customerName})? "
   },
   "Are you sure you want to update the restriction status of this user?": {
     "description": "marketplace/service-providers/RestrictOfferingUser.tsx",
@@ -1115,9 +1115,9 @@
     "description": "administration/agreements/UserAgreementDeleteDialog.tsx",
     "message": "Are you sure you would like to delete the user agreement?"
   },
-  "Are you sure you would like to terminate resource {resourceName}?": {
+  "Are you sure you would like to terminate resource {resourceName} from project {projectName} ({customerName})?": {
     "description": "marketplace/resources/terminate/TerminateDialog.tsx",
-    "message": "Are you sure you would like to terminate resource {resourceName}?"
+    "message": "Are you sure you would like to terminate resource {resourceName} from project {projectName} ({customerName})?"
   },
   "Article code": {
     "description": "customer/credits/CreditUsageDialog.tsx, invoices/details/ComponentRow.tsx, invoices/details/InvoiceItemUpdateDialog.tsx, marketplace/offerings/ArticleCodeField.tsx",
@@ -5639,9 +5639,9 @@
     "description": "project/MoveProjectAction.tsx",
     "message": "Move project"
   },
-  "Move resource {resourceName}": {
+  "Move resource {resourceName} from {projectName} ({customerName})": {
     "description": "marketplace/resources/actions/MoveResourceDialog.tsx",
-    "message": "Move resource {resourceName}"
+    "message": "Move resource {resourceName} from {projectName} ({customerName})"
   },
   "Move to organization": {
     "description": "project/MoveToOrganizationAutocomplete.tsx",
@@ -10571,9 +10571,9 @@
     "description": "marketplace/orders/details/OrderDetailsQuickBody.tsx",
     "message": "Terminate an existing resource"
   },
-  "Terminate resource {resourceName}": {
+  "Terminate resource {resourceName} from {projectName} ({customerName})": {
     "description": "marketplace/resources/terminate/TerminateDialog.tsx",
-    "message": "Terminate resource {resourceName}"
+    "message": "Terminate resource {resourceName} from {projectName} ({customerName})"
   },
   "Terminate resource": {
     "description": "administration/roles/PermissionOptions.tsx",
@@ -10679,9 +10679,9 @@
     "description": "administration/providers/ProviderForm.tsx",
     "message": "The endpoint for user details management."
   },
-  "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}, {options_KEY}, {backend_metadata_KEY}": {
+  "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}, {options_key}, {backend_metadata_key}": {
     "description": "marketplace/offerings/update/overview/EditGettingStartedDialog.tsx",
-    "message": "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}, {options_KEY}, {backend_metadata_KEY}"
+    "message": "The following substitution variables are available: {resource_name}, {resource_username}, {backend_id}, {options_key}, {backend_metadata_key}"
   },
   "The image rendered at hero section of HomePort landing page.": {
     "description": "SettingsDescription.ts",

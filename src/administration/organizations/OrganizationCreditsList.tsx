@@ -37,7 +37,7 @@ export const OrganizationCreditsList: FC<{}> = () => {
           export: 'customer_name',
         },
         {
-          title: translate('Offerings'),
+          title: translate('Eligible offerings'),
           render: ({ row }) => (
             <>{row.offerings.map((offering) => offering.name).join(', ')}</>
           ),
