@@ -45,7 +45,7 @@ export const CustomerDashboardChart: FunctionComponent<
   }
   if (data.costChart || data.teamChart) {
     return (
-      <Row>
+      <Row style={{ height: '18rem' }}>
         {Boolean(data.costChart) && (
           <Col md={6} sm={12} className="mb-6">
             <WidgetCard

@@ -49,7 +49,7 @@ export const CustomerDashboard: FunctionComponent = () => {
           )}
           {(shouldShowAggregateLimitWidget(customer.uuid) ||
             Boolean(customer.credit)) && (
-            <Row style={{ minHeight: '14rem' }}>
+            <Row style={{ height: '18rem' }}>
               <Col md={6} sm={12} className="mb-6">
                 <AggregateLimitWidget customer={customer} />
               </Col>
