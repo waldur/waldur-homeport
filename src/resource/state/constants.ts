@@ -8,7 +8,7 @@ export const getStateMessages = (translate) => ({
   extend: translate('Extending'),
   detach: translate('Detaching'),
   destroy: translate('Destroying'),
-  restore: translate('Restroing'),
+  restore: translate('Restoring'),
   change_flavor: translate('Changing flavor'),
   start: translate('Starting'),
   stop: translate('Stopping'),
