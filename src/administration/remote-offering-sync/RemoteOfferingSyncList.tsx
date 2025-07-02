@@ -89,7 +89,6 @@ export const RemoteOfferingSyncList: FunctionComponent = () => {
       enableExport
       hasQuery
       expandableRow={RemoteSyncExpandableRow}
-      expandableRowClassName="p-0"
       rowActions={({ row }) => (
         <RemoteSyncRowActions row={row} refetch={tableProps.fetch} />
       )}

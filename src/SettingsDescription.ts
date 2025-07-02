@@ -36,6 +36,12 @@ export const SettingsDescription = [
         default: 'https://example.com/',
         type: 'string',
       },
+      {
+        key: 'RANCHER_USERNAME_INPUT_LABEL',
+        description: translate('Label for the username field in Rancher external user resource access management.'),
+        default: 'Username',
+        type: 'string',
+      },
     ],
   },
   {
@@ -125,9 +131,9 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
-        key: 'ENABLE_RESOURCE_END_DATE',
-        description: translate('Allow to view and update resource end date.'),
-        default: true,
+        key: 'ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND',
+        description: translate('Enable mock returns for the service account service'),
+        default: false,
         type: 'boolean',
       },
     ],
@@ -161,7 +167,7 @@ export const SettingsDescription = [
       {
         key: 'DOCKER_CLIENT',
         description: translate('Options for docker client. See also: <https://docker-py.readthedocs.io/en/stable/client.html#docker.client.DockerClient>'),
-        default: {'base_url': 'unix://var/run/docker.sock'},
+        default: {'base_url': 'unix:///var/run/docker.sock'},
         type: 'dict_field',
       },
       {
@@ -185,7 +191,7 @@ export const SettingsDescription = [
       {
         key: 'DOCKER_IMAGES',
         description: translate('Key is command to execute script, value is a dictionary of image name and command.'),
-        default: {'python': {'image': 'python:3.11-alpine', 'command': 'python'}, 'shell': {'image': 'alpine:3', 'command': 'sh'}},
+        default: {'python': {'image': 'python:3.11-alpine', 'command': 'python'}, 'shell': {'image': 'alpine:3', 'command': 'sh'}, 'ansible': {'image': 'alpine/ansible:2.18.6', 'command': 'ansible-playbook'}},
         type: 'dict_field',
       },
       {
@@ -319,6 +325,18 @@ export const SettingsDescription = [
       {
         key: 'HERO_IMAGE',
         description: translate('The image rendered at hero section of HomePort landing page.'),
+        default: '',
+        type: 'image_field',
+      },
+      {
+        key: 'MARKETPLACE_HERO_IMAGE',
+        description: translate('The image rendered at hero section of Marketplace landing page. Please, use a wide image (min. 1920×600px) with no text or logos. Keep the center area clean, and choose a darker image for dark mode or a brighter image for light mode.'),
+        default: '',
+        type: 'image_field',
+      },
+      {
+        key: 'CALL_MANAGEMENT_HERO_IMAGE',
+        description: translate('The image rendered at hero section of Call Management landing page. Please, use a wide image (min. 1920×600px) with no text or logos. Keep the center area clean, and choose a darker image for dark mode or a brighter image for light mode.'),
         default: '',
         type: 'image_field',
       },
@@ -810,6 +828,47 @@ export const SettingsDescription = [
         description: translate('Optionally disable creation of user groups in FreeIPA matching Waldur structure'),
         default: true,
         type: 'boolean',
+      },
+    ],
+  },
+  {
+    description: translate('OIDC auth settings'),
+    items: [
+      {
+        key: 'OIDC_AUTH_URL',
+        description: translate('OIDC authentication endpoint URL.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'OIDC_INTROSPECTION_URL',
+        description: translate('OIDC introspection endpoint URL for validating access tokens.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'OIDC_CLIENT_ID',
+        description: translate('Client ID for authenticating against the introspection endpoint.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'OIDC_CLIENT_SECRET',
+        description: translate('Client secret for authenticating against the introspection endpoint.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'OIDC_USER_FIELD',
+        description: translate('Field name from the introspection response to identify the user (e.g., \'username\', \'email\', \'client_id\').'),
+        default: 'username',
+        type: 'string',
+      },
+      {
+        key: 'OIDC_CACHE_TIMEOUT',
+        description: translate('Number of seconds to cache token introspection results.'),
+        default: 300,
+        type: 'integer',
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { Wrench } from '@phosphor-icons/react';
+import { WrenchIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -14,28 +14,22 @@ const CategoryManageColumnsDialog = lazyComponent(() =>
   })),
 );
 
-export const CategoryManageColumns = ({
-  row,
-  refetch,
-}: {
-  row: Category;
-  refetch;
-}) => {
+export const CategoryManageColumns = ({ row }: { row: Category }) => {
   const dispatch = useDispatch();
   const openFormDialog = useCallback(() => {
     dispatch(
       openModalDialog(CategoryManageColumnsDialog, {
-        resolve: { category: row, refetch },
+        resolve: { category: row },
         size: 'xl',
       }),
     );
-  }, [dispatch, refetch]);
+  }, [dispatch]);
 
   return (
     <ActionItem
       title={translate('Configure columns')}
       action={openFormDialog}
-      iconNode={<Wrench weight="bold" />}
+      iconNode={<WrenchIcon weight="bold" />}
     />
   );
 };

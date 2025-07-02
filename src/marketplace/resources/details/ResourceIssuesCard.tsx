@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,7 +19,7 @@ const CreateIssueButton = ({ resource }) => {
     );
   return (
     <ActionButton
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
       title={translate('Create')}
       action={callback}
       variant="primary"
@@ -36,8 +36,8 @@ export const ResourceIssuesCard = ({ resource }) => {
       scope={resource}
       scopeType="resource"
       filter={filter}
-      title={translate('Tickets')}
-      verboseName={translate('Resource issues')}
+      title={translate('Requests')}
+      verboseName={translate('Support requests')}
       initialPageSize={5}
       tableActions={<CreateIssueButton resource={resource} />}
     />

@@ -1,4 +1,4 @@
-import { XCircle } from '@phosphor-icons/react';
+import { XCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -14,7 +14,7 @@ const TerminateDialog = lazyComponent(() =>
   })),
 );
 
-const validators = [validateState('OK', 'ERRED')];
+const validators = [validateState('OK', 'ERRED', 'Erred')];
 
 interface TerminateActionProps {
   resource: any;
@@ -39,7 +39,7 @@ export const TerminateAction: FC<TerminateActionProps> = ({
   return (
     <ActionItem
       {...props}
-      iconNode={<XCircle weight="bold" />}
+      iconNode={<XCircleIcon weight="bold" />}
       iconColor="danger"
     />
   );

@@ -23,10 +23,10 @@ export const OpenstackVolumeActions = (props) => (
       <DetachAction {...props} />
       <ExtendAction {...props} />
       <RetypeAction {...props} />
+      <PullAction {...props} />
     </ActionGroup>
 
     <ActionGroup title={translate('Billing actions')}>
-      <PullAction {...props} />
       <ChangePlanAction {...props} />
       <ChangeLimitsAction {...props} />
       <ShowUsageAction {...props} />

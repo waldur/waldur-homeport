@@ -1,11 +1,11 @@
 import {
-  Bell,
-  Headset,
-  SealPercent,
-  Stack,
-  Tag,
-  UserList,
-  Warning,
+  BellIcon,
+  HeadsetIcon,
+  SealPercentIcon,
+  StackIcon,
+  TagIcon,
+  UserListIcon,
+  WarningIcon,
 } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
@@ -36,21 +36,21 @@ interface ProviderWidget {
 
 const generateWidgetsData = (statistics: ServiceProviderStatistics) => [
   {
-    iconNode: <SealPercent size={40} />,
+    iconNode: <SealPercentIcon size={40} />,
     value: statistics.active_campaigns,
     title: translate('Active campaigns'),
     changes: 0,
     to: { state: 'marketplace-provider-campaigns' },
   },
   {
-    iconNode: <UserList size={40} />,
+    iconNode: <UserListIcon size={40} />,
     value: statistics.current_customers,
     title: translate('Active clients'),
     changes: statistics.customers_number_change,
     to: { state: 'marketplace-provider-organizations' },
   },
   {
-    iconNode: <Stack size={40} />,
+    iconNode: <StackIcon size={40} />,
     value: statistics.active_resources,
     title: translate('Active resources'),
     changes: statistics.resources_number_change,
@@ -66,7 +66,7 @@ const generateWidgetsData = (statistics: ServiceProviderStatistics) => [
     },
   },
   {
-    iconNode: <Tag size={40} />,
+    iconNode: <TagIcon size={40} />,
     value: statistics.active_and_paused_offerings,
     title: translate('Total published offerings'),
     changes: 0,
@@ -76,7 +76,7 @@ const generateWidgetsData = (statistics: ServiceProviderStatistics) => [
     },
   },
   {
-    iconNode: <Headset size={40} />,
+    iconNode: <HeadsetIcon size={40} />,
     value: statistics.unresolved_tickets,
     title: translate('Open support tickets'),
     changes: 0,
@@ -95,14 +95,14 @@ const generateWidgetsData = (statistics: ServiceProviderStatistics) => [
     },
   },
   {
-    iconNode: <Bell size={40} />,
+    iconNode: <BellIcon size={40} />,
     value: 0,
     title: translate('Active notifications'),
     changes: 0,
     to: { state: '#' },
   },
   {
-    iconNode: <Warning size={40} />,
+    iconNode: <WarningIcon size={40} />,
     value: statistics.erred_resources,
     title: translate('Erred resources'),
     changes: 0,

@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,7 +69,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
         <div>
           <Button onClick={removeCustomer} variant="danger">
             <span className="svg-icon svg-icon-2">
-              <Trash />
+              <TrashIcon />
             </span>{' '}
             {translate('Remove organization')}
           </Button>

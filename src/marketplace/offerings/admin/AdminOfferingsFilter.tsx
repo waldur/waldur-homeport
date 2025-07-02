@@ -32,7 +32,11 @@ const PureAdminOfferingsFilter: FunctionComponent<
   AdminOfferingsFilterOwnProps
 > = ({ showCategory, showOrganization = true }) => (
   <>
-    <TableFilterItem title={translate('State')} name="state">
+    <TableFilterItem
+      title={translate('State')}
+      name="state"
+      instantApply={false}
+    >
       <OfferingStateFilter />
     </TableFilterItem>
     {showOrganization ? (

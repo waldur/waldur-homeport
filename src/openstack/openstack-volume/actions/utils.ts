@@ -8,3 +8,9 @@ export function isBootable(ctx: ActionContext<OpenStackVolume>): string {
     return translate("System volume couldn't be detached.");
   }
 }
+
+export function isExtendable(ctx: ActionContext<OpenStackVolume>): string {
+  if (!ctx.resource.extend_enabled) {
+    return translate('Volume cannot be extended.');
+  }
+}

@@ -18,6 +18,9 @@ interface WizardFormContainerProps {
   initialValues?: any;
   data?: any;
   validate?(values: any): any;
+  modalProps?: {
+    bodyClassName?: string;
+  };
 }
 
 export const WizardFormContainer: FC<WizardFormContainerProps> = ({
@@ -75,5 +78,6 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
     data: props.data,
     reinitialize,
     validate: props.validate,
+    modalProps: props.modalProps,
   });
 };

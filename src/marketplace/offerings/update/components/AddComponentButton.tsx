@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -30,7 +30,7 @@ export const AddComponentButton: FunctionComponent<{
   };
   return (
     <ActionButton
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
       title={translate('Add component')}
       action={callback}
     />

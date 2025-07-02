@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import {
   FunctionComponent,
@@ -57,7 +57,7 @@ export const ReadOnlyFormControl: FunctionComponent<
         label={tooltip}
         placement="left"
       >
-        <Question size={20} weight="bold" className="text-gray-500" />
+        <QuestionIcon size={20} weight="bold" className="text-gray-500" />
       </Tip>
     </div>
   ) : (

@@ -1,4 +1,4 @@
-import { ShieldWarning } from '@phosphor-icons/react';
+import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import {
   FC,
@@ -95,7 +95,7 @@ const RestrictedView = () => {
       <Card.Body>
         <div className="d-flex flex-column align-items-center justify-content-center my-10 my-xl-20 min-h-150px">
           <span className="svg-icon mb-6 svg-icon-5x text-danger">
-            <ShieldWarning />
+            <ShieldWarningIcon />
           </span>
           <h3 className="text-danger mb-4">{pageMessage.title}</h3>
           <p className="mb-10 text-dark mw-400px text-center">
@@ -174,6 +174,16 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
           !user.permissions.find(
             (permission) =>
               permission.scope_type === 'project' &&
+              permission.customer_uuid === params.uuid,
+          ) &&
+          !user.permissions.find(
+            (permission) =>
+              permission.scope_type === 'callmanagingorganisation' &&
+              permission.customer_uuid === params.uuid,
+          ) &&
+          !user.permissions.find(
+            (permission) =>
+              permission.scope_type === 'call' &&
               permission.customer_uuid === params.uuid,
           )
         ) {

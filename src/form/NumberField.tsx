@@ -19,6 +19,7 @@ export const NumberField: FunctionComponent<NumberFieldProps> = ({
   unit,
   placeholder = '  ',
   solid,
+  description,
   ...rest
 }) => {
   const control = (
@@ -30,11 +31,14 @@ export const NumberField: FunctionComponent<NumberFieldProps> = ({
       {...rest}
     />
   );
-  if (unit) {
+
+  if (unit || description) {
     return (
       <>
         {control}
-        <InputGroup.Text className="border-0 unit">{unit}</InputGroup.Text>
+        {unit && (
+          <InputGroup.Text className="border-0 unit">{unit}</InputGroup.Text>
+        )}
       </>
     );
   } else {

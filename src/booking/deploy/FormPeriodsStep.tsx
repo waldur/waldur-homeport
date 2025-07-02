@@ -1,4 +1,4 @@
-import { Plus, X } from '@phosphor-icons/react';
+import { PlusIcon, XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { uniqueId } from 'lodash-es';
 import { DateTime, Duration } from 'luxon';
@@ -7,14 +7,13 @@ import { Button } from 'react-bootstrap';
 import { Field, FieldArray } from 'redux-form';
 import { marketplaceBookingsList } from 'waldur-js-client';
 
-import { parseDate } from '@waldur/core/dateUtils';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 
 import { BookingProps } from '../types';
 import {
-  createAvailabilitySlots,
+  getAvailableRangeOfDates,
   getBookedSlots,
   getDurationOptions,
 } from '../utils';
@@ -31,47 +30,6 @@ const getDurationSlot = (schedules: BookingProps[] = []) => {
     configWithEvent?.extendedProps?.config?.slotDuration ||
     getDurationOptions()[0].value
   );
-};
-
-const getAvailableRangeOfDates = (
-  schedules: BookingProps[],
-  inUseRanges: any[],
-) => {
-  const availableRanges: Array<{ from: DateTime; to: DateTime }> = [];
-
-  const durationSlot = Duration.fromISOTime(getDurationSlot(schedules), {});
-
-  const slots = createAvailabilitySlots(schedules, durationSlot);
-
-  slots.forEach((slot) => {
-    const slotStart = parseDate(slot.start);
-    const isBusy = inUseRanges.some((used) => {
-      if (!used?.start) return false;
-      const usedStart = parseDate(used.start);
-      const usedEnd = parseDate(used.end);
-      return (
-        slotStart.equals(usedStart) ||
-        (slotStart > usedStart && slotStart < usedEnd)
-      );
-    });
-    if (!isBusy) {
-      const existRange = availableRanges.find((range) =>
-        range.to.equals(slotStart),
-      );
-      if (existRange) {
-        existRange.to = existRange.to.plus(durationSlot);
-      } else {
-        availableRanges.push({
-          from: slotStart,
-          to: parseDate(slot.end),
-        });
-      }
-    }
-  });
-  return availableRanges.map((range) => ({
-    from: range.from.toISO(),
-    to: range.to.toISO(),
-  }));
 };
 
 const renderScheduleRows = ({
@@ -119,7 +77,7 @@ const renderScheduleRows = ({
               onClick={() => fields.remove(index)}
             >
               <span className="svg-icon svg-icon-2">
-                <X weight="bold" />
+                <XIcon weight="bold" />
               </span>
             </Button>
           </div>
@@ -158,7 +116,7 @@ const renderScheduleRows = ({
       ))}
       <Button variant="light" className="text-nowrap" onClick={addRow}>
         <span className="svg-icon svg-icon-2">
-          <Plus weight="bold" />
+          <PlusIcon weight="bold" />
         </span>
         {translate('Add time period')}
       </Button>
@@ -167,14 +125,16 @@ const renderScheduleRows = ({
 };
 
 export const FormPeriodsStep = (props: FormStepProps) => {
-  const { isLoading, data: bookedItems } = useQuery(
-    ['bookedItems', props.offering.uuid],
-    () =>
+  const { isLoading, data: bookedItems } = useQuery({
+    queryKey: ['bookedItems', props.offering.uuid],
+
+    queryFn: () =>
       marketplaceBookingsList({ path: { uuid: props.offering.uuid } }).then(
         (r) => r.data,
       ),
-    { staleTime: 3 * 60 * 1000 },
-  );
+
+    staleTime: 3 * 60 * 1000,
+  });
 
   return (
     <VStepperFormStepCard

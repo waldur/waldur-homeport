@@ -377,6 +377,20 @@ export const states: StateDeclaration[] = [
       skipBreadcrumb: true,
     },
   },
+
+  {
+    name: 'marketplace-provider-projects',
+    parent: 'marketplace-provider-customers',
+    url: 'projects/',
+    component: lazyComponent(() =>
+      import('./service-providers/ProviderProjectsList').then((module) => ({
+        default: module.ProviderProjectsList,
+      })),
+    ),
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
   {
     name: 'marketplace-provider-user-manage',
     parent: 'marketplace-provider-user-manage-container',

@@ -26,6 +26,7 @@ export const CreateOfferingUserDialog = ({
       type: 'string',
     },
   ];
+
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create offering user')}

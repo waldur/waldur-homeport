@@ -5,6 +5,8 @@ import { UserRoleDetails } from 'waldur-js-client';
 
 import Avatar from '@waldur/core/Avatar';
 import { renderRoleExpirationDate } from '@waldur/customer/team/CustomerUsersList';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -18,6 +20,7 @@ import { PROJECT_TEAM_TABLE_TABS } from '../utils';
 
 import { ProjectPermisionActions } from './ProjectPermisionActions';
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';
+import { ProjectUsersBulkRemoveButton } from './ProjectUsersBulkRemoveButton';
 import { ProjectUsersListFilter } from './ProjectUsersListFilter';
 import { TeamDropdownActions } from './TeamDropdownActions';
 
@@ -73,24 +76,11 @@ export const ProjectUsersList = ({
           title: translate('Member'),
           render: ({ row }) => (
             <div className="d-flex align-items-center gap-1">
-              {row.user_image ? (
-                <img
-                  src={row.user_image}
-                  alt={row.user_username}
-                  width={32}
-                  height={32}
-                  className="rounded-circle"
-                />
-              ) : (
-                <Avatar
-                  className="symbol symbol-32px symbol-circle"
-                  name={row.user_full_name}
-                  size={32}
-                />
-              )}
+              <Avatar name={row.user_full_name} src={row.user_image} circle />
               {row.user_full_name || DASH_ESCAPE_CODE}
             </div>
           ),
+
           id: 'member',
           keys: ['user_full_name', 'user_username', 'user_image'],
           copyField: (row) => row.user_full_name,
@@ -105,10 +95,12 @@ export const ProjectUsersList = ({
         {
           title: translate('Username'),
           render: ({ row }) => row.user_username,
+          copyField: (row) => row.user_username,
           id: 'user_username',
           keys: ['user_username'],
-          optional: true,
+          optional: !isFeatureVisible(UserFeatures.show_username),
         },
+
         {
           title: translate('Role in project'),
           render: RoleField,
@@ -133,6 +125,7 @@ export const ProjectUsersList = ({
               project ||
               ({
                 uuid: projectUuid,
+                customer_uuid: customerUuid,
               } as any)
             }
             refetch={tableProps.fetch}
@@ -151,6 +144,8 @@ export const ProjectUsersList = ({
       )}
       filters={<ProjectUsersListFilter />}
       hasOptionalColumns
+      enableMultiSelect
+      multiSelectActions={ProjectUsersBulkRemoveButton}
     />
   );
 };

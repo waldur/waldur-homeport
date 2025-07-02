@@ -62,19 +62,6 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
               : 'd-flex flex-wrap gap-4 w-100'
           }
         >
-          {/* {props.filtersStorage.map((item) => (
-            <Badge
-              key={item.name}
-              bg="light"
-              className={
-                'min-h-40px d-flex align-items-center pe-0' +
-                (isMd ? '' : ' flex-wrap')
-              }
-            >
-              <span className="text-gray-700 fw-bold">{item.label}:</span>
-              <item.component />
-            </Badge>
-          ))} */}
           {props.filtersStorage.map((item) => (
             <Stack
               key={item.name}

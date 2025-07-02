@@ -6,7 +6,7 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getStates, RequestStateFilter } from './RequestStateFilter';
 
 const Filter = () => (
-  <TableFilterItem title={translate('State')} name="state">
+  <TableFilterItem title={translate('State')} name="state" instantApply={false}>
     <RequestStateFilter />
   </TableFilterItem>
 );

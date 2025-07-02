@@ -1,4 +1,4 @@
-import { FileText } from '@phosphor-icons/react';
+import { FileTextIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { Invoice } from 'waldur-js-client';
@@ -29,7 +29,7 @@ export const InvoicesDropdown: FunctionComponent<
     title={
       <>
         <span className="svg-icon svg-icon-2">
-          <FileText />
+          <FileTextIcon />
         </span>{' '}
         {translate('Link invoice')}
       </>

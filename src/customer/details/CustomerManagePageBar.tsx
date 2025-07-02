@@ -23,4 +23,5 @@ const tabs = [
     title: translate('Media'),
   },
 ];
+
 export const CustomerManagePageBar = () => <PageBarTabs tabs={tabs} />;

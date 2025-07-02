@@ -1,4 +1,4 @@
-import { PlusCircle, Trash } from '@phosphor-icons/react';
+import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { Col, Form, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -137,7 +137,7 @@ const renderEmails = ({ fields }: any) => (
             onClick={() => fields.remove(index)}
           >
             <span className="svg-icon svg-icon-2">
-              <Trash />
+              <TrashIcon />
             </span>
           </button>
         </Col>
@@ -148,7 +148,7 @@ const renderEmails = ({ fields }: any) => (
         <ActionButton
           title={translate('Add email')}
           action={() => fields.push()}
-          iconNode={<PlusCircle weight="bold" />}
+          iconNode={<PlusCircleIcon weight="bold" />}
           variant="primary"
         />
       </Col>

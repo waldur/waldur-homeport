@@ -1,4 +1,4 @@
-import { DotsThreeVertical } from '@phosphor-icons/react';
+import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import { debounce } from 'lodash-es';
 import React from 'react';
 import { Dropdown, Nav, Tab } from 'react-bootstrap';
@@ -50,7 +50,7 @@ const WrappedTabs = React.forwardRef(
                     variant="active-light-primary"
                     className="btn-icon btn-text-grey-500 no-arrow w-35px h-35px"
                   >
-                    <DotsThreeVertical size={22} weight="bold" />
+                    <DotsThreeVerticalIcon size={22} weight="bold" />
                     {props.toggleContent}
                   </Dropdown.Toggle>
                   <Dropdown.Menu>

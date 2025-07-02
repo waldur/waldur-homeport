@@ -1,7 +1,8 @@
-import { UserPlus } from '@phosphor-icons/react';
+import { UserPlusIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -29,12 +30,16 @@ export const AddUserButton: React.FC<AddUserDialogProps> = (props) => {
               ...props,
               initialValues:
                 props.roles && props.roles.length === 1
-                  ? { role: props.roles[0] }
+                  ? {
+                      role: ENV.roles.find(
+                        (role) => role.name === props.roles[0],
+                      ),
+                    }
                   : {},
             }),
           )
         }
-        iconNode={<UserPlus weight="bold" />}
+        iconNode={<UserPlusIcon weight="bold" />}
       />
     )
   );

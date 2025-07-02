@@ -1,4 +1,4 @@
-import { Prohibit } from '@phosphor-icons/react';
+import { ProhibitIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersCancel } from 'waldur-js-client';
@@ -40,7 +40,7 @@ export const CancelOrderButton: FC<CancelOrderButtonProps> = (props) => {
           title={translate('Cancel')}
           action={callback}
           disabled={loading}
-          iconNode={<Prohibit weight="bold" />}
+          iconNode={<ProhibitIcon weight="bold" />}
           iconColor="danger"
         />
       )}

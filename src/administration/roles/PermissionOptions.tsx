@@ -4,51 +4,198 @@ import { translate } from '@waldur/i18n';
 
 export const PermissionOptions = [
   {
+    label: translate('Call management'),
+    options: [
+      {
+        label: translate('Approve and reject proposals'),
+        value: 'CALL.APPROVE_AND_REJECT_PROPOSALS',
+      },
+      {
+        label: translate('Close rounds'),
+        value: 'CALL.CLOSE_ROUNDS',
+      },
+      {
+        label: translate('Create call'),
+        value: 'CALL.CREATE',
+      },
+      {
+        label: translate('Create permission'),
+        value: 'CALL.CREATE_PERMISSION',
+      },
+      {
+        label: translate('Delete permission call'),
+        value: 'CALL.DELETE_PERMISSION',
+      },
+      {
+        label: translate('Delete permission proposal'),
+        value: 'PROPOSAL.DELETE_PERMISSION',
+      },
+      {
+        label: translate('List call'),
+        value: 'CALL.LIST',
+      },
+      {
+        label: translate('List proposal'),
+        value: 'PROPOSAL.LIST',
+      },
+      {
+        label: translate('List round'),
+        value: 'ROUND.LIST',
+      },
+      {
+        label: translate('Manage proposal'),
+        value: 'PROPOSAL.MANAGE',
+      },
+      {
+        label: translate('Manage review'),
+        value: 'PROPOSAL.MANAGE_REVIEW',
+      },
+      {
+        label: translate('Update permission call'),
+        value: 'CALL.UPDATE_PERMISSION',
+      },
+      {
+        label: translate('Update permission proposal'),
+        value: 'PROPOSAL.UPDATE_PERMISSION',
+      },
+    ],
+  },
+  {
+    label: translate('Customer'),
+    options: [
+      {
+        label: translate('Create customer'),
+        value: 'CUSTOMER.CREATE',
+      },
+      {
+        label: translate('Delete customer'),
+        value: 'CUSTOMER.DELETE',
+      },
+      {
+        label: translate('List users'),
+        value: 'CUSTOMER.LIST_USERS',
+      },
+      {
+        label: translate('Update customer'),
+        value: 'CUSTOMER.UPDATE',
+      },
+    ],
+  },
+  {
+    label: translate('Customer actions for resources'),
+    options: [
+      {
+        label: translate('Accept booking request for resource'),
+        value: 'RESOURCE.ACCEPT_BOOKING_REQUEST',
+      },
+      {
+        label: translate('Consumption limitation'),
+        value: 'RESOURCE.CONSUMPTION_LIMITATION',
+      },
+      {
+        label: translate('List importable for resource'),
+        value: 'RESOURCE.LIST_IMPORTABLE',
+      },
+      {
+        label: translate('List resource'),
+        value: 'RESOURCE.LIST',
+      },
+      {
+        label: translate('Reject booking request for resource'),
+        value: 'RESOURCE.REJECT_BOOKING_REQUEST',
+      },
+      {
+        label: translate('Set limits for resource'),
+        value: 'RESOURCE.SET_LIMITS',
+      },
+      {
+        label: translate('Set plan for resource'),
+        value: 'RESOURCE.SET_PLAN',
+      },
+      {
+        label: translate('Terminate resource'),
+        value: 'RESOURCE.TERMINATE',
+      },
+      {
+        label: translate('Update options for resource'),
+        value: 'RESOURCE.UPDATE_OPTIONS',
+      },
+    ],
+  },
+  {
     label: translate('Offering'),
     options: [
       {
+        label: translate('Accept call request'),
+        value: 'OFFERING.ACCEPT_CALL_REQUEST',
+      },
+      {
+        label: translate('Add endpoint'),
+        value: 'OFFERING.ADD_ENDPOINT',
+      },
+      {
+        label: translate('Archive offering'),
+        value: 'OFFERING.ARCHIVE',
+      },
+      {
+        label: translate('Archive plan'),
+        value: 'OFFERING.ARCHIVE_PLAN',
+      },
+      {
         label: translate('Create offering'),
         value: 'OFFERING.CREATE',
+      },
+      {
+        label: translate('Create permission'),
+        value: 'OFFERING.CREATE_PERMISSION',
+      },
+      {
+        label: translate('Create plan'),
+        value: 'OFFERING.CREATE_PLAN',
+      },
+      {
+        label: translate('Create screenshot'),
+        value: 'OFFERING.CREATE_SCREENSHOT',
+      },
+      {
+        label: translate('Create user'),
+        value: 'OFFERING.CREATE_USER',
+      },
+      {
+        label: translate('Delete endpoint'),
+        value: 'OFFERING.DELETE_ENDPOINT',
       },
       {
         label: translate('Delete offering'),
         value: 'OFFERING.DELETE',
       },
       {
-        label: translate('Update offering thumbnail'),
-        value: 'OFFERING.UPDATE_THUMBNAIL',
+        label: translate('Delete permission'),
+        value: 'OFFERING.DELETE_PERMISSION',
       },
       {
-        label: translate('Update offering'),
-        value: 'OFFERING.UPDATE',
+        label: translate('Delete screenshot'),
+        value: 'OFFERING.DELETE_SCREENSHOT',
       },
       {
-        label: translate('Update offering attributes'),
-        value: 'OFFERING.UPDATE_ATTRIBUTES',
+        label: translate('Delete user'),
+        value: 'OFFERING.DELETE_USER',
       },
       {
-        label: translate('Update offering location'),
-        value: 'OFFERING.UPDATE_LOCATION',
+        label: translate('Dry run script'),
+        value: 'OFFERING.DRY_RUN_SCRIPT',
       },
       {
-        label: translate('Update offering description'),
-        value: 'OFFERING.UPDATE_DESCRIPTION',
+        label: translate('Manage campaign'),
+        value: 'OFFERING.MANAGE_CAMPAIGN',
       },
       {
-        label: translate('Update offering options'),
-        value: 'OFFERING.UPDATE_OPTIONS',
+        label: translate('Manage user group'),
+        value: 'OFFERING.MANAGE_USER_GROUP',
       },
       {
-        label: translate('Add offering endpoint'),
-        value: 'OFFERING.ADD_ENDPOINT',
-      },
-      {
-        label: translate('Delete offering endpoint'),
-        value: 'OFFERING.DELETE_ENDPOINT',
-      },
-      {
-        label: translate('Update offering components'),
-        value: 'OFFERING.UPDATE_COMPONENTS',
+        label: translate('Manage user role'),
+        value: 'OFFERING.MANAGE_USER_ROLE',
       },
       {
         label: translate('Pause offering'),
@@ -59,51 +206,55 @@ export const PermissionOptions = [
         value: 'OFFERING.UNPAUSE',
       },
       {
-        label: translate('Archive offering'),
-        value: 'OFFERING.ARCHIVE',
+        label: translate('Update attributes'),
+        value: 'OFFERING.UPDATE_ATTRIBUTES',
       },
       {
-        label: translate('Dry run offering script'),
-        value: 'OFFERING.DRY_RUN_SCRIPT',
+        label: translate('Update components'),
+        value: 'OFFERING.UPDATE_COMPONENTS',
       },
       {
-        label: translate('Manage campaign'),
-        value: 'OFFERING.MANAGE_CAMPAIGN',
+        label: translate('Update description'),
+        value: 'OFFERING.UPDATE_DESCRIPTION',
       },
       {
-        label: translate('Manage offering user group'),
-        value: 'OFFERING.MANAGE_USER_GROUP',
+        label: translate('Update integration'),
+        value: 'OFFERING.UPDATE_INTEGRATION',
       },
       {
-        label: translate('Create offering plan'),
-        value: 'OFFERING.CREATE_PLAN',
+        label: translate('Update location'),
+        value: 'OFFERING.UPDATE_LOCATION',
       },
       {
-        label: translate('Update offering plan'),
+        label: translate('Update offering'),
+        value: 'OFFERING.UPDATE',
+      },
+      {
+        label: translate('Update options'),
+        value: 'OFFERING.UPDATE_OPTIONS',
+      },
+      {
+        label: translate('Update permission'),
+        value: 'OFFERING.UPDATE_PERMISSION',
+      },
+      {
+        label: translate('Update plan'),
         value: 'OFFERING.UPDATE_PLAN',
       },
       {
-        label: translate('Archive offering plan'),
-        value: 'OFFERING.ARCHIVE_PLAN',
+        label: translate('Update restriction for offeringuser'),
+        value: 'OFFERINGUSER.UPDATE_RESTRICTION',
       },
       {
-        label: translate('Create offering screenshot'),
-        value: 'OFFERING.CREATE_SCREENSHOT',
-      },
-      {
-        label: translate('Update offering screenshot'),
+        label: translate('Update screenshot'),
         value: 'OFFERING.UPDATE_SCREENSHOT',
       },
       {
-        label: translate('Delete offering screenshot'),
-        value: 'OFFERING.DELETE_SCREENSHOT',
+        label: translate('Update thumbnail'),
+        value: 'OFFERING.UPDATE_THUMBNAIL',
       },
       {
-        label: translate('Create offering user'),
-        value: 'OFFERING.CREATE_USER',
-      },
-      {
-        label: translate('Update offering user'),
+        label: translate('Update user'),
         value: 'OFFERING.UPDATE_USER',
       },
     ],
@@ -112,219 +263,53 @@ export const PermissionOptions = [
     label: translate('Order'),
     options: [
       {
-        label: translate('List orders'),
-        value: 'ORDER.LIST',
-      },
-      {
         label: translate('Approve order'),
         value: 'ORDER.APPROVE',
       },
       {
-        label: translate('Approve private order'),
+        label: translate('Approve private for order'),
         value: 'ORDER.APPROVE_PRIVATE',
       },
       {
-        label: translate('Reject order'),
-        value: 'ORDER.REJECT',
+        label: translate('Cancel order'),
+        value: 'ORDER.CANCEL',
       },
       {
         label: translate('Destroy order'),
         value: 'ORDER.DESTROY',
       },
       {
-        label: translate('Cancel order'),
-        value: 'ORDER.CANCEL',
+        label: translate('List order'),
+        value: 'ORDER.LIST',
+      },
+      {
+        label: translate('Reject order'),
+        value: 'ORDER.REJECT',
       },
     ],
   },
   {
-    label: translate('Provider actions'),
+    label: translate('Other'),
     options: [
       {
-        label: translate('Set resource usage'),
-        value: 'RESOURCE.SET_USAGE',
+        label: translate('Create access subnet'),
+        value: 'ACCESS_SUBNET.CREATE',
       },
       {
-        label: translate('Set resource backend id'),
-        value: 'RESOURCE.SET_BACKEND_ID',
+        label: translate('Create lexis link'),
+        value: 'LEXIS_LINK.CREATE',
       },
       {
-        label: translate('Submit resource report'),
-        value: 'RESOURCE.SUBMIT_REPORT',
+        label: translate('Delete access subnet'),
+        value: 'ACCESS_SUBNET.DELETE',
       },
       {
-        label: translate('Set resource end date'),
-        value: 'RESOURCE.SET_END_DATE',
+        label: translate('Delete lexis link'),
+        value: 'LEXIS_LINK.DELETE',
       },
       {
-        label: translate('Set resource state'),
-        value: 'RESOURCE.SET_STATE',
-      },
-      {
-        label: translate('Set resource backend metadata'),
-        value: 'RESOURCE.SET_BACKEND_METADATA',
-      },
-      {
-        label: translate('Create robot account'),
-        value: 'RESOURCE.CREATE_ROBOT_ACCOUNT',
-      },
-      {
-        label: translate('Update robot account'),
-        value: 'RESOURCE.UPDATE_ROBOT_ACCOUNT',
-      },
-      {
-        label: translate('Delete robot account'),
-        value: 'RESOURCE.DELETE_ROBOT_ACCOUNT',
-      },
-      {
-        label: translate('Manage resource users'),
-        value: 'RESOURCE.MANAGE_USERS',
-      },
-      {
-        label: translate('Get API secret code'),
-        value: 'SERVICE_PROVIDER.GET_API_SECRET_CODE',
-      },
-      {
-        label: translate('Generate API secret code'),
-        value: 'SERVICE_PROVIDER.GENERATE_API_SECRET_CODE',
-      },
-      {
-        label: translate('List service provider customers'),
-        value: 'SERVICE_PROVIDER.LIST_CUSTOMERS',
-      },
-      {
-        label: translate('List service provider customer projects'),
-        value: 'SERVICE_PROVIDER.LIST_CUSTOMER_PROJECTS',
-      },
-      {
-        label: translate('List service provider projects'),
-        value: 'SERVICE_PROVIDER.LIST_PROJECTS',
-      },
-      {
-        label: translate('List service provider project permissions'),
-        value: 'SERVICE_PROVIDER.LIST_PROJECT_PERMISSIONS',
-      },
-      {
-        label: translate('List service provider keys'),
-        value: 'SERVICE_PROVIDER.LIST_KEYS',
-      },
-      {
-        label: translate('List service provider users'),
-        value: 'SERVICE_PROVIDER.LIST_USERS',
-      },
-      {
-        label: translate('List service provider user customers'),
-        value: 'SERVICE_PROVIDER.LIST_USER_CUSTOMERS',
-      },
-      {
-        label: translate('Set offerings username'),
-        value: 'SERVICE_PROVIDER.SET_OFFERINGS_USERNAME',
-      },
-      {
-        label: translate('Get service provider statistics'),
-        value: 'SERVICE_PROVIDER.GET_STATISTICS',
-      },
-      {
-        label: translate('Get service provider revenue'),
-        value: 'SERVICE_PROVIDER.GET_REVENUE',
-      },
-      {
-        label: translate('Get service provider robot account customers'),
-        value: 'SERVICE_PROVIDER.GET_ROBOT_ACCOUNT_CUSTOMERS',
-      },
-      {
-        label: translate('Get service provider robot account projects'),
-        value: 'SERVICE_PROVIDER.GET_ROBOT_ACCOUNT_PROJECTS',
-      },
-    ],
-  },
-  {
-    label: translate('Customer actions for resources'),
-    options: [
-      {
-        label: translate('List resources'),
-        value: 'RESOURCE.LIST',
-      },
-      {
-        label: translate('Set resource end date'),
-        value: 'RESOURCE.SET_END_DATE',
-      },
-      {
-        label: translate('Terminate resource'),
-        value: 'RESOURCE.TERMINATE',
-      },
-      {
-        label: translate('List importable resources'),
-        value: 'RESOURCE.LIST_IMPORTABLE',
-      },
-      {
-        label: translate('Switch resource plan'),
-        value: 'RESOURCE.SET_PLAN',
-      },
-      {
-        label: translate('Update resource limits'),
-        value: 'RESOURCE.SET_LIMITS',
-      },
-      {
-        label: translate('Accept booking request'),
-        value: 'RESOURCE.ACCEPT_BOOKING_REQUEST',
-      },
-      {
-        label: translate('Reject booking request'),
-        value: 'RESOURCE.REJECT_BOOKING_REQUEST',
-      },
-      {
-        label: translate('Update resource options'),
-        value: 'RESOURCE.UPDATE_OPTIONS',
-      },
-      {
-        label: translate('Set resource consumption limitation'),
-        value: 'RESOURCE.CONSUMPTION_LIMITATION',
-      },
-    ],
-  },
-  {
-    label: translate('Team members'),
-    options: [
-      {
-        label: translate('List invitations'),
-        value: 'INVITATION.LIST',
-      },
-      {
-        label: translate('Create project permission'),
-        value: 'PROJECT.CREATE_PERMISSION',
-      },
-      {
-        label: translate('Create customer permission'),
-        value: 'CUSTOMER.CREATE_PERMISSION',
-      },
-      {
-        label: translate('Create offering permission'),
-        value: 'OFFERING.CREATE_PERMISSION',
-      },
-      {
-        label: translate('Update project permission'),
-        value: 'PROJECT.UPDATE_PERMISSION',
-      },
-      {
-        label: translate('Update customer permission'),
-        value: 'CUSTOMER.UPDATE_PERMISSION',
-      },
-      {
-        label: translate('Update offering permission'),
-        value: 'OFFERING.UPDATE_PERMISSION',
-      },
-      {
-        label: translate('Delete project permission'),
-        value: 'PROJECT.DELETE_PERMISSION',
-      },
-      {
-        label: translate('Delete customer permission'),
-        value: 'CUSTOMER.DELETE_PERMISSION',
-      },
-      {
-        label: translate('Delete offering permission'),
-        value: 'OFFERING.DELETE_PERMISSION',
+        label: translate('Update access subnet'),
+        value: 'ACCESS_SUBNET.UPDATE',
       },
     ],
   },
@@ -332,69 +317,170 @@ export const PermissionOptions = [
     label: translate('Project'),
     options: [
       {
-        label: translate('List projects'),
-        value: 'PROJECT.LIST',
-      },
-      {
         label: translate('Create project'),
         value: 'PROJECT.CREATE',
-      },
-      {
-        label: translate('Update project'),
-        value: 'PROJECT.UPDATE',
       },
       {
         label: translate('Delete project'),
         value: 'PROJECT.DELETE',
       },
+      {
+        label: translate('List project'),
+        value: 'PROJECT.LIST',
+      },
+      {
+        label: translate('Update project'),
+        value: 'PROJECT.UPDATE',
+      },
     ],
   },
   {
-    label: translate('Call management'),
+    label: translate('Provider actions'),
     options: [
       {
-        label: translate('List calls'),
-        value: 'CALL.LIST',
+        label: translate('Create robot account'),
+        value: 'RESOURCE.CREATE_ROBOT_ACCOUNT',
       },
       {
-        label: translate('List rounds'),
-        value: 'ROUND.LIST',
+        label: translate('Delete robot account'),
+        value: 'RESOURCE.DELETE_ROBOT_ACCOUNT',
       },
       {
-        label: translate('List proposals'),
-        value: 'PROPOSAL.LIST',
+        label: translate('Generate api secret code'),
+        value: 'SERVICE_PROVIDER.GENERATE_API_SECRET_CODE',
       },
       {
-        label: translate('Approve and reject proposals'),
-        value: 'CALL.APPROVE_AND_REJECT_PROPOSALS',
+        label: translate('List customer projects'),
+        value: 'SERVICE_PROVIDER.LIST_CUSTOMER_PROJECTS',
       },
       {
-        label: translate('Close rounds'),
-        value: 'CALL.CLOSE_ROUNDS',
+        label: translate('List customers'),
+        value: 'SERVICE_PROVIDER.LIST_CUSTOMERS',
       },
       {
-        label: translate('Create call permission'),
-        value: 'CALL.CREATE_PERMISSION',
+        label: translate('List keys'),
+        value: 'SERVICE_PROVIDER.LIST_KEYS',
       },
       {
-        label: translate('Update call permission'),
-        value: 'CALL.UPDATE_PERMISSION',
+        label: translate('List project permissions'),
+        value: 'SERVICE_PROVIDER.LIST_PROJECT_PERMISSIONS',
       },
       {
-        label: translate('Delete call permission'),
-        value: 'CALL.DELETE_PERMISSION',
+        label: translate('List projects'),
+        value: 'SERVICE_PROVIDER.LIST_PROJECTS',
       },
       {
-        label: translate('Manage proposal'),
-        value: 'PROPOSAL.MANAGE',
+        label: translate('List user customers'),
+        value: 'SERVICE_PROVIDER.LIST_USER_CUSTOMERS',
       },
       {
-        label: translate('Update proposal permission'),
-        value: 'PROPOSAL.UPDATE_PERMISSION',
+        label: translate('List users'),
+        value: 'SERVICE_PROVIDER.LIST_USERS',
       },
       {
-        label: translate('Delete proposal permission'),
-        value: 'PROPOSAL.DELETE_PERMISSION',
+        label: translate('Manage offerings username'),
+        value: 'SERVICE_PROVIDER.SET_OFFERINGS_USERNAME',
+      },
+      {
+        label: translate('Manage service account'),
+        value: 'SERVICE_ACCOUNT.MANAGE',
+      },
+      {
+        label: translate('Manage users for resource'),
+        value: 'RESOURCE.MANAGE_USERS',
+      },
+      {
+        label: translate('Openstack image management for service provider'),
+        value: 'SERVICE_PROVIDER.OPENSTACK_IMAGE_MANAGEMENT',
+      },
+      {
+        label: translate('Register service provider'),
+        value: 'SERVICE_PROVIDER.REGISTER',
+      },
+      {
+        label: translate('Set backend id for resource'),
+        value: 'RESOURCE.SET_BACKEND_ID',
+      },
+      {
+        label: translate('Set backend metadata for resource'),
+        value: 'RESOURCE.SET_BACKEND_METADATA',
+      },
+      {
+        label: translate('Set end date for resource'),
+        value: 'RESOURCE.SET_END_DATE',
+      },
+      {
+        label: translate('Set state for resource'),
+        value: 'RESOURCE.SET_STATE',
+      },
+      {
+        label: translate('Set usage for resource'),
+        value: 'RESOURCE.SET_USAGE',
+      },
+      {
+        label: translate('Submit report'),
+        value: 'RESOURCE.SUBMIT_REPORT',
+      },
+      {
+        label: translate('Update robot account'),
+        value: 'RESOURCE.UPDATE_ROBOT_ACCOUNT',
+      },
+      {
+        label: translate('View api secret code'),
+        value: 'SERVICE_PROVIDER.GET_API_SECRET_CODE',
+      },
+      {
+        label: translate('View revenue'),
+        value: 'SERVICE_PROVIDER.GET_REVENUE',
+      },
+      {
+        label: translate('View robot account customers'),
+        value: 'SERVICE_PROVIDER.GET_ROBOT_ACCOUNT_CUSTOMERS',
+      },
+      {
+        label: translate('View robot account projects'),
+        value: 'SERVICE_PROVIDER.GET_ROBOT_ACCOUNT_PROJECTS',
+      },
+      {
+        label: translate('View statistics'),
+        value: 'SERVICE_PROVIDER.GET_STATISTICS',
+      },
+    ],
+  },
+  {
+    label: translate('Team members'),
+    options: [
+      {
+        label: translate('Create permission customer'),
+        value: 'CUSTOMER.CREATE_PERMISSION',
+      },
+      {
+        label: translate('Create permission project'),
+        value: 'PROJECT.CREATE_PERMISSION',
+      },
+      {
+        label: translate('Delete permission customer'),
+        value: 'CUSTOMER.DELETE_PERMISSION',
+      },
+      {
+        label: translate('Delete permission project'),
+        value: 'PROJECT.DELETE_PERMISSION',
+      },
+      {
+        label: translate('List invitation'),
+        value: 'INVITATION.LIST',
+      },
+      {
+        label: translate('List permission reviews'),
+        value: 'CUSTOMER.LIST_PERMISSION_REVIEWS',
+      },
+      {
+        label: translate('Update permission customer'),
+        value: 'CUSTOMER.UPDATE_PERMISSION',
+      },
+      {
+        label: translate('Update permission project'),
+        value: 'PROJECT.UPDATE_PERMISSION',
       },
     ],
   },

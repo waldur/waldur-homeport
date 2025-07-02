@@ -28,7 +28,11 @@ const getFiltersFromParams = (params) => {
 
 const PureProviderOfferingsFilter: FunctionComponent = () => (
   <>
-    <TableFilterItem title={translate('State')} name="state">
+    <TableFilterItem
+      title={translate('State')}
+      name="state"
+      instantApply={false}
+    >
       <OfferingStateFilter />
     </TableFilterItem>
 

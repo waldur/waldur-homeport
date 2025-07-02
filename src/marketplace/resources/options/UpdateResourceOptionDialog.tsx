@@ -4,8 +4,8 @@ import { reduxForm } from 'redux-form';
 import {
   marketplaceResourcesUpdateOptions,
   OptionField,
+  Resource,
 } from 'waldur-js-client';
-import { Resource } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { OptionsForm } from '@waldur/marketplace/common/OptionsForm';
@@ -14,27 +14,29 @@ import { ActionDialog } from '@waldur/modal/ActionDialog';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-interface UpdateResourceOptionDialogProps {
+export interface UpdateResourceOptionDialogProps {
   resolve: {
-    resource: Resource & { options };
+    resource: Resource;
     offering: Offering;
     option: OptionField & { name };
     refetch?;
   };
 }
 
-export const UpdateResourceOptionDialog = connect(
-  (_, ownProps: UpdateResourceOptionDialogProps) => ({
-    initialValues: {
-      attributes: {
-        [ownProps.resolve.option.name]:
-          ownProps.resolve.resource && ownProps.resolve.resource.options
-            ? ownProps.resolve.resource.options[ownProps.resolve.option.name]
-            : null,
-      },
+export const UpdateResourceOptionDialog = connect<
+  {},
+  {},
+  UpdateResourceOptionDialogProps
+>((_, ownProps) => ({
+  initialValues: {
+    attributes: {
+      [ownProps.resolve.option.name]:
+        ownProps.resolve.resource && ownProps.resolve.resource.options
+          ? ownProps.resolve.resource.options[ownProps.resolve.option.name]
+          : null,
     },
-  }),
-)(
+  },
+}))(
   reduxForm<{}, UpdateResourceOptionDialogProps>({
     form: 'UpdateResourceOptionDialog',
   })((props) => {

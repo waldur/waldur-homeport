@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 import { invoicesPaid } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@waldur/core/api';
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatISODate } from '@waldur/core/dateUtils';
 import { FileUploadField, FormContainer, SubmitButton } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
@@ -21,7 +21,7 @@ const MarkAsPaidDialogContainer: FunctionComponent<any> = (props) => {
       await invoicesPaid({
         path: { uuid: props.resolve.invoice.uuid },
         body: {
-          date: formData.date ? formatDate(formData.date) : undefined,
+          date: formData.date ? formatISODate(formData.date) : undefined,
           proof: fileSerializer(formData.proof),
         },
         ...formDataOptions,

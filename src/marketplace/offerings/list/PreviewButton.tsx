@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -22,7 +22,7 @@ export const PreviewButton = ({ offering }) => {
   return (
     <ActionButton
       title={translate('Preview order form')}
-      iconNode={<Eye weight="bold" />}
+      iconNode={<EyeIcon weight="bold" />}
       className="order-1 order-sm-2 w-100 w-sm-auto"
       action={() =>
         dispatch(

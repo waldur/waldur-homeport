@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { FormSection, WrappedFieldArrayProps } from 'redux-form';
@@ -39,7 +39,7 @@ const ColumnsHeader: FC = () => (
 const ColumnAddButton = ({ fields }) => (
   <Button variant="primary" size="sm" onClick={() => fields.push({})}>
     <span className="svg-icon svg-icon-2">
-      <Plus weight="bold" />
+      <PlusIcon weight="bold" />
     </span>{' '}
     {translate('Add column')}
   </Button>

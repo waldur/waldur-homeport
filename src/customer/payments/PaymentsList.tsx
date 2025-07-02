@@ -24,8 +24,8 @@ export const PaymentsList: FunctionComponent = () => {
     [customer],
   );
 
-  const filter = useMemo<PaymentsListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): PaymentsListData['query'] => ({
       profile_uuid: profile?.uuid,
     }),
     [profile],

@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { AuthToken, authTokensDestroy } from 'waldur-js-client';
 
@@ -40,7 +40,7 @@ export const TokenDeleteButton = ({
     <ActionItem
       title={translate('Remove')}
       action={openDialog}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
       className="text-danger"
       iconColor="danger"

@@ -16,7 +16,9 @@
       "estimated_cost": true,
       "events": true,
       "oecd_fos_2007_code": false,
-      "show_industry_flag": false
+      "show_industry_flag": false,
+      "show_start_date_in_create_dialog": true,
+      "show_end_date_in_create_dialog": true
     },
     "user": {
       "preferred_language": false,
@@ -75,7 +77,6 @@
     "MASTERMIND_URL": "",
     "MARKETPLACE_LANDING_PAGE": "Marketplace",
     "ANONYMOUS_USER_CAN_VIEW_OFFERINGS": true,
-    "ENABLE_RESOURCE_END_DATE": true,
     "AUTHENTICATION_METHODS": ["LOCAL_SIGNIN", "SAML2", "SOCIAL_SIGNUP"],
     "INVITATIONS_ENABLED": true,
     "VALIDATE_INVITATION_EMAIL": false,

@@ -1,4 +1,4 @@
-import { Buildings } from '@phosphor-icons/react';
+import { BuildingsIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
 import { translate } from '@waldur/i18n';
@@ -21,7 +21,7 @@ export const OrganizationsListMenu = () => {
           ? state.name
           : undefined
       }
-      icon={<Buildings weight="bold" />}
+      icon={<BuildingsIcon weight="bold" />}
       child={false}
     />
   );

@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { adminAnnouncementsDestroy } from 'waldur-js-client';
 
@@ -26,7 +26,7 @@ export const AnnouncementDeleteAction = ({ row, refetch }) => {
     <ActionItem
       title={translate('Remove')}
       action={openDialog}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
       iconColor="danger"
       size="sm"

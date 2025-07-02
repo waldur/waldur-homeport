@@ -1,4 +1,4 @@
-import { PlusCircle, Trash } from '@phosphor-icons/react';
+import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
@@ -124,7 +124,7 @@ const FieldsListGroup = ({
                         disabled={fields.length < 2}
                       >
                         <span className="svg-icon svg-icon-1">
-                          <Trash weight="bold" />
+                          <TrashIcon weight="bold" />
                         </span>
                       </Button>
                     </td>
@@ -143,7 +143,7 @@ const FieldsListGroup = ({
           disabled={addDisabled}
         >
           <span className="svg-icon svg-icon-2">
-            <PlusCircle weight="bold" />
+            <PlusCircleIcon weight="bold" />
           </span>{' '}
           {translate('Add new')}
         </Button>

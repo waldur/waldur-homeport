@@ -1,5 +1,5 @@
 import { padStart, uniqueId } from 'lodash-es';
-import { Duration } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -32,35 +32,93 @@ export const createBooking = (
   extendedProps,
 });
 
-export const createAvailabilitySlots = (
-  events: BookingProps[],
-  slotDuration: Duration,
-): EventInput[] => {
-  const slots = [];
+interface RangeItem {
+  start: DateTime;
+  end: DateTime;
+}
 
-  events.forEach((event) => {
-    const eventEnd = parseDate(event.end);
-    let cursor = parseDate(event.start);
+const subtractRanges = (
+  availableRanges: RangeItem[],
+  busyRanges: RangeItem[],
+) => {
+  const result: RangeItem[] = [];
 
-    while (cursor < eventEnd) {
-      const end = cursor.plus(slotDuration);
-      // Don't push duplicate slots
-      if (!slots.some((sl) => parseDate(sl.start).equals(cursor))) {
-        const slot: EventInput = {
-          start: cursor.toISO(),
-          end: end.toISO(),
-          id: 'availableForBooking',
-          groupId: 'availableForBooking',
-          editable: false,
-          rendering: 'background',
-        };
-        slots.push(slot);
+  for (const available of availableRanges) {
+    let current = [available];
+
+    for (const busy of busyRanges) {
+      const temp: typeof current = [];
+
+      for (const range of current) {
+        if (
+          busy.end.toMillis() <= range.start.toMillis() ||
+          busy.start.toMillis() >= range.end.toMillis()
+        ) {
+          temp.push(range); // no overlap
+        } else {
+          if (busy.start.toMillis() > range.start.toMillis()) {
+            temp.push({ start: range.start, end: busy.start });
+          }
+          if (busy.end.toMillis() < range.end.toMillis()) {
+            temp.push({ start: busy.end, end: range.end });
+          }
+        }
       }
-      cursor = end;
-    }
-  });
 
-  return slots;
+      current = temp;
+    }
+
+    result.push(...current);
+  }
+
+  return result;
+};
+
+const mergeEventsIntoRanges = (events: BookingProps[]) => {
+  const sorted = events
+    .map((e) => ({
+      start: parseDate(e.start),
+      end: parseDate(e.end),
+    }))
+    .sort((a, b) => a.start.toMillis() - b.start.toMillis());
+
+  const merged: RangeItem[] = [];
+
+  for (const ev of sorted) {
+    const last = merged[merged.length - 1];
+    if (last && ev.start.toMillis() <= last.end.toMillis()) {
+      last.end = DateTime.max(last.end, ev.end);
+    } else {
+      merged.push({ start: ev.start, end: ev.end });
+    }
+  }
+
+  return merged;
+};
+
+export const getAvailableRangeOfDates = (
+  schedules: BookingProps[],
+  inUseRanges: any[],
+) => {
+  const busyRanges = inUseRanges.map((r) => ({
+    start: parseDate(r.start),
+    end: parseDate(r.end),
+  }));
+
+  const fullRanges = mergeEventsIntoRanges(schedules);
+  const availableRanges = subtractRanges(fullRanges, busyRanges);
+
+  return availableRanges.map((range) => {
+    let start = range.start;
+    // if start time is 23:59, take it to the next day to render it currently in flatpickr
+    if (start.hour === 23 && start.minute === 59) {
+      start = start.plus({ hours: 1 }).startOf('day');
+    }
+    return {
+      from: start.toISO(),
+      to: range.end.toISO(),
+    };
+  });
 };
 
 export const handleWeekDays = (weekdayNumbers, dayNumber): number[] => {

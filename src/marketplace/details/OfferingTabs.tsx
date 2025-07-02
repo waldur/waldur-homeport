@@ -1,6 +1,6 @@
-import Markdown from 'markdown-to-jsx';
 import { NestedSection, PublicOfferingDetails } from 'waldur-js-client';
 
+import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
 import { translate } from '@waldur/i18n';
 import { ImagesTab } from '@waldur/marketplace/offerings/images/ImagesTab';
 
@@ -34,7 +34,7 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
     {
       visible: !!props.offering.terms_of_service,
       title: translate('Terms of Service'),
-      component: () => <Markdown>{props.offering.terms_of_service}</Markdown>,
+      component: () => <SafeMarkdown text={props.offering.terms_of_service} />,
     },
     {
       visible: basicSections.length > 0,

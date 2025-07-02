@@ -1,4 +1,4 @@
-import { CheckCircle } from '@phosphor-icons/react';
+import { CheckCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,16 +20,22 @@ export const ApproveByConsumerButton: FC<
 > = ({ order, as, className, refetch }) => {
   const user = useSelector(getUser);
   const dispatch = useDispatch();
-  const { mutate, isLoading } = useMutation(async () => {
-    try {
-      await marketplaceOrdersApproveByConsumer({ path: { uuid: order.uuid } });
-      if (refetch) {
-        await refetch();
+  const { mutate, isPending: isLoading } = useMutation({
+    mutationFn: async () => {
+      try {
+        await marketplaceOrdersApproveByConsumer({
+          path: { uuid: order.uuid },
+        });
+        if (refetch) {
+          await refetch();
+        }
+        dispatch(showSuccess(translate('Order has been approved.')));
+      } catch (error) {
+        dispatch(
+          showErrorResponse(error, translate('Unable to approve order.')),
+        );
       }
-      dispatch(showSuccess(translate('Order has been approved.')));
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to approve order.')));
-    }
+    },
   });
   if (
     !hasPermission(user, {
@@ -52,7 +58,7 @@ export const ApproveByConsumerButton: FC<
           title={translate('Approve')}
           action={mutate}
           disabled={isLoading}
-          iconNode={<CheckCircle weight="bold" />}
+          iconNode={<CheckCircleIcon weight="bold" />}
           size="sm"
         />
       )}

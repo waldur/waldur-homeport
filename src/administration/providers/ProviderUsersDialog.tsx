@@ -14,8 +14,8 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { FreeIPAUsersList } from '../users/FreeIPAUsersList';
 
 const ProviderUsersList = (props) => {
-  const filter = useMemo<UsersListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): UsersListData['query'] => ({
       registration_method: props.resolve.type,
       field: ['full_name', 'email', 'is_active'],
     }),

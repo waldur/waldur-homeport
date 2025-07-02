@@ -3,7 +3,10 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures, SupportFeatures } from '@waldur/FeaturesEnums';
+import {
+  InvitationsFeatures,
+  MarketplaceFeatures,
+} from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
 
@@ -257,7 +260,6 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      feature: SupportFeatures.users,
       breadcrumb: () => translate('Users'),
     },
   },
@@ -282,9 +284,6 @@ export const states: StateDeclaration[] = [
         default: module.UserManage,
       })),
     ),
-    data: {
-      feature: SupportFeatures.users,
-    },
   },
   {
     name: 'admin-user-notifications',
@@ -381,6 +380,21 @@ export const states: StateDeclaration[] = [
     parent: 'admin-accounts',
     data: {
       breadcrumb: () => translate('Invitations'),
+    },
+  },
+
+  {
+    name: 'admin-service-accounts',
+    url: 'service-accounts/?tab',
+    parent: 'admin-accounts',
+    component: lazyComponent(() =>
+      import('./service-accounts/ServiceAccountsTable').then((module) => ({
+        default: module.ServiceAccountsTable,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Service accounts'),
+      feature: InvitationsFeatures.show_service_accounts,
     },
   },
 

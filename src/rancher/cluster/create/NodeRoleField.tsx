@@ -8,16 +8,13 @@ export const NodeRoleField: FunctionComponent<any> = (props) => (
     value={props.input.value}
     onChange={props.input.onChange}
     name="role"
-    type="checkbox"
+    type="radio"
   >
-    <ToggleButton value="controlplane" id="controlplane">
-      {translate('Control plane')}
+    <ToggleButton value="agent" id="agent">
+      {translate('Agent')}
     </ToggleButton>
-    <ToggleButton value="etcd" id="etcd">
-      {translate('etcd')}
-    </ToggleButton>
-    <ToggleButton value="worker" id="worker">
-      {translate('Worker')}
+    <ToggleButton value="server" id="server">
+      {translate('Server')}
     </ToggleButton>
   </ToggleButtonGroup>
 );

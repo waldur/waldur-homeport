@@ -1,5 +1,6 @@
+import _ from 'lodash';
+
 import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
 import { PhoneNumber } from '@waldur/workspace/types';
 
 export function wait(amount = 0) {
@@ -67,9 +68,6 @@ export const formatPhoneNumber = (phoneNumber: PhoneNumber) => {
   if (typeof phoneNumber === 'string') return phoneNumber;
   return phoneNumber.country_code + '-' + phoneNumber.national_number;
 };
-
-export const formatYesNo = (value) =>
-  value === true ? translate('Yes') : translate('No');
 
 export const listToDict = (key, value) => (list) => {
   const dict = {};
@@ -173,6 +171,15 @@ export function returnReactSelectAsyncPaginateObject<T = {}>(
 }
 
 export const cleanObject = (value: any) => JSON.parse(JSON.stringify(value));
+
+export const removeEmptyObjects = (obj) => {
+  return _(obj)
+    .pickBy(_.isObject) // pick objects only
+    .mapValues(removeEmptyObjects) // call only for object values
+    .omitBy(_.isEmpty) // remove all empty objects
+    .assign(_.omitBy(obj, _.isObject)) // assign back primitive values
+    .value();
+};
 
 export const createDeferred = () => {
   const deferred: any = {};

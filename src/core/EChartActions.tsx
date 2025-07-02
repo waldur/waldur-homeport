@@ -1,4 +1,4 @@
-import { FileCsv, FileXls, Printer } from '@phosphor-icons/react';
+import { FileCsvIcon, FileXlsIcon, PrinterIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -37,6 +37,7 @@ const generatePDF = async (image: any, title?: string) => {
         width: 530,
       },
     ],
+
     defaultStyle: {
       font: 'OpenSans',
     },
@@ -108,7 +109,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
               className="text-btn text-hover-primary"
               onClick={makePdf}
             >
-              <Printer size={20} />
+              <PrinterIcon size={20} />
             </button>
           </Tip>
         )}
@@ -119,7 +120,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
               className="text-btn text-hover-primary"
               onClick={() => exportData('csv')}
             >
-              <FileCsv size={20} />
+              <FileCsvIcon size={20} />
             </button>
           </Tip>
         )}
@@ -130,7 +131,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
               className="text-btn text-hover-primary"
               onClick={() => exportData('excel')}
             >
-              <FileXls size={20} />
+              <FileXlsIcon size={20} />
             </button>
           </Tip>
         )}

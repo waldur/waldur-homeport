@@ -12,6 +12,7 @@ export const CredentialsTab = () => (
       validate={required}
       maxLength={150}
     />
+
     <SecretField
       name="token"
       label={translate('Authentication token')}

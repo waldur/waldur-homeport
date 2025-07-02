@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { createRef, useCallback, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCurrentStateAndParams } from '@uirouter/react';
+import { createRef, useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { getFormValues, submit as submitForm } from 'redux-form';
 import {
   proposalProposalsRetrieve,
   proposalReviewsPartialUpdate,
@@ -23,10 +24,14 @@ import {
   waitForConfirmation,
 } from '@waldur/modal/actions';
 import { useTitle } from '@waldur/navigation/title';
-import { PROPOSAL_UPDATE_REVIEW_FORM_ID } from '@waldur/proposals/constants';
+import {
+  PROPOSAL_UPDATE_REVIEW_FORM_ID,
+  REVIEW_SUMMARY_FORM_ID,
+} from '@waldur/proposals/constants';
 import { ProposalReview } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getUser } from '@waldur/workspace/selectors';
+import { RootState } from '@waldur/store/reducers';
+import store from '@waldur/store/store';
 
 import { CreatePageSidebar } from './CreatePageSidebar';
 import { ReviewHeader } from './ReviewHeader';
@@ -54,26 +59,24 @@ export const ProposalReviewCreatePage = (props) => {
   const {
     params: { review_uuid },
   } = useCurrentStateAndParams();
-  const router = useRouter();
-  const user = useSelector(getUser);
 
   // We keep the Review object here, so that we don't fetch it again every time a comment is added/edited.
   // See the "openCommentFormDialog" function.
   const [reviewObject, setReviewObject] = useState<ProposalReview>(null);
 
-  const { data, isLoading, error, refetch } = useQuery(
-    ['ReviewData', review_uuid],
-    () => loadData(review_uuid),
-    {
-      refetchOnWindowFocus: false,
-      onSuccess(data) {
-        setReviewObject(data.review);
-      },
-    },
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['ReviewData', review_uuid],
+    queryFn: () => loadData(review_uuid),
+    refetchOnWindowFocus: false,
+  });
+
+  useEffect(() => {
+    if (data?.review) {
+      setReviewObject(data.review);
+    }
+  }, [data]);
 
   const formSteps = createReviewSteps;
-
   const stepRefs = useRef([]);
   stepRefs.current = formSteps.map(
     (_, i) => stepRefs.current[i] ?? createRef(),
@@ -81,7 +84,36 @@ export const ProposalReviewCreatePage = (props) => {
 
   const dispatch = useDispatch();
 
+  const captureFormValues = useCallback(() => {
+    store.dispatch(submitForm(REVIEW_SUMMARY_FORM_ID));
+    const values = getFormValues(REVIEW_SUMMARY_FORM_ID)(
+      store.getState() as RootState,
+    );
+    return values;
+  }, []);
+
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSaveSummary = useCallback(async () => {
+    const values = captureFormValues();
+
+    setIsSaving(true);
+    try {
+      const response = await proposalReviewsPartialUpdate({
+        body: values,
+        path: { uuid: data.review.uuid },
+      });
+      setReviewObject(response.data);
+      dispatch(showSuccess(translate('Review has been updated.')));
+    } catch (e) {
+      dispatch(showErrorResponse(e, translate('Unable to update review.')));
+    } finally {
+      setIsSaving(false);
+    }
+  }, [dispatch, data?.review]);
+
   const submit = useCallback(async () => {
+    await handleSaveSummary();
     try {
       await waitForConfirmation(
         dispatch,
@@ -108,7 +140,7 @@ export const ProposalReviewCreatePage = (props) => {
     } catch (error) {
       dispatch(showErrorResponse(error, translate('Something went wrong')));
     }
-  }, [data, router, user]);
+  }, [data, dispatch]);
 
   const openCommentFormDialog = useCallback(
     ({ commentField, label }) =>
@@ -176,6 +208,8 @@ export const ProposalReviewCreatePage = (props) => {
                 <CreatePageSidebar
                   review={reviewObject}
                   submitting={submitting}
+                  saveAsDraft={handleSaveSummary}
+                  isSaving={isSaving}
                   refetch={refetch}
                 />
               </SidebarLayout.Sidebar>

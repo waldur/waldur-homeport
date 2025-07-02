@@ -42,7 +42,7 @@ export const CustomerSupportRating: FunctionComponent = () => {
         'Unable to load customer support satisfaction overall rating.',
       )}
     </>
-  ) : (
+  ) : value.averageFeedback instanceof Number ? (
     <Panel
       title={translate('Customer support satisfaction overall rating')}
       className="customer-support-rating-container"
@@ -56,6 +56,7 @@ export const CustomerSupportRating: FunctionComponent = () => {
           activeColor={RATING_STAR_ACTIVE_COLOR}
           value={value.averageFeedback}
         />
+
         <div className="total-reviews">
           <span>
             {getTotalNumberOfReviews(value.feedbackReport)}{' '}
@@ -64,5 +65,5 @@ export const CustomerSupportRating: FunctionComponent = () => {
         </div>
       </div>
     </Panel>
-  );
+  ) : null;
 };

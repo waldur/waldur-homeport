@@ -1,4 +1,4 @@
-import { AddressBook } from '@phosphor-icons/react';
+import { AddressBookIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -35,7 +35,7 @@ export const CreditUsageButton = ({ row, scope }) => {
   return (
     <Dropdown.Item as="button" onClick={openDialog}>
       <span className="svg-icon svg-icon-2">
-        <AddressBook weight="bold" />
+        <AddressBookIcon weight="bold" />
       </span>
       {translate('Credit usage')}
     </Dropdown.Item>

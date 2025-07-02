@@ -1,4 +1,4 @@
-import { PlusCircle, X } from '@phosphor-icons/react';
+import { PlusCircleIcon, XIcon } from '@phosphor-icons/react';
 import { DateTime, Duration } from 'luxon';
 import {
   FunctionComponent,
@@ -146,15 +146,18 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
             setStartTime={setStartTime}
             setEndTime={setEndTime}
           />
+
           <WeekdaysGroup
             daysOfWeek={daysOfWeek}
             setDaysOfWeek={setDaysOfWeek}
           />
+
           <WeekendsGroup weekends={weekends} setWeekends={setWeekends} />
           <SlotDurationGroup
             slotDuration={slotDuration}
             setSlotDuration={setSlotDuration}
           />
+
           <TimeZoneGroup timeZone={timeZone} setTimeZone={setTimeZone} />
         </Card.Body>
       </Card>
@@ -183,7 +186,7 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
                 onClick={() => props.fields.remove(index)}
               >
                 <span className="svg-icon svg-icon-2">
-                  <X weight="bold" />
+                  <XIcon weight="bold" />
                 </span>
               </Button>
             </div>
@@ -204,7 +207,7 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
         ))}
         <Button variant="light" className="text-nowrap" onClick={addRow}>
           <span className="svg-icon svg-icon-2">
-            <PlusCircle weight="bold" />
+            <PlusCircleIcon weight="bold" />
           </span>
           {translate('Add time period')}
         </Button>

@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { RequestedOffering } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
-import { CallOfferingDeleteButton } from '@waldur/proposals/details/CallOfferingDeleteButton';
 import { CallOfferingStateField } from '@waldur/proposals/details/CallOfferingStateField';
 import { Call } from '@waldur/proposals/types';
 import { createFetcher } from '@waldur/table/api';
@@ -12,6 +11,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { AddOfferingButton } from './AddOfferingButton';
 import { CallOfferingExpandableRow } from './CallOfferingExpandableRow';
+import { CallOfferingRowActions } from './CallOfferingRowActions';
 
 interface CallOfferingsSectionProps {
   call: Call;
@@ -58,7 +58,7 @@ export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
       }
       expandableRow={CallOfferingExpandableRow}
       rowActions={({ row }) => (
-        <CallOfferingDeleteButton row={row} refetch={tableProps.fetch} />
+        <CallOfferingRowActions row={row} refetch={tableProps.fetch} />
       )}
     />
   );

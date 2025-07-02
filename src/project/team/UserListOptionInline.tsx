@@ -1,4 +1,4 @@
-import { Key, Prohibit } from '@phosphor-icons/react';
+import { KeyIcon, ProhibitIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OptionProps, components } from 'react-select';
 
@@ -53,14 +53,14 @@ export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
       <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
         {props.data.is_active === false && (
           <Tip label={translate('Inactive')} id="inactive-user-tooltip">
-            <Prohibit />
+            <ProhibitIcon />
           </Tip>
         )}
         <Tip
           label={props.data.registration_method}
           id="registration-method-tooltip"
         >
-          <Key />
+          <KeyIcon />
         </Tip>
       </div>
     </div>

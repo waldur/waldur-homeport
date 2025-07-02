@@ -31,6 +31,7 @@ export const OfferingPermissionsList = ({ offering }) => {
         row.expiration_time ? formatDateTime(row.expiration_time) : 'N/A',
     },
   ];
+
   return (
     <Table
       {...tableProps}

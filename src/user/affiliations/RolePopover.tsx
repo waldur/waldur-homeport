@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { Accordion, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -44,7 +44,7 @@ export const RolePopover = ({ roleName }) => {
   return (
     <>
       {role?.description || role?.name || roleName}{' '}
-      <Question
+      <QuestionIcon
         size={12}
         weight="bold"
         onClick={() => dispatch(openModalDialog(RoleDetailsDialog, { role }))}

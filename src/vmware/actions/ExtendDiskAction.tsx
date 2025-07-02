@@ -1,4 +1,4 @@
-import { ArrowsOut } from '@phosphor-icons/react';
+import { ArrowsOutIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -21,6 +21,6 @@ export const ExtendDiskAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     resource={resource}
     extraResolve={{ refetch }}
-    iconNode={<ArrowsOut weight="bold" />}
+    iconNode={<ArrowsOutIcon weight="bold" />}
   />
 );

@@ -18,7 +18,7 @@ export const CategoryCreateButton = ({ refetch }) => {
         dispatch(
           openModalDialog(CategoryCreateDialog, {
             resolve: { refetch },
-            size: 'md',
+            size: 'lg',
           }),
         )
       }

@@ -40,36 +40,38 @@ export const ResourceRequestItemActions = ({
     [dispatch, row, proposal, refetch],
   );
 
-  const { mutate: remove, isLoading: isRemoving } = useMutation(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Removing resource request'),
-        translate(
-          'Are you sure you want to remove the {name} resource request?',
-          {
-            name: <b>{row.requested_offering.offering_name}</b>,
-          },
-          formatJsxTemplate,
-        ),
-      );
-    } catch {
-      return;
-    }
-    try {
-      await proposalProposalsResourcesDestroy({
-        path: { uuid: proposal.uuid, obj_uuid: row.uuid },
-      });
-      refetch && refetch();
-      dispatch(showSuccess(translate('Resource request has been deleted.')));
-    } catch (response) {
-      dispatch(
-        showErrorResponse(
-          response,
-          translate('Unable to delete resource request.'),
-        ),
-      );
-    }
+  const { mutate: remove, isPending: isRemoving } = useMutation({
+    mutationFn: async () => {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Removing resource request'),
+          translate(
+            'Are you sure you want to remove the {name} resource request?',
+            {
+              name: <b>{row.requested_offering.offering_name}</b>,
+            },
+            formatJsxTemplate,
+          ),
+        );
+      } catch {
+        return;
+      }
+      try {
+        await proposalProposalsResourcesDestroy({
+          path: { uuid: proposal.uuid, obj_uuid: row.uuid },
+        });
+        refetch && refetch();
+        dispatch(showSuccess(translate('Resource request has been deleted.')));
+      } catch (response) {
+        dispatch(
+          showErrorResponse(
+            response,
+            translate('Unable to delete resource request.'),
+          ),
+        );
+      }
+    },
   });
 
   return (

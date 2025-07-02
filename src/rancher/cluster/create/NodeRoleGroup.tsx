@@ -9,6 +9,6 @@ import { NodeRoleField } from './NodeRoleField';
 
 export const NodeRoleGroup: FC = () => (
   <FormGroup label={translate('Role')} required={true}>
-    <Field name="roles" component={NodeRoleField} validate={required} />
+    <Field name="role" component={NodeRoleField} validate={required} />
   </FormGroup>
 );

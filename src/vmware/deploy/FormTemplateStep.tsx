@@ -26,9 +26,14 @@ export const FormTemplateStep = (props: FormStepProps) => {
   const [tab, setTab] = useState<TabSpec>(tabs[0]);
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
-  const { data, isLoading, error, refetch } = useQuery(
-    ['VMwareImages', props.offering?.scope_uuid, props.offering?.customer_uuid],
-    () =>
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: [
+      'VMwareImages',
+      props.offering?.scope_uuid,
+      props.offering?.customer_uuid,
+    ],
+
+    queryFn: () =>
       props.offering.scope_uuid && props.offering.customer_uuid
         ? getAllPages((page) =>
             vmwareTemplatesList({
@@ -36,8 +41,9 @@ export const FormTemplateStep = (props: FormStepProps) => {
             }),
           )
         : Promise.resolve([]),
-    { staleTime: 3 * 60 * 1000 },
-  );
+
+    staleTime: 3 * 60 * 1000,
+  });
 
   const choices = useMemo(() => {
     const _choices = generateSystemImageChoices(data);

@@ -55,9 +55,11 @@ export const UserPermissionRequestsList: FC<OwnProps> = ({
       render: ({ row }) => (
         <UserPermissionRequestRowActions row={row} refetch={props.fetch} />
       ),
+
       className: 'w-90px',
     },
   ];
+
   return (
     <Table
       {...props}

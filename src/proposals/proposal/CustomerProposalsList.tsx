@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { ProposalProposalsListData } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -17,6 +18,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { PROPOSALS_FILTER_FORM_ID } from '../constants';
 import { EndingField } from '../EndingField';
+import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 
 import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
@@ -26,11 +28,11 @@ const mapStateToFilter = createSelector(
   getCustomer,
   getFormValues(PROPOSALS_FILTER_FORM_ID),
   (customer, filters: any) => {
-    const result: Record<string, any> = {};
+    const result: ProposalProposalsListData['query'] = {};
     if (customer) {
       result.organization_uuid = customer.uuid;
     }
-    result.o = '-round__cutoff_time';
+    result.o = ['-round__cutoff_time'];
     result.state = getNonCanceledProposalStates();
 
     if (filters) {
@@ -60,7 +62,17 @@ export const CustomerProposalsList: FC<{}> = () => {
       columns={[
         {
           title: translate('Proposal'),
-          render: ({ row }) => <>{row.name}</>,
+          render: ({ row }) => (
+            <Link
+              state="call-management.proposal-details"
+              params={{ proposal_uuid: row.uuid }}
+              label={row.name}
+            />
+          ),
+        },
+        {
+          title: translate('Applicant'),
+          render: ({ row }) => <>{row.created_by_name || '-'} </>,
         },
         {
           title: translate('Call'),
@@ -71,6 +83,7 @@ export const CustomerProposalsList: FC<{}> = () => {
               label={row.call_name}
             />
           ),
+
           filter: 'call',
           inlineFilter: (row) => ({ name: row.call_name, uuid: row.call_uuid }),
         },
@@ -98,6 +111,7 @@ export const CustomerProposalsList: FC<{}> = () => {
       rowActions={({ row }) => (
         <ProposalRowActions refetch={tableProps.fetch} row={row} />
       )}
+      expandableRow={ProposalExpandableRow}
     />
   );
 };

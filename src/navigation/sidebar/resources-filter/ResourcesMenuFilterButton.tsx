@@ -1,4 +1,4 @@
-import { FunnelSimple } from '@phosphor-icons/react';
+import { FunnelSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -41,7 +41,7 @@ export const ResourcesMenuFilterButton = () => {
       className="text-btn menu-btn btn-filter-resources position-relative"
       onClick={callback}
     >
-      <FunnelSimple size={20} weight="bold" />
+      <FunnelSimpleIcon size={20} weight="bold" />
       {(values?.organization || values?.project) && (
         <HeaderButtonBullet
           size={9}

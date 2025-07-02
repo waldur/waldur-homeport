@@ -19,6 +19,7 @@ describe('UserStatus', () => {
   let user;
   let showErrorResponseMock;
   let showSuccessMock;
+  let setQueryDataMock;
 
   beforeEach(() => {
     user = {
@@ -29,9 +30,11 @@ describe('UserStatus', () => {
 
     showErrorResponseMock = vi.fn();
     showSuccessMock = vi.fn();
+    setQueryDataMock = vi.fn();
 
     vi.mocked(useQueryClient).mockReturnValue({
-      setQueryData: vi.fn(),
+      setQueryData: setQueryDataMock,
+      invalidateQueries: vi.fn(),
     } as any);
     vi.mocked(useDispatch).mockReturnValue(vi.fn());
     vi.mocked(useNotify).mockReturnValue({
@@ -44,7 +47,7 @@ describe('UserStatus', () => {
   it('renders the component with the enabled user', () => {
     render(<UserStatus user={user} />);
     expect(screen.getByText('Account status')).toBeInTheDocument();
-    expect(screen.getByLabelText('Active')).not.toBeChecked();
+    expect(screen.getByLabelText('Active')).toBeChecked();
   });
 
   it('deactivates user successfully', async () => {
@@ -55,9 +58,7 @@ describe('UserStatus', () => {
         path: { uuid: 'abc123' },
         body: { is_active: false },
       });
-      expect(showSuccessMock).toHaveBeenCalledWith(
-        'User has been deactivated.',
-      );
+      expect(showSuccessMock).toHaveBeenCalledWith('User has been disabled.');
     });
   });
 
@@ -76,12 +77,12 @@ describe('UserStatus', () => {
   it('renders the component with the disabled user', () => {
     render(<UserStatus user={{ ...user, is_active: false }} />);
     expect(screen.getByText('Account status')).toBeInTheDocument();
-    expect(screen.getByLabelText('Deactivated')).toBeChecked();
+    expect(screen.getByLabelText('Disabled')).not.toBeChecked();
   });
 
   it('activates user successfully', async () => {
     render(<UserStatus user={{ ...user, is_active: false }} />);
-    fireEvent.click(screen.getByLabelText('Deactivated'));
+    fireEvent.click(screen.getByLabelText('Disabled'));
     await waitFor(() => {
       expect(usersPartialUpdate).toHaveBeenCalledWith({
         path: { uuid: 'abc123' },

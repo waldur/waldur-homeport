@@ -23,6 +23,7 @@ export const WeekendsGroup: FunctionComponent<WeekendsGroupProps> = ({
         checked={weekends}
         onChange={() => setWeekends(!weekends)}
       />
+
       <label htmlFor="weekendsToggle">Toggle weekends</label>
     </div>
   </FormGroup>

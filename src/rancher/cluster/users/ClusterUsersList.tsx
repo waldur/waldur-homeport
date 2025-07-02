@@ -5,13 +5,14 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
+import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
 import { RolesRenderer } from './RolesRenderer';
 
-export const ClusterUsersList: FunctionComponent<{
-  resourceScope: RancherCluster;
-}> = ({ resourceScope }) => {
+export const ClusterUsersList: FunctionComponent<
+  TableWithPortal<{ resourceScope: RancherCluster }>
+> = ({ resourceScope, portal }) => {
   const filter = useMemo(
     () => ({
       cluster_uuid: resourceScope.uuid,
@@ -24,6 +25,7 @@ export const ClusterUsersList: FunctionComponent<{
     filter,
     queryField: 'user_username',
   });
+
   return (
     <Table
       {...props}
@@ -49,6 +51,7 @@ export const ClusterUsersList: FunctionComponent<{
               )}
             </>
           ),
+
           export: false,
         },
         {
@@ -62,6 +65,7 @@ export const ClusterUsersList: FunctionComponent<{
               )}
             </>
           ),
+
           export: false,
         },
         {
@@ -69,11 +73,17 @@ export const ClusterUsersList: FunctionComponent<{
           render: ({ row }) => (
             <>{row.is_active ? translate('Yes') : translate('No')}</>
           ),
+
           export: false,
         },
       ]}
       verboseName={translate('users')}
       hasQuery={true}
+      showPageSizeSelector
+      portal={portal}
+      hasActionBar={false}
+      cardBordered={false}
+      fullWidth
     />
   );
 };

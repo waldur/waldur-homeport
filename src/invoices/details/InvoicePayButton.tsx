@@ -1,4 +1,4 @@
-import { Money } from '@phosphor-icons/react';
+import { MoneyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { DropdownItem } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -31,7 +31,7 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
       rel="noopener noreferrer"
     >
       <span className="svg-icon svg-icon-2">
-        <Money weight="bold" />
+        <MoneyIcon weight="bold" />
       </span>
       {translate('Pay')}
     </a>
@@ -42,7 +42,7 @@ export const InvoicePayButton: FC<InvoicePayButtonProps> = ({
       rel="noopener noreferrer"
     >
       <span className="svg-icon svg-icon-2">
-        <Money weight="bold" />
+        <MoneyIcon weight="bold" />
       </span>
       {translate('Pay')}
     </DropdownItem>

@@ -8,7 +8,7 @@ interface SubmitButtonProps {
   id?: string;
   disabled?: boolean;
   className?: string;
-  onClick?(): void;
+  onClick?(event): void;
 }
 
 export const SubmitButton: FC<SubmitButtonProps> = ({

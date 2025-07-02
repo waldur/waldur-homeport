@@ -32,10 +32,10 @@ export const OpenStackInstanceActions = (props) => (
       <UpdateFloatingIpsAction {...props} />
       <ConsoleLogAction {...props} />
       <ConsoleAction {...props} />
+      <PullInstanceAction {...props} />
     </ActionGroup>
 
     <ActionGroup title={translate('Billing actions')}>
-      <PullInstanceAction {...props} />
       <ChangePlanAction {...props} />
       <ChangeLimitsAction {...props} />
       <ShowUsageAction {...props} />

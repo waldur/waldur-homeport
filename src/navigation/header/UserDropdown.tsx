@@ -18,7 +18,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
   return (
     <>
       <div
-        className="btn btn-active-light d-flex align-items-center bg-hover-light py-2 px-2 px-md-3"
+        className="btn btn-active-light d-flex align-items-center gap-2 bg-hover-light py-2 px-2 px-md-3"
         data-kt-menu-trigger="click"
         data-kt-menu-attach="parent"
         data-kt-menu-placement="bottom"
@@ -27,18 +27,9 @@ export const UserDropdownMenu: FunctionComponent = () => {
       >
         <div className="cursor-pointer symbol symbol-30px symbol-md-40px justify-content-center">
           {!user ? (
-            <ImagePlaceholder width="40px" height="40px" />
-          ) : user.image ? (
-            <div
-              className="symbol-label"
-              style={{ backgroundImage: `url(${user.image})` }}
-            />
+            <ImagePlaceholder width="40px" height="40px" circle />
           ) : (
-            <Avatar
-              className="symbol symbol-40px"
-              name={user.full_name}
-              size={40}
-            />
+            <Avatar src={user.image} name={user.full_name} size={40} circle />
           )}
         </div>
         <div className="d-none d-md-flex flex-column align-items-center justify-content-center me-2 mt-2">
@@ -58,26 +49,22 @@ export const UserDropdownMenu: FunctionComponent = () => {
         </div>
       </div>
       <div
-        className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
+        className="menu-dropdown-default menu menu-sub menu-sub-dropdown menu-column menu-gray-600 menu-state-bg-gray fw-bold py-4 fs-6 w-275px"
         data-kt-menu="true"
         data-popper-placement="bottom-end"
         data-cy="user-dropdown-menu"
       >
         <div className="menu-item px-3">
-          <div className="menu-content d-flex align-items-center px-3">
+          <div className="menu-content d-flex align-items-center px-2">
             <div className="symbol symbol-50px me-5">
               {!user ? (
-                <ImagePlaceholder width="40px" height="40px" />
-              ) : user.image ? (
-                <div
-                  className="symbol-label"
-                  style={{ backgroundImage: `url(${user.image})` }}
-                />
+                <ImagePlaceholder width="40px" height="40px" circle />
               ) : (
                 <Avatar
-                  className="symbol symbol-40px"
+                  src={user.image}
                   name={user.full_name}
                   size={40}
+                  circle
                 />
               )}
             </div>
@@ -105,7 +92,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
         {user ? (
           <UserDropdownMenuItems />
         ) : (
-          <div className="d-grid gap-2 px-6">
+          <div className="d-grid gap-2 px-5">
             <Link
               state="login"
               className="btn btn-light btn-color-dark btn-active-color-dark"
@@ -120,10 +107,10 @@ export const UserDropdownMenu: FunctionComponent = () => {
         <LanguageSelectorDropdown />
 
         {user && (
-          <div className="menu-item px-5" data-kt-menu-trigger="click">
+          <div className="menu-item" data-kt-menu-trigger="click">
             <Link
               state="logout"
-              className="menu-link px-5"
+              className="menu-link"
               aria-hidden="true"
               label={translate('Log out')}
             />

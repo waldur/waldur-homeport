@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,14 +35,15 @@ export const OfferingCreateDialog = reduxForm<
 >({
   form: OFFERING_CREATE_FORM_ID,
 })(({ handleSubmit, submitting, invalid, resolve: { fetch } }) => {
-  const { data, isLoading, error, refetch } = useQuery(
-    ['OfferingCreateDialog'],
-    async () => {
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['OfferingCreateDialog'],
+
+    queryFn: async () => {
       const categories = await getCategories();
       const offeringTypes = getCreatableOfferings();
       return { categories, offeringTypes };
     },
-  );
+  });
 
   const customer = useSelector(getCustomer);
   const dispatch = useDispatch();
@@ -102,7 +103,7 @@ export const OfferingCreateDialog = reduxForm<
             />
           </>
         }
-        iconNode={<PlusCircle weight="bold" />}
+        iconNode={<PlusCircleIcon weight="bold" />}
         iconColor="success"
       >
         <FormContainer submitting={submitting}>
@@ -113,6 +114,7 @@ export const OfferingCreateDialog = reduxForm<
             validate={required}
             maxLength={150}
           />
+
           <SelectField
             name="category"
             label={translate('Category')}
@@ -123,6 +125,7 @@ export const OfferingCreateDialog = reduxForm<
             isClearable={false}
             validate={required}
           />
+
           <SelectField
             name="type"
             label={translate('Type')}

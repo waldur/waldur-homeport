@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Project } from 'waldur-js-client';
+import { MarketplaceResourcesListData, Project } from 'waldur-js-client';
 
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { createFetcher } from '@waldur/table/api';
@@ -16,7 +16,7 @@ import { resourcesListRequiredFields } from './utils';
 const mapStateToFilter = createSelector(
   getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID),
   (filters: any) => {
-    const result: Record<string, any> = {};
+    const result: MarketplaceResourcesListData['query'] = {};
     if (filters?.offering) {
       result.offering_uuid = filters.offering.uuid;
     }
@@ -33,7 +33,9 @@ const mapStateToFilter = createSelector(
       result.runtime_state = filters.runtime_state.value;
     }
     if (filters?.state) {
-      result.state = filters.state.map((option) => option.value) as string[];
+      result.state = filters.state.map(
+        (option) => option.value,
+      ) as MarketplaceResourcesListData['query']['state'];
       if (filters?.include_terminated) {
         result.state = [...result.state, 'Terminated'];
       }

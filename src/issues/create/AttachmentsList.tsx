@@ -1,4 +1,4 @@
-import { CloudArrowDown } from '@phosphor-icons/react';
+import { CloudArrowDownIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 export const AttachmentsList: FunctionComponent<{ attachments }> = ({
@@ -9,7 +9,7 @@ export const AttachmentsList: FunctionComponent<{ attachments }> = ({
       <li key={index}>
         <a href={attachment.file} target="_blank" rel="noopener noreferrer">
           <span className="svg-icon svg-icon-2">
-            <CloudArrowDown />
+            <CloudArrowDownIcon />
           </span>{' '}
           {attachment.name}
         </a>

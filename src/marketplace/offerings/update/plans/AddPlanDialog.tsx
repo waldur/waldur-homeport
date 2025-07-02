@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -66,7 +66,7 @@ export const AddPlanDialog = connect<{}, {}, { resolve: { plan? } }>(
               label={translate('Create')}
             />
           }
-          iconNode={<PlusCircle weight="bold" />}
+          iconNode={<PlusCircleIcon weight="bold" />}
           iconColor="success"
         >
           <PlanForm />

@@ -1,8 +1,8 @@
 import {
-  CaretDown,
-  FunnelSimple,
-  SquareLogo,
-  WarningCircle,
+  CaretDownIcon,
+  FunnelSimpleIcon,
+  SquareLogoIcon,
+  WarningCircleIcon,
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, {
@@ -75,26 +75,24 @@ const InlineFilterButton = ({ column, row }) => {
     <>
       <button
         type="button"
-        className="inline-filter text-btn"
+        className="inline-filter btn btn-icon btn-sm btn-outline btn-outline-default"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom"
       >
-        <FunnelSimple weight="bold" size={16} />
+        <FunnelSimpleIcon weight="bold" size={20} />
       </button>
       <div
-        className="menu menu-sub menu-sub-dropdown menu-column menu-gray-700 menu-state-bg-light-primary w-auto min-w-150px py-1 fw-bold"
+        className="menu menu-sub menu-sub-dropdown menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
         data-kt-menu="true"
       >
         <div className="menu-item">
           <span
-            className="menu-link px-5"
+            className="menu-link px-5 py-3"
             aria-hidden="true"
             onClick={callback}
           >
-            <span className="menu-icon">
-              <span className="svg-icon svg-icon-2">
-                <SquareLogo weight="bold" />
-              </span>
+            <span className="menu-icon w-auto me-4">
+              <SquareLogoIcon weight="bold" size={20} />
             </span>
             <span className="menu-title">{translate('Filter by')}</span>
           </span>
@@ -323,7 +321,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
                         id={`tableErrorTip-${rowIndex}`}
                         className="error-mark"
                       >
-                        <WarningCircle weight="bold" />
+                        <WarningCircleIcon weight="bold" />
                       </Tip>
                     )}
                   <FormCheck
@@ -350,7 +348,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             data-testid="row-expander"
             className={toggled[getId(row, rowIndex)] ? 'active' : ''}
           >
-            <CaretDown size={20} weight="bold" className="rotate-180" />
+            <CaretDownIcon size={20} weight="bold" className="rotate-180" />
           </td>
         )}
         <TableCells
@@ -360,6 +358,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
           columnPositions={columnPositions}
           hasOptionalColumns={hasOptionalColumns}
         />
+
         {rowActions && (
           <td
             className={classNames(

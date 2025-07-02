@@ -1,4 +1,4 @@
-import { CaretLeft } from '@phosphor-icons/react';
+import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { SubmitButton } from '@waldur/form';
@@ -30,7 +30,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
       <ActionButton
         title={translate('Back')}
         action={goBack}
-        iconNode={<CaretLeft />}
+        iconNode={<CaretLeftIcon />}
         disabled={submitting}
         className="min-w-125px"
       />

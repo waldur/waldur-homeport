@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
@@ -22,7 +22,7 @@ export const ProjectDelete: FC<ProjectDeleteProps> = ({ project }) => {
       actions={
         <Button variant="light-danger" onClick={callback}>
           <span className="svg-icon svg-icon-2">
-            <Trash weight="bold" />
+            <TrashIcon weight="bold" />
           </span>
           {translate('Delete')}
         </Button>

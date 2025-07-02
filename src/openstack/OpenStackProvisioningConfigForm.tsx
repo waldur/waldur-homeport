@@ -1,16 +1,19 @@
-import { get } from 'lodash-es';
 import { FC } from 'react';
 
 import { NumberField, StringField } from '@waldur/form';
-import FormTable from '@waldur/form/FormTable';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import { translate } from '@waldur/i18n';
-import { FieldEditButton } from '@waldur/marketplace/offerings/update/integration/FieldEditButton';
+import {
+  DefaultOfferingEditPanel,
+  OfferingEditField,
+} from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
 import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
 
 import { OpenStackPluginOptionsForm } from './OpenStackPluginOptionsForm';
 import { OpenStackSecretOptionsForm } from './OpenStackSecretOptionsForm';
 
-const openStackFields = [
+const openStackFields: OfferingEditField[] = [
   {
     label: translate('Availability zone'),
     description: translate(
@@ -72,29 +75,29 @@ const openStackFields = [
     key: 'service_attributes.console_domain_override',
     component: StringField,
   },
+  {
+    label: translate('Default DNS servers'),
+    description: translate(
+      'Default value for new subnets DNS name servers. Should be defined as list.',
+    ),
+    key: 'service_attributes.dns_nameservers',
+    component: CommaSeparatedListField,
+  },
+  {
+    label: translate('Allow live volume resize'),
+    description: translate(
+      'Allow live volume resize of system and data volumes',
+    ),
+    key: 'service_attributes.live_resize_of_volumes_enabled',
+    component: AwesomeCheckboxField,
+  },
 ];
 
 export const OpenStackProvisioningConfigForm: FC<OfferingEditPanelFormProps> = (
   props,
 ) => (
   <>
-    {openStackFields.map((field) => (
-      <FormTable.Item
-        key={field.key}
-        label={field.label}
-        value={get(props.offering, field.key, 'N/A')}
-        description={field.description}
-        actions={
-          <FieldEditButton
-            title={field.label}
-            scope={props.offering}
-            name={field.key}
-            callback={props.callback}
-            fieldComponent={field.component}
-          />
-        }
-      />
-    ))}
+    <DefaultOfferingEditPanel fields={openStackFields} {...props} />
     <OpenStackSecretOptionsForm {...props} />
     <OpenStackPluginOptionsForm {...props} />
   </>

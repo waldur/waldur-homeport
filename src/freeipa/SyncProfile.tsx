@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useCallback, FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -48,7 +48,7 @@ export const SyncProfile: FunctionComponent<{
     >
       <Button variant="primary" className="ms-2" onClick={callback}>
         <span className="svg-icon svg-icon-2">
-          <ArrowsClockwise />
+          <ArrowsClockwiseIcon />
         </span>{' '}
         {translate('Sync profile')}
       </Button>

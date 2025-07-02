@@ -16,7 +16,6 @@ export const Select = ({ input, loadOptions, ...rest }) => (
     className={
       'metronic-select-container' + (rest.className ? ` ${rest.className}` : '')
     }
-    placeholder=""
   />
 );
 
@@ -27,7 +26,7 @@ export const AsyncSelectField: FunctionComponent<any> = (props) => {
       name={name}
       component={Select}
       defaultOptions
-      placeholder={placeholder}
+      placeholder={placeholder || translate('Select') + '...'}
       loadOptions={props.loadOptions}
       noOptionsMessage={() => translate('No results found')}
       getOptionLabel={(option) => option.name}

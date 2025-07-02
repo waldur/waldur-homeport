@@ -1,4 +1,4 @@
-import { UploadSimple } from '@phosphor-icons/react';
+import { UploadSimpleIcon } from '@phosphor-icons/react';
 import accepts from 'attr-accept';
 import { ReactNode, useRef, useState } from 'react';
 
@@ -19,7 +19,7 @@ export const FileUploadField = ({
   className = 'btn btn-sm btn-primary',
   disabled,
   input,
-  iconNode = <UploadSimple />,
+  iconNode = <UploadSimpleIcon />,
 }: FileUploadFieldProps) => {
   const [fileName, setFileName] = useState<string | undefined>(undefined);
   const fileInputRef = useRef<HTMLInputElement>(null);

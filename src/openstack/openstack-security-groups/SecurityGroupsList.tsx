@@ -15,15 +15,17 @@ import { useTable } from '@waldur/table/useTable';
 import { CreateSecurityGroupAction } from '../openstack-tenant/actions/CreateSecurityGroupAction';
 import { PullSecurityGroupsAction } from '../openstack-tenant/actions/PullSecurityGroupsAction';
 
+import { DestroyBulkSecurityGroupsAction } from './DestroyBulkSecurityGroupsAction';
 import { SecurityGroupRulesList } from './SecurityGroupRulesList';
 
 export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackSecurityGroupsListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackSecurityGroupsListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
       field: [
+        'uuid',
         'name',
         'description',
         'state',
@@ -84,6 +86,8 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
       rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
+      multiSelectActions={DestroyBulkSecurityGroupsAction}
+      enableMultiSelect
       verboseName={translate('security groups')}
       initialSorting={{ field: 'name', mode: 'asc' }}
       showPageSizeSelector={true}
@@ -94,6 +98,7 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
             resource={resourceScope}
             refetch={props.fetch}
           />
+
           <PullSecurityGroupsAction resource={resourceScope} />
         </ButtonGroup>
       }

@@ -19,9 +19,11 @@ const getCeleryStats = () =>
   );
 
 export const CeleryInfoPage = () => {
-  const { isLoading, error, data } = useQuery(['CeleryInfoPage'], () =>
-    getCeleryStats(),
-  );
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['CeleryInfoPage'],
+
+    queryFn: () => getCeleryStats(),
+  });
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -38,6 +40,7 @@ export const CeleryInfoPage = () => {
             0,
           )}
         />
+
         <FormTable.Item
           label={translate('Scheduled tasks')}
           value={Object.values(data.scheduled).reduce(
@@ -45,6 +48,7 @@ export const CeleryInfoPage = () => {
             0,
           )}
         />
+
         <FormTable.Item
           label={translate('Reserved tasks')}
           value={Object.values(data.reserved).reduce(
@@ -52,6 +56,7 @@ export const CeleryInfoPage = () => {
             0,
           )}
         />
+
         <FormTable.Item
           label={translate('Revoked tasks')}
           value={Object.values(data.revoked).reduce(

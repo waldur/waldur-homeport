@@ -44,7 +44,6 @@ export const UserAgreementsList: FunctionComponent<{}> = () => {
       verboseName={translate('user agreements')}
       rowActions={UserAggrementsRowActions}
       expandableRow={UserAgreementsExpandableRow}
-      expandableRowClassName="bg-gray-200"
       tableActions={<UserAgreementCreateButton refetch={props.fetch} />}
     />
   );

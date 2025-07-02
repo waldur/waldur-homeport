@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
 import { translate } from '@waldur/i18n';
 import { Category, Offering } from '@waldur/marketplace/types';
 
@@ -23,9 +23,10 @@ export const PublicOfferingInfo: FunctionComponent<PublicOfferingInfoProps> = ({
         <PublicOfferingCardTitle>
           {translate('Description')}
         </PublicOfferingCardTitle>
-        <FormattedHtml
-          html={offering.full_description || offering.description}
+        <SafeMarkdown
+          text={offering.full_description || offering.description}
         />
+
         <PublicOfferingAttributesCard offering={offering} category={category} />
       </Card.Body>
     </Card>

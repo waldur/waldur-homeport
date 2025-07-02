@@ -61,6 +61,7 @@ export const ComponentLimitPeriodField: FunctionComponent<
         )
       }
     />
+
     {props.limitPeriod && (
       <div className="help-text mt-2">{props.limitPeriod.description}</div>
     )}

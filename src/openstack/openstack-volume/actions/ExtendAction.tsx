@@ -1,4 +1,4 @@
-import { ArrowsOut } from '@phosphor-icons/react';
+import { ArrowsOutIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -6,7 +6,7 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 
-import { isBootable } from './utils';
+import { isExtendable } from './utils';
 
 const VolumeExtendDialog = lazyComponent(() =>
   import('./ExtendDialog').then((module) => ({
@@ -14,7 +14,7 @@ const VolumeExtendDialog = lazyComponent(() =>
   })),
 );
 
-const validators = [isBootable, validateState('OK')];
+const validators = [isExtendable, validateState('OK')];
 
 export const ExtendAction: ActionItemType = ({ resource, refetch }) => (
   <DialogActionItem
@@ -23,6 +23,6 @@ export const ExtendAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     resource={resource}
     extraResolve={{ refetch }}
-    iconNode={<ArrowsOut weight="bold" />}
+    iconNode={<ArrowsOutIcon weight="bold" />}
   />
 );

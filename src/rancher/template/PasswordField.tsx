@@ -36,6 +36,7 @@ export const PasswordField: React.FC<FieldProps> = (props) => {
         </Button>
       </InputGroup>
     ),
+
     [setGeneratedPassword],
   );
 

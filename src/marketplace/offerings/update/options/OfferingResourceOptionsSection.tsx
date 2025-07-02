@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -24,7 +24,7 @@ export const OfferingResourceOptionsSection: FC<OfferingSectionProps> = (
             )}
             className="mx-2 text-muted"
           >
-            <Question size={24} weight="fill" />
+            <QuestionIcon size={24} weight="fill" />
           </Tip>
         </>
       }

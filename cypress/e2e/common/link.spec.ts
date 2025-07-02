@@ -36,6 +36,9 @@ describe('Link persistance after login', () => {
 });
 
 describe('Expired token redirect', () => {
+  beforeEach(() => {
+    cy.setAcceptCookies();
+  });
   // See also: https://github.com/cypress-io/cypress/issues/9302
   it('should redirect to attempted url with params after login', () => {
     cy.intercept('GET', '/api/configuration/', {

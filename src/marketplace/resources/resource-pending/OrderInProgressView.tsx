@@ -1,4 +1,4 @@
-import { Info } from '@phosphor-icons/react';
+import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Resource } from 'waldur-js-client';
@@ -33,6 +33,7 @@ const getSteps = (resource: Resource) => {
         formatDateTime(resource.order_in_progress.created),
       ].join(', '),
     ],
+
     completed: true,
   });
   const isStep2Completed = order.state !== 'pending-consumer';
@@ -79,6 +80,7 @@ const getSteps = (resource: Resource) => {
         ).toLowerCase(),
       }),
     ],
+
     completed: steps[steps.length - 1].completed && order.state !== 'executing',
   });
 
@@ -104,6 +106,7 @@ const getSteps = (resource: Resource) => {
               ? translate('Resource successfully terminated')
               : translate('Resource successfully updated'),
         ],
+
     completed: isStep4Completed,
     variant: order.state === 'done' ? 'primary' : 'danger',
   });
@@ -127,6 +130,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
             bgClass="bg-body"
             className="flex-grow-1"
           />
+
           <div className="d-flex flex-sm-column gap-3 text-nowrap">
             {resource.order_in_progress.state === 'pending-consumer' ? (
               <OrderConsumerActions
@@ -147,7 +151,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
               className="btn btn-sm btn-outline btn-outline-default"
             >
               <span className="svg-icon svg-icon-4">
-                <Info weight="bold" />
+                <InfoIcon weight="bold" />
               </span>
               {translate('View order')}
             </OrderDetailsLink>

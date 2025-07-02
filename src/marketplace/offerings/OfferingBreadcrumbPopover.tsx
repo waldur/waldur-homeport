@@ -13,7 +13,6 @@ const OfferingRow = ({
   removeFavorite,
   isFavorite,
   page,
-  close,
 }) => (
   <SearchItem
     to={
@@ -28,19 +27,16 @@ const OfferingRow = ({
     addFavoritePage={addFavoritePage}
     removeFavorite={removeFavorite}
     isFavorite={isFavorite}
-    onClick={close}
   />
 );
 
 interface OfferingBreadcrumbPopoverProps {
   provider: ServiceProvider;
-  close(): void;
   page: 'details' | 'edit';
 }
 
 export const OfferingBreadcrumbPopover = ({
   provider,
-  close,
   page,
 }: OfferingBreadcrumbPopoverProps) => {
   const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
@@ -66,7 +62,6 @@ export const OfferingBreadcrumbPopover = ({
           removeFavorite={removeFavorite}
           isFavorite={isFavorite}
           page={page}
-          close={close}
         />
       )}
       emptyMessage={translate('There are no offerings.')}

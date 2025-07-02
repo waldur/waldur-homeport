@@ -1,8 +1,8 @@
 import {
-  CheckCircle,
-  DownloadSimple,
-  File,
-  Trash,
+  CheckCircleIcon,
+  DownloadSimpleIcon,
+  FileIcon,
+  TrashIcon,
 } from '@phosphor-icons/react';
 import Papa from 'papaparse';
 import { FC, useCallback, useState } from 'react';
@@ -90,7 +90,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
     <div className="border rounded px-2 mb-7">
       <Row className="h-60px align-items-center gx-5 fs-6">
         <Col xs="auto" className="ps-6">
-          <File weight="bold" size={22} className="text-muted" />
+          <FileIcon weight="bold" size={22} className="text-muted" />
         </Col>
         <Col>
           <Stack
@@ -99,7 +99,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
             className="align-items-center fw-bold"
           >
             <span className="fw-bold">{file.name}</span>
-            <CheckCircle size={16} weight="fill" className="text-success" />
+            <CheckCircleIcon size={16} weight="fill" className="text-success" />
           </Stack>
           <p className="text-muted mb-0">
             {translate('{count} users', { count: importedUsersCount })}
@@ -114,7 +114,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
             onClick={removeFile}
           >
             <span className="svg-icon svg-icon-1">
-              <Trash weight="bold" />
+              <TrashIcon weight="bold" />
             </span>
           </Button>
         </Col>
@@ -149,7 +149,7 @@ export const BulkUpload: FC<OwnProps> = (props) => {
           input={{ onChange: (file) => parseCsvFile([file]) } as any}
           accept=".csv"
           buttonLabel={translate('Import')}
-          iconNode={<DownloadSimple weight="bold" />}
+          iconNode={<DownloadSimpleIcon weight="bold" />}
           className="btn btn-secondary"
         />
       </Col>

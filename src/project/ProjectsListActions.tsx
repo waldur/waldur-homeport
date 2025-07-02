@@ -8,7 +8,7 @@ import { DeleteAction } from './DeleteAction';
 import { MoveProjectAction } from './MoveProjectAction';
 import { ProjectEditAction } from './ProjectEditAction';
 
-const ActionsList = [DeleteAction, MoveProjectAction, ProjectEditAction];
+const ActionsList = [MoveProjectAction, ProjectEditAction, DeleteAction];
 
 interface ProjectsListActionsProps {
   project: Project;

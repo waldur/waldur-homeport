@@ -1,4 +1,4 @@
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDownIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
@@ -64,7 +64,7 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
           item.text
         )}{' '}
         {!item.hideDropdownArrow && (
-          <CaretDown size={18} className="svg-icon" />
+          <CaretDownIcon size={18} className="svg-icon" />
         )}
       </BreadcrumbItem>
     </OverlayTrigger>

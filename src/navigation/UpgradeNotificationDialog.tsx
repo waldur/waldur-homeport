@@ -1,4 +1,4 @@
-import { Info } from '@phosphor-icons/react';
+import { InfoIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { translate } from '@waldur/i18n';
@@ -16,7 +16,7 @@ export const UpgradeNotificationDialog: FunctionComponent<
 > = ({ resolve: { version } }) => (
   <ModalDialog
     title={translate('Upgrade available')}
-    iconNode={<Info size={28} color="#04bc38" />}
+    iconNode={<InfoIcon size={28} color="#04bc38" />}
   >
     <div className="modal-body">
       <p>

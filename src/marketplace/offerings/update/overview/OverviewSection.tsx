@@ -1,4 +1,4 @@
-import { Check, X } from '@phosphor-icons/react';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -140,9 +140,9 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
           label={translate('Location')}
           value={
             props.offering.latitude && props.offering.longitude ? (
-              <Check weight="bold" className="text-info" />
+              <CheckIcon weight="bold" className="text-info" />
             ) : (
-              <X weight="bold" className="text-danger" />
+              <XIcon weight="bold" className="text-danger" />
             )
           }
           description={translate('Specify where the offering is hosted.')}
@@ -153,6 +153,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             />
           }
         />
+
         <FormTable.Item
           key="access_policies"
           label={translate('Access policies')}
@@ -173,14 +174,15 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             />
           }
         />
+
         <FormTable.Item
           key="logo"
           label={translate('Logo')}
           value={
             props.offering.thumbnail ? (
-              <Check weight="bold" className="text-info" />
+              <CheckIcon weight="bold" className="text-info" />
             ) : (
-              <X weight="bold" className="text-danger" />
+              <XIcon weight="bold" className="text-danger" />
             )
           }
           description={translate(
@@ -194,14 +196,15 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             />
           }
         />
+
         <FormTable.Item
           key="image"
           label={translate('Image')}
           value={
             props.offering.image ? (
-              <Check weight="bold" className="text-info" />
+              <CheckIcon weight="bold" className="text-info" />
             ) : (
-              <X weight="bold" className="text-danger" />
+              <XIcon weight="bold" className="text-danger" />
             )
           }
           description={translate('Upload a background image for the offering.')}
@@ -213,14 +216,15 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             />
           }
         />
+
         <FormTable.Item
           key="getting_started"
           label={translate('Getting started instructions')}
           value={
             props.offering.getting_started ? (
-              <Check weight="bold" className="text-info" />
+              <CheckIcon weight="bold" className="text-info" />
             ) : (
-              <X weight="bold" className="text-danger" />
+              <XIcon weight="bold" className="text-danger" />
             )
           }
           description={translate(

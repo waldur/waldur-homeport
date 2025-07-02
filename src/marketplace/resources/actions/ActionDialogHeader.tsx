@@ -20,7 +20,7 @@ export const ActionDialogHeader = ({
           <Tip label={marketplaceResource.category_title} id="resource-tooltip">
             <Image
               src={getMarketplaceResourceLogo(marketplaceResource)}
-              size={25}
+              size={24}
               isContain
             />
           </Tip>

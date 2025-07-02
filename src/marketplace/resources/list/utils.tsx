@@ -1,7 +1,8 @@
 import { Resource } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { SLUG_COLUMN } from '@waldur/table/slug';
@@ -11,6 +12,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';
 import { getStates } from './ResourceStateFilter';
+import { ResourceTerminationDateField } from './ResourceTerminationDateField';
 
 export const resourcesListRequiredFields = (hasExpandableView = true) =>
   [
@@ -155,12 +157,12 @@ export const getResourceAllListColumns = (
         keys: ['created'],
         export: (row) => formatDateTime(row.created),
       },
-      ENV.plugins.WALDUR_CORE.ENABLE_RESOURCE_END_DATE && {
+      {
         title: translate('Termination date'),
-        render: ({ row }) => <>{row.end_date || 'N/A'}</>,
+        render: ResourceTerminationDateField,
         id: 'end_date',
-        keys: ['end_date'],
-        optional: true,
+        keys: ['end_date', 'project_end_date'],
+        optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
         export: (row) => row.end_date,
       },
       {
@@ -196,6 +198,7 @@ export const getResourceAllListColumns = (
         render: ({ row }) => (
           <BooleanField value={row.restrict_member_access} />
         ),
+
         id: 'restrict_member_access',
         keys: ['restrict_member_access'],
         optional: true,

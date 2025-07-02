@@ -1,11 +1,8 @@
-import { formValueSelector } from 'redux-form';
-
 import {
   getFormLimitSerializer,
   getFormSerializer,
 } from '@waldur/marketplace/common/registry';
 
-import { ORDER_FORM_ID } from './constants';
 import { OrderSummaryProps } from './types';
 
 const formatLimits = (props) => {
@@ -62,11 +59,3 @@ export const formatOrderForCreate = (props: OrderSummaryProps) => ({
   limits: formatLimits(props),
   accepting_terms_of_service: true,
 });
-
-const orderFormValues = formValueSelector(ORDER_FORM_ID);
-
-export const orderCustomerSelector = (state) =>
-  orderFormValues(state, 'customer');
-
-export const orderProjectSelector = (state) =>
-  orderFormValues(state, 'project');

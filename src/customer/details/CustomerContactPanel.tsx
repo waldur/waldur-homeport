@@ -31,6 +31,7 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = (props) => {
         value: props.customer.homepage,
       },
     ],
+
     [props.customer],
   );
 

@@ -59,6 +59,7 @@ export const UserChecklist: React.FC<UserChecklistProps> = (props) => {
           options={state.checklistOptions}
           isClearable={false}
         />
+
         {state.questionsLoading ? (
           <LoadingSpinner />
         ) : state.questionsErred ? (
@@ -69,12 +70,14 @@ export const UserChecklist: React.FC<UserChecklistProps> = (props) => {
               questions={state.questionsList}
               answers={state.answers}
             />
+
             <AnswersTable
               questions={state.questionsList}
               answers={state.answersTable}
               setAnswers={state.setAnswersTable}
               readOnly={props.readOnly}
             />
+
             {!props.readOnly && (
               <p>
                 <SubmitButton

@@ -24,6 +24,7 @@ export const BroadcastExpandableRow: FunctionComponent<{
           label={translate('Organizations')}
           list={row.query['customers']}
         />
+
         <OptionsList
           label={translate('Offerings')}
           list={row.query['offerings']}

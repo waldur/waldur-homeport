@@ -5,3 +5,11 @@
 .border-active-brand.active {
   border-color: var(--waldur-brand-color) !important;
 }
+
+.border-rows {
+  > *:not(:last-child) {
+    border-bottom: 1px solid $border-color;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+}

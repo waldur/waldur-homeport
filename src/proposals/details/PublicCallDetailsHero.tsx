@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
-import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { getCallStatus } from '@waldur/proposals/utils';
 
 import { CallProposalsButton } from '../CallProposalsButton';
@@ -20,9 +20,10 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
   const status = useMemo(() => getCallStatus(call), [call]);
 
   return (
-    <PublicDashboardHero2
+    <PublicDashboardHero
       logo={undefined}
       logoAlt={call.name}
+      logoCircle
       cardBordered
       title={
         <>

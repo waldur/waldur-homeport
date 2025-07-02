@@ -1,15 +1,14 @@
-import { Eye, WarningCircle } from '@phosphor-icons/react';
+import { EyeIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { formValueSelector } from 'redux-form';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
@@ -43,7 +42,7 @@ const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
       <ActionItem
         title={translate('Show rules')}
         action={callback}
-        iconNode={<Eye weight="bold" />}
+        iconNode={<EyeIcon weight="bold" />}
       />
     </ActionsDropdownComponent>
   );
@@ -51,7 +50,7 @@ const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
 
 const ShowPreviewButton = () => {
   const securityGroups = useSelector((state) =>
-    formValueSelector(ORDER_FORM_ID)(state, 'attributes.security_groups'),
+    orderFormSelector(state, 'attributes.security_groups'),
   );
   const dispatch = useDispatch();
   const callback = useCallback(() => {
@@ -71,7 +70,7 @@ const ShowPreviewButton = () => {
       disabled={!securityGroups?.length}
     >
       <span className="svg-icon svg-icon-2">
-        <Eye />
+        <EyeIcon />
       </span>
       {translate('Preview')}
     </Button>
@@ -123,7 +122,7 @@ export const FormSecurityGroupsField = ({
                   )}
                   id="default_security_group_tooltip"
                 >
-                  <WarningCircle
+                  <WarningCircleIcon
                     size={20}
                     weight="bold"
                     className="text-warning"

@@ -1,4 +1,4 @@
-import { CalendarBlank, X } from '@phosphor-icons/react';
+import { CalendarBlankIcon, XIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import Flatpickr from 'react-flatpickr';
@@ -10,17 +10,22 @@ import { useFlatpickrTheme } from './useFlatpickrTheme';
 
 export const DateField: FunctionComponent<any> = (props) => {
   useFlatpickrTheme();
+  const options: Record<string, any> = {
+    dateFormat: 'Y-m-d',
+    minDate: props.minDate,
+    maxDate: props.maxDate,
+    defaultDate: props.defaultDate,
+    monthSelectorType: 'static',
+    inline: props.inline,
+    allowInvalidPreload: true,
+  };
+  if (props.enable) {
+    options.enable = props.enable;
+  }
   return (
     <div style={{ position: 'relative' }}>
       <Flatpickr
-        options={{
-          dateFormat: 'Y-m-d',
-          minDate: props.minDate,
-          maxDate: props.maxDate,
-          defaultDate: props.defaultDate,
-          monthSelectorType: 'static',
-          inline: props.inline,
-        }}
+        options={options}
         value={
           props.input.value && typeof props.input.value === 'string'
             ? DateTime.fromISO(props.input.value).toJSDate()
@@ -38,6 +43,7 @@ export const DateField: FunctionComponent<any> = (props) => {
         }
         placeholder={props.placeholder}
       />
+
       {props.input.value && typeof props.input.value === 'string' ? (
         <button
           type="button"
@@ -51,7 +57,7 @@ export const DateField: FunctionComponent<any> = (props) => {
             className="w-100"
           >
             <span className="svg-icon svg-icon-2">
-              <X weight="bold" />
+              <XIcon weight="bold" />
             </span>
           </Tip>
         </button>
@@ -65,7 +71,7 @@ export const DateField: FunctionComponent<any> = (props) => {
             pointerEvents: 'none',
           }}
         >
-          <CalendarBlank weight="bold" />
+          <CalendarBlankIcon weight="bold" />
         </span>
       )}
     </div>

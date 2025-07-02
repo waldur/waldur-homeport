@@ -78,10 +78,10 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
 
 export const AdministrationServiceDesk = () => {
   const serviceDeskProviders = ['atlassian', 'zammad', 'smax'];
-  const { data, error, isLoading, refetch } = useQuery(
-    ['AdministrationServiceDesk'],
-    () => overrideSettingsRetrieve().then((response) => response.data),
-  );
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ['AdministrationServiceDesk'],
+    queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
+  });
 
   return isLoading ? (
     <LoadingSpinner />

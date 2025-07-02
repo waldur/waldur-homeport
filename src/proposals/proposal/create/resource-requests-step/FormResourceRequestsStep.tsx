@@ -48,17 +48,17 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
     isLoading,
     error,
     refetch: refetchCall,
-  } = useQuery(
-    ['publicCall', proposal.call_uuid],
-    () =>
+  } = useQuery({
+    queryKey: ['publicCall', proposal.call_uuid],
+
+    queryFn: () =>
       proposalPublicCallsRetrieve({ path: { uuid: proposal.call_uuid } }).then(
         (r) => r.data,
       ),
-    {
-      refetchOnWindowFocus: false,
-      staleTime: 60 * 1000,
-    },
-  );
+
+    refetchOnWindowFocus: false,
+    staleTime: 60 * 1000,
+  });
 
   const filter = useSelector(mapStateToFilter);
 

@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsDeleteUser } from 'waldur-js-client';
@@ -78,7 +78,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
     <ActionItem
       action={callback}
       title={translate('Remove')}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
       iconColor="danger"
       size="sm"

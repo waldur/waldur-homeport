@@ -1,4 +1,4 @@
-import { File, Trash } from '@phosphor-icons/react';
+import { FileIcon, TrashIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 import { Button, ProgressBar } from 'react-bootstrap';
@@ -12,6 +12,7 @@ interface AttachmentItemPendingProps {
   file: File;
   progress: number;
   error?: any;
+  iconSize?: number;
   onRetry?(file: File): void;
   onCancel?(file: File): void;
 }
@@ -20,6 +21,7 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
   file,
   progress,
   error,
+  iconSize = 20,
   onRetry,
   onCancel,
 }) => {
@@ -29,7 +31,11 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
       data-testid="pending-attachment-item"
     >
       <div className="attachment-item__thumb">
-        <File size={40} className={error ? 'text-danger' : 'text-muted'} />
+        <FileIcon
+          size={iconSize}
+          weight="bold"
+          className={error ? 'text-danger' : 'text-muted'}
+        />
       </div>
 
       <div className="attachment-item__body">
@@ -55,20 +61,22 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
           />
         ) : null}
       </div>
-      <Button
-        variant="active-light-danger"
-        size="sm"
-        className={classNames(
-          'btn-icon attachment-item__delete',
-          error && 'btn-icon-danger',
-        )}
-        disabled={!error && progress && progress !== 0}
-        onClick={() => onCancel(file)}
-      >
-        <span className="svg-icon svg-icon-2">
-          <Trash weight="bold" />
-        </span>
-      </Button>
+      <div>
+        <Button
+          variant="link"
+          size="sm"
+          className={classNames(
+            'btn-active-icon-danger attachment-item__delete p-0 btn-icon-right',
+            error && 'btn-icon-danger',
+          )}
+          disabled={!error && progress && progress !== 0}
+          onClick={() => onCancel(file)}
+        >
+          <span className="svg-icon svg-icon-2">
+            <TrashIcon weight="bold" />
+          </span>
+        </Button>
+      </div>
     </div>
   );
 };

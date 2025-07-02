@@ -1,4 +1,4 @@
-import { Export } from '@phosphor-icons/react';
+import { ExportIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -13,11 +13,12 @@ export const TableExportButton: FunctionComponent<TableProps> = (props) => {
     <Button
       variant="outline-default"
       className="btn-outline"
+      size="lg"
       onClick={() => openExportDialog(props.table, 'clipboard', props)}
       disabled={props.rows?.length === 0}
     >
       <span className="svg-icon svg-icon-2">
-        <Export weight="bold" />
+        <ExportIcon weight="bold" />
       </span>
       {translate('Export')}
     </Button>

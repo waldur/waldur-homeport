@@ -134,6 +134,15 @@ export const formatReviewState = (value: ProposalReviewStateEnum) =>
   getReviewStateOptions().find((option) => option.value === value)?.label ||
   value;
 
+export const getReviewStateBadgeVariant = (value: ProposalReviewStateEnum) =>
+  value === 'created'
+    ? 'default'
+    : value === 'in_review' || value === 'submitted'
+      ? 'warning'
+      : value === 'rejected'
+        ? 'danger'
+        : 'secondary';
+
 export const isReviewInFinalState = (state: ProposalReviewStateEnum) =>
   !['in_review', 'created'].includes(state);
 

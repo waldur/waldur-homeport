@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -40,7 +40,7 @@ export const useOfferingDropdownActions = (refetch?): TableDropdownItem[] => {
   return [
     {
       label: translate('Import offerings'),
-      iconNode: <Plus weight="bold" />,
+      iconNode: <PlusIcon weight="bold" />,
       action: () => {
         dispatch(
           openModalDialog(OfferingImportDialog, {
@@ -84,13 +84,7 @@ export const getOfferingBreadcrumbItems = (
       key: 'offering',
       text: offering?.name || '...',
       dropdown: provider
-        ? (close) => (
-            <OfferingBreadcrumbPopover
-              provider={provider}
-              close={close}
-              page={page}
-            />
-          )
+        ? () => <OfferingBreadcrumbPopover provider={provider} page={page} />
         : undefined,
       truncate: true,
       active: true,

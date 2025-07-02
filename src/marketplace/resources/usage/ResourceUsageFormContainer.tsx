@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { change, reduxForm } from 'redux-form';
-import { marketplaceComponentUsagesSetUsage } from 'waldur-js-client';
+import {
+  marketplaceComponentUsagesSetUsage,
+  marketplaceComponentUsagesSetUserUsage,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
@@ -19,15 +22,18 @@ interface OwnProps {
   params: UsageReportContext;
 }
 
-const mapComponents = (components: ComponentUsage[]) =>
+const mapComponents = (components: ComponentUsage[], userUsage = false) =>
   components.reduce(
     (collector, component) => ({
       ...collector,
-      [component.type]: {
-        amount: component.usage,
-        description: component.description,
-        recurring: component.recurring,
-      },
+      [component.type]: userUsage
+        ? { uuid: component.uuid, amount: 0 }
+        : {
+            uuid: component.uuid,
+            amount: component.usage,
+            description: component.description,
+            recurring: component.recurring,
+          },
     }),
     {},
   );
@@ -38,13 +44,16 @@ const mapStateToProps = (_, ownProps: OwnProps) =>
         initialValues: {
           period: ownProps.periods[0],
           components: ownProps.periods[0].value
-            ? mapComponents(ownProps.periods[0].value.components)
+            ? mapComponents(
+                ownProps.periods[0].value.components,
+                ownProps.params.userUsage,
+              )
             : undefined,
         },
       }
     : {};
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   onPeriodChange: (option) => {
     const period = option.value;
     for (const component of period.components) {
@@ -60,17 +69,36 @@ const mapDispatchToProps = (dispatch) => ({
       );
     }
   },
-  submitReport: async ({ period, components }) => {
+  submitReport: async ({ period, components, user, username }) => {
+    const isUserUsage = ownProps.params.userUsage;
+
     try {
-      await marketplaceComponentUsagesSetUsage({
-        body: {
-          plan_period: period.value?.uuid,
-          usages: Object.keys(components).map((key) => ({
-            type: key,
-            ...components[key],
-          })),
-        },
-      });
+      if (isUserUsage) {
+        // Report user usage
+        const promises = Object.keys(components).map((key) => {
+          return marketplaceComponentUsagesSetUserUsage({
+            path: { uuid: components[key].uuid },
+            body: {
+              usage: components[key].amount,
+              user: user.url,
+              username,
+            },
+          });
+        });
+        await Promise.all(promises);
+      } else {
+        const usages = Object.keys(components).map((key) => ({
+          type: key,
+          ...components[key],
+        }));
+        // Report resource usage
+        await marketplaceComponentUsagesSetUsage({
+          body: {
+            plan_period: period.value?.uuid,
+            usages,
+          },
+        });
+      }
       dispatch(showSuccess(translate('Usage report has been submitted.')));
       dispatch(closeModalDialog());
     } catch (error) {

@@ -26,6 +26,7 @@ export const EnumField: React.FC<EnumFieldProps> = ({
         getValue={getValue}
       />
     ),
+
     [options, getLabel, getValue],
   );
   return <DecoratedField {...props} component={renderField} />;

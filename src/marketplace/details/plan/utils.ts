@@ -6,7 +6,7 @@ import {
   getFormLimitParser,
 } from '@waldur/marketplace/common/registry';
 import { getBillingPeriods } from '@waldur/marketplace/common/utils';
-import { offeringSelector } from '@waldur/marketplace/details/selectors';
+import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import { Limits } from '@waldur/marketplace/details/types';
 import { parseOfferingLimits } from '@waldur/marketplace/offerings/store/limits';
 import { Plan } from '@waldur/marketplace/types';
@@ -220,7 +220,7 @@ const getPlan = (state, props) => {
       return props.offering.plans[0];
     }
   } else {
-    return offeringSelector(state, 'plan');
+    return orderFormSelector(state, 'plan');
   }
 };
 
@@ -229,7 +229,7 @@ const getLimits = (state, props) => {
   if (props.viewMode && props.order) {
     return limitParser(props.order.limits);
   } else {
-    return offeringSelector(state, 'limits');
+    return orderFormSelector(state, 'limits');
   }
 };
 

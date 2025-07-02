@@ -1,4 +1,4 @@
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDownIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { useBoolean } from 'react-use';
@@ -42,6 +42,7 @@ const CellWrapper: FC<any> = (props) => (
           max={props.limits.max}
           {...props.input}
         />
+
         {props.offeringComponent.measured_unit ? (
           <InputGroup.Text>
             {props.offeringComponent.measured_unit}
@@ -71,7 +72,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         <td className="text-nowrap">
           {canExpand && (
             <span className={toggled ? 'me-2 active' : 'me-2'}>
-              <CaretDown size={20} weight="bold" className="rotate-180" />
+              <CaretDownIcon size={20} weight="bold" className="rotate-180" />
             </span>
           )}
           {component.name}
@@ -88,6 +89,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
           offeringComponent={component}
           limits={limits}
         />
+
         <td>
           <ChangedLimitField changedLimit={component.changedLimit} />
         </td>

@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { ReactNode, FC, PropsWithChildren } from 'react';
 import { Form } from 'react-bootstrap';
 
@@ -24,7 +24,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => (
           <Form.Label className="fs-6 fw-semibold form-label mt-3">
             {props.description && (
               <Tip id="form-field-tooltip" label={props.description}>
-                <Question />{' '}
+                <QuestionIcon />{' '}
               </Tip>
             )}
             {props.label}

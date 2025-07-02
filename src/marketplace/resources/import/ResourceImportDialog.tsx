@@ -20,9 +20,11 @@ import { ResourcesList } from './ResourcesList';
 import { ImportDialogProps } from './types';
 import { IMPORT_RESOURCE_FORM_ID, useImportDialog } from './useImportDialog';
 
-export const ResourceImportDialog = connect((state) => ({
-  initialValues: sidebarResourcesFilterSelector(state),
-}))(
+export const ResourceImportDialog = connect<{}, {}, ImportDialogProps>(
+  (state) => ({
+    initialValues: sidebarResourcesFilterSelector(state),
+  }),
+)(
   reduxForm<{}, ImportDialogProps>({
     form: IMPORT_RESOURCE_FORM_ID,
   })((props) => {

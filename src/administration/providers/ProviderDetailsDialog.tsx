@@ -11,20 +11,19 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 export const ProviderDetailsDialog = (props) => {
   const neededProvider = props.provider.provider;
-  const { data, isLoading, error, refetch } = useQuery<
-    Record<string, { is_active }>,
-    {},
-    {}
-  >(['IdentityProvidersList'], () =>
-    getIdentityProviders().then((providers) =>
-      providers.reduce((result, item) => {
-        if (item.provider === neededProvider) {
-          return { ...result, [item.provider]: item };
-        }
-        return result;
-      }, {}),
-    ),
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['IdentityProvidersList'],
+
+    queryFn: () =>
+      getIdentityProviders().then((providers) =>
+        providers.reduce((result, item) => {
+          if (item.provider === neededProvider) {
+            return { ...result, [item.provider]: item };
+          }
+          return result;
+        }, {}),
+      ),
+  });
 
   const renderUrlItem = (urlKey, label) => {
     const url = data[neededProvider][urlKey];

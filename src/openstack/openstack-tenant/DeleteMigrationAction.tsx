@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { openstackMigrationsDestroy } from 'waldur-js-client';
 
@@ -26,7 +26,7 @@ export const DeleteMigrationAction = ({ resource, refetch }) => {
     <ActionItem
       title={translate('Remove')}
       action={openDialog}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
     />
   );

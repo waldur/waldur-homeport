@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
@@ -49,9 +49,11 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
     isRefetching,
     error,
     refetch,
-  } = useQuery(['offeringBookings', offering.uuid], () =>
-    loadBookingOfferings(offering.uuid),
-  );
+  } = useQuery({
+    queryKey: ['offeringBookings', offering.uuid],
+
+    queryFn: () => loadBookingOfferings(offering.uuid),
+  });
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -78,7 +80,7 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
               className="btn btn-icon btn-active-light"
               onClick={() => refetch()}
             >
-              <ArrowsClockwise />
+              <ArrowsClockwiseIcon />
             </button>
           )}
         </Card.Title>

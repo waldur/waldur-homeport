@@ -69,6 +69,7 @@ export const CallAutocomplete: React.FC<CallAutocompleteProps> = (props) => (
           isClearable={true}
           {...props.reactSelectProps}
         />
+
         {props.showError && fieldProps.meta.touched && (
           <FieldError error={fieldProps.meta.error} />
         )}

@@ -11,9 +11,17 @@ import { ServiceProvider } from '../types';
 
 import { OfferingUser } from './types';
 
-export const ProviderOfferingUserUpdateDialog: FC<{
-  resolve: { row: OfferingUser; refetch(): void; provider: ServiceProvider };
-}> = ({ resolve: { row, refetch } }) => {
+export interface ProviderOfferingUserUpdateDialogProps {
+  resolve: {
+    row: OfferingUser;
+    refetch(): void;
+    provider: ServiceProvider;
+  };
+}
+
+export const ProviderOfferingUserUpdateDialog: FC<
+  ProviderOfferingUserUpdateDialogProps
+> = ({ resolve: { row, refetch } }) => {
   const dispatch = useDispatch();
 
   const fields = [

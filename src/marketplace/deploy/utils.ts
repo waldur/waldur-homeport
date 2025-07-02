@@ -1,5 +1,4 @@
 import { createElement } from 'react';
-import { getFormSyncErrors, isValid, getFormSubmitErrors } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -10,10 +9,6 @@ import Oracle from '@waldur/images/appstore/oracle.svg';
 import Rocky from '@waldur/images/appstore/rocky.svg';
 import Ubuntu from '@waldur/images/appstore/ubuntu.svg';
 import Windows from '@waldur/images/appstore/windows.svg';
-import { type RootState } from '@waldur/store/reducers';
-
-import { ORDER_FORM_ID } from '../details/constants';
-import { orderFormDataSelector } from '../utils';
 
 import { BoxRadioChoice } from './steps/BoxRadioField';
 import { OfferingConfigurationFormStep } from './types';
@@ -81,22 +76,3 @@ export const hasStepWithField = (
 
 export const concealPricesSelector = () =>
   isFeatureVisible(MarketplaceFeatures.conceal_prices);
-
-export const formProjectSelector = (state: RootState) => {
-  const formData = orderFormDataSelector(state);
-  return formData.project;
-};
-
-export const formCustomerSelector = (state: RootState) => {
-  const formData = orderFormDataSelector(state);
-  return formData.customer;
-};
-
-export const formIsValidSelector = (state: RootState) =>
-  isValid(ORDER_FORM_ID)(state);
-
-export const formErrorsSelector = (state: RootState) =>
-  getFormSyncErrors(ORDER_FORM_ID)(state) as any;
-
-export const formSubmitErrorsSelector = (state: RootState) =>
-  getFormSubmitErrors(ORDER_FORM_ID)(state) as any;

@@ -44,7 +44,7 @@ export const formatInvitationState = (value) => {
 };
 
 export const InvitationStateFilter = () => (
-  <TableFilterItem title={translate('State')} name="state">
+  <TableFilterItem title={translate('State')} name="state" instantApply={false}>
     <Field
       name="state"
       component={(fieldProps) => (

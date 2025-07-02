@@ -38,6 +38,7 @@ export const WeekdaysGroup: FunctionComponent<WeekdaysGroupProps> = ({
                 setDaysOfWeek(handleWeekDays(daysOfWeek, e.target.value))
               }
             />
+
             <label htmlFor={`weekday-${jsDateDay}`}>
               {Info.weekdays('narrow')[day]}
             </label>

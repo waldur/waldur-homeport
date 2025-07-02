@@ -13,13 +13,11 @@ interface CostPolicyFormDialogProps {
   submitFn(formData: CostPolicyFormData): void;
   type: CostPolicyType;
   formId: string;
-  initialValues?: any;
 }
 
-export const CostPolicyFormDialog = connect(
+export const CostPolicyFormDialog = connect<{}, {}, CostPolicyFormDialogProps>(
   (_, ownProps: CostPolicyFormDialogProps) => ({
     form: ownProps.formId,
-    initialValues: ownProps.initialValues,
   }),
 )(
   reduxForm<CostPolicyFormData, CostPolicyFormDialogProps>({

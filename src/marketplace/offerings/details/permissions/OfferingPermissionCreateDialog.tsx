@@ -67,6 +67,7 @@ export const OfferingPermissionCreateDialog = reduxForm<
             getOptionLabel={({ full_name, email }) => full_name || email}
             required={true}
           />
+
           <Field
             name="expiration_time"
             label={translate('Expiration time')}

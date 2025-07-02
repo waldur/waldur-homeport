@@ -1,4 +1,4 @@
-import { UploadSimple } from '@phosphor-icons/react';
+import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useEffect, useMemo } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
@@ -46,7 +46,7 @@ export const CustomerMediaPanel = connect<{}, {}, CustomerEditPanelProps>(
                   alt={abbreviation}
                   initialValue={props.customer.image}
                   max={2 * 1024 * 1024} // 2MB
-                  size={65}
+                  size={64}
                   extraActions={({ isChanged, isTooLarge }) =>
                     isChanged || props.submitting ? (
                       <Button
@@ -58,7 +58,7 @@ export const CustomerMediaPanel = connect<{}, {}, CustomerEditPanelProps>(
                       >
                         {translate('Save')}
                         <span className="svg-icon svg-icon-5">
-                          <UploadSimple />
+                          <UploadSimpleIcon />
                         </span>
                       </Button>
                     ) : null

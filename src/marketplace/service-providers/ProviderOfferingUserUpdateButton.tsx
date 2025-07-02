@@ -1,6 +1,7 @@
-import { Pencil } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
+import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -11,7 +12,7 @@ import { useUser } from '@waldur/workspace/hooks';
 
 import { ServiceProvider } from '../types';
 
-import { OfferingUser } from './types';
+import { ProviderOfferingUserUpdateDialogProps } from './ProviderOfferingUserUpdateDialog';
 
 const ProviderOfferingUserUpdateDialog = lazyComponent(() =>
   import('./ProviderOfferingUserUpdateDialog').then((module) => ({
@@ -19,12 +20,12 @@ const ProviderOfferingUserUpdateDialog = lazyComponent(() =>
   })),
 );
 
-export const ProviderOfferingUserUpdateButton: FC<{
-  row: OfferingUser;
-  provider?: ServiceProvider;
-  offering?: any;
-  refetch;
-}> = (props) => {
+export const ProviderOfferingUserUpdateButton: FC<
+  ProviderOfferingUserUpdateDialogProps['resolve'] & {
+    provider: ServiceProvider;
+    offering?: PublicOfferingDetails;
+  }
+> = (props) => {
   const dispatch = useDispatch();
   const user = useUser();
   const canUpdateOfferingUser = hasPermission(user, {
@@ -47,7 +48,7 @@ export const ProviderOfferingUserUpdateButton: FC<{
             }),
           )
         }
-        iconNode={<Pencil weight="bold" />}
+        iconNode={<PencilSimpleIcon weight="bold" />}
       />
     )
   );

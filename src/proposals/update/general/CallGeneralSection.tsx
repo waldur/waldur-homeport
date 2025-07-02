@@ -1,7 +1,7 @@
-import Markdown from 'markdown-to-jsx';
 import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
+import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -50,7 +50,7 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
               <td className="col-md-3">{translate('Description')}</td>
               <td className="col-md-9">
                 {props.call.description ? (
-                  <Markdown>{props.call.description}</Markdown>
+                  <SafeMarkdown text={props.call.description} />
                 ) : (
                   'N/A'
                 )}
@@ -96,6 +96,48 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                     call={props.call}
                     name="default_project_role"
                     title={translate('Edit default project role')}
+                    refetch={props.refetch}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="col-md-3">
+                {translate('Reviewer identity visible to submitters')}
+              </td>
+              <td className="col-md-9">
+                {props.call.reviewer_identity_visible_to_submitters
+                  ? translate('Yes')
+                  : translate('No')}
+              </td>
+              <td className="row-actions">
+                <div>
+                  <EditGeneralInfoButton
+                    call={props.call}
+                    name="reviewer_identity_visible_to_submitters"
+                    title={translate(
+                      'Edit reviewer identity visibility for submitters',
+                    )}
+                    refetch={props.refetch}
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td className="col-md-3">
+                {translate('Reviews visible to submitters')}
+              </td>
+              <td className="col-md-9">
+                {props.call.reviews_visible_to_submitters
+                  ? translate('Yes')
+                  : translate('No')}
+              </td>
+              <td className="row-actions">
+                <div>
+                  <EditGeneralInfoButton
+                    call={props.call}
+                    name="reviews_visible_to_submitters"
+                    title={translate('Edit reviews visibility for submitters')}
                     refetch={props.refetch}
                   />
                 </div>

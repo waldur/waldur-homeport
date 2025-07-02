@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { FormSection, WrappedFieldArrayProps } from 'redux-form';
@@ -53,7 +53,7 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
           }}
         >
           <span className="svg-icon svg-icon-2">
-            <PlusCircle weight="bold" />
+            <PlusCircleIcon weight="bold" />
           </span>
           {translate('Add')}
         </Button>

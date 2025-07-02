@@ -5,11 +5,12 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
+import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-export const ClusterTemplatesList: FunctionComponent<{
-  resourceScope: RancherCluster;
-}> = ({ resourceScope }) => {
+export const ClusterTemplatesList: FunctionComponent<
+  TableWithPortal<{ resourceScope: RancherCluster }>
+> = ({ resourceScope, portal }) => {
   const filter = useMemo(
     () => ({
       cluster_uuid: resourceScope.uuid,
@@ -22,6 +23,7 @@ export const ClusterTemplatesList: FunctionComponent<{
     filter,
     queryField: 'name',
   });
+
   return (
     <Table<RancherTemplate>
       {...props}
@@ -40,6 +42,7 @@ export const ClusterTemplatesList: FunctionComponent<{
               {row.name}
             </Link>
           ),
+
           copyField: (row) => row.name,
           orderField: 'name',
           export: 'name',
@@ -62,7 +65,12 @@ export const ClusterTemplatesList: FunctionComponent<{
         },
       ]}
       verboseName={translate('application templates')}
+      portal={portal}
+      hasActionBar={false}
       hasQuery={true}
+      showPageSizeSelector
+      cardBordered={false}
+      fullWidth
     />
   );
 };

@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { marketplaceProviderResourcesOfferingForSubresourcesList } from 'waldur-js-client';
@@ -37,7 +37,7 @@ export const AddResourceButton = (props: AddResourceButtonProps) => {
         className="btn btn-primary"
       >
         <span className="svg-icon svg-icon-2">
-          <PlusCircle weight="bold" />
+          <PlusCircleIcon weight="bold" />
         </span>
         {translate('Add resource')}
       </OfferingLink>

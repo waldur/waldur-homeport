@@ -35,6 +35,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
               isClearable={false}
               validate={required}
             />
+
             {showMinAverageScoring && (
               <NumberField
                 label={translate('Minimum average scoring for allocation')}
@@ -52,6 +53,7 @@ export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
               isClearable={false}
               validate={required}
             />
+
             {showAllocationDate && (
               <DateTimeField
                 label={translate('Allocation date')}

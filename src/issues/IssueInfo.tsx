@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Issue } from 'waldur-js-client';
@@ -144,7 +144,7 @@ export const IssueInfoButton = ({ issue }) => {
   return (
     <Button variant="secondary" onClick={callback}>
       <span className="svg-icon svg-icon-2">
-        <Eye />
+        <EyeIcon />
       </span>
       {translate('Show details')}
     </Button>

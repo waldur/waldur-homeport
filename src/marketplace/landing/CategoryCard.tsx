@@ -1,8 +1,9 @@
-import { Cube, Question } from '@phosphor-icons/react';
+import { CubeIcon, QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { CategoryGroup } from 'waldur-js-client';
 
+import Avatar from '@waldur/core/Avatar';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import { Category } from '../types';
@@ -19,9 +20,14 @@ export const CategoryCard: FunctionComponent<CategoryCardProps> = (props) => (
     <Card.Body>
       <div className={'category-thumb' + (!props.item.icon ? ' no-image' : '')}>
         {props.item.icon ? (
-          <img src={props.item.icon} alt="category logo" />
+          <Avatar
+            name={props.item.title}
+            src={props.item.icon}
+            circle
+            size={40}
+          />
         ) : (
-          <Cube weight="bold" size={20} />
+          <CubeIcon weight="bold" size={20} />
         )}
       </div>
       <h3 className="text-dark text-center fw-bold fs-6 mb-0">
@@ -29,7 +35,7 @@ export const CategoryCard: FunctionComponent<CategoryCardProps> = (props) => (
         {Boolean(props.item.description) &&
           wrapTooltip(
             props.item.description,
-            <Question
+            <QuestionIcon
               size={16}
               weight="bold"
               className="ms-2 text-muted mb-1 text-hover-gray-600"

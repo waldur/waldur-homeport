@@ -22,6 +22,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         nameLabel={props.params?.nameLabel}
         offering={props.offering}
       />
+
       <Field
         name="attributes.description"
         component={FormGroup}

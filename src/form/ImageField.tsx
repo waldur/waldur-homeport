@@ -1,11 +1,12 @@
-import { ArrowClockwise, PencilSimple, X } from '@phosphor-icons/react';
+import {
+  UploadSimpleIcon,
+  ImageIcon,
+  ArrowsClockwiseIcon,
+} from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, useCallback, useEffect, useRef } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import AvatarBlank from '@waldur/images/avatar-blank.svg';
 
 import { FormField } from './types';
 
@@ -72,86 +73,52 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
   );
 
   return (
-    <>
-      <div
-        className={classNames('image-input image-input-outline', {
-          'image-input-empty': !input.value,
-          'image-input-changed': isChanged,
-        })}
-        data-kt-image-input="true"
-      >
-        <div className="w-100px h-100px d-flex align-items-center justify-content-center">
+    <div
+      className={classNames('image-input image-input-outline', {
+        'image-input-empty': !input.value,
+        'image-input-changed': isChanged,
+      })}
+      data-kt-image-input="true"
+    >
+      <div className="imagefield-upload-row">
+        <div className="imagefield-avatar-box">
           {!input.value ? (
-            <AvatarBlank style={style} />
+            <ImageIcon size={32} color="forestgreen" />
           ) : (
             <img style={style} ref={previewRef} alt="preview" />
           )}
         </div>
-
-        {/* Pick image */}
-
-        <label
-          className="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-          data-kt-image-input-action="change"
-        >
-          <Tip
-            id="image-input-edit"
-            label={translate('Change avatar')}
-            className="w-100"
+        <div className="imagefield-upload-info">
+          <div className="imagefield-upload-desc">
+            {translate('Upload an image')} JPG {translate('or')} PNG,{' '}
+            {translate('under 2 MB')}
+          </div>
+          <label
+            className="btn btn-outline btn-outline-default d-inline-flex align-items-center gap-2"
+            data-kt-image-input-action="change"
           >
-            <PencilSimple />
-          </Tip>
-
-          <input
-            ref={inputRef}
-            type="file"
-            name={input.name}
-            accept=".png, .jpg, .jpeg"
-            onChange={(event) => changeImage(event.target.files[0])}
-          />
-        </label>
-
-        {/* Cancel image */}
-        <button
-          type="button"
-          className="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
-          data-kt-image-input-action="cancel"
-          onClick={() => changeImage(initialValue)}
-        >
-          <Tip
-            id="image-input-cancel"
-            label={translate('Reset avatar')}
-            className="w-100"
-          >
-            <ArrowClockwise />
-          </Tip>
-        </button>
-
-        {/* Remove image */}
-        <button
-          type="button"
-          className="btn btn-icon btn-circle btn-color-muted btn-active-color-danger w-25px h-25px bg-body shadow"
-          data-kt-image-input-action="remove"
-          onClick={() => changeImage('')}
-        >
-          <Tip
-            id="image-input-remove"
-            label={translate('Remove avatar')}
-            className="w-100"
-          >
-            <X />
-          </Tip>
-        </button>
+            {input.value ? (
+              <>
+                <span>{translate('Replace')}</span>
+                <ArrowsClockwiseIcon size={20} />
+              </>
+            ) : (
+              <>
+                <UploadSimpleIcon size={20} />
+                <span>{translate('Upload')}</span>
+              </>
+            )}
+            <input
+              ref={inputRef}
+              type="file"
+              name={input.name}
+              accept=".png, .jpg, .jpeg"
+              onChange={(event) => changeImage(event.target.files[0])}
+              style={{ display: 'none' }}
+            />
+          </label>
+        </div>
       </div>
-      <div className="form-text">
-        {isChanged && input.value instanceof File ? (
-          <>
-            {input.value.name} {formatFilesize(input.value.size, 'B')}
-          </>
-        ) : (
-          <>{translate('Allowed file types')}: png, jpg, jpeg.</>
-        )}
-      </div>
-    </>
+    </div>
   );
 };

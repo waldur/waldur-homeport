@@ -41,6 +41,11 @@ export const PROVIDER_CUSTOMERS_TABLE_TABS = [
     state: 'marketplace-provider-organizations',
   },
   {
+    key: 'marketplace-provider-projects',
+    title: translate('Projects'),
+    state: 'marketplace-provider-projects',
+  },
+  {
     key: 'marketplace-provider-users',
     title: translate('Users'),
     state: 'marketplace-provider-users',

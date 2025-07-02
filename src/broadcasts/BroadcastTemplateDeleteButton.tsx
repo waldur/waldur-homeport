@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { broadcastMessageTemplatesDestroy } from 'waldur-js-client';
 
@@ -32,7 +32,7 @@ export const BroadcastTemplateDeleteButton = ({ row, refetch }) => {
     <ActionItem
       title={translate('Remove')}
       action={openDialog}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
       iconColor="danger"
       className="text-danger"

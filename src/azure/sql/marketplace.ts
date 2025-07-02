@@ -2,9 +2,9 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OfferingConfiguration } from '@waldur/marketplace/common/types';
 
-const AzureSQLServerDetails = lazyComponent(() =>
-  import('./AzureSQLServerDetails').then((module) => ({
-    default: module.AzureSQLServerDetails,
+const AzureCredentials = lazyComponent(() =>
+  import('../common/AzureCredentials').then((module) => ({
+    default: module.AzureCredentials,
   })),
 );
 const AzureSQLServerForm = lazyComponent(() =>
@@ -19,7 +19,7 @@ export const AzureSQLServerOffering: OfferingConfiguration = {
     return translate('Azure PostgreSQL database server');
   },
   orderFormComponent: AzureSQLServerForm,
-  detailsComponent: AzureSQLServerDetails,
+  detailsComponent: AzureCredentials,
   providerType: 'Azure',
   allowToUpdateService: true,
 };

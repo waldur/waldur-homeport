@@ -4,7 +4,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { INSTANCE_TYPE, VOLUME_TYPE } from '@waldur/openstack/constants';
 import { formatResourceType } from '@waldur/resource/utils';
@@ -18,6 +18,7 @@ import { InstanceComponents } from './openstack-instance/InstanceComponents';
 import { ResourceComponents } from './ResourceComponents';
 import { ResourceDetailsHeaderBody } from './ResourceDetailsHeaderBody';
 import { ResourceDetailsHeaderTitle } from './ResourceDetailsHeaderTitle';
+import { ResourceEndDateConflictBar } from './ResourceEndDateConflictBar';
 import { VolumeComponents } from './VolumeComponents';
 
 export const ResourceDetailsHero = ({
@@ -37,17 +38,23 @@ export const ResourceDetailsHero = ({
 }) => {
   return (
     <>
+      {resource.end_date &&
+        resource.project_end_date &&
+        resource.end_date > resource.project_end_date && (
+          <ResourceEndDateConflictBar />
+        )}
       {resource.order_in_progress ? (
         <OrderInProgressView resource={resource} refetch={refetch} />
       ) : resource.creation_order ? (
         <OrderErredView resource={resource} />
       ) : null}
-      <PublicDashboardHero2
+      <PublicDashboardHero
         containerClassName="container-fluid my-5"
         cardBordered
         logo={getMarketplaceResourceLogo(resource)}
         logoAlt={resource.category_title}
         logoTooltip={formatResourceType(resource)}
+        logoCircle
         backgroundImage={offering.image}
         title={<ResourceDetailsHeaderTitle resource={resource} />}
         quickActions={
@@ -76,7 +83,7 @@ export const ResourceDetailsHero = ({
         }
       >
         <ResourceDetailsHeaderBody resource={resource} offering={offering} />
-      </PublicDashboardHero2>
+      </PublicDashboardHero>
     </>
   );
 };

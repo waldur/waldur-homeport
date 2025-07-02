@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -41,7 +41,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
           <div className="d-flex justify-content-end flex-grow-1">
             <Button variant="light" className="text-nowrap" size="sm">
               <span className="svg-icon svg-icon-2">
-                <Plus weight="bold" />
+                <PlusIcon weight="bold" />
               </span>
               {translate('New interface')}
             </Button>

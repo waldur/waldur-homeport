@@ -14,6 +14,7 @@ export const OrderConsumerActions: FC<OrderActionProps> = (props) =>
           props.as === Button ? 'btn-light-success btn-sm' : 'text-success'
         }
       />
+
       <RejectByConsumerButton
         {...props}
         className={

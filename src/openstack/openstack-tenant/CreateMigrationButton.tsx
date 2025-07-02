@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -19,7 +19,7 @@ export const CreateMigrationButton: FC<TenantActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Create')}
-    iconNode={<Plus weight="bold" />}
+    iconNode={<PlusIcon weight="bold" />}
     modalComponent={MigrateTenantDialog}
     resource={resource}
     extraResolve={{ refetch }}

@@ -1,4 +1,4 @@
-import { ClipboardText } from '@phosphor-icons/react';
+import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
 import { translate } from '@waldur/i18n';
@@ -15,7 +15,7 @@ export const ProjectsListMenu = () => {
       title={translate('Projects')}
       state="projects"
       activeState={isDescendantOf('project', state) ? state.name : undefined}
-      icon={<ClipboardText weight="bold" />}
+      icon={<ClipboardTextIcon weight="bold" />}
       child={false}
     />
   );

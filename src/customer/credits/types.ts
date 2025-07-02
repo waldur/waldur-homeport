@@ -1,3 +1,5 @@
+import { Customer, NestedProviderOffering, Project } from 'waldur-js-client';
+
 export interface BaseCreditFormData {
   expected_consumption: string;
   value: string;
@@ -6,10 +8,10 @@ export interface BaseCreditFormData {
 }
 
 export interface CustomerCreditFormData extends BaseCreditFormData {
-  customer: string;
-  offerings: string[];
+  customer: Pick<Customer, 'uuid' | 'name' | 'url'>;
+  offerings: Array<NestedProviderOffering>;
 }
 
 export interface ProjectCreditFormData extends BaseCreditFormData {
-  project: string;
+  project: Project;
 }

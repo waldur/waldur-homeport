@@ -13,11 +13,11 @@ import Table from '@waldur/table/Table';
 import { Column, TableProps } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { formatLongText } from '@waldur/table/utils';
-import { ProjectExpandableRow } from '@waldur/user/affiliations/ProjectExpandableRow';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { ProjectCreateButton } from './create/ProjectCreateButton';
+import { ProjectImportButton } from './import/ProjectImportButton';
 import { ProjectCostField } from './ProjectCostField';
 import { ProjectLink } from './ProjectLink';
 
@@ -33,26 +33,18 @@ interface ProjectsListProps extends Partial<TableProps> {
   optionalColumns?: ('description' | 'created')[];
 }
 
-export const ProjectsList: FC<ProjectsListProps> = ({
+const TableActions = ({ customer, refetch }) => (
+  <>
+    <ProjectImportButton customer={customer} refetch={refetch} />
+    <ProjectCreateButton customer={customer} refetch={refetch} />
+  </>
+);
+
+export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
   customer,
   optionalColumns = [],
   ...props
 }) => {
-  const currentCustomer = useSelector(getCustomer);
-  const filter = useMemo(
-    () => ({
-      customer: customer ? customer.uuid : currentCustomer.uuid,
-      o: 'name',
-    }),
-    [currentCustomer, customer],
-  );
-  const tableProps = useTable({
-    table: props.table || PROJECTS_LIST,
-    fetchData: createFetcher('projects'),
-    queryField: 'query',
-    filter,
-    mandatoryFields,
-  });
   const columns: Column[] = [
     {
       title: translate('Name'),
@@ -86,6 +78,7 @@ export const ProjectsList: FC<ProjectsListProps> = ({
       render: ({ row }) => (
         <>{row.start_date ? formatDate(row.start_date) : DASH_ESCAPE_CODE}</>
       ),
+
       orderField: 'start_date',
       export: false,
       id: 'start_date',
@@ -97,12 +90,14 @@ export const ProjectsList: FC<ProjectsListProps> = ({
       render: ({ row }) => (
         <>{row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE}</>
       ),
+
       orderField: 'end_date',
       export: false,
       id: 'end_date',
       keys: ['end_date'],
     },
   ];
+
   if (isFeatureVisible(ProjectFeatures.estimated_cost)) {
     columns.push({
       title: translate('Estimated cost'),
@@ -115,23 +110,50 @@ export const ProjectsList: FC<ProjectsListProps> = ({
 
   return (
     <Table
-      {...tableProps}
       title={translate('Projects')}
       columns={columns}
       verboseName={translate('projects')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
-      tableActions={
-        <ProjectCreateButton customer={customer} refetch={tableProps.fetch} />
-      }
+      tableActions={<TableActions customer={customer} refetch={props.fetch} />}
       rowActions={({ row }) => (
-        <ProjectsListActions project={row} refetch={tableProps.fetch} />
+        <ProjectsListActions project={row} refetch={props.fetch} />
       )}
-      expandableRow={ProjectExpandableRow}
       enableExport={true}
       hasOptionalColumns
       {...props}
+    />
+  );
+};
+
+export const ProjectsList: FC<ProjectsListProps> = ({
+  customer,
+  optionalColumns = [],
+  ...props
+}) => {
+  const currentCustomer = useSelector(getCustomer);
+  const filter = useMemo(
+    () => ({
+      customer: customer ? customer.uuid : currentCustomer.uuid,
+      o: 'name',
+    }),
+    [currentCustomer, customer],
+  );
+  const tableProps = useTable({
+    table: props.table || PROJECTS_LIST,
+    fetchData: createFetcher('projects'),
+    queryField: 'query',
+    filter,
+    mandatoryFields,
+  });
+
+  return (
+    <ProjectsListTable
+      {...tableProps}
+      {...props}
+      customer={customer || currentCustomer}
+      optionalColumns={optionalColumns}
     />
   );
 };

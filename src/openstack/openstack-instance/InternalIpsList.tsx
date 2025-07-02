@@ -6,12 +6,19 @@ import {
 import { OpenStackNestedPort } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { UpdateInternalIpsAction } from './actions/update-internal-ips/UpdateInternalIpsSetAction';
 import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';
 import { formatAddressList } from './utils';
+
+const RowActions = ({ row, instance }) => (
+  <ActionsDropdownComponent>
+    <SetAllowedAddressPairsButton instance={instance} port={row} />
+  </ActionsDropdownComponent>
+);
 
 export const InternalIpsList: FunctionComponent<{
   resourceScope: OpenStackInstance;
@@ -51,15 +58,13 @@ export const InternalIpsList: FunctionComponent<{
           title: translate('Subnet CIDR'),
           render: ({ row }) => <>{row.subnet_cidr}</>,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <SetAllowedAddressPairsButton instance={resourceScope} port={row} />
-          ),
-        },
       ]}
       title={translate('Ports')}
       verboseName={translate('ports')}
+      showPageSizeSelector
+      rowActions={({ row }) => (
+        <RowActions row={row} instance={resourceScope} />
+      )}
       tableActions={
         <UpdateInternalIpsAction
           resource={resourceScope}

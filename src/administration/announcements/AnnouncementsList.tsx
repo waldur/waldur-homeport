@@ -110,6 +110,7 @@ export const AnnouncementsList = () => {
       optional: true,
     },
   ];
+
   return (
     <Table<AdminAnnouncement>
       {...tableProps}

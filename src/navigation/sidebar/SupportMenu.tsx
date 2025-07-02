@@ -1,4 +1,4 @@
-import { Headset } from '@phosphor-icons/react';
+import { HeadsetIcon } from '@phosphor-icons/react';
 
 import { translate } from '@waldur/i18n';
 
@@ -11,7 +11,7 @@ export const SupportMenu = () => {
       state="support-dashboard"
       activeState="support"
       child={false}
-      icon={<Headset weight="bold" />}
+      icon={<HeadsetIcon weight="bold" />}
     />
   );
 };

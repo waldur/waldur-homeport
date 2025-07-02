@@ -1,4 +1,4 @@
-import { Copy } from '@phosphor-icons/react';
+import { CopyIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
@@ -33,7 +33,7 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
       type="button"
       onClick={onClick}
     >
-      <Copy /> {label}
+      <CopyIcon /> {label}
     </button>
   ) : (
     <button
@@ -42,7 +42,7 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
       onClick={onClick}
     >
       <span className="svg-icon svg-icon-2">
-        <Copy />
+        <CopyIcon />
       </span>
       {label}
     </button>

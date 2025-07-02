@@ -15,14 +15,17 @@ export const OpenStackNetworkSummary = (
         value={formatDefault(resource.type)}
         valueClass="ellipsis"
       />
+
       <Field
         label={translate('Segmentation ID')}
         value={formatDefault(resource.segmentation_id)}
       />
+
       <Field
         label={translate('Is external')}
         value={resource.is_external ? translate('Yes') : translate('No')}
       />
+
       <Field label={translate('MTU')} value={formatDefault(resource.mtu)} />
     </>
   );

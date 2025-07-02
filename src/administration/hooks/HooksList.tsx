@@ -106,7 +106,7 @@ export const HooksList: FunctionComponent = () => {
       showPageSizeSelector={true}
       verboseName={translate('Notifications')}
       rowActions={({ row }) => (
-        <HooksRowActions row={row} refetch={tableProps.fetch} url={row.url} />
+        <HooksRowActions row={row} refetch={tableProps.fetch} />
       )}
       enableExport={true}
       hasQuery={true}

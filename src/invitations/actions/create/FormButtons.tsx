@@ -1,4 +1,4 @@
-import { CaretLeft } from '@phosphor-icons/react';
+import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -39,7 +39,7 @@ export const FormButtons: FC<FormButtonsProps> = ({
         onClick={() => setStep(1)}
       >
         <div className="svg-icon svg-icon-2">
-          <CaretLeft />
+          <CaretLeftIcon />
         </div>
         {translate('Go back')}
       </Button>

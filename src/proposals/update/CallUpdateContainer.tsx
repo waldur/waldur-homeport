@@ -45,6 +45,7 @@ const Body = ({ call, refetch, loading }) => {
               {translate('Rounds')}
             </>
           ),
+
           component: CallRoundsList,
         },
         {
@@ -55,6 +56,7 @@ const Body = ({ call, refetch, loading }) => {
               <span>{translate('General')}</span>
             </>
           ),
+
           component: CallGeneralSection,
         },
         {
@@ -81,6 +83,7 @@ const Body = ({ call, refetch, loading }) => {
                   hasTeamTabs
                 />
               ),
+
               visible: false,
             },
             {
@@ -95,6 +98,7 @@ const Body = ({ call, refetch, loading }) => {
                   hasTeamTabs
                 />
               ),
+
               visible: false,
             },
           ].filter(Boolean),
@@ -131,16 +135,16 @@ export const CallUpdateContainer: FunctionComponent = () => {
     error,
     refetch,
     isRefetching,
-  } = useQuery(
-    ['CallUpdateContainer', call_uuid],
-    () =>
+  } = useQuery({
+    queryKey: ['CallUpdateContainer', call_uuid],
+
+    queryFn: () =>
       proposalProtectedCallsRetrieve({ path: { uuid: call_uuid } }).then(
         (r) => r.data as any as Call,
       ),
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
+
+    refetchOnWindowFocus: false,
+  });
 
   useTitle(call ? call.name : translate('Call update'));
 

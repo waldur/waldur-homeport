@@ -270,6 +270,11 @@ $asides: (
     .menu-item {
       .menu-badge {
         // Outline badge
+        .badge {
+          color: if(isDarkMode(), $dark-badge-color, $white);
+          background-color: if(isDarkMode(), $dark-badge-bg, transparent);
+          border-color: if(isDarkMode(), $dark-badge-border, $white);
+        }
         .badge.badge-inverse {
           color: if(isDarkMode(), $dark-badge-bg, $white);
           background-color: transparent;

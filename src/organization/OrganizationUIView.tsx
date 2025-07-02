@@ -74,6 +74,7 @@ const PageHero = ({ customer }) => {
             eventKey="organization.dashboard"
             title={translate('Customer')}
           />
+
           {showCallManagement && (
             <Tab
               eventKey="call-management.dashboard"
@@ -119,6 +120,7 @@ const WithHero = (props) => {
         active: true,
       },
     ],
+
     [customer],
   );
   useBreadcrumbs(breadcrumbItems);

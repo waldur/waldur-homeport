@@ -3,7 +3,10 @@ import { translate } from '@waldur/i18n';
 
 const formatErrorObject = (error) =>
   Object.keys(error)
-    .map((key) => `${key}: ${error[key]}`)
+    .map(
+      (key) =>
+        `${key}: ${typeof error[key] === 'object' ? formatErrorObject(error[key]) : error[key]}`,
+    )
     .join(', ');
 
 export const format = (error, parseResponse?) => {

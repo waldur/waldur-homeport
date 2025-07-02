@@ -1,4 +1,4 @@
-import { UploadSimple } from '@phosphor-icons/react';
+import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -14,9 +14,13 @@ import { useUpdateUser } from './useUpdateUser';
 
 interface OwnProps {
   user: User;
+  disabled?: boolean;
 }
 
-export const UserEditAvatarFormItem: React.FC<OwnProps> = ({ user }) => {
+export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
+  user,
+  disabled,
+}) => {
   const currentUser = useSelector(getUser);
   const [image, setImage] = useState(user.image);
   const { callback, isLoading } = useUpdateUser(user);
@@ -31,13 +35,15 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({ user }) => {
               "Upload an image to personalize the user's account profile",
             )
       }
+      disabled={disabled}
       value={
         <WideImageField
           name="image"
+          disabled={disabled}
           alt={getItemAbbreviation(user, 'full_name')}
           initialValue={user.image}
           max={2 * 1024 * 1024} // 2MB
-          size={65}
+          size={64}
           input={{ value: image, onChange: (value) => setImage(value) } as any}
           extraActions={({ isChanged, isTooLarge }) =>
             isChanged || isLoading ? (
@@ -45,12 +51,12 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({ user }) => {
                 variant="primary"
                 size="sm"
                 className="btn-icon-right"
-                disabled={isLoading || isTooLarge}
+                disabled={isLoading || isTooLarge || disabled}
                 onClick={() => callback({ image })}
               >
                 {translate('Save')}
                 <span className="svg-icon svg-icon-5">
-                  <UploadSimple />
+                  <UploadSimpleIcon />
                 </span>
               </Button>
             ) : null

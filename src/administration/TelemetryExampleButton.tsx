@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -21,7 +21,7 @@ export const TelemetryExampleButton = () => {
       className="text-btn btn-xs"
     >
       <span className="svg-icon svg-icon-2">
-        <Eye />
+        <EyeIcon />
       </span>
       {translate('Show example')}
     </Button>

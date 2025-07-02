@@ -1,4 +1,8 @@
-import { CaretDown, MagnifyingGlass, X } from '@phosphor-icons/react';
+import {
+  CaretDownIcon,
+  MagnifyingGlassIcon,
+  XIcon,
+} from '@phosphor-icons/react';
 import classNames from 'classnames';
 
 import { translate } from '@waldur/i18n';
@@ -37,8 +41,13 @@ export const SearchInput = ({
           type="password"
           name="fakepasswordremembered"
         />
+
         <span className="position-absolute top-50 translate-middle-y ms-4">
-          <MagnifyingGlass weight="bold" size={20} className="text-gray-500" />
+          <MagnifyingGlassIcon
+            weight="bold"
+            size={20}
+            className="text-gray-500"
+          />
         </span>
         <input
           type="text"
@@ -48,6 +57,7 @@ export const SearchInput = ({
           onChange={(event) => setQuery(event.target.value)}
           placeholder={translate('Search...')}
         />
+
         {show && isLoading ? (
           <span className="position-absolute top-50 end-0 translate-middle-y lh-0 me-4">
             <span className="spinner-border h-15px w-15px align-middle text-gray-400" />
@@ -61,7 +71,7 @@ export const SearchInput = ({
           )}
           onClick={() => setQuery('')}
         >
-          <X weight="bold" size={16} className="text-gray-400" />
+          <XIcon weight="bold" size={16} className="text-gray-400" />
         </button>
 
         {/* Filters toggle */}
@@ -80,7 +90,7 @@ export const SearchInput = ({
               data-bs-toggle="tooltip"
               title="Show more search options"
             >
-              <CaretDown size={30} />
+              <CaretDownIcon size={30} />
             </button>
           </div>
         )}

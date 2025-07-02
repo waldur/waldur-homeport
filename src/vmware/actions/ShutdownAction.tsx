@@ -1,4 +1,4 @@
-import { Power } from '@phosphor-icons/react';
+import { PowerIcon } from '@phosphor-icons/react';
 import { vmwareVirtualMachineShutdownGuest } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -20,6 +20,6 @@ export const ShutdownAction: ActionItemType = ({ resource, refetch }) => (
       vmwareVirtualMachineShutdownGuest({ path: { uuid: id } })
     }
     refetch={refetch}
-    iconNode={<Power weight="bold" />}
+    iconNode={<PowerIcon weight="bold" />}
   />
 );

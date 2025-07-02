@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { ProposalProtectedCallsListData } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -24,7 +25,7 @@ const mapStateToFilter = createSelector(
   getCustomer,
   getFormValues(CALL_FILTER_FORM_ID),
   (customer, filters: any) => {
-    const result: Record<string, any> = {};
+    const result: ProposalProtectedCallsListData['query'] = {};
     if (customer) {
       result.customer_uuid = customer.uuid;
     }
@@ -61,6 +62,7 @@ export const CallManagementPage: FunctionComponent = () => {
               label={row.name}
             />
           ),
+
           copyField: (row) => row.name,
         },
         {

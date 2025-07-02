@@ -2,7 +2,7 @@ import { EChartsOption, MarkLineComponentOption, SeriesOption } from 'echarts';
 
 import { translate } from '@waldur/i18n';
 
-import { LINE_CHART_COLOR } from './constants';
+import { CHART_BAR_ROUNDING, LINE_CHART_COLOR } from './constants';
 import { Chart, ChartData } from './types';
 
 type Value = string | number;
@@ -93,7 +93,7 @@ export const getCostWidgetChartOptions = (
     grid: {
       left: '0%',
       right: '0%',
-      top: 30,
+      top: series.length > 2 ? 48 : 30,
       bottom: '0%',
       containLabel: true,
     },
@@ -170,8 +170,8 @@ export const getCostWidgetChartOptions = (
       const datum = data[j];
       if (datum) {
         const isPositive = Number(datum.value) >= 0;
-        const topBorder = isPositive ? 5 : 0;
-        const bottomBorder = isPositive ? 0 : 5;
+        const topBorder = isPositive ? CHART_BAR_ROUNDING : 0;
+        const bottomBorder = isPositive ? 0 : CHART_BAR_ROUNDING;
 
         data[j] = {
           ...datum,
@@ -237,8 +237,8 @@ export const getCreditWidgetChartOptions = (
 
   const options = {
     grid: {
-      left: '6%',
-      right: '6%',
+      left: 35,
+      right: '0%',
       top: 30,
       bottom: '0%',
       containLabel: true,
@@ -316,8 +316,8 @@ export const getCreditWidgetChartOptions = (
       const datum = data[j];
       if (datum) {
         const isPositive = Number(datum.value) >= 0;
-        const topBorder = isPositive ? 5 : 0;
-        const bottomBorder = isPositive ? 0 : 5;
+        const topBorder = isPositive ? CHART_BAR_ROUNDING : 0;
+        const bottomBorder = isPositive ? 0 : CHART_BAR_ROUNDING;
 
         data[j] = {
           ...datum,

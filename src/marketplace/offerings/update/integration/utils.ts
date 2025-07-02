@@ -8,6 +8,10 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import {
+  getPluginOptionsSerializer,
+  getSecretOptionsSerializer,
+} from '@waldur/marketplace/common/registry';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
 
@@ -44,6 +48,18 @@ export const useUpdateOfferingIntegration = (
   const dispatch = useDispatch();
   const update = useCallback(
     async (formData: OfferingIntegrationUpdateRequest) => {
+      if (formData.plugin_options) {
+        const serializer = getPluginOptionsSerializer(offering.type);
+        if (serializer) {
+          formData.plugin_options = serializer(formData.plugin_options);
+        }
+      }
+      if (formData.secret_options) {
+        const serializer = getSecretOptionsSerializer(offering.type);
+        if (serializer) {
+          formData.secret_options = serializer(formData.secret_options);
+        }
+      }
       try {
         await marketplaceProviderOfferingsUpdateIntegration({
           path: { uuid: offering.uuid },

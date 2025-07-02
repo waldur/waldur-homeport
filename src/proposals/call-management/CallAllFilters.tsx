@@ -17,7 +17,11 @@ const PureCallAllFilters = ({ form }) => {
   useReinitializeFilterFromUrl(form);
   return (
     <>
-      <TableFilterItem title={translate('State')} name="state">
+      <TableFilterItem
+        title={translate('State')}
+        name="state"
+        instantApply={false}
+      >
         <CallStateFilter />
       </TableFilterItem>
       <TableFilterItem

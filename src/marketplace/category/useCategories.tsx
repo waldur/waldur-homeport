@@ -4,7 +4,6 @@ import { marketplaceCategoriesList } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
 import { getCategoryGroups } from '@waldur/marketplace/common/api';
-import { CategoryGroup } from '@waldur/marketplace/types';
 
 import {
   getContextFiltersForOfferings,
@@ -17,9 +16,10 @@ export const useCategories = () => {
   const marketplaceFilters = useSelector(getMarketplaceFilters);
   const contextFilter = getContextFiltersForOfferings(marketplaceFilters) || {};
 
-  return useQuery<any, any, CategoryGroup[]>(
-    ['useCategories', contextFilter],
-    () =>
+  return useQuery({
+    queryKey: ['useCategories', contextFilter],
+
+    queryFn: () =>
       Promise.all([
         getCategoryGroups(),
         getAllPages((page) =>
@@ -34,6 +34,7 @@ export const useCategories = () => {
       ]).then(([categoryGroups, categories]) =>
         getGroupedCategories(categories, categoryGroups),
       ),
-    { staleTime: 1 * 60 * 1000 },
-  );
+
+    staleTime: 1 * 60 * 1000,
+  });
 };

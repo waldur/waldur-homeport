@@ -1,4 +1,4 @@
-import { Eye, EyeSlash } from '@phosphor-icons/react';
+import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import { Component } from 'react';
 
 export class SecretField extends Component<
@@ -13,7 +13,11 @@ export class SecretField extends Component<
     return (
       <>
         <button className="text-btn" type="button" onClick={this.toggle}>
-          {this.state.showSecret ? <EyeSlash size={20} /> : <Eye size={20} />}
+          {this.state.showSecret ? (
+            <EyeSlashIcon size={20} />
+          ) : (
+            <EyeIcon size={20} />
+          )}
         </button>{' '}
         {this.getValue()}
       </>

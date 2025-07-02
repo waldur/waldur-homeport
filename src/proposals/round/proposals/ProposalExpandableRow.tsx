@@ -1,15 +1,23 @@
 import React, { useMemo } from 'react';
+import { Proposal } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
+import { Field } from '@waldur/resource/summary';
 import { createFetcher } from '@waldur/table/api';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { ProposalReviewsDetailButton } from './ProposalReviewsDetailButton';
+import { ProposalReviewsRowActions } from './ProposalReviewsRowActions';
 
 interface ProposalExpandableRowProps {
-  row;
+  row: Proposal;
 }
+
+const renderReviewScoreField = ({ row }) => {
+  return <RateStars value={row.summary_score} />;
+};
 
 export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
   row,
@@ -32,16 +40,31 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     },
     {
       title: translate('Score'),
-      render: ({ row }) => row.summary_score,
+      render: renderReviewScoreField,
     },
   ];
 
   return (
-    <Table
-      {...tableProps}
-      columns={columns}
-      rowActions={ProposalReviewsDetailButton}
-      title={translate('Reviews')}
-    />
+    <ExpandableContainer>
+      {row.project_summary && (
+        <Field
+          label={translate('Project summary')}
+          value={row.project_summary}
+          className="col-md-6 mb-3"
+        />
+      )}
+      <Table
+        {...tableProps}
+        columns={columns}
+        minHeight="auto"
+        hideRefresh
+        headerClassName="py-0 min-h-45px"
+        titleClassName="fs-6 fw-bolder text-gray-700"
+        title={translate('Reviews')}
+        rowActions={({ row }) => <ProposalReviewsRowActions row={row} />}
+        showPageSizeSelector
+        initialPageSize={5}
+      />
+    </ExpandableContainer>
   );
 };

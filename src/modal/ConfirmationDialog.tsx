@@ -1,4 +1,4 @@
-import { WarningCircle } from '@phosphor-icons/react';
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import React, { ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -39,7 +39,7 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   },
 }) => {
   const dispatch = useDispatch();
-  const closeDialog = () => dispatch(closeModalDialog());
+  const closeDialog = () => dispatch(closeModalDialog('HIDE_CONFIRM'));
 
   const handleSubmit = () => {
     deferred.resolve();
@@ -54,21 +54,21 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   return (
     <ModalDialog
       title={title}
-      iconNode={iconNode || <WarningCircle weight="bold" />}
+      iconNode={iconNode || <WarningCircleIcon weight="bold" />}
       iconColor={type}
       bodyClassName="text-gray-500 pt-2"
       footer={
         <>
           <Button
             variant="outline btn-outline-default"
-            className="flex-equal"
+            className="flex-equal px-3"
             onClick={handleCancel}
           >
             {negativeButton}
           </Button>
           <Button
             variant={positiveButtonVariant}
-            className="flex-equal"
+            className="flex-equal px-3"
             onClick={handleSubmit}
           >
             {positiveButton}

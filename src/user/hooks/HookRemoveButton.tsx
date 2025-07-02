@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { hooksEmailDestroy, hooksWebDestroy } from 'waldur-js-client';
@@ -10,11 +10,11 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface HookRemoveButtonProps {
   refetch();
-  hook;
+  row;
 }
 
 export const HookRemoveButton: FC<HookRemoveButtonProps> = ({
-  hook,
+  row: hook,
   refetch,
 }) => {
   const [removing, setRemoving] = useState(false);
@@ -55,7 +55,7 @@ export const HookRemoveButton: FC<HookRemoveButtonProps> = ({
       title={translate('Remove')}
       action={action}
       disabled={removing}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
       className="text-danger"
       iconColor="danger"

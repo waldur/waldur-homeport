@@ -1,8 +1,8 @@
 import {
-  ArrowLeft,
-  ArrowRight,
-  CaretLeft,
-  CaretRight,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CaretLeftIcon,
+  CaretRightIcon,
 } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
@@ -54,7 +54,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
             {props.hasRows && props.resultCount > props.pageSize && (
               <Pagination
                 totalPages={totalPages}
-                currentPage={props.currentPage}
+                currentPage={Math.min(props.currentPage, totalPages)}
                 onChange={props.gotoPage}
                 hideFirstAndLastPageLinks
                 hidePreviousAndNextPageLinks
@@ -81,7 +81,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
                   disabled={prevDisabled}
                   onClick={() => props.gotoPage(props.currentPage - 1)}
                 >
-                  <CaretLeft size={20} weight="bold" />
+                  <CaretLeftIcon size={20} weight="bold" />
                 </button>
               </div>
               <div className={'page-item' + (nextDisabled ? ' disabled' : '')}>
@@ -91,7 +91,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
                   disabled={nextDisabled}
                   onClick={() => props.gotoPage(props.currentPage + 1)}
                 >
-                  <CaretRight size={20} weight="bold" />
+                  <CaretRightIcon size={20} weight="bold" />
                 </button>
               </div>
             </div>
@@ -108,7 +108,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
             disabled={prevDisabled}
             onClick={() => props.gotoPage(props.currentPage - 1)}
           >
-            <ArrowLeft size={20} weight="bold" />
+            <ArrowLeftIcon size={20} weight="bold" />
           </Button>
         </div>
         {props.hasRows && (
@@ -126,7 +126,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
             disabled={nextDisabled}
             onClick={() => props.gotoPage(props.currentPage + 1)}
           >
-            <ArrowRight size={20} weight="bold" />
+            <ArrowRightIcon size={20} weight="bold" />
           </Button>
         </div>
       </div>

@@ -27,6 +27,7 @@ export const fakeInstance = {
       subnet_cidr: '192.168.42.0/24',
     },
   ],
+
   ports: [
     {
       subnet: '/api/openstack-subnets/7350f289a6d14e4bbd780ee59b2899e6/',

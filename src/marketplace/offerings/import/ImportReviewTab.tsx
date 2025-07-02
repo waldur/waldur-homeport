@@ -34,6 +34,7 @@ export const ImportReviewTab = () => {
         value={renderFieldOrDash(formData.customer.name)}
         labelClass="fw-bolder"
       />
+
       <Field
         label={translate('Offerings')}
         value={renderFieldOrDash(
@@ -41,6 +42,7 @@ export const ImportReviewTab = () => {
         )}
         labelClass="fw-bolder"
       />
+
       <div>
         <label className="field-label text-gray-700 fw-bolder mb-4">
           {translate('Selected mappings')}:

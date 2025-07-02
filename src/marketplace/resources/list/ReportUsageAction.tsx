@@ -1,4 +1,4 @@
-import { ChartPie } from '@phosphor-icons/react';
+import { ChartPieIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
@@ -51,7 +51,7 @@ export const ReportUsageAction = ({ resource }: { resource: Resource }) => {
   return (
     <ActionItem
       title={translate('Report usage')}
-      iconNode={<ChartPie weight="bold" />}
+      iconNode={<ChartPieIcon weight="bold" />}
       action={() =>
         callback({
           offering_uuid: resource.offering_uuid,

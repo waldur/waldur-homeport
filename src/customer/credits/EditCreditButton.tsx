@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { SubmissionError } from 'redux-form';
@@ -68,7 +68,7 @@ export const EditCreditButton = ({
   return (
     <Dropdown.Item as="button" type="button" onClick={openCreditFormDialog}>
       <span className="svg-icon svg-icon-2">
-        <PencilSimple weight="bold" />
+        <PencilSimpleIcon weight="bold" />
       </span>
       {translate('Edit')}
     </Dropdown.Item>

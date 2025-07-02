@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import { getIconUrl } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { Link } from '@waldur/core/Link';
 import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
@@ -9,8 +10,16 @@ import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
 import { CallsAvailableOfferingsList } from '@waldur/proposals/CallsAvailableOfferingsList';
 import { CallsForProposalsList } from '@waldur/proposals/CallsForProposalsList';
+import { useTheme } from '@waldur/theme/useTheme';
+
+import DefaultDarkImage from './proposal-calls-dark.png';
+import DefaultLightImage from './proposal-calls.png';
 
 export const CallsForProposals: FunctionComponent = () => {
+  const { theme } = useTheme();
+  const defaultImage = theme === 'dark' ? DefaultDarkImage : DefaultLightImage;
+  const backendImage = getIconUrl('call_management_hero_image');
+
   useFullPage();
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
@@ -28,6 +37,7 @@ export const CallsForProposals: FunctionComponent = () => {
         header={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
         title={translate('Calls for proposals')}
         context="calls"
+        backgroundImage={`url(${backendImage}), url(${defaultImage})`}
       >
         <div className="d-flex justify-content-center gap-5">
           <Link

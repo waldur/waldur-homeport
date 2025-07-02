@@ -25,9 +25,10 @@ export const GrowthChart: FunctionComponent = () => {
     isLoading: loading,
     error,
     data: option,
-  } = useQuery(
-    ['growth-chart', accountRunningState?.value],
-    async ({ signal }) => {
+  } = useQuery({
+    queryKey: ['growth-chart', accountRunningState?.value],
+
+    queryFn: async ({ signal }) => {
       const response = await invoicesGrowthRetrieve({
         query: {
           accounting_is_running: accountRunningState?.value,
@@ -37,7 +38,7 @@ export const GrowthChart: FunctionComponent = () => {
       });
       return formatGrowthChart(response.data);
     },
-  );
+  });
   if (loading) {
     return <LoadingSpinner />;
   }

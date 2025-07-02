@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { EmailLogsListData } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -15,7 +16,7 @@ import { SupportEmailLogsFilter } from './SupportEmailLogsFilter';
 const mapStateToFilter = createSelector(
   getFormValues('SupportEmailLogsFilter'),
   (filterValues: any) => {
-    const result: Record<string, any> = {};
+    const result: EmailLogsListData['query'] = {};
     if (filterValues?.subject) {
       result.subject = filterValues.subject;
     }

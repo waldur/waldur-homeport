@@ -19,10 +19,10 @@ export const ProviderDetailsContainer: React.FC<{}> = () => {
     params: { customer_uuid },
   } = useCurrentStateAndParams();
 
-  const { isLoading, error, data } = useQuery(
-    ['ProviderDetailsContainer', customer_uuid],
-    () => loadProviderData(customer_uuid),
-  );
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['ProviderDetailsContainer', customer_uuid],
+    queryFn: () => loadProviderData(customer_uuid),
+  });
 
   if (isLoading) {
     return <LoadingSpinner />;

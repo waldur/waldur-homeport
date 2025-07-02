@@ -53,6 +53,13 @@ export const selectFiltersStorage = (state: RootState, table: string) => {
   return null;
 };
 
+export const selectSelectedRows = (table: string) => (state: RootState) => {
+  if (state.tables && state.tables[table]) {
+    return state.tables[table].selectedRows;
+  }
+  return null;
+};
+
 type TableSelector = (table: string) => (state: StateTables) => TableState;
 
 export const getTableState: TableSelector = (table) => (state: RootState) => {

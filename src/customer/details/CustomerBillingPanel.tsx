@@ -26,6 +26,7 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
         value: props.customer.bank_account,
       },
     ],
+
     [props.customer],
   );
 
@@ -42,6 +43,7 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
         value: props.customer.default_tax_percent,
       },
     ],
+
     [props.customer],
   );
 

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useState } from 'react';
 import {
   customersList,
@@ -7,6 +7,64 @@ import {
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@waldur/core/api';
+
+const queryFn =
+  (query) =>
+  async ({ signal }) => {
+    const organizationsPromise = customersList({
+      signal,
+      query: {
+        query: query,
+        field: ['name', 'display_name', 'uuid', 'abbreviation', 'image'],
+      },
+    });
+    const projectsPromise = projectsList({
+      signal,
+      query: {
+        query: query,
+        field: ['name', 'uuid', 'image', 'customer_name', 'customer_uuid'],
+      },
+    });
+    const resourcesPromise = marketplaceResourcesList({
+      signal,
+      query: {
+        query: query,
+        state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
+        field: [
+          'name',
+          'uuid',
+          'category_title',
+          'offering_thumbnail',
+          'customer_name',
+          'customer_uuid',
+          'project_name',
+          'project_uuid',
+          'state',
+        ],
+      },
+    });
+    const [organizations, projects, resources] = await Promise.all([
+      organizationsPromise,
+      projectsPromise,
+      resourcesPromise,
+    ]);
+
+    const customersCount = fetchResultCount(organizations);
+    const projectsCount = fetchResultCount(projects);
+    const resourcesCount = fetchResultCount(resources);
+
+    return {
+      customers: organizations.data,
+      customersCount,
+      projects: projects.data,
+      projectsCount,
+      resources: resources.data,
+      resourcesCount,
+      resultsCount: customersCount + projectsCount + resourcesCount,
+    };
+  };
+
+type QueryResult = ReturnType<typeof queryFn>;
 
 export const useSearch = () => {
   const [query, setQuery] = useState('');
@@ -33,63 +91,15 @@ export const useSearch = () => {
     };
   }, [handleClickOutside]);
 
-  const result = useQuery(
-    [`global-search`, query],
-    async ({ signal }) => {
-      const organizationsPromise = customersList({
-        signal,
-        query: {
-          query: query,
-          field: ['name', 'display_name', 'uuid', 'abbreviation', 'image'],
-        },
-      });
-      const projectsPromise = projectsList({
-        signal,
-        query: {
-          query: query,
-          field: ['name', 'uuid', 'image', 'customer_name', 'customer_uuid'],
-        },
-      });
-      const resourcesPromise = marketplaceResourcesList({
-        signal,
-        query: {
-          query: query,
-          state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-          field: [
-            'name',
-            'uuid',
-            'category_title',
-            'offering_thumbnail',
-            'customer_name',
-            'customer_uuid',
-            'project_name',
-            'project_uuid',
-            'state',
-          ],
-        },
-      });
-      const [organizations, projects, resources] = await Promise.all([
-        organizationsPromise,
-        projectsPromise,
-        resourcesPromise,
-      ]);
+  const result = useQuery<{}, {}, Awaited<ReturnType<QueryResult>>>({
+    queryKey: [`global-search`, query],
 
-      const customersCount = fetchResultCount(organizations);
-      const projectsCount = fetchResultCount(projects);
-      const resourcesCount = fetchResultCount(resources);
+    queryFn: queryFn(query),
 
-      return {
-        customers: organizations.data,
-        customersCount,
-        projects: projects.data,
-        projectsCount,
-        resources: resources.data,
-        resourcesCount,
-        resultsCount: customersCount + projectsCount + resourcesCount,
-      };
-    },
-    { staleTime: 60 * 1000, keepPreviousData: true, enabled: show },
-  );
+    staleTime: 60 * 1000,
+    placeholderData: keepPreviousData,
+    enabled: show,
+  });
   return { query, setQuery, result, show, setShow };
 };
 

@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -58,7 +58,7 @@ export const DeleteProjectUserButton: React.FC<
       iconColor="danger"
       title={translate('Remove')}
       action={callback}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
     />
   );
 };

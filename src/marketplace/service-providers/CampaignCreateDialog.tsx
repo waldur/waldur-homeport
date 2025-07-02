@@ -32,6 +32,7 @@ export const CampaignCreateDialog = connect((state: RootState) => ({
           step={step}
           setStep={setStep}
         />
+
         <CampaignFooter
           step={step}
           setStep={setStep}

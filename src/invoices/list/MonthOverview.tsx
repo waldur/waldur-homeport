@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowUp, Minus } from '@phosphor-icons/react';
+import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
@@ -79,11 +79,11 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
                 </div>
                 <span className="text-dark ms-4 svg-icon svg-icon-2">
                   {costTrend === -1 ? (
-                    <ArrowDown size={20} />
+                    <ArrowDownIcon size={20} />
                   ) : costTrend === 1 ? (
-                    <ArrowUp size={20} />
+                    <ArrowUpIcon size={20} />
                   ) : (
-                    <Minus size={20} />
+                    <MinusIcon size={20} />
                   )}
                 </span>
               </div>
@@ -118,6 +118,7 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
                         title={translate('Subtotal')}
                         value={defaultCurrency(invoice.price)}
                       />
+
                       <OverviewItemTr
                         title={translate('Total')}
                         value={defaultCurrency(invoice.total)}

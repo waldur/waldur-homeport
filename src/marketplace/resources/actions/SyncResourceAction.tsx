@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { marketplaceScriptSyncResource } from 'waldur-js-client';
 
@@ -27,7 +27,7 @@ export const SyncResourceAction = ({ resource, ...rest }) => {
       title={translate('Synchronise')}
       action={callback}
       {...rest}
-      iconNode={<ArrowsClockwise weight="bold" />}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
     />
   ) : null;
 };

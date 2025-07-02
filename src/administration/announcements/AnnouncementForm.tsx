@@ -104,16 +104,19 @@ export const AnnouncementForm = connect<
               simpleValue
               className="col-md-6"
             />
+
             <DateTimeField
               label={translate('Active from')}
               name="active_from"
               required
             />
+
             <DateTimeField
               label={translate('Active to')}
               name="active_to"
               required
             />
+
             <TextField
               label={translate('Announcement')}
               name="description"

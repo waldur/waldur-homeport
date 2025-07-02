@@ -49,6 +49,7 @@ export const CustomerQuotasList = () => {
                 : row.value}
             </>
           ),
+
           orderField: 'value',
         },
       ]}

@@ -1,4 +1,4 @@
-import { Wrench } from '@phosphor-icons/react';
+import { WrenchIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OpenStackInstance } from 'waldur-js-client';
 
@@ -26,7 +26,7 @@ export const UpdateInternalIpsAction: FC<UpdateInternalIpsActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Configure')}
-    iconNode={<Wrench />}
+    iconNode={<WrenchIcon />}
     modalComponent={UpdateInternalIpsDialog}
     resource={resource}
     validators={validators}

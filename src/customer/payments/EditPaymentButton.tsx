@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -27,7 +27,7 @@ export const EditPaymentButton = ({ row: payment }) => {
           }),
         )
       }
-      iconNode={<PencilSimple weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       disabled={!user.is_staff}
       tooltip={
         !user.is_staff

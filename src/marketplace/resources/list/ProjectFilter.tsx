@@ -1,4 +1,4 @@
-import { Factory } from '@phosphor-icons/react';
+import { FactoryIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { Props as SelectProps } from 'react-select';
 import { BaseFieldProps, Field } from 'redux-form';
@@ -23,7 +23,7 @@ const getOptionLabel = (option) => (
     {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
       option.is_industry && (
         <span className="svg-icon svg-icon-3 ms-3">
-          <Factory />
+          <FactoryIcon />
         </span>
       )}
   </div>

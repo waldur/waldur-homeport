@@ -1,8 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { useAsyncFn } from 'react-use';
+import { FC } from 'react';
 import {
   rancherIngressesDestroy,
   rancherIngressesYamlRetrieve,
@@ -10,41 +6,27 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { deleteEntity } from '@waldur/table/actions';
+import { ResourceDeleteButton } from '@waldur/resource/actions/ResourceDeleteButton';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
 import { ViewYAMLButton } from './ViewYAMLButton';
 
-export const IngressActions: FunctionComponent<{ ingress }> = ({ ingress }) => {
-  const dispatch = useDispatch();
-
-  const [deleteResult, deleteCallback] = useAsyncFn(async () => {
-    try {
-      await rancherIngressesDestroy({ path: { uuid: ingress.uuid } });
-      dispatch(showSuccess('Ingress has been deleted.'));
-      dispatch(deleteEntity('rancher-ingresses', ingress.uuid));
-    } catch (e) {
-      dispatch(showErrorResponse(e, 'Unable to delete ingress.'));
-    }
-  }, [dispatch, ingress]);
-
-  const disabled = deleteResult.loading;
-
+export const IngressActions: FC<{ row; fetch }> = ({ row, fetch }) => {
   return (
-    <ButtonGroup>
+    <ActionsDropdownComponent>
       <ViewYAMLButton
         yamlRetrieve={rancherIngressesYamlRetrieve}
         yamlUpdate={rancherIngressesYamlUpdate}
-        resource={ingress}
-        disabled={disabled}
+        resource={row}
       />
-      <ActionButton
-        title={translate('Delete')}
-        action={deleteCallback}
-        iconNode={<Trash />}
-        disabled={disabled}
+
+      <ResourceDeleteButton
+        apiFunction={() =>
+          rancherIngressesDestroy({ path: { uuid: row.uuid } })
+        }
+        resourceType={translate('Ingress')}
+        refetch={fetch}
       />
-    </ButtonGroup>
+    </ActionsDropdownComponent>
   );
 };

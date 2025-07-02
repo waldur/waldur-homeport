@@ -1,4 +1,4 @@
-import { Warning } from '@phosphor-icons/react';
+import { WarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
@@ -61,7 +61,11 @@ export const QuotaUsageBarChartDescription = ({ quota, hideLabel = false }) => (
           label={translate('Quota usage exceeds available limit.')}
         >
           {' '}
-          <Warning className="text-warning" size={16} data-testid="warning" />
+          <WarningIcon
+            className="text-warning"
+            size={16}
+            data-testid="warning"
+          />
         </Tip>
       )}
     </p>
@@ -81,6 +85,7 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
               quota={quota}
               hideLabel={props.hideLabel}
             />
+
             <Tip
               id="quota-usage"
               label={<ProgressTooltipMessage quota={quota} />}
@@ -92,6 +97,7 @@ export const QuotaUsageBarChart: FunctionComponent<QuotaUsageBarChartProps> = (
                   now={(quota.usage * 100) / quota.limit}
                   key={1}
                 />
+
                 <ProgressBar
                   variant="warning"
                   now={(quota.required * 100) / quota.limit}

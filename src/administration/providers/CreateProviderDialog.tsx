@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
@@ -72,7 +72,7 @@ export const CreateProviderDialog = (props) => {
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Add identity provider')}
-            iconNode={<PlusCircle weight="bold" />}
+            iconNode={<PlusCircleIcon weight="bold" />}
             iconColor="success"
             footer={
               <SubmitButton

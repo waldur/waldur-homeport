@@ -14,10 +14,12 @@ export const OpenStackPackageDetails: FunctionComponent<OrderDetailsProps> = ({
     {ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE && (
       <>
         <Field label={translate('Initial admin username')}>
-          {attributes['user_username'] || translate('Auto-generated')}
+          {(typeof attributes['user_username'] === 'string' &&
+            attributes['user_username']) ||
+            translate('Auto-generated')}
         </Field>
         <Field label={translate('Initial admin password')}>
-          {attributes['user_password'] ? (
+          {typeof attributes['user_password'] === 'string' ? (
             <SecretValueField
               className="max-w-300"
               value={attributes['user_password']}
@@ -28,13 +30,15 @@ export const OpenStackPackageDetails: FunctionComponent<OrderDetailsProps> = ({
         </Field>
       </>
     )}
-    {attributes['subnet_cidr'] && (
+    {typeof attributes['subnet_cidr'] === 'string' && (
       <Field label={translate('Internal network mask (CIDR)')}>
         {attributes['subnet_cidr']}
       </Field>
     )}
-    <Field label={translate('Skip connection to external network')}>
-      <BooleanField value={attributes['skip_connection_extnet']} />
-    </Field>
+    {typeof attributes['skip_connection_extnet'] === 'boolean' && (
+      <Field label={translate('Skip connection to external network')}>
+        <BooleanField value={attributes['skip_connection_extnet']} />
+      </Field>
+    )}
   </>
 );

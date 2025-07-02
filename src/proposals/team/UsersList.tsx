@@ -41,6 +41,7 @@ export const UsersList: FC<UsersListProps> = ({
       render: ({ row }) => <>{row.user_email}</>,
     },
   ];
+
   if (!hideRole) {
     columns.push({
       title: translate('Role'),

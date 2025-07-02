@@ -1,4 +1,4 @@
-import { Factory } from '@phosphor-icons/react';
+import { FactoryIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren } from 'react';
 import { Project } from 'waldur-js-client';
 
@@ -35,7 +35,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
       isFeatureVisible(ProjectFeatures.show_industry_flag) &&
       row.is_industry && (
         <span className="svg-icon svg-icon-4 ms-3">
-          <Factory />
+          <FactoryIcon />
         </span>
       )}
   </>

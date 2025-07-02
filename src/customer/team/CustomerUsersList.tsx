@@ -10,8 +10,10 @@ import { ENV } from '@waldur/core/config';
 import { formatDate } from '@waldur/core/dateUtils';
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
+import { useTeamTableTabs } from '@waldur/customer/team/tabs';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { useTeamTableTabs } from '@waldur/invitations/tabs';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
@@ -26,6 +28,7 @@ import {
 import { CustomerPermissionsLogButton } from './CustomerPermissionsLogButton';
 import { CustomerUserRowActions } from './CustomerUserRowActions';
 import { TeamDropdownActions } from './TeamDropdownActions';
+import { UsersBulkRemoveButton } from './UsersBulkRemoveButton';
 
 export const renderRoleExpirationDate = (row) => {
   return row.expiration_time
@@ -98,21 +101,7 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
           title: translate('Member'),
           render: ({ row }) => (
             <div className="content-wrapper gap-2">
-              {row.image ? (
-                <img
-                  src={row.image}
-                  alt={row.username}
-                  width={32}
-                  height={32}
-                  className="rounded-circle"
-                />
-              ) : (
-                <Avatar
-                  className="symbol symbol-32px symbol-circle"
-                  name={row.full_name}
-                  size={32}
-                />
-              )}
+              <Avatar name={row.full_name} src={row.image} circle size={32} />
               <p className="mb-0">{row.full_name || DASH_ESCAPE_CODE}</p>
             </div>
           ),
@@ -135,7 +124,8 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
           export: 'username',
           id: 'username',
           keys: ['username'],
-          optional: true,
+          optional: !isFeatureVisible(UserFeatures.show_username),
+          copyField: (row) => row.username,
         },
         {
           title: translate('Role in organization'),
@@ -167,7 +157,6 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
       expandableRow={({ row }) => (
         <CustomerUsersListExpandableRow row={row} refetch={props.fetch} />
       )}
-      expandableRowClassName="p-0 ps-12"
       tableActions={
         <>
           <CustomerPermissionsLogButton />
@@ -175,6 +164,8 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
         </>
       }
       hasOptionalColumns
+      enableMultiSelect
+      multiSelectActions={UsersBulkRemoveButton}
     />
   );
 };

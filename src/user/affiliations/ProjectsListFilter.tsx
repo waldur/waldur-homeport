@@ -13,6 +13,7 @@ const PureProjectsListFilter = () => (
       title={translate('Organization')}
       name="organization"
       getValueLabel={(option) => option.name}
+      instantApply={false}
     >
       <OrganizationAutocomplete
         reactSelectProps={{ ...REACT_MULTI_SELECT_TABLE_FILTER }}

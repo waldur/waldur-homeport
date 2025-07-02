@@ -1,4 +1,4 @@
-import { Info } from '@phosphor-icons/react';
+import { InfoIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -50,7 +50,7 @@ export const IssueDetailsStepLabel = () => {
             }
             id="tooltip"
           >
-            <Info />
+            <InfoIcon />
           </Tip>
         </span>
       )}

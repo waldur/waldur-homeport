@@ -24,6 +24,7 @@ export const ProviderOfferingsList = (props) => {
           {row.name}
         </Link>
       ),
+
       copyField: (row) => row.name,
       orderField: 'name',
     },
@@ -69,6 +70,7 @@ export const ProviderDashboardTab = (props) => {
         provider_uuid={props.data.provider.customer_uuid}
         initialMode="grid"
       />
+
       {isFeatureVisible(
         MarketplaceFeatures.show_call_management_functionality,
       ) && (

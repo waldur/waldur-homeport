@@ -1,4 +1,4 @@
-import { BracketsSquare } from '@phosphor-icons/react';
+import { BracketsSquareIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -19,6 +19,6 @@ export const SetMtuAction: ActionItemType = ({ resource, refetch }) => (
     modalComponent={SetMtuDialog}
     resource={resource}
     extraResolve={{ refetch }}
-    iconNode={<BracketsSquare weight="bold" />}
+    iconNode={<BracketsSquareIcon weight="bold" />}
   />
 );

@@ -14,7 +14,7 @@ const GroupEditDialog = lazyComponent(() =>
 const groupEditDialog = (row, refetch) =>
   openModalDialog(GroupEditDialog, {
     resolve: { categoryGroup: row, refetch },
-    size: 'md',
+    size: 'lg',
   });
 
 export const GroupEditButton = ({ row, refetch }) => {

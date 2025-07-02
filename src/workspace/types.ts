@@ -5,7 +5,7 @@ import {
   CustomerCredit,
   Resource,
 } from 'waldur-js-client';
-export { User, Project, PaymentProfile, Payment } from 'waldur-js-client';
+export { User, Project, Payment } from 'waldur-js-client';
 
 export interface Customer extends SdkCustomer {
   credit?: CustomerCredit;

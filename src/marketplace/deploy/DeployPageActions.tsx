@@ -1,4 +1,4 @@
-import { DotsThreeVertical } from '@phosphor-icons/react';
+import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -8,7 +8,7 @@ export const DeployPageActions = () => {
   return (
     <Dropdown id="deploy-actions" align="end">
       <Dropdown.Toggle variant="light" bsPrefix="btn-icon bg-body">
-        <DotsThreeVertical />
+        <DotsThreeVerticalIcon />
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <ActionItem action={() => null} title={translate('Import config')} />

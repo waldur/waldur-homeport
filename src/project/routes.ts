@@ -2,6 +2,7 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 
@@ -152,6 +153,21 @@ export const states: StateDeclaration[] = [
     data: {
       skipBreadcrumb: true,
       breadcrumb: () => translate('Invitations'),
+    },
+  },
+  {
+    name: 'project-service-accounts',
+    url: 'service-accounts/',
+    component: lazyComponent(() =>
+      import('./team/ProjectServiceAccountsList').then((module) => ({
+        default: module.ProjectServiceAccountsList,
+      })),
+    ),
+    parent: 'project-team',
+    data: {
+      skipBreadcrumb: true,
+      breadcrumb: () => translate('Service accounts'),
+      feature: InvitationsFeatures.show_service_accounts,
     },
   },
 ];

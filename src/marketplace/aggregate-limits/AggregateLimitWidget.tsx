@@ -1,27 +1,30 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { ComponentsUsageStats } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
+import { EChart } from '@waldur/core/EChart';
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Tip } from '@waldur/core/Tooltip';
 import { WidgetCard } from '@waldur/dashboard/WidgetCard';
 import { translate } from '@waldur/i18n';
-import { AggregateLimitsShowMoreButton } from '@waldur/marketplace/aggregate-limits/AggregateLimitsShowMoreButton';
-import { QuotaCell } from '@waldur/marketplace/resources/details/QuotaCell';
 import { openModalDialog } from '@waldur/modal/actions';
 import { Customer } from '@waldur/workspace/types';
 
-import { getBillingTypeLabel } from '../resources/usage/utils';
+import { useAggregateLimitChart } from './utils';
 
 interface AggregateLimitWidgetProps {
   project?: Project;
   customer?: Customer;
   data: ComponentsUsageStats;
   isLoading: boolean;
+  refetch(): void;
   error: any;
+  type?: 'monthly' | 'all';
 }
 
 const AggregateLimitDetailsDialog = lazyComponent(() =>
@@ -30,20 +33,11 @@ const AggregateLimitDetailsDialog = lazyComponent(() =>
   })),
 );
 
-export const ComponentItem = ({ component }) => {
-  return (
-    <QuotaCell
-      usage={
-        component.billing_type === 'limit'
-          ? component.limit_usage
-          : component.usage
-      }
-      limit={component.limit}
-      title={component.name}
-      description={getBillingTypeLabel(component.billing_type)}
-    />
-  );
-};
+const AggregateLimitChartModal = lazyComponent(() =>
+  import('./AggregateLimitChartModal').then((module) => ({
+    default: module.AggregateLimitChartModal,
+  })),
+);
 
 export const AggregateLimitWidget = ({
   project,
@@ -51,64 +45,132 @@ export const AggregateLimitWidget = ({
   data,
   isLoading,
   error,
+  refetch,
+  type = 'all',
 }: AggregateLimitWidgetProps) => {
   const dispatch = useDispatch();
   const isProject = !!project;
+  const isMonthly = type === 'monthly';
+
+  // Limit to 6 components for the dashboard view
+  const { options } = useAggregateLimitChart(
+    data || { components: [] },
+    isMonthly,
+    6,
+  );
 
   const viewDetails = useCallback(
     () =>
+      isProject
+        ? dispatch(
+            openModalDialog(AggregateLimitDetailsDialog, {
+              resolve: {
+                project,
+                components: data?.components,
+              },
+              size: 'lg',
+            }),
+          )
+        : dispatch(
+            openModalDialog(AggregateLimitDetailsDialog, {
+              resolve: {
+                customer,
+                components: data?.components,
+              },
+              size: 'lg',
+            }),
+          ),
+    [dispatch, project, customer, data, isProject],
+  );
+
+  const viewAllComponents = useCallback(
+    () =>
       dispatch(
-        openModalDialog(AggregateLimitDetailsDialog, {
+        openModalDialog(AggregateLimitChartModal, {
           resolve: {
-            [isProject ? 'project' : 'customer']: isProject
-              ? project
-              : customer,
-            components: data?.components,
+            data,
+            isMonthly,
+            title:
+              type === 'monthly'
+                ? translate("Current month's usage")
+                : translate('Aggregate usage and limits'),
           },
-          size: 'lg',
+          size: 'xl',
         }),
       ),
-    [dispatch, project, customer, data, isProject],
+    [dispatch, data, isMonthly, type],
   );
 
   if (isLoading) {
     return <LoadingSpinner />;
   } else if (error) {
     return (
-      <>
-        {translate(
-          `Unable to load aggregate limits for this ${isProject ? 'project' : 'customer'}`,
-        )}
-      </>
+      <LoadingErred
+        loadData={refetch}
+        message={
+          isProject
+            ? translate('Unable to load aggregate limits for this project')
+            : translate('Unable to load aggregate limits for this customer')
+        }
+      />
     );
   }
 
-  const components = data.components;
+  const components = data?.components;
+  const title =
+    type === 'monthly'
+      ? translate("Current month's usage")
+      : translate('Aggregate usage and limits');
 
-  return components?.length ? (
+  const TitleWithTip = () => (
+    <>
+      {title}{' '}
+      <Tip
+        id="aggregate-limit-tooltip"
+        label={translate('You are viewing the chart in log scale mode.')}
+      >
+        <QuestionIcon />
+      </Tip>
+    </>
+  );
+
+  if (!components?.length || !options) {
+    return null;
+  }
+
+  const showViewAllButton = components.length > 6;
+  const actions = [
+    {
+      label: translate('Details'),
+      icon: <EyeIcon />,
+      callback: viewDetails,
+    },
+  ];
+
+  const cardAction = () => {
+    if (showViewAllButton) {
+      return (
+        <Button
+          onClick={viewAllComponents}
+          variant="link"
+          size="sm"
+          className="py-0"
+        >
+          {translate('View all')}
+        </Button>
+      );
+    }
+    return null;
+  };
+
+  return (
     <WidgetCard
-      cardTitle={translate('Aggregate usage and limits')}
+      cardTitle={<TitleWithTip />}
       className="h-100"
-      actions={[
-        {
-          label: translate('Details'),
-          icon: <Eye />,
-          callback: viewDetails,
-        },
-      ]}
+      actions={actions}
+      cardAction={cardAction()}
     >
-      <Row className="field-row">
-        {components.slice(0, 4).map((component) => (
-          <Col key={component.type} xs={6}>
-            <ComponentItem component={component} />
-          </Col>
-        ))}
-      </Row>
-      {components?.length > 4 && (
-        <div className="flex-grow-1 d-flex align-items-end">
-          <AggregateLimitsShowMoreButton components={components} />
-        </div>
-      )}
+      <EChart options={options} />
     </WidgetCard>
-  ) : null;
+  );
 };

@@ -5,7 +5,7 @@ import { featureValues } from 'waldur-js-client';
 import { TelemetryExampleButton } from '@waldur/administration/TelemetryExampleButton';
 import { ENV } from '@waldur/core/config';
 import { FeaturesDescription } from '@waldur/features/FeaturesDescription';
-import { TelemetryFeatures } from '@waldur/FeaturesEnums';
+import { DeploymentFeatures } from '@waldur/FeaturesEnums';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
@@ -21,7 +21,7 @@ const FeatureSection = ({ section }) => (
             <>
               {item.description}
               {`${section.key}.${item.key}` ===
-              TelemetryFeatures.send_metrics ? (
+              DeploymentFeatures.send_metrics ? (
                 <div>
                   <TelemetryExampleButton />
                 </div>

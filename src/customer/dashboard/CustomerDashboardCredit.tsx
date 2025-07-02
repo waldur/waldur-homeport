@@ -1,4 +1,4 @@
-import { Eye, WarningOctagon } from '@phosphor-icons/react';
+import { EyeIcon, WarningOctagonIcon } from '@phosphor-icons/react';
 import { Col } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
@@ -57,7 +57,7 @@ export const CustomerDashboardCredit = ({
   }
 
   return (
-    <Col md={6} sm={12} className={className} style={COMMON_WIDGET_HEIGHT}>
+    <Col md={12} sm={12} className={className} style={COMMON_WIDGET_HEIGHT}>
       <WidgetCard
         cardTitle={
           <>
@@ -71,7 +71,7 @@ export const CustomerDashboardCredit = ({
                 label={translate('Credit is overallocated')}
                 className="ms-2"
               >
-                <WarningOctagon
+                <WarningOctagonIcon
                   className="text-warning"
                   weight="bold"
                   size={16}
@@ -83,13 +83,13 @@ export const CustomerDashboardCredit = ({
         actions={[
           {
             label: translate('Details'),
-            icon: <Eye />,
+            icon: <EyeIcon />,
             callback: viewDetails,
           },
         ]}
         className="h-100"
       >
-        <EChart options={options} />
+        <EChart options={options} height="130px" />
       </WidgetCard>
     </Col>
   );

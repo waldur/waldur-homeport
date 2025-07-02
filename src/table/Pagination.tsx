@@ -12,18 +12,23 @@ export default createUltimatePagination({
         {value}
       </Pagination.Item>
     ),
+
     [ITEM_TYPES.ELLIPSIS]: ({ isActive, onClick }) => (
       <Pagination.Ellipsis disabled={isActive} onClick={onClick} />
     ),
+
     [ITEM_TYPES.FIRST_PAGE_LINK]: ({ isActive, onClick }) => (
       <Pagination.First disabled={isActive} onClick={onClick} />
     ),
+
     [ITEM_TYPES.PREVIOUS_PAGE_LINK]: ({ isActive, onClick }) => (
       <Pagination.Prev disabled={isActive} onClick={onClick} />
     ),
+
     [ITEM_TYPES.NEXT_PAGE_LINK]: ({ isActive, onClick }) => (
       <Pagination.Next disabled={isActive} onClick={onClick} />
     ),
+
     [ITEM_TYPES.LAST_PAGE_LINK]: ({ isActive, onClick }) => (
       <Pagination.Last disabled={isActive} onClick={onClick} />
     ),

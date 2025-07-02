@@ -19,6 +19,7 @@ interface ResourceActionComponentProps {
   providerResourceActions?: ActionItemType[];
   staffActions?: ActionItemType[];
   resourceTypeActions?: ActionItemType[];
+  extraActions?: ActionItemType[];
   resource: any;
   marketplaceResource?: any;
   refetch?(): void;
@@ -30,6 +31,11 @@ export const ResourceActionComponent: FunctionComponent<
   ResourceActionComponentProps
 > = (props) => {
   const user = useSelector(getUser);
+
+  const extraAndResourceTypeActions = (props.extraActions || []).concat(
+    props.resourceTypeActions || [],
+  );
+
   return (
     <ActionsDropdownComponent
       labeled={props.labeled}
@@ -48,33 +54,34 @@ export const ResourceActionComponent: FunctionComponent<
           </Dropdown.Item>
         ) : props.customerResourceActions ||
           props.staffActions ||
-          props.resourceTypeActions ? (
+          extraAndResourceTypeActions?.length > 0 ? (
           <>
-            {props.resourceTypeActions?.length > 0 && (
-              <>
-                {props.resourceTypeActions.map((ActionComponent, index) => (
-                  <ActionComponent
-                    key={`resource-${index}`}
-                    resource={props.resource}
-                    marketplaceResource={props.marketplaceResource}
-                    refetch={props.refetch}
-                  />
-                ))}
-              </>
-            )}
+            {/* If we also have Resource actions, move the extra and resource type actions into it. */}
+            {extraAndResourceTypeActions?.length > 0 &&
+              !props.customerResourceActions?.length &&
+              extraAndResourceTypeActions.map((ActionComponent, index) => (
+                <ActionComponent
+                  key={`resource-${index}`}
+                  resource={props.resource}
+                  marketplaceResource={props.marketplaceResource}
+                  refetch={props.refetch}
+                />
+              ))}
             {props.customerResourceActions?.length > 0 && (
               <>
                 <Dropdown.Header>
                   {translate('Resource actions')}
                 </Dropdown.Header>
-                {props.customerResourceActions.map((ActionComponent, index) => (
-                  <ActionComponent
-                    key={`resource-${index}`}
-                    resource={props.resource}
-                    marketplaceResource={props.marketplaceResource}
-                    refetch={props.refetch}
-                  />
-                ))}
+                {props.customerResourceActions
+                  .concat(extraAndResourceTypeActions)
+                  .map((ActionComponent, index) => (
+                    <ActionComponent
+                      key={`resource-${index}`}
+                      resource={props.resource}
+                      marketplaceResource={props.marketplaceResource}
+                      refetch={props.refetch}
+                    />
+                  ))}
               </>
             )}
             {props.providerResourceActions && (
@@ -92,7 +99,7 @@ export const ResourceActionComponent: FunctionComponent<
                 ))}
               </>
             )}
-            {props.staffActions.length > 0 && user.is_staff && (
+            {props.staffActions?.length > 0 && user.is_staff && (
               <>
                 <Dropdown.Header>{translate('Staff actions')}</Dropdown.Header>
                 {props.staffActions.map((ActionComponent, index) => (

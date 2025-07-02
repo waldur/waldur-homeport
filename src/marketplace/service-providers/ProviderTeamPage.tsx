@@ -19,9 +19,13 @@ export const ProviderTeamPage = () => {
     }),
     [customer.service_provider],
   );
+  const url =
+    'marketplace-service-providers/' +
+    customer.service_provider_uuid +
+    '/list_users';
   const tableProps = useTable({
-    table: `ProviderTeamPage/${customer.call_managing_organization_uuid}`,
-    fetchData: createFetcher(`${customer.service_provider}list_users`),
+    table: `ProviderTeamPage/${customer.service_provider_uuid}`,
+    fetchData: createFetcher(url),
     filter: usersFilter,
     queryField: 'search_string',
   });
@@ -41,6 +45,7 @@ export const ProviderTeamPage = () => {
       render: ({ row }) => renderRoleExpirationDate(row),
     },
   ];
+
   return (
     <Table<GenericPermission>
       {...tableProps}

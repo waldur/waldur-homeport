@@ -10,5 +10,5 @@ const HookDetailsDialog = lazyComponent(() =>
 export const showHookUpdateDialog = (resolve) =>
   openModalDialog(HookDetailsDialog, {
     resolve,
-    size: 'md',
+    size: 'lg',
   });

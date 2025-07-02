@@ -1,4 +1,4 @@
-import { MagnifyingGlass } from '@phosphor-icons/react';
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { CSSProperties, FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
@@ -50,7 +50,7 @@ export const NoResult: FC<NoResultProps> = ({
       )}
       <div className="text-center d-flex flex-column align-items-center gap-6 pb-10 position-relative z-index-1">
         <div className="search-icon">
-          <MagnifyingGlass weight="bold" size={24} />
+          <MagnifyingGlassIcon weight="bold" size={24} />
         </div>
 
         <div>

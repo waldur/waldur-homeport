@@ -1,10 +1,12 @@
-import React from 'react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { RowActionButton } from '@waldur/table/ActionButton';
+
+import { ActionItem } from '../actions/ActionItem';
+import { ActionItemType } from '../actions/types';
 
 const ResourceSummaryModal = lazyComponent(() =>
   import('./ResourceSummaryModal').then((module) => ({
@@ -12,29 +14,20 @@ const ResourceSummaryModal = lazyComponent(() =>
   })),
 );
 
-interface ResourceSummaryButtonProps {
-  url: string;
-  disabled?: boolean;
-}
-
-export const ResourceSummaryButton: React.FC<ResourceSummaryButtonProps> = ({
-  disabled,
-  url,
-}) => {
+export const ResourceSummaryAction: ActionItemType = ({ resource }) => {
   const dispatch = useDispatch();
   const showDetailsModal = () => {
     dispatch(
       openModalDialog(ResourceSummaryModal, {
-        resolve: { url },
+        resolve: { url: resource.url },
       }),
     );
   };
   return (
-    <RowActionButton
+    <ActionItem
       title={translate('Details')}
-      size="sm"
       action={showDetailsModal}
-      disabled={disabled}
+      iconNode={<EyeIcon weight="bold" />}
     />
   );
 };

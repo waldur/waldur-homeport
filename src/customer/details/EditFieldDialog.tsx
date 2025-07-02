@@ -73,9 +73,10 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
       error: groupsError,
       data: organizationGroups,
       refetch: refetchGroups,
-    } = useQuery(
-      ['organizationGroups'],
-      () =>
+    } = useQuery({
+      queryKey: ['organizationGroups'],
+
+      queryFn: () =>
         getAllPages((page) => organizationGroupsList({ query: { page } })).then(
           (items) =>
             items.map((item) => ({
@@ -83,8 +84,9 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
               value: item.url,
             })),
         ),
-      { staleTime: 5 * 60 * 1000 },
-    );
+
+      staleTime: 5 * 60 * 1000,
+    });
 
     return (
       <form onSubmit={props.handleSubmit(processRequest)}>
@@ -174,6 +176,12 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
               />
             ) : props.resolve.name === 'slug' ? (
               <StringField name="slug" label={translate('Slug')} />
+            ) : props.resolve.name === 'max_service_accounts' ? (
+              <NumberField
+                name="max_service_accounts"
+                label={translate('Maximum number of service accounts')}
+                min={0}
+              />
             ) : // Contact fields
             props.resolve.name === 'email' ? (
               <EmailField name="email" label={translate('Email')} />

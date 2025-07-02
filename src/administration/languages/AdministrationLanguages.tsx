@@ -1,13 +1,14 @@
+import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { CountryFlagIcon } from '@waldur/core/CountryFlagIcon';
 import { Panel } from '@waldur/core/Panel';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { LanguageCountry } from '@waldur/navigation/header/LanguageSelectorDropdown';
 import { useNotify } from '@waldur/store/hooks';
 import { TableQuery } from '@waldur/table/TableQuery';
@@ -96,6 +97,9 @@ export const AdministrationLanguages: FunctionComponent = () => {
         <>
           <TableQuery query={query} setQuery={setQuery} />
           <Button className="min-w-80px ms-4" onClick={saveLanguageOptions}>
+            <span className="svg-icon svg-icon-2">
+              <CheckCircleIcon weight="bold" />
+            </span>
             {translate('Save')}
           </Button>
         </>
@@ -119,12 +123,10 @@ export const AdministrationLanguages: FunctionComponent = () => {
                 }
                 label={
                   <div className="d-flex align-items-center">
-                    <div className="symbol symbol-20px me-2">
-                      <CountryFlag
-                        countryCode={LanguageCountry[language.code]}
-                        className="lh-1"
-                      />
-                    </div>
+                    <CountryFlagIcon
+                      countryCode={LanguageCountry[language.code]}
+                      className="me-2"
+                    />
                     {language.label}
                   </div>
                 }

@@ -1,4 +1,8 @@
-import { ArrowSquareOut, CaretDown, Copy } from '@phosphor-icons/react';
+import {
+  ArrowSquareOutIcon,
+  CaretDownIcon,
+  CopyIcon,
+} from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
 import { Button, Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -32,9 +36,9 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
   const extendURLWithUsername = (url) => {
     const [protocol, restUrl] = url.split('://');
     const [hostname, port] = restUrl.split(':');
-    return `${protocol}://${resource.username}${
-      resource.username ? '@' : ''
-    }${hostname}${port ? `:${port}` : ''}`;
+    return `${protocol}://${resource.username}${resource.username ? '@' : ''}${
+      hostname
+    }${port ? `:${port}` : ''}`;
   };
 
   const copyText = useCallback(
@@ -44,6 +48,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
         const valueToCopy = `ssh ${resource.username}@${hostname}${
           port ? ` -p ${port}` : ''
         }`;
+
         navigator.clipboard.writeText(valueToCopy).then(() => {
           dispatch(showSuccess(translate('Text has been copied')));
         });
@@ -72,7 +77,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
       >
         {translate('Access resource')}
         <span className="svg-icon svg-icon-2 rotate-180">
-          <CaretDown weight="bold" />
+          <CaretDownIcon weight="bold" />
         </span>
       </Dropdown.Toggle>
       <Dropdown.Menu flip>
@@ -87,7 +92,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
           >
             <span className="d-flex flex-center me-6">
               <span className="svg-icon svg-icon-2 svg-icon-primary">
-                <ArrowSquareOut weight="bold" />
+                <ArrowSquareOutIcon weight="bold" />
               </span>
               {endpoint.name}
             </span>
@@ -109,7 +114,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                 }}
               >
                 <span className="svg-icon svg-icon-2">
-                  <Copy weight="bold" />
+                  <CopyIcon weight="bold" />
                 </span>
               </Button>
             </Tip>

@@ -1,4 +1,4 @@
-import { XCircle } from '@phosphor-icons/react';
+import { XCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,16 +19,20 @@ export const RejectByConsumerButton: FC<
 > = ({ order, as, className, refetch }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
-  const { mutate, isLoading } = useMutation(async () => {
-    try {
-      await marketplaceOrdersRejectByConsumer({ path: { uuid: order.uuid } });
-      if (refetch) {
-        await refetch();
+  const { mutate, isPending: isLoading } = useMutation({
+    mutationFn: async () => {
+      try {
+        await marketplaceOrdersRejectByConsumer({ path: { uuid: order.uuid } });
+        if (refetch) {
+          await refetch();
+        }
+        dispatch(showSuccess(translate('Order has been rejected.')));
+      } catch (error) {
+        dispatch(
+          showErrorResponse(error, translate('Unable to reject order.')),
+        );
       }
-      dispatch(showSuccess(translate('Order has been rejected.')));
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to reject order.')));
-    }
+    },
   });
   if (
     !hasPermission(user, {
@@ -50,7 +54,7 @@ export const RejectByConsumerButton: FC<
           title={translate('Reject')}
           action={mutate}
           disabled={isLoading}
-          iconNode={<XCircle weight="bold" />}
+          iconNode={<XCircleIcon weight="bold" />}
           size="sm"
         />
       )}

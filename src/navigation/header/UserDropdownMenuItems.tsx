@@ -20,27 +20,27 @@ export const UserDropdownMenuItems = () => {
       {items.map((item, index) => (
         <UISrefActive class="showing" key={index}>
           <div
-            className="menu-item px-5"
+            className="menu-item"
             data-kt-menu-trigger="hover"
             data-kt-menu-placement="left-start"
             data-kt-menu-flip="bottom"
           >
             {item.to ? (
-              <Link state={item.to} className="menu-link px-5">
+              <Link state={item.to} className="menu-link">
                 <span className="menu-title">{item.title}</span>
               </Link>
             ) : (
-              <a className="menu-link px-5">{item.title}</a>
+              <a className="menu-link">{item.title}</a>
             )}
             {item.children?.length > 0 && (
-              <div className="menu-sub menu-sub-dropdown w-175px py-4">
+              <div className="menu-sub menu-sub-dropdown w-175px py-2">
                 {item.children.map((child, childIndex) => (
                   <div
                     key={childIndex}
-                    className="menu-item px-3"
+                    className="menu-item"
                     data-kt-menu-trigger="click"
                   >
-                    <Link state={child.to} className="menu-link px-5">
+                    <Link state={child.to} className="menu-link">
                       <span className="menu-title">{child.title}</span>
                     </Link>
                   </div>

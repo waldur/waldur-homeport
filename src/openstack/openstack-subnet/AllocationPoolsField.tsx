@@ -1,4 +1,4 @@
-import { PlusCircle, Trash } from '@phosphor-icons/react';
+import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -136,6 +136,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
               className="form-control"
               onChange={(e) => validateField(e.target.value, index, 'start')}
             />
+
             <InputGroup.Text>-</InputGroup.Text>
             <Field
               name={`${pool}.end`}
@@ -145,6 +146,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
               className="form-control"
               onChange={(e) => validateField(e.target.value, index, 'end')}
             />
+
             <Button
               variant="danger"
               onClick={() => {
@@ -158,7 +160,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
               }}
               title={translate('Remove')}
             >
-              <Trash />
+              <TrashIcon />
             </Button>
           </InputGroup>
           {validationErrors[`${index}-start`] && (
@@ -176,7 +178,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
 
       <div className="mb-3">
         <Button size="sm" onClick={addPool}>
-          <PlusCircle /> {translate('Add allocation pool')}
+          <PlusCircleIcon /> {translate('Add allocation pool')}
         </Button>
       </div>
 

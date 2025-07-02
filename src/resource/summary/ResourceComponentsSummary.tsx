@@ -20,16 +20,19 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
     isLoading,
     error,
     refetch,
-  } = useQuery(
-    ['resource-offering-components', resource.uuid],
-    () =>
+  } = useQuery({
+    queryKey: ['resource-offering-components', resource.uuid],
+
+    queryFn: () =>
       marketplaceResourcesOfferingRetrieve({
         path: { uuid: resource.uuid },
         // @ts-ignore
         query: { field: ['components'] },
       }).then((response) => response.data),
-    { refetchOnWindowFocus: false, staleTime: 60 * 1000 },
-  );
+
+    refetchOnWindowFocus: false,
+    staleTime: 60 * 1000,
+  });
 
   if (isLoading) {
     return <LoadingSpinner />;

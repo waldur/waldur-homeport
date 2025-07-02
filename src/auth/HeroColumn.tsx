@@ -11,7 +11,7 @@ export const HeroColumn = () => (
   <div
     className="hero-column"
     style={{
-      backgroundImage: `url(${getIconUrl('hero_image') || DefaultHeroImage})`,
+      backgroundImage: `url(${getIconUrl('hero_image')}), url(${DefaultHeroImage})`,
     }}
   >
     <div className="hero-background">

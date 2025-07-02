@@ -1,11 +1,17 @@
 import { DateTime } from 'luxon';
-import { FunctionComponent } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { FunctionComponent, useMemo } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { compose } from 'redux';
-import { Field, reduxForm, InjectedFormProps } from 'redux-form';
+import {
+  Field,
+  reduxForm,
+  InjectedFormProps,
+  formValueSelector,
+} from 'redux-form';
 import { Resource } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatISODate, parseDate } from '@waldur/core/dateUtils';
+import { WarnCard } from '@waldur/core/WarnCard';
 import { FormContainer, SubmitButton } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
@@ -30,16 +36,27 @@ interface FormData {
   end_date: string;
 }
 
+const endDateSelector = (state) =>
+  formValueSelector(EDIT_RESOURCE_END_DATE_FORM_ID)(state, 'end_date');
+
 const PureEditResourceEndDateDialog: FunctionComponent<
   InjectedFormProps<{}> & OwnProps & StateProps
 > = (props) => {
   const dispatch = useDispatch();
+  const value = useSelector(endDateSelector);
+
+  const exceedsProjectEndDate = useMemo(() => {
+    if (!value || !props.resolve.resource?.project_end_date) return false;
+    return (
+      parseDate(value) > parseDate(props.resolve.resource?.project_end_date)
+    );
+  }, [value, props.resolve.resource]);
 
   const submitRequest = async (formData: FormData) => {
     try {
       await props.resolve.updateEndDate(
         props.resolve.resource.uuid,
-        formData.end_date ? formatDate(formData.end_date) : null,
+        formData.end_date ? formatISODate(formData.end_date) : null,
       );
       dispatch(
         showSuccess(
@@ -60,16 +77,20 @@ const PureEditResourceEndDateDialog: FunctionComponent<
   return (
     <form onSubmit={props.handleSubmit(submitRequest)}>
       <ModalDialog
-        title={translate('Set termination date of {resourceName}', {
-          resourceName: props.resolve.resource.name,
-        })}
+        title={translate('Set termination date')}
+        subtitle={
+          <>
+            <b>{translate('Resource name')}</b>: {props.resolve.resource.name}
+          </>
+        }
         footer={
           <>
-            <CloseDialogButton />
+            <CloseDialogButton className="min-w-125px" />
             <SubmitButton
               submitting={props.submitting}
               label={translate('Save')}
-              disabled={props.invalid}
+              disabled={props.invalid || exceedsProjectEndDate}
+              className="btn btn-primary min-w-125px"
             />
           </>
         }
@@ -78,13 +99,60 @@ const PureEditResourceEndDateDialog: FunctionComponent<
           <Field
             name="end_date"
             label={translate('Termination date')}
+            hideLabel
+            spaceless
             component={DateField}
             disabled={props.submitting}
-            description={translate(
-              'The date is inclusive. Once reached, resource will be scheduled for termination.',
-            )}
+            description={
+              exceedsProjectEndDate
+                ? translate(
+                    'Termination date is after end date. Resource will end with the project.',
+                  )
+                : translate(
+                    'The date is inclusive. Once reached, resource will be scheduled for termination.',
+                  )
+            }
             minDate={DateTime.now().plus({ weeks: 1 }).toISO()}
+            maxDate={
+              props.resolve.resource?.project_end_date
+                ? parseDate(props.resolve.resource.project_end_date).toISO()
+                : undefined
+            }
           />
+
+          {exceedsProjectEndDate && (
+            <WarnCard
+              title={translate('Date conflict')}
+              description={
+                <>
+                  {translate(
+                    'The selected termination date ({terminationDate}) is after the project end date ({endDate}). The resource will be terminated on the project end date regardless of this setting.',
+                    {
+                      terminationDate: parseDate(value).toLocaleString(
+                        DateTime.DATE_MED,
+                      ),
+                      endDate: parseDate(
+                        props.resolve.resource.project_end_date,
+                      ).toLocaleString(DateTime.DATE_MED),
+                    },
+                  )}
+                  <button
+                    className="text-anchor fw-bold d-block mt-2"
+                    type="button"
+                    onClick={() => {
+                      props.change(
+                        'end_date',
+                        props.resolve.resource?.project_end_date,
+                      );
+                    }}
+                  >
+                    {translate('Use project date')}
+                  </button>
+                </>
+              }
+              className="mt-5"
+            />
+          )}
         </FormContainer>
       </ModalDialog>
     </form>

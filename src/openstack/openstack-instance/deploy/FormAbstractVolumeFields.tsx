@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { Field, formValueSelector } from 'redux-form';
+import { Field } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { required } from '@waldur/core/validators';
@@ -9,8 +9,8 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { OpenstackFeatures } from '@waldur/FeaturesEnums';
 import { FormGroup, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 
 import { VolumeTypeChoice } from '../utils';
@@ -43,10 +43,10 @@ export const FormAbstractVolumeFields = (
   const { data, isLoading } = useVolumeDataLoader(props.offering);
 
   const volumeType: VolumeTypeChoice = useSelector((state) =>
-    formValueSelector(ORDER_FORM_ID)(state, props.typeField),
+    orderFormSelector(state, props.typeField),
   );
   const volumeSize: number = useSelector((state) =>
-    formValueSelector(ORDER_FORM_ID)(state, props.sizeField),
+    orderFormSelector(state, props.sizeField),
   );
 
   const extendedSizeOptions = useMemo(() => {

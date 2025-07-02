@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { User } from 'waldur-js-client';
@@ -16,6 +16,7 @@ const UserEmailChangeDialog = lazyComponent(() =>
 interface ChangeEmailButtonProps {
   user: User;
   protected?: boolean;
+  disabled?: boolean;
 }
 
 export const ChangeEmailButton: FunctionComponent<ChangeEmailButtonProps> = (
@@ -32,10 +33,11 @@ export const ChangeEmailButton: FunctionComponent<ChangeEmailButtonProps> = (
   }, [dispatch, props.user]);
   return (
     <ActionButton
-      iconNode={<PencilSimple weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       action={openChangeEmailDialog}
       variant="secondary"
       className="btn-sm btn-icon"
+      disabled={props.disabled}
     />
   );
 };

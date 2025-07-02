@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -21,6 +21,6 @@ export const EditNetworkAction: ActionItemType = ({ resource, refetch }) => (
     modalComponent={EditNetworkDialog}
     resource={resource}
     extraResolve={{ refetch }}
-    iconNode={<PencilSimple weight="bold" />}
+    iconNode={<PencilSimpleIcon weight="bold" />}
   />
 );

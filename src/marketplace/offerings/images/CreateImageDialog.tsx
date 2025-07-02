@@ -1,3 +1,4 @@
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { reduxForm } from 'redux-form';
 import { marketplaceScreenshotsCreate } from 'waldur-js-client';
 
@@ -17,7 +18,10 @@ import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 
-export const CreateImageDialog = reduxForm<{}, { resolve: { offering } }>({
+export const CreateImageDialog = reduxForm<
+  {},
+  { resolve: { offering; refetch } }
+>({
   form: OFFERING_IMAGES_FORM_ID,
 })((props) => {
   const { showSuccess, showErrorResponse } = useNotify();
@@ -33,6 +37,7 @@ export const CreateImageDialog = reduxForm<{}, { resolve: { offering } }>({
         },
         ...formDataOptions,
       });
+      props.resolve.refetch();
       showSuccess(translate('Image has been added.'));
       closeDialog();
     } catch (error) {
@@ -42,14 +47,17 @@ export const CreateImageDialog = reduxForm<{}, { resolve: { offering } }>({
   return (
     <form onSubmit={props.handleSubmit(submitRequest)}>
       <ModalDialog
-        title={translate('Add image')}
+        title={translate('Add offering image')}
+        iconNode={<PlusCircleIcon weight="bold" />}
+        iconColor="success"
         footer={
           <>
-            <CloseDialogButton />
+            <CloseDialogButton className="flex-equal" />
             <SubmitButton
+              className="flex-equal btn btn-primary"
               disabled={props.invalid}
               submitting={props.submitting}
-              label={translate('Submit')}
+              label={translate('Confirm')}
             />
           </>
         }
@@ -61,19 +69,23 @@ export const CreateImageDialog = reduxForm<{}, { resolve: { offering } }>({
             required
             validate={required}
           />
+
           <StringField
             name="name"
             label={translate('Name')}
             required={true}
             validate={required}
             maxLength={150}
+            placeholder={translate('e.g. Image name...')}
           />
+
           <TextField
             name="description"
             label={translate('Description')}
             required={true}
             validate={required}
             maxLength={2000}
+            placeholder={translate('Enter a description...')}
           />
         </FormContainer>
       </ModalDialog>

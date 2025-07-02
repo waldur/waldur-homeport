@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -64,7 +64,7 @@ export const PullActionItem: <T extends { uuid?: string; backend_id?: string }>(
       {...buttonProps}
       as={props.as}
       staff={props.staff}
-      iconNode={<ArrowsClockwise weight="bold" />}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
     />
   );
 };

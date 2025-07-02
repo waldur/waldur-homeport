@@ -44,15 +44,12 @@ const InvitationsListComponent: FunctionComponent = () => {
           title: translate('Email'),
           render: ({ row }) => (
             <div className="d-flex align-items-center gap-1">
-              <Avatar
-                className="symbol symbol-32px symbol-circle"
-                name={row?.email}
-                size={32}
-              />
+              <Avatar name={row?.email} size={32} circle />
               {row.email}
               <CopyToClipboardButton value={row.email} />
             </div>
           ),
+
           orderField: 'email',
         },
         {
@@ -70,6 +67,12 @@ const InvitationsListComponent: FunctionComponent = () => {
           title: translate('Created at'),
           orderField: 'created',
           render: ({ row }) => formatDate(row.created),
+        },
+        {
+          title: translate('Invited by'),
+          orderField: 'created_by',
+          render: ({ row }) => row.created_by_full_name,
+          export: (row) => row.created_by_full_name,
         },
         {
           title: translate('Expires at'),

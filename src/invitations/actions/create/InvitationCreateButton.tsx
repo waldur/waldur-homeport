@@ -1,4 +1,4 @@
-import { At } from '@phosphor-icons/react';
+import { AtIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
@@ -20,7 +20,7 @@ export const InvitationCreateButton: FC<
     <ActionItem
       action={callback}
       title={translate('Invite by mail')}
-      iconNode={<At weight="bold" />}
+      iconNode={<AtIcon weight="bold" />}
       disabled={!canInvite}
       tooltip={tooltip}
     />

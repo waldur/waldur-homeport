@@ -1,4 +1,4 @@
-import { ArrowsOutCardinal } from '@phosphor-icons/react';
+import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -31,7 +31,7 @@ export const MultiMoveAction = ({ rows, refetch }) => {
     <ActionItem
       title={translate('Move')}
       action={callback}
-      iconNode={<ArrowsOutCardinal weight="bold" />}
+      iconNode={<ArrowsOutCardinalIcon weight="bold" />}
     />
   ) : null;
 };

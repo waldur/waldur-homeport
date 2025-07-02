@@ -88,6 +88,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
             offering={props.offering}
             type="old"
           />
+
           <hr />
           <PlanCard
             title="New plan"

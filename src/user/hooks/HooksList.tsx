@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
+import { HooksRowActions } from '@waldur/administration/hooks/HooksRowActions';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -11,8 +12,6 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { HOOK_LIST_ID } from './constants';
 import { HookCreateButton } from './HookCreateButton';
-import { HookRemoveButton } from './HookRemoveButton';
-import { HookUpdateButton } from './HookUpdateButton';
 import { formatEventTitle } from './utils';
 
 const StateField = ({ row }) => {
@@ -77,10 +76,7 @@ export const HooksList: FunctionComponent = () => {
       verboseName={translate('Notifications')}
       tableActions={<HookCreateButton refetch={props.fetch} />}
       rowActions={({ row }) => (
-        <>
-          <HookUpdateButton hook={row} refetch={props.fetch} />
-          <HookRemoveButton hook={row} refetch={props.fetch} />
-        </>
+        <HooksRowActions row={row} refetch={props.fetch} />
       )}
       enableExport={true}
     />

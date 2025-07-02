@@ -51,6 +51,7 @@ export const ProjectExpandableRow: FC<OwnProps> = (props) => {
               count={resourcesCount.data}
               countLoading={resourcesCount.isLoading}
             />
+
             <NavItem
               title={translate('Team')}
               eventKey="team"

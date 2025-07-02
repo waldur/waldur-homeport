@@ -1,8 +1,8 @@
 import {
-  ArrowLeft,
-  ArrowRight,
-  FloppyDisk,
-  Share,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  FloppyDiskIcon,
+  ShareIcon,
 } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button, Modal } from 'react-bootstrap';
@@ -142,7 +142,7 @@ export const BroadcastFooter = ({
             disabled={disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <FloppyDisk />
+              <FloppyDiskIcon />
             </span>{' '}
             {translate('Save as draft')}
           </Button>
@@ -152,13 +152,13 @@ export const BroadcastFooter = ({
             disabled={disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <FloppyDisk />
+              <FloppyDiskIcon />
             </span>{' '}
             {translate('Save as a template')}
           </Button>
           <Button onClick={() => setStep(1)}>
             <span className="svg-icon svg-icon-2">
-              <ArrowRight />
+              <ArrowRightIcon />
             </span>{' '}
             {translate('Select recipients')}
           </Button>
@@ -167,7 +167,7 @@ export const BroadcastFooter = ({
         <>
           <Button onClick={() => setStep(0)} variant="secondary">
             <span className="svg-icon svg-icon-2">
-              <ArrowLeft />
+              <ArrowLeftIcon />
             </span>{' '}
             {translate('Back')}
           </Button>
@@ -177,13 +177,13 @@ export const BroadcastFooter = ({
             disabled={disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <FloppyDisk />
+              <FloppyDiskIcon />
             </span>{' '}
             {translate('Save as draft')}
           </Button>
           <Button disabled={disabled} onClick={handleSubmit(saveAndSend)}>
             <span className="svg-icon svg-icon-2">
-              <Share />
+              <ShareIcon />
             </span>{' '}
             {formValues.send_at
               ? translate('Schedule broadcast')

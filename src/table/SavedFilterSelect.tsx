@@ -1,4 +1,4 @@
-import { Funnel, Trash } from '@phosphor-icons/react';
+import { FunnelIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,7 +28,7 @@ const Control = (props) => (
   <div className="d-flex align-items-center gap-2">
     <components.Control {...props} className={props.className + ' flex-grow-1'}>
       <span className="svg-icon svg-icon-2 svg-icon-gray-700 ms-3">
-        <Funnel weight="bold" />
+        <FunnelIcon weight="bold" />
       </span>
       {props.children}
     </components.Control>
@@ -40,7 +40,7 @@ const Control = (props) => (
         onClick={(e) => props.remove(e, props.getValue()[0])}
       >
         <span className="svg-icon svg-icon-2">
-          <Trash weight="bold" />
+          <TrashIcon weight="bold" />
         </span>
       </Button>
     )}
@@ -58,7 +58,7 @@ const ListOption: FC<OptionProps & { remove }> = (props) => (
         onClick={(e) => props.remove(e, props.getValue()[0])}
       >
         <span className="svg-icon svg-icon-2">
-          <Trash weight="bold" />
+          <TrashIcon weight="bold" />
         </span>
       </Button>
     </div>

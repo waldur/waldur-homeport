@@ -1,4 +1,4 @@
-import { UserPlus } from '@phosphor-icons/react';
+import { UserPlusIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { Project } from 'waldur-js-client';
 
@@ -36,7 +36,7 @@ export const AddUserButton: React.FC<{ project: Project; refetch }> = ({
     <ActionItem
       title={translate('Member')}
       action={() => openDialog(AddUserDialog, { refetch, level: 'project' })}
-      iconNode={<UserPlus weight="bold" />}
+      iconNode={<UserPlusIcon weight="bold" />}
       disabled={!canAddUser}
       tooltip={
         !canAddUser

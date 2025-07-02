@@ -1,4 +1,4 @@
-import { WarningCircle } from '@phosphor-icons/react';
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -63,7 +63,7 @@ export const CustomerRemoveDialog = reduxForm<
         }
       >
         <div className="d-flex flex-center w-40px h-40px bg-light-danger rounded-circle mb-6">
-          <WarningCircle size={22} className="text-danger" />
+          <WarningCircleIcon size={22} className="text-danger" />
         </div>
         <h3 className="fw-bold">{translate('Organization removal')}</h3>
         <p className="text-muted mb-8">

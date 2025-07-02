@@ -99,6 +99,7 @@ export const loadData = async (
         value: subnet.url,
       })),
     ],
+
     floatingIps: [
       {
         value: SKIP_FLOATING_IP_ASSIGNMENT,

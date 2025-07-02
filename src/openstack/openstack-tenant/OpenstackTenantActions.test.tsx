@@ -20,7 +20,6 @@ vi.mock('@waldur/core/config', () => ({
     plugins: {
       WALDUR_CORE: {
         ONLY_STAFF_MANAGES_SERVICES: false,
-        ENABLE_RESOURCE_END_DATE: true,
       },
       WALDUR_OPENSTACK: { TENANT_CREDENTIALS_VISIBLE: true },
     },
@@ -42,10 +41,17 @@ const renderComponent = (props = {}) => {
   );
 };
 
-const mockResource = {
-  uuid: 'test-uuid',
+const mockMarketplaceResource = {
+  uuid: 'test-market-uuid',
   state: 'OK',
-  marketplace_resource_uuid: 'market-uuid',
+  customer_uuid: 'customer-uuid',
+  name: 'Test Market Resource',
+  offering_customer_uuid: 'offering-uuid',
+};
+const mockResource = {
+  uuid: 'test-scope-uuid',
+  state: 'OK',
+  marketplace_resource_uuid: 'test-market-uuid',
   customer_uuid: 'customer-uuid',
   name: 'Test Resource',
 };
@@ -53,6 +59,7 @@ const mockResource = {
 describe('OpenstackTenantActions', () => {
   it('renders action groups with correct titles', () => {
     renderComponent({
+      marketplaceResource: mockMarketplaceResource,
       resource: mockResource,
       refetch: vi.fn(),
     });

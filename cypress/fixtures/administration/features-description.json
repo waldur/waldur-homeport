@@ -132,10 +132,6 @@
         "description": "Render list of organization creation requests in support workspace."
       },
       {
-        "key": "users",
-        "description": "Render list of users in support workspace."
-      },
-      {
         "key": "resource_usage",
         "description": "Enable resource usage overview charts in support workspace."
       },

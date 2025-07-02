@@ -15,8 +15,6 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface OwnProps {
-  submitting: boolean;
-  initialValues?: any;
   refetch?(): void;
   resolve;
 }
@@ -25,7 +23,7 @@ const enhance = reduxForm<MessageTemplate, OwnProps>({
   form: BROADCAST_TEMPLATE_CREATE_FORM_ID,
 });
 
-export const BroadcastTemplateUpdateDialog = connect(
+export const BroadcastTemplateUpdateDialog = connect<{}, {}, OwnProps>(
   (_, ownProps: OwnProps) => ({
     initialValues: ownProps.resolve.template,
   }),

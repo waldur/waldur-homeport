@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceProviderOfferingsDeleteUser } from 'waldur-js-client';
@@ -56,7 +56,7 @@ export const OfferingPermissionRemoveButton: React.FC<
     <ActionItem
       action={callback}
       title={translate('Revoke')}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
       iconColor="danger"
     />

@@ -1,8 +1,9 @@
-import { Share } from '@phosphor-icons/react';
+import { ShareIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { broadcastMessagesSend } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -11,6 +12,24 @@ export const BroadcastSendButton = ({ row, refetch }) => {
 
   const callback = async () => {
     try {
+      if (row.state === 'SCHEDULED') {
+        try {
+          await waitForConfirmation(
+            dispatch,
+            translate('Confirmation'),
+            translate(
+              'The broadcast {subject} is scheduled. Are you sure you want to force send it?',
+              {
+                subject: <strong>{row.subject}</strong>,
+              },
+              formatJsxTemplate,
+            ),
+            { type: 'success' },
+          );
+        } catch {
+          return;
+        }
+      }
       await broadcastMessagesSend({ path: { uuid: row.uuid } });
       await refetch();
       dispatch(showSuccess(translate('Broadcast has been sent.')));
@@ -22,7 +41,7 @@ export const BroadcastSendButton = ({ row, refetch }) => {
     <ActionItem
       action={callback}
       title={translate('Send')}
-      iconNode={<Share weight="bold" />}
+      iconNode={<ShareIcon weight="bold" />}
       size="sm"
     />
   );

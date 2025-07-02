@@ -40,6 +40,7 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = () => {
         title={translate('Project role')}
         name="project_role"
         getValueLabel={(value) => value.description || value.name}
+        instantApply={false}
       >
         <ProjectRoleSelectField />
       </TableFilterItem>
@@ -47,10 +48,15 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = () => {
         title={translate('Organization role')}
         name="organization_role"
         getValueLabel={(value) => value.description || value.name}
+        instantApply={false}
       >
         <OrganizationRoleSelectField />
       </TableFilterItem>
-      <TableFilterItem name="role" title={translate('Role')}>
+      <TableFilterItem
+        name="role"
+        title={translate('Role')}
+        instantApply={false}
+      >
         <Field
           name="role"
           component={(fieldProps) => (

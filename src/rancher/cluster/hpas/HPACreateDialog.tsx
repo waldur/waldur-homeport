@@ -140,6 +140,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         label={translate('Description')}
         required={false}
       />
+
       <SelectField
         name="namespace"
         label={translate('Namespace')}
@@ -150,6 +151,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         isLoading={loading}
         isClearable={true}
       />
+
       <SelectField
         name="workload"
         label={translate('Workload')}
@@ -161,6 +163,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         isDisabled={!namespace}
         isClearable={true}
       />
+
       <NumberField
         name="min_replicas"
         label={translate('Min replicas')}
@@ -168,6 +171,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         min={1}
         max={10}
       />
+
       <NumberField
         name="max_replicas"
         label={translate('Max replicas')}
@@ -175,6 +179,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         min={1}
         max={10}
       />
+
       <SelectField
         name="metric_name"
         label={translate('Metric name')}
@@ -182,6 +187,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         options={metricNameOptions}
         isClearable={true}
       />
+
       <SelectField
         name="target_type"
         label={translate('Target type')}
@@ -189,6 +195,7 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
         options={targetTypeOptions}
         isClearable={true}
       />
+
       <NumberField
         name="quantity"
         label={translate('Quantity')}

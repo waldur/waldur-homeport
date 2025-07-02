@@ -1,9 +1,9 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { OverlayTrigger, OverlayTriggerProps, Tooltip } from 'react-bootstrap';
 
-interface TipProps {
+export interface TipProps {
   label: React.ReactNode;
   id: string;
   placement?: OverlayTriggerProps['placement'];
@@ -39,6 +39,7 @@ export const Tip: React.FC<PropsWithChildren<TipProps>> = ({
             autoWidth && 'tooltip-auto-width',
             tipClassName,
           )}
+          style={{ zIndex: 1180 }}
         >
           {label}
         </Tooltip>
@@ -60,7 +61,7 @@ export const BackendIdTip = ({ backendId }) =>
     <>
       {' '}
       <Tip id="backend-id" label={backendId}>
-        <Question weight="bold" />
+        <QuestionIcon weight="bold" />
       </Tip>
     </>
   ) : null;

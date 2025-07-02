@@ -32,7 +32,7 @@ export const RuleRow: FC<RuleRowProps> = ({
       <DirectionField />
       <ProtocolField />
       <PortRangeField rule={rule} />
-      <CIDRField rule={rule} />
+      <CIDRField ethertype={rule.ethertype} />
       <RemoteGroupField choices={remoteSecurityGroups} />
       <DescriptionField />
       <ActionsField onRemove={onRemove} />

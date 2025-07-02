@@ -71,6 +71,7 @@ export const OfferingPermissionCreateDialog = reduxForm<
             getOptionLabel={({ full_name, email }) => full_name || email}
             required={true}
           />
+
           <AsyncSelectField
             name="offering"
             label={translate('Offering')}
@@ -85,6 +86,7 @@ export const OfferingPermissionCreateDialog = reduxForm<
             getOptionLabel={({ name }) => name}
             required={true}
           />
+
           <Field
             name="expiration_time"
             label={translate('Expiration time')}

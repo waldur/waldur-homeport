@@ -5,6 +5,7 @@ import { getFormValues } from 'redux-form';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDate } from '@waldur/core/dateUtils';
 import { CustomerPermissionsLogButton } from '@waldur/customer/team/CustomerPermissionsLogButton';
+import { useTeamTableTabs } from '@waldur/customer/team/tabs';
 import { TeamDropdownActions } from '@waldur/customer/team/TeamDropdownActions';
 import { translate } from '@waldur/i18n';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
@@ -20,7 +21,6 @@ import { InvitationActions } from './InvitationActions';
 import { InvitationsFilter } from './InvitationsFilter';
 import { InvitationsMultiSelectActions } from './InvitationsMultiSelectActions';
 import { formatInvitationState } from './InvitationStateFilter';
-import { useTeamTableTabs } from './tabs';
 
 export const InvitationsList: FunctionComponent = () => {
   useTitle(translate('Invitations'));
@@ -56,6 +56,7 @@ export const InvitationsList: FunctionComponent = () => {
               <CopyToClipboardButton value={row.email} />
             </div>
           ),
+
           orderField: 'email',
           export: (row) => row.email,
         },
@@ -72,6 +73,7 @@ export const InvitationsList: FunctionComponent = () => {
           inlineFilter: (row) => [
             { value: row.state, label: formatInvitationState(row.state) },
           ],
+
           export: (row) => row.state,
         },
         {
@@ -79,6 +81,12 @@ export const InvitationsList: FunctionComponent = () => {
           orderField: 'created',
           render: ({ row }) => formatDate(row.created),
           export: (row) => formatDate(row.created),
+        },
+        {
+          title: translate('Invited by'),
+          orderField: 'created_by',
+          render: ({ row }) => row.created_by_full_name,
+          export: (row) => row.created_by_full_name,
         },
         {
           title: translate('Expires at'),
@@ -102,6 +110,7 @@ export const InvitationsList: FunctionComponent = () => {
         <InvitationActions invitation={row} refetch={props.fetch} />
       )}
       expandableRow={InvitationExpandableRow}
+      expandableRowClassName="has-multiselect"
       enableMultiSelect
       multiSelectActions={InvitationsMultiSelectActions}
     />

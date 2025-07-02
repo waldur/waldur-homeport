@@ -48,15 +48,16 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
                     item.role.toLocaleLowerCase(),
               )
             : defaultRole;
-          const project = item.project
-            ? resolve.customer.projects.find(
-                (project) =>
-                  project.name.toLocaleLowerCase() ===
-                    item.project.toLocaleLowerCase() ||
-                  project.uuid.toLocaleLowerCase() ===
-                    item.project.toLocaleLowerCase(),
-              )
-            : defaultProject;
+          const project =
+            item.project && resolve.roleTypes.includes('customer')
+              ? resolve.customer.projects.find(
+                  (project) =>
+                    project.name.toLocaleLowerCase() ===
+                      item.project.toLocaleLowerCase() ||
+                    project.uuid.toLocaleLowerCase() ===
+                      item.project.toLocaleLowerCase(),
+                )
+              : defaultProject;
           rows.push({
             email: item.email,
             role_project: { role, project },

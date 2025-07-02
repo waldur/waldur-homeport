@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { userAgreementsDestroy } from 'waldur-js-client';
@@ -43,7 +43,7 @@ export const UserAgreementDeleteButton: FC<{ row; refetch }> = ({
     <ActionItem
       title={translate('Delete')}
       action={action}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
       disabled={removing}
       className="text-danger"

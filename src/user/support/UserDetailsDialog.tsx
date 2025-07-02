@@ -1,4 +1,4 @@
-import { UserGear } from '@phosphor-icons/react';
+import { UserGearIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -42,7 +42,7 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
       subtitle={translate(
         'View detailed information about a user, including its permissions and contact details',
       )}
-      iconNode={<UserGear weight="bold" />}
+      iconNode={<UserGearIcon weight="bold" />}
       iconColor="success"
       bodyClassName="min-h-425px"
       closeButton

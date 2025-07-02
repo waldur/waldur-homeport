@@ -1,4 +1,4 @@
-import { IdentificationBadge, Question } from '@phosphor-icons/react';
+import { IdentificationBadgeIcon, QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
 import { FC, ReactNode, useContext } from 'react';
@@ -75,7 +75,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
           id={`action-reason-${uniqueId()}`}
           className="ms-1 me-3"
         >
-          <Question
+          <QuestionIcon
             size={20}
             weight="bold"
             className={classNames('text-muted', props.disabled && 'opacity-50')}
@@ -88,7 +88,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
           id={`staff-action-${uniqueId()}`}
           className="text-dark ms-auto ps-2"
         >
-          <IdentificationBadge size={25} />
+          <IdentificationBadgeIcon size={25} />
         </Tip>
       )}
     </div>

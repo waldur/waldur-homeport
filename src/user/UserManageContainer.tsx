@@ -49,14 +49,13 @@ export const UserManageContainer = ({ isPersonal }) => {
     params: { user_uuid },
   } = useCurrentStateAndParams();
 
-  const { data, isLoading, error, refetch } = useQuery(
-    ['User', user_uuid],
-    () => (isPersonal ? null : usersRetrieve({ path: { uuid: user_uuid } })),
-    {
-      staleTime: 3 * 60 * 1000,
-      refetchOnWindowFocus: false,
-    },
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['User', user_uuid],
+    queryFn: () =>
+      isPersonal ? null : usersRetrieve({ path: { uuid: user_uuid } }),
+    staleTime: 3 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
 
   const currentUser = useUser();
 
@@ -132,6 +131,7 @@ export const UserManageContainer = ({ isPersonal }) => {
       refetch={refetch}
       error={error}
     />,
+
     [user, isLoading, refetch, error],
   );
 

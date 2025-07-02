@@ -33,6 +33,7 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
           {row.user_uuid}
         </Link>
       ),
+
       copyField: (row) => row.user_uuid,
     },
     {

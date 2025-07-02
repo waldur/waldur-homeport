@@ -1,8 +1,8 @@
-import { Check, X } from '@phosphor-icons/react';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
 
 export const CheckOrX = ({ value }) =>
   value ? (
-    <Check weight="bold" className="text-info" />
+    <CheckIcon weight="bold" className="text-info" />
   ) : (
-    <X weight="bold" className="text-danger" />
+    <XIcon weight="bold" className="text-danger" />
   );

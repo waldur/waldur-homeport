@@ -6,16 +6,17 @@ import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 export const RequestDirectAccessDialog: FunctionComponent<{
   resolve: { resource };
-  close;
-}> = ({ resolve: { resource }, close }) => {
+}> = ({ resolve: { resource } }) => {
   const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   useEffect(() => {
     if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
-      close();
+      closeDialog();
       dispatch(
         openIssueCreateDialog({
           issue: {

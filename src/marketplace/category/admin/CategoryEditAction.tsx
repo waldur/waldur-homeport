@@ -18,7 +18,7 @@ export const CategoryEditAction = ({ row, refetch }) => {
       dispatch(
         openModalDialog(CategoryEditDialog, {
           resolve: { category: row, refetch },
-          size: 'md',
+          size: 'lg',
         }),
       ),
     [dispatch],

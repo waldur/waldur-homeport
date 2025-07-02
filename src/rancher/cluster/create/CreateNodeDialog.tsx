@@ -42,7 +42,7 @@ const serializeDataVolume = ({ size, ...volumeRest }) => ({
 
 const serializeNode = (cluster: RancherCluster, formData) => ({
   cluster: cluster.url,
-  roles: formData.roles.filter((role) => role),
+  role: formData.role,
   subnet: formData.attributes.subnet,
   flavor: formData.flavor.url,
   system_volume_size: formData.system_volume_size * 1024,
@@ -98,7 +98,6 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
             <SubnetGroup options={state.value.subnets} />
             <NodeStorageGroup
               volumeTypes={state.value.volumeTypes}
-              mountPoints={state.value.mountPoints}
               defaultVolumeType={state.value.defaultVolumeType}
               sm={{ span: 9, offset: 3 }}
             />

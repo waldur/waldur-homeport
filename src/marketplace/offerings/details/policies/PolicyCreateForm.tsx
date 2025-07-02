@@ -61,6 +61,7 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
         getOptionLabel={(option) => option.label}
         simpleValue
       />
+
       <SelectField
         name="period"
         label={translate('Period')}
@@ -71,6 +72,7 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
         getOptionLabel={(option) => option.label}
         simpleValue
       />
+
       {groupsLoading ? (
         <LoadingSpinner />
       ) : groupsError ? (

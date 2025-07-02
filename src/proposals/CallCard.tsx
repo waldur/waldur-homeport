@@ -54,6 +54,7 @@ export const CallCard: FC<{ call }> = ({ call }) => {
                 variant="active-secondary"
                 className="btn btn-text-primary btn-sm"
               />
+
               <CallLink
                 call={call}
                 className="btn btn-text-primary btn-active-secondary btn-sm"

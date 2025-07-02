@@ -25,6 +25,7 @@ const mockData = {
     { name: 'name', label: 'Name' },
     { name: 'price', label: 'Price' },
   ],
+
   choices: [
     {
       url: 'plan1-url',
@@ -42,6 +43,7 @@ const mockData = {
       archived: false,
     },
   ],
+
   initialValues: {
     plan: {
       url: 'plan1-url',

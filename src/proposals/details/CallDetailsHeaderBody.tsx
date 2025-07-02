@@ -24,6 +24,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
             label={translate('Open round started')}
             value={formatDateTime(nextRound.start_time)}
           />
+
           <Field
             label={translate('Open round ends')}
             value={formatDateTime(nextRound.cutoff_time)}
@@ -41,6 +42,7 @@ export const CallDetailsHeaderBody = (props: CallDetailsHeaderBodyProps) => {
             label={translate('Next round starts')}
             value={formatDateTime(nextRound.start_time)}
           />
+
           <Field
             label={translate('Next round ends')}
             value={formatDateTime(nextRound.cutoff_time)}

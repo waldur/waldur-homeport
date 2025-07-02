@@ -23,6 +23,7 @@ const UserNameColumn = ({ row }) => (
       label={renderFieldOrDash(row.full_name)}
       className="fw-bold"
     />
+
     {row.organization ? (
       <p className="text-muted mb-0">{row.organization}</p>
     ) : null}

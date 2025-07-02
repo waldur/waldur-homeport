@@ -1,4 +1,4 @@
-import { ArrowsLeftRight } from '@phosphor-icons/react';
+import { ArrowsLeftRightIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -23,6 +23,6 @@ export const ChangePlanAction: ActionItemType = ({ resource, refetch }) =>
       modalComponent={ChangePlanDialog}
       resource={resource}
       extraResolve={{ refetch }}
-      iconNode={<ArrowsLeftRight weight="bold" />}
+      iconNode={<ArrowsLeftRightIcon weight="bold" />}
     />
   ) : null;

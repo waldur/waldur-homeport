@@ -56,6 +56,7 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
             autoFocus
             className="mb-5"
           />
+
           <div>
             <Button
               variant="outline btn-outline-default"

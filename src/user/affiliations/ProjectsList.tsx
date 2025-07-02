@@ -13,8 +13,11 @@ import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation
 import { useTitle } from '@waldur/navigation/title';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { GlobalProjectCreateButton } from '@waldur/project/create/GlobalProjectCreateButton';
+import { ProjectImportButton } from '@waldur/project/import/ProjectImportButton';
 import { ProjectCard } from '@waldur/project/ProjectCard';
+import { ProjectEndDateField } from '@waldur/project/ProjectEndDateField';
 import { ProjectLink } from '@waldur/project/ProjectLink';
+import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { SLUG_COLUMN } from '@waldur/table/slug';
@@ -75,6 +78,7 @@ export const ProjectsList = () => {
       render: ({ row }) => (
         <ProjectLink row={row} onClick={() => onClickDetails(row)} />
       ),
+
       copyField: (row) => row.name,
       keys: ['name', 'is_industry'],
       id: 'name',
@@ -99,11 +103,13 @@ export const ProjectsList = () => {
           {row.customer_name}
         </OrganizationLink>
       ),
+
       keys: ['customer_uuid', 'customer_name'],
       filter: 'organization',
       inlineFilter: (row) => [
         { name: row.customer_name, uuid: row.customer_uuid },
       ],
+
       id: 'organization',
       export: 'customer_name',
     },
@@ -127,6 +133,7 @@ export const ProjectsList = () => {
       render: ({ row }) => (
         <>{row.start_date ? formatDate(row.start_date) : DASH_ESCAPE_CODE}</>
       ),
+
       keys: ['start_date'],
       id: 'start_date',
       export: (row) =>
@@ -137,9 +144,7 @@ export const ProjectsList = () => {
     {
       title: translate('End date'),
       orderField: 'end_date',
-      render: ({ row }) => (
-        <>{row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE}</>
-      ),
+      render: ProjectEndDateField,
       keys: ['end_date'],
       id: 'end_date',
       export: (row) =>
@@ -150,6 +155,7 @@ export const ProjectsList = () => {
       render: ({ row }) => (
         <>{row.created ? formatDate(row.created) : DASH_ESCAPE_CODE}</>
       ),
+
       keys: ['created'],
       orderField: 'created',
       id: 'created',
@@ -183,6 +189,7 @@ export const ProjectsList = () => {
           )}
         </>
       ),
+
       keys: ['billing_price_estimate'],
       id: 'cost_estimation',
       export: (row) =>
@@ -202,6 +209,7 @@ export const ProjectsList = () => {
             : DASH_ESCAPE_CODE}
         </>
       ),
+
       optional: true,
       keys: ['oecd_fos_2007_code', 'oecd_fos_2007_label'],
       id: 'oecd_fos_code',
@@ -218,6 +226,7 @@ export const ProjectsList = () => {
       render: ({ row }) => (
         <>{row.is_industry ? translate('Yes') : translate('No')}</>
       ),
+
       optional: true,
       keys: ['is_industry'],
       id: 'industry_project',
@@ -244,7 +253,15 @@ export const ProjectsList = () => {
       filter={filter}
       standalone
       hasOptionalColumns
-      tableActions={<GlobalProjectCreateButton refetch={props.fetch} />}
+      tableActions={
+        <>
+          <ProjectImportButton refetch={props.fetch} />
+          <GlobalProjectCreateButton refetch={props.fetch} />
+        </>
+      }
+      rowActions={({ row }) => (
+        <ProjectsListActions project={row} refetch={props.fetch} />
+      )}
     />
   );
 };

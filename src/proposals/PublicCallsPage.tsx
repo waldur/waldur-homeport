@@ -27,6 +27,7 @@ export const PublicCallsPage: FunctionComponent<PublicCallsPageProps> = ({
         title={translate('Calls for proposals')}
         context="calls"
       />
+
       <div className="container-fluid mt-20 mb-10">
         <PublicCallsList
           offering_uuid={offering_uuid}

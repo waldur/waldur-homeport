@@ -4,9 +4,10 @@ import { marketplaceCategoriesList } from 'waldur-js-client';
 import { getAllPages } from '@waldur/core/api';
 
 export const useOfferingCategories = () => {
-  const { data: categories } = useQuery(
-    ['ResourcesMenu', 'Categories'],
-    () =>
+  const { data: categories } = useQuery({
+    queryKey: ['ResourcesMenu', 'Categories'],
+
+    queryFn: () =>
       getAllPages((page) =>
         marketplaceCategoriesList({
           query: {
@@ -15,7 +16,8 @@ export const useOfferingCategories = () => {
           },
         }),
       ),
-    { refetchOnWindowFocus: false },
-  );
+
+    refetchOnWindowFocus: false,
+  });
   return categories;
 };

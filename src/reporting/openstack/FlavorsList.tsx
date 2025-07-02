@@ -14,6 +14,7 @@ const FlavorNameField = ({ row }) => <>{row.name}</>;
 const NumOfRunningInstancesField = ({ row }) => (
   <>{row.running_instances_count}</>
 );
+
 const NumOfCreatedInstancesField = ({ row }) => (
   <>{row.created_instances_count}</>
 );

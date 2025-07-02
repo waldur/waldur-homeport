@@ -4,6 +4,7 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { MarketplaceOrdersListData } from 'waldur-js-client';
 
+import { OrdersBulkActions } from '@waldur/marketplace/orders/actions/OrdersBulkActions';
 import { CustomerOrdersListFilter } from '@waldur/marketplace/orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '@waldur/marketplace/orders/list/OrdersTableComponent';
 import { RootState } from '@waldur/store/reducers';
@@ -25,6 +26,9 @@ export const CustomerOrdersList: FunctionComponent = () => {
       filters={<CustomerOrdersListFilter />}
       filter={filter}
       hideColumns={['organization']}
+      standalone
+      enableMultiSelect
+      multiSelectActions={OrdersBulkActions}
     />
   );
 };

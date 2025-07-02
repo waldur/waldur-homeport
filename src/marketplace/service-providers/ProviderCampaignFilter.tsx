@@ -8,10 +8,18 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureProviderCampaignFilter: FunctionComponent = () => (
   <>
-    <TableFilterItem title={translate('State')} name="state">
+    <TableFilterItem
+      title={translate('State')}
+      name="state"
+      instantApply={false}
+    >
       <ProviderCampaignStateFilter />
     </TableFilterItem>
-    <TableFilterItem title={translate('Discount type')} name="discount_type">
+    <TableFilterItem
+      title={translate('Discount type')}
+      name="discount_type"
+      instantApply={false}
+    >
       <ProviderCampaignTypeFilter />
     </TableFilterItem>
   </>

@@ -13,7 +13,9 @@ import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/Offe
 export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   props,
 ) => {
-  const queryData = useQuery(['categories'], getCategories, {
+  const queryData = useQuery({
+    queryKey: ['categories'],
+    queryFn: getCategories,
     staleTime: 3 * 60 * 1000,
   });
 

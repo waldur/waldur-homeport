@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersUnlink } from 'waldur-js-client';
@@ -15,7 +15,9 @@ export const OrderUnlinkButton = ({ row, refetch }) => {
       await waitForConfirmation(
         dispatch,
         translate('Confirmation'),
-        translate('Are you sure you want to unlink the order?'),
+        translate(
+          'Are you sure you want to unlink the order? Unlinking will only remove object from the database, it will not trigger any cleanup',
+        ),
       );
     } catch {
       return;
@@ -34,7 +36,7 @@ export const OrderUnlinkButton = ({ row, refetch }) => {
       title={translate('Unlink')}
       className="text-danger"
       action={callback}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       iconColor="danger"
     />
   );

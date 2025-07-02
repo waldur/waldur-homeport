@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import React, { useState } from 'react';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import { usersPartialUpdate } from 'waldur-js-client';
@@ -87,7 +87,7 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
                 'Lifetime will be updated and reset upon saving the form. Token lifetime is prolonged each time a successful API call with the token is done.',
               )}
             >
-              {translate('Token lifetime')} <Question />
+              {translate('Token lifetime')} <QuestionIcon />
             </Tip>
           }
         >
@@ -97,7 +97,7 @@ export const UserTokenLifetime: React.FC<UserEditTokenComponentProps> = (
             onChange={(value) => setTokenLifetime(value)}
           />
         </FormGroup>
-        {tokenLifetime.value === null ? (
+        {tokenLifetime?.value === null ? (
           <Form.Group>
             <Form.Text className="text-danger">
               {translate(

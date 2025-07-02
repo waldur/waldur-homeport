@@ -23,6 +23,20 @@ export const FeaturesDescription: FeatureSection[] = [
     ],
   },
   {
+    key: 'deployment',
+    description: translate('Waldur deployment settings'),
+    items: [
+      {
+        key: 'enable_cookie_notice',
+        description: translate('Enable cookie notice in marketplace.'),
+      },
+      {
+        key: 'send_metrics',
+        description: translate('Send telemetry metrics.'),
+      },
+    ],
+  },
+  {
     key: 'invitations',
     description: translate('Invitations management'),
     items: [
@@ -33,6 +47,10 @@ export const FeaturesDescription: FeatureSection[] = [
       {
         key: 'conceal_civil_number',
         description: translate('Conceal civil number in invitation creation dialog.'),
+      },
+      {
+        key: 'show_service_accounts',
+        description: translate('Show service accounts of the scopes.'),
       },
     ],
   },
@@ -68,6 +86,10 @@ export const FeaturesDescription: FeatureSection[] = [
         key: 'show_experimental_ui_components',
         description: translate('Enabled display of experimental or mocked components in marketplace.'),
       },
+      {
+        key: 'show_resource_end_date',
+        description: translate('Show resource end date as a non optional column in resources list.'),
+      },
     ],
   },
   {
@@ -93,8 +115,20 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Render estimated cost column in projects list.'),
       },
       {
+        key: 'mandatory_end_date',
+        description: translate('Make the project end date mandatory.'),
+      },
+      {
+        key: 'mandatory_start_date',
+        description: translate('Make the project start date mandatory.'),
+      },
+      {
         key: 'oecd_fos_2007_code',
         description: translate('Enable OECD code.'),
+      },
+      {
+        key: 'show_credit_in_create_dialog',
+        description: translate('Show credit field in project create dialog.'),
       },
       {
         key: 'show_description_in_create_dialog',
@@ -127,6 +161,10 @@ export const FeaturesDescription: FeatureSection[] = [
     description: translate('Rancher resources provisioning'),
     items: [
       {
+        key: 'apps',
+        description: translate('Render Rancher apps as a separate tab in resource details page.'),
+      },
+      {
         key: 'volume_mount_point',
         description: translate('Allow to select mount point for data volume when Rancher cluster is provisioned.'),
       },
@@ -155,22 +193,8 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Render marketplace plan components pricelist in support workspace.'),
       },
       {
-        key: 'users',
-        description: translate('Render list of users in support workspace.'),
-      },
-      {
         key: 'vm_type_overview',
         description: translate('Enable VM type overview in support workspace.'),
-      },
-    ],
-  },
-  {
-    key: 'telemetry',
-    description: translate('Telemetry settings'),
-    items: [
-      {
-        key: 'send_metrics',
-        description: translate('Send telemetry metrics.'),
       },
     ],
   },
@@ -193,6 +217,10 @@ export const FeaturesDescription: FeatureSection[] = [
       {
         key: 'show_slug',
         description: translate('Enable display of slug field in user summary.'),
+      },
+      {
+        key: 'show_username',
+        description: translate('Enable display of username field in user tables.'),
       },
       {
         key: 'ssh_keys',

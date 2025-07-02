@@ -1,4 +1,4 @@
-import Markdown from 'markdown-to-jsx';
+import Markdown, { RuleType } from 'markdown-to-jsx';
 import { FunctionComponent, PropsWithChildren } from 'react';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -19,8 +19,14 @@ const CodeBlock: FunctionComponent<PropsWithChildren> = ({ children }) => (
 export const CodePreview = ({ template, context }) => (
   <Markdown
     options={{
-      overrides: {
-        CodeBlock: { component: CodeBlock },
+      renderRule(next, node, _, state) {
+        if (node.type === RuleType.codeBlock) {
+          return (
+            <CodeBlock key={state.key}>{String.raw`${node.text}`}</CodeBlock>
+          );
+        }
+
+        return next();
       },
     }}
   >

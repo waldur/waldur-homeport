@@ -1,13 +1,14 @@
-import { IconProps } from '@phosphor-icons/react';
+import { Icon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { ComponentType, FC } from 'react';
+import { CSSProperties, FC } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
 interface RadarIconProps {
-  IconComponent: ComponentType<IconProps>;
+  IconComponent: Icon;
   variant?: Variant;
   size?: 'sm';
   className?: string;
+  style?: CSSProperties;
 }
 
 export const RadarIcon: FC<RadarIconProps> = ({
@@ -15,6 +16,7 @@ export const RadarIcon: FC<RadarIconProps> = ({
   variant = 'success',
   size,
   className,
+  style,
 }) => (
   <div
     className={classNames(
@@ -22,6 +24,7 @@ export const RadarIcon: FC<RadarIconProps> = ({
       size && `radar-icon-${size}`,
       className,
     )}
+    style={style}
   >
     <div>
       <IconComponent

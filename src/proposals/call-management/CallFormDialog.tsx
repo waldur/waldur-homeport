@@ -16,7 +16,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { SubmitButton } from '@waldur/form';
 import { FormContainer } from '@waldur/form/FormContainer';
-import { MarkdownField } from '@waldur/form/MarkdownField';
+import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -45,16 +45,16 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
       isLoading: loadingManager,
       error: errorManager,
       refetch,
-    } = useQuery(
-      ['CallManagingOrganizations', customer.uuid],
-      () =>
+    } = useQuery({
+      queryKey: ['CallManagingOrganizations', customer.uuid],
+
+      queryFn: () =>
         callManagingOrganisationsList({
           query: { customer_uuid: customer.uuid },
         }).then((response) => response.data[0]),
-      {
-        staleTime: 60 * 1000,
-      },
-    );
+
+      staleTime: 60 * 1000,
+    });
     const isEdit = Boolean(props.resolve.call?.uuid);
 
     useEffect(() => {
@@ -138,19 +138,21 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
             />
           }
         >
-          <FormContainer submitting={props.submitting}>
+          <FormContainer submitting={props.submitting} className="size-lg">
             <StringField
               label={translate('Name')}
               name="name"
               required
               validate={required}
             />
+
             {isEdit && (
-              <MarkdownField
-                label={translate('Description')}
+              <MarkdownEditor
                 name="description"
-                required={false}
-                verticalLayout
+                required
+                autoFocus
+                hideLabel
+                spaceless
               />
             )}
             {isEdit && isFeatureVisible(MarketplaceFeatures.call_only) && (

@@ -45,6 +45,6 @@ export const showRedirectMessage = (title, message) =>
 
 export const showErrorResponse = (response: Response, message?: string) => {
   const details = format(response);
-  const errorMessage = `${message} ${details}`;
+  const errorMessage = message ? `${message} ${details}` : details;
   return showError(errorMessage);
 };

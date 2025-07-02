@@ -1,4 +1,4 @@
-import { CheckCircle, XCircle } from '@phosphor-icons/react';
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
@@ -44,9 +44,9 @@ export const BackendHealthStatusIndicator: FC = () => {
         }
       >
         {isWorking(value) ? (
-          <CheckCircle size={20} className="text-success" />
+          <CheckCircleIcon size={20} className="text-success" />
         ) : (
-          <XCircle size={20} className="text-danger" />
+          <XCircleIcon size={20} className="text-danger" />
         )}
       </button>
     </span>

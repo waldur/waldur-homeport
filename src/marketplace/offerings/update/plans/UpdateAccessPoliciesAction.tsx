@@ -1,4 +1,4 @@
-import { Users } from '@phosphor-icons/react';
+import { UsersIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -31,7 +31,7 @@ export const UpdateAccessPoliciesAction = ({ plan, refetch }) => {
   return (
     <ActionItem
       title={translate('Update access policies')}
-      iconNode={<Users weight="bold" />}
+      iconNode={<UsersIcon weight="bold" />}
       action={callback}
     />
   );

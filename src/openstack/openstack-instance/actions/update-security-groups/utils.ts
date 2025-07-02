@@ -2,13 +2,18 @@ import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
-import { openstackInstancesUpdateSecurityGroups } from 'waldur-js-client';
+import {
+  openstackInstancesUpdateSecurityGroups,
+  OpenStackPort,
+  openstackPortsUpdateSecurityGroups,
+} from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { loadSecurityGroups } from '@waldur/openstack/api';
+import { OPENSTACK_PORT_TYPE } from '@waldur/openstack/constants';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface UpdateSecurityGroupsFormData {
@@ -16,7 +21,7 @@ interface UpdateSecurityGroupsFormData {
 }
 
 export const useUpdateSecurityGroupsForm = (
-  resource: OpenStackInstance,
+  resource: OpenStackInstance | OpenStackPort,
   refetch?,
 ) => {
   const asyncState = useAsync(
@@ -34,8 +39,16 @@ export const useUpdateSecurityGroupsForm = (
   );
   const dispatch = useDispatch();
   const submitRequest = async (formData: UpdateSecurityGroupsFormData) => {
+    const resourceLabel =
+      resource.resource_type === OPENSTACK_PORT_TYPE
+        ? translate('OpenStack port')
+        : translate('OpenStack instance');
     try {
-      await openstackInstancesUpdateSecurityGroups({
+      const api =
+        resource.resource_type === OPENSTACK_PORT_TYPE
+          ? openstackPortsUpdateSecurityGroups
+          : openstackInstancesUpdateSecurityGroups;
+      await api({
         path: { uuid: resource.uuid },
         body: {
           security_groups: (formData.security_groups || []).map(
@@ -46,7 +59,8 @@ export const useUpdateSecurityGroupsForm = (
       dispatch(
         showSuccess(
           translate(
-            'Update of OpenStack instance security groups has been scheduled.',
+            'Update of {resource} security groups has been scheduled.',
+            { resource: resourceLabel },
           ),
         ),
       );
@@ -58,7 +72,9 @@ export const useUpdateSecurityGroupsForm = (
       dispatch(
         showErrorResponse(
           e,
-          translate('Unable to update security groups of OpenStack instance.'),
+          translate('Unable to update security groups of {resource}.', {
+            resource: resourceLabel,
+          }),
         ),
       );
     }

@@ -1,18 +1,19 @@
+import { CalendarBlankIcon, CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { ProtectedRound } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { Link } from '@waldur/core/Link';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
-import heroBg from '@waldur/proposals/proposal-calls.png';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { PublicCallApplyButton } from '../details/PublicCallApplyButton';
 import { Call } from '../types';
 import { getRoundStatus } from '../utils';
 
 import { RoundPageHeaderBody } from './RoundPageHeaderBody';
-import { RoundQuotas } from './RoundQuotas';
 
 interface RoundPageHeroProps {
   round: ProtectedRound;
@@ -23,38 +24,54 @@ export const RoundPageHero: FC<RoundPageHeroProps> = ({ round, call }) => {
   const customer = useSelector(getCustomer);
   const status = useMemo(() => getRoundStatus(round), [round]);
   return (
-    <PublicDashboardHero
-      logo={customer?.image}
-      logoAlt={round.uuid}
-      logoBottomLabel={translate('Round')}
-      logoBottomClass="bg-secondary"
-      logoTopLabel={status.label}
-      logoTopClass={'bg-' + status.color}
-      backgroundImage={heroBg}
-      asHero
-      title={
-        <>
-          <h3>{round.name}</h3>
-          <Link
-            state="protected-call.main"
-            params={{ call_uuid: call.uuid }}
-            label={translate('Part of {name}', { name: call.name })}
-            className="text-link"
-          />
-        </>
-      }
-      quickActions={
-        <Link
-          state="protected-call.main"
-          params={{ call_uuid: call.uuid }}
-          label={translate('See call')}
-          className="btn btn-outline btn-outline-default w-50"
-        />
-      }
-      quickBody={<RoundQuotas round={round} />}
-      quickFooterClassName="justify-content-center"
-    >
-      <RoundPageHeaderBody round={round} />
-    </PublicDashboardHero>
+    <div className="container-fluid my-5">
+      <PublicDashboardHero
+        hideQuickSection
+        logo={customer?.image}
+        logoAlt={round.uuid}
+        logoCircle
+        cardBordered
+        title={
+          <>
+            <div className="d-flex align-items-center gap-2 mb-2">
+              <h3 className="mb-0 me-2">{round.name}</h3>
+              <Badge
+                variant={status.color}
+                outline
+                pill
+                size="sm"
+                leftIcon={
+                  status.value === 'scheduled' ? (
+                    <CalendarBlankIcon weight="bold" />
+                  ) : status.value === 'ended' ? (
+                    <XIcon weight="bold" />
+                  ) : (
+                    <CheckIcon weight="bold" />
+                  )
+                }
+              >
+                {status.label}
+              </Badge>
+            </div>
+            <p className="mb-0 text-muted">
+              {translate('Part of {name}', { name: call.name })}
+            </p>
+          </>
+        }
+        actions={
+          <>
+            <PublicCallApplyButton call={call} round={round} />
+            <Link
+              state="protected-call.main"
+              params={{ call_uuid: call.uuid }}
+              label={translate('See call')}
+              className="btn btn-secondary"
+            />
+          </>
+        }
+      >
+        <RoundPageHeaderBody round={round} />
+      </PublicDashboardHero>
+    </div>
   );
 };

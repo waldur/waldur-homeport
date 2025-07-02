@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { vmwareVirtualMachineReset } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -18,6 +18,6 @@ export const ResetAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     apiMethod={(id) => vmwareVirtualMachineReset({ path: { uuid: id } })}
     refetch={refetch}
-    iconNode={<ArrowsClockwise weight="bold" />}
+    iconNode={<ArrowsClockwiseIcon weight="bold" />}
   />
 );

@@ -1,4 +1,8 @@
-import { CheckCircle, WarningCircle, XCircle } from '@phosphor-icons/react';
+import {
+  CheckCircleIcon,
+  WarningCircleIcon,
+  XCircleIcon,
+} from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
@@ -105,7 +109,7 @@ export const FormSteps: FC<{
               placement="left"
               autoWidth
             >
-              <XCircle weight="bold" className="text-danger" size={20} />
+              <XCircleIcon weight="bold" className="text-danger" size={20} />
             </Tip>
           ) : step.fields && hasNormalErrors ? (
             <Tip
@@ -115,10 +119,14 @@ export const FormSteps: FC<{
               placement="left"
               autoWidth
             >
-              <WarningCircle weight="bold" className="text-warning" size={20} />
+              <WarningCircleIcon
+                weight="bold"
+                className="text-warning"
+                size={20}
+              />
             </Tip>
           ) : completedSteps[i] ? (
-            <CheckCircle weight="bold" className="text-success" size={20} />
+            <CheckCircleIcon weight="bold" className="text-success" size={20} />
           ) : null}
         </div>
       ),

@@ -9,6 +9,7 @@ import { IPList } from '@waldur/resource/IPList';
 interface CategoryColumnFieldProps {
   row: Resource;
   column: CategoryColumn;
+  for_export?: boolean;
 }
 
 export const CategoryColumnField: FunctionComponent<
@@ -24,7 +25,7 @@ export const CategoryColumnField: FunctionComponent<
       if (!Array.isArray(value) || value.length === 0) {
         return 'N/A';
       }
-      if (validateIP(value[0])) {
+      if (validateIP(value[0]) && !props.for_export) {
         return <IPList value={value} />;
       } else {
         return value.join(', ');

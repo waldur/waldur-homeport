@@ -1,4 +1,4 @@
-import { ArrowClockwise } from '@phosphor-icons/react';
+import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { vmwareVirtualMachineRebootGuest } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -18,6 +18,6 @@ export const RebootAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     apiMethod={(id) => vmwareVirtualMachineRebootGuest({ path: { uuid: id } })}
     refetch={refetch}
-    iconNode={<ArrowClockwise weight="bold" />}
+    iconNode={<ArrowClockwiseIcon weight="bold" />}
   />
 );

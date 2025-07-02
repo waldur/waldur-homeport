@@ -1,4 +1,4 @@
-import { Stop } from '@phosphor-icons/react';
+import { StopIcon } from '@phosphor-icons/react';
 import { openstackInstancesStop } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
@@ -38,6 +38,6 @@ export const StopAction: ActionItemType = ({ resource, ...rest }) => (
     {...getProps()}
     resource={resource}
     {...rest}
-    iconNode={<Stop weight="bold" />}
+    iconNode={<StopIcon weight="bold" />}
   />
 );

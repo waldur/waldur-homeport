@@ -13,7 +13,21 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-export const AccessSubnetForm = ({ refetch, customer_url, row }) => {
+export interface AccessSubnetFormProps {
+  refetch(): void;
+  customer_url?: string;
+  row?: {
+    uuid: string;
+    inet: string;
+    description: string;
+  };
+}
+
+export const AccessSubnetForm = ({
+  refetch,
+  customer_url,
+  row,
+}: AccessSubnetFormProps) => {
   const dispatch = useDispatch();
   const isEditMode = !!row;
   const [formData, setFormData] = useState<
@@ -101,6 +115,7 @@ export const AccessSubnetForm = ({ refetch, customer_url, row }) => {
             placeholder={translate('Example: 192.168.1.0/32')}
             isInvalid={!!error}
           />
+
           {error && (
             <Form.Control.Feedback type="invalid">
               {error}

@@ -3,6 +3,7 @@ import { Field } from 'redux-form';
 
 import { SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { OPENSTACK_PORT_TYPE } from '@waldur/openstack/constants';
 import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 
 import { connectForm } from './utils';
@@ -18,12 +19,13 @@ export const UpdateSecurityGroupsForm = connectForm(
   }) => (
     <form onSubmit={handleSubmit(submitRequest)}>
       <AsyncActionDialog
-        title={translate(
-          'Update security groups for OpenStack instance {name}',
-          {
-            name: resource.name,
-          },
-        )}
+        title={translate('Update security groups for {resource} {name}', {
+          resource:
+            resource.resource_type === OPENSTACK_PORT_TYPE
+              ? translate('OpenStack port')
+              : translate('OpenStack instance'),
+          name: resource.name,
+        })}
         loading={asyncState.loading}
         error={asyncState.error}
         submitting={submitting}

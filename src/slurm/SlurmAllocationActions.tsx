@@ -16,10 +16,10 @@ export const SlurmAllocationActions = (props) => (
   <>
     <ActionGroup title={translate('Resource actions')}>
       <EditAction {...props} />
+      <PullAllocationAction {...props} />
     </ActionGroup>
 
     <ActionGroup title={translate('Billing actions')}>
-      <PullAllocationAction {...props} />
       <ChangePlanAction {...props} />
       <ShowUsageAction {...props} />
       <RequestLimitsChangeAction {...props} />

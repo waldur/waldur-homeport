@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { userInvitationsDelete } from 'waldur-js-client';
 
@@ -21,7 +21,7 @@ export const InvitationDeleteButton = ({ row, refetch }) => {
     <ActionItem
       action={callback}
       title={translate('Delete')}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
       iconColor="danger"
     />

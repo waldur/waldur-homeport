@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceResourcesMoveResource, Resource } from 'waldur-js-client';
@@ -14,15 +13,22 @@ import { MOVE_RESOURCE_FORM_ID } from './constants';
 import { MoveToProjectAutocomplete } from './MoveToProjectAutocomplete';
 
 interface MoveResourceDialogOwnProps {
-  resource: Resource;
-  refetch?(): void;
+  resolve: {
+    resource: Resource & { marketplace_resource_uuid: string };
+    refetch?(): void;
+  };
 }
 
 interface FormData {
   project: { name: string; customer_name: string; url: string };
 }
 
-const PureMoveResourceDialog: FunctionComponent<any> = (props) => {
+export const MoveResourceDialog = reduxForm<
+  FormData,
+  MoveResourceDialogOwnProps
+>({
+  form: MOVE_RESOURCE_FORM_ID,
+})((props) => {
   const dispatch = useDispatch();
 
   const submitRequest = async (formData: FormData) => {
@@ -84,11 +90,4 @@ const PureMoveResourceDialog: FunctionComponent<any> = (props) => {
       </ModalDialog>
     </form>
   );
-};
-
-export const MoveResourceDialog = reduxForm<
-  FormData,
-  MoveResourceDialogOwnProps
->({
-  form: MOVE_RESOURCE_FORM_ID,
-})(PureMoveResourceDialog);
+});

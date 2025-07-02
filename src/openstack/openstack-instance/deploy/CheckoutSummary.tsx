@@ -3,12 +3,10 @@ import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { DeployPageTotalCard } from '@waldur/marketplace/deploy/DeployPageTotalCard';
-import {
-  formErrorsSelector,
-  formIsValidSelector,
-} from '@waldur/marketplace/deploy/utils';
+import { formIsValidSelector } from '@waldur/marketplace/deploy/selectors';
+import { formErrorsSelector } from '@waldur/marketplace/deploy/selectors';
+import { orderFormDataSelector } from '@waldur/marketplace/deploy/selectors';
 import { OrderSubmitButton } from '@waldur/marketplace/details/OrderSubmitButton';
-import { orderFormDataSelector } from '@waldur/marketplace/utils';
 
 interface CheckoutSummaryProps {
   offering: PublicOfferingDetails;

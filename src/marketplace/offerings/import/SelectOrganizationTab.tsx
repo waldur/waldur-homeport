@@ -15,9 +15,10 @@ export const SelectOrganizationTab = () => {
     isLoading,
     error,
     data: organizations,
-  } = useQuery(
-    ['RemoteOrganizations', formData?.api_url, formData?.token],
-    () => {
+  } = useQuery({
+    queryKey: ['RemoteOrganizations', formData?.api_url, formData?.token],
+
+    queryFn: () => {
       if (!formData?.api_url || !formData?.token) {
         return Promise.reject(
           new Error(translate('Please check the credentials again.')),
@@ -27,8 +28,10 @@ export const SelectOrganizationTab = () => {
         (r) => r.data,
       );
     },
-    { staleTime: 60 * 1000, retry: false },
-  );
+
+    staleTime: 60 * 1000,
+    retry: false,
+  });
 
   return (
     <FormContainer
@@ -48,6 +51,7 @@ export const SelectOrganizationTab = () => {
         getOptionLabel={(option) => option.name}
         validate={required}
       />
+
       {isLoading ? null : error ? (
         <ErredRemoteConnection
           error={error}

@@ -1,4 +1,4 @@
-import { ArrowsLeftRight } from '@phosphor-icons/react';
+import { ArrowsLeftRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -22,7 +22,7 @@ export const MigrateTenantAction: FC<TenantActionProps> = ({
   isFeatureVisible(OpenstackFeatures.show_migrations) ? (
     <DialogActionItem
       title={translate('Replicate')}
-      iconNode={<ArrowsLeftRight weight="bold" />}
+      iconNode={<ArrowsLeftRightIcon weight="bold" />}
       modalComponent={MigrateTenantDialog}
       resource={resource}
       extraResolve={{ refetch }}

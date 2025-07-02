@@ -10,11 +10,13 @@ import {
 
 import { getActions } from './registry';
 import { ResourceActionComponent } from './ResourceActionComponent';
+import { ActionItemType } from './types';
 
 interface ActionButtonResourceProps {
   url: string;
   disabled?: boolean;
   refetch?(): void;
+  extraActions?: ActionItemType[];
 }
 
 async function loadData(url: string) {
@@ -63,6 +65,7 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
   return (
     <ResourceActionComponent
       {...value}
+      extraActions={props.extraActions}
       open={open}
       disabled={props.disabled}
       loading={loading}

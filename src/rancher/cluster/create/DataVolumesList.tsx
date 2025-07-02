@@ -18,7 +18,6 @@ export const DataVolumesList: FunctionComponent<any> = ({
           volumePath={volume}
           onRemove={props.fields.remove}
           volumeTypes={props.volumeTypes}
-          mountPoints={props.mountPoints}
         />
       ))}
       <DataVolumeAddButton

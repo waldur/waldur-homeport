@@ -20,8 +20,8 @@ import { formatInstance } from './OpenStackVolumeSummary';
 export const TenantVolumesList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackVolumesListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackVolumesListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
     }),
     [resourceScope],
@@ -73,6 +73,7 @@ export const TenantVolumesList: FunctionComponent<{ resourceScope }> = ({
       }
       title={translate('Volumes')}
       verboseName={translate('volumes')}
+      showPageSizeSelector
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       rowActions={({ row }) => (
         <ModalActionsRouter

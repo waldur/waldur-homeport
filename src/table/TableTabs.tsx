@@ -3,22 +3,22 @@ import { isMatch } from 'lodash-es';
 import { useMemo } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 
-import { TableProps } from './types';
+import { TableTab } from './types';
 
-type TableTabsProps = Pick<TableProps, 'tabs'>;
-
-export const TableTabs = ({ tabs }: TableTabsProps) => {
+export const TableTabs = ({ tabs }: { tabs: TableTab[] }) => {
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
   const goTo = (key) => {
     const tab = tabs.find((t) => t.key === key);
-    router.stateService.go(tab.state, tab.params);
+    router.stateService.go(tab.state ?? state.name, tab.params);
   };
 
   const activeKey = useMemo(
     () =>
-      tabs.find((t) => t.state === state.name && isMatch(params, t.params))
-        ?.key,
+      tabs.find(
+        (t) =>
+          (!t.state || t.state === state.name) && isMatch(params, t.params),
+      )?.key,
     [state, params, tabs],
   );
 

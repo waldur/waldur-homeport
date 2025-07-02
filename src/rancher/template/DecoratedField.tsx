@@ -36,6 +36,7 @@ export const DecoratedField: React.FC<OwnProps> = (props) => (
               : undefined
         }
       />
+
       <Form.Text muted={true}>{props.description}</Form.Text>
     </Form.Group>
   </Col>

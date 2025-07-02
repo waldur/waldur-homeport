@@ -19,6 +19,7 @@ export const InputGroup = (props) => (
       }
       validate={props.validate}
     />
+
     {props.helpText && <Form.Text muted={true}>{props.helpText}</Form.Text>}
   </Form.Group>
 );

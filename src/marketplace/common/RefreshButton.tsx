@@ -1,4 +1,4 @@
-import { ArrowClockwise } from '@phosphor-icons/react';
+import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
@@ -28,7 +28,7 @@ export const RefreshButton = ({
         <LoadingSpinnerIcon />
       ) : (
         <span className={'svg-icon' + (size !== 'sm' ? ' svg-icon-2' : '')}>
-          <ArrowClockwise />
+          <ArrowClockwiseIcon />
         </span>
       )}
       {translate('Refresh')}

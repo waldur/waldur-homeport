@@ -1,11 +1,10 @@
 import { useCallback, FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { userGroupInvitationsRetrieve } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { GroupInvitationButtons } from './GroupinvitationButtons';
@@ -15,19 +14,17 @@ import { GroupInvitationMessage } from './GroupInvitationMessage';
 export const GroupInvitationConfirmDialog: FunctionComponent<{
   resolve: { token; deferred };
 }> = ({ resolve: { token, deferred } }) => {
-  const dispatch = useDispatch();
-
-  const close = useCallback(() => dispatch(closeModalDialog()), [dispatch]);
+  const { closeDialog } = useModal();
 
   const dismiss = useCallback(() => {
     deferred.reject();
-    close();
-  }, [close, deferred]);
+    closeDialog();
+  }, [closeDialog, deferred]);
 
   const submitRequest = useCallback(() => {
-    close();
+    closeDialog();
     deferred.resolve(true);
-  }, [close, deferred]);
+  }, [closeDialog, deferred]);
 
   const asyncResult = useAsync(() =>
     userGroupInvitationsRetrieve({ path: { uuid: token } }).then(

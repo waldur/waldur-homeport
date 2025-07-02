@@ -17,6 +17,7 @@ export const UploadDocumentationFiles = (props) => (
       maxSize={25 * 1024 * 1024} // 25MB
       accept={ACCEPTED_FILE_TYPES}
     />
+
     <DocumentationFiles
       files={props.proposal.supporting_documentation}
       pending={props.input.value}

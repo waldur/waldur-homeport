@@ -10,11 +10,32 @@ import {
   getUser,
 } from '@waldur/workspace/selectors';
 
-export const userHasCustomerPermission = (permission) => (state) =>
-  hasPermission(getUser(state), {
-    customerId: getCustomerSelector(state).uuid,
-    permission,
-  });
+export const userHasCustomerPermission = (permission) => (state) => {
+  const user = getUser(state);
+  const customerId = getCustomerSelector(state).uuid;
+  return (
+    hasPermission(user, {
+      customerId,
+      permission,
+    }) ||
+    hasPermission(
+      {
+        ...user,
+        permissions: user.permissions
+          .filter((perm) => perm.customer_uuid === customerId)
+          .map((perm) => ({
+            ...perm,
+            scope_uuid: customerId,
+            scope_type: 'customer',
+          })),
+      },
+      {
+        customerId,
+        permission,
+      },
+    )
+  );
+};
 
 export const getCustomer = (
   customerId: string,

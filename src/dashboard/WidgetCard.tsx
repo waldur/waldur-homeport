@@ -1,4 +1,4 @@
-import { DotsThreeVertical } from '@phosphor-icons/react';
+import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Col, Dropdown, Row } from 'react-bootstrap';
@@ -14,6 +14,7 @@ interface WidgetCardProps {
   title?: ReactNode;
   meta?: ReactNode;
   actions?: WidgetCardAction[];
+  cardAction?: ReactNode;
   className?: string;
   right?: ReactNode;
   left?: ReactNode;
@@ -25,6 +26,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
   title,
   meta,
   actions,
+  cardAction,
   className,
   children,
   right,
@@ -42,10 +44,18 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
       <Card.Body className="d-flex">
         {left && <div className="me-4 flex-shrink-0">{left}</div>}
         <div className="d-flex flex-column flex-grow-1">
-          <div className="d-flex align-items-center mb-2">
+          <div
+            className={
+              'd-flex align-items-center gap-3 ' +
+              (actions?.length ? 'mb-1' : 'mb-2')
+            }
+          >
             <Card.Title as="div" className="fw-bold flex-grow-1 h4 mb-0">
               {cardTitle}
             </Card.Title>
+            {cardAction && (
+              <div className="p-0 m-0 flex-shrink-0">{cardAction}</div>
+            )}
             {actions?.length && (
               <Dropdown>
                 <Dropdown.Toggle
@@ -54,7 +64,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
                   bsPrefix="btn-icon"
                   className="h-25px w-25px"
                 >
-                  <DotsThreeVertical
+                  <DotsThreeVerticalIcon
                     size={20}
                     weight="bold"
                     className="text-gray-400"

@@ -49,6 +49,7 @@ const fakeBackup = {
       name: 'IMAPS',
     },
   ],
+
   instance_ports: [
     {
       subnet: fakeSubnet.url,
@@ -309,6 +310,7 @@ describe('BackupRestoreDialog', () => {
             subnet: fakeSubnet.url,
           },
         ],
+
         security_groups: fakeBackup.instance_security_groups.map((group) => ({
           url: group.url,
         })),

@@ -23,6 +23,7 @@ export const VmOverviewFilter: FunctionComponent<VmOverviewFilterProps> = (
           component={AwesomeCheckboxField}
           label={translate('Show shared')}
         />
+
         <Form.Group>
           <Field
             name="service_provider"

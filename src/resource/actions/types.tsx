@@ -47,15 +47,15 @@ export interface ActionContext<Resource = BaseResource> {
   user: Pick<User, 'is_staff' | 'is_support'>;
 }
 
-export type ActionItemType = ComponentType<{
-  resource;
+export type ActionItemType<T = any> = ComponentType<{
+  resource: T;
   marketplaceResource?;
   refetch?(): void;
   as?: ComponentType;
 }>;
 
-export type ActionDialogProps = {
-  resolve: { resource; refetch };
+export type ActionDialogProps<T = any> = {
+  resolve: { resource: T; refetch?(): void };
 };
 
 export interface ActionConfiguration {

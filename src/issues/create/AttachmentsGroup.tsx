@@ -24,6 +24,7 @@ export const AttachmentsGroup = () => {
               disabled={submitting}
               message={translate('SVG, PNG, JPG or GIF (max. 800x400px)')}
             />
+
             {value.length > 0 ? (
               <AttachmentsList
                 uploading={Array.from(value as FileList).map((file) => ({

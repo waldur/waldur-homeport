@@ -22,8 +22,8 @@ import { InvitationsFilter } from './InvitationsFilter';
 export const InvitationList: FunctionComponent = () => {
   useTitle(translate('Invitations'));
   const filterForm: any = useSelector(getFormValues('AdminInvitationsFilter'));
-  const filter = useMemo<UserInvitationsListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): UserInvitationsListData['query'] => ({
       state: filterForm?.state?.map((option) => option.value),
       role_uuid: filterForm?.role?.uuid,
       customer_uuid: filterForm?.organization?.uuid,
@@ -51,6 +51,7 @@ export const InvitationList: FunctionComponent = () => {
               <CopyToClipboardButton value={row.email} />
             </div>
           ),
+
           orderField: 'email',
         },
         {

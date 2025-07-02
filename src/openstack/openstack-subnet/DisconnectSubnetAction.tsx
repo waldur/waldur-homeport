@@ -1,4 +1,4 @@
-import { Plugs } from '@phosphor-icons/react';
+import { PlugsIcon } from '@phosphor-icons/react';
 import { openstackSubnetsDisconnect } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -16,6 +16,6 @@ export const DisconnectSubnetAction: ActionItemType = ({
     resource={resource}
     validators={[validateState('OK')]}
     refetch={refetch}
-    iconNode={<Plugs weight="bold" />}
+    iconNode={<PlugsIcon weight="bold" />}
   />
 );

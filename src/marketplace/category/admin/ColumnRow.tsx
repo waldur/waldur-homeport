@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
@@ -49,11 +49,13 @@ export const ColumnRow = ({ column, fields, index }) => {
         component={FormField}
         tooltip={translate('Title is rendered as column header')}
       />
+
       <Field
         name="attribute"
         component={FormField}
         tooltip={translate('Resource attribute is rendered as table cell')}
       />
+
       <td>
         <Field
           name="widget"
@@ -76,9 +78,10 @@ export const ColumnRow = ({ column, fields, index }) => {
         component={FormField}
         tooltip={translate('Index allows to reorder columns')}
       />
+
       <td>
         <Button variant="danger" onClick={onRemove} aria-description="Delete">
-          <Trash />
+          <TrashIcon />
         </Button>
       </td>
     </tr>

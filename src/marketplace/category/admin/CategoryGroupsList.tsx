@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Image } from '@waldur/core/Image';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import Avatar from '@waldur/core/Avatar';
 import { Link } from '@waldur/core/Link';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -29,11 +28,7 @@ export const CategoryGroupsList: FunctionComponent = () => {
           render: ({ row }) => (
             <>
               <div className="d-inline-block align-middle me-2">
-                {row.icon ? (
-                  <Image src={row.icon} size={30} isContain />
-                ) : (
-                  <ImagePlaceholder width="30px" height="30px" />
-                )}
+                <Avatar name={row.title} src={row.icon} circle />
               </div>
               <Link
                 state="admin-marketplace-categories"

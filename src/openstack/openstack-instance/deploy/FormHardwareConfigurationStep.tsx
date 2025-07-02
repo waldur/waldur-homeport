@@ -1,7 +1,7 @@
 import { debounce } from 'lodash-es';
 import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { OpenStackFlavor } from 'waldur-js-client';
+import { OpenStackFlavor, OpenStackImage } from 'waldur-js-client';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
@@ -9,8 +9,8 @@ import { FilterBox } from '@waldur/form/FilterBox';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { DeployFormData } from '@waldur/marketplace/common/types';
+import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { orderFormAttributesSelector } from '@waldur/marketplace/utils';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
@@ -78,16 +78,22 @@ export const FormHardwareConfigurationStep = (props: FormStepProps) => {
     [limit, vcpuQuota.usage, ramQuota.usage],
   );
 
-  const attributes = useSelector(orderFormAttributesSelector);
+  const image = useSelector((state) =>
+    orderFormSelector(state, 'attributes.image'),
+  ) as OpenStackImage;
+
+  const flavor = useSelector((state) =>
+    orderFormSelector(state, 'attributes.flavor'),
+  ) as OpenStackFlavor;
+
   const minSystemVolumeSize = useMemo(() => {
-    const data = {
-      image: attributes?.image,
-      flavor: attributes?.flavor,
+    const minSize = calculateSystemVolumeSize({
+      image,
+      flavor,
       system_volume_size: 0,
-    };
-    const minSize = calculateSystemVolumeSize(data);
+    });
     return minSize || 0;
-  }, [attributes]);
+  }, [image, flavor]);
 
   return (
     <VStepperFormStepCard

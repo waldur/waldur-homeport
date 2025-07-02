@@ -1,4 +1,4 @@
-import { ChatsCircle } from '@phosphor-icons/react';
+import { ChatsCircleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -31,7 +31,7 @@ export const QuickIssueDrawerToggle: React.FC = () => {
         onClick={openDrawer}
       >
         <span className="svg-icon" title={translate('Requests')}>
-          <ChatsCircle className="w-20px h-20px" weight="bold" />
+          <ChatsCircleIcon className="w-20px h-20px" weight="bold" />
         </span>
       </button>
     </div>

@@ -1,4 +1,4 @@
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDownIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useBoolean } from 'react-use';
 
@@ -26,7 +26,7 @@ export const ComponentTotalRow: FC<
         <td colSpan={5}>
           {canExpand && (
             <span className={toggled ? 'me-2 active' : 'me-2'}>
-              <CaretDown size={20} weight="bold" className="rotate-180" />
+              <CaretDownIcon size={20} weight="bold" className="rotate-180" />
             </span>
           )}
           <span className="fw-bolder">{translate('Total')}</span>

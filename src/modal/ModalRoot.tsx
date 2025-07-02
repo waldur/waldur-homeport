@@ -21,7 +21,7 @@ export const ModalRoot: FunctionComponent = () => {
   const { modalComponent, modalProps } = useSelector<{ modal: TState }, TState>(
     (state: RootState) => state.modal,
   );
-  const { formId, modalStyle, ...rest } = modalProps || {};
+  const { formId, modalStyle, _resolve, ...rest } = modalProps || {};
   const dispatch = useDispatch();
   const isDirtyForm = useSelector((state: RootState) =>
     formId ? isDirty(formId)(state) : false,

@@ -1,4 +1,4 @@
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDownIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Button, FormCheck } from 'react-bootstrap';
@@ -198,42 +198,87 @@ export const TableHeader: FC<TableHeaderProps> = ({
     }
   }, [rows, toggledAll, toggled, toggleRow]);
 
+  const colsLen = useMemo(() => {
+    return hasOptionalColumns
+      ? columnPositions.filter(
+          (id) => columnMap[id] && (columnMap[id].visible ?? true),
+        ).length
+      : columns.filter((column) => column.visible ?? true).length;
+  }, [hasOptionalColumns, columnPositions, columnMap, columns]);
+
   return (
-    <thead>
-      <tr className="text-start text-muted fw-bolder fs-7 gs-0 align-middle">
+    <>
+      <colgroup>
         {fieldType ? (
-          <th style={{ width: '10px' }} />
+          <col width="10px" />
         ) : enableMultiSelect ? (
-          <th style={{ width: '10px' }}>
-            <FormCheck
-              ref={refCheck}
-              data-testid="select-all"
-              className="form-check form-check-custom form-check-sm"
-              checked={isAllSelected}
-              onChange={() => onSelectAllRows(rows)}
-            />
-          </th>
+          <col width="10px" />
         ) : null}
-        {expandableRow && (
-          <th data-testid="all-rows-expander">
-            <Button
-              variant="flush"
-              className={classNames('btn-no-focus', toggledAll ? 'active' : '')}
-              onClick={toggleAll}
-            >
-              <CaretDown size={20} weight="bold" className="rotate-180" />
-            </Button>
-          </th>
-        )}
-        {hasOptionalColumns
-          ? columnPositions
-              .filter((id) => columnMap[id])
-              .map(
-                (id) =>
-                  (columnMap[id].visible ?? true) && (
+        {expandableRow && <col width="10px" />}
+        {Array.from({ length: colsLen }).map((_, i) => (
+          <col
+            key={i}
+            style={{
+              width: (i === 0 ? (100 / colsLen) * 2 : 100 / colsLen) + '%',
+              minWidth: i === 0 ? 200 : 150,
+            }}
+          />
+        ))}
+      </colgroup>
+      <thead>
+        <tr className="text-start text-muted fw-bolder fs-7 gs-0 align-middle">
+          {fieldType ? (
+            <th style={{ width: '10px' }} />
+          ) : enableMultiSelect ? (
+            <th style={{ width: '10px' }}>
+              <FormCheck
+                ref={refCheck}
+                data-testid="select-all"
+                className="form-check form-check-custom form-check-sm"
+                checked={isAllSelected}
+                onChange={() => onSelectAllRows(rows)}
+              />
+            </th>
+          ) : null}
+          {expandableRow && (
+            <th data-testid="all-rows-expander" style={{ width: '10px' }}>
+              <Button
+                variant="flush"
+                className={classNames(
+                  'btn-no-focus',
+                  toggledAll ? 'active' : '',
+                )}
+                onClick={toggleAll}
+              >
+                <CaretDownIcon size={20} weight="bold" className="rotate-180" />
+              </Button>
+            </th>
+          )}
+          {hasOptionalColumns
+            ? columnPositions
+                .filter((id) => columnMap[id])
+                .map(
+                  (id) =>
+                    (columnMap[id].visible ?? true) && (
+                      <TableTh
+                        key={id}
+                        column={columnMap[id]}
+                        onSortClick={onSortClick}
+                        currentSorting={currentSorting}
+                        filters={filters}
+                        filtersStorage={filtersStorage}
+                        setFilter={setFilter}
+                        applyFiltersFn={applyFiltersFn}
+                        toggleFilterMenu={toggleFilterMenu}
+                      />
+                    ),
+                )
+            : columns.map(
+                (column, index) =>
+                  (column.visible ?? true) && (
                     <TableTh
-                      key={id}
-                      column={columnMap[id]}
+                      key={index}
+                      column={column}
                       onSortClick={onSortClick}
                       currentSorting={currentSorting}
                       filters={filters}
@@ -243,35 +288,20 @@ export const TableHeader: FC<TableHeaderProps> = ({
                       toggleFilterMenu={toggleFilterMenu}
                     />
                   ),
-              )
-          : columns.map(
-              (column, index) =>
-                (column.visible ?? true) && (
-                  <TableTh
-                    key={index}
-                    column={column}
-                    onSortClick={onSortClick}
-                    currentSorting={currentSorting}
-                    filters={filters}
-                    filtersStorage={filtersStorage}
-                    setFilter={setFilter}
-                    applyFiltersFn={applyFiltersFn}
-                    toggleFilterMenu={toggleFilterMenu}
-                  />
-                ),
-            )}
-        {showActions ? (
-          <th
-            className={classNames(
-              'header-actions',
-              COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned',
-              pinnedColumns[COLUMN_ACTIONS_KEY] && 'is-floating',
-            )}
-          >
-            {translate('Actions')}
-          </th>
-        ) : null}
-      </tr>
-    </thead>
+              )}
+          {showActions ? (
+            <th
+              className={classNames(
+                'header-actions',
+                COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned',
+                pinnedColumns[COLUMN_ACTIONS_KEY] && 'is-floating',
+              )}
+            >
+              {translate('Actions')}
+            </th>
+          ) : null}
+        </tr>
+      </thead>
+    </>
   );
 };

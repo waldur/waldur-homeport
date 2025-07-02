@@ -31,19 +31,23 @@ export const OrderExpandableRow: FunctionComponent<{ row }> = ({ row }) => (
       label={translate('Limits')}
       value={<InfoSummary infoObj={row.limits} />}
     />
+
     <Field
       label={translate('Attributes')}
       value={<InfoSummary infoObj={row.attributes} />}
     />
+
     <Field label={translate('Plan')} value={renderFieldOrDash(row.plan_name)} />
     <Field
       label={translate('Plan unit')}
       value={renderFieldOrDash(row.plan_unit)}
     />
+
     <Field
       label={translate('New plan')}
       value={renderFieldOrDash(row.new_plan_name)}
     />
+
     <Field
       label={translate('Created at')}
       value={formatDateTime(row.created)}

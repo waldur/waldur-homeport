@@ -1,4 +1,4 @@
-import { Play } from '@phosphor-icons/react';
+import { PlayIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paymentProfilesEnable } from 'waldur-js-client';
 
@@ -36,7 +36,7 @@ export const PaymentProfileEnableButton = (props) => {
     <ActionItem
       title={translate('Enable')}
       action={callback}
-      iconNode={<Play weight="bold" />}
+      iconNode={<PlayIcon weight="bold" />}
       {...props.tooltipAndDisabledAttributes}
     />
   );

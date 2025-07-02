@@ -1,4 +1,4 @@
-import { Check } from '@phosphor-icons/react';
+import { CheckIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { userPermissionRequestsApprove } from 'waldur-js-client';
@@ -23,7 +23,7 @@ const PermissionRequestActionDialog = lazyComponent(() =>
 const openPermissionRequestActionDialog = (resolve) =>
   openModalDialog(PermissionRequestActionDialog, {
     resolve,
-    size: 'md',
+    size: 'lg',
   });
 
 export const UserPermissionRequestApproveButton: FunctionComponent<
@@ -65,7 +65,7 @@ export const UserPermissionRequestApproveButton: FunctionComponent<
     <ActionButton
       action={callback}
       title={translate('Approve')}
-      iconNode={<Check />}
+      iconNode={<CheckIcon />}
     />
   );
 };

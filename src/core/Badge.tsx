@@ -8,6 +8,7 @@ import { Tip } from '@waldur/core/Tooltip';
 interface OwnProps extends BadgeProps {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
+  onlyIcon?: boolean;
   tooltip?: string;
   variant?: Variant;
   roundless?: boolean;
@@ -31,6 +32,7 @@ export const Badge: FunctionComponent<OwnProps> = ({
   variant = 'primary',
   leftIcon,
   rightIcon,
+  onlyIcon,
   tooltip,
   roundless,
   light,
@@ -59,6 +61,7 @@ export const Badge: FunctionComponent<OwnProps> = ({
         pill && 'badge-pill',
         leftIcon && 'has-left-icon',
         hasBullet && 'has-bullet',
+        onlyIcon && 'badge-icon',
         className,
       ])}
       {...rest}

@@ -28,6 +28,7 @@ export const fakeSecurityGroup = {
       direction: 'egress',
     },
   ],
+
   tenant: '/api/openstack-tenants/2bfc029827bb41e884ff60f4b8eff3b2/',
 } as SecurityGroup;
 

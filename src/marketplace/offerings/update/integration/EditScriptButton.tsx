@@ -8,6 +8,12 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { EDIT_SCRIPT_FORM_ID } from './constants';
 import { ScriptEditorProps } from './types';
 
+const EditScriptLanguageDialog = lazyComponent(() =>
+  import('./EditScriptLanguageDialog').then((module) => ({
+    default: module.EditScriptLanguageDialog,
+  })),
+);
+
 const EditScriptDialog = lazyComponent(() =>
   import('./EditScriptDialog').then((module) => ({
     default: module.EditScriptDialog,
@@ -19,13 +25,24 @@ export const EditScriptButton: FunctionComponent<ScriptEditorProps> = (
 ) => {
   const dispatch = useDispatch();
   const callback = () => {
-    dispatch(
-      openModalDialog(EditScriptDialog, {
-        resolve: props,
-        formId: EDIT_SCRIPT_FORM_ID,
-        size: props.type !== 'language' && 'xl',
-      }),
-    );
+    if (props.type === 'language') {
+      dispatch(
+        openModalDialog(EditScriptLanguageDialog, {
+          resolve: props,
+          formId: EDIT_SCRIPT_FORM_ID,
+          size: 'sm',
+        }),
+      );
+    } else {
+      dispatch(
+        openModalDialog(EditScriptDialog, {
+          resolve: props,
+          formId: EDIT_SCRIPT_FORM_ID,
+          size: 'xl',
+          onHide: null,
+        }),
+      );
+    }
   };
   return <EditButton onClick={callback} size="sm" />;
 };

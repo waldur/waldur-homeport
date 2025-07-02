@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback } from 'react';
 import { Form } from 'react-final-form';
@@ -76,7 +76,7 @@ export const CustomerCreateDialog: FC<OwnProps> = ({ resolve }) => {
             subtitle={translate(
               'Provide the required information to create a new organization.',
             )}
-            iconNode={<PlusCircle weight="bold" />}
+            iconNode={<PlusCircleIcon weight="bold" />}
             iconColor="success"
             footer={
               <>

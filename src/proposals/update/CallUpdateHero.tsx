@@ -2,11 +2,10 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
-import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { getCallStatus } from '@waldur/proposals/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { CallProposalsButton } from '../CallProposalsButton';
 import { CallDetailsHeaderBody } from '../details/CallDetailsHeaderBody';
 import { Call } from '../types';
 
@@ -21,9 +20,10 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
   const customer = useSelector(getCustomer);
   const status = useMemo(() => getCallStatus(call), [call]);
   return (
-    <PublicDashboardHero2
+    <PublicDashboardHero
       logo={customer?.image}
       logoAlt={call.name}
+      logoCircle
       cardBordered
       title={
         <>
@@ -42,7 +42,6 @@ export const CallUpdateHero: FC<CallUpdateHeroProps> = ({ call, refetch }) => {
       quickActions={
         <div className="d-flex flex-column flex-wrap gap-2">
           <CallActions call={call} refetch={refetch} />
-          <CallProposalsButton call={call} />
         </div>
       }
       quickBody={

@@ -41,7 +41,7 @@ export const CreateCreditButton = ({ refetch }) => {
           size: 'lg',
           form: FORM_ID,
           formId: FORM_ID,
-          onSubmit: callback,
+          submitFn: callback,
         })
       }
     />

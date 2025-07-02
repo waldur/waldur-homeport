@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -71,7 +71,7 @@ const OrganizationRolesField = ({ row }: { row: User }) => {
           label={formatRole(permission.role_name)}
           id="customer-role"
         >
-          {permission.scope_name} <Question />
+          {permission.scope_name} <QuestionIcon />
         </Tip>
         <br />
       </span>
@@ -96,7 +96,7 @@ const ProjectRolesField = ({ row }: { row: User }) => {
           })}
           id="project-role"
         >
-          {permission.scope_name} <Question />
+          {permission.scope_name} <QuestionIcon />
         </Tip>
         <br />
       </span>
@@ -205,6 +205,14 @@ export const UserList: FunctionComponent = () => {
       copyField: (row) => row.full_name,
     },
     {
+      title: translate('Username'),
+      render: ({ row }) => renderFieldOrDash(row.username),
+      copyField: (row) => row.username,
+      keys: ['username'],
+      id: 'username',
+      optional: !isFeatureVisible(UserFeatures.show_username),
+    },
+    {
       title: translate('Email'),
       render: EmailField,
       orderField: 'email',
@@ -304,12 +312,6 @@ export const UserList: FunctionComponent = () => {
       export: (row) => formatDateTime(row.agreement_date),
     },
     {
-      title: translate('Username'),
-      render: ({ row }) => renderFieldOrDash(row.username),
-      keys: ['username'],
-      id: 'username',
-    },
-    {
       title: translate('UUID'),
       render: ({ row }) => <>{row.uuid}</>,
       keys: ['uuid'],
@@ -370,7 +372,9 @@ export const UserList: FunctionComponent = () => {
     : DEFAULT_ENABLED_COLUMNS;
   if (enabledColumns) {
     columns.forEach((column) => {
-      column.optional = !enabledColumns.includes(column.id);
+      if (column.id !== 'username') {
+        column.optional = !enabledColumns.includes(column.id);
+      }
     });
   }
 

@@ -12,7 +12,9 @@ export const KeyValueButton: FunctionComponent<{ items; title }> = (props) => {
 
   const showDetails = useCallback(() => {
     const resolve = { items: props.items, title: props.title };
-    dispatch(openModalDialog(MarketplaceKeyValueDialog, { resolve }));
+    dispatch(
+      openModalDialog(MarketplaceKeyValueDialog, { resolve, size: 'lg' }),
+    );
   }, [dispatch, props.items, props.title]);
 
   return (

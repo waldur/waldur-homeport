@@ -8,6 +8,7 @@ export const CallDocumentsSection = ({ call, refetch }) => {
   const rowActions = ({ row }) => (
     <RemoveDocumentButton file={row} call={call} refetch={refetch} />
   );
+
   return (
     <CallDocumentsCard
       call={call}

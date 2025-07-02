@@ -1,4 +1,4 @@
-import { CheckCircle, Eye, XCircle } from '@phosphor-icons/react';
+import { CheckCircleIcon, EyeIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import { RadarIcon } from '@waldur/core/RadarIcon';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { Proposal, ProposalReview } from '@waldur/proposals/types';
+import { useUser } from '@waldur/workspace/hooks';
 
 import { RateStars } from '../create-review/RateStars';
 
@@ -26,6 +27,18 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
   proposal,
   reviews,
 }) => {
+  const user = useUser();
+  const userIsSubmitter = user.uuid === proposal.created_by_uuid;
+
+  const acceptedMessage = userIsSubmitter
+    ? translate('Your proposal has been successfully accepted.')
+    : translate('The proposal has been successfully accepted.');
+  const declinedMessage = userIsSubmitter
+    ? translate('Your proposal has been declined.')
+    : translate('The proposal has been declined.');
+  const message =
+    proposal.state === 'accepted' ? acceptedMessage : declinedMessage;
+
   const overallScore = useMemo(() => {
     if (!reviews?.length) return 0;
     return (
@@ -42,16 +55,13 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
           <div className="d-flex align-items-center">
             <RadarIcon
               IconComponent={
-                proposal.state === 'accepted' ? CheckCircle : XCircle
+                proposal.state === 'accepted' ? CheckCircleIcon : XCircleIcon
               }
               className="me-2"
               variant={proposal.state === 'accepted' ? 'success' : 'danger'}
             />
-            <p className="mb-0 fw-bold fs-6">
-              {proposal.state === 'accepted'
-                ? translate('Your proposal has been successfully accepted.')
-                : translate('Your proposal has been declined.')}
-            </p>
+
+            <p className="mb-0 fw-bold fs-6">{message}</p>
           </div>
           <div className="d-flex align-items-center flex-grow-1 flex-wrap gap-4">
             <RateStars value={overallScore} className="mb-2" />
@@ -73,7 +83,7 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
               }
             >
               <span className="svg-icon svg-icon-2">
-                <Eye weight="bold" />
+                <EyeIcon weight="bold" />
               </span>
               {translate('More details')}
             </Button>

@@ -46,11 +46,13 @@ export const SigninForm = reduxForm<FormData>({ form: FORM_ID })(
         placeholder={translate('Username')}
         type="text"
       />
+
       <InputGroup
         fieldName="password"
         placeholder={translate('Password')}
         type="password"
       />
+
       <button
         type="submit"
         className="login-submit-button"

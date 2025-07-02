@@ -22,11 +22,12 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
       className={classNames('review-comment d-flex p-5 gap-4', props.className)}
     >
       <Avatar
-        className="symbol symbol-32px symbol-circle flex-shrink-0 lh-0"
         labelClassName="bg-primary-200 text-primary-700"
         name={props.title}
         size={32}
+        circle
       />
+
       <div className="fw-semibold">
         <FormLabel className="mb-0">
           {props.title}

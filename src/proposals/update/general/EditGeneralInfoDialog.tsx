@@ -7,8 +7,9 @@ import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
 import { ENV } from '@waldur/core/config';
 import { required } from '@waldur/core/validators';
 import { SelectField, SubmitButton } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { FormContainer } from '@waldur/form/FormContainer';
-import { MarkdownField } from '@waldur/form/MarkdownField';
+import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -82,11 +83,12 @@ export const EditGeneralInfoDialog = connect<
                 submitting={props.submitting}
                 label={translate('Save')}
               />
+
               <CloseDialogButton />
             </>
           }
         >
-          <FormContainer submitting={props.submitting}>
+          <FormContainer submitting={props.submitting} className="size-lg">
             {props.resolve.name === 'name' && (
               <StringField
                 label={translate('Name')}
@@ -96,11 +98,12 @@ export const EditGeneralInfoDialog = connect<
               />
             )}
             {props.resolve.name === 'description' && (
-              <MarkdownField
-                label={translate('Description')}
+              <MarkdownEditor
                 name="description"
-                required={false}
-                verticalLayout
+                required
+                autoFocus
+                hideLabel
+                spaceless
               />
             )}
             {props.resolve.name === 'reference_code' && (
@@ -125,6 +128,14 @@ export const EditGeneralInfoDialog = connect<
                 name="external_url"
                 required
                 validate={required}
+              />
+            )}
+            {(props.resolve.name === 'reviews_visible_to_submitters' ||
+              props.resolve.name ===
+                'reviewer_identity_visible_to_submitters') && (
+              <AwesomeCheckboxField
+                label={props.resolve.title}
+                name={props.resolve.name}
               />
             )}
           </FormContainer>

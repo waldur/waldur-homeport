@@ -1,4 +1,4 @@
-import { Play } from '@phosphor-icons/react';
+import { PlayIcon } from '@phosphor-icons/react';
 import { openstackInstancesStart } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
@@ -38,6 +38,6 @@ export const StartAction: ActionItemType = ({ resource, ...rest }) => (
     {...getProps()}
     resource={resource}
     {...rest}
-    iconNode={<Play weight="bold" />}
+    iconNode={<PlayIcon weight="bold" />}
   />
 );

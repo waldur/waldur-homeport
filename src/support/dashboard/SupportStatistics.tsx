@@ -20,13 +20,11 @@ const getIssueState = (states: string[]) => ({
 });
 
 export const SupportStatistics = () => {
-  const { data, isLoading, error, refetch } = useQuery(
-    ['support-statistics'],
-    () => supportStatisticsRetrieve().then((r) => r.data),
-    {
-      staleTime: 5 * 60 * 1000,
-    },
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['support-statistics'],
+    queryFn: () => supportStatisticsRetrieve().then((r) => r.data),
+    staleTime: 5 * 60 * 1000,
+  });
 
   return (
     <Row>

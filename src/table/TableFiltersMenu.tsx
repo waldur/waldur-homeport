@@ -1,9 +1,9 @@
 import {
-  ArrowsClockwise,
-  CaretRight,
-  FunnelSimple,
-  Plus,
-  Star,
+  ArrowsClockwiseIcon,
+  CaretRightIcon,
+  FunnelSimpleIcon,
+  PlusIcon,
+  StarIcon,
 } from '@phosphor-icons/react';
 import { debounce, isEqual, throttle } from 'lodash-es';
 import {
@@ -121,7 +121,7 @@ const SaveFilterItems = ({ table, formId, apply }) => {
         >
           <span className="menu-link" aria-hidden="true">
             <span className="menu-title">{translate('Current filters')}</span>
-            <CaretRight size={18} className="ms-auto" weight="bold" />
+            <CaretRightIcon size={20} className="ms-auto" weight="bold" />
           </span>
 
           <div className="menu-sub menu-sub-dropdown w-250px py-3 shadow-sm">
@@ -131,7 +131,7 @@ const SaveFilterItems = ({ table, formId, apply }) => {
               onClick={onSaveFilter}
             >
               <span className="menu-title">{translate('Save as')}</span>
-              <Star size={18} className="ms-auto" weight="bold" />
+              <StarIcon size={20} className="ms-auto" weight="bold" />
             </span>
             {selectedSavedFilter ? (
               <span
@@ -140,7 +140,11 @@ const SaveFilterItems = ({ table, formId, apply }) => {
                 onClick={(e) => onSaveFilter(e, true)}
               >
                 {translate('Update')}
-                <ArrowsClockwise size={18} className="ms-auto" weight="bold" />
+                <ArrowsClockwiseIcon
+                  size={20}
+                  className="ms-auto"
+                  weight="bold"
+                />
               </span>
             ) : null}
           </div>
@@ -155,7 +159,7 @@ const SaveFilterItems = ({ table, formId, apply }) => {
           <span className="menu-title">
             {translate('Saved filters') + ` (${list.length})`}
           </span>
-          <CaretRight size={18} className="ms-auto" weight="bold" />
+          <CaretRightIcon size={20} className="ms-auto" weight="bold" />
         </span>
 
         <div className="menu-sub menu-sub-dropdown w-250px py-3 shadow-sm">
@@ -294,7 +298,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
             data-kt-menu-flip="bottom"
             data-cy={`${props.openName}-add-filter-button`}
           >
-            <FunnelSimple size={16} weight="bold" />
+            <FunnelSimpleIcon size={16} weight="bold" />
           </button>
           <div
             ref={menuEl}
@@ -315,7 +319,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
             data-kt-menu-placement="bottom-start"
             data-cy="table-add-filter-button"
           >
-            <Plus weight="bold" size={28} />
+            <PlusIcon weight="bold" size={28} />
           </Button>
           <div
             ref={menuEl}
@@ -328,6 +332,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
               formId={context.form}
               apply={() => props.applyFiltersFn(true)}
             />
+
             <div className="separator" />
             {props.filters}
           </div>

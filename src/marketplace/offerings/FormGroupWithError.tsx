@@ -16,6 +16,7 @@ export const FormGroupWithError = (inputProps) => (
       readOnly={inputProps.readOnly}
       type="text"
     />
+
     {inputProps.meta.touched && <FieldError error={inputProps.meta.error} />}
   </FormGroup>
 );

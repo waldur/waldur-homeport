@@ -24,7 +24,7 @@ export const CloseDialogButton: React.FC<OwnProps> = ({
   return (
     <Button
       className={className}
-      onClick={closeDialog}
+      onClick={() => closeDialog()}
       variant={variant}
       disabled={disabled}
     >

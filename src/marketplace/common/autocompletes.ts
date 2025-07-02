@@ -27,7 +27,7 @@ export const organizationAutocomplete = async (
 ) => {
   const response = await customersList({
     query: {
-      name: query,
+      query,
       page: page,
       page_size: ENV.pageSize,
       ...extraQueryParams,
@@ -130,19 +130,21 @@ export const categoryAutocomplete = async (
   );
 };
 
+export const OfferingsAutocompleteCommonFields = [
+  'name',
+  'uuid',
+  'url',
+  'category_title',
+  'thumbnail',
+  'customer_name',
+  'customer_uuid',
+] as any[];
+
 export const providerOfferingsAutocomplete = async (
   query: string | MarketplaceProviderOfferingsListData['query'],
   prevOptions,
   currentPage: number,
-  field: MarketplaceProviderOfferingsListData['query']['field'] = [
-    'name',
-    'uuid',
-    'url',
-    'category_title',
-    'thumbnail',
-    'customer_name',
-    'customer_uuid',
-  ],
+  field: MarketplaceProviderOfferingsListData['query']['field'] = OfferingsAutocompleteCommonFields,
 ) => {
   const queryObject = typeof query === 'string' ? { name: query } : query;
   const response = await marketplaceProviderOfferingsList({
@@ -166,15 +168,7 @@ export const publicOfferingsAutocomplete = async (
   query: string | MarketplacePublicOfferingsListData['query'],
   prevOptions,
   currentPage: number,
-  field: MarketplacePublicOfferingsListData['query']['field'] = [
-    'name',
-    'uuid',
-    'url',
-    'category_title',
-    'thumbnail',
-    'customer_name',
-    'customer_uuid',
-  ],
+  field: MarketplacePublicOfferingsListData['query']['field'] = OfferingsAutocompleteCommonFields,
 ) => {
   const queryObject = typeof query === 'string' ? { name: query } : query;
   const response = await marketplacePublicOfferingsList({

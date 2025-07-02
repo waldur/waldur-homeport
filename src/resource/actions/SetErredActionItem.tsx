@@ -1,4 +1,4 @@
-import { CloudX } from '@phosphor-icons/react';
+import { CloudXIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceProviderResourcesSetAsErred } from 'waldur-js-client';
@@ -80,7 +80,7 @@ export const SetErredActionItem: FC<{
       title={translate('Set as erred')}
       action={callback}
       className="text-danger"
-      iconNode={<CloudX weight="bold" />}
+      iconNode={<CloudXIcon weight="bold" />}
       iconColor="danger"
     />
   );

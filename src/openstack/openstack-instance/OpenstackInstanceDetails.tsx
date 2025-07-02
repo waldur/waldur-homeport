@@ -161,7 +161,7 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
           {attributesData.availabilityZone.name}
         </Field>
       )}
-      {attributes['system_volume_size'] && (
+      {typeof attributes['system_volume_size'] === 'number' && (
         <Field label={translate('System volume size')}>
           {attributes['system_volume_size'] / 1024} GB
         </Field>
@@ -171,7 +171,7 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
           {formatVolumeTypeLabel(attributesData.systemVolumeType)}
         </Field>
       )}
-      {attributes['data_volume_size'] && (
+      {typeof attributes['data_volume_size'] === 'number' && (
         <Field label={translate('Data volume size')}>
           {attributes['data_volume_size'] / 1024} GB
         </Field>
@@ -204,7 +204,7 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
           ))}
         </Field>
       )}
-      {attributes['user_data'] && (
+      {typeof attributes['user_data'] == 'string' && (
         <Field label={translate('User data')}>
           <pre>{attributes['user_data']}</pre>
         </Field>

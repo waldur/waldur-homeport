@@ -6,6 +6,7 @@ import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { SetAccessPolicyDialogProps } from '../../actions/SetAccessPolicyDialog';
 import { isVisible } from '../../actions/utils';
 
 const SetAccessPolicyDialog = lazyComponent(() =>
@@ -14,7 +15,10 @@ const SetAccessPolicyDialog = lazyComponent(() =>
   })),
 );
 
-export const SetAccessPolicyButton = ({ offering, refetch }) => {
+export const SetAccessPolicyButton = ({
+  offering,
+  refetch,
+}: SetAccessPolicyDialogProps['resolve']) => {
   const {
     data: organizationGroups,
     isLoading,

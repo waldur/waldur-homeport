@@ -1,4 +1,4 @@
-import { BookOpenText } from '@phosphor-icons/react';
+import { BookOpenTextIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -22,7 +22,7 @@ export const FilteredEventsButton = ({ filter }) => {
           filter,
         })
       }
-      iconNode={<BookOpenText />}
+      iconNode={<BookOpenTextIcon />}
     />
   );
 };

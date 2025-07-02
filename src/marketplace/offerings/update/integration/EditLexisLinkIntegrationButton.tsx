@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -32,7 +32,7 @@ export const EditLexisLinkIntegrationButton: FunctionComponent<{
   return (
     <ActionButton
       action={callback}
-      iconNode={<PencilSimple weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       title={translate('Edit LEXIS link integration options')}
     />
   );

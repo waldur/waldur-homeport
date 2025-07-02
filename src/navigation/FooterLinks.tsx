@@ -1,4 +1,4 @@
-import { Copy } from '@phosphor-icons/react';
+import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -23,7 +23,7 @@ const SupportSubMenuItem = ({ title, onCopy }) =>
       <span className="menu-title">{title}</span>
       <span className="menu-badge">
         <button className="btn btn-active-icon-primary btn-flush ms-2">
-          <Copy />
+          <CopyIcon />
         </button>
       </span>
     </span>
@@ -105,6 +105,7 @@ export const FooterLinks = () => {
               title={ENV.plugins.WALDUR_CORE.SITE_EMAIL}
               onCopy={copyText}
             />
+
             <SupportSubMenuItem
               title={ENV.plugins.WALDUR_CORE.SITE_PHONE}
               onCopy={copyText}

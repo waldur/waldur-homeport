@@ -5,13 +5,18 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { EditAction } from '@waldur/form/EditAction';
 import { openModalDialog } from '@waldur/modal/actions';
 
+import { AccessSubnetFormProps } from './AccessSubnetForm';
+
 const AccessSubnetForm = lazyComponent(() =>
   import('./AccessSubnetForm').then((module) => ({
     default: module.AccessSubnetForm,
   })),
 );
 
-export const AccessSubnetEditButton = ({ row, refetch }) => {
+export const AccessSubnetEditButton = ({
+  row,
+  refetch,
+}: AccessSubnetFormProps) => {
   const dispatch = useDispatch();
   const openFormDialog = useCallback(
     () =>
@@ -19,7 +24,7 @@ export const AccessSubnetEditButton = ({ row, refetch }) => {
         openModalDialog(AccessSubnetForm, {
           refetch,
           row,
-          size: 'md',
+          size: 'lg',
         }),
       ),
     [dispatch, row, refetch],

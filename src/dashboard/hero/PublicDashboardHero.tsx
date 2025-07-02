@@ -2,100 +2,131 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { DashboardHeroLogo } from './DashboardHeroLogo';
+import { Tip } from '@waldur/core/Tooltip';
+
+import { DashboardHeroLogo2 } from './DashboardHeroLogo2';
 import './PublicDashboardHero.scss';
 
 interface PublicDashboardHeroProps {
-  asHero?: boolean;
   backgroundImage?: string;
-  logo: string;
+  logo?: string;
   logoAlt?: string;
-  logoTopLabel?: string | ReactNode;
-  logoBottomLabel?: string | ReactNode;
-  logoTopClass?: string;
-  logoBottomClass?: string;
+  logoSize?: number;
+  logoCircle?: boolean;
+  logoTooltip?: string;
   title: ReactNode;
   actions?: ReactNode;
+  mobileBottomActions?: boolean;
   quickActions?: ReactNode;
   quickBody?: ReactNode;
   quickFooter?: ReactNode;
   quickFooterClassName?: string;
   className?: string;
+  containerClassName?: string;
+  hideQuickSection?: boolean;
+  cardBordered?: boolean;
 }
 
 export const PublicDashboardHero: FC<
   PropsWithChildren<PublicDashboardHeroProps>
 > = (props) => {
-  const body = (
-    <Row className={classNames('public-dashboard-hero-body', props.className)}>
-      <Col md={8} sm={12} className="d-flex">
-        <Card className="w-100 mb-md-0 mb-4">
-          <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch gap-10 flex-grow-1">
-            <DashboardHeroLogo
-              logo={props.logo}
-              logoAlt={props.logoAlt}
-              logoTopLabel={props.logoTopLabel}
-              logoBottomLabel={props.logoBottomLabel}
-              logoTopClass={props.logoTopClass}
-              logoBottomClass={props.logoBottomClass}
-            />
-            <div className="d-flex flex-column flex-grow-1">
-              <div className="d-flex flex-grow-1 flex-sm-row flex-column-reverse">
-                {/* Title */}
-                <div className="flex-grow-1">{props.title}</div>
-                {/* Actions */}
-                <div className="d-flex align-self-end align-self-sm-start">
-                  {props.actions}
-                </div>
-              </div>
-              <div className="mt-6">
-                {/* Details */}
-                {props.children}
-              </div>
-            </div>
-          </Card.Body>
-        </Card>
-      </Col>
-      {/* Quick view */}
-      <Col md={4} sm={12} className="d-flex">
-        <Card className="flex-grow-1">
-          <Card.Body className="d-flex flex-column pb-4">
-            {props.quickActions && (
-              <div className="mb-5">{props.quickActions}</div>
-            )}
-            {props.quickBody && <div>{props.quickBody}</div>}
-            {props.quickFooter && (
-              <div
-                className={classNames(
-                  'flex-grow-1 d-flex align-items-end',
-                  props.quickFooterClassName,
-                )}
-              >
-                {props.quickFooter}
-              </div>
-            )}
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
-  );
-
-  return props.asHero ? (
+  return (
     <div
-      className="public-dashboard-hero__background"
-      style={
-        props.backgroundImage
-          ? { backgroundImage: `url(${props.backgroundImage})` }
-          : {}
-      }
+      className={classNames('public-dashboard-hero', props.containerClassName)}
     >
-      <div className="public-dashboard-hero__table">
-        <div className="public-dashboard-hero__cell">
-          <div className="container-fluid py-16">{body}</div>
-        </div>
-      </div>
+      <Row
+        className={classNames('public-dashboard-hero-body', props.className)}
+      >
+        <Col
+          md={props.hideQuickSection ? undefined : 6}
+          sm={props.hideQuickSection ? undefined : 12}
+          className="d-flex"
+        >
+          <Card
+            className={classNames(
+              'w-100 mb-md-0 mb-4',
+              props.cardBordered && 'card-bordered',
+            )}
+          >
+            <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch flex-grow-1">
+              {props.logo || props.logoAlt ? (
+                <Tip
+                  label={props.logoTooltip}
+                  id={`tip-header-${props.logoTooltip}`}
+                >
+                  <DashboardHeroLogo2
+                    logo={props.logo}
+                    logoAlt={props.logoAlt}
+                    circle={props.logoCircle}
+                    size={props.logoSize || 48}
+                  />
+                </Tip>
+              ) : null}
+              <div className="d-flex flex-column flex-grow-1 gap-2">
+                <div className="d-flex flex-sm-row flex-column-reverse align-items-sm-center gap-3">
+                  {/* Title */}
+                  <div className="flex-grow-1">{props.title}</div>
+                  {/* Actions */}
+                  {props.actions && (
+                    <div
+                      className={
+                        (props.mobileBottomActions
+                          ? 'd-none d-sm-flex '
+                          : 'd-flex ') +
+                        'flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3'
+                      }
+                    >
+                      {props.actions}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  {/* Details */}
+                  {props.children}
+                </div>
+                {/* Actions - at the end */}
+                {props.actions && props.mobileBottomActions && (
+                  <div className="d-sm-none d-flex flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3">
+                    {props.actions}
+                  </div>
+                )}
+              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        {!props.hideQuickSection && (
+          <Col md={6} sm={12} className="d-flex">
+            <Card
+              className={classNames(
+                'flex-grow-1',
+                props.cardBordered && 'card-bordered',
+              )}
+            >
+              <Card.Body className="d-flex flex-column">
+                <Row>
+                  <Col xs>{props.quickBody}</Col>
+                  {/* Quick actions */}
+                  {props.quickActions && (
+                    <Col xs="auto">{props.quickActions}</Col>
+                  )}
+                </Row>
+                {props.quickFooter && (
+                  <div
+                    className={classNames(
+                      'flex-grow-1 d-flex align-items-end',
+                      props.quickFooterClassName,
+                      'mt-5',
+                    )}
+                  >
+                    {props.quickFooter}
+                  </div>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        )}
+      </Row>
     </div>
-  ) : (
-    body
   );
 };

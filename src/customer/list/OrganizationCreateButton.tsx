@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -28,7 +28,7 @@ export const OrganizationCreateButton: FunctionComponent = () => {
     <ActionButton
       title={translate('Add')}
       action={handleClick}
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
     />
   ) : null;

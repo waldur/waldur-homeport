@@ -96,6 +96,7 @@ export const VolumeExtendDialog = reduxForm<
               parse={parseIntField}
               format={formatIntField}
             />
+
             <InputGroup.Text>{translate('GB')}</InputGroup.Text>
           </InputGroup>
         </Form.Group>

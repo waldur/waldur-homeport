@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { OrganizationGroup } from 'waldur-js-client';
@@ -32,7 +32,7 @@ export const OrganizationGroupDetailsButton: FunctionComponent<
   return (
     <ActionItem
       title={translate('Details')}
-      iconNode={<Eye weight="bold" />}
+      iconNode={<EyeIcon weight="bold" />}
       action={() => dispatch(openOrganizationGroupsDialog(props.row))}
       size="sm"
     />

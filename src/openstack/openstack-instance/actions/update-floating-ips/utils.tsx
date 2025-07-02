@@ -55,6 +55,7 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
         }),
       })),
     ],
+
     [resource.ports],
   );
 

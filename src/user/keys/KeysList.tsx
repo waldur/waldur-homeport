@@ -3,6 +3,7 @@ import { SshKey } from 'waldur-js-client';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
@@ -12,6 +13,16 @@ import { useUser } from '@waldur/workspace/hooks';
 
 import { KeyCreateButton } from './KeyCreateButton';
 import { KeyRemoveButton } from './KeyRemoveButton';
+
+const KeysListRowActions = ({ row, fetch }) => {
+  return (
+    <ActionsDropdown
+      row={row}
+      refetch={fetch}
+      actions={[KeyRemoveButton].filter(Boolean)}
+    />
+  );
+};
 
 export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
   user,
@@ -59,6 +70,7 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
       render: ({ row }) => (
         <CopyToClipboardContainer value={row.fingerprint_sha256} />
       ),
+
       export: 'fingerprint_sha256',
     },
     {
@@ -69,17 +81,6 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
     },
   ];
 
-  if (isSelf) {
-    columns.push({
-      title: translate('Actions'),
-      render: ({ row }) => (
-        <KeyRemoveButton uuid={row.uuid} refetch={props.fetch} />
-      ),
-      className: 'text-center col-md-2',
-      export: false,
-    });
-  }
-
   return (
     <Table
       {...props}
@@ -88,6 +89,7 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
       showPageSizeSelector={true}
       verboseName={translate('SSH keys')}
       tableActions={isSelf && <KeyCreateButton />}
+      rowActions={isSelf && KeysListRowActions}
       enableExport={true}
       expandableRow={KeysListExpandableRow}
       hasActionBar={hasActionBar}

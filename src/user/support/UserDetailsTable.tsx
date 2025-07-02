@@ -31,6 +31,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         label={translate('Full name')}
         value={<FieldWithCopy value={props.user.full_name} />}
       />
+
       {getNativeNameVisible() && (
         <FormTable.Item
           label={translate('Native name')}
@@ -41,18 +42,22 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         label={translate('ID code')}
         value={<FieldWithCopy value={props.user.civil_number} />}
       />
+
       <FormTable.Item
         label={translate('Phone numbers')}
         value={<FieldWithCopy value={props.user.phone_number} />}
       />
+
       <FormTable.Item
         label={translate('Username')}
         value={<FieldWithCopy value={props.user.username} />}
       />
+
       <FormTable.Item
         label={translate('Email')}
         value={<FieldWithCopy value={props.user.email} />}
       />
+
       {isFeatureVisible(UserFeatures.show_slug) && (
         <FormTable.Item
           label={translate('Shortname')}
@@ -69,18 +74,22 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         label={translate('Registration method')}
         value={<FieldWithCopy value={props.user.identity_provider_label} />}
       />
+
       <FormTable.Item
         label={translate('Date joined')}
         value={<FieldWithCopy value={formatDateTime(props.user.date_joined)} />}
       />
+
       <FormTable.Item
         label={translate('Organization')}
         value={<FieldWithCopy value={props.user.organization} />}
       />
+
       <FormTable.Item
         label={translate('Job position')}
         value={<FieldWithCopy value={props.user.job_title} />}
       />
+
       {Array.isArray(props.user.affiliations) &&
       props.user.affiliations.length > 0 ? (
         <FormTable.Item

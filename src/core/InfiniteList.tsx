@@ -8,11 +8,11 @@ export const InfiniteList = ({
   RowComponent,
   emptyMessage,
 }: {
-  context: InfiniteQueryObserverResult<{ data: any[] }>;
+  context: InfiniteQueryObserverResult<any>;
   RowComponent;
   emptyMessage: ReactNode;
 }) =>
-  context.status === 'loading' ? (
+  context.status === 'pending' ? (
     <p className="text-center text-dark mb-0">{translate('Loading')}</p>
   ) : context.status === 'error' ? (
     <p className="text-center text-dark mb-0">{translate('Error')}</p>

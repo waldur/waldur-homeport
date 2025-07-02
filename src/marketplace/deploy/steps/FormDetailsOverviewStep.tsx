@@ -12,23 +12,26 @@ import { Field } from '@waldur/resource/summary';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { DetailsOverviewButton } from '../DetailsOverviewButton';
+import { orderCustomerSelector } from '../selectors';
+import { orderProjectSelector } from '../selectors';
 import { FormStepProps } from '../types';
-import { formCustomerSelector, formProjectSelector } from '../utils';
 
 export const FormDetailsOverviewStep = (props: FormStepProps) => {
-  const project = useSelector(formProjectSelector);
-  const customer = useSelector(formCustomerSelector);
+  const project = useSelector(orderProjectSelector);
+  const customer = useSelector(orderCustomerSelector);
 
-  const { data: provider } = useQuery(
-    ['DeployDetailsOverview', 'provider', props.offering?.uuid],
-    () =>
+  const { data: provider } = useQuery({
+    queryKey: ['DeployDetailsOverview', 'provider', props.offering?.uuid],
+
+    queryFn: () =>
       props.offering
         ? getServiceProviderByCustomer({
             customer_uuid: props.offering.customer_uuid,
           })
         : null,
-    { staleTime: 5 * 60 * 1000 },
-  );
+
+    staleTime: 5 * 60 * 1000,
+  });
 
   if (props.offering.shared) {
     // Render with organization and project fields
@@ -53,7 +56,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
               value={
                 <Stack direction="horizontal" gap={2}>
                   {props.offering.thumbnail ? (
-                    <Image src={props.offering.thumbnail} size={25} circle />
+                    <Image src={props.offering.thumbnail} size={24} circle />
                   ) : null}
                   {props.offering.name}
                 </Stack>
@@ -117,7 +120,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
             value={
               <Stack direction="horizontal" gap={2}>
                 {props.offering.thumbnail ? (
-                  <Image src={props.offering.thumbnail} size={25} circle />
+                  <Image src={props.offering.thumbnail} size={24} circle />
                 ) : null}
                 {props.offering.name}
               </Stack>

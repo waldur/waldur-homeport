@@ -23,6 +23,7 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
         }}
         label={label}
       />
+
       <BackendIdTip backendId={row.backend_id} />
       <EndDateTooltip end_date={row.end_date} />
     </>

@@ -53,6 +53,7 @@ export const OrganizationCostPoliciesList: FC = () => {
               row={{ name: row.scope_name, uuid: row.scope_uuid }}
             />
           ),
+
           filter: 'organization',
           inlineFilter: (row) => ({
             name: row.scope_name,

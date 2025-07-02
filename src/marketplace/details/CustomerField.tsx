@@ -9,10 +9,10 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 
 import { organizationAutocomplete } from '../common/autocompletes';
+import { orderCustomerSelector } from '../deploy/selectors';
 import { FormGroup } from '../offerings/FormGroup';
 
 import { ORDER_FORM_ID } from './constants';
-import { orderCustomerSelector } from './utils';
 
 export const CustomerField: FC<{ organizationGroups }> = ({
   organizationGroups,

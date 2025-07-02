@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -17,7 +17,7 @@ export const CreateProviderOfferingUserButton = ({ refetch }) => {
   return (
     <ActionButton
       title={translate('Create')}
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
       action={() =>
         dispatch(
           openModalDialog(CreateProviderOfferingUserDialog, {

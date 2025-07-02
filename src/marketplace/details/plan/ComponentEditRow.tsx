@@ -82,6 +82,7 @@ const RowWrapper2 = (
           aria-describedby={`basic-addon-${props.offeringComponent.type}`}
           {...props.input}
         />
+
         {props.offeringComponent.measured_unit && (
           <InputGroup.Text
             className="text-muted"

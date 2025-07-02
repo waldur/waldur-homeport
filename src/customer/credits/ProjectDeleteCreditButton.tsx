@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { projectCreditsDestroy } from 'waldur-js-client';
@@ -48,7 +48,7 @@ export const ProjectDeleteCreditButton = ({ row, refetch }) => {
       onClick={() => handleDeleteConfirmation()}
     >
       <span className="svg-icon svg-icon-2 svg-icon-danger">
-        <Trash weight="bold" />
+        <TrashIcon weight="bold" />
       </span>
       {translate('Delete')}
     </Dropdown.Item>

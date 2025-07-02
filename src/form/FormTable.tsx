@@ -1,4 +1,4 @@
-import { Question, WarningCircle } from '@phosphor-icons/react';
+import { QuestionIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Table } from 'react-bootstrap';
@@ -42,7 +42,7 @@ const FormTableItem: FC<FormTableItemProps> = ({ actions, ...props }) => {
               {Boolean(props.tooltip) &&
                 wrapTooltip(
                   props.tooltip,
-                  <Question
+                  <QuestionIcon
                     size={20}
                     weight="bold"
                     className="ms-2 text-muted mb-1"
@@ -52,7 +52,7 @@ const FormTableItem: FC<FormTableItemProps> = ({ actions, ...props }) => {
               {Boolean(props.warnTooltip) &&
                 wrapTooltip(
                   props.warnTooltip,
-                  <WarningCircle
+                  <WarningCircleIcon
                     size={20}
                     weight="bold"
                     className="ms-2 text-warning mb-1"
@@ -76,7 +76,7 @@ const FormTableItem: FC<FormTableItemProps> = ({ actions, ...props }) => {
             {Boolean(props.tooltip) &&
               wrapTooltip(
                 props.tooltip,
-                <Question
+                <QuestionIcon
                   size={20}
                   weight="bold"
                   className="ms-2 text-muted mb-1"
@@ -86,7 +86,7 @@ const FormTableItem: FC<FormTableItemProps> = ({ actions, ...props }) => {
             {Boolean(props.warnTooltip) &&
               wrapTooltip(
                 props.warnTooltip,
-                <WarningCircle
+                <WarningCircleIcon
                   size={20}
                   weight="bold"
                   className="ms-2 text-warning mb-1"
@@ -147,6 +147,7 @@ interface FormTableProps {
 }
 
 const TABLE_GY_SPACE_REGEX = /(?<=\s|^)(g[y]?-([1-9]\d*))( ?)(?=\s|$)/;
+const TABLE_GX_SPACE_REGEX = /(?<=\s|^)(g[x]?-([1-9]\d*))( ?)(?=\s|$)/;
 
 const FormTable: FC<PropsWithChildren<FormTableProps>> & {
   Item: FC<FormTableItemProps>;
@@ -162,6 +163,7 @@ const FormTable: FC<PropsWithChildren<FormTableProps>> & {
         props.detailsMode && 'details-mode',
         props.alignTop && 'align-top',
         !TABLE_GY_SPACE_REGEX.test(props.className) && 'gy-base',
+        !TABLE_GX_SPACE_REGEX.test(props.className) && 'gx-5',
         props.className,
       )}
     >

@@ -1,4 +1,4 @@
-import { Share } from '@phosphor-icons/react';
+import { ShareIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -22,7 +22,7 @@ export const FinancialReportSendButton = () => {
       className="btn-outline"
     >
       <span className="svg-icon svg-icon-2">
-        <Share />
+        <ShareIcon />
       </span>{' '}
       {translate('Send')}
     </Button>

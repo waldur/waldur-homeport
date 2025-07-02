@@ -74,7 +74,6 @@ export const RemoteSyncExpandableRow: FC<{
           </div>
         }
         hasActionBar={false}
-        cardBordered={false}
         minHeight="auto"
       />
     </ExpandableContainer>

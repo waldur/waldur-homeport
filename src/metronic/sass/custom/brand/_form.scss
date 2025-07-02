@@ -1,5 +1,9 @@
 .form-switch.form-check-solid .form-check-input:checked {
   background-color: $brand;
+
+  &:disabled {
+    background-color: $brand-100;
+  }
 }
 
 .form-check-input {

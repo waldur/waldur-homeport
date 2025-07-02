@@ -19,6 +19,7 @@ export const RoleForm: FC<{ role?; submitting? }> = (props) => {
         required
         disabled={props.role?.is_system_role}
       />
+
       <SelectField
         name="content_type"
         label={translate('Type')}
@@ -28,6 +29,7 @@ export const RoleForm: FC<{ role?; submitting? }> = (props) => {
         options={ROLE_TYPES}
         simpleValue
       />
+
       <PermissionField
         name="permissions"
         label={translate('Permissions')}

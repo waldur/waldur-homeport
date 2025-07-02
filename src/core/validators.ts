@@ -19,6 +19,14 @@ export const isGuid = (value) => {
   }
 };
 
+export const isMatchPattern =
+  (regex: RegExp, message = translate('Please match the requested format.')) =>
+  (value) => {
+    if (value && !value.match(regex)) {
+      return message;
+    }
+  };
+
 export const required = (value) =>
   value || value === 0 ? undefined : translate('This field is required.');
 

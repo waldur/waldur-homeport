@@ -9,13 +9,14 @@ import { translate } from '@waldur/i18n';
 interface AccountingPeriodFieldProps {
   options: PeriodOption[];
   reactSelectProps?: Partial<SelectProps>;
+  name?: string;
 }
 
 export const AccountingPeriodField: FunctionComponent<
   AccountingPeriodFieldProps
 > = (props) => (
   <Field
-    name="accounting_period"
+    name={props.name || 'accounting_period'}
     component={(prop) => (
       <Select
         placeholder={translate('Select accounting period')}

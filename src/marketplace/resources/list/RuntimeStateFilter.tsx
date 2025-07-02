@@ -14,16 +14,17 @@ export const RuntimeStateFilter: React.FC<{}> = () => {
   const { params } = useCurrentStateAndParams();
   const project = useSelector(getProject);
 
-  const { data, isLoading } = useQuery(
-    ['runtime-states', project?.uuid, params.category_uuid],
-    () =>
+  const { data, isLoading } = useQuery({
+    queryKey: ['runtime-states', project?.uuid, params.category_uuid],
+
+    queryFn: () =>
       marketplaceRuntimeStatesList({
         query: {
           project_uuid: project?.uuid,
           category_uuid: params.category_uuid,
         },
       }).then((r) => r.data),
-  );
+  });
 
   if (isLoading) {
     return <LoadingSpinner />;

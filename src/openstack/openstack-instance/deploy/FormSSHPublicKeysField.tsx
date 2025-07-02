@@ -1,8 +1,9 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { KeysListData } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
@@ -15,7 +16,7 @@ import { keysListTable } from '@waldur/user/keys/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
 const filtersSelector = createSelector(getUser, (user) => {
-  const result: Record<string, any> = {};
+  const result: KeysListData['query'] = {};
   if (user) {
     result.user_uuid = user.uuid;
   }
@@ -67,7 +68,7 @@ export const FormSSHPublicKeysField = ({ change, ...props }: OwnProps) => {
           onClick={openFormDialog}
         >
           <span className="svg-icon svg-icon-2">
-            <PlusCircle weight="bold" />
+            <PlusCircleIcon weight="bold" />
           </span>
           {translate('Create new')}
         </Button>

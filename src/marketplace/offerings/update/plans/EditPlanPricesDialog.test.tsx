@@ -10,6 +10,7 @@ import { EditPlanPricesDialog } from './EditPlanPricesDialog';
 // Mock dependencies
 vi.mock('waldur-js-client', () => ({
   marketplacePlansUpdatePrices: vi.fn(),
+  formDataBodySerializer: vi.fn(),
 }));
 
 vi.mock('@waldur/modal/hooks', () => ({

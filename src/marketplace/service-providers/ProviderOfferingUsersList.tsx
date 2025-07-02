@@ -61,6 +61,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
           label={row.offering_name}
         />
       ),
+
       filter: 'offering',
       inlineFilter: (row) => ({
         name: row.offering_name,
@@ -88,6 +89,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
       orderField: 'modified',
     },
   ];
+
   return (
     <Table
       {...tableProps}

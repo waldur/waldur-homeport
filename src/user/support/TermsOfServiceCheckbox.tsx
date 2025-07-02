@@ -28,6 +28,7 @@ export const TermsOfServiceCheckbox: FunctionComponent<
           }}
           disabled={isLoading || Boolean(user.agreement_date)}
         />
+
         <Form.Check.Label className="opacity-100">
           {!user.agreement_date
             ? translate(

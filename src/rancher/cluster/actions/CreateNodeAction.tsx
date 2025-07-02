@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { RancherCluster } from 'waldur-js-client';
 
@@ -19,7 +19,7 @@ export const CreateNodeAction: FC<{ resource: RancherCluster }> = ({
   !ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE && Boolean(resource.tenant) ? (
     <DialogActionButton
       title={translate('Create node')}
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
       modalComponent={CreateNodeDialog}
       resource={resource}
     />

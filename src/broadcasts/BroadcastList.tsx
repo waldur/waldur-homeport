@@ -1,5 +1,7 @@
-import { FunctionComponent } from 'react';
-import { BroadcastMessage } from 'waldur-js-client';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
+import { BroadcastMessage, BroadcastMessagesListData } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
@@ -10,9 +12,10 @@ import { useTable } from '@waldur/table/useTable';
 
 import { BroadcastCreateButton } from './BroadcastCreateButton';
 import { BroadcastExpandableRow } from './BroadcastExpandableRow';
+import { BroadcastFilter } from './BroadcastFilter';
 import { BroadcastsRowActions } from './BroadcastsRowActions';
 
-const mandatoryFields = [
+const mandatoryFields: BroadcastMessagesListData['query']['field'] = [
   'uuid',
   'author_full_name',
   'subject',
@@ -24,11 +27,19 @@ const mandatoryFields = [
 ];
 
 export const BroadcastList: FunctionComponent<{}> = () => {
+  const filterForm: any = useSelector(getFormValues('BroadcastsFilter'));
+  const filter = useMemo(
+    (): BroadcastMessagesListData['query'] => ({
+      state: filterForm?.state?.value,
+    }),
+    [filterForm],
+  );
   const props = useTable({
     table: 'broadcast',
     fetchData: createFetcher('broadcast-messages'),
     queryField: 'subject',
     mandatoryFields,
+    filter,
   });
   return (
     <Table<BroadcastMessage>
@@ -60,6 +71,7 @@ export const BroadcastList: FunctionComponent<{}> = () => {
               pill
             />
           ),
+          filter: 'state',
         },
         {
           title: translate('Created at'),
@@ -69,6 +81,7 @@ export const BroadcastList: FunctionComponent<{}> = () => {
       ]}
       verboseName={translate('broadcasts')}
       tableActions={<BroadcastCreateButton refetch={props.fetch} />}
+      filters={<BroadcastFilter />}
       expandableRow={BroadcastExpandableRow}
       initialPageSize={10}
       showPageSizeSelector={true}

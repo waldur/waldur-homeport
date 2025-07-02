@@ -10,6 +10,7 @@ import { OpenStackNetworkSummaryConfiguration } from '@waldur/openstack/openstac
 import { OpenStackSnapshotSummaryConfiguration } from '@waldur/openstack/openstack-snapshot/summary';
 import { OpenStackSubNetSummaryConfiguration } from '@waldur/openstack/openstack-subnet/summary';
 import {
+  OpenStackPortSummaryConfiguration,
   OpenStackRouterSummaryConfiguration,
   OpenStackTenantSummaryConfiguration,
 } from '@waldur/openstack/openstack-tenant/summary';
@@ -42,6 +43,7 @@ register(OpenStackNetworkSummaryConfiguration);
 register(OpenStackRouterSummaryConfiguration);
 register(OpenStackSnapshotSummaryConfiguration);
 register(OpenStackSubNetSummaryConfiguration);
+register(OpenStackPortSummaryConfiguration);
 register(OpenStackTenantSummaryConfiguration);
 register(OpenStackInstanceSummaryConfiguration);
 register(OpenStackVolumeSummaryConfiguration);

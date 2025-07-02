@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Issue } from 'waldur-js-client';
+import { Issue, SupportIssuesListData } from 'waldur-js-client';
 
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -27,6 +27,7 @@ interface OwnProps {
     | 'time_in_progress'
     | 'resource_type'
   )[];
+
   scope?: Record<string, any>;
   scopeType?: string;
   filter?: Record<string, any>;
@@ -35,7 +36,7 @@ interface OwnProps {
 const mapStateToFilter = createSelector(
   getFormValues('IssuesFilter'),
   (filters: any) => {
-    const result: Record<string, any> = {};
+    const result: SupportIssuesListData['query'] = {};
     if (filters?.status) {
       result.status = filters.status.map((option) => option.value);
     }
@@ -65,6 +66,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         render: ({ row }) => (
           <IssueLinkField label={row.key || 'N/A'} row={row} />
         ),
+
         export: (row) => row.key || 'N/A',
         exportKeys: ['key'],
       },
@@ -91,6 +93,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         export: 'description',
       },
     ];
+
     if (supportOrStaff && !hiddenColumns.includes('resource_type')) {
       columns.push({
         visible: false,

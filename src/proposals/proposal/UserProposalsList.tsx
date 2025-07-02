@@ -1,19 +1,16 @@
-import { Eye } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Proposal } from 'waldur-js-client';
+import { Proposal, ProposalProposalsListData } from 'waldur-js-client';
 
+import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PROPOSALS_FILTER_FORM_ID } from '@waldur/proposals/constants';
 import { getProposalStateOptions } from '@waldur/proposals/utils';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { router } from '@waldur/router';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
@@ -29,38 +26,19 @@ import { ProposalsTableFilter } from './ProposalsTableFilter';
 const filtersSelector = createSelector(
   getFormValues(PROPOSALS_FILTER_FORM_ID),
   (filters: any) => {
-    const result: Record<string, any> = {};
+    const result: ProposalProposalsListData['query'] = {};
     if (filters?.state) {
       result.state = filters.state.map((option) => option.value);
     }
     if (filters?.call) {
       result.call_uuid = filters.call.uuid;
     }
-    result.o = '-round__cutoff_time';
+    result.o = ['-round__cutoff_time'];
     return result;
   },
 );
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
-
-const ViewProposalAction = ({ row }) => {
-  const action = () => {
-    router.stateService.go('proposals.manage-proposal', {
-      proposal_uuid: row.uuid,
-    });
-  };
-  return (
-    <ActionItem
-      title={translate('View')}
-      action={action}
-      iconNode={<Eye weight="bold" />}
-    />
-  );
-};
-
-const UserProposalsRowActions = ({ row }) => (
-  <ActionsDropdown row={row} actions={[ViewProposalAction]} />
-);
 
 export const UserProposalsList: FC = () => {
   const {
@@ -90,7 +68,14 @@ export const UserProposalsList: FC = () => {
   const columns: Column<Proposal>[] = [
     {
       title: translate('Proposal'),
-      render: ({ row }) => <>{row.name}</>,
+      render: ({ row }) => (
+        <Link
+          state="proposals.manage-proposal"
+          params={{ proposal_uuid: row.uuid }}
+          label={row.name}
+        />
+      ),
+
       keys: ['name'],
       id: 'proposal',
     },
@@ -152,6 +137,7 @@ export const UserProposalsList: FC = () => {
             : DASH_ESCAPE_CODE}
         </>
       ),
+
       optional: true,
       keys: ['oecd_fos_2007_code', 'oecd_fos_2007_label'],
       id: 'oecd_fos_code',
@@ -166,7 +152,6 @@ export const UserProposalsList: FC = () => {
       verboseName={translate('Proposals')}
       hasQuery={true}
       hasOptionalColumns
-      rowActions={UserProposalsRowActions}
       filters={<ProposalsTableFilter initialValues={initialValues} />}
     />
   );

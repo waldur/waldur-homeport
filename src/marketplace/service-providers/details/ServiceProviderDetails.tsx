@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
 
-import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -57,13 +57,14 @@ const getProviderPageTabs = (data): PageBarTab[] => {
 
 const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
   return (
-    <PublicDashboardHero2
+    <PublicDashboardHero
       hideQuickSection
       cardBordered
       logo={data.provider.customer_image}
       className="container-fluid my-5"
       logoAlt={data.provider.customer_name}
       logoTooltip={data.provider.customer_name}
+      logoCircle
       title={
         <Stack direction="horizontal" gap={2} className="gap-6 text-muted mb-1">
           {data.provider.customer_country && (
@@ -78,7 +79,7 @@ const ProviderDetailsHero: FunctionComponent<ProviderDetailsProps> = (data) => {
         value={data.provider.description}
         isStuck={true}
       />
-    </PublicDashboardHero2>
+    </PublicDashboardHero>
   );
 };
 

@@ -1,4 +1,4 @@
-import { PauseCircle } from '@phosphor-icons/react';
+import { PauseCircleIcon } from '@phosphor-icons/react';
 import { vmwareVirtualMachineSuspend } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -18,6 +18,6 @@ export const SuspendAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     apiMethod={(id) => vmwareVirtualMachineSuspend({ path: { uuid: id } })}
     refetch={refetch}
-    iconNode={<PauseCircle weight="bold" />}
+    iconNode={<PauseCircleIcon weight="bold" />}
   />
 );

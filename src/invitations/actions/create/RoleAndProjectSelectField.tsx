@@ -1,4 +1,4 @@
-import { CaretDown } from '@phosphor-icons/react';
+import { CaretDownIcon } from '@phosphor-icons/react';
 import React, {
   useCallback,
   useEffect,
@@ -219,8 +219,9 @@ const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {
           readOnly
           className="pe-12"
         />
+
         <span className="svg-icon svg-icon-1 rotate-180 position-absolute mx-4 end-0 h-100 d-flex align-items-center">
-          <CaretDown />
+          <CaretDownIcon />
         </span>
       </FormGroup>
       <RoleAndProjectSelectPopup

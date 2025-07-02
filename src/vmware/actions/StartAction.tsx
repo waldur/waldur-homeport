@@ -1,4 +1,4 @@
-import { Play } from '@phosphor-icons/react';
+import { PlayIcon } from '@phosphor-icons/react';
 import { vmwareVirtualMachineStart } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -21,6 +21,6 @@ export const StartAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     apiMethod={(id) => vmwareVirtualMachineStart({ path: { uuid: id } })}
     refetch={refetch}
-    iconNode={<Play weight="bold" />}
+    iconNode={<PlayIcon weight="bold" />}
   />
 );

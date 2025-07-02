@@ -4,6 +4,7 @@ import * as Sentry from '@sentry/react';
 import { ENV } from './core/config';
 import { generateBrandColors, hexToRgb } from './core/generateColors';
 import { LanguageUtilsService } from './i18n/LanguageUtilsService';
+import { getConsent } from './navigation/cookies/CookiesStorage';
 import { attachTransitions } from './transitions';
 
 function initSentry() {
@@ -68,9 +69,10 @@ function initCssVariables() {
 
 export let MatomoInstance: MatomoTracker = null;
 
-export function afterBootstrap() {
-  document.title = ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE;
+export function initMatomoTracker() {
+  const isAllowed = getConsent() === 'true';
   if (
+    isAllowed &&
     ENV.plugins.WALDUR_CORE.MATOMO_URL_BASE &&
     ENV.plugins.WALDUR_CORE.MATOMO_SITE_ID
   )
@@ -78,6 +80,11 @@ export function afterBootstrap() {
       urlBase: ENV.plugins.WALDUR_CORE.MATOMO_URL_BASE,
       siteId: ENV.plugins.WALDUR_CORE.MATOMO_SITE_ID,
     });
+}
+
+export function afterBootstrap() {
+  document.title = ENV.plugins.WALDUR_CORE.FULL_PAGE_TITLE;
+  initMatomoTracker();
   initSentry();
   LanguageUtilsService.checkLanguage();
   attachTransitions();

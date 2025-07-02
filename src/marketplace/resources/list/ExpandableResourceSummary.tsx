@@ -23,6 +23,7 @@ const StaticResourceSummary: FunctionComponent<{ row }> = ({ row }) => (
       label={translate('Plan details')}
       value={row.plan_uuid && <PlanDetailsLink resource={row.uuid} />}
     />
+
     <Field
       label={translate('Attributes')}
       value={

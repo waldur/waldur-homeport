@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SubmissionError } from 'redux-form';
 import {
@@ -33,67 +33,72 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
   const queryClient = useQueryClient();
   const customer = useSelector(getCustomer);
 
-  const { data: secretCode } = useQuery(
-    ['ServiceProviderSecretCode', serviceProvider?.uuid],
-    () =>
+  const { data: secretCode, error } = useQuery({
+    queryKey: ['ServiceProviderSecretCode', serviceProvider?.uuid],
+
+    queryFn: () =>
       serviceProvider?.uuid
         ? serviceProviderApiSecretCodeRetrieve({
             path: { uuid: serviceProvider.uuid },
           }).then((r) => r.data)
         : null,
+
+    refetchOnWindowFocus: false,
+  });
+
+  useEffect(() => {
+    if (error) {
+      dispatch(
+        showErrorResponse(
+          error as any,
+          translate('Unable to retrieve service provider API secret code.'),
+        ),
+      );
+    }
+  }, [error, dispatch]);
+
+  const { mutate: regenerateSecretCode, isPending: isGenerating } = useMutation(
     {
-      refetchOnWindowFocus: false,
-      onError: (error: any) => {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to get service provider API secret code.'),
-          ),
-        );
+      mutationFn: async () => {
+        try {
+          await waitForConfirmation(
+            dispatch,
+            translate('Regenerate secret API code'),
+            translate(
+              'After secret API code has been regenerated, it will not be possible to submit usage with the old key.',
+            ),
+            {
+              type: 'warning',
+              positiveButton: translate('Regenerate'),
+              negativeButton: translate('Cancel'),
+            },
+          );
+        } catch {
+          return;
+        }
+
+        try {
+          const data = await serviceProviderApiSecretCodeGenerate({
+            path: { uuid: serviceProvider.uuid },
+          }).then((r) => r.data);
+          queryClient.setQueryData(
+            ['ServiceProviderSecretCode', serviceProvider?.uuid],
+            data,
+          );
+          dispatch(
+            showSuccess(
+              translate('Service provider API secret code has been generated.'),
+            ),
+          );
+        } catch (error) {
+          dispatch(
+            showErrorResponse(
+              error,
+              translate('Unable to generate service provider API secret code.'),
+            ),
+          );
+        }
       },
-    },
-  );
-
-  const { mutate: regenerateSecretCode, isLoading: isGenerating } = useMutation(
-    async () => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Regenerate secret API code'),
-          translate(
-            'After secret API code has been regenerated, it will not be possible to submit usage with the old key.',
-          ),
-          {
-            type: 'warning',
-            positiveButton: translate('Regenerate'),
-            negativeButton: translate('Cancel'),
-          },
-        );
-      } catch {
-        return;
-      }
-
-      try {
-        const data = await serviceProviderApiSecretCodeGenerate({
-          path: { uuid: serviceProvider.uuid },
-        }).then((r) => r.data);
-        queryClient.setQueryData(
-          ['ServiceProviderSecretCode', serviceProvider?.uuid],
-          data,
-        );
-        dispatch(
-          showSuccess(
-            translate('Service provider API secret code has been generated.'),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to generate service provider API secret code.'),
-          ),
-        );
-      }
     },
   );
 
@@ -139,6 +144,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
             />
           }
         />
+
         <FormTable.Item
           label={translate('Description')}
           value={serviceProvider?.description || 'N/A'}

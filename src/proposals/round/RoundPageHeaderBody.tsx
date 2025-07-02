@@ -1,42 +1,27 @@
 import { ProtectedRound } from 'waldur-js-client';
 
-import { formatDateTime, formatRelativeWithHour } from '@waldur/core/dateUtils';
+import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-
-import { getRoundStatus } from '../utils';
 
 interface RoundPageHeaderBodyProps {
   round: ProtectedRound;
 }
 
 export const RoundPageHeaderBody = (props: RoundPageHeaderBodyProps) => {
-  const roundStatus = getRoundStatus(props.round);
   return (
-    <p className="fw-bold">
-      {roundStatus.label === 'Open' && (
-        <p>
-          {translate('Open round ends')}:{' '}
-          <span className="text-danger">
-            {formatRelativeWithHour(props.round.cutoff_time)}
-          </span>
-        </p>
-      )}
-      {roundStatus.label === 'Ended' && (
-        <p>
-          {translate('The round has ended on: ')}
-          <span className="text-danger">
-            {formatDateTime(props.round.cutoff_time)}
-          </span>
-        </p>
-      )}
-      {roundStatus.label === 'Scheduled' && (
-        <p>
-          {translate('The round will be open on: ')}
-          <span className="text-danger">
-            {formatDateTime(props.round.start_time)}
-          </span>
-        </p>
-      )}
-    </p>
+    <div className="d-flex gap-3">
+      <div>
+        <span className="fw-bolder me-2">{translate('Start date')}:</span>
+        <span className="text-muted">
+          {formatDateTime(props.round.start_time)}
+        </span>
+      </div>
+      <div>
+        <span className="fw-bolder me-2">{translate('End date')}:</span>
+        <span className="text-muted">
+          {formatDate(props.round.cutoff_time)}
+        </span>
+      </div>
+    </div>
   );
 };

@@ -49,6 +49,7 @@ export const InvoicesList: FunctionComponent = () => {
           {row.number}
         </Link>
       ),
+
       export: 'number',
     },
     {
@@ -58,6 +59,7 @@ export const InvoicesList: FunctionComponent = () => {
       inlineFilter: (row) => [
         getInvoiceStatusOptions().find((s) => s.value === row.state),
       ],
+
       export: 'state',
     },
     {
@@ -71,6 +73,7 @@ export const InvoicesList: FunctionComponent = () => {
       export: 'due_date',
     },
   ];
+
   const activeFixedPriceProfile = getActiveFixedPricePaymentProfile(
     customer.payment_profiles,
   );

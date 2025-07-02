@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const MONACO_LANGUAGE_PATH_MAP = {
   python: () => import('monaco-editor/esm/vs/basic-languages/python/python.js'),
   yaml: () => import('monaco-editor/esm/vs/basic-languages/yaml/yaml.js'),
   shell: () => import('monaco-editor/esm/vs/basic-languages/shell/shell.js'),
+  ansible: () => import('monaco-editor/esm/vs/basic-languages/yaml/yaml.js'),
 };
 
 export const MonacoEditor = ({
@@ -16,6 +17,7 @@ export const MonacoEditor = ({
 }) => {
   const editorRef = useRef(null);
   const containerRef = useRef(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const loadMonacoAndLanguage = async () => {
@@ -55,6 +57,7 @@ export const MonacoEditor = ({
           onChange?.(editorRef.current.getValue());
         });
       }
+      setReady(true);
     };
     loadMonacoAndLanguage();
 
@@ -65,6 +68,14 @@ export const MonacoEditor = ({
       }
     };
   }, []); // Empty dependency array as we want this to run once
+
+  // Assume the value changes from the outside
+  useEffect(() => {
+    if (!ready) return;
+    if (editorRef.current && value !== editorRef.current.getValue()) {
+      editorRef.current.setValue(value || '');
+    }
+  }, [editorRef?.current, ready, value]);
 
   return (
     <div ref={containerRef} style={{ width: '100%', height: `${height}px` }} />

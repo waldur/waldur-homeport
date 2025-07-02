@@ -1,4 +1,4 @@
-import { CaretDown, FunnelSimple } from '@phosphor-icons/react';
+import { CaretDownIcon, FunnelSimpleIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Card, OverlayTrigger, Popover, Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import { Project } from 'waldur-js-client';
 
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
+import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -41,6 +42,9 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
     getFormValues(MARKETPLACE_LANDING_FILTER_FORM),
   ) as FormData;
 
+  const { syncResourceFilters } =
+    useOrganizationAndProjectFiltersForResources();
+
   const apply = useCallback(
     (formData) => {
       filterItems.forEach((item) => {
@@ -55,8 +59,9 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
       });
       setShow(false);
       syncFiltersToURL(formData);
+      syncResourceFilters(formData);
     },
-    [setShow, dispatch],
+    [setShow, dispatch, syncResourceFilters],
   );
 
   // To initialize & apply filters (from URL)
@@ -105,6 +110,7 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
                 customer_uuid={formValues?.organization?.uuid}
                 isDisabled={!formValues?.organization?.uuid}
               />
+
               <Stack direction="horizontal" gap={4}>
                 <Button
                   variant="outline"
@@ -129,9 +135,9 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
         }
         onClick={() => setShow((v) => !v)}
       >
-        <FunnelSimple size={20} className="svg-icon" />
+        <FunnelSimpleIcon size={20} className="svg-icon" />
         {translate('Organization')} & {translate('Project')}
-        <CaretDown size={18} className="svg-icon rotate-180 ms-2 me-0" />
+        <CaretDownIcon size={18} className="svg-icon rotate-180 ms-2 me-0" />
       </Button>
     </OverlayTrigger>
   );

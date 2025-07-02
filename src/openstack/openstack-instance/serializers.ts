@@ -23,11 +23,23 @@ const serializePorts = (networks) => {
   if (!networks?.length || !networks[0]?.subnet) {
     return undefined;
   }
-  return networks.map((network) => ({
-    subnet: network.subnet.url,
-  }));
-};
 
+  return networks.map((network) => {
+    const port = {
+      subnet: network.subnet.url,
+      fixed_ips: undefined,
+    };
+
+    // Add fixed_ip if it exists
+    if (network.fixed_ip) {
+      port.fixed_ips = [
+        { ip_address: network.fixed_ip, subnet_id: network.subnet.backend_id },
+      ];
+    }
+
+    return port;
+  });
+};
 const serializeSecurityGroups = (groups) => {
   if (!groups) {
     return undefined;

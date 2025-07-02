@@ -1,5 +1,6 @@
-import { UserCirclePlus } from '@phosphor-icons/react';
+import { UserCirclePlusIcon } from '@phosphor-icons/react';
 import { reduxForm } from 'redux-form';
+import { RoleDetails } from 'waldur-js-client';
 
 import { post } from '@waldur/core/api';
 import { required } from '@waldur/core/validators';
@@ -10,7 +11,6 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Role } from '@waldur/permissions/types';
 import { ExpirationTimeGroup } from '@waldur/project/team/ExpirationTimeGroup';
 import { RoleGroup } from '@waldur/project/team/RoleGroup';
 import { UserListOptionInline } from '@waldur/project/team/UserListOptionInline';
@@ -21,7 +21,7 @@ import { AddUserDialogProps } from './types';
 const FORM_ID = 'AddUserDialog';
 
 interface AddUserDialogFormData {
-  role: Role;
+  role: RoleDetails;
   expiration_time: string;
   user: any;
 }
@@ -71,7 +71,7 @@ export const AddUserDialog = reduxForm<
         subtitle={translate(
           'Select a user to assign a role within the project.',
         )}
-        iconNode={<UserCirclePlus weight="bold" />}
+        iconNode={<UserCirclePlusIcon weight="bold" />}
         iconColor="success"
         footer={
           <>
@@ -99,6 +99,7 @@ export const AddUserDialog = reduxForm<
             required={true}
             validate={[required]}
           />
+
           {roles && roles.length === 1 ? null : <RoleGroup types={roleTypes} />}
           <ExpirationTimeGroup />
         </FormContainer>

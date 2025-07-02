@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { User } from 'waldur-js-client';
 
@@ -14,6 +14,7 @@ interface RowProps {
   value: string;
   description?: string;
   requiredMsg?: string | null;
+  disabled?: boolean;
   protected?: boolean;
   protectedMsg?: string;
   name: string;
@@ -52,14 +53,15 @@ export const UserEditRow = (props: RowProps) => {
       description={props.description}
       value={props.value || '—'}
       warnTooltip={props.requiredMsg}
+      disabled={props.disabled}
       actions={
         props.actions || (
           <ActionButton
             action={callback}
-            iconNode={<PencilSimple weight="bold" />}
+            iconNode={<PencilSimpleIcon weight="bold" />}
             variant="secondary"
             className="btn-sm btn-icon"
-            disabled={props.protected}
+            disabled={props.protected || props.disabled}
             tooltip={tooltip}
             data-testid={`user-edit-row-${props.name}`}
           />

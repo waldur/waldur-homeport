@@ -1,4 +1,4 @@
-import { Eye, EyeSlash } from '@phosphor-icons/react';
+import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React from 'react';
 import { Form } from 'react-bootstrap';
@@ -27,13 +27,14 @@ export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
               }
         }
       />
+
       <button
         className="text-btn password-icon"
         type="button"
         title={showSecret ? translate('Hide') : translate('Show')}
         onClick={onToggle}
       >
-        {!showSecret ? <Eye size={18} /> : <EyeSlash size={18} />}
+        {!showSecret ? <EyeIcon size={18} /> : <EyeSlashIcon size={18} />}
       </button>
     </div>
   );

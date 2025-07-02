@@ -64,11 +64,17 @@
     &.expanded,
     &.expanded + tr {
       background-color: $gray-50;
+
+      th.pinned,
+      td.pinned {
+        background-color: unset;
+      }
     }
     &.expanded + tr {
       > td {
         padding-top: 16px;
         padding-bottom: 16px;
+        padding-left: 0;
       }
       .table-pagination {
         padding-top: 0.5rem;
@@ -133,18 +139,19 @@
         top: 50%;
         transform: translateY(-50%);
         transition: opacity 0.15s linear;
-        background: rgba($light, 0.75);
-        padding: 0.2rem 0.5rem;
-        border-radius: 5px;
+        background: rgba($gray-50, 0.75);
+        width: 32px;
+        height: 32px;
+        border: none;
 
         svg {
-          color: $gray-400;
+          color: $gray-600;
         }
         &:hover {
-          background: $light;
+          background: $gray-50;
 
           svg {
-            color: $gray-500;
+            color: $gray-700;
           }
         }
       }
@@ -228,8 +235,27 @@
 
 /* TABLE IN CARD */
 .card.card-table {
+  .card-header {
+    min-height: 77px;
+
+    .card-toolbar {
+      margin: 0.71rem 0;
+
+      .card-title {
+        margin: 0;
+      }
+    }
+  }
+
   &:not(.grid-table) .card-body {
     padding-top: 0;
+  }
+
+  .card-header .card-toolbar {
+    .btn {
+      height: 44px;
+      font-size: $input-btn-font-size-lg;
+    }
   }
 
   table {
@@ -521,6 +547,18 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
       .card-header {
         border-color: $gray-200 !important;
       }
+    }
+  }
+}
+
+// Standalone table header
+.table-standalone-header {
+  .btn {
+    height: 44px;
+    font-size: $input-btn-font-size-lg;
+
+    &.btn-icon {
+      width: 44px;
     }
   }
 }

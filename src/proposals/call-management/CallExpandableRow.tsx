@@ -37,6 +37,7 @@ export const CallExpandableRow: FunctionComponent<{
             : DASH_ESCAPE_CODE
         }
       />
+
       {activeRound && (
         <Field
           label={translate('Review strategy')}

@@ -1,4 +1,4 @@
-import { MagnifyingGlass, X } from '@phosphor-icons/react';
+import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
 import { FC } from 'react';
@@ -17,8 +17,8 @@ import BaseWindowedSelect from 'react-windowed-select';
 import { BaseFieldProps } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import CheckboxIcon from '@waldur/table/Checkbox.svg';
 import CheckboxEmptyIcon from '@waldur/table/CheckboxEmpty.svg';
+import CheckboxFillIcon from '@waldur/table/CheckboxFill.svg';
 import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
 import { useTheme } from '@waldur/theme/useTheme';
 
@@ -45,7 +45,7 @@ export const FilterSelectClearIndicator = (props: ClearIndicatorProps) => {
       <div
         style={{ padding: '0px 5px', marginRight: '7px', cursor: 'pointer' }}
       >
-        <X size={20} weight="bold" className="text-gray-500" />
+        <XIcon size={20} weight="bold" className="text-gray-500" />
       </div>
     </div>
   );
@@ -54,7 +54,11 @@ export const FilterSelectClearIndicator = (props: ClearIndicatorProps) => {
 export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
   <components.Control {...props}>
     {!(props.hasValue && props.selectProps.components.SingleValue) && (
-      <MagnifyingGlass size={20} weight="bold" className="text-gray-500 ms-3" />
+      <MagnifyingGlassIcon
+        size={20}
+        weight="bold"
+        className="text-gray-500 ms-3"
+      />
     )}
     {children}
   </components.Control>
@@ -63,8 +67,13 @@ export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
 export const MultiSelectOption = (props) => {
   return (
     <components.Option {...props}>
-      <span className="svg-icon svg-icon-4 svg-icon-transparent">
-        {props.isSelected ? <CheckboxIcon /> : <CheckboxEmptyIcon />}
+      <span
+        className={
+          'svg-icon svg-icon-4 ' +
+          (props.isSelected ? 'svg-icon-primary' : 'svg-icon-transparent')
+        }
+      >
+        {props.isSelected ? <CheckboxFillIcon /> : <CheckboxEmptyIcon />}
       </span>
       <label>{props.label}</label>
     </components.Option>
@@ -128,6 +137,12 @@ export const REACT_SELECT_TABLE_FILTER: Partial<SelectProps> = {
     ClearIndicator: FilterSelectClearIndicator,
   },
   ...REACT_SELECT_MENU_NO_PORTALING,
+  styles: {
+    menuList: (baseStyles) => ({
+      ...baseStyles,
+      height: '175px',
+    }),
+  },
 };
 
 export const REACT_MULTI_SELECT_TABLE_FILTER: Partial<SelectProps> = {

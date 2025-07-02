@@ -1,4 +1,4 @@
-import { GitMerge } from '@phosphor-icons/react';
+import { GitMergeIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -25,6 +25,6 @@ export const UpdateFloatingIpsAction: ActionItemType = ({
     modalComponent={UpdateFloatingIpsDialog}
     extraResolve={{ refetch }}
     dialogSize="lg"
-    iconNode={<GitMerge weight="bold" />}
+    iconNode={<GitMergeIcon weight="bold" />}
   />
 );

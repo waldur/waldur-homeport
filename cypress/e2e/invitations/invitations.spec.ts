@@ -106,11 +106,9 @@ describe('Invitations', () => {
         { statusCode: 200 },
       )
 
-      .intercept(
-        'GET',
-        '/api/marketplace-categories/**',
-        { fixture: 'marketplace/categories.json' },
-      )
+      .intercept('GET', '/api/marketplace-categories/**', {
+        fixture: 'marketplace/categories.json',
+      })
 
       .intercept('GET', '/api/marketplace-orders/**', [])
       .intercept(
@@ -242,7 +240,7 @@ describe('Invitations', () => {
 
   it('Can select all the toggle buttons in Invitations component', () => {
     //select rejection toggle button
-    cy.selectTableFilter('State', 'Rejected').wait('@pendingRejected');
+    cy.selectTableFilter('State', 'Rejected', true).wait('@pendingRejected');
   });
 
   it('Resend invitation', () => {

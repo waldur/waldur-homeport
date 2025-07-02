@@ -23,6 +23,7 @@ const colorClasses = [
   'bg-dark text-inverse-dark',
   'bg-info text-inverse-info',
 ];
+
 const getSymbolColorClass = (index: number) => {
   return colorClasses[index % colorClasses.length];
 };
@@ -47,17 +48,12 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
     {items.slice(0, max).map((item: User, index: number) => (
       <div key={index} className={`symbol symbol-circle symbol-${size}px`}>
         <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
-          {item[imageKey] ? (
-            <img
-              src={item[imageKey]}
-              alt={item[imageKey]}
-              className={`rounded-circle w-${size}px h-${size}px`}
-            />
-          ) : item[emailKey] ? (
+          {item[imageKey] || item[nameKey] ? (
             <Avatar
               size={size}
-              className="rounded-circle"
+              src={item[imageKey]}
               name={item[nameKey]}
+              circle
             />
           ) : (
             <div

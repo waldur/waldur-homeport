@@ -1,4 +1,4 @@
-import { CopySimple } from '@phosphor-icons/react';
+import { CopySimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 
@@ -16,7 +16,7 @@ export const ResourceDetailsDialog: FC<ActionDialogProps> = ({
       title={translate('Resource details')}
       subtitle={translate('Key information about the resource.')}
       closeButton
-      iconNode={<CopySimple weight="bold" />}
+      iconNode={<CopySimpleIcon weight="bold" />}
       iconColor="success"
       bodyClassName="min-h-350px"
     >

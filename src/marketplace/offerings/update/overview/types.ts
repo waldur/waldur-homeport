@@ -1,3 +1,5 @@
+import { Offering } from 'waldur-js-client';
+
 export interface Attribute {
   key: string;
   title: string;
@@ -8,9 +10,9 @@ export interface Attribute {
   requiredMsg?: string;
 }
 export interface EditOfferingProps {
-  offering;
-  refetch;
-  attribute: Attribute;
+  offering: Offering;
+  refetch(): void;
+  attribute?: Attribute;
   disabled?: boolean;
 }
 

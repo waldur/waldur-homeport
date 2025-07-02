@@ -1,4 +1,4 @@
-import { Clock } from '@phosphor-icons/react';
+import { ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 
@@ -28,7 +28,7 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
       className="col-xs-2 svg-icon svg-icon-2"
       htmlFor="react-select-startTime--value"
     >
-      <Clock />
+      <ClockIcon />
     </Form.Label>
     <Select
       instanceId="startTime"
@@ -41,6 +41,7 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
       value={getOptions(60).filter(({ value }) => value === startTime)}
       onChange={(option: any) => setStartTime(option.value)}
     />
+
     <Form.Label className="col-xs-2" htmlFor="react-select-endTime--value">
       {translate('till')}
     </Form.Label>

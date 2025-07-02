@@ -16,12 +16,19 @@ export const UserPermissionRequestRowActions: FunctionComponent<
   UserPermissionRequestRowActionsProps
 > = ({ row, refetch }) => {
   const user = useUser();
-  const canManageRequest =
-    hasPermission(user, {
+  let canManageRequest = false;
+  // Check if the user has permission to manage the request based on the role name
+  if (row.role_name.startsWith('PROJECT.')) {
+    canManageRequest = hasPermission(user, {
+      permission: PermissionEnum.CREATE_PROJECT_PERMISSION,
+      projectId: row.scope_uuid,
+    });
+  } else if (row.role_name.startsWith('CUSTOMER.')) {
+    canManageRequest = hasPermission(user, {
       permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-      customerId: row.customer_uuid,
-      projectId: row.project_uuid,
-    }) || user.is_support;
+      customerId: row.scope_uuid,
+    });
+  }
 
   return row.state === 'pending' && canManageRequest ? (
     <ButtonGroup>
@@ -29,6 +36,7 @@ export const UserPermissionRequestRowActions: FunctionComponent<
         permissionRequest={row}
         refetch={refetch}
       />
+
       <UserPermissionRequestRejectButton
         permissionRequest={row}
         refetch={refetch}

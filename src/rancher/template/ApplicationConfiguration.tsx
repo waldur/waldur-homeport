@@ -38,6 +38,7 @@ export const ApplicationConfiguration: React.FC<
         variable="name"
         validate={[required, validateName]}
       />
+
       <StringField label={translate('Description')} variable="description" />
       <EnumField
         required={true}
@@ -45,6 +46,7 @@ export const ApplicationConfiguration: React.FC<
         variable="version"
         options={props.versions}
       />
+
       <EnumField
         required={true}
         label={translate('Project')}
@@ -53,6 +55,7 @@ export const ApplicationConfiguration: React.FC<
         getLabel={({ name }) => name}
         getValue={({ url }) => url}
       />
+
       <NamespaceField options={props.namespaces} />
     </Row>
   </>

@@ -36,34 +36,41 @@ export const ExpandableEventDetailsTable: FunctionComponent<
       label={translate('IP address')}
       value={event.context.ip_address}
     />
+
     <ExpandableEventField
       label={translate('Event type')}
       value={event.event_type}
     />
+
     <ExpandableEventField
       label={translate('Event message')}
       value={event.message}
     />
+
     <ExpandableEventField
       label={translate('Error message')}
       value={event.context.error_message}
     />
+
     <ExpandableEventField
       label={translate('Organization')}
       value={event.context.customer_name}
       state="organization.events"
       params={{ uuid: event.context.customer_uuid }}
     />
+
     <ExpandableEventField
       label={translate('Project')}
       value={event.context.project_name}
       state="project.dashboard"
       params={{ uuid: event.context.project_uuid }}
     />
+
     <ExpandableEventField
       label={translate('Project name')}
       value={event.context.project_name}
     />
+
     {event.context.project_end_date !== 'None' && (
       <ExpandableEventField
         label={translate('Project end date')}
@@ -74,6 +81,7 @@ export const ExpandableEventDetailsTable: FunctionComponent<
       label={translate('Provider')}
       value={event.context.service_name}
     />
+
     <ExpandableEventField
       label={translate('Resource')}
       value={event.context.resource_full_name}
@@ -84,10 +92,12 @@ export const ExpandableEventDetailsTable: FunctionComponent<
         resource_type: event.context.resource_type,
       }}
     />
+
     <ExpandableEventField
       label={translate('Resource configuration')}
       value={event.context.resource_configuration}
     />
+
     <ExpandableEventField
       label={translate('Issue link')}
       value={

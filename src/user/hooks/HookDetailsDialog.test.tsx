@@ -1,5 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   hooksEmailCreate,
@@ -25,6 +27,13 @@ vi.mock('@waldur/store/hooks', () => ({
     showErrorResponse: vi.fn(),
   }),
 }));
+
+const mockStore = configureStore([]);
+const store = mockStore({});
+
+const renderWithRedux = (ui) => {
+  return render(<Provider store={store}>{ui}</Provider>);
+};
 
 const mockEventGroups = [
   {
@@ -52,6 +61,7 @@ describe('HookDetailsDialog', () => {
       showError: mockShowError,
       showErrorResponse: mockShowErrorResponse,
     });
+    store.clearActions();
   });
 
   afterEach(() => {
@@ -60,7 +70,7 @@ describe('HookDetailsDialog', () => {
 
   describe('Create mode', () => {
     beforeEach(async () => {
-      render(<HookDetailsDialog resolve={{ refetch: mockRefetch }} />);
+      renderWithRedux(<HookDetailsDialog resolve={{ refetch: mockRefetch }} />);
       await waitFor(() => {
         expect(screen.getByText('Create notification')).toBeInTheDocument();
       });
@@ -130,7 +140,7 @@ describe('HookDetailsDialog', () => {
       event_groups: ['users'],
     };
     beforeEach(async () => {
-      render(
+      renderWithRedux(
         <HookDetailsDialog
           resolve={{ hook: mockHook, refetch: mockRefetch }}
         />,

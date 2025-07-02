@@ -1,4 +1,4 @@
-import { Warning } from '@phosphor-icons/react';
+import { WarningIcon } from '@phosphor-icons/react';
 import { reduxForm } from 'redux-form';
 
 import { ProgressStep } from '@waldur/core/ProgressSteps';
@@ -36,6 +36,7 @@ const steps: ProgressStep[] = [
     completed: false,
   },
 ];
+
 const tabs = {
   details: IssueDetailsTab,
   description: IssueDescriptionTab,
@@ -50,11 +51,11 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
   return (
     <form onSubmit={handleSubmit(onCreateIssue)}>
       <ModalDialog
-        title={translate('Create request')}
+        title={translate('Create support request')}
         subtitle={translate(
           'Use this modal to describe your problem or request, so our support team can assist you.',
         )}
-        iconNode={<Warning weight="bold" />}
+        iconNode={<WarningIcon weight="bold" />}
         iconColor="warning"
         footer={
           <WizardButtons
@@ -75,6 +76,7 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
           onClick={setStep}
           disabled={submitting}
         />
+
         <WizardTabs
           steps={steps}
           currentStep={step}

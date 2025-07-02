@@ -61,6 +61,7 @@ const CategoryPanel = ({ category, checklists, customer }) => {
         options={checklists}
         isClearable={false}
       />
+
       {statsState.loading ? (
         <LoadingSpinner />
       ) : Array.isArray(statsState.value) && statsState.value.length > 0 ? (

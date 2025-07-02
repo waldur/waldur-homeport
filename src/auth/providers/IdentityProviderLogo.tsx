@@ -38,6 +38,7 @@ const LogoMap = {
   [EDUTEAMS_IDP]: (props) => (
     <img src={EduteamsLogo} alt="eduteams" {...props} />
   ),
+
   [FREEIPA_IDP]: (props) => <img src={FreeipaLogo} alt="freeipa" {...props} />,
   [TARA_IDP]: TaraLogo,
   [KEYCLOAK_IDP]: KeycloakLogoComponent,
@@ -45,7 +46,7 @@ const LogoMap = {
   waldur: WaldurLogo,
 };
 
-export const IdentityProviderLogo = ({ name }) => {
+export const IdentityProviderLogo = ({ name, maxHeight = undefined }) => {
   const Logo = LogoMap[name] || LogoMap.waldur;
-  return <Logo style={{ width: '100%', maxHeight: 40 }} />;
+  return <Logo style={{ width: '100%', maxHeight }} />;
 };

@@ -1,4 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent, memo, useMemo } from 'react';
 import { OpenStackNetwork, OpenstackNetworksListData } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -12,11 +12,28 @@ import { useTable } from '@waldur/table/useTable';
 
 import { CreateNetworkAction } from '../openstack-tenant/actions/CreateNetworkAction';
 
+import { NetworkRBACList } from './NetworkRBACList';
+
+const ExpandableRow = ({ row }) => (
+  <ResourceSummary
+    resource={row}
+    extraTabs={[
+      {
+        title: translate('Network sharing (RBAC)'),
+        eventKey: 'rbac',
+        component: () => <NetworkRBACList network={row} />,
+      },
+    ]}
+  />
+);
+
+const ExpandableRowMemo = memo(ExpandableRow);
+
 export const TenantNetworksList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackNetworksListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackNetworksListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
@@ -74,13 +91,14 @@ export const TenantNetworksList: FunctionComponent<{ resourceScope }> = ({
       ]}
       verboseName={translate('networks')}
       title={translate('Networks')}
+      showPageSizeSelector
       tableActions={
         <CreateNetworkAction resource={resourceScope} refetch={props.fetch} />
       }
       rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
-      expandableRow={({ row }) => <ResourceSummary resource={row} />}
+      expandableRow={ExpandableRowMemo}
     />
   );
 };

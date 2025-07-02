@@ -150,6 +150,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
               <PriceTooltip />
             </>
           ),
+
           render: ({ row }) => <>{defaultCurrency(row.price)}</>,
           className: invoiceView ? undefined : 'w-150px',
         },

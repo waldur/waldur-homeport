@@ -121,6 +121,7 @@ export const DetailsOverviewDialog: FC<{
                   label={translate('Name')}
                   value={withCopy(customer.data.name)}
                 />
+
                 <FormTable.Item
                   label={translate('Contact info')}
                   group
@@ -144,6 +145,7 @@ export const DetailsOverviewDialog: FC<{
                   label={translate('Name')}
                   value={withCopy(project.data.data.name)}
                 />
+
                 <FormTable.Item
                   label={translate('End date')}
                   value={withCopy(
@@ -162,10 +164,12 @@ export const DetailsOverviewDialog: FC<{
                   label={translate('Name')}
                   value={withCopy(props.offering.name)}
                 />
+
                 <FormTable.Item
                   label={translate('Type')}
                   value={withCopy(getLabel(props.offering.type))}
                 />
+
                 {props.offering.parent_name && (
                   <FormTable.Item
                     label={translate('Parent offering')}
@@ -184,6 +188,7 @@ export const DetailsOverviewDialog: FC<{
                   label={translate('Name')}
                   value={withCopy(provider.data.customer_name)}
                 />
+
                 <FormTable.Item
                   label={translate('Description')}
                   value={withCopy(provider.data.description)}

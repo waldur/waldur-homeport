@@ -2,13 +2,11 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { ProposalReviewsListData } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { ProposalReview } from '@waldur/proposals/types';
-import {
-  formatReviewState,
-  getReviewStateOptions,
-} from '@waldur/proposals/utils';
+import { getReviewStateOptions } from '@waldur/proposals/utils';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -18,14 +16,16 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { EndingField } from '../EndingField';
 
+import { ReviewsExpandableRow } from './ReviewsExpandableRow';
 import { ReviewsRowActions } from './ReviewsRowActons';
 import { ReviewsTableFilter } from './ReviewsTableFilter';
+import { ReviewStateRenderer } from './ReviewStateRenderer';
 
 const filtersSelctor = createSelector(
   getUser,
   getFormValues(USER_REVIEWS_FILTER_FORM_ID),
   (user, filters: any) => {
-    const result: Record<string, any> = {};
+    const result: ProposalReviewsListData['query'] = {};
     result.reviewer_uuid = user.uuid;
     if (filters?.state) {
       result.state = filters.state.map((option) => option.value);
@@ -63,7 +63,10 @@ export const UserReviewsList: FC = () => {
         },
         {
           title: translate('Proposal'),
-          render: ({ row }) => <>{row.proposal_name}</>,
+          render: ({ row }) => (
+            <span className="text-gray-700 fw-bold">{row.proposal_name}</span>
+          ),
+
           keys: ['proposal_name'],
           id: 'proposal',
         },
@@ -90,7 +93,7 @@ export const UserReviewsList: FC = () => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{formatReviewState(row.state)}</>,
+          render: ReviewStateRenderer,
           filter: 'state',
           inlineFilter: (row) =>
             getReviewStateOptions().filter((s) => s.value === row.state),
@@ -103,6 +106,7 @@ export const UserReviewsList: FC = () => {
       hasQuery={true}
       rowActions={ReviewsRowActions}
       filters={<ReviewsTableFilter />}
+      expandableRow={ReviewsExpandableRow}
       hasOptionalColumns
     />
   );

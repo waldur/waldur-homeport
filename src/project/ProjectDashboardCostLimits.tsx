@@ -1,4 +1,4 @@
-import { Eye, GearSix } from '@phosphor-icons/react';
+import { EyeIcon, GearSixIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -69,7 +69,7 @@ export const ProjectDashboardCostLimits = ({
         isOwnerOrStaff
           ? {
               label: translate('Manage policy'),
-              icon: <GearSix weight="bold" />,
+              icon: <GearSixIcon weight="bold" />,
               callback: () =>
                 router.stateService.go('organization-cost-policies', {
                   uuid: project.customer_uuid,
@@ -78,7 +78,7 @@ export const ProjectDashboardCostLimits = ({
           : null,
         {
           label: translate('View details'),
-          icon: <Eye weight="bold" />,
+          icon: <EyeIcon weight="bold" />,
           callback: viewDetails,
         },
       ].filter(Boolean)}

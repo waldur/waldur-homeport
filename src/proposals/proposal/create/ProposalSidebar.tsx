@@ -56,6 +56,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
                 : undefined
             }
           />
+
           <Button
             variant="secondary"
             onClick={props.saveAsDraft}

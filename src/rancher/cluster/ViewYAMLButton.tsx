@@ -1,10 +1,10 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { RowActionButton } from '@waldur/table/ActionButton';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 const ViewYAMLDialog = lazyComponent(() =>
   import('./ViewYAMLDialog').then((module) => ({
@@ -25,7 +25,7 @@ export const ViewYAMLButton = ({
 }) => {
   const dispatch = useDispatch();
   return (
-    <RowActionButton
+    <ActionItem
       title={translate('View YAML')}
       action={() =>
         dispatch(
@@ -35,9 +35,8 @@ export const ViewYAMLButton = ({
           }),
         )
       }
-      iconNode={<PencilSimple />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       disabled={disabled}
-      size="sm"
     />
   );
 };

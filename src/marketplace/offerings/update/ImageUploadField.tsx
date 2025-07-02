@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
@@ -51,7 +51,7 @@ export const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (
               className="btn btn-sm btn-danger mb-2"
               title={translate('Remove')}
               action={() => props.input.onChange(null)}
-              iconNode={<Trash />}
+              iconNode={<TrashIcon />}
             />
           )}
         </Col>

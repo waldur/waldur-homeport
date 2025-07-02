@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { EventsListData } from 'waldur-js-client';
 
 import { BaseEventsList } from '@waldur/events/BaseEventsList';
 
@@ -10,7 +11,7 @@ export const SupportEventsList = () => {
   const filtersSelector = createSelector(
     getFormValues('SupportEventsFilter'),
     (filterValues: any) => {
-      const result: Record<string, any> = {};
+      const result: EventsListData['query'] = {};
       if (filterValues?.organization) {
         result.customer_uuid = filterValues.organization.uuid;
       }

@@ -1,4 +1,4 @@
-import { Terminal } from '@phosphor-icons/react';
+import { TerminalIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -34,7 +34,7 @@ export const OpenConsoleActionItem: <T extends { uuid?: string }>(
       title={translate('Open console')}
       action={callback}
       staff={staff}
-      iconNode={<Terminal weight="bold" />}
+      iconNode={<TerminalIcon weight="bold" />}
       {...validationState}
     />
   );

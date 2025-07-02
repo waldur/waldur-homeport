@@ -9,17 +9,17 @@ import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { UpdateResourceOptionDialogProps } from './UpdateResourceOptionDialog';
+
 const UpdateResourceOptionDialog = lazyComponent(() =>
   import('./UpdateResourceOptionDialog').then((module) => ({
     default: module.UpdateResourceOptionDialog,
   })),
 );
 
-export const UpdateResourceOptionButton: FunctionComponent<{
-  resource;
-  option;
-  refetch?;
-}> = (props) => {
+export const UpdateResourceOptionButton: FunctionComponent<
+  UpdateResourceOptionDialogProps['resolve']
+> = (props) => {
   const user = useSelector(getUser);
   const disabled = !hasPermission(user, {
     permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,

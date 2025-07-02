@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { change, Field, reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client';
@@ -49,17 +50,22 @@ export const EditCategoryDialog = reduxForm<FormData, OwnProps>({
     }
   };
 
-  const queryData = useQuery(['EditCategoryDialog'], getCategories, {
-    onSuccess: (data) => {
+  const queryData = useQuery({
+    queryKey: ['EditCategoryDialog'],
+    queryFn: getCategories,
+  });
+
+  useEffect(() => {
+    if (queryData.data) {
       dispatch(
         change(
           CATEGORY_FORM_ID,
           'category',
-          data.find((item) => item.url === resolve.offering.category),
+          queryData.data.find((item) => item.url === resolve.offering.category),
         ),
       );
-    },
-  });
+    }
+  }, [queryData.data, dispatch, resolve.offering.category]);
 
   return (
     <form onSubmit={handleSubmit(submitRequest)}>

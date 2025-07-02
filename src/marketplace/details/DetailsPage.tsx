@@ -12,10 +12,10 @@ import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { formProjectSelector } from '@waldur/marketplace/deploy/utils';
 import { useTitle } from '@waldur/navigation/title';
 
 import { DeployPage } from '../deploy/DeployPage';
+import { orderProjectSelector } from '../deploy/selectors';
 import { Offering } from '../types';
 
 async function loadData(offering_uuid: string) {
@@ -49,7 +49,7 @@ export const OfferingDetailsPage: React.FC = () => {
       : translate('Add resource'),
   );
 
-  const project = useSelector(formProjectSelector);
+  const project = useSelector(orderProjectSelector);
   usePermissionView(() => {
     if (project?.end_date) {
       const endDate = parseDate(project.end_date);

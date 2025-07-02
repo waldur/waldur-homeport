@@ -47,6 +47,7 @@ export const BroadcastForm = ({
         activeStep={step}
         onSelect={setStep}
       />
+
       <FormName>
         {({ form }) => (
           <Modal.Body className="scroll-y border-0">
@@ -78,18 +79,21 @@ export const BroadcastForm = ({
                   }}
                   isClearable={true}
                 />
+
                 <StringField
                   name="subject"
                   label={translate('Subject')}
                   required={true}
                   validate={required}
                 />
+
                 <TextField
                   name="body"
                   label={translate('Message')}
                   required={true}
                   validate={required}
                 />
+
                 <DateField
                   name="send_at"
                   label={translate('Send at')}
@@ -112,6 +116,7 @@ export const BroadcastForm = ({
                       label={translate('Send message to all users')}
                       hideLabel={true}
                     />
+
                     <AsyncSelectField
                       name="offerings"
                       label={translate('Offerings')}
@@ -125,6 +130,7 @@ export const BroadcastForm = ({
                       }
                       isMulti={true}
                     />
+
                     <AsyncSelectField
                       name="customers"
                       label={translate('Organizations')}

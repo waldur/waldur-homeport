@@ -1,7 +1,11 @@
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { FieldArray, reduxForm } from 'redux-form';
-import { openstackRoutersSetRoutes } from 'waldur-js-client';
+import {
+  OpenStackRouter,
+  openstackRoutersSetRoutes,
+  OpenStackStaticRouteRequest,
+} from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -10,19 +14,16 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { StaticRoute, StaticRoutesTable } from './StaticRoutesTable';
+import { StaticRoutesTable } from './StaticRoutesTable';
 
 interface OwnProps {
   resolve: {
-    router: {
-      uuid: string;
-      routes: StaticRoute[];
-    };
+    router: OpenStackRouter;
   };
 }
 
 interface FormData {
-  routes: StaticRoute[];
+  routes: OpenStackStaticRouteRequest[];
 }
 
 const enhance = compose(

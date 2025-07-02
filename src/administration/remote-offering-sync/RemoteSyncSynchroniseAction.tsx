@@ -1,4 +1,4 @@
-import { GearSix } from '@phosphor-icons/react';
+import { GearSixIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { marketplaceRemoteSynchronisationsRunSynchronisation } from 'waldur-js-client';
@@ -12,23 +12,27 @@ import { RemoteSyncActionProps } from './types';
 export const RemoteSyncSynchroniseAction = (props: RemoteSyncActionProps) => {
   const dispatch = useDispatch();
 
-  const { mutate, isLoading } = useMutation(async () => {
-    try {
-      await marketplaceRemoteSynchronisationsRunSynchronisation({
-        path: { uuid: props.row.uuid },
-      });
-      dispatch(showSuccess(translate('Synchronisation has been successful.')));
-      props.refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to synchronise.')));
-    }
+  const { mutate, isPending: isLoading } = useMutation({
+    mutationFn: async () => {
+      try {
+        await marketplaceRemoteSynchronisationsRunSynchronisation({
+          path: { uuid: props.row.uuid },
+        });
+        dispatch(
+          showSuccess(translate('Synchronisation has been successful.')),
+        );
+        props.refetch();
+      } catch (e) {
+        dispatch(showErrorResponse(e, translate('Unable to synchronise.')));
+      }
+    },
   });
 
   return (
     <ActionItem
       title={translate('Synchronise')}
       action={mutate}
-      iconNode={<GearSix weight="bold" />}
+      iconNode={<GearSixIcon weight="bold" />}
       disabled={isLoading}
     />
   );

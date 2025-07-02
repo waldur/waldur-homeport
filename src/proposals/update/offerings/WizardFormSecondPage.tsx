@@ -19,16 +19,16 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
       {(wizardProps) => {
         const { offering, plan, limits } = wizardProps.formValues;
 
-        const queryData = useQuery(
-          ['offering', offering?.uuid],
-          () =>
+        const queryData = useQuery({
+          queryKey: ['offering', offering?.uuid],
+
+          queryFn: () =>
             marketplacePublicOfferingsRetrieve({
               path: { uuid: offering.uuid },
             }).then((response) => response.data),
-          {
-            staleTime: 3 * 60 * 1000,
-          },
-        );
+
+          staleTime: 3 * 60 * 1000,
+        });
 
         const plans = useMemo(
           () =>

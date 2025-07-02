@@ -11,8 +11,8 @@ import { useTable } from '@waldur/table/useTable';
 export const TenantFlavorsList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackFlavorsListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackFlavorsListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
     }),
     [resourceScope],
@@ -71,6 +71,7 @@ export const TenantFlavorsList: FunctionComponent<{ resourceScope }> = ({
       verboseName={translate('flavors')}
       hasQuery={true}
       hasOptionalColumns
+      showPageSizeSelector
     />
   );
 };

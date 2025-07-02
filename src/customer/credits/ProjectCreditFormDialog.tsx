@@ -1,22 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
 import { Accordion, Form } from 'react-bootstrap';
 import { useSelector, connect } from 'react-redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 import { customerCreditsList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
-import { lessThanOrEqual, required } from '@waldur/core/validators';
 import {
-  FieldError,
-  FormContainer,
-  NumberField,
-  SubmitButton,
-} from '@waldur/form';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
+  LoadingSpinner,
+  LoadingSpinnerIcon,
+} from '@waldur/core/LoadingSpinner';
+import { FieldError, FormContainer, SubmitButton } from '@waldur/form';
+import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useProjectCostChart } from '@waldur/project/utils';
@@ -24,20 +19,25 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OrganizationProjectSelectField } from '../team/OrganizationProjectSelectField';
 
-import { useMinimalConsumptionFields } from './constants';
+import {
+  useMinimalConsumptionFields,
+  useProjectAllocateCreditField,
+} from './constants';
 import { ProjectCreditFormData } from './types';
 
 interface ProjectCreditFormDialogProps {
   formId: string;
   submitFn(formData: ProjectCreditFormData): void;
-  initialValues: any;
+  initialValues?: any;
 }
 
-export const ProjectCreditFormDialog = connect(
-  (_, ownProps: ProjectCreditFormDialogProps) => ({
-    form: ownProps.formId,
-  }),
-)(
+export const ProjectCreditFormDialog = connect<
+  {},
+  {},
+  ProjectCreditFormDialogProps
+>((_, ownProps: ProjectCreditFormDialogProps) => ({
+  form: ownProps.formId,
+}))(
   reduxForm<ProjectCreditFormData, ProjectCreditFormDialogProps>({
     destroyOnUnmount: true,
   })((props) => {
@@ -48,27 +48,18 @@ export const ProjectCreditFormDialog = connect(
       isLoading,
       error,
       refetch,
-    } = useQuery(
-      ['organizationCredits', customer?.uuid],
-      () =>
+    } = useQuery({
+      queryKey: ['organizationCredits', customer?.uuid],
+
+      queryFn: () =>
         customerCreditsList({
           query: { customer_uuid: customer?.uuid },
         }).then((r) => r.data[0]),
-      { staleTime: 60 * 1000 },
-    );
+
+      staleTime: 60 * 1000,
+    });
 
     const isEdit = Boolean(props.initialValues);
-
-    const valueFieldDescriptionData = {
-      currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-      credits: isLoading ? (
-        <LoadingSpinnerIcon />
-      ) : error ? (
-        <LoadingErred loadData={refetch} />
-      ) : (
-        (organizationCredit?.value ?? 0)
-      ),
-    };
 
     const project = useSelector((state) =>
       formValueSelector(props.formId)(state, 'project'),
@@ -81,14 +72,13 @@ export const ProjectCreditFormDialog = connect(
       refetch: refetchChart,
     } = useProjectCostChart(project);
 
-    const exceeds = useMemo(
-      () => lessThanOrEqual(Number(organizationCredit?.value ?? 0)),
-      [organizationCredit],
-    );
-
     const CONSUMPTION_FIELDS = useMinimalConsumptionFields(
       props.formId,
       props.initialValues,
+    );
+    const ALLOCATE_CREDIT_FIELD = useProjectAllocateCreditField(
+      organizationCredit?.value,
+      isEdit,
     );
 
     return (
@@ -116,29 +106,13 @@ export const ProjectCreditFormDialog = connect(
         >
           <FormContainer submitting={props.submitting} className="size-lg">
             <OrganizationProjectSelectField disabled={isEdit} />
-            <NumberField
-              label={translate('Allocate credit ({currency})', {
-                currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-              })}
-              name="value"
-              placeholder="0"
-              description={
-                isEdit
-                  ? translate(
-                      'Previously saved credit value for this organization: {currency} {credits}',
-                      valueFieldDescriptionData,
-                      formatJsxTemplate,
-                    )
-                  : translate(
-                      'Credits available for this organization: {currency} {credits}',
-                      valueFieldDescriptionData,
-                      formatJsxTemplate,
-                    )
-              }
-              unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
-              validate={[required, exceeds]}
-              required
-            />
+            {isLoading ? (
+              <LoadingSpinner />
+            ) : error ? (
+              <LoadingErred loadData={refetch} />
+            ) : (
+              ALLOCATE_CREDIT_FIELD
+            )}
             {CONSUMPTION_FIELDS}
             {isEdit && (
               <Accordion className="mb-7">

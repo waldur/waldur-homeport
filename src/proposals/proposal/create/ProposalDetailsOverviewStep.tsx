@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { Button, Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -34,7 +34,7 @@ const DetailsOverviewButton = ({ proposal }) => {
       }
     >
       <span className="svg-icon svg-icon-2">
-        <Eye weight="bold" />
+        <EyeIcon weight="bold" />
       </span>
       {translate('More details')}
     </Button>

@@ -17,20 +17,24 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { EDIT_LEXIS_LINK_INTEGRATION_FORM_ID } from './constants';
-
+interface EditLexisLinkIntegrationDialogProps {
+  resolve: { offering; refetch };
+}
 type FormData = {
   secret_options?: MergedSecretOptionsRequest;
   plugin_options?: MergedPluginOptionsRequest;
 };
-export const EditLexisLinkIntegrationDialog = connect(
-  (_, ownProps: { resolve: { offering } }) => ({
-    initialValues: {
-      secret_options: ownProps.resolve.offering.secret_options,
-      plugin_options: ownProps.resolve.offering.plugin_options,
-    },
-  }),
-)(
-  reduxForm<FormData, { resolve: { offering; provider; refetch } }>({
+export const EditLexisLinkIntegrationDialog = connect<
+  {},
+  {},
+  EditLexisLinkIntegrationDialogProps
+>((_, ownProps) => ({
+  initialValues: {
+    secret_options: ownProps.resolve.offering.secret_options,
+    plugin_options: ownProps.resolve.offering.plugin_options,
+  },
+}))(
+  reduxForm<FormData, EditLexisLinkIntegrationDialogProps>({
     form: EDIT_LEXIS_LINK_INTEGRATION_FORM_ID,
   })((props) => {
     const dispatch = useDispatch();

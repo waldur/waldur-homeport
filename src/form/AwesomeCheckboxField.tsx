@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, ReactNode } from 'react';
 import { Form } from 'react-bootstrap';
@@ -42,13 +42,14 @@ export const AwesomeCheckboxField: FunctionComponent<
       checked={input.value}
       onChange={(e: React.ChangeEvent<any>) => input.onChange(e.target.checked)}
       data-testid={props['data-testid']}
-      disabled={props.disabled}
+      disabled={props.readOnly || props.disabled}
     />
+
     {(tooltip || label || help_text) && (
       <label className="form-check-label">
         {tooltip && !tooltipEnd && (
           <Tip id={'form-field-tooltip-' + input.name} label={tooltip}>
-            <Question weight="bold" size={20} className="text-muted" />{' '}
+            <QuestionIcon weight="bold" size={20} className="text-muted" />{' '}
           </Tip>
         )}
         {label}
@@ -61,7 +62,7 @@ export const AwesomeCheckboxField: FunctionComponent<
         className="align-self-center ms-auto"
         label={tooltip}
       >
-        <Question weight="bold" size={20} className="text-muted" />
+        <QuestionIcon weight="bold" size={20} className="text-muted" />
       </Tip>
     )}
   </div>

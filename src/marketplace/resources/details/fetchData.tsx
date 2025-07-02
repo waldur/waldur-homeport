@@ -21,6 +21,10 @@ import {
 } from '@waldur/marketplace/common/api';
 import { PageBarTab } from '@waldur/navigation/types';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
+import {
+  MANAGED_RANCHER,
+  MARKETPLACE_RANCHER,
+} from '@waldur/rancher/cluster/create/constants';
 import { getTabs } from '@waldur/resource/tabs/registry';
 import { getResourceAccessEndpoints } from '@waldur/resource/utils';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
@@ -42,7 +46,9 @@ export const getResourceTabs = ({
   const tabs: PageBarTab<{
     resource: Resource;
     resourceScope;
+    scope;
     offering: PublicOfferingDetails;
+    refetch: () => void;
   }>[] = [];
 
   const endpoints = getResourceAccessEndpoints(resource, offering);
@@ -112,6 +118,34 @@ export const getResourceTabs = ({
         ),
       });
     }
+  } else if (
+    [MARKETPLACE_RANCHER, MANAGED_RANCHER].includes(resource.offering_type) &&
+    scope
+  ) {
+    tabs.push({
+      key: 'dashboard',
+      title: translate('Dashboard'),
+      component: lazyComponent(() =>
+        import('@waldur/rancher/cluster/dashboard/ClusterDashboard').then(
+          (module) => ({
+            default: module.ClusterDashboard,
+          }),
+        ),
+      ),
+    });
+    if (resource.offering_type === MANAGED_RANCHER) {
+      tabs.push({
+        key: 'security_groups',
+        title: translate('Security groups'),
+        component: lazyComponent(() =>
+          import('@waldur/rancher/cluster/ClusterSecurityGroupsList').then(
+            (module) => ({
+              default: module.ClusterSecurityGroupsList,
+            }),
+          ),
+        ),
+      });
+    }
   }
 
   if (scope) {
@@ -155,8 +189,8 @@ export const getResourceTabs = ({
   const showIssues = hasSupport();
   if (showIssues) {
     tabs.push({
-      key: 'tickets',
-      title: translate('Tickets'),
+      key: 'requests',
+      title: translate('Requests'),
       component: lazyComponent(() =>
         import('./ResourceIssuesCard').then((module) => ({
           default: module.ResourceIssuesCard,
@@ -240,7 +274,17 @@ export const getResourceTabs = ({
       ),
     });
   }
-  // @ts-ignore
+  if (resource.offering_type === MANAGED_RANCHER) {
+    tabs.push({
+      key: 'longhorn',
+      title: translate('Longhorn'),
+      component: lazyComponent(() =>
+        import('@waldur/rancher/cluster/ClusterLonghornTab').then((module) => ({
+          default: module.ClusterLonghornTab,
+        })),
+      ),
+    });
+  }
   if (resource.report?.length > 0) {
     tabs.push({
       key: 'report',
@@ -258,6 +302,13 @@ export const getResourceTabs = ({
 export const fetchData = async (resource: Resource) => {
   let scope;
   if (resource.scope) {
+    if (resource.offering_type === MANAGED_RANCHER) {
+      resource = (
+        await marketplaceResourcesDetailsRetrieve({
+          path: { uuid: resource.uuid },
+        })
+      ).data;
+    }
     scope = (
       await marketplaceResourcesDetailsRetrieve({
         path: { uuid: resource.uuid },

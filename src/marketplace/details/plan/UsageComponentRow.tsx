@@ -1,4 +1,4 @@
-import { PlusMinus } from '@phosphor-icons/react';
+import { PlusMinusIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -94,7 +94,7 @@ export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
             </div>
             <div className="estimate">
               <Button variant="link" onClick={onClick} className="p-0">
-                <PlusMinus size={16} weight="bold" className="me-2" />
+                <PlusMinusIcon size={16} weight="bold" className="me-2" />
                 {translate('Calculate price')}
               </Button>
             </div>

@@ -1,4 +1,4 @@
-import { Eye, EyeSlash } from '@phosphor-icons/react';
+import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useToggle } from 'react-use';
@@ -13,16 +13,17 @@ interface SecretFieldProps extends FormField {
   placeholder?: string;
   maxLength?: number;
   solid?: boolean;
+  className?: string;
 }
 
 export const SecretField: React.FC<SecretFieldProps> = (props) => {
   const [showSecret, onToggle] = useToggle(false);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { input, label, validate, solid, ...rest } = props;
+  const { input, label, validate, solid, className, ...rest } = props;
 
   return (
-    <div className="has-password">
+    <div className={'has-password' + (className ? ` ${className}` : '')}>
       <Form.Control
         {...props.input}
         type={showSecret ? 'text' : 'password'}
@@ -31,13 +32,14 @@ export const SecretField: React.FC<SecretFieldProps> = (props) => {
         className={solid ? 'form-control-solid' : undefined}
         {...rest}
       />
+
       <button
         className="password-icon text-btn"
         type="button"
         title={showSecret ? translate('Hide') : translate('Show')}
         onClick={onToggle}
       >
-        {showSecret ? <EyeSlash size={18} /> : <Eye size={18} />}
+        {showSecret ? <EyeSlashIcon size={18} /> : <EyeIcon size={18} />}
         &nbsp;
       </button>
     </div>

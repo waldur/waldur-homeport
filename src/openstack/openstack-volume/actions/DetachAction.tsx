@@ -1,4 +1,4 @@
-import { Plugs } from '@phosphor-icons/react';
+import { PlugsIcon } from '@phosphor-icons/react';
 import { openstackVolumesDetach } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -25,6 +25,6 @@ export const DetachAction: ActionItemType = ({ resource, refetch }) => (
     validators={validators}
     refetch={refetch}
     important
-    iconNode={<Plugs weight="bold" />}
+    iconNode={<PlugsIcon weight="bold" />}
   />
 );

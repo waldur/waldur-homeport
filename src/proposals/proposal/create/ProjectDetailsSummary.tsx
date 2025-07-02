@@ -59,7 +59,7 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
         reviews={reviews}
         proposal={proposal}
       >
-        <TextField />
+        <TextField solid />
       </CommentSection>
 
       <CommentSection

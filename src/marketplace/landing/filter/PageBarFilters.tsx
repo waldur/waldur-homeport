@@ -1,4 +1,4 @@
-import { X } from '@phosphor-icons/react';
+import { XIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button, Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -84,7 +84,7 @@ export const PageBarFilters = () => {
             className="btn-active-text-primary"
             onClick={clearFilters}
           >
-            <X weight="bold" className="svg-icon" />
+            <XIcon weight="bold" className="svg-icon" />
             {translate('Clear filters')}
           </Button>
         </div>

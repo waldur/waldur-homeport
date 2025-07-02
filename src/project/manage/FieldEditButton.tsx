@@ -11,15 +11,19 @@ const EditFieldDialog = lazyComponent(() =>
     default: module.EditFieldDialog,
   })),
 );
+const EditEndDateDialog = lazyComponent(() =>
+  import('./EditEndDateDialog').then((module) => ({
+    default: module.EditEndDateDialog,
+  })),
+);
 
 export const FieldEditButton = (props: EditProjectProps) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
-      openModalDialog(EditFieldDialog, {
-        resolve: props,
-        size: 'sm',
-      }),
+      props.name === 'end_date'
+        ? openModalDialog(EditEndDateDialog, { resolve: props, size: 'lg' })
+        : openModalDialog(EditFieldDialog, { resolve: props, size: 'sm' }),
     );
   };
   return <EditButton onClick={callback} size="sm" />;

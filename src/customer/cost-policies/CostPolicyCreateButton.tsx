@@ -2,16 +2,16 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceCustomerEstimatedCostPoliciesCreate,
+  MarketplaceCustomerEstimatedCostPoliciesCreateData,
   marketplaceProjectEstimatedCostPoliciesCreate,
+  MarketplaceProjectEstimatedCostPoliciesCreateData,
 } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
 
 import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { Customer } from '@waldur/workspace/types';
 
-import { CostPolicyFormData, CostPolicyType, PolicyPeriod } from './types';
+import { CostPolicyFormData, CostPolicyType } from './types';
 
 const CostPolicyFormDialog = lazyComponent(() =>
   import('./CostPolicyFormDialog').then((module) => ({
@@ -19,17 +19,7 @@ const CostPolicyFormDialog = lazyComponent(() =>
   })),
 );
 
-interface SubmitedFormData {
-  scope: (Project | Customer)[];
-  actions: { value; label };
-  limit_cost: number;
-  period: PolicyPeriod;
-  options?: {
-    notify_external_user?: string;
-  };
-}
-
-const submit = (formData: SubmitedFormData, type: CostPolicyType) => {
+const submit = (formData: CostPolicyFormData, type: CostPolicyType) => {
   const promises = formData.scope.map((scope) => {
     const options =
       formData.actions.value === 'notify_external_user'
@@ -37,7 +27,9 @@ const submit = (formData: SubmitedFormData, type: CostPolicyType) => {
             notify_external_user: formData.options?.notify_external_user,
           }
         : {};
-    const data: CostPolicyFormData = {
+    const data:
+      | MarketplaceProjectEstimatedCostPoliciesCreateData['body']
+      | MarketplaceCustomerEstimatedCostPoliciesCreateData['body'] = {
       scope: scope.url,
       actions: formData.actions.value,
       limit_cost: formData.limit_cost,

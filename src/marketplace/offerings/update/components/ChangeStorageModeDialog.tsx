@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
-  MergedPluginOptionsRequest,
+  PublicOfferingDetails,
   StorageModeEnum,
 } from 'waldur-js-client';
 
@@ -16,7 +16,7 @@ import { useNotify } from '@waldur/store/hooks';
 
 interface ChangeStorageModeDialogProps {
   resolve: {
-    offering: { plugin_options: MergedPluginOptionsRequest; uuid: string };
+    offering: Pick<PublicOfferingDetails, 'plugin_options' | 'uuid'>;
     refetch(): void;
     currentMode: StorageModeEnum;
     modes: Option[];

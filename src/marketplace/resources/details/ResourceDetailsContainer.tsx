@@ -41,31 +41,29 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     isLoading: isLoadingResource,
     isRefetching: isRefetchingResource,
     error: errorResource,
-  } = useQuery(
-    ['resource-details', params['resource_uuid']],
-    () =>
+  } = useQuery({
+    queryKey: ['resource-details', params['resource_uuid']],
+
+    queryFn: () =>
       marketplaceResourcesRetrieve({
         path: { uuid: params['resource_uuid'] },
       }).then((r) => r.data),
-    {
-      refetchOnWindowFocus: false,
-      staleTime: 3 * 60 * 1000,
-    },
-  );
+
+    refetchOnWindowFocus: false,
+    staleTime: 3 * 60 * 1000,
+  });
   const {
     data,
     refetch: refetchData,
     isLoading: isLoadingData,
     isRefetching: isRefetchingData,
     error: errorData,
-  } = useQuery(
-    ['resource-details-page', resource?.uuid],
-    () => (resource?.uuid ? fetchData(resource) : null),
-    {
-      refetchOnWindowFocus: false,
-      staleTime: 3 * 60 * 1000,
-    },
-  );
+  } = useQuery({
+    queryKey: ['resource-details-page', resource?.uuid],
+    queryFn: () => (resource?.uuid ? fetchData(resource) : null),
+    refetchOnWindowFocus: false,
+    staleTime: 3 * 60 * 1000,
+  });
 
   const isLoading = useMemo(
     () => isLoadingResource || isLoadingData,
@@ -84,9 +82,10 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     refetchData();
   }, [refetchResource, refetchData]);
 
-  const { data: resourceState } = useQuery(
-    ['ResourceState', resource?.uuid],
-    () =>
+  const { data: resourceState } = useQuery({
+    queryKey: ['ResourceState', resource?.uuid],
+
+    queryFn: () =>
       resource?.uuid
         ? marketplaceResourcesRetrieve({
             path: {
@@ -97,8 +96,10 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
             },
           }).then((r) => r.data)
         : null,
-    { refetchInterval: 10 * 1000 },
-  );
+
+    refetchInterval: 10 * 1000,
+    enabled: resource?.state !== 'OK' && !!resource?.order_in_progress,
+  });
   // Check if resource state is changed
   useEffect(() => {
     if (!resourceState || !resource) return;
@@ -159,6 +160,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         dropdown: (close) => (
           <ResourceBreadcrumbPopover resource={resource} close={close} />
         ),
+
         truncate: true,
         active: true,
       },
@@ -201,6 +203,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
         isLoading={isRefetching}
       />
     ),
+
     [resource, data, refetch, isLoading, isRefetching],
   );
 
@@ -221,6 +224,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
       onClick={openTeamModal}
       projectId={resource?.project_uuid}
     />,
+
     [openTeamModal],
   );
 

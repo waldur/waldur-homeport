@@ -12,7 +12,7 @@ const GroupCreateDialog = lazyComponent(() =>
 );
 
 const groupCreateDialog = (refetch) =>
-  openModalDialog(GroupCreateDialog, { resolve: { refetch }, size: 'md' });
+  openModalDialog(GroupCreateDialog, { resolve: { refetch }, size: 'lg' });
 
 export const GroupCreateButton = ({ refetch }) => {
   const dispatch = useDispatch();

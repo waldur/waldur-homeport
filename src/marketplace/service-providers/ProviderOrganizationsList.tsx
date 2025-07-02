@@ -45,6 +45,7 @@ const ProviderOrganizationsListComponent = ({ provider }) => {
       render: EstimatedCostField,
     },
   ];
+
   const ExpandableRow = useCallback(
     ({ row }) => (
       <OrganizationProjectsExpandable
@@ -53,6 +54,7 @@ const ProviderOrganizationsListComponent = ({ provider }) => {
         provider_customer_uuid={provider.customer_uuid}
       />
     ),
+
     [provider],
   );
 

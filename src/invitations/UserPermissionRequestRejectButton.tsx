@@ -1,4 +1,4 @@
-import { Prohibit } from '@phosphor-icons/react';
+import { ProhibitIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { userPermissionRequestsReject } from 'waldur-js-client';
@@ -23,7 +23,7 @@ const PermissionRequestActionDialog = lazyComponent(() =>
 const openPermissionRequestActionDialog = (resolve) =>
   openModalDialog(PermissionRequestActionDialog, {
     resolve,
-    size: 'md',
+    size: 'lg',
   });
 
 export const UserPermissionRequestRejectButton: FunctionComponent<
@@ -62,7 +62,7 @@ export const UserPermissionRequestRejectButton: FunctionComponent<
     <ActionButton
       action={callback}
       title={translate('Reject')}
-      iconNode={<Prohibit />}
+      iconNode={<ProhibitIcon />}
     />
   );
 };

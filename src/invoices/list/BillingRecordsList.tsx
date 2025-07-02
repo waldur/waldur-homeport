@@ -72,6 +72,7 @@ export const BillingRecordsList: FunctionComponent = () => {
               {row.number}
             </Link>
           ),
+
           export: 'number',
         },
         {
@@ -81,6 +82,7 @@ export const BillingRecordsList: FunctionComponent = () => {
           inlineFilter: (row) => [
             getInvoiceStatusOptions().find((s) => s.value === row.state),
           ],
+
           export: 'state',
         },
         {
@@ -95,6 +97,7 @@ export const BillingRecordsList: FunctionComponent = () => {
               <PriceTooltip /> {translate('Total')}
             </>
           ),
+
           render: ({ row }) => defaultCurrency(row.price),
           exportTitle: translate('Total'),
           export: (row) => defaultCurrency(row.price),

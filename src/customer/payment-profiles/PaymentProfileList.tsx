@@ -65,6 +65,7 @@ export const PaymentProfileList: FunctionComponent<{}> = () => {
           pill
         />
       ),
+
       orderField: 'is_active',
     },
   ];

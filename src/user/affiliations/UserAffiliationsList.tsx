@@ -85,6 +85,7 @@ export const UserAffiliationsList: FunctionComponent<
         ) : (
           <>{row.scope_name}</>
         ),
+
       filter: 'scope_name',
     },
     {

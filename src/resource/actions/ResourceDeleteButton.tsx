@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
@@ -53,7 +53,7 @@ export const ResourceDeleteButton: FunctionComponent<{
       title={translate('Delete')}
       disabled={loading}
       action={callback}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
       className="text-danger"
       iconColor="danger"

@@ -73,6 +73,7 @@ export const ResourcesList: FunctionComponent<{
               isClearable={false}
             />
           ),
+
           className: 'min-w-150px',
           disabledClick: true,
         },

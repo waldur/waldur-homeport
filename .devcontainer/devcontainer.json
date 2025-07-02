@@ -2,7 +2,7 @@
   "name": "Waldur HomePort",
   "image": "mcr.microsoft.com/devcontainers/typescript-node",
   "forwardPorts": [8001],
-  "postCreateCommand": "yarn install && yarn devcontainer",
+  "postStartCommand": "yarn install && yarn devcontainer",
   "customizations": {
     "vscode": {
       "extensions": [

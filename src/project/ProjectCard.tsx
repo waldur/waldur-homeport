@@ -50,6 +50,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               valueCol={6}
               valueClass="ellipsis"
             />
+
             <Field
               label={translate('Resources')}
               value={renderFieldOrDash(project.resources_count)}
@@ -57,6 +58,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               labelCol={6}
               valueCol={6}
             />
+
             <Field
               label={
                 project.start_date && project.end_date
@@ -77,6 +79,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               labelCol={6}
               valueCol={6}
             />
+
             <Field
               label={translate('Cost estimation')}
               value={defaultCurrency(
@@ -88,6 +91,7 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               labelCol={6}
               valueCol={6}
             />
+
             {(project.project_credit || project.project_credit === 0) && (
               <Field
                 label={translate('Remaining credit')}

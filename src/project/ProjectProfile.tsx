@@ -1,4 +1,4 @@
-import { Factory } from '@phosphor-icons/react';
+import { FactoryIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -6,7 +6,7 @@ import { Project } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
-import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -18,7 +18,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
   const abbreviation = useMemo(() => getItemAbbreviation(project), [project]);
 
   return (
-    <PublicDashboardHero2
+    <PublicDashboardHero
       hideQuickSection
       logo={project.image}
       logoAlt={abbreviation}
@@ -30,7 +30,7 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
             {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
               project.is_industry && (
                 <span className="svg-icon svg-icon-3 me-3">
-                  <Factory />
+                  <FactoryIcon />
                 </span>
               )}
             {project.name}
@@ -64,6 +64,6 @@ export const ProjectProfile = ({ project }: { project: Project }) => {
           </span>
         )}
       </Stack>
-    </PublicDashboardHero2>
+    </PublicDashboardHero>
   );
 };

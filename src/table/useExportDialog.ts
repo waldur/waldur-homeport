@@ -4,6 +4,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { ExportFormat } from './exporters/types';
+import { TableState } from './types';
 
 const ExportDialog = lazyComponent(() =>
   import('./ExportDialog').then((module) => ({ default: module.ExportDialog })),
@@ -11,7 +12,11 @@ const ExportDialog = lazyComponent(() =>
 
 export const useExportDialog = () => {
   const dispatch = useDispatch();
-  return (table: string, format: ExportFormat, ownProps?) => {
+  return (
+    table: string,
+    format: ExportFormat,
+    ownProps?: Partial<TableState>,
+  ) => {
     dispatch(
       openModalDialog(ExportDialog, {
         resolve: {

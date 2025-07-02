@@ -1,4 +1,4 @@
-import { CaretLeft } from '@phosphor-icons/react';
+import { CaretLeftIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
@@ -76,11 +76,7 @@ const OfferingListItem: FunctionComponent<{
             </div>
           ) : (
             <div className="symbol">
-              <ImagePlaceholder
-                width="40px"
-                height="40px"
-                backgroundColor="#e2e2e2"
-              >
+              <ImagePlaceholder width="40px" height="40px">
                 {abbreviation && (
                   <div className="symbol-label fs-6 fw-bold">
                     {abbreviation}
@@ -169,7 +165,7 @@ export const OfferingsPanel: FunctionComponent<{
         className="btn-back text-anchor fw-bold p-2 ms-5 my-2"
         onClick={goBack}
       >
-        <CaretLeft size={14} weight="bold" />
+        <CaretLeftIcon size={14} weight="bold" />
         {translate('Go back to categories')}
       </button>
       <div className="divider border-bottom mx-7" />

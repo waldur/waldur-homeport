@@ -17,6 +17,8 @@ interface ResourceCreateUsageDialogProps {
 export const ResourceCreateUsageDialog: FunctionComponent<
   ResourceCreateUsageDialogProps
 > = (props) => {
+  const isUserUsage = props.resolve.userUsage;
+
   const { loading, error, value } = useAsync(
     () => getProviderUsageComponents(props.resolve),
     [props.resolve],
@@ -24,7 +26,11 @@ export const ResourceCreateUsageDialog: FunctionComponent<
 
   return (
     <ModalDialog
-      title={translate('Resource usage') + ` "${props.resolve.resource_name}"`}
+      title={
+        (isUserUsage
+          ? translate('User usage report')
+          : translate('Resource usage')) + ` "${props.resolve.resource_name}"`
+      }
       bodyClassName="pt-2"
       footer={<ResourceUsageSubmitButton params={props.resolve} />}
     >

@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { orderFormAttributesSelector } from '@waldur/marketplace/utils';
+import { orderFormAttributesSelector } from '@waldur/marketplace/deploy/selectors';
 import { loadVolumeTypes } from '@waldur/openstack/api';
 import {
   formatVolumeTypeChoices,
@@ -41,9 +41,10 @@ export const useQuotasData = (offering: PublicOfferingDetails) => {
 };
 
 export const useVolumeDataLoader = (offering: PublicOfferingDetails) => {
-  return useQuery(
-    ['volumeTypes', offering.uuid],
-    async () => {
+  return useQuery({
+    queryKey: ['volumeTypes', offering.uuid],
+
+    queryFn: async () => {
       const volumeTypes = offering.scope_uuid
         ? await loadVolumeTypes({ tenant_uuid: offering.scope_uuid })
         : [];
@@ -54,6 +55,7 @@ export const useVolumeDataLoader = (offering: PublicOfferingDetails) => {
         defaultVolumeType,
       };
     },
-    { staleTime: 3 * 60 * 1000 },
-  );
+
+    staleTime: 3 * 60 * 1000,
+  });
 };

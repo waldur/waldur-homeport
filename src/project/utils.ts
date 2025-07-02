@@ -15,6 +15,8 @@ import {
   getCreditChartAndOptions,
   getCostChartAndOptions,
 } from '@waldur/dashboard/utils';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -41,13 +43,11 @@ async function getProjectCostData(project: Project) {
 }
 
 export function useProjectCostChart(project: Project) {
-  const { data, isLoading, error, refetch } = useQuery(
-    ['ProjectCostData', project?.uuid],
-    () => (project ? getProjectCostData(project) : null),
-    {
-      staleTime: 5 * 60 * 1000,
-    },
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['ProjectCostData', project?.uuid],
+    queryFn: () => (project ? getProjectCostData(project) : null),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const chartData = useMemo(() => {
     if (!data) return { chart: null, options: null };
@@ -93,27 +93,28 @@ export function useProjectCreditChart(project: Project) {
     isLoading: isCostLoading,
     error: costError,
     refetch: refetchCost,
-  } = useQuery(
-    ['ProjectCostData', project.uuid],
-    () => getProjectCostData(project),
-    {
-      staleTime: 5 * 60 * 1000,
-    },
-  );
+  } = useQuery({
+    queryKey: ['ProjectCostData', project.uuid],
+    queryFn: () => getProjectCostData(project),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const {
     data: creditData,
     isLoading: isCreditLoading,
     error: creditError,
     refetch: refetchCredit,
-  } = useQuery(
-    ['ProjectCreditData', project?.uuid],
-    () =>
+  } = useQuery({
+    queryKey: ['ProjectCreditData', project?.uuid],
+
+    queryFn: () =>
       projectCreditsList({
         query: { project_uuid: project?.uuid },
       }).then((response) => response.data.length > 0 && response.data[0]),
-    { refetchOnWindowFocus: false, staleTime: 60 * 1000 },
-  );
+
+    refetchOnWindowFocus: false,
+    staleTime: 60 * 1000,
+  });
 
   const chartData = useMemo(() => {
     if (!costData || !creditData) return { chart: null, options: null };
@@ -164,5 +165,10 @@ export const PROJECT_TEAM_TABLE_TABS = [
     key: 'project-invitations',
     title: translate('Invitations'),
     state: 'project-invitations',
+  },
+  isFeatureVisible(InvitationsFeatures.show_service_accounts) && {
+    key: 'project-service-accounts',
+    title: translate('Service accounts'),
+    state: 'project-service-accounts',
   },
 ];

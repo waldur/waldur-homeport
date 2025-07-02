@@ -157,6 +157,7 @@ export const AttachDocumentsDialog = reduxForm<
             maxSize={2 * 1024 * 1024} // 2MB
             accept={ACCEPTED_FILE_TYPES}
           />
+
           <AttachmentsList
             attachments={attachments}
             uploading={pendingFiles}
@@ -170,6 +171,7 @@ export const AttachDocumentsDialog = reduxForm<
               />
             )}
           />
+
           {pendingFiles.map((file, index) => (
             <Field
               key={index}

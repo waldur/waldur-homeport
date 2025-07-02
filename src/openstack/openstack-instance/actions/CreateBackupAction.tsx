@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OpenStackInstance } from 'waldur-js-client';
 
@@ -25,7 +25,7 @@ export const CreateBackupAction: FC<CreateBackupActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Create')}
-    iconNode={<PlusCircle weight="bold" />}
+    iconNode={<PlusCircleIcon weight="bold" />}
     modalComponent={CreateBackupDialog}
     formId={RESOURCE_ACTION_FORM}
     resource={resource}

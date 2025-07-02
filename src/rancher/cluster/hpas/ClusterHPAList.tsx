@@ -1,5 +1,4 @@
-import { FunctionComponent, useMemo } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
+import { FunctionComponent } from 'react';
 import {
   RancherCluster,
   RancherHpa,
@@ -9,26 +8,36 @@ import {
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
+import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
+import { ClusterFilter, useClusterFilter } from '../ClusterFilter';
 import { ViewYAMLButton } from '../ViewYAMLButton';
 
 import { HPACreateButton } from './HPACreateButton';
 import { HPADeleteButton } from './HPADeleteButton';
 import { HPAUpdateButton } from './HPAUpdateButton';
 
-export const ClusterHPAList: FunctionComponent<{
-  resourceScope: RancherCluster;
-}> = ({ resourceScope }) => {
-  const filter = useMemo(
-    () => ({
-      cluster_uuid: resourceScope.uuid,
-    }),
-    [resourceScope],
-  );
+const RowActions = ({ row, yamlRetrieve, yamlUpdate }) => (
+  <ActionsDropdownComponent>
+    <ViewYAMLButton
+      yamlRetrieve={yamlRetrieve}
+      yamlUpdate={yamlUpdate}
+      resource={row}
+    />
 
+    <HPAUpdateButton hpa={row} />
+    <HPADeleteButton hpa={row} />
+  </ActionsDropdownComponent>
+);
+
+export const ClusterHPAList: FunctionComponent<
+  TableWithPortal<{ resourceScope: RancherCluster }>
+> = ({ resourceScope, portal }) => {
+  const filter = useClusterFilter(resourceScope);
   const props = useTable({
     table: 'rancher-hpas',
     fetchData: createFetcher('rancher-hpas'),
@@ -47,10 +56,12 @@ export const ClusterHPAList: FunctionComponent<{
         {
           title: translate('Project'),
           render: ({ row }) => <>{row.project_name}</>,
+          filter: 'rancher_project',
         },
         {
           title: translate('Namespace'),
           render: ({ row }) => <>{row.namespace_name}</>,
+          filter: 'namespace',
         },
         {
           title: translate('Workload'),
@@ -80,23 +91,22 @@ export const ClusterHPAList: FunctionComponent<{
           title: translate('State'),
           render: ({ row }) => <>{row.runtime_state}</>,
         },
-        {
-          title: translate('Actions'),
-          render: ({ row }) => (
-            <ButtonGroup>
-              <ViewYAMLButton
-                yamlRetrieve={rancherHpasYamlRetrieve}
-                yamlUpdate={rancherHpasYamlUpdate}
-                resource={row}
-              />
-              <HPAUpdateButton hpa={row} />
-              <HPADeleteButton hpa={row} />
-            </ButtonGroup>
-          ),
-        },
       ]}
+      rowActions={({ row }) => (
+        <RowActions
+          yamlRetrieve={rancherHpasYamlRetrieve}
+          yamlUpdate={rancherHpasYamlUpdate}
+          row={row}
+        />
+      )}
       verboseName={translate('horizontal pod autoscalers')}
+      showPageSizeSelector
       tableActions={<HPACreateButton cluster={resourceScope} />}
+      filters={<ClusterFilter cluster={resourceScope} />}
+      portal={portal}
+      hasActionBar={false}
+      cardBordered={false}
+      fullWidth
     />
   );
 };

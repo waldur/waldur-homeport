@@ -20,10 +20,10 @@ export const OpenstackTenantActions = (props) => (
       <EditAction {...props} />
       <RequestDirectAccessAction {...props} />
       <MigrateTenantAction {...props} />
+      <PullTenantAction {...props} />
     </ActionGroup>
 
     <ActionGroup title={translate('Billing actions')}>
-      <PullTenantAction {...props} />
       <ChangePlanAction {...props} />
       <ChangeLimitsAction {...props} />
       <ShowUsageAction {...props} />

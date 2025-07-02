@@ -1,4 +1,4 @@
-import { MagnifyingGlass } from '@phosphor-icons/react';
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useEffect, useRef } from 'react';
 import { Form, FormControlProps } from 'react-bootstrap';
@@ -29,7 +29,11 @@ export const FilterBox: FC<FilterBoxProps> = ({
   return (
     <div className={classNames('position-relative', className)}>
       <span className="svg-icon svg-icon-2 position-absolute top-50 translate-middle-y ms-4">
-        <MagnifyingGlass weight="bold" size={20} className="text-gray-500" />
+        <MagnifyingGlassIcon
+          weight="bold"
+          size={20}
+          className="text-gray-500"
+        />
       </span>
       <Form.Control
         type="text"

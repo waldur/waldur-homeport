@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -24,7 +24,7 @@ export const UserTableActions = ({ refetch }) => {
   return (
     <Button onClick={openDialog} className="me-3">
       <span className="svg-icon svg-icon-2">
-        <Plus weight="bold" />
+        <PlusIcon weight="bold" />
       </span>{' '}
       {translate('Add user')}
     </Button>

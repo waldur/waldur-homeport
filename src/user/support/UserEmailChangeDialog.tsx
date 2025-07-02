@@ -27,6 +27,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
             variant="outline btn-outline-default"
             className="flex-equal"
           />
+
           {!user.requested_email ? (
             <SubmitButton
               disabled={email === user.email || !email || isProtected}
@@ -54,6 +55,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
             defaultValue={user.requested_email}
             className="form-control-solid"
           />
+
           <Form.Text muted>{translate('Request has been sent')}</Form.Text>
         </>
       ) : (

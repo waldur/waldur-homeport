@@ -1,4 +1,4 @@
-import { Star } from '@phosphor-icons/react';
+import { StarIcon } from '@phosphor-icons/react';
 import { ReactNode } from 'react';
 
 import { Link } from '@waldur/core/Link';
@@ -48,6 +48,7 @@ export const SearchItem = (props: SearchItemProps) => {
         className="me-4"
         circle
       />
+
       <div className="d-flex flex-column justify-content-start fw-semibold">
         <span className="fs-6 fw-semibold">{props.title}</span>
         {Boolean(props.subtitle) && (
@@ -74,9 +75,9 @@ export const SearchItem = (props: SearchItemProps) => {
           }
         >
           {isFav ? (
-            <Star size={20} weight="fill" className="text-warning" />
+            <StarIcon size={20} weight="fill" className="text-warning" />
           ) : (
-            <Star size={20} className="text-dark" />
+            <StarIcon size={20} className="text-dark" />
           )}
         </button>
       </div>

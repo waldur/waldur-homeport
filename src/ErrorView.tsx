@@ -1,4 +1,8 @@
-import { ArrowClockwise, Eye, WarningCircle } from '@phosphor-icons/react';
+import {
+  ArrowClockwiseIcon,
+  EyeIcon,
+  WarningCircleIcon,
+} from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -23,14 +27,14 @@ interface ErrorViewProps {
 export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
   const dispatch = useDispatch();
   const openErrorTraceDialog = () =>
-    dispatch(openModalDialog(ErrorTraceDialog, { error }));
+    dispatch(openModalDialog(ErrorTraceDialog, { error } as any));
 
   return (
     <div className="search-error">
       <Bg className="background" />
       <div className="text-center d-flex flex-column align-items-center gap-6 pb-10 position-relative z-index-1">
         <div className="error-icon">
-          <WarningCircle weight="bold" size={24} />
+          <WarningCircleIcon weight="bold" size={24} />
         </div>
 
         <div>
@@ -49,7 +53,7 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
             onClick={openErrorTraceDialog}
           >
             <span className="svg-icon svg-icon-2">
-              <Eye weight="bold" />
+              <EyeIcon weight="bold" />
             </span>
             {translate('Show error trace')}
           </Button>
@@ -58,7 +62,7 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
             onClick={() => location.reload()}
           >
             <span className="svg-icon svg-icon-2">
-              <ArrowClockwise weight="bold" />
+              <ArrowClockwiseIcon weight="bold" />
             </span>
             {translate('Reload')}
           </Button>

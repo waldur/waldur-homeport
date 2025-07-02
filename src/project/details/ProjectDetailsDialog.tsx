@@ -1,4 +1,4 @@
-import { ClipboardText } from '@phosphor-icons/react';
+import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
@@ -20,7 +20,7 @@ export const ProjectDetailsDialog: FC<{
         name: project.customer_name,
       })}
       closeButton
-      iconNode={<ClipboardText weight="bold" />}
+      iconNode={<ClipboardTextIcon weight="bold" />}
       iconColor="success"
     >
       <FormTable hideActions alignTop detailsMode className="gy-5">
@@ -28,10 +28,12 @@ export const ProjectDetailsDialog: FC<{
           label={translate('Name')}
           value={<FieldWithCopy value={project.name} />}
         />
+
         <FormTable.Item
           label={translate('Owner')}
           value={<FieldWithCopy value={project.customer_name} />}
         />
+
         <FormTable.Item
           label={translate('Start date')}
           value={
@@ -40,6 +42,7 @@ export const ProjectDetailsDialog: FC<{
             />
           }
         />
+
         <FormTable.Item
           label={translate('End date')}
           value={
@@ -48,10 +51,12 @@ export const ProjectDetailsDialog: FC<{
             />
           }
         />
+
         <FormTable.Item
           label={translate('Description')}
           value={<FieldWithCopy value={project.description} />}
         />
+
         <FormTable.Item
           label={translate('Estimated cost')}
           value={<FieldWithCopy value={ProjectCostField({ row: project })} />}

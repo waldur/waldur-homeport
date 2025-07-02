@@ -1,4 +1,4 @@
-import { CaretCircleDown, CaretCircleUp } from '@phosphor-icons/react';
+import { CaretCircleDownIcon, CaretCircleUpIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 
@@ -63,9 +63,9 @@ export const CategoriesList: FC = () => {
             {showAll ? translate('See less') : translate('See more')}
             <span className="svg-icon svg-icon-2">
               {showAll ? (
-                <CaretCircleUp weight="bold" />
+                <CaretCircleUpIcon weight="bold" />
               ) : (
-                <CaretCircleDown weight="bold" />
+                <CaretCircleDownIcon weight="bold" />
               )}
             </span>
           </Button>

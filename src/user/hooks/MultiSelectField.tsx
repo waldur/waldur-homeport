@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { FormCheck, ListGroup, ListGroupItem } from 'react-bootstrap';
 
@@ -24,6 +24,7 @@ export const MultiSelectField: FunctionComponent<{ input; options }> = ({
               input.onChange({ ...input.value, [option.key]: e.target.checked })
             }
           />
+
           <FormCheck.Label className="d-flex justify-content-between">
             {option.title}
             {option.help_text && (
@@ -33,7 +34,7 @@ export const MultiSelectField: FunctionComponent<{ input; options }> = ({
                   label={option.help_text}
                   autoWidth={true}
                 >
-                  <Question />
+                  <QuestionIcon />
                 </Tip>
               </div>
             )}

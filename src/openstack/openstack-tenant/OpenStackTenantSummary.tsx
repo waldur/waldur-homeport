@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Badge, Col, Container, Row } from 'react-bootstrap';
+import { Badge, Col, Row } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/config';
 import { ExternalLink } from '@waldur/core/ExternalLink';
@@ -123,7 +123,7 @@ export const OpenStackTenantSummary: FunctionComponent<
   );
 
   return (
-    <Container>
+    <>
       <Row>
         <Col>
           <ResourceSummaryBase resource={resource} hideBaseInfo />
@@ -144,13 +144,16 @@ export const OpenStackTenantSummary: FunctionComponent<
         </Col>
       </Row>
       {quotas.length > 0 && (
-        <Field
-          label={translate('Quotas')}
-          value={<QuotaBadges quotas={quotas} />}
-          className="mt-4"
-          isStuck
-        />
+        <Row className="mt-4">
+          <Col>
+            <Field
+              label={translate('Quotas')}
+              value={<QuotaBadges quotas={quotas} />}
+              isStuck
+            />
+          </Col>
+        </Row>
       )}
-    </Container>
+    </>
   );
 };

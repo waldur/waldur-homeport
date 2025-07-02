@@ -4,6 +4,7 @@ import { DestroySecurityGroupAction } from './DestroySecurityGroupAction';
 import { EditAction } from './EditAction';
 import { PullSecurityGroupAction } from './PullSecurityGroupAction';
 import { SetRulesAction } from './SetRulesAction';
+import { UnlinkSecurityGroupAction } from './UnlinkSecurityGroupAction';
 
 export const OpenStackSecurityGroupActions: ActionConfiguration = {
   type: 'OpenStack.SecurityGroup',
@@ -12,5 +13,6 @@ export const OpenStackSecurityGroupActions: ActionConfiguration = {
     SetRulesAction,
     DestroySecurityGroupAction,
     PullSecurityGroupAction,
+    UnlinkSecurityGroupAction,
   ],
 };

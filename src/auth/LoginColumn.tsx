@@ -24,10 +24,10 @@ import './LoginColumn.scss';
 export const LoginColumn = () => {
   const features = useAuthFeatures();
   const imageUrl = getIconUrl('login_logo');
-  const { data, isLoading, error, refetch } = useQuery(
-    ['IdentityProvidersConfigurations'],
-    () => getIdentityProviders(),
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['IdentityProvidersConfigurations'],
+    queryFn: () => getIdentityProviders(),
+  });
   const params = getQueryParams();
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { SubmissionError } from 'redux-form';
 import { projectCreditsUpdate } from 'waldur-js-client';
@@ -56,7 +56,7 @@ export const ProjectEditCreditButton = ({ row, refetch }) => {
   return (
     <Dropdown.Item as="button" onClick={openCreditFormDialog}>
       <span className="svg-icon svg-icon-2">
-        <PencilSimple weight="bold" />
+        <PencilSimpleIcon weight="bold" />
       </span>
       {translate('Edit')}
     </Dropdown.Item>

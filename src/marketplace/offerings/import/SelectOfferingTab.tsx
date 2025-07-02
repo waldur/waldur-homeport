@@ -22,14 +22,15 @@ export const SelectOfferingTab = () => {
     isLoading,
     error,
     data: offerings,
-  } = useQuery(
-    [
+  } = useQuery({
+    queryKey: [
       'RemoteOfferings',
       formData?.api_url,
       !formData?.token,
       !formData?.customer?.uuid,
     ],
-    () => {
+
+    queryFn: () => {
       if (!formData?.api_url || !formData?.token || !formData?.customer?.uuid) {
         return Promise.reject(
           new Error(translate('Please check the credentials again.')),
@@ -48,8 +49,10 @@ export const SelectOfferingTab = () => {
         })),
       );
     },
-    { staleTime: 60 * 1000, retry: false },
-  );
+
+    staleTime: 60 * 1000,
+    retry: false,
+  });
 
   const dispatch = useDispatch();
   const updateCategoriesMapping = (offerings: Offering[]) => {
@@ -77,6 +80,7 @@ export const SelectOfferingTab = () => {
         className="border-bottom border-top py-5 mb-5"
         labelClass="fw-bolder me-3"
       />
+
       <SelectField
         name="offerings"
         label={translate('Offerings')}
@@ -106,6 +110,7 @@ export const SelectOfferingTab = () => {
           ),
         }}
       />
+
       {isLoading ? null : error ? (
         <ErredRemoteConnection
           error={error}

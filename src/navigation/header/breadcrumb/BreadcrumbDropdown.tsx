@@ -1,4 +1,4 @@
-import { FunnelSimple } from '@phosphor-icons/react';
+import { FunnelSimpleIcon } from '@phosphor-icons/react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
 import { ComponentType, FC, useCallback, useState } from 'react';
@@ -63,20 +63,16 @@ export const BreadcrumbDropdown: FC<BreadcrumbDropdownProps> = ({
     [setQuery],
   );
 
-  const context = useInfiniteQuery<any, any, DataPage>(
-    ['SearchBoxResults', api, params, query, formValues],
-    loadData,
-    {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
-      meta: { api, params: { ...params, [queryField]: query, ...formValues } },
-      refetchOnWindowFocus: false,
-      useErrorBoundary: false,
-      retry: false,
-      onError: () => {
-        /* Catch error to prevent showing error boundary view */
-      },
-    },
-  );
+  const context = useInfiniteQuery<any, any, DataPage>({
+    queryKey: ['SearchBoxResults', api, params, query, formValues],
+    queryFn: loadData,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    meta: { api, params: { ...params, [queryField]: query, ...formValues } },
+    refetchOnWindowFocus: false,
+    throwOnError: false,
+    retry: false,
+  });
 
   return (
     <div>
@@ -89,6 +85,7 @@ export const BreadcrumbDropdown: FC<BreadcrumbDropdownProps> = ({
           className="flex-grow-1"
           autoFocus
         />
+
         {Boolean(filters) && (
           <Button
             variant="outline-default"
@@ -96,7 +93,7 @@ export const BreadcrumbDropdown: FC<BreadcrumbDropdownProps> = ({
             onClick={setFilterOpen}
           >
             <span className="svg-icon svg-icon-1">
-              <FunnelSimple weight="bold" />
+              <FunnelSimpleIcon weight="bold" />
             </span>
             {!isEmpty(formValues) && (
               <HeaderButtonBullet size={8} blink={false} className="me-n2" />

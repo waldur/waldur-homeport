@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { userInvitationsDetailsRetrieve } from 'waldur-js-client';
 
 import { getInvitationLinkProps } from '@waldur/administration/getInvitationLinkProps';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -20,28 +20,30 @@ import { clearInvitationToken } from './InvitationStorage';
 export const InvitationConfirmDialog: FunctionComponent<{
   resolve: { token; deferred };
 }> = ({ resolve: { token, deferred } }) => {
-  const dispatch = useDispatch();
   const router = useRouter();
 
   const user = useSelector(getUser);
-  const asyncResult = useQuery(['invitation', token], () =>
-    userInvitationsDetailsRetrieve({ path: { uuid: token } }).then(
-      (response) => response.data,
-    ),
-  );
+  const asyncResult = useQuery({
+    queryKey: ['invitation', token],
+
+    queryFn: () =>
+      userInvitationsDetailsRetrieve({ path: { uuid: token } }).then(
+        (response) => response.data,
+      ),
+  });
   const invitation = asyncResult.data;
 
-  const close = useCallback(() => dispatch(closeModalDialog()), [dispatch]);
+  const { closeDialog } = useModal();
 
   const dismiss = useCallback(() => {
     deferred.reject();
-    close();
-  }, [close, deferred]);
+    closeDialog();
+  }, [closeDialog, deferred]);
 
   const closeAcceptingInvitation = useCallback(() => {
-    close();
+    closeDialog();
     deferred.resolve({ invitation });
-  }, [close, deferred, invitation]);
+  }, [closeDialog, deferred, invitation]);
 
   useEffect(() => {
     if (invitation?.state === 'accepted') {
@@ -50,7 +52,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
         router.stateService.go(linkProps.state, linkProps.params);
       }
       clearInvitationToken();
-      close();
+      closeDialog();
     }
   }, [invitation]);
 

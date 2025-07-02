@@ -1,6 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import { customersUsersList } from 'waldur-js-client';
 
 import { parseSelectData } from '@waldur/core/api';
@@ -50,7 +50,7 @@ export const CustomerDashboardChart: FunctionComponent<
   }
   if (costChart.chart || teamChart.chart) {
     return (
-      <Row>
+      <>
         {Boolean(costChart.chart) && (
           <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
             <WidgetCard
@@ -76,7 +76,7 @@ export const CustomerDashboardChart: FunctionComponent<
                 customersUsersList({
                   path: { uuid: customer.uuid },
                   query: {
-                    field: ['uuid', 'full_name', 'email', 'role_name'],
+                    field: ['uuid', 'full_name', 'email', 'role_name', 'image'],
                     page_size: 5,
                   },
                 }).then(parseSelectData)
@@ -91,7 +91,7 @@ export const CustomerDashboardChart: FunctionComponent<
             />
           </Col>
         )}
-      </Row>
+      </>
     );
   }
   return null;

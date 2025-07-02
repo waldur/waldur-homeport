@@ -17,5 +17,6 @@ export const PullNodeAction: ActionItemType = ({ resource, refetch }) => {
         staff={ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE}
       />
     );
+
   return null;
 };

@@ -1,4 +1,4 @@
-import { Pen } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
@@ -31,7 +31,7 @@ export const ProjectEditAction = ({ project }: { project: Project }) => {
       action={() =>
         router.stateService.go('project-manage', { uuid: project.uuid })
       }
-      iconNode={<Pen weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
     />
   );
 };

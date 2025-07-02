@@ -152,5 +152,15 @@
         }
       }
     }
+
+    // Radio button at the right
+    &.right-radio {
+      .form-check-box {
+        flex-direction: row-reverse;
+        align-items: baseline;
+        gap: 10px;
+        column-gap: 10px;
+      }
+    }
   }
 }

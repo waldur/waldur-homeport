@@ -17,8 +17,8 @@ import { useTable } from '@waldur/table/useTable';
 export const TenantSnapshotsList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackSnapshotsListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackSnapshotsListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
     }),
     [resourceScope],
@@ -65,6 +65,7 @@ export const TenantSnapshotsList: FunctionComponent<{ resourceScope }> = ({
       title={translate('Snapshots')}
       verboseName={translate('snapshots')}
       hasQuery={false}
+      showPageSizeSelector
     />
   );
 };

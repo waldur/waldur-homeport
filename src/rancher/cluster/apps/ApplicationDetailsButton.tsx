@@ -1,11 +1,11 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 const ApplicationDetailsDialog = lazyComponent(() =>
   import('./ApplicationDetailsDialog').then((module) => ({
@@ -22,10 +22,10 @@ export const ApplicationDetailsButton: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();
   const callback = () => dispatch(applicationDetailsDialog(props.application));
   return (
-    <ActionButton
+    <ActionItem
       title={translate('Details')}
       action={callback}
-      iconNode={<Eye />}
+      iconNode={<EyeIcon weight="bold" />}
     />
   );
 };

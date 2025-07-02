@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
@@ -85,7 +85,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) => {
                         })
                   }
                 >
-                  <Question size={20} className="text-muted ms-1" />
+                  <QuestionIcon size={20} className="text-muted ms-1" />
                 </Tip>
               )}
               <div className="flex-grow-1 d-flex justify-content-end gap-2">

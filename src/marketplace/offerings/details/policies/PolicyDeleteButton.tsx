@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceOfferingEstimatedCostPoliciesDestroy,
@@ -57,7 +57,7 @@ export const PolicyDeleteButton = ({
       title={translate('Remove')}
       action={openDialog}
       variant="outline-danger"
-      iconNode={<Trash />}
+      iconNode={<TrashIcon />}
       size="sm"
     />
   );

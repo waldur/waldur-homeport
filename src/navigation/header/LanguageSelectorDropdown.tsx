@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
+import { CountryFlagIcon } from '@waldur/core/CountryFlagIcon';
 import { translate } from '@waldur/i18n';
 import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 
 export const LanguageCountry = {
   ar: 'sa',
@@ -28,19 +28,19 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
 
   return (
     <div
-      className="menu-item px-5"
+      className="menu-item"
       data-kt-menu-trigger="hover"
       data-kt-menu-placement="left-start"
       data-kt-menu-flip="bottom"
     >
-      <div className="menu-link px-5">
+      <div className="menu-link">
         <span className="menu-title position-relative">
           {translate('Language')}
           <span className="d-flex flex-center gap-2 fs-8 rounded bg-light px-3 py-1 position-absolute translate-middle-y top-50 end-0">
             {currentLanguage.label}{' '}
-            <CountryFlag
+            <CountryFlagIcon
               countryCode={LanguageCountry[currentLanguage.code]}
-              fontSize={16}
+              size="sm"
             />
           </span>
         </span>
@@ -49,7 +49,7 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
       <div className="menu-sub menu-sub-dropdown w-175px py-4">
         {languageChoices.map((language) => (
           <div
-            className="menu-item px-3"
+            className="menu-item"
             key={language.code}
             data-kt-menu-trigger="click"
             aria-hidden="true"
@@ -58,12 +58,12 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
             }}
           >
             <div
-              className={classNames('menu-link d-flex px-5', {
+              className={classNames('menu-link d-flex', {
                 active: language.code === currentLanguage.code,
               })}
             >
               <span className="symbol symbol-20px me-4">
-                <CountryFlag countryCode={LanguageCountry[language.code]} />
+                <CountryFlagIcon countryCode={LanguageCountry[language.code]} />
               </span>
               {language.label}
             </div>

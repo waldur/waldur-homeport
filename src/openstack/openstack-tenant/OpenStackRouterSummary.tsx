@@ -19,6 +19,7 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
           )
         }
       />
+
       {props.resource.offering_external_ips.length ? (
         <Field
           label={translate('External IPs')}

@@ -14,7 +14,7 @@ vi.mock('@waldur/core/config', () => ({
       WALDUR_OPENSTACK: {
         TENANT_CREDENTIALS_VISIBLE: true,
       },
-      WALDUR_CORE: { ENABLE_RESOURCE_END_DATE: false },
+      WALDUR_CORE: {},
     },
   },
 }));

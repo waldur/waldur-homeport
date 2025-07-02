@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Button, Col } from 'react-bootstrap';
@@ -43,11 +43,11 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
   emailKey,
   imageKey,
 }) => {
-  const { data, isLoading, error, refetch } = useQuery(
-    ['TeamWidget', scope?.uuid],
-    api,
-    { staleTime: 3 * 60 * 1000 },
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['TeamWidget', scope?.uuid],
+    queryFn: api,
+    staleTime: 3 * 60 * 1000,
+  });
 
   const count = data?.totalItems ?? 0;
 
@@ -81,7 +81,7 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
           : null
       }
       right={
-        <Col xs="auto" className="d-flex gap-3">
+        <Col xs="auto" className="d-flex align-items-center gap-3">
           {isLoading ? (
             <LoadingSpinner />
           ) : error ? (
@@ -108,7 +108,7 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
                 className="btn-icon btn-outline-dashed border-2 btn-color-muted btn-active-color-primary btn-circle w-40px h-40px"
                 onClick={onAddClick}
               >
-                <Plus size={18} weight="bold" />
+                <PlusIcon size={18} weight="bold" />
               </Button>
             </div>
           )}

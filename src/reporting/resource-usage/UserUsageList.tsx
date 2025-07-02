@@ -63,6 +63,7 @@ export const UserUsageList: FC = () => {
       render: ({ row }) => (
         <ResourceLink uuid={row.resource_uuid} label={row.resource_name} />
       ),
+
       filter: 'resource',
       inlineFilter: (row) => ({
         name: row.resource_name,

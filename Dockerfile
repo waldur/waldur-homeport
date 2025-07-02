@@ -1,5 +1,7 @@
+ARG DOCKER_REGISTRY=docker.io/
+
 # build environment
-FROM node:lts-alpine as build
+FROM ${DOCKER_REGISTRY}node:lts-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json yarn.lock /app/
@@ -21,7 +23,7 @@ ENV NODE_OPTIONS --max-old-space-size=32768
 RUN yarn vite build --base=$ASSET_PATH
 
 # production environment
-FROM nginx:stable-alpine
+FROM ${DOCKER_REGISTRY}nginx:stable-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY --from=build /app/dist/index.html /usr/share/nginx/html/index.orig.html
 COPY --from=build /app/build-info/ /build-info/

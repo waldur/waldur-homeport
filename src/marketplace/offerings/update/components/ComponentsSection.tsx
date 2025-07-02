@@ -99,9 +99,10 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
         <>
           <EditComponentButton
             offering={props.offering}
-            refetch={props.refetch}
+            refetch={tableProps.fetch}
             component={row}
           />
+
           <DeleteComponentButton offering={props.offering} component={row} />
         </>
       )}

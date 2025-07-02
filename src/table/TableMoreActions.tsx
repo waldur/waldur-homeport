@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { DotsThreeVertical } from '@phosphor-icons/react';
+import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -23,12 +23,13 @@ export const TableMoreActions: FunctionComponent<TableMoreActionsProps> = ({
       <Button
         variant="active-light-primary"
         className="btn-icon btn-text-gray-500 no-arrow"
+        size="lg"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom-end"
         data-kt-menu-attach="parent"
       >
         <span className="svg-icon svg-icon-2">
-          <DotsThreeVertical weight="bold" />
+          <DotsThreeVerticalIcon weight="bold" />
         </span>
       </Button>
 

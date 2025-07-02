@@ -1,4 +1,4 @@
-import { CaretDown, PlusCircle } from '@phosphor-icons/react';
+import { CaretDownIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
@@ -21,11 +21,11 @@ export const TeamDropdownActions = ({
     <Dropdown placement="bottom-end">
       <Dropdown.Toggle variant="primary" className="no-arrow btn-icon-right">
         <span className="svg-icon svg-icon-2">
-          <PlusCircle weight="bold" />
+          <PlusCircleIcon weight="bold" />
         </span>
         {translate('Add')}
         <span className="svg-icon svg-icon-2 rotate-180">
-          <CaretDown weight="bold" />
+          <CaretDownIcon weight="bold" />
         </span>
       </Dropdown.Toggle>
       <Dropdown.Menu flip>

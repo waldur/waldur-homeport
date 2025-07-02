@@ -61,6 +61,58 @@ export const ProviderForm = () => (
     >
       <Field name="protected_fields" component={StringField as any} />
     </FormGroup>
+    <FormGroup
+      label={translate('Extra scope')}
+      description={translate(
+        'Space-separated list of scopes to request during authentication.',
+      )}
+    >
+      <Field name="extra_scope" component={StringField as any} />
+    </FormGroup>
+    <FormGroup
+      label={translate('User field')}
+      description={translate('The field to be used for looking up the user.')}
+    >
+      <Field
+        name="user_field"
+        component={StringField as any}
+        placeholder="username"
+      />
+    </FormGroup>
+    <FormGroup
+      label={translate('User claim')}
+      description={translate(
+        'Space seprated list of OIDC claims to be used as the value for the lookup field.',
+      )}
+    >
+      <Field
+        name="user_claim"
+        component={StringField as any}
+        placeholder="sub"
+      />
+    </FormGroup>
+    <FormGroup
+      label={translate('First name field')}
+      description={translate(
+        'The OIDC claim to be used as the value for the first name field.',
+      )}
+    >
+      <Field
+        name="attribute_mapping.first_name"
+        component={StringField as any}
+      />
+    </FormGroup>
+    <FormGroup
+      label={translate('Last name field')}
+      description={translate(
+        'The OIDC claim to be used as the value for the last name field.',
+      )}
+    >
+      <Field
+        name="attribute_mapping.last_name"
+        component={StringField as any}
+      />
+    </FormGroup>
     <Form.Group className="mb-7">
       <Field
         name="is_active"

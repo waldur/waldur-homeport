@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { proposalProtectedCallsDetachDocuments } from 'waldur-js-client';
 
@@ -53,7 +53,7 @@ export const RemoveDocumentButton = (props) => {
     <RowActionButton
       action={callback}
       title={translate('Remove')}
-      iconNode={<Trash />}
+      iconNode={<TrashIcon />}
       variant="danger"
       size="sm"
     />

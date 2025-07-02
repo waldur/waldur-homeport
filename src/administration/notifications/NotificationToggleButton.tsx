@@ -1,4 +1,4 @@
-import { BellSimple, BellSimpleSlash } from '@phosphor-icons/react';
+import { BellSimpleIcon, BellSimpleSlashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -49,9 +49,9 @@ export const NotificationToggleButton: FunctionComponent<{
       title={row.enabled ? translate('Disable') : translate('Enable')}
       iconNode={
         row.enabled ? (
-          <BellSimple weight="bold" />
+          <BellSimpleIcon weight="bold" />
         ) : (
-          <BellSimpleSlash weight="bold" />
+          <BellSimpleSlashIcon weight="bold" />
         )
       }
       size="sm"

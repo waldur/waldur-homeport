@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { ProviderOfferingDetails } from 'waldur-js-client';
@@ -42,7 +42,7 @@ export const PreviewOfferingButton = ({
       }}
     >
       <span className="svg-icon svg-icon-2">
-        <Eye weight="bold" />
+        <EyeIcon weight="bold" />
       </span>
       {translate('Preview order form')}
     </Dropdown.Item>

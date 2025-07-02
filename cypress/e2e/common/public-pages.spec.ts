@@ -1,6 +1,6 @@
 describe('Public marketplace pages', () => {
   beforeEach(() => {
-    cy.mockConfigs().mockChecklists();
+    cy.mockConfigs().mockChecklists().setAcceptCookies();
 
     cy.intercept('GET', '/api/users/me/', {
       statusCode: 401,
@@ -63,7 +63,7 @@ describe('Public marketplace pages', () => {
 
 describe('Public calls for proposals pages', () => {
   beforeEach(() => {
-    cy.mockConfigs().mockChecklists();
+    cy.mockConfigs().mockChecklists().setAcceptCookies();
 
     cy.intercept('GET', '/api/users/me/', {
       statusCode: 401,
@@ -144,7 +144,7 @@ describe('Public calls for proposals pages', () => {
 
 describe('TOS and PP pages', () => {
   beforeEach(() => {
-    cy.mockConfigs().mockChecklists();
+    cy.mockConfigs().mockChecklists().setAcceptCookies();
 
     cy.intercept('GET', '/api/users/me/', {
       statusCode: 401,

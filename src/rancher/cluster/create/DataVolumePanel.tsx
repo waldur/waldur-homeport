@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
-import { FormName, FormSection } from 'redux-form';
+import { FormSection } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { RancherFeatures } from '@waldur/FeaturesEnums';
@@ -17,7 +17,6 @@ interface OwnProps {
   nodeIndex: number;
   onRemove(index: number): void;
   volumeTypes: any[];
-  mountPoints: any[];
 }
 
 export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
@@ -31,21 +30,9 @@ export const DataVolumePanel: FunctionComponent<OwnProps> = (props) => (
     <Card.Body>
       <FormSection name={props.volumePath}>
         {isFeatureVisible(RancherFeatures.volume_mount_point) && (
-          <FormName>
-            {({ form }) => (
-              <VolumeMountPointGroup
-                form={form}
-                nodeIndex={props.nodeIndex}
-                volumeIndex={props.volumeIndex}
-                mountPoints={props.mountPoints}
-              />
-            )}
-          </FormName>
+          <VolumeMountPointGroup nodeIndex={props.nodeIndex} />
         )}
-        <VolumeSizeGroup
-          nodeIndex={props.nodeIndex}
-          volumeIndex={props.volumeIndex}
-        />
+        <VolumeSizeGroup />
         <VolumeTypeGroup volumeTypes={props.volumeTypes} />
       </FormSection>
     </Card.Body>

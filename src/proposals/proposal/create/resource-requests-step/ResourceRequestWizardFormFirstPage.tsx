@@ -18,17 +18,17 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
     isLoading,
     error,
     refetch,
-  } = useQuery(
-    ['publicCall', props.data.call.uuid],
-    () =>
+  } = useQuery({
+    queryKey: ['publicCall', props.data.call.uuid],
+
+    queryFn: () =>
       proposalPublicCallsRetrieve({
         path: { uuid: props.data.call.uuid },
       }).then((r) => r.data),
-    {
-      refetchOnWindowFocus: false,
-      staleTime: 60 * 1000,
-    },
-  );
+
+    refetchOnWindowFocus: false,
+    staleTime: 60 * 1000,
+  });
   const options = useMemo(() => {
     if (!call) return [];
     return call.offerings

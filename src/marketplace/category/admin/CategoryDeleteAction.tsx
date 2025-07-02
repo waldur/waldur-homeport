@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceCategoriesDestroy } from 'waldur-js-client';
@@ -49,7 +49,7 @@ export const CategoryDeleteAction = (props: CategoryDeleteActionProps) => {
       title={translate('Remove')}
       className="text-danger"
       action={openDialog}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       iconColor="danger"
       disabled={removing}
     />

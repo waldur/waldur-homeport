@@ -27,16 +27,19 @@ export const PlanActions = ({ offering, plan, refetch, user }) => {
               refetch={refetch}
               plan={plan}
             />
+
             <EditPlanPricesButton
               offering={offering}
               refetch={refetch}
               plan={plan}
             />
+
             <EditPlanQuotasButton
               offering={offering}
               refetch={refetch}
               plan={plan}
             />
+
             <UpdateAccessPoliciesAction plan={plan} refetch={refetch} />
           </>
         )}

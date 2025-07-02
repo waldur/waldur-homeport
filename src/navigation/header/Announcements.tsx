@@ -1,4 +1,8 @@
-import { Info, WarningCircle, XCircle } from '@phosphor-icons/react';
+import {
+  InfoIcon,
+  WarningCircleIcon,
+  XCircleIcon,
+} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from 'react-bootstrap';
 import { adminAnnouncementsList } from 'waldur-js-client';
@@ -10,15 +14,15 @@ import { translate } from '@waldur/i18n';
 
 const ANNOUNCEMENT_ICON = {
   warning: {
-    icon: WarningCircle,
+    icon: WarningCircleIcon,
     variant: 'warning',
   },
   danger: {
-    icon: XCircle,
+    icon: XCircleIcon,
     variant: 'danger',
   },
   information: {
-    icon: Info,
+    icon: InfoIcon,
     variant: 'dark',
   },
 };
@@ -27,18 +31,23 @@ const getTypeLabel = (type) =>
   AnnouncementTypeOptions.find((op) => op.value === type)?.label || type;
 
 export const Announcements = () => {
-  const { isLoading, error, data, refetch } = useQuery(
-    ['adminAnnouncements'],
-    () =>
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ['adminAnnouncements'],
+
+    queryFn: () =>
       getAllPages(() => adminAnnouncementsList({ query: { is_active: true } })),
-    {
-      staleTime: 1000 * 60 * 5,
-      cacheTime: 1000 * 60 * 60, // Keep cached data for 60 minutes
-      retry: 2, // Retry failed requests twice before showing error
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-    },
-  );
+
+    staleTime: 1000 * 60 * 5,
+
+    // Keep cached data for 60 minutes
+    gcTime: 1000 * 60 * 60,
+
+    // Retry failed requests twice before showing error
+    retry: 2,
+
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
 
   if (error) {
     return (
@@ -67,6 +76,7 @@ export const Announcements = () => {
               variant={ANNOUNCEMENT_ICON[announcement.type].variant}
               size="sm"
             />
+
             <p className="text-start fs-7">
               <strong className="fw-bold">
                 {getTypeLabel(announcement.type)}

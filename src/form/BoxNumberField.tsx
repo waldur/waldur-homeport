@@ -1,4 +1,4 @@
-import { Minus, Plus } from '@phosphor-icons/react';
+import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
@@ -43,7 +43,7 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           disabled={props.disabled}
         >
           <span className="svg-icon svg-icon-2">
-            <Minus />
+            <MinusIcon />
           </span>
         </Button>
         <Form.Control
@@ -54,6 +54,7 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           {...rest}
           onBlur={() => change(input.value)}
         />
+
         <Button
           size="sm"
           variant="light"
@@ -64,7 +65,7 @@ export const BoxNumberField: FunctionComponent<BoxNumberFieldProps> = (
           disabled={props.disabled}
         >
           <span className="svg-icon svg-icon-2">
-            <Plus weight="bold" />
+            <PlusIcon weight="bold" />
           </span>
         </Button>
       </div>

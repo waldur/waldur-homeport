@@ -145,9 +145,10 @@ export const OfferingPublicUIView = () => {
 
   const user = useSelector(getUser);
 
-  const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    [PUBLIC_OFFERING_DATA_QUERY_KEY, uuid, user?.uuid],
-    async () => {
+  const { isLoading, error, data, refetch, isRefetching } = useQuery({
+    queryKey: [PUBLIC_OFFERING_DATA_QUERY_KEY, uuid, user?.uuid],
+
+    queryFn: async () => {
       const options = user ? undefined : { auth: null };
       const offering = (await marketplacePublicOfferingsRetrieve({
         path: { uuid },
@@ -159,8 +160,10 @@ export const OfferingPublicUIView = () => {
       }).then((response) => response.data);
       return { offering, category };
     },
-    { refetchOnWindowFocus: false, staleTime: 3 * 60 * 1000 },
-  );
+
+    refetchOnWindowFocus: false,
+    staleTime: 3 * 60 * 1000,
+  });
 
   const tabs = useMemo(() => getTabs(data?.offering), [data]);
   const { tabSpec } = usePageTabsTransmitter(tabs);
@@ -174,6 +177,7 @@ export const OfferingPublicUIView = () => {
       error={error}
       isPublic
     />,
+
     [data?.offering, isRefetching, refetch, error, isLoading],
   );
 

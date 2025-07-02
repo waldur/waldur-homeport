@@ -36,6 +36,7 @@ export const TenantVolumeTypesList: FunctionComponent<{ resourceScope }> = ({
       hasQuery={true}
       title={translate('volume types')}
       verboseName={translate('Volume types')}
+      showPageSizeSelector
     />
   );
 };

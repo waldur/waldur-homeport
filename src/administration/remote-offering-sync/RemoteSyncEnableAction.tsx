@@ -1,4 +1,4 @@
-import { CheckCircle, XCircle } from '@phosphor-icons/react';
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { marketplaceRemoteSynchronisationsPartialUpdate } from 'waldur-js-client';
@@ -12,32 +12,34 @@ import { RemoteSyncActionProps } from './types';
 export const RemoteSyncEnableAction = (props: RemoteSyncActionProps) => {
   const dispatch = useDispatch();
 
-  const { mutate, isLoading } = useMutation(async () => {
-    try {
-      await marketplaceRemoteSynchronisationsPartialUpdate({
-        path: { uuid: props.row.uuid },
-        body: {
-          is_active: !props.row.is_active,
-        },
-      });
-      dispatch(
-        showSuccess(
-          props.row.is_active
-            ? translate('Remote synchronization disabled')
-            : translate('Remote synchronization enabled'),
-        ),
-      );
-      props.refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          props.row.is_active
-            ? translate('Unable to disable remote synchronization')
-            : translate('Unable to enable remote synchronization'),
-        ),
-      );
-    }
+  const { mutate, isPending: isLoading } = useMutation({
+    mutationFn: async () => {
+      try {
+        await marketplaceRemoteSynchronisationsPartialUpdate({
+          path: { uuid: props.row.uuid },
+          body: {
+            is_active: !props.row.is_active,
+          },
+        });
+        dispatch(
+          showSuccess(
+            props.row.is_active
+              ? translate('Remote synchronization disabled')
+              : translate('Remote synchronization enabled'),
+          ),
+        );
+        props.refetch();
+      } catch (e) {
+        dispatch(
+          showErrorResponse(
+            e,
+            props.row.is_active
+              ? translate('Unable to disable remote synchronization')
+              : translate('Unable to enable remote synchronization'),
+          ),
+        );
+      }
+    },
   });
 
   return (
@@ -46,9 +48,9 @@ export const RemoteSyncEnableAction = (props: RemoteSyncActionProps) => {
       action={mutate}
       iconNode={
         props.row.is_active ? (
-          <XCircle weight="bold" />
+          <XCircleIcon weight="bold" />
         ) : (
-          <CheckCircle weight="bold" />
+          <CheckCircleIcon weight="bold" />
         )
       }
       disabled={isLoading}

@@ -47,6 +47,7 @@ const ResourceQuotaChart = ({ value, max }) => {
             },
           },
         ],
+
         animation: false,
         emphasis: {
           itemStyle: {

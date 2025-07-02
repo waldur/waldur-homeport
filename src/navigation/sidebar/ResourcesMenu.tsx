@@ -1,4 +1,4 @@
-import { CaretDown, SquaresFour } from '@phosphor-icons/react';
+import { CaretDownIcon, SquaresFourIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
@@ -57,7 +57,7 @@ const CustomToggle = ({
       </span>
       <span className={classNames('menu-badge rotate', expanded && 'active')}>
         <span className="svg-icon svg-icon-3 svg-icon-primary-300 rotate-180">
-          <CaretDown weight="bold" />
+          <CaretDownIcon weight="bold" />
         </span>
       </span>
     </span>
@@ -109,18 +109,16 @@ const RenderMenuItems = ({ items }) => {
 export const ResourcesMenu = ({ user }) => {
   const categories = useOfferingCategories();
 
-  const { data: categoryGroups } = useQuery(
-    ['MarketplaceCategoryGroups'],
-    () => getCategoryGroups({ field: ['uuid', 'title', 'url'] }),
-    { staleTime: 1 * 60 * 1000 },
-  );
+  const { data: categoryGroups } = useQuery({
+    queryKey: ['MarketplaceCategoryGroups'],
+    queryFn: () => getCategoryGroups({ field: ['uuid', 'title', 'url'] }),
+    staleTime: 1 * 60 * 1000,
+  });
 
   const resourcesFilters = useSelector((state: any) =>
     selectFiltersStorage(state, ALL_RESOURCES_TABLE_ID),
   );
-  const query = useMemo<
-    MarketplaceGlobalCategoriesRetrieveData['query']
-  >(() => {
+  const query = useMemo(() => {
     if (!resourcesFilters) return undefined;
     const project = resourcesFilters.find((item) => item.name === 'project');
     const organization = resourcesFilters.find(
@@ -129,24 +127,26 @@ export const ResourcesMenu = ({ user }) => {
     return {
       project_uuid: project?.value?.uuid,
       customer_uuid: organization?.value?.uuid,
-    };
+    } satisfies MarketplaceGlobalCategoriesRetrieveData['query'];
   }, [resourcesFilters]);
 
   // We will clean counters on impersonation (on change user)
-  const { data: counters = {} } = useQuery(
-    [
+  const { data: counters = {} } = useQuery({
+    queryKey: [
       'ResourcesMenu',
       'Counters',
       user?.uuid,
       query?.customer_uuid,
       query?.project_uuid,
     ],
-    () =>
+
+    queryFn: () =>
       marketplaceGlobalCategoriesRetrieve({ query }).then(
         (response) => response.data,
       ),
-    { refetchOnWindowFocus: false },
-  );
+
+    refetchOnWindowFocus: false,
+  });
   const [expanded, setExpanded] = useState(false);
 
   const sortedCategoryGroups = useMemo(() => {
@@ -183,7 +183,7 @@ export const ResourcesMenu = ({ user }) => {
     <MenuAccordion
       title={translate('Resources')}
       itemId="resources-menu"
-      icon={<SquaresFour weight="bold" />}
+      icon={<SquaresFourIcon weight="bold" />}
       badge={<ResourcesMenuFilterButton />}
     >
       <ResourcesMenuFilters />
@@ -196,6 +196,7 @@ export const ResourcesMenu = ({ user }) => {
       <RenderMenuItems
         items={sortedCategoryGroups.slice(0, MAX_COLLAPSE_MENU_COUNT)}
       />
+
       {sortedCategoryGroups.length > MAX_COLLAPSE_MENU_COUNT ? (
         <>
           {expanded && (

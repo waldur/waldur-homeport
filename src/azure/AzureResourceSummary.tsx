@@ -19,6 +19,7 @@ export function PureAzureResourceSummary(
         label={translate('Resource group')}
         value={resource.resource_group_name}
       />
+
       <Field label={translate('Location')} value={resource.location_name} />
     </>
   );

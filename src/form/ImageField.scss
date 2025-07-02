@@ -35,3 +35,34 @@
     }
   }
 }
+
+.imagefield-upload-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.imagefield-avatar-box {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6faf7;
+  border-radius: 8px;
+}
+
+.imagefield-upload-info .btn {
+  font-size: 1rem;
+  min-width: unset;
+  width: auto;
+  height: 2.25rem;
+  border-radius: 12px;
+  box-shadow: none;
+  margin-top: 2rem;
+}
+
+.imagefield-upload-desc {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}

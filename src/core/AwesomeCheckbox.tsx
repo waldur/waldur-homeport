@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { FC } from 'react';
 
@@ -7,7 +7,7 @@ import { Tip } from './Tooltip';
 interface AwesomeCheckboxProps {
   label?: React.ReactNode;
   value: boolean;
-  onChange(value: boolean): void;
+  onChange?(value: boolean): void;
   disabled?: boolean;
   tooltip?: React.ReactNode;
   size?: 'sm';
@@ -29,15 +29,16 @@ export const AwesomeCheckbox: FC<AwesomeCheckboxProps> = (props) => {
         disabled={props.disabled}
         checked={props.value}
         onChange={(e: React.ChangeEvent<any>) =>
-          props.onChange(e.target.checked)
+          props.onChange && props.onChange(e.target.checked)
         }
       />
+
       {(props.label || props.tooltip) && (
         <span className="form-check-label">
           {props.tooltip && (
             <>
               <Tip label={props.tooltip} id="tooltip">
-                <Question />
+                <QuestionIcon />
               </Tip>{' '}
             </>
           )}

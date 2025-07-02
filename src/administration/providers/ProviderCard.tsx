@@ -97,7 +97,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
                 marginRight: 17,
               }}
             >
-              <IdentityProviderLogo name={type} />
+              <IdentityProviderLogo name={type} maxHeight={40} />
             </div>
             <div className="flex-grow-1">
               <h1 className="fs-2 text-nowrap fw-boldest">{title}</h1>

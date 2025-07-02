@@ -19,7 +19,7 @@ export const ConfigurationEditButton = ({ item, value }) => {
         openModalDialog(ConfigurationEditDialog, {
           resolve: { item },
           initialValues: { value },
-          size: 'md',
+          size: 'lg',
         }),
       ),
     [dispatch],

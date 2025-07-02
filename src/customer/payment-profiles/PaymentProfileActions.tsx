@@ -19,12 +19,14 @@ export const PaymentProfileActions = ({
           tooltipAndDisabledAttributes={tooltipAndDisabledAttributes}
         />
       ),
+
       (props) => (
         <PaymentProfileEditButton
           {...props}
           tooltipAndDisabledAttributes={tooltipAndDisabledAttributes}
         />
       ),
+
       (props) => (
         <PaymentProfileDeleteButton
           {...props}

@@ -1,4 +1,4 @@
-import { ChatCircleText } from '@phosphor-icons/react';
+import { ChatCircleTextIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { PublicOfferingDetails } from 'waldur-js-client';
@@ -10,7 +10,7 @@ import { LeafletMap } from '@waldur/map/LeafletMap';
 const DemoButton: FunctionComponent = () => (
   <button className="btn btn-outline btn-success btn-sm">
     <span className="svg-icon svg-icon-2">
-      <ChatCircleText />
+      <ChatCircleTextIcon />
     </span>{' '}
     {translate('Request demo')}
   </button>

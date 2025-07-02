@@ -10,7 +10,7 @@ interface StepsListProps {
 }
 
 export const StepsList: FC<StepsListProps> = (props) => {
-  const steps = useMemo<ProgressStep[]>(() => {
+  const steps = useMemo((): ProgressStep[] => {
     const currentIndex = props.steps.findIndex(
       (step) => step.label === props.value.label,
     );
@@ -25,7 +25,7 @@ export const StepsList: FC<StepsListProps> = (props) => {
       steps={steps}
       onClick={props.onClick}
       bgClass="bg-body"
-      className="mt-3 mb-10"
+      className="mt-3 mb-3"
     />
   );
 };

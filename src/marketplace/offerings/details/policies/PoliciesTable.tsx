@@ -1,5 +1,6 @@
-import { Check, X } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
+import { FC, useMemo } from 'react';
 import { Badge } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -19,6 +20,26 @@ export const PoliciesTable: FC<TableProps> = ({ columns, ...props }) => {
     data: organizationGroups,
     refetch: refetchGroups,
   } = useOrganizationGroups();
+
+  const { state } = useCurrentStateAndParams();
+  const tabs = useMemo(
+    () => [
+      {
+        key: 'cost-policy',
+        title: translate('Cost'),
+        state: state.name,
+        params: { tab: 'cost-policy' },
+      },
+      {
+        key: 'usage-policy',
+        title: translate('Usage'),
+        state: state.name,
+        params: { tab: 'usage-policy' },
+      },
+    ],
+
+    [state],
+  );
 
   return (
     <Table
@@ -74,7 +95,7 @@ export const PoliciesTable: FC<TableProps> = ({ columns, ...props }) => {
                 bg={null}
                 className="fs-8 fw-bolder lh-base badge-light-danger badge-pill"
               >
-                <X size={12} className="text-danger me-2" />
+                <XIcon size={12} className="text-danger me-2" />
                 {translate('No')}
               </Badge>
             ) : (
@@ -82,13 +103,15 @@ export const PoliciesTable: FC<TableProps> = ({ columns, ...props }) => {
                 bg={null}
                 className="fs-8 fw-bolder lh-base badge-light-success badge-pill"
               >
-                <Check size={12} className="text-success me-2" />
+                <CheckIcon size={12} className="text-success me-2" />
                 {translate('Yes')}
               </Badge>
             ),
         },
       ]}
+      title={translate('Policy')}
       verboseName={translate('Policies')}
+      tabs={tabs}
       initialSorting={{ field: 'created', mode: 'desc' }}
       showPageSizeSelector={true}
       {...props}

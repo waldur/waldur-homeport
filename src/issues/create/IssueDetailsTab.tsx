@@ -127,6 +127,7 @@ export const IssueDetailsTab = ({
             ['customer', 'project', 'resource'].includes(context.scopeType)
           }
         />
+
         <ProjectGroup
           disabled={
             standaloneIssue ||

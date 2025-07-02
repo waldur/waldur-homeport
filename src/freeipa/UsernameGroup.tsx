@@ -66,6 +66,7 @@ export const UsernameGroup: FunctionComponent = () => (
       validate={validateUsername}
       component={UsernameField}
     />
+
     <Form.Text muted={true}>
       {translate(
         'Please select a username that you will use for login into the Linux systems.',

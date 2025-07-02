@@ -1,4 +1,4 @@
-import { LinkBreak } from '@phosphor-icons/react';
+import { LinkBreakIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesUnlink } from 'waldur-js-client';
@@ -14,9 +14,12 @@ export const MultiUnlinkAction = ({ rows, refetch }) => {
       await waitForConfirmation(
         dispatch,
         translate('Perform mass action'),
-        translate('Are you sure you want to unlink {count} resources?', {
-          count: rows.length,
-        }),
+        translate(
+          'Are you sure you want to unlink {count} resources? Unlinking will only remove objects from the database, it will not trigger any cleanup',
+          {
+            count: rows.length,
+          },
+        ),
       );
     } catch {
       return;
@@ -35,7 +38,7 @@ export const MultiUnlinkAction = ({ rows, refetch }) => {
       action={callback}
       className="text-danger"
       staff
-      iconNode={<LinkBreak weight="bold" />}
+      iconNode={<LinkBreakIcon weight="bold" />}
       iconColor="danger"
     />
   );

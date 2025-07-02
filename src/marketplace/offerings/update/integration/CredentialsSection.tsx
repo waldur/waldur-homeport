@@ -8,7 +8,11 @@ import {
   showBackendId,
 } from '@waldur/marketplace/common/registry';
 
-import { FieldEditButton } from './FieldEditButton';
+import {
+  DefaultOfferingEditPanel,
+  OfferingEditField,
+} from '../DefaultOfferingEditPanel';
+
 import { OfferingScopeState } from './OfferingScopeState';
 import { getServiceSettingsForm } from './registry';
 import { SyncButton } from './SyncButton';
@@ -25,6 +29,15 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
 
   const ServiceSettingsForm = getServiceSettingsForm(props.offering.type);
 
+  const fields: OfferingEditField[] = [];
+  if (showBackendId(props.offering.type)) {
+    fields.push({
+      label: translate('Backend ID'),
+      key: 'backend_id',
+      component: StringField,
+    });
+  }
+
   return (
     <FormTable.Card
       title={TITLE}
@@ -40,21 +53,11 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
             callback={update}
           />
         ) : null}
-        {showBackendId(props.offering.type) && (
-          <FormTable.Item
-            label={translate('Backend ID')}
-            value={props.offering.backend_id || 'N/A'}
-            actions={
-              <FieldEditButton
-                title={TITLE}
-                scope={props.offering}
-                name="backend_id"
-                callback={update}
-                fieldComponent={StringField}
-              />
-            }
-          />
-        )}
+        <DefaultOfferingEditPanel
+          fields={fields}
+          callback={update}
+          {...props}
+        />
       </FormTable>
     </FormTable.Card>
   );

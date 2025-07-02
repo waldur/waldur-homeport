@@ -1,4 +1,4 @@
-import { GitPullRequest } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -46,7 +46,7 @@ export const MultiPullAction = ({ rows, refetch }) => {
       await waitForConfirmation(
         dispatch,
         translate('Perform mass action'),
-        translate('Are you sure you want to pull {count} resources?', {
+        translate('Are you sure you want to synchronise {count} resources?', {
           count: validResources.length,
         }),
       );
@@ -68,10 +68,10 @@ export const MultiPullAction = ({ rows, refetch }) => {
   }
   return (
     <ActionItem
-      title={translate('Pull')}
+      title={translate('Synchronise')}
       action={callback}
       disabled={validResources.length !== rows.length}
-      iconNode={<GitPullRequest weight="bold" />}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
     />
   );
 };

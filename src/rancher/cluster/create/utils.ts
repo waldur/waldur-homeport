@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { formValueSelector } from 'redux-form';
 import {
   marketplacePublicOfferingsRetrieve,
   OpenStackFlavor,
@@ -10,9 +9,8 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
 import { translate } from '@waldur/i18n';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
+import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import {
   loadFlavors,
   loadSecurityGroups,
@@ -58,14 +56,6 @@ export const filterFlavors = (
 export const formatSubnets = (tenant_uuid: string) =>
   loadSubnets({ tenant_uuid }).then((data) => data.map(formatSubnetOption));
 
-export const getRancherMountPointChoices = () => {
-  const mountPoints = ENV.plugins.WALDUR_RANCHER.MOUNT_POINT_CHOICES;
-  return mountPoints.map((choice) => ({
-    label: choice,
-    value: choice,
-  }));
-};
-
 export const loadNodeCreateData = async (cluster: RancherCluster) => {
   const offering = await marketplacePublicOfferingsRetrieve({
     path: { uuid: cluster.marketplace_offering_uuid },
@@ -88,16 +78,16 @@ export const loadNodeCreateData = async (cluster: RancherCluster) => {
     flavors,
     volumeTypes: volumeTypeChoices,
     defaultVolumeType: defaultVolumeType && defaultVolumeType.value,
-    mountPoints: getRancherMountPointChoices(),
     templates,
     securityGroups,
   };
 };
 
 export const useVolumeDataLoader = (tenant) => {
-  return useQuery(
-    ['volumeTypes', tenant],
-    async () => {
+  return useQuery({
+    queryKey: ['volumeTypes', tenant],
+
+    queryFn: async () => {
       const volumeTypes = tenant
         ? await loadVolumeTypes({ tenant: tenant.url })
         : [];
@@ -108,8 +98,9 @@ export const useVolumeDataLoader = (tenant) => {
         defaultVolumeType,
       };
     },
-    { staleTime: 3 * 60 * 1000 },
-  );
+
+    staleTime: 3 * 60 * 1000,
+  });
 };
 
 export const getDataVolumes = (nodeIndex, allValues) => {
@@ -125,7 +116,7 @@ export const getDataVolumes = (nodeIndex, allValues) => {
 };
 
 export const formTenantSelector = (state: RootState) =>
-  formValueSelector(ORDER_FORM_ID)(state, 'attributes.tenant');
+  orderFormSelector(state, 'attributes.tenant');
 
 export const formNodesSelector = (state: RootState): NodeField[] =>
-  formValueSelector(ORDER_FORM_ID)(state, 'attributes.nodes');
+  orderFormSelector(state, 'attributes.nodes');

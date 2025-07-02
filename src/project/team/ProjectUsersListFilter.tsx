@@ -12,6 +12,7 @@ const PureProjectUsersListFilter: FunctionComponent = () => (
     title={translate('Role')}
     name="project_role"
     getValueLabel={(value) => value.description || value.name}
+    instantApply={false}
   >
     <ProjectRoleSelectField />
   </TableFilterItem>

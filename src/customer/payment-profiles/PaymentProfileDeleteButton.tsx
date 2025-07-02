@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paymentProfilesDestroy } from 'waldur-js-client';
 
@@ -46,7 +46,7 @@ export const PaymentProfileDeleteButton = (props) => {
     <ActionItem
       title={translate('Delete')}
       action={openDialog}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
       iconColor="danger"
       {...props.tooltipAndDisabledAttributes}

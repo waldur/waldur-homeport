@@ -8,6 +8,7 @@ import { OpenStackServerGroupActions } from '@waldur/openstack/openstack-server-
 import { OpenStackSnapshotActions } from '@waldur/openstack/openstack-snapshot/actions';
 import { OpenStackSubNetActions } from '@waldur/openstack/openstack-subnet/actions';
 import { OpenStackPortActions } from '@waldur/openstack/openstack-tenant/ports';
+import { OpenStackRouterActions } from '@waldur/openstack/openstack-tenant/tenant-routers';
 import { RancherClusterActions } from '@waldur/rancher/cluster/actions';
 import { RancherNodeActions } from '@waldur/rancher/node/actions';
 import {
@@ -32,6 +33,7 @@ register(OpenStackBackupActions);
 register(OpenStackFloatingIPActions);
 register(OpenStackNetworkActions);
 register(OpenStackPortActions);
+register(OpenStackRouterActions);
 register(OpenStackSecurityGroupActions);
 register(OpenStackServerGroupActions);
 register(OpenStackSnapshotActions);

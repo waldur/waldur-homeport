@@ -12,7 +12,8 @@ import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
 
 import { getCheckoutSummaryComponent } from '../common/registry';
 
-import { formErrorsSelector, formSubmitErrorsSelector } from './utils';
+import { formSubmitErrorsSelector } from './selectors';
+import { formErrorsSelector } from './selectors';
 
 interface DeployPageSidebarProps extends SidebarProps {
   offering: PublicOfferingDetails;

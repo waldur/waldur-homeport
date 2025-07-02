@@ -1,4 +1,4 @@
-import { Check, X } from '@phosphor-icons/react';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import React, { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,8 @@ import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { BackendIdTip } from '@waldur/core/Tooltip';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
@@ -181,15 +183,16 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) =>
         !row.downscaled ? (
           <Badge variant="danger" outline pill size="sm">
-            <X size={12} className="text-danger me-2" />
+            <XIcon size={12} className="text-danger me-2" />
             {translate('No')}
           </Badge>
         ) : (
           <Badge variant="success" outline pill size="sm">
-            <Check size={12} className="text-success me-2" />
+            <CheckIcon size={12} className="text-success me-2" />
             {translate('Yes')}
           </Badge>
         ),
+
       export: 'downscaled',
       keys: ['downscaled'],
       exportKeys: ['downscaled'],
@@ -201,15 +204,16 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) =>
         !row.restrict_member_access ? (
           <Badge variant="danger" outline pill size="sm">
-            <X size={12} className="text-danger me-2" />
+            <XIcon size={12} className="text-danger me-2" />
             {translate('No')}
           </Badge>
         ) : (
           <Badge variant="success" outline pill size="sm">
-            <Check size={12} className="text-success me-2" />
+            <CheckIcon size={12} className="text-success me-2" />
             {translate('Yes')}
           </Badge>
         ),
+
       export: 'restrict_member_access',
       keys: ['restrict_member_access'],
       exportKeys: ['restrict_member_access'],
@@ -221,15 +225,16 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) =>
         !row.paused ? (
           <Badge variant="danger" outline pill size="sm">
-            <X size={12} className="text-danger me-2" />
+            <XIcon size={12} className="text-danger me-2" />
             {translate('No')}
           </Badge>
         ) : (
           <Badge variant="success" outline pill size="sm">
-            <Check size={12} className="text-success me-2" />
+            <CheckIcon size={12} className="text-success me-2" />
             {translate('Yes')}
           </Badge>
         ),
+
       export: 'paused',
       keys: ['paused'],
       exportKeys: ['paused'],
@@ -244,6 +249,17 @@ const TableComponent: FunctionComponent<any> = (props) => {
       exportKeys: ['created'],
       id: 'created',
       keys: ['created'],
+    },
+    {
+      title: translate('Termination date'),
+      render: ({ row }) =>
+        row.end_date ? formatDateTime(row.end_date) : 'N/A',
+      orderField: 'end_date',
+      id: 'end_date',
+      keys: ['end_date'],
+      optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
+      export: (row) => row.end_date,
+      exportKeys: ['end_date'],
     },
     {
       title: translate('State'),

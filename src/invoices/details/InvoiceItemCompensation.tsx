@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -13,7 +13,7 @@ const InvoiceItemCompensationDialog = lazyComponent(() =>
 export const InvoiceItemCompensation = ({ item, refreshInvoiceItems }) => (
   <DialogActionItem
     title={translate('Create compensation')}
-    iconNode={<PlusCircle weight="bold" />}
+    iconNode={<PlusCircleIcon weight="bold" />}
     modalComponent={InvoiceItemCompensationDialog}
     resource={item}
     extraResolve={{ refreshInvoiceItems }}

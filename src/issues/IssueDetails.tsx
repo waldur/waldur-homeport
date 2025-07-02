@@ -11,7 +11,7 @@ import { ExternalLink } from '@waldur/core/ExternalLink';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { FormattedJira } from '@waldur/core/FormattedJira';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
 import { linkify } from '@waldur/issues/utils';
 import { useBreadcrumbs } from '@waldur/navigation/context';
@@ -77,7 +77,7 @@ export const IssueDetails: FunctionComponent = () => {
 
   return (
     <>
-      <PublicDashboardHero2
+      <PublicDashboardHero
         containerClassName="mb-5"
         cardBordered
         hideQuickSection
@@ -143,7 +143,7 @@ export const IssueDetails: FunctionComponent = () => {
             )}
           </Col>
         </Row>
-      </PublicDashboardHero2>
+      </PublicDashboardHero>
 
       <Card className="card-bordered mb-5">
         <Card.Header>

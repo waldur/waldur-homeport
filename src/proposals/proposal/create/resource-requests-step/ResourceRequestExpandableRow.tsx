@@ -2,6 +2,7 @@ import { translate } from '@waldur/i18n';
 import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
 import { ProposalResource } from '@waldur/proposals/types';
 import { BooleanField } from '@waldur/table/BooleanField';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 const UserInputs = ({ callOffering, optionsValues }) => (
@@ -35,25 +36,27 @@ export const ResourceRequestExpandableRow = ({
   const { limits, ...optionsValues } = row.attributes;
 
   return (
-    <PlanDetailsTable2
-      offering={row.requested_offering as any}
-      plan={row.requested_offering.plan_details}
-      limits={limits}
-      viewMode
-      extraTabs={
-        row.requested_offering.options?.order?.length > 0 && [
-          {
-            title: translate('User inputs'),
-            eventKey: 'user-inputs',
-            component: () => (
-              <UserInputs
-                callOffering={row.requested_offering}
-                optionsValues={optionsValues}
-              />
-            ),
-          },
-        ]
-      }
-    />
+    <ExpandableContainer>
+      <PlanDetailsTable2
+        offering={row.requested_offering as any}
+        plan={row.requested_offering.plan_details}
+        limits={limits}
+        viewMode
+        extraTabs={
+          row.requested_offering.options?.order?.length > 0 && [
+            {
+              title: translate('User inputs'),
+              eventKey: 'user-inputs',
+              component: () => (
+                <UserInputs
+                  callOffering={row.requested_offering}
+                  optionsValues={optionsValues}
+                />
+              ),
+            },
+          ]
+        }
+      />
+    </ExpandableContainer>
   );
 };

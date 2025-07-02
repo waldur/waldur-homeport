@@ -3,6 +3,8 @@
 //
 
 .badge {
+  line-height: 0.9;
+
   // Fixed size
   &.badge-circle,
   &.badge-square {
@@ -22,9 +24,14 @@
     width: $badge-size;
   }
 
-  // Circle
+  // Pill
   &.badge-pill {
     border-radius: 50px;
+  }
+
+  // Only contains an icon
+  &.badge-icon {
+    padding: $badge-padding-y;
   }
 
   // Sizes
@@ -37,6 +44,10 @@
       width: $badge-size-sm;
       height: $badge-size-sm;
     }
+
+    &.badge-icon {
+      padding: $badge-padding-y-sm;
+    }
   }
 
   &.badge-lg {
@@ -47,6 +58,10 @@
     &.badge-circle {
       width: $badge-size-lg;
       height: $badge-size-lg;
+    }
+
+    &.badge-icon {
+      padding: $badge-padding-y-lg;
     }
   }
 

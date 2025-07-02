@@ -1,4 +1,9 @@
-import { ArrowsClockwise, Info, Warning, Wrench } from '@phosphor-icons/react';
+import {
+  ArrowsClockwiseIcon,
+  InfoIcon,
+  WarningIcon,
+  WrenchIcon,
+} from '@phosphor-icons/react';
 
 import { translate } from '@waldur/i18n';
 
@@ -18,10 +23,10 @@ const getIssueTypeLabel = (issueType) =>
   })[issueType];
 
 export const ISSUE_ICONS = {
-  INCIDENT: <Warning weight="bold" />,
-  CHANGE_REQUEST: <ArrowsClockwise weight="bold" />,
-  SERVICE_REQUEST: <Wrench weight="bold" />,
-  INFORMATIONAL: <Info weight="bold" />,
+  INCIDENT: <WarningIcon weight="bold" />,
+  CHANGE_REQUEST: <ArrowsClockwiseIcon weight="bold" />,
+  SERVICE_REQUEST: <WrenchIcon weight="bold" />,
+  INFORMATIONAL: <InfoIcon weight="bold" />,
 };
 
 const getIssueDescription = (issueType) =>

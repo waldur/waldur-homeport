@@ -1,4 +1,4 @@
-import { SignIn } from '@phosphor-icons/react';
+import { SignInIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
@@ -44,6 +44,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
       isMounted() &&
       (result.state === 'Scheduled' || result.state === 'Processing')
     );
+
     return result;
   };
 
@@ -108,7 +109,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
             <CloseDialogButton />
             <SubmitButton invalid={invalid} submitting={submitting}>
               <span className="svg-icon svg-icon-2">
-                <SignIn />
+                <SignInIcon />
               </span>{' '}
               {translate('Sign in')}
             </SubmitButton>

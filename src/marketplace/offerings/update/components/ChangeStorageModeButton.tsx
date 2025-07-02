@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -20,7 +20,7 @@ export const ChangeStorageModeButton: FC<OfferingSectionProps> = (props) => {
 
   return (
     <ActionButton
-      iconNode={<PencilSimple />}
+      iconNode={<PencilSimpleIcon />}
       title={translate('Change storage mode')}
       action={() => {
         openDialog(ChangeStorageModeDialog, {

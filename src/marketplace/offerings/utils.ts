@@ -104,6 +104,7 @@ export const isOfferingRestrictedToProject = (
   const isRestrictedAndNotAllowed =
     !offering.shared &&
     offering.project_uuid &&
+    user &&
     !user.permissions.find(
       (permission) =>
         permission.scope_type === 'project' &&

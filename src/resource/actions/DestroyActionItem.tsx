@@ -1,4 +1,4 @@
-import { FileX } from '@phosphor-icons/react';
+import { FileXIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -76,7 +76,7 @@ export const DestroyActionItem: <T extends { uuid?: string }>(
       title={translate('Destroy')}
       action={callback}
       className="text-danger"
-      iconNode={<FileX weight="bold" />}
+      iconNode={<FileXIcon weight="bold" />}
       iconColor="danger"
       {...validationState}
     />

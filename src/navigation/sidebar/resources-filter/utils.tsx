@@ -1,9 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
 import {
   ALL_RESOURCES_TABLE_ID,
   CATEGORY_RESOURCES_ALL_FILTER_FORM_ID,
@@ -15,6 +16,15 @@ import { selectFiltersStorage } from '@waldur/table/selectors';
 import { TableSidebarFilterValues } from '@waldur/table/TableFilterItem';
 
 import { useOfferingCategories } from '../utils';
+
+const key = 'waldur/filter/resources';
+
+const restoreFilter = () => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : data;
+};
+const storeFilter = (values) =>
+  localStorage.setItem(key, JSON.stringify(values));
 
 const _setFilter = ({ table, form, label, name, value, dispatch }) => {
   dispatch(
@@ -145,9 +155,49 @@ export const useOrganizationAndProjectFiltersForResources = (
           );
         }
       }
+
+      // Update filters of marketplace landing page
+      dispatch(
+        change(
+          MARKETPLACE_LANDING_FILTER_FORM,
+          'project',
+          formData?.project
+            ? {
+                uuid: formData.project.uuid,
+                url: formData.project.url,
+                name: formData.project.name,
+                customer_uuid: formData.project.customer_uuid,
+                is_industry: formData.project.is_industry,
+              }
+            : formData?.project,
+          true,
+        ),
+      );
+      dispatch(
+        change(
+          MARKETPLACE_LANDING_FILTER_FORM,
+          'organization',
+          formData?.organization
+            ? {
+                uuid: formData.organization.uuid,
+                name: formData.organization.name,
+                abbreviation: formData.organization.abbreviation,
+              }
+            : formData?.organization,
+          true,
+        ),
+      );
+
+      // Save in local storage
+      storeFilter(formData);
     },
     [dispatch, categories, state, params],
   );
+
+  useEffect(() => {
+    const filter = restoreFilter();
+    syncResourceFilters(filter);
+  }, []);
 
   return { syncResourceFilters };
 };

@@ -4,7 +4,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { paymentsCreate } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@waldur/core/api';
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatISODate } from '@waldur/core/dateUtils';
 import { ADD_PAYMENT_FORM_ID } from '@waldur/customer/payments/constants';
 import {
   FileUploadField,
@@ -38,7 +38,7 @@ const PaymentCreateDialog: FunctionComponent<PaymentCreateDialogProps> = (
     try {
       await paymentsCreate({
         body: {
-          date_of_payment: formatDate(formData.date_of_payment),
+          date_of_payment: formatISODate(formData.date_of_payment),
           sum: formData.sum,
           proof: fileSerializer(formData.proof),
           profile: props.resolve.profileUrl,

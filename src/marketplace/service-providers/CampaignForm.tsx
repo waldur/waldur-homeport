@@ -36,6 +36,7 @@ export const CampaignForm = ({
         activeStep={step}
         onSelect={setStep}
       />
+
       <FormName>
         {() => (
           <Modal.Body className="scroll-y">
@@ -47,6 +48,7 @@ export const CampaignForm = ({
                   required={true}
                   validate={required}
                 />
+
                 <SelectField
                   name="discount_type"
                   label={translate('Discount type')}
@@ -60,16 +62,19 @@ export const CampaignForm = ({
                     },
                   ]}
                 />
+
                 <DateField
                   name="start_date"
                   label={translate('Campaign start date')}
                   required={true}
                 />
+
                 <DateField
                   name="end_date"
                   label={translate('Campaign end date')}
                   required={true}
                 />
+
                 <AsyncSelectField
                   name="offerings"
                   label={translate('Offerings')}
@@ -96,6 +101,7 @@ export const CampaignForm = ({
                   validate={required}
                   min={0}
                 />
+
                 <NumberField name="stock" label={translate('Stock')} min={0} />
                 <AwesomeCheckboxField
                   name="auto_apply"

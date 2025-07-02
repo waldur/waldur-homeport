@@ -10,10 +10,10 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { useNotify } from '@waldur/store/hooks';
 
-const getConfirmationText = (isActive, name) => {
+const getConfirmationText = (isActive: boolean, name: string): string => {
   return isActive
     ? translate(
-        'Are you sure you want to deactivate {name}?',
+        'Are you sure you want to disable {name}?',
         { name: <strong>{name}</strong> },
         formatJsxTemplate,
       )
@@ -35,11 +35,11 @@ export const UserStatus = ({ user }: { user: User }) => {
       await waitForConfirmation(
         dispatch,
         translate('Confirmation'),
-        getConfirmationText(user.is_active, user.full_name),
+        getConfirmationText(isActive, user.full_name),
         {
           type: 'danger',
-          positiveButton: user.is_active
-            ? translate('Deactivate')
+          positiveButton: isActive
+            ? translate('Disable')
             : translate('Activate'),
           negativeButton: translate('Cancel'),
         },
@@ -49,19 +49,29 @@ export const UserStatus = ({ user }: { user: User }) => {
       return;
     }
     try {
-      setIsActive(!isActive);
       await usersPartialUpdate({
         path: { uuid: user.uuid },
         body: {
           is_active: !isActive,
         },
       });
-      queryClient.setQueryData(['User', user.uuid], (user: User) => ({
-        ...user,
-        is_active: !isActive,
-      }));
+      queryClient.invalidateQueries({
+        queryKey: ['User', user.uuid],
+      });
+
+      queryClient.setQueryData(
+        ['User', user.uuid],
+        (cachedUser: User | undefined) => {
+          if (!cachedUser) {
+            return { ...user, is_active: !isActive };
+          }
+          return { ...cachedUser, is_active: !isActive };
+        },
+      );
+      setIsActive(!isActive);
+
       if (isActive) {
-        showSuccess(translate('User has been deactivated.'));
+        showSuccess(translate('User has been disabled.'));
       } else {
         showSuccess(translate('User has been activated.'));
       }
@@ -76,9 +86,9 @@ export const UserStatus = ({ user }: { user: User }) => {
       cardBordered
       actions={
         <AwesomeCheckbox
-          value={!isActive}
+          value={isActive}
           onChange={toggleUserStatus}
-          label={isActive ? translate('Active') : translate('Deactivated')}
+          label={isActive ? translate('Active') : translate('Disabled')}
         />
       }
     >

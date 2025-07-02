@@ -125,5 +125,6 @@ export const GoogleCalendarActions = ({ offering }) => {
       visible: offering.google_calendar_is_public,
     },
   ];
+
   return <ActionsDropdown actions={actions} />;
 };

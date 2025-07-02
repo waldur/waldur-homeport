@@ -17,7 +17,11 @@ const Filter = () => (
     >
       <OrganizationAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
     </TableFilterItem>
-    <TableFilterItem title={translate('State')} name="state">
+    <TableFilterItem
+      title={translate('State')}
+      name="state"
+      instantApply={false}
+    >
       <RequestStateFilter />
     </TableFilterItem>
   </>

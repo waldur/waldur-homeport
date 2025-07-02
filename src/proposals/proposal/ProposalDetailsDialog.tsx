@@ -25,17 +25,17 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
     isLoading,
     error,
     refetch,
-  } = useQuery(
-    ['publicCall', proposal.call_uuid],
-    () =>
+  } = useQuery({
+    queryKey: ['publicCall', proposal.call_uuid],
+
+    queryFn: () =>
       proposalPublicCallsRetrieve({ path: { uuid: proposal.call_uuid } }).then(
         (r) => r.data,
       ),
-    {
-      refetchOnWindowFocus: false,
-      staleTime: 60 * 1000,
-    },
-  );
+
+    refetchOnWindowFocus: false,
+    staleTime: 60 * 1000,
+  });
 
   return (
     <ModalDialog title={translate('Proposal details overview')} closeButton>
@@ -56,6 +56,7 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
                   label={translate('Name')}
                   value={<FieldWithCopy value={call.name} />}
                 />
+
                 <FormTable.Item
                   label={translate('Reference code')}
                   value={<FieldWithCopy value={(call as any).reference_code} />}

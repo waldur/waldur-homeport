@@ -13,7 +13,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { DotsSixVertical, Gear } from '@phosphor-icons/react';
+import { DotsSixVerticalIcon, GearIcon } from '@phosphor-icons/react';
 import { FC, useMemo, useState } from 'react';
 import { Button, Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
 
@@ -43,7 +43,7 @@ const SortableItem = (props) => {
       {...listeners}
     >
       <span className="svg-icon svg-icon-2 svg-icon-gray me-3">
-        <DotsSixVertical size={32} />
+        <DotsSixVerticalIcon size={32} />
       </span>{' '}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
       <span
@@ -183,10 +183,11 @@ export const TableColumnButton: FC<TableProps> = ({
     <Button
       disabled={mode !== 'table'}
       variant="outline-default"
+      size="lg"
       className="btn-outline btn-icon"
     >
       <span className="svg-icon svg-icon-2">
-        <Gear weight="bold" />
+        <GearIcon weight="bold" />
       </span>
     </Button>
   </OverlayTrigger>

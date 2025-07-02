@@ -1,4 +1,4 @@
-import { Prohibit } from '@phosphor-icons/react';
+import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userInvitationsCancel } from 'waldur-js-client';
@@ -80,7 +80,7 @@ export const MultiCancelAction = ({ rows, refetch }) => {
     <ActionItem
       title={translate('Cancel')}
       action={callback}
-      iconNode={<Prohibit weight="bold" />}
+      iconNode={<ProhibitIcon weight="bold" />}
       disabled={disabled}
       tooltip={tooltip}
     />

@@ -1,4 +1,4 @@
-import { List } from '@phosphor-icons/react';
+import { ListIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -22,7 +22,7 @@ const AsideMobileToggle: FunctionComponent = () => (
     id="kt_aside_mobile_toggle"
   >
     <span className="svg-icon svg-icon-1">
-      <List />
+      <ListIcon />
     </span>
   </div>
 );

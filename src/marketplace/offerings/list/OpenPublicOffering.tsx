@@ -1,4 +1,4 @@
-import { ShoppingCart } from '@phosphor-icons/react';
+import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
@@ -19,7 +19,7 @@ export const OpenPublicOffering = ({
     }}
   >
     <span className="svg-icon svg-icon-2">
-      <ShoppingCart weight="bold" />
+      <ShoppingCartIcon weight="bold" />
     </span>
     {translate('Open public page')}
   </Dropdown.Item>

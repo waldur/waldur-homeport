@@ -5,12 +5,14 @@ import { translate } from '@waldur/i18n';
 
 export const IdentityProviderIndicator = ({ user, hasLabel = false }) => (
   <div className="d-flex align-items-center">
-    <div className="symbol img-wrapper me-5">
-      <Tip label={user.registration_method} id="registration_method_tooltip">
-        <IdentityProviderLogo name={user.registration_method} />
-      </Tip>
-    </div>
-    <div className="d-flex flex-column">
+    <Tip label={user.registration_method} id="registration_method_tooltip">
+      <div className="symbol symbol-circle symbol-40px img-wrapper">
+        <div className="symbol-label overflow-hidden">
+          <IdentityProviderLogo name={user.registration_method} />
+        </div>
+      </div>
+    </Tip>
+    <div className="ms-5 d-flex flex-column">
       <span className="text-gray-500 text-hover-primary fw-bold">
         {user.identity_provider_label}
       </span>

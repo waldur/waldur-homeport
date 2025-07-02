@@ -17,6 +17,7 @@ export const InvitationLinkField = ({ invitation }) => {
           readOnly
           className="form-control-solid"
         />
+
         <CopyToClipboardButton
           value={link}
           size={20}

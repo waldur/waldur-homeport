@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 
@@ -72,7 +71,11 @@ const PureProviderResourcesFilter: FunctionComponent<StateProps> = (props) => {
       >
         <CategoryFilter />
       </TableFilterItem>
-      <TableFilterItem title={translate('State')} name="state">
+      <TableFilterItem
+        title={translate('State')}
+        name="state"
+        instantApply={false}
+      >
         <ResourceStateFilter />
       </TableFilterItem>
       <TableFilterItem
@@ -105,17 +108,15 @@ const filterSelector = createSelector(
 
 const mapStateToProps = (state: RootState) => ({
   offeringFilter: filterSelector(state),
-  onChange: syncFiltersToURL,
 });
 
-const enhance = compose(
-  connect(mapStateToProps),
-  reduxForm({
-    form: PROVIDER_RESOURCES_LIST_FILTER_FORM_ID,
-    onChange: syncFiltersToURL,
-    destroyOnUnmount: false,
-    enableReinitialize: true,
-  }),
+const ConnectedComponent = connect(mapStateToProps)(
+  PureProviderResourcesFilter,
 );
 
-export const ProviderResourcesFilter = enhance(PureProviderResourcesFilter);
+export const ProviderResourcesFilter = reduxForm({
+  form: PROVIDER_RESOURCES_LIST_FILTER_FORM_ID,
+  onChange: syncFiltersToURL,
+  destroyOnUnmount: false,
+  enableReinitialize: true,
+})(ConnectedComponent);

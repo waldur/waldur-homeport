@@ -1,4 +1,4 @@
-import { WarningCircle, X } from '@phosphor-icons/react';
+import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { RadarIcon } from '@waldur/core/RadarIcon';
@@ -18,10 +18,11 @@ export const HiddenActionsMessage: FunctionComponent<
   return (
     <div className="d-flex gap-5 my-5 w-100">
       <RadarIcon
-        IconComponent={WarningCircle}
+        IconComponent={WarningCircleIcon}
         variant="warning"
         className="me-2"
       />
+
       <div className="fw-bold">
         <p className="mb-1">{translate('Action column is hidden.')}</p>
         <p className="text-muted mb-1">
@@ -41,7 +42,7 @@ export const HiddenActionsMessage: FunctionComponent<
           className="btn btn-sm btn-icon btn-active-light-primary"
           onClick={close}
         >
-          <X size={18} />
+          <XIcon size={18} />
         </button>
       </div>
     </div>

@@ -1,15 +1,26 @@
-import { get } from 'lodash-es';
 import { FunctionComponent } from 'react';
 
 import { required } from '@waldur/core/validators';
-import { StringField, SecretField, TextField } from '@waldur/form';
-import FormTable from '@waldur/form/FormTable';
+import { SecretField, StringField, TextField, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { SecretField as PlainSecretField } from '@waldur/marketplace/common/SecretField';
-import { FieldEditButton } from '@waldur/marketplace/offerings/update/integration/FieldEditButton';
+import {
+  DefaultOfferingEditPanel,
+  OfferingEditField,
+} from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
 import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
 
-const fields = [
+export const RANCHER_NODE_DISK_DRIVER_OPTIONS = [
+  {
+    label: 'VD',
+    value: 'vd',
+  },
+  {
+    label: 'SD',
+    value: 'sd',
+  },
+];
+
+const fields: OfferingEditField[] = [
   {
     label: translate('Rancher server URL'),
     key: 'service_attributes.backend_url',
@@ -35,35 +46,37 @@ const fields = [
     fieldProps: { required: true, validate: required },
   },
   {
+    label: translate('Private registry URL'),
+    key: 'service_attributes.private_registry_url',
+    component: StringField,
+  },
+  {
+    label: translate('Private registry username'),
+    key: 'service_attributes.private_registry_user',
+    component: StringField,
+  },
+  {
+    label: translate('Private registry password'),
+    key: 'service_attributes.private_registry_password',
+    component: SecretField,
+  },
+  {
     label: translate('Cloud init template'),
     key: 'service_attributes.cloud_init_template',
     component: TextField,
+  },
+  {
+    label: translate('Node disk driver type'),
+    key: 'service_attributes.node_disk_driver',
+    component: SelectField,
+    fieldProps: {
+      options: RANCHER_NODE_DISK_DRIVER_OPTIONS,
+      simpleValue: true,
+      isClearable: false,
+    },
   },
 ];
 
 export const RancherProviderForm: FunctionComponent<
   OfferingEditPanelFormProps
-> = (props) =>
-  fields.map((field) => (
-    <FormTable.Item
-      key={field.key}
-      label={field.label}
-      value={
-        field.component === SecretField ? (
-          <PlainSecretField value={get(props.offering, field.key)} />
-        ) : (
-          get(props.offering, field.key, 'N/A')
-        )
-      }
-      actions={
-        <FieldEditButton
-          title={field.label}
-          scope={props.offering}
-          name={field.key}
-          callback={props.callback}
-          fieldComponent={field.component}
-          fieldProps={field.fieldProps}
-        />
-      }
-    />
-  ));
+> = (props) => <DefaultOfferingEditPanel fields={fields} {...props} />;

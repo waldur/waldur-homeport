@@ -5,15 +5,15 @@
 .dropdown-item {
   color: $gray-700;
   font-size: 14px;
-  line-height: normal;
+  line-height: 1;
   font-weight: 500;
 
   .svg-icon {
-    margin-right: 0.75rem;
+    margin-right: 0.923rem;
 
     svg {
-      height: 1.54rem !important;
-      width: 1.54rem !important;
+      height: 20px !important;
+      width: 20px !important;
     }
   }
 }

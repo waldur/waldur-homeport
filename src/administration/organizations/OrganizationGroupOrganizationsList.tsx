@@ -16,8 +16,8 @@ import { OrganizationExpandableRow } from './OrganizationExpandableRow';
 export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
   props,
 ) => {
-  const filter = useMemo<CustomersListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): CustomersListData['query'] => ({
       organization_group_uuid: props.organizationGroup.uuid,
     }),
     [props.organization_group_uuid],
@@ -38,6 +38,7 @@ export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
           label={row.name}
         />
       ),
+
       export: 'name',
     },
     {

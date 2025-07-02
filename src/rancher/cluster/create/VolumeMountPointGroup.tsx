@@ -1,17 +1,14 @@
-import { useMemo, FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Field, change, formValueSelector } from 'redux-form';
+import { FunctionComponent, useMemo } from 'react';
+import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
+import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { type RootState } from '@waldur/store/reducers';
 
-import { getMinSize } from './getMinSize';
-import { SimpleSelectField } from './SimpleSelectField';
 import { getDataVolumes } from './utils';
 
-const createMountPointValidator = (nodeIndex) => (value, allValues) => {
+const createMountPointValidator = (nodeIndex: number) => (value, allValues) => {
   if (!value) {
     return;
   }
@@ -27,41 +24,9 @@ const createMountPointValidator = (nodeIndex) => (value, allValues) => {
   }
 };
 
-const getSizeField = (nodeIndex, volumeIndex) => {
-  const parts = [];
-  if (nodeIndex !== undefined) {
-    parts.push(`attributes.nodes[${nodeIndex}]`);
-  }
-  parts.push(`data_volumes[${volumeIndex}]`);
-  parts.push('size');
-  return parts.join('.');
-};
-
-const useMinimalSize = (form, nodeIndex, volumeIndex) => {
-  const sizeField = getSizeField(nodeIndex, volumeIndex);
-  const dispatch = useDispatch();
-  const getSize = (state: RootState) =>
-    formValueSelector(form)(state, sizeField);
-
-  const volumeSize = useSelector(getSize);
-
-  return (mountPoint) => {
-    const minSize = getMinSize(mountPoint);
-    if (!minSize) {
-      return;
-    }
-    if (!volumeSize || volumeSize < minSize) {
-      dispatch(change(form, sizeField, minSize));
-    }
-  };
-};
-
-export const VolumeMountPointGroup: FunctionComponent<any> = (props) => {
-  const setValidVolumeSize = useMinimalSize(
-    props.form,
-    props.nodeIndex,
-    props.volumeIndex,
-  );
+export const VolumeMountPointGroup: FunctionComponent<{ nodeIndex: number }> = (
+  props,
+) => {
   const validateMountPoint = useMemo(
     () => [required, createMountPointValidator(props.nodeIndex)],
     [props.nodeIndex],
@@ -71,10 +36,8 @@ export const VolumeMountPointGroup: FunctionComponent<any> = (props) => {
     <FormGroup label={translate('Mount point')} required={true}>
       <Field
         name="mount_point"
-        options={props.mountPoints}
-        component={SimpleSelectField}
+        component={InputField}
         validate={validateMountPoint}
-        onChange={setValidVolumeSize}
       />
     </FormGroup>
   );

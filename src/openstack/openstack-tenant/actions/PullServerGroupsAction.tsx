@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { openstackTenantsPullServerGroups } from 'waldur-js-client';
 
@@ -16,7 +16,7 @@ export const PullServerGroupsAction: FC<TenantActionProps> = ({
 }) => (
   <AsyncActionButton
     title={translate('Synchronise')}
-    iconNode={<ArrowsClockwise />}
+    iconNode={<ArrowsClockwiseIcon />}
     resource={resource}
     validators={validators}
     apiMethod={(uuid) => openstackTenantsPullServerGroups({ path: { uuid } })}

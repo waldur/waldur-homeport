@@ -5,9 +5,10 @@ import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
 import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
-import { orderFormAttributesSelector } from '@waldur/marketplace/utils';
 import { NodeRole } from '@waldur/rancher/types';
 import { type RootState } from '@waldur/store/reducers';
+
+import { formNodesSelector } from './utils';
 
 const countNodesByRole = (role: NodeRole, nodes) =>
   nodes.filter((node) => (node.roles || []).includes(role)).length;
@@ -33,23 +34,20 @@ const getTotalCores = (nodes) => sum(getFlavorField('cores', nodes));
 const getTotalRam = (nodes) => sum(getFlavorField('ram', nodes));
 
 const getStats = (state: RootState) => {
-  const attributes: any = orderFormAttributesSelector(state);
-  if (!attributes) {
+  const nodes = formNodesSelector(state);
+  if (!nodes) {
     return {};
   }
-  const nodes = attributes.nodes;
   const nodeCount = nodes.length;
-  const etcdCount = countNodesByRole('etcd', nodes);
-  const workerCount = countNodesByRole('worker', nodes);
-  const controlCount = countNodesByRole('controlplane', nodes);
+  const agentCount = countNodesByRole('agent', nodes);
+  const serverCount = countNodesByRole('server', nodes);
   const totalCores = getTotalCores(nodes);
   const totalStorage = formatFilesize(getTotalStorage(nodes) * 1024);
   const totalRam = formatFilesize(getTotalRam(nodes));
   return {
     nodeCount,
-    etcdCount,
-    workerCount,
-    controlCount,
+    agentCount,
+    serverCount,
     totalCores,
     totalStorage,
     totalRam,
@@ -58,33 +56,34 @@ const getStats = (state: RootState) => {
 
 const connector = connect(getStats);
 
-const PureRancherExtraComponent = (props) =>
+const PureRancherExtraComponent = (props: ReturnType<typeof getStats>) =>
   props.nodeCount ? (
     <>
       <CheckoutPricingRow
         label={translate('Total number of nodes')}
         value={props.nodeCount}
       />
+
       <CheckoutPricingRow
-        label={translate('Number of etcd nodes')}
-        value={props.etcdCount}
+        label={translate('Number of agent nodes')}
+        value={props.agentCount}
       />
+
       <CheckoutPricingRow
-        label={translate('Number of worker nodes')}
-        value={props.workerCount}
+        label={translate('Number of server nodes')}
+        value={props.serverCount}
       />
-      <CheckoutPricingRow
-        label={translate('Number of control plane nodes')}
-        value={props.controlCount}
-      />
+
       <CheckoutPricingRow
         label={translate('Total CPU')}
         value={props.totalCores}
       />
+
       <CheckoutPricingRow
         label={translate('Total storage')}
         value={props.totalStorage}
       />
+
       <CheckoutPricingRow
         label={translate('Total memory')}
         value={props.totalRam}

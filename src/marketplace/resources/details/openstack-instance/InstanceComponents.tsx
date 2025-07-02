@@ -38,12 +38,14 @@ export const InstanceComponents = ({
         units={null}
         isSmallScreen={isSmallScreen}
       />
+
       <ResourceComponentItem
         title={translate('RAM')}
         usage={(resource.ram / 1024).toFixed()}
         units="GB"
         isSmallScreen={isSmallScreen}
       />
+
       {Object.entries(volumeTypes)
         .sort(([aType], [bType]) => aType.localeCompare(bType))
         .map(([volumeType, usage]) => (

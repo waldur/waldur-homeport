@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -8,6 +8,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ENVIRON_FORM_ID } from './constants';
+import { EditVarsDialogOwnProps } from './EditVarsDialog';
 
 const EditVarsDialog = lazyComponent(() =>
   import('./EditVarsDialog').then((module) => ({
@@ -15,10 +16,9 @@ const EditVarsDialog = lazyComponent(() =>
   })),
 );
 
-export const EditVarsButton: FunctionComponent<{
-  offering;
-  refetch;
-}> = ({ offering, refetch }) => {
+export const EditVarsButton: FunctionComponent<
+  EditVarsDialogOwnProps['resolve']
+> = ({ offering, refetch }) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
@@ -32,7 +32,7 @@ export const EditVarsButton: FunctionComponent<{
   return (
     <ActionButton
       action={callback}
-      iconNode={<PencilSimple weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       title={translate('Edit environment variables')}
       className="me-3"
     />

@@ -9,9 +9,8 @@ import { ProjectCreateButton } from '@waldur/project/create/ProjectCreateButton'
 import { setCurrentProject } from '@waldur/workspace/actions';
 
 import { projectAutocomplete } from '../common/autocompletes';
+import { orderCustomerSelector } from '../deploy/selectors';
 import { FormGroup } from '../offerings/FormGroup';
-
-import { orderCustomerSelector } from './utils';
 
 interface ProjectFieldProps {
   previewMode?: boolean;

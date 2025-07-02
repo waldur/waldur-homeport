@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { getUser } from '@waldur/workspace/selectors';
 
-import { ResourceSummaryButton } from '../summary/ResourceSummaryButton';
+import { ResourceSummaryAction } from '../summary/ResourceSummaryButton';
 
 import { ActionButtonResource } from './ActionButtonResource';
 
@@ -16,9 +16,10 @@ export const ResourceRowActions: FunctionComponent<{ resource; refetch }> = ({
     return null;
   }
   return (
-    <>
-      <ActionButtonResource url={resource.url} refetch={refetch} />
-      <ResourceSummaryButton url={resource.url} />
-    </>
+    <ActionButtonResource
+      url={resource.url}
+      refetch={refetch}
+      extraActions={[ResourceSummaryAction]}
+    />
   );
 };

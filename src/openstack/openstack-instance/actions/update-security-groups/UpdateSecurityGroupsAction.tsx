@@ -1,4 +1,4 @@
-import { ShieldChevron } from '@phosphor-icons/react';
+import { ShieldChevronIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -24,6 +24,6 @@ export const UpdateSecurityGroupsAction: ActionItemType = ({
     validators={validators}
     modalComponent={UpdateSecurityGroupsDialog}
     extraResolve={{ refetch }}
-    iconNode={<ShieldChevron weight="bold" />}
+    iconNode={<ShieldChevronIcon weight="bold" />}
   />
 );

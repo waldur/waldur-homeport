@@ -31,7 +31,10 @@ export const ActionsPopover = ({
     error,
     data: value,
     refetch: refetchChild,
-  } = useQuery(['ActionsPopover', url], () => loadData(url));
+  } = useQuery({
+    queryKey: ['ActionsPopover', url],
+    queryFn: () => loadData(url),
+  });
   const actionMenuContextValue = useMemo<ResourceActionMenuContextModel>(
     () => ({
       hideDisabled: false,

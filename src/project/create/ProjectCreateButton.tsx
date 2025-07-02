@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -73,7 +73,7 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
               )
             : undefined
       }
-      iconNode={iconNode || <PlusCircle weight="bold" />}
+      iconNode={iconNode || <PlusCircleIcon weight="bold" />}
       disabled={disabled}
     />
   );

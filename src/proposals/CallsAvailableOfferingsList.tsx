@@ -9,8 +9,11 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 export const CallsAvailableOfferingsList: FC = () => {
-  const filter = useMemo<MarketplacePublicOfferingsListData['query']>(
-    () => ({ page_size: 6, accessible_via_calls: true }),
+  const filter = useMemo(
+    (): MarketplacePublicOfferingsListData['query'] => ({
+      page_size: 6,
+      accessible_via_calls: true,
+    }),
     [],
   );
   const tableProps = useTable({

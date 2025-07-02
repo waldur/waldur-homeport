@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Card, Col, Row } from 'react-bootstrap';
-import { overrideSettingsRetrieve } from 'waldur-js-client';
+import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
 
 import {
   EDUTEAMS_IDP,
@@ -28,33 +28,38 @@ export const IdentityProvidersList = () => {
     isLoading: isProvidersLoading,
     error: providersError,
     refetch: refetchProviders,
-  } = useQuery<{}, {}, Record<string, { is_active }>>(
-    ['IdentityProvidersList'],
-    () =>
+  } = useQuery<{}, {}, Record<string, IdentityProvider>>({
+    queryKey: ['IdentityProvidersList'],
+
+    queryFn: () =>
       getIdentityProviders().then((providers) =>
         providers.reduce(
           (result, item) => ({ ...result, [item.provider]: item }),
           {},
         ),
       ),
-  );
+  });
   const {
     data: settingsData,
     isLoading: isSettingsLoading,
     error: settingsError,
     refetch: refetchSettings,
-  } = useQuery(['AdministrationUserSettings'], () =>
-    overrideSettingsRetrieve().then((response) => response.data),
-  );
+  } = useQuery({
+    queryKey: ['AdministrationUserSettings'],
+
+    queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
+  });
   if (isProvidersLoading || isSettingsLoading) return <LoadingSpinner />;
+  let errorMessage = '';
   if (providersError || settingsError) {
-    let errorMessage = translate('Unable to load ');
     if (providersError && settingsError) {
-      errorMessage += translate('providers and settings configuration');
+      errorMessage = translate(
+        'Unable to load providers and settings configuration.',
+      );
     } else if (providersError) {
-      errorMessage += translate('providers configuration');
+      errorMessage = translate('Unable to load providers configuration.');
     } else {
-      errorMessage += translate('settings configuration');
+      errorMessage = translate('Unable to load settings configuration.');
     }
 
     return (
@@ -73,6 +78,7 @@ export const IdentityProvidersList = () => {
         groupNames={[translate('User settings')]}
         settingsSource={settingsData}
       />
+
       <Card className="card-bordered">
         <Card.Body>
           <Row>

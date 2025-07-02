@@ -1,4 +1,4 @@
-import { Copy } from '@phosphor-icons/react';
+import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -16,8 +16,8 @@ export const UserToken = ({ token }) => {
   }, [dispatch, token]);
 
   return (
-    <div className="menu-item px-5" data-kt-menu-trigger="click">
-      <div className="px-5 menu-link">
+    <div className="menu-item" data-kt-menu-trigger="click">
+      <div className="menu-link bg-transparent">
         <span className="menu-title me-2 text-nowrap">
           {translate('API token')}
         </span>
@@ -32,13 +32,14 @@ export const UserToken = ({ token }) => {
               fontFamily: 'text-security-disc',
             }}
           />
+
           <Button
             variant="primary"
             size="sm"
             className="px-3"
             onClick={onClick}
           >
-            <Copy />
+            <CopyIcon />
             {translate('Copy')}
           </Button>
         </InputGroup>

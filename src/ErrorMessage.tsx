@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FallbackRender } from '@sentry/react';
 import { Button } from 'react-bootstrap';
 
@@ -15,12 +15,13 @@ export const ErrorMessage: FallbackRender = (props) => (
       action={
         <Button onClick={() => location.reload()} variant="success">
           <span className="svg-icon svg-icon-2">
-            <ArrowsClockwise />
+            <ArrowsClockwiseIcon />
           </span>{' '}
           {translate('Reload')}
         </Button>
       }
     />
+
     <pre className="mt-3">
       {props.componentStack || (props.error as Error).stack}
     </pre>

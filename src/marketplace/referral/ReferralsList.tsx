@@ -34,6 +34,7 @@ export const ReferralsList: FunctionComponent<{ offering }> = ({
           {row.title}
         </>
       ),
+
       orderField: 'resource_type',
     },
     {

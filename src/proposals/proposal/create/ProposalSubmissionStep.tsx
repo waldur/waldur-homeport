@@ -84,26 +84,28 @@ export const ProposalSubmissionStep: FC<{
 
   const formData = useSelector(formDataSelector);
 
-  const { mutate: saveAsDraft, isLoading: isSaving } = useMutation(async () => {
-    try {
-      await proposalProposalsUpdateProjectDetails({
-        path: { uuid: proposal_uuid },
-        body: formData,
-      });
-      await attachDocuments(proposal_uuid, formData.supporting_documentation);
-      dispatch(showSuccess(translate('Proposal updated successfully')));
-      // clear formData.supporting_documentation from redux-form store to prevent file upload on next submit/switchToTeam
-      dispatch(
-        change(
-          PROPOSAL_UPDATE_SUBMISSION_FORM_ID,
-          'supporting_documentation',
-          {},
-        ),
-      );
-      refetch && refetch();
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Something went wrong')));
-    }
+  const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
+    mutationFn: async () => {
+      try {
+        await proposalProposalsUpdateProjectDetails({
+          path: { uuid: proposal_uuid },
+          body: formData,
+        });
+        await attachDocuments(proposal_uuid, formData.supporting_documentation);
+        dispatch(showSuccess(translate('Proposal updated successfully')));
+        // clear formData.supporting_documentation from redux-form store to prevent file upload on next submit/switchToTeam
+        dispatch(
+          change(
+            PROPOSAL_UPDATE_SUBMISSION_FORM_ID,
+            'supporting_documentation',
+            {},
+          ),
+        );
+        refetch && refetch();
+      } catch (error) {
+        dispatch(showErrorResponse(error, translate('Something went wrong')));
+      }
+    },
   });
 
   const submitForm = useCallback(

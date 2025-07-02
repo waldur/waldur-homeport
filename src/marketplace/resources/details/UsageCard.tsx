@@ -1,4 +1,4 @@
-import { ChartBar, Table } from '@phosphor-icons/react';
+import { ChartBarIcon, TableIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { Button, Card, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
@@ -41,14 +41,16 @@ export const UsageCard = ({ resource }) => {
     isLoading: teamIsLoading,
     error: teamError,
     refetch: refetchTeam,
-  } = useQuery(
-    ['ResourceTeam', resource.uuid],
-    () =>
+  } = useQuery({
+    queryKey: ['ResourceTeam', resource.uuid],
+
+    queryFn: () =>
       marketplaceResourcesTeamList({ path: { uuid: resource.uuid } }).then(
         (r) => r.data,
       ),
-    { staleTime: 3 * 60 * 1000 },
-  );
+
+    staleTime: 3 * 60 * 1000,
+  });
 
   const { loading, error, value } = useAsync(
     () => getComponentsAndUsages(resourceRef.resource_uuid, period),
@@ -77,7 +79,7 @@ export const UsageCard = ({ resource }) => {
           ) : usersFilterOptions.length > 0 ? (
             <Select
               getOptionValue={(option) => option.uuid}
-              getOptionLabel={(option) => option.full_name}
+              getOptionLabel={(option) => option.full_name || option.username}
               value={users}
               isMulti
               placeholder={translate('All users')}
@@ -114,6 +116,7 @@ export const UsageCard = ({ resource }) => {
             users={team}
             months={period}
           />
+
           <Button
             variant="outline-default"
             className="btn-outline btn-icon"
@@ -122,7 +125,7 @@ export const UsageCard = ({ resource }) => {
             }
           >
             <span className="svg-icon svg-icon-2">
-              {mode === 'chart' ? <Table /> : <ChartBar />}
+              {mode === 'chart' ? <TableIcon /> : <ChartBarIcon />}
             </span>
           </Button>
         </div>

@@ -68,6 +68,7 @@ export const BackupsList: FunctionComponent<{ resourceScope }> = ({
       title={translate('VM snapshots')}
       verboseName={translate('VM snapshots')}
       hasQuery={false}
+      showPageSizeSelector
       tableActions={<CreateBackupAction resource={resourceScope} />}
     />
   );

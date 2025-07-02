@@ -8,6 +8,7 @@ import { FinancialReportSendButton } from '@waldur/customer/list/FinancialReport
 import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { createFetcher } from '@waldur/table/api';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -137,8 +138,11 @@ export const CustomerList: FunctionComponent<{
 
   const expandableRow = useCallback(
     ({ row }) => (
-      <CustomerExpandableRow row={row} providerUUID={filter?.provider_uuid} />
+      <ExpandableContainer>
+        <CustomerExpandableRow row={row} providerUUID={filter?.provider_uuid} />
+      </ExpandableContainer>
     ),
+
     [filter],
   );
 

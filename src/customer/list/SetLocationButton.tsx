@@ -50,25 +50,25 @@ export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
     }
   };
 
-  const params = {
-    resolve: {
-      location: {
-        latitude: customer.latitude,
-        longitude: customer.longitude,
-      },
-      setLocationFn: (formData: GeolocationPoint) =>
-        setOrganizationLocation({ uuid: customer.uuid, ...formData }),
-      label: translate('Location of {name} organization', {
-        name: customer.name,
-      }),
-    },
-    size: 'lg',
-  };
-
   return (
     <EditButton
       onClick={() => {
-        dispatch(openModalDialog(SetLocationDialog, params));
+        dispatch(
+          openModalDialog(SetLocationDialog, {
+            resolve: {
+              location: {
+                latitude: customer.latitude,
+                longitude: customer.longitude,
+              },
+              setLocationFn: (formData: GeolocationPoint) =>
+                setOrganizationLocation({ uuid: customer.uuid, ...formData }),
+              label: translate('Location of {name} organization', {
+                name: customer.name,
+              }),
+            },
+            size: 'lg',
+          }),
+        );
       }}
       size="sm"
     />

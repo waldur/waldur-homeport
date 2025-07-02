@@ -23,8 +23,6 @@ import { ProposalHeader } from './ProposalHeader';
 import { ProposalSubmissionStep } from './ProposalSubmissionStep';
 
 export const ProposalManagePage = () => {
-  useTitle(translate('Update proposal'));
-
   const {
     params: { proposal_uuid },
   } = useCurrentStateAndParams();
@@ -34,31 +32,44 @@ export const ProposalManagePage = () => {
     isLoading,
     error,
     refetch,
-  } = useQuery(
-    ['Proposal', proposal_uuid],
-    () =>
+  } = useQuery({
+    queryKey: ['Proposal', proposal_uuid],
+
+    queryFn: () =>
       proposalProposalsRetrieve({
         path: { uuid: proposal_uuid },
       }).then((response) => response.data as any as Proposal),
-    {
-      refetchOnWindowFocus: false,
-    },
-  );
+
+    refetchOnWindowFocus: false,
+  });
+
+  const title =
+    proposal?.state === 'draft'
+      ? translate('Update proposal')
+      : translate('View proposal');
+  useTitle(title);
+
   const user = useSelector(getUser);
 
   const hasPermissionToSubmit =
     user.is_staff || (proposal && user.uuid === proposal.created_by_uuid);
 
-  const { data: reviews, isLoading: isLoadingReviews } = useQuery(
-    ['ProposalReviews', proposal_uuid],
-    () =>
+  const { data: reviews, isLoading: isLoadingReviews } = useQuery({
+    queryKey: ['ProposalReviews', proposal_uuid],
+
+    queryFn: () =>
       getAllPages((page) =>
         proposalReviewsList({
-          query: { page, proposal_uuid },
+          query: {
+            page,
+            proposal_uuid,
+            state: ['submitted'],
+          },
         }),
       ),
-    { refetchOnWindowFocus: false },
-  );
+
+    refetchOnWindowFocus: false,
+  });
 
   if (isLoading || isLoadingReviews) {
     return <LoadingSpinner />;

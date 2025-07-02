@@ -45,6 +45,7 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
               provider={provider}
               offering={offering}
             />
+
             <ProviderOfferingUserDeleteButton
               {...props}
               provider={provider}
@@ -52,6 +53,7 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
             />
           </>
         ),
+
         canUpdateRestrictedStatus ? RestrictOfferingUserButton : null,
       ].filter(Boolean)}
       data-cy="public-resources-list-actions-dropdown-btn"

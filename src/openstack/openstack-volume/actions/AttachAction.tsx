@@ -1,4 +1,4 @@
-import { PlugsConnected } from '@phosphor-icons/react';
+import { PlugsConnectedIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -20,6 +20,6 @@ export const AttachAction: ActionItemType = ({ resource, refetch }) => (
     resource={resource}
     extraResolve={{ refetch }}
     important
-    iconNode={<PlugsConnected weight="bold" />}
+    iconNode={<PlugsConnectedIcon weight="bold" />}
   />
 );

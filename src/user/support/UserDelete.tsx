@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
@@ -67,7 +67,7 @@ export const UserDelete = ({ user }: { user: User }) => {
           disabled={isLoading}
         >
           <span className="svg-icon svg-icon-2">
-            <Trash weight="bold" />
+            <TrashIcon weight="bold" />
           </span>
           {translate('Delete')}
         </Button>

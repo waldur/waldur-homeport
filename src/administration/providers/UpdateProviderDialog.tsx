@@ -18,7 +18,7 @@ interface UpdateProviderDialogProps {
   resolve: {
     provider: { provider: string };
     type: string;
-    refetch?: () => Promise<void>;
+    refetch?(): void;
   };
 }
 

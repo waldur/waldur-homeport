@@ -107,12 +107,14 @@ export const GroupFromDialog = connect<
               name="icon"
               initialValue={props.initialValues?.icon as any as string}
             />
+
             <StringField
               label={translate('Title')}
               name="title"
               required
               validate={required}
             />
+
             <TextField
               label={translate('Description')}
               name="description"

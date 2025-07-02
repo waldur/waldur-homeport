@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { MarketplaceOrdersListData } from 'waldur-js-client';
 
+import { OrdersBulkActions } from '../orders/actions/OrdersBulkActions';
 import { ProviderOrdersListFilter } from '../orders/list/MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from '../orders/list/OrdersTableComponent';
 
@@ -50,6 +51,9 @@ export const ProviderOrdersList = ({ provider }) => {
         <ProviderOrdersListFilter provider_uuid={provider.customer_uuid} />
       }
       filter={filter}
+      standalone
+      enableMultiSelect
+      multiSelectActions={OrdersBulkActions}
     />
   );
 };

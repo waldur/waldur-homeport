@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { ButtonProps } from 'react-bootstrap';
@@ -54,14 +54,14 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
     >
       {!btnIcon && iconRight && label}
       <span className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'}`}>
-        <PencilSimple weight="bold" />
+        <PencilSimpleIcon weight="bold" />
       </span>
       {!btnIcon && !iconRight && label}
     </Link>
   ) : (
     <ActionButton
       action={onClick}
-      iconNode={<PencilSimple weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       title={!btnIcon && label}
       size={size}
       variant={variant}

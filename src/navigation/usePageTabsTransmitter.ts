@@ -9,7 +9,7 @@ export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
   const { state, params } = useCurrentStateAndParams();
   const mainTabs = useMemo<Tab[]>(() => {
     return tabs.map((tab) =>
-      tab.children
+      tab.children && !tab.component
         ? {
             title: tab.title,
             disabled: tab.disabled,

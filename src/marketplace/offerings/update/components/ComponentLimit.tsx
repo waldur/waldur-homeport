@@ -61,6 +61,7 @@ export const ComponentLimit = enhance(
               limitPeriod={props.limitPeriod}
               readOnly={props.readOnly}
             />
+
             <ComponentLimitAmountField />
           </>
         );

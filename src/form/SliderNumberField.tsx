@@ -1,4 +1,4 @@
-import { Minus, Plus } from '@phosphor-icons/react';
+import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
@@ -63,6 +63,7 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
           {...rest}
           onBlur={() => change(input.value)}
         />
+
         <div>
           <Button
             size="sm"
@@ -74,7 +75,7 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
             disabled={props.disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <Plus weight="bold" />
+              <PlusIcon weight="bold" />
             </span>
           </Button>
           <Button
@@ -87,7 +88,7 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
             disabled={props.disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <Minus />
+              <MinusIcon />
             </span>
           </Button>
         </div>

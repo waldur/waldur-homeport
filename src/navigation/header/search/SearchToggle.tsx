@@ -1,4 +1,4 @@
-import { MagnifyingGlass } from '@phosphor-icons/react';
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 import { SearchInput } from './SearchInput';
@@ -41,9 +41,10 @@ export const SearchToggle = () => {
           show={show}
           className="d-none d-lg-block"
         />
+
         <div className="btn btn-icon btn-icon-gray-500 btn-active-secondary w-35px h-35px w-md-40px h-md-40px d-lg-none">
           <span className="svg-icon">
-            <MagnifyingGlass className="w-20px h-20px" weight="bold" />
+            <MagnifyingGlassIcon className="w-20px h-20px" weight="bold" />
           </span>
         </div>
       </div>

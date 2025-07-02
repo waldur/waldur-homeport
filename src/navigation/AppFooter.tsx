@@ -1,4 +1,4 @@
-import { ArrowCircleUp } from '@phosphor-icons/react';
+import { ArrowCircleUpIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { versionRetrieve } from 'waldur-js-client';
@@ -89,7 +89,7 @@ export const AppFooter: FunctionComponent = () => {
           {showUpgradeAvailable && (
             <Tip id="upgrade-tooltip" label={translate('Update available')}>
               <span className="ms-2 d-inline-block">
-                <ArrowCircleUp
+                <ArrowCircleUpIcon
                   size={20}
                   color="#6B8E23"
                   weight="bold"

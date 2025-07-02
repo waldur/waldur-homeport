@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -22,7 +22,7 @@ export const CreateServerGroupAction: FC<TenantActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Create')}
-    iconNode={<PlusCircle weight="bold" />}
+    iconNode={<PlusCircleIcon weight="bold" />}
     modalComponent={CreateServerGroupDialog}
     resource={resource}
     validators={validators}

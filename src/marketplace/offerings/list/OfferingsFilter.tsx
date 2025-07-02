@@ -8,7 +8,7 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { OfferingStateFilter, getStates } from './OfferingStateFilter';
 
 const PureOfferingsFilter: FunctionComponent = () => (
-  <TableFilterItem title={translate('State')} name="state">
+  <TableFilterItem title={translate('State')} name="state" instantApply={false}>
     <OfferingStateFilter />
   </TableFilterItem>
 );

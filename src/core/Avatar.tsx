@@ -1,17 +1,24 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 
+import { Image } from './Image';
+import { getPlaceholderFontSize } from './ImagePlaceholder';
+
 interface AvatarProps {
   name: string;
+  src?: string;
   size?: number;
   className?: string;
   labelClassName?: string;
+  circle?: boolean;
 }
 const Avatar: FC<AvatarProps> = ({
-  size = 35,
+  size = 32,
   name,
+  src,
   className,
   labelClassName,
+  circle,
 }) => {
   const acronym = name
     ? name
@@ -22,13 +29,18 @@ const Avatar: FC<AvatarProps> = ({
         .slice(0, 2)
     : name;
 
+  if (src) {
+    return <Image src={src} size={size} isContain circle={circle} />;
+  }
+
   return (
     <div
       className={classNames(
+        `symbol symbol-${size}px`,
+        circle && 'symbol-circle',
         className,
-        'd-flex align-items-center justify-content-center',
       )}
-      style={{ width: `${size}px`, height: `${size}px` }}
+      style={{ fontSize: getPlaceholderFontSize(size) + 'px' }}
     >
       <div className={classNames('symbol-label', labelClassName)}>
         {acronym}

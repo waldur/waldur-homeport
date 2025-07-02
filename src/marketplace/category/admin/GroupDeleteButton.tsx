@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceCategoryGroupsDestroy } from 'waldur-js-client';
@@ -51,7 +51,7 @@ export const GroupDeleteButton = (props: GroupDeleteButtonProps) => {
     <ActionItem
       title={translate('Remove')}
       action={openDialog}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       disabled={removing}
       size="sm"
       className="text-danger"

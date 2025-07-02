@@ -17,6 +17,6 @@ export const ExpandableContainer: FC<
       hasMultiSelect && 'has-multiselect',
     )}
   >
-    {children}
+    {asTable ? <div>{children}</div> : children}
   </div>
 );

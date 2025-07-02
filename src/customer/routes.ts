@@ -4,15 +4,31 @@ import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import {
+  CustomerFeatures,
+  InvitationsFeatures,
+  MarketplaceFeatures,
+} from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
 import { hasSupport } from '@waldur/issues/hooks';
 import { PermissionEnum } from '@waldur/permissions/enums';
-import { isOwnerOrStaff, isStaff } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  isOwnerOrStaff,
+  isStaff,
+  isOwner,
+} from '@waldur/workspace/selectors';
 
 import { userHasCustomerPermission } from './utils';
 import { fetchCustomer } from './workspace/fetchCustomer';
+
+function canAccessPaymentProfiles(state) {
+  const customer = getCustomer(state);
+  if (isStaff(state)) return true;
+  if (isOwner(state) && customer.payment_profiles?.length > 0) return true;
+  return false;
+}
 
 export const states: StateDeclaration[] = [
   {
@@ -206,6 +222,22 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'organization-service-accounts',
+    url: 'service-accounts/',
+    component: lazyComponent(() =>
+      import('./service-accounts/ServiceAccountsList').then((module) => ({
+        default: module.OrganizationServiceAccountsList,
+      })),
+    ),
+    parent: 'organization-team',
+    data: {
+      skipBreadcrumb: true,
+      breadcrumb: () => translate('Service accounts'),
+      feature: InvitationsFeatures.show_service_accounts,
+    },
+  },
+
+  {
     name: 'organization-manage-container',
     url: '',
     abstract: true,
@@ -259,8 +291,9 @@ export const states: StateDeclaration[] = [
         (state) => {
           if (isFeatureVisible(CustomerFeatures.payments_for_staff_only)) {
             return isStaff(state);
+          } else {
+            return canAccessPaymentProfiles(state);
           }
-          return true;
         },
       ],
     },

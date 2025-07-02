@@ -1,4 +1,4 @@
-import { X } from '@phosphor-icons/react';
+import { XIcon } from '@phosphor-icons/react';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -32,7 +32,7 @@ export const ForceDestroyAction: ActionItemType = ({ resource, refetch }) => (
     className="text-danger"
     resource={resource}
     extraResolve={{ refetch }}
-    iconNode={<X weight="bold" />}
+    iconNode={<XIcon weight="bold" />}
     iconColor="danger"
   />
 );

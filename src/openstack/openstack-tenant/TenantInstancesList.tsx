@@ -21,8 +21,8 @@ import { INSTANCE_TYPE } from '../constants';
 export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackInstancesListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackInstancesListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
@@ -56,7 +56,7 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
   const props = useTable({
     table: 'openstack-instances',
     fetchData: createFetcher('openstack-instances'),
-    queryField: 'name',
+    queryField: 'query',
     filter,
   });
   return (

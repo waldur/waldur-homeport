@@ -18,7 +18,7 @@ export const OrganizationGroupCreateButton = ({ refetch }) => {
       dispatch(
         openModalDialog(OrganizationGroupForm, {
           resolve: { refetch },
-          size: 'md',
+          size: 'lg',
         }),
       ),
     [dispatch],

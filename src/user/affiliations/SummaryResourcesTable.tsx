@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { MarketplaceResourcesListData, Resource } from 'waldur-js-client';
@@ -53,7 +53,7 @@ const ResourcesListActions = ({ row, fetch }) => {
         ({ row }) => (
           <ActionItem
             title={translate('View details')}
-            iconNode={<Eye weight="bold" />}
+            iconNode={<EyeIcon weight="bold" />}
             action={() =>
               dispatch(
                 openModalDialog(ResourceDetailsDialog, {
@@ -122,6 +122,7 @@ export const SummaryResourcesTable: FC<OwnProps> = ({ scope, context }) => {
           render: ({ row }) => (
             <ResourceStateField resource={row} outline pill />
           ),
+
           orderField: 'state',
         },
       ]}

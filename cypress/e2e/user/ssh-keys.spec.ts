@@ -59,7 +59,15 @@ describe('SSH Keys', () => {
       cy.get('.table-container tbody tr')
         .should('have.length', 3)
         .contains('tr', keys[0].name)
-        .contains('button', 'Remove')
+        .find('td')
+        .last()
+        .find('button')
+        .should('be.visible')
+        .click()
+        .get('.dropdown-menu')
+        .should('be.visible')
+        .contains('a', 'Remove')
+        .should('be.visible')
         .click();
       cy.get('.modal-footer').should('be.visible');
       cy.contains('.modal-footer button', 'Delete').click();

@@ -1,4 +1,4 @@
-import { EyeSlash, WarningCircle } from '@phosphor-icons/react';
+import { EyeSlashIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,15 +18,17 @@ export const ImpersonationBar = () => {
   const impersonatorUser = useSelector(getImpersonatorUser);
 
   const dispatch = useDispatch();
-  const { mutate: stop, isLoading } = useMutation(async () => {
-    try {
-      clearImpersonationData();
-      await UsersService.getCurrentUser(true);
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to stop impersonating.')),
-      );
-    }
+  const { mutate: stop, isPending: isLoading } = useMutation({
+    mutationFn: async () => {
+      try {
+        clearImpersonationData();
+        await UsersService.getCurrentUser(true);
+      } catch (error) {
+        dispatch(
+          showErrorResponse(error, translate('Unable to stop impersonating.')),
+        );
+      }
+    },
   });
 
   if (!impersonatorUser || !user) {
@@ -37,7 +39,7 @@ export const ImpersonationBar = () => {
     <div className="impersonation-bar d-flex align-items-center justify-content-between h-100 container-fluid gap-4">
       <Stack direction="horizontal" gap={4} className="fw-bold">
         <div className="icon">
-          <WarningCircle size={20} weight="bold" />
+          <WarningCircleIcon size={20} weight="bold" />
         </div>
         {translate(
           'Caution! You are impersonating {impersonated}. Logged in as: {impersonator}',
@@ -55,7 +57,7 @@ export const ImpersonationBar = () => {
         onClick={() => stop()}
         disabled={isLoading}
       >
-        <EyeSlash size={20} weight="bold" className="me-3" />
+        <EyeSlashIcon size={20} weight="bold" className="me-3" />
         {translate('Stop impersonating')}
       </button>
     </div>

@@ -1,4 +1,8 @@
-import { CaretDown, DotsThreeVertical, Spinner } from '@phosphor-icons/react';
+import {
+  CaretDownIcon,
+  DotsThreeVerticalIcon,
+  SpinnerIcon,
+} from '@phosphor-icons/react';
 import { FunctionComponent, PropsWithChildren } from 'react';
 import { Dropdown, DropdownProps } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
@@ -27,6 +31,7 @@ interface TableDropdownToggleProps {
   labeled?: boolean;
   variant?: Variant;
   className?: string;
+  size?: 'sm' | 'md' | 'lg';
 }
 
 export const TableDropdownToggle = ({
@@ -35,17 +40,18 @@ export const TableDropdownToggle = ({
   labeled = false,
   variant = 'outline btn-outline-default',
   className = 'min-w-100px w-100',
+  size = 'sm',
 }: TableDropdownToggleProps) => {
   return labeled ? (
     <Dropdown.Toggle
       variant={variant}
-      size="sm"
+      size={size === 'md' ? undefined : size}
       className={className + ' btn-icon-right no-arrow'}
       disabled={disabled}
     >
       {label || translate('Actions')}
       <span className="svg-icon svg-icon-4 rotate-180">
-        <CaretDown weight="bold" />
+        <CaretDownIcon weight="bold" />
       </span>
     </Dropdown.Toggle>
   ) : (
@@ -53,9 +59,9 @@ export const TableDropdownToggle = ({
       variant="active-light"
       className="btn-icon no-arrow"
       disabled={disabled}
-      size="sm"
+      size={size === 'md' ? undefined : size}
     >
-      <DotsThreeVertical size={22} weight="bold" />
+      <DotsThreeVerticalIcon size={22} weight="bold" />
     </Dropdown.Toggle>
   );
 };
@@ -65,7 +71,9 @@ const PortalDropdown = ({ children }) => {
 };
 
 export const ActionsDropdownComponent: FunctionComponent<
-  PropsWithChildren<DropdownProps & TableDropdownToggleProps>
+  PropsWithChildren<DropdownProps & TableDropdownToggleProps> & {
+    menuStyle?: React.CSSProperties;
+  }
 > = ({
   onToggle,
   disabled,
@@ -74,6 +82,8 @@ export const ActionsDropdownComponent: FunctionComponent<
   labeled,
   variant,
   className,
+  menuStyle,
+  size,
   ...rest
 }) => (
   <Dropdown onToggle={onToggle} drop="start" align="end" {...rest}>
@@ -83,7 +93,9 @@ export const ActionsDropdownComponent: FunctionComponent<
       disabled={disabled}
       variant={variant}
       className={className}
+      size={size}
     />
+
     <PortalDropdown>
       <Dropdown.Menu
         popperConfig={
@@ -100,6 +112,7 @@ export const ActionsDropdownComponent: FunctionComponent<
                 ],
               }
         }
+        style={menuStyle}
       >
         {children}
       </Dropdown.Menu>
@@ -124,7 +137,7 @@ export const ActionsDropdown: FunctionComponent<
     {open ? (
       loading ? (
         <Dropdown.Item eventKey="1">
-          <Spinner size={20} className="animation-spin me-2" />
+          <SpinnerIcon size={20} className="animation-spin me-2" />
           {translate('Loading actions')}
         </Dropdown.Item>
       ) : error ? (

@@ -14,6 +14,7 @@ interface ActionDialogProps {
   invalid?: boolean;
   onSubmit: any;
   error?: string;
+  fullButtons?: boolean;
 }
 
 export const ActionDialog: React.FC<PropsWithChildren<ActionDialogProps>> = (
@@ -23,14 +24,20 @@ export const ActionDialog: React.FC<PropsWithChildren<ActionDialogProps>> = (
     <ModalDialog
       title={props.title}
       footer={
-        <div>
-          <CloseDialogButton className="me-3" />
+        <>
+          <CloseDialogButton
+            className={props.fullButtons ? 'flex-equal' : undefined}
+          />
+
           <SubmitButton
             disabled={props.invalid}
             submitting={props.submitting}
             label={props.submitLabel}
+            className={
+              props.fullButtons ? 'btn btn-primary flex-equal' : undefined
+            }
           />
-        </div>
+        </>
       }
     >
       {props.loading ? (

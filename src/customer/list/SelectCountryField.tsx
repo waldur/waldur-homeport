@@ -32,13 +32,11 @@ const WindowedSelectField = ({ input: { value, onChange }, ...props }) => (
 );
 
 export const SelectCountryField: FunctionComponent = () => {
-  const { isLoading, data } = useQuery(
-    ['countries'],
-    () => customersCountriesList().then((r) => r.data),
-    {
-      staleTime: 5 * 60 * 1000,
-    },
-  );
+  const { isLoading, data } = useQuery({
+    queryKey: ['countries'],
+    queryFn: () => customersCountriesList().then((r) => r.data),
+    staleTime: 5 * 60 * 1000,
+  });
   return (
     <Form.Group className="mb-7">
       <Field

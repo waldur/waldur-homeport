@@ -1,4 +1,4 @@
-import { CaretRight } from '@phosphor-icons/react';
+import { CaretRightIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
@@ -93,7 +93,7 @@ const WidgetItem = ({ item }: { item: ReportingWidget }) => (
           )}
         </div>
         <div>
-          <CaretRight className="icon-arrow display-5 fw-light text-dark" />
+          <CaretRightIcon className="icon-arrow display-5 fw-light text-dark" />
         </div>
       </div>
     </Card.Body>

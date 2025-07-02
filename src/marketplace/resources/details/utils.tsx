@@ -1,6 +1,5 @@
 import { Resource } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CreatedField } from '@waldur/resource/summary/CreatedField';
@@ -69,13 +68,11 @@ export const getResourceSummaryFields = ({
       label: translate('Created'),
       value: <CreatedField resource={resource} />,
     },
-    ENV.plugins.WALDUR_CORE.ENABLE_RESOURCE_END_DATE
-      ? {
-          name: 'end_date',
-          label: translate('Termination date'),
-          value: resource.end_date ? formatDate(resource.end_date) : null,
-        }
-      : null,
+    {
+      name: 'end_date',
+      label: translate('Termination date'),
+      value: resource.end_date ? formatDate(resource.end_date) : null,
+    },
     {
       name: 'uuid',
       label: translate('UUID'),

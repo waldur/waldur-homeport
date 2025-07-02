@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import {
+  MarketplacePublicOfferingsListData,
+  PublicOfferingDetails,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -46,7 +50,7 @@ const RowActions = ({ row }) => {
   );
 };
 
-const mandatoryFields = [
+const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   // OfferingCard
   'uuid',
   'name',
@@ -84,7 +88,7 @@ export const PublicOfferingsList: FunctionComponent<{
     mandatoryFields,
   });
 
-  const columns: Column[] = [
+  const columns: Column<PublicOfferingDetails>[] = [
     {
       title: translate('Name'),
       render: ({ row }: { row: Offering }) => (
@@ -95,6 +99,7 @@ export const PublicOfferingsList: FunctionComponent<{
           {row.name}
         </Link>
       ),
+
       copyField: (row) => row.name,
       orderField: 'name',
       id: 'name',
@@ -135,7 +140,7 @@ export const PublicOfferingsList: FunctionComponent<{
       keys: ['shared'],
       optional: true,
     },
-    SLUG_COLUMN,
+    SLUG_COLUMN as Column<PublicOfferingDetails>,
   ];
 
   if (showCategory) {

@@ -100,7 +100,7 @@ function* fireOnApplyFilters(action) {
   const state = yield select(getTableState(table));
   const { onApplyFilter } = getTableOptions(table);
   if (apply && onApplyFilter) {
-    onApplyFilter(state.filtersStorage);
+    onApplyFilter(state.filtersStorage, state.firstFetch);
   }
 }
 

@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 
 import { LoadingSpinner } from '@waldur/table/TableRefreshButton';
 
@@ -16,6 +16,6 @@ export const RefreshButton = (props: RefreshButtonProps) =>
       className="btn btn-icon btn-active-light btn-color-muted"
       onClick={props.refetch}
     >
-      <ArrowsClockwise size={20} data-cy="loading-spinner" weight="bold" />
+      <ArrowsClockwiseIcon size={20} data-cy="loading-spinner" weight="bold" />
     </button>
   );

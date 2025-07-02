@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
@@ -29,7 +29,7 @@ export const OrderSummaryButton = ({
       disabled={disabled}
     >
       <span className="svg-icon svg-icon-2">
-        <Eye weight="bold" />
+        <EyeIcon weight="bold" />
       </span>
       {label}
     </Button>

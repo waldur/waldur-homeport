@@ -31,10 +31,12 @@ export const CallDetailsFields = ({ call }) => {
         label={translate('Reference code')}
         value={call.backend_id || <>&mdash;</>}
       />
+
       <Field
         label={translate('Publication date')}
         value={renderFieldOrDash(formatDateTime(call.start_date))}
       />
+
       {activeRound && (
         <Field
           label={translate('Review strategy in active round')}

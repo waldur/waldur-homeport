@@ -21,16 +21,19 @@ export const InstanceMainComponent = ({ resourceScope }) => {
           label={translate('Image')}
           value={<ResourceImageField scope={resourceScope} />}
         />
+
         <Field
           label={translate('Flavor')}
           value={resourceScope.flavor_name}
           hasCopy
         />
+
         <Field
           label={translate('Internal IPs')}
           value={resourceScope.internal_ips.join(', ')}
           hasCopy
         />
+
         <Field
           label={translate('Floating IPs')}
           value={resourceScope.floating_ips
@@ -38,6 +41,7 @@ export const InstanceMainComponent = ({ resourceScope }) => {
             .join(', ')}
           hasCopy
         />
+
         <Field
           label={translate('External IPs')}
           value={resourceScope.external_address.join(', ')}

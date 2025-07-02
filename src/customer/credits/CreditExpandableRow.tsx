@@ -17,18 +17,22 @@ export const CreditExpandableRow = ({
       label={translate('Minimal consumption logic')}
       value={startCase(row.minimal_consumption_logic)}
     />
+
     <Field
       label={translate('Minimal consumption')}
       value={defaultCurrency(row.minimal_consumption)}
     />
+
     <Field
       label={translate('Expected consumption')}
       value={defaultCurrency(row.expected_consumption)}
     />
+
     <Field
       label={translate('Grace coefficient')}
       value={row.grace_coefficient}
     />
+
     <Field
       label={translate('Apply as minimal consumption')}
       value={<BooleanField value={row.apply_as_minimal_consumption} />}

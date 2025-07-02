@@ -43,6 +43,8 @@ export interface OfferingConfiguration<
   ) => RequestPayloadType;
   limitSerializer?: LimitParser;
   limitParser?: LimitParser;
+  pluginOptionsSerializer?: (formData) => any;
+  secretOptionsSerializer?: (formData) => any;
   label: string;
   showComponents?: boolean;
   onlyOnePlan?: boolean;

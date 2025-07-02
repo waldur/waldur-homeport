@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { rancherCatalogsDestroy } from 'waldur-js-client';
@@ -48,7 +48,7 @@ export const CatalogDeleteButton: FunctionComponent<{ catalog; refetch }> = ({
     <RowActionButton
       title={translate('Delete')}
       action={callback}
-      iconNode={<Trash />}
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
       pending={removing}
     />

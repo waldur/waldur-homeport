@@ -19,6 +19,7 @@ export const GroupInvitationsListExpandableRow: FunctionComponent<{
       labelClass="min-w-150px fw-bolder"
       space={5}
     />
+
     <UserPermissionRequestsList groupInvitationUuid={row.uuid} />
   </ExpandableContainer>
 );

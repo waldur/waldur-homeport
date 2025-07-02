@@ -1,4 +1,4 @@
-import { ArrowsOutCardinal } from '@phosphor-icons/react';
+import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
@@ -37,7 +37,7 @@ export const MoveProjectAction = ({
       title={translate('Move project')}
       action={callback}
       disabled={!isStaff}
-      iconNode={<ArrowsOutCardinal weight="bold" />}
+      iconNode={<ArrowsOutCardinalIcon weight="bold" />}
     />
   );
 };

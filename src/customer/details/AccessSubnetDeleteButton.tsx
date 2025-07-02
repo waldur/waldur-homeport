@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { AccessSubnet, accessSubnetsDestroy } from 'waldur-js-client';
@@ -52,7 +52,7 @@ export const AccessSubnetDeleteButton = (
       title={translate('Remove')}
       action={openDialog}
       disabled={removing}
-      iconNode={<Trash />}
+      iconNode={<TrashIcon />}
       className="text-danger"
       iconColor="danger"
     />

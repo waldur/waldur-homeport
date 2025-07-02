@@ -1,4 +1,4 @@
-import { PencilSimple, Trash, X } from '@phosphor-icons/react';
+import { PencilSimpleIcon, TrashIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import {
   ComponentType,
@@ -90,12 +90,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
           {input.value ? (
             <div ref={previewRef} className="symbol-label" />
           ) : (
-            <ImagePlaceholder
-              width={`${size}px`}
-              height={`${size}px`}
-              backgroundColor="#e2e2e2"
-              circle
-            >
+            <ImagePlaceholder width={`${size}px`} height={`${size}px`} circle>
               <div className="symbol-label fs-2 fw-bold w-100 h-100">
                 {props.alt}
               </div>
@@ -113,12 +108,15 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
         </p>
         <div className="d-flex gap-2 mb-4">
           <label
-            className="btn btn-outline btn-outline-default btn-sm btn-icon-right"
+            className={classNames(
+              'btn btn-outline btn-outline-default btn-sm btn-icon-right',
+              props.disabled && 'disabled',
+            )}
             data-image-input-action="change"
           >
             {translate('Change')}
             <span className="svg-icon svg-icon-5">
-              <PencilSimple weight="bold" />
+              <PencilSimpleIcon weight="bold" />
             </span>
             <input
               ref={inputRef}
@@ -127,6 +125,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
               accept=".png, .jpg, .jpeg"
               onChange={(event) => changeImage(event.target.files[0])}
               className="d-none"
+              disabled={props.disabled}
             />
           </label>
           <Button
@@ -134,11 +133,12 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             size="sm"
             className="btn-outline-default btn-icon-right"
             onClick={() => changeImage(initialValue)}
+            disabled={props.disabled}
             data-image-input-action="cancel"
           >
             {translate('Cancel')}
             <span className="svg-icon svg-icon-5">
-              <X weight="bold" />
+              <XIcon weight="bold" />
             </span>
           </Button>
           <Button
@@ -146,11 +146,12 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             size="sm"
             className="btn-outline-default btn-icon-right"
             onClick={() => changeImage(null)}
+            disabled={props.disabled}
             data-image-input-action="remove"
           >
             {translate('Remove')}
             <span className="svg-icon svg-icon-5">
-              <Trash />
+              <TrashIcon />
             </span>
           </Button>
           {props.extraActions

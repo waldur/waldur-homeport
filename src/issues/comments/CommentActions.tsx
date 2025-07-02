@@ -1,4 +1,4 @@
-import { PencilSimple, Trash } from '@phosphor-icons/react';
+import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -55,7 +55,7 @@ export const CommentActions = ({ comment }) => {
           >
             {translate('Change')}
             <span className="svg-icon svg-icon-5">
-              <PencilSimple weight="bold" />
+              <PencilSimpleIcon weight="bold" />
             </span>
           </Button>
           <Button
@@ -67,7 +67,7 @@ export const CommentActions = ({ comment }) => {
           >
             {translate('Remove')}
             <span className="svg-icon svg-icon-5">
-              <Trash weight="bold" />
+              <TrashIcon weight="bold" />
             </span>
           </Button>
         </>

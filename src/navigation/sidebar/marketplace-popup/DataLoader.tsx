@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useEffect, useMemo, useState } from 'react';
 import { CategoryGroup } from 'waldur-js-client';
 
@@ -27,21 +27,30 @@ export const DataLoader = ({
     Category | CategoryGroup
   >();
 
-  const { data: lastOfferings } = useQuery(
-    ['MarketplacePopupNOfferings', customer?.uuid, project?.uuid, categoryUuid],
-    () =>
+  const { data: lastOfferings } = useQuery({
+    queryKey: [
+      'MarketplacePopupNOfferings',
+      customer?.uuid,
+      project?.uuid,
+      categoryUuid,
+    ],
+
+    queryFn: () =>
       categoryUuid || !showRecentlyAddedOfferings
         ? null
         : fetchLastNOfferings(customer, project),
-    { staleTime: 1 * 60 * 1000 },
-  );
+
+    staleTime: 1 * 60 * 1000,
+  });
 
   const {
     data: categoryGroups,
     isLoading: loadingGroups,
     error: errorGroups,
     refetch: loadCategoryGroups,
-  } = useQuery(['MarketplaceCategoryGroups'], () => getCategoryGroups(), {
+  } = useQuery({
+    queryKey: ['MarketplaceCategoryGroups'],
+    queryFn: () => getCategoryGroups(),
     staleTime: 1 * 60 * 1000,
   });
 
@@ -51,11 +60,17 @@ export const DataLoader = ({
     error: errorCategories,
     refetch: loadCategories,
     isFetching: fetchingCategories,
-  } = useQuery(
-    ['MarketplacePopupCategories', filter, customer?.uuid, project?.uuid],
-    () => fetchCategories(customer, project, filter),
-    { staleTime: 1 * 60 * 1000, keepPreviousData: true },
-  );
+  } = useQuery({
+    queryKey: [
+      'MarketplacePopupCategories',
+      filter,
+      customer?.uuid,
+      project?.uuid,
+    ],
+    queryFn: () => fetchCategories(customer, project, filter),
+    staleTime: 1 * 60 * 1000,
+    placeholderData: keepPreviousData,
+  });
 
   const categories = useMemo(() => {
     if (!Array.isArray(mainCategories)) return [];

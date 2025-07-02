@@ -1,17 +1,16 @@
-import { get } from 'lodash-es';
 import { FunctionComponent } from 'react';
 
-import { CheckOrX } from '@waldur/core/CheckOrX';
 import { required } from '@waldur/core/validators';
-import { StringField, SecretField, TextField } from '@waldur/form';
+import { SecretField, StringField, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { SecretField as PlainSecretField } from '@waldur/marketplace/common/SecretField';
-import { FieldEditButton } from '@waldur/marketplace/offerings/update/integration/FieldEditButton';
+import {
+  DefaultOfferingEditPanel,
+  OfferingEditField,
+} from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
 import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
 
-const fields = [
+const fields: OfferingEditField[] = [
   {
     label: translate('API URL'),
     key: 'service_attributes.backend_url',
@@ -70,33 +69,4 @@ const fields = [
 
 export const OpenStackForm: FunctionComponent<OfferingEditPanelFormProps> = (
   props,
-) =>
-  fields.map((field) => (
-    <FormTable.Item
-      key={field.key}
-      label={field.label}
-      description={field.description}
-      required={field.fieldProps?.required}
-      value={
-        field.component === SecretField ? (
-          <PlainSecretField value={get(props.offering, field.key)} />
-        ) : field.component === AwesomeCheckboxField ? (
-          <CheckOrX value={get(props.offering, field.key)} />
-        ) : (
-          get(props.offering, field.key, 'N/A')
-        )
-      }
-      actions={
-        <FieldEditButton
-          title={field.label}
-          scope={props.offering}
-          name={field.key}
-          description={field.description}
-          callback={props.callback}
-          fieldComponent={field.component}
-          hideLabel={field.hideLabel}
-          fieldProps={field.fieldProps}
-        />
-      }
-    />
-  ));
+) => <DefaultOfferingEditPanel fields={fields} {...props} />;

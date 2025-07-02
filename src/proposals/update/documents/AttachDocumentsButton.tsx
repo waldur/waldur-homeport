@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -26,7 +26,7 @@ export const AttachDocumentsButton = ({ call, refetch }) => {
     <ActionButton
       action={callback}
       title={translate('Add document')}
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
     />
   );
 };

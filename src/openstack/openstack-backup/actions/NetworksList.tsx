@@ -1,4 +1,4 @@
-import { Plus, Trash } from '@phosphor-icons/react';
+import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { Field } from 'react-final-form';
@@ -18,7 +18,7 @@ type NetworkChoices = Pick<BackupFormChoices, 'subnets' | 'floatingIps'>;
 const AddButton = ({ onClick, disabled }) => (
   <Button variant="default" onClick={onClick} disabled={disabled}>
     <span className="svg-icon svg-icon-2">
-      <Plus weight="bold" />
+      <PlusIcon weight="bold" />
     </span>{' '}
     {translate('Add')}
   </Button>
@@ -27,7 +27,7 @@ const AddButton = ({ onClick, disabled }) => (
 const DeleteButton = ({ onClick }) => (
   <Button variant="default" title={translate('Delete')} onClick={onClick}>
     <span className="svg-icon svg-icon-2">
-      <Trash />
+      <TrashIcon />
     </span>
   </Button>
 );

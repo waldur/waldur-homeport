@@ -26,6 +26,7 @@ interface Context {
     | 'old_cost_estimate'
     | 'new_cost_estimate'
   >;
+
   user: string;
   approved?: string;
   components: OfferingComponent[];
@@ -77,12 +78,13 @@ const getComponentMap = (components: OfferingComponent[]): ComponentMap => {
 export const getUpdateSummary = (ctx: Context) => {
   let msg;
   const componentMap = getComponentMap(ctx.components);
-  if (ctx.order.attributes['old_limits']) {
+  if (typeof ctx.order.attributes['old_limits'] === 'object') {
     msg = translate(
       '{user} has requested changing of limits from "{old_limits}" to "{new_limits}".',
       {
         user: ctx.user,
         old_limits: formatLimits(
+          // @ts-ignore
           ctx.order.attributes['old_limits'],
           componentMap,
         ),

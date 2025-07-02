@@ -1,11 +1,5 @@
-import { X, Export } from '@phosphor-icons/react';
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
-import { Button, Stack } from 'react-bootstrap';
+import { ExportIcon } from '@phosphor-icons/react';
+import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
@@ -50,7 +44,7 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
           ? [
               {
                 label: translate('Export'),
-                iconNode: <Export />,
+                iconNode: <ExportIcon />,
                 children: EXPORT_OPTIONS.map(({ value, label }) => ({
                   label: label,
                   action: () => openExportDialog(props.table, value, props),
@@ -98,31 +92,6 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
 
   return (
     <>
-      {/* Multi-select actions */}
-      {Boolean(props.selectedRows?.length && props.multiSelectActions) && (
-        <div className="d-flex justify-content-between w-100 w-sm-auto gap-3">
-          <Stack direction="horizontal" className="fw-normal text-dark me-2">
-            <Button
-              variant="active-secondary"
-              className="btn-icon me-1"
-              size="sm"
-              onClick={props.resetSelection}
-            >
-              <X weight="bold" />
-            </Button>
-            <span>
-              ({props.selectedRows?.length}) {translate('Selected')}
-            </span>
-          </Stack>
-          {React.createElement(props.multiSelectActions, {
-            rows: props.selectedRows,
-            refetch: () => {
-              props.fetch();
-              props.resetSelection();
-            },
-          })}
-        </div>
-      )}
       {showDefaultActions && (
         <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3 flex-grow-1 flex-sm-grow-0">
           {/* Filter */}

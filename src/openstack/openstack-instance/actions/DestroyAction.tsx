@@ -1,4 +1,4 @@
-import { FileX } from '@phosphor-icons/react';
+import { FileXIcon } from '@phosphor-icons/react';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -37,7 +37,7 @@ export const DestroyAction: ActionItemType = ({ resource, refetch }) => (
     resource={resource}
     modalComponent={DestroyDialog}
     extraResolve={{ refetch }}
-    iconNode={<FileX weight="bold" />}
+    iconNode={<FileXIcon weight="bold" />}
     iconColor="danger"
   />
 );

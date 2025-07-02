@@ -1,4 +1,4 @@
-import { XCircle } from '@phosphor-icons/react';
+import { XCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { GroupInvitation, userGroupInvitationsCancel } from 'waldur-js-client';
@@ -32,7 +32,7 @@ export const GroupInvitationCancelButton: FunctionComponent<
           positiveButton: translate('Unsent'),
           negativeButton: translate('Cancel'),
           positiveButtonVariant: 'light-danger',
-          iconNode: <XCircle weight="bold" />,
+          iconNode: <XCircleIcon weight="bold" />,
         },
       );
     } catch {
@@ -54,7 +54,7 @@ export const GroupInvitationCancelButton: FunctionComponent<
     <ActionItem
       action={callback}
       title={translate('Cancel')}
-      iconNode={<XCircle weight="bold" />}
+      iconNode={<XCircleIcon weight="bold" />}
       iconColor="danger"
       className="text-danger"
       disabled={!permissionRequest.is_active}

@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
+  ComponentsUsageStats,
+  Customer,
   marketplaceResourcesList,
   MarketplaceResourcesListData,
+  Project,
 } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
@@ -29,6 +32,12 @@ const requiredFields: MarketplaceResourcesListData['query']['field'] = [
 
 export const AggregateLimitDetailsDialog = ({
   resolve: { project, customer, components },
+}: {
+  resolve: {
+    project?: Project;
+    customer?: Customer;
+    components: ComponentsUsageStats['components'];
+  };
 }) => {
   const dispatch = useDispatch();
   const initialComponent = components?.[0] || null;

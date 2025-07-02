@@ -1,6 +1,6 @@
 import { createElement, FC, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { isSubmitting, isValid } from 'redux-form';
+import { isSubmitting } from 'redux-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -9,12 +9,11 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 
 import { DeployPageTotalCard } from '../deploy/DeployPageTotalCard';
-import {
-  formCustomerSelector,
-  formErrorsSelector,
-  formSubmitErrorsSelector,
-} from '../deploy/utils';
-import { orderFormDataSelector } from '../utils';
+import { formIsValidSelector } from '../deploy/selectors';
+import { formSubmitErrorsSelector } from '../deploy/selectors';
+import { formErrorsSelector } from '../deploy/selectors';
+import { orderCustomerSelector } from '../deploy/selectors';
+import { orderFormDataSelector } from '../deploy/selectors';
 
 import { OrderSubmitButton } from './OrderSubmitButton';
 import { OrderSummaryPlanRows } from './plan/OrderSummaryPlanRows';
@@ -66,10 +65,10 @@ const PureOrderSummary: FC<OrderSummaryProps> = (props) =>
   );
 
 const mapStateToProps = (state, ownProps) => ({
-  customer: formCustomerSelector(state),
+  customer: orderCustomerSelector(state),
   prices: pricesSelector(state, ownProps),
   formData: orderFormDataSelector(state),
-  formValid: isValid(ORDER_FORM_ID)(state),
+  formValid: formIsValidSelector(state),
   errors: { ...formErrorsSelector(state), ...formSubmitErrorsSelector(state) },
   isSubmitting: isSubmitting(ORDER_FORM_ID)(state),
   shouldConcealPrices: isFeatureVisible(MarketplaceFeatures.conceal_prices),

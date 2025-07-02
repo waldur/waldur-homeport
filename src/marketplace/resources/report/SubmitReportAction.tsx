@@ -1,4 +1,4 @@
-import { FileText } from '@phosphor-icons/react';
+import { FileTextIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -38,7 +38,7 @@ export const SubmitReportAction: ActionItemType = ({
     <DialogActionItem
       validators={validators}
       title={translate('Submit report')}
-      iconNode={<FileText weight="bold" />}
+      iconNode={<FileTextIcon weight="bold" />}
       modalComponent={SubmitReportDialog}
       dialogSize="xl"
       resource={marketplaceResource || resource}

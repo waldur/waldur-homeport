@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, getFormValues } from 'redux-form';
 
@@ -7,11 +7,13 @@ import { ENV } from '@waldur/core/config';
 import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { required } from '@waldur/core/validators';
+import { lessThanOrEqual, required } from '@waldur/core/validators';
 import { NumberField } from '@waldur/form';
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { providerOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { Column } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -27,6 +29,7 @@ export const COMMON_CREDIT_COLUMNS: Column[] = [
         )}
       </>
     ),
+
     export: (row) =>
       renderFieldOrDash(
         row.offerings.map((offering) => offering.name).join(', '),
@@ -67,6 +70,39 @@ const validatePercent = (value) => {
   return undefined;
 };
 
+export const minimalConsumptionLogicOptions = [
+  {
+    label: translate('Fixed'),
+    value: 'fixed',
+    description: translate('A minimal guaranteed credit reduction per month.'),
+  },
+  {
+    label: translate('Linear'),
+    value: 'linear',
+    description: translate(
+      'A minimum amount deducted monthly, calculated based on the end date. Updated on the start of the month.',
+    ),
+  },
+];
+
+export const getMinimalConsumptionFieldIndex = (field: string) => {
+  switch (field) {
+    case 'end_date':
+      return 0;
+    case 'minimal_consumption_logic':
+      return 1;
+    case 'expected_consumption':
+      return 2;
+    case 'grace_coefficient':
+      return 3;
+    case 'apply_as_minimal_consumption':
+      return 4;
+
+    default:
+      break;
+  }
+};
+
 export const useMinimalConsumptionFields = (formId: string, initialValues) => {
   const formValues = (useSelector(getFormValues(formId)) ||
     {}) as BaseCreditFormData;
@@ -89,6 +125,12 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
       }
     }
   });
+
+  const onlyFirstDayOfMonth = useCallback(
+    (date: Date) => date.getDate() === 1,
+    [],
+  );
+
   return [
     <DateField
       name="end_date"
@@ -107,29 +149,17 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
           ? getStartOfNextMonth().toISO()
           : undefined
       }
+      enable={[onlyFirstDayOfMonth]}
     />,
+
     <CustomRadioButton
       label={translate('Minimal consumption logic')}
       name="minimal_consumption_logic"
       key="minimal_consumption_logic"
       direction="horizontal"
-      choices={[
-        {
-          label: translate('Fixed'),
-          value: 'fixed',
-          description: translate(
-            'A minimal guaranteed credit reduction per month.',
-          ),
-        },
-        {
-          label: translate('Linear'),
-          value: 'linear',
-          description: translate(
-            'A minimum amount deducted monthly, calculated based on the end date. Updated on the start of the month.',
-          ),
-        },
-      ]}
+      choices={minimalConsumptionLogicOptions}
     />,
+
     <NumberField
       label={translate('Expected consumption (per month)')}
       name="expected_consumption"
@@ -138,6 +168,7 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
       description={translate('Enter the expected credit reduction per month')}
       unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
     />,
+
     <NumberField
       label={translate('Grace coefficient')}
       name="grace_coefficient"
@@ -146,6 +177,7 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
       unit="%"
       validate={validatePercent}
     />,
+
     <AwesomeCheckboxField
       label={translate('Apply as minimal consumption')}
       name="apply_as_minimal_consumption"
@@ -153,4 +185,83 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
       hideLabel
     />,
   ];
+};
+
+export const useCustomerCreditOfferingsField = () => {
+  return (
+    <AsyncSelectField
+      name="offerings"
+      label={translate('Offering(s)')}
+      placeholder={translate('All')}
+      loadOptions={(query, prevOptions, { page }) =>
+        providerOfferingsAutocomplete(
+          { name: query, billable: true },
+          prevOptions,
+          page,
+        )
+      }
+      isMulti
+      getOptionValue={(option) => option.uuid}
+      getOptionLabel={(option) =>
+        option.category_title
+          ? `${option.category_title} / ${option.name}`
+          : option.name
+      }
+      noOptionsMessage={() => translate('No offerings')}
+    />
+  );
+};
+
+export const useCustomerAllocateCreditField = () => {
+  return (
+    <NumberField
+      label={translate('Allocate credit ({currency})', {
+        currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+      })}
+      name="value"
+      placeholder="0"
+      validate={required}
+      required
+      unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
+    />
+  );
+};
+
+export const useProjectAllocateCreditField = (
+  organizationCredit: number | string,
+  isEdit: boolean,
+) => {
+  const exceeds = useMemo(
+    () => lessThanOrEqual(Number(organizationCredit ?? 0)),
+    [organizationCredit],
+  );
+  const valueFieldDescriptionData = {
+    currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+    credits: organizationCredit ?? 0,
+  };
+  return (
+    <NumberField
+      label={translate('Allocate credit ({currency})', {
+        currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+      })}
+      name="value"
+      placeholder="0"
+      description={
+        isEdit
+          ? translate(
+              'Previously saved credit value for this organization: {currency} {credits}',
+              valueFieldDescriptionData,
+              formatJsxTemplate,
+            )
+          : translate(
+              'Credits available for this organization: {currency} {credits}',
+              valueFieldDescriptionData,
+              formatJsxTemplate,
+            )
+      }
+      unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
+      validate={[required, exceeds]}
+      required
+    />
+  );
 };

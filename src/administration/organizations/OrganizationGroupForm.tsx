@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import {
@@ -70,7 +70,7 @@ export const OrganizationGroupForm = ({ resolve }) => {
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
-            iconNode={isEdit ? null : <PlusCircle weight="bold" />}
+            iconNode={isEdit ? null : <PlusCircleIcon weight="bold" />}
             iconColor="success"
             title={
               isEdit

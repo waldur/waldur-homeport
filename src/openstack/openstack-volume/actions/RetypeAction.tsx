@@ -1,4 +1,4 @@
-import { ArrowURightDown } from '@phosphor-icons/react';
+import { ArrowURightDownIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -22,6 +22,6 @@ export const RetypeAction: ActionItemType = ({ resource, refetch }) => (
     modalComponent={RetypeDialog}
     resource={resource}
     extraResolve={{ refetch }}
-    iconNode={<ArrowURightDown weight="bold" />}
+    iconNode={<ArrowURightDownIcon weight="bold" />}
   />
 );

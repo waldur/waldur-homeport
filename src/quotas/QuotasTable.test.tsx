@@ -76,6 +76,7 @@ describe('QuotasTable', () => {
         limit: 10,
       },
     ];
+
     renderQuotas(quotas);
     expect(screen.getByText('Storage')).toBeInTheDocument(); // Should be under Storage category
   });
@@ -85,6 +86,7 @@ describe('QuotasTable', () => {
       { name: 'vcpu', usage: 2, limit: 4 },
       { name: 'ram', usage: 1024, limit: 2048 },
     ];
+
     renderQuotas(quotas);
     const items = screen.getAllByText(/RAM|vCPU count/);
     expect(items[0]).toHaveTextContent('RAM');

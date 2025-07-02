@@ -1,4 +1,4 @@
-import { Prohibit } from '@phosphor-icons/react';
+import { ProhibitIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { customerPermissionsReviewsClose } from 'waldur-js-client';
@@ -25,7 +25,7 @@ export const ReviewCloseButton: FC<ReviewCloseButtonProps> = ({ reviewId }) => {
     <RowActionButton
       action={callback}
       title={translate('Perform review')}
-      iconNode={<Prohibit />}
+      iconNode={<ProhibitIcon />}
       size="sm"
     />
   );

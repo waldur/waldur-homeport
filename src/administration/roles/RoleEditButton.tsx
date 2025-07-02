@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { RoleModifyRequest, rolesUpdate } from 'waldur-js-client';
@@ -40,7 +40,7 @@ export const RoleEditButton = ({ row, refetch }) => {
   return (
     <ActionItem
       title={translate('Edit role')}
-      iconNode={<PencilSimple weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       action={openRoleEditDialog}
     />
   );

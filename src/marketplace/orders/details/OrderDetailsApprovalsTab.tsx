@@ -20,14 +20,17 @@ export const OrderDetailsApprovalsTab = ({ order, offering }) => {
             label={translate('Description')}
             value={<OrderSummaryMessage order={order} offering={offering} />}
           />
+
           <Field
             label={translate('Created by')}
             value={order.created_by_full_name}
           />
+
           <Field
             label={translate('Created at')}
             value={formatDateTime(order.created)}
           />
+
           {order.provider_reviewed_by_full_name ? (
             <Field
               label={translate('Reviewed by provider')}

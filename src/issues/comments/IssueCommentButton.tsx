@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,7 @@ export const IssueCommentButton: FC = () => {
       onClick={openCommentDialog}
     >
       <span className="svg-icon svg-icon-2">
-        <Plus weight="bold" />
+        <PlusIcon weight="bold" />
       </span>
       {translate('Add comment')}
     </Button>

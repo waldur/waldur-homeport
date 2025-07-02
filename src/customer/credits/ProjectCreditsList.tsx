@@ -38,6 +38,7 @@ export const ProjectCreditsList: FC = () => {
               {row.project_name}
             </ProjectLink>
           ),
+
           orderField: 'project_name',
           export: 'project_name',
         },
@@ -54,6 +55,7 @@ export const ProjectCreditsList: FC = () => {
           <FilteredEventsButton
             filter={{ feature: 'credits', customer_uuid: customer.uuid }}
           />
+
           <ProjectCreateCreditButton refetch={tableProps.fetch} />
         </>
       }

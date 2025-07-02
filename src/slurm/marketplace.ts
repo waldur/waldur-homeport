@@ -1,7 +1,7 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OfferingConfiguration } from '@waldur/marketplace/common/types';
-import { SLURM_PLUGIN, SLURM_REMOTE_PLUGIN } from '@waldur/slurm/constants';
+import { SLURM_PLUGIN, SITE_AGENT_PLUGIN } from '@waldur/slurm/constants';
 
 const UserPluginOptionsForm = lazyComponent(() =>
   import('@waldur/marketplace/UserPluginOptionsForm').then((module) => ({
@@ -31,15 +31,13 @@ export const SlurmOffering: OfferingConfiguration = {
   allowToUpdateService: true,
 };
 
-export const SlurmRemoteOffering: OfferingConfiguration = {
-  type: SLURM_REMOTE_PLUGIN,
+export const SiteAgentOffering: OfferingConfiguration = {
+  type: SITE_AGENT_PLUGIN,
   get label() {
-    return translate('SLURM remote allocation');
+    return translate('Waldur site agent');
   },
   orderFormComponent: SlurmOrderForm,
   pluginOptionsForm: UserPluginOptionsForm,
   secretOptionsForm: UserSecretOptionsForm,
-  providerType: 'SLURM remote',
-  allowToUpdateService: true,
   showComponents: true,
 };

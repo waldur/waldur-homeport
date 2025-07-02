@@ -5,11 +5,11 @@ import { AccordionCard } from '@waldur/core/AccordionCard';
 import { Tip } from '@waldur/core/Tooltip';
 import { OptionsForm } from '@waldur/marketplace/common/OptionsForm';
 
+import { orderCustomerSelector } from '../selectors';
 import { FormStepProps } from '../types';
-import { formCustomerSelector } from '../utils';
 
 export const FormAdditionalConfigurationStep = (props: FormStepProps) => {
-  const customer = useSelector(formCustomerSelector);
+  const customer = useSelector(orderCustomerSelector);
   return (
     <Tip id={`tip-${props.id}`} label={props.disabledTooltip}>
       <AccordionCard

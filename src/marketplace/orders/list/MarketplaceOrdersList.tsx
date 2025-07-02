@@ -10,6 +10,8 @@ import {
 } from '@waldur/marketplace/orders/list/constants';
 import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 
+import { OrdersBulkActions } from '../actions/OrdersBulkActions';
+
 import { MarketplaceOrdersListFilter } from './MarketplaceOrdersListFilter';
 import { OrdersTableComponent } from './OrdersTableComponent';
 
@@ -62,6 +64,8 @@ export const MarketplaceOrdersList: FunctionComponent<
       filters={<MarketplaceOrdersListFilter />}
       filter={filter}
       standalone
+      enableMultiSelect
+      multiSelectActions={OrdersBulkActions}
     />
   );
 };

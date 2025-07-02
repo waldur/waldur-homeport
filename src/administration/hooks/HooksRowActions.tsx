@@ -3,13 +3,10 @@ import { HookRemoveButton } from '@waldur/user/hooks/HookRemoveButton';
 
 import { HookUpdateButton } from './HookUpdateButton';
 
-export const HooksRowActions = ({ row, refetch, url }) => (
+export const HooksRowActions = ({ row, refetch }) => (
   <ActionsDropdown
     row={row}
     refetch={refetch}
-    actions={[
-      HookUpdateButton,
-      (props) => <HookRemoveButton {...props} refetch={refetch} url={url} />,
-    ].filter(Boolean)}
+    actions={[HookUpdateButton, HookRemoveButton].filter(Boolean)}
   />
 );

@@ -1,7 +1,12 @@
-import { At, DeviceMobile, Hexagon, Hash } from '@phosphor-icons/react';
+import {
+  AtIcon,
+  DeviceMobileIcon,
+  HexagonIcon,
+  HashIcon,
+} from '@phosphor-icons/react';
 import { Col, Row, Stack } from 'react-bootstrap';
 
-import { PublicDashboardHero2 } from '@waldur/dashboard/hero/PublicDashboardHero2';
+import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { ProviderOfferingPermissions } from '@waldur/marketplace/service-providers/dashboard/ProviderOfferingPermissions';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
@@ -18,7 +23,7 @@ export const CustomerProfile = ({
   customer,
   fromServiceProvider,
 }: CustomerProfileProps) => (
-  <PublicDashboardHero2
+  <PublicDashboardHero
     hideQuickSection
     logo={customer.image}
     logoAlt={getItemAbbreviation(customer)}
@@ -43,7 +48,7 @@ export const CustomerProfile = ({
         >
           {customer.organization_groups.length > 0 && (
             <span className="text-nowrap">
-              <Hexagon size={18} weight="duotone" className="me-1" />
+              <HexagonIcon size={18} weight="duotone" className="me-1" />
               {customer.organization_groups
                 .map((group) => group.name)
                 .join(', ')}
@@ -51,21 +56,21 @@ export const CustomerProfile = ({
           )}
           {customer.email && (
             <span className="text-nowrap">
-              <At size={18} weight="duotone" className="me-1" />
+              <AtIcon size={18} weight="duotone" className="me-1" />
               {customer.email}
             </span>
           )}
           {customer.phone_number &&
             typeof customer.phone_number === 'string' && (
               <span className="text-nowrap">
-                <DeviceMobile size={18} weight="duotone" className="me-1" />
+                <DeviceMobileIcon size={18} weight="duotone" className="me-1" />
                 {customer.phone_number}
               </span>
             )}
           {customer.registration_code &&
             typeof customer.registration_code === 'string' && (
               <span className="text-nowrap">
-                <Hash size={18} weight="duotone" className="me-1" />
+                <HashIcon size={18} weight="duotone" className="me-1" />
                 {customer.registration_code}
               </span>
             )}
@@ -81,5 +86,5 @@ export const CustomerProfile = ({
         </Col>
       </Row>
     ) : null}
-  </PublicDashboardHero2>
+  </PublicDashboardHero>
 );

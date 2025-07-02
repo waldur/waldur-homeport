@@ -1,4 +1,4 @@
-import { Calendar } from '@phosphor-icons/react';
+import { CalendarIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Flatpickr from 'react-flatpickr';
@@ -104,7 +104,7 @@ export const BookingResourcesCalendar: FunctionComponent<
       ) : (
         <Col className="p-4 text-center">
           <div className="pt-10 pb-5">
-            <Calendar className="display-5" />
+            <CalendarIcon className="display-5" />
           </div>
           <div className="pb-15 fw-bold">
             <h3 className="text-gray-600 fs-5 mb-2">

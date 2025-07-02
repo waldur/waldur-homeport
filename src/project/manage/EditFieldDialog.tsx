@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { projectsPartialUpdate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatISODate } from '@waldur/core/dateUtils';
 import { SubmitButton } from '@waldur/form';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
@@ -28,7 +28,7 @@ const formatValue = (key, value) => {
   switch (key) {
     case 'end_date':
     case 'start_date':
-      return formatDate(value);
+      return formatISODate(value);
     case 'oecd_fos_2007_code':
       return value.value;
     default:
@@ -113,6 +113,17 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
             ) : resolve.name === 'slug' ? (
               <FormGroup label={translate('Slug')}>
                 <Field component={StringField as any} name="slug" />
+              </FormGroup>
+            ) : resolve.name === 'max_service_accounts' ? (
+              <FormGroup
+                label={translate('Maximum number of service accounts')}
+              >
+                <Field
+                  component={StringField as any}
+                  name="max_service_accounts"
+                  type="number"
+                  min={0}
+                />
               </FormGroup>
             ) : null}
           </ModalDialog>

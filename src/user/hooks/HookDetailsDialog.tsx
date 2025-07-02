@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import {
   EventGroupsEnum,
@@ -28,6 +29,7 @@ import { loadEventGroupsOptions } from './utils';
 
 const useHookForm = (hook, refetch) => {
   const { showErrorResponse, showSuccess } = useNotify();
+  const dispatch = useDispatch();
   const saveHook = async (formData: HookFormData) => {
     const hookType = hook ? hook.hook_type : formData.hook_type;
     const event_groups = Object.keys(
@@ -56,7 +58,7 @@ const useHookForm = (hook, refetch) => {
         }
         await refetch();
         showSuccess(translate('Notification has been updated.'));
-        closeModalDialog();
+        dispatch(closeModalDialog());
       } catch (e) {
         showErrorResponse(e, translate('Unable to update notification.'));
       }
@@ -81,7 +83,7 @@ const useHookForm = (hook, refetch) => {
         }
         await refetch();
         showSuccess(translate('Notification has been created.'));
-        closeModalDialog();
+        dispatch(closeModalDialog());
       } catch (e) {
         showErrorResponse(e, translate('Unable to create notification.'));
       }

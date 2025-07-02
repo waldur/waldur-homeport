@@ -1,4 +1,4 @@
-import { EnvelopeSimple, LinkSimple } from '@phosphor-icons/react';
+import { EnvelopeSimpleIcon, LinkSimpleIcon } from '@phosphor-icons/react';
 import { useMemo, FunctionComponent } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
@@ -13,14 +13,15 @@ export const HookTypeField: FunctionComponent<{ input; defaultValue }> = ({
       {
         key: 'email',
         label: translate('Email'),
-        iconClass: <EnvelopeSimple />,
+        iconClass: <EnvelopeSimpleIcon />,
       },
       {
         key: 'webhook',
         label: translate('Webhook'),
-        iconClass: <LinkSimple />,
+        iconClass: <LinkSimpleIcon />,
       },
     ],
+
     [],
   );
   return (

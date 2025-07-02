@@ -5,6 +5,7 @@ import { marketplaceOfferingUsagePoliciesCreate } from 'waldur-js-client';
 
 import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { PolicyPeriod } from '@waldur/customer/cost-policies/types';
 import { policyPeriodOptions } from '@waldur/customer/cost-policies/utils';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
@@ -52,8 +53,8 @@ export const UsagePolicyCreateButton = ({
           },
           initialValues: {
             scope: offering.url,
-            period: policyPeriodOptions.oneMonth.value,
-            component_limits_set: [{}],
+            period: policyPeriodOptions.oneMonth.value as PolicyPeriod,
+            component_limits_set: [],
           },
           type: 'usage',
           offering: offering,

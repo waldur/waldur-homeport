@@ -40,12 +40,13 @@ const LayoutWrapper: FC<PropsWithChildren<OwnProps>> = (props) =>
 export const ProjectUsersBadge = (props: OwnProps) => {
   const {
     data: users,
-    isLoading,
+    isPending,
     error,
     refetch,
-  } = useQuery(
-    ['ProjectTeam', props.projectId],
-    () =>
+  } = useQuery({
+    queryKey: ['ProjectTeam', props.projectId],
+
+    queryFn: () =>
       getAllPages((page) =>
         projectsListUsersList({
           path: { uuid: props.projectId },
@@ -55,10 +56,12 @@ export const ProjectUsersBadge = (props: OwnProps) => {
           },
         }),
       ),
-    { staleTime: 3 * 60 * 1000, enabled: Boolean(props.projectId) },
-  );
 
-  return isLoading ? (
+    staleTime: 3 * 60 * 1000,
+    enabled: Boolean(props.projectId),
+  });
+
+  return isPending ? (
     <LoadingSpinner />
   ) : error ? (
     <LoadingErred

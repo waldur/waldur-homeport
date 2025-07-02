@@ -7,6 +7,7 @@ import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
 import { parseSelectData } from '@waldur/core/api';
 import { Panel } from '@waldur/core/Panel';
+import { filterComponentsWithUsage } from '@waldur/customer/dashboard/utils';
 import { COMMON_WIDGET_HEIGHT } from '@waldur/dashboard/constants';
 import { TeamWidget } from '@waldur/dashboard/TeamWidget';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -32,11 +33,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   const router = useRouter();
   const goToUsers = () => router.stateService.go('project-users');
 
-  const { data: teamData } = useQuery(
-    ['projectTeamData', project?.uuid],
-    () => getProjectTeamChart(project),
-    { staleTime: 5 * 60 * 1000 },
-  );
+  const { data: teamData } = useQuery({
+    queryKey: ['projectTeamData', project?.uuid],
+    queryFn: () => getProjectTeamChart(project),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const { callback, canInvite } = useCreateInvitation({
     project: project,
@@ -47,17 +48,46 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     data: aggregateLimitData,
     isLoading: isAggregateLimitLoading,
     error: aggregateLimitError,
-  } = useQuery(
-    ['project-stats', project?.uuid],
-    () =>
+    refetch: aggregateLimitRefetch,
+  } = useQuery({
+    queryKey: ['project-stats', project?.uuid],
+
+    queryFn: () =>
       projectsStatsRetrieve({ path: { uuid: project?.uuid } }).then(
         (r) => r.data,
       ),
-    { refetchOnWindowFocus: false, staleTime: 60 * 1000 },
+
+    refetchOnWindowFocus: false,
+    staleTime: 60 * 1000,
+  });
+
+  const {
+    data: aggregateLimitDataForCurrentMonth,
+    isLoading: isAggregateLimitLoadingForCurrentMonth,
+    error: aggregateLimitErrorForCurrentMonth,
+    refetch: aggregateLimitRefetchForCurrentMonth,
+  } = useQuery({
+    queryKey: ['project-stats', project?.uuid, 'current-month'],
+
+    queryFn: () =>
+      projectsStatsRetrieve({
+        path: { uuid: project?.uuid },
+        query: { for_current_month: true },
+      }).then((r) => r.data),
+
+    refetchOnWindowFocus: false,
+    staleTime: 60 * 1000,
+  });
+
+  const currentMonthFilteredData = filterComponentsWithUsage(
+    aggregateLimitDataForCurrentMonth,
   );
 
   const shouldShowAggregateLimitWidget =
     aggregateLimitData?.components?.length > 0;
+
+  const shouldShowCurrentMonthWidget =
+    currentMonthFilteredData?.components?.length > 0;
 
   if (!project || !user) {
     return null;
@@ -80,8 +110,10 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                     'user_uuid',
                     'user_full_name',
                     'user_email',
+                    'user_image',
                     'role_name',
                   ],
+
                   page_size: 5,
                 },
               }).then(parseSelectData)
@@ -99,19 +131,33 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           />
         </Col>
       </Row>
-      {shouldShowAggregateLimitWidget && (
-        <Row>
+      <Row>
+        {shouldShowCurrentMonthWidget && (
+          <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
+            <AggregateLimitWidget
+              project={project}
+              data={currentMonthFilteredData}
+              isLoading={isAggregateLimitLoadingForCurrentMonth}
+              error={aggregateLimitErrorForCurrentMonth}
+              refetch={aggregateLimitRefetchForCurrentMonth}
+              type="monthly"
+            />
+          </Col>
+        )}
+        {shouldShowAggregateLimitWidget && (
           <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
             <AggregateLimitWidget
               project={project}
               data={aggregateLimitData}
               isLoading={isAggregateLimitLoading}
               error={aggregateLimitError}
+              refetch={aggregateLimitRefetch}
             />
           </Col>
-          <ProjectDashboardCredit project={project} className="mb-5" />
-        </Row>
-      )}
+        )}
+        <ProjectDashboardCredit project={project} className="mb-5" />
+      </Row>
+
       {project.description ? (
         <Panel title={translate('Description')} cardBordered>
           <p>{project.description}</p>

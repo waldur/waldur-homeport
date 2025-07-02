@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { FormControl, InputGroup } from 'react-bootstrap';
 
@@ -45,7 +45,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
                 className="mx-1"
               >
                 {' '}
-                <Question />
+                <QuestionIcon />
               </Tip>
               <span className="fw-normal fst-italic">
                 (
@@ -68,6 +68,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
                   onChange={(e: any) => setQty(e.target.value)}
                   aria-describedby={`basic-addon-${props.resolve.component.type}`}
                 />
+
                 {props.resolve.component.measured_unit && (
                   <InputGroup.Text
                     className="text-muted"

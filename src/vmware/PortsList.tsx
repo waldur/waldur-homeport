@@ -56,6 +56,7 @@ export const PortsList: FunctionComponent<{ resourceScope }> = ({
         },
       ]}
       verboseName={translate('ports')}
+      showPageSizeSelector
       tableActions={<CreatePortAction resource={resourceScope} />}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       rowActions={({ row }) => (

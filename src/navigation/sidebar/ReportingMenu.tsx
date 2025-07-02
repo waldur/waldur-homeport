@@ -1,4 +1,4 @@
-import { ChartBar } from '@phosphor-icons/react';
+import { ChartBarIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -17,7 +17,7 @@ export const ReportingMenu = () => {
       state="reporting-dashboard"
       activeState="reporting"
       child={false}
-      icon={<ChartBar weight="bold" />}
+      icon={<ChartBarIcon weight="bold" />}
     />
   );
 };

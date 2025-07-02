@@ -10,6 +10,13 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+const browserGlobals = {
+  ...globals.browser,
+  AudioWorkletGlobalScope: false, // this is the default,
+};
+
+delete browserGlobals['AudioWorkletGlobalScope '];
+
 export default tseslint
   .config(
     eslint.configs.recommended,
@@ -29,7 +36,7 @@ export default tseslint
         parserOptions: {
           ecmaVersion: 2020,
         },
-        globals: globals.browser,
+        globals: browserGlobals,
       },
       settings: {
         react: {
@@ -105,6 +112,12 @@ export default tseslint
         'import/no-named-as-default': 'error',
         'require-await': 'error',
         'jsx-a11y/no-autofocus': ['error', { ignoreNonDOM: true }],
+        'no-restricted-globals': [
+          'error',
+          {
+            name: 'close',
+          },
+        ],
       },
     },
     {

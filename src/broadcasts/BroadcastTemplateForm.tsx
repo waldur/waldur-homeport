@@ -17,12 +17,14 @@ export const BroadcastTemplateForm = ({
           required={true}
           validate={required}
         />
+
         <StringField
           name="subject"
           label={translate('Subject')}
           required={true}
           validate={required}
         />
+
         <TextField
           name="body"
           label={translate('Message')}

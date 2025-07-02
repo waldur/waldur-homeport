@@ -31,8 +31,9 @@
   transform: translateX(-50%);
   height: 270px;
 }
-.modal .has-icon .btn-close {
+.modal-header .btn-close {
   align-self: start;
+  margin-top: -0.5rem !important;
 }
 
 /* To fix scrollable modal body if we wrap it nested in other tags */
@@ -44,4 +45,11 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+.modal.confirm-modal {
+  z-index: 1065;
+}
+.modal-backdrop.confirm-backdrop {
+  z-index: 1060;
 }

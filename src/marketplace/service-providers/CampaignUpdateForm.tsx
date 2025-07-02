@@ -36,6 +36,7 @@ export const CampaignUpdateForm = enhance(({ submitting, step, setStep }) => (
       activeStep={step}
       onSelect={setStep}
     />
+
     <form>
       <Modal.Body className="scroll-y">
         {step === 0 ? (
@@ -46,6 +47,7 @@ export const CampaignUpdateForm = enhance(({ submitting, step, setStep }) => (
               required
               validate={required}
             />
+
             <SelectField
               name="discount_type"
               label={translate('Discount type')}
@@ -59,16 +61,19 @@ export const CampaignUpdateForm = enhance(({ submitting, step, setStep }) => (
                 },
               ]}
             />
+
             <DateField
               name="start_date"
               label={translate('Campaign start date')}
               required
             />
+
             <DateField
               name="end_date"
               label={translate('Campaign end date')}
               required
             />
+
             <AsyncSelectField
               name="offerings"
               label={translate('Offerings')}
@@ -95,6 +100,7 @@ export const CampaignUpdateForm = enhance(({ submitting, step, setStep }) => (
               validate={required}
               min={0}
             />
+
             <NumberField name="stock" label={translate('Stock')} min={0} />
             <AwesomeCheckboxField
               name="auto_apply"

@@ -1,4 +1,4 @@
-import { Bell } from '@phosphor-icons/react';
+import { BellIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
@@ -65,7 +65,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
         onClick={openDrawer}
       >
         <span className="svg-icon" title={translate('Pending tasks')}>
-          <Bell className="w-20px h-20px" weight="bold" />
+          <BellIcon className="w-20px h-20px" weight="bold" />
         </span>
         {showBullet && <HeaderButtonBullet />}
       </button>

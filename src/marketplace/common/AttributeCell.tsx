@@ -1,4 +1,4 @@
-import { Check, X } from '@phosphor-icons/react';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { NestedAttribute } from 'waldur-js-client';
 
@@ -26,7 +26,7 @@ export const AttributeCell: React.FC<AttributeCellProps> = ({
         <>
           {titles.map((item, index) => (
             <span key={index}>
-              <Check weight="bold" />
+              <CheckIcon weight="bold" />
               {` ${item}`}
               <br />
             </span>
@@ -37,9 +37,9 @@ export const AttributeCell: React.FC<AttributeCellProps> = ({
 
     case 'boolean': {
       return value === true ? (
-        <Check weight="bold" className="text-info" />
+        <CheckIcon weight="bold" className="text-info" />
       ) : (
-        <X weight="bold" className="text-danger" />
+        <XIcon weight="bold" className="text-danger" />
       );
     }
 

@@ -1,4 +1,4 @@
-import { Play } from '@phosphor-icons/react';
+import { PlayIcon } from '@phosphor-icons/react';
 
 import { getProps } from '@waldur/openstack/openstack-instance/actions/StartAction';
 
@@ -6,7 +6,7 @@ import { VirtualMachineMultiAction } from './VirtualMachineMultiAction';
 
 export const MultiStartAction = ({ rows, refetch }) => (
   <VirtualMachineMultiAction
-    iconNode={<Play weight="bold" />}
+    iconNode={<PlayIcon weight="bold" />}
     rows={rows}
     refetch={refetch}
     {...getProps()}

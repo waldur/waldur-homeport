@@ -1,0 +1,15 @@
+//
+// Accordion
+//
+
+// Custom accordion
+.accordion {
+  .card {
+    .card-header .card-toolbar {
+      @include svg-icon-color($gray-700);
+    }
+    &.card-solid .card-header .card-toolbar {
+      @include svg-icon-color($gray-500);
+    }
+  }
+}

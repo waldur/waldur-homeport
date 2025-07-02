@@ -97,6 +97,7 @@ export const CustomerManage: FunctionComponent<OwnProps> = ({ tabSpec }) => {
           callback={update}
           canUpdate={canEditCustomer}
         />
+
         <CustomerMarketplacePanel />
         {isFeatureVisible(
           MarketplaceFeatures.show_call_management_functionality,

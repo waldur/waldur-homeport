@@ -43,6 +43,11 @@ const CustomerMarketplacePanel = lazyComponent(() =>
     default: module.CustomerMarketplacePanel,
   })),
 );
+const CustomerCreditPanel = lazyComponent(() =>
+  import('./CustomerCreditPanel').then((module) => ({
+    default: module.CustomerCreditPanel,
+  })),
+);
 const CustomerRemovePanel = lazyComponent(() =>
   import('./CustomerRemovePanel').then((module) => ({
     default: module.CustomerRemovePanel,
@@ -94,6 +99,13 @@ export const CustomerManageContainer = () => {
               key: 'service-provider',
               component: CustomerMarketplacePanel,
               title: translate('Service provider'),
+            }
+          : null,
+        customer.credit
+          ? {
+              key: 'credit',
+              component: CustomerCreditPanel,
+              title: translate('Credit management'),
             }
           : null,
         hasPermission(user, {

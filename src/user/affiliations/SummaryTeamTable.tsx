@@ -3,6 +3,8 @@ import { Project } from 'waldur-js-client';
 
 import Avatar from '@waldur/core/Avatar';
 import { renderRoleExpirationDate } from '@waldur/customer/team/CustomerUsersList';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
@@ -22,6 +24,7 @@ const organizationUserMandatoryFields = [
   'expiration_time',
   'role_name',
 ];
+
 const projectUserMandatoryFields = [
   'uuid',
   'user_uuid',
@@ -73,30 +76,28 @@ export const SummaryTeamTable: FC<OwnProps> = ({ scope, context }) => {
           title: translate('Member'),
           render: ({ row }) => (
             <div className="content-wrapper gap-2">
-              {getValue(row, 'image') ? (
-                <img
-                  src={getValue(row, 'image')}
-                  alt={getValue(row, 'username')}
-                  width={32}
-                  height={32}
-                  className="rounded-circle"
-                />
-              ) : (
-                <Avatar
-                  className="symbol symbol-32px symbol-circle"
-                  name={getValue(row, 'full_name')}
-                  size={32}
-                />
-              )}
+              <Avatar
+                src={getValue(row, 'image')}
+                name={getValue(row, 'full_name')}
+                circle
+              />
+
               <p className="mb-0">
                 {getValue(row, 'full_name') || DASH_ESCAPE_CODE}
               </p>
             </div>
           ),
+
           copyField: (row) => getValue(row, 'full_name'),
           orderField:
             (context === 'organization' && 'concatenated_name') ||
             (context === 'project' && 'full_name'),
+        },
+        isFeatureVisible(UserFeatures.show_username) && {
+          title: translate('Username'),
+          render: ({ row }) => getValue(row, 'username'),
+          copyField: (row) => getValue(row, 'username'),
+          className: 'w-25',
         },
         {
           title: translate('Email'),
@@ -116,7 +117,7 @@ export const SummaryTeamTable: FC<OwnProps> = ({ scope, context }) => {
           render: ({ row }) => renderRoleExpirationDate(row),
           className: 'w-45px',
         },
-      ]}
+      ].filter(Boolean)}
       verboseName={translate('Team members')}
       hasActionBar={false}
       hoverShadow={false}

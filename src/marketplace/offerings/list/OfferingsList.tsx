@@ -26,7 +26,8 @@ import { OfferingNameColumn } from './OfferingNameColumn';
 import { OfferingStateCell } from './OfferingStateCell';
 import { getStates } from './OfferingStateFilter';
 
-const mandatoryFields = ['customer_uuid', 'components', 'plans'];
+const mandatoryFields: MarketplaceProviderOfferingsListData['query']['field'] =
+  ['customer_uuid', 'components', 'plans'];
 
 export const BaseOfferingsList: FunctionComponent<{
   table: string;

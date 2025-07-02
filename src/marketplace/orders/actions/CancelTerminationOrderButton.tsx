@@ -1,4 +1,4 @@
-import { Prohibit } from '@phosphor-icons/react';
+import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { remoteWaldurApiCancelTermination } from 'waldur-js-client';
@@ -20,16 +20,18 @@ export const CancelTerminationOrderButton = ({
   const user = useSelector(getUser);
 
   const dispatch = useDispatch();
-  const { mutate, isLoading } = useMutation(async () => {
-    try {
-      await remoteWaldurApiCancelTermination({ path: { uuid: row.uuid } });
-      await fetch();
-      dispatch(showSuccess(translate('Order has been canceled.')));
-    } catch (response) {
-      dispatch(
-        showErrorResponse(response, translate('Unable to cancel order.')),
-      );
-    }
+  const { mutate, isPending: isLoading } = useMutation({
+    mutationFn: async () => {
+      try {
+        await remoteWaldurApiCancelTermination({ path: { uuid: row.uuid } });
+        await fetch();
+        dispatch(showSuccess(translate('Order has been canceled.')));
+      } catch (response) {
+        dispatch(
+          showErrorResponse(response, translate('Unable to cancel order.')),
+        );
+      }
+    },
   });
 
   if (
@@ -43,7 +45,7 @@ export const CancelTerminationOrderButton = ({
         title={translate('Cancel')}
         action={mutate}
         disabled={isLoading}
-        iconNode={<Prohibit weight="bold" />}
+        iconNode={<ProhibitIcon weight="bold" />}
         size="sm"
       />
     );

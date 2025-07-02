@@ -5,7 +5,7 @@ import { Image } from '@waldur/core/Image';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
-export const ImageFetcher = ({ url, name, thumb = false }) => {
+export const ImageFetcher = ({ url, name, thumb = false, iconSize = 20 }) => {
   const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -46,7 +46,7 @@ export const ImageFetcher = ({ url, name, thumb = false }) => {
         <p>{error}</p>
       ) : imageUrl ? (
         thumb ? (
-          <Image size={40} src={imageUrl} />
+          <Image size={iconSize} src={imageUrl} />
         ) : (
           <img
             src={imageUrl}

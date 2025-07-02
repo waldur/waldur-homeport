@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -17,7 +17,7 @@ const validators = [validateState('OK')];
 export const CreateDiskAction: FC<{ resource }> = ({ resource }) => (
   <DialogActionButton
     title={translate('Create disk')}
-    iconNode={<PlusCircle weight="bold" />}
+    iconNode={<PlusCircleIcon weight="bold" />}
     modalComponent={CreateDiskDialog}
     resource={resource}
     validators={validators}

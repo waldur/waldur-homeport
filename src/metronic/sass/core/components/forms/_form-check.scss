@@ -114,17 +114,26 @@
   }
   &.form-check-custom {
     align-items: start;
+    justify-content: end;
   }
   &.form-check-solid {
     .form-check-input {
+      background-color: $gray-100;
       height: $form-switch-height;
       background-image: escape-svg($form-switch-bg-image-solid);
       border-radius: $form-switch-border-radius;
 
+      &:hover {
+        background-color: $form-check-input-bg-solid;
+      }
+
       &:checked {
         filter: none;
-        background-image: escape-svg($form-switch-checked-bg-image);
         background-color: $form-switch-checked-bg-color;
+
+        &:disabled {
+          background-color: $brand-200;
+        }
       }
     }
 

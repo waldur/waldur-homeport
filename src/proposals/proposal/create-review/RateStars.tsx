@@ -1,4 +1,4 @@
-import { Star, StarHalf } from '@phosphor-icons/react';
+import { StarIcon, StarHalfIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import ReactStars from 'react-rating-stars-component';
 
@@ -19,13 +19,14 @@ export const RateStars: FC<RateStarsProps> = ({
   className,
 }) => (
   <ReactStars
+    key={`stars-${value}`}
     count={5}
     size={size}
     edit={false}
     isHalf={true}
-    emptyIcon={<Star weight="fill" />}
-    filledIcon={<Star weight="fill" />}
-    halfIcon={<StarHalf weight="fill" />}
+    emptyIcon={<StarIcon weight="fill" />}
+    filledIcon={<StarIcon weight="fill" />}
+    halfIcon={<StarHalfIcon weight="fill" />}
     color={RATING_STAR_INACTIVE_COLOR}
     activeColor={RATING_STAR_ACTIVE_COLOR}
     value={value}

@@ -1,4 +1,4 @@
-import { CaretRight, PaperPlaneTilt } from '@phosphor-icons/react';
+import { CaretRightIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -87,7 +87,7 @@ export const CampaignFooter = ({
       {step === 0 ? (
         <Button onClick={() => setStep(1)}>
           <span className="svg-icon svg-icon-2">
-            <CaretRight weight="bold" />
+            <CaretRightIcon weight="bold" />
           </span>{' '}
           {translate('Continue')}
         </Button>
@@ -96,14 +96,14 @@ export const CampaignFooter = ({
           {!isUpdate ? (
             <Button disabled={disabled} onClick={handleSubmit(saveAndSend)}>
               <span className="svg-icon svg-icon-2">
-                <PaperPlaneTilt weight="bold" />
+                <PaperPlaneTiltIcon weight="bold" />
               </span>{' '}
               {translate('Create a campaign')}
             </Button>
           ) : (
             <Button disabled={disabled} onClick={handleSubmit(saveAndUpdate)}>
               <span className="svg-icon svg-icon-2">
-                <PaperPlaneTilt weight="bold" />
+                <PaperPlaneTiltIcon weight="bold" />
               </span>{' '}
               {translate('Update a campaign')}
             </Button>

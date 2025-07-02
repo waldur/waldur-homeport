@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -15,7 +15,7 @@ export const HookCreateButton: FunctionComponent<{ refetch; hook? }> = (
     <ActionButton
       title={translate('Add notification')}
       action={() => dispatch(showHookUpdateDialog(props))}
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
     />
   );

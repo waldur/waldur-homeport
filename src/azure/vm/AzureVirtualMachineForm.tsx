@@ -54,6 +54,7 @@ export const AzureVirtualMachineForm: React.FC<
           validate={[required, virtualMachineName]}
           required={true}
         />
+
         <AsyncSelectField
           name="attributes.location"
           label={translate('Location')}
@@ -67,6 +68,7 @@ export const AzureVirtualMachineForm: React.FC<
             )
           }
         />
+
         <SelectField
           name="attributes.availability_zone"
           label={translate('Availability zone')}
@@ -77,6 +79,7 @@ export const AzureVirtualMachineForm: React.FC<
             { label: translate('Third'), value: 3 },
           ]}
         />
+
         <AsyncSelectField
           name="attributes.size"
           label={translate('Size')}
@@ -95,6 +98,7 @@ export const AzureVirtualMachineForm: React.FC<
           }
           getOptionLabel={getSizeLabel}
         />
+
         <AsyncSelectField
           name="attributes.image"
           label={translate('Image')}
@@ -112,6 +116,7 @@ export const AzureVirtualMachineForm: React.FC<
           getOptionLabel={getImageLabel}
           isDisabled={!location}
         />
+
         <TextField
           label={translate('Description')}
           name="attributes.description"

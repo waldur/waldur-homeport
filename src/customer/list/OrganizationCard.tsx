@@ -48,6 +48,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
               valueCol={6}
               valueClass="ellipsis"
             />
+
             <Field
               label={translate('Projects')}
               value={renderFieldOrDash(organization.projects_count)}
@@ -55,6 +56,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
               labelCol={6}
               valueCol={6}
             />
+
             <Field
               label={translate('Created')}
               value={formatDate(organization.created)}
@@ -62,6 +64,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
               labelCol={6}
               valueCol={6}
             />
+
             <Field
               label={translate('Cost estimation')}
               value={defaultCurrency(
@@ -73,6 +76,7 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
               labelCol={6}
               valueCol={6}
             />
+
             {(organization.customer_credit ||
               organization.customer_credit === 0) && (
               <Field

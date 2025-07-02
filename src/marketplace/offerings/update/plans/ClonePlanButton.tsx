@@ -1,4 +1,4 @@
-import { Copy } from '@phosphor-icons/react';
+import { CopyIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -32,7 +32,7 @@ export const ClonePlanButton: FunctionComponent<{
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <Copy size={18} /> {translate('Clone')}
+      <CopyIcon size={18} /> {translate('Clone')}
     </Dropdown.Item>
   );
 };

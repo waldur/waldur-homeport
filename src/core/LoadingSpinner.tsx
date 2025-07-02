@@ -1,8 +1,8 @@
-import { Spinner } from '@phosphor-icons/react';
+import { SpinnerIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 export const LoadingSpinnerIcon = ({ className }: { className? }) => (
-  <Spinner
+  <SpinnerIcon
     className={'animation-spin text-primary' + (className || '')}
     data-testid="spinner"
     role="status"

@@ -451,6 +451,7 @@
 }
 
 // Gray background states
+.menu-sub.menu-state-bg-gray,
 .menu-state-bg-gray {
   .menu-item {
     @include menu-link-show-state(

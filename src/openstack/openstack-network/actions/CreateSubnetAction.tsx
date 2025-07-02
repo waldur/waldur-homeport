@@ -1,4 +1,4 @@
-import { PlusSquare } from '@phosphor-icons/react';
+import { PlusSquareIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -21,6 +21,6 @@ export const CreateSubnetAction: ActionItemType = ({ resource, refetch }) => (
     modalComponent={CreateSubnetDialog}
     resource={resource}
     extraResolve={{ refetch }}
-    iconNode={<PlusSquare weight="bold" />}
+    iconNode={<PlusSquareIcon weight="bold" />}
   />
 );

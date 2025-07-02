@@ -1,6 +1,7 @@
 describe('Users', () => {
   beforeEach(() => {
     cy.mockChecklists()
+      .setAcceptCookies()
 
       .intercept('GET', '/api/configuration/', {
         fixture: 'support/configuration.json',
@@ -126,7 +127,7 @@ describe('Users', () => {
 
   it('should organization search works correctly', () => {
     cy.wait('@getUsers').then(() => {
-      cy.selectTableFilter('Organization', 'Allen-Rodriguez', true, true);
+      cy.selectTableFilter('Organization', 'Allen-Rodriguez', false, true);
       cy.get('table tbody tr').should('have.length', 1);
     });
   });

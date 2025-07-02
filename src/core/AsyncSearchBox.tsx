@@ -67,16 +67,15 @@ export const AsyncSearchBox: FC<AsyncSearchBoxProps> = ({
     [setQuery],
   );
 
-  const context = useInfiniteQuery<any, any, DataPage>(
-    ['SearchBoxResults', api, params, query],
-    loadData,
-    {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
-      meta: { api, params: { ...params, [queryField]: query } },
-      refetchOnWindowFocus: false,
-      enabled,
-    },
-  );
+  const context = useInfiniteQuery<any, any, DataPage>({
+    queryKey: ['SearchBoxResults', api, params, query],
+    queryFn: loadData,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => lastPage.nextPage,
+    meta: { api, params: { ...params, [queryField]: query } },
+    refetchOnWindowFocus: false,
+    enabled,
+  });
 
   const refPopup = useRef<HTMLInputElement>();
   const isVisible = useOnScreen(refPopup);

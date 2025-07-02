@@ -82,6 +82,17 @@ export const EChart: React.FC<ChartProps> = ({
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (chartRef.current) {
+        chartRef.current.resize();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [chartRef.current]);
+
   const style = { width, height };
 
   return (

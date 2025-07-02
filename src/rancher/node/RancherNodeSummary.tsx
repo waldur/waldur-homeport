@@ -22,28 +22,39 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         label={translate('Kubernetes version')}
         value={props.resource.k8s_version}
       />
+
       <Field
         label={translate('Roles')}
         value={<NodeRoleField node={props.resource} />}
       />
+
       <Field
         label={translate('Docker version')}
         value={props.resource.docker_version}
       />
+
       <Field
         label={translate('CPU')}
         value={
           props.resource.cpu_allocated &&
-          `${props.resource.cpu_allocated} / ${props.resource.cpu_total} cores`
+          translate('{allocated} / {total} cores', {
+            allocated: props.resource.cpu_allocated,
+            total: props.resource.cpu_total,
+          })
         }
       />
+
       <Field
         label={translate('RAM')}
         value={
           props.resource.ram_total &&
-          `${props.resource.ram_allocated} / ${props.resource.ram_total} GiB`
+          translate('{allocated} / {total} MiB', {
+            allocated: props.resource.ram_allocated,
+            total: props.resource.ram_total,
+          })
         }
       />
+
       <Field
         label={translate('Pods')}
         value={
@@ -51,6 +62,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
           `${props.resource.pods_allocated} / ${props.resource.pods_total}`
         }
       />
+
       <Field
         label={translate('Labels')}
         value={
@@ -62,6 +74,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
           )
         }
       />
+
       <Field
         label={translate('Annotations')}
         value={
@@ -73,6 +86,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
           )
         }
       />
+
       <Field
         label={translate('OpenStack instance')}
         value={formatInstance(props.resource)}

@@ -19,6 +19,7 @@ export const InvoiceDetailActions: FC<InvoiceDetailActionsProps> = ({
     <FilteredEventsButton
       filter={{ scope: invoice.url, feature: 'invoices' }}
     />
+
     <InvoicePayButton row={invoice} asButton />
   </>
 );

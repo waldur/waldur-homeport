@@ -8,14 +8,18 @@ import './CustomRadioButton.scss';
 interface CustomRadioButtonProps extends FormField {
   choices: Choice[];
   direction?: 'vertical' | 'horizontal';
+  align?: 'left' | 'center' | 'right';
 }
 
 export const CustomRadioButton: FunctionComponent<CustomRadioButtonProps> = ({
   choices,
   direction = 'vertical',
+  align = 'center',
   ...props
 }) => (
-  <div className={classNames('custom-radio-button', direction)}>
+  <div
+    className={classNames('custom-radio-button', direction, `radio-${align}`)}
+  >
     {choices.map((choice, index) => (
       <label key={index} className="d-flex mb-3">
         <input
@@ -25,6 +29,7 @@ export const CustomRadioButton: FunctionComponent<CustomRadioButtonProps> = ({
           checked={props.input?.value === choice.value}
           {...props}
         />
+
         <div className="custom-checkmark" />
         <div className="radio-text">
           <span className="radio-label">{choice.label}</span>

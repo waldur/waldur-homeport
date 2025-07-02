@@ -37,9 +37,11 @@ const DatabaseStats = ({ data }: { data: TableSize[] }) => (
 );
 
 export const SystemInfoPage = () => {
-  const { isLoading, error, data } = useQuery(['SystemInfoPage'], () =>
-    databaseStatsList().then((r) => r.data),
-  );
+  const { isLoading, error, data } = useQuery({
+    queryKey: ['SystemInfoPage'],
+
+    queryFn: () => databaseStatsList().then((r) => r.data),
+  });
   if (isLoading) {
     return <LoadingSpinner />;
   }

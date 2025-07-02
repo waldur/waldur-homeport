@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -16,6 +16,6 @@ export const ResourceDetailsAction: ActionItemType = ({ resource }) => (
     title={translate('View details')}
     modalComponent={ResourceDetailsDialog}
     resource={resource}
-    iconNode={<Eye weight="bold" />}
+    iconNode={<EyeIcon weight="bold" />}
   />
 );

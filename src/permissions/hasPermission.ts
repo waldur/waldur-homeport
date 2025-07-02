@@ -10,6 +10,9 @@ export function checkScope(
   targetScopeId,
   targetPerm,
 ) {
+  if (!user) {
+    return false;
+  }
   if (user?.is_staff) {
     return true;
   }

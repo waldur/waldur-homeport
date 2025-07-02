@@ -1,14 +1,28 @@
 @import '@waldur/metronic/sass/core/components/_variables.scss';
 
 /* CARD */
-.card .card-header {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  font-weight: bold;
-  color: $gray-700;
-  margin: 0 $card-px;
-  padding: $card-header-py 0;
+.card {
+  .card-header {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: $gray-700;
+    margin: 0 $card-px;
+    padding: $card-header-py 0;
+  }
+
+  &.card-solid {
+    .card-header {
+      margin: 0;
+      padding-left: $card-px;
+      padding-right: $card-px;
+      min-height: 48px;
+      color: $gray-900;
+      font-size: $font-size-lg;
+      background-color: $gray-50;
+    }
+  }
 }
 
 /* LIST-GROUP & ITEMS */
@@ -37,6 +51,11 @@
     transform: rotateZ(180deg);
     transition: transform 0.3s ease;
   }
+}
+
+.image-placeholder {
+  color: if(isDarkMode(), $primary-500, $primary);
+  background-color: if(isDarkMode(), $gray-100, $primary-50);
 }
 
 /* Typography */

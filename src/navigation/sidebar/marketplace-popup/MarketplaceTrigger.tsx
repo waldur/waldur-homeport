@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -41,7 +41,7 @@ export const MarketplaceTrigger: FunctionComponent = () => {
       >
         <span className="menu-icon justify-content-center">
           <span className="svg-icon svg-icon-2">
-            <Plus weight="bold" />
+            <PlusIcon weight="bold" />
           </span>
         </span>
         <span className="menu-title">{translate('Add resource')}</span>

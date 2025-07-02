@@ -15,7 +15,7 @@ export const OrganizationGroup = ({ isDisabled }) => (
       placeholder={translate('Select...')}
       loadOptions={(query, prevOptions, page) =>
         organizationAutocomplete(query, prevOptions, page, {
-          field: ['name', 'url'],
+          field: ['name', 'url', 'customer_unallocated_credit'],
           o: 'name',
         })
       }

@@ -5,7 +5,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { paymentsPartialUpdate } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@waldur/core/api';
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatISODate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { EDIT_PAYMENT_FORM_ID } from '@waldur/customer/payments/constants';
 import { PaymentProofRenderer } from '@waldur/customer/payments/PaymentProofRenderer';
@@ -43,7 +43,7 @@ const PaymentUpdateDialog: FunctionComponent<
       await paymentsPartialUpdate({
         path: { uuid: props.resolve.uuid },
         body: {
-          date_of_payment: formatDate(formData.date_of_payment),
+          date_of_payment: formatISODate(formData.date_of_payment),
           sum: formData.sum,
           proof: fileSerializer(formData.proof),
         },
@@ -89,6 +89,7 @@ const PaymentUpdateDialog: FunctionComponent<
             showFileName={true}
             buttonLabel={translate('Browse')}
           />
+
           {props.resolve.proof ? (
             <span style={{ marginLeft: '145px' }}>
               <PaymentProofRenderer row={props.resolve} />

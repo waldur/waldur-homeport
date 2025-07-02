@@ -1,4 +1,4 @@
-import { Check, Circle } from '@phosphor-icons/react';
+import { CheckIcon, CircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
@@ -69,9 +69,9 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                           step.icon
                         )
                       ) : step.completed ? (
-                        <Check size={16} weight="bold" />
+                        <CheckIcon size={16} weight="bold" />
                       ) : (
-                        <Circle size={10} weight="fill" />
+                        <CircleIcon size={10} weight="fill" />
                       )}
                     </div>
                     <div

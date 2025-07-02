@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Button, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -57,7 +57,7 @@ export const SyncButton = ({ offering, refetch }) => {
     >
       <span className="svg-icon svg-icon-2">
         {enabled ? (
-          <ArrowsClockwise weight="bold" />
+          <ArrowsClockwiseIcon weight="bold" />
         ) : (
           <Spinner className="animation-spin" />
         )}

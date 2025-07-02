@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { MarketplaceResourcesListData, Resource } from 'waldur-js-client';
+import { MarketplaceOrdersListData, Resource } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -24,8 +24,8 @@ interface ResourceOrdersProps {
 export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
   props,
 ) => {
-  const filter = useMemo<MarketplaceResourcesListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): MarketplaceOrdersListData['query'] => ({
       resource_uuid: props.resource.uuid,
       o: ['-created'],
     }),

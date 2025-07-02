@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -27,7 +27,7 @@ export const EditGeneralInfoButton = (props: EditCallProps) => {
     <ActionButton
       action={callback}
       title={translate('Edit')}
-      iconNode={<PencilSimple />}
+      iconNode={<PencilSimpleIcon />}
       variant="primary"
       className="btn-sm"
     />

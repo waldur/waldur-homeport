@@ -1,33 +1,34 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 
 import { formatRelative } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
+import { WarnTip } from '@waldur/core/WarnTip';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
 export const EndDateField = ({ resource }) => {
-  const ResourceTerminationDate = resource.end_date;
+  const resourceTerminationDate = resource.end_date;
   const projectEndDate = resource.project_end_date;
 
-  if (!ResourceTerminationDate && !projectEndDate) {
+  if (!resourceTerminationDate && !projectEndDate) {
     return null;
   }
 
   const closestDate =
-    ResourceTerminationDate && projectEndDate
-      ? ResourceTerminationDate < projectEndDate
-        ? ResourceTerminationDate
+    resourceTerminationDate && projectEndDate
+      ? resourceTerminationDate < projectEndDate
+        ? resourceTerminationDate
         : projectEndDate
-      : ResourceTerminationDate || projectEndDate;
+      : resourceTerminationDate || projectEndDate;
 
   const isPastDate = closestDate < new Date();
 
   const tooltipContent = (
     <div className="flex-grow-1">
-      {ResourceTerminationDate && (
+      {resourceTerminationDate && (
         <div>
-          {translate('Resource termination date')}: {ResourceTerminationDate} (
-          {formatRelative(ResourceTerminationDate)})
+          {translate('Resource termination date')}: {resourceTerminationDate} (
+          {formatRelative(resourceTerminationDate)})
         </div>
       )}
       {projectEndDate && (
@@ -44,12 +45,30 @@ export const EndDateField = ({ resource }) => {
       label={translate('Termination date')}
       value={
         <span className={isPastDate ? 'text-danger' : ''}>
-          {closestDate} ({formatRelative(closestDate)})
-          {ResourceTerminationDate && projectEndDate && (
+          {closestDate} ({formatRelative(closestDate)}) &nbsp;
+          {projectEndDate && resourceTerminationDate > projectEndDate ? (
+            <WarnTip
+              id={resource.uuid}
+              label={
+                <ul className="text-start mb-0">
+                  <li>
+                    {translate(
+                      'Termination date exceeds project end date. Resource termination will start from the project end date.',
+                    )}
+                  </li>
+                  <li>{translate('Resource will be terminated soon.')}</li>
+                </ul>
+              }
+              hasSpace
+              autoWidth
+              className="w-100"
+              tipClassName="mw-275px"
+            />
+          ) : resourceTerminationDate && projectEndDate ? (
             <Tip id="end-date-tooltip" label={tooltipContent}>
-              <Question size={15} />
+              <QuestionIcon size={15} />
             </Tip>
-          )}
+          ) : null}
         </span>
       }
     />

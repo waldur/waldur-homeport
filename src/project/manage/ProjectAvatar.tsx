@@ -1,4 +1,4 @@
-import { UploadSimple } from '@phosphor-icons/react';
+import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
@@ -58,7 +58,7 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
                   alt={abbreviation}
                   initialValue={project.image}
                   max={2 * 1024 * 1024} // 2MB
-                  size={65}
+                  size={64}
                   extraActions={({ isChanged, isTooLarge }) =>
                     isChanged || submitting ? (
                       <Button
@@ -70,7 +70,7 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
                       >
                         {translate('Save')}
                         <span className="svg-icon svg-icon-5">
-                          <UploadSimple weight="bold" />
+                          <UploadSimpleIcon weight="bold" />
                         </span>
                       </Button>
                     ) : null

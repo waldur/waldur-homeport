@@ -1,4 +1,4 @@
-import { SignOut } from '@phosphor-icons/react';
+import { SignOutIcon } from '@phosphor-icons/react';
 import Qs from 'qs';
 import { FunctionComponent } from 'react';
 
@@ -22,7 +22,7 @@ export const AuthLogoutFailed: FunctionComponent = () => {
           onClick={AuthService.localLogout}
         >
           <span className="svg-icon svg-icon-2">
-            <SignOut />
+            <SignOutIcon />
           </span>{' '}
           {translate('Perform local logout')}
         </button>

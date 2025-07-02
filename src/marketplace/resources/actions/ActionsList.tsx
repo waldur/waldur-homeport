@@ -14,6 +14,7 @@ import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ResourceDetailsAction } from '../details/popup/ResourceDetailsAction';
 import { ReportUsageAction } from '../list/ReportUsageAction';
+import { ReportUserUsageAction } from '../list/ReportUserUsageAction';
 import { ShowUsageAction } from '../list/ShowUsageAction';
 
 import { EditAction } from './EditAction';
@@ -48,6 +49,7 @@ export const CustomerResourceActions = [
 export const ProviderActionsList = [
   ShowUsageAction,
   ReportUsageAction,
+  ReportUserUsageAction,
   SetBackendIdAction,
   SubmitReportAction,
   CreateLexisLinkAction,

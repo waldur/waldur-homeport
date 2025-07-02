@@ -1,4 +1,4 @@
-import { UsersThree } from '@phosphor-icons/react';
+import { UsersThreeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -71,7 +71,7 @@ export const GroupInvitationCreateButton: FC<{
     <ActionItem
       title={translate('Group invitation')}
       action={callback}
-      iconNode={<UsersThree weight="bold" />}
+      iconNode={<UsersThreeIcon weight="bold" />}
       disabled={!canManage}
       tooltip={!canManage && translate('You can not create group invitations.')}
     />

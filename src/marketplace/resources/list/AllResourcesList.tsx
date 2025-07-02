@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Project } from 'waldur-js-client';
+import { MarketplaceResourcesListData, Project } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import {
@@ -22,7 +22,7 @@ import { resourcesListRequiredFields } from './utils';
 const mapStateToFilter = createSelector(
   getFormValues(PROJECT_RESOURCES_ALL_FILTER_FORM_ID),
   (filters: any) => {
-    const result: Record<string, any> = {};
+    const result: MarketplaceResourcesListData['query'] = {};
     if (filters?.offering) {
       result.offering_uuid = filters.offering.uuid;
     }

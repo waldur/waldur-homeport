@@ -29,11 +29,13 @@ export const OpenStackVolumeSummary = (props: ResourceSummaryProps) => {
         label={translate('Attached to')}
         value={formatInstance(props.resource)}
       />
+
       <Field label={translate('Device')} value={resource.device} />
       <Field
         label={translate('Availability zone')}
         value={resource.availability_zone_name}
       />
+
       <Field label={translate('Volume type')} value={resource.type_name} />
     </>
   );

@@ -20,7 +20,11 @@ const choices = [
 ];
 
 const PureProjectEventsFilter: FunctionComponent = () => (
-  <TableFilterItem name="feature" title={translate('Type')}>
+  <TableFilterItem
+    name="feature"
+    title={translate('Type')}
+    instantApply={false}
+  >
     <Field
       name="feature"
       component={(fieldProps) => (

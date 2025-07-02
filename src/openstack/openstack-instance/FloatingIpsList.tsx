@@ -51,6 +51,7 @@ export const FloatingIpsList: FunctionComponent<{
       ]}
       title={translate('Floating IPs')}
       verboseName={translate('floating IPs')}
+      showPageSizeSelector
       tableActions={
         <UpdateFloatingIpsActionButton
           resource={resourceScope}

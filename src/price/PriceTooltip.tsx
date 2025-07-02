@@ -1,4 +1,4 @@
-import { WarningCircle } from '@phosphor-icons/react';
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { ENV } from '@waldur/core/config';
@@ -33,7 +33,7 @@ export const PriceTooltip: FC<PriceTooltipProps> = ({
   return (
     <span className="ms-1 hidden-print">
       <Tip label={message} id="price-tooltip">
-        <WarningCircle weight="bold" size={size} />
+        <WarningCircleIcon weight="bold" size={size} />
       </Tip>
     </span>
   );

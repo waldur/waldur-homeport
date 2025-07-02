@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import {
   proposalRequestedOfferingsCancel,
@@ -7,8 +7,8 @@ import {
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
 export const CallOfferingDeleteButton = ({
   row,
@@ -46,11 +46,12 @@ export const CallOfferingDeleteButton = ({
     }
   };
   return (
-    <RowActionButton
+    <ActionItem
       title={translate('Remove')}
+      className="text-danger"
       action={openDialog}
-      variant="outline-danger"
-      iconNode={<Trash />}
+      iconNode={<TrashIcon />}
+      iconColor="danger"
       size="sm"
     />
   );

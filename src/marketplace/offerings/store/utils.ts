@@ -9,7 +9,7 @@ import { PlanFormData, OptionFormData } from './types';
 export const formatPlan = (plan: PlanFormData) => ({
   name: plan.name,
   unit: plan.unit.value as BillingUnit,
-  unit_price: String(plan.unit_price),
+  unit_price: plan.unit_price ? String(plan.unit_price) : undefined,
   article_code: plan.article_code,
   description: plan.description,
 });

@@ -1,4 +1,4 @@
-import { Swap } from '@phosphor-icons/react';
+import { SwapIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -13,7 +13,7 @@ const InvoiceItemMoveDialog = lazyComponent(() =>
 export const InvoiceItemMove = ({ invoice, item, refreshInvoiceItems }) => (
   <DialogActionItem
     title={translate('Move item')}
-    iconNode={<Swap weight="bold" />}
+    iconNode={<SwapIcon weight="bold" />}
     modalComponent={InvoiceItemMoveDialog}
     resource={item}
     extraResolve={{ invoice, refreshInvoiceItems }}

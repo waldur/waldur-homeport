@@ -48,9 +48,11 @@ export const SetAccessPolicyFormContainer: FunctionComponent<
             }}
           />
         ),
+
         className: 'text-center',
       },
     ],
+
     [submitting],
   );
 

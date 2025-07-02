@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
@@ -33,7 +33,7 @@ export const RemoteSyncLastRunResultsAction = (
     <ActionItem
       title={translate('Show results of last run')}
       action={openDialog}
-      iconNode={<Eye weight="bold" />}
+      iconNode={<EyeIcon weight="bold" />}
     />
   );
 };

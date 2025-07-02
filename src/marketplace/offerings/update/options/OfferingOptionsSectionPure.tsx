@@ -64,6 +64,7 @@ export const OfferingOptionsSectionPure: FC<
                           name: key,
                         }}
                       />
+
                       <DeleteOptionButton
                         {...props}
                         optionKey={key}

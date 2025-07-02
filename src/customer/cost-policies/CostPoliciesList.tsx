@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { MarketplaceProjectEstimatedCostPoliciesListData } from 'waldur-js-client';
 
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -17,7 +18,7 @@ import { CostPolicyCreateButton } from './CostPolicyCreateButton';
 import { getCostPolicyActionOptions, policyPeriodOptions } from './utils';
 
 const filtersSelector = createSelector(getCustomer, (customer) => {
-  const result: Record<string, any> = {};
+  const result: MarketplaceProjectEstimatedCostPoliciesListData['query'] = {};
   if (customer) {
     result.customer_uuid = customer.uuid;
   }

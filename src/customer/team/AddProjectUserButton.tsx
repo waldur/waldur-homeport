@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { CustomerUser } from 'waldur-js-client';
@@ -40,13 +40,13 @@ export const AddProjectUserButton: React.FC<AddProjectUserButtonProps> = ({
     <ActionItem
       title={translate('Add project role')}
       action={callback}
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
     />
   ) : (
     <ActionButton
       action={callback}
       title={translate('Add')}
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
     />
   );
 };

@@ -10,7 +10,7 @@ import {
 } from '@waldur/user/UserPermissionRequestsStateFilter';
 
 const PureUserPermissionRequestsListFilter: FunctionComponent = () => (
-  <TableFilterItem name="state" title={translate('State')}>
+  <TableFilterItem name="state" title={translate('State')} instantApply={false}>
     <UserPermissionRequestsStateFilter />
   </TableFilterItem>
 );

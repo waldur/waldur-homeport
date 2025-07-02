@@ -9,7 +9,12 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 const PureOfferingResourcesFilter: FunctionComponent = () => (
   <>
-    <TableFilterItem title={translate('State')} name="state" ellipsis={false}>
+    <TableFilterItem
+      title={translate('State')}
+      name="state"
+      ellipsis={false}
+      instantApply={false}
+    >
       <ResourceStateFilter />
     </TableFilterItem>
     <TableFilterItem

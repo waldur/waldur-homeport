@@ -1,5 +1,5 @@
-import { formDataBodySerializer, RequestResult } from '@hey-api/client-fetch';
 import Qs from 'qs';
+import { formDataBodySerializer, RequestResult } from 'waldur-js-client';
 import { client } from 'waldur-js-client/client.gen';
 
 import { setRedirect } from '@waldur/auth/AuthRedirectStorage';
@@ -18,9 +18,9 @@ export function initApiClient() {
   const headers = {
     Accept: 'application/json',
   };
-  if (getImpersonatedUserUuid()) {
-    headers['X-IMPERSONATED-USER-UUID'] = getImpersonatedUserUuid();
-  }
+
+  headers['X-IMPERSONATED-USER-UUID'] = getImpersonatedUserUuid();
+
   if (getLanguageKey()) {
     headers['Accept-Language'] = getLanguageKey();
   }

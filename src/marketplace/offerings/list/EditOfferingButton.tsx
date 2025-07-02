@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { Dropdown } from 'react-bootstrap';
 import { ProviderOfferingDetails } from 'waldur-js-client';
@@ -42,7 +42,7 @@ export const EditOfferingButton = ({
       }}
     >
       <span className="svg-icon svg-icon-2">
-        <PencilSimple weight="bold" />
+        <PencilSimpleIcon weight="bold" />
       </span>
       {translate('Edit')}
     </Dropdown.Item>

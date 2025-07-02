@@ -104,7 +104,7 @@ export const TabsList: FC = () => {
               <span className="menu-title">{parentTab.title}</span>
               <span className="menu-arrow" />
             </MenuLink>
-            <div className="menu-sub menu-sub-down-accordion menu-sub-dropdown px-2 py-4 w-200px">
+            <div className="menu-sub menu-sub-down-accordion menu-sub-dropdown menu-state-bg-gray menu-rounded-0 menu-dropdown-default py-2 w-200px">
               {parentTab.children.map((childTab, childIndex) => (
                 <UISrefActive class="showing" key={childIndex}>
                   <Link

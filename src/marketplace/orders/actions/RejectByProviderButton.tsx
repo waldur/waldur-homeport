@@ -1,4 +1,4 @@
-import { Prohibit } from '@phosphor-icons/react';
+import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
@@ -30,39 +30,41 @@ export const RejectByProviderButton: FunctionComponent<
   RejectByProviderButtonProps
 > = (props) => {
   const dispatch = useDispatch();
-  const { mutate, isLoading } = useMutation(async () => {
-    try {
-      await marketplaceOrdersRejectByProvider({
-        path: { uuid: props.row.uuid },
-      });
-      const newOrder = await marketplaceOrdersRetrieve({
-        path: { uuid: props.row.uuid },
-      }).then((response) => response.data);
-      dispatch(
-        updateEntity(TABLE_MARKETPLACE_ORDERS, props.row.uuid, newOrder),
-      );
-      // update orders table on the main page
-      dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.row.uuid, newOrder));
-      // update pending orders tables on the drawer
-      dispatch(
-        updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.row.uuid, newOrder),
-      );
-      dispatch(
-        updateEntity(
-          TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
-          props.row.uuid,
-          newOrder,
-        ),
-      );
+  const { mutate, isPending: isLoading } = useMutation({
+    mutationFn: async () => {
+      try {
+        await marketplaceOrdersRejectByProvider({
+          path: { uuid: props.row.uuid },
+        });
+        const newOrder = await marketplaceOrdersRetrieve({
+          path: { uuid: props.row.uuid },
+        }).then((response) => response.data);
+        dispatch(
+          updateEntity(TABLE_MARKETPLACE_ORDERS, props.row.uuid, newOrder),
+        );
+        // update orders table on the main page
+        dispatch(updateEntity(TABLE_PUBLIC_ORDERS, props.row.uuid, newOrder));
+        // update pending orders tables on the drawer
+        dispatch(
+          updateEntity(TABLE_PENDING_PUBLIC_ORDERS, props.row.uuid, newOrder),
+        );
+        dispatch(
+          updateEntity(
+            TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
+            props.row.uuid,
+            newOrder,
+          ),
+        );
 
-      if (props.refetch) await props.refetch();
+        if (props.refetch) await props.refetch();
 
-      dispatch(showSuccess(translate('Order has been rejected.')));
-    } catch (response) {
-      dispatch(
-        showErrorResponse(response, translate('Unable to reject order.')),
-      );
-    }
+        dispatch(showSuccess(translate('Order has been rejected.')));
+      } catch (response) {
+        dispatch(
+          showErrorResponse(response, translate('Unable to reject order.')),
+        );
+      }
+    },
   });
   return (
     <ActionItem
@@ -73,7 +75,7 @@ export const RejectByProviderButton: FunctionComponent<
       title={translate('Reject')}
       action={mutate}
       disabled={isLoading}
-      iconNode={<Prohibit weight="bold" />}
+      iconNode={<ProhibitIcon weight="bold" />}
       iconColor="danger"
     />
   );

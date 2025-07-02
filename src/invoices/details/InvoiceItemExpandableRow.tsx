@@ -1,4 +1,4 @@
-import { WarningCircle } from '@phosphor-icons/react';
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
@@ -77,7 +77,7 @@ export const InvoiceItemExpandableRow: FC<OwnProps> = (props) => {
                     >
                       <td>
                         {Number(item.factor || item.quantity)}{' '}
-                        <WarningCircle
+                        <WarningCircleIcon
                           weight="bold"
                           size={16}
                           className="text-gray-400"

@@ -1,4 +1,4 @@
-import { ChatTeardropText } from '@phosphor-icons/react';
+import { ChatTeardropTextIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -16,7 +16,7 @@ export const CallPublicMenu = () => {
       <MenuItem
         title={translate('Calls for proposals')}
         state="calls-for-proposals-dashboard"
-        icon={<ChatTeardropText weight="bold" />}
+        icon={<ChatTeardropTextIcon weight="bold" />}
         child={false}
       />
     );
@@ -30,7 +30,7 @@ export const CallPublicMenu = () => {
     <MenuAccordion
       title={translate('Calls')}
       itemId="calls-menu"
-      icon={<ChatTeardropText weight="bold" />}
+      icon={<ChatTeardropTextIcon weight="bold" />}
     >
       <MenuItem
         title={translate('Calls for proposals')}
@@ -43,6 +43,7 @@ export const CallPublicMenu = () => {
             : undefined
         }
       />
+
       <MenuItem
         title={translate('Proposals')}
         state="proposals-all-proposals"
@@ -50,6 +51,7 @@ export const CallPublicMenu = () => {
           isDescendantOf('proposals', state) ? state.name : undefined
         }
       />
+
       <MenuItem title={translate('Reviews')} state="reviews-all-reviews" />
     </MenuAccordion>
   );

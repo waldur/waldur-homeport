@@ -17,6 +17,7 @@ const ColorField = ({ value }) => (
     />
   </div>
 );
+
 const ImageField = ({ value }) => (
   <div className="symbol symbol-50px symbol-circle">
     <div

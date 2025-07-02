@@ -26,6 +26,7 @@ export const PlanSelectField: FunctionComponent<PlanSelectFieldProps> = (
           options={props.plans}
           isClearable={false}
         />
+
         {fieldProps.meta.touched && (
           <FieldError error={fieldProps.meta.error} />
         )}

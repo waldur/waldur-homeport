@@ -40,10 +40,10 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
   const {
     params: { order_uuid },
   } = useCurrentStateAndParams();
-  const { isLoading, error, data, refetch, isRefetching } = useQuery(
-    ['OrderDetails', order_uuid],
-    () => loadOrder(order_uuid),
-  );
+  const { isLoading, error, data, refetch, isRefetching } = useQuery({
+    queryKey: ['OrderDetails', order_uuid],
+    queryFn: () => loadOrder(order_uuid),
+  });
   return isLoading ? (
     <LoadingSpinner />
   ) : error ? (

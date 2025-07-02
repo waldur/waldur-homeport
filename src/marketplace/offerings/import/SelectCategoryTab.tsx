@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -66,7 +66,7 @@ const FieldsListMapping = ({
                       </>
                     }
                   >
-                    <Question
+                    <QuestionIcon
                       size={20}
                       className="text-gray-500 cursor-pointer text-hover-muted ms-2"
                     />
@@ -98,16 +98,18 @@ export const SelectCategoryTab = () => {
     data: categories,
     error,
     refetch,
-  } = useQuery(
-    ['categories'],
-    () =>
+  } = useQuery({
+    queryKey: ['categories'],
+
+    queryFn: () =>
       getAllPages((page) =>
         marketplaceCategoriesList({
           query: { page, field: ['uuid', 'title', 'group'], page_size: 100 },
         }),
       ),
-    { staleTime: 3 * 60 * 1000 },
-  );
+
+    staleTime: 3 * 60 * 1000,
+  });
   const formData = useSelector(importOfferingSelector);
 
   return (
@@ -119,6 +121,7 @@ export const SelectCategoryTab = () => {
         offerings={formData.offerings}
         categories={categories}
       />
+
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (

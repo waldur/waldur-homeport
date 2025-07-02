@@ -11,17 +11,15 @@ export const NodeStorageGroup: FunctionComponent<any> = (props) => (
   <>
     <SystemVolumeSizeGroup />
     <SystemVolumeTypeGroup volumeTypes={props.volumeTypes} />
-    {props.mountPoints.length > 0 &&
-      !ENV.plugins.WALDUR_RANCHER.DISABLE_DATA_VOLUME_CREATION && (
-        <FieldArray
-          name="data_volumes"
-          component={DataVolumesList}
-          nodeIndex={props.nodeIndex}
-          mountPoints={props.mountPoints}
-          volumeTypes={props.volumeTypes}
-          defaultVolumeType={props.defaultVolumeType}
-          sm={props.sm}
-        />
-      )}
+    {!ENV.plugins.WALDUR_RANCHER.DISABLE_DATA_VOLUME_CREATION && (
+      <FieldArray
+        name="data_volumes"
+        component={DataVolumesList}
+        nodeIndex={props.nodeIndex}
+        volumeTypes={props.volumeTypes}
+        defaultVolumeType={props.defaultVolumeType}
+        sm={props.sm}
+      />
+    )}
   </>
 );

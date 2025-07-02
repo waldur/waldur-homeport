@@ -1,6 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { InvoiceCost, invoicesList } from 'waldur-js-client';
+import {
+  ComponentsUsageStats,
+  InvoiceCost,
+  invoicesList,
+} from 'waldur-js-client';
 
 import { getLineChartOptions } from '@waldur/dashboard/chart';
 import { Scope } from '@waldur/dashboard/types';
@@ -29,13 +33,11 @@ async function getCustomerCostData(customer: Scope) {
 }
 
 export function useCustomerCostChart(customer: Scope) {
-  const { data, isLoading, error, refetch } = useQuery(
-    ['CustomerCostData', customer.url],
-    () => getCustomerCostData(customer),
-    {
-      staleTime: 5 * 60 * 1000,
-    },
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['CustomerCostData', customer.url],
+    queryFn: () => getCustomerCostData(customer),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const chartData = useMemo(() => {
     if (!data) return { chart: null, options: null };
@@ -53,13 +55,11 @@ export function useCustomerCreditChart(customer: Customer) {
     isLoading,
     error,
     refetch,
-  } = useQuery(
-    ['CustomerCostData', customer.url],
-    () => getCustomerCostData(customer),
-    {
-      staleTime: 5 * 60 * 1000,
-    },
-  );
+  } = useQuery({
+    queryKey: ['CustomerCostData', customer.url],
+    queryFn: () => getCustomerCostData(customer),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const chartData = useMemo(() => {
     if (!customer.credit) return { chart: null, options: null };
@@ -82,13 +82,11 @@ export function useCustomerCreditChart(customer: Customer) {
 }
 
 export const useCustomerTeamChart = (customer) => {
-  const { data, isLoading, error, refetch } = useQuery(
-    ['CustomerTeamChart', customer.url],
-    () => getTeamSizeChart(customer),
-    {
-      staleTime: 5 * 60 * 1000,
-    },
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['CustomerTeamChart', customer.url],
+    queryFn: () => getTeamSizeChart(customer),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const chartData = useMemo(
     () =>
@@ -102,4 +100,24 @@ export const useCustomerTeamChart = (customer) => {
   );
 
   return { ...chartData, isLoading, error, refetch };
+};
+
+export const filterComponentsWithUsage = (data: ComponentsUsageStats) => {
+  if (!data || !data.components || !data.components.length) {
+    return data;
+  }
+
+  const filteredComponents = data.components.filter((component) => {
+    const usageValue =
+      component.billing_type === 'limit'
+        ? component.limit_usage
+        : component.usage;
+
+    return usageValue > 0;
+  });
+
+  return {
+    ...data,
+    components: filteredComponents,
+  };
 };

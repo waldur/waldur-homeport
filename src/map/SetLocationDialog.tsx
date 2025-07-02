@@ -20,7 +20,7 @@ interface SetLocationDialogProps {
 }
 
 export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> =
-  connect<{}, {}, { resolve }>((_, props) => ({
+  connect<{}, {}, SetLocationDialogProps>((_, props) => ({
     initialValues: {
       location: props.resolve.location,
     },

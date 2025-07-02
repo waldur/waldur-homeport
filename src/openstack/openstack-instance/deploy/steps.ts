@@ -65,7 +65,7 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   {
     label: translate('Automation'),
     id: 'step-startup-script',
-    fields: ['startup_script'],
+    fields: ['attributes.user_data'],
     required: false,
     component: FormStartupScriptStep,
   },

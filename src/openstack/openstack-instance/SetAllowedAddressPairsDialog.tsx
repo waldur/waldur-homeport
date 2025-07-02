@@ -1,4 +1,4 @@
-import { Plus, Trash } from '@phosphor-icons/react';
+import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import {
   OpenStackAllowedAddressPairRequest,
+  OpenStackInstance,
   openstackInstancesUpdateAllowedAddressPairs,
 } from 'waldur-js-client';
 
@@ -27,9 +28,7 @@ interface OwnProps {
     port: {
       allowed_address_pairs: OpenStackAllowedAddressPairRequest[];
     };
-    instance: {
-      url: string;
-    };
+    instance: OpenStackInstance;
   };
 }
 
@@ -54,7 +53,7 @@ const PairRow = ({ pair, onRemove }) => (
     <td>
       <Button variant="default" onClick={onRemove}>
         <span className="svg-icon svg-icon-2">
-          <Trash />
+          <TrashIcon />
         </span>{' '}
         {translate('Remove')}
       </Button>
@@ -65,7 +64,7 @@ const PairRow = ({ pair, onRemove }) => (
 const PairAddButton = ({ onClick }) => (
   <Button variant="default" onClick={onClick}>
     <span className="svg-icon svg-icon-2">
-      <Plus weight="bold" />
+      <PlusIcon weight="bold" />
     </span>{' '}
     {translate('Add pair')}
   </Button>

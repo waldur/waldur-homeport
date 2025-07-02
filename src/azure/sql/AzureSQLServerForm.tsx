@@ -24,6 +24,7 @@ export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
           validate={[required, sqlServerName]}
           required={true}
         />
+
         <AsyncSelectField
           name="attributes.location"
           label={translate('Location')}
@@ -37,6 +38,7 @@ export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
             )
           }
         />
+
         <TextField
           label={translate('SQL server description')}
           name="attributes.description"

@@ -1,3 +1,6 @@
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
+import { Button } from 'react-bootstrap';
+
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
@@ -13,6 +16,7 @@ import { ProposalDecisionResult } from './create/ProposalDecisionResult';
 import { ProposalDetailsOverviewStep } from './create/ProposalDetailsOverviewStep';
 import { ResourceRequestsSummary } from './create/ResourceRequestsSummary';
 import { createProposalSteps } from './create/steps';
+import { useProposalDecisionActions } from './create/utils';
 
 interface ProposalDetails {
   proposal: Proposal;
@@ -30,6 +34,12 @@ export const ProposalDetails = ({
   refetch,
 }: ProposalDetails) => {
   const formSteps = createProposalSteps;
+
+  const {
+    canPerformDecisionActions,
+    handleApproveProposal,
+    handleRejectProposal,
+  } = useProposalDecisionActions(proposal, refetch);
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -54,6 +64,26 @@ export const ProposalDetails = ({
         <Panel title={translate('Progress')} cardBordered className="mb-5">
           <FormSteps steps={formSteps} />
         </Panel>
+        {canPerformDecisionActions && (
+          <>
+            <Button
+              variant="btn btn-icon btn-primary"
+              onClick={handleApproveProposal}
+              className="w-100 mt-2"
+            >
+              <CheckCircleIcon className="me-1" />
+              {translate('Accept')}
+            </Button>
+            <Button
+              variant="btn btn-icon btn-light-danger"
+              onClick={handleRejectProposal}
+              className="w-100 mt-2"
+            >
+              <XCircleIcon className="me-1" />
+              {translate('Reject')}
+            </Button>
+          </>
+        )}
       </SidebarLayout.Sidebar>
     </SidebarLayout.Container>
   );

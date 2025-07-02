@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -38,7 +38,7 @@ export const EditSchedulesButton: FunctionComponent<{
     <ActionButton
       action={callback}
       title={translate('Edit schedules')}
-      iconNode={<PencilSimple weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
     />
   );
 };

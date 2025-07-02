@@ -8,10 +8,10 @@ import { translate } from '@waldur/i18n';
 import { SettingsCard } from '../settings/SettingsCard';
 
 export const AdministrationTelemetry = () => {
-  const { data, error, isLoading, refetch } = useQuery(
-    ['AdministrationTelemetry'],
-    () => overrideSettingsRetrieve().then((response) => response.data),
-  );
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ['AdministrationTelemetry'],
+    queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
+  });
 
   if (isLoading) return <LoadingSpinner />;
   if (error)

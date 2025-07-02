@@ -79,6 +79,7 @@ export const CatalogCreateDialog = reduxForm<FormData, OwnProps>({
         label={translate('Catalog URL')}
         required={true}
       />
+
       <StringField name="branch" label={translate('Branch')} required={true} />
       <StringField name="username" label={translate('Username')} />
       <SecretField name="password" label={translate('Password')} />

@@ -38,6 +38,7 @@ export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
           render: ({ row }) => (
             <>{row.closed ? formatDateTime(row.closed) : 'N/A'}</>
           ),
+
           export: (row) => (row.closed ? formatDateTime(row.closed) : 'N/A'),
         },
         {
@@ -52,6 +53,7 @@ export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
               {row.is_pending ? translate('Pending') : translate('Performed')}
             </>
           ),
+
           export: (row) =>
             row.is_pending ? translate('Pending') : translate('Performed'),
         },

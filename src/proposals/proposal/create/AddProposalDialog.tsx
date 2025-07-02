@@ -1,7 +1,7 @@
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
 import { reduxForm } from 'redux-form';
-import { proposalProposalsCreate, ProtectedRound } from 'waldur-js-client';
+import { proposalProposalsCreate } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
 import { SubmitButton } from '@waldur/form';
@@ -20,7 +20,7 @@ interface FormData {
 
 export const AddProposalDialog = reduxForm<
   FormData,
-  { resolve: { round: ProtectedRound; call: Call } }
+  { resolve: { round_uuid: string; call: Call } }
 >({
   form: 'AddProposalForm',
 })((props) => {
@@ -32,7 +32,7 @@ export const AddProposalDialog = reduxForm<
         const response = await proposalProposalsCreate({
           body: {
             ...values,
-            round_uuid: props.resolve.round.uuid,
+            round_uuid: props.resolve.round_uuid,
           },
         });
         const proposal = response.data;
@@ -58,6 +58,7 @@ export const AddProposalDialog = reduxForm<
               variant="outline btn-outline-default"
               className="flex-equal"
             />
+
             <SubmitButton
               disabled={props.invalid}
               submitting={props.submitting}

@@ -1,4 +1,4 @@
-import { CheckSquare, XSquare } from '@phosphor-icons/react';
+import { CheckSquareIcon, XSquareIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { rolesDisable, rolesEnable } from 'waldur-js-client';
@@ -40,9 +40,9 @@ export const RoleToggleButton: FunctionComponent<{
       title={row.is_active ? translate('Disable') : translate('Enable')}
       iconNode={
         row.is_active ? (
-          <XSquare weight="bold" />
+          <XSquareIcon weight="bold" />
         ) : (
-          <CheckSquare weight="bold" />
+          <CheckSquareIcon weight="bold" />
         )
       }
     />

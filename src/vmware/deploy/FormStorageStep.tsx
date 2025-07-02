@@ -46,6 +46,7 @@ const StaticDiskField = (props) => {
               labelClass="col-sm-3"
               controlClass="col-sm-9"
             />
+
             <FieldError error={fieldProps.meta.error} />
           </>
         ) : null

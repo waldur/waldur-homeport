@@ -742,7 +742,7 @@ $line-height-xxl: 2.25 !default;
 
 // Heading sizes
 $h1-font-size: $font-size-base * 1.75 !default; // 22.75px
-$h2-font-size: $font-size-base * 1.5 !default; // 19.50px
+$h2-font-size: $font-size-base * 1.54 !default; // 20.02px
 $h3-font-size: $font-size-base * 1.35 !default; // 17.55px
 $h4-font-size: $font-size-base * 1.25 !default; // 16.25px
 $h5-font-size: $font-size-base * 1.15 !default; // 14.95px
@@ -854,9 +854,9 @@ $input-btn-padding-y-sm: 0.55rem !default;
 $input-btn-padding-x-sm: 0.75rem !default;
 $input-btn-font-size-sm: $font-size-sm !default;
 
-$input-btn-padding-y-lg: 0.825rem !default;
+$input-btn-padding-y-lg: 0.68rem !default;
 $input-btn-padding-x-lg: 1.5rem !default;
-$input-btn-font-size-lg: $font-size-base * 1.15 !default;
+$input-btn-font-size-lg: $font-size-base * 1.23 !default;
 
 $input-btn-border-width: $border-width !default;
 
@@ -1008,7 +1008,7 @@ $form-check-label-disabled-opacity: $form-check-input-disabled-opacity !default;
 $form-check-btn-check-disabled-opacity: $btn-disabled-opacity !default;
 
 $form-switch-color: rgba(0, 0, 0, 0.25) !default;
-$form-switch-color-solid: if(isDarkMode(), $gray-500, $white) !default;
+$form-switch-color-solid: if(isDarkMode(), $gray-700, $white) !default;
 $form-switch-width: 3.25rem !default;
 $form-switch-height: 2.25rem !default; // Custom variable
 $form-switch-width-sm: 2.5rem !default; // Custom variable
@@ -1019,7 +1019,7 @@ $form-switch-height-lg: 2.75rem !default; // Custom variable
 $form-switch-padding-start: $form-switch-width + 0.5rem !default;
 $form-switch-padding-left: $form-switch-width + 0.5rem !default;
 $form-switch-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color}'/></svg>") !default;
-$form-switch-bg-image-solid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color-solid}'/></svg>") !default;
+$form-switch-bg-image-solid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><defs><filter id='shadow' x='-10%%25' y='-10%%25' width='120%%25' height='120%%25'><feDropShadow dx='0' dy='0.3' stdDeviation='0.5' flood-color='%23101828' flood-opacity='0.1'/></filter></defs><circle r='3' fill='#{$form-switch-color-solid}' filter='url(%23shadow)'/></svg>") !default;
 $form-switch-border-radius: $form-switch-width !default;
 
 $form-switch-focus-color: $input-focus-border-color !default;
@@ -1389,7 +1389,7 @@ $custom-sizes: (
 // Symbol Sizes
 $symbol-sizes: (
   20px: 20px,
-  25px: 25px,
+  24px: 24px,
   30px: 30px,
   32px: 32px,
   35px: 35px,
@@ -1398,9 +1398,9 @@ $symbol-sizes: (
   48px: 48px,
   default: 50px,
   50px: 50px,
-  55px: 55px,
+  56px: 56px,
   60px: 60px,
-  65px: 65px,
+  64px: 64px,
   70px: 70px,
   75px: 75px,
   100px: 100px,

@@ -1,4 +1,4 @@
-import { LinkBreak } from '@phosphor-icons/react';
+import { LinkBreakIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { rancherNodesUnlinkOpenstack } from 'waldur-js-client';
 
@@ -18,9 +18,12 @@ export const UnlinkAction: ActionItemType = ({ resource, refetch }) => {
       await waitForConfirmation(
         dispatch,
         translate('Unlink instance'),
-        translate('Do you want to unlink instance {name}?', {
-          name: resource.instance_name,
-        }),
+        translate(
+          'Do you want to unlink instance {name}? Unlinking will only remove object from the database, it will not trigger any cleanup',
+          {
+            name: resource.instance_name,
+          },
+        ),
       );
     } catch {
       return;
@@ -52,7 +55,7 @@ export const UnlinkAction: ActionItemType = ({ resource, refetch }) => {
         title={translate('Unlink instance')}
         action={callback}
         staff
-        iconNode={<LinkBreak weight="bold" />}
+        iconNode={<LinkBreakIcon weight="bold" />}
       />
     );
   }

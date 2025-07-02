@@ -20,7 +20,7 @@ export const ProjectCreateCreditButton = ({ refetch }) => {
     openDialog(ProjectCreditFormDialog, {
       size: 'lg',
       formId: 'ProjectCreditCreateForm',
-      onSubmit: async (formData) => {
+      submitFn: async (formData) => {
         try {
           await projectCreditsCreate({
             body: {

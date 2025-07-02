@@ -1,6 +1,6 @@
 import { useAsync } from 'react-use';
 import { openstackVolumeTypesRetrieve } from 'waldur-js-client';
-import { OrderDetails as OrderResponse } from 'waldur-js-client';
+import { OrderDetails } from 'waldur-js-client';
 
 import { formatFilesize, getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -9,7 +9,7 @@ import { Field } from '@waldur/resource/summary';
 import { formatVolumeTypeLabel } from '../openstack-instance/utils';
 
 interface OpenstackVolumeDetailsProps {
-  order: OrderResponse;
+  order: OrderDetails;
 }
 
 export const OpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
@@ -26,7 +26,7 @@ export const OpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
       <Field label={translate('Size')}>
         {formatFilesize(props.order.attributes['size'])}
       </Field>
-      {order.attributes['availability_zone_name'] && (
+      {typeof order.attributes['availability_zone_name'] === 'string' && (
         <Field label={translate('Availability zone')}>
           {order.attributes['availability_zone_name']}
         </Field>

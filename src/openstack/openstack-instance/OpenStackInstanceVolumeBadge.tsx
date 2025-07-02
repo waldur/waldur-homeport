@@ -22,11 +22,13 @@ const VolumeBadgeTipView = ({ volume, resourceName }: VolumeBadgeProps) => {
         value={volume.type_name}
         isStuck
       />
+
       <Field
         label={translate('Size')}
         value={formatFilesize(volume.size)}
         isStuck
       />
+
       <Field label={translate('Mount')} value={volume.device} isStuck hasCopy />
       {volume.marketplace_resource_uuid && (
         <Link

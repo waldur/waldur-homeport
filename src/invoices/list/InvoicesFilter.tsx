@@ -41,7 +41,11 @@ const PureInvoicesFilter = () => {
   }, [ENV.accountingMode]);
 
   return (
-    <TableFilterItem name="state" title={translate('State')}>
+    <TableFilterItem
+      name="state"
+      title={translate('State')}
+      instantApply={false}
+    >
       <Field
         name="state"
         component={(fieldProps) => (

@@ -28,11 +28,19 @@ export const parseDate = (value: DateInput) => {
   }
 };
 
-export const formatDate: DateFormatter = (date) => parseDate(date).toISODate();
+/** @example 2027-02-26 */
+export const formatISODate: DateFormatter = (date) =>
+  parseDate(date).toISODate();
 
+/** @example 26 Feb 2027 */
+export const formatDate: DateFormatter = (date) =>
+  parseDate(date).toLocaleString(DateTime.DATE_MED);
+
+/** @example 26 Feb 2027 14:00 */
 export const formatDateTime: DateFormatter = (date) =>
-  parseDate(date).toFormat('yyyy-MM-dd T');
+  parseDate(date).toLocaleString(DateTime.DATETIME_MED);
 
+/** @example 14:21 */
 export const formatTime: DateFormatter = (date) =>
   parseDate(date).toFormat('T');
 
@@ -58,11 +66,18 @@ export const formatRelativeWithHour: DateFormatter = (date) => {
   }
 };
 
+/** @example July 22, 2024 at 2:00:00 PM GMT+2 */
 export const formatMediumDateTime: DateFormatter = (date) =>
   parseDate(date).toFormat('FFF');
 
+/** @example Jul 7/22/2024, 14:00 */
 export const formatShortDateTime: DateFormatter = (date) =>
   parseDate(date).toFormat('MMM D, T');
 
+/** @example 2024-07-22T14:00 */
 export const formatISOWithoutZone: DateFormatter = (date) =>
   parseDate(date).toFormat("yyyy-MM-dd'T'T");
+
+/** @example July 2022 */
+export const formatMonth: DateFormatter = (date) =>
+  parseDate(date).toFormat('MMMM yyyy');

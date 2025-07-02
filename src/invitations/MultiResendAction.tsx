@@ -1,4 +1,4 @@
-import { Share } from '@phosphor-icons/react';
+import { ShareIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userInvitationsSend } from 'waldur-js-client';
@@ -83,7 +83,7 @@ export const MultiResendAction = ({ rows, refetch }) => {
     <ActionItem
       title={translate('Resend')}
       action={callback}
-      iconNode={<Share weight="bold" />}
+      iconNode={<ShareIcon weight="bold" />}
       disabled={disabled}
       tooltip={tooltip}
     />

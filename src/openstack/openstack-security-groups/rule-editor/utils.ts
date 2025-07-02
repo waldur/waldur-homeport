@@ -16,7 +16,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { type RootState } from '@waldur/store/reducers';
 
-import { FormData, Rule } from './types';
+import { SecurityGroupRulesFormData, Rule } from './types';
 
 export const getPortMax = (rule: Rule) => {
   if (rule.protocol === 'any' || !rule.protocol) {
@@ -36,7 +36,9 @@ export const getRuleSelector =
 
 type OwnProps = ReturnType<typeof useRulesEditor>;
 
-export const connectForm = reduxForm<FormData, OwnProps>({ form: FORM_NAME });
+export const connectForm = reduxForm<SecurityGroupRulesFormData, OwnProps>({
+  form: FORM_NAME,
+});
 
 export const useRulesEditor = (resource: OpenStackSecurityGroup) => {
   const tenant =
@@ -53,20 +55,11 @@ export const useRulesEditor = (resource: OpenStackSecurityGroup) => {
     [tenant],
   );
   const dispatch = useDispatch();
-  const submitRequest = async (formData: FormData) => {
+  const submitRequest = async (formData: SecurityGroupRulesFormData) => {
     try {
       await openstackSecurityGroupsSetRules({
         path: { uuid: resource.uuid },
-        body: formData.rules.map(
-          ({ protocol, port_range, ethertype, direction, ...rest }) => ({
-            ...rest,
-            ethertype: ethertype as EthertypeEnum,
-            direction: direction as DirectionEnum,
-            protocol: (protocol === 'any' ? '' : protocol) as ProtocolEnum,
-            from_port: port_range.min,
-            to_port: port_range.max,
-          }),
-        ),
+        body: serializeRulesPayload(formData),
       });
       dispatch(
         showSuccess(
@@ -98,3 +91,15 @@ export const useRulesEditor = (resource: OpenStackSecurityGroup) => {
     },
   };
 };
+
+export const serializeRulesPayload = (formData: SecurityGroupRulesFormData) =>
+  formData.rules.map(
+    ({ protocol, port_range, ethertype, direction, ...rest }) => ({
+      ...rest,
+      ethertype: ethertype as EthertypeEnum,
+      direction: direction as DirectionEnum,
+      protocol: (protocol === 'any' ? '' : protocol) as ProtocolEnum,
+      from_port: port_range.min,
+      to_port: port_range.max,
+    }),
+  );

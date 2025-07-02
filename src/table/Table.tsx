@@ -1,8 +1,10 @@
+import { XIcon } from '@phosphor-icons/react';
 import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import { debounce, isEqual } from 'lodash-es';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { Card, Col, Row, Stack } from 'react-bootstrap';
+import { Button, Card, Col, Row, Stack } from 'react-bootstrap';
+import { createPortal } from 'react-dom';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
@@ -10,6 +12,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { titleCase } from '@waldur/core/utils';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { ErrorView } from '@waldur/ErrorView';
+import { translate } from '@waldur/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { FilterContextProvider } from './FilterContextProvider';
@@ -55,7 +58,7 @@ const TableComponent = (
   return (
     <table
       className={classNames(
-        'table align-middle table-row-bordered fs-6 gy-0 no-footer',
+        'table align-middle table-row-bordered fs-6 gy-0 gx-2 no-footer',
         {
           'table-expandable': Boolean(props.expandableRow),
           'table-hover': props.hoverable,
@@ -162,7 +165,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
         toggleFilterMenu={this.toggleFilterMenu}
       >
         {this.props.standalone && (
-          <div className="d-flex justify-content-between gap-4 mb-6">
+          <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
             <Stack direction="horizontal" gap={2}>
               <h1 className="mb-0">
                 {this.props.title || this.props.alterTitle}
@@ -216,42 +219,26 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                           </small>
                         )}
                       </div>
-                      {!this.props.hideRefresh && (
-                        <TableRefreshButton {...this.props} />
-                      )}
+                      {!this.props.hideRefresh &&
+                        !this.props.portal?.refresh && (
+                          <TableRefreshButton {...this.props} />
+                        )}
                     </Card.Title>
                   </Col>
                 )}
-                <Col sm="auto" className="order-1 order-sm-2 ms-auto">
-                  {this.showActionsColumn() && (
-                    <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3">
-                      <TableButtons
-                        {...this.props}
-                        showFilterMenuToggle={this.state.showFilterMenuToggle}
-                        toggleFilterMenu={this.toggleFilterMenu}
-                      />
-                    </div>
-                  )}
-                </Col>
-                {this.props.hasQuery && (
-                  <Col
-                    xs
-                    className={classNames(
-                      'order-2 order-sm-1 mw-lg-325px',
-                      !this.props.standalone && 'ms-auto',
-                    )}
-                  >
-                    {this.props.hasQuery && (
-                      <TableQuery
-                        query={this.props.query}
-                        setQuery={this.props.setQuery}
-                      />
-                    )}
-                  </Col>
-                )}
+                {!this.props.portal?.toolbar && this.renderActions()}
               </Row>
             </Card.Header>
           )}
+
+          {/* Portals */}
+          {Boolean(this.props.portal?.refresh) &&
+            createPortal(
+              <TableRefreshButton {...this.props} />,
+              this.props.portal?.refresh,
+            )}
+          {Boolean(this.props.portal?.toolbar) &&
+            createPortal(this.renderActions(), this.props.portal.toolbar)}
 
           {/* Tabs */}
           {this.props.tabs?.length ? (
@@ -390,6 +377,76 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     );
   }
 
+  renderActions() {
+    return (
+      <>
+        {/* Multi-select actions */}
+        {this.props.selectedRows?.length > 0 &&
+          this.props.multiSelectActions && (
+            <Col
+              xs="auto"
+              className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-3"
+            >
+              <Stack
+                direction="horizontal"
+                className="fw-normal text-dark me-2"
+              >
+                <Button
+                  variant="active-secondary"
+                  className="btn-icon me-1"
+                  size="sm"
+                  onClick={this.props.resetSelection}
+                >
+                  <XIcon weight="bold" />
+                </Button>
+                <span>
+                  ({this.props.selectedRows?.length}) {translate('Selected')}
+                </span>
+              </Stack>
+              {React.createElement(this.props.multiSelectActions, {
+                rows: this.props.selectedRows,
+                refetch: () => {
+                  this.props.fetch();
+                  this.props.resetSelection();
+                },
+              })}
+            </Col>
+          )}
+
+        {/* Table Query */}
+        {this.props.hasQuery && (
+          <Col
+            xs
+            className={classNames(
+              'order-2 order-sm-2 mw-lg-325px',
+              !this.props.standalone && 'ms-auto',
+            )}
+          >
+            {this.props.hasQuery && (
+              <TableQuery
+                query={this.props.query}
+                setQuery={this.props.setQuery}
+              />
+            )}
+          </Col>
+        )}
+
+        {/* Remaining table action buttons */}
+        <Col sm="auto" className="order-3 order-sm-3 ms-auto">
+          {this.showActionsColumn() && (
+            <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3">
+              <TableButtons
+                {...this.props}
+                showFilterMenuToggle={this.state.showFilterMenuToggle}
+                toggleFilterMenu={this.toggleFilterMenu}
+              />
+            </div>
+          )}
+        </Col>
+      </>
+    );
+  }
+
   componentDidMount() {
     if (this.props.initialMode) {
       this.props.setDisplayMode(this.props.initialMode);
@@ -420,12 +477,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     } else if (
       prevProps.pagination.pageSize !== this.props.pagination.pageSize
     ) {
-      if (
-        this.props.pagination.pageSize * this.props.pagination.currentPage >=
-        this.props.pagination.resultCount
-      ) {
-        this.props.resetPagination();
-      }
+      this.props.resetPagination();
       this.props.fetch();
     } else if (prevProps.query !== this.props.query) {
       this.props.resetPagination();

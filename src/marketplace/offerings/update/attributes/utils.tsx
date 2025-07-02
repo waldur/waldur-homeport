@@ -57,6 +57,7 @@ export const configAttrField = (attribute) => {
             isClearable={true}
           />
         ),
+
         normalize: (v) => (v ? v : ''),
       };
       break;
@@ -72,6 +73,7 @@ export const configAttrField = (attribute) => {
             isClearable={true}
           />
         ),
+
         normalize: (v) => (v ? v : ''),
       };
       break;
@@ -83,6 +85,7 @@ export const configAttrField = (attribute) => {
             { value: 'true', label: translate('Yes') },
             { value: 'false', label: translate('No') },
           ];
+
           return (
             <CustomRadioButton
               choices={choices}

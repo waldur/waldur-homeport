@@ -1,22 +1,174 @@
-import { PlusCircle, Trash } from '@phosphor-icons/react';
+import { PlusCircleIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback, useEffect, useMemo } from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
+import { Button, Col, Form, FormLabel, Row } from 'react-bootstrap';
+import { components } from 'react-select';
+import { useToggle } from 'react-use';
 import { Field, FieldArray } from 'redux-form';
+import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { Tip } from '@waldur/core/Tooltip';
 import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
+import { FieldError, FormGroup, SelectField, StringField } from '@waldur/form';
+import { Select } from '@waldur/form/themed-select';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { loadFloatingIps, loadSubnets } from '@waldur/openstack/api';
+import {
+  getIPsInRange,
+  isIPInRange,
+} from '@waldur/openstack/openstack-network/utils';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { getDefaultFloatingIps, formatSubnet } from '../utils';
 
 import { FormSecurityGroupsField } from './FormSecurityGroupsField';
 import { FormSSHPublicKeysField } from './FormSSHPublicKeysField';
 
-const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
+export const CustomIpField = ({
+  parentName,
+  data,
+  autoFocus = false,
+  hasAutoOption = false,
+}) => {
+  const options = useMemo(() => {
+    const ipRanges = data?.subnet
+      ?.allocation_pools as OpenStackSubNetAllocationPool[];
+    const customIps = ipRanges?.length
+      ? ipRanges.flatMap(({ start, end }) => getIPsInRange(start, end))
+      : [];
+    const opts = customIps
+      .map((ip) => ({ label: ip, value: ip }))
+      .concat({
+        value: 'other',
+        label: translate('Other (manual input)'),
+      });
+    if (hasAutoOption) {
+      return [{ label: translate('Automatic'), value: false }].concat(opts);
+    }
+    return opts;
+  }, [data?.subnet?.allocation_pools]);
+
+  const isOutsideAllocationPool = useCallback(
+    (value) =>
+      options.some((opt) => opt.value === value)
+        ? null
+        : translate('IPs is outside the allocation pool'),
+    [options],
+  );
+
+  const isOutsideRange = useCallback(
+    (value) =>
+      !value || isIPInRange(value, data?.subnet?.cidr)
+        ? null
+        : translate('IP is outside of subnet CIDR'),
+    [data?.subnet?.cidr],
+  );
+
+  const [selected, setSelected] = useState<{ label; value }>(() =>
+    data?.fixed_ip ? { label: data?.fixed_ip, value: data?.fixed_ip } : null,
+  );
+
+  return (
+    <Field
+      name={`${parentName}.fixed_ip`}
+      component={(fieldProps) => (
+        <div>
+          <FormLabel>{translate('Custom IP')}</FormLabel>
+          <Select
+            placeholder={translate('e.g.') + ' 192.168.42.16'}
+            options={options}
+            value={options.find((opt) => opt.value === selected?.value)}
+            onChange={(opt) => {
+              setSelected(opt);
+              fieldProps.input.onChange(opt.value === 'other' ? '' : opt.value);
+            }}
+          />
+
+          <StringField
+            placeholder={translate('Enter custom IP')}
+            value={fieldProps.input?.value}
+            onChange={fieldProps.input.onChange}
+            hidden={selected?.value !== 'other'}
+            className="mt-4"
+            autoFocus={autoFocus}
+          />
+
+          {fieldProps.meta.dirty &&
+            (fieldProps.meta.error ? (
+              <FieldError error={fieldProps.meta.error} />
+            ) : fieldProps.meta.warning ? (
+              <Form.Text className="text-warning" as="div">
+                {fieldProps.meta.warning}
+              </Form.Text>
+            ) : null)}
+        </div>
+      )}
+      validate={
+        selected?.value === false ? undefined : [required, isOutsideRange]
+      }
+      warn={selected?.value === false ? undefined : [isOutsideAllocationPool]}
+      required={true}
+    />
+  );
+};
+
+export const SubnetValueContainer = (props) => {
+  if (!props.hasValue) {
+    return (
+      <components.ValueContainer {...props}>
+        {props.children}
+      </components.ValueContainer>
+    );
+  }
+
+  const subnet = props.getValue()[0] || {};
+
+  return (
+    <components.ValueContainer {...props} className="pe-0">
+      <div className="d-flex align-items-center justify-content-between ellipsis">
+        {props.children}
+        <Tip
+          id={`tip-subnet-${subnet.uuid}`}
+          autoWidth
+          label={
+            <div className="text-start">
+              {translate('CIDR')}: {renderFieldOrDash(subnet.cidr)}
+              <br />
+              {translate('Allocation pool')}:{' '}
+              {subnet.allocation_pools?.length ? (
+                <>
+                  {' '}
+                  {subnet.allocation_pools[0].start}
+                  {' - '}
+                  {subnet.allocation_pools[0].end}
+                </>
+              ) : (
+                DASH_ESCAPE_CODE
+              )}
+              <br />
+              {translate('Gateway IP')}: {renderFieldOrDash(subnet.gateway_ip)}
+            </div>
+          }
+        >
+          <span className="svg-icon svg-icon-2">
+            <QuestionIcon weight="bold" />
+          </span>
+        </Tip>
+      </div>
+    </components.ValueContainer>
+  );
+};
+
+const renderNetworkRows = ({
+  fields,
+  subnets,
+  floatingIps,
+  hasCustomIp,
+}: any) => {
   const availableNetworkItemsFilter = useCallback(
     (itemType) => (item) => {
       let res = true;
@@ -47,6 +199,7 @@ const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
       ...getDefaultFloatingIps(),
       ...floatingIps.filter(availableNetworkItemsFilter('floatingIp')),
     ],
+
     [floatingIps, availableNetworkItemsFilter],
   );
 
@@ -72,57 +225,81 @@ const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (!hasCustomIp) {
+      fields.forEach((_, index) => {
+        delete fields.get(index).fixed_ip;
+      });
+    }
+  }, [hasCustomIp]);
+
   return (
     <div className="mb-5">
-      <Row>
-        <Col sm={6}>
-          <Form.Label>{translate('Subnet')}</Form.Label>
-        </Col>
-        <Col sm={6}>
-          <Form.Label>{translate('Floating IP')}</Form.Label>
-        </Col>
-      </Row>
-      {fields.map((network, index) => (
-        <Row key={index} className="g-4 mb-4">
-          <Col sm={6}>
-            <Field
-              name={`${network}.subnet`}
-              component={SelectField}
-              options={freeSubnets}
-              validate={[required]}
-              required={true}
-              placeholder={translate('Select subnet')}
-              getOptionValue={(option) => option.url}
-              getOptionLabel={(option) => option.name}
-              noUpdateOnBlur
-            />
-          </Col>
-          <Col sm>
-            <Field
-              name={`${network}.floatingIp`}
-              component={SelectField}
-              options={freeFloatingIps}
-              validate={[required]}
-              required={true}
-              isDisabled={!fields.get(index)?.subnet?.uuid}
-              getOptionValue={(option) => option.url}
-              getOptionLabel={(option) => option.address}
-              noUpdateOnBlur
-            />
-          </Col>
-          <Col xs="auto">
-            <Button
-              variant="active-light-danger"
-              className="btn-icon btn-icon-danger"
-              onClick={() => fields.remove(index)}
-            >
-              <span className="svg-icon svg-icon-1x">
-                <Trash weight="bold" />
-              </span>
-            </Button>
-          </Col>
-        </Row>
-      ))}
+      <div className="border-rows mb-4">
+        {fields.map((network, index) => (
+          <Fragment key={index}>
+            <Row className="g-4">
+              <Col sm={6}>
+                <Field
+                  name={`${network}.subnet`}
+                  label={translate('Subnet')}
+                  component={FormGroup}
+                  options={freeSubnets}
+                  validate={[required]}
+                  required={true}
+                  placeholder={translate('Select subnet')}
+                  getOptionValue={(option) => option.url}
+                  getOptionLabel={(option) => option.name}
+                  noUpdateOnBlur
+                  spaceless
+                  components={{ ValueContainer: SubnetValueContainer }}
+                >
+                  <SelectField />
+                </Field>
+              </Col>
+              <Col sm>
+                <Field
+                  name={`${network}.floatingIp`}
+                  label={translate('Floating IP')}
+                  component={FormGroup}
+                  options={freeFloatingIps}
+                  validate={[required]}
+                  required={true}
+                  isDisabled={!fields.get(index)?.subnet?.uuid}
+                  getOptionValue={(option) => option.url}
+                  getOptionLabel={(option) => option.address}
+                  noUpdateOnBlur
+                  spaceless
+                >
+                  <SelectField />
+                </Field>
+              </Col>
+              <Col xs="auto" className="align-self-end">
+                <Button
+                  variant="active-light-danger"
+                  className="btn-icon btn-icon-danger"
+                  onClick={() => fields.remove(index)}
+                >
+                  <span className="svg-icon svg-icon-1x">
+                    <TrashIcon weight="bold" />
+                  </span>
+                </Button>
+              </Col>
+              {hasCustomIp && (
+                <Col xs={12}>
+                  <Col sm={6}>
+                    <CustomIpField
+                      parentName={network}
+                      data={fields.get(index)}
+                      hasAutoOption
+                    />
+                  </Col>
+                </Col>
+              )}
+            </Row>
+          </Fragment>
+        ))}
+      </div>
       <Button
         variant="active-secondary"
         className="btn-text-primary btn-icon-primary"
@@ -130,7 +307,7 @@ const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
         onClick={addRow}
       >
         <span className="svg-icon svg-icon-2">
-          <PlusCircle weight="bold" />
+          <PlusCircleIcon weight="bold" />
         </span>{' '}
         {translate('Add subnet')}
       </Button>
@@ -139,9 +316,12 @@ const renderNetworkRows = ({ fields, subnets, floatingIps }: any) => {
 };
 
 export const FormNetworkSecurityStep = (props: FormStepProps) => {
-  const { data, isLoading } = useQuery(
-    ['network-step', props.offering.scope_uuid],
-    () => {
+  const [customIpEnabled, setCustomIpEnabled] = useToggle(false);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['network-step', props.offering.scope_uuid],
+
+    queryFn: () => {
       return Promise.all([
         loadSubnets({ tenant_uuid: props.offering.scope_uuid }),
         loadFloatingIps({
@@ -154,8 +334,9 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
         floatingIps,
       }));
     },
-    { staleTime: 3 * 60 * 1000 },
-  );
+
+    staleTime: 3 * 60 * 1000,
+  });
 
   return (
     <VStepperFormStepCard
@@ -176,12 +357,22 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
       </div>
 
       <Form.Group className="mb-2 border-bottom">
-        <Form.Label className="fs-6 fw-bolder mb-5">
-          {translate('Network')}
-        </Form.Label>
+        <div className="d-flex justify-content-between mb-5">
+          <Form.Label className="fs-6 fw-bolder mb-0">
+            {translate('Network')}
+          </Form.Label>
+          <AwesomeCheckbox
+            value={customIpEnabled}
+            onChange={setCustomIpEnabled}
+            size="sm"
+            className="align-self-center"
+            label={translate('Custom IP configuration')}
+          />
+        </div>
         <FieldArray
           name="attributes.networks"
           component={renderNetworkRows}
+          hasCustomIp={customIpEnabled}
           {...data}
         />
       </Form.Group>

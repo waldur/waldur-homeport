@@ -1,4 +1,4 @@
-import { Check, X } from '@phosphor-icons/react';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -21,7 +21,7 @@ import { RoleField } from '@waldur/user/affiliations/RoleField';
 import { exportRoleField } from '@waldur/user/affiliations/RolePopover';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { useTeamTableTabs } from './tabs';
+import { useTeamTableTabs } from '../customer/team/tabs';
 
 const mapStateToFilter = createSelector(
   getCustomer,
@@ -72,14 +72,15 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
           title: translate('Status'),
           render: ({ row }) =>
             row.is_active ? (
-              <Badge variant="success" leftIcon={<Check />} outline pill>
+              <Badge variant="success" leftIcon={<CheckIcon />} outline pill>
                 {translate('Active')}
               </Badge>
             ) : (
-              <Badge variant="default" leftIcon={<X />} outline pill>
+              <Badge variant="default" leftIcon={<XIcon />} outline pill>
                 {translate('Inactive')}
               </Badge>
             ),
+
           filter: 'is_active',
           export: (row) => (row.is_active ? translate('Yes') : translate('No')),
         },

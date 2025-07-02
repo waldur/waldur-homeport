@@ -18,6 +18,7 @@ export const ProjectPermisionActions = ({
       (props) => (
         <UserDetailsButton {...props} userId={row.user_uuid} asDropdownItem />
       ),
+
       EditUserButton,
       UserRemoveButton,
     ]}

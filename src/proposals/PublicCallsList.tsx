@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { ProposalPublicCallsListData } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -39,6 +40,7 @@ const CallColumns = [
         label={row.name}
       />
     ),
+
     copyField: (row) => row.name,
   },
   {
@@ -96,7 +98,7 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
     const filters = useSelector(getFormValues(CALL_FILTER_FORM_ID)) as any;
 
     return useMemo(() => {
-      const result: Record<string, any> = {};
+      const result: ProposalPublicCallsListData['query'] = {};
       if (filters) {
         if (filters.state) {
           result.state = filters.state.map((option) => option.value);

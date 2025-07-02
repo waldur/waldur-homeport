@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import React, { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -35,7 +35,7 @@ export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
           {props.offeringComponent.name}
           <Tip label={props.offeringComponent.type} id="componentTypeTooltip">
             {' '}
-            <Question />
+            <QuestionIcon />
           </Tip>
         </p>
       </td>

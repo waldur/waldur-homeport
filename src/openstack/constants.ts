@@ -6,6 +6,8 @@ export const INSTANCE_TYPE = 'OpenStack.Instance';
 
 export const VOLUME_TYPE = 'OpenStack.Volume';
 
+export const OPENSTACK_PORT_TYPE = 'OpenStack.Port';
+
 const FIXED_STORAGE_MODE = 'fixed';
 
 const DYNAMIC_STORAGE_MODE = 'dynamic';

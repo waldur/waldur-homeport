@@ -1,4 +1,4 @@
-import { LinkBreak } from '@phosphor-icons/react';
+import { LinkBreakIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesUnlink } from 'waldur-js-client';
@@ -20,7 +20,7 @@ const getConfirmationText = (resource) => {
     customerName: <strong>{resource.customer_name}</strong>,
   };
   return translate(
-    'Are you sure you want to unlink {resourceName} {resourceType} from {projectName} ({customerName})? ',
+    'Are you sure you want to unlink {resourceName} {resourceType} from {projectName} ({customerName})? Unlinking will only remove object from the database, it will not trigger any cleanup',
     context,
     formatJsxTemplate,
   );
@@ -58,7 +58,7 @@ export const UnlinkActionItem: FC<{ resource }> = ({ resource }) => {
       action={callback}
       className="text-danger"
       staff
-      iconNode={<LinkBreak weight="bold" />}
+      iconNode={<LinkBreakIcon weight="bold" />}
       iconColor="danger"
     />
   );

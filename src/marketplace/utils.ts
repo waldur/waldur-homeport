@@ -1,29 +1,17 @@
 import ipRegex from 'ip-regex';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { useExtraTabs } from '@waldur/navigation/context';
 import { useOfferingCategories } from '@waldur/navigation/sidebar/utils';
 import { Tab } from '@waldur/navigation/Tab';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
-import { type RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getCategoryItems } from './category/utils';
-import { DeployFormData } from './common/types';
-
-export const orderFormDataSelector = (state: RootState) =>
-  (getFormValues(ORDER_FORM_ID)(state) || {}) as DeployFormData;
-
-export const orderFormAttributesSelector = (state: RootState) => {
-  const formData = orderFormDataSelector(state);
-  return formData.attributes || {};
-};
 
 export const formatResourceShort = (resource) => {
   return (

@@ -1,39 +1,51 @@
-import { useState, FunctionComponent } from 'react';
+import { useCurrentStateAndParams } from '@uirouter/react';
+import { useState, FunctionComponent, useEffect } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { initMatomoTracker, MatomoInstance } from '@waldur/afterBootstrap';
+import { lazyComponent } from '@waldur/core/lazyComponent';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { DeploymentFeatures } from '@waldur/FeaturesEnums';
+import { useModal } from '@waldur/modal/hooks';
 
 import { getConsent, setConsent } from './CookiesStorage';
 
-import './CookiesConsent.css';
+const CookiesConsentDialog = lazyComponent(() =>
+  import('./CookiesConsentDialog').then((module) => ({
+    default: module.CookiesConsentDialog,
+  })),
+);
 
 export const CookiesConsent: FunctionComponent = () => {
-  const [accepted, setAccepted] = useState(getConsent() === 'true');
+  const { state } = useCurrentStateAndParams();
+  const { openDialog, closeDialog } = useModal();
+  const [accepted, setAccepted] = useState(
+    ['true', 'essential'].includes(getConsent()),
+  );
 
-  if (accepted) {
-    return null;
-  }
-
-  const hideConsent = () => {
+  const hideConsent = (onlyEssential) => {
     setAccepted(true);
-    setConsent('true');
+    setConsent(onlyEssential ? 'essential' : 'true');
+    closeDialog();
+    if (!onlyEssential && !MatomoInstance) {
+      initMatomoTracker();
+    }
   };
 
-  return (
-    <div className="d-flex d-lg-block flex-column bg-dark text-light text-center rounded-0 cookiealert py-5">
-      {translate(
-        'This website uses cookies to ensure you get the best experience on our website.',
-      )}{' '}
-      <Link className="menu-link px-2" state="about.privacy">
-        {translate('Learn more')}
-      </Link>
-      <button
-        type="button"
-        className="btn btn-primary d-inline mx-auto ms-lg-5 acceptcookies mt-5 mt-lg-0"
-        onClick={hideConsent}
-      >
-        {translate('I agree')}
-      </button>
-    </div>
-  );
+  useEffect(() => {
+    if (state.name === 'about.privacy') return;
+    if (
+      !accepted &&
+      isFeatureVisible(DeploymentFeatures.enable_cookie_notice)
+    ) {
+      openDialog(CookiesConsentDialog, {
+        resolve: {
+          acceptAll: () => hideConsent(false),
+          acceptEssential: () => hideConsent(true),
+        },
+        backdrop: 'static',
+      });
+    }
+  }, [accepted, state, openDialog, hideConsent]);
+
+  return null;
 };

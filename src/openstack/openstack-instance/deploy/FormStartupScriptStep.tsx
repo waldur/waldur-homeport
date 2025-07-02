@@ -21,7 +21,7 @@ export const FormStartupScriptStep = (props: FormStepProps) => {
         className={classNames('step-card', props.disabled && 'step-disabled')}
       >
         <Field
-          name="startup_script"
+          name="attributes.user_data"
           component={FormGroup}
           label={translate('Start script')}
           spaceless

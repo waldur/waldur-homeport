@@ -16,5 +16,6 @@ export const PullClusterAction: ActionItemType = ({ resource }) => {
         staff={ENV.plugins.WALDUR_RANCHER.READ_ONLY_MODE}
       />
     );
+
   return null;
 };

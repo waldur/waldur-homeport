@@ -1,4 +1,9 @@
-import { FileCsv, FileXls, Printer, FilePng } from '@phosphor-icons/react';
+import {
+  FileCsvIcon,
+  FileXlsIcon,
+  PrinterIcon,
+  FilePngIcon,
+} from '@phosphor-icons/react';
 import { init } from 'echarts';
 import { sum } from 'lodash-es';
 import { useCallback } from 'react';
@@ -233,22 +238,25 @@ export const UsageExportDropdown = (props: UsageExportDropdownProps) => {
       <ActionItem
         title={translate('PNG')}
         action={() => exportUsages('png')}
-        iconNode={<FilePng weight="bold" />}
+        iconNode={<FilePngIcon weight="bold" />}
       />
+
       <ActionItem
         title={translate('PDF')}
         action={() => exportUsages('pdf')}
-        iconNode={<Printer weight="bold" />}
+        iconNode={<PrinterIcon weight="bold" />}
       />
+
       <ActionItem
         title={translate('CSV')}
         action={() => exportUsages('csv')}
-        iconNode={<FileCsv weight="bold" />}
+        iconNode={<FileCsvIcon weight="bold" />}
       />
+
       <ActionItem
         title={translate('Excel')}
         action={() => exportUsages('excel')}
-        iconNode={<FileXls weight="bold" />}
+        iconNode={<FileXlsIcon weight="bold" />}
       />
     </DropdownButton>
   );

@@ -11,7 +11,7 @@ export const OauthLoginButton = ({
   provider: Pick<IdentityProvider, 'label' | 'provider'>;
 }) => (
   <LoginButton
-    image={<IdentityProviderLogo name={provider.provider} />}
+    image={<IdentityProviderLogo name={provider.provider} maxHeight={40} />}
     label={provider.label}
     onClick={() => {
       window.location.href = getOauthURL(provider);

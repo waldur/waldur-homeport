@@ -9,15 +9,24 @@ import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
 
 import { ResourcePlanPeriod, UsageReportContext } from './types';
 
-const getPeriodLabel = (
+export const getPeriodRange = (
   period: Pick<ResourcePlanPeriod, 'start' | 'end' | 'plan_name'>,
 ) => {
   const startOfMonth = DateTime.now().startOf('month');
   const start =
     startOfMonth.diff(parseDate(period.start)).as('milliseconds') > 0
-      ? formatDateTime(startOfMonth)
-      : formatDateTime(period.start);
-  const end = period.end && formatDateTime(period.end);
+      ? startOfMonth
+      : parseDate(period.start);
+  const end = period.end && parseDate(period.end);
+  return { start, end };
+};
+
+const getPeriodLabel = (
+  period: Pick<ResourcePlanPeriod, 'start' | 'end' | 'plan_name'>,
+) => {
+  const periodRange = getPeriodRange(period);
+  const start = formatDateTime(periodRange.start);
+  const end = periodRange.end && formatDateTime(periodRange.end);
   if (end) {
     return `${period.plan_name} (from ${start} to ${end})`;
   } else {

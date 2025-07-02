@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 
 import { translate } from '@waldur/i18n';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
@@ -11,9 +11,11 @@ export const DeleteAction = ({ project, refetch }) => {
   return (
     <ActionItem
       title={translate('Delete')}
+      className="text-danger"
+      iconColor="danger"
       action={callback}
       disabled={!canDelete}
-      iconNode={<Trash weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
     />
   );
 };

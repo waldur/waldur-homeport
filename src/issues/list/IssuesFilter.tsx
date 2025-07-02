@@ -23,7 +23,11 @@ const PureIssuesFilter = ({ form }) => {
   useReinitializeFilterFromUrl(form);
 
   return (
-    <TableFilterItem title={translate('Status')} name="status">
+    <TableFilterItem
+      title={translate('Status')}
+      name="status"
+      instantApply={false}
+    >
       <Field
         name="status"
         component={(fieldProps) => (

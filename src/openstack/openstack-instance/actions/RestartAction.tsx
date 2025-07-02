@@ -1,4 +1,4 @@
-import { ArrowClockwise } from '@phosphor-icons/react';
+import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { openstackInstancesRestart } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
@@ -38,6 +38,6 @@ export const RestartAction: ActionItemType = ({ resource, ...rest }) => (
     {...getProps()}
     resource={resource}
     {...rest}
-    iconNode={<ArrowClockwise weight="bold" />}
+    iconNode={<ArrowClockwiseIcon weight="bold" />}
   />
 );

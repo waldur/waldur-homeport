@@ -2,26 +2,29 @@ import { FunctionComponent, useMemo } from 'react';
 import { OpenStackRouter, OpenstackRoutersListData } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { SetRoutersButton } from './SetRoutersButton';
+import { CreateRouterAction } from './actions/CreateRouterAction';
 
 export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackRoutersListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackRoutersListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
         'url',
+        'backend_id',
         'name',
         'description',
         'created',
+        'ports',
         'resource_type',
         'routes',
         'service_name',
@@ -30,6 +33,7 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
         'service_settings_state',
         'service_settings_error_message',
         'state',
+        'tenant_uuid',
         'error_message',
         'fixed_ips',
         'offering_external_ips',
@@ -64,9 +68,15 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
       ]}
       verboseName={translate('routers')}
       title={translate('Routers')}
-      rowActions={({ row }) => <SetRoutersButton router={row} />}
+      tableActions={
+        <CreateRouterAction resource={resourceScope} refetch={props.fetch} />
+      }
+      rowActions={({ row }) => (
+        <ResourceRowActions resource={row} refetch={props.fetch} />
+      )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
       hasQuery={true}
+      showPageSizeSelector
     />
   );
 };

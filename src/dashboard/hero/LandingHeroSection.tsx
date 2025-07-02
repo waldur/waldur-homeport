@@ -32,7 +32,7 @@ export const LandingHeroSection: FC<
       )}
       style={
         props.backgroundImage
-          ? { backgroundImage: `url(${props.backgroundImage})` }
+          ? { backgroundImage: props.backgroundImage }
           : null
       }
     >

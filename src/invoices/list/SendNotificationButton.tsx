@@ -1,4 +1,4 @@
-import { Share } from '@phosphor-icons/react';
+import { ShareIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { invoicesSendNotification } from 'waldur-js-client';
@@ -36,7 +36,7 @@ export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
     <ActionItem
       title={translate('Send notification')}
       action={onClick}
-      iconNode={<Share weight="bold" />}
+      iconNode={<ShareIcon weight="bold" />}
       disabled={row.state !== 'created'}
       tooltip={
         row.state !== 'created'

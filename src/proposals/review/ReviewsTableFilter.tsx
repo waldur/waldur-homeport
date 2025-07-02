@@ -19,7 +19,11 @@ const PureReviewsTableFilter = ({ form }) => {
   useReinitializeFilterFromUrl(form);
   return (
     <>
-      <TableFilterItem title={translate('State')} name="state">
+      <TableFilterItem
+        title={translate('State')}
+        name="state"
+        instantApply={false}
+      >
         <Field
           name="state"
           component={(fieldProps) => (

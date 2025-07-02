@@ -1,4 +1,4 @@
-import { DownloadSimple } from '@phosphor-icons/react';
+import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/core/config';
@@ -34,7 +34,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
           <ActionButton
             title={translate('Import project')}
             action={null}
-            iconNode={<DownloadSimple weight="bold" />}
+            iconNode={<DownloadSimpleIcon weight="bold" />}
             disabled
           />
         </div>
@@ -58,6 +58,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_title"
       />
+
       <Field
         name="project_summary"
         component={FormGroup}
@@ -75,6 +76,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_summary"
       />
+
       <Field
         name="description"
         component={FormGroup}
@@ -92,6 +94,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_description"
       />
+
       <Field
         name="project_has_civilian_purpose"
         component={FormGroup}
@@ -108,6 +111,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_has_civilian_purpose"
       />
+
       {isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
         <Field
           name="oecd_fos_2007_code"
@@ -141,6 +145,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_is_confidential"
       />
+
       <Field
         name="duration_in_days"
         component={FormGroup}
@@ -159,6 +164,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         reviews={reviews}
         fieldName="comment_project_duration"
       />
+
       <Field
         name="supporting_documentation"
         className="mb-7"

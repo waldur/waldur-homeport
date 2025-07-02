@@ -98,14 +98,12 @@ export const TeamSection: FC<
         </Card.Title>
         <div className="card-toolbar gap-3">
           {!props.readOnlyMode ? (
-            // <div className="col d-flex justify-content-end text-nowrap gap-3">
             <TeamDropdownActions
               refetchUsers={usersTable.fetch}
               refetchInvitations={invitationsTable.fetch}
               {...props}
             />
-          ) : // </div>
-          props.onAddCommentClick ? (
+          ) : props.onAddCommentClick ? (
             <AddCommentButton
               review={props.reviews?.[0]}
               onClick={() =>

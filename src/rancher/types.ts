@@ -25,7 +25,7 @@ export interface FieldProps {
   validate?: any;
 }
 
-export type NodeRole = 'worker' | 'etcd' | 'controlplane';
+export type NodeRole = 'agent' | 'server';
 
 export interface NodeField {
   flavor: OpenStackFlavor;

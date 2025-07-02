@@ -18,11 +18,13 @@ import { INSTANCE_TYPE } from '../constants';
 import { CreateFloatingIpAction } from '../openstack-tenant/actions/CreateFloatingIpAction';
 import { PullFloatingIpsAction } from '../openstack-tenant/actions/PullFloatingIpsAction';
 
+import { DestroyBulkFloatingIpsAction } from './DestroyBulkFloatingIpsAction';
+
 export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackFloatingIpsListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackFloatingIpsListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
       field: [
         'uuid',
@@ -82,6 +84,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
       ]}
       verboseName={translate('floating IPs')}
       title={translate('Floating IPs')}
+      showPageSizeSelector
       tableActions={
         <ButtonGroup>
           <PullFloatingIpsAction resource={resourceScope} />
@@ -94,6 +97,8 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
       rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={tableProps.fetch} />
       )}
+      enableMultiSelect
+      multiSelectActions={DestroyBulkFloatingIpsAction}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
     />
   );

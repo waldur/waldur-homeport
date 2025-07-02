@@ -56,6 +56,7 @@ export const SecretField: React.FC<FieldProps> = (props) => {
           getValue={({ id }) => id}
         />
       ),
+
     [options, loading, error],
   );
   return <DecoratedField {...props} component={renderField} />;

@@ -47,6 +47,7 @@ export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
             {...fieldProps.input}
             placeholder={translate('e.g. MyApp')}
           />
+
           {fieldProps.meta.touched && (
             <FieldError error={fieldProps.meta.error} />
           )}
@@ -59,6 +60,7 @@ export const NamespaceField: React.FC<NamespaceFieldProps> = ({ options }) => {
           getValue={({ url }) => url}
         />
       ),
+
     [useNew, options],
   );
 

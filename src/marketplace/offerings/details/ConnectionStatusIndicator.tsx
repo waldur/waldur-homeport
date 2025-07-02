@@ -1,4 +1,4 @@
-import { Circle } from '@phosphor-icons/react';
+import { CircleIcon } from '@phosphor-icons/react';
 import { Col, FormGroup, FormLabel, Row } from 'react-bootstrap';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -35,7 +35,7 @@ export const ConnectionStatusIndicator = ({ status }) => {
               time: formatDateTime(status[i].last_request_timestamp),
             })}
           >
-            <Circle className={getStatusClassName(status[i])} />
+            <CircleIcon className={getStatusClassName(status[i])} />
           </Tip>
         ))}
       </Col>

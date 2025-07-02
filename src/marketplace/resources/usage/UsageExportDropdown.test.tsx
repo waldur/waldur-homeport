@@ -52,10 +52,12 @@ describe('useUsageExport', () => {
           billing_type: 'fixed',
         },
       ],
+
       usages: [
         { type: 'cpu', date: '2024-01-01', usage: 10 },
         { type: 'ram', date: '2024-01-01', usage: 8 },
       ],
+
       userUsages: [
         {
           username: 'user_1',
@@ -79,6 +81,7 @@ describe('useUsageExport', () => {
         offering_user_username: 'user_1',
       },
     ],
+
     months: 1,
   };
 

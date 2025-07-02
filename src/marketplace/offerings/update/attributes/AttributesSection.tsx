@@ -38,6 +38,7 @@ export const AttributesSection: FC<OfferingSectionProps & { category }> = (
                   <td className="col-md-6">
                     <AttributeCell
                       attr={attribute}
+                      // @ts-ignore
                       value={props.offering.attributes[attribute.key]}
                     />
                   </td>

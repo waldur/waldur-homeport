@@ -5,14 +5,9 @@ $bg-height: 232px;
   height: $bg-height;
   width: 100%;
   background-color: $primary-900;
-  background-image: url('/src/dashboard/hero/servers-room-dark.png');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-
-  &.calls-landing {
-    background-image: url('/src/proposals/proposal-calls-dark.png');
-  }
 
   &.has-overlay::before {
     content: ' ';
@@ -33,13 +28,6 @@ $bg-height: 232px;
     &.bg-mode-light,
     &.bg-mode-accent {
       background-position: 50% 40%;
-
-      &.marketplace-landing {
-        background-image: url('/src/dashboard/hero/servers-room-light.png');
-      }
-      &.calls-landing {
-        background-image: url('/src/proposals/proposal-calls.png');
-      }
     }
 
     &.bg-mode-light {

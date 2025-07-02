@@ -1,4 +1,4 @@
-import { ArrowSquareOut } from '@phosphor-icons/react';
+import { ArrowSquareOutIcon } from '@phosphor-icons/react';
 
 import { translate } from '@waldur/i18n';
 
@@ -11,7 +11,7 @@ export const OfferingAccessButton = ({ offering }) =>
       className="min-w-100px btn btn-primary"
     >
       <span className="svg-icon svg-icon-2">
-        <ArrowSquareOut weight="bold" />
+        <ArrowSquareOutIcon weight="bold" />
       </span>{' '}
       {translate('Access')}
     </a>

@@ -92,6 +92,7 @@ export const OrganizationsList: FunctionComponent = () => {
           {row.name}
         </OrganizationLink>
       ),
+
       keys: ['name'],
       id: 'organization',
     },
@@ -173,6 +174,7 @@ export const OrganizationsList: FunctionComponent = () => {
         ) : (
           DASH_ESCAPE_CODE
         ),
+
       keys: ['country'],
       optional: true,
       id: 'country',
@@ -214,6 +216,7 @@ export const OrganizationsList: FunctionComponent = () => {
             : DASH_ESCAPE_CODE}
         </>
       ),
+
       keys: ['accounting_start_date'],
       optional: true,
       id: 'accounting_start_date',
@@ -265,6 +268,7 @@ export const OrganizationsList: FunctionComponent = () => {
       render: ({ row }) => (
         <>{row.is_service_provider ? translate('Yes') : translate('No')}</>
       ),
+
       keys: ['is_service_provider'],
       optional: true,
       filter: 'is_service_provider',
@@ -285,6 +289,7 @@ export const OrganizationsList: FunctionComponent = () => {
             : translate('No')}
         </>
       ),
+
       keys: ['call_managing_organization_uuid'],
       optional: true,
       filter: 'is_call_managing_organization',

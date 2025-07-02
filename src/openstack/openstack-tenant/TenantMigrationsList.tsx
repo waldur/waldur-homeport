@@ -18,8 +18,8 @@ import { MigrationExpandableRow } from './MigrationExpandableRow';
 export const TenantMigrationsList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filter = useMemo<OpenstackMigrationsListData['query']>(
-    () => ({
+  const filter = useMemo(
+    (): OpenstackMigrationsListData['query'] => ({
       src_resource_uuid: resourceScope.marketplace_resource_uuid,
     }),
     [resourceScope],

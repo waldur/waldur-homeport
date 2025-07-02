@@ -1,4 +1,4 @@
-import { PlugsConnected } from '@phosphor-icons/react';
+import { PlugsConnectedIcon } from '@phosphor-icons/react';
 import { openstackSubnetsConnect } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -13,6 +13,6 @@ export const ConnectSubnetAction: ActionItemType = ({ resource, refetch }) => (
     resource={resource}
     validators={[validateState('OK')]}
     refetch={refetch}
-    iconNode={<PlugsConnected weight="bold" />}
+    iconNode={<PlugsConnectedIcon weight="bold" />}
   />
 );

@@ -1,4 +1,4 @@
-import { Timer } from '@phosphor-icons/react';
+import { TimerIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -29,7 +29,7 @@ const useChangeLimits = ({ resource, refetch }) => {
     action,
     tooltip,
     disabled,
-    iconNode: <Timer weight="bold" />,
+    iconNode: <TimerIcon weight="bold" />,
     important: true,
   };
 };

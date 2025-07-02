@@ -1,4 +1,4 @@
-import { RocketLaunch } from '@phosphor-icons/react';
+import { RocketLaunchIcon } from '@phosphor-icons/react';
 
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
@@ -27,7 +27,7 @@ export const DeployButton = ({
         className={`btn btn-primary w-100 ${disabled ? 'disabled' : ''}`}
       >
         <span className="svg-icon svg-icon-2">
-          <RocketLaunch weight="bold" />
+          <RocketLaunchIcon weight="bold" />
         </span>
         {translate('Deploy')}
       </Link>

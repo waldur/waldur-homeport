@@ -10,7 +10,7 @@ import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 export const InvitationExpandableRow: React.FC<{
   row: Invitation;
 }> = ({ row }) => (
-  <ExpandableContainer hasMultiSelect>
+  <ExpandableContainer>
     <p>
       <b>{translate('Invitation link')}: </b>
       <CopyToClipboardContainer

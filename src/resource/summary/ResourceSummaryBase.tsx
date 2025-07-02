@@ -1,4 +1,3 @@
-import { ENV } from '@waldur/core/config';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
@@ -52,12 +51,8 @@ export function ResourceSummaryBase<T extends Resource = Resource>(
         label={translate('Created')}
         value={<CreatedField resource={props.resource} />}
       />
-      {ENV.plugins.WALDUR_CORE.ENABLE_RESOURCE_END_DATE ? (
-        <Field
-          label={translate('Termination date')}
-          value={resource.end_date}
-        />
-      ) : null}
+
+      <Field label={translate('Termination date')} value={resource.end_date} />
       <Field
         label={translate('Metadata')}
         value={ResourceMetadataLink(props)}

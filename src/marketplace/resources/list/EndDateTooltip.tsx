@@ -1,15 +1,11 @@
-import { Clock } from '@phosphor-icons/react';
+import { ClockIcon } from '@phosphor-icons/react';
 
-import { ENV } from '@waldur/core/config';
 import { formatDate } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 export const EndDateTooltip = ({ end_date }) => {
   if (!end_date) {
-    return null;
-  }
-  if (!ENV.plugins.WALDUR_CORE.ENABLE_RESOURCE_END_DATE) {
     return null;
   }
   return (
@@ -21,7 +17,7 @@ export const EndDateTooltip = ({ end_date }) => {
           date: formatDate(end_date),
         })}
       >
-        <Clock />
+        <ClockIcon />
       </Tip>
     </>
   );

@@ -1,4 +1,4 @@
-import { UserPlus } from '@phosphor-icons/react';
+import { UserPlusIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 import {
@@ -8,6 +8,8 @@ import {
   CustomersUsersListData,
   marketplaceServiceProvidersAddUser,
   projectsAddUser,
+  projectsOtherUsersList,
+  ProjectsOtherUsersListData,
 } from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
@@ -38,6 +40,7 @@ import { Project, User } from '@waldur/workspace/types';
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
 import { RoleGroup } from './RoleGroup';
 import { UserListOptionInline } from './UserListOptionInline';
+import { hasCurrentCustomerPermission } from './utils';
 
 const FORM_ID = 'AddUserDialog';
 const FIELD_ID = 'showAllUsers';
@@ -77,6 +80,27 @@ const customerUsersAutocomplete = async (
   );
 };
 
+const projectUsersAutocomplete = async (
+  projectUuid: string,
+  query: ProjectsOtherUsersListData['query'],
+  prevOptions,
+  currentPage: number,
+) => {
+  const response = await projectsOtherUsersList({
+    path: { uuid: projectUuid },
+    query: {
+      ...query,
+      page: currentPage,
+      page_size: ENV.pageSize,
+    },
+  });
+  return returnReactSelectAsyncPaginateObject(
+    parseSelectData(response),
+    prevOptions,
+    currentPage,
+  );
+};
+
 const showAllUsersSelector = (state: RootState) =>
   formValueSelector(FORM_ID)(state, FIELD_ID);
 
@@ -94,6 +118,38 @@ export const AddUserDialog = reduxForm<
   const currentUser = useUser() as User;
   const currentProject = useSelector(getProject);
   const currentCustomer = useSelector(getCustomer);
+  const hasCustomerPermission = useSelector(hasCurrentCustomerPermission);
+
+  const loadUsers = async (query, prevOptions, page) => {
+    try {
+      if (showAllUsers) {
+        return await usersAutocomplete({ query }, prevOptions, page);
+      }
+
+      if (hasCustomerPermission || !currentProject) {
+        return await customerUsersAutocomplete(
+          currentCustomer.uuid,
+          { user_keyword: query },
+          prevOptions,
+          page,
+        );
+      }
+
+      return await projectUsersAutocomplete(
+        currentProject.uuid,
+        { user_keyword: query },
+        prevOptions,
+        page,
+      );
+    } catch (error) {
+      dispatch(showErrorResponse(error, translate('Unable to load users.')));
+      return {
+        options: [],
+        hasMore: false,
+        additional: { page: 1 },
+      };
+    }
+  };
 
   const getOptionLabel = (option) =>
     option.email
@@ -199,7 +255,7 @@ export const AddUserDialog = reduxForm<
             </SubmitButton>
           </>
         }
-        iconNode={<UserPlus weight="bold" />}
+        iconNode={<UserPlusIcon weight="bold" />}
         iconColor="success"
       >
         <FormContainer submitting={submitting}>
@@ -208,22 +264,14 @@ export const AddUserDialog = reduxForm<
             key={showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
             label={translate('User')}
             placeholder={translate('Select user...')}
-            loadOptions={(query, prevOptions, page) =>
-              showAllUsers
-                ? usersAutocomplete({ query }, prevOptions, page)
-                : customerUsersAutocomplete(
-                    currentCustomer.uuid,
-                    { user_keyword: query },
-                    prevOptions,
-                    page,
-                  )
-            }
+            loadOptions={loadUsers}
             getOptionValue={(option) => option.uuid}
             getOptionLabel={getOptionLabel}
             components={{ Option: UserListOptionInline }}
             required={true}
             validate={[required]}
           />
+
           {currentUser.is_staff && (
             <AwesomeCheckboxField
               hideLabel
@@ -243,6 +291,7 @@ export const AddUserDialog = reduxForm<
                 : [level]
             }
           />
+
           {level === 'customer' && role?.content_type === 'project' && (
             <OrganizationProjectSelectField />
           )}

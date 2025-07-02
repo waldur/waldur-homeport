@@ -2,10 +2,7 @@ import { AzureProviderConfig } from '@waldur/azure/provider/provider';
 import { getProviderType } from '@waldur/marketplace/common/registry';
 import { OpenStackProviderConfig } from '@waldur/openstack/provider';
 import { RancherProviderConfig } from '@waldur/rancher/provider';
-import {
-  SlurmProviderConfig,
-  SlurmRemoteProviderConfig,
-} from '@waldur/slurm/provider';
+import { SlurmProviderConfig } from '@waldur/slurm/provider';
 import { VMwareProviderConfig } from '@waldur/vmware/provider';
 
 import { ProviderConfig } from './types';
@@ -35,5 +32,4 @@ register(AzureProviderConfig);
 register(OpenStackProviderConfig);
 register(RancherProviderConfig);
 register(SlurmProviderConfig);
-register(SlurmRemoteProviderConfig);
 register(VMwareProviderConfig);

@@ -1,4 +1,4 @@
-import { WarningCircle } from '@phosphor-icons/react';
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import { connect, useSelector } from 'react-redux';
@@ -11,10 +11,8 @@ import { FieldError } from '@waldur/form';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import {
-  concealPricesSelector,
-  formSubmitErrorsSelector,
-} from '@waldur/marketplace/deploy/utils';
+import { formSubmitErrorsSelector } from '@waldur/marketplace/deploy/selectors';
+import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
 import { Limits } from '@waldur/marketplace/details/types';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -191,7 +189,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
               id="order-plan-errors"
               autoWidth
             >
-              <WarningCircle
+              <WarningCircleIcon
                 size={18}
                 weight="bold"
                 className="ms-2 text-warning mb-1"

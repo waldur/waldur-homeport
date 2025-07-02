@@ -1,9 +1,12 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { FieldArray, reduxForm } from 'redux-form';
-import { marketplaceProviderOfferingsUpdateIntegration } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsUpdateIntegration,
+  ProviderOfferingDetails,
+} from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -15,14 +18,18 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ENVIRON_FORM_ID } from './constants';
 import { EnvironmentVariablesList } from './EnvironmentVariablesList';
 
-type OwnProps = { resolve: { offering; type; refetch } };
+export interface EditVarsDialogOwnProps {
+  resolve: { offering: ProviderOfferingDetails; type?; refetch?(): void };
+}
 
-export const EditVarsDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
-  initialValues: {
-    environ: ownProps.resolve.offering.secret_options.environ,
-  },
-}))(
-  reduxForm<{}, OwnProps>({
+export const EditVarsDialog = connect<{}, {}, EditVarsDialogOwnProps>(
+  (_, ownProps) => ({
+    initialValues: {
+      environ: ownProps.resolve.offering.secret_options.environ,
+    },
+  }),
+)(
+  reduxForm<{}, EditVarsDialogOwnProps>({
     form: ENVIRON_FORM_ID,
   })((props) => {
     const dispatch = useDispatch();
@@ -32,6 +39,7 @@ export const EditVarsDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           await marketplaceProviderOfferingsUpdateIntegration({
             path: { uuid: props.resolve.offering.uuid },
             body: {
+              // @ts-ignore
               secret_options: {
                 ...props.resolve.offering.secret_options,
                 environ: formData.environ,
@@ -74,7 +82,7 @@ export const EditVarsDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                   onClick={() => nestedProps.fields.push({})}
                 >
                   <span className="svg-icon svg-icon-2">
-                    <PlusCircle weight="bold" />
+                    <PlusCircleIcon weight="bold" />
                   </span>
                 </Button>
               }

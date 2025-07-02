@@ -203,6 +203,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         onChange={(value) => setSelectedPeriod(value)}
         simpleValue
       />
+
       {costsData && costsData.length !== 0 && (
         <Table bordered>
           <thead>
@@ -237,6 +238,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         required={true}
         unit={ENV.plugins.WALDUR_CORE.CURRENCY_NAME}
       />
+
       <SelectField
         name="actions"
         label={translate('Then')}
@@ -250,6 +252,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
         getOptionLabel={(option) => option.label}
         onChange={(value) => handleActionChange(value)}
       />
+
       {selectedAction?.value === 'notify_external_user' && (
         <StringField
           name="options.notify_external_user"

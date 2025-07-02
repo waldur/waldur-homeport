@@ -21,11 +21,13 @@ export const AzureVirtualMachineSummary = (
         label={translate('Admin password')}
         value={<UserPassword password={resource.password} />}
       />
+
       <Field label={translate('Size')} value={resource.size_name} />
       <Field
         label={translate('Internal IP')}
         value={<IPList value={props.resource.internal_ips} />}
       />
+
       <Field
         label={translate('External IP')}
         value={<IPList value={props.resource.external_ips} />}

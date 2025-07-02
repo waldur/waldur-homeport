@@ -1,21 +1,22 @@
-import { useCallback, useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { useCallback, useMemo, useState } from 'react';
+import { Button, Card } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { Field, getFormValues, initialize, reduxForm } from 'redux-form';
+import { Field, getFormValues, reduxForm } from 'redux-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
   marketplaceScriptAsyncDryRunRetrieve,
   marketplaceScriptDryRunAsyncRun,
+  MergedSecretOptionsRequest,
 } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { AccordionCard } from '@waldur/core/AccordionCard';
 import { Tip } from '@waldur/core/Tooltip';
 import { wait } from '@waldur/core/utils';
-import { SubmitButton, SelectField } from '@waldur/form';
+import { SubmitButton } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { Offering } from '@waldur/marketplace/types';
+import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import {
   showError,
@@ -24,20 +25,12 @@ import {
 } from '@waldur/store/notify';
 
 import { EDIT_SCRIPT_FORM_ID } from './constants';
+import { ScriptEditorHeader } from './ScriptEditorHeader';
 import { ScriptEditorProps } from './types';
 
-type OwnProps = { resolve: ScriptEditorProps };
+import './EditScriptDialog.scss';
 
-const PROGRAMMING_LANGUAGE_CHOICES = [
-  {
-    label: 'Python',
-    value: 'python',
-  },
-  {
-    label: 'Bash',
-    value: 'shell',
-  },
-];
+type OwnProps = { resolve: ScriptEditorProps };
 
 export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
   initialValues: {
@@ -46,41 +39,141 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
 }))(
   reduxForm<{}, OwnProps>({
     form: EDIT_SCRIPT_FORM_ID,
+    enableReinitialize: true,
+    keepDirtyOnReinitialize: true,
   })((props) => {
+    const [initialSecretOptions, setInitialSecretOptions] = useState<
+      Offering['secret_options']
+    >(props.resolve.offering.secret_options);
+    const [scriptOption, setScriptOption] = useState<{
+      label;
+      type;
+      dry_run;
+    }>({
+      label: props.resolve.label,
+      type: props.resolve.type,
+      dry_run: props.resolve.dry_run,
+    });
+
     const dispatch = useDispatch();
     const [executing, setExecuting] = useState<boolean>(false);
     const [scriptExecutionResult, setScriptExecutionResult] = useState('');
-    const formValues = useSelector(getFormValues(EDIT_SCRIPT_FORM_ID));
-    const update = useCallback(
+    const language = props.resolve.offering.secret_options.language;
+    const formValues = useSelector(getFormValues(EDIT_SCRIPT_FORM_ID)) as {
+      script;
+    };
+
+    // We need to check isDirty manually, because redux-form dirty does not work correctly when form is reinitialized
+    const isDirty = useMemo(
+      () =>
+        String(formValues.script) !==
+        String(initialSecretOptions[scriptOption.type]),
+      [formValues, initialSecretOptions, scriptOption],
+    );
+
+    const changeScript = async (option) => {
+      if (option.type === scriptOption.type) return;
+      let switchAllowed = true;
+      if (isDirty) {
+        switchAllowed = false;
+        try {
+          await waitForConfirmation(
+            dispatch,
+            translate('Unsaved changes'),
+            translate(
+              'Switching scripts will discard your changes. Do you want to continue?',
+            ),
+            {
+              size: 'sm',
+              negativeButton: translate('Discard and switch'),
+              positiveButton: translate('Stay on current'),
+            },
+          );
+        } catch {
+          switchAllowed = true;
+        }
+      }
+      if (switchAllowed) {
+        setScriptOption(option);
+        props.initialize({
+          script: initialSecretOptions[option.type],
+        });
+      }
+    };
+
+    // Simulate reset
+    const resetScript = () => {
+      // Since the current script type is the key of MonacoField,
+      // switch it to update the field value and ui
+      const scriptType = scriptOption.type;
+      setScriptOption({ ...scriptOption, type: '' });
+      setTimeout(() => {
+        setScriptOption({ ...scriptOption, type: scriptType });
+      });
+
+      props.reset();
+    };
+
+    const closeDialog = async () => {
+      if (isDirty) {
+        try {
+          await waitForConfirmation(
+            dispatch,
+            translate('Unsaved changes'),
+            translate('Do you want to save or discard changes?'),
+            {
+              size: 'sm',
+              negativeButton: translate('Discard and exit'),
+              positiveButton: translate('Save changes'),
+            },
+          );
+        } catch {
+          dispatch(closeModalDialog());
+          return;
+        }
+        handleSaveAndExit();
+      } else {
+        dispatch(closeModalDialog());
+      }
+    };
+
+    const updateScript = useCallback(
       async (formData) => {
         try {
+          const secret_options = {
+            ...initialSecretOptions,
+            [scriptOption.type]: formData.script ? formData.script : null,
+          } as MergedSecretOptionsRequest;
           await marketplaceProviderOfferingsUpdateIntegration({
             path: { uuid: props.resolve.offering.uuid },
-            body: {
-              secret_options: {
-                ...props.resolve.offering.secret_options,
-                [props.resolve.type]: formData.script,
-              },
-            },
+            body: { secret_options },
           });
+          setInitialSecretOptions(secret_options);
+          props.initialize({ script: formData.script });
           dispatch(
             showSuccess(translate('Script has been updated successfully.')),
           );
           if (props.resolve.refetch) {
             await props.resolve.refetch();
           }
+          return true;
         } catch (error) {
           dispatch(
             showErrorResponse(error, translate('Unable to update script.')),
           );
+          return false;
         }
       },
-      [dispatch, props.resolve],
+      [dispatch, props.resolve, scriptOption, initialSecretOptions],
     );
 
-    const handleSaveButtonClick = () => {
-      props.handleSubmit(update)();
-      dispatch(closeModalDialog());
+    const handleSave = props.handleSubmit(updateScript);
+
+    const handleSaveAndExit = (event?: React.FormEvent<HTMLFormElement>) => {
+      if (event) event.preventDefault();
+      handleSave().then((res) => {
+        if (res) dispatch(closeModalDialog());
+      });
     };
 
     const pollAsyncDryRunResult = async (dryRunUuid: string) => {
@@ -99,17 +192,20 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
       return asyncDryRunResult;
     };
 
-    const handleSaveAndRunScriptButtonClick = async () => {
+    const handleSaveAndRunScript = async () => {
       const planUrl = props.resolve.offering?.plans?.length
         ? props.resolve.offering.plans[0].url
         : null;
-      await props.handleSubmit(update)();
+      // Save the script if it is changed
+      if (isDirty) {
+        await handleSave();
+      }
       try {
         const response: any = await marketplaceScriptDryRunAsyncRun({
           path: { uuid: props.resolve.offering.uuid },
           body: {
             plan: planUrl,
-            type: props.resolve.dry_run,
+            type: scriptOption.dry_run,
           },
         });
 
@@ -122,7 +218,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           dispatch(
             showSuccess(
               translate('{type} script was executed successfully', {
-                type: props.resolve.dry_run,
+                type: scriptOption.dry_run,
               }),
             ),
           );
@@ -133,95 +229,99 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           showErrorResponse(
             e,
             translate('{type} script got an error', {
-              type: props.resolve.dry_run,
+              type: scriptOption.dry_run,
             }),
           ),
         );
       }
-      dispatch(initialize(EDIT_SCRIPT_FORM_ID, formValues));
     };
 
     return (
-      <form>
+      <form onSubmit={handleSaveAndExit} className="script-editor">
         <ModalDialog
-          title={props.resolve.label}
-          actions={
-            props.resolve.type !== 'language' ? (
-              props.resolve.offering.secret_options.language ? (
-                <Button
-                  variant="secondary"
-                  onClick={handleSaveAndRunScriptButtonClick}
-                  disabled={executing}
-                >
-                  {executing && (
-                    <>
-                      <LoadingSpinnerIcon className="me-1" />{' '}
-                    </>
-                  )}
+          title={
+            translate('Manage custom scripts') +
+            (language ? ` (${language})` : '')
+          }
+          closeButton
+          onHide={closeDialog}
+          bodyClassName="py-0"
+          hasFooterPadding
+          extraClassName="editor-header gap-4 py-5"
+          extra={
+            !language ? (
+              <Tip
+                id="resource-action-dialog-disabled-tooltip"
+                label={translate(
+                  'Please select a script language to use dry-run',
+                )}
+              >
+                <Button variant="secondary" disabled>
                   {translate('Save & dry run script')}
                 </Button>
-              ) : (
-                <Tip
-                  label={translate(
-                    'Please select a script language to use dry-run',
-                  )}
-                  id="resource-action-dialog-disabled-tooltip"
-                >
-                  <Button variant="secondary" disabled>
-                    {translate('Save & dry run script')}
-                  </Button>
-                </Tip>
-              )
-            ) : null
+              </Tip>
+            ) : (
+              <ScriptEditorHeader
+                offering={props.resolve.offering}
+                script={scriptOption}
+                onDryRun={handleSaveAndRunScript}
+                onSave={handleSave}
+                onReset={resetScript}
+                onChangeScript={changeScript}
+                submitting={props.submitting}
+                executing={executing}
+                dirty={isDirty}
+              />
+            )
           }
           footer={
-            <>
-              <CloseDialogButton />
-              <SubmitButton
-                disabled={props.invalid}
-                submitting={props.submitting}
-                label={translate('Save')}
-                onClick={handleSaveButtonClick}
-              />
-            </>
+            <div className="flex-grow-1">
+              <AccordionCard
+                title={translate('Console output')}
+                solid
+                className="mb-5"
+                titleClassName="fs-6"
+              >
+                {scriptExecutionResult ? (
+                  <pre className="text-primary mb-0">
+                    {scriptExecutionResult}
+                  </pre>
+                ) : (
+                  <i className="text-muted">{translate('Nothing to show')}</i>
+                )}
+              </AccordionCard>
+              <div className="d-flex justify-content-end gap-2">
+                <Button
+                  variant="outline btn-outline-default"
+                  onClick={closeDialog}
+                  disabled={props.submitting}
+                >
+                  {translate('Cancel')}
+                </Button>
+                <SubmitButton
+                  disabled={props.invalid || !isDirty}
+                  submitting={props.submitting}
+                  label={translate('Save and exit')}
+                />
+              </div>
+            </div>
           }
         >
-          {props.resolve.type === 'language' ? (
-            <Field
-              name="script"
-              options={PROGRAMMING_LANGUAGE_CHOICES}
-              simpleValue={true}
-              required={true}
-              isClearable={false}
-              component={SelectField}
-              className="flex-grow-1"
-            />
-          ) : (
-            <Row>
-              <Col sm={12}>
-                <p>
-                  {translate('Script language: {language}', {
-                    language: props.resolve.offering.secret_options.language,
-                  })}
-                </p>
-                <Field
-                  name="script"
-                  required={true}
-                  language={props.resolve.offering.secret_options.language}
-                  component={MonacoField}
-                />
-
-                {scriptExecutionResult && (
-                  <div className="mt-4">
-                    <h4>{translate('Script execution result')}</h4>
-                    <hr />
-                    <pre>{scriptExecutionResult}</pre>
-                    <hr />
-                  </div>
-                )}
-              </Col>
-            </Row>
-          )}
+          <Card className="card-bordered card-solid">
+            <Card.Header>
+              <h6 className="mb-0">{translate('Code editor')}</h6>
+            </Card.Header>
+            <Card.Body className="p-0">
+              <Field
+                key={scriptOption.type}
+                name="script"
+                required={true}
+                language={props.resolve.offering.secret_options.language}
+                component={MonacoField}
+                height={450}
+              />
+            </Card.Body>
+          </Card>
         </ModalDialog>
       </form>
     );

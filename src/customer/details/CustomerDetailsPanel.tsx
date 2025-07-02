@@ -68,6 +68,13 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
           key: 'country',
           value: props.customer.country_name,
         },
+        user?.is_staff && {
+          label: translate('Maximum number of service accounts'),
+          key: 'max_service_accounts',
+          value: props.customer.max_service_accounts
+            ? props.customer.max_service_accounts
+            : 'N/A',
+        },
       ].filter(Boolean),
     [props.customer, nativeNameVisible],
   );
@@ -90,6 +97,7 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
         value: props.customer.sponsor_number,
       },
     ],
+
     [props.customer],
   );
 
@@ -133,6 +141,7 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
             label={translate('UUID')}
             value={props.customer.uuid}
           />
+
           <FormTable.Item
             label={translate('Slug')}
             value={props.customer.slug}
@@ -146,6 +155,7 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
               ) : null
             }
           />
+
           {identifiersRows.map((row) => (
             <FormTable.Item
               key={row.key}

@@ -1,4 +1,4 @@
-import { Plus } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { groupBy, isEmpty } from 'lodash-es';
 import { Fragment, useCallback, useEffect, useRef } from 'react';
 import { Button, Col, Nav, Row, Tab } from 'react-bootstrap';
@@ -95,7 +95,7 @@ const AllResultsTabContent = ({
               onClick={addCurrentPageFavorite}
             >
               <span className="svg-icon svg-icon-2">
-                <Plus weight="bold" />
+                <PlusIcon weight="bold" />
               </span>
               {translate('Add current page')}
             </Button>
@@ -191,7 +191,7 @@ const AllResultsTabContent = ({
           </>
         ) : null}
         <NoResult
-          isVisible={!result.data?.resultsCount && result.status !== 'loading'}
+          isVisible={!result.data?.resultsCount && result.status !== 'pending'}
           callback={clearSearch}
         />
       </Col>
@@ -232,7 +232,7 @@ const OrganizationsTabContent = ({
       ) : null}
       <NoResult
         isVisible={
-          isEmpty(result.data?.customers) && result.status !== 'loading'
+          isEmpty(result.data?.customers) && result.status !== 'pending'
         }
         callback={clearSearch}
       />
@@ -278,7 +278,7 @@ const ProjectsTabContent = ({
       ) : null}
       <NoResult
         isVisible={
-          isEmpty(result.data?.projects) && result.status !== 'loading'
+          isEmpty(result.data?.projects) && result.status !== 'pending'
         }
         callback={clearSearch}
       />
@@ -333,7 +333,7 @@ const ResourcesTabContent = ({
         </div>
       ) : null}
       <NoResult
-        isVisible={isEmpty(resourceGroups) && result.status !== 'loading'}
+        isVisible={isEmpty(resourceGroups) && result.status !== 'pending'}
         callback={clearSearch}
       />
     </>
@@ -377,6 +377,7 @@ export const SearchPopover = ({
         setQuery={setQuery}
         className="px-5 mb-6 d-lg-none"
       />
+
       <Tab.Container defaultActiveKey="all">
         <div className="overflow-auto">
           <Nav variant="tabs" className="nav-line-tabs flex-nowrap">

@@ -13,6 +13,7 @@ const PureCustomerUsersListFilter: FunctionComponent = () => (
       title={translate('Project role')}
       name="project_role"
       getValueLabel={(value) => value.description || value.name}
+      instantApply={false}
     >
       <ProjectRoleSelectField />
     </TableFilterItem>
@@ -20,6 +21,7 @@ const PureCustomerUsersListFilter: FunctionComponent = () => (
       title={translate('Organization role')}
       name="organization_role"
       getValueLabel={(value) => value.description || value.name}
+      instantApply={false}
     >
       <OrganizationRoleSelectField />
     </TableFilterItem>

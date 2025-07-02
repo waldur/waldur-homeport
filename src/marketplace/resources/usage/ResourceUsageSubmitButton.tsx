@@ -6,7 +6,6 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { ResourceUsageFormProps } from './ResourceUsageForm';
 import { enhance } from './ResourceUsageFormContainer';
-import { UsageReportContext } from './types';
 
 export const ResourceUsageSubmitButton = enhance(
   (props: ResourceUsageFormProps) => (
@@ -18,9 +17,13 @@ export const ResourceUsageSubmitButton = enhance(
       <SubmitButton
         disabled={props.invalid}
         submitting={props.submitting}
-        label={translate('Submit usage report')}
+        label={
+          props.params.userUsage
+            ? translate('Submit')
+            : translate('Submit usage report')
+        }
         className="btn btn-primary flex-equal"
       />
     </form>
   ),
-) as React.ComponentType<{ params: UsageReportContext }>;
+) as React.ComponentType<Pick<ResourceUsageFormProps, 'params'>>;

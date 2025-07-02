@@ -1,4 +1,4 @@
-import { ArrowLeft } from '@phosphor-icons/react';
+import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -78,13 +78,14 @@ export const BroadcastSaveAsTemplateDialog = reduxForm<
             required={true}
             validate={required}
           />
+
           <div className="d-flex justify-content-between">
             <Button
               onClick={() => backToBroadcast(resolve.broadcastData)}
               variant="secondary"
             >
               <span className="svg-icon svg-icon-2">
-                <ArrowLeft />
+                <ArrowLeftIcon />
               </span>{' '}
               {translate('Back')}
             </Button>

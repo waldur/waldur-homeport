@@ -45,6 +45,7 @@ export const CommentFormDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                 variant="outline btn-outline-default"
                 className="flex-equal"
               />
+
               <SubmitButton
                 disabled={props.invalid || props.pristine}
                 submitting={props.submitting}

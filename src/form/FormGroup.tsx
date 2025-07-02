@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import {
   cloneElement,
@@ -24,7 +24,6 @@ export interface FormGroupProps extends FormField {
   actions?: ReactNode;
   quickAction?: ReactNode;
   tooltipEnd?: boolean;
-  containerClassName?: string;
 }
 
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
@@ -62,7 +61,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   const newProps = {
     input,
     ...rest,
-    readOnly: context.readOnlyFields.includes(input.name),
+    readOnly: context.readOnlyFields.includes(input.name) || rest.readOnly,
     onBlur: (event) => {
       if (!props.noUpdateOnBlur) {
         props.input.onBlur(event);
@@ -75,7 +74,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     <Form.Label className={classNames({ required })}>
       {tooltip && !tooltipEnd && (
         <Tip id={'form-field-tooltip-' + input.name} label={tooltip}>
-          <Question weight="bold" size={20} className="text-muted" />{' '}
+          <QuestionIcon weight="bold" size={20} className="text-muted" />{' '}
         </Tip>
       )}
       {label}
@@ -103,7 +102,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
               className="align-self-center ms-2"
               label={tooltip}
             >
-              <Question weight="bold" size={20} className="text-muted" />
+              <QuestionIcon weight="bold" size={20} className="text-muted" />
             </Tip>
           )}
         </div>

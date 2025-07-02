@@ -65,6 +65,7 @@ export const VolumeSnapshotsList: FunctionComponent<{ resourceScope }> = ({
       ]}
       verboseName={translate('snapshots')}
       hasQuery={false}
+      showPageSizeSelector
       tableActions={
         <CreateSnapshotAction resource={resourceScope} refetch={props.fetch} />
       }

@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -45,7 +45,7 @@ export const GlobalProjectCreateButton: FC<{ refetch }> = ({ refetch }) => {
           }),
         )
       }
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
     />
   );

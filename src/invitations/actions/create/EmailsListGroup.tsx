@@ -1,4 +1,4 @@
-import { Plus, Question, Trash } from '@phosphor-icons/react';
+import { PlusIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
@@ -80,7 +80,7 @@ export const EmailsListGroup = ({
                         id="idTooltip"
                       >
                         {' '}
-                        <Question />
+                        <QuestionIcon />
                       </Tip>
                     </td>
                   )}
@@ -138,7 +138,7 @@ export const EmailsListGroup = ({
                             disabled={fields.length === 1}
                           >
                             <span className="svg-icon svg-icon-1x">
-                              <Trash weight="bold" />
+                              <TrashIcon weight="bold" />
                             </span>
                           </Button>
                         </td>
@@ -158,7 +158,7 @@ export const EmailsListGroup = ({
             onClick={addRow}
           >
             <div className="svg-icon svg-icon-2">
-              <Plus weight="bold" />
+              <PlusIcon weight="bold" />
             </div>
             {fields.length > 0
               ? translate('Add another user')

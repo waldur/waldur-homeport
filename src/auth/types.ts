@@ -23,7 +23,6 @@ interface CoreConfiguration {
   INVITATION_USE_WEBHOOKS: boolean;
   DEFAULT_IDP: Pick<IdentityProvider, 'provider' | 'auth_url' | 'client_id'>;
   ANONYMOUS_USER_CAN_VIEW_OFFERINGS: boolean;
-  ENABLE_RESOURCE_END_DATE: boolean;
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;
   MASTERMIND_URL: string;
@@ -72,6 +71,7 @@ interface CoreConfiguration {
   FREEIPA_USERNAME_PREFIX?: string;
   FREEIPA_ENABLED?: boolean;
   KEYCLOAK_ICON: string;
+  RANCHER_USERNAME_INPUT_LABEL: string;
 }
 
 interface OpenStackConfiguration {
@@ -87,12 +87,9 @@ interface MarketplaceOpenStackTenantConfiguration {
 }
 
 interface RancherConfiguration {
-  ROLE_REQUIREMENT: Record<string, { CPU: number; RAM: number }>;
-  MOUNT_POINT_CHOICES: string[];
-  MOUNT_POINT_MIN_SIZE: number;
   SYSTEM_VOLUME_MIN_SIZE: number;
   READ_ONLY_MODE: boolean;
-  MOUNT_POINT_CHOICE_IS_MANDATORY: boolean;
+  DISABLE_AUTOMANAGEMENT_OF_USERS: boolean;
   DISABLE_SSH_KEY_INJECTION: boolean;
   DISABLE_DATA_VOLUME_CREATION: boolean;
 }

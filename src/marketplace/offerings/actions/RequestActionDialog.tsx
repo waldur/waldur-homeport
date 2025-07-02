@@ -6,19 +6,20 @@ import { translate } from '@waldur/i18n';
 import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 export const RequestActionDialog: FunctionComponent<{
   resolve: { offering; offeringRequestMode };
-  close;
-}> = ({ resolve: { offering, offeringRequestMode }, close }) => {
+}> = ({ resolve: { offering, offeringRequestMode } }) => {
   const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
   useEffect(() => {
     if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
-      close();
+      closeDialog();
       dispatch(
         openIssueCreateDialog({
           issue: {

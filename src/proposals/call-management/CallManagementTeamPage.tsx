@@ -44,6 +44,7 @@ export const CallManagementTeamPage = () => {
       render: ({ row }) => renderRoleExpirationDate(row),
     },
   ];
+
   return (
     <Table<GenericPermission>
       {...tableProps}

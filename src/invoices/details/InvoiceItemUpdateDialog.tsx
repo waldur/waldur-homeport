@@ -20,7 +20,14 @@ export const InvoiceItemUpdateDialog = ({
       required: false,
       type: 'string',
     },
+    {
+      name: 'unit_price',
+      label: translate('Unit price'),
+      required: false,
+      type: 'integer',
+    },
   ];
+
   if (resource.billing_type === 'fixed') {
     fields.push({
       name: 'start',
@@ -44,6 +51,7 @@ export const InvoiceItemUpdateDialog = ({
   }
   const initialValues: PatchedInvoiceItemUpdateRequest = {
     article_code: resource.article_code,
+    unit_price: resource.unit_price,
   };
   if (resource.billing_type === 'fixed') {
     initialValues.start = resource.start;

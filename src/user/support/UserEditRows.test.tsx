@@ -141,6 +141,7 @@ describe('UserEditRows', () => {
       ).plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS = [
         'eduGAIN',
       ];
+
       renderComponent({
         ...mockUser,
         registration_method: 'eduGAIN',
@@ -158,6 +159,7 @@ describe('UserEditRows', () => {
         'first_name',
         'email',
       ];
+
       renderComponent();
       expect(screen.getAllByTestId('warning').length).toBe(2);
     });

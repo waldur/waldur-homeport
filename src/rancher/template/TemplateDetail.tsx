@@ -1,5 +1,4 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import Markdown from 'markdown-to-jsx';
 import { useMemo, useCallback, FunctionComponent } from 'react';
 import { Card, Accordion } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,6 +7,7 @@ import { formValueSelector } from 'redux-form';
 import { rancherAppsCreate } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
@@ -107,7 +107,7 @@ export const TemplateDetail: FunctionComponent = () => {
               <Card.Title>{translate('Summary')}</Card.Title>
             </Card.Header>
             <Card.Body>
-              <Markdown>{state.value.version.readme}</Markdown>
+              <SafeMarkdown text={state.value.version.readme} />
             </Card.Body>
           </Accordion.Item>
         )}

@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -17,7 +17,7 @@ export const ActionsField: FC<ActionsFieldProps> = ({ onRemove }) => (
       className="d-flex align-items-center"
     >
       <span className="svg-icon svg-icon-2">
-        <Trash />
+        <TrashIcon />
       </span>{' '}
       {translate('Delete')}
     </Button>

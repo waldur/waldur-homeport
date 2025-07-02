@@ -1,4 +1,4 @@
-import { Eye, EyeSlash } from '@phosphor-icons/react';
+import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useToggle } from 'react-use';
 
@@ -22,9 +22,9 @@ export const UserPassword: React.FC<UserPasswordProps> = (props) => {
         data-testid="toggle-password"
       >
         {showPassword ? (
-          <EyeSlash size={17} data-testid="eye-slash" />
+          <EyeSlashIcon size={17} data-testid="eye-slash" />
         ) : (
-          <Eye size={17} data-testid="eye" />
+          <EyeIcon size={17} data-testid="eye" />
         )}
         &nbsp;
       </button>

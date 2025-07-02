@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { useModal } from '@waldur/modal/hooks';
@@ -26,7 +26,7 @@ export const OpenStackSecurityGroupsLink = ({ items }) => {
   return (
     <button className="btn btn-link btn-flush" onClick={handleOpenDialog}>
       {items.map((item) => item.name).join(', ')}
-      <Question size={17} className="ms-1" />
+      <QuestionIcon size={17} className="ms-1" />
     </button>
   );
 };

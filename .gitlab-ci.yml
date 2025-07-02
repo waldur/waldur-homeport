@@ -20,7 +20,7 @@ include:
 variables:
   COMPONENT_VERSION: "latest"
 
-image: registry.hpc.ut.ee/mirror/library/node:lts-alpine
+image: registry.hpc.ut.ee/mirror/library/node:lts-alpine3.22
 
 cache:
   key: "$CI_COMMIT_REF_NAME"
@@ -107,15 +107,14 @@ Run unit tests:
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
     when: always
+    paths:
+      - junit.xml
     reports:
       junit: junit.xml
-      coverage_report:
-        coverage_format: cobertura
-        path: coverage/cobertura-coverage.xml
 
 Run E2E tests:
   image:
-    name: registry.hpc.ut.ee/mirror/cypress/included:13.15.0
+    name: registry.hpc.ut.ee/mirror/cypress/included:14.5.0
     entrypoint: [""]
   stage: test
   interruptible: true

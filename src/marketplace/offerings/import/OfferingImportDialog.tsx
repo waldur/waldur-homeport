@@ -111,6 +111,7 @@ export const OfferingImportDialog = reduxForm<
           onClick={setStep}
           disabled={submitting}
         />
+
         <WizardTabs
           steps={OFFERING_IMPORT_STEPS}
           currentStep={step}

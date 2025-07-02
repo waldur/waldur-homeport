@@ -10,6 +10,7 @@ import { getStates } from '@waldur/marketplace/resources/list/ResourceStateFilte
 import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
 
 const tenantSerializer = ({ name, backend_id, project_name }) => ({
+  backend_id,
   name: `${project_name} / ${name}`,
   value: `Tenant UUID: ${backend_id}. Name: ${name}`,
 });
@@ -53,6 +54,7 @@ export const fetchOpenstackOptions = async (
 };
 
 const instanceSerializer = ({ name, backend_id, project_name }) => ({
+  backend_id,
   name: `${project_name} / ${name}`,
   value: `Instance UUID: ${backend_id}. Name: ${name}`,
 });

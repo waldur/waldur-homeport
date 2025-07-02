@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { RancherCluster, RancherNode } from 'waldur-js-client';
+import {
+  RancherCluster,
+  RancherNode,
+  RancherNodesListData,
+} from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -9,19 +13,24 @@ import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
+import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
 import { CreateNodeAction } from '../cluster/actions/CreateNodeAction';
 
 import { NodeRoleField } from './NodeRoleField';
 
-export const ClusterNodesList: FunctionComponent<{
-  resourceScope: RancherCluster;
-}> = ({ resourceScope }) => {
+export const ClusterNodesList: FunctionComponent<
+  TableWithPortal<{ resourceScope: RancherCluster }>
+> = ({ resourceScope, portal }) => {
   const filter = useMemo(
-    () => ({
-      cluster_uuid: resourceScope.uuid,
-    }),
+    () =>
+      ({
+        // ManagedRancher marketplace resource scope is a Rancher marketplace resource
+        // and not a Rancher cluster directly because of uniqueness constraint.
+        // We need to use resource_uuid from the scope to filter security groups.
+        cluster_uuid: resourceScope['resource_uuid'] || resourceScope.uuid,
+      }) satisfies RancherNodesListData['query'],
     [resourceScope],
   );
   const props = useTable({
@@ -29,6 +38,7 @@ export const ClusterNodesList: FunctionComponent<{
     fetchData: createFetcher('rancher-nodes'),
     filter,
   });
+
   return (
     <Table<RancherNode>
       {...props}
@@ -66,11 +76,16 @@ export const ClusterNodesList: FunctionComponent<{
         },
       ]}
       verboseName={translate('Kubernetes nodes')}
+      showPageSizeSelector
       tableActions={<CreateNodeAction resource={resourceScope} />}
       rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
       expandableRow={({ row }) => <ResourceSummary resource={row} />}
+      portal={portal}
+      hasActionBar={false}
+      cardBordered={false}
+      fullWidth
     />
   );
 };

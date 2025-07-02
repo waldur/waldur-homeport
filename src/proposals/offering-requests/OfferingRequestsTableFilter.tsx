@@ -31,7 +31,11 @@ const PureOfferingRequestsTableFilter: FunctionComponent<{}> = () => (
     >
       <CallAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
     </TableFilterItem>
-    <TableFilterItem title={translate('Status')} name="state">
+    <TableFilterItem
+      title={translate('Status')}
+      name="state"
+      instantApply={false}
+    >
       <Field
         name="state"
         component={(fieldProps) => (

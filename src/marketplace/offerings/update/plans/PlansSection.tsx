@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
+import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
 import { translate } from '@waldur/i18n';
 import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
 import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
@@ -19,6 +20,7 @@ import { useOfferingAccountingTableTabs } from '../utils';
 
 import { AddPlanButton } from './AddPlanButton';
 import { PlanActions } from './PlanActions';
+import { PlanExpandableRow } from './PlanExpandableRow';
 
 export const PlansSection: FC<OfferingSectionProps> = (props) => {
   const user = useSelector(getUser);
@@ -92,9 +94,21 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
       verboseName={translate('plans')}
       tabs={tableTabs}
       tableActions={
-        canCreatePlan && (
-          <AddPlanButton refetch={tableProps.fetch} offering={props.offering} />
-        )
+        <>
+          <FilteredEventsButton
+            filter={{
+              feature: 'offering_accounting',
+              scope: props.offering.url,
+            }}
+          />
+
+          {canCreatePlan && (
+            <AddPlanButton
+              refetch={tableProps.fetch}
+              offering={props.offering}
+            />
+          )}
+        </>
       }
       rowActions={({ row }) => (
         <PlanActions
@@ -103,6 +117,9 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
           refetch={tableProps.fetch}
           user={user}
         />
+      )}
+      expandableRow={({ row }) => (
+        <PlanExpandableRow row={row} components={props.offering.components} />
       )}
     />
   );

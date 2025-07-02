@@ -46,6 +46,7 @@ export const CallDocumentsCard = ({ call, rowActions, tableActions }) => {
       render: ({ row }) => formatDateTime(row.created),
     },
   ];
+
   return (
     <Table
       {...tableProps}

@@ -1,6 +1,11 @@
 import { FC } from 'react';
+import { FormText } from 'react-bootstrap';
 import { Props as SelectProps } from 'react-select';
 import { Field, Validator } from 'redux-form';
+import {
+  MarketplaceProviderOfferingsListData,
+  MarketplacePublicOfferingsListData,
+} from 'waldur-js-client';
 
 import { FieldError } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -13,8 +18,13 @@ import { AutocompleteField } from '@waldur/marketplace/landing/AutocompleteField
 interface OfferingAutocompleteProps {
   offeringFilter?: object;
   name?: string;
+  field?: (
+    | MarketplacePublicOfferingsListData
+    | MarketplaceProviderOfferingsListData
+  )['query']['field'];
   providerOfferings?: boolean;
   className?: string;
+  description?: string;
   reactSelectProps?: Partial<SelectProps>;
   onChange?(value): any;
   showError?: boolean;
@@ -24,6 +34,7 @@ interface OfferingAutocompleteProps {
 export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
   providerOfferings = true,
   name = 'offering',
+  field,
   ...props
 }) => (
   <Field
@@ -43,6 +54,7 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
                   },
                   prevOptions,
                   page,
+                  field as any,
                 )
               : publicOfferingsAutocomplete(
                   {
@@ -51,6 +63,7 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
                   },
                   prevOptions,
                   page,
+                  field as any,
                 )
           }
           value={fieldProps.input.value}
@@ -58,6 +71,10 @@ export const OfferingAutocomplete: FC<OfferingAutocompleteProps> = ({
           noOptionsMessage={() => translate('No offerings')}
           reactSelectProps={props.reactSelectProps}
         />
+
+        {props.description && (
+          <FormText className="text-muted">{props.description}</FormText>
+        )}
         {props.showError && fieldProps.meta.touched && (
           <FieldError error={fieldProps.meta.error} />
         )}

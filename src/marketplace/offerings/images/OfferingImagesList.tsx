@@ -58,8 +58,12 @@ export const OfferingImagesList: FunctionComponent<{ offering }> = ({
       columns={columns}
       verboseName={translate('Offerings images')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      tableActions={<CreateImageButton offering={offering} />}
-      rowActions={DeleteImageButton}
+      tableActions={
+        <CreateImageButton offering={offering} refetch={tableProps.fetch} />
+      }
+      rowActions={({ row, fetch }) => (
+        <DeleteImageButton row={row} fetch={fetch} offering={offering} />
+      )}
     />
   );
 };

@@ -1,4 +1,4 @@
-import { ChatDots } from '@phosphor-icons/react';
+import { ChatDotsIcon } from '@phosphor-icons/react';
 import { Button } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -25,7 +25,7 @@ export const AddCommentButton = ({
         disabled={disabled}
       >
         <span className="svg-icon svg-icon-1x me-0">
-          <ChatDots weight="bold" />
+          <ChatDotsIcon weight="bold" />
         </span>
       </Button>
     </Tip>

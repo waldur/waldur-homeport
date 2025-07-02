@@ -1,4 +1,4 @@
-import { DownloadSimple } from '@phosphor-icons/react';
+import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useAsync } from 'react-use';
@@ -30,6 +30,7 @@ const onExport = (offeringName: string, rows: PlanComponent[]) => {
     'Amount',
     'Component price',
   ];
+
   const exportRow = (row: PlanComponent) => [
     row.plan_name,
     row.component_name,
@@ -39,6 +40,7 @@ const onExport = (offeringName: string, rows: PlanComponent[]) => {
     row.amount,
     row.price,
   ];
+
   const data = {
     fields,
     data: rows.map((row) => exportRow(row)),
@@ -82,7 +84,7 @@ export const ExportFullPriceList: FunctionComponent<
           onClick={() => onExport(offering.name, components)}
         >
           <span className="svg-icon svg-icon-2">
-            <DownloadSimple weight="bold" />
+            <DownloadSimpleIcon weight="bold" />
           </span>
           {translate('Download full price list')}
         </Button>

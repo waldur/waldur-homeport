@@ -25,19 +25,15 @@ import { PageBarProvider } from '../context';
 import { ORDER_FORM_ID } from '../details/constants';
 import { getMarketplaceFilters } from '../landing/filter/store/selectors';
 import { getDefaultLimits } from '../offerings/utils';
-import {
-  isExperimentalUiComponentsVisible,
-  orderFormDataSelector,
-} from '../utils';
+import { isExperimentalUiComponentsVisible } from '../utils';
 
 import { DeployForm } from './DeployForm';
 import { DeployPageActions } from './DeployPageActions';
 import { DeployPageSidebar } from './DeployPageSidebar';
-import {
-  formCustomerSelector,
-  formProjectSelector,
-  hasStepWithField,
-} from './utils';
+import { orderFormDataSelector } from './selectors';
+import { orderCustomerSelector } from './selectors';
+import { orderProjectSelector } from './selectors';
+import { hasStepWithField } from './utils';
 
 import './DeployPage.scss';
 
@@ -63,8 +59,8 @@ export const BaseDeployPage = ({
 
   const isEdit = useMemo(() => Boolean(props.order), [props]);
 
-  const customer = useSelector(formCustomerSelector);
-  const project = useSelector(formProjectSelector);
+  const customer = useSelector(orderCustomerSelector);
+  const project = useSelector(orderProjectSelector);
 
   const isProjectInactive = useMemo(() => {
     if (project?.end_date) {
@@ -155,7 +151,6 @@ export const BaseDeployPage = ({
         props.change('attributes.subnet_cidr', '192.168.42.0/24');
       }
       if (selectedOffering.type === MARKETPLACE_RANCHER) {
-        props.change('attributes.install_longhorn', false);
         props.change('attributes.nodes', []);
       }
       props.change('limits', {

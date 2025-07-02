@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceResourcesMoveResource, Resource } from 'waldur-js-client';
@@ -12,15 +11,19 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { MoveToProjectAutocomplete } from '../actions/MoveToProjectAutocomplete';
 
 interface MultiMoveDialogOwnProps {
-  rows: Resource[];
-  refetch?(): void;
+  resolve: {
+    rows: Resource[];
+    refetch?(): void;
+  };
 }
 
 interface FormData {
   project: { name: string; customer_name: string; url: string };
 }
 
-const PureMultiMoveDialog: FunctionComponent<any> = (props) => {
+export const MultiMoveDialog = reduxForm<FormData, MultiMoveDialogOwnProps>({
+  form: 'MultiMoveDialog',
+})((props) => {
   const dispatch = useDispatch();
   const submitRequest = (formData: FormData) => {
     Promise.all(
@@ -62,8 +65,4 @@ const PureMultiMoveDialog: FunctionComponent<any> = (props) => {
       </ModalDialog>
     </form>
   );
-};
-
-export const MultiMoveDialog = reduxForm<FormData, MultiMoveDialogOwnProps>({
-  form: 'MultiMoveDialog',
-})(PureMultiMoveDialog);
+});

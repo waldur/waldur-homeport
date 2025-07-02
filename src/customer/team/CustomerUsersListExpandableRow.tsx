@@ -5,6 +5,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 
 import { AddProjectUserButton } from './AddProjectUserButton';
@@ -19,6 +20,7 @@ const RowActions = ({ row, refetch, project }) => {
         project={project}
         refetch={refetch}
       />
+
       <DeleteProjectUserButton
         customer={row}
         project={project}
@@ -38,43 +40,45 @@ export const CustomerUsersListExpandableRow: FunctionComponent<{
       <AddProjectUserButton customer={row} refetch={refetch} />
     </div>
   ) : (
-    <table className="table align-middle gy-0 mb-0">
-      <thead className="border-bottom">
-        <tr>
-          <th className="text-dark">{translate('Project name')}</th>
-          <th />
-          <th className="text-dark w-25">{translate('Role')}</th>
-          <th className="text-dark w-45px">{translate('Expiration time')}</th>
-          <th className="header-actions text-dark">{translate('Actions')}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {row.projects.map((project, index) => (
-          <tr key={index}>
-            <td>
-              <Link
-                state="project.dashboard"
-                params={{ uuid: project.uuid }}
-                label={project.name}
-              />
-            </td>
-            <td />
-            <td>
-              <RoleField row={project} />
-            </td>
-            <td>
-              {project.expiration_time
-                ? formatDateTime(project.expiration_time)
-                : 'N/A'}
-            </td>
-            <td className="row-actions">
-              <div>
-                <RowActions row={row} refetch={refetch} project={project} />
-              </div>
-            </td>
+    <ExpandableContainer hasMultiSelect>
+      <table className="table align-middle gy-0 mb-0">
+        <thead className="border-bottom">
+          <tr>
+            <th className="text-dark">{translate('Project name')}</th>
+            <th />
+            <th className="text-dark w-25">{translate('Role')}</th>
+            <th className="text-dark w-45px">{translate('Expiration time')}</th>
+            <th className="header-actions text-dark">{translate('Actions')}</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {row.projects.map((project, index) => (
+            <tr key={index}>
+              <td>
+                <Link
+                  state="project.dashboard"
+                  params={{ uuid: project.uuid }}
+                  label={project.name}
+                />
+              </td>
+              <td />
+              <td>
+                <RoleField row={project} />
+              </td>
+              <td>
+                {project.expiration_time
+                  ? formatDateTime(project.expiration_time)
+                  : 'N/A'}
+              </td>
+              <td className="row-actions">
+                <div>
+                  <RowActions row={row} refetch={refetch} project={project} />
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </ExpandableContainer>
   );
 };

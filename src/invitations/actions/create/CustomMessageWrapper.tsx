@@ -43,6 +43,7 @@ export const CustomMessageWrapper = () => {
         component={TextField}
         placeholder={translate('Enter custom message') + '...'}
       />
+
       <p className="text-muted mb-0">
         {translate(
           'You can add a message to be attached to the invitation email the users receive.',

@@ -6,6 +6,7 @@ import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { ResourceStateField } from '../list/ResourceStateField';
 
 import { ParentResourceLink } from './ParentResourceLink';
+import { ResourceBackendState } from './ResourceBackendState';
 import { ResourceFlags } from './ResourceFlags';
 
 interface ResourceDetailsHeaderTitleProps {
@@ -24,7 +25,16 @@ export const ResourceDetailsHeaderTitle: FunctionComponent<
           className="text-hover-primary cursor-pointer"
           size={20}
         />
-        <ResourceStateField resource={resource} pill outline hasBullet />
+
+        <ResourceStateField
+          resource={resource}
+          pill
+          outline
+          hasBullet
+          size="sm"
+        />
+
+        <ResourceBackendState resource={resource} />
         <ResourceFlags resource={resource} />
       </div>
       <ParentResourceLink resource={resource} />

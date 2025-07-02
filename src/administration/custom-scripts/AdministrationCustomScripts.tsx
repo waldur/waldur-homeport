@@ -8,10 +8,10 @@ import { translate } from '@waldur/i18n';
 import { SettingsCard } from '../settings/SettingsCard';
 
 export const AdministrationCustomScripts = () => {
-  const { data, error, isLoading, refetch } = useQuery(
-    ['AdministrationCustomScripts'],
-    () => overrideSettingsRetrieve().then((response) => response.data),
-  );
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ['AdministrationCustomScripts'],
+    queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
+  });
 
   if (isLoading) return <LoadingSpinner />;
   if (error)

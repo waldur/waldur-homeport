@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { ConstanceSettings, overrideSettingsRetrieve } from 'waldur-js-client';
+import { overrideSettingsRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -29,10 +29,10 @@ const CountrySelector = lazyComponent(() =>
 
 export const AdministrationBranding = () => {
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useQuery<ConstanceSettings>(
-    ['AdministrationMarketplace'],
-    () => overrideSettingsRetrieve().then((response) => response.data),
-  );
+  const { data, error, isLoading } = useQuery({
+    queryKey: ['AdministrationMarketplace'],
+    queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
+  });
 
   const openCountryDialog = useCallback(() => {
     const countries = data?.COUNTRIES || [];

@@ -18,6 +18,7 @@ export const OfferingTosNotification = ({ offering }) => (
                 label={s}
               />
             ),
+
             pp: (s: string) => (
               <ExternalLink
                 url={offering.privacy_policy_link}

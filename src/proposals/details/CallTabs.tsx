@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -40,7 +40,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
             >
               <Nav.Link disabled className="text-center min-w-60px d-flex">
                 {translate('Public')}
-                <Question size={18} className="ms-1" />
+                <QuestionIcon size={18} className="ms-1" />
               </Nav.Link>
             </Tip>
           </Nav.Item>

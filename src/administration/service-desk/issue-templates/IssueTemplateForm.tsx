@@ -242,11 +242,13 @@ export const IssueTemplateForm = connect<
               simpleValue
               className="col-md-6"
             />
+
             <TextField
               label={translate('Description')}
               name="description"
               required
             />
+
             <Form.Label>{translate('Attachments')}</Form.Label>
             <UploadContainer
               onDrop={onDrop}
@@ -256,6 +258,7 @@ export const IssueTemplateForm = connect<
               maxSize={2 * 1024 * 1024} // 2MB
               accept={ACCEPTED_FILE_TYPES}
             />
+
             <AttachmentsList
               attachments={attachments}
               uploading={pendingFiles}

@@ -84,10 +84,12 @@ const ProjectContainerWithHero = (props) => {
         dropdown: (close) => (
           <ProjectBreadcrumbPopover project={project} close={close} />
         ),
+
         truncate: true,
         active: true,
       },
     ],
+
     [project],
   );
   useBreadcrumbs(breadcrumbItems);

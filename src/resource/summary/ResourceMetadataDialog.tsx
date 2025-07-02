@@ -26,6 +26,7 @@ export const ResourceMetadataDialog = <T extends Resource = any>(
       helpText={translate('Unique ID of a resource within management plugin')}
       hasCopy
     />
+
     {props.resolve.resource.marketplace_resource_uuid && (
       <Field
         label={translate('Marketplace UUID')}
@@ -52,6 +53,7 @@ export const ResourceMetadataDialog = <T extends Resource = any>(
             (props.resolve.resource as OpenStackTenant).internal_network_id
           }
         />
+
         <Field
           label={translate('External network ID')}
           value={

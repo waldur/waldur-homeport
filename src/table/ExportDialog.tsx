@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
@@ -20,20 +20,22 @@ interface ExportDialogProps {
   resolve: {
     table: string;
     format: ExportFormat;
-    ownProps?: any;
+    ownProps?: Partial<TableState>;
   };
 }
 
-export const ExportDialog = connect<{}, {}, ExportDialogProps>(
-  (state: RootState, ownProps) => ({
-    initialValues: {
-      format: ownProps.resolve?.format,
-      withFilters: true,
-      allPages: true,
-    },
-    tableState: state.tables[ownProps.resolve.table],
-  }),
-)(
+export const ExportDialog = connect<
+  { tableState: TableState },
+  {},
+  ExportDialogProps
+>((state: RootState, ownProps) => ({
+  initialValues: {
+    format: ownProps.resolve?.format,
+    withFilters: true,
+    allPages: true,
+  },
+  tableState: state.tables[ownProps.resolve.table],
+}))(
   reduxForm<ExportConfig, ExportDialogProps & { tableState: TableState }>({
     form: 'tableExportForm',
   })((props) => {
@@ -68,11 +70,13 @@ export const ExportDialog = connect<{}, {}, ExportDialogProps>(
               isClearable={false}
               validate={required}
             />
+
             <AwesomeCheckboxField
               name="withFilters"
               label={translate('Apply table filters')}
               hideLabel
             />
+
             <AwesomeCheckboxField
               name="allPages"
               label={
@@ -85,7 +89,7 @@ export const ExportDialog = connect<{}, {}, ExportDialogProps>(
                     className="ms-2"
                     id="tip-export-table-all-page"
                   >
-                    <Question size={20} />
+                    <QuestionIcon size={20} />
                   </Tip>
                 </>
               }

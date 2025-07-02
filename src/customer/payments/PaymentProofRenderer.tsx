@@ -1,4 +1,4 @@
-import { ArrowSquareOut } from '@phosphor-icons/react';
+import { ArrowSquareOutIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Payment } from 'waldur-js-client';
 
@@ -10,7 +10,7 @@ export const PaymentProofRenderer: FunctionComponent<{ row: Payment }> = ({
 }) =>
   row.proof ? (
     <a href={row.proof} target="_blank" rel="noopener noreferrer">
-      {translate('Proof document')} <ArrowSquareOut />
+      {translate('Proof document')} <ArrowSquareOutIcon />
     </a>
   ) : (
     <>{DASH_ESCAPE_CODE}</>

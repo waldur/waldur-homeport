@@ -76,6 +76,7 @@ const PureCommentFormDialog: FC<CommentFormDialogProps> = (props) => {
               variant="outline btn-outline-default"
               className="flex-equal"
             />
+
             <SubmitButton
               submitting={props.submitting}
               disabled={props.invalid || props.submitting}

@@ -271,5 +271,6 @@ export const RemoteActions = ({ offering }) => {
       handler: () => pullRemoteOfferingRobotAccounts(offering.uuid),
     },
   ];
+
   return <ActionsDropdown actions={actions} />;
 };

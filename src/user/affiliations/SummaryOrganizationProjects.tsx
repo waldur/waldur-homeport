@@ -1,4 +1,4 @@
-import { Eye, Plus } from '@phosphor-icons/react';
+import { EyeIcon, PlusIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -26,7 +26,7 @@ const ProjectsListActions = ({ row, fetch }) => {
         ({ row }) => (
           <ActionItem
             title={translate('View details')}
-            iconNode={<Eye weight="bold" />}
+            iconNode={<EyeIcon weight="bold" />}
             action={() =>
               dispatch(
                 openModalDialog(ProjectDetailsDialog, {
@@ -69,7 +69,7 @@ export const SummaryOrganizationProjects = ({ customer }) => {
             <ProjectCreateButton
               customer={customer}
               title={translate('Create project')}
-              iconNode={<Plus weight="bold" />}
+              iconNode={<PlusIcon weight="bold" />}
             />
           }
         />

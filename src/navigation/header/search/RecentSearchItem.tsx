@@ -1,16 +1,18 @@
 import {
-  ArrowClockwise,
-  Buildings,
-  ClipboardText,
-  SquaresFour,
+  ArrowClockwiseIcon,
+  BuildingsIcon,
+  ClipboardTextIcon,
+  SquaresFourIcon,
 } from '@phosphor-icons/react';
 
 import { Link } from '@waldur/core/Link';
+import { useModal } from '@waldur/modal/hooks';
 import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
 
 import { getResourceFilterFromSearchItem } from './utils';
 
 export const RecentSearchItem = ({ item }) => {
+  const { closeDialog } = useModal();
   const { syncResourceFilters } =
     useOrganizationAndProjectFiltersForResources();
 
@@ -23,18 +25,26 @@ export const RecentSearchItem = ({ item }) => {
       params={item.params}
       onClick={() => {
         syncResourceFilters(getResourceFilterFromSearchItem(item));
-        close();
+        closeDialog();
       }}
     >
       {item.type === 'organization' ? (
-        <Buildings size={22} weight="bold" className="text-gray-700 me-4" />
+        <BuildingsIcon size={22} weight="bold" className="text-gray-700 me-4" />
       ) : item.type === 'project' ? (
-        <ClipboardText size={22} weight="bold" className="text-gray-700 me-4" />
+        <ClipboardTextIcon
+          size={22}
+          weight="bold"
+          className="text-gray-700 me-4"
+        />
       ) : (
-        <SquaresFour size={22} weight="bold" className="text-gray-700 me-4" />
+        <SquaresFourIcon
+          size={22}
+          weight="bold"
+          className="text-gray-700 me-4"
+        />
       )}
       <span className="fs-6 fw-semibold flex-grow-1">{item.title}</span>
-      <ArrowClockwise size={20} className="text-dark" />
+      <ArrowClockwiseIcon size={20} className="text-dark" />
     </Link>
   );
 };

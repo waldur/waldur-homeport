@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { ProtectedRound } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ProposalBadge } from '@waldur/proposals/proposal/ProposalBadge';
 import { Call } from '@waldur/proposals/types';
@@ -34,7 +35,17 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
       columns={[
         {
           title: translate('Name'),
-          render: ({ row }) => <>{row.name}</>,
+          render: ({ row }) => (
+            <Link
+              state="call-management.proposal-details"
+              params={{
+                proposal_uuid: row.uuid,
+                uuid: props.call.customer_uuid,
+              }}
+              label={row.name}
+            />
+          ),
+
           copyField: (row) => row.name,
         },
         {
@@ -59,7 +70,6 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
           row={{
             ...row,
             call_uuid: props.call.uuid,
-            call_manager_uuid: props.call.customer_uuid,
           }}
           refetch={tableProps.fetch}
         />

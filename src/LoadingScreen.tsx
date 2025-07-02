@@ -1,4 +1,4 @@
-import { ArrowClockwise, Eye } from '@phosphor-icons/react';
+import { ArrowClockwiseIcon, EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
@@ -37,6 +37,7 @@ export const LoadingScreen: FunctionComponent<{
 
                 {show && (
                   <Modal show={show} onHide={() => setShow(false)}>
+                    {/* @ts-ignore */}
                     <ErrorTraceDialog error={error} />
                   </Modal>
                 )}
@@ -44,7 +45,7 @@ export const LoadingScreen: FunctionComponent<{
                   {error.stack && (
                     <Button variant="btn-default" onClick={() => setShow(true)}>
                       <span className="svg-icon svg-icon-2">
-                        <Eye weight="bold" />
+                        <EyeIcon weight="bold" />
                       </span>
                       {translate('Show error trace')}
                     </Button>
@@ -54,7 +55,7 @@ export const LoadingScreen: FunctionComponent<{
                     onClick={() => location.reload()}
                   >
                     <span className="svg-icon svg-icon-2">
-                      <ArrowClockwise weight="bold" />
+                      <ArrowClockwiseIcon weight="bold" />
                     </span>
                     {translate('Reload')}
                   </Button>

@@ -11,4 +11,5 @@ export interface UsageReportContext {
   customer_name?: string;
   project_name?: string;
   backend_id?: string;
+  userUsage?: boolean;
 }

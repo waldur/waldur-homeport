@@ -30,7 +30,7 @@ export const UserRoleGroup = ({
     let _items: typeof users = [];
     if (role) {
       _items = users.filter((user) => user.role_name === role.name);
-    } else {
+    } else if (Array.isArray(users)) {
       _items = users;
     }
     return _items.map((perm) => ({

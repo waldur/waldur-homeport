@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CustomerUser } from 'waldur-js-client';
@@ -50,7 +50,7 @@ export const UserEditButton: React.FC<UserEditButtonProps> = ({
     <ActionItem
       title={translate('Edit')}
       action={callback}
-      iconNode={<PencilSimple weight="bold" />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
     />
   );
 };

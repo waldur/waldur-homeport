@@ -1,4 +1,4 @@
-import { CaretDown, Check } from '@phosphor-icons/react';
+import { CaretDownIcon, CheckIcon } from '@phosphor-icons/react';
 import { isEqual } from 'lodash-es';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -21,6 +21,9 @@ export interface BoxRadioChoice {
 interface BoxRadioFieldProps extends FormField {
   choices: BoxRadioChoice[];
   vertical?: boolean;
+  hasOptions?: boolean;
+  hasImage?: boolean;
+  rightRadio?: boolean;
 }
 
 const getRadioVersions = (choices: BoxRadioChoice[]) => {
@@ -31,9 +34,15 @@ const getRadioVersions = (choices: BoxRadioChoice[]) => {
   );
 };
 
-export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
-  const { input, choices, ...rest } = props;
-
+export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
+  input,
+  choices,
+  vertical,
+  hasImage = true,
+  hasOptions = true,
+  rightRadio,
+  ...rest
+}) => {
   const [selectedVersions, setSelectedVersions] = useState(() =>
     getRadioVersions(choices),
   );
@@ -61,9 +70,14 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
     MenuComponent.reinitialization();
   }, [choices, setSelectedVersions]);
 
-  if (props.vertical) {
+  if (vertical) {
     return (
-      <div className="form-check-boxes-wrapper vertical">
+      <div
+        className={
+          'form-check-boxes-wrapper vertical' +
+          (rightRadio ? ' right-radio' : '')
+        }
+      >
         {choices.map((choice, index) => {
           const isChecked = [choice.value]
             .concat((choice.options || []).map((x) => x.value))
@@ -85,21 +99,23 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
               }
             >
               <div className="form-check-header">
-                <div className="form-check-wrapper">
-                  {choice.image ? (
-                    choice.image
-                  ) : typeof choice.label === 'string' ? (
-                    <ImagePlaceholder width="48px" height="48px">
-                      {choice.label.toUpperCase().substring(0, 4)}
-                    </ImagePlaceholder>
-                  ) : (
-                    <span className="display-6">
-                      <Check />
-                    </span>
-                  )}
-                </div>
+                {hasImage && (
+                  <div className="form-check-wrapper">
+                    {choice.image ? (
+                      choice.image
+                    ) : typeof choice.label === 'string' ? (
+                      <ImagePlaceholder width="48px" height="48px">
+                        {choice.label.toUpperCase().substring(0, 4)}
+                      </ImagePlaceholder>
+                    ) : (
+                      <span className="display-6">
+                        <CheckIcon />
+                      </span>
+                    )}
+                  </div>
+                )}
                 <div>
-                  <p className="fs-6 fw-bold mb-1">{choice.label}</p>
+                  <p className="fs-6 fw-bold mb-0">{choice.label}</p>
                   {Boolean(choice.metadata) && (
                     <p className="fs-6 fw-semibold text-muted mb-0">
                       {choice.metadata}
@@ -108,16 +124,18 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
                 </div>
               </div>
               <div className="form-check-info">
-                <Select
-                  value={selectedVersions[index]}
-                  onChange={(value) => onChangeSelect(value, index)}
-                  options={choice.options}
-                  getOptionLabel={(option) =>
-                    option.label || translate('Default')
-                  }
-                  className="metronic-select-container"
-                  classNamePrefix="metronic-select"
-                />
+                {hasOptions && (
+                  <Select
+                    value={selectedVersions[index]}
+                    onChange={(value) => onChangeSelect(value, index)}
+                    options={choice.options}
+                    getOptionLabel={(option) =>
+                      option.label || translate('Default')
+                    }
+                    className="metronic-select-container"
+                    classNamePrefix="metronic-select"
+                  />
+                )}
                 <div className="form-check form-check-custom form-check-sm d-block">
                   <input
                     className="form-check-input flex-shrink-0"
@@ -158,7 +176,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
                   choice.label.toUpperCase().substring(0, 4)
                 ) : (
                   <span className="display-6">
-                    <Check />
+                    <CheckIcon />
                   </span>
                 )}
               </div>
@@ -193,7 +211,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = (props) => {
                       </div>
                     </div>
                     <span className="fs-1 fw-light">
-                      <CaretDown />
+                      <CaretDownIcon />
                     </span>
                   </div>
 

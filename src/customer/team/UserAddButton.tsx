@@ -1,4 +1,4 @@
-import { UserPlus } from '@phosphor-icons/react';
+import { UserPlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -55,7 +55,7 @@ export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
           }),
         )
       }
-      iconNode={<UserPlus weight="bold" />}
+      iconNode={<UserPlusIcon weight="bold" />}
       disabled={!canAddUser || !isOwnerOrStaff}
       tooltip={
         !isOwnerOrStaff

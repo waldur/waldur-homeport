@@ -78,6 +78,7 @@ export const UserPermissionRequestsList = () => {
       inlineFilter: (row) => getStates().filter((s) => s.value === row.state),
     },
   ];
+
   return (
     <Table
       {...props}

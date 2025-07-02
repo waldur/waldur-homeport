@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
@@ -33,7 +34,25 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
         ) : (
           'N/A'
         ),
+
       export: 'username',
+    },
+    {
+      title: translate('State'),
+      render: ({ row }) => (
+        <StateIndicator
+          label={row.state}
+          variant={
+            row.state === 'ERRED'
+              ? 'danger'
+              : row.state === 'CREATING' || row.state === 'REQUESTED_DELETION'
+                ? 'warning'
+                : 'primary'
+          }
+          outline
+          pill
+        />
+      ),
     },
   ];
 

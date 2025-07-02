@@ -37,6 +37,7 @@ export const ChecklistOverview: FunctionComponent = () => {
           options={state.checklistOptions}
           isClearable={false}
         />
+
         {state.statsLoading ? (
           <LoadingSpinner />
         ) : state.statsErred ? (

@@ -30,6 +30,7 @@ export const OfferingRequestsListExpandableRow: FunctionComponent<OwnProps> = ({
       value={`${row.created_by_name} / ${row.created_by_email}`}
       isStuck
     />
+
     <Field label={translate('Message')} value={row.description} isStuck />
   </ExpandableContainer>
 );

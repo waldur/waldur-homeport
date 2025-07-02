@@ -1,14 +1,14 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { keysDestroy } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
 
-export const KeyRemoveButton = ({ uuid, refetch }) => {
+export const KeyRemoveButton = ({ row, refetch }) => {
   const dispatch = useDispatch();
   const [pending, setPending] = useState(false);
 
@@ -25,7 +25,7 @@ export const KeyRemoveButton = ({ uuid, refetch }) => {
     }
     try {
       setPending(true);
-      await keysDestroy({ path: { uuid } });
+      await keysDestroy({ path: { uuid: row.uuid } });
       await refetch();
       dispatch(showSuccess(translate('SSH key has been removed.')));
     } catch (e) {
@@ -35,12 +35,13 @@ export const KeyRemoveButton = ({ uuid, refetch }) => {
   };
 
   return (
-    <ActionButton
+    <ActionItem
       title={translate('Remove')}
       action={action}
-      pending={pending}
-      iconNode={<Trash />}
       disabled={pending}
+      iconNode={<TrashIcon />}
+      className="text-danger"
+      iconColor="danger"
     />
   );
 };

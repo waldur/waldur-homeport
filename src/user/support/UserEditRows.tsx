@@ -8,7 +8,11 @@ import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { formatUserStatus } from '@waldur/user/support/utils';
-import { getUser, isStaffOrSupport } from '@waldur/workspace/selectors';
+import {
+  getUser,
+  isStaffOrSupport,
+  isStaff,
+} from '@waldur/workspace/selectors';
 
 import { ChangeEmailButton } from './ChangeEmailButton';
 import { UserEditRow } from './UserEditRow';
@@ -28,12 +32,13 @@ const fieldIsProtected = (user: User, field: string) =>
     ENV.plugins.WALDUR_CORE.PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS || []
   ).includes(user.registration_method);
 
-const FirstNameRow = ({ user, isSelf }) => (
+const FirstNameRow = ({ user, disabled, isSelf }) => (
   <UserEditRow
     user={user}
     label={translate('First name')}
     name="first_name"
     value={user.first_name}
+    disabled={disabled}
     description={
       isSelf
         ? translate('Display your first name on your profile')
@@ -48,12 +53,13 @@ const FirstNameRow = ({ user, isSelf }) => (
   />
 );
 
-const LastNameRow = ({ user, isSelf }) => (
+const LastNameRow = ({ user, disabled, isSelf }) => (
   <UserEditRow
     user={user}
     label={translate('Last name')}
     name="last_name"
     value={user.last_name}
+    disabled={disabled}
     description={
       isSelf
         ? translate('Display your last name on your profile')
@@ -68,7 +74,7 @@ const LastNameRow = ({ user, isSelf }) => (
   />
 );
 
-const NativeNameRow = ({ user, isSelf }) => {
+const NativeNameRow = ({ user, disabled, isSelf }) => {
   const nativeNameIsVisible = useSelector(getNativeNameVisible);
   return nativeNameIsVisible ? (
     <UserEditRow
@@ -76,6 +82,7 @@ const NativeNameRow = ({ user, isSelf }) => {
       label={translate('Native name')}
       name="native_name"
       value={user.native_name}
+      disabled={disabled}
       requiredMsg={
         isRequired('native_name')
           ? getDefaultRequiredMsg(translate('native name'), isSelf)
@@ -86,12 +93,39 @@ const NativeNameRow = ({ user, isSelf }) => {
   ) : null;
 };
 
-const PhoneNumberRow = ({ user, isSelf }) => (
+const NotificationsEnabledRow = ({ user, disabled, isSelf }) => {
+  const isStaffUser = useSelector(isStaff);
+  return (
+    <UserEditRow
+      user={user}
+      label={translate('Notifications')}
+      name="notifications_enabled"
+      value={
+        user.notifications_enabled
+          ? translate('Enabled')
+          : translate('Disabled')
+      }
+      disabled={disabled || !isStaffUser}
+      description={
+        isSelf
+          ? translate(
+              'Enable or disable notifications for your account (Staff only)',
+            )
+          : translate(
+              'Enable or disable notifications for this user (Staff only)',
+            )
+      }
+    />
+  );
+};
+
+const PhoneNumberRow = ({ user, disabled, isSelf }) => (
   <UserEditRow
     user={user}
     label={translate('Phone number')}
     name="phone_number"
     value={user.phone_number}
+    disabled={disabled}
     protected={fieldIsProtected(user, 'phone_number')}
     requiredMsg={
       isRequired('phone_number')
@@ -108,12 +142,13 @@ const PhoneNumberRow = ({ user, isSelf }) => (
   />
 );
 
-const EmailRow = ({ user, isSelf }) => (
+const EmailRow = ({ user, disabled, isSelf }) => (
   <UserEditRow
     user={user}
     label={translate('Email')}
     name="email"
     value={user.email}
+    disabled={disabled}
     protected={fieldIsProtected(user, 'email')}
     requiredMsg={
       isRequired('email')
@@ -132,25 +167,26 @@ const EmailRow = ({ user, isSelf }) => (
     }
     actions={
       !fieldIsProtected(user, 'email') ? (
-        <ChangeEmailButton user={user} />
+        <ChangeEmailButton user={user} disabled={disabled} />
       ) : null
     }
   />
 );
 
-const DateJoinedRow = ({ user }) => (
+const DateJoinedRow = ({ user, disabled }) => (
   <UserEditRow
     user={user}
     label={translate('Date joined')}
     name="date_joined"
     value={formatDateTime(user.date_joined)}
+    disabled={disabled}
     protected={true}
     protectedMsg={translate('Read-only field')}
     description={translate('The date the user has joined')}
   />
 );
 
-const UserTypeRow = ({ user, isSelf }) => {
+const UserTypeRow = ({ user, disabled, isSelf }) => {
   const visible = useSelector(isStaffOrSupport);
   return visible ? (
     <UserEditRow
@@ -158,6 +194,7 @@ const UserTypeRow = ({ user, isSelf }) => {
       label={translate('User type')}
       name="type"
       value={formatUserStatus(user)}
+      disabled={disabled}
       protected={true}
       description={
         isSelf
@@ -168,23 +205,25 @@ const UserTypeRow = ({ user, isSelf }) => {
   ) : null;
 };
 
-const CivilNumberRow = ({ user }) =>
+const CivilNumberRow = ({ user, disabled }) =>
   user.civil_number ? (
     <UserEditRow
       user={user}
       label={translate('ID code')}
       name="civil_number"
       value={user.civil_number}
+      disabled={disabled}
       protected={true}
     />
   ) : null;
 
-const OrganizationRow = ({ user, isSelf }) => (
+const OrganizationRow = ({ user, disabled, isSelf }) => (
   <UserEditRow
     user={user}
     label={translate('Organization name')}
     name="organization"
     value={user.organization}
+    disabled={disabled}
     protected={fieldIsProtected(user, 'organization')}
     description={
       isSelf
@@ -198,12 +237,13 @@ const OrganizationRow = ({ user, isSelf }) => (
   />
 );
 
-const JobTitleRow = ({ user, isSelf }) => (
+const JobTitleRow = ({ user, disabled, isSelf }) => (
   <UserEditRow
     user={user}
     label={translate('Job position')}
     name="job_title"
     value={user.job_title}
+    disabled={disabled}
     protected={fieldIsProtected(user, 'job_title')}
     description={
       isSelf
@@ -215,18 +255,19 @@ const JobTitleRow = ({ user, isSelf }) => (
   />
 );
 
-const AffiliationsRow = ({ user }) =>
+const AffiliationsRow = ({ user, disabled }) =>
   Array.isArray(user.affiliations) && user.affiliations.length > 0 ? (
     <UserEditRow
       user={user}
       label={translate('Affiliations')}
       name="affiliations"
       value={user.affiliations.join(', ')}
+      disabled={disabled}
       protected={true}
     />
   ) : null;
 
-const DescriptionRow = ({ user, isSelf }) => {
+const DescriptionRow = ({ user, disabled, isSelf }) => {
   const visible = useSelector(isStaffOrSupport);
   return visible ? (
     <UserEditRow
@@ -234,6 +275,7 @@ const DescriptionRow = ({ user, isSelf }) => {
       label={translate('Description')}
       name="description"
       value={user.description}
+      disabled={disabled}
       description={translate(
         'Additional account description invisible to user',
       )}
@@ -246,36 +288,48 @@ const DescriptionRow = ({ user, isSelf }) => {
   ) : null;
 };
 
-const ShortnameRow = ({ user, currentUser }) =>
+const ShortnameRow = ({ user, disabled, currentUser }) =>
   isFeatureVisible(UserFeatures.show_slug) ? (
     <UserEditRow
       user={user}
       label={translate('Shortname')}
       name="slug"
       value={user.slug}
+      disabled={disabled}
       protected={!currentUser.is_staff}
     />
   ) : null;
 
-export const UserEditRows = ({ user }: { user: User }) => {
+export const UserEditRows = ({
+  user,
+  disabled,
+}: {
+  user: User;
+  disabled?: boolean;
+}) => {
   const currentUser = useSelector(getUser);
   const isSelf = currentUser.uuid === user.uuid;
 
   return (
     <>
-      <FirstNameRow user={user} isSelf={isSelf} />
-      <LastNameRow user={user} isSelf={isSelf} />
-      <NativeNameRow user={user} isSelf={isSelf} />
-      <PhoneNumberRow user={user} isSelf={isSelf} />
-      <EmailRow user={user} isSelf={isSelf} />
-      <DateJoinedRow user={user} />
-      <UserTypeRow user={user} isSelf={isSelf} />
-      <CivilNumberRow user={user} />
-      <OrganizationRow user={user} isSelf={isSelf} />
-      <JobTitleRow user={user} isSelf={isSelf} />
-      <AffiliationsRow user={user} />
-      <DescriptionRow user={user} isSelf={isSelf} />
-      <ShortnameRow user={user} currentUser={currentUser} />
+      <FirstNameRow user={user} isSelf={isSelf} disabled={disabled} />
+      <LastNameRow user={user} isSelf={isSelf} disabled={disabled} />
+      <NativeNameRow user={user} isSelf={isSelf} disabled={disabled} />
+      <PhoneNumberRow user={user} isSelf={isSelf} disabled={disabled} />
+      <EmailRow user={user} isSelf={isSelf} disabled={disabled} />
+      <DateJoinedRow user={user} disabled={disabled} />
+      <UserTypeRow user={user} isSelf={isSelf} disabled={disabled} />
+      <CivilNumberRow user={user} disabled={disabled} />
+      <OrganizationRow user={user} isSelf={isSelf} disabled={disabled} />
+      <JobTitleRow user={user} isSelf={isSelf} disabled={disabled} />
+      <AffiliationsRow user={user} disabled={disabled} />
+      <DescriptionRow user={user} isSelf={isSelf} disabled={disabled} />
+      <ShortnameRow user={user} currentUser={currentUser} disabled={disabled} />
+      <NotificationsEnabledRow
+        user={user}
+        isSelf={isSelf}
+        disabled={disabled}
+      />
     </>
   );
 };

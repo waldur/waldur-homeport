@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { marketplacePlansArchive } from 'waldur-js-client';
@@ -35,7 +35,7 @@ export const ArchivePlanButton = ({ plan, refetch }) => {
   };
   return (
     <Dropdown.Item onClick={handler}>
-      <Trash size={18} /> {translate('Archive')}
+      <TrashIcon size={18} /> {translate('Archive')}
     </Dropdown.Item>
   );
 };

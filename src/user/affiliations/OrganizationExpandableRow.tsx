@@ -87,12 +87,14 @@ export const OrganizationExpandableRow: FC<OwnProps> = (props) => {
               count={projectsCount.data}
               countLoading={projectsCount.isLoading}
             />
+
             <NavItem
               title={translate('Resources')}
               eventKey="resources"
               count={resourcesCount.data}
               countLoading={resourcesCount.isLoading}
             />
+
             {canListUsers && (
               <NavItem
                 title={translate('Team')}

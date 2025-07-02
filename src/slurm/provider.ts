@@ -6,20 +6,9 @@ const SlurmForm = lazyComponent(() =>
   import('./SlurmForm').then((module) => ({ default: module.SlurmForm })),
 );
 
-const SlurmRemoteForm = lazyComponent(() =>
-  import('./SlurmForm').then((module) => ({ default: module.SlurmRemoteForm })),
-);
-
 export const SlurmProviderConfig: ProviderConfig = {
   name: 'Batch processing',
   type: 'SLURM',
   icon,
   component: SlurmForm,
-};
-
-export const SlurmRemoteProviderConfig: ProviderConfig = {
-  name: 'Batch processing (agent)',
-  type: 'SLURM remote',
-  icon,
-  component: SlurmRemoteForm,
 };

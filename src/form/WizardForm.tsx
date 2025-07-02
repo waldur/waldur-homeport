@@ -1,3 +1,4 @@
+import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -9,6 +10,7 @@ import { translate } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import './wizard.scss';
 
@@ -18,13 +20,15 @@ export interface WizardFormStepProps
   onSubmit(formData, dispatch, formProps): Promise<any> | void;
   submitLabel: string;
   submitDisabled?: boolean;
+  submitTooltip?: ReactNode;
   steps: ProgressStep[];
   step: number;
-  onPrev(): void;
+  onPrev(values: any): void;
   onStep?(step: number): void;
   validate?(values: any): any;
   data?: any;
   reinitialize(): void;
+  modalProps?: Record<string, any>;
 }
 
 interface WizardFormProps extends WizardFormStepProps, InjectedFormProps {
@@ -33,7 +37,7 @@ interface WizardFormProps extends WizardFormStepProps, InjectedFormProps {
   submit(): void;
 }
 
-const WizardFormPure: FC<WizardFormProps> = (props) => {
+const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
   useEffect(() => {
     // Touch the form at the beginning to avoid going to the next step without a validation
     props.reinitialize();
@@ -48,26 +52,33 @@ const WizardFormPure: FC<WizardFormProps> = (props) => {
         title={props.title}
         footer={
           <>
-            {props.step == 0 ? (
-              <CloseDialogButton className="min-w-125px" />
-            ) : (
+            {props.step > 0 && (
               <Button
-                variant="secondary"
-                className="min-w-125px"
-                onClick={props.onPrev}
+                variant="outline btn-outline-default"
+                className="min-w-125px me-auto"
+                onClick={() => props.onPrev(formValues)}
               >
-                {translate('Previous')}
+                <span className="svg-icon svg-icon-4">
+                  <CaretLeftIcon weight="bold" />
+                </span>
+                {translate('Back')}
               </Button>
             )}
-            <SubmitButton
-              submitting={props.submitting}
-              label={props.submitLabel}
-              invalid={props.submitDisabled}
-              className="min-w-125px"
-            />
+            <CloseDialogButton className="min-w-125px" />
+            {wrapTooltip(
+              props.submitTooltip,
+              <SubmitButton
+                submitting={props.submitting}
+                label={props.submitLabel}
+                invalid={props.submitDisabled}
+                className="min-w-125px"
+              />,
+            )}
           </>
         }
         closeButton
+        hasHeaderPadding
+        {...(modalProps || {})}
       >
         <div className="wizard-big wizard-body clearfix">
           <StepsList
@@ -85,6 +96,7 @@ const WizardFormPure: FC<WizardFormProps> = (props) => {
               }
             }}
           />
+
           <div className="content clearfix">
             {typeof props.children === 'function'
               ? props.children({ ...props, formValues })

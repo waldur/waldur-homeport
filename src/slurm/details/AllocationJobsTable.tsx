@@ -31,6 +31,7 @@ export const AllocationJobsTable: FunctionComponent<{ resourceScope }> = ({
       render: ({ row }) => <ResourceState resource={row} />,
     },
   ];
+
   const filter = useMemo(
     () => ({
       allocation_uuid: resourceScope.uuid,

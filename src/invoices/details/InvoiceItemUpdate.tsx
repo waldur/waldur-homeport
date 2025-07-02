@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -13,7 +13,7 @@ const InvoiceItemUpdateDialog = lazyComponent(() =>
 export const InvoiceItemUpdate = ({ item, refreshInvoiceItems }) => (
   <DialogActionItem
     title={translate('Edit item')}
-    iconNode={<PencilSimple weight="bold" />}
+    iconNode={<PencilSimpleIcon weight="bold" />}
     modalComponent={InvoiceItemUpdateDialog}
     resource={item}
     extraResolve={{ refreshInvoiceItems }}

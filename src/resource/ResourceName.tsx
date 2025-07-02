@@ -1,4 +1,4 @@
-import { Warning } from '@phosphor-icons/react';
+import { WarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
@@ -50,7 +50,7 @@ const ResourceWarning = (props: ResourceNameProps) =>
       label={translate('Provider does not comply with project policies')}
     >
       {' '}
-      <Warning className="text-muted" />
+      <WarningIcon className="text-muted" />
     </Tip>
   ) : null;
 
@@ -69,6 +69,7 @@ export const ResourceName = (props: ResourceNameProps) =>
         uuid={props.resource.marketplace_uuid}
         label={<ResourceIcon resource={props.resource} />}
       />
+
       <ResourceWarning resource={props.resource} />
     </>
   ) : (

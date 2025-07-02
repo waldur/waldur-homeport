@@ -4,11 +4,11 @@ import { ProviderOfferingDetails } from 'waldur-js-client';
 import { FormTableItemProps } from '@waldur/form/FormTable';
 
 export interface ScriptEditorProps {
-  offering;
-  type;
-  dry_run;
-  label;
-  refetch;
+  offering: ProviderOfferingDetails;
+  type: string;
+  dry_run: string;
+  label: string;
+  refetch: () => Promise<any>;
 }
 
 export interface ProviderConfig {

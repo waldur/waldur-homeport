@@ -6,6 +6,7 @@ import { FormField } from './types';
 interface EmailFieldProps extends FormField {
   maxLength?: number;
   solid?: boolean;
+  placeholder?: string;
 }
 
 export const EmailField: FunctionComponent<EmailFieldProps> = (props) => {

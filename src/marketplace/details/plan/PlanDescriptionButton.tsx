@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -38,7 +38,7 @@ export const PlanDescriptionButton = (props: PlanDescriptionButtonProps) => {
     <ActionButton
       title={translate('View details')}
       action={handleClick}
-      iconNode={<Eye weight="bold" />}
+      iconNode={<EyeIcon weight="bold" />}
       className={props.className}
     />
   );

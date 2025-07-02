@@ -1,4 +1,4 @@
-import { X } from '@phosphor-icons/react';
+import { XIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
@@ -41,7 +41,7 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
       title={translate('Destroy')}
       action={callback}
       disabled={validResources.length !== rows.length}
-      iconNode={<X weight="bold" />}
+      iconNode={<XIcon weight="bold" />}
       iconColor="danger"
       className="text-danger"
     />

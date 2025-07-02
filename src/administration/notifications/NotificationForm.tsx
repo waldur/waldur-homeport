@@ -1,4 +1,4 @@
-import { ArrowCounterClockwise } from '@phosphor-icons/react';
+import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
 import { Button, Tab, Tabs } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
@@ -26,6 +26,7 @@ const renderFields = ({ fields }) => {
               placeholder={template.original_content}
               validate={required}
             />
+
             <div className="mt-1 text-end">
               <Button
                 onClick={() =>
@@ -38,7 +39,7 @@ const renderFields = ({ fields }) => {
                 size="sm"
               >
                 <span className="svg-icon svg-icon-2">
-                  <ArrowCounterClockwise />
+                  <ArrowCounterClockwiseIcon />
                 </span>{' '}
                 {translate('Reset')}
               </Button>

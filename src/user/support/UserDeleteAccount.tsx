@@ -1,64 +1,45 @@
-import { Trash } from '@phosphor-icons/react';
-import { FC, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
 
-const UserRemovalMessageDialog = lazyComponent(() =>
-  import('./UserRemovalMessageDialog').then((module) => ({
-    default: module.UserRemovalMessageDialog,
-  })),
-);
+import { DangerActionPanel } from './DangerActionPanel';
 
-export const UserDeleteAccount: FC<{ user: User }> = ({ user }) => {
-  const dispatch = useDispatch();
-  const [confirm, setConfirm] = useState(false);
-  const showUserRemoval = () =>
-    dispatch(
-      openModalDialog(UserRemovalMessageDialog, {
-        resolve: {
-          supportEmail: ENV.plugins.WALDUR_CORE.SITE_EMAIL,
-          userName: user.full_name,
-        },
-      }),
-    );
-
-  return (
-    <Panel
-      title={translate('Delete account')}
-      cardBordered
-      actions={
-        <Button
-          variant="light-danger"
-          onClick={showUserRemoval}
-          disabled={!confirm}
-        >
-          <span className="svg-icon svg-icon-2">
-            <Trash weight="bold" />
-          </span>
-          {translate('Request deletion')}
-        </Button>
-      }
-    >
+export const UserDeleteAccount: FC<{ user: User }> = ({ user }) => (
+  <DangerActionPanel
+    panelTitle={translate('Delete account')}
+    buttonTitle={translate('Request deletion')}
+    panelDescription={
       <ul className="text-gray-500 mb-7">
         <li>{translate('Permanently delete your account.')}</li>
         <li>{translate('This action cannot be undone.')}</li>
       </ul>
-      <Form.Check
-        id="confirm-deletion"
-        type="checkbox"
-        checked={confirm}
-        onChange={(value) => setConfirm(value.target.checked)}
-        label={translate(
-          'I confirm that I understand the impact and want to delete my account',
-        )}
-      />
-    </Panel>
-  );
-};
+    }
+    checkboxLabel={translate(
+      'I confirm that I understand the impact and want to delete my account',
+    )}
+    issueSummary={translate('Account deletion')}
+    sucessMessage={translate('Request for account deletion has been created.')}
+    dialogTitle={translate('Request account removal for {userName}.', {
+      userName: user.full_name,
+    })}
+    dialogSubtitle={translate(
+      'Why would you want to go away? Help us become better please!',
+    )}
+    fallbackMessage={
+      <>
+        <p>
+          {translate('To remove account, please send a request to {support}.', {
+            support: ENV.plugins.WALDUR_CORE.SITE_EMAIL || translate('support'),
+          })}
+        </p>
+        <p>
+          {translate(
+            'Please note that request should specify user name and provide a reason.',
+          )}
+        </p>
+      </>
+    }
+  />
+);

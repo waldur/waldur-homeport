@@ -1,4 +1,4 @@
-import { Warning } from '@phosphor-icons/react';
+import { WarningIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -16,7 +16,7 @@ export const CustomerActions = ({ customer }) => {
           className="btn btn-secondary"
         >
           <span className="svg-icon svg-icon-2">
-            <Warning weight="bold" />
+            <WarningIcon weight="bold" />
           </span>
           {translate('Requests')}
         </Link>

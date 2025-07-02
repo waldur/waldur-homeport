@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 
 import { formatRelative } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
 import { ProposalReview } from '@waldur/proposals/types';
 
 import { ReviewComment } from './ReviewComment';
@@ -26,10 +25,8 @@ export const FieldReviewComments = ({
   if (!reviews) return null;
   const items = reviews
     .filter(Boolean)
-    .map((review, i) => ({
-      reviewer:
-        review.reviewer_full_name ||
-        translate('Reviewer {number}', { number: i + 1 }),
+    .map((review) => ({
+      reviewer: review.reviewer_full_name || review.anonymous_reviewer_name,
       comment: review[fieldName],
       score: hasScore ? review.summary_score : undefined,
       time: review.review_end_date

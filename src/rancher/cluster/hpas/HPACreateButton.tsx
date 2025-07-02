@@ -1,4 +1,4 @@
-import { PlusCircle } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { RancherCluster } from 'waldur-js-client';
@@ -26,7 +26,7 @@ export const HPACreateButton: FunctionComponent<{
     <ActionButton
       title={translate('Create')}
       action={callback}
-      iconNode={<PlusCircle weight="bold" />}
+      iconNode={<PlusCircleIcon weight="bold" />}
     />
   );
 };

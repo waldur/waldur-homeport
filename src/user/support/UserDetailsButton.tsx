@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -19,7 +19,7 @@ export const UserDetailsButton: FunctionComponent<{ row }> = ({ row }) => {
     <ActionItem
       title={translate('Details')}
       size="sm"
-      iconNode={<Eye weight="bold" />}
+      iconNode={<EyeIcon weight="bold" />}
       action={() =>
         dispatch(
           openModalDialog(UserDetailsDialog, {

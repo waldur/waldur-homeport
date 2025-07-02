@@ -1,4 +1,4 @@
-import { Link, UsersThree } from '@phosphor-icons/react';
+import { LinkIcon, UsersThreeIcon } from '@phosphor-icons/react';
 import { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -63,7 +63,7 @@ export const GroupInvitationCreateDialog = reduxForm<
     <form onSubmit={handleSubmit(createInvitation)}>
       <ModalDialog
         title={translate('Create group invitation')}
-        iconNode={<UsersThree weight="bold" />}
+        iconNode={<UsersThreeIcon weight="bold" />}
         iconColor="success"
         closeButton
       >
@@ -76,7 +76,7 @@ export const GroupInvitationCreateDialog = reduxForm<
             invalid={Boolean(invitation)}
           >
             <span className="svg-icon svg-icon-2">
-              <Link weight="bold" />
+              <LinkIcon weight="bold" />
             </span>
             {translate('Generate link')}
           </SubmitButton>

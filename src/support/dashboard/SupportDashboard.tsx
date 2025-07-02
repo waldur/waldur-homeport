@@ -19,11 +19,11 @@ import { getUser } from '@waldur/workspace/selectors';
 import { SupportStatistics } from './SupportStatistics';
 
 export const SupportDashboard: FC = () => {
-  const { data, isLoading, error, refetch } = useQuery(
-    ['HealthStatus'],
-    () => getBackendHealthStatus(),
-    { staleTime: 5 * 60 * 1000 },
-  );
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['HealthStatus'],
+    queryFn: () => getBackendHealthStatus(),
+    staleTime: 5 * 60 * 1000,
+  });
 
   const healthy = isWorking(data);
   const isSupportEnabled = ENV.plugins.WALDUR_SUPPORT?.ENABLED;

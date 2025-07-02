@@ -1,4 +1,4 @@
-import { ShoppingCart } from '@phosphor-icons/react';
+import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect } from 'react';
 
@@ -78,7 +78,7 @@ export const UnifiedSidebar = () => {
             ? state.name
             : undefined
         }
-        icon={<ShoppingCart weight="bold" />}
+        icon={<ShoppingCartIcon weight="bold" />}
         title={translate('Marketplace')}
         state="public.marketplace-landing"
         child={false}

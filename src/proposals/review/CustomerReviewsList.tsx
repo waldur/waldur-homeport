@@ -9,10 +9,7 @@ import { translate } from '@waldur/i18n';
 import { EndingField } from '@waldur/proposals/EndingField';
 import { ReviewsTableFilter } from '@waldur/proposals/review/ReviewsTableFilter';
 import { ProposalReview } from '@waldur/proposals/types';
-import {
-  formatReviewState,
-  getReviewStateOptions,
-} from '@waldur/proposals/utils';
+import { getReviewStateOptions } from '@waldur/proposals/utils';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -20,6 +17,7 @@ import { USER_REVIEWS_FILTER_FORM_ID } from '@waldur/user/constants';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ReviewsRowActions } from './ReviewsRowActons';
+import { ReviewStateRenderer } from './ReviewStateRenderer';
 
 const filtersSelector = createSelector(
   getCustomer,
@@ -81,6 +79,7 @@ export const CustomerReviewsList: FC<{}> = () => {
               label={row.call_name}
             />
           ),
+
           filter: 'call',
           inlineFilter: (row) => ({ name: row.call_name, uuid: row.call_uuid }),
           keys: ['call_name'],
@@ -101,7 +100,8 @@ export const CustomerReviewsList: FC<{}> = () => {
         },
         {
           title: translate('State'),
-          render: ({ row }) => <>{formatReviewState(row.state)}</>,
+          render: ReviewStateRenderer,
+
           filter: 'state',
           inlineFilter: (row) =>
             getReviewStateOptions().filter((s) => s.value === row.state),

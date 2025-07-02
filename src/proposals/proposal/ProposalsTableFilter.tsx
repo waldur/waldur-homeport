@@ -23,7 +23,11 @@ export const ProposalsTableFilter = reduxForm({
   useReinitializeFilterFromUrl(PROPOSALS_FILTER_FORM_ID, props.initialValues);
   return (
     <>
-      <TableFilterItem title={translate('State')} name="state">
+      <TableFilterItem
+        title={translate('State')}
+        name="state"
+        instantApply={false}
+      >
         <Field
           name="state"
           component={(fieldProps) => (

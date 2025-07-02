@@ -144,7 +144,17 @@ export const ConfigurationEditDialog = reduxForm<
             <MonacoField
               name="value"
               language="json"
-              format={(value) => (value ? JSON.stringify(value, null, 2) : '')}
+              format={(value) => {
+                if (!value) return '';
+                if (typeof value === 'object') {
+                  try {
+                    return JSON.stringify(value, null, 2);
+                  } catch {
+                    return '';
+                  }
+                }
+                return value;
+              }}
               height={100}
               label={item.description}
             />

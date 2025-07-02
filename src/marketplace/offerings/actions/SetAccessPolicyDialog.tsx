@@ -9,12 +9,16 @@ import { SetAccessPolicyDialogForm } from '@waldur/marketplace/offerings/actions
 import { Offering, Plan } from '@waldur/marketplace/types';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
-interface SetAccessPolicyDialogProps {
+export interface SetAccessPolicyDialogProps {
   resolve: {
     plan?: Plan;
     offering?: Offering;
     customer?: Customer;
     refetch: any;
+    organizationGroups?;
+    loading?: boolean;
+    error?: boolean;
+    refetchGroups?: () => void;
   };
 }
 

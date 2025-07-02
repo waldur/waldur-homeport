@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { ProgressBar } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
@@ -22,7 +22,7 @@ const CellDescription = ({
     {description && (
       <>
         <Tip id="quota" label={description} className="aligned-tip">
-          <Question />
+          <QuestionIcon />
         </Tip>{' '}
       </>
     )}
@@ -58,6 +58,7 @@ export const QuotaCell = ({
         description={description}
         units={units}
       />
+
       <ProgressBar
         variant={percent < 33 ? 'primary' : percent < 66 ? 'warning' : 'danger'}
         now={percent}

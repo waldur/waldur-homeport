@@ -56,6 +56,7 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
               actions={
                 <UpdateResourceOptionButton
                   resource={props.resource}
+                  offering={props.offering}
                   refetch={props.refetch}
                   option={option}
                 />

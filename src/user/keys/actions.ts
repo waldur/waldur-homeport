@@ -8,4 +8,4 @@ const KeyCreateDialog = lazyComponent(() =>
 );
 
 export const keyCreateDialog = () =>
-  openModalDialog(KeyCreateDialog, { size: 'md' });
+  openModalDialog(KeyCreateDialog, { size: 'lg' });
