@@ -4,9 +4,14 @@ import { OfferingConfiguration } from '@waldur/marketplace/common/types';
 
 import { TENANT_TYPE } from './constants';
 
-const OpenStackPackageDetails = lazyComponent(() =>
-  import('./OpenStackPackageDetails').then((module) => ({
-    default: module.OpenStackPackageDetails,
+const OpenStackCredentialsForm = lazyComponent(() =>
+  import('./OpenStackCredentialsForm').then((module) => ({
+    default: module.OpenStackCredentialsForm,
+  })),
+);
+const OpenStackTenantDetails = lazyComponent(() =>
+  import('./OpenStackTenantDetails').then((module) => ({
+    default: module.OpenStackTenantDetails,
   })),
 );
 const OpenStackProvisioningConfigForm = lazyComponent(() =>
@@ -14,9 +19,9 @@ const OpenStackProvisioningConfigForm = lazyComponent(() =>
     default: module.OpenStackProvisioningConfigForm,
   })),
 );
-const OpenstackTenantOrder = lazyComponent(() =>
-  import('./deploy/OpenstackTenantOrder').then((module) => ({
-    default: module.OpenstackTenantOrder,
+const OpenstackTenantOrderForm = lazyComponent(() =>
+  import('./deploy/OpenstackTenantOrderForm').then((module) => ({
+    default: module.OpenstackTenantOrderForm,
   })),
 );
 
@@ -63,14 +68,13 @@ export const OpenStackTenantOffering: OfferingConfiguration = {
   get label() {
     return translate('OpenStack tenant');
   },
-  orderFormComponent: OpenstackTenantOrder,
-  detailsComponent: OpenStackPackageDetails,
+  credentialsForm: OpenStackCredentialsForm,
+  orderFormComponent: OpenstackTenantOrderForm,
+  detailsComponent: OpenStackTenantDetails,
   provisioningConfigForm: OpenStackProvisioningConfigForm,
   limitSerializer,
   limitParser,
-  providerType: 'OpenStack',
   onlyOnePlan: true,
   showComponents: true,
   offeringComponentsFilter,
-  allowToUpdateService: true,
 };

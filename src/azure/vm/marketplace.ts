@@ -2,9 +2,15 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OfferingConfiguration } from '@waldur/marketplace/common/types';
 
-const AzureCredentials = lazyComponent(() =>
-  import('../common/AzureCredentials').then((module) => ({
-    default: module.AzureCredentials,
+const AzureCredentialsForm = lazyComponent(() =>
+  import('../common/AzureCredentialsForm').then((module) => ({
+    default: module.AzureCredentialsForm,
+  })),
+);
+
+const AzureDetailsComponent = lazyComponent(() =>
+  import('../common/AzureDetailsComponent').then((module) => ({
+    default: module.AzureDetailsComponent,
   })),
 );
 const AzureVirtualMachineForm = lazyComponent(() =>
@@ -26,8 +32,7 @@ export const AzureVirtualMachineOffering: OfferingConfiguration = {
     return translate('Azure Virtual Machine');
   },
   orderFormComponent: AzureVirtualMachineForm,
-  detailsComponent: AzureCredentials,
-  providerType: 'Azure',
+  detailsComponent: AzureDetailsComponent,
   serializer,
-  allowToUpdateService: true,
+  credentialsForm: AzureCredentialsForm,
 };

@@ -5,7 +5,7 @@ import { required } from '@waldur/core/validators';
 import { SelectField, NumberField, StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
-import { SITE_AGENT_PLUGIN } from '@waldur/slurm/constants';
+import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 
 import { DefaultOfferingEditPanel } from './offerings/update/DefaultOfferingEditPanel';
 import { OfferingEditPanelFormProps } from './offerings/update/integration/types';

@@ -77,6 +77,6 @@ const fields: OfferingEditField[] = [
   },
 ];
 
-export const RancherProviderForm: FunctionComponent<
+export const RancherCredentialsForm: FunctionComponent<
   OfferingEditPanelFormProps
 > = (props) => <DefaultOfferingEditPanel fields={fields} {...props} />;

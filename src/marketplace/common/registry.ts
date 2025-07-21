@@ -13,7 +13,8 @@ import {
   ManagedRancherOffering,
   RancherOffering,
 } from '@waldur/rancher/cluster/create/marketplace';
-import { SlurmOffering, SiteAgentOffering } from '@waldur/slurm/marketplace';
+import { SiteAgentOffering } from '@waldur/site-agent/marketplace';
+import { SlurmOffering } from '@waldur/slurm/marketplace';
 import { BasicOffering, SupportOffering } from '@waldur/support/marketplace';
 import { vmWareOffering } from '@waldur/vmware/marketplace';
 
@@ -104,13 +105,6 @@ export function showBackendId(offeringType: string) {
   );
 }
 
-export function allowToUpdateService(offeringType: string) {
-  return (
-    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].allowToUpdateService
-  );
-}
-
 export function hidePlanAddButton(offeringType: string, fields: Array<any>) {
   return (
     Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
@@ -161,17 +155,17 @@ export function getProvisioningConfigForm(offeringType: string) {
   );
 }
 
+export function getCredentialsForm(offeringType: string) {
+  return (
+    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
+    REGISTRY[offeringType].credentialsForm
+  );
+}
+
 export function showComponentsList(offeringType: string) {
   return (
     Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
     REGISTRY[offeringType].showComponents
-  );
-}
-
-export function getProviderType(offeringType: string) {
-  return (
-    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
-    REGISTRY[offeringType].providerType
   );
 }
 

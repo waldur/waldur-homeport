@@ -32,5 +32,4 @@ export const OpenStackInstanceOffering: OfferingConfiguration = {
   checkoutSummaryComponent: CheckoutSummary,
   serializer: instanceSerializer,
   disableOfferingCreation: true,
-  allowToUpdateService: true,
 };

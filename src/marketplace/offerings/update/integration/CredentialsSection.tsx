@@ -4,7 +4,7 @@ import { StringField } from '@waldur/form';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import {
-  allowToUpdateService,
+  getCredentialsForm,
   showBackendId,
 } from '@waldur/marketplace/common/registry';
 
@@ -14,7 +14,6 @@ import {
 } from '../DefaultOfferingEditPanel';
 
 import { OfferingScopeState } from './OfferingScopeState';
-import { getServiceSettingsForm } from './registry';
 import { SyncButton } from './SyncButton';
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
@@ -27,7 +26,7 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
     props.refetch,
   );
 
-  const ServiceSettingsForm = getServiceSettingsForm(props.offering.type);
+  const CredentialsForm = getCredentialsForm(props.offering.type);
 
   const fields: OfferingEditField[] = [];
   if (showBackendId(props.offering.type)) {
@@ -46,8 +45,8 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
     >
       <FormTable>
         <OfferingScopeState state={props.offering.scope_state || 'missing'} />
-        {allowToUpdateService(props.offering.type) && ServiceSettingsForm ? (
-          <ServiceSettingsForm
+        {CredentialsForm ? (
+          <CredentialsForm
             offering={props.offering}
             title={TITLE}
             callback={update}

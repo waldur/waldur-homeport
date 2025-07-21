@@ -9,7 +9,8 @@ import {
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
 import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
-import { SLURM_PLUGIN, SITE_AGENT_PLUGIN } from '@waldur/slurm/constants';
+import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
+import { SLURM_PLUGIN } from '@waldur/slurm/constants';
 import { VMWARE_VM } from '@waldur/vmware/constants';
 
 import { Offering } from '../types';

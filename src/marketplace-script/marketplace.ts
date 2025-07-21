@@ -10,5 +10,4 @@ export const ScriptOffering: OfferingConfiguration = {
   get label() {
     return translate('Custom scripts');
   },
-  allowToUpdateService: true,
 };

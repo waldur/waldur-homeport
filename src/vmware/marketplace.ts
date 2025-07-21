@@ -4,6 +4,10 @@ import { OfferingConfiguration } from '@waldur/marketplace/common/types';
 
 import { VMWARE_VM } from './constants';
 
+const VMwareCredentialsForm = lazyComponent(() =>
+  import('./VMwareForm').then((module) => ({ default: module.VMwareForm })),
+);
+
 const VmwareOrderForm = lazyComponent(() =>
   import('./deploy/VmwareOrderForm').then((module) => ({
     default: module.VmwareOrderForm,
@@ -46,9 +50,8 @@ export const vmWareOffering: OfferingConfiguration = {
     return translate('vSphere Virtual Machine');
   },
   orderFormComponent: VmwareOrderForm,
-  providerType: 'VMware',
+  credentialsForm: VMwareCredentialsForm,
   serializer,
   limitSerializer,
   limitParser,
-  allowToUpdateService: true,
 };

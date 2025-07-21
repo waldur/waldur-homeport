@@ -49,6 +49,6 @@ const fields: OfferingEditField[] = [
   },
 ];
 
-export const SlurmForm: FunctionComponent<OfferingEditPanelFormProps> = (
-  props,
-) => <DefaultOfferingEditPanel fields={fields} {...props} />;
+export const SlurmCredentialsForm: FunctionComponent<
+  OfferingEditPanelFormProps
+> = (props) => <DefaultOfferingEditPanel fields={fields} {...props} />;

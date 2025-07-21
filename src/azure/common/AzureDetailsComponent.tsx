@@ -5,7 +5,7 @@ import { SecretValueField } from '@waldur/marketplace/SecretValueField';
 import { OrderDetailsProps } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
 
-export const AzureCredentials: FunctionComponent<OrderDetailsProps> = (
+export const AzureDetailsComponent: FunctionComponent<OrderDetailsProps> = (
   props,
 ) => {
   const { attributes } = props.order;

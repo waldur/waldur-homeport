@@ -31,7 +31,7 @@ import {
 } from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
 import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
 import { TENANT_TYPE } from '@waldur/openstack/constants';
-import { RANCHER_NODE_DISK_DRIVER_OPTIONS } from '@waldur/rancher/RancherProviderForm';
+import { RANCHER_NODE_DISK_DRIVER_OPTIONS } from '@waldur/rancher/RancherCredentialsForm';
 
 const VOLUME_TYPE_FIELD: Partial<OfferingEditField> = {
   component: AsyncSelectField,

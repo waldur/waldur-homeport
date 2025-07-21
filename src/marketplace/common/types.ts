@@ -33,6 +33,9 @@ export interface OfferingConfiguration<
   provisioningConfigForm?: LazyExoticComponent<
     ComponentType<OfferingEditPanelFormProps>
   >;
+  credentialsForm?: LazyExoticComponent<
+    ComponentType<OfferingEditPanelFormProps>
+  >;
   detailsComponent?: LazyExoticComponent<ComponentType<OrderDetailsProps>>;
   checkoutSummaryComponent?: LazyExoticComponent<
     ComponentType<CheckoutSummaryProps>
@@ -48,11 +51,9 @@ export interface OfferingConfiguration<
   label: string;
   showComponents?: boolean;
   onlyOnePlan?: boolean;
-  providerType?: string;
   disableOfferingCreation?: boolean;
   schedulable?: boolean;
   showBackendId?: boolean;
-  allowToUpdateService?: boolean;
   offeringComponentsFilter?: (
     formData: any,
     components: OfferingComponent[],

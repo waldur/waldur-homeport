@@ -40,6 +40,6 @@ const fields: OfferingEditField[] = [
   },
 ];
 
-export const AzureForm: FunctionComponent<OfferingEditPanelFormProps> = (
-  props,
-) => <DefaultOfferingEditPanel fields={fields} {...props} />;
+export const AzureCredentialsForm: FunctionComponent<
+  OfferingEditPanelFormProps
+> = (props) => <DefaultOfferingEditPanel fields={fields} {...props} />;
