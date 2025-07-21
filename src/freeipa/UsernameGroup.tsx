@@ -1,10 +1,11 @@
-import { FunctionComponent } from 'react';
+import { FC } from 'react';
 import { Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { Field, WrappedFieldProps } from 'redux-form';
+import { Field, FieldRenderProps } from 'react-final-form';
 
 import { ENV } from '@waldur/core/config';
-import { FieldError, StringField } from '@waldur/form';
+import { FieldError } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 // These limitations are imposed by underlying operating system
 const MAXIMUM_USERNAME_LENGTH = 32;
@@ -12,7 +13,7 @@ const USERNAME_PATTERN = new RegExp(
   '^[a-zA-Z0-9_.][a-zA-Z0-9_.-]*[a-zA-Z0-9_.$-]?$',
 );
 
-const validateUsername = (username: string) => {
+export const validateUsername = (username: string) => {
   if (!username) {
     return translate('Username is required.');
   }
@@ -35,7 +36,21 @@ const validateUsername = (username: string) => {
   }
 };
 
-const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
+interface UsernameFieldProps extends FieldRenderProps<string> {
+  placeholder?: string;
+  autoFocus?: boolean;
+  disabled?: boolean;
+  'data-testid'?: string;
+}
+
+const UsernameField: FC<UsernameFieldProps> = ({
+  input,
+  meta,
+  placeholder = '  ',
+  autoFocus,
+  disabled,
+  'data-testid': testId,
+}) => (
   <>
     <InputGroup className="mb-2">
       {ENV.plugins.WALDUR_CORE.FREEIPA_USERNAME_PREFIX && (
@@ -52,25 +67,50 @@ const UsernameField: FunctionComponent<WrappedFieldProps> = (props) => (
           </InputGroup.Text>
         </OverlayTrigger>
       )}
-      <StringField {...props} />
+      <Form.Control
+        type="text"
+        placeholder={placeholder}
+        autoFocus={autoFocus}
+        disabled={disabled}
+        data-testid={testId}
+        isInvalid={meta.touched && !!meta.error}
+        {...input}
+      />
     </InputGroup>
-    {props.meta.touched && <FieldError error={props.meta.error} />}
+    {meta.touched && meta.error && <FieldError error={meta.error} />}
   </>
 );
 
-export const UsernameGroup: FunctionComponent = () => (
-  <Form.Group className="mb-7">
-    <Form.Label>{translate('Username')}</Form.Label>
-    <Field
-      name="username"
-      validate={validateUsername}
-      component={UsernameField}
-    />
+interface UsernameGroupProps {
+  name?: string;
+  label?: string;
+  description?: string;
+  required?: boolean;
+  autoFocus?: boolean;
+  disabled?: boolean;
+  'data-testid'?: string;
+}
 
-    <Form.Text muted={true}>
-      {translate(
-        'Please select a username that you will use for login into the Linux systems.',
-      )}
-    </Form.Text>
-  </Form.Group>
+export const UsernameGroup: FC<UsernameGroupProps> = ({
+  name = 'username',
+  label = translate('Username'),
+  description = translate(
+    'Please select a username that you will use for login into the Linux systems.',
+  ),
+  required = true,
+  autoFocus,
+  disabled,
+  'data-testid': testId,
+}) => (
+  <FormGroup label={label} description={description} required={required}>
+    <Field
+      name={name}
+      validate={required ? validateUsername : undefined}
+      component={UsernameField}
+      placeholder="Enter username"
+      autoFocus={autoFocus}
+      disabled={disabled}
+      data-testid={testId}
+    />
+  </FormGroup>
 );

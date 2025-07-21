@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 
 interface SubmitButtonProps {
   submitting: boolean;
-  label: string;
+  label?: string;
+  children?: ReactNode;
   id?: string;
   disabled?: boolean;
   className?: string;
@@ -13,6 +14,8 @@ interface SubmitButtonProps {
 
 export const SubmitButton: FC<SubmitButtonProps> = ({
   className = 'btn btn-primary',
+  children,
+  label,
   ...props
 }) => (
   <button
@@ -23,6 +26,6 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
     onClick={props.onClick}
   >
     {props.submitting && <LoadingSpinnerIcon className="me-1" />}
-    {props.label}
+    {children || label}
   </button>
 );
