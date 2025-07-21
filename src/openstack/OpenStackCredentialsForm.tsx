@@ -67,6 +67,6 @@ const fields: OfferingEditField[] = [
   },
 ];
 
-export const OpenStackForm: FunctionComponent<OfferingEditPanelFormProps> = (
-  props,
-) => <DefaultOfferingEditPanel fields={fields} {...props} />;
+export const OpenStackCredentialsForm: FunctionComponent<
+  OfferingEditPanelFormProps
+> = (props) => <DefaultOfferingEditPanel fields={fields} {...props} />;

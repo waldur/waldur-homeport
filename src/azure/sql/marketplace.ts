@@ -2,9 +2,14 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OfferingConfiguration } from '@waldur/marketplace/common/types';
 
+const AzureCredentialsForm = lazyComponent(() =>
+  import('../common/AzureCredentialsForm').then((module) => ({
+    default: module.AzureCredentialsForm,
+  })),
+);
 const AzureCredentials = lazyComponent(() =>
-  import('../common/AzureCredentials').then((module) => ({
-    default: module.AzureCredentials,
+  import('../common/AzureDetailsComponent').then((module) => ({
+    default: module.AzureDetailsComponent,
   })),
 );
 const AzureSQLServerForm = lazyComponent(() =>
@@ -20,6 +25,5 @@ export const AzureSQLServerOffering: OfferingConfiguration = {
   },
   orderFormComponent: AzureSQLServerForm,
   detailsComponent: AzureCredentials,
-  providerType: 'Azure',
-  allowToUpdateService: true,
+  credentialsForm: AzureCredentialsForm,
 };

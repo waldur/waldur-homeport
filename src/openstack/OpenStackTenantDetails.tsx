@@ -7,7 +7,7 @@ import { OrderDetailsProps } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
 import { BooleanField } from '@waldur/table/BooleanField';
 
-export const OpenStackPackageDetails: FunctionComponent<OrderDetailsProps> = ({
+export const OpenStackTenantDetails: FunctionComponent<OrderDetailsProps> = ({
   order: { attributes },
 }) => (
   <>

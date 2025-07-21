@@ -1,20 +1,11 @@
 import { WarningIcon } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
+import { ResourceIcon } from './ResourceIcon';
 import { ResourceLink } from './ResourceLink';
-import { formatDefault, formatResourceType, getResourceIcon } from './utils';
-
-interface ResourceIconProps {
-  resource: {
-    name?: string;
-    uuid?: string;
-    resource_type?: string;
-  };
-}
 
 interface ResourceNameProps {
   resource: {
@@ -27,21 +18,6 @@ interface ResourceNameProps {
     marketplace_resource_uuid?: string;
   };
 }
-
-export const ResourceIcon: FunctionComponent<ResourceIconProps> = (props) => (
-  <Tip
-    id={`resourceIcon-${props.resource.uuid}`}
-    label={formatResourceType(props.resource)}
-  >
-    <img
-      src={getResourceIcon(props.resource.resource_type)}
-      alt="resource"
-      className="me-1"
-      width={25}
-    />{' '}
-    {formatDefault(props.resource.name)}
-  </Tip>
-);
 
 const ResourceWarning = (props: ResourceNameProps) =>
   props.resource.is_link_valid === false ? (

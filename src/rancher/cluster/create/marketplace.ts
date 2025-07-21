@@ -7,6 +7,12 @@ import { Offering } from '@waldur/marketplace/types';
 
 import { MANAGED_RANCHER, MARKETPLACE_RANCHER } from './constants';
 
+const RancherCredentialsForm = lazyComponent(() =>
+  import('@waldur/rancher/RancherCredentialsForm').then((module) => ({
+    default: module.RancherCredentialsForm,
+  })),
+);
+
 const RancherClusterCheckoutSummary = lazyComponent(() =>
   import('./RancherClusterCheckoutSummary').then((module) => ({
     default: module.RancherClusterCheckoutSummary,
@@ -100,9 +106,8 @@ export const RancherOffering: OfferingConfiguration = {
   orderFormComponent: RancherOrderForm,
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
   pluginOptionsForm: RancherPluginOptionsForm,
-  providerType: 'Rancher',
+  credentialsForm: RancherCredentialsForm,
   serializer: standaloneRancherOrderSerializer,
-  allowToUpdateService: true,
 };
 
 export const ManagedRancherOffering: OfferingConfiguration = {

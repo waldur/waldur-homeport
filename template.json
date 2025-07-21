@@ -108,7 +108,7 @@
     "message": "A profile has been created."
   },
   "API URL": {
-    "description": "marketplace/offerings/import/CredentialsTab.tsx, marketplace/offerings/import/SelectOfferingTab.tsx, marketplace-remote/RemoteOfferingSecretOptions.tsx, openstack/OpenStackForm.tsx",
+    "description": "marketplace/offerings/import/CredentialsTab.tsx, marketplace/offerings/import/SelectOfferingTab.tsx, marketplace-remote/RemoteOfferingSecretOptions.tsx, openstack/OpenStackCredentialsForm.tsx",
     "message": "API URL"
   },
   "API accounts for automation at organization and project level.": {
@@ -576,7 +576,7 @@
     "message": "Address"
   },
   "Admin password": {
-    "description": "azure/common/AzureCredentials.tsx, azure/vm/AzureVirtualMachineSummary.tsx",
+    "description": "azure/common/AzureDetailsComponent.tsx, azure/vm/AzureVirtualMachineSummary.tsx",
     "message": "Admin password"
   },
   "Admin state": {
@@ -584,7 +584,7 @@
     "message": "Admin state"
   },
   "Admin username": {
-    "description": "azure/common/AzureCredentials.tsx, azure/vm/AzureVirtualMachineSummary.tsx",
+    "description": "azure/common/AzureDetailsComponent.tsx, azure/vm/AzureVirtualMachineSummary.tsx",
     "message": "Admin username"
   },
   "Administration": {
@@ -752,7 +752,7 @@
     "message": "Allocation date"
   },
   "Allocation name": {
-    "description": "slurm/deploy/steps.ts",
+    "description": "marketplace/deploy/steps/constants.ts",
     "message": "Allocation name"
   },
   "Allocation pool": {
@@ -1572,7 +1572,7 @@
     "message": "Auto-assign floating IP"
   },
   "Auto-generated": {
-    "description": "openstack/OpenStackPackageDetails.tsx",
+    "description": "openstack/OpenStackTenantDetails.tsx",
     "message": "Auto-generated"
   },
   "Automatic based on review scoring": {
@@ -1628,7 +1628,7 @@
     "message": "Average value"
   },
   "Azure Active Directory Application Secret": {
-    "description": "azure/provider/AzureForm.tsx",
+    "description": "azure/common/AzureCredentialsForm.tsx",
     "message": "Azure Active Directory Application Secret"
   },
   "Azure PostgreSQL database server": {
@@ -1684,7 +1684,7 @@
     "message": "Bank name"
   },
   "Base image name": {
-    "description": "rancher/RancherProviderForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx",
     "message": "Base image name"
   },
   "Basic details": {
@@ -1698,6 +1698,10 @@
   "Basic": {
     "description": "support/marketplace.ts",
     "message": "Basic"
+  },
+  "Batch processing allocation": {
+    "description": "resource/utils.tsx",
+    "message": "Batch processing allocation"
   },
   "Batch script file": {
     "description": "slurm/details/SubmitJobDialog.tsx",
@@ -2240,7 +2244,7 @@
     "message": "Client ID for authenticating against the introspection endpoint."
   },
   "Client ID": {
-    "description": "administration/providers/ProviderForm.tsx, azure/provider/AzureForm.tsx",
+    "description": "administration/providers/ProviderForm.tsx, azure/common/AzureCredentialsForm.tsx",
     "message": "Client ID"
   },
   "Client organization": {
@@ -2256,7 +2260,7 @@
     "message": "Client secret for authenticating against the introspection endpoint."
   },
   "Client secret": {
-    "description": "administration/providers/ProviderForm.tsx, azure/provider/AzureForm.tsx",
+    "description": "administration/providers/ProviderForm.tsx, azure/common/AzureCredentialsForm.tsx",
     "message": "Client secret"
   },
   "Clinical medicine": {
@@ -2300,7 +2304,7 @@
     "message": "Cloud init template for load balancer node"
   },
   "Cloud init template": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
     "message": "Cloud init template"
   },
   "Cloud region": {
@@ -3316,11 +3320,11 @@
     "message": "Default DNS servers"
   },
   "Default SLURM account for user": {
-    "description": "slurm/SlurmForm.tsx",
+    "description": "slurm/SlurmCredentialsForm.tsx",
     "message": "Default SLURM account for user"
   },
   "Default account": {
-    "description": "slurm/SlurmForm.tsx",
+    "description": "slurm/SlurmCredentialsForm.tsx",
     "message": "Default account"
   },
   "Default availability zone for provisioned instances.": {
@@ -3800,7 +3804,7 @@
     "message": "Documents"
   },
   "Domain name": {
-    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, openstack/OpenStackForm.tsx",
+    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, openstack/OpenStackCredentialsForm.tsx",
     "message": "Domain name"
   },
   "Domain": {
@@ -4684,7 +4688,7 @@
     "message": "External URL"
   },
   "External network ID": {
-    "description": "openstack/OpenStackForm.tsx, resource/summary/ResourceMetadataDialog.tsx",
+    "description": "openstack/OpenStackCredentialsForm.tsx, resource/summary/ResourceMetadataDialog.tsx",
     "message": "External network ID"
   },
   "External size": {
@@ -4844,7 +4848,7 @@
     "message": "Filters"
   },
   "Final configuration": {
-    "description": "booking/deploy/steps.ts, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, openstack/deploy/steps.ts, openstack/openstack-instance/deploy/steps.ts, openstack/openstack-volume/deploy/steps.ts, rancher/cluster/create/managed-steps.ts, rancher/cluster/create/steps.ts, slurm/deploy/steps.ts, support/deploy-steps.ts, vmware/deploy/steps.ts",
+    "description": "booking/deploy/steps.ts, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, marketplace/deploy/steps/constants.ts, openstack/deploy/steps.ts, openstack/openstack-instance/deploy/steps.ts, openstack/openstack-volume/deploy/steps.ts, rancher/cluster/create/managed-steps.ts, rancher/cluster/create/steps.ts, support/deploy-steps.ts, vmware/deploy/steps.ts",
     "message": "Final configuration"
   },
   "Find solution": {
@@ -5072,7 +5076,7 @@
     "message": "Gateway IP"
   },
   "Gateway": {
-    "description": "slurm/SlurmForm.tsx",
+    "description": "slurm/SlurmCredentialsForm.tsx",
     "message": "Gateway"
   },
   "General information": {
@@ -5328,15 +5332,15 @@
     "message": "Hostname of FreeIPA server."
   },
   "Hostname or IP address of gateway node": {
-    "description": "slurm/SlurmForm.tsx",
+    "description": "slurm/SlurmCredentialsForm.tsx",
     "message": "Hostname or IP address of gateway node"
   },
   "Hostname or IP address of master node": {
-    "description": "slurm/SlurmForm.tsx",
+    "description": "slurm/SlurmCredentialsForm.tsx",
     "message": "Hostname or IP address of master node"
   },
   "Hostname": {
-    "description": "slurm/SlurmForm.tsx, vmware/VMwareForm.tsx",
+    "description": "slurm/SlurmCredentialsForm.tsx, vmware/VMwareForm.tsx",
     "message": "Hostname"
   },
   "Hours": {
@@ -5616,7 +5620,7 @@
     "message": "In review"
   },
   "In the format of GUID": {
-    "description": "azure/provider/AzureForm.tsx",
+    "description": "azure/common/AzureCredentialsForm.tsx",
     "message": "In the format of GUID"
   },
   "Inactive": {
@@ -5696,11 +5700,11 @@
     "message": "Initial UID number"
   },
   "Initial admin password": {
-    "description": "openstack/OpenStackPackageDetails.tsx",
+    "description": "openstack/OpenStackTenantDetails.tsx",
     "message": "Initial admin password"
   },
   "Initial admin username": {
-    "description": "openstack/OpenStackPackageDetails.tsx",
+    "description": "openstack/OpenStackTenantDetails.tsx",
     "message": "Initial admin username"
   },
   "Initial primary group number": {
@@ -5800,7 +5804,7 @@
     "message": "Internal network allocation pool"
   },
   "Internal network mask (CIDR)": {
-    "description": "openstack/OpenStackPackageDetails.tsx, openstack/deploy/FormInternalNetworkStep.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-network/actions/CreateSubnetDialog.tsx",
+    "description": "openstack/OpenStackTenantDetails.tsx, openstack/deploy/FormInternalNetworkStep.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-network/actions/CreateSubnetDialog.tsx",
     "message": "Internal network mask (CIDR)"
   },
   "Internal network": {
@@ -6104,7 +6108,7 @@
     "message": "It is used in organization creation dialog in order to limit country choices to predefined set."
   },
   "It is used to automatically assign floating IP to your virtual machine.": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "openstack/OpenStackCredentialsForm.tsx",
     "message": "It is used to automatically assign floating IP to your virtual machine."
   },
   "Item {item} has been moved from invoice {origin} to {target}.": {
@@ -6208,7 +6212,7 @@
     "message": "Keys"
   },
   "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "openstack/OpenStackCredentialsForm.tsx",
     "message": "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)"
   },
   "Kubernetes namespace where jobs will be executed": {
@@ -7624,7 +7628,7 @@
     "message": "No"
   },
   "Node disk driver type": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
     "message": "Node disk driver type"
   },
   "Node has been created.": {
@@ -7824,7 +7828,7 @@
     "message": "Offering LEXIS link options have been updated successfully."
   },
   "Offering UUID": {
-    "description": "marketplace/orders/details/OrderMetadataTab.tsx",
+    "description": "marketplace/orders/details/OrderMetadataTab.tsx, site-agent/SiteAgentCredentialsForm.tsx",
     "message": "Offering UUID"
   },
   "Offering billable?": {
@@ -8232,7 +8236,7 @@
     "message": "OpenStack volume"
   },
   "Openstack API TLS certificate": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "openstack/OpenStackCredentialsForm.tsx",
     "message": "Openstack API TLS certificate"
   },
   "Openstack image management for service provider": {
@@ -8604,7 +8608,7 @@
     "message": "Password of FreeIPA user with administrative privileges"
   },
   "Password": {
-    "description": "auth/SigninForm.tsx, azure/sql/AzureSQLServerSummary.tsx, openstack/OpenStackForm.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, vmware/VMwareForm.tsx",
+    "description": "auth/SigninForm.tsx, azure/sql/AzureSQLServerSummary.tsx, openstack/OpenStackCredentialsForm.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx, rancher/catalog/CatalogCreateDialog.tsx, vmware/VMwareForm.tsx",
     "message": "Password"
   },
   "Paste your SSH public key here...": {
@@ -9168,7 +9172,7 @@
     "message": "Port security has been enabled."
   },
   "Port": {
-    "description": "openstack/openstack-tenant/AddRouterInterfaceDialog.tsx, slurm/SlurmForm.tsx",
+    "description": "openstack/openstack-tenant/AddRouterInterfaceDialog.tsx, slurm/SlurmCredentialsForm.tsx",
     "message": "Port"
   },
   "Ports": {
@@ -9348,15 +9352,15 @@
     "message": "Private comment"
   },
   "Private registry URL": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
     "message": "Private registry URL"
   },
   "Private registry password": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
     "message": "Private registry password"
   },
   "Private registry username": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
     "message": "Private registry username"
   },
   "Processor": {
@@ -9928,7 +9932,7 @@
     "message": "RAM"
   },
   "Rancher access key": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
     "message": "Rancher access key"
   },
   "Rancher cluster": {
@@ -9944,11 +9948,11 @@
     "message": "Rancher resources provisioning"
   },
   "Rancher secret key": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
     "message": "Rancher secret key"
   },
   "Rancher server URL": {
-    "description": "rancher/RancherProviderForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
     "message": "Rancher server URL"
   },
   "Rate": {
@@ -12056,7 +12060,7 @@
     "message": "Set to true if this category is for OpenStack Volume. Only one category can have \"true\" value."
   },
   "Set to true to activate privilege escalation": {
-    "description": "slurm/SlurmForm.tsx",
+    "description": "slurm/SlurmCredentialsForm.tsx",
     "message": "Set to true to activate privilege escalation"
   },
   "Set usage for resource": {
@@ -12312,7 +12316,7 @@
     "message": "Size"
   },
   "Skip connection to external network": {
-    "description": "openstack/OpenStackPackageDetails.tsx, openstack/deploy/FormInternalNetworkStep.tsx, openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
+    "description": "openstack/OpenStackTenantDetails.tsx, openstack/deploy/FormInternalNetworkStep.tsx, openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
     "message": "Skip connection to external network"
   },
   "Skip connection to extnet": {
@@ -12632,7 +12636,7 @@
     "message": "Subnets"
   },
   "Subscription ID": {
-    "description": "azure/provider/AzureForm.tsx",
+    "description": "azure/common/AzureCredentialsForm.tsx",
     "message": "Subscription ID"
   },
   "Subtotal": {
@@ -12916,19 +12920,19 @@
     "message": "Temporarily block account"
   },
   "Tenant ID": {
-    "description": "azure/provider/AzureForm.tsx",
+    "description": "azure/common/AzureCredentialsForm.tsx",
     "message": "Tenant ID"
   },
   "Tenant name": {
-    "description": "openstack/OpenStackForm.tsx, openstack/deploy/steps.ts",
+    "description": "openstack/OpenStackCredentialsForm.tsx, openstack/deploy/steps.ts",
     "message": "Tenant name"
   },
   "Tenant user password": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "openstack/OpenStackCredentialsForm.tsx",
     "message": "Tenant user password"
   },
   "Tenant user username": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "openstack/OpenStackCredentialsForm.tsx",
     "message": "Tenant user username"
   },
   "Tenant": {
@@ -15600,7 +15604,7 @@
     "message": "Use project date"
   },
   "Use sudo": {
-    "description": "slurm/SlurmForm.tsx",
+    "description": "slurm/SlurmCredentialsForm.tsx",
     "message": "Use sudo"
   },
   "Use this modal to describe your problem or request, so our support team can assist you.": {
@@ -15872,7 +15876,7 @@
     "message": "Username prefix"
   },
   "Username": {
-    "description": "administration/TokensList.tsx, administration/users/FreeIPAUsersList.tsx, auth/SigninForm.tsx, customer/service-accounts/ServiceAccountFormDialog.tsx, customer/service-accounts/ServiceAccountShowInfoDialog.tsx, customer/service-accounts/ServiceAccountsList.tsx, customer/team/TeamTableComponent.tsx, customer/team/UserGroup.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/utils.tsx, marketplace/resources/usage/ResourceComponentUserUsageTable.tsx, marketplace/resources/usage/ResourceUsageFilter.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, marketplace/resources/usage/UsageExportDropdown.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, openstack/OpenStackForm.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx, project/team/UserGroup.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, reporting/resource-usage/UserUsageList.tsx, slurm/SlurmForm.tsx, slurm/details/AllocationUsersTable.tsx, user/UserOfferingList.tsx, user/affiliations/SummaryTeamTable.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
+    "description": "administration/TokensList.tsx, administration/users/FreeIPAUsersList.tsx, auth/SigninForm.tsx, customer/service-accounts/ServiceAccountFormDialog.tsx, customer/service-accounts/ServiceAccountShowInfoDialog.tsx, customer/service-accounts/ServiceAccountsList.tsx, customer/team/TeamTableComponent.tsx, customer/team/UserGroup.tsx, freeipa/FreeIPAAccountEdit.tsx, freeipa/UsernameGroup.tsx, marketplace/offerings/details/CreateOfferingUserDialog.tsx, marketplace/resources/details/utils.tsx, marketplace/resources/usage/ResourceComponentUserUsageTable.tsx, marketplace/resources/usage/ResourceUsageFilter.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, marketplace/resources/usage/UsageExportDropdown.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/CreateProviderOfferingUserDialog.tsx, openstack/OpenStackCredentialsForm.tsx, openstack/openstack-tenant/OpenStackTenantSummary.tsx, project/team/UserGroup.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx, rancher/cluster/users/ClusterUsersList.tsx, reporting/resource-usage/UserUsageList.tsx, slurm/SlurmCredentialsForm.tsx, slurm/details/AllocationUsersTable.tsx, user/UserOfferingList.tsx, user/affiliations/SummaryTeamTable.tsx, user/support/UserDetailsTable.tsx, user/support/UserList.tsx, vmware/VMwareForm.tsx",
     "message": "Username"
   },
   "Usernames can contain letters (a-z), numbers (0-9), dashes (-), underscores (_) and periods (.).": {
@@ -15915,9 +15919,17 @@
     "description": "invoices/details/CustomerDetails.tsx, invoices/list/MonthOverview.tsx",
     "message": "VAT"
   },
+  "VM disk": {
+    "description": "resource/utils.tsx",
+    "message": "VM disk"
+  },
   "VM name": {
     "description": "openstack/openstack-instance/deploy/steps.ts, vmware/deploy/steps.ts",
     "message": "VM name"
+  },
+  "VM network adapter": {
+    "description": "resource/utils.tsx",
+    "message": "VM network adapter"
   },
   "VM snapshot has been created.": {
     "description": "openstack/openstack-instance/actions/CreateBackupDialog.tsx",
@@ -16032,7 +16044,7 @@
     "message": "Verify SSL"
   },
   "Verify server certificate": {
-    "description": "openstack/OpenStackForm.tsx",
+    "description": "openstack/OpenStackCredentialsForm.tsx",
     "message": "Verify server certificate"
   },
   "Verify your data before importing": {
@@ -16199,6 +16211,10 @@
     "description": "issues/list/IssuesFilter.tsx",
     "message": "Waiting for support"
   },
+  "Waldur API URL": {
+    "description": "site-agent/SiteAgentCredentialsForm.tsx",
+    "message": "Waldur API URL"
+  },
   "Waldur deployment settings": {
     "description": "features/FeaturesDescription.ts",
     "message": "Waldur deployment settings"
@@ -16208,7 +16224,7 @@
     "message": "Waldur only uses <b>essential cookies</b>, which are necessary for the platform to function correctly. These cookies enable you to log in, access secure areas, and navigate throughout Waldur. No other types of cookies are used."
   },
   "Waldur site agent": {
-    "description": "slurm/marketplace.ts",
+    "description": "site-agent/marketplace.ts",
     "message": "Waldur site agent"
   },
   "Waldur username": {
@@ -16926,6 +16942,10 @@
   "vSphere Virtual Machine": {
     "description": "vmware/marketplace.ts",
     "message": "vSphere Virtual Machine"
+  },
+  "vSphere virtual machine": {
+    "description": "resource/utils.tsx",
+    "message": "vSphere virtual machine"
   },
   "virtual machine": {
     "description": "vmware/actions/EditDialog.tsx",

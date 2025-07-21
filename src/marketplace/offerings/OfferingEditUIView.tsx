@@ -18,7 +18,7 @@ import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitte
 import { TENANT_TYPE } from '@waldur/openstack/constants';
 
 import {
-  allowToUpdateService,
+  getCredentialsForm,
   getPluginOptionsForm,
   getProvisioningConfigForm,
   getSecretOptionsForm,
@@ -29,7 +29,6 @@ import { ValidationIcon } from '../common/ValidationIcon';
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { getOfferingBreadcrumbItems } from './hooks';
 import { OfferingViewHero } from './OfferingViewHero';
-import { getServiceSettingsForm } from './update/integration/registry';
 import { SCRIPT_ROWS } from './update/integration/utils';
 
 const OverviewSection = lazyComponent(() =>
@@ -133,13 +132,13 @@ const getTabs = (offering: Offering): PageBarTab[] => {
   ];
 
   // Integration
-  const ServiceSettingsForm = getServiceSettingsForm(offering.type);
+  const CredentialsForm = getCredentialsForm(offering.type);
   const SecretOptionsForm = getSecretOptionsForm(offering.type);
   const PluginOptionsForm = getPluginOptionsForm(offering.type);
   const provisioningConfigForm = getProvisioningConfigForm(offering.type);
 
   if (
-    ServiceSettingsForm ||
+    CredentialsForm ||
     SecretOptionsForm ||
     PluginOptionsForm ||
     provisioningConfigForm
@@ -162,7 +161,7 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       ),
 
       children: [
-        ServiceSettingsForm && allowToUpdateService(offering.type)
+        CredentialsForm
           ? {
               key: 'credentials',
               component: CredentialsSection,

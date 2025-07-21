@@ -36,5 +36,4 @@ export const OpenStackVolumeOffering: OfferingConfiguration = {
   checkoutSummaryComponent: CheckoutSummary,
   serializer,
   disableOfferingCreation: true,
-  allowToUpdateService: true,
 };

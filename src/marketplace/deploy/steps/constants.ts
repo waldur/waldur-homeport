@@ -1,4 +1,6 @@
+import { getLatinNameValidators } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
+import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 
 import { FormAdditionalConfigurationStep } from './FormAdditionalConfigurationStep';
 import { FormDetailsOverviewStep } from './FormDetailsOverviewStep';
@@ -30,5 +32,18 @@ export const AdditionalConfigurationStep = {
   component: FormAdditionalConfigurationStep,
   isActive: (offering) => {
     return offering.options.order?.length > 0;
+  },
+};
+
+export const FinalConfigurationStep = {
+  label: translate('Final configuration'),
+  id: 'step-final-configuration',
+  fields: ['attributes.name', 'attributes.description'],
+  required: true,
+  requiredFields: ['attributes.name'],
+  component: FormFinalConfigurationStep,
+  params: {
+    nameLabel: translate('Allocation name'),
+    nameValidate: getLatinNameValidators(),
   },
 };

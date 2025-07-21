@@ -1,11 +1,5 @@
 import { detectOS, formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import {
-  getTypeDisplay,
-  getServiceIcon,
-} from '@waldur/marketplace/offerings/update/integration/registry';
-
-export const getResourceIcon = (type) => getServiceIcon(type.split('.')[0]);
 
 export const getResourceAccessEndpoints = (resource, offering) => {
   const os = detectOS();
@@ -26,9 +20,10 @@ export const isSshFormat = (url) => {
 };
 
 const RESOURCE_TYPE_LABELS = {
-  'VMware.VirtualMachine': 'vSphere Virtual Machine',
-  'VMware.Disk': 'VM Disk',
-  'VMware.Port': 'VM Network Adapter',
+  'VMware.VirtualMachine': translate('vSphere virtual machine'),
+  'VMware.Disk': translate('VM disk'),
+  'VMware.Port': translate('VM network adapter'),
+  'SLURM.Allocation': translate('Batch processing allocation'),
 };
 
 export const formatResourceType = (resource) => {
@@ -37,8 +32,7 @@ export const formatResourceType = (resource) => {
     return RESOURCE_TYPE_LABELS[resource.resource_type];
   }
   const parts = resource.resource_type.split('.');
-  const service = getTypeDisplay(parts[0]);
-  return service + ' ' + parts[1];
+  return parts[0] + ' ' + parts[1];
 };
 
 export const formatFlavor = (limits) => {

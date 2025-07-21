@@ -11,13 +11,6 @@ export interface ScriptEditorProps {
   refetch: () => Promise<any>;
 }
 
-export interface ProviderConfig {
-  name: string;
-  type: string;
-  component: React.ComponentType<OfferingEditPanelFormProps>;
-  icon: string;
-}
-
 export interface EditOfferingProps
   extends Partial<Omit<FormTableItemProps, 'actions'>> {
   title?: string;

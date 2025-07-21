@@ -2,6 +2,6 @@ import { BaseDeployPage } from '@waldur/marketplace/deploy/DeployPage';
 
 import { deployOfferingSteps } from './steps';
 
-export const OpenstackTenantOrder = (props) => (
+export const OpenstackTenantOrderForm = (props) => (
   <BaseDeployPage inputFormSteps={deployOfferingSteps} {...props} />
 );
