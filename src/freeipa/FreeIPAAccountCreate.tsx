@@ -1,23 +1,16 @@
 import { PlusIcon } from '@phosphor-icons/react';
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import { FormGroup } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { reduxForm, change } from 'redux-form';
+import { Form } from 'react-final-form';
+import { useSelector } from 'react-redux';
 import { freeipaProfilesCreate } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { FormContainer } from '@waldur/form';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
-import {
-  showSuccess,
-  showError,
-  showErrorResponse,
-} from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { UsernameGroup } from './UsernameGroup';
-
-const FORM_ID = 'FreeIPAAccountCreate';
 
 interface FreeIPAAccountCreateFormData {
   username: string;
@@ -32,58 +25,54 @@ const SUGGESTED_USERNAME_PATTERN = /[^a-zA-Z0-9._-]/g;
 const fixUsername = (username: string): string =>
   username.replace(SUGGESTED_USERNAME_PATTERN, '_');
 
-export const FreeIPAAccountCreate = reduxForm<
-  FreeIPAAccountCreateFormData,
-  FreeIPAAccountCreateOwnProps
->({ form: FORM_ID })(({
-  invalid,
-  submitting,
-  handleSubmit,
+export const FreeIPAAccountCreate: React.FC<FreeIPAAccountCreateOwnProps> = ({
   onProfileAdded,
 }) => {
-  const dispatch = useDispatch();
+  const { showSuccess, showError, showErrorResponse } = useNotify();
   const user = useSelector(getUser);
 
-  useEffect(() => {
-    dispatch(change(FORM_ID, 'username', fixUsername(user.username)));
-  }, [user, dispatch]);
-
-  const callback = useCallback(
-    async (formData) => {
+  const onSubmit = useCallback(
+    async (formData: FreeIPAAccountCreateFormData) => {
       try {
         await freeipaProfilesCreate({ body: { username: formData.username } });
-        dispatch(showSuccess(translate('A profile has been created.')));
+        showSuccess(translate('A profile has been created.'));
         onProfileAdded();
       } catch (response) {
         if (response.data && response.data.username) {
-          dispatch(showError(response.data.username));
+          showError(response.data.username);
         }
-        dispatch(
-          showErrorResponse(
-            response,
-            translate('Unable to create a FreeIPA profile.'),
-          ),
+        showErrorResponse(
+          response,
+          translate('Unable to create a FreeIPA profile.'),
         );
       }
     },
-    [dispatch, onProfileAdded],
+    [showSuccess, showError, showErrorResponse, onProfileAdded],
   );
 
   return (
-    <form onSubmit={handleSubmit(callback)}>
-      <FormContainer submitting={submitting}>
-        <UsernameGroup />
-        <FormGroup>
-          <div className="pull-right">
-            <SubmitButton submitting={submitting} invalid={invalid}>
-              <span className="svg-icon svg-icon-2">
-                <PlusIcon weight="bold" />
-              </span>{' '}
-              {translate('Create')}
-            </SubmitButton>
-          </div>
-        </FormGroup>
-      </FormContainer>
-    </form>
+    <Form
+      onSubmit={onSubmit}
+      initialValues={{ username: fixUsername(user.username) }}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <UsernameGroup />
+          <FormGroup>
+            <div className="pull-right">
+              <SubmitButton
+                submitting={submitting}
+                disabled={invalid}
+                className="btn btn-primary"
+              >
+                <span className="svg-icon svg-icon-2">
+                  <PlusIcon weight="bold" />
+                </span>{' '}
+                {translate('Create')}
+              </SubmitButton>
+            </div>
+          </FormGroup>
+        </form>
+      )}
+    />
   );
-});
+};
