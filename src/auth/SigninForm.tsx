@@ -83,7 +83,11 @@ export const SigninForm = () => (
           </button>
 
           {formError && (
-            <div className="alert alert-danger mt-3" role="alert">
+            <div
+              className="alert alert-danger mt-3 ellipsis-lines-1"
+              role="alert"
+              style={{ maxWidth: '100vh' }}
+            >
               {formError}
             </div>
           )}
