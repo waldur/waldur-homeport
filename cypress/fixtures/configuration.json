@@ -43,6 +43,9 @@
     "user": {
       "ssh_keys": true,
       "notifications": true
+    },
+    "invitations": {
+      "show_service_accounts": true
     }
   }
 }

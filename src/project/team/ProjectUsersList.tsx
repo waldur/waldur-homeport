@@ -40,6 +40,15 @@ const mapStateToFilter = createSelector(
   },
 );
 
+const TeamSecondaryDropdownActions = ({ project, refetch }) => {
+  return (
+    <>
+      <SyncMembersButton project={project} refetch={refetch} />
+      <ProjectPermissionsLogButton projectId={project?.uuid} asDropdownItem />
+    </>
+  );
+};
+
 export const ProjectUsersList = ({
   hideTabs = false,
   project,
@@ -67,12 +76,15 @@ export const ProjectUsersList = ({
       userFieldPrefix="user_"
       tabs={!hideTabs && PROJECT_TEAM_TABLE_TABS}
       tableActions={
-        <>
-          <SyncMembersButton project={_project} refetch={tableProps.fetch} />
-          <ProjectPermissionsLogButton projectId={_project?.uuid} />
-          <TeamDropdownActions project={_project} refetch={tableProps.fetch} />
-        </>
+        <TeamDropdownActions project={_project} refetch={tableProps.fetch} />
       }
+      dropdownActions={
+        <TeamSecondaryDropdownActions
+          project={_project}
+          refetch={tableProps.fetch}
+        />
+      }
+      showExportInDropdown
       rowActions={({ row, fetch }) => (
         <ProjectPermisionActions
           row={row}

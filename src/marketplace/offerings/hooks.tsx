@@ -7,7 +7,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
-import { TableDropdownItem } from '@waldur/table/types';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { useUser } from '@waldur/workspace/hooks';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -22,7 +22,7 @@ const OfferingImportDialog = lazyComponent(() =>
   })),
 );
 
-export const useOfferingDropdownActions = (refetch?): TableDropdownItem[] => {
+export const useOfferingDropdownActions = (refetch?) => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const user = useUser();
@@ -34,14 +34,13 @@ export const useOfferingDropdownActions = (refetch?): TableDropdownItem[] => {
     customer && customer.is_service_provider && canCreateOffering;
 
   if (!showOfferingListActions) {
-    return [];
+    return null;
   }
 
-  return [
-    {
-      label: translate('Import offerings'),
-      iconNode: <PlusIcon weight="bold" />,
-      action: () => {
+  return (
+    <ActionItem
+      title={translate('Import offerings')}
+      action={() => {
         dispatch(
           openModalDialog(OfferingImportDialog, {
             refetch,
@@ -49,9 +48,10 @@ export const useOfferingDropdownActions = (refetch?): TableDropdownItem[] => {
             formId: OFFERING_IMPORT_FORM_ID,
           }),
         );
-      },
-    },
-  ];
+      }}
+      iconNode={<PlusIcon weight="bold" />}
+    />
+  );
 };
 
 export const getOfferingBreadcrumbItems = (

@@ -1,18 +1,14 @@
-import { ExportIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useCallback, useEffect, useState } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
 
-import { EXPORT_OPTIONS } from './exporters/constants';
 import { TableColumnButton } from './TableColumnsButton';
 import { TableDisplayModeButton } from './TableDisplayModeButton';
 import { TableExportButton } from './TableExportButton';
 import { TableFilterButton } from './TableFilterButton';
 import { TableMoreActions } from './TableMoreActions';
-import { TableProps, TableDropdownItem } from './types';
-import { useExportDialog } from './useExportDialog';
+import { TableProps } from './types';
 
 interface TableButtonsProps extends TableProps {
   toggleFilterMenu?(): void;
@@ -20,41 +16,11 @@ interface TableButtonsProps extends TableProps {
 }
 
 export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
-  const openExportDialog = useExportDialog();
-
-  const [dropdownActions, setDropdownActions] = useState<TableDropdownItem[]>(
-    [],
-  );
-
   const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
 
   const showExportInDropdown =
     (props.enableExport && props.showExportInDropdown) ||
-    (props.enableExport && isSm);
-
-  useEffect(() => {
-    setDropdownActions(
-      (props.dropdownActions && props.dropdownActions instanceof Array
-        ? props.dropdownActions.filter(
-            (x) => !x.isMobileAction || (x.isMobileAction && isSm),
-          )
-        : []
-      ).concat(
-        showExportInDropdown
-          ? [
-              {
-                label: translate('Export'),
-                iconNode: <ExportIcon />,
-                children: EXPORT_OPTIONS.map(({ value, label }) => ({
-                  label: label,
-                  action: () => openExportDialog(props.table, value, props),
-                })),
-              },
-            ]
-          : [],
-      ),
-    );
-  }, [props.dropdownActions, showExportInDropdown, isSm]);
+    (props.enableExport && Boolean(props.dropdownActions) && isSm);
 
   const onClickFilterButton = useCallback(
     (event) => {
@@ -84,7 +50,7 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
   );
 
   const showDefaultActions =
-    dropdownActions?.length ||
+    Boolean(props.dropdownActions) ||
     props.enableExport ||
     props.filters ||
     Boolean(props.gridItem && props.columns.length) ||
@@ -113,12 +79,16 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
           {props.hasOptionalColumns && <TableColumnButton {...props} />}
           {/* Main actions */}
           {showExportInDropdown ? (
-            <TableMoreActions actions={dropdownActions} />
+            <TableMoreActions
+              {...props}
+              actions={props.dropdownActions}
+              showExport
+            />
           ) : (
             <>
               {props.enableExport && <TableExportButton {...props} />}
-              {dropdownActions.length > 0 && (
-                <TableMoreActions actions={dropdownActions} />
+              {Boolean(props.dropdownActions) && (
+                <TableMoreActions {...props} actions={props.dropdownActions} />
               )}
             </>
           )}

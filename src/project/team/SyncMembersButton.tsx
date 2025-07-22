@@ -5,8 +5,8 @@ import { Project, projectsSyncUserRoles } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 interface SyncMembersButtonProps {
@@ -62,10 +62,10 @@ export const SyncMembersButton = ({
     return null;
   }
   return (
-    <ActionButton
-      title={translate('Synchronise members')}
+    <ActionItem
+      title={translate('Sync members')}
       action={handleSync}
-      iconNode={<ArrowsClockwiseIcon />}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
     />
   );
 };

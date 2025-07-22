@@ -125,18 +125,6 @@ interface SortingState extends Sorting {
   loading?: boolean;
 }
 
-export interface TableDropdownItem {
-  label: string;
-  iconNode?: ReactNode;
-  action?: () => void;
-  children?: Array<{
-    label: string;
-    iconNode?: ReactNode;
-    action: () => void;
-  }>;
-  isMobileAction?: boolean;
-}
-
 export type DropdownActionItemType<T = any> = React.ComponentType<
   {
     row?: T;
@@ -179,7 +167,7 @@ export interface TableProps<RowType = any> extends TableState {
   gridSize?: ColProps;
   openFiltersDrawer?: (filters: React.ReactNode) => void;
   renderFiltersDrawer?: (filters: React.ReactNode) => void;
-  dropdownActions?: TableDropdownItem[];
+  dropdownActions?: ReactNode;
   tableActions?: React.ReactNode;
   verboseName?: string;
   className?: string;

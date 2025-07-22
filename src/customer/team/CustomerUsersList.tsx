@@ -88,12 +88,9 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
       expandableRow={({ row }) => (
         <CustomerUsersListExpandableRow row={row} refetch={props.fetch} />
       )}
-      tableActions={
-        <>
-          <CustomerPermissionsLogButton />
-          <TeamDropdownActions refetch={props.fetch} />
-        </>
-      }
+      tableActions={<TeamDropdownActions refetch={props.fetch} />}
+      dropdownActions={<CustomerPermissionsLogButton />}
+      showExportInDropdown
       enableMultiSelect
       multiSelectActions={UsersBulkRemoveButton}
     />

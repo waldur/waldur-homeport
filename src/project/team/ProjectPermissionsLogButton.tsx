@@ -6,8 +6,10 @@ import { getProject } from '@waldur/workspace/selectors';
 
 export const ProjectPermissionsLogButton = ({
   projectId,
+  asDropdownItem,
 }: {
   projectId?: string;
+  asDropdownItem?: boolean;
 }) => {
   const project = useSelector(getProject);
   return (
@@ -16,6 +18,7 @@ export const ProjectPermissionsLogButton = ({
         scope: project?.url || `${ENV.apiEndpoint}api/projects/${projectId}/`,
         event_type: ['role_granted', 'role_revoked', 'role_updated'],
       }}
+      asDropdownItem={asDropdownItem}
     />
   );
 };

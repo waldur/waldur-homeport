@@ -11,6 +11,7 @@ export const CustomerPermissionsLogButton = () => {
         scope: customer.url,
         event_type: ['role_granted', 'role_revoked', 'role_updated'],
       }}
+      asDropdownItem
     />
   );
 };

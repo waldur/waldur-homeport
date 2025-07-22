@@ -98,14 +98,11 @@ export const InvitationsList: FunctionComponent = () => {
       tabs={tableTabs}
       title={translate('Team')}
       verboseName={translate('team invitations')}
-      tableActions={
-        <>
-          <CustomerPermissionsLogButton />
-          <TeamDropdownActions refetch={props.fetch} />
-        </>
-      }
       hasQuery={true}
+      tableActions={<TeamDropdownActions refetch={props.fetch} />}
+      dropdownActions={<CustomerPermissionsLogButton />}
       enableExport
+      showExportInDropdown
       rowActions={({ row }) => (
         <InvitationActions invitation={row} refetch={props.fetch} />
       )}
