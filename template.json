@@ -11575,6 +11575,10 @@
     "description": "administration/organizations/SelectOrganizationGroupFieldHelpers.tsx",
     "message": "Select organization group..."
   },
+  "Select organization groups": {
+    "description": "marketplace/offerings/details/policies/PolicyCreateForm.tsx",
+    "message": "Select organization groups"
+  },
   "Select organization roles": {
     "description": "customer/team/OrganizationRoleSelectField.tsx",
     "message": "Select organization roles"
@@ -11594,6 +11598,10 @@
   "Select organizations...": {
     "description": "broadcasts/BroadcastForm.tsx",
     "message": "Select organizations..."
+  },
+  "Select period": {
+    "description": "marketplace/offerings/details/policies/PolicyCreateForm.tsx",
+    "message": "Select period"
   },
   "Select period...": {
     "description": "issues/feedback/PeriodFilterField.tsx",

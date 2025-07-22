@@ -1,6 +1,6 @@
+import { FORM_ERROR } from 'final-form';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { SubmissionError } from 'redux-form';
 import { marketplaceOfferingEstimatedCostPoliciesCreate } from 'waldur-js-client';
 
 import { AddButton } from '@waldur/core/AddButton';
@@ -12,7 +12,6 @@ import { Offering } from '@waldur/marketplace/types';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/notify';
 
-import { OFFERING_POLICY_FORM } from './PolicyCreateDialog';
 import { OfferingCostPolicyFormData } from './types';
 
 const PolicyCreateDialog = lazyComponent(() =>
@@ -36,7 +35,6 @@ export const CostPolicyCreateButton = ({
       dispatch(
         openModalDialog(PolicyCreateDialog, {
           size: 'lg',
-          formId: OFFERING_POLICY_FORM,
           submitFn: async (formData: OfferingCostPolicyFormData) => {
             try {
               await marketplaceOfferingEstimatedCostPoliciesCreate({
@@ -49,8 +47,9 @@ export const CostPolicyCreateButton = ({
                 showErrorResponse(e, translate('Unable to create policy.')),
               );
               if (e.response && e.response.status === 400) {
-                throw new SubmissionError(e.response.data);
+                return e.response.data;
               }
+              return { [FORM_ERROR]: translate('Unable to create policy.') };
             }
           },
           initialValues: {
@@ -58,9 +57,10 @@ export const CostPolicyCreateButton = ({
             period: policyPeriodOptions.oneMonth.value as PolicyPeriod,
           },
           type: 'cost',
+          offering,
         }),
       ),
-    [dispatch],
+    [dispatch, offering, refetch],
   );
 
   return <AddButton action={openPolicyCreateDialog} />;

@@ -1,14 +1,16 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment } from 'react';
 import { Button, Form, FormLabel } from 'react-bootstrap';
-import { BaseFieldArrayProps, Field, FieldArray } from 'redux-form';
+import { Field } from 'react-final-form';
+import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required } from '@waldur/core/validators';
-import { FormGroup, NumberField, SelectField } from '@waldur/form';
+import { NumberField, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
-interface ComponentLimitsFieldProps extends BaseFieldArrayProps<any> {
+interface ComponentLimitsFieldProps
+  extends FieldArrayRenderProps<any, HTMLElement> {
   components: OfferingComponent[];
 }
 
@@ -17,7 +19,7 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
     let res = true;
     if (fields.length > 0) {
       fields.forEach((_, i) => {
-        const comp = fields.get(i);
+        const comp = fields.value[i];
         if (comp && comp.type === item.type) {
           res = false;
         }
@@ -37,8 +39,7 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
     }
   };
 
-  const removeRow = (index) =>
-    fields._isFieldArray && fields.length > 1 && fields.remove(index);
+  const removeRow = (index) => fields.length > 1 && fields.remove(index);
 
   return (
     <>
@@ -56,7 +57,7 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
               <tbody>
                 {fields.map((component, i) => {
                   const details = components.find(
-                    (c) => c.type === fields.get(i).type,
+                    (c) => c.type === fields.value[i]?.type,
                   );
 
                   return (
@@ -65,33 +66,23 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                         <td>
                           <Field
                             name={`${component}.type`}
-                            component={FormGroup}
-                            validate={[required]}
+                            component={SelectField as any}
+                            validate={required}
                             placeholder={translate('Select component') + '...'}
                             options={getAvailableOptions(details)}
                             getOptionValue={(option) => option.type}
                             getOptionLabel={(option) => option.name}
                             simpleValue
                             isClearable={false}
-                            required={true}
-                            hideLabel
-                            spaceless
-                          >
-                            <SelectField />
-                          </Field>
+                          />
                         </td>
                         <td>
                           <Field
                             name={`${component}.limit`}
-                            required={true}
-                            component={FormGroup}
-                            validate={[required]}
+                            component={NumberField as any}
+                            validate={required}
                             unit={details?.measured_unit}
-                            hideLabel
-                            spaceless
-                          >
-                            <NumberField />
-                          </Field>
+                          />
                         </td>
                         <td>
                           <Button
@@ -99,6 +90,7 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                             className="btn-icon"
                             onClick={() => removeRow(i)}
                             disabled={fields.length === 1}
+                            aria-label="Remove"
                           >
                             <span className="svg-icon svg-icon-2">
                               <TrashIcon />
@@ -116,7 +108,12 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
       )}
       {fields.length < components.length && (
         <div>
-          <Button variant="light" className="btn-icon" onClick={addRow}>
+          <Button
+            variant="light"
+            className="btn-icon"
+            onClick={addRow}
+            aria-label="Add"
+          >
             <span className="svg-icon svg-icon-2">
               <PlusCircleIcon weight="bold" />
             </span>
@@ -127,19 +124,19 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
   );
 };
 
+interface ComponentLimitsFieldWrapperProps {
+  components: OfferingComponent[];
+}
+
 export const ComponentLimitsField = ({
   components,
-}: ComponentLimitsFieldProps) => (
+}: ComponentLimitsFieldWrapperProps) => (
   <div className="mb-7">
     <FormLabel className="required">
       {translate('When component limits reaches')}
     </FormLabel>
-    <FieldArray
-      name="component_limits_set"
-      components={components}
-      component={FieldsListGroup}
-      validate={[required]}
-      rerenderOnEveryChange
-    />
+    <FieldArray name="component_limits_set" validate={required}>
+      {(props) => <FieldsListGroup {...props} components={components} />}
+    </FieldArray>
   </div>
 );
