@@ -1,4 +1,6 @@
-import { reduxForm } from 'redux-form';
+import arrayMutators from 'final-form-arrays';
+import { FC } from 'react';
+import { Form } from 'react-final-form';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -16,41 +18,60 @@ import {
 interface PolicyCreateDialogProps {
   submitFn(
     formData: OfferingCostPolicyFormData | OfferingUsagePolicyFormData,
-  ): void;
+  ): Promise<void>;
   type: OfferingPolicyType;
   offering?: Offering;
+  initialValues?: Partial<
+    OfferingCostPolicyFormData | OfferingUsagePolicyFormData
+  >;
 }
 
-export const OFFERING_POLICY_FORM = 'offeringPolicyCreate';
-
-export const PolicyCreateDialog = reduxForm<
-  OfferingCostPolicyFormData | OfferingUsagePolicyFormData,
-  PolicyCreateDialogProps
->({
-  form: OFFERING_POLICY_FORM,
-})((props) => {
+export const PolicyCreateDialog: FC<PolicyCreateDialogProps> = ({
+  submitFn,
+  type,
+  offering,
+  initialValues,
+}) => {
   return (
-    <form onSubmit={props.handleSubmit(props.submitFn)}>
-      <ModalDialog
-        title={
-          props.type === 'usage'
-            ? translate('New usage policy')
-            : translate('New cost policy')
-        }
-        footer={
-          <>
-            <CloseDialogButton className="min-w-125px" />
-            <SubmitButton
-              disabled={props.invalid || !props.dirty}
-              submitting={props.submitting}
-              label={translate('Create')}
-              className="btn btn-primary min-w-125px"
+    <Form
+      onSubmit={(formData) => submitFn(formData)}
+      initialValues={initialValues}
+      mutators={{ ...arrayMutators }}
+      render={({
+        handleSubmit,
+        submitting,
+        invalid,
+        submitError,
+        pristine,
+      }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
+              type === 'usage'
+                ? translate('New usage policy')
+                : translate('New cost policy')
+            }
+            footer={
+              <>
+                <CloseDialogButton className="min-w-125px" />
+                <SubmitButton
+                  disabled={invalid || pristine}
+                  submitting={submitting}
+                  label={translate('Create')}
+                  className="btn btn-primary min-w-125px"
+                />
+              </>
+            }
+          >
+            <PolicyCreateForm
+              type={type}
+              offering={offering}
+              submitting={submitting}
+              submitError={submitError}
             />
-          </>
-        }
-      >
-        <PolicyCreateForm {...props} />
-      </ModalDialog>
-    </form>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};
