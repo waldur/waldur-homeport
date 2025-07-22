@@ -544,7 +544,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     return (
       (this.props.enableMultiSelect && this.props.multiSelectActions) ||
       this.props.tableActions ||
-      this.props.dropdownActions?.length ||
+      Boolean(this.props.dropdownActions) ||
       this.props.enableExport ||
       this.props.filters ||
       this.props.hasOptionalColumns ||

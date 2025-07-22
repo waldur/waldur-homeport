@@ -88,18 +88,15 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
       tabs={tableTabs}
       title={translate('Team')}
       verboseName={translate('group invitations')}
-      tableActions={
-        <>
-          <CustomerPermissionsLogButton />
-          <TeamDropdownActions refetch={props.fetch} />
-        </>
-      }
+      tableActions={<TeamDropdownActions refetch={props.fetch} />}
+      dropdownActions={<CustomerPermissionsLogButton />}
+      enableExport
+      showExportInDropdown
       rowActions={({ row }) => (
         <GroupInvitationRowActions row={row} refetch={props.fetch} />
       )}
       expandableRow={GroupInvitationsListExpandableRow}
       expandableRowClassName="pb-2 pe-2"
-      enableExport
     />
   );
 };

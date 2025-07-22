@@ -4652,7 +4652,7 @@
     "message": "Export as"
   },
   "Export": {
-    "description": "table/ExportDialog.tsx, table/TableButtons.tsx, table/TableExportButton.tsx",
+    "description": "table/ExportDialog.tsx, table/TableExportButton.tsx",
     "message": "Export"
   },
   "Exporting...": {
@@ -12726,6 +12726,10 @@
   "Switching scripts will discard your changes. Do you want to continue?": {
     "description": "marketplace/offerings/update/integration/EditScriptDialog.tsx",
     "message": "Switching scripts will discard your changes. Do you want to continue?"
+  },
+  "Sync members": {
+    "description": "project/team/SyncMembersButton.tsx",
+    "message": "Sync members"
   },
   "Sync profile": {
     "description": "freeipa/SyncProfile.tsx",

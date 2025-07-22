@@ -131,20 +131,22 @@ export const ServiceAccountsList: FC<ServiceAccountsProps> = ({
       tabs={tableTabs}
       tableActions={
         context === 'customer' ? (
-          <>
-            <CustomerPermissionsLogButton />
-            <TeamDropdownActions refetch={tableProps.fetch} />
-          </>
+          <TeamDropdownActions refetch={tableProps.fetch} />
         ) : (
-          <>
-            <ProjectPermissionsLogButton />
-            <ProjectTeamDropdownActions
-              refetch={tableProps.fetch}
-              project={scope}
-            />
-          </>
+          <ProjectTeamDropdownActions
+            refetch={tableProps.fetch}
+            project={scope}
+          />
         )
       }
+      dropdownActions={
+        context === 'customer' ? (
+          <CustomerPermissionsLogButton />
+        ) : (
+          <ProjectPermissionsLogButton asDropdownItem />
+        )
+      }
+      showExportInDropdown
     />
   );
 };

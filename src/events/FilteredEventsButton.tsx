@@ -3,6 +3,7 @@ import { BookOpenTextIcon } from '@phosphor-icons/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const FilteredEventsDialog = lazyComponent(() =>
@@ -11,10 +12,11 @@ const FilteredEventsDialog = lazyComponent(() =>
   })),
 );
 
-export const FilteredEventsButton = ({ filter }) => {
+export const FilteredEventsButton = ({ filter, asDropdownItem = false }) => {
   const { openDialog } = useModal();
+  const Component = asDropdownItem ? ActionItem : ActionButton;
   return (
-    <ActionButton
+    <Component
       title={translate('History log')}
       action={() =>
         openDialog(FilteredEventsDialog, {
@@ -22,7 +24,7 @@ export const FilteredEventsButton = ({ filter }) => {
           filter,
         })
       }
-      iconNode={<BookOpenTextIcon />}
+      iconNode={<BookOpenTextIcon weight="bold" />}
     />
   );
 };
