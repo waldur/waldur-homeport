@@ -1,16 +1,25 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 import {
+  CallResourceTemplate,
   Proposal,
   proposalProposalsApprove,
   proposalProposalsReject,
+  proposalProposalsResourcesDestroy,
+  proposalProposalsResourcesSet,
+  RequestedResource,
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { PROPOSAL_UPDATE_SUBMISSION_FORM_ID } from '@waldur/proposals/constants';
+import { Call } from '@waldur/proposals/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { fetchListStart } from '@waldur/table/actions';
 import { useUser } from '@waldur/workspace/hooks';
 
 export const useProposalDecisionActions = (
@@ -75,5 +84,101 @@ export const useProposalDecisionActions = (
     canPerformDecisionActions,
     handleApproveProposal,
     handleRejectProposal,
+  };
+};
+
+export const proposalFormDataSelector = (state) =>
+  (getFormValues(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) || {}) as any;
+
+export const useSubmitProposalResourcesFromTemplates = (
+  proposal: Proposal,
+  showMessages = true,
+) => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const formData: {
+    resources: CallResourceTemplate[];
+    resources_init: RequestedResource[];
+  } = useSelector(proposalFormDataSelector);
+
+  const newSelections = useMemo(() => {
+    if (!formData?.resources?.length) return [];
+    return formData.resources.filter((resource) => {
+      return !formData.resources_init.some(
+        (req) => req.call_resource_template === resource.url,
+      );
+    });
+  }, [formData]);
+  const removedSelections = useMemo(() => {
+    if (!formData?.resources_init?.length) return [];
+    return formData.resources_init.filter((req) => {
+      return !formData.resources.some(
+        (resource) => resource.url === req.call_resource_template,
+      );
+    });
+  }, [formData]);
+
+  const { mutate: saveSelections, isPending } = useMutation({
+    mutationFn: async () => {
+      const call = queryClient.getQueryData<Call>([
+        'publicCall',
+        proposal.call_uuid,
+      ]);
+
+      if (!call?.resource_templates?.length) return;
+
+      try {
+        const addPromises = newSelections.map((resource) => {
+          return proposalProposalsResourcesSet({
+            path: { uuid: proposal.uuid },
+            body: { call_resource_template_uuid: resource.uuid },
+          });
+        });
+        const removePromises = removedSelections.map((resource) => {
+          return proposalProposalsResourcesDestroy({
+            path: { uuid: proposal.uuid, obj_uuid: resource.uuid },
+          });
+        });
+        let success;
+        let error;
+        const sendRequests = async (promises) => {
+          await Promise.allSettled(promises).then((results) => {
+            results.forEach((res) => {
+              if (res.status === 'rejected') {
+                error = res.reason;
+              } else if (res.status === 'fulfilled') {
+                success = true;
+              }
+            });
+          });
+        };
+        await sendRequests(removePromises);
+        await sendRequests(addPromises);
+        if (showMessages) {
+          if (success) {
+            dispatch(
+              showSuccess(translate('Resource requests has been updated.')),
+            );
+          }
+          if (error) {
+            dispatch(
+              showErrorResponse(error, translate('Something went wrong')),
+            );
+          }
+        }
+        // Refresh table
+        dispatch(fetchListStart('ProposalResourcesList'));
+      } catch (error) {
+        if (showMessages)
+          dispatch(showErrorResponse(error, translate('Something went wrong')));
+      }
+    },
+  });
+
+  return {
+    save: saveSelections,
+    newCount: newSelections?.length ?? 0,
+    removedCount: removedSelections?.length ?? 0,
+    isPending,
   };
 };

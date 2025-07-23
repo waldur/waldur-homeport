@@ -1,10 +1,16 @@
+import { LockIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
+import { Badge } from '@waldur/core/Badge';
 import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
-export const EndingField = ({ endDate, dateFirst = false }) => {
+export const EndingField = ({
+  endDate,
+  dateFirst = false,
+  hasFixedDuration = false,
+}) => {
   const data = useMemo(() => {
     if (!endDate) return {};
     const endDateParsed = parseDate(endDate);
@@ -32,6 +38,22 @@ export const EndingField = ({ endDate, dateFirst = false }) => {
       ) : (
         <>
           {data.text} ({data.date})
+        </>
+      )}
+      {hasFixedDuration && (
+        <>
+          &nbsp;
+          <Badge
+            variant="blue"
+            outline
+            pill
+            onlyIcon
+            size="sm"
+            tooltip={translate('Fixed duration')}
+            className="w-20px h-20px p-1"
+          >
+            <LockIcon weight="bold" size={12} />
+          </Badge>
         </>
       )}
     </div>

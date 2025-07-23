@@ -21,7 +21,7 @@ export const CallsForProposalsList: FC = () => {
     <Table
       {...tableProps}
       gridItem={({ row }) => <CallCard call={row} />}
-      gridSize={{ lg: 6, xl: 4 }}
+      gridSize={{ lg: 6, xxl: 4 }}
       hoverShadow={{ grid: false }}
       mode="grid"
       title={translate('Open calls')}

@@ -1,5 +1,5 @@
 export {
-  ChecklistQuestion as Question,
+  Question,
   Checklist,
   ChecklistCustomerStats as ChecklistStats,
 } from 'waldur-js-client';

@@ -1,11 +1,9 @@
-import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
+import { EditButton } from '@waldur/form/EditButton';
 import { openModalDialog } from '@waldur/modal/actions';
 import { EditCallProps } from '@waldur/proposals/types';
-import { ActionButton } from '@waldur/table/ActionButton';
 
 const EditGeneralInfoDialog = lazyComponent(() =>
   import('./EditGeneralInfoDialog').then((module) => ({
@@ -23,13 +21,5 @@ export const EditGeneralInfoButton = (props: EditCallProps) => {
       }),
     );
   };
-  return (
-    <ActionButton
-      action={callback}
-      title={translate('Edit')}
-      iconNode={<PencilSimpleIcon />}
-      variant="primary"
-      className="btn-sm"
-    />
-  );
+  return <EditButton onClick={callback} btnIcon size="sm" />;
 };

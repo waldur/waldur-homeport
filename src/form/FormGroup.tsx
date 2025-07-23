@@ -51,7 +51,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
 
   useEffect(() => {
     return () => {
-      if (clearOnUnmount === false) {
+      if (!clearOnUnmount) {
         return;
       }
       dispatch(clearFields(meta.form, false, false, input.name));

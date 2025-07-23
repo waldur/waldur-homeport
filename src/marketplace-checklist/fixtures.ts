@@ -20,6 +20,7 @@ export const checklists: Checklist[] = [
     category_name: 'Project checklist',
     category_uuid: '7fd33c0055d8453d84e4da5371dd8fab',
     roles: [],
+    url: 'api/marketplace-checklists/51525237e3bc40879c437f5d4d3be850',
   },
   {
     uuid: '407296c2821345aab0f02a583293a476',
@@ -29,6 +30,7 @@ export const checklists: Checklist[] = [
     category_name: 'Project checklist',
     category_uuid: '7fd33c0055d8453d84e4da5371dd8fab',
     roles: [],
+    url: 'api/marketplace-checklists/407296c2821345aab0f02a583293a476',
   },
 ];
 
@@ -38,14 +40,14 @@ export const questions: Question[] = [
     description: 'I assign PIDs to all my generated resources',
     solution: 'Please see RDA recommendations here and here',
     category_uuid: '6dfcdbe3c18241dc87526ef411bf6064',
-    correct_answer: true,
+    question_options: [],
   },
   {
     uuid: '4472d7df987644f39804cb7dbdbc2e6e',
     description: 'I preserve data in a storage with SLAs on preservation',
     solution: 'Find a service provider to use for keeping artifacts.',
     category_uuid: '6dfcdbe3c18241dc87526ef411bf6064',
-    correct_answer: true,
+    question_options: [],
   },
 ];
 

@@ -8,6 +8,8 @@ import { Select } from '@waldur/form/themed-select';
 
 interface PlanSelectFieldProps {
   plans: BasePublicPlan[];
+  isLoading?: boolean;
+  isDisabled?: boolean;
 }
 
 export const PlanSelectField: FunctionComponent<PlanSelectFieldProps> = (
@@ -25,6 +27,8 @@ export const PlanSelectField: FunctionComponent<PlanSelectFieldProps> = (
           getOptionLabel={(option: BasePublicPlan) => option.name}
           options={props.plans}
           isClearable={false}
+          isLoading={props.isLoading}
+          isDisabled={props.isDisabled}
         />
 
         {fieldProps.meta.touched && (

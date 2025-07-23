@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { get } from 'lodash-es';
 import { createRef, FC, useCallback, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { change, getFormValues } from 'redux-form';
+import { change } from 'redux-form';
 import {
   proposalProposalsAttachDocument,
   proposalProposalsSubmit,
@@ -21,9 +21,10 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
-
-const formDataSelector = (state) =>
-  (getFormValues(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) || {}) as any;
+import {
+  proposalFormDataSelector,
+  useSubmitProposalResourcesFromTemplates,
+} from './utils';
 
 const attachDocuments = async (proposal_uuid, supporting_documentation) => {
   if (supporting_documentation) {
@@ -69,6 +70,7 @@ export const ProposalSubmissionStep: FC<{
       project_is_confidential: proposal.project_is_confidential,
       duration_in_days: proposal.duration_in_days,
       resources: [],
+      resources_init: [], // Temporary field to hold current resource requests
       users: [],
     }),
     [proposal],
@@ -82,11 +84,15 @@ export const ProposalSubmissionStep: FC<{
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
-  const formData = useSelector(formDataSelector);
+  const formData = useSelector(proposalFormDataSelector);
+
+  const { save: saveResources } =
+    useSubmitProposalResourcesFromTemplates(proposal);
 
   const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
     mutationFn: async () => {
       try {
+        await saveResources();
         await proposalProposalsUpdateProjectDetails({
           path: { uuid: proposal_uuid },
           body: formData,
@@ -120,6 +126,7 @@ export const ProposalSubmissionStep: FC<{
         return;
       }
       try {
+        await saveResources();
         await proposalProposalsUpdateProjectDetails({
           path: { uuid: proposal_uuid },
           body: formValues,
@@ -161,6 +168,7 @@ export const ProposalSubmissionStep: FC<{
       onSubmit={submitForm}
       initialValues={initialValues}
       validate={validate}
+      shouldValidate={() => true}
     >
       {(formProps) => (
         <SidebarLayout.Container>

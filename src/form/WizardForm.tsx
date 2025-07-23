@@ -46,7 +46,7 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
     if (!props.anyTouched) props.touch();
   }, []);
 
-  const formValues = useSelector(getFormValues(props.form));
+  const formValues = useSelector(getFormValues(props.form)) || {};
 
   return (
     <form className="wizard" onSubmit={props.handleSubmit(props.onSubmit)}>

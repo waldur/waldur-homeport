@@ -139,7 +139,8 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
   const { periodic, oneTime } = useComponentsDetailPrices(props);
   const [selectedPeriod, setSelectedPeriod] = useState<PlanPeriod>('monthly');
 
-  const customer = useSelector(getCustomer);
+  const currentCustomer = useSelector(getCustomer);
+  const customer = props.customer || currentCustomer;
   const activeFixedPriceProfile =
     customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 

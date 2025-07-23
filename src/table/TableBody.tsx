@@ -303,7 +303,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             return;
 
           trClick(row, rowIndex);
-          if (fieldProps) {
+          if (fieldProps && !expandableRow) {
             onChangeField(row, fieldProps.input);
           }
         }}

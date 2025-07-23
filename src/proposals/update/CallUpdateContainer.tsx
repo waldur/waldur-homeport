@@ -21,6 +21,7 @@ import { Call } from '../types';
 import { useCallBreadcrumbItems } from '../utils';
 
 import { CallUpdateHero } from './CallUpdateHero';
+import { CallConfiguration } from './configuration/CallConfiguration';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallGeneralSection } from './general/CallGeneralSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
@@ -59,6 +60,11 @@ const Body = ({ call, refetch, loading }) => {
           ),
 
           component: CallGeneralSection,
+        },
+        {
+          key: 'configuration',
+          title: translate('Configuration'),
+          component: CallConfiguration,
         },
         {
           key: 'documents',

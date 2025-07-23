@@ -10,6 +10,7 @@ const countStats = (answers: Answers, questions: Question[]) => {
   questions.forEach((question) => {
     if (answers[question.uuid] === undefined) {
       unknown += 1;
+      // @ts-ignore - correct_answer is not exist in the interface
     } else if (answers[question.uuid] === question.correct_answer) {
       positive += 1;
     } else {

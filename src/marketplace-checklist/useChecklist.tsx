@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import {
+  AnswerSubmitRequest,
   ChecklistCategory,
   marketplaceChecklistsAnswersSubmitCreate,
   marketplaceChecklistsCategoriesRetrieve,
@@ -90,7 +91,7 @@ export const useUserChecklist = (userId, categoryId?) => {
       try {
         const questions = await getAllPages((page) =>
           marketplaceChecklistsQuestionsList({
-            path: { checklist_uuid: checklist.uuid },
+            path: { uuid: checklist.uuid },
             query: { page },
           }),
         );
@@ -137,10 +138,12 @@ export const useUserChecklist = (userId, categoryId?) => {
     setSubmitting(true);
 
     try {
-      const payload = Object.keys(answersTable).map((question_uuid) => ({
-        question_uuid,
-        value: answersTable[question_uuid],
-      }));
+      const payload: AnswerSubmitRequest[] = Object.keys(answersTable).map(
+        (question_uuid) => ({
+          question_uuid,
+          answer_data: answersTable[question_uuid],
+        }),
+      );
       await marketplaceChecklistsAnswersSubmitCreate({
         path: { checklist_uuid: checklist.uuid },
         body: payload,

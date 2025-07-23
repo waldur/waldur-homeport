@@ -36,7 +36,9 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
     ...rest
   } = props;
 
-  const widthClass = `min-w-sm-${width === 'auto' ? width : width + 'px'}`;
+  const widthClass = btnIcon
+    ? ''
+    : `min-w-sm-${width === 'auto' ? width : width + 'px'}`;
 
   return state ? (
     <Link
@@ -53,7 +55,9 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
       {...rest}
     >
       {!btnIcon && iconRight && label}
-      <span className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'}`}>
+      <span
+        className={`svg-icon svg-icon-${size === 'sm' && !btnIcon ? '4' : '2'}`}
+      >
         <PencilSimpleIcon weight="bold" />
       </span>
       {!btnIcon && !iconRight && label}

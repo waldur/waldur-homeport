@@ -17,6 +17,10 @@ const UserInputs = ({ callOffering, optionsValues }) => (
             <td className="col-md-8">
               {typeof optionsValues[key] === 'boolean' ? (
                 <BooleanField value={optionsValues[key]} />
+              ) : typeof optionsValues[key] === 'object' ? (
+                optionsValues[key].name ||
+                optionsValues[key].value ||
+                JSON.stringify(optionsValues[key])
               ) : (
                 renderFieldOrDash(optionsValues[key])
               )}

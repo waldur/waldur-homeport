@@ -56,7 +56,7 @@ const ActionButtonPure: FC<ActionButtonProps> = ({
         <LoadingSpinnerIcon />
       ) : props.iconNode ? (
         <span
-          className={`svg-icon svg-icon-${props.size === 'sm' ? '4' : '2'}`}
+          className={`svg-icon svg-icon-${props.size === 'sm' && props.title ? '4' : '2'}`}
         >
           {props.iconNode}
         </span>

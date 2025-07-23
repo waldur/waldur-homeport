@@ -39,6 +39,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             submitting={props.submitting}
             label={translate('Submit')}
             variant="primary"
+            disabled={props.isSaving}
             errors={
               Object.keys(errors).length
                 ? [

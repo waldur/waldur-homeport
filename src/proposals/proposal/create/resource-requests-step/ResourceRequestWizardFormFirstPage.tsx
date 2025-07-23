@@ -31,17 +31,12 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
   });
   const options = useMemo(() => {
     if (!call) return [];
-    return call.offerings
-      .map((item) => ({
-        requested_offering_uuid: item.uuid,
-        uuid: item.offering_uuid,
-        name: item.offering_name,
-        url: item.offering,
-        customer_name: item.provider_name,
-        attributes: item.attributes,
-        plan: item.plan_details,
-      }))
-      .filter((opt) => Boolean(opt.plan));
+    return (
+      call.offerings
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        .map(({ options, ...rest }) => ({ ...rest })) // To avoid error on react-select because of group options
+        .filter((opt) => Boolean(opt.plan))
+    );
   }, [call]);
 
   return (
@@ -69,7 +64,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
                 isClearable={true}
                 component={SelectField}
                 getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.name}
+                getOptionLabel={(option) => option.offering_name}
                 placeholder={translate('Select offering') + '...'}
                 isLoading={isLoading}
                 noUpdateOnBlur
@@ -84,7 +79,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
             {offering && (
               <p>
                 <strong>{translate('Service provider')}: </strong>
-                {offering.customer_name}
+                {offering.provider_name}
               </p>
             )}
           </FormContainer>

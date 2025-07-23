@@ -57,7 +57,7 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
         Object.assign(attributes, { limits: formData.limits });
       }
       const payload = {
-        requested_offering_uuid: formData.offering.requested_offering_uuid,
+        requested_offering_uuid: formData.offering.uuid,
         attributes,
       };
       if (props.resolve.resourceRequest) {
@@ -129,20 +129,7 @@ export const ResourceRequestFormDialog: FC<OwnProps> = (props) => {
       initialValues={
         isEdit
           ? {
-              offering: {
-                attributes:
-                  props.resolve.resourceRequest.requested_offering.attributes,
-                customer_name:
-                  props.resolve.resourceRequest.requested_offering
-                    .provider_name,
-                name: props.resolve.resourceRequest.requested_offering
-                  .offering_name,
-                requested_offering_uuid:
-                  props.resolve.resourceRequest.requested_offering.uuid,
-                url: props.resolve.resourceRequest.requested_offering.offering,
-                uuid: props.resolve.resourceRequest.requested_offering
-                  .offering_uuid,
-              },
+              offering: { ...props.resolve.resourceRequest.requested_offering },
               attributes: props.resolve.resourceRequest.attributes,
               limits: props.resolve.resourceRequest.attributes?.limits,
               plan: props.resolve.resourceRequest.requested_offering
