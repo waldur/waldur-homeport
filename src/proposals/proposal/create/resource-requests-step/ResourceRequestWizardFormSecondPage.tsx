@@ -20,11 +20,11 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
         const { offering, mainOffering, plan, limits } = wizardProps.formValues;
 
         const queryData = useQuery({
-          queryKey: ['offering', offering?.uuid],
+          queryKey: ['offering', offering?.offering_uuid],
 
           queryFn: () =>
             marketplacePublicOfferingsRetrieve({
-              path: { uuid: offering.uuid },
+              path: { uuid: offering.offering_uuid },
             }).then((response) => response.data),
 
           staleTime: 3 * 60 * 1000,
@@ -80,6 +80,7 @@ export const ResourceRequestWizardFormSecondPage: FunctionComponent<
                   offering={queryData.data}
                   plan={plan}
                   limits={limits}
+                  customer={{ url: mainOffering?.customer_uuid }}
                 />
               </>
             )}

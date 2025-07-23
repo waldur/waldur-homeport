@@ -78,68 +78,6 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                 </div>
               </td>
             </tr>
-            <tr>
-              <td className="col-md-3">
-                {translate('Fixed duration for granted projects (in days)')}
-              </td>
-              <td className="col-md-9">
-                {props.call.fixed_duration_in_days || 'N/A'}
-              </td>
-              <td className="row-actions">
-                <div>
-                  <EditGeneralInfoButton
-                    call={props.call}
-                    name="fixed_duration_in_days"
-                    title={translate(
-                      'Edit fixed duration for granted projects (in days)',
-                    )}
-                    refetch={props.refetch}
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="col-md-3">
-                {translate('Reviewer identity visible to submitters')}
-              </td>
-              <td className="col-md-9">
-                {props.call.reviewer_identity_visible_to_submitters
-                  ? translate('Yes')
-                  : translate('No')}
-              </td>
-              <td className="row-actions">
-                <div>
-                  <EditGeneralInfoButton
-                    call={props.call}
-                    name="reviewer_identity_visible_to_submitters"
-                    title={translate(
-                      'Edit reviewer identity visibility for submitters',
-                    )}
-                    refetch={props.refetch}
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td className="col-md-3">
-                {translate('Reviews visible to submitters')}
-              </td>
-              <td className="col-md-9">
-                {props.call.reviews_visible_to_submitters
-                  ? translate('Yes')
-                  : translate('No')}
-              </td>
-              <td className="row-actions">
-                <div>
-                  <EditGeneralInfoButton
-                    call={props.call}
-                    name="reviews_visible_to_submitters"
-                    title={translate('Edit reviews visibility for submitters')}
-                    refetch={props.refetch}
-                  />
-                </div>
-              </td>
-            </tr>
             {isFeatureVisible(MarketplaceFeatures.call_only) && (
               <tr>
                 <td className="col-md-3">{translate('External URL')}</td>

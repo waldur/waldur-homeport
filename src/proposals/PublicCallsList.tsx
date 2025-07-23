@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { ProposalPublicCallsListData } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -85,6 +86,19 @@ const CallColumns = [
       );
     },
     filter: 'has_active_round',
+  },
+  {
+    title: translate('Duration'),
+    render: ({ row }) =>
+      row.fixed_duration_in_days ? (
+        <Badge variant="blue" outline pill>
+          {translate('Fixed - {n} days', {
+            n: row.fixed_duration_in_days,
+          })}
+        </Badge>
+      ) : (
+        translate('Standard')
+      ),
   },
 ];
 

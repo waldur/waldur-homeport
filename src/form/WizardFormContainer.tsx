@@ -1,7 +1,7 @@
 import { uniq } from 'lodash-es';
-import { useState, createElement, FC, useCallback } from 'react';
+import { useState, createElement, FC, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { change, getFormValues } from 'redux-form';
+import { change, destroy, getFormValues } from 'redux-form';
 
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { WizardFormStepProps } from '@waldur/form/WizardForm';
@@ -67,6 +67,11 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
     });
     setInitialized(true);
   }, [initialized, setInitialized, dispatch, formValues]);
+
+  // Destroy the form on close wizard
+  useEffect(() => {
+    return () => dispatch(destroy(form));
+  }, []);
 
   return createElement(props.wizardForms[step], {
     form,

@@ -3,13 +3,14 @@ import { FunctionComponent, ReactNode } from 'react';
 import BsBadge, { BadgeProps } from 'react-bootstrap/Badge';
 import type { Variant } from 'react-bootstrap/types';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip, TipProps } from '@waldur/core/Tooltip';
 
 interface OwnProps extends BadgeProps {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   onlyIcon?: boolean;
-  tooltip?: string;
+  tooltip?: ReactNode;
+  tooltipProps?: Partial<TipProps>;
   variant?: Variant;
   roundless?: boolean;
   light?: boolean;
@@ -19,9 +20,9 @@ interface OwnProps extends BadgeProps {
   size?: 'sm' | 'lg';
 }
 
-const wrapTooltip = (label, children) =>
+const wrapTooltip = (label, children, props = {}) =>
   label ? (
-    <Tip label={label} id="state-indicator">
+    <Tip label={label} id="state-indicator" {...props}>
       {children}
     </Tip>
   ) : (
@@ -34,6 +35,7 @@ export const Badge: FunctionComponent<OwnProps> = ({
   rightIcon,
   onlyIcon,
   tooltip,
+  tooltipProps,
   roundless,
   light,
   outline,
@@ -60,6 +62,7 @@ export const Badge: FunctionComponent<OwnProps> = ({
         roundless && 'rounded-0',
         pill && 'badge-pill',
         leftIcon && 'has-left-icon',
+        rightIcon && 'has-right-icon',
         hasBullet && 'has-bullet',
         onlyIcon && 'badge-icon',
         className,
@@ -70,4 +73,5 @@ export const Badge: FunctionComponent<OwnProps> = ({
       {children}
       {Boolean(rightIcon) && <span className="right-icon">{rightIcon}</span>}
     </BsBadge>,
+    tooltipProps,
   );

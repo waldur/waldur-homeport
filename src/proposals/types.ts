@@ -1,4 +1,7 @@
-import { type ProtectedCall as Call } from 'waldur-js-client';
+import {
+  RequestedOffering,
+  type ProtectedCall as Call,
+} from 'waldur-js-client';
 
 import { Limits } from '@waldur/marketplace/details/types';
 import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
@@ -76,7 +79,7 @@ export interface ProposalResource {
 }
 
 export interface ProposalResourceFormData {
-  offering: CallOffering & { requested_offering_uuid: string };
+  offering: RequestedOffering;
   attributes: AttributesType;
   plan: Plan;
   limits?: Limits;

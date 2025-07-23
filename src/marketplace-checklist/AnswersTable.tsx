@@ -20,8 +20,10 @@ const QuestionGroup: FunctionComponent<{
 }> = ({ question, answers }) => (
   <>
     {question.description}
+    {/* @ts-ignore - correct_answer is not exist in the interface */}
     {answers[question.uuid] !== question.correct_answer &&
       question.solution && <p>{question.solution}</p>}
+    {/* @ts-ignore - correct_answer is not exist in the interface */}
     {answers[question.uuid] !== question.correct_answer &&
       question.category_uuid && (
         <p>

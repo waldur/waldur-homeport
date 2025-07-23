@@ -1,7 +1,7 @@
 import { LightbulbFilamentIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
 
@@ -9,11 +9,11 @@ import { Tip } from '@waldur/core/Tooltip';
 import { getNameFieldValidators } from '@waldur/core/validators';
 import { FormGroup, StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-
-import { orderProjectSelector } from '../selectors';
+import { showErrorResponse } from '@waldur/store/notify';
 
 const ResourceNameField = (props) => {
-  const project = useSelector(orderProjectSelector);
+  const dispatch = useDispatch();
+  const project = props.project;
   const { mutate: suggestName, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       const response = await marketplaceResourcesSuggestName({
@@ -23,6 +23,9 @@ const ResourceNameField = (props) => {
         },
       });
       props.input.onChange(response.data['name']);
+    },
+    onError: (error) => {
+      dispatch(showErrorResponse(error as any));
     },
   });
 
@@ -59,15 +62,20 @@ const ResourceNameField = (props) => {
     </div>
   );
 };
-export const ResourceNameGroup = ({ nameValidate, nameLabel, offering }) => (
+export const ResourceNameGroup = ({
+  nameValidate = getNameFieldValidators(),
+  nameLabel = translate('Name'),
+  offering,
+  project,
+}) => (
   <Field
     name="attributes.name"
-    label={nameLabel || translate('Name')}
+    label={nameLabel}
     component={FormGroup}
     required={true}
     description={translate('This name will be visible in accounting data.')}
-    validate={nameValidate || getNameFieldValidators()}
+    validate={nameValidate}
   >
-    <ResourceNameField offering={offering} />
+    <ResourceNameField offering={offering} project={project} />
   </Field>
 );

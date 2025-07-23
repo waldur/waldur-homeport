@@ -1,15 +1,19 @@
+import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
 import { FormGroup, TextField } from '@waldur/form';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 
+import { orderProjectSelector } from '../selectors';
 import { FormStepProps } from '../types';
 
 import { ResourceNameGroup } from './ResourceNameGroup';
 import { TerminationDateField } from './TerminationDateField';
 
 export const FormFinalConfigurationStep = (props: FormStepProps) => {
+  const project = useSelector(orderProjectSelector);
+
   return (
     <VStepperFormStepCard
       title={translate('Final configuration')}
@@ -21,6 +25,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         nameValidate={props.params?.nameValidate}
         nameLabel={props.params?.nameLabel}
         offering={props.offering}
+        project={project}
       />
 
       <Field

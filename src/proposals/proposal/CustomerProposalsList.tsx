@@ -94,7 +94,13 @@ export const CustomerProposalsList: FC<{}> = () => {
         },
         {
           title: translate('Ending'),
-          render: ({ row }) => <EndingField endDate={row.round?.cutoff_time} />,
+          render: ({ row }) => (
+            <EndingField
+              endDate={row.round?.cutoff_time}
+              hasFixedDuration={Boolean(row.duration_in_days)}
+            />
+          ),
+          className: 'text-nowrap',
         },
         {
           title: translate('State'),

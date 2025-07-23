@@ -3,23 +3,27 @@ import { Props as SelectProps } from 'react-select';
 import { BaseFieldProps, Field } from 'redux-form';
 
 import { AsyncPaginate } from '@waldur/form/themed-select';
+import { FormField } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
 
-interface OrganizationAutocompleteProps {
+interface OrganizationAutocompleteProps extends FormField {
+  name?: string;
   label?: string;
   placeholder?: string;
   noOptionsMessage?: string;
   reactSelectProps?: Partial<SelectProps>;
   validator?: BaseFieldProps['validate'];
+  onChange?(value: any): void;
 }
 
 export const OrganizationAutocomplete: FunctionComponent<
   OrganizationAutocompleteProps
 > = (props) => (
   <Field
-    name="organization"
+    name={props.name || 'organization'}
     validate={props.validator}
+    onChange={props.onChange}
     component={(fieldProps) => (
       <AsyncPaginate
         placeholder={props.placeholder || translate('Select organization...')}

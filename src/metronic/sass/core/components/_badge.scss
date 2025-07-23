@@ -91,9 +91,9 @@
     position: relative;
     padding-right: 1.6em;
 
-    .left-icon {
+    .right-icon {
       position: absolute;
-      transform: translateY(50%);
+      transform: translateY(-50%);
       right: 5px;
       top: 50%;
     }
