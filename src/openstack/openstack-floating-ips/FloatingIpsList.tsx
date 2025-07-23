@@ -41,6 +41,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
         'instance_uuid',
         'instance_name',
         'project_uuid',
+        'port_fixed_ips',
       ],
     }),
     [resourceScope],
