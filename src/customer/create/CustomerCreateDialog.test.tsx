@@ -1,13 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  pushStateLocationPlugin,
-  servicesPlugin,
-  UIRouter,
-  UIRouterReact,
-} from '@uirouter/react';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { customersAddUser, customersCreate } from 'waldur-js-client';
 
@@ -20,74 +12,55 @@ import { CustomerCreateDialog } from './CustomerCreateDialog';
 // Mock API calls
 vi.mock('waldur-js-client');
 vi.mock('@waldur/user/UsersService');
+vi.mock('@waldur/modal/hooks', () => ({
+  useModal: () => ({
+    closeDialog: vi.fn(),
+  }),
+}));
 
 // Mock i18n
 vi.mock('@waldur/i18n', () => ({
   translate: (message: string) => message,
 }));
 
-// Mock notify hooks
-vi.mock('@waldur/store/notify', () => ({
-  showSuccess: vi.fn(() => ({ type: 'SHOW_SUCCESS' })),
-  showErrorResponse: vi.fn(() => ({ type: 'SHOW_ERROR_RESPONSE' })),
+const mockUser = {
+  uuid: 'test-user-uuid',
+  name: 'Test User',
+};
+
+const mockSetUser = vi.fn();
+const mockShowSuccess = vi.fn();
+const mockShowErrorResponse = vi.fn();
+const mockRouter = {
+  stateService: {
+    go: vi.fn(),
+  },
+};
+
+// Mock hooks
+vi.mock('@uirouter/react', async (importOriginal) => {
+  const mod: any = await importOriginal();
+  return {
+    ...mod,
+    useRouter: () => mockRouter,
+  };
+});
+
+vi.mock('@waldur/store/hooks', () => ({
+  useNotify: () => ({
+    showSuccess: mockShowSuccess,
+    showErrorResponse: mockShowErrorResponse,
+  }),
 }));
 
-// Mock workspace actions
-vi.mock('@waldur/workspace/actions', () => ({
-  setCurrentUser: vi.fn((user) => ({
-    type: 'SET_CURRENT_USER',
-    payload: user,
-  })),
+vi.mock('@waldur/workspace/hooks', () => ({
+  useUser: () => mockUser,
+  useSetUser: () => mockSetUser,
 }));
 
 describe('CustomerCreateDialog', () => {
-  const mockRouter = {
-    stateService: {
-      go: vi.fn(),
-    },
-  };
-
   const renderComponent = (role = constants.ROLES.customer) => {
-    // Mock Redux store with middleware
-    const mockStore = createStore((state: any = {}, action: any) => {
-      switch (action.type) {
-        case 'SET_CURRENT_USER':
-          return {
-            ...(state || {}),
-            workspace: {
-              ...(state?.workspace || {}),
-              user: action.payload,
-            },
-          };
-        case 'SHOW_SUCCESS':
-        case 'SHOW_ERROR_RESPONSE':
-          return state;
-        default:
-          return {
-            workspace: {
-              user: {
-                uuid: 'test-user-uuid',
-                is_staff: true,
-                permissions: [],
-              },
-            },
-          };
-      }
-    });
-
-    const router = new UIRouterReact();
-    router.plugin(servicesPlugin);
-    router.plugin(pushStateLocationPlugin);
-    // Mock the stateService
-    router.stateService = mockRouter.stateService as any;
-
-    return render(
-      <Provider store={mockStore}>
-        <UIRouter router={router}>
-          <CustomerCreateDialog resolve={{ role }} />
-        </UIRouter>
-      </Provider>,
-    );
+    return render(<CustomerCreateDialog resolve={{ role }} />);
   };
 
   beforeEach(() => {
@@ -114,15 +87,12 @@ describe('CustomerCreateDialog', () => {
     expect(screen.getByText('Cancel')).toBeInTheDocument();
   });
 
-  it('should validate required fields', async () => {
+  it('should validate required fields', () => {
     renderComponent();
 
     // Try to submit without filling any fields
     const createButton = screen.getByText('Create');
-    await userEvent.click(createButton);
-
-    // Form should not submit and validation errors should be visible
-    expect(customersCreate).not.toHaveBeenCalled();
+    expect(createButton).toBeDisabled();
   });
 
   it('should validate email format', async () => {
@@ -138,10 +108,7 @@ describe('CustomerCreateDialog', () => {
 
     // Try to submit
     const createButton = screen.getByText('Create');
-    await userEvent.click(createButton);
-
-    // Form should not submit due to invalid email
-    expect(customersCreate).not.toHaveBeenCalled();
+    expect(createButton).toBeDisabled();
   });
 
   it('should create organization successfully for customer role', async () => {
@@ -151,17 +118,15 @@ describe('CustomerCreateDialog', () => {
         name: 'Test Organization',
         email: 'test@example.com',
       },
-      request: {} as Request,
-      response: {} as Response,
     };
 
-    const mockUser = {
-      uuid: 'updated-user-uuid',
+    const refreshedUser = {
+      uuid: 'refreshed-user-uuid',
       name: 'Test User',
     };
 
-    vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse);
-    vi.mocked(getCurrentUser).mockResolvedValue(mockUser);
+    vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse as any);
+    vi.mocked(getCurrentUser).mockResolvedValue(refreshedUser);
 
     renderComponent(constants.ROLES.customer);
 
@@ -177,20 +142,32 @@ describe('CustomerCreateDialog', () => {
     await userEvent.click(createButton);
 
     // Wait for the API call
-    await waitFor(
-      () => {
-        expect(customersCreate).toHaveBeenCalledWith({
-          body: {
-            name: 'Test Organization',
-            email: 'test@example.com',
-          },
-        });
-      },
-      { timeout: 3000 },
-    );
+    await waitFor(() => {
+      expect(customersCreate).toHaveBeenCalledWith({
+        body: {
+          name: 'Test Organization',
+          email: 'test@example.com',
+        },
+      });
+    });
 
     // Should not add user for customer role
     expect(customersAddUser).not.toHaveBeenCalled();
+
+    // Check for success side-effects
+    await waitFor(() => {
+      expect(mockShowSuccess).toHaveBeenCalledWith(
+        'Organization has been created.',
+      );
+      expect(getCurrentUser).toHaveBeenCalled();
+      expect(mockSetUser).toHaveBeenCalledWith(refreshedUser);
+      expect(mockRouter.stateService.go).toHaveBeenCalledWith(
+        'organization-manage',
+        {
+          uuid: 'new-customer-uuid',
+        },
+      );
+    });
   });
 
   it('should create organization and add user for provider role', async () => {
@@ -200,18 +177,16 @@ describe('CustomerCreateDialog', () => {
         name: 'Test Organization',
         email: 'test@example.com',
       },
-      request: {} as Request,
-      response: {} as Response,
     };
 
-    const mockUser = {
-      uuid: 'updated-user-uuid',
+    const refreshedUser = {
+      uuid: 'refreshed-user-uuid',
       name: 'Test User',
     };
 
-    vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse);
+    vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse as any);
     vi.mocked(customersAddUser).mockResolvedValue({} as any);
-    vi.mocked(getCurrentUser).mockResolvedValue(mockUser);
+    vi.mocked(getCurrentUser).mockResolvedValue(refreshedUser);
 
     renderComponent(constants.ROLES.provider);
 
@@ -227,31 +202,40 @@ describe('CustomerCreateDialog', () => {
     await userEvent.click(createButton);
 
     // Wait for the API calls
-    await waitFor(
-      () => {
-        expect(customersCreate).toHaveBeenCalledWith({
-          body: {
-            name: 'Test Organization',
-            email: 'test@example.com',
-          },
-        });
-      },
-      { timeout: 3000 },
-    );
+    await waitFor(() => {
+      expect(customersCreate).toHaveBeenCalledWith({
+        body: {
+          name: 'Test Organization',
+          email: 'test@example.com',
+        },
+      });
+    });
 
     // Should add user for provider role
-    await waitFor(
-      () => {
-        expect(customersAddUser).toHaveBeenCalledWith({
-          path: { uuid: 'new-customer-uuid' },
-          body: {
-            role: RoleEnum.CUSTOMER_OWNER,
-            user: 'test-user-uuid',
-          },
-        });
-      },
-      { timeout: 3000 },
-    );
+    await waitFor(() => {
+      expect(customersAddUser).toHaveBeenCalledWith({
+        path: { uuid: 'new-customer-uuid' },
+        body: {
+          role: RoleEnum.CUSTOMER_OWNER,
+          user: mockUser.uuid,
+        },
+      });
+    });
+
+    // Check for success side-effects
+    await waitFor(() => {
+      expect(mockShowSuccess).toHaveBeenCalledWith(
+        'Organization has been created.',
+      );
+      expect(getCurrentUser).toHaveBeenCalled();
+      expect(mockSetUser).toHaveBeenCalledWith(refreshedUser);
+      expect(mockRouter.stateService.go).toHaveBeenCalledWith(
+        'organization-manage',
+        {
+          uuid: 'new-customer-uuid',
+        },
+      );
+    });
   });
 
   it('should handle API errors during organization creation', async () => {
@@ -280,6 +264,10 @@ describe('CustomerCreateDialog', () => {
     // Wait for error handling
     await waitFor(() => {
       expect(customersCreate).toHaveBeenCalled();
+      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        mockError,
+        'Could not create organization',
+      );
       // Should not navigate on error
       expect(mockRouter.stateService.go).not.toHaveBeenCalled();
     });
@@ -306,6 +294,10 @@ describe('CustomerCreateDialog', () => {
     // Wait for error handling
     await waitFor(() => {
       expect(customersCreate).toHaveBeenCalled();
+      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        networkError,
+        'Could not create organization',
+      );
       // Should not navigate on error
       expect(mockRouter.stateService.go).not.toHaveBeenCalled();
     });
@@ -318,13 +310,11 @@ describe('CustomerCreateDialog', () => {
         name: 'Test Organization',
         email: 'test@example.com',
       },
-      request: {} as Request,
-      response: {} as Response,
     };
 
     const addUserError = new Error('Failed to add user');
 
-    vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse);
+    vi.mocked(customersCreate).mockResolvedValue(mockCustomerResponse as any);
     vi.mocked(customersAddUser).mockRejectedValue(addUserError);
 
     renderComponent(constants.ROLES.provider);
@@ -344,6 +334,10 @@ describe('CustomerCreateDialog', () => {
     await waitFor(() => {
       expect(customersCreate).toHaveBeenCalled();
       expect(customersAddUser).toHaveBeenCalled();
+      expect(mockShowErrorResponse).toHaveBeenCalledWith(
+        addUserError,
+        'Could not create organization',
+      );
       // Should not navigate if user addition fails
       expect(mockRouter.stateService.go).not.toHaveBeenCalled();
     });
