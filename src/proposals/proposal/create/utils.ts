@@ -62,15 +62,26 @@ export const useProposalDecisionActions = (
   }, [dispatch, proposal.uuid, proposal.name, proposal.state, refetch]);
 
   const handleRejectProposal = useCallback(async () => {
-    await waitForConfirmation(
-      dispatch,
-      translate('Confirmation'),
-      translate('Are you sure you want to reject the proposal: {name}?', {
-        name: proposal.name,
-      }),
-    );
     try {
-      await proposalProposalsReject({ path: { uuid: proposal.uuid } });
+      const reason = await waitForConfirmation(
+        dispatch,
+        translate('Confirmation'),
+        translate('Are you sure you want to reject the proposal: {name}?', {
+          name: proposal.name,
+        }),
+        {
+          showInput: true,
+          inputLabel: translate('Rejection reason'),
+          inputPlaceholder: translate('Enter reason for rejection'),
+          inputRequired: false,
+        },
+      );
+
+      await proposalProposalsReject({
+        path: { uuid: proposal.uuid },
+        body: { allocation_comment: reason },
+      });
+
       dispatch(showSuccess(translate('Proposal has been rejected.')));
       refetch();
     } catch (error) {
