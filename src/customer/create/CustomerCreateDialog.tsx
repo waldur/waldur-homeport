@@ -3,7 +3,6 @@ import { useRouter } from '@uirouter/react';
 import { FC, useCallback } from 'react';
 import { Form } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { reset, SubmissionError } from 'redux-form';
 import { customersAddUser, customersCreate } from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/form';
@@ -54,14 +53,10 @@ export const CustomerCreateDialog: FC<OwnProps> = ({ resolve }) => {
         router.stateService.go('organization-manage', {
           uuid: customer.uuid,
         });
-        dispatch(reset('CustomerCreateDialog'));
       } catch (e) {
         dispatch(
           showErrorResponse(e, translate('Could not create organization')),
         );
-        if (e.status === 400) {
-          throw new SubmissionError(e.data);
-        }
       }
     },
     [dispatch, router, user, resolve.role],
