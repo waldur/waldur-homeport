@@ -2,7 +2,6 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { customersAddUser, customersCreate } from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/form';
@@ -10,10 +9,9 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { RoleEnum } from '@waldur/permissions/enums';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
 import { getCurrentUser } from '@waldur/user/UsersService';
-import { setCurrentUser } from '@waldur/workspace/actions';
-import { getUser } from '@waldur/workspace/selectors';
+import { useSetUser, useUser } from '@waldur/workspace/hooks';
 
 import * as constants from './constants';
 import { CustomerCreateForm } from './CustomerCreateForm';
@@ -27,8 +25,9 @@ interface OwnProps {
 }
 
 export const CustomerCreateDialog: FC<OwnProps> = ({ resolve }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const user = useUser();
+  const setUser = useSetUser();
+  const { showSuccess, showErrorResponse } = useNotify();
   const router = useRouter();
 
   const createOrganization = useCallback(
@@ -47,19 +46,17 @@ export const CustomerCreateDialog: FC<OwnProps> = ({ resolve }) => {
             },
           });
         }
-        dispatch(showSuccess(translate('Organization has been created.')));
+        showSuccess(translate('Organization has been created.'));
         const newUser = await getCurrentUser();
-        dispatch(setCurrentUser(newUser));
+        setUser(newUser);
         router.stateService.go('organization-manage', {
           uuid: customer.uuid,
         });
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Could not create organization')),
-        );
+        showErrorResponse(e, translate('Could not create organization'));
       }
     },
-    [dispatch, router, user, resolve.role],
+    [showSuccess, showErrorResponse, setUser, router, user, resolve.role],
   );
   return (
     <Form
