@@ -1,0 +1,146 @@
+import { useQuery } from '@tanstack/react-query';
+import { FC, useEffect, useMemo } from 'react';
+import { Col, FormLabel } from 'react-bootstrap';
+import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
+
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { FormContainer, SelectField } from '@waldur/form';
+import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
+import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
+import { translate } from '@waldur/i18n';
+import { getCategories } from '@waldur/marketplace/common/api';
+import { publicOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
+import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
+import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
+
+export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
+  const categoriesQuery = useQuery({
+    queryKey: ['marketplaceCategories'],
+    queryFn: getCategories,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const rule = props.data.rule;
+
+  return (
+    <WizardForm {...props}>
+      {(wizardProps) => {
+        const { category, offering, plan, limits, attributes } =
+          wizardProps.formValues;
+
+        const offeringQuery = useQuery({
+          queryKey: ['offering', offering?.uuid],
+          queryFn: () =>
+            !offering?.uuid
+              ? null
+              : marketplacePublicOfferingsRetrieve({
+                  path: { uuid: offering.uuid },
+                }).then((response) => response.data),
+          staleTime: 3 * 60 * 1000,
+        });
+
+        useEffect(() => {
+          if (offeringQuery.data) {
+            wizardProps.change('offering', offeringQuery.data);
+          }
+        }, [offeringQuery?.data]);
+
+        const plans = useMemo(
+          () =>
+            offeringQuery.isLoading || !offeringQuery?.data?.plans
+              ? []
+              : offeringQuery.data.plans.filter(
+                  (plan) => plan.archived === false,
+                ),
+          [offeringQuery],
+        );
+
+        // We cannot directly use the 'plan' in edit mode because it lacks plan details when initialized.
+        const selectedPlan = useMemo(
+          () => (plan ? plans.find((p) => p.url === plan.url) : null),
+          [plans, plan],
+        );
+
+        return (
+          <FormContainer
+            submitting={wizardProps.submitting}
+            className="size-lg"
+            asRow
+          >
+            <SelectField
+              name="category"
+              label={translate('Category')}
+              options={categoriesQuery.data}
+              isClearable={false}
+              getOptionValue={(option) => option.url}
+              getOptionLabel={(option) => option.title}
+              isLoading={categoriesQuery.isLoading}
+              containerClassName="col-md-6"
+              onChange={(v) => {
+                if (v.uuid !== category?.uuid) {
+                  wizardProps.change('offering', null);
+                }
+              }}
+            />
+            <AsyncSelectField
+              key={category?.uuid}
+              name="offering"
+              label={translate('Offering')}
+              placeholder={translate('Select offering...')}
+              loadOptions={(query, prevOptions, page) =>
+                publicOfferingsAutocomplete(
+                  { name: query, category_uuid: category.uuid },
+                  prevOptions,
+                  page,
+                  ['uuid', 'name'],
+                )
+              }
+              getOptionValue={(option) => option.uuid}
+              getOptionLabel={(option) => option.name}
+              isDisabled={!category}
+              containerClassName="col-md-6"
+              onChange={(v) => {
+                if (v.uuid !== offering?.uuid) {
+                  wizardProps.change('plan', null);
+                  wizardProps.change('limits', null);
+                  if (attributes?.description) {
+                    wizardProps.change('attributes', {
+                      description: attributes?.description,
+                    });
+                  } else {
+                    wizardProps.change('attributes', null);
+                  }
+                }
+              }}
+            />
+            {offeringQuery.error ? (
+              <LoadingErred loadData={offeringQuery.refetch} />
+            ) : null}
+            <Col>
+              <FormLabel>{translate('Plan')}</FormLabel>
+              <div className="d-flex gap-6 pb-6 border-bottom mb-7">
+                <div className="flex-grow-1">
+                  <PlanSelectField
+                    plans={plans}
+                    isLoading={offeringQuery.isLoading}
+                    isDisabled={!offering}
+                  />
+                </div>
+                <PlanDescriptionButton formId={props.form} />
+              </div>
+              {offeringQuery.data && selectedPlan && (
+                <PlanDetailsTable2
+                  offering={offeringQuery.data}
+                  plan={selectedPlan}
+                  limits={limits}
+                  customer={{ url: rule.customer }}
+                />
+              )}
+            </Col>
+          </FormContainer>
+        );
+      }}
+    </WizardForm>
+  );
+};

@@ -521,6 +521,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-auto-provisioning-rules',
+    url: 'auto-provisioning-rules/',
+    parent: 'admin-settings',
+    component: lazyComponent(() =>
+      import('./auto-provisioning-rules/RulesList').then((module) => ({
+        default: module.RulesList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Auto-provisioning rules'),
+    },
+  },
+
+  {
     name: 'admin-notification-messages',
     url: 'notification-messages/',
     parent: 'admin-settings',

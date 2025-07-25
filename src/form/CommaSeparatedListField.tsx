@@ -13,21 +13,25 @@ interface CommaSeparatedListFieldProps
   maxLength?: number;
   autoFocus?: boolean;
   solid?: boolean;
+  separator?: 'comma' | 'space';
 }
 
 export const CommaSeparatedListField: FC<CommaSeparatedListFieldProps> = ({
   input,
   placeholder = translate('Enter comma-separated values'),
   solid,
+  separator: sep = 'comma',
   ...rest
 }) => {
   const value = Array.isArray(input.value)
-    ? input.value.join(', ')
+    ? input.value.join(sep === 'comma' ? ', ' : ' ')
     : input.value;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    const parsedValue = newValue.split(',').map((item) => item.trim());
+    const parsedValue = newValue
+      .split(sep === 'comma' ? ',' : ' ')
+      .map((item) => item.trim());
     input.onChange(parsedValue);
   };
 

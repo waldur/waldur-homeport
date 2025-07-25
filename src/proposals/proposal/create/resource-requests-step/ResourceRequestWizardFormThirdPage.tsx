@@ -9,10 +9,12 @@ export const ResourceRequestWizardFormThirdPage: FunctionComponent<
   return (
     <WizardForm {...props}>
       {(wizardProps) => {
-        const { mainOffering } = wizardProps.formValues;
-        return mainOffering?.options ? (
+        const { mainOffering, offering } = wizardProps.formValues;
+        const _offering = mainOffering || offering;
+
+        return _offering?.options ? (
           <OptionsForm
-            options={mainOffering.options}
+            options={_offering.options}
             submitting={wizardProps.submitting}
           />
         ) : null;
