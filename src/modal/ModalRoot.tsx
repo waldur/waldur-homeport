@@ -21,7 +21,10 @@ export const ModalRoot: FunctionComponent = () => {
   const { modalComponent, modalProps } = useSelector<{ modal: TState }, TState>(
     (state: RootState) => state.modal,
   );
-  const { formId, modalStyle, _resolve, ...rest } = modalProps || {};
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { formId, modalStyle, resolve, initialValues, ...rest } =
+    modalProps || {};
+
   const dispatch = useDispatch();
   const isDirtyForm = useSelector((state: RootState) =>
     formId ? isDirty(formId)(state) : false,
