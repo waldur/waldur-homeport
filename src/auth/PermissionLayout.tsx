@@ -178,7 +178,7 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
           ) &&
           !user.permissions.find(
             (permission) =>
-              permission.scope_type === 'callmanagingorganisation' &&
+              permission.scope_type === 'call_organizer' &&
               permission.customer_uuid === params.uuid,
           ) &&
           !user.permissions.find(

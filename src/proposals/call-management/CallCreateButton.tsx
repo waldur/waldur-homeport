@@ -24,7 +24,7 @@ export const CallCreateButton = ({ refetch }) => {
   const customer = useSelector(getCustomer);
   const canCreateCall = hasPermission(user, {
     permission: PermissionEnum.CREATE_CALL,
-    customerId: customer.uuid,
+    callOrganizerId: customer.call_managing_organization_uuid,
   });
 
   if (!canCreateCall) {

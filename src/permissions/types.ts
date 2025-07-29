@@ -43,5 +43,6 @@ export interface PermissionRequest {
   permission: string;
   projectId?: string;
   customerId?: string;
+  callOrganizerId?: string;
   scopeId?: string;
 }

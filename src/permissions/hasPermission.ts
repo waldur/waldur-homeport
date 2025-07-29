@@ -42,6 +42,18 @@ export const hasPermission = (user: User, request: PermissionRequest) => {
       return true;
     }
   }
+  if (request.callOrganizerId) {
+    if (
+      checkScope(
+        user,
+        'call_organizer',
+        request.callOrganizerId,
+        request.permission,
+      )
+    ) {
+      return true;
+    }
+  }
   if (request.scopeId) {
     if (
       checkScope(user, 'call', request.scopeId, request.permission) ||
