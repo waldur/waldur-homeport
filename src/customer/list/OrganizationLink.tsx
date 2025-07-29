@@ -14,16 +14,11 @@ interface OwnProps {
 const PERMISSION_MAP = {
   customer: 'organization.dashboard',
   project: 'marketplace-projects',
-  callmanagingorganisation: 'call-management.dashboard',
+  call_organizer: 'call-management.dashboard',
   call: 'call-management.dashboard',
 };
 
-const PERMISSION_PRIORITY = [
-  'customer',
-  'project',
-  'callmanagingorganisation',
-  'call',
-];
+const PERMISSION_PRIORITY = ['customer', 'project', 'call_organizer', 'call'];
 
 export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
   uuid,
