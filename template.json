@@ -16640,7 +16640,7 @@
     "message": "You do not have the permissions for accessing this page."
   },
   "You don't have enough privileges to perform this operation.": {
-    "description": "customer/team/UserAddButton.tsx, invitations/actions/create/InvitationCreateButton.tsx, marketplace/resources/options/UpdateResourceOptionButton.tsx, marketplace/service-providers/UserRemoveButton.tsx, project/create/ProjectCreateButton.tsx, project/import/ProjectImportButton.tsx, project/team/AddUserButton.tsx",
+    "description": "customer/team/UserAddButton.tsx, invitations/actions/create/InvitationCreateButton.tsx, marketplace/resources/options/UpdateResourceOptionButton.tsx, marketplace/service-providers/UserRemoveButton.tsx, project/create/ProjectCreateButton.tsx, project/team/AddUserButton.tsx",
     "message": "You don't have enough privileges to perform this operation."
   },
   "You don't have permission to cancel these invitations.": {

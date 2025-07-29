@@ -47,6 +47,10 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
       );
   const dispatch = useDispatch();
 
+  if (disabled || hasNoPermission) {
+    return null;
+  }
+
   return (
     <ActionButton
       title={translate('Bulk import')}
@@ -62,15 +66,7 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
           }),
         )
       }
-      tooltip={
-        disabled || hasNoPermission
-          ? translate(
-              "You don't have enough privileges to perform this operation.",
-            )
-          : undefined
-      }
       iconNode={<DownloadSimpleIcon weight="bold" />}
-      disabled={disabled || hasNoPermission}
     />
   );
 };
