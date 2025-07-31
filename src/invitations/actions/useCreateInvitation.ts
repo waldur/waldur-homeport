@@ -36,6 +36,9 @@ export const useCreateInvitation = (
     () =>
       context.roleTypes.some((roleType) => {
         let scope: any = context.scope;
+        if (roleType === 'call_organizer') {
+          scope = context.scope.manager_uuid;
+        }
         if (!scope) {
           switch (roleType) {
             case 'customer':
@@ -52,7 +55,10 @@ export const useCreateInvitation = (
         return (
           (customer &&
             checkScope(user, 'customer', customer.uuid, permission)) ||
-          (scope && checkScope(user, roleType, scope.uuid, permission))
+          (scope && checkScope(user, roleType, scope.uuid, permission)) ||
+          (scope &&
+            typeof scope === 'string' &&
+            checkScope(user, roleType, scope, permission))
         );
       }),
     [context, user, customer, project],
