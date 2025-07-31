@@ -51,7 +51,7 @@ export function useCustomerProjects() {
   const customer = useSelector(getCustomerSelector);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    if (customer.projects) return;
+    if (!customer || customer.projects) return;
     setLoading(true);
     fetchCustomerProjects(customer.uuid)
       .then((projects) => {

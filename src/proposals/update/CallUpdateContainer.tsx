@@ -85,7 +85,7 @@ const Body = ({ call, refetch, loading }) => {
                 <TeamSection
                   scope={call}
                   roles={[RoleEnum.CALL_REVIEWER]}
-                  roleTypes={['call']}
+                  roleTypes={['call', 'call_organizer']}
                   title={translate('Reviewers')}
                   hasTeamTabs
                 />
@@ -100,7 +100,7 @@ const Body = ({ call, refetch, loading }) => {
                 <TeamSection
                   scope={call}
                   roles={[RoleEnum.CALL_MANAGER]}
-                  roleTypes={['call']}
+                  roleTypes={['call', 'call_organizer']}
                   title={translate('Managers')}
                   hasTeamTabs
                 />
