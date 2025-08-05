@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { showPlanDetailsDialog } from '@waldur/marketplace/details/plan/actions';
-import { Field } from '@waldur/resource/summary';
 
 export const PlanDetailsField = ({ resource }) => {
   const dispatch = useDispatch();
   return resource.plan_name ? (
-    <Field
+    <FormTable.Item
       label={translate('Plan')}
       value={
         <>

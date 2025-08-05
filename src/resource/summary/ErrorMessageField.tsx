@@ -2,6 +2,7 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
 import { Tip } from '@waldur/core/Tooltip';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 
 import { Field } from './Field';
@@ -30,8 +31,14 @@ const formatErrorField = (props: ResourceSummaryProps) => {
   );
 };
 
-export const ErrorMessageField: FunctionComponent<ResourceSummaryProps> = (
-  props,
-) => (
-  <Field label={translate('Error message')} value={formatErrorField(props)} />
-);
+export const ErrorMessageField: FunctionComponent<
+  ResourceSummaryProps & { formTableItem?: boolean }
+> = (props) => {
+  const Component = props.formTableItem ? FormTable.Item : Field;
+  return (
+    <Component
+      label={translate('Error message')}
+      value={formatErrorField(props)}
+    />
+  );
+};

@@ -1,4 +1,5 @@
 import { formatFilesize } from '@waldur/core/utils';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
@@ -22,21 +23,22 @@ export const formatInstance = (resource) =>
 
 export const OpenStackVolumeSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Field label={translate('Size')} value={formatSize(props)} />
-      <Field
+      <Component label={translate('Size')} value={formatSize(props)} />
+      <Component
         label={translate('Attached to')}
         value={formatInstance(props.resource)}
       />
 
-      <Field label={translate('Device')} value={resource.device} />
-      <Field
+      <Component label={translate('Device')} value={resource.device} />
+      <Component
         label={translate('Availability zone')}
         value={resource.availability_zone_name}
       />
 
-      <Field label={translate('Volume type')} value={resource.type_name} />
+      <Component label={translate('Volume type')} value={resource.type_name} />
     </>
   );
 };

@@ -23,7 +23,7 @@ export const ResourceMetadataDialog = <T extends Resource = any>(
       label={translate('UUID')}
       value={props.resolve.resource.uuid}
       valueClass="ellipsis"
-      helpText={translate('Unique ID of a resource within management plugin')}
+      tooltip={translate('Unique ID of a resource within management plugin')}
       hasCopy
     />
 
@@ -32,7 +32,7 @@ export const ResourceMetadataDialog = <T extends Resource = any>(
         label={translate('Marketplace UUID')}
         value={props.resolve.resource.marketplace_resource_uuid}
         valueClass="ellipsis"
-        helpText={translate('Unique ID of a resource created via Marketplace')}
+        tooltip={translate('Unique ID of a resource created via Marketplace')}
         hasCopy
       />
     )}
@@ -41,7 +41,7 @@ export const ResourceMetadataDialog = <T extends Resource = any>(
         label={translate('Backend ID')}
         value={props.resolve.resource.backend_id}
         valueClass="ellipsis"
-        helpText={translate('Unique ID of a resource in a backend system')}
+        tooltip={translate('Unique ID of a resource in a backend system')}
         hasCopy
       />
     )}

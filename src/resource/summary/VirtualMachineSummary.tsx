@@ -2,6 +2,7 @@ import { QuestionIcon } from '@phosphor-icons/react';
 
 import { formatRelative } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { formatSummary } from '@waldur/resource/utils';
 
@@ -31,36 +32,37 @@ export const ResourceSummaryField = ({ resource }) => (
 );
 
 export const PureVirtualMachineSummary = (props: ResourceSummaryProps) => {
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Field
+      <Component
         label={translate('Summary')}
         value={<ResourceSummaryField {...props} />}
       />
 
-      <Field
+      <Component
         label={translate('Internal IP')}
         value={<IPList value={props.resource.internal_ips} />}
       />
 
-      <Field
+      <Component
         label={translate('Floating IP')}
         value={<IPList value={props.resource.external_ips} />}
       />
 
-      <Field
+      <Component
         label={translate('External IPs')}
         value={<IPList value={props.resource.external_address} />}
       />
 
-      <Field
+      <Component
         label={translate('SSH key')}
         value={props.resource.key_name}
-        helpText={props.resource.key_fingerprint}
+        tooltip={props.resource.key_fingerprint}
         hasCopy
       />
 
-      <Field label={translate('Uptime')} value={formatUptime(props)} />
+      <Component label={translate('Uptime')} value={formatUptime(props)} />
     </>
   );
 };

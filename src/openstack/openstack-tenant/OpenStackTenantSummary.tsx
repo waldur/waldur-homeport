@@ -3,6 +3,7 @@ import { Badge, Col, Row } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/config';
 import { ExternalLink } from '@waldur/core/ExternalLink';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
 import { QuotaBadge } from '@waldur/quotas/QuotaBadge';
@@ -121,6 +122,45 @@ export const OpenStackTenantSummary: FunctionComponent<
   const quotas = resource.quotas.filter(
     (quota) => !formattedQuotas.some((item) => item.data.name === quota.name),
   );
+
+  if (props.formTableItem) {
+    return (
+      <>
+        <ResourceSummaryBase
+          resource={resource}
+          hideBaseInfo
+          formTableItem={props.formTableItem}
+        />
+        <FormTable.Item
+          label={translate('Access')}
+          value={formatAccess(props)}
+        />
+        <FormTable.Item
+          label={translate('Username')}
+          value={formatUsername(props)}
+        />
+        <FormTable.Item
+          label={translate('Password')}
+          value={formatPassword(props)}
+        />
+        {formattedQuotas.map((quotaItem) => {
+          return (
+            <FormTable.Item
+              key={quotaItem.name}
+              label={quotaItem.name}
+              value={`${quotaItem.data.usage}/${quotaItem.data.limit}`}
+            />
+          );
+        })}
+        {quotas.length > 0 && (
+          <FormTable.Item
+            label={translate('Quotas')}
+            value={<QuotaBadges quotas={quotas} />}
+          />
+        )}
+      </>
+    );
+  }
 
   return (
     <>

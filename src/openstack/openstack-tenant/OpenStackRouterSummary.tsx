@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { IPList } from '@waldur/resource/IPList';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
@@ -7,9 +8,10 @@ import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
   props,
 ) => {
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Field
+      <Component
         label={translate('Fixed IPs')}
         value={
           props.resource.fixed_ips?.length ? (
@@ -21,7 +23,7 @@ export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
       />
 
       {props.resource.offering_external_ips.length ? (
-        <Field
+        <Component
           label={translate('External IPs')}
           value={
             props.resource.offering_external_ips?.length ? (

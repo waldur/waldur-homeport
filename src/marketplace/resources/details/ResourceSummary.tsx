@@ -1,7 +1,8 @@
-import { FunctionComponent, PropsWithChildren, useMemo } from 'react';
+import { Fragment, FunctionComponent, PropsWithChildren, useMemo } from 'react';
 import { Resource } from 'waldur-js-client';
 
-import { Field } from '@waldur/resource/summary';
+import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
+import FormTable from '@waldur/form/FormTable';
 
 import { getResourceSummaryFields } from './utils';
 
@@ -25,8 +26,24 @@ export const ResourceSummary: FunctionComponent<
 
   return (
     <>
-      {fields.map((field) =>
-        field.custom ? field.custom : <Field key={field.name} {...field} />,
+      {fields.map((field, i) =>
+        field.custom ? (
+          <Fragment key={i}>{field.custom}</Fragment>
+        ) : field.value ? (
+          <FormTable.Item
+            key={i}
+            label={field.label}
+            value={
+              field.hasCopy ? (
+                <FieldWithCopy value={field.value} />
+              ) : (
+                field.value
+              )
+            }
+            tooltip={field.tooltip}
+            valueClass={field.valueClass}
+          />
+        ) : null,
       )}
       {children}
     </>

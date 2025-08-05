@@ -1,6 +1,7 @@
 import { OpenStackNestedVolume } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
@@ -45,27 +46,28 @@ const VolumeBadges = ({
 export const OpenStackInstanceSummary = (
   props: ResourceSummaryProps<OpenStackInstance>,
 ) => {
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
       <PureVirtualMachineSummary {...props} />
-      <Field
+      <Component
         label={translate('Security groups')}
         value={formatSecurityGroups(props)}
         valueClass="text-decoration-underline"
       />
 
-      <Field
+      <Component
         label={translate('Availability zone')}
         value={props.resource.availability_zone_name}
       />
 
-      <Field
+      <Component
         label={translate('Hypervisor')}
         value={props.resource.hypervisor_hostname}
       />
 
       {props.resource.rancher_cluster && (
-        <Field
+        <Component
           label={translate('Rancher cluster')}
           value={
             <ResourceLink
@@ -77,7 +79,7 @@ export const OpenStackInstanceSummary = (
       )}
 
       {props.resource?.volumes?.length > 0 && (
-        <Field
+        <Component
           label={translate('Attached')}
           value={
             <VolumeBadges

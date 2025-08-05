@@ -1,27 +1,24 @@
-import { Card } from 'react-bootstrap';
-
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { ResourceSummaryBase } from '@waldur/resource/summary';
 import * as ResourceSummaryRegistry from '@waldur/resource/summary/registry';
 
 import { ResourceSummary } from './ResourceSummary';
 
-export const ResourceMetadataCard = ({ resource, scope }) => {
+export const ResourceMetadataCard = ({ resource, resourceScope: scope }) => {
   const configuration = ResourceSummaryRegistry.get(resource.resource_type);
   const SummaryComponent = configuration?.component || ResourceSummaryBase;
 
   return (
-    <Card className="card-bordered">
-      <Card.Header>
-        <Card.Title>
-          <h3>{translate('Resource details')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
+    <FormTable.Card
+      title={translate('Resource details')}
+      className="card-bordered"
+    >
+      <FormTable hideActions detailsMode>
         <ResourceSummary resource={resource} scope={scope}>
-          {scope && <SummaryComponent resource={scope} />}
+          {scope && <SummaryComponent resource={scope} formTableItem />}
         </ResourceSummary>
-      </Card.Body>
-    </Card>
+      </FormTable>
+    </FormTable.Card>
   );
 };

@@ -1,4 +1,6 @@
+import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
 import { Link } from '@waldur/core/Link';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { Resource } from '@waldur/resource/types';
@@ -17,13 +19,17 @@ export function ResourceSummaryBase<T extends Resource = Resource>(
   props: ResourceSummaryProps<T> & ExtraProps,
 ) {
   const { resource } = props;
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
       {!props.hideBaseInfo && (
-        <Field label={translate('Name')} value={resource.name} hasCopy />
+        <Component
+          label={translate('Name')}
+          value={<FieldWithCopy value={resource.name} />}
+        />
       )}
       {(resource as any).parent_uuid && (resource as any).parent_name ? (
-        <Field
+        <Component
           label={translate('Part of')}
           value={
             <Link
@@ -37,23 +43,32 @@ export function ResourceSummaryBase<T extends Resource = Resource>(
         />
       ) : null}
       {!props.hideBaseInfo && (
-        <Field
+        <Component
           label={translate('State')}
           value={<ResourceState {...props} />}
         />
       )}
       <ErrorMessageField {...props} />
       {!props.resource.marketplace_offering_uuid && (
-        <Field label={translate('Provider')} value={resource.service_name} />
+        <Component
+          label={translate('Provider')}
+          value={resource.service_name}
+        />
       )}
-      <Field label={translate('Description')} value={resource.description} />
-      <Field
+      <Component
+        label={translate('Description')}
+        value={resource.description}
+      />
+      <Component
         label={translate('Created')}
         value={<CreatedField resource={props.resource} />}
       />
 
-      <Field label={translate('Termination date')} value={resource.end_date} />
-      <Field
+      <Component
+        label={translate('Termination date')}
+        value={resource.end_date}
+      />
+      <Component
         label={translate('Metadata')}
         value={ResourceMetadataLink(props)}
         valueClass="text-decoration-underline"

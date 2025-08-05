@@ -1,3 +1,4 @@
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { KeyValueButton } from '@waldur/marketplace/resources/KeyValueButton';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
@@ -16,24 +17,25 @@ const formatInstance = (resource) =>
   );
 
 export const RancherNodeSummary = (props: ResourceSummaryProps) => {
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Field
+      <Component
         label={translate('Kubernetes version')}
         value={props.resource.k8s_version}
       />
 
-      <Field
+      <Component
         label={translate('Roles')}
         value={<NodeRoleField node={props.resource} />}
       />
 
-      <Field
+      <Component
         label={translate('Docker version')}
         value={props.resource.docker_version}
       />
 
-      <Field
+      <Component
         label={translate('CPU')}
         value={
           props.resource.cpu_allocated &&
@@ -44,7 +46,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         }
       />
 
-      <Field
+      <Component
         label={translate('RAM')}
         value={
           props.resource.ram_total &&
@@ -55,7 +57,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         }
       />
 
-      <Field
+      <Component
         label={translate('Pods')}
         value={
           props.resource.pods_total &&
@@ -63,7 +65,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         }
       />
 
-      <Field
+      <Component
         label={translate('Labels')}
         value={
           Object.keys(props.resource.labels).length > 0 && (
@@ -75,7 +77,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         }
       />
 
-      <Field
+      <Component
         label={translate('Annotations')}
         value={
           Object.keys(props.resource.annotations).length > 0 && (
@@ -87,7 +89,7 @@ export const RancherNodeSummary = (props: ResourceSummaryProps) => {
         }
       />
 
-      <Field
+      <Component
         label={translate('OpenStack instance')}
         value={formatInstance(props.resource)}
       />

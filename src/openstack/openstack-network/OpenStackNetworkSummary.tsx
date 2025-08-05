@@ -1,3 +1,4 @@
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { formatDefault } from '@waldur/resource/utils';
@@ -8,25 +9,26 @@ export const OpenStackNetworkSummary = (
   props: ResourceSummaryProps<Network>,
 ) => {
   const { resource } = props;
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Field
+      <Component
         label={translate('Type')}
         value={formatDefault(resource.type)}
         valueClass="ellipsis"
       />
 
-      <Field
+      <Component
         label={translate('Segmentation ID')}
         value={formatDefault(resource.segmentation_id)}
       />
 
-      <Field
+      <Component
         label={translate('Is external')}
         value={resource.is_external ? translate('Yes') : translate('No')}
       />
 
-      <Field label={translate('MTU')} value={formatDefault(resource.mtu)} />
+      <Component label={translate('MTU')} value={formatDefault(resource.mtu)} />
     </>
   );
 };
