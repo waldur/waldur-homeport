@@ -3,11 +3,23 @@
     visibility: hidden;
   }
 
-  #kt_content_container {
+  .content {
     visibility: visible;
     position: absolute;
     left: 0;
     top: 0;
+
+    .hero {
+      visibility: hidden;
+    }
+  }
+
+  #kt_content_container,
+  .public-dashboard-hero {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 1;
   }
 
   // Hide table header elements except for the title

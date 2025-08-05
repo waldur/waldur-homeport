@@ -106,7 +106,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <LayoutContext.Provider value={context}>
       <PermissionDataProvider>
-        <div className="d-flex flex-column flex-root">
+        <div className="d-flex flex-column flex-root print-content-only">
           {PageBar && <OutstandingBar>{PageBar}</OutstandingBar>}
           <div className="page d-flex flex-row flex-column-fluid">
             <UnifiedSidebar />
