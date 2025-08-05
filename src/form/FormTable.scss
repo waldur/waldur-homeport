@@ -79,3 +79,15 @@
     }
   }
 }
+
+@media (min-width: 576px) {
+  .table.form-table tr th:first-child {
+    min-width: 150px;
+  }
+}
+
+@media (min-width: 768px) {
+  .table.form-table tr th:first-child {
+    min-width: 200px;
+  }
+}

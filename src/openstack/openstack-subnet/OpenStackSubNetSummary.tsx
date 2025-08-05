@@ -1,3 +1,4 @@
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { formatAllocationPool } from '@waldur/openstack/openstack-network/utils';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
@@ -5,37 +6,38 @@ import { formatDefault } from '@waldur/resource/utils';
 
 export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Field label={translate('Network')} value={resource.network_name} />
-      <Field
+      <Component label={translate('Network')} value={resource.network_name} />
+      <Component
         label={translate('CIDR')}
         value={formatDefault(resource.cidr)}
         valueClass="ellipsis"
       />
 
-      <Field
+      <Component
         label={translate('Allocation pools')}
         value={formatAllocationPool(resource.allocation_pools)}
         valueClass="ellipsis"
       />
 
-      <Field
+      <Component
         label={translate('Gateway IP')}
         value={formatDefault(resource.gateway_ip)}
       />
 
-      <Field
+      <Component
         label={translate('Enabled default gateway')}
         value={resource.is_connected ? translate('Yes') : translate('No')}
       />
 
-      <Field
+      <Component
         label={translate('IP version')}
         value={formatDefault(resource.ip_version)}
       />
 
-      <Field
+      <Component
         label={translate('Enable DHCP')}
         value={resource.enable_dhcp ? translate('Yes') : translate('No')}
       />

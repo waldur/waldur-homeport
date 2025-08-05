@@ -11,7 +11,7 @@ import './Field.css';
 
 interface FieldProps {
   label: string;
-  helpText?: string;
+  tooltip?: string;
   value?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
@@ -53,8 +53,8 @@ export const Field: FunctionComponent<FieldProps> = (props) =>
         className={classNames('text-gray-500', props.valueClass)}
       >
         {props.value || props.children || DASH_ESCAPE_CODE}
-        {props.helpText && (
-          <Tip label={props.helpText} id="fieldHelpText">
+        {props.tooltip && (
+          <Tip label={props.tooltip} id="fieldHelpText">
             {' '}
             <QuestionIcon size={17} />
           </Tip>

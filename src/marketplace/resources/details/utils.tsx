@@ -26,31 +26,37 @@ export const getResourceSummaryFields = ({
       name: 'name',
       label: translate('Name'),
       value: resource.name,
+      hasCopy: true,
     },
     {
       name: 'resource_type',
       label: translate('Resource type'),
       value: formatResourceType(resource),
+      hasCopy: true,
     },
     {
       name: 'offering_name',
       label: translate('Offering name'),
       value: resource.offering_name,
+      hasCopy: true,
     },
     {
       name: 'customer_name',
       label: translate('Client organization'),
       value: resource.customer_name,
+      hasCopy: true,
     },
     {
       name: 'project_name',
       label: translate('Client project'),
       value: resource.project_name,
+      hasCopy: true,
     },
     {
       name: 'category_title',
       label: translate('Category'),
       value: resource.category_title,
+      hasCopy: true,
     },
     {
       name: 'plan_name',
@@ -123,21 +129,19 @@ export const getResourceSummaryFields = ({
       name: 'state',
       label: translate('Sync state'),
       value: resource.state,
-      helpText: translate('Shows state of synchronisation with accounting.'),
+      tooltip: translate('Shows state of synchronisation with accounting.'),
     },
     {
       name: 'backend_metadata.state',
       label: translate('Backend sync'),
       value: resource.backend_metadata?.state,
-      helpText: translate(
-        'Shows state of synchronisation with backend system.',
-      ),
+      tooltip: translate('Shows state of synchronisation with backend system.'),
     },
     {
       name: 'backend_metadata.runtime_state',
       label: translate('Runtime state'),
       value: resource.backend_metadata?.runtime_state,
-      helpText: translate(
+      tooltip: translate(
         'Shows state of a resource as reported by backend system.',
       ),
     },
@@ -186,6 +190,7 @@ export const getResourceSummaryFields = ({
       name: 'username',
       label: translate('Username'),
       value: resource.username,
+      hasCopy: true,
     },
   ].filter(
     (field) =>

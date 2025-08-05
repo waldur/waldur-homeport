@@ -3,6 +3,7 @@ import { AzureSqlServer } from 'waldur-js-client';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { UserPassword } from '@waldur/resource/UserPassword';
@@ -22,35 +23,38 @@ export const AzureSQLServerSummary = (
   props: ResourceSummaryProps<AzureSqlServer>,
 ) => {
   const { resource } = props;
+  const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
       <PureAzureResourceSummary {...props} />
       {resource.fqdn && (
-        <Field label={translate('Connection details')}>
+        <Component label={translate('Connection details')}>
           {`psql --host=${resource.fqdn} --port=5432 --username=${resource.username}@${resource.name} --dbname=postgres`}
-        </Field>
+        </Component>
       )}
-      <Field label={translate('Password')}>
+      <Component label={translate('Password')}>
         <UserPassword password={resource.password} />
-      </Field>
-      <Field label={translate('Pricing tier')}>
+      </Component>
+      <Component label={translate('Pricing tier')}>
         <ValueWithTooltip
           value="Basic"
           tooltip="Workloads that require light compute and I/O performance. Examples include servers used for development or testing or small-scale infrequently used applications."
         />
-      </Field>
-      <Field label={translate('Compute generation')}>
+      </Component>
+      <Component label={translate('Compute generation')}>
         <ValueWithTooltip
           value="5 Gen"
           tooltip="CPUs are based on Intel E5-2673 v4 (Broadwell) 2.3-GHz processors."
         />
-      </Field>
-      <Field label={translate('Storage size')}>
+      </Component>
+      <Component label={translate('Storage size')}>
         {formatFilesize(resource.storage_mb || 5120)}
-      </Field>
-      <Field label={translate('vCores')}>1</Field>
-      <Field label={translate('Memory per vCore')}>2 GB</Field>
-      <Field label={translate('Storage type')}>Azure Standard Storage</Field>
+      </Component>
+      <Component label={translate('vCores')}>1</Component>
+      <Component label={translate('Memory per vCore')}>2 GB</Component>
+      <Component label={translate('Storage type')}>
+        Azure Standard Storage
+      </Component>
     </>
   );
 };
