@@ -205,7 +205,7 @@ Test Multi-arch docker image build:
     - docker buildx imagetools inspect ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch
     - docker pull ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch
     - docker image inspect ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch
-    
+
 Lint docker image:
   extends: .Lint docker image template
   variables:
@@ -358,7 +358,7 @@ Build test docker image:
 Test k8s deployment:
   stage: validate
   image:
-    name: "registry.hpc.ut.ee/mirror/bitnami/kubectl:1.29.4-debian-12-r2"
+    name: "registry.hpc.ut.ee/mirror/alpine/kubectl:1.33.3"
     entrypoint: ['']
   interruptible: false
   environment:
@@ -372,7 +372,7 @@ Test k8s deployment:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   before_script:
     - export KUBECONFIG=${K8S_CONFIG_WALDUR_HELM_TEST}
-    - apt update && apt install gettext -y
+    - apk update && apk add gettext
   script:
     - kubectl config current-context
     - envsubst < k8s-test/deployment-tpl.yaml > k8s-test/deployment.yaml
@@ -417,7 +417,7 @@ Upload Source SBOM:
 Cleanup test k8s deployment:
   stage: deploy
   image:
-    name: "registry.hpc.ut.ee/mirror/bitnami/kubectl:1.29.4-debian-12-r2"
+    name: "registry.hpc.ut.ee/mirror/alpine/kubectl:1.33.3"
     entrypoint: ['']
   interruptible: false
   rules:
