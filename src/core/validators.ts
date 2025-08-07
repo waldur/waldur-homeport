@@ -51,6 +51,28 @@ export const email = (value) =>
     ? translate('Invalid email address')
     : undefined;
 
+export const url = (value) => {
+  if (!value) return undefined;
+
+  try {
+    const urlPattern =
+      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
+    const isValidPattern = urlPattern.test(value);
+
+    if (isValidPattern) {
+      // If no protocol is provided, assume https
+      const urlToTest = value.startsWith('http') ? value : `https://${value}`;
+      new URL(urlToTest);
+    } else {
+      throw new Error('Invalid URL format');
+    }
+
+    return undefined;
+  } catch {
+    return translate('Please enter a valid URL (e.g., https://example.com)');
+  }
+};
+
 const latinName = (value: string) => {
   if (!value.match(LATIN_NAME_PATTERN)) {
     return translate('Name should consist of latin symbols and numbers.');

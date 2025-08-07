@@ -1,8 +1,21 @@
-import { FunctionComponent, useCallback } from 'react';
+import { SquaresFourIcon, ArrowSquareOutIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import {
+  FunctionComponent,
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
+import { Dropdown } from 'react-bootstrap';
+import { externalLinksList } from 'waldur-js-client';
 
+import { SHORTCUTS_QUERY_KEY } from '@waldur/administration/quick-shortcuts/utils';
 import { getIconUrl } from '@waldur/core/api';
+import Avatar from '@waldur/core/Avatar';
 import { ENV } from '@waldur/core/config';
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { useLayout } from '@waldur/metronic/layout/core';
 import { useTheme } from '@waldur/theme/useTheme';
 
@@ -10,6 +23,36 @@ export const BrandName: FunctionComponent = () => {
   const { theme } = useTheme();
   const sidebarTheme = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
   const layout = useLayout();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const { data: shortcutsResponse } = useQuery({
+    queryKey: SHORTCUTS_QUERY_KEY,
+    queryFn: () => externalLinksList().then((response) => response.data),
+  });
+
+  const shortcuts = shortcutsResponse || [];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDropdown]);
+
   // switch aside.minimized to keep sidebar state between pages
   const toggleSidebar = useCallback(() => {
     layout.setLayout({
@@ -31,32 +74,109 @@ export const BrandName: FunctionComponent = () => {
         ? sidebarLogoUrl
         : undefined;
 
+  const DropdownMenu = (
+    <Dropdown.Menu
+      show={showDropdown}
+      className="p-0"
+      style={{ minWidth: '400px' }}
+    >
+      {shortcuts.map((shortcut: any, index: number) => (
+        <Dropdown.Item
+          key={shortcut.uuid}
+          as="a"
+          href={shortcut.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="d-flex align-items-center p-3 position-relative"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderRadius = '8px';
+          }}
+        >
+          {/* Show separator line only if there are multiple items and not the last item */}
+          {shortcuts.length > 1 && index < shortcuts.length - 1 && (
+            <div
+              className="position-absolute bottom-0 start-50 translate-middle-x border-bottom"
+              style={{
+                width: '95%',
+                borderBottomWidth: '1px',
+                borderBottomColor: 'var(--bs-border-color)',
+              }}
+            />
+          )}
+          <div className="me-5">
+            <Avatar
+              name={shortcut.name}
+              src={shortcut.image}
+              circle
+              size={48}
+            />
+          </div>
+          <div className="flex-grow-1">
+            <div className="fw-semibold fs-6">{shortcut.name}</div>
+            {shortcut.description && (
+              <div className="text-muted fs-6 mt-3">{shortcut.description}</div>
+            )}
+          </div>
+          <div className="ms-2">
+            <span className="svg-icon svg-icon-primary svg-icon-1x">
+              <ArrowSquareOutIcon weight="bold" />
+            </span>
+          </div>
+        </Dropdown.Item>
+      ))}
+    </Dropdown.Menu>
+  );
+
   return (
     <div
       className="aside-logo flex-column-auto position-relative"
       id="kt_aside_logo"
     >
-      <Link state="profile.details">
-        {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE && sidebarLogo ? (
-          <>
-            <img
-              src={sidebarLogoMobileUrl}
-              alt="logo"
-              className="mh-50px mw-200px logo_mobile"
-            />
-
-            <img
-              src={sidebarLogo}
-              alt="logo"
-              className="mh-50px mw-200px logo"
-            />
-          </>
-        ) : sidebarLogo ? (
-          <img src={sidebarLogo} alt="logo" className="mh-50px mw-200px logo" />
-        ) : (
-          <h3 className="mt-2">{ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}</h3>
+      <div className="d-flex align-items-center">
+        {shortcuts.length > 0 && !layout.config.aside.minimized && (
+          <div className="position-relative" ref={dropdownRef}>
+            <button
+              className="btn btn-icon btn-sm me-2 border-0"
+              onClick={() => setShowDropdown(!showDropdown)}
+              aria-label={translate('Quick shortcuts')}
+              style={{ outline: 'none', boxShadow: 'none' }}
+            >
+              <SquaresFourIcon size={24} />
+            </button>
+            {DropdownMenu}
+          </div>
         )}
-      </Link>
+
+        <div>
+          <Link state="profile.details">
+            {ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_MOBILE && sidebarLogo ? (
+              <>
+                <img
+                  src={sidebarLogoMobileUrl}
+                  alt="logo"
+                  className="mh-50px mw-200px logo_mobile"
+                />
+
+                <img
+                  src={sidebarLogo}
+                  alt="logo"
+                  className="mh-50px mw-200px logo"
+                />
+              </>
+            ) : sidebarLogo ? (
+              <img
+                src={sidebarLogo}
+                alt="logo"
+                className="mh-50px mw-200px logo"
+              />
+            ) : (
+              <h3 className="mt-2">
+                {ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+              </h3>
+            )}
+          </Link>
+        </div>
+      </div>
       <div
         id="kt_aside_toggle"
         className="btn btn-icon btn-sm btn-active-color-primary h-30px w-30px activee"

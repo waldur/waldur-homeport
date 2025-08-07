@@ -81,6 +81,7 @@ describe('Users', () => {
     cy.intercept('GET', '/api/marketplace-categories/**', [])
       .intercept('GET', '/api/marketplace-category-groups/**', [])
       .intercept('GET', '/api/marketplace-global-categories/**', [])
+      .intercept('GET', '/api/external-links/', [])
       .intercept('GET', '/api/admin-announcements/**', []);
 
     cy.fixture('support/user-search-by-name.json')

@@ -91,7 +91,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
         <div className="imagefield-upload-info">
           <div className="imagefield-upload-desc">
             {translate('Upload an image')} JPG {translate('or')} PNG,{' '}
-            {translate('under 2 MB')}
+            {translate('under 2 MB.')} {props.description}
           </div>
           <label
             className="btn btn-outline btn-outline-default d-inline-flex align-items-center gap-2"

@@ -11,7 +11,7 @@
   // Theme colors
   @each $name, $color in $theme-text-colors {
     &.svg-icon-#{$name} {
-      @include svg-icon-color($color);
+      @include svg-icon-color($color, true);
     }
   }
 
