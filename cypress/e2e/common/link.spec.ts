@@ -77,6 +77,7 @@ describe('Expired token redirect', () => {
       .intercept('GET', '/api/marketplace-category-groups/**', [])
       .intercept('GET', '/api/marketplace-global-categories/**', [])
       .intercept('GET', '/api/admin-announcements/**', [])
+      .intercept('GET', '/api/external-links/', [])
       .intercept('POST', '/api-auth/password/', { token: 'valid' })
       .intercept('GET', '/api/events/**', [])
       .as('success')

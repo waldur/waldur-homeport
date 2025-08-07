@@ -124,6 +124,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-quick-shortcuts',
+    url: 'quick-shortcuts/',
+    parent: 'admin-settings',
+    component: lazyComponent(() =>
+      import('./quick-shortcuts/QuickShortcutsList').then((module) => ({
+        default: module.QuickShortcutsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Quick shortcuts'),
+    },
+  },
+
+  {
     name: 'admin-branding',
     url: 'branding/',
     parent: 'admin-settings',
