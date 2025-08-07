@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 
 export const SelectMultiCheckboxGroup: FunctionComponent<any> = (props) => (
-  <>
+  <div className="d-flex flex-column gap-6">
     {props.options.map((value, index) => (
       <AwesomeCheckbox
         label={value}
@@ -22,5 +22,5 @@ export const SelectMultiCheckboxGroup: FunctionComponent<any> = (props) => (
         }}
       />
     ))}
-  </>
+  </div>
 );
