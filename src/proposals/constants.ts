@@ -1,4 +1,3 @@
-export const EDIT_CALL_GENERAL_FORM_ID = 'CallGeneralInfoForm';
 export const PROPOSAL_UPDATE_SUBMISSION_FORM_ID = 'ProposalSubmissionStep';
 export const PROPOSAL_UPDATE_REVIEW_FORM_ID = 'ProposalUpdateReviewForm';
 
