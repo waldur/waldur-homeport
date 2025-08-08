@@ -337,6 +337,10 @@ export const PermissionOptions = [
         value: 'PROJECT.LIST',
       },
       {
+        label: translate('Update metadata'),
+        value: 'PROJECT.UPDATE_METADATA',
+      },
+      {
         label: translate('Update project'),
         value: 'PROJECT.UPDATE',
       },
