@@ -15583,6 +15583,10 @@
     "description": "marketplace/offerings/actions/UpdateOfferingMediaDialog.tsx",
     "message": "Update logo"
   },
+  "Update metadata": {
+    "description": "administration/roles/PermissionOptions.tsx",
+    "message": "Update metadata"
+  },
   "Update notification": {
     "description": "user/hooks/HookDetailsDialog.tsx",
     "message": "Update notification"
