@@ -18,7 +18,7 @@ export const ProviderFreeIPAForm = () => (
       <FormGroup
         key={item.key}
         label={getKeyTitle(item.key)}
-        description={item.description}
+        help={item.description}
       >
         {item.type === 'boolean' ? (
           <Field name={item.key} component={AwesomeCheckboxField as any} />

@@ -1,4 +1,5 @@
 import { QuestionIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { ReactNode, FC, PropsWithChildren } from 'react';
 import { Form } from 'react-bootstrap';
 
@@ -6,24 +7,29 @@ import { Tip } from '@waldur/core/Tooltip';
 
 interface FormGroupProps {
   label?: ReactNode;
+  help?: ReactNode;
   description?: ReactNode;
   required?: boolean;
   controlId?: string;
   quickAction?: ReactNode;
   spaceless?: boolean;
+  className?: string;
 }
 
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => (
   <Form.Group
-    className={props.spaceless ? undefined : 'mb-7'}
+    className={classNames(
+      props.className,
+      props.spaceless ? undefined : 'mb-7',
+    )}
     controlId={props.controlId}
   >
     {props.label ? (
       <>
         <div className="d-flex align-items-end">
-          <Form.Label className="fs-6 fw-semibold form-label mt-3">
-            {props.description && (
-              <Tip id="form-field-tooltip" label={props.description}>
+          <Form.Label>
+            {props.help && (
+              <Tip id="form-field-tooltip" label={props.help}>
                 <QuestionIcon />{' '}
               </Tip>
             )}
@@ -35,6 +41,9 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => (
           )}
         </div>
         <div>{props.children}</div>
+        {props.description && (
+          <Form.Text className="text-muted">{props.description}</Form.Text>
+        )}
       </>
     ) : (
       <>

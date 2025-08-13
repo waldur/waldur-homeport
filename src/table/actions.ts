@@ -113,7 +113,11 @@ export const createEntity = (table: string, uuid: string, content: object) => ({
   },
 });
 
-export const updateEntity = (table: string, uuid: string, content: object) => ({
+export const updateEntity = (
+  table: string,
+  uuid: string,
+  content: object | ((entity) => object),
+) => ({
   type: ENTITY_UPDATE,
   payload: {
     table,

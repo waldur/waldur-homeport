@@ -3,7 +3,7 @@ import {
   DotsThreeVerticalIcon,
   SpinnerIcon,
 } from '@phosphor-icons/react';
-import { FunctionComponent, PropsWithChildren } from 'react';
+import { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 import { Dropdown, DropdownProps } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 import { createPortal } from 'react-dom';
@@ -26,7 +26,7 @@ interface ActionsDropdownProps {
 }
 
 interface TableDropdownToggleProps {
-  label?: string;
+  label?: ReactNode;
   disabled?: boolean;
   labeled?: boolean;
   variant?: Variant;
@@ -50,7 +50,9 @@ export const TableDropdownToggle = ({
       disabled={disabled}
     >
       {label || translate('Actions')}
-      <span className="svg-icon svg-icon-4 rotate-180">
+      <span
+        className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-180`}
+      >
         <CaretDownIcon weight="bold" />
       </span>
     </Dropdown.Toggle>

@@ -6,6 +6,8 @@ interface ChangesAmountBadgeProps {
   showOnZero?: boolean;
   fractionDigits?: number;
   asBadge?: boolean;
+  badgeOutline?: boolean;
+  badgePill?: boolean;
   unit?: string;
 }
 export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
@@ -14,9 +16,13 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   showOnZero,
   fractionDigits = 2,
   asBadge = true,
+  badgeOutline,
+  badgePill,
   unit = '%',
 }) => {
-  let className = asBadge ? 'badge badge-light-' : 'text-';
+  let className = asBadge
+    ? `badge${badgePill ? ' badge-pill' : ''} badge-${badgeOutline ? 'outline' : 'light'}-`
+    : 'text-';
   const arrowClassName = asBadge ? '' : 'fs-4';
 
   if (typeof changes === 'string') {

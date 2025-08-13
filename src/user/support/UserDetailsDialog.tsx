@@ -9,7 +9,6 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { UserChecklist } from '@waldur/marketplace-checklist/UserChecklist';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { UserEvents } from '@waldur/user/dashboard/UserEvents';
@@ -23,7 +22,6 @@ import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 interface UserDetailsDialogProps {
   resolve: {
     user: User;
-    showChecklists?: boolean;
     loading?: boolean;
     error?;
     refetch?;
@@ -31,7 +29,7 @@ interface UserDetailsDialogProps {
 }
 
 export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
-  resolve: { user, showChecklists, loading, error, refetch },
+  resolve: { user, loading, error, refetch },
 }) => {
   const currentUser = useSelector(getUser) as User;
   return (
@@ -63,11 +61,6 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
           <Tab eventKey={1} title={translate('Details')}>
             <UserDetailsTable user={user} />
           </Tab>
-          {showChecklists ? (
-            <Tab eventKey={2} title={translate('Checklists')}>
-              <UserChecklist userId={user.uuid} readOnly={true} />
-            </Tab>
-          ) : null}
           <Tab eventKey={3} title={translate('Audit log')}>
             <UserEvents user={user} hasActionBar={false} />
           </Tab>

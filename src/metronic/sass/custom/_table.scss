@@ -247,7 +247,7 @@
     }
   }
 
-  &:not(.grid-table) .card-body {
+  &:not(.grid-table):not(.tab-content .card-body) {
     padding-top: 0;
   }
 

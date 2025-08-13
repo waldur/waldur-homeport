@@ -1,4 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+import classNames from 'classnames';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
 
@@ -7,11 +8,22 @@ import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
 import { TableProps } from './types';
 
 export const TableWithTabs: FC<
-  Pick<TableProps, 'title' | 'subtitle' | 'tabs'> & {
+  Pick<
+    TableProps,
+    'title' | 'subtitle' | 'tabs' | 'className' | 'headerClassName'
+  > & {
     data?: Record<string, any>;
     syncWithUrlKey?: string;
   }
-> = ({ title, subtitle, tabs, data = {}, syncWithUrlKey }) => {
+> = ({
+  title,
+  subtitle,
+  tabs,
+  className,
+  headerClassName,
+  data = {},
+  syncWithUrlKey,
+}) => {
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
 
@@ -70,8 +82,8 @@ export const TableWithTabs: FC<
   };
 
   return (
-    <Card className="card-table card-bordered">
-      <Card.Header>
+    <Card className={classNames('card-table card-bordered', className)}>
+      <Card.Header className={headerClassName}>
         <Row className="card-toolbar g-0 gap-4 w-100">
           <Col xs>
             <Card.Title ref={refTitle}>

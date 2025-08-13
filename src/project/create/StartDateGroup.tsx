@@ -14,7 +14,7 @@ export const StartDateGroup = ({ create }: { create?: boolean }) =>
   isFeatureVisible(ProjectFeatures.mandatory_start_date) ? (
     <FormGroup
       label={translate('Start date')}
-      description={translate(
+      help={translate(
         'Once start date is reached, invitations and orders are processed.',
       )}
       required={isFeatureVisible(ProjectFeatures.mandatory_start_date)}

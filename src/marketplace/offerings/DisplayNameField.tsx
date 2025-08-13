@@ -19,7 +19,7 @@ export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
   <FormGroup
     label={translate('Display name')}
     required={true}
-    description={translate('Label that is visible to users in Marketplace.')}
+    help={translate('Label that is visible to users in Marketplace.')}
   >
     <Field
       component={InputField}

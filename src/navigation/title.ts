@@ -5,7 +5,7 @@ import { takeEvery } from 'redux-saga/effects';
 import { ENV } from '@waldur/core/config';
 import { type RootState } from '@waldur/store/reducers';
 
-export const SET_TITLE = 'waldur/navigation/SET_TITLE';
+const SET_TITLE = 'waldur/navigation/SET_TITLE';
 
 type TitleAs = 'both' | 'page' | 'browser';
 
