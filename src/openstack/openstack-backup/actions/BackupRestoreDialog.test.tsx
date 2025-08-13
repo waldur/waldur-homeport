@@ -131,18 +131,22 @@ describe('BackupRestoreDialog', () => {
     ).toBeInTheDocument();
   });
 
-  it('shows loading state while data is being fetched', () => {
+  it('shows loading state while data is being fetched', async () => {
     render(<BackupRestoreDialog resolve={{ resource: fakeBackup }} />);
-    expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId('spinner')).toBeInTheDocument();
+    });
   });
 
-  it('disables submit button while data is loading', () => {
+  it('disables submit button while data is loading', async () => {
     render(<BackupRestoreDialog resolve={{ resource: fakeBackup }} />);
-    expect(
-      screen.getByRole('button', {
-        name: /submit/i,
-      }),
-    ).toBeDisabled();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', {
+          name: /submit/i,
+        }),
+      ).toBeDisabled();
+    });
   });
 
   it('filters related resources by tenant', async () => {

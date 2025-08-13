@@ -10,13 +10,13 @@ import { IssueAttachmentsList } from './IssueAttachmentsList';
 
 vi.mock('./IssueAttachment', () => ({
   IssueAttachment: ({ attachment }) => (
-    <div data-testid="mocked-attachment">{attachment.name}</div>
+    <div data-testid="mocked-attachment">{attachment.file_name}</div>
   ),
 }));
 
 const mockAttachments = [
-  { uuid: 'test-1', name: 'file1.pdf' },
-  { uuid: 'test-2', name: 'file2.jpg' },
+  { uuid: 'test-1', file_name: 'file1.pdf', file_size: 128 },
+  { uuid: 'test-2', file_name: 'file2.jpg', file_size: 256 },
 ];
 
 const initStore: Partial<RootState> = {

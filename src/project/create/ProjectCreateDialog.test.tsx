@@ -89,17 +89,19 @@ describe('ProjectCreateDialog', () => {
     vi.clearAllMocks(); // Clear mocks after each test
   });
 
-  it('should render the form correctly', () => {
+  it('should render the form correctly', async () => {
     vi.mocked(projectTypesList).mockResolvedValue({ data: [] } as any);
     renderComponent();
     // Assert that the form fields are rendered
-    expect(screen.getByText('Project name')).toBeInTheDocument();
-    expect(screen.getByText('Organization')).toBeInTheDocument();
-    expect(screen.getByText('Project description')).toBeInTheDocument();
-    expect(screen.queryByText('Project type')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Project name')).toBeInTheDocument();
+      expect(screen.getByText('Organization')).toBeInTheDocument();
+      expect(screen.getByText('Project description')).toBeInTheDocument();
+      expect(screen.queryByText('Project type')).not.toBeInTheDocument();
+    });
   });
 
-  it('should conceal disabled feature fields', () => {
+  it('should conceal disabled feature fields', async () => {
     vi.mocked(config).ENV = {
       plugins: {
         WALDUR_CORE: {
@@ -115,10 +117,12 @@ describe('ProjectCreateDialog', () => {
     } as any;
     renderComponent();
     // Assert that the form fields are rendered
-    expect(screen.getByText('Project name')).toBeInTheDocument();
-    expect(screen.getByText('Organization')).toBeInTheDocument();
-    expect(screen.queryByText('Project description')).not.toBeInTheDocument();
-    expect(screen.queryByText('Project type')).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Project name')).toBeInTheDocument();
+      expect(screen.getByText('Organization')).toBeInTheDocument();
+      expect(screen.queryByText('Project description')).not.toBeInTheDocument();
+      expect(screen.queryByText('Project type')).not.toBeInTheDocument();
+    });
   });
 
   it('should create a new project using entered values', async () => {

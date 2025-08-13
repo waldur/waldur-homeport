@@ -65,7 +65,11 @@ const renderComponent = (
   });
   return render(
     <Provider store={store}>
-      <UserEditRows user={user as any} />
+      <table>
+        <tbody>
+          <UserEditRows user={user as any} />
+        </tbody>
+      </table>
     </Provider>,
   );
 };
