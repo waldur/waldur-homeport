@@ -1,0 +1,67 @@
+import { WarningCircleIcon } from '@phosphor-icons/react';
+import { FC, useMemo } from 'react';
+import { MaintenanceAnnouncement } from 'waldur-js-client';
+
+import { formatDateTime } from '@waldur/core/dateUtils';
+import { getUUID } from '@waldur/core/utils';
+import { translate } from '@waldur/i18n';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { Field } from '@waldur/resource/summary';
+
+import { AffectedOfferingsTable } from '../create/AffectedOfferingsTable';
+
+export const MaintenanceDetailsDialog: FC<{
+  resolve: {
+    maintenance: MaintenanceAnnouncement;
+  };
+}> = ({ resolve: { maintenance } }) => {
+  const affectedOfferingsProps = useMemo(
+    () => ({
+      offerings: maintenance.affected_offerings.map((item) => ({
+        uuid: getUUID(item.offering),
+        url: item.offering,
+        name: item.offering_name,
+      })),
+      impact_level: maintenance.affected_offerings.reduce((acc, item) => {
+        acc[getUUID(item.offering)] = item.impact_level;
+        return acc;
+      }, {}),
+      impact_description: maintenance.affected_offerings.reduce((acc, item) => {
+        acc[getUUID(item.offering)] = item.impact_description;
+        return acc;
+      }, {}),
+    }),
+    [maintenance],
+  );
+
+  return (
+    <ModalDialog
+      title={translate('Maintenance') + ': ' + maintenance.name}
+      closeButton
+      className="maintenance-details"
+      iconNode={<WarningCircleIcon weight="bold" />}
+      iconColor="warning"
+    >
+      <Field
+        label={translate('Service provider')}
+        value={maintenance.service_provider_name}
+      />
+      <Field
+        label={translate('Ongoing since')}
+        value={formatDateTime(maintenance.scheduled_start)}
+      />
+      <Field
+        label={translate('Expected completion')}
+        value={formatDateTime(maintenance.scheduled_end)}
+      />
+      <Field label={translate('Message')} value={maintenance.message} />
+      <Field
+        label={translate('Affected offerings')}
+        valueCol={12}
+        valueClass="mt-2"
+      >
+        <AffectedOfferingsTable values={affectedOfferingsProps} />
+      </Field>
+    </ModalDialog>
+  );
+};

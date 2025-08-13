@@ -6,7 +6,7 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 export const EditAction = (props) => {
   return (
     <ActionItem
-      title={translate('Edit')}
+      title={props.title || translate('Edit')}
       iconNode={<PencilSimpleIcon weight="bold" />}
       {...props}
     />
