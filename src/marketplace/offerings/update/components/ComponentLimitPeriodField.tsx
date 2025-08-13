@@ -21,6 +21,13 @@ export function getLimitPeriods(): LimitPeriodOption[] {
       ),
     },
     {
+      value: 'quarterly',
+      label: translate('Maximum quarterly'),
+      description: translate(
+        'Maximum quarterly - every quarter service provider can report up to the amount requested by user.',
+      ),
+    },
+    {
       value: 'annual',
       label: translate('Maximum annually'),
       description: translate(
