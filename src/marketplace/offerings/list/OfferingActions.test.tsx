@@ -55,8 +55,8 @@ describe('OfferingActions', () => {
   it('shows all available actions when dropdown is clicked', async () => {
     renderOfferingActions();
     const dropdownButton = screen.getByRole('button');
-    await act(() => {
-      fireEvent.click(dropdownButton);
+    await act(async () => {
+      await fireEvent.click(dropdownButton);
     });
 
     expect(screen.getByText(translate('Edit'))).toBeInTheDocument();
@@ -66,10 +66,12 @@ describe('OfferingActions', () => {
     expect(screen.getByText(translate('Open public page'))).toBeInTheDocument();
   });
 
-  it('hides delete action when offering is not in Draft state', () => {
+  it('hides delete action when offering is not in Draft state', async () => {
     renderOfferingActions();
     const dropdownButton = screen.getByRole('button');
-    fireEvent.click(dropdownButton);
+    await act(async () => {
+      await fireEvent.click(dropdownButton);
+    });
 
     expect(screen.queryByText(translate('Delete'))).not.toBeInTheDocument();
   });
@@ -85,8 +87,8 @@ describe('OfferingActions', () => {
     });
 
     const dropdownButton = screen.getByRole('button');
-    await act(() => {
-      fireEvent.click(dropdownButton);
+    await act(async () => {
+      await fireEvent.click(dropdownButton);
     });
 
     expect(screen.getByText(translate('Delete'))).toBeInTheDocument();

@@ -26,7 +26,11 @@ const defaultProps = {
 };
 
 const renderTableHeader = (props = {}) => {
-  return render(<TableHeader {...defaultProps} {...props} />);
+  return render(
+    <table>
+      <TableHeader {...defaultProps} {...props} />
+    </table>,
+  );
 };
 
 describe('TableHeader', () => {
@@ -76,23 +80,27 @@ describe('TableHeader', () => {
 
     // Test partial selection
     rerender(
-      <TableHeader
-        {...defaultProps}
-        enableMultiSelect={true}
-        onSelectAllRows={onSelectAllRows}
-        selectedRows={[mockRows[0]]}
-      />,
+      <table>
+        <TableHeader
+          {...defaultProps}
+          enableMultiSelect={true}
+          onSelectAllRows={onSelectAllRows}
+          selectedRows={[mockRows[0]]}
+        />
+      </table>,
     );
     expect(checkbox.indeterminate).toBeTruthy();
 
     // Test all selected
     rerender(
-      <TableHeader
-        {...defaultProps}
-        enableMultiSelect={true}
-        onSelectAllRows={onSelectAllRows}
-        selectedRows={mockRows}
-      />,
+      <table>
+        <TableHeader
+          {...defaultProps}
+          enableMultiSelect={true}
+          onSelectAllRows={onSelectAllRows}
+          selectedRows={mockRows}
+        />
+      </table>,
     );
     expect(checkbox.checked).toBeTruthy();
     expect(checkbox.indeterminate).toBeFalsy();

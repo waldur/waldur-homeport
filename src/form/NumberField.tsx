@@ -20,6 +20,8 @@ export const NumberField: FunctionComponent<NumberFieldProps> = ({
   placeholder = '  ',
   solid,
   description,
+  hideLabel, // eslint-disable-line @typescript-eslint/no-unused-vars
+  validate, // eslint-disable-line @typescript-eslint/no-unused-vars
   ...rest
 }) => {
   const control = (

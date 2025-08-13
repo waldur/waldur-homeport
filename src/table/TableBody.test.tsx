@@ -25,7 +25,11 @@ const ROWS = [
 ];
 
 export const renderWrapper = (props?) =>
-  render(<TableBody columns={COLUMNS} rows={ROWS} {...props} />);
+  render(
+    <table>
+      <TableBody columns={COLUMNS} rows={ROWS} {...props} />
+    </table>,
+  );
 
 const expandableRow = () => <h3>Detailed info</h3>;
 
