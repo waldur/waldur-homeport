@@ -133,6 +133,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'support.maintenance',
+    url: 'maintenance/',
+    component: lazyComponent(() =>
+      import('../maintenance/MaintenanceList').then((module) => ({
+        default: module.MaintenanceList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Maintenance'),
+      priority: 100,
+    },
+  },
+
+  {
     name: 'support-logs.audit-logs',
     url: 'audit-logs/',
     component: lazyComponent(() =>

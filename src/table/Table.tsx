@@ -87,6 +87,7 @@ const TableComponent = (
           hasOptionalColumns={props.hasOptionalColumns}
           toggleFilterMenu={props.toggleFilterMenu}
           pinnedColumns={props.pinnedColumns}
+          equalColWidth={props.equalColWidth}
         />
       )}
       <TableBody

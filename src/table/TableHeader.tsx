@@ -32,6 +32,7 @@ interface TableHeaderProps {
   applyFiltersFn?: TableProps['applyFiltersFn'];
   columnPositions: string[];
   hasOptionalColumns?: boolean;
+  equalColWidth?: boolean;
   toggleFilterMenu(show?): void;
   pinnedColumns?: PinnedColumns;
 }
@@ -109,7 +110,6 @@ const TableTh = ({
   <th
     className={
       classNames(
-        column.className,
         column.orderField && 'sorting-column',
         column.filter && filters && 'filter-column',
       ) || undefined
@@ -157,6 +157,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
   setFilter,
   applyFiltersFn,
   hasOptionalColumns,
+  equalColWidth,
   toggleFilterMenu,
   pinnedColumns = {},
 }) => {
@@ -208,7 +209,8 @@ export const TableHeader: FC<TableHeaderProps> = ({
 
   const colWidths = useMemo(() => {
     if (colsLen <= 1) return { first: 100, other: 0 };
-    const first = Math.min(50, (100 / colsLen) * 2);
+    const firstColMul = equalColWidth ? 1 : 2;
+    const first = Math.min(50, (100 / colsLen) * firstColMul);
     const remainingWidth = 100 - first;
     const other = remainingWidth / (colsLen - 1);
     return { first, other };

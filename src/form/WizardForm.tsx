@@ -1,10 +1,12 @@
-import { CaretLeftIcon } from '@phosphor-icons/react';
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useToggle } from 'react-use';
 import { getFormValues, InjectedFormProps, reduxForm } from 'redux-form';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { translate } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
@@ -22,6 +24,7 @@ export interface WizardFormStepProps
   submitLabel: string;
   submitDisabled?: boolean;
   submitTooltip?: ReactNode;
+  actions?: ReactNode | FC<{ formValues }>;
   steps: ProgressStep[];
   step: number;
   onPrev(values: any): void;
@@ -37,6 +40,7 @@ interface WizardFormProps extends WizardFormStepProps, InjectedFormProps {
   children: ReactNode | FC<WizardFormProps>;
   formValues: any;
   submit(): void;
+  setLoading(): void;
 }
 
 const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
@@ -47,6 +51,8 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
   }, []);
 
   const formValues = useSelector(getFormValues(props.form)) || {};
+
+  const [loading, setLoading] = useToggle(false);
 
   return (
     <form className="wizard" onSubmit={props.handleSubmit(props.onSubmit)}>
@@ -68,13 +74,28 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
               </Button>
             )}
             <CloseDialogButton className="min-w-125px" />
+            {props.actions}
+            {typeof props.actions === 'function'
+              ? props.actions({ formValues })
+              : props.actions}
             {wrapTooltip(
               props.submitTooltip,
               <SubmitButton
                 submitting={props.submitting}
                 label={props.submitLabel}
-                invalid={props.submitDisabled}
-                className="min-w-125px"
+                invalid={props.submitDisabled || loading}
+                className="btn-icon-right min-w-125px"
+                children={
+                  loading ? (
+                    <span className="svg-icon svg-icon-2">
+                      <LoadingSpinnerIcon />
+                    </span>
+                  ) : props.step !== props.steps.length - 1 ? (
+                    <span className="svg-icon svg-icon-2">
+                      <CaretRightIcon weight="bold" />
+                    </span>
+                  ) : null
+                }
               />,
             )}
           </>
@@ -104,7 +125,7 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
 
           <div className="content clearfix">
             {typeof props.children === 'function'
-              ? props.children({ ...props, formValues })
+              ? props.children({ ...props, formValues, setLoading })
               : props.children}
           </div>
         </div>

@@ -180,6 +180,7 @@ export interface TableProps<RowType = any> extends TableState {
   fullWidth?: boolean;
   minHeight?: number | 'auto';
   cardBordered?: boolean;
+  equalColWidth?: boolean;
   showPageSizeSelector?: boolean;
   updatePageSize?: (size: number) => void;
   initialPageSize?: number;

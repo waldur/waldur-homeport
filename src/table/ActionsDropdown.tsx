@@ -75,6 +75,7 @@ const PortalDropdown = ({ children }) => {
 export const ActionsDropdownComponent: FunctionComponent<
   PropsWithChildren<DropdownProps & TableDropdownToggleProps> & {
     menuStyle?: React.CSSProperties;
+    menuClassName?: string;
   }
 > = ({
   onToggle,
@@ -85,6 +86,7 @@ export const ActionsDropdownComponent: FunctionComponent<
   variant,
   className,
   menuStyle,
+  menuClassName,
   size,
   ...rest
 }) => (
@@ -115,6 +117,7 @@ export const ActionsDropdownComponent: FunctionComponent<
               }
         }
         style={menuStyle}
+        className={menuClassName}
       >
         {children}
       </Dropdown.Menu>

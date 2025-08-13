@@ -1,5 +1,12 @@
 import { uniq } from 'lodash-es';
-import { useState, createElement, FC, useCallback, useEffect } from 'react';
+import {
+  useState,
+  createElement,
+  FC,
+  useCallback,
+  useEffect,
+  ReactNode,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, destroy, getFormValues } from 'redux-form';
 
@@ -18,9 +25,12 @@ interface WizardFormContainerProps {
   hideStepper?: boolean;
   wizardForms: FC<WizardFormStepProps>[];
   initialValues?: any;
+  actions?: WizardFormStepProps['actions'];
   data?: any;
   validate?(values: any): any;
   modalProps?: {
+    iconNode?: ReactNode;
+    iconColor?: string;
     headerClassName?: string;
     bodyClassName?: string;
   };
@@ -85,6 +95,7 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
     steps: props.steps,
     hideStepper: props.hideStepper,
     initialValues: props.initialValues,
+    actions: props.actions,
     data: props.data,
     reinitialize,
     validate: props.validate,
