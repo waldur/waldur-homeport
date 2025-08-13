@@ -12,5 +12,9 @@
       border-color: $brand-200;
       color: $brand-700;
     }
+
+    .nav-link.disabled {
+      color: $gray-400 !important;
+    }
   }
 }

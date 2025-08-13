@@ -48,7 +48,7 @@ export const BroadcastForm = ({
           <div>
             <FormGroup
               label={translate('Template')}
-              description={translate('Select a pre-defined template')}
+              help={translate('Select a pre-defined template')}
             >
               <Field
                 name="template"
@@ -99,7 +99,7 @@ export const BroadcastForm = ({
 
             <FormGroup
               label={translate('Send at')}
-              description={translate(
+              help={translate(
                 'Schedule the message to be sent at a specific time',
               )}
             >
@@ -131,7 +131,7 @@ export const BroadcastForm = ({
 
               <FormGroup
                 label={translate('Offerings')}
-                description={translate('Select specific offerings to target')}
+                help={translate('Select specific offerings to target')}
               >
                 <Field
                   name="offerings"
@@ -153,9 +153,7 @@ export const BroadcastForm = ({
 
               <FormGroup
                 label={translate('Organizations')}
-                description={translate(
-                  'Select specific organizations to target',
-                )}
+                help={translate('Select specific organizations to target')}
               >
                 <Field
                   name="customers"

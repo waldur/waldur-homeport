@@ -363,19 +363,4 @@ export const states: StateDeclaration[] = [
       priority: 137,
     },
   },
-
-  {
-    name: 'organization.checklists',
-    url: 'checklists/',
-    component: lazyComponent(() =>
-      import('../marketplace-checklist/CustomerChecklistOverview').then(
-        (module) => ({ default: module.CustomerChecklistOverview }),
-      ),
-    ),
-    data: {
-      breadcrumb: () => translate('Checklists'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-      priority: 130,
-    },
-  },
 ];

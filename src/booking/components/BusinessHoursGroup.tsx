@@ -22,7 +22,7 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
 }) => (
   <FormGroup
     label={translate('Business hours')}
-    description={translate('Daily available booking time range')}
+    help={translate('Daily available booking time range')}
   >
     <Form.Label
       className="col-xs-2 svg-icon svg-icon-2"

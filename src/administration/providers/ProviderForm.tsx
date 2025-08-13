@@ -15,9 +15,7 @@ export const ProviderForm = () => (
     <FormGroup
       label={translate('Client ID')}
       required={true}
-      description={translate(
-        'ID of application used for OAuth authentication.',
-      )}
+      help={translate('ID of application used for OAuth authentication.')}
     >
       <Field
         name="client_id"
@@ -28,7 +26,7 @@ export const ProviderForm = () => (
     <FormGroup
       label={translate('Client secret')}
       required={true}
-      description={translate('Application secret key.')}
+      help={translate('Application secret key.')}
     >
       <Field
         name="client_secret"
@@ -39,7 +37,7 @@ export const ProviderForm = () => (
     <FormGroup
       label={translate('Discovery URL')}
       required={true}
-      description={translate('The endpoint for endpoint discovery.')}
+      help={translate('The endpoint for endpoint discovery.')}
     >
       <Field
         name="discovery_url"
@@ -49,13 +47,13 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('Profile management URL')}
-      description={translate('The endpoint for user details management.')}
+      help={translate('The endpoint for user details management.')}
     >
       <Field name="management_url" component={StringField as any} />
     </FormGroup>
     <FormGroup
       label={translate('Protected fields')}
-      description={translate(
+      help={translate(
         'Enter a comma separated list of fields of the user profile that would be protected from editing in Waldur.',
       )}
     >
@@ -63,7 +61,7 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('Extra scope')}
-      description={translate(
+      help={translate(
         'Space-separated list of scopes to request during authentication.',
       )}
     >
@@ -71,7 +69,7 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('User field')}
-      description={translate('The field to be used for looking up the user.')}
+      help={translate('The field to be used for looking up the user.')}
     >
       <Field
         name="user_field"
@@ -81,7 +79,7 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('User claim')}
-      description={translate(
+      help={translate(
         'Space seprated list of OIDC claims to be used as the value for the lookup field.',
       )}
     >
@@ -93,7 +91,7 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('First name field')}
-      description={translate(
+      help={translate(
         'The OIDC claim to be used as the value for the first name field.',
       )}
     >
@@ -104,7 +102,7 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('Last name field')}
-      description={translate(
+      help={translate(
         'The OIDC claim to be used as the value for the last name field.',
       )}
     >
@@ -115,7 +113,7 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('Email field')}
-      description={translate(
+      help={translate(
         'The OIDC claim to be used as the value for the email field.',
       )}
     >
@@ -123,7 +121,7 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('Affiliations field')}
-      description={translate(
+      help={translate(
         'The OIDC claim to be used as the value for the affiliations field.',
       )}
     >
@@ -134,7 +132,7 @@ export const ProviderForm = () => (
     </FormGroup>
     <FormGroup
       label={translate('Civil number field')}
-      description={translate(
+      help={translate(
         'The OIDC claim to be used as the value for the civil_number field.',
       )}
     >

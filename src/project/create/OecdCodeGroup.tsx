@@ -15,9 +15,7 @@ export const OecdCodeGroup = () => {
   return isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) ? (
     <FormGroup
       label={translate('OECD FoS code')}
-      description={translate(
-        'Choose a science code identifying project activities.',
-      )}
+      help={translate('Choose a science code identifying project activities.')}
       required={isCodeRequired}
     >
       <Field

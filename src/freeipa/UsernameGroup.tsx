@@ -102,7 +102,7 @@ export const UsernameGroup: FC<UsernameGroupProps> = ({
   disabled,
   'data-testid': testId,
 }) => (
-  <FormGroup label={label} description={description} required={required}>
+  <FormGroup label={label} help={description} required={required}>
     <Field
       name={name}
       validate={required ? validateUsername : undefined}

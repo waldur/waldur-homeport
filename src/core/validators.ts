@@ -41,6 +41,11 @@ export const number = (value) =>
 export const lessThanOrEqual = (n) => (value: number) =>
   value && value > n ? translate('Must be {n} or less.', { n }) : undefined;
 
+export const greaterThan = (n) => (value: number) =>
+  value && value <= n
+    ? translate('Must be greater than {n}.', { n })
+    : undefined;
+
 export const max = (length) => (value) =>
   value && value.length > length
     ? translate('Must be {length} characters or less.', { length })

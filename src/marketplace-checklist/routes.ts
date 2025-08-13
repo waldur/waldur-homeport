@@ -1,37 +1,26 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { isStaff } from '@waldur/workspace/selectors';
 
 export const states: StateDeclaration[] = [
   {
-    name: 'marketplace-checklist-user',
-    url: 'marketplace-checklist-user/:category/',
+    name: 'admin-organization-checklist-management',
+    url: 'organization-checklist-management/',
+    parent: 'admin-organizations',
     component: lazyComponent(() =>
-      import('./UserChecklist').then((module) => ({
-        default: module.UserChecklist,
-      })),
+      import('@waldur/marketplace-checklist/ChecklistManagementTable').then(
+        (module) => ({
+          default: module.ChecklistManagementTable,
+        }),
+      ),
     ),
-    parent: 'profile',
-  },
-
-  {
-    name: 'marketplace-checklist-overview',
-    url: 'marketplace-checklist-overview/:category/',
-    component: lazyComponent(() =>
-      import('./ChecklistOverview').then((module) => ({
-        default: module.ChecklistOverview,
-      })),
-    ),
-    parent: 'support',
-  },
-
-  {
-    name: 'marketplace-checklist-customer',
-    url: 'marketplace-checklist-customer/',
-    component: lazyComponent(() =>
-      import('./ChecklistCustomer').then((module) => ({
-        default: module.ChecklistCustomer,
-      })),
-    ),
-    parent: 'organization',
+    data: {
+      breadcrumb: () => translate('Checklist management'),
+      permissions: [isStaff, isExperimentalUiComponentsVisible],
+      feature: MarketplaceFeatures.show_experimental_ui_components,
+    },
   },
 ];

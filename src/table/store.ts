@@ -93,7 +93,10 @@ const pagination = (state = INITIAL_STATE, action): TableState => {
         ...state,
         entities: {
           ...state.entities,
-          [action.payload.uuid]: action.payload.content,
+          [action.payload.uuid]:
+            typeof action.payload.content === 'function'
+              ? action.payload.content(state.entities[action.payload.uuid])
+              : action.payload.content,
         },
       };
 

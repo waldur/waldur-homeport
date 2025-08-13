@@ -148,6 +148,15 @@
   cursor: move;
 }
 
+// Cursor grab
+.cursor-grab {
+  cursor: grab;
+}
+// Cursor grabbing
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
 // Icons
 i {
   line-height: 1;

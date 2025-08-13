@@ -7,7 +7,7 @@ import { FormGroup } from './FormGroup';
 export const FormGroupWithError = (inputProps) => (
   <FormGroup
     label={inputProps.label}
-    description={inputProps.description}
+    help={inputProps.description}
     required={inputProps.required}
   >
     <Form.Control

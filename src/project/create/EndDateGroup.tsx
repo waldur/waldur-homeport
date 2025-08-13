@@ -14,7 +14,7 @@ export const EndDateGroup = ({ create }: { create?: boolean }) =>
   isFeatureVisible(ProjectFeatures.mandatory_end_date) ? (
     <FormGroup
       label={translate('End date')}
-      description={translate(
+      help={translate(
         'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
       )}
       required={isFeatureVisible(ProjectFeatures.mandatory_end_date)}
