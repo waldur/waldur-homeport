@@ -51,6 +51,8 @@ export const InvoicesStatsList = (props: any) => {
       columns={columns}
       verboseName={translate('Invoice statistics')}
       showPageSizeSelector={true}
+      hasActionBar={false}
+      minHeight="auto"
     />
   );
 };
