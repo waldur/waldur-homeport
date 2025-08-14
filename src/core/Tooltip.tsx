@@ -9,6 +9,7 @@ export interface TipProps {
   placement?: OverlayTriggerProps['placement'];
   trigger?: OverlayTriggerProps['trigger'];
   rootClose?: OverlayTriggerProps['rootClose'];
+  delay?: OverlayTriggerProps['delay'];
   autoWidth?: boolean;
   className?: string;
   tipClassName?: string;

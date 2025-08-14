@@ -452,7 +452,7 @@
     "message": "Add endpoint"
   },
   "Add filter": {
-    "description": "table/TableFiltersMenu.tsx",
+    "description": "table/TableBody.tsx, table/TableFiltersMenu.tsx",
     "message": "Add filter"
   },
   "Add guidance": {

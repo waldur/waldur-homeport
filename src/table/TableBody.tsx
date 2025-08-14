@@ -6,6 +6,7 @@ import {
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, {
+  Fragment,
   FunctionComponent,
   useCallback,
   useEffect,
@@ -21,7 +22,7 @@ import { MenuComponent } from '@waldur/metronic/components';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFilterContext } from './FilterContextProvider';
-import { PinnedColumns, TableProps } from './types';
+import { Column, PinnedColumns, TableProps } from './types';
 import { getId } from './utils';
 
 interface TableBodyProps
@@ -75,11 +76,17 @@ const InlineFilterButton = ({ column, row }) => {
     <>
       <button
         type="button"
-        className="inline-filter btn btn-icon btn-sm btn-outline btn-outline-default"
+        className="inline-filter btn btn-icon btn-sm btn-outline btn-outline-default icon-align"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom"
       >
-        <FunnelSimpleIcon weight="bold" size={20} />
+        <Tip
+          id={'tip-filter-' + column.title.slice(0, 2) + row.uuid}
+          label={translate('Add filter')}
+          delay={{ show: 1000, hide: 0 }}
+        >
+          <FunnelSimpleIcon weight="bold" size={20} />
+        </Tip>
       </button>
       <div
         className="menu menu-sub menu-sub-dropdown menu-column menu-gray-700 menu-state-bg-gray w-auto min-w-150px py-1 fw-bold"
@@ -109,6 +116,45 @@ const hasFilterMenu = (key) => {
   return Boolean(item);
 };
 
+const renderCellContent = (column: Column, row) => {
+  const renderedContent = React.createElement(column.render, {
+    row,
+  });
+  const valueToCopy = column.copyField ? column.copyField(row) : '';
+  const hasFilter = column.inlineFilter && hasFilterMenu(column.filter);
+  return (
+    (column.visible ?? true) && (
+      <td
+        className={classNames(
+          column.className,
+          column.inlineFilter && 'has-filter',
+          (column.ellipsis ?? true) && 'ellipsis',
+        )}
+        onClick={column.disabledClick ? (e) => e.stopPropagation() : undefined}
+      >
+        {column.copyField ? (
+          <>
+            <div className="with-copy d-flex align-items-center gap-1">
+              <div className="td-data">{renderedContent}</div>
+              <CopyToClipboardButton value={valueToCopy} />
+            </div>
+            {hasFilter && <InlineFilterButton column={column} row={row} />}
+          </>
+        ) : (
+          <>
+            {hasFilter ? (
+              <div className="td-data">{renderedContent}</div>
+            ) : (
+              renderedContent
+            )}
+            {hasFilter && <InlineFilterButton column={column} row={row} />}
+          </>
+        )}
+      </td>
+    )
+  );
+};
+
 const TableCells = ({
   row,
   columns,
@@ -120,83 +166,14 @@ const TableCells = ({
     {hasOptionalColumns
       ? columnPositions
           .filter((id) => columnsMap[id])
-          .map(
-            (id) =>
-              (columnsMap[id].visible ?? true) && (
-                <td
-                  key={id}
-                  className={classNames(
-                    columnsMap[id].className,
-                    columnsMap[id].inlineFilter && 'has-filter',
-                  )}
-                  onClick={
-                    columnsMap[id].disabledClick
-                      ? (e) => e.stopPropagation()
-                      : undefined
-                  }
-                >
-                  {(() => {
-                    const renderedContent = React.createElement(
-                      columnsMap[id].render,
-                      { row },
-                    );
-                    const valueToCopy = columnsMap[id].copyField
-                      ? columnsMap[id].copyField(row)
-                      : '';
-                    if (columnsMap[id].copyField) {
-                      return (
-                        <div className="d-flex align-items-center gap-1">
-                          {renderedContent}
-                          <CopyToClipboardButton value={valueToCopy} />
-                        </div>
-                      );
-                    }
-                    return renderedContent;
-                  })()}
-                  {columnsMap[id].inlineFilter &&
-                    hasFilterMenu(columnsMap[id].filter) && (
-                      <InlineFilterButton column={columnsMap[id]} row={row} />
-                    )}
-                </td>
-              ),
-          )
-      : columns.map(
-          (column, colIndex) =>
-            (column.visible ?? true) && (
-              <td
-                key={colIndex}
-                className={classNames(
-                  column.className,
-                  column.inlineFilter && 'has-filter',
-                  column.ellipsis && 'ellipsis',
-                )}
-                onClick={
-                  column.disabledClick ? (e) => e.stopPropagation() : undefined
-                }
-              >
-                {(() => {
-                  const renderedContent = React.createElement(column.render, {
-                    row,
-                  });
-                  const valueToCopy = column.copyField
-                    ? column.copyField(row)
-                    : '';
-                  if (column.copyField) {
-                    return (
-                      <div className="d-flex align-items-center gap-1">
-                        {renderedContent}
-                        <CopyToClipboardButton value={valueToCopy} />
-                      </div>
-                    );
-                  }
-                  return renderedContent;
-                })()}
-                {column.inlineFilter && hasFilterMenu(column.filter) && (
-                  <InlineFilterButton column={column} row={row} />
-                )}
-              </td>
-            ),
-        )}
+          .map((id) => (
+            <Fragment key={id}>
+              {renderCellContent(columnsMap[id], row)}
+            </Fragment>
+          ))
+      : columns.map((column, colIndex) => (
+          <Fragment key={colIndex}>{renderCellContent(column, row)}</Fragment>
+        ))}
   </>
 );
 

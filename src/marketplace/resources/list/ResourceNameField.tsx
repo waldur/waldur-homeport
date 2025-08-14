@@ -13,12 +13,12 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
   row,
 }) => {
   return (
-    <>
+    <div className="d-flex align-items-center gap-1">
       <PublicResourceLink row={row} />
       <CopyToClipboardButton
         value={row.name}
         className="ms-2 text-hover-primary cursor-pointer d-inline-block"
       />
-    </>
+    </div>
   );
 };
