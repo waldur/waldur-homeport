@@ -137,22 +137,22 @@ exports[`InternalIpsList > renders list 1`] = `
             <tbody>
               <tr>
                 <td
-                  class=""
+                  class="ellipsis"
                 >
                   192.168.42.14
                 </td>
                 <td
-                  class=""
+                  class="ellipsis"
                 >
                   fa:16:3e:93:f0:7d
                 </td>
                 <td
-                  class=""
+                  class="ellipsis"
                 >
                   theses-and-papers-on-mach-sub-net
                 </td>
                 <td
-                  class=""
+                  class="ellipsis"
                 >
                   192.168.42.0/24
                 </td>

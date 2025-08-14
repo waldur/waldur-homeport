@@ -22,6 +22,7 @@ export const PublicResourceLink: FunctionComponent<PublicResourceLinkProps> = ({
           resource_uuid: row.uuid,
         }}
         label={label}
+        className="ellipsis"
       />
 
       <BackendIdTip backendId={row.backend_id} />

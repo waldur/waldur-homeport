@@ -139,7 +139,7 @@
         top: 50%;
         transform: translateY(-50%);
         transition: opacity 0.15s linear;
-        background: rgba($gray-50, 0.75);
+        background: $gray-50;
         width: 32px;
         height: 32px;
         border: none;
@@ -147,12 +147,8 @@
         svg {
           color: $gray-600;
         }
-        &:hover {
-          background: $gray-50;
-
-          svg {
-            color: $gray-700;
-          }
+        &:hover svg {
+          color: $gray-700;
         }
       }
     }
@@ -160,15 +156,31 @@
     > td.ellipsis {
       max-width: 300px;
 
-      > * {
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      &,
+      > *,
+      div.td-data,
+      div.td-data > * {
         overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
     }
 
-    &:hover > td.has-filter button.inline-filter {
-      opacity: 1;
+    &:hover > td.has-filter {
+      div.td-data:not(.with-copy div.td-data) {
+        width: calc(100% - 40px); /* 32px of filter button + 8px of gap */
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      > .with-copy {
+        width: calc(100% - 40px);
+      }
+
+      button.inline-filter {
+        opacity: 1;
+      }
     }
   }
 
