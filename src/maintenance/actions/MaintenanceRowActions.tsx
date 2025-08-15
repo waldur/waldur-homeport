@@ -4,6 +4,7 @@ import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { MaintenanceDeleteAction } from './MaintenanceDeleteAction';
 import { MaintenanceEditAction } from './MaintenanceEditAction';
 import { MaintenanceHistoryLogAction } from './MaintenanceHistoryLogAction';
+import { MaintenanceStateActions } from './MaintenanceStateActions';
 import { MaintenanceStopAction } from './MaintenanceStopAction';
 import { MaintenanceViewAction } from './MaintenanceViewAction';
 
@@ -19,8 +20,9 @@ export const MaintenanceRowActions = ({ provider, row, fetch }) => {
         provider
           ? [
               // Service provider actions
-              showExperimentalUiComponents && MaintenanceEditAction,
+              MaintenanceEditAction,
               MaintenanceViewAction,
+              MaintenanceStateActions,
               MaintenanceDeleteAction,
             ].filter(Boolean)
           : [

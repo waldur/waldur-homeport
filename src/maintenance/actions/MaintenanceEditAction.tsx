@@ -62,7 +62,9 @@ export const MaintenanceEditAction: FC<MaintenanceEditActionProps> = ({
         },
       }),
     );
-  }, [dispatch, refetch]);
+  }, [row, provider, dispatch, refetch]);
+
+  if (row.state !== 'Draft') return null;
 
   return <EditAction action={callback} title={translate('Edit')} />;
 };

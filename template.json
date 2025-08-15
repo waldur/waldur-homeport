@@ -1439,6 +1439,10 @@
     "description": "marketplace/service-providers/RestrictOfferingUser.tsx",
     "message": "Are you sure you want to update the restriction status of this user?"
   },
+  "Are you sure you want to {action} the maintenance announcement?": {
+    "description": "maintenance/actions/MaintenanceStateActions.tsx",
+    "message": "Are you sure you want to {action} the maintenance announcement?"
+  },
   "Are you sure you want to {action} this call?": {
     "description": "proposals/update/CallActions.tsx",
     "message": "Are you sure you want to {action} this call?"
@@ -2164,7 +2168,7 @@
     "message": "Cancel request"
   },
   "Cancel": {
-    "description": "administration/roles/RoleDescriptionEditDialog.tsx, form/InsertLinkPopover.tsx, form/WideImageField.tsx, invitations/GroupInvitationCancelButton.tsx, invitations/GroupinvitationButtons.tsx, invitations/MultiCancelAction.tsx, invitations/actions/InvitationCancelButton.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/update/integration/EditScriptDialog.tsx, marketplace/orders/actions/CancelTerminationOrderButton.tsx, marketplace/orders/details/CancelOrderButton.tsx, marketplace/service-providers/ServiceProviderManagement.tsx, modal/CloseDialogButton.tsx, modal/DeleteConfirmationDialog.tsx, rancher/cluster/WorkloadActions.tsx, table/TableFilterActions.tsx, table/TableFilterItem.tsx, user/support/DangerActionDialog.tsx, user/support/UserStatus.tsx",
+    "description": "administration/roles/RoleDescriptionEditDialog.tsx, form/InsertLinkPopover.tsx, form/WideImageField.tsx, invitations/GroupInvitationCancelButton.tsx, invitations/GroupinvitationButtons.tsx, invitations/MultiCancelAction.tsx, invitations/actions/InvitationCancelButton.tsx, maintenance/actions/MaintenanceStateActions.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/update/integration/EditScriptDialog.tsx, marketplace/orders/actions/CancelTerminationOrderButton.tsx, marketplace/orders/details/CancelOrderButton.tsx, marketplace/service-providers/ServiceProviderManagement.tsx, modal/CloseDialogButton.tsx, modal/DeleteConfirmationDialog.tsx, rancher/cluster/WorkloadActions.tsx, table/TableFilterActions.tsx, table/TableFilterItem.tsx, user/support/DangerActionDialog.tsx, user/support/UserStatus.tsx",
     "message": "Cancel"
   },
   "Canceled": {
@@ -2716,7 +2720,7 @@
     "message": "Confirmation notification template"
   },
   "Confirmation": {
-    "description": "administration/TokenDeleteButton.tsx, administration/announcements/AnnouncementDeleteAction.tsx, administration/auto-provisioning-rules/RuleDeleteButton.tsx, administration/auto-provisioning-rules/RuleDeleteTemplateButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/quick-shortcuts/QuickShortcutDeleteAction.tsx, administration/roles/RoleDeleteButton.tsx, administration/service-desk/issue-templates/IssueTemplateDeleteAction.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, broadcasts/BroadcastSendButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerLocationRow.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/service-accounts/ServiceAccountDeleteAction.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invoices/details/InvoiceItemDelete.tsx, maintenance/actions/MaintenanceDeleteAction.tsx, maintenance/actions/MaintenanceStopAction.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/ColumnRow.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/deploy/DeployForm.tsx, marketplace/offerings/details/policies/PolicyDeleteButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, marketplace/service-providers/UserRemoveButton.tsx, marketplace-checklist/categories/CategoryDeleteAction.tsx, marketplace-checklist/checklists/ChecklistArchiveAction.tsx, marketplace-checklist/checklists/questions/QuestionDeleteAction.tsx, openstack/openstack-security-groups/UnlinkSecurityGroupAction.tsx, openstack/openstack-tenant/DeleteMigrationAction.tsx, openstack/openstack-tenant/actions/ActivatePortAction.tsx, openstack/openstack-tenant/actions/TogglePortSecurityAction.tsx, openstack/openstack-tenant/actions/UnlinkPortAction.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/proposal/create/utils.ts, proposals/review/ReviewDeleteAction.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, proposals/update/configuration/ResourceTemplateDeleteButton.tsx, proposals/update/documents/RemoveDocumentButton.tsx, proposals/update/general/EditGeneralInfoDialog.tsx, rancher/cluster/create/FormNodesStep.tsx, rancher/cluster/team/KeycloakMembershipRowActions.tsx, resource/actions/AsyncActionButton.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserDelete.tsx, user/support/UserStatus.tsx",
+    "description": "administration/TokenDeleteButton.tsx, administration/announcements/AnnouncementDeleteAction.tsx, administration/auto-provisioning-rules/RuleDeleteButton.tsx, administration/auto-provisioning-rules/RuleDeleteTemplateButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/quick-shortcuts/QuickShortcutDeleteAction.tsx, administration/roles/RoleDeleteButton.tsx, administration/service-desk/issue-templates/IssueTemplateDeleteAction.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, broadcasts/BroadcastSendButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerLocationRow.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/service-accounts/ServiceAccountDeleteAction.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invoices/details/InvoiceItemDelete.tsx, maintenance/actions/MaintenanceDeleteAction.tsx, maintenance/actions/MaintenanceStateActions.tsx, maintenance/actions/MaintenanceStopAction.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/ColumnRow.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/deploy/DeployForm.tsx, marketplace/offerings/details/policies/PolicyDeleteButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, marketplace/service-providers/UserRemoveButton.tsx, marketplace-checklist/categories/CategoryDeleteAction.tsx, marketplace-checklist/checklists/ChecklistArchiveAction.tsx, marketplace-checklist/checklists/questions/QuestionDeleteAction.tsx, openstack/openstack-security-groups/UnlinkSecurityGroupAction.tsx, openstack/openstack-tenant/DeleteMigrationAction.tsx, openstack/openstack-tenant/actions/ActivatePortAction.tsx, openstack/openstack-tenant/actions/TogglePortSecurityAction.tsx, openstack/openstack-tenant/actions/UnlinkPortAction.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/proposal/create/utils.ts, proposals/review/ReviewDeleteAction.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, proposals/update/configuration/ResourceTemplateDeleteButton.tsx, proposals/update/documents/RemoveDocumentButton.tsx, proposals/update/general/EditGeneralInfoDialog.tsx, rancher/cluster/create/FormNodesStep.tsx, rancher/cluster/team/KeycloakMembershipRowActions.tsx, resource/actions/AsyncActionButton.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserDelete.tsx, user/support/UserStatus.tsx",
     "message": "Confirmation"
   },
   "Confirming that data is correct": {
@@ -6994,6 +6998,10 @@
   "Maintenance added successfully": {
     "description": "maintenance/create/MaintenanceFormDialog.tsx",
     "message": "Maintenance added successfully"
+  },
+  "Maintenance announcement updated": {
+    "description": "maintenance/actions/MaintenanceStateActions.tsx",
+    "message": "Maintenance announcement updated"
   },
   "Maintenance edited successfully": {
     "description": "maintenance/create/MaintenanceFormDialog.tsx",
@@ -11871,6 +11879,10 @@
     "description": "broadcasts/BroadcastForm.tsx",
     "message": "Schedule the message to be sent at a specific time"
   },
+  "Schedule": {
+    "description": "maintenance/actions/MaintenanceStateActions.tsx",
+    "message": "Schedule"
+  },
   "Scheduled tasks": {
     "description": "administration/CeleryInfoPage.tsx",
     "message": "Scheduled tasks"
@@ -12571,6 +12583,10 @@
     "description": "openstack/openstack-instance/SetAllowedAddressPairsButton.tsx",
     "message": "Set allowed address pairs"
   },
+  "Set as completed": {
+    "description": "maintenance/actions/MaintenanceStateActions.tsx",
+    "message": "Set as completed"
+  },
   "Set as erred": {
     "description": "resource/actions/SetErredActionItem.tsx",
     "message": "Set as erred"
@@ -13100,7 +13116,7 @@
     "message": "Start time"
   },
   "Start": {
-    "description": "azure/vm/actions/StartAction.tsx, openstack/openstack-instance/actions/StartAction.tsx, proposals/PublicCallsList.tsx, vmware/actions/StartAction.tsx",
+    "description": "azure/vm/actions/StartAction.tsx, maintenance/actions/MaintenanceStateActions.tsx, openstack/openstack-instance/actions/StartAction.tsx, proposals/PublicCallsList.tsx, vmware/actions/StartAction.tsx",
     "message": "Start"
   },
   "Start-end date": {
@@ -15707,6 +15723,10 @@
     "description": "marketplace/offerings/actions/UpdateOfferingMediaDialog.tsx",
     "message": "Unable to update logo."
   },
+  "Unable to update maintenance announcement state.": {
+    "description": "maintenance/actions/MaintenanceStateActions.tsx",
+    "message": "Unable to update maintenance announcement state."
+  },
   "Unable to update management security group.": {
     "description": "rancher/cluster/SetManagementSecurityGroupDialog.tsx",
     "message": "Unable to update management security group."
@@ -15930,6 +15950,10 @@
   "Unsaved changes": {
     "description": "marketplace/offerings/update/integration/EditScriptDialog.tsx",
     "message": "Unsaved changes"
+  },
+  "Unschedule": {
+    "description": "maintenance/actions/MaintenanceStateActions.tsx",
+    "message": "Unschedule"
   },
   "Unsent": {
     "description": "invitations/GroupInvitationCancelButton.tsx",
