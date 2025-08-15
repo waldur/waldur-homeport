@@ -4,7 +4,6 @@ import { MaintenanceAnnouncement, ServiceProvider } from 'waldur-js-client';
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
@@ -82,8 +81,6 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
     [props.provider],
   );
 
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
-
   return (
     <Table<MaintenanceAnnouncement>
       {...tableProps}
@@ -92,7 +89,7 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
       verboseName={translate('Maintenance records')}
       hasQuery
       tableActions={
-        props.provider && showExperimentalUiComponents ? (
+        props.provider ? (
           <MaintenanceAddButton
             provider={props.provider}
             refetch={tableProps.fetch}
