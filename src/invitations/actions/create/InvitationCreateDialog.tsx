@@ -50,7 +50,7 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
             : defaultRole;
           const project =
             item.project && resolve.roleTypes.includes('customer')
-              ? resolve.customer.projects.find(
+              ? resolve.customer.projects?.find(
                   (project) =>
                     project.name.toLocaleLowerCase() ===
                       item.project.toLocaleLowerCase() ||

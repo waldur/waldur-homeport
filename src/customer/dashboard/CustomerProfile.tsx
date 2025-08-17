@@ -46,11 +46,11 @@ export const CustomerProfile = ({
           gap={5}
           className="flex-wrap text-muted lh-1"
         >
-          {customer.organization_groups.length > 0 && (
+          {customer.organization_groups?.length > 0 && (
             <span className="text-nowrap">
               <HexagonIcon size={18} weight="duotone" className="me-1" />
               {customer.organization_groups
-                .map((group) => group.name)
+                ?.map((group) => group.name)
                 .join(', ')}
             </span>
           )}

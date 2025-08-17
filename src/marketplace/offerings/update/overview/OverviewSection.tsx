@@ -158,7 +158,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
           key="access_policies"
           label={translate('Access policies')}
           value={
-            props.offering.organization_groups.length > 0
+            props.offering.organization_groups?.length > 0
               ? props.offering.organization_groups
                   .map(({ name }) => name)
                   .join(', ')

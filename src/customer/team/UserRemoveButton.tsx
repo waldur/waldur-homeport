@@ -50,7 +50,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
     }
     try {
       await Promise.all(
-        customer.projects.map((project) =>
+        (customer.projects || []).map((project) =>
           projectsDeleteUser({
             path: { uuid: project.uuid },
             body: {

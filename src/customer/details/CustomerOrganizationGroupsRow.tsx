@@ -27,12 +27,14 @@ export const CustomerOrganizationGroupsRow = (props) => {
   return (
     <FormTable.Item
       label={translate('Organization groups')}
-      value={props.customer.organization_groups
-        .map(
-          (group) =>
-            `${group.parent_name ? `${group.parent_name} ➔ ` : ''}${group.name}`,
-        )
-        .join(', ')}
+      value={
+        props.customer.organization_groups
+          ?.map(
+            (group) =>
+              `${group.parent_name ? `${group.parent_name} ➔ ` : ''}${group.name}`,
+          )
+          .join(', ') || ''
+      }
       actions={
         <UpdateCustomerOrganizationsGroupsButton
           customer={props.customer}
