@@ -16,7 +16,7 @@ export const PaymentProfilesPanel: FunctionComponent = () => {
   const isStaff = useSelector(isStaffSelector);
   const isSupport = useSelector(isSupportSelector);
   const isOwner = useSelector(isOwnerSelector);
-  if (isStaff || isSupport || (isOwner && customer.payment_profiles.length)) {
+  if (isStaff || isSupport || (isOwner && customer.payment_profiles?.length)) {
     return (
       <>
         {isOwner && !isStaff && !isSupport && <PaymentProfileDetails />}

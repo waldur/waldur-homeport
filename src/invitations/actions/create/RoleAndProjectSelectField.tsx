@@ -73,7 +73,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
   const projects = useMemo(() => {
     if (!customer?.projects_count) return [];
     const q = query.toLowerCase();
-    return customer.projects.filter((project) =>
+    return (customer.projects || []).filter((project) =>
       project.name.toLowerCase().includes(q),
     );
   }, [customer, query]);

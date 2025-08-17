@@ -27,7 +27,7 @@ export const PaymentsPanel: FunctionComponent = () => {
   }, [customer]);
 
   if (
-    (isStaff || isSupport || (isOwner && customer.payment_profiles.length)) &&
+    (isStaff || isSupport || (isOwner && customer.payment_profiles?.length)) &&
     activePaymentProfile
   ) {
     return isStaff || isSupport ? <PaymentsList /> : null;

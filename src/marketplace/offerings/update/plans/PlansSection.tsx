@@ -56,7 +56,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
     {
       title: translate('Organization groups'),
       render: ({ row }) =>
-        row.organization_groups.map((group) => group.name).join(', ') ||
+        row.organization_groups?.map((group) => group.name).join(', ') ||
         DASH_ESCAPE_CODE,
     },
     {
