@@ -9,21 +9,17 @@ import {
   FunctionComponent,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 import { Dropdown, Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import {
-  Field,
-  formValueSelector,
-  getFormSyncErrors,
-  InjectedFormProps,
-} from 'redux-form';
+import { Field, useField, useForm } from 'react-final-form';
 import {
   ComponentUserUsage,
   marketplaceComponentUserUsagesList,
   marketplaceOfferingUsersList,
+  type ResourcePlanPeriod,
 } from 'waldur-js-client';
 
 import { parseDate } from '@waldur/core/dateUtils';
@@ -32,7 +28,6 @@ import { Tip } from '@waldur/core/Tooltip';
 import { required } from '@waldur/core/validators';
 import {
   FieldError,
-  FormContainer,
   NumberField,
   SelectField,
   StringField,
@@ -40,39 +35,42 @@ import {
 } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import { HeaderButtonBullet } from '@waldur/navigation/header/HeaderButtonBullet';
-import { type RootState } from '@waldur/store/reducers';
 
 import { getPeriodRange } from './api';
 import { UsageReportContext } from './types';
 import { getBillingTypeLabel } from './utils';
 
-export interface ResourceUsageFormProps extends InjectedFormProps {
-  components: OfferingComponent[];
-  periods: any;
-  params: UsageReportContext;
-  submitReport(): void;
-  onPeriodChange(): void;
+interface Period {
+  label: string;
+  value: ResourcePlanPeriod | null;
 }
 
-const SummaryField = ({ label, value }) => (
+interface ResourceUsageFormProps {
+  components: OfferingComponent[];
+  periods: Period[];
+  params: UsageReportContext;
+}
+
+interface SummaryFieldProps {
+  label: string;
+  value: string;
+}
+
+const SummaryField: React.FC<SummaryFieldProps> = ({ label, value }) => (
   <span>
     <strong className="text-gray-700">{label}</strong>: {value}
   </span>
 );
 
-const StaticPlanField: FunctionComponent = () => (
-  <Field
-    name="period"
-    component={(fieldProps) => (
-      <SummaryField
-        label={translate('Period')}
-        value={fieldProps.input.value.label}
-      />
-    )}
-  />
-);
+const StaticPlanField: FunctionComponent = () => {
+  const { input } = useField('period');
+  return (
+    <SummaryField label={translate('Period')} value={input.value?.label} />
+  );
+};
 
 export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
   props,
@@ -81,6 +79,9 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
   const [wrappedComponents, setWrappedComponents] = useState<
     OfferingComponent[]
   >([]);
+  const form = useForm();
+  const formState = form.getState();
+  const errors = formState.errors || {};
 
   const handleWindowResize = useCallback(
     debounce(() => {
@@ -110,19 +111,13 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
     };
   }, [handleWindowResize]);
 
-  const errors = useSelector(
-    (state: RootState) => getFormSyncErrors(props.form)(state) as any,
-  );
-
   useEffect(() => {
     handleWindowResize();
   }, [errors]);
 
   const isUserUsage = props.params.userUsage;
-
-  const user = useSelector((state) =>
-    formValueSelector(props.form)(state, 'user'),
-  );
+  const { input: userInput } = useField('user');
+  const user = userInput.value;
 
   const {
     data: team,
@@ -153,7 +148,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
     ],
 
     queryFn: () => {
-      if (!isUserUsage || !user) return null;
+      if (!isUserUsage || !user || !props.periods[0].value) return null;
 
       const { start, end } = getPeriodRange(props.periods[0].value);
       return marketplaceComponentUserUsagesList({
@@ -168,9 +163,11 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
     },
   });
 
-  // Set last recorded user usages as components amount
-  useEffect(() => {
-    if (!userUsages?.length || !user) return;
+  // Memoize the user usages processing for performance
+  const processedUserUsages = useMemo(() => {
+    if (!userUsages?.length || !user) return {};
+
+    const usagesByComponentType: Record<string, number> = {};
 
     props.components.forEach((component) => {
       let recentUserRecord: ComponentUserUsage;
@@ -189,19 +186,27 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
         }
       });
 
-      props.change(
-        `components.${component.type}.amount`,
-        recentUserRecord?.usage ?? 0,
-      );
+      usagesByComponentType[component.type] = recentUserRecord?.usage ?? 0;
     });
-  }, [userUsages, props.change, props.components, user]);
+
+    return usagesByComponentType;
+  }, [userUsages, user, props.components]);
+
+  // Set last recorded user usages as components amount
+  useEffect(() => {
+    if (Object.keys(processedUserUsages).length === 0) return;
+
+    Object.entries(processedUserUsages).forEach(([componentType, usage]) => {
+      form.change(`components.${componentType}.amount`, usage);
+    });
+  }, [processedUserUsages, form]);
 
   const onChangeUser = (newUser) => {
-    props.change('username', newUser?.username);
+    form.change('username', newUser?.username);
   };
 
   return (
-    <form onSubmit={props.handleSubmit(props.submitReport)}>
+    <div>
       <div className="text-gray-500 mb-4">
         <SummaryField
           label={translate('Client organization')}
@@ -223,18 +228,35 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
           </>
         )}
         {props.periods.length > 1 ? (
-          <FormContainer submitting={props.submitting}>
-            <SelectField
+          <FormGroup
+            label={translate('Plan')}
+            help={translate(
+              'Each usage report must be connected with a billing plan to assure correct calculation of accounting data.',
+            )}
+          >
+            <Field
+              component={SelectField as any}
               name="period"
-              label={translate('Plan')}
-              tooltip={translate(
-                'Each usage report must be connected with a billing plan to assure correct calculation of accounting data.',
-              )}
               options={props.periods}
-              onChange={props.onPeriodChange}
+              onChange={(value) => {
+                const period = value;
+                if (period?.value?.components) {
+                  for (const component of period.value.components) {
+                    form.change(
+                      `components.${component.type}.amount`,
+                      component.usage,
+                    );
+                    form.change(
+                      `components.${component.type}.description`,
+                      component.description,
+                    );
+                  }
+                }
+                return value;
+              }}
               isClearable={false}
             />
-          </FormContainer>
+          </FormGroup>
         ) : (
           <StaticPlanField />
         )}
@@ -242,31 +264,34 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
       {/* Render User and Username for User usage report */}
       <div className="text-gray-500 mb-4">
         {isUserUsage && (
-          <FormContainer submitting={props.submitting}>
+          <>
             {teamError ? (
               <LoadingErred loadData={refetchTeam} />
             ) : (
-              <SelectField
-                name="user"
-                label={translate('User')}
-                options={team}
-                getOptionValue={(option) => option.uuid}
-                getOptionLabel={(option) => option.user_full_name}
-                onChange={onChangeUser}
-                isLoading={teamIsLoading}
-                isClearable
-                placeholder={translate('Select team member')}
-              />
+              <FormGroup label={translate('User')}>
+                <Field
+                  component={SelectField as any}
+                  name="user"
+                  options={team}
+                  getOptionValue={(option) => option.uuid}
+                  getOptionLabel={(option) => option.user_full_name}
+                  onChange={onChangeUser}
+                  isLoading={teamIsLoading}
+                  isClearable
+                  placeholder={translate('Select team member')}
+                />
+              </FormGroup>
             )}
-            <StringField
-              name="username"
-              label={translate('Username')}
-              placeholder={translate('Enter username(s)')}
-              required={true}
-              validate={required}
-              readOnly={Boolean(user)}
-            />
-          </FormContainer>
+            <FormGroup label={translate('Username')} required>
+              <Field
+                component={StringField as any}
+                name="username"
+                placeholder={translate('Enter username(s)')}
+                validate={required}
+                readOnly={Boolean(user)}
+              />
+            </FormGroup>
+          </>
         )}
       </div>
       {props.components.length > 0 && (
@@ -391,46 +416,61 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
           <Tab.Content>
             {props.components.map((component) => (
               <Tab.Pane key={component.uuid} eventKey={component.uuid}>
-                <FormContainer submitting={props.submitting} space={4}>
-                  <NumberField
-                    name={`components.${component.type}.amount`}
-                    key={`${component.uuid}.amount`}
-                    hideLabel
-                    description={component.description}
-                    unit={component.measured_unit}
-                    max={
-                      component.limit_period
-                        ? component.limit_amount
-                        : undefined
-                    }
-                    required={true}
-                    validate={required}
-                    placeholder={translate('Amount') + ' *'}
-                  />
+                <div>
+                  <div className="mb-7">
+                    {component.description && (
+                      <div
+                        id={`${component.type}-description`}
+                        className="text-muted mb-2"
+                      >
+                        {component.description}
+                      </div>
+                    )}
+                    <Field
+                      component={NumberField as any}
+                      name={`components.${component.type}.amount`}
+                      unit={component.measured_unit}
+                      max={
+                        component.limit_period
+                          ? component.limit_amount
+                          : undefined
+                      }
+                      validate={required}
+                      placeholder={translate('Amount') + ' *'}
+                      aria-label={translate('{amount} for {name}', {
+                        amount: translate('Amount'),
+                        name: component.name,
+                      })}
+                      aria-describedby={`${component.type}-description`}
+                    />
+                  </div>
 
-                  <TextField
-                    name={`components.${component.type}.description`}
-                    key={`${component.uuid}.description`}
-                    placeholder={translate('Enter a description') + '...'}
-                    hideLabel
-                    rows={3}
-                  />
+                  <div className="mb-7">
+                    <Field
+                      component={TextField as any}
+                      name={`components.${component.type}.description`}
+                      placeholder={translate('Enter a description') + '...'}
+                      rows={3}
+                      aria-label={translate('{description} for {name}', {
+                        description: translate('Description'),
+                        name: component.name,
+                      })}
+                    />
+                  </div>
 
-                  <AwesomeCheckboxField
+                  <Field
+                    component={AwesomeCheckboxField as any}
                     name={`components.${component.type}.recurring`}
-                    key={`${component.uuid}.recurring`}
                     label={translate(
                       'Reported value is reused every month until changed.',
                     )}
-                    hideLabel
-                    spaceless
                   />
-                </FormContainer>
+                </div>
               </Tab.Pane>
             ))}
           </Tab.Content>
         </Tab.Container>
       )}
-    </form>
+    </div>
   );
 };

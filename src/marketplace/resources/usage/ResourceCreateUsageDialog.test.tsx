@@ -43,7 +43,14 @@ const mockData = {
   periods: [
     {
       label: 'January 2024',
-      value: { uuid: 'period-1', components: [] },
+      value: {
+        uuid: 'period-1',
+        plan_name: 'Test Plan',
+        plan_uuid: 'plan-1',
+        start: '2024-01-01',
+        end: '2024-01-31',
+        components: [],
+      },
     },
   ],
 };
