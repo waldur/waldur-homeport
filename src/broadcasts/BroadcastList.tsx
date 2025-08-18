@@ -26,6 +26,11 @@ const mandatoryFields: BroadcastMessagesListData['query']['field'] = [
   'send_at',
 ];
 
+const broadcastState = {
+  DRAFT: { label: translate('Draft'), color: 'default' },
+  SENT: { label: translate('Sent'), color: 'success' },
+};
+
 export const BroadcastList: FunctionComponent<{}> = () => {
   const filterForm: any = useSelector(getFormValues('BroadcastsFilter'));
   const filter = useMemo(
@@ -59,14 +64,8 @@ export const BroadcastList: FunctionComponent<{}> = () => {
           title: translate('State'),
           render: ({ row }) => (
             <StateIndicator
-              label={row.state}
-              variant={
-                row.state === 'DRAFT'
-                  ? 'default'
-                  : row.state === 'SENT'
-                    ? 'success'
-                    : 'info'
-              }
+              label={broadcastState[row.state]?.label || row.state}
+              variant={broadcastState[row.state]?.color || 'info'}
               outline
               pill
             />
