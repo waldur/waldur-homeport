@@ -10,7 +10,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import Pagination from '@waldur/table/Pagination';
 
-import { MIN_PAGE_SIZE } from './constants';
+import { PAGE_SIZE_COMPACT } from './constants';
 import { TablePageSize } from './TablePageSize';
 import { Pagination as PaginationProps } from './types';
 
@@ -31,7 +31,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
   const prevDisabled = props.currentPage <= 1;
   const nextDisabled = props.currentPage >= totalPages;
 
-  return props.resultCount > MIN_PAGE_SIZE ? (
+  return props.resultCount > PAGE_SIZE_COMPACT ? (
     <>
       <div className="table-pagination d-none d-md-block">
         <Row className="d-flex px-0 align-items-center">

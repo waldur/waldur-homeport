@@ -7,6 +7,7 @@ import { openIssueCreateDialog } from '@waldur/issues/create/actions';
 import { hasSupport } from '@waldur/issues/hooks';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { PAGE_SIZE_COMPACT } from '@waldur/table/constants';
 
 const CreateIssueButton = ({ resource }) => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ export const ResourceIssuesCard = ({ resource }) => {
       filter={filter}
       title={translate('Requests')}
       verboseName={translate('Support requests')}
-      initialPageSize={5}
+      initialPageSize={PAGE_SIZE_COMPACT}
       tableActions={<CreateIssueButton resource={resource} />}
     />
   ) : null;
