@@ -28,12 +28,8 @@ export const FilterBox: FC<FilterBoxProps> = ({
   }, [inputRef, autoFocus]);
   return (
     <div className={classNames('position-relative', className)}>
-      <span className="svg-icon svg-icon-2 position-absolute top-50 translate-middle-y ms-4">
-        <MagnifyingGlassIcon
-          weight="bold"
-          size={20}
-          className="text-gray-500"
-        />
+      <span className="svg-icon svg-icon-2 svg-icon-gray-500 position-absolute top-50 translate-middle-y ms-4">
+        <MagnifyingGlassIcon weight="bold" size={20} />
       </span>
       <Form.Control
         type="text"

@@ -55,6 +55,7 @@ export const ActionsPopover = ({
         name,
         refetch,
         ActionsList,
+        className: 'resource-actions-modal',
         ...value,
       }),
     );

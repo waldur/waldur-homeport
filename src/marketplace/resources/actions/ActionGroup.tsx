@@ -8,12 +8,9 @@ export const ActionGroup = ({ title, children }) => {
   return (
     <div className="action-group">
       {queryContext?.hideGroupName ? null : (
-        <>
-          <Dropdown.ItemText className="text-gray-600 fw-bolder fs-8 text-uppercase mt-3">
-            {title}
-          </Dropdown.ItemText>
-          <Dropdown.Divider />
-        </>
+        <Dropdown.ItemText className="text-muted fw-bolder fs-7">
+          {title}
+        </Dropdown.ItemText>
       )}
       <div className="action-list">{children}</div>
     </div>
