@@ -103,14 +103,18 @@ Run unit tests:
         - test/*
       allow_failure: true
   script:
-    - yarn vitest --run --reporter junit --outputFile junit.xml
+    - yarn vitest --run --reporter junit --outputFile junit.xml --coverage
   coverage: /All\sfiles.*?\s+(\d+.\d+)/
   artifacts:
     when: always
     paths:
       - junit.xml
+      - coverage/
     reports:
       junit: junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
 
 Run E2E tests:
   image:

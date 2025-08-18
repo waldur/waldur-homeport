@@ -57,6 +57,7 @@ export const getProviderUsageComponents = async (
       : [
           {
             label: 'Default plan',
+            value: null,
           },
         ];
   return {

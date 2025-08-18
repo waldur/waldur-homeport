@@ -7,7 +7,6 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { getProviderUsageComponents } from './api';
 import { ResourceUsageFormContainer } from './ResourceUsageFormContainer';
-import { ResourceUsageSubmitButton } from './ResourceUsageSubmitButton';
 import { UsageReportContext } from './types';
 
 interface ResourceCreateUsageDialogProps {
@@ -32,7 +31,6 @@ export const ResourceCreateUsageDialog: FunctionComponent<
           : translate('Resource usage')) + ` "${props.resolve.resource_name}"`
       }
       bodyClassName="pt-2"
-      footer={<ResourceUsageSubmitButton params={props.resolve} />}
     >
       {loading ? (
         <LoadingSpinner />

@@ -1,9 +1,14 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { change, reduxForm } from 'redux-form';
+import { FORM_ERROR } from 'final-form';
+import { FunctionComponent } from 'react';
+import { Form } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import {
   marketplaceComponentUsagesSetUsage,
   marketplaceComponentUsagesSetUserUsage,
+  type ComponentUsageCreateRequest,
+  type ComponentUserUsageCreateRequest,
+  type ResourcePlanPeriod,
+  type BaseComponentUsage,
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -11,18 +16,22 @@ import { OfferingComponent } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { FORM_ID } from '../store/constants';
-
 import { ResourceUsageForm } from './ResourceUsageForm';
-import { UsageReportContext, ComponentUsage } from './types';
+import { ResourceUsageSubmitButton } from './ResourceUsageSubmitButton';
+import { UsageReportContext } from './types';
+
+interface Period {
+  label: string;
+  value: ResourcePlanPeriod | null;
+}
 
 interface OwnProps {
   components: OfferingComponent[];
-  periods: any;
+  periods: Period[];
   params: UsageReportContext;
 }
 
-const mapComponents = (components: ComponentUsage[], userUsage = false) =>
+const mapComponents = (components: BaseComponentUsage[], userUsage = false) =>
   components.reduce(
     (collector, component) => ({
       ...collector,
@@ -30,7 +39,7 @@ const mapComponents = (components: ComponentUsage[], userUsage = false) =>
         ? { uuid: component.uuid, amount: 0 }
         : {
             uuid: component.uuid,
-            amount: component.usage,
+            amount: component.usage ? parseFloat(component.usage) : 0,
             description: component.description,
             recurring: component.recurring,
           },
@@ -38,79 +47,89 @@ const mapComponents = (components: ComponentUsage[], userUsage = false) =>
     {},
   );
 
-const mapStateToProps = (_, ownProps: OwnProps) =>
-  ownProps.periods
+export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
+  props,
+) => {
+  const dispatch = useDispatch();
+
+  const initialValues = props.periods
     ? {
-        initialValues: {
-          period: ownProps.periods[0],
-          components: ownProps.periods[0].value
-            ? mapComponents(
-                ownProps.periods[0].value.components,
-                ownProps.params.userUsage,
-              )
-            : undefined,
-        },
+        period: props.periods[0],
+        components: props.periods[0].value?.components
+          ? mapComponents(
+              props.periods[0].value.components,
+              props.params.userUsage,
+            )
+          : undefined,
       }
     : {};
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onPeriodChange: (option) => {
-    const period = option.value;
-    for (const component of period.components) {
-      dispatch(
-        change(FORM_ID, `components.${component.type}.amount`, component.usage),
-      );
-      dispatch(
-        change(
-          FORM_ID,
-          `components.${component.type}.description`,
-          component.description,
-        ),
-      );
-    }
-  },
-  submitReport: async ({ period, components, user, username }) => {
-    const isUserUsage = ownProps.params.userUsage;
+  const onSubmit = async ({ period, components, user, username }) => {
+    const isUserUsage = props.params.userUsage;
 
     try {
       if (isUserUsage) {
         // Report user usage
         const promises = Object.keys(components).map((key) => {
+          const requestBody: ComponentUserUsageCreateRequest = {
+            usage: components[key].amount.toString(),
+            user: user.url,
+            username,
+          };
           return marketplaceComponentUsagesSetUserUsage({
             path: { uuid: components[key].uuid },
-            body: {
-              usage: components[key].amount,
-              user: user.url,
-              username,
-            },
+            body: requestBody,
           });
         });
         await Promise.all(promises);
       } else {
         const usages = Object.keys(components).map((key) => ({
           type: key,
-          ...components[key],
+          amount: components[key].amount.toString(),
+          description: components[key].description,
+          recurring: components[key].recurring,
         }));
         // Report resource usage
+        const requestBody: ComponentUsageCreateRequest = {
+          plan_period: period.value?.uuid,
+          usages,
+        };
         await marketplaceComponentUsagesSetUsage({
-          body: {
-            plan_period: period.value?.uuid,
-            usages,
-          },
+          body: requestBody,
         });
       }
       dispatch(showSuccess(translate('Usage report has been submitted.')));
       dispatch(closeModalDialog());
-    } catch (error) {
+    } catch (error: any) {
+      // Show user-friendly error notification (existing pattern)
       dispatch(
         showErrorResponse(error, translate('Unable to submit usage report.')),
       );
+
+      // Return form-level errors for React Final Form
+      if (error.response?.status === 400 && error.response?.data) {
+        return error.response.data; // Field-level validation errors
+      }
+      return { [FORM_ERROR]: translate('Unable to submit usage report.') };
     }
-  },
-});
+  };
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-export const enhance = compose(connector, reduxForm({ form: FORM_ID }));
-
-export const ResourceUsageFormContainer = enhance(ResourceUsageForm);
+  return (
+    <Form
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <ResourceUsageForm
+            components={props.components}
+            periods={props.periods}
+            params={props.params}
+          />
+          <div className="modal-footer">
+            <ResourceUsageSubmitButton params={props.params} />
+          </div>
+        </form>
+      )}
+    />
+  );
+};
