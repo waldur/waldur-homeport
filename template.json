@@ -11947,10 +11947,6 @@
     "description": "proposals/team/AddUserDialog.tsx",
     "message": "Search and select user..."
   },
-  "Search by name": {
-    "description": "marketplace/resources/actions/ActionDialogBody.tsx",
-    "message": "Search by name"
-  },
   "Search by username": {
     "description": "marketplace/resources/usage/ResourceUsageFilter.tsx",
     "message": "Search by username"
@@ -11960,7 +11956,7 @@
     "message": "Search for project"
   },
   "Search": {
-    "description": "core/AsyncSearchBox.tsx, marketplace/offerings/update/integration/ScriptEditorHeader.tsx, navigation/header/breadcrumb/BreadcrumbDropdown.tsx, openstack/openstack-instance/deploy/FormHardwareConfigurationStep.tsx, openstack/openstack-instance/deploy/FormImageStep.tsx, rancher/cluster/create/ManagedFormNodesStep.tsx, table/TableColumnsButton.tsx, table/TableQuery.tsx",
+    "description": "core/AsyncSearchBox.tsx, marketplace/offerings/update/integration/ScriptEditorHeader.tsx, marketplace/resources/actions/ActionDialogBody.tsx, navigation/header/breadcrumb/BreadcrumbDropdown.tsx, openstack/openstack-instance/deploy/FormHardwareConfigurationStep.tsx, openstack/openstack-instance/deploy/FormImageStep.tsx, rancher/cluster/create/ManagedFormNodesStep.tsx, table/TableColumnsButton.tsx, table/TableQuery.tsx",
     "message": "Search"
   },
   "Search...": {

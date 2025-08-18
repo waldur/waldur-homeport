@@ -58,10 +58,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         <div className={props.disabled ? 'opacity-50' : undefined}>
           {props.iconNode && (
             <span
-              className={classNames(
-                'svg-icon svg-icon-2',
-                props.iconColor && `svg-icon-${props.iconColor}`,
-              )}
+              className={`svg-icon svg-icon-2 svg-icon-${props.iconColor || 'gray-400'}`}
             >
               {props.iconNode}
             </span>
@@ -86,9 +83,9 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         <Tip
           label={translate('Staff action')}
           id={`staff-action-${uniqueId()}`}
-          className="text-dark ms-auto ps-2"
+          className="text-dark ms-1 me-3"
         >
-          <IdentificationBadgeIcon size={25} />
+          <IdentificationBadgeIcon size={22} />
         </Tip>
       )}
     </div>

@@ -25,7 +25,14 @@ export const ActionDialogHeader = ({
             />
           </Tip>
           {name}
-          <ResourceStateField resource={marketplaceResource} roundless />
+          <div>
+            <ResourceStateField
+              resource={marketplaceResource}
+              size="sm"
+              pill
+              outline
+            />
+          </div>
         </div>
       ) : (
         <>{name}</>

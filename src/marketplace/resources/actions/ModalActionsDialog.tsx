@@ -1,6 +1,8 @@
 import { ActionDialogBody } from './ActionDialogBody';
 import { ActionDialogHeader } from './ActionDialogHeader';
 
+import './ModalActionsDialog.scss';
+
 export const ModalActionsDialog = ({
   name,
   refetch,

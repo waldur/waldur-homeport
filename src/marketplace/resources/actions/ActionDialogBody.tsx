@@ -11,21 +11,22 @@ export const ActionDialogBody: FC<PropsWithChildren> = ({ children }) => {
   const queryContextValue = useMemo(() => ({ query }), [query]);
 
   return (
-    <Modal.Body>
-      <FilterBox
-        type="search"
-        placeholder={translate('Search by name') + ' ...'}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        autoFocus
-        solid
-      />
-
-      <div className="scroll-y mh-400px">
+    <>
+      <Modal.Header className="without-border pb-4">
+        <FilterBox
+          type="search"
+          placeholder={translate('Search')}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          autoFocus
+          className="flex-grow-1"
+        />
+      </Modal.Header>
+      <Modal.Body className="pt-0 px-0 h-400px">
         <ResourceActionMenuContext.Provider value={queryContextValue}>
           {children}
         </ResourceActionMenuContext.Provider>
-      </div>
-    </Modal.Body>
+      </Modal.Body>
+    </>
   );
 };
