@@ -8,10 +8,13 @@ import {
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
+import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+
+import { AnnouncementTypeOptions } from '../utils';
 
 import { AnnouncementFilter } from './AnnouncementFilter';
 import { AnnouncementRowActions } from './AnnouncementRowActions';
@@ -26,7 +29,10 @@ const renderType = ({ row }) => (
           ? 'warning'
           : 'danger'
     }
-    label={row.type}
+    label={
+      AnnouncementTypeOptions.find((opt) => opt.value === row.type)?.label ||
+      row.type
+    }
     outline
     pill
   />
@@ -35,7 +41,7 @@ const renderType = ({ row }) => (
 const renderStatus = ({ row }) => (
   <StateIndicator
     variant={row.is_active ? 'success' : 'danger'}
-    label={row.is_active ? 'Active' : 'Inactive'}
+    label={row.is_active ? translate('Active') : translate('Inactive')}
     outline
     pill
   />

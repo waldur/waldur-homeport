@@ -22,7 +22,7 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
   ...props
 }) => (
   <Badge {...props}>
-    {props.label.toUpperCase()}{' '}
+    {props.label}{' '}
     {active && (
       <LoadingSpinnerIcon
         className={

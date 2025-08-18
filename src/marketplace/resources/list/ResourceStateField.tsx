@@ -1,3 +1,4 @@
+import { capitalize, lowerCase } from 'lodash-es';
 import { Resource } from 'waldur-js-client';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
@@ -33,7 +34,7 @@ export const ResourceStateField = ({
   const state = runtimeState || backendState || resource.state;
   return (
     <StateIndicator
-      label={state}
+      label={state === 'OK' ? state : capitalize(lowerCase(state))}
       variant={
         isErred
           ? 'danger'

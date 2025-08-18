@@ -352,7 +352,7 @@
     "message": "Active to"
   },
   "Active": {
-    "description": "administration/announcements/AnnouncementFilter.tsx, administration/roles/RolesList.tsx, administration/users/FreeIPAUsersList.tsx, customer/team/tabs.ts, invitations/GroupInvitationsList.tsx, marketplace/offerings/list/OfferingStateCell.tsx, marketplace/offerings/list/OfferingStateFilter.tsx, marketplace/offerings/update/plans/PlansSection.tsx, marketplace/service-providers/ProviderCampaignStateFilter.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/utils.ts, proposals/utils.ts, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/support/UserList.tsx, user/support/UserStatus.tsx, user/support/utils.ts",
+    "description": "administration/announcements/AnnouncementFilter.tsx, administration/announcements/AnnouncementsList.tsx, administration/roles/RolesList.tsx, administration/users/FreeIPAUsersList.tsx, customer/team/tabs.ts, invitations/GroupInvitationsList.tsx, marketplace/offerings/list/OfferingStateCell.tsx, marketplace/offerings/list/OfferingStateFilter.tsx, marketplace/offerings/update/plans/PlansSection.tsx, marketplace/service-providers/ProviderCampaignStateFilter.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/utils.ts, proposals/utils.ts, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/support/UserList.tsx, user/support/UserStatus.tsx, user/support/utils.ts",
     "message": "Active"
   },
   "Add Waldur user SSH keys to the FreeIPA profile": {
@@ -4068,7 +4068,7 @@
     "message": "Downscaled"
   },
   "Draft": {
-    "description": "broadcasts/BroadcastFilter.tsx, maintenance/utils.ts, marketplace/offerings/details/PublicOfferingDetails.tsx, marketplace/offerings/list/OfferingStateCell.tsx, marketplace/offerings/list/OfferingStateFilter.tsx, marketplace/service-providers/ProviderCampaignStateFilter.tsx, proposals/utils.ts",
+    "description": "broadcasts/BroadcastFilter.tsx, broadcasts/BroadcastList.tsx, maintenance/utils.ts, marketplace/offerings/details/PublicOfferingDetails.tsx, marketplace/offerings/list/OfferingStateCell.tsx, marketplace/offerings/list/OfferingStateFilter.tsx, marketplace/service-providers/ProviderCampaignStateFilter.tsx, proposals/utils.ts",
     "message": "Draft"
   },
   "Drop files to attach them.": {
@@ -5988,7 +5988,7 @@
     "message": "In the format of GUID"
   },
   "Inactive": {
-    "description": "administration/announcements/AnnouncementFilter.tsx, invitations/GroupInvitationsList.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/team/UserListOptionInline.tsx, user/support/UserList.tsx",
+    "description": "administration/announcements/AnnouncementFilter.tsx, administration/announcements/AnnouncementsList.tsx, invitations/GroupInvitationsList.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/team/UserListOptionInline.tsx, user/support/UserList.tsx",
     "message": "Inactive"
   },
   "Incident - client issue with service usage or availability (interruptions, degradation of quality).": {
@@ -12432,7 +12432,7 @@
     "message": "Sent at"
   },
   "Sent": {
-    "description": "broadcasts/BroadcastFilter.tsx",
+    "description": "broadcasts/BroadcastFilter.tsx, broadcasts/BroadcastList.tsx",
     "message": "Sent"
   },
   "Server group creation has been scheduled.": {
