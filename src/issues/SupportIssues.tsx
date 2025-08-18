@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Panel } from '@waldur/core/Panel';
 import { CustomerSupportRating } from '@waldur/issues/CustomerSupportRating';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
+import { PAGE_SIZE_FULL } from '@waldur/table/constants';
 import {
   getUser,
   isStaffOrSupport as isStaffOrSupportSelector,
@@ -16,7 +17,7 @@ export const SupportIssues: FunctionComponent = () => {
     <>
       {isStaffOrSupport && <CustomerSupportRating />}
       <Panel>
-        <IssuesList scope={user} />
+        <IssuesList scope={user} initialPageSize={PAGE_SIZE_FULL} />
       </Panel>
     </>
   );

@@ -14,6 +14,7 @@ import {
   getBackendHealthStatus,
   isWorking,
 } from '@waldur/navigation/BackendHealthStatusIndicator';
+import { PAGE_SIZE_COMPACT } from '@waldur/table/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { SupportStatistics } from './SupportStatistics';
@@ -48,7 +49,7 @@ export const SupportDashboard: FC = () => {
           className="mb-5"
           title={translate('Open issues')}
           filter={{ status: 'Open' }}
-          initialPageSize={5}
+          initialPageSize={PAGE_SIZE_COMPACT}
           showPageSizeSelector={false}
           scope={user}
         />

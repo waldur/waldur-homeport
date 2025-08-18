@@ -1,7 +1,6 @@
 import { Field, reduxForm } from 'redux-form';
 
 import {
-  getInitialValues,
   syncFiltersToURL,
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
@@ -49,7 +48,6 @@ const enhance = reduxForm({
   form: 'IssuesFilter',
   destroyOnUnmount: false,
   onChange: syncFiltersToURL,
-  initialValues: getInitialValues(),
 });
 
 export const IssuesFilter = enhance(PureIssuesFilter);

@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { IssuesList } from '@waldur/issues/list/IssuesList';
+import { PAGE_SIZE_FULL } from '@waldur/table/constants';
 import { useUser } from '@waldur/workspace/hooks';
 
 export const UserIssuesTable: FC = () => {
@@ -13,7 +14,7 @@ export const UserIssuesTable: FC = () => {
       filter={filter}
       hiddenColumns={['caller', 'time_in_progress', 'customer', 'project']}
       title={translate('Requests')}
-      initialPageSize={10}
+      initialPageSize={PAGE_SIZE_FULL}
     />
   );
 };

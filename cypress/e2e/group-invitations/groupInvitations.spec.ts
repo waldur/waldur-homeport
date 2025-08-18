@@ -27,7 +27,7 @@ describe('Group invitations', () => {
       )
       .intercept(
         'GET',
-        '/api/user-group-invitations/?page=1&page_size=10&is_active=&customer_uuid=895e38d197e748459189f19285119edf',
+        '/api/user-group-invitations/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf',
         {
           fixture: 'group-invitations/user-group-invitations.json',
         },

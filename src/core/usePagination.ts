@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { MIN_PAGE_SIZE } from '@waldur/table/constants';
+import { PAGE_SIZE_COMPACT } from '@waldur/table/constants';
 
 export const usePagination = <
   T extends FieldArrayRenderProps<any, any>['fields'] | any[],
@@ -9,7 +9,7 @@ export const usePagination = <
   items: T,
 ) => {
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(MIN_PAGE_SIZE);
+  const [pageSize, setPageSize] = useState(PAGE_SIZE_COMPACT);
 
   const changePageSize = (newSize) => {
     if (newSize !== pageSize) {
@@ -49,6 +49,6 @@ export const usePagination = <
     visibleItems: visibleItems as T,
     refreshPageOnAdd,
     refreshPageOnRemove,
-    hasPages: items.length > MIN_PAGE_SIZE,
+    hasPages: items.length > PAGE_SIZE_COMPACT,
   };
 };

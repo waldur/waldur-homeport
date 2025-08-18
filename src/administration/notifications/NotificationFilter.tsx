@@ -2,7 +2,6 @@ import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import {
-  getInitialValues,
   syncFiltersToURL,
   useReinitializeFilterFromUrl,
 } from '@waldur/core/filters';
@@ -52,6 +51,4 @@ export const NotificationFilter = reduxForm({
   form: 'notificationFilter',
   onChange: syncFiltersToURL,
   destroyOnUnmount: false,
-  initialValues: getInitialValues(),
-  enableReinitialize: true,
 })(PureNotificationFilter);
