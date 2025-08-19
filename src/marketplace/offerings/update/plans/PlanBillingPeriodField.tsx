@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { required } from '@waldur/core/validators';
-import { Select } from '@waldur/form/themed-select';
+import { SelectField } from '@waldur/form/SelectField';
 
 import { getBillingPeriods } from './constants';
 
@@ -10,13 +10,8 @@ export const PlanBillingPeriodField: FunctionComponent = () => (
   <Field
     name="unit"
     validate={required}
-    component={(fieldProps) => (
-      <Select
-        value={fieldProps.input.value}
-        onChange={(value) => fieldProps.input.onChange(value)}
-        options={getBillingPeriods()}
-        isClearable={false}
-      />
-    )}
+    component={SelectField as any}
+    options={getBillingPeriods()}
+    isClearable={false}
   />
 );
