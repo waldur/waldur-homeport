@@ -382,6 +382,10 @@ export const PermissionOptions = [
         value: 'SERVICE_PROVIDER.LIST_PROJECTS',
       },
       {
+        label: translate('List service accounts'),
+        value: 'SERVICE_PROVIDER.LIST_SERVICE_ACCOUNTS',
+      },
+      {
         label: translate('List user customers'),
         value: 'SERVICE_PROVIDER.LIST_USER_CUSTOMERS',
       },
