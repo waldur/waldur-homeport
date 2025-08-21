@@ -1,5 +1,9 @@
+import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { marketplaceOfferingUsersCreate } from 'waldur-js-client';
+import {
+  marketplaceOfferingUsersCreate,
+  ServiceProvider,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -17,6 +21,13 @@ import {
   providerOfferingsAutocomplete,
   userAutocomplete,
 } from '../common/autocompletes';
+
+interface OwnProps {
+  resolve: {
+    provider: ServiceProvider;
+    refetch(): void;
+  };
+}
 
 const handleSubmit =
   ({ formData, dispatch, curretUser, refetch }) =>
@@ -53,7 +64,9 @@ const handleSubmit =
     }
   };
 
-export const CreateProviderOfferingUserDialog = ({ resolve: { refetch } }) => {
+export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
+  resolve: { provider, refetch },
+}) => {
   const dispatch = useDispatch();
   const curretUser = useUser();
 
@@ -70,7 +83,12 @@ export const CreateProviderOfferingUserDialog = ({ resolve: { refetch } }) => {
       name: 'offering',
       label: translate('Offering'),
       type: 'async_select',
-      loadOptions: providerOfferingsAutocomplete,
+      loadOptions: (query, prevOptions, page) =>
+        providerOfferingsAutocomplete(
+          { name: query, customer: provider.customer },
+          prevOptions,
+          page,
+        ),
       getOptionLabel: ({ name, customer_name }) => (
         <>
           {name} | {customer_name}

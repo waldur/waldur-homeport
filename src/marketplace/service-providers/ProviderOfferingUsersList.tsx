@@ -1,7 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { OfferingUserStateEnum } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -15,7 +17,35 @@ import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerReso
 
 import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
 import { CreateProviderOfferingUserButton } from './CreateProviderOfferingUserButton';
+import { OfferingUsersExpandableRow } from './OfferingUsersExpandableRow';
 import { ProviderOfferingUsersFilter } from './ProviderOfferingUsersFilter';
+
+const getStateColor = (state: OfferingUserStateEnum) => {
+  switch (state) {
+    case 'OK':
+      return 'success';
+    case 'Creating':
+      return 'blue';
+    case 'Pending account linking':
+    case 'Pending additional validation':
+      return 'warning';
+    case 'Error creating':
+    case 'Error deleting':
+      return 'danger';
+    case 'Deleted':
+    case 'Deleting':
+      return 'pink';
+    case 'Requested':
+    case 'Requested deletion':
+      return 'default';
+  }
+};
+
+const AccountStateField = ({ row }) => (
+  <Badge variant={getStateColor(row.state)} pill outline>
+    {row.state}
+  </Badge>
+);
 
 export const ProviderOfferingUsersListComponent: FunctionComponent<{
   provider?;
@@ -52,6 +82,14 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
         },
       ]
     : [];
+  const stateColumn = provider
+    ? [
+        {
+          title: translate('Account state'),
+          render: AccountStateField,
+        },
+      ]
+    : [];
   const columns = [
     {
       title: translate('Offering'),
@@ -74,6 +112,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
       title: translate('User'),
       render: ({ row }) => row.user_full_name,
     },
+    ...stateColumn,
     {
       title: translate('External username'),
       render: ({ row }) => row.username || 'N/A',
@@ -105,7 +144,10 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
       tableActions={
         <>
           <UserImportButton refetch={tableProps.fetch} provider={provider} />
-          <CreateProviderOfferingUserButton refetch={tableProps.fetch} />
+          <CreateProviderOfferingUserButton
+            refetch={tableProps.fetch}
+            provider={provider}
+          />
         </>
       }
       rowActions={({ row }) => (
@@ -116,6 +158,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
         />
       )}
       hasQuery={true}
+      expandableRow={provider ? OfferingUsersExpandableRow : undefined}
     />
   );
 };

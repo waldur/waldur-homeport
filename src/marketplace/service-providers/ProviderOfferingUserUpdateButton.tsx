@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -39,7 +40,13 @@ export const ProviderOfferingUserUpdateButton: FC<
   return (
     canUpdateOfferingUser && (
       <ActionItem
-        title="Edit"
+        title={
+          props.updateScope === 'comment'
+            ? translate('Edit comment')
+            : props.updateScope === 'state'
+              ? translate('Update account state')
+              : translate('Edit')
+        }
         action={() =>
           dispatch(
             openModalDialog(ProviderOfferingUserUpdateDialog, {
