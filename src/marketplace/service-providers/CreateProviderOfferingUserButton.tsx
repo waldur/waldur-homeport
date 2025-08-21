@@ -1,10 +1,8 @@
-import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
+import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
 
 const CreateProviderOfferingUserDialog = lazyComponent(() =>
   import('./CreateProviderOfferingUserDialog').then((module) => ({
@@ -12,16 +10,14 @@ const CreateProviderOfferingUserDialog = lazyComponent(() =>
   })),
 );
 
-export const CreateProviderOfferingUserButton = ({ refetch }) => {
+export const CreateProviderOfferingUserButton = ({ refetch, provider }) => {
   const dispatch = useDispatch();
   return (
-    <ActionButton
-      title={translate('Create')}
-      iconNode={<PlusCircleIcon weight="bold" />}
+    <AddButton
       action={() =>
         dispatch(
           openModalDialog(CreateProviderOfferingUserDialog, {
-            resolve: { refetch },
+            resolve: { refetch, provider },
           }),
         )
       }

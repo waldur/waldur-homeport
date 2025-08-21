@@ -44,7 +44,24 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
               {...props}
               provider={provider}
               offering={offering}
+              updateScope="username"
             />
+            {Boolean(provider) && (
+              <>
+                <ProviderOfferingUserUpdateButton
+                  {...props}
+                  provider={provider}
+                  offering={offering}
+                  updateScope="comment"
+                />
+                <ProviderOfferingUserUpdateButton
+                  {...props}
+                  provider={provider}
+                  offering={offering}
+                  updateScope="state"
+                />
+              </>
+            )}
 
             <ProviderOfferingUserDeleteButton
               {...props}
@@ -56,7 +73,7 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
 
         canUpdateRestrictedStatus ? RestrictOfferingUserButton : null,
       ].filter(Boolean)}
-      data-cy="public-resources-list-actions-dropdown-btn"
+      data-cy="offering-users-list-actions-dropdown-btn"
     />
   );
 };
