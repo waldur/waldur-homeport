@@ -206,6 +206,65 @@ type CustomSelectProps = {
 } & SelectProps<any> &
   Partial<Omit<BaseFieldProps, 'onChange'>>;
 
+// Utility to reorder options: selected options at the top (for both isMulti and single)
+const reorderOptions = (options, value, getOptionValue, isMulti) => {
+  if (!Array.isArray(options) || value === null) return options;
+  if (isMulti) {
+    if (!Array.isArray(value) || value.length === 0) return options;
+    const selectedValues = new Set(value.map(getOptionValue));
+    const selectedOptions = options.filter((opt) =>
+      selectedValues.has(getOptionValue(opt)),
+    );
+    const unselectedOptions = options.filter(
+      (opt) => !selectedValues.has(getOptionValue(opt)),
+    );
+    return [...selectedOptions, ...unselectedOptions];
+  } else {
+    // single select
+    const selectedValue = getOptionValue(value);
+    const selectedOption = options.find(
+      (opt) => getOptionValue(opt) === selectedValue,
+    );
+    const unselectedOptions = options.filter(
+      (opt) => getOptionValue(opt) !== selectedValue,
+    );
+    return selectedOption ? [selectedOption, ...unselectedOptions] : options;
+  }
+};
+
+// Utility to reorder options for async select: selected options at the top (for both isMulti and single)
+const reorderAsyncOptions = (options, value, getOptionValue, isMulti, page) => {
+  if (!Array.isArray(options) || value === null) return options;
+  if (isMulti) {
+    if (!Array.isArray(value) || value.length === 0) return options;
+    const selectedValues = new Set(value.map(getOptionValue));
+    const unselectedOptions = options.filter(
+      (opt) => !selectedValues.has(getOptionValue(opt)),
+    );
+
+    if (page === 1) {
+      return value.concat(unselectedOptions);
+    }
+    return unselectedOptions;
+  } else {
+    const selectedValue = getOptionValue(value);
+    const selectedOption = options.find(
+      (opt) => getOptionValue(opt) === selectedValue,
+    );
+    const unselectedOptions = options.filter(
+      (opt) => getOptionValue(opt) !== selectedValue,
+    );
+
+    if (page === 1) {
+      if (selectedOption) return [selectedOption].concat(unselectedOptions);
+      else if (value) return [value].concat(options);
+      else return options;
+    }
+    if (selectedOption) return unselectedOptions;
+    return options;
+  }
+};
+
 export const Select: FC<CustomSelectProps> = ({
   components = undefined,
   size = undefined,
@@ -221,6 +280,19 @@ export const Select: FC<CustomSelectProps> = ({
     size === 'sm' && 'select-sm',
     props.className,
   );
+
+  // Reorder options so selected option(s) are always at the top
+  let options = props.options;
+  const getOptionValue = props.getOptionValue || ((option) => option.value);
+  if (props.menuIsOpen && Array.isArray(options) && props.value !== null) {
+    options = reorderOptions(
+      options,
+      props.value,
+      getOptionValue,
+      props.isMulti,
+    );
+  }
+
   return !creatable ? (
     <BaseSelect
       theme={theme}
@@ -228,6 +300,7 @@ export const Select: FC<CustomSelectProps> = ({
       {...(props.isMulti ? REACT_MULTI_SELECT : REACT_SELECT_MENU_PORTALING)}
       components={composedComponents}
       {...props}
+      options={options}
       className={className}
       classNamePrefix="metronic-select"
     />
@@ -238,6 +311,7 @@ export const Select: FC<CustomSelectProps> = ({
       {...(props.isMulti ? REACT_MULTI_SELECT : REACT_SELECT_MENU_PORTALING)}
       components={composedComponents}
       {...props}
+      options={options}
       className={className}
       classNamePrefix="metronic-select"
     />
@@ -246,6 +320,25 @@ export const Select: FC<CustomSelectProps> = ({
 
 export const AsyncPaginate: FC<any> = (props) => {
   const theme = useSelectTheme();
+
+  const getOptionValue = props.getOptionValue || ((option) => option.value);
+  let wrappedLoadOptions;
+  if (props.menuIsOpen && props.loadOptions) {
+    wrappedLoadOptions = async (query, prevOptions, additional) => {
+      const result = await props.loadOptions(query, prevOptions, additional);
+      return {
+        ...result,
+        options: reorderAsyncOptions(
+          result.options,
+          props.value,
+          getOptionValue,
+          props.isMulti,
+          additional?.page,
+        ),
+      };
+    };
+  }
+
   return (
     <BaseAsyncPaginate
       theme={theme}
@@ -254,6 +347,7 @@ export const AsyncPaginate: FC<any> = (props) => {
       }}
       {...REACT_SELECT_MENU_PORTALING}
       {...props}
+      loadOptions={wrappedLoadOptions || props.loadOptions}
     />
   );
 };
