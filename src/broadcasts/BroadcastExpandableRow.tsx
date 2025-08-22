@@ -5,6 +5,7 @@ import { BroadcastMessage } from 'waldur-js-client';
 import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { Field } from '@waldur/resource/summary';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 import { OptionsList } from './OptionsList';
@@ -33,10 +34,12 @@ export const BroadcastExpandableRow: FunctionComponent<{
         <RecipientsField row={row} />
 
         {row.send_at && (
-          <>
-            <h4 className="fw-normal">{translate('Send at')}</h4>
-            <p>{formatDateTime(row.send_at)}</p>
-          </>
+          <Field
+            label={translate('Send at')}
+            value={formatDateTime(row.send_at)}
+            labelCol={5}
+            valueCol={7}
+          />
         )}
       </Col>
     </Row>

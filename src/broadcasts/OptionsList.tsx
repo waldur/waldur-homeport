@@ -1,3 +1,5 @@
+import { Field } from '@waldur/resource/summary';
+
 import { IdNamePair } from './types';
 
 export const OptionsList = ({
@@ -8,8 +10,10 @@ export const OptionsList = ({
   list: IdNamePair[];
 }) =>
   list ? (
-    <>
-      <h4 className="fw-normal">{label}</h4>
-      <p>{list.map((c) => c.name || c).join(', ')}</p>
-    </>
+    <Field
+      label={label}
+      value={list.map((c) => c.name || c).join(', ')}
+      labelCol={5}
+      valueCol={7}
+    />
   ) : null;

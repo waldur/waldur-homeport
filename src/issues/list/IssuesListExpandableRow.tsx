@@ -15,7 +15,7 @@ export const IssuesListExpandableRow: FunctionComponent<{
   supportOrStaff;
 }> = ({ row, supportOrStaff }) => (
   <ExpandableContainer>
-    <Row className="mb-2">
+    <Row>
       <Col xs={6}>
         <Field label={translate('Reporter')}>
           {row.reporter_name || 'N/A'}

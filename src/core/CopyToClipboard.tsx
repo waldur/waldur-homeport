@@ -11,6 +11,7 @@ interface CopyToClipboardProps {
   className?: string;
   label?: string;
   textButton?: boolean;
+  rightIcon?: boolean;
 }
 
 export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
@@ -18,6 +19,7 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
   label = translate('Copy to clipboard'),
   className,
   textButton,
+  rightIcon,
 }) => {
   const dispatch = useDispatch();
 
@@ -33,18 +35,25 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
       type="button"
       onClick={onClick}
     >
-      <CopyIcon /> {label}
+      {rightIcon && label}
+      <CopyIcon
+        weight="bold"
+        size="1.4em"
+        className={rightIcon ? 'ms-2' : 'me-2'}
+      />
+      {!rightIcon && label}
     </button>
   ) : (
     <button
-      className={classNames('btn', className)}
+      className={classNames('btn', className, rightIcon && 'btn-icon-right')}
       type="button"
       onClick={onClick}
     >
+      {rightIcon && label}
       <span className="svg-icon svg-icon-2">
-        <CopyIcon />
+        <CopyIcon weight="bold" />
       </span>
-      {label}
+      {!rightIcon && label}
     </button>
   );
 };

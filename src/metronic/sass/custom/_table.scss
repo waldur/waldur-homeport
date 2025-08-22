@@ -247,7 +247,7 @@
 
 /* TABLE IN CARD */
 .card.card-table {
-  .card-header {
+  .card-header:not(.card-solid .card-header) {
     min-height: 77px;
 
     .card-toolbar {
@@ -259,7 +259,8 @@
     }
   }
 
-  &:not(.grid-table):not(.tab-content .card-body) {
+  &:not(.grid-table)
+    .card-body:not(.tab-content .card-body):not(.card-solid .card-body) {
     padding-top: 0;
   }
 
@@ -359,7 +360,7 @@
       padding-right: $card-px;
     }
 
-    &:not(.grid-table) .card-body {
+    &:not(.grid-table) .card-body:not(.card-solid .card-body) {
       padding-top: 0;
       padding-left: 0;
       padding-right: 0;

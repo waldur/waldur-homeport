@@ -1,8 +1,10 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
+import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
+import { Tip } from '@waldur/core/Tooltip';
+import { translate } from '@waldur/i18n';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 export const NotificationExpandableRow: FunctionComponent<{
@@ -10,10 +12,11 @@ export const NotificationExpandableRow: FunctionComponent<{
 }> = ({ row }) => {
   return (
     <ExpandableContainer>
-      <div className="tabs-container">
+      <div className="tabs-container tabs-scrollable">
         <Tabs
           defaultActiveKey="tab-0"
           id="notification-templates-tabs"
+          className="nav-line-tabs"
           unmountOnExit
           mountOnEnter
         >
@@ -24,9 +27,13 @@ export const NotificationExpandableRow: FunctionComponent<{
                   {template.is_content_overridden ? (
                     <div>
                       {template.path}
-                      <span className="svg-icon svg-icon-5 ms-3">
-                        <PencilSimpleIcon />
-                      </span>
+                      <Tip
+                        id={'tip-notif-overridden-' + index}
+                        label={translate('Content is overridden')}
+                        className="svg-icon svg-icon-5 ms-3"
+                      >
+                        <PencilSimpleIcon weight="bold" />
+                      </Tip>
                     </div>
                   ) : (
                     template.path
@@ -36,20 +43,25 @@ export const NotificationExpandableRow: FunctionComponent<{
               key={index}
               eventKey={`tab-${index}`}
             >
-              <div className="mt-5 mx-5">
-                <div className="row">
-                  <div className="col-md-9">
-                    <pre>{template.content}</pre>
-                  </div>
-                  <div className="col-md-3 d-flex align-items-start justify-content-end">
-                    <CopyToClipboardButton
-                      className="mx-2 text-hover-primary cursor-pointer d-inline z-index-1"
-                      value={template.content}
-                      size={30}
-                    />
-                  </div>
-                </div>
-              </div>
+              <Card className="card-bordered card-solid">
+                <Card.Header className="min-h-auto">
+                  <h6 className="mb-0 fw-bold">
+                    {translate('Notification template')}
+                  </h6>
+                  <CopyToClipboard
+                    label={translate('Copy')}
+                    value={template.content}
+                    textButton
+                    rightIcon
+                    className="my-2 text-hover-primary"
+                  />
+                </Card.Header>
+                <Card.Body className="p-8">
+                  <pre className="text-gray-700 fs-6 mb-0">
+                    {template.content}
+                  </pre>
+                </Card.Body>
+              </Card>
             </Tab>
           ))}
         </Tabs>

@@ -32,7 +32,6 @@ export const BroadcastTemplateList = () => {
       expandableRow={BroadcastTemplateExpandableRow}
       initialPageSize={10}
       showPageSizeSelector={true}
-      expandableRowClassName="bg-gray-200"
       rowActions={({ row }) => (
         <BroadcastTemplateActions row={row} refetch={tableProps.fetch} />
       )}
