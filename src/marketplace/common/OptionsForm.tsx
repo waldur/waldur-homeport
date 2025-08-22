@@ -65,6 +65,7 @@ export const OptionsForm = ({
                   value: item,
                 })),
                 noUpdateOnBlur: true,
+                simpleValue: true,
               };
               break;
 
