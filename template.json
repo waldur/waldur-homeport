@@ -1903,6 +1903,10 @@
     "description": "user/support/UserStatus.tsx",
     "message": "Blocked users cannot login into the system"
   },
+  "Body": {
+    "description": "broadcasts/BroadcastTemplateExpandableRow.tsx",
+    "message": "Body"
+  },
   "Booked by": {
     "description": "booking/components/BookingResourceDetailsDialog.tsx",
     "message": "Booked by"
@@ -2811,8 +2815,12 @@
     "description": "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
     "message": "Contains invalid users."
   },
+  "Content is overridden": {
+    "description": "administration/notifications/NotificationExpandableRow.tsx, administration/notifications/NotificationList.tsx",
+    "message": "Content is overridden"
+  },
   "Content": {
-    "description": "administration/agreements/UserAgreementCreateDialog.tsx",
+    "description": "administration/agreements/UserAgreementCreateDialog.tsx, administration/agreements/UserAgreementsExpandableRow.tsx",
     "message": "Content"
   },
   "Continue review": {
@@ -2844,7 +2852,7 @@
     "message": "Copy to clipboard"
   },
   "Copy": {
-    "description": "marketplace/offerings/update/integration/GLAuthConfigDialog.tsx, navigation/header/UserToken.tsx",
+    "description": "administration/notifications/NotificationExpandableRow.tsx, marketplace/offerings/update/integration/GLAuthConfigDialog.tsx, navigation/header/UserToken.tsx",
     "message": "Copy"
   },
   "Cores": {
@@ -3812,7 +3820,7 @@
     "message": "Description of the Waldur deployment."
   },
   "Description": {
-    "description": "administration/auto-provisioning-rules/Step3FinalConfig.tsx, administration/quick-shortcuts/QuickShortcutForm.tsx, administration/quick-shortcuts/QuickShortcutsList.tsx, administration/roles/RolesList.tsx, administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, azure/vm/AzureVirtualMachineForm.tsx, customer/details/AccessSubnetForm.tsx, customer/details/CustomerAccessControlPanel.tsx, customer/details/EditFieldDialog.tsx, customer/service-accounts/ServiceAccountExpandableRow.tsx, customer/service-accounts/ServiceAccountFormDialog.tsx, issues/IssueDetails.tsx, issues/create/IssueCreateForm.tsx, issues/list/IssuesListExpandableRow.tsx, maintenance/MaintenanceExpandableRow.tsx, maintenance/create/AffectedOfferingsTable.tsx, maintenance/create/Step2SelectOfferings.tsx, marketplace/category/admin/AdminCategoriesPage.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/CategoryGroupsList.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, marketplace/details/OfferingTabs.tsx, marketplace/details/plan/PlanSection.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/actions/RequestActionDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/details/PublicOfferingInfo.tsx, marketplace/offerings/images/CreateImageDialog.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, marketplace/offerings/update/plans/PlanForm.tsx, marketplace/orders/details/OrderDetailsApprovalsTab.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, marketplace/resources/usage/utils.ts, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ServiceProviderManagement.tsx, marketplace/service-providers/ServiceProvidersList.tsx, marketplace/service-providers/details/ServiceProviderDetails.tsx, marketplace-checklist/categories/CategoriesTable.tsx, marketplace-checklist/categories/CategoryFormDialog.tsx, marketplace-checklist/checklists/ChecklistFormDialog.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-instance/deploy/FormSecurityGroupsField.tsx, openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx, openstack/openstack-security-groups/SecurityGroupRulesList.tsx, openstack/openstack-security-groups/SecurityGroupsList.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx, openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx, openstack/openstack-volume/TenantVolumeTypesList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectDashboard.tsx, project/ProjectsList.tsx, project/details/ProjectDetailsDialog.tsx, project/import/Step5PreviewAndImport.tsx, project/manage/ProjectGeneral.tsx, proposals/CallsAvailableOfferingsPage.tsx, proposals/details/CallDescriptionCard.tsx, proposals/details/CallDocumentsCard.tsx, proposals/details/PublicCallDetailsContainer.tsx, proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx, proposals/update/configuration/ResourceTemplateExpandableRow.tsx, proposals/update/configuration/Step4FinalConfig.tsx, proposals/update/general/CallGeneralSection.tsx, rancher/ClusterProjectList.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/catalog/ClusterCatalogList.tsx, rancher/cluster/hpas/HPACreateDialog.tsx, rancher/cluster/hpas/HPAUpdateDialog.tsx, rancher/template/ApplicationConfiguration.tsx, rancher/template/CatalogTemplateList.tsx, rancher/template/ClusterTemplateList.tsx, resource/actions/base.ts, resource/summary/ResourceSummaryBase.tsx, slurm/RequestLimitsChangeDialog.tsx, user/support/EditFieldDialog.tsx, user/support/UserEditRows.tsx, user/support/UserList.tsx",
+    "description": "administration/auto-provisioning-rules/Step3FinalConfig.tsx, administration/quick-shortcuts/QuickShortcutForm.tsx, administration/quick-shortcuts/QuickShortcutsList.tsx, administration/roles/RolesList.tsx, administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, azure/vm/AzureVirtualMachineForm.tsx, customer/details/AccessSubnetForm.tsx, customer/details/CustomerAccessControlPanel.tsx, customer/details/EditFieldDialog.tsx, customer/service-accounts/ServiceAccountExpandableRow.tsx, customer/service-accounts/ServiceAccountFormDialog.tsx, issues/IssueDetails.tsx, issues/create/IssueCreateForm.tsx, issues/list/IssuesListExpandableRow.tsx, maintenance/MaintenanceExpandableRow.tsx, maintenance/create/AffectedOfferingsTable.tsx, maintenance/create/Step2SelectOfferings.tsx, marketplace/category/admin/AdminCategoriesPage.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/CategoryGroupsList.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, marketplace/details/OfferingTabs.tsx, marketplace/details/plan/PlanSection.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/actions/RequestActionDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/details/PublicOfferingInfo.tsx, marketplace/offerings/images/CreateImageDialog.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, marketplace/offerings/update/plans/PlanForm.tsx, marketplace/orders/details/OrderDetailsApprovalsTab.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, marketplace/resources/usage/utils.ts, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ServiceProviderManagement.tsx, marketplace/service-providers/ServiceProvidersList.tsx, marketplace/service-providers/details/ServiceProviderDetails.tsx, marketplace-checklist/categories/CategoriesTable.tsx, marketplace-checklist/categories/CategoryFormDialog.tsx, marketplace-checklist/checklists/ChecklistFormDialog.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-instance/deploy/FormSecurityGroupsField.tsx, openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx, openstack/openstack-security-groups/SecurityGroupRulesList.tsx, openstack/openstack-security-groups/SecurityGroupsList.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx, openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx, openstack/openstack-volume/TenantVolumeTypesList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectDashboard.tsx, project/ProjectsList.tsx, project/details/ProjectDetailsDialog.tsx, project/import/Step5PreviewAndImport.tsx, project/manage/ProjectGeneral.tsx, proposals/CallsAvailableOfferingsPage.tsx, proposals/PublicCallExpandableRow.tsx, proposals/details/CallDescriptionCard.tsx, proposals/details/CallDocumentsCard.tsx, proposals/details/PublicCallDetailsContainer.tsx, proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx, proposals/update/configuration/ResourceTemplateExpandableRow.tsx, proposals/update/configuration/Step4FinalConfig.tsx, proposals/update/general/CallGeneralSection.tsx, rancher/ClusterProjectList.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/catalog/ClusterCatalogList.tsx, rancher/cluster/hpas/HPACreateDialog.tsx, rancher/cluster/hpas/HPAUpdateDialog.tsx, rancher/template/ApplicationConfiguration.tsx, rancher/template/CatalogTemplateList.tsx, rancher/template/ClusterTemplateList.tsx, resource/actions/base.ts, resource/summary/ResourceSummaryBase.tsx, slurm/RequestLimitsChangeDialog.tsx, user/support/EditFieldDialog.tsx, user/support/UserEditRows.tsx, user/support/UserList.tsx",
     "message": "Description"
   },
   "Desired replicas": {
@@ -8186,6 +8194,10 @@
   "Notification method": {
     "description": "user/hooks/HookDetailsDialog.tsx",
     "message": "Notification method"
+  },
+  "Notification template": {
+    "description": "administration/notifications/NotificationExpandableRow.tsx",
+    "message": "Notification template"
   },
   "Notifications": {
     "description": "SettingsDescription.ts, administration/hooks/HooksList.tsx, administration/routes.ts, administration/settings/AdministrationBranding.tsx, user/hooks/HooksList.tsx, user/routes.ts, user/support/UserEditRows.tsx",

@@ -1,0 +1,20 @@
+.md-content {
+  .md-small-titles {
+    // Show smaller font size for markdown files under expanded table detail section
+    h1 {
+      font-size: 18px !important;
+    }
+    // Apply same font size for the smaller heading tags under expanded table detail section
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 16px !important;
+    }
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}

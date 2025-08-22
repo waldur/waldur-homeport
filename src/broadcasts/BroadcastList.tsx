@@ -84,7 +84,6 @@ export const BroadcastList: FunctionComponent<{}> = () => {
       expandableRow={BroadcastExpandableRow}
       initialPageSize={10}
       showPageSizeSelector={true}
-      expandableRowClassName="bg-gray-200"
       rowActions={BroadcastsRowActions}
       hasQuery={true}
       title={translate('Broadcasts')}

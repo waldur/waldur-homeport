@@ -4,6 +4,7 @@ import { BroadcastMessage } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { Field } from '@waldur/resource/summary';
 
 import { RecipientsListDialog } from './RecipientsListDialog';
 
@@ -19,8 +20,7 @@ export const RecipientsField: FunctionComponent<{
       }),
     );
   return (
-    <>
-      <h4 className="fw-normal">{translate('Recipients')}</h4>
+    <Field label={translate('Recipients')} labelCol={5} valueCol={7}>
       <p>
         <button
           className="btn btn-link btn-flush"
@@ -30,6 +30,6 @@ export const RecipientsField: FunctionComponent<{
           {translate('Show recipients')}
         </button>
       </p>
-    </>
+    </Field>
   );
 };
