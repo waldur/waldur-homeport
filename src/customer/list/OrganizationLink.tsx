@@ -38,7 +38,9 @@ export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
     // Find the highest-priority permission the user has for this organization
     for (const scope of PERMISSION_PRIORITY) {
       const hasPermission = user.permissions.some(
-        (p) => p.scope_type === scope && p.customer_uuid === uuid,
+        (p) =>
+          p.scope_type === scope &&
+          (p.customer_uuid === uuid || p.scope_uuid === uuid),
       );
       if (hasPermission) {
         return PERMISSION_MAP[scope];
