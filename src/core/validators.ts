@@ -60,16 +60,35 @@ export const url = (value) => {
   if (!value) return undefined;
 
   try {
-    const urlPattern =
-      /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/i;
-    const isValidPattern = urlPattern.test(value);
+    // Check for disallowed protocols and patterns first
+    if (value.match(/^(ftp|file|javascript|data|vbscript|about|blob):/i)) {
+      throw new Error('Invalid protocol');
+    }
 
-    if (isValidPattern) {
-      // If no protocol is provided, assume https
-      const urlToTest = value.startsWith('http') ? value : `https://${value}`;
-      new URL(urlToTest);
-    } else {
-      throw new Error('Invalid URL format');
+    // Reject protocol-relative URLs
+    if (value.startsWith('//')) {
+      throw new Error('Protocol-relative URLs not allowed');
+    }
+
+    // Simply use the native URL constructor for validation
+    // It's more robust and handles all valid URL formats
+    const urlToTest = value.match(/^https?:\/\//) ? value : `https://${value}`;
+
+    const urlObj = new URL(urlToTest);
+
+    // Only allow http and https protocols
+    if (!['http:', 'https:'].includes(urlObj.protocol)) {
+      throw new Error('Invalid protocol');
+    }
+
+    // Check for valid hostname
+    if (
+      !urlObj.hostname ||
+      urlObj.hostname.includes(' ') ||
+      urlObj.hostname === '.' ||
+      urlObj.hostname === '..'
+    ) {
+      throw new Error('Invalid hostname');
     }
 
     return undefined;

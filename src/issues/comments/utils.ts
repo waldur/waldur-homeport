@@ -2,10 +2,11 @@ import { escapeHtml } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Attachment } from '@waldur/issues/attachments/types';
 
-const urlPattern =
-  '(?:(?:https?)://|www.)(?:([-A-Z0-9+&@#/%=~_|$?!:,.]*)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:([-A-Z0-9+&@#/%=~_|$?!:,.]*)|[A-Z0-9+&@#/%=~_|$])';
+// Simplified URL pattern to avoid catastrophic backtracking
+// Matches URLs starting with http://, https://, or www.
+const urlPattern = '(?:https?://|www\\.)[^\\s\\]|]+';
 
-const urlRegex = new RegExp(urlPattern, 'im');
+const urlRegex = new RegExp(urlPattern, 'i');
 
 const standaloneLinkRegex = /\s+(https?:\/\/[^\s]+)\s*/gim;
 
