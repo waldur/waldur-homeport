@@ -6855,6 +6855,10 @@
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "List round"
   },
+  "List service accounts": {
+    "description": "administration/roles/PermissionOptions.tsx",
+    "message": "List service accounts"
+  },
   "List user customers": {
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "List user customers"
