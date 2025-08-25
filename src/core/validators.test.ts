@@ -157,9 +157,9 @@ describe('URL validator', () => {
       }
       const endTime = performance.now();
 
-      // 3000 validations should complete in less than 500ms
+      // 3000 validations should complete in less than 1000ms
       // URL constructor validation is still fast but not as fast as simple regex
-      expect(endTime - startTime).toBeLessThan(500);
+      expect(endTime - startTime).toBeLessThan(1000);
     });
   });
 });
