@@ -12,7 +12,7 @@ export const ComponentForm = ({ readOnly }: { readOnly?: boolean }) => (
     <DisplayNameField name="name" readOnly={readOnly} />
     <ComponentMeasuredUnitField readOnly={readOnly} />
     <ComponentAccountingTypeField readOnly={readOnly} />
-    <ArticleCodeField />
+    <ArticleCodeField legacyField />
     <ComponentLimit readOnly={readOnly} />
   </>
 );
