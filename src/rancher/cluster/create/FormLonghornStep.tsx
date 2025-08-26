@@ -1,24 +1,16 @@
 import { useQueries } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
-import { openstackFlavorsList, OpenStackVolumeType } from 'waldur-js-client';
+import { openstackFlavorsList } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
 import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Offering } from '@waldur/marketplace/types';
 import { loadVolumeTypes } from '@waldur/openstack/api';
+import { FormAbstractVolumeFields } from '@waldur/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
 
 import { InstallLonghornField } from './InstallLonghornField';
-import { IntegerUnitField } from './IntegerUnitField';
 
 export const FormLonghornStep = (props: FormStepProps) => {
   const enabled: boolean = useSelector((state) =>
@@ -27,7 +19,7 @@ export const FormLonghornStep = (props: FormStepProps) => {
   const openstackOffering: Offering = useSelector((state) =>
     orderFormSelector(state, 'attributes.openstack_offering'),
   );
-  const [_, volumeTypes] = useQueries({
+  const [_, _volume_types] = useQueries({
     queries: [
       {
         queryKey: ['nodes-step-flavors', props.offering.uuid],
@@ -60,33 +52,18 @@ export const FormLonghornStep = (props: FormStepProps) => {
     >
       <InstallLonghornField />
       {enabled ? (
-        <FormGroup
-          label={translate('Longhorn volume size for worker nodes')}
-          required={true}
-        >
-          <Field
-            name="attributes.worker_nodes_longhorn_volume_size"
-            units={translate('GB')}
-            component={IntegerUnitField}
-            parse={parseIntField}
-            format={formatIntField}
-            validate={required}
+        <div className="mt-4">
+          <FormAbstractVolumeFields
+            {...props}
+            offering={openstackOffering}
+            typeTitle={translate('Longhorn volume type for worker nodes')}
+            sizeTitle={translate('Longhorn volume size for worker nodes (GB)')}
+            helpText={translate('Detachable and resizable data disk')}
+            typeField="attributes.worker_nodes_longhorn_volume_type_name"
+            sizeField="attributes.worker_nodes_longhorn_volume_size"
+            hideQuotas
           />
-        </FormGroup>
-      ) : null}
-      {enabled && volumeTypes.data?.length ? (
-        <FormGroup
-          label={translate('Longhorn volume type for worker nodes')}
-          required={true}
-        >
-          <Field
-            name="attributes.worker_nodes_longhorn_volume_type_name"
-            component={SelectField}
-            options={volumeTypes.data}
-            getOptionValue={(option: OpenStackVolumeType) => option.uuid}
-            getOptionLabel={(option: OpenStackVolumeType) => option.name}
-          />
-        </FormGroup>
+        </div>
       ) : null}
     </VStepperFormStepCard>
   );
