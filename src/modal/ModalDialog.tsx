@@ -17,6 +17,7 @@ interface ModalDialogProps {
   footerClassName?: string;
   hasHeaderPadding?: boolean;
   hasFooterPadding?: boolean;
+  hasFooterBorder?: boolean;
   children?: ReactNode;
   headerLess?: boolean;
   actions?: ReactNode;
@@ -40,6 +41,7 @@ export const ModalDialog: FC<ModalDialogProps> = ({
   footerClassName,
   hasHeaderPadding,
   hasFooterPadding,
+  hasFooterBorder,
   headerLess,
   actions,
   extra,
@@ -94,8 +96,9 @@ export const ModalDialog: FC<ModalDialogProps> = ({
       <Modal.Footer
         className={classNames(
           footerClassName,
-          !hasFooterPadding && 'pt-0',
-          'border-0 gap-2',
+          !hasFooterPadding && !hasFooterBorder && 'pt-0',
+          !hasFooterBorder && 'border-0',
+          'gap-2',
         )}
       >
         {footer}
