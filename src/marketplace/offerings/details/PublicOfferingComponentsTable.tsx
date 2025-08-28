@@ -7,11 +7,13 @@ import { useTable } from '@waldur/table/useTable';
 
 interface PublicOfferingComponentsTableProps {
   offering: Offering;
+  hideActionBar?: boolean;
+  fullWidth?: boolean;
 }
 
 export const PublicOfferingComponentsTable: FunctionComponent<
   PublicOfferingComponentsTableProps
-> = ({ offering }) => {
+> = ({ offering, hideActionBar, fullWidth }) => {
   const tableProps = useTable({
     table: 'OfferingComponents-' + offering.uuid,
     fetchData: () => Promise.resolve({ rows: offering.components }),
@@ -47,6 +49,8 @@ export const PublicOfferingComponentsTable: FunctionComponent<
       title={translate('Components')}
       verboseName={translate('Components')}
       hideRefresh
+      hasActionBar={!hideActionBar}
+      fullWidth={fullWidth}
     />
   );
 };

@@ -1,12 +1,17 @@
 import { NestedSection, PublicOfferingDetails } from 'waldur-js-client';
 
 import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ImagesTab } from '@waldur/marketplace/offerings/images/ImagesTab';
 
+import { PublicOfferingComponentsTable } from '../offerings/details/PublicOfferingComponentsTable';
+import { PublicOfferingPricing } from '../offerings/details/PublicOfferingPricing';
+
 import { AttributesTable } from './attributes/AttributesTable';
 import { OfferingTab } from './OfferingTabsComponent';
-import { OverviewTab } from './OverviewTab';
+import { ProviderLocationTab } from './ProviderLocationTab';
 
 interface OfferingTabsProps {
   sections: NestedSection[];
@@ -27,9 +32,32 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
 
   let tabs = [
     {
-      visible: !!props.offering.full_description,
+      visible:
+        !!props.offering.full_description || !!props.offering.description,
       title: translate('Description'),
-      component: () => <OverviewTab offering={props.offering} />,
+      component: () => (
+        <SafeMarkdown
+          text={props.offering.full_description || props.offering.description}
+        />
+      ),
+    },
+    {
+      visible:
+        !isFeatureVisible(MarketplaceFeatures.catalogue_only) &&
+        props.offering.plans?.length > 0,
+      title: translate('Pricing'),
+      component: () => <PublicOfferingPricing offering={props.offering} />,
+    },
+    {
+      visible: !isFeatureVisible(MarketplaceFeatures.catalogue_only),
+      title: translate('Components'),
+      component: () => (
+        <PublicOfferingComponentsTable
+          offering={props.offering}
+          hideActionBar
+          fullWidth
+        />
+      ),
     },
     {
       visible: !!props.offering.terms_of_service,
@@ -47,6 +75,11 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
       visible: props.offering.screenshots.length > 0,
       title: translate('Images'),
       component: () => <ImagesTab images={props.offering.screenshots} />,
+    },
+    {
+      visible: Boolean(props.offering.latitude && props.offering.longitude),
+      title: translate('Provider location'),
+      component: () => <ProviderLocationTab offering={props.offering} />,
     },
   ];
 

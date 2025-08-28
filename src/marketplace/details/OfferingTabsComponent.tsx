@@ -21,7 +21,7 @@ export const OfferingTabsComponent: React.FC<OfferingTabsComponentProps> = (
     <Tabs
       defaultActiveKey="tab-0"
       id="offering-tabs"
-      className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fw-bold"
+      className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fw-bold my-6"
       unmountOnExit={true}
     >
       {props.tabs.map((tab, index) => (
