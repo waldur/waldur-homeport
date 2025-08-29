@@ -3,9 +3,14 @@ import { client } from 'waldur-js-client/client.gen';
 import { queryClient } from '@waldur/Application';
 import { fetchResultCount, parseNextPage } from '@waldur/core/api';
 
-import { Fetcher, TableRequest } from './types';
+import { Fetcher, FetcherOptions, TableRequest } from './types';
 
-export const parseResponse = async (url: string, query?, options?) => {
+export const parseResponse = async (
+  url: string,
+  query?,
+  options?,
+  parser?: FetcherOptions['parser'],
+) => {
   const result = await client.get({
     url,
     query,
@@ -25,7 +30,7 @@ export const parseResponse = async (url: string, query?, options?) => {
   if (contentType !== 'application/json') {
     throw new Error('Unexpected response content type');
   }
-  const rows = result.data as any[];
+  const rows = parser ? parser(result.data) : (result.data as any[]);
   const resultCount = fetchResultCount(result);
   return {
     rows,
@@ -34,9 +39,12 @@ export const parseResponse = async (url: string, query?, options?) => {
   };
 };
 
-export function createFetcher(endpoint: string, options?): Fetcher {
+export function createFetcher(
+  endpoint: string,
+  options?: FetcherOptions,
+): Fetcher {
   return (request: TableRequest) => {
-    const { params: optionsParams, ...restOptions } = options || {};
+    const { params: optionsParams, parser, ...restOptions } = options || {};
     const { params: requestOptionsParams, ...restRequestOptions } =
       request.options || {};
     const mergedParams = {
@@ -50,7 +58,7 @@ export function createFetcher(endpoint: string, options?): Fetcher {
     return queryClient.fetchQuery({
       queryKey: ['table', endpoint, mergedParams],
       queryFn: () =>
-        parseResponse(`/api/${endpoint}/`, mergedParams, mergedOptions),
+        parseResponse(`/api/${endpoint}/`, mergedParams, mergedOptions, parser),
       staleTime: request.options?.staleTime,
     });
   };

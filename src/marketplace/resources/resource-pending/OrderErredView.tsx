@@ -8,7 +8,11 @@ import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { marketplaceOrdersCreate, Resource } from 'waldur-js-client';
+import {
+  marketplaceOrdersCreate,
+  OrderCreateRequest,
+  Resource,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -120,7 +124,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
             offering: resource.offering,
             project: resource.project,
             plan: resource.plan,
-            attributes: resource.attributes,
+            attributes: resource.attributes as OrderCreateRequest['attributes'],
             limits: resource.limits,
           },
         });

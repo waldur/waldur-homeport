@@ -451,8 +451,8 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-projects',
     url: 'marketplace-projects/',
     component: lazyComponent(() =>
-      import('@waldur/project/ProjectsList').then((module) => ({
-        default: module.ProjectsList,
+      import('@waldur/project/ProjectsListWithTabs').then((module) => ({
+        default: module.ProjectsListWithTabs,
       })),
     ),
     parent: 'organization',

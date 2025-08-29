@@ -5,16 +5,13 @@ import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 interface AddButtonProps
-  extends Omit<
-    ComponentProps<typeof ActionButton>,
-    'title' | 'iconNode' | 'variant'
-  > {}
+  extends Omit<ComponentProps<typeof ActionButton>, 'title' | 'variant'> {}
 
 export const AddButton = (props: AddButtonProps) => {
   return (
     <ActionButton
       title={translate('Add')}
-      iconNode={<PlusCircleIcon weight="bold" />}
+      iconNode={props.iconNode || <PlusCircleIcon weight="bold" />}
       variant="primary"
       {...props}
     />

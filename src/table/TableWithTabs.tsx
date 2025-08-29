@@ -1,6 +1,14 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import classNames from 'classnames';
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  FC,
+  Fragment,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
 
 import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
@@ -14,6 +22,9 @@ export const TableWithTabs: FC<
   > & {
     data?: Record<string, any>;
     syncWithUrlKey?: string;
+    actions?:
+      | ReactNode
+      | Array<{ activeKeys: (string | number)[]; component: ReactNode }>;
   }
 > = ({
   title,
@@ -23,6 +34,7 @@ export const TableWithTabs: FC<
   headerClassName,
   data = {},
   syncWithUrlKey,
+  actions,
 }) => {
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
@@ -115,14 +127,31 @@ export const TableWithTabs: FC<
           onSelect={handleSelect}
           className="min-h-175px"
         >
-          <div className="overflow-auto">
-            <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
-              {tabs.map((tab) => (
-                <Nav.Item key={tab.key} className="text-nowrap">
-                  <Nav.Link eventKey={tab.key}>{tab.title}</Nav.Link>
-                </Nav.Item>
-              ))}
-            </Nav>
+          <div className="d-flex justify-content-between">
+            <div className="overflow-auto flex-grow-1">
+              <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
+                {tabs.map((tab) => (
+                  <Nav.Item key={tab.key} className="text-nowrap">
+                    <Nav.Link eventKey={tab.key}>{tab.title}</Nav.Link>
+                  </Nav.Item>
+                ))}
+              </Nav>
+            </div>
+            {actions ? (
+              Array.isArray(actions) && actions.length ? (
+                <div className="d-flex align-items-center border-bottom gap-2">
+                  {actions.map((action, index) => (
+                    <Fragment key={index}>
+                      {action.activeKeys.includes(activeKey)
+                        ? action.component
+                        : null}
+                    </Fragment>
+                  ))}
+                </div>
+              ) : (
+                <div className="border-bottom">{actions as ReactNode}</div>
+              )
+            ) : null}
           </div>
           {isRefsReady && (
             <Tab.Content className="overflow-auto">

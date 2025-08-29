@@ -29,7 +29,6 @@ export function loadProject(transition: Transition) {
         'blocked',
         'archived',
         'projects_count',
-        'users_count',
         'name',
         'native_name',
         'abbreviation',

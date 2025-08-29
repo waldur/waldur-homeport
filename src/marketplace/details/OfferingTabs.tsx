@@ -60,11 +60,6 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
       ),
     },
     {
-      visible: !!props.offering.terms_of_service,
-      title: translate('Terms of Service'),
-      component: () => <SafeMarkdown text={props.offering.terms_of_service} />,
-    },
-    {
       visible: basicSections.length > 0,
       title: translate('Features'),
       component: () => (

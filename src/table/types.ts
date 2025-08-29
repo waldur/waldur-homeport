@@ -33,6 +33,11 @@ export type Fetcher = <RowType = any>(
   request: TableRequest,
 ) => Promise<TableResponse<RowType>>;
 
+export type FetcherOptions = {
+  params?: any;
+  parser?: (data) => any[];
+} & Record<string, any>;
+
 export interface TableOptionsType<RowType = any> {
   table: string;
   fetchData: (request: TableRequest) => any;
@@ -188,7 +193,7 @@ export interface TableProps<RowType = any> extends TableState {
   hasPagination?: boolean;
   sortList?(sorting: Sorting): void;
   initialSorting?: Sorting;
-  expandableRow?: React.ComponentType<{ row: RowType }>;
+  expandableRow?: React.ComponentType<{ row: RowType; fetch }>;
   expandableRowClassName?: string;
   rowActions?: React.ComponentType<{ row: RowType; fetch }>;
   toggleRow?(row: any): void;

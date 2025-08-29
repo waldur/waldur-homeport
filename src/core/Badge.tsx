@@ -9,6 +9,7 @@ interface OwnProps extends BadgeProps {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   onlyIcon?: boolean;
+  alignIcon?: boolean;
   tooltip?: ReactNode;
   tooltipProps?: Partial<TipProps>;
   variant?: Variant;
@@ -34,6 +35,7 @@ export const Badge: FunctionComponent<OwnProps> = ({
   leftIcon,
   rightIcon,
   onlyIcon,
+  alignIcon,
   tooltip,
   tooltipProps,
   roundless,
@@ -65,6 +67,7 @@ export const Badge: FunctionComponent<OwnProps> = ({
         rightIcon && 'has-right-icon',
         hasBullet && 'has-bullet',
         onlyIcon && 'badge-icon',
+        alignIcon && 'icon-align',
         className,
       ])}
       {...rest}

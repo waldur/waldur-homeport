@@ -16,10 +16,9 @@ import { formatLongText } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
-import { ProjectCreateButton } from './create/ProjectCreateButton';
-import { ProjectImportButton } from './import/ProjectImportButton';
 import { ProjectCostField } from './ProjectCostField';
 import { ProjectLink } from './ProjectLink';
+import { ProjectsTableActions } from './ProjectsTableActions';
 
 const mandatoryFields = [
   'uuid',
@@ -32,13 +31,6 @@ interface ProjectsListProps extends Partial<TableProps> {
   customer?: Customer;
   optionalColumns?: ('description' | 'created')[];
 }
-
-const TableActions = ({ customer, refetch }) => (
-  <>
-    <ProjectImportButton customer={customer} refetch={refetch} />
-    <ProjectCreateButton customer={customer} refetch={refetch} />
-  </>
-);
 
 export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
   customer,
@@ -116,7 +108,9 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery={true}
       showPageSizeSelector={true}
-      tableActions={<TableActions customer={customer} refetch={props.fetch} />}
+      tableActions={
+        <ProjectsTableActions customer={customer} refetch={props.fetch} />
+      }
       rowActions={({ row }) => (
         <ProjectsListActions project={row} refetch={props.fetch} />
       )}

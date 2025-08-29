@@ -22,7 +22,7 @@ async function loadBookingOfferings(offeringUuid: string) {
   return (
     await bookingResourcesList({
       query: {
-        offering_uuid: offeringUuid,
+        offering_uuid: [offeringUuid],
         offering_type: OFFERING_TYPE_BOOKING,
         state: [
           getBookingFilterOptionStates()[0],
