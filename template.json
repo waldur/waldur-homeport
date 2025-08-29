@@ -604,7 +604,7 @@
     "message": "Add {category}"
   },
   "Add": {
-    "description": "administration/providers/CreateProviderDialog.tsx, core/AddButton.tsx, customer/list/OrganizationCreateButton.tsx, customer/team/AddProjectUserButton.tsx, customer/team/TeamDropdownActions.tsx, marketplace/deploy/DeployPage.tsx, marketplace-checklist/ChecklistsTableActions.tsx, openstack/OpenStackExternalIpsField.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-tenant/actions/SubnetsTable.tsx, openstack/openstack-tenant/actions/VolumeTypesTable.tsx, project/create/GlobalProjectCreateButton.tsx, project/create/ProjectCreateButton.tsx, project/team/TeamDropdownActions.tsx, proposals/team/TeamDropdownActions.tsx, rancher/cluster/create/FormNodesStep.tsx, rancher/cluster/team/KeycloakMembershipList.tsx",
+    "description": "administration/providers/CreateProviderDialog.tsx, core/AddButton.tsx, customer/list/OrganizationCreateButton.tsx, customer/team/AddProjectUserButton.tsx, customer/team/TeamDropdownActions.tsx, marketplace/deploy/DeployPage.tsx, marketplace-checklist/ChecklistsTableActions.tsx, openstack/OpenStackExternalIpsField.tsx, openstack/openstack-backup/actions/NetworksList.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpsList.tsx, openstack/openstack-subnet/actions/CreateSubnetButton.tsx, openstack/openstack-tenant/actions/SubnetsTable.tsx, openstack/openstack-tenant/actions/VolumeTypesTable.tsx, project/create/GlobalProjectCreateButton.tsx, project/create/ProjectCreateButton.tsx, project/team/TeamDropdownActions.tsx, proposals/team/TeamDropdownActions.tsx, rancher/cluster/create/FormNodesStep.tsx, rancher/cluster/team/KeycloakMembershipList.tsx",
     "message": "Add"
   },
   "Additional account description invisible to user": {
@@ -4014,10 +4014,6 @@
   "Do not allow user to grant multiple roles in the same project or organization using invitation.": {
     "description": "SettingsDescription.ts",
     "message": "Do not allow user to grant multiple roles in the same project or organization using invitation."
-  },
-  "Do not configure a gateway for this subnet": {
-    "description": "openstack/openstack-network/actions/CreateSubnetDialog.tsx",
-    "message": "Do not configure a gateway for this subnet"
   },
   "Do not render prices in order details.": {
     "description": "features/FeaturesDescription.ts",
@@ -7720,7 +7716,7 @@
     "message": "Network sharing"
   },
   "Network": {
-    "description": "openstack/openstack-instance/deploy/FormNetworkSecurityStep.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-subnet/TenantSubnetsList.tsx, openstack/openstack-tenant/actions/CreatePortDialog.tsx, quotas/constants.ts, rancher/cluster/create/FormNetworkStep.tsx, rancher/cluster/create/steps.ts, rancher/cluster/dashboard/ClusterStatistics.tsx, vmware/PortsList.tsx, vmware/VMwarePortSummary.tsx, vmware/actions/CreatePortDialog.tsx",
+    "description": "openstack/openstack-instance/deploy/FormNetworkSecurityStep.tsx, openstack/openstack-network/actions/CreateSubnetDialog.tsx, openstack/openstack-subnet/OpenStackSubNetSummary.tsx, openstack/openstack-subnet/TenantSubnetsList.tsx, openstack/openstack-tenant/actions/CreatePortDialog.tsx, quotas/constants.ts, rancher/cluster/create/FormNetworkStep.tsx, rancher/cluster/create/steps.ts, rancher/cluster/dashboard/ClusterStatistics.tsx, vmware/PortsList.tsx, vmware/VMwarePortSummary.tsx, vmware/actions/CreatePortDialog.tsx",
     "message": "Network"
   },
   "Networking": {
@@ -7950,6 +7946,10 @@
   "No namespaces": {
     "description": "rancher/cluster/hpas/NamespaceAutocomplete.tsx",
     "message": "No namespaces"
+  },
+  "No networks": {
+    "description": "openstack/openstack-network/actions/CreateSubnetDialog.tsx",
+    "message": "No networks"
   },
   "No offering is affected": {
     "description": "maintenance/create/AffectedOfferingsTable.tsx",
@@ -12182,6 +12182,10 @@
   "Select namespace...": {
     "description": "rancher/cluster/hpas/NamespaceAutocomplete.tsx",
     "message": "Select namespace..."
+  },
+  "Select network...": {
+    "description": "openstack/openstack-network/actions/CreateSubnetDialog.tsx",
+    "message": "Select network..."
   },
   "Select offering": {
     "description": "project/import/ProjectImportDialog.tsx, project/import/Step2SelectOffering.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestFormDialog.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx, proposals/update/offerings/CallOfferingCreateDialog.tsx",

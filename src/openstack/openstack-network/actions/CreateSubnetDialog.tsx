@@ -6,29 +6,51 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { InternalNetworkAllocationPool } from '@waldur/openstack/openstack-subnet/AllocationPoolsField';
 import { getFields } from '@waldur/openstack/openstack-subnet/fields';
+import { networkAutocomplete } from '@waldur/openstack/openstack-subnet/networkAutocomplete';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
-export const CreateSubnetDialog: FC<ActionDialogProps> = ({
-  resolve: { resource, refetch },
-}) => {
+type CreateSubnetDialogResolve = {
+  resource: any;
+  refetch?: () => void;
+  showNetworkField?: boolean;
+};
+
+export const CreateSubnetDialog: FC<
+  Omit<ActionDialogProps, 'resolve'> & { resolve: CreateSubnetDialogResolve }
+> = ({ resolve: { resource, refetch, showNetworkField = false } }) => {
   const dispatch = useDispatch();
   const initialCidr = '192.168.42.0/24';
   const defaultPool = {
     start: '192.168.42.10',
     end: '192.168.42.200',
   };
+
+  const networkField = showNetworkField
+    ? [
+        {
+          name: 'network',
+          label: translate('Network'),
+          type: 'async_select',
+          placeholder: translate('Select network...'),
+          loadOptions: networkAutocomplete(resource.uuid),
+          defaultOptions: true,
+          getOptionValue: (option) => option.uuid,
+          getOptionLabel: (option) => option.name,
+          noOptionsMessage: () => translate('No networks'),
+          isClearable: true,
+          required: true,
+        },
+      ]
+    : [];
+
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create subnet')}
       formFields={[
+        ...networkField,
         ...getFields(),
-        {
-          name: 'disable_gateway',
-          type: 'boolean',
-          label: translate('Do not configure a gateway for this subnet'),
-        },
         {
           name: 'cidr',
           label: translate('Internal network mask (CIDR)'),
@@ -45,9 +67,16 @@ export const CreateSubnetDialog: FC<ActionDialogProps> = ({
       }}
       submitForm={async (formData) => {
         try {
+          const networkUuid = showNetworkField
+            ? formData.network?.uuid
+            : resource.uuid;
+
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { network, ...submitData } = formData;
+
           await openstackNetworksCreateSubnet({
-            path: { uuid: resource.uuid },
-            body: formData,
+            path: { uuid: networkUuid },
+            body: submitData,
           });
           dispatch(showSuccess(translate('Subnet has been created.')));
           dispatch(closeModalDialog());
