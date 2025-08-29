@@ -3880,7 +3880,7 @@
     "message": "Detach"
   },
   "Detachable and resizable data disk": {
-    "description": "openstack/openstack-instance/deploy/FormHardwareConfigurationStep.tsx, rancher/cluster/create/ManagedFormNodesStep.tsx",
+    "description": "openstack/openstack-instance/deploy/FormHardwareConfigurationStep.tsx, rancher/cluster/create/FormLonghornStep.tsx, rancher/cluster/create/ManagedFormNodesStep.tsx",
     "message": "Detachable and resizable data disk"
   },
   "Detaching": {
@@ -5392,7 +5392,7 @@
     "message": "Full price list of {offeringName} offering"
   },
   "GB": {
-    "description": "openstack/openstack-volume/actions/ExtendDialog.tsx, rancher/cluster/create/FormLonghornStep.tsx, rancher/cluster/create/SystemVolumeSizeGroup.tsx, rancher/cluster/create/VolumeSizeGroup.tsx, vmware/deploy/FormMemoryStep.tsx",
+    "description": "openstack/openstack-volume/actions/ExtendDialog.tsx, rancher/cluster/create/SystemVolumeSizeGroup.tsx, rancher/cluster/create/VolumeSizeGroup.tsx, vmware/deploy/FormMemoryStep.tsx",
     "message": "GB"
   },
   "GLAuth configuration for {offering}": {
@@ -7003,9 +7003,9 @@
     "description": "rancher/cluster/ClusterLonghornTab.tsx",
     "message": "Longhorn status"
   },
-  "Longhorn volume size for worker nodes": {
+  "Longhorn volume size for worker nodes (GB)": {
     "description": "rancher/cluster/create/FormLonghornStep.tsx",
-    "message": "Longhorn volume size for worker nodes"
+    "message": "Longhorn volume size for worker nodes (GB)"
   },
   "Longhorn volume type for worker nodes": {
     "description": "rancher/cluster/create/FormLonghornStep.tsx",

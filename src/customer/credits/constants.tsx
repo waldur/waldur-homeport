@@ -158,6 +158,7 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
       key="minimal_consumption_logic"
       direction="horizontal"
       choices={minimalConsumptionLogicOptions}
+      hideLabel
     />,
 
     <NumberField
