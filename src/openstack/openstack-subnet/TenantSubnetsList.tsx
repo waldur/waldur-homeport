@@ -9,6 +9,8 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
+import { CreateSubnetButton } from './actions/CreateSubnetButton';
+
 export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
@@ -73,6 +75,9 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
       title={translate('Subnets')}
       verboseName={translate('subnets')}
       showPageSizeSelector
+      tableActions={
+        <CreateSubnetButton resource={resourceScope} refetch={props.fetch} />
+      }
       rowActions={({ row }) => (
         <ActionButtonResource url={row.url} refetch={props.fetch} />
       )}
