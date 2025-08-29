@@ -35,7 +35,7 @@ export const CookiesConsentDialog: FC<OwnProps> = ({ resolve }) => {
                   formatJsx,
                 )
               : translate(
-                  'Waldur only uses <b>essential cookies</b>, which are necessary for the platform to function correctly. These cookies enable you to log in, access secure areas, and navigate throughout Waldur. No other types of cookies are used.',
+                  'This site only uses <b>essential cookies</b>, which are necessary for the platform to function correctly. These cookies enable you to log in, access secure areas, and navigate throughout the site. No other types of cookies are used.',
                   { b: (s) => <b>{s}</b> },
                   formatJsx,
                 )}
