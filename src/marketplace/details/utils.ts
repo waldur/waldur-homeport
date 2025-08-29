@@ -1,3 +1,5 @@
+import { OrderCreateRequest } from 'waldur-js-client';
+
 import {
   getFormLimitSerializer,
   getFormSerializer,
@@ -32,13 +34,13 @@ const formatLimits = (props) => {
   return limits;
 };
 
-const formatAttributes = (props) => {
+const formatAttributes = (props): OrderCreateRequest['attributes'] => {
   if (!props.formData.attributes) {
-    return {};
+    return {} as any;
   }
   const serializer = getFormSerializer(props.offering.type);
   const attributes = serializer(props.formData.attributes, props.offering);
-  let newAttributes = {};
+  let newAttributes = {} as OrderCreateRequest['attributes'];
   for (const [key, value] of Object.entries(attributes)) {
     newAttributes = {
       ...newAttributes,

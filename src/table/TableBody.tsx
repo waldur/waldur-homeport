@@ -377,7 +377,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
                 }
                 className={expandableRowClassName}
               >
-                {React.createElement(expandableRow, { row })}
+                {React.createElement(expandableRow, { row, fetch })}
               </td>
             </tr>
           )}

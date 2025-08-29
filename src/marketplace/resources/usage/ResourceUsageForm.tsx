@@ -131,7 +131,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
       isUserUsage
         ? marketplaceOfferingUsersList({
             query: {
-              offering_uuid: props.params.offering_uuid,
+              offering_uuid: [props.params.offering_uuid],
               field: ['uuid', 'url', 'user_full_name', 'username'],
             },
           }).then((r) => r.data)

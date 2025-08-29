@@ -12,13 +12,22 @@ const EditFieldDialog = lazyComponent(() =>
   })),
 );
 
+const EditCustomerChecklistDialog = lazyComponent(() =>
+  import('./EditCustomerChecklistDialog').then((module) => ({
+    default: module.EditCustomerChecklistDialog,
+  })),
+);
+
 export const FieldEditButton = (props: EditCustomerProps) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
-      openModalDialog(EditFieldDialog, {
-        resolve: props,
-      }),
+      openModalDialog(
+        props.name === 'project_metadata_checklist'
+          ? EditCustomerChecklistDialog
+          : EditFieldDialog,
+        { resolve: props },
+      ),
     );
   };
   return <EditButton onClick={callback} size="sm" />;

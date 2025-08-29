@@ -1,13 +1,25 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { Project } from 'waldur-js-client';
+import { Project, projectsChecklistRetrieve } from 'waldur-js-client';
 
+import { LoadingErred } from '@waldur/core/LoadingErred';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { usePermission } from '@waldur/permissions/hooks';
+import { useNotify } from '@waldur/store/hooks';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { ParsedAnswer } from '../metadata/ParsedAnswer';
+
 import { FieldEditButton } from './FieldEditButton';
+import { MetadataEditButton } from './MetadataEditButton';
+
+// Server error message if no checklist configured for the project
+const NO_CHECKLIST_CONFIGURED_MSG = 'No checklist configured for this object';
+const METADATA_LOAD_ERROR_MSG = translate('Unable to load full metadata.');
 
 interface ProjectMetadataProps {
   project: Project;
@@ -17,6 +29,29 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
   project,
 }) => {
   const user = useUser();
+  const { showErrorResponse } = useNotify();
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['projectChecklist', project.uuid],
+    queryFn: () =>
+      projectsChecklistRetrieve({ path: { uuid: project.uuid } })
+        .then((response) => response.data)
+        .catch((err) => {
+          if (err.detail !== NO_CHECKLIST_CONFIGURED_MSG) {
+            showErrorResponse(err, METADATA_LOAD_ERROR_MSG);
+          }
+          throw err;
+        }),
+    staleTime: 3 * 60 * 1000,
+    retry: false,
+  });
+
+  const hasPermission = usePermission();
+  const canUpdateMetadata = hasPermission({
+    permission: PermissionEnum.UPDATE_PROJECT_METADATA,
+    customerId: project.customer_uuid,
+    projectId: project.uuid,
+  });
+
   return (
     <FormTable.Card className="card-bordered">
       <FormTable>
@@ -50,6 +85,41 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
             ) : null
           }
         />
+
+        {error &&
+        (error as any)?.detail !== NO_CHECKLIST_CONFIGURED_MSG &&
+        !isLoading ? (
+          <FormTable.Item
+            value={
+              <LoadingErred
+                message={METADATA_LOAD_ERROR_MSG}
+                loadData={refetch}
+              />
+            }
+          />
+        ) : data?.questions?.length ? (
+          data.questions.map((question) => (
+            <FormTable.Item
+              key={question.uuid}
+              label={question.description}
+              value={
+                <ParsedAnswer
+                  question={question as any}
+                  answer={question.existing_answer as any}
+                />
+              }
+              actions={
+                canUpdateMetadata && (
+                  <MetadataEditButton
+                    project={project}
+                    question={question}
+                    refetch={refetch}
+                  />
+                )
+              }
+            />
+          ))
+        ) : null}
       </FormTable>
     </FormTable.Card>
   );

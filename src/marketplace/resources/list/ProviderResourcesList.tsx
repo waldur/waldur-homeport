@@ -317,7 +317,7 @@ const mapStateToFilter = createSelector(
       filter.provider_uuid = customer.uuid;
     }
     if (filters?.offering) {
-      filter.offering_uuid = filters.offering.uuid;
+      filter.offering_uuid = [filters.offering.uuid];
     }
     if (filters?.parent_offering) {
       filter.parent_offering_uuid = filters.parent_offering.uuid;

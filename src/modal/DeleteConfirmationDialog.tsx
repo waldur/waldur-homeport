@@ -16,12 +16,13 @@ interface DeleteConfirmationDialogProps {
     };
     title: ReactNode;
     body: ReactNode;
+    iconNode?: ReactNode;
   };
 }
 
 export const DeleteConfirmationDialog: React.FC<
   DeleteConfirmationDialogProps
-> = ({ resolve: { title, body, deferred } }) => {
+> = ({ resolve: { title, body, deferred, iconNode } }) => {
   const dispatch = useDispatch();
   const closeDialog = () => dispatch(closeModalDialog('HIDE_CONFIRM'));
 
@@ -38,7 +39,7 @@ export const DeleteConfirmationDialog: React.FC<
   return (
     <ModalDialog
       title={title}
-      iconNode={<TrashIcon weight="bold" />}
+      iconNode={iconNode || <TrashIcon weight="bold" />}
       iconColor="danger"
       bodyClassName="text-gray-500 pt-2"
       footer={

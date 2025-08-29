@@ -95,7 +95,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
             )}
         </th>
       ) : null}
-      {row ? (
+      {row || [false, 0].includes(row) ? (
         <td
           className={classNames('value col-md', props.valueClass)}
           colSpan={props.label ? undefined : 2}
