@@ -32,6 +32,11 @@ export const TerminateDialog = reduxForm<
     try {
       await marketplaceResourcesTerminate({
         path: { uuid: resource.marketplace_resource_uuid },
+        body: {
+          attributes: {
+            accepting_terms_of_service: true,
+          },
+        },
       });
       dispatch(
         showSuccess(
