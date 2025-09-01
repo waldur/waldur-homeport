@@ -28,7 +28,11 @@ export const BrandName: FunctionComponent = () => {
 
   const { data: shortcutsResponse } = useQuery({
     queryKey: SHORTCUTS_QUERY_KEY,
-    queryFn: () => externalLinksList().then((response) => response.data),
+    queryFn: () =>
+      externalLinksList({ query: { page_size: 50 } }).then(
+        (response) => response.data,
+      ),
+    refetchOnWindowFocus: false,
   });
 
   const shortcuts = shortcutsResponse || [];
