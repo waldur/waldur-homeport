@@ -1,10 +1,9 @@
 import { ListIcon } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getIconUrl } from '@waldur/core/api';
 import { Link } from '@waldur/core/Link';
-import DefaultLogo from '@waldur/images/logo.svg';
 import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';
 import { useUser } from '@waldur/workspace/hooks';
 
@@ -37,6 +36,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   const pageTitle = useSelector(getTitle);
   const user = useUser();
   const imageUrl = getIconUrl('sidebar_logo_mobile');
+  const [errorImg, setErrorImg] = useState(false);
 
   const hasSupport = useSelector(hasSupportSelector);
 
@@ -46,18 +46,23 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
         <div className="d-flex align-items-center d-lg-none ms-n2 me-2">
           {Boolean(user) && <AsideMobileToggle />}
 
-          <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-            <Link
-              state={user ? 'profile.details' : null}
-              className="d-lg-none text-dark"
-            >
-              {imageUrl ? (
-                <img src={imageUrl} alt="Logo" className="h-30px" />
-              ) : (
-                <DefaultLogo className="h-30px" />
-              )}
-            </Link>
-          </div>
+          {!errorImg && (
+            <div className="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
+              <Link
+                state={user ? 'profile.details' : null}
+                className="d-lg-none text-dark"
+              >
+                {imageUrl ? (
+                  <img
+                    src={imageUrl}
+                    alt="Logo"
+                    onError={() => setErrorImg(true)}
+                    className="h-30px"
+                  />
+                ) : null}
+              </Link>
+            </div>
+          )}
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-grow-1">
           <div className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1">

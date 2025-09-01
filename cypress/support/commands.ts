@@ -306,7 +306,7 @@ Cypress.Commands.add('mockUser', (userName) => {
     })
     .intercept('GET', '/api/marketplace-category-groups/**', [])
     .intercept('GET', '/api/marketplace-global-categories/**', [])
-    .intercept('GET', '/api/external-links/', [])
+    .intercept('GET', '/api/external-links/**', [])
     .intercept('GET', '/api/admin-announcements/**', []);
 
   cy.setAcceptCookies();
