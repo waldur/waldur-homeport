@@ -13,14 +13,14 @@ By following these patterns, you can effectively mock HTTP requests in your unit
 
 To ensure a clean testing environment for each test case, we should set up `nock` before each test and clean up the mocks afterward. This is typically done in `beforeEach` and `afterEach` blocks.
 
-```typescript
+```js
 import { render, screen, waitFor } from '@testing-library/react';
 import { got } from 'got';
 import nock from 'nock';
 import { afterEach, beforeEach, describe, it } from 'vitest';
 
 // It's a good practice to define the base URL of your API to avoid repetition.
-const API_URL = 'http://example.com';
+const API_URL = '<http://example.com';>
 
 describe('MyComponent', () => {
   beforeEach(() => {
@@ -54,8 +54,8 @@ describe('MyComponent', () => {
 
 The example above shows a basic successful `GET` request. You can customize the response data to fit your test case.
 
-```typescript
-nock('http://example.com')
+```js
+  nock('<http://example.com>')
   .get('/api/organization-groups/')
   .reply(200, [
     { name: 'Group 1', uuid: 'group-1-uuid' },
@@ -67,8 +67,8 @@ nock('http://example.com')
 
 To test how your component handles API errors, you can mock a request to return an error status code.
 
-```typescript
-nock('http://example.com')
+```js
+   nock('<http://example.com>')
   .get('/api/organization-groups/')
   .reply(400, { error: 'Invalid request' });
 
@@ -80,4 +80,3 @@ await waitFor(() =>
   ).toBeInTheDocument(),
 );
 ```
-
