@@ -6,20 +6,20 @@ import { CHECKLIST_FLAGS } from './utils';
 
 const tabs = [
   {
-    key: 'categories',
-    title: translate('Categories'),
-    component: lazyComponent(() =>
-      import('./categories/CategoriesTable').then((module) => ({
-        default: module.CategoriesTable,
-      })),
-    ),
-  },
-  {
     key: 'checklists',
     title: translate('Checklists'),
     component: lazyComponent(() =>
       import('./checklists/ChecklistsTable').then((module) => ({
         default: module.ChecklistsTable,
+      })),
+    ),
+  },
+  {
+    key: 'categories',
+    title: translate('Categories'),
+    component: lazyComponent(() =>
+      import('./categories/CategoriesTable').then((module) => ({
+        default: module.CategoriesTable,
       })),
     ),
   },
