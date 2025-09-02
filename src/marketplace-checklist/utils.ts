@@ -28,12 +28,33 @@ export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [
 export const questionConditionOperatorOptions: Array<{
   label;
   value: ChecklistOperators;
+  compatible: QuestionTypeEnum[];
 }> = [
-  { label: translate('If (any of)'), value: 'in' },
-  { label: translate('If (all of)'), value: 'not_equals' }, // FIX THIS: seems wrong
-  { label: translate('If (none of)'), value: 'not_in' },
-  { label: translate('If (equals)'), value: 'equals' },
-  { label: translate('If (contains)'), value: 'contains' },
+  {
+    label: translate('Exact match'),
+    value: 'equals',
+    compatible: ['boolean', 'date', 'number'],
+  },
+  {
+    label: translate('Not equal to'),
+    value: 'not_equals',
+    compatible: ['boolean', 'date', 'number'],
+  },
+  {
+    label: translate('Text contains substring'),
+    value: 'contains',
+    compatible: ['text_input', 'text_area'],
+  },
+  {
+    label: translate('Value exists in list'),
+    value: 'in',
+    compatible: ['single_select', 'multi_select'],
+  },
+  {
+    label: translate('Value does not exist in list'),
+    value: 'not_in',
+    compatible: ['single_select', 'multi_select'],
+  },
 ];
 
 /** For disabling/hiding the things for non-functional parts of the checklist management */
@@ -43,6 +64,6 @@ export const CHECKLIST_FLAGS = {
   checklistActionChangeStatus: false,
 
   questionFormUserGuidance: false,
-  questionFormVisibility: false,
+  questionFormVisibility: true,
   questionFormTriggers: false,
 };

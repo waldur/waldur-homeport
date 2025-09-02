@@ -28,7 +28,9 @@ export const isMatchPattern =
   };
 
 export const required = (value) =>
-  value || value === 0 ? undefined : translate('This field is required.');
+  value || [0, false].includes(value)
+    ? undefined
+    : translate('This field is required.');
 
 export const requiredArray = (value) =>
   Array.isArray(value) && value.length

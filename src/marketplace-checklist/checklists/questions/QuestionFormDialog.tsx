@@ -1,11 +1,16 @@
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
-import { FC, useState } from 'react';
+import { isEqual } from 'lodash-es';
+import { FC, useMemo, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import {
   Checklist,
   checklistsAdminQuestionDependenciesCreate,
+  checklistsAdminQuestionDependenciesDestroy,
+  checklistsAdminQuestionDependenciesList,
+  checklistsAdminQuestionDependenciesPartialUpdate,
   checklistsAdminQuestionOptionsCreate,
   checklistsAdminQuestionOptionsDestroy,
   checklistsAdminQuestionOptionsPartialUpdate,
@@ -15,6 +20,9 @@ import {
   QuestionAdminRequest,
 } from 'waldur-js-client';
 
+import { getAllPages } from '@waldur/core/api';
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { AtLeast } from '@waldur/core/types';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -47,12 +55,45 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
   const { closeDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+
+  // Load question dependencies (For edit mode - visibility tab)
+  const {
+    data: deps,
+    isLoading: isLoadingDeps,
+    error: errorDeps,
+    refetch: refetchDeps,
+  } = useQuery({
+    queryKey: ['QuestionDeps', question?.uuid],
+    queryFn: () =>
+      question?.uuid
+        ? getAllPages((page) =>
+            checklistsAdminQuestionDependenciesList({
+              query: { question_uuid: question.uuid, page, page_size: 1000 },
+            }),
+          )
+        : null,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const initialValuesWithDeps = useMemo<ChecklistQuestionForm>(() => {
+    if (!deps?.length) return initialValues;
+    return {
+      ...initialValues,
+      conditions: deps.map((dep) => ({
+        uuid: dep.uuid,
+        depends_on_question: dep.depends_on_question,
+        operator: dep.operator,
+        required_answer_value: dep.required_answer_value,
+      })),
+    };
+  }, [initialValues, deps]);
 
   // Store the question if it saved, to avoid recreating it if there is an error with options, deps or conditions.
   const [savedQuestion, setSavedQuestion] = useState<QuestionAdmin>(null);
   const isEdit = Boolean(question?.uuid);
 
-  // FIX THIS: complete the function - user guidance and visibility remained
+  // FIX THIS: complete the function - user guidance and trigger remained
   const onSubmit = async (formData: ChecklistQuestionForm) => {
     try {
       const body: QuestionAdminRequest = {
@@ -65,6 +106,10 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
       if (formData.question_type === 'number') {
         if (formData.min_value) body.min_value = formData.min_value;
         if (formData.max_value) body.max_value = formData.max_value;
+      }
+
+      if (formData.conditions?.length) {
+        body.dependency_logic_operator = formData.dependency_logic_operator;
       }
 
       // Save question
@@ -144,44 +189,71 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
       }
 
       // Save visibility options (dependencies)
-      if (formData.conditions?.length) {
-        // const prevCondition = initialValues?.conditions || [];
-        const newConditions = formData.conditions;
-        // const updatedCondition = formData.conditions.filter(
-        //   (g) => g.uuid && prevCondition.some((p) => p.uuid === g.uuid),
-        // );
-        // const removedCondition = prevCondition.filter(
-        //   (p) => !formData.conditions.some((g) => g.uuid === p.uuid),
-        // );
+      const prevConditions = initialValuesWithDeps?.conditions || [];
+      const conditions = formData.conditions || [];
+      if (conditions.length || prevConditions.length) {
+        const newConditions = conditions.filter(
+          (cond) =>
+            !prevConditions.some(
+              (p) => p.depends_on_question === cond.depends_on_question,
+            ),
+        );
+        const updatedConditions = [];
+        conditions.forEach((cond) => {
+          const prevCond = prevConditions.find(
+            (p) => p.depends_on_question === cond.depends_on_question,
+          );
+          if (
+            prevCond &&
+            (prevCond.operator !== cond.operator ||
+              !isEqual(
+                prevCond.required_answer_value,
+                cond.required_answer_value,
+              ))
+          ) {
+            updatedConditions.push({ ...cond, uuid: prevCond.uuid });
+          }
+        });
+        const removedConditions = prevConditions.filter(
+          (p) =>
+            !conditions.some(
+              (cond) => cond.depends_on_question === p.depends_on_question,
+            ),
+        );
 
         const dependenciesPromises = [];
         // Create new conditions
-        for (const g of newConditions) {
+        for (const cond of newConditions) {
           dependenciesPromises.push(
             checklistsAdminQuestionDependenciesCreate({
-              body: { question: saved.url, ...g },
+              body: { question: saved.url, ...cond },
             }),
           );
         }
-        // // Update existing condition
-        // for (const g of updatedCondition) {
-        //   dependenciesPromises.push(
-        //     checklistsAdminQuestionDependenciesPartialUpdate({
-        //       path: { uuid: g.uuid },
-        //       body: g,
-        //     }),
-        //   );
-        // }
-        // // Remove deleted condition
-        // for (const g of removedCondition) {
-        //   dependenciesPromises.push(
-        //     checklistsAdminQuestionDependenciesDestroy({
-        //       path: { uuid: g.uuid },
-        //     }),
-        //   );
-        // }
+        // Update existing condition
+        for (const cond of updatedConditions) {
+          dependenciesPromises.push(
+            checklistsAdminQuestionDependenciesPartialUpdate({
+              path: { uuid: cond.uuid },
+              body: cond,
+            }),
+          );
+        }
+        // Remove deleted condition
+        for (const cond of removedConditions) {
+          dependenciesPromises.push(
+            checklistsAdminQuestionDependenciesDestroy({
+              path: { uuid: cond.uuid },
+            }),
+          );
+        }
 
         await Promise.all(dependenciesPromises);
+        if (dependenciesPromises.length) {
+          queryClient.invalidateQueries({
+            queryKey: ['QuestionDeps', question?.uuid],
+          });
+        }
       }
 
       if (!isEdit) {
@@ -213,11 +285,17 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
     }
   };
 
+  if (isLoadingDeps) {
+    return <LoadingSpinner />;
+  } else if (errorDeps) {
+    return <LoadingErred loadData={refetchDeps} />;
+  }
+
   return (
     <Form
       onSubmit={onSubmit}
       mutators={{ ...arrayMutators }}
-      initialValues={initialValues}
+      initialValues={initialValuesWithDeps}
       render={({ handleSubmit, submitting, pristine, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
@@ -258,7 +336,10 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
               )}
               {CHECKLIST_FLAGS.questionFormVisibility && (
                 <Tab eventKey="visibility" title={translate('Visibility')}>
-                  <QuestionVisibilityForm checklistUuid={checklist.uuid} />
+                  <QuestionVisibilityForm
+                    checklistUuid={checklist.uuid}
+                    question={question || savedQuestion}
+                  />
                 </Tab>
               )}
               {CHECKLIST_FLAGS.questionFormTriggers && (
