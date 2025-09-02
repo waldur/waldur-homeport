@@ -4899,6 +4899,10 @@
     "description": "marketplace/offerings/update/components/ComponentLimitPeriodField.tsx",
     "message": "Every year service provider can report up to the amount requested by user."
   },
+  "Exact match": {
+    "description": "marketplace-checklist/utils.ts",
+    "message": "Exact match"
+  },
   "Example telemetry metrics": {
     "description": "administration/TelemetryExampleDialog.tsx",
     "message": "Example telemetry metrics"
@@ -5842,26 +5846,6 @@
   "Identity service of the Republic of Estonia": {
     "description": "administration/providers/IdentityProvidersList.tsx",
     "message": "Identity service of the Republic of Estonia"
-  },
-  "If (all of)": {
-    "description": "marketplace-checklist/utils.ts",
-    "message": "If (all of)"
-  },
-  "If (any of)": {
-    "description": "marketplace-checklist/utils.ts",
-    "message": "If (any of)"
-  },
-  "If (contains)": {
-    "description": "marketplace-checklist/utils.ts",
-    "message": "If (contains)"
-  },
-  "If (equals)": {
-    "description": "marketplace-checklist/utils.ts",
-    "message": "If (equals)"
-  },
-  "If (none of)": {
-    "description": "marketplace-checklist/utils.ts",
-    "message": "If (none of)"
   },
   "If defined, will be set as a password for all offering users": {
     "description": "marketplace/UserSecretOptionsForm.tsx",
@@ -8178,6 +8162,10 @@
   "Not configured": {
     "description": "administration/providers/ProviderCard.tsx",
     "message": "Not configured"
+  },
+  "Not equal to": {
+    "description": "marketplace-checklist/utils.ts",
+    "message": "Not equal to"
   },
   "Not overridden": {
     "description": "administration/notifications/NotificationFilter.tsx",
@@ -13743,6 +13731,10 @@
     "description": "marketplace-checklist/utils.ts",
     "message": "Text area"
   },
+  "Text contains substring": {
+    "description": "marketplace-checklist/utils.ts",
+    "message": "Text contains substring"
+  },
   "Text has been copied": {
     "description": "core/CopyToClipboardButton.tsx, marketplace/common/CopyToClipboard.tsx, navigation/FooterLinks.tsx, openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx, resource/ResourceAccessButton.tsx",
     "message": "Text has been copied"
@@ -14218,6 +14210,10 @@
   "This section is only for single select and multi select questions.": {
     "description": "marketplace-checklist/checklists/questions/QuestionGuidanceForm.tsx",
     "message": "This section is only for single select and multi select questions."
+  },
+  "This site only uses <b>essential cookies</b>, which are necessary for the platform to function correctly. These cookies enable you to log in, access secure areas, and navigate throughout the site. No other types of cookies are used.": {
+    "description": "navigation/cookies/CookiesConsentDialog.tsx",
+    "message": "This site only uses <b>essential cookies</b>, which are necessary for the platform to function correctly. These cookies enable you to log in, access secure areas, and navigate throughout the site. No other types of cookies are used."
   },
   "This template includes all required fields for HPC project import: {fields} (required) etc.": {
     "description": "project/import/Step3DownloadTemplate.tsx",
@@ -16831,6 +16827,14 @@
     "description": "SettingsDescription.ts",
     "message": "Validate TLS certificate of FreeIPA web interface / REST API"
   },
+  "Value does not exist in list": {
+    "description": "marketplace-checklist/utils.ts",
+    "message": "Value does not exist in list"
+  },
+  "Value exists in list": {
+    "description": "marketplace-checklist/utils.ts",
+    "message": "Value exists in list"
+  },
   "Value has been copied": {
     "description": "core/CopyToClipboard.tsx",
     "message": "Value has been copied"
@@ -16854,6 +16858,10 @@
   "Value": {
     "description": "marketplace/offerings/update/integration/EnvironmentVariablePanel.tsx, marketplace/resources/KeyValueTable.tsx, marketplace/resources/usage/utils.ts, marketplace-checklist/checklists/questions/QuestionVisibilityForm.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestTemplates.tsx, rancher/cluster/apps/ApplicationDetailsDialog.tsx, reporting/quotas/CustomerQuotasList.tsx, reporting/resource-usage/ResourceUsageList.tsx, reporting/resource-usage/UserUsageList.tsx",
     "message": "Value"
+  },
+  "Values that trigger this question": {
+    "description": "marketplace-checklist/checklists/questions/QuestionVisibilityForm.tsx",
+    "message": "Values that trigger this question"
   },
   "Vault Host": {
     "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
@@ -17058,10 +17066,6 @@
   "Waldur deployment settings": {
     "description": "features/FeaturesDescription.ts",
     "message": "Waldur deployment settings"
-  },
-  "Waldur only uses <b>essential cookies</b>, which are necessary for the platform to function correctly. These cookies enable you to log in, access secure areas, and navigate throughout Waldur. No other types of cookies are used.": {
-    "description": "navigation/cookies/CookiesConsentDialog.tsx",
-    "message": "Waldur only uses <b>essential cookies</b>, which are necessary for the platform to function correctly. These cookies enable you to log in, access secure areas, and navigate throughout Waldur. No other types of cookies are used."
   },
   "Waldur site agent": {
     "description": "site-agent/marketplace.ts",

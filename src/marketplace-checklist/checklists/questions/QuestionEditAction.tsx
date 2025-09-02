@@ -35,6 +35,7 @@ export const QuestionEditAction: FC<QuestionEditActionProps> = ({ row }) => {
         options: row.question_options.map((opt) => opt.label),
         min_value: row.min_value,
         max_value: row.max_value,
+        dependency_logic_operator: row.dependency_logic_operator,
       },
       size: 'lg',
       formId: QUESTION_FORM_ID,

@@ -1,4 +1,8 @@
-import { ChecklistOperators, QuestionTypeEnum } from 'waldur-js-client';
+import {
+  ChecklistOperators,
+  DependencyLogicOperatorEnum,
+  QuestionTypeEnum,
+} from 'waldur-js-client';
 
 export interface ChecklistQuestionForm {
   description: string; // Question
@@ -11,9 +15,11 @@ export interface ChecklistQuestionForm {
     solution: string;
   }>;
   conditions?: Array<{
+    uuid?: string;
     depends_on_question: string;
     operator: ChecklistOperators;
-    required_answer_value: string;
+    required_answer_value: unknown;
   }>;
+  dependency_logic_operator: DependencyLogicOperatorEnum;
   review_answer_value?: string;
 }
