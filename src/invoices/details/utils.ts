@@ -8,7 +8,10 @@ import { InvoiceItem, InvoiceTableItem } from '../types';
 const getResourceKey = (item: InvoiceItem) =>
   item.resource_uuid || item.details.resource_uuid;
 
-export const groupInvoiceItems = (items: InvoiceItem[]): InvoiceTableItem[] => {
+export const groupInvoiceItems = (
+  items: InvoiceItem[],
+  orderBy?: string,
+): InvoiceTableItem[] => {
   const groupedByProjectAndResource = items.reduce<
     Record<string, InvoiceTableItem>
   >((acc, item) => {
@@ -43,7 +46,44 @@ export const groupInvoiceItems = (items: InvoiceItem[]): InvoiceTableItem[] => {
     return acc;
   }, {});
 
-  return Object.values(groupedByProjectAndResource);
+  const groupedItems = Object.values(groupedByProjectAndResource);
+
+  // Apply sorting if specified
+  if (orderBy) {
+    const isDescending = orderBy.startsWith('-');
+    const field = isDescending ? orderBy.substring(1) : orderBy;
+
+    if (field === 'project_name') {
+      groupedItems.sort((a, b) => {
+        const comparison = a.project_name.localeCompare(b.project_name);
+        return isDescending ? -comparison : comparison;
+      });
+    } else if (field === 'offering_name') {
+      groupedItems.sort((a, b) => {
+        const comparison = a.offering_name.localeCompare(b.offering_name);
+        return isDescending ? -comparison : comparison;
+      });
+    } else if (field === 'resource_name') {
+      groupedItems.sort((a, b) => {
+        const comparison = a.resource_name.localeCompare(b.resource_name);
+        return isDescending ? -comparison : comparison;
+      });
+    } else if (field === 'service_provider_name') {
+      groupedItems.sort((a, b) => {
+        const comparison = a.service_provider_name.localeCompare(
+          b.service_provider_name,
+        );
+        return isDescending ? -comparison : comparison;
+      });
+    } else if (field === 'plan_name') {
+      groupedItems.sort((a, b) => {
+        const comparison = a.plan_name.localeCompare(b.plan_name);
+        return isDescending ? -comparison : comparison;
+      });
+    }
+  }
+
+  return groupedItems;
 };
 
 // phone numbers specification https://www.itu.int/rec/T-REC-E.164-201011-I
