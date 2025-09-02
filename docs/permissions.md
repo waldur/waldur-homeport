@@ -45,6 +45,7 @@ export const AcceptAction = (props) => {
     return <Button/>;
   }
 }
+
 ```
 
 The only prerequisite of course is to ensure that backend uses dynamic roles too.
