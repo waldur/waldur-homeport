@@ -44,11 +44,11 @@ export const AffectedOfferingsTable: FC<AffectedOfferingsTableProps> = ({
         {
           title: translate('Impact level'),
           render: ({ row }) =>
-            MAINTENANCE_IMPACT_LEVEL[values.impact_level[row.uuid]] || 'N/A',
+            MAINTENANCE_IMPACT_LEVEL[values.impact_level?.[row.uuid]] || 'N/A',
         },
         {
           title: translate('Description'),
-          render: ({ row }) => values.impact_description[row.uuid] || 'N/A',
+          render: ({ row }) => values.impact_description?.[row.uuid] || 'N/A',
         },
       ]}
       verboseName={translate('Affected offerings')}

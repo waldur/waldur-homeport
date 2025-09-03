@@ -105,7 +105,7 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
             body: {
               maintenance: maintenance.url,
               offering: offering.url,
-              impact_description: formData.impact_description[offering.uuid],
+              impact_description: formData.impact_description?.[offering.uuid],
               impact_level: formData.impact_level[offering.uuid],
             },
           });
@@ -115,7 +115,7 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
           return maintenanceAnnouncementOfferingsPartialUpdate({
             path: { uuid: item.uuid },
             body: {
-              impact_description: formData.impact_description[offeringUuid],
+              impact_description: formData.impact_description?.[offeringUuid],
               impact_level: formData.impact_level[offeringUuid],
             },
           });

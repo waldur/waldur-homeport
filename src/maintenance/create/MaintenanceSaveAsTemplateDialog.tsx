@@ -186,7 +186,7 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
             body: {
               maintenance_template: template.url,
               offering: offering.url,
-              impact_description: impact_description[offering.uuid],
+              impact_description: impact_description?.[offering.uuid],
               impact_level: impact_level[offering.uuid],
             },
           });
@@ -196,7 +196,7 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
           return maintenanceAnnouncementTemplateOfferingsPartialUpdate({
             path: { uuid: item.uuid },
             body: {
-              impact_description: impact_description[offeringUuid],
+              impact_description: impact_description?.[offeringUuid],
               impact_level: impact_level[offeringUuid],
             },
           });
