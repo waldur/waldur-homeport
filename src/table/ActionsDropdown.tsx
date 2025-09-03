@@ -4,7 +4,12 @@ import {
   SpinnerIcon,
 } from '@phosphor-icons/react';
 import { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
-import { Dropdown, DropdownProps } from 'react-bootstrap';
+import {
+  Dropdown,
+  DropdownProps,
+  OverlayTrigger,
+  Tooltip,
+} from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 import { createPortal } from 'react-dom';
 
@@ -23,6 +28,7 @@ interface ActionsDropdownProps {
   row?: any;
   refetch?(): void;
   data?: Record<string, any>;
+  tooltip?: string | boolean;
 }
 
 interface TableDropdownToggleProps {
@@ -32,6 +38,7 @@ interface TableDropdownToggleProps {
   variant?: Variant;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
+  tooltip?: string | boolean;
 }
 
 export const TableDropdownToggle = ({
@@ -41,31 +48,55 @@ export const TableDropdownToggle = ({
   variant = 'outline btn-outline-default',
   className = 'min-w-100px w-100',
   size = 'sm',
+  tooltip,
 }: TableDropdownToggleProps) => {
-  return labeled ? (
-    <Dropdown.Toggle
-      variant={variant}
-      size={size === 'md' ? undefined : size}
-      className={className + ' btn-icon-right no-arrow'}
-      disabled={disabled}
-    >
-      {label || translate('Actions')}
-      <span
-        className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-180`}
+  const getTooltipMessage = () => {
+    if (typeof tooltip === 'string') return tooltip;
+    if (tooltip === true && disabled)
+      return translate('There are no available actions');
+    return undefined;
+  };
+
+  const tooltipMessage = getTooltipMessage();
+
+  const renderToggle = () =>
+    labeled ? (
+      <Dropdown.Toggle
+        variant={variant}
+        size={size === 'md' ? undefined : size}
+        className={className + ' btn-icon-right no-arrow'}
+        disabled={disabled}
       >
-        <CaretDownIcon weight="bold" />
-      </span>
-    </Dropdown.Toggle>
-  ) : (
-    <Dropdown.Toggle
-      variant="active-light"
-      className="btn-icon no-arrow"
-      disabled={disabled}
-      size={size === 'md' ? undefined : size}
-    >
-      <DotsThreeVerticalIcon size={22} weight="bold" />
-    </Dropdown.Toggle>
-  );
+        {label || translate('Actions')}
+        <span
+          className={`svg-icon svg-icon-${size === 'sm' ? '4' : '2'} rotate-180`}
+        >
+          <CaretDownIcon weight="bold" />
+        </span>
+      </Dropdown.Toggle>
+    ) : (
+      <Dropdown.Toggle
+        variant="active-light"
+        className="btn-icon no-arrow"
+        disabled={disabled}
+        size={size === 'md' ? undefined : size}
+      >
+        <DotsThreeVerticalIcon size={22} weight="bold" />
+      </Dropdown.Toggle>
+    );
+
+  if (tooltipMessage && disabled) {
+    return (
+      <OverlayTrigger
+        placement="top"
+        overlay={<Tooltip>{tooltipMessage}</Tooltip>}
+      >
+        <span className="d-inline-block">{renderToggle()}</span>
+      </OverlayTrigger>
+    );
+  }
+
+  return renderToggle();
 };
 
 const PortalDropdown = ({ children }) => {
@@ -88,6 +119,7 @@ export const ActionsDropdownComponent: FunctionComponent<
   menuStyle,
   menuClassName,
   size,
+  tooltip,
   ...rest
 }) => (
   <Dropdown onToggle={onToggle} drop="start" align="end" {...rest}>
@@ -98,6 +130,7 @@ export const ActionsDropdownComponent: FunctionComponent<
       variant={variant}
       className={className}
       size={size}
+      tooltip={tooltip}
     />
 
     <PortalDropdown>
@@ -136,9 +169,10 @@ export const ActionsDropdown: FunctionComponent<
   row,
   refetch,
   data = {},
+  tooltip,
   ...rest
 }) => (
-  <ActionsDropdownComponent {...rest}>
+  <ActionsDropdownComponent tooltip={tooltip} {...rest}>
     {open ? (
       loading ? (
         <Dropdown.Item eventKey="1">

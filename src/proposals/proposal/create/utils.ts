@@ -34,6 +34,7 @@ export const useProposalDecisionActions = (
   const hasPermissionForDecision = hasPermission(user, {
     permission: PermissionEnum.APPROVE_AND_REJECT_PROPOSALS,
     scopeId: proposal.call_uuid,
+    callOrganizerId: proposal.call_managing_organisation_uuid,
   });
 
   const canPerformDecisionActions = stateIsValid && hasPermissionForDecision;

@@ -18,6 +18,7 @@ export const ReviewsRowActions = ({ row, fetch }) => {
   const canDelete = hasPermission(user, {
     permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
     scopeId: row.call_uuid,
+    callOrganizerId: row.call_managing_organisation_uuid,
   });
   const showActions =
     canDelete ||

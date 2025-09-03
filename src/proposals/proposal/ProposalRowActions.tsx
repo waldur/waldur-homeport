@@ -12,7 +12,10 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import {
+  ActionsDropdown,
+  ActionsDropdownComponent,
+} from '@waldur/table/ActionsDropdown';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { useProposalDecisionActions } from './create/utils';
@@ -28,6 +31,7 @@ export const ProposalRowActions = ({ row, refetch }) => {
   const canCreateReview = hasPermission(user, {
     permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
     scopeId: row.call_uuid,
+    callOrganizerId: row.call_managing_organisation_uuid,
   });
 
   const dispatch = useDispatch();
@@ -48,6 +52,10 @@ export const ProposalRowActions = ({ row, refetch }) => {
     handleApproveProposal,
     handleRejectProposal,
   } = useProposalDecisionActions(row, refetch);
+
+  if (!canPerformDecisionActions && !canCreateReview) {
+    return <ActionsDropdown disabled tooltip />;
+  }
 
   return (
     <ActionsDropdownComponent>
