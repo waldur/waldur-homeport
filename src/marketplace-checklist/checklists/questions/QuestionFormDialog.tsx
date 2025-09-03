@@ -250,9 +250,12 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
 
         await Promise.all(dependenciesPromises);
         if (dependenciesPromises.length) {
-          queryClient.invalidateQueries({
-            queryKey: ['QuestionDeps', question?.uuid],
-          });
+          // Invalidate question dependencies query (after 1 sec to prevent immediate refetch)
+          setTimeout(() => {
+            queryClient.invalidateQueries({
+              queryKey: ['QuestionDeps', question?.uuid],
+            });
+          }, 1000);
         }
       }
 
@@ -265,6 +268,13 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
           })),
         );
       }
+
+      // Invalidate checklist questions query (after 1 sec to prevent immediate refetch)
+      setTimeout(() => {
+        queryClient.invalidateQueries({
+          queryKey: ['ChecklistQuestions', checklist.uuid],
+        });
+      }, 1000);
 
       // Refetch the questions table
       dispatch(fetchListStart('ChecklistQuestions-' + checklist.uuid));
@@ -322,6 +332,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
               defaultActiveKey="general"
               id="questions-tabs"
               className="nav-line-tabs mb-7"
+              mountOnEnter
             >
               <Tab eventKey="general" title={translate('General')}>
                 <QuestionGeneralForm values={values} />
