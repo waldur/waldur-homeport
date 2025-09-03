@@ -1,4 +1,5 @@
 import { TrashIcon } from '@phosphor-icons/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { checklistsAdminQuestionsDestroy } from 'waldur-js-client';
 
@@ -10,6 +11,7 @@ import { updateEntity } from '@waldur/table/actions';
 
 export const QuestionDeleteAction = ({ row, refetch }) => {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const openDialog = async () => {
     try {
       await waitForConfirmation(
@@ -31,6 +33,10 @@ export const QuestionDeleteAction = ({ row, refetch }) => {
         questions_count: entity.questions_count - 1,
       })),
     );
+    // Invalidate checklist questions query
+    queryClient.invalidateQueries({
+      queryKey: ['ChecklistQuestions', row.checklist_uuid],
+    });
     await refetch();
   };
   return (
