@@ -19,8 +19,9 @@ const impactLevelOptions = Object.keys(MAINTENANCE_IMPACT_LEVEL).map((key) => ({
   value: key,
 }));
 
-const fieldFilter = {
+const baseFilter = {
   field: ['uuid', 'url', 'name'],
+  shared: true,
 };
 
 const ImpactLevelField = ({ row }) => (
@@ -49,8 +50,8 @@ export const Step2SelectOfferings: FC<WizardFormStepProps> = (props) => {
   const filter = useMemo(
     () =>
       props.data?.provider
-        ? { ...fieldFilter, customer_uuid: props.data?.provider?.customer_uuid }
-        : fieldFilter,
+        ? { ...baseFilter, customer_uuid: props.data?.provider?.customer_uuid }
+        : baseFilter,
     [props.data?.provider],
   );
 
