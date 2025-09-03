@@ -17295,6 +17295,10 @@
     "description": "invitations/MultiResendAction.tsx, invitations/actions/InvitationSendButton.tsx",
     "message": "You don't have permission to send this invitation."
   },
+  "You don't have permissions or there are no actions available": {
+    "description": "table/ActionsDropdown.tsx",
+    "message": "You don't have permissions or there are no actions available"
+  },
   "You have entered data in form. When dialog is closed form data would be lost.": {
     "description": "modal/ModalRoot.tsx",
     "message": "You have entered data in form. When dialog is closed form data would be lost."
