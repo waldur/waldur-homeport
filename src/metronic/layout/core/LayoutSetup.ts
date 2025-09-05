@@ -194,7 +194,7 @@ export class LayoutSetup {
 
     // Height setup
     let bodyStyles = document.body.getAttribute('style');
-    bodyStyles += ' --kt-extra-toolbar-height: 36px;';
+    bodyStyles += ' --kt-extra-toolbar-height: 44px;';
     document.body.setAttribute('style', bodyStyles);
   }
 
