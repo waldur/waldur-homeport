@@ -131,7 +131,7 @@ export const UserAffiliationsList: FunctionComponent<
       verboseName={translate('affiliations')}
       title={translate('Roles and permissions')}
       filters={<UserAffiliationsFilter />}
-      initialPageSize={100}
+      initialPageSize={10}
       hasActionBar={hasActionBar}
     />
   );
