@@ -505,6 +505,22 @@ export const states: StateDeclaration[] = [
       permissions: [isStaff],
     },
   },
+  {
+    name: 'admin-organization-requests',
+    url: 'organization-requests/',
+    parent: 'admin-organizations',
+    component: lazyComponent(() =>
+      import('./organizations/requests/OrganizationRequestsList').then(
+        (module) => ({
+          default: module.OrganizationRequestsList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Requests'),
+      permissions: [isStaff],
+    },
+  },
 
   {
     name: 'admin-identity',

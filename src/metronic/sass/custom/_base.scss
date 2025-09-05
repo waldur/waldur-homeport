@@ -23,6 +23,22 @@
       background-color: $gray-50;
     }
   }
+
+  &.card-sm {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+
+    .card-header {
+      margin-left: $card-px / 2;
+      margin-right: $card-px / 2;
+      padding: 0;
+      min-height: 36px;
+    }
+    .card-body {
+      padding-left: $card-px / 2;
+      padding-right: $card-px / 2;
+    }
+  }
 }
 
 /* LIST-GROUP & ITEMS */

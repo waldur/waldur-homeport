@@ -23,6 +23,7 @@ interface ConfirmationDialogProps {
     positiveButton?: string;
     negativeButton?: string;
     positiveButtonVariant?: string;
+    onlyPositiveButton?: boolean;
     iconNode?: ReactNode;
     showInput?: boolean;
     inputRequired?: boolean;
@@ -40,6 +41,7 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
     positiveButton = translate('Yes'),
     negativeButton = translate('No'),
     positiveButtonVariant,
+    onlyPositiveButton,
     iconNode,
     showInput = false,
     inputRequired = false,
@@ -72,16 +74,18 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       bodyClassName="text-gray-500 pt-2"
       footer={
         <>
-          <Button
-            variant="outline btn-outline-default"
-            className="flex-equal px-3"
-            onClick={handleCancel}
-          >
-            {negativeButton}
-          </Button>
+          {!onlyPositiveButton && (
+            <Button
+              variant="outline btn-outline-default"
+              className="flex-equal px-3"
+              onClick={handleCancel}
+            >
+              {negativeButton}
+            </Button>
+          )}
           <Button
             variant={positiveButtonVariant}
-            className="flex-equal px-3"
+            className={onlyPositiveButton ? undefined : 'flex-equal px-3'}
             onClick={handleSubmit}
             disabled={showInput && inputRequired && !inputValue.trim()}
           >

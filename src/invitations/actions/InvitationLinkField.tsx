@@ -22,6 +22,7 @@ export const InvitationLinkField = ({ invitation }) => {
           value={link}
           size={20}
           buttonClassName="btn btn-active-secondary btn-icon"
+          onlyButton
         />
       </div>
     </Form.Group>

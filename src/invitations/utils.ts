@@ -7,7 +7,7 @@ import * as AuthService from '@waldur/auth/AuthService';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { createDeferred } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import {
   showError,
@@ -85,9 +85,28 @@ export function submitPermissionRequest(token) {
   return confirmUserGroupInvitation(token)
     .then((accept) => {
       if (accept) {
-        submitGroupRequest(token).then(() => {
-          router.stateService.go('profile.details');
-        });
+        submitGroupRequest(token)
+          .then(() => {
+            router.stateService.go('profile.details');
+          })
+          .catch(async (error) => {
+            await waitForConfirmation(
+              store.dispatch,
+              translate('Access restricted'),
+              error ||
+                translate(
+                  "You don't have the required permissions to join this organization.",
+                ),
+              {
+                type: 'danger',
+                size: 'sm',
+                positiveButton: translate('Go to dashboard'),
+                positiveButtonVariant: 'primary w-175px',
+                onlyPositiveButton: true,
+              },
+            );
+            router.stateService.go('profile.details');
+          });
       }
     })
     .catch(() => {
@@ -139,6 +158,7 @@ function submitGroupRequest(token) {
           ),
         );
       }
+      throw error;
     });
 }
 

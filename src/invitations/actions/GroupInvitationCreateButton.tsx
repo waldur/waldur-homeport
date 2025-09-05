@@ -49,6 +49,7 @@ export const GroupInvitationCreateButton: FC<{
         },
         initialValues: {
           role: roles[0],
+          type: 'private',
         },
       }),
     );
