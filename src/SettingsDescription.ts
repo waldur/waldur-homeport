@@ -136,6 +136,12 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'ENFORCE_USER_CONSENT_FOR_OFFERINGS',
+        description: translate('If True, users must have active consent to access offerings that have active Terms of Service.'),
+        default: false,
+        type: 'boolean',
+      },
     ],
   },
   {
