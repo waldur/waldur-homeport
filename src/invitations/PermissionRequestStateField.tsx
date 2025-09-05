@@ -1,24 +1,29 @@
-import { FunctionComponent } from 'react';
+import { CheckIcon, ClockCountdownIcon, XIcon } from '@phosphor-icons/react';
+import { FC } from 'react';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
+import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
 
-export const PermissionRequestStateField: FunctionComponent<{ row }> = ({
-  row,
-}) => {
-  const state = row.state;
+const requestStatus = {
+  pending: {
+    label: translate('Pending'),
+    color: 'warning',
+    icon: ClockCountdownIcon,
+  },
+  approved: { label: translate('Accepted'), color: 'success', icon: CheckIcon },
+  rejected: { label: translate('Declined'), color: 'danger', icon: XIcon },
+};
+
+export const PermissionRequestStateField: FC<{ row }> = ({ row }) => {
+  const status = requestStatus[row.state];
   return (
-    <StateIndicator
-      label={translate(state)}
-      variant={
-        state === 'rejected'
-          ? 'danger'
-          : state === 'pending'
-            ? 'warning'
-            : 'primary'
-      }
+    <Badge
+      variant={status.color}
+      leftIcon={<status.icon weight="bold" />}
       outline
       pill
-    />
+    >
+      {status.label}
+    </Badge>
   );
 };

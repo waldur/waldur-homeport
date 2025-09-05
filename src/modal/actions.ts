@@ -37,6 +37,7 @@ export const waitForConfirmation = (
     negativeButton?: string;
     size?: DialogSizeType;
     positiveButtonVariant?: string;
+    onlyPositiveButton?: boolean;
     iconNode?: ReactNode;
     showInput?: boolean;
     inputLabel?: string;

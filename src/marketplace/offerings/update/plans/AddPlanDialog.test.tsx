@@ -245,6 +245,8 @@ describe('AddPlanDialog', () => {
     await user.click(createButton);
 
     // Button should be disabled during submission
-    expect(createButton).toBeDisabled();
+    await waitFor(() => {
+      expect(createButton).toBeDisabled();
+    });
   });
 });

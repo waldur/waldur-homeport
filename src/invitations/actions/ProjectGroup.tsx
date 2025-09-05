@@ -13,11 +13,12 @@ export const ProjectGroup: FunctionComponent<{
   customer;
   loading?;
   disabled;
-}> = ({ customer, loading, disabled }) => {
+  required?;
+}> = ({ customer, loading, disabled, required: isRequired = true }) => {
   const role = useSelector((state: RootState) =>
     formValueSelector(GROUP_INVITATION_CREATE_FORM_ID)(state, 'role'),
   );
-  const projectEnabled = role.content_type === 'project';
+  const projectEnabled = role?.content_type === 'project';
   if (!projectEnabled) {
     return null;
   }
@@ -27,12 +28,11 @@ export const ProjectGroup: FunctionComponent<{
       name="project"
       component={FormGroup}
       label={translate('Project')}
-      required
-      validate={[required]}
+      required={isRequired}
+      validate={isRequired ? [required] : undefined}
       options={customer.projects}
       isDisabled={disabled}
       isLoading={loading}
-      placeholder={translate('Select project')}
       getOptionValue={(option) => option.uuid}
       getOptionLabel={(option) => option.name}
       isClearable={true}

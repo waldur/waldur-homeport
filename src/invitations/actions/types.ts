@@ -21,3 +21,5 @@ export interface GroupInvitationFormData {
   rows: GroupInviteRow[];
   extra_invitation_text: string;
 }
+
+export type GroupInvitationType = 'private' | 'public';

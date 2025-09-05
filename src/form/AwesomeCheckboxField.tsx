@@ -39,6 +39,7 @@ export const AwesomeCheckboxField: FunctionComponent<
     )}
   >
     <Form.Check
+      id={'check-' + input.name}
       checked={input.value}
       onChange={(e: React.ChangeEvent<any>) => input.onChange(e.target.checked)}
       data-testid={props['data-testid']}
@@ -46,7 +47,7 @@ export const AwesomeCheckboxField: FunctionComponent<
     />
 
     {(tooltip || label || help_text) && (
-      <label className="form-check-label">
+      <label className="form-check-label" htmlFor={'check-' + input.name}>
         {tooltip && !tooltipEnd && (
           <Tip id={'form-field-tooltip-' + input.name} label={tooltip}>
             <QuestionIcon weight="bold" size={20} className="text-muted" />{' '}

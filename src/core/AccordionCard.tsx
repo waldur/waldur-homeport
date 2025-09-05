@@ -15,6 +15,7 @@ interface AccordionCardProps extends PropsWithChildren {
   titleClassName?: string;
   defaultOpen?: boolean;
   solid?: boolean;
+  size?: 'sm';
 }
 
 const CustomToggle = ({ eventKey, title, titleClassName }) => {
@@ -44,6 +45,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
         className={classNames(
           'card-bordered',
           props.solid && 'card-solid',
+          props.size && 'card-' + props.size,
           props.className,
         )}
         id={props.id}

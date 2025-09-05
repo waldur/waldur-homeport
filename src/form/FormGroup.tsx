@@ -12,7 +12,7 @@ import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip, TipProps } from '@waldur/core/Tooltip';
 
 import { FormFieldsContext } from './context';
 import { FieldError } from './FieldError';
@@ -24,6 +24,7 @@ export interface FormGroupProps extends FormField {
   actions?: ReactNode;
   quickAction?: ReactNode;
   tooltipEnd?: boolean;
+  tooltipProps?: Partial<TipProps>;
 }
 
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
@@ -37,6 +38,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     description,
     tooltip,
     tooltipEnd,
+    tooltipProps,
     hideLabel,
     meta,
     children,
@@ -73,7 +75,11 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
   const labelNode = !hideLabel && (
     <Form.Label className={classNames({ required })}>
       {tooltip && !tooltipEnd && (
-        <Tip id={'form-field-tooltip-' + input.name} label={tooltip}>
+        <Tip
+          id={'form-field-tooltip-' + input.name}
+          label={tooltip}
+          {...tooltipProps}
+        >
           <QuestionIcon weight="bold" size={20} className="text-muted" />{' '}
         </Tip>
       )}
@@ -101,6 +107,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
               id={'form-field-tooltip-' + input.name}
               className="align-self-center ms-2"
               label={tooltip}
+              {...tooltipProps}
             >
               <QuestionIcon weight="bold" size={20} className="text-muted" />
             </Tip>

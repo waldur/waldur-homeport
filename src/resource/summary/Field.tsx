@@ -11,6 +11,7 @@ import './Field.css';
 
 interface FieldProps {
   label: string;
+  labelTooltipLen?: number | false;
   tooltip?: string;
   value?: React.ReactNode;
   children?: React.ReactNode;
@@ -24,7 +25,10 @@ interface FieldProps {
   space?: number;
 }
 
-export const Field: FunctionComponent<FieldProps> = (props) =>
+export const Field: FunctionComponent<FieldProps> = ({
+  labelTooltipLen = 20,
+  ...props
+}) =>
   props.value || props.children ? (
     <Row
       className={classNames(
@@ -40,7 +44,7 @@ export const Field: FunctionComponent<FieldProps> = (props) =>
           props.labelClass,
         )}
       >
-        {props.label.length > 20 ? (
+        {labelTooltipLen && props.label.length > labelTooltipLen ? (
           <Tip label={props.label} id="fieldLabel">
             {props.label}:
           </Tip>

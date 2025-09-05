@@ -1,20 +1,22 @@
 import { FunctionComponent } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 
 import { UserPermissionRequestApproveButton } from '@waldur/invitations/UserPermissionRequestApproveButton';
 import { UserPermissionRequestRejectButton } from '@waldur/invitations/UserPermissionRequestRejectButton';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { UserPermissionRequestReviewButton } from './UserPermissionRequestReviewButton';
+
 interface UserPermissionRequestRowActionsProps {
-  refetch;
+  fetch;
   row;
 }
 
 export const UserPermissionRequestRowActions: FunctionComponent<
   UserPermissionRequestRowActionsProps
-> = ({ row, refetch }) => {
+> = ({ row, fetch: refetch }) => {
   const user = useUser();
   let canManageRequest = false;
   // Check if the user has permission to manage the request based on the role name
@@ -30,17 +32,22 @@ export const UserPermissionRequestRowActions: FunctionComponent<
     });
   }
 
-  return row.state === 'pending' && canManageRequest ? (
-    <ButtonGroup>
-      <UserPermissionRequestApproveButton
-        permissionRequest={row}
-        refetch={refetch}
-      />
+  const actionable = row.state === 'pending' && canManageRequest;
 
-      <UserPermissionRequestRejectButton
-        permissionRequest={row}
-        refetch={refetch}
-      />
-    </ButtonGroup>
-  ) : null;
+  return (
+    <ActionsDropdown
+      row={row}
+      refetch={refetch}
+      data={{ readOnly: !actionable }}
+      actions={
+        actionable
+          ? [
+              UserPermissionRequestReviewButton,
+              UserPermissionRequestApproveButton,
+              UserPermissionRequestRejectButton,
+            ]
+          : [UserPermissionRequestReviewButton]
+      }
+    />
+  );
 };
