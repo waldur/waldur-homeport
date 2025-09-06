@@ -47,38 +47,46 @@ export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
       ? ' /year'
       : ' /mo';
 
+  const limitAmount = props.offeringComponent.limit_amount;
+  const limitPeriod = props.offeringComponent.limit_period;
+  const measuredUnit = props.offeringComponent.measured_unit;
+
   return (
     <FormTable.Item
       label={props.offeringComponent.name}
       tooltip={
-        props.offeringComponent.limit_amount !== null && (
-          // limit_period options: total, month, annual
+        limitAmount !== null && (
+          // limit_period options: total, month, quarterly, annual
           <>
-            {props.offeringComponent.limit_period === 'total' &&
-              translate('Total limit: {limit} {unit}', {
-                limit: props.offeringComponent.limit_amount,
-                unit: props.offeringComponent.measured_unit,
-              })}
-            {props.offeringComponent.limit_period === 'month' &&
-              translate('Monthly limit: {limit} {unit}', {
-                limit: props.offeringComponent.limit_amount,
-                unit: props.offeringComponent.measured_unit,
-              })}
-            {props.offeringComponent.limit_period === 'annual' &&
-              translate('Annual limit: {limit} {unit}', {
-                limit: props.offeringComponent.limit_amount,
-                unit: props.offeringComponent.measured_unit,
-              })}
+            {limitPeriod === 'total'
+              ? translate('Limit: {limit} {unit} total', {
+                  limit: limitAmount,
+                  unit: measuredUnit,
+                })
+              : limitPeriod === 'quarterly'
+                ? translate('Limit: {limit} {unit} per quarter', {
+                    limit: limitAmount,
+                    unit: measuredUnit,
+                  })
+                : limitPeriod === 'annual'
+                  ? translate('Limit: {limit} {unit} per year', {
+                      limit: limitAmount,
+                      unit: measuredUnit,
+                    })
+                  : translate('Limit: {limit} {unit} per month', {
+                      limit: limitAmount,
+                      unit: measuredUnit,
+                    })}
           </>
         )
       }
       description={
         translate('Cost') +
         ': ' +
-        (props.offeringComponent.measured_unit
+        (measuredUnit
           ? translate('{price} per {unit}', {
               price: defaultCurrency(props.offeringComponent.price),
-              unit: props.offeringComponent.measured_unit,
+              unit: measuredUnit,
             })
           : defaultCurrency(props.offeringComponent.price))
       }

@@ -975,10 +975,6 @@
     "description": "administration/routes.ts",
     "message": "Announcements"
   },
-  "Annual limit: {limit} {unit}": {
-    "description": "marketplace/details/plan/UsageComponentRow.tsx",
-    "message": "Annual limit: {limit} {unit}"
-  },
   "Anonymized": {
     "description": "marketplace/UserPluginOptionsForm.tsx",
     "message": "Anonymized"
@@ -6807,6 +6803,22 @@
     "description": "marketplace/aggregate-limits/utils.ts, marketplace/offerings/update/components/ComponentAccountingTypeField.tsx",
     "message": "Limit-based"
   },
+  "Limit: {limit} {unit} per month": {
+    "description": "marketplace/details/plan/UsageComponentRow.tsx",
+    "message": "Limit: {limit} {unit} per month"
+  },
+  "Limit: {limit} {unit} per quarter": {
+    "description": "marketplace/details/plan/UsageComponentRow.tsx",
+    "message": "Limit: {limit} {unit} per quarter"
+  },
+  "Limit: {limit} {unit} per year": {
+    "description": "marketplace/details/plan/UsageComponentRow.tsx",
+    "message": "Limit: {limit} {unit} per year"
+  },
+  "Limit: {limit} {unit} total": {
+    "description": "marketplace/details/plan/UsageComponentRow.tsx",
+    "message": "Limit: {limit} {unit} total"
+  },
   "Limits": {
     "description": "marketplace/orders/details/LimitsSection.tsx, marketplace/orders/details/OrderDetails.tsx, marketplace/resources/list/ProviderResourcesList.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx",
     "message": "Limits"
@@ -7546,10 +7558,6 @@
   "Monthly invoices": {
     "description": "customer/payment-profiles/utils.ts",
     "message": "Monthly invoices"
-  },
-  "Monthly limit: {limit} {unit}": {
-    "description": "marketplace/details/plan/UsageComponentRow.tsx",
-    "message": "Monthly limit: {limit} {unit}"
   },
   "Monthly revenue": {
     "description": "reporting/dashboard/ReportingWidgets.tsx, reporting/routes.ts",
@@ -14502,10 +14510,6 @@
   "Total for the year": {
     "description": "customer/credits/CreditFormDialog.tsx",
     "message": "Total for the year"
-  },
-  "Total limit: {limit} {unit}": {
-    "description": "marketplace/details/plan/UsageComponentRow.tsx",
-    "message": "Total limit: {limit} {unit}"
   },
   "Total memory": {
     "description": "rancher/cluster/create/RancherClusterCheckoutSummary.tsx",
