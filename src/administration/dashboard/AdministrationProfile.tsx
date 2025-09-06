@@ -14,7 +14,7 @@ import { translate } from '@waldur/i18n';
 import { getRoleFilterOptions } from '@waldur/user/support/utils';
 
 interface AdministrationProfileProps {
-  healthy: boolean;
+  healthy?: boolean;
   supportOnly?: boolean;
 }
 
@@ -28,6 +28,23 @@ export const AdministrationProfile = ({
   const website = ENV.plugins.WALDUR_CORE.HOMEPORT_URL;
   const email = ENV.plugins.WALDUR_CORE.SITE_EMAIL;
   const phone = ENV.plugins.WALDUR_CORE.SITE_PHONE;
+
+  // Determine health display state
+  const getHealthStatus = () => {
+    if (healthy === undefined) {
+      // Health check is still loading
+      return {
+        label: translate('Checking...'),
+        className: 'bg-warning',
+      };
+    }
+    return {
+      label: healthy ? translate('Healthy') : translate('Error'),
+      className: healthy ? 'bg-success' : 'bg-danger',
+    };
+  };
+
+  const healthStatus = getHealthStatus();
 
   const { data: version } = useQuery({
     queryKey: ['version'],
@@ -80,9 +97,9 @@ export const AdministrationProfile = ({
             <DashboardHeroLogo
               logo={image}
               logoAlt={ENV.plugins.WALDUR_CORE.SITE_NAME}
-              logoTopLabel={healthy ? translate('Healthy') : translate('Error')}
+              logoTopLabel={healthStatus.label}
               logoBottomLabel="Operator"
-              logoTopClass={healthy ? 'bg-success' : 'bg-danger'}
+              logoTopClass={healthStatus.className}
               logoBottomClass="bg-secondary"
             />
           </Col>

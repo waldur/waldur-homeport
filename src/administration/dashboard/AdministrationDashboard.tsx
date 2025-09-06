@@ -20,22 +20,24 @@ export const AdministrationDashboard: FC = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  const healthy = isWorking(data);
+  const healthy = data ? isWorking(data) : undefined;
 
   return (
     <>
+      <AdministrationProfile healthy={healthy} />
       {isLoading ? (
-        <LoadingSpinner />
+        <LoadingSpinner
+          helpText={translate(
+            'Checking system health status and verifying all services are operational...',
+          )}
+        />
       ) : error ? (
         <LoadingErred
           message={translate('Unable to load health information')}
           loadData={refetch}
         />
       ) : data ? (
-        <>
-          <AdministrationProfile healthy={healthy} />
-          <HealthChecks healthInfoItems={data} />
-        </>
+        <HealthChecks healthInfoItems={data} />
       ) : null}
       <AdminStatistics />
     </>

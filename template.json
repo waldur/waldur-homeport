@@ -2383,6 +2383,14 @@
     "description": "navigation/BackendHealthStatusDialog.tsx",
     "message": "Check name"
   },
+  "Checking system health status and verifying all services are operational...": {
+    "description": "administration/dashboard/AdministrationDashboard.tsx",
+    "message": "Checking system health status and verifying all services are operational..."
+  },
+  "Checking...": {
+    "description": "administration/dashboard/AdministrationProfile.tsx",
+    "message": "Checking..."
+  },
   "Checklist category has been added.": {
     "description": "marketplace-checklist/categories/CategoryFormDialog.tsx, marketplace-checklist/checklists/ChecklistFormDialog.tsx",
     "message": "Checklist category has been added."
@@ -5906,6 +5914,10 @@
   "Identity service of the Republic of Estonia": {
     "description": "administration/providers/IdentityProvidersList.tsx",
     "message": "Identity service of the Republic of Estonia"
+  },
+  "If True, users must have active consent to access offerings that have active Terms of Service.": {
+    "description": "SettingsDescription.ts",
+    "message": "If True, users must have active consent to access offerings that have active Terms of Service."
   },
   "If defined, will be set as a password for all offering users": {
     "description": "marketplace/UserSecretOptionsForm.tsx",
@@ -17858,6 +17870,10 @@
   "server groups": {
     "description": "openstack/openstack-server-groups/ServerGroupsList.tsx",
     "message": "server groups"
+  },
+  "services healthy": {
+    "description": "administration/dashboard/HealthChecks.tsx",
+    "message": "services healthy"
   },
   "services": {
     "description": "rancher/cluster/ClusterServicesList.tsx",
