@@ -9,8 +9,17 @@ export const LoadingSpinnerIcon = ({ className }: { className? }) => (
   />
 );
 
-export const LoadingSpinner: FunctionComponent = () => (
-  <h1 className="text-center">
-    <LoadingSpinnerIcon />
-  </h1>
+interface LoadingSpinnerProps {
+  helpText?: string;
+}
+
+export const LoadingSpinner: FunctionComponent<LoadingSpinnerProps> = ({
+  helpText,
+}) => (
+  <div className="text-center mb-5">
+    <h1>
+      <LoadingSpinnerIcon />
+    </h1>
+    {helpText && <p className="text-muted mt-3 mb-0">{helpText}</p>}
+  </div>
 );
