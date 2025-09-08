@@ -45,7 +45,7 @@ export const ClusterStatistics: FC<{
   );
 
   const nodesCount = useMemo(
-    () => resourceScope.nodes.length || 0,
+    () => resourceScope?.nodes.length || 0,
     [resourceScope],
   );
 
