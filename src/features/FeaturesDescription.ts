@@ -59,6 +59,10 @@ export const FeaturesDescription: FeatureSection[] = [
     description: translate('Marketplace offerings and resources'),
     items: [
       {
+        key: 'allow_display_of_images_in_markdown',
+        description: translate('Allow display of images in markdown format.'),
+      },
+      {
         key: 'call_only',
         description: translate('Allow marketplace to serve only as aggregator of call info.'),
       },
