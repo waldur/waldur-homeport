@@ -875,6 +875,10 @@
     "description": "booking/components/WeekendsGroup.tsx",
     "message": "Allow bookings to be scheduled at weekends"
   },
+  "Allow display of images in markdown format.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Allow display of images in markdown format."
+  },
   "Allow live volume resize of system and data volumes": {
     "description": "openstack/OpenStackProvisioningConfigForm.tsx",
     "message": "Allow live volume resize of system and data volumes"
