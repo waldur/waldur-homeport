@@ -17,7 +17,6 @@ import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitte
 import { getUser } from '@waldur/workspace/selectors';
 
 import { Offering } from '../types';
-import { isExperimentalUiComponentsVisible } from '../utils';
 
 import { PUBLIC_OFFERING_DATA_QUERY_KEY } from './constants';
 import { OfferingViewHero } from './OfferingViewHero';
@@ -43,11 +42,6 @@ const PublicOfferingGettingStarted = lazyComponent(() =>
     default: module.PublicOfferingGettingStarted,
   })),
 );
-const PublicOfferingFAQ = lazyComponent(() =>
-  import('./details/PublicOfferingFAQ').then((module) => ({
-    default: module.PublicOfferingFAQ,
-  })),
-);
 const PublicOfferingPricing = lazyComponent(() =>
   import('./details/PublicOfferingPricing').then((module) => ({
     default: module.PublicOfferingPricing,
@@ -58,18 +52,12 @@ const PublicOfferingLocation = lazyComponent(() =>
     default: module.PublicOfferingLocation,
   })),
 );
-const PublicOfferingGetHelp = lazyComponent(() =>
-  import('./details/PublicOfferingGetHelp').then((module) => ({
-    default: module.PublicOfferingGetHelp,
-  })),
-);
 
 const getTabs = (offering?): PageBarTab[] => {
   if (!offering) {
     // Return an empty array or placeholders until the offering is loaded
     return [];
   }
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   const showDescriptionTab =
     offering?.full_description ||
     offering?.description ||
@@ -112,25 +100,11 @@ const getTabs = (offering?): PageBarTab[] => {
           component: PublicOfferingImages,
         }
       : null,
-    showExperimentalUiComponents
-      ? {
-          title: translate('FAQ'),
-          key: 'faq',
-          component: PublicOfferingFAQ,
-        }
-      : null,
     offering.latitude && offering.longitude
       ? {
           title: translate('Location'),
           key: 'location',
           component: PublicOfferingLocation,
-        }
-      : null,
-    showExperimentalUiComponents
-      ? {
-          title: translate('Get help'),
-          key: 'get-help',
-          component: PublicOfferingGetHelp,
         }
       : null,
   ].filter(Boolean);
