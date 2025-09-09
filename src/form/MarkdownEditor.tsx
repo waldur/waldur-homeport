@@ -2,6 +2,7 @@ import {
   MDXEditor,
   headingsPlugin,
   listsPlugin,
+  imagePlugin,
   quotePlugin,
   thematicBreakPlugin,
   toolbarPlugin,
@@ -28,6 +29,9 @@ import {
   DiffSourceToggleWrapper,
 } from '@mdxeditor/editor';
 import { FC, useRef } from 'react';
+
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 
 import InsertLinkPopover from './InsertLinkPopover';
 import { FormField } from './types';
@@ -100,6 +104,11 @@ const MarkdownEditor: FC<MarkdownEditorProps> = (props) => {
         toolbarPlugin({ toolbarContents: () => <Toolbar /> }),
         listsPlugin(),
         quotePlugin(),
+        ...(isFeatureVisible(
+          MarketplaceFeatures.allow_display_of_images_in_markdown,
+        )
+          ? [imagePlugin()]
+          : []),
         headingsPlugin(),
         linkPlugin(),
         linkDialogPlugin({
