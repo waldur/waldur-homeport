@@ -325,6 +325,10 @@ export const PermissionOptions = [
     label: translate('Project'),
     options: [
       {
+        label: translate('Course account manage'),
+        value: 'PROJECT.COURSE_ACCOUNT_MANAGE',
+      },
+      {
         label: translate('Create project'),
         value: 'PROJECT.CREATE',
       },
@@ -360,6 +364,10 @@ export const PermissionOptions = [
       {
         label: translate('Generate api secret code'),
         value: 'SERVICE_PROVIDER.GENERATE_API_SECRET_CODE',
+      },
+      {
+        label: translate('List course accounts'),
+        value: 'SERVICE_PROVIDER.LIST_COURSE_ACCOUNTS',
       },
       {
         label: translate('List customer projects'),
