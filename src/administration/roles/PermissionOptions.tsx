@@ -341,6 +341,10 @@ export const PermissionOptions = [
         value: 'PROJECT.LIST',
       },
       {
+        label: translate('Review membership'),
+        value: 'PROJECT.REVIEW_MEMBERSHIP',
+      },
+      {
         label: translate('Update metadata'),
         value: 'PROJECT.UPDATE_METADATA',
       },
