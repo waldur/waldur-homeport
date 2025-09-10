@@ -49,6 +49,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Conceal civil number in invitation creation dialog.'),
       },
       {
+        key: 'show_course_accounts',
+        description: translate('Show course accounts of the scopes.'),
+      },
+      {
         key: 'show_service_accounts',
         description: translate('Show service accounts of the scopes.'),
       },
