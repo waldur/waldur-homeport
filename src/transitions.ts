@@ -40,9 +40,8 @@ export function attachTransitions() {
           return;
         }
         return transition.router.stateService.target('profile-manage');
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.log(e);
+      } catch {
+        return transition.router.stateService.target('errorPage.serverError');
       }
     },
   );

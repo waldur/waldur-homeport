@@ -5540,7 +5540,7 @@
     "message": "Go back to categories"
   },
   "Go back": {
-    "description": "invitations/actions/create/FormButtons.tsx, project/manage/EditEndDateDialog.tsx",
+    "description": "error/ServerErrorPage.tsx, invitations/actions/create/FormButtons.tsx, project/manage/EditEndDateDialog.tsx",
     "message": "Go back"
   },
   "Go to dashboard": {
@@ -6238,6 +6238,10 @@
   "Internal IPs": {
     "description": "marketplace/resources/details/openstack-instance/InstanceMainComponent.tsx, openstack/openstack-instance/tabs.ts, openstack/openstack-tenant/TenantInstancesList.tsx",
     "message": "Internal IPs"
+  },
+  "Internal Server Error": {
+    "description": "error/ServerErrorPage.tsx",
+    "message": "Internal Server Error"
   },
   "Internal address": {
     "description": "openstack/openstack-floating-ips/FloatingIpsList.tsx",
@@ -8695,6 +8699,10 @@
     "description": "marketplace/resources/actions/utils.ts",
     "message": "Only staff users are allowed to perform this action."
   },
+  "Oops! Something went wrong on our side.": {
+    "description": "error/ServerErrorPage.tsx",
+    "message": "Oops! Something went wrong on our side."
+  },
   "Open calls": {
     "description": "proposals/CallsForProposalsList.tsx, proposals/call-management/CallManagementDashboard.tsx",
     "message": "Open calls"
@@ -10798,6 +10806,10 @@
   "Release floating IPs": {
     "description": "openstack/openstack-instance/actions/utils.ts",
     "message": "Release floating IPs"
+  },
+  "Reload page": {
+    "description": "error/ServerErrorPage.tsx",
+    "message": "Reload page"
   },
   "Reload": {
     "description": "ErrorMessage.tsx, ErrorView.tsx, LoadingScreen.tsx, core/LoadingErred.tsx",
@@ -17198,6 +17210,10 @@
   "We'll email them instructions and a link to accept the invitation.": {
     "description": "invitations/actions/create/InvitationCreateDialog.tsx",
     "message": "We'll email them instructions and a link to accept the invitation."
+  },
+  "We're sorry for the inconvenience. Our technical team has been automatically notified and is working to fix the issue. Please try again in a few moments.": {
+    "description": "error/ServerErrorPage.tsx",
+    "message": "We're sorry for the inconvenience. Our technical team has been automatically notified and is working to fix the issue. Please try again in a few moments."
   },
   "Webhook": {
     "description": "user/hooks/HookTypeField.tsx",

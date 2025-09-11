@@ -20,6 +20,15 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'errorPage.serverError',
+    component: lazyComponent(() =>
+      import('./ServerErrorPage').then((module) => ({
+        default: module.ServerErrorPage,
+      })),
+    ),
+  },
+
+  {
     name: 'errorPage.otherwise',
     url: '*path',
     component: lazyComponent(() =>
