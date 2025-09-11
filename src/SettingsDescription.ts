@@ -137,6 +137,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'ENABLE_MOCK_COURSE_ACCOUNT_BACKEND',
+        description: translate('Enable mock returns for the course account service'),
+        default: false,
+        type: 'boolean',
+      },
+      {
         key: 'ENFORCE_USER_CONSENT_FOR_OFFERINGS',
         description: translate('If True, users must have active consent to access offerings that have active Terms of Service.'),
         default: false,

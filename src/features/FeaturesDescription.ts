@@ -18,7 +18,7 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'show_permission_reviews',
-        description: translate('Allows to show permission reviews tab and popups.'),
+        description: translate('Allows to show permission reviews tab and popups for organisations.'),
       },
     ],
   },
@@ -153,6 +153,10 @@ export const FeaturesDescription: FeatureSection[] = [
       {
         key: 'show_industry_flag',
         description: translate('Show industry flag.'),
+      },
+      {
+        key: 'show_permission_reviews',
+        description: translate('Allows to show permission reviews tab and popups for projects.'),
       },
       {
         key: 'show_start_date_in_create_dialog',
