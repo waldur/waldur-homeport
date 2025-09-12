@@ -2,7 +2,7 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { InvitationsFeatures } from '@waldur/FeaturesEnums';
+import { ProjectFeatures, InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 
@@ -168,6 +168,21 @@ export const states: StateDeclaration[] = [
       skipBreadcrumb: true,
       breadcrumb: () => translate('Service accounts'),
       feature: InvitationsFeatures.show_service_accounts,
+    },
+  },
+  {
+    name: 'project-permissions-reviews',
+    url: 'permissions-reviews/',
+    component: lazyComponent(() =>
+      import('./team/ProjectPermissionsReviewsList').then((module) => ({
+        default: module.ProjectPermissionsReviewsList,
+      })),
+    ),
+    parent: 'project-team',
+    data: {
+      skipBreadcrumb: true,
+      breadcrumb: () => translate('Permissions reviews'),
+      feature: ProjectFeatures.show_permission_reviews,
     },
   },
 ];

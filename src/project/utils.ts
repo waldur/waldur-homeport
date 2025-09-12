@@ -16,10 +16,11 @@ import {
   getCostChartAndOptions,
 } from '@waldur/dashboard/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { InvitationsFeatures } from '@waldur/FeaturesEnums';
+import { InvitationsFeatures, ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import store from '@waldur/store/store';
 import { Project, User } from '@waldur/workspace/types';
 
 async function getProjectCostData(project: Project) {
@@ -155,6 +156,16 @@ export const canEditProject = (user: User, context: { customer?; project? }) =>
     projectId: context?.project?.uuid,
   });
 
+const userHasProjectPermission = (permission) => (state) => {
+  const user = state?.workspace?.user;
+  const projectId = state?.workspace?.project?.uuid;
+
+  return hasPermission(user, {
+    projectId,
+    permission,
+  });
+};
+
 export const PROJECT_TEAM_TABLE_TABS = [
   {
     key: 'users',
@@ -166,9 +177,17 @@ export const PROJECT_TEAM_TABLE_TABS = [
     title: translate('Invitations'),
     state: 'project-invitations',
   },
+  isFeatureVisible(ProjectFeatures.show_permission_reviews) &&
+    userHasProjectPermission(PermissionEnum.REVIEW_PROJECT_MEMBERSHIP)(
+      store.getState(),
+    ) && {
+      key: 'reviews',
+      title: translate('Permission reviews'),
+      state: 'project-permissions-reviews',
+    },
   isFeatureVisible(InvitationsFeatures.show_service_accounts) && {
     key: 'project-service-accounts',
     title: translate('Service accounts'),
     state: 'project-service-accounts',
   },
-];
+].filter(Boolean);

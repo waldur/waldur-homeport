@@ -65,7 +65,7 @@ const customerUsersAutocomplete = async (
   currentPage: number,
 ) => {
   const response = await customersUsersList({
-    path: { uuid: customerUuid },
+    path: { customer_uuid: customerUuid },
     query: {
       o: 'concatenated_name',
       ...query,
@@ -87,7 +87,7 @@ const projectUsersAutocomplete = async (
   currentPage: number,
 ) => {
   const response = await projectsOtherUsersList({
-    path: { uuid: projectUuid },
+    path: { project_uuid: projectUuid },
     query: {
       ...query,
       page: currentPage,

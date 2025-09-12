@@ -5,20 +5,20 @@ import { createSelector } from 'reselect';
 import { PermissionsReviewsList } from '@waldur/core/PermissionsReviewsList';
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getProject } from '@waldur/workspace/selectors';
 
-const mapStateToProps = createSelector(getCustomer, (customer) => ({
-  customer_uuid: customer.uuid,
+const mapStateToProps = createSelector(getProject, (project) => ({
+  project_uuid: project.uuid,
   o: '-created',
 }));
 
-export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
+export const ProjectPermissionsReviewsList: FunctionComponent<{}> = () => {
   const filter = useSelector(mapStateToProps);
   const tableProps = useTable({
-    table: 'customer-permissions-reviews',
-    fetchData: createFetcher('customer-permissions-reviews'),
+    table: 'project-permissions-reviews',
+    fetchData: createFetcher('project-permissions-reviews'),
     filter,
   });
 
-  return <PermissionsReviewsList tableProps={tableProps} scope="customer" />;
+  return <PermissionsReviewsList tableProps={tableProps} scope="project" />;
 };

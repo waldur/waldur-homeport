@@ -11,9 +11,9 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { SET_CURRENT_CUSTOMER } from '@waldur/workspace/constants';
 import { checkIsOwner, getUser } from '@waldur/workspace/selectors';
 
-const PendingReviewDialog = lazyComponent(() =>
-  import('@waldur/customer/team/PendingReviewDialog').then((module) => ({
-    default: module.PendingReviewDialog,
+const PendingMembershipReviewDialog = lazyComponent(() =>
+  import('@waldur/core/PendingMembershipReviewDialog').then((module) => ({
+    default: module.PendingMembershipReviewDialog,
   })),
 );
 
@@ -38,8 +38,8 @@ function* checkPendingReview(action) {
     );
     if (review) {
       yield put(
-        openModalDialog(PendingReviewDialog, {
-          resolve: { reviewId: review.uuid },
+        openModalDialog(PendingMembershipReviewDialog, {
+          resolve: { reviewId: review.uuid, scope: 'customer' },
           size: 'xl',
         }),
       );
