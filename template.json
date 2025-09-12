@@ -931,9 +931,13 @@
     "description": "features/FeaturesDescription.ts",
     "message": "Allows to hide domain field in organization detail."
   },
-  "Allows to show permission reviews tab and popups.": {
+  "Allows to show permission reviews tab and popups for organisations.": {
     "description": "features/FeaturesDescription.ts",
-    "message": "Allows to show permission reviews tab and popups."
+    "message": "Allows to show permission reviews tab and popups for organisations."
+  },
+  "Allows to show permission reviews tab and popups for projects.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Allows to show permission reviews tab and popups for projects."
   },
   "Amount": {
     "description": "customer/credits/CreditUsageDialog.tsx, marketplace/offerings/PriceList.tsx, marketplace/offerings/update/plans/QuotasTable.tsx, marketplace/resources/usage/ResourceUsageForm.tsx",
@@ -2663,6 +2667,10 @@
     "description": "proposals/proposal/create/ProposalSidebar.tsx",
     "message": "Complete all required sections: {sections} and {lastSection} to proceed."
   },
+  "Complete review": {
+    "description": "core/PendingMembershipReviewDialog.tsx, customer/team/ReviewCloseButton.tsx",
+    "message": "Complete review"
+  },
   "Complete your profile.": {
     "description": "user/CompleteYourProfileBanner.tsx",
     "message": "Complete your profile."
@@ -2786,10 +2794,6 @@
   "Confirmation": {
     "description": "administration/TokenDeleteButton.tsx, administration/announcements/AnnouncementDeleteAction.tsx, administration/auto-provisioning-rules/RuleDeleteButton.tsx, administration/auto-provisioning-rules/RuleDeleteTemplateButton.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/quick-shortcuts/QuickShortcutDeleteAction.tsx, administration/roles/RoleDeleteButton.tsx, administration/service-desk/issue-templates/IssueTemplateDeleteAction.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, broadcasts/BroadcastSendButton.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerCallManagerPanel.tsx, customer/details/CustomerLocationRow.tsx, customer/payment-profiles/PaymentProfileDeleteButton.tsx, customer/payments/DeletePaymentButton.tsx, customer/service-accounts/ServiceAccountDeleteAction.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, invoices/details/InvoiceItemDelete.tsx, maintenance/actions/MaintenanceDeleteAction.tsx, maintenance/actions/MaintenanceStateActions.tsx, maintenance/actions/MaintenanceStopAction.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/ColumnRow.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/deploy/DeployForm.tsx, marketplace/offerings/details/policies/PolicyDeleteButton.tsx, marketplace/offerings/images/DeleteImageButton.tsx, marketplace/offerings/update/components/DeleteComponentButton.tsx, marketplace/offerings/update/endpoints/DeleteEndpointButton.tsx, marketplace/offerings/update/options/DeleteOptionButton.tsx, marketplace/offerings/update/plans/ArchivePlanButton.tsx, marketplace/offerings/update/roles/DeleteRoleButton.tsx, marketplace/orders/actions/OrderUnlinkButton.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/resources/resource-pending/OrderErredView.tsx, marketplace/resources/users/DeleteUserButton.tsx, marketplace/service-providers/OfferingPermissionRemoveButton.tsx, marketplace/service-providers/RestrictOfferingUser.tsx, marketplace/service-providers/UserRemoveButton.tsx, marketplace-checklist/categories/CategoryDeleteAction.tsx, marketplace-checklist/checklists/ChecklistArchiveAction.tsx, marketplace-checklist/checklists/questions/QuestionDeleteAction.tsx, openstack/openstack-security-groups/UnlinkSecurityGroupAction.tsx, openstack/openstack-tenant/DeleteMigrationAction.tsx, openstack/openstack-tenant/actions/ActivatePortAction.tsx, openstack/openstack-tenant/actions/TogglePortSecurityAction.tsx, openstack/openstack-tenant/actions/UnlinkPortAction.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/create/ProposalSubmissionStep.tsx, proposals/proposal/create/utils.ts, proposals/review/ReviewDeleteAction.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/CallActions.tsx, proposals/update/configuration/ResourceTemplateDeleteButton.tsx, proposals/update/documents/RemoveDocumentButton.tsx, proposals/update/general/EditGeneralInfoDialog.tsx, rancher/cluster/create/FormNodesStep.tsx, rancher/cluster/team/KeycloakMembershipRowActions.tsx, resource/actions/AsyncActionButton.tsx, resource/actions/AsyncActionItem.tsx, resource/actions/ResourceDeleteButton.tsx, user/support/UserDelete.tsx, user/support/UserStatus.tsx",
     "message": "Confirmation"
-  },
-  "Confirming that data is correct": {
-    "description": "customer/team/PendingReviewDialog.tsx",
-    "message": "Confirming that data is correct"
   },
   "Connect subnet": {
     "description": "openstack/openstack-subnet/ConnectSubnetAction.tsx",
@@ -2946,6 +2950,10 @@
   "Coupon": {
     "description": "marketplace/service-providers/ProviderCampaignsList.tsx",
     "message": "Coupon"
+  },
+  "Course account manage": {
+    "description": "administration/roles/PermissionOptions.tsx",
+    "message": "Course account manage"
   },
   "Create LEXIS Link for the resource {resourceName}": {
     "description": "marketplace/resources/lexis/CreateLexisLinkDialog.tsx",
@@ -3200,7 +3208,7 @@
     "message": "Created by"
   },
   "Created": {
-    "description": "administration/TokensList.tsx, administration/hooks/HooksList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, customer/list/CustomerList.tsx, customer/list/OrganizationCard.tsx, customer/team/CustomerPermissionsReviewList.tsx, invoices/list/InvoicesFilter.tsx, issues/IssueDetails.tsx, issues/IssueInfo.tsx, issues/feedback/SupportFeedbackList.tsx, issues/list/IssuesList.tsx, issues/list/IssuesListExpandableRow.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/resources/details/utils.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-tenant/TenantMigrationsList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsList.tsx, proposals/call-management/CallManagementPage.tsx, proposals/proposal/UserProposalsList.tsx, proposals/round/proposals/ProposalsList.tsx, proposals/utils.ts, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/ClusterWorkloadsList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, resource/summary/ResourceSummaryBase.tsx, user/affiliations/OrganizationsList.tsx, user/affiliations/ProjectsList.tsx, vmware/DisksList.tsx, vmware/PortsList.tsx",
+    "description": "administration/TokensList.tsx, administration/hooks/HooksList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, core/PermissionsReviewsList.tsx, customer/list/CustomerList.tsx, customer/list/OrganizationCard.tsx, invoices/list/InvoicesFilter.tsx, issues/IssueDetails.tsx, issues/IssueInfo.tsx, issues/feedback/SupportFeedbackList.tsx, issues/list/IssuesList.tsx, issues/list/IssuesListExpandableRow.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/resources/details/utils.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-tenant/TenantMigrationsList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectsList.tsx, proposals/call-management/CallManagementPage.tsx, proposals/proposal/UserProposalsList.tsx, proposals/round/proposals/ProposalsList.tsx, proposals/utils.ts, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/ClusterWorkloadsList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, resource/summary/ResourceSummaryBase.tsx, user/affiliations/OrganizationsList.tsx, user/affiliations/ProjectsList.tsx, vmware/DisksList.tsx, vmware/PortsList.tsx",
     "message": "Created"
   },
   "Creates resource": {
@@ -4291,10 +4299,6 @@
     "description": "customer/team/EditUserDialog.tsx",
     "message": "Edit organization member"
   },
-  "Edit permissions": {
-    "description": "customer/team/PendingReviewDialog.tsx",
-    "message": "Edit permissions"
-  },
   "Edit plan": {
     "description": "marketplace/offerings/update/plans/EditPlanDescriptionDialog.tsx",
     "message": "Edit plan"
@@ -4566,6 +4570,10 @@
   "Enable limit": {
     "description": "marketplace/offerings/update/components/ComponentLimitEnableField.tsx",
     "message": "Enable limit"
+  },
+  "Enable mock returns for the course account service": {
+    "description": "SettingsDescription.ts",
+    "message": "Enable mock returns for the course account service"
   },
   "Enable mock returns for the service account service": {
     "description": "SettingsDescription.ts",
@@ -6863,6 +6871,10 @@
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "List call"
   },
+  "List course accounts": {
+    "description": "administration/roles/PermissionOptions.tsx",
+    "message": "List course accounts"
+  },
   "List customer projects": {
     "description": "administration/roles/PermissionOptions.tsx",
     "message": "List customer projects"
@@ -7430,6 +7442,10 @@
   "Members": {
     "description": "marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ProviderOrganizationsList.tsx, marketplace/service-providers/ProviderUserCustomersList.tsx",
     "message": "Members"
+  },
+  "Membership review has been completed.": {
+    "description": "core/PendingMembershipReviewDialog.tsx",
+    "message": "Membership review has been completed."
   },
   "Memory per vCore": {
     "description": "azure/sql/AzureSQLServerSummary.tsx",
@@ -9376,7 +9392,7 @@
     "message": "Pending tasks"
   },
   "Pending": {
-    "description": "customer/team/CustomerPermissionsReviewList.tsx, invitations/InvitationStateFilter.tsx, invitations/PermissionRequestStateField.tsx, invoices/list/InvoicesFilter.tsx, marketplace-remote/RequestStateFilter.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/UserPermissionRequestsStateFilter.tsx",
+    "description": "core/PermissionsReviewsList.tsx, invitations/InvitationStateFilter.tsx, invitations/PermissionRequestStateField.tsx, invoices/list/InvoicesFilter.tsx, marketplace-remote/RequestStateFilter.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/UserPermissionRequestsStateFilter.tsx",
     "message": "Pending"
   },
   "Per day": {
@@ -9403,16 +9419,12 @@
     "description": "marketplace/resources/mass-actions/MultiDestroyAction.tsx, marketplace/resources/mass-actions/MultiPullAction.tsx, marketplace/resources/mass-actions/MultiSetErredAction.tsx, marketplace/resources/mass-actions/MultiUnlinkAction.tsx, marketplace/resources/mass-actions/VirtualMachineMultiAction.tsx",
     "message": "Perform mass action"
   },
-  "Perform review": {
-    "description": "customer/team/ReviewCloseButton.tsx",
-    "message": "Perform review"
-  },
   "Performed by": {
-    "description": "customer/team/CustomerPermissionsReviewList.tsx",
+    "description": "core/PermissionsReviewsList.tsx",
     "message": "Performed by"
   },
   "Performed": {
-    "description": "customer/team/CustomerPermissionsReviewList.tsx",
+    "description": "core/PermissionsReviewsList.tsx",
     "message": "Performed"
   },
   "Period {i}": {
@@ -9470,6 +9482,14 @@
   "Permission requests": {
     "description": "user/UserPermissionRequestsList.tsx, user/routes.ts",
     "message": "Permission requests"
+  },
+  "Permission reviews": {
+    "description": "project/utils.ts",
+    "message": "Permission reviews"
+  },
+  "Permissions reviews": {
+    "description": "project/routes.ts",
+    "message": "Permissions reviews"
   },
   "Permissions": {
     "description": "administration/roles/RoleForm.tsx, marketplace/offerings/OfferingDetailsUIView.tsx, proposals/team/TeamSection.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx",
@@ -9668,8 +9688,12 @@
     "message": "Please review and activate offering {offeringName} ({offeringUuid}). \nRequestor: {userName} / {userUuid}. \nService provider: {customerName} / {customerUuid}"
   },
   "Please review organization permissions": {
-    "description": "customer/team/PendingReviewDialog.tsx",
+    "description": "core/PendingMembershipReviewDialog.tsx",
     "message": "Please review organization permissions"
+  },
+  "Please review project permissions": {
+    "description": "core/PendingMembershipReviewDialog.tsx",
+    "message": "Please review project permissions"
   },
   "Please review the application below. If you want to add a comment to a specific field, click on the comment action in the corresponding field.": {
     "description": "proposals/proposal/create-review/ReviewHeader.tsx",
@@ -10827,6 +10851,10 @@
     "description": "marketplace/offerings/details/PlanUsageList.tsx, reporting/plan-usage/PlanUsageList.tsx",
     "message": "Remaining"
   },
+  "Remind me later": {
+    "description": "core/PendingMembershipReviewDialog.tsx",
+    "message": "Remind me later"
+  },
   "Remote API URL": {
     "description": "administration/remote-offering-sync/RemoteSyncFormDialog.tsx",
     "message": "Remote API URL"
@@ -11647,13 +11675,9 @@
     "description": "proposals/review/utils.tsx",
     "message": "Review has been accepted."
   },
-  "Review has been closed.": {
-    "description": "customer/team/PendingReviewDialog.tsx",
-    "message": "Review has been closed."
-  },
-  "Review has been performed.": {
+  "Review has been completed.": {
     "description": "customer/team/ReviewCloseButton.tsx",
-    "message": "Review has been performed."
+    "message": "Review has been completed."
   },
   "Review has been rejected.": {
     "description": "proposals/review/utils.tsx",
@@ -11670,6 +11694,10 @@
   "Review keywords (comma-separated)": {
     "description": "marketplace-checklist/checklists/questions/QuestionReviewTriggersForm.tsx",
     "message": "Review keywords (comma-separated)"
+  },
+  "Review membership": {
+    "description": "administration/roles/PermissionOptions.tsx",
+    "message": "Review membership"
   },
   "Review request": {
     "description": "marketplace-remote/ReviewDialog.tsx",
@@ -12915,6 +12943,10 @@
     "description": "resource/actions/OpenConsoleLogActionItem.tsx",
     "message": "Show console log"
   },
+  "Show course accounts of the scopes.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Show course accounts of the scopes."
+  },
   "Show credit field in project create dialog.": {
     "description": "features/FeaturesDescription.ts",
     "message": "Show credit field in project create dialog."
@@ -13292,7 +13324,7 @@
     "message": "Starting"
   },
   "State": {
-    "description": "administration/hooks/HooksList.tsx, administration/hooks/HooksListFilter.tsx, administration/remote-offering-sync/RemoteOfferingSyncList.tsx, broadcasts/BroadcastFilter.tsx, broadcasts/BroadcastList.tsx, customer/team/CustomerPermissionsReviewList.tsx, invitations/InvitationStateFilter.tsx, invitations/UserPermissionRequestsList.tsx, invoices/list/BillingRecordsList.tsx, invoices/list/InvoicesFilter.tsx, invoices/list/InvoicesList.tsx, maintenance/MaintenanceList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/list/OfferingsFilter.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/integration/OfferingScopeState.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/orders/list/OrdersTableComponent.tsx, marketplace/orders/list/ResourceOrders.tsx, marketplace/resources/lexis/BasicLexisLinkList.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/ProviderResourcesFilter.tsx, marketplace/resources/list/ProviderResourcesList.tsx, marketplace/resources/list/utils.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/ProviderCampaignFilter.tsx, marketplace/service-providers/ProviderOfferingsFilter.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, marketplace-remote/ProjectUpdateRequestListFilter.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-floating-ips/FloatingIpsList.tsx, openstack/openstack-network/TenantNetworksList.tsx, openstack/openstack-security-groups/SecurityGroupsList.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-subnet/TenantSubnetsList.tsx, openstack/openstack-tenant/TenantInstancesList.tsx, openstack/openstack-tenant/TenantRoutersList.tsx, openstack/openstack-volume/InstanceVolumesList.tsx, openstack/openstack-volume/TenantVolumesList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/manage/EditEndDateDialog.tsx, proposals/CallsAvailableOfferingsPage.tsx, proposals/PublicCallsList.tsx, proposals/call-management/CallAllFilters.tsx, proposals/call-management/CallManagementPage.tsx, proposals/details/CallRoundsList.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/proposal/CustomerProposalsList.tsx, proposals/proposal/ProposalsTableFilter.tsx, proposals/proposal/UserProposalsList.tsx, proposals/review/CustomerReviewsList.tsx, proposals/review/ReviewsTableFilter.tsx, proposals/review/UserReviewsList.tsx, proposals/round/proposals/ProposalsList.tsx, proposals/update/offerings/CallOfferingsSection.tsx, proposals/update/rounds/CallRoundsList.tsx, rancher/ClusterProjectList.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/ClusterWorkloadsList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, rancher/node/ClusterNodesList.tsx, rancher/template/ClusterTemplateList.tsx, resource/summary/ResourceSummaryBase.tsx, slurm/details/AllocationJobsTable.tsx, user/UserPermissionRequestsList.tsx, user/UserPermissionRequestsListFilter.tsx, user/affiliations/SummaryResourcesTable.tsx, user/hooks/HooksList.tsx, vmware/DisksList.tsx, vmware/PortsList.tsx",
+    "description": "administration/hooks/HooksList.tsx, administration/hooks/HooksListFilter.tsx, administration/remote-offering-sync/RemoteOfferingSyncList.tsx, broadcasts/BroadcastFilter.tsx, broadcasts/BroadcastList.tsx, core/PermissionsReviewsList.tsx, invitations/InvitationStateFilter.tsx, invitations/UserPermissionRequestsList.tsx, invoices/list/BillingRecordsList.tsx, invoices/list/InvoicesFilter.tsx, invoices/list/InvoicesList.tsx, maintenance/MaintenanceList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/details/OfferingResourcesFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/list/OfferingsFilter.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/integration/OfferingScopeState.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/orders/list/OrdersTableComponent.tsx, marketplace/orders/list/ResourceOrders.tsx, marketplace/resources/lexis/BasicLexisLinkList.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/ProviderResourcesFilter.tsx, marketplace/resources/list/ProviderResourcesList.tsx, marketplace/resources/list/utils.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/ProviderCampaignFilter.tsx, marketplace/service-providers/ProviderOfferingsFilter.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, marketplace-remote/ProjectUpdateRequestListFilter.tsx, marketplace-remote/ProjectUpdateRequestsList.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-floating-ips/FloatingIpsList.tsx, openstack/openstack-network/TenantNetworksList.tsx, openstack/openstack-security-groups/SecurityGroupsList.tsx, openstack/openstack-server-groups/ServerGroupsList.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-subnet/TenantSubnetsList.tsx, openstack/openstack-tenant/TenantInstancesList.tsx, openstack/openstack-tenant/TenantRoutersList.tsx, openstack/openstack-volume/InstanceVolumesList.tsx, openstack/openstack-volume/TenantVolumesList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/manage/EditEndDateDialog.tsx, proposals/CallsAvailableOfferingsPage.tsx, proposals/PublicCallsList.tsx, proposals/call-management/CallAllFilters.tsx, proposals/call-management/CallManagementPage.tsx, proposals/details/CallRoundsList.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/proposal/CustomerProposalsList.tsx, proposals/proposal/ProposalsTableFilter.tsx, proposals/proposal/UserProposalsList.tsx, proposals/review/CustomerReviewsList.tsx, proposals/review/ReviewsTableFilter.tsx, proposals/review/UserReviewsList.tsx, proposals/round/proposals/ProposalsList.tsx, proposals/update/offerings/CallOfferingsSection.tsx, proposals/update/rounds/CallRoundsList.tsx, rancher/ClusterProjectList.tsx, rancher/cluster/ClusterIngressesList.tsx, rancher/cluster/ClusterServicesList.tsx, rancher/cluster/ClusterWorkloadsList.tsx, rancher/cluster/apps/ClusterApplicationsList.tsx, rancher/cluster/hpas/ClusterHPAList.tsx, rancher/node/ClusterNodesList.tsx, rancher/template/ClusterTemplateList.tsx, resource/summary/ResourceSummaryBase.tsx, slurm/details/AllocationJobsTable.tsx, user/UserPermissionRequestsList.tsx, user/UserPermissionRequestsListFilter.tsx, user/affiliations/SummaryResourcesTable.tsx, user/hooks/HooksList.tsx, vmware/DisksList.tsx, vmware/PortsList.tsx",
     "message": "State"
   },
   "Static routes update was scheduled.": {
@@ -14775,9 +14807,9 @@
     "description": "navigation/AppFooter.tsx",
     "message": "Unable to check version update: {error}"
   },
-  "Unable to close review.": {
-    "description": "customer/team/PendingReviewDialog.tsx",
-    "message": "Unable to close review."
+  "Unable to complete review.": {
+    "description": "core/PendingMembershipReviewDialog.tsx, customer/team/ReviewCloseButton.tsx",
+    "message": "Unable to complete review."
   },
   "Unable to confirm email.": {
     "description": "user/support/UserEmailChangeCallback.tsx",
@@ -15406,10 +15438,6 @@
   "Unable to perform operation.": {
     "description": "customer/details/CustomerCallManagerPanel.tsx, marketplace/orders/actions/OrdersBulkActions.tsx",
     "message": "Unable to perform operation."
-  },
-  "Unable to perform review.": {
-    "description": "customer/team/ReviewCloseButton.tsx",
-    "message": "Unable to perform review."
   },
   "Unable to post comment.": {
     "description": "issues/comments/CommentFormDialog.tsx",
@@ -17784,7 +17812,7 @@
     "message": "payments"
   },
   "permission reviews": {
-    "description": "customer/team/CustomerPermissionsReviewList.tsx",
+    "description": "core/PermissionsReviewsList.tsx",
     "message": "permission reviews"
   },
   "plans": {
