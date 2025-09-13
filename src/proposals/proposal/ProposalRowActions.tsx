@@ -28,11 +28,12 @@ const CreateReviewDialog = lazyComponent(() =>
 
 export const ProposalRowActions = ({ row, refetch }) => {
   const user = useSelector(getUser);
-  const canCreateReview = hasPermission(user, {
-    permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
-    scopeId: row.call_uuid,
-    callOrganizerId: row.call_managing_organisation_uuid,
-  });
+  const canCreateReview =
+    hasPermission(user, {
+      permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
+      scopeId: row.call_uuid,
+      callOrganizerId: row.call_managing_organisation_uuid,
+    }) && !['accepted', 'rejected', 'canceled'].includes(row.state);
 
   const dispatch = useDispatch();
 
