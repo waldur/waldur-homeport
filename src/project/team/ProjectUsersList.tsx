@@ -9,13 +9,13 @@ import { useTable } from '@waldur/table/useTable';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { PROJECT_USERS_LIST_FILTER_FORM_ID } from '../constants';
-import { PROJECT_TEAM_TABLE_TABS } from '../utils';
 
 import { ProjectPermisionActions } from './ProjectPermisionActions';
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';
 import { ProjectUsersBulkRemoveButton } from './ProjectUsersBulkRemoveButton';
 import { ProjectUsersListFilter } from './ProjectUsersListFilter';
 import { SyncMembersButton } from './SyncMembersButton';
+import { useTeamTableTabs } from './tabs';
 import { TeamDropdownActions } from './TeamDropdownActions';
 
 const mandatoryFields = [
@@ -69,12 +69,14 @@ export const ProjectUsersList = ({
     mandatoryFields,
   });
 
+  const tabs = useTeamTableTabs(_project);
+
   return (
     <TeamTableComponent<UserRoleDetails>
       {...tableProps}
       context="project"
       userFieldPrefix="user_"
-      tabs={!hideTabs && PROJECT_TEAM_TABLE_TABS}
+      tabs={!hideTabs && tabs}
       tableActions={
         <TeamDropdownActions project={_project} refetch={tableProps.fetch} />
       }

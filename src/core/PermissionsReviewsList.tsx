@@ -1,12 +1,14 @@
 import { FunctionComponent } from 'react';
+import { useSelector } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { ReviewCloseButton } from '@waldur/customer/team/ReviewCloseButton';
 import { useTeamTableTabs } from '@waldur/customer/team/tabs';
 import { translate } from '@waldur/i18n';
-import { PROJECT_TEAM_TABLE_TABS } from '@waldur/project/utils';
+import { useTeamTableTabs as useProjectTeamTableTabs } from '@waldur/project/team/tabs';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { getProject } from '@waldur/workspace/selectors';
 
 interface PermissionsReviewsListProps {
   tableProps: ReturnType<typeof useTable>;
@@ -16,8 +18,9 @@ interface PermissionsReviewsListProps {
 export const PermissionsReviewsList: FunctionComponent<
   PermissionsReviewsListProps
 > = ({ tableProps, scope }) => {
+  const project = useSelector(getProject);
   const tableTabs =
-    scope === 'project' ? PROJECT_TEAM_TABLE_TABS : useTeamTableTabs();
+    scope === 'project' ? useProjectTeamTableTabs(project) : useTeamTableTabs();
   return (
     <Table
       {...tableProps}

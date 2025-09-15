@@ -5,6 +5,8 @@ import FormTable, { FormTableItemProps } from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { projectKindOptions } from '../utils';
+
 import { FieldEditButton } from './FieldEditButton';
 import { ProjectAvatar } from './ProjectAvatar';
 
@@ -48,6 +50,11 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             label: translate('Description'),
             key: 'description',
             value: project.description || 'N/A',
+          },
+          {
+            label: translate('Project kind'),
+            key: 'kind',
+            value: projectKindOptions[project.kind]?.label || 'N/A',
           },
           user.is_staff && {
             label: translate('Maximum number of service accounts'),

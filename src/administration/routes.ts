@@ -413,6 +413,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-course-accounts',
+    url: 'course-accounts/?tab',
+    parent: 'admin-accounts',
+    component: lazyComponent(() =>
+      import('./CourseAccountsTable').then((module) => ({
+        default: module.CourseAccountsTable,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Course accounts'),
+      feature: InvitationsFeatures.show_course_accounts,
+    },
+  },
+
+  {
     name: 'admin-marketplace-category-groups',
     url: 'category-groups',
     parent: 'admin-marketplace',

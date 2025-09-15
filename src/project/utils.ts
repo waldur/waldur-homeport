@@ -1,7 +1,9 @@
+import { GlobeSimpleIcon, GraduationCapIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import {
   invoiceItemsCostsList,
+  KindEnum,
   marketplaceProjectEstimatedCostPoliciesList,
   projectCreditsList,
 } from 'waldur-js-client';
@@ -15,12 +17,9 @@ import {
   getCreditChartAndOptions,
   getCostChartAndOptions,
 } from '@waldur/dashboard/utils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { InvitationsFeatures, ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
-import store from '@waldur/store/store';
 import { Project, User } from '@waldur/workspace/types';
 
 async function getProjectCostData(project: Project) {
@@ -156,7 +155,7 @@ export const canEditProject = (user: User, context: { customer?; project? }) =>
     projectId: context?.project?.uuid,
   });
 
-const userHasProjectPermission = (permission) => (state) => {
+export const userHasProjectPermission = (permission) => (state) => {
   const user = state?.workspace?.user;
   const projectId = state?.workspace?.project?.uuid;
 
@@ -166,28 +165,26 @@ const userHasProjectPermission = (permission) => (state) => {
   });
 };
 
-export const PROJECT_TEAM_TABLE_TABS = [
-  {
-    key: 'users',
-    title: translate('Active'),
-    state: 'project-users',
+export const projectKindOptions: Record<
+  KindEnum,
+  { value: KindEnum; label; color; component }
+> = {
+  default: {
+    value: 'default',
+    label: translate('Regular'),
+    color: 'default',
+    component: null,
   },
-  {
-    key: 'project-invitations',
-    title: translate('Invitations'),
-    state: 'project-invitations',
+  course: {
+    value: 'course',
+    label: translate('Course'),
+    color: 'warning',
+    component: GraduationCapIcon,
   },
-  isFeatureVisible(ProjectFeatures.show_permission_reviews) &&
-    userHasProjectPermission(PermissionEnum.REVIEW_PROJECT_MEMBERSHIP)(
-      store.getState(),
-    ) && {
-      key: 'reviews',
-      title: translate('Permission reviews'),
-      state: 'project-permissions-reviews',
-    },
-  isFeatureVisible(InvitationsFeatures.show_service_accounts) && {
-    key: 'project-service-accounts',
-    title: translate('Service accounts'),
-    state: 'project-service-accounts',
+  public: {
+    value: 'public',
+    label: translate('Public'),
+    color: 'blue',
+    component: GlobeSimpleIcon,
   },
-].filter(Boolean);
+};
