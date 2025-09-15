@@ -16,6 +16,7 @@ import { GlobalProjectCreateButton } from '@waldur/project/create/GlobalProjectC
 import { ProjectImportButton } from '@waldur/project/import/ProjectImportButton';
 import { ProjectCard } from '@waldur/project/ProjectCard';
 import { ProjectEndDateField } from '@waldur/project/ProjectEndDateField';
+import { ProjectKindField } from '@waldur/project/ProjectKindField';
 import { ProjectLink } from '@waldur/project/ProjectLink';
 import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
 import { createFetcher } from '@waldur/table/api';
@@ -76,7 +77,7 @@ export const ProjectsList = () => {
       title: translate('Name'),
       orderField: 'name',
       render: ({ row }) => (
-        <ProjectLink row={row} onClick={() => onClickDetails(row)} />
+        <ProjectLink row={row} onClick={() => onClickDetails(row)} showKind />
       ),
 
       copyField: (row) => row.name,
@@ -233,6 +234,14 @@ export const ProjectsList = () => {
       export: (row) => (row.is_industry ? translate('Yes') : translate('No')),
     });
   }
+
+  columns.push({
+    title: translate('Type'),
+    render: ProjectKindField,
+    keys: ['kind'],
+    id: 'kind',
+    export: 'kind',
+  });
 
   return (
     <Table

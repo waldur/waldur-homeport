@@ -59,3 +59,12 @@ export const hasManageServiceAccountPermission =
         }))
     );
   };
+
+export const hasManageCourseAccountPermission =
+  (project) => (state: RootState) => {
+    const user = getUser(state);
+    return hasPermission(user, {
+      permission: PermissionEnum.MANAGE_COURSE_ACCOUNT,
+      projectId: project.uuid,
+    });
+  };

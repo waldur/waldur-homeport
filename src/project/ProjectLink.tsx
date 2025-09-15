@@ -1,16 +1,23 @@
 import { FactoryIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
 import { Project } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { Link } from '@waldur/core/Link';
+import { Tip } from '@waldur/core/Tooltip';
 import { AtLeast } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
+import { translate } from '@waldur/i18n';
+
+import { projectKindOptions } from './utils';
 
 interface OwnProps {
   row: AtLeast<Project, 'uuid' | 'name'>;
   className?: string;
   showIndustry?: boolean;
+  showKind?: boolean;
   onClick?(): void;
 }
 
@@ -19,24 +26,44 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
   className,
   children,
   showIndustry = true,
+  showKind,
   onClick,
-}) => (
-  <>
-    <Link
-      state="project.dashboard"
-      params={{ uuid: row.uuid }}
-      label={children ? undefined : row.name}
-      onClick={onClick}
-      className={className}
-    >
-      {children}
-    </Link>
-    {showIndustry &&
-      isFeatureVisible(ProjectFeatures.show_industry_flag) &&
-      row.is_industry && (
-        <span className="svg-icon svg-icon-4 ms-3">
-          <FactoryIcon />
-        </span>
+}) => {
+  const kind = projectKindOptions[row.kind];
+  return (
+    <div className="d-flex align-items-center gap-1">
+      <Link
+        state="project.dashboard"
+        params={{ uuid: row.uuid }}
+        label={children ? undefined : row.name}
+        onClick={onClick}
+        className={classNames(className, !children && 'ellipsis')}
+      >
+        {children}
+      </Link>
+      {showKind && row.kind !== 'default' && kind && (
+        <Badge
+          variant={kind.color}
+          onlyIcon
+          pill
+          outline
+          className="align-middle"
+        >
+          <Tip
+            id={'tip-kind-' + row.uuid}
+            label={kind.label + ' ' + translate('Project')}
+          >
+            <kind.component weight="bold" size={12} />
+          </Tip>
+        </Badge>
       )}
-  </>
-);
+      {showIndustry &&
+        isFeatureVisible(ProjectFeatures.show_industry_flag) &&
+        row.is_industry && (
+          <span className="svg-icon svg-icon-4">
+            <FactoryIcon />
+          </span>
+        )}
+    </div>
+  );
+};

@@ -2,9 +2,11 @@ import { UIView } from '@uirouter/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures, InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
+import { getProject } from '@waldur/workspace/selectors';
 
 import { loadProject } from './resolve';
 
@@ -168,6 +170,30 @@ export const states: StateDeclaration[] = [
       skipBreadcrumb: true,
       breadcrumb: () => translate('Service accounts'),
       feature: InvitationsFeatures.show_service_accounts,
+    },
+  },
+  {
+    name: 'project-course-accounts',
+    url: 'course-accounts/',
+    component: lazyComponent(() =>
+      import('./course-accounts/ProjectCourseAccountsList').then((module) => ({
+        default: module.ProjectCourseAccountsList,
+      })),
+    ),
+    parent: 'project-team',
+    data: {
+      skipBreadcrumb: true,
+      breadcrumb: () => translate('Course accounts'),
+      feature: InvitationsFeatures.show_course_accounts,
+      permissions: [
+        (state) => {
+          const project = getProject(state);
+          if (isFeatureVisible(InvitationsFeatures.show_course_accounts)) {
+            return project.kind === 'course';
+          }
+          return false;
+        },
+      ],
     },
   },
   {

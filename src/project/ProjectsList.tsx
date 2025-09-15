@@ -17,6 +17,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
 import { ProjectCostField } from './ProjectCostField';
+import { ProjectKindField } from './ProjectKindField';
 import { ProjectLink } from './ProjectLink';
 import { ProjectsTableActions } from './ProjectsTableActions';
 
@@ -40,12 +41,12 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
   const columns: Column[] = [
     {
       title: translate('Name'),
-      render: ProjectLink,
+      render: ({ row }) => <ProjectLink row={row} showKind />,
       copyField: (row) => row.name,
       orderField: 'name',
       export: 'name',
       id: 'name',
-      keys: ['uuid', 'name', 'is_industry'],
+      keys: ['uuid', 'name', 'is_industry', 'kind'],
     },
     {
       title: translate('Description'),
@@ -99,6 +100,14 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
       keys: ['billing_price_estimate'],
     });
   }
+
+  columns.push({
+    title: translate('Type'),
+    render: ProjectKindField,
+    export: 'kind',
+    id: 'kind',
+    keys: ['kind'],
+  });
 
   return (
     <Table

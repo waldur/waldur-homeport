@@ -15,6 +15,8 @@ import { InvitationCreateButton } from '@waldur/invitations/actions/create/Invit
 import { getTableState } from '@waldur/table/selectors';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { CourseAccountCreateButton } from '../course-accounts/CourseAccountCreateAction';
+
 import { AddUserButton } from './AddUserButton';
 import { hasCurrentCustomerPermission } from './utils';
 
@@ -98,6 +100,7 @@ export const TeamDropdownActions = ({
                 }
               />
             )}
+            <CourseAccountCreateButton project={project} refetch={refetch} />
           </>
         )}
       </Dropdown.Menu>

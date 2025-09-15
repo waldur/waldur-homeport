@@ -10,8 +10,8 @@ import { TeamDropdownActions } from '@waldur/customer/team/TeamDropdownActions';
 import { translate } from '@waldur/i18n';
 import { ProjectLink } from '@waldur/project/ProjectLink';
 import { ProjectPermissionsLogButton } from '@waldur/project/team/ProjectPermissionsLogButton';
+import { useTeamTableTabs as useProjectTeamTableTabs } from '@waldur/project/team/tabs';
 import { TeamDropdownActions as ProjectTeamDropdownActions } from '@waldur/project/team/TeamDropdownActions';
-import { PROJECT_TEAM_TABLE_TABS } from '@waldur/project/utils';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { TableProps } from '@waldur/table/types';
@@ -121,7 +121,9 @@ export const ServiceAccountsList: FC<ServiceAccountsProps> = ({
   });
 
   const tableTabs =
-    context === 'customer' ? useTeamTableTabs() : PROJECT_TEAM_TABLE_TABS;
+    context === 'customer'
+      ? useTeamTableTabs()
+      : useProjectTeamTableTabs(scope);
 
   return (
     <ServiceAccountsTableComponent

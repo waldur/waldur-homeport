@@ -22,9 +22,8 @@ import { RoleField } from '@waldur/user/affiliations/RoleField';
 import { useUser } from '@waldur/workspace/hooks';
 import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
-import { PROJECT_TEAM_TABLE_TABS } from '../utils';
-
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';
+import { useTeamTableTabs } from './tabs';
 import { TeamDropdownActions } from './TeamDropdownActions';
 
 const InvitationsListComponent: FunctionComponent = () => {
@@ -36,6 +35,9 @@ const InvitationsListComponent: FunctionComponent = () => {
     queryField: 'email',
   });
   const project = useSelector(getProject);
+
+  const tabs = useTeamTableTabs(project);
+
   return (
     <Table<Invitation>
       {...props}
@@ -80,7 +82,7 @@ const InvitationsListComponent: FunctionComponent = () => {
           render: ({ row }) => formatDate(row.expires),
         },
       ]}
-      tabs={PROJECT_TEAM_TABLE_TABS}
+      tabs={tabs}
       rowActions={({ row }) => (
         <InvitationActions invitation={row} refetch={props.fetch} />
       )}
