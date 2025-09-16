@@ -229,6 +229,7 @@ export interface TableProps<RowType = any> extends TableState {
   swapColumns?(column1: string, column2: string): void;
   initialMode?: 'grid' | 'table';
   standalone?: boolean;
+  standaloneActionsInTable?: boolean;
   hideClearFilters?: boolean;
   hideRefresh?: boolean;
   portal?: TablePortal;

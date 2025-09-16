@@ -1,5 +1,6 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 
 export const states: StateDeclaration[] = [
   {
@@ -42,6 +43,22 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       auth: true,
+    },
+  },
+
+  {
+    name: 'public.join-organization',
+    url: '/join-organization/',
+    component: lazyComponent(() =>
+      import('./join-organization/AvailableOrganizationsToJoin').then(
+        (module) => ({
+          default: module.AvailableOrganizationsToJoin,
+        }),
+      ),
+    ),
+    data: {
+      skipBreadcrumb: true,
+      ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },
 ];

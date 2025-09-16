@@ -89,7 +89,8 @@
   -webkit-box-orient: vertical;
 
   &-1 {
-    @extend .ellipsis;
+    @extend .ellipsis-lines;
+    -webkit-line-clamp: 1;
   }
   &-2 {
     @extend .ellipsis-lines;

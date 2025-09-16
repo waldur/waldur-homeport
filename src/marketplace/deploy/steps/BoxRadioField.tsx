@@ -1,6 +1,7 @@
 import { CaretDownIcon, CheckIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Select } from '@waldur/form/themed-select';
@@ -21,9 +22,13 @@ export interface BoxRadioChoice {
 interface BoxRadioFieldProps extends FormField {
   choices: BoxRadioChoice[];
   vertical?: boolean;
+  ellipsisTitle?: boolean;
   hasOptions?: boolean;
   hasImage?: boolean;
-  rightRadio?: boolean;
+  imagePlaceholder?: ReactNode;
+  leftRadio?: boolean;
+  hoverable?: boolean;
+  alignTop?: boolean;
 }
 
 const getRadioVersions = (choices: BoxRadioChoice[]) => {
@@ -38,9 +43,13 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
   input,
   choices,
   vertical,
+  ellipsisTitle,
   hasImage = true,
+  imagePlaceholder,
   hasOptions = true,
-  rightRadio,
+  leftRadio,
+  hoverable,
+  alignTop,
   ...rest
 }) => {
   const [selectedVersions, setSelectedVersions] = useState(() =>
@@ -75,7 +84,9 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
       <div
         className={
           'form-check-boxes-wrapper vertical' +
-          (rightRadio ? ' right-radio' : '')
+          (leftRadio ? ' left-radio' : '') +
+          (alignTop ? ' align-top' : '') +
+          (hoverable ? ' hoverable' : '')
         }
       >
         {choices.map((choice, index) => {
@@ -89,7 +100,11 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
           return (
             <div
               key={index}
-              className={'form-check-box' + (isChecked ? ' active' : '')}
+              className={
+                'form-check-box' +
+                (isChecked ? ' active' : '') +
+                (hasOptions ? ' flex-wrap' : '')
+              }
               onClick={() => onChange(selectedVersions[index].value)}
               role="radio"
               aria-checked={isChecked}
@@ -103,6 +118,8 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   <div className="form-check-wrapper">
                     {choice.image ? (
                       choice.image
+                    ) : imagePlaceholder ? (
+                      imagePlaceholder
                     ) : typeof choice.label === 'string' ? (
                       <ImagePlaceholder width="48px" height="48px">
                         {choice.label.toUpperCase().substring(0, 4)}
@@ -115,12 +132,22 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   </div>
                 )}
                 <div>
-                  <p className="fs-6 fw-bold mb-0">{choice.label}</p>
-                  {Boolean(choice.metadata) && (
-                    <p className="fs-6 fw-semibold text-muted mb-0">
-                      {choice.metadata}
-                    </p>
-                  )}
+                  <p
+                    className={classNames(
+                      'fs-6 fw-bold mb-0',
+                      ellipsisTitle && 'ellipsis-lines-1',
+                    )}
+                  >
+                    {choice.label}
+                  </p>
+                  {Boolean(choice.metadata) &&
+                    (['string', 'number'].includes(typeof choice.metadata) ? (
+                      <p className="fs-6 fw-semibold text-muted mb-0">
+                        {choice.metadata}
+                      </p>
+                    ) : (
+                      choice.metadata
+                    ))}
                 </div>
               </div>
               <div className="form-check-info">
@@ -154,7 +181,9 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
   }
 
   return (
-    <div className="form-check-boxes-wrapper">
+    <div
+      className={'form-check-boxes-wrapper' + (hoverable ? ' hoverable' : '')}
+    >
       {choices.map((choice, index) => {
         const isChecked = [choice.value]
           .concat((choice.options || []).map((x) => x.value))

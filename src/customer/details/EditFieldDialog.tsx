@@ -119,6 +119,8 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                 name="abbreviation"
                 label={translate('Abbreviation')}
               />
+            ) : props.resolve.name === 'description' ? (
+              <TextField name="description" label={translate('Description')} />
             ) : props.resolve.name === 'organization_group' ? (
               groupsLoading ? (
                 <LoadingSpinner />

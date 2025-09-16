@@ -1,4 +1,6 @@
 .form-check-boxes-wrapper {
+  height: 100%;
+
   // Horizontal items
   &:not(.vertical) {
     display: flex;
@@ -9,7 +11,8 @@
       position: relative;
       width: 145px;
       border-radius: 0.5rem;
-      border: 2px solid var(--bs-border-color);
+      border: 1px solid var(--bs-border-color);
+      margin: 1px;
       margin-bottom: 1.5rem;
       transition: all 0.2s ease-in-out;
       cursor: pointer;
@@ -19,6 +22,7 @@
       }
 
       &.active {
+        outline: 1px solid var(--bs-primary);
         border-color: var(--bs-primary) !important;
 
         .form-check-info {
@@ -107,18 +111,19 @@
   &.vertical {
     .form-check-box {
       display: flex;
-      flex-wrap: wrap;
       gap: 16px;
       column-gap: 16px;
+      height: 100%;
       position: relative;
       border-radius: 8px;
-      border: 2px solid var(--bs-border-color);
+      border: 1px solid var(--bs-border-color);
       padding: 1.23rem;
-      margin-bottom: 8px;
+      margin: 1px 1px 8px 1px;
       transition: all 0.2s ease-in-out;
       cursor: pointer;
 
       &.active {
+        outline: 1px solid var(--bs-primary);
         border-color: var(--bs-primary) !important;
       }
 
@@ -153,14 +158,24 @@
       }
     }
 
-    // Radio button at the right
-    &.right-radio {
+    // Radio button at the left
+    &.left-radio {
       .form-check-box {
         flex-direction: row-reverse;
         align-items: baseline;
         gap: 10px;
         column-gap: 10px;
       }
+    }
+  }
+
+  &.hoverable .form-check-box:hover {
+    border: 1px solid var(--bs-primary);
+  }
+
+  &.align-top {
+    .form-check-header {
+      align-items: start !important;
     }
   }
 }

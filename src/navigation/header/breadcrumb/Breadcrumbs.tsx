@@ -105,6 +105,7 @@ export const Breadcrumbs = () => {
             truncate={item.truncate}
             active={item.active}
             maxLength={item.maxLength}
+            isBack={breadcrumbItems.length === 1}
           >
             {item.text}
           </BreadcrumbItem>

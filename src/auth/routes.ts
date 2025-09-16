@@ -15,7 +15,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'login',
-    url: '/login/?disableAutoLogin',
+    url: '/login/?disableAutoLogin&_invitation',
     component: lazyComponent(() =>
       import('./LandingPage').then((module) => ({
         default: module.LandingPage,

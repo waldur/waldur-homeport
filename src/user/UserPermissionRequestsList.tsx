@@ -15,7 +15,8 @@ import {
 } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { RoleField } from './affiliations/RoleField';
+import { UserPermissionRequestActions } from './UserPermissionRequestActions';
+import { UserPermissionRequestExpandableRow } from './UserPermissionRequestExpandableRow';
 import { UserPermissionRequestsListFilter } from './UserPermissionRequestsListFilter';
 import { getStates } from './UserPermissionRequestsStateFilter';
 
@@ -43,36 +44,24 @@ export const UserPermissionRequestsList = () => {
   });
   const columns = [
     {
-      title: translate('Created at'),
-      render: ({ row }) => formatDateTime(row.created),
-    },
-    {
-      title: translate('Organization'),
+      title: translate('Name'),
       render: ({ row }) => row.customer_name,
     },
     {
-      title: translate('Scope'),
-      render: ({ row }) => row.scope_name || 'N/A',
+      title: translate('Date of request'),
+      render: ({ row }) => formatDateTime(row.created),
     },
     {
-      title: translate('Role'),
-      render: RoleField,
-    },
-    {
-      title: translate('Reviewed by'),
-      render: ({ row }) => row.reviewed_by_full_name || 'N/A',
-    },
-    {
-      title: translate('Reviewed at'),
+      title: translate('Type'),
       render: ({ row }) =>
-        row.reviewed_at ? formatDateTime(row.reviewed_at) : 'N/A',
+        row.role_name.startsWith('PROJECT')
+          ? translate('Project')
+          : row.role_name.startsWith('CUSTOMER')
+            ? translate('Organization')
+            : row.role_name,
     },
     {
-      title: translate('Comment'),
-      render: ({ row }) => row.review_comment || 'N/A',
-    },
-    {
-      title: translate('State'),
+      title: translate('Status'),
       render: PermissionRequestStateField,
       filter: 'state',
       inlineFilter: (row) => getStates().filter((s) => s.value === row.state),
@@ -86,6 +75,8 @@ export const UserPermissionRequestsList = () => {
       verboseName={translate('user permission requests')}
       showPageSizeSelector={true}
       filters={<UserPermissionRequestsListFilter />}
+      rowActions={UserPermissionRequestActions}
+      expandableRow={UserPermissionRequestExpandableRow}
     />
   );
 };

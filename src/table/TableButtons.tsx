@@ -94,7 +94,8 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
           )}
         </div>
       )}
-      {(!props.standalone || isSm) && props.tableActions}
+      {(!props.standalone || props.standaloneActionsInTable || isSm) &&
+        props.tableActions}
     </>
   );
 };
