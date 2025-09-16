@@ -84,7 +84,7 @@ const ProjectKindCard = ({ project }: ProjectProfileProps) => {
         <p className="fs-6 text-muted">
           {project.kind === 'course'
             ? translate(
-                'This course project features structured learning, role-based teamwork, and automated progress tracking.',
+                'This course project enables creation of short-lived course accounts.',
               )
             : project.kind === 'public'
               ? translate(
