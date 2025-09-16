@@ -6,7 +6,7 @@
   background: white;
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 10px 0 10px;
 }
 
 .login-body {
@@ -20,9 +20,24 @@
 }
 
 .login-footer {
+  height: 64px;
   display: flex;
   justify-content: space-between;
-  padding: 15px;
+  padding: 15px 32px;
+  font-size: 1.075rem;
+  font-weight: 500;
+  border-top: 1px solid var(--bs-border-color);
+  margin: 0 -10px;
+}
+
+.login-footer.footer-top {
+  margin-top: 2.5rem;
+}
+
+.login-footer .menu {
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .login-footer select {

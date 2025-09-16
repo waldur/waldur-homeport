@@ -44,9 +44,9 @@ export const BackendHealthStatusIndicator: FC = () => {
         }
       >
         {isWorking(value) ? (
-          <CheckCircleIcon size={20} className="text-success" />
+          <CheckCircleIcon size={20} weight="bold" className="text-success" />
         ) : (
-          <XCircleIcon size={20} className="text-danger" />
+          <XCircleIcon size={20} weight="bold" className="text-danger" />
         )}
       </button>
     </span>

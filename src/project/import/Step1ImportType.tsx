@@ -35,7 +35,7 @@ export const Step1ImportType: FC<WizardFormStepProps> = (props) => {
           vertical
           hasOptions={false}
           hasImage={false}
-          rightRadio
+          leftRadio
           required
           onChange={(value) => {
             if (value !== wizardProps.formValues.import_type) {

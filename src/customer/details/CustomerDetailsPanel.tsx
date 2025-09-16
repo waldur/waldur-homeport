@@ -43,6 +43,11 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
           key: 'abbreviation',
           value: props.customer.abbreviation,
         },
+        {
+          label: translate('Description'),
+          key: 'description',
+          value: props.customer.description,
+        },
         isFeatureVisible(CustomerFeatures.show_domain)
           ? {
               label: translate('Domain name'),

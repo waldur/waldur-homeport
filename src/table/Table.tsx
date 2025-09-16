@@ -166,16 +166,32 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
         toggleFilterMenu={this.toggleFilterMenu}
       >
         {this.props.standalone && (
-          <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-            <Stack direction="horizontal" gap={2}>
-              <h1 className="mb-0">
-                {this.props.title || this.props.alterTitle}
-              </h1>
-              <TableRefreshButton {...this.props} />
-            </Stack>
-            <div className="d-none d-sm-flex gap-3">
-              {this.props.tableActions}
+          <div className="table-standalone-header d-flex justify-content-between gap-4">
+            <div>
+              <Stack direction="horizontal" gap={2}>
+                <h1 className="mb-0 fs-1x">
+                  {this.props.title || this.props.alterTitle}
+                </h1>
+                {!this.props.hideRefresh && (
+                  <TableRefreshButton {...this.props} />
+                )}
+              </Stack>
+              {Boolean(this.props.subtitle) && (
+                <p
+                  className={classNames(
+                    'fs-4 fw-normal d-block text-muted mb-0',
+                    this.props.hideRefresh && 'mt-2',
+                  )}
+                >
+                  {this.props.subtitle}
+                </p>
+              )}
             </div>
+            {!this.props.standaloneActionsInTable && (
+              <div className="d-none d-sm-flex gap-3">
+                {this.props.tableActions}
+              </div>
+            )}
           </div>
         )}
         <Card

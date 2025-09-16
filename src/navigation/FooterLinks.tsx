@@ -12,6 +12,9 @@ import { MenuComponent } from '@waldur/metronic/components';
 import { DocsLink } from '@waldur/navigation/header/DocsLink';
 import { IssuesLink } from '@waldur/navigation/IssuesLink';
 import { showSuccess } from '@waldur/store/notify';
+import { useUser } from '@waldur/workspace/hooks';
+
+import { JoinOrganizationFooterLink } from './JoinOrganizationFooterLink';
 
 const SupportSubMenuItem = ({ title, onCopy }) =>
   title && (
@@ -31,6 +34,8 @@ const SupportSubMenuItem = ({ title, onCopy }) =>
 
 export const FooterLinks = () => {
   const dispatch = useDispatch();
+
+  const user = useUser();
 
   const showSupport =
     ENV.plugins.WALDUR_CORE.DOCS_URL ||
@@ -78,6 +83,9 @@ export const FooterLinks = () => {
           )}
         </>
       )}
+
+      {!!user && <JoinOrganizationFooterLink />}
+
       <li className="menu-item" data-kt-menu-trigger="click">
         <Link className="menu-link px-2" state="about.privacy">
           {translate('Privacy policy')}

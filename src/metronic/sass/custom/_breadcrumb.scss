@@ -5,6 +5,7 @@
   .breadcrumb-item {
     text-wrap: nowrap;
     min-width: 20px;
+    font-size: $font-size-lg;
 
     &:last-child {
       flex-grow: 1;
@@ -13,6 +14,10 @@
     &:hover a {
       color: $brand;
       text-decoration: underline !important;
+    }
+
+    .breadcrumb-back {
+      margin-right: 8px;
     }
   }
 }

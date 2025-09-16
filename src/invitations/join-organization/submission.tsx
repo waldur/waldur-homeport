@@ -1,0 +1,67 @@
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
+
+import { FieldErrorMessage } from '@waldur/form/FieldError';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
+import { showErrorResponse } from '@waldur/store/notify';
+
+import { clearGroupInvitationToken } from '../InvitationStorage';
+import { submitGroupRequest } from '../utils';
+
+export const requestToAccessOrganization = (
+  groupInvitationUuid: string,
+  dispatch,
+) =>
+  submitGroupRequest(groupInvitationUuid)
+    .then(async (groupInvitation) => {
+      clearGroupInvitationToken();
+      await waitForConfirmation(
+        dispatch,
+        translate('Request has been sent for approval'),
+        translate(
+          "Your request to join the organization {name} has been submitted. You’ll receive a notification once it's reviewed and approved.",
+          { name: <strong>{groupInvitation.scope_name || 'N/A'}</strong> },
+          formatJsxTemplate,
+        ),
+        {
+          type: 'success',
+          size: 'sm',
+          positiveButton: translate('OK'),
+          onlyPositiveButton: true,
+          positiveButtonVariant: 'primary w-95px',
+          iconNode: <CheckCircleIcon weight="bold" />,
+        },
+      );
+    })
+    .catch(async (err) => {
+      clearGroupInvitationToken();
+      if (err?.[0] && err?.[0].includes('Request has been created already')) {
+        dispatch(showErrorResponse(err, translate('Something went wrong')));
+      } else {
+        const formattedMessage = (
+          <div>
+            <p>
+              {translate(
+                'You can’t join this organization with your current account details. Access is limited to certain users as defined by the organization manager.',
+              )}
+            </p>
+            <p className="fw-bolder">{translate('Restriction details')}:</p>
+            <FieldErrorMessage error={err} />
+          </div>
+        );
+
+        await waitForConfirmation(
+          dispatch,
+          translate('Access restricted'),
+          formattedMessage,
+          {
+            type: 'danger',
+            size: 'sm',
+            positiveButton: translate('Cancel request'),
+            onlyPositiveButton: true,
+            positiveButtonVariant: 'light-danger',
+            iconNode: <XCircleIcon weight="bold" />,
+          },
+        );
+      }
+    });

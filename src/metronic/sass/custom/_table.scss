@@ -280,8 +280,7 @@
   }
 
   &.grid-table .table-container {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    overflow-x: hidden;
   }
 
   .table-filter {
@@ -539,6 +538,11 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
       padding-right: $mobile-spacing !important;
     }
   }
+
+  // Standalone table header
+  .table-standalone-header {
+    margin-bottom: $mobile-spacing;
+  }
 }
 
 // Dark mode
@@ -566,6 +570,8 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 
 // Standalone table header
 .table-standalone-header {
+  margin-bottom: get($content-spacing, desktop);
+
   .btn {
     height: 44px;
     font-size: $input-btn-font-size-lg;
