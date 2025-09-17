@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Project } from 'waldur-js-client';
 
+import { ENV } from '@waldur/core/config';
 import FormTable, { FormTableItemProps } from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
@@ -51,7 +52,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             key: 'description',
             value: project.description || 'N/A',
           },
-          {
+          ENV.plugins.WALDUR_CORE.ENABLE_PROJECT_KIND_COURSE && {
             label: translate('Project kind'),
             key: 'kind',
             value: projectKindOptions[project.kind]?.label || 'N/A',

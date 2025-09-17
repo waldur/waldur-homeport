@@ -13103,6 +13103,10 @@
     "description": "features/FeaturesDescription.ts",
     "message": "Show industry flag."
   },
+  "Show kind field in project create dialog.": {
+    "description": "features/FeaturesDescription.ts",
+    "message": "Show kind field in project create dialog."
+  },
   "Show less": {
     "description": "core/TruncatedDescription.tsx, navigation/sidebar/ResourcesMenu.tsx",
     "message": "Show less"
@@ -14423,9 +14427,9 @@
     "description": "proposals/proposal/create/resource-requests-step/ResourceRequestTemplates.tsx",
     "message": "This call uses predefined resource templates. You can only select from the available templates below. Custom resource configurations are not allowed."
   },
-  "This course project features structured learning, role-based teamwork, and automated progress tracking.": {
+  "This course project enables creation of short-lived course accounts.": {
     "description": "project/ProjectProfile.tsx",
-    "message": "This course project features structured learning, role-based teamwork, and automated progress tracking."
+    "message": "This course project enables creation of short-lived course accounts."
   },
   "This field is only editable when startup script is enabled.": {
     "description": "openstack/openstack-instance/deploy/FormStartupScriptStep.tsx",
