@@ -29,6 +29,7 @@ import { KindGroup } from './KindGroup';
 import { NameGroup } from './NameGroup';
 import { OecdCodeGroup } from './OecdCodeGroup';
 import { OrganizationGroup } from './OrganizationGroup';
+import { SlugGroup } from './SlugGroup';
 import { StartDateGroup } from './StartDateGroup';
 import { TypeGroup } from './TypeGroup';
 
@@ -39,6 +40,7 @@ interface ProjectCreateDialogProps {
 
 interface ProjectFormData {
   name: string;
+  slug?: string;
   description: string;
   end_date?: Date;
   start_date?: Date;
@@ -88,6 +90,7 @@ export const ProjectCreateDialog = ({
       const response = await projectsCreate({
         body: {
           name: formData.name,
+          slug: formData.slug,
           description: formData.description,
           end_date: formData.end_date
             ? formatISODate(formData.end_date)
@@ -168,6 +171,7 @@ export const ProjectCreateDialog = ({
                 error={error}
                 refetch={refetchProjects}
               />
+              <SlugGroup />
               <DescriptionGroup create />
               <IndustryGroup />
               <OecdCodeGroup />
