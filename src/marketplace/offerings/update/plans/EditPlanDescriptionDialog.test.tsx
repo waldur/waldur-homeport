@@ -11,6 +11,17 @@ vi.mock('waldur-js-client', () => ({
   marketplacePlansUpdate: vi.fn(),
 }));
 
+// Mock config to prevent errors from ENV access
+vi.mock('@waldur/core/config', () => ({
+  ENV: {
+    plugins: {
+      WALDUR_CORE: {
+        ENABLE_PROJECT_KIND_COURSE: false,
+      },
+    },
+  },
+}));
+
 // Mock store hooks
 vi.mock('@waldur/store/hooks', () => ({
   useNotify: () => ({
