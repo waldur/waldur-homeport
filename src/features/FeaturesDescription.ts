@@ -155,6 +155,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Show industry flag.'),
       },
       {
+        key: 'show_kind_in_create_dialog',
+        description: translate('Show kind field in project create dialog.'),
+      },
+      {
         key: 'show_permission_reviews',
         description: translate('Allows to show permission reviews tab and popups for projects.'),
       },
