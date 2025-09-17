@@ -3,7 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useMemo, useState } from 'react';
 import { Form } from 'react-final-form';
-import { projectCreditsCreate, projectsCreate } from 'waldur-js-client';
+import {
+  KindEnum,
+  projectCreditsCreate,
+  projectsCreate,
+} from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@waldur/core/api';
 import { formatISODate } from '@waldur/core/dateUtils';
@@ -21,6 +25,7 @@ import { DescriptionGroup } from './DescriptionGroup';
 import { EndDateGroup } from './EndDateGroup';
 import { ImageGroup } from './ImageGroup';
 import { IndustryGroup } from './IndustryGroup';
+import { KindGroup } from './KindGroup';
 import { NameGroup } from './NameGroup';
 import { OecdCodeGroup } from './OecdCodeGroup';
 import { OrganizationGroup } from './OrganizationGroup';
@@ -43,6 +48,7 @@ interface ProjectFormData {
   is_industry: boolean;
   image?: File | Blob;
   project_credit?: string;
+  kind?: KindEnum;
 }
 
 export const ProjectCreateDialog = ({
@@ -93,6 +99,7 @@ export const ProjectCreateDialog = ({
           type: formData.type?.url,
           oecd_fos_2007_code: formData.oecd_fos_2007_code?.value,
           is_industry: formData.is_industry,
+          kind: formData.kind,
           image: fileSerializer(formData.image),
         },
         ...formDataOptions,
@@ -164,6 +171,8 @@ export const ProjectCreateDialog = ({
               <DescriptionGroup create />
               <IndustryGroup />
               <OecdCodeGroup />
+              <KindGroup create />
+
               <TypeGroup create />
               <StartDateGroup create />
               <EndDateGroup create />
