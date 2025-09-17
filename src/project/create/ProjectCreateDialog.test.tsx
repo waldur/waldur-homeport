@@ -13,7 +13,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { projectTypesList, projectsCreate } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
-import * as config from '@waldur/core/config';
 import { Customer } from '@waldur/workspace/types';
 
 import { ProjectCreateDialog } from './ProjectCreateDialog';
@@ -21,7 +20,26 @@ import { ProjectCreateDialog } from './ProjectCreateDialog';
 // Mock API calls
 vi.mock('../api');
 vi.mock('waldur-js-client');
-vi.mock('@waldur/core/config');
+
+// Create a mocked config that can be modified in tests
+const mockConfig = vi.hoisted(() => ({
+  ENV: {
+    plugins: {
+      WALDUR_CORE: {
+        OECD_FOS_2007_CODE_MANDATORY: false,
+        ENABLE_PROJECT_KIND_COURSE: false,
+      },
+    },
+    FEATURES: {
+      project: {
+        show_description_in_create_dialog: true,
+        show_type_in_create_dialog: true,
+      },
+    },
+  },
+}));
+
+vi.mock('@waldur/core/config', () => mockConfig);
 
 describe('ProjectCreateDialog', () => {
   const mockedRefetch = vi.fn();
@@ -70,10 +88,12 @@ describe('ProjectCreateDialog', () => {
   };
 
   beforeEach(() => {
-    vi.mocked(config).ENV = {
+    // Reset to default config values
+    mockConfig.ENV = {
       plugins: {
         WALDUR_CORE: {
           OECD_FOS_2007_CODE_MANDATORY: false,
+          ENABLE_PROJECT_KIND_COURSE: false,
         },
       },
       FEATURES: {
@@ -82,7 +102,7 @@ describe('ProjectCreateDialog', () => {
           show_type_in_create_dialog: true,
         },
       },
-    } as any;
+    };
   });
 
   afterEach(() => {
@@ -102,10 +122,12 @@ describe('ProjectCreateDialog', () => {
   });
 
   it('should conceal disabled feature fields', async () => {
-    vi.mocked(config).ENV = {
+    // Modify the mock config for this specific test
+    mockConfig.ENV = {
       plugins: {
         WALDUR_CORE: {
           OECD_FOS_2007_CODE_MANDATORY: false,
+          ENABLE_PROJECT_KIND_COURSE: false,
         },
       },
       FEATURES: {
@@ -114,7 +136,8 @@ describe('ProjectCreateDialog', () => {
           show_type_in_create_dialog: true,
         },
       },
-    } as any;
+    };
+
     renderComponent();
     // Assert that the form fields are rendered
     await waitFor(() => {
