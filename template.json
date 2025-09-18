@@ -10300,7 +10300,7 @@
     "message": "Project roles"
   },
   "Project slug": {
-    "description": "marketplace/UserPluginOptionsForm.tsx",
+    "description": "marketplace/UserPluginOptionsForm.tsx, project/create/SlugGroup.tsx",
     "message": "Project slug"
   },
   "Project summary": {
@@ -13288,7 +13288,7 @@
     "message": "Slug has been successfully set."
   },
   "Slug": {
-    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, marketplace/resources/SetSlugDialog.tsx, marketplace/resources/details/utils.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectMetadata.tsx, table/slug.tsx",
+    "description": "customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, marketplace/resources/SetSlugDialog.tsx, marketplace/resources/details/utils.tsx, project/manage/EditFieldDialog.tsx, project/manage/ProjectGeneral.tsx, project/manage/ProjectMetadata.tsx, table/slug.tsx",
     "message": "Slug"
   },
   "Snapshot size limit": {

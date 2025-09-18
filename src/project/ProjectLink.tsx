@@ -29,7 +29,8 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
   showKind,
   onClick,
 }) => {
-  const kind = projectKindOptions[row.kind];
+  const options = projectKindOptions();
+  const kind = options[row.kind] || options.default;
   return (
     <div className="d-flex align-items-center gap-1">
       <Link
@@ -41,7 +42,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
       >
         {children}
       </Link>
-      {showKind && row.kind !== 'default' && kind && (
+      {showKind && row.kind !== 'default' && kind && kind.component && (
         <Badge
           variant={kind.color}
           onlyIcon

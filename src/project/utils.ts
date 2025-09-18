@@ -18,6 +18,7 @@ import {
   getCostChartAndOptions,
 } from '@waldur/dashboard/utils';
 import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { Project, User } from '@waldur/workspace/types';
@@ -165,26 +166,35 @@ export const userHasProjectPermission = (permission) => (state) => {
   });
 };
 
-export const projectKindOptions: Record<
-  KindEnum,
-  { value: KindEnum; label; color; component }
-> = {
-  default: {
-    value: 'default',
-    label: translate('Regular'),
-    color: 'default',
-    component: null,
-  },
-  course: {
-    value: 'course',
-    label: translate('Course'),
-    color: 'warning',
-    component: GraduationCapIcon,
-  },
-  public: {
-    value: 'public',
-    label: translate('Public'),
-    color: 'blue',
-    component: GlobeSimpleIcon,
-  },
+export const projectKindOptions = (): Partial<
+  Record<KindEnum, { value: KindEnum; label; color; component }>
+> => {
+  const baseOptions = {
+    default: {
+      value: 'default' as KindEnum,
+      label: translate('Regular'),
+      color: 'default',
+      component: null,
+    },
+    course: {
+      value: 'course' as KindEnum,
+      label: translate('Course'),
+      color: 'warning',
+      component: GraduationCapIcon,
+    },
+  };
+
+  if (isExperimentalUiComponentsVisible()) {
+    return {
+      ...baseOptions,
+      public: {
+        value: 'public' as KindEnum,
+        label: translate('Public'),
+        color: 'blue',
+        component: GlobeSimpleIcon,
+      },
+    };
+  }
+
+  return baseOptions;
 };

@@ -60,7 +60,11 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
           ENV.plugins.WALDUR_CORE.ENABLE_PROJECT_KIND_COURSE && {
             label: translate('Project kind'),
             key: 'kind',
-            value: projectKindOptions[project.kind]?.label || 'N/A',
+            value:
+              (
+                projectKindOptions()[project.kind] ||
+                projectKindOptions().default
+              )?.label || 'N/A',
           },
           user.is_staff && {
             label: translate('Maximum number of service accounts'),
