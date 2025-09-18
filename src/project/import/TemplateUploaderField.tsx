@@ -3,7 +3,11 @@ import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
 import { UploadContainer } from '@waldur/form/upload/UploadContainer';
 import { translate } from '@waldur/i18n';
 
-export const TemplateUploaderField = ({ input: { value, onChange }, meta }) => {
+export const TemplateUploaderField = ({
+  input: { value, onChange },
+  meta,
+  description = null,
+}) => {
   return (
     <>
       <UploadContainer
@@ -14,9 +18,11 @@ export const TemplateUploaderField = ({ input: { value, onChange }, meta }) => {
           'text/csv': ['.csv'],
         }}
         multiple={false}
-        className="mb-6"
+        className={description ? 'mb-3' : 'mb-6'}
         maxSize={10 * 1024 * 1024}
       />
+
+      {description}
 
       {value?.length > 0 && (
         <AttachmentItem

@@ -1828,7 +1828,7 @@
     "message": "Back to login"
   },
   "Back": {
-    "description": "broadcasts/BroadcastFooter.tsx, broadcasts/BroadcastSaveAsTemplateDialog.tsx, error/InvalidObjectPage.tsx, error/InvalidRoutePage.tsx, form/WizardForm.tsx, maintenance/create/MaintenanceSaveAsTemplateDialog.tsx, marketplace/offerings/import/WizardButtons.tsx, marketplace/resources/import/ResourceImportDialog.tsx",
+    "description": "broadcasts/BroadcastFooter.tsx, broadcasts/BroadcastSaveAsTemplateDialog.tsx, error/InvalidObjectPage.tsx, error/InvalidRoutePage.tsx, form/WizardForm.tsx, maintenance/create/MaintenanceSaveAsTemplateDialog.tsx, marketplace/offerings/import/WizardButtons.tsx, marketplace/resources/import/ResourceImportDialog.tsx, project/course-accounts/CourseAccountFormDialog.tsx",
     "message": "Back"
   },
   "Backend ID has been successfully set.": {
@@ -1882,6 +1882,10 @@
   "Basic": {
     "description": "support/marketplace.ts",
     "message": "Basic"
+  },
+  "Batch import": {
+    "description": "project/course-accounts/CourseAccountFormDialog.tsx",
+    "message": "Batch import"
   },
   "Batch processing allocation": {
     "description": "resource/utils.tsx",
@@ -2118,6 +2122,10 @@
   "CPU": {
     "description": "rancher/cluster/dashboard/ClusterStatistics.tsx, rancher/cluster/hpas/utils.ts, rancher/node/RancherNodeSummary.tsx",
     "message": "CPU"
+  },
+  "CSV should include headers: {headers}": {
+    "description": "project/course-accounts/Step1UploadFile.tsx",
+    "message": "CSV should include headers: {headers}"
   },
   "CSV": {
     "description": "marketplace/resources/usage/UsageExportDropdown.tsx",
@@ -3932,7 +3940,7 @@
     "message": "Description of the Waldur deployment."
   },
   "Description": {
-    "description": "administration/auto-provisioning-rules/Step3FinalConfig.tsx, administration/quick-shortcuts/QuickShortcutForm.tsx, administration/quick-shortcuts/QuickShortcutsList.tsx, administration/roles/RolesList.tsx, administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, azure/vm/AzureVirtualMachineForm.tsx, customer/details/AccessSubnetForm.tsx, customer/details/CustomerAccessControlPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, customer/service-accounts/ServiceAccountExpandableRow.tsx, customer/service-accounts/ServiceAccountFormDialog.tsx, invitations/join-organization/GroupInvitationDetails.tsx, issues/IssueDetails.tsx, issues/create/IssueCreateForm.tsx, issues/list/IssuesListExpandableRow.tsx, maintenance/MaintenanceExpandableRow.tsx, maintenance/create/AffectedOfferingsTable.tsx, maintenance/create/Step2SelectOfferings.tsx, marketplace/category/admin/AdminCategoriesPage.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/CategoryGroupsList.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, marketplace/details/OfferingTabs.tsx, marketplace/details/plan/PlanSection.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/actions/RequestActionDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/details/PublicOfferingInfo.tsx, marketplace/offerings/images/CreateImageDialog.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, marketplace/offerings/update/plans/PlanForm.tsx, marketplace/orders/details/OrderDetailsApprovalsTab.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, marketplace/resources/usage/utils.ts, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ServiceProviderManagement.tsx, marketplace/service-providers/ServiceProvidersList.tsx, marketplace/service-providers/details/ServiceProviderDetails.tsx, marketplace-checklist/categories/CategoriesTable.tsx, marketplace-checklist/categories/CategoryFormDialog.tsx, marketplace-checklist/checklists/ChecklistFormDialog.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-instance/deploy/FormSecurityGroupsField.tsx, openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx, openstack/openstack-security-groups/SecurityGroupRulesList.tsx, openstack/openstack-security-groups/SecurityGroupsList.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx, openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx, openstack/openstack-volume/TenantVolumeTypesList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectDashboard.tsx, project/ProjectsList.tsx, project/course-accounts/CourseAccountExpandableRow.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/details/ProjectDetailsDialog.tsx, project/import/Step5PreviewAndImport.tsx, project/manage/ProjectGeneral.tsx, proposals/CallsAvailableOfferingsPage.tsx, proposals/PublicCallExpandableRow.tsx, proposals/details/CallDescriptionCard.tsx, proposals/details/CallDocumentsCard.tsx, proposals/details/PublicCallDetailsContainer.tsx, proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx, proposals/update/configuration/ResourceTemplateExpandableRow.tsx, proposals/update/configuration/Step4FinalConfig.tsx, proposals/update/general/CallGeneralSection.tsx, rancher/ClusterProjectList.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/catalog/ClusterCatalogList.tsx, rancher/cluster/hpas/HPACreateDialog.tsx, rancher/cluster/hpas/HPAUpdateDialog.tsx, rancher/template/ApplicationConfiguration.tsx, rancher/template/CatalogTemplateList.tsx, rancher/template/ClusterTemplateList.tsx, resource/actions/base.ts, resource/summary/ResourceSummaryBase.tsx, slurm/RequestLimitsChangeDialog.tsx, user/support/EditFieldDialog.tsx, user/support/UserEditRows.tsx, user/support/UserList.tsx",
+    "description": "administration/auto-provisioning-rules/Step3FinalConfig.tsx, administration/quick-shortcuts/QuickShortcutForm.tsx, administration/quick-shortcuts/QuickShortcutsList.tsx, administration/roles/RolesList.tsx, administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, azure/vm/AzureVirtualMachineForm.tsx, customer/details/AccessSubnetForm.tsx, customer/details/CustomerAccessControlPanel.tsx, customer/details/CustomerDetailsPanel.tsx, customer/details/EditFieldDialog.tsx, customer/service-accounts/ServiceAccountExpandableRow.tsx, customer/service-accounts/ServiceAccountFormDialog.tsx, invitations/join-organization/GroupInvitationDetails.tsx, issues/IssueDetails.tsx, issues/create/IssueCreateForm.tsx, issues/list/IssuesListExpandableRow.tsx, maintenance/MaintenanceExpandableRow.tsx, maintenance/create/AffectedOfferingsTable.tsx, maintenance/create/Step2SelectOfferings.tsx, marketplace/category/admin/AdminCategoriesPage.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/CategoryGroupsList.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, marketplace/details/OfferingTabs.tsx, marketplace/details/plan/PlanSection.tsx, marketplace/offerings/OfferingPublicUIView.tsx, marketplace/offerings/actions/RequestActionDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/details/PublicOfferingInfo.tsx, marketplace/offerings/images/CreateImageDialog.tsx, marketplace/offerings/images/OfferingImagesList.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/offerings/update/overview/OverviewSection.tsx, marketplace/offerings/update/plans/PlanForm.tsx, marketplace/orders/details/OrderDetailsApprovalsTab.tsx, marketplace/resources/usage/ResourceUsageForm.tsx, marketplace/resources/usage/utils.ts, marketplace/service-providers/OrganizationProjectsExpandable.tsx, marketplace/service-providers/ServiceProviderManagement.tsx, marketplace/service-providers/ServiceProvidersList.tsx, marketplace/service-providers/details/ServiceProviderDetails.tsx, marketplace-checklist/categories/CategoriesTable.tsx, marketplace-checklist/categories/CategoryFormDialog.tsx, marketplace-checklist/checklists/ChecklistFormDialog.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, openstack/openstack-backup/BackupsList.tsx, openstack/openstack-instance/deploy/FormSecurityGroupsField.tsx, openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx, openstack/openstack-security-groups/SecurityGroupRulesList.tsx, openstack/openstack-security-groups/SecurityGroupsList.tsx, openstack/openstack-security-groups/rule-editor/RulesHeader.tsx, openstack/openstack-snapshot/TenantSnapshotsList.tsx, openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx, openstack/openstack-tenant/actions/RequestDirectAccessDialog.tsx, openstack/openstack-volume/TenantVolumeTypesList.tsx, openstack/openstack-volume/VolumeSnapshotsList.tsx, project/ProjectDashboard.tsx, project/ProjectsList.tsx, project/course-accounts/CourseAccountExpandableRow.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/course-accounts/Step2PreviewAndCreate.tsx, project/details/ProjectDetailsDialog.tsx, project/import/Step5PreviewAndImport.tsx, project/manage/ProjectGeneral.tsx, proposals/CallsAvailableOfferingsPage.tsx, proposals/PublicCallExpandableRow.tsx, proposals/details/CallDescriptionCard.tsx, proposals/details/CallDocumentsCard.tsx, proposals/details/PublicCallDetailsContainer.tsx, proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx, proposals/update/configuration/ResourceTemplateExpandableRow.tsx, proposals/update/configuration/Step4FinalConfig.tsx, proposals/update/general/CallGeneralSection.tsx, rancher/ClusterProjectList.tsx, rancher/catalog/CatalogCreateDialog.tsx, rancher/catalog/ClusterCatalogList.tsx, rancher/cluster/hpas/HPACreateDialog.tsx, rancher/cluster/hpas/HPAUpdateDialog.tsx, rancher/template/ApplicationConfiguration.tsx, rancher/template/CatalogTemplateList.tsx, rancher/template/ClusterTemplateList.tsx, resource/actions/base.ts, resource/summary/ResourceSummaryBase.tsx, slurm/RequestLimitsChangeDialog.tsx, user/support/EditFieldDialog.tsx, user/support/UserEditRows.tsx, user/support/UserList.tsx",
     "message": "Description"
   },
   "Desired replicas": {
@@ -4182,6 +4190,10 @@
   "Done": {
     "description": "administration/organizations/OrganizationGroupDetailsDialog.tsx, marketplace/details/plan/PlanDetailsDialog.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrderStateCell.tsx, marketplace/orders/list/OrderStateFilter.tsx, marketplace/resources/details/ResourceComponentsDialog.tsx, marketplace/resources/resource-pending/OrderInProgressView.tsx, navigation/BackendHealthStatusDialog.tsx",
     "message": "Done"
+  },
+  "Download CSV template": {
+    "description": "project/course-accounts/Step1UploadFile.tsx",
+    "message": "Download CSV template"
   },
   "Download full price list": {
     "description": "marketplace/offerings/details/ExportFullPriceList.tsx",
@@ -4536,7 +4548,7 @@
     "message": "Email verification has been sent. Please check your inbox."
   },
   "Email": {
-    "description": "administration/InvitationList.tsx, administration/hooks/HooksList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, administration/providers/ProviderUsersDialog.tsx, broadcasts/RecipientsList.tsx, customer/details/CustomerContactPanel.tsx, customer/details/EditFieldDialog.tsx, customer/import/Step3PreviewAndImport.tsx, customer/list/ExportAsEmailDialog.tsx, customer/list/OrganizationCard.tsx, customer/team/TeamTableComponent.tsx, customer/team/UserGroup.tsx, invitations/InvitationsList.tsx, invitations/PermissionRequestActionDialog.tsx, invitations/actions/create/EmailsListGroup.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/course-accounts/ProjectCourseAccountsList.tsx, project/team/InvitationsList.tsx, project/team/UserGroup.tsx, proposals/round/reviewers/RoundReviewersList.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/affiliations/OrganizationsList.tsx, user/affiliations/SummaryTeamTable.tsx, user/hooks/HookTypeField.tsx, user/support/UserDetailsTable.tsx, user/support/UserEditRows.tsx, user/support/UserEmailChangeDialog.tsx, user/support/UserList.tsx",
+    "description": "administration/InvitationList.tsx, administration/hooks/HooksList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, administration/providers/ProviderUsersDialog.tsx, broadcasts/RecipientsList.tsx, customer/details/CustomerContactPanel.tsx, customer/details/EditFieldDialog.tsx, customer/import/Step3PreviewAndImport.tsx, customer/list/ExportAsEmailDialog.tsx, customer/list/OrganizationCard.tsx, customer/team/TeamTableComponent.tsx, customer/team/UserGroup.tsx, invitations/InvitationsList.tsx, invitations/PermissionRequestActionDialog.tsx, invitations/actions/create/EmailsListGroup.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/course-accounts/ProjectCourseAccountsList.tsx, project/course-accounts/Step2PreviewAndCreate.tsx, project/team/InvitationsList.tsx, project/team/UserGroup.tsx, proposals/round/reviewers/RoundReviewersList.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/affiliations/OrganizationsList.tsx, user/affiliations/SummaryTeamTable.tsx, user/hooks/HookTypeField.tsx, user/support/UserDetailsTable.tsx, user/support/UserEditRows.tsx, user/support/UserEmailChangeDialog.tsx, user/support/UserList.tsx",
     "message": "Email"
   },
   "Email: {email}": {
@@ -6344,7 +6356,7 @@
     "message": "Invalid email address"
   },
   "Invalid email": {
-    "description": "customer/import/Step3PreviewAndImport.tsx",
+    "description": "customer/import/Step3PreviewAndImport.tsx, project/course-accounts/Step2PreviewAndCreate.tsx",
     "message": "Invalid email"
   },
   "Invalid email: {email}": {
@@ -6356,7 +6368,7 @@
     "message": "Invalid files"
   },
   "Invalid format, please import a .csv file": {
-    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/import/Step4UploadFile.tsx",
+    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/import/Step4UploadFile.tsx",
     "message": "Invalid format, please import a .csv file"
   },
   "Invalid offering": {
@@ -7615,6 +7627,10 @@
     "description": "project/import/Step5PreviewAndImport.tsx",
     "message": "Missing date"
   },
+  "Missing description": {
+    "description": "project/course-accounts/Step2PreviewAndCreate.tsx",
+    "message": "Missing description"
+  },
   "Missing email": {
     "description": "customer/import/Step3PreviewAndImport.tsx",
     "message": "Missing email"
@@ -8020,7 +8036,7 @@
     "message": "Next round starts"
   },
   "Next": {
-    "description": "form/WizardFormContainer.tsx, marketplace/offerings/import/WizardButtons.tsx, marketplace/resources/import/ResourceImportDialog.tsx",
+    "description": "form/WizardFormContainer.tsx, marketplace/offerings/import/WizardButtons.tsx, marketplace/resources/import/ResourceImportDialog.tsx, project/course-accounts/CourseAccountFormDialog.tsx",
     "message": "Next"
   },
   "No access info.": {
@@ -8267,6 +8283,10 @@
     "description": "issues/feedback/UserAutocomplete.tsx",
     "message": "No users"
   },
+  "No valid course account to create.": {
+    "description": "project/course-accounts/CourseAccountFormDialog.tsx",
+    "message": "No valid course account to create."
+  },
   "No valid offering user to import": {
     "description": "marketplace/offerings/import-users/UserImportDialog.tsx",
     "message": "No valid offering user to import"
@@ -8488,7 +8508,7 @@
     "message": "OIDC introspection endpoint URL for validating access tokens."
   },
   "OK": {
-    "description": "administration/providers/ProviderDetailsDialog.tsx, administration/providers/ProviderUsersDialog.tsx, customer/import/Step3PreviewAndImport.tsx, invitations/join-organization/GroupInvitationDetails.tsx, invitations/join-organization/submission.tsx, marketplace/resources/list/ResourceStateFilter.tsx, project/course-accounts/ProjectCourseAccountsList.tsx, project/import/Step5PreviewAndImport.tsx, user/support/DangerActionDialog.tsx",
+    "description": "administration/providers/ProviderDetailsDialog.tsx, administration/providers/ProviderUsersDialog.tsx, customer/import/Step3PreviewAndImport.tsx, invitations/join-organization/GroupInvitationDetails.tsx, invitations/join-organization/submission.tsx, marketplace/resources/list/ResourceStateFilter.tsx, project/course-accounts/ProjectCourseAccountsList.tsx, project/course-accounts/Step2PreviewAndCreate.tsx, project/import/Step5PreviewAndImport.tsx, user/support/DangerActionDialog.tsx",
     "message": "OK"
   },
   "OR": {
@@ -9704,7 +9724,7 @@
     "message": "Please give us a moment to validate your invitation."
   },
   "Please import a file.": {
-    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/import/Step4UploadFile.tsx",
+    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/import/Step4UploadFile.tsx",
     "message": "Please import a file."
   },
   "Please log in to submit a proposal.": {
@@ -9950,6 +9970,10 @@
   "Preserve project permissions": {
     "description": "project/MoveProjectDialog.tsx",
     "message": "Preserve project permissions"
+  },
+  "Preview & create": {
+    "description": "project/course-accounts/CourseAccountFormDialog.tsx",
+    "message": "Preview & create"
   },
   "Preview & import": {
     "description": "customer/import/OrganizationImportDialog.tsx, marketplace/offerings/import-users/UserImportDialog.tsx, project/import/ProjectImportDialog.tsx",
@@ -13247,6 +13271,10 @@
     "description": "auth/valimo/AuthValimoDialog.tsx, navigation/header/UserDropdown.tsx",
     "message": "Sign in"
   },
+  "Single account": {
+    "description": "project/course-accounts/CourseAccountFormDialog.tsx",
+    "message": "Single account"
+  },
   "Single select": {
     "description": "marketplace-checklist/utils.ts",
     "message": "Single select"
@@ -13456,7 +13484,7 @@
     "message": "Statistics"
   },
   "Status": {
-    "description": "administration/InvitationList.tsx, administration/announcements/AnnouncementFilter.tsx, administration/notifications/NotificationFilter.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, administration/providers/ProviderUsersDialog.tsx, customer/import/Step3PreviewAndImport.tsx, customer/payment-profiles/PaymentProfileList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, issues/list/IssuesFilter.tsx, issues/list/IssuesList.tsx, marketplace/offerings/OfferingBreadcrumbPopover.tsx, marketplace/offerings/details/ConnectionStatusIndicator.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, marketplace/offerings/update/plans/PlansSection.tsx, marketplace/resources/details/utils.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, navigation/BackendHealthStatusDialog.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/import/Step5PreviewAndImport.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/round/proposals/ProposalExpandableRow.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/UserPermissionRequestsList.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
+    "description": "administration/InvitationList.tsx, administration/announcements/AnnouncementFilter.tsx, administration/notifications/NotificationFilter.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, administration/providers/ProviderUsersDialog.tsx, customer/import/Step3PreviewAndImport.tsx, customer/payment-profiles/PaymentProfileList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, issues/list/IssuesFilter.tsx, issues/list/IssuesList.tsx, marketplace/offerings/OfferingBreadcrumbPopover.tsx, marketplace/offerings/details/ConnectionStatusIndicator.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, marketplace/offerings/update/plans/PlansSection.tsx, marketplace/resources/details/utils.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, navigation/BackendHealthStatusDialog.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/course-accounts/Step2PreviewAndCreate.tsx, project/import/Step5PreviewAndImport.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/round/proposals/ProposalExpandableRow.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/UserPermissionRequestsList.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
     "message": "Status"
   },
   "Stay on current": {
@@ -14079,6 +14107,10 @@
     "description": "openstack/openstack-security-groups/DestroyBulkSecurityGroupsAction.tsx",
     "message": "The default security group cannot be deleted."
   },
+  "The email is not specified in one or more records.": {
+    "description": "project/course-accounts/CourseAccountFormDialog.tsx",
+    "message": "The email is not specified in one or more records."
+  },
   "The endpoint for endpoint discovery.": {
     "description": "administration/providers/ProviderForm.tsx",
     "message": "The endpoint for endpoint discovery."
@@ -14152,11 +14184,11 @@
     "message": "The image's minimum RAM is over the flavor RAM"
   },
   "The imported data format does not match the template format.": {
-    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/import/Step4UploadFile.tsx",
+    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/import/Step4UploadFile.tsx",
     "message": "The imported data format does not match the template format."
   },
   "The imported file is empty.": {
-    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/import/Step4UploadFile.tsx",
+    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/import/Step4UploadFile.tsx",
     "message": "The imported file is empty."
   },
   "The invoice has been marked as paid.": {
@@ -14212,7 +14244,7 @@
     "message": "The notification has been enabled"
   },
   "The number of records exceeds the allowed limit.": {
-    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx",
+    "description": "customer/import/Step2UploadFile.tsx, marketplace/offerings/import-users/Step1UploadFile.tsx, project/course-accounts/CourseAccountFormDialog.tsx",
     "message": "The number of records exceeds the allowed limit."
   },
   "The offering UUID is not specified in one or more records.": {
@@ -16628,7 +16660,7 @@
     "message": "Upload failed, please try again"
   },
   "Upload file": {
-    "description": "customer/import/OrganizationImportDialog.tsx, project/import/ProjectImportDialog.tsx",
+    "description": "customer/import/OrganizationImportDialog.tsx, project/course-accounts/CourseAccountFormDialog.tsx, project/import/ProjectImportDialog.tsx",
     "message": "Upload file"
   },
   "Upload supporting documentation": {
@@ -17180,7 +17212,7 @@
     "message": "Verify server certificate"
   },
   "Verify your data before importing": {
-    "description": "customer/import/Step3PreviewAndImport.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, project/import/Step5PreviewAndImport.tsx",
+    "description": "customer/import/Step3PreviewAndImport.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, project/course-accounts/Step2PreviewAndCreate.tsx, project/import/Step5PreviewAndImport.tsx",
     "message": "Verify your data before importing"
   },
   "Verifying email change": {
@@ -18267,9 +18299,17 @@
     "description": "marketplace/resources/usage/utils.ts, marketplace-checklist/analytics/AnalyticsAndReports.tsx",
     "message": "{month} months"
   },
+  "{n} course accounts has been created.": {
+    "description": "project/course-accounts/CourseAccountFormDialog.tsx",
+    "message": "{n} course accounts has been created."
+  },
   "{n} days": {
     "description": "marketplace-checklist/analytics/AnalyticsAndReports.tsx, proposals/update/configuration/CallConfiguration.tsx",
     "message": "{n} days"
+  },
+  "{n} users identified": {
+    "description": "project/course-accounts/Step2PreviewAndCreate.tsx",
+    "message": "{n} users identified"
   },
   "{n} valid, {m} errors found": {
     "description": "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",

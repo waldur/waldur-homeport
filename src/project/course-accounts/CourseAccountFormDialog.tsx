@@ -1,22 +1,41 @@
-import { PlusCircleIcon } from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
+import {
+  CaretLeftIcon,
+  CaretRightIcon,
+  PlusCircleIcon,
+} from '@phosphor-icons/react';
+import Papa from 'papaparse';
+import { FC, useCallback, useMemo, useState } from 'react';
+import { Button, Tab, Tabs } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useToggle } from 'react-use';
 import {
   CourseAccountRequest,
   marketplaceCourseAccountsCreate,
+  marketplaceCourseAccountsCreateBulk,
 } from 'waldur-js-client';
 
+import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { required } from '@waldur/core/validators';
 import { SubmitButton, TextField } from '@waldur/form';
 import { EmailField } from '@waldur/form/EmailField';
 import { translate } from '@waldur/i18n';
+import { StepsList } from '@waldur/marketplace/common/StepsList';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { showErrorResponse, showInfo, showSuccess } from '@waldur/store/notify';
 import { getProject } from '@waldur/workspace/selectors';
+
+import templateFile from './course_accounts_template.json';
+import { Step1UploadFile } from './Step1UploadFile';
+import { Step2PreviewAndCreate } from './Step2PreviewAndCreate';
+import {
+  hasCourseAccountsErrors,
+  RawCourseAccount,
+  validateCourseAccountCreation,
+} from './utils';
 
 interface OwnProps {
   resolve: {
@@ -24,21 +43,136 @@ interface OwnProps {
   };
 }
 
+const stepsBatch: ProgressStep[] = [
+  {
+    key: 'upload',
+    label: translate('Upload file'),
+    completed: false,
+  },
+  {
+    key: 'preview',
+    label: translate('Preview & create'),
+    completed: false,
+  },
+];
+
+const MAX_LENGTH = 1000;
+
+const validator = (values) =>
+  new Promise((resolve) => {
+    if (!values.file?.length)
+      resolve({ file: translate('Please import a file.') });
+
+    const file = values.file[0];
+
+    if (file.type !== 'text/csv')
+      resolve({ file: translate('Invalid format, please import a .csv file') });
+
+    Papa.parse(file, {
+      skipEmptyLines: true,
+      complete: function (results: { data: Array<Array<string>> }) {
+        let _error = 'invalid';
+        if (Array.isArray(results?.data) && Array.isArray(results?.data[0])) {
+          const header = results.data[0];
+          // Check headers
+          if (templateFile.fields.every((field) => header.includes(field))) {
+            _error = '';
+          }
+
+          // Check empty
+          if (!_error && (!results.data[1] || results.data[1]?.length === 0)) {
+            _error = 'empty';
+          }
+
+          // Check max length
+          if (!_error && results.data?.length > MAX_LENGTH + 1) {
+            _error = 'max';
+          }
+
+          // Check emails
+          if (!_error) {
+            const emailIdx = header.indexOf('email');
+            if (!results.data.slice(1).every((record) => record[emailIdx])) {
+              _error = 'email';
+            }
+          }
+        }
+
+        if (_error === 'invalid') {
+          resolve({
+            file: translate(
+              'The imported data format does not match the template format.',
+            ),
+          });
+        } else if (_error === 'empty') {
+          resolve({ file: translate('The imported file is empty.') });
+        } else if (_error === 'max') {
+          resolve({
+            file: translate('The number of records exceeds the allowed limit.'),
+          });
+        } else if (_error === 'email') {
+          resolve({
+            file: translate(
+              'The email is not specified in one or more records.',
+            ),
+          });
+        } else {
+          // No error
+          resolve('');
+        }
+      },
+    });
+  });
+
 export const CourseAccountFormDialog: FC<OwnProps> = ({
   resolve: { refetch },
 }) => {
   const project = useSelector(getProject);
   const dispatch = useDispatch();
+  const [activeTab, setActiveTab] = useState<'single' | 'batch'>('single');
 
   const save = useCallback(
-    async (formData: CourseAccountRequest) => {
+    async (
+      formData: CourseAccountRequest & {
+        /** Data for batch creation */ data?: Array<RawCourseAccount>;
+      },
+    ) => {
       try {
-        await marketplaceCourseAccountsCreate({
-          body: formData,
-        });
+        if (activeTab === 'single') {
+          await marketplaceCourseAccountsCreate({
+            body: {
+              project: formData.project,
+              email: formData.email,
+              description: formData.description,
+            },
+          });
+          dispatch(showSuccess(translate('Course account has been created.')));
+        } else {
+          const validRecords: RawCourseAccount[] = formData.data.filter(
+            (row) => {
+              const validate = validateCourseAccountCreation(row);
+              return !validate.errors.includes('invalid_email');
+            },
+          );
+          if (!validRecords.length) {
+            dispatch(showInfo(translate('No valid course account to create.')));
+            return;
+          }
+          await marketplaceCourseAccountsCreateBulk({
+            body: {
+              course_accounts: validRecords,
+              project: formData.project,
+            },
+          });
+          dispatch(
+            showSuccess(
+              translate('{n} course accounts has been created.', {
+                n: validRecords.length,
+              }),
+            ),
+          );
+        }
         dispatch(closeModalDialog());
-
-        dispatch(showSuccess(translate('Course account has been created.')));
         if (refetch) refetch();
       } catch (e) {
         dispatch(
@@ -46,51 +180,127 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
         );
       }
     },
-    [dispatch, refetch],
+    [dispatch, refetch, activeTab],
   );
+
+  // Batch import method
+  const [skipErrors, setSkipErrors] = useToggle(false);
+  const [step, setStep] = useState(0);
+  const isLast = step === stepsBatch.length - 1;
+  const nextStep = () => {
+    if (isLast) return;
+    setStep(step + 1);
+  };
+  const prevStep = () => (step > 0 ? setStep(step - 1) : null);
 
   return (
     <Form
       onSubmit={save}
       initialValues={{ project: project.uuid }}
-      render={({ handleSubmit, submitting, invalid }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={translate('Create course account')}
-            iconNode={<PlusCircleIcon weight="bold" />}
-            iconColor="success"
-            closeButton
-            footer={
-              <>
-                <CloseDialogButton className="min-w-125px" />
-                <SubmitButton
-                  submitting={submitting}
-                  disabled={invalid}
-                  label={translate('Create')}
-                  className="btn btn-primary min-w-125px"
-                />
-              </>
-            }
-          >
-            <FormGroup label={translate('Email')} required>
-              <Field
-                component={EmailField as any}
-                name="email"
-                placeholder={translate('e.g.') + ' Courseaccount@example.com'}
-                validate={required}
-              />
-            </FormGroup>
-            <FormGroup label={translate('Description')}>
-              <Field
-                component={TextField as any}
-                name="description"
-                placeholder={translate('e.g. Used for automated backups')}
-                spaceless
-              />
-            </FormGroup>
-          </ModalDialog>
-        </form>
-      )}
+      validate={validator}
+      render={({ handleSubmit, submitting, invalid, values }) => {
+        const hasErrors = useMemo(
+          () => hasCourseAccountsErrors(values.data),
+          [values.data],
+        );
+
+        return (
+          <form onSubmit={handleSubmit}>
+            <ModalDialog
+              title={translate('Create course account')}
+              iconNode={<PlusCircleIcon weight="bold" />}
+              iconColor="success"
+              closeButton
+              footer={
+                <>
+                  {activeTab === 'batch' && step > 0 && (
+                    <Button
+                      variant="outline btn-outline-default"
+                      className="w-125px me-auto"
+                      onClick={prevStep}
+                    >
+                      <span className="svg-icon svg-icon-4">
+                        <CaretLeftIcon weight="bold" />
+                      </span>
+                      {translate('Back')}
+                    </Button>
+                  )}
+                  <CloseDialogButton className="w-125px" />
+                  {activeTab === 'batch' && step === 0 ? (
+                    <Button
+                      className="w-125px btn-icon-right"
+                      onClick={nextStep}
+                      disabled={invalid}
+                    >
+                      {translate('Next')}
+                      <span className="svg-icon svg-icon-4">
+                        <CaretRightIcon weight="bold" />
+                      </span>
+                    </Button>
+                  ) : (
+                    <SubmitButton
+                      submitting={submitting}
+                      disabled={
+                        invalid ||
+                        (activeTab === 'batch' && hasErrors && !skipErrors)
+                      }
+                      label={translate('Create')}
+                      className="btn btn-primary w-125px"
+                    />
+                  )}
+                </>
+              }
+            >
+              <Tabs
+                defaultActiveKey="single"
+                id="create-course-tabs"
+                className="nav nav-stretch nav-line-tabs mb-4"
+                unmountOnExit
+                onSelect={setActiveTab as any}
+              >
+                <Tab eventKey="single" title={translate('Single account')}>
+                  <FormGroup label={translate('Email')} required>
+                    <Field
+                      component={EmailField as any}
+                      name="email"
+                      placeholder={
+                        translate('e.g.') + ' Courseaccount@example.com'
+                      }
+                      validate={required}
+                    />
+                  </FormGroup>
+                  <FormGroup label={translate('Description')}>
+                    <Field
+                      component={TextField as any}
+                      name="description"
+                      placeholder={translate('e.g. Used for automated backups')}
+                      spaceless
+                    />
+                  </FormGroup>
+                </Tab>
+                <Tab eventKey="batch" title={translate('Batch import')}>
+                  <StepsList
+                    steps={stepsBatch}
+                    value={stepsBatch[step]}
+                    onClick={(_, index) => {
+                      if (invalid) return;
+                      setStep(index);
+                    }}
+                  />
+                  {step === 0 ? (
+                    <Step1UploadFile />
+                  ) : (
+                    <Step2PreviewAndCreate
+                      skipErrors={skipErrors}
+                      setSkipErrors={setSkipErrors}
+                    />
+                  )}
+                </Tab>
+              </Tabs>
+            </ModalDialog>
+          </form>
+        );
+      }}
     />
   );
 };
