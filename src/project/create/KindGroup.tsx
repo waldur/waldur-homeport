@@ -10,9 +10,8 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { projectKindOptions } from '../utils';
 
-const kindOptions = Object.values(projectKindOptions);
-
 export const KindGroup = ({ create }: { create?: boolean }) => {
+  const kindOptions = Object.values(projectKindOptions());
   if (!ENV.plugins.WALDUR_CORE.ENABLE_PROJECT_KIND_COURSE) {
     return null;
   }

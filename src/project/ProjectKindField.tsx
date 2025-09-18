@@ -4,7 +4,8 @@ import { translate } from '@waldur/i18n';
 import { projectKindOptions } from './utils';
 
 export const ProjectKindField = ({ row }) => {
-  const kind = projectKindOptions[row.kind];
+  const options = projectKindOptions();
+  const kind = options[row.kind] || options.default;
   return (
     <Badge variant={kind.color} pill outline className="align-middle">
       {row.kind === 'public' ? translate('Global') : kind.label}
