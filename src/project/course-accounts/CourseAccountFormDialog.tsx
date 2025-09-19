@@ -192,12 +192,17 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
     setStep(step + 1);
   };
   const prevStep = () => (step > 0 ? setStep(step - 1) : null);
+  const goToTab = (key) => {
+    setActiveTab(key);
+    if (key === 'single') setStep(0);
+  };
 
   return (
     <Form
+      key={activeTab}
       onSubmit={save}
       initialValues={{ project: project.uuid }}
-      validate={validator}
+      validate={activeTab === 'batch' ? validator : undefined}
       render={({ handleSubmit, submitting, invalid, values }) => {
         const hasErrors = useMemo(
           () => hasCourseAccountsErrors(values.data),
@@ -253,10 +258,11 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
             >
               <Tabs
                 defaultActiveKey="single"
+                activeKey={activeTab}
                 id="create-course-tabs"
                 className="nav nav-stretch nav-line-tabs mb-4"
                 unmountOnExit
-                onSelect={setActiveTab as any}
+                onSelect={goToTab}
               >
                 <Tab eventKey="single" title={translate('Single account')}>
                   <FormGroup label={translate('Email')} required>
@@ -266,7 +272,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                       placeholder={
                         translate('e.g.') + ' Courseaccount@example.com'
                       }
-                      validate={required}
+                      validate={activeTab === 'single' ? required : undefined}
                     />
                   </FormGroup>
                   <FormGroup label={translate('Description')}>
