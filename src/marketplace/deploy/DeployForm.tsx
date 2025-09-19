@@ -3,9 +3,11 @@ import { FC, PropsWithChildren } from 'react';
 import { SubmissionError } from 'redux-form';
 import {
   marketplaceOrdersCreate,
+  marketplaceOrdersUpdateAttachment,
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
+import { fileSerializer, formDataOptions } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -30,6 +32,15 @@ export const DeployForm: FC<
           formData: values,
         }),
       });
+      if (values.attachment instanceof File) {
+        await marketplaceOrdersUpdateAttachment({
+          path: { uuid: order.data.uuid },
+          body: {
+            attachment: fileSerializer(values.attachment),
+          },
+          ...formDataOptions,
+        });
+      }
       dispatch(showSuccess(translate('Order has been submitted.')));
       router.stateService.go('marketplace-resource-details', {
         resource_uuid: order.data.marketplace_resource_uuid,

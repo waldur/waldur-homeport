@@ -832,7 +832,7 @@
     "message": "Allocation date"
   },
   "Allocation name": {
-    "description": "marketplace/deploy/steps/constants.ts",
+    "description": "site-agent/SiteAgentOrderForm.tsx, slurm/SlurmOrderForm.tsx",
     "message": "Allocation name"
   },
   "Allocation pool": {
@@ -1615,6 +1615,10 @@
     "description": "openstack/openstack-volume/actions/AttachDialog.tsx",
     "message": "Attach OpenStack Volume to Instance"
   },
+  "Attach file": {
+    "description": "marketplace/deploy/steps/OrderAttachmentField.tsx",
+    "message": "Attach file"
+  },
   "Attach has been scheduled.": {
     "description": "openstack/openstack-instance/actions/AttachVolumeDialog.tsx",
     "message": "Attach has been scheduled."
@@ -1646,6 +1650,10 @@
   "Attachment is broken.": {
     "description": "form/upload/AttachmentItem.tsx",
     "message": "Attachment is broken."
+  },
+  "Attachment": {
+    "description": "marketplace/orders/details/NotesSection.tsx",
+    "message": "Attachment"
   },
   "Attachments' count": {
     "description": "administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx",
@@ -2656,7 +2664,7 @@
     "message": "Comment prefix with user info."
   },
   "Comment": {
-    "description": "invitations/UserPermissionRequestsList.tsx, issues/feedback/SupportFeedback.tsx, issues/feedback/SupportFeedbackListExpandableRow.tsx, marketplace/service-providers/OfferingUsersExpandableRow.tsx, marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx, marketplace-remote/ReviewDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, reporting/resource-usage/ResourceUsageList.tsx, reporting/resource-usage/UserUsageList.tsx",
+    "description": "invitations/UserPermissionRequestsList.tsx, issues/feedback/SupportFeedback.tsx, issues/feedback/SupportFeedbackListExpandableRow.tsx, marketplace/deploy/steps/OrderCommentField.tsx, marketplace/service-providers/OfferingUsersExpandableRow.tsx, marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx, marketplace-remote/ReviewDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx, reporting/resource-usage/ResourceUsageList.tsx, reporting/resource-usage/UserUsageList.tsx",
     "message": "Comment"
   },
   "Comments by {reviewer}": {
@@ -4204,7 +4212,7 @@
     "message": "Download template"
   },
   "Download": {
-    "description": "form/upload/FileDownloader.tsx",
+    "description": "form/upload/FileDownloader.tsx, marketplace/orders/details/NotesSection.tsx",
     "message": "Download"
   },
   "Downscaled": {
@@ -4771,6 +4779,10 @@
     "description": "issues/comments/CommentFormDialog.tsx, proposals/proposal/create-review/CommentFormDialog.tsx",
     "message": "Enter a comment"
   },
+  "Enter a comment...": {
+    "description": "marketplace/deploy/steps/OrderCommentField.tsx",
+    "message": "Enter a comment..."
+  },
   "Enter a contact number for the user": {
     "description": "user/support/UserEditRows.tsx",
     "message": "Enter a contact number for the user"
@@ -5308,7 +5320,7 @@
     "message": "Filters"
   },
   "Final configuration": {
-    "description": "administration/auto-provisioning-rules/RuleAddTemplateDialog.tsx, booking/deploy/steps.ts, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, marketplace/deploy/steps/constants.ts, openstack/deploy/steps.ts, openstack/openstack-instance/deploy/steps.ts, openstack/openstack-volume/deploy/steps.ts, proposals/update/configuration/ResourceTemplateFormDialog.tsx, rancher/cluster/create/managed-steps.ts, rancher/cluster/create/steps.ts, support/deploy-steps.ts, vmware/deploy/steps.ts",
+    "description": "administration/auto-provisioning-rules/RuleAddTemplateDialog.tsx, marketplace/deploy/steps/FormFinalConfigurationStep.tsx, marketplace/deploy/steps/constants.ts, proposals/update/configuration/ResourceTemplateFormDialog.tsx",
     "message": "Final configuration"
   },
   "Fingerprint (MD5)": {
@@ -8159,6 +8171,10 @@
     "description": "openstack/openstack-network/actions/CreateSubnetDialog.tsx",
     "message": "No networks"
   },
+  "No notes or attachment were provided for this order": {
+    "description": "marketplace/orders/details/NotesSection.tsx",
+    "message": "No notes or attachment were provided for this order"
+  },
   "No offering is affected": {
     "description": "maintenance/create/AffectedOfferingsTable.tsx",
     "message": "No offering is affected"
@@ -8382,6 +8398,18 @@
   "Notes (not visible to user)": {
     "description": "proposals/proposal/create-review/steps/FormSummaryStep.tsx",
     "message": "Notes (not visible to user)"
+  },
+  "Notes and attachment": {
+    "description": "marketplace/orders/details/NotesSection.tsx, marketplace/orders/details/OrderDetails.tsx",
+    "message": "Notes and attachment"
+  },
+  "Notes and attachments": {
+    "description": "marketplace/deploy/steps/FormNotesStep.tsx, marketplace/deploy/steps/constants.ts",
+    "message": "Notes and attachments"
+  },
+  "Notes": {
+    "description": "marketplace/orders/details/NotesSection.tsx",
+    "message": "Notes"
   },
   "Nothing to show here": {
     "description": "marketplace/resources/list/CustomerResourcesListPlaceholder.tsx",
@@ -9054,6 +9082,10 @@
   "Order submitted": {
     "description": "marketplace/resources/resource-pending/OrderErredView.tsx",
     "message": "Order submitted"
+  },
+  "Order supports comments and metadata": {
+    "description": "marketplace/offerings/update/integration/LifecyclePolicySection.tsx",
+    "message": "Order supports comments and metadata"
   },
   "Order with script over API": {
     "description": "marketplace/deploy/DeployPageActions.tsx",
@@ -11096,7 +11128,7 @@
     "message": "Remove template"
   },
   "Remove": {
-    "description": "administration/TokenDeleteButton.tsx, administration/announcements/AnnouncementDeleteAction.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/quick-shortcuts/QuickShortcutDeleteAction.tsx, administration/roles/RoleDeleteButton.tsx, administration/service-desk/issue-templates/IssueTemplateDeleteAction.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerManageContainer.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, customer/team/UsersBulkRemoveButton.tsx, form/FlatpickrField.tsx, form/WideImageField.tsx, invoices/details/InvoiceItemDelete.tsx, issues/comments/CommentActions.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/offerings/RemoveButton.tsx, marketplace/offerings/details/policies/PolicyDeleteButton.tsx, marketplace/offerings/update/ImageUploadField.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/service-providers/UserRemoveButton.tsx, openstack/openstack-floating-ips/DestroyBulkFloatingIpsAction.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/DestroyBulkSecurityGroupsAction.tsx, openstack/openstack-subnet/AllocationPoolsField.tsx, openstack/openstack-tenant/DeleteMigrationAction.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/RemoveRouterButton.tsx, openstack/openstack-tenant/RemoveRouterInterfaceButton.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-tenant/actions/SubnetsTable.tsx, openstack/openstack-tenant/actions/VolumeTypesTable.tsx, project/ProjectManageContainer.tsx, project/team/ProjectUsersBulkRemoveButton.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx, proposals/review/ReviewDeleteAction.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/documents/RemoveDocumentButton.tsx, rancher/cluster/team/KeycloakMembershipBulkRemoveAction.tsx, rancher/cluster/team/KeycloakMembershipRowActions.tsx, user/hooks/HookRemoveButton.tsx, user/keys/KeyRemoveButton.tsx",
+    "description": "administration/TokenDeleteButton.tsx, administration/announcements/AnnouncementDeleteAction.tsx, administration/organizations/OrganizationGroupDeleteButton.tsx, administration/quick-shortcuts/QuickShortcutDeleteAction.tsx, administration/roles/RoleDeleteButton.tsx, administration/service-desk/issue-templates/IssueTemplateDeleteAction.tsx, broadcasts/BroadcastTemplateDeleteButton.tsx, customer/cost-policies/CostPolicyDeleteButton.tsx, customer/details/AccessSubnetDeleteButton.tsx, customer/details/CustomerManageContainer.tsx, customer/team/DeleteProjectUserButton.tsx, customer/team/UserRemoveButton.tsx, customer/team/UsersBulkRemoveButton.tsx, form/FlatpickrField.tsx, form/WideImageField.tsx, invoices/details/InvoiceItemDelete.tsx, issues/comments/CommentActions.tsx, marketplace/category/admin/CategoryDeleteAction.tsx, marketplace/category/admin/GroupDeleteButton.tsx, marketplace/deploy/steps/OrderAttachmentField.tsx, marketplace/offerings/RemoveButton.tsx, marketplace/offerings/details/policies/PolicyDeleteButton.tsx, marketplace/offerings/update/ImageUploadField.tsx, marketplace/resources/lexis/LexisLinkDeleteButton.tsx, marketplace/service-providers/UserRemoveButton.tsx, openstack/openstack-floating-ips/DestroyBulkFloatingIpsAction.tsx, openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx, openstack/openstack-security-groups/DestroyBulkSecurityGroupsAction.tsx, openstack/openstack-subnet/AllocationPoolsField.tsx, openstack/openstack-tenant/DeleteMigrationAction.tsx, openstack/openstack-tenant/IpAddressList.tsx, openstack/openstack-tenant/RemoveRouterButton.tsx, openstack/openstack-tenant/RemoveRouterInterfaceButton.tsx, openstack/openstack-tenant/StaticRoutesTable.tsx, openstack/openstack-tenant/actions/SubnetsTable.tsx, openstack/openstack-tenant/actions/VolumeTypesTable.tsx, project/ProjectManageContainer.tsx, project/team/ProjectUsersBulkRemoveButton.tsx, project/team/UserRemoveButton.tsx, proposals/details/CallOfferingDeleteButton.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestItemActions.tsx, proposals/review/ReviewDeleteAction.tsx, proposals/team/UserRemoveButton.tsx, proposals/update/documents/RemoveDocumentButton.tsx, rancher/cluster/team/KeycloakMembershipBulkRemoveAction.tsx, rancher/cluster/team/KeycloakMembershipRowActions.tsx, user/hooks/HookRemoveButton.tsx, user/keys/KeyRemoveButton.tsx",
     "message": "Remove"
   },
   "Removed organizations cannot be restored!": {
@@ -16622,6 +16654,10 @@
   "Upgrade available": {
     "description": "navigation/UpgradeNotificationDialog.tsx",
     "message": "Upgrade available"
+  },
+  "Upload PDF file": {
+    "description": "marketplace/deploy/steps/OrderAttachmentField.tsx",
+    "message": "Upload PDF file"
   },
   "Upload a background image for the offering.": {
     "description": "marketplace/offerings/update/overview/OverviewSection.tsx",

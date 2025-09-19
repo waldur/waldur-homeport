@@ -1,8 +1,11 @@
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
-import { DetailsOverviewStep } from '@waldur/marketplace/deploy/steps/constants';
+import {
+  DetailsOverviewStep,
+  FinalConfigurationStep,
+  NotesStep,
+} from '@waldur/marketplace/deploy/steps/constants';
 import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
-import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 import { INSTANCE_TYPE } from '@waldur/openstack/constants';
 
@@ -69,13 +72,9 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     required: false,
     component: FormStartupScriptStep,
   },
+  NotesStep,
   {
-    label: translate('Final configuration'),
-    id: 'step-final-configuration',
-    fields: ['attributes.name', 'attributes.description'],
-    required: true,
-    requiredFields: ['attributes.name'],
-    component: FormFinalConfigurationStep,
+    ...FinalConfigurationStep,
     params: {
       nameLabel: translate('VM name'),
       nameValidate: [required, validateOpenstackInstanceName],

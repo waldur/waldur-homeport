@@ -60,4 +60,5 @@ export const formatOrderForCreate = (props: OrderSummaryProps) => ({
   attributes: formatAttributes(props),
   limits: formatLimits(props),
   accepting_terms_of_service: true,
+  request_comment: props.formData?.request_comment,
 });

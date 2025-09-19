@@ -66,4 +66,6 @@ export interface DeployFormData {
   attributes?: AttributesType;
   limits?: Limits;
   plan?: Plan;
+  request_comment?: string;
+  attachment?: File;
 }

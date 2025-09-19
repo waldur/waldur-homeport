@@ -1,10 +1,12 @@
 import { FunctionComponent, useMemo } from 'react';
+import { OrderDetails as OrderDetailsType } from 'waldur-js-client';
 
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { PlanSection } from '@waldur/marketplace/details/plan/PlanSection';
+import { Offering } from '@waldur/marketplace/types';
 import { getOrderBreadcrumbItems } from '@waldur/marketplace/utils';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
@@ -15,6 +17,7 @@ import { OrderActionsButton } from '../actions/OrderActionsButton';
 
 import { ErrorDetailsTab } from './ErrorDetailsTab';
 import { LimitsSection } from './LimitsSection';
+import { NotesSection } from './NotesSection';
 import { OrderAccordion } from './OrderAccordion';
 import { OrderDetailsApprovalsTab } from './OrderDetailsApprovalsTab';
 import { OrderDetailsHeaderBody } from './OrderDetailsHeaderBody';
@@ -26,7 +29,10 @@ import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
 import '@waldur/core/CustomCard.scss';
 
-const getOrderPageTabs = (data): PageBarTab[] => {
+const getOrderPageTabs = (data: {
+  order: OrderDetailsType;
+  offering: Offering;
+}): PageBarTab[] => {
   const limitParser = getFormLimitParser(data.order.offering_type);
   const limits = limitParser(data.order.limits);
   return [
@@ -73,7 +79,12 @@ const getOrderPageTabs = (data): PageBarTab[] => {
         <LimitsSection components={data.offering.components} limits={limits} />
       ),
     },
-  ];
+    data.offering?.plugin_options.order_supports_comments_and_metadata && {
+      key: 'notes',
+      title: translate('Notes and attachment'),
+      component: () => <NotesSection order={data.order} />,
+    },
+  ].filter(Boolean);
 };
 
 interface OrderDetailsProps {

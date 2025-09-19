@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { AsyncState } from 'react-use/lib/useAsync';
 import { compose } from 'redux';
 import { formValueSelector, reduxForm } from 'redux-form';
+import { Offering } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -40,6 +41,7 @@ export interface StateProps {
   changedTotalPeriods: number[];
   orderCanBeApproved: boolean;
   shouldConcealPrices?: boolean;
+  offering?: Offering;
 }
 
 const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
