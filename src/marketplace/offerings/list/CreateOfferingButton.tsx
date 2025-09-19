@@ -17,24 +17,31 @@ const OfferingCreateDialog = lazyComponent(() =>
 export const CreateOfferingButton = ({
   fetch,
   className,
+  showProvider = false,
 }: {
   fetch?;
   className?;
+  showProvider?: boolean;
 }) => {
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
   const user = useUser();
 
   const callback = () => {
-    dispatch(openModalDialog(OfferingCreateDialog, { resolve: { fetch } }));
+    dispatch(
+      openModalDialog(OfferingCreateDialog, {
+        resolve: { fetch, showProvider },
+      }),
+    );
   };
 
   if (
-    customer?.is_service_provider &&
-    hasPermission(user, {
-      permission: PermissionEnum.CREATE_OFFERING,
-      customerId: customer.uuid,
-    })
+    user.is_staff ||
+    (customer?.is_service_provider &&
+      hasPermission(user, {
+        permission: PermissionEnum.CREATE_OFFERING,
+        customerId: customer.uuid,
+      }))
   ) {
     return <AddButton action={callback} className={className} />;
   } else {

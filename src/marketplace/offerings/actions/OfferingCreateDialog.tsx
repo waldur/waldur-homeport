@@ -1,8 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
+import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import { Field } from 'redux-form';
 import {
   BillingUnit,
   marketplaceProviderOfferingsCreate,
@@ -17,8 +19,10 @@ import {
   StringField,
   SubmitButton,
 } from '@waldur/form';
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
+import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { getCreatableOfferings } from '@waldur/marketplace/common/registry';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -31,10 +35,15 @@ import { OfferingCreateFormData } from './types';
 
 export const OfferingCreateDialog = reduxForm<
   OfferingCreateFormData,
-  { resolve: { fetch } }
+  { resolve: { fetch; showProvider?: boolean } }
 >({
   form: OFFERING_CREATE_FORM_ID,
-})(({ handleSubmit, submitting, invalid, resolve: { fetch } }) => {
+})(({
+  handleSubmit,
+  submitting,
+  invalid,
+  resolve: { fetch, showProvider = false },
+}) => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['OfferingCreateDialog'],
 
@@ -59,7 +68,9 @@ export const OfferingCreateDialog = reduxForm<
       const response = await marketplaceProviderOfferingsCreate({
         body: {
           name: formData.name,
-          customer: customer.url,
+          customer: formData.organisation
+            ? formData.organisation.url
+            : customer.url,
           category: formData.category.url,
           type: formData.type.value,
           plans: [plan_payload],
@@ -71,6 +82,9 @@ export const OfferingCreateDialog = reduxForm<
       }
       dispatch(closeModalDialog());
       router.stateService.go('marketplace-offering-update', {
+        uuid: formData.organisation
+          ? formData.organisation.uuid
+          : customer.uuid,
         offering_uuid: response.data.uuid,
       });
     } catch (e) {
@@ -107,6 +121,38 @@ export const OfferingCreateDialog = reduxForm<
         iconColor="success"
       >
         <FormContainer submitting={submitting}>
+          {showProvider && (
+            <div className="form-group mb-5">
+              <Form.Label className="form-label">
+                {translate('Service provider')}
+              </Form.Label>
+              <Field
+                name="organisation"
+                validate={required}
+                component={(fieldProps) => (
+                  <AsyncPaginate
+                    placeholder={translate('Select service provider...')}
+                    loadOptions={(query, prevOptions, { page }) =>
+                      organizationAutocomplete(query, prevOptions, page, {
+                        field: ['name', 'url', 'uuid'],
+                        o: 'name',
+                        is_service_provider: true,
+                      })
+                    }
+                    defaultOptions
+                    getOptionValue={(option) => option.url}
+                    getOptionLabel={(option) => option.name}
+                    value={fieldProps.input.value}
+                    onChange={(value) => fieldProps.input.onChange(value)}
+                    noOptionsMessage={() => translate('No service providers')}
+                    isClearable={true}
+                    className="metronic-select-container"
+                    classNamePrefix="metronic-select"
+                  />
+                )}
+              />
+            </div>
+          )}
           <StringField
             name="name"
             label={translate('Name')}

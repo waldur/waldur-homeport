@@ -10,4 +10,9 @@ export interface OfferingCreateFormData {
   name: string;
   category: Category;
   type: Option;
+  organisation?: {
+    uuid: string;
+    name: string;
+    url: string;
+  };
 }

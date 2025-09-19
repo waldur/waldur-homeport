@@ -53,6 +53,7 @@ export const AdminOfferingsList = () => {
       filter={filter}
       hasOrganizationColumn
       showActions
+      showProvider
       filters={<AdminOfferingsFilter initialValues={initialValues} />}
     />
   );
