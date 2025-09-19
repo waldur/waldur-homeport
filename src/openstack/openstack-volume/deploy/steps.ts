@@ -1,7 +1,10 @@
 import { translate } from '@waldur/i18n';
-import { DetailsOverviewStep } from '@waldur/marketplace/deploy/steps/constants';
+import {
+  DetailsOverviewStep,
+  FinalConfigurationStep,
+  NotesStep,
+} from '@waldur/marketplace/deploy/steps/constants';
 import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
-import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 import { VOLUME_TYPE } from '@waldur/openstack/constants';
 import { getVolumeNameValidators } from '@waldur/openstack/utils';
@@ -28,13 +31,9 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     requiredFields: ['attributes.type', 'attributes.size'],
     component: FormVolumeStep,
   },
+  NotesStep,
   {
-    label: translate('Final configuration'),
-    id: 'step-final-configuration',
-    fields: ['attributes.name', 'attributes.description'],
-    required: true,
-    requiredFields: ['attributes.name'],
-    component: FormFinalConfigurationStep,
+    ...FinalConfigurationStep,
     params: {
       nameLabel: translate('Volume name'),
       nameValidate: getVolumeNameValidators(),

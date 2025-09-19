@@ -1,4 +1,5 @@
 import { StateProps } from '@waldur/marketplace/resources/change-limits/connector';
+import { Offering } from '@waldur/marketplace/types';
 import { TENANT_TYPE } from '@waldur/openstack/constants';
 
 export const plan = {
@@ -35,7 +36,8 @@ export const offering = {
     },
   ],
   type: TENANT_TYPE,
-};
+  plugin_options: { order_supports_comments_and_metadata: true },
+} as Offering;
 
 export const newLimits = {
   cores: 10,
@@ -100,6 +102,7 @@ export const resultData: StateProps = {
       changedLimit: -1971,
     },
   ],
+  offering,
   orderCanBeApproved: true,
   totalPeriods: [0.8633329999999999, 25.899989999999995, 315.116545],
   changedTotalPeriods: [-7.8063917, -234.19175099999998, -2849.3329705],

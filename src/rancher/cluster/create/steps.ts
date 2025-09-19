@@ -3,10 +3,11 @@ import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
 import {
   DetailsOverviewStep,
+  FinalConfigurationStep,
+  NotesStep,
   PlanStep,
 } from '@waldur/marketplace/deploy/steps/constants';
 import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
-import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 
 import { MARKETPLACE_RANCHER } from './constants';
@@ -85,13 +86,9 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     required: false,
     component: FormRancherSecurityGroupsStep,
   },
+  NotesStep,
   {
-    label: translate('Final configuration'),
-    id: 'step-final-configuration',
-    fields: ['attributes.name', 'attributes.description'],
-    required: true,
-    requiredFields: ['attributes.name'],
-    component: FormFinalConfigurationStep,
+    ...FinalConfigurationStep,
     params: {
       nameLabel: translate('Cluster name'),
       nameValidate: [required, rancherClusterName],

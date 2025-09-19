@@ -1,7 +1,10 @@
 import { ENV } from '@waldur/core/config';
 import { translate } from '@waldur/i18n';
-import { DetailsOverviewStep } from '@waldur/marketplace/deploy/steps/constants';
-import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
+import {
+  DetailsOverviewStep,
+  FinalConfigurationStep,
+  NotesStep,
+} from '@waldur/marketplace/deploy/steps/constants';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 
 import { FormAdvancedOptionsStep } from './FormAdvancedOptionsStep';
@@ -58,13 +61,9 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     component: FormAdvancedOptionsStep,
     isActive: () => !ENV.plugins.WALDUR_VMWARE.BASIC_MODE,
   },
+  NotesStep,
   {
-    label: translate('Final configuration'),
-    id: 'step-final-configuration',
-    fields: ['attributes.name', 'attributes.description'],
-    required: true,
-    requiredFields: ['attributes.name'],
-    component: FormFinalConfigurationStep,
+    ...FinalConfigurationStep,
     params: { nameLabel: translate('VM name') },
   },
 ];

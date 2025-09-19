@@ -115,5 +115,6 @@ export const getData = (
     orderCanBeApproved,
     totalPeriods,
     changedTotalPeriods,
+    offering,
   };
 };

@@ -3,9 +3,10 @@ import { translate } from '@waldur/i18n';
 import {
   AdditionalConfigurationStep,
   DetailsOverviewStep,
+  FinalConfigurationStep,
+  NotesStep,
   PlanStep,
 } from '@waldur/marketplace/deploy/steps/constants';
-import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 
 import { FormLonghornStep } from './FormLonghornStep';
@@ -46,13 +47,9 @@ export const managedDeployOfferingSteps: OfferingConfigurationFormStep[] = [
     component: FormLonghornStep,
   },
   AdditionalConfigurationStep,
+  NotesStep,
   {
-    label: translate('Final configuration'),
-    id: 'step-final-configuration',
-    fields: ['attributes.name', 'attributes.description'],
-    required: true,
-    requiredFields: ['attributes.name'],
-    component: FormFinalConfigurationStep,
+    ...FinalConfigurationStep,
     params: {
       nameLabel: translate('Cluster name'),
       nameValidate: [required, rancherClusterName],

@@ -60,6 +60,11 @@ const fields: OfferingEditField[] = [
     key: 'plugin_options.required_team_role_for_provisioning',
     component: StringField,
   },
+  {
+    label: translate('Order supports comments and metadata'),
+    key: 'plugin_options.order_supports_comments_and_metadata',
+    component: AwesomeCheckboxField,
+  },
 ];
 
 export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
