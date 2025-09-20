@@ -18,17 +18,10 @@ import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
 
-import { isExperimentalUiComponentsVisible } from '../utils';
-
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { getOfferingBreadcrumbItems } from './hooks';
 import { OfferingViewHero } from './OfferingViewHero';
 
-const OfferingDetailsStatistics = lazyComponent(() =>
-  import(
-    '@waldur/marketplace/offerings/details/OfferingDetailsStatistics'
-  ).then((module) => ({ default: module.OfferingDetailsStatistics })),
-);
 const OfferingBookingResourcesCalendarContainer = lazyComponent(() =>
   import(
     '@waldur/booking/offering/OfferingBookingResourcesCalendarContainer'
@@ -104,15 +97,7 @@ async function loadOfferingData(offering_uuid: string) {
 }
 
 const getTabs = (offering: Offering): PageBarTab[] => {
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   return [
-    showExperimentalUiComponents
-      ? {
-          title: translate('Statistics'),
-          key: 'statistics',
-          component: OfferingDetailsStatistics,
-        }
-      : null,
     offering.type === OFFERING_TYPE_BOOKING
       ? {
           title: translate('Bookings'),
