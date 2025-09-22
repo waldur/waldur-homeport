@@ -12,9 +12,11 @@ import {
   marketplaceOfferingUsersSetPendingAccountLinking,
   marketplaceOfferingUsersSetPendingAdditionalValidation,
   marketplaceOfferingUsersUpdateCommentsPartialUpdate,
+  OfferingUser,
 } from 'waldur-js-client';
 
 import { url } from '@waldur/core/validators';
+import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
@@ -23,7 +25,49 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 import { ServiceProvider } from '../types';
 
-import { OfferingUser } from './types';
+const STATE_TRANSITIONS = {
+  'Creation requested': ['Creating', 'OK', 'Error creating'],
+  Creating: [
+    'OK',
+    'Pending additional validation',
+    'Pending account linking',
+    'Error creating',
+  ],
+  'Pending additional validation': ['OK', 'Error creating'],
+  'Pending account linking': ['OK', 'Error creating'],
+  OK: ['Requested deletion'],
+  'Error creating': [
+    'Creating',
+    'OK',
+    'Pending additional validation',
+    'Pending account linking',
+  ],
+  'Error deleting': ['OK', 'Deleting'],
+  'Requested deletion': ['Deleting', 'Error deleting'],
+  Deleting: ['Deleted', 'Error deleting'],
+  Deleted: [],
+};
+
+const getAvailableStateOptions = (currentState: string) => {
+  const allOptions = [
+    { label: 'OK', value: 'OK' },
+    { label: 'Creating', value: 'Creating' },
+    { label: 'Pending account linking', value: 'Pending account linking' },
+    {
+      label: 'Pending additional validation',
+      value: 'Pending additional validation',
+    },
+    { label: 'Error creating', value: 'Error creating' },
+    { label: 'Error deleting', value: 'Error deleting' },
+    { label: 'Deleted', value: 'Deleted' },
+    { label: 'Deleting', value: 'Deleting' },
+    { label: 'Requested deletion', value: 'Requested deletion' },
+  ];
+
+  const availableStates = STATE_TRANSITIONS[currentState] || [];
+
+  return allOptions.filter((option) => availableStates.includes(option.value));
+};
 
 export interface ProviderOfferingUserUpdateDialogProps {
   resolve: {
@@ -34,7 +78,7 @@ export interface ProviderOfferingUserUpdateDialogProps {
   };
 }
 
-const UPDATE_FIELDS = {
+const UPDATE_FIELDS = (currentState?: string) => ({
   username: {
     title: translate('Set external username'),
     fields: [
@@ -51,7 +95,7 @@ const UPDATE_FIELDS = {
     fields: [
       {
         name: 'service_provider_comment',
-        type: 'text',
+        component: MarkdownEditor,
         label: translate('Comment'),
         placeholder: translate('Your comment') + '...',
       },
@@ -71,52 +115,56 @@ const UPDATE_FIELDS = {
         name: 'state',
         type: 'select',
         label: translate('Account state'),
-        options: [
-          { label: 'OK', value: 'OK' },
-          {
-            label: 'Creating',
-            value: 'Creating',
-          },
-          {
-            label: 'Pending account linking',
-            value: 'Pending account linking',
-          },
-          {
-            label: 'Pending additional validation',
-            value: 'Pending additional validation',
-          },
-          {
-            label: 'Error creating',
-            value: 'Error creating',
-          },
-          {
-            label: 'Error deleting',
-            value: 'Error deleting',
-          },
-          {
-            label: 'Deleted',
-            value: 'Deleted',
-          },
-          {
-            label: 'Deleting',
-            value: 'Deleting',
-          },
-          {
-            label: 'Requested deletion',
-            value: 'Requested deletion',
-          },
-        ],
+        options: currentState
+          ? getAvailableStateOptions(currentState)
+          : [
+              { label: 'OK', value: 'OK' },
+              {
+                label: 'Creating',
+                value: 'Creating',
+              },
+              {
+                label: 'Pending account linking',
+                value: 'Pending account linking',
+              },
+              {
+                label: 'Pending additional validation',
+                value: 'Pending additional validation',
+              },
+              {
+                label: 'Error creating',
+                value: 'Error creating',
+              },
+              {
+                label: 'Error deleting',
+                value: 'Error deleting',
+              },
+              {
+                label: 'Deleted',
+                value: 'Deleted',
+              },
+              {
+                label: 'Deleting',
+                value: 'Deleting',
+              },
+              {
+                label: 'Requested deletion',
+                value: 'Requested deletion',
+              },
+            ],
       },
     ],
   },
-};
+});
 
 export const ProviderOfferingUserUpdateDialog: FC<
   ProviderOfferingUserUpdateDialogProps
 > = ({ resolve: { row, refetch, updateScope = 'username' } }) => {
   const dispatch = useDispatch();
 
-  const fields = UPDATE_FIELDS[updateScope]?.fields || [];
+  const currentState = row.state;
+  const updateFields = UPDATE_FIELDS(currentState);
+  const fields = updateFields[updateScope]?.fields || [];
 
   const submit = useCallback(
     async (formData) => {
@@ -191,7 +239,7 @@ export const ProviderOfferingUserUpdateDialog: FC<
 
   return (
     <ResourceActionDialog
-      dialogTitle={UPDATE_FIELDS[updateScope]?.title || DASH_ESCAPE_CODE}
+      dialogTitle={updateFields[updateScope]?.title || DASH_ESCAPE_CODE}
       formFields={fields}
       initialValues={fields.reduce((acc, field) => {
         acc[field.name] = row[field.name];
