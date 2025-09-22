@@ -12,7 +12,7 @@ import {
 } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
-import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import { OrderFormComponentProps } from '@waldur/marketplace/common/types';
 
 import {
   getImageLabel,
@@ -22,9 +22,9 @@ import {
   loadSizeOptions,
 } from './utils';
 
-export const AzureVirtualMachineForm: React.FC<
-  OfferingConfigurationFormProps
-> = (props) => {
+export const AzureVirtualMachineForm: React.FC<OrderFormComponentProps> = (
+  props,
+) => {
   const location = useSelector((state) =>
     formValueSelector(props.form)(state, 'attributes.location'),
   );

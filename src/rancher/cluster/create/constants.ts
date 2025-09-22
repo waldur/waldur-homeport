@@ -1,3 +1,2 @@
 export const MARKETPLACE_RANCHER = 'Marketplace.Rancher';
-export const MANAGED_RANCHER = 'Marketplace.ManagedRancher';
 export const NODES_FIELD_ARRAY = 'attributes.nodes';

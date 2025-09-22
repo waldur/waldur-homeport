@@ -1548,11 +1548,11 @@
     "message": "Are you sure you would like to terminate resource {resourceName} from project {projectName} ({customerName})?"
   },
   "ArgoCD K8S kubeconfig": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "ArgoCD K8S kubeconfig"
   },
   "ArgoCD K8S namespace": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "ArgoCD K8S namespace"
   },
   "Article code": {
@@ -2572,11 +2572,11 @@
     "message": "Cloud block storage size"
   },
   "Cloud init template for load balancer node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Cloud init template for load balancer node"
   },
   "Cloud init template": {
-    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Cloud init template"
   },
   "Cloud region": {
@@ -3483,10 +3483,6 @@
     "description": "rancher/cluster/hpas/ClusterHPAList.tsx",
     "message": "Current replicas"
   },
-  "Current revenue": {
-    "description": "marketplace/offerings/details/OfferingDetailsStatistics.tsx",
-    "message": "Current revenue"
-  },
   "Current size": {
     "description": "openstack/openstack-volume/actions/ExtendDialog.tsx",
     "message": "Current size"
@@ -3910,6 +3906,10 @@
   "Deployment ID": {
     "description": "administration/TelemetryExampleDialog.tsx",
     "message": "Deployment ID"
+  },
+  "Deployment mode": {
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
+    "message": "Deployment mode"
   },
   "Deployment type": {
     "description": "administration/TelemetryExampleDialog.tsx",
@@ -4996,7 +4996,7 @@
     "message": "Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included."
   },
   "Estimated revenue": {
-    "description": "marketplace/offerings/details/OfferingDetailsStatistics.tsx, marketplace/service-providers/dashboard/utils.ts",
+    "description": "marketplace/service-providers/dashboard/utils.ts",
     "message": "Estimated revenue"
   },
   "Ethernet type": {
@@ -5094,10 +5094,6 @@
   "Expires at": {
     "description": "administration/InvitationList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, project/team/InvitationsList.tsx, proposals/team/InvitationsList.tsx",
     "message": "Expires at"
-  },
-  "Expiring resources": {
-    "description": "marketplace/offerings/details/OfferingDetailsStatistics.tsx",
-    "message": "Expiring resources"
   },
   "Explanation of the scientific case of the project for which the resources are intended to be used.": {
     "description": "proposals/proposal/create/ProjectDetailsStep.tsx, proposals/proposal/create/ProjectDetailsSummary.tsx",
@@ -5412,7 +5408,7 @@
     "message": "Flavors matching this regex expression will not be pulled from the backend."
   },
   "Flavors regex": {
-    "description": "rancher/cluster/create/RancherPluginOptionsForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Flavors regex"
   },
   "Flavors": {
@@ -6044,7 +6040,7 @@
     "message": "Image is too large"
   },
   "Image name for Rancher nodes": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Image name for Rancher nodes"
   },
   "Image name": {
@@ -6728,27 +6724,27 @@
     "message": "Key"
   },
   "Keycloak Realm": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Keycloak Realm"
   },
   "Keycloak TLS verify": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Keycloak TLS verify"
   },
   "Keycloak URL": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Keycloak URL"
   },
   "Keycloak User Realm": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Keycloak User Realm"
   },
   "Keycloak password": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Keycloak password"
   },
   "Keycloak sync frequency": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Keycloak sync frequency"
   },
   "Keycloak user group membership": {
@@ -6756,7 +6752,7 @@
     "message": "Keycloak user group membership"
   },
   "Keycloak username": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Keycloak username"
   },
   "Keys": {
@@ -6776,7 +6772,7 @@
     "message": "Kubernetes nodes"
   },
   "Kubernetes version": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx, rancher/cluster/dashboard/ClusterSummary.tsx, rancher/node/RancherNodeSummary.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx, rancher/cluster/dashboard/ClusterSummary.tsx, rancher/node/RancherNodeSummary.tsx",
     "message": "Kubernetes version"
   },
   "LEXIS link creation request has been submitted.": {
@@ -6996,7 +6992,7 @@
     "message": "List of resources"
   },
   "List of supported OpenStack offerings": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "List of supported OpenStack offerings"
   },
   "List of username that users are not allowed to select": {
@@ -7315,9 +7311,9 @@
     "description": "marketplace/offerings/OfferingViewHero.tsx, user/UserManageContainer.tsx",
     "message": "Manage"
   },
-  "Managed Rancher cluster": {
-    "description": "rancher/cluster/create/marketplace.ts",
-    "message": "Managed Rancher cluster"
+  "Managed": {
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
+    "message": "Managed"
   },
   "Management offering": {
     "description": "rancher/cluster/create/steps.ts",
@@ -7440,15 +7436,15 @@
     "message": "Maximum monthly"
   },
   "Maximum number of CPU for cluster tenants": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Maximum number of CPU for cluster tenants"
   },
   "Maximum number of RAM for a cluster tenants (GB)": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Maximum number of RAM for a cluster tenants (GB)"
   },
   "Maximum number of disk space for a cluster tenants (GB)": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Maximum number of disk space for a cluster tenants (GB)"
   },
   "Maximum number of instances in a single tenant": {
@@ -8287,6 +8283,10 @@
     "description": "table/SavedFilterSelect.tsx",
     "message": "No saved filter"
   },
+  "No service providers": {
+    "description": "marketplace/offerings/actions/OfferingCreateDialog.tsx",
+    "message": "No service providers"
+  },
   "No templates found": {
     "description": "broadcasts/BroadcastForm.tsx",
     "message": "No templates found"
@@ -8332,7 +8332,7 @@
     "message": "No"
   },
   "Node disk driver type": {
-    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Node disk driver type"
   },
   "Node has been created.": {
@@ -8884,23 +8884,23 @@
     "message": "OpenStack Images"
   },
   "OpenStack data volume size for load balancer node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack data volume size for load balancer node"
   },
   "OpenStack data volume size for server node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack data volume size for server node"
   },
   "OpenStack data volume type for load balancer node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack data volume type for load balancer node"
   },
   "OpenStack data volume type for server node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack data volume type for server node"
   },
   "OpenStack flavor name for server node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack flavor name for server node"
   },
   "OpenStack instance has been unlinked from Rancher node.": {
@@ -8924,7 +8924,7 @@
     "message": "OpenStack offering"
   },
   "OpenStack offerings": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack offerings"
   },
   "OpenStack port": {
@@ -8948,31 +8948,31 @@
     "message": "OpenStack subnet"
   },
   "OpenStack system flavor for load balancer node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack system flavor for load balancer node"
   },
   "OpenStack system volume size for load balancer node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack system volume size for load balancer node"
   },
   "OpenStack system volume size for server node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack system volume size for server node"
   },
   "OpenStack system volume size for worker node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack system volume size for worker node"
   },
   "OpenStack system volume type for load balancer node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack system volume type for load balancer node"
   },
   "OpenStack system volume type for server node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack system volume type for server node"
   },
   "OpenStack system volume type for worker node": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "OpenStack system volume type for worker node"
   },
   "OpenStack tenant": {
@@ -9208,7 +9208,7 @@
     "message": "Organization updated successfully"
   },
   "Organization where project can be created": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Organization where project can be created"
   },
   "Organization workspace": {
@@ -9228,7 +9228,7 @@
     "message": "Organization {customer_name} has been deleted."
   },
   "Organization": {
-    "description": "administration/InvitationsFilter.tsx, administration/auto-provisioning-rules/RuleForm.tsx, administration/auto-provisioning-rules/RulesList.tsx, administration/organizations/OrganizationCostPoliciesFilter.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, customer/cost-policies/CostPolicyForm.tsx, customer/credits/CreditFormDialog.tsx, customer/details/CustomerRemoveDialog.tsx, customer/list/CustomerList.tsx, customer/routes.ts, customer/service-accounts/ServiceAccountsList.tsx, events/ExpandableEventDetailsTable.tsx, invitations/PermissionRequestActionDialog.tsx, invitations/join-organization/GroupInvitationDetails.tsx, issues/IssueInfo.tsx, issues/create/IssueDetailsStepLabel.tsx, issues/create/OrganizationGroup.tsx, issues/list/IssuesList.tsx, issues/list/IssuesListExpandableRow.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/deploy/steps/FormDetailsOverviewStep.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/offerings/import/ImportReviewTab.tsx, marketplace/offerings/import/SelectOrganizationTab.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/orders/details/OrderDetailsHeaderBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/utils.tsx, marketplace/robot-accounts/ProviderRobotAccountFilter.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, navigation/sidebar/resources-filter/utils.tsx, permissions/constants.tsx, project/ProjectCard.tsx, project/create/OrganizationGroup.tsx, project/import/Step5PreviewAndImport.tsx, proposals/PublicCallsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, support/SupportEventsFilter.tsx, user/UserPermissionRequestExpandableRow.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/OrganizationsList.tsx, user/affiliations/ProjectsList.tsx, user/affiliations/ProjectsListFilter.tsx, user/affiliations/UserAffiliationsList.tsx, user/support/UserDetailsTable.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
+    "description": "administration/InvitationsFilter.tsx, administration/auto-provisioning-rules/RuleForm.tsx, administration/auto-provisioning-rules/RulesList.tsx, administration/organizations/OrganizationCostPoliciesFilter.tsx, administration/organizations/OrganizationCostPoliciesList.tsx, administration/organizations/OrganizationGroupOrganizationsList.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, customer/cost-policies/CostPolicyForm.tsx, customer/credits/CreditFormDialog.tsx, customer/details/CustomerRemoveDialog.tsx, customer/list/CustomerList.tsx, customer/routes.ts, customer/service-accounts/ServiceAccountsList.tsx, events/ExpandableEventDetailsTable.tsx, invitations/PermissionRequestActionDialog.tsx, invitations/join-organization/GroupInvitationDetails.tsx, issues/IssueInfo.tsx, issues/create/IssueDetailsStepLabel.tsx, issues/create/OrganizationGroup.tsx, issues/list/IssuesList.tsx, issues/list/IssuesListExpandableRow.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/deploy/steps/FormDetailsOverviewStep.tsx, marketplace/details/CustomerField.tsx, marketplace/landing/MarketplaceLandingFilter.tsx, marketplace/offerings/admin/AdminOfferingsFilter.tsx, marketplace/offerings/expandable/OfferingCustomersList.tsx, marketplace/offerings/import/ImportReviewTab.tsx, marketplace/offerings/import/SelectOrganizationTab.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/orders/details/OrderDetailsHeaderBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/resources/list/AllResourcesFilter.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProjectResourcesAllFilter.tsx, marketplace/resources/list/utils.tsx, marketplace/robot-accounts/ProviderRobotAccountFilter.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/service-providers/ProviderOfferingUsersList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-remote/BaseProjectUpdateRequestsList.tsx, marketplace-remote/OrganizationProjectUpdateRequestListFilter.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, navigation/sidebar/resources-filter/utils.tsx, permissions/constants.tsx, project/ProjectCard.tsx, project/create/OrganizationGroup.tsx, project/import/Step5PreviewAndImport.tsx, proposals/PublicCallsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx, reporting/resource-usage/ResourceUsageFilter.tsx, support/SupportEventsFilter.tsx, user/UserPermissionRequestExpandableRow.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/OrganizationsList.tsx, user/affiliations/ProjectsList.tsx, user/affiliations/ProjectsListFilter.tsx, user/affiliations/UserAffiliationsList.tsx, user/support/UserDetailsTable.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
     "message": "Organization"
   },
   "Organizations owner": {
@@ -10140,15 +10140,15 @@
     "message": "Private comment"
   },
   "Private registry URL": {
-    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Private registry URL"
   },
   "Private registry password": {
-    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Private registry password"
   },
   "Private registry username": {
-    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Private registry username"
   },
   "Private": {
@@ -10784,7 +10784,7 @@
     "message": "RAM"
   },
   "Rancher access key": {
-    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Rancher access key"
   },
   "Rancher cluster": {
@@ -10800,11 +10800,11 @@
     "message": "Rancher resources provisioning"
   },
   "Rancher secret key": {
-    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Rancher secret key"
   },
   "Rancher server URL": {
-    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/RancherCredentialsForm.tsx, rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Rancher server URL"
   },
   "Rate": {
@@ -10924,7 +10924,7 @@
     "message": "Registration method"
   },
   "Regular expression to limit flavors list": {
-    "description": "rancher/cluster/create/RancherPluginOptionsForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Regular expression to limit flavors list"
   },
   "Regular user": {
@@ -12644,7 +12644,7 @@
     "message": "Select service provider"
   },
   "Select service provider...": {
-    "description": "customer/list/ServiceProviderFilter.tsx",
+    "description": "customer/list/ServiceProviderFilter.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx",
     "message": "Select service provider..."
   },
   "Select source offering": {
@@ -12750,6 +12750,10 @@
   "Selector": {
     "description": "rancher/cluster/ClusterServicesList.tsx",
     "message": "Selector"
+  },
+  "Self-managed": {
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
+    "message": "Self-managed"
   },
   "Send at": {
     "description": "broadcasts/BroadcastExpandableRow.tsx, broadcasts/BroadcastForm.tsx",
@@ -12892,7 +12896,7 @@
     "message": "Service provider profile has been disabled."
   },
   "Service provider": {
-    "description": "administration/organizations/OrganizationsFilter.tsx, customer/details/CustomerManageContainer.tsx, customer/list/CustomerListFilter.tsx, invoices/details/InvoiceItemsFilter.tsx, invoices/details/InvoiceItemsTable.tsx, invoices/list/InvoicesStatsList.tsx, maintenance/MaintenanceList.tsx, maintenance/actions/MaintenanceDetailsDialog.tsx, map/LeafletMap.tsx, marketplace/UserPluginOptionsForm.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/deploy/steps/FormDetailsOverviewStep.tsx, marketplace/offerings/details/OfferingDetailsDialog.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/routes.ts, marketplace/service-providers/ProviderOfferingUsersFilter.tsx, organization/OrganizationUIView.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx, proposals/update/offerings/WizardFormFirstPage.tsx, reporting/plan-usage/PlanUsageFilter.tsx, reporting/plan-usage/PlanUsageList.tsx",
+    "description": "administration/organizations/OrganizationsFilter.tsx, customer/details/CustomerManageContainer.tsx, customer/list/CustomerListFilter.tsx, invoices/details/InvoiceItemsFilter.tsx, invoices/details/InvoiceItemsTable.tsx, invoices/list/InvoicesStatsList.tsx, maintenance/MaintenanceList.tsx, maintenance/actions/MaintenanceDetailsDialog.tsx, map/LeafletMap.tsx, marketplace/UserPluginOptionsForm.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/deploy/steps/FormDetailsOverviewStep.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/OfferingDetailsDialog.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/routes.ts, marketplace/service-providers/ProviderOfferingUsersFilter.tsx, organization/OrganizationUIView.tsx, proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx, proposals/update/offerings/WizardFormFirstPage.tsx, reporting/plan-usage/PlanUsageFilter.tsx, reporting/plan-usage/PlanUsageList.tsx",
     "message": "Service provider"
   },
   "Service providers": {
@@ -13510,10 +13514,6 @@
   "Static routes update was scheduled.": {
     "description": "openstack/openstack-tenant/SetRoutesDialog.tsx",
     "message": "Static routes update was scheduled."
-  },
-  "Statistics": {
-    "description": "marketplace/offerings/OfferingDetailsUIView.tsx",
-    "message": "Statistics"
   },
   "Status": {
     "description": "administration/InvitationList.tsx, administration/announcements/AnnouncementFilter.tsx, administration/notifications/NotificationFilter.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, administration/providers/ProviderUsersDialog.tsx, customer/import/Step3PreviewAndImport.tsx, customer/payment-profiles/PaymentProfileList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, issues/list/IssuesFilter.tsx, issues/list/IssuesList.tsx, marketplace/offerings/OfferingBreadcrumbPopover.tsx, marketplace/offerings/details/ConnectionStatusIndicator.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, marketplace/offerings/update/plans/PlansSection.tsx, marketplace/resources/details/utils.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, navigation/BackendHealthStatusDialog.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/course-accounts/Step2PreviewAndCreate.tsx, project/import/Step5PreviewAndImport.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/round/proposals/ProposalExpandableRow.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/UserPermissionRequestsList.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
@@ -14772,7 +14772,7 @@
     "message": "Total published offerings"
   },
   "Total resources": {
-    "description": "marketplace/offerings/details/OfferingDetailsStatistics.tsx, rancher/cluster/dashboard/ClusterStatistics.tsx",
+    "description": "rancher/cluster/dashboard/ClusterStatistics.tsx",
     "message": "Total resources"
   },
   "Total size": {
@@ -17224,19 +17224,19 @@
     "message": "Values that trigger this question"
   },
   "Vault Host": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Vault Host"
   },
   "Vault Port": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Vault Port"
   },
   "Vault TLS verify": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Vault TLS verify"
   },
   "Vault Token": {
-    "description": "rancher/cluster/create/ManagedRancherProvisioningConfigurationForm.tsx",
+    "description": "rancher/cluster/create/RancherProvisioningConfigurationForm.tsx",
     "message": "Vault Token"
   },
   "Verify SSL": {

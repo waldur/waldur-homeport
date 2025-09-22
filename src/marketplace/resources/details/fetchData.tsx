@@ -21,10 +21,7 @@ import {
 } from '@waldur/marketplace/common/api';
 import { PageBarTab } from '@waldur/navigation/types';
 import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
-import {
-  MANAGED_RANCHER,
-  MARKETPLACE_RANCHER,
-} from '@waldur/rancher/cluster/create/constants';
+import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
 import { getTabs } from '@waldur/resource/tabs/registry';
 import { getResourceAccessEndpoints } from '@waldur/resource/utils';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
@@ -119,10 +116,7 @@ export const getResourceTabs = ({
         ),
       });
     }
-  } else if (
-    [MARKETPLACE_RANCHER, MANAGED_RANCHER].includes(resource.offering_type) &&
-    scope
-  ) {
+  } else if ([MARKETPLACE_RANCHER].includes(resource.offering_type) && scope) {
     tabs.push({
       key: 'dashboard',
       title: translate('Dashboard'),
@@ -134,7 +128,7 @@ export const getResourceTabs = ({
         ),
       ),
     });
-    if (resource.offering_type === MANAGED_RANCHER) {
+    if (resource.offering_type === MARKETPLACE_RANCHER) {
       tabs.push({
         key: 'security_groups',
         title: translate('Security groups'),
@@ -275,7 +269,7 @@ export const getResourceTabs = ({
       ),
     });
   }
-  if (resource.offering_type === MANAGED_RANCHER) {
+  if (resource.offering_type === MARKETPLACE_RANCHER) {
     tabs.push({
       key: 'longhorn',
       title: translate('Longhorn'),
@@ -308,15 +302,6 @@ export const fetchData = async (resource: Resource) => {
         path: { uuid: resource.uuid },
       })
     ).data;
-  }
-  if (resource.offering_type === MANAGED_RANCHER) {
-    if (scope) {
-      nestedScope = (
-        await marketplaceResourcesDetailsRetrieve({
-          path: { uuid: scope.uuid },
-        })
-      ).data;
-    }
   }
 
   const offering = await marketplaceResourcesOfferingRetrieve({

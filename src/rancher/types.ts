@@ -27,9 +27,16 @@ export interface FieldProps {
 
 export type NodeRole = 'agent' | 'server';
 
+export interface DataVolume {
+  size: number;
+  type: string;
+}
+
 export interface NodeField {
   flavor: OpenStackFlavor;
   name: string;
   roles: string[];
   units: number;
+  system_volume_size: number;
+  data_volumes: Array<DataVolume>;
 }
