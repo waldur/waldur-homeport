@@ -100,5 +100,5 @@ export const OfferingDetailsPage: React.FC = () => {
     return null;
   }
 
-  return <DeployPage offering={value.offering} limits={value.limits} />;
+  return <DeployPage offering={value.offering} />;
 };

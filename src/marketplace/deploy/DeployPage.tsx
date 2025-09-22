@@ -9,18 +9,18 @@ import {
 } from 'react';
 import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
-import { reduxForm } from 'redux-form';
-import { OrderDetails as OrderResponse } from 'waldur-js-client';
+import { InjectedFormProps, reduxForm } from 'redux-form';
+import { OrderDetails } from 'waldur-js-client';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
-import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
+import { Offering, Plan } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
 import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
 
 import { getOrderFormComponent } from '../common/registry';
-import { DeployFormData } from '../common/types';
+import { DeployFormData, Limits } from '../common/types';
 import { PageBarProvider } from '../context';
 import { ORDER_FORM_ID } from '../details/constants';
 import { getMarketplaceFilters } from '../landing/filter/store/selectors';
@@ -33,18 +33,27 @@ import { DeployPageSidebar } from './DeployPageSidebar';
 import { orderFormDataSelector } from './selectors';
 import { orderCustomerSelector } from './selectors';
 import { orderProjectSelector } from './selectors';
+import { OfferingConfigurationFormStep } from './types';
 import { hasStepWithField } from './utils';
 
 import './DeployPage.scss';
 
 interface DeployPageProps {
   offering: Offering;
-  limits?: string[];
-  updateMode?: boolean;
+  limits?: Limits;
   previewMode?: boolean;
-  order?: OrderResponse;
+}
+
+interface BaseDeployPageProps
+  extends Partial<InjectedFormProps>,
+    DeployPageProps {
+  order?: OrderDetails;
+  formData: DeployFormData;
+  selectedOffering: Offering;
+  inputFormSteps: OfferingConfigurationFormStep[];
+  initialLimits?: Limits;
   plan?: Plan;
-  initialLimits?: AttributesType;
+  updateMode?: boolean;
 }
 
 export const BaseDeployPage = ({
@@ -52,7 +61,7 @@ export const BaseDeployPage = ({
   inputFormSteps,
   selectedOffering,
   ...props
-}) => {
+}: BaseDeployPageProps) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const marketplaceFilters = useSelector(getMarketplaceFilters);

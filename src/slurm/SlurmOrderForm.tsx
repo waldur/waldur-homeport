@@ -1,5 +1,6 @@
 import { getLatinNameValidators } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
+import { OrderFormComponentProps } from '@waldur/marketplace/common/types';
 import { BaseDeployPage } from '@waldur/marketplace/deploy/DeployPage';
 import {
   AdditionalConfigurationStep,
@@ -24,6 +25,6 @@ const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   },
 ];
 
-export const SlurmOrderForm = (props) => (
+export const SlurmOrderForm = (props: OrderFormComponentProps) => (
   <BaseDeployPage inputFormSteps={deployOfferingSteps} {...props} />
 );

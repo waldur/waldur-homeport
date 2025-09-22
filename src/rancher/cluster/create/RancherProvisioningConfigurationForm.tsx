@@ -89,7 +89,40 @@ const FLAVOR_FIELD: Partial<OfferingEditField> = {
   },
 };
 
-const fields: OfferingEditField[] = [
+const RANCHER_DEPLOYMENT_MODE_OPTIONS = [
+  {
+    label: translate('Managed'),
+    value: 'managed',
+  },
+  {
+    label: translate('Self-managed'),
+    value: 'self_managed',
+  },
+];
+
+const DEPLOYMENT_MODE_FIELD: OfferingEditField = {
+  label: translate('Deployment mode'),
+  key: 'plugin_options.deployment_mode',
+  component: SelectField,
+  fieldProps: {
+    options: RANCHER_DEPLOYMENT_MODE_OPTIONS,
+    simpleValue: true,
+    isClearable: false,
+  },
+};
+
+const SELF_MANAGED_FIELDS: OfferingEditField[] = [
+  DEPLOYMENT_MODE_FIELD,
+  {
+    label: translate('Flavors regex'),
+    key: 'plugin_options.flavors_regex',
+    component: StringField,
+    description: translate('Regular expression to limit flavors list'),
+  },
+];
+
+const MANAGED_RANCHER_FIELD: OfferingEditField[] = [
+  DEPLOYMENT_MODE_FIELD,
   {
     label: translate('OpenStack offerings'),
     key: 'plugin_options.openstack_offering_uuid_list',
@@ -355,6 +388,15 @@ const fields: OfferingEditField[] = [
   },
 ];
 
-export const ManagedRancherProvisioningConfigurationForm: FunctionComponent<
+export const RancherProvisioningConfigurationForm: FunctionComponent<
   OfferingEditPanelFormProps
-> = (props) => <DefaultOfferingEditPanel fields={fields} {...props} />;
+> = (props) => (
+  <DefaultOfferingEditPanel
+    fields={
+      props.offering.plugin_options.deployment_mode === 'managed'
+        ? MANAGED_RANCHER_FIELD
+        : SELF_MANAGED_FIELDS
+    }
+    {...props}
+  />
+);

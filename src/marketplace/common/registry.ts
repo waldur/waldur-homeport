@@ -9,10 +9,7 @@ import { ScriptOffering } from '@waldur/marketplace-script/marketplace';
 import { OpenStackTenantOffering } from '@waldur/openstack/marketplace';
 import { OpenStackInstanceOffering } from '@waldur/openstack/openstack-instance/marketplace';
 import { OpenStackVolumeOffering } from '@waldur/openstack/openstack-volume/marketplace';
-import {
-  ManagedRancherOffering,
-  RancherOffering,
-} from '@waldur/rancher/cluster/create/marketplace';
+import { RancherOffering } from '@waldur/rancher/cluster/create/marketplace';
 import { SiteAgentOffering } from '@waldur/site-agent/marketplace';
 import { SlurmOffering } from '@waldur/slurm/marketplace';
 import { BasicOffering, SupportOffering } from '@waldur/support/marketplace';
@@ -204,7 +201,6 @@ registerOfferingType(OpenStackTenantOffering);
 registerOfferingType(OpenStackInstanceOffering);
 registerOfferingType(OpenStackVolumeOffering);
 registerOfferingType(RancherOffering);
-registerOfferingType(ManagedRancherOffering);
 registerOfferingType(SlurmOffering);
 registerOfferingType(SiteAgentOffering);
 registerOfferingType(SupportOffering);

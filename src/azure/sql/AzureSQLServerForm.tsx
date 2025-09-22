@@ -5,11 +5,11 @@ import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, TextField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
-import { OfferingConfigurationFormProps } from '@waldur/marketplace/types';
+import { OrderFormComponentProps } from '@waldur/marketplace/common/types';
 
 import { loadLocationOptions } from '../vm/utils';
 
-export const AzureSQLServerForm: React.FC<OfferingConfigurationFormProps> = (
+export const AzureSQLServerForm: React.FC<OrderFormComponentProps> = (
   props,
 ) => {
   return (

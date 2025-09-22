@@ -1,11 +1,9 @@
-import { OpenStackFlavor, OpenStackVolumeType } from 'waldur-js-client';
-
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OfferingConfiguration } from '@waldur/marketplace/common/types';
-import { Offering } from '@waldur/marketplace/types';
 
-import { MANAGED_RANCHER, MARKETPLACE_RANCHER } from './constants';
+import { MARKETPLACE_RANCHER } from './constants';
+import { rancherOrderSerializer } from './serializers';
 
 const RancherCredentialsForm = lazyComponent(() =>
   import('@waldur/rancher/RancherCredentialsForm').then((module) => ({
@@ -18,85 +16,17 @@ const RancherClusterCheckoutSummary = lazyComponent(() =>
     default: module.RancherClusterCheckoutSummary,
   })),
 );
-const RancherPluginOptionsForm = lazyComponent(() =>
-  import('./RancherPluginOptionsForm').then((module) => ({
-    default: module.RancherPluginOptionsForm,
-  })),
-);
 const RancherOrderForm = lazyComponent(() =>
   import('./RancherOrderForm').then((module) => ({
     default: module.RancherOrderForm,
   })),
 );
 
-const ManagedRancherProvisioningConfigurationForm = lazyComponent(() =>
-  import('./ManagedRancherProvisioningConfigurationForm').then((module) => ({
-    default: module.ManagedRancherProvisioningConfigurationForm,
+const RancherProvisioningConfigurationForm = lazyComponent(() =>
+  import('./RancherProvisioningConfigurationForm').then((module) => ({
+    default: module.RancherProvisioningConfigurationForm,
   })),
 );
-
-const ManagedRancherOrderForm = lazyComponent(() =>
-  import('./ManagedRancherOrderForm').then((module) => ({
-    default: module.ManagedRancherOrderForm,
-  })),
-);
-
-const serializeDataVolume = ({ size, ...volumeRest }) => ({
-  ...volumeRest,
-  size: size * 1024,
-});
-
-const serializeNode =
-  (subnet) =>
-  ({ system_volume_size, flavor, ...nodeRest }) => ({
-    ...nodeRest,
-    system_volume_size: system_volume_size * 1024,
-    flavor: flavor ? flavor.url : undefined,
-    subnet,
-    data_volumes: (nodeRest.data_volumes || []).map(serializeDataVolume),
-  });
-
-const standaloneRancherOrderSerializer = ({
-  subnet,
-  nodes,
-  ssh_public_key,
-  security_groups,
-  tenant,
-  ...clusterRest
-}) => ({
-  ...clusterRest,
-  nodes: nodes ? nodes.map(serializeNode(subnet)) : undefined,
-  ssh_public_key: ssh_public_key ? ssh_public_key.url : undefined,
-  security_groups: security_groups
-    ? security_groups.map((group) => ({ url: group.url }))
-    : undefined,
-  tenant: tenant ? tenant.url : undefined,
-});
-
-interface ManagedRancherOrderFormData {
-  worker_nodes_count: number;
-  worker_nodes_flavor: OpenStackFlavor;
-  worker_nodes_data_volume_size: number;
-  worker_nodes_data_volume_type_name: OpenStackVolumeType;
-  openstack_offering: Offering;
-  install_longhorn: boolean;
-  worker_nodes_longhorn_volume_size: number;
-  worker_nodes_longhorn_volume_type_name: OpenStackVolumeType;
-}
-
-const managedRancherOrderSerializer = (
-  formData: ManagedRancherOrderFormData,
-) => ({
-  ...formData,
-  worker_nodes_flavor_name: formData.worker_nodes_flavor?.name,
-  worker_nodes_data_volume_type_name:
-    formData.worker_nodes_data_volume_type_name?.name,
-  worker_nodes_longhorn_volume_type_name:
-    formData.worker_nodes_longhorn_volume_type_name?.name,
-  openstack_offering_uuid_list: formData.openstack_offering
-    ? [formData.openstack_offering.uuid]
-    : undefined,
-});
 
 export const RancherOffering: OfferingConfiguration = {
   type: MARKETPLACE_RANCHER,
@@ -105,19 +35,9 @@ export const RancherOffering: OfferingConfiguration = {
   },
   orderFormComponent: RancherOrderForm,
   checkoutSummaryComponent: RancherClusterCheckoutSummary,
-  pluginOptionsForm: RancherPluginOptionsForm,
   credentialsForm: RancherCredentialsForm,
-  serializer: standaloneRancherOrderSerializer,
-};
-
-export const ManagedRancherOffering: OfferingConfiguration = {
-  type: MANAGED_RANCHER,
-  get label() {
-    return translate('Managed Rancher cluster');
-  },
-  provisioningConfigForm: ManagedRancherProvisioningConfigurationForm,
-  orderFormComponent: ManagedRancherOrderForm,
-  serializer: managedRancherOrderSerializer,
+  provisioningConfigForm: RancherProvisioningConfigurationForm,
+  serializer: rancherOrderSerializer,
   secretOptionsSerializer: ({ customer_uuid, ...formData }) => ({
     ...formData,
     customer_uuid: customer_uuid ? customer_uuid.uuid : undefined,

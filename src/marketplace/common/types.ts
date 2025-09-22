@@ -1,4 +1,5 @@
 import { ComponentType, LazyExoticComponent } from 'react';
+import { InjectedFormProps } from 'redux-form';
 import {
   Project,
   Customer,
@@ -23,7 +24,9 @@ export interface OfferingConfiguration<
   RequestPayloadType = any,
 > {
   type: string;
-  orderFormComponent?: LazyExoticComponent<ComponentType<any>>;
+  orderFormComponent?: LazyExoticComponent<
+    ComponentType<OrderFormComponentProps>
+  >;
   pluginOptionsForm?: LazyExoticComponent<
     ComponentType<OfferingEditPanelFormProps>
   >;
@@ -68,4 +71,10 @@ export interface DeployFormData {
   plan?: Plan;
   request_comment?: string;
   attachment?: File;
+}
+
+export interface OrderFormComponentProps extends InjectedFormProps {
+  offering: Offering;
+  formData: DeployFormData;
+  selectedOffering: Offering;
 }
