@@ -14,6 +14,7 @@ import {
   useBreadcrumbs,
   usePageHero,
   useToolbarActions,
+  useExtraAnnouncementBar,
 } from '@waldur/navigation/context';
 import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
 import { useTitle } from '@waldur/navigation/title';
@@ -26,6 +27,7 @@ import { setCurrentResource } from '@waldur/workspace/actions';
 import { fetchData, getResourceTabs } from './fetchData';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { ResourceDetailsHero } from './ResourceDetailsHero';
+import { ServiceProviderCommentWarningBar } from './ServiceProviderCommentWarningBar';
 
 const ResourceTeamDialog = lazyComponent(() =>
   import('./ResourceTeamDialog').then((module) => ({
@@ -207,6 +209,13 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     ),
 
     [resource, data, refetch, isLoading, isRefetching],
+  );
+
+  useExtraAnnouncementBar(
+    !data || isLoading ? null : (
+      <ServiceProviderCommentWarningBar offering={data.offering} />
+    ),
+    [data, isLoading],
   );
 
   const openTeamModal = useCallback(() => {

@@ -1,8 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form';
+import { OfferingUserStateEnum } from 'waldur-js-client';
 
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
+import {
+  REACT_MULTI_SELECT_TABLE_FILTER,
+  REACT_SELECT_TABLE_FILTER,
+  Select,
+} from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
@@ -15,6 +20,43 @@ import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
 interface ProviderOfferingUsersFilterProps {
   hasOrganizationColumn?: boolean;
 }
+
+const getOfferingUserStateFilterOptions = (): {
+  value: OfferingUserStateEnum;
+  label: string;
+}[] => [
+  { value: 'Creating', label: translate('Creating') },
+  {
+    value: 'Pending account linking',
+    label: translate('Pending account linking'),
+  },
+  {
+    value: 'Pending additional validation',
+    label: translate('Pending additional validation'),
+  },
+  { value: 'OK', label: translate('OK') },
+  { value: 'Requested deletion', label: translate('Requested deletion') },
+  { value: 'Deleting', label: translate('Deleting') },
+  { value: 'Deleted', label: translate('Deleted') },
+  { value: 'Error creating', label: translate('Error creating') },
+  { value: 'Error deleting', label: translate('Error deleting') },
+];
+
+const OfferingUserStateFilter = () => (
+  <Field
+    name="state"
+    component={(fieldProps) => (
+      <Select
+        placeholder={translate('Select state...')}
+        options={getOfferingUserStateFilterOptions()}
+        value={fieldProps.input.value}
+        onChange={(value) => fieldProps.input.onChange(value)}
+        isClearable={true}
+        {...REACT_MULTI_SELECT_TABLE_FILTER}
+      />
+    )}
+  />
+);
 
 const PureProviderOfferingUsersFilter: FunctionComponent<
   ProviderOfferingUsersFilterProps &
@@ -43,6 +85,14 @@ const PureProviderOfferingUsersFilter: FunctionComponent<
           reactSelectProps={REACT_SELECT_TABLE_FILTER}
         />
       </TableFilterItem>
+      <TableFilterItem
+        title={translate('State')}
+        name="state"
+        instantApply={false}
+      >
+        <OfferingUserStateFilter />
+      </TableFilterItem>
+
       {hasOrganizationColumn && (
         <TableFilterItem
           title={translate('Service provider')}

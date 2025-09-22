@@ -1,9 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { OfferingUserStateEnum } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -13,6 +11,7 @@ import { useTable } from '@waldur/table/useTable';
 
 import { OfferingUserRowActions } from '../offerings/actions/OfferingUserRowActions';
 import { UserImportButton } from '../offerings/import-users/UserImportButton';
+import { OfferingUserStateField } from '../OfferingUserStateField';
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
 import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
@@ -20,46 +19,20 @@ import { CreateProviderOfferingUserButton } from './CreateProviderOfferingUserBu
 import { OfferingUsersExpandableRow } from './OfferingUsersExpandableRow';
 import { ProviderOfferingUsersFilter } from './ProviderOfferingUsersFilter';
 
-const getStateColor = (state: OfferingUserStateEnum) => {
-  switch (state) {
-    case 'OK':
-      return 'success';
-    case 'Creating':
-      return 'blue';
-    case 'Pending account linking':
-    case 'Pending additional validation':
-      return 'warning';
-    case 'Error creating':
-    case 'Error deleting':
-      return 'danger';
-    case 'Deleted':
-    case 'Deleting':
-      return 'pink';
-    case 'Requested':
-    case 'Requested deletion':
-      return 'default';
-  }
-};
-
-const AccountStateField = ({ row }) => (
-  <Badge variant={getStateColor(row.state)} pill outline>
-    {row.state}
-  </Badge>
-);
-
 export const ProviderOfferingUsersListComponent: FunctionComponent<{
   provider?;
   hasOrganizationColumn?: boolean;
 }> = ({ provider, hasOrganizationColumn }) => {
   const filterValues = useSelector(
     getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
-  ) as { offering?; provider? };
+  ) as { offering?; provider?; state?: Array<{ value: any }> };
   const filter = useMemo(
     () => ({
       provider_uuid: hasOrganizationColumn
         ? filterValues?.provider?.customer_uuid
         : provider?.customer_uuid,
       offering_uuid: filterValues?.offering?.uuid,
+      state: filterValues?.state?.map((option) => option.value),
     }),
     [provider, filterValues],
   );
@@ -86,7 +59,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
     ? [
         {
           title: translate('Account state'),
-          render: AccountStateField,
+          render: OfferingUserStateField,
         },
       ]
     : [];

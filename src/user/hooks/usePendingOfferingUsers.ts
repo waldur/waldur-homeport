@@ -1,0 +1,35 @@
+import { useQuery } from '@tanstack/react-query';
+import {
+  marketplaceOfferingUsersList,
+  OfferingUserStateEnum,
+} from 'waldur-js-client';
+
+import { useUser } from '@waldur/workspace/hooks';
+
+const PENDING_STATES: OfferingUserStateEnum[] = [
+  'Pending account linking',
+  'Pending additional validation',
+];
+
+export const usePendingOfferingUsers = () => {
+  const user = useUser();
+
+  return useQuery({
+    queryKey: ['pendingOfferingUsers', user?.uuid],
+    queryFn: async () => {
+      if (!user?.uuid) return [];
+
+      const response = await marketplaceOfferingUsersList({
+        query: {
+          user_uuid: user.uuid,
+          state: PENDING_STATES,
+          field: ['uuid', 'state'],
+        },
+      });
+
+      return response.data;
+    },
+    enabled: !!user?.uuid,
+    staleTime: 2 * 60 * 1000,
+  });
+};

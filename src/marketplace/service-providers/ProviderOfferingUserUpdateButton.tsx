@@ -1,4 +1,4 @@
-import { PencilSimpleIcon } from '@phosphor-icons/react';
+import { ChatTeardropTextIcon, PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
@@ -37,6 +37,14 @@ export const ProviderOfferingUserUpdateButton: FC<
         ? props.offering.customer_uuid
         : undefined,
   });
+
+  const icon =
+    props.updateScope === 'comment' ? (
+      <ChatTeardropTextIcon weight="bold" />
+    ) : (
+      <PencilSimpleIcon weight="bold" />
+    );
+
   return (
     canUpdateOfferingUser && (
       <ActionItem
@@ -45,7 +53,7 @@ export const ProviderOfferingUserUpdateButton: FC<
             ? translate('Edit comment')
             : props.updateScope === 'state'
               ? translate('Update account state')
-              : translate('Edit')
+              : translate('Edit external username')
         }
         action={() =>
           dispatch(
@@ -55,7 +63,7 @@ export const ProviderOfferingUserUpdateButton: FC<
             }),
           )
         }
-        iconNode={<PencilSimpleIcon weight="bold" />}
+        iconNode={icon}
       />
     )
   );

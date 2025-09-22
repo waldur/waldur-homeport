@@ -18,6 +18,7 @@ export interface LayoutContextInterface {
   setExtraToolbar(component: React.ReactNode);
   setPageHero(component: React.ReactNode);
   setPageBar(component: React.ReactNode);
+  setExtraAnnouncementBar(component: React.ReactNode);
   breadcrumbs: IBreadcrumbItem[];
   setBreadcrumbs(items: IBreadcrumbItem[]);
 }
@@ -91,4 +92,17 @@ export const useBreadcrumbs = (items: IBreadcrumbItem[]) => {
       layoutContext.setBreadcrumbs([]);
     };
   }, [items, layoutContext]);
+};
+
+export const useExtraAnnouncementBar = (
+  component: ReactNode,
+  deps: DependencyList = [],
+) => {
+  const layoutContext = useContext(LayoutContext);
+  useEffect(() => {
+    layoutContext.setExtraAnnouncementBar(component);
+    return () => {
+      layoutContext.setExtraAnnouncementBar(null);
+    };
+  }, [layoutContext, ...deps]);
 };

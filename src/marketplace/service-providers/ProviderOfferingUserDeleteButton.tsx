@@ -1,7 +1,10 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { marketplaceOfferingUsersDestroy } from 'waldur-js-client';
+import {
+  marketplaceOfferingUsersDestroy,
+  OfferingUser,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -12,8 +15,6 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { ServiceProvider } from '../types';
-
-import { OfferingUser } from './types';
 
 export const ProviderOfferingUserDeleteButton: FC<{
   row: OfferingUser;

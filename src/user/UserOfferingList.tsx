@@ -1,8 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
 import { User } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
+import { PROVIDER_OFFERING_USERS_FORM_ID } from '@waldur/marketplace/service-providers/constants';
+import { ProviderOfferingUsersFilter } from '@waldur/marketplace/service-providers/ProviderOfferingUsersFilter';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -19,11 +24,17 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
 }) => {
   const currentUser = useUser();
   const user = props.user || currentUser;
+  const filterValues = useSelector(
+    getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
+  ) as { offering?; provider?; state?: Array<{ value: any }> };
   const filter = useMemo(
     () => ({
+      provider_uuid: filterValues?.provider?.customer_uuid,
+      offering_uuid: filterValues?.offering?.uuid,
+      state: filterValues?.state?.map((option) => option.value),
       user_uuid: user?.uuid,
     }),
-    [user],
+    [filterValues, user],
   );
   const tableProps = useTable({
     table: 'UserOfferingList',
@@ -44,6 +55,10 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       title: translate('Created at'),
       render: ({ row }) => <>{formatDateTime(row.created)}</>,
     },
+    {
+      title: translate('State'),
+      render: OfferingUserStateField,
+    },
   ];
 
   return (
@@ -54,6 +69,7 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       showPageSizeSelector={true}
       hasQuery={true}
       hasActionBar={hasActionBar}
+      filters={<ProviderOfferingUsersFilter hasOrganizationColumn={true} />}
     />
   );
 };

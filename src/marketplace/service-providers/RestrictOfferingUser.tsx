@@ -1,4 +1,4 @@
-import { CheckIcon, ProhibitIcon } from '@phosphor-icons/react';
+import { CheckIcon, ProhibitInsetIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceOfferingUsersUpdateRestricted } from 'waldur-js-client';
@@ -55,9 +55,11 @@ export const RestrictOfferingUserButton: FC<{
         props.row.is_restricted ? (
           <CheckIcon weight="bold" />
         ) : (
-          <ProhibitIcon weight="bold" />
+          <ProhibitInsetIcon weight="bold" />
         )
       }
+      className="text-danger"
+      iconColor="danger"
     />
   );
 };
