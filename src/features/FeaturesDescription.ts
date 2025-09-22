@@ -79,6 +79,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Do not render prices in order details.'),
       },
       {
+        key: 'display_user_tos',
+        description: translate('Enable display of user terms of service in UI.'),
+      },
+      {
         key: 'import_resources',
         description: translate('Allow to import resources from service provider to project.'),
       },
