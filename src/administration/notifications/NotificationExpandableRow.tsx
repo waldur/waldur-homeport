@@ -7,6 +7,8 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
+import { formatHeader } from './NotificationForm';
+
 export const NotificationExpandableRow: FunctionComponent<{
   row;
 }> = ({ row }) => {
@@ -26,7 +28,7 @@ export const NotificationExpandableRow: FunctionComponent<{
                 <>
                   {template.is_content_overridden ? (
                     <div>
-                      {template.path}
+                      {formatHeader(template.path)}
                       <Tip
                         id={'tip-notif-overridden-' + index}
                         label={translate('Content is overridden')}
@@ -36,7 +38,7 @@ export const NotificationExpandableRow: FunctionComponent<{
                       </Tip>
                     </div>
                   ) : (
-                    template.path
+                    formatHeader(template.path)
                   )}
                 </>
               }
