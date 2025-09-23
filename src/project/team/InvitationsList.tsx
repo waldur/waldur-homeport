@@ -25,6 +25,7 @@ import { getCustomer, getProject } from '@waldur/workspace/selectors';
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';
 import { useTeamTableTabs } from './tabs';
 import { TeamDropdownActions } from './TeamDropdownActions';
+import { useRedirectCourseProjects } from './utils';
 
 const InvitationsListComponent: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
@@ -127,6 +128,8 @@ export const InvitationsList: FunctionComponent = () => {
       router.stateService.target('errorPage.notFound');
     }
   }, [user, project, customer, router]);
+
+  useRedirectCourseProjects(project);
 
   return <InvitationsListComponent />;
 };

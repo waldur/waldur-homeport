@@ -16,12 +16,12 @@ export const useTeamTableTabs = (project: Project) => {
   return useMemo(
     () =>
       [
-        {
+        project.kind !== 'course' && {
           key: 'users',
           title: translate('Active'),
           state: 'project-users',
         },
-        {
+        project.kind !== 'course' && {
           key: 'project-invitations',
           title: translate('Invitations'),
           state: 'project-invitations',

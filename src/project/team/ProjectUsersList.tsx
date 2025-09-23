@@ -17,6 +17,7 @@ import { ProjectUsersListFilter } from './ProjectUsersListFilter';
 import { SyncMembersButton } from './SyncMembersButton';
 import { useTeamTableTabs } from './tabs';
 import { TeamDropdownActions } from './TeamDropdownActions';
+import { useRedirectCourseProjects } from './utils';
 
 const mandatoryFields = [
   // Required for actions
@@ -70,6 +71,8 @@ export const ProjectUsersList = ({
   });
 
   const tabs = useTeamTableTabs(_project);
+
+  useRedirectCourseProjects(_project);
 
   return (
     <TeamTableComponent<UserRoleDetails>
