@@ -65,6 +65,13 @@ const fields: OfferingEditField[] = [
     key: 'plugin_options.order_supports_comments_and_metadata',
     component: AwesomeCheckboxField,
   },
+  {
+    label: translate(
+      'Maximal number of offering resources allowed per project',
+    ),
+    key: 'plugin_options.maximal_resource_count_per_project',
+    component: NumberField,
+  },
 ];
 
 export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
