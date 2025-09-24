@@ -1,4 +1,5 @@
-import { reduxForm } from 'redux-form';
+import React from 'react';
+import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
@@ -8,9 +9,17 @@ import { InvitationStateFilter } from '@waldur/invitations/InvitationStateFilter
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-const PureInvitationsFilter = () => (
+interface InvitationsFilterOwnProps {
+  showStateFilter?: boolean;
+}
+
+type InvitationsFilterProps = InvitationsFilterOwnProps & InjectedFormProps;
+
+const PureInvitationsFilter = ({
+  showStateFilter = true,
+}: InvitationsFilterProps) => (
   <>
-    <InvitationStateFilter />
+    {showStateFilter && <InvitationStateFilter />}
     <InvitationRoleFilter />
     <TableFilterItem
       title={translate('Organization')}
@@ -28,4 +37,6 @@ const enhance = reduxForm({
   destroyOnUnmount: false,
 });
 
-export const InvitationsFilter = enhance(PureInvitationsFilter);
+export const InvitationsFilter = enhance(
+  PureInvitationsFilter,
+) as React.ComponentType<InvitationsFilterOwnProps>;
