@@ -159,7 +159,6 @@ export const MigrateTenantDialog = connect<
                     },
                     prevOptions,
                     currentPage,
-                    // @ts-ignore
                     ['name', 'uuid', 'customer_name', 'plans', 'scope_uuid'],
                   )
                 }

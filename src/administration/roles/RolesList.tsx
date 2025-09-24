@@ -46,7 +46,6 @@ export const RolesList = () => {
         },
         {
           title: translate('Assigned users count'),
-          // @ts-ignore
           render: ({ row }) => row.users_count,
         },
         {

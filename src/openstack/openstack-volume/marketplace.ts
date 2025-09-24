@@ -31,7 +31,6 @@ export const OpenStackVolumeOffering: OfferingConfiguration = {
     return translate('OpenStack volume');
   },
   orderFormComponent: OpenstackVolumeOrder,
-  // @ts-ignore
   detailsComponent: OpenstackVolumeDetails,
   checkoutSummaryComponent: CheckoutSummary,
   serializer,

@@ -43,7 +43,6 @@ export const TenantNetworksList: FunctionComponent<{ resourceScope }> = ({
         'created',
         'is_external',
         'type',
-        // @ts-ignore
         'segmentation_id',
         'mtu',
         'subnets',

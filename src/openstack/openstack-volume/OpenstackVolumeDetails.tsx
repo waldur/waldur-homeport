@@ -1,18 +1,14 @@
 import { useAsync } from 'react-use';
 import { openstackVolumeTypesRetrieve } from 'waldur-js-client';
-import { OrderDetails } from 'waldur-js-client';
 
 import { formatFilesize, getUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { OrderDetailsProps } from '@waldur/marketplace/types';
 import { Field } from '@waldur/resource/summary';
 
 import { formatVolumeTypeLabel } from '../openstack-instance/utils';
 
-interface OpenstackVolumeDetailsProps {
-  order: OrderDetails;
-}
-
-export const OpenstackVolumeDetails = (props: OpenstackVolumeDetailsProps) => {
+export const OpenstackVolumeDetails = (props: OrderDetailsProps) => {
   const { order } = props;
   const { value: volumeType } = useAsync(() =>
     order.attributes['type']
