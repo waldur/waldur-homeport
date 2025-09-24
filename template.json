@@ -335,6 +335,10 @@
     "description": "administration/announcements/AnnouncementForm.tsx",
     "message": "Active from"
   },
+  "Active invitations": {
+    "description": "user/dashboard/ActiveInvitationsList.tsx, user/dashboard/UserDashboard.tsx",
+    "message": "Active invitations"
+  },
   "Active notifications": {
     "description": "marketplace/service-providers/dashboard/ProviderWidgets.tsx",
     "message": "Active notifications"
@@ -3264,7 +3268,7 @@
     "message": "Create"
   },
   "Created at": {
-    "description": "administration/InvitationList.tsx, administration/agreements/UserAgreementsList.tsx, administration/notifications/NotificationList.tsx, broadcasts/BroadcastList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, invitations/UserPermissionRequestsList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/offerings/details/OfferingUsersTable.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/orders/details/OrderDetailsApprovalsTab.tsx, marketplace/orders/list/OrdersTableComponent.tsx, marketplace/orders/list/ResourceOrders.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProviderResourcesList.tsx, marketplace/resources/list/utils.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace/service-providers/ServiceProvidersList.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx, openstack/openstack-network/NetworkRBACList.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/team/InvitationsList.tsx, user/UserOfferingList.tsx, user/affiliations/SummaryResourcesTable.tsx",
+    "description": "administration/InvitationList.tsx, administration/agreements/UserAgreementsList.tsx, administration/notifications/NotificationList.tsx, broadcasts/BroadcastList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, invitations/UserPermissionRequestsList.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/offerings/details/OfferingUsersTable.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/orders/details/OrderDetailsApprovalsTab.tsx, marketplace/orders/list/OrdersTableComponent.tsx, marketplace/orders/list/ResourceOrders.tsx, marketplace/resources/list/CategoryResourcesList.tsx, marketplace/resources/list/ProviderResourcesList.tsx, marketplace/resources/list/utils.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, marketplace/service-providers/ProviderCampaignResourceExpandable.tsx, marketplace/service-providers/ProviderProjectResourcesList.tsx, marketplace/service-providers/ServiceProvidersList.tsx, navigation/header/confirmation-drawer/OrderExpandableRow.tsx, openstack/openstack-network/NetworkRBACList.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsList.tsx, proposals/team/InvitationsList.tsx, user/UserOfferingList.tsx, user/affiliations/SummaryResourcesTable.tsx, user/dashboard/ActiveInvitationsList.tsx",
     "message": "Created at"
   },
   "Created by": {
@@ -5120,7 +5124,7 @@
     "message": "Expired"
   },
   "Expires at": {
-    "description": "administration/InvitationList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, project/team/InvitationsList.tsx, proposals/team/InvitationsList.tsx",
+    "description": "administration/InvitationList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, marketplace/offerings/details/permissions/OfferingPermissionsList.tsx, marketplace/service-providers/OfferingPermissionsList.tsx, project/team/InvitationsList.tsx, proposals/team/InvitationsList.tsx, user/dashboard/ActiveInvitationsList.tsx",
     "message": "Expires at"
   },
   "Explanation of the scientific case of the project for which the resources are intended to be used.": {
@@ -6520,7 +6524,7 @@
     "message": "Invite by mail"
   },
   "Invited by": {
-    "description": "invitations/InvitationsList.tsx, project/team/InvitationsList.tsx",
+    "description": "invitations/InvitationsList.tsx, project/team/InvitationsList.tsx, user/dashboard/ActiveInvitationsList.tsx",
     "message": "Invited by"
   },
   "Invoice date": {
@@ -7108,7 +7112,7 @@
     "message": "Loading"
   },
   "Loading...": {
-    "description": "marketplace/category/admin/CategoryColumnsForm.tsx",
+    "description": "marketplace/category/admin/CategoryColumnsForm.tsx, user/dashboard/UserDashboard.tsx",
     "message": "Loading..."
   },
   "Local category UUID": {
@@ -8086,6 +8090,10 @@
   "No access": {
     "description": "administration/roles/PermissionField.tsx",
     "message": "No access"
+  },
+  "No active invitations at the moment": {
+    "description": "user/dashboard/UserDashboard.tsx",
+    "message": "No active invitations at the moment"
   },
   "No active members": {
     "description": "marketplace/service-providers/CustomerMembersColumn.tsx",
@@ -9518,6 +9526,10 @@
   "Pending consumer orders": {
     "description": "navigation/header/confirmation-drawer/PendingConfirmationContainer.tsx",
     "message": "Pending consumer orders"
+  },
+  "Pending invitations sent to your email: {email}": {
+    "description": "user/dashboard/ActiveInvitationsList.tsx",
+    "message": "Pending invitations sent to your email: {email}"
   },
   "Pending offering requests": {
     "description": "proposals/call-management/CallManagementDashboard.tsx",
@@ -12052,7 +12064,7 @@
     "message": "Role name"
   },
   "Role": {
-    "description": "administration/InvitationList.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, customer/team/CustomerUsersListExpandableRow.tsx, customer/team/TeamTableComponent.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationRoleFilter.tsx, invitations/InvitationsList.tsx, invitations/actions/RoleGroup.tsx, invitations/actions/create/EmailsListGroup.tsx, marketplace/offerings/update/integration/ScriptEditorHeader.tsx, marketplace/offerings/update/roles/RolesSection.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/resources/users/ResourceUsersList.tsx, project/team/InvitationsList.tsx, project/team/ProjectUsersListFilter.tsx, project/team/RoleGroup.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/create/NodeRoleGroup.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, user/UserPermissionRequestExpandableRow.tsx, user/affiliations/PermissionDetails.tsx, user/support/UserFilter.tsx",
+    "description": "administration/InvitationList.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, customer/team/CustomerUsersListExpandableRow.tsx, customer/team/TeamTableComponent.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationRoleFilter.tsx, invitations/InvitationsList.tsx, invitations/actions/RoleGroup.tsx, invitations/actions/create/EmailsListGroup.tsx, marketplace/offerings/update/integration/ScriptEditorHeader.tsx, marketplace/offerings/update/roles/RolesSection.tsx, marketplace/resources/users/AddUserDialog.tsx, marketplace/resources/users/ResourceUsersList.tsx, project/team/InvitationsList.tsx, project/team/ProjectUsersListFilter.tsx, project/team/RoleGroup.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/create/NodeRoleGroup.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, user/UserPermissionRequestExpandableRow.tsx, user/affiliations/PermissionDetails.tsx, user/dashboard/ActiveInvitationsList.tsx, user/support/UserFilter.tsx",
     "message": "Role"
   },
   "Roles and permissions": {
@@ -12304,7 +12316,7 @@
     "message": "Scope type"
   },
   "Scope": {
-    "description": "administration/InvitationList.tsx, administration/roles/RolesList.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx, user/UserPermissionRequestExpandableRow.tsx",
+    "description": "administration/InvitationList.tsx, administration/roles/RolesList.tsx, rancher/cluster/team/AddResourceAccessDialog.tsx, user/UserPermissionRequestExpandableRow.tsx, user/dashboard/ActiveInvitationsList.tsx",
     "message": "Scope"
   },
   "Score": {
@@ -12434,6 +12446,10 @@
   "See our {guide}.": {
     "description": "dashboard/hero/NewbiesGuideNotification.tsx",
     "message": "See our {guide}."
+  },
+  "See pending invites sent to your email {email} ({count})": {
+    "description": "user/dashboard/UserDashboard.tsx",
+    "message": "See pending invites sent to your email {email} ({count})"
   },
   "Seems you don't have any resources yet": {
     "description": "marketplace/resources/list/CustomerResourcesListPlaceholder.tsx",
@@ -13564,7 +13580,7 @@
     "message": "Static routes update was scheduled."
   },
   "Status": {
-    "description": "administration/InvitationList.tsx, administration/announcements/AnnouncementFilter.tsx, administration/notifications/NotificationFilter.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, administration/providers/ProviderUsersDialog.tsx, customer/import/Step3PreviewAndImport.tsx, customer/payment-profiles/PaymentProfileList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, issues/list/IssuesFilter.tsx, issues/list/IssuesList.tsx, marketplace/offerings/OfferingBreadcrumbPopover.tsx, marketplace/offerings/details/ConnectionStatusIndicator.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, marketplace/offerings/update/plans/PlansSection.tsx, marketplace/resources/details/utils.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, navigation/BackendHealthStatusDialog.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/course-accounts/Step2PreviewAndCreate.tsx, project/import/Step5PreviewAndImport.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/round/proposals/ProposalExpandableRow.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/UserPermissionRequestsList.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
+    "description": "administration/InvitationList.tsx, administration/announcements/AnnouncementFilter.tsx, administration/notifications/NotificationFilter.tsx, administration/organizations/requests/OrganizationRequestsList.tsx, administration/providers/ProviderUsersDialog.tsx, customer/import/Step3PreviewAndImport.tsx, customer/payment-profiles/PaymentProfileList.tsx, invitations/GroupInvitationsList.tsx, invitations/InvitationsList.tsx, issues/list/IssuesFilter.tsx, issues/list/IssuesList.tsx, marketplace/offerings/OfferingBreadcrumbPopover.tsx, marketplace/offerings/details/ConnectionStatusIndicator.tsx, marketplace/offerings/import-users/Step2PreviewAndImport.tsx, marketplace/offerings/update/plans/PlansSection.tsx, marketplace/resources/details/utils.tsx, marketplace/service-providers/ProviderCampaignsList.tsx, navigation/BackendHealthStatusDialog.tsx, openstack/openstack-tenant/TenantPortsList.tsx, project/course-accounts/Step2PreviewAndCreate.tsx, project/import/Step5PreviewAndImport.tsx, project/team/InvitationsList.tsx, proposals/offering-requests/OfferingRequestsTableFilter.tsx, proposals/round/proposals/ProposalExpandableRow.tsx, proposals/team/InvitationsList.tsx, rancher/cluster/team/KeycloakMembershipExpandableRow.tsx, rancher/cluster/team/KeycloakMembershipList.tsx, user/UserPermissionRequestsList.tsx, user/dashboard/ActiveInvitationsList.tsx, user/support/UserFilter.tsx, user/support/UserList.tsx",
     "message": "Status"
   },
   "Stay on current": {
@@ -14896,7 +14912,7 @@
     "message": "Type your question here..."
   },
   "Type": {
-    "description": "administration/agreements/UserAgreementsList.tsx, administration/announcements/AnnouncementFilter.tsx, administration/announcements/AnnouncementForm.tsx, administration/roles/RoleForm.tsx, administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileDetails.tsx, customer/payment-profiles/PaymentProfileList.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, customer/workspace/CustomerEventsFilter.tsx, invitations/GroupInvitationsList.tsx, maintenance/create/Step3ReviewAndCreate.tsx, marketplace/aggregate-limits/AggregateLimitsExpandableRow.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/components/ComponentsSection.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/orders/details/OrderDetailsQuickBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/orders/list/OrdersTableComponent.tsx, marketplace/orders/list/ResourceOrders.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, openstack/openstack-instance/deploy/FormSSHPublicKeysField.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-tenant/AddRouterInterfaceDialog.tsx, openstack/openstack-volume/InstanceVolumesList.tsx, openstack/openstack-volume/TenantVolumesList.tsx, project/ProjectEventsFilter.tsx, project/ProjectsList.tsx, project/import/Step5PreviewAndImport.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/ProjectsList.tsx, user/keys/KeysList.tsx, vmware/deploy/FormNetworkStep.tsx",
+    "description": "administration/agreements/UserAgreementsList.tsx, administration/announcements/AnnouncementFilter.tsx, administration/announcements/AnnouncementForm.tsx, administration/roles/RoleForm.tsx, administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx, administration/service-desk/issue-templates/IssueTemplateForm.tsx, customer/payment-profiles/PaymentProfileCreateDialog.tsx, customer/payment-profiles/PaymentProfileDetails.tsx, customer/payment-profiles/PaymentProfileList.tsx, customer/payment-profiles/PaymentProfileUpdateDialog.tsx, customer/workspace/CustomerEventsFilter.tsx, invitations/GroupInvitationsList.tsx, maintenance/create/Step3ReviewAndCreate.tsx, marketplace/aggregate-limits/AggregateLimitsExpandableRow.tsx, marketplace/category/PublicOfferingsList.tsx, marketplace/deploy/DetailsOverviewDialog.tsx, marketplace/offerings/OfferingViewHero.tsx, marketplace/offerings/actions/OfferingCreateDialog.tsx, marketplace/offerings/details/PublicOfferingComponentsTable.tsx, marketplace/offerings/list/OfferingsList.tsx, marketplace/offerings/update/components/ComponentsSection.tsx, marketplace/offerings/update/options/OptionForm.tsx, marketplace/orders/details/OrderDetailsQuickBody.tsx, marketplace/orders/list/MarketplaceOrdersListFilter.tsx, marketplace/orders/list/OrdersListExpandableRow.tsx, marketplace/orders/list/OrdersTableComponent.tsx, marketplace/orders/list/ResourceOrders.tsx, marketplace/resources/import/ResourcesList.tsx, marketplace/robot-accounts/CreateRobotAccountDialog.tsx, marketplace/robot-accounts/ProviderRobotAccountList.tsx, marketplace/robot-accounts/RobotAccountList.tsx, marketplace/service-providers/ProviderOfferingsList.tsx, marketplace/service-providers/details/ProviderDashboardTab.tsx, marketplace-remote/ProjectUpdateRequestExpandable.tsx, navigation/header/confirmation-drawer/PendingConsumerOrders.tsx, navigation/header/confirmation-drawer/PendingProviderOrders.tsx, openstack/openstack-instance/deploy/FormSSHPublicKeysField.tsx, openstack/openstack-network/OpenStackNetworkSummary.tsx, openstack/openstack-tenant/AddRouterInterfaceDialog.tsx, openstack/openstack-volume/InstanceVolumesList.tsx, openstack/openstack-volume/TenantVolumesList.tsx, project/ProjectEventsFilter.tsx, project/ProjectsList.tsx, project/import/Step5PreviewAndImport.tsx, user/UserPermissionRequestsList.tsx, user/affiliations/ProjectsList.tsx, user/dashboard/ActiveInvitationsList.tsx, user/keys/KeysList.tsx, vmware/deploy/FormNetworkStep.tsx",
     "message": "Type"
   },
   "Types of offering": {
