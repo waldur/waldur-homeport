@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { openstackFlavorsUsageStatsRetrieve } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -28,7 +29,7 @@ export const FlavorsList: FunctionComponent<{}> = () => {
   const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: 'flavorsList',
-    fetchData: createFetcher('openstack-flavors/usage_stats'),
+    fetchData: createFetcher(openstackFlavorsUsageStatsRetrieve),
     filter,
   });
   return (

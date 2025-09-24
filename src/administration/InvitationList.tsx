@@ -1,7 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { Invitation, UserInvitationsListData } from 'waldur-js-client';
+import {
+  Invitation,
+  userInvitationsList,
+  UserInvitationsListData,
+} from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -33,7 +37,7 @@ export const InvitationList: FunctionComponent = () => {
   );
   const props = useTable({
     table: 'admin-invitations',
-    fetchData: createFetcher('user-invitations'),
+    fetchData: createFetcher(userInvitationsList),
     queryField: 'email',
     filter,
   });

@@ -1,4 +1,4 @@
-import { FreeipaProfile } from 'waldur-js-client';
+import { FreeipaProfile, freeipaProfilesList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -10,7 +10,7 @@ import { useTable } from '@waldur/table/useTable';
 export const FreeIPAUsersList = () => {
   const tableProps = useTable({
     table: `FreeIPAUsersList`,
-    fetchData: createFetcher('freeipa-profiles'),
+    fetchData: createFetcher(freeipaProfilesList),
     queryField: 'query',
   });
 

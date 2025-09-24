@@ -2,7 +2,10 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { MarketplacePublicOfferingsListData } from 'waldur-js-client';
+import {
+  marketplacePublicOfferingsList,
+  MarketplacePublicOfferingsListData,
+} from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { Link } from '@waldur/core/Link';
@@ -40,7 +43,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
 
   const tableProps = useTable({
     table: 'PublicAvailableOfferingsList',
-    fetchData: createFetcher('marketplace-public-offerings'),
+    fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'name',
     filter,
   });

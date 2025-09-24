@@ -2,7 +2,11 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { MarketplaceResourcesListData, Project } from 'waldur-js-client';
+import {
+  marketplaceResourcesList,
+  MarketplaceResourcesListData,
+  Project,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import {
@@ -70,7 +74,7 @@ export const AllResourcesList: FC<AllResourcesListProps> = (props) => {
 
   const tableProps = useTable({
     table: ALL_RESOURCES_TABLE_ID,
-    fetchData: createFetcher('marketplace-resources'),
+    fetchData: createFetcher(marketplaceResourcesList),
     queryField: 'query',
     filter,
     onApplyFilter: (filters) => {

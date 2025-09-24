@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import {
+  callProposalProjectRoleMappingsList,
   CallProposalProjectRoleMappingsListData,
   ProposalProjectRoleMapping,
 } from 'waldur-js-client';
@@ -35,7 +36,7 @@ export const CallRoleMappingsList = (props) => {
   );
   const tableProps = useTable({
     table: 'callRoleMappingsList',
-    fetchData: createFetcher('call-proposal-project-role-mappings'),
+    fetchData: createFetcher(callProposalProjectRoleMappingsList),
     queryField: 'query',
     filter,
   });

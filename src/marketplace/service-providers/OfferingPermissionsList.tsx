@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { marketplaceOfferingPermissionsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -23,7 +24,7 @@ export const OfferingPermissionsList: FunctionComponent = () => {
 
   const tableProps = useTable({
     table: OFFERING_PERMISSIONS_LIST_ID,
-    fetchData: createFetcher('marketplace-offering-permissions'),
+    fetchData: createFetcher(marketplaceOfferingPermissionsList),
     filter,
   });
 

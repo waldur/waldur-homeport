@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { marketplaceScreenshotsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -21,7 +22,7 @@ export const OfferingImagesList: FunctionComponent<{ offering }> = ({
   }, [offering]);
   const tableProps = useTable({
     table: IMAGES_TABLE_NAME,
-    fetchData: createFetcher('marketplace-screenshots'),
+    fetchData: createFetcher(marketplaceScreenshotsList),
     filter,
   });
   const columns = [

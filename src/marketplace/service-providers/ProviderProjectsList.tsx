@@ -1,3 +1,5 @@
+import { marketplaceServiceProvidersProjectsList } from 'waldur-js-client';
+
 import { ProjectsListTable } from '@waldur/project/ProjectsList';
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/useTable';
@@ -9,9 +11,9 @@ import { PROVIDER_CUSTOMERS_TABLE_TABS } from './utils';
 const ProviderProjectsListComponent = ({ provider }) => {
   const tableProps = useTable({
     table: 'marketplace-provider-projects',
-    fetchData: createFetcher(
-      `marketplace-service-providers/${provider.uuid}/projects`,
-    ),
+    fetchData: createFetcher(marketplaceServiceProvidersProjectsList, {
+      path: { service_provider_uuid: provider.uuid },
+    }),
     queryField: 'query',
   });
 

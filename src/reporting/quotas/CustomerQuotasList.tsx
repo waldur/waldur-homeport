@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { customerQuotasList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -19,7 +20,7 @@ export const CustomerQuotasList = () => {
   const filter = useSelector(filterSelector);
   const tableProps = useTable({
     table: 'CustomerQuotasList',
-    fetchData: createFetcher('customer-quotas'),
+    fetchData: createFetcher(customerQuotasList),
     filter,
   });
   const formValues = useSelector<any, { quota: QuotaChoice }>(

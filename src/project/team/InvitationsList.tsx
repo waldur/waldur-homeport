@@ -3,7 +3,7 @@ import { FunctionComponent, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Invitation } from 'waldur-js-client';
+import { Invitation, userInvitationsList } from 'waldur-js-client';
 
 import Avatar from '@waldur/core/Avatar';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -31,7 +31,7 @@ const InvitationsListComponent: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: 'user-invitations',
-    fetchData: createFetcher('user-invitations'),
+    fetchData: createFetcher(userInvitationsList),
     filter,
     queryField: 'email',
   });

@@ -1,6 +1,10 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { MarketplaceCustomerServiceAccountsRetrieveResponse } from 'waldur-js-client';
+import {
+  marketplaceCustomerServiceAccountsList,
+  marketplaceProjectServiceAccountsList,
+  MarketplaceCustomerServiceAccountsRetrieveResponse,
+} from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDate } from '@waldur/core/dateUtils';
@@ -115,7 +119,11 @@ export const ServiceAccountsList: FC<ServiceAccountsProps> = ({
   );
   const tableProps = useTable({
     table: `marketplace-${context}-service-accounts`,
-    fetchData: createFetcher(`marketplace-${context}-service-accounts`),
+    fetchData: createFetcher(
+      context === 'customer'
+        ? marketplaceCustomerServiceAccountsList
+        : marketplaceProjectServiceAccountsList,
+    ),
     filter,
     queryField: 'email',
   });

@@ -1,5 +1,9 @@
 import { FC, useMemo } from 'react';
-import { KeycloakUserGroupMembership, RancherCluster } from 'waldur-js-client';
+import {
+  KeycloakUserGroupMembership,
+  keycloakUserGroupMembershipsList,
+  RancherCluster,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
@@ -25,7 +29,7 @@ export const KeycloakMembershipExpandableRow: FC<{
   );
   const props = useTable({
     table: 'rancher-keycloak-memberships-' + row.uuid,
-    fetchData: createFetcher('keycloak-user-group-memberships'),
+    fetchData: createFetcher(keycloakUserGroupMembershipsList),
     filter,
   });
 

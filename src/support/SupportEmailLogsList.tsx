@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { EmailLogsListData } from 'waldur-js-client';
+import { emailLogsList, EmailLogsListData } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
@@ -35,7 +35,7 @@ export const SupportEmailLogsList = () => {
 
   const tableProps = useTable({
     table: `supportEmailLogs`,
-    fetchData: createFetcher('email-logs'),
+    fetchData: createFetcher(emailLogsList),
     queryField: 'body',
     filter,
   });

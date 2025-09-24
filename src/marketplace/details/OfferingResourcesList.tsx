@@ -1,7 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { MarketplaceProviderResourcesListData } from 'waldur-js-client';
+import {
+  marketplaceProviderResourcesList,
+  MarketplaceProviderResourcesListData,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import {
@@ -52,7 +55,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
 
   const tableProps = useTable({
     table: TABLE_OFFERING_RESOURCE,
-    fetchData: createFetcher('marketplace-provider-resources'),
+    fetchData: createFetcher(marketplaceProviderResourcesList),
     filter,
     queryField: 'query',
     mandatoryFields: resourcesListRequiredFields(false),

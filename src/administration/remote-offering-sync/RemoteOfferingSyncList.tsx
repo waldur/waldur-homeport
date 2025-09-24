@@ -1,5 +1,8 @@
 import { FunctionComponent } from 'react';
-import { RemoteSynchronisation } from 'waldur-js-client';
+import {
+  marketplaceRemoteSynchronisationsList,
+  RemoteSynchronisation,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -31,7 +34,7 @@ const mandatoryFields: Array<keyof RemoteSynchronisation> = [
 export const RemoteOfferingSyncList: FunctionComponent = () => {
   const tableProps = useTable({
     table: 'RemoteOfferingSync',
-    fetchData: createFetcher('marketplace-remote-synchronisations'),
+    fetchData: createFetcher(marketplaceRemoteSynchronisationsList),
     queryField: 'title',
     mandatoryFields,
   });

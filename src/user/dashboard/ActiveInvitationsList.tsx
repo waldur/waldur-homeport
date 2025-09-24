@@ -5,6 +5,7 @@ import {
   Invitation,
   RoleType,
   User,
+  userInvitationsList,
   UserInvitationsListData,
 } from 'waldur-js-client';
 
@@ -42,7 +43,7 @@ export const ActiveInvitationsList: FunctionComponent<
 
   const props = useTable({
     table: 'ActiveInvitations',
-    fetchData: createFetcher('user-invitations'),
+    fetchData: createFetcher(userInvitationsList),
     queryField: 'scope_name',
     filter,
   });

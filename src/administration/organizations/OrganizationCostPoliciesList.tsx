@@ -4,6 +4,7 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
   CustomerEstimatedCostPolicy,
+  marketplaceCustomerEstimatedCostPoliciesList,
   MarketplaceCustomerEstimatedCostPoliciesListData,
 } from 'waldur-js-client';
 
@@ -38,7 +39,7 @@ export const OrganizationCostPoliciesList: FC = () => {
   const tableProps = useTable({
     table: 'OrgCostPoliciesList',
     filter: filter,
-    fetchData: createFetcher('marketplace-customer-estimated-cost-policies'),
+    fetchData: createFetcher(marketplaceCustomerEstimatedCostPoliciesList),
     queryField: 'query',
   });
 

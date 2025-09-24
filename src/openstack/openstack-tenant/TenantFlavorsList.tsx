@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { OpenStackFlavor } from 'waldur-js-client';
+import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -13,7 +13,7 @@ export const TenantFlavorsList: FunctionComponent<{ filter }> = ({
 }) => {
   const props = useTable({
     table: 'openstack-flavors',
-    fetchData: createFetcher('openstack-flavors'),
+    fetchData: createFetcher(openstackFlavorsList),
     filter,
     queryField: 'name',
   });

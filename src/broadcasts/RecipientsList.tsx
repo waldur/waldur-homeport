@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { broadcastMessagesRecipientsRetrieve } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
@@ -27,7 +28,7 @@ export const RecipientsList: FunctionComponent<{ query }> = ({ query }) => {
   );
   const props = useTable({
     table: 'broadcast-recipients',
-    fetchData: createFetcher('broadcast-messages/recipients'),
+    fetchData: createFetcher(broadcastMessagesRecipientsRetrieve),
     filter,
   });
   return (

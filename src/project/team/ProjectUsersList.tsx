@@ -1,7 +1,11 @@
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Project, UserRoleDetails } from 'waldur-js-client';
+import {
+  Project,
+  projectsListUsersList,
+  UserRoleDetails,
+} from 'waldur-js-client';
 
 import { TeamTableComponent } from '@waldur/customer/team/TeamTableComponent';
 import { createFetcher } from '@waldur/table/api';
@@ -64,7 +68,9 @@ export const ProjectUsersList = ({
 
   const tableProps = useTable({
     table: 'project-users',
-    fetchData: createFetcher(`projects/${_project?.uuid}/list_users`),
+    fetchData: createFetcher(projectsListUsersList, {
+      path: { uuid: _project?.uuid },
+    }),
     queryField: 'search_string',
     filter,
     mandatoryFields,

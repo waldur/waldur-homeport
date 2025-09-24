@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
+  marketplacePlansUsageStatsList,
   MarketplacePlansUsageStatsListData,
   PlanUsageResponse,
 } from 'waldur-js-client';
@@ -21,7 +22,7 @@ export const PlanUsageList: FunctionComponent = () => {
   const filter = useSelector(mapStateToProps);
   const props = useTable({
     table: 'PlanUsages',
-    fetchData: createFetcher('marketplace-plans/usage_stats'),
+    fetchData: createFetcher(marketplacePlansUsageStatsList),
     filter,
   });
   const columns: Column<PlanUsageResponse>[] = [

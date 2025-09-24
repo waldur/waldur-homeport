@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { marketplaceCategoryGroupsList } from 'waldur-js-client';
 
 import Avatar from '@waldur/core/Avatar';
 import { Link } from '@waldur/core/Link';
@@ -15,7 +16,7 @@ import { GroupCreateButton } from './GroupCreateButton';
 export const CategoryGroupsList: FunctionComponent = () => {
   const tableProps = useTable({
     table: 'CategoryGroupsList',
-    fetchData: createFetcher('marketplace-category-groups'),
+    fetchData: createFetcher(marketplaceCategoryGroupsList),
     queryField: 'title',
   });
 

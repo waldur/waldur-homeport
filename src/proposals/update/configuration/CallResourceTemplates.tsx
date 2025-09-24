@@ -1,5 +1,8 @@
 import { FC } from 'react';
-import { CallResourceTemplate } from 'waldur-js-client';
+import {
+  CallResourceTemplate,
+  proposalProtectedCallsResourceTemplatesList,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { Call } from '@waldur/proposals/types';
@@ -32,9 +35,9 @@ export const CallResourceTemplates: FC<CallResourceTemplatesProps> = (
 ) => {
   const tableProps = useTable({
     table: 'PrivateCallResourceTemplates',
-    fetchData: createFetcher(
-      `proposal-protected-calls/${props.call.uuid}/resource_templates`,
-    ),
+    fetchData: createFetcher(proposalProtectedCallsResourceTemplatesList, {
+      path: { uuid: props.call.uuid },
+    }),
     queryField: 'name',
   });
 

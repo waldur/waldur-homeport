@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { openstackVolumeTypesList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -11,7 +12,7 @@ export const TenantVolumeTypesList: FunctionComponent<{ filter }> = ({
 }) => {
   const props = useTable({
     table: 'openstack-volume-types',
-    fetchData: createFetcher('openstack-volume-types'),
+    fetchData: createFetcher(openstackVolumeTypesList),
     filter,
     queryField: 'name',
   });

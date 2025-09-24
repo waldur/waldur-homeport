@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { ProjectCredit } from 'waldur-js-client';
+import { ProjectCredit, projectCreditsList } from 'waldur-js-client';
 
 import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
 import { translate } from '@waldur/i18n';
@@ -19,9 +19,7 @@ export const ProjectCreditsList: FC = () => {
   const customer = useSelector(getCustomer);
   const tableProps = useTable({
     table: 'ProjectCreditsList',
-    fetchData: createFetcher('project-credits', {
-      params: { customer_uuid: customer.uuid },
-    }),
+    fetchData: createFetcher(projectCreditsList),
     queryField: 'query',
   });
 

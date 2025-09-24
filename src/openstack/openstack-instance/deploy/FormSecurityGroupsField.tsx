@@ -2,7 +2,10 @@ import { EyeIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { OpenStackSecurityGroup } from 'waldur-js-client';
+import {
+  OpenStackSecurityGroup,
+  openstackSecurityGroupsList,
+} from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Tip } from '@waldur/core/Tooltip';
@@ -93,7 +96,7 @@ export const FormSecurityGroupsField = ({
 
   const tableProps = useTable({
     table: 'deploy-security-groups',
-    fetchData: createFetcher('openstack-security-groups'),
+    fetchData: createFetcher(openstackSecurityGroupsList),
     onFetch: (rows, _, firstFetch) => {
       if (!firstFetch || !rows?.length) return;
       const defaultItem = rows.find((row) => row?.name === 'default');

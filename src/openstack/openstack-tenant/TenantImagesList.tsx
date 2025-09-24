@@ -1,5 +1,9 @@
 import { FunctionComponent } from 'react';
-import { OpenStackImage, OpenstackImagesListData } from 'waldur-js-client';
+import {
+  OpenStackImage,
+  openstackImagesList,
+  OpenstackImagesListData,
+} from 'waldur-js-client';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -13,7 +17,7 @@ export const TenantImagesList: FunctionComponent<{
 }> = ({ filter }) => {
   const props = useTable({
     table: 'openstack-images',
-    fetchData: createFetcher('openstack-images'),
+    fetchData: createFetcher(openstackImagesList),
     filter,
     queryField: 'name',
   });

@@ -39,6 +39,7 @@ function* fetchList(action) {
     }
 
     const request: TableRequest = {
+      tableKey: table,
       currentPage: state.pagination.currentPage,
       pageSize: state.pagination.pageSize,
       filter: {

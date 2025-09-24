@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { MarketplaceComponentUserUsagesListData } from 'waldur-js-client';
+import {
+  marketplaceComponentUserUsagesList,
+  MarketplaceComponentUserUsagesListData,
+} from 'waldur-js-client';
 
 import { formatMonth } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -30,7 +33,7 @@ export const ResourceComponentUserUsageTable = (props) => {
 
   const tableProps = useTable({
     table: 'ResourceUsageTable',
-    fetchData: createFetcher('marketplace-component-user-usages'),
+    fetchData: createFetcher(marketplaceComponentUserUsagesList),
     filter,
   });
   const columns = [

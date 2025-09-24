@@ -1,7 +1,11 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { MarketplaceResourcesListData, Resource } from 'waldur-js-client';
+import {
+  marketplaceResourcesList,
+  MarketplaceResourcesListData,
+  Resource,
+} from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -86,7 +90,7 @@ export const SummaryResourcesTable: FC<OwnProps> = ({ scope, context }) => {
         : 'ProjectResources') +
       '-' +
       scope.uuid,
-    fetchData: createFetcher('marketplace-resources'),
+    fetchData: createFetcher(marketplaceResourcesList),
     filter,
     mandatoryFields,
   });

@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { marketplaceRobotAccountsList } from 'waldur-js-client';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { StateIndicator } from '@waldur/core/StateIndicator';
@@ -16,7 +17,7 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
   const filter = useMemo(() => ({ resource: resource.url }), [resource]);
   const tableProps = useTable({
     table: 'marketplace-robot-accounts',
-    fetchData: createFetcher('marketplace-robot-accounts'),
+    fetchData: createFetcher(marketplaceRobotAccountsList),
     filter,
     queryField: 'type',
   });

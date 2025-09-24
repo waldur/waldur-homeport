@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { userPermissionRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -19,7 +20,7 @@ export const UserPermissionRequestsList: FC<OwnProps> = ({
   const tableOptions = useMemo(
     () => ({
       table: [USER_PERMISSION_REQUESTS_TABLE_ID, groupInvitationUuid].join('-'),
-      fetchData: createFetcher('user-permission-requests'),
+      fetchData: createFetcher(userPermissionRequestsList),
       filter: {
         invitation: groupInvitationUuid,
       },

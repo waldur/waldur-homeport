@@ -1,7 +1,10 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { MarketplaceProjectEstimatedCostPoliciesListData } from 'waldur-js-client';
+import {
+  marketplaceProjectEstimatedCostPoliciesList,
+  MarketplaceProjectEstimatedCostPoliciesListData,
+} from 'waldur-js-client';
 
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -39,7 +42,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
   const tableProps = useTable({
     table,
     filter: filter,
-    fetchData: createFetcher('marketplace-project-estimated-cost-policies'),
+    fetchData: createFetcher(marketplaceProjectEstimatedCostPoliciesList),
     queryField: 'query',
   });
 

@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { OpenStackSnapshot } from 'waldur-js-client';
+import { OpenStackSnapshot, openstackSnapshotsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
@@ -25,7 +25,7 @@ export const VolumeSnapshotsList: FunctionComponent<{ resourceScope }> = ({
 
   const props = useTable({
     table: 'openstack-snapshots',
-    fetchData: createFetcher('openstack-snapshots'),
+    fetchData: createFetcher(openstackSnapshotsList),
     filter,
   });
 

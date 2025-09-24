@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { customersProjectMetadataComplianceDetailsList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -17,10 +18,10 @@ export const ProjectsMetadataByProject: FC<TableWithPortal> = ({ portal }) => {
 
   const tableProps = useTable({
     table: 'ProjectsMetadataByProject-' + currentCustomer.uuid,
-    fetchData: createFetcher(
-      `customers/${currentCustomer.uuid}/project-metadata-compliance-details`,
-      { parser: (data) => data.project_details },
-    ),
+    fetchData: createFetcher(customersProjectMetadataComplianceDetailsList, {
+      parser: (data) => data.project_details,
+      path: { customer_uuid: currentCustomer.uuid },
+    }),
     queryField: 'query',
   });
 

@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { marketplaceOfferingUsersList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -22,7 +23,7 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
   );
   const props = useTable({
     table: 'OfferingUsersList',
-    fetchData: createFetcher('marketplace-offering-users'),
+    fetchData: createFetcher(marketplaceOfferingUsersList),
     filter,
   });
   const columns = [

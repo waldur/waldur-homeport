@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import {
   OpenStackServerGroup,
+  openstackServerGroupsList,
   OpenstackServerGroupsListData,
 } from 'waldur-js-client';
 
@@ -25,7 +26,7 @@ export const ServerGroupsList: FunctionComponent<{ resourceScope }> = ({
   );
   const props = useTable({
     table: 'openstack-server-groups',
-    fetchData: createFetcher('openstack-server-groups'),
+    fetchData: createFetcher(openstackServerGroupsList),
     filter,
   });
   return (

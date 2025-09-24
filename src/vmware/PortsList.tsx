@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { vmwarePortsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -23,7 +24,7 @@ export const PortsList: FunctionComponent<{ resourceScope }> = ({
 
   const props = useTable({
     table: 'vmware-ports',
-    fetchData: createFetcher('vmware-ports'),
+    fetchData: createFetcher(vmwarePortsList),
     filter,
   });
 

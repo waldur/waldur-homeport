@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { SshKey } from 'waldur-js-client';
+import { keysList, SshKey } from 'waldur-js-client';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
@@ -38,7 +38,7 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
   );
   const props = useTable({
     table: 'keysList',
-    fetchData: createFetcher('keys'),
+    fetchData: createFetcher(keysList),
     queryField: 'name',
     filter,
   });

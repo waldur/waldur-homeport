@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { UserPermissionsListData } from 'waldur-js-client';
+import { userPermissionsList, UserPermissionsListData } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -62,7 +62,7 @@ export const UserAffiliationsList: FunctionComponent<
   ]);
   const props = useTable({
     table: 'UserAffiliationsList',
-    fetchData: createFetcher('user-permissions'),
+    fetchData: createFetcher(userPermissionsList),
     queryField: 'name',
     filter,
   });

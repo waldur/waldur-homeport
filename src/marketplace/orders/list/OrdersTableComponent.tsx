@@ -1,5 +1,9 @@
 import { FC } from 'react';
-import { MarketplaceOrdersListData, OrderDetails } from 'waldur-js-client';
+import {
+  marketplaceOrdersList,
+  MarketplaceOrdersListData,
+  OrderDetails,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -52,7 +56,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
 }) => {
   const props = useTable({
     table,
-    fetchData: createFetcher('marketplace-orders'),
+    fetchData: createFetcher(marketplaceOrdersList),
     filter,
     queryField: 'query',
     mandatoryFields,

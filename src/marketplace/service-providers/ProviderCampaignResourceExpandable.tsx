@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { promotionsCampaignsResourcesList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -11,9 +12,9 @@ export const ProviderCampaignResourceExpandable = ({ campaign }) => {
   const tableOptions = useMemo(
     () => ({
       table: 'marketplace-provider-campaign-resources',
-      fetchData: createFetcher(
-        `promotions-campaigns/${campaign.uuid}/resources`,
-      ),
+      fetchData: createFetcher(promotionsCampaignsResourcesList, {
+        path: { uuid: campaign.uuid },
+      }),
     }),
     [campaign],
   );

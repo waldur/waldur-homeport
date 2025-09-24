@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { CourseAccount } from 'waldur-js-client';
+import { CourseAccount, marketplaceCourseAccountsList } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -35,7 +35,7 @@ export const ProjectCourseAccountsList = ({ admin = false }) => {
   );
   const tableProps = useTable({
     table: `marketplace-project-course-accounts`,
-    fetchData: createFetcher('marketplace-course-accounts'),
+    fetchData: createFetcher(marketplaceCourseAccountsList),
     filter,
     queryField: 'email',
   });

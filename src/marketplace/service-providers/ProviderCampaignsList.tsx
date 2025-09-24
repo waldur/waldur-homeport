@@ -1,7 +1,7 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { Campaign } from 'waldur-js-client';
+import { Campaign, promotionsCampaignsList } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -47,7 +47,7 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
   }, [filterValues, provider]);
   const props = useTable({
     table: 'marketplace-provider-campaigns',
-    fetchData: createFetcher('promotions-campaigns'),
+    fetchData: createFetcher(promotionsCampaignsList),
     filter,
     queryField: 'query',
   });

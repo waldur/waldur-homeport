@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { ProposalReviewsListData } from 'waldur-js-client';
+import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -42,7 +42,7 @@ export const CustomerReviewsList: FC<{}> = () => {
 
   const tableProps = useTable({
     table: 'ReviewsList',
-    fetchData: createFetcher('proposal-reviews'),
+    fetchData: createFetcher(proposalReviewsList),
     queryField: 'proposal_name',
     filter,
   });

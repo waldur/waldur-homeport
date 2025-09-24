@@ -3,6 +3,7 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
   AdminAnnouncement,
+  adminAnnouncementsList,
   AdminAnnouncementsListData,
 } from 'waldur-js-client';
 
@@ -65,7 +66,7 @@ export const AnnouncementsList = () => {
   const filter = useSelector(filtersSelector);
   const tableProps = useTable({
     table: 'AdminAnnouncements',
-    fetchData: createFetcher('admin-announcements'),
+    fetchData: createFetcher(adminAnnouncementsList),
     filter,
     queryField: 'description',
   });

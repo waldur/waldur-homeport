@@ -1,5 +1,6 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { projectsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -145,7 +146,7 @@ export const ProjectsList: FC<ProjectsListProps> = ({
   );
   const tableProps = useTable({
     table: props.table || PROJECTS_LIST,
-    fetchData: createFetcher('projects'),
+    fetchData: createFetcher(projectsList),
     queryField: 'query',
     filter,
     mandatoryFields,

@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { VmwareDisk } from 'waldur-js-client';
+import { VmwareDisk, vmwareDisksList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { formatFilesize } from '@waldur/core/utils';
@@ -24,7 +24,7 @@ export const DisksList: FunctionComponent<{ resourceScope }> = ({
   );
   const tableProps = useTable({
     table: 'vmware-disks',
-    fetchData: createFetcher('vmware-disks'),
+    fetchData: createFetcher(vmwareDisksList),
     filter,
   });
 

@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { OpenStackPort, OpenstackPortsListData } from 'waldur-js-client';
+import {
+  OpenStackPort,
+  openstackPortsList,
+  OpenstackPortsListData,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
@@ -51,7 +55,7 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
   );
   const props = useTable({
     table: 'openstack-ports',
-    fetchData: createFetcher('openstack-ports'),
+    fetchData: createFetcher(openstackPortsList),
     queryField: 'query',
     filter,
   });

@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { ComponentUserUsage } from 'waldur-js-client';
+import {
+  ComponentUserUsage,
+  marketplaceComponentUserUsagesList,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -19,7 +22,7 @@ export const UserUsageList: FC = () => {
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: 'UserUsageReports',
-    fetchData: createFetcher('marketplace-component-user-usages'),
+    fetchData: createFetcher(marketplaceComponentUserUsagesList),
     filter,
   });
   const columns: Array<Column<ComponentUserUsage>> = [

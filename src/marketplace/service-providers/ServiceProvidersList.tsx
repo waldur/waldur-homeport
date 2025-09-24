@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { marketplaceServiceProvidersList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -15,7 +16,7 @@ export const ServiceProvidersList: FunctionComponent = () => {
   useMarketplacePublicTabs();
   const props = useTable({
     table: TABLE_SERVICE_PROVIDERS,
-    fetchData: createFetcher('marketplace-service-providers'),
+    fetchData: createFetcher(marketplaceServiceProvidersList),
   });
 
   const columns = [

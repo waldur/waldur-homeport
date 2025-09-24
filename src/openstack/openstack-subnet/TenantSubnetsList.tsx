@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { OpenStackSubNet, OpenstackSubnetsListData } from 'waldur-js-client';
+import {
+  OpenStackSubNet,
+  openstackSubnetsList,
+  OpenstackSubnetsListData,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
@@ -46,7 +50,7 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
   );
   const props = useTable({
     table: 'openstack-subnets',
-    fetchData: createFetcher('openstack-subnets'),
+    fetchData: createFetcher(openstackSubnetsList),
     filter,
   });
 

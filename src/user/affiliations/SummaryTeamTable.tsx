@@ -1,5 +1,9 @@
 import { FC } from 'react';
-import { Project } from 'waldur-js-client';
+import {
+  customersUsersList,
+  Project,
+  projectsListUsersList,
+} from 'waldur-js-client';
 
 import Avatar from '@waldur/core/Avatar';
 import { renderRoleExpirationDate } from '@waldur/customer/team/TeamTableComponent';
@@ -7,7 +11,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
+import { createFetcher as createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -55,10 +59,12 @@ export const SummaryTeamTable: FC<OwnProps> = ({ scope, context }) => {
       (context === 'organization' ? 'customer-users' : 'project-users') +
       '-' +
       scope.uuid,
-    fetchData:
+    fetchData: createFetcher(
+      context === 'organization' ? customersUsersList : projectsListUsersList,
       context === 'organization'
-        ? createFetcher(`customers/${scope.uuid}/users`)
-        : createFetcher(`projects/${scope.uuid}/list_users`),
+        ? { path: { customer_uuid: scope.uuid } }
+        : { path: { uuid: scope.uuid } },
+    ),
     mandatoryFields:
       context === 'organization'
         ? organizationUserMandatoryFields

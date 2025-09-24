@@ -1,4 +1,4 @@
-import { ExternalLink } from 'waldur-js-client';
+import { ExternalLink, externalLinksList } from 'waldur-js-client';
 
 import Avatar from '@waldur/core/Avatar';
 import { translate } from '@waldur/i18n';
@@ -13,7 +13,7 @@ import { QuickShortcutsRowActions } from './QuickShortcutsRowActions';
 export const QuickShortcutsList = () => {
   const tableProps = useTable({
     table: 'QuickShortcutsList',
-    fetchData: createFetcher('external-links'),
+    fetchData: createFetcher(externalLinksList),
     queryField: 'query',
   });
   const columns: Column<ExternalLink>[] = [

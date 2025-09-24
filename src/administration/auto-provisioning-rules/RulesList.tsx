@@ -1,5 +1,5 @@
 import { CheckIcon, MinusIcon } from '@phosphor-icons/react';
-import { Rule } from 'waldur-js-client';
+import { autoprovisioningRulesList, Rule } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
@@ -31,7 +31,7 @@ const BooleanIconBadge = ({ value }) => (
 export const RulesList = () => {
   const tableProps = useTable({
     table: 'RulesList',
-    fetchData: createFetcher('autoprovisioning-rules'),
+    fetchData: createFetcher(autoprovisioningRulesList),
   });
 
   return (

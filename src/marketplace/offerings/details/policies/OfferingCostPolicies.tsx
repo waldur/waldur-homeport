@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { marketplaceOfferingEstimatedCostPoliciesList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
@@ -21,7 +22,7 @@ export const OfferingCostPolicies: FC<OfferingCostPoliciesProps> = ({
   const tableProps = useTable({
     table: 'OfferingCostPoliciesList',
     filter: filter,
-    fetchData: createFetcher('marketplace-offering-estimated-cost-policies'),
+    fetchData: createFetcher(marketplaceOfferingEstimatedCostPoliciesList),
   });
 
   return (

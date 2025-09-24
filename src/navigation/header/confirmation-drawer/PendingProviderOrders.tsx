@@ -1,4 +1,5 @@
 import React from 'react';
+import { marketplaceOrdersList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { OrderProviderActions } from '@waldur/marketplace/orders/actions/OrderProviderActions';
@@ -19,7 +20,7 @@ import { OrderExpandableRow } from './OrderExpandableRow';
 export const PendingProviderOrders: React.FC<{}> = () => {
   const tableProps = useTable({
     table: TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
-    fetchData: createFetcher('marketplace-orders'),
+    fetchData: createFetcher(marketplaceOrdersList),
     filter: PENDING_PROVIDER_ORDERS_FILTER,
   });
 

@@ -3,6 +3,7 @@ import { FunctionComponent, memo, useMemo } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import {
   KeycloakUserGroupMembership,
+  keycloakUserGroupMembershipsList,
   KeycloakUserGroupMembershipsListData,
   Resource,
 } from 'waldur-js-client';
@@ -84,7 +85,7 @@ export const KeycloakMembershipList: FunctionComponent<
   );
   const props = useTable({
     table: 'rancher-keycloak-memberships',
-    fetchData: createFetcher('keycloak-user-group-memberships'),
+    fetchData: createFetcher(keycloakUserGroupMembershipsList),
     filter,
     queryField: 'username',
   });

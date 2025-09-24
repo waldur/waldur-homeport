@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
+  proposalRequestedOfferingsList,
   ProposalRequestedOfferingsListData,
   ProtectedRound,
   ProviderRequestedOffering,
@@ -57,7 +58,7 @@ export const OfferingRequestsList: FC<OfferingRequestsListProps> = () => {
 
   const tableProps = useTable({
     table: 'ProposalRequestedOfferingsList',
-    fetchData: createFetcher('proposal-requested-offerings'),
+    fetchData: createFetcher(proposalRequestedOfferingsList),
     queryField: 'call_name',
     filter,
   });

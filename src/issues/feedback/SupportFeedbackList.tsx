@@ -2,7 +2,11 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Feedback, SupportFeedbacksListData } from 'waldur-js-client';
+import {
+  Feedback,
+  supportFeedbacksList,
+  SupportFeedbacksListData,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -25,7 +29,7 @@ export const SupportFeedbackList: FC = () => {
   const filter = useSelector(mapStateToProps);
   const props = useTable({
     table: SUPPORT_FEEDBACK_LIST,
-    fetchData: createFetcher('support-feedbacks'),
+    fetchData: createFetcher(supportFeedbacksList),
     filter,
     queryField: 'query',
   });

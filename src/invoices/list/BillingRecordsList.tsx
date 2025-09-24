@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { invoicesList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
@@ -52,7 +53,7 @@ export const BillingRecordsList: FunctionComponent = () => {
 
   const props = useTable({
     table: table,
-    fetchData: createFetcher('invoices'),
+    fetchData: createFetcher(invoicesList),
     filter,
     queryField: 'number',
   });

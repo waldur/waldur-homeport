@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { OrderDetails } from 'waldur-js-client';
+import { marketplaceOrdersList, OrderDetails } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { OrderConsumerActions } from '@waldur/marketplace/orders/actions/OrderConsumerActions';
@@ -19,7 +19,7 @@ import { PENDING_CONSUMER_ORDERS_FILTER } from './constants';
 export const PendingConsumerOrders: React.FC<{}> = () => {
   const tableProps = useTable({
     table: TABLE_PENDING_PUBLIC_ORDERS,
-    fetchData: createFetcher('marketplace-orders'),
+    fetchData: createFetcher(marketplaceOrdersList),
     filter: PENDING_CONSUMER_ORDERS_FILTER,
   });
 

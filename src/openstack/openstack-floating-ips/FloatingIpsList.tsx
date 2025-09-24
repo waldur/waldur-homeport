@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import {
   OpenStackFloatingIp,
+  openstackFloatingIpsList,
   OpenstackFloatingIpsListData,
 } from 'waldur-js-client';
 
@@ -48,7 +49,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
   );
   const tableProps = useTable({
     table: 'openstack-floating-ips',
-    fetchData: createFetcher('openstack-floating-ips'),
+    fetchData: createFetcher(openstackFloatingIpsList),
     filter,
   });
   return (

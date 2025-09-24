@@ -2,7 +2,10 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { MarketplaceResourcesListData } from 'waldur-js-client';
+import {
+  marketplaceResourcesList,
+  MarketplaceResourcesListData,
+} from 'waldur-js-client';
 
 import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { createFetcher } from '@waldur/table/api';
@@ -60,7 +63,7 @@ export const OrganizationResourcesAllList: FC<Partial<TableProps>> = (
   const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: `OrganizationResourcesAllList`,
-    fetchData: createFetcher('marketplace-resources'),
+    fetchData: createFetcher(marketplaceResourcesList),
     queryField: 'query',
     filter,
     mandatoryFields: resourcesListRequiredFields(),

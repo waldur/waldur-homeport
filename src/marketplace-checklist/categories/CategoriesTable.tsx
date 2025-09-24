@@ -1,5 +1,8 @@
 import { FC } from 'react';
-import { ChecklistCategory } from 'waldur-js-client';
+import {
+  ChecklistCategory,
+  checklistsAdminCategoriesList,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -14,7 +17,7 @@ import { CategoryRowActions } from './CategoryRowActions';
 export const CategoriesTable: FC<TableWithPortal> = ({ portal }) => {
   const tableProps = useTable({
     table: 'CategoriesTable',
-    fetchData: createFetcher('checklists-admin-categories'),
+    fetchData: createFetcher(checklistsAdminCategoriesList),
     queryField: 'name',
   });
 

@@ -1,5 +1,6 @@
 import { FC, useEffect, useMemo } from 'react';
 import { Field } from 'redux-form';
+import { marketplaceProviderOfferingsList } from 'waldur-js-client';
 
 import { getUUID } from '@waldur/core/utils';
 import { SelectField, TextField } from '@waldur/form';
@@ -57,7 +58,7 @@ export const Step2SelectOfferings: FC<WizardFormStepProps> = (props) => {
 
   const tableProps = useTable({
     table: TABLE_ID,
-    fetchData: createFetcher('marketplace-provider-offerings'),
+    fetchData: createFetcher(marketplaceProviderOfferingsList),
     filter,
   });
 

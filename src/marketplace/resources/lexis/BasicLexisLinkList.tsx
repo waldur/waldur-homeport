@@ -1,4 +1,5 @@
 import { FunctionComponent } from 'react';
+import { lexisLinksList } from 'waldur-js-client';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { StateIndicator } from '@waldur/core/StateIndicator';
@@ -13,7 +14,7 @@ export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
 }) => {
   const props = useTable({
     table: 'lexis-links',
-    fetchData: createFetcher('lexis-links'),
+    fetchData: createFetcher(lexisLinksList),
     filter,
     queryField: 'query',
   });

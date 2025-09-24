@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { PlanComponent } from 'waldur-js-client';
+import { marketplacePlanComponentsList, PlanComponent } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -13,7 +13,7 @@ import { getBillingTypeLabel } from '../resources/usage/utils';
 export const PriceList: FunctionComponent = () => {
   const props = useTable({
     table: 'MarketplacePriceList',
-    fetchData: createFetcher('marketplace-plan-components'),
+    fetchData: createFetcher(marketplacePlanComponentsList),
   });
 
   const columns: Column<PlanComponent>[] = [

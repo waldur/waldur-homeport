@@ -1,3 +1,5 @@
+import { marketplacePublicOfferingsList } from 'waldur-js-client';
+
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -44,7 +46,7 @@ export const ProviderOfferingsList = (props) => {
 
   const tableProps = useTable({
     table: 'ProviderOfferingsList',
-    fetchData: createFetcher('marketplace-public-offerings', {
+    fetchData: createFetcher(marketplacePublicOfferingsList, {
       params: { customer_uuid: props.provider_uuid },
     }),
     queryField: 'keyword',

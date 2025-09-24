@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { RancherCluster } from 'waldur-js-client';
+import { RancherCluster, rancherUsersList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -21,7 +21,7 @@ export const ClusterUsersList: FunctionComponent<
   );
   const props = useTable({
     table: 'rancher-cluster-users',
-    fetchData: createFetcher('rancher-users'),
+    fetchData: createFetcher(rancherUsersList),
     filter,
     queryField: 'user_username',
   });

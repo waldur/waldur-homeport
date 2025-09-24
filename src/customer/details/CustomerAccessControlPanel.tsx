@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { AccessSubnet } from 'waldur-js-client';
+import { AccessSubnet, accessSubnetsList } from 'waldur-js-client';
 
 import { CustomerEditPanelProps } from '@waldur/customer/details/types';
 import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
@@ -17,8 +17,9 @@ export const CustomerAccessControlPanel: FunctionComponent<
   const customer_uuid = customer.uuid;
   const tableProps = useTable({
     table: 'customerAccessControl',
-    fetchData: createFetcher('access-subnets', {
-      params: { customer_uuid },
+    // @ts-ignore
+    fetchData: createFetcher(accessSubnetsList, {
+      query: { customer_uuid },
     }),
     queryField: 'description',
   });

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CustomerCredit } from 'waldur-js-client';
+import { CustomerCredit, customerCreditsList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { COMMON_CREDIT_COLUMNS } from '@waldur/customer/credits/constants';
@@ -23,7 +23,7 @@ const OrganizationField = ({ row }) => (
 export const OrganizationCreditsList: FC<{}> = () => {
   const tableProps = useTable({
     table: 'OrganizationCreditsList',
-    fetchData: createFetcher('customer-credits'),
+    fetchData: createFetcher(customerCreditsList),
     queryField: 'query',
   });
 

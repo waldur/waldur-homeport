@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react';
 import {
+  marketplaceProviderOfferingsList,
   MarketplaceProviderOfferingsListData,
   ProviderOfferingDetails,
 } from 'waldur-js-client';
@@ -47,7 +48,7 @@ export const BaseOfferingsList: FunctionComponent<{
   const props = useTable({
     table,
     filter,
-    fetchData: createFetcher('marketplace-provider-offerings'),
+    fetchData: createFetcher(marketplaceProviderOfferingsList),
     queryField: 'keyword',
     mandatoryFields,
   });

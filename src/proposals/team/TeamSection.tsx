@@ -1,6 +1,11 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
+import {
+  proposalProposalsListUsersList,
+  proposalProtectedCallsListUsersList,
+  userInvitationsList,
+} from 'waldur-js-client';
 
 import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
 import { BaseEventsList } from '@waldur/events/BaseEventsList';
@@ -43,16 +48,15 @@ export const TeamSection: FC<
     [props.roles],
   );
 
-  const url =
-    props.roleTypes?.[0] === 'proposal'
-      ? 'proposal-proposals/' + props.scope.uuid + '/list_users'
-      : props.roleTypes?.[0] === 'call'
-        ? 'proposal-protected-calls/' + props.scope.uuid + '/list_users'
-        : undefined;
-
+  const roleType = props.roleTypes?.[0];
   const usersTable = useTable({
     table: `UserList${props.title}`,
-    fetchData: createFetcher(url),
+    fetchData: createFetcher(
+      roleType === 'proposal'
+        ? proposalProposalsListUsersList
+        : proposalProtectedCallsListUsersList,
+      { path: { uuid: props.scope.uuid } },
+    ),
     filter: usersFilter,
     onFetch(rows) {
       if (props.change) {
@@ -77,7 +81,7 @@ export const TeamSection: FC<
   );
   const invitationsTable = useTable({
     table: `UserInvitations${props.title}`,
-    fetchData: createFetcher('user-invitations'),
+    fetchData: createFetcher(userInvitationsList),
     queryField: 'email',
     filter: invitationsFilter,
   });

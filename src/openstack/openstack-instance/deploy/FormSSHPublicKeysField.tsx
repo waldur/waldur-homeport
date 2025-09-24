@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
-import { KeysListData } from 'waldur-js-client';
+import { keysList, KeysListData } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
@@ -29,7 +29,7 @@ export const FormSSHPublicKeysField = ({ change, ...props }: OwnProps) => {
   const filter = useSelector(filtersSelector);
   const tableProps = useTable({
     table: keysListTable,
-    fetchData: createFetcher('keys'),
+    fetchData: createFetcher(keysList),
     onFetch: (rows, totalCount, firstFetch) => {
       if (firstFetch && totalCount === 1 && rows.length === 1) {
         change('attributes.ssh_public_key', rows[0]);

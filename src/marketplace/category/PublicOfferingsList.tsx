@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
+  marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
   PublicOfferingDetails,
 } from 'waldur-js-client';
@@ -83,7 +84,7 @@ export const PublicOfferingsList: FunctionComponent<{
   const props = useTable({
     table: 'PublicOfferingsList',
     filter: mergedFilter,
-    fetchData: createFetcher('marketplace-public-offerings'),
+    fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'keyword',
     mandatoryFields,
   });

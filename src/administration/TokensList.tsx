@@ -1,4 +1,4 @@
-import { AuthToken } from 'waldur-js-client';
+import { AuthToken, authTokensList } from 'waldur-js-client';
 
 import { TokenDeleteButton } from '@waldur/administration/TokenDeleteButton';
 import { translate } from '@waldur/i18n';
@@ -11,7 +11,7 @@ import { useTable } from '@waldur/table/useTable';
 export const TokensList = () => {
   const tableProps = useTable({
     table: `TokensList`,
-    fetchData: createFetcher('auth-tokens'),
+    fetchData: createFetcher(authTokensList),
   });
 
   const TokenRowActions = ({ row, fetch }) => (

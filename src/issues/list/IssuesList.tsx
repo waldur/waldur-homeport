@@ -2,7 +2,11 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Issue, SupportIssuesListData } from 'waldur-js-client';
+import {
+  Issue,
+  supportIssuesList,
+  SupportIssuesListData,
+} from 'waldur-js-client';
 
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -53,7 +57,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
 
   const tableProps = useTable({
     table: `issuesList-${props.scope?.uuid}`,
-    fetchData: createFetcher('support-issues'),
+    fetchData: createFetcher(supportIssuesList),
     queryField: 'query',
     filter: props.filter || filter,
   });

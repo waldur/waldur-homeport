@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import {
   Customer,
+  marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
   Project,
 } from 'waldur-js-client';
@@ -68,7 +69,7 @@ export const OfferingsGroup = () => {
   const tableProps = useTable({
     table: 'marketplace-landing-offerings',
     filter,
-    fetchData: createFetcher('marketplace-public-offerings'),
+    fetchData: createFetcher(marketplacePublicOfferingsList),
     staleTime: 3 * 60 * 1000,
     mandatoryFields,
   });
