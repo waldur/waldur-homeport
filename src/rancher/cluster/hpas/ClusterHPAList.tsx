@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import {
   RancherCluster,
   RancherHpa,
+  rancherHpasList,
   rancherHpasYamlRetrieve,
   rancherHpasYamlUpdate,
 } from 'waldur-js-client';
@@ -40,7 +41,7 @@ export const ClusterHPAList: FunctionComponent<
   const filter = useClusterFilter(resourceScope);
   const props = useTable({
     table: 'rancher-hpas',
-    fetchData: createFetcher('rancher-hpas'),
+    fetchData: createFetcher(rancherHpasList),
     filter,
   });
 

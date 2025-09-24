@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { marketplaceOfferingUsagePoliciesList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
@@ -20,7 +21,7 @@ export const OfferingUsagePolicies: FC<OfferingUsagePoliciesProps> = ({
   const tableProps = useTable({
     table: 'OfferingUsagePoliciesList',
     filter: filter,
-    fetchData: createFetcher('marketplace-offering-usage-policies'),
+    fetchData: createFetcher(marketplaceOfferingUsagePoliciesList),
     queryField: 'query',
   });
 

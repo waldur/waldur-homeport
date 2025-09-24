@@ -2,7 +2,10 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { ProposalProtectedCallsListData } from 'waldur-js-client';
+import {
+  proposalProtectedCallsList,
+  ProposalProtectedCallsListData,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -43,7 +46,7 @@ export const CallManagementPage: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: 'CallManagementList',
-    fetchData: createFetcher('proposal-protected-calls'),
+    fetchData: createFetcher(proposalProtectedCallsList),
     queryField: 'name',
     filter,
   });

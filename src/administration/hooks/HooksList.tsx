@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { hooksList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { titleCase } from '@waldur/core/utils';
@@ -49,7 +50,7 @@ export const HooksList: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
   const tableProps = useTable({
     table: ADMIN_HOOK_LIST_ID,
-    fetchData: createFetcher('hooks'),
+    fetchData: createFetcher(hooksList),
     queryField: 'query',
     filter,
   });

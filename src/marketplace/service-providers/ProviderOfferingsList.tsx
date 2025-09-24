@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { marketplaceServiceProvidersOfferingsList } from 'waldur-js-client';
 
 import { useDestroyFilterOnLeave } from '@waldur/core/filters';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -62,9 +63,9 @@ const ProviderOfferingsComponent: FC<ProviderOfferingsComponentProps> = ({
 
   const tableProps = useTable({
     table: 'ProviderOfferingsList',
-    fetchData: createFetcher(
-      `marketplace-service-providers/${provider.uuid}/offerings`,
-    ),
+    fetchData: createFetcher(marketplaceServiceProvidersOfferingsList, {
+      path: { service_provider_uuid: provider.uuid },
+    }),
     filter,
     queryField: 'name',
     mandatoryFields,

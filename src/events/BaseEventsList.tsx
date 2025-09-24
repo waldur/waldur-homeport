@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { eventsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import eventsRegistry from '@waldur/events/registry';
@@ -24,7 +25,7 @@ export const BaseEventsList: FunctionComponent<Partial<TableProps>> = ({
     () => ({
       table: table || 'events',
       filter,
-      fetchData: createFetcher('events'),
+      fetchData: createFetcher(eventsList),
       queryField: 'message',
       pullInterval: 30 * 1000,
     }),

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import {
   InvoiceItem,
+  invoiceItemsList,
   InvoiceItemsListData,
   invoiceItemsTotalPriceRetrieve,
 } from 'waldur-js-client';
@@ -76,7 +77,7 @@ export const CreditUsageDialog: FC<CreditUsageDialogProps> = (props) => {
   const tableProps = useTable({
     table: 'credit-usage-' + props.creditUuid,
     filter,
-    fetchData: createFetcher('invoice-items'),
+    fetchData: createFetcher(invoiceItemsList),
     queryField: 'query',
   });
 

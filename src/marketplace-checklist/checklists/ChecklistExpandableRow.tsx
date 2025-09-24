@@ -1,5 +1,9 @@
 import { FC } from 'react';
-import { Checklist, QuestionAdmin } from 'waldur-js-client';
+import {
+  Checklist,
+  checklistsAdminChecklistQuestions,
+  QuestionAdmin,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -16,7 +20,9 @@ export const ChecklistExpandableRow: FC<{
 }> = ({ row: checklist }) => {
   const tableProps = useTable({
     table: 'ChecklistQuestions-' + checklist.uuid,
-    fetchData: createFetcher(`checklists-admin/${checklist.uuid}/questions`),
+    fetchData: createFetcher(checklistsAdminChecklistQuestions, {
+      path: { uuid: checklist.uuid },
+    }),
   });
 
   return (

@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { OpenStackBackup } from 'waldur-js-client';
+import { OpenStackBackup, openstackBackupsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -30,7 +30,7 @@ export const BackupsList: FunctionComponent<{ resourceScope }> = ({
   }, [resourceScope]);
   const props = useTable({
     table: 'openstack-backups',
-    fetchData: createFetcher('openstack-backups'),
+    fetchData: createFetcher(openstackBackupsList),
     filter,
   });
   return (

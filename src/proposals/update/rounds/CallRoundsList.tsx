@@ -1,5 +1,8 @@
 import { FC } from 'react';
-import { ProtectedRound } from 'waldur-js-client';
+import {
+  ProtectedRound,
+  proposalProtectedCallsRoundsList,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -22,9 +25,10 @@ interface CallRoundsListProps {
 export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
   const tableProps = useTable({
     table: 'PrivateCallRoundsList',
-    fetchData: createFetcher(
-      `proposal-protected-calls/${props.call.uuid}/rounds`,
-    ),
+    fetchData: createFetcher(proposalProtectedCallsRoundsList, {
+      path: { uuid: props.call.uuid },
+    }),
+    queryField: 'name',
   });
 
   const renderRoundState = (row: ProtectedRound) => {

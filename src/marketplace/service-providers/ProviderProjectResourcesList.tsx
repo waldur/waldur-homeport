@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { marketplaceResourcesList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -24,7 +25,7 @@ export const ProviderProjectResourcesList: FunctionComponent<{
   );
   const props = useTable({
     table: 'ProviderProjectResourcesList',
-    fetchData: createFetcher('marketplace-resources'),
+    fetchData: createFetcher(marketplaceResourcesList),
     filter,
     queryField: 'query',
   });

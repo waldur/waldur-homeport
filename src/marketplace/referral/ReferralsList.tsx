@@ -1,11 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
+import { marketplaceOfferingReferralsList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { REFERRALS_TABLE } from '@waldur/marketplace/referral/constants';
 import { ReferralTypeIcon } from '@waldur/marketplace/referral/ReferralTypeIcon';
-import { createFetcher, ANONYMOUS_CONFIG } from '@waldur/table/api';
+import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
@@ -15,13 +15,7 @@ export const ReferralsList: FunctionComponent<{ offering }> = ({
   const filter = useMemo(() => ({ scope: offering.url }), [offering]);
   const props = useTable({
     table: REFERRALS_TABLE,
-    fetchData: (request) =>
-      createFetcher(
-        'marketplace-offering-referrals',
-        ENV.plugins.WALDUR_CORE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS
-          ? ANONYMOUS_CONFIG
-          : undefined,
-      )(request),
+    fetchData: createFetcher(marketplaceOfferingReferralsList),
     filter,
   });
   const columns = [

@@ -1,6 +1,7 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Button } from 'react-bootstrap';
+import { vmwareNetworksList } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
@@ -25,7 +26,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
 
   const tableProps = useTable({
     table: 'deploy-security-groups',
-    fetchData: createFetcher('vmware-networks'),
+    fetchData: createFetcher(vmwareNetworksList),
     filter,
     staleTime: 3 * 60 * 1000,
   });

@@ -1,5 +1,8 @@
 import { FC, useMemo } from 'react';
-import { OpenStackNetwork } from 'waldur-js-client';
+import {
+  OpenStackNetwork,
+  openstackNetworkRbacPoliciesList,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -41,7 +44,7 @@ export const NetworkRBACList: FC<{ network: OpenStackNetwork }> = ({
   const filter = useMemo(() => ({ network_uuid: network.uuid }), [network]);
   const props = useTable({
     table: 'openstack-network-rbac-' + network.uuid,
-    fetchData: createFetcher('openstack-network-rbac-policies'),
+    fetchData: createFetcher(openstackNetworkRbacPoliciesList),
     filter,
   });
   return (

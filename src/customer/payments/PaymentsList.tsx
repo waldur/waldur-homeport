@@ -1,6 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { Payment, PaymentsListData } from 'waldur-js-client';
+import { Payment, paymentsList, PaymentsListData } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { PAYMENTS_TABLE } from '@waldur/customer/details/constants';
@@ -33,7 +33,7 @@ export const PaymentsList: FunctionComponent = () => {
 
   const props = useTable({
     table: PAYMENTS_TABLE,
-    fetchData: createFetcher('payments'),
+    fetchData: createFetcher(paymentsList),
     filter,
   });
 

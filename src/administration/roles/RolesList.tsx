@@ -1,4 +1,4 @@
-import { RoleDetails } from 'waldur-js-client';
+import { RoleDetails, rolesList } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
@@ -14,7 +14,7 @@ import { RoleCreateButton } from './RoleCreateButton';
 export const RolesList = () => {
   const tableProps = useTable({
     table: `RolesList`,
-    fetchData: createFetcher('roles'),
+    fetchData: createFetcher(rolesList),
   });
 
   return (

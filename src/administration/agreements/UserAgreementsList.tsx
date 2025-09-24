@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { UserAgreement } from 'waldur-js-client';
+import { UserAgreement, userAgreementsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -26,7 +26,7 @@ const UserAggrementsRowActions = ({ row, fetch }) => (
 export const UserAgreementsList: FunctionComponent<{}> = () => {
   const props = useTable({
     table: 'user-agreements',
-    fetchData: createFetcher('user-agreements'),
+    fetchData: createFetcher(userAgreementsList),
   });
   return (
     <Table<UserAgreement>

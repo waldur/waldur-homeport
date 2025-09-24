@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { RancherIngress } from 'waldur-js-client';
+import { RancherIngress, rancherIngressesList } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -19,7 +19,7 @@ export const ClusterIngressesList: FunctionComponent<
 
   const props = useTable({
     table: 'rancher-ingresses',
-    fetchData: createFetcher('rancher-ingresses'),
+    fetchData: createFetcher(rancherIngressesList),
     filter,
   });
 

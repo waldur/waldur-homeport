@@ -1,7 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { BroadcastMessage, BroadcastMessagesListData } from 'waldur-js-client';
+import {
+  BroadcastMessage,
+  broadcastMessagesList,
+  BroadcastMessagesListData,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
@@ -41,7 +45,7 @@ export const BroadcastList: FunctionComponent<{}> = () => {
   );
   const props = useTable({
     table: 'broadcast',
-    fetchData: createFetcher('broadcast-messages'),
+    fetchData: createFetcher(broadcastMessagesList),
     queryField: 'subject',
     mandatoryFields,
     filter,

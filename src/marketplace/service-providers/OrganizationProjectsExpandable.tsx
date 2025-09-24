@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { marketplaceServiceProvidersCustomerProjectsList } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -18,7 +19,8 @@ export const OrganizationProjectsExpandable = ({
     () => ({
       table: `OrganizationProjects-${row.uuid}`,
       fetchData: createFetcher(
-        `marketplace-service-providers/${provider_uuid}/customer_projects`,
+        marketplaceServiceProvidersCustomerProjectsList,
+        { path: { service_provider_uuid: provider_uuid } },
       ),
       filter: {
         project_customer_uuid: row.uuid,

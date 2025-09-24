@@ -1,4 +1,4 @@
-import { Template } from 'waldur-js-client';
+import { supportTemplatesList, Template } from 'waldur-js-client';
 
 import { IssueTemplateTypeOptions } from '@waldur/administration/utils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
@@ -33,7 +33,7 @@ const renderType = ({ row }) => (
 export const AdministrationIssueTemplatesList = () => {
   const tableProps = useTable({
     table: 'issueTemplates',
-    fetchData: createFetcher('support-templates'),
+    fetchData: createFetcher(supportTemplatesList),
   });
   const columns: Column<Template>[] = [
     {

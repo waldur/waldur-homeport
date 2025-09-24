@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { marketplaceServiceProvidersCustomersList } from 'waldur-js-client';
 
 import { EstimatedCostField } from '@waldur/customer/list/EstimatedCostField';
 import { translate } from '@waldur/i18n';
@@ -18,9 +19,9 @@ import { PROVIDER_CUSTOMERS_TABLE_TABS } from './utils';
 const ProviderOrganizationsListComponent = ({ provider }) => {
   const tableProps = useTable({
     table: 'marketplace-provider-organizations',
-    fetchData: createFetcher(
-      `marketplace-service-providers/${provider.uuid}/customers`,
-    ),
+    fetchData: createFetcher(marketplaceServiceProvidersCustomersList, {
+      path: { service_provider_uuid: provider.uuid },
+    }),
   });
   const columns = [
     {

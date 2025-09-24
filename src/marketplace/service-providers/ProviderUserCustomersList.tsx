@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { marketplaceServiceProvidersUserCustomersList } from 'waldur-js-client';
 
 import { EstimatedCostField } from '@waldur/customer/list/EstimatedCostField';
 import { translate } from '@waldur/i18n';
@@ -15,9 +16,9 @@ export const ProviderUserCustomersList = ({ user, provider }) => {
   const tableOptions = useMemo(
     () => ({
       table: 'marketplace-provider-user-organizations',
-      fetchData: createFetcher(
-        `marketplace-service-providers/${provider.uuid}/user_customers`,
-      ),
+      fetchData: createFetcher(marketplaceServiceProvidersUserCustomersList, {
+        path: { service_provider_uuid: provider.uuid },
+      }),
       filter: {
         user_uuid: user.uuid,
       },

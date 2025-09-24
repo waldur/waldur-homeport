@@ -1,5 +1,8 @@
 import { useMemo } from 'react';
-import { MarketplaceComponentUsagesListData } from 'waldur-js-client';
+import {
+  marketplaceComponentUsagesList,
+  MarketplaceComponentUsagesListData,
+} from 'waldur-js-client';
 
 import { formatMonth } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -17,7 +20,7 @@ export const ResourceComponentUsageTable = (props) => {
 
   const tableProps = useTable({
     table: 'ResourceUsageTable',
-    fetchData: createFetcher('marketplace-component-usages'),
+    fetchData: createFetcher(marketplaceComponentUsagesList),
     filter,
   });
   const columns = [

@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 import {
   RancherCluster,
   RancherNode,
+  rancherNodesList,
   RancherNodesListData,
 } from 'waldur-js-client';
 
@@ -35,7 +36,7 @@ export const ClusterNodesList: FunctionComponent<
   );
   const props = useTable({
     table: 'rancher-nodes',
-    fetchData: createFetcher('rancher-nodes'),
+    fetchData: createFetcher(rancherNodesList),
     filter,
   });
 

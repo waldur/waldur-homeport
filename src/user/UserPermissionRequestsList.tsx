@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { userPermissionRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -39,7 +40,7 @@ export const UserPermissionRequestsList = () => {
   const filter = useSelector(mapStateToProps);
   const props = useTable({
     table: USER_PERMISSION_REQUESTS_TABLE_ID,
-    fetchData: createFetcher('user-permission-requests'),
+    fetchData: createFetcher(userPermissionRequestsList),
     filter,
   });
   const columns = [

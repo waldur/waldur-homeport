@@ -1,6 +1,7 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { financialReportsList } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { formatDate } from '@waldur/core/dateUtils';
@@ -131,7 +132,7 @@ export const CustomerList: FunctionComponent<{
 
   const props = useTable({
     table: 'customerList',
-    fetchData: createFetcher('financial-reports'),
+    fetchData: createFetcher(financialReportsList),
     queryField: 'query',
     filter,
   });

@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { RancherCluster, RancherTemplate } from 'waldur-js-client';
+import {
+  RancherCluster,
+  RancherTemplate,
+  rancherTemplatesList,
+} from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -19,7 +23,7 @@ export const ClusterTemplatesList: FunctionComponent<
   );
   const props = useTable({
     table: 'rancher-cluster-templates',
-    fetchData: createFetcher('rancher-templates'),
+    fetchData: createFetcher(rancherTemplatesList),
     filter,
     queryField: 'name',
   });

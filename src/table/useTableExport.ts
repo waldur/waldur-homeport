@@ -62,6 +62,7 @@ export function useTableExport(table, props?) {
 
     if (config.allPages) {
       const request: TableRequest = {
+        tableKey: table,
         pageSize: Math.max(tableState.pagination.resultCount, 200),
         currentPage: 1,
         filter: config.withFilters ? { ...options.filter } : {},

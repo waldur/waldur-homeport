@@ -1,5 +1,9 @@
 import { FC, useMemo } from 'react';
-import { MaintenanceAnnouncement, ServiceProvider } from 'waldur-js-client';
+import {
+  MaintenanceAnnouncement,
+  maintenanceAnnouncementsList,
+  ServiceProvider,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -27,7 +31,7 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
 
   const tableProps = useTable({
     table: 'MaintenanceList',
-    fetchData: createFetcher('maintenance-announcements'),
+    fetchData: createFetcher(maintenanceAnnouncementsList),
     queryField: 'name',
     filter,
   });

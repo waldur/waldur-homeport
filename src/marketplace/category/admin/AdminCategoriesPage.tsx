@@ -2,7 +2,10 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
-import { MarketplaceCategoriesListData } from 'waldur-js-client';
+import {
+  marketplaceCategoriesList,
+  MarketplaceCategoriesListData,
+} from 'waldur-js-client';
 
 import Avatar from '@waldur/core/Avatar';
 import { Link } from '@waldur/core/Link';
@@ -36,7 +39,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
 
   const tableProps = useTable({
     table: 'CategoriesList',
-    fetchData: createFetcher('marketplace-categories'),
+    fetchData: createFetcher(marketplaceCategoriesList),
     queryField: 'title',
     filter: categoryFields,
   });

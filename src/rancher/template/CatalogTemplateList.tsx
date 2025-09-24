@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { RancherTemplate } from 'waldur-js-client';
+import { RancherTemplate, rancherTemplatesList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -23,7 +23,7 @@ export const CatalogTemplatesList: FC<OwnProps> = (props) => {
   );
   const tableProps = useTable({
     table: `rancher-catalog-templates-${props.catalogUuid}`,
-    fetchData: createFetcher('rancher-templates'),
+    fetchData: createFetcher(rancherTemplatesList),
     filter,
     queryField: 'name',
   });

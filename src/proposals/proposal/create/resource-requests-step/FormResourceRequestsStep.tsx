@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
+  proposalProposalsResourcesList,
   proposalPublicCallsRetrieve,
   RequestedResource,
 } from 'waldur-js-client';
@@ -74,7 +75,9 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
 
   const tableProps = useTable({
     table: 'ProposalResourcesList',
-    fetchData: createFetcher(`proposal-proposals/${proposal.uuid}/resources`),
+    fetchData: createFetcher(proposalProposalsResourcesList, {
+      path: { uuid: proposal.uuid },
+    }),
     filter,
     onFetch(rows) {
       if (change) {

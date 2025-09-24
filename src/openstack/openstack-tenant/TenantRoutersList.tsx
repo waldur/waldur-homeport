@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { OpenStackRouter, OpenstackRoutersListData } from 'waldur-js-client';
+import {
+  OpenStackRouter,
+  openstackRoutersList,
+  OpenstackRoutersListData,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
@@ -44,7 +48,7 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
   );
   const props = useTable({
     table: 'openstack-routers',
-    fetchData: createFetcher('openstack-routers'),
+    fetchData: createFetcher(openstackRoutersList),
     queryField: 'name',
     filter,
   });

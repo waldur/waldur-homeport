@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { marketplaceOfferingPermissionsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -13,7 +14,7 @@ export const OfferingPermissionsList = ({ offering }) => {
   const filter = useMemo(() => ({ offering: offering.uuid }), [offering]);
   const tableProps = useTable({
     table: 'marketplace-offering-permissions',
-    fetchData: createFetcher(`marketplace-offering-permissions`),
+    fetchData: createFetcher(marketplaceOfferingPermissionsList),
     filter,
   });
   const columns = [

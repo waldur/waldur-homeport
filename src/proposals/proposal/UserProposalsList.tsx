@@ -3,7 +3,11 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Proposal, ProposalProposalsListData } from 'waldur-js-client';
+import {
+  Proposal,
+  proposalProposalsList,
+  ProposalProposalsListData,
+} from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -49,7 +53,7 @@ export const UserProposalsList: FC = () => {
 
   const tableProps = useTable({
     table: 'MyProposalsList',
-    fetchData: createFetcher('proposal-proposals'),
+    fetchData: createFetcher(proposalProposalsList),
     queryField: 'name',
     filter,
     mandatoryFields,

@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { userInvitationsList } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDate } from '@waldur/core/dateUtils';
@@ -36,7 +37,7 @@ export const InvitationsList: FunctionComponent = () => {
   );
   const props = useTable({
     table: 'user-invitations',
-    fetchData: createFetcher('user-invitations'),
+    fetchData: createFetcher(userInvitationsList),
     filter,
     queryField: 'email',
   });

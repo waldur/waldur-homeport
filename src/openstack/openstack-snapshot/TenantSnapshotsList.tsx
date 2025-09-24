@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import {
   OpenStackSnapshot,
+  openstackSnapshotsList,
   OpenstackSnapshotsListData,
 } from 'waldur-js-client';
 
@@ -25,7 +26,7 @@ export const TenantSnapshotsList: FunctionComponent<{ resourceScope }> = ({
   );
   const props = useTable({
     table: 'openstack-snapshots',
-    fetchData: createFetcher('openstack-snapshots'),
+    fetchData: createFetcher(openstackSnapshotsList),
     filter,
   });
   return (

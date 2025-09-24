@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { User } from 'waldur-js-client';
+import { marketplaceOfferingUsersList, User } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -38,7 +38,7 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
   );
   const tableProps = useTable({
     table: 'UserOfferingList',
-    fetchData: createFetcher('marketplace-offering-users'),
+    fetchData: createFetcher(marketplaceOfferingUsersList),
     filter,
     queryField: 'query',
   });

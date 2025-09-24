@@ -1,5 +1,8 @@
 import { FunctionComponent } from 'react';
-import { RemoteProjectUpdateRequest } from 'waldur-js-client';
+import {
+  marketplaceProjectUpdateRequestsList,
+  RemoteProjectUpdateRequest,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -18,7 +21,7 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
 }> = ({ filter, title, filters }) => {
   const props = useTable({
     table: 'marketplace-project-update-requests',
-    fetchData: createFetcher('marketplace-project-update-requests'),
+    fetchData: createFetcher(marketplaceProjectUpdateRequestsList),
     filter,
   });
   return (

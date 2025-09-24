@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { hooksList } from 'waldur-js-client';
 
 import { HooksRowActions } from '@waldur/administration/hooks/HooksRowActions';
 import { titleCase } from '@waldur/core/utils';
@@ -37,7 +38,7 @@ export const HooksList: FunctionComponent = () => {
   const filter = useSelector(mapStateToProps);
   const props = useTable({
     table: HOOK_LIST_ID,
-    fetchData: createFetcher('hooks'),
+    fetchData: createFetcher(hooksList),
     filter,
   });
   return (

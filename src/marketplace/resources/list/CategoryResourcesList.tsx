@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { marketplaceResourcesList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -91,7 +92,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
 
   const props = useTable({
     table: `${CATEGORY_RESOURCES_TABLE_ID}-${ownProps.category_uuid}`,
-    fetchData: createFetcher('marketplace-resources'),
+    fetchData: createFetcher(marketplaceResourcesList),
     filter,
     queryField: 'query',
     onApplyFilter: (filters, firstFetch) => {

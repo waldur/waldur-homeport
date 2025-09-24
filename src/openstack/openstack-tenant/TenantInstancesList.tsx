@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import {
   OpenStackInstance,
+  openstackInstancesList,
   OpenstackInstancesListData,
 } from 'waldur-js-client';
 
@@ -55,7 +56,7 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
   );
   const props = useTable({
     table: 'openstack-instances',
-    fetchData: createFetcher('openstack-instances'),
+    fetchData: createFetcher(openstackInstancesList),
     queryField: 'query',
     filter,
   });

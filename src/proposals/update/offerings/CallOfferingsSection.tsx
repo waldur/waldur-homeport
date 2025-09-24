@@ -1,5 +1,8 @@
 import { FC } from 'react';
-import { RequestedOffering } from 'waldur-js-client';
+import {
+  RequestedOffering,
+  proposalProtectedCallsOfferingsList,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { CallOfferingStateField } from '@waldur/proposals/details/CallOfferingStateField';
@@ -20,9 +23,9 @@ interface CallOfferingsSectionProps {
 export const CallOfferingsSection: FC<CallOfferingsSectionProps> = (props) => {
   const tableProps = useTable({
     table: 'CallOfferingsList',
-    fetchData: createFetcher(
-      `proposal-protected-calls/${props.call.uuid}/offerings`,
-    ),
+    fetchData: createFetcher(proposalProtectedCallsOfferingsList, {
+      path: { uuid: props.call.uuid },
+    }),
   });
 
   return (

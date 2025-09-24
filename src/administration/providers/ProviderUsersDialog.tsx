@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { User, UsersListData } from 'waldur-js-client';
+import { User, usersList, UsersListData } from 'waldur-js-client';
 
 import { FREEIPA_IDP } from '@waldur/auth/providers/constants';
 import { CancelButton } from '@waldur/form';
@@ -23,7 +23,7 @@ const ProviderUsersList = (props) => {
   );
   const tableProps = useTable({
     table: `ProviderUsersList`,
-    fetchData: createFetcher('users'),
+    fetchData: createFetcher(usersList),
     queryField: 'query',
     filter,
   });

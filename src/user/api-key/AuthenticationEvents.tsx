@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Event } from 'waldur-js-client';
+import { Event, eventsList } from 'waldur-js-client';
 
 import { formatRelative } from '@waldur/core/dateUtils';
 import eventsRegistry from '@waldur/events/registry';
@@ -20,7 +20,7 @@ export const AuthenticationEvents: FunctionComponent<{ user }> = ({ user }) => {
   );
   const props = useTable({
     table: `authentication-events-${user.uuid}`,
-    fetchData: createFetcher('events'),
+    fetchData: createFetcher(eventsList),
     filter,
   });
   return (

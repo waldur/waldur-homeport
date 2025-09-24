@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { slurmJobsList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { ResourceName } from '@waldur/resource/ResourceName';
@@ -40,7 +41,7 @@ export const AllocationJobsTable: FunctionComponent<{ resourceScope }> = ({
   );
   const tableProps = useTable({
     table: 'AllocationJobsTable',
-    fetchData: createFetcher('slurm-jobs'),
+    fetchData: createFetcher(slurmJobsList),
     filter,
   });
 

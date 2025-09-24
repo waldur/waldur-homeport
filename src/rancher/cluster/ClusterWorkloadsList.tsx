@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { RancherWorkload } from 'waldur-js-client';
+import { RancherWorkload, rancherWorkloadsList } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -17,7 +17,7 @@ export const ClusterWorkloadsList: FunctionComponent<
   const filter = useClusterFilter(resourceScope);
   const props = useTable({
     table: 'rancher-workloads',
-    fetchData: createFetcher('rancher-workloads'),
+    fetchData: createFetcher(rancherWorkloadsList),
     filter,
   });
 

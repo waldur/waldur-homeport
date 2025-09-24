@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { userPermissionRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -12,7 +13,7 @@ import { RoleField } from '@waldur/user/affiliations/RoleField';
 export const OrganizationRequestsList: FC = () => {
   const props = useTable({
     table: 'UserPermissionRequests',
-    fetchData: createFetcher('user-permission-requests'),
+    fetchData: createFetcher(userPermissionRequestsList),
   });
 
   return (

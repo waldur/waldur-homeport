@@ -3,7 +3,11 @@ import { FunctionComponent, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { CustomersUsersListData, CustomerUser } from 'waldur-js-client';
+import {
+  CustomersUsersListData,
+  CustomerUser,
+  customersUsersList,
+} from 'waldur-js-client';
 
 import { CUSTOMER_USERS_LIST_FILTER_FORM_ID } from '@waldur/customer/team/constants';
 import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
@@ -59,7 +63,11 @@ export const CustomerUsersList: FunctionComponent<{ filters? }> = ({
   const customer = useSelector(getCustomer);
   const props = useTable({
     table: 'customer-users',
-    fetchData: createFetcher(`customers/${customer.uuid}/users`),
+    fetchData: createFetcher(customersUsersList, {
+      path: {
+        customer_uuid: customer.uuid,
+      } satisfies CustomersUsersListData['path'],
+    }),
     queryField: 'user_keyword',
     filter,
     mandatoryFields,

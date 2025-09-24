@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Proposal } from 'waldur-js-client';
+import { Proposal, proposalReviewsList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
@@ -25,7 +25,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
   const filter = useMemo(() => ({ proposal_uuid: row.uuid }), [row]);
   const tableProps = useTable({
     table: 'ProposalReviewsList',
-    fetchData: createFetcher(`proposal-reviews`),
+    fetchData: createFetcher(proposalReviewsList),
     filter,
   });
 

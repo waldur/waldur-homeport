@@ -8,7 +8,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { GroupInvitation } from 'waldur-js-client';
+import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -41,7 +41,7 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: 'group-invitations',
-    fetchData: createFetcher('user-group-invitations'),
+    fetchData: createFetcher(userGroupInvitationsList),
     filter,
   });
 

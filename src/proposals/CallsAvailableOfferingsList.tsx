@@ -1,5 +1,8 @@
 import { FC, useMemo } from 'react';
-import { MarketplacePublicOfferingsListData } from 'waldur-js-client';
+import {
+  marketplacePublicOfferingsList,
+  MarketplacePublicOfferingsListData,
+} from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -19,7 +22,7 @@ export const CallsAvailableOfferingsList: FC = () => {
   const tableProps = useTable({
     table: 'CallsAvailableOfferingsList',
     filter,
-    fetchData: createFetcher('marketplace-public-offerings'),
+    fetchData: createFetcher(marketplacePublicOfferingsList),
     staleTime: 3 * 60 * 1000,
   });
 

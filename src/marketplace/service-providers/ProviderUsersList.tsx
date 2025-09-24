@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { marketplaceServiceProvidersUsersList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -33,9 +34,9 @@ const UserNameColumn = ({ row }) => (
 const ProviderUsersListComponent = ({ provider }) => {
   const tableProps = useTable({
     table: 'marketplace-provider-users',
-    fetchData: createFetcher(
-      `marketplace-service-providers/${provider.uuid}/users`,
-    ),
+    fetchData: createFetcher(marketplaceServiceProvidersUsersList, {
+      path: { service_provider_uuid: provider.uuid },
+    }),
     queryField: 'query',
   });
   const ExpandableRow = useCallback(

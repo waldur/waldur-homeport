@@ -1,5 +1,9 @@
 import { FC } from 'react';
-import { ProtectedRound, RoundReviewer } from 'waldur-js-client';
+import {
+  callRoundsReviewersList,
+  ProtectedRound,
+  RoundReviewer,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -13,7 +17,9 @@ interface RoundReviewersListProps {
 export const RoundReviewersList: FC<RoundReviewersListProps> = (props) => {
   const tableProps = useTable({
     table: 'RoundReviewersList',
-    fetchData: createFetcher(`call-rounds/${props.round.uuid}/reviewers`),
+    fetchData: createFetcher(callRoundsReviewersList, {
+      path: { uuid: props.round.uuid },
+    }),
   });
 
   return (

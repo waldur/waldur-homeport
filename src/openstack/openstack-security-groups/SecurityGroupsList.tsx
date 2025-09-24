@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
 import {
   OpenStackSecurityGroup,
+  openstackSecurityGroupsList,
   OpenstackSecurityGroupsListData,
 } from 'waldur-js-client';
 
@@ -41,7 +42,7 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
   );
   const props = useTable({
     table: 'openstack-security-groups',
-    fetchData: createFetcher('openstack-security-groups'),
+    fetchData: createFetcher(openstackSecurityGroupsList),
     filter,
     queryField: 'query',
   });

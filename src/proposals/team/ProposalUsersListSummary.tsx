@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { proposalProposalsListUsersList } from 'waldur-js-client';
 
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/useTable';
@@ -10,9 +11,9 @@ import { UsersList } from './UsersList';
 export const ProposalUsersListSummary: FC<{ scope; reviews? }> = (props) => {
   const usersTable = useTable({
     table: `ProposalUsersList`,
-    fetchData: createFetcher(
-      `proposal-proposals/${props.scope.uuid}/list_users`,
-    ),
+    fetchData: createFetcher(proposalProposalsListUsersList, {
+      path: { uuid: props.scope.uuid },
+    }),
   });
   return (
     <UsersList

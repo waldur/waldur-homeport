@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { MarketplaceOrdersListData, Resource } from 'waldur-js-client';
+import {
+  marketplaceOrdersList,
+  MarketplaceOrdersListData,
+  Resource,
+} from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -33,7 +37,7 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
   );
   const tableProps = useTable({
     table: `ResourceOrders-${props.resource.uuid}`,
-    fetchData: createFetcher('marketplace-orders'),
+    fetchData: createFetcher(marketplaceOrdersList),
     filter,
   });
   const columns: Column<Resource>[] = [

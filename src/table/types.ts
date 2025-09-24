@@ -10,6 +10,7 @@ interface RequestConfigExtended extends RequestInit {
 }
 
 export interface TableRequest {
+  tableKey: string;
   pageSize: number;
   currentPage: number;
   filter?: any;
@@ -33,8 +34,9 @@ export type Fetcher = <RowType = any>(
   request: TableRequest,
 ) => Promise<TableResponse<RowType>>;
 
-export type FetcherOptions = {
-  params?: any;
+export type FetcherOptions<QueryPayload = any, PathPayload = any> = {
+  query?: QueryPayload;
+  path?: PathPayload;
   parser?: (data) => any[];
 } & Record<string, any>;
 

@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { marketplaceProviderOfferingsCustomersList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
@@ -43,9 +44,9 @@ export const OfferingCustomersList: FunctionComponent<
 
   const fetcher = useMemo(
     () =>
-      createFetcher(
-        `marketplace-provider-offerings/${props.offering.uuid}/customers`,
-      ),
+      createFetcher(marketplaceProviderOfferingsCustomersList, {
+        path: { uuid: props.offering.uuid },
+      }),
     [props.offering],
   );
 

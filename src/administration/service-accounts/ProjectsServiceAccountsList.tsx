@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { marketplaceProjectServiceAccountsList } from 'waldur-js-client';
 
 import { ServiceAccountsTableComponent } from '@waldur/customer/service-accounts/ServiceAccountsList';
 import { createFetcher } from '@waldur/table/api';
@@ -10,7 +11,7 @@ export const ProjectsServiceAccountsList: FC<TableWithPortal> = ({
 }) => {
   const tableProps = useTable({
     table: `marketplace-project-service-accounts`,
-    fetchData: createFetcher(`marketplace-project-service-accounts`),
+    fetchData: createFetcher(marketplaceProjectServiceAccountsList),
     queryField: 'email',
   });
 

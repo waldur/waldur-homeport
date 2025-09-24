@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { marketplaceProjectUpdateRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -29,7 +30,7 @@ export const ProjectUpdateRequestsList: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: 'marketplace-project-update-requests',
-    fetchData: createFetcher('marketplace-project-update-requests'),
+    fetchData: createFetcher(marketplaceProjectUpdateRequestsList),
     filter,
   });
   return (

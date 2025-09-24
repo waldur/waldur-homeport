@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { marketplaceServiceProvidersListUsersList } from 'waldur-js-client';
 
 import { TeamTableComponent } from '@waldur/customer/team/TeamTableComponent';
 import { translate } from '@waldur/i18n';
@@ -28,13 +29,11 @@ export const ProviderTeamPage = () => {
     }),
     [customer.service_provider],
   );
-  const url =
-    'marketplace-service-providers/' +
-    customer.service_provider_uuid +
-    '/list_users';
   const tableProps = useTable({
     table: 'service-provider-users',
-    fetchData: createFetcher(url),
+    fetchData: createFetcher(marketplaceServiceProvidersListUsersList, {
+      path: { uuid: customer.service_provider_uuid },
+    }),
     filter: usersFilter,
     queryField: 'search_string',
   });

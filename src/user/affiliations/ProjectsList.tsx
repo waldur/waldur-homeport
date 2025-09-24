@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { Project } from 'waldur-js-client';
+import { Project, projectsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -55,7 +55,7 @@ export const ProjectsList = () => {
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: PROJECTS_LIST,
-    fetchData: createFetcher('projects'),
+    fetchData: createFetcher(projectsList),
     queryField: 'name',
     filter,
   });

@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { RancherCatalog } from 'waldur-js-client';
+import { RancherCatalog, rancherCatalogsList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
@@ -22,7 +22,7 @@ export const ClusterCatalogList: FunctionComponent<
   );
   const props = useTable({
     table: 'rancher-catalogs',
-    fetchData: createFetcher('rancher-catalogs'),
+    fetchData: createFetcher(rancherCatalogsList),
     filter,
   });
   const columns = useMemo(

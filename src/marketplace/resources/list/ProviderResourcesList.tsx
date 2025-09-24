@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
+  marketplaceProviderResourcesList,
   MarketplaceProviderResourcesListData,
   Resource,
 } from 'waldur-js-client';
@@ -299,7 +300,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
 
 const TableOptions = {
   table: TABLE_PUBLIC_RESOURCE,
-  fetchData: createFetcher('marketplace-provider-resources'),
+  fetchData: createFetcher(marketplaceProviderResourcesList),
   queryField: 'query',
 };
 

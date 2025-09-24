@@ -1,7 +1,10 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { RobotAccountDetails } from 'waldur-js-client';
+import {
+  marketplaceRobotAccountsList,
+  RobotAccountDetails,
+} from 'waldur-js-client';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
@@ -44,7 +47,7 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
 
   const tableProps = useTable({
     table: 'provider-robot-accounts',
-    fetchData: createFetcher('marketplace-robot-accounts'),
+    fetchData: createFetcher(marketplaceRobotAccountsList),
     filter,
   });
 

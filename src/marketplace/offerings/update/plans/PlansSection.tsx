@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { marketplacePlansList } from 'waldur-js-client';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
@@ -67,7 +68,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
 
   const tableProps = useTable({
     table: 'OfferingPlans',
-    fetchData: createFetcher('marketplace-plans', {
+    fetchData: createFetcher(marketplacePlansList, {
       params: { offering_uuid: props.offering.uuid },
     }),
   });

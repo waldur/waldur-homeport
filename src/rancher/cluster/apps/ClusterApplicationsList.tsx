@@ -1,5 +1,9 @@
 import { FunctionComponent } from 'react';
-import { RancherApplication, RancherCluster } from 'waldur-js-client';
+import {
+  RancherApplication,
+  rancherAppsList,
+  RancherCluster,
+} from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -28,7 +32,7 @@ export const ClusterApplicationsList: FunctionComponent<
 
   const props = useTable({
     table: 'rancher-apps',
-    fetchData: createFetcher('rancher-apps'),
+    fetchData: createFetcher(rancherAppsList),
     filter,
   });
 

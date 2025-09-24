@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { GroupInvitation } from 'waldur-js-client';
+import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { SubmitButton } from '@waldur/form';
@@ -37,7 +37,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
   const tableProps = useTable({
     table: 'PublicGroupInvitations',
     filter,
-    fetchData: createFetcher('user-group-invitations'),
+    fetchData: createFetcher(userGroupInvitationsList),
     queryField: 'name',
   });
 

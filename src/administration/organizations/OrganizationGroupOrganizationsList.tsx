@@ -1,5 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Customer, CustomersListData } from 'waldur-js-client';
+import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -24,7 +24,7 @@ export const OrganizationGroupOrganizationsList: FunctionComponent<any> = (
   );
   const tableProps = useTable({
     table: 'customerList',
-    fetchData: createFetcher('customers'),
+    fetchData: createFetcher(customersList),
     queryField: 'name',
     filter,
   });

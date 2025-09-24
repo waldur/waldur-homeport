@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { marketplaceResourceUsersList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -13,7 +14,7 @@ export const ResourceUsersList = ({ resource, offering }) => {
   const tableProps = useTable({
     table: `ResourceUsersList`,
     filter,
-    fetchData: createFetcher('marketplace-resource-users'),
+    fetchData: createFetcher(marketplaceResourceUsersList),
   });
 
   return (

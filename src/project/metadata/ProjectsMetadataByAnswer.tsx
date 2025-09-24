@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
+import { customersProjectMetadataQuestionAnswersList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -18,9 +19,9 @@ export const ProjectsMetadataByAnswer: FC<TableWithPortal> = ({ portal }) => {
 
   const tableProps = useTable({
     table: 'ProjectsMetadata-' + currentCustomer.uuid,
-    fetchData: createFetcher(
-      `customers/${currentCustomer.uuid}/project-metadata-question-answers`,
-    ),
+    fetchData: createFetcher(customersProjectMetadataQuestionAnswersList, {
+      path: { customer_uuid: currentCustomer.uuid },
+    }),
   });
 
   if (!checklistUuid) return null;

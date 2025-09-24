@@ -1,5 +1,6 @@
 import { FunctionComponent, useMemo } from 'react';
 import {
+  rancherClusterSecurityGroupsList,
   RancherClusterSecurityGroupsListData,
   Resource,
 } from 'waldur-js-client';
@@ -42,7 +43,7 @@ export const ClusterSecurityGroupsList: FunctionComponent<{
   );
   const tableProps = useTable({
     table: 'ClusterSecurityGroups',
-    fetchData: createFetcher('rancher-cluster-security-groups'),
+    fetchData: createFetcher(rancherClusterSecurityGroupsList),
     filter,
   });
 

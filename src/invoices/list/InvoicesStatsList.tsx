@@ -1,3 +1,5 @@
+import { invoicesStatsList } from 'waldur-js-client';
+
 import { ENV } from '@waldur/core/config';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
@@ -18,11 +20,18 @@ const CostField = ({ invoiceStats, organization }) =>
 export const InvoicesStatsList = (props: any) => {
   const tableProps = useTable({
     table: [INVOICES_STATS_TABLE, props.invoiceUuid].join('-'),
-    fetchData: createFetcher(`invoices/${props.invoiceUuid}/stats`, {
-      params: {
-        provider_uuid: props.providerUUID,
+    fetchData: createFetcher(
+      // @ts-ignore
+      invoicesStatsList,
+      {
+        path: {
+          uuid: props.invoiceUuid,
+        },
+        query: {
+          provider_uuid: props.providerUUID,
+        },
       },
-    }),
+    ),
   });
   const columns = [
     {

@@ -1,3 +1,5 @@
+import { proposalProposalsResourcesList } from 'waldur-js-client';
+
 import { translate } from '@waldur/i18n';
 import {
   Proposal,
@@ -24,7 +26,9 @@ export const ResourceRequestsSummary = ({
 }: ResourceRequestsSummaryProps) => {
   const tableProps = useTable({
     table: 'ProposalResourcesList',
-    fetchData: createFetcher(`proposal-proposals/${proposal.uuid}/resources`),
+    fetchData: createFetcher(proposalProposalsResourcesList, {
+      path: { uuid: proposal.uuid },
+    }),
   });
 
   return (

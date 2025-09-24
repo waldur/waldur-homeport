@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
+import { customerPermissionsReviewsList } from 'waldur-js-client';
 
 import { PermissionsReviewsList } from '@waldur/core/PermissionsReviewsList';
 import { createFetcher } from '@waldur/table/api';
@@ -16,7 +17,7 @@ export const CustomerPermissionsReviewList: FunctionComponent<{}> = () => {
   const filter = useSelector(mapStateToProps);
   const tableProps = useTable({
     table: 'customer-permissions-reviews',
-    fetchData: createFetcher('customer-permissions-reviews'),
+    fetchData: createFetcher(customerPermissionsReviewsList),
     filter,
   });
 

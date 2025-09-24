@@ -1,7 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { ProposalPublicCallsListData } from 'waldur-js-client';
+import {
+  proposalPublicCallsList,
+  ProposalPublicCallsListData,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -133,7 +136,7 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
   const filter = usePublicCallsFilter(props.offering_uuid, props.provider_uuid);
   const tableProps = useTable({
     table: 'PublicCallsList',
-    fetchData: createFetcher('proposal-public-calls'),
+    fetchData: createFetcher(proposalPublicCallsList),
     filter,
     queryField: 'name',
   });

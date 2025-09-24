@@ -1,5 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { OpenStackVolume, OpenstackVolumesListData } from 'waldur-js-client';
+import {
+  OpenStackVolume,
+  openstackVolumesList,
+  OpenstackVolumesListData,
+} from 'waldur-js-client';
 
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -26,7 +30,7 @@ export const InstanceVolumesList: FunctionComponent<{ resourceScope }> = ({
   );
   const props = useTable({
     table: 'openstack-volumes',
-    fetchData: createFetcher('openstack-volumes'),
+    fetchData: createFetcher(openstackVolumesList),
     filter,
   });
 

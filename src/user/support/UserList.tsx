@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { User, UsersListData } from 'waldur-js-client';
+import { User, usersList, UsersListData } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -189,7 +189,7 @@ export const UserList: FunctionComponent = () => {
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: `userList`,
-    fetchData: createFetcher('users'),
+    fetchData: createFetcher(usersList),
     queryField: 'query',
     filter,
     mandatoryFields,

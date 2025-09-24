@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { OrganizationGroup } from 'waldur-js-client';
+import { OrganizationGroup, organizationGroupsList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -13,7 +13,7 @@ import { OrganizationGroupRowActions } from './OrganizationGroupRowActions';
 export const OrganizationGroupsList: FunctionComponent = () => {
   const tableProps = useTable({
     table: 'OrganizationGroupsList',
-    fetchData: createFetcher('organization-groups'),
+    fetchData: createFetcher(organizationGroupsList),
     queryField: 'name',
   });
 

@@ -1,6 +1,7 @@
 import { FC, ReactNode, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
+import { invoicesItemsRetrieve } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -73,7 +74,9 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
   const customer = useSelector(getCustomer);
 
   const fetchItems = useMemo(() => {
-    return createFetcher(`invoices/${invoice.uuid}/items`);
+    return createFetcher(invoicesItemsRetrieve, {
+      path: { uuid: invoice.uuid },
+    });
   }, [invoice.uuid]);
 
   const tableProps = useTable({
