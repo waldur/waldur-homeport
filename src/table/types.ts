@@ -51,9 +51,7 @@ export interface TableOptionsType<RowType = any> {
   exportKeys?: string[];
   exportData?: (rows: RowType[], props: any) => string[][];
   exportRow?: (row: RowType, props: any) => string[];
-  placeholderComponent?: React.ComponentType;
   pullInterval?: number | (() => number);
-  filters?: React.ReactNode;
   filter?;
   mandatoryFields?: string[];
 }

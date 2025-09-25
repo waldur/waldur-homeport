@@ -58,7 +58,6 @@ type SdkFunction<QueryPayload = any, PathPayload = any> = (options?: {
  * @param sdkFunction - The SDK function to call for fetching data.
  * @param options - Default options for the fetcher.
  */
-// In your api file (e.g., table/api.ts)
 
 export function createFetcher<QueryPayload = any, PathPayload = any>(
   sdkFunction: SdkFunction<QueryPayload, PathPayload>,
