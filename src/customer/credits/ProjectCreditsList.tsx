@@ -21,6 +21,7 @@ export const ProjectCreditsList: FC = () => {
     table: 'ProjectCreditsList',
     fetchData: createFetcher(projectCreditsList),
     queryField: 'query',
+    filter: { customer_uuid: customer.uuid },
   });
 
   return (
