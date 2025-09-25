@@ -1,13 +1,15 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { openstackTenantsList } from 'waldur-js-client';
+import {
+  openstackNetworksRbacPolicyCreate,
+  openstackTenantsList,
+} from 'waldur-js-client';
 
 import { parseSelectData } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { ShareOpenstackNetwork } from '@waldur/openstack/api';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@waldur/resource/actions/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
@@ -62,7 +64,7 @@ export const ShareNetworkDialog: FC<ActionDialogProps> = ({
       ]}
       submitForm={async (formData) => {
         try {
-          await ShareOpenstackNetwork({
+          await openstackNetworksRbacPolicyCreate({
             path: { uuid: resource.uuid },
             body: {
               policy_type: formData.policy_type,

@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import {
   OpenStackNetwork,
   openstackNetworkRbacPoliciesList,
+  openstackNetworksRbacPolicyDeleteDestroy,
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
@@ -12,8 +13,6 @@ import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
-
-import { deleteNetworkRBAC } from '../api';
 
 const POLICY_TYPE = {
   access_as_shared: { color: 'blue', label: translate('Shared') },
@@ -29,7 +28,9 @@ const RowActions: FC<{ row; networkUuid; fetch }> = ({
     <ActionsDropdownComponent>
       <ResourceDeleteButton
         apiFunction={() =>
-          deleteNetworkRBAC({ network_uuid: networkUuid, uuid: row.uuid })
+          openstackNetworksRbacPolicyDeleteDestroy({
+            path: { uuid: networkUuid, rbac_policy_uuid: row.uuid },
+          })
         }
         resourceType={translate('Network sharing')}
         refetch={fetch}
