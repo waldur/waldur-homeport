@@ -95,7 +95,7 @@ export function parseSelectData<TData = {}>(
   result: Awaited<RequestResult<TData>>,
 ) {
   return {
-    options: Array.isArray(result.data) ? (result.data as TData) : [],
+    options: (Array.isArray(result.data) ? result.data : []) as TData,
     totalItems: fetchResultCount(result),
   };
 }

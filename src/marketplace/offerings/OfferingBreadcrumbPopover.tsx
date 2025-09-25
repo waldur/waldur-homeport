@@ -1,3 +1,5 @@
+import { marketplaceServiceProvidersOfferingsList } from 'waldur-js-client';
+
 import { translate } from '@waldur/i18n';
 import { BreadcrumbDropdown } from '@waldur/navigation/header/breadcrumb/BreadcrumbDropdown';
 import { useFavoritePages } from '@waldur/navigation/header/favorite-pages/FavoritePageService';
@@ -43,9 +45,12 @@ export const OfferingBreadcrumbPopover = ({
 
   return (
     <BreadcrumbDropdown
-      api={`/marketplace-service-providers/${provider.uuid}/offerings/`}
+      fetcher={marketplaceServiceProvidersOfferingsList}
+      path={{ service_provider_uuid: provider.uuid }}
+      queryKey="marketplaceServiceProvidersOfferingsList"
       queryField="name"
       params={{
+        // @ts-ignore
         field: ['name', 'uuid', 'category_title', 'thumbnail'],
       }}
       filters={[

@@ -1,22 +1,23 @@
-import { InfiniteQueryObserverResult } from '@tanstack/react-query';
-import { Fragment, ReactNode } from 'react';
+import { InfiniteData, UseInfiniteQueryResult } from '@tanstack/react-query';
+import { ComponentType, Fragment, ReactNode } from 'react';
 
 import { translate } from '@waldur/i18n';
+import { DataPage } from '@waldur/table/api';
 
-export const InfiniteList = ({
+export const InfiniteList = <RowType,>({
   context,
   RowComponent,
   emptyMessage,
 }: {
-  context: InfiniteQueryObserverResult<any>;
-  RowComponent;
+  context: UseInfiniteQueryResult<InfiniteData<DataPage<RowType>>>;
+  RowComponent: ComponentType<{ row: RowType }>;
   emptyMessage: ReactNode;
 }) =>
   context.status === 'pending' ? (
     <p className="text-center text-dark mb-0">{translate('Loading')}</p>
   ) : context.status === 'error' ? (
     <p className="text-center text-dark mb-0">{translate('Error')}</p>
-  ) : context.data.pages[0].data.length === 0 ? (
+  ) : context.data.pages[0].rows.length === 0 ? (
     typeof emptyMessage === 'string' ? (
       <p className="text-center text-dark mb-0">{emptyMessage}</p>
     ) : (
@@ -27,7 +28,7 @@ export const InfiniteList = ({
       <div className="timeline">
         {context.data.pages.map((page, i) => (
           <Fragment key={i}>
-            {page.data.map((row, index) => (
+            {page.rows.map((row, index) => (
               <RowComponent row={row} key={index} />
             ))}
           </Fragment>

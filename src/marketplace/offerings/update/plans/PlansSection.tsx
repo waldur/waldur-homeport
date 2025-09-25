@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { marketplacePlansList } from 'waldur-js-client';
 
@@ -66,11 +66,15 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
     },
   ];
 
+  const filter = useMemo(
+    () => ({ offering_uuid: props.offering.uuid }),
+    [props.offering],
+  );
+
   const tableProps = useTable({
     table: 'OfferingPlans',
-    fetchData: createFetcher(marketplacePlansList, {
-      params: { offering_uuid: props.offering.uuid },
-    }),
+    filter,
+    fetchData: createFetcher(marketplacePlansList),
   });
 
   const canCreatePlan =

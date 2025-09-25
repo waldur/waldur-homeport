@@ -1,3 +1,5 @@
+import { projectsList } from 'waldur-js-client';
+
 import { translate } from '@waldur/i18n';
 import { BreadcrumbDropdown } from '@waldur/navigation/header/breadcrumb/BreadcrumbDropdown';
 import { useFavoritePages } from '@waldur/navigation/header/favorite-pages/FavoritePageService';
@@ -29,7 +31,8 @@ export const ProjectBreadcrumbPopover = ({ project, close }) => {
 
   return (
     <BreadcrumbDropdown
-      api="/projects/"
+      fetcher={projectsList}
+      queryKey="projects"
       queryField="query"
       params={{
         customer: project.customer_uuid,

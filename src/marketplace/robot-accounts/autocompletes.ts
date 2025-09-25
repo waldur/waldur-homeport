@@ -1,7 +1,6 @@
 import {
   marketplaceServiceProvidersRobotAccountCustomersList,
   marketplaceServiceProvidersRobotAccountProjectsList,
-  NameUuid,
 } from 'waldur-js-client';
 
 import { parseSelectData } from '@waldur/core/api';
@@ -22,7 +21,7 @@ export const providerProjectAutocomplete = async (
       page_size: ENV.pageSize,
     },
   });
-  return returnReactSelectAsyncPaginateObject<NameUuid>(
+  return returnReactSelectAsyncPaginateObject(
     parseSelectData(response),
     prevOptions,
     currentPage,
@@ -43,7 +42,7 @@ export const providerCustomerAutocomplete = async (
       page_size: ENV.pageSize,
     },
   });
-  return returnReactSelectAsyncPaginateObject<NameUuid>(
+  return returnReactSelectAsyncPaginateObject(
     parseSelectData(response),
     prevOptions,
     currentPage,

@@ -1,8 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import {
+  marketplacePublicOfferingsList,
+  MarketplacePublicOfferingsListData,
+} from 'waldur-js-client';
 
-import { AsyncSearchBox } from '@waldur/core/AsyncSearchBox';
+import { AsyncSearchBox } from '@waldur/core/async/AsyncSearchBox';
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { TextWithoutFormatting } from '@waldur/core/TextWithoutFormatting';
@@ -82,20 +86,21 @@ export const OfferingsSearchBox = () => {
       'customer_uuid',
       'state',
       'paused_reason',
-    ];
+    ] satisfies MarketplacePublicOfferingsListData['query']['field'];
 
     return {
-      o: '-created',
+      o: ['-created'],
       state: ['Active', 'Paused'],
       field,
       allowed_customer_uuid: customer?.uuid,
       project_uuid: project?.uuid,
-    };
+    } satisfies MarketplacePublicOfferingsListData['query'];
   }, [customer, project]);
 
   return (
     <AsyncSearchBox
-      api="/marketplace-public-offerings/"
+      fetcher={marketplacePublicOfferingsList}
+      queryKey="marketplace-public-offerings"
       queryField="keyword"
       params={params}
       RowComponent={OfferingListItem}

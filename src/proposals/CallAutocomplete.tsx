@@ -4,10 +4,10 @@ import { Field, Validator } from 'redux-form';
 import {
   proposalProtectedCallsList,
   proposalPublicCallsList,
-  ProposalPublicCallsListData,
 } from 'waldur-js-client';
 
 import { parseSelectData } from '@waldur/core/api';
+import { QueryParams } from '@waldur/core/async/types';
 import { ENV } from '@waldur/core/config';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { FieldError } from '@waldur/form';
@@ -24,7 +24,8 @@ interface CallAutocompleteProps {
 }
 
 const callAutocomplete = async (
-  query: ProposalPublicCallsListData['query'],
+  query: QueryParams<typeof proposalProtectedCallsList> &
+    QueryParams<typeof proposalPublicCallsList>,
   prevOptions,
   currentPage: number,
   protectedCalls = false,

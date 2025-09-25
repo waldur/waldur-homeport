@@ -156,8 +156,8 @@ export const truncate = (fullStr: string, strLen = 30, separator = '...') => {
   );
 };
 
-export function returnReactSelectAsyncPaginateObject<T = {}>(
-  response: { options: T[]; totalItems: number },
+export function returnReactSelectAsyncPaginateObject<T = any>(
+  response: { options: T; totalItems: number },
   prevOptions,
   currentPage: number,
 ) {
