@@ -312,7 +312,7 @@ const mapStateToFilter = createSelector(
 
     // Public resources should only contain resources from billable offerings.
     // @ts-ignore
-    filter.billable = true;
+    filter.offering_billable = true;
 
     if (customer) {
       filter.provider_uuid = customer.uuid;
