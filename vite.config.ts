@@ -29,6 +29,22 @@ export default defineConfig({
     markdownPlugin.default({ mode: 'react' }),
     reactDisplayNamePlugin(),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+        silenceDeprecations: [
+          'mixed-decls',
+          'import',
+          'abs-percent',
+          'function-units',
+          'color-functions',
+          'slash-div',
+          'global-builtin',
+        ],
+      },
+    },
+  },
   build: {
     sourcemap: true,
   },
