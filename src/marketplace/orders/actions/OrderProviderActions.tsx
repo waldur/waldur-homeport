@@ -1,6 +1,9 @@
+import { useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -20,18 +23,42 @@ export const OrderProviderActions = ({
     return null;
   }
 
+  const showApproveByProviderButton = useMemo(() => {
+    return (
+      order.state === 'pending-provider' &&
+      hasPermission(user, {
+        permission: PermissionEnum.APPROVE_ORDER,
+        customerId: order.provider_uuid,
+      })
+    );
+  }, [order, user]);
+
+  const showRejectByProviderButton = useMemo(() => {
+    return (
+      order.state === 'pending-provider' &&
+      hasPermission(user, {
+        permission: PermissionEnum.REJECT_ORDER,
+        customerId: order.provider_uuid,
+      })
+    );
+  }, [order, user]);
+
   return as === Button ? (
     <>
-      <ApproveByProviderButton row={order} refetch={refetch} as={Button} />
-      <RejectByProviderButton row={order} refetch={refetch} as={Button} />
+      {showApproveByProviderButton && (
+        <ApproveByProviderButton row={order} refetch={refetch} as={Button} />
+      )}
+      {showRejectByProviderButton && (
+        <RejectByProviderButton row={order} refetch={refetch} as={Button} />
+      )}
     </>
   ) : (
     <ActionsDropdown
       row={order}
       refetch={refetch}
       actions={[
-        order.state === 'pending-provider' ? ApproveByProviderButton : null,
-        order.state === 'pending-provider' ? RejectByProviderButton : null,
+        showApproveByProviderButton ? ApproveByProviderButton : null,
+        showRejectByProviderButton ? RejectByProviderButton : null,
         user.is_staff ? OrderUnlinkButton : null,
       ].filter(Boolean)}
       data-cy="public-resources-list-actions-dropdown-btn"
