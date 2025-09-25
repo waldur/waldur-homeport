@@ -26,11 +26,13 @@
   },
   "dependencies": {
     "@cloudfour/simple-svg-placeholder": "^1.1.0",
+    "@codemirror/language": "^6.0.0",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^8.0.0",
     "@fontsource/inter": "^4.5.15",
     "@fontsource/open-sans": "^4.5.14",
     "@jonkoops/matomo-tracker": "^0.7.0",
+    "@lezer/highlight": "^1.0.0",
     "@mdxeditor/editor": "^3.23.0",
     "@phosphor-icons/react": "^2.1.7",
     "@popperjs/core": "~2.10.1",
@@ -88,7 +90,8 @@
     "reselect": "^3.0.1",
     "source-map": "^0.7.4",
     "text-security": "^3.2.1",
-    "waldur-js-client": "^7.8.1-dev.2"
+    "waldur-js-client": "^7.8.1-dev.2",
+    "yjs": "^13.5.22"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
