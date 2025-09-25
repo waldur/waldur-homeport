@@ -67,7 +67,7 @@
 
       th.pinned,
       td.pinned {
-        background-color: unset;
+        background-color: $gray-50;
       }
     }
     &.expanded + tr {
