@@ -118,9 +118,12 @@ export const FormAbstractVolumeFields = (
     [limit, usage, quotaName, props.minSize],
   );
 
+  const showTypeField =
+    data?.volumeTypeChoices?.length > 0 && !hideVolumeTypeSelector;
+
   return (
     <Row>
-      {data?.volumeTypeChoices?.length > 0 && !hideVolumeTypeSelector && (
+      {showTypeField && (
         <Col sm={6}>
           <Field
             name={props.typeField}
@@ -161,13 +164,25 @@ export const FormAbstractVolumeFields = (
           required
           space={5}
           quickAction={
-            !props.hideQuotas &&
-            quota && (
-              <QuotaUsageBarChart
-                className="capacity-bar mb-2"
-                quotas={[quota]}
-              />
-            )
+            <>
+              {!showTypeField && props.optional && (
+                <AwesomeCheckbox
+                  value={fieldsEnabled}
+                  onChange={setFieldsEnabled}
+                  size="sm"
+                  className="align-self-center ms-auto"
+                />
+              )}
+              {!props.hideQuotas && quota && (
+                <QuotaUsageBarChart
+                  className={
+                    'capacity-bar mb-2' +
+                    (!showTypeField && props.optional ? ' ms-4' : '')
+                  }
+                  quotas={[quota]}
+                />
+              )}
+            </>
           }
         >
           <SelectField
