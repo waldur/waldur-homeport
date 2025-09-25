@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
@@ -44,11 +45,15 @@ export const ProviderOfferingsList = (props) => {
     },
   ];
 
+  const filter = useMemo(
+    () => ({ customer_uuid: props.provider_uuid }),
+    [props.provider_uuid],
+  );
+
   const tableProps = useTable({
     table: 'ProviderOfferingsList',
-    fetchData: createFetcher(marketplacePublicOfferingsList, {
-      params: { customer_uuid: props.provider_uuid },
-    }),
+    filter,
+    fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'keyword',
   });
 

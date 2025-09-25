@@ -1,13 +1,12 @@
 import { RequestResult } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
 
 import { queryClient } from '@waldur/Application';
 import { fetchResultCount, parseNextPage } from '@waldur/core/api';
 
 import { Fetcher, FetcherOptions, TableRequest } from './types';
 
-const processApiResponse = (
-  result: Awaited<RequestResult>,
+export const processApiResponse = <TData = any>(
+  result: Awaited<RequestResult<TData>>,
   parser?: FetcherOptions['parser'],
 ) => {
   const contentType = result.response.headers
@@ -28,30 +27,19 @@ const processApiResponse = (
   };
 };
 
-export const parseResponse = async (
-  url: string,
-  query?,
-  options?,
-  parser?: FetcherOptions['parser'],
-) => {
-  const result = await client.get({
-    url,
-    query,
-    security: [
-      {
-        name: 'Authorization',
-        type: 'apiKey',
-      },
-    ],
-    ...options,
-  });
-  return processApiResponse(result, parser);
-};
+export type DataPage<TData = any> = ReturnType<
+  typeof processApiResponse<TData>
+>;
 
-type SdkFunction<QueryPayload = any, PathPayload = any> = (options?: {
+export type SdkFunction<
+  QueryPayload = any,
+  PathPayload = any,
+  DataType = any,
+> = (options?: {
   query?: QueryPayload;
   path?: PathPayload;
-}) => RequestResult;
+  signal?: AbortSignal;
+}) => RequestResult<DataType>;
 
 /**
  * Creates a fetcher function for a table, using a type-safe SDK function.

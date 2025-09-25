@@ -1,62 +1,38 @@
-import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
-import { debounce } from 'lodash-es';
 import {
-  ComponentType,
-  FC,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+  InfiniteData,
+  QueryFunction,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
+import { debounce } from 'lodash-es';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
-import { parseResponse } from '@waldur/table/api';
+import { DataPage, processApiResponse, SdkFunction } from '@waldur/table/api';
+
+import useOnScreen from '../useOnScreen';
 
 import { InfiniteList } from './InfiniteList';
-import useOnScreen from './useOnScreen';
+import { BaseAsyncListProps, RowData } from './types';
 
-export interface DataPage {
-  data: any[];
-  nextPage?: number;
-}
-
-export const loadData: QueryFunction<DataPage> = async (context) => {
-  const response = await parseResponse(
-    `api${context.meta.api}`,
-    {
-      page: context.pageParam,
-      ...(context.meta.params as any),
-    },
-    { signal: context.signal },
-  );
-  return {
-    data: response.rows,
-    nextPage: response.nextPage,
-  };
-};
-
-interface AsyncSearchBoxProps {
-  api: string;
-  RowComponent: ComponentType<{ row }>;
-  queryField: string;
-  params?: Record<string, any>;
-  emptyMessage?: string;
-  placeholder?: string;
+interface AsyncSearchBoxProps<Fetcher extends SdkFunction>
+  extends BaseAsyncListProps<Fetcher> {
   className?: string;
   wrapperClassName?: string;
 }
 
-export const AsyncSearchBox: FC<AsyncSearchBoxProps> = ({
-  api,
+export const AsyncSearchBox = <Fetcher extends SdkFunction>({
+  fetcher,
+  queryKey,
   queryField,
   RowComponent,
+  path,
   params = {},
   emptyMessage = translate('There are no results for this keyword.'),
   placeholder = translate('Search') + '...',
   className,
   wrapperClassName,
-}) => {
+}: AsyncSearchBoxProps<Fetcher>): JSX.Element => {
   const [enabled, setEnabled] = useState(false);
   const [query, setQuery] = useState('');
 
@@ -67,12 +43,29 @@ export const AsyncSearchBox: FC<AsyncSearchBoxProps> = ({
     [setQuery],
   );
 
-  const context = useInfiniteQuery<any, any, DataPage>({
-    queryKey: ['SearchBoxResults', api, params, query],
-    queryFn: loadData,
+  type TypedPage = DataPage<RowData<Fetcher>>;
+
+  const queryFn: QueryFunction<TypedPage, unknown[], number> = async ({
+    pageParam = 1,
+    signal,
+  }) => {
+    const result = await fetcher({
+      query: {
+        page: pageParam,
+        ...params,
+        [queryField]: query,
+      },
+      path,
+      signal,
+    });
+    return processApiResponse(result);
+  };
+
+  const context = useInfiniteQuery<TypedPage, Error, InfiniteData<TypedPage>>({
+    queryKey: ['SearchBoxResults', queryKey, params, query],
+    queryFn,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage,
-    meta: { api, params: { ...params, [queryField]: query } },
     refetchOnWindowFocus: false,
     enabled,
   });

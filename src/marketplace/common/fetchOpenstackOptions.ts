@@ -1,7 +1,4 @@
-import {
-  marketplaceResourcesList,
-  MarketplaceResourcesListData,
-} from 'waldur-js-client';
+import { marketplaceResourcesList } from 'waldur-js-client';
 
 import { parseSelectData } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
@@ -30,9 +27,7 @@ export const fetchOpenstackOptions = async (
       o: ['project_name', 'name'],
       page: currentPage,
       page_size: ENV.pageSize,
-      state: getStates().map(
-        (state) => state.value,
-      ) as MarketplaceResourcesListData['query']['state'],
+      state: getStates().map((state) => state.value),
       offering_type: type,
     },
   });
@@ -41,6 +36,7 @@ export const fetchOpenstackOptions = async (
     {
       totalItems: selectData.totalItems,
       options: selectData.options.map(
+        // @ts-ignore
         type === TENANT_TYPE
           ? tenantSerializer
           : type === INSTANCE_TYPE

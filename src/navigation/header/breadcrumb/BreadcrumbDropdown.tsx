@@ -1,18 +1,23 @@
 import { FunnelSimpleIcon } from '@phosphor-icons/react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import {
+  InfiniteData,
+  QueryFunction,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
 import { debounce } from 'lodash-es';
-import { ComponentType, FC, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useBoolean } from 'react-use';
 import { Field, getFormValues } from 'redux-form';
 
-import { DataPage, loadData } from '@waldur/core/AsyncSearchBox';
-import { InfiniteList } from '@waldur/core/InfiniteList';
+import { InfiniteList } from '@waldur/core/async/InfiniteList';
+import { BaseAsyncListProps, RowData } from '@waldur/core/async/types';
 import { isEmpty } from '@waldur/core/utils';
 import { FilterBox } from '@waldur/form/FilterBox';
 import { Form } from '@waldur/form/Form';
 import { translate } from '@waldur/i18n';
+import { DataPage, processApiResponse, SdkFunction } from '@waldur/table/api';
 
 import { HeaderButtonBullet } from '../HeaderButtonBullet';
 
@@ -20,29 +25,26 @@ import { FilterSelect } from './FilterSelect';
 
 const FILTERS_FORM_ID = 'BreadcrumbsFiltersForm';
 
-interface BreadcrumbDropdownProps {
-  api: string;
-  RowComponent: ComponentType<{ row }>;
-  queryField: string;
-  params?: Record<string, any>;
+interface BreadcrumbDropdownProps<Fetcher extends SdkFunction>
+  extends BaseAsyncListProps<Fetcher> {
   filters?: Array<{
     field: string;
     label: string;
     options: Array<{ value; label }>;
   }>;
-  emptyMessage?: string;
-  placeholder?: string;
 }
 
-export const BreadcrumbDropdown: FC<BreadcrumbDropdownProps> = ({
-  api,
+export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
+  fetcher,
+  queryKey,
   queryField,
   RowComponent,
+  path,
   params = {},
   filters,
   emptyMessage = translate('There are no results for this keyword.'),
   placeholder = translate('Search'),
-}) => {
+}: BreadcrumbDropdownProps<Fetcher>): JSX.Element => {
   const [query, setQuery] = useState('');
   const [filterOpen, setFilterOpen] = useBoolean(false);
 
@@ -63,12 +65,30 @@ export const BreadcrumbDropdown: FC<BreadcrumbDropdownProps> = ({
     [setQuery],
   );
 
-  const context = useInfiniteQuery<any, any, DataPage>({
-    queryKey: ['SearchBoxResults', api, params, query, formValues],
-    queryFn: loadData,
+  type TypedPage = DataPage<RowData<Fetcher>>;
+
+  const queryFn: QueryFunction<TypedPage, unknown[], number> = async ({
+    pageParam = 1,
+    signal,
+  }) => {
+    const result = await fetcher({
+      query: {
+        page: pageParam,
+        ...params,
+        ...formValues,
+        [queryField]: query,
+      },
+      path,
+      signal,
+    });
+    return processApiResponse(result);
+  };
+
+  const context = useInfiniteQuery<TypedPage, Error, InfiniteData<TypedPage>>({
+    queryKey: ['SearchBoxResults', queryKey, path, params, query, formValues],
+    queryFn,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage,
-    meta: { api, params: { ...params, [queryField]: query, ...formValues } },
     refetchOnWindowFocus: false,
     throwOnError: false,
     retry: false,

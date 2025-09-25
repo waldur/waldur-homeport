@@ -1,3 +1,5 @@
+import { marketplaceResourcesList } from 'waldur-js-client';
+
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { BreadcrumbDropdown } from '@waldur/navigation/header/breadcrumb/BreadcrumbDropdown';
@@ -31,7 +33,8 @@ export const ResourceBreadcrumbPopover = ({ resource, close }) => {
 
   return (
     <BreadcrumbDropdown
-      api="/marketplace-resources/"
+      fetcher={marketplaceResourcesList}
+      queryKey="marketplaceResourcesList"
       queryField="query"
       params={{
         state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],

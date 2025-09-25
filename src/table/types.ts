@@ -38,7 +38,7 @@ export type FetcherOptions<QueryPayload = any, PathPayload = any> = {
   query?: QueryPayload;
   path?: PathPayload;
   parser?: (data) => any[];
-} & Record<string, any>;
+};
 
 export interface TableOptionsType<RowType = any> {
   table: string;
