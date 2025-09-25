@@ -25,6 +25,7 @@ import { requestToAccessOrganization } from './submission';
 
 const filter = {
   is_active: true,
+  is_public: true,
 };
 
 export const AvailableOrganizationsToJoin: FC = () => {

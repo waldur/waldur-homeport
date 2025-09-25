@@ -8,7 +8,11 @@ import { translate } from '@waldur/i18n';
 export const JoinOrganizationFooterLink = ({ loginPage = false }) => {
   const { data: publicGroupInvitationsCount } = useQuery({
     queryKey: ['publicGroupInvitationsCount'],
-    queryFn: () => count('/api/user-group-invitations/'),
+    queryFn: () =>
+      count('/api/user-group-invitations/', {
+        is_public: true,
+        is_active: true,
+      }),
   });
 
   if (!publicGroupInvitationsCount) return null;
