@@ -6,10 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showError } from '@waldur/store/notify';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { getCustomer, isStaff } from '@waldur/workspace/selectors';
 
 const CustomerRemoveDialog = lazyComponent(() =>
   import('@waldur/customer/details/CustomerRemoveDialog').then((module) => ({
@@ -19,11 +17,7 @@ const CustomerRemoveDialog = lazyComponent(() =>
 
 export const CustomerRemovePanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
-  const user = useSelector(getUser);
-  const canDeleteCustomer = hasPermission(user, {
-    permission: PermissionEnum.DELETE_CUSTOMER,
-    customerId: customer.uuid,
-  });
+  const canDeleteCustomer = useSelector(isStaff);
   const dispatch = useDispatch();
 
   const removeCustomer = () => {
