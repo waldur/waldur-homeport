@@ -1,8 +1,8 @@
-import { OfferingUserStateEnum } from 'waldur-js-client';
+import { OfferingUserState } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 
-const getStateBadgeVariant = (state: OfferingUserStateEnum) => {
+const getStateBadgeVariant = (state: OfferingUserState) => {
   switch (state) {
     case 'Creating':
       return 'blue';

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import {
   marketplaceOfferingUsersList,
-  OfferingUserStateEnum,
+  OfferingUserState,
 } from 'waldur-js-client';
 
 import { useUser } from '@waldur/workspace/hooks';
 
-const PENDING_STATES: OfferingUserStateEnum[] = [
+const PENDING_STATES: OfferingUserState[] = [
   'Pending account linking',
   'Pending additional validation',
 ];

@@ -26,6 +26,7 @@ export const customerOptionalFields = [
   { title: translate('Bank account'), key: 'bank_account' },
   { title: translate('VAT code'), key: 'vat_code' },
   { title: translate('Default tax percent'), key: 'default_tax_percent' },
+  { title: translate('Notification emails'), key: 'notification_emails' },
 ];
 
 export const parseOrganizationsFile = (file: File) => {
