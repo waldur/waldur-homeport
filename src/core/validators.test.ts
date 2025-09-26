@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { isGuid, url } from './validators';
+import { email, isGuid, url } from './validators';
 
 describe('GUID validator', () => {
   it('returns undefined if GUID is valid', () => {
@@ -9,6 +9,75 @@ describe('GUID validator', () => {
 
   it('returns error message if GUID is invalid', () => {
     expect(isGuid('invalid-guid-string')).toBe('GUID is expected.');
+  });
+});
+
+describe('email validator', () => {
+  describe('valid emails', () => {
+    it('accepts standard email formats', () => {
+      expect(email('test@example.com')).toBeUndefined();
+      expect(email('user@domain.org')).toBeUndefined();
+      expect(email('admin@site.net')).toBeUndefined();
+    });
+
+    it('accepts emails with modern long TLDs', () => {
+      expect(email('user@immune.engineering')).toBeUndefined();
+      expect(email('admin@site.technology')).toBeUndefined();
+      expect(email('contact@company.international')).toBeUndefined();
+      expect(email('info@studio.photography')).toBeUndefined();
+    });
+
+    it('accepts emails with numbers and special characters', () => {
+      expect(email('user123@example.com')).toBeUndefined();
+      expect(email('test.email@domain.co.uk')).toBeUndefined();
+      expect(email('user+tag@example.org')).toBeUndefined();
+      expect(email('user_name@domain-name.com')).toBeUndefined();
+      expect(email('user%test@example.com')).toBeUndefined();
+    });
+
+    it('accepts emails with subdomains', () => {
+      expect(email('user@mail.example.com')).toBeUndefined();
+      expect(email('admin@api.v2.service.com')).toBeUndefined();
+    });
+
+    it('accepts emails with minimum valid TLD length', () => {
+      expect(email('user@example.co')).toBeUndefined();
+      expect(email('test@site.uk')).toBeUndefined();
+    });
+  });
+
+  describe('invalid emails', () => {
+    it('returns undefined for empty values', () => {
+      expect(email('')).toBeUndefined();
+      expect(email(null)).toBeUndefined();
+      expect(email(undefined)).toBeUndefined();
+    });
+
+    it('returns error for invalid email formats', () => {
+      const errorMessage = 'Invalid email address';
+
+      expect(email('invalid')).toBe(errorMessage);
+      expect(email('invalid@')).toBe(errorMessage);
+      expect(email('@domain.com')).toBe(errorMessage);
+      expect(email('user@')).toBe(errorMessage);
+      expect(email('user@domain')).toBe(errorMessage);
+      expect(email('user@domain.')).toBe(errorMessage);
+      expect(email('user@.com')).toBe(errorMessage);
+      expect(email('user @domain.com')).toBe(errorMessage);
+      expect(email('user@domain .com')).toBe(errorMessage);
+    });
+
+    it('returns error for emails with single character TLD', () => {
+      const errorMessage = 'Invalid email address';
+      expect(email('user@domain.c')).toBe(errorMessage);
+    });
+
+    it('returns error for emails with invalid characters', () => {
+      const errorMessage = 'Invalid email address';
+      expect(email('user@domain.c<>m')).toBe(errorMessage);
+      expect(email('user[]@domain.com')).toBe(errorMessage);
+      expect(email('user@domain.com.')).toBe(errorMessage);
+    });
   });
 });
 
