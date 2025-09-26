@@ -68,14 +68,6 @@ export const PermissionOptions = [
     label: translate('Customer'),
     options: [
       {
-        label: translate('Create customer'),
-        value: 'CUSTOMER.CREATE',
-      },
-      {
-        label: translate('Delete customer'),
-        value: 'CUSTOMER.DELETE',
-      },
-      {
         label: translate('List users'),
         value: 'CUSTOMER.LIST_USERS',
       },
