@@ -9,8 +9,6 @@ import { translate } from '@waldur/i18n';
 import { canRegisterServiceProviderForCustomer } from '@waldur/marketplace/service-providers/selectors';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
 import { getCustomer, getUser, isStaff } from '@waldur/workspace/selectors';
 
 const CustomerDetailsPanel = lazyComponent(() =>
@@ -108,10 +106,7 @@ export const CustomerManageContainer = () => {
               title: translate('Credit management'),
             }
           : null,
-        hasPermission(user, {
-          permission: PermissionEnum.DELETE_CUSTOMER,
-          customerId: customer.uuid,
-        })
+        isUserStaff
           ? {
               key: 'remove',
               component: CustomerRemovePanel,
