@@ -117,41 +117,52 @@ const hasFilterMenu = (key) => {
 };
 
 const renderCellContent = (column: Column, row) => {
+  // Skip rendering if column is not visible
+  if (column.visible === false) {
+    return null;
+  }
+
+  if (!column.render || typeof column.render !== 'function') {
+    return null;
+  }
+
   const renderedContent = React.createElement(column.render, {
     row,
   });
+
+  if (renderedContent === undefined || renderedContent === null) {
+    return null;
+  }
   const valueToCopy = column.copyField ? column.copyField(row) : '';
   const hasFilter = column.inlineFilter && hasFilterMenu(column.filter);
   return (
-    (column.visible ?? true) && (
-      <td
-        className={classNames(
-          column.className,
-          column.inlineFilter && 'has-filter',
-          (column.ellipsis ?? true) && 'ellipsis',
-        )}
-        onClick={column.disabledClick ? (e) => e.stopPropagation() : undefined}
-      >
-        {column.copyField ? (
-          <>
-            <div className="with-copy d-flex align-items-center gap-1">
-              <div className="td-data">{renderedContent}</div>
-              <CopyToClipboardButton value={valueToCopy} />
-            </div>
-            {hasFilter && <InlineFilterButton column={column} row={row} />}
-          </>
-        ) : (
-          <>
-            {hasFilter ? (
-              <div className="td-data">{renderedContent}</div>
-            ) : (
-              renderedContent
-            )}
-            {hasFilter && <InlineFilterButton column={column} row={row} />}
-          </>
-        )}
-      </td>
-    )
+    <td
+      className={classNames(
+        column.className,
+        column.inlineFilter && 'has-filter',
+        (column.ellipsis ?? true) && 'ellipsis',
+      )}
+      onClick={column.disabledClick ? (e) => e.stopPropagation() : undefined}
+    >
+      {column.copyField ? (
+        <>
+          <div className="with-copy d-flex align-items-center gap-1">
+            <div className="td-data">{renderedContent}</div>
+            <CopyToClipboardButton value={valueToCopy} />
+          </div>
+          {hasFilter && <InlineFilterButton column={column} row={row} />}
+        </>
+      ) : (
+        <>
+          {hasFilter ? (
+            <div className="td-data">{renderedContent}</div>
+          ) : (
+            renderedContent
+          )}
+          {hasFilter && <InlineFilterButton column={column} row={row} />}
+        </>
+      )}
+    </td>
   );
 };
 
