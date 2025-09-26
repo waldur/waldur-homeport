@@ -14,6 +14,7 @@ import {
   SubmitButton,
   TextField,
 } from '@waldur/form';
+import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import { DateField } from '@waldur/form/DateField';
 import { EmailField } from '@waldur/form/EmailField';
 import { FormContainer } from '@waldur/form/FormContainer';
@@ -199,6 +200,17 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
               />
             ) : props.resolve.name === 'homepage' ? (
               <StringField name="homepage" label={translate('Homepage')} />
+            ) : props.resolve.name === 'notification_emails' ? (
+              <CommaSeparatedListField
+                name="notification_emails"
+                label={translate('Notification emails')}
+                placeholder={translate(
+                  'Enter email addresses separated by commas',
+                )}
+                description={translate(
+                  'Email addresses for receiving notifications, separated by commas',
+                )}
+              />
             ) : // Service provider
             props.resolve.name === 'description' ? (
               <TextField name="description" label={translate('Description')} />

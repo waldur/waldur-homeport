@@ -30,6 +30,13 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = (props) => {
         key: 'homepage',
         value: props.customer.homepage,
       },
+      {
+        label: translate('Notification emails'),
+        key: 'notification_emails',
+        value: Array.isArray(props.customer.notification_emails)
+          ? props.customer.notification_emails.join(', ')
+          : props.customer.notification_emails,
+      },
     ],
 
     [props.customer],

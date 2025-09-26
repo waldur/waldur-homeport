@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
-import { OfferingUserStateEnum } from 'waldur-js-client';
+import { OfferingUserState } from 'waldur-js-client';
 
 import {
   REACT_MULTI_SELECT_TABLE_FILTER,
@@ -22,7 +22,7 @@ interface ProviderOfferingUsersFilterProps {
 }
 
 const getOfferingUserStateFilterOptions = (): {
-  value: OfferingUserStateEnum;
+  value: OfferingUserState;
   label: string;
 }[] => [
   { value: 'Creating', label: translate('Creating') },
