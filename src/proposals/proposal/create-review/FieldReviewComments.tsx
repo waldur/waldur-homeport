@@ -29,9 +29,7 @@ export const FieldReviewComments = ({
       reviewer: review.reviewer_full_name || review.anonymous_reviewer_name,
       comment: review[fieldName],
       score: hasScore ? review.summary_score : undefined,
-      time: review.review_end_date
-        ? formatRelative(review.review_end_date)
-        : null,
+      time: review.modified ? formatRelative(review.modified) : null,
     }))
     .filter((item) => item.comment || item.score !== undefined);
 

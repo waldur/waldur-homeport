@@ -3099,10 +3099,6 @@
     "description": "project/course-accounts/CourseAccountFormDialog.tsx",
     "message": "Create course account"
   },
-  "Create customer": {
-    "description": "administration/roles/PermissionOptions.tsx",
-    "message": "Create customer"
-  },
   "Create disk": {
     "description": "vmware/actions/CreateDiskAction.tsx, vmware/actions/CreateDiskDialog.tsx",
     "message": "Create disk"
@@ -3798,10 +3794,6 @@
   "Delete confirmation": {
     "description": "customer/credits/DeleteCreditButton.tsx, marketplace/offerings/list/DeleteOfferingButton.tsx",
     "message": "Delete confirmation"
-  },
-  "Delete customer": {
-    "description": "administration/roles/PermissionOptions.tsx",
-    "message": "Delete customer"
   },
   "Delete endpoint": {
     "description": "administration/roles/PermissionOptions.tsx",
