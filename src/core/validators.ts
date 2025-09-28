@@ -61,10 +61,28 @@ export const email = (value) =>
 export const url = (value) => {
   if (!value) return undefined;
 
+  // Early length check to avoid processing extremely long URLs
+  if (value.length > 10000) {
+    return translate('URL is too long');
+  }
+
   try {
-    // Check for disallowed protocols and patterns first
-    if (value.match(/^(ftp|file|javascript|data|vbscript|about|blob):/i)) {
-      throw new Error('Invalid protocol');
+    // Fast string checks before regex
+    if (value.indexOf('://') !== -1) {
+      const protocol = value.substring(0, value.indexOf('://'));
+      if (
+        [
+          'ftp',
+          'file',
+          'javascript',
+          'data',
+          'vbscript',
+          'about',
+          'blob',
+        ].includes(protocol.toLowerCase())
+      ) {
+        throw new Error('Invalid protocol');
+      }
     }
 
     // Reject protocol-relative URLs
@@ -72,9 +90,11 @@ export const url = (value) => {
       throw new Error('Protocol-relative URLs not allowed');
     }
 
-    // Simply use the native URL constructor for validation
-    // It's more robust and handles all valid URL formats
-    const urlToTest = value.match(/^https?:\/\//) ? value : `https://${value}`;
+    // Use startsWith for performance instead of regex
+    const urlToTest =
+      value.startsWith('http://') || value.startsWith('https://')
+        ? value
+        : `https://${value}`;
 
     const urlObj = new URL(urlToTest);
 

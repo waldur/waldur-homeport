@@ -4,16 +4,18 @@ import { createRef, useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getFormValues, submit as submitForm } from 'redux-form';
 import {
+  Proposal,
   proposalProposalsRetrieve,
+  proposalPublicCallsRetrieve,
   proposalReviewsPartialUpdate,
   proposalReviewsRetrieve,
   proposalReviewsSubmit,
+  PublicCall,
 } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getUUID } from '@waldur/core/utils';
 import { Form } from '@waldur/form/Form';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
@@ -33,6 +35,8 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
 import store from '@waldur/store/store';
 
+import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
+
 import { CreatePageSidebar } from './CreatePageSidebar';
 import { ReviewHeader } from './ReviewHeader';
 import { createReviewSteps } from './steps/steps';
@@ -44,13 +48,20 @@ const CommentFormDialog = lazyComponent(() =>
 );
 
 const loadData = async (reviewUuid: string) => {
-  const review = (await proposalReviewsRetrieve({
+  const review = await proposalReviewsRetrieve({
     path: { uuid: reviewUuid },
-  }).then((response) => response.data)) as ProposalReview;
-  const proposal = await proposalProposalsRetrieve({
-    path: { uuid: getUUID(review.proposal) },
   }).then((response) => response.data);
-  return { review, proposal };
+  const promises: [Promise<Proposal>, Promise<PublicCall>] = [
+    proposalProposalsRetrieve({
+      path: { uuid: review.proposal_uuid },
+    }).then((response) => response.data),
+    proposalPublicCallsRetrieve({
+      path: { uuid: review.call_uuid },
+      query: { field: ['uuid', 'customer_uuid'] },
+    }).then((res) => res.data),
+  ];
+  const [proposal, call] = await Promise.all(promises);
+  return { review, proposal, call };
 };
 
 export const ProposalReviewCreatePage = (props) => {
@@ -183,7 +194,12 @@ export const ProposalReviewCreatePage = (props) => {
           <>
             <SidebarLayout.Header className="pb-5">
               <div className="w-100">
-                <ReviewHeader review={data.review} />
+                <ProposalRoleBasedTabs
+                  review={data.review}
+                  proposal={data.proposal}
+                  call={data.call}
+                />
+                <ReviewHeader review={data.review} proposal={data.proposal} />
               </div>
             </SidebarLayout.Header>
             <SidebarLayout.Container>

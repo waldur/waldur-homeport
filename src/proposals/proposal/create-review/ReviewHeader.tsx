@@ -1,25 +1,45 @@
 import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
+import { Proposal, ProposalReview } from '@waldur/proposals/types';
 import {
   formatReviewState,
   getReviewStateBadgeVariant,
+  isReviewInFinalState,
 } from '@waldur/proposals/utils';
 
-export const ReviewHeader = ({ review, className = undefined }) => {
+import { EntityHeader } from '../EntityHeader';
+
+interface ReviewHeaderProps {
+  review: ProposalReview;
+  proposal: Proposal;
+  className?: string;
+}
+
+export const ReviewHeader = ({
+  review,
+  proposal,
+  className,
+}: ReviewHeaderProps) => {
   const variant = getReviewStateBadgeVariant(review.state);
+  const disabled = isReviewInFinalState(review.state);
+
+  const helpText = !disabled
+    ? translate(
+        'Please review the application below. If you want to add a comment to a specific field, click on the comment action in the corresponding field.',
+      )
+    : undefined;
+
   return (
-    <div className={className}>
-      <div className="d-flex align-items-center mb-1">
-        <h1 className="mb-0 fs-1x">{review.proposal_name}</h1>
-        <Badge variant={variant} outline pill className="ms-4">
+    <EntityHeader
+      title={proposal.name}
+      slug={proposal.slug}
+      badge={
+        <Badge variant={variant} outline pill>
           {formatReviewState(review.state)}
         </Badge>
-      </div>
-      <p className="fs-6 text-muted mb-0">
-        {translate(
-          'Please review the application below. If you want to add a comment to a specific field, click on the comment action in the corresponding field.',
-        )}
-      </p>
-    </div>
+      }
+      helpText={helpText}
+      className={className}
+    />
   );
 };

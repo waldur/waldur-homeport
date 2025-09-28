@@ -4,6 +4,7 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ProposalReview } from '@waldur/proposals/types';
 import { getReviewStateOptions } from '@waldur/proposals/utils';
@@ -62,7 +63,24 @@ export const UserReviewsList: FC = () => {
           optional: true,
         },
         {
-          title: translate('Proposal'),
+          title: translate('Proposal slug'),
+          render: ({ row }) => (
+            <Link
+              state="proposal-review"
+              params={{
+                uuid: row.call_uuid,
+                review_uuid: row.uuid,
+              }}
+              label={(row as any).proposal_slug}
+            />
+          ),
+
+          keys: ['proposal_slug'] as any,
+          id: 'proposal_slug',
+        },
+
+        {
+          title: translate('Proposal name'),
           render: ({ row }) => (
             <span className="text-gray-700 fw-bold">{row.proposal_name}</span>
           ),
