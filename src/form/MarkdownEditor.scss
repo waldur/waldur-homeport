@@ -11,6 +11,18 @@
   }
 }
 
+.markdown-editor-wrapper {
+  border: 1px solid #e4e6ef;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &.markdown-editor-preview {
+    padding: 16px;
+    min-height: 200px;
+    background-color: #f8f9fa;
+  }
+}
+
 .mdxeditor-popup-container {
   z-index: 2000;
 }

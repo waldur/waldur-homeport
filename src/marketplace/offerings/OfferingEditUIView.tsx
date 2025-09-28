@@ -9,6 +9,8 @@ import {
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { Offering, ServiceProvider } from '@waldur/marketplace/types';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
@@ -49,6 +51,11 @@ const LifecyclePolicySection = lazyComponent(() =>
 const UserManagementSection = lazyComponent(() =>
   import('./update/integration/UserManagementSection').then((module) => ({
     default: module.UserManagementSection,
+  })),
+);
+const TosManagementSection = lazyComponent(() =>
+  import('./update/tos/TosManagementSection').then((module) => ({
+    default: module.TosManagementSection,
   })),
 );
 const ProvisioningConfigSection = lazyComponent(() =>
@@ -251,6 +258,11 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       title: translate('Resource options'),
     },
     { key: 'roles', component: RolesSection, title: translate('Roles') },
+    isFeatureVisible(MarketplaceFeatures.display_user_tos) && {
+      key: 'tos_management',
+      component: TosManagementSection,
+      title: translate('ToS management'),
+    },
   );
 
   tabs.push({

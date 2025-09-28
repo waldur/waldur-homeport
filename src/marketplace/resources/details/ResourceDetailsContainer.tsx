@@ -28,6 +28,7 @@ import { fetchData, getResourceTabs } from './fetchData';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { ResourceDetailsHero } from './ResourceDetailsHero';
 import { ServiceProviderCommentWarningBar } from './ServiceProviderCommentWarningBar';
+import { TosConsentWarningBanner } from './TosConsentWarningBanner';
 
 const ResourceTeamDialog = lazyComponent(() =>
   import('./ResourceTeamDialog').then((module) => ({
@@ -198,14 +199,20 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
 
   usePageHero(
     !data || isLoading ? null : (
-      <ResourceDetailsHero
-        resource={resource}
-        scope={data.scope}
-        offering={data.offering}
-        components={data.components}
-        refetch={refetch}
-        isLoading={isRefetching}
-      />
+      <>
+        <TosConsentWarningBanner
+          offering={data.offering}
+          userHasConsent={data.offering?.user_has_consent}
+        />
+        <ResourceDetailsHero
+          resource={resource}
+          scope={data.scope}
+          offering={data.offering}
+          components={data.components}
+          refetch={refetch}
+          isLoading={isRefetching}
+        />
+      </>
     ),
 
     [resource, data, refetch, isLoading, isRefetching],

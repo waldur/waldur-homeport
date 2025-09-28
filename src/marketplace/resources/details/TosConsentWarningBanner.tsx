@@ -1,0 +1,91 @@
+import { WarningCircleIcon } from '@phosphor-icons/react';
+import { FC, useMemo } from 'react';
+import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+
+import { ENV } from '@waldur/core/config';
+import { RadarIcon } from '@waldur/core/RadarIcon';
+import { translate } from '@waldur/i18n';
+import { router } from '@waldur/router';
+import { setFilterQuery } from '@waldur/table/actions';
+import { USER_TOS_MANAGEMENT_TABLE_ID } from '@waldur/user/constants';
+import { useUser } from '@waldur/workspace/hooks';
+
+interface TosConsentWarningBannerProps {
+  offering: {
+    uuid?: string;
+    name?: string;
+    plugin_options?: {
+      service_provider_can_create_offering_user?: boolean;
+    };
+  };
+  userHasConsent?: boolean;
+}
+
+export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
+  offering,
+  userHasConsent,
+}) => {
+  const user = useUser();
+  const dispatch = useDispatch();
+  const handleViewTos = () => {
+    router.stateService.go('profile.tos-management').then(() => {
+      setTimeout(() => {
+        dispatch(setFilterQuery(USER_TOS_MANAGEMENT_TABLE_ID, offering.name));
+      }, 100);
+    });
+  };
+
+  const shouldShowBanner = useMemo(() => {
+    const enforceConsent =
+      ENV.plugins.WALDUR_CORE.ENFORCE_USER_CONSENT_FOR_OFFERINGS;
+    const canCreateUser =
+      offering.plugin_options?.service_provider_can_create_offering_user;
+
+    return (
+      !user.is_staff &&
+      enforceConsent &&
+      canCreateUser &&
+      userHasConsent === false
+    );
+  }, [
+    offering.plugin_options?.service_provider_can_create_offering_user,
+    userHasConsent,
+  ]);
+
+  if (!shouldShowBanner) {
+    return null;
+  }
+
+  return (
+    <div className="h-60px bg-body border-bottom">
+      <div className="container-fluid d-flex align-items-center h-100">
+        <div className="d-flex align-items-center">
+          <RadarIcon
+            IconComponent={WarningCircleIcon}
+            variant="warning"
+            className="me-2"
+          />
+          <p className="mb-0">
+            <strong>{translate('Access restricted: ToS not accepted.')}</strong>{' '}
+            <span className="text-gray-500">
+              {translate(
+                "Accept the Terms of Service for this resource's offering before using it.",
+              )}
+            </span>
+          </p>
+        </div>
+        <div className="ms-auto">
+          <Button
+            variant="light"
+            size="sm"
+            onClick={handleViewTos}
+            className="ms-3"
+          >
+            {translate('Review in profile')}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};

@@ -4,6 +4,8 @@ import { getFormValues } from 'redux-form';
 import { User } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
 import { PROVIDER_OFFERING_USERS_FORM_ID } from '@waldur/marketplace/service-providers/constants';
@@ -58,6 +60,14 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
     {
       title: translate('State'),
       render: OfferingUserStateField,
+    },
+    isFeatureVisible(MarketplaceFeatures.display_user_tos) && {
+      title: translate('Consent status'),
+      render: ({ row }) => (
+        <>
+          {row.has_consent ? translate('Accepted') : translate('Not accepted')}
+        </>
+      ),
     },
   ];
 

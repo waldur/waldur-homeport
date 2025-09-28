@@ -3,7 +3,7 @@ import { UIView } from '@uirouter/react';
 import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { UserFeatures } from '@waldur/FeaturesEnums';
+import { MarketplaceFeatures, UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 
@@ -105,6 +105,20 @@ export const states: StateDeclaration[] = [
       feature: UserFeatures.notifications,
       breadcrumb: () => translate('Notifications'),
       priority: 120,
+    },
+  },
+  {
+    name: 'profile.tos-management',
+    url: 'tos-management/',
+    component: lazyComponent(() =>
+      import('./dashboard/UserTosManagementSection').then((module) => ({
+        default: module.UserTosManagementSection,
+      })),
+    ),
+    data: {
+      feature: MarketplaceFeatures.display_user_tos,
+      breadcrumb: () => translate('ToS management'),
+      priority: 130,
     },
   },
   {
