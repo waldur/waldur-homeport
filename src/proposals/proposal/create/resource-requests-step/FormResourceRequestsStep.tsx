@@ -102,7 +102,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
 
   return (
     <div id={props.id}>
-      {call?.resource_templates?.length ? (
+      {call?.resource_templates?.length && !readOnlyMode ? (
         <ResourceRequestTemplates
           call={call}
           proposal={proposal}
@@ -134,9 +134,13 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           ]}
           title={props.title}
           verboseName={translate('Resources')}
-          emptyMessage={translate(
-            'No resources available in the current project. Start by adding or managing resources to get started.',
-          )}
+          emptyMessage={
+            readOnlyMode
+              ? translate('No resources available in the current project.')
+              : translate(
+                  'No resources available in the current project. Start by adding or managing resources to get started.',
+                )
+          }
           minHeight="auto"
           filters={
             readOnlyMode ? null : isLoading ? (

@@ -14,6 +14,7 @@ import {
   VStepperFormStepProps,
 } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { OECD_FOS_2007_CODES } from '@waldur/project/OECD_FOS_2007_CODES';
 import { Call, ProposalReview } from '@waldur/proposals/types';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -46,14 +47,16 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
       title={props.title}
       id={props.id}
       actions={
-        <div className="d-flex justify-content-end flex-grow-1">
-          <ActionButton
-            title={translate('Import project')}
-            action={null}
-            iconNode={<DownloadSimpleIcon weight="bold" />}
-            disabled
-          />
-        </div>
+        isExperimentalUiComponentsVisible() ? (
+          <div className="d-flex justify-content-end flex-grow-1">
+            <ActionButton
+              title={translate('Import project')}
+              action={null}
+              iconNode={<DownloadSimpleIcon weight="bold" />}
+              disabled
+            />
+          </div>
+        ) : null
       }
     >
       <Field

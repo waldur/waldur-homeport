@@ -1,5 +1,8 @@
 import { FC, useMemo } from 'react';
-import { OfferingTermsOfService } from 'waldur-js-client';
+import {
+  OfferingTermsOfService,
+  marketplaceOfferingTermsOfServiceList,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -21,7 +24,7 @@ export const TosManagementSection: FC<OfferingSectionProps> = ({
   const tableProps = useTable({
     table: USER_TOS_MANAGEMENT_TABLE_ID,
     filter,
-    fetchData: createFetcher('marketplace-offering-terms-of-service'),
+    fetchData: createFetcher(marketplaceOfferingTermsOfServiceList),
   });
 
   return (

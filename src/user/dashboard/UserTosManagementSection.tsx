@@ -2,7 +2,10 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import { MarketplacePublicOfferingsListData } from 'waldur-js-client';
+import {
+  MarketplacePublicOfferingsListData,
+  marketplacePublicOfferingsList,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -47,7 +50,7 @@ export const UserTosManagementSection: FC = () => {
   const tableProps = useTable({
     table: USER_TOS_MANAGEMENT_TABLE_ID,
     filter,
-    fetchData: createFetcher('marketplace-public-offerings'),
+    fetchData: createFetcher(marketplacePublicOfferingsList),
     queryField: 'keyword',
     mandatoryFields,
   });

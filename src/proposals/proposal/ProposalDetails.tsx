@@ -1,4 +1,5 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { Button } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -33,6 +34,7 @@ export const ProposalDetails = ({
   error,
   refetch,
 }: ProposalDetails) => {
+  const { state } = useCurrentStateAndParams();
   const formSteps = createProposalSteps;
 
   const {
@@ -40,6 +42,8 @@ export const ProposalDetails = ({
     handleApproveProposal,
     handleRejectProposal,
   } = useProposalDecisionActions(proposal, refetch);
+
+  const isCallManagerView = state.name?.startsWith('call-management');
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -64,7 +68,7 @@ export const ProposalDetails = ({
         <Panel title={translate('Progress')} cardBordered className="mb-5">
           <FormSteps steps={formSteps} />
         </Panel>
-        {canPerformDecisionActions && (
+        {canPerformDecisionActions && isCallManagerView && (
           <>
             <Button
               variant="btn btn-icon btn-primary"

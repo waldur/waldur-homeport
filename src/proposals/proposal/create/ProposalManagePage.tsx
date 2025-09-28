@@ -1,12 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
   proposalProposalsRetrieve,
+  proposalPublicCallsRetrieve,
   proposalReviewsList,
 } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
+import { getQueryParams } from '@waldur/core/filters';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
@@ -17,6 +20,7 @@ import { Proposal } from '@waldur/proposals/types';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ProposalDetails } from '../ProposalDetails';
+import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
 
 import { ProgressSteps } from './ProgressSteps';
 import { ProposalHeader } from './ProposalHeader';
@@ -24,6 +28,7 @@ import { ProposalSubmissionStep } from './ProposalSubmissionStep';
 
 export const ProposalManagePage = () => {
   const {
+    state,
     params: { proposal_uuid },
   } = useCurrentStateAndParams();
 
@@ -51,8 +56,22 @@ export const ProposalManagePage = () => {
 
   const user = useSelector(getUser);
 
+  const isEditPage = state.name === 'proposals.manage-proposal';
   const hasPermissionToSubmit =
     user.is_staff || (proposal && user.uuid === proposal.created_by_uuid);
+
+  const { data: call } = useQuery({
+    queryKey: ['ProposalCall', proposal?.call_uuid],
+    queryFn: () =>
+      proposal?.call_uuid
+        ? proposalPublicCallsRetrieve({
+            path: { uuid: proposal.call_uuid },
+            query: { field: ['uuid', 'customer_uuid'] },
+          }).then((res) => res.data)
+        : null,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
+  });
 
   const { data: reviews, isLoading: isLoadingReviews } = useQuery({
     queryKey: ['ProposalReviews', proposal_uuid],
@@ -63,13 +82,46 @@ export const ProposalManagePage = () => {
           query: {
             page,
             proposal_uuid,
-            state: ['submitted'],
           },
         }),
       ),
 
     refetchOnWindowFocus: false,
   });
+
+  // For the "Reviewer" tab navigation, prefer using non-rejected review,
+  // if all is rejected, take the newer,
+  // but if another review was selected, use it by reading from the url query `review_uuid`
+  const userReview = useMemo(() => {
+    if (!reviews?.length) return null;
+    const params = getQueryParams();
+    if (params['review_uuid']) {
+      const review = reviews.find((rw) => rw.uuid === params['review_uuid']);
+      if (review) return review;
+    }
+    const userReviews = reviews.filter(
+      (review) => review.reviewer_uuid === user.uuid,
+    );
+    if (!userReviews?.length) return null;
+    if (userReviews.length === 1) return userReviews[0];
+    if (userReviews.every((rw) => rw.state === 'rejected')) {
+      return userReviews.sort(
+        (a, b) =>
+          new Date(b.review_end_date).getTime() -
+          new Date(a.review_end_date).getTime(),
+      )[0];
+    }
+    // Sort by state, so that can take prefered review
+    return userReviews.sort((a, b) => (a.state < b.state ? 1 : -1))[0];
+  }, [reviews, user]);
+
+  const submittedReviews = useMemo(
+    () =>
+      reviews
+        ? reviews.filter((rw) => ['submitted', 'rejected'].includes(rw.state))
+        : null,
+    [reviews],
+  );
 
   if (isLoading || isLoadingReviews) {
     return <LoadingSpinner />;
@@ -81,18 +133,23 @@ export const ProposalManagePage = () => {
     <PageBarProvider scrollOffset={100}>
       <SidebarLayout.Header className="pb-5">
         <div className="w-100">
+          <ProposalRoleBasedTabs
+            review={userReview}
+            proposal={proposal}
+            call={call}
+          />
           <ProposalHeader proposal={proposal} className="mb-7" />
           <ProgressSteps proposal={proposal} bgClass="bg-body" />
         </div>
       </SidebarLayout.Header>
-      {proposal.state === 'draft' && hasPermissionToSubmit ? (
+      {proposal.state === 'draft' && isEditPage && hasPermissionToSubmit ? (
         <ProposalSubmissionStep
           proposal={proposal}
           refetch={refetch}
-          reviews={reviews}
+          reviews={submittedReviews}
         />
       ) : (
-        <ProposalDetails proposal={proposal} reviews={reviews} />
+        <ProposalDetails proposal={proposal} reviews={submittedReviews} />
       )}
     </PageBarProvider>
   );

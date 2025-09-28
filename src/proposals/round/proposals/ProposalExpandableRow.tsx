@@ -3,6 +3,7 @@ import { Proposal, proposalReviewsList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
+import { ReviewStateRenderer } from '@waldur/proposals/review/ReviewStateRenderer';
 import { Field } from '@waldur/resource/summary';
 import { createFetcher } from '@waldur/table/api';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
@@ -36,7 +37,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     },
     {
       title: translate('Status'),
-      render: ({ row }) => row.state,
+      render: ReviewStateRenderer,
     },
     {
       title: translate('Score'),
@@ -50,7 +51,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
         <Field
           label={translate('Project summary')}
           value={row.project_summary}
-          className="col-md-6 mb-3"
+          className="col-md-12 mb-3"
         />
       )}
       <Table

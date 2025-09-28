@@ -76,6 +76,14 @@ export const ProposalDetailsOverviewStep = (props: VStepperFormStepProps) => {
             valueCol={7}
           />
         </Col>
+        <Col sm={6}>
+          <Field
+            label={translate('Created by')}
+            value={proposal.created_by_name}
+            labelCol={5}
+            valueCol={7}
+          />
+        </Col>
       </Row>
     </VStepperFormStepCard>
   );
