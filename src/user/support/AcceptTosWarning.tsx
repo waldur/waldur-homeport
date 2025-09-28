@@ -9,7 +9,7 @@ export const AcceptTosWarning = () => (
       translate('Accept term and conditions')
     }
     description={translate(
-      'You must accept the terms of service and privacy policy to access all features. To accept, please check the box below.',
+      'You must accept the Terms of Service and privacy policy to access all features. To accept, please check the box below.',
     )}
     className="mt-3"
   />

@@ -1,0 +1,15 @@
+@import '../core/components/_variables';
+
+.tos-content-preview {
+  background-color: if(isDarkMode(), $gray-200, $gray-100);
+  padding: 16px;
+  min-height: 300px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.tos-thumbnail {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+}
