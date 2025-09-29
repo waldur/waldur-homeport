@@ -12,7 +12,7 @@ const mapStateToFilter = createSelector(
   getFormValues('OrganizationProjectUpdateRequestListFilter'),
   (customer, filterValues: any) => {
     const filter: Record<string, any> = {
-      offering_customer_uuid: customer.uuid,
+      provider_uuid: customer.uuid,
     };
     if (filterValues?.state) {
       filter.state = filterValues.state?.map((choice) => choice.value);
