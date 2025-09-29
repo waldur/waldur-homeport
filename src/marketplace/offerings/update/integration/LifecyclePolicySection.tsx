@@ -67,6 +67,13 @@ const fields: OfferingEditField[] = [
   },
   {
     label: translate(
+      'If set to True, pricing and components tab would be concealed',
+    ),
+    key: 'plugin_options.conceal_billing_data',
+    component: AwesomeCheckboxField,
+  },
+  {
+    label: translate(
       'Maximal number of offering resources allowed per project',
     ),
     key: 'plugin_options.maximal_resource_count_per_project',
