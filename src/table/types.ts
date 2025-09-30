@@ -37,7 +37,7 @@ export type Fetcher = <RowType = any>(
 export type FetcherOptions<QueryPayload = any, PathPayload = any> = {
   query?: QueryPayload;
   path?: PathPayload;
-  parser?: (data) => any[];
+  parser?: (data, query?: any) => any[];
 };
 
 export interface TableOptionsType<RowType = any> {
