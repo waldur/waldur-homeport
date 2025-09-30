@@ -88,7 +88,7 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
               } else {
                 return {
                   subnet: item.subnet,
-                  url: item.floating_ip,
+                  url: item.floating_ip as string,
                 };
               }
             }),

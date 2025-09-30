@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { invoicesStatsList } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
@@ -18,20 +19,20 @@ const CostField = ({ invoiceStats, organization }) =>
       : defaultCurrency(invoiceStats.aggregated_total);
 
 export const InvoicesStatsList = (props: any) => {
+  const filter = useMemo(
+    () => ({
+      provider_uuid: props.providerUUID,
+    }),
+    [props.providerUUID],
+  );
   const tableProps = useTable({
     table: [INVOICES_STATS_TABLE, props.invoiceUuid].join('-'),
-    fetchData: createFetcher(
-      // @ts-ignore
-      invoicesStatsList,
-      {
-        path: {
-          uuid: props.invoiceUuid,
-        },
-        query: {
-          provider_uuid: props.providerUUID,
-        },
+    filter,
+    fetchData: createFetcher(invoicesStatsList, {
+      path: {
+        uuid: props.invoiceUuid,
       },
-    ),
+    }),
   });
   const columns = [
     {

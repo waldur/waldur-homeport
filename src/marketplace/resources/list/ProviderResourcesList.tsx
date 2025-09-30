@@ -311,7 +311,6 @@ const mapStateToFilter = createSelector(
     const filter: MarketplaceProviderResourcesListData['query'] = {};
 
     // Public resources should only contain resources from billable offerings.
-    // @ts-ignore
     filter.offering_billable = true;
 
     if (customer) {

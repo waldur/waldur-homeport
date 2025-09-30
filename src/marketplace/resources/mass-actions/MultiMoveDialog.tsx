@@ -30,7 +30,6 @@ export const MultiMoveDialog = reduxForm<FormData, MultiMoveDialogOwnProps>({
       props.resolve.rows.map((row) =>
         marketplaceResourcesMoveResource({
           path: { uuid: row.uuid },
-          // @ts-ignore
           body: {
             project: {
               url: formData.project.url,

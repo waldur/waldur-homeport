@@ -1,6 +1,6 @@
 import {
   OpenStackBackup,
-  OpenStackBackupRestorationRequest,
+  OpenStackBackupRestorationCreateRequest,
   openstackFlavorsList,
   openstackFloatingIpsList,
   openstackSecurityGroupsList,
@@ -134,7 +134,7 @@ export const getInitialValues = (
 
 export const serializeBackupRestoreFormData = (
   form: BackupRestoreFormData,
-): OpenStackBackupRestorationRequest => ({
+): OpenStackBackupRestorationCreateRequest => ({
   flavor: form.flavor.value,
   ports: form.networks
     .filter((item) => item.subnet)
@@ -158,7 +158,6 @@ export const serializeBackupRestoreFormData = (
         };
       }
     }),
-  // @ts-ignore
   security_groups: form.security_groups.map(({ value }) => ({
     url: value,
   })),
