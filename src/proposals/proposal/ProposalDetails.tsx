@@ -24,7 +24,7 @@ interface ProposalDetails {
   reviews?: ProposalReview[];
   isLoading?;
   error?;
-  refetch?;
+  refetch;
 }
 
 export const ProposalDetails = ({
