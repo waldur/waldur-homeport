@@ -132,7 +132,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
                 {user ? (
                   <SubmitButton
                     submitting={submitting}
-                    disabled={invalid}
+                    disabled={invalid || !values?.invitation?.uuid}
                     className="btn btn-primary ms-6"
                   >
                     <span className="svg-icon svg-icon-2">
