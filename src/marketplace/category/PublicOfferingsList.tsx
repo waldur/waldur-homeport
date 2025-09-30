@@ -184,6 +184,7 @@ export const PublicOfferingsList: FunctionComponent<{
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialMode={initialMode === 'table' ? 'table' : 'grid'}
       standalone
+      showPageSizeSelector={true}
       title={translate('Offerings')}
       rowActions={RowActions}
       hasOptionalColumns
