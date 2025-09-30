@@ -145,7 +145,7 @@ describe('useProposalDecisionActions', () => {
           showInput: true,
           inputLabel: 'Rejection reason',
           inputPlaceholder: 'Enter reason for rejection',
-          inputRequired: false,
+          inputRequired: true,
         },
       );
     });

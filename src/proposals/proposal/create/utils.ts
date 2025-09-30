@@ -74,7 +74,7 @@ export const useProposalDecisionActions = (
           showInput: true,
           inputLabel: translate('Rejection reason'),
           inputPlaceholder: translate('Enter reason for rejection'),
-          inputRequired: false,
+          inputRequired: true,
         },
       );
 
@@ -86,6 +86,7 @@ export const useProposalDecisionActions = (
       dispatch(showSuccess(translate('Proposal has been rejected.')));
       refetch();
     } catch (error) {
+      if (!error) return;
       dispatch(
         showErrorResponse(error, translate('Unable to reject the proposal.')),
       );
