@@ -13,13 +13,9 @@ const NameTemplateTooltip = () => (
   <div className="text-start py-1">
     <p className="fw-bold mb-2">{translate('Available variables')}</p>
     <ul className="mb-0 list-unstyled">
-      <li>{'{user.full_name} - ' + translate('Full name of the user')}</li>
-      <li>{'{user.email} - ' + translate('Email address of the user')}</li>
-      <li>{'{user.username} - ' + translate('Username of the user')}</li>
-      <li>{'{invitation.title} - ' + translate('Title of this invitation')}</li>
-      <li>
-        {'{organization.name} - ' + translate('Name of the organization')}
-      </li>
+      <li>{'{full_name} - ' + translate('Full name of the user')}</li>
+      <li>{'{email} - ' + translate('Email address of the user')}</li>
+      <li>{'{username} - ' + translate('Username of the user')}</li>
     </ul>
   </div>
 );
