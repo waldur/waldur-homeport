@@ -283,6 +283,11 @@ export const SupportEnum = {
   issue_update_succeeded: 'issue_update_succeeded',
 };
 
+export const Terms_of_serviceEnum = {
+  terms_of_service_consent_granted: 'terms_of_service_consent_granted',
+  terms_of_service_consent_revoked: 'terms_of_service_consent_revoked',
+};
+
 export const UsersEnum = {
   auth_logged_in_with_saml2: 'auth_logged_in_with_saml2',
   auth_logged_out_with_saml2: 'auth_logged_out_with_saml2',

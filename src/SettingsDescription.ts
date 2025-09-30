@@ -806,6 +806,12 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'OIDC_ACCESS_TOKEN_ENABLED',
+        description: translate('If true, OIDC complete view returns access token instead of Waldur token'),
+        default: false,
+        type: 'boolean',
+      },
     ],
   },
   {
