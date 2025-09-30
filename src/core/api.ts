@@ -14,6 +14,16 @@ import { getImpersonatedUserUuid } from '@waldur/workspace/WorkspaceStorage';
 const querySerializer = (params) =>
   Qs.stringify(params, { arrayFormat: 'repeat' });
 
+const getAuthHeader = () => {
+  const prefix = ENV.plugins.WALDUR_CORE.OIDC_ACCESS_TOKEN_ENABLED
+    ? 'Bearer'
+    : 'Token';
+  const token = getToken();
+  if (token) {
+    return [prefix, token].join(' ');
+  }
+};
+
 export function initApiClient() {
   const headers = {
     Accept: 'application/json',
@@ -25,7 +35,7 @@ export function initApiClient() {
     headers['Accept-Language'] = getLanguageKey();
   }
   client.setConfig({
-    auth: () => (getToken() ? 'Token ' + getToken() : undefined),
+    auth: getAuthHeader,
     baseUrl: ENV.apiEndpoint,
     throwOnError: true,
     headers,
@@ -75,7 +85,7 @@ export async function get<T = any>(endpoint: string): Promise<T> {
     fixURL(endpoint),
     getToken()
       ? {
-          headers: { Authorization: `Token ${getToken()}` },
+          headers: { Authorization: getAuthHeader() },
         }
       : {},
   );
@@ -106,7 +116,7 @@ export async function post(endpoint: string, data?: object) {
     body: data ? JSON.stringify(data) : undefined,
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Token ${getToken()}`,
+      Authorization: getAuthHeader(),
     },
   });
 }

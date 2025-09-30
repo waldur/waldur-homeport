@@ -74,6 +74,7 @@ interface CoreConfiguration {
   RANCHER_USERNAME_INPUT_LABEL: string;
   ENFORCE_USER_CONSENT_FOR_OFFERINGS: boolean;
   ENABLE_PROJECT_KIND_COURSE: boolean;
+  OIDC_ACCESS_TOKEN_ENABLED: boolean;
 }
 
 interface OpenStackConfiguration {
