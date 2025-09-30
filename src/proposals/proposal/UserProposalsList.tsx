@@ -162,6 +162,7 @@ export const UserProposalsList: FC = () => {
       verboseName={translate('Proposals')}
       hasQuery={true}
       hasOptionalColumns
+      showPageSizeSelector={true}
       filters={<ProposalsTableFilter initialValues={initialValues} />}
     />
   );

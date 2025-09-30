@@ -124,6 +124,7 @@ export const UserReviewsList: FC = () => {
       hasQuery={true}
       rowActions={ReviewsRowActions}
       filters={<ReviewsTableFilter />}
+      showPageSizeSelector={true}
       expandableRow={ReviewsExpandableRow}
       hasOptionalColumns
     />

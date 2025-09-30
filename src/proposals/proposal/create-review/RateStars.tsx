@@ -8,7 +8,7 @@ import {
 } from '@waldur/core/constants';
 
 interface RateStarsProps {
-  value: number;
+  value: string | number;
   size?: number;
   className?: string;
 }

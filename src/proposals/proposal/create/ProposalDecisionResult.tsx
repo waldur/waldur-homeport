@@ -44,7 +44,7 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
     return (
       reviews.reduce((acc, value) => acc + value.summary_score, 0) /
       reviews.length
-    );
+    ).toPrecision(2);
   }, [reviews]);
 
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
           <div className="d-flex align-items-center flex-grow-1 flex-wrap gap-4">
             <RateStars value={overallScore} className="mb-2" />
             <span className="fs-6 text-gray-700">
-              {overallScore === 1
+              {overallScore === '1.0'
                 ? translate('1 star rate')
                 : translate('{count} stars rate', { count: overallScore })}
             </span>
