@@ -25,7 +25,7 @@ export const RobotAccountEditButton = (props) => {
   if (
     !hasPermission(user, {
       permission: PermissionEnum.UPDATE_RESOURCE_ROBOT_ACCOUNT,
-      customerId: props.row.offering_customer_uuid,
+      customerId: props.row.provider_uuid,
     })
   ) {
     return null;

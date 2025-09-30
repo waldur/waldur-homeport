@@ -29,7 +29,7 @@ export const SubmitReportAction: ActionItemType = ({
   if (
     !hasPermission(user, {
       permission: PermissionEnum.SUBMIT_RESOURCE_REPORT,
-      customerId: resource.offering_customer_uuid,
+      customerId: resource.provider_uuid,
     })
   ) {
     return null;

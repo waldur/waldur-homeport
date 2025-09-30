@@ -35,8 +35,8 @@ export const SetErredActionItem: FC<{
     ? marketplaceResource.uuid
     : resource.uuid;
   const customer_uuid = marketplaceResource
-    ? marketplaceResource.offering_customer_uuid
-    : resource.offering_customer_uuid;
+    ? marketplaceResource.provider_uuid
+    : resource.provider_uuid;
 
   const dispatch = useDispatch();
   const user = useSelector(getUser);

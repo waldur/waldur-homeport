@@ -11,7 +11,7 @@ export const RobotAccountDeleteButton = ({ row, refetch }) => {
   if (
     !hasPermission(user, {
       permission: PermissionEnum.DELETE_RESOURCE_ROBOT_ACCOUNT,
-      customerId: row.offering_customer_uuid,
+      customerId: row.provider_uuid,
     })
   ) {
     return null;

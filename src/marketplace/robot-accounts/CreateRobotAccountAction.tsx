@@ -31,7 +31,7 @@ export const CreateRobotAccountAction: ActionItemType = ({ resource }) => {
   if (
     !hasPermission(user, {
       permission: PermissionEnum.CREATE_RESOURCE_ROBOT_ACCOUNT,
-      customerId: resource.offering_customer_uuid,
+      customerId: resource.provider_uuid,
     })
   ) {
     return null;

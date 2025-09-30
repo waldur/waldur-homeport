@@ -46,7 +46,7 @@ const mockMarketplaceResource = {
   state: 'OK',
   customer_uuid: 'customer-uuid',
   name: 'Test Market Resource',
-  offering_customer_uuid: 'offering-uuid',
+  provider_uuid: 'offering-uuid',
 };
 const mockResource = {
   uuid: 'test-scope-uuid',
