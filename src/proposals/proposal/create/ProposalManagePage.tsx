@@ -149,7 +149,11 @@ export const ProposalManagePage = () => {
           reviews={submittedReviews}
         />
       ) : (
-        <ProposalDetails proposal={proposal} reviews={submittedReviews} />
+        <ProposalDetails
+          proposal={proposal}
+          reviews={submittedReviews}
+          refetch={refetch}
+        />
       )}
     </PageBarProvider>
   );
