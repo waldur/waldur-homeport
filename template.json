@@ -6079,6 +6079,10 @@
     "description": "marketplace/UserSecretOptionsForm.tsx",
     "message": "If defined, will be set as a password for all offering users"
   },
+  "If set to True, pricing and components tab would be concealed": {
+    "description": "marketplace/offerings/update/integration/LifecyclePolicySection.tsx",
+    "message": "If set to True, pricing and components tab would be concealed"
+  },
   "If the project role is not set, corresponding users in proposal role will not be transferred to the project.": {
     "description": "proposals/update/role-mapping/RoleMappingFormDialog.tsx",
     "message": "If the project role is not set, corresponding users in proposal role will not be transferred to the project."
@@ -12044,7 +12048,7 @@
     "message": "Review the details of your order, before confirming"
   },
   "Review": {
-    "description": "invitations/UserPermissionRequestReviewButton.tsx, proposals/proposal/create/ProgressSteps.tsx, proposals/round/review/EditRoundReviewDialog.tsx, proposals/update/rounds/CallRoundCreateDialog.tsx",
+    "description": "invitations/UserPermissionRequestReviewButton.tsx, proposals/proposal/create/ProgressSteps.tsx, proposals/round/proposals/ProposalExpandableRow.tsx, proposals/round/review/EditRoundReviewDialog.tsx, proposals/update/rounds/CallRoundCreateDialog.tsx",
     "message": "Review"
   },
   "Reviewed at": {

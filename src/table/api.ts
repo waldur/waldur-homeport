@@ -8,6 +8,7 @@ import { Fetcher, FetcherOptions, TableRequest } from './types';
 export const processApiResponse = <TData = any>(
   result: Awaited<RequestResult<TData>>,
   parser?: FetcherOptions['parser'],
+  query?: any,
 ) => {
   const contentType = result.response.headers
     .get('content-type')
@@ -17,7 +18,7 @@ export const processApiResponse = <TData = any>(
   if (contentType !== 'application/json') {
     throw new Error('Unexpected response content type');
   }
-  const rows = parser ? parser(result.data) : (result.data as any[]);
+  const rows = parser ? parser(result.data, query) : (result.data as any[]);
   const resultCount = fetchResultCount(result);
   const nextPage = parseNextPage(result);
   return {
@@ -80,7 +81,7 @@ export function createFetcher<QueryPayload = any, PathPayload = any>(
           query: mergedQueryParams,
           ...mergedOptions,
         });
-        return processApiResponse(result, parser);
+        return processApiResponse(result, parser, mergedQueryParams);
       },
       staleTime: request.options?.staleTime,
     });
