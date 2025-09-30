@@ -50,7 +50,6 @@ export const OfferingBreadcrumbPopover = ({
       queryKey="marketplaceServiceProvidersOfferingsList"
       queryField="name"
       params={{
-        // @ts-ignore
         field: ['name', 'uuid', 'category_title', 'thumbnail'],
       }}
       filters={[

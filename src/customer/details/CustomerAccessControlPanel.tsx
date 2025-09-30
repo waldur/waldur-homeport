@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { AccessSubnet, accessSubnetsList } from 'waldur-js-client';
 
 import { CustomerEditPanelProps } from '@waldur/customer/details/types';
@@ -15,12 +15,11 @@ export const CustomerAccessControlPanel: FunctionComponent<
   CustomerEditPanelProps
 > = ({ customer }) => {
   const customer_uuid = customer.uuid;
+  const filter = useMemo(() => ({ customer_uuid }), [customer_uuid]);
   const tableProps = useTable({
     table: 'customerAccessControl',
-    // @ts-ignore
-    fetchData: createFetcher(accessSubnetsList, {
-      query: { customer_uuid },
-    }),
+    filter,
+    fetchData: createFetcher(accessSubnetsList),
     queryField: 'description',
   });
 

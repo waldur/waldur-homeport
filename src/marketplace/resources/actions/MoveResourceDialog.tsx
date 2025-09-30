@@ -35,7 +35,6 @@ export const MoveResourceDialog = reduxForm<
     try {
       await marketplaceResourcesMoveResource({
         path: { uuid: props.resolve.resource.marketplace_resource_uuid },
-        // @ts-ignore
         body: {
           project: {
             url: formData.project.url,
