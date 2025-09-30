@@ -7959,10 +7959,6 @@
     "description": "rancher/cluster/create/utils.ts",
     "message": "Name must consist of lower case alphanumeric characters."
   },
-  "Name of the organization": {
-    "description": "invitations/actions/AutoCreateProjectGroup.tsx",
-    "message": "Name of the organization"
-  },
   "Name should consist of latin symbols and numbers.": {
     "description": "core/validators.ts",
     "message": "Name should consist of latin symbols and numbers."
@@ -14830,10 +14826,6 @@
   "Title is rendered as column header": {
     "description": "marketplace/category/admin/ColumnRow.tsx",
     "message": "Title is rendered as column header"
-  },
-  "Title of this invitation": {
-    "description": "invitations/actions/AutoCreateProjectGroup.tsx",
-    "message": "Title of this invitation"
   },
   "Title": {
     "description": "issues/create/IssueDescriptionTab.tsx, issues/list/IssuesList.tsx, maintenance/MaintenanceList.tsx, marketplace/category/admin/AdminCategoriesPage.tsx, marketplace/category/admin/CategoryEditDialog.tsx, marketplace/category/admin/CategoryGroupsList.tsx, marketplace/category/admin/ColumnsList.tsx, marketplace/category/admin/GroupFromDialog.tsx, marketplace/referral/ReferralsList.tsx, user/keys/KeysList.tsx",
