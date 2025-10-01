@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { marketplacePlansList } from 'waldur-js-client';
 
@@ -86,6 +86,13 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
 
   const tableTabs = useOfferingAccountingTableTabs(props.offering);
 
+  const ExpandableRow = useCallback(
+    ({ row }) => (
+      <PlanExpandableRow row={row} components={props.offering.components} />
+    ),
+    [props.offering.components],
+  );
+
   return (
     <Table<Plan>
       {...tableProps}
@@ -123,9 +130,7 @@ export const PlansSection: FC<OfferingSectionProps> = (props) => {
           user={user}
         />
       )}
-      expandableRow={({ row }) => (
-        <PlanExpandableRow row={row} components={props.offering.components} />
-      )}
+      expandableRow={ExpandableRow}
     />
   );
 };

@@ -21,7 +21,7 @@ export const OauthLoginCompleted: FunctionComponent = () => {
     async function fetchToken() {
       const qs = Qs.parse(getQueryString());
       try {
-        AuthService.setAuthHeader(qs.token);
+        AuthService.setAuthHeader(decodeURIComponent(qs.token as string));
         const user = await UsersService.getCurrentUser();
         AuthService.loginSuccess({
           data: { ...user, method: provider },

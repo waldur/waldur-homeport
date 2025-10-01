@@ -1,60 +1,43 @@
-import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { OfferingComponent } from 'waldur-js-client';
+import { Nav, Tab } from 'react-bootstrap';
+import { OfferingComponent, ProviderPlanDetails } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
 import { translate } from '@waldur/i18n';
-import { Plan } from '@waldur/marketplace/types';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
+import { PlanComponentsTable } from './PlanComponentsTable';
+import { PlanResourcesTable } from './PlanResourcesTable';
+
 interface OwnProps {
-  row: Plan;
+  row: ProviderPlanDetails;
   components: OfferingComponent[];
 }
 
-export const PlanExpandableRow: FC<OwnProps> = (props) => {
-  return (
-    <ExpandableContainer>
-      <div className="card card-table card-bordered">
-        <div className="card-body">
-          <table className="table align-middle">
-            <thead>
-              <tr className="align-middle">
-                <th>{translate('Name')}</th>
-                <th>{translate('Current price')}</th>
-                <th>{translate('Price update next month')}</th>
-                <th>{translate('Units')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {props.components.map((component, index) => (
-                <tr key={index}>
-                  <td>
-                    {component.name}{' '}
-                    <Tip
-                      id={`tip-component-${props.row.name}-${component.name}`}
-                      label={component.type}
-                      placement="right"
-                    >
-                      <InfoIcon weight="bold" />
-                    </Tip>
-                  </td>
-                  <td>{props.row.prices[component.type]}</td>
-                  <td>
-                    {props.row.future_prices[component.type] ??
-                      translate('No update')}
-                  </td>
-                  <td>
-                    <div className="form-control-static">
-                      {component.measured_unit}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </ExpandableContainer>
-  );
-};
+export const PlanExpandableRow: FC<OwnProps> = (props) => (
+  <ExpandableContainer>
+    <TableTabsContainer
+      defaultActiveKey="components"
+      unmountOnExit={true}
+      className="min-h-375px"
+    >
+      <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
+        <Nav.Item>
+          <Nav.Link eventKey="components">{translate('Components')}</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="resources">{translate('Resources')}</Nav.Link>
+        </Nav.Item>
+      </Nav>
+
+      <Tab.Content className="overflow-auto">
+        <Tab.Pane eventKey="resources" unmountOnExit={true}>
+          <PlanResourcesTable {...props} />
+        </Tab.Pane>
+        <Tab.Pane eventKey="components" unmountOnExit={true}>
+          <PlanComponentsTable {...props} />
+        </Tab.Pane>
+      </Tab.Content>
+    </TableTabsContainer>
+  </ExpandableContainer>
+);

@@ -1,60 +1,36 @@
 import { FC, useMemo } from 'react';
 import {
+  ProviderPlanDetails,
+  OfferingComponent,
   marketplaceResourcesList,
-  MarketplaceResourcesListData,
-  Project,
   Resource,
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
+import { ResourceNameField } from '@waldur/marketplace/orders/list/ResourceNameField';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
-import { getStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
-import { Customer } from '@waldur/workspace/types';
-
-import { ResourcesListActions } from './ResourcesListActions';
-
-const mandatoryFields: MarketplaceResourcesListData['query']['field'] = [
-  'uuid',
-  'name',
-  'category_title',
-  'offering_name',
-  'customer_name',
-  'project_name',
-  'created',
-  'state',
-  'backend_metadata',
-];
+import { ResourcesListActions } from '@waldur/user/affiliations/ResourcesListActions';
 
 interface OwnProps {
-  scope: Customer | Project;
-  context: 'organization' | 'project';
+  row: ProviderPlanDetails;
+  components: OfferingComponent[];
 }
 
-export const SummaryResourcesTable: FC<OwnProps> = ({ scope, context }) => {
+export const PlanResourcesTable: FC<OwnProps> = (props) => {
   const filter = useMemo(
     () => ({
-      state: getStates().map((state) => state.value),
-      ...(context === 'organization'
-        ? { customer_uuid: scope.uuid }
-        : { project_uuid: scope.uuid }),
+      plan_uuid: props.row.uuid,
     }),
-    [scope],
+    [props.row],
   );
   const tableProps = useTable({
-    table:
-      (context === 'organization'
-        ? 'OrganizationResources'
-        : 'ProjectResources') +
-      '-' +
-      scope.uuid,
+    table: `PlanResourcesTable-${props.row.uuid}`,
     fetchData: createFetcher(marketplaceResourcesList),
     filter,
-    mandatoryFields,
   });
 
   return (
@@ -67,16 +43,8 @@ export const SummaryResourcesTable: FC<OwnProps> = ({ scope, context }) => {
           orderField: 'name',
         },
         {
-          title: translate('Category'),
-          render: ({ row }) => <>{row.category_title}</>,
-        },
-        {
-          title: translate('Offering'),
-          render: ({ row }) => <>{row.offering_name}</>,
-        },
-        {
-          title: translate('Project'),
-          render: ({ row }) => <>{row.project_name}</>,
+          title: translate('Customer'),
+          render: ({ row }) => <>{row.customer_name}</>,
         },
         {
           title: translate('Created at'),
@@ -88,7 +56,6 @@ export const SummaryResourcesTable: FC<OwnProps> = ({ scope, context }) => {
           render: ({ row }) => (
             <ResourceStateField resource={row} outline pill />
           ),
-
           orderField: 'state',
         },
       ]}
