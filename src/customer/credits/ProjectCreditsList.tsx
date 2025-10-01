@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { ProjectCredit, projectCreditsList } from 'waldur-js-client';
 
@@ -17,11 +17,15 @@ import { ProjectCreditActions } from './ProjectCreditActions';
 
 export const ProjectCreditsList: FC = () => {
   const customer = useSelector(getCustomer);
+  const filter = useMemo(
+    () => ({ customer_uuid: customer.uuid }),
+    [customer.uuid],
+  );
   const tableProps = useTable({
     table: 'ProjectCreditsList',
     fetchData: createFetcher(projectCreditsList),
     queryField: 'query',
-    filter: { customer_uuid: customer.uuid },
+    filter,
   });
 
   return (
