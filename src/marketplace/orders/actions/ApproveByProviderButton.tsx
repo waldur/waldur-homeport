@@ -10,7 +10,9 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { updateEntity } from '@waldur/table/actions';
 
@@ -33,6 +35,22 @@ export const ApproveByProviderButton: FunctionComponent<
   const dispatch = useDispatch();
   const { mutate, isPending: isLoading } = useMutation({
     mutationFn: async () => {
+      const isSiteAgentOrder = props.row.offering_type === SITE_AGENT_PLUGIN;
+
+      if (isSiteAgentOrder) {
+        try {
+          await waitForConfirmation(
+            dispatch,
+            translate('Approve order'),
+            translate(
+              'Provider approval is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.',
+            ),
+          );
+        } catch {
+          return;
+        }
+      }
+
       try {
         await marketplaceOrdersApproveByProvider({
           path: { uuid: props.row.uuid },
