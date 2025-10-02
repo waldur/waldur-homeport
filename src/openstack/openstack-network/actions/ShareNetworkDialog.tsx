@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  openstackNetworksRbacPolicyCreate,
+  openstackNetworkRbacPoliciesCreate,
   openstackTenantsList,
 } from 'waldur-js-client';
 
@@ -64,9 +64,9 @@ export const ShareNetworkDialog: FC<ActionDialogProps> = ({
       ]}
       submitForm={async (formData) => {
         try {
-          await openstackNetworksRbacPolicyCreate({
-            path: { uuid: resource.uuid },
+          await openstackNetworkRbacPoliciesCreate({
             body: {
+              network: resource.url,
               policy_type: formData.policy_type,
               target_tenant: formData.target_tenant.url,
             },
