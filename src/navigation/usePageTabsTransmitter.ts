@@ -37,7 +37,10 @@ export const usePageTabsTransmitter = (tabs: PageBarTab[]) => {
   useExtraTabs(mainTabs);
 
   const flatTabs = useMemo(
-    () => tabs.flatMap((tab) => (tab.component ? [tab] : tab.children)),
+    () =>
+      tabs
+        .flatMap((tab) => (tab.component ? [tab] : tab.children))
+        .filter(Boolean),
     [tabs],
   );
 
