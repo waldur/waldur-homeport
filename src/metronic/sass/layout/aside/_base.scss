@@ -9,6 +9,25 @@
   box-shadow: get($aside-config, box-shadow);
   padding: 0;
 
+  // Logo
+  .aside-logo {
+    gap: 12px;
+
+    // Desktop & Mobile
+    .logo,
+    .logo_mobile {
+      max-height: 28px;
+      font-size: 9px;
+    }
+    .logo {
+      width: 100%;
+      max-width: 190px;
+    }
+    .logo_mobile {
+      max-width: 48px;
+    }
+  }
+
   // Custom button
   .btn-custom {
     display: flex;
