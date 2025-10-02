@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 import {
   OpenStackNetwork,
+  openstackNetworkRbacPoliciesDestroy,
   openstackNetworkRbacPoliciesList,
-  openstackNetworksRbacPolicyDeleteDestroy,
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
@@ -19,17 +19,13 @@ const POLICY_TYPE = {
   access_as_external: { color: 'warning', label: translate('External') },
 };
 
-const RowActions: FC<{ row; networkUuid; fetch }> = ({
-  row,
-  networkUuid,
-  fetch,
-}) => {
+const RowActions: FC<{ row; fetch }> = ({ row, fetch }) => {
   return (
     <ActionsDropdownComponent>
       <ResourceDeleteButton
         apiFunction={() =>
-          openstackNetworksRbacPolicyDeleteDestroy({
-            path: { uuid: networkUuid, rbac_policy_uuid: row.uuid },
+          openstackNetworkRbacPoliciesDestroy({
+            path: { uuid: row.uuid },
           })
         }
         resourceType={translate('Network sharing')}
@@ -75,9 +71,7 @@ export const NetworkRBACList: FC<{ network: OpenStackNetwork }> = ({
       ]}
       verboseName={translate('Network sharing')}
       hasActionBar={false}
-      rowActions={({ row, fetch }) => (
-        <RowActions row={row} fetch={fetch} networkUuid={network.uuid} />
-      )}
+      rowActions={RowActions}
       initialPageSize={5}
       minHeight={265}
     />
