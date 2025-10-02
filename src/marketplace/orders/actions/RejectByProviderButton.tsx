@@ -16,7 +16,9 @@ import {
   TABLE_PENDING_PUBLIC_ORDERS,
   TABLE_PUBLIC_ORDERS,
 } from '@waldur/marketplace/orders/list/constants';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { updateEntity } from '@waldur/table/actions';
 
@@ -32,6 +34,22 @@ export const RejectByProviderButton: FunctionComponent<
   const dispatch = useDispatch();
   const { mutate, isPending: isLoading } = useMutation({
     mutationFn: async () => {
+      const isSiteAgentOrder = props.row.offering_type === SITE_AGENT_PLUGIN;
+
+      if (isSiteAgentOrder) {
+        try {
+          await waitForConfirmation(
+            dispatch,
+            translate('Reject order'),
+            translate(
+              'Provider rejection is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.',
+            ),
+          );
+        } catch {
+          return;
+        }
+      }
+
       try {
         await marketplaceOrdersRejectByProvider({
           path: { uuid: props.row.uuid },
