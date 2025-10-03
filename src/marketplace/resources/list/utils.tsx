@@ -31,7 +31,7 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'plan_uuid', // Expandable view, ChangeLimitsAction
     'marketplace_plan_uuid', // ChangeLimitsAction
     'is_limit_based', // Expandable view, ChangeLimitsAction
-    hasExpandableView ? 'is_usage_based' : null, // Expandable view
+    'is_usage_based', // Expandable view, ShowUsageAction, ReportUsageAction
     hasExpandableView ? 'limits' : null, // Expandable view
     hasExpandableView ? 'limit_usage' : null, // Expandable view
     hasExpandableView ? 'current_usages' : null, // Expandable view
