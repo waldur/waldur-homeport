@@ -22,6 +22,7 @@ export const CallEnum = {
 
 export const CreditsEnum = {
   allowed_offerings_have_been_updated: 'allowed_offerings_have_been_updated',
+  automatic_credit_adjustment: 'automatic_credit_adjustment',
   create_of_credit_by_staff: 'create_of_credit_by_staff',
   reduction_of_customer_credit: 'reduction_of_customer_credit',
   reduction_of_customer_credit_due_to_minimal_consumption: 'reduction_of_customer_credit_due_to_minimal_consumption',
@@ -37,6 +38,7 @@ export const CreditsEnum = {
 
 export const CustomersEnum = {
   allowed_offerings_have_been_updated: 'allowed_offerings_have_been_updated',
+  automatic_credit_adjustment: 'automatic_credit_adjustment',
   create_of_credit_by_staff: 'create_of_credit_by_staff',
   customer_creation_succeeded: 'customer_creation_succeeded',
   customer_deletion_succeeded: 'customer_deletion_succeeded',
@@ -59,6 +61,7 @@ export const CustomersEnum = {
 
 export const InvoicesEnum = {
   allowed_offerings_have_been_updated: 'allowed_offerings_have_been_updated',
+  automatic_credit_adjustment: 'automatic_credit_adjustment',
   create_of_credit_by_staff: 'create_of_credit_by_staff',
   invoice_canceled: 'invoice_canceled',
   invoice_created: 'invoice_created',
