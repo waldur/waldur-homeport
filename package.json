@@ -22,7 +22,18 @@
     "ci:start": "VITE_API_URL=http://localhost:8001/ yarn build && yarn serve dist --single --listen 8001",
     "ci:run": "cypress run",
     "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run",
-    "gettext:extract": "node extractLiteralsFromFiles.cjs"
+    "gettext:extract": "node locales/tools/extractLiteralsFromFiles.cjs",
+    "i18n:check": "node locales/tools/checkTranslations.cjs",
+    "i18n:check:dry": "node locales/tools/checkTranslations.cjs --dry-run",
+    "i18n:check:locales": "node locales/tools/checkTranslations.cjs --locales-only",
+    "i18n:check:lang": "node locales/tools/checkTranslations.cjs --language",
+    "i18n:clean": "node locales/tools/removeDeprecatedTranslations.cjs",
+    "i18n:validate": "node locales/tools/validateTranslations.cjs",
+    "i18n:analyze": "node locales/tools/analyzeLanguageTranslations.cjs",
+    "i18n:llm:prepare": "node locales/tools/simpleLLMProcessor.cjs",
+    "i18n:search": "node locales/tools/searchTranslations.cjs",
+    "i18n:analyze-changes": "node locales/tools/analyzeTranslations.cjs",
+    "i18n:edit": "node locales/tools/translationEdit.cjs"
   },
   "dependencies": {
     "@cloudfour/simple-svg-placeholder": "^1.1.0",
@@ -207,7 +218,9 @@
       "*.fixture.tsx",
       "src/EventsEnums.ts",
       "src/FeaturesEnums.ts",
-      "build.dev/**"
+      "build.dev/**",
+      "locales/tools/analyze*Translations.cjs",
+      "locales/tools/cleanupTranslations.cjs"
     ]
   },
   "stylelint": {
