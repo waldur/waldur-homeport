@@ -15,6 +15,7 @@ class SimpleLLMProcessor {
     this.template = {};
     this.translations = {};
     this.languageWisdom = '';
+    this.contextualGuidance = this.getContextualGuidance();
   }
 
   loadData() {
@@ -61,6 +62,13 @@ class SimpleLLMProcessor {
       'lt': 'Lithuanian'
     };
     return names[this.language] || this.language.charAt(0).toUpperCase() + this.language.slice(1);
+  }
+
+  getContextualGuidance() {
+    // Domain-specific guidance is now in the main prompt context
+    // This can be used for language-specific translation nuances if needed
+    const guidance = {};
+    return guidance[this.language] || {};
   }
 
   getAudienceDescription() {
@@ -166,6 +174,10 @@ class SimpleLLMProcessor {
                      translation.includes('loanword patterns') ||
                      (uiType.includes('button') && !translation.match(/da$|mine$/));
             break;
+          case 'missing':
+            // Don't include existing translations when looking for missing ones
+            include = false;
+            break;
           default:
             include = true;
         }
@@ -195,7 +207,7 @@ class SimpleLLMProcessor {
     
     const taskType = issueType === 'missing' ? 'add missing' : 'improve existing';
     const taskDescription = issueType === 'missing' ? 
-      `Add ${this.getLanguageName()} translations for ${entries.length} missing entries` :
+      `Add ${this.getLanguageName()} translations for ${missingCount} missing entries` :
       `Improve ${improvingCount} existing ${this.getLanguageName()} translations`;
     
     return `Please ${taskType} ${this.getLanguageName()} translations in the locales/${this.language}.json file.
@@ -203,6 +215,13 @@ class SimpleLLMProcessor {
 ## Context: Waldur Cloud Management Platform
 
 **Domain**: This is a professional cloud infrastructure and project management platform used by organizations to manage IT resources, costs, and teams.
+
+**Important Domain Context**:
+- **"Call" terminology**: In Waldur platform, "Call" refers to competitive calls for proposals/funding/tenders, NOT phone calls
+- **"Call managing organization"**: Organization that coordinates/manages competitive calls/tenders
+- **"Call management"**: Process of managing competitive calls for proposals, funding rounds, tenders
+- **"Volume" terminology**: In OpenStack/cloud context, "Volume" refers to disk storage/virtual disks, NOT audio volume
+- **"Tenant" terminology**: In cloud context, "Tenant" refers to a private cloud instance or isolated environment, not a physical tenant
 
 **Audience**: ${this.getAudienceDescription()}
 
@@ -221,6 +240,8 @@ ${this.languageWisdom}
 2. **AnalyzeTranslations**: \`node locales/tools/analyzeTranslations.cjs\` - Compare and find what needs changes  
 3. **TranslationEdit**: \`node locales/tools/translationEdit.cjs apply ${this.language} input.json\` - Apply changes atomically
 
+${this.getTranslationOverridesSection()}
+
 ## Focus: ${issueType}
 ${this.getFocusGuidance(issueType)}
 
@@ -229,6 +250,7 @@ ${this.getFocusGuidance(issueType)}
 **Translation Data** (keys with rich context):
 
 ${entries.map(entry => {
+  // For missing entries, show [MISSING], for existing ones show current translation
   const status = entry.isMissing ? '[MISSING - ADD TRANSLATION]' : entry.translation;
   const ctx = entry.context || {};
   
@@ -276,7 +298,10 @@ ${entries.map(entry => {
   
   const contextStr = contextParts.length > 0 ? contextParts.join(' | ') : 'general';
   
-  return `"${entry.english}": "${status}"  // ${contextStr}${locations}`;
+  // Add contextual guidance if available
+  const contextualNote = this.contextualGuidance[entry.english] ? ` | CONTEXT: ${this.contextualGuidance[entry.english]}` : '';
+  
+  return `"${entry.english}": ${entry.isMissing ? `"[MISSING - ADD TRANSLATION]"` : `"${status}"`}  // ${contextStr}${locations}${contextualNote}`;
 }).join('\n')}
 
 **Recommended Workflow**:
@@ -385,6 +410,22 @@ ${issueType === 'missing' ? 'For missing translations, provide natural, contextu
     };
     
     return guidance[issueType] || 'General translation quality improvements';
+  }
+
+  getTranslationOverridesSection() {
+    const guidanceKeys = Object.keys(this.contextualGuidance);
+    if (guidanceKeys.length === 0) {
+      return '';
+    }
+
+    const guidanceList = guidanceKeys.map(key => 
+      `- "${key}": ${this.contextualGuidance[key]}`
+    ).join('\n');
+
+    return `**TRANSLATION CONTEXT**: Pay special attention to these terms that may have non-obvious meanings:
+
+${guidanceList}
+`;
   }
 
   // Get missing translation count
