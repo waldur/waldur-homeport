@@ -124,7 +124,9 @@ export const AdministrationLanguages: FunctionComponent = () => {
                 label={
                   <div className="d-flex align-items-center">
                     <CountryFlagIcon
-                      countryCode={LanguageCountry[language.code]}
+                      countryCode={
+                        LanguageCountry[language.code] || language.code
+                      }
                       className="me-2"
                     />
                     {language.label}
