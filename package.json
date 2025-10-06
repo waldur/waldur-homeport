@@ -45,6 +45,7 @@
     "@jonkoops/matomo-tracker": "^0.7.0",
     "@lezer/highlight": "^1.0.0",
     "@mdxeditor/editor": "^3.23.0",
+    "@monaco-editor/react": "^4.7.0",
     "@phosphor-icons/react": "^2.1.7",
     "@popperjs/core": "~2.10.1",
     "@sentry/react": "^8.55.0",

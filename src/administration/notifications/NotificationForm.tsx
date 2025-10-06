@@ -5,6 +5,7 @@ import { FieldArray } from 'react-final-form-arrays';
 
 import { required } from '@waldur/core/validators';
 import { TextField } from '@waldur/form';
+import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
 
 export const formatHeader = (path) => {
@@ -28,14 +29,24 @@ const renderFields = ({ fields }) => {
           <Accordion.Item eventKey={index.toString()} key={index}>
             <Accordion.Header>{formatHeader(template.path)}</Accordion.Header>
             <Accordion.Body>
-              <Field
-                name={`${name}.content`}
-                component={TextField as any}
-                rows={template.path.endsWith('subject.txt') ? 1 : 10}
-                type="text"
-                placeholder={template.original_content}
-                validate={required}
-              />
+              {template.path.endsWith('message.html') ||
+              template.path.endsWith('message.txt') ? (
+                <Field
+                  name={`${name}.content`}
+                  component={MonacoField as any}
+                  validate={required}
+                  language="django-html"
+                />
+              ) : (
+                <Field
+                  name={`${name}.content`}
+                  component={TextField as any}
+                  rows={template.path.endsWith('subject.txt') ? 1 : 10}
+                  type="text"
+                  placeholder={template.original_content}
+                  validate={required}
+                />
+              )}
 
               <div className="mt-1 text-end">
                 <Button
