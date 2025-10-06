@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { PropsWithChildren, useEffect, useRef } from 'react';
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import { ENV } from '@waldur/core/config';
 import {
@@ -16,6 +16,7 @@ import { SidebarFooter } from './SidebarFooter';
 export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   const sidebarRef = useRef<HTMLElement>(undefined);
   const layout = useLayout();
+  const [isAsideHovered, setIsAsideHovered] = useState(false);
 
   useEffect(() => {
     if (sidebarRef?.current) {
@@ -49,8 +50,12 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
       data-kt-drawer-width="{default:'200px', '300px': '250px'}"
       data-kt-drawer-direction="start"
       data-kt-drawer-toggle="#kt_aside_mobile_toggle"
+      onMouseEnter={() => {
+        layout.config.aside.minimized && setIsAsideHovered(true);
+      }}
+      onMouseLeave={() => setIsAsideHovered(false)}
     >
-      <BrandName />
+      <BrandName isAsideHovered={isAsideHovered} />
 
       <div className="aside-menu flex-grow-1 overflow-hidden">
         <div

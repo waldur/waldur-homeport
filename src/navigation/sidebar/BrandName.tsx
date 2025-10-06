@@ -19,12 +19,56 @@ import { translate } from '@waldur/i18n';
 import { useLayout } from '@waldur/metronic/layout/core';
 import { useTheme } from '@waldur/theme/useTheme';
 
-export const BrandName: FunctionComponent = () => {
+interface BrandNameProps {
+  isAsideHovered?: boolean;
+}
+
+export const BrandName: FunctionComponent<BrandNameProps> = ({
+  isAsideHovered = false,
+}) => {
   const { theme } = useTheme();
   const sidebarTheme = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
   const layout = useLayout();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [userHasToggled, setUserHasToggled] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Auto-minimize sidebar for medium screens (768px - 1399px)
+  useEffect(() => {
+    // Only auto-resize if user hasn't manually toggled
+    if (userHasToggled) return;
+
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const shouldMinimize = width >= 768 && width < 1400;
+
+      if (shouldMinimize && !layout.config.aside.minimized) {
+        layout.setLayout({
+          aside: {
+            ...layout.config.aside,
+            minimized: true,
+          },
+        });
+      } else if (
+        !shouldMinimize &&
+        width >= 1400 &&
+        layout.config.aside.minimized
+      ) {
+        layout.setLayout({
+          aside: {
+            ...layout.config.aside,
+            minimized: false,
+          },
+        });
+      }
+    };
+
+    // Check on mount
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [layout, userHasToggled]);
 
   const { data: shortcutsResponse } = useQuery({
     queryKey: SHORTCUTS_QUERY_KEY,
@@ -59,6 +103,7 @@ export const BrandName: FunctionComponent = () => {
 
   // switch aside.minimized to keep sidebar state between pages
   const toggleSidebar = useCallback(() => {
+    setUserHasToggled(true);
     layout.setLayout({
       aside: {
         ...layout.config.aside,
@@ -138,19 +183,20 @@ export const BrandName: FunctionComponent = () => {
     >
       {/* Shortcuts Button */}
       <div className="position-relative min-w-24px" ref={dropdownRef}>
-        {shortcuts.length > 0 && !layout.config.aside.minimized && (
-          <>
-            <button
-              className="btn btn-icon btn-sm border-0 w-24px"
-              onClick={() => setShowDropdown(!showDropdown)}
-              aria-label={translate('Quick shortcuts')}
-              style={{ outline: 'none', boxShadow: 'none' }}
-            >
-              <SquaresFourIcon size={24} weight="bold" />
-            </button>
-            {DropdownMenu}
-          </>
-        )}
+        {shortcuts.length > 0 &&
+          (!layout.config.aside.minimized || isAsideHovered) && (
+            <>
+              <button
+                className="btn btn-icon btn-sm border-0 w-24px"
+                onClick={() => setShowDropdown(!showDropdown)}
+                aria-label={translate('Quick shortcuts')}
+                style={{ outline: 'none', boxShadow: 'none' }}
+              >
+                <SquaresFourIcon size={24} weight="bold" />
+              </button>
+              {DropdownMenu}
+            </>
+          )}
       </div>
       {/* Logo */}
       <Link state="profile.details">
