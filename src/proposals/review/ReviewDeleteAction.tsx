@@ -6,7 +6,7 @@ import { proposalReviewsDestroy } from 'waldur-js-client';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse } from '@waldur/store/notify';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 export const ReviewDeleteAction = (props) => {
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ export const ReviewDeleteAction = (props) => {
     try {
       await proposalReviewsDestroy({ path: { uuid: props.row.uuid } });
       props.refetch();
+      dispatch(showSuccess(translate('Review removed successfully.')));
     } catch (e) {
       dispatch(showErrorResponse(e, translate('Unable to remove review.')));
     } finally {
