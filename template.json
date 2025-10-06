@@ -261743,6 +261743,71 @@
       "This is a question. Ensure question format is appropriate in your language."
     ]
   },
+  "Review removed successfully.": {
+    "message": "Review removed successfully.",
+    "description": "proposals/review/ReviewDeleteAction.tsx",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "review"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "proposals/review/ReviewDeleteAction.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1,
+      "first_seen": "proposals/review/ReviewDeleteAction.tsx"
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Unable to remove review.": {
     "message": "Unable to remove review.",
     "description": "proposals/review/ReviewDeleteAction.tsx",
