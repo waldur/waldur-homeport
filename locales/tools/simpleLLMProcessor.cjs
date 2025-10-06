@@ -440,14 +440,14 @@ ${guidanceList}
   }
 
   // Generate prompts for all issue types
-  generateAllPrompts() {
+  generateAllPrompts(limit = 30) {
     const types = ['missing', 'problematic', 'buttons', 'errors', 'titles'];
     const prompts = {};
     
     for (const type of types) {
-      const entries = this.generateFocusedBatch(type, 30);
+      const entries = this.generateFocusedBatch(type, limit);
       if (entries.length > 0) {
-        prompts[type] = this.generateClaudePrompt(type);
+        prompts[type] = this.generateClaudePrompt(type, limit);
       }
     }
     
@@ -455,13 +455,13 @@ ${guidanceList}
   }
 
   // Save prompts to files for easy copy-paste
-  savePromptsToFiles() {
+  savePromptsToFiles(limit = 30) {
     const outputDir = path.join(__dirname, '../llm-prompts');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
     
-    const prompts = this.generateAllPrompts();
+    const prompts = this.generateAllPrompts(limit);
     const missingCount = this.getMissingCount();
     
     for (const [type, prompt] of Object.entries(prompts)) {
@@ -493,7 +493,7 @@ Generated on: ${new Date().toISOString()}
 ## Available Prompts:
 
 ${Object.keys(prompts).map(type => {
-  const entryCount = this.generateFocusedBatch(type, 30).length;
+  const entryCount = this.generateFocusedBatch(type, limit).length;
   return `- **${type}**: ${this.language}-${type}-improvements.txt (${entryCount} entries)`;
 }).join('\n')}
 
@@ -504,7 +504,7 @@ ${missingCount > 0 ? '1. Start with **missing** - adds missing translations\n2. 
 4. Then **buttons** - enhances UI consistency
 5. Finally **titles** - polishes terminology
 
-Each prompt processes ~30 translations for focused improvement.
+Each prompt processes ~${limit} translations for focused improvement.
 `;
     
     fs.writeFileSync(path.join(outputDir, `${this.language}-README.md`), summary, 'utf8');
@@ -517,23 +517,55 @@ Each prompt processes ~30 translations for focused improvement.
 // CLI interface
 if (require.main === module) {
   const args = process.argv.slice(2);
+  
+  // Show help if requested
+  if (args.includes('--help') || args.includes('-h')) {
+    console.log(`Simple LLM Translation Processor
+
+Usage:
+  node locales/tools/simpleLLMProcessor.cjs [language] [type] [limit]
+
+Arguments:
+  language  Language code (default: et)
+  type      Issue type: all, missing, problematic, buttons, errors, titles (default: all)
+  limit     Number of entries per batch (default: 30)
+
+Examples:
+  node locales/tools/simpleLLMProcessor.cjs et all 50     # Generate all Estonian prompts with 50 entries each
+  node locales/tools/simpleLLMProcessor.cjs nb missing 25 # Generate Norwegian missing translations prompt with 25 entries
+  node locales/tools/simpleLLMProcessor.cjs ru buttons    # Generate Russian button translations prompt with default 30 entries
+
+Options:
+  --help, -h    Show this help message
+`);
+    process.exit(0);
+  }
+  
   const language = args[0] || 'et';
   const issueType = args[1] || 'all';
+  const limit = parseInt(args[2]) || 30;
+  
+  // Validate limit
+  if (limit < 1 || limit > 200) {
+    console.error('❌ Error: Limit must be between 1 and 200');
+    process.exit(1);
+  }
   
   const processor = new SimpleLLMProcessor(language);
   processor.loadData();
   
   if (issueType === 'all') {
-    processor.savePromptsToFiles();
+    processor.savePromptsToFiles(limit);
     console.log(`\n✅ Generated prompts for ${language.toUpperCase()}`);
     console.log(`📁 Files saved to: locales/llm-prompts/`);
+    console.log(`📊 Record limit: ${limit} entries per batch`);
     console.log(`\n💡 Next steps:`);
     console.log(`1. Open the generated prompt files`);
     console.log(`2. Copy a prompt and paste into your LLM (Claude, ChatGPT, etc.)`);
     console.log(`3. Let the LLM edit locales/${language}.json directly`);
     console.log(`4. Review and commit changes with git`);
   } else {
-    console.log(processor.generateClaudePrompt(issueType));
+    console.log(processor.generateClaudePrompt(issueType, limit));
   }
 }
 
