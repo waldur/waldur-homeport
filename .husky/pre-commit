@@ -1,1 +1,1 @@
-yarn gettext:extract && yarn lint-staged
+yarn i18n:extract && yarn lint-staged

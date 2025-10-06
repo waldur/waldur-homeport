@@ -140,5 +140,22 @@ export default tseslint
         'vite-plugin-react-displayname.ts',
       ],
     },
+    {
+      files: ['locales/tools/**/*.cjs'],
+      languageOptions: {
+        sourceType: 'script',
+        ecmaVersion: 2022,
+        globals: {
+          ...globals.node,
+        },
+      },
+      rules: {
+        'no-console': 'off',
+        'no-case-declarations': 'off',
+        'no-prototype-builtins': 'off',
+        '@typescript-eslint/no-require-imports': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+      },
+    },
   )
   .concat(eslintPluginPrettier);

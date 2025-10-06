@@ -5,7 +5,7 @@ const path = require('path');
 
 /**
  * Latvian Translation Quality Analysis
- * 
+ *
  * Analyzes Latvian translations against enhanced context to identify improvement opportunities
  * Focuses on Latvian language-specific grammar, style, and cultural adaptation
  */
@@ -22,14 +22,24 @@ class LatvianTranslationAnalyzer {
   loadData() {
     try {
       const rootDir = path.join(__dirname, '../../');
-      const enhancedContent = fs.readFileSync(path.join(rootDir, 'template.json'), 'utf8');
+      const enhancedContent = fs.readFileSync(
+        path.join(rootDir, 'template.json'),
+        'utf8',
+      );
       this.enhancedTemplate = JSON.parse(enhancedContent);
-      
-      const latvianContent = fs.readFileSync(path.join(rootDir, 'locales/lv.json'), 'utf8');
+
+      const latvianContent = fs.readFileSync(
+        path.join(rootDir, 'locales/lv.json'),
+        'utf8',
+      );
       this.latvianTranslations = JSON.parse(latvianContent);
-      
-      console.log(`📚 Loaded ${Object.keys(this.enhancedTemplate).length} enhanced template entries`);
-      console.log(`🇱🇻 Loaded ${Object.keys(this.latvianTranslations).length} Latvian translations`);
+
+      console.log(
+        `📚 Loaded ${Object.keys(this.enhancedTemplate).length} enhanced template entries`,
+      );
+      console.log(
+        `🇱🇻 Loaded ${Object.keys(this.latvianTranslations).length} Latvian translations`,
+      );
     } catch (error) {
       console.error(`Error loading data: ${error.message}`);
       process.exit(1);
@@ -39,13 +49,19 @@ class LatvianTranslationAnalyzer {
   // Check if Latvian translation follows button text conventions
   analyzeButtonTranslations() {
     const buttonIssues = [];
-    
-    for (const [english, templateData] of Object.entries(this.enhancedTemplate)) {
+
+    for (const [english, templateData] of Object.entries(
+      this.enhancedTemplate,
+    )) {
       const latvian = this.latvianTranslations[english];
       if (!latvian) continue;
-      
+
       const context = templateData.context;
-      if (context && context.primary_ui_type && context.primary_ui_type.includes('button')) {
+      if (
+        context &&
+        context.primary_ui_type &&
+        context.primary_ui_type.includes('button')
+      ) {
         const issues = this.checkButtonTextQuality(english, latvian, context);
         if (issues.length > 0) {
           buttonIssues.push({
@@ -53,108 +69,121 @@ class LatvianTranslationAnalyzer {
             latvian,
             context: context.primary_ui_type,
             issues,
-            locations: templateData.description
+            locations: templateData.description,
           });
         }
       }
     }
-    
+
     return buttonIssues;
   }
 
   // Check button text quality for Latvian
   checkButtonTextQuality(english, latvian, context) {
     const issues = [];
-    
+
     // Check length - Latvian tends to be longer than English
     if (latvian.length > english.length * 3.2) {
       issues.push({
         type: 'length_concern',
         message: `Latvian text significantly longer than English (${latvian.length} vs ${english.length} chars)`,
-        severity: 'medium'
+        severity: 'medium',
       });
     }
-    
+
     // Check for appropriate verb forms in action buttons (Latvian infinitive or imperative)
-    if (context.primary_ui_type === 'submit_button' || context.primary_ui_type === 'action_button') {
+    if (
+      context.primary_ui_type === 'submit_button' ||
+      context.primary_ui_type === 'action_button'
+    ) {
       if (!this.hasAppropriateLatvianVerb(english, latvian)) {
         issues.push({
           type: 'verb_form',
-          message: 'Consider using Latvian infinitive (-t) or imperative verb form for action buttons',
-          severity: 'low'
+          message:
+            'Consider using Latvian infinitive (-t) or imperative verb form for action buttons',
+          severity: 'low',
         });
       }
     }
-    
+
     // Check for case consistency (Latvian has 6 cases)
     if (this.hasInconsistentLatvianCase(latvian)) {
       issues.push({
         type: 'case_consistency',
-        message: 'Check Latvian case usage - ensure consistency with grammatical context',
-        severity: 'medium'
+        message:
+          'Check Latvian case usage - ensure consistency with grammatical context',
+        severity: 'medium',
       });
     }
-    
+
     // Check for gender agreement issues
     if (this.hasGenderAgreementIssues(latvian)) {
       issues.push({
         type: 'gender_agreement',
-        message: 'Check Latvian gender agreement (masculine/feminine) in adjectives',
-        severity: 'medium'
+        message:
+          'Check Latvian gender agreement (masculine/feminine) in adjectives',
+        severity: 'medium',
       });
     }
-    
+
     // Check for proper diacritical and long vowel usage
     if (this.missingLatvianDiacriticals(english, latvian)) {
       issues.push({
         type: 'diacriticals',
-        message: 'Check Latvian diacritical marks and long vowels (ā, ē, ī, ō, ū, ģ, ķ, ļ, ņ, š, ž, č)',
-        severity: 'high'
+        message:
+          'Check Latvian diacritical marks and long vowels (ā, ē, ī, ō, ū, ģ, ķ, ļ, ņ, š, ž, č)',
+        severity: 'high',
       });
     }
-    
+
     // Check for palatalization patterns
     if (this.hasIncorrectPalatalization(latvian)) {
       issues.push({
         type: 'palatalization',
         message: 'Check Latvian palatalization rules and consonant softening',
-        severity: 'medium'
+        severity: 'medium',
       });
     }
-    
+
     return issues;
   }
 
   // Check variable handling in Latvian translations
   analyzeVariableHandling() {
     const variableIssues = [];
-    
-    for (const [english, templateData] of Object.entries(this.enhancedTemplate)) {
+
+    for (const [english, templateData] of Object.entries(
+      this.enhancedTemplate,
+    )) {
       const latvian = this.latvianTranslations[english];
       if (!latvian) continue;
-      
+
       const context = templateData.context;
       if (context && context.variables) {
-        const issues = this.checkLatvianVariableHandling(english, latvian, context.variables);
+        const issues = this.checkLatvianVariableHandling(
+          english,
+          latvian,
+          context.variables,
+        );
         if (issues.length > 0) {
           variableIssues.push({
             english,
             latvian,
             variables: context.variables,
             issues,
-            locations: templateData.description
+            locations: templateData.description,
           });
         }
       }
     }
-    
+
     return variableIssues;
   }
 
   // Check Latvian variable handling (cases, gender agreement, etc.)
   checkLatvianVariableHandling(english, latvian, variables) {
     const issues = [];
-    
+
     // Check for number-noun agreement issues
     for (const [varName, varInfo] of Object.entries(variables)) {
       if (varInfo.type === 'number') {
@@ -162,44 +191,51 @@ class LatvianTranslationAnalyzer {
           issues.push({
             type: 'number_agreement',
             variable: varName,
-            message: 'Latvian number-noun agreement may need attention (singular/plural forms)',
-            severity: 'high'
+            message:
+              'Latvian number-noun agreement may need attention (singular/plural forms)',
+            severity: 'high',
           });
         }
       }
-      
+
       // Check for proper case usage with variables
-      if (varInfo.type === 'string' && this.needsLatvianCaseAdjustment(latvian, varName)) {
+      if (
+        varInfo.type === 'string' &&
+        this.needsLatvianCaseAdjustment(latvian, varName)
+      ) {
         issues.push({
           type: 'case_adjustment',
           variable: varName,
-          message: 'Variable may need Latvian case inflection in grammatical context',
-          severity: 'medium'
+          message:
+            'Variable may need Latvian case inflection in grammatical context',
+          severity: 'medium',
         });
       }
-      
+
       // Check for gender agreement with variables
       if (this.needsLatvianGenderAgreement(latvian, varName)) {
         issues.push({
           type: 'gender_agreement',
           variable: varName,
           message: 'Variable may need gender agreement in Latvian context',
-          severity: 'medium'
+          severity: 'medium',
         });
       }
     }
-    
+
     return issues;
   }
 
   // Analyze titles and headings
   analyzeTitleTranslations() {
     const titleIssues = [];
-    
-    for (const [english, templateData] of Object.entries(this.enhancedTemplate)) {
+
+    for (const [english, templateData] of Object.entries(
+      this.enhancedTemplate,
+    )) {
       const latvian = this.latvianTranslations[english];
       if (!latvian) continue;
-      
+
       const context = templateData.context;
       if (context && context.primary_ui_type === 'title') {
         const issues = this.checkLatvianTitle(english, latvian);
@@ -208,37 +244,38 @@ class LatvianTranslationAnalyzer {
             english,
             latvian,
             issues,
-            locations: templateData.description
+            locations: templateData.description,
           });
         }
       }
     }
-    
+
     return titleIssues;
   }
 
   // Check Latvian title quality
   checkLatvianTitle(english, latvian) {
     const issues = [];
-    
+
     // Check capitalization (Latvian uses sentence case)
     if (this.hasInappropriateLatvianCapitalization(latvian)) {
       issues.push({
         type: 'capitalization',
         message: 'Latvian titles typically use sentence case, not title case',
-        severity: 'low'
+        severity: 'low',
       });
     }
-    
+
     // Check for appropriate Latvian terminology
     if (this.shouldUseNativeLatvianTerms(english, latvian)) {
       issues.push({
         type: 'terminology',
-        message: 'Consider using native Latvian terminology instead of loanwords',
-        severity: 'medium'
+        message:
+          'Consider using native Latvian terminology instead of loanwords',
+        severity: 'medium',
       });
     }
-    
+
     return issues;
   }
 
@@ -246,15 +283,28 @@ class LatvianTranslationAnalyzer {
   hasAppropriateLatvianVerb(english, latvian) {
     // Check for Latvian infinitive forms (-t) or imperative mood
     const latvianVerbPatterns = [
-      /t$/, /īt$/, /ēt$/,        // infinitive endings
-      /i$/, /iet$/,             // imperative forms
+      /t$/,
+      /īt$/,
+      /ēt$/, // infinitive endings
+      /i$/,
+      /iet$/, // imperative forms
     ];
-    
-    const actionWords = ['add', 'save', 'delete', 'create', 'update', 'send', 'cancel'];
-    if (actionWords.some(word => english.toLowerCase().includes(word))) {
-      return latvianVerbPatterns.some(pattern => pattern.test(latvian.toLowerCase()));
+
+    const actionWords = [
+      'add',
+      'save',
+      'delete',
+      'create',
+      'update',
+      'send',
+      'cancel',
+    ];
+    if (actionWords.some((word) => english.toLowerCase().includes(word))) {
+      return latvianVerbPatterns.some((pattern) =>
+        pattern.test(latvian.toLowerCase()),
+      );
     }
-    
+
     return true; // Default to OK if not an action word
   }
 
@@ -268,35 +318,39 @@ class LatvianTranslationAnalyzer {
     // Check for potential gender agreement issues
     // Look for patterns that might indicate gender disagreement
     const mismatchPatterns = [
-      /s\s+[aāeēiī]/i,  // masculine ending with feminine modifier
-      /a\s+[aāeēiī]/i,  // feminine ending with masculine modifier
+      /s\s+[aāeēiī]/i, // masculine ending with feminine modifier
+      /a\s+[aāeēiī]/i, // feminine ending with masculine modifier
     ];
-    
-    return mismatchPatterns.some(pattern => pattern.test(latvian));
+
+    return mismatchPatterns.some((pattern) => pattern.test(latvian));
   }
 
   missingLatvianDiacriticals(english, latvian) {
     // Check if Latvian text might be missing diacriticals or long vowels
     const suspiciousPatterns = [
-      /[aeiou]{2,}/,    // Double vowels that should probably be long vowels
-      /g(?![aeiouāēīōū])/,  // 'g' that should probably be 'ģ'
-      /k(?![aeiouāēīōū])/,  // 'k' that should probably be 'ķ'
-      /l(?![aeiouāēīōū])/,  // 'l' that should probably be 'ļ'
-      /n(?![aeiouāēīōū])/,  // 'n' that should probably be 'ņ'
+      /[aeiou]{2,}/, // Double vowels that should probably be long vowels
+      /g(?![aeiouāēīōū])/, // 'g' that should probably be 'ģ'
+      /k(?![aeiouāēīōū])/, // 'k' that should probably be 'ķ'
+      /l(?![aeiouāēīōū])/, // 'l' that should probably be 'ļ'
+      /n(?![aeiouāēīōū])/, // 'n' that should probably be 'ņ'
     ];
-    
-    return suspiciousPatterns.some(pattern => pattern.test(latvian.toLowerCase()));
+
+    return suspiciousPatterns.some((pattern) =>
+      pattern.test(latvian.toLowerCase()),
+    );
   }
 
   hasIncorrectPalatalization(latvian) {
     // Check for potential palatalization issues
     // This is a simplified check for consonant softening patterns
     const palatalizationPatterns = [
-      /[ģķļņ][bcdfghjklmnpqrstvwxyz]/,  // Softened consonants before hard consonants
-      /[gkln][iīeē]/,                   // Hard consonants that might need softening before front vowels
+      /[ģķļņ][bcdfghjklmnpqrstvwxyz]/, // Softened consonants before hard consonants
+      /[gkln][iīeē]/, // Hard consonants that might need softening before front vowels
     ];
-    
-    return palatalizationPatterns.some(pattern => pattern.test(latvian.toLowerCase()));
+
+    return palatalizationPatterns.some((pattern) =>
+      pattern.test(latvian.toLowerCase()),
+    );
   }
 
   hasProperLatvianNumberAgreement(latvian, varName) {
@@ -313,30 +367,35 @@ class LatvianTranslationAnalyzer {
     const variablePattern = `{${varName}}`;
     // Check if variable appears in context that requires specific case
     const caseRequiringContexts = [
-      /\s(ar|bez|no|uz|pie|par|pēc|līdz)\s/,  // prepositions requiring specific cases
-      /\s(caur|dēļ|labad|vietā)\s/,           // more prepositions
+      /\s(ar|bez|no|uz|pie|par|pēc|līdz)\s/, // prepositions requiring specific cases
+      /\s(caur|dēļ|labad|vietā)\s/, // more prepositions
     ];
-    
-    return latvian.includes(variablePattern) && 
-           caseRequiringContexts.some(pattern => pattern.test(latvian));
+
+    return (
+      latvian.includes(variablePattern) &&
+      caseRequiringContexts.some((pattern) => pattern.test(latvian))
+    );
   }
 
   needsLatvianGenderAgreement(latvian, varName) {
     const variablePattern = `{${varName}}`;
     // Check if variable appears with adjectives that need gender agreement
-    return latvian.includes(variablePattern) && 
-           latvian.match(/\s(jauns|vecs|labs|slikts|liels|mazs)\s/);
+    return (
+      latvian.includes(variablePattern) &&
+      latvian.match(/\s(jauns|vecs|labs|slikts|liels|mazs)\s/)
+    );
   }
-
 
   hasInappropriateLatvianCapitalization(latvian) {
     // Check for English-style title case in Latvian
     const words = latvian.split(' ');
     if (words.length > 1) {
       // Count capitalized words (excluding first word)
-      const capitalizedCount = words.slice(1).filter(word => 
-        word.length > 2 && word[0] === word[0].toUpperCase()
-      ).length;
+      const capitalizedCount = words
+        .slice(1)
+        .filter(
+          (word) => word.length > 2 && word[0] === word[0].toUpperCase(),
+        ).length;
       return capitalizedCount > 1; // More than 1 capitalized word suggests title case
     }
     return false;
@@ -345,8 +404,10 @@ class LatvianTranslationAnalyzer {
   shouldUseNativeLatvianTerms(english, latvian) {
     // Check for excessive use of loanwords where native terms exist
     const loanwords = ['kompjūters', 'internets', 'emeils', 'fails'];
-    
-    return loanwords.some(loanword => latvian.toLowerCase().includes(loanword));
+
+    return loanwords.some((loanword) =>
+      latvian.toLowerCase().includes(loanword),
+    );
   }
 
   // Generate improvement recommendations
@@ -362,37 +423,38 @@ class LatvianTranslationAnalyzer {
       '• Check consonant softening patterns (ģ, ķ, ļ, ņ, š, ž, č)',
       '• Use formal "jūs" form in professional contexts',
       '• Follow Latvian palatalization rules correctly',
-      '• Check verb mood usage (indicative/conditional/imperative) for proper meaning'
+      '• Check verb mood usage (indicative/conditional/imperative) for proper meaning',
     ];
   }
 
   // Main analysis function
   analyze() {
     console.log('🔍 Starting Latvian translation analysis...\n');
-    
+
     this.loadData();
-    
+
     console.log('🔘 Analyzing button translations...');
     const buttonIssues = this.analyzeButtonTranslations();
-    
+
     console.log('🔢 Analyzing variable handling...');
     const variableIssues = this.analyzeVariableHandling();
-    
+
     console.log('📝 Analyzing titles and headings...');
     const titleIssues = this.analyzeTitleTranslations();
-    
+
     // Generate report
     this.generateReport(buttonIssues, variableIssues, titleIssues);
   }
 
   // Generate comprehensive report
   generateReport(buttonIssues, variableIssues, titleIssues) {
-    const totalIssues = buttonIssues.length + variableIssues.length + titleIssues.length;
-    
+    const totalIssues =
+      buttonIssues.length + variableIssues.length + titleIssues.length;
+
     console.log('\n📊 LATVIAN TRANSLATION ANALYSIS REPORT');
     console.log('==================================================');
     console.log(`Total improvement opportunities found: ${totalIssues}\n`);
-    
+
     // Button issues
     if (buttonIssues.length > 0) {
       console.log(`🔘 BUTTON TRANSLATION ISSUES (${buttonIssues.length})`);
@@ -400,13 +462,15 @@ class LatvianTranslationAnalyzer {
       buttonIssues.slice(0, 5).forEach((item, index) => {
         console.log(`${index + 1}. "${item.english}" → "${item.latvian}"`);
         console.log(`   Context: ${item.context}`);
-        item.issues.forEach(issue => {
+        item.issues.forEach((issue) => {
           console.log(`   ⚠️  ${issue.message}`);
         });
         console.log('');
       });
       if (buttonIssues.length > 5) {
-        console.log(`   ... and ${buttonIssues.length - 5} more button issues\n`);
+        console.log(
+          `   ... and ${buttonIssues.length - 5} more button issues\n`,
+        );
       }
     }
 
@@ -417,13 +481,15 @@ class LatvianTranslationAnalyzer {
       variableIssues.slice(0, 5).forEach((item, index) => {
         console.log(`${index + 1}. "${item.english}" → "${item.latvian}"`);
         console.log(`   Variables: ${Object.keys(item.variables).join(', ')}`);
-        item.issues.forEach(issue => {
+        item.issues.forEach((issue) => {
           console.log(`   ⚠️  ${issue.message}`);
         });
         console.log('');
       });
       if (variableIssues.length > 5) {
-        console.log(`   ... and ${variableIssues.length - 5} more variable issues\n`);
+        console.log(
+          `   ... and ${variableIssues.length - 5} more variable issues\n`,
+        );
       }
     }
 
@@ -434,7 +500,7 @@ class LatvianTranslationAnalyzer {
       titleIssues.slice(0, 5).forEach((item, index) => {
         console.log(`${index + 1}. "${item.english}" → "${item.latvian}"`);
         console.log(`   Context: title`);
-        item.issues.forEach(issue => {
+        item.issues.forEach((issue) => {
           console.log(`   ⚠️  ${issue.message}`);
         });
         console.log('');
@@ -447,11 +513,13 @@ class LatvianTranslationAnalyzer {
     // Recommendations
     console.log('💡 IMPROVEMENT RECOMMENDATIONS');
     console.log('========================================');
-    this.generateRecommendations().forEach(rec => console.log(rec));
-    
+    this.generateRecommendations().forEach((rec) => console.log(rec));
+
     console.log('\n🎯 PRIORITY ACTIONS:');
     console.log('1. Focus on case agreement and gender agreement issues first');
-    console.log('2. Review button text for Latvian infinitive or imperative forms');
+    console.log(
+      '2. Review button text for Latvian infinitive or imperative forms',
+    );
     console.log('3. Ensure proper diacritical marks and long vowel usage');
     console.log('4. Check consonant palatalization and softening rules');
     console.log('6. Standardize title capitalization to Latvian conventions');
