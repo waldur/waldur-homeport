@@ -23,6 +23,7 @@ export const LanguageCountry = {
   ru: 'ru',
   sl: 'si',
   sv: 'se',
+  uk: 'ua',
 };
 
 export const LanguageSelectorDropdown: FunctionComponent = () => {

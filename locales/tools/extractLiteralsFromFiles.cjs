@@ -2,11 +2,12 @@
 
 const fs = require('fs');
 const path = require('path');
+
 const ts = require('typescript');
 
 /**
  * Enhanced Translation Extraction Tool
- * 
+ *
  * This enhanced version extracts much more context information to help translators
  * provide better translations.
  */
@@ -56,7 +57,6 @@ class EnhancedTranslationExtractor {
       const varName = match[1];
       variables[varName] = {
         type: this.inferVariableType(varName),
-        position: match.index
       };
     }
 
@@ -66,7 +66,7 @@ class EnhancedTranslationExtractor {
   // Infer variable type from name patterns
   inferVariableType(varName) {
     const lowerName = varName.toLowerCase();
-    
+
     if (/count|number|total|amount|size|length|index|page/.test(lowerName)) {
       return 'number';
     }
@@ -82,7 +82,7 @@ class EnhancedTranslationExtractor {
     if (/email|mail/.test(lowerName)) {
       return 'email';
     }
-    
+
     return 'unknown';
   }
 
@@ -96,14 +96,14 @@ class EnhancedTranslationExtractor {
     while (parent) {
       if (ts.isJsxElement(parent) || ts.isJsxSelfClosingElement(parent)) {
         const tagName = parent.tagName?.escapedText || parent.tagName?.text;
-        
+
         if (tagName) {
           elementType = this.mapJSXTagToUIType(tagName);
           attributes = this.extractJSXAttributes(parent);
           break;
         }
       }
-      
+
       if (ts.isPropertyAssignment(parent)) {
         const propertyName = parent.name?.text;
         if (propertyName) {
@@ -111,15 +111,16 @@ class EnhancedTranslationExtractor {
           break;
         }
       }
-      
+
       if (ts.isCallExpression(parent)) {
-        const functionName = parent.expression?.text || parent.expression?.name?.text;
+        const functionName =
+          parent.expression?.text || parent.expression?.name?.text;
         if (functionName) {
           elementType = this.mapFunctionToUIType(functionName);
           break;
         }
       }
-      
+
       parent = parent.parent;
     }
 
@@ -129,33 +130,33 @@ class EnhancedTranslationExtractor {
   // Map JSX tag names to UI element types
   mapJSXTagToUIType(tagName) {
     const mapping = {
-      'button': 'button',
-      'Button': 'button',
-      'SubmitButton': 'submit_button',
-      'ActionButton': 'action_button',
-      'DeleteButton': 'delete_button',
-      'CancelButton': 'cancel_button',
-      'input': 'input_field',
-      'Input': 'input_field',
-      'textarea': 'textarea',
-      'select': 'select_field',
-      'Select': 'select_field',
-      'option': 'select_option',
-      'label': 'field_label',
-      'h1': 'page_title',
-      'h2': 'section_title',
-      'h3': 'subsection_title',
-      'p': 'paragraph',
-      'span': 'text_span',
-      'div': 'container',
-      'Modal': 'modal_dialog',
-      'ModalDialog': 'modal_dialog',
-      'Alert': 'alert_message',
-      'Tooltip': 'tooltip',
-      'Tab': 'tab_label',
-      'MenuItem': 'menu_item',
-      'Link': 'link',
-      'NavLink': 'navigation_link'
+      button: 'button',
+      Button: 'button',
+      SubmitButton: 'submit_button',
+      ActionButton: 'action_button',
+      DeleteButton: 'delete_button',
+      CancelButton: 'cancel_button',
+      input: 'input_field',
+      Input: 'input_field',
+      textarea: 'textarea',
+      select: 'select_field',
+      Select: 'select_field',
+      option: 'select_option',
+      label: 'field_label',
+      h1: 'page_title',
+      h2: 'section_title',
+      h3: 'subsection_title',
+      p: 'paragraph',
+      span: 'text_span',
+      div: 'container',
+      Modal: 'modal_dialog',
+      ModalDialog: 'modal_dialog',
+      Alert: 'alert_message',
+      Tooltip: 'tooltip',
+      Tab: 'tab_label',
+      MenuItem: 'menu_item',
+      Link: 'link',
+      NavLink: 'navigation_link',
     };
 
     return mapping[tagName] || 'generic_element';
@@ -164,20 +165,20 @@ class EnhancedTranslationExtractor {
   // Map property names to UI context
   mapPropertyToUIType(propertyName) {
     const mapping = {
-      'title': 'title',
-      'label': 'label',
-      'placeholder': 'placeholder',
-      'text': 'text_content',
-      'children': 'content',
-      'value': 'value',
-      'defaultValue': 'default_value',
-      'alt': 'alt_text',
+      title: 'title',
+      label: 'label',
+      placeholder: 'placeholder',
+      text: 'text_content',
+      children: 'content',
+      value: 'value',
+      defaultValue: 'default_value',
+      alt: 'alt_text',
       'aria-label': 'accessibility_label',
-      'tooltip': 'tooltip',
-      'helpText': 'help_text',
-      'errorMessage': 'error_message',
-      'successMessage': 'success_message',
-      'warningMessage': 'warning_message'
+      tooltip: 'tooltip',
+      helpText: 'help_text',
+      errorMessage: 'error_message',
+      successMessage: 'success_message',
+      warningMessage: 'warning_message',
     };
 
     return mapping[propertyName] || 'property_value';
@@ -200,20 +201,20 @@ class EnhancedTranslationExtractor {
     if (/warn/i.test(functionName)) {
       return 'warning_message';
     }
-    
+
     return 'function_call';
   }
 
   // Extract JSX attributes for additional context
   extractJSXAttributes(jsxNode) {
     const attributes = {};
-    
+
     if (jsxNode.attributes) {
-      jsxNode.attributes.properties?.forEach(attr => {
+      jsxNode.attributes.properties?.forEach((attr) => {
         if (ts.isJsxAttribute(attr) && attr.name?.text) {
           const attrName = attr.name.text;
           let attrValue = 'true';
-          
+
           if (attr.initializer) {
             if (ts.isStringLiteral(attr.initializer)) {
               attrValue = attr.initializer.text;
@@ -221,7 +222,7 @@ class EnhancedTranslationExtractor {
               attrValue = attr.initializer.expression?.text || 'expression';
             }
           }
-          
+
           attributes[attrName] = attrValue;
         }
       });
@@ -233,40 +234,53 @@ class EnhancedTranslationExtractor {
   // Get semantic context from surrounding code
   getSemanticContext(node, sourceFile) {
     const context = {
-      lineNumber: sourceFile.getLineAndCharacterOfPosition(node.getStart()).line + 1,
+      lineNumber:
+        sourceFile.getLineAndCharacterOfPosition(node.getStart()).line + 1,
       isConditional: false,
       isInLoop: false,
       isInFunction: false,
       functionName: null,
       containingComponent: null,
-      nearbyStrings: []
+      nearbyStrings: [],
     };
 
     let parent = node.parent;
-    
+
     // Traverse up to gather context
     while (parent) {
       // Check for conditional statements
       if (ts.isIfStatement(parent) || ts.isConditionalExpression(parent)) {
         context.isConditional = true;
       }
-      
+
       // Check for loops
-      if (ts.isForStatement(parent) || ts.isWhileStatement(parent) || ts.isForInStatement(parent) || ts.isForOfStatement(parent)) {
+      if (
+        ts.isForStatement(parent) ||
+        ts.isWhileStatement(parent) ||
+        ts.isForInStatement(parent) ||
+        ts.isForOfStatement(parent)
+      ) {
         context.isInLoop = true;
       }
-      
+
       // Check for function context
-      if (ts.isFunctionDeclaration(parent) || ts.isArrowFunction(parent) || ts.isMethodDeclaration(parent)) {
+      if (
+        ts.isFunctionDeclaration(parent) ||
+        ts.isArrowFunction(parent) ||
+        ts.isMethodDeclaration(parent)
+      ) {
         context.isInFunction = true;
         context.functionName = parent.name?.text || 'anonymous';
       }
-      
+
       // Check for React component
-      if (ts.isFunctionDeclaration(parent) && /^[A-Z]/.test(parent.name?.text)) {
+      if (
+        ts.isFunctionDeclaration(parent) &&
+        /^[A-Z]/.test(parent.name?.text)
+      ) {
         context.containingComponent = parent.name.text;
       }
-      
+
       parent = parent.parent;
     }
 
@@ -286,7 +300,7 @@ class EnhancedTranslationExtractor {
       startsWithCapital: /^[A-Z]/.test(text.trim()),
       hasNumbers: /\d/.test(text),
       hasSpecialChars: /[^a-zA-Z0-9\s{}<>/]/.test(text),
-      isAllCaps: text === text.toUpperCase() && text.length > 1
+      isAllCaps: text === text.toUpperCase() && text.length > 1,
       // Removed language field - source is always English
     };
   }
@@ -295,43 +309,49 @@ class EnhancedTranslationExtractor {
 
   // Extract file and domain context from file path
   getFileContext(filePath) {
-    const relativePath = path.relative(path.join(__dirname, '../../src'), filePath);
+    const relativePath = path.relative(
+      path.join(__dirname, '../../src'),
+      filePath,
+    );
     const pathParts = relativePath.split(path.sep);
-    
+
     // Determine domain from path structure
     const domain = this.inferDomain(pathParts);
     const featureArea = this.inferFeatureArea(pathParts);
-    const componentType = this.inferComponentType(pathParts, path.basename(filePath));
-    
+    const componentType = this.inferComponentType(
+      pathParts,
+      path.basename(filePath),
+    );
+
     return {
       domain,
       feature_area: featureArea,
       component_type: componentType,
       file_path: relativePath,
       directory_depth: pathParts.length,
-      file_size_category: this.getFileSizeCategory(filePath)
+      file_size_category: this.getFileSizeCategory(filePath),
     };
   }
 
   // Infer domain from file path
   inferDomain(pathParts) {
     const domainMappings = {
-      'marketplace': 'marketplace',
-      'customer': 'customer_management', 
-      'project': 'project_management',
-      'user': 'user_management',
-      'invoices': 'billing',
-      'administration': 'admin',
-      'support': 'support',
-      'issues': 'support',
-      'auth': 'authentication',
-      'dashboard': 'dashboard',
-      'resource': 'resource_management',
-      'openstack': 'infrastructure',
-      'rancher': 'infrastructure',
-      'slurm': 'infrastructure',
-      'vmware': 'infrastructure',
-      'azure': 'infrastructure'
+      marketplace: 'marketplace',
+      customer: 'customer_management',
+      project: 'project_management',
+      user: 'user_management',
+      invoices: 'billing',
+      administration: 'admin',
+      support: 'support',
+      issues: 'support',
+      auth: 'authentication',
+      dashboard: 'dashboard',
+      resource: 'resource_management',
+      openstack: 'infrastructure',
+      rancher: 'infrastructure',
+      slurm: 'infrastructure',
+      vmware: 'infrastructure',
+      azure: 'infrastructure',
     };
 
     for (const part of pathParts) {
@@ -345,32 +365,38 @@ class EnhancedTranslationExtractor {
   // Infer feature area from path
   inferFeatureArea(pathParts) {
     if (pathParts.length < 2) return 'general';
-    
+
     // Take the most specific path segment that's not a filename
-    const specificParts = pathParts.slice(0, -1).filter(part => 
-      !part.includes('.') && part !== 'components' && part !== 'forms'
-    );
-    
+    const specificParts = pathParts
+      .slice(0, -1)
+      .filter(
+        (part) =>
+          !part.includes('.') && part !== 'components' && part !== 'forms',
+      );
+
     return specificParts[specificParts.length - 1] || 'general';
   }
 
   // Infer component type from filename and path
   inferComponentType(pathParts, filename) {
     const typeIndicators = {
-      'dialog': /Dialog|Modal/i,
-      'form': /Form|Create|Edit|Update/i,
-      'list': /List|Table|Grid/i,
-      'page': /Page|View/i,
-      'card': /Card|Item/i,
-      'filter': /Filter|Search/i,
-      'button': /Button|Action/i,
-      'field': /Field|Input/i,
-      'navigation': /Nav|Menu|Sidebar/i,
-      'chart': /Chart|Graph|Visualization/i
+      dialog: /Dialog|Modal/i,
+      form: /Form|Create|Edit|Update/i,
+      list: /List|Table|Grid/i,
+      page: /Page|View/i,
+      card: /Card|Item/i,
+      filter: /Filter|Search/i,
+      button: /Button|Action/i,
+      field: /Field|Input/i,
+      navigation: /Nav|Menu|Sidebar/i,
+      chart: /Chart|Graph|Visualization/i,
     };
 
     for (const [type, pattern] of Object.entries(typeIndicators)) {
-      if (pattern.test(filename) || pathParts.some(part => pattern.test(part))) {
+      if (
+        pattern.test(filename) ||
+        pathParts.some((part) => pattern.test(part))
+      ) {
         return type;
       }
     }
@@ -382,7 +408,7 @@ class EnhancedTranslationExtractor {
     try {
       const stats = require('fs').statSync(filePath);
       const sizeKB = stats.size / 1024;
-      
+
       if (sizeKB < 5) return 'small';
       if (sizeKB < 20) return 'medium';
       return 'large';
@@ -395,9 +421,13 @@ class EnhancedTranslationExtractor {
   getJSXContext(node) {
     try {
       let jsxElement = node;
-      
+
       // Traverse up to find JSX element
-      while (jsxElement && !ts.isJsxElement(jsxElement) && !ts.isJsxSelfClosingElement(jsxElement)) {
+      while (
+        jsxElement &&
+        !ts.isJsxElement(jsxElement) &&
+        !ts.isJsxSelfClosingElement(jsxElement)
+      ) {
         jsxElement = jsxElement.parent;
       }
 
@@ -407,7 +437,7 @@ class EnhancedTranslationExtractor {
         jsx_tag: this.getJSXTagName(jsxElement),
         jsx_attributes: this.extractJSXAttributes(jsxElement),
         is_self_closing: ts.isJsxSelfClosingElement(jsxElement),
-        conditional_render: this.isConditionallyRendered(jsxElement)
+        conditional_render: this.isConditionallyRendered(jsxElement),
       };
 
       return context;
@@ -420,7 +450,10 @@ class EnhancedTranslationExtractor {
   // Get JSX tag name
   getJSXTagName(jsxElement) {
     if (ts.isJsxElement(jsxElement)) {
-      return jsxElement.openingElement.tagName.text || jsxElement.openingElement.tagName.escapedText;
+      return (
+        jsxElement.openingElement.tagName.text ||
+        jsxElement.openingElement.tagName.escapedText
+      );
     } else if (ts.isJsxSelfClosingElement(jsxElement)) {
       return jsxElement.tagName.text || jsxElement.tagName.escapedText;
     }
@@ -431,21 +464,24 @@ class EnhancedTranslationExtractor {
   isConditionallyRendered(jsxElement) {
     try {
       let parent = jsxElement.parent;
-      
+
       while (parent) {
         // Check for logical AND expressions: {condition && <Element>}
-        if (ts.isBinaryExpression(parent) && parent.operatorToken?.kind === ts.SyntaxKind.AmpersandAmpersandToken) {
+        if (
+          ts.isBinaryExpression(parent) &&
+          parent.operatorToken?.kind === ts.SyntaxKind.AmpersandAmpersandToken
+        ) {
           return true;
         }
-        
+
         // Check for conditional expressions: {condition ? <A> : <B>}
         if (ts.isConditionalExpression(parent)) {
           return true;
         }
-        
+
         parent = parent.parent;
       }
-      
+
       return false;
     } catch {
       // Safe fallback for AST parsing issues
@@ -456,28 +492,30 @@ class EnhancedTranslationExtractor {
   // Infer action type from function/variable names and context
   inferActionType(functionName, variableNames, uiType) {
     const actionPatterns = {
-      'create': /create|add|new|insert|register|submit/i,
-      'read': /get|fetch|load|read|show|view|display/i,
-      'update': /update|edit|modify|change|save|patch/i,
-      'delete': /delete|remove|destroy|cancel|clear/i,
-      'navigate': /goto|navigate|redirect|route|push/i,
-      'confirm': /confirm|accept|approve|ok/i,
-      'cancel': /cancel|dismiss|close|abort/i,
-      'export': /export|download|save/i,
-      'import': /import|upload|load/i,
-      'filter': /filter|search|query|find/i,
-      'sort': /sort|order|arrange/i,
-      'refresh': /refresh|reload|sync|update/i
+      create: /create|add|new|insert|register|submit/i,
+      read: /get|fetch|load|read|show|view|display/i,
+      update: /update|edit|modify|change|save|patch/i,
+      delete: /delete|remove|destroy|cancel|clear/i,
+      navigate: /goto|navigate|redirect|route|push/i,
+      confirm: /confirm|accept|approve|ok/i,
+      cancel: /cancel|dismiss|close|abort/i,
+      export: /export|download|save/i,
+      import: /import|upload|load/i,
+      filter: /filter|search|query|find/i,
+      sort: /sort|order|arrange/i,
+      refresh: /refresh|reload|sync|update/i,
     };
 
-    const contextText = [functionName, ...variableNames, uiType].join(' ').toLowerCase();
-    
+    const contextText = [functionName, ...variableNames, uiType]
+      .join(' ')
+      .toLowerCase();
+
     for (const [action, pattern] of Object.entries(actionPatterns)) {
       if (pattern.test(contextText)) {
         return action;
       }
     }
-    
+
     return 'unknown';
   }
 
@@ -489,28 +527,32 @@ class EnhancedTranslationExtractor {
       parent_components: [],
       child_elements: [],
       sibling_count: 0,
-      nesting_level: 0
+      nesting_level: 0,
     };
 
     let current = node;
     let level = 0;
-    
+
     // Traverse up to collect parent components
-    while (current && level < 10) { // Limit to prevent infinite loops
+    while (current && level < 10) {
+      // Limit to prevent infinite loops
       current = current.parent;
       level++;
-      
+
       if (ts.isJsxElement(current) || ts.isJsxSelfClosingElement(current)) {
         const tagName = this.getJSXTagName(current);
-        if (tagName && /^[A-Z]/.test(tagName)) { // React component (starts with capital)
+        if (tagName && /^[A-Z]/.test(tagName)) {
+          // React component (starts with capital)
           hierarchy.parent_components.push(tagName);
         }
         hierarchy.nesting_level = level;
       }
-      
+
       // Count siblings at JSX level
       if (ts.isJsxElement(current)) {
-        hierarchy.sibling_count = current.children ? current.children.length : 0;
+        hierarchy.sibling_count = current.children
+          ? current.children.length
+          : 0;
       }
     }
 
@@ -523,27 +565,34 @@ class EnhancedTranslationExtractor {
       modifies_state: false,
       state_variables: [],
       hook_usage: [],
-      side_effects: false
+      side_effects: false,
     };
 
     // Look for state modifications in the surrounding function
     let functionNode = node;
-    while (functionNode && !ts.isFunctionDeclaration(functionNode) && !ts.isArrowFunction(functionNode)) {
+    while (
+      functionNode &&
+      !ts.isFunctionDeclaration(functionNode) &&
+      !ts.isArrowFunction(functionNode)
+    ) {
       functionNode = functionNode.parent;
     }
 
     if (functionNode) {
       const sourceText = sourceFile.getFullText();
-      const functionText = sourceText.substring(functionNode.getFullStart(), functionNode.getEnd());
-      
+      const functionText = sourceText.substring(
+        functionNode.getFullStart(),
+        functionNode.getEnd(),
+      );
+
       // Detect React hooks
       const hookPatterns = {
-        'useState': /useState\s*\(/g,
-        'useEffect': /useEffect\s*\(/g,
-        'useCallback': /useCallback\s*\(/g,
-        'useMemo': /useMemo\s*\(/g,
-        'useReducer': /useReducer\s*\(/g,
-        'useContext': /useContext\s*\(/g
+        useState: /useState\s*\(/g,
+        useEffect: /useEffect\s*\(/g,
+        useCallback: /useCallback\s*\(/g,
+        useMemo: /useMemo\s*\(/g,
+        useReducer: /useReducer\s*\(/g,
+        useContext: /useContext\s*\(/g,
       };
 
       for (const [hook, pattern] of Object.entries(hookPatterns)) {
@@ -561,7 +610,11 @@ class EnhancedTranslationExtractor {
       }
 
       // Detect side effects
-      if (/fetch|axios|\.post|\.get|\.put|\.delete|localStorage|sessionStorage/.test(functionText)) {
+      if (
+        /fetch|axios|\.post|\.get|\.put|\.delete|localStorage|sessionStorage/.test(
+          functionText,
+        )
+      ) {
         stateContext.side_effects = true;
       }
     }
@@ -574,24 +627,31 @@ class EnhancedTranslationExtractor {
     const navigationContext = {
       triggers_navigation: false,
       navigation_type: null,
-      target_route: null
+      target_route: null,
     };
 
     let functionNode = node;
-    while (functionNode && !ts.isFunctionDeclaration(functionNode) && !ts.isArrowFunction(functionNode)) {
+    while (
+      functionNode &&
+      !ts.isFunctionDeclaration(functionNode) &&
+      !ts.isArrowFunction(functionNode)
+    ) {
       functionNode = functionNode.parent;
     }
 
     if (functionNode) {
       const sourceText = sourceFile.getFullText();
-      const functionText = sourceText.substring(functionNode.getFullStart(), functionNode.getEnd());
-      
+      const functionText = sourceText.substring(
+        functionNode.getFullStart(),
+        functionNode.getEnd(),
+      );
+
       // Detect navigation patterns
       const navigationPatterns = {
-        'router_push': /router\.push|navigate\(/,
-        'link_component': /<Link\s+to=|<NavLink/,
-        'window_location': /window\.location|location\.href/,
-        'history_api': /history\.push|history\.replace/
+        router_push: /router\.push|navigate\(/,
+        link_component: /<Link\s+to=|<NavLink/,
+        window_location: /window\.location|location\.href/,
+        history_api: /history\.push|history\.replace/,
       };
 
       for (const [type, pattern] of Object.entries(navigationPatterns)) {
@@ -613,20 +673,20 @@ class EnhancedTranslationExtractor {
       validation_library: null,
       form_field: null,
       required: false,
-      validation_rules: []
+      validation_rules: [],
     };
 
     // Check for validation in the file imports and surrounding context
     const sourceText = sourceFile.getFullText();
-    
+
     // Detect validation libraries
     const validationLibraries = {
-      'yup': /import.*yup|from ['"]yup['"]/,
-      'joi': /import.*joi|from ['"]joi['"]/,
-      'zod': /import.*zod|from ['"]zod['"]/,
+      yup: /import.*yup|from ['"]yup['"]/,
+      joi: /import.*joi|from ['"]joi['"]/,
+      zod: /import.*zod|from ['"]zod['"]/,
       'react-hook-form': /import.*react-hook-form/,
       'final-form': /import.*final-form/,
-      'formik': /import.*formik/
+      formik: /import.*formik/,
     };
 
     for (const [library, pattern] of Object.entries(validationLibraries)) {
@@ -640,19 +700,22 @@ class EnhancedTranslationExtractor {
     // Look for validation keywords near the translation
     let parent = node.parent;
     let searchDepth = 0;
-    
+
     while (parent && searchDepth < 5) {
-      const parentText = sourceText.substring(parent.getFullStart(), parent.getEnd());
-      
+      const parentText = sourceText.substring(
+        parent.getFullStart(),
+        parent.getEnd(),
+      );
+
       if (/required|validate|validation|error/.test(parentText.toLowerCase())) {
         validationContext.has_validation = true;
-        
+
         if (/required/.test(parentText.toLowerCase())) {
           validationContext.required = true;
           validationContext.validation_rules.push('required');
         }
       }
-      
+
       parent = parent.parent;
       searchDepth++;
     }
@@ -666,18 +729,25 @@ class EnhancedTranslationExtractor {
       has_api_call: false,
       api_endpoint: null,
       http_method: null,
-      async_operation: false
+      async_operation: false,
     };
 
     let functionNode = node;
-    while (functionNode && !ts.isFunctionDeclaration(functionNode) && !ts.isArrowFunction(functionNode)) {
+    while (
+      functionNode &&
+      !ts.isFunctionDeclaration(functionNode) &&
+      !ts.isArrowFunction(functionNode)
+    ) {
       functionNode = functionNode.parent;
     }
 
     if (functionNode) {
       const sourceText = sourceFile.getFullText();
-      const functionText = sourceText.substring(functionNode.getFullStart(), functionNode.getEnd());
-      
+      const functionText = sourceText.substring(
+        functionNode.getFullStart(),
+        functionNode.getEnd(),
+      );
+
       // Detect async functions
       if (/async\s+function|async\s*\(|=>\s*{[\s\S]*await/.test(functionText)) {
         apiContext.async_operation = true;
@@ -689,9 +759,12 @@ class EnhancedTranslationExtractor {
         { pattern: /axios\.get\s*\(\s*['"`]([^'"`]+)['"`]/, method: 'GET' },
         { pattern: /axios\.post\s*\(\s*['"`]([^'"`]+)['"`]/, method: 'POST' },
         { pattern: /axios\.put\s*\(\s*['"`]([^'"`]+)['"`]/, method: 'PUT' },
-        { pattern: /axios\.delete\s*\(\s*['"`]([^'"`]+)['"`]/, method: 'DELETE' },
+        {
+          pattern: /axios\.delete\s*\(\s*['"`]([^'"`]+)['"`]/,
+          method: 'DELETE',
+        },
         { pattern: /\.post\s*\(\s*['"`]([^'"`]+)['"`]/, method: 'POST' },
-        { pattern: /\.get\s*\(\s*['"`]([^'"`]+)['"`]/, method: 'GET' }
+        { pattern: /\.get\s*\(\s*['"`]([^'"`]+)['"`]/, method: 'GET' },
       ];
 
       for (const { pattern, method } of apiPatterns) {
@@ -710,32 +783,42 @@ class EnhancedTranslationExtractor {
 
   // Main extraction function for translate() calls
   extractStringLiteralFromTranslate(node, filePath, sourceFile) {
-    if (ts.isCallExpression(node) &&
-        ts.isIdentifier(node.expression) &&
-        node.expression.text === 'translate' &&
-        node.arguments.length > 0) {
-      
+    if (
+      ts.isCallExpression(node) &&
+      ts.isIdentifier(node.expression) &&
+      node.expression.text === 'translate' &&
+      node.arguments.length > 0
+    ) {
       const firstArg = node.arguments[0];
       let literal = null;
-      
+
       if (ts.isStringLiteral(firstArg)) {
         literal = firstArg.text;
       } else if (ts.isBinaryExpression(firstArg)) {
         literal = this.extractStringFromBinaryExpression(firstArg);
       }
-      
+
       if (literal !== null) {
-        const relativeFilePath = path.relative(path.join(__dirname, '../../src'), filePath);
-        
+        const relativeFilePath = path.relative(
+          path.join(__dirname, '../../src'),
+          filePath,
+        );
+
         // Extract comprehensive context
         const uiContext = this.getUIElementType(node);
         const semanticContext = this.getSemanticContext(node, sourceFile);
         const variables = this.analyzeVariables(literal);
         const textCharacteristics = this.analyzeTextCharacteristics(literal);
-        
+
         // Extract enhanced context information
-        let fileContext, jsxContext, apiContext, componentHierarchy, stateContext, navigationContext, validationContext;
-        
+        let fileContext,
+          jsxContext,
+          apiContext,
+          componentHierarchy,
+          stateContext,
+          navigationContext,
+          validationContext;
+
         try {
           fileContext = this.getFileContext(filePath);
           jsxContext = this.getJSXContext(node);
@@ -746,28 +829,38 @@ class EnhancedTranslationExtractor {
           validationContext = this.detectValidationContext(node, sourceFile);
         } catch {
           // Continue with null values if context extraction fails
-          fileContext = jsxContext = apiContext = componentHierarchy = stateContext = navigationContext = validationContext = null;
+          fileContext =
+            jsxContext =
+            apiContext =
+            componentHierarchy =
+            stateContext =
+            navigationContext =
+            validationContext =
+              null;
         }
-        
+
         // Infer action type from all available context
         const actionType = this.inferActionType(
           semanticContext.functionName || '',
           Object.keys(variables),
-          uiContext.type
+          uiContext.type,
         );
-        
+
         // Get second argument (interpolation context) if present
         let interpolationHint = null;
-        if (node.arguments.length > 1 && ts.isObjectLiteralExpression(node.arguments[1])) {
+        if (
+          node.arguments.length > 1 &&
+          ts.isObjectLiteralExpression(node.arguments[1])
+        ) {
           const obj = node.arguments[1];
           interpolationHint = {};
-          obj.properties.forEach(prop => {
+          obj.properties.forEach((prop) => {
             if (ts.isPropertyAssignment(prop) && ts.isIdentifier(prop.name)) {
               interpolationHint[prop.name.text] = 'variable_reference';
             }
           });
         }
-        
+
         // Store or update entry
         if (!this.literals.has(literal)) {
           this.literals.set(literal, {
@@ -776,18 +869,17 @@ class EnhancedTranslationExtractor {
             contexts: [],
             variables,
             textCharacteristics,
-            firstSeen: relativeFilePath
           });
         }
-        
+
         const entry = this.literals.get(literal);
         entry.locations.add(relativeFilePath);
-        
+
         // Add enhanced context information
         entry.contexts.push({
           file: relativeFilePath,
           line: semanticContext.lineNumber,
-          
+
           // UI and semantic context
           uiElementType: uiContext.type,
           uiAttributes: uiContext.attributes,
@@ -795,36 +887,35 @@ class EnhancedTranslationExtractor {
             isConditional: semanticContext.isConditional,
             isInLoop: semanticContext.isInLoop,
             functionName: semanticContext.functionName,
-            component: semanticContext.containingComponent
+            component: semanticContext.containingComponent,
           },
           interpolationHint,
-          
+
           // File and component context
           fileContext,
           jsxContext,
           actionType,
           apiContext,
-          
+
           // Advanced analysis context
           componentHierarchy,
           stateContext,
           navigationContext,
-          validationContext
+          validationContext,
         });
       }
     }
-    
-    ts.forEachChild(node, childNode => {
+
+    ts.forEachChild(node, (childNode) => {
       this.extractStringLiteralFromTranslate(childNode, filePath, sourceFile);
     });
   }
 
-
   // Get all TypeScript files recursively
   getAllTSFiles(dirPath, arrayOfFiles = []) {
     const files = fs.readdirSync(dirPath);
-    
-    files.forEach(file => {
+
+    files.forEach((file) => {
       const fullPath = path.join(dirPath, file);
       if (fs.statSync(fullPath).isDirectory()) {
         this.getAllTSFiles(fullPath, arrayOfFiles);
@@ -832,17 +923,19 @@ class EnhancedTranslationExtractor {
         arrayOfFiles.push(fullPath);
       }
     });
-    
+
     return arrayOfFiles;
   }
-
 
   // Determine if string is user-facing
   isUserFacingString(uiTypes, characteristics) {
     const nonUserFacingTypes = ['property_value', 'function_call', 'unknown'];
-    const hasUserFacingType = uiTypes.some(type => !nonUserFacingTypes.includes(type));
-    const looksLikeUserText = characteristics.isSentence || characteristics.startsWithCapital;
-    
+    const hasUserFacingType = uiTypes.some(
+      (type) => !nonUserFacingTypes.includes(type),
+    );
+    const looksLikeUserText =
+      characteristics.isSentence || characteristics.startsWithCapital;
+
     return hasUserFacingType || looksLikeUserText;
   }
 
@@ -850,21 +943,21 @@ class EnhancedTranslationExtractor {
   determinePrimaryContext(contexts, uiTypes) {
     // Priority order for UI types
     const typePriority = {
-      'button': 10,
-      'submit_button': 9,
-      'action_button': 8,
-      'title': 7,
-      'label': 6,
-      'error_message': 5,
-      'success_message': 4,
-      'modal_dialog': 3,
-      'notification_message': 2,
-      'text_content': 1
+      button: 10,
+      submit_button: 9,
+      action_button: 8,
+      title: 7,
+      label: 6,
+      error_message: 5,
+      success_message: 4,
+      modal_dialog: 3,
+      notification_message: 2,
+      text_content: 1,
     };
-    
+
     let bestType = 'unknown';
     let bestPriority = 0;
-    
+
     for (const type of uiTypes) {
       const priority = typePriority[type] || 0;
       if (priority > bestPriority) {
@@ -872,66 +965,80 @@ class EnhancedTranslationExtractor {
         bestType = type;
       }
     }
-    
+
     return bestType;
   }
 
   // Generate translator notes
   generateTranslatorNotes(data, uiTypes, primaryContext) {
     const notes = [];
-    
+
     // Context-specific notes
     if (primaryContext === 'button') {
-      notes.push('This text appears on a button. Keep it short and action-oriented.');
+      notes.push(
+        'This text appears on a button. Keep it short and action-oriented.',
+      );
     } else if (primaryContext.includes('title')) {
-      notes.push('This is a title/heading. Use title case if appropriate in your language.');
+      notes.push(
+        'This is a title/heading. Use title case if appropriate in your language.',
+      );
     } else if (primaryContext.includes('message')) {
-      notes.push('This is a user message. Ensure tone is appropriate for the context.');
+      notes.push(
+        'This is a user message. Ensure tone is appropriate for the context.',
+      );
     }
-    
+
     // Variable notes
     if (Object.keys(data.variables).length > 0) {
-      const varTypes = Object.values(data.variables).map(v => v.type);
-      notes.push(`Contains variables: ${Object.keys(data.variables).join(', ')}. Variable types: ${[...new Set(varTypes)].join(', ')}.`);
+      const varTypes = Object.values(data.variables).map((v) => v.type);
+      notes.push(
+        `Contains variables: ${Object.keys(data.variables).join(', ')}. Variable types: ${[...new Set(varTypes)].join(', ')}.`,
+      );
     }
-    
+
     // Text characteristic notes
     if (data.textCharacteristics.hasMarkup) {
-      notes.push('Contains HTML/JSX markup. Preserve all tags and their structure.');
+      notes.push(
+        'Contains HTML/JSX markup. Preserve all tags and their structure.',
+      );
     }
-    
+
     if (data.textCharacteristics.isQuestion) {
-      notes.push('This is a question. Ensure question format is appropriate in your language.');
+      notes.push(
+        'This is a question. Ensure question format is appropriate in your language.',
+      );
     }
-    
+
     if (data.textCharacteristics.isAllCaps) {
-      notes.push('Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language.');
+      notes.push(
+        'Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language.',
+      );
     }
-    
+
     return notes.length > 0 ? notes : undefined;
   }
 
   // Determine primary UI type from list of types
   determinePrimaryUIType(uiTypes) {
     if (!uiTypes || uiTypes.length === 0) return 'unknown';
-    
+
     // Priority order for UI types
     const typePriority = {
-      'submit_button': 10,
-      'action_button': 9,
-      'delete_button': 8,
-      'title': 7,
-      'label': 6,
-      'error_message': 5,
-      'success_message': 4,
-      'modal_dialog': 3,
-      'notification_message': 2,
-      'text_content': 1
+      submit_button: 10,
+      action_button: 9,
+      delete_button: 8,
+      title: 7,
+      label: 6,
+      error_message: 5,
+      success_message: 4,
+      modal_dialog: 3,
+      notification_message: 2,
+      text_content: 1,
     };
-    
+
     let bestType = 'unknown';
     let bestPriority = 0;
-    
+
     for (const type of uiTypes) {
       const priority = typePriority[type] || 0;
       if (priority > bestPriority) {
@@ -939,176 +1046,267 @@ class EnhancedTranslationExtractor {
         bestType = type;
       }
     }
-    
+
     return bestType;
   }
 
   // Generate enhanced template with new context data
   generateEnhancedTemplate() {
     const template = {};
-    
+
     for (const [literal, entry] of this.literals) {
       // Aggregate context from all occurrences
-      const allUiTypes = [...new Set(entry.contexts.map(ctx => ctx.uiElementType).filter(Boolean))];
+      const allUiTypes = [
+        ...new Set(
+          entry.contexts.map((ctx) => ctx.uiElementType).filter(Boolean),
+        ),
+      ];
       const primaryUiType = this.determinePrimaryUIType(allUiTypes);
-      
-      // Collect file contexts 
-      const domains = [...new Set(entry.contexts.map(ctx => ctx.fileContext?.domain).filter(Boolean))];
-      const featureAreas = [...new Set(entry.contexts.map(ctx => ctx.fileContext?.feature_area).filter(Boolean))];
-      const componentTypes = [...new Set(entry.contexts.map(ctx => ctx.fileContext?.component_type).filter(Boolean))];
-      
+
+      // Collect file contexts
+      const domains = [
+        ...new Set(
+          entry.contexts.map((ctx) => ctx.fileContext?.domain).filter(Boolean),
+        ),
+      ];
+      const featureAreas = [
+        ...new Set(
+          entry.contexts
+            .map((ctx) => ctx.fileContext?.feature_area)
+            .filter(Boolean),
+        ),
+      ];
+      const componentTypes = [
+        ...new Set(
+          entry.contexts
+            .map((ctx) => ctx.fileContext?.component_type)
+            .filter(Boolean),
+        ),
+      ];
+
       // Collect action types
-      const actionTypes = [...new Set(entry.contexts.map(ctx => ctx.actionType).filter(Boolean))];
-      
+      const actionTypes = [
+        ...new Set(entry.contexts.map((ctx) => ctx.actionType).filter(Boolean)),
+      ];
+
       // Collect API context
-      const apiEndpoints = [...new Set(entry.contexts.map(ctx => ctx.apiContext?.api_endpoint).filter(Boolean))];
-      const httpMethods = [...new Set(entry.contexts.map(ctx => ctx.apiContext?.http_method).filter(Boolean))];
-      
+      const apiEndpoints = [
+        ...new Set(
+          entry.contexts
+            .map((ctx) => ctx.apiContext?.api_endpoint)
+            .filter(Boolean),
+        ),
+      ];
+      const httpMethods = [
+        ...new Set(
+          entry.contexts
+            .map((ctx) => ctx.apiContext?.http_method)
+            .filter(Boolean),
+        ),
+      ];
+
       // Collect state and interaction context
-      const modifiesState = entry.contexts.some(ctx => ctx.stateContext?.modifies_state);
-      const triggersNavigation = entry.contexts.some(ctx => ctx.navigationContext?.triggers_navigation);
-      const hasValidation = entry.contexts.some(ctx => ctx.validationContext?.has_validation);
-      
+      const modifiesState = entry.contexts.some(
+        (ctx) => ctx.stateContext?.modifies_state,
+      );
+      const triggersNavigation = entry.contexts.some(
+        (ctx) => ctx.navigationContext?.triggers_navigation,
+      );
+      const hasValidation = entry.contexts.some(
+        (ctx) => ctx.validationContext?.has_validation,
+      );
+
       // Collect JSX context
-      const jsxTags = [...new Set(entry.contexts.map(ctx => ctx.jsxContext?.jsx_tag).filter(Boolean))];
-      const conditionalRender = entry.contexts.some(ctx => ctx.jsxContext?.conditional_render);
-      
+      const jsxTags = [
+        ...new Set(
+          entry.contexts.map((ctx) => ctx.jsxContext?.jsx_tag).filter(Boolean),
+        ),
+      ];
+      const conditionalRender = entry.contexts.some(
+        (ctx) => ctx.jsxContext?.conditional_render,
+      );
+
       // Collect component hierarchy info
-      const parentComponents = [...new Set(entry.contexts.flatMap(ctx => ctx.componentHierarchy?.parent_components || []))];
-      const maxNestingLevel = Math.max(...entry.contexts.map(ctx => ctx.componentHierarchy?.nesting_level || 0));
-      
+      const parentComponents = [
+        ...new Set(
+          entry.contexts.flatMap(
+            (ctx) => ctx.componentHierarchy?.parent_components || [],
+          ),
+        ),
+      ];
+      const maxNestingLevel = Math.max(
+        ...entry.contexts.map(
+          (ctx) => ctx.componentHierarchy?.nesting_level || 0,
+        ),
+      );
+
       // Build enhanced context object
       const enhancedContext = {
         primary_ui_type: primaryUiType,
         ui_types: allUiTypes,
         components: parentComponents,
         is_user_facing: true, // assume all extracted strings are user-facing
-        
+
         // Text characteristics
         text_characteristics: entry.textCharacteristics,
-        
+
         // Variables with enhanced info
         variables: entry.variables,
-        
+
         // PHASE 1 ENHANCEMENTS
         file_context: {
           domains: domains,
           feature_areas: featureAreas,
           component_types: componentTypes,
-          paths: Array.from(entry.locations)
+          paths: Array.from(entry.locations),
         },
-        
+
         jsx_context: {
           tags: jsxTags,
-          conditional_render: conditionalRender
+          conditional_render: conditionalRender,
         },
-        
+
         action_types: actionTypes,
-        
+
         api_context: {
           endpoints: apiEndpoints,
           http_methods: httpMethods,
-          has_api_calls: apiEndpoints.length > 0
+          has_api_calls: apiEndpoints.length > 0,
         },
-        
+
         // PHASE 2 ENHANCEMENTS
         interaction_context: {
           modifies_state: modifiesState,
           triggers_navigation: triggersNavigation,
           has_validation: hasValidation,
-          max_nesting_level: maxNestingLevel
+          max_nesting_level: maxNestingLevel,
         },
-        
+
         usage_count: entry.locations.size,
-        first_seen: entry.firstSeen
       };
-      
+
       // Generate enhanced translator notes
-      const translatorNotes = this.generateEnhancedTranslatorNotes(enhancedContext, literal);
-      
+      const translatorNotes = this.generateEnhancedTranslatorNotes(
+        enhancedContext,
+        literal,
+      );
+
       template[literal] = {
         message: literal,
-        description: Array.from(entry.locations).join(', '),
         context: enhancedContext,
-        translator_notes: translatorNotes
+        translator_notes: translatorNotes,
       };
     }
-    
+
     return template;
   }
 
   // Generate enhanced translator notes using new context
   generateEnhancedTranslatorNotes(context, _literal) {
     const notes = [];
-    
+
     // UI context notes
     if (context.primary_ui_type.includes('button')) {
-      notes.push('This text appears on a button. Keep it short and action-oriented.');
+      notes.push(
+        'This text appears on a button. Keep it short and action-oriented.',
+      );
     } else if (context.primary_ui_type.includes('title')) {
-      notes.push('This is a title/heading. Use title case if appropriate in your language.');
+      notes.push(
+        'This is a title/heading. Use title case if appropriate in your language.',
+      );
     } else if (context.primary_ui_type.includes('error')) {
-      notes.push('This is an error message. Ensure tone is helpful and not alarming.');
+      notes.push(
+        'This is an error message. Ensure tone is helpful and not alarming.',
+      );
     } else if (context.primary_ui_type.includes('success')) {
-      notes.push('This is a success message. Use positive, confirming language.');
+      notes.push(
+        'This is a success message. Use positive, confirming language.',
+      );
     }
-    
+
     // Domain-specific notes
     if (context.file_context.domains.includes('marketplace')) {
-      notes.push('This appears in the marketplace context. Use business-appropriate language.');
+      notes.push(
+        'This appears in the marketplace context. Use business-appropriate language.',
+      );
     } else if (context.file_context.domains.includes('admin')) {
-      notes.push('This appears in administrative interface. Use formal, technical language.');
+      notes.push(
+        'This appears in administrative interface. Use formal, technical language.',
+      );
     } else if (context.file_context.domains.includes('billing')) {
-      notes.push('This appears in billing context. Ensure financial terminology is accurate.');
+      notes.push(
+        'This appears in billing context. Ensure financial terminology is accurate.',
+      );
     }
-    
+
     // Action context notes
     if (context.action_types.includes('delete')) {
-      notes.push('This relates to delete/removal actions. Use clear, cautionary language.');
+      notes.push(
+        'This relates to delete/removal actions. Use clear, cautionary language.',
+      );
     } else if (context.action_types.includes('create')) {
-      notes.push('This relates to creation actions. Use encouraging, positive language.');
+      notes.push(
+        'This relates to creation actions. Use encouraging, positive language.',
+      );
     }
-    
+
     // Variable handling notes
     if (Object.keys(context.variables).length > 0) {
-      const varTypes = Object.values(context.variables).map(v => v.type);
-      notes.push(`Contains variables: ${Object.keys(context.variables).join(', ')}. Variable types: ${[...new Set(varTypes)].join(', ')}.`);
-      
+      const varTypes = Object.values(context.variables).map((v) => v.type);
+      notes.push(
+        `Contains variables: ${Object.keys(context.variables).join(', ')}. Variable types: ${[...new Set(varTypes)].join(', ')}.`,
+      );
+
       if (varTypes.includes('number')) {
-        notes.push('Variable contains numbers. Consider plural handling in your language.');
+        notes.push(
+          'Variable contains numbers. Consider plural handling in your language.',
+        );
       }
     }
-    
+
     // Interaction context notes
     if (context.interaction_context.modifies_state) {
-      notes.push('This action modifies application state. Use clear, actionable language.');
+      notes.push(
+        'This action modifies application state. Use clear, actionable language.',
+      );
     }
-    
+
     if (context.interaction_context.triggers_navigation) {
-      notes.push('This action triggers navigation. Consider using navigation-appropriate language.');
+      notes.push(
+        'This action triggers navigation. Consider using navigation-appropriate language.',
+      );
     }
-    
+
     if (context.interaction_context.has_validation) {
-      notes.push('This appears in a form with validation. Ensure message supports user guidance.');
+      notes.push(
+        'This appears in a form with validation. Ensure message supports user guidance.',
+      );
     }
-    
+
     // Conditional rendering notes
     if (context.jsx_context.conditional_render) {
-      notes.push('This text may be conditionally shown/hidden. Ensure context independence.');
+      notes.push(
+        'This text may be conditionally shown/hidden. Ensure context independence.',
+      );
     }
-    
+
     // Text format notes
     if (context.text_characteristics.hasMarkup) {
       notes.push('Contains HTML/JSX markup. Preserve all tags and structure.');
     }
-    
+
     if (context.text_characteristics.isQuestion) {
-      notes.push('This is a question. Ensure question format is appropriate in your language.');
+      notes.push(
+        'This is a question. Ensure question format is appropriate in your language.',
+      );
     }
-    
+
     if (context.text_characteristics.isAllCaps) {
-      notes.push('Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language.');
+      notes.push(
+        'Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language.',
+      );
     }
-    
+
     return notes.length > 0 ? notes : undefined;
   }
 
@@ -1121,18 +1319,20 @@ class EnhancedTranslationExtractor {
         sourceCode,
         ts.ScriptTarget.Latest,
         true,
-        filePath.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS
+        filePath.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS,
       );
-      
+
       this.extractStringLiteralFromTranslate(sourceFile, filePath, sourceFile);
     } catch (error) {
       // Silently skip problematic files - most don't contain translate() calls anyway
       const fileName = path.basename(filePath);
       const errorMsg = error.message.split('\n')[0]; // Get first line of error
-      
+
       // Only show warning for unexpected errors, not AST parsing issues
       if (!errorMsg.includes('Cannot read properties of undefined')) {
-        console.warn(`Warning: Could not process file ${fileName}: ${errorMsg}`);
+        console.warn(
+          `Warning: Could not process file ${fileName}: ${errorMsg}`,
+        );
       }
       // AST parsing warnings are now suppressed as they're typically harmless
     }
@@ -1141,20 +1341,20 @@ class EnhancedTranslationExtractor {
   // Main execution
   run(outputFileName = 'template.json') {
     console.log('🔄 Starting enhanced translation extraction...\n');
-    
+
     const rootDir = path.join(__dirname, '../../');
     const srcDir = path.join(rootDir, 'src');
     const outputFile = path.join(rootDir, outputFileName);
-    
+
     // Get all TypeScript files
     const tsFiles = this.getAllTSFiles(srcDir);
     console.log(`📁 Found ${tsFiles.length} TypeScript files`);
-    
+
     // Process all files with enhanced error handling
     let processedCount = 0;
     let skippedCount = 0;
-    
-    tsFiles.forEach(filePath => {
+
+    tsFiles.forEach((filePath) => {
       try {
         this.processFile(filePath);
         processedCount++;
@@ -1162,45 +1362,57 @@ class EnhancedTranslationExtractor {
         skippedCount++;
       }
     });
-    
-    console.log(`✅ Extracted ${this.literals.size} unique translation strings`);
+
+    console.log(
+      `✅ Extracted ${this.literals.size} unique translation strings`,
+    );
     if (skippedCount > 0) {
-      console.log(`📁 Processed ${processedCount} files successfully, skipped ${skippedCount} files with parsing issues`);
+      console.log(
+        `📁 Processed ${processedCount} files successfully, skipped ${skippedCount} files with parsing issues`,
+      );
     }
-    
+
     // Generate enhanced template
     const template = this.generateEnhancedTemplate();
-    
+
     // Save to file
-    fs.writeFileSync(
-      outputFile,
-      JSON.stringify(template, null, 2),
-      'utf8'
-    );
-    
+    fs.writeFileSync(outputFile, JSON.stringify(template, null, 2), 'utf8');
+
     console.log(`💾 Enhanced template saved to: ${path.basename(outputFile)}`);
-    
+
     // Statistics
-    const userFacingCount = Object.values(template).filter(entry => entry.context.is_user_facing).length;
-    const withVariables = Object.values(template).filter(entry => entry.context.variables).length;
-    const uiTypes = [...new Set(Object.values(template).map(entry => entry.context.primary_ui_type))];
-    
+    const userFacingCount = Object.values(template).filter(
+      (entry) => entry.context.is_user_facing,
+    ).length;
+    const withVariables = Object.values(template).filter(
+      (entry) => entry.context.variables,
+    ).length;
+    const uiTypes = [
+      ...new Set(
+        Object.values(template).map((entry) => entry.context.primary_ui_type),
+      ),
+    ];
+
     console.log('\n📊 Statistics:');
-    console.log(`User-facing strings: ${userFacingCount}/${this.literals.size}`);
+    console.log(
+      `User-facing strings: ${userFacingCount}/${this.literals.size}`,
+    );
     console.log(`Strings with variables: ${withVariables}`);
     console.log(`UI element types found: ${uiTypes.length}`);
-    console.log(`Primary UI types: ${uiTypes.slice(0, 10).join(', ')}${uiTypes.length > 10 ? '...' : ''}`);
+    console.log(
+      `Primary UI types: ${uiTypes.slice(0, 10).join(', ')}${uiTypes.length > 10 ? '...' : ''}`,
+    );
   }
 }
 
 // Execute if run directly
 if (require.main === module) {
   const args = process.argv.slice(2);
-  
+
   // Parse command line arguments
   let outputFileName = 'template.json'; // Default to template.json for compatibility
   let showHelp = false;
-  
+
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     switch (arg) {
@@ -1217,7 +1429,7 @@ if (require.main === module) {
         break;
     }
   }
-  
+
   if (showHelp) {
     console.log(`
 Enhanced Translation Extraction Tool
@@ -1236,7 +1448,7 @@ Examples:
     `);
     process.exit(0);
   }
-  
+
   const extractor = new EnhancedTranslationExtractor();
   extractor.run(outputFileName);
 }

@@ -5,7 +5,7 @@ const path = require('path');
 
 /**
  * TranslationEdit Tool
- * 
+ *
  * Handles atomic batch updates of translations with validation,
  * proper JSON formatting, and error recovery
  */
@@ -28,7 +28,7 @@ class TranslationEdit {
       validateKeys = true,
       createBackup = true,
       dryRun = false,
-      sortKeys = true
+      sortKeys = true,
     } = options;
 
     const results = {
@@ -37,7 +37,7 @@ class TranslationEdit {
       skipped: [],
       errors: [],
       backup: null,
-      summary: {}
+      summary: {},
     };
 
     try {
@@ -57,7 +57,9 @@ class TranslationEdit {
       if (validateKeys) {
         const validation = this.validateKeys(Object.keys(translations));
         if (validation.invalid.length > 0) {
-          results.errors.push(`Invalid keys found: ${validation.invalid.join(', ')}`);
+          results.errors.push(
+            `Invalid keys found: ${validation.invalid.join(', ')}`,
+          );
         }
         // Continue with valid keys only
         for (const invalidKey of validation.invalid) {
@@ -69,17 +71,28 @@ class TranslationEdit {
       // Create backup if requested
       if (createBackup && !dryRun) {
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const backupFile = path.join(path.dirname(this.localeFile), `${this.language}.backup.${timestamp}.json`);
-        fs.writeFileSync(backupFile, JSON.stringify(currentTranslations, null, 2), 'utf8');
+        const backupFile = path.join(
+          path.dirname(this.localeFile),
+          `${this.language}.backup.${timestamp}.json`,
+        );
+        fs.writeFileSync(
+          backupFile,
+          JSON.stringify(currentTranslations, null, 2),
+          'utf8',
+        );
         results.backup = backupFile;
       }
 
       // Apply translations
       const updatedTranslations = { ...currentTranslations };
-      
+
       for (const [key, value] of Object.entries(translations)) {
         // Skip empty or placeholder values
-        if (!value || value === '[MISSING]' || value === '[MISSING - ADD TRANSLATION]') {
+        if (
+          !value ||
+          value === '[MISSING]' ||
+          value === '[MISSING - ADD TRANSLATION]'
+        ) {
           results.skipped.push({ key, reason: 'Empty or placeholder value' });
           continue;
         }
@@ -95,7 +108,7 @@ class TranslationEdit {
           key,
           oldValue: currentTranslations[key] || null,
           newValue: value,
-          action: currentTranslations.hasOwnProperty(key) ? 'updated' : 'added'
+          action: currentTranslations.hasOwnProperty(key) ? 'updated' : 'added',
         });
       }
 
@@ -121,11 +134,10 @@ class TranslationEdit {
         applied: results.applied.length,
         skipped: results.skipped.length,
         errors: results.errors.length,
-        dryRun
+        dryRun,
       };
 
       results.success = results.errors.length === 0;
-
     } catch (error) {
       results.errors.push(`Fatal error: ${error.message}`);
       results.success = false;
@@ -143,7 +155,7 @@ class TranslationEdit {
     const results = {
       valid: [],
       invalid: [],
-      missing: []
+      missing: [],
     };
 
     // Load template for validation
@@ -204,17 +216,14 @@ class TranslationEdit {
    * @returns {Object} Results of the removal operation
    */
   removeTranslations(keys, options = {}) {
-    const {
-      createBackup = true,
-      dryRun = false
-    } = options;
+    const { createBackup = true, dryRun = false } = options;
 
     const results = {
       success: false,
       removed: [],
       notFound: [],
       errors: [],
-      backup: null
+      backup: null,
     };
 
     try {
@@ -228,14 +237,21 @@ class TranslationEdit {
       // Create backup if requested
       if (createBackup && !dryRun) {
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const backupFile = path.join(path.dirname(this.localeFile), `${this.language}.backup.${timestamp}.json`);
-        fs.writeFileSync(backupFile, JSON.stringify(currentTranslations, null, 2), 'utf8');
+        const backupFile = path.join(
+          path.dirname(this.localeFile),
+          `${this.language}.backup.${timestamp}.json`,
+        );
+        fs.writeFileSync(
+          backupFile,
+          JSON.stringify(currentTranslations, null, 2),
+          'utf8',
+        );
         results.backup = backupFile;
       }
 
       // Remove keys
       const updatedTranslations = { ...currentTranslations };
-      
+
       for (const key of keys) {
         if (updatedTranslations.hasOwnProperty(key)) {
           delete updatedTranslations[key];
@@ -252,7 +268,6 @@ class TranslationEdit {
       }
 
       results.success = true;
-
     } catch (error) {
       results.errors.push(`Error: ${error.message}`);
       results.success = false;
@@ -279,7 +294,9 @@ class TranslationEdit {
       totalTranslations: Object.keys(translations).length,
       fileSize: content.length,
       lastModified: stats.mtime,
-      emptyTranslations: Object.values(translations).filter(v => !v || v.trim() === '').length
+      emptyTranslations: Object.values(translations).filter(
+        (v) => !v || v.trim() === '',
+      ).length,
     };
   }
 }
@@ -289,60 +306,76 @@ if (require.main === module) {
   const args = process.argv.slice(2);
   const command = args[0];
   const language = args[1] || 'ru';
-  
+
   const editor = new TranslationEdit(language);
-  
+
   try {
     switch (command) {
       case 'apply':
         const inputFile = args[2];
         const dryRun = args.includes('--dry-run');
-        
+
         if (!inputFile || !fs.existsSync(inputFile)) {
-          console.error('Usage: node translationEdit.cjs apply <language> <input.json> [--dry-run]');
+          console.error(
+            'Usage: node translationEdit.cjs apply <language> <input.json> [--dry-run]',
+          );
           process.exit(1);
         }
-        
+
         const translations = JSON.parse(fs.readFileSync(inputFile, 'utf8'));
         const results = editor.applyTranslations(translations, { dryRun });
         console.log(JSON.stringify(results, null, 2));
         break;
-        
+
       case 'remove':
-        const keys = args.slice(2).filter(arg => !arg.startsWith('--'));
+        const keys = args.slice(2).filter((arg) => !arg.startsWith('--'));
         const dryRunRemove = args.includes('--dry-run');
-        
+
         if (keys.length === 0) {
-          console.error('Usage: node translationEdit.cjs remove <language> <key1> <key2> ... [--dry-run]');
+          console.error(
+            'Usage: node translationEdit.cjs remove <language> <key1> <key2> ... [--dry-run]',
+          );
           process.exit(1);
         }
-        
-        const removeResults = editor.removeTranslations(keys, { dryRun: dryRunRemove });
+
+        const removeResults = editor.removeTranslations(keys, {
+          dryRun: dryRunRemove,
+        });
         console.log(JSON.stringify(removeResults, null, 2));
         break;
-        
+
       case 'get':
         const getKeys = args.slice(2);
         if (getKeys.length === 0) {
-          console.error('Usage: node translationEdit.cjs get <language> <key1> <key2> ...');
+          console.error(
+            'Usage: node translationEdit.cjs get <language> <key1> <key2> ...',
+          );
           process.exit(1);
         }
-        
+
         const currentTranslations = editor.getCurrentTranslations(getKeys);
         console.log(JSON.stringify(currentTranslations, null, 2));
         break;
-        
+
       case 'stats':
         const stats = editor.getFileStats();
         console.log(JSON.stringify(stats, null, 2));
         break;
-        
+
       default:
         console.log('Available commands:');
-        console.log('  apply <language> <input.json> [--dry-run]  - Apply translation updates');
-        console.log('  remove <language> <key1> <key2> ... [--dry-run] - Remove translations');
-        console.log('  get <language> <key1> <key2> ...           - Get current translations');
-        console.log('  stats <language>                           - Get file statistics');
+        console.log(
+          '  apply <language> <input.json> [--dry-run]  - Apply translation updates',
+        );
+        console.log(
+          '  remove <language> <key1> <key2> ... [--dry-run] - Remove translations',
+        );
+        console.log(
+          '  get <language> <key1> <key2> ...           - Get current translations',
+        );
+        console.log(
+          '  stats <language>                           - Get file statistics',
+        );
         break;
     }
   } catch (error) {
