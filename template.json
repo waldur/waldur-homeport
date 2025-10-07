@@ -64624,7 +64624,8 @@
         "InvoiceItemsTable",
         "OverviewItemTr",
         "Card",
-        "CheckoutPricingRow"
+        "CheckoutPricingRow",
+        "QuotaSingleView"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -64683,6 +64684,7 @@
           "marketplace/details/plan/TotalLimitComponentsTable.tsx",
           "marketplace/details/plan/UsageComponentRow.tsx",
           "marketplace/resources/change-limits/ComponentTotalRow.tsx",
+          "marketplace/resources/details/ResourceComponentItem.tsx",
           "marketplace/resources/usage/UsageExportDropdown.tsx",
           "reporting/invoices/utils.ts"
         ]
@@ -64697,7 +64699,8 @@
           "h3",
           "CheckoutPricingRow",
           "td",
-          "div"
+          "div",
+          "QuotaSingleView"
         ],
         "conditional_render": true
       },
@@ -64715,7 +64718,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 20
+      "usage_count": 21
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -140152,7 +140155,8 @@
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
-        "title"
+        "title",
+        "unknown"
       ],
       "components": [
         "Table"
@@ -140178,20 +140182,24 @@
         ],
         "feature_areas": [
           "offerings",
-          "update"
+          "update",
+          "details"
         ],
         "component_types": [
           "list",
-          "form"
+          "form",
+          "page"
         ],
         "paths": [
           "marketplace/offerings/PriceList.tsx",
-          "marketplace/offerings/update/components/ComponentsSection.tsx"
+          "marketplace/offerings/update/components/ComponentsSection.tsx",
+          "marketplace/resources/details/QuotaSingleView.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Table"
+          "Table",
+          "span"
         ],
         "conditional_render": false
       },
@@ -140209,7 +140217,7 @@
         "has_validation": false,
         "max_nesting_level": 7
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -174655,6 +174663,133 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Limit frequency": {
+    "message": "Limit frequency",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "marketplace/resources/details/QuotaSingleView.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Current usage": {
+    "message": "Current usage",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "marketplace/resources/details/QuotaSingleView.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
   "Backend state": {
     "message": "Backend state",
     "context": {
@@ -174843,6 +174978,201 @@
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Quarterly": {
+    "message": "Quarterly",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "QuotaSingleView"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/ResourceComponentItem.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "QuotaSingleView"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Annual": {
+    "message": "Annual",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "QuotaSingleView"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/ResourceComponentItem.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "QuotaSingleView"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Monthly": {
+    "message": "Monthly",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "QuotaSingleView"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "marketplace/resources/details/ResourceComponentItem.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "QuotaSingleView"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
       },
       "usage_count": 1
     },

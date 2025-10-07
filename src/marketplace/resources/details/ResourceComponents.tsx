@@ -16,6 +16,16 @@ export const ResourceComponents = ({
 }) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 320 });
 
+  if (components.length === 1) {
+    return (
+      <ResourceComponentItem
+        expanded
+        resource={resource}
+        component={components[0]}
+      />
+    );
+  }
+
   return (
     <>
       <Row>

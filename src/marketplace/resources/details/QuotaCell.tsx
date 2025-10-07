@@ -1,7 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { ProgressBar } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
+
+import { QuotaProgressBar } from './QuotaProgressBar';
 
 interface QuotaCellProps {
   usage: number | string;
@@ -10,6 +11,16 @@ interface QuotaCellProps {
   title: any;
   description?: string;
 }
+
+export const getUsagePercentOfLimitComponent = (limit, usage) => {
+  const limitValue =
+    limit === undefined || limit === null
+      ? Infinity
+      : Number(limit) === 0
+        ? Number(usage)
+        : Number(limit);
+  return Math.round((Number(usage) / limitValue) * 100);
+};
 
 const CellDescription = ({
   usage,
@@ -42,13 +53,8 @@ export const QuotaCell = ({
   title,
   description,
 }: QuotaCellProps) => {
-  const limitValue =
-    limit === undefined || limit === null
-      ? Infinity
-      : Number(limit) === 0
-        ? Number(usage)
-        : Number(limit);
-  const percent = Math.round((Number(usage) / limitValue) * 100);
+  const percent = getUsagePercentOfLimitComponent(limit, usage);
+
   return (
     <div className="d-flex flex-column mb-3">
       <CellDescription
@@ -59,11 +65,7 @@ export const QuotaCell = ({
         units={units}
       />
 
-      <ProgressBar
-        variant={percent < 33 ? 'primary' : percent < 66 ? 'warning' : 'danger'}
-        now={percent}
-        className="h-4px resource-progress shadow-none w-100 mt-1"
-      />
+      <QuotaProgressBar percent={percent} className="mt-1" />
     </div>
   );
 };
