@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
-import { proposalRequestedOfferingsList } from 'waldur-js-client';
+import { proposalProtectedCallsOfferingsList } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
 import { required } from '@waldur/core/validators';
@@ -10,8 +10,9 @@ import { translate } from '@waldur/i18n';
 
 const getOfferings = (call_uuid: string) =>
   getAllPages((page) =>
-    proposalRequestedOfferingsList({
-      query: { page, page_size: 1000, call_uuid, state: ['accepted'] },
+    proposalProtectedCallsOfferingsList({
+      query: { page, page_size: 1000, state: 'accepted' },
+      path: { uuid: call_uuid },
     }),
   );
 
