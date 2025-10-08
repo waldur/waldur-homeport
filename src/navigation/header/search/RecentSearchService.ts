@@ -75,12 +75,12 @@ export const useRecentSearch = () => {
         params: item.params,
         type,
       };
-      event && event.preventDefault();
+      if (event) event.preventDefault();
       recentItem.params = pickBy(recentItem.params, (x) => x !== null);
       if (findRecentSearchItem(recentItem.to, recentItem.params)) return;
       RecentSearchService.add(recentItem);
       setRecentSearchItems(getRecentSearchList());
-      event && event.stopPropagation();
+      if (event) event.stopPropagation();
     },
     [
       recentSearchItems,

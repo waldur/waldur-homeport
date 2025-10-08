@@ -12,7 +12,6 @@ import { Tip } from '@waldur/core/Tooltip';
 import { required, requiredArray } from '@waldur/core/validators';
 import { SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { useCategories } from '@waldur/marketplace/category/useCategories';
 import { Category, Offering } from '@waldur/marketplace/types';
 
 import { importOfferingSelector } from './selectors';
@@ -92,7 +91,6 @@ const FieldsListMapping = ({
 };
 
 export const SelectCategoryTab = () => {
-  useCategories;
   const {
     isLoading,
     data: categories,

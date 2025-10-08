@@ -94,14 +94,15 @@ export const ConfigurationEditDialog = reduxForm<
       const isFileRemoving =
         item.type === 'image_field' && formData.value === null;
 
-      isFileRemoving
-        ? await overrideSettings({
-            body: { [item.key]: null },
-          })
-        : await overrideSettings({
-            body: { [item.key]: formData.value },
-            ...formDataOptions,
-          });
+      if (isFileRemoving)
+        await overrideSettings({
+          body: { [item.key]: null },
+        });
+      else
+        await overrideSettings({
+          body: { [item.key]: formData.value },
+          ...formDataOptions,
+        });
 
       ENV.plugins.WALDUR_CORE[item.key] = formData.value;
       dispatch(showSuccess(translate('Configuration has been updated.')));

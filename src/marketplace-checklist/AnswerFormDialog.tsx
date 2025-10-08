@@ -88,7 +88,7 @@ export const AnswerFormDialog: FC<AnswerFormDialogProps> = ({ resolve }) => {
       } else {
         showSuccess(translate('Answer has been updated.'));
       }
-      resolve.refetch && resolve.refetch();
+      if (resolve.refetch) resolve.refetch();
       closeDialog();
     } catch (e) {
       showErrorResponse(e, translate('Unable to submit answer'));

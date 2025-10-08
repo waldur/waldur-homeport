@@ -57,7 +57,7 @@ export const ActionButtonResource: React.FC<ActionButtonResourceProps> = (
   const [open, onToggle] = useBoolean(false);
 
   const loadActionsIfOpen = React.useCallback(() => {
-    open && getActions();
+    if (open) getActions();
   }, [open, getActions]);
 
   React.useEffect(loadActionsIfOpen, [open, loadActionsIfOpen]);

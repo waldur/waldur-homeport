@@ -1043,6 +1043,7 @@ class MenuComponent {
 
     // Resize handler
     window.addEventListener('resize', () => {
+      // oxlint-disable-next-line no-unassigned-vars
       let timer;
       throttle(
         timer,

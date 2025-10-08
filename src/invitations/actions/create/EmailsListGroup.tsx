@@ -54,7 +54,7 @@ export const EmailsListGroup = ({
   }, [fields, project, refreshPageOnAdd]);
 
   const removeRow = (index) => {
-    fields._isFieldArray && fields.remove(index);
+    if (fields._isFieldArray) fields.remove(index);
     refreshPageOnRemove();
   };
 

@@ -44,8 +44,8 @@ export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
         {...rest}
         {...(to ? sref : {})}
         onClick={(event) => {
-          sref?.onClick && sref.onClick(event);
-          onClick && onClick(event);
+          if (sref?.onClick) sref.onClick(event);
+          if (onClick) onClick(event);
         }}
         ref={ref}
         className={classNames(className, ellipsisClass)}

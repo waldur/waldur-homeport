@@ -111,7 +111,7 @@ export const SavedFilterSelect = ({
       dispatch(setSavedFilters(table, TableFilterService.list(key).reverse()));
       if (!deselect || !value) {
         dispatch(selectSavedFilter(table, value));
-        onSelect && onSelect();
+        if (onSelect) onSelect();
       } else {
         dispatch(selectSavedFilter(table, null));
       }
@@ -137,7 +137,7 @@ export const SavedFilterSelect = ({
       try {
         TableFilterService.remove(key, item);
         setSelected(null);
-        onSelect && onSelect();
+        if (onSelect) onSelect();
       } catch (error) {
         dispatch(
           showErrorResponse(error, translate('Unable to remove the filter.')),

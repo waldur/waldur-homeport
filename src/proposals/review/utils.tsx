@@ -32,7 +32,7 @@ export const useReviewActions = (review: ProposalReview, refetch = null) => {
       }
       try {
         await proposalReviewsAccept({ path: { uuid: review.uuid } });
-        refetch && refetch();
+        if (refetch) refetch();
         showSuccess(translate('Review has been accepted.'));
 
         try {
@@ -71,7 +71,7 @@ export const useReviewActions = (review: ProposalReview, refetch = null) => {
       }
       try {
         await proposalReviewsReject({ path: { uuid: review.uuid } });
-        refetch && refetch();
+        if (refetch) refetch();
         dispatch(showSuccess(translate('Review has been rejected.')));
       } catch (response) {
         dispatch(

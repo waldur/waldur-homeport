@@ -34,7 +34,7 @@ export const LinkInvoiceAction: FunctionComponent<{ row }> = ({
   const [open, onToggle] = useBoolean(false);
 
   const loadInvoicesIfOpen = useCallback(() => {
-    open && getInvoices();
+    if (open) getInvoices();
   }, [open, getInvoices]);
 
   useEffect(loadInvoicesIfOpen, [open]);

@@ -61,7 +61,7 @@ export const ResourceRequestItemActions = ({
         await proposalProposalsResourcesDestroy({
           path: { uuid: proposal.uuid, obj_uuid: row.uuid },
         });
-        refetch && refetch();
+        if (refetch) refetch();
         dispatch(showSuccess(translate('Resource request has been deleted.')));
       } catch (response) {
         dispatch(

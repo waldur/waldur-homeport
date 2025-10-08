@@ -206,7 +206,7 @@ export const ProjectImportDialog: FC<ProjectImportDialogProps> = (props) => {
 
         formProps.destroy();
         dispatch(closeModalDialog());
-        props.resolve.refetch && props.resolve.refetch();
+        if (props.resolve.refetch) props.resolve.refetch();
         dispatch(
           showSuccess(
             formData.import_type === 'projects_only' ||

@@ -225,7 +225,7 @@ const TableSidebarFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
   );
   useEffect(() => {
     _setFilter(itemValue);
-    props.onApply &&
+    if (props.onApply)
       props.onApply({ title: props.title, name: props.name, value: itemValue });
   }, [itemValue, _setFilter]);
 
@@ -358,7 +358,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
 
   const onApply = () => {
     _setFilter(itemValue);
-    props.onApply &&
+    if (props.onApply)
       props.onApply({ title: props.title, name: props.name, value: itemValue });
     apply();
   };

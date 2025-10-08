@@ -201,12 +201,12 @@ export const useFavoritePages = () => {
 
   const addFavoritePage = useCallback(
     (page: Omit<FavoritePage, 'id'>, event = null) => {
-      event && event.preventDefault();
+      if (event) event.preventDefault();
       page.params = pickBy(page.params, (value) => value !== null);
       if (findFavoritePage(page.state, page.params)) return;
       FavoritePageService.add(page);
       setFavPages(getPagesList());
-      event && event.stopPropagation();
+      if (event) event.stopPropagation();
     },
     [favPages, setFavPages, getPagesList, findFavoritePage],
   );
@@ -249,11 +249,11 @@ export const useFavoritePages = () => {
 
   const removeFavorite = useCallback(
     (state, params, event = null) => {
-      event && event.preventDefault();
+      if (event) event.preventDefault();
       const page = findFavoritePage(state, params);
       FavoritePageService.remove(page);
       setFavPages(getPagesList());
-      event && event.stopPropagation();
+      if (event) event.stopPropagation();
     },
     [setFavPages, getPagesList, findFavoritePage],
   );

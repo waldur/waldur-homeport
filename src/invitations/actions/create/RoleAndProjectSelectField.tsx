@@ -53,7 +53,7 @@ const RoleAndProjectSelectPopup: React.FC<RoleAndProjectSelectPopupProps> = ({
         select(role, null);
         MenuComponent.hideDropdowns(null);
       } else {
-        refSearch?.current && refSearch.current.focus();
+        if (refSearch?.current) refSearch.current.focus();
       }
     },
     [select, selectedRole, selectedProject, refSearch?.current],

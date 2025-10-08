@@ -246,7 +246,11 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
     let msg = '';
     data.forEach((user) => {
       const validate = validateOfferingUserCreation(user);
-      validate.valid ? valid++ : invalid++;
+      if (validate.valid) {
+        valid++;
+      } else {
+        invalid++;
+      }
       if (!msg && !validate.valid) {
         if (validate.errors.includes('invalid')) {
           msg = translate('Contains invalid users.');

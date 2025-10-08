@@ -295,7 +295,7 @@ export const getResourceTabs = ({
 };
 
 export const fetchData = async (resource: Resource) => {
-  let scope, nestedScope;
+  let scope;
   if (resource.scope) {
     scope = (
       await marketplaceResourcesDetailsRetrieve({
@@ -321,7 +321,6 @@ export const fetchData = async (resource: Resource) => {
 
   return {
     scope,
-    nestedScope,
     components,
     offering,
     lexisLinksCount,

@@ -268,7 +268,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
           MenuComponent.hideDropdowns(null);
         }, 100);
       }
-      props.toggleFilterMenu && props.toggleFilterMenu(true);
+      if (props.toggleFilterMenu) props.toggleFilterMenu(true);
     },
     [props.applyFiltersFn, props.toggleFilterMenu, menuInstance?.current],
   );

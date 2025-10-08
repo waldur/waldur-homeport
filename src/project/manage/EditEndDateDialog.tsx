@@ -144,8 +144,7 @@ const FormModalComponent: FC<
 
   const ignoredResources = useMemo(() => {
     const items: Resource[] = [];
-    resources?.length &&
-      selectedResources &&
+    if (resources?.length && selectedResources)
       resources.forEach((resource) => {
         if (
           !selectedResources.some(

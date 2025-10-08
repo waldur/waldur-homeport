@@ -198,6 +198,7 @@ class SwapperComponent {
 
 // Window resize handler
 window.addEventListener('resize', function () {
+  // oxlint-disable-next-line no-unassigned-vars
   let timer;
   throttle(
     timer,

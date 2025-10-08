@@ -6,14 +6,7 @@
 import * as echarts from 'echarts';
 
 function registerDarkTheme() {
-  const log = function (msg) {
-    if (typeof console !== 'undefined') {
-      // eslint-disable-next-line no-console
-      console && console.error && console.error(msg);
-    }
-  };
   if (!echarts) {
-    log('ECharts is not Loaded');
     return;
   }
   const contrastColor = '#eee';
@@ -166,14 +159,7 @@ function registerDarkTheme() {
  * light-metronic theme
  */
 function registerLightTheme() {
-  const log = function (msg) {
-    if (typeof console !== 'undefined') {
-      // eslint-disable-next-line no-console
-      console && console.error && console.error(msg);
-    }
-  };
   if (!echarts) {
-    log('ECharts is not Loaded');
     return;
   }
 

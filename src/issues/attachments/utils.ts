@@ -21,7 +21,11 @@ export const validateFiles = (
         excludedTypes,
       );
 
-    isRejected ? rejected.push(file) : accepted.push(file);
+    if (isRejected) {
+      rejected.push(file);
+    } else {
+      accepted.push(file);
+    }
   }
 
   return {

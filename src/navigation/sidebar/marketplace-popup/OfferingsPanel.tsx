@@ -125,7 +125,7 @@ export const OfferingsPanel: FunctionComponent<{
   const handleOfferingClick = useCallback(
     (offering: Offering) => {
       selectOffering(offering);
-      onSelect && onSelect(offering);
+      if (onSelect) onSelect(offering);
       if (!selectable) {
         router.stateService.go('marketplace-offering-public', {
           offering_uuid: offering.uuid,

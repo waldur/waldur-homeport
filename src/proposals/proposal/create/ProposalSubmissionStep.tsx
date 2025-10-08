@@ -107,7 +107,7 @@ export const ProposalSubmissionStep: FC<{
             {},
           ),
         );
-        refetch && refetch();
+        if (refetch) refetch();
       } catch (error) {
         dispatch(showErrorResponse(error, translate('Something went wrong')));
       }
@@ -136,7 +136,7 @@ export const ProposalSubmissionStep: FC<{
           formValues.supporting_documentation,
         );
         await proposalProposalsSubmit({ path: { uuid: proposal_uuid } });
-        refetch && refetch();
+        if (refetch) refetch();
         dispatch(showSuccess(translate('Proposal submitted successfully')));
       } catch (error) {
         dispatch(showErrorResponse(error, translate('Something went wrong')));

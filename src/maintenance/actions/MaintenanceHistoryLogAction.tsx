@@ -5,7 +5,7 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 export const MaintenanceHistoryLogAction = ({ row, refetch }) => {
   const callback = () => {
-    row & refetch;
+    if (row) refetch();
   };
   return (
     <ActionItem

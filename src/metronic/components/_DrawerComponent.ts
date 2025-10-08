@@ -347,6 +347,7 @@ class DrawerComponent {
   public static initGlobalHandlers(): void {
     // Window Resize Handling
     window.addEventListener('resize', function () {
+      // oxlint-disable-next-line no-unassigned-vars
       let timer: number | undefined;
       throttle(
         timer,

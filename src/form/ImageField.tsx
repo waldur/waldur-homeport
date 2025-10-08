@@ -49,7 +49,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
 
   const changeImage = useCallback(
     (imageFile: ImageType) => {
-      input.onChange && input.onChange(imageFile);
+      if (input.onChange) input.onChange(imageFile);
       previewImage(imageFile, previewRef.current);
       if (!imageFile && inputRef.current) {
         inputRef.current.value = null;

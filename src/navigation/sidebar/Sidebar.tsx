@@ -51,7 +51,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
       data-kt-drawer-direction="start"
       data-kt-drawer-toggle="#kt_aside_mobile_toggle"
       onMouseEnter={() => {
-        layout.config.aside.minimized && setIsAsideHovered(true);
+        if (layout.config.aside.minimized) setIsAsideHovered(true);
       }}
       onMouseLeave={() => setIsAsideHovered(false)}
     >

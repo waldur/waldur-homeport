@@ -38,7 +38,9 @@ export const SearchItem = (props: SearchItemProps) => {
       params={props.params}
       className="search-result-item d-flex text-dark text-hover-primary align-items-center py-2 px-5 bg-hover-primary-50"
       onClick={(e) => {
-        props.onClick ? props.onClick(props) : e.stopPropagation();
+        if (props.onClick) {
+          props.onClick(props);
+        } else e.stopPropagation();
         syncResourceFilters(getResourceFilterFromSearchItem(props));
       }}
       aria-hidden={true}

@@ -483,7 +483,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     ) {
       return;
     }
-    doFetch && this.props.fetch();
+    if (doFetch) this.props.fetch();
   }
 
   componentDidUpdate(prevProps: TableProps) {

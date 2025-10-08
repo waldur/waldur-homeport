@@ -24,7 +24,7 @@ export const TermsOfServiceCheckbox: FunctionComponent<
           type="checkbox"
           checked={Boolean(user.agreement_date)}
           onChange={() => {
-            !user.agreement_date && callback({ agree_with_policy: true });
+            if (!user.agreement_date) callback({ agree_with_policy: true });
           }}
           disabled={isLoading || Boolean(user.agreement_date)}
         />

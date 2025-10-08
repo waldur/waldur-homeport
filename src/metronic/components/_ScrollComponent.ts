@@ -260,6 +260,7 @@ class ScrollComponent {
   public static resize() {
     // Window Resize Handling
     window.addEventListener('resize', function () {
+      // oxlint-disable-next-line no-unassigned-vars
       let timer;
       throttle(
         timer,
