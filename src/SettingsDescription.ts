@@ -914,5 +914,40 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('Onboarding settings'),
+    items: [
+      {
+        key: 'ONBOARDING_VERIFICATION_EXPIRY_HOURS',
+        description: translate('Number of hours after which onboarding verifications expire.'),
+        default: 48,
+        type: 'integer',
+      },
+      {
+        key: 'ONBOARDING_ARIREGISTER_BASE_URL',
+        description: translate('Base URL for Estonian Äriregister API endpoint.'),
+        default: 'https://demo-ariregxmlv6.rik.ee/',
+        type: 'url_field',
+      },
+      {
+        key: 'ONBOARDING_ARIREGISTER_USERNAME',
+        description: translate('Username for Estonian Äriregister API authentication.'),
+        default: '',
+        type: 'text_field',
+      },
+      {
+        key: 'ONBOARDING_ARIREGISTER_PASSWORD',
+        description: translate('Password for Estonian Äriregister API authentication.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'ONBOARDING_ARIREGISTER_TIMEOUT',
+        description: translate('Timeout in seconds for Estonian Äriregister API requests.'),
+        default: 30,
+        type: 'integer',
+      },
+    ],
+  },
 ];
 
