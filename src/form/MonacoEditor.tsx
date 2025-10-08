@@ -1,4 +1,5 @@
 import { Editor, loader } from '@monaco-editor/react';
+import * as monacoEditor from 'monaco-editor';
 import { useEffect, useState } from 'react';
 
 import { LoadingSpinner } from '@waldur/table/TableRefreshButton';
@@ -552,6 +553,8 @@ export const MonacoEditor = ({
   const [isMonacoReady, setIsMonacoReady] = useState(false);
 
   useEffect(() => {
+    // Use local version of editor (not CDN)
+    loader.config({ monaco: monacoEditor });
     loader.init().then((monaco) => {
       configureDjangoHTML(monaco);
       setIsMonacoReady(true);
