@@ -42,7 +42,11 @@ export function validateState(
   ...validStates: (ResourceState | MarketplaceResourceState)[]
 ): (ctx: ActionContext) => string {
   return (ctx) => {
-    if (!validStates.includes(ctx.resource.state)) {
+    if (
+      !validStates
+        .map((state) => state.toLowerCase())
+        .includes(ctx.resource.state.toLowerCase())
+    ) {
       return translate('Valid states for operation: {validStates}.', {
         validStates: validStates.join(', '),
       });
