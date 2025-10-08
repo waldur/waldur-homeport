@@ -106,12 +106,6 @@ class ThaiTranslationAnalyzer {
       }
     }
 
-    if (this.needsThaiPolitenessParticles(english, thai, context)) {
-      issues.push({
-        severity: 'medium',
-      });
-    }
-
     // Check for word spacing (Thai doesn't use spaces between words)
     if (this.hasInappropriateThaiSpacing(thai)) {
       issues.push({
@@ -268,10 +262,6 @@ class ThaiTranslationAnalyzer {
     }
 
     return true; // Default to OK if not an action word
-  }
-
-  needsThaiPolitenessParticles(english, thai, context) {
-    return false;
   }
 
   hasInappropriateThaiSpacing(thai) {
