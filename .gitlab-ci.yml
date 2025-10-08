@@ -279,37 +279,31 @@ Build test docker image:
   stage: test
   interruptible: true
   image:
-    name: "gcr.io/kaniko-project/executor:debug"
+    name: quay.io/containers/buildah:latest
     entrypoint: [""]
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
       when: never
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  variables:
+    BUILDAH_FORMAT: docker
+    BUILDAH_ISOLATION: chroot
   before_script:
     - echo "[+] Build and publish docker image for merge request ${CI_MERGE_REQUEST_ID}"
-    - mkdir build-info
+    - mkdir -p build-info
     - echo $CI_COMMIT_SHA > build-info/COMMIT_SHA
+    # Log in to GitLab Container Registry
+    - echo "${CI_REGISTRY_PASSWORD}" | buildah login -u "${CI_REGISTRY_USER}" --password-stdin "${CI_REGISTRY}"
   script:
-    - echo $CI_REGISTRY_IMAGE:$CI_MERGE_REQUEST_ID
-    - AUTH=$(echo -n "${CI_REGISTRY_USER}:${CI_REGISTRY_PASSWORD}" | base64)
+    - echo "[+] Building image ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}"
     - |
-      cat << EOF > /kaniko/.docker/config.json
-      {
-        "auths": {
-          "https://${CI_REGISTRY}": {
-            "auth": "${AUTH}"
-          }
-        }
-      }
-      EOF
-    - /kaniko/executor
-      --context "${CI_PROJECT_DIR}"
-      --dockerfile "${CI_PROJECT_DIR}/Dockerfile"
-      --registry-map docker.io=registry.hpc.ut.ee/mirror
-      --registry-map index.docker.io=registry.hpc.ut.ee/mirror
-      --build-arg="DOCKER_REGISTRY=${DOCKER_REGISTRY}"
-      --build-arg="ASSET_PATH=/${CI_MERGE_REQUEST_ID}/"
-      --destination "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}"
+      buildah bud \
+        --build-arg DOCKER_REGISTRY="${DOCKER_REGISTRY}" \
+        --build-arg ASSET_PATH="/${CI_MERGE_REQUEST_ID}/" \
+        -t "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}" \
+        -f "${CI_PROJECT_DIR}/Dockerfile" \
+        "${CI_PROJECT_DIR}"
+    - buildah push "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}"
 
 Test k8s deployment:
   stage: validate

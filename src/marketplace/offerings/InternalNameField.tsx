@@ -12,11 +12,13 @@ interface InternalNameFieldProps {
   readOnly?: boolean;
 }
 
-const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_-]+$');
+const INTERNAL_NAME_PATTERN = new RegExp('^[a-zA-Z0-9_\\-/:]+$');
 
 const validateInternalName = (value: string) =>
   !value.match(INTERNAL_NAME_PATTERN)
-    ? translate('Please use Latin letters without spaces only.')
+    ? translate(
+        'Please use Latin letters, numbers, underscores, hyphens, slashes, and colons only.',
+      )
     : undefined;
 
 const validators = [required, validateInternalName];

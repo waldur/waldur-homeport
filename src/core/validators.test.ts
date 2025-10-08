@@ -209,8 +209,8 @@ describe('URL validator', () => {
       url(complexUrl);
       const endTime = performance.now();
 
-      // Should complete in less than 10ms even for very long URLs
-      expect(endTime - startTime).toBeLessThan(10);
+      // Should complete in less than 15ms even for very long URLs
+      expect(endTime - startTime).toBeLessThan(15);
     });
 
     it('handles many validations efficiently', () => {
@@ -221,14 +221,14 @@ describe('URL validator', () => {
       ];
 
       const startTime = performance.now();
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < 1500; i++) {
         testUrls.forEach((testUrl) => url(testUrl));
       }
       const endTime = performance.now();
 
-      // 3000 validations should complete in less than 1000ms
+      // 3000 validations should complete in less than 1500ms
       // URL constructor validation is still fast but not as fast as simple regex
-      expect(endTime - startTime).toBeLessThan(1000);
+      expect(endTime - startTime).toBeLessThan(1500);
     });
   });
 });

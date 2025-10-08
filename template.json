@@ -137754,8 +137754,8 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Please use Latin letters without spaces only.": {
-    "message": "Please use Latin letters without spaces only.",
+  "Please use Latin letters, numbers, underscores, hyphens, slashes, and colons only.": {
+    "message": "Please use Latin letters, numbers, underscores, hyphens, slashes, and colons only.",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -137764,8 +137764,8 @@
       "components": [],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 45,
-        "wordCount": 7,
+        "length": 82,
+        "wordCount": 11,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
