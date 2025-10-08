@@ -15496,6 +15496,7 @@
         "feature_areas": [
           "agreements",
           "announcements",
+          "notifications",
           "roles",
           "issue-templates",
           "payment-profiles",
@@ -15529,8 +15530,8 @@
           "list",
           "filter",
           "form",
-          "dialog",
           "component",
+          "dialog",
           "page",
           "navigation"
         ],
@@ -15538,6 +15539,7 @@
           "administration/agreements/UserAgreementsList.tsx",
           "administration/announcements/AnnouncementFilter.tsx",
           "administration/announcements/AnnouncementForm.tsx",
+          "administration/notifications/VariablesPane.tsx",
           "administration/roles/RoleForm.tsx",
           "administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx",
           "administration/service-desk/issue-templates/IssueTemplateForm.tsx",
@@ -15591,9 +15593,9 @@
           "Table",
           "TableFilterItem",
           "SelectField",
+          "th",
           "b",
           "Field",
-          "th",
           "FormGroup",
           "td",
           "Component"
@@ -15614,7 +15616,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 49
+      "usage_count": 50
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -19787,8 +19789,8 @@
       "primary_ui_type": "title",
       "ui_types": [
         "generic_element",
-        "title",
         "unknown",
+        "title",
         "label",
         "property_value",
         "function_call"
@@ -19897,15 +19899,15 @@
         ],
         "component_types": [
           "component",
-          "dialog",
           "form",
           "list",
+          "dialog",
           "page",
           "card"
         ],
         "paths": [
           "administration/auto-provisioning-rules/Step3FinalConfig.tsx",
-          "administration/notifications/NotificationUpdateDialog.tsx",
+          "administration/notifications/VariablesPane.tsx",
           "administration/quick-shortcuts/QuickShortcutForm.tsx",
           "administration/quick-shortcuts/QuickShortcutsList.tsx",
           "administration/roles/RolesList.tsx",
@@ -23608,23 +23610,21 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Reset": {
-    "message": "Reset",
+  "Reset to default": {
+    "message": "Reset to default",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "function_call",
-        "unknown",
-        "generic_element"
+        "function_call"
       ],
       "components": [
         "Button",
-        "AsyncActionItem"
+        "Tab"
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 5,
-        "wordCount": 1,
+        "length": 16,
+        "wordCount": 3,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -23638,29 +23638,21 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "admin",
-          "marketplace",
-          "infrastructure"
+          "admin"
         ],
         "feature_areas": [
-          "notifications",
-          "integration",
-          "actions"
+          "notifications"
         ],
         "component_types": [
-          "form",
-          "button"
+          "form"
         ],
         "paths": [
-          "administration/notifications/NotificationForm.tsx",
-          "marketplace/offerings/update/integration/ScriptEditorHeader.tsx",
-          "vmware/actions/ResetAction.tsx"
+          "administration/notifications/NotificationForm.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Button",
-          "AsyncActionItem"
+          "Button"
         ],
         "conditional_render": false
       },
@@ -23673,16 +23665,83 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 5
+        "max_nesting_level": 4
       },
-      "usage_count": 3
+      "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Available variables": {
+    "message": "Available variables",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Tab",
+        "Tabs"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "notifications"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "administration/notifications/NotificationForm.tsx",
+          "invitations/actions/AutoCreateProjectGroup.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Tab"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -24287,6 +24346,70 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
+  "Unable to update a notification.": {
+    "message": "Unable to update a notification.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 32,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "notifications"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "administration/notifications/NotificationUpdateDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in administrative interface. Use formal, technical language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Notification has been updated.": {
     "message": "Notification has been updated.",
     "context": {
@@ -24354,72 +24477,8 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Unable to update a notification.": {
-    "message": "Unable to update a notification.",
-    "context": {
-      "primary_ui_type": "error_message",
-      "ui_types": [
-        "error_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 32,
-        "wordCount": 5,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "admin"
-        ],
-        "feature_areas": [
-          "notifications"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "administration/notifications/NotificationUpdateDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Update a notification": {
-    "message": "Update a notification",
+  "Update notification template": {
+    "message": "Update notification template",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -24430,7 +24489,7 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 21,
+        "length": 28,
         "wordCount": 3,
         "hasVariables": false,
         "hasMarkup": false,
@@ -24484,21 +24543,18 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Context fields": {
-    "message": "Context fields",
+  "Variable": {
+    "message": "Variable",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
-      "components": [
-        "Accordion",
-        "ModalDialog"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 14,
-        "wordCount": 2,
+        "length": 8,
+        "wordCount": 1,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -24518,15 +24574,17 @@
           "notifications"
         ],
         "component_types": [
-          "dialog"
+          "component"
         ],
         "paths": [
-          "administration/notifications/NotificationUpdateDialog.tsx"
+          "administration/notifications/VariablesPane.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [],
-        "conditional_render": true
+        "tags": [
+          "th"
+        ],
+        "conditional_render": false
       },
       "action_types": [
         "unknown"
@@ -24539,312 +24597,13 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 9
+        "has_validation": false,
+        "max_nesting_level": 5
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This appears in administrative interface. Use formal, technical language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Name": {
-    "message": "Name",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "generic_element",
-        "title",
-        "label",
-        "unknown",
-        "function_call"
-      ],
-      "components": [
-        "Field",
-        "ModalDialog",
-        "Table",
-        "FormGroup",
-        "Col",
-        "Row",
-        "StringField",
-        "FormContainer",
-        "DecoratedLabel",
-        "ExpandableContainer",
-        "FormTable",
-        "Tab",
-        "Tabs",
-        "DetailsField",
-        "Card",
-        "AsyncActionDialog",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "ActionDialog",
-        "Component"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 4,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "admin",
-          "infrastructure",
-          "general",
-          "customer_management",
-          "billing",
-          "marketplace",
-          "project_management",
-          "resource_management",
-          "user_management"
-        ],
-        "feature_areas": [
-          "notifications",
-          "organizations",
-          "quick-shortcuts",
-          "roles",
-          "issue-templates",
-          "vm",
-          "broadcasts",
-          "create",
-          "credits",
-          "details",
-          "payment-profiles",
-          "invitations",
-          "aggregate-limits",
-          "category",
-          "deploy",
-          "plan",
-          "actions",
-          "images",
-          "list",
-          "update",
-          "endpoints",
-          "plans",
-          "change-limits",
-          "import",
-          "service-providers",
-          "checklists",
-          "marketplace-remote",
-          "openstack-backup",
-          "openstack-network",
-          "openstack-security-groups",
-          "openstack-server-groups",
-          "openstack-snapshot",
-          "openstack-subnet",
-          "openstack-tenant",
-          "openstack-volume",
-          "project",
-          "manage",
-          "proposals",
-          "call-management",
-          "proposal",
-          "configuration",
-          "general",
-          "rancher",
-          "catalog",
-          "cluster",
-          "apps",
-          "hpas",
-          "template",
-          "quotas",
-          "summary",
-          "user",
-          "affiliations",
-          "dashboard",
-          "vmware"
-        ],
-        "component_types": [
-          "dialog",
-          "form",
-          "list",
-          "component",
-          "card",
-          "page"
-        ],
-        "paths": [
-          "administration/notifications/NotificationUpdateDialog.tsx",
-          "administration/organizations/OrganizationGroupForm.tsx",
-          "administration/organizations/OrganizationGroupsList.tsx",
-          "administration/quick-shortcuts/QuickShortcutForm.tsx",
-          "administration/quick-shortcuts/QuickShortcutsList.tsx",
-          "administration/roles/RoleForm.tsx",
-          "administration/roles/RolesList.tsx",
-          "administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx",
-          "administration/service-desk/issue-templates/IssueTemplateForm.tsx",
-          "azure/vm/AzureVirtualMachineForm.tsx",
-          "broadcasts/BroadcastSaveAsTemplateDialog.tsx",
-          "broadcasts/BroadcastTemplateForm.tsx",
-          "broadcasts/BroadcastTemplateList.tsx",
-          "customer/create/CustomerCreateForm.tsx",
-          "customer/credits/CreditUsageDialog.tsx",
-          "customer/credits/ProjectCreditsList.tsx",
-          "customer/details/CustomerDetailsPanel.tsx",
-          "customer/details/EditFieldDialog.tsx",
-          "customer/payment-profiles/PaymentProfileCreateDialog.tsx",
-          "customer/payment-profiles/PaymentProfileDetails.tsx",
-          "customer/payment-profiles/PaymentProfileList.tsx",
-          "customer/payment-profiles/PaymentProfileUpdateDialog.tsx",
-          "invitations/PermissionRequestActionDialog.tsx",
-          "invoices/details/InvoiceItemCompensationDialog.tsx",
-          "invoices/details/InvoiceItemExpandableRow.tsx",
-          "maintenance/create/MaintenanceSaveAsTemplateDialog.tsx",
-          "maintenance/create/Step1CreateMessage.tsx",
-          "maintenance/create/Step3ReviewAndCreate.tsx",
-          "marketplace/aggregate-limits/AggregateLimitDetailsDialog.tsx",
-          "marketplace/category/PublicOfferingsList.tsx",
-          "marketplace/deploy/DetailsOverviewDialog.tsx",
-          "marketplace/deploy/steps/ResourceNameGroup.tsx",
-          "marketplace/details/plan/PlanSection.tsx",
-          "marketplace/offerings/actions/OfferingCreateDialog.tsx",
-          "marketplace/offerings/actions/SetAccessPolicyFormContainer.tsx",
-          "marketplace/offerings/details/OfferingDetailsDialog.tsx",
-          "marketplace/offerings/details/OfferingUsersTable.tsx",
-          "marketplace/offerings/details/PublicOfferingComponentsTable.tsx",
-          "marketplace/offerings/images/CreateImageDialog.tsx",
-          "marketplace/offerings/images/OfferingImagesList.tsx",
-          "marketplace/offerings/list/OfferingsList.tsx",
-          "marketplace/offerings/update/components/ComponentsSection.tsx",
-          "marketplace/offerings/update/endpoints/AddEndpointDialog.tsx",
-          "marketplace/offerings/update/overview/OverviewSection.tsx",
-          "marketplace/offerings/update/plans/PlanComponentsTable.tsx",
-          "marketplace/offerings/update/plans/PlanForm.tsx",
-          "marketplace/offerings/update/plans/PlanResourcesTable.tsx",
-          "marketplace/offerings/update/plans/PlansSection.tsx",
-          "marketplace/offerings/update/plans/PricesTable.tsx",
-          "marketplace/offerings/update/plans/QuotasTable.tsx",
-          "marketplace/offerings/update/roles/AddRoleDialog.tsx",
-          "marketplace/orders/details/LimitsSection.tsx",
-          "marketplace/orders/list/OrdersTableComponent.tsx",
-          "marketplace/resources/change-limits/ChangeLimitsComponent.tsx",
-          "marketplace/resources/change-plan/utils.tsx",
-          "marketplace/resources/details/utils.tsx",
-          "marketplace/resources/import/ResourcesList.tsx",
-          "marketplace/resources/list/CategoryResourcesList.tsx",
-          "marketplace/resources/list/ProviderResourcesList.tsx",
-          "marketplace/resources/list/utils.tsx",
-          "marketplace/service-providers/OrganizationProjectsExpandable.tsx",
-          "marketplace/service-providers/ProviderCampaignResourceExpandable.tsx",
-          "marketplace/service-providers/ProviderCampaignsList.tsx",
-          "marketplace/service-providers/ProviderOrganizationsList.tsx",
-          "marketplace/service-providers/ProviderProjectResourcesList.tsx",
-          "marketplace/service-providers/ProviderUserCustomersList.tsx",
-          "marketplace/service-providers/ServiceProvidersList.tsx",
-          "marketplace/service-providers/details/ProviderDashboardTab.tsx",
-          "marketplace-checklist/checklists/ChecklistsTable.tsx",
-          "marketplace-remote/ProjectUpdateRequestExpandable.tsx",
-          "openstack/openstack-backup/BackupsList.tsx",
-          "openstack/openstack-instance/actions/EditDialog.tsx",
-          "openstack/openstack-network/TenantNetworksList.tsx",
-          "openstack/openstack-security-groups/SecurityGroupsList.tsx",
-          "openstack/openstack-server-groups/ServerGroupsList.tsx",
-          "openstack/openstack-snapshot/TenantSnapshotsList.tsx",
-          "openstack/openstack-subnet/TenantSubnetsList.tsx",
-          "openstack/openstack-tenant/TenantFlavorsList.tsx",
-          "openstack/openstack-tenant/TenantImagesList.tsx",
-          "openstack/openstack-tenant/TenantInstancesList.tsx",
-          "openstack/openstack-tenant/TenantRoutersList.tsx",
-          "openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx",
-          "openstack/openstack-tenant/actions/CreateServerGroupForm.tsx",
-          "openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
-          "openstack/openstack-volume/InstanceVolumesList.tsx",
-          "openstack/openstack-volume/TenantVolumeTypesList.tsx",
-          "openstack/openstack-volume/TenantVolumesList.tsx",
-          "openstack/openstack-volume/VolumeSnapshotsList.tsx",
-          "project/ProjectsList.tsx",
-          "project/details/ProjectDetailsDialog.tsx",
-          "project/manage/ProjectGeneral.tsx",
-          "proposals/CallsAvailableOfferingsPage.tsx",
-          "proposals/PublicCallsList.tsx",
-          "proposals/call-management/CallFormDialog.tsx",
-          "proposals/call-management/CallManagementPage.tsx",
-          "proposals/proposal/ProposalDetailsDialog.tsx",
-          "proposals/proposal/create/AddProposalDialog.tsx",
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
-          "proposals/proposal/create/ProjectDetailsSummary.tsx",
-          "proposals/round/proposals/ProposalsList.tsx",
-          "proposals/update/configuration/CallResourceTemplates.tsx",
-          "proposals/update/general/CallGeneralSection.tsx",
-          "proposals/update/general/EditGeneralInfoDialog.tsx",
-          "rancher/ClusterProjectList.tsx",
-          "rancher/catalog/CatalogCreateDialog.tsx",
-          "rancher/catalog/ClusterCatalogList.tsx",
-          "rancher/cluster/ClusterIngressesList.tsx",
-          "rancher/cluster/ClusterSecurityGroupsList.tsx",
-          "rancher/cluster/ClusterServicesList.tsx",
-          "rancher/cluster/ClusterWorkloadsList.tsx",
-          "rancher/cluster/apps/ClusterApplicationsList.tsx",
-          "rancher/cluster/hpas/ClusterHPAList.tsx",
-          "rancher/cluster/hpas/HPACreateDialog.tsx",
-          "rancher/cluster/hpas/HPAUpdateDialog.tsx",
-          "rancher/template/ApplicationConfiguration.tsx",
-          "rancher/template/CatalogTemplateList.tsx",
-          "rancher/template/ClusterTemplateList.tsx",
-          "reporting/quotas/CustomerQuotasList.tsx",
-          "resource/actions/base.ts",
-          "resource/summary/ResourceSummaryBase.tsx",
-          "slurm/details/AllocationJobsTable.tsx",
-          "user/UserPermissionRequestsList.tsx",
-          "user/affiliations/ProjectsList.tsx",
-          "user/affiliations/SummaryResourcesTable.tsx",
-          "user/dashboard/OfferingTosExpandableRow.tsx",
-          "user/dashboard/RevokeTosDialog.tsx",
-          "vmware/DisksList.tsx",
-          "vmware/PortsList.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th",
-          "Field",
-          "Table",
-          "FormGroup",
-          "StringField",
-          "DecoratedLabel",
-          "b",
-          "DetailsField",
-          "td",
-          "CommentSection",
-          "Component"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown",
-        "create"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 10
-      },
-      "usage_count": 128
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This relates to creation actions. Use encouraging, positive language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
+      "This appears in administrative interface. Use formal, technical language."
     ]
   },
   "Action": {
@@ -26442,6 +26201,301 @@
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
       "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Name": {
+    "message": "Name",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "generic_element",
+        "title",
+        "label",
+        "unknown",
+        "function_call"
+      ],
+      "components": [
+        "Field",
+        "ModalDialog",
+        "Table",
+        "FormGroup",
+        "Col",
+        "Row",
+        "StringField",
+        "FormContainer",
+        "DecoratedLabel",
+        "ExpandableContainer",
+        "FormTable",
+        "Tab",
+        "Tabs",
+        "DetailsField",
+        "Card",
+        "AsyncActionDialog",
+        "VStepperFormStepCard",
+        "CommentSection",
+        "ActionDialog",
+        "Component"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 4,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin",
+          "infrastructure",
+          "general",
+          "customer_management",
+          "billing",
+          "marketplace",
+          "project_management",
+          "resource_management",
+          "user_management"
+        ],
+        "feature_areas": [
+          "organizations",
+          "quick-shortcuts",
+          "roles",
+          "issue-templates",
+          "vm",
+          "broadcasts",
+          "create",
+          "credits",
+          "details",
+          "payment-profiles",
+          "invitations",
+          "aggregate-limits",
+          "category",
+          "deploy",
+          "plan",
+          "actions",
+          "images",
+          "list",
+          "update",
+          "endpoints",
+          "plans",
+          "change-limits",
+          "import",
+          "service-providers",
+          "checklists",
+          "marketplace-remote",
+          "openstack-backup",
+          "openstack-network",
+          "openstack-security-groups",
+          "openstack-server-groups",
+          "openstack-snapshot",
+          "openstack-subnet",
+          "openstack-tenant",
+          "openstack-volume",
+          "project",
+          "manage",
+          "proposals",
+          "call-management",
+          "proposal",
+          "configuration",
+          "general",
+          "rancher",
+          "catalog",
+          "cluster",
+          "apps",
+          "hpas",
+          "template",
+          "quotas",
+          "summary",
+          "user",
+          "affiliations",
+          "dashboard",
+          "vmware"
+        ],
+        "component_types": [
+          "form",
+          "list",
+          "dialog",
+          "component",
+          "card",
+          "page"
+        ],
+        "paths": [
+          "administration/organizations/OrganizationGroupForm.tsx",
+          "administration/organizations/OrganizationGroupsList.tsx",
+          "administration/quick-shortcuts/QuickShortcutForm.tsx",
+          "administration/quick-shortcuts/QuickShortcutsList.tsx",
+          "administration/roles/RoleForm.tsx",
+          "administration/roles/RolesList.tsx",
+          "administration/service-desk/issue-templates/AdministrationIssueTemplatesList.tsx",
+          "administration/service-desk/issue-templates/IssueTemplateForm.tsx",
+          "azure/vm/AzureVirtualMachineForm.tsx",
+          "broadcasts/BroadcastSaveAsTemplateDialog.tsx",
+          "broadcasts/BroadcastTemplateForm.tsx",
+          "broadcasts/BroadcastTemplateList.tsx",
+          "customer/create/CustomerCreateForm.tsx",
+          "customer/credits/CreditUsageDialog.tsx",
+          "customer/credits/ProjectCreditsList.tsx",
+          "customer/details/CustomerDetailsPanel.tsx",
+          "customer/details/EditFieldDialog.tsx",
+          "customer/payment-profiles/PaymentProfileCreateDialog.tsx",
+          "customer/payment-profiles/PaymentProfileDetails.tsx",
+          "customer/payment-profiles/PaymentProfileList.tsx",
+          "customer/payment-profiles/PaymentProfileUpdateDialog.tsx",
+          "invitations/PermissionRequestActionDialog.tsx",
+          "invoices/details/InvoiceItemCompensationDialog.tsx",
+          "invoices/details/InvoiceItemExpandableRow.tsx",
+          "maintenance/create/MaintenanceSaveAsTemplateDialog.tsx",
+          "maintenance/create/Step1CreateMessage.tsx",
+          "maintenance/create/Step3ReviewAndCreate.tsx",
+          "marketplace/aggregate-limits/AggregateLimitDetailsDialog.tsx",
+          "marketplace/category/PublicOfferingsList.tsx",
+          "marketplace/deploy/DetailsOverviewDialog.tsx",
+          "marketplace/deploy/steps/ResourceNameGroup.tsx",
+          "marketplace/details/plan/PlanSection.tsx",
+          "marketplace/offerings/actions/OfferingCreateDialog.tsx",
+          "marketplace/offerings/actions/SetAccessPolicyFormContainer.tsx",
+          "marketplace/offerings/details/OfferingDetailsDialog.tsx",
+          "marketplace/offerings/details/OfferingUsersTable.tsx",
+          "marketplace/offerings/details/PublicOfferingComponentsTable.tsx",
+          "marketplace/offerings/images/CreateImageDialog.tsx",
+          "marketplace/offerings/images/OfferingImagesList.tsx",
+          "marketplace/offerings/list/OfferingsList.tsx",
+          "marketplace/offerings/update/components/ComponentsSection.tsx",
+          "marketplace/offerings/update/endpoints/AddEndpointDialog.tsx",
+          "marketplace/offerings/update/overview/OverviewSection.tsx",
+          "marketplace/offerings/update/plans/PlanComponentsTable.tsx",
+          "marketplace/offerings/update/plans/PlanForm.tsx",
+          "marketplace/offerings/update/plans/PlanResourcesTable.tsx",
+          "marketplace/offerings/update/plans/PlansSection.tsx",
+          "marketplace/offerings/update/plans/PricesTable.tsx",
+          "marketplace/offerings/update/plans/QuotasTable.tsx",
+          "marketplace/offerings/update/roles/AddRoleDialog.tsx",
+          "marketplace/orders/details/LimitsSection.tsx",
+          "marketplace/orders/list/OrdersTableComponent.tsx",
+          "marketplace/resources/change-limits/ChangeLimitsComponent.tsx",
+          "marketplace/resources/change-plan/utils.tsx",
+          "marketplace/resources/details/utils.tsx",
+          "marketplace/resources/import/ResourcesList.tsx",
+          "marketplace/resources/list/CategoryResourcesList.tsx",
+          "marketplace/resources/list/ProviderResourcesList.tsx",
+          "marketplace/resources/list/utils.tsx",
+          "marketplace/service-providers/OrganizationProjectsExpandable.tsx",
+          "marketplace/service-providers/ProviderCampaignResourceExpandable.tsx",
+          "marketplace/service-providers/ProviderCampaignsList.tsx",
+          "marketplace/service-providers/ProviderOrganizationsList.tsx",
+          "marketplace/service-providers/ProviderProjectResourcesList.tsx",
+          "marketplace/service-providers/ProviderUserCustomersList.tsx",
+          "marketplace/service-providers/ServiceProvidersList.tsx",
+          "marketplace/service-providers/details/ProviderDashboardTab.tsx",
+          "marketplace-checklist/checklists/ChecklistsTable.tsx",
+          "marketplace-remote/ProjectUpdateRequestExpandable.tsx",
+          "openstack/openstack-backup/BackupsList.tsx",
+          "openstack/openstack-instance/actions/EditDialog.tsx",
+          "openstack/openstack-network/TenantNetworksList.tsx",
+          "openstack/openstack-security-groups/SecurityGroupsList.tsx",
+          "openstack/openstack-server-groups/ServerGroupsList.tsx",
+          "openstack/openstack-snapshot/TenantSnapshotsList.tsx",
+          "openstack/openstack-subnet/TenantSubnetsList.tsx",
+          "openstack/openstack-tenant/TenantFlavorsList.tsx",
+          "openstack/openstack-tenant/TenantImagesList.tsx",
+          "openstack/openstack-tenant/TenantInstancesList.tsx",
+          "openstack/openstack-tenant/TenantRoutersList.tsx",
+          "openstack/openstack-tenant/actions/CreateSecurityGroupForm.tsx",
+          "openstack/openstack-tenant/actions/CreateServerGroupForm.tsx",
+          "openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
+          "openstack/openstack-volume/InstanceVolumesList.tsx",
+          "openstack/openstack-volume/TenantVolumeTypesList.tsx",
+          "openstack/openstack-volume/TenantVolumesList.tsx",
+          "openstack/openstack-volume/VolumeSnapshotsList.tsx",
+          "project/ProjectsList.tsx",
+          "project/details/ProjectDetailsDialog.tsx",
+          "project/manage/ProjectGeneral.tsx",
+          "proposals/CallsAvailableOfferingsPage.tsx",
+          "proposals/PublicCallsList.tsx",
+          "proposals/call-management/CallFormDialog.tsx",
+          "proposals/call-management/CallManagementPage.tsx",
+          "proposals/proposal/ProposalDetailsDialog.tsx",
+          "proposals/proposal/create/AddProposalDialog.tsx",
+          "proposals/proposal/create/ProjectDetailsStep.tsx",
+          "proposals/proposal/create/ProjectDetailsSummary.tsx",
+          "proposals/round/proposals/ProposalsList.tsx",
+          "proposals/update/configuration/CallResourceTemplates.tsx",
+          "proposals/update/general/CallGeneralSection.tsx",
+          "proposals/update/general/EditGeneralInfoDialog.tsx",
+          "rancher/ClusterProjectList.tsx",
+          "rancher/catalog/CatalogCreateDialog.tsx",
+          "rancher/catalog/ClusterCatalogList.tsx",
+          "rancher/cluster/ClusterIngressesList.tsx",
+          "rancher/cluster/ClusterSecurityGroupsList.tsx",
+          "rancher/cluster/ClusterServicesList.tsx",
+          "rancher/cluster/ClusterWorkloadsList.tsx",
+          "rancher/cluster/apps/ClusterApplicationsList.tsx",
+          "rancher/cluster/hpas/ClusterHPAList.tsx",
+          "rancher/cluster/hpas/HPACreateDialog.tsx",
+          "rancher/cluster/hpas/HPAUpdateDialog.tsx",
+          "rancher/template/ApplicationConfiguration.tsx",
+          "rancher/template/CatalogTemplateList.tsx",
+          "rancher/template/ClusterTemplateList.tsx",
+          "reporting/quotas/CustomerQuotasList.tsx",
+          "resource/actions/base.ts",
+          "resource/summary/ResourceSummaryBase.tsx",
+          "slurm/details/AllocationJobsTable.tsx",
+          "user/UserPermissionRequestsList.tsx",
+          "user/affiliations/ProjectsList.tsx",
+          "user/affiliations/SummaryResourcesTable.tsx",
+          "user/dashboard/OfferingTosExpandableRow.tsx",
+          "user/dashboard/RevokeTosDialog.tsx",
+          "vmware/DisksList.tsx",
+          "vmware/PortsList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field",
+          "Table",
+          "FormGroup",
+          "StringField",
+          "DecoratedLabel",
+          "b",
+          "th",
+          "DetailsField",
+          "td",
+          "CommentSection",
+          "Component"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown",
+        "create"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 127
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This relates to creation actions. Use encouraging, positive language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Parent group": {
@@ -104039,58 +104093,6 @@
       "usage_count": 1
     }
   },
-  "Available variables": {
-    "message": "Available variables",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 19,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "invitations/actions/AutoCreateProjectGroup.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
   "Full name of the user": {
     "message": "Full name of the user",
     "context": {
@@ -158441,6 +158443,79 @@
         "max_nesting_level": 4
       },
       "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Reset": {
+    "message": "Reset",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element"
+      ],
+      "components": [
+        "Button",
+        "AsyncActionItem"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "integration",
+          "actions"
+        ],
+        "component_types": [
+          "form",
+          "button"
+        ],
+        "paths": [
+          "marketplace/offerings/update/integration/ScriptEditorHeader.tsx",
+          "vmware/actions/ResetAction.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Button",
+          "AsyncActionItem"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",

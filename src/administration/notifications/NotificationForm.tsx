@@ -1,12 +1,20 @@
 import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
-import { Accordion, Button } from 'react-bootstrap';
+import { Button, Tab, Tabs } from 'react-bootstrap';
 import { Field } from 'react-final-form';
-import { FieldArray } from 'react-final-form-arrays';
+import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required } from '@waldur/core/validators';
 import { TextField } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
+
+import { VariablesPane } from './VariablesPane';
+
+interface Template {
+  path: string;
+  content: string;
+  original_content: string;
+}
 
 export const formatHeader = (path) => {
   if (path.endsWith('.html')) {
@@ -20,63 +28,75 @@ export const formatHeader = (path) => {
   }
 };
 
-const renderFields = ({ fields }) => {
-  return (
-    <>
-      {fields.map((name, index) => {
-        const template = fields.value[index];
-        return (
-          <Accordion.Item eventKey={index.toString()} key={index}>
-            <Accordion.Header>{formatHeader(template.path)}</Accordion.Header>
-            <Accordion.Body>
-              {template.path.endsWith('message.html') ||
-              template.path.endsWith('message.txt') ? (
-                <Field
-                  name={`${name}.content`}
-                  component={MonacoField as any}
-                  validate={required}
-                  language="django-html"
-                />
-              ) : (
-                <Field
-                  name={`${name}.content`}
-                  component={TextField as any}
-                  rows={template.path.endsWith('subject.txt') ? 1 : 10}
-                  type="text"
-                  placeholder={template.original_content}
-                  validate={required}
-                />
-              )}
+const NotificationTabs = ({
+  fields,
+  schema,
+}: FieldArrayRenderProps<Template, HTMLElement> & { schema }) => (
+  <Tabs
+    defaultActiveKey={0}
+    id="notification-templates-tabs"
+    className="nav-line-tabs"
+  >
+    {fields.map((name, index) => {
+      const template = fields.value[index];
+      return (
+        <Tab
+          // STEP 2: Use a stable key. The template path is unique and won't change.
+          // Using `index` can sometimes cause issues if the array were to be reordered.
+          key={template.path}
+          eventKey={index}
+          title={formatHeader(template.path)}
+          className="p-3"
+        >
+          {template.path.endsWith('message.html') ||
+          template.path.endsWith('message.txt') ? (
+            <Field
+              name={`${name}.content`}
+              component={MonacoField as any}
+              validate={required}
+              language="django-html"
+              height={400}
+            />
+          ) : (
+            <Field
+              name={`${name}.content`}
+              component={TextField as any}
+              rows={template.path.endsWith('subject.txt') ? 1 : 10}
+              type="text"
+              placeholder={template.original_content}
+              validate={required}
+            />
+          )}
+          <div className="mt-2 text-end">
+            <Button
+              onClick={() =>
+                fields.update(index, {
+                  ...fields.value[index],
+                  content: template.original_content,
+                })
+              }
+              variant="warning"
+              size="sm"
+            >
+              <span className="svg-icon svg-icon-2">
+                <ArrowCounterClockwiseIcon />
+              </span>{' '}
+              {translate('Reset to default')}
+            </Button>
+          </div>
+        </Tab>
+      );
+    })}
+    <Tab
+      title={translate('Available variables')}
+      className="p-3"
+      eventKey="variables"
+    >
+      <VariablesPane schema={schema} />
+    </Tab>
+  </Tabs>
+);
 
-              <div className="mt-1 text-end">
-                <Button
-                  onClick={() =>
-                    fields.update(index, {
-                      ...fields.value[index],
-                      content: template.original_content,
-                    })
-                  }
-                  variant="warning"
-                  size="sm"
-                >
-                  <span className="svg-icon svg-icon-2">
-                    <ArrowCounterClockwiseIcon />
-                  </span>{' '}
-                  {translate('Reset')}
-                </Button>
-              </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        );
-      })}
-    </>
-  );
-};
-
-export const NotificationForm = ({ submitting }) => (
-  <FieldArray
-    name="templates"
-    component={renderFields}
-    props={{ submitting }}
-  />
+export const NotificationForm = ({ schema }) => (
+  <FieldArray name="templates" component={NotificationTabs} schema={schema} />
 );
