@@ -29,6 +29,38 @@ const RESOURCE_FIELDS = [
   'plan_name',
 ];
 
+const COMMON_DEFAULTS = {
+  oecd_fos_2007_code: '1',
+  is_industry: 'false',
+  project_type: 'Regular',
+  'start_date (yyyy-mm-dd)': '2025-01-01',
+  'end_date (yyyy-mm-dd)': '2025-01-31',
+};
+
+const FIELD_RULES = {
+  project: {
+    include: [...PROJECT_FIELDS],
+    exclude: ['project_name', 'offering_name', 'plan_name'],
+  },
+  resource: {
+    include: [...RESOURCE_FIELDS],
+  },
+};
+
+const TYPE_DEFAULTS = {
+  project: {
+    name: 'Sample Project',
+    description: 'Sample project description',
+  },
+  resource: {
+    name: 'Sample Resource',
+    description: 'Sample resource description',
+    project_name: 'Sample Project',
+    offering_name: 'Sample Offering',
+    plan_name: 'Sample Plan',
+  },
+};
+
 interface IField {
   field: string;
   idx: number;
@@ -157,9 +189,24 @@ export const generateTemplateData = (
   offering?: Offering,
 ) => {
   if (!offering) {
+    const fields = [!customerUuid && ORG_FIELD, ...PROJECT_FIELDS].filter(
+      Boolean,
+    );
+
+    const createProjectRow = () => {
+      return fields.map((field) => {
+        if (field === ORG_FIELD)
+          return customerUuid || 'your-customer-uuid-here';
+        if (COMMON_DEFAULTS[field]) return COMMON_DEFAULTS[field];
+        if (field === 'name') return 'Sample Project';
+        if (field === 'description') return 'Sample project description';
+        return '';
+      });
+    };
+
     return {
-      fields: [!customerUuid && ORG_FIELD, ...PROJECT_FIELDS].filter(Boolean),
-      data: [],
+      fields,
+      data: [createProjectRow()],
     };
   }
   // Generate template file for projects with resources
@@ -169,14 +216,61 @@ export const generateTemplateData = (
     ...PROJECT_FIELDS,
     ...RESOURCE_FIELDS,
   ]);
+
+  const allFields = fixedFields
+    .concat(
+      offering.components.map((comp) => comp.type + '_limit'),
+      Object.keys(offering.attributes).map((attr) => attr),
+    )
+    .filter(Boolean);
+
+  const createRow = (type, overrides = {}) => {
+    const rules = FIELD_RULES[type];
+
+    return allFields.map((field) => {
+      if (field === TYPE_FIELD) return type;
+      if (field === ORG_FIELD) return customerUuid || 'your-customer-uuid-here';
+
+      // Check if field should be excluded for this type
+      if (rules.exclude?.includes(field)) return '';
+
+      if (TYPE_DEFAULTS[type]?.[field]) return TYPE_DEFAULTS[type][field];
+
+      if (COMMON_DEFAULTS[field]) return COMMON_DEFAULTS[field];
+
+      // Fill sample data depending on whether it's a resource or a project field
+      if (type === 'resource') {
+        if (field === 'offering_name')
+          return offering.name || 'Sample Offering Name';
+        if (field.endsWith('_limit')) return '1';
+        if (
+          offering.attributes &&
+          Object.keys(offering.attributes).includes(field)
+        ) {
+          return 'sample_value';
+        }
+      }
+
+      if (type === 'project') {
+        if (field.endsWith('_limit')) return '';
+        if (
+          offering.attributes &&
+          Object.keys(offering.attributes).includes(field)
+        )
+          return '';
+      }
+
+      if (overrides[field] !== undefined) return overrides[field];
+
+      return '';
+    });
+  };
+
+  const sampleData = [createRow('project'), createRow('resource')];
+
   return {
-    fields: fixedFields
-      .concat(
-        offering.components.map((comp) => comp.type + '_limit'),
-        Object.keys(offering.attributes).map((attr) => attr),
-      )
-      .filter(Boolean),
-    data: [],
+    fields: allFields,
+    data: sampleData,
   };
 };
 
