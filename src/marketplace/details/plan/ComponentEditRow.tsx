@@ -1,11 +1,13 @@
+import { CalendarPlusIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { translate } from '@waldur/i18n';
 import {
-  parseIntField,
   formatIntField,
+  parseIntField,
 } from '@waldur/marketplace/common/utils';
 import { getOfferingComponentValidator } from '@waldur/marketplace/offerings/store/limits';
 
@@ -74,24 +76,35 @@ const RowWrapper2 = (
         onChange={(value) => props.input.onChange(value ? 1 : 0)}
       />
     ) : (
-      <InputGroup className="mw-200px">
-        <Form.Control
-          type="number"
-          min={props.offeringComponent.min_value || 0}
-          max={props.offeringComponent.max_value}
-          aria-describedby={`basic-addon-${props.offeringComponent.type}`}
-          {...props.input}
-        />
+      <>
+        <InputGroup className="mw-200px">
+          <Form.Control
+            type="number"
+            min={props.offeringComponent.min_value || 0}
+            max={props.offeringComponent.max_value}
+            aria-describedby={`basic-addon-${props.offeringComponent.type}`}
+            {...props.input}
+          />
 
-        {props.offeringComponent.measured_unit && (
-          <InputGroup.Text
-            className="text-muted"
-            id={`basic-addon-${props.offeringComponent.type}`}
-          >
-            {props.offeringComponent.measured_unit}
-          </InputGroup.Text>
-        )}
-      </InputGroup>
+          {props.offeringComponent.measured_unit && (
+            <InputGroup.Text
+              className="text-muted"
+              id={`basic-addon-${props.offeringComponent.type}`}
+            >
+              {props.offeringComponent.measured_unit}
+            </InputGroup.Text>
+          )}
+        </InputGroup>
+
+        {props.offeringComponent.is_prepaid ? (
+          <Button className="text-secondary">
+            <span className="svg-icon svg-icon-2">
+              <CalendarPlusIcon />
+            </span>
+            {translate('Add prepayment')}
+          </Button>
+        ) : null}
+      </>
     )}
   </ComponentRow2>
 );
