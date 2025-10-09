@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
@@ -7,6 +8,7 @@ import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDesc
 import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
 import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
 
+import { orderCustomerSelector } from '../selectors';
 import { FormStepProps } from '../types';
 
 export const FormPlanStep = (props: FormStepProps) => {
@@ -14,6 +16,8 @@ export const FormPlanStep = (props: FormStepProps) => {
     () => props.offering.plans.filter((plan) => plan.archived === false),
     [props.offering],
   );
+
+  const customer = useSelector(orderCustomerSelector);
 
   if (plans.length === 0) {
     return null;
@@ -40,7 +44,7 @@ export const FormPlanStep = (props: FormStepProps) => {
         </div>
         <PlanDescriptionButton />
       </div>
-      <PlanDetailsTable2 offering={props.offering} />
+      <PlanDetailsTable2 offering={props.offering} customer={customer} />
     </VStepperFormStepCard>
   );
 };

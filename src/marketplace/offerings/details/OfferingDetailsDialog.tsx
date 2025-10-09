@@ -15,15 +15,18 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Field } from '@waldur/resource/summary';
 
 interface OfferingDetailsDialogProps {
-  resolve: { offering: PublicOfferingDetails };
+  resolve: { offering: PublicOfferingDetails; concealBillingInfo?: boolean };
 }
 
-async function loadData(offering: PublicOfferingDetails) {
+async function loadData(
+  offering: PublicOfferingDetails,
+  concealBillingInfo: boolean,
+) {
   const category = await marketplaceCategoriesRetrieve({
     path: { uuid: offering.category_uuid },
   }).then((response) => response.data);
   const sections = category.sections;
-  const tabs = getTabs({ offering, sections });
+  const tabs = getTabs({ offering, sections, concealBillingInfo });
   return {
     offering,
     tabs,
@@ -34,7 +37,7 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
   props,
 ) => {
   const { loading, error, value } = useAsync(
-    () => loadData(props.resolve.offering),
+    () => loadData(props.resolve.offering, props.resolve.concealBillingInfo),
     [props.resolve.offering],
   );
   return (

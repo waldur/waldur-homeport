@@ -20,6 +20,7 @@ interface TotalLimitComponentsTableProps {
   components: Component[];
   total: number;
   viewMode: boolean;
+  hidePrices?: boolean;
 }
 
 export const TotalLimitComponentsTable: FunctionComponent<
@@ -35,13 +36,13 @@ export const TotalLimitComponentsTable: FunctionComponent<
           <th className="col-sm-1">{translate('Component name')}</th>
           <th className="col-sm-1">{translate('Unit')}</th>
           <th className="col-md-2 col-sm-3">{translate('Quantity')}</th>
-          {!shouldConcealPrices && (
+          {!shouldConcealPrices && !props.hidePrices && (
             <th>
               {translate('Price per unit')}
               <PriceTooltip />
             </th>
           )}
-          <th>{translate('Subtotal')}</th>
+          {!props.hidePrices && <th>{translate('Subtotal')}</th>}
         </tr>
       </thead>
       <tbody>
@@ -63,7 +64,7 @@ export const TotalLimitComponentsTable: FunctionComponent<
                 />
               )}
             </td>
-            {!shouldConcealPrices && (
+            {!shouldConcealPrices && !props.hidePrices && (
               <td>
                 {formatCurrency(
                   component.price,
@@ -72,25 +73,29 @@ export const TotalLimitComponentsTable: FunctionComponent<
                 )}
               </td>
             )}
+            {!props.hidePrices && (
+              <td>
+                {formatCurrency(
+                  component.subTotal,
+                  ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                  4,
+                )}
+              </td>
+            )}
+          </tr>
+        ))}
+        {!props.hidePrices && (
+          <tr>
+            <td colSpan={3}>{translate('Total')}</td>
             <td>
               {formatCurrency(
-                component.subTotal,
+                props.total,
                 ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
                 4,
               )}
             </td>
           </tr>
-        ))}
-        <tr>
-          <td colSpan={3}>{translate('Total')}</td>
-          <td>
-            {formatCurrency(
-              props.total,
-              ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-              4,
-            )}
-          </td>
-        </tr>
+        )}
       </tbody>
     </Table>
   );

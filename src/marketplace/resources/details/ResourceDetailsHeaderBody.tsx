@@ -5,6 +5,7 @@ import {
   PublicOfferingDetails,
   Resource,
   marketplaceOfferingUsersList,
+  projectsRetrieve,
 } from 'waldur-js-client';
 
 import { getUser } from '@waldur/workspace/selectors';
@@ -23,6 +24,18 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
 > = ({ resource, offering }) => {
   const user = useSelector(getUser);
 
+  const { data: project } = useQuery({
+    queryKey: ['display-project-billing', resource.project_uuid],
+    queryFn: () =>
+      resource.project_uuid
+        ? projectsRetrieve({
+            path: { uuid: resource.project_uuid },
+            query: { field: ['customer_display_billing_info_in_projects'] },
+          }).then((response) => response.data)
+        : null,
+    refetchOnWindowFocus: false,
+    staleTime: 5 * 60 * 1000,
+  });
   const { data: offeringUser } = useQuery({
     queryKey: ['fetchOfferingUser', user?.uuid, offering?.uuid],
     queryFn: () =>
@@ -42,7 +55,12 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
   return (
     <>
       {resource.description ? <p>{resource.description}</p> : null}
-      <OfferingDetailsField offering={offering} />
+      <OfferingDetailsField
+        offering={offering}
+        concealBillingInfo={
+          project?.customer_display_billing_info_in_projects === false
+        }
+      />
       <EndDateField resource={resource} />
       <OfferingUserDetailsField offeringUser={offeringUser} />
     </>

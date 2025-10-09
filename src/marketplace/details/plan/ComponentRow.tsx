@@ -43,7 +43,7 @@ export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
       <td>
         <p>{props.offeringComponent.measured_unit || 'N/A'}</p>
       </td>
-      {!activeFixedPriceProfile
+      {!activeFixedPriceProfile && !props.hidePrices
         ? props.offeringComponent.prices.map((price, innerIndex) => (
             <td key={innerIndex}>
               <p>
@@ -76,14 +76,16 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
     <FormTable.Item
       label={props.offeringComponent.name}
       description={
-        translate('Cost') +
-        ': ' +
-        (props.offeringComponent.measured_unit
-          ? translate('{price} per {unit}', {
-              price: defaultCurrency(props.offeringComponent.price),
-              unit: props.offeringComponent.measured_unit,
-            })
-          : defaultCurrency(props.offeringComponent.price))
+        !props.hidePrices
+          ? translate('Cost') +
+            ': ' +
+            (props.offeringComponent.measured_unit
+              ? translate('{price} per {unit}', {
+                  price: defaultCurrency(props.offeringComponent.price),
+                  unit: props.offeringComponent.measured_unit,
+                })
+              : defaultCurrency(props.offeringComponent.price))
+          : undefined
       }
       value={props.children}
       actions={

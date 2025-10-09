@@ -64,7 +64,14 @@ export interface OfferingConfiguration<
 }
 export interface DeployFormData {
   project?: Pick<Project, 'uuid' | 'name' | 'end_date' | 'url'>;
-  customer?: Pick<Customer, 'uuid' | 'name' | 'url' | 'payment_profiles'>;
+  customer?: Pick<
+    Customer,
+    | 'uuid'
+    | 'name'
+    | 'url'
+    | 'payment_profiles'
+    | 'display_billing_info_in_projects'
+  >;
   offering?;
   attributes?: AttributesType;
   limits?: Limits;

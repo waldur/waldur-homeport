@@ -15,6 +15,7 @@ interface OrderSummaryPlanRowsProps {
   priceData: PricesData;
   customer: Pick<Customer, 'name' | 'uuid' | 'url' | 'payment_profiles'>;
   hasTotal?: boolean;
+  concealPrices?: boolean;
 }
 
 const getRowLabel = (component: Component) =>
@@ -24,7 +25,8 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
   const activeFixedPriceProfile =
     props.customer &&
     getActiveFixedPricePaymentProfile(props.customer.payment_profiles);
-  const shouldConcealPrices = useSelector(concealPricesSelector);
+  const shouldConcealPrices =
+    useSelector(concealPricesSelector) || props.concealPrices;
 
   const { periodic, oneTime } = useComponentsDetailPrices(props.priceData);
 

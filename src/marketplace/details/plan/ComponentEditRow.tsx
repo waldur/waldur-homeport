@@ -22,9 +22,15 @@ interface ComponentEditRowProps {
 }
 
 const RowWrapper = (
-  props: WrappedFieldProps & { offeringComponent: Component },
+  props: WrappedFieldProps & {
+    offeringComponent: Component;
+    concealBillingInfo?: boolean;
+  },
 ) => (
-  <ComponentRow offeringComponent={props.offeringComponent}>
+  <ComponentRow
+    offeringComponent={props.offeringComponent}
+    hidePrices={props.concealBillingInfo}
+  >
     {props.offeringComponent.is_boolean ? (
       <AwesomeCheckbox
         label=""

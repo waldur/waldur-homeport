@@ -81,14 +81,16 @@ export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
         )
       }
       description={
-        translate('Cost') +
-        ': ' +
-        (measuredUnit
-          ? translate('{price} per {unit}', {
-              price: defaultCurrency(props.offeringComponent.price),
-              unit: measuredUnit,
-            })
-          : defaultCurrency(props.offeringComponent.price))
+        !props.hidePrices
+          ? translate('Cost') +
+            ': ' +
+            (measuredUnit
+              ? translate('{price} per {unit}', {
+                  price: defaultCurrency(props.offeringComponent.price),
+                  unit: measuredUnit,
+                })
+              : defaultCurrency(props.offeringComponent.price))
+          : undefined
       }
       value={translate('Usage based')}
       actions={

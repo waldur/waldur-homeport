@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+import { CheckOrX } from '@waldur/core/CheckOrX';
 import { ENV } from '@waldur/core/config';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures } from '@waldur/FeaturesEnums';
@@ -83,6 +84,13 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
           value: props.customer.max_service_accounts
             ? props.customer.max_service_accounts
             : 'N/A',
+        },
+        user?.is_staff && {
+          label: translate('Display billing info in projects'),
+          key: 'display_billing_info_in_projects',
+          value: (
+            <CheckOrX value={props.customer.display_billing_info_in_projects} />
+          ),
         },
       ].filter(Boolean),
     [props.customer, nativeNameVisible],

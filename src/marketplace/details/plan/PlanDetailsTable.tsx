@@ -15,7 +15,10 @@ import { TotalLimitComponentsTable } from './TotalLimitComponentsTable';
 import { Component, PlanDetailsTableProps } from './types';
 import { pricesSelector } from './utils';
 
-const HeaderRow = (props: { periods?: string[] }) => (
+const HeaderRow = (props: {
+  periods?: string[];
+  concealBillingInfo?: boolean;
+}) => (
   <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
     <th className="col-sm-1" style={{ width: '5%' }}>
       {translate('Component name')}
@@ -26,16 +29,20 @@ const HeaderRow = (props: { periods?: string[] }) => (
     <th className="col-sm-1" style={{ width: '5%' }}>
       {translate('Unit')}
     </th>
-    {props.periods.map((period, index) => (
-      <th className="col-sm-1" key={index}>
-        {period}
-        <PriceTooltip />
-      </th>
-    ))}
+    {!props.concealBillingInfo &&
+      props.periods.map((period, index) => (
+        <th className="col-sm-1" key={index}>
+          {period}
+          <PriceTooltip />
+        </th>
+      ))}
   </tr>
 );
 
-const FixedRows = (props: { components: Component[] }) => (
+const FixedRows = (props: {
+  components: Component[];
+  concealBillingInfo?: boolean;
+}) => (
   <>
     {props.components.map((component, index) => (
       <ComponentRow key={index} offeringComponent={component}>
@@ -45,9 +52,16 @@ const FixedRows = (props: { components: Component[] }) => (
   </>
 );
 
-const UsageRows = (props: { components: Component[]; viewMode: boolean }) =>
+const UsageRows = (props: {
+  components: Component[];
+  viewMode: boolean;
+  concealBillingInfo?: boolean;
+}) =>
   props.viewMode ? (
-    <FixedRows components={props.components} />
+    <FixedRows
+      components={props.components}
+      concealBillingInfo={props.concealBillingInfo}
+    />
   ) : (
     <>
       {props.components.map((component, index) => (
@@ -103,10 +117,16 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
             <thead>
               <HeaderRow
                 periods={!activeFixedPriceProfile ? props.periods : []}
+                concealBillingInfo={props.concealBillingInfo}
               />
             </thead>
             <tbody>
-              {fixedRows.length > 0 && <FixedRows components={fixedRows} />}
+              {fixedRows.length > 0 && (
+                <FixedRows
+                  components={fixedRows}
+                  concealBillingInfo={props.concealBillingInfo}
+                />
+              )}
               {!props.viewMode &&
                 otherLimitedRows.length > 0 &&
                 fixedRows.length > 0 && (
@@ -122,9 +142,10 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                 <UsageRows
                   components={otherLimitedRows}
                   viewMode={props.viewMode}
+                  concealBillingInfo={props.concealBillingInfo}
                 />
               )}
-              {!activeFixedPriceProfile ? (
+              {!activeFixedPriceProfile && !props.concealBillingInfo ? (
                 <tr>
                   <td colSpan={3}>{translate('Total')}</td>
                   {props.totalPeriods.map((price, index) => (
@@ -146,7 +167,10 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                     'Service provider can charge for usage of the following components',
                   )}
             </p>
-            <LimitlessComponentsTable components={usageRows} />
+            <LimitlessComponentsTable
+              components={usageRows}
+              concealBillingInfo={props.concealBillingInfo}
+            />
           </>
         )}
         {totalLimitedRows.length > 0 && (
@@ -160,19 +184,26 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               components={totalLimitedRows}
               total={totalLimitTotal}
               viewMode={props.viewMode}
+              hidePrices={props.concealBillingInfo}
             />
           </>
         )}
         {initialRows.length > 0 && (
           <>
             <p>{translate('A one-time fee applied on activation.')}</p>
-            <LimitlessComponentsTable components={initialRows} />
+            <LimitlessComponentsTable
+              components={initialRows}
+              concealBillingInfo={props.concealBillingInfo}
+            />
           </>
         )}
         {switchRows.length > 0 && (
           <>
             <p>{translate('Fee applied each time this plan is activated.')}</p>
-            <LimitlessComponentsTable components={switchRows} />
+            <LimitlessComponentsTable
+              components={switchRows}
+              concealBillingInfo={props.concealBillingInfo}
+            />
           </>
         )}
       </div>

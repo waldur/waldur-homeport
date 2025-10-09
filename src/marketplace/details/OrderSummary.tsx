@@ -7,6 +7,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 import { DeployPageTotalCard } from '../deploy/DeployPageTotalCard';
 import { formIsValidSelector } from '../deploy/selectors';
@@ -29,6 +30,7 @@ export const SummaryTable: FC<OrderSummaryProps> = (props) => {
           priceData={props.prices}
           customer={props.formData.customer}
           hasTotal={props.onlyDetails}
+          concealPrices={props.shouldConcealPrices}
         />
       )}
     </div>
@@ -48,7 +50,11 @@ const OrderCheckout: FC<OrderSummaryProps> = (props) => {
 
   return (
     <DeployPageTotalCard
-      total={defaultCurrency(total || 0)}
+      total={
+        props.shouldConcealPrices
+          ? DASH_ESCAPE_CODE
+          : defaultCurrency(total || 0)
+      }
       offering={props.offering}
     >
       <SummaryTable {...props} />
@@ -64,15 +70,23 @@ const PureOrderSummary: FC<OrderSummaryProps> = (props) =>
     <OrderCheckout {...props} />
   );
 
-const mapStateToProps = (state, ownProps) => ({
-  customer: orderCustomerSelector(state),
-  prices: pricesSelector(state, ownProps),
-  formData: orderFormDataSelector(state),
-  formValid: formIsValidSelector(state),
-  errors: { ...formErrorsSelector(state), ...formSubmitErrorsSelector(state) },
-  isSubmitting: isSubmitting(ORDER_FORM_ID)(state),
-  shouldConcealPrices: isFeatureVisible(MarketplaceFeatures.conceal_prices),
-});
+const mapStateToProps = (state, ownProps) => {
+  const customer = orderCustomerSelector(state);
+  return {
+    customer,
+    prices: pricesSelector(state, ownProps),
+    formData: orderFormDataSelector(state),
+    formValid: formIsValidSelector(state),
+    errors: {
+      ...formErrorsSelector(state),
+      ...formSubmitErrorsSelector(state),
+    },
+    isSubmitting: isSubmitting(ORDER_FORM_ID)(state),
+    shouldConcealPrices:
+      isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+      customer?.display_billing_info_in_projects === false,
+  };
+};
 
 export const OrderSummary = connect<
   ReturnType<typeof mapStateToProps>,

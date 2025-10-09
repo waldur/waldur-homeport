@@ -89,13 +89,15 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldShowCurrentMonthWidget =
     currentMonthFilteredData?.components?.length > 0;
 
+  const showBillingInfo = project.customer_display_billing_info_in_projects;
+
   if (!project || !user) {
     return null;
   }
   return (
     <>
       <Row>
-        {!shouldConcealPrices && (
+        {!shouldConcealPrices && showBillingInfo && (
           <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
             <ProjectDashboardCostLimits project={project} />
           </Col>
@@ -131,8 +133,6 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
             imageKey="user_image"
           />
         </Col>
-      </Row>
-      <Row>
         {shouldShowCurrentMonthWidget && (
           <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
             <AggregateLimitWidget
@@ -156,7 +156,9 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
             />
           </Col>
         )}
-        <ProjectDashboardCredit project={project} className="mb-5" />
+        {showBillingInfo && (
+          <ProjectDashboardCredit project={project} className="mb-5" />
+        )}
       </Row>
 
       {project.description ? (
