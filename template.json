@@ -11777,7 +11777,6 @@
           "create",
           "integration",
           "roles",
-          "metadata",
           "users",
           "user",
           "affiliations",
@@ -11804,7 +11803,6 @@
           "invitations/actions/create/EmailsListGroup.tsx",
           "marketplace/offerings/update/integration/ScriptEditorHeader.tsx",
           "marketplace/offerings/update/roles/RolesSection.tsx",
-          "marketplace/resources/metadata/TeamSyncTable.tsx",
           "marketplace/resources/users/AddUserDialog.tsx",
           "marketplace/resources/users/ResourceUsersList.tsx",
           "project/team/InvitationsList.tsx",
@@ -11847,7 +11845,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 25
+      "usage_count": 24
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -11916,7 +11914,6 @@
           "import-users",
           "plans",
           "tos",
-          "metadata",
           "service-providers",
           "navigation",
           "openstack-tenant",
@@ -11954,9 +11951,6 @@
           "marketplace/offerings/update/plans/PlansSection.tsx",
           "marketplace/offerings/update/tos/TosManagementSection.tsx",
           "marketplace/resources/details/utils.tsx",
-          "marketplace/resources/metadata/OrderSyncTable.tsx",
-          "marketplace/resources/metadata/ResourceStateTable.tsx",
-          "marketplace/resources/metadata/TeamSyncTable.tsx",
           "marketplace/service-providers/ProviderCampaignsList.tsx",
           "navigation/BackendHealthStatusDialog.tsx",
           "openstack/openstack-tenant/TenantPortsList.tsx",
@@ -11999,7 +11993,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 36
+      "usage_count": 33
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -20940,7 +20934,6 @@
         "unknown",
         "property_value",
         "title",
-        "function_call",
         "label",
         "text_content"
       ],
@@ -20988,7 +20981,6 @@
           "offerings",
           "details",
           "import-users",
-          "charts",
           "robot-accounts",
           "project",
           "team",
@@ -21000,7 +20992,6 @@
           "card",
           "page",
           "list",
-          "form",
           "dialog"
         ],
         "paths": [
@@ -21011,7 +21002,6 @@
           "marketplace/offerings/OfferingDetailsUIView.tsx",
           "marketplace/offerings/details/OfferingUsersTable.tsx",
           "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
-          "marketplace/offerings/update/tos/charts/TosVersionAdoptionChart.tsx",
           "marketplace/robot-accounts/CreateRobotAccountDialog.tsx",
           "marketplace/service-providers/utils.ts",
           "project/routes.ts",
@@ -21043,7 +21033,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 15
+      "usage_count": 14
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -54944,18 +54934,15 @@
       "file_context": {
         "domains": [
           "general",
-          "marketplace",
           "user_management"
         ],
         "feature_areas": [
           "booking",
-          "charts",
           "user",
           "dashboard"
         ],
         "component_types": [
           "field",
-          "form",
           "list",
           "component"
         ],
@@ -54964,7 +54951,6 @@
           "booking/utils.ts",
           "invitations/InvitationStateFilter.tsx",
           "invitations/PermissionRequestStateField.tsx",
-          "marketplace/offerings/update/tos/charts/ConsentStatusBreakdownChart.tsx",
           "proposals/utils.ts",
           "user/UserOfferingList.tsx",
           "user/dashboard/OfferingTosExpandableRow.tsx",
@@ -54991,10 +54977,9 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 9
+      "usage_count": 8
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -67862,7 +67847,6 @@
         "ExpandableContainer",
         "Field",
         "Nav",
-        "Card",
         "TableTabsContainer"
       ],
       "is_user_facing": true,
@@ -67893,7 +67877,6 @@
           "events",
           "create",
           "list",
-          "metadata",
           "robot-accounts",
           "confirmation-drawer",
           "openstack-instance",
@@ -67903,7 +67886,6 @@
           "dialog",
           "form",
           "list",
-          "page",
           "navigation",
           "filter"
         ],
@@ -67913,7 +67895,6 @@
           "events/ExpandableEventDetailsTable.tsx",
           "issues/create/IssueDetailsStepLabel.tsx",
           "marketplace/orders/list/OrdersListExpandableRow.tsx",
-          "marketplace/resources/metadata/ResourceMetadataPage.tsx",
           "marketplace/robot-accounts/ProviderRobotAccountList.tsx",
           "navigation/header/confirmation-drawer/PendingConsumerOrders.tsx",
           "navigation/header/confirmation-drawer/PendingProviderOrders.tsx",
@@ -67945,7 +67926,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 11
+      "usage_count": 10
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -68104,8 +68085,8 @@
       "ui_types": [
         "title",
         "unknown",
-        "property_value",
-        "generic_element"
+        "generic_element",
+        "property_value"
       ],
       "components": [
         "Table",
@@ -68136,7 +68117,6 @@
           "credits",
           "offerings",
           "plans",
-          "charts",
           "usage"
         ],
         "component_types": [
@@ -68148,7 +68128,6 @@
           "customer/credits/CreditUsageDialog.tsx",
           "marketplace/offerings/PriceList.tsx",
           "marketplace/offerings/update/plans/QuotasTable.tsx",
-          "marketplace/offerings/update/tos/charts/RevokedConsentsOverTimeChart.tsx",
           "marketplace/resources/usage/ResourceUsageForm.tsx"
         ]
       },
@@ -68174,7 +68153,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 5
+      "usage_count": 4
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -73216,6 +73195,75 @@
     "translator_notes": [
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Display billing info in projects": {
+    "message": "Display billing info in projects",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label",
+        "generic_element"
+      ],
+      "components": [
+        "AwesomeCheckboxField"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 32,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component",
+          "dialog"
+        ],
+        "paths": [
+          "customer/details/CustomerDetailsPanel.tsx",
+          "customer/details/EditFieldDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AwesomeCheckboxField"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -80947,7 +80995,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 6
+        "max_nesting_level": 7
       },
       "usage_count": 7
     },
@@ -166188,214 +166236,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Acceptance Trends": {
-    "message": "Acceptance Trends",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element",
-        "unknown"
-      ],
-      "components": [
-        "Component",
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "tos"
-        ],
-        "component_types": [
-          "form",
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/ToSAcceptanceTrendsButton.tsx",
-          "marketplace/offerings/update/tos/ToSAcceptanceTrendsModal.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Component",
-          "ModalDialog"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 5
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Unable to load ToS statistics": {
-    "message": "Unable to load ToS statistics",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 29,
-        "wordCount": 5,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "tos"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/ToSAcceptanceTrendsModal.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "div"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "No data available": {
-    "message": "No data available",
-    "context": {
-      "primary_ui_type": "text_content",
-      "ui_types": [
-        "unknown",
-        "text_content"
-      ],
-      "components": [
-        "ModalDialog",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "tos",
-          "charts"
-        ],
-        "component_types": [
-          "dialog",
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/ToSAcceptanceTrendsModal.tsx",
-          "marketplace/offerings/update/tos/charts/ActiveUsersShareChart.tsx",
-          "marketplace/offerings/update/tos/charts/ConsentStatusBreakdownChart.tsx",
-          "marketplace/offerings/update/tos/charts/RevokedConsentsOverTimeChart.tsx",
-          "marketplace/offerings/update/tos/charts/TosVersionAdoptionChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "div"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 5
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
   "Delete ToS": {
     "message": "Delete ToS",
     "context": {
@@ -167247,498 +167087,6 @@
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 7
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Share of active users": {
-    "message": "Share of active users",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 21,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "charts"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/charts/ActiveUsersShareChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Percentage (%)": {
-    "message": "Percentage (%)",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 14,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "charts"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/charts/ActiveUsersShareChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Consent status breakdown": {
-    "message": "Consent status breakdown",
-    "context": {
-      "primary_ui_type": "text_content",
-      "ui_types": [
-        "text_content"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 24,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "charts"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/charts/ConsentStatusBreakdownChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Revoked": {
-    "message": "Revoked",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "charts"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/charts/ConsentStatusBreakdownChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Consent Status": {
-    "message": "Consent Status",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 14,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "charts"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/charts/ConsentStatusBreakdownChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Revoked consents over time": {
-    "message": "Revoked consents over time",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 26,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "charts"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/charts/RevokedConsentsOverTimeChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "ToS Version Adoption": {
-    "message": "ToS Version Adoption",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "function_call"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 20,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "charts"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/charts/TosVersionAdoptionChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "ToS version adoption": {
-    "message": "ToS version adoption",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 20,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "charts"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/charts/TosVersionAdoptionChart.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
       },
       "usage_count": 1
     },
@@ -182871,1362 +182219,6 @@
       "Variable contains numbers. Consider plural handling in your language.",
       "This action modifies application state. Use clear, actionable language.",
       "This is a question. Ensure question format is appropriate in your language."
-    ]
-  },
-  "In sync": {
-    "message": "In sync",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Badge"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx",
-          "marketplace/resources/metadata/ResourceStateTable.tsx",
-          "marketplace/resources/metadata/TeamSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Badge"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Not synced": {
-    "message": "Not synced",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Badge"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 10,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx",
-          "marketplace/resources/metadata/ResourceStateTable.tsx",
-          "marketplace/resources/metadata/TeamSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Badge"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Sync failed": {
-    "message": "Sync failed",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Badge"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 11,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx",
-          "marketplace/resources/metadata/ResourceStateTable.tsx",
-          "marketplace/resources/metadata/TeamSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Badge"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Unknown": {
-    "message": "Unknown",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Badge"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx",
-          "marketplace/resources/metadata/ResourceStateTable.tsx",
-          "marketplace/resources/metadata/TeamSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Badge"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Loading orders...": {
-    "message": "Loading orders...",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 3
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Failed to load orders": {
-    "message": "Failed to load orders",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 21,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 3
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "No orders found": {
-    "message": "No orders found",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 15,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 3
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Order UUID": {
-    "message": "Order UUID",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 10,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Local state": {
-    "message": "Local state",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 11,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx",
-          "marketplace/resources/metadata/ResourceStateTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Remote state": {
-    "message": "Remote state",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 12,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/OrderSyncTable.tsx",
-          "marketplace/resources/metadata/ResourceStateTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Remote resource metadata": {
-    "message": "Remote resource metadata",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 24,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "page"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceMetadataPage.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "h2"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Project data": {
-    "message": "Project data",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Nav",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 12,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "page"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceMetadataPage.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Team:": {
-    "message": "Team:",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 5,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "page"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceMetadataPage.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "h5"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Orders:": {
-    "message": "Orders:",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "page"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceMetadataPage.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "h5"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Loading resource state...": {
-    "message": "Loading resource state...",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 25,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceStateTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 3
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Failed to load resource state": {
-    "message": "Failed to load resource state",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 29,
-        "wordCount": 5,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceStateTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 3
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Resource state": {
-    "message": "Resource state",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 14,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceStateTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "h5"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Field": {
-    "message": "Field",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 5,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "general"
-        ],
-        "feature_areas": [
-          "metadata",
-          "marketplace-remote"
-        ],
-        "component_types": [
-          "list",
-          "form"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceStateTable.tsx",
-          "marketplace-remote/ProjectUpdateRequestExpandable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Sync status": {
-    "message": "Sync status",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 11,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/ResourceStateTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "td"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Local permissions": {
-    "message": "Local permissions",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/TeamSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Remote permissions": {
-    "message": "Remote permissions",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 18,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/resources/metadata/TeamSyncTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
   "Resource doesn't have options.": {
@@ -201801,6 +199793,68 @@
         "max_nesting_level": 4
       },
       "usage_count": 2
+    }
+  },
+  "Field": {
+    "message": "Field",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "marketplace-remote"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace-remote/ProjectUpdateRequestExpandable.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
     }
   },
   "OECD FoS code": {

@@ -18,8 +18,10 @@ const OfferingDetailsDialog = lazyComponent(() =>
 
 export const OfferingDetailsField = ({
   offering,
+  concealBillingInfo,
 }: {
   offering: PublicOfferingDetails;
+  concealBillingInfo?: boolean;
 }) => {
   const dispatch = useDispatch();
   return (
@@ -39,7 +41,7 @@ export const OfferingDetailsField = ({
             onClick={() =>
               dispatch(
                 openModalDialog(OfferingDetailsDialog, {
-                  resolve: { offering },
+                  resolve: { offering, concealBillingInfo },
                   size: 'lg',
                 }),
               )

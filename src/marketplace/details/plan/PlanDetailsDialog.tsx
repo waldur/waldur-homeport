@@ -1,8 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useAsync } from 'react-use';
 import {
   marketplacePublicOfferingsRetrieve,
   marketplaceResourcesRetrieve,
+  projectsRetrieve,
 } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -23,10 +24,38 @@ interface PlanDetailsDialogProps {
 async function loadData(resourceId: string) {
   const resource = await marketplaceResourcesRetrieve({
     path: { uuid: resourceId },
+    query: {
+      field: [
+        'offering_uuid',
+        'project_uuid',
+        'plan',
+        'plan_uuid',
+        'limits',
+        'current_usages',
+      ],
+    },
   }).then((r) => r.data);
-  const offering = await marketplacePublicOfferingsRetrieve({
-    path: { uuid: resource.offering_uuid },
+  const projectPromise = projectsRetrieve({
+    path: { uuid: resource.project_uuid },
+    query: { field: ['customer_display_billing_info_in_projects'] },
   }).then((response) => response.data);
+  const offeringPromise = marketplacePublicOfferingsRetrieve({
+    path: { uuid: resource.offering_uuid },
+    query: {
+      field: [
+        'type',
+        'plans',
+        'components',
+        'plugin_options',
+        'options',
+        'resource_options',
+      ],
+    },
+  }).then((response) => response.data);
+  const [project, offering] = await Promise.all([
+    projectPromise,
+    offeringPromise,
+  ]);
   const plan =
     resource.plan &&
     offering.plans.find((item) => item.uuid === resource.plan_uuid);
@@ -40,6 +69,7 @@ async function loadData(resourceId: string) {
           ? parseFloat(plan.unit_price)
           : plan.unit_price,
     },
+    project,
     ...combinePrices(
       plan,
       limitParser(resource.limits),
@@ -50,20 +80,21 @@ async function loadData(resourceId: string) {
 }
 
 export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
-  const {
-    loading,
-    error,
-    value: data,
-  } = useAsync(
-    () => loadData(props.resolve.resourceId),
-    [props.resolve.resourceId],
-  );
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['resource-plan-data', props.resolve.resourceId],
+    queryFn: () => loadData(props.resolve.resourceId),
+    refetchOnWindowFocus: false,
+    staleTime: 3 * 60 * 1000,
+  });
+  const concealBillingInfo =
+    data.project?.customer_display_billing_info_in_projects === false;
+
   return (
     <ModalDialog
       title={translate('Plan details')}
       footer={<CloseDialogButton label={translate('Done')} />}
     >
-      {loading ? (
+      {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
         <p>{translate('Unable to load plan details.')}</p>
@@ -80,7 +111,7 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
               {data.plan.description}
             </p>
           )}
-          {data.plan.unit_price > 0 && (
+          {data.plan.unit_price > 0 && !concealBillingInfo && (
             <>
               <p>
                 <strong>{translate('Plan price')}</strong>:{' '}
@@ -92,7 +123,11 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
               </p>
             </>
           )}
-          <PureDetailsTable {...data} viewMode={true} />
+          <PureDetailsTable
+            {...data}
+            viewMode={true}
+            concealBillingInfo={concealBillingInfo}
+          />
         </>
       )}
     </ModalDialog>

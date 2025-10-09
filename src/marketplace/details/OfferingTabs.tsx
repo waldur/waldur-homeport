@@ -17,6 +17,7 @@ interface OfferingTabsProps {
   sections: NestedSection[];
   offering: PublicOfferingDetails;
   order?: any;
+  concealBillingInfo?: boolean;
 }
 
 export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
@@ -45,7 +46,8 @@ export const getTabs = (props: OfferingTabsProps): OfferingTab[] => {
       visible:
         !isFeatureVisible(MarketplaceFeatures.catalogue_only) &&
         !props.offering.plugin_options['conceal_billing_data'] &&
-        props.offering.plans?.length > 0,
+        props.offering.plans?.length > 0 &&
+        !props.concealBillingInfo,
       title: translate('Pricing'),
       component: () => <PublicOfferingPricing offering={props.offering} />,
     },

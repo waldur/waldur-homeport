@@ -71,7 +71,13 @@ export const CustomerField: FC<{ organizationGroups }> = ({
                 organization_group_uuid: organizationGroups.map(
                   (group) => group.uuid,
                 ),
-                field: ['name', 'uuid', 'url', 'payment_profiles'],
+                field: [
+                  'name',
+                  'uuid',
+                  'url',
+                  'payment_profiles',
+                  'display_billing_info_in_projects',
+                ],
                 o: 'name',
               })
             }

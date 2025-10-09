@@ -9,12 +9,13 @@ import { Component } from './types';
 
 export const LimitlessComponentsTable = ({
   components,
+  concealBillingInfo,
 }: {
   components: Component[];
+  concealBillingInfo?: boolean;
 }) => {
-  const shouldConcealPrices = isFeatureVisible(
-    MarketplaceFeatures.conceal_prices,
-  );
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) || concealBillingInfo;
   return (
     <table className="table align-middle table-row-dashed fs-6 gy-5 no-footer">
       <thead>

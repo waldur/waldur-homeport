@@ -24,6 +24,7 @@ export interface PlanDetailsTableProps extends PricesData {
   formGroupClassName?: string;
   columnClassName?: string;
   customer?: Customer;
+  concealBillingInfo?: boolean;
   extraTabs?: Array<{
     title: ReactNode;
     eventKey: string | number;

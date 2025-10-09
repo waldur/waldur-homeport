@@ -14,6 +14,7 @@ import {
   SubmitButton,
   TextField,
 } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import { DateField } from '@waldur/form/DateField';
 import { EmailField } from '@waldur/form/EmailField';
@@ -184,6 +185,13 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                 name="max_service_accounts"
                 label={translate('Maximum number of service accounts')}
                 min={0}
+              />
+            ) : props.resolve.name === 'display_billing_info_in_projects' ? (
+              <AwesomeCheckboxField
+                name={props.resolve.name}
+                label={translate('Display billing info in projects')}
+                hideLabel
+                alignMiddle
               />
             ) : // Contact fields
             props.resolve.name === 'email' ? (

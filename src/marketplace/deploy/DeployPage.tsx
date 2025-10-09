@@ -13,6 +13,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form';
 import { OrderDetails } from 'waldur-js-client';
 
 import { parseDate } from '@waldur/core/dateUtils';
+import { getCustomer } from '@waldur/customer/utils';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
 import { Offering, Plan } from '@waldur/marketplace/types';
@@ -239,6 +240,24 @@ export const BaseDeployPage = ({
       );
     }
   }, [formData?.attributes?.flavor, formData?.attributes?.image, props.change]);
+
+  // To check if a customer has display_billing_info_in_projects to hide prices
+  // When the customer is not selected from the selector, we may not have this field.
+  const fetchCustomerBillingFlag = useCallback(async (customer) => {
+    try {
+      const _customer = await getCustomer(customer.uuid, [
+        'display_billing_info_in_projects',
+      ]);
+      props.change('customer', { ...customer, ..._customer });
+    } catch {
+      return;
+    }
+  }, []);
+  useEffect(() => {
+    if (!customer) return;
+    if ('display_billing_info_in_projects' in customer) return;
+    fetchCustomerBillingFlag(customer);
+  }, [customer]);
 
   if (props.previewMode) {
     return (
