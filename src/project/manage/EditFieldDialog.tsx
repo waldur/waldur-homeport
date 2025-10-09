@@ -28,6 +28,7 @@ import { StartDateGroup } from '../create/StartDateGroup';
 import { EditProjectProps } from '../types';
 
 const formatValue = (key, value) => {
+  if (['', undefined, null].includes(value)) return null;
   switch (key) {
     case 'end_date':
     case 'start_date':

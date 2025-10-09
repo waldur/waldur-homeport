@@ -26,5 +26,5 @@ export const FieldEditButton = (props: EditProjectProps) => {
         : openModalDialog(EditFieldDialog, { resolve: props, size: 'sm' }),
     );
   };
-  return <EditButton onClick={callback} size="sm" />;
+  return <EditButton onClick={callback} size="sm" disabled={props.disabled} />;
 };
