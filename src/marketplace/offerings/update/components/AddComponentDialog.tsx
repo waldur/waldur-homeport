@@ -58,7 +58,7 @@ export const AddComponentDialog = reduxForm<
           />
         }
       >
-        <ComponentForm />
+        <ComponentForm offering={props.resolve.offering} />
       </ModalDialog>
     </form>
   );

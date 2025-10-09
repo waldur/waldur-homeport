@@ -73,6 +73,7 @@ export const EditComponentDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
         >
           <ComponentForm
             readOnly={props.resolve.offering.type === TENANT_TYPE}
+            offering={props.resolve.offering}
           />
         </ModalDialog>
       </form>
