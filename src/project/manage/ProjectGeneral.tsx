@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Project } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { parseDate } from '@waldur/core/dateUtils';
 import FormTable, { FormTableItemProps } from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
@@ -43,6 +44,10 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             ),
             key: 'start_date',
             value: project.start_date || 'N/A',
+            // If date is past, disable it
+            disabled: project.start_date
+              ? parseDate(project.start_date) < parseDate(null)
+              : false,
           },
           {
             label: translate('End date'),
@@ -93,7 +98,13 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
               label={row.label}
               description={row.description}
               value={row.value}
-              actions={<FieldEditButton project={project} name={row.key} />}
+              actions={
+                <FieldEditButton
+                  project={project}
+                  name={row.key}
+                  disabled={row.disabled}
+                />
+              }
             />
           ))}
         </FormTable>
