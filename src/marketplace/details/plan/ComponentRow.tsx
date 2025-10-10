@@ -3,13 +3,14 @@ import React, { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/core/config';
-import { defaultCurrency, formatCurrency } from '@waldur/core/formatCurrency';
+import { formatCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { ComponentCost } from './ComponentCost';
 import { Component, PlanPeriod } from './types';
 
 interface ComponentRowProps {
@@ -76,16 +77,9 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
     <FormTable.Item
       label={props.offeringComponent.name}
       description={
-        !props.hidePrices
-          ? translate('Cost') +
-            ': ' +
-            (props.offeringComponent.measured_unit
-              ? translate('{price} per {unit}', {
-                  price: defaultCurrency(props.offeringComponent.price),
-                  unit: props.offeringComponent.measured_unit,
-                })
-              : defaultCurrency(props.offeringComponent.price))
-          : undefined
+        props.hidePrices ? null : (
+          <ComponentCost component={props.offeringComponent} />
+        )
       }
       value={props.children}
       actions={

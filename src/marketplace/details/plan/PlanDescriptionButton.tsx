@@ -1,10 +1,11 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
-import { showOfferingPlanDescription } from '@waldur/marketplace/details/plan/actions';
+import { useModal } from '@waldur/modal/hooks';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 interface PlanDescriptionButtonProps {
@@ -13,8 +14,14 @@ interface PlanDescriptionButtonProps {
   formId?: string;
 }
 
+const PlanDescription = lazyComponent(() =>
+  import('./PlanDescription').then((module) => ({
+    default: module.PlanDescription,
+  })),
+);
+
 export const PlanDescriptionButton = (props: PlanDescriptionButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const formData = useSelector(
     getFormValues(props.formId || ORDER_FORM_ID),
   ) as { plan: { description } };
@@ -30,9 +37,11 @@ export const PlanDescriptionButton = (props: PlanDescriptionButtonProps) => {
     return null;
   }
 
-  const handleClick = () => {
-    dispatch(showOfferingPlanDescription(planDescription));
-  };
+  const handleClick = () =>
+    openDialog(PlanDescription, {
+      resolve: { plan_description: planDescription },
+      size: 'lg',
+    });
 
   return (
     <ActionButton

@@ -11,8 +11,8 @@ import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { publicOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
-import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
 import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
+import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
 
 export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
   const categoriesQuery = useQuery({
@@ -130,7 +130,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
                 <PlanDescriptionButton formId={props.form} />
               </div>
               {offeringQuery.data && selectedPlan && (
-                <PlanDetailsTable2
+                <TabbedPlanComponents
                   offering={offeringQuery.data}
                   plan={selectedPlan}
                   limits={limits}

@@ -3,7 +3,7 @@ import { BasePublicPlan, PublicOfferingDetails } from 'waldur-js-client';
 
 import { Panel } from '@waldur/core/Panel';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
-import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
+import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
 
 interface PricingPlanItemProps {
   offering: PublicOfferingDetails;
@@ -21,7 +21,7 @@ export const PublicOfferingPricingPlanItem: FC<PricingPlanItemProps> = ({
       actions={<PlanDescriptionButton planDescription={plan.description} />}
       cardBordered
     >
-      <PlanDetailsTable2 offering={offering} plan={plan} />
+      <TabbedPlanComponents offering={offering} plan={plan} />
     </Panel>
   );
 };

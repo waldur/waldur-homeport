@@ -5,8 +5,8 @@ import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { OrderSummaryButton } from '@waldur/marketplace/details/OrderSummaryButton';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
-import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
 import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
+import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
 
 import { orderCustomerSelector } from '../selectors';
 import { FormStepProps } from '../types';
@@ -44,7 +44,7 @@ export const FormPlanStep = (props: FormStepProps) => {
         </div>
         <PlanDescriptionButton />
       </div>
-      <PlanDetailsTable2 offering={props.offering} customer={customer} />
+      <TabbedPlanComponents offering={props.offering} customer={customer} />
     </VStepperFormStepCard>
   );
 };

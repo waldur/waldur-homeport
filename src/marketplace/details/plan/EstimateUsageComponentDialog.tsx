@@ -1,6 +1,5 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
-import { FormControl, InputGroup } from 'react-bootstrap';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
@@ -8,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
+import { MeasuredUnitInput } from './MeasuredUnitInput';
 import { Component, PlanPeriod } from './types';
 
 interface OwnProps {
@@ -60,24 +60,10 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
             </th>
             <td>X</td>
             <td className="control">
-              <InputGroup>
-                <FormControl
-                  type="number"
-                  min={props.resolve.component.min_value || 0}
-                  max={props.resolve.component.max_value}
-                  onChange={(e: any) => setQty(e.target.value)}
-                  aria-describedby={`basic-addon-${props.resolve.component.type}`}
-                />
-
-                {props.resolve.component.measured_unit && (
-                  <InputGroup.Text
-                    className="text-muted"
-                    id={`basic-addon-${props.resolve.component.type}`}
-                  >
-                    {props.resolve.component.measured_unit}
-                  </InputGroup.Text>
-                )}
-              </InputGroup>
+              <MeasuredUnitInput
+                component={props.resolve.component}
+                input={{ value: qty, onChange: setQty }}
+              />
             </td>
             <td className="text-center" width="20px">
               =

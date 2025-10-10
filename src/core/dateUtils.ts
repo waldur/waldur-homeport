@@ -81,3 +81,13 @@ export const formatISOWithoutZone: DateFormatter = (date) =>
 /** @example July 2022 */
 export const formatMonth: DateFormatter = (date) =>
   parseDate(date).toFormat('MMMM yyyy');
+
+export const calculateMonthsDifference = (
+  startDate: string,
+  endDate: string,
+): number => {
+  const start = DateTime.fromISO(startDate);
+  const end = DateTime.fromISO(endDate);
+
+  return Math.round(end.diff(start, 'months').months);
+};
