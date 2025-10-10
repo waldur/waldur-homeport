@@ -21,10 +21,11 @@ export const OauthLoginCompleted: FunctionComponent = () => {
     async function fetchToken() {
       const qs = Qs.parse(getQueryString());
       try {
-        AuthService.setAuthHeader(decodeURIComponent(qs.token as string));
+        const token = decodeURIComponent(qs.token as string);
+        AuthService.setAuthHeader(token);
         const user = await UsersService.getCurrentUser();
         AuthService.loginSuccess({
-          data: { ...user, method: provider },
+          data: { ...user, token, method: provider },
         });
         AuthService.redirectOnSuccess();
       } catch (e) {
