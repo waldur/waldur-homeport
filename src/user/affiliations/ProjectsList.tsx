@@ -235,13 +235,15 @@ export const ProjectsList = () => {
     });
   }
 
-  columns.push({
-    title: translate('Type'),
-    render: ProjectKindField,
-    keys: ['kind'],
-    id: 'kind',
-    export: 'kind',
-  });
+  if (isFeatureVisible(ProjectFeatures.show_kind_in_create_dialog)) {
+    columns.push({
+      title: translate('Type'),
+      render: ProjectKindField,
+      keys: ['kind'],
+      id: 'kind',
+      export: 'kind',
+    });
+  }
 
   return (
     <Table

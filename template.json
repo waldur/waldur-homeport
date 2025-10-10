@@ -26073,10 +26073,9 @@
   "Done": {
     "message": "Done",
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "unknown",
       "ui_types": [
         "generic_element",
-        "label",
         "property_value"
       ],
       "components": [
@@ -26107,22 +26106,18 @@
         "feature_areas": [
           "organizations",
           "plan",
-          "list",
           "details",
           "resource-pending",
           "navigation"
         ],
         "component_types": [
           "dialog",
-          "list",
           "page"
         ],
         "paths": [
           "administration/organizations/OrganizationGroupDetailsDialog.tsx",
           "marketplace/details/plan/PlanDetailsDialog.tsx",
-          "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
-          "marketplace/orders/list/OrderStateCell.tsx",
-          "marketplace/orders/list/OrderStateFilter.tsx",
+          "marketplace/orders/OrderStates.ts",
           "marketplace/resources/details/ResourceComponentsDialog.tsx",
           "marketplace/resources/resource-pending/OrderInProgressView.tsx",
           "navigation/BackendHealthStatusDialog.tsx"
@@ -26148,7 +26143,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 8
+      "usage_count": 6
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
@@ -55016,20 +55011,17 @@
         ],
         "feature_areas": [
           "booking",
-          "list",
           "resource-pending"
         ],
         "component_types": [
           "field",
-          "list",
           "page"
         ],
         "paths": [
           "booking/BookingStateField.tsx",
           "booking/utils.ts",
           "invitations/InvitationStateFilter.tsx",
-          "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
-          "marketplace/orders/list/OrderStateCell.tsx",
+          "marketplace/orders/OrderStates.ts",
           "marketplace/resources/resource-pending/OrderInProgressView.tsx",
           "marketplace-remote/RequestStateFilter.tsx",
           "proposals/utils.ts",
@@ -55054,7 +55046,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 9
+      "usage_count": 8
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
@@ -102041,18 +102033,12 @@
       },
       "variables": {},
       "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "list"
-        ],
-        "component_types": [
-          "list"
-        ],
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
         "paths": [
           "invitations/InvitationStateFilter.tsx",
-          "marketplace/orders/list/OrderStateCell.tsx"
+          "marketplace/orders/OrderStates.ts"
         ]
       },
       "jsx_context": {
@@ -102074,10 +102060,7 @@
         "max_nesting_level": 0
       },
       "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
+    }
   },
   "Canceled": {
     "message": "Canceled",
@@ -102119,8 +102102,7 @@
         "paths": [
           "invitations/InvitationStateFilter.tsx",
           "invoices/list/InvoicesFilter.tsx",
-          "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
-          "marketplace/orders/list/OrderStateCell.tsx",
+          "marketplace/orders/OrderStates.ts",
           "marketplace/resources/resource-pending/OrderInProgressView.tsx",
           "marketplace-remote/RequestStateFilter.tsx",
           "proposals/proposal/create/ProgressSteps.tsx",
@@ -102145,7 +102127,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 8
+      "usage_count": 7
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
@@ -149103,8 +149085,8 @@
       "primary_ui_type": "label",
       "ui_types": [
         "property_value",
-        "label",
-        "unknown"
+        "unknown",
+        "label"
       ],
       "components": [
         "Tip"
@@ -149129,20 +149111,16 @@
           "marketplace"
         ],
         "feature_areas": [
-          "list",
           "details",
           "resource-pending"
         ],
         "component_types": [
-          "list",
           "component",
           "page"
         ],
         "paths": [
           "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
-          "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
-          "marketplace/orders/list/OrderStateCell.tsx",
-          "marketplace/orders/list/OrderStateFilter.tsx",
+          "marketplace/orders/OrderStates.ts",
           "marketplace/resources/details/ResourceBackendState.tsx",
           "marketplace/resources/list/ResourceStateFilter.tsx",
           "marketplace/resources/resource-pending/OrderInProgressView.tsx",
@@ -149169,7 +149147,7 @@
         "has_validation": false,
         "max_nesting_level": 6
       },
-      "usage_count": 8
+      "usage_count": 6
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
@@ -168010,6 +167988,172 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Pending consumer approval": {
+    "message": "Pending consumer approval",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/orders/OrderStates.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Pending provider approval": {
+    "message": "Pending provider approval",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "resource-pending"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "marketplace/orders/OrderStates.ts",
+          "marketplace/resources/resource-pending/OrderInProgressView.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Executing": {
+    "message": "Executing",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/orders/OrderStates.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Select provider...": {
     "message": "Select provider...",
     "context": {
@@ -171207,6 +171351,73 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
+  "Unknown state": {
+    "message": "Unknown state",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element",
+        "unknown"
+      ],
+      "components": [
+        "StateIndicator"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "field"
+        ],
+        "paths": [
+          "marketplace/orders/details/OrderStateField.tsx",
+          "marketplace/orders/list/OrderStateCell.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "StateIndicator"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
   "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\".": {
     "message": "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\".",
     "context": {
@@ -171691,254 +171902,6 @@
       "This appears in the marketplace context. Use business-appropriate language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
-  },
-  "Executing": {
-    "message": "Executing",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label",
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 9,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "list"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
-          "marketplace/orders/list/OrderStateCell.tsx",
-          "marketplace/orders/list/OrderStateFilter.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Pending consumer approval": {
-    "message": "Pending consumer approval",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label",
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 25,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "list"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
-          "marketplace/orders/list/OrderStateCell.tsx",
-          "marketplace/orders/list/OrderStateFilter.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Pending provider approval": {
-    "message": "Pending provider approval",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label",
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 25,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "list",
-          "resource-pending"
-        ],
-        "component_types": [
-          "list",
-          "page"
-        ],
-        "paths": [
-          "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
-          "marketplace/orders/list/OrderStateCell.tsx",
-          "marketplace/orders/list/OrderStateFilter.tsx",
-          "marketplace/resources/resource-pending/OrderInProgressView.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 4
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Terminated": {
-    "message": "Terminated",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 10,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "marketplace/orders/list/OrderStateFilter.tsx",
-          "marketplace/service-providers/ProviderCampaignStateFilter.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 2
-    }
   },
   "Go to marketplace": {
     "message": "Go to marketplace",
@@ -190431,6 +190394,58 @@
       "Contains variables: count. Variable types: number.",
       "Variable contains numbers. Consider plural handling in your language."
     ]
+  },
+  "Terminated": {
+    "message": "Terminated",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/service-providers/ProviderCampaignStateFilter.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
   },
   "Coupon": {
     "message": "Coupon",
@@ -239561,6 +239576,64 @@
       "text_characteristics": {
         "length": 27,
         "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "import"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/import/Step4UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "The plan name is not specified in one or more resource records.": {
+    "message": "The plan name is not specified in one or more resource records.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 63,
+        "wordCount": 12,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
