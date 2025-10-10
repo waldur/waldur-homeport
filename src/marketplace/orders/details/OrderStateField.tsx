@@ -1,9 +1,12 @@
 import { StateIndicator } from '@waldur/core/StateIndicator';
+import { translate } from '@waldur/i18n';
+
+import { ORDER_STATE_LABELS } from '../OrderStates';
 
 export const OrderStateField = ({ order, pill, outline, hasBullet }) => {
   return (
     <StateIndicator
-      label={order.state}
+      label={ORDER_STATE_LABELS[order.state] || translate('Unknown state')}
       variant={
         order.state === 'erred'
           ? 'danger'
