@@ -15,8 +15,9 @@ import { Column, TableProps } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
 import { OrderProviderActions } from '../actions/OrderProviderActions';
+import { OrderStateField } from '../details/OrderStateField';
+import { createOrderStateOptions } from '../OrderStates';
 
-import { getOrderStateFilterOptions } from './MarketplaceOrdersListFilter';
 import { OrdersListExpandableRow } from './OrdersListExpandableRow';
 import { OrderTablePlaceholderActions } from './OrderTablePlaceholderActions';
 import { OrderTypeCell } from './OrderTypeCell';
@@ -98,12 +99,14 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
     },
     {
       title: translate('State'),
-      render: ({ row }) => row.state,
+      render: ({ row }) => (
+        <OrderStateField order={row} pill outline hasBullet />
+      ),
       orderField: 'state',
       keys: ['state'],
       filter: 'state',
       inlineFilter: (row) =>
-        getOrderStateFilterOptions().find((op) => op.value === row.state),
+        createOrderStateOptions().find((op) => op.value === row.state),
       id: 'state',
     },
     {

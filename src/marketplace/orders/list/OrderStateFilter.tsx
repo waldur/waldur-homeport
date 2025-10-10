@@ -5,14 +5,7 @@ import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { Option } from '@waldur/marketplace/common/registry';
 
-const getOrderStateFilterOption = (): Option[] => [
-  { value: 'pending-consumer', label: translate('Pending consumer approval') },
-  { value: 'pending-provider', label: translate('Pending provider approval') },
-  { value: 'executing', label: translate('Executing') },
-  { value: 'done', label: translate('Done') },
-  { value: 'erred', label: translate('Erred') },
-  { value: 'terminated', label: translate('Terminated') },
-];
+import { createOrderStateOptions } from '../OrderStates';
 
 interface OrderStateFilterProps {
   options?: () => Option[];
@@ -26,7 +19,7 @@ export const OrderStateFilter: FunctionComponent<OrderStateFilterProps> = ({
     component={(fieldProps) => (
       <Select
         placeholder={translate('Select state...')}
-        options={options ? options() : getOrderStateFilterOption()}
+        options={options ? options() : createOrderStateOptions()}
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
         isClearable={true}
