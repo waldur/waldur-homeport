@@ -116,6 +116,10 @@ export const PermissionOptions = [
         label: translate('Update options for resource'),
         value: 'RESOURCE.UPDATE_OPTIONS',
       },
+      {
+        label: translate('Update resource'),
+        value: 'RESOURCE.UPDATE',
+      },
     ],
   },
   {
