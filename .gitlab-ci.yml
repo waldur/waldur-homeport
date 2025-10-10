@@ -166,10 +166,36 @@ Build artifact:
       - dist/
     expire_in: 1 week
 
-Publish latest multiarch docker image:
-  extends: .Publish multiarch latest docker image template
+Publish latest docker image:
+  stage: release
+  interruptible: true
+  image:
+    name: quay.io/containers/buildah:latest
+    entrypoint: [""]
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
   variables:
-    EXTRA_BUILD_ARGS: "--build-arg COMMIT_INFO=${CI_COMMIT_SHA} --build-arg VERSION=latest"
+    BUILDAH_FORMAT: docker
+    BUILDAH_ISOLATION: chroot
+    DOCKER_HUB_REGISTRY: "docker.io"
+    IMAGE_TAG: "opennode/waldur-homeport:latest"
+  before_script:
+    - echo "[+] Build and publish latest docker image for ${CI_DEFAULT_BRANCH} branch"
+    # Log in to Docker Hub
+    - echo "${WALDUR_DOCKER_HUB_PASSWORD}" | buildah login -u "${WALDUR_DOCKER_HUB_USER}" --password-stdin "${DOCKER_HUB_REGISTRY}"
+  script:
+    - echo "[+] Building image ${IMAGE_TAG}"
+    - |
+      buildah bud \
+        --build-arg DOCKER_REGISTRY="${DOCKER_REGISTRY}" \
+        --build-arg COMMIT_INFO="${CI_COMMIT_SHA}" \
+        --build-arg VERSION="latest" \
+        -t "${IMAGE_TAG}" \
+        -f "${CI_PROJECT_DIR}/Dockerfile" \
+        "${CI_PROJECT_DIR}"
+    - buildah push "${IMAGE_TAG}" "docker://${IMAGE_TAG}"
 
 Publish multiarch docker image with specific version:
   extends: .Publish multiarch docker image with specific version template
