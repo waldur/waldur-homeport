@@ -196,10 +196,12 @@ export const count = (url: string, query?) =>
       query,
       parseAs: 'text',
       security: [
-        {
-          name: 'Authorization',
-          type: 'apiKey',
-        },
+        ENV.plugins.WALDUR_CORE.OIDC_ACCESS_TOKEN_ENABLED
+          ? { type: 'http', scheme: 'bearer' }
+          : {
+              name: 'Authorization',
+              type: 'apiKey',
+            },
       ],
     })
     .then(fetchResultCount);
