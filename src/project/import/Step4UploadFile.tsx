@@ -57,6 +57,20 @@ const asyncValidate = (values) =>
             }
           }
 
+          // Check plan names for resource records
+          if (!_error && values.import_type === 'projects_with_resources') {
+            const typeIdx = header.indexOf('type');
+            const planIdx = header.indexOf('plan_name');
+            if (typeIdx !== -1 && planIdx !== -1) {
+              const resourceRecords = results.data
+                .slice(1)
+                .filter((record) => record[typeIdx] === 'resource');
+              if (resourceRecords.some((record) => !record[planIdx])) {
+                _error = 'plan';
+              }
+            }
+          }
+
           // Check OECD field
           if (!_error && isFeatureVisible(ProjectFeatures.oecd_fos_2007_code)) {
             const isOecdRequired =
@@ -111,6 +125,12 @@ const asyncValidate = (values) =>
           reject({ file: translate('OECD code is required for projects.') });
         } else if (_error === 'invalid_oecd') {
           reject({ file: translate('OECD code must be a number.') });
+        } else if (_error === 'plan') {
+          reject({
+            file: translate(
+              'The plan name is not specified in one or more resource records.',
+            ),
+          });
         } else {
           // No error
           resolve('');

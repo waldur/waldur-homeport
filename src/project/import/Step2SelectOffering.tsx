@@ -55,6 +55,7 @@ export const Step2SelectOffering: FC<WizardFormStepProps> = (props) => {
                 field={OfferingsAutocompleteCommonFields.concat(
                   'components',
                   'attributes',
+                  'plans',
                 )}
               />
             </Form.Group>

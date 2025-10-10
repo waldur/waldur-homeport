@@ -29,12 +29,16 @@ const RESOURCE_FIELDS = [
   'plan_name',
 ];
 
+const today = new Date();
+const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+const formatDate = (date) => date.toISOString().split('T')[0];
+
 const COMMON_DEFAULTS = {
-  oecd_fos_2007_code: '1',
+  oecd_fos_2007_code: '1.1',
   is_industry: 'false',
   project_type: 'Regular',
-  'start_date (yyyy-mm-dd)': '2025-01-01',
-  'end_date (yyyy-mm-dd)': '2025-01-31',
+  'start_date (yyyy-mm-dd)': formatDate(today),
+  'end_date (yyyy-mm-dd)': formatDate(lastDayOfMonth),
 };
 
 const FIELD_RULES = {
@@ -56,8 +60,6 @@ const TYPE_DEFAULTS = {
     name: 'Sample Resource',
     description: 'Sample resource description',
     project_name: 'Sample Project',
-    offering_name: 'Sample Offering',
-    plan_name: 'Sample Plan',
   },
 };
 
@@ -242,6 +244,8 @@ export const generateTemplateData = (
       if (type === 'resource') {
         if (field === 'offering_name')
           return offering.name || 'Sample Offering Name';
+        if (field === 'plan_name')
+          return offering.plans?.[0]?.name || 'Sample Plan';
         if (field.endsWith('_limit')) return '1';
         if (
           offering.attributes &&
