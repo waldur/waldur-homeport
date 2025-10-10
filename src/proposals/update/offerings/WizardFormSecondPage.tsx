@@ -8,8 +8,8 @@ import { FormContainer } from '@waldur/form';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
-import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
 import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
+import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
 
 export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
   props,
@@ -60,7 +60,7 @@ export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
                   </div>
                   <PlanDescriptionButton formId={props.form} />
                 </div>
-                <PlanDetailsTable2
+                <TabbedPlanComponents
                   offering={queryData.data}
                   plan={plan}
                   limits={limits}

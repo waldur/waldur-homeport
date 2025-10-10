@@ -17759,6 +17759,7 @@
           "details",
           "comments",
           "create",
+          "plan",
           "images",
           "import",
           "integration",
@@ -17788,6 +17789,7 @@
           "issues/comments/CommentFormDialog.tsx",
           "maintenance/create/MaintenanceFormDialog.tsx",
           "marketplace/details/CustomerField.tsx",
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx",
           "marketplace/offerings/images/CreateImageDialog.tsx",
           "marketplace/offerings/import/WizardButtons.tsx",
           "marketplace/offerings/update/integration/EditFieldDialog.tsx",
@@ -17826,7 +17828,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 24
+      "usage_count": 25
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -49710,7 +49712,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 7
@@ -49719,7 +49721,6 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -55453,7 +55454,8 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "function_call"
+        "function_call",
+        "unknown"
       ],
       "components": [],
       "is_user_facing": true,
@@ -55473,24 +55475,29 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "general"
+          "general",
+          "marketplace"
         ],
         "feature_areas": [
           "booking",
-          "deploy"
+          "deploy",
+          "plan"
         ],
         "component_types": [
           "component",
-          "form"
+          "form",
+          "dialog"
         ],
         "paths": [
           "booking/OfferingScheduler.tsx",
-          "booking/deploy/FormPeriodsStep.tsx"
+          "booking/deploy/FormPeriodsStep.tsx",
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "span"
+          "span",
+          "label"
         ],
         "conditional_render": true
       },
@@ -55505,12 +55512,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -65074,9 +65083,10 @@
           "invoices/list/MonthOverview.tsx",
           "marketplace/deploy/DeployPageTotalCard.tsx",
           "marketplace/details/plan/ComponentRow.tsx",
+          "marketplace/details/plan/ComponentRowTotal.tsx",
           "marketplace/details/plan/OrderSummaryPlanRows.tsx",
           "marketplace/details/plan/PlanDetailsTable.tsx",
-          "marketplace/details/plan/PlanDetailsTable2.tsx",
+          "marketplace/details/plan/PrepaidRows.tsx",
           "marketplace/details/plan/TotalLimitComponentsTable.tsx",
           "marketplace/details/plan/UsageComponentRow.tsx",
           "marketplace/resources/change-limits/ComponentTotalRow.tsx",
@@ -65114,7 +65124,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 21
+      "usage_count": 22
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -80973,7 +80983,7 @@
           "customer/list/CustomerList.tsx",
           "dashboard/utils.ts",
           "invoices/list/InvoicesStatsList.tsx",
-          "marketplace/details/plan/ComponentRow.tsx",
+          "marketplace/details/plan/ComponentCost.tsx",
           "marketplace/details/plan/UsageComponentRow.tsx",
           "marketplace/offerings/details/policies/PoliciesTable.tsx",
           "marketplace/offerings/expandable/utils.ts"
@@ -111291,14 +111301,15 @@
         "component_types": [
           "card",
           "dialog",
-          "list"
+          "list",
+          "component"
         ],
         "paths": [
           "invoices/details/InvoiceItemExpandableRow.tsx",
           "invoices/details/InvoiceItemUpdateDialog.tsx",
           "invoices/details/ResourceLimitPeriodsTable.tsx",
+          "marketplace/details/plan/FixedRows.tsx",
           "marketplace/details/plan/PlanDetailsTable.tsx",
-          "marketplace/details/plan/PlanDetailsTable2.tsx",
           "marketplace/details/plan/TotalLimitComponentsTable.tsx",
           "rancher/cluster/hpas/HPACreateDialog.tsx",
           "rancher/cluster/hpas/HPAUpdateDialog.tsx"
@@ -135243,6 +135254,406 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "{count} months": {
+    "message": "{count} months",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Custom range": {
+    "message": "Custom range",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Prepaid duration": {
+    "message": "Prepaid duration",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "label"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 3
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "From": {
+    "message": "From",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 4,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "label"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Duration: {count} months": {
+    "message": "Duration: {count} months",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 3,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Prepayment until: {date}": {
+    "message": "Prepayment until: {date}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 3,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "date": {
+          "type": "date"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: date. Variable types: date.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Add prepayment": {
     "message": "Add prepayment",
     "context": {
@@ -135251,8 +135662,8 @@
         "unknown"
       ],
       "components": [
-        "Button",
-        "ComponentRow2"
+        "ModalDialog",
+        "Form"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -135277,15 +135688,87 @@
           "plan"
         ],
         "component_types": [
-          "form"
+          "dialog",
+          "button"
         ],
         "paths": [
-          "marketplace/details/plan/ComponentEditRow.tsx"
+          "marketplace/details/plan/AddPrepaidPeriodDialog.tsx",
+          "marketplace/details/plan/AddPrepaymentButton.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Button"
+          "ModalDialog",
+          "button"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "{count} mo prepayment": {
+    "message": "{count} mo prepayment",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 3,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/details/plan/AddPrepaymentButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "small"
         ],
         "conditional_render": true
       },
@@ -135298,15 +135781,18 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -135354,7 +135840,7 @@
           "dialog"
         ],
         "paths": [
-          "marketplace/details/plan/ComponentRow.tsx",
+          "marketplace/details/plan/ComponentCost.tsx",
           "marketplace/details/plan/EstimateUsageComponentDialog.tsx",
           "marketplace/details/plan/UsageComponentRow.tsx"
         ]
@@ -135385,6 +135871,72 @@
       "This appears in the marketplace context. Use business-appropriate language.",
       "Contains variables: price, unit. Variable types: unknown.",
       "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Yearly estimate": {
+    "message": "Yearly estimate",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AwesomeCheckbox"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/details/plan/ComponentRowTotal.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AwesomeCheckbox"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Estimate usage of {component}": {
@@ -135560,12 +136112,11 @@
           "plan"
         ],
         "component_types": [
-          "component",
-          "list"
+          "component"
         ],
         "paths": [
           "marketplace/details/plan/OrderSummaryPlanRows.tsx",
-          "marketplace/details/plan/PlanDetailsTable2.tsx"
+          "marketplace/details/plan/TabbedPlanComponents.tsx"
         ]
       },
       "jsx_context": {
@@ -135631,12 +136182,11 @@
           "plan"
         ],
         "component_types": [
-          "component",
-          "list"
+          "component"
         ],
         "paths": [
           "marketplace/details/plan/OrderSummaryPlanRows.tsx",
-          "marketplace/details/plan/PlanDetailsTable2.tsx",
+          "marketplace/details/plan/TabbedPlanComponents.tsx",
           "quotas/constants.ts"
         ]
       },
@@ -136639,72 +137189,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Yearly estimate": {
-    "message": "Yearly estimate",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "AwesomeCheckbox"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 15,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "plan"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "marketplace/details/plan/PlanDetailsTable2.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "AwesomeCheckbox"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
   "No plans found for this order": {
     "message": "No plans found for this order",
     "context": {
@@ -137178,6 +137662,67 @@
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "mo": {
+    "message": "mo",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 2,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "plan"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/details/plan/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
   "Unable to load categories.": {
@@ -175469,7 +176014,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 7
@@ -175478,7 +176023,6 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -251908,7 +252452,7 @@
         "title"
       ],
       "components": [
-        "PlanDetailsTable2",
+        "TabbedPlanComponents",
         "ExpandableContainer"
       ],
       "is_user_facing": true,
@@ -251942,7 +252486,7 @@
       },
       "jsx_context": {
         "tags": [
-          "PlanDetailsTable2"
+          "TabbedPlanComponents"
         ],
         "conditional_render": false
       },

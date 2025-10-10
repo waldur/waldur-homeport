@@ -35,9 +35,12 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
     return index > -1 ? index : 0;
   }, [props.priceData.periodKeys]);
 
-  const oneTimeRows = oneTime.initialRows
-    .concat(oneTime.switchRows)
-    .concat(oneTime.totalLimitedRows);
+  const oneTimeRows = [
+    ...oneTime.initialRows,
+    ...oneTime.prepaidRows,
+    ...oneTime.switchRows,
+    ...oneTime.totalLimitedRows,
+  ];
 
   const total =
     periodic.periodicTotal[monthlyPriceIndex] + oneTime.oneTimeTotal;

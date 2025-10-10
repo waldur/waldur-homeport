@@ -1,6 +1,11 @@
+import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import { BasePublicPlan, PublicOfferingDetails } from 'waldur-js-client';
 
+import { ENV } from '@waldur/core/config';
+import { calculateMonthsDifference } from '@waldur/core/dateUtils';
+import { formatCurrency } from '@waldur/core/formatCurrency';
+import { translate } from '@waldur/i18n';
 import {
   filterOfferingComponents,
   getFormLimitParser,
@@ -18,11 +23,19 @@ export const combinePrices = (
   limits: Limits,
   usages: Limits,
   offering: PublicOfferingDetails,
+  end_date?: string,
 ): PricesData => {
   if (plan && offering) {
     const { periods, multipliers, periodKeys } = getBillingPeriods(plan.unit);
     const offeringLimits = parseOfferingLimits(offering);
     const offeringComponents = filterOfferingComponents(offering);
+
+    // Calculate the duration multiplier based on the end_date
+    const durationInMonths = calculateMonthsDifference(
+      DateTime.now().toISODate(),
+      end_date,
+    );
+
     const components: Component[] = offeringComponents.map((component) => {
       let amount = 0;
       if (
@@ -47,7 +60,16 @@ export const combinePrices = (
         component.billing_type === 'one' ||
         component.billing_type === 'few'
       ) {
-        amount = 1;
+        // If the one-time component is prepaid, take its value from limits.
+        if (component.is_prepaid && limits && limits[component.type]) {
+          amount = limits[component.type];
+          if (durationInMonths) {
+            amount *= durationInMonths;
+          }
+        } else {
+          // Otherwise, preserve the existing logic for non-prepaid one-time components.
+          amount = 1;
+        }
       }
       const price = plan.prices[component.type] || 0;
       const subTotal = price * amount;
@@ -119,7 +141,12 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
     (component) => component.billing_type === 'usage',
   );
   const initialRows = prices.components.filter(
-    (component) => component.billing_type === 'one',
+    (component) =>
+      component.billing_type === 'one' && component.is_prepaid == false,
+  );
+  const prepaidRows = prices.components.filter(
+    (component) =>
+      component.billing_type === 'one' && component.is_prepaid == true,
   );
   const switchRows = prices.components.filter(
     (component) => component.billing_type === 'few',
@@ -147,6 +174,11 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
     () => calculateTotalPeriods(initialRows),
     [initialRows],
   );
+  const prepaidTotalPeriods = useMemo(
+    () => calculateTotalPeriods(prepaidRows),
+    [prepaidRows],
+  );
+
   const switchTotalPeriods = useMemo(
     () => calculateTotalPeriods(switchRows),
     [switchRows],
@@ -168,6 +200,7 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
   const oneTimeTotal: number = useMemo(
     () =>
       (initialTotalPeriods[0] || 0) +
+      (prepaidTotalPeriods[0] || 0) +
       (switchTotalPeriods[0] || 0) +
       (totalLimitTotalPeriods[0] || 0),
     [initialTotalPeriods, switchTotalPeriods, totalLimitTotalPeriods],
@@ -180,7 +213,8 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
   const hasOneTimeCost =
     initialRows.length > 0 ||
     switchRows.length > 0 ||
-    totalLimitedRows.length > 0;
+    totalLimitedRows.length > 0 ||
+    prepaidRows.length > 0;
 
   return {
     periodic: {
@@ -195,9 +229,11 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
     oneTime: {
       hasOneTimeCost,
       initialRows,
+      prepaidRows,
       switchRows,
       totalLimitedRows,
       initialTotalPeriods,
+      prepaidTotalPeriods,
       switchTotalPeriods,
       totalLimitTotalPeriods,
       oneTimeTotal,
@@ -233,8 +269,61 @@ const getLimits = (state, props) => {
   }
 };
 
+export const getEndDate = (state) => {
+  return orderFormSelector(state, 'attributes.end_date');
+};
+
 export const pricesSelector = (state, props): PricesData => {
   const plan: Plan = getPlan(state, props) || props.plan;
   const limits: Limits = getLimits(state, props) || props.limits;
-  return combinePrices(plan, limits, {}, props.offering);
+  const endDate = getEndDate(state);
+  return combinePrices(plan, limits, {}, props.offering, endDate);
+};
+
+interface CostParts {
+  total: string;
+  details: string;
+}
+
+/**
+ * Generates an object with total cost and calculation details for a prepaid component.
+ * @param component The offering component, whose `amount` is the total for the period.
+ * @param endDate The subscription end date, used to calculate duration.
+ * @returns An object with `total` and `details` strings.
+ */
+export const getPrepaidCostParts = (
+  component: Component,
+  endDate: string,
+): CostParts => {
+  const currency = ENV.plugins.WALDUR_CORE.CURRENCY_NAME;
+  const formattedTotal = formatCurrency(component.subTotal, currency, 4);
+
+  // Don't show details if the price or amount is zero
+  if (component.price === 0 || component.amount === 0) {
+    return {
+      total: formattedTotal,
+      details: '', // Return empty details string
+    };
+  }
+
+  const durationInMonths = calculateMonthsDifference(
+    DateTime.now().toISODate(),
+    endDate,
+  );
+
+  // The component.amount is the total for the whole period.
+  // We need the base amount per month for the details string.
+  const baseAmount = component.amount / durationInMonths;
+
+  const formattedPrice = formatCurrency(component.price, currency, 4);
+  const calculationBase = `(${baseAmount} ${component.measured_unit} × ${formattedPrice})`;
+
+  // Only add the duration part if it's more than one month
+  const durationDetails =
+    durationInMonths > 1 ? ` x ${durationInMonths} ${translate('mo')}` : '';
+
+  return {
+    total: formattedTotal,
+    details: `${calculationBase}${durationDetails}`,
+  };
 };

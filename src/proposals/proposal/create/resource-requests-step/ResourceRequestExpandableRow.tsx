@@ -1,5 +1,5 @@
 import { translate } from '@waldur/i18n';
-import { PlanDetailsTable2 } from '@waldur/marketplace/details/plan/PlanDetailsTable2';
+import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
 import { ProposalResource } from '@waldur/proposals/types';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
@@ -41,7 +41,7 @@ export const ResourceRequestExpandableRow = ({
 
   return (
     <ExpandableContainer>
-      <PlanDetailsTable2
+      <TabbedPlanComponents
         offering={row.requested_offering as any}
         plan={row.requested_offering.plan_details}
         limits={limits}

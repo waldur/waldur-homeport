@@ -1,11 +1,18 @@
-import { useDispatch } from 'react-redux';
-
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { showPlanDetailsDialog } from '@waldur/marketplace/details/plan/actions';
+import { useModal } from '@waldur/modal/hooks';
+
+const PlanDetailsDialog = lazyComponent(() =>
+  import('@waldur/marketplace/details/plan/PlanDetailsDialog').then(
+    (module) => ({
+      default: module.PlanDetailsDialog,
+    }),
+  ),
+);
 
 export const PlanDetailsField = ({ resource }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return resource.plan_name ? (
     <FormTable.Item
       label={translate('Plan')}
@@ -15,7 +22,12 @@ export const PlanDetailsField = ({ resource }) => {
           <button
             className="text-link"
             type="button"
-            onClick={() => dispatch(showPlanDetailsDialog(resource.uuid))}
+            onClick={() =>
+              openDialog(PlanDetailsDialog, {
+                resolve: { resourceId: resource.uuid },
+                size: 'lg',
+              })
+            }
           >
             [{translate('Show plan')}]
           </button>
