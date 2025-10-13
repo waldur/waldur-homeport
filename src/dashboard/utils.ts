@@ -228,27 +228,6 @@ export const getCreditChartAndOptions = (
       data: chart.data as any,
       color: brandColors[300],
     },
-    // {
-    //   name: translate('Remaining credit'),
-    //   type: 'line',
-    //   yAxisIndex: 1,
-    //   data: chart.remaining as any,
-    //   color: '#D0D5DD',
-    //   smooth: true,
-    //   showSymbol: false,
-    //   areaStyle: {
-    //     color: new graphic.LinearGradient(0, 0, 0, 1, [
-    //       {
-    //         offset: 0,
-    //         color: 'rgba(170, 170, 170, 0.6)',
-    //       },
-    //       {
-    //         offset: 1,
-    //         color: 'rgba(170, 170, 170, 0)',
-    //       },
-    //     ]),
-    //   },
-    // },
   ];
 
   return {

@@ -2,6 +2,7 @@ import MatomoTracker from '@jonkoops/matomo-tracker';
 import * as Sentry from '@sentry/react';
 
 import { ENV } from './core/config';
+import { DEFAULT_PRIMARY_COLORS } from './core/constants';
 import { generateBrandColors, hexToRgb } from './core/generateColors';
 import { LanguageUtilsService } from './i18n/LanguageUtilsService';
 import { getConsent } from './navigation/cookies/CookiesStorage';
@@ -38,7 +39,8 @@ const generateRadioSvgUrl = (color) => {
 };
 
 function initCssVariables() {
-  const brand600 = ENV.plugins.WALDUR_CORE.BRAND_COLOR || '#307300';
+  const brand600 =
+    ENV.plugins.WALDUR_CORE.BRAND_COLOR || DEFAULT_PRIMARY_COLORS[600];
   document.documentElement.style.setProperty('--waldur-brand-color', brand600);
   const brandRgb = hexToRgb(brand600);
   document.documentElement.style.setProperty(
