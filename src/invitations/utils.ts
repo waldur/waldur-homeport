@@ -5,6 +5,7 @@ import {
 
 import * as AuthService from '@waldur/auth/AuthService';
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { InvitationTokenStorage } from '@waldur/core/StorageManager';
 import { createDeferred } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
@@ -17,8 +18,6 @@ import {
 import store from '@waldur/store/store';
 import { UsersService, getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
-
-import { clearInvitationToken, setInvitationToken } from './InvitationStorage';
 
 const InvitationConfirmDialog = lazyComponent(() =>
   import('./InvitationConfirmDialog').then((module) => ({
@@ -63,14 +62,14 @@ export function checkAndAccept(token) {
         });
       })
       .catch(() => {
-        clearInvitationToken();
+        InvitationTokenStorage.remove();
         store.dispatch(
           showError(translate('Invitation is not valid anymore.')),
         );
         router.stateService.go('profile.details');
       });
   } else {
-    setInvitationToken(token);
+    InvitationTokenStorage.set(token);
     router.stateService.go('login');
     store.dispatch(
       showRedirectMessage(
@@ -118,14 +117,14 @@ export async function acceptInvitation(token) {
   try {
     await userInvitationsAccept({ path: { uuid: token } });
     store.dispatch(showSuccess(translate('Your invitation was accepted.')));
-    clearInvitationToken();
+    InvitationTokenStorage.remove();
     const newUser = await getCurrentUser();
     store.dispatch(setCurrentUser(newUser));
   } catch (error) {
     if (error.response?.status === 404) {
       store.dispatch(showError(translate('Invitation is not found.')));
     } else if (error.response?.status === 400) {
-      clearInvitationToken();
+      InvitationTokenStorage.remove();
       store.dispatch(showError(translate('Invitation is not valid.')));
     } else if (error.response?.status === 500) {
       store.dispatch(

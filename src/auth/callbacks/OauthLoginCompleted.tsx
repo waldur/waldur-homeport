@@ -6,9 +6,9 @@ import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { UsersService } from '@waldur/user/UsersService';
 
 import * as AuthService from '../AuthService';
+import { loginUser } from '../AuthService';
 
 export const OauthLoginCompleted: FunctionComponent = () => {
   const router = useRouter();
@@ -22,11 +22,7 @@ export const OauthLoginCompleted: FunctionComponent = () => {
       const qs = Qs.parse(getQueryString());
       try {
         const token = decodeURIComponent(qs.token as string);
-        AuthService.setAuthHeader(token);
-        const user = await UsersService.getCurrentUser();
-        AuthService.loginSuccess({
-          data: { ...user, token, method: provider },
-        });
+        await loginUser(token, provider);
         AuthService.redirectOnSuccess();
       } catch (e) {
         setError(e.data?.detail || translate('Unknown error'));

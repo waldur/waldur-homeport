@@ -1,9 +1,8 @@
 import { Settings } from 'luxon';
 
 import { ENV } from '@waldur/core/config';
+import { LanguageStorage } from '@waldur/core/StorageManager';
 import { LanguageOption } from '@waldur/core/types';
-
-import { getLanguageKey, setLanguageKey } from './LanguageStorage';
 
 function getLocaleData(locale) {
   return import(`../../locales/${locale}.json`);
@@ -19,7 +18,7 @@ class LanguageUtilsServiceClass {
 
   setCurrentLanguage(language: LanguageOption) {
     this.currentLanguage = language;
-    setLanguageKey(language.code);
+    LanguageStorage.set(language.code);
     getLocaleData(language.code).then((mod) => {
       this.dictionary = mod.default;
     });
@@ -30,7 +29,7 @@ class LanguageUtilsServiceClass {
     // Check if current language is listed in choices and
     // switch to default language if current choice is invalid.
     // Fallback to first option in languageChoices list if defaultLanguage is invalid.
-    const code = getLanguageKey();
+    const code = LanguageStorage.get();
     const current =
       this.findLanguageByCode(code) ||
       this.findLanguageByCode(ENV.defaultLanguage) ||

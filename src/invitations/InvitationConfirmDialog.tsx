@@ -7,6 +7,7 @@ import { userInvitationsDetailsRetrieve } from 'waldur-js-client';
 
 import { getInvitationLinkProps } from '@waldur/administration/getInvitationLinkProps';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { InvitationTokenStorage } from '@waldur/core/StorageManager';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -16,7 +17,6 @@ import { InvitationButtons } from './InvitationButtons';
 import { InvitationErrorMessage } from './InvitationErrorMessage';
 import { InvitationMessage } from './InvitationMessage';
 import { formatInvitationState } from './InvitationStateFilter';
-import { clearInvitationToken } from './InvitationStorage';
 
 export const InvitationConfirmDialog: FunctionComponent<{
   resolve: { token; deferred };
@@ -57,7 +57,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
       if (linkProps) {
         router.stateService.go(linkProps.state, linkProps.params);
       }
-      clearInvitationToken();
+      InvitationTokenStorage.remove();
       closeDialog();
     }
   }, [invitation]);

@@ -1,11 +1,11 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 
+import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
 import { FieldErrorMessage } from '@waldur/form/FieldError';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/notify';
 
-import { clearGroupInvitationToken } from '../InvitationStorage';
 import { submitGroupRequest } from '../utils';
 
 export const requestToAccessOrganization = (
@@ -14,7 +14,7 @@ export const requestToAccessOrganization = (
 ) =>
   submitGroupRequest(groupInvitationUuid)
     .then(async (groupInvitation) => {
-      clearGroupInvitationToken();
+      GroupInvitationTokenStorage.remove();
       await waitForConfirmation(
         dispatch,
         translate('Request has been sent for approval'),
@@ -34,7 +34,7 @@ export const requestToAccessOrganization = (
       );
     })
     .catch(async (err) => {
-      clearGroupInvitationToken();
+      GroupInvitationTokenStorage.remove();
       if (err?.[0] && err?.[0].includes('Request has been created already')) {
         dispatch(showErrorResponse(err, translate('Something went wrong')));
       } else {
