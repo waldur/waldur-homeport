@@ -1,6 +1,5 @@
 import { Form } from 'react-final-form';
 
-import { ENV } from '@waldur/core/config';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -69,9 +68,6 @@ export const SigninForm = () => (
           <button
             type="submit"
             className="login-submit-button"
-            style={{
-              backgroundColor: ENV.plugins.WALDUR_CORE.BRAND_COLOR,
-            }}
             disabled={submitting}
           >
             {submitting && (
