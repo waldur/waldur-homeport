@@ -74,12 +74,15 @@ export const getOrderBreadcrumbItems = (order): IBreadcrumbItem[] => [
     key: 'offerings',
     text: translate('Offerings'),
     to: 'public.offerings',
+    ellipsis: 'xxl',
   },
   {
     key: 'offering',
     text: order.offering_name,
     to: 'public-offering.marketplace-public-offering',
     params: { uuid: order.offering_uuid },
+    ellipsis: 'xxl',
+    truncate: true,
   },
   {
     key: 'resources',
@@ -93,12 +96,15 @@ export const getOrderBreadcrumbItems = (order): IBreadcrumbItem[] => [
         thumbnail: order.offering_thumbnail,
       }),
     },
+    ellipsis: 'xxl',
   },
   {
     key: 'resource',
     text: order.resource_name,
     to: 'marketplace-resource-details',
     params: { resource_uuid: order.marketplace_resource_uuid },
+    ellipsis: 'xxl',
+    truncate: true,
   },
   {
     key: 'orders',
@@ -108,10 +114,12 @@ export const getOrderBreadcrumbItems = (order): IBreadcrumbItem[] => [
       resource_uuid: order.marketplace_resource_uuid,
       tab: 'order-history',
     },
+    ellipsis: 'xxl',
   },
   {
     key: 'order',
     text: order.attributes.name + ' (' + order.type + ')',
     active: true,
+    truncate: true,
   },
 ];
