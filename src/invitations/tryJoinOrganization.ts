@@ -1,8 +1,8 @@
+import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
 import store from '@waldur/store/store';
 
 import { UsersService } from '../user/UsersService';
 
-import { getGroupInvitationToken } from './InvitationStorage';
 import { requestToAccessOrganization } from './join-organization/submission';
 
 /*
@@ -10,7 +10,7 @@ import { requestToAccessOrganization } from './join-organization/submission';
 */
 export function tryJoinOrganization() {
   UsersService.getCurrentUser().then((user) => {
-    const token = getGroupInvitationToken();
+    const token = GroupInvitationTokenStorage.get();
 
     if (token && user) {
       requestToAccessOrganization(token, store.dispatch);

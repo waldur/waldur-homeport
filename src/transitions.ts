@@ -1,8 +1,8 @@
 import store from '@waldur/store/store';
 
 import { MatomoInstance } from './afterBootstrap';
-import { setRedirect } from './auth/AuthRedirectStorage';
 import * as AuthService from './auth/AuthService';
+import { RedirectStorage } from './core/StorageManager';
 import { cleanObject } from './core/utils';
 import { setPrevParams, setPrevState } from './error/utils';
 import { isFeatureVisible } from './features/connect';
@@ -154,7 +154,7 @@ export function attachTransitions() {
     // Erred state is terminal, user should not be redirected from erred state to login
     // so that he would be able to read error message details
     if (error && error.detail && error.detail.status === 401) {
-      setRedirect({
+      RedirectStorage.set({
         toState: transition.to().name,
         toParams: transition.to().params,
       });
@@ -200,7 +200,7 @@ export function attachTransitions() {
       transition.to().data?.auth &&
       !Object.prototype.hasOwnProperty.call(transition.params(), 'toState')
     ) {
-      setRedirect({
+      RedirectStorage.set({
         toState: transition.to().name,
         toParams: transition.params(),
       });
