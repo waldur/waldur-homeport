@@ -55,6 +55,13 @@ export function initApiClient() {
   });
 }
 
+client.interceptors.error.use((error: Error, response) => {
+  return {
+    ...error,
+    response,
+  };
+});
+
 client.interceptors.response.use((response) => {
   if (
     response?.status === 401 &&

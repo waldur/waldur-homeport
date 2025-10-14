@@ -20,6 +20,7 @@ import {
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getUUID } from '@waldur/core/utils';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { OrderDetailsProps } from '@waldur/marketplace/types';
 import {
@@ -27,7 +28,6 @@ import {
   formatVolumeTypeLabel,
   getDefaultFloatingIps,
 } from '@waldur/openstack/openstack-instance/utils';
-import { Field } from '@waldur/resource/summary';
 import { formatFlavor } from '@waldur/resource/utils';
 
 export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
@@ -149,52 +149,54 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
   return (
     <>
       {attributesData?.image && (
-        <Field label={translate('Image')}>{attributesData.image.name}</Field>
+        <FormTable.Item label={translate('Image')}>
+          {attributesData.image.name}
+        </FormTable.Item>
       )}
       {attributesData?.flavor && (
-        <Field label={translate('Flavor')}>
+        <FormTable.Item label={translate('Flavor')}>
           {formatFlavor(attributesData.flavor)}
-        </Field>
+        </FormTable.Item>
       )}
       {attributesData?.availabilityZone && (
-        <Field label={translate('Availability zone')}>
+        <FormTable.Item label={translate('Availability zone')}>
           {attributesData.availabilityZone.name}
-        </Field>
+        </FormTable.Item>
       )}
       {typeof attributes['system_volume_size'] === 'number' && (
-        <Field label={translate('System volume size')}>
+        <FormTable.Item label={translate('System volume size')}>
           {attributes['system_volume_size'] / 1024} GB
-        </Field>
+        </FormTable.Item>
       )}
       {attributesData?.systemVolumeType && (
-        <Field label={translate('System volume type')}>
+        <FormTable.Item label={translate('System volume type')}>
           {formatVolumeTypeLabel(attributesData.systemVolumeType)}
-        </Field>
+        </FormTable.Item>
       )}
       {typeof attributes['data_volume_size'] === 'number' && (
-        <Field label={translate('Data volume size')}>
+        <FormTable.Item label={translate('Data volume size')}>
           {attributes['data_volume_size'] / 1024} GB
-        </Field>
+        </FormTable.Item>
       )}
       {attributesData?.dataVolumeType && (
-        <Field label={translate('Data volume type')}>
+        <FormTable.Item label={translate('Data volume type')}>
           {formatVolumeTypeLabel(attributesData.dataVolumeType)}
-        </Field>
+        </FormTable.Item>
       )}
       {attributesData?.publicKey && (
-        <Field label={translate('SSH public key')}>
+        <FormTable.Item label={translate('SSH public key')}>
           {attributesData.publicKey.name}
-        </Field>
+        </FormTable.Item>
       )}
       {attributesData?.securityGroups && (
-        <Field label={translate('Security groups')}>
+        <FormTable.Item label={translate('Security groups')}>
           {attributesData.securityGroups.map((securityGroup, index) => (
             <p key={index}>{securityGroup.name}</p>
           ))}
-        </Field>
+        </FormTable.Item>
       )}
       {attributesData?.networks && (
-        <Field label={translate('Networks')}>
+        <FormTable.Item label={translate('Networks')}>
           {attributesData.networks.map((network, index) => (
             <p key={index}>
               {formatSubnet(network.subnet)}
@@ -202,12 +204,12 @@ export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
               {network.floatingIp.address}
             </p>
           ))}
-        </Field>
+        </FormTable.Item>
       )}
       {typeof attributes['user_data'] == 'string' && (
-        <Field label={translate('User data')}>
+        <FormTable.Item label={translate('User data')}>
           <pre>{attributes['user_data']}</pre>
-        </Field>
+        </FormTable.Item>
       )}
     </>
   );
