@@ -1,7 +1,8 @@
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
 import { reduxForm } from 'redux-form';
-import { proposalProposalsCreate } from 'waldur-js-client';
+import { NestedRound, proposalProposalsCreate } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
 import { SubmitButton } from '@waldur/form';
@@ -10,7 +11,9 @@ import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { EndingField } from '@waldur/proposals/EndingField';
 import { Call } from '@waldur/proposals/types';
+import { Field } from '@waldur/resource/summary';
 import { useNotify } from '@waldur/store/hooks';
 import { UsersService } from '@waldur/user/UsersService';
 
@@ -20,7 +23,7 @@ interface FormData {
 
 export const AddProposalDialog = reduxForm<
   FormData,
-  { resolve: { round_uuid: string; call: Call } }
+  { resolve: { round: NestedRound; call: Call } }
 >({
   form: 'AddProposalForm',
 })((props) => {
@@ -32,7 +35,7 @@ export const AddProposalDialog = reduxForm<
         const response = await proposalProposalsCreate({
           body: {
             ...values,
-            round_uuid: props.resolve.round_uuid,
+            round_uuid: props.resolve.round.uuid,
           },
         });
         const proposal = response.data;
@@ -52,28 +55,56 @@ export const AddProposalDialog = reduxForm<
     <form onSubmit={props.handleSubmit(processRequest)}>
       <ModalDialog
         title={translate('Create proposal')}
+        iconNode={<PlusCircleIcon weight="bold" />}
+        iconColor="success"
         footer={
           <>
-            <CloseDialogButton
-              variant="outline btn-outline-default"
-              className="flex-equal"
-            />
-
+            <CloseDialogButton variant="outline btn-outline-default w-125px" />
             <SubmitButton
               disabled={props.invalid}
               submitting={props.submitting}
               label={translate('Create')}
-              className="btn btn-primary flex-equal"
+              className="btn btn-primary w-125px"
             />
           </>
         }
       >
-        <FormContainer submitting={props.submitting}>
+        <Field
+          label={translate('Call name')}
+          value={props.resolve.call.name}
+          labelCol={4}
+          valueCol={8}
+          space={2}
+        />
+        <Field
+          label={translate('Round reference')}
+          value={props.resolve.round.name}
+          labelCol={4}
+          valueCol={8}
+          space={2}
+        />
+        <Field
+          label={translate('Round deadline')}
+          value={
+            <EndingField
+              endDate={props.resolve.round.cutoff_time}
+              dateFirst
+              hasFixedDuration={Boolean(
+                props.resolve.call.fixed_duration_in_days,
+              )}
+            />
+          }
+          labelCol={4}
+          valueCol={8}
+          space={2}
+        />
+        <FormContainer submitting={props.submitting} className="mt-7">
           <StringField
             label={translate('Name')}
             name="name"
             required
             validate={required}
+            spaceless
           />
         </FormContainer>
       </ModalDialog>
