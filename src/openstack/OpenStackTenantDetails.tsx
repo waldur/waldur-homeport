@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
 import { ENV } from '@waldur/core/config';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { SecretValueField } from '@waldur/marketplace/SecretValueField';
 import { OrderDetailsProps } from '@waldur/marketplace/types';
-import { Field } from '@waldur/resource/summary';
 import { BooleanField } from '@waldur/table/BooleanField';
 
 export const OpenStackTenantDetails: FunctionComponent<OrderDetailsProps> = ({
@@ -13,12 +13,12 @@ export const OpenStackTenantDetails: FunctionComponent<OrderDetailsProps> = ({
   <>
     {ENV.plugins.WALDUR_OPENSTACK.TENANT_CREDENTIALS_VISIBLE && (
       <>
-        <Field label={translate('Initial admin username')}>
+        <FormTable.Item label={translate('Initial admin username')}>
           {(typeof attributes['user_username'] === 'string' &&
             attributes['user_username']) ||
             translate('Auto-generated')}
-        </Field>
-        <Field label={translate('Initial admin password')}>
+        </FormTable.Item>
+        <FormTable.Item label={translate('Initial admin password')}>
           {typeof attributes['user_password'] === 'string' ? (
             <SecretValueField
               className="max-w-300"
@@ -27,18 +27,18 @@ export const OpenStackTenantDetails: FunctionComponent<OrderDetailsProps> = ({
           ) : (
             translate('Auto-generated')
           )}
-        </Field>
+        </FormTable.Item>
       </>
     )}
     {typeof attributes['subnet_cidr'] === 'string' && (
-      <Field label={translate('Internal network mask (CIDR)')}>
+      <FormTable.Item label={translate('Internal network mask (CIDR)')}>
         {attributes['subnet_cidr']}
-      </Field>
+      </FormTable.Item>
     )}
     {typeof attributes['skip_connection_extnet'] === 'boolean' && (
-      <Field label={translate('Skip connection to external network')}>
+      <FormTable.Item label={translate('Skip connection to external network')}>
         <BooleanField value={attributes['skip_connection_extnet']} />
-      </Field>
+      </FormTable.Item>
     )}
   </>
 );

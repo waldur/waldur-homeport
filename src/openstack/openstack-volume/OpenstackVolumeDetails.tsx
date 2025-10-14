@@ -2,9 +2,9 @@ import { useAsync } from 'react-use';
 import { openstackVolumeTypesRetrieve } from 'waldur-js-client';
 
 import { formatFilesize, getUUID } from '@waldur/core/utils';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { OrderDetailsProps } from '@waldur/marketplace/types';
-import { Field } from '@waldur/resource/summary';
 
 import { formatVolumeTypeLabel } from '../openstack-instance/utils';
 
@@ -19,18 +19,18 @@ export const OpenstackVolumeDetails = (props: OrderDetailsProps) => {
   );
   return (
     <>
-      <Field label={translate('Size')}>
+      <FormTable.Item label={translate('Size')}>
         {formatFilesize(props.order.attributes['size'])}
-      </Field>
+      </FormTable.Item>
       {typeof order.attributes['availability_zone_name'] === 'string' && (
-        <Field label={translate('Availability zone')}>
+        <FormTable.Item label={translate('Availability zone')}>
           {order.attributes['availability_zone_name']}
-        </Field>
+        </FormTable.Item>
       )}
       {volumeType && (
-        <Field label={translate('Volume type')}>
+        <FormTable.Item label={translate('Volume type')}>
           {formatVolumeTypeLabel(volumeType)}
-        </Field>
+        </FormTable.Item>
       )}
     </>
   );
