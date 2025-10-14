@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { reduxForm } from 'redux-form';
 
-import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
+import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
@@ -126,12 +126,12 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
       );
     } else if (field.type === 'radio') {
       return (
-        <CustomRadioButton
+        <AwesomeRadioButton
           key={key}
           {...props}
           choices={field.choices}
           direction={field.direction}
-          align={field.align}
+          justify={field.justify}
         />
       );
     }

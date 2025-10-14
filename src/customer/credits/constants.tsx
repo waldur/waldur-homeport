@@ -3,8 +3,8 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, getFormValues } from 'redux-form';
 
+import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
 import { ENV } from '@waldur/core/config';
-import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { lessThanOrEqual, required } from '@waldur/core/validators';
@@ -152,7 +152,7 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
       enable={[onlyFirstDayOfMonth]}
     />,
 
-    <CustomRadioButton
+    <AwesomeRadioButton
       label={translate('Minimal consumption logic')}
       name="minimal_consumption_logic"
       key="minimal_consumption_logic"
