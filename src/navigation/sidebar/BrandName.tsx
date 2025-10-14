@@ -126,7 +126,7 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
   const DropdownMenu = (
     <Dropdown.Menu
       show={showDropdown}
-      className="p-0"
+      className="p-0 overflow-hidden"
       style={{ minWidth: '400px' }}
     >
       {shortcuts.map((shortcut: any, index: number) => (
@@ -136,20 +136,13 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
           href={shortcut.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="d-flex align-items-center p-3 position-relative"
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderRadius = '8px';
-          }}
+          className="d-flex align-items-center py-5 ps-6 pe-2 position-relative"
         >
           {/* Show separator line only if there are multiple items and not the last item */}
           {shortcuts.length > 1 && index < shortcuts.length - 1 && (
             <div
               className="position-absolute bottom-0 start-50 translate-middle-x border-bottom"
-              style={{
-                width: '95%',
-                borderBottomWidth: '1px',
-                borderBottomColor: 'var(--bs-border-color)',
-              }}
+              style={{ width: 'calc(100% - 24px)' }}
             />
           )}
           <div className="me-5">
@@ -157,13 +150,15 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
               name={shortcut.name}
               src={shortcut.image}
               circle
-              size={48}
+              size={42}
             />
           </div>
-          <div className="flex-grow-1">
-            <div className="fw-semibold fs-6">{shortcut.name}</div>
+          <div className="flex-grow-1 fs-4">
+            <div className="fw-bolder">{shortcut.name}</div>
             {shortcut.description && (
-              <div className="text-muted fs-6 mt-3">{shortcut.description}</div>
+              <div className="fw-normal text-muted mt-3">
+                {shortcut.description}
+              </div>
             )}
           </div>
           <div className="ms-2">
