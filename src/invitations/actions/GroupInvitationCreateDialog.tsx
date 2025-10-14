@@ -6,7 +6,7 @@ import { userGroupInvitationsCreate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
+import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
 import { required } from '@waldur/core/validators';
 import { useCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
 import { FormGroup } from '@waldur/form';
@@ -143,7 +143,7 @@ export const GroupInvitationCreateDialog = reduxForm<
             space={2}
             disabled={fieldsDisabled}
           >
-            <CustomRadioButton choices={invitationTypeOptions} />
+            <AwesomeRadioButton choices={invitationTypeOptions} />
           </Field>
           <RoleGroup roles={filteredRoles} disabled={fieldsDisabled} />
           <ProjectGroup
