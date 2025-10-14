@@ -8,6 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbs } from '@waldur/navigation/context';
@@ -17,8 +18,6 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { useUser } from '@waldur/workspace/hooks';
-
-import { setGroupInvitationToken } from '../InvitationStorage';
 
 import { GroupInvitationCard } from './GroupInvitationCard';
 import { requestToAccessOrganization } from './submission';
@@ -60,7 +59,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
           translate('Log in to proceed with your request.'),
         ),
       );
-      setGroupInvitationToken(invitation.uuid);
+      GroupInvitationTokenStorage.set(invitation.uuid);
       router.stateService.go('login');
     },
     [router],

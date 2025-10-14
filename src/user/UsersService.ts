@@ -8,14 +8,10 @@ import {
 import { getRoles } from '@waldur/administration/roles/utils';
 import { initApiClient } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
+import { ImpersonationStorage } from '@waldur/core/StorageManager';
 import store from '@waldur/store/store';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
-import {
-  setImpersonatedUserUuid,
-  clearImpersonatedUserUuid,
-  getImpersonatedUserUuid,
-} from '@waldur/workspace/WorkspaceStorage';
 
 export const getCurrentUser = async (
   options?: Options<UsersMeRetrieveData>,
@@ -27,13 +23,13 @@ export const getCurrentUser = async (
   return user;
 };
 
-export const setImpersonationData = (userUuid) => {
-  setImpersonatedUserUuid(userUuid);
+export const setImpersonationData = (userUuid: string) => {
+  ImpersonationStorage.set(userUuid);
   initApiClient();
 };
 
 export const clearImpersonationData = () => {
-  clearImpersonatedUserUuid();
+  ImpersonationStorage.remove();
   initApiClient();
 };
 
@@ -44,7 +40,7 @@ class UsersServiceClass {
       return Promise.resolve(cached);
     }
     return getCurrentUser().then((user) => {
-      const isImpersonated = Boolean(getImpersonatedUserUuid());
+      const isImpersonated = Boolean(ImpersonationStorage.get());
       store.dispatch(setCurrentUser(user, isImpersonated));
       return user;
     });

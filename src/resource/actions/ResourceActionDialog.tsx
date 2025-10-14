@@ -156,6 +156,7 @@ export const ResourceActionDialog = reduxForm<{}, ResourceActionDialogOwnProps>(
             key: index,
             name: field.name,
             label: field.label,
+            hideLabel: field.hideLabel,
             placeholder: field.placeholder,
             required: field.required,
             description: field.help_text,

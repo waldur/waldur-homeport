@@ -1,29 +1,19 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import { useCallback, useEffect, FunctionComponent } from 'react';
+import { FunctionComponent, useEffect } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { UsersService } from '@waldur/user/UsersService';
 
-import { setAuthHeader, loginSuccess } from '../AuthService';
+import { loginUser } from '../AuthService';
 
 export const AuthLoginCompleted: FunctionComponent = () => {
   const router = useRouter();
   const { params } = useCurrentStateAndParams();
-  const completeAuth = useCallback(
-    async (token, method) => {
-      setAuthHeader(token);
-      const user = await UsersService.getCurrentUser();
-      loginSuccess({
-        data: { ...user, method },
-      });
-      router.stateService.go('profile.details');
-    },
-    [router.stateService],
-  );
   useEffect(() => {
-    completeAuth(params.token, params.method);
-  }, [completeAuth, params]);
+    loginUser(params.token, params.method).then(() =>
+      router.stateService.go('profile.details'),
+    );
+  }, [router, params]);
 
   return (
     <div className="middle-box text-center">

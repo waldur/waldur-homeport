@@ -1,10 +1,10 @@
+import { InvitationTokenStorage } from '@waldur/core/StorageManager';
 import store from '@waldur/store/store';
 
 import { translate } from '../i18n';
 import { showError } from '../store/notify';
 import { UsersService } from '../user/UsersService';
 
-import { clearInvitationToken, getInvitationToken } from './InvitationStorage';
 import { acceptInvitation, confirmInvitation } from './utils';
 
 /*
@@ -18,14 +18,14 @@ import { acceptInvitation, confirmInvitation } from './utils';
 */
 export function tryAcceptInvitation() {
   UsersService.getCurrentUser().then((user) => {
-    const token = getInvitationToken();
+    const token = InvitationTokenStorage.get();
     if (token && !UsersService.mandatoryFieldsMissing(user)) {
       confirmInvitation(token)
         .then(() => {
           acceptInvitation(token);
         })
         .catch(() => {
-          clearInvitationToken();
+          InvitationTokenStorage.remove();
           store.dispatch(
             showError(translate('Invitation could not be accepted')),
           );

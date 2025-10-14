@@ -8,7 +8,7 @@
 
 .login-input:focus {
   outline: 0;
-  box-shadow: 0 0 2px #3a8500;
+  box-shadow: 0 0 2px var(--waldur-brand-color);
 }
 
 .login-separator {
@@ -19,7 +19,7 @@
 
 .login-separator-border {
   flex-grow: 1;
-  border-bottom: 1px solid #3a8500;
+  border-bottom: 1px solid var(--waldur-brand-color);
 }
 
 .login-separator-text {
@@ -31,14 +31,14 @@
   font-size: 12px;
   line-height: 15px;
   text-decoration: underline;
-  color: #4e8223;
+  color: var(--waldur-brand-color);
   margin-bottom: 1rem;
   border: 0;
   background: transparent;
 }
 
 .login-submit-button {
-  background: #3a8500;
+  background: var(--waldur-brand-color);
   color: white;
   text-align: center;
   border-radius: 12px;

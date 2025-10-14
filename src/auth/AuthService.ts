@@ -9,21 +9,22 @@ import {
 } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
-import { getRedirect, resetRedirect, setRedirect } from './AuthRedirectStorage';
-import { getToken, removeToken, setToken } from './TokenStorage';
+import {
+  RedirectStorage,
+  AuthTokenStorage,
+  AuthMethodStorage,
+} from '../core/StorageManager';
 
-export function setAuthHeader(token) {
-  setToken(token);
+export async function loginUser(token: string, method: string) {
+  AuthTokenStorage.set(token);
+  AuthMethodStorage.set(method);
   initApiClient();
-}
-
-export function loginSuccess(response) {
-  setAuthHeader(response.data.token);
-  store.dispatch(setCurrentUser(response.data));
+  const user = await UsersService.getCurrentUser();
+  store.dispatch(setCurrentUser(user));
 }
 
 export function isAuthenticated() {
-  return !!getToken();
+  return !!AuthTokenStorage.get();
 }
 
 export async function signin(username, password) {
@@ -33,9 +34,7 @@ export async function signin(username, password) {
       password,
     },
   });
-  setAuthHeader(response.data.token);
-  const user = await UsersService.getCurrentUser();
-  loginSuccess({ data: { ...user, method: 'local' } });
+  await loginUser(response.data.token, 'local');
 }
 
 export function storeRedirect() {
@@ -43,7 +42,7 @@ export function storeRedirect() {
     router.globals.params?.toState &&
     router.globals.params?.toState !== 'profile.details'
   ) {
-    setRedirect({
+    RedirectStorage.set({
       toState: router.globals.params.toState,
       toParams: router.globals.params.toParams,
     });
@@ -51,9 +50,9 @@ export function storeRedirect() {
 }
 
 export function redirectOnSuccess() {
-  const redirect = getRedirect();
+  const redirect = RedirectStorage.get();
   if (redirect) {
-    resetRedirect();
+    RedirectStorage.remove();
     // If redirect is not possible, go to default state
     const href = router.stateService.href(redirect.toState, redirect.toParams);
     if (!href) {
@@ -69,7 +68,8 @@ export function redirectOnSuccess() {
 export function clearAuthCache() {
   store.dispatch(setCurrentUser(undefined));
   clearImpersonationData();
-  removeToken();
+  AuthTokenStorage.remove();
+  AuthMethodStorage.remove();
 }
 
 export function localLogout() {

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useMountedState } from 'react-use';
-import { reduxForm, Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import {
   AuthResult,
   authValimoCreate,
@@ -17,10 +17,9 @@ import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showError } from '@waldur/store/notify';
-import { UsersService } from '@waldur/user/UsersService';
+import { showError, showErrorResponse } from '@waldur/store/notify';
 
-import * as AuthService from '../AuthService';
+import { loginUser } from '../AuthService';
 import { SubmitButton } from '../SubmitButton';
 
 export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
@@ -53,12 +52,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
       return;
     }
     if (result.state === 'OK') {
-      AuthService.setAuthHeader(result.token);
-      const user = UsersService.getCurrentUser();
-
-      AuthService.loginSuccess({
-        data: { ...user, token: result.token, method: 'valimo' },
-      });
+      loginUser(result.token, 'valimo');
       router.stateService.go('profile.details');
     } else if (result.state === 'Canceled') {
       if (result.details === 'User is not registered.') {

@@ -1,6 +1,5 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 
-import { ENV } from '@waldur/core/config';
 import { translate } from '@waldur/i18n';
 
 import './LocalLogin.css';
@@ -15,14 +14,7 @@ interface SigninWithLocalAccountProps {
   setShowForm: Dispatch<SetStateAction<boolean>>;
 }
 
-const Border = () => (
-  <div
-    className="login-separator-border"
-    style={{
-      borderBottomColor: ENV.plugins.WALDUR_CORE.BRAND_COLOR,
-    }}
-  />
-);
+const Border = () => <div className="login-separator-border" />;
 
 const SignInWithLocalAccount: FC<SigninWithLocalAccountProps> = ({
   setShowForm,
