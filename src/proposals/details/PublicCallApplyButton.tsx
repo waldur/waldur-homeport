@@ -3,7 +3,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 import { useDispatch } from 'react-redux';
-import { ProtectedRound } from 'waldur-js-client';
+import { NestedRound, ProtectedRound } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -79,8 +79,7 @@ export const PublicCallApplyButton: FC<PublicCallApplyButtonProps> = ({
       } else if (activeRound) {
         dispatch(
           openModalDialog(ProposalCreateDialog, {
-            resolve: { call, round_uuid: activeRound.uuid },
-            size: 'lg',
+            resolve: { call, round: activeRound as NestedRound },
           }),
         );
       }
