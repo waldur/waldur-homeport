@@ -5,7 +5,6 @@
   "name": "Test",
   "description": "<p>Test description</p>",
   "full_description": "<p>Test full description</p>",
-  "terms_of_service_link": "",
   "privacy_policy_link": "",
   "access_url": "",
   "customer": "/api/customers/895e38d197e748459189f19285119edf/",

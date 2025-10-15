@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -18,6 +18,6 @@ export const TermsOfServiceDialog: FunctionComponent<
     title={translate('Terms of Service')}
     footer={<CloseDialogButton label={translate('Ok')} />}
   >
-    <FormattedHtml html={props.resolve.content} />
+    <SafeMarkdown text={props.resolve.content} />
   </ModalDialog>
 );

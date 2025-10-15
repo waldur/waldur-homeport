@@ -5,7 +5,5 @@ export const pickOverview = pick([
   'description',
   'full_description',
   'privacy_policy_link',
-  'terms_of_service',
-  'terms_of_service_link',
   'access_url',
 ]);
