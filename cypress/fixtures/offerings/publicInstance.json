@@ -5,8 +5,6 @@
   "name": "Test request-based item (Test...)",
   "description": "<p>Test Description edited 5000.&nbsp;</p>",
   "full_description": "<p>This is demo description.</p>",
-  "terms_of_service": "<p>test tos</p>",
-  "terms_of_service_link": "https://test.com",
   "privacy_policy_link": "https://privacy.policy",
   "access_url": "",
   "customer": "/api/customers/895e38d197e748459189f19285119edf/",

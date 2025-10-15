@@ -25,6 +25,7 @@ describe('VPC creation', () => {
         '/api/marketplace-public-offerings/0873ed194daa4370a0f4bfcfebc9ad6a/',
         { fixture: 'offerings/openstackTenant.json' },
       )
+      .intercept('GET', '/api/marketplace-offering-terms-of-service/**', [])
       .intercept('POST', '/api/marketplace-provider-offerings/', {})
       .as('createOrder')
       .visit('/marketplace-provider-offering/0873ed194daa4370a0f4bfcfebc9ad6a/')
