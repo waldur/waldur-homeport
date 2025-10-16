@@ -1,20 +1,22 @@
-import { FC, useEffect, useState, useMemo } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
-import {
-  marketplaceOfferingTermsOfServiceList,
-  marketplaceResourcesList,
-} from 'waldur-js-client';
+import { useQueries } from '@tanstack/react-query';
+import { FC, useCallback } from 'react';
+import { Nav, Tab } from 'react-bootstrap';
+import { marketplaceOfferingTermsOfServiceList } from 'waldur-js-client';
 
+import { count } from '@waldur/core/api';
 import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { formatDate } from '@waldur/core/dateUtils';
+import {
+  LoadingSpinner,
+  LoadingSpinnerIcon,
+} from '@waldur/core/LoadingSpinner';
+import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
 import { translate } from '@waldur/i18n';
-import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 import { AcceptTosAction } from './AcceptTosAction';
+import { OfferingResourcesTable } from './OfferingResourcesTable';
 import { RevokeTosAction } from './RevokeTosAction';
 import { ViewTosAction } from './ViewTosAction';
 
@@ -23,57 +25,54 @@ interface OfferingTosExpandableRowProps {
     uuid: string;
     name: string;
   };
-  refetch?: () => void;
+  onTosAction?: () => void;
 }
+
+const NavItem = ({ title, eventKey, count, countLoading }) => (
+  <Nav.Item className="text-nowrap">
+    <Nav.Link eventKey={eventKey}>
+      {title}
+      <Badge variant="default" outline pill className="ms-2">
+        {countLoading ? <LoadingSpinnerIcon /> : count || 0}
+      </Badge>
+    </Nav.Link>
+  </Nav.Item>
+);
 
 export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
   offering,
-  refetch,
+  onTosAction,
 }) => {
-  const [tosData, setTosData] = useState<any[]>([]);
-  const [resourcesData, setResourcesData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [tosQuery, resourcesCountQuery] = useQueries({
+    queries: [
+      {
+        queryKey: ['offering-tos', offering.uuid],
+        queryFn: () =>
+          marketplaceOfferingTermsOfServiceList({
+            query: { offering_uuid: offering.uuid, is_active: true },
+          }).then((response) => response.data || []),
+        refetchOnWindowFocus: false,
+      },
+      {
+        queryKey: ['offering-resources-count', offering.uuid],
+        queryFn: () =>
+          count('/api/marketplace-resources/', {
+            offering_uuid: [offering.uuid],
+          }),
+        refetchOnWindowFocus: false,
+      },
+    ],
+  });
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      setError(false);
-
-      // Fetch both ToS and Resources data in parallel
-      const [tosResponse, resourcesResponse] = await Promise.all([
-        marketplaceOfferingTermsOfServiceList({
-          query: { offering_uuid: offering.uuid, is_active: true },
-        }),
-        marketplaceResourcesList({
-          query: { offering_uuid: [offering.uuid] },
-        }),
-      ]);
-
-      const tosList = tosResponse.data || [];
-      const resourcesList = resourcesResponse.data || [];
-
-      setTosData(tosList);
-      setResourcesData(resourcesList);
-    } catch {
-      setError(true);
-    } finally {
-      setLoading(false);
+  const handleRefetch = useCallback(async () => {
+    await tosQuery.refetch();
+    if (onTosAction) {
+      onTosAction();
     }
-  };
+  }, [tosQuery, onTosAction]);
 
-  const handleRefetch = async () => {
-    await fetchData();
-    if (refetch) {
-      refetch();
-    }
-  };
-
-  const resourceCount = useMemo(() => resourcesData.length, [resourcesData]);
-
-  useEffect(() => {
-    fetchData();
-  }, [offering.uuid]);
+  const loading = tosQuery.isLoading;
+  const error = tosQuery.isError;
 
   if (loading) {
     return (
@@ -99,18 +98,29 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
 
   return (
     <ExpandableContainer>
-      <div className="tabs-container tabs-scrollable">
-        <Tabs
-          defaultActiveKey="tos"
-          id={`offering-tabs-${offering.uuid}`}
-          className="nav-line-tabs"
-          unmountOnExit
-          mountOnEnter
-        >
-          <Tab eventKey="tos" title={translate('Terms of Service')}>
+      <TableTabsContainer defaultActiveKey="tos" unmountOnExit={true}>
+        <div className="overflow-auto">
+          <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
+            <Nav.Item className="text-nowrap">
+              <Nav.Link eventKey="tos">
+                {translate('Terms of Service')}
+              </Nav.Link>
+            </Nav.Item>
+
+            <NavItem
+              title={translate('Resources')}
+              eventKey="resources"
+              count={resourcesCountQuery.data}
+              countLoading={resourcesCountQuery.isLoading}
+            />
+          </Nav>
+        </div>
+
+        <Tab.Content className="overflow-auto">
+          <Tab.Pane eventKey="tos" unmountOnExit={true}>
             <div className="card card-table card-bordered">
               <div className="card-body">
-                {tosData.length === 0 ? (
+                {tosQuery.data?.length === 0 ? (
                   <div className="text-center py-3">
                     <p className="text-muted">
                       {translate(
@@ -119,7 +129,7 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
                     </p>
                   </div>
                 ) : (
-                  <table className="table align-middle">
+                  <table className="table align-middle mb-0">
                     <thead>
                       <tr className="align-middle">
                         <th>{translate('Terms of Service')}</th>
@@ -128,17 +138,15 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
                       </tr>
                     </thead>
                     <tbody>
-                      {tosData.map((tos: any, index: number) => (
-                        <tr key={index}>
+                      {tosQuery.data?.map((tos: any) => (
+                        <tr key={tos.uuid}>
                           <td>
                             <div>
                               <div className="fw-bold">
                                 {tos.version || 'v1.0'}
                               </div>
                               <div className="text-muted small">
-                                {tos.created
-                                  ? new Date(tos.created).toLocaleDateString()
-                                  : '-'}
+                                {formatDate(tos.created)}
                               </div>
                             </div>
                           </td>
@@ -170,7 +178,7 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
                                   tos={tos}
                                   offering={offering}
                                   refetch={handleRefetch}
-                                  resources={resourcesData}
+                                  offeringUuid={offering.uuid}
                                 />
                               )}
                             </ActionsDropdown>
@@ -182,56 +190,13 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
                 )}
               </div>
             </div>
-          </Tab>
-          <Tab
-            eventKey="resources"
-            title={`${translate('Resources')} (${resourceCount})`}
-          >
-            <div className="card card-table card-bordered">
-              <div className="card-body">
-                {resourcesData.length === 0 ? (
-                  <div className="text-center py-3">
-                    <p className="text-muted">
-                      {translate('No resources found for this offering.')}
-                    </p>
-                  </div>
-                ) : (
-                  <table className="table align-middle">
-                    <thead>
-                      <tr className="align-middle">
-                        <th>{translate('Name')}</th>
-                        <th>{translate('Project')}</th>
-                        <th>{translate('Category')}</th>
-                        <th>{translate('Created')}</th>
-                        <th>{translate('State')}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {resourcesData.map((resource: any, index: number) => (
-                        <tr key={index}>
-                          <td>
-                            <ResourceNameField row={resource} />
-                          </td>
-                          <td>{resource.project_name || '-'}</td>
-                          <td>{resource.category_title}</td>
-                          <td>{formatDateTime(resource.created)}</td>
-                          <td>
-                            <ResourceStateField
-                              resource={resource}
-                              outline
-                              pill
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
-              </div>
-            </div>
-          </Tab>
-        </Tabs>
-      </div>
+          </Tab.Pane>
+
+          <Tab.Pane eventKey="resources" unmountOnExit={true}>
+            <OfferingResourcesTable offeringUuid={offering.uuid} />
+          </Tab.Pane>
+        </Tab.Content>
+      </TableTabsContainer>
     </ExpandableContainer>
   );
 };

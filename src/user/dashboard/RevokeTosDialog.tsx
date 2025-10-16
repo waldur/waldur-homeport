@@ -1,10 +1,15 @@
 import { XIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { marketplaceUserOfferingConsentsRevoke } from 'waldur-js-client';
+import {
+  marketplaceResourcesList,
+  marketplaceUserOfferingConsentsRevoke,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
@@ -13,9 +18,17 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 export const RevokeTosDialog = ({
-  resolve: { tos, offering, refetch, resources },
+  resolve: { tos, offering, refetch, offeringUuid },
 }) => {
   const dispatch = useDispatch();
+
+  const { data: resources, isLoading: resourcesLoading } = useQuery({
+    queryKey: ['offering-resources-for-revoke', offeringUuid],
+    queryFn: () =>
+      marketplaceResourcesList({
+        query: { offering_uuid: [offeringUuid] },
+      }).then((response) => response.data || []),
+  });
 
   const handleRevoke = useCallback(async () => {
     try {
@@ -74,42 +87,56 @@ export const RevokeTosDialog = ({
         )}
       </p>
 
-      {resources && resources.length > 0 && (
-        <div className="mb-4">
-          <h6 className="mb-3">
-            {translate('Resources that will be affected:')}
-          </h6>
-          <div className="card card-table card-bordered">
-            <div className="card-body">
-              <table className="table align-middle">
-                <thead>
-                  <tr className="align-middle">
-                    <th>{translate('Name')}</th>
-                    <th>{translate('Project')}</th>
-                    <th>{translate('Category')}</th>
-                    <th>{translate('Created')}</th>
-                    <th>{translate('State')}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {resources.map((resource: any, index: number) => (
-                    <tr key={index}>
-                      <td>
-                        <ResourceNameField row={resource} />
-                      </td>
-                      <td>{resource.project_name || '-'}</td>
-                      <td>{resource.category_title}</td>
-                      <td>{formatDateTime(resource.created)}</td>
-                      <td>
-                        <ResourceStateField resource={resource} outline pill />
-                      </td>
+      {resourcesLoading ? (
+        <div className="text-center py-4">
+          <LoadingSpinner />
+          <p className="text-muted mt-2">
+            {translate('Loading affected resources...')}
+          </p>
+        </div>
+      ) : (
+        resources &&
+        resources.length > 0 && (
+          <div className="mb-4">
+            <h6 className="mb-3">
+              {translate('Resources that will be affected:')}
+            </h6>
+            <div className="card card-table card-bordered">
+              <div className="card-body p-0">
+                <table className="table align-middle mb-0">
+                  <thead>
+                    <tr className="align-middle">
+                      <th>{translate('Name')}</th>
+                      <th>{translate('Project')}</th>
+                      <th>{translate('Category')}</th>
+                      <th>{translate('Created')}</th>
+                      <th>{translate('State')}</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {resources.map((resource: any) => (
+                      <tr key={resource.uuid}>
+                        <td>
+                          <ResourceNameField row={resource} />
+                        </td>
+                        <td>{resource.project_name || '-'}</td>
+                        <td>{resource.category_title}</td>
+                        <td>{formatDateTime(resource.created)}</td>
+                        <td>
+                          <ResourceStateField
+                            resource={resource}
+                            outline
+                            pill
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
+        )
       )}
     </ModalDialog>
   );

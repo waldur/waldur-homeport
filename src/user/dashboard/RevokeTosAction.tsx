@@ -7,13 +7,13 @@ import { openModalDialog } from '@waldur/modal/actions';
 
 import { RevokeTosDialog } from './RevokeTosDialog';
 
-export const RevokeTosAction = ({ tos, offering, refetch, resources }) => {
+export const RevokeTosAction = ({ tos, offering, refetch, offeringUuid }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(
       openModalDialog(RevokeTosDialog, {
-        resolve: { tos, offering, refetch, resources },
+        resolve: { tos, offering, refetch, offeringUuid },
         size: 'lg',
       }),
     );
