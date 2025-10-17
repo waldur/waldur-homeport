@@ -52527,7 +52527,6 @@
         "generic_element"
       ],
       "components": [
-        "Field",
         "Component"
       ],
       "is_user_facing": true,
@@ -52563,7 +52562,6 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
           "Component"
         ],
         "conditional_render": true
@@ -52597,7 +52595,6 @@
         "generic_element"
       ],
       "components": [
-        "Field",
         "Component"
       ],
       "is_user_facing": true,
@@ -52633,7 +52630,6 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
           "Component"
         ],
         "conditional_render": true
@@ -53779,8 +53775,7 @@
       "components": [
         "SelectField",
         "FormContainer",
-        "Component",
-        "Field"
+        "Component"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -53822,8 +53817,7 @@
       "jsx_context": {
         "tags": [
           "SelectField",
-          "Component",
-          "Field"
+          "Component"
         ],
         "conditional_render": true
       },
@@ -66908,7 +66902,7 @@
       "components": [
         "Field",
         "ExpandableContainer",
-        "CustomRadioButton"
+        "AwesomeRadioButton"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -66948,7 +66942,7 @@
       "jsx_context": {
         "tags": [
           "Field",
-          "CustomRadioButton"
+          "AwesomeRadioButton"
         ],
         "conditional_render": false
       },
@@ -134674,8 +134668,7 @@
         "Nav",
         "TableTabsContainer",
         "ExpandableContainer",
-        "Field",
-        "Card",
+        "FormTable",
         "ModalDialog"
       ],
       "is_user_facing": true,
@@ -134730,7 +134723,6 @@
         "tags": [
           "Table",
           "PoliciesTable",
-          "Field",
           "ModalDialog",
           "h3"
         ],
@@ -134748,7 +134740,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 9
       },
       "usage_count": 10
     },
@@ -154520,18 +154512,17 @@
       "primary_ui_type": "title",
       "ui_types": [
         "label",
-        "generic_element",
+        "unknown",
         "title",
-        "unknown"
+        "generic_element"
       ],
       "components": [
-        "Field",
-        "Card",
+        "FormTable",
         "ResourceActionDialog",
         "Table",
         "SummaryField",
         "FormGroup",
-        "FormTable",
+        "Field",
         "ModalDialog"
       ],
       "is_user_facing": true,
@@ -154598,12 +154589,12 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
           "ResourceActionDialog",
           "Table",
           "b",
           "SummaryField",
-          "FormGroup"
+          "FormGroup",
+          "Field"
         ],
         "conditional_render": true
       },
@@ -169974,7 +169965,6 @@
         "generic_element"
       ],
       "components": [
-        "Card",
         "Component"
       ],
       "is_user_facing": true,
@@ -170017,7 +170007,6 @@
       },
       "jsx_context": {
         "tags": [
-          "h3",
           "Component"
         ],
         "conditional_render": false
@@ -170811,12 +170800,11 @@
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
-        "generic_element",
+        "unknown",
         "title"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -170851,9 +170839,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -170868,7 +170854,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 2
     },
@@ -170882,11 +170868,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -170918,9 +170903,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -170935,7 +170918,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -170948,11 +170931,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -170984,9 +170966,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -171001,7 +170981,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -171014,12 +170994,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element",
         "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -171055,9 +171033,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -171072,7 +171048,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 2
     },
@@ -171085,11 +171061,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -171121,9 +171096,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -171138,7 +171111,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -171152,11 +171125,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -171188,9 +171160,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -171205,7 +171175,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -171218,11 +171188,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -171254,9 +171223,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -171271,7 +171238,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -171285,11 +171252,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -171321,9 +171287,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -171338,7 +171302,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -171351,11 +171315,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -171387,9 +171350,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -171404,7 +171365,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -177836,7 +177797,6 @@
         "AsyncActionDialog",
         "Component",
         "TablePlaceholder",
-        "Field",
         "Table",
         "VStepperFormStepCard"
       ],
@@ -177899,7 +177859,6 @@
           "FormLabel",
           "Component",
           "TablePlaceholder",
-          "Field",
           "Table",
           "VStepperFormStepCard"
         ],
@@ -198700,7 +198659,7 @@
         "generic_element"
       ],
       "components": [
-        "CustomRadioButton",
+        "AwesomeRadioButton",
         "Field"
       ],
       "is_user_facing": true,
@@ -198734,7 +198693,7 @@
       },
       "jsx_context": {
         "tags": [
-          "CustomRadioButton"
+          "AwesomeRadioButton"
         ],
         "conditional_render": false
       },
@@ -198766,7 +198725,7 @@
         "label"
       ],
       "components": [
-        "CustomRadioButton"
+        "AwesomeRadioButton"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -198799,7 +198758,7 @@
       },
       "jsx_context": {
         "tags": [
-          "CustomRadioButton"
+          "AwesomeRadioButton"
         ],
         "conditional_render": false
       },
@@ -198831,7 +198790,7 @@
         "label"
       ],
       "components": [
-        "CustomRadioButton"
+        "AwesomeRadioButton"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -198864,7 +198823,7 @@
       },
       "jsx_context": {
         "tags": [
-          "CustomRadioButton"
+          "AwesomeRadioButton"
         ],
         "conditional_render": false
       },
@@ -198896,7 +198855,7 @@
         "generic_element"
       ],
       "components": [
-        "CustomRadioButton"
+        "AwesomeRadioButton"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -198929,7 +198888,7 @@
       },
       "jsx_context": {
         "tags": [
-          "CustomRadioButton"
+          "AwesomeRadioButton"
         ],
         "conditional_render": false
       },
@@ -207207,9 +207166,7 @@
       "ui_types": [
         "unknown"
       ],
-      "components": [
-        "Field"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 22,
@@ -207240,9 +207197,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -207272,9 +207227,7 @@
       "ui_types": [
         "unknown"
       ],
-      "components": [
-        "Field"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 14,
@@ -207305,9 +207258,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -207337,9 +207288,7 @@
       "ui_types": [
         "unknown"
       ],
-      "components": [
-        "Field"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 22,
@@ -207370,9 +207319,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -207485,8 +207432,8 @@
         "generic_element"
       ],
       "components": [
-        "Field",
         "AwesomeCheckboxField",
+        "Field",
         "VStepperFormStepCard",
         "ModalDialog"
       ],
@@ -207527,8 +207474,8 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
-          "AwesomeCheckboxField"
+          "AwesomeCheckboxField",
+          "Field"
         ],
         "conditional_render": true
       },
@@ -208530,8 +208477,8 @@
         "FormLabel",
         "FormGroup",
         "AsyncActionDialog",
-        "Field",
-        "Table"
+        "Table",
+        "Field"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -208574,8 +208521,8 @@
       "jsx_context": {
         "tags": [
           "FormLabel",
-          "Field",
-          "Table"
+          "Table",
+          "Field"
         ],
         "conditional_render": true
       },
@@ -210932,7 +210879,6 @@
         "unknown"
       ],
       "components": [
-        "Field",
         "FormGroup"
       ],
       "is_user_facing": true,
@@ -210969,7 +210915,6 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
           "FormGroup"
         ],
         "conditional_render": true
@@ -211004,7 +210949,6 @@
         "generic_element"
       ],
       "components": [
-        "Field",
         "FormAbstractVolumeFields",
         "VStepperFormStepCard",
         "FormGroup"
@@ -211045,7 +210989,6 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
           "FormAbstractVolumeFields",
           "FormGroup"
         ],
@@ -211080,9 +211023,7 @@
       "ui_types": [
         "unknown"
       ],
-      "components": [
-        "Field"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 16,
@@ -211113,9 +211054,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -211147,7 +211086,6 @@
         "generic_element"
       ],
       "components": [
-        "Field",
         "FormAbstractVolumeFields",
         "VStepperFormStepCard"
       ],
@@ -211187,7 +211125,6 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
           "FormAbstractVolumeFields"
         ],
         "conditional_render": true
@@ -211221,9 +211158,7 @@
         "unknown",
         "label"
       ],
-      "components": [
-        "Field"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 14,
@@ -211255,9 +211190,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -211287,9 +211220,7 @@
       "ui_types": [
         "unknown"
       ],
-      "components": [
-        "Field"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 9,
@@ -211320,9 +211251,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -249512,6 +249441,219 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Call name": {
+    "message": "Call name",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "ModalDialog",
+        "Col",
+        "Row",
+        "VStepperFormStepCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "dialog",
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/AddProposalDialog.tsx",
+          "proposals/proposal/create/ProposalDetailsOverviewStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Round reference": {
+    "message": "Round reference",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "ModalDialog",
+        "Col",
+        "Row",
+        "VStepperFormStepCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "dialog",
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/AddProposalDialog.tsx",
+          "proposals/proposal/create/ProposalDetailsOverviewStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Round deadline": {
+    "message": "Round deadline",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "ModalDialog",
+        "Col",
+        "Row",
+        "VStepperFormStepCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "dialog",
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/AddProposalDialog.tsx",
+          "proposals/proposal/create/ProposalDetailsOverviewStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Submission": {
     "message": "Submission",
     "context": {
@@ -251438,201 +251580,6 @@
       "Variable contains numbers. Consider plural handling in your language.",
       "This action modifies application state. Use clear, actionable language."
     ]
-  },
-  "Call name": {
-    "message": "Call name",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "Field",
-        "Col",
-        "Row",
-        "VStepperFormStepCard"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 9,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProposalDetailsOverviewStep.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
-      },
-      "usage_count": 1
-    }
-  },
-  "Round deadline": {
-    "message": "Round deadline",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "Field",
-        "Col",
-        "Row",
-        "VStepperFormStepCard"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 14,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProposalDetailsOverviewStep.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
-      },
-      "usage_count": 1
-    }
-  },
-  "Round reference": {
-    "message": "Round reference",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "Field",
-        "Col",
-        "Row",
-        "VStepperFormStepCard"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 15,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProposalDetailsOverviewStep.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
-      },
-      "usage_count": 1
-    }
   },
   "Update proposal": {
     "message": "Update proposal",

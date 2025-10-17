@@ -4,7 +4,7 @@ import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 
 interface SubmitButtonProps {
   submitting: boolean;
-  label?: string;
+  label?: ReactNode;
   children?: ReactNode;
   id?: string;
   disabled?: boolean;

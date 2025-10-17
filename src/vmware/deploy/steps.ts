@@ -3,7 +3,6 @@ import { translate } from '@waldur/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
-  NotesStep,
 } from '@waldur/marketplace/deploy/steps/constants';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
 
@@ -61,7 +60,6 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     component: FormAdvancedOptionsStep,
     isActive: () => !ENV.plugins.WALDUR_VMWARE.BASIC_MODE,
   },
-  NotesStep,
   {
     ...FinalConfigurationStep,
     params: { nameLabel: translate('VM name') },

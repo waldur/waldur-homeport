@@ -2,7 +2,6 @@ import { translate } from '@waldur/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
-  NotesStep,
 } from '@waldur/marketplace/deploy/steps/constants';
 import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
@@ -31,7 +30,6 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     requiredFields: ['attributes.type', 'attributes.size'],
     component: FormVolumeStep,
   },
-  NotesStep,
   {
     ...FinalConfigurationStep,
     params: {

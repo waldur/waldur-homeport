@@ -43,14 +43,6 @@ const attributes: Attribute[] = [
     ),
   },
   {
-    key: 'terms_of_service',
-    title: translate('Terms of service'),
-    type: 'html',
-    description: translate(
-      'Specify the terms users must agree to when accessing the offering.',
-    ),
-  },
-  {
     key: 'privacy_policy_link',
     title: translate('Privacy policy link'),
     type: 'string',
@@ -58,13 +50,6 @@ const attributes: Attribute[] = [
     description: translate(
       'Add a link to your privacy policy for this offering.',
     ),
-  },
-  {
-    key: 'terms_of_service_link',
-    title: translate('Terms of service link'),
-    type: 'string',
-    maxLength: 200,
-    description: translate('Add a link to the full terms of service.'),
   },
   {
     key: 'access_url',

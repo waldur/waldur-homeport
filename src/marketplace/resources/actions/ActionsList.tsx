@@ -20,6 +20,9 @@ import { ShowUsageAction } from '../list/ShowUsageAction';
 import { EditAction } from './EditAction';
 import { EditResourceEndDateByProviderAction } from './EditResourceEndDateByProviderAction';
 import { EditResourceEndDateByStaffAction } from './EditResourceEndDateByStaffAction';
+import { PullOrderAction } from './PullOrderAction';
+import { PullResourceAction } from './PullResourceAction';
+import { PullRobotAccounts } from './PullRobotAccounts';
 
 export const ActionsList = [
   EditAction,
@@ -64,4 +67,8 @@ export const StaffActions = [
   MoveResourceAction,
   SetSlugAction,
   EditResourceEndDateByStaffAction,
+  // Resource sync actions
+  PullResourceAction,
+  PullOrderAction,
+  PullRobotAccounts,
 ];

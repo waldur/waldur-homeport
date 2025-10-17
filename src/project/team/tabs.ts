@@ -13,6 +13,9 @@ export const useTeamTableTabs = (project: Project) => {
   const hasProjectPermission = useSelector(
     userHasProjectPermission(PermissionEnum.REVIEW_PROJECT_MEMBERSHIP),
   );
+  if (!project) {
+    return [];
+  }
   return useMemo(
     () =>
       [

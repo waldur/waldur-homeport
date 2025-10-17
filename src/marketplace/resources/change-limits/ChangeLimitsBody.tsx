@@ -1,17 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { InjectedFormProps } from 'redux-form';
-import {
-  marketplaceOrdersUpdateAttachment,
-  marketplaceResourcesUpdateLimits,
-} from 'waldur-js-client';
+import { marketplaceResourcesUpdateLimits } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { Limits } from '@waldur/marketplace/common/types';
-import { OrderAttachmentField } from '@waldur/marketplace/deploy/steps/OrderAttachmentField';
-import { OrderCommentField } from '@waldur/marketplace/deploy/steps/OrderCommentField';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -30,22 +24,12 @@ export const DialogBody = connector((props: DialogBodyProps) => {
   const dispatch = useDispatch();
   const submitRequest = async (formData) => {
     try {
-      const order = await marketplaceResourcesUpdateLimits({
+      await marketplaceResourcesUpdateLimits({
         path: { uuid: props.asyncState.value?.resource?.uuid },
         body: {
           limits: props.asyncState.value.limitSerializer(formData.limits),
-          request_comment: formData.request_comment,
         },
       });
-      if (formData.attachment instanceof File) {
-        await marketplaceOrdersUpdateAttachment({
-          path: { uuid: order.data.order_uuid },
-          body: {
-            attachment: fileSerializer(formData.attachment),
-          },
-          ...formDataOptions,
-        });
-      }
       dispatch(
         showSuccess(
           translate('Resource limits change request has been submitted.'),
@@ -101,13 +85,6 @@ export const DialogBody = connector((props: DialogBodyProps) => {
             shouldConcealPrices={props.shouldConcealPrices}
           />
         )}
-        {props.offering?.plugin_options.order_supports_comments_and_metadata ? (
-          <>
-            <div className="mb-7 border-bottom" />
-            <OrderCommentField />
-            <OrderAttachmentField />
-          </>
-        ) : null}
       </ModalDialog>
     </form>
   );

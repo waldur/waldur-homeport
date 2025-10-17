@@ -1,6 +1,6 @@
 import { Validator } from 'redux-form';
 
-import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
+import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import {
@@ -87,7 +87,7 @@ export const configAttrField = (attribute) => {
           ];
 
           return (
-            <CustomRadioButton
+            <AwesomeRadioButton
               choices={choices}
               name={attribute.key}
               input={componentProp.input}

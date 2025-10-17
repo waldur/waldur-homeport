@@ -1,25 +1,34 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { marketplaceOrdersApproveByConsumer } from 'waldur-js-client';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { useModal } from '@waldur/modal/hooks';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { OrderActionProps } from './types';
 
+const UploadPurchaseOrderDialog = lazyComponent(() =>
+  import('./UploadPurchaseOrderDialog').then((module) => ({
+    default: module.UploadPurchaseOrderDialog,
+  })),
+);
+
 export const ApproveByConsumerButton: FC<
   OrderActionProps & { className?: string }
-> = ({ order, as, className, refetch }) => {
+> = ({ order, offering, as, className, refetch }) => {
   const user = useSelector(getUser);
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
+  const { showSuccess, showErrorResponse } = useNotify();
   const { mutate, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       try {
@@ -29,14 +38,19 @@ export const ApproveByConsumerButton: FC<
         if (refetch) {
           await refetch();
         }
-        dispatch(showSuccess(translate('Order has been approved.')));
+        showSuccess(translate('Order has been approved.'));
       } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to approve order.')),
-        );
+        showErrorResponse(error, translate('Unable to approve order.'));
       }
     },
   });
+  const callback = () => {
+    if (offering?.plugin_options.order_supports_comments_and_metadata) {
+      openDialog(UploadPurchaseOrderDialog, { order, refetch });
+    } else {
+      mutate();
+    }
+  };
   if (
     !hasPermission(user, {
       permission: PermissionEnum.APPROVE_ORDER,
@@ -56,7 +70,7 @@ export const ApproveByConsumerButton: FC<
           as={as}
           className={className + ' w-100'}
           title={translate('Approve')}
-          action={mutate}
+          action={callback}
           disabled={isLoading}
           iconNode={<CheckCircleIcon weight="bold" />}
           size="sm"

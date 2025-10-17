@@ -294,7 +294,7 @@ $blue-active: if(isDarkMode(), $blue-600, $blue-700);
 $blue-light: if(isDarkMode(), $blue-950, $blue-50);
 $blue-inverse: #ffffff;
 
-// Teal
+// Teal (Blue light)
 $teal-50: #f0fdf9 !default;
 $teal-200: #99f6e0 !default;
 $teal-500: #15b79e !default;
@@ -305,6 +305,66 @@ $teal: if(isDarkMode(), $teal-500, $teal-500);
 $teal-active: if(isDarkMode(), $teal-600, $teal-700);
 $teal-light: if(isDarkMode(), $teal-950, $teal-50);
 $teal-inverse: #ffffff;
+
+// Indigo
+$indigo-50: #eef4ff !default;
+$indigo-200: #c7d7fe !default;
+$indigo-500: #6172f3 !default;
+$indigo-600: #444ce7 !default;
+$indigo-700: #3538cd !default;
+$indigo-950: #1f235b !default;
+$indigo: if(isDarkMode(), $indigo-500, $indigo-500);
+$indigo-active: if(isDarkMode(), $indigo-600, $indigo-700);
+$indigo-light: if(isDarkMode(), $indigo-950, $indigo-50);
+$indigo-inverse: #ffffff;
+
+// Purple
+$purple-50: #f4f3ff !default;
+$purple-200: #d9d6fe !default;
+$purple-500: #7a5af8 !default;
+$purple-600: #6938ef !default;
+$purple-700: #5925dc !default;
+$purple-950: #27115f !default;
+$purple: if(isDarkMode(), $purple-500, $purple-500);
+$purple-active: if(isDarkMode(), $purple-600, $purple-700);
+$purple-light: if(isDarkMode(), $purple-950, $purple-50);
+$purple-inverse: #ffffff;
+
+// Rose
+$rose-50: #fff1f3 !default;
+$rose-200: #fecdd6 !default;
+$rose-500: #f63d68 !default;
+$rose-600: #e31b54 !default;
+$rose-700: #c01048 !default;
+$rose-950: #510b24 !default;
+$rose: if(isDarkMode(), $rose-500, $rose-500);
+$rose-active: if(isDarkMode(), $rose-600, $rose-700);
+$rose-light: if(isDarkMode(), $rose-950, $rose-50);
+$rose-inverse: #ffffff;
+
+// Orange
+$orange-50: #fff6ed !default;
+$orange-200: #fddcab !default;
+$orange-500: #fb6514 !default;
+$orange-600: #ec4a0a !default;
+$orange-700: #c4320a !default;
+$orange-950: #57130a !default;
+$orange: if(isDarkMode(), $orange-500, $orange-500);
+$orange-active: if(isDarkMode(), $orange-600, $orange-700);
+$orange-light: if(isDarkMode(), $orange-950, $orange-50);
+$orange-inverse: #ffffff;
+
+// Moss
+$moss-50: #f5fbee !default;
+$moss-200: #ceeab0 !default;
+$moss-500: #669f2a !default;
+$moss-600: #4f7a21 !default;
+$moss-700: #3f621a !default;
+$moss-950: #1a280b !default;
+$moss: if(isDarkMode(), $moss-500, $moss-500);
+$moss-active: if(isDarkMode(), $moss-600, $moss-700);
+$moss-light: if(isDarkMode(), $moss-950, $moss-50);
+$moss-inverse: #ffffff;
 
 // Theme colors
 $theme-colors: (
@@ -343,6 +403,11 @@ $theme-colors: (
   'pink': $pink,
   'blue': $blue,
   'teal': $teal,
+  'indigo': $indigo,
+  'purple': $purple,
+  'rose': $rose,
+  'moss': $moss,
+  'orange': $orange,
 ) !default;
 
 // Hover colors
@@ -362,6 +427,11 @@ $theme-active-colors: (
   'pink': $pink-active,
   'blue': $blue-active,
   'teal': $teal-active,
+  'indigo': $indigo-active,
+  'purple': $purple-active,
+  'rose': $rose-active,
+  'moss': $moss-active,
+  'orange': $orange-active,
 ) !default; // Custom variable
 
 // Inverse colors
@@ -380,6 +450,11 @@ $theme-inverse-colors: (
   'pink': $pink-inverse,
   'blue': $blue-inverse,
   'teal': $teal-inverse,
+  'indigo': $indigo-inverse,
+  'purple': $purple-inverse,
+  'rose': $rose-inverse,
+  'moss': $moss-inverse,
+  'orange': $orange-inverse,
 ) !default; // Custom variable
 
 // Light colors
@@ -395,6 +470,11 @@ $theme-light-colors: (
   'pink': $pink-light,
   'blue': $blue-light,
   'teal': $teal-light,
+  'indigo': $indigo-light,
+  'purple': $purple-light,
+  'rose': $rose-light,
+  'moss': $moss-light,
+  'orange': $orange-light,
 ) !default; // Custom variable
 
 // Text colors
@@ -1398,6 +1478,7 @@ $symbol-sizes: (
   32px: 32px,
   35px: 35px,
   40px: 40px,
+  42px: 42px,
   45px: 45px,
   48px: 48px,
   default: 50px,

@@ -11,7 +11,7 @@ import {
   QuestionTypeEnum,
 } from 'waldur-js-client';
 
-import { CustomRadioButton } from '@waldur/core/CustomRadioButton';
+import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
@@ -92,7 +92,7 @@ const FieldsListGroup = ({
           name="dependency_logic_operator"
           defaultValue="and"
           render={({ input }) => (
-            <CustomRadioButton
+            <AwesomeRadioButton
               label={translate(
                 'When multiple conditions exist, show this question if:',
               )}
@@ -107,7 +107,7 @@ const FieldsListGroup = ({
                 },
               ]}
               direction="horizontal"
-              align="left"
+              justify="start"
               input={input as any}
               disabled={fields.length < 2}
               tooltip={
