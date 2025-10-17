@@ -4,7 +4,6 @@ import {
   AdditionalConfigurationStep,
   DetailsOverviewStep,
   FinalConfigurationStep,
-  NotesStep,
   PlanStep,
 } from '@waldur/marketplace/deploy/steps/constants';
 import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
@@ -47,7 +46,6 @@ export const managedDeployOfferingSteps: OfferingConfigurationFormStep[] = [
     component: FormLonghornStep,
   },
   AdditionalConfigurationStep,
-  NotesStep,
   {
     ...FinalConfigurationStep,
     params: {

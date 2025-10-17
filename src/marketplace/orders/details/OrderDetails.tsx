@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { Stack } from 'react-bootstrap';
 import { OrderDetails as OrderDetailsType } from 'waldur-js-client';
 
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
@@ -17,7 +18,6 @@ import { OrderActionsButton } from '../actions/OrderActionsButton';
 
 import { ErrorDetailsTab } from './ErrorDetailsTab';
 import { LimitsSection } from './LimitsSection';
-import { NotesSection } from './NotesSection';
 import { OrderAccordion } from './OrderAccordion';
 import { OrderDetailsApprovalsTab } from './OrderDetailsApprovalsTab';
 import { OrderDetailsHeaderBody } from './OrderDetailsHeaderBody';
@@ -79,11 +79,6 @@ const getOrderPageTabs = (data: {
         <LimitsSection components={data.offering.components} limits={limits} />
       ),
     },
-    data.offering?.plugin_options.order_supports_comments_and_metadata && {
-      key: 'notes',
-      title: translate('Notes and attachment'),
-      component: () => <NotesSection order={data.order} />,
-    },
   ].filter(Boolean);
 };
 
@@ -97,28 +92,36 @@ interface OrderDetailsProps {
 
 const PageHero = ({ data, isRefetching }) => (
   <PublicDashboardHero
-    className="container-fluid my-5"
+    hideQuickSection
     cardBordered
+    className="container-fluid my-5"
     logo={data.offering.thumbnail}
     logoAlt={data.offering.name}
     logoTooltip={data.offering.name}
     logoCircle
-    title={<OrderDetailsHeaderTitle order={data.order} />}
-    quickBody={<OrderDetailsQuickBody order={data.order} />}
-    quickActions={
-      <div className="d-flex flex-column flex-wrap gap-2">
-        <RefreshButton
-          refetch={data.refetch}
-          isLoading={isRefetching}
-          size="sm"
-        />
+    title={
+      <Stack direction="horizontal">
+        <Stack direction="vertical">
+          <OrderDetailsHeaderTitle order={data.order} />
+          <OrderDetailsQuickBody order={data.order} />
+          <OrderDetailsHeaderBody order={data.order} />
+        </Stack>
+        <Stack direction="vertical" gap={3} className="align-items-end">
+          <RefreshButton
+            refetch={data.refetch}
+            isLoading={isRefetching}
+            size="sm"
+          />
 
-        <OrderActionsButton order={data.order} loadData={data.refetch} />
-      </div>
+          <OrderActionsButton
+            order={data.order}
+            offering={data.offering}
+            loadData={data.refetch}
+          />
+        </Stack>
+      </Stack>
     }
-  >
-    <OrderDetailsHeaderBody order={data.order} />
-  </PublicDashboardHero>
+  />
 );
 
 export const OrderDetails: FunctionComponent<OrderDetailsProps> = (data) => {
