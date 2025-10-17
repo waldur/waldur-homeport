@@ -142,7 +142,7 @@ $blue-600: if(isDarkMode(), #84caff, #1570ef) !default;
 $blue-700: if(isDarkMode(), #b2ddff, #175cd3) !default;
 $blue-900: if(isDarkMode(), #eff8ff, #194185) !default;
 
-// Teal
+// Teal (Blue light)
 $teal-50: if(isDarkMode(), #134e48, #f0fdf9) !default;
 $teal-200: if(isDarkMode(), #107569, #99f6e0) !default;
 $teal-300: if(isDarkMode(), #0e9384, #5fe9d0) !default;
@@ -150,6 +150,51 @@ $teal-500: if(isDarkMode(), #2ed3b7, #15b79e) !default;
 $teal-600: if(isDarkMode(), #5fe9d0, #0e9384) !default;
 $teal-700: if(isDarkMode(), #99f6e0, #107569) !default;
 $teal-900: if(isDarkMode(), #f0fdf9, #134e48) !default;
+
+// Indigo
+$indigo-50: if(isDarkMode(), #2d3282, #eef4ff) !default;
+$indigo-200: if(isDarkMode(), #3538cd, #c7d7fe) !default;
+$indigo-300: if(isDarkMode(), #444ce7, #a4bcfd) !default;
+$indigo-500: if(isDarkMode(), #8098f9, #6172f3) !default;
+$indigo-600: if(isDarkMode(), #a4bcfd, #444ce7) !default;
+$indigo-700: if(isDarkMode(), #c7d7fe, #3538cd) !default;
+$indigo-900: if(isDarkMode(), #eef4ff, #2d3282) !default;
+
+// Purple
+$purple-50: if(isDarkMode(), #3e1c96, #f4f3ff) !default;
+$purple-200: if(isDarkMode(), #5925dc, #d9d6fe) !default;
+$purple-300: if(isDarkMode(), #6938ef, #bdb4fe) !default;
+$purple-500: if(isDarkMode(), #9b8afb, #7a5af8) !default;
+$purple-600: if(isDarkMode(), #bdb4fe, #6938ef) !default;
+$purple-700: if(isDarkMode(), #d9d6fe, #5925dc) !default;
+$purple-900: if(isDarkMode(), #f4f3ff, #3e1c96) !default;
+
+// Rose
+$rose-50: if(isDarkMode(), #89123e, #fff1f3) !default;
+$rose-200: if(isDarkMode(), #c01048, #fecdd6) !default;
+$rose-300: if(isDarkMode(), #e31b54, #fea3b4) !default;
+$rose-500: if(isDarkMode(), #fd6f8e, #f63d68) !default;
+$rose-600: if(isDarkMode(), #fea3b4, #e31b54) !default;
+$rose-700: if(isDarkMode(), #fecdd6, #c01048) !default;
+$rose-900: if(isDarkMode(), #fff1f3, #89123e) !default;
+
+// Orange
+$orange-50: if(isDarkMode(), #7e2410, #fff6ed) !default;
+$orange-200: if(isDarkMode(), #c4320a, #fddcab) !default;
+$orange-300: if(isDarkMode(), #ec4a0a, #feb273) !default;
+$orange-500: if(isDarkMode(), #fd853a, #fb6514) !default;
+$orange-600: if(isDarkMode(), #feb273, #ec4a0a) !default;
+$orange-700: if(isDarkMode(), #fddcab, #c4320a) !default;
+$orange-900: if(isDarkMode(), #fff6ed, #7e2410) !default;
+
+// Moss
+$moss-50: if(isDarkMode(), #2b4212, #f5fbee) !default;
+$moss-200: if(isDarkMode(), #3f621a, #ceeab0) !default;
+$moss-300: if(isDarkMode(), #4f7a21, #acdc79) !default;
+$moss-500: if(isDarkMode(), #86cb3c, #669f2a) !default;
+$moss-600: if(isDarkMode(), #acdc79, #4f7a21) !default;
+$moss-700: if(isDarkMode(), #ceeab0, #3f621a) !default;
+$moss-900: if(isDarkMode(), #f5fbee, #2b4212) !default;
 
 $dropdown-item-padding-x: 16px;
 $dropdown-item-padding-y: 10px;
@@ -183,6 +228,11 @@ $theme-50-colors: (
   'pink': $pink-50,
   'blue': $blue-50,
   'teal': $teal-50,
+  'indigo': $indigo-50,
+  'purple': $purple-50,
+  'rose': $rose-50,
+  'moss': $moss-50,
+  'orange': $orange-50,
 ) !default; // Custom variable
 
 // 200 colors
@@ -200,6 +250,11 @@ $theme-200-colors: (
   'pink': $pink-200,
   'blue': $blue-200,
   'teal': $teal-200,
+  'indigo': $indigo-200,
+  'purple': $purple-200,
+  'rose': $rose-200,
+  'moss': $moss-200,
+  'orange': $orange-200,
 ) !default; // Custom variable
 
 // 500 colors
@@ -217,6 +272,11 @@ $theme-500-colors: (
   'pink': $pink-500,
   'blue': $blue-500,
   'teal': $teal-500,
+  'indigo': $indigo-500,
+  'purple': $purple-500,
+  'rose': $rose-500,
+  'moss': $moss-500,
+  'orange': $orange-500,
 ) !default; // Custom variable
 
 // 700 colors
@@ -234,6 +294,11 @@ $theme-700-colors: (
   'pink': $pink-700,
   'blue': $blue-700,
   'teal': $teal-700,
+  'indigo': $indigo-700,
+  'purple': $purple-700,
+  'rose': $rose-700,
+  'moss': $moss-700,
+  'orange': $orange-700,
 ) !default; // Custom variable
 
 // Card
