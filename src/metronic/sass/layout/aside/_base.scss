@@ -54,11 +54,11 @@
 
   // Dark theme
   &.aside-dark {
-    background-color: get($aside-config, bg-color);
+    background-color: get($aside-config, bg-color-dark);
 
     // Logo
     .aside-logo {
-      background-color: get($aside-config, logo-bg-color);
+      background-color: get($aside-config, logo-bg-color-dark);
       h3 {
         color: white;
       }
@@ -100,19 +100,27 @@
 
   // Light theme
   &.aside-light {
-    background-color: if(isDarkMode(), get($aside-config, bg-color), $gray-25);
+    background-color: if(isDarkMode(), $gray-950, $gray-25);
   }
 
+  // Primary Dark theme
   &.aside-accent {
-    background-color: if(
-      isDarkMode(),
-      get($aside-config, bg-color),
-      var(--waldur-brand-color)
-    );
+    background-color: get($aside-config, bg-color);
 
     .aside-logo {
       h3 {
         color: white;
+      }
+    }
+  }
+
+  // Primary Light theme
+  &.aside-accent-light {
+    background-color: var(--waldur-brand-25);
+
+    .aside-logo {
+      h3 {
+        color: var(--waldur-brand-25);
       }
     }
   }
