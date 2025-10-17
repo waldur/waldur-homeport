@@ -1,8 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { truncate } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { formatJsx, translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 
 import { OrderStateField } from './OrderStateField';
@@ -13,13 +12,6 @@ interface OrderDetailsHeaderTitleProps {
 export const OrderDetailsHeaderTitle: FunctionComponent<
   OrderDetailsHeaderTitleProps
 > = ({ order }) => {
-  const resourceLabel = translate(
-    'Order for: {resource_name} (view resource)',
-    {
-      resource_name: order.resource_name,
-    },
-  );
-  const offeringName = truncate(order.offering_name, 50);
   return (
     <>
       <div className="d-flex flex-wrap gap-2 mb-2 align-items-center">
@@ -36,11 +28,20 @@ export const OrderDetailsHeaderTitle: FunctionComponent<
 
         <OrderStateField order={order} pill outline hasBullet />
       </div>
-      <ResourceLink
-        uuid={order.marketplace_resource_uuid}
-        label={resourceLabel}
-      />{' '}
-      / {offeringName}
+      <div>
+        {translate(
+          'Part of <ResourceLink></ResourceLink>',
+          {
+            ResourceLink: () => (
+              <ResourceLink
+                uuid={order.marketplace_resource_uuid}
+                label={order.resource_name}
+              />
+            ),
+          },
+          formatJsx,
+        )}
+      </div>
     </>
   );
 };

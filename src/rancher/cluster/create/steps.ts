@@ -4,7 +4,6 @@ import { translate } from '@waldur/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
-  NotesStep,
   PlanStep,
 } from '@waldur/marketplace/deploy/steps/constants';
 import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
@@ -86,7 +85,6 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     required: false,
     component: FormRancherSecurityGroupsStep,
   },
-  NotesStep,
   {
     ...FinalConfigurationStep,
     params: {
