@@ -17,22 +17,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { getKeyTitle } from './utils';
-
-const SIDEBAR_STYLES = [
-  {
-    label: translate('Primary accent'),
-    value: 'accent',
-  },
-  {
-    label: translate('Dark'),
-    value: 'dark',
-  },
-  {
-    label: translate('Light'),
-    value: 'light',
-  },
-];
+import { getKeyTitle, SIDEBAR_STYLES } from './utils';
 
 const SUPPORT_BACKENDS = [
   {

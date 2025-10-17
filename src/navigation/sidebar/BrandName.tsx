@@ -17,7 +17,6 @@ import { ENV } from '@waldur/core/config';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { useLayout } from '@waldur/metronic/layout/core';
-import { useTheme } from '@waldur/theme/useTheme';
 
 interface BrandNameProps {
   isAsideHovered?: boolean;
@@ -26,7 +25,6 @@ interface BrandNameProps {
 export const BrandName: FunctionComponent<BrandNameProps> = ({
   isAsideHovered = false,
 }) => {
-  const { theme } = useTheme();
   const sidebarTheme = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
   const layout = useLayout();
   const [showDropdown, setShowDropdown] = useState(false);
@@ -116,7 +114,7 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
   const sidebarLogoMobileUrl = getIconUrl('sidebar_logo_mobile');
   const sidebarLogoDarkUrl = getIconUrl('sidebar_logo_dark');
   const sidebarLogo =
-    (theme === 'dark' || sidebarTheme === 'dark') &&
+    (sidebarTheme === 'accent' || sidebarTheme === 'dark') &&
     ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO_DARK
       ? sidebarLogoDarkUrl
       : ENV.plugins.WALDUR_CORE.SIDEBAR_LOGO

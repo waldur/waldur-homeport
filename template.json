@@ -47428,162 +47428,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Primary accent": {
-    "message": "Primary accent",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 14,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "administration/settings/ConfigurationEditDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
-  "Dark": {
-    "message": "Dark",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 4,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "administration/settings/ConfigurationEditDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
-  "Light": {
-    "message": "Light",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 5,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "administration/settings/ConfigurationEditDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
   "Configuration has been updated.": {
     "message": "Configuration has been updated.",
     "context": {
@@ -48033,6 +47877,214 @@
       "This action modifies application state. Use clear, actionable language.",
       "This action triggers navigation. Consider using navigation-appropriate language."
     ]
+  },
+  "Dark primary": {
+    "message": "Dark primary",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "administration/settings/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Light primary": {
+    "message": "Light primary",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "administration/settings/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Dark": {
+    "message": "Dark",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 4,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "administration/settings/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Light": {
+    "message": "Light",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "administration/settings/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
   },
   "Unable to load telemetry configuration.": {
     "message": "Unable to load telemetry configuration.",
