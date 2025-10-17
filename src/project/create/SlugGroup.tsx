@@ -11,7 +11,12 @@ export const SlugGroup = () => {
     return null;
   }
   return (
-    <FormGroup label={translate('Project slug')}>
+    <FormGroup
+      label={translate('Project slug')}
+      help={translate(
+        'Warning: The slug will be used for external integrations and APIs. Choose carefully as changing it later may break dependent systems.',
+      )}
+    >
       <Field component={StringField as any} name="slug" />
     </FormGroup>
   );

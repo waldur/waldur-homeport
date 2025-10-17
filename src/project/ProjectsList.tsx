@@ -101,14 +101,15 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
       keys: ['billing_price_estimate'],
     });
   }
-
-  columns.push({
-    title: translate('Type'),
-    render: ProjectKindField,
-    export: 'kind',
-    id: 'kind',
-    keys: ['kind'],
-  });
+  if (isFeatureVisible(ProjectFeatures.show_kind_in_create_dialog)) {
+    columns.push({
+      title: translate('Type'),
+      render: ProjectKindField,
+      export: 'kind',
+      id: 'kind',
+      keys: ['kind'],
+    });
+  }
 
   return (
     <Table
