@@ -179,7 +179,13 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                 label={translate('Sponsor number')}
               />
             ) : props.resolve.name === 'slug' ? (
-              <StringField name="slug" label={translate('Slug')} />
+              <StringField
+                name="slug"
+                label={translate('Slug')}
+                description={translate(
+                  'Warning: Changing the slug may break external integrations that rely on this value. Ensure that all dependent systems are updated before proceeding.',
+                )}
+              />
             ) : props.resolve.name === 'max_service_accounts' ? (
               <NumberField
                 name="max_service_accounts"

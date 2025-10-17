@@ -21,6 +21,9 @@ export const SetSlugDialog: FC<ActionDialogProps> = ({
           label: translate('Slug'),
           required: true,
           type: 'string',
+          help_text: translate(
+            'Warning: Changing the slug may break external integrations that rely on this value. Ensure that all dependent systems are updated before proceeding.',
+          ),
         },
       ]}
       initialValues={{
