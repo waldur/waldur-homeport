@@ -22,6 +22,7 @@ const mapStateToFilter = createSelector(
   (filterValues: any) => {
     const filter: MarketplacePublicOfferingsListData['query'] = {
       has_terms_of_service: true,
+      user_has_offering_user: true,
     };
 
     if (filterValues?.user_has_consent !== undefined) {
@@ -124,7 +125,7 @@ export const UserTosManagementSection: FC = () => {
       placeholderComponent={
         <div className="text-center py-5">
           <p className="text-muted">
-            {translate('No offerings with Terms of Service found.')}
+            {translate('No connected offerings with Terms of Service found.')}
           </p>
         </div>
       }

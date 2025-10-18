@@ -123,74 +123,61 @@
 }
 
 // Add resource button
-$dark-add-resource-border: $gray-600;
-$dark-add-resource-color: $gray-600;
-$dark-add-resource-state-color: $gray-700;
-$dark-show-more-color: $gray-600;
-$dark-show-more-active-icon: $gray-800;
+$dark-add-resource-border: if(isDarkMode(), $gray-600, $gray-300);
+$dark-add-resource-color: if(isDarkMode(), $gray-600, $gray-300);
+$dark-add-resource-state-color: if(isDarkMode(), $gray-700, $gray-200);
+$dark-show-more-color: if(isDarkMode(), $gray-600, $gray-300);
+$dark-show-more-active-icon: if(isDarkMode(), $gray-800, $gray-100);
 // Resources filter
-$dark-badge-color: $gray-800;
-$dark-badge-bg: $gray-100;
-$dark-badge-border: $gray-400;
+$dark-badge-color: if(isDarkMode(), $gray-800, $gray-100);
+$dark-badge-bg: if(isDarkMode(), $gray-100, $gray-800);
+$dark-badge-border: if(isDarkMode(), $gray-400, $gray-500);
 
 $custom-aside: (
   dark: (
-    add-resource-border: if(
-        isDarkMode(),
-        $dark-add-resource-border,
-        $primary-300
-      ),
-    add-resource-color: if(isDarkMode(), $dark-add-resource-color, $primary-300),
-    add-resource-state-color: if(
-        isDarkMode(),
-        $dark-add-resource-state-color,
-        $primary-200
-      ),
-    show-more-color: if(isDarkMode(), $dark-show-more-color, $primary-300),
-    show-more-active-icon: if(
-        isDarkMode(),
-        $dark-show-more-active-icon,
-        $primary-100
-      ),
+    add-resource-border: $dark-add-resource-border,
+    add-resource-color: $dark-add-resource-color,
+    add-resource-state-color: $dark-add-resource-state-color,
+    show-more-color: $dark-show-more-color,
+    show-more-active-icon: $dark-show-more-active-icon,
     // Resources filter
-    filter-label: if(isDarkMode(), $dark-show-more-color, $primary-200),
-    filter-badge-color: if(isDarkMode(), $dark-badge-color, $primary-100),
-    filter-badge-bg: if(isDarkMode(), $dark-badge-bg, $primary-700),
-    filter-badge-border: if(isDarkMode(), $dark-badge-border, $primary-600),
+    filter-label: $dark-show-more-color,
+    filter-badge-color: $dark-badge-color,
+    filter-badge-bg: $dark-badge-bg,
+    filter-badge-border: $dark-badge-border,
   ),
   light: (
-    add-resource-border: if(isDarkMode(), $dark-add-resource-border, $gray-300),
-    add-resource-color: if(isDarkMode(), $dark-add-resource-color, $gray-700),
-    add-resource-state-color: if(
-        isDarkMode(),
-        $dark-add-resource-state-color,
-        $gray-600
-      ),
-    show-more-color: if(isDarkMode(), $dark-show-more-color, $gray-500),
-    show-more-active-icon: if(
-        isDarkMode(),
-        $dark-show-more-active-icon,
-        $gray-600
-      ),
-    filter-label: if(isDarkMode(), $dark-show-more-color, $gray-500),
-    filter-badge-color: if(isDarkMode(), $dark-badge-color, $gray-700),
-    filter-badge-bg: if(isDarkMode(), $dark-badge-bg, transparent),
-    filter-badge-border: if(isDarkMode(), $dark-badge-border, $gray-300),
+    add-resource-border: if(isDarkMode(), $gray-600, $gray-300),
+    add-resource-color: if(isDarkMode(), $gray-200, $gray-700),
+    add-resource-state-color: if(isDarkMode(), $gray-300, $gray-600),
+    show-more-color: if(isDarkMode(), $gray-400, $gray-500),
+    show-more-active-icon: if(isDarkMode(), $gray-300, $gray-600),
+    filter-label: if(isDarkMode(), $gray-400, $gray-500),
+    filter-badge-color: if(isDarkMode(), $gray-200, $gray-700),
+    filter-badge-bg: transparent,
+    filter-badge-border: if(isDarkMode(), $gray-600, $gray-300),
   ),
   accent: (
-    add-resource-border: if(isDarkMode(), $dark-add-resource-border, white),
-    add-resource-color: if(isDarkMode(), $dark-add-resource-color, white),
-    add-resource-state-color: if(
-        isDarkMode(),
-        $dark-add-resource-state-color,
-        white
-      ),
-    show-more-color: if(isDarkMode(), $dark-show-more-color, $white),
-    show-more-active-icon: if(isDarkMode(), $dark-show-more-active-icon, $white),
-    filter-label: if(isDarkMode(), $dark-show-more-color, $white),
-    filter-badge-color: if(isDarkMode(), $dark-badge-color, $white),
-    filter-badge-bg: if(isDarkMode(), $dark-badge-bg, transparent),
-    filter-badge-border: if(isDarkMode(), $dark-badge-border, $white),
+    add-resource-border: var(--waldur-brand-300),
+    add-resource-color: var(--waldur-brand-300),
+    add-resource-state-color: var(--waldur-brand-200),
+    show-more-color: var(--waldur-brand-300),
+    show-more-active-icon: var(--waldur-brand-100),
+    filter-label: var(--waldur-brand-200),
+    filter-badge-color: var(--waldur-brand-100),
+    filter-badge-bg: var(--waldur-brand-700),
+    filter-badge-border: var(--waldur-brand-color),
+  ),
+  accent-light: (
+    add-resource-border: var(--waldur-brand-600),
+    add-resource-color: var(--waldur-brand-600),
+    add-resource-state-color: var(--waldur-brand-700),
+    show-more-color: var(--waldur-brand-600),
+    show-more-active-icon: var(--waldur-brand-800),
+    filter-label: var(--waldur-brand-700),
+    filter-badge-color: var(--waldur-brand-800),
+    filter-badge-bg: var(--waldur-brand-200),
+    filter-badge-border: var(--waldur-brand-400),
   ),
 );
 
