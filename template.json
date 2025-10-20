@@ -139742,6 +139742,71 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
+  "Resource display options": {
+    "message": "Resource display options",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title",
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "offerings",
+          "integration"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/OfferingEditUIView.tsx",
+          "marketplace/offerings/update/integration/ResourceDisplayOptionsSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
   "User management": {
     "message": "User management",
     "context": {
@@ -154554,12 +154619,14 @@
           "form",
           "component",
           "dialog",
+          "field",
           "list"
         ],
         "paths": [
           "marketplace/offerings/update/integration/CredentialsSection.tsx",
           "marketplace/orders/details/OrderMetadataTab.tsx",
           "marketplace/resources/SetBackendIdDialog.tsx",
+          "marketplace/resources/details/BackendIdField.tsx",
           "marketplace/resources/details/utils.tsx",
           "marketplace/resources/import/ResourcesList.tsx",
           "marketplace/resources/list/CategoryResourcesList.tsx",
@@ -154602,7 +154669,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 18
+      "usage_count": 19
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -159545,6 +159612,110 @@
       "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
+  },
+  "Highlight backend ID display": {
+    "message": "Highlight backend ID display",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/ResourceDisplayOptionsSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Backend ID display label": {
+    "message": "Backend ID display label",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/ResourceDisplayOptionsSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
   },
   "Edit user input": {
     "message": "Edit user input",
@@ -172755,7 +172926,7 @@
       "jsx_context": {
         "tags": [
           "DialogActionItem",
-          "div"
+          "ResourceActionDialog"
         ],
         "conditional_render": false
       },
@@ -172771,7 +172942,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 6
+        "max_nesting_level": 4
       },
       "usage_count": 2
     },
@@ -172779,79 +172950,6 @@
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Staff action": {
-    "message": "Staff action",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element",
-        "unknown"
-      ],
-      "components": [
-        "Tip",
-        "ResourceActionDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 12,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "resource_management"
-        ],
-        "feature_areas": [
-          "resources",
-          "actions"
-        ],
-        "component_types": [
-          "dialog",
-          "card"
-        ],
-        "paths": [
-          "marketplace/resources/SetSlugDialog.tsx",
-          "resource/actions/ActionItem.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Tip"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Slug has been successfully set.": {
@@ -281670,6 +281768,71 @@
       "usage_count": 1
     }
   },
+  "Staff action": {
+    "message": "Staff action",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Tip"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "resource_management"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "resource/actions/ActionItem.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Tip"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Are you sure you want to {action}?": {
     "message": "Are you sure you want to {action}?",
     "context": {
@@ -296797,8 +296960,8 @@
       "usage_count": 1
     }
   },
-  "No offerings with Terms of Service found.": {
-    "message": "No offerings with Terms of Service found.",
+  "No connected offerings with Terms of Service found.": {
+    "message": "No connected offerings with Terms of Service found.",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -296809,8 +296972,8 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 41,
-        "wordCount": 7,
+        "length": 51,
+        "wordCount": 8,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
