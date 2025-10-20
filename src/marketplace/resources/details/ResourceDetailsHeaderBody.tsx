@@ -10,6 +10,7 @@ import {
 
 import { getUser } from '@waldur/workspace/selectors';
 
+import { BackendIdField } from './BackendIdField';
 import { EndDateField } from './EndDateField';
 import { OfferingDetailsField } from './OfferingDetailsField';
 import { OfferingUserDetailsField } from './OfferingUserDetailsField';
@@ -61,6 +62,7 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
           project?.customer_display_billing_info_in_projects === false
         }
       />
+      <BackendIdField resource={resource} offering={offering} />
       <EndDateField resource={resource} />
       <OfferingUserDetailsField offeringUser={offeringUser} />
     </>

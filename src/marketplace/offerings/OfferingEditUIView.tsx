@@ -48,6 +48,13 @@ const LifecyclePolicySection = lazyComponent(() =>
     default: module.LifecyclePolicySection,
   })),
 );
+const ResourceDisplayOptionsSection = lazyComponent(() =>
+  import('./update/integration/ResourceDisplayOptionsSection').then(
+    (module) => ({
+      default: module.ResourceDisplayOptionsSection,
+    }),
+  ),
+);
 const UserManagementSection = lazyComponent(() =>
   import('./update/integration/UserManagementSection').then((module) => ({
     default: module.UserManagementSection,
@@ -179,6 +186,11 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           key: 'lifecycle-policy',
           component: LifecyclePolicySection,
           title: translate('Lifecycle policy'),
+        },
+        {
+          key: 'resource-display-options',
+          component: ResourceDisplayOptionsSection,
+          title: translate('Resource display options'),
         },
         SecretOptionsForm || PluginOptionsForm
           ? {
