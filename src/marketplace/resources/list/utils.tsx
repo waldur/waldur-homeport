@@ -25,6 +25,9 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'provider_uuid', // SubmitReportAction, EditResourceEndDateAction
     'backend_metadata', // Mass-actions
     'backend_id', // SetBackendIdAction
+    'effective_id', // BackendIdField in ExpandableResourceSummary
+    'offering_plugin_options', // BackendIdField in ExpandableResourceSummary
+    hasExpandableView ? 'options' : null, // Resource options in ExpandableResourceSummary
     'slug', // SetSlugAction
     'scope', // Expandable view, Actions
     'report', // ShowReportAction, SubmitReportAction

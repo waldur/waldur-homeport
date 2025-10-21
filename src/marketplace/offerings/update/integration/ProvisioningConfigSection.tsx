@@ -1,12 +1,11 @@
 import { FC } from 'react';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
+import { EditSchedulesButton } from '@waldur/booking/EditSchedulesButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { getProvisioningConfigForm } from '@waldur/marketplace/common/registry';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
-
-import { EditSchedulesButton } from '../../../../booking/EditSchedulesButton';
 
 import { GoogleCalendarActions } from './GoogleCalendarActions';
 import { RemoteActions } from './RemoteActions';

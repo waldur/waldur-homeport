@@ -35,11 +35,7 @@ async function loadData(resourceId: string) {
       ],
     },
   }).then((r) => r.data);
-  const projectPromise = projectsRetrieve({
-    path: { uuid: resource.project_uuid },
-    query: { field: ['customer_display_billing_info_in_projects'] },
-  }).then((response) => response.data);
-  const offeringPromise = marketplacePublicOfferingsRetrieve({
+  const offering = await marketplacePublicOfferingsRetrieve({
     path: { uuid: resource.offering_uuid },
     query: {
       field: [
@@ -52,15 +48,12 @@ async function loadData(resourceId: string) {
       ],
     },
   }).then((response) => response.data);
-  const [project, offering] = await Promise.all([
-    projectPromise,
-    offeringPromise,
-  ]);
   const plan =
     resource.plan &&
     offering.plans.find((item) => item.uuid === resource.plan_uuid);
   const limitParser = getFormLimitParser(offering.type);
   return {
+    resource,
     offering,
     plan: plan && {
       ...plan,
@@ -69,7 +62,6 @@ async function loadData(resourceId: string) {
           ? parseFloat(plan.unit_price)
           : plan.unit_price,
     },
-    project,
     ...combinePrices(
       plan,
       limitParser(resource.limits),
@@ -86,8 +78,24 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
     refetchOnWindowFocus: false,
     staleTime: 3 * 60 * 1000,
   });
+
+  // Use the same caching pattern as ResourceDetailsHeaderBody for project data
+  const { data: project } = useQuery({
+    queryKey: ['display-project-billing', data?.resource?.project_uuid],
+    queryFn: () =>
+      data?.resource?.project_uuid
+        ? projectsRetrieve({
+            path: { uuid: data.resource.project_uuid },
+            query: { field: ['customer_display_billing_info_in_projects'] },
+          }).then((response) => response.data)
+        : null,
+    enabled: !!data?.resource?.project_uuid,
+    refetchOnWindowFocus: false,
+    staleTime: 5 * 60 * 1000,
+  });
+
   const concealBillingInfo =
-    data.project?.customer_display_billing_info_in_projects === false;
+    project?.customer_display_billing_info_in_projects === false;
 
   return (
     <ModalDialog
