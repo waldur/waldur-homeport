@@ -41,7 +41,7 @@ export const useTable = (options: TableOptionsType) => {
   const dispatch = useDispatch();
 
   const fetch = useCallback(
-    (force = false) =>
+    (force = false) => {
       dispatch(
         actions.fetchListStart(
           table,
@@ -49,7 +49,8 @@ export const useTable = (options: TableOptionsType) => {
           options.pullInterval,
           force,
         ),
-      ),
+      );
+    },
     [dispatch, table, options.filter, options.pullInterval],
   );
   const gotoPage = useCallback(

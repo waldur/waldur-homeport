@@ -2,15 +2,15 @@ import { PaperclipIcon, XIcon } from '@phosphor-icons/react';
 import { Field } from 'react-final-form';
 
 import { formatFilesize } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
+import { required as requiredValidator } from '@waldur/core/validators';
 import { FileUploadField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-export const OrderAttachmentField = () => (
+export const OrderAttachmentField = ({ required }) => (
   <Field
     name="attachment"
-    validate={required}
+    validate={required ? requiredValidator : undefined}
     component={({ input }) => (
       <div className="d-flex justify-content-between">
         <FileUploadField

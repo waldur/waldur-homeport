@@ -45,8 +45,12 @@ export const ApproveByConsumerButton: FC<
     },
   });
   const callback = () => {
-    if (offering?.plugin_options.order_supports_comments_and_metadata) {
-      openDialog(UploadPurchaseOrderDialog, { order, refetch });
+    if (offering?.plugin_options['enable_purchase_order_upload']) {
+      openDialog(UploadPurchaseOrderDialog, {
+        order,
+        refetch,
+        required: offering?.plugin_options['require_purchase_order_upload'],
+      });
     } else {
       mutate();
     }
