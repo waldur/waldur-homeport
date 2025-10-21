@@ -44,7 +44,11 @@ export const ResourceDetailsHero = ({
           <ResourceEndDateConflictBar />
         )}
       {resource.order_in_progress ? (
-        <OrderInProgressView resource={resource} refetch={refetch} />
+        <OrderInProgressView
+          resource={resource}
+          offering={offering}
+          refetch={refetch}
+        />
       ) : resource.creation_order ? (
         <OrderErredView resource={resource} />
       ) : null}

@@ -11869,6 +11869,7 @@
         "BreadcrumbDropdown",
         "FormLabel",
         "FormGroup",
+        "FormTable",
         "ModalDialog",
         "ExpandableContainer"
       ],
@@ -11949,6 +11950,7 @@
           "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
           "marketplace/offerings/update/plans/PlansSection.tsx",
           "marketplace/offerings/update/tos/TosManagementSection.tsx",
+          "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
           "marketplace/resources/details/utils.tsx",
           "marketplace/service-providers/ProviderCampaignsList.tsx",
           "navigation/BackendHealthStatusDialog.tsx",
@@ -11992,7 +11994,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 33
+      "usage_count": 34
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -12007,12 +12009,13 @@
       "primary_ui_type": "title",
       "ui_types": [
         "title",
+        "unknown",
         "generic_element"
       ],
       "components": [
         "Table",
+        "FormTable",
         "Field",
-        "Card",
         "ExpandableContainer"
       ],
       "is_user_facing": true,
@@ -12306,9 +12309,9 @@
         "Button",
         "OverlayTrigger",
         "SelectField",
+        "FormTable",
         "ModelCard1",
-        "ProjectLink",
-        "FormTable"
+        "ProjectLink"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -12413,6 +12416,7 @@
           "marketplace/offerings/import/ImportReviewTab.tsx",
           "marketplace/offerings/import/SelectOrganizationTab.tsx",
           "marketplace/offerings/list/OfferingsList.tsx",
+          "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
           "marketplace/orders/details/OrderDetailsHeaderBody.tsx",
           "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
           "marketplace/resources/list/AllResourcesFilter.tsx",
@@ -12481,7 +12485,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 64
+      "usage_count": 65
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -40763,6 +40767,7 @@
         "AsyncPaginate",
         "Button",
         "OverlayTrigger",
+        "FormTable",
         "Tip",
         "Badge",
         "ToggleButton",
@@ -40862,6 +40867,7 @@
           "marketplace/deploy/steps/FormDetailsOverviewStep.tsx",
           "marketplace/details/ProjectField.tsx",
           "marketplace/landing/MarketplaceLandingFilter.tsx",
+          "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
           "marketplace/orders/details/OrderDetailsHeaderBody.tsx",
           "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
           "marketplace/orders/list/OrdersTableComponent.tsx",
@@ -40933,7 +40939,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 55
+      "usage_count": 56
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -65191,6 +65197,7 @@
           "marketplace/details/plan/PrepaidRows.tsx",
           "marketplace/details/plan/TotalLimitComponentsTable.tsx",
           "marketplace/details/plan/UsageComponentRow.tsx",
+          "marketplace/orders/details/OrderComponentsTable.tsx",
           "marketplace/resources/change-limits/ComponentTotalRow.tsx",
           "marketplace/resources/details/ResourceComponentItem.tsx",
           "marketplace/resources/usage/UsageExportDropdown.tsx",
@@ -65226,7 +65233,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 22
+      "usage_count": 23
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -100409,12 +100416,13 @@
       "primary_ui_type": "title",
       "ui_types": [
         "title",
+        "unknown",
         "generic_element"
       ],
       "components": [
         "Table",
+        "FormTable",
         "Field",
-        "Card",
         "ExpandableContainer",
         "Col",
         "Row",
@@ -110761,7 +110769,8 @@
         "paths": [
           "invoices/details/InvoiceDetails.tsx",
           "invoices/list/MonthOverview.tsx",
-          "marketplace/details/plan/TotalLimitComponentsTable.tsx"
+          "marketplace/details/plan/TotalLimitComponentsTable.tsx",
+          "marketplace/orders/details/OrderComponentsTable.tsx"
         ]
       },
       "jsx_context": {
@@ -110786,7 +110795,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -111472,6 +111481,7 @@
           "marketplace/details/plan/FixedRows.tsx",
           "marketplace/details/plan/PlanDetailsTable.tsx",
           "marketplace/details/plan/TotalLimitComponentsTable.tsx",
+          "marketplace/orders/details/OrderComponentsTable.tsx",
           "rancher/cluster/hpas/HPACreateDialog.tsx",
           "rancher/cluster/hpas/HPAUpdateDialog.tsx"
         ]
@@ -111499,7 +111509,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 8
+      "usage_count": 9
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -112625,6 +112635,7 @@
       "primary_ui_type": "title",
       "ui_types": [
         "title",
+        "unknown",
         "label"
       ],
       "components": [
@@ -112662,12 +112673,14 @@
           "invoices/details/InvoiceItemsTable.tsx",
           "invoices/list/InvoicesList.tsx",
           "marketplace/offerings/PriceList.tsx",
+          "marketplace/orders/details/OrderComponentsTable.tsx",
           "marketplace/resources/change-plan/utils.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Table"
+          "Table",
+          "th"
         ],
         "conditional_render": false
       },
@@ -112685,7 +112698,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -141148,7 +141161,8 @@
         ],
         "feature_areas": [
           "offerings",
-          "policies"
+          "policies",
+          "details"
         ],
         "component_types": [
           "list",
@@ -141156,12 +141170,14 @@
         ],
         "paths": [
           "marketplace/offerings/PriceList.tsx",
-          "marketplace/offerings/details/policies/ComponentLimitsField.tsx"
+          "marketplace/offerings/details/policies/ComponentLimitsField.tsx",
+          "marketplace/orders/details/OrderComponentsTable.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "td"
+          "td",
+          "th"
         ],
         "conditional_render": true
       },
@@ -141179,7 +141195,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -169555,6 +169571,58 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Export as PDF": {
+    "message": "Export as PDF",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/orders/details/ExportOrderComponentsButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Limits": {
     "message": "Limits",
     "context": {
@@ -169709,9 +169777,7 @@
         "title",
         "unknown"
       ],
-      "components": [
-        "Card"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 9,
@@ -169743,9 +169809,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "h3"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -170039,16 +170103,78 @@
       "usage_count": 1
     }
   },
+  "Order slug": {
+    "message": "Order slug",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/details/OrderDetailsApprovalsTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
   "Reviewed by provider": {
     "message": "Reviewed by provider",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -170080,9 +170206,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -170097,7 +170221,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 9
       },
       "usage_count": 1
     },
@@ -170111,11 +170235,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -170147,9 +170270,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -170164,7 +170285,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 9
       },
       "usage_count": 1
     },
@@ -170178,11 +170299,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -170214,9 +170334,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -170231,7 +170349,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 9
       },
       "usage_count": 1
     },
@@ -170245,11 +170363,10 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "unknown"
       ],
       "components": [
-        "Field",
-        "Card"
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -170281,9 +170398,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "Field"
-        ],
+        "tags": [],
         "conditional_render": true
       },
       "action_types": [
@@ -170298,7 +170413,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 9
       },
       "usage_count": 1
     },
