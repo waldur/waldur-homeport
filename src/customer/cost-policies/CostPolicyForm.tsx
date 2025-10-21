@@ -122,7 +122,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           label={translate('Select project(s)')}
           validate={required}
           required
-          placeholder={translate('Search and select project') + '...'}
+          placeholder={translate('Search and select project...')}
           loadOptions={(query, prevOptions, { page }) =>
             projectAutocomplete(
               currentOrganization?.uuid,
@@ -163,7 +163,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           label={translate('Select organization(s)')}
           validate={required}
           required
-          placeholder={translate('Search and select organization') + '...'}
+          placeholder={translate('Search and select organization...')}
           loadOptions={(query, prevOptions, { page }) =>
             organizationAutocomplete(query, prevOptions, page, {
               field: [
@@ -242,9 +242,9 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
       <SelectField
         name="actions"
         label={translate('Then')}
-        placeholder={
-          translate('Select action to take when the condition is met') + '...'
-        }
+        placeholder={translate(
+          'Select action to take when the condition is met...',
+        )}
         validate={required}
         required
         options={getCostPolicyActionOptions(props.type)}

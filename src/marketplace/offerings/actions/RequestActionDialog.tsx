@@ -30,6 +30,7 @@ export const RequestActionDialog: FunctionComponent<{
             description:
               offeringRequestMode === 'publishing'
                 ? translate(
+                    // eslint-disable-next-line local/no-template-in-translate
                     'Please review and activate offering {offeringName} ({offeringUuid}). \n' +
                       'Requestor: {userName} / {userUuid}. \n' +
                       'Service provider: {customerName} / {customerUuid}',
@@ -43,6 +44,7 @@ export const RequestActionDialog: FunctionComponent<{
                     },
                   )
                 : translate(
+                    // eslint-disable-next-line local/no-template-in-translate
                     'Please open offering {offeringName} ({offeringUuid}) for editing. \n' +
                       'Requestor: {userName} / {userUuid}. \n' +
                       'Service provider: {customerName} / {customerUuid}',

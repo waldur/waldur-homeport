@@ -36,7 +36,7 @@ export const MaintenanceDetailsDialog: FC<{
 
   return (
     <ModalDialog
-      title={translate('Maintenance') + ': ' + maintenance.name}
+      title={translate('Maintenance: {name}', { name: maintenance.name })}
       closeButton
       className="maintenance-details"
       iconNode={<WarningCircleIcon weight="bold" />}

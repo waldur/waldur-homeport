@@ -10,6 +10,8 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+import noTemplateInTranslate from './no-template-in-translate.cjs';
+
 const browserGlobals = {
   ...globals.browser,
   AudioWorkletGlobalScope: false, // this is the default,
@@ -31,6 +33,7 @@ export default tseslint
         prettier: prettier,
         import: importPlugin,
         'react-refresh': reactRefresh,
+        local: noTemplateInTranslate,
       },
       languageOptions: {
         parserOptions: {
@@ -54,6 +57,9 @@ export default tseslint
       },
       rules: {
         ...reactHooks.configs.recommended.rules,
+
+        // Custom local rules
+        'local/no-template-in-translate': 'error',
 
         // React Hooks rules
         'react-hooks/rules-of-hooks': 'off',
@@ -141,7 +147,7 @@ export default tseslint
       ],
     },
     {
-      files: ['locales/tools/**/*.cjs'],
+      files: ['locales/tools/**/*.cjs', './no-template-in-translate.cjs'],
       languageOptions: {
         sourceType: 'script',
         ecmaVersion: 2022,

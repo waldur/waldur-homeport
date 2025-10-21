@@ -39,9 +39,9 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
   const rows = useMemo(
     () => [
       {
-        label:
-          translate('Allocated credit') +
-          ` (${ENV.plugins.WALDUR_CORE.CURRENCY_NAME})`,
+        label: translate('Allocated credit ({currency})', {
+          currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+        }),
         key: 'value',
         value: creditData?.value || 'N/A',
       },
@@ -52,9 +52,9 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
           creditData?.offerings.map((offer) => offer.name).join(', ') || 'N/A',
       },
       {
-        label:
-          translate('Credit allocated to projects') +
-          ` (${ENV.plugins.WALDUR_CORE.CURRENCY_NAME})`,
+        label: translate('Credit allocated to projects ({currency})', {
+          currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+        }),
         key: 'allocated_to_projects',
         value: creditData?.allocated_to_projects || 'N/A',
         disabled: true,
@@ -80,7 +80,7 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
         value: creditData?.expected_consumption || 'N/A',
       },
       {
-        label: translate('Grace coefficient') + ' (%)',
+        label: translate('Grace coefficient (%)'),
         key: 'grace_coefficient',
         value: creditData?.grace_coefficient || 'N/A',
       },

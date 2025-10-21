@@ -168,7 +168,7 @@ export const ServiceAccountFormDialog = reduxForm<
             label={
               isEdit ? translate('Username') : translate('Preferred identifier')
             }
-            placeholder={translate('e.g.') + ' backup'}
+            placeholder={translate('e.g. backup')}
             autoFocus
             disabled={isEdit}
             description={
@@ -183,7 +183,7 @@ export const ServiceAccountFormDialog = reduxForm<
           <EmailField
             name="email"
             label={translate('Notification email')}
-            placeholder={translate('e.g.') + ' serviceaccount@example.com'}
+            placeholder={translate('e.g. serviceaccount@example.com')}
             description={translate(
               'Email for receiving notifications about events connected with the service account.',
             )}

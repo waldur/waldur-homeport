@@ -103,17 +103,14 @@ export const getUpdateSummary = (ctx: Context) => {
   if (ctx.approved) {
     return msg + ' ' + ctx.approved;
   } else {
-    return (
-      msg +
-      ' ' +
-      translate(
-        'Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included.',
-        {
-          old_estimate: defaultCurrency(ctx.order.old_cost_estimate || 0),
-          new_estimate: defaultCurrency(ctx.order.new_cost_estimate || 0),
-        },
-      )
+    const EstimatedMessage = translate(
+      'Estimated monthly fee will change from {old_estimate} to {new_estimate}. VAT is not included.',
+      {
+        old_estimate: defaultCurrency(ctx.order.old_cost_estimate || 0),
+        new_estimate: defaultCurrency(ctx.order.new_cost_estimate || 0),
+      },
     );
+    return msg + ' ' + EstimatedMessage;
   }
 };
 

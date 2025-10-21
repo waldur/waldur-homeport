@@ -37,9 +37,9 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
   const rows = useMemo(
     () => [
       {
-        label:
-          translate('Allocated credit') +
-          ` (${ENV.plugins.WALDUR_CORE.CURRENCY_NAME})`,
+        label: translate('Allocated credit ({currency})', {
+          currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+        }),
         key: 'value',
         value: creditData?.value || 'N/A',
       },
@@ -64,7 +64,7 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
         value: creditData?.expected_consumption || 'N/A',
       },
       {
-        label: translate('Grace coefficient') + ' (%)',
+        label: translate('Grace coefficient (%)'),
         key: 'grace_coefficient',
         value: creditData?.grace_coefficient || 'N/A',
       },

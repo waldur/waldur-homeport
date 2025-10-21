@@ -31,7 +31,7 @@ export const RuleForm: FC<{ submitting? }> = (props) => {
       <CommaSeparatedListField
         name="user_email_patterns"
         label={translate('Email patterns')}
-        placeholder={translate('e.g.') + ' .*@example.com'}
+        placeholder={translate('e.g. .*@example.com')}
         description={translate(
           'Enter space separated regex pattern to match user email',
         )}

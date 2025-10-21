@@ -41,7 +41,7 @@ const CustomToggle = ({
       className="menu-link"
       title={
         !expanded
-          ? moreResourcesCount + ' ' + translate('More resources')
+          ? translate('{count} More resources', { count: moreResourcesCount })
           : null
       }
     >

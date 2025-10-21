@@ -65,7 +65,7 @@ export const ResourceRequestWizardFormFirstPage: FunctionComponent<
                 component={SelectField}
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={(option) => option.offering_name}
-                placeholder={translate('Select offering') + '...'}
+                placeholder={translate('Select offering...')}
                 isLoading={isLoading}
                 noUpdateOnBlur
                 validate={required}

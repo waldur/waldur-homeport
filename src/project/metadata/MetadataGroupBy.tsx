@@ -5,7 +5,7 @@ import { translate } from '@waldur/i18n';
 export const MetadataGroupBy = ({ value, onChange }) => {
   return (
     <>
-      <FormLabel className="mb-0">{translate('Group by') + ':'}</FormLabel>
+      <FormLabel className="mb-0">{translate('Group by:')}</FormLabel>
       <ToggleButtonGroup
         type="radio"
         name="groupBy"

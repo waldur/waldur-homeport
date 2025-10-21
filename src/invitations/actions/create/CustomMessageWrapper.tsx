@@ -49,7 +49,7 @@ export const CustomMessageWrapper = () => {
         )}
         validate={validateMaxLength(250)}
       >
-        <TextField placeholder={translate('Enter custom message') + '...'} />
+        <TextField placeholder={translate('Enter custom message...')} />
       </Field>
     </div>
   );

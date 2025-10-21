@@ -51,7 +51,7 @@ export const ResourceBreadcrumbPopover = ({ resource, close }) => {
           close={close}
         />
       )}
-      placeholder={translate('Type in name of resource') + '...'}
+      placeholder={translate('Type in name of resource...')}
       emptyMessage={translate('There are no resources.')}
     />
   );

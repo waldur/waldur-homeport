@@ -62,7 +62,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
         >
           <SelectField
             options={data}
-            placeholder={translate('Select subnet') + '...'}
+            placeholder={translate('Select subnet...')}
           />
         </Field>
       ) : (

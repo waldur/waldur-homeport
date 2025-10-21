@@ -9,7 +9,7 @@ export const GroupInvitationErrorMessage = ({ dismiss }) => (
     illustration={<Illustration />}
     title={translate('Request is not valid.')}
     description={translate(
-      `You've either entered invalid URL or don't have enough permissions to view this page.`,
+      "You've either entered invalid URL or don't have enough permissions to view this page.",
     )}
     action={<Button onClick={dismiss}>{translate('Go to profile')}</Button>}
   />

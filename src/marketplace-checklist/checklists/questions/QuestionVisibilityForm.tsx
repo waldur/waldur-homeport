@@ -98,11 +98,11 @@ const FieldsListGroup = ({
               )}
               choices={[
                 {
-                  label: translate('All conditions match') + ' (AND)',
+                  label: translate('All conditions match (AND)'),
                   value: 'and',
                 },
                 {
-                  label: translate('Any condition matches') + ' (OR)',
+                  label: translate('Any condition matches (OR)'),
                   value: 'or',
                 },
               ]}
@@ -134,7 +134,7 @@ const FieldsListGroup = ({
           <Card key={name} className="card-bordered bg-gray-50 mb-3">
             <Card.Header className="mx-4 min-h-auto">
               <h6 className="mb-0 text-gray">
-                {translate('Condition') + ' ' + (i + 1)}
+                {translate('Condition {index}', { index: i + 1 })}
               </h6>
               <div className="card-toolbar m-0">
                 <Button

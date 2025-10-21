@@ -33,7 +33,7 @@ export const CustomerCreateForm = () => {
         <Field
           name="email"
           component={InputField as any}
-          placeholder={translate('e.g.') + ' someone@example.com'}
+          placeholder={translate('e.g. someone@example.com')}
           type="email"
           validate={composeValidators(required, email)}
         />

@@ -240,8 +240,9 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
       <form onSubmit={handleSaveAndExit} className="script-editor">
         <ModalDialog
           title={
-            translate('Manage custom scripts') +
-            (language ? ` (${language})` : '')
+            language
+              ? translate('Manage custom scripts ({language})', { language })
+              : translate('Manage custom scripts')
           }
           closeButton
           onHide={closeDialog}

@@ -265,10 +265,9 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
         }
       }
     });
+    const FixMessage = translate('Please fix data or skip records with errors');
     return {
-      message: msg
-        ? msg + ' ' + translate('Please fix data or skip records with errors')
-        : null,
+      message: msg ? msg + ' ' + FixMessage : null,
       valid,
       invalid,
     };

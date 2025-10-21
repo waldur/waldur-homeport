@@ -249,7 +249,7 @@ export const AddResourceAccessDialog = reduxForm<
                 ENV.plugins.WALDUR_CORE.RANCHER_USERNAME_INPUT_LABEL ||
                 translate('Username')
               }
-              placeholder={translate('e.g.') + ', EE12345667890'}
+              placeholder={translate('e.g. EE12345667890')}
               isLoading={isLoadingUsers}
               options={projectUsers}
               getOptionValue={(opt) => opt.user_username}
@@ -266,7 +266,7 @@ export const AddResourceAccessDialog = reduxForm<
                 ENV.plugins.WALDUR_CORE.RANCHER_USERNAME_INPUT_LABEL ||
                 translate('Username')
               }
-              placeholder={translate('e.g.') + ', EE12345667890'}
+              placeholder={translate('e.g. EE12345667890')}
               containerClassName="col-md-6"
               validate={required}
             />

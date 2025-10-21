@@ -30,7 +30,7 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
         name="user_email_patterns"
         component={FormGroup}
         label={translate('Allowed email patterns')}
-        placeholder={translate('e.g.') + ' .*@example.com'}
+        placeholder={translate('e.g. .*@example.com')}
         description={translate(
           'Enter space separated regex pattern to match user email',
         )}

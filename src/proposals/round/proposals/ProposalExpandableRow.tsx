@@ -26,7 +26,9 @@ const dataParser = (data: ProposalReview[], query) => {
   const { page = 1, page_size = 5 } = query;
   return data.map((review, index) => {
     const num = (page - 1) * page_size + index + 1;
-    Object.assign(review, { name: translate('Review') + ' ' + num });
+    Object.assign(review, {
+      name: translate('Review, {index}', { index: num }),
+    });
     return review;
   });
 };

@@ -79,7 +79,7 @@ export const CustomIpField = ({
         <div>
           <FormLabel>{translate('Custom IP')}</FormLabel>
           <Select
-            placeholder={translate('e.g.') + ' 192.168.42.16'}
+            placeholder={translate('e.g. 192.168.42.16')}
             options={options}
             value={options.find((opt) => opt.value === selected?.value)}
             onChange={(opt) => {
