@@ -1,62 +1,88 @@
-import { Card } from 'react-bootstrap';
+import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
 
+import { OrderStateCell } from '../list/OrderStateCell';
+
+import { ExportOrderComponentsButton } from './ExportOrderComponentsButton';
+import { OrderComponentsTable } from './OrderComponentsTable';
 import { OrderSummaryMessage } from './OrderSummaryMessage';
 
-export const OrderDetailsApprovalsTab = ({ order, offering }) => {
+export const OrderDetailsApprovalsTab = ({
+  order,
+  offering,
+}: {
+  order: OrderDetails;
+  offering: PublicOfferingDetails;
+}) => {
   return (
-    <Card className="card-bordered">
-      <Card.Header className="custom-card-header custom-padding-zero">
-        <Card.Title>
-          <h3>{translate('Approvals')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body className="custom-padding-zero">
-        <div className="container ml-0">
-          <Field
-            label={translate('Description')}
-            value={<OrderSummaryMessage order={order} offering={offering} />}
-          />
+    <FormTable.Card
+      className="card-bordered"
+      title={translate('Approvals')}
+      actions={<ExportOrderComponentsButton />}
+    >
+      <FormTable>
+        <FormTable.Item label={translate('Order slug')} value={order['slug']} />
 
-          <Field
-            label={translate('Created by')}
-            value={order.created_by_full_name}
-          />
+        <FormTable.Item
+          label={translate('Project')}
+          value={order.project_name}
+        />
 
-          <Field
-            label={translate('Created at')}
-            value={formatDateTime(order.created)}
-          />
+        <FormTable.Item
+          label={translate('Organization')}
+          value={order.customer_name}
+        />
 
-          {order.provider_reviewed_by_full_name ? (
-            <Field
-              label={translate('Reviewed by provider')}
-              value={order.provider_reviewed_by_full_name}
-            />
-          ) : null}
-          {order.provider_reviewed_at ? (
-            <Field
-              label={translate('Reviewed by provider at')}
-              value={formatDateTime(order.provider_reviewed_at)}
-            />
-          ) : null}
-          {order.consumer_reviewed_by_full_name ? (
-            <Field
-              label={translate('Reviewed by consumer')}
-              value={order.consumer_reviewed_by_full_name}
-            />
-          ) : null}
-          {order.consumer_reviewed_at ? (
-            <Field
-              label={translate('Reviewed by consumer at')}
-              value={formatDateTime(order.consumer_reviewed_at)}
-            />
-          ) : null}
-        </div>
-      </Card.Body>
-    </Card>
+        <FormTable.Item
+          label={translate('Status')}
+          value={<OrderStateCell row={order} />}
+        />
+
+        <FormTable.Item
+          label={translate('Description')}
+          value={<OrderSummaryMessage order={order} offering={offering} />}
+          className="d-print-none"
+        />
+
+        <FormTable.Item
+          label={translate('Created by')}
+          value={order.created_by_full_name}
+        />
+
+        <FormTable.Item
+          label={translate('Created at')}
+          value={formatDateTime(order.created)}
+        />
+
+        {order.provider_reviewed_by_full_name ? (
+          <FormTable.Item
+            label={translate('Reviewed by provider')}
+            value={order.provider_reviewed_by_full_name}
+          />
+        ) : null}
+        {order.provider_reviewed_at ? (
+          <FormTable.Item
+            label={translate('Reviewed by provider at')}
+            value={formatDateTime(order.provider_reviewed_at)}
+          />
+        ) : null}
+        {order.consumer_reviewed_by_full_name ? (
+          <FormTable.Item
+            label={translate('Reviewed by consumer')}
+            value={order.consumer_reviewed_by_full_name}
+          />
+        ) : null}
+        {order.consumer_reviewed_at ? (
+          <FormTable.Item
+            label={translate('Reviewed by consumer at')}
+            value={formatDateTime(order.consumer_reviewed_at)}
+          />
+        ) : null}
+      </FormTable>
+      <OrderComponentsTable order={order} offering={offering} />
+    </FormTable.Card>
   );
 };

@@ -1,7 +1,7 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button, Card } from 'react-bootstrap';
-import { Resource } from 'waldur-js-client';
+import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { ProgressSteps } from '@waldur/core/ProgressSteps';
@@ -12,6 +12,7 @@ import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetail
 
 interface OrderInProgressViewProps {
   resource: Resource;
+  offering: PublicOfferingDetails;
   refetch(): void;
 }
 
@@ -115,6 +116,7 @@ const getSteps = (resource: Resource) => {
 
 export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   resource,
+  offering,
   refetch,
 }) => {
   if (!resource.order_in_progress) {
@@ -135,6 +137,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
             {resource.order_in_progress.state === 'pending-consumer' ? (
               <OrderConsumerActions
                 order={resource.order_in_progress}
+                offering={offering}
                 refetch={refetch}
                 as={Button}
               />
