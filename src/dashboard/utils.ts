@@ -98,14 +98,15 @@ export const formatCostChartLabel = (
   date: DateTime,
   isEstimate: boolean = false,
 ): string => {
-  let template = translate('{value} at {date}');
-  if (isEstimate) {
-    template = translate('{value} at {date}, estimated');
-  }
-  return translate(template, {
-    value: defaultCurrency(value),
-    date: date.toISODate(),
-  });
+  return isEstimate
+    ? translate('{value} at {date}, estimated', {
+        value: defaultCurrency(value),
+        date: date.toISODate(),
+      })
+    : translate('{value} at {date}', {
+        value: defaultCurrency(value),
+        date: date.toISODate(),
+      });
 };
 
 export const formatOrganizationCostChart = (invoices: Invoice[]): CostChart => {

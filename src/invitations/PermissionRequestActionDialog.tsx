@@ -122,7 +122,7 @@ const PurePermissionRequestActionDialog: FunctionComponent<
           <TextField
             name="comment"
             label={translate('Reason')}
-            placeholder={translate('Enter a message') + '...'}
+            placeholder={translate('Enter a message...')}
             description={translate(
               'Optionally provide a reason to improve transparency and record decisions.',
             )}

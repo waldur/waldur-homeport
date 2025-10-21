@@ -58,9 +58,9 @@ export const PolicyCreateForm: FC<PolicyCreateFormProps> = (props) => {
         <Field
           component={SelectField as any}
           name="actions"
-          placeholder={
-            translate('Select action to take when the condition is met') + '...'
-          }
+          placeholder={translate(
+            'Select action to take when the condition is met...',
+          )}
           options={getOfferingPolicyActionOptions()}
           getOptionValue={(option) => option.value}
           getOptionLabel={(option) => option.label}

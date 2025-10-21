@@ -3,11 +3,7 @@ import { translate } from '@waldur/i18n';
 
 export const AcceptTosWarning = () => (
   <WarnCard
-    title={
-      translate('Actions required') +
-      ': ' +
-      translate('Accept term and conditions')
-    }
+    title={translate('Actions required: Accept term and conditions')}
     description={translate(
       'You must accept the Terms of Service and privacy policy to access all features. To accept, please check the box below.',
     )}

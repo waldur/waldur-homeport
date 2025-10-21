@@ -8,11 +8,7 @@ export const UploadDocumentationFiles = (props) => (
   <>
     <UploadContainer
       onDrop={(files) => props.input.onChange(files)}
-      message={
-        'PDF, PNG/JPG/JPEG, DOC/DOCX/ODT (' +
-        translate('max. {size}', { size: '25 MB' }) +
-        ')'
-      }
+      message={translate('PDF, PNG/JPG/JPEG, DOC/DOCX/ODT (max. 25 MB)')}
       multiple={true}
       maxSize={25 * 1024 * 1024} // 25MB
       accept={ACCEPTED_FILE_TYPES}

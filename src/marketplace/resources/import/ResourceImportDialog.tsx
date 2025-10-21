@@ -68,7 +68,7 @@ export const ResourceImportDialog = connect<{}, {}, ImportDialogProps>(
           subtitle={
             <>
               <span className="fw-bolder">
-                {translate('Step') + ` ${step}: `}
+                {translate('Step {step}: ', { step })}
               </span>
               <span className="fw-bold">
                 {step === 1

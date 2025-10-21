@@ -55,7 +55,7 @@ export const SaveFilterDialog = reduxForm<{ name }, SaveFilterDialogProps>({
           <StringField
             name="name"
             label={translate('Filter name')}
-            placeholder={translate('e.g.') + ' ' + translate('New filter')}
+            placeholder={translate('e.g. New filter')}
             required={true}
             validate={required}
             spaceless

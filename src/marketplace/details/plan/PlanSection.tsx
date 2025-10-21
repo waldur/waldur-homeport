@@ -26,7 +26,7 @@ const PlanCard = ({
   <Card className="card-bordered">
     <Card.Header className="custom-card-header custom-padding-zero">
       <Card.Title>
-        <h3>{translate(title)}</h3>
+        <h3>{title}</h3>
       </Card.Title>
     </Card.Header>
     <Card.Body>
@@ -81,7 +81,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
       {props.order.type === 'Update' ? (
         <>
           <PlanCard
-            title="Old plan"
+            title={translate('Old plan')}
             planName={old_plan_name}
             planDescription={plan_description}
             order={props.order}
@@ -91,7 +91,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
 
           <hr />
           <PlanCard
-            title="New plan"
+            title={translate('New plan')}
             planName={plan_name}
             planDescription={plan_description}
             order={props.order}
@@ -101,7 +101,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
         </>
       ) : (
         <PlanCard
-          title="Plan"
+          title={translate('Plan')}
           planName={plan_name}
           planDescription={plan_description}
           order={props.order}

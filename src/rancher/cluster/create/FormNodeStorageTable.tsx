@@ -107,7 +107,7 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
             name={props.typeName}
             component={SelectField}
             validate={props.typeValidate}
-            placeholder={translate('Select volume type') + '...'}
+            placeholder={translate('Select volume type...')}
             options={props.volumeTypeChoices}
             getOptionValue={(option) => option.value}
             simpleValue

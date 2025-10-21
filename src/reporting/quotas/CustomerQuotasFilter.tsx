@@ -24,7 +24,7 @@ const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
       component={SelectField}
       getOptionValue={(option: QuotaChoice) => option.key}
       getOptionLabel={(option: QuotaChoice) => option.title}
-      placeholder={translate('Select quota') + '...'}
+      placeholder={translate('Select quota...')}
       noUpdateOnBlur
       {...REACT_SELECT_TABLE_FILTER}
     />

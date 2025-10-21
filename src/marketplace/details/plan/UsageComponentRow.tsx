@@ -82,14 +82,14 @@ export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
       }
       description={
         !props.hidePrices
-          ? translate('Cost') +
-            ': ' +
-            (measuredUnit
-              ? translate('{price} per {unit}', {
-                  price: defaultCurrency(props.offeringComponent.price),
-                  unit: measuredUnit,
-                })
-              : defaultCurrency(props.offeringComponent.price))
+          ? measuredUnit
+            ? translate('Cost: {price} per {unit}', {
+                price: defaultCurrency(props.offeringComponent.price),
+                unit: measuredUnit,
+              })
+            : translate('Cost: {price}', {
+                price: defaultCurrency(props.offeringComponent.price),
+              })
           : undefined
       }
       value={translate('Usage based')}
@@ -97,10 +97,14 @@ export const UsageComponentRow: FC<UsageComponentRowProps> = (props) => {
         !props.hidePrices && (
           <>
             <div>
-              {translate('Total')}
-              {': '}
-              {formatCurrency(0, ENV.plugins.WALDUR_CORE.CURRENCY_NAME, 4)}
-              {perPeriod}
+              {translate('Total: {currency} {period}', {
+                currency: formatCurrency(
+                  0,
+                  ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                  4,
+                ),
+                period: perPeriod,
+              })}
             </div>
             <div className="estimate">
               <Button variant="link" onClick={onClick} className="p-0">

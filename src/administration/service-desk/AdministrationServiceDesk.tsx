@@ -45,7 +45,7 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
           </div>
           <div className="flex-grow-1">
             <h1 className="fs-2 text-nowrap fw-boldest">
-              {translate(capitalize(serviceDeskProvider))}
+              {capitalize(serviceDeskProvider)}
             </h1>
             <p className="fs-6 text-dark">
               {translate(

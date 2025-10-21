@@ -29,7 +29,7 @@ export const AsyncSearchBox = <Fetcher extends SdkFunction>({
   path,
   params = {},
   emptyMessage = translate('There are no results for this keyword.'),
-  placeholder = translate('Search') + '...',
+  placeholder = translate('Search...'),
   className,
   wrapperClassName,
 }: AsyncSearchBoxProps<Fetcher>): JSX.Element => {

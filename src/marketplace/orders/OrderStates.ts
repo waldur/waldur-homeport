@@ -16,7 +16,7 @@ export const ORDER_STATE_LABELS: Record<OrderState, string> = {
 export const createOrderStateOptions = () =>
   Object.keys(ORDER_STATE_LABELS).map((state) => ({
     value: state,
-    label: translate(ORDER_STATE_LABELS[state]),
+    label: ORDER_STATE_LABELS[state],
   })) as {
     value: OrderState;
     label: string;

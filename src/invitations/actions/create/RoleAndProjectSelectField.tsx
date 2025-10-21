@@ -251,14 +251,14 @@ export const RoleAndProjectSelectField: React.FC<
       customer={customer}
       currentProject={currentProject}
       component={RoleAndProjectSelect}
-      placeholder={translate('Select') + '...'}
+      placeholder={translate('Select...')}
       validate={[required]}
     />
   ) : (
     <Field
       name={name}
       component={FormControl}
-      placeholder={translate('Select') + '...'}
+      placeholder={translate('Select...')}
       disabled={disabled}
       validate={[required]}
     />

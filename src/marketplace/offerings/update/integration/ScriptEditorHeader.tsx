@@ -176,7 +176,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
       >
         <FilterBox
           type="search"
-          placeholder={translate('Search') + '...'}
+          placeholder={translate('Search...')}
           onChange={(e) => setQuery(e.target.value)}
           inputClassName="border-0 shadow-none"
           className="border-bottom"

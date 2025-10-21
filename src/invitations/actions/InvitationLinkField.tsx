@@ -13,7 +13,7 @@ export const InvitationLinkField = ({ invitation }) => {
       <div className="d-flex gap-2">
         <Form.Control
           value={link}
-          placeholder={translate('e.g.') + ' https://'}
+          placeholder={translate('e.g. https://')}
           readOnly
           className="form-control-solid"
         />

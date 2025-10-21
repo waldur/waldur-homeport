@@ -12,7 +12,7 @@ export const ResourceBackendState = ({ resource }: { resource: Resource }) => {
   return (
     <Tip
       id="tip-resource-backend-state"
-      label={translate('Backend state') + ': ' + translate('Erred')}
+      label={translate('Backend state: Erred')}
     >
       <Badge variant="danger" outline pill onlyIcon size="sm">
         <XCircleIcon weight="bold" size={12} />

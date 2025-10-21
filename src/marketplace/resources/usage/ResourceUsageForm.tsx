@@ -436,7 +436,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                           : undefined
                       }
                       validate={required}
-                      placeholder={translate('Amount') + ' *'}
+                      placeholder={translate('Amount *')}
                       aria-label={translate('{amount} for {name}', {
                         amount: translate('Amount'),
                         name: component.name,
@@ -449,7 +449,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                     <Field
                       component={TextField as any}
                       name={`components.${component.type}.description`}
-                      placeholder={translate('Enter a description') + '...'}
+                      placeholder={translate('Enter a description...')}
                       rows={3}
                       aria-label={translate('{description} for {name}', {
                         description: translate('Description'),

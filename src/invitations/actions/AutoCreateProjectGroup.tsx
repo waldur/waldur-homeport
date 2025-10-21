@@ -13,9 +13,15 @@ const NameTemplateTooltip = () => (
   <div className="text-start py-1">
     <p className="fw-bold mb-2">{translate('Available variables')}</p>
     <ul className="mb-0 list-unstyled">
-      <li>{'{full_name} - ' + translate('Full name of the user')}</li>
-      <li>{'{email} - ' + translate('Email address of the user')}</li>
-      <li>{'{username} - ' + translate('Username of the user')}</li>
+      <li>
+        {'{full_name} - '} {translate('Full name of the user')}
+      </li>
+      <li>
+        {'{email} - '} {translate('Email address of the user')}
+      </li>
+      <li>
+        {'{username} - '} {translate('Username of the user')}
+      </li>
     </ul>
   </div>
 );
@@ -55,11 +61,7 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
           label={translate('Project name template')}
           required
           validate={[required]}
-          placeholder={
-            translate('e.g.') +
-            ' {user.full_name} ' +
-            translate('Research project')
-          }
+          placeholder={translate('e.g. {user.full_name} Research project')}
           description={translate(
             'Use variables like {user.full_name}, {user.email} to create dynamic project names',
           )}

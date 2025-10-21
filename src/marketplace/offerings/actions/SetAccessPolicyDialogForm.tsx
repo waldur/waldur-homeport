@@ -67,18 +67,19 @@ const PureSetAccessPolicyDialogForm: FunctionComponent<any> = (props) => {
   return (
     <form onSubmit={props.handleSubmit(submitRequest)}>
       <ModalDialog
-        title={translate(
+        title={
           props.plan
-            ? 'Set access policy for {planName}'
+            ? translate('Set access policy for {planName}', {
+                planName: props.plan?.name,
+              })
             : props.offering
-              ? 'Set access policy for {offeringName}'
-              : 'Set organization groups for {customerName}',
-          {
-            planName: props.plan?.name,
-            offeringName: props.offering?.name,
-            customerName: props.customer?.name,
-          },
-        )}
+              ? translate('Set access policy for {offeringName}', {
+                  offeringName: props.offering?.name,
+                })
+              : translate('Set organization groups for {customerName}', {
+                  customerName: props.customer?.name,
+                })
+        }
         footer={
           <>
             <CloseDialogButton />

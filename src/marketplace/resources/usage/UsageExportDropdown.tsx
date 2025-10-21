@@ -62,7 +62,9 @@ const exportAsPng = (props: UsageExportDropdownProps) => {
     Object.assign(options, { animation: false });
     Object.assign(options, {
       title: {
-        text: translate('Usage history') + ' - ' + component.name,
+        text: translate('Usage history - {component}', {
+          component: component.name,
+        }),
         subtext: props.resource.name,
         left: 'center',
         textStyle: {
@@ -219,7 +221,9 @@ export const useUsageExport = (props: UsageExportDropdownProps) => {
 
       exportAs(
         format,
-        translate('Usage history') + ' - ' + props.resource.name,
+        translate('Usage history - {resource}', {
+          resource: props.resource.name,
+        }),
         exportData,
       );
     },

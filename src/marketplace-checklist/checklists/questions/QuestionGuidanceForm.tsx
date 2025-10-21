@@ -87,7 +87,7 @@ const FieldsListGroup = ({
               </Button>
             </Stack>
             <FormGroup
-              label={translate('Solution') + '/' + translate('Guidance')}
+              label={translate('Solution / Guidance')}
               spaceless={i === fields.length - 1}
             >
               <Field

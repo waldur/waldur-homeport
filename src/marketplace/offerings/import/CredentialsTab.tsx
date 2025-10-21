@@ -7,7 +7,7 @@ export const CredentialsTab = () => (
     <StringField
       name="api_url"
       label={translate('API URL')}
-      placeholder={translate('e.g.') + ' waldur.example.com'}
+      placeholder={translate('e.g. waldur.example.com')}
       required={true}
       validate={required}
       maxLength={150}
@@ -16,7 +16,7 @@ export const CredentialsTab = () => (
     <SecretField
       name="token"
       label={translate('Authentication token')}
-      placeholder={translate('e.g.') + ' SECRET_TOKEN'}
+      placeholder={translate('e.g. SECRET_TOKEN')}
       required={true}
       validate={required}
     />

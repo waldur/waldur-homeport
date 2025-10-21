@@ -65,7 +65,9 @@ export const OrdersBulkActions = ({
             if (!handler) {
               dispatch(
                 showInfo(
-                  translate(`Unsupported action for state: ${order.state}`),
+                  translate('Unsupported action for state: {state}', {
+                    state: order.state,
+                  }),
                 ),
               );
               return Promise.resolve(); // no-op fallback

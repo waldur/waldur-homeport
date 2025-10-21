@@ -136,7 +136,7 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
       name="end_date"
       key="end_date"
       label={translate('End date')}
-      placeholder={translate('Select date') + '...'}
+      placeholder={translate('Select date...')}
       description={translate('On that date all credit will be set to 0')}
       required={formValues.minimal_consumption_logic === 'linear'}
       validate={

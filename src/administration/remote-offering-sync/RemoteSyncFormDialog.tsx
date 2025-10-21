@@ -246,7 +246,7 @@ const RemoteSyncRenderer = ({
           <Field
             component={StringField as any}
             name="api_url"
-            placeholder={translate('e.g.') + ' waldur.example.com'}
+            placeholder={translate('e.g. waldur.example.com')}
             validate={required}
             onBlur={loadData}
           />
@@ -255,7 +255,7 @@ const RemoteSyncRenderer = ({
           <Field
             component={SecretField as any}
             name="token"
-            placeholder={translate('e.g.') + ' SECRET_TOKEN'}
+            placeholder={translate('e.g. SECRET_TOKEN')}
             validate={required}
             onBlur={loadData}
           />

@@ -76,7 +76,7 @@ const CheckboxGroup = ({ groupName, options, input, groupClassName }) => (
 const renderNodeRows = ({ fields, flavors }: any) => {
   const addRow = useCallback(() => {
     fields.push({
-      name: translate('Rancher node ') + (fields.length + 1),
+      name: translate('Rancher node {index}', { index: fields.length + 1 }),
       roles: ['worker'],
       units: 1,
     });
@@ -129,7 +129,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                           <Field
                             name={`${node}.flavor`}
                             component={SelectField}
-                            placeholder={translate('Select flavor') + '...'}
+                            placeholder={translate('Select flavor...')}
                             options={flavors}
                             validate={required}
                             isClearable={true}
@@ -226,7 +226,7 @@ export const FormNodesStep = (props: FormStepProps) => {
             : undefined;
           dispatch(
             arrayPush(ORDER_FORM_ID, NODES_FIELD_ARRAY, {
-              name: translate('Rancher node ') + (i + 1),
+              name: translate('Rancher node {index}', { index: i + 1 }),
               units: 1,
               roles: node.roles,
               system_volume_size: node.system_volume_size,

@@ -71,7 +71,7 @@ const ResourcesTable: FC<TableProps & { projectDate }> = ({
         render: ({ row }) => <>{formatDate(row.end_date)}</>,
       },
       {
-        title: translate('Offering') + '/' + translate('Category'),
+        title: translate('Offering / Category'),
         render: ({ row }) => (
           <>
             <span className="d-block text-dark">{row.offering_name}</span>
@@ -181,7 +181,9 @@ const FormModalComponent: FC<
       <ModalDialog
         title={
           step === 1
-            ? translate('Set end date for project') + ': ' + project.name
+            ? translate('Set end date for project: {name}.', {
+                name: project.name,
+              })
             : translate('Some conflicting resources are unselected')
         }
         bodyClassName="pt-5 min-h-200px"
@@ -347,38 +349,29 @@ export const EditEndDateDialog = ({
 
           let message = '';
           if (updatedResources.length > 0) {
-            message +=
-              translate(
-                'The following resources had their termination dates updated',
-              ) +
-              ': ' +
-              updatedResources.join(', ') +
-              '. ';
+            message += translate(
+              'The following resources had their termination dates updated: {list}.',
+              { list: updatedResources.join(', ') },
+            );
             if (ignoredResources.length > 0) {
-              message +=
-                translate(
-                  'The following were not updated and be affected by the project end',
-                ) +
-                ': ' +
-                ignoredResources.join(', ') +
-                '. ';
+              message += translate(
+                'The following were not updated and be affected by the project end: {list}.',
+                { list: ignoredResources.join(', ') },
+              );
             }
           } else if (ignoredResources.length > 0) {
-            message +=
-              translate(
-                'The following resources were not updated and be affected by the project end',
-              ) +
-              ': ' +
-              ignoredResources.join(', ') +
-              '. ';
+            message += translate(
+              'The following resources were not updated and be affected by the project end: {list}.',
+              { list: ignoredResources.join(', ') },
+            );
           }
           dispatch(showSuccess(message, title));
           if (erredResources.length > 0) {
             showError(
-              translate('The following resources could not be updated') +
-                ': ' +
-                erredResources.join(', ') +
-                '. ',
+              translate(
+                'The following resources could not be updated: {list}.',
+                { list: erredResources.join(', ') },
+              ),
             );
           }
         } else {

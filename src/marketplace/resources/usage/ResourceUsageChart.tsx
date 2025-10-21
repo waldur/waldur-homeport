@@ -72,8 +72,10 @@ export const ResourceUsageChart: FunctionComponent<ResourceUsageChartProps> = ({
       exportExcel={hasExport}
       exportTitle={
         hasExport
-          ? translate('Usage history') +
-            ` - ${resource?.name} - ${offeringComponent.name}`
+          ? translate('Usage history - {resource} - {offering}', {
+              resource: resource?.name || '',
+              offering: offeringComponent.name,
+            })
           : undefined
       }
     />

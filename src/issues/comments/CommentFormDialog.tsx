@@ -91,7 +91,7 @@ const PureCommentFormDialog: FC<CommentFormDialogProps> = (props) => {
             name={constants.FORM_FIELDS.comment}
             spaceless
             hideLabel
-            placeholder={translate('Enter a comment') + '...'}
+            placeholder={translate('Enter a comment...')}
             validate={required}
             autoFocus
           />
