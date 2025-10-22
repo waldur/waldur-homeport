@@ -36,7 +36,7 @@ export const offering = {
     },
   ],
   type: TENANT_TYPE,
-  plugin_options: { order_supports_comments_and_metadata: true },
+  plugin_options: { enable_purchase_order_upload: true },
 } as Offering;
 
 export const newLimits = {

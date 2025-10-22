@@ -61,10 +61,20 @@ const fields: OfferingEditField[] = [
     component: StringField,
   },
   {
-    label: translate('Order supports comments and metadata'),
-    key: 'plugin_options.order_supports_comments_and_metadata',
+    label: translate(
+      'If set to True, users will be able to upload purchase orders',
+    ),
+    key: 'plugin_options.enable_purchase_order_upload',
     component: AwesomeCheckboxField,
   },
+  {
+    label: translate(
+      'If set to True, users will be required to upload purchase orders',
+    ),
+    key: 'plugin_options.require_purchase_order_upload',
+    component: AwesomeCheckboxField,
+  },
+
   {
     label: translate(
       'If set to True, pricing and components tab would be concealed',

@@ -3,6 +3,7 @@ import { Form } from 'react-final-form';
 import {
   marketplaceOrdersApproveByConsumer,
   marketplaceOrdersUpdateAttachment,
+  OrderDetails,
 } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@waldur/core/api';
@@ -14,7 +15,15 @@ import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 
-export const UploadPurchaseOrderDialog = ({ order, refetch }) => {
+export const UploadPurchaseOrderDialog = ({
+  order,
+  refetch,
+  required,
+}: {
+  order: OrderDetails;
+  refetch(): void | Promise<void>;
+  required: boolean;
+}) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
   const callback = async (formData) => {
@@ -63,7 +72,7 @@ export const UploadPurchaseOrderDialog = ({ order, refetch }) => {
               </>
             }
           >
-            <OrderAttachmentField />
+            <OrderAttachmentField required={required} />
           </ModalDialog>
         </form>
       )}
