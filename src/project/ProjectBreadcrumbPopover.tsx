@@ -47,7 +47,7 @@ export const ProjectBreadcrumbPopover = ({ project, close }) => {
           close={close}
         />
       )}
-      placeholder={translate('Type in name of project') + '...'}
+      placeholder={translate('Type in name of project...')}
       emptyMessage={translate('There are no projects.')}
     />
   );

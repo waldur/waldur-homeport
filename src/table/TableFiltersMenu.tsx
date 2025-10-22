@@ -157,7 +157,7 @@ const SaveFilterItems = ({ table, formId, apply }) => {
       >
         <span className="menu-link" aria-hidden="true">
           <span className="menu-title">
-            {translate('Saved filters') + ` (${list.length})`}
+            {translate('Saved filters ({count})', { count: list.length })}
           </span>
           <CaretRightIcon size={20} className="ms-auto" weight="bold" />
         </span>

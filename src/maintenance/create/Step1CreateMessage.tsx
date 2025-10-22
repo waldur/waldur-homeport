@@ -200,9 +200,7 @@ export const Step1CreateMessage: FC<WizardFormStepProps> = (props) => {
 
             <StringField
               name="external_reference_url"
-              label={
-                translate('External reference') + ` (${translate('Optional')})`
-              }
+              label={translate('External reference (Optional)')}
               placeholder={translate(
                 'e.g. https://status.example.com/maintenance/123',
               )}

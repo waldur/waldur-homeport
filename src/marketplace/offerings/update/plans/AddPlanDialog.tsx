@@ -29,7 +29,7 @@ export const AddPlanDialog: FC<AddPlanDialogProps> = ({ resolve }) => {
   const initialValues = resolve.plan
     ? {
         ...resolve.plan,
-        name: translate('Clone of') + ' ' + resolve.plan.name,
+        name: translate('Clone of {plan}', { plan: resolve.plan.name }),
         unit: getBillingPeriods().find(
           ({ value }) => value === resolve.plan.unit,
         ),

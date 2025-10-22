@@ -100,16 +100,22 @@ export const combinePrices = (
       0,
     );
 
-    const subscriptionSubTotal = fixedSubTotal + limitSubTotal;
+    const prepaidComponents = components.filter(
+      (component) =>
+        component.billing_type === 'one' && component.is_prepaid === true,
+    );
+    const prepaidSubTotal = prepaidComponents.reduce(
+      (result, item) => result + item.subTotal,
+      0,
+    );
+
+    const subscriptionSubTotal =
+      fixedSubTotal + limitSubTotal + prepaidSubTotal;
     const totalPeriods = multipliers.map(
       (mult) => mult * subscriptionSubTotal || 0,
     );
 
-    const initPrice =
-      typeof plan.init_price === 'string'
-        ? parseFloat(plan.init_price)
-        : plan.init_price;
-    const total = subscriptionSubTotal + initPrice;
+    const total = subscriptionSubTotal;
 
     return { components, periods, total, totalPeriods, periodKeys };
   } else {

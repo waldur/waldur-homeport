@@ -52,7 +52,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
         >
           <Tip
             id={'tip-kind-' + row.uuid}
-            label={kind.label + ' ' + translate('Project')}
+            label={translate('{name} project', { name: kind.label })}
           >
             <kind.component weight="bold" size={12} />
           </Tip>

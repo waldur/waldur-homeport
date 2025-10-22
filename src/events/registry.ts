@@ -22,6 +22,7 @@ export class EventRegistry {
         if (group.context) {
           context = { ...context, ...group.context(event) };
         }
+        // eslint-disable-next-line local/no-template-in-translate
         return translate(type.title, context, formatJsxTemplate);
       };
       this.formatters[type.key] = type.formatter || defaultFormatter;

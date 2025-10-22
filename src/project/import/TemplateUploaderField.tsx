@@ -12,7 +12,7 @@ export const TemplateUploaderField = ({
     <>
       <UploadContainer
         onDrop={onChange}
-        message={'CSV (' + translate('max. {size}', { size: '10 MB' }) + ')'}
+        message={translate('CSV (max. 10 MB)')}
         accept={{
           'application/csv': ['.csv'],
           'text/csv': ['.csv'],

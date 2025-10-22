@@ -23,11 +23,9 @@ const generateYearOptions = () => {
 };
 
 const MONTH_OPTIONS = Array.from({ length: 12 }, (_, i) => ({
-  label: translate(
-    DateTime.local()
-      .set({ month: i + 1 })
-      .toFormat('LLLL'),
-  ),
+  label: DateTime.local()
+    .set({ month: i + 1 })
+    .toFormat('LLLL'),
   value: i + 1,
 }));
 

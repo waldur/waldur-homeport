@@ -128,11 +128,7 @@ export const Step1UploadFile: FC<WizardFormStepProps> = (props) => {
                 <>
                   <UploadContainer
                     onDrop={onChange}
-                    message={
-                      'CSV (' +
-                      translate('max. {size}', { size: '10 MB' }) +
-                      ')'
-                    }
+                    message="CSV (max. 10 MB)"
                     accept={{
                       'application/csv': ['.csv'],
                       'text/csv': ['.csv'],

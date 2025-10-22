@@ -58,7 +58,7 @@ export const CommentFormDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           <FormContainer submitting={props.submitting}>
             <TextField
               label={translate('Comment')}
-              placeholder={translate('Enter a comment') + '...'}
+              placeholder={translate('Enter a comment...')}
               name="comment"
               required
               validate={required}

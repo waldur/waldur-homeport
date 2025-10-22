@@ -63,7 +63,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         name="name"
         component={FormGroup}
         label={translate('Name')}
-        placeholder={translate('Enter a name') + '...'}
+        placeholder={translate('Enter a name...')}
         tooltip={translate(
           'Short title for the project, which explains the project goal as much as possible.',
         )}
@@ -83,7 +83,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         component={FormGroup}
         maxLength={1000}
         label={translate('Summary')}
-        placeholder={translate('Enter a summary') + '...'}
+        placeholder={translate('Enter a summary...')}
         tooltip={translate('Brief description of the project.')}
         tooltipEnd
         validate={required}
@@ -101,7 +101,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         component={FormGroup}
         maxLength={1000}
         label={translate('Description')}
-        placeholder={translate('Enter a description') + '...'}
+        placeholder={translate('Enter a description...')}
         tooltip={translate(
           'Explanation of the scientific case of the project for which the resources are intended to be used.',
         )}
@@ -169,7 +169,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
         name="duration_in_days"
         component={FormGroup}
         label={translate('Project duration in days')}
-        placeholder={translate('Enter number of days') + '...'}
+        placeholder={translate('Enter number of days...')}
         tooltip={translate(
           'Expected project duration in days once resources have been granted. {extra_msg}',
           {

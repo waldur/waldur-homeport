@@ -111,7 +111,7 @@ const ColumnsPopover = ({
       <div className="p-5">
         <FilterBox
           type="search"
-          placeholder={translate('Search') + '...'}
+          placeholder={translate('Search...')}
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>

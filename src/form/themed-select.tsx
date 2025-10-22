@@ -296,7 +296,7 @@ export const Select: FC<CustomSelectProps> = ({
   return !creatable ? (
     <BaseSelect
       theme={theme}
-      placeholder={translate('Select') + '...'}
+      placeholder={translate('Select...')}
       {...(props.isMulti ? REACT_MULTI_SELECT : REACT_SELECT_MENU_PORTALING)}
       components={composedComponents}
       {...props}
@@ -307,7 +307,7 @@ export const Select: FC<CustomSelectProps> = ({
   ) : (
     <CreatableSelect
       theme={theme}
-      placeholder={translate('Select or type to add a new option') + '...'}
+      placeholder={translate('Select or type to add a new option...')}
       {...(props.isMulti ? REACT_MULTI_SELECT : REACT_SELECT_MENU_PORTALING)}
       components={composedComponents}
       {...props}

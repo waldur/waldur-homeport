@@ -26,7 +26,7 @@ export const AsyncSelectField: FunctionComponent<any> = (props) => {
       name={name}
       component={Select}
       defaultOptions
-      placeholder={placeholder || translate('Select') + '...'}
+      placeholder={placeholder || translate('Select...')}
       loadOptions={props.loadOptions}
       noOptionsMessage={() => translate('No results found')}
       getOptionLabel={(option) => option.name}

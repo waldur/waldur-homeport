@@ -11,12 +11,14 @@ export const LoadingSpinnerIcon = ({ className }: { className? }) => (
 
 interface LoadingSpinnerProps {
   helpText?: string;
+  className?: string;
 }
 
 export const LoadingSpinner: FunctionComponent<LoadingSpinnerProps> = ({
   helpText,
+  className,
 }) => (
-  <div className="text-center mb-5">
+  <div className={'text-center mb-5' + (className ? ' ' + className : '')}>
     <h1>
       <LoadingSpinnerIcon />
     </h1>

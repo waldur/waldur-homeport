@@ -5,13 +5,13 @@ import { Component } from './types';
 
 export const ComponentCost = ({ component }: { component: Component }) => (
   <>
-    {translate('Cost') +
-      ': ' +
-      (component.measured_unit
+    {translate('Cost: {cost}', {
+      cost: component.measured_unit
         ? translate('{price} per {unit}', {
             price: defaultCurrency(component.price),
             unit: component.measured_unit,
           })
-        : defaultCurrency(component.price))}
+        : defaultCurrency(component.price),
+    })}
   </>
 );

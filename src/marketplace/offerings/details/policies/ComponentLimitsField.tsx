@@ -68,7 +68,7 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                             name={`${component}.type`}
                             component={SelectField as any}
                             validate={required}
-                            placeholder={translate('Select component') + '...'}
+                            placeholder={translate('Select component...')}
                             options={getAvailableOptions(details)}
                             getOptionValue={(option) => option.type}
                             getOptionLabel={(option) => option.name}

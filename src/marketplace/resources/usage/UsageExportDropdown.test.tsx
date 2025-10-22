@@ -91,18 +91,14 @@ describe('useUsageExport', () => {
     );
     result.current('csv');
 
-    expect(exportAs).toHaveBeenCalledWith(
-      'csv',
-      'Usage history - Test Resource',
-      {
-        fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
-        data: [
-          ['user_1', '1 - 2024', 5, 4],
-          ['Total of {label}', '1 - 2024', 10, 8],
-          ['Total', '01/2024', 10, 8],
-        ],
-      },
-    );
+    expect(exportAs).toHaveBeenCalledWith('csv', 'Usage history - {resource}', {
+      fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
+      data: [
+        ['user_1', '1 - 2024', 5, 4],
+        ['Total of {label}', '1 - 2024', 10, 8],
+        ['Total', '01/2024', 10, 8],
+      ],
+    });
   });
 
   it('should show error when there is no usage data', () => {
@@ -140,7 +136,7 @@ describe('useUsageExport', () => {
 
     expect(exportAs).toHaveBeenCalledWith(
       'excel',
-      'Usage history - Test Resource',
+      'Usage history - {resource}',
       {
         fields: ['Date', 'CPU/cores', 'RAM/GB'],
         data: [
@@ -180,18 +176,14 @@ describe('useUsageExport', () => {
     );
     result.current('pdf');
 
-    expect(exportAs).toHaveBeenCalledWith(
-      'pdf',
-      'Usage history - Test Resource',
-      {
-        fields: ['Username', 'Date', 'CPU', 'RAM'],
-        data: [
-          ['user_1', '1 - 2024', 5, 4],
-          ['Total of {label}', '1 - 2024', 10, 8],
-          ['Total', '01/2024', 10, 8],
-        ],
-      },
-    );
+    expect(exportAs).toHaveBeenCalledWith('pdf', 'Usage history - {resource}', {
+      fields: ['Username', 'Date', 'CPU', 'RAM'],
+      data: [
+        ['user_1', '1 - 2024', 5, 4],
+        ['Total of {label}', '1 - 2024', 10, 8],
+        ['Total', '01/2024', 10, 8],
+      ],
+    });
   });
 
   it('should handle N/A values for missing usage data', () => {
@@ -208,17 +200,13 @@ describe('useUsageExport', () => {
     );
     result.current('csv');
 
-    expect(exportAs).toHaveBeenCalledWith(
-      'csv',
-      'Usage history - Test Resource',
-      {
-        fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
-        data: [
-          ['user_1', '1 - 2024', 5, '0'],
-          ['Total of {label}', '1 - 2024', 10, 'N/A'],
-          ['Total', '01/2024', 10, 'N/A'],
-        ],
-      },
-    );
+    expect(exportAs).toHaveBeenCalledWith('csv', 'Usage history - {resource}', {
+      fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
+      data: [
+        ['user_1', '1 - 2024', 5, '0'],
+        ['Total of {label}', '1 - 2024', 10, 'N/A'],
+        ['Total', '01/2024', 10, 'N/A'],
+      ],
+    });
   });
 });

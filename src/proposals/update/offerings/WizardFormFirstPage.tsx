@@ -37,7 +37,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
                 component={SelectField}
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={(option) => option.title}
-                placeholder={translate('Select category') + '...'}
+                placeholder={translate('Select category...')}
                 isLoading={queryData.isLoading}
                 simpleValue
                 noUpdateOnBlur

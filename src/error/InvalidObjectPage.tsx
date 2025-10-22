@@ -14,7 +14,7 @@ export const InvalidObjectPage: FunctionComponent = () => {
         <Illustration className="mw-100 mb-10 h-lg-450px" />
         <h1 className="fw-bold mb-10">
           {translate(
-            `You've either entered invalid URL or don't have enough permissions to view this page.`,
+            "You've either entered invalid URL or don't have enough permissions to view this page.",
           )}
         </h1>
         <Button onClick={goBack}>{translate('Back')}</Button>

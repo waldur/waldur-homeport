@@ -94,7 +94,7 @@ const PageHero = ({ data, isRefetching }) => (
   <PublicDashboardHero
     hideQuickSection
     cardBordered
-    className="container-fluid my-5"
+    className="container-fluid my-5 d-print-none"
     logo={data.offering.thumbnail}
     logoAlt={data.offering.name}
     logoTooltip={data.offering.name}

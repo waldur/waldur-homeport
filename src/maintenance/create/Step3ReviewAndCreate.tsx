@@ -24,25 +24,19 @@ export const Step3ReviewAndCreate: FC<WizardFormStepProps> = (props) => {
             />
             <Field
               label={translate('Start date')}
-              value={
-                translate('{date} at {time}', {
-                  date: values.scheduled_start_date,
-                  time: formatTime(values.scheduled_start_time),
-                }) +
-                ' ' +
-                DateTime.local().zone.name
-              }
+              value={translate('{date} at {time} {zone}', {
+                date: values.scheduled_start_date,
+                time: formatTime(values.scheduled_start_time),
+                zone: DateTime.local().zone.name,
+              })}
             />
             <Field
               label={translate('End date')}
-              value={
-                translate('{date} at {time}', {
-                  date: values.scheduled_end_date,
-                  time: formatTime(values.scheduled_end_time),
-                }) +
-                ' ' +
-                DateTime.local().zone.name
-              }
+              value={translate('{date} at {time} {zone}', {
+                date: values.scheduled_end_date,
+                time: formatTime(values.scheduled_end_time),
+                zone: DateTime.local().zone.name,
+              })}
             />
             <Field label={translate('Message')} value={values.message} />
             {values.external_reference_url && (

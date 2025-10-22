@@ -151,6 +151,17 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('Project'),
+    items: [
+      {
+        key: 'PROJECT_END_DATE_MANDATORY',
+        description: translate('If true, project end date field becomes mandatory when creating or updating projects.'),
+        default: false,
+        type: 'boolean',
+      },
+    ],
+  },
+  {
     description: translate('Telemetry'),
     items: [
       {
