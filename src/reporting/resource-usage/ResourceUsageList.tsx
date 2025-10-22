@@ -13,7 +13,6 @@ import { translate } from '@waldur/i18n';
 import { getStartAndEndDatesOfMonth } from '@waldur/issues/utils';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { createFetcher } from '@waldur/table/api';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -21,14 +20,7 @@ import { useTable } from '@waldur/table/useTable';
 import { usageTableTabs } from '../utils';
 
 import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
-
-export const UsageExpandableRow = ({ row }) => (
-  <ExpandableContainer>
-    <p>
-      <strong>{translate('Comment')}</strong>: {row.description || 'N/A'}
-    </p>
-  </ExpandableContainer>
-);
+import { UsageExpandableRow } from './UserUsageExpandableRow';
 
 export const mapStateToFilter = createSelector(
   getFormValues(FORM_ID),
@@ -39,7 +31,9 @@ export const mapStateToFilter = createSelector(
         const { start } = getStartAndEndDatesOfMonth(
           usageFilter.accounting_period.value,
         );
-        filter.billing_period = start;
+        const startDate = new Date(start);
+        filter.billing_period_year = startDate.getFullYear();
+        filter.billing_period_month = startDate.getMonth() + 1;
       }
       if (usageFilter.organization) {
         filter.customer_uuid = usageFilter.organization.uuid;
@@ -142,7 +136,9 @@ export const ResourceUsageList: FC = () => {
       verboseName={translate('Usages')}
       showPageSizeSelector={true}
       enableExport={true}
-      expandableRow={UsageExpandableRow}
+      expandableRow={({ row }) => (
+        <UsageExpandableRow row={row} type="resource-usage" />
+      )}
       filters={<ResourceUsageFilter />}
     />
   );

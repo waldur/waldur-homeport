@@ -67966,7 +67966,9 @@
         "ExpandableContainer",
         "Field",
         "Nav",
-        "TableTabsContainer"
+        "TableTabsContainer",
+        "Col",
+        "Row"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -68006,7 +68008,8 @@
           "form",
           "list",
           "navigation",
-          "filter"
+          "filter",
+          "component"
         ],
         "paths": [
           "customer/credits/CreditUsageDialog.tsx",
@@ -68018,7 +68021,8 @@
           "navigation/header/confirmation-drawer/PendingConsumerOrders.tsx",
           "navigation/header/confirmation-drawer/PendingProviderOrders.tsx",
           "openstack/openstack-instance/OpenStackSecurityGroupsList.tsx",
-          "reporting/resource-usage/ResourceUsageFilter.tsx"
+          "reporting/resource-usage/ResourceUsageFilter.tsx",
+          "reporting/resource-usage/UserUsageExpandableRow.tsx"
         ]
       },
       "jsx_context": {
@@ -68045,7 +68049,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 10
+      "usage_count": 11
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -68132,7 +68136,8 @@
       "primary_ui_type": "title",
       "ui_types": [
         "title",
-        "unknown"
+        "unknown",
+        "label"
       ],
       "components": [
         "Table",
@@ -68167,7 +68172,8 @@
         ],
         "paths": [
           "customer/credits/CreditUsageDialog.tsx",
-          "customer/credits/CreditUsageFilter.tsx"
+          "customer/credits/CreditUsageFilter.tsx",
+          "reporting/resource-usage/UserUsageExpandableRow.tsx"
         ]
       },
       "jsx_context": {
@@ -68191,7 +68197,7 @@
         "has_validation": false,
         "max_nesting_level": 8
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language."
@@ -104275,15 +104281,16 @@
       "ui_types": [
         "title",
         "generic_element",
-        "label",
-        "unknown"
+        "label"
       ],
       "components": [
         "TextField",
         "FormContainer",
         "Field",
         "ExpandableContainer",
-        "ModalDialog"
+        "ModalDialog",
+        "Col",
+        "Row"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -104328,14 +104335,14 @@
           "marketplace-remote/ReviewDialog.tsx",
           "proposals/proposal/create-review/CommentFormDialog.tsx",
           "reporting/resource-usage/ResourceUsageList.tsx",
+          "reporting/resource-usage/UserUsageExpandableRow.tsx",
           "reporting/resource-usage/UserUsageList.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "TextField",
-          "Field",
-          "strong"
+          "Field"
         ],
         "conditional_render": false
       },
@@ -104353,7 +104360,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 9
+      "usage_count": 10
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -154646,6 +154653,7 @@
           "marketplace/resources/details/utils.tsx",
           "marketplace/resources/import/ResourcesList.tsx",
           "marketplace/resources/list/CategoryResourcesList.tsx",
+          "marketplace/resources/list/ExpandableResourceSummary.tsx",
           "marketplace/resources/list/ProviderResourcesList.tsx",
           "marketplace/resources/list/utils.tsx",
           "marketplace/resources/usage/ResourceMetaInfo.tsx",
@@ -154685,7 +154693,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 19
+      "usage_count": 20
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -178346,9 +178354,14 @@
       "primary_ui_type": "title",
       "ui_types": [
         "title",
+        "generic_element",
         "unknown"
       ],
-      "components": [],
+      "components": [
+        "Field",
+        "ExpandableContainer",
+        "KeyValueButton"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 7,
@@ -178370,20 +178383,26 @@
         ],
         "feature_areas": [
           "details",
+          "list",
           "options"
         ],
         "component_types": [
           "component",
+          "list",
           "card"
         ],
         "paths": [
           "marketplace/resources/details/fetchData.tsx",
+          "marketplace/resources/list/ExpandableResourceSummary.tsx",
           "marketplace/resources/options/ResourceOptionsCard.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [],
-        "conditional_render": false
+        "tags": [
+          "Field",
+          "KeyValueButton"
+        ],
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -178397,13 +178416,14 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 5
+        "max_nesting_level": 10
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language."
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Resource metadata": {
@@ -186581,6 +186601,72 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "{month}M": {
+    "message": "{month}M",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 1,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "month": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/resources/usage/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: month. Variable types: unknown."
     ]
   },
   "{month} months": {
@@ -281396,6 +281482,323 @@
       },
       "usage_count": 2
     }
+  },
+  "6 months": {
+    "message": "6 months",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": true,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "resource-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "reporting/resource-usage/UserUsageExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Metric": {
+    "message": "Metric",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Card",
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "resource-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "reporting/resource-usage/UserUsageExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Max": {
+    "message": "Max",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 3,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "resource-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "reporting/resource-usage/UserUsageExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Last": {
+    "message": "Last",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 4,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "resource-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "reporting/resource-usage/UserUsageExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "There are no statistics.": {
+    "message": "There are no statistics.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "resource-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "reporting/resource-usage/UserUsageExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
   },
   "VM type overview": {
     "message": "VM type overview",

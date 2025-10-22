@@ -1,6 +1,11 @@
 $expandArrowWidth: 42px;
 $checkboxWidth: 32px;
 
+$aside: 300px;
+$asideMinimized: 75px;
+// Includes 300px of aside + Arrow width
+$tableSidesSpace: 164px;
+
 table .has-multiselect .expandable-container {
   margin-left: calc($expandArrowWidth + $checkboxWidth);
 }
@@ -8,8 +13,21 @@ table .has-multiselect .expandable-container {
 table .expandable-container {
   margin-left: $expandArrowWidth;
 
+  width: calc(100vw - $tableSidesSpace - $aside);
+  position: sticky;
+  left: 16px;
+
   &.has-multiselect {
     margin-left: calc($expandArrowWidth + $checkboxWidth);
+    width: calc(100vw - $tableSidesSpace - $aside - $checkboxWidth);
+  }
+
+  [data-kt-aside-minimize='on'] & {
+    width: calc(100vw - $tableSidesSpace - $asideMinimized);
+
+    &.has-multiselect {
+      width: calc(100vw - $tableSidesSpace - $asideMinimized - $checkboxWidth);
+    }
   }
 
   // As table
@@ -76,6 +94,19 @@ table .expandable-container {
           background-color: var(--bs-gray-50);
         }
       }
+    }
+  }
+}
+
+// Mobile screens (no aside)
+@media (max-width: 992px) {
+  table .expandable-container {
+    width: calc(
+      100vw - $tableSidesSpace + 30px
+    ) !important; // 30px from container, space released
+
+    &.has-multiselect {
+      width: calc(100vw - $tableSidesSpace - $checkboxWidth + 30px) !important;
     }
   }
 }

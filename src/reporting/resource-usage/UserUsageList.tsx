@@ -16,7 +16,8 @@ import { useTable } from '@waldur/table/useTable';
 import { usageTableTabs } from '../utils';
 
 import { ResourceUsageFilter } from './ResourceUsageFilter';
-import { mapStateToFilter, UsageExpandableRow } from './ResourceUsageList';
+import { mapStateToFilter } from './ResourceUsageList';
+import { UsageExpandableRow } from './UserUsageExpandableRow';
 
 export const UserUsageList: FC = () => {
   const filter = useSelector(mapStateToFilter);
@@ -30,6 +31,7 @@ export const UserUsageList: FC = () => {
       title: translate('Username'),
       render: ({ row }) => <>{row.username}</>,
       export: 'username',
+      copyField: (row) => row.username,
     },
     {
       title: translate('Client organization'),
@@ -107,7 +109,9 @@ export const UserUsageList: FC = () => {
       verboseName={translate('Usages')}
       showPageSizeSelector={true}
       enableExport={true}
-      expandableRow={UsageExpandableRow}
+      expandableRow={({ row }) => (
+        <UsageExpandableRow row={row} type="user-usage" />
+      )}
       filters={<ResourceUsageFilter />}
     />
   );
