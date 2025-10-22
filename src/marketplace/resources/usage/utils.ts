@@ -223,7 +223,10 @@ export const getEChartOptions = (
   );
 };
 
-export const getUsageHistoryPeriodOptions = (startDate = null) => {
+export const getUsageHistoryPeriodOptions = (
+  startDate = null,
+  abbreviate = false,
+) => {
   const now = DateTime.now();
   const start = parseDate(startDate);
   let totalMonths = Math.max(
@@ -237,13 +240,17 @@ export const getUsageHistoryPeriodOptions = (startDate = null) => {
   if (totalMonths > 6) {
     options.push({
       value: 6,
-      label: translate('{month} months', { month: 6 }),
+      label: abbreviate
+        ? translate('{month}M', { month: 6 })
+        : translate('{month} months', { month: 6 }),
     });
   }
   if (totalMonths > 12) {
     options.push({
       value: 12,
-      label: translate('{month} months', { month: 12 }),
+      label: abbreviate
+        ? translate('{month}M', { month: 12 })
+        : translate('{month} months', { month: 12 }),
     });
   }
   options.push({ value: totalMonths, label: translate('From creation') });

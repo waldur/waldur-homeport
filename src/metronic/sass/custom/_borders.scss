@@ -13,3 +13,8 @@
     padding-bottom: 1rem;
   }
 }
+@include media-breakpoint-up(sm) {
+  .border-sm-start {
+    border-left: $border-width solid $border-color;
+  }
+}

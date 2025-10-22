@@ -1,3 +1,7 @@
+import { EChartsOption, graphic } from 'echarts';
+
+import { hexToRgb } from '@waldur/core/generateColors';
+import { LINE_CHART_COLOR } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
 export const usageTableTabs = [
@@ -12,3 +16,61 @@ export const usageTableTabs = [
     state: 'marketplace-support-user-usage-reports',
   },
 ];
+
+export const getUsageLineChartOptions = (
+  dates: string[],
+  values: (string | number)[],
+): EChartsOption => {
+  const color = LINE_CHART_COLOR;
+  const rgb = hexToRgb(color);
+  return {
+    tooltip: {
+      trigger: 'axis',
+      formatter: (params) => {
+        const point = params[0];
+        return `${point.axisValue}<br/>${point.data}`;
+      },
+    },
+    grid: {
+      left: 10,
+      top: 10,
+      right: 0,
+      bottom: 0,
+      containLabel: false,
+    },
+    xAxis: {
+      data: dates,
+      show: false,
+    },
+    yAxis: {
+      type: 'value',
+      splitNumber: 3,
+      axisLine: { show: false },
+      axisTick: { show: false },
+      axisLabel: { show: false },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: 'rgba(129, 129, 129, 0.3)',
+          type: 'solid',
+        },
+      },
+    },
+    series: [
+      {
+        type: 'line',
+        data: values,
+        color,
+        smooth: true,
+        showSymbol: false,
+        areaStyle: {
+          origin: 'start',
+          color: new graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: `rgba(${rgb}, 0.2)` },
+            { offset: 1, color: `rgba(${rgb}, 0)` },
+          ]),
+        },
+      },
+    ],
+  };
+};
