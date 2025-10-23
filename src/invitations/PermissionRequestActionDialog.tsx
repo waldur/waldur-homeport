@@ -38,8 +38,8 @@ const PurePermissionRequestActionDialog: FunctionComponent<
         !readOnly && (
           <>
             <Button
-              variant="outline btn-outline-danger"
-              className="btn-icon-danger btn-active-icon-white w-150px"
+              variant="danger"
+              className="w-150px"
               disabled={props.invalid || props.submitting}
               onClick={props.handleSubmit((values) => {
                 rejectRequest(values.comment);

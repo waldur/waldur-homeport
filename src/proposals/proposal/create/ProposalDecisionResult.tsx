@@ -71,7 +71,7 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
                 : translate('{count} stars rate', { count: overallScore })}
             </span>
             <Button
-              variant="outline btn-outline-default"
+              variant="tertiary"
               className="ms-auto"
               onClick={() =>
                 dispatch(

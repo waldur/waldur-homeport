@@ -70,11 +70,8 @@ export const NoResult: FC<NoResultProps> = ({
           <div className="d-flex justify-content-center gap-4 w-100">
             {Boolean(callback) && (
               <Button
-                variant="outline"
-                className={classNames(
-                  'btn-outline-default mw-350px',
-                  actions ? 'w-175px' : 'w-50',
-                )}
+                variant="tertiary"
+                className={classNames('mw-350px', actions ? 'w-175px' : 'w-50')}
                 onClick={callback}
               >
                 {buttonTitle}

@@ -24,14 +24,9 @@ export const Step1UploadFile: FC = () => {
               headers: 'email, description',
             })}
           </p>
-          <Button
-            variant="link"
-            size="sm"
-            className="btn-icon-primary"
-            onClick={onDownloadClick}
-          >
+          <Button variant="link" size="sm" onClick={onDownloadClick}>
             <span className="svg-icon svg-icon-2">
-              <FileCsvIcon size={20} weight="bold" className="text-muted" />
+              <FileCsvIcon size={20} weight="bold" />
             </span>
             {translate('Download CSV template')}
           </Button>

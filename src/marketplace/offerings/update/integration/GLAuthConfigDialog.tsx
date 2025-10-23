@@ -19,7 +19,7 @@ export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
         <CopyToClipboard
           value={props.resolve.config}
           label={translate('Copy')}
-          className="btn-outline btn-outline-default w-150px"
+          className="btn-tertiary w-150px"
         />
       }
       footer={

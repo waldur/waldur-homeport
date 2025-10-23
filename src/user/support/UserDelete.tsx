@@ -62,7 +62,7 @@ export const UserDelete = ({ user }: { user: User }) => {
       cardBordered
       actions={
         <Button
-          variant="light-danger"
+          variant="danger"
           onClick={handleDeleteUser}
           disabled={isLoading}
         >

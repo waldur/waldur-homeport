@@ -94,7 +94,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
             {translate('under 2 MB.')} {props.description}
           </div>
           <label
-            className="btn btn-outline btn-outline-default d-inline-flex align-items-center gap-2"
+            className="btn btn-tertiary d-inline-flex align-items-center gap-2"
             data-kt-image-input-action="change"
           >
             {input.value ? (

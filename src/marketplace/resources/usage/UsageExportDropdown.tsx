@@ -235,10 +235,7 @@ export const UsageExportDropdown = (props: UsageExportDropdownProps) => {
   const exportUsages = useUsageExport(props);
 
   return (
-    <DropdownButton
-      variant="outline btn-outline-default"
-      title={translate('Export all')}
-    >
+    <DropdownButton variant="tertiary" title={translate('Export all')}>
       <ActionItem
         title={translate('PNG')}
         action={() => exportUsages('png')}

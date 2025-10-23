@@ -109,7 +109,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
         <div className="d-flex gap-2 mb-4">
           <label
             className={classNames(
-              'btn btn-outline btn-outline-default btn-sm btn-icon-right',
+              'btn btn-tertiary btn-sm btn-icon-right',
               props.disabled && 'disabled',
             )}
             data-image-input-action="change"
@@ -129,9 +129,9 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             />
           </label>
           <Button
-            variant="outline"
+            variant="tertiary"
             size="sm"
-            className="btn-outline-default btn-icon-right"
+            className="btn-icon-right"
             onClick={() => changeImage(initialValue)}
             disabled={props.disabled}
             data-image-input-action="cancel"
@@ -142,9 +142,9 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
             </span>
           </Button>
           <Button
-            variant="outline"
+            variant="tertiary"
             size="sm"
-            className="btn-outline-default btn-icon-right"
+            className="btn-icon-right"
             onClick={() => changeImage(null)}
             disabled={props.disabled}
             data-image-input-action="remove"

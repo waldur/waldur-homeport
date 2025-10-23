@@ -56,8 +56,8 @@ export const CategoriesList: FC = () => {
       {showMoreButton ? (
         <div className="text-center my-3">
           <Button
-            variant="active-secondary"
-            className="btn-color-primary btn-icon-right"
+            variant="text-primary"
+            className="btn-icon-right"
             onClick={() => setShowAll((value) => !value)}
           >
             {showAll ? translate('See less') : translate('See more')}

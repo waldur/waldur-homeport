@@ -147,8 +147,8 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                         </td>
                         <td>
                           <Button
-                            variant="light"
-                            className="btn-icon btn-active-light-danger"
+                            variant="text-danger"
+                            className="btn-icon"
                             onClick={() => fields.remove(index)}
                           >
                             <span className="svg-icon svg-icon-2">
@@ -165,7 +165,7 @@ const renderNodeRows = ({ fields, flavors }: any) => {
           </div>
         </Form.Group>
       )}
-      <Button variant="light" className="text-nowrap" onClick={addRow}>
+      <Button variant="tertiary" className="text-nowrap" onClick={addRow}>
         <span className="svg-icon svg-icon-2">
           <PlusIcon weight="bold" />
         </span>

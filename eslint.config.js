@@ -9,7 +9,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
-
+import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
 import noTemplateInTranslate from './no-template-in-translate.cjs';
 
 const browserGlobals = {
@@ -34,6 +34,11 @@ export default tseslint
         import: importPlugin,
         'react-refresh': reactRefresh,
         local: noTemplateInTranslate,
+        'waldur-custom': {
+          rules: {
+            'enforce-button-variants': enforceButtonVariants,
+          },
+        },
       },
       languageOptions: {
         parserOptions: {
@@ -124,6 +129,7 @@ export default tseslint
             name: 'close',
           },
         ],
+        'waldur-custom/enforce-button-variants': 'error',
       },
     },
     {

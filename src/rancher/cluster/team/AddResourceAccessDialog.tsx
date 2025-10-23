@@ -220,16 +220,14 @@ export const AddResourceAccessDialog = reduxForm<
             <ToggleButton
               value="external-user"
               id="user-type-external-user"
-              variant="outline-default"
-              className="btn-outline btn-active-primary"
+              variant="tertiary"
             >
               {translate('External user')}
             </ToggleButton>
             <ToggleButton
               value="project-member"
               id="user-type-project-member"
-              variant="outline-default"
-              className="btn-outline btn-active-primary"
+              variant="tertiary"
             >
               {translate('Project member')}
             </ToggleButton>

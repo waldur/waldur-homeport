@@ -55,7 +55,7 @@ export const Announcements = () => {
         <div>
           <p>
             {translate('Unable to load announcements')}
-            <Button variant="text" onClick={() => refetch()}>
+            <Button variant="text-secondary" onClick={() => refetch()}>
               {translate('Retry')}
             </Button>
           </p>

@@ -182,9 +182,9 @@ export const TableColumnButton: FC<TableProps> = ({
   >
     <Button
       disabled={mode !== 'table'}
-      variant="outline-default"
+      variant="tertiary"
       size="lg"
-      className="btn-outline btn-icon"
+      className="btn-icon"
     >
       <span className="svg-icon svg-icon-2">
         <GearIcon weight="bold" />

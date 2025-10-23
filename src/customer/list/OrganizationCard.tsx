@@ -97,7 +97,8 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
               <Link
                 state="organization-manage"
                 params={{ uuid: organization.uuid }}
-                className="btn btn-text-primary btn-active-secondary btn-sm"
+                buttonVariant="text-primary"
+                className="btn-sm"
               >
                 {translate('Edit')}
               </Link>
@@ -105,7 +106,8 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
             <OrganizationLink
               uuid={organization.uuid}
               onClick={() => onClickDetails(organization)}
-              className="btn btn-text-primary btn-active-secondary btn-sm"
+              buttonVariant="text-primary"
+              className="btn-sm"
               asButton
             >
               {translate('Details')}

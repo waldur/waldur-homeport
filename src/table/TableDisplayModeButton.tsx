@@ -17,8 +17,8 @@ export const TableDisplayModeButton = (
       }
     >
       <Button
-        variant="outline-default"
-        className="btn-outline btn-icon btn-toggle-mode"
+        variant="tertiary"
+        className="btn-icon btn-toggle-mode"
         size="lg"
         onClick={() =>
           props.setDisplayMode(props.mode === 'grid' ? 'table' : 'grid')

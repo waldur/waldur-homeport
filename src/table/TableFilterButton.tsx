@@ -9,8 +9,8 @@ export const TableFilterButton = ({ onClick, hasFilter = false }) => {
   return (
     <Tip id="table-filter-toggle-tip" label={translate('Set filters')}>
       <Button
-        variant="outline-default"
-        className="btn-outline btn-icon btn-toggle-filters position-relative"
+        variant="tertiary"
+        className="btn-icon btn-toggle-filters position-relative"
         size="lg"
         onClick={onClick}
       >

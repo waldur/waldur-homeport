@@ -213,7 +213,7 @@ export const BrandName: FunctionComponent<BrandNameProps> = ({
       <div className="min-w-24px">
         <div
           id="kt_aside_toggle"
-          className="btn btn-icon btn-sm btn-active-color-primary w-24px"
+          className="btn btn-icon btn-sm border-0 w-24px"
           data-kt-toggle="true"
           data-kt-toggle-state="active"
           data-kt-toggle-target="body"

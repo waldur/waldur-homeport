@@ -31,7 +31,7 @@ export const GroupInvitationCancelButton: FunctionComponent<
           size: 'sm',
           positiveButton: translate('Unsent'),
           negativeButton: translate('Cancel'),
-          positiveButtonVariant: 'light-danger',
+          positiveButtonVariant: 'danger',
           iconNode: <XCircleIcon weight="bold" />,
         },
       );

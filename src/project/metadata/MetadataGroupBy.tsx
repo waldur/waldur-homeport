@@ -15,7 +15,7 @@ export const MetadataGroupBy = ({ value, onChange }) => {
         <ToggleButton
           id="tbg-answer"
           value="answer"
-          variant="outline btn-outline-default"
+          variant="tertiary"
           size="sm"
         >
           {translate('Answer')}
@@ -23,7 +23,7 @@ export const MetadataGroupBy = ({ value, onChange }) => {
         <ToggleButton
           id="tbg-project"
           value="project"
-          variant="outline btn-outline-default"
+          variant="tertiary"
           size="sm"
         >
           {translate('Project')}

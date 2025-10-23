@@ -59,7 +59,7 @@ export const AddProposalDialog = reduxForm<
         iconColor="success"
         footer={
           <>
-            <CloseDialogButton variant="outline btn-outline-default w-125px" />
+            <CloseDialogButton variant="tertiary" className="w-125px" />
             <SubmitButton
               disabled={props.invalid}
               submitting={props.submitting}

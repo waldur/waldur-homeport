@@ -38,7 +38,7 @@ const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
                       </td>
                       <td>
                         <Button
-                          variant="light-danger"
+                          variant="danger"
                           className="btn-icon"
                           onClick={() => removeRow(i)}
                         >
@@ -56,11 +56,7 @@ const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
         </Form.Group>
       )}
       <div>
-        <Button
-          variant="outline"
-          className="btn-outline-default"
-          onClick={addRow}
-        >
+        <Button variant="tertiary" onClick={addRow}>
           <span className="svg-icon svg-icon-2">
             <PlusIcon weight="bold" />
           </span>{' '}

@@ -48,19 +48,13 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
           </div>
         </div>
         <div className="d-flex gap-4 mt-2">
-          <Button
-            variant="outline btn-outline-default"
-            onClick={openErrorTraceDialog}
-          >
+          <Button variant="tertiary" onClick={openErrorTraceDialog}>
             <span className="svg-icon svg-icon-2">
               <EyeIcon weight="bold" />
             </span>
             {translate('Show error trace')}
           </Button>
-          <Button
-            variant="outline btn-outline-default"
-            onClick={() => location.reload()}
-          >
+          <Button variant="tertiary" onClick={() => location.reload()}>
             <span className="svg-icon svg-icon-2">
               <ArrowClockwiseIcon weight="bold" />
             </span>

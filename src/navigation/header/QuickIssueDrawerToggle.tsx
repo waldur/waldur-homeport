@@ -27,11 +27,11 @@ export const QuickIssueDrawerToggle: React.FC = () => {
       <button
         id="quick-issue-toggle"
         type="button"
-        className="btn btn-icon btn-icon-gray-500 btn-active-secondary w-35px h-35px w-md-40px h-md-40px"
+        className="btn-nav-item"
         onClick={openDrawer}
       >
-        <span className="svg-icon" title={translate('Requests')}>
-          <ChatsCircleIcon className="w-20px h-20px" weight="bold" />
+        <span className="svg-icon svg-icon-2" title={translate('Requests')}>
+          <ChatsCircleIcon weight="bold" />
         </span>
       </button>
     </div>

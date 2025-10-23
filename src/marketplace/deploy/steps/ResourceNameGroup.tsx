@@ -32,12 +32,11 @@ const ResourceNameField = (props) => {
   return (
     <div className="d-flex justify-content-between">
       <div className="flex-grow-1 me-3 ">
-        <StringField input={props.input} />
+        <StringField input={props.input} isInvalid={props.isInvalid} />
       </div>
       {project ? (
         <Button
-          variant="outline"
-          className="btn-outline-default"
+          variant="tertiary"
           onClick={() => suggestName()}
           disabled={isLoading}
         >
@@ -51,7 +50,7 @@ const ResourceNameField = (props) => {
           id="ResourceNameField"
           label={translate('Organization and project need to be selected.')}
         >
-          <Button variant="outline" className="btn-outline-default" disabled>
+          <Button variant="tertiary" disabled>
             <span className="svg-icon svg-icon-2">
               <LightbulbFilamentIcon weight="bold" />
             </span>

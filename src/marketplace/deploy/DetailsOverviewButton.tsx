@@ -28,7 +28,7 @@ export const DetailsOverviewButton = ({
   const dispatch = useDispatch();
   return (
     <Button
-      variant="outline btn-outline-default"
+      variant="tertiary"
       className={className}
       disabled={!offering}
       onClick={() =>

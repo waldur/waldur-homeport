@@ -4,204 +4,34 @@
 // are not accessible in this file but you can override any global variable as shown below:
 //
 
-// Theme colors
-// Primary base
-$primary-25: if(isDarkMode(), #103000, #fafcf9);
-$primary-50: if(isDarkMode(), #174000, #f1f7ef);
-$primary-100: if(isDarkMode(), #1f5000, #e6f0e3);
-$primary-200: if(isDarkMode(), #286100, #c3dabb);
-$primary-300: if(isDarkMode(), #307300, #97bf89);
-$primary-400: if(isDarkMode(), #398500, #6ca359);
-$primary-500: if(isDarkMode(), #6ca359, #398500);
-$primary-600: if(isDarkMode(), #97bf89, #307300);
-$primary-700: if(isDarkMode(), #c3dabb, #286100);
-$primary-800: if(isDarkMode(), #e6f0e3, #1f5000);
-$primary-900: if(isDarkMode(), #f1f7ef, #174000);
-$primary-950: if(isDarkMode(), #fafcf9, #103000);
+// Brand colors map
+$brands: (
+  '25': $brand-25,
+  '50': $brand-50,
+  '100': $brand-100,
+  '200': $brand-200,
+  '300': $brand-300,
+  '400': $brand-400,
+  '500': $brand-500,
+  '600': $brand-600,
+  '700': $brand-700,
+  '800': $brand-800,
+  '900': $brand-900,
+) !default;
 
-// Primary
-$primary: if(isDarkMode(), $primary-300, $primary-600);
-$primary-active: if(isDarkMode(), $primary-200, $primary-700);
-$primary-light: if(isDarkMode(), #214729, $primary-50);
-$primary-inverse: if(isDarkMode(), #fff, #fff);
-
-// Secondary
-$secondary: $primary-50 !default;
-$secondary-active: $primary-200 !default;
-$secondary-dark: $primary-300 !default;
-$secondary-light: $primary-50 !default;
-$secondary-inverse: $primary-700 !default;
-$secondary-dark-inverse: $primary-800 !default;
-
-// Light/Gray
-$gray-50: if(isDarkMode(), #161b26, #f9fafb) !default; // Custom variable
-$gray-200: if(isDarkMode(), #333741, #e4e7ec) !default; // Custom variable
-$gray-500: if(isDarkMode(), #94969c, #667085) !default; // Custom variable
-$gray-700: if(isDarkMode(), #ececed, #344054) !default;
-
-// Transparent White
-$white-1: #fff1;
-$white-2: #fff2;
-$white-3: #fff3;
-$white-6: #fff6;
-$white-8: #fff8;
-
-// Brand
-$brand-50: if(isDarkMode(), var(--waldur-brand-900), var(--waldur-brand-50));
-$brand-200: if(isDarkMode(), var(--waldur-brand-700), var(--waldur-brand-200));
-$brand-500: if(isDarkMode(), var(--waldur-brand-400), var(--waldur-brand-500));
-$brand-700: if(isDarkMode(), var(--waldur-brand-200), var(--waldur-brand-700));
-$brand-200-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-700-rgb),
-  var(--waldur-brand-200-rgb)
-);
-$brand-300-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-600-rgb),
-  var(--waldur-brand-300-rgb)
-);
-$brand-700-rgb: if(
-  isDarkMode(),
-  var(--waldur-brand-200-rgb),
-  var(--waldur-brand-700-rgb)
-);
-
-// Success
-$success-50: if(isDarkMode(), #054f31, #ecfdf3);
-$success-200: if(isDarkMode(), #027a48, #a6f4c5);
-$success-300: if(isDarkMode(), #039855, #6ce9a6);
-$success-400: if(isDarkMode(), #12b76a, #32d583);
-$success-500: if(isDarkMode(), #32d583, #12b76a);
-$success-600: if(isDarkMode(), #6ce9a6, #039855);
-$success-700: if(isDarkMode(), #a6f4c5, #027a48);
-$success-900: if(isDarkMode(), #ecfdf3, #054f31);
-$success: $success-600;
-$success-active: if(isDarkMode(), #22c100, $success-700);
-$success-light: if(isDarkMode(), #1c3238, $success-50);
-$success-inverse: #ffffff;
-
-// Info
-$info-50: if(isDarkMode(), #3e1c96, #f4f3ff);
-$info-200: if(isDarkMode(), #5925dc, #d9d6fe);
-$info-300: if(isDarkMode(), #6938ef, #bdb4fe);
-$info-400: if(isDarkMode(), #7a5af8, #9b8afb);
-$info-500: if(isDarkMode(), #9b8afb, #7a5af8);
-$info-600: if(isDarkMode(), #bdb4fe, #6938ef);
-$info-700: if(isDarkMode(), #d9d6fe, #5925dc);
-$info-900: if(isDarkMode(), #f4f3ff, #3e1c96);
-$info: $info-600;
-$info-active: if(isDarkMode(), #7337ee, $info-700);
-$info-light: if(isDarkMode(), #2f264f, $info-50);
-$info-inverse: #ffffff;
-
-// Danger
-$danger-50: if(isDarkMode(), #7a271a, #fef3f2) !default;
-$danger-200: if(isDarkMode(), #b42318, #fecdca) !default;
-$danger-300: if(isDarkMode(), #d92d20, #fda29b) !default;
-$danger-400: if(isDarkMode(), #f04438, #f97066) !default;
-$danger-500: if(isDarkMode(), #f97066, #f04438) !default;
-$danger-600: if(isDarkMode(), #fda29b, #d92d20) !default;
-$danger-700: if(isDarkMode(), #fecdca, #b42318) !default;
-$danger-900: if(isDarkMode(), #fef3f2, #7a271a) !default;
-$danger: $danger-600;
-$danger-active: if(isDarkMode(), #f5641e, $danger-700);
-$danger-light: if(isDarkMode(), #3a2434, $danger-50);
-$danger-inverse: #ffffff;
-
-// Warning
-$warning-50: if(isDarkMode(), #7a2e0e, #fffaeb) !default;
-$warning-200: if(isDarkMode(), #b54708, #fedf89) !default;
-$warning-300: if(isDarkMode(), #dc6803, #fec84b) !default;
-$warning-400: if(isDarkMode(), #f79009, #fdb022) !default;
-$warning-500: if(isDarkMode(), #fdb022, #f79009) !default;
-$warning-600: if(isDarkMode(), #fec84b, #dc6803) !default;
-$warning-700: if(isDarkMode(), #fedf89, #b54708) !default;
-$warning-900: if(isDarkMode(), #fffaeb, #7a2e0e) !default;
-$warning: $warning-600;
-$warning-active: if(isDarkMode(), #ee9d01, $warning-700);
-$warning-light: if(isDarkMode(), #392f28, $warning-50);
-$warning-inverse: #ffffff;
-
-// Custom colors
-// Pink
-$pink-50: if(isDarkMode(), #851651, #fdf2fa) !default;
-$pink-200: if(isDarkMode(), #c11574, #fcceee) !default;
-$pink-300: if(isDarkMode(), #dd2590, #faa7e0) !default;
-$pink-500: if(isDarkMode(), #f670c7, #ee46bc) !default;
-$pink-600: if(isDarkMode(), #faa7e0, #dd2590) !default;
-$pink-700: if(isDarkMode(), #fcceee, #c11574) !default;
-$pink-900: if(isDarkMode(), #fdf2fa, #851651) !default;
-
-// Blue
-$blue-50: if(isDarkMode(), #194185, #eff8ff) !default;
-$blue-200: if(isDarkMode(), #175cd3, #b2ddff) !default;
-$blue-300: if(isDarkMode(), #1570ef, #84caff) !default;
-$blue-500: if(isDarkMode(), #53b1fd, #2e90fa) !default;
-$blue-600: if(isDarkMode(), #84caff, #1570ef) !default;
-$blue-700: if(isDarkMode(), #b2ddff, #175cd3) !default;
-$blue-900: if(isDarkMode(), #eff8ff, #194185) !default;
-
-// Teal (Blue light)
-$teal-50: if(isDarkMode(), #134e48, #f0fdf9) !default;
-$teal-200: if(isDarkMode(), #107569, #99f6e0) !default;
-$teal-300: if(isDarkMode(), #0e9384, #5fe9d0) !default;
-$teal-500: if(isDarkMode(), #2ed3b7, #15b79e) !default;
-$teal-600: if(isDarkMode(), #5fe9d0, #0e9384) !default;
-$teal-700: if(isDarkMode(), #99f6e0, #107569) !default;
-$teal-900: if(isDarkMode(), #f0fdf9, #134e48) !default;
-
-// Indigo
-$indigo-50: if(isDarkMode(), #2d3282, #eef4ff) !default;
-$indigo-200: if(isDarkMode(), #3538cd, #c7d7fe) !default;
-$indigo-300: if(isDarkMode(), #444ce7, #a4bcfd) !default;
-$indigo-500: if(isDarkMode(), #8098f9, #6172f3) !default;
-$indigo-600: if(isDarkMode(), #a4bcfd, #444ce7) !default;
-$indigo-700: if(isDarkMode(), #c7d7fe, #3538cd) !default;
-$indigo-900: if(isDarkMode(), #eef4ff, #2d3282) !default;
-
-// Purple
-$purple-50: if(isDarkMode(), #3e1c96, #f4f3ff) !default;
-$purple-200: if(isDarkMode(), #5925dc, #d9d6fe) !default;
-$purple-300: if(isDarkMode(), #6938ef, #bdb4fe) !default;
-$purple-500: if(isDarkMode(), #9b8afb, #7a5af8) !default;
-$purple-600: if(isDarkMode(), #bdb4fe, #6938ef) !default;
-$purple-700: if(isDarkMode(), #d9d6fe, #5925dc) !default;
-$purple-900: if(isDarkMode(), #f4f3ff, #3e1c96) !default;
-
-// Rose
-$rose-50: if(isDarkMode(), #89123e, #fff1f3) !default;
-$rose-200: if(isDarkMode(), #c01048, #fecdd6) !default;
-$rose-300: if(isDarkMode(), #e31b54, #fea3b4) !default;
-$rose-500: if(isDarkMode(), #fd6f8e, #f63d68) !default;
-$rose-600: if(isDarkMode(), #fea3b4, #e31b54) !default;
-$rose-700: if(isDarkMode(), #fecdd6, #c01048) !default;
-$rose-900: if(isDarkMode(), #fff1f3, #89123e) !default;
-
-// Orange
-$orange-50: if(isDarkMode(), #7e2410, #fff6ed) !default;
-$orange-200: if(isDarkMode(), #c4320a, #fddcab) !default;
-$orange-300: if(isDarkMode(), #ec4a0a, #feb273) !default;
-$orange-500: if(isDarkMode(), #fd853a, #fb6514) !default;
-$orange-600: if(isDarkMode(), #feb273, #ec4a0a) !default;
-$orange-700: if(isDarkMode(), #fddcab, #c4320a) !default;
-$orange-900: if(isDarkMode(), #fff6ed, #7e2410) !default;
-
-// Moss
-$moss-50: if(isDarkMode(), #2b4212, #f5fbee) !default;
-$moss-200: if(isDarkMode(), #3f621a, #ceeab0) !default;
-$moss-300: if(isDarkMode(), #4f7a21, #acdc79) !default;
-$moss-500: if(isDarkMode(), #86cb3c, #669f2a) !default;
-$moss-600: if(isDarkMode(), #acdc79, #4f7a21) !default;
-$moss-700: if(isDarkMode(), #ceeab0, #3f621a) !default;
-$moss-900: if(isDarkMode(), #f5fbee, #2b4212) !default;
-
-$dropdown-item-padding-x: 16px;
-$dropdown-item-padding-y: 10px;
-$dropdown-link-hover-color: $gray-700;
-$dropdown-link-hover-bg: $gray-50;
-$dropdown-link-active-color: $gray-700;
-$dropdown-link-active-bg: $gray-50;
+$brands-rgb: (
+  '25': $brand-25-rgb,
+  '50': $brand-50-rgb,
+  '100': $brand-100-rgb,
+  '200': $brand-200-rgb,
+  '300': $brand-300-rgb,
+  '400': $brand-400-rgb,
+  '500': $brand-500-rgb,
+  '600': $brand-600-rgb,
+  '700': $brand-700-rgb,
+  '800': $brand-800-rgb,
+  '900': $brand-900-rgb,
+) !default;
 
 // Dark colors
 $theme-dark-colors: (
@@ -301,6 +131,108 @@ $theme-700-colors: (
   'orange': $orange-700,
 ) !default; // Custom variable
 
+// Button variants
+/* prettier-ignore */
+$button-variants: (
+  'primary': (
+    'contained': (
+      'enabled': (bg: $btn-primary-bg, text: $text-white),
+      'hovered': (bg: $btn-primary-bg_hover, text: $text-white),
+      'focused': (bg: $btn-primary-bg_hover, text: $text-white, ring: $ring-primary-100),
+      'pressed': (bg: $btn-primary-bg_pressed, text: $text-white),
+      'disabled': (bg: $btn-bg-disable, text: $fg-disabled),
+    ),
+    'text': (
+      'enabled': (bg: transparent, text: $text-brand-secondary, icon: $fg-brand-secondary),
+      'hovered': (bg: $btn-secondary-bg, text: $text-brand-secondary, icon: $fg-brand-secondary),
+      'focused': (bg: $btn-secondary-bg_hover, text: $text-brand-secondary, icon: $fg-brand-secondary, ring: $ring-primary-100),
+      'pressed': (bg: transparent, text: $text-brand-primary, icon: $fg-brand-secondary),
+      'disabled': (bg: transparent, text: $fg-disabled),
+    ),
+  ),
+  'secondary': (
+    'contained': (
+      'enabled': (bg: $btn-secondary-bg, text: $text-brand-primary, icon: $fg-brand-secondary, border: $border-brand),
+      'hovered': (bg: $btn-secondary-bg_hover, text: $text-brand-primary, icon: $fg-brand-secondary, border: $border-brand),
+      'focused': (bg: $btn-secondary-bg_hover, text: $text-brand-primary, icon: $fg-brand-secondary, border: $border-brand, ring: $ring-primary-100),
+      'pressed': (bg: $btn-secondary-bg_pressed, text: $text-brand-primary, icon: $fg-brand-secondary),
+      'disabled': (bg: $btn-bg-disable, text: $fg-disabled),
+    ),
+    'text': (
+      'enabled': (bg: transparent, text: $text-secondary, icon: $fg-quaternary),
+      'hovered': (bg: $bg-tertiary, text: $text-secondary, icon: $fg-quinary),
+      'focused': (bg: $bg-tertiary, text: $text-secondary, icon: $fg-quinary, ring: $ring-gray-200),
+      'pressed': (bg: transparent, text: $text-secondary, icon: $fg-tertiary),
+      'disabled': (bg: transparent, text: $fg-disabled),
+    ),
+  ),
+  'tertiary': (
+    'contained': (
+      'enabled': (bg: $btn-tertiary-bg, text: $text-secondary, icon: $fg-quaternary, border: $border-primary),
+      'hovered': (bg: $btn-tertiary-bg_hover, text: $text-secondary, icon: $fg-quaternary, border: $border-primary),
+      'focused': (bg: $btn-tertiary-bg_hover, text: $text-secondary, icon: $fg-quaternary, border: $border-primary, ring: $ring-gray-100),
+      'pressed': (bg: $btn-tertiary-bg_pressed, text: $text-secondary, icon: $fg-quaternary, border: $btn-tertiary-border_pressed),
+      'disabled': (bg: $btn-bg-disable, text: $fg-disabled),
+    ),
+  ),
+  'danger': (
+    'contained': (
+      'enabled': (bg: $btn-error-bg, text: $text-error-primary, border: $border-error),
+      'hovered': (bg: $btn-error-bg_hover, text: $text-error-primary, icon: $fg-error-secondary, border: $border-error),
+      'focused': (bg: $btn-error-bg, text: $text-error-primary, icon: $fg-error-secondary, ring: $ring-error-100),
+      'pressed': (bg: $btn-error-bg_pressed, text: $text-primary_on-brand, icon: $fg-white),
+      'disabled': (bg: $btn-bg-disable, text: $fg-disabled),
+    ),
+    'text': (
+      'enabled': (bg: transparent, text: $danger-700, icon: $fg-error-primary),
+      'hovered': (bg: $btn-error-bg_hover, text: $text-error-primary, icon: $fg-error-secondary),
+      'focused': (bg: $btn-error-bg, text: $text-error-primary, icon: $fg-error-secondary, ring: $ring-error-100),
+      'pressed': (bg: transparent, text: $text-error-primary, icon: $fg-error-secondary),
+      'disabled': (bg: transparent, text: $fg-disabled),
+    ),
+  ),
+  'warning': (
+    'contained': (
+      'enabled': (bg: $btn-warning-bg, text: $text-warning-primary, border: $fg-warning-secondary),
+      'hovered': (bg: $btn-warning-bg_hover, text: $text-warning-primary, icon: $fg-warning-secondary),
+      'focused': (bg: $btn-warning-bg, text: $text-warning-primary, icon: $fg-warning-secondary, ring: $ring-warning-100),
+      'pressed': (bg: $btn-warning-bg_pressed, text: $text-primary_on-brand, icon: $fg-white),
+      'disabled': (bg: $btn-bg-disable, text: $fg-disabled),
+    ),
+    'text': (
+      'enabled': (bg: transparent, text: $warning-600, icon: $fg-warning-secondary),
+      'hovered': (bg: $btn-warning-bg_hover, text: $text-warning-primary, icon: $fg-warning-secondary),
+      'focused': (bg: $btn-warning-bg, text: $text-warning-primary, icon: $fg-warning-secondary, ring: $ring-warning-100),
+      'pressed': (bg: transparent, text: $text-warning-primary, icon: $fg-warning-secondary),
+      'disabled': (bg: transparent, text: $fg-disabled),
+    ),
+  ),
+  'success': (
+    'contained': (
+      'enabled': (bg: $btn-success-bg, text: $text-success-primary, border: $border-success),
+      'hovered': (bg: $btn-success-bg_hover, text: $text-success-primary, icon: $fg-success-secondary, border: $border-success),
+      'focused': (bg: $btn-success-bg, text: $text-success-primary, icon: $fg-success-secondary, ring: $ring-success-100),
+      'pressed': (bg: $btn-success-bg_pressed, text: $text-primary_on-brand, icon: $fg-white),
+      'disabled': (bg: $btn-bg-disable, text: $fg-disabled),
+    ),
+    'text': (
+      'enabled': (bg: transparent, text: $success-700, icon: $fg-success-primary),
+      'hovered': (bg: $btn-success-bg_hover, text: $text-success-primary, icon: $fg-success-secondary),
+      'focused': (bg: $btn-success-bg, text: $text-success-primary, icon: $fg-success-secondary, ring: $ring-success-100),
+      'pressed': (bg: transparent, text: $text-success-primary, icon: $fg-success-secondary),
+      'disabled': (bg: transparent, text: $fg-disabled),
+    ),
+  ),
+) !default; // Custom variable
+
+// -----------------------------
+// Components
+
+// Border Radiues
+$border-radius-sm: 6px !default;
+$border-radius: 8px !default;
+$border-radius-lg: 8px !default;
+
 // Card
 $card-py: 1.23rem !default;
 $card-px: 1.85rem !default;
@@ -313,6 +245,26 @@ $btn-padding-y-sm: $input-btn-padding-y-sm !default;
 $btn-padding-x-sm: 0.54rem !default;
 
 $btn-disabled-opacity: 1 !default;
+
+// Form inputs
+$input-padding-y: 0.692rem !default;
+$input-padding-x: 0.925rem !default;
+$input-font-size: 1.23rem !default;
+$input-font-weight: 400 !default;
+
+$input-color: $text-primary !default;
+$input-placeholder-color: $text-placeholder !default;
+$input-bg: $bg-primary !default;
+$input-border-color: $border-primary !default;
+$input-box-shadow: unset !default;
+$input-disabled-bg: $bg-disabled_subtle !default;
+$input-disabled-color: $text-disabled !default; // Custom variable
+$input-focus-border-color: $border-brand !default;
+$input-focus-box-shadow: 0 0 0 1px $border-brand !default;
+
+$form-feedback-invalid-color: $border-error;
+$form-focus-feedback-invalid-color: $border-error-solid; // Custom variable
+$form-feedback-icon-invalid-color: $fg-error-secondary;
 
 // Check & Radio
 $form-check-input-width: 1.539rem !default;
@@ -328,6 +280,16 @@ $form-switch-width: 3.386rem !default;
 $form-switch-height: 1.85rem !default; // Custom variable
 $form-switch-width-sm: 2.77rem !default; // Custom variable
 $form-switch-height-sm: 1.54rem !default; // Custom variable
+
+// Dropdown
+$gray-50: if(isDarkMode(), #161b26, #f9fafb);
+$gray-700: if(isDarkMode(), #ececed, #344054);
+$dropdown-item-padding-x: 16px;
+$dropdown-item-padding-y: 10px;
+$dropdown-link-hover-color: $gray-700;
+$dropdown-link-hover-bg: $gray-50;
+$dropdown-link-active-color: $gray-700;
+$dropdown-link-active-bg: $gray-50;
 
 // Modals
 

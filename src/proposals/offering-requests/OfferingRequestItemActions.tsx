@@ -88,7 +88,7 @@ export const OfferingRequestItemActions = ({
       <RowActionButton
         action={accept}
         title={translate('Accept')}
-        variant="light-primary"
+        variant="secondary"
         pending={isAcceptLoading || isRejectLoading}
         size="sm"
       />
@@ -96,7 +96,7 @@ export const OfferingRequestItemActions = ({
       <RowActionButton
         action={reject}
         title={translate('Reject')}
-        variant="light-danger"
+        variant="danger"
         pending={isAcceptLoading || isRejectLoading}
         size="sm"
       />

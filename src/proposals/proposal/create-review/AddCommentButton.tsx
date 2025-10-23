@@ -19,8 +19,8 @@ export const AddCommentButton = ({
       className={className}
     >
       <Button
-        variant="active-secondary"
-        className="btn-icon btn-icon-primary"
+        variant="text-primary"
+        className="btn-icon"
         onClick={onClick}
         disabled={disabled}
       >

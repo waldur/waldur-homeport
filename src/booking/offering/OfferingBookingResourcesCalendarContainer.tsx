@@ -77,10 +77,10 @@ export const OfferingBookingResourcesCalendarContainer: FunctionComponent<
             <LoadingSpinner />
           ) : (
             <button
-              className="btn btn-icon btn-active-light"
+              className="btn btn-icon btn-text-secondary"
               onClick={() => refetch()}
             >
-              <ArrowsClockwiseIcon />
+              <ArrowsClockwiseIcon weight="bold" />
             </button>
           )}
         </Card.Title>

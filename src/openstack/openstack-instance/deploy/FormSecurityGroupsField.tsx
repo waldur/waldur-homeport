@@ -67,8 +67,8 @@ const ShowPreviewButton = () => {
 
   return (
     <Button
-      variant="outline"
-      className="btn-outline-default text-nowrap"
+      variant="tertiary"
+      className="text-nowrap"
       onClick={callback}
       disabled={!securityGroups?.length}
     >

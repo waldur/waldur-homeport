@@ -63,7 +63,7 @@ const renderDataVolumeRows = ({
       <tr>
         <td colSpan={4}>
           <Button
-            variant="light"
+            variant="tertiary"
             className="text-nowrap"
             onClick={() =>
               fields.push({ size: 1, volume_type: defaultVolumeType })

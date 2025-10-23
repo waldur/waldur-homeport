@@ -18,7 +18,7 @@ export const OrderAttachmentField = ({ required }) => (
           input={input as any}
           accept="application/pdf"
           buttonLabel={translate('Attach file')}
-          className="btn-outline-default btn btn-outline"
+          className="btn btn-tertiary"
         />
         <div className="flex-grow-1 ms-3 align-items-center d-flex">
           <span className="text-muted fs-5">

@@ -10,9 +10,9 @@ import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 
 const CountryRenderer = (option) => (
-  <>
-    <CountryFlag countryCode={option.value} /> {option.label}
-  </>
+  <span>
+    <CountryFlag countryCode={option.value} fontSize={20} /> {option.label}
+  </span>
 );
 
 const Option: FunctionComponent<any> = (props) => (
@@ -28,7 +28,13 @@ const SingleValue: FunctionComponent<any> = (props) => (
 );
 
 const WindowedSelectField = ({ input: { value, onChange }, ...props }) => (
-  <WindowedSelect value={value} onChange={onChange} {...props} />
+  <WindowedSelect
+    value={value}
+    onChange={onChange}
+    {...props}
+    className="metronic-select-container"
+    classNamePrefix="metronic-select"
+  />
 );
 
 export const SelectCountryField: FunctionComponent = () => {

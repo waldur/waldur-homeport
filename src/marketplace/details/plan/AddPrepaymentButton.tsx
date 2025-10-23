@@ -1,6 +1,7 @@
 import { CalendarPlusIcon, XIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { change } from 'redux-form';
 
@@ -100,15 +101,15 @@ export const AddPrepaymentButton = ({
   }
 
   return (
-    <button
-      className="btn-text-primary btn-icon-primary mb-1 btn btn-sm"
-      type="button"
+    <Button
+      variant="text-primary"
+      className="btn-sm mb-1"
       onClick={() => handleAddPrepayment(component)}
     >
       <span className="svg-icon svg-icon-2">
         <CalendarPlusIcon />
       </span>
       {translate('Add prepayment')}
-    </button>
+    </Button>
   );
 };

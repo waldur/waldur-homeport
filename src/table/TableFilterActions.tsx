@@ -67,8 +67,8 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
   return (
     <Stack direction="horizontal" gap={2}>
       <Button
-        variant="active-light-primary"
-        className="btn-text-primary me-auto"
+        variant="text-primary"
+        className="me-auto"
         size="sm"
         onClick={saveFilter}
       >
@@ -76,12 +76,7 @@ export const TableFilterActions: React.FC<TableFilterActionsProps> = (
           ? translate('Update filter')
           : translate('Save filter')}
       </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        className="btn-outline-primary btn-active-light-primary"
-        onClick={props.close}
-      >
+      <Button variant="secondary" size="sm" onClick={props.close}>
         {translate('Cancel')}
       </Button>
       <Button size="sm" onClick={applyCallback}>

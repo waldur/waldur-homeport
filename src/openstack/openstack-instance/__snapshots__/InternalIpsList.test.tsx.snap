@@ -27,7 +27,7 @@ exports[`InternalIpsList > renders list 1`] = `
               </span>
             </div>
             <button
-              class="btn btn-icon btn-active-light"
+              class="btn btn-icon btn-text-secondary"
               type="button"
             >
               <svg
@@ -52,7 +52,7 @@ exports[`InternalIpsList > renders list 1`] = `
             class="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3"
           >
             <button
-              class="btn btn-outline btn-outline-default"
+              class="btn btn-tertiary"
               type="button"
             >
               <span
@@ -167,7 +167,7 @@ exports[`InternalIpsList > renders list 1`] = `
                     >
                       <button
                         aria-expanded="false"
-                        class="btn-icon no-arrow dropdown-toggle btn btn-active-light btn-sm"
+                        class="btn-icon no-arrow dropdown-toggle btn btn-text-secondary btn-sm"
                         id="react-aria-:r0:"
                         type="button"
                       >

@@ -61,11 +61,14 @@ export const ConfirmationDrawerToggle: React.FC = () => {
       <button
         id="pending-confirmations-toggle"
         type="button"
-        className="btn btn-icon btn-icon-gray-500 btn-active-secondary position-relative w-35px h-35px w-md-40px h-md-40px"
+        className="position-relative btn-nav-item"
         onClick={openDrawer}
       >
-        <span className="svg-icon" title={translate('Pending tasks')}>
-          <BellIcon className="w-20px h-20px" weight="bold" />
+        <span
+          className="svg-icon svg-icon-2"
+          title={translate('Pending tasks')}
+        >
+          <BellIcon weight="bold" />
         </span>
         {showBullet && <HeaderButtonBullet />}
       </button>

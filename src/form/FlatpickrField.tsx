@@ -52,7 +52,7 @@ export const FlatpickrField: FC<FlatpickrFieldProps> = ({
       {props.input.value && typeof props.input.value === 'string' ? (
         <button
           type="button"
-          className="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow end-button"
+          className="btn btn-icon btn-circle btn-color-muted w-25px h-25px bg-body shadow end-button"
           onClick={() => props.input.onChange(null)}
           style={{ position: 'absolute', right: 10, top: 10 }}
         >

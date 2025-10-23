@@ -2,25 +2,41 @@
 
 /* BUTTON */
 .btn {
-  border-radius: 7px;
   letter-spacing: 0.56px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  &.disabled,
-  &:disabled {
-    color: $gray-400 !important;
+  &.btn-link.disabled,
+  &.btn-link:disabled {
+    color: $gray-300 !important;
     border-color: transparent !important;
 
     i {
-      color: $gray-400 !important;
+      color: $gray-300 !important;
     }
     .svg-icon {
-      @include svg-icon-color($gray-400, true);
+      @include svg-icon-color($gray-300, true);
     }
     &.dropdown-toggle:after {
-      color: $gray-400 !important;
+      color: $gray-300 !important;
+    }
+  }
+
+  &.btn-icon.disabled,
+  &.btn-icon:disabled {
+    background-color: $bg-disabled_subtle !important;
+    color: $fg-disabled !important;
+    border-color: transparent !important;
+
+    i {
+      color: $fg-disabled !important;
+    }
+    .svg-icon {
+      @include svg-icon-color($fg-disabled, true);
+    }
+    &.dropdown-toggle:after {
+      color: $fg-disabled !important;
     }
   }
 
@@ -28,5 +44,15 @@
   &.btn-icon.btn-lg {
     height: 3.385rem;
     width: 3.385rem;
+  }
+}
+
+.up-down-buttons {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: middle;
+
+  > button {
+    display: flex;
   }
 }

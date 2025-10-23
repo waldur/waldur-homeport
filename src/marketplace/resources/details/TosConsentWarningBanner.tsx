@@ -77,7 +77,7 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
         </div>
         <div className="ms-auto">
           <Button
-            variant="light"
+            variant="tertiary"
             size="sm"
             onClick={handleViewTos}
             className="ms-3"

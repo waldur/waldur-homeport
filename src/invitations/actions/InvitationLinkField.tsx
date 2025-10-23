@@ -21,7 +21,7 @@ export const InvitationLinkField = ({ invitation }) => {
         <CopyToClipboardButton
           value={link}
           size={20}
-          buttonClassName="btn btn-active-secondary btn-icon"
+          buttonClassName="btn btn-text-secondary btn-icon"
           onlyButton
         />
       </div>

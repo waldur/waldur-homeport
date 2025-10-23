@@ -99,7 +99,7 @@ export const ResourceImportDialog = connect<{}, {}, ImportDialogProps>(
                 <CloseDialogButton className="flex-equal" />
               ) : (
                 <Button
-                  variant="outline btn-outline-default"
+                  variant="tertiary"
                   className="flex-equal"
                   onClick={() => setStep((current) => current - 1)}
                 >

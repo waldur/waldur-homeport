@@ -16,14 +16,15 @@ import { SearchToggle } from './search/SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
 
 const AsideMobileToggle: FunctionComponent = () => (
-  <div
-    className="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"
+  <button
+    className="btn-nav-item me-1"
     id="kt_aside_mobile_toggle"
+    type="button"
   >
-    <span className="svg-icon svg-icon-1">
-      <ListIcon />
+    <span className="svg-icon svg-icon-1x">
+      <ListIcon weight="bold" />
     </span>
-  </div>
+  </button>
 );
 
 interface AppHeaderProps {

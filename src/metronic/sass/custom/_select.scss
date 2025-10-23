@@ -1,46 +1,56 @@
 .metronic-select-container {
   .metronic-select {
     &__control {
-      border-radius: 8px;
-      border-color: $gray-300;
-      font-size: 1.2rem;
-      font-weight: 400;
-      background-color: if(isDarkMode(), $gray-25, $white);
+      border-radius: $input-border-radius;
+      border-color: $input-border-color;
+      font-size: $input-font-size;
+      font-weight: $input-font-weight;
+      background-color: $input-bg;
 
       &--is-focused,
       &--is-focused:hover {
-        border-color: $brand-300;
-        box-shadow: 0 0 0 4px rgba($brand-300-rgb, 0.25);
+        border-color: $input-focus-border-color;
+        box-shadow: $input-focus-box-shadow;
       }
 
       &--is-disabled {
-        background-color: if(isDarkMode(), $gray-100, $gray-200);
+        background-color: $bg-disabled;
         .metronic-select__placeholder {
-          color: if(isDarkMode(), $gray-300, $gray-500);
+          color: $text-disabled;
         }
       }
     }
 
     &__value-container {
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
-      padding-left: 10px;
+      padding-top: calc($input-padding-y - 4px);
+      padding-bottom: calc($input-padding-y - 4px);
+      padding-left: calc($input-padding-x - 2px);
     }
 
     &__placeholder {
-      color: $gray-500;
+      color: $text-placeholder;
     }
 
     &__indicator {
-      color: $gray-700;
+      color: $fg-quinary;
 
       &-separator {
         display: none;
       }
     }
+    &__clear-indicator {
+      padding-right: 4px;
 
-    // dropdown-indicator rotate
+      &:hover {
+        color: $fg-quaternary;
+      }
+    }
+
     &__dropdown-indicator {
+      margin-right: 8px;
+      padding-right: 4px;
+      padding-left: 4px;
+      // dropdown-indicator rotate
       transition: $rotate-transition;
       backface-visibility: hidden;
     }
@@ -51,6 +61,10 @@
         [direction='rtl'] & {
           transform: rotateZ(-180deg);
         }
+
+        &:hover {
+          color: $fg-quaternary;
+        }
       }
     }
 
@@ -59,14 +73,16 @@
       gap: 6px;
 
       .badge {
-        color: $gray-700;
-        border: 1px solid $gray-200;
-        background-color: transparent;
+        color: $text-secondary;
+        border: 1px solid $border-primary;
+        background-color: $bg-primary;
         padding: 4px 8px;
+        border-radius: $border-radius-sm;
         display: flex;
         align-items: center;
         font-size: $font-size-lg;
-        font-weight: 500;
+        font-weight: 400;
+        line-height: 20px;
       }
     }
   }
@@ -102,22 +118,23 @@
 
 // Menu/List
 .metronic-select__menu {
-  border-radius: 8px !important;
+  border-radius: $border-radius !important;
 
   .metronic-select__menu-list {
     .metronic-select__option {
-      padding: 12px 16px;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
       column-gap: 0.5rem;
+      font-size: $input-font-size;
+      color: $text-primary;
 
       &--is-selected,
       &--is-focused {
-        color: $dark;
-        background-color: $gray-50;
+        background-color: $bg-secondary;
 
         &:active {
-          background-color: $gray-200;
+          background-color: $bg-tertiary;
         }
       }
 
@@ -157,6 +174,7 @@
             background-repeat: no-repeat;
             background-position: 50%;
             background-color: transparent;
+            scale: 1.25; // = 20px
           }
         }
       }
@@ -167,7 +185,10 @@
         column-gap: 12px;
 
         &--is-focused {
-          background-color: $gray-50;
+          background-color: $bg-secondary;
+        }
+        &:active {
+          background-color: $bg-tertiary;
         }
       }
     }

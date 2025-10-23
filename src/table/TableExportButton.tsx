@@ -21,8 +21,7 @@ export const TableExportButton: FunctionComponent<
     />
   ) : (
     <Button
-      variant="outline-default"
-      className="btn-outline"
+      variant="tertiary"
       size="lg"
       onClick={() => openExportDialog(props.table, 'clipboard', props)}
       disabled={props.rows?.length === 0}

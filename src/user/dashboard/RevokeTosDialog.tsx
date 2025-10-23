@@ -61,14 +61,14 @@ export const RevokeTosDialog = ({
       footer={
         <>
           <Button
-            variant="outline btn-outline-default"
+            variant="tertiary"
             className="flex-equal"
             onClick={() => dispatch(closeModalDialog())}
           >
             {translate('Cancel')}
           </Button>
           <Button
-            variant="light-danger"
+            variant="danger"
             className="flex-equal"
             onClick={handleRevoke}
           >

@@ -33,11 +33,7 @@ export const FormButtons: FC<FormButtonsProps> = ({
     </>
   ) : step === 2 ? (
     <>
-      <Button
-        variant="outline btn-outline-default"
-        className="w-150px"
-        onClick={() => setStep(1)}
-      >
+      <Button variant="tertiary" className="w-150px" onClick={() => setStep(1)}>
         <div className="svg-icon svg-icon-2">
           <CaretLeftIcon />
         </div>

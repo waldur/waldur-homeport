@@ -60,7 +60,7 @@ export const CookiesConsentDialog: FC<OwnProps> = ({ resolve }) => {
           <>
             <Button
               onClick={resolve.acceptEssential}
-              variant="outline btn-outline-default"
+              variant="tertiary"
               className="flex-equal"
             >
               {translate('Deny analytical cookies')}

@@ -13,7 +13,7 @@ export const CallProposalsButton = ({ call }) =>
           call: JSON.stringify(call),
         })
       }
-      variant="light"
+      variant="tertiary"
     >
       {translate('My Proposals')}
     </Button>

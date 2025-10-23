@@ -59,7 +59,7 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
             {actions?.length && (
               <Dropdown>
                 <Dropdown.Toggle
-                  variant="active-light-primary"
+                  variant="text-secondary"
                   size="sm"
                   bsPrefix="btn-icon"
                   className="h-25px w-25px"

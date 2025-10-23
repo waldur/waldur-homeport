@@ -138,8 +138,8 @@ const FieldsListGroup = ({
               </h6>
               <div className="card-toolbar m-0">
                 <Button
-                  variant="active-light-danger"
-                  className="btn-icon btn-icon-danger"
+                  variant="text-danger"
+                  className="btn-icon"
                   onClick={() => removeRow(i)}
                 >
                   <span className="svg-icon svg-icon-1">
@@ -251,12 +251,7 @@ const FieldsListGroup = ({
         );
       })}
       <div>
-        <Button
-          variant="active-secondary"
-          className="btn-text-primary btn-icon-primary"
-          onClick={addRow}
-          disabled={addDisabled}
-        >
+        <Button variant="text-primary" onClick={addRow} disabled={addDisabled}>
           <span className="svg-icon svg-icon-2">
             <PlusIcon weight="bold" />
           </span>

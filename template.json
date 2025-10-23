@@ -96749,6 +96749,7 @@
       ],
       "components": [
         "Field",
+        "FinalField",
         "BaseSelect",
         "FormGroup"
       ],
@@ -96789,6 +96790,7 @@
       "jsx_context": {
         "tags": [
           "Field",
+          "FinalField",
           "BaseSelect"
         ],
         "conditional_render": true
@@ -96812,77 +96814,6 @@
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Select": {
-    "message": "Select",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "generic_element",
-        "title"
-      ],
-      "components": [
-        "FinalField"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 6,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general",
-          "marketplace"
-        ],
-        "feature_areas": [
-          "form",
-          "actions"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "form/AsyncSelectField.tsx",
-          "marketplace/offerings/actions/SetAccessPolicyFormContainer.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "FinalField"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Enter comma-separated values": {
@@ -136674,7 +136605,8 @@
       ],
       "components": [
         "ModalDialog",
-        "Form"
+        "Form",
+        "Button"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -136710,7 +136642,7 @@
       "jsx_context": {
         "tags": [
           "ModalDialog",
-          "button"
+          "Button"
         ],
         "conditional_render": false
       },
@@ -144790,6 +144722,68 @@
   },
   "Parent": {
     "message": "Parent",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/actions/SetAccessPolicyFormContainer.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Select": {
+    "message": "Select",
     "context": {
       "primary_ui_type": "title",
       "ui_types": [

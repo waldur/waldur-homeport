@@ -150,7 +150,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
             <ActionButton
               title={translate('Disable service provider profile')}
               action={deleteServiceProvider}
-              variant="outline btn-outline-danger"
+              variant="danger"
               pending={isDeleting}
             />
           ) : !serviceProvider && canRegisterServiceProvider ? (

@@ -88,7 +88,7 @@ export const RejectByProviderButton: FunctionComponent<
     <ActionItem
       as={props.as}
       className={
-        props.as === Button ? 'btn-light-danger btn-sm w-100' : 'text-danger'
+        props.as === Button ? 'btn-danger btn-sm w-100' : 'text-danger'
       }
       title={translate('Reject')}
       action={mutate}

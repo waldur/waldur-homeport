@@ -109,9 +109,9 @@ export const AvailableOrganizationsToJoin: FC = () => {
                 {values?.invitation?.uuid ? (
                   <>
                     <Button
-                      variant="text"
+                      variant="icon"
                       size="sm"
-                      className="btn-icon btn-no-focus btn-icon-gray-700 btn-active-icon-danger me-2"
+                      className="btn-no-focus btn-icon-gray-700 btn-active-icon-danger me-2"
                       onClick={() => form.change('invitation', null)}
                     >
                       <span className="svg-icon svg-icon-3">

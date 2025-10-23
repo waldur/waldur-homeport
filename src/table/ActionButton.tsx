@@ -35,7 +35,7 @@ export const wrapTooltip = (label, children, rest?) =>
 
 const ActionButtonPure: FC<ActionButtonProps> = ({
   className,
-  variant = 'outline btn-outline-default',
+  variant = 'tertiary',
   ...props
 }) =>
   wrapTooltip(
@@ -77,17 +77,15 @@ export const ActionButton: FC<ActionButtonProps> = (props) => {
 
 export const RowActionButton: FC<ActionButtonProps> = ({
   className,
-  variant = 'outline-dark',
+  variant = 'tertiary',
   ...props
 }) =>
   wrapTooltip(
     props.tooltip,
     <Button
-      className={classNames(
-        'btn-outline border-gray-400 btn-active-secondary bg-gray-25 px-2',
-        className,
-        { disabled: props.disabled || props.pending },
-      )}
+      className={classNames(className, {
+        disabled: props.disabled || props.pending,
+      })}
       onClick={props.action}
       variant={variant}
       size={props.size}

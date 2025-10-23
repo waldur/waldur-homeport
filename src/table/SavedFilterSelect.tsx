@@ -34,9 +34,9 @@ const Control = (props) => (
     </components.Control>
     {Boolean(props.getValue()[0]) && (
       <Button
-        variant="active-light-danger"
+        variant="text-danger"
         size="sm"
-        className="btn-icon btn-text-danger btn-icon-danger me-3"
+        className="btn-icon me-3"
         onClick={(e) => props.remove(e, props.getValue()[0])}
       >
         <span className="svg-icon svg-icon-2">
@@ -52,9 +52,9 @@ const ListOption: FC<OptionProps & { remove }> = (props) => (
     <div className="d-flex justify-content-between align-items-center">
       {props.children}
       <Button
-        variant="active-light-danger"
+        variant="text-danger"
         size="sm"
-        className="btn-remove btn-icon btn-text-danger btn-icon-danger"
+        className="btn-remove btn-icon"
         onClick={(e) => props.remove(e, props.getValue()[0])}
       >
         <span className="svg-icon svg-icon-2">

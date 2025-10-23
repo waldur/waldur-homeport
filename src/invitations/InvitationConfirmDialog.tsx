@@ -72,7 +72,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
             closeAcceptingInvitation={closeAcceptingInvitation}
           />
         ) : (
-          <Button variant="outline btn-outline-default" onClick={closeButton}>
+          <Button variant="tertiary" onClick={closeButton}>
             {translate('Close')}
           </Button>
         )

@@ -58,7 +58,8 @@ const OfferingListItem: FC<{ row: Offering }> = ({ row }) => {
             >
               <OfferingLink
                 offering_uuid={row.uuid}
-                className="btn btn-active-secondary btn-icon btn-icon-gray-700 btn-sm"
+                buttonVariant="text-primary"
+                className="btn-icon btn-sm"
               >
                 <span className="svg-icon svg-icon-2">
                   <PlusCircleIcon weight="bold" />

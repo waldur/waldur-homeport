@@ -58,7 +58,11 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         <div className={props.disabled ? 'opacity-50' : undefined}>
           {props.iconNode && (
             <span
-              className={`svg-icon svg-icon-2 svg-icon-${props.iconColor || 'gray-400'}`}
+              className={classNames(
+                'svg-icon svg-icon-2',
+                Component !== Button &&
+                  `svg-icon-${props.iconColor || 'gray-400'}`,
+              )}
             >
               {props.iconNode}
             </span>

@@ -1,6 +1,7 @@
 import { FactoryIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
+import { Variant } from 'react-bootstrap/esm/types';
 import { Project } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
@@ -15,6 +16,7 @@ import { projectKindOptions } from './utils';
 
 interface OwnProps {
   row: AtLeast<Project, 'uuid' | 'name'>;
+  buttonVariant?: Variant;
   className?: string;
   showIndustry?: boolean;
   showKind?: boolean;
@@ -23,6 +25,7 @@ interface OwnProps {
 
 export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
   row,
+  buttonVariant,
   className,
   children,
   showIndustry = true,
@@ -38,6 +41,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
         params={{ uuid: row.uuid }}
         label={children ? undefined : row.name}
         onClick={onClick}
+        buttonVariant={buttonVariant}
         className={classNames(className, !children && 'ellipsis')}
       >
         {children}

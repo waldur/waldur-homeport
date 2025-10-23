@@ -187,12 +187,9 @@ export const BookingResourceListItem = ({
             )}
             <div className="position-absolute bottom-0 end-0 mb-2">
               <Button
-                variant="light"
+                variant="tertiary"
                 size="sm"
-                className={classNames(
-                  'btn-text-dark',
-                  layout.diffHours < 1.1 ? 'py-1' : undefined,
-                )}
+                className={layout.diffHours < 1.1 ? 'py-1' : undefined}
                 onClick={onClickSeeMore}
               >
                 {translate('See more')}
