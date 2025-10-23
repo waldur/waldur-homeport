@@ -43,7 +43,7 @@ const RowActions = ({ row }) => {
   return (
     <OfferingLink
       offering_uuid={row.uuid}
-      className="btn btn-outline btn-outline-dark btn-sm border-gray-400 btn-active-secondary px-2"
+      className="btn btn-secondary btn-sm"
       disabled={!isAllowed}
     >
       {translate('Deploy')}

@@ -63,10 +63,10 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
       </div>
       <div>
         <Button
-          variant="link"
+          variant="flush"
           size="sm"
           className={classNames(
-            'btn-active-icon-danger attachment-item__delete p-0 btn-icon-right',
+            'btn-active-icon-danger attachment-item__delete btn-icon-right',
             error && 'btn-icon-danger',
           )}
           disabled={!error && progress && progress !== 0}

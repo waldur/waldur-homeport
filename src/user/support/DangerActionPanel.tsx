@@ -25,7 +25,7 @@ export const DangerActionPanel: FC<DangerActionPanelProps> = (props) => {
       cardBordered
       actions={
         <Button
-          variant="light-danger"
+          variant="danger"
           onClick={() => dispatch(openModalDialog(DangerActionDialog, props))}
           disabled={!confirm}
         >

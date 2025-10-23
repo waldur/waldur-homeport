@@ -58,11 +58,7 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
           />
 
           <div>
-            <Button
-              variant="outline btn-outline-default"
-              type="reset"
-              size="sm"
-            >
+            <Button variant="tertiary" type="reset" size="sm">
               {translate('Cancel')}
             </Button>
             <Button type="submit" size="sm" className="ms-2">

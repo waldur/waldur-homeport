@@ -43,17 +43,14 @@ export const LoadingScreen: FunctionComponent<{
                 )}
                 <div className="d-flex gap-4 mt-2">
                   {error.stack && (
-                    <Button variant="btn-default" onClick={() => setShow(true)}>
+                    <Button variant="tertiary" onClick={() => setShow(true)}>
                       <span className="svg-icon svg-icon-2">
                         <EyeIcon weight="bold" />
                       </span>
                       {translate('Show error trace')}
                     </Button>
                   )}
-                  <Button
-                    variant="outline btn-success"
-                    onClick={() => location.reload()}
-                  >
+                  <Button variant="success" onClick={() => location.reload()}>
                     <span className="svg-icon svg-icon-2">
                       <ArrowClockwiseIcon weight="bold" />
                     </span>

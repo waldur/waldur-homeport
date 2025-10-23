@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren, useMemo } from 'react';
+import { Variant } from 'react-bootstrap/esm/types';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
@@ -9,6 +10,7 @@ interface OwnProps {
   className?: string;
   onClick?(): void;
   asButton?: boolean;
+  buttonVariant?: Variant;
 }
 
 const PERMISSION_MAP = {
@@ -25,6 +27,7 @@ export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
   onClick,
   className,
   asButton,
+  buttonVariant,
   children,
 }) => {
   const user = useSelector(getUser);
@@ -58,6 +61,7 @@ export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
         params={{ uuid }}
         onClick={onClick}
         className={className}
+        buttonVariant={buttonVariant}
       >
         {children}
       </Link>
@@ -67,7 +71,13 @@ export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
   // Fallback rendering for users without link permissions
   if (asButton) {
     return (
-      <button type="button" className={className} disabled>
+      <button
+        type="button"
+        className={
+          className + (buttonVariant ? 'btn btn-' + buttonVariant : '')
+        }
+        disabled
+      >
         {children}
       </button>
     );

@@ -91,7 +91,7 @@ const AllResultsTabContent = ({
           {!isCurrentPageFavorite && (
             <Button
               variant="link"
-              className="btn-icon-primary ms-8"
+              className="ms-8"
               onClick={addCurrentPageFavorite}
             >
               <span className="svg-icon svg-icon-2">

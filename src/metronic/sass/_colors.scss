@@ -1,0 +1,376 @@
+// -----------------------------
+// Original Bootstrap Variables
+
+// Bootstrap base colors
+$white: #ffffff !default;
+$black: #000000 !default;
+$gray-25: if(isDarkMode(), #0c111d, #fcfcfd) !default; // Custom variable
+$gray-50: if(isDarkMode(), #161b26, #f9fafb) !default; // Custom variable
+$gray-100: if(isDarkMode(), #1f242f, #f2f4f7) !default;
+$gray-200: if(isDarkMode(), #333741, #e4e7ec) !default;
+$gray-300: if(isDarkMode(), #61646c, #d0d5dd) !default;
+$gray-400: if(isDarkMode(), #85888e, #98a2b3) !default;
+$gray-500: if(isDarkMode(), #94969c, #667085) !default;
+$gray-600: if(isDarkMode(), #cecfd2, #475467) !default;
+$gray-700: if(isDarkMode(), #ececed, #344054) !default;
+$gray-800: if(isDarkMode(), #f0f1f1, #182230) !default;
+$gray-900: if(isDarkMode(), #f5f5f6, #101828) !default;
+$gray-950: if(isDarkMode(), #fafafa, #0c111d) !default; // Custom variable
+
+$text-muted: $gray-500 !default;
+
+// Dark Mode
+$dark-mode-page-bg-color: $gray-50 !default;
+
+// Bootstrap custom colors
+$blue: #009ef6 !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #198754 !default;
+$teal: #20c997 !default;
+$cyan: #0dcaf0 !default;
+
+// Bootstrap contextual colors
+// Dark colors
+$dark: $gray-900 !default; // Bootstrap variable
+$dark-active: if(
+  isDarkMode(),
+  darken($gray-900, 9%),
+  darken($gray-900, 3%)
+) !default;
+$dark-light: #253629 !default; // Custom variable
+$dark-inverse: if(isDarkMode(), $gray-100, $white) !default; // Custom variable
+$dark-always: #181c32 !default; // Custom variable
+
+// Light colors
+$light: if(isDarkMode(), $gray-300, $gray-100) !default; // Bootstrap variable
+$light-active: if(
+  isDarkMode(),
+  $gray-400,
+  $gray-200
+) !default; // Custom variable
+$light-inverse: if(
+  isDarkMode(),
+  $gray-800,
+  $gray-600
+) !default; // Custom variable
+$lighten: rgba($light, 0.5); // Custom variable
+
+// White colors
+$white: $white !default; // Bootstrap variable
+$white-active: $gray-100 !default; // Custom variable
+$white-inverse: if(
+  isDarkMode(),
+  $gray-200,
+  $gray-600
+) !default; // Custom variable
+
+// -----------------------------
+
+// Theme colors
+// Primary base
+$primary-25: if(isDarkMode(), #103000, #fafcf9);
+$primary-50: if(isDarkMode(), #174000, #f1f7ef);
+$primary-100: if(isDarkMode(), #1f5000, #e6f0e3);
+$primary-200: if(isDarkMode(), #286100, #c3dabb);
+$primary-300: if(isDarkMode(), #307300, #97bf89);
+$primary-400: if(isDarkMode(), #398500, #6ca359);
+$primary-500: if(isDarkMode(), #6ca359, #398500);
+$primary-600: if(isDarkMode(), #97bf89, #307300);
+$primary-700: if(isDarkMode(), #c3dabb, #286100);
+$primary-800: if(isDarkMode(), #e6f0e3, #1f5000);
+$primary-900: if(isDarkMode(), #f1f7ef, #174000);
+$primary-950: if(isDarkMode(), #fafcf9, #103000);
+
+// Primary
+$primary: if(
+  isDarkMode(),
+  $primary-300,
+  $primary-600
+) !default; // Bootstrap variable
+$primary-active: if(isDarkMode(), $primary-200, $primary-700) !default;
+$primary-light: $primary-50 !default;
+$primary-inverse: #fff !default;
+
+// Brand
+$brand-25: if(isDarkMode(), var(--waldur-brand-950), var(--waldur-brand-25));
+$brand-50: if(isDarkMode(), var(--waldur-brand-900), var(--waldur-brand-50));
+$brand-100: if(isDarkMode(), var(--waldur-brand-800), var(--waldur-brand-100));
+$brand-200: if(isDarkMode(), var(--waldur-brand-700), var(--waldur-brand-200));
+$brand-300: if(isDarkMode(), var(--waldur-brand-600), var(--waldur-brand-300));
+$brand-400: if(isDarkMode(), var(--waldur-brand-500), var(--waldur-brand-400));
+$brand-500: if(isDarkMode(), var(--waldur-brand-400), var(--waldur-brand-500));
+$brand-600: if(isDarkMode(), var(--waldur-brand-300), var(--waldur-brand-600));
+$brand-700: if(isDarkMode(), var(--waldur-brand-200), var(--waldur-brand-700));
+$brand-800: if(isDarkMode(), var(--waldur-brand-100), var(--waldur-brand-800));
+$brand-900: if(isDarkMode(), var(--waldur-brand-50), var(--waldur-brand-900));
+$brand-950: if(isDarkMode(), var(--waldur-brand-25), var(--waldur-brand-950));
+$brand: $brand-600;
+$brand-active: $brand-700;
+$brand-light: $brand-50;
+$brand-inverse: #ffffff;
+$brand-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-300-rgb),
+  var(--waldur-brand-600-rgb)
+);
+$brand-25-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-950-rgb),
+  var(--waldur-brand-25-rgb)
+);
+$brand-50-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-900-rgb),
+  var(--waldur-brand-50-rgb)
+);
+$brand-100-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-800-rgb),
+  var(--waldur-brand-100-rgb)
+);
+$brand-200-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-700-rgb),
+  var(--waldur-brand-200-rgb)
+);
+$brand-300-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-600-rgb),
+  var(--waldur-brand-300-rgb)
+);
+$brand-400-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-500-rgb),
+  var(--waldur-brand-400-rgb)
+);
+$brand-500-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-400-rgb),
+  var(--waldur-brand-500-rgb)
+);
+$brand-600-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-300-rgb),
+  var(--waldur-brand-600-rgb)
+);
+$brand-700-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-200-rgb),
+  var(--waldur-brand-700-rgb)
+);
+$brand-800-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-100-rgb),
+  var(--waldur-brand-800-rgb)
+);
+$brand-900-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-50-rgb),
+  var(--waldur-brand-900-rgb)
+);
+$brand-950-rgb: if(
+  isDarkMode(),
+  var(--waldur-brand-25-rgb),
+  var(--waldur-brand-950-rgb)
+);
+
+// Secondary
+$secondary: $primary-50 !default; // Bootstrap variable
+$secondary-active: $primary-200 !default;
+$secondary-dark: $primary-300 !default;
+$secondary-light: $primary-50 !default;
+$secondary-inverse: $primary-700 !default;
+$secondary-dark-inverse: $primary-800 !default;
+
+// Transparent White
+$white-1: #fff1;
+$white-2: #fff2;
+$white-3: #fff3;
+$white-6: #fff6;
+$white-8: #fff8;
+
+// Success
+$success-25: if(isDarkMode(), #053321, #f6fef9) !default;
+$success-50: if(isDarkMode(), #054f31, #ecfdf3) !default;
+$success-100: if(isDarkMode(), #05603a, #dcfae6) !default;
+$success-200: if(isDarkMode(), #027a48, #a6f4c5) !default;
+$success-300: if(isDarkMode(), #039855, #6ce9a6) !default;
+$success-400: if(isDarkMode(), #12b76a, #32d583) !default;
+$success-500: if(isDarkMode(), #32d583, #12b76a) !default;
+$success-600: if(isDarkMode(), #6ce9a6, #039855) !default;
+$success-700: if(isDarkMode(), #a6f4c5, #027a48) !default;
+$success-800: if(isDarkMode(), #dcfae6, #05603a) !default;
+$success-900: if(isDarkMode(), #ecfdf3, #054f31) !default;
+$success-950: if(isDarkMode(), #f6fef9, #053321) !default;
+$success: $success-600 !default; // Bootstrap variable
+$success-active: $success-700 !default;
+$success-light: $success-50 !default;
+$success-inverse: #ffffff !default;
+
+// Info
+$info-50: if(isDarkMode(), #3e1c96, #f4f3ff) !default;
+$info-200: if(isDarkMode(), #5925dc, #d9d6fe) !default;
+$info-300: if(isDarkMode(), #6938ef, #bdb4fe) !default;
+$info-400: if(isDarkMode(), #7a5af8, #9b8afb) !default;
+$info-500: if(isDarkMode(), #9b8afb, #7a5af8) !default;
+$info-600: if(isDarkMode(), #bdb4fe, #6938ef) !default;
+$info-700: if(isDarkMode(), #d9d6fe, #5925dc) !default;
+$info-900: if(isDarkMode(), #f4f3ff, #3e1c96) !default;
+$info: $info-600 !default; // Bootstrap variable
+$info-active: $info-700 !default;
+$info-light: $info-50 !default;
+$info-inverse: #ffffff !default;
+
+// Danger
+$danger-25: if(isDarkMode(), #55160c, #fffbfa) !default;
+$danger-50: if(isDarkMode(), #7a271a, #fef3f2) !default;
+$danger-100: if(isDarkMode(), #912018, #fee4e2) !default;
+$danger-200: if(isDarkMode(), #b42318, #fecdca) !default;
+$danger-300: if(isDarkMode(), #d92d20, #fda29b) !default;
+$danger-400: if(isDarkMode(), #f04438, #f97066) !default;
+$danger-500: if(isDarkMode(), #f97066, #f04438) !default;
+$danger-600: if(isDarkMode(), #fda29b, #d92d20) !default;
+$danger-700: if(isDarkMode(), #fecdca, #b42318) !default;
+$danger-800: if(isDarkMode(), #fee4e2, #912018) !default;
+$danger-900: if(isDarkMode(), #fef3f2, #7a271a) !default;
+$danger-950: if(isDarkMode(), #fffbfa, #55160c) !default;
+$danger: $danger-600 !default; // Bootstrap variable
+$danger-active: $danger-700 !default;
+$danger-light: $danger-50 !default;
+$danger-inverse: #ffffff !default;
+
+// Warning
+$warning-25: if(isDarkMode(), #4e1d09, #fffcf5) !default;
+$warning-50: if(isDarkMode(), #7a2e0e, #fffaeb) !default;
+$warning-100: if(isDarkMode(), #93370d, #fef0c7) !default;
+$warning-200: if(isDarkMode(), #b54708, #fedf89) !default;
+$warning-300: if(isDarkMode(), #dc6803, #fec84b) !default;
+$warning-400: if(isDarkMode(), #f79009, #fdb022) !default;
+$warning-500: if(isDarkMode(), #fdb022, #f79009) !default;
+$warning-600: if(isDarkMode(), #fec84b, #dc6803) !default;
+$warning-700: if(isDarkMode(), #fedf89, #b54708) !default;
+$warning-800: if(isDarkMode(), #fef0c7, #93370d) !default;
+$warning-900: if(isDarkMode(), #fffaeb, #7a2e0e) !default;
+$warning-950: if(isDarkMode(), #fffcf5, #4e1d09) !default;
+$warning: $warning-600 !default; // Bootstrap variable
+$warning-active: $warning-700 !default;
+$warning-light: $warning-50 !default;
+$warning-inverse: #ffffff !default;
+
+// Custom colors
+// Pink
+$pink-50: if(isDarkMode(), #851651, #fdf2fa) !default;
+$pink-200: if(isDarkMode(), #c11574, #fcceee) !default;
+$pink-300: if(isDarkMode(), #dd2590, #faa7e0) !default;
+$pink-500: if(isDarkMode(), #f670c7, #ee46bc) !default;
+$pink-600: if(isDarkMode(), #faa7e0, #dd2590) !default;
+$pink-700: if(isDarkMode(), #fcceee, #c11574) !default;
+$pink-900: if(isDarkMode(), #fdf2fa, #851651) !default;
+$pink-950: #4e0d30 !default;
+$pink: if(isDarkMode(), $pink-500, $pink-500);
+$pink-active: if(isDarkMode(), $pink-600, $pink-700);
+$pink-light: if(isDarkMode(), $pink-950, $pink-50);
+$pink-inverse: #ffffff;
+
+// Blue
+$blue-50: if(isDarkMode(), #194185, #eff8ff) !default;
+$blue-200: if(isDarkMode(), #175cd3, #b2ddff) !default;
+$blue-300: if(isDarkMode(), #1570ef, #84caff) !default;
+$blue-500: if(isDarkMode(), #53b1fd, #2e90fa) !default;
+$blue-600: if(isDarkMode(), #84caff, #1570ef) !default;
+$blue-700: if(isDarkMode(), #b2ddff, #175cd3) !default;
+$blue-900: if(isDarkMode(), #eff8ff, #194185) !default;
+$blue-950: #102a56 !default;
+$blue: if(isDarkMode(), $blue-500, $blue-500);
+$blue-active: if(isDarkMode(), $blue-600, $blue-700);
+$blue-light: if(isDarkMode(), $blue-950, $blue-50);
+$blue-inverse: #ffffff;
+
+// Teal (Blue light)
+$teal-50: if(isDarkMode(), #134e48, #f0fdf9) !default;
+$teal-200: if(isDarkMode(), #107569, #99f6e0) !default;
+$teal-300: if(isDarkMode(), #0e9384, #5fe9d0) !default;
+$teal-500: if(isDarkMode(), #2ed3b7, #15b79e) !default;
+$teal-600: if(isDarkMode(), #5fe9d0, #0e9384) !default;
+$teal-700: if(isDarkMode(), #99f6e0, #107569) !default;
+$teal-900: if(isDarkMode(), #f0fdf9, #134e48) !default;
+$teal-950: #0a2926 !default;
+$teal: if(isDarkMode(), $teal-500, $teal-500);
+$teal-active: if(isDarkMode(), $teal-600, $teal-700);
+$teal-light: if(isDarkMode(), $teal-950, $teal-50);
+$teal-inverse: #ffffff;
+
+// Indigo
+$indigo-50: if(isDarkMode(), #2d3282, #eef4ff) !default;
+$indigo-200: if(isDarkMode(), #3538cd, #c7d7fe) !default;
+$indigo-300: if(isDarkMode(), #444ce7, #a4bcfd) !default;
+$indigo-500: if(isDarkMode(), #8098f9, #6172f3) !default;
+$indigo-600: if(isDarkMode(), #a4bcfd, #444ce7) !default;
+$indigo-700: if(isDarkMode(), #c7d7fe, #3538cd) !default;
+$indigo-900: if(isDarkMode(), #eef4ff, #2d3282) !default;
+$indigo-950: #1f235b !default;
+$indigo: if(isDarkMode(), $indigo-500, $indigo-500);
+$indigo-active: if(isDarkMode(), $indigo-600, $indigo-700);
+$indigo-light: if(isDarkMode(), $indigo-950, $indigo-50);
+$indigo-inverse: #ffffff;
+
+// Purple
+$purple-50: if(isDarkMode(), #3e1c96, #f4f3ff) !default;
+$purple-200: if(isDarkMode(), #5925dc, #d9d6fe) !default;
+$purple-300: if(isDarkMode(), #6938ef, #bdb4fe) !default;
+$purple-500: if(isDarkMode(), #9b8afb, #7a5af8) !default;
+$purple-600: if(isDarkMode(), #bdb4fe, #6938ef) !default;
+$purple-700: if(isDarkMode(), #d9d6fe, #5925dc) !default;
+$purple-900: if(isDarkMode(), #f4f3ff, #3e1c96) !default;
+$purple-950: #27115f !default;
+$purple: if(isDarkMode(), $purple-500, $purple-500);
+$purple-active: if(isDarkMode(), $purple-600, $purple-700);
+$purple-light: if(isDarkMode(), $purple-950, $purple-50);
+$purple-inverse: #ffffff;
+
+// Rose
+$rose-50: if(isDarkMode(), #89123e, #fff1f3) !default;
+$rose-200: if(isDarkMode(), #c01048, #fecdd6) !default;
+$rose-300: if(isDarkMode(), #e31b54, #fea3b4) !default;
+$rose-500: if(isDarkMode(), #fd6f8e, #f63d68) !default;
+$rose-600: if(isDarkMode(), #fea3b4, #e31b54) !default;
+$rose-700: if(isDarkMode(), #fecdd6, #c01048) !default;
+$rose-900: if(isDarkMode(), #fff1f3, #89123e) !default;
+$rose-950: #510b24 !default;
+$rose: if(isDarkMode(), $rose-500, $rose-500);
+$rose-active: if(isDarkMode(), $rose-600, $rose-700);
+$rose-light: if(isDarkMode(), $rose-950, $rose-50);
+$rose-inverse: #ffffff;
+
+// Orange
+$orange-50: if(isDarkMode(), #7e2410, #fff6ed) !default;
+$orange-200: if(isDarkMode(), #c4320a, #fddcab) !default;
+$orange-300: if(isDarkMode(), #ec4a0a, #feb273) !default;
+$orange-500: if(isDarkMode(), #fd853a, #fb6514) !default;
+$orange-600: if(isDarkMode(), #feb273, #ec4a0a) !default;
+$orange-700: if(isDarkMode(), #fddcab, #c4320a) !default;
+$orange-900: if(isDarkMode(), #fff6ed, #7e2410) !default;
+$orange-950: #57130a !default;
+$orange: if(isDarkMode(), $orange-500, $orange-500);
+$orange-active: if(isDarkMode(), $orange-600, $orange-700);
+$orange-light: if(isDarkMode(), $orange-950, $orange-50);
+$orange-inverse: #ffffff;
+
+// Moss
+$moss-50: if(isDarkMode(), #2b4212, #f5fbee) !default;
+$moss-200: if(isDarkMode(), #3f621a, #ceeab0) !default;
+$moss-300: if(isDarkMode(), #4f7a21, #acdc79) !default;
+$moss-500: if(isDarkMode(), #86cb3c, #669f2a) !default;
+$moss-600: if(isDarkMode(), #acdc79, #4f7a21) !default;
+$moss-700: if(isDarkMode(), #ceeab0, #3f621a) !default;
+$moss-900: if(isDarkMode(), #f5fbee, #2b4212) !default;
+$moss-950: #1a280b !default;
+$moss: if(isDarkMode(), $moss-500, $moss-500);
+$moss-active: if(isDarkMode(), $moss-600, $moss-700);
+$moss-light: if(isDarkMode(), $moss-950, $moss-50);
+$moss-inverse: #ffffff;

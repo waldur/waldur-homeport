@@ -33,7 +33,7 @@ export const ProjectField: FC<ProjectFieldProps> = ({ previewMode }) => {
             title={translate('Add project')}
             variant="link"
             size="sm"
-            className="btn-text-primary btn-icon-primary mb-1"
+            className="mb-1"
           />
         )
       }

@@ -56,13 +56,13 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
         footer={
           <>
             <Button
-              variant="outline btn-outline-default"
+              variant="tertiary"
               className="flex-equal"
               onClick={() => closeDialog()}
             >
               {translate('Cancel')}
             </Button>
-            <Button variant="light-danger" className="flex-equal" type="submit">
+            <Button variant="danger" className="flex-equal" type="submit">
               {translate('Delete')}
             </Button>
           </>

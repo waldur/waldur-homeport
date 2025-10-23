@@ -34,9 +34,9 @@ export const EnvironmentVariablePanel: FunctionComponent<OwnProps> = (
         </td>
         <td>
           <Button
-            variant="icon"
+            variant="text-danger"
             size="sm"
-            className="btn-active-color-danger"
+            className="btn-icon"
             onClick={() => props.onRemove(props.index)}
           >
             <span className="svg-icon svg-icon-2">

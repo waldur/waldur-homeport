@@ -9,7 +9,7 @@ export const ReviewRejectAction = ({ request, refetch, apiMethod }) =>
   request.state === 'pending' ? (
     <DialogActionButton
       title={translate('Reject')}
-      variant="light-danger"
+      variant="danger"
       iconNode={<ProhibitIcon />}
       resource={request}
       modalComponent={ReviewDialog}

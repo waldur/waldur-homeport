@@ -19,7 +19,7 @@ export const RefreshButton = ({
 }: RefreshButtonProps) => {
   return (
     <Button
-      variant="outline btn-outline-default"
+      variant="tertiary"
       className={'min-w-100px' + (className ? ` ${className}` : '')}
       size={size}
       onClick={!isLoading ? refetch : undefined}

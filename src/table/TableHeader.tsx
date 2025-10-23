@@ -3,14 +3,15 @@ import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Button, FormCheck } from 'react-bootstrap';
 
+import { CaretUpDownButtons } from '@waldur/core/CaretUpDownButtons';
 import { translate } from '@waldur/i18n';
-
-import './TableHeader.scss';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { TableProps, Column, Sorting, PinnedColumns } from './types';
 import { getId } from './utils';
+
+import './TableHeader.scss';
 
 interface TableHeaderProps {
   columns: Column[];
@@ -51,38 +52,23 @@ function renderSortingIcon(
 
   return (
     <span>
-      <span className="sorting-buttons">
-        <button
-          type="button"
-          data-testid="sort-asc"
-          onClick={() => onClickSort('asc')}
-          className={classNames(
-            'text-btn',
-            column.orderField === sorting.field &&
-              sorting.mode === 'asc' &&
-              'active',
-          )}
-        >
-          <svg width="16" height="8" fill="currentColor" viewBox="0 0 256 128">
-            <path d="M 126 45 l 39.51 39.52 a 12 12 0 0 0 17 -17 l -48 -48 a 12 12 0 0 0 -17 0 l -48 48 a 12 12 0 0 0 17 17 Z" />
-          </svg>
-        </button>
-        <button
-          type="button"
-          data-testid="sort-desc"
-          onClick={() => onClickSort('desc')}
-          className={classNames(
-            'text-btn',
-            column.orderField === sorting.field &&
-              sorting.mode === 'desc' &&
-              'active',
-          )}
-        >
-          <svg width="16" height="8" fill="currentColor" viewBox="0 0 256 128">
-            <path d="M 184.49 39.51 a 12 12 0 0 1 0 17 l -48 48 a 12 12 0 0 1 -17 0 l -48 -48 a 12 12 0 0 1 17 -17 L 128 79 l 39.51 -39.52 A 12 12 0 0 1 184.49 39.51 Z" />
-          </svg>
-        </button>
-      </span>
+      <CaretUpDownButtons
+        className="sorting-buttons"
+        onClickUp={() => onClickSort('asc')}
+        onClickDown={() => onClickSort('desc')}
+        upClassName={
+          column.orderField === sorting.field &&
+          sorting.mode === 'asc' &&
+          'active'
+        }
+        downClassName={
+          column.orderField === sorting.field &&
+          sorting.mode === 'desc' &&
+          'active'
+        }
+        upTestId="sort-asc"
+        downTestId="sort-desc"
+      />
     </span>
   );
 }

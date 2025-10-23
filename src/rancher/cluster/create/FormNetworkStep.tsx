@@ -41,7 +41,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
       actions={
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-end flex-grow-1">
-            <Button variant="light" className="text-nowrap" size="sm">
+            <Button variant="tertiary" className="text-nowrap" size="sm">
               <span className="svg-icon svg-icon-2">
                 <PlusIcon weight="bold" />
               </span>

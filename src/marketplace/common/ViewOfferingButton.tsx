@@ -1,3 +1,5 @@
+import { Button } from 'react-bootstrap';
+
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
@@ -11,14 +13,15 @@ export const ViewOfferingButton = ({
   disabled?: boolean;
 }) =>
   disabled ? (
-    <button className="btn text-gray-700 btn-active-light btn-sm" disabled>
+    <Button variant="text-primary" className="btn-sm" disabled>
       {translate('Details')}
-    </button>
+    </Button>
   ) : (
     <Link
       state="public-offering.marketplace-public-offering"
       params={{ uuid: offering.uuid }}
-      className="btn btn-text-primary btn-active-secondary btn-sm"
+      buttonVariant="text-primary"
+      className="btn-sm"
     >
       {translate('Details')}
     </Link>

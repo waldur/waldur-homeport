@@ -10,16 +10,12 @@ export const OrderConsumerActions: FC<OrderActionProps> = (props) =>
     <>
       <ApproveByConsumerButton
         {...props}
-        className={
-          props.as === Button ? 'btn-light-success btn-sm' : 'text-success'
-        }
+        className={props.as === Button ? 'btn-success btn-sm' : 'text-success'}
       />
 
       <RejectByConsumerButton
         {...props}
-        className={
-          props.as === Button ? 'btn-light-danger btn-sm' : 'text-danger'
-        }
+        className={props.as === Button ? 'btn-danger btn-sm' : 'text-danger'}
       />
     </>
   ) : null;

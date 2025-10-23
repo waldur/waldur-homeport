@@ -42,11 +42,11 @@ export const SearchToggle = () => {
           className="d-none d-lg-block"
         />
 
-        <div className="btn btn-icon btn-icon-gray-500 btn-active-secondary w-35px h-35px w-md-40px h-md-40px d-lg-none">
-          <span className="svg-icon">
-            <MagnifyingGlassIcon className="w-20px h-20px" weight="bold" />
+        <button className="btn-nav-item d-lg-none" type="button">
+          <span className="svg-icon svg-icon-2">
+            <MagnifyingGlassIcon weight="bold" />
           </span>
-        </div>
+        </button>
       </div>
     </OverlayTrigger>
   );

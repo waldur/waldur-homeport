@@ -1,9 +1,11 @@
 import React, { PropsWithChildren } from 'react';
+import { Variant } from 'react-bootstrap/esm/types';
 
 import { Link } from '@waldur/core/Link';
 
 interface OwnProps {
   offering_uuid: string;
+  buttonVariant?: Variant;
   className?: string;
   disabled?: boolean;
 }
@@ -13,6 +15,7 @@ export const OfferingLink: React.FC<PropsWithChildren<OwnProps>> = (props) => {
     <Link
       state="marketplace-offering-public"
       params={{ offering_uuid: props.offering_uuid }}
+      buttonVariant={props.buttonVariant}
       className={props.className}
     >
       {props.children}

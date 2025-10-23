@@ -73,7 +73,7 @@ export const DestroyBulkSecurityGroupsAction = ({ rows, refetch }) => {
       title={translate('Remove')}
       action={mutate}
       iconNode={<TrashIcon weight="bold" />}
-      variant="light-danger"
+      variant="danger"
       disabled={isPending || !filteredRows.length}
       tooltip={
         !filteredRows.length &&

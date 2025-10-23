@@ -15,7 +15,7 @@ const SubNetRow = ({ SubNet: subnet, onRemove }) => (
       <Field name={`${subnet}.destination`} component={InputField} />
     </td>
     <td>
-      <Button variant="default" onClick={onRemove} size="sm">
+      <Button variant="text-secondary" onClick={onRemove} size="sm">
         <span className="svg-icon svg-icon-2">
           <TrashIcon />
         </span>{' '}
@@ -26,7 +26,7 @@ const SubNetRow = ({ SubNet: subnet, onRemove }) => (
 );
 
 const SubNetAddButton = ({ onClick }) => (
-  <Button variant="default" onClick={onClick} size="sm">
+  <Button variant="text-secondary" onClick={onClick} size="sm">
     <span className="svg-icon svg-icon-2">
       <PlusIcon weight="bold" />
     </span>{' '}

@@ -1,12 +1,14 @@
 import { useSref } from '@uirouter/react';
 import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
+import { Variant } from 'react-bootstrap/esm/types';
 
 interface LinkProps {
   label?: React.ReactNode;
   children?: React.ReactNode;
   state: string;
   params?: object;
+  buttonVariant?: Variant;
   className?: string;
   target?: string;
   onClick?: (e?) => void;
@@ -19,6 +21,7 @@ export const Link: FunctionComponent<LinkProps> = ({
   label,
   onClick,
   target,
+  buttonVariant,
   className,
   ...rest
 }) => {
@@ -33,6 +36,7 @@ export const Link: FunctionComponent<LinkProps> = ({
         e.preventDefault();
       }}
       className={classNames(
+        buttonVariant && 'btn btn-' + buttonVariant,
         className,
         typeof (label || children) === 'string' &&
           !(className || '').includes('btn') &&

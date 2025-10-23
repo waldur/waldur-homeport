@@ -1,0 +1,109 @@
+// Color tokens
+//
+// Text
+$text-primary: $gray-900;
+$text-primary_on-brand: if(isDarkMode(), $gray-900, $white);
+$text-secondary: if(isDarkMode(), $gray-600, $gray-700);
+$text-tertiary: if(isDarkMode(), $gray-500, $gray-600);
+$text-quaternary: $gray-500;
+$text-white: $white;
+$text-disabled: if(isDarkMode(), $gray-400, $gray-300);
+$text-placeholder: $gray-500;
+$text-brand-primary: if(isDarkMode(), $gray-900, $brand-900);
+$text-brand-secondary: if(isDarkMode(), $gray-600, $brand-700);
+$text-brand-tertiary: if(isDarkMode(), $gray-500, $brand-600);
+$text-error-primary: if(isDarkMode(), $danger-500, $danger-600);
+$text-warning-primary: if(isDarkMode(), $warning-500, $warning-600);
+$text-success-primary: if(isDarkMode(), $success-500, $success-600);
+
+// Border
+$border-primary: if(isDarkMode(), $gray-200, $gray-300);
+$border-secondary: if(isDarkMode(), $gray-100, $gray-200);
+$border-tertiary: $gray-100;
+$border-disabled: if(isDarkMode(), $gray-200, $gray-300);
+$border-brand: if(isDarkMode(), $brand-500, $brand-300);
+$border-brand-solid: if(isDarkMode(), $brand-400, $brand-600);
+$border-brand-solid-rgb: if(isDarkMode(), $brand-400-rgb, $brand-600-rgb);
+$border-error: if(isDarkMode(), $danger-500, $danger-300);
+$border-error-solid: if(isDarkMode(), $danger-400, $danger-600);
+$border-warning: if(isDarkMode(), $warning-500, $warning-300);
+$border-warning-solid: if(isDarkMode(), $warning-400, $warning-600);
+$border-success: if(isDarkMode(), $success-500, $success-300);
+$border-success-solid: if(isDarkMode(), $success-400, $success-600);
+
+// Foreground
+$fg-primary: if(isDarkMode(), $white, $gray-900);
+$fg-secondary: if(isDarkMode(), $gray-600, $gray-700);
+$fg-tertiary: if(isDarkMode(), $gray-500, $gray-600);
+$fg-quaternary: $gray-500;
+$fg-quinary: $gray-400;
+$fg-senary: $gray-300;
+$fg-white: $white;
+$fg-disabled: $gray-400;
+$fg-brand-primary: if(isDarkMode(), $gray-400, $brand-600);
+$fg-brand-secondary: if(isDarkMode(), $gray-400, $brand-500);
+$fg-error-primary: if(isDarkMode(), $danger-400, $danger-600);
+$fg-error-secondary: $danger-500;
+$fg-warning-primary: if(isDarkMode(), $warning-300, $warning-600);
+$fg-warning-secondary: if(isDarkMode(), $warning-400, $warning-500);
+$fg-success-primary: if(isDarkMode(), $success-300, $success-600);
+$fg-success-secondary: if(isDarkMode(), $success-400, $success-500);
+
+// Background
+$bg-primary: if(isDarkMode(), $gray-25, $white);
+$bg-primary-solid: if(isDarkMode(), $gray-50, $gray-900);
+$bg-secondary: $gray-50;
+$bg-secondary-solid: if(isDarkMode(), $gray-300, $gray-600);
+$bg-tertiary: $gray-100;
+$bg-quaternary: $gray-200;
+$bg-active: if(isDarkMode(), $gray-100, $gray-50);
+$bg-disabled: $gray-100;
+$bg-disabled_subtle: $gray-50;
+$bg-overlay: if(isDarkMode(), $gray-100, $gray-900);
+$bg-brand-primary: if(isDarkMode(), $brand-400, $brand-50);
+$bg-brand-secondary: if(isDarkMode(), $brand-300, $brand-100);
+$bg-brand-solid: if(isDarkMode(), $brand-300, $brand-600);
+$bg-brand-section: if(isDarkMode(), $gray-500, $brand-800);
+$bg-error-primary: if(isDarkMode(), $danger-400, $danger-50);
+$bg-error-secondary: if(isDarkMode(), $danger-300, $danger-100);
+$bg-error-solid: if(isDarkMode(), $danger-300, $danger-600);
+$bg-warning-primary: if(isDarkMode(), $warning-400, $warning-50);
+$bg-warning-secondary: if(isDarkMode(), $warning-300, $warning-100);
+$bg-warning-solid: if(isDarkMode(), $warning-300, $warning-600);
+$bg-success-primary: if(isDarkMode(), $success-400, $success-50);
+$bg-success-secondary: if(isDarkMode(), $success-300, $success-100);
+$bg-success-solid: if(isDarkMode(), $success-300, $success-600);
+
+// Button
+$btn-primary-bg: $bg-brand-solid;
+$btn-primary-bg_hover: if(isDarkMode(), $brand-200, $brand-700);
+$btn-primary-bg_pressed: if(isDarkMode(), $brand-100, $brand-800);
+$btn-secondary-bg: $brand-50;
+$btn-secondary-bg_hover: $brand-200;
+$btn-secondary-bg_pressed: $brand-300;
+$btn-tertiary-bg: $bg-primary;
+$btn-tertiary-bg_hover: $bg-secondary;
+$btn-tertiary-bg_pressed: $bg-tertiary;
+$btn-tertiary-border_pressed: $gray-500;
+$btn-error-bg: $danger-50;
+$btn-error-bg_hover: $danger-200;
+$btn-error-bg_pressed: $danger-500;
+$btn-warning-bg: $warning-50;
+$btn-warning-bg_hover: $warning-200;
+$btn-warning-bg_pressed: $warning-600;
+$btn-success-bg: $success-50;
+$btn-success-bg_hover: $success-200;
+$btn-success-bg_pressed: $success-500;
+$btn-bg-disable: $gray-100;
+
+// Ring (use as box-shadow)
+$ring-primary-100: 0 0 0 0.25rem rgba($border-brand-solid-rgb, 1);
+$ring-primary-200: 0 0 0 0.25rem rgba($brand-200-rgb, 1);
+$ring-primary-800: 0 0 0 0.25rem rgba($brand-800-rgb, 1);
+$ring-gray-50: 0 0 0 0.25rem rgba($gray-50, 1);
+$ring-gray-100: 0 0 0 0.25rem rgba($gray-100, 1);
+$ring-gray-200: 0 0 0 0.25rem rgba($gray-200, 1);
+$ring-gray-600: 0 0 0 0.25rem rgba($gray-600, 1);
+$ring-error-100: 0 0 0 0.25rem rgba($border-error-solid, 1);
+$ring-warning-100: 0 0 0 0.25rem rgba($border-warning-solid, 1);
+$ring-success-100: 0 0 0 0.25rem rgba($border-success-solid, 1);

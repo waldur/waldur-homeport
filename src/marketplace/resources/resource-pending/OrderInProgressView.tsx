@@ -151,7 +151,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
             <OrderDetailsLink
               order_uuid={resource.order_in_progress.uuid}
               project_uuid={resource.order_in_progress.project_uuid}
-              className="btn btn-sm btn-outline btn-outline-default"
+              className="btn btn-sm btn-tertiary"
             >
               <span className="svg-icon svg-icon-4">
                 <InfoIcon weight="bold" />

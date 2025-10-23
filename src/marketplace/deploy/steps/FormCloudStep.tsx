@@ -164,7 +164,7 @@ export const FormCloudStep = (props: FormStepProps) => {
               <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />
             </div>
             <div className="d-flex gap-10 justify-content-end">
-              <Button variant="light" className="text-nowrap" size="sm">
+              <Button variant="tertiary" className="text-nowrap" size="sm">
                 <span className="svg-icon svg-icon-2">
                   <PlusIcon weight="bold" />
                 </span>

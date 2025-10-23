@@ -312,8 +312,8 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
       ) : (
         <Tip id="table-add-filter-tip" label={translate('Add filter')}>
           <Button
-            variant="outline"
-            className="btn-outline-default btn-icon btn-add-filter w-40px h-40px"
+            variant="tertiary"
+            className="btn-icon btn-add-filter w-40px h-40px"
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom-start"

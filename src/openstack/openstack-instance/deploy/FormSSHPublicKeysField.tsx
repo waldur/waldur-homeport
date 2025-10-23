@@ -63,8 +63,8 @@ export const FormSSHPublicKeysField = ({ change, ...props }: OwnProps) => {
       verboseName={translate('SSH keys')}
       tableActions={
         <Button
-          variant="outline"
-          className="btn-outline-default text-nowrap"
+          variant="tertiary"
+          className="text-nowrap"
           onClick={openFormDialog}
         >
           <span className="svg-icon svg-icon-2">

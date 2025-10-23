@@ -71,17 +71,17 @@ export const ProposalDetails = ({
         {canPerformDecisionActions && isCallManagerView && (
           <>
             <Button
-              variant="btn btn-icon btn-primary"
+              variant="primary"
               onClick={handleApproveProposal}
-              className="w-100 mt-2"
+              className="btn-icon w-100 mt-2"
             >
               <CheckCircleIcon className="me-1" />
               {translate('Accept')}
             </Button>
             <Button
-              variant="btn btn-icon btn-light-danger"
+              variant="danger"
               onClick={handleRejectProposal}
-              className="w-100 mt-2"
+              className="btn-icon w-100 mt-2"
             >
               <XCircleIcon className="me-1" />
               {translate('Reject')}

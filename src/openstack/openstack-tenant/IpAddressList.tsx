@@ -21,7 +21,7 @@ const IPAddressRow = ({ address, onRemove }) => (
       />
     </td>
     <td>
-      <Button variant="default" onClick={onRemove} size="sm">
+      <Button variant="text-secondary" onClick={onRemove} size="sm">
         <span className="svg-icon svg-icon-2">
           <TrashIcon />
         </span>{' '}
@@ -32,7 +32,7 @@ const IPAddressRow = ({ address, onRemove }) => (
 );
 
 const IPAddressAddButton = ({ onClick }) => (
-  <Button variant="default" onClick={onClick} size="sm">
+  <Button variant="text-secondary" onClick={onClick} size="sm">
     <span className="svg-icon svg-icon-2">
       <PlusIcon weight="bold" />
     </span>{' '}

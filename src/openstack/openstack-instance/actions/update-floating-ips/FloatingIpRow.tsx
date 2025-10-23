@@ -56,7 +56,7 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
       </td>
       <td>
         <Button
-          variant="default"
+          variant="text-secondary"
           title={translate('Delete')}
           onClick={onRemove}
         >

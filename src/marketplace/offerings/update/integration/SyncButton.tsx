@@ -50,11 +50,7 @@ export const SyncButton = ({ offering, refetch }) => {
   const enabled = ['OK', 'ERRED'].includes(offering.scope_state);
 
   return (
-    <Button
-      onClick={callback}
-      variant="outline btn-outline-default"
-      disabled={!enabled}
-    >
+    <Button onClick={callback} variant="tertiary" disabled={!enabled}>
       <span className="svg-icon svg-icon-2">
         {enabled ? (
           <ArrowsClockwiseIcon weight="bold" />

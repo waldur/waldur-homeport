@@ -77,8 +77,9 @@ const FieldsListGroup = ({
               </FormGroup>
 
               <Button
-                variant="active-light-danger"
-                className="btn-icon btn-icon-danger btn-lg mt-1"
+                variant="text-danger"
+                className="btn-icon mt-1"
+                size="lg"
                 onClick={() => removeRow(i)}
               >
                 <span className="svg-icon svg-icon-1">
@@ -103,12 +104,7 @@ const FieldsListGroup = ({
         ))}
       </Form.Group>
       <div className="mt-3">
-        <Button
-          variant="active-secondary"
-          className="btn-text-primary btn-icon-primary"
-          onClick={addRow}
-          disabled={addDisabled}
-        >
+        <Button variant="text-primary" onClick={addRow} disabled={addDisabled}>
           <span className="svg-icon svg-icon-2">
             <PlusIcon weight="bold" />
           </span>

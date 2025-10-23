@@ -353,8 +353,8 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                 <Nav.Item>
                   <Dropdown>
                     <Dropdown.Toggle
-                      variant="active-light-primary"
-                      className="btn-icon btn-text-gray-500 no-arrow w-35px h-35px"
+                      variant="text-secondary"
+                      className="btn-icon no-arrow w-35px h-35px"
                     >
                       <DotsThreeIcon size={22} weight="bold" />
                       {wrappedComponents.some((comp) =>

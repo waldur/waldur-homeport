@@ -22,7 +22,7 @@ export const StatisticsCard: React.FC<StatisticsCardProps> = ({
           <Link
             state={to.state}
             params={to.params}
-            className="btn btn-outline btn-outline-default"
+            className="btn btn-tertiary"
           >
             {translate('View all')}
           </Link>

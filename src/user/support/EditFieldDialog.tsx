@@ -51,10 +51,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
             headerLess
             footer={
               <>
-                <CloseDialogButton
-                  variant="outline btn-outline-default"
-                  className="flex-equal"
-                />
+                <CloseDialogButton variant="tertiary" className="flex-equal" />
 
                 <SubmitButton
                   disabled={invalid || !dirty}

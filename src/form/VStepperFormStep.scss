@@ -14,11 +14,11 @@
   &.step-disabled {
     .form-control,
     .metronic-select__control {
-      background-color: var(--bs-gray-200);
+      background-color: var(--bs-gray-50);
       cursor: not-allowed;
     }
     .btn {
-      background-color: var(--bs-gray-100);
+      background-color: var(--bs-gray-50);
       cursor: not-allowed;
     }
 

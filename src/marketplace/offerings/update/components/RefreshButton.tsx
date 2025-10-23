@@ -13,7 +13,7 @@ export const RefreshButton = (props: RefreshButtonProps) =>
   ) : (
     <button
       type="button"
-      className="btn btn-icon btn-active-light btn-color-muted"
+      className="btn btn-icon btn-text-secondary"
       onClick={props.refetch}
     >
       <ArrowsClockwiseIcon size={20} data-cy="loading-spinner" weight="bold" />

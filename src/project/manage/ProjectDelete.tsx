@@ -20,7 +20,7 @@ export const ProjectDelete: FC<ProjectDeleteProps> = ({ project }) => {
       title={translate('Delete project')}
       cardBordered
       actions={
-        <Button variant="light-danger" onClick={callback}>
+        <Button variant="danger" onClick={callback}>
           <span className="svg-icon svg-icon-2">
             <TrashIcon weight="bold" />
           </span>

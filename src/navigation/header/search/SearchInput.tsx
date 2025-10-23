@@ -4,6 +4,7 @@ import {
   XIcon,
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
+import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
@@ -83,15 +84,16 @@ export const SearchInput = ({
             )}
             data-kt-search-element="toolbar"
           >
-            <button
-              type="button"
+            <Button
+              variant="text-primary"
               data-kt-search-element="advanced-options-form-show"
-              className="btn btn-icon w-20px btn-sm btn-active-color-primary"
+              size="sm"
+              className="btn-icon w-20px"
               data-bs-toggle="tooltip"
               title="Show more search options"
             >
               <CaretDownIcon size={30} />
-            </button>
+            </Button>
           </div>
         )}
       </form>

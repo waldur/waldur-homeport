@@ -57,8 +57,8 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
       </td>
       <td width={60}>
         <Button
-          variant="active-light-danger"
-          className="btn-icon btn-icon-danger"
+          variant="text-danger"
+          className="btn-icon"
           onClick={onRemove}
           disabled={disabled}
         >
@@ -125,8 +125,7 @@ const DraggableFieldsListGroup = ({
                 <td />
                 <td colSpan={2}>
                   <Button
-                    variant="active-secondary"
-                    className="btn-text-primary btn-icon-primary"
+                    variant="text-primary"
                     onClick={addRow}
                     disabled={addDisabled}
                   >

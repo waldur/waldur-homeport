@@ -113,14 +113,14 @@ export const AnalyticsAndReports = () => {
                   key={option.value}
                   id={'tbg-' + option.value}
                   value={option.value}
-                  variant="outline btn-outline-default"
+                  variant="tertiary"
                 >
                   {option.label}
                 </ToggleButton>
               ))}
             </ToggleButtonGroup>
           )}
-          <Button variant="outline btn-outline-default">
+          <Button variant="tertiary">
             <span className="svg-icon svg-icon-2">
               <ExportIcon weight="bold" />
             </span>

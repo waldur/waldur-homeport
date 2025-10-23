@@ -47,7 +47,7 @@ export const CommentActions = ({ comment }) => {
       {(user.is_staff || user.uuid === comment.author_uuid) && (
         <>
           <Button
-            variant="outline btn-outline-default"
+            variant="tertiary"
             size="sm"
             className="btn-icon-right me-3"
             disabled={!comment.update_is_available}
@@ -59,7 +59,7 @@ export const CommentActions = ({ comment }) => {
             </span>
           </Button>
           <Button
-            variant="outline btn-outline-default"
+            variant="tertiary"
             size="sm"
             className="btn-icon-right"
             disabled={!comment.destroy_is_available}

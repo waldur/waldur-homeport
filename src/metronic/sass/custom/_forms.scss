@@ -17,23 +17,22 @@
 
 /* FORM CONTROL (INPUT) */
 .form-control {
-  border-radius: 8px;
-  font-size: 1.24rem;
-  color: $dark;
-  box-shadow: unset;
-  font-weight: 400;
-  padding-top: 0.68rem;
-  padding-bottom: 0.68rem;
-
   &:focus {
-    color: $dark;
-    border-color: $brand-300;
-    box-shadow: 0 0 0 4px rgba($brand-300-rgb, 0.25);
+    box-shadow: $input-focus-box-shadow;
   }
 
   &:disabled {
     cursor: not-allowed;
-    background-color: $gray-200;
+    color: $input-disabled-color;
+    border-color: $input-border-color;
+    @include placeholder($input-disabled-color);
+  }
+
+  &.is-invalid:focus,
+  .was-validated &:invalid:focus {
+    border-color: $form-focus-feedback-invalid-color;
+    border-width: 1px;
+    box-shadow: 0 0 0 1px $form-focus-feedback-invalid-color;
   }
 
   &.form-control-solid {
@@ -47,6 +46,19 @@
     &.is-invalid {
       border-color: #f1416c;
     }
+  }
+
+  /** Number input **/
+  /* Hide arrows on number input */
+  /* For WebKit browsers (Chrome, Safari, Edge, Opera) */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* For Firefox */
+  &[type='number'] {
+    -moz-appearance: textfield;
   }
 }
 .form-floating {
@@ -82,8 +94,77 @@
 }
 
 /* INPUT GROUP */
-.input-group .input-group-text {
-  background-color: transparent;
-  color: $gray-500;
-  font-size: 1.24rem;
+.input-group {
+  .input-group-text {
+    background-color: transparent;
+    color: $gray-500;
+    font-size: 1.24rem;
+  }
+
+  .input-group-addons {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  /* NUMBER */
+  &.input-group-number {
+    input[type='number'] {
+      border-radius: $border-radius !important;
+      padding-right: 2.6rem;
+
+      &.has-unit {
+        padding-right: 4.8rem;
+
+        &.is-invalid {
+          padding-right: 6.5rem;
+        }
+      }
+      &.is-invalid {
+        padding-right: 4.8rem;
+      }
+    }
+
+    .up-down-buttons {
+      margin-right: 1rem;
+      z-index: 6;
+
+      > button {
+        color: $fg-quinary;
+        &:hover {
+          color: $fg-quaternary;
+        }
+
+        svg {
+          width: 20px;
+          height: 10px;
+        }
+
+        &:first-child {
+          padding-top: 6px;
+        }
+        &:last-child {
+          padding-bottom: 6px;
+        }
+      }
+    }
+
+    .has-unit ~ .input-group-addons .up-down-buttons {
+      margin-right: 0;
+    }
+
+    .unit {
+      background: transparent;
+      padding-left: 0.31rem;
+      z-index: 5;
+    }
+
+    .form-control.is-invalid,
+    .was-validated .form-control:invalid {
+      background-position: right 4.4rem center;
+    }
+  }
 }

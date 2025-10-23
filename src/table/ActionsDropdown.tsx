@@ -45,7 +45,7 @@ export const TableDropdownToggle = ({
   label = '',
   disabled = false,
   labeled = false,
-  variant = 'outline btn-outline-default',
+  variant = 'tertiary',
   className = 'min-w-100px w-100',
   size = 'sm',
   tooltip,
@@ -76,7 +76,7 @@ export const TableDropdownToggle = ({
       </Dropdown.Toggle>
     ) : (
       <Dropdown.Toggle
-        variant="active-light"
+        variant="text-secondary"
         className="btn-icon no-arrow"
         disabled={disabled}
         size={size === 'md' ? undefined : size}

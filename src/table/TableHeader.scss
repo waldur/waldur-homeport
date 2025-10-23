@@ -13,13 +13,6 @@
   vertical-align: middle;
 
   .sorting-buttons {
-    display: inline-flex;
-    flex-direction: column;
-    vertical-align: middle;
     margin-left: 4px;
-
-    > button {
-      display: flex;
-    }
   }
 }

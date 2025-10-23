@@ -59,7 +59,7 @@ export const requestToAccessOrganization = (
             size: 'sm',
             positiveButton: translate('Cancel request'),
             onlyPositiveButton: true,
-            positiveButtonVariant: 'light-danger',
+            positiveButtonVariant: 'danger',
             iconNode: <XCircleIcon weight="bold" />,
           },
         );

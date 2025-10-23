@@ -132,8 +132,8 @@ export const EmailsListGroup = ({
                         </td>
                         <td>
                           <Button
-                            variant="active-light-danger"
-                            className="btn-icon btn-icon-danger"
+                            variant="text-danger"
+                            className="btn-icon"
                             onClick={() => removeRow(i)}
                             disabled={fields.length === 1}
                           >
@@ -151,12 +151,7 @@ export const EmailsListGroup = ({
           </Form.Group>
         )}
         <div>
-          <Button
-            variant="active-light-primary"
-            className="btn-icon-primary btn-text-primary"
-            disabled={warn}
-            onClick={addRow}
-          >
+          <Button variant="text-primary" disabled={warn} onClick={addRow}>
             <div className="svg-icon svg-icon-2">
               <PlusIcon weight="bold" />
             </div>

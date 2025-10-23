@@ -37,8 +37,7 @@ export const HookTypeField: FunctionComponent<{ input; defaultValue }> = ({
           key={option.key}
           id={option.key}
           value={option.key}
-          variant="outline-default"
-          className="btn-outline btn-active-primary"
+          variant="tertiary"
         >
           <span className="svg-icon svg-icon-2 me-3">{option.iconClass}</span>
           {option.label}

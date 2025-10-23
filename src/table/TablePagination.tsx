@@ -105,8 +105,8 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
       <div className="table-pagination d-flex d-md-none align-items-center justify-content-between">
         <div className={'page-item me-1' + (prevDisabled ? ' disabled' : '')}>
           <Button
-            variant="outline"
-            className="btn-outline-default btn-icon w-35px h-35px"
+            variant="tertiary"
+            className="btn-icon w-35px h-35px"
             disabled={prevDisabled}
             onClick={() => props.gotoPage(props.currentPage - 1)}
           >
@@ -123,8 +123,8 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
         )}
         <div className={'page-item' + (nextDisabled ? ' disabled' : '')}>
           <Button
-            variant="outline"
-            className="btn-outline-default btn-icon w-35px h-35px"
+            variant="tertiary"
+            className="btn-icon w-35px h-35px"
             disabled={nextDisabled}
             onClick={() => props.gotoPage(props.currentPage + 1)}
           >

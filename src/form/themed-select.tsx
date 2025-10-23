@@ -1,4 +1,8 @@
-import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
+import {
+  CaretDownIcon,
+  MagnifyingGlassIcon,
+  XIcon,
+} from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
 import { FC } from 'react';
@@ -7,6 +11,7 @@ import BaseSelect, {
   ClearIndicatorProps,
   components,
   ControlProps,
+  DropdownIndicatorProps,
   MultiValueProps,
   Props as SelectProps,
   ThemeConfig,
@@ -37,19 +42,18 @@ const REACT_SELECT_MENU_NO_PORTALING: Partial<SelectProps> = {
 };
 
 export const FilterSelectClearIndicator = (props: ClearIndicatorProps) => {
-  const {
-    innerProps: { ref, ...restInnerProps },
-  } = props;
   return (
-    <div {...restInnerProps} ref={ref}>
-      <div
-        style={{ padding: '0px 5px', marginRight: '7px', cursor: 'pointer' }}
-      >
-        <XIcon size={20} weight="bold" className="text-gray-500" />
-      </div>
-    </div>
+    <components.ClearIndicator {...props}>
+      <XIcon size={16} weight="bold" />
+    </components.ClearIndicator>
   );
 };
+
+const SelectDropdownIndicator = (props: DropdownIndicatorProps) => (
+  <components.DropdownIndicator {...props}>
+    <CaretDownIcon size={16} weight="bold" />
+  </components.DropdownIndicator>
+);
 
 export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
   <components.Control {...props}>
@@ -265,6 +269,20 @@ const reorderAsyncOptions = (options, value, getOptionValue, isMulti, page) => {
   }
 };
 
+const composeComponents = (components, isMulti) => {
+  const commonComponents = {
+    ClearIndicator: FilterSelectClearIndicator,
+    DropdownIndicator: SelectDropdownIndicator,
+  };
+  return isMulti
+    ? {
+        ...REACT_MULTI_SELECT.components,
+        ...commonComponents,
+        ...components,
+      }
+    : { ...commonComponents, ...components };
+};
+
 export const Select: FC<CustomSelectProps> = ({
   components = undefined,
   size = undefined,
@@ -272,9 +290,7 @@ export const Select: FC<CustomSelectProps> = ({
   ...props
 }) => {
   const theme = useSelectTheme();
-  const composedComponents = props.isMulti
-    ? { ...REACT_MULTI_SELECT.components, ...components }
-    : components;
+  const composedComponents = composeComponents(components, props.isMulti);
   const className = classNames(
     'metronic-select-container',
     size === 'sm' && 'select-sm',
@@ -318,7 +334,10 @@ export const Select: FC<CustomSelectProps> = ({
   );
 };
 
-export const AsyncPaginate: FC<any> = (props) => {
+export const AsyncPaginate: FC<any> = ({
+  components = undefined,
+  ...props
+}) => {
   const theme = useSelectTheme();
 
   const getOptionValue = props.getOptionValue || ((option) => option.value);
@@ -339,6 +358,8 @@ export const AsyncPaginate: FC<any> = (props) => {
     };
   }
 
+  const composedComponents = composeComponents(components, props.isMulti);
+
   return (
     <BaseAsyncPaginate
       theme={theme}
@@ -346,19 +367,22 @@ export const AsyncPaginate: FC<any> = (props) => {
         page: 1,
       }}
       {...REACT_SELECT_MENU_PORTALING}
+      components={composedComponents}
       {...props}
       loadOptions={wrappedLoadOptions || props.loadOptions}
     />
   );
 };
 
-export const WindowedSelect = (props) => {
+export const WindowedSelect = ({ components = undefined, ...props }) => {
   const theme = useSelectTheme();
+  const composedComponents = composeComponents(components, props.isMulti);
   return (
     <BaseWindowedSelect
       theme={theme}
       {...REACT_SELECT_MENU_PORTALING}
-      {...props}
+      components={composedComponents}
+      {...(props as any)}
     />
   );
 };

@@ -30,7 +30,7 @@ export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
         <Button
           variant="link"
           size="sm"
-          className="btn-active-icon-primary p-0 btn-icon-right"
+          className="btn-icon-right"
           onClick={props.onClick}
         >
           <span className="svg-icon svg-icon-2">

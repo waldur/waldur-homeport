@@ -67,14 +67,12 @@ export const OfferingUsersWarningBar: FC = () => {
               <strong>{translate('Action required for some accounts.')}</strong>{' '}
               {translate(
                 'You have {count} accounts that require attention to complete setup.',
-                {
-                  count,
-                },
+                { count },
               )}
             </span>
           </div>
           <Button
-            variant="light"
+            variant="tertiary"
             size="sm"
             onClick={handleViewAccounts}
             className="ms-3"

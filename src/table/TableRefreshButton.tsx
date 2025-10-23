@@ -18,7 +18,7 @@ export const TableRefreshButton = (props: TableProps) =>
   ) : (
     <button
       type="button"
-      className="btn btn-icon btn-active-light"
+      className="btn btn-icon btn-text-secondary"
       onClick={() => props.fetch(true)}
     >
       <ArrowsClockwiseIcon size={20} data-cy="loading-spinner" />

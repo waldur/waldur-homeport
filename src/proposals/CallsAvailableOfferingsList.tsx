@@ -39,7 +39,7 @@ export const CallsAvailableOfferingsList: FC = () => {
         <Link
           state="calls-for-proposals-all-available-offerings"
           label={translate('View all')}
-          className="btn btn-outline btn-outline-default"
+          className="btn btn-tertiary"
         />
       }
       hasQuery={false}
