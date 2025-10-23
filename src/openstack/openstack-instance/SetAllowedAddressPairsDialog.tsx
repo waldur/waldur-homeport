@@ -51,7 +51,7 @@ const PairRow = ({ pair, onRemove }) => (
       <Field name={`${pair}.mac_address`} component={ValidatedInputField} />
     </td>
     <td>
-      <Button variant="default" onClick={onRemove}>
+      <Button variant="text-secondary" onClick={onRemove}>
         <span className="svg-icon svg-icon-2">
           <TrashIcon />
         </span>{' '}
@@ -62,7 +62,7 @@ const PairRow = ({ pair, onRemove }) => (
 );
 
 const PairAddButton = ({ onClick }) => (
-  <Button variant="default" onClick={onClick}>
+  <Button variant="text-secondary" onClick={onClick}>
     <span className="svg-icon svg-icon-2">
       <PlusIcon weight="bold" />
     </span>{' '}

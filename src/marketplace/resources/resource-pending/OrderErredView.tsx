@@ -44,7 +44,7 @@ const ShowErrorButton = ({ resource }) => {
     );
   };
   return (
-    <Button variant="light-danger" size="sm" onClick={showErrorDialog}>
+    <Button variant="danger" size="sm" onClick={showErrorDialog}>
       <span className="svg-icon svg-icon-4">
         <XCircleIcon weight="bold" />
       </span>
@@ -160,7 +160,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
 
           <div className="d-flex flex-sm-column gap-3 text-nowrap">
             <Button
-              variant="outline btn-outline-default"
+              variant="tertiary"
               size="sm"
               onClick={() => mutate()}
               disabled={isLoading}
@@ -176,7 +176,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
             <OrderDetailsLink
               order_uuid={resource.creation_order.uuid}
               project_uuid={resource.creation_order.project_uuid}
-              className="btn btn-sm btn-outline btn-outline-default"
+              className="btn btn-sm btn-tertiary"
             >
               <span className="svg-icon svg-icon-4">
                 <InfoIcon weight="bold" />

@@ -111,7 +111,8 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               <Link
                 state="project-manage"
                 params={{ uuid: project.uuid }}
-                className="btn btn-text-primary btn-active-secondary btn-sm"
+                buttonVariant="text-primary"
+                className="btn-sm"
               >
                 {translate('Edit')}
               </Link>
@@ -120,7 +121,8 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               row={project}
               showIndustry={false}
               onClick={() => onClickDetails(project)}
-              className="btn btn-text-primary btn-active-secondary btn-sm"
+              buttonVariant="text-primary"
+              className="btn-sm"
             >
               {translate('Details')}
             </ProjectLink>

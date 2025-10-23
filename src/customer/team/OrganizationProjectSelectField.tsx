@@ -1,9 +1,11 @@
+import { Field } from 'react-final-form';
 import { useSelector } from 'react-redux';
-import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { SelectField, FormGroup } from '@waldur/form';
+import { SelectField } from '@waldur/form';
+import { FormFieldError } from '@waldur/form/FormFieldError';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { useCustomerProjects } from '../workspace/fetchCustomer';
@@ -13,21 +15,19 @@ export const OrganizationProjectSelectField = ({ disabled = false }) => {
   const { loading } = useCustomerProjects();
 
   return (
-    <Field
-      name="project"
-      label={translate('Project')}
-      component={FormGroup}
-      validate={[required]}
-      required
-    >
-      <SelectField
+    <FormGroup label={translate('Project')} required>
+      <Field
+        name="project"
+        component={SelectField as any}
         options={currentCustomer?.projects}
         getOptionLabel={(option) => option.name}
         getOptionValue={(option) => option.url}
         isClearable={false}
         isDisabled={disabled}
         isLoading={loading}
+        validate={required}
       />
-    </Field>
+      <FormFieldError name="project" />
+    </FormGroup>
   );
 };

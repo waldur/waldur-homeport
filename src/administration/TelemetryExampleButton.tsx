@@ -18,7 +18,7 @@ export const TelemetryExampleButton = () => {
     <Button
       onClick={() => dispatch(openModalDialog(TelemetryExampleDialog))}
       variant="link"
-      className="text-btn btn-xs"
+      className="btn-sm"
     >
       <span className="svg-icon svg-icon-2">
         <EyeIcon />

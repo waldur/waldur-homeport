@@ -80,7 +80,7 @@ export const ExportFullPriceList: FunctionComponent<
         <>{translate('Unable to load full price list')}</>
       ) : components ? (
         <Button
-          variant="outline btn-outline-default"
+          variant="tertiary"
           onClick={() => onExport(offering.name, components)}
         >
           <span className="svg-icon svg-icon-2">

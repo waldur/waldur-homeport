@@ -63,7 +63,7 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
           <>
             {props.step > 0 && (
               <Button
-                variant="outline btn-outline-default"
+                variant="tertiary"
                 className="min-w-125px me-auto"
                 onClick={() => props.onPrev(formValues)}
               >

@@ -76,7 +76,7 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
         <>
           {!onlyPositiveButton && (
             <Button
-              variant="outline btn-outline-default"
+              variant="tertiary"
               className="flex-equal px-3"
               onClick={handleCancel}
             >

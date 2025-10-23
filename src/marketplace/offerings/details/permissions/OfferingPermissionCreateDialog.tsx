@@ -1,80 +1,118 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { FC, useCallback } from 'react';
+import { Field, Form } from 'react-final-form';
+import { useSelector } from 'react-redux';
 import { marketplaceProviderOfferingsAddUser } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { required } from '@waldur/core/validators';
 import { usersAutocomplete } from '@waldur/customer/team/utils';
-import { FormContainer } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
+import { SubmitButton } from '@waldur/form';
+import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
 import { DateTimeField } from '@waldur/form/DateTimeField';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { providerOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { RoleEnum } from '@waldur/permissions/enums';
-import { showErrorResponse } from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
+import { getCustomer } from '@waldur/workspace/selectors';
 
-export const OfferingPermissionCreateDialog = reduxForm<
-  {},
-  { resolve: { refetch; offering } }
->({
-  form: 'OfferingPermissionCreateDialog',
-})(({ submitting, handleSubmit, resolve: { refetch, offering } }) => {
-  const dispatch = useDispatch();
+interface OwnProps {
+  resolve: {
+    /** If no offering is given, will show a selector field for it. */
+    offering?;
+    refetch;
+  };
+}
+
+export const OfferingPermissionCreateDialog: FC<OwnProps> = ({
+  resolve: { refetch, offering },
+}) => {
+  const { closeDialog } = useModal();
+  const { showErrorResponse } = useNotify();
+
+  const customer = useSelector(getCustomer);
+
   const saveUser = useCallback(
     async (formData) => {
+      const _offering = offering || formData.offering;
       try {
         await marketplaceProviderOfferingsAddUser({
-          path: { uuid: offering.uuid },
+          path: { uuid: _offering.uuid },
           body: {
             role: RoleEnum.OFFERING_MANAGER,
             user: formData.user.uuid,
             expiration_time: formData.expiration_time,
           },
         });
-        dispatch(closeModalDialog());
+        closeDialog();
         await refetch();
       } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to grant permission.')),
-        );
+        showErrorResponse(error, translate('Unable to grant permission.'));
       }
     },
-    [dispatch, offering, refetch],
+    [closeDialog, showErrorResponse, offering, refetch],
   );
-  return (
-    <form onSubmit={handleSubmit(saveUser)}>
-      <ModalDialog
-        title={translate('Grant permission')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton submitting={submitting}>
-              {translate('Submit')}
-            </SubmitButton>
-          </>
-        }
-      >
-        <FormContainer submitting={submitting}>
-          <AsyncSelectField
-            name="user"
-            label={translate('User')}
-            placeholder={translate('Select user...')}
-            loadOptions={(query, prevOptions, page) =>
-              usersAutocomplete({ full_name: query }, prevOptions, page)
-            }
-            getOptionLabel={({ full_name, email }) => full_name || email}
-            required={true}
-          />
 
-          <Field
-            name="expiration_time"
-            label={translate('Expiration time')}
-            component={DateTimeField}
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+  return (
+    <Form onSubmit={saveUser}>
+      {({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Grant permission')}
+            footer={
+              <>
+                <CloseDialogButton className="min-w-125px" />
+                <SubmitButton
+                  label={translate('Submit')}
+                  submitting={submitting}
+                  disabled={invalid}
+                  className="btn btn-primary min-w-125px"
+                />
+              </>
+            }
+          >
+            <FormGroup label={translate('User')} required>
+              <AsyncSelectFieldFinal
+                name="user"
+                placeholder={translate('Select user...')}
+                loadOptions={(query, prevOptions, page) =>
+                  usersAutocomplete({ full_name: query }, prevOptions, page)
+                }
+                getOptionLabel={({ full_name, email }) => full_name || email}
+                validate={required}
+              />
+            </FormGroup>
+
+            {!offering && (
+              <FormGroup label={translate('Offering')} required>
+                <AsyncSelectFieldFinal
+                  name="offering"
+                  placeholder={translate('Select offering...')}
+                  loadOptions={(query, prevOptions, page) =>
+                    providerOfferingsAutocomplete(
+                      { name: query, shared: true, customer: customer.url },
+                      prevOptions,
+                      page,
+                    )
+                  }
+                  getOptionLabel={({ name }) => name}
+                  validate={required}
+                />
+              </FormGroup>
+            )}
+
+            <FormGroup label={translate('Expiration time')}>
+              <Field
+                name="expiration_time"
+                component={DateTimeField as any}
+                placeholder={translate('Select a date')}
+              />
+            </FormGroup>
+          </ModalDialog>
+        </form>
+      )}
+    </Form>
   );
-});
+};

@@ -37,7 +37,7 @@ export const DeleteUserButton = ({ user, refetch }) => {
     <RowActionButton
       title={translate('Delete')}
       action={handler}
-      variant="light-danger"
+      variant="danger"
       size="sm"
     />
   );

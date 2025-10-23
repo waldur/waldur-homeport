@@ -111,9 +111,9 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
       {onDelete ? (
         <div>
           <Button
-            variant="link"
+            variant="flush"
             size="sm"
-            className="btn-active-icon-danger attachment-item__delete p-0 btn-icon-right"
+            className="btn-active-icon-danger attachment-item__delete btn-icon-right"
             onClick={() => onDelete(attachment)}
           >
             <span className="svg-icon svg-icon-2">

@@ -76,7 +76,7 @@ const InlineFilterButton = ({ column, row }) => {
     <>
       <button
         type="button"
-        className="inline-filter btn btn-icon btn-sm btn-outline btn-outline-default icon-align"
+        className="inline-filter btn btn-icon btn-sm btn-tertiary icon-align"
         data-kt-menu-trigger="click"
         data-kt-menu-placement="bottom"
       >

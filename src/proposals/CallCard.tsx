@@ -12,11 +12,12 @@ import { PublicCallApplyButton } from './details/PublicCallApplyButton';
 import { Call } from './types';
 import { getRoundsWithStatus } from './utils';
 
-const CallLink = ({ call, className = undefined, children }) => (
+const CallLink = ({ call, asButton = false, children }) => (
   <Link
     state="public-call.details"
     params={{ call_uuid: call.uuid }}
-    className={className}
+    buttonVariant={asButton ? 'text-primary' : undefined}
+    className={asButton ? 'btn-sm' : undefined}
   >
     {children}
   </Link>
@@ -78,14 +79,11 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
               <PublicCallApplyButton
                 call={call}
                 title={translate('Apply')}
-                variant="active-secondary"
-                className="btn btn-text-primary btn-sm"
+                variant="text-primary"
+                className="btn-sm"
               />
 
-              <CallLink
-                call={call}
-                className="btn btn-text-primary btn-active-secondary btn-sm"
-              >
+              <CallLink call={call} asButton>
                 {translate('Details')}
               </CallLink>
             </Stack>

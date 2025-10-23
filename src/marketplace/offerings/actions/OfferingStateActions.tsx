@@ -116,7 +116,11 @@ export const OfferingStateActions = ({
 
   if (offering.state == ARCHIVED) {
     return (
-      <Button variant="light" onClick={() => setDraft()} className={className}>
+      <Button
+        variant="tertiary"
+        onClick={() => setDraft()}
+        className={className}
+      >
         {draftTitle}
       </Button>
     );

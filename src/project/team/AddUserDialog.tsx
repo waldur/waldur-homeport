@@ -1,6 +1,7 @@
 import { UserPlusIcon } from '@phosphor-icons/react';
+import { FC, useCallback } from 'react';
+import { Field, Form } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { formValueSelector, reduxForm } from 'redux-form';
 import {
   callManagingOrganisationsAddUser,
   customersAddUser,
@@ -12,25 +13,24 @@ import {
   ProjectsOtherUsersListData,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { parseSelectData } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
 import { OrganizationProjectSelectField } from '@waldur/customer/team/OrganizationProjectSelectField';
 import { usersAutocomplete } from '@waldur/customer/team/utils';
-import { FormContainer } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
+import { SubmitButton } from '@waldur/form';
+import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { Role, RoleType } from '@waldur/permissions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { type RootState } from '@waldur/store/reducers';
+import { useNotify } from '@waldur/store/hooks';
 import { getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { useUser } from '@waldur/workspace/hooks';
@@ -42,14 +42,12 @@ import { RoleGroup } from './RoleGroup';
 import { UserListOptionInline } from './UserListOptionInline';
 import { hasCurrentCustomerPermission } from './utils';
 
-const FORM_ID = 'AddUserDialog';
-const FIELD_ID = 'showAllUsers';
-
 interface AddUserDialogFormData {
   role: Role;
   expiration_time: string;
   user: any;
   project?: Project;
+  showAllUsers?: boolean;
 }
 
 interface AddUserDialogProps {
@@ -101,203 +99,222 @@ const projectUsersAutocomplete = async (
   );
 };
 
-const showAllUsersSelector = (state: RootState) =>
-  formValueSelector(FORM_ID)(state, FIELD_ID);
-
-const roleSelector = (state: RootState) =>
-  formValueSelector(FORM_ID)(state, 'role');
-
-export const AddUserDialog = reduxForm<
-  AddUserDialogFormData,
-  AddUserDialogProps
->({
-  form: FORM_ID,
-})(({ submitting, handleSubmit, refetch, invalid, level, title }) => {
+export const AddUserDialog: FC<AddUserDialogProps> = ({
+  refetch,
+  level,
+  title,
+}) => {
   const dispatch = useDispatch();
+  const { closeDialog } = useModal();
+  const { showSuccess, showErrorResponse } = useNotify();
 
   const currentUser = useUser() as User;
   const currentProject = useSelector(getProject);
   const currentCustomer = useSelector(getCustomer);
   const hasCustomerPermission = useSelector(hasCurrentCustomerPermission);
 
-  const loadUsers = async (query, prevOptions, page) => {
-    try {
-      if (showAllUsers) {
-        return await usersAutocomplete({ query }, prevOptions, page);
-      }
+  const loadUsers = useCallback(
+    async (query, prevOptions, page, showAllUsers: boolean) => {
+      try {
+        if (showAllUsers) {
+          return await usersAutocomplete({ query }, prevOptions, page);
+        }
 
-      if (hasCustomerPermission || !currentProject) {
-        return await customerUsersAutocomplete(
-          currentCustomer.uuid,
+        if (hasCustomerPermission || !currentProject) {
+          return await customerUsersAutocomplete(
+            currentCustomer.uuid,
+            { user_keyword: query },
+            prevOptions,
+            page,
+          );
+        }
+
+        return await projectUsersAutocomplete(
+          currentProject.uuid,
           { user_keyword: query },
           prevOptions,
           page,
         );
+      } catch (error) {
+        dispatch(showErrorResponse(error, translate('Unable to load users.')));
+        return {
+          options: [],
+          hasMore: false,
+          additional: { page: 1 },
+        };
       }
-
-      return await projectUsersAutocomplete(
-        currentProject.uuid,
-        { user_keyword: query },
-        prevOptions,
-        page,
-      );
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to load users.')));
-      return {
-        options: [],
-        hasMore: false,
-        additional: { page: 1 },
-      };
-    }
-  };
+    },
+    [dispatch, hasCustomerPermission, currentProject, currentCustomer.uuid],
+  );
 
   const getOptionLabel = (option) =>
     option.email
       ? (option.full_name || option.username) + ` (${option.email})`
       : option.full_name || option.username;
 
-  const saveUser = async (formData: AddUserDialogFormData) => {
-    if (formData.role.content_type === 'project') {
-      try {
-        await projectsAddUser({
-          path: {
-            uuid: formData.project
-              ? formData.project.uuid
-              : currentProject.uuid,
-          },
-          body: {
-            user: formData.user.uuid,
-            expiration_time: formData.expiration_time,
-            role: formData.role.name,
-          },
-        });
-        await refetch();
-        dispatch(showSuccess('User has been added to project.'));
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to add user.')));
-      }
-    } else if (formData.role.content_type === 'customer') {
-      try {
-        await customersAddUser({
-          path: { uuid: currentCustomer.uuid },
-          body: {
-            user: formData.user.uuid,
-            role: formData.role.name,
-            expiration_time: formData.expiration_time,
-          },
-        });
-        if (currentUser.uuid === formData.user.uuid) {
-          const newUser = await getCurrentUser();
-          dispatch(setCurrentUser(newUser));
+  const saveUser = useCallback(
+    async (formData: AddUserDialogFormData) => {
+      if (formData.role.content_type === 'project') {
+        try {
+          await projectsAddUser({
+            path: {
+              uuid: formData.project
+                ? formData.project.uuid
+                : currentProject.uuid,
+            },
+            body: {
+              user: formData.user.uuid,
+              expiration_time: formData.expiration_time,
+              role: formData.role.name,
+            },
+          });
+          await refetch();
+          showSuccess('User has been added to project.');
+          closeDialog();
+        } catch (error) {
+          showErrorResponse(error, translate('Unable to add user.'));
         }
-        await refetch();
-        dispatch(showSuccess('User has been added to organization.'));
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to add user.')));
-      }
-    } else if (formData.role.content_type === 'call_organizer') {
-      try {
-        await callManagingOrganisationsAddUser({
-          path: { uuid: currentCustomer.call_managing_organization_uuid },
-          body: {
-            user: formData.user.uuid,
-            role: formData.role.name,
-            expiration_time: formData.expiration_time,
-          },
-        });
-        if (currentUser.uuid === formData.user.uuid) {
-          const newUser = await getCurrentUser();
-          dispatch(setCurrentUser(newUser));
+      } else if (formData.role.content_type === 'customer') {
+        try {
+          await customersAddUser({
+            path: { uuid: currentCustomer.uuid },
+            body: {
+              user: formData.user.uuid,
+              role: formData.role.name,
+              expiration_time: formData.expiration_time,
+            },
+          });
+          if (currentUser.uuid === formData.user.uuid) {
+            const newUser = await getCurrentUser();
+            dispatch(setCurrentUser(newUser));
+          }
+          await refetch();
+          showSuccess('User has been added to organization.');
+          closeDialog();
+        } catch (error) {
+          showErrorResponse(error, translate('Unable to add user.'));
         }
-        await refetch();
-        dispatch(showSuccess('User has been added to organization.'));
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to add user.')));
-      }
-    } else if (formData.role.content_type === 'service_provider') {
-      try {
-        await marketplaceServiceProvidersAddUser({
-          path: { uuid: currentCustomer.service_provider_uuid },
-          body: {
-            user: formData.user.uuid,
-            role: formData.role.name,
-            expiration_time: formData.expiration_time,
-          },
-        });
-        if (currentUser.uuid === formData.user.uuid) {
-          const newUser = await getCurrentUser();
-          dispatch(setCurrentUser(newUser));
+      } else if (formData.role.content_type === 'call_organizer') {
+        try {
+          await callManagingOrganisationsAddUser({
+            path: { uuid: currentCustomer.call_managing_organization_uuid },
+            body: {
+              user: formData.user.uuid,
+              role: formData.role.name,
+              expiration_time: formData.expiration_time,
+            },
+          });
+          if (currentUser.uuid === formData.user.uuid) {
+            const newUser = await getCurrentUser();
+            dispatch(setCurrentUser(newUser));
+          }
+          await refetch();
+          showSuccess('User has been added to organization.');
+          closeDialog();
+        } catch (error) {
+          showErrorResponse(error, translate('Unable to add user.'));
         }
-        await refetch();
-        dispatch(showSuccess('User has been added to organization.'));
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to add user.')));
+      } else if (formData.role.content_type === 'service_provider') {
+        try {
+          await marketplaceServiceProvidersAddUser({
+            path: { uuid: currentCustomer.service_provider_uuid },
+            body: {
+              user: formData.user.uuid,
+              role: formData.role.name,
+              expiration_time: formData.expiration_time,
+            },
+          });
+          if (currentUser.uuid === formData.user.uuid) {
+            const newUser = await getCurrentUser();
+            dispatch(setCurrentUser(newUser));
+          }
+          await refetch();
+          showSuccess('User has been added to organization.');
+          closeDialog();
+        } catch (error) {
+          showErrorResponse(error, translate('Unable to add user.'));
+        }
       }
-    }
-  };
-
-  const showAllUsers = useSelector(showAllUsersSelector);
-  const role = useSelector<RootState, Role>(roleSelector);
+    },
+    [
+      refetch,
+      showSuccess,
+      closeDialog,
+      showErrorResponse,
+      currentProject,
+      currentCustomer,
+      currentUser,
+      dispatch,
+    ],
+  );
 
   return (
-    <form onSubmit={handleSubmit(saveUser)}>
-      <ModalDialog
-        title={title || translate('Add user')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton submitting={submitting} invalid={invalid}>
-              {translate('Add role')}
-            </SubmitButton>
-          </>
-        }
-        iconNode={<UserPlusIcon weight="bold" />}
-        iconColor="success"
-      >
-        <FormContainer submitting={submitting}>
-          <AsyncSelectField
-            name="user"
-            key={showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
-            label={translate('User')}
-            placeholder={translate('Select user...')}
-            loadOptions={loadUsers}
-            getOptionValue={(option) => option.uuid}
-            getOptionLabel={getOptionLabel}
-            components={{ Option: UserListOptionInline }}
-            required={true}
-            validate={[required]}
-          />
-
-          {currentUser.is_staff && (
-            <AwesomeCheckboxField
-              hideLabel
-              name={FIELD_ID}
-              className="mt-3"
-              label={translate('Show users outside organization')}
-            />
-          )}
-          <RoleGroup
-            types={
-              level === 'customer' &&
-              hasPermission(currentUser, {
-                permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-                customerId: currentCustomer.uuid,
-              })
-                ? ['customer', 'project']
-                : [level]
+    <Form onSubmit={saveUser}>
+      {({ handleSubmit, submitting, invalid, values }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={title || translate('Add user')}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton submitting={submitting} disabled={invalid}>
+                  {translate('Add role')}
+                </SubmitButton>
+              </>
             }
-          />
+            iconNode={<UserPlusIcon weight="bold" />}
+            iconColor="success"
+          >
+            <FormGroup label={translate('User')} required>
+              <AsyncSelectFieldFinal
+                name="user"
+                key={values.showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
+                placeholder={translate('Select user...')}
+                loadOptions={(query, prevOptions, { page }) =>
+                  loadUsers(
+                    query,
+                    prevOptions,
+                    page,
+                    values.showAllUsers || false,
+                  )
+                }
+                getOptionValue={(option) => option.uuid}
+                getOptionLabel={getOptionLabel}
+                components={{ Option: UserListOptionInline }}
+                required={true}
+                validate={required}
+              />
+            </FormGroup>
 
-          {level === 'customer' && role?.content_type === 'project' && (
-            <OrganizationProjectSelectField />
-          )}
-          <ExpirationTimeGroup />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+            {currentUser.is_staff && (
+              <FormGroup>
+                <Field
+                  name="showAllUsers"
+                  component={AwesomeCheckboxField as any}
+                  label={translate('Show users outside organization')}
+                />
+              </FormGroup>
+            )}
+            <RoleGroup
+              types={
+                level === 'customer' &&
+                hasPermission(currentUser, {
+                  permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
+                  customerId: currentCustomer.uuid,
+                })
+                  ? ['customer', 'project']
+                  : [level]
+              }
+            />
+
+            {level === 'customer' &&
+              values.role?.content_type === 'project' && (
+                <OrganizationProjectSelectField />
+              )}
+            <ExpirationTimeGroup />
+          </ModalDialog>
+        </form>
+      )}
+    </Form>
   );
-});
+};

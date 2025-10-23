@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
+import { Field } from 'react-final-form';
 import { OptionProps, components } from 'react-select';
-import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
+import { SelectField } from '@waldur/form/SelectField';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Role, RoleType } from '@waldur/permissions/types';
 import { getRoles } from '@waldur/permissions/utils';
 
@@ -36,17 +36,15 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => (
 export const RoleGroup: FunctionComponent<{ types: RoleType[] }> = ({
   types,
 }) => (
-  <Form.Group className="mb-7">
-    <Form.Label>{translate('Role')}</Form.Label>
+  <FormGroup label={translate('Role')}>
     <Field
       name="role"
-      component={SelectField}
+      component={SelectField as any}
       options={getRoles(types)}
       getOptionLabel={(role: Role) => role.description || role.name}
       getOptionValue={({ name }) => name}
-      validate={[required]}
+      validate={required}
       components={{ Option: RoleOption }}
-      noUpdateOnBlur
     />
-  </Form.Group>
+  </FormGroup>
 );

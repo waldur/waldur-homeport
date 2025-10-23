@@ -77,7 +77,7 @@ export const EditVarsDialog = connect<{}, {}, EditVarsDialogOwnProps>(
               title={translate('Edit environment variables')}
               actions={
                 <Button
-                  variant="outline btn-outline-default"
+                  variant="tertiary"
                   className="btn-icon"
                   onClick={() => nestedProps.fields.push({})}
                 >

@@ -409,7 +409,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                 className="fw-normal text-dark me-2"
               >
                 <Button
-                  variant="active-secondary"
+                  variant="text-secondary"
                   className="btn-icon me-1"
                   size="sm"
                   onClick={this.props.resetSelection}

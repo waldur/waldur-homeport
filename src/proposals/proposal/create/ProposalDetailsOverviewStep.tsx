@@ -23,7 +23,7 @@ const DetailsOverviewButton = ({ proposal }) => {
   const dispatch = useDispatch();
   return (
     <Button
-      variant="outline btn-outline-default"
+      variant="tertiary"
       className="ms-auto"
       onClick={() =>
         dispatch(

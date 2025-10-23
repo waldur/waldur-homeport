@@ -19,13 +19,15 @@ export const AvailableOfferingCard: FC<{ availableOffering }> = ({
           <Link
             state="calls-for-proposals-all-calls"
             params={{ offering_uuid: availableOffering.uuid }}
-            className="btn btn-text-primary btn-active-secondary btn-sm"
+            buttonVariant="text-primary"
+            className="btn-sm"
             label={translate('Apply')}
           />
 
           <OfferingDetailsLink
             offering_uuid={availableOffering.uuid}
-            className="btn btn-text-primary btn-active-secondary btn-sm"
+            buttonVariant="text-primary"
+            className="btn-sm"
           >
             {translate('View offering')}
           </OfferingDetailsLink>

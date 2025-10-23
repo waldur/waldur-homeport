@@ -412,8 +412,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
                 <div className="menu-content filter-footer pb-0">
                   <div className="d-flex gap-4">
                     <Button
-                      variant="outline"
-                      className="btn-outline-default flex-grow-1 w-50"
+                      variant="tertiary"
+                      className="flex-grow-1 w-50"
                       onClick={() => MenuComponent.hideDropdowns(null)}
                     >
                       {translate('Cancel')}

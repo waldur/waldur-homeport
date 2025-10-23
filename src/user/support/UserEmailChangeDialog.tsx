@@ -23,10 +23,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
       )}
       footer={
         <>
-          <CloseDialogButton
-            variant="outline btn-outline-default"
-            className="flex-equal"
-          />
+          <CloseDialogButton variant="tertiary" className="flex-equal" />
 
           {!user.requested_email ? (
             <SubmitButton
@@ -41,7 +38,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
               disabled={isProtected}
               submitting={submitting}
               label={translate('Cancel request')}
-              className="btn btn-light-danger flex-equal"
+              className="btn btn-danger flex-equal"
               onClick={cancelRequest}
             />
           )}

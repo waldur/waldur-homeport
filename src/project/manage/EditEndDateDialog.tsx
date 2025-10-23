@@ -194,7 +194,7 @@ const FormModalComponent: FC<
             ) : (
               <Button
                 onClick={() => setStep(1)}
-                variant="outline btn-outline-default"
+                variant="tertiary"
                 className="min-w-125px"
               >
                 {translate('Go back')}

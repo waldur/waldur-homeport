@@ -56,8 +56,8 @@ export const PolicyDeleteButton = ({
     <RowActionButton
       title={translate('Remove')}
       action={openDialog}
-      variant="outline-danger"
-      iconNode={<TrashIcon />}
+      variant="danger"
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
     />
   );

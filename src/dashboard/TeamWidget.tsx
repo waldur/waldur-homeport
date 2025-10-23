@@ -109,8 +109,8 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
             ) : (
               <div>
                 <Button
-                  variant="outline"
-                  className="btn-icon btn-outline-dashed border-2 btn-color-muted btn-active-color-primary btn-circle w-40px h-40px"
+                  variant="tertiary"
+                  className="btn-icon border-dashed border-2 btn-color-gray-400 btn-active-color-muted btn-circle w-40px h-40px"
                   onClick={onAddClick}
                 >
                   <PlusIcon size={18} weight="bold" />

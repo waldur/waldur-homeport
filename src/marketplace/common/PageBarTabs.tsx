@@ -34,7 +34,7 @@ const PageBarTabItem = (props: PageBarTabProps) =>
   props.subTabs?.length > 0 ? (
     <div>
       <Button
-        variant="active-secondary"
+        variant="text-primary"
         size="sm"
         data-kt-menu-trigger="hover"
         data-kt-menu-placement="bottom-start"

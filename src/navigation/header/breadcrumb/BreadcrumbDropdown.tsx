@@ -108,8 +108,8 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
 
         {Boolean(filters) && (
           <Button
-            variant="outline-default"
-            className="btn-outline btn-icon btn-toggle-filters position-relative"
+            variant="tertiary"
+            className="btn-icon btn-toggle-filters position-relative"
             onClick={setFilterOpen}
           >
             <span className="svg-icon svg-icon-1">

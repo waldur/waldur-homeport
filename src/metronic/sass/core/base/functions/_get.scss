@@ -33,6 +33,13 @@
   @return $get;
 }
 
+@function get-def($map, $key, $default: null) {
+  @if map-has-key($map, $key) {
+    @return map-get($map, $key);
+  }
+  @return $default;
+}
+
 @function has($map, $keys...) {
   @if length($keys) == 1 {
     $keys: nth($keys, 1);

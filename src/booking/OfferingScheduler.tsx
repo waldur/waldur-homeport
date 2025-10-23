@@ -181,8 +181,8 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
                   )}
               </label>
               <Button
-                variant="light"
-                className="btn-icon btn-active-light-danger"
+                variant="text-danger"
+                className="btn-icon"
                 onClick={() => props.fields.remove(index)}
               >
                 <span className="svg-icon svg-icon-2">
@@ -205,7 +205,7 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
             />
           </div>
         ))}
-        <Button variant="light" className="text-nowrap" onClick={addRow}>
+        <Button variant="text-primary" className="text-nowrap" onClick={addRow}>
           <span className="svg-icon svg-icon-2">
             <PlusCircleIcon weight="bold" />
           </span>

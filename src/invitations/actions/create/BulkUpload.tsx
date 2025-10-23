@@ -109,8 +109,8 @@ export const BulkUpload: FC<OwnProps> = (props) => {
         </Col>
         <Col xs="auto">
           <Button
-            variant="active-light-danger"
-            className="btn-icon btn-icon-danger"
+            variant="text-danger"
+            className="btn-icon"
             onClick={removeFile}
           >
             <span className="svg-icon svg-icon-1">

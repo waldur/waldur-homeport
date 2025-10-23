@@ -16,7 +16,7 @@ import {
 type NetworkChoices = Pick<BackupFormChoices, 'subnets' | 'floatingIps'>;
 
 const AddButton = ({ onClick, disabled }) => (
-  <Button variant="default" onClick={onClick} disabled={disabled}>
+  <Button variant="text-secondary" onClick={onClick} disabled={disabled}>
     <span className="svg-icon svg-icon-2">
       <PlusIcon weight="bold" />
     </span>{' '}
@@ -25,7 +25,11 @@ const AddButton = ({ onClick, disabled }) => (
 );
 
 const DeleteButton = ({ onClick }) => (
-  <Button variant="default" title={translate('Delete')} onClick={onClick}>
+  <Button
+    variant="text-secondary"
+    title={translate('Delete')}
+    onClick={onClick}
+  >
     <span className="svg-icon svg-icon-2">
       <TrashIcon />
     </span>

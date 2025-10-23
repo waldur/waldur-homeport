@@ -82,7 +82,7 @@ export const DestroyBulkFloatingIpsAction = ({ rows, refetch }) => {
       title={translate('Remove')}
       action={mutate}
       iconNode={<TrashIcon weight="bold" />}
-      variant="light-danger"
+      variant="danger"
       disabled={isPending || rowsData.error}
       tooltip={rowsData.error}
     />

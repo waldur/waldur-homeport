@@ -39,10 +39,10 @@ export const HiddenActionsMessage: FunctionComponent<
       <div className="ms-auto">
         <button
           type="button"
-          className="btn btn-sm btn-icon btn-active-light-primary"
+          className="btn btn-sm btn-icon btn-text-secondary"
           onClick={close}
         >
-          <XIcon size={18} />
+          <XIcon size={18} weight="bold" />
         </button>
       </div>
     </div>

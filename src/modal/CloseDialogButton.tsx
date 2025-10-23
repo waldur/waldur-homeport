@@ -15,7 +15,7 @@ interface OwnProps {
 
 export const CloseDialogButton: React.FC<OwnProps> = ({
   label,
-  variant = 'outline btn-outline-default',
+  variant = 'tertiary',
   className,
   disabled,
 }) => {

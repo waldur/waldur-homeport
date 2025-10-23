@@ -42,7 +42,7 @@ export const CallsForProposals: FunctionComponent = () => {
         <div className="d-flex justify-content-center gap-5">
           <Link
             state="calls-for-proposals-all-available-offerings"
-            className="btn btn-outline w-200px btn-outline-default"
+            className="btn btn-tertiary w-200px"
           >
             {translate('Available offerings')}
           </Link>

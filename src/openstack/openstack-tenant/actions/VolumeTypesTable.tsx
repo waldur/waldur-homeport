@@ -27,7 +27,7 @@ const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
       />
     </td>
     <td>
-      <Button variant="default" onClick={onRemove} size="sm">
+      <Button variant="text-secondary" onClick={onRemove} size="sm">
         <span className="svg-icon svg-icon-2">
           <TrashIcon />
         </span>{' '}
@@ -38,7 +38,7 @@ const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
 );
 
 const VolumeTypeAddButton = ({ onClick }) => (
-  <Button variant="default" onClick={onClick} size="sm">
+  <Button variant="text-secondary" onClick={onClick} size="sm">
     <span className="svg-icon svg-icon-2">
       <PlusIcon weight="bold" />
     </span>{' '}

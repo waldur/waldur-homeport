@@ -294,7 +294,7 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
           <div className="d-flex justify-content-between">
             <Button
               onClick={backToMainForm}
-              variant="outline btn-outline-default"
+              variant="tertiary"
               className="min-w-125px"
             >
               <span className="svg-icon svg-icon-2">

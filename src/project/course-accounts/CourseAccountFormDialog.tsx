@@ -220,7 +220,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                 <>
                   {activeTab === 'batch' && step > 0 && (
                     <Button
-                      variant="outline btn-outline-default"
+                      variant="tertiary"
                       className="w-125px me-auto"
                       onClick={prevStep}
                     >

@@ -9,6 +9,7 @@ import { ArchivePlanButton } from './ArchivePlanButton';
 import { ClonePlanButton } from './ClonePlanButton';
 import { DeletePlanButton } from './DeletePlanButton';
 import { EditPlanDescriptionButton } from './EditPlanDescriptionButton';
+import { EditPlanDiscountsButton } from './EditPlanDiscountsButton';
 import { EditPlanPricesButton } from './EditPlanPricesButton';
 import { EditPlanQuotasButton } from './EditPlanQuotasButton';
 import { UpdateAccessPoliciesAction } from './UpdateAccessPoliciesAction';
@@ -33,6 +34,12 @@ export const PlanActions = ({ offering, plan, refetch, user }) => {
               offering={offering}
               refetch={refetch}
               plan={plan}
+            />
+
+            <EditPlanDiscountsButton
+              offering={offering}
+              plan={plan}
+              refetch={refetch}
             />
 
             <EditPlanQuotasButton

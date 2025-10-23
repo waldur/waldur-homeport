@@ -113,8 +113,8 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
 
               <Stack direction="horizontal" gap={4}>
                 <Button
-                  variant="outline"
-                  className="btn-outline-default flex-equal"
+                  variant="tertiary"
+                  className="flex-equal"
                   onClick={() => setShow(false)}
                 >
                   {translate('Cancel')}
@@ -129,10 +129,8 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
       }
     >
       <Button
-        variant="outline"
-        className={
-          'btn-outline-default d-flex text-nowrap' + (show ? ' active' : '')
-        }
+        variant="tertiary"
+        className={'d-flex text-nowrap' + (show ? ' active' : '')}
         onClick={() => setShow((v) => !v)}
       >
         <FunnelSimpleIcon size={20} className="svg-icon" />

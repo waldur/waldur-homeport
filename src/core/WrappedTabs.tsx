@@ -47,8 +47,8 @@ const WrappedTabs = React.forwardRef(
               <Nav.Item>
                 <Dropdown>
                   <Dropdown.Toggle
-                    variant="active-light-primary"
-                    className="btn-icon btn-text-grey-500 no-arrow w-35px h-35px"
+                    variant="text-secondary"
+                    className="btn-icon no-arrow w-35px h-35px"
                   >
                     <DotsThreeVerticalIcon size={22} weight="bold" />
                     {props.toggleContent}

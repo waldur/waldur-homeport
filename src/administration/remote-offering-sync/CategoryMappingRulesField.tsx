@@ -118,8 +118,8 @@ const FieldsListGroup = ({
                     </td>
                     <td>
                       <Button
-                        variant="active-light-danger"
-                        className="btn-icon btn-icon-danger"
+                        variant="text-danger"
+                        className="btn-icon"
                         onClick={() => removeRow(actualIndex)}
                         disabled={fields.length < 2}
                       >
@@ -136,12 +136,7 @@ const FieldsListGroup = ({
         </table>
       </Form.Group>
       <div>
-        <Button
-          variant="active-secondary"
-          className="btn-text-primary btn-icon-primary"
-          onClick={addRow}
-          disabled={addDisabled}
-        >
+        <Button variant="text-primary" onClick={addRow} disabled={addDisabled}>
           <span className="svg-icon svg-icon-2">
             <PlusCircleIcon weight="bold" />
           </span>{' '}

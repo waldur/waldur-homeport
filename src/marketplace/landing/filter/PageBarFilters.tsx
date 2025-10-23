@@ -81,7 +81,7 @@ export const PageBarFilters = () => {
           ))}
           <Button
             variant="flush"
-            className="btn-active-text-primary"
+            className="btn-active-text-primary btn-no-focus"
             onClick={clearFilters}
           >
             <XIcon weight="bold" className="svg-icon" />

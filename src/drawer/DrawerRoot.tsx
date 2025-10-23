@@ -70,10 +70,10 @@ export const DrawerRoot: FunctionComponent = () => {
           <div className="card-toolbar">
             <button
               type="button"
-              className="btn btn-sm btn-icon btn-active-light-primary me-n5"
+              className="btn btn-sm btn-icon btn-text-secondary"
               onClick={onHide}
             >
-              <XIcon size={18} />
+              <XIcon size={18} weight="bold" />
             </button>
           </div>
         </div>

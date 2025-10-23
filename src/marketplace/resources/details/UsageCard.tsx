@@ -103,7 +103,7 @@ export const UsageCard = ({ resource }) => {
                   key={option.value}
                   id={'tbg-' + option.value}
                   value={option.value}
-                  variant="outline btn-outline-default"
+                  variant="tertiary"
                 >
                   {option.label}
                 </ToggleButton>
@@ -118,8 +118,8 @@ export const UsageCard = ({ resource }) => {
           />
 
           <Button
-            variant="outline-default"
-            className="btn-outline btn-icon"
+            variant="tertiary"
+            className="btn-icon"
             onClick={() =>
               setMode((prev) => (prev === 'chart' ? 'table' : 'chart'))
             }

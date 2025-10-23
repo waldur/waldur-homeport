@@ -2,7 +2,151 @@
 // Button Mixins
 //
 
+@function validate-button-variant($variant) {
+  $required-states: ('enabled', 'hovered', 'focused', 'pressed', 'disabled');
+  $required-inner-keys: ('bg', 'text');
+
+  @each $state in $required-states {
+    @if not map-has-key($variant, $state) {
+      @error "❌ Missing required state `#{$state}` in button variant map.";
+    }
+
+    $state-map: map-get($variant, $state);
+
+    @if type-of($state-map) != 'map' {
+      @error "❌ State `#{$state}` must be a map (e.g. (bg: ..., text: ...))";
+    }
+
+    @each $key in $required-inner-keys {
+      @if not map-has-key($state-map, $key) {
+        @error "❌ Missing key `#{$key}` in state `#{$state}`.";
+      }
+    }
+  }
+
+  @return true;
+}
+
+@mixin button-declaration($bg, $text, $icon, $border) {
+  @if ($text != null) {
+    color: $text;
+  }
+  @if ($icon != null) {
+    i {
+      color: $icon;
+    }
+    .svg-icon {
+      @include svg-icon-color($icon);
+    }
+    &.dropdown-toggle:after {
+      color: $icon;
+    }
+  }
+  @if ($border != null) {
+    border-color: $border;
+  }
+  @if ($bg != null) {
+    background-color: $bg;
+  }
+}
+
 // Custom variant
+@mixin button-custom-variant-2($variant) {
+  $v: validate-button-variant($variant);
+
+  $enabled: get($variant, enabled);
+  $bg: get($enabled, bg);
+  $color: get($enabled, text);
+  $icon: get-def($enabled, icon, $color);
+  $border: get-def($enabled, border, $bg);
+
+  $hovered: get($variant, hovered);
+  $bg-hovered: get($hovered, bg);
+  $color-hovered: get($hovered, text);
+  $icon-hovered: get-def($hovered, icon, $color-hovered);
+  $border-hovered: get-def($hovered, border, $bg-hovered);
+
+  $focused: get($variant, focused);
+  $bg-focused: get($focused, bg);
+  $color-focused: get($focused, text);
+  $icon-focused: get-def($focused, icon, $color-focused);
+  $border-focused: get-def($focused, border, $bg-focused);
+  $ring-focused: get-def($focused, ring);
+
+  $pressed: get($variant, pressed);
+  $bg-pressed: get($pressed, bg);
+  $color-pressed: get($pressed, text);
+  $icon-pressed: get-def($pressed, icon, $color-pressed);
+  $border-pressed: get-def($pressed, border, $bg-pressed);
+
+  $disabled: get($variant, disabled);
+  $bg-disabled: get($disabled, bg);
+  $color-disabled: get($disabled, text);
+  $icon-disabled: get-def($disabled, icon, $color-disabled);
+  $border-disabled: get-def($disabled, border, $bg-disabled);
+
+  // Enabled
+  @include button-declaration($bg, $color, $icon, $border);
+
+  // Hover
+  .btn-check:checked + &,
+  .btn-check:active + &,
+  &:focus:not(.btn-active),
+  &:hover:not(.btn-active),
+  &:active:not(.btn-active),
+  &.hover,
+  &.active,
+  &.show,
+  .show > & {
+    @include button-declaration(
+      $bg-hovered,
+      $color-hovered,
+      $icon-hovered,
+      $border-hovered
+    );
+  }
+
+  // Focused
+  .btn-check:focus + &,
+  &:focus:not(.btn-active) {
+    @include button-declaration(
+      $bg-focused,
+      $color-focused,
+      $icon-focused,
+      $border-focused
+    );
+    @if ($ring-focused != null) {
+      outline: 0;
+      box-shadow: $ring-focused;
+    }
+  }
+
+  // Pressed
+  .btn-check:active + &,
+  &:active:not(.btn-active),
+  &.active,
+  &.show {
+    @include button-declaration(
+      $bg-pressed,
+      $color-pressed,
+      $icon-pressed,
+      $border-pressed
+    );
+    box-shadow: none;
+  }
+
+  // Disabled
+  &.disabled,
+  &:disabled {
+    @include button-declaration(
+      $bg-disabled,
+      $color-disabled,
+      $icon-disabled,
+      $border-disabled
+    );
+  }
+}
+
 @mixin button-custom-variant(
   $color,
   $icon-color,

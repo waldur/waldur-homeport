@@ -11,7 +11,7 @@ export const ManageSecurityGroupsButton: FunctionComponent<any> = (props) =>
         resource_uuid: props.resource.parent_uuid,
         tab: 'security_groups',
       }}
-      className="ms-3 btn btn-outline btn-outline-default"
+      className="ms-3 btn btn-tertiary"
     >
       {translate('Manage security groups')}
     </Link>

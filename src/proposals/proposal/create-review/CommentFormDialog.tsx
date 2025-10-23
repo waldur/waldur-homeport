@@ -41,10 +41,7 @@ export const CommentFormDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           }
           footer={
             <>
-              <CloseDialogButton
-                variant="outline btn-outline-default"
-                className="flex-equal"
-              />
+              <CloseDialogButton variant="tertiary" className="flex-equal" />
 
               <SubmitButton
                 disabled={props.invalid || props.pristine}

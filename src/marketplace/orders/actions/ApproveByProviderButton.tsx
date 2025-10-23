@@ -87,7 +87,7 @@ export const ApproveByProviderButton: FunctionComponent<
     <ActionItem
       as={props.as}
       className={
-        props.as === Button ? 'btn-light-success btn-sm w-100' : 'text-success'
+        props.as === Button ? 'btn-success btn-sm w-100' : 'text-success'
       }
       title={translate('Approve')}
       action={mutate}
