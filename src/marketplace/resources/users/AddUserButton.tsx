@@ -7,8 +7,6 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-import { USER_FORM_ID } from './constants';
-
 const AddUserDialog = lazyComponent(() =>
   import('./AddUserDialog').then((module) => ({
     default: module.AddUserDialog,
@@ -25,7 +23,6 @@ export const AddUserButton: FunctionComponent<{
     dispatch(
       openModalDialog(AddUserDialog, {
         resolve: { resource, offering, refetch },
-        formId: USER_FORM_ID,
       }),
     );
   };
