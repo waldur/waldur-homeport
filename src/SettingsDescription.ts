@@ -148,6 +148,12 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'ENABLE_ORDER_START_DATE',
+        description: translate('Allow setting start date to control when resource creation order is processed.'),
+        default: false,
+        type: 'boolean',
+      },
     ],
   },
   {
@@ -587,6 +593,12 @@ export const SettingsDescription = [
         key: 'ATLASSIAN_TEMPLATE_FIELD',
         description: translate('Template field name'),
         default: '',
+        type: 'string',
+      },
+      {
+        key: 'ATLASSIAN_WALDUR_BACKEND_ID_FIELD',
+        description: translate('Waldur backend ID custom field ID (fallback when field lookup by name fails)'),
+        default: 'customfield_10200',
         type: 'string',
       },
       {
