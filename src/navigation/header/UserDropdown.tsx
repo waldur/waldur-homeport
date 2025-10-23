@@ -11,6 +11,7 @@ import { ThemeSwitcher } from '../../theme/ThemeSwitcher';
 
 import { LanguageSelectorDropdown } from './LanguageSelectorDropdown';
 import { UserDropdownMenuItems } from './UserDropdownMenuItems';
+import { UserIpAddress } from './UserIpAddress';
 import { UserToken } from './UserToken';
 
 export const UserDropdownMenu: FunctionComponent = () => {
@@ -128,6 +129,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
           <>
             <div className="separator my-2" />
             <UserToken token={user.token} />
+            <UserIpAddress ip={user.ip_address} />
           </>
         )}
       </div>
