@@ -61856,18 +61856,18 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
-  "Text has been copied": {
-    "message": "Text has been copied",
+  "Text": {
+    "message": "Text",
     "context": {
-      "primary_ui_type": "success_message",
+      "primary_ui_type": "unknown",
       "ui_types": [
-        "success_message"
+        "unknown"
       ],
       "components": [],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 20,
-        "wordCount": 4,
+        "length": 4,
+        "wordCount": 1,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -61880,31 +61880,73 @@
       },
       "variables": {},
       "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "core/CopyToClipboardButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "{name} has been copied": {
+    "message": "{name} has been copied",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 4,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "file_context": {
         "domains": [
-          "general",
-          "marketplace",
-          "infrastructure",
-          "resource_management"
+          "general"
         ],
         "feature_areas": [
-          "core",
-          "common",
-          "navigation",
-          "update-floating-ips",
-          "resource"
+          "core"
         ],
         "component_types": [
-          "button",
-          "component",
-          "navigation",
-          "form"
+          "button"
         ],
         "paths": [
-          "core/CopyToClipboardButton.tsx",
-          "marketplace/common/CopyToClipboard.tsx",
-          "navigation/FooterLinks.tsx",
-          "openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx",
-          "resource/ResourceAccessButton.tsx"
+          "core/CopyToClipboardButton.tsx"
         ]
       },
       "jsx_context": {
@@ -61925,11 +61967,11 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 5
+      "usage_count": 1
     },
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: name. Variable types: string.",
       "This action modifies application state. Use clear, actionable language."
     ]
   },
@@ -92508,12 +92550,13 @@
       "primary_ui_type": "title",
       "ui_types": [
         "generic_element",
-        "title",
-        "unknown"
+        "unknown",
+        "title"
       ],
       "components": [
         "ExpandableEventField",
         "ExpandableContainer",
+        "CopyToClipboardButton",
         "Table"
       ],
       "is_user_facing": true,
@@ -92539,16 +92582,19 @@
         ],
         "feature_areas": [
           "events",
+          "header",
           "openstack-instance",
           "openstack-tenant",
           "api-key"
         ],
         "component_types": [
           "list",
+          "navigation",
           "component"
         ],
         "paths": [
           "events/ExpandableEventDetailsTable.tsx",
+          "navigation/header/UserIpAddress.tsx",
           "openstack/openstack-instance/FloatingIpsList.tsx",
           "openstack/openstack-instance/InternalIpsList.tsx",
           "openstack/openstack-tenant/IpAddressList.tsx",
@@ -92559,6 +92605,8 @@
       "jsx_context": {
         "tags": [
           "ExpandableEventField",
+          "span",
+          "CopyToClipboardButton",
           "Table",
           "th"
         ],
@@ -92576,9 +92624,9 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 9
       },
-      "usage_count": 6
+      "usage_count": 7
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -131293,6 +131341,81 @@
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Text has been copied": {
+    "message": "Text has been copied",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "general",
+          "infrastructure",
+          "resource_management"
+        ],
+        "feature_areas": [
+          "common",
+          "navigation",
+          "update-floating-ips",
+          "resource"
+        ],
+        "component_types": [
+          "component",
+          "navigation",
+          "form",
+          "button"
+        ],
+        "paths": [
+          "marketplace/common/CopyToClipboard.tsx",
+          "navigation/FooterLinks.tsx",
+          "openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx",
+          "resource/ResourceAccessButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 4
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language."
     ]
   },
   "Add resource": {

@@ -13,6 +13,7 @@ interface OwnProps {
   className?: string;
   buttonClassName?: string;
   onlyButton?: boolean;
+  verbose?: string;
 }
 
 export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
@@ -21,6 +22,7 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
   buttonClassName,
   size,
   onlyButton,
+  verbose = translate('Text'),
 }) => {
   const dispatch = useDispatch();
 
@@ -29,10 +31,12 @@ export const CopyToClipboardButton: FunctionComponent<OwnProps> = ({
       event.stopPropagation();
       event.preventDefault();
       navigator.clipboard.writeText(value).then(() => {
-        dispatch(showSuccess(translate('Text has been copied')));
+        dispatch(
+          showSuccess(translate('{name} has been copied', { name: verbose })),
+        );
       });
     },
-    [dispatch, value],
+    [dispatch, value, verbose],
   );
 
   const CopyButton = () => (
