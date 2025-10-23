@@ -1,24 +1,25 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
-import { Form } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
-
-import './ExpirationTimeGroup.scss';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 export const ExpirationTimeGroup: FunctionComponent<{ disabled?: boolean }> = ({
   disabled,
 }) => (
-  <Form.Group id="expiration-time-group" className="mt-3">
-    <Form.Label>{translate('Role expires on')}</Form.Label>
+  <FormGroup
+    id="expiration-time-group"
+    label={translate('Role expires on')}
+    spaceless
+  >
     <Field
       name="expiration_time"
-      component={DateField}
+      component={DateField as any}
       disabled={disabled}
       minDate={DateTime.now().plus({ days: 1 }).toISO()}
       placeholder="YYYY-MM-DD"
     />
-  </Form.Group>
+  </FormGroup>
 );

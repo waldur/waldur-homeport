@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { useCallback, FC } from 'react';
+import { Form } from 'react-final-form';
+import { useSelector } from 'react-redux';
 import {
   Project,
   projectsAddUser,
@@ -8,35 +8,31 @@ import {
   projectsUpdateUser,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { FormContainer } from '@waldur/form';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { GenericPermission, Role } from '@waldur/permissions/types';
 import { getProjectRoles } from '@waldur/permissions/utils';
-import { showErrorResponse } from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
 import { RoleGroup } from './RoleGroup';
 import { UserGroup } from './UserGroup';
 
-const FORM_ID = 'EditUserDialog';
-
 interface EditUserDialogFormData {
   role: Role;
   expiration_time: string;
-  user: any;
 }
 
 interface EditUserDialogResolve {
   permission: GenericPermission;
-  refetch;
+  refetch();
 }
 
-interface EditUserDialogOwnProps {
+interface EditUserDialogProps {
   resolve: EditUserDialogResolve;
 }
 
@@ -76,56 +72,52 @@ const savePermissions = async (
   await resolve.refetch();
 };
 
-export const EditUserDialog = connect(
-  (_, ownProps: EditUserDialogOwnProps) => ({
-    initialValues: {
-      role: getProjectRoles().find(
-        ({ name }) => name === ownProps.resolve.permission.role_name,
-      ),
-      expiration_time: ownProps.resolve.permission.expiration_time,
+export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
+  const { closeDialog } = useModal();
+  const { showSuccess, showErrorResponse } = useNotify();
+  const currentProject = useSelector(getProject);
+
+  const initialValues = {
+    role: getProjectRoles().find(
+      ({ name }) => name === resolve.permission.role_name,
+    ),
+    expiration_time: resolve.permission.expiration_time,
+  };
+
+  const saveUser = useCallback(
+    async (formData: EditUserDialogFormData) => {
+      try {
+        await savePermissions(currentProject, formData, resolve);
+        showSuccess(translate('Permission has been updated.'));
+        closeDialog();
+      } catch (error) {
+        showErrorResponse(error, translate('Unable to update permission.'));
+      }
     },
-  }),
-)(
-  reduxForm<EditUserDialogFormData, EditUserDialogOwnProps>({
-    form: FORM_ID,
-  })(({ submitting, handleSubmit, resolve }) => {
-    const dispatch = useDispatch();
-    const currentProject = useSelector(getProject);
+    [currentProject, resolve, showSuccess, showErrorResponse, closeDialog],
+  );
 
-    const saveUser = useCallback(
-      async (formData) => {
-        try {
-          await savePermissions(currentProject, formData, resolve);
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to update permission.')),
-          );
-        }
-      },
-      [dispatch, resolve],
-    );
-
-    return (
-      <form onSubmit={handleSubmit(saveUser)}>
-        <ModalDialog
-          title={translate('Edit project member')}
-          footer={
-            <>
-              <SubmitButton submitting={submitting}>
-                {translate('Save')}
-              </SubmitButton>
-              <CloseDialogButton />
-            </>
-          }
-        >
-          <FormContainer submitting={submitting}>
+  return (
+    <Form onSubmit={saveUser} initialValues={initialValues}>
+      {({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit project member')}
+            footer={
+              <>
+                <SubmitButton disabled={invalid} submitting={submitting}>
+                  {translate('Save')}
+                </SubmitButton>
+                <CloseDialogButton />
+              </>
+            }
+          >
             <UserGroup permission={resolve.permission} />
             <RoleGroup types={['project']} />
             <ExpirationTimeGroup disabled={submitting} />
-          </FormContainer>
-        </ModalDialog>
-      </form>
-    );
-  }),
-);
+          </ModalDialog>
+        </form>
+      )}
+    </Form>
+  );
+};

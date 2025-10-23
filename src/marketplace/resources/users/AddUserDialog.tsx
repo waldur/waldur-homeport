@@ -1,50 +1,51 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { FC, useCallback } from 'react';
+import { Field, Form } from 'react-final-form';
 import { marketplaceResourceUsersCreate, usersList } from 'waldur-js-client';
 
 import { parseSelectData } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { Select } from '@waldur/form/themed-select';
+import { SelectField, SubmitButton } from '@waldur/form';
+import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
 
-import { USER_FORM_ID } from './constants';
+export const AddUserDialog: FC<{
+  resolve: { resource; offering; refetch };
+}> = ({ resolve }) => {
+  const { showSuccess, showErrorResponse } = useNotify();
+  const { closeDialog } = useModal();
 
-export const AddUserDialog = reduxForm<
-  {},
-  { resolve: { resource; offering; refetch } }
->({
-  form: USER_FORM_ID,
-})((props) => {
-  const dispatch = useDispatch();
   const update = useCallback(
     async (formData) => {
       try {
         await marketplaceResourceUsersCreate({
           body: {
-            resource: props.resolve.resource.url,
+            resource: resolve.resource.url,
             user: formData.user.url,
             role: formData.role.url,
           },
         });
-        dispatch(
-          showSuccess(translate('User has been assigned successfully.')),
-        );
-        if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
+
+        showSuccess(translate('User has been assigned successfully.'));
+        if (resolve.refetch) await resolve.refetch();
+        closeDialog();
       } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to assign user.')));
+        showErrorResponse(error, translate('Unable to assign user.'));
       }
     },
-    [dispatch],
+    [
+      resolve.resource,
+      resolve.refetch,
+      showSuccess,
+      closeDialog,
+      showErrorResponse,
+    ],
   );
 
   const loadUsers = useCallback(
@@ -52,7 +53,7 @@ export const AddUserDialog = reduxForm<
       usersList({
         query: {
           full_name: query,
-          project_uuid: props.resolve.resource.project_uuid,
+          project_uuid: resolve.resource.project_uuid,
           field: ['full_name', 'email', 'url', 'uuid'],
           o: ['full_name'],
           page,
@@ -65,47 +66,52 @@ export const AddUserDialog = reduxForm<
           page,
         ),
       ),
-    [props.resolve.resource],
+    [resolve.resource],
   );
 
   return (
-    <form onSubmit={props.handleSubmit(update)}>
-      <ModalDialog
-        title={translate('Assign user')}
-        footer={
-          <SubmitButton
-            disabled={props.invalid}
-            submitting={props.submitting}
-            label={translate('Create')}
-          />
-        }
-      >
-        <FormGroup label={translate('User')} required={true}>
-          <Field
-            name="user"
-            validate={required}
-            component={AsyncSelectField}
-            loadOptions={loadUsers}
-            getOptionLabel={({ full_name, email }) => `${full_name} (${email})`}
-            getOptionValue={({ uuid }) => uuid}
-          />
-        </FormGroup>
-        <FormGroup label={translate('Role')} required={true}>
-          <Field
-            name="role"
-            validate={required}
-            component={(componentProp) => (
-              <Select
-                value={componentProp.input.value}
-                onChange={(value) => componentProp.input.onChange(value)}
-                options={props.resolve.offering.roles}
+    <Form onSubmit={update}>
+      {({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Assign user')}
+            footer={
+              <>
+                <CloseDialogButton className="min-w-125px" />
+                <SubmitButton
+                  label={translate('Create')}
+                  submitting={submitting}
+                  disabled={invalid}
+                  className="btn btn-primary min-w-125px"
+                />
+              </>
+            }
+          >
+            <FormGroup label={translate('User')} required>
+              <AsyncSelectFieldFinal
+                name="user"
+                placeholder={translate('Select user...')}
+                loadOptions={loadUsers}
+                getOptionLabel={({ full_name, email }) =>
+                  `${full_name} (${email})`
+                }
+                getOptionValue={({ uuid }) => uuid}
+                validate={required}
+              />
+            </FormGroup>
+            <FormGroup label={translate('Role')} required>
+              <Field
+                name="role"
+                validate={required}
+                component={SelectField}
+                options={resolve.offering.roles}
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={(option) => option.name}
               />
-            )}
-          />
-        </FormGroup>
-      </ModalDialog>
-    </form>
+            </FormGroup>
+          </ModalDialog>
+        </form>
+      )}
+    </Form>
   );
-});
+};

@@ -2085,9 +2085,10 @@
       "components": [
         "Table",
         "FormContainer",
-        "Field",
+        "FormGroup",
         "ExpandableEventField",
         "ExpandableContainer",
+        "Field",
         "ModalDialog",
         "TableFilterItem",
         "Col",
@@ -2095,7 +2096,6 @@
         "Tab",
         "Tabs",
         "VStepperFormStepCard",
-        "FormGroup",
         "AsyncPaginate",
         "Button",
         "OverlayTrigger",
@@ -2239,13 +2239,13 @@
         "tags": [
           "Table",
           "th",
-          "Field",
+          "FormGroup",
           "strong",
           "ExpandableEventField",
+          "Field",
           "h6",
           "TableFilterItem",
           "Tab",
-          "FormGroup",
           "AsyncPaginate",
           "Button",
           "ToggleButton",
@@ -13986,6 +13986,7 @@
           "actions",
           "admin",
           "deploy",
+          "permissions",
           "policies",
           "images",
           "update",
@@ -14048,6 +14049,7 @@
           "marketplace/category/admin/ColumnRow.tsx",
           "marketplace/category/admin/GroupDeleteButton.tsx",
           "marketplace/deploy/DeployForm.tsx",
+          "marketplace/offerings/details/permissions/OfferingPermissionRemoveButton.tsx",
           "marketplace/offerings/details/policies/PolicyDeleteButton.tsx",
           "marketplace/offerings/images/DeleteImageButton.tsx",
           "marketplace/offerings/update/components/DeleteComponentButton.tsx",
@@ -14059,7 +14061,6 @@
           "marketplace/resources/lexis/LexisLinkDeleteButton.tsx",
           "marketplace/resources/resource-pending/OrderErredView.tsx",
           "marketplace/resources/users/DeleteUserButton.tsx",
-          "marketplace/service-providers/OfferingPermissionRemoveButton.tsx",
           "marketplace/service-providers/RestrictOfferingUser.tsx",
           "marketplace/service-providers/UserRemoveButton.tsx",
           "marketplace-checklist/categories/CategoryDeleteAction.tsx",
@@ -18792,6 +18793,7 @@
         "Tab",
         "Tabs",
         "VStepperFormStepCard",
+        "FormGroup",
         "SelectField"
       ],
       "is_user_facing": true,
@@ -18827,6 +18829,7 @@
           "deploy",
           "steps",
           "offerings",
+          "permissions",
           "import-users",
           "list",
           "service-providers",
@@ -18866,6 +18869,7 @@
           "marketplace/deploy/DetailsOverviewDialog.tsx",
           "marketplace/deploy/steps/FormDetailsOverviewStep.tsx",
           "marketplace/offerings/PriceList.tsx",
+          "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx",
           "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
           "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
           "marketplace/orders/list/OrdersListExpandableRow.tsx",
@@ -18877,7 +18881,6 @@
           "marketplace/resources/list/ProviderResourcesList.tsx",
           "marketplace/resources/list/utils.tsx",
           "marketplace/service-providers/CreateProviderOfferingUserDialog.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateDialog.tsx",
           "marketplace/service-providers/OfferingPermissionsList.tsx",
           "marketplace/service-providers/ProviderCampaignResourceExpandable.tsx",
           "marketplace/service-providers/ProviderOfferingUsersFilter.tsx",
@@ -18917,6 +18920,7 @@
           "Table",
           "TableFilterItem",
           "Tab",
+          "FormGroup",
           "strong",
           "SelectField"
         ],
@@ -20202,6 +20206,8 @@
         "AsyncSelectField",
         "FormContainer",
         "AutocompleteField",
+        "AsyncSelectFieldFinal",
+        "FormGroup",
         "ModalDialog",
         "Select",
         "Field"
@@ -20230,21 +20236,21 @@
         "feature_areas": [
           "auto-provisioning-rules",
           "details",
+          "permissions",
           "list",
-          "service-providers",
           "resource-requests-step"
         ],
         "component_types": [
           "component",
-          "list",
           "dialog",
+          "list",
           "form"
         ],
         "paths": [
           "administration/auto-provisioning-rules/Step1OfferingAndPlan.tsx",
           "marketplace/offerings/details/OfferingAutocomplete.tsx",
+          "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx",
           "marketplace/resources/list/OfferingFilter.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateDialog.tsx",
           "proposals/proposal/create/resource-requests-step/CallOfferingFilter.tsx",
           "proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormFirstPage.tsx"
         ]
@@ -20253,6 +20259,7 @@
         "tags": [
           "AsyncSelectField",
           "AutocompleteField",
+          "AsyncSelectFieldFinal",
           "Select",
           "Field"
         ],
@@ -20267,7 +20274,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 10
@@ -20276,7 +20283,6 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -22335,10 +22341,10 @@
           "details",
           "payment-profiles",
           "payments",
+          "permissions",
           "overview",
           "tos",
           "options",
-          "service-providers",
           "openstack-instance",
           "openstack-tenant",
           "role-mapping",
@@ -22359,13 +22365,13 @@
           "customer/details/AccessSubnetForm.tsx",
           "customer/payment-profiles/PaymentProfileUpdateDialog.tsx",
           "customer/payments/PaymentUpdateDialog.tsx",
+          "marketplace/offerings/details/permissions/UpdateOfferingPermissionExpirationTimeDialog.tsx",
           "marketplace/offerings/update/overview/EditGettingStartedDialog.tsx",
           "marketplace/offerings/update/overview/EditOverviewDialog.tsx",
           "marketplace/offerings/update/tos/TosEditDialog.tsx",
           "marketplace/orders/list/OrderTypeCell.tsx",
           "marketplace/orders/list/OrderTypeFilter.tsx",
           "marketplace/resources/options/UpdateResourceOptionDialog.tsx",
-          "marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx",
           "openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx",
           "openstack/openstack-tenant/SetRoutesDialog.tsx",
           "proposals/update/role-mapping/RoleMappingFormDialog.tsx",
@@ -51786,7 +51792,8 @@
       ],
       "components": [
         "AsyncPaginate",
-        "Field"
+        "Field",
+        "FinalField"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -51827,7 +51834,8 @@
       "jsx_context": {
         "tags": [
           "AsyncPaginate",
-          "Field"
+          "Field",
+          "FinalField"
         ],
         "conditional_render": false
       },
@@ -51842,11 +51850,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 5
       },
       "usage_count": 4
-    }
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
   "Unable to login via SAML2 protocol.": {
     "message": "Unable to login via SAML2 protocol.",
@@ -57432,11 +57443,15 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "unknown",
+        "generic_element"
       ],
       "components": [
         "Col",
-        "Row"
+        "Row",
+        "Field",
+        "FormGroup",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -57455,21 +57470,27 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "general"
+          "general",
+          "marketplace"
         ],
         "feature_areas": [
-          "offering"
+          "offering",
+          "permissions"
         ],
         "component_types": [
-          "component"
+          "component",
+          "dialog"
         ],
         "paths": [
-          "booking/offering/BookingResourcesCalendar.tsx"
+          "booking/offering/BookingResourcesCalendar.tsx",
+          "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx",
+          "marketplace/offerings/details/permissions/UpdateOfferingPermissionExpirationTimeDialog.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "h3"
+          "h3",
+          "Field"
         ],
         "conditional_render": true
       },
@@ -57484,13 +57505,15 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 1
+      "usage_count": 3
     },
     "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -82943,7 +82966,6 @@
           "lexis",
           "terminate",
           "usage",
-          "service-providers",
           "marketplace-remote",
           "create",
           "catalog",
@@ -82972,7 +82994,6 @@
           "marketplace/resources/lexis/CreateLexisLinkDialog.tsx",
           "marketplace/resources/terminate/TerminateDialog.tsx",
           "marketplace/resources/usage/ResourceUsageSubmitButton.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateDialog.tsx",
           "marketplace-remote/ReviewDialog.tsx",
           "openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
           "openstack/openstack-volume/actions/ExtendDialog.tsx",
@@ -83012,7 +83033,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 28
+      "usage_count": 27
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -88476,7 +88497,7 @@
         ],
         "feature_areas": [
           "team",
-          "service-providers"
+          "permissions"
         ],
         "component_types": [
           "dialog"
@@ -88485,7 +88506,7 @@
           "customer/team/AddProjectUserDialog.tsx",
           "customer/team/EditProjectUserDialog.tsx",
           "customer/team/EditUserDialog.tsx",
-          "marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx",
+          "marketplace/offerings/details/permissions/UpdateOfferingPermissionExpirationTimeDialog.tsx",
           "project/team/EditUserDialog.tsx"
         ]
       },
@@ -88680,13 +88701,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown",
-        "generic_element"
+        "unknown"
       ],
       "components": [
         "ExpandableContainer",
-        "Field",
-        "FormContainer",
+        "FormGroup",
         "ModalDialog"
       ],
       "is_user_facing": true,
@@ -88711,8 +88730,7 @@
         ],
         "feature_areas": [
           "team",
-          "permissions",
-          "service-providers"
+          "permissions"
         ],
         "component_types": [
           "list",
@@ -88721,14 +88739,13 @@
         "paths": [
           "customer/team/CustomerUsersListExpandableRow.tsx",
           "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateDialog.tsx",
-          "marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx"
+          "marketplace/offerings/details/permissions/UpdateOfferingPermissionExpirationTimeDialog.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "th",
-          "Field"
+          "FormGroup"
         ],
         "conditional_render": true
       },
@@ -88741,16 +88758,15 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 4
+      "usage_count": 3
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -89043,7 +89059,8 @@
         "unknown"
       ],
       "components": [
-        "ModalDialog"
+        "ModalDialog",
+        "Form"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -89093,13 +89110,78 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
+        "has_validation": true,
+        "max_nesting_level": 10
       },
       "usage_count": 2
     },
     "translator_notes": [
-      "This action modifies application state. Use clear, actionable language."
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Permission has been updated.": {
+    "message": "Permission has been updated.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "project_management"
+        ],
+        "feature_areas": [
+          "team"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/team/EditUserDialog.tsx",
+          "project/team/EditUserDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Edit organization member": {
@@ -89110,7 +89192,8 @@
         "unknown"
       ],
       "components": [
-        "ModalDialog"
+        "ModalDialog",
+        "Form"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -89156,15 +89239,15 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
+        "has_validation": true,
+        "max_nesting_level": 10
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Select organization roles": {
@@ -89780,7 +89863,8 @@
       "components": [
         "ActionItem",
         "AddButton",
-        "ModalDialog"
+        "ModalDialog",
+        "Form"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -89839,7 +89923,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 9
+        "max_nesting_level": 10
       },
       "usage_count": 4
     },
@@ -90016,10 +90100,8 @@
         "ExpandableEventField",
         "ExpandableContainer",
         "TableFilterItem",
-        "AsyncSelectField",
-        "FormContainer",
-        "ModalDialog",
-        "FormGroup"
+        "FormGroup",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -90078,7 +90160,6 @@
           "marketplace/resources/users/AddUserDialog.tsx",
           "marketplace/resources/users/ResourceUsersList.tsx",
           "marketplace/service-providers/CreateProviderOfferingUserDialog.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateDialog.tsx",
           "marketplace/service-providers/OfferingPermissionsList.tsx",
           "marketplace/service-providers/ProviderOfferingUsersList.tsx",
           "marketplace/service-providers/ProviderUsersList.tsx",
@@ -90097,7 +90178,6 @@
           "Table",
           "ExpandableEventField",
           "TableFilterItem",
-          "AsyncSelectField",
           "FormGroup"
         ],
         "conditional_render": true
@@ -90116,7 +90196,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 23
+      "usage_count": 22
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -96732,6 +96812,77 @@
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Select": {
+    "message": "Select",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "generic_element",
+        "title"
+      ],
+      "components": [
+        "FinalField"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "form",
+          "actions"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "form/AsyncSelectField.tsx",
+          "marketplace/offerings/actions/SetAccessPolicyFormContainer.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FinalField"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Enter comma-separated values": {
@@ -119891,8 +120042,8 @@
       "components": [
         "AsyncPaginate",
         "Field",
-        "AsyncSelectField",
-        "FormContainer",
+        "AsyncSelectFieldFinal",
+        "FormGroup",
         "ModalDialog"
       ],
       "is_user_facing": true,
@@ -119919,7 +120070,7 @@
         "feature_areas": [
           "feedback",
           "permissions",
-          "service-providers",
+          "users",
           "team"
         ],
         "component_types": [
@@ -119929,14 +120080,14 @@
         "paths": [
           "issues/feedback/UserAutocomplete.tsx",
           "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateDialog.tsx",
+          "marketplace/resources/users/AddUserDialog.tsx",
           "project/team/AddUserDialog.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "AsyncPaginate",
-          "AsyncSelectField"
+          "AsyncSelectFieldFinal"
         ],
         "conditional_render": false
       },
@@ -119949,7 +120100,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 10
@@ -119958,7 +120109,6 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -144700,68 +144850,6 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
-  "Select": {
-    "message": "Select",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 6,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "actions"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/actions/SetAccessPolicyFormContainer.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
   "Logo has been updated successfully.": {
     "message": "Logo has been updated successfully.",
     "context": {
@@ -147049,15 +147137,13 @@
           "marketplace"
         ],
         "feature_areas": [
-          "permissions",
-          "service-providers"
+          "permissions"
         ],
         "component_types": [
           "dialog"
         ],
         "paths": [
-          "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateDialog.tsx"
+          "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx"
         ]
       },
       "jsx_context": {
@@ -147073,17 +147159,16 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
       "This is an error message. Ensure tone is helpful and not alarming.",
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -147095,7 +147180,8 @@
         "unknown"
       ],
       "components": [
-        "ModalDialog"
+        "ModalDialog",
+        "Form"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -147117,15 +147203,13 @@
           "marketplace"
         ],
         "feature_areas": [
-          "permissions",
-          "service-providers"
+          "permissions"
         ],
         "component_types": [
           "dialog"
         ],
         "paths": [
-          "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateDialog.tsx"
+          "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx"
         ]
       },
       "jsx_context": {
@@ -147143,17 +147227,283 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 6
+        "max_nesting_level": 10
       },
-      "usage_count": 2
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Are you sure you want to revoke this permission?": {
+    "message": "Are you sure you want to revoke this permission?",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "dialog_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 48,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": true,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "permissions"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/offerings/details/permissions/OfferingPermissionRemoveButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
+      "This is a question. Ensure question format is appropriate in your language."
+    ]
+  },
+  "Permission has been revoked.": {
+    "message": "Permission has been revoked.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "permissions"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/offerings/details/permissions/OfferingPermissionRemoveButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to revoke permission.": {
+    "message": "Unable to revoke permission.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "permissions"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/offerings/details/permissions/OfferingPermissionRemoveButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Revoke": {
+    "message": "Revoke",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element",
+        "unknown"
+      ],
+      "components": [
+        "ActionItem",
+        "Button",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "user_management"
+        ],
+        "feature_areas": [
+          "permissions",
+          "dashboard"
+        ],
+        "component_types": [
+          "button",
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/offerings/details/permissions/OfferingPermissionRemoveButton.tsx",
+          "user/dashboard/RevokeTosAction.tsx",
+          "user/dashboard/RevokeTosDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionItem",
+          "Button"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Offering permissions": {
@@ -147219,6 +147569,141 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Permission has been updated successfully.": {
+    "message": "Permission has been updated successfully.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 41,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "permissions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/offerings/details/permissions/UpdateOfferingPermissionExpirationTimeDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Update permission of {name}": {
+    "message": "Update permission of {name}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog",
+        "Form"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 27,
+        "wordCount": 4,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "permissions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/offerings/details/permissions/UpdateOfferingPermissionExpirationTimeDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: name. Variable types: string.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Select component...": {
@@ -189425,7 +189910,8 @@
       ],
       "components": [
         "ActionButton",
-        "ModalDialog"
+        "ModalDialog",
+        "Form"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -189477,7 +189963,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 6
+        "max_nesting_level": 10
       },
       "usage_count": 2
     },
@@ -189538,7 +190024,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 0
@@ -189548,7 +190034,6 @@
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -189602,7 +190087,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 0
@@ -189612,7 +190097,6 @@
     "translator_notes": [
       "This is an error message. Ensure tone is helpful and not alarming.",
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -192656,273 +193140,6 @@
       },
       "usage_count": 1
     }
-  },
-  "Are you sure you want to revoke this permission?": {
-    "message": "Are you sure you want to revoke this permission?",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "dialog_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 48,
-        "wordCount": 9,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": true,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "service-providers"
-        ],
-        "component_types": [
-          "button"
-        ],
-        "paths": [
-          "marketplace/service-providers/OfferingPermissionRemoveButton.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This is a question. Ensure question format is appropriate in your language."
-    ]
-  },
-  "Permission has been revoked.": {
-    "message": "Permission has been revoked.",
-    "context": {
-      "primary_ui_type": "success_message",
-      "ui_types": [
-        "success_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 28,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "service-providers"
-        ],
-        "component_types": [
-          "button"
-        ],
-        "paths": [
-          "marketplace/service-providers/OfferingPermissionRemoveButton.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a success message. Use positive, confirming language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Unable to revoke permission.": {
-    "message": "Unable to revoke permission.",
-    "context": {
-      "primary_ui_type": "error_message",
-      "ui_types": [
-        "error_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 28,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "service-providers"
-        ],
-        "component_types": [
-          "button"
-        ],
-        "paths": [
-          "marketplace/service-providers/OfferingPermissionRemoveButton.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Revoke": {
-    "message": "Revoke",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element",
-        "unknown"
-      ],
-      "components": [
-        "ActionItem",
-        "Button",
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 6,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "user_management"
-        ],
-        "feature_areas": [
-          "service-providers",
-          "dashboard"
-        ],
-        "component_types": [
-          "button",
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/service-providers/OfferingPermissionRemoveButton.tsx",
-          "user/dashboard/RevokeTosAction.tsx",
-          "user/dashboard/RevokeTosDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ActionItem",
-          "Button"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
   },
   "offering permissions": {
     "message": "offering permissions",
@@ -196446,141 +196663,6 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Permission has been updated successfully.": {
-    "message": "Permission has been updated successfully.",
-    "context": {
-      "primary_ui_type": "success_message",
-      "ui_types": [
-        "success_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 41,
-        "wordCount": 5,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "service-providers"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a success message. Use positive, confirming language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Update permission of {name}": {
-    "message": "Update permission of {name}",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 27,
-        "wordCount": 4,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "service-providers"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/service-providers/UpdateOfferingPermissionExpirationTimeDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ModalDialog"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "Contains variables: name. Variable types: string.",
       "This action modifies application state. Use clear, actionable language."
     ]
   },
@@ -245886,8 +245968,8 @@
         "generic_element"
       ],
       "components": [
-        "AwesomeCheckboxField",
-        "FormContainer",
+        "Field",
+        "FormGroup",
         "ModalDialog"
       ],
       "is_user_facing": true,
@@ -245921,7 +246003,7 @@
       },
       "jsx_context": {
         "tags": [
-          "AwesomeCheckboxField"
+          "Field"
         ],
         "conditional_render": true
       },
@@ -245934,15 +246016,15 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 10
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -245953,7 +246035,9 @@
       "ui_types": [
         "unknown"
       ],
-      "components": [],
+      "components": [
+        "FormGroup"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 15,
@@ -245970,15 +246054,23 @@
       },
       "variables": {},
       "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "team"
+        ],
+        "component_types": [
+          "component"
+        ],
         "paths": [
           "project/team/ExpirationTimeGroup.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [],
+        "tags": [
+          "FormGroup"
+        ],
         "conditional_render": false
       },
       "action_types": [
@@ -245992,11 +246084,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
+        "has_validation": true,
+        "max_nesting_level": 5
       },
       "usage_count": 1
-    }
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
   "Team invitations": {
     "message": "Team invitations",
@@ -262321,7 +262416,8 @@
         "unknown"
       ],
       "components": [
-        "ModalDialog"
+        "ModalDialog",
+        "Form"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -262370,7 +262466,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 6
+        "max_nesting_level": 10
       },
       "usage_count": 1
     },
@@ -262386,8 +262482,8 @@
         "generic_element"
       ],
       "components": [
-        "AsyncSelectField",
-        "FormContainer",
+        "AsyncSelectFieldFinal",
+        "FormGroup",
         "ModalDialog"
       ],
       "is_user_facing": true,
@@ -262421,7 +262517,7 @@
       },
       "jsx_context": {
         "tags": [
-          "AsyncSelectField"
+          "AsyncSelectFieldFinal"
         ],
         "conditional_render": false
       },

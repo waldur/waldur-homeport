@@ -12,7 +12,9 @@ import { useUser } from '@waldur/workspace/hooks';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 const OfferingPermissionCreateDialog = lazyComponent(() =>
-  import('./OfferingPermissionCreateDialog').then((module) => ({
+  import(
+    '../offerings/details/permissions/OfferingPermissionCreateDialog'
+  ).then((module) => ({
     default: module.OfferingPermissionCreateDialog,
   })),
 );
@@ -29,7 +31,9 @@ export const OfferingPermissionCreateButton: React.FC<{ fetch }> = ({
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
-      openModalDialog(OfferingPermissionCreateDialog, { resolve: { fetch } }),
+      openModalDialog(OfferingPermissionCreateDialog, {
+        resolve: { refetch: fetch },
+      }),
     );
   };
   return canCreatePermission ? (
