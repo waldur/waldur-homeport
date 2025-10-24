@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { orderProjectSelector } from '../selectors';
 import { FormStepProps } from '../types';
 
+import { OrderStartDateField } from './OrderStartDateField';
 import { ResourceNameGroup } from './ResourceNameGroup';
 import { TerminationDateField } from './TerminationDateField';
 
@@ -38,6 +39,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
       </Field>
       <div className="mb-7 border-bottom" />
       <TerminationDateField offering={props.offering} />
+      <OrderStartDateField project={project} />
     </VStepperFormStepCard>
   );
 };

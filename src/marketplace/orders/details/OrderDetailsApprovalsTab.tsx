@@ -81,6 +81,11 @@ export const OrderDetailsApprovalsTab = ({
             value={formatDateTime(order.consumer_reviewed_at)}
           />
         ) : null}
+
+        <FormTable.Item
+          label={translate('Start date')}
+          value={formatDateTime(order.start_date)}
+        />
       </FormTable>
       <OrderComponentsTable order={order} offering={offering} />
     </FormTable.Card>
