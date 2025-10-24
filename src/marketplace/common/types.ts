@@ -76,6 +76,7 @@ export interface DeployFormData {
   attributes?: AttributesType;
   limits?: Limits;
   plan?: Plan;
+  start_date?: string;
 }
 
 export interface OrderFormComponentProps extends InjectedFormProps {

@@ -1,0 +1,70 @@
+import { DateTime } from 'luxon';
+import { useMemo } from 'react';
+import { Field } from 'redux-form';
+
+import { ENV } from '@waldur/core/config';
+import { FormGroup } from '@waldur/form';
+import { DateField } from '@waldur/form/DateField';
+import { translate } from '@waldur/i18n';
+import { Project } from '@waldur/workspace/types';
+
+interface OrderStartDateFieldProps {
+  project: Project;
+}
+
+export const OrderStartDateField = ({ project }: OrderStartDateFieldProps) => {
+  // 1. Check if the feature is enabled from the global config
+  const isEnabled = ENV.plugins.WALDUR_CORE.ENABLE_ORDER_START_DATE;
+
+  // 2. Memoize date calculations for performance
+  const dateFieldProps = useMemo(() => {
+    if (!project) {
+      return {
+        minDate: DateTime.local().plus({ days: 1 }).toISODate(),
+        isClearable: true, // This field is optional
+      };
+    }
+
+    // The earliest possible start date is tomorrow.
+    const tomorrow = DateTime.local().plus({ days: 1 });
+
+    // If the project has a future start date, that becomes the earliest possible date.
+    let minDate = tomorrow;
+    if (project.start_date) {
+      const projectStartDate = DateTime.fromISO(project.start_date);
+      if (projectStartDate > tomorrow) {
+        minDate = projectStartDate;
+      }
+    }
+
+    // The latest possible start date is the project's end date, if it is set.
+    const maxDate = project.end_date
+      ? DateTime.fromISO(project.end_date)
+      : undefined;
+
+    return {
+      minDate: minDate.toISODate(),
+      maxDate: maxDate?.toISODate(),
+      isClearable: true, // This field is optional
+    };
+  }, [project]);
+
+  // 3. Do not render anything if the feature is disabled
+  if (!isEnabled) {
+    return null;
+  }
+
+  // 4. Render the Redux Form Field
+  return (
+    <Field
+      name="start_date" // This field is at the root of the order payload
+      label={translate('Start date')}
+      component={FormGroup}
+      description={translate(
+        'The date when the resource provisioning will be initiated. If not set, the order is processed immediately after approval.',
+      )}
+    >
+      <DateField {...dateFieldProps} />
+    </Field>
+  );
+};
