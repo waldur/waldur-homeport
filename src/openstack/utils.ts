@@ -3,6 +3,8 @@ import ipRegex from 'ip-regex';
 import { ENV } from '@waldur/core/config';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionContext } from '@waldur/resource/actions/types';
 
 import { listToDict } from '../core/utils';
@@ -55,21 +57,6 @@ export const validatePrivateCIDR = (value) => {
   }
 };
 
-export const validatePermissionsForConsoleAction = (ctx: ActionContext) => {
-  if (ctx.user?.is_staff) {
-    return;
-  }
-  if (
-    !ctx.user?.is_support &&
-    ENV.plugins.WALDUR_OPENSTACK.ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS
-  ) {
-    return;
-  }
-  return translate(
-    'Only staff and organization users are allowed to open console.',
-  );
-};
-
 const volumeName = (value: string) => {
   if (!value) {
     return undefined;
@@ -92,4 +79,95 @@ export const getVolumeNameValidators = () => {
     validators.push(volumeName);
   }
   return validators;
+};
+
+export const validateOpenStackInstancePowerPermission = (
+  ctx: ActionContext,
+) => {
+  if (ctx.user?.is_staff) {
+    return;
+  }
+
+  const resource = ctx.resource;
+  if (!resource) {
+    return translate('Resource not found.');
+  }
+
+  const hasProjectPermission = hasPermission(ctx.user, {
+    permission: PermissionEnum.CAN_MANAGE_OPENSTACK_INSTANCE_POWER,
+    projectId: resource.project_uuid,
+  });
+
+  const hasCustomerPermission = hasPermission(ctx.user, {
+    permission: PermissionEnum.CAN_MANAGE_OPENSTACK_INSTANCE_POWER,
+    customerId: resource.customer_uuid,
+  });
+
+  if (!hasProjectPermission && !hasCustomerPermission) {
+    return translate(
+      'You do not have permission to manage power operations for this instance.',
+    );
+  }
+};
+
+export const validateOpenStackInstanceManagePermission = (
+  ctx: ActionContext,
+) => {
+  if (ctx.user?.is_staff) {
+    return;
+  }
+
+  const resource = ctx.resource;
+  if (!resource) {
+    return translate('Resource not found.');
+  }
+
+  const hasProjectPermission = hasPermission(ctx.user, {
+    permission: PermissionEnum.CAN_MANAGE_OPENSTACK_INSTANCE,
+    projectId: resource.project_uuid,
+  });
+
+  const hasCustomerPermission = hasPermission(ctx.user, {
+    permission: PermissionEnum.CAN_MANAGE_OPENSTACK_INSTANCE,
+    customerId: resource.customer_uuid,
+  });
+
+  if (!hasProjectPermission && !hasCustomerPermission) {
+    return translate('You do not have permission to manage this instance.');
+  }
+};
+
+export const validateOpenStackInstanceConsolePermission = (
+  ctx: ActionContext,
+) => {
+  if (ctx.user?.is_staff) {
+    return;
+  }
+
+  const resource = ctx.resource;
+  if (!resource) {
+    return translate('Resource not found.');
+  }
+
+  if (
+    !ENV.plugins.WALDUR_OPENSTACK.ALLOW_CUSTOMER_USERS_OPENSTACK_CONSOLE_ACCESS
+  ) {
+    return translate('Console access is not allowed for customer users.');
+  }
+
+  const hasProjectPermission = hasPermission(ctx.user, {
+    permission: PermissionEnum.HAS_OPENSTACK_INSTANCE_CONSOLE_ACCESS,
+    projectId: resource.project_uuid,
+  });
+
+  const hasCustomerPermission = hasPermission(ctx.user, {
+    permission: PermissionEnum.HAS_OPENSTACK_INSTANCE_CONSOLE_ACCESS,
+    customerId: resource.customer_uuid,
+  });
+
+  if (!hasProjectPermission && !hasCustomerPermission) {
+    return translate(
+      'You do not have permission to access the console for this instance.',
+    );
+  }
 };

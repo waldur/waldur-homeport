@@ -3,6 +3,7 @@ import { openstackInstancesStart } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { validateOpenStackInstancePowerPermission } from '@waldur/openstack/utils';
 import {
   AsyncActionItem,
   AsyncActionItemProps,
@@ -23,6 +24,7 @@ const validators = [
   validate,
   validateState('OK'),
   validateRuntimeState('SHUTOFF'),
+  validateOpenStackInstancePowerPermission,
 ];
 
 export const getProps = () =>
