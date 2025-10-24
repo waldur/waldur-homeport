@@ -89,6 +89,13 @@ const fields: OfferingEditField[] = [
     key: 'plugin_options.maximal_resource_count_per_project',
     component: NumberField,
   },
+  {
+    label: translate(
+      'Create orders when options of related resources are changed',
+    ),
+    key: 'plugin_options.create_orders_on_resource_option_change',
+    component: AwesomeCheckboxField,
+  },
 ];
 
 export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {

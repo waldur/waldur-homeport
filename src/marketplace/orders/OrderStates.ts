@@ -6,7 +6,7 @@ export const ORDER_STATE_LABELS: Record<OrderState, string> = {
   'pending-consumer': translate('Pending consumer approval'),
   'pending-provider': translate('Pending provider approval'),
   'pending-project': translate('Pending project start'),
-  'pending-start-date': translate('Processing is scheduled for a future date'),
+  'pending-start-date': translate('Pending start date'),
   executing: translate('Executing'),
   done: translate('Done'),
   erred: translate('Erred'),

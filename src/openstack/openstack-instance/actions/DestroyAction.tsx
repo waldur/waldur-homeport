@@ -3,6 +3,7 @@ import { OpenStackInstance } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { validateOpenStackInstanceManagePermission } from '@waldur/openstack/utils';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionContext, ActionItemType } from '@waldur/resource/actions/types';
 
@@ -27,7 +28,7 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
   );
 }
 
-const validators = [validate];
+const validators = [validate, validateOpenStackInstanceManagePermission];
 
 export const DestroyAction: ActionItemType = ({ resource, refetch }) => (
   <DialogActionItem

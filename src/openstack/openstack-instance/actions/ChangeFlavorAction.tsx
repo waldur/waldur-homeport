@@ -3,6 +3,7 @@ import { OpenStackInstance } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { validateOpenStackInstanceManagePermission } from '@waldur/openstack/utils';
 import {
   validateState,
   validateRuntimeState,
@@ -26,6 +27,7 @@ const validators = [
   validate,
   validateState('OK'),
   validateRuntimeState('SHUTOFF'),
+  validateOpenStackInstanceManagePermission,
 ];
 
 export const ChangeFlavorAction: ActionItemType = ({ resource, refetch }) => (
