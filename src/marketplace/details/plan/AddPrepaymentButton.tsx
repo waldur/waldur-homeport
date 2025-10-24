@@ -8,12 +8,13 @@ import { change } from 'redux-form';
 import { calculateMonthsDifference, formatDate } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { orderProjectSelector } from '@waldur/marketplace/deploy/selectors';
 import { useModal } from '@waldur/modal/hooks';
 
 import { ORDER_FORM_ID } from '../constants';
 
 import { Component } from './types';
-import { getEndDate } from './utils';
+import { getEndDate, getStartDate } from './utils';
 
 const AddPrepaidPeriodDialog = lazyComponent(() =>
   import('./AddPrepaidPeriodDialog').then((module) => ({
@@ -29,10 +30,14 @@ export const AddPrepaymentButton = ({
   const { openDialog, closeDialog } = useModal();
   const dispatch = useDispatch();
   const endDate = useSelector(getEndDate);
+  const startDate = useSelector(getStartDate);
+  const project = useSelector(orderProjectSelector);
 
   const handleAddPrepayment = (component: Component) => {
     openDialog(AddPrepaidPeriodDialog, {
       component,
+      project,
+      startDate,
       onSubmit: (data: { end_date: string }) => {
         // Update the end_date field in the parent redux-form
         dispatch(change(ORDER_FORM_ID, `attributes.end_date`, data.end_date));
@@ -44,10 +49,6 @@ export const AddPrepaymentButton = ({
   const handleClearEndDate = () => {
     dispatch(change(ORDER_FORM_ID, `attributes.end_date`, null));
   };
-
-  const startDate = useMemo(() => {
-    return DateTime.now().toISODate();
-  }, []);
 
   const monthsDuration = useMemo(() => {
     if (endDate) {

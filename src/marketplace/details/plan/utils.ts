@@ -279,6 +279,10 @@ export const getEndDate = (state) => {
   return orderFormSelector(state, 'attributes.end_date');
 };
 
+export const getStartDate = (state) => {
+  return orderFormSelector(state, 'start_date');
+};
+
 export const pricesSelector = (state, props): PricesData => {
   const plan: Plan = getPlan(state, props) || props.plan;
   const limits: Limits = getLimits(state, props) || props.limits;
