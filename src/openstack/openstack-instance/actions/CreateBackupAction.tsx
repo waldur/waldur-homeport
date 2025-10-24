@@ -4,6 +4,7 @@ import { OpenStackInstance } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { validateOpenStackInstanceManagePermission } from '@waldur/openstack/utils';
 import { validateState } from '@waldur/resource/actions/base';
 import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
 import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
@@ -18,7 +19,10 @@ interface CreateBackupActionProps {
   resource: OpenStackInstance;
 }
 
-const validators = [validateState('OK')];
+const validators = [
+  validateState('OK'),
+  validateOpenStackInstanceManagePermission,
+];
 
 export const CreateBackupAction: FC<CreateBackupActionProps> = ({
   resource,
