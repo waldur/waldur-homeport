@@ -264,6 +264,23 @@ export const PermissionOptions = [
     ],
   },
   {
+    label: translate('Openstack_instance'),
+    options: [
+      {
+        label: translate('Console access'),
+        value: 'OPENSTACK_INSTANCE.CONSOLE_ACCESS',
+      },
+      {
+        label: translate('Manage openstack instance'),
+        value: 'OPENSTACK_INSTANCE.MANAGE',
+      },
+      {
+        label: translate('Manage power for openstack instance'),
+        value: 'OPENSTACK_INSTANCE.MANAGE_POWER',
+      },
+    ],
+  },
+  {
     label: translate('Order'),
     options: [
       {
