@@ -10,7 +10,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
-import noTemplateInTranslate from './no-template-in-translate.cjs';
+import noTemplateInTranslate from './eslint-rules/no-template-in-translate.js';
 
 const browserGlobals = {
   ...globals.browser,
@@ -33,9 +33,9 @@ export default tseslint
         prettier: prettier,
         import: importPlugin,
         'react-refresh': reactRefresh,
-        local: noTemplateInTranslate,
         'waldur-custom': {
           rules: {
+            ...noTemplateInTranslate.rules,
             'enforce-button-variants': enforceButtonVariants,
           },
         },
@@ -64,7 +64,8 @@ export default tseslint
         ...reactHooks.configs.recommended.rules,
 
         // Custom local rules
-        'local/no-template-in-translate': 'error',
+        'waldur-custom/no-template-in-translate': 'error',
+        'waldur-custom/enforce-button-variants': 'error',
 
         // React Hooks rules
         'react-hooks/rules-of-hooks': 'off',
@@ -153,7 +154,7 @@ export default tseslint
       ],
     },
     {
-      files: ['locales/tools/**/*.cjs', './no-template-in-translate.cjs'],
+      files: ['locales/tools/**/*.cjs'],
       languageOptions: {
         sourceType: 'script',
         ecmaVersion: 2022,
