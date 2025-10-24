@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   // CreateChecklistRequest,
@@ -22,6 +22,7 @@ import {
 } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -95,6 +96,17 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
     }
   };
 
+  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+  const allowedChecklistTypeOptions = useMemo(
+    () =>
+      showExperimentalUiComponents
+        ? checklistTypeOptions
+        : checklistTypeOptions.filter(
+            (opt) => opt.value === 'project_metadata',
+          ),
+    [],
+  );
+
   return (
     <Form
       onSubmit={onSubmit}
@@ -155,7 +167,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               <Field
                 name="checklist_type"
                 component={SelectField as any}
-                options={checklistTypeOptions}
+                options={allowedChecklistTypeOptions}
                 validate={required}
                 simpleValue
               />
