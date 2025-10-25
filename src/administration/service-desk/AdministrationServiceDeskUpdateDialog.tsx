@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { capitalize } from 'lodash-es';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -20,6 +21,7 @@ export const AdministrationServiceDeskUpdateDialog = reduxForm<
   form: 'AdministrationServiceDeskUpdateDialog',
 })((props) => {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const callback = async (formData) => {
     const relevantFormData = {};
     Object.keys(formData).forEach((fieldName) => {
@@ -29,6 +31,9 @@ export const AdministrationServiceDeskUpdateDialog = reduxForm<
     });
     try {
       await overrideSettings({ body: relevantFormData, ...formDataOptions });
+      queryClient.invalidateQueries({
+        queryKey: ['AdministrationServiceDesk'],
+      });
       dispatch(showSuccess('Configurations have been updated'));
       dispatch(closeModalDialog());
     } catch (e) {
@@ -39,7 +44,7 @@ export const AdministrationServiceDeskUpdateDialog = reduxForm<
   };
 
   return (
-    <form onSubmit={props.handleSubmit(callback)}>
+    <form onSubmit={props.handleSubmit(callback)} autoComplete="off">
       <ModalDialog
         title={translate('Update {name} settings', {
           name: capitalize(props.name),
