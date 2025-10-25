@@ -79,6 +79,14 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Do not render prices in order details.'),
       },
       {
+        key: 'display_offering_partitions',
+        description: translate('Enable display of offering partitions in UI.'),
+      },
+      {
+        key: 'display_software_catalog',
+        description: translate('Enable display of software catalog in UI.'),
+      },
+      {
         key: 'display_user_tos',
         description: translate('Enable display of user terms of service in UI.'),
       },
