@@ -64,6 +64,12 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
           ) : (
             <CountryListField value={value} />
           )
+        ) : item.type === 'dict_field' ? (
+          <pre style={{ fontSize: '12px', margin: 0, whiteSpace: 'pre-wrap' }}>
+            {typeof value === 'object' && value !== null
+              ? JSON.stringify(value, null, 2)
+              : value || ''}
+          </pre>
         ) : typeof value === 'object' ? (
           <pre>{JSON.stringify(value, null, 2)}</pre>
         ) : item.key === 'SIDEBAR_STYLE' ? (

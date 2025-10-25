@@ -512,6 +512,12 @@ export const SettingsDescription = [
         type: 'string',
       },
       {
+        key: 'ATLASSIAN_SUPPORT_TYPE_MAPPING',
+        description: translate('Mapping from frontend issue types to backend request types'),
+        default: {'Informational': 'Get IT help', 'Service Request': 'Request new software', 'Change Request': 'Change Request', 'Incident': 'Report a system problem'},
+        type: 'dict_field',
+      },
+      {
         key: 'ATLASSIAN_AFFECTED_RESOURCE_FIELD',
         description: translate('Affected resource field name'),
         default: '',
