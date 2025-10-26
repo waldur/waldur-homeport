@@ -9,18 +9,25 @@ export const ProjectPermisionActions = ({
   fetch,
   projectUuid,
   customerUuid,
-}) => (
-  <ActionsDropdown
-    row={row}
-    refetch={fetch}
-    data={{ projectUuid, customerUuid }}
-    actions={[
-      (props) => (
-        <UserDetailsButton {...props} userId={row.user_uuid} asDropdownItem />
-      ),
+  project,
+}) => {
+  const actions = [
+    (props) => (
+      <UserDetailsButton {...props} userId={row.user_uuid} asDropdownItem />
+    ),
+  ];
 
-      EditUserButton,
-      UserRemoveButton,
-    ]}
-  />
-);
+  // Only add edit and remove actions if project is not removed
+  if (!project?.is_removed) {
+    actions.push(EditUserButton as any, UserRemoveButton as any);
+  }
+
+  return (
+    <ActionsDropdown
+      row={row}
+      refetch={fetch}
+      data={{ projectUuid, customerUuid }}
+      actions={actions}
+    />
+  );
+};

@@ -59,8 +59,9 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
                   initialValue={project.image}
                   max={2 * 1024 * 1024} // 2MB
                   size={64}
+                  disabled={project.is_removed}
                   extraActions={({ isChanged, isTooLarge }) =>
-                    isChanged || submitting ? (
+                    (isChanged || submitting) && !project.is_removed ? (
                       <Button
                         type="submit"
                         variant="primary"

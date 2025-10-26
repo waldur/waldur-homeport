@@ -1,0 +1,263 @@
+import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
+import { FC, useState } from 'react';
+import { Alert } from 'react-bootstrap';
+import { Form } from 'react-final-form';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  Project,
+  projectsRecover,
+  ProjectRecoveryRequest,
+} from 'waldur-js-client';
+
+import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
+import { SubmitButton } from '@waldur/form';
+import { translate } from '@waldur/i18n';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { useNotify } from '@waldur/store/hooks';
+import { RoleField } from '@waldur/user/affiliations/RoleField';
+import { getUser } from '@waldur/workspace/selectors';
+
+interface ProjectRecoveryModalProps {
+  resolve: {
+    project: Project;
+  };
+}
+
+export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
+  resolve: { project },
+}) => {
+  const dispatch = useDispatch();
+  const { showSuccess, showErrorResponse } = useNotify();
+  const user = useSelector(getUser);
+  const [roleRecoveryOption, setRoleRecoveryOption] = useState<string>('');
+
+  const handleClose = () => {
+    dispatch(closeModalDialog());
+  };
+
+  const handleRecover = async () => {
+    try {
+      const body: ProjectRecoveryRequest = {};
+
+      if (roleRecoveryOption === 'restore_team_members') {
+        body.restore_team_members = true;
+      } else if (
+        roleRecoveryOption === 'send_invitations_to_previous_members'
+      ) {
+        body.send_invitations_to_previous_members = true;
+      }
+
+      const response = await projectsRecover({
+        path: { uuid: project.uuid },
+        body,
+      });
+
+      showSuccess(translate('Project has been successfully recovered.'));
+
+      // Show recovery info if available
+      const recoveredProject = response.data as any;
+      if (recoveredProject.recovery_info) {
+        const info = recoveredProject.recovery_info;
+        if (info.restored_users_count) {
+          showSuccess(
+            translate('Restored {count} team members.', {
+              count: info.restored_users_count,
+            }),
+          );
+        }
+        if (info.sent_invitations_count) {
+          showSuccess(
+            translate('Sent {count} invitations to previous team members.', {
+              count: info.sent_invitations_count,
+            }),
+          );
+        }
+      }
+
+      handleClose();
+      window.location.reload();
+    } catch (error) {
+      showErrorResponse(error, translate('Unable to recover project.'));
+    }
+  };
+
+  const hasTerminationMetadata = !!project.termination_metadata;
+  const previousMembers =
+    (project.termination_metadata as any)?.user_roles || [];
+  const hasPreviousMembers = previousMembers.length > 0;
+
+  const roleRecoveryChoices = [
+    {
+      value: '',
+      label: translate('Do not restore team members'),
+      description: translate(
+        'Project will be recovered without restoring any team members',
+      ),
+    },
+    {
+      value: 'send_invitations_to_previous_members',
+      label: translate('Re-invite team members ({count} users)', {
+        count: previousMembers.length,
+      }),
+      description: translate('Send invitations to users with prior access'),
+    },
+    ...(user.is_staff
+      ? [
+          {
+            value: 'restore_team_members',
+            label: translate('Restore team members ({count} users)', {
+              count: previousMembers.length,
+            }),
+            description: translate(
+              'Automatically restore team members who had access before project deletion (staff only)',
+            ),
+          },
+        ]
+      : []),
+  ];
+
+  return (
+    <Form
+      onSubmit={handleRecover}
+      render={({ handleSubmit, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Recover Project')}
+            iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  submitting={submitting}
+                  label={translate('Recover Project')}
+                  className="btn btn-primary"
+                />
+              </>
+            }
+          >
+            <div className="mb-4">
+              <h5>{translate('Project Recovery')}</h5>
+              <p className="text-muted mb-3">
+                {translate(
+                  'You are about to recover the removed project "{projectName}". This action will:',
+                  { projectName: project.name },
+                )}
+              </p>
+              <ul className="list-unstyled">
+                <li className="mb-2">
+                  <i className="fa fa-check text-success me-2" />
+                  {translate('Restore project access and functionality')}
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-check text-success me-2" />
+                  {translate('Re-enable project management capabilities')}
+                </li>
+                <li className="mb-2">
+                  <i className="fa fa-exclamation-triangle text-warning me-2" />
+                  {translate('Resources will need to be manually recreated')}
+                </li>
+                {!hasTerminationMetadata && (
+                  <li className="mb-2">
+                    <i className="fa fa-exclamation-triangle text-warning me-2" />
+                    {translate(
+                      'User roles will need to be manually reassigned',
+                    )}
+                  </li>
+                )}
+              </ul>
+            </div>
+
+            {hasPreviousMembers && (
+              <div className="mb-4">
+                <AwesomeRadioButton
+                  label={translate(
+                    'Choose what should be restored along with the project:',
+                  )}
+                  choices={roleRecoveryChoices}
+                  input={{
+                    name: 'roleRecoveryOption',
+                    value: roleRecoveryOption,
+                    onChange: (e) => setRoleRecoveryOption(e.target.value),
+                    onBlur: () => {},
+                    onFocus: () => {},
+                    onDragStart: () => {},
+                    onDrop: () => {},
+                  }}
+                  meta={{
+                    autofilled: false,
+                    asyncValidating: false,
+                    dirty: false,
+                    dispatch: (() => {}) as any,
+                    form: 'projectRecoveryForm',
+                    initial: '',
+                    invalid: false,
+                    pristine: true,
+                    submitting: false,
+                    submitFailed: false,
+                    touched: false,
+                    valid: true,
+                    visited: false,
+                  }}
+                />
+
+                {(roleRecoveryOption ===
+                  'send_invitations_to_previous_members' ||
+                  roleRecoveryOption === 'restore_team_members') && (
+                  <div
+                    className="border rounded p-3 mb-3 mt-3"
+                    style={{ maxHeight: '200px', overflowY: 'auto' }}
+                  >
+                    <h6 className="mb-2">
+                      {translate('Previous team members:')}
+                    </h6>
+                    <div className="table-responsive">
+                      <table className="table table-sm mb-0">
+                        <thead>
+                          <tr>
+                            <th>{translate('Name')}</th>
+                            <th>{translate('Email')}</th>
+                            <th>{translate('Role')}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {previousMembers.map((member, index) => (
+                            <tr key={index}>
+                              <td>
+                                {member.user_first_name || member.user_last_name
+                                  ? `${member.user_first_name} ${member.user_last_name}`.trim()
+                                  : member.user_username}
+                              </td>
+                              <td>{member.user_email}</td>
+                              <td>
+                                <RoleField row={member} />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {!hasTerminationMetadata && (
+              <Alert variant="info">
+                <h6 className="alert-heading">
+                  {translate('Basic Recovery Available')}
+                </h6>
+                <p className="mb-0">
+                  {translate(
+                    'This project was deleted before team member metadata was captured. Only basic project recovery is available. Team members will need to be manually added after recovery.',
+                  )}
+                </p>
+              </Alert>
+            )}
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

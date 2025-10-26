@@ -46,6 +46,13 @@ const mapStateToFilter = createSelector(
 );
 
 const TeamSecondaryDropdownActions = ({ project, refetch }) => {
+  // For removed projects, only show permissions log (read-only)
+  if (project?.is_removed) {
+    return (
+      <ProjectPermissionsLogButton projectId={project?.uuid} asDropdownItem />
+    );
+  }
+
   return (
     <>
       <SyncMembersButton project={project} refetch={refetch} />
@@ -102,6 +109,7 @@ export const ProjectUsersList = ({
           fetch={fetch}
           projectUuid={_project?.uuid}
           customerUuid={_project?.customer_uuid}
+          project={_project}
         />
       )}
       filters={<ProjectUsersListFilter />}

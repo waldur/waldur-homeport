@@ -30,14 +30,15 @@ export const useProjectDelete = ({
 
   const isCurrentProject = project.uuid === currentProject?.uuid;
   const canDelete =
-    hasPermission(user, {
+    !project.is_removed &&
+    (hasPermission(user, {
       permission: PermissionEnum.DELETE_PROJECT,
       customerId: project.customer_uuid,
     }) ||
-    hasPermission(user, {
-      permission: PermissionEnum.DELETE_PROJECT,
-      projectId: project.uuid,
-    });
+      hasPermission(user, {
+        permission: PermissionEnum.DELETE_PROJECT,
+        projectId: project.uuid,
+      }));
 
   const callback = async () => {
     try {

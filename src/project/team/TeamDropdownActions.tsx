@@ -55,6 +55,11 @@ export const TeamDropdownActions = ({
     },
   });
 
+  // Don't render Add dropdown for removed projects
+  if (project.is_removed) {
+    return null;
+  }
+
   return (
     <Dropdown placement="bottom-end">
       <Dropdown.Toggle variant="primary" className="no-arrow btn-icon-right">

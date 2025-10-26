@@ -84,7 +84,7 @@ export const ProjectUsersBulkRemoveButton = ({ rows, refetch, project }) => {
     }
   };
 
-  if (!canRemoveUsers || !project) {
+  if (!canRemoveUsers || !project || project.is_removed) {
     return null;
   }
 
