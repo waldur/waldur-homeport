@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { EditButton } from '@waldur/form/EditButton';
+import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { EditProjectProps } from '../types';
@@ -26,5 +27,19 @@ export const FieldEditButton = (props: EditProjectProps) => {
         : openModalDialog(EditFieldDialog, { resolve: props, size: 'sm' }),
     );
   };
-  return <EditButton onClick={callback} size="sm" disabled={props.disabled} />;
+
+  // Disable editing if project is removed
+  const isDisabled = props.disabled || props.project.is_removed;
+  const tooltip = props.project.is_removed
+    ? translate('Action is disabled for removed project')
+    : undefined;
+
+  return (
+    <EditButton
+      onClick={callback}
+      size="sm"
+      disabled={isDisabled}
+      tooltip={tooltip}
+    />
+  );
 };

@@ -10,6 +10,7 @@ import WarningBar from '@waldur/auth/WarningBar';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { DefaultLayoutConfig, useLayout } from '@waldur/metronic/layout/core';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
+import { RemovedProjectWarningBar } from '@waldur/project/RemovedProjectWarningBar';
 import { OfferingUsersWarningBar } from '@waldur/user/OfferingUsersWarningBar';
 import { getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
@@ -125,6 +126,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
               {ExtraAnnouncementBar}
               <WarningBar />
               <OfferingUsersWarningBar />
+              <RemovedProjectWarningBar />
               <div
                 className={classNames(
                   'content d-flex flex-column flex-grow-1',

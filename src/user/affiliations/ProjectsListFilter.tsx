@@ -2,10 +2,29 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { REACT_MULTI_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
+import { SelectField } from '@waldur/form';
+import {
+  REACT_MULTI_SELECT_TABLE_FILTER,
+  REACT_SELECT_TABLE_FILTER,
+} from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
+
+const getIsRemovedFilterOptions = () => [
+  {
+    label: translate('All projects'),
+    value: '',
+  },
+  {
+    label: translate('Not removed'),
+    value: false,
+  },
+  {
+    label: translate('Removed'),
+    value: true,
+  },
+];
 
 const PureProjectsListFilter = () => (
   <>
@@ -32,6 +51,47 @@ const PureProjectsListFilter = () => (
             label={translate('Conceal finished projects')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
+          />
+        )}
+      />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Include removed')}
+      name="include_terminated"
+      badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
+      ellipsis={false}
+    >
+      <Field
+        name="include_terminated"
+        component={(fieldProps) => (
+          <AwesomeCheckbox
+            label={translate('Include removed')}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+          />
+        )}
+      />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Removal status')}
+      name="is_removed"
+      badgeValue={(value) =>
+        getIsRemovedFilterOptions().find((op) => op.value === value)?.label
+      }
+      ellipsis={false}
+    >
+      <Field
+        name="is_removed"
+        component={(fieldProps) => (
+          <SelectField
+            {...fieldProps}
+            className="Select"
+            placeholder={translate('Select removal status')}
+            options={getIsRemovedFilterOptions()}
+            noUpdateOnBlur={true}
+            simpleValue={true}
+            isClearable={true}
+            {...REACT_SELECT_TABLE_FILTER}
           />
         )}
       />

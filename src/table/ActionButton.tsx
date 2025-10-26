@@ -49,6 +49,7 @@ const ActionButtonPure: FC<ActionButtonProps> = ({
       size={props.size}
       onClick={props.action}
       variant={variant}
+      disabled={props.disabled || props.pending}
       data-testid={props['data-testid']}
     >
       {props.iconRight && props.title}
@@ -89,6 +90,7 @@ export const RowActionButton: FC<ActionButtonProps> = ({
       onClick={props.action}
       variant={variant}
       size={props.size}
+      disabled={props.disabled || props.pending}
     >
       {props.pending ? (
         <LoadingSpinnerIcon />

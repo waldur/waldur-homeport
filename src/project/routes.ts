@@ -13,7 +13,7 @@ import { loadProject } from './resolve';
 export const states: StateDeclaration[] = [
   {
     name: 'project',
-    url: '/projects/:uuid/',
+    url: '/projects/:uuid/?include_terminated',
     abstract: true,
     parent: 'layout',
     component: lazyComponent(() =>
@@ -71,6 +71,7 @@ export const states: StateDeclaration[] = [
         default: module.ProjectManageContainer,
       })),
     ),
+    data: {},
   },
   {
     name: 'project-manage',

@@ -45,6 +45,16 @@ const mapStateToFilter = createSelector(
     if (stateFilter && stateFilter.conceal_finished_projects) {
       filter.conceal_finished_projects = stateFilter.conceal_finished_projects;
     }
+    if (stateFilter && stateFilter.include_terminated) {
+      filter.include_terminated = stateFilter.include_terminated;
+    }
+    if (
+      stateFilter &&
+      stateFilter.is_removed !== undefined &&
+      stateFilter.is_removed !== ''
+    ) {
+      filter.is_removed = stateFilter.is_removed;
+    }
     filter.user_uuid = user.uuid;
     return filter;
   },
@@ -81,7 +91,7 @@ export const ProjectsList = () => {
       ),
 
       copyField: (row) => row.name,
-      keys: ['name', 'is_industry'],
+      keys: ['name', 'is_industry', 'is_removed'],
       id: 'name',
       export: 'name',
     },
@@ -141,7 +151,6 @@ export const ProjectsList = () => {
         row.start_date ? formatDate(row.start_date) : DASH_ESCAPE_CODE,
       optional: true,
     },
-
     {
       title: translate('End date'),
       orderField: 'end_date',
@@ -161,6 +170,17 @@ export const ProjectsList = () => {
       orderField: 'created',
       id: 'created',
       export: (row) => formatDateTime(row.created),
+    },
+    {
+      title: translate('Is removed'),
+      render: ({ row }) => (
+        <>{row.is_removed ? translate('Yes') : translate('No')}</>
+      ),
+      optional: true,
+      filter: 'is_removed',
+      keys: ['is_removed'],
+      id: 'is_removed',
+      export: (row) => (row.is_removed ? translate('Yes') : translate('No')),
     },
     {
       title: translate('Backend ID'),

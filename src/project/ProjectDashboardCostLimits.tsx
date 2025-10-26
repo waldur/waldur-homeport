@@ -66,7 +66,7 @@ export const ProjectDashboardCostLimits = ({
       }
       className="h-100"
       actions={[
-        isOwnerOrStaff
+        isOwnerOrStaff && !project.is_removed
           ? {
               label: translate('Manage policy'),
               icon: <GearSixIcon weight="bold" />,

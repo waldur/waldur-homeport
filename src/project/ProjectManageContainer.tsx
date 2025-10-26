@@ -50,7 +50,7 @@ export const ProjectManageContainer = () => {
           component: ProjectCredit,
           title: translate('Credit management'),
         },
-        {
+        !project?.is_removed && {
           key: 'remove',
           component: ProjectDelete,
           title: translate('Remove'),

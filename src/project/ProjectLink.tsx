@@ -38,7 +38,10 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
     <div className="d-flex align-items-center gap-1">
       <Link
         state="project.dashboard"
-        params={{ uuid: row.uuid }}
+        params={{
+          uuid: row.uuid,
+          ...(row.is_removed && { include_terminated: 'true' }),
+        }}
         label={children ? undefined : row.name}
         onClick={onClick}
         buttonVariant={buttonVariant}
@@ -69,6 +72,11 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
             <FactoryIcon />
           </span>
         )}
+      {row.is_removed && (
+        <Badge variant="light-danger" pill className="align-middle fs-8">
+          {translate('Removed')}
+        </Badge>
+      )}
     </div>
   );
 };

@@ -17,8 +17,11 @@ export function loadProject(transition: Transition) {
 
   async function loadData() {
     try {
+      const includeTerminated =
+        transition.params().include_terminated === 'true';
       const project = await projectsRetrieve({
         path: { uuid: transition.params().uuid },
+        query: includeTerminated ? ({ include_terminated: true } as any) : {},
       });
       const customer = await getCustomer(project.data.customer_uuid, [
         'url',

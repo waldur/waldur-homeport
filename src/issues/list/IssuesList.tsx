@@ -181,7 +181,8 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
       showPageSizeSelector={true}
       enableExport={true}
       tableActions={
-        props.scope && (
+        props.scope &&
+        !props.scope.is_removed && (
           <IssueCreateButton
             scope={props.scope}
             scopeType={props.scopeType}

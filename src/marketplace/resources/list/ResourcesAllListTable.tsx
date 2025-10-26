@@ -62,26 +62,34 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       title={translate('Resources')}
       verboseName={translate('Resources')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      rowActions={({ row }) => (
-        <ResourceActionsButton row={row} refetch={props.fetch} />
-      )}
+      rowActions={
+        !project?.is_removed
+          ? ({ row }) => (
+              <ResourceActionsButton row={row} refetch={props.fetch} />
+            )
+          : undefined
+      }
       hasQuery={true}
       enableExport
       showPageSizeSelector={true}
       expandableRow={ExpandableResourceSummary}
-      enableMultiSelect={true}
-      multiSelectActions={ResourceMultiSelectAction}
+      enableMultiSelect={!project?.is_removed}
+      multiSelectActions={
+        !project?.is_removed ? ResourceMultiSelectAction : undefined
+      }
       tableActions={
-        <>
-          {isFeatureVisible(MarketplaceFeatures.import_resources) && (
-            <ResourceImportButton />
-          )}
-          <AddResourceButton
-            context={props.context}
-            customer={customer}
-            project={project}
-          />
-        </>
+        !project?.is_removed ? (
+          <>
+            {isFeatureVisible(MarketplaceFeatures.import_resources) && (
+              <ResourceImportButton />
+            )}
+            <AddResourceButton
+              context={props.context}
+              customer={customer}
+              project={project}
+            />
+          </>
+        ) : null
       }
     />
   );

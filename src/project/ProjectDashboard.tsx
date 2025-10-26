@@ -44,6 +44,8 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     roleTypes: ['project'],
   });
 
+  const isProjectRemoved = Boolean(project?.is_removed);
+
   const {
     data: aggregateLimitData,
     isLoading: isAggregateLimitLoading,
@@ -123,9 +125,9 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
             scope={project}
             chartData={teamData}
             showChart
-            onBadgeClick={goToUsers}
-            onAddClick={callback}
-            showAdd={canInvite}
+            onBadgeClick={isProjectRemoved ? undefined : goToUsers}
+            onAddClick={isProjectRemoved ? undefined : callback}
+            showAdd={canInvite && !isProjectRemoved}
             loadingAdd={loadingProjects}
             className="h-100"
             nameKey="user_full_name"

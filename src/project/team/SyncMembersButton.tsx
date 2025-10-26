@@ -58,7 +58,7 @@ export const SyncMembersButton = ({
       );
     }
   };
-  if (!isStaff) {
+  if (!isStaff || project.is_removed) {
     return null;
   }
   return (
