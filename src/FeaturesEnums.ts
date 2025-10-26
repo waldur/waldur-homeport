@@ -24,6 +24,8 @@ export enum MarketplaceFeatures {
   call_only = 'marketplace.call_only',
   catalogue_only = 'marketplace.catalogue_only',
   conceal_prices = 'marketplace.conceal_prices',
+  display_offering_partitions = 'marketplace.display_offering_partitions',
+  display_software_catalog = 'marketplace.display_software_catalog',
   display_user_tos = 'marketplace.display_user_tos',
   import_resources = 'marketplace.import_resources',
   lexis_links = 'marketplace.lexis_links',

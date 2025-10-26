@@ -31,6 +31,8 @@ const FieldRow = ({ field, ...rest }) =>
     <NumberField {...rest} />
   ) : field.type === 'secret_field' ? (
     <SecretField {...rest} />
+  ) : field.type === 'dict_field' ? (
+    <TextField rows={5} {...rest} />
   ) : (
     <StringField {...rest} />
   );
@@ -51,6 +53,33 @@ export const SupportSettingsForm = ({ name }) => {
             (field.description.length < 75
               ? field.description
               : getKeyTitle(field.key))
+          }
+          format={
+            field.type === 'dict_field'
+              ? (value) => {
+                  if (!value) return '';
+                  if (typeof value === 'object') {
+                    try {
+                      return JSON.stringify(value, null, 2);
+                    } catch {
+                      return '';
+                    }
+                  }
+                  return value;
+                }
+              : undefined
+          }
+          parse={
+            field.type === 'dict_field'
+              ? (value) => {
+                  if (!value || !value.trim()) return null;
+                  try {
+                    return JSON.parse(value);
+                  } catch {
+                    return value;
+                  }
+                }
+              : undefined
           }
         >
           <FieldRow field={field} />
