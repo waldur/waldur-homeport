@@ -140,7 +140,7 @@ export const ProjectsList: FC<ProjectsListProps> = ({
   const currentCustomer = useSelector(getCustomer);
   const filter = useMemo(
     () => ({
-      customer: customer ? customer.uuid : currentCustomer.uuid,
+      customer: customer ? customer.uuid : currentCustomer?.uuid,
       o: 'name',
     }),
     [currentCustomer, customer],
