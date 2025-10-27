@@ -133,6 +133,10 @@ const PageHero = ({ customer }) => {
 const WithHero = (props) => {
   const customer = useSelector(getCustomer);
 
+  if (!customer) {
+    return null;
+  }
+
   usePageHero(<PageHero customer={customer} />);
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
@@ -144,7 +148,7 @@ const WithHero = (props) => {
       },
       {
         key: 'organization',
-        text: customer.name,
+        text: customer?.name || '',
         active: true,
       },
     ],
