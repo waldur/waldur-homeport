@@ -335,9 +335,22 @@ class EstonianTranslationAnalyzer {
     // Check for excessive use of loanwords where native terms exist
     const loanwords = ['kompjuter', 'internet', 'email', 'fail', 'kataloog'];
 
-    return loanwords.some((loanword) =>
+    // Check for incorrect translations
+    const incorrectTranslations = [
+      { english: 'floating ip', incorrect: 'ujuv ip', correct: 'liikuv ip' },
+    ];
+
+    const hasLoanword = loanwords.some((loanword) =>
       estonian.toLowerCase().includes(loanword),
     );
+
+    const hasIncorrectTranslation = incorrectTranslations.some(
+      (item) =>
+        english.toLowerCase().includes(item.english) &&
+        estonian.toLowerCase().includes(item.incorrect),
+    );
+
+    return hasLoanword || hasIncorrectTranslation;
   }
 
   // Generate improvement recommendations
@@ -352,6 +365,7 @@ class EstonianTranslationAnalyzer {
       '• Ensure proper number-noun agreement for dynamic content',
       '• Use formal "te" form in professional contexts',
       '• Adapt technical terminology to Estonian language patterns',
+      '• Use "Liikuv IP" not "Ujuv IP" for "Floating IP" translations',
     ];
   }
 

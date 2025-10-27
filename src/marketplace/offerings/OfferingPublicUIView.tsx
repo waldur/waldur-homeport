@@ -52,6 +52,16 @@ const PublicOfferingLocation = lazyComponent(() =>
     default: module.PublicOfferingLocation,
   })),
 );
+const PublicOfferingSoftwareCatalog = lazyComponent(() =>
+  import('./details/PublicOfferingSoftwareCatalog').then((module) => ({
+    default: module.PublicOfferingSoftwareCatalog,
+  })),
+);
+const PublicOfferingPartitions = lazyComponent(() =>
+  import('./details/PublicOfferingPartitions').then((module) => ({
+    default: module.PublicOfferingPartitions,
+  })),
+);
 
 const getTabs = (offering?): PageBarTab[] => {
   if (!offering) {
@@ -93,6 +103,21 @@ const getTabs = (offering?): PageBarTab[] => {
           key: 'components',
           component: PublicOfferingComponents,
         },
+    offering?.software_catalogs?.length
+      ? {
+          title: translate('Software'),
+          key: 'software',
+          component: PublicOfferingSoftwareCatalog,
+        }
+      : null,
+    isFeatureVisible(MarketplaceFeatures.display_offering_partitions) &&
+    offering?.partitions?.length
+      ? {
+          title: translate('Slurm partitions'),
+          key: 'partitions',
+          component: PublicOfferingPartitions,
+        }
+      : null,
     offering?.screenshots.length
       ? {
           title: translate('Images'),
@@ -164,17 +189,23 @@ export const OfferingPublicUIView = () => {
 
   return (
     <UIView
-      render={(Component, { key, ...props }) => (
-        <Component
-          key={key}
-          {...props}
-          refetch={refetch}
-          data={data}
-          isLoading={isLoading}
-          error={error}
-          tabSpec={tabSpec}
-        />
-      )}
+      render={(Component, { key, ...props }) => {
+        // Use tabSpec.component if available (for tab navigation)
+        const ComponentToRender = tabSpec?.component || Component;
+        return (
+          <ComponentToRender
+            key={key}
+            {...props}
+            refetch={refetch}
+            data={data}
+            isLoading={isLoading}
+            error={error}
+            tabSpec={tabSpec}
+            offering={data?.offering}
+            category={data?.category}
+          />
+        );
+      }}
     />
   );
 };
