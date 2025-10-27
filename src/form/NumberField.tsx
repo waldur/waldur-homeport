@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { clamp } from 'lodash-es';
 import { CSSProperties, FunctionComponent } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 
@@ -26,6 +27,15 @@ export const NumberField: FunctionComponent<NumberFieldProps> = ({
   validate, // eslint-disable-line @typescript-eslint/no-unused-vars
   ...rest
 }) => {
+  const changeBy = (by: number) =>
+    input.onChange(
+      clamp(
+        Number(input.value || 0) + by,
+        Number(rest.min ?? -Infinity),
+        Number(rest.max ?? Infinity),
+      ),
+    );
+
   return (
     <InputGroup className="input-group-number">
       <Form.Control
@@ -40,8 +50,8 @@ export const NumberField: FunctionComponent<NumberFieldProps> = ({
       />
       <div className="input-group-addons">
         <CaretUpDownButtons
-          onClickUp={() => input.onChange(Number(input.value || 0) + 1)}
-          onClickDown={() => input.onChange(Number(input.value || 0) - 1)}
+          onClickUp={() => changeBy(1)}
+          onClickDown={() => changeBy(-1)}
         />
         {unit && (
           <InputGroup.Text className="border-0 unit">{unit}</InputGroup.Text>

@@ -21,7 +21,7 @@ These steps outline the process of generating the TypeScript SDK from the Waldur
    This command uses `waldur spectacular` to generate the `waldur-openapi-schema.yaml` file. In `waldur-mastermind` directory, run:
 
    ```bash
-   poetry run waldur spectacular --file waldur-openapi-schema.yaml --fail-on-warn
+   uv run waldur spectacular --file waldur-openapi-schema.yaml --fail-on-warn
    ```
 
 2. **Generate TypeScript code from the OpenAPI schema.**
@@ -32,11 +32,12 @@ These steps outline the process of generating the TypeScript SDK from the Waldur
    npx --yes @hey-api/openapi-ts@0.77.0
 
    # post-processing
-   sed -i '/querySerializer: {/,/},/d' waldur-typescript-sdk/sdk.gen.ts
-   sed -i '1i export { formDataBodySerializer, RequestResult } from "./client";' waldur-typescript-sdk/index.ts
+   sed -i.bak '/querySerializer: {/,/},/d' waldur-typescript-sdk/sdk.gen.ts && rm waldur-typescript-sdk/sdk.gen.ts.bak
+   sed -i.bak $'1i\\\nexport { formDataBodySerializer, RequestResult } from "./client";' waldur-typescript-sdk/index.ts && rm waldur-typescript-sdk/index.ts.bak
+
 
    # copying
-   cp waldur-typescript-sdk ../js-client/src
+   cp -rvf waldur-typescript-sdk/* ../js-client/src
    ```
 
 3. **Building a local version of the Waldur SDK with Yarn.**

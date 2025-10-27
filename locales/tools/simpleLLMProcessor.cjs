@@ -86,7 +86,11 @@ class SimpleLLMProcessor {
   getContextualGuidance() {
     // Domain-specific guidance is now in the main prompt context
     // This can be used for language-specific translation nuances if needed
-    const guidance = {};
+    const guidance = {
+      et: {
+        'Floating IP': 'Translate as "Liikuv IP", not "Ujuv IP"',
+      },
+    };
     return guidance[this.language] || {};
   }
 

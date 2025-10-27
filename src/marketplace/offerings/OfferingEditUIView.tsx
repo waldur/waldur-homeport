@@ -75,6 +75,18 @@ const OfferingEndpointsSection = lazyComponent(() =>
     default: module.OfferingEndpointsSection,
   })),
 );
+const OfferingSoftwareCatalogsSection = lazyComponent(() =>
+  import('./update/software-catalogs/OfferingSoftwareCatalogsSection').then(
+    (module) => ({
+      default: module.OfferingSoftwareCatalogsSection,
+    }),
+  ),
+);
+const OfferingPartitionsSection = lazyComponent(() =>
+  import('./update/partitions/OfferingPartitionsSection').then((module) => ({
+    default: module.OfferingPartitionsSection,
+  })),
+);
 const OfferingOptionsSection = lazyComponent(() =>
   import('./update/options/OfferingOptionsSection').then((module) => ({
     default: module.OfferingOptionsSection,
@@ -247,6 +259,16 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           component: OfferingEndpointsSection,
           title: translate('Endpoints'),
         },
+        isFeatureVisible(MarketplaceFeatures.display_software_catalog) && {
+          key: 'software_catalogs',
+          component: OfferingSoftwareCatalogsSection,
+          title: translate('Software catalogs'),
+        },
+        isFeatureVisible(MarketplaceFeatures.display_offering_partitions) && {
+          key: 'slurm_partitions',
+          component: OfferingPartitionsSection,
+          title: translate('Slurm partitions'),
+        },
         {
           key: 'category',
           component: AttributesSection,
@@ -257,7 +279,7 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           component: OfferingImagesList,
           title: translate('Images'),
         },
-      ],
+      ].filter(Boolean),
     },
     {
       key: 'options',
