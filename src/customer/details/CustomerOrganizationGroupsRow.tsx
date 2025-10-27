@@ -36,10 +36,12 @@ export const CustomerOrganizationGroupsRow = (props) => {
           .join(', ') || ''
       }
       actions={
-        <UpdateCustomerOrganizationsGroupsButton
-          customer={props.customer}
-          refetch={updateCustomerData}
-        />
+        props.canUpdate ? (
+          <UpdateCustomerOrganizationsGroupsButton
+            customer={props.customer}
+            refetch={updateCustomerData}
+          />
+        ) : null
       }
     />
   );

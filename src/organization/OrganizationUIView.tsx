@@ -53,12 +53,40 @@ const PageHero = ({ customer }) => {
     customer?.is_service_provider &&
     (checkIsServiceManager(customer, user) || isOwnerOrStaff);
 
-  const canEditCustomer = hasPermission(user, {
-    permission: PermissionEnum.UPDATE_CUSTOMER,
-    customerId: customer.uuid,
-  });
+  const canViewCustomerManagement =
+    // Can update customer details
+    hasPermission(user, {
+      permission: PermissionEnum.UPDATE_CUSTOMER,
+      customerId: customer.uuid,
+    }) ||
+    // Can view/manage access control
+    hasPermission(user, {
+      permission: PermissionEnum.LIST_CUSTOMER_USERS,
+      customerId: customer.uuid,
+    }) ||
+    hasPermission(user, {
+      permission: PermissionEnum.CREATE_ACCESS_SUBNET,
+      customerId: customer.uuid,
+    }) ||
+    hasPermission(user, {
+      permission: PermissionEnum.UPDATE_ACCESS_SUBNET,
+      customerId: customer.uuid,
+    }) ||
+    hasPermission(user, {
+      permission: PermissionEnum.DELETE_ACCESS_SUBNET,
+      customerId: customer.uuid,
+    }) ||
+    // Can register service provider
+    hasPermission(user, {
+      permission: PermissionEnum.REGISTER_SERVICE_PROVIDER,
+      customerId: customer.uuid,
+    }) ||
+    // Is staff or support (can access call manager and remove)
+    user?.is_staff ||
+    user?.is_support;
 
-  const showTabs = showCallManagement || showServiceProvider || canEditCustomer;
+  const showTabs =
+    showCallManagement || showServiceProvider || canViewCustomerManagement;
 
   const dashboardState = getDashboardState(router.globals.current);
 
@@ -87,7 +115,7 @@ const PageHero = ({ customer }) => {
               title={translate('Service provider')}
             />
           )}
-          {canEditCustomer && (
+          {canViewCustomerManagement && (
             <Tab eventKey="organization-manage" title={translate('Edit')} />
           )}
         </Tabs>

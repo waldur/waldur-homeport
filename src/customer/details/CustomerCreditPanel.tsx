@@ -14,6 +14,7 @@ import { getUser } from '@waldur/workspace/selectors';
 import { minimalConsumptionLogicOptions } from '../credits/constants';
 import { CreditFieldEditButton } from '../credits/CreditFieldEditButton';
 
+import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
 
 export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
@@ -121,11 +122,14 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
               }
               actions={
                 user.is_staff && (
-                  <CreditFieldEditButton
-                    credit={creditData}
-                    name={row.key}
-                    disabled={row.disabled}
-                  />
+                  <>
+                    <StaffOnlyIndicator />
+                    <CreditFieldEditButton
+                      credit={creditData}
+                      name={row.key}
+                      disabled={row.disabled}
+                    />
+                  </>
                 )
               }
             />

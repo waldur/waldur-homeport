@@ -51,11 +51,13 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = (props) => {
             label={row.label}
             value={row.value || 'N/A'}
             actions={
-              <FieldEditButton
-                customer={props.customer}
-                name={row.key}
-                callback={props.callback}
-              />
+              props.canUpdate ? (
+                <FieldEditButton
+                  customer={props.customer}
+                  name={row.key}
+                  callback={props.callback}
+                />
+              ) : null
             }
           />
         ))}
