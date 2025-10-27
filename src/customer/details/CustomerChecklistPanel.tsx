@@ -8,6 +8,7 @@ import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 
 import { FieldEditButton } from './FieldEditButton';
+import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
 
 export const CustomerChecklistPanel: FC<CustomerEditPanelProps> = (props) => {
@@ -58,11 +59,16 @@ export const CustomerChecklistPanel: FC<CustomerEditPanelProps> = (props) => {
             )
           }
           actions={
-            <FieldEditButton
-              customer={props.customer}
-              callback={props.callback}
-              name="project_metadata_checklist"
-            />
+            props.canUpdate ? (
+              <>
+                <StaffOnlyIndicator />
+                <FieldEditButton
+                  customer={props.customer}
+                  callback={props.callback}
+                  name="project_metadata_checklist"
+                />
+              </>
+            ) : null
           }
         />
       </FormTable>

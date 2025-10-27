@@ -130,7 +130,6 @@ export default tseslint
             name: 'close',
           },
         ],
-        'waldur-custom/enforce-button-variants': 'error',
       },
     },
     {

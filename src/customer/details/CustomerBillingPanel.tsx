@@ -5,6 +5,7 @@ import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 
 import { FieldEditButton } from './FieldEditButton';
+import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
 
 export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
@@ -60,11 +61,18 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
               label={row.label}
               value={row.value || 'N/A'}
               actions={
-                <FieldEditButton
-                  customer={props.customer}
-                  name={row.key}
-                  callback={props.callback}
-                />
+                props.canUpdate ? (
+                  <>
+                    {['accounting_start_date', 'default_tax_percent'].includes(
+                      row.key,
+                    ) && <StaffOnlyIndicator />}
+                    <FieldEditButton
+                      customer={props.customer}
+                      name={row.key}
+                      callback={props.callback}
+                    />
+                  </>
+                ) : null
               }
             />
           ))}
@@ -79,11 +87,18 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
               label={row.label}
               value={row.value || 'N/A'}
               actions={
-                <FieldEditButton
-                  customer={props.customer}
-                  name={row.key}
-                  callback={props.callback}
-                />
+                props.canUpdate ? (
+                  <>
+                    {['accounting_start_date', 'default_tax_percent'].includes(
+                      row.key,
+                    ) && <StaffOnlyIndicator />}
+                    <FieldEditButton
+                      customer={props.customer}
+                      name={row.key}
+                      callback={props.callback}
+                    />
+                  </>
+                ) : null
               }
             />
           ))}

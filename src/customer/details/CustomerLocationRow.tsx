@@ -13,10 +13,11 @@ import { Customer } from '@waldur/workspace/types';
 
 import { SetLocationButton } from '../list/SetLocationButton';
 
-export const CustomerLocationRow: FC<{ customer: Customer; callback }> = ({
-  customer,
-  callback,
-}) => {
+export const CustomerLocationRow: FC<{
+  customer: Customer;
+  callback;
+  canUpdate?: boolean;
+}> = ({ customer, callback, canUpdate }) => {
   const dispatch = useDispatch();
 
   const { mutate: removeLocation, isPending: isRemovingLocation } = useMutation(
@@ -55,22 +56,24 @@ export const CustomerLocationRow: FC<{ customer: Customer; callback }> = ({
         )
       }
       actions={
-        <>
-          <ActionButton
-            iconNode={
-              !isRemovingLocation ? (
-                <TrashIcon weight="bold" className="text-danger" />
-              ) : (
-                <Spinner className="animation-spin" />
-              )
-            }
-            action={removeLocation}
-            variant="secondary"
-            className="btn-sm btn-icon me-3"
-          />
+        canUpdate ? (
+          <>
+            <ActionButton
+              iconNode={
+                !isRemovingLocation ? (
+                  <TrashIcon weight="bold" className="text-danger" />
+                ) : (
+                  <Spinner className="animation-spin" />
+                )
+              }
+              action={removeLocation}
+              variant="secondary"
+              className="btn-sm btn-icon me-3"
+            />
 
-          <SetLocationButton customer={customer} />
-        </>
+            <SetLocationButton customer={customer} />
+          </>
+        ) : null
       }
     />
   );
