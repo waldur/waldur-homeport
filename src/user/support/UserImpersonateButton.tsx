@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { translate } from '@waldur/i18n';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse } from '@waldur/store/notify';
+import { setImpersonatorUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { UsersService, setImpersonationData } from '../UsersService';
@@ -17,7 +18,8 @@ export const UserImpersonateButton: FunctionComponent<{ row }> = ({ row }) => {
     mutationFn: async () => {
       try {
         setImpersonationData(row.uuid);
-        await UsersService.getCurrentUser(true);
+        dispatch(setImpersonatorUser(user));
+        await UsersService.refreshCurrentUser();
       } catch (error) {
         dispatch(
           showErrorResponse(

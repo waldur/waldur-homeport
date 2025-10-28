@@ -1,10 +1,11 @@
-import { Customer, Resource } from 'waldur-js-client';
+import { Customer, Resource, User } from 'waldur-js-client';
 
 import {
   SET_CURRENT_CUSTOMER,
   SET_CURRENT_PROJECT,
   SET_CURRENT_RESOURCE,
   SET_CURRENT_USER,
+  SET_IMPERSONATOR_USER,
 } from './constants';
 import { Project } from './types';
 
@@ -22,11 +23,17 @@ export const setCurrentProject = (project: Project) => ({
   },
 });
 
-export const setCurrentUser = (user, impersonated = false) => ({
+export const setCurrentUser = (user: User) => ({
   type: SET_CURRENT_USER,
   payload: {
     user,
-    impersonated,
+  },
+});
+
+export const setImpersonatorUser = (user: User) => ({
+  type: SET_IMPERSONATOR_USER,
+  payload: {
+    user,
   },
 });
 

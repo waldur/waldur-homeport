@@ -6,11 +6,11 @@ import {
 } from 'waldur-js-client';
 
 import { getRoles } from '@waldur/administration/roles/utils';
-import { initApiClient } from '@waldur/core/api';
+import { getHeaders, initApiClient } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { ImpersonationStorage } from '@waldur/core/StorageManager';
 import store from '@waldur/store/store';
-import { setCurrentUser } from '@waldur/workspace/actions';
+import { setCurrentUser, setImpersonatorUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
 export const getCurrentUser = async (
@@ -31,19 +31,28 @@ export const setImpersonationData = (userUuid: string) => {
 export const clearImpersonationData = () => {
   ImpersonationStorage.remove();
   initApiClient();
+  store.dispatch(setImpersonatorUser(null));
 };
 
 class UsersServiceClass {
-  getCurrentUser(refetch = false) {
-    const cached = this.getCachedUser();
-    if (!refetch && cached) {
-      return Promise.resolve(cached);
+  async getCurrentUser() {
+    return this.getCachedUser() || (await this.refreshCurrentUser());
+  }
+
+  async refreshImpersonatorUser(options?: Options<UsersMeRetrieveData>) {
+    if (ImpersonationStorage.get()) {
+      const user = await getCurrentUser({
+        ...options,
+        headers: getHeaders(false),
+      });
+      store.dispatch(setImpersonatorUser(user));
     }
-    return getCurrentUser().then((user) => {
-      const isImpersonated = Boolean(ImpersonationStorage.get());
-      store.dispatch(setCurrentUser(user, isImpersonated));
-      return user;
-    });
+  }
+
+  async refreshCurrentUser(options?: Options<UsersMeRetrieveData>) {
+    const user = await getCurrentUser(options);
+    store.dispatch(setCurrentUser(user));
+    return user;
   }
 
   getCachedUser() {

@@ -40,7 +40,7 @@ export const AddProposalDialog = reduxForm<
         });
         const proposal = response.data;
         showSuccess(translate('Proposal created successfully'));
-        UsersService.getCurrentUser(true);
+        UsersService.refreshCurrentUser();
         router.stateService.go('proposals.manage-proposal', {
           proposal_uuid: proposal.uuid,
         });

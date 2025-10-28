@@ -3,6 +3,7 @@ import {
   SET_CURRENT_PROJECT,
   SET_CURRENT_RESOURCE,
   SET_CURRENT_USER,
+  SET_IMPERSONATOR_USER,
 } from './constants';
 import { WorkspaceState } from './types';
 
@@ -29,20 +30,16 @@ export const reducer = (state = INITIAL_STATE, action): WorkspaceState => {
       };
 
     case SET_CURRENT_USER:
-      if (!action.payload.impersonated) {
-        return {
-          ...state,
-          impersonatorUser: undefined,
-          user: action.payload.user,
-        };
-      } else {
-        const impersonatorUser = state.impersonatorUser || state.user;
-        return {
-          ...state,
-          impersonatorUser,
-          user: action.payload.user,
-        };
-      }
+      return {
+        ...state,
+        user: action.payload.user,
+      };
+
+    case SET_IMPERSONATOR_USER:
+      return {
+        ...state,
+        impersonatorUser: action.payload.user,
+      };
 
     case SET_CURRENT_RESOURCE:
       return {

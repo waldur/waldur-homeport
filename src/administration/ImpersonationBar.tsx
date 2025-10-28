@@ -3,6 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { getHeaders } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse } from '@waldur/store/notify';
 import {
@@ -22,7 +23,7 @@ export const ImpersonationBar = () => {
     mutationFn: async () => {
       try {
         clearImpersonationData();
-        await UsersService.getCurrentUser(true);
+        await UsersService.refreshCurrentUser({ headers: getHeaders(false) });
       } catch (error) {
         dispatch(
           showErrorResponse(error, translate('Unable to stop impersonating.')),

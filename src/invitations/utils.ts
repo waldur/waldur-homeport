@@ -46,7 +46,7 @@ export function checkAndAccept(token) {
       .then(({ invitation }) => {
         acceptInvitation(token).then(() => {
           // Refetch the user data to update the permissions for the new org or project
-          UsersService.getCurrentUser(true).then(() => {
+          UsersService.refreshCurrentUser().then(() => {
             if (invitation?.project_uuid) {
               router.stateService.go('project.dashboard', {
                 uuid: invitation.project_uuid,
