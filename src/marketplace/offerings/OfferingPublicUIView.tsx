@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   marketplaceCategoriesRetrieve,
+  marketplaceOfferingTermsOfServiceList,
   marketplacePublicOfferingsRetrieve,
 } from 'waldur-js-client';
 
@@ -62,8 +63,13 @@ const PublicOfferingPartitions = lazyComponent(() =>
     default: module.PublicOfferingPartitions,
   })),
 );
+const PublicOfferingTermsOfService = lazyComponent(() =>
+  import('./details/PublicOfferingTermsOfService').then((module) => ({
+    default: module.PublicOfferingTermsOfService,
+  })),
+);
 
-const getTabs = (offering?): PageBarTab[] => {
+const getTabs = (offering?, hasActiveTos = false): PageBarTab[] => {
   if (!offering) {
     // Return an empty array or placeholders until the offering is loaded
     return [];
@@ -132,6 +138,13 @@ const getTabs = (offering?): PageBarTab[] => {
           component: PublicOfferingLocation,
         }
       : null,
+    hasActiveTos
+      ? {
+          title: translate('Terms of Service'),
+          key: 'terms-of-service',
+          component: PublicOfferingTermsOfService,
+        }
+      : null,
   ].filter(Boolean);
 };
 
@@ -157,14 +170,31 @@ export const OfferingPublicUIView = () => {
         path: { uuid: offering.category_uuid },
         ...options,
       }).then((response) => response.data);
-      return { offering, category };
+
+      // Check if offering has active ToS
+      let hasActiveTos = false;
+      if (user) {
+        try {
+          const tosData = await marketplaceOfferingTermsOfServiceList({
+            query: { offering_uuid: offering.uuid, is_active: true },
+          }).then((response) => response.data || []);
+          hasActiveTos = tosData.length > 0;
+        } catch {
+          hasActiveTos = false;
+        }
+      }
+
+      return { offering, category, hasActiveTos };
     },
 
     refetchOnWindowFocus: false,
     staleTime: 3 * 60 * 1000,
   });
 
-  const tabs = useMemo(() => getTabs(data?.offering), [data]);
+  const tabs = useMemo(
+    () => getTabs(data?.offering, data?.hasActiveTos),
+    [data],
+  );
   const { tabSpec } = usePageTabsTransmitter(tabs);
 
   usePageHero(

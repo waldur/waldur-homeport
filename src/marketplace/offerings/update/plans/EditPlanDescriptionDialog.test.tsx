@@ -239,7 +239,9 @@ describe('EditPlanDescriptionDialog', () => {
     await user.click(saveButton);
 
     // Button should be disabled during submission
-    expect(saveButton).toBeDisabled();
+    await waitFor(() => {
+      expect(saveButton).toBeDisabled();
+    });
   });
 
   it('handles API errors gracefully', async () => {
