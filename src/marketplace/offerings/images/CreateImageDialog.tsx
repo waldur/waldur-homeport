@@ -84,7 +84,7 @@ export const CreateImageDialog = reduxForm<
             label={translate('Description')}
             required={true}
             validate={required}
-            maxLength={2000}
+            maxLength={4096}
             placeholder={translate('Enter a description...')}
           />
         </FormContainer>

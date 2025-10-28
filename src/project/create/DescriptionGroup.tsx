@@ -18,7 +18,7 @@ export const DescriptionGroup = ({ create }: { create?: boolean }) =>
         component={TextField as any}
         name="description"
         placeholder={translate('Enter a description...')}
-        validate={validateMaxLength(2000)}
+        validate={validateMaxLength(4096)}
       />
     </FormGroup>
   ) : null;

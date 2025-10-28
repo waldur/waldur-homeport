@@ -45,7 +45,7 @@ export const CreateSecurityGroupForm = connectForm(
               <Field
                 component={InputField}
                 name="description"
-                maxLength={2000}
+                maxLength={4096}
               />
             </Form.Group>
 

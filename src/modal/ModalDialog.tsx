@@ -69,7 +69,11 @@ export const ModalDialog: FC<ModalDialogProps> = ({
                 className={classNames(
                   'modal-icon mb-6',
                   iconColor && `text-${iconColor}`,
-                  iconColor ? `bg-light-${iconColor}` : 'bg-secondary',
+                  !iconColor
+                    ? 'bg-secondary'
+                    : iconColor === 'dark'
+                      ? `bg-gray-100`
+                      : `bg-light-${iconColor}`,
                 )}
               >
                 {iconNode}
