@@ -27,17 +27,17 @@ export const PullInstanceAction: ActionItemType = ({ resource, refetch }) => {
 
   return (
     <ActionItem
-      title={translate('Pull')}
+      title={translate('Synchronise')}
       action={async () => {
         try {
           await openstackInstancesPull({ path: { uuid: resource.uuid } });
           if (refetch) {
             await refetch();
           }
-          dispatch(showSuccess(translate('Resource pull has been scheduled.')));
+          dispatch(showSuccess(translate('Resource sync has been scheduled.')));
         } catch (error) {
           dispatch(
-            showErrorResponse(error, translate('Unable to pull resource.')),
+            showErrorResponse(error, translate('Unable to sync resource.')),
           );
         }
       }}
