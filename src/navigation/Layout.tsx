@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ImpersonationBar } from '@waldur/administration/ImpersonationBar';
 import * as AuthService from '@waldur/auth/AuthService';
@@ -12,8 +12,7 @@ import { DefaultLayoutConfig, useLayout } from '@waldur/metronic/layout/core';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
 import { RemovedProjectWarningBar } from '@waldur/project/RemovedProjectWarningBar';
 import { OfferingUsersWarningBar } from '@waldur/user/OfferingUsersWarningBar';
-import { getCurrentUser } from '@waldur/user/UsersService';
-import { setCurrentUser } from '@waldur/workspace/actions';
+import { UsersService } from '@waldur/user/UsersService';
 import { getImpersonatorUser, getUser } from '@waldur/workspace/selectors';
 
 import { AppFooter } from './AppFooter';
@@ -30,7 +29,6 @@ import { IBreadcrumbItem } from './types';
 import { useTabs } from './useTabs';
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
-  const dispatch = useDispatch();
   const { state } = useCurrentStateAndParams();
   const currentUser = useSelector(getUser);
   const impersonatorUser = useSelector(getImpersonatorUser);
@@ -92,10 +90,9 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (AuthService.isAuthenticated() && !currentUser) {
-      getCurrentUser({ throwOnError: false }).then((user) => {
-        dispatch(setCurrentUser(user));
-      });
+      UsersService.refreshCurrentUser({ throwOnError: false });
     }
+    UsersService.refreshImpersonatorUser();
   }, []);
 
   useEffect(() => {

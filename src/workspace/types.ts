@@ -21,7 +21,7 @@ export type PhoneNumber =
 
 export interface WorkspaceState {
   user: User;
-  impersonatorUser: User;
+  impersonatorUser?: User;
   customer?: Customer;
   project?: Project;
   resource?: Resource;

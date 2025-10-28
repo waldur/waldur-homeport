@@ -10544,14 +10544,17 @@
   "Terms of Service": {
     "message": "Terms of Service",
     "context": {
-      "primary_ui_type": "unknown",
+      "primary_ui_type": "title",
       "ui_types": [
         "generic_element",
         "property_value",
+        "title",
         "unknown"
       ],
       "components": [
         "UserAgreementComponent",
+        "PublicOfferingCardTitle",
+        "Card",
         "FormGroup",
         "ModalDialog",
         "Table",
@@ -10583,6 +10586,8 @@
         "feature_areas": [
           "about",
           "general",
+          "offerings",
+          "details",
           "tos",
           "orders",
           "dashboard"
@@ -10596,6 +10601,8 @@
         "paths": [
           "about/TosPage.tsx",
           "about.tsx",
+          "marketplace/offerings/OfferingPublicUIView.tsx",
+          "marketplace/offerings/details/PublicOfferingTermsOfService.tsx",
           "marketplace/offerings/update/tos/AddTosDialog.tsx",
           "marketplace/offerings/update/tos/TosEditDialog.tsx",
           "marketplace/offerings/update/tos/TosManagementSection.tsx",
@@ -10606,6 +10613,7 @@
       "jsx_context": {
         "tags": [
           "UserAgreementComponent",
+          "PublicOfferingCardTitle",
           "FormGroup",
           "Table",
           "ModalDialog",
@@ -10627,9 +10635,10 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 7
+      "usage_count": 9
     },
     "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -148456,6 +148465,213 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
+  "No Terms of Service available.": {
+    "message": "No Terms of Service available.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 30,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/offerings/details/PublicOfferingTermsOfService.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "External link": {
+    "message": "External link",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "unknown",
+        "label"
+      ],
+      "components": [
+        "Card",
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details",
+          "tos"
+        ],
+        "component_types": [
+          "component",
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/offerings/details/PublicOfferingTermsOfService.tsx",
+          "marketplace/offerings/update/tos/AddTosDialog.tsx",
+          "marketplace/offerings/update/tos/TosEditDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "strong",
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "No Terms of Service content available.": {
+    "message": "No Terms of Service content available.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 38,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/offerings/details/PublicOfferingTermsOfService.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Available Versions": {
     "message": "Available Versions",
     "context": {
@@ -174304,77 +174520,6 @@
       },
       "usage_count": 2
     }
-  },
-  "External link": {
-    "message": "External link",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label",
-        "unknown"
-      ],
-      "components": [
-        "FormGroup",
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 13,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "tos"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/offerings/update/tos/AddTosDialog.tsx",
-          "marketplace/offerings/update/tos/TosEditDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "FormGroup"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 10
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
   },
   "Terms of service has been added successfully.": {
     "message": "Terms of service has been added successfully.",

@@ -36,16 +36,25 @@ const getAuthHeader = () => {
   }
 };
 
-export function initApiClient() {
+export function getHeaders(impersonate = true) {
   const headers = {
     Accept: 'application/json',
   };
 
-  headers['X-IMPERSONATED-USER-UUID'] = ImpersonationStorage.get();
+  if (impersonate && ImpersonationStorage.get()) {
+    headers['X-IMPERSONATED-USER-UUID'] = ImpersonationStorage.get();
+  } else {
+    headers['X-IMPERSONATED-USER-UUID'] = null;
+  }
 
   if (LanguageStorage.get()) {
     headers['Accept-Language'] = LanguageStorage.get();
   }
+  return headers;
+}
+
+export function initApiClient() {
+  const headers = getHeaders();
   client.setConfig({
     auth: getAuthHeader,
     baseUrl: ENV.apiEndpoint,
