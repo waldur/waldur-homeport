@@ -1,0 +1,28 @@
+.announcements {
+  .bar {
+    border-bottom: 1px solid var(--bs-border-color);
+
+    &:not(:first-child) {
+      border-top: 1px solid var(--bs-border-color);
+    }
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
+
+    .ellipsis {
+      overflow: hidden;
+
+      p.ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+        margin-bottom: 0;
+      }
+    }
+
+    .text-anchor {
+      white-space: nowrap;
+    }
+  }
+}

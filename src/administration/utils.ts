@@ -1,3 +1,9 @@
+import {
+  InfoIcon,
+  WarningCircleIcon,
+  XCircleIcon,
+} from '@phosphor-icons/react';
+
 import { translate } from '@waldur/i18n';
 
 export const AnnouncementTypeOptions = [
@@ -14,6 +20,24 @@ export const AnnouncementTypeOptions = [
     value: 'danger',
   },
 ];
+
+export const ANNOUNCEMENT_ICON = {
+  warning: {
+    icon: WarningCircleIcon,
+    variant: 'warning',
+  },
+  danger: {
+    icon: XCircleIcon,
+    variant: 'danger',
+  },
+  information: {
+    icon: InfoIcon,
+    variant: 'dark',
+  },
+};
+
+export const getAnnouncementTypeLabel = (type) =>
+  AnnouncementTypeOptions.find((op) => op.value === type)?.label || type;
 
 export const IssueTemplateTypeOptions = [
   {

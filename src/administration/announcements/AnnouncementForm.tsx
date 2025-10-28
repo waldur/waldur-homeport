@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { connect } from 'react-redux';
 import { reduxForm, SubmissionError } from 'redux-form';
 import {
@@ -6,16 +7,13 @@ import {
   adminAnnouncementsUpdate,
 } from 'waldur-js-client';
 
-import {
-  FormContainer,
-  SelectField,
-  SubmitButton,
-  TextField,
-} from '@waldur/form';
+import { FormContainer, SelectField, SubmitButton } from '@waldur/form';
 import { DateTimeField } from '@waldur/form/DateTimeField';
+import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@waldur/navigation/header/announcements/queryKeys';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { AnnouncementTypeOptions } from '../utils';
@@ -33,6 +31,7 @@ export const AnnouncementForm = connect<
     form: 'AdminAnnouncementForm',
   })((props) => {
     const isEdit = Boolean(props.resolve.announcement?.uuid);
+    const queryClient = useQueryClient();
 
     const processRequest = async (
       values: AdminAnnouncementRequest,
@@ -53,6 +52,10 @@ export const AnnouncementForm = connect<
       try {
         await action;
         props.resolve.refetch();
+        // Invalidate React Query cache to update announcements in header
+        queryClient.invalidateQueries({
+          queryKey: ADMIN_ANNOUNCEMENTS_QUERY_KEY,
+        });
         dispatch(
           showSuccess(
             isEdit
@@ -117,7 +120,7 @@ export const AnnouncementForm = connect<
               required
             />
 
-            <TextField
+            <MarkdownEditor
               label={translate('Announcement')}
               name="description"
               required

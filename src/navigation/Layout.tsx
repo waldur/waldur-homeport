@@ -18,7 +18,7 @@ import { getImpersonatorUser, getUser } from '@waldur/workspace/selectors';
 import { AppFooter } from './AppFooter';
 import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
-import { Announcements } from './header/Announcements';
+import { Announcements } from './header/announcements/Announcements';
 import { AppHeader } from './header/AppHeader';
 import { BreadcrumbMain } from './header/breadcrumb/BreadcrumbMain';
 import { OutstandingBar } from './OutstandingBar';

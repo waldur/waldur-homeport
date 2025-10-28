@@ -16836,7 +16836,7 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
@@ -16844,7 +16844,8 @@
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "New announcement has been created.": {
@@ -16899,7 +16900,7 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
@@ -16907,7 +16908,8 @@
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Unable to update announcement.": {
@@ -17551,7 +17553,8 @@
       "components": [
         "DateTimeField",
         "FormContainer",
-        "ModalDialog"
+        "ModalDialog",
+        "Field"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -17570,23 +17573,27 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "admin"
+          "admin",
+          "general"
         ],
         "feature_areas": [
           "announcements"
         ],
         "component_types": [
-          "form"
+          "form",
+          "dialog"
         ],
         "paths": [
-          "administration/announcements/AnnouncementForm.tsx"
+          "administration/announcements/AnnouncementForm.tsx",
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "DateTimeField"
+          "DateTimeField",
+          "Field"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -17600,14 +17607,15 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 9
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
       "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Active to": {
@@ -17620,7 +17628,8 @@
       "components": [
         "DateTimeField",
         "FormContainer",
-        "ModalDialog"
+        "ModalDialog",
+        "Field"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -17639,23 +17648,27 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "admin"
+          "admin",
+          "general"
         ],
         "feature_areas": [
           "announcements"
         ],
         "component_types": [
-          "form"
+          "form",
+          "dialog"
         ],
         "paths": [
-          "administration/announcements/AnnouncementForm.tsx"
+          "administration/announcements/AnnouncementForm.tsx",
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "DateTimeField"
+          "DateTimeField",
+          "Field"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -17669,14 +17682,15 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 9
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
       "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Announcement": {
@@ -17687,7 +17701,7 @@
         "generic_element"
       ],
       "components": [
-        "TextField",
+        "MarkdownEditor",
         "FormContainer",
         "ModalDialog"
       ],
@@ -17722,7 +17736,7 @@
       },
       "jsx_context": {
         "tags": [
-          "TextField"
+          "MarkdownEditor"
         ],
         "conditional_render": false
       },
@@ -20660,6 +20674,7 @@
           "categories",
           "checklists",
           "marketplace-remote",
+          "announcements",
           "openstack-backup",
           "openstack-security-groups",
           "openstack-snapshot",
@@ -20739,6 +20754,7 @@
           "marketplace-checklist/categories/CategoryFormDialog.tsx",
           "marketplace-checklist/checklists/ChecklistFormDialog.tsx",
           "marketplace-remote/ProjectUpdateRequestExpandable.tsx",
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx",
           "openstack/openstack-backup/BackupsList.tsx",
           "openstack/openstack-instance/deploy/FormSecurityGroupsField.tsx",
           "openstack/openstack-security-groups/SecurityGroupRuleHeader.tsx",
@@ -20819,7 +20835,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 93
+      "usage_count": 94
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -36400,6 +36416,7 @@
           "administration/remote-offering-sync/RemoteSyncSynchroniseAction.tsx",
           "marketplace/resources/actions/SyncResourceAction.tsx",
           "marketplace/resources/mass-actions/MultiPullAction.tsx",
+          "openstack/openstack-instance/actions/PullInstanceAction.tsx",
           "openstack/openstack-tenant/actions/PullFloatingIpsAction.tsx",
           "openstack/openstack-tenant/actions/PullSecurityGroupsAction.tsx",
           "openstack/openstack-tenant/actions/PullServerGroupsAction.tsx",
@@ -36428,7 +36445,7 @@
         "has_validation": true,
         "max_nesting_level": 4
       },
-      "usage_count": 8
+      "usage_count": 9
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -59721,6 +59738,7 @@
           "invitations",
           "actions",
           "create",
+          "announcements",
           "offering-requests",
           "api-key"
         ],
@@ -59738,6 +59756,7 @@
           "maintenance/actions/MaintenanceDetailsDialog.tsx",
           "maintenance/create/Step1CreateMessage.tsx",
           "maintenance/create/Step3ReviewAndCreate.tsx",
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx",
           "proposals/offering-requests/OfferingRequestsListExpandableRow.tsx",
           "user/api-key/AuthenticationEvents.tsx"
         ]
@@ -59766,7 +59785,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 9
+      "usage_count": 10
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -63532,15 +63551,18 @@
         ],
         "feature_areas": [
           "core",
-          "details"
+          "details",
+          "announcements"
         ],
         "component_types": [
-          "component"
+          "component",
+          "navigation"
         ],
         "paths": [
           "core/TruncatedDescription.tsx",
           "marketplace/resources/details/ResourceShowMoreComponents.tsx",
-          "marketplace/resources/details/ServiceProviderCommentWarningBar.tsx"
+          "marketplace/resources/details/ServiceProviderCommentWarningBar.tsx",
+          "navigation/header/announcements/AnnouncementBar.tsx"
         ]
       },
       "jsx_context": {
@@ -63563,7 +63585,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -121475,7 +121497,8 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "property_value"
+        "property_value",
+        "unknown"
       ],
       "components": [],
       "is_user_facing": true,
@@ -121496,18 +121519,22 @@
       "file_context": {
         "domains": [
           "support",
-          "marketplace"
+          "marketplace",
+          "general"
         ],
         "feature_areas": [
           "issues",
-          "marketplace"
+          "marketplace",
+          "announcements"
         ],
         "component_types": [
-          "component"
+          "component",
+          "dialog"
         ],
         "paths": [
           "issues/routes.ts",
-          "marketplace/routes.ts"
+          "marketplace/routes.ts",
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
         ]
       },
       "jsx_context": {
@@ -121528,7 +121555,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
@@ -192331,7 +192358,7 @@
         ],
         "feature_areas": [
           "resource-pending",
-          "header"
+          "announcements"
         ],
         "component_types": [
           "page",
@@ -192339,7 +192366,7 @@
         ],
         "paths": [
           "marketplace/resources/resource-pending/OrderErredView.tsx",
-          "navigation/header/Announcements.tsx"
+          "navigation/header/announcements/AnnouncementError.tsx"
         ]
       },
       "jsx_context": {
@@ -211122,66 +211149,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Unable to load announcements": {
-    "message": "Unable to load announcements",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 28,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "header"
-        ],
-        "component_types": [
-          "navigation"
-        ],
-        "paths": [
-          "navigation/header/Announcements.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "p"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    }
-  },
   "Pending confirmations": {
     "message": "Pending confirmations",
     "context": {
@@ -211740,6 +211707,447 @@
       "This is a success message. Use positive, confirming language.",
       "This action modifies application state. Use clear, actionable language."
     ]
+  },
+  "Ongoing Since": {
+    "message": "Ongoing Since",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call",
+        "generic_element"
+      ],
+      "components": [
+        "Field"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "announcements"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Expected Completion": {
+    "message": "Expected Completion",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call",
+        "generic_element"
+      ],
+      "components": [
+        "Field"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "announcements"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Service Provider": {
+    "message": "Service Provider",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "announcements"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Affected Offerings": {
+    "message": "Affected Offerings",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 18,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "announcements"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h6"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 3
+      },
+      "usage_count": 1
+    }
+  },
+  "Offering Name": {
+    "message": "Offering Name",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "announcements"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "Impact Level": {
+    "message": "Impact Level",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "announcements"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/header/announcements/AnnouncementDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "Unable to load announcements": {
+    "message": "Unable to load announcements",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "announcements"
+        ],
+        "component_types": [
+          "navigation"
+        ],
+        "paths": [
+          "navigation/header/announcements/AnnouncementError.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    }
   },
   "Go back to": {
     "message": "Go back to",
@@ -222015,74 +222423,8 @@
       "usage_count": 2
     }
   },
-  "Pull": {
-    "message": "Pull",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "ActionItem"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 4,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "infrastructure"
-        ],
-        "feature_areas": [
-          "actions"
-        ],
-        "component_types": [
-          "button"
-        ],
-        "paths": [
-          "openstack/openstack-instance/actions/PullInstanceAction.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ActionItem"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Resource pull has been scheduled.": {
-    "message": "Resource pull has been scheduled.",
+  "Resource sync has been scheduled.": {
+    "message": "Resource sync has been scheduled.",
     "context": {
       "primary_ui_type": "success_message",
       "ui_types": [
@@ -222146,8 +222488,8 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Unable to pull resource.": {
-    "message": "Unable to pull resource.",
+  "Unable to sync resource.": {
+    "message": "Unable to sync resource.",
     "context": {
       "primary_ui_type": "error_message",
       "ui_types": [
