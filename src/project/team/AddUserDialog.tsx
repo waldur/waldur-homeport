@@ -270,7 +270,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
                 name="user"
                 key={values.showAllUsers ? 'showAllUsers' : 'notShowAllUsers'}
                 placeholder={translate('Select user...')}
-                loadOptions={(query, prevOptions, { page }) =>
+                loadOptions={(query, prevOptions, page) =>
                   loadUsers(
                     query,
                     prevOptions,
