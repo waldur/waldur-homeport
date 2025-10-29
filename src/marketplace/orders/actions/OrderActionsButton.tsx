@@ -15,6 +15,7 @@ import { getUser } from '@waldur/workspace/selectors';
 import { CancelOrderButton } from '../details/CancelOrderButton';
 
 import { ApproveByProviderButton } from './ApproveByProviderButton';
+import { MarkAsDoneButton } from './MarkAsDoneButton';
 import { OrderConsumerActions } from './OrderConsumerActions';
 
 export const OrderActionsButton = ({
@@ -54,12 +55,26 @@ export const OrderActionsButton = ({
     );
   }, [order, user]);
 
+  const showMarkAsDoneButton = useMemo(() => {
+    return (
+      order.state === 'executing' &&
+      hasPermission(user, {
+        permission: PermissionEnum.APPROVE_ORDER,
+        customerId: order.provider_uuid,
+      })
+    );
+  }, [order, user]);
+
   return showCancelButton ||
     showApproveByProviderButton ||
+    showMarkAsDoneButton ||
     order.state === 'pending-consumer' ? (
     <ActionsDropdownComponent label={translate('Actions')} labeled={true}>
       {showApproveByProviderButton && (
         <ApproveByProviderButton row={order} refetch={loadData} />
+      )}
+      {showMarkAsDoneButton && (
+        <MarkAsDoneButton row={order} refetch={loadData} />
       )}
       {showCancelButton && (
         <CancelOrderButton uuid={order.uuid} loadData={loadData} />

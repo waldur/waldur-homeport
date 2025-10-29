@@ -39,8 +39,15 @@ export const TableWithTabs: FC<
   const { state, params } = useCurrentStateAndParams();
   const router = useRouter();
 
+  const defaultActiveKey = useMemo(
+    () => tabs.find((tab) => tab.key)?.key,
+    [tabs],
+  );
+  const [activeKey, setActiveKey] = useState<string | number | null>(
+    defaultActiveKey,
+  );
+
   const [isRefsReady, setRefsReady] = useState(false);
-  const [activeKey, setActiveKey] = useState<string | number | null>(null);
   const refToolbar = useRef<HTMLDivElement>(null);
   const refTitle = useRef<HTMLDivElement>(null);
 
@@ -49,11 +56,6 @@ export const TableWithTabs: FC<
       setRefsReady(true);
     }
   }, [refToolbar.current, refTitle.current]);
-
-  const defaultActiveKey = useMemo(
-    () => tabs.find((tab) => tab.key)?.key,
-    [tabs],
-  );
 
   // Sync activeKey with URL query if syncWithUrlKey is provided
   useEffect(() => {
@@ -159,6 +161,7 @@ export const TableWithTabs: FC<
                 <Tab.Pane key={tab.key} eventKey={tab.key} unmountOnExit={true}>
                   <tab.component
                     {...data}
+                    activeTab={activeKey}
                     portal={{
                       toolbar: refToolbar.current,
                       refresh: refTitle.current,

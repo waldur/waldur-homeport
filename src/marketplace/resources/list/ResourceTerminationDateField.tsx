@@ -1,20 +1,22 @@
 import { FC } from 'react';
 import { Resource } from 'waldur-js-client';
 
+import { formatDate } from '@waldur/core/dateUtils';
 import { WarnTip } from '@waldur/core/WarnTip';
 import { translate } from '@waldur/i18n';
 
 interface ResourceTerminationDateFieldProps {
   row: Resource;
+  format?: boolean;
 }
 
 export const ResourceTerminationDateField: FC<
   ResourceTerminationDateFieldProps
-> = ({ row }) => {
+> = ({ row, format }) => {
   if (!row.end_date) return 'N/A';
   return (
     <>
-      {row.end_date}
+      {format ? formatDate(row.end_date) : row.end_date}
       {row.project_end_date && row.end_date > row.project_end_date && (
         <WarnTip
           id={row.uuid}

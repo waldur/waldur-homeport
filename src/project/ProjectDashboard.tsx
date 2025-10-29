@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
+import { count, parseSelectData } from '@waldur/core/api';
 import { Panel } from '@waldur/core/Panel';
 import { filterComponentsWithUsage } from '@waldur/customer/dashboard/utils';
 import { COMMON_WIDGET_HEIGHT } from '@waldur/dashboard/constants';
@@ -15,9 +15,11 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useCreateInvitation } from '@waldur/invitations/actions/useCreateInvitation';
 import { AggregateLimitWidget } from '@waldur/marketplace/aggregate-limits/AggregateLimitWidget';
+import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
 import { useUser } from '@waldur/workspace/hooks';
 import { getProject } from '@waldur/workspace/selectors';
 
+import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
 import { ProjectDashboardCredit } from './ProjectDashboardCredit';
 import { getProjectTeamChart } from './utils';
@@ -91,6 +93,25 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   const shouldShowCurrentMonthWidget =
     currentMonthFilteredData?.components?.length > 0;
 
+  // Check if there are limit-based resources to show
+  const { data: limitBasedResourcesCount } = useQuery({
+    queryKey: ['limit-based-resources-count', project?.uuid],
+    queryFn: () =>
+      project?.uuid
+        ? count('/api/marketplace-resources/', {
+            project_uuid: project.uuid,
+            state: NON_TERMINATED_STATES,
+            only_limit_based: true,
+            component_count: 1,
+          })
+        : 0,
+    refetchOnWindowFocus: false,
+    staleTime: 3 * 60 * 1000,
+    enabled: Boolean(project?.uuid),
+  });
+
+  const shouldShowLimitBasedResources = (limitBasedResourcesCount || 0) > 0;
+
   const showBillingInfo = project.customer_display_billing_info_in_projects;
 
   if (!project || !user) {
@@ -98,6 +119,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   }
   return (
     <>
+      {shouldShowLimitBasedResources && <ProjectLimitUsageBasedResources />}
       <Row>
         {!shouldConcealPrices && showBillingInfo && (
           <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>

@@ -1,0 +1,37 @@
+import { OfferingComponent } from 'waldur-js-client';
+
+import { ProgressBar } from '@waldur/core/ProgressBar';
+import { getUsagePercentOfLimitComponent } from '@waldur/marketplace/resources/details/QuotaCell';
+import { getQuotaCellProps } from '@waldur/marketplace/resources/details/ResourceComponentItem';
+
+interface ResourceQuotaFieldProps {
+  row;
+  component?: OfferingComponent;
+  progressBar?: boolean;
+}
+
+export const ResourceQuotaField = ({
+  row,
+  component,
+  progressBar = false,
+}: ResourceQuotaFieldProps) => {
+  const quotaProps = getQuotaCellProps(component, row);
+  const percent = getUsagePercentOfLimitComponent(
+    quotaProps.limit,
+    quotaProps.usage,
+  );
+  return progressBar ? (
+    <ProgressBar
+      now={percent}
+      showValue
+      variant={percent > 66 ? 'danger' : percent > 33 ? 'warning' : undefined}
+    />
+  ) : (
+    <>
+      {quotaProps.limit
+        ? `${quotaProps.usage.toLocaleString()}/${quotaProps.limit.toLocaleString()}`
+        : quotaProps.usage.toLocaleString()}
+      {component?.measured_unit && ` ${component.measured_unit}`}
+    </>
+  );
+};
