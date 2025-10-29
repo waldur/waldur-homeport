@@ -18256,6 +18256,7 @@
           "import",
           "integration",
           "tos",
+          "mass-actions",
           "categories",
           "checklists",
           "questions",
@@ -18287,6 +18288,7 @@
           "marketplace/offerings/update/integration/EditFieldDialog.tsx",
           "marketplace/offerings/update/integration/EditScriptLanguageDialog.tsx",
           "marketplace/offerings/update/tos/AddTosDialog.tsx",
+          "marketplace/resources/mass-actions/MultiEditOptionsDialog.tsx",
           "marketplace-checklist/categories/CategoryFormDialog.tsx",
           "marketplace-checklist/checklists/ChecklistFormDialog.tsx",
           "marketplace-checklist/checklists/questions/QuestionFormDialog.tsx",
@@ -18320,7 +18322,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 25
+      "usage_count": 26
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -132650,9 +132652,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "FormContainer"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -132666,13 +132666,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Select tenants...": {
@@ -132713,9 +132714,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "FormContainer"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -132729,13 +132728,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Select instance...": {
@@ -132776,9 +132776,7 @@
         ]
       },
       "jsx_context": {
-        "tags": [
-          "FormContainer"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -132792,13 +132790,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Refresh": {
@@ -163618,9 +163617,15 @@
     "context": {
       "primary_ui_type": "label",
       "ui_types": [
-        "label"
+        "label",
+        "generic_element",
+        "unknown"
       ],
-      "components": [],
+      "components": [
+        "EditAction",
+        "ModalDialog",
+        "Form"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 21,
@@ -163637,16 +163642,28 @@
       },
       "variables": {},
       "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "mass-actions"
+        ],
+        "component_types": [
+          "form",
+          "dialog"
+        ],
         "paths": [
-          "marketplace/offerings/update/integration/ScriptEditorHeader.tsx"
+          "marketplace/offerings/update/integration/ScriptEditorHeader.tsx",
+          "marketplace/resources/mass-actions/MultiEditOptionsAction.tsx",
+          "marketplace/resources/mass-actions/MultiEditOptionsDialog.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [],
-        "conditional_render": false
+        "tags": [
+          "EditAction",
+          "ModalDialog"
+        ],
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -163657,13 +163674,19 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
+        "has_validation": true,
+        "max_nesting_level": 10
       },
-      "usage_count": 1
-    }
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
   },
   "Edit roles": {
     "message": "Edit roles",
@@ -190977,6 +191000,276 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Edit all": {
+    "message": "Edit all",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Button"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "mass-actions"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/resources/mass-actions/MultiEditOptionsAction.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Button"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Options have been updated": {
+    "message": "Options have been updated",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "mass-actions",
+          "options"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/resources/mass-actions/MultiEditOptionsDialog.tsx",
+          "marketplace/resources/options/UpdateResourceOptionDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to update options.": {
+    "message": "Unable to update options.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "mass-actions",
+          "options"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/resources/mass-actions/MultiEditOptionsDialog.tsx",
+          "marketplace/resources/options/UpdateResourceOptionDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "There are no resource options defined in the offering.": {
+    "message": "There are no resource options defined in the offering.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog",
+        "ActionDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 54,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "mass-actions",
+          "options"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/resources/mass-actions/MultiEditOptionsDialog.tsx",
+          "marketplace/resources/options/UpdateResourceOptionDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog",
+          "ActionDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Mass move resources": {
     "message": "Mass move resources",
     "context": {
@@ -191450,134 +191743,6 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
-  "Options have been updated": {
-    "message": "Options have been updated",
-    "context": {
-      "primary_ui_type": "success_message",
-      "ui_types": [
-        "success_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 25,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "options"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/resources/options/UpdateResourceOptionDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a success message. Use positive, confirming language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Unable to update options.": {
-    "message": "Unable to update options.",
-    "context": {
-      "primary_ui_type": "error_message",
-      "ui_types": [
-        "error_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 25,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "options"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/resources/options/UpdateResourceOptionDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
   "Update option": {
     "message": "Update option",
     "context": {
@@ -191636,72 +191801,6 @@
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 5
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "There are no resource options defined in the offering.": {
-    "message": "There are no resource options defined in the offering.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ActionDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 54,
-        "wordCount": 9,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "options"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/resources/options/UpdateResourceOptionDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ActionDialog"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
       },
       "usage_count": 1
     },
