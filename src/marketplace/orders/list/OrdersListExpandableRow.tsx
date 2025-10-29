@@ -38,9 +38,11 @@ export const OrdersListExpandableRow: FunctionComponent<{
       value={renderFieldOrDash(order.plan_name)}
     />
 
-    <Field
-      label={translate('Actions')}
-      value={<OrderProviderActions order={order} />}
-    />
+    {order.state === 'pending-provider' && (
+      <Field
+        label={translate('Actions')}
+        value={<OrderProviderActions order={order} />}
+      />
+    )}
   </ExpandableContainer>
 );

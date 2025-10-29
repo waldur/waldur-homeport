@@ -9,7 +9,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { PermissionEnum } from '@waldur/permissions/enums';
-import { getUser, isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { isOwnerOrStaff } from '@waldur/workspace/selectors';
 
 import { fetchProvider } from './resolve';
 
@@ -75,18 +75,19 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'public.marketplace-orders',
+    name: 'auth-marketplace-orders',
     url: '/marketplace-orders/',
     component: lazyComponent(() =>
       import('./orders/list/MarketplaceOrdersList').then((module) => ({
         default: module.MarketplaceOrdersList,
       })),
     ),
+    parent: 'layout',
     data: {
+      auth: true,
       breadcrumb: () => translate('Orders'),
       permissions: [
         () => !isFeatureVisible(MarketplaceFeatures.catalogue_only),
-        (state) => Boolean(getUser(state)),
       ],
     },
   },
