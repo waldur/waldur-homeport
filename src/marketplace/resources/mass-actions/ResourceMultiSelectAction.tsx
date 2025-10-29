@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { MultiDestroyAction } from './MultiDestroyAction';
+import { MultiEditOptionsAction } from './MultiEditOptionsAction';
 import { MultiMoveAction } from './MultiMoveAction';
 import { MultiPullAction } from './MultiPullAction';
 import { MultiRestartAction } from './MultiRestartAction';
@@ -23,6 +24,7 @@ export const ResourceMultiSelectAction = ({
   const user = useUser();
   return (
     <DropdownButton variant="primary" title={translate('All actions')}>
+      <MultiEditOptionsAction rows={rows} refetch={refetch} />
       <MultiStopAction rows={rows} refetch={refetch} />
       <MultiStartAction rows={rows} refetch={refetch} />
       <MultiRestartAction rows={rows} refetch={refetch} />

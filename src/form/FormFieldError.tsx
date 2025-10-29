@@ -10,7 +10,9 @@ export const FormFieldError = ({ name }: FormFieldErrorProps) => (
   <Field
     name={name}
     component={({ meta }) =>
-      meta.touched && meta.error ? <FieldError error={meta.error} /> : null
+      meta.touched && (meta.error || meta.submitError) ? (
+        <FieldError error={meta.error || meta.submitError} />
+      ) : null
     }
   />
 );

@@ -1,5 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
+import { uniqueId } from 'lodash-es';
 import { ReactNode, FC, PropsWithChildren } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
@@ -10,21 +11,26 @@ import { FieldError } from '@waldur/form';
 interface FormGroupProps {
   label?: ReactNode;
   help?: ReactNode;
+  helpEnd?: boolean;
   description?: ReactNode;
   meta?: FieldMetaState<any>;
   required?: boolean;
   controlId?: string;
   quickAction?: ReactNode;
   spaceless?: boolean;
+  space?: number;
   className?: string;
   id?: string;
 }
 
-export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => (
+export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
+  space = 7,
+  ...props
+}) => (
   <Form.Group
     className={classNames(
       props.className,
-      props.spaceless ? undefined : 'mb-7',
+      props.spaceless ? undefined : `mb-${space}`,
     )}
     controlId={props.controlId}
     id={props.id}
@@ -32,8 +38,8 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => (
     {Boolean(props.label || props.quickAction) && (
       <div className="d-flex align-items-end">
         {!!props.label && (
-          <Form.Label>
-            {props.help && (
+          <Form.Label className="me-auto">
+            {props.help && !props.helpEnd && (
               <Tip id="form-field-tooltip" label={props.help}>
                 <QuestionIcon />{' '}
               </Tip>
@@ -42,8 +48,15 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => (
             {props.required && <span className="text-danger"> *</span>}
           </Form.Label>
         )}
-        {props.quickAction && (
-          <div className="ms-auto">{props.quickAction}</div>
+        {props.quickAction}
+        {props.help && props.helpEnd && (
+          <Tip
+            id={uniqueId('form-field-tooltip-')}
+            className="align-self-center ms-2"
+            label={props.help}
+          >
+            <QuestionIcon weight="bold" size={20} className="text-muted" />
+          </Tip>
         )}
       </div>
     )}

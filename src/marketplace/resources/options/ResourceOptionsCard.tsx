@@ -5,6 +5,8 @@ import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 
+import { MultiEditOptionsAction } from '../mass-actions/MultiEditOptionsAction';
+
 import { OptionValue } from './OptionValue';
 import { UpdateResourceOptionButton } from './UpdateResourceOptionButton';
 
@@ -35,6 +37,13 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
       refetch={props.refetch}
       loading={props.isLoading}
       className="card-bordered"
+      actions={
+        <MultiEditOptionsAction
+          rows={[props.resource]}
+          refetch={props.refetch}
+          asButton
+        />
+      }
     >
       <FormTable>
         {resourceOptions.order?.map((key) => {
