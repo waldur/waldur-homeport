@@ -5,7 +5,11 @@ import { Resource } from 'waldur-js-client';
 
 import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
 
-import { CustomerResourceActions, StaffActions } from './ActionsList';
+import {
+  CustomerResourceActions,
+  ProviderActionsList,
+  StaffActions,
+} from './ActionsList';
 
 interface ResourceActionsButtonProps {
   resource: Resource;
@@ -24,6 +28,7 @@ export const ResourceActionsButton: FunctionComponent<
       open={open}
       onToggle={onToggle}
       customerResourceActions={CustomerResourceActions}
+      providerResourceActions={ProviderActionsList}
       staffActions={StaffActions}
       resource={props.resource}
       refetch={props.refetch}

@@ -48,7 +48,7 @@ export const EditResourceEndDateByProviderAction = ({
 
   return hasPermission(user, {
     permission: PermissionEnum.SET_RESOURCE_END_DATE,
-    customerId: resource.customer_uuid,
+    customerId: resource.provider_uuid,
   }) || user.is_support ? (
     <ActionItem
       title={translate('Set termination date')}

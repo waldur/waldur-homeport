@@ -19047,6 +19047,7 @@
           "marketplace",
           "general",
           "infrastructure",
+          "project_management",
           "user_management"
         ],
         "feature_areas": [
@@ -19064,6 +19065,7 @@
           "marketplace-remote",
           "confirmation-drawer",
           "actions",
+          "dashboard",
           "offering-requests",
           "create",
           "resource-requests-step",
@@ -19072,8 +19074,7 @@
           "plan-usage",
           "resource-usage",
           "user",
-          "affiliations",
-          "dashboard"
+          "affiliations"
         ],
         "component_types": [
           "component",
@@ -19119,6 +19120,8 @@
           "navigation/header/confirmation-drawer/PendingProviderOrders.tsx",
           "openstack/openstack-tenant/actions/MigrateTenantDialog.tsx",
           "permissions/constants.tsx",
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx",
+          "project/dashboard/ProjectResourcesFilter.tsx",
           "proposals/offering-requests/OfferingRequestsList.tsx",
           "proposals/offering-requests/OfferingRequestsTableFilter.tsx",
           "proposals/proposal/create/ResourceRequestsSummary.tsx",
@@ -19168,7 +19171,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 53
+      "usage_count": 55
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -27097,6 +27100,7 @@
           "openstack-tenant",
           "openstack-volume",
           "project",
+          "dashboard",
           "manage",
           "proposals",
           "call-management",
@@ -27113,7 +27117,6 @@
           "summary",
           "user",
           "affiliations",
-          "dashboard",
           "vmware"
         ],
         "component_types": [
@@ -27217,6 +27220,7 @@
           "openstack/openstack-volume/VolumeSnapshotsList.tsx",
           "project/ProjectRecoveryModal.tsx",
           "project/ProjectsList.tsx",
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx",
           "project/details/ProjectDetailsDialog.tsx",
           "project/manage/ProjectGeneral.tsx",
           "proposals/CallsAvailableOfferingsPage.tsx",
@@ -27289,7 +27293,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 131
+      "usage_count": 132
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -127560,6 +127564,7 @@
       "file_context": {
         "domains": [
           "marketplace",
+          "project_management",
           "general",
           "infrastructure"
         ],
@@ -127569,6 +127574,7 @@
           "change-limits",
           "details",
           "usage",
+          "dashboard",
           "plan-usage"
         ],
         "component_types": [
@@ -127583,6 +127589,7 @@
           "marketplace/resources/change-limits/ChangeLimitsComponent.tsx",
           "marketplace/resources/details/fetchData.tsx",
           "marketplace/resources/usage/ResourceComponentUsageTable.tsx",
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx",
           "reporting/plan-usage/PlanUsageDialog.tsx",
           "slurm/details/utils.ts"
         ]
@@ -127607,7 +127614,7 @@
         "has_validation": false,
         "max_nesting_level": 6
       },
-      "usage_count": 8
+      "usage_count": 9
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -176804,6 +176811,200 @@
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Order has been marked as done.": {
+    "message": "Order has been marked as done.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 30,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/orders/actions/MarkAsDoneButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to mark order as done.": {
+    "message": "Unable to mark order as done.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/orders/actions/MarkAsDoneButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Mark as done": {
+    "message": "Mark as done",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ActionItem"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/orders/actions/MarkAsDoneButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionItem"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language."
     ]
   },
   "Are you sure you want to unlink the order? Unlinking will only remove object from the database, it will not trigger any cleanup": {
@@ -249164,6 +249365,384 @@
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Used/total units": {
+    "message": "Used/total units",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "dashboard"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Renewal": {
+    "message": "Renewal",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "dashboard"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Expiration": {
+    "message": "Expiration",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "dashboard"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Active limit-based resources": {
+    "message": "Active limit-based resources",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "dashboard"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Resources with a fixed allocation limit": {
+    "message": "Resources with a fixed allocation limit",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 39,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "dashboard"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "limit-based resources": {
+    "message": "limit-based resources",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "dashboard"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/dashboard/ProjectLimitUsageBasedResources.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Project details for {name}": {

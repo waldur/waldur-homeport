@@ -138,8 +138,9 @@ export type DropdownActionItemType<T = any> = React.ComponentType<
   } & Record<string, any>
 >;
 
-export type TableWithPortal<T = any> = {
+export type TableWithPortal<T = {}> = {
   portal: TablePortal;
+  activeTab?: string;
 } & T;
 
 export interface TableTab {

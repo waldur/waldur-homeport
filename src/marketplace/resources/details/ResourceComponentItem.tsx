@@ -16,12 +16,11 @@ interface ResourceComponentItemProps {
 const normalize = (value: number, factor: number) =>
   ((value || 0) / (factor || 1)).toFixed();
 
-export const ResourceComponentItem = ({
-  component,
-  resource,
-  expanded = false,
-}: ResourceComponentItemProps) => {
-  const props = {
+export const getQuotaCellProps = (component: OfferingComponent, resource) => {
+  if (!component) {
+    return { usage: '', limit: '', title: '' };
+  }
+  return {
     usage:
       component.billing_type === 'limit' && resource.limit_usage
         ? normalize(resource.limit_usage[component.type], component.factor)
@@ -33,6 +32,14 @@ export const ResourceComponentItem = ({
         : null,
     title: component.name + ' ' + component.measured_unit,
   };
+};
+
+export const ResourceComponentItem = ({
+  component,
+  resource,
+  expanded = false,
+}: ResourceComponentItemProps) => {
+  const props = getQuotaCellProps(component, resource);
 
   const billingType = getBillingTypeLabel(component.billing_type);
   const limitPeriod = component.limit_period;

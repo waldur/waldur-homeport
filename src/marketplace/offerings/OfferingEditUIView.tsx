@@ -331,7 +331,7 @@ const getTabs = (offering: Offering): PageBarTab[] => {
     ].filter(Boolean),
   });
 
-  return tabs;
+  return tabs.filter(Boolean);
 };
 
 export const OfferingEditUIView = ({
