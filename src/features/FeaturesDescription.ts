@@ -13,6 +13,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Make payments menu visible for staff users only.'),
       },
       {
+        key: 'show_banking_data',
+        description: translate('Display banking related data under customer profile.'),
+      },
+      {
         key: 'show_domain',
         description: translate('Allows to hide domain field in organization detail.'),
       },
