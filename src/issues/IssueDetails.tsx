@@ -1,8 +1,8 @@
+import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 import { supportIssuesRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
@@ -10,10 +10,12 @@ import { formatDateTime, formatRelative } from '@waldur/core/dateUtils';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { FormattedJira } from '@waldur/core/FormattedJira';
+import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
 import { linkify } from '@waldur/issues/utils';
+import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { useBreadcrumbs } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { Field } from '@waldur/resource/summary';
@@ -59,20 +61,26 @@ export const IssueDetails: FunctionComponent = () => {
   }
 
   const {
-    loading,
+    data: issue,
+    isLoading,
+    isRefetching,
     error,
-    value: issue,
-  } = useAsync(() => loadDependencies(issue_uuid));
+    refetch,
+  } = useQuery({
+    queryKey: ['Issue', issue_uuid],
+    queryFn: () => loadDependencies(issue_uuid),
+    refetchOnWindowFocus: false,
+  });
 
   const breadcrumbItems = useIssueBreadcrumbItems(issue);
 
   useBreadcrumbs(breadcrumbItems);
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
   if (error) {
-    return <>{translate('Unable to load data.')}</>;
+    return <LoadingErred loadData={refetch} />;
   }
 
   return (
@@ -89,7 +97,12 @@ export const IssueDetails: FunctionComponent = () => {
             <IssueStatus status={issue.status} />
           </div>
         }
-        actions={<IssueInfoButton issue={issue} />}
+        actions={
+          <>
+            <RefreshButton refetch={refetch} isLoading={isRefetching} />
+            <IssueInfoButton issue={issue} />
+          </>
+        }
       >
         <Row>
           <Col className="mw-450px">
