@@ -94211,6 +94211,64 @@
       "usage_count": 1
     }
   },
+  "Display banking related data under customer profile.": {
+    "message": "Display banking related data under customer profile.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 52,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "features"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "features/FeaturesDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Allows to hide domain field in organization detail.": {
     "message": "Allows to hide domain field in organization detail.",
     "context": {
