@@ -1,4 +1,4 @@
-import { CaretDownIcon, XIcon } from '@phosphor-icons/react';
+import { CaretDownIcon, CaretRightIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import React, {
@@ -388,7 +388,8 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
       data-kt-menu-placement={columnFilter ? 'bottom' : 'right-start'}
     >
       <span className="menu-link" aria-hidden="true">
-        {props.title}
+        <span className="menu-title">{props.title}</span>
+        <CaretRightIcon size={20} className="ms-auto" weight="bold" />
       </span>
 
       <div
