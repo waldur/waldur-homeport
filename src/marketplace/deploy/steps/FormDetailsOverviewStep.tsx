@@ -75,7 +75,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           </Col>
         </Row>
 
-        <Row>
+        <Row className="align-items-end">
           <Col sm={6}>
             <CustomerField
               organizationGroups={props.offering.organization_groups}
