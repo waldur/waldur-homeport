@@ -7,7 +7,6 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -22,8 +21,6 @@ import { CustomerEditPanelProps } from './types';
 export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
   const nativeNameVisible = getNativeNameVisible();
   const user = useSelector(getUser);
-
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   const detailsRows = useMemo(
     () =>
@@ -211,7 +208,7 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
         </FormTable>
       </FormTable.Card>
 
-      {showExperimentalUiComponents && <CustomerChecklistPanel {...props} />}
+      <CustomerChecklistPanel {...props} />
     </>
   );
 };
