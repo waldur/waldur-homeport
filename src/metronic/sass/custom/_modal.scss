@@ -1,0 +1,4 @@
+.modal-backdrop.show {
+  -webkit-backdrop-filter: blur(3px); /* Fix blur for Safari*/
+  backdrop-filter: blur(3px);
+}
