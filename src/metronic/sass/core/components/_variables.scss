@@ -864,8 +864,8 @@ $modal-content-box-shadow: 0 0.25rem 0.5rem rgba($black, 0.05) !default;
 $modal-content-box-shadow-xs: 0 0.25rem 0.5rem rgba($black, 0.1) !default;
 $modal-content-box-shadow-sm-up: 0 0.5rem 1rem rgba($black, 0.1) !default;
 
-$modal-backdrop-bg: $black !default;
-$modal-backdrop-opacity: if(isDarkMode(), 0.4, 0.3) !default;
+$modal-backdrop-bg: rgba($backdrop-color, if(isDarkMode(), 0.5, 0.7)) !default;
+$modal-backdrop-opacity: 1 !default; // Opacity breaks the blur filter of backdrop
 
 $modal-xl: 1140px !default;
 $modal-lg: 800px !default;

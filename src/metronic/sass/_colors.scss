@@ -18,6 +18,7 @@ $gray-900: if(isDarkMode(), #f5f5f6, #101828) !default;
 $gray-950: if(isDarkMode(), #fafafa, #0c111d) !default; // Custom variable
 
 $text-muted: $gray-500 !default;
+$backdrop-color: if(isDarkMode(), $gray-50, $gray-900); // Custom variable
 
 // Dark Mode
 $dark-mode-page-bg-color: $gray-50 !default;
